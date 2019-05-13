@@ -3,12 +3,14 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.28803.352
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GW2SDK", "GW2SDK\GW2SDK.csproj", "{94A2B678-DEB4-42F2-B5BA-935C1FB6DB19}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GW2SDK", "GW2SDK\GW2SDK.csproj", "{94A2B678-DEB4-42F2-B5BA-935C1FB6DB19}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{122C3FD6-EB04-4A9F-AA27-641C364CE7C9}"
 	ProjectSection(SolutionItems) = preProject
 		Publish.ps1 = Publish.ps1
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GW2SDK.Tests", "GW2SDK.Tests\GW2SDK.Tests.csproj", "{55D98C85-2530-4006-BBB9-57FC5C00E728}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -20,6 +22,10 @@ Global
 		{94A2B678-DEB4-42F2-B5BA-935C1FB6DB19}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{94A2B678-DEB4-42F2-B5BA-935C1FB6DB19}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{94A2B678-DEB4-42F2-B5BA-935C1FB6DB19}.Release|Any CPU.Build.0 = Release|Any CPU
+		{55D98C85-2530-4006-BBB9-57FC5C00E728}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{55D98C85-2530-4006-BBB9-57FC5C00E728}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{55D98C85-2530-4006-BBB9-57FC5C00E728}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{55D98C85-2530-4006-BBB9-57FC5C00E728}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
