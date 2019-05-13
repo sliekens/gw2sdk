@@ -15,8 +15,7 @@ namespace GW2SDK.Builds
 
         public async Task<Build> GetBuildAsync()
         {
-            var response = await _http.GetAsync("/v2/build");
-            var json = await response.Content.ReadAsStringAsync();
+            var json = await _http.GetStringAsync("/v2/build");
             return JsonConvert.DeserializeObject<Build>(json);
         }
     }
