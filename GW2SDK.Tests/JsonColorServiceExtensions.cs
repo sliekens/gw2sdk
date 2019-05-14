@@ -1,21 +1,22 @@
-﻿using Newtonsoft.Json.Linq;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using GW2SDK.Colors.Infrastructure;
+using Newtonsoft.Json.Linq;
 
-namespace GW2SDK.Colors.Infrastructure
+namespace GW2SDK.Tests
 {
     public static class JsonColorServiceExtensions
     {
-        public static async Task<List<string>> GetAllColorCategories(this JsonColorService service)
+        public static async Task<ISet<string>> GetAllColorCategories(this JsonColorService service)
         {
             var json = await service.GetAllColors();
             var root = JToken.Parse(json);
             var query = from value in root.SelectTokens("$[*].categories[*]", true).Cast<JValue>()
-                        orderby value.Value ascending
+                        orderby value.Value
                         select (string)value.Value;
 
-            return query.Distinct().ToList();
+            return new HashSet<string>(query);
         }
     }
 }

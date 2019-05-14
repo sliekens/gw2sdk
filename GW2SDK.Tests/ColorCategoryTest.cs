@@ -1,23 +1,22 @@
-using GW2SDK.Colors;
-using GW2SDK.Colors.Infrastructure;
 using System;
 using System.Linq;
-using System.Net.Http;
 using System.Threading.Tasks;
+using GW2SDK.Colors;
 using Xunit;
+using Xunit.Abstractions;
 
 namespace GW2SDK.Tests
 {
-    public class ColorCategoryTest
+    public class ColorCategoryTest : IClassFixture<ColorsFixture>
     {
-        private readonly HttpClient http;
+        private readonly ColorsFixture _colors;
 
-        public ColorCategoryTest()
+        private readonly ITestOutputHelper _logger;
+
+        public ColorCategoryTest(ColorsFixture colors, ITestOutputHelper logger)
         {
-            http = new HttpClient
-            {
-                BaseAddress = new Uri("https://api.guildwars2.com")
-            };
+            _colors = colors;
+            _logger = logger;
         }
 
         [Fact]
@@ -25,14 +24,12 @@ namespace GW2SDK.Tests
         [Trait("Feature", "Colors")]
         public async Task ColorCategory_ShouldIncludeAllKnownValues()
         {
-            // TODO: ideally we should have the data already available before we run tests
-            // LiteDB looks like a good candidate for storage
-            var service = new JsonColorService(http);
-            var categories = await service.GetAllColorCategories();
+            var knownCategories = Enum.GetNames(typeof(ColorCategory)).ToHashSet();
 
-            var missingCategories = categories.Except(Enum.GetNames(typeof(ColorCategory)));
+            _logger.WriteLine("Expected: {0}", _colors.ColorCategories.ToCsv());
+            _logger.WriteLine("Actual: {0}", knownCategories.ToCsv());
 
-            Assert.Empty(missingCategories);
+            Assert.ProperSuperset(_colors.ColorCategories, knownCategories);
         }
     }
 }
