@@ -1,6 +1,6 @@
 ﻿namespace GW2SDK.Colors
 {
-    public class Color
+    public sealed class Color
     {
         public int Id { get; set; }
 

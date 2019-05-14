@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace GW2SDK.Colors.Infrastructure
 {
-    public class JsonColorService : IJsonColorService
+    public sealed class JsonColorService : IJsonColorService
     {
         private readonly HttpClient _http;
 

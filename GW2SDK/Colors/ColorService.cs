@@ -5,7 +5,7 @@ using Newtonsoft.Json;
 
 namespace GW2SDK.Colors
 {
-    public class ColorService
+    public sealed class ColorService
     {
         private readonly IJsonColorService _api;
 

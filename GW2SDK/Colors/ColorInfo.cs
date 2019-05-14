@@ -1,6 +1,6 @@
 ﻿namespace GW2SDK.Colors
 {
-    public class ColorInfo
+    public sealed class ColorInfo
     {
         public int Brightness { get; set; }
 

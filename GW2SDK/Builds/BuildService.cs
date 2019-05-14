@@ -4,7 +4,7 @@ using Newtonsoft.Json;
 
 namespace GW2SDK.Builds
 {
-    public class BuildService
+    public sealed class BuildService
     {
         private readonly IJsonBuildService _api;
 

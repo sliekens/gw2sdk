@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 
 namespace GW2SDK.Builds.Infrastructure
 {
-    public class JsonBuildService : IJsonBuildService
+    public sealed class JsonBuildService : IJsonBuildService
     {
         private readonly HttpClient _http;
 
