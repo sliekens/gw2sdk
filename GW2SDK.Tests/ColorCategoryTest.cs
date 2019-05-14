@@ -25,6 +25,8 @@ namespace GW2SDK.Tests
         [Trait("Feature", "Colors")]
         public async Task ColorCategory_ShouldIncludeAllKnownValues()
         {
+            // TODO: ideally we should have the data already available before we run tests
+            // LiteDB looks like a good candidate for storage
             var service = new JsonColorService(http);
             var categories = await service.GetAllColorCategories();
 
