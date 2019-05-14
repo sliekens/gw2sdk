@@ -5,7 +5,7 @@ using GW2SDK.Colors;
 using Xunit;
 using Xunit.Abstractions;
 
-namespace GW2SDK.Tests
+namespace GW2SDK.Tests.Colors
 {
     public class ColorCategoryTest : IClassFixture<ColorsFixture>
     {

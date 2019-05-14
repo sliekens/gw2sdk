@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using GW2SDK.Colors.Infrastructure;
 using Xunit;
 
-namespace GW2SDK.Tests
+namespace GW2SDK.Tests.Colors
 {
     public class ColorsFixture : IAsyncLifetime
     {
@@ -15,7 +15,7 @@ namespace GW2SDK.Tests
         {
             var http = new HttpClient
             {
-                BaseAddress = new Uri("https://api.guildwars2.com")
+                BaseAddress = new Uri("https://api.guildwars2.com", UriKind.Absolute)
             };
 
             // TODO: ideally we should use persistent storage for this
