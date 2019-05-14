@@ -1,46 +1,46 @@
-﻿using GW2SDK.Colors.Infrastructure;
-using Newtonsoft.Json;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using GW2SDK.Colors.Infrastructure;
+using Newtonsoft.Json;
 
 namespace GW2SDK.Colors
 {
     public class ColorService
     {
-        private readonly JsonColorService _http;
+        private readonly IJsonColorService _api;
 
-        public ColorService(JsonColorService http)
+        public ColorService(IJsonColorService api)
         {
-            _http = http;
+            _api = api;
         }
 
         public async Task<List<Color>> GetAllColors()
         {
-            var json = await _http.GetAllColors();
+            var json = await _api.GetAllColors();
             return JsonConvert.DeserializeObject<List<Color>>(json);
         }
 
         public async Task<List<int>> GetColorIds()
         {
-            var json = await _http.GetColorIds();
+            var json = await _api.GetColorIds();
             return JsonConvert.DeserializeObject<List<int>>(json);
         }
 
         public async Task<Color> GetColorById(int colorId)
         {
-            var json = await _http.GetColorById(colorId);
+            var json = await _api.GetColorById(colorId);
             return JsonConvert.DeserializeObject<Color>(json);
         }
 
         public async Task<List<Color>> GetColorsById(IReadOnlyList<int> colorIds)
         {
-            var json = await _http.GetColorsById(colorIds);
+            var json = await _api.GetColorsById(colorIds);
             return JsonConvert.DeserializeObject<List<Color>>(json);
         }
 
         public async Task<Color> GetColorsPage(int page, int? pageSize)
         {
-            var json = await _http.GetColorsPage(page, pageSize);
+            var json = await _api.GetColorsPage(page, pageSize);
             return JsonConvert.DeserializeObject<Color>(json);
         }
     }
