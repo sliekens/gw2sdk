@@ -2,9 +2,8 @@
 {
     public enum ColorCategory
     {
-        Unspecified,
-
-        Blue,
+        // Skip index 0 so that Enum.IsDefined returns false for default(ColorCategory)
+        Blue = 1,
 
         Brown,
 

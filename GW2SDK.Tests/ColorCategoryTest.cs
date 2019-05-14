@@ -9,27 +9,36 @@ namespace GW2SDK.Tests
 {
     public class ColorCategoryTest : IClassFixture<ColorsFixture>
     {
-        private readonly ColorsFixture _colors;
+        private readonly ColorsFixture _fixture;
 
         private readonly ITestOutputHelper _logger;
 
-        public ColorCategoryTest(ColorsFixture colors, ITestOutputHelper logger)
+        public ColorCategoryTest(ColorsFixture fixture, ITestOutputHelper logger)
         {
-            _colors = colors;
+            _fixture = fixture;
             _logger = logger;
         }
 
         [Fact]
-        [Trait("Category", "Integration")]
         [Trait("Feature", "Colors")]
+        [Trait("Category", "Unit")]
+        public async Task DefaultMember_ShouldBeUndefined()
+        {
+            var actual = default(ColorCategory);
+            Assert.False(Enum.IsDefined(typeof(ColorCategory), actual));
+        }
+
+        [Fact]
+        [Trait("Feature", "Colors")]
+        [Trait("Category", "Integration")]
         public async Task ColorCategory_ShouldIncludeAllKnownValues()
         {
-            var knownCategories = Enum.GetNames(typeof(ColorCategory)).ToHashSet();
+            var actual = Enum.GetNames(typeof(ColorCategory)).ToHashSet();
 
-            _logger.WriteLine("Expected: {0}", _colors.ColorCategories.ToCsv());
-            _logger.WriteLine("Actual: {0}", knownCategories.ToCsv());
+            _logger.WriteLine("Expected: {0}", _fixture.ColorCategories.ToCsv());
+            _logger.WriteLine("Actual: {0}", actual.ToCsv());
 
-            Assert.ProperSuperset(_colors.ColorCategories, knownCategories);
+            Assert.Equal(_fixture.ColorCategories, actual);
         }
     }
 }
