@@ -21,6 +21,8 @@ namespace GW2SDK.Tests
         }
 
         [Fact]
+        [Trait("Category", "Integration")]
+        [Trait("Feature", "Colors")]
         public async Task ColorCategory_ShouldIncludeAllKnownValues()
         {
             var service = new JsonColorService(http);
