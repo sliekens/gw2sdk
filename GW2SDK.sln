@@ -7,10 +7,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GW2SDK", "GW2SDK\GW2SDK.csp
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{122C3FD6-EB04-4A9F-AA27-641C364CE7C9}"
 	ProjectSection(SolutionItems) = preProject
+		GW2SDK.sln.DotSettings = GW2SDK.sln.DotSettings
 		Publish.ps1 = Publish.ps1
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GW2SDK.Tests", "GW2SDK.Tests\GW2SDK.Tests.csproj", "{55D98C85-2530-4006-BBB9-57FC5C00E728}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GW2SDK.Tests", "GW2SDK.Tests\GW2SDK.Tests.csproj", "{55D98C85-2530-4006-BBB9-57FC5C00E728}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
