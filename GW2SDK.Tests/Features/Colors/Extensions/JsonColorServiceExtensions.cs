@@ -13,8 +13,8 @@ namespace GW2SDK.Tests.Features.Colors.Extensions
             var json = await service.GetAllColors();
             var root = JToken.Parse(json);
             var query = from value in root.SelectTokens("$[*].categories[*]", true).Cast<JValue>()
-                        orderby value.Value
-                        select (string)value.Value;
+                orderby value.Value
+                select (string) value.Value;
 
             return new HashSet<string>(query);
         }

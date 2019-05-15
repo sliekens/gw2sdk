@@ -26,10 +26,6 @@ namespace GW2SDK.Tests.Features.Colors.Fixtures
             ColorCategories = await service.GetAllColorCategories();
         }
 
-        public Task DisposeAsync()
-        {
-            // Nothing to do here (yet!)
-            return Task.CompletedTask;
-        }
+        public Task DisposeAsync() => Task.CompletedTask;
     }
 }

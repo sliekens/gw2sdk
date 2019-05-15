@@ -10,15 +10,15 @@ namespace GW2SDK.Tests.Features.Colors
 {
     public class ColorCategoryTest : IClassFixture<ColorCategoryFixture>
     {
-        private readonly ColorCategoryFixture _fixture;
-
-        private readonly ITestOutputHelper _logger;
-
         public ColorCategoryTest(ColorCategoryFixture fixture, ITestOutputHelper logger)
         {
             _fixture = fixture;
             _logger = logger;
         }
+
+        private readonly ColorCategoryFixture _fixture;
+
+        private readonly ITestOutputHelper _logger;
 
         [Fact]
         [Trait("Feature", "Colors")]

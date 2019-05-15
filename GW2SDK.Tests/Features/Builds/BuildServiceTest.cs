@@ -9,12 +9,12 @@ namespace GW2SDK.Tests.Features.Builds
 {
     public class BuildServiceTest : IClassFixture<ConfigurationFixture>
     {
-        private readonly ConfigurationFixture _fixture;
-
         public BuildServiceTest(ConfigurationFixture fixture)
         {
             _fixture = fixture;
         }
+
+        private readonly ConfigurationFixture _fixture;
 
         private BuildService CreateSut() =>
             new BuildService(new JsonBuildService(new HttpClient

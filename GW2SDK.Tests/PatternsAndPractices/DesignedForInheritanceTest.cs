@@ -8,12 +8,12 @@ namespace GW2SDK.Tests.PatternsAndPractices
 {
     public class DesignedForInheritanceTest : IClassFixture<AssemblyFixture>
     {
-        private readonly AssemblyFixture _fixture;
-
         public DesignedForInheritanceTest(AssemblyFixture fixture)
         {
             _fixture = fixture;
         }
+
+        private readonly AssemblyFixture _fixture;
 
 
         [Fact]
