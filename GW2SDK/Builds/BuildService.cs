@@ -15,10 +15,10 @@ namespace GW2SDK.Builds
             _api = api ?? throw new ArgumentNullException(nameof(api));
         }
 
-        public async Task<Build> GetBuildAsync()
+        public async Task<Build> GetBuild([CanBeNull] JsonSerializerSettings settings = null)
         {
             var json = await _api.GetBuildAsync();
-            return JsonConvert.DeserializeObject<Build>(json);
+            return JsonConvert.DeserializeObject<Build>(json, settings);
         }
     }
 }
