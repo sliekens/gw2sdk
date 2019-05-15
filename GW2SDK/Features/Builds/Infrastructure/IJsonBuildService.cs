@@ -4,6 +4,6 @@ namespace GW2SDK.Features.Builds.Infrastructure
 {
     public interface IJsonBuildService
     {
-        Task<string> GetBuildAsync();
+        Task<string> GetBuild();
     }
 }

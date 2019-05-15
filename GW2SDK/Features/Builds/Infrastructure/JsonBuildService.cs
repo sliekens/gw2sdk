@@ -14,7 +14,7 @@ namespace GW2SDK.Features.Builds.Infrastructure
             _http = http ?? throw new ArgumentNullException(nameof(http));
         }
 
-        public async Task<string> GetBuildAsync()
+        public async Task<string> GetBuild()
         {
             return await _http.GetStringAsync("/v2/build");
         }

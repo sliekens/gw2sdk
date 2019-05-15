@@ -27,7 +27,7 @@ namespace GW2SDK.Features.Builds
 
         public async Task<Build> GetBuild([CanBeNull] JsonSerializerSettings settings = null)
         {
-            var json = await _api.GetBuildAsync();
+            var json = await _api.GetBuild();
             return JsonConvert.DeserializeObject<Build>(json, settings ?? DefaultJsonSerializerSettings);
         }
     }
