@@ -1,26 +1,40 @@
-﻿using Xunit;
+﻿using System;
+using System.Net.Http;
+using System.Threading.Tasks;
+using GW2SDK.Builds;
+using GW2SDK.Builds.Infrastructure;
+using Xunit;
 
 namespace GW2SDK.Tests.Builds
 {
-    public class BuildServiceTest : IClassFixture<BuildServiceFixture>
+    public class BuildServiceTest
     {
-        public BuildServiceTest(BuildServiceFixture fixture)
+        private BuildService CreateSut()
         {
-            _fixture = fixture;
-        }
-
-        private readonly BuildServiceFixture _fixture;
-
-        [Fact]
-        public void Build_ShouldNotReturnNull()
-        {
-            Assert.NotNull(_fixture.Build);
+            return new BuildService(new JsonBuildService(new HttpClient
+            {
+                BaseAddress = new Uri("https://api.guildwars2.com", UriKind.Absolute)
+            }));
         }
 
         [Fact]
-        public void BuildId_ShouldBePositiveNumber()
+        public async Task GetBuild_ShouldNotReturnNull()
         {
-            Assert.InRange(_fixture.Build.Id, 1, int.MaxValue);
+            var sut = CreateSut();
+
+            var actual = await sut.GetBuild();
+
+            Assert.NotNull(actual);
+        }
+
+        [Fact]
+        public async Task GetBuild_IdShouldBePositiveNumber()
+        {
+            var sut = CreateSut();
+
+            var actual = await sut.GetBuild();
+
+            Assert.InRange(actual.Id, 1, int.MaxValue);
         }
     }
 }
