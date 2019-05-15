@@ -41,12 +41,14 @@ namespace GW2SDK.Features.Colors.Infrastructure
 
         public async Task<string> GetColorsPage(int page, int? pageSize)
         {
-            var search = $"page=${page}";
+            var search = $"page={page}";
             if (pageSize.HasValue)
             {
                 search += $"&page_size={pageSize}";
             }
-            return await _http.GetStringAsync($"/v2/colors?${search}");
+
+            var resource = $"/v2/colors?{search}";
+            return await _http.GetStringAsync(resource);
         }
     }
 }

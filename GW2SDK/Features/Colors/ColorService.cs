@@ -40,10 +40,10 @@ namespace GW2SDK.Features.Colors
             return JsonConvert.DeserializeObject<List<Color>>(json, settings);
         }
 
-        public async Task<Color> GetColorsPage(int page, int? pageSize, [CanBeNull] JsonSerializerSettings settings = null)
+        public async Task<List<Color>> GetColorsPage(int page, int? pageSize, [CanBeNull] JsonSerializerSettings settings = null)
         {
             var json = await _api.GetColorsPage(page, pageSize);
-            return JsonConvert.DeserializeObject<Color>(json, settings);
+            return JsonConvert.DeserializeObject<List<Color>>(json, settings);
         }
     }
 }
