@@ -7,13 +7,20 @@ using Xunit;
 
 namespace GW2SDK.Tests.Builds
 {
-    public class BuildServiceTest
+    public class BuildServiceTest : IClassFixture<ConfigurationFixture>
     {
+        private readonly ConfigurationFixture _fixture;
+
+        public BuildServiceTest(ConfigurationFixture fixture)
+        {
+            _fixture = fixture;
+        }
+
         private BuildService CreateSut()
         {
             return new BuildService(new JsonBuildService(new HttpClient
             {
-                BaseAddress = new Uri("https://api.guildwars2.com", UriKind.Absolute)
+                BaseAddress = _fixture.BaseAddress
             }));
         }
 

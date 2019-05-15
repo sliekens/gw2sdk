@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -13,9 +12,10 @@ namespace GW2SDK.Tests.Colors
 
         public async Task InitializeAsync()
         {
+            var configuration = new ConfigurationFixture();
             var http = new HttpClient
             {
-                BaseAddress = new Uri("https://api.guildwars2.com", UriKind.Absolute)
+                BaseAddress = configuration.BaseAddress
             };
 
             // TODO: ideally we should use persistent storage for this
