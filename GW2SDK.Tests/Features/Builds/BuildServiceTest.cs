@@ -33,17 +33,5 @@ namespace GW2SDK.Tests.Features.Builds
 
             Assert.NotNull(actual);
         }
-
-        [Fact]
-        [Trait("Feature", "Builds")]
-        [Trait("Category", "Integration")]
-        public async Task GetBuild_IdShouldBePositiveNumber()
-        {
-            var sut = CreateSut();
-
-            var actual = await sut.GetBuild();
-
-            Assert.InRange(actual.Id, 1, int.MaxValue);
-        }
     }
 }

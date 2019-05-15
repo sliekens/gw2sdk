@@ -72,15 +72,15 @@ namespace GW2SDK.Tests.Features.Colors
         [Fact]
         [Trait("Feature", "Colors")]
         [Trait("Category", "Integration")]
-        public async Task GetColorsPage_ShouldReturnExpectedCount()
+        public async Task GetColorsPage_ShouldReturnExpectedLimit()
         {
             var sut = CreateSut();
 
-            var count = 50;
+            var limit = 50;
 
-            var actual = await sut.GetColorsPage(0, 50);
+            var actual = await sut.GetColorsPage(0, limit);
 
-            Assert.InRange(actual.Count, 0, count);
+            Assert.InRange(actual.Count, 0, limit);
         }
     }
 }

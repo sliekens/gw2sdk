@@ -32,5 +32,17 @@ namespace GW2SDK.Tests.Features.Builds
 
             JsonConvert.PopulateObject(_fixture.JsonBuild, actual, serializerSettings);
         }
+
+        [Fact]
+        [Trait("Feature", "Builds")]
+        [Trait("Category", "Integration")]
+        public void Build_IdShouldBePositiveNumber()
+        {
+            var actual = new Build();
+
+            JsonConvert.PopulateObject(_fixture.JsonBuild, actual, BuildService.DefaultJsonSerializerSettings);
+
+            Assert.InRange(actual.Id, 1, int.MaxValue);
+        }
     }
 }
