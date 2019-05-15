@@ -1,4 +1,4 @@
-﻿namespace GW2SDK.Builds
+﻿namespace GW2SDK.Features.Builds
 {
     public sealed class Build
     {

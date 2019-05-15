@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
-using GW2SDK.Colors.Infrastructure;
+using GW2SDK.Features.Colors.Infrastructure;
 using GW2SDK.Tests.Features.Colors.Extensions;
 using GW2SDK.Tests.Shared.Fixtures;
 using Xunit;

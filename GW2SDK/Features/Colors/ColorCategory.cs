@@ -1,4 +1,4 @@
-﻿namespace GW2SDK.Colors
+﻿namespace GW2SDK.Features.Colors
 {
     public enum ColorCategory
     {

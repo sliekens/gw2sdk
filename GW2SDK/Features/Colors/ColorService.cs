@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using GW2SDK.Colors.Infrastructure;
+using GW2SDK.Features.Colors.Infrastructure;
 using GW2SDK.Infrastructure;
 using Newtonsoft.Json;
 
-namespace GW2SDK.Colors
+namespace GW2SDK.Features.Colors
 {
     public sealed class ColorService
     {

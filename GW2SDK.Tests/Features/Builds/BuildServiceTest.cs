@@ -1,7 +1,7 @@
 ﻿using System.Net.Http;
 using System.Threading.Tasks;
-using GW2SDK.Builds;
-using GW2SDK.Builds.Infrastructure;
+using GW2SDK.Features.Builds;
+using GW2SDK.Features.Builds.Infrastructure;
 using GW2SDK.Tests.Shared.Fixtures;
 using Xunit;
 

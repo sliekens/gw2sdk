@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Threading.Tasks;
-using GW2SDK.Builds.Infrastructure;
+using GW2SDK.Features.Builds.Infrastructure;
 using GW2SDK.Infrastructure;
 using Newtonsoft.Json;
 
-namespace GW2SDK.Builds
+namespace GW2SDK.Features.Builds
 {
     public sealed class BuildService
     {
