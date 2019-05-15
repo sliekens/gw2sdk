@@ -1,6 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using GW2SDK.Colors.Infrastructure;
+using GW2SDK.Infrastructure;
 using Newtonsoft.Json;
 
 namespace GW2SDK.Colors
@@ -9,9 +11,9 @@ namespace GW2SDK.Colors
     {
         private readonly IJsonColorService _api;
 
-        public ColorService(IJsonColorService api)
+        public ColorService([NotNull] IJsonColorService api)
         {
-            _api = api;
+            _api = api ?? throw new ArgumentNullException(nameof(api));
         }
 
         public async Task<List<Color>> GetAllColors()

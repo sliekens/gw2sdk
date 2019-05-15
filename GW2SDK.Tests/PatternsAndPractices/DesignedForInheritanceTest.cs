@@ -6,19 +6,20 @@ using Xunit;
 
 namespace GW2SDK.Tests.PatternsAndPractices
 {
-    public class DesignedForInheritanceTest
+    public class DesignedForInheritanceTest : IClassFixture<AssemblyFixture>
     {
-        public DesignedForInheritanceTest()
+        private readonly AssemblyFixture _fixture;
+
+        public DesignedForInheritanceTest(AssemblyFixture fixture)
         {
-            _assembly = Assembly.Load("GW2SDK");
+            _fixture = fixture;
         }
 
-        private readonly Assembly _assembly;
 
         [Fact]
         public void EveryExportedClass_ShouldBeInheritableOrSealed()
         {
-            var classes = _assembly.ExportedTypes.Where(type => type.IsClass).ToList();
+            var classes = _fixture.Assembly.ExportedTypes.Where(type => type.IsClass).ToList();
             foreach (var type in classes)
             {
                 if (type.IsAbstract)

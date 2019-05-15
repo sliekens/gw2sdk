@@ -1,6 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
+using GW2SDK.Infrastructure;
 
 namespace GW2SDK.Colors.Infrastructure
 {
@@ -8,9 +10,9 @@ namespace GW2SDK.Colors.Infrastructure
     {
         private readonly HttpClient _http;
 
-        public JsonColorService(HttpClient http)
+        public JsonColorService([NotNull] HttpClient http)
         {
-            _http = http;
+            _http = http ?? throw new ArgumentNullException(nameof(http));
         }
 
         public async Task<string> GetAllColors()
