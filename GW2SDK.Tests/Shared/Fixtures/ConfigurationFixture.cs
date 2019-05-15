@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.Extensions.Configuration;
 
-namespace GW2SDK.Tests
+namespace GW2SDK.Tests.Shared.Fixtures
 {
     public class ConfigurationFixture
     {

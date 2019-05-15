@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using GW2SDK.Colors.Infrastructure;
 using Newtonsoft.Json.Linq;
 
-namespace GW2SDK.Tests.Colors
+namespace GW2SDK.Tests.Features.Colors.Extensions
 {
     public static class JsonColorServiceExtensions
     {

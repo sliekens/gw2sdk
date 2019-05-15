@@ -1,10 +1,12 @@
 using System;
 using System.Linq;
 using GW2SDK.Colors;
+using GW2SDK.Tests.Features.Colors.Fixtures;
+using GW2SDK.Tests.Shared.Extensions;
 using Xunit;
 using Xunit.Abstractions;
 
-namespace GW2SDK.Tests.Colors
+namespace GW2SDK.Tests.Features.Colors
 {
     public class ColorCategoryTest : IClassFixture<ColorCategoryFixture>
     {

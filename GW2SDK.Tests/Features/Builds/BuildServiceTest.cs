@@ -1,11 +1,11 @@
-﻿using System;
-using System.Net.Http;
+﻿using System.Net.Http;
 using System.Threading.Tasks;
 using GW2SDK.Builds;
 using GW2SDK.Builds.Infrastructure;
+using GW2SDK.Tests.Shared.Fixtures;
 using Xunit;
 
-namespace GW2SDK.Tests.Builds
+namespace GW2SDK.Tests.Features.Builds
 {
     public class BuildServiceTest : IClassFixture<ConfigurationFixture>
     {
@@ -16,13 +16,11 @@ namespace GW2SDK.Tests.Builds
             _fixture = fixture;
         }
 
-        private BuildService CreateSut()
-        {
-            return new BuildService(new JsonBuildService(new HttpClient
+        private BuildService CreateSut() =>
+            new BuildService(new JsonBuildService(new HttpClient
             {
                 BaseAddress = _fixture.BaseAddress
             }));
-        }
 
         [Fact]
         public async Task GetBuild_ShouldNotReturnNull()
