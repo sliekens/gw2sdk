@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using GW2SDK.Features.Builds.Infrastructure;
 using GW2SDK.Infrastructure;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 
 namespace GW2SDK.Features.Builds
 {
@@ -15,10 +16,19 @@ namespace GW2SDK.Features.Builds
             _api = api ?? throw new ArgumentNullException(nameof(api));
         }
 
+        public static JsonSerializerSettings DefaultJsonSerializerSettings => new JsonSerializerSettings
+        {
+            ContractResolver = new DefaultContractResolver
+            {
+                NamingStrategy = new SnakeCaseNamingStrategy()
+            }
+        };
+
+
         public async Task<Build> GetBuild([CanBeNull] JsonSerializerSettings settings = null)
         {
             var json = await _api.GetBuildAsync();
-            return JsonConvert.DeserializeObject<Build>(json, settings);
+            return JsonConvert.DeserializeObject<Build>(json, settings ?? DefaultJsonSerializerSettings);
         }
     }
 }
