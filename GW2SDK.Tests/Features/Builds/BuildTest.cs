@@ -36,7 +36,7 @@ namespace GW2SDK.Tests.Features.Builds
         [Fact]
         [Trait("Feature", "Builds")]
         [Trait("Category", "Integration")]
-        public void Build_IdShouldBePositiveNumber()
+        public void Build_Id_ShouldBePositive()
         {
             var actual = new Build();
 
