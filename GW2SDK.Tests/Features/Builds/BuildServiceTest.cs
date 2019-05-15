@@ -23,6 +23,8 @@ namespace GW2SDK.Tests.Features.Builds
             }));
 
         [Fact]
+        [Trait("Feature", "Builds")]
+        [Trait("Category", "Integration")]
         public async Task GetBuild_ShouldNotReturnNull()
         {
             var sut = CreateSut();
@@ -33,6 +35,8 @@ namespace GW2SDK.Tests.Features.Builds
         }
 
         [Fact]
+        [Trait("Feature", "Builds")]
+        [Trait("Category", "Integration")]
         public async Task GetBuild_IdShouldBePositiveNumber()
         {
             var sut = CreateSut();
