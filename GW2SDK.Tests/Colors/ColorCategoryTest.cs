@@ -22,7 +22,7 @@ namespace GW2SDK.Tests.Colors
         [Fact]
         [Trait("Feature", "Colors")]
         [Trait("Category", "Unit")]
-        public async Task DefaultMember_ShouldBeUndefined()
+        public async Task DefaultEnumMember_ShouldBeUndefined()
         {
             var actual = default(ColorCategory);
             Assert.False(Enum.IsDefined(typeof(ColorCategory), actual));
