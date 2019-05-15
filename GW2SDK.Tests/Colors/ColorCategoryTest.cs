@@ -1,19 +1,18 @@
 using System;
 using System.Linq;
-using System.Threading.Tasks;
 using GW2SDK.Colors;
 using Xunit;
 using Xunit.Abstractions;
 
 namespace GW2SDK.Tests.Colors
 {
-    public class ColorCategoryTest : IClassFixture<ColorsFixture>
+    public class ColorCategoryTest : IClassFixture<ColorCategoryFixture>
     {
-        private readonly ColorsFixture _fixture;
+        private readonly ColorCategoryFixture _fixture;
 
         private readonly ITestOutputHelper _logger;
 
-        public ColorCategoryTest(ColorsFixture fixture, ITestOutputHelper logger)
+        public ColorCategoryTest(ColorCategoryFixture fixture, ITestOutputHelper logger)
         {
             _fixture = fixture;
             _logger = logger;
@@ -22,16 +21,15 @@ namespace GW2SDK.Tests.Colors
         [Fact]
         [Trait("Feature", "Colors")]
         [Trait("Category", "Unit")]
-        public async Task DefaultEnumMember_ShouldBeUndefined()
+        public void ColorCategory_ShouldNotDefineDefaultValue()
         {
-            var actual = default(ColorCategory);
-            Assert.False(Enum.IsDefined(typeof(ColorCategory), actual));
+            Assert.False(Enum.IsDefined(typeof(ColorCategory), default(ColorCategory)));
         }
 
         [Fact]
         [Trait("Feature", "Colors")]
         [Trait("Category", "Integration")]
-        public async Task ColorCategory_ShouldIncludeAllKnownValues()
+        public void ColorCategory_ShouldIncludeAllKnownValues()
         {
             var actual = Enum.GetNames(typeof(ColorCategory)).ToHashSet();
 

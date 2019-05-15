@@ -6,7 +6,7 @@ using Xunit;
 
 namespace GW2SDK.Tests.Colors
 {
-    public class ColorsFixture : IAsyncLifetime
+    public class ColorCategoryFixture : IAsyncLifetime
     {
         public ISet<string> ColorCategories { get; private set; }
 
