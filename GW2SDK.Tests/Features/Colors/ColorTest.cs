@@ -33,5 +33,108 @@ namespace GW2SDK.Tests.Features.Colors
 
             JsonConvert.PopulateObject(_fixture.JsonArrayOfColors, actual, serializerSettings);
         }
+
+        [Fact]
+        [Trait("Feature", "Colors")]
+        [Trait("Category", "Integration")]
+        public void Color_Id_ShouldBePositive()
+        {
+            var actual = new List<Color>();
+
+            JsonConvert.PopulateObject(_fixture.JsonArrayOfColors, actual, ColorService.DefaultJsonSerializerSettings);
+
+            Assert.All(actual, color => { Assert.InRange(color.Id, 1, int.MaxValue); });
+        }
+
+
+        [Fact]
+        [Trait("Feature", "Colors")]
+        [Trait("Category", "Integration")]
+        public void Color_Name_ShouldNotBeEmpty()
+        {
+            var actual = new List<Color>();
+
+            JsonConvert.PopulateObject(_fixture.JsonArrayOfColors, actual, ColorService.DefaultJsonSerializerSettings);
+
+            Assert.All(actual, color => { Assert.NotEmpty(color.Name); });
+        }
+
+        [Fact]
+        [Trait("Feature", "Colors")]
+        [Trait("Category", "Integration")]
+        public void Color_Cloth_ShouldNotBeNull()
+        {
+            var actual = new List<Color>();
+
+            JsonConvert.PopulateObject(_fixture.JsonArrayOfColors, actual, ColorService.DefaultJsonSerializerSettings);
+
+            Assert.All(actual, color => { Assert.NotNull(color.Cloth); });
+        }
+
+        [Fact]
+        [Trait("Feature", "Colors")]
+        [Trait("Category", "Integration")]
+        public void Color_Leather_ShouldNotBeNull()
+        {
+            var actual = new List<Color>();
+
+            JsonConvert.PopulateObject(_fixture.JsonArrayOfColors, actual, ColorService.DefaultJsonSerializerSettings);
+
+            Assert.All(actual, color => { Assert.NotNull(color.Leather); });
+        }
+
+        [Fact]
+        [Trait("Feature", "Colors")]
+        [Trait("Category", "Integration")]
+        public void Color_Metal_ShouldNotBeNull()
+        {
+            var actual = new List<Color>();
+
+            JsonConvert.PopulateObject(_fixture.JsonArrayOfColors, actual, ColorService.DefaultJsonSerializerSettings);
+
+            Assert.All(actual, color => { Assert.NotNull(color.Metal); });
+        }
+
+        [Fact(Skip = "Some dyes like Hydra (1594) don't have a 'fur' property. Bug in API?")]
+        [Trait("Feature", "Colors")]
+        [Trait("Category", "Integration")]
+        public void Color_Fur_ShouldNotBeNull()
+        {
+            var actual = new List<Color>();
+
+            JsonConvert.PopulateObject(_fixture.JsonArrayOfColors, actual, ColorService.DefaultJsonSerializerSettings);
+
+            Assert.All(actual, color => { Assert.NotNull(color.Fur); });
+        }
+
+        [Fact]
+        [Trait("Feature", "Colors")]
+        [Trait("Category", "Integration")]
+        public void Color_Categories_ShouldNotBeNull()
+        {
+            var actual = new List<Color>();
+
+            JsonConvert.PopulateObject(_fixture.JsonArrayOfColors, actual, ColorService.DefaultJsonSerializerSettings);
+
+            Assert.All(actual, color => { Assert.NotNull(color.Categories); });
+        }
+
+        [Fact]
+        [Trait("Feature", "Colors")]
+        [Trait("Category", "Integration")]
+        public void Color_BaseRgb_ShouldBeRgbTuple()
+        {
+            var actual = new List<Color>();
+
+            JsonConvert.PopulateObject(_fixture.JsonArrayOfColors, actual, ColorService.DefaultJsonSerializerSettings);
+
+            Assert.All(actual, color =>
+            {
+                Assert.Collection(color.BaseRgb,
+                    red => Assert.InRange(red, 1, 255),
+                    green => Assert.InRange(green, 1, 255),
+                    blue => Assert.InRange(blue, 1, 255));
+            });
+        }
     }
 }
