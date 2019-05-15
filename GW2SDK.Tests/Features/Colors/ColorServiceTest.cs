@@ -5,7 +5,6 @@ using GW2SDK.Features.Colors;
 using GW2SDK.Features.Colors.Infrastructure;
 using GW2SDK.Tests.Shared.Extensions;
 using GW2SDK.Tests.Shared.Fixtures;
-using Newtonsoft.Json;
 using Xunit;
 using Xunit.Abstractions;
 
@@ -13,14 +12,14 @@ namespace GW2SDK.Tests.Features.Colors
 {
     public class ColorServiceTest : IClassFixture<ConfigurationFixture>
     {
-        public ColorServiceTest(ConfigurationFixture fixture, ITestOutputHelper logger)
+        public ColorServiceTest(ConfigurationFixture fixture, ITestOutputHelper output)
         {
             _fixture = fixture;
-            _logger = logger;
+            _output = output;
         }
 
         private readonly ConfigurationFixture _fixture;
-        private readonly ITestOutputHelper _logger;
+        private readonly ITestOutputHelper _output;
 
         private ColorService CreateSut() =>
             new ColorService(new JsonColorService(new HttpClient
@@ -37,7 +36,7 @@ namespace GW2SDK.Tests.Features.Colors
 
             var actual = await sut.GetColorIds();
 
-            _logger.WriteLine("GetColorIds: {0}", actual.ToCsv());
+            _output.WriteLine("GetColorIds: {0}", actual.ToCsv());
 
             Assert.NotEmpty(actual);
         }

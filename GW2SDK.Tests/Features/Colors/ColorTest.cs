@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using GW2SDK.Features.Colors;
 using GW2SDK.Tests.Features.Colors.Fixtures;
 using Newtonsoft.Json;
@@ -10,13 +9,13 @@ namespace GW2SDK.Tests.Features.Colors
 {
     public class ColorTest : IClassFixture<ColorFixture>
     {
-        private readonly ITestOutputHelper _output;
-
         public ColorTest(ColorFixture fixture, ITestOutputHelper output)
         {
             _fixture = fixture;
             _output = output;
         }
+
+        private readonly ITestOutputHelper _output;
 
         private readonly ColorFixture _fixture;
 

@@ -10,15 +10,15 @@ namespace GW2SDK.Tests.Features.Colors
 {
     public class ColorCategoryTest : IClassFixture<ColorCategoryFixture>
     {
-        public ColorCategoryTest(ColorCategoryFixture fixture, ITestOutputHelper logger)
+        public ColorCategoryTest(ColorCategoryFixture fixture, ITestOutputHelper output)
         {
             _fixture = fixture;
-            _logger = logger;
+            _output = output;
         }
 
         private readonly ColorCategoryFixture _fixture;
 
-        private readonly ITestOutputHelper _logger;
+        private readonly ITestOutputHelper _output;
 
         [Fact]
         [Trait("Feature", "Colors")]
@@ -35,8 +35,8 @@ namespace GW2SDK.Tests.Features.Colors
         {
             var actual = Enum.GetNames(typeof(ColorCategory)).ToHashSet();
 
-            _logger.WriteLine("Expected: {0}", _fixture.ColorCategories.ToCsv());
-            _logger.WriteLine("Actual: {0}", actual.ToCsv());
+            _output.WriteLine("Expected: {0}", _fixture.ColorCategories.ToCsv());
+            _output.WriteLine("Actual: {0}", actual.ToCsv());
 
             Assert.Equal(_fixture.ColorCategories, actual);
         }

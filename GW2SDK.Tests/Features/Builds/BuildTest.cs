@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using GW2SDK.Features.Builds;
+﻿using GW2SDK.Features.Builds;
 using GW2SDK.Tests.Features.Builds.Fixtures;
 using Newtonsoft.Json;
 using Xunit;
