@@ -23,8 +23,15 @@ namespace GW2SDK.Tests.Features.Colors
 
         private readonly ITestOutputHelper _output;
 
-        private ColorService CreateSut() =>
-            new ColorService(new JsonColorService(new HttpClient().WithBaseAddress(_configuration.BaseAddress)));
+        private ColorService CreateSut()
+        {
+            var http = new HttpClient()
+                .WithBaseAddress(_configuration.BaseAddress)
+                .WithLatestSchemaVersion();
+
+            var api = new JsonColorService(http);
+            return new ColorService(api);
+        }
 
         [Fact]
         [Trait("Feature", "Colors")]

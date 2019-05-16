@@ -14,7 +14,12 @@ namespace GW2SDK.Tests.Features.Builds.Fixtures
         public async Task InitializeAsync()
         {
             var configuration = new ConfigurationFixture();
-            var service = new JsonBuildService(new HttpClient().WithBaseAddress(configuration.BaseAddress));
+
+            var http = new HttpClient()
+                .WithBaseAddress(configuration.BaseAddress)
+                .WithLatestSchemaVersion();
+
+            var service = new JsonBuildService(http);
 
             JsonBuild = await service.GetBuild();
         }

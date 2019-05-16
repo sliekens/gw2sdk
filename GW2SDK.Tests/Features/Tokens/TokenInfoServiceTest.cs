@@ -21,13 +21,16 @@ namespace GW2SDK.Tests.Features.Tokens
 
         private readonly ITestOutputHelper _output;
 
-        private TokenInfoService CreateSut() =>
-            new TokenInfoService(
-                new JsonTokenInfoService(
-                    new HttpClient()
-                        .WithBaseAddress(_configuration.BaseAddress)
-                        .WithAccessToken(_configuration.ApiKey)));
+        private TokenInfoService CreateSut()
+        {
+            var http = new HttpClient()
+                .WithBaseAddress(_configuration.BaseAddress)
+                .WithAccessToken(_configuration.ApiKey)
+                .WithLatestSchemaVersion();
 
+            var api = new JsonTokenInfoService(http);
+            return new TokenInfoService(api);
+        }
 
         [Fact]
         [Trait("Feature", "Tokens")]

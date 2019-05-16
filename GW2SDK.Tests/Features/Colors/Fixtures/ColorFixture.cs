@@ -14,7 +14,12 @@ namespace GW2SDK.Tests.Features.Colors.Fixtures
         public async Task InitializeAsync()
         {
             var configuration = new ConfigurationFixture();
-            var service = new JsonColorService(new HttpClient().WithBaseAddress(configuration.BaseAddress));
+
+            var http = new HttpClient()
+                .WithBaseAddress(configuration.BaseAddress)
+                .WithLatestSchemaVersion();
+
+            var service = new JsonColorService(http);
 
             JsonArrayOfColors = await service.GetAllColors();
         }

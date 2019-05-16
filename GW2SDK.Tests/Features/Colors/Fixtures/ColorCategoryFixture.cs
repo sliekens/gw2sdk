@@ -16,8 +16,10 @@ namespace GW2SDK.Tests.Features.Colors.Fixtures
         public async Task InitializeAsync()
         {
             var configuration = new ConfigurationFixture();
+
             var http = new HttpClient()
-                .WithBaseAddress(configuration.BaseAddress);
+                .WithBaseAddress(configuration.BaseAddress)
+                .WithLatestSchemaVersion();
 
             // TODO: ideally we should use persistent storage for this
             // LiteDB looks like a good candidate for storage

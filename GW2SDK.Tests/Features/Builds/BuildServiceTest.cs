@@ -17,8 +17,15 @@ namespace GW2SDK.Tests.Features.Builds
 
         private readonly ConfigurationFixture _configuration;
 
-        private BuildService CreateSut() =>
-            new BuildService(new JsonBuildService(new HttpClient().WithBaseAddress(_configuration.BaseAddress)));
+        private BuildService CreateSut()
+        {
+            var http = new HttpClient()
+                .WithBaseAddress(_configuration.BaseAddress)
+                .WithLatestSchemaVersion();
+
+            var api = new JsonBuildService(http);
+            return new BuildService(api);
+        }
 
         [Fact]
         [Trait("Feature", "Builds")]
