@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using GW2SDK.Features.Colors;
+using GW2SDK.Infrastructure;
 using GW2SDK.Tests.Features.Colors.Fixtures;
 using Newtonsoft.Json;
 using Xunit;
@@ -28,7 +29,7 @@ namespace GW2SDK.Tests.Features.Colors
 
             var actual = new List<Color>();
 
-            var serializerSettings = ColorService.DefaultJsonSerializerSettings;
+            var serializerSettings = Json.DefaultJsonSerializerSettings;
             serializerSettings.MissingMemberHandling = MissingMemberHandling.Error;
 
             JsonConvert.PopulateObject(_fixture.JsonArrayOfColors, actual, serializerSettings);
@@ -41,7 +42,7 @@ namespace GW2SDK.Tests.Features.Colors
         {
             var actual = new List<Color>();
 
-            JsonConvert.PopulateObject(_fixture.JsonArrayOfColors, actual, ColorService.DefaultJsonSerializerSettings);
+            JsonConvert.PopulateObject(_fixture.JsonArrayOfColors, actual, Json.DefaultJsonSerializerSettings);
 
             Assert.All(actual, color => { Assert.InRange(color.Id, 1, int.MaxValue); });
         }
@@ -54,7 +55,7 @@ namespace GW2SDK.Tests.Features.Colors
         {
             var actual = new List<Color>();
 
-            JsonConvert.PopulateObject(_fixture.JsonArrayOfColors, actual, ColorService.DefaultJsonSerializerSettings);
+            JsonConvert.PopulateObject(_fixture.JsonArrayOfColors, actual, Json.DefaultJsonSerializerSettings);
 
             Assert.All(actual, color => { Assert.NotEmpty(color.Name); });
         }
@@ -66,7 +67,7 @@ namespace GW2SDK.Tests.Features.Colors
         {
             var actual = new List<Color>();
 
-            JsonConvert.PopulateObject(_fixture.JsonArrayOfColors, actual, ColorService.DefaultJsonSerializerSettings);
+            JsonConvert.PopulateObject(_fixture.JsonArrayOfColors, actual, Json.DefaultJsonSerializerSettings);
 
             Assert.All(actual, color => { Assert.NotNull(color.Cloth); });
         }
@@ -78,7 +79,7 @@ namespace GW2SDK.Tests.Features.Colors
         {
             var actual = new List<Color>();
 
-            JsonConvert.PopulateObject(_fixture.JsonArrayOfColors, actual, ColorService.DefaultJsonSerializerSettings);
+            JsonConvert.PopulateObject(_fixture.JsonArrayOfColors, actual, Json.DefaultJsonSerializerSettings);
 
             Assert.All(actual, color => { Assert.NotNull(color.Leather); });
         }
@@ -90,7 +91,7 @@ namespace GW2SDK.Tests.Features.Colors
         {
             var actual = new List<Color>();
 
-            JsonConvert.PopulateObject(_fixture.JsonArrayOfColors, actual, ColorService.DefaultJsonSerializerSettings);
+            JsonConvert.PopulateObject(_fixture.JsonArrayOfColors, actual, Json.DefaultJsonSerializerSettings);
 
             Assert.All(actual, color => { Assert.NotNull(color.Metal); });
         }
@@ -102,7 +103,7 @@ namespace GW2SDK.Tests.Features.Colors
         {
             var actual = new List<Color>();
 
-            JsonConvert.PopulateObject(_fixture.JsonArrayOfColors, actual, ColorService.DefaultJsonSerializerSettings);
+            JsonConvert.PopulateObject(_fixture.JsonArrayOfColors, actual, Json.DefaultJsonSerializerSettings);
 
             Assert.All(actual, color => { Assert.NotNull(color.Fur); });
         }
@@ -114,7 +115,7 @@ namespace GW2SDK.Tests.Features.Colors
         {
             var actual = new List<Color>();
 
-            JsonConvert.PopulateObject(_fixture.JsonArrayOfColors, actual, ColorService.DefaultJsonSerializerSettings);
+            JsonConvert.PopulateObject(_fixture.JsonArrayOfColors, actual, Json.DefaultJsonSerializerSettings);
 
             Assert.All(actual, color => { Assert.NotNull(color.Categories); });
         }
@@ -126,7 +127,7 @@ namespace GW2SDK.Tests.Features.Colors
         {
             var actual = new List<Color>();
 
-            JsonConvert.PopulateObject(_fixture.JsonArrayOfColors, actual, ColorService.DefaultJsonSerializerSettings);
+            JsonConvert.PopulateObject(_fixture.JsonArrayOfColors, actual, Json.DefaultJsonSerializerSettings);
 
             Assert.All(actual, color =>
             {

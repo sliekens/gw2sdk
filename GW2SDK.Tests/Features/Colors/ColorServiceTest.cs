@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
+using GW2SDK.Extensions;
 using GW2SDK.Features.Colors;
 using GW2SDK.Features.Colors.Infrastructure;
 using GW2SDK.Tests.Shared.Extensions;
@@ -12,20 +13,18 @@ namespace GW2SDK.Tests.Features.Colors
 {
     public class ColorServiceTest : IClassFixture<ConfigurationFixture>
     {
-        public ColorServiceTest(ConfigurationFixture fixture, ITestOutputHelper output)
+        public ColorServiceTest(ConfigurationFixture configuration, ITestOutputHelper output)
         {
-            _fixture = fixture;
+            _configuration = configuration;
             _output = output;
         }
 
-        private readonly ConfigurationFixture _fixture;
+        private readonly ConfigurationFixture _configuration;
+
         private readonly ITestOutputHelper _output;
 
         private ColorService CreateSut() =>
-            new ColorService(new JsonColorService(new HttpClient
-            {
-                BaseAddress = _fixture.BaseAddress
-            }));
+            new ColorService(new JsonColorService(new HttpClient().WithBaseAddress(_configuration.BaseAddress)));
 
         [Fact]
         [Trait("Feature", "Colors")]

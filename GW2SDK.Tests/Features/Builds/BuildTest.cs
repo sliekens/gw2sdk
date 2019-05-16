@@ -1,4 +1,5 @@
 ﻿using GW2SDK.Features.Builds;
+using GW2SDK.Infrastructure;
 using GW2SDK.Tests.Features.Builds.Fixtures;
 using Newtonsoft.Json;
 using Xunit;
@@ -27,7 +28,7 @@ namespace GW2SDK.Tests.Features.Builds
 
             var actual = new Build();
 
-            var serializerSettings = BuildService.DefaultJsonSerializerSettings;
+            var serializerSettings = Json.DefaultJsonSerializerSettings;
             serializerSettings.MissingMemberHandling = MissingMemberHandling.Error;
 
             JsonConvert.PopulateObject(_fixture.JsonBuild, actual, serializerSettings);
@@ -40,7 +41,7 @@ namespace GW2SDK.Tests.Features.Builds
         {
             var actual = new Build();
 
-            JsonConvert.PopulateObject(_fixture.JsonBuild, actual, BuildService.DefaultJsonSerializerSettings);
+            JsonConvert.PopulateObject(_fixture.JsonBuild, actual, Json.DefaultJsonSerializerSettings);
 
             Assert.InRange(actual.Id, 1, int.MaxValue);
         }

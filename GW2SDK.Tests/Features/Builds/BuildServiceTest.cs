@@ -1,5 +1,6 @@
 ﻿using System.Net.Http;
 using System.Threading.Tasks;
+using GW2SDK.Extensions;
 using GW2SDK.Features.Builds;
 using GW2SDK.Features.Builds.Infrastructure;
 using GW2SDK.Tests.Shared.Fixtures;
@@ -9,18 +10,15 @@ namespace GW2SDK.Tests.Features.Builds
 {
     public class BuildServiceTest : IClassFixture<ConfigurationFixture>
     {
-        public BuildServiceTest(ConfigurationFixture fixture)
+        public BuildServiceTest(ConfigurationFixture configuration)
         {
-            _fixture = fixture;
+            _configuration = configuration;
         }
 
-        private readonly ConfigurationFixture _fixture;
+        private readonly ConfigurationFixture _configuration;
 
         private BuildService CreateSut() =>
-            new BuildService(new JsonBuildService(new HttpClient
-            {
-                BaseAddress = _fixture.BaseAddress
-            }));
+            new BuildService(new JsonBuildService(new HttpClient().WithBaseAddress(_configuration.BaseAddress)));
 
         [Fact]
         [Trait("Feature", "Builds")]

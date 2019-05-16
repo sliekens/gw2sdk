@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
+using GW2SDK.Extensions;
 using GW2SDK.Features.Colors.Infrastructure;
 using GW2SDK.Tests.Features.Colors.Extensions;
 using GW2SDK.Tests.Shared.Fixtures;
@@ -15,10 +16,8 @@ namespace GW2SDK.Tests.Features.Colors.Fixtures
         public async Task InitializeAsync()
         {
             var configuration = new ConfigurationFixture();
-            var http = new HttpClient
-            {
-                BaseAddress = configuration.BaseAddress
-            };
+            var http = new HttpClient()
+                .WithBaseAddress(configuration.BaseAddress);
 
             // TODO: ideally we should use persistent storage for this
             // LiteDB looks like a good candidate for storage
