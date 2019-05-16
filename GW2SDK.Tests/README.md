@@ -16,7 +16,8 @@ Next you have to store the key in a place where the tests can find it. You have 
 2. Azure Key Vault
 
 NB: the key name must match exactly! We check the name to prevent abuse.\
-Of course you're able to remove that bit of code, but please don't. :)
+The reason is that some services associate API keys with logins, as long as you use a key name of _their_ choice.\
+The only way for us to counter abuse is by demanding a key name of **our** choice. That way if a key leaks to the outside world, it can't be used to login to those other services.
 
 ### User Secrets
 
