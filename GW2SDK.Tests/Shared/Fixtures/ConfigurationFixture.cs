@@ -9,10 +9,20 @@ namespace GW2SDK.Tests.Shared.Fixtures
         {
             Configuration = new ConfigurationBuilder()
                 .AddJsonFile("appsettings.json")
+                .AddUserSecrets<ConfigurationFixture>()
                 .Build();
+
+            // 2-phase build, because the next part requires configuration of its own
+            Configuration = new ConfigurationBuilder()
+                .AddConfiguration(Configuration)
+                .AddAzureKeyVault($"https://{Configuration["KeyVaultName"]}.vault.azure.net/")
+                .Build();
+
         }
 
         public IConfigurationRoot Configuration { get; }
+
+        public string ApiKey => Configuration["ApiKey"];
 
         public Uri BaseAddress => new Uri(Configuration["Authority"], UriKind.Absolute);
     }
