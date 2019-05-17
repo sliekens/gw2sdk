@@ -9,7 +9,7 @@ namespace GW2SDK.Tests.Features.Accounts.Fixtures
 {
     public class AccountFixture : IAsyncLifetime
     {
-        public string JsonAccount { get; private set; }
+        public string JsonAccountObject { get; private set; }
 
         public async Task InitializeAsync()
         {
@@ -22,7 +22,7 @@ namespace GW2SDK.Tests.Features.Accounts.Fixtures
 
             var service = new JsonAccountsService(http);
 
-            JsonAccount = await service.GetAccount();
+            JsonAccountObject = await service.GetAccount();
         }
 
         public Task DisposeAsync() => Task.CompletedTask;
