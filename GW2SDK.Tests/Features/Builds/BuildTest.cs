@@ -1,4 +1,5 @@
-﻿using GW2SDK.Features.Builds;
+﻿using GW2SDK.Extensions;
+using GW2SDK.Features.Builds;
 using GW2SDK.Infrastructure;
 using GW2SDK.Tests.Features.Builds.Fixtures;
 using Newtonsoft.Json;
@@ -19,6 +20,13 @@ namespace GW2SDK.Tests.Features.Builds
 
         private readonly ITestOutputHelper _output;
 
+        private Build CreateSut(JsonSerializerSettings jsonSerializerSettings)
+        {
+            var sut = new Build();
+            JsonConvert.PopulateObject(_fixture.JsonBuildObject, sut, jsonSerializerSettings);
+            return sut;
+        }
+
         [Fact]
         [Trait("Feature", "Builds")]
         [Trait("Category", "Integration")]
@@ -26,12 +34,7 @@ namespace GW2SDK.Tests.Features.Builds
         {
             _output.WriteLine(_fixture.JsonBuildObject);
 
-            var sut = new Build();
-
-            var serializerSettings = Json.DefaultJsonSerializerSettings;
-            serializerSettings.MissingMemberHandling = MissingMemberHandling.Error;
-
-            JsonConvert.PopulateObject(_fixture.JsonBuildObject, sut, serializerSettings);
+            _ = CreateSut(Json.DefaultJsonSerializerSettings.WithMissingMemberHandling(MissingMemberHandling.Error));
         }
 
         [Fact]
@@ -39,9 +42,7 @@ namespace GW2SDK.Tests.Features.Builds
         [Trait("Category", "Integration")]
         public void Build_Id_ShouldBePositive()
         {
-            var sut = new Build();
-
-            JsonConvert.PopulateObject(_fixture.JsonBuildObject, sut, Json.DefaultJsonSerializerSettings);
+            var sut = CreateSut(Json.DefaultJsonSerializerSettings);
 
             Assert.InRange(sut.Id, 1, int.MaxValue);
         }

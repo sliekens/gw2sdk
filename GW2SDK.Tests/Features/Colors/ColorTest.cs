@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using GW2SDK.Extensions;
 using GW2SDK.Features.Colors;
 using GW2SDK.Infrastructure;
 using GW2SDK.Tests.Features.Colors.Fixtures;
@@ -20,6 +21,13 @@ namespace GW2SDK.Tests.Features.Colors
 
         private readonly ColorFixture _fixture;
 
+        private List<Color> CreateSut(JsonSerializerSettings jsonSerializerSettings)
+        {
+            var sut = new List<Color>();
+            JsonConvert.PopulateObject(_fixture.JsonArrayOfColors, sut, jsonSerializerSettings);
+            return sut;
+        }
+
         [Fact]
         [Trait("Feature", "Colors")]
         [Trait("Category", "Integration")]
@@ -27,12 +35,7 @@ namespace GW2SDK.Tests.Features.Colors
         {
             _output.WriteLine(_fixture.JsonArrayOfColors);
 
-            var sut = new List<Color>();
-
-            var serializerSettings = Json.DefaultJsonSerializerSettings;
-            serializerSettings.MissingMemberHandling = MissingMemberHandling.Error;
-
-            JsonConvert.PopulateObject(_fixture.JsonArrayOfColors, sut, serializerSettings);
+            _ = CreateSut(Json.DefaultJsonSerializerSettings.WithMissingMemberHandling(MissingMemberHandling.Error));
         }
 
         [Fact]
@@ -40,9 +43,7 @@ namespace GW2SDK.Tests.Features.Colors
         [Trait("Category", "Integration")]
         public void Color_Id_ShouldBePositive()
         {
-            var sut = new List<Color>();
-
-            JsonConvert.PopulateObject(_fixture.JsonArrayOfColors, sut, Json.DefaultJsonSerializerSettings);
+            var sut = CreateSut(Json.DefaultJsonSerializerSettings);
 
             Assert.All(sut, color => { Assert.InRange(color.Id, 1, int.MaxValue); });
         }
@@ -53,9 +54,7 @@ namespace GW2SDK.Tests.Features.Colors
         [Trait("Category", "Integration")]
         public void Color_Name_ShouldNotBeEmpty()
         {
-            var sut = new List<Color>();
-
-            JsonConvert.PopulateObject(_fixture.JsonArrayOfColors, sut, Json.DefaultJsonSerializerSettings);
+            var sut = CreateSut(Json.DefaultJsonSerializerSettings);
 
             Assert.All(sut, color => { Assert.NotEmpty(color.Name); });
         }
@@ -65,9 +64,7 @@ namespace GW2SDK.Tests.Features.Colors
         [Trait("Category", "Integration")]
         public void Color_Cloth_ShouldNotBeNull()
         {
-            var sut = new List<Color>();
-
-            JsonConvert.PopulateObject(_fixture.JsonArrayOfColors, sut, Json.DefaultJsonSerializerSettings);
+            var sut = CreateSut(Json.DefaultJsonSerializerSettings);
 
             Assert.All(sut, color => { Assert.NotNull(color.Cloth); });
         }
@@ -77,9 +74,7 @@ namespace GW2SDK.Tests.Features.Colors
         [Trait("Category", "Integration")]
         public void Color_Leather_ShouldNotBeNull()
         {
-            var sut = new List<Color>();
-
-            JsonConvert.PopulateObject(_fixture.JsonArrayOfColors, sut, Json.DefaultJsonSerializerSettings);
+            var sut = CreateSut(Json.DefaultJsonSerializerSettings);
 
             Assert.All(sut, color => { Assert.NotNull(color.Leather); });
         }
@@ -89,9 +84,7 @@ namespace GW2SDK.Tests.Features.Colors
         [Trait("Category", "Integration")]
         public void Color_Metal_ShouldNotBeNull()
         {
-            var sut = new List<Color>();
-
-            JsonConvert.PopulateObject(_fixture.JsonArrayOfColors, sut, Json.DefaultJsonSerializerSettings);
+            var sut = CreateSut(Json.DefaultJsonSerializerSettings);
 
             Assert.All(sut, color => { Assert.NotNull(color.Metal); });
         }
@@ -101,9 +94,7 @@ namespace GW2SDK.Tests.Features.Colors
         [Trait("Category", "Integration")]
         public void Color_Fur_ShouldNotBeNull()
         {
-            var sut = new List<Color>();
-
-            JsonConvert.PopulateObject(_fixture.JsonArrayOfColors, sut, Json.DefaultJsonSerializerSettings);
+            var sut = CreateSut(Json.DefaultJsonSerializerSettings);
 
             Assert.All(sut, color => { Assert.NotNull(color.Fur); });
         }
@@ -113,9 +104,7 @@ namespace GW2SDK.Tests.Features.Colors
         [Trait("Category", "Integration")]
         public void Color_Categories_ShouldNotBeNull()
         {
-            var sut = new List<Color>();
-
-            JsonConvert.PopulateObject(_fixture.JsonArrayOfColors, sut, Json.DefaultJsonSerializerSettings);
+            var sut = CreateSut(Json.DefaultJsonSerializerSettings);
 
             Assert.All(sut, color => { Assert.NotNull(color.Categories); });
         }
@@ -125,9 +114,7 @@ namespace GW2SDK.Tests.Features.Colors
         [Trait("Category", "Integration")]
         public void Color_BaseRgb_ShouldBeRgbTuple()
         {
-            var sut = new List<Color>();
-
-            JsonConvert.PopulateObject(_fixture.JsonArrayOfColors, sut, Json.DefaultJsonSerializerSettings);
+            var sut = CreateSut(Json.DefaultJsonSerializerSettings);
 
             Assert.All(sut, color =>
             {

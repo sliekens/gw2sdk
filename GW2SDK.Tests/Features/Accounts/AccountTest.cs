@@ -1,4 +1,5 @@
-﻿using GW2SDK.Features.Accounts;
+﻿using GW2SDK.Extensions;
+using GW2SDK.Features.Accounts;
 using GW2SDK.Infrastructure;
 using GW2SDK.Tests.Features.Accounts.Fixtures;
 using Newtonsoft.Json;
@@ -19,6 +20,13 @@ namespace GW2SDK.Tests.Features.Accounts
 
         private readonly ITestOutputHelper _output;
 
+        private Account CreateSut(JsonSerializerSettings jsonSerializerSettings)
+        {
+            var sut = new Account();
+            JsonConvert.PopulateObject(_fixture.JsonAccountObject, sut, jsonSerializerSettings);
+            return sut;
+        }
+
         [Fact]
         [Trait("Feature", "Accounts")]
         [Trait("Category", "Integration")]
@@ -26,12 +34,7 @@ namespace GW2SDK.Tests.Features.Accounts
         {
             _output.WriteLine(_fixture.JsonAccountObject);
 
-            var sut = new Account();
-
-            var serializerSettings = Json.DefaultJsonSerializerSettings;
-            serializerSettings.MissingMemberHandling = MissingMemberHandling.Error;
-
-            JsonConvert.PopulateObject(_fixture.JsonAccountObject, sut, serializerSettings);
+            _ = CreateSut(Json.DefaultJsonSerializerSettings.WithMissingMemberHandling(MissingMemberHandling.Error));
         }
 
 
@@ -40,9 +43,7 @@ namespace GW2SDK.Tests.Features.Accounts
         [Trait("Category", "Integration")]
         public void Account_Id_ShouldNotBeDefaultValue()
         {
-            var sut = new Account();
-
-            JsonConvert.PopulateObject(_fixture.JsonAccountObject, sut, Json.DefaultJsonSerializerSettings);
+            var sut = CreateSut(Json.DefaultJsonSerializerSettings);
 
             Assert.NotEqual(default, sut.Id);
         }
@@ -52,9 +53,7 @@ namespace GW2SDK.Tests.Features.Accounts
         [Trait("Category", "Integration")]
         public void Account_Name_ShouldNotBeEmpty()
         {
-            var sut = new Account();
-
-            JsonConvert.PopulateObject(_fixture.JsonAccountObject, sut, Json.DefaultJsonSerializerSettings);
+            var sut = CreateSut(Json.DefaultJsonSerializerSettings);
 
             Assert.NotEmpty(sut.Name);
         }
@@ -64,9 +63,7 @@ namespace GW2SDK.Tests.Features.Accounts
         [Trait("Category", "Integration")]
         public void Account_Access_ShouldNotBeEmpty()
         {
-            var sut = new Account();
-
-            JsonConvert.PopulateObject(_fixture.JsonAccountObject, sut, Json.DefaultJsonSerializerSettings);
+            var sut = CreateSut(Json.DefaultJsonSerializerSettings);
 
             Assert.NotEmpty(sut.Access);
         }
@@ -76,9 +73,7 @@ namespace GW2SDK.Tests.Features.Accounts
         [Trait("Category", "Integration")]
         public void Account_Access_ShouldNotContainNone()
         {
-            var sut = new Account();
-
-            JsonConvert.PopulateObject(_fixture.JsonAccountObject, sut, Json.DefaultJsonSerializerSettings);
+            var sut = CreateSut(Json.DefaultJsonSerializerSettings);
 
             Assert.DoesNotContain(GameAccess.None, sut.Access);
         }
@@ -88,9 +83,7 @@ namespace GW2SDK.Tests.Features.Accounts
         [Trait("Category", "Integration")]
         public void Account_Age_ShouldNotBeDefaultValue()
         {
-            var sut = new Account();
-
-            JsonConvert.PopulateObject(_fixture.JsonAccountObject, sut, Json.DefaultJsonSerializerSettings);
+            var sut = CreateSut(Json.DefaultJsonSerializerSettings);
 
             Assert.NotEqual(default, sut.Age);
         }
@@ -100,9 +93,7 @@ namespace GW2SDK.Tests.Features.Accounts
         [Trait("Category", "Integration")]
         public void Account_LastModified_ShouldNotBeDefaultValue()
         {
-            var sut = new Account();
-
-            JsonConvert.PopulateObject(_fixture.JsonAccountObject, sut, Json.DefaultJsonSerializerSettings);
+            var sut = CreateSut(Json.DefaultJsonSerializerSettings);
 
             Assert.NotEqual(default, sut.LastModified);
         }
@@ -112,9 +103,7 @@ namespace GW2SDK.Tests.Features.Accounts
         [Trait("Category", "Integration")]
         public void Account_World_ShouldBePositiveNumber()
         {
-            var sut = new Account();
-
-            JsonConvert.PopulateObject(_fixture.JsonAccountObject, sut, Json.DefaultJsonSerializerSettings);
+            var sut = CreateSut(Json.DefaultJsonSerializerSettings);
 
             // TODO: update with /v2/worlds comparison once implemented
             Assert.NotEqual(default, sut.LastModified);
@@ -125,9 +114,7 @@ namespace GW2SDK.Tests.Features.Accounts
         [Trait("Category", "Integration")]
         public void Account_Guilds_ShouldNotBeNull()
         {
-            var sut = new Account();
-
-            JsonConvert.PopulateObject(_fixture.JsonAccountObject, sut, Json.DefaultJsonSerializerSettings);
+            var sut = CreateSut(Json.DefaultJsonSerializerSettings);
 
             Assert.NotNull(sut.Guilds);
         }
@@ -137,9 +124,7 @@ namespace GW2SDK.Tests.Features.Accounts
         [Trait("Category", "Integration")]
         public void Account_GuildLeader_ShouldNotBeNull()
         {
-            var sut = new Account();
-
-            JsonConvert.PopulateObject(_fixture.JsonAccountObject, sut, Json.DefaultJsonSerializerSettings);
+            var sut = CreateSut(Json.DefaultJsonSerializerSettings);
 
             Assert.NotNull(sut.GuildLeader);
         }
@@ -149,34 +134,28 @@ namespace GW2SDK.Tests.Features.Accounts
         [Trait("Category", "Integration")]
         public void Account_Created_ShouldNotBeDefaultValue()
         {
-            var sut = new Account();
-
-            JsonConvert.PopulateObject(_fixture.JsonAccountObject, sut, Json.DefaultJsonSerializerSettings);
+            var sut = CreateSut(Json.DefaultJsonSerializerSettings);
 
             Assert.NotEqual(default, sut.Created);
         }
-        
+
         [Fact]
         [Trait("Feature", "Accounts")]
         [Trait("Category", "Integration")]
         public void Account_FractalLevel_ShouldNotBeNull()
         {
-            var sut = new Account();
-
-            JsonConvert.PopulateObject(_fixture.JsonAccountObject, sut, Json.DefaultJsonSerializerSettings);
+            var sut = CreateSut(Json.DefaultJsonSerializerSettings);
 
             // Can be null if token is missing Progression permission
             Assert.NotNull(sut.FractalLevel);
         }
-        
+
         [Fact]
         [Trait("Feature", "Accounts")]
         [Trait("Category", "Integration")]
         public void Account_DailyAp_ShouldNotBeNull()
         {
-            var sut = new Account();
-
-            JsonConvert.PopulateObject(_fixture.JsonAccountObject, sut, Json.DefaultJsonSerializerSettings);
+            var sut = CreateSut(Json.DefaultJsonSerializerSettings);
 
             // Can be null if token is missing Progression permission
             Assert.NotNull(sut.DailyAp);
@@ -187,9 +166,7 @@ namespace GW2SDK.Tests.Features.Accounts
         [Trait("Category", "Integration")]
         public void Account_MonthlyAp_ShouldNotBeNull()
         {
-            var sut = new Account();
-
-            JsonConvert.PopulateObject(_fixture.JsonAccountObject, sut, Json.DefaultJsonSerializerSettings);
+            var sut = CreateSut(Json.DefaultJsonSerializerSettings);
 
             // Can be null if token is missing Progression permission
             Assert.NotNull(sut.MonthlyAp);
@@ -200,9 +177,7 @@ namespace GW2SDK.Tests.Features.Accounts
         [Trait("Category", "Integration")]
         public void Account_WvwRank_ShouldNotBeNull()
         {
-            var sut = new Account();
-
-            JsonConvert.PopulateObject(_fixture.JsonAccountObject, sut, Json.DefaultJsonSerializerSettings);
+            var sut = CreateSut(Json.DefaultJsonSerializerSettings);
 
             // Can be null if token is missing Progression permission
             Assert.NotNull(sut.WvwRank);
