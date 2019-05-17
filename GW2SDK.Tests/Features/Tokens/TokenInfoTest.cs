@@ -28,12 +28,12 @@ namespace GW2SDK.Tests.Features.Tokens
         {
             _output.WriteLine(_fixture.JsonTokenInfo);
 
-            var actual = new TokenInfo();
+            var sut = new TokenInfo();
 
             var serializerSettings = Json.DefaultJsonSerializerSettings;
             serializerSettings.MissingMemberHandling = MissingMemberHandling.Error;
 
-            JsonConvert.PopulateObject(_fixture.JsonTokenInfo, actual, serializerSettings);
+            JsonConvert.PopulateObject(_fixture.JsonTokenInfo, sut, serializerSettings);
         }
 
         [Fact]
@@ -41,11 +41,11 @@ namespace GW2SDK.Tests.Features.Tokens
         [Trait("Category", "Integration")]
         public void TokenInfo_Id_ShouldNotBeEmpty()
         {
-            var actual = new TokenInfo();
+            var sut = new TokenInfo();
 
-            JsonConvert.PopulateObject(_fixture.JsonTokenInfo, actual, Json.DefaultJsonSerializerSettings);
+            JsonConvert.PopulateObject(_fixture.JsonTokenInfo, sut, Json.DefaultJsonSerializerSettings);
 
-            Assert.NotEmpty(actual.Id);
+            Assert.NotEmpty(sut.Id);
         }
 
         [Fact]
@@ -53,14 +53,14 @@ namespace GW2SDK.Tests.Features.Tokens
         [Trait("Category", "Integration")]
         public void TokenInfo_Name_ShouldBeGW2SDKDev()
         {
-            var actual = new TokenInfo();
+            var sut = new TokenInfo();
 
-            JsonConvert.PopulateObject(_fixture.JsonTokenInfo, actual, Json.DefaultJsonSerializerSettings);
+            JsonConvert.PopulateObject(_fixture.JsonTokenInfo, sut, Json.DefaultJsonSerializerSettings);
 
             // This is not intended to improve account security, only to prevent key abuse
             // The reason is that some services like GW2BLTC.com associate keys with logins but require you to use a key name of their choice
             // If this key leaks to the outside world, it still can't be (ab)used to login with GW2BLTC.com or similar sites
-            Assert.Equal("GW2SDK-Dev", actual.Name);
+            Assert.Equal("GW2SDK-Dev", sut.Name);
         }
 
         [Fact]
@@ -68,13 +68,13 @@ namespace GW2SDK.Tests.Features.Tokens
         [Trait("Category", "Integration")]
         public void TokenInfo_Permissions_ShouldHaveFullPermissions()
         {
+            var sut = new TokenInfo();
+
             var expected = Enum.GetValues(typeof(Permission)).Cast<Permission>().ToHashSet();
 
-            var actual = new TokenInfo();
+            JsonConvert.PopulateObject(_fixture.JsonTokenInfo, sut, Json.DefaultJsonSerializerSettings);
 
-            JsonConvert.PopulateObject(_fixture.JsonTokenInfo, actual, Json.DefaultJsonSerializerSettings);
-
-            Assert.Equal(expected, actual.Permissions.ToHashSet());
+            Assert.Equal(expected, sut.Permissions.ToHashSet());
         }
     }
 }
