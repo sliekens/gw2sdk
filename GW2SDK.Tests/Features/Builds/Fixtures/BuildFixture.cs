@@ -9,7 +9,7 @@ namespace GW2SDK.Tests.Features.Builds.Fixtures
 {
     public class BuildFixture : IAsyncLifetime
     {
-        public string JsonBuild { get; set; }
+        public string JsonBuildObject { get; set; }
 
         public async Task InitializeAsync()
         {
@@ -21,7 +21,7 @@ namespace GW2SDK.Tests.Features.Builds.Fixtures
 
             var service = new JsonBuildService(http);
 
-            JsonBuild = await service.GetBuild();
+            JsonBuildObject = await service.GetBuild();
         }
 
         public Task DisposeAsync() => Task.CompletedTask;

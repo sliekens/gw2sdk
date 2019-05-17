@@ -24,14 +24,14 @@ namespace GW2SDK.Tests.Features.Builds
         [Trait("Category", "Integration")]
         public void Build_ShouldHaveNoMissingMembers()
         {
-            _output.WriteLine(_fixture.JsonBuild);
+            _output.WriteLine(_fixture.JsonBuildObject);
 
             var actual = new Build();
 
             var serializerSettings = Json.DefaultJsonSerializerSettings;
             serializerSettings.MissingMemberHandling = MissingMemberHandling.Error;
 
-            JsonConvert.PopulateObject(_fixture.JsonBuild, actual, serializerSettings);
+            JsonConvert.PopulateObject(_fixture.JsonBuildObject, actual, serializerSettings);
         }
 
         [Fact]
@@ -41,7 +41,7 @@ namespace GW2SDK.Tests.Features.Builds
         {
             var actual = new Build();
 
-            JsonConvert.PopulateObject(_fixture.JsonBuild, actual, Json.DefaultJsonSerializerSettings);
+            JsonConvert.PopulateObject(_fixture.JsonBuildObject, actual, Json.DefaultJsonSerializerSettings);
 
             Assert.InRange(actual.Id, 1, int.MaxValue);
         }
