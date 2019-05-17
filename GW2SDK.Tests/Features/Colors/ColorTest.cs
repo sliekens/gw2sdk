@@ -23,6 +23,7 @@ namespace GW2SDK.Tests.Features.Colors
 
         private List<Color> CreateSut(JsonSerializerSettings jsonSerializerSettings)
         {
+            _output.WriteLine(_fixture.JsonArrayOfColors);
             var sut = new List<Color>();
             JsonConvert.PopulateObject(_fixture.JsonArrayOfColors, sut, jsonSerializerSettings);
             return sut;
@@ -33,8 +34,6 @@ namespace GW2SDK.Tests.Features.Colors
         [Trait("Category", "Integration")]
         public void Color_ShouldHaveNoMissingMembers()
         {
-            _output.WriteLine(_fixture.JsonArrayOfColors);
-
             _ = CreateSut(Json.DefaultJsonSerializerSettings.WithMissingMemberHandling(MissingMemberHandling.Error));
         }
 

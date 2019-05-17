@@ -22,6 +22,7 @@ namespace GW2SDK.Tests.Features.Accounts
 
         private Account CreateSut(JsonSerializerSettings jsonSerializerSettings)
         {
+            _output.WriteLine(_fixture.JsonAccountObject);
             var sut = new Account();
             JsonConvert.PopulateObject(_fixture.JsonAccountObject, sut, jsonSerializerSettings);
             return sut;
@@ -32,8 +33,6 @@ namespace GW2SDK.Tests.Features.Accounts
         [Trait("Category", "Integration")]
         public void Account_ShouldHaveNoMissingMembers()
         {
-            _output.WriteLine(_fixture.JsonAccountObject);
-
             _ = CreateSut(Json.DefaultJsonSerializerSettings.WithMissingMemberHandling(MissingMemberHandling.Error));
         }
 

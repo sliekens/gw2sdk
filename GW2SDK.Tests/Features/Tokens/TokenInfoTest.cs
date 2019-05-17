@@ -25,6 +25,7 @@ namespace GW2SDK.Tests.Features.Tokens
 
         private TokenInfo CreateSut(JsonSerializerSettings jsonSerializerSettings)
         {
+            _output.WriteLine(_fixture.JsonTokenInfoObject);
             var sut = new TokenInfo();
             JsonConvert.PopulateObject(_fixture.JsonTokenInfoObject, sut, jsonSerializerSettings);
             return sut;
@@ -35,8 +36,6 @@ namespace GW2SDK.Tests.Features.Tokens
         [Trait("Category", "Integration")]
         public void TokenInfo_ShouldHaveNoMissingMembers()
         {
-            _output.WriteLine(_fixture.JsonTokenInfoObject);
-
             _ = CreateSut(Json.DefaultJsonSerializerSettings.WithMissingMemberHandling(MissingMemberHandling.Error));
         }
 

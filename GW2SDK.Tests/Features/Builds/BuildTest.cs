@@ -22,6 +22,7 @@ namespace GW2SDK.Tests.Features.Builds
 
         private Build CreateSut(JsonSerializerSettings jsonSerializerSettings)
         {
+            _output.WriteLine(_fixture.JsonBuildObject);
             var sut = new Build();
             JsonConvert.PopulateObject(_fixture.JsonBuildObject, sut, jsonSerializerSettings);
             return sut;
@@ -32,8 +33,6 @@ namespace GW2SDK.Tests.Features.Builds
         [Trait("Category", "Integration")]
         public void Build_ShouldHaveNoMissingMembers()
         {
-            _output.WriteLine(_fixture.JsonBuildObject);
-
             _ = CreateSut(Json.DefaultJsonSerializerSettings.WithMissingMemberHandling(MissingMemberHandling.Error));
         }
 
