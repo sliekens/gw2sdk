@@ -1,5 +1,4 @@
-﻿using System;
-using System.Net.Http;
+﻿using System.Net.Http;
 using System.Threading.Tasks;
 using GW2SDK.Extensions;
 using GW2SDK.Features.Tokens.Infrastructure;
@@ -10,7 +9,7 @@ namespace GW2SDK.Tests.Features.Tokens.Fixtures
 {
     public class TokenInfoFixture : IAsyncLifetime
     {
-        public string JsonTokenInfo { get; private set; }
+        public string JsonTokenInfoObject { get; private set; }
 
         public async Task InitializeAsync()
         {
@@ -23,7 +22,7 @@ namespace GW2SDK.Tests.Features.Tokens.Fixtures
 
             var service = new JsonTokenInfoService(http);
 
-            JsonTokenInfo = await service.GetTokenInfo();
+            JsonTokenInfoObject = await service.GetTokenInfo();
         }
 
         public Task DisposeAsync() => Task.CompletedTask;
