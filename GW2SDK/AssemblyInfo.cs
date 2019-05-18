@@ -3,9 +3,11 @@
 /**
  * Use this comment to sum up our technical debt, it integrates nicely with To-do explorer
  *
- * TODO: add custom list type with ListMetaData
+ * TODO: use DataTransferList in all existing services
  *
- * TODO: add ListMetaData to all existing services
+ * TODO: add localization support
+ *
+ * TODO: invent paging data structure
  *
  */
 [assembly: InternalsVisibleTo("GW2SDK.Tests")]

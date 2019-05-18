@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Linq;
 
-namespace GW2SDK.Tests.Shared.Extensions
+namespace GW2SDK.Extensions
 {
     public static class EnumerableExtensions
     {

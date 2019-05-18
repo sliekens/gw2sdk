@@ -1,7 +1,8 @@
 ﻿using System;
-using System.Globalization;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Threading.Tasks;
+using GW2SDK.Features.Common;
 using GW2SDK.Infrastructure;
 
 namespace GW2SDK.Extensions
@@ -9,6 +10,21 @@ namespace GW2SDK.Extensions
     [UsedImplicitly(ImplicitUseTargetFlags.WithMembers)]
     public static class HttpClientExtensions
     {
+        public static async Task<(string Json, ListMetaData MetaData)> GetStringWithListMetaDataAsync(
+            [NotNull] this HttpClient instance, Uri requestUri)
+        {
+            if (instance == null) throw new ArgumentNullException(nameof(instance));
+            using (var request = new HttpRequestMessage(HttpMethod.Get, requestUri))
+            using (var response = await instance.SendAsync(request, HttpCompletionOption.ResponseHeadersRead)
+                .ConfigureAwait(false))
+            {
+                response.EnsureSuccessStatusCode();
+                var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
+                var metaData = response.Headers.GetListMetaData();
+                return (json, metaData);
+            }
+        }
+
         public static void UseBaseAddress([NotNull] this HttpClient instance, [NotNull] Uri baseAddress)
         {
             if (instance == null) throw new ArgumentNullException(nameof(instance));
@@ -51,7 +67,7 @@ namespace GW2SDK.Extensions
                 instance.DefaultRequestHeaders.Add("X-Schema-Version", version);
             }
         }
-        
+
         public static HttpClient WithSchemaVersion([NotNull] this HttpClient instance, [NotNull] string version)
         {
             if (instance == null) throw new ArgumentNullException(nameof(instance));
@@ -87,7 +103,7 @@ namespace GW2SDK.Extensions
             // (There is no format string that does all this in, I checked)
             instance.UseSchemaVersion(version.ToOffset(TimeSpan.Zero).ToString(sortable) + "Z");
         }
-        
+
         public static HttpClient WithSchemaVersion([NotNull] this HttpClient instance, DateTimeOffset version)
         {
             if (instance == null) throw new ArgumentNullException(nameof(instance));

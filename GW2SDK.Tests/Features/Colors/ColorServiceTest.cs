@@ -4,7 +4,6 @@ using System.Threading.Tasks;
 using GW2SDK.Extensions;
 using GW2SDK.Features.Colors;
 using GW2SDK.Features.Colors.Infrastructure;
-using GW2SDK.Tests.Shared.Extensions;
 using GW2SDK.Tests.Shared.Fixtures;
 using Xunit;
 using Xunit.Abstractions;

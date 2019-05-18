@@ -1,8 +1,8 @@
 using System;
 using System.Linq;
+using GW2SDK.Extensions;
 using GW2SDK.Features.Colors;
 using GW2SDK.Tests.Features.Colors.Fixtures;
-using GW2SDK.Tests.Shared.Extensions;
 using Xunit;
 using Xunit.Abstractions;
 
