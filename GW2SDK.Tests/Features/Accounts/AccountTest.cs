@@ -90,11 +90,12 @@ namespace GW2SDK.Tests.Features.Accounts
         [Fact]
         [Trait("Feature", "Accounts")]
         [Trait("Category", "Integration")]
-        public void Account_LastModified_ShouldNotBeDefaultValue()
+        [Trait("Importance", "Critical")]
+        public void Account_LastModified_ShouldEqualKnownSchemaVersion()
         {
             var sut = CreateSut(Json.DefaultJsonSerializerSettings);
 
-            Assert.NotEqual(default, sut.LastModified);
+            Assert.Equal(_fixture.KnownSchemaVersion, sut.LastModified);
         }
 
         [Fact]

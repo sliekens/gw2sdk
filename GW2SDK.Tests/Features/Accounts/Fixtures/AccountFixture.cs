@@ -1,4 +1,5 @@
-﻿using System.Net.Http;
+﻿using System;
+using System.Net.Http;
 using System.Threading.Tasks;
 using GW2SDK.Extensions;
 using GW2SDK.Features.Accounts.Infrastructure;
@@ -10,6 +11,8 @@ namespace GW2SDK.Tests.Features.Accounts.Fixtures
     public class AccountFixture : IAsyncLifetime
     {
         public string JsonAccountObject { get; private set; }
+
+        public DateTimeOffset KnownSchemaVersion { get; private set; }
 
         public async Task InitializeAsync()
         {
@@ -23,6 +26,8 @@ namespace GW2SDK.Tests.Features.Accounts.Fixtures
             var service = new JsonAccountsService(http);
 
             JsonAccountObject = await service.GetAccount();
+
+            KnownSchemaVersion = DateTimeOffset.Parse(configuration.Configuration["KnownSchemaVersion:Account"]);
         }
 
         public Task DisposeAsync() => Task.CompletedTask;
