@@ -5,6 +5,7 @@ using Newtonsoft.Json;
 
 namespace GW2SDK.Features.Accounts
 {
+    [DataTransferObject]
     public sealed class Account
     {
         public Guid Id { get; set; }

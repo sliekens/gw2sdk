@@ -1,5 +1,8 @@
-﻿namespace GW2SDK.Features.Colors
+﻿using GW2SDK.Infrastructure;
+
+namespace GW2SDK.Features.Colors
 {
+    [DataTransferObject(RootObject = false)]
     public sealed class ColorInfo
     {
         public int Brightness { get; set; }

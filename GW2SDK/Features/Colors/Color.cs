@@ -1,5 +1,8 @@
-﻿namespace GW2SDK.Features.Colors
+﻿using GW2SDK.Infrastructure;
+
+namespace GW2SDK.Features.Colors
 {
+    [DataTransferObject]
     public sealed class Color
     {
         public int Id { get; set; }
