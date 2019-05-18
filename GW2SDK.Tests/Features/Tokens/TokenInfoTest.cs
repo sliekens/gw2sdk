@@ -34,6 +34,7 @@ namespace GW2SDK.Tests.Features.Tokens
         [Fact]
         [Trait("Feature", "Tokens")]
         [Trait("Category", "Integration")]
+        [Trait("Importance", "Critical")]
         public void TokenInfo_ShouldHaveNoMissingMembers()
         {
             _ = CreateSut(Json.DefaultJsonSerializerSettings.WithMissingMemberHandling(MissingMemberHandling.Error));

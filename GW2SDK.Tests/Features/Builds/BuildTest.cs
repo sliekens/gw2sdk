@@ -31,6 +31,7 @@ namespace GW2SDK.Tests.Features.Builds
         [Fact]
         [Trait("Feature", "Builds")]
         [Trait("Category", "Integration")]
+        [Trait("Importance", "Critical")]
         public void Build_ShouldHaveNoMissingMembers()
         {
             _ = CreateSut(Json.DefaultJsonSerializerSettings.WithMissingMemberHandling(MissingMemberHandling.Error));

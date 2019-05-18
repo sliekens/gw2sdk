@@ -31,6 +31,7 @@ namespace GW2SDK.Tests.Features.Accounts
         [Fact]
         [Trait("Feature", "Accounts")]
         [Trait("Category", "Integration")]
+        [Trait("Importance", "Critical")]
         public void Account_ShouldHaveNoMissingMembers()
         {
             _ = CreateSut(Json.DefaultJsonSerializerSettings.WithMissingMemberHandling(MissingMemberHandling.Error));

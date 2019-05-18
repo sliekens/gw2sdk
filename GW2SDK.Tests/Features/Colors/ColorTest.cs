@@ -32,6 +32,7 @@ namespace GW2SDK.Tests.Features.Colors
         [Fact]
         [Trait("Feature", "Colors")]
         [Trait("Category", "Integration")]
+        [Trait("Importance", "Critical")]
         public void Color_ShouldHaveNoMissingMembers()
         {
             _ = CreateSut(Json.DefaultJsonSerializerSettings.WithMissingMemberHandling(MissingMemberHandling.Error));
