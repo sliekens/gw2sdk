@@ -75,7 +75,7 @@ namespace GW2SDK.Tests.Features.Accounts
         {
             var sut = CreateSut(Json.DefaultJsonSerializerSettings);
 
-            Assert.DoesNotContain(GameAccess.None, sut.Access);
+            Assert.DoesNotContain(GW2SDK.Features.Accounts.ProductName.None, sut.Access);
         }
 
         [Fact]

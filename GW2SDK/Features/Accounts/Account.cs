@@ -24,7 +24,7 @@ namespace GW2SDK.Features.Accounts
 
         public DateTimeOffset Created { get; set; }
 
-        public GameAccess[] Access { get; set; }
+        public ProductName[] Access { get; set; }
 
         public bool Commander { get; set; }
 

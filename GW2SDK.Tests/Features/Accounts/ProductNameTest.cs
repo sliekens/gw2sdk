@@ -3,14 +3,14 @@ using Xunit;
 
 namespace GW2SDK.Tests.Features.Accounts
 {
-    public class GameAccessTest
+    public class ProductNameTest
     {
         [Fact]
         [Trait("Feature", "Accounts")]
         [Trait("Category", "Unit")]
-        public void GameAccess_None_ShouldBeDefault()
+        public void ProductName_None_ShouldBeDefault()
         {
-            Assert.Equal(GameAccess.None, default);
+            Assert.Equal(ProductName.None, default);
         }
     }
 }
