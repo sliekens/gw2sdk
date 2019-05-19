@@ -1,9 +1,12 @@
-﻿using System.Net.Http;
+﻿using System;
+using System.Net.Http;
 using System.Threading.Tasks;
 using GW2SDK.Extensions;
 using GW2SDK.Features.Accounts;
 using GW2SDK.Features.Accounts.Infrastructure;
 using GW2SDK.Tests.Shared.Fixtures;
+using Microsoft.Extensions.Http;
+using Polly;
 using Xunit;
 
 namespace GW2SDK.Tests.Features.Accounts
@@ -19,8 +22,15 @@ namespace GW2SDK.Tests.Features.Accounts
 
         private AccountService CreateSut()
         {
-            var http = new HttpClient()
-                .WithBaseAddress(_configuration.BaseAddress)
+            var policy = Policy.TimeoutAsync<HttpResponseMessage>(TimeSpan.FromSeconds(2));
+            var handler = new PolicyHttpMessageHandler(policy)
+            {
+                InnerHandler = new SocketsHttpHandler()
+            };
+            var http = new HttpClient(handler)
+                {
+                    BaseAddress = _configuration.BaseAddress
+                }
                 .WithAccessToken(_configuration.ApiKey)
                 .WithLatestSchemaVersion();
 
@@ -30,7 +40,7 @@ namespace GW2SDK.Tests.Features.Accounts
 
         [Fact]
         [Trait("Feature", "Accounts")]
-        [Trait("Category", "Integration")]
+        [Trait("Category", "E2E")]
         public async Task GetAccount_ShouldNotReturnNull()
         {
             var sut = CreateSut();

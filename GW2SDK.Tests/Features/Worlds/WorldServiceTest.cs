@@ -1,10 +1,13 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
 using GW2SDK.Extensions;
 using GW2SDK.Features.Worlds;
 using GW2SDK.Features.Worlds.Infrastructure;
 using GW2SDK.Tests.Shared.Fixtures;
+using Microsoft.Extensions.Http;
+using Polly;
 using Xunit;
 using Xunit.Abstractions;
 
@@ -24,8 +27,15 @@ namespace GW2SDK.Tests.Features.Worlds
 
         private WorldService CreateSut()
         {
-            var http = new HttpClient()
-                .WithBaseAddress(_configuration.BaseAddress)
+            var policy = Policy.TimeoutAsync<HttpResponseMessage>(TimeSpan.FromSeconds(2));
+            var handler = new PolicyHttpMessageHandler(policy)
+            {
+                InnerHandler = new SocketsHttpHandler()
+            };
+            var http = new HttpClient(handler)
+                {
+                    BaseAddress = _configuration.BaseAddress
+                }
                 .WithLatestSchemaVersion();
 
             var api = new JsonWorldService(http);

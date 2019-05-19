@@ -1,10 +1,13 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 using GW2SDK.Extensions;
 using GW2SDK.Features.Colors;
 using GW2SDK.Features.Colors.Infrastructure;
 using GW2SDK.Tests.Shared.Fixtures;
+using Microsoft.Extensions.Http;
+using Polly;
 using Xunit;
 using Xunit.Abstractions;
 
@@ -24,8 +27,15 @@ namespace GW2SDK.Tests.Features.Colors
 
         private ColorService CreateSut()
         {
-            var http = new HttpClient()
-                .WithBaseAddress(_configuration.BaseAddress)
+            var policy = Policy.TimeoutAsync<HttpResponseMessage>(TimeSpan.FromSeconds(2));
+            var handler = new PolicyHttpMessageHandler(policy)
+            {
+                InnerHandler = new SocketsHttpHandler()
+            };
+            var http = new HttpClient(handler)
+                {
+                    BaseAddress = _configuration.BaseAddress
+                }
                 .WithLatestSchemaVersion();
 
             var api = new JsonColorService(http);
@@ -34,7 +44,7 @@ namespace GW2SDK.Tests.Features.Colors
 
         [Fact]
         [Trait("Feature", "Colors")]
-        [Trait("Category", "Integration")]
+        [Trait("Category", "E2E")]
         public async Task GetColorIds_ShouldNotReturnEmptyCollection()
         {
             var sut = CreateSut();
@@ -48,7 +58,7 @@ namespace GW2SDK.Tests.Features.Colors
 
         [Fact]
         [Trait("Feature", "Colors")]
-        [Trait("Category", "Integration")]
+        [Trait("Category", "E2E")]
         public async Task GetColorById_ShouldNotReturnNull()
         {
             var sut = CreateSut();
@@ -62,7 +72,7 @@ namespace GW2SDK.Tests.Features.Colors
 
         [Fact]
         [Trait("Feature", "Colors")]
-        [Trait("Category", "Integration")]
+        [Trait("Category", "E2E")]
         public async Task GetColorsById_ShouldReturnExpectedRange()
         {
             var sut = CreateSut();
@@ -76,7 +86,7 @@ namespace GW2SDK.Tests.Features.Colors
 
         [Fact]
         [Trait("Feature", "Colors")]
-        [Trait("Category", "Integration")]
+        [Trait("Category", "E2E")]
         public async Task GetColorsPage_ShouldReturnExpectedLimit()
         {
             var sut = CreateSut();
