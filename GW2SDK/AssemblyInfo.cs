@@ -7,7 +7,5 @@
  *
  * TODO: add localization support
  *
- * TODO: invent paging data structure
- *
  */
 [assembly: InternalsVisibleTo("GW2SDK.Tests")]
