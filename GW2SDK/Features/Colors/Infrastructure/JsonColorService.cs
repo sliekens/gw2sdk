@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
+using GW2SDK.Extensions;
 using GW2SDK.Infrastructure;
 
 namespace GW2SDK.Features.Colors.Infrastructure
@@ -15,40 +16,59 @@ namespace GW2SDK.Features.Colors.Infrastructure
             _http = http ?? throw new ArgumentNullException(nameof(http));
         }
 
-        public async Task<string> GetAllColors()
+        public async Task<(string Json, Dictionary<string, string> MetaData)> GetColorIds()
         {
-            return await _http.GetStringAsync("/v2/colors?ids=all");
+            var resource = new UriBuilder(_http.BaseAddress)
+            {
+                Path = "/v2/colors"
+            };
+            return await _http.GetStringWithMetaDataAsync(resource.Uri).ConfigureAwait(false);
         }
 
-        public async Task<string> GetColorIds()
+        public async Task<(string Json, Dictionary<string, string> MetaData)> GetAllColors()
         {
-            return await _http.GetStringAsync("/v2/colors");
+            var resource = new UriBuilder(_http.BaseAddress)
+            {
+                Path = "/v2/colors",
+                Query = "ids=all"
+            };
+            return await _http.GetStringWithMetaDataAsync(resource.Uri).ConfigureAwait(false);
         }
 
-        public async Task<string> GetColorById(int colorId)
+        public async Task<(string Json, Dictionary<string, string> MetaData)> GetColorById(int colorId)
         {
-            var search = $"id={colorId}";
-            return await _http.GetStringAsync($"/v2/colors?{search}");
+            var resource = new UriBuilder(_http.BaseAddress)
+            {
+                Path = "/v2/colors",
+                Query = $"id={colorId}"
+            };
+            return await _http.GetStringWithMetaDataAsync(resource.Uri).ConfigureAwait(false);
         }
 
-        public async Task<string> GetColorsById(IReadOnlyList<int> colorIds)
+        public async Task<(string Json, Dictionary<string, string> MetaData)> GetColorsById(IReadOnlyList<int> colorIds)
         {
-            var ids = string.Join(",", colorIds);
-            var search = $"ids={ids}";
-            var resource = $"/v2/colors?{search}";
-            return await _http.GetStringAsync(resource);
+            var resource = new UriBuilder(_http.BaseAddress)
+            {
+                Path = "/v2/colors",
+                Query = $"ids={colorIds.ToCsv()}"
+            };
+            return await _http.GetStringWithMetaDataAsync(resource.Uri).ConfigureAwait(false);
         }
 
-        public async Task<string> GetColorsPage(int page, int? pageSize)
+        public async Task<(string Json, Dictionary<string, string> MetaData)> GetColorsPage(int page, int? pageSize)
         {
-            var search = $"page={page}";
+            var resource = new UriBuilder(_http.BaseAddress)
+            {
+                Path = "/v2/colors",
+                Query = $"page={page}"
+            };
+
             if (pageSize.HasValue)
             {
-                search += $"&page_size={pageSize}";
+                resource.Query += $"&page_size={pageSize}";
             }
 
-            var resource = $"/v2/colors?{search}";
-            return await _http.GetStringAsync(resource);
+            return await _http.GetStringWithMetaDataAsync(resource.Uri).ConfigureAwait(false);
         }
     }
 }

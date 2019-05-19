@@ -10,7 +10,7 @@ namespace GW2SDK.Tests.Features.Colors.Extensions
     {
         public static async Task<ISet<string>> GetAllColorCategories(this JsonColorService service)
         {
-            var json = await service.GetAllColors();
+            var (json, _) = await service.GetAllColors();
             var root = JToken.Parse(json);
             var query = from value in root.SelectTokens("$[*].categories[*]", true).Cast<JValue>()
                 orderby value.Value
