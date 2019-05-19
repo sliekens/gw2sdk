@@ -12,26 +12,28 @@ namespace GW2SDK.Tests.Features.Builds.Fixtures
 {
     public class BuildFixture : IAsyncLifetime
     {
+        private readonly ConfigurationFixture _configuration = new ConfigurationFixture();
+
         private readonly HttpClient _http;
 
         public BuildFixture()
         {
-            var httpPolicy = Policy.TimeoutAsync<HttpResponseMessage>(TimeSpan.FromSeconds(3));
-            var messageHandler = new PolicyHttpMessageHandler(httpPolicy)
+            var policy = Policy.TimeoutAsync<HttpResponseMessage>(TimeSpan.FromSeconds(3));
+            var handler = new PolicyHttpMessageHandler(policy)
             {
                 InnerHandler = new SocketsHttpHandler()
             };
-            _http = new HttpClient(messageHandler, true);
+            _http = new HttpClient(handler, true)
+            {
+                BaseAddress = _configuration.BaseAddress
+            };
         }
 
         public string JsonBuildObject { get; set; }
 
         public async Task InitializeAsync()
         {
-            var configuration = new ConfigurationFixture();
-
-            _http.WithBaseAddress(configuration.BaseAddress)
-                .WithLatestSchemaVersion();
+            _http.UseLatestSchemaVersion();
 
             var service = new JsonBuildService(_http);
 

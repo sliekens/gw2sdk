@@ -4,12 +4,31 @@ using System.Threading.Tasks;
 using GW2SDK.Extensions;
 using GW2SDK.Features.Accounts.Infrastructure;
 using GW2SDK.Tests.Shared.Fixtures;
+using Microsoft.Extensions.Http;
+using Polly;
 using Xunit;
 
 namespace GW2SDK.Tests.Features.Accounts.Fixtures
 {
     public class AccountFixture : IAsyncLifetime
     {
+        private readonly ConfigurationFixture _configuration = new ConfigurationFixture();
+
+        private readonly HttpClient _http;
+
+        public AccountFixture()
+        {
+            var policy = Policy.TimeoutAsync<HttpResponseMessage>(TimeSpan.FromSeconds(3));
+            var handler = new PolicyHttpMessageHandler(policy)
+            {
+                InnerHandler = new SocketsHttpHandler()
+            };
+            _http = new HttpClient(handler, true)
+            {
+                BaseAddress = _configuration.BaseAddress
+            };
+        }
+
         public string JsonAccountObjectLatestSchema { get; private set; }
 
         public string JsonAccountObjectKnownSchema { get; private set; }
@@ -18,24 +37,24 @@ namespace GW2SDK.Tests.Features.Accounts.Fixtures
 
         public async Task InitializeAsync()
         {
-            var configuration = new ConfigurationFixture();
+            KnownSchemaVersion = DateTimeOffset.Parse(_configuration.Configuration["KnownSchemaVersion:Account"]);
 
-            KnownSchemaVersion = DateTimeOffset.Parse(configuration.Configuration["KnownSchemaVersion:Account"]);
+            _http.UseAccessToken(_configuration.ApiKey);
+            _http.UseSchemaVersion(KnownSchemaVersion);
 
-            var http = new HttpClient()
-                .WithBaseAddress(configuration.BaseAddress)
-                .WithAccessToken(configuration.ApiKey)
-                .WithSchemaVersion(KnownSchemaVersion);
-
-            var service = new JsonAccountsService(http);
+            var service = new JsonAccountsService(_http);
 
             JsonAccountObjectKnownSchema = await service.GetAccount();
 
-            http.UseLatestSchemaVersion();
+            _http.UseLatestSchemaVersion();
 
             JsonAccountObjectLatestSchema = await service.GetAccount();
         }
 
-        public Task DisposeAsync() => Task.CompletedTask;
+        public Task DisposeAsync()
+        {
+            _http.Dispose();
+            return Task.CompletedTask;
+        }
     }
 }
