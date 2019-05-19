@@ -38,7 +38,7 @@ namespace GW2SDK.Tests.Features.Worlds
                 }
                 .WithLatestSchemaVersion();
 
-            var api = new JsonWorldService(http);
+            var api = new WorldJsonService(http);
             return new WorldService(api);
         }
 

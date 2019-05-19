@@ -36,7 +36,7 @@ namespace GW2SDK.Tests.Features.Tokens.Fixtures
             _http.UseAccessToken(_configuration.ApiKey);
             _http.UseLatestSchemaVersion();
 
-            var service = new JsonTokenInfoService(_http);
+            var service = new TokenInfoJsonService(_http);
 
             (JsonTokenInfoObject, _) = await service.GetTokenInfo();
         }

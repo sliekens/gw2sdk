@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 
 namespace GW2SDK.Features.Tokens.Infrastructure
 {
-    public interface IJsonTokenInfoService
+    public interface ITokenInfoJsonService
     {
         Task<(string Json, Dictionary<string, string> MetaData)> GetTokenInfo();
     }

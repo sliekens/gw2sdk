@@ -12,9 +12,9 @@ namespace GW2SDK.Features.Colors
 {
     public sealed class ColorService
     {
-        private readonly IJsonColorService _api;
+        private readonly IColorJsonService _api;
 
-        public ColorService([NotNull] IJsonColorService api)
+        public ColorService([NotNull] IColorJsonService api)
         {
             _api = api ?? throw new ArgumentNullException(nameof(api));
         }

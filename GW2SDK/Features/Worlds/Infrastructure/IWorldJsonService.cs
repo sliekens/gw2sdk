@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 
 namespace GW2SDK.Features.Worlds.Infrastructure
 {
-    public interface IJsonWorldService
+    public interface IWorldJsonService
     {
         Task<(string Json, Dictionary<string, string> MetaData)> GetWorldIds();
 

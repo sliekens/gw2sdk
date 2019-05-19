@@ -8,7 +8,7 @@ namespace GW2SDK.Tests.Features.Colors.Extensions
 {
     public static class JsonColorServiceExtensions
     {
-        public static async Task<ISet<string>> GetAllColorCategories(this JsonColorService service)
+        public static async Task<ISet<string>> GetAllColorCategories(this ColorJsonService service)
         {
             var (json, _) = await service.GetAllColors();
             var root = JToken.Parse(json);

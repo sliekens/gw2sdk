@@ -38,7 +38,7 @@ namespace GW2SDK.Tests.Features.Worlds.Fixtures
         {
             _http.UseLatestSchemaVersion();
 
-            var service = new JsonWorldService(_http);
+            var service = new WorldJsonService(_http);
 
             var (json, metaData) = await service.GetAllWorlds();
             JsonArrayOfWorlds = json;

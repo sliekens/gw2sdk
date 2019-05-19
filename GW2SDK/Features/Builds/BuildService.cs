@@ -8,9 +8,9 @@ namespace GW2SDK.Features.Builds
 {
     public sealed class BuildService
     {
-        private readonly IJsonBuildService _api;
+        private readonly IBuildJsonService _api;
 
-        public BuildService([NotNull] IJsonBuildService api)
+        public BuildService([NotNull] IBuildJsonService api)
         {
             _api = api ?? throw new ArgumentNullException(nameof(api));
         }

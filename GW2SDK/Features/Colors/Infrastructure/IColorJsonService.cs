@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 
 namespace GW2SDK.Features.Colors.Infrastructure
 {
-    public interface IJsonColorService
+    public interface IColorJsonService
     {
         Task<(string Json, Dictionary<string, string> MetaData)> GetColorIds();
 

@@ -8,9 +8,9 @@ namespace GW2SDK.Features.Tokens
 {
     public sealed class TokenInfoService
     {
-        private readonly IJsonTokenInfoService _api;
+        private readonly ITokenInfoJsonService _api;
 
-        public TokenInfoService([NotNull] IJsonTokenInfoService api)
+        public TokenInfoService([NotNull] ITokenInfoJsonService api)
         {
             _api = api ?? throw new ArgumentNullException(nameof(api));
         }

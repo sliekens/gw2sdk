@@ -33,7 +33,7 @@ namespace GW2SDK.Tests.Features.Builds
                 }
                 .WithLatestSchemaVersion();
 
-            var api = new JsonBuildService(http);
+            var api = new BuildJsonService(http);
             return new BuildService(api);
         }
 

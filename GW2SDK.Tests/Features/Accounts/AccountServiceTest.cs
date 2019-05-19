@@ -34,7 +34,7 @@ namespace GW2SDK.Tests.Features.Accounts
                 .WithAccessToken(_configuration.ApiKey)
                 .WithLatestSchemaVersion();
 
-            var api = new JsonAccountsService(http);
+            var api = new AccountJsonService(http);
             return new AccountService(api);
         }
 

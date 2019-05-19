@@ -38,7 +38,7 @@ namespace GW2SDK.Tests.Features.Tokens
                 .WithAccessToken(_configuration.ApiKey)
                 .WithLatestSchemaVersion();
 
-            var api = new JsonTokenInfoService(http);
+            var api = new TokenInfoJsonService(http);
             return new TokenInfoService(api);
         }
 

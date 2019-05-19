@@ -38,7 +38,7 @@ namespace GW2SDK.Tests.Features.Colors
                 }
                 .WithLatestSchemaVersion();
 
-            var api = new JsonColorService(http);
+            var api = new ColorJsonService(http);
             return new ColorService(api);
         }
 

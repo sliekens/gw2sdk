@@ -8,9 +8,9 @@ namespace GW2SDK.Features.Accounts
 {
     public sealed class AccountService
     {
-        private readonly IJsonAccountsService _api;
+        private readonly IAccountJsonService _api;
 
-        public AccountService([NotNull] IJsonAccountsService api)
+        public AccountService([NotNull] IAccountJsonService api)
         {
             _api = api ?? throw new ArgumentNullException(nameof(api));
         }

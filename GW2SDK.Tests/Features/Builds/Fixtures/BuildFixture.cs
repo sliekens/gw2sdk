@@ -35,7 +35,7 @@ namespace GW2SDK.Tests.Features.Builds.Fixtures
         {
             _http.UseLatestSchemaVersion();
 
-            var service = new JsonBuildService(_http);
+            var service = new BuildJsonService(_http);
 
             (JsonBuildObject, _) = await service.GetBuild();
         }

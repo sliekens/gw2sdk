@@ -42,7 +42,7 @@ namespace GW2SDK.Tests.Features.Accounts.Fixtures
             _http.UseAccessToken(_configuration.ApiKey);
             _http.UseSchemaVersion(KnownSchemaVersion);
 
-            var service = new JsonAccountsService(_http);
+            var service = new AccountJsonService(_http);
 
             (JsonAccountObjectKnownSchema, _) = await service.GetAccount();
 

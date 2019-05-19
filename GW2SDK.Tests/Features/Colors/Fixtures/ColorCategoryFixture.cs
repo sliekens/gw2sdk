@@ -39,7 +39,7 @@ namespace GW2SDK.Tests.Features.Colors.Fixtures
 
             // TODO: ideally we should use persistent storage for this
             // LiteDB looks like a good candidate for storage
-            var service = new JsonColorService(_http);
+            var service = new ColorJsonService(_http);
             ColorCategories = await service.GetAllColorCategories();
         }
 

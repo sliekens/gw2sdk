@@ -12,9 +12,9 @@ namespace GW2SDK.Features.Worlds
 {
     public sealed class WorldService
     {
-        private readonly IJsonWorldService _api;
+        private readonly IWorldJsonService _api;
 
-        public WorldService([NotNull] IJsonWorldService api)
+        public WorldService([NotNull] IWorldJsonService api)
         {
             _api = api ?? throw new ArgumentNullException(nameof(api));
         }

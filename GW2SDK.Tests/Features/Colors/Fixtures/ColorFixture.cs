@@ -33,7 +33,7 @@ namespace GW2SDK.Tests.Features.Colors.Fixtures
             _http.WithBaseAddress(configuration.BaseAddress)
                 .WithLatestSchemaVersion();
 
-            var service = new JsonColorService(_http);
+            var service = new ColorJsonService(_http);
 
             (JsonArrayOfColors, _) = await service.GetAllColors();
         }
