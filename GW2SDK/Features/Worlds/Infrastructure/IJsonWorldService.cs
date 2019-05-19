@@ -1,17 +1,16 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using GW2SDK.Features.Common;
 
 namespace GW2SDK.Features.Worlds.Infrastructure
 {
     public interface IJsonWorldService
     {
-        Task<(string Json, ListMetaData MetaData)> GetAllWorlds();
+        Task<(string Json, Dictionary<string, string> MetaData)> GetWorldIds();
 
-        Task<(string Json, ListMetaData MetaData)> GetWorldIds();
+        Task<(string Json, Dictionary<string, string> MetaData)> GetWorldById(int worldId);
 
-        Task<string> GetWorldById(int worldId);
+        Task<(string Json, Dictionary<string, string> MetaData)> GetWorldsById(IReadOnlyList<int> worldIds);
 
-        Task<(string Json, ListMetaData MetaData)> GetWorldsById(IReadOnlyList<int> worldIds);
+        Task<(string Json, Dictionary<string, string> MetaData)> GetAllWorlds();
     }
 }

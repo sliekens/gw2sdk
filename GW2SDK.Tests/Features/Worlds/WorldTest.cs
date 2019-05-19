@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using GW2SDK.Extensions;
 using GW2SDK.Features.Common;
+using GW2SDK.Features.Common.Infrastructure;
 using GW2SDK.Features.Worlds;
 using GW2SDK.Infrastructure;
 using GW2SDK.Tests.Features.Worlds.Fixtures;

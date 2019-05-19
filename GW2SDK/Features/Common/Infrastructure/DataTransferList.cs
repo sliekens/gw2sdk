@@ -2,7 +2,7 @@
 using System.Collections.ObjectModel;
 using GW2SDK.Infrastructure;
 
-namespace GW2SDK.Features.Common
+namespace GW2SDK.Features.Common.Infrastructure
 {
     public sealed class DataTransferList<T> : ReadOnlyCollection<T>, IDataTransferList<T>
     {

@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using GW2SDK.Features.Common;
+using GW2SDK.Features.Common.Infrastructure;
 using GW2SDK.Infrastructure;
 
 namespace GW2SDK.Extensions
@@ -10,8 +12,8 @@ namespace GW2SDK.Extensions
     [UsedImplicitly(ImplicitUseTargetFlags.WithMembers)]
     public static class HttpClientExtensions
     {
-        public static async Task<(string Json, ListMetaData MetaData)> GetStringWithListMetaDataAsync(
-            [NotNull] this HttpClient instance, Uri requestUri)
+        
+        public static async Task<(string Json, Dictionary<string, string> MetaData)> GetStringWithMetaDataAsync([NotNull] this HttpClient instance, Uri requestUri)
         {
             if (instance == null) throw new ArgumentNullException(nameof(instance));
             using (var request = new HttpRequestMessage(HttpMethod.Get, requestUri))
@@ -19,8 +21,8 @@ namespace GW2SDK.Extensions
                 .ConfigureAwait(false))
             {
                 response.EnsureSuccessStatusCode();
+                var metaData = response.Headers.GetMetaData();
                 var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
-                var metaData = response.Headers.GetListMetaData();
                 return (json, metaData);
             }
         }

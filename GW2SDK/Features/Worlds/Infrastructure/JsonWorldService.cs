@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
 using GW2SDK.Extensions;
-using GW2SDK.Features.Common;
 using GW2SDK.Infrastructure;
 
 namespace GW2SDK.Features.Worlds.Infrastructure
@@ -17,38 +16,28 @@ namespace GW2SDK.Features.Worlds.Infrastructure
             _http = http ?? throw new ArgumentNullException(nameof(http));
         }
 
-        public async Task<(string Json, ListMetaData MetaData)> GetAllWorlds()
-        {
-            var resource = new UriBuilder(_http.BaseAddress)
-            {
-                Path = "/v2/worlds",
-                Query = "ids=all"
-            };
-
-            return await _http.GetStringWithListMetaDataAsync(resource.Uri).ConfigureAwait(false);
-        }
-
-        public async Task<(string Json, ListMetaData MetaData)> GetWorldIds()
+        public async Task<(string Json, Dictionary<string, string> MetaData)> GetWorldIds()
         {
             var resource = new UriBuilder(_http.BaseAddress)
             {
                 Path = "/v2/worlds"
             };
 
-            return await _http.GetStringWithListMetaDataAsync(resource.Uri).ConfigureAwait(false);
+            return await _http.GetStringWithMetaDataAsync(resource.Uri).ConfigureAwait(false);
         }
 
-        public async Task<string> GetWorldById(int worldId)
+        public async Task<(string Json, Dictionary<string, string> MetaData)> GetWorldById(int worldId)
         {
             var resource = new UriBuilder(_http.BaseAddress)
             {
                 Path = "/v2/worlds",
                 Query = $"id={worldId}"
             };
-            return await _http.GetStringAsync(resource.Uri).ConfigureAwait(false);
+            return await _http.GetStringWithMetaDataAsync(resource.Uri).ConfigureAwait(false);
         }
 
-        public async Task<(string Json, ListMetaData MetaData)> GetWorldsById([NotNull] IReadOnlyList<int> worldIds)
+        public async Task<(string Json, Dictionary<string, string> MetaData)> GetWorldsById(
+            [NotNull] IReadOnlyList<int> worldIds)
         {
             if (worldIds == null) throw new ArgumentNullException(nameof(worldIds));
             var resource = new UriBuilder(_http.BaseAddress)
@@ -57,7 +46,18 @@ namespace GW2SDK.Features.Worlds.Infrastructure
                 Query = $"ids={worldIds.ToCsv()}"
             };
 
-            return await _http.GetStringWithListMetaDataAsync(resource.Uri).ConfigureAwait(false);
+            return await _http.GetStringWithMetaDataAsync(resource.Uri).ConfigureAwait(false);
+        }
+
+        public async Task<(string Json, Dictionary<string, string> MetaData)> GetAllWorlds()
+        {
+            var resource = new UriBuilder(_http.BaseAddress)
+            {
+                Path = "/v2/worlds",
+                Query = "ids=all"
+            };
+
+            return await _http.GetStringWithMetaDataAsync(resource.Uri).ConfigureAwait(false);
         }
     }
 }

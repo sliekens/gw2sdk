@@ -1,4 +1,4 @@
-﻿namespace GW2SDK.Features.Common
+﻿namespace GW2SDK.Features.Common.Infrastructure
 {
     public sealed class ListMetaData : IListMetaData
     {
