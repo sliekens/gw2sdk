@@ -116,12 +116,11 @@ namespace GW2SDK.Tests.Features.Accounts
         [Fact]
         [Trait("Feature", "Accounts")]
         [Trait("Category", "Integration")]
-        public void Account_World_ShouldBePositiveNumber()
+        public void Account_World_ShouldBeValidId()
         {
             var sut = CreateSut(Json.DefaultJsonSerializerSettings);
 
-            // TODO: update with /v2/worlds comparison once implemented
-            Assert.NotEqual(default, sut.World);
+            Assert.Contains(sut.World, _fixture.WorldIds);
         }
 
         [Fact]

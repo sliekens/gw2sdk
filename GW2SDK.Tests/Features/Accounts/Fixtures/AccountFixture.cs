@@ -1,8 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
 using GW2SDK.Extensions;
 using GW2SDK.Features.Accounts.Infrastructure;
+using GW2SDK.Features.Worlds;
+using GW2SDK.Features.Worlds.Infrastructure;
 using GW2SDK.Tests.Shared.Fixtures;
 using Microsoft.Extensions.Http;
 using Polly;
@@ -35,6 +38,8 @@ namespace GW2SDK.Tests.Features.Accounts.Fixtures
 
         public DateTimeOffset KnownSchemaVersion { get; private set; }
 
+        public IReadOnlyList<int> WorldIds { get; private set; }
+
         public async Task InitializeAsync()
         {
             KnownSchemaVersion = DateTimeOffset.Parse(_configuration.Configuration["KnownSchemaVersion:Account"]);
@@ -49,6 +54,10 @@ namespace GW2SDK.Tests.Features.Accounts.Fixtures
             _http.UseLatestSchemaVersion();
 
             (JsonAccountObjectLatestSchema, _) = await service.GetAccount();
+
+            var worldService = new WorldService(new WorldJsonService(_http));
+
+            WorldIds = await worldService.GetWorldIds();
         }
 
         public Task DisposeAsync()
