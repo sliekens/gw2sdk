@@ -8,7 +8,7 @@ namespace GW2SDK.Extensions
     {
         public static Dictionary<string, string> GetMetaData(this HttpResponseHeaders headers)
         {
-            return headers.ToDictionary(header => header.Key, header => header.Value.ToString());
+            return headers.ToDictionary(header => header.Key, header => header.Value.ToCsv());
         }
     }
 }
