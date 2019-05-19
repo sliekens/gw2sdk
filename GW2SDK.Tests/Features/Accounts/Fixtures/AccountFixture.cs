@@ -44,11 +44,11 @@ namespace GW2SDK.Tests.Features.Accounts.Fixtures
 
             var service = new JsonAccountsService(_http);
 
-            JsonAccountObjectKnownSchema = await service.GetAccount();
+            (JsonAccountObjectKnownSchema, _) = await service.GetAccount();
 
             _http.UseLatestSchemaVersion();
 
-            JsonAccountObjectLatestSchema = await service.GetAccount();
+            (JsonAccountObjectLatestSchema, _) = await service.GetAccount();
         }
 
         public Task DisposeAsync()

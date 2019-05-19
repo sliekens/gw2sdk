@@ -17,7 +17,7 @@ namespace GW2SDK.Features.Accounts
 
         public async Task<Account> GetAccount([CanBeNull] JsonSerializerSettings settings = null)
         {
-            var json = await _api.GetAccount();
+            var (json, _) = await _api.GetAccount();
             return JsonConvert.DeserializeObject<Account>(json, settings ?? Json.DefaultJsonSerializerSettings);
         }
     }

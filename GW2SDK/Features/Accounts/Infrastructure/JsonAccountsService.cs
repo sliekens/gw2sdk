@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
+using GW2SDK.Extensions;
 using GW2SDK.Infrastructure;
 
 namespace GW2SDK.Features.Accounts.Infrastructure
@@ -14,6 +16,13 @@ namespace GW2SDK.Features.Accounts.Infrastructure
             _http = http ?? throw new ArgumentNullException(nameof(http));
         }
 
-        public async Task<string> GetAccount() => await _http.GetStringAsync("/v2/account");
+        public async Task<(string Json, Dictionary<string, string> MetaData)> GetAccount()
+        {
+            var resource = new UriBuilder(_http.BaseAddress)
+            {
+                Path = "/v2/account"
+            };
+            return await _http.GetStringWithMetaDataAsync(resource.Uri).ConfigureAwait(false);
+        }
     }
 }
