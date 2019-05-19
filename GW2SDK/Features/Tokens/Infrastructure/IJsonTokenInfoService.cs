@@ -1,9 +1,10 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace GW2SDK.Features.Tokens.Infrastructure
 {
     public interface IJsonTokenInfoService
     {
-        Task<string> GetTokenInfo();
+        Task<(string Json, Dictionary<string, string> MetaData)> GetTokenInfo();
     }
 }

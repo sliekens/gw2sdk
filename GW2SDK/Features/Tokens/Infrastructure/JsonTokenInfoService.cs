@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
+using GW2SDK.Extensions;
 using GW2SDK.Infrastructure;
 
 namespace GW2SDK.Features.Tokens.Infrastructure
@@ -15,8 +17,13 @@ namespace GW2SDK.Features.Tokens.Infrastructure
         }
 
         // This is a little weird but in order for this to work, you need to add the token to HttpClient.DefaultRequestHeaders
-        // Because GetStringAsync does not have an overload for headers
-        // And I've looked at the sources but I didn't want to re-invent GetStringAsync with support for headers
-        public async Task<string> GetTokenInfo() => await _http.GetStringAsync("/v2/tokeninfo");
+        public async Task<(string Json, Dictionary<string, string> MetaData)> GetTokenInfo()
+        {
+            var resource = new UriBuilder(_http.BaseAddress)
+            {
+                Path = "/v2/tokeninfo"
+            };
+            return await _http.GetStringWithMetaDataAsync(resource.Uri).ConfigureAwait(false);
+        }
     }
 }
