@@ -121,7 +121,7 @@ namespace GW2SDK.Tests.Features.Accounts
             var sut = CreateSut(Json.DefaultJsonSerializerSettings);
 
             // TODO: update with /v2/worlds comparison once implemented
-            Assert.NotEqual(default, sut.LastModified);
+            Assert.NotEqual(default, sut.World);
         }
 
         [Fact]
