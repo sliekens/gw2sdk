@@ -59,5 +59,17 @@ namespace GW2SDK.Features.Worlds
                 MetaData = metaData.GetListMetaData()
             };
         }
+
+        public async Task<IDataTransferPagedList<World>> GetWorldsByPage(int page, int? pageSize = null,
+            [CanBeNull] JsonSerializerSettings settings = null)
+        {
+            var list = new List<World>();
+            var (json, metaData) = await _api.GetWorldsByPage(page, pageSize).ConfigureAwait(false);
+            JsonConvert.PopulateObject(json, list, settings ?? Json.DefaultJsonSerializerSettings);
+            return new DataTransferPagedList<World>(list)
+            {
+                MetaData = metaData.GetPagedListMetaData()
+            };
+        }
     }
 }

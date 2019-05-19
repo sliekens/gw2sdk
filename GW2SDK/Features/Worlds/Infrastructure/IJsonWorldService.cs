@@ -12,5 +12,7 @@ namespace GW2SDK.Features.Worlds.Infrastructure
         Task<(string Json, Dictionary<string, string> MetaData)> GetWorldsById(IReadOnlyList<int> worldIds);
 
         Task<(string Json, Dictionary<string, string> MetaData)> GetAllWorlds();
+
+        Task<(string Json, Dictionary<string, string> MetaData)> GetWorldsByPage(int page, int? pageSize);
     }
 }

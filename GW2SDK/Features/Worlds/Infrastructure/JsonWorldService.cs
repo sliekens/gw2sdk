@@ -59,5 +59,21 @@ namespace GW2SDK.Features.Worlds.Infrastructure
 
             return await _http.GetStringWithMetaDataAsync(resource.Uri).ConfigureAwait(false);
         }
+
+        public async Task<(string Json, Dictionary<string, string> MetaData)> GetWorldsByPage(int page, int? pageSize = null)
+        {
+            var resource = new UriBuilder(_http.BaseAddress)
+            {
+                Path = "/v2/worlds",
+                Query = $"page={page}"
+            };
+
+            if (pageSize.HasValue)
+            {
+                resource.Query += $"&page_size={pageSize}";
+            }
+
+            return await _http.GetStringWithMetaDataAsync(resource.Uri).ConfigureAwait(false);
+        }
     }
 }

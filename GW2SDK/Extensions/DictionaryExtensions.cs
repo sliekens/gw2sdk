@@ -13,8 +13,20 @@ namespace GW2SDK.Extensions
             if (instance == null) throw new ArgumentNullException(nameof(instance));
             return new ListMetaData
             {
-                ResultCount = int.Parse(instance[ResponseHeaderName.ResultCount]),
-                ResultTotal = int.Parse(instance[ResponseHeaderName.ResultTotal])
+                ResultTotal = int.Parse(instance[ResponseHeaderName.ResultTotal]),
+                ResultCount = int.Parse(instance[ResponseHeaderName.ResultCount])
+            };
+        }
+
+        public static IPagedListMetaData GetPagedListMetaData([NotNull] this IDictionary<string, string> instance)
+        {
+            if (instance == null) throw new ArgumentNullException(nameof(instance));
+            return new PagedListMetaData
+            {
+                PageTotal = int.Parse(instance[ResponseHeaderName.PageTotal]),
+                PageSize = int.Parse(instance[ResponseHeaderName.PageSize]),
+                ResultTotal = int.Parse(instance[ResponseHeaderName.ResultTotal]),
+                ResultCount = int.Parse(instance[ResponseHeaderName.ResultCount])
             };
         }
     }
