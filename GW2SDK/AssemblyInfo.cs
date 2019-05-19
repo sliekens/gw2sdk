@@ -3,8 +3,6 @@
 /**
  * Use this comment to sum up our technical debt, it integrates nicely with To-do explorer
  *
- * TODO: use DataTransferList in all existing services
- *
  * TODO: add localization support
  *
  */
