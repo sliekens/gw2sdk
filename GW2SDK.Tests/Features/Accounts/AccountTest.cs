@@ -2,6 +2,7 @@
 using GW2SDK.Features.Accounts;
 using GW2SDK.Infrastructure;
 using GW2SDK.Tests.Features.Accounts.Fixtures;
+using JsonDiffPatchDotNet;
 using Newtonsoft.Json;
 using Xunit;
 using Xunit.Abstractions;
@@ -22,9 +23,9 @@ namespace GW2SDK.Tests.Features.Accounts
 
         private Account CreateSut(JsonSerializerSettings jsonSerializerSettings)
         {
-            _output.WriteLine(_fixture.JsonAccountObject);
+            _output.WriteLine(_fixture.JsonAccountObjectLatestSchema);
             var sut = new Account();
-            JsonConvert.PopulateObject(_fixture.JsonAccountObject, sut, jsonSerializerSettings);
+            JsonConvert.PopulateObject(_fixture.JsonAccountObjectLatestSchema, sut, jsonSerializerSettings);
             return sut;
         }
 
@@ -37,6 +38,20 @@ namespace GW2SDK.Tests.Features.Accounts
             _ = CreateSut(Json.DefaultJsonSerializerSettings.WithMissingMemberHandling(MissingMemberHandling.Error));
         }
 
+        [Fact]
+        [Trait("Feature", "Accounts")]
+        [Trait("Category", "Integration")]
+        [Trait("Importance", "Critical")]
+        public void Account_SchemaDiff_ShouldBeEmpty()
+        {
+            var jdp = new JsonDiffPatch();
+
+            var diff = jdp.Diff(_fixture.JsonAccountObjectKnownSchema, _fixture.JsonAccountObjectLatestSchema);
+
+            _output.WriteLine(diff ?? "Schema is unchanged.");
+
+            Assert.Null(diff);
+        }
 
         [Fact]
         [Trait("Feature", "Accounts")]

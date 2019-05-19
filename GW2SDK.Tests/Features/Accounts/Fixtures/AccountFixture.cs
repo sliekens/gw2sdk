@@ -10,7 +10,9 @@ namespace GW2SDK.Tests.Features.Accounts.Fixtures
 {
     public class AccountFixture : IAsyncLifetime
     {
-        public string JsonAccountObject { get; private set; }
+        public string JsonAccountObjectLatestSchema { get; private set; }
+
+        public string JsonAccountObjectKnownSchema { get; private set; }
 
         public DateTimeOffset KnownSchemaVersion { get; private set; }
 
@@ -18,16 +20,20 @@ namespace GW2SDK.Tests.Features.Accounts.Fixtures
         {
             var configuration = new ConfigurationFixture();
 
+            KnownSchemaVersion = DateTimeOffset.Parse(configuration.Configuration["KnownSchemaVersion:Account"]);
+
             var http = new HttpClient()
                 .WithBaseAddress(configuration.BaseAddress)
                 .WithAccessToken(configuration.ApiKey)
-                .WithLatestSchemaVersion();
+                .WithSchemaVersion(KnownSchemaVersion);
 
             var service = new JsonAccountsService(http);
 
-            JsonAccountObject = await service.GetAccount();
+            JsonAccountObjectKnownSchema = await service.GetAccount();
 
-            KnownSchemaVersion = DateTimeOffset.Parse(configuration.Configuration["KnownSchemaVersion:Account"]);
+            http.UseLatestSchemaVersion();
+
+            JsonAccountObjectLatestSchema = await service.GetAccount();
         }
 
         public Task DisposeAsync() => Task.CompletedTask;
