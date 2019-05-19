@@ -63,7 +63,7 @@ namespace GW2SDK.Tests.Features.Worlds
         [Fact]
         [Trait("Feature", "Worlds")]
         [Trait("Category", "E2E")]
-        public async Task GetWorldById__ShouldReturnRequestedWorld()
+        public async Task GetWorldById_ShouldReturnRequestedWorld()
         {
             var sut = CreateSut();
 
@@ -78,7 +78,7 @@ namespace GW2SDK.Tests.Features.Worlds
         [Fact]
         [Trait("Feature", "Worlds")]
         [Trait("Category", "E2E")]
-        public async Task GetWorldsById__ShouldReturnRequestedWorlds()
+        public async Task GetWorldsById_ShouldReturnRequestedWorlds()
         {
             var sut = CreateSut();
 
