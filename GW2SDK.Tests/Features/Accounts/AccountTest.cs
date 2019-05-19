@@ -91,7 +91,6 @@ namespace GW2SDK.Tests.Features.Accounts
         [Fact]
         [Trait("Feature", "Accounts")]
         [Trait("Category", "Integration")]
-        [Trait("Importance", "Critical")]
         public void Account_LastModified_ShouldNotBeDefaultValue()
         {
             var sut = CreateSut(Json.DefaultJsonSerializerSettings);
