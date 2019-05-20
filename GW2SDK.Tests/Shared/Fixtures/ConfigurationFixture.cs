@@ -22,7 +22,9 @@ namespace GW2SDK.Tests.Shared.Fixtures
 
         public IConfigurationRoot Configuration { get; }
 
-        public string ApiKey => Configuration["ApiKey"];
+        public string ApiKeyBasic => Configuration["ApiKeyBasic"];
+
+        public string ApiKeyFull => Configuration["ApiKeyFull"];
 
         public Uri BaseAddress => new Uri(Configuration["Authority"], UriKind.Absolute);
     }

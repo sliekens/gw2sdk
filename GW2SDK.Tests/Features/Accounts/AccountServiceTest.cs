@@ -28,11 +28,11 @@ namespace GW2SDK.Tests.Features.Accounts
                 InnerHandler = new SocketsHttpHandler()
             };
             var http = new HttpClient(handler)
-                {
-                    BaseAddress = _configuration.BaseAddress
-                }
-                .WithAccessToken(_configuration.ApiKey)
-                .WithLatestSchemaVersion();
+            {
+                BaseAddress = _configuration.BaseAddress
+            };
+            http.UseLatestSchemaVersion();
+            http.UseAccessToken(_configuration.ApiKeyFull);
 
             var api = new AccountJsonService(http);
             return new AccountService(api);

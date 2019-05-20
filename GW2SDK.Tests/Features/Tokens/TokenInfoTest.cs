@@ -60,7 +60,7 @@ namespace GW2SDK.Tests.Features.Tokens
             // This is not intended to improve account security, only to prevent key abuse
             // The reason is that some services like GW2BLTC.com associate keys with logins but require you to use a key name of their choice
             // If this key leaks to the outside world, it still can't be (ab)used to login with GW2BLTC.com or similar sites
-            Assert.Equal("GW2SDK-Dev", sut.Name);
+            Assert.StartsWith("GW2SDK-", sut.Name);
         }
 
         [Fact]

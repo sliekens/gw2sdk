@@ -35,7 +35,7 @@ namespace GW2SDK.Tests.Features.Tokens
                 {
                     BaseAddress = _configuration.BaseAddress
                 }
-                .WithAccessToken(_configuration.ApiKey)
+                .WithAccessToken(_configuration.ApiKeyFull)
                 .WithLatestSchemaVersion();
 
             var api = new TokenInfoJsonService(http);

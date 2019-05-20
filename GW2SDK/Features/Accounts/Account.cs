@@ -21,6 +21,8 @@ namespace GW2SDK.Features.Accounts
 
         public Guid[] Guilds { get; set; }
 
+        [CanBeNull]
+        [Scope(Permission.Guilds)]
         public Guid[] GuildLeader { get; set; }
 
         public DateTimeOffset Created { get; set; }

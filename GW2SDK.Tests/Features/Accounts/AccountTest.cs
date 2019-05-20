@@ -9,23 +9,34 @@ using Xunit.Abstractions;
 
 namespace GW2SDK.Tests.Features.Accounts
 {
-    public class AccountTest : IClassFixture<AccountFixture>
+    public class AccountTest : IClassFixture<AccountBasicFixture>, IClassFixture<AccountFullFixture>
     {
-        public AccountTest(AccountFixture fixture, ITestOutputHelper output)
+        public AccountTest(AccountBasicFixture basicFixture, AccountFullFixture fullFixture, ITestOutputHelper output)
         {
-            _fixture = fixture;
+            _basicFixture = basicFixture;
+            _fullFixture = fullFixture;
             _output = output;
         }
 
-        private readonly AccountFixture _fixture;
+        private readonly AccountBasicFixture _basicFixture;
+
+        private readonly AccountFullFixture _fullFixture;
 
         private readonly ITestOutputHelper _output;
 
-        private Account CreateSut(JsonSerializerSettings jsonSerializerSettings)
+        private Account CreateBasicSut(JsonSerializerSettings jsonSerializerSettings)
         {
-            _output.WriteLine(_fixture.JsonAccountObjectLatestSchema);
+            _output.WriteLine(_basicFixture.AccountJsonObjectLatestSchemaBasic);
             var sut = new Account();
-            JsonConvert.PopulateObject(_fixture.JsonAccountObjectLatestSchema, sut, jsonSerializerSettings);
+            JsonConvert.PopulateObject(_basicFixture.AccountJsonObjectLatestSchemaBasic, sut, jsonSerializerSettings);
+            return sut;
+        }
+
+        private Account CreateFullSut(JsonSerializerSettings jsonSerializerSettings)
+        {
+            _output.WriteLine(_fullFixture.AccountJsonObjectLatestSchemaFull);
+            var sut = new Account();
+            JsonConvert.PopulateObject(_fullFixture.AccountJsonObjectLatestSchemaFull, sut, jsonSerializerSettings);
             return sut;
         }
 
@@ -33,22 +44,34 @@ namespace GW2SDK.Tests.Features.Accounts
         [Trait("Feature", "Accounts")]
         [Trait("Category", "Integration")]
         [Trait("Importance", "Critical")]
-        public void Account_ShouldHaveNoMissingMembers()
+        public void Basic_Account_ShouldHaveNoMissingMembers()
         {
-            _ = CreateSut(Json.DefaultJsonSerializerSettings.WithMissingMemberHandling(MissingMemberHandling.Error));
+            _ = CreateBasicSut(
+                Json.DefaultJsonSerializerSettings.WithMissingMemberHandling(MissingMemberHandling.Error));
         }
 
         [Fact]
         [Trait("Feature", "Accounts")]
         [Trait("Category", "Integration")]
         [Trait("Importance", "Critical")]
-        public void Account_SchemaDiff_ShouldBeEmpty()
+        public void Full_Account_ShouldHaveNoMissingMembers()
+        {
+            _ = CreateFullSut(
+                Json.DefaultJsonSerializerSettings.WithMissingMemberHandling(MissingMemberHandling.Error));
+        }
+
+        [Fact]
+        [Trait("Feature", "Accounts")]
+        [Trait("Category", "Integration")]
+        [Trait("Importance", "Critical")]
+        public void Basic_Account_SchemaDiff_ShouldBeEmpty()
         {
             var jdp = new JsonDiffPatch();
 
-            var diff = jdp.Diff(_fixture.JsonAccountObjectKnownSchema, _fixture.JsonAccountObjectLatestSchema);
+            var diff = jdp.Diff(_basicFixture.AccountJsonObjectKnownSchemaBasic,
+                _basicFixture.AccountJsonObjectLatestSchemaBasic);
 
-            _output.WriteLine(diff ?? "Schema is unchanged.");
+            _output.WriteLine(diff ?? "Basic schema is unchanged.");
 
             Assert.Null(diff);
         }
@@ -56,9 +79,25 @@ namespace GW2SDK.Tests.Features.Accounts
         [Fact]
         [Trait("Feature", "Accounts")]
         [Trait("Category", "Integration")]
-        public void Account_Id_ShouldNotBeDefaultValue()
+        [Trait("Importance", "Critical")]
+        public void Full_Account_SchemaDiff_ShouldBeEmpty()
         {
-            var sut = CreateSut(Json.DefaultJsonSerializerSettings);
+            var jdp = new JsonDiffPatch();
+
+            var diff = jdp.Diff(_fullFixture.AccountJsonObjectKnownSchemaFull,
+                _fullFixture.AccountJsonObjectLatestSchemaFull);
+
+            _output.WriteLine(diff ?? "Full schema is unchanged.");
+
+            Assert.Null(diff);
+        }
+
+        [Fact]
+        [Trait("Feature", "Accounts")]
+        [Trait("Category", "Integration")]
+        public void Basic_Account_Id_ShouldNotBeDefaultValue()
+        {
+            var sut = CreateBasicSut(Json.DefaultJsonSerializerSettings);
 
             Assert.NotEqual(default, sut.Id);
         }
@@ -66,9 +105,19 @@ namespace GW2SDK.Tests.Features.Accounts
         [Fact]
         [Trait("Feature", "Accounts")]
         [Trait("Category", "Integration")]
-        public void Account_Name_ShouldNotBeEmpty()
+        public void Full_Account_Id_ShouldNotBeDefaultValue()
         {
-            var sut = CreateSut(Json.DefaultJsonSerializerSettings);
+            var sut = CreateFullSut(Json.DefaultJsonSerializerSettings);
+
+            Assert.NotEqual(default, sut.Id);
+        }
+
+        [Fact]
+        [Trait("Feature", "Accounts")]
+        [Trait("Category", "Integration")]
+        public void Basic_Account_Name_ShouldNotBeEmpty()
+        {
+            var sut = CreateBasicSut(Json.DefaultJsonSerializerSettings);
 
             Assert.NotEmpty(sut.Name);
         }
@@ -76,9 +125,19 @@ namespace GW2SDK.Tests.Features.Accounts
         [Fact]
         [Trait("Feature", "Accounts")]
         [Trait("Category", "Integration")]
-        public void Account_Access_ShouldNotBeEmpty()
+        public void Full_Account_Name_ShouldNotBeEmpty()
         {
-            var sut = CreateSut(Json.DefaultJsonSerializerSettings);
+            var sut = CreateFullSut(Json.DefaultJsonSerializerSettings);
+
+            Assert.NotEmpty(sut.Name);
+        }
+
+        [Fact]
+        [Trait("Feature", "Accounts")]
+        [Trait("Category", "Integration")]
+        public void Basic_Account_Access_ShouldNotBeEmpty()
+        {
+            var sut = CreateBasicSut(Json.DefaultJsonSerializerSettings);
 
             Assert.NotEmpty(sut.Access);
         }
@@ -86,19 +145,39 @@ namespace GW2SDK.Tests.Features.Accounts
         [Fact]
         [Trait("Feature", "Accounts")]
         [Trait("Category", "Integration")]
-        public void Account_Access_ShouldNotContainNone()
+        public void Full_Account_Access_ShouldNotBeEmpty()
         {
-            var sut = CreateSut(Json.DefaultJsonSerializerSettings);
+            var sut = CreateFullSut(Json.DefaultJsonSerializerSettings);
 
-            Assert.DoesNotContain(GW2SDK.Features.Accounts.ProductName.None, sut.Access);
+            Assert.NotEmpty(sut.Access);
         }
 
         [Fact]
         [Trait("Feature", "Accounts")]
         [Trait("Category", "Integration")]
-        public void Account_Age_ShouldNotBeDefaultValue()
+        public void Basic_Account_Access_ShouldNotContainNone()
         {
-            var sut = CreateSut(Json.DefaultJsonSerializerSettings);
+            var sut = CreateBasicSut(Json.DefaultJsonSerializerSettings);
+
+            Assert.DoesNotContain(ProductName.None, sut.Access);
+        }
+
+        [Fact]
+        [Trait("Feature", "Accounts")]
+        [Trait("Category", "Integration")]
+        public void Full_Account_Access_ShouldNotContainNone()
+        {
+            var sut = CreateFullSut(Json.DefaultJsonSerializerSettings);
+
+            Assert.DoesNotContain(ProductName.None, sut.Access);
+        }
+
+        [Fact]
+        [Trait("Feature", "Accounts")]
+        [Trait("Category", "Integration")]
+        public void Basic_Account_Age_ShouldNotBeDefaultValue()
+        {
+            var sut = CreateBasicSut(Json.DefaultJsonSerializerSettings);
 
             Assert.NotEqual(default, sut.Age);
         }
@@ -106,9 +185,19 @@ namespace GW2SDK.Tests.Features.Accounts
         [Fact]
         [Trait("Feature", "Accounts")]
         [Trait("Category", "Integration")]
-        public void Account_LastModified_ShouldNotBeDefaultValue()
+        public void Full_Account_Age_ShouldNotBeDefaultValue()
         {
-            var sut = CreateSut(Json.DefaultJsonSerializerSettings);
+            var sut = CreateFullSut(Json.DefaultJsonSerializerSettings);
+
+            Assert.NotEqual(default, sut.Age);
+        }
+
+        [Fact]
+        [Trait("Feature", "Accounts")]
+        [Trait("Category", "Integration")]
+        public void Basic_Account_LastModified_ShouldNotBeDefaultValue()
+        {
+            var sut = CreateBasicSut(Json.DefaultJsonSerializerSettings);
 
             Assert.NotEqual(default, sut.LastModified);
         }
@@ -116,19 +205,39 @@ namespace GW2SDK.Tests.Features.Accounts
         [Fact]
         [Trait("Feature", "Accounts")]
         [Trait("Category", "Integration")]
-        public void Account_World_ShouldBeValidId()
+        public void Full_Account_LastModified_ShouldNotBeDefaultValue()
         {
-            var sut = CreateSut(Json.DefaultJsonSerializerSettings);
+            var sut = CreateFullSut(Json.DefaultJsonSerializerSettings);
 
-            Assert.Contains(sut.World, _fixture.WorldIds);
+            Assert.NotEqual(default, sut.LastModified);
         }
 
         [Fact]
         [Trait("Feature", "Accounts")]
         [Trait("Category", "Integration")]
-        public void Account_Guilds_ShouldNotBeNull()
+        public void Basic_Account_World_ShouldBeValidId()
         {
-            var sut = CreateSut(Json.DefaultJsonSerializerSettings);
+            var sut = CreateBasicSut(Json.DefaultJsonSerializerSettings);
+
+            Assert.Contains(sut.World, _fullFixture.WorldIds);
+        }
+
+        [Fact]
+        [Trait("Feature", "Accounts")]
+        [Trait("Category", "Integration")]
+        public void Full_Account_World_ShouldBeValidId()
+        {
+            var sut = CreateFullSut(Json.DefaultJsonSerializerSettings);
+
+            Assert.Contains(sut.World, _fullFixture.WorldIds);
+        }
+
+        [Fact]
+        [Trait("Feature", "Accounts")]
+        [Trait("Category", "Integration")]
+        public void Basic_Account_Guilds_ShouldNotBeNull()
+        {
+            var sut = CreateBasicSut(Json.DefaultJsonSerializerSettings);
 
             Assert.NotNull(sut.Guilds);
         }
@@ -136,9 +245,30 @@ namespace GW2SDK.Tests.Features.Accounts
         [Fact]
         [Trait("Feature", "Accounts")]
         [Trait("Category", "Integration")]
-        public void Account_GuildLeader_ShouldNotBeNull()
+        public void Full_Account_Guilds_ShouldNotBeNull()
         {
-            var sut = CreateSut(Json.DefaultJsonSerializerSettings);
+            var sut = CreateFullSut(Json.DefaultJsonSerializerSettings);
+
+            Assert.NotNull(sut.Guilds);
+        }
+
+        [Fact]
+        [Trait("Feature", "Accounts")]
+        [Trait("Category", "Integration")]
+        public void Basic_Account_GuildLeader_ShouldBeNull()
+        {
+            var sut = CreateBasicSut(Json.DefaultJsonSerializerSettings);
+
+            Assert.Null(sut.GuildLeader);
+        }
+
+
+        [Fact]
+        [Trait("Feature", "Accounts")]
+        [Trait("Category", "Integration")]
+        public void Full_Account_GuildLeader_ShouldNotBeNull()
+        {
+            var sut = CreateFullSut(Json.DefaultJsonSerializerSettings);
 
             Assert.NotNull(sut.GuildLeader);
         }
@@ -146,9 +276,9 @@ namespace GW2SDK.Tests.Features.Accounts
         [Fact]
         [Trait("Feature", "Accounts")]
         [Trait("Category", "Integration")]
-        public void Account_Created_ShouldNotBeDefaultValue()
+        public void Basic_Account_Created_ShouldNotBeDefaultValue()
         {
-            var sut = CreateSut(Json.DefaultJsonSerializerSettings);
+            var sut = CreateBasicSut(Json.DefaultJsonSerializerSettings);
 
             Assert.NotEqual(default, sut.Created);
         }
@@ -156,44 +286,90 @@ namespace GW2SDK.Tests.Features.Accounts
         [Fact]
         [Trait("Feature", "Accounts")]
         [Trait("Category", "Integration")]
-        public void Account_FractalLevel_ShouldNotBeNull()
+        public void Full_Account_Created_ShouldNotBeDefaultValue()
         {
-            var sut = CreateSut(Json.DefaultJsonSerializerSettings);
+            var sut = CreateFullSut(Json.DefaultJsonSerializerSettings);
 
-            // Can be null if token is missing Progression permission
+            Assert.NotEqual(default, sut.Created);
+        }
+
+        [Fact]
+        [Trait("Feature", "Accounts")]
+        [Trait("Category", "Integration")]
+        public void Basic_Account_FractalLevel_ShouldBeNull()
+        {
+            var sut = CreateBasicSut(Json.DefaultJsonSerializerSettings);
+
+            Assert.Null(sut.FractalLevel);
+        }
+
+        [Fact]
+        [Trait("Feature", "Accounts")]
+        [Trait("Category", "Integration")]
+        public void Full_Account_FractalLevel_ShouldNotBeNull()
+        {
+            var sut = CreateFullSut(Json.DefaultJsonSerializerSettings);
+
             Assert.NotNull(sut.FractalLevel);
         }
 
         [Fact]
         [Trait("Feature", "Accounts")]
         [Trait("Category", "Integration")]
-        public void Account_DailyAp_ShouldNotBeNull()
+        public void Basic_Account_DailyAp_ShouldBeNull()
         {
-            var sut = CreateSut(Json.DefaultJsonSerializerSettings);
+            var sut = CreateBasicSut(Json.DefaultJsonSerializerSettings);
 
-            // Can be null if token is missing Progression permission
+            Assert.Null(sut.DailyAp);
+        }
+
+        [Fact]
+        [Trait("Feature", "Accounts")]
+        [Trait("Category", "Integration")]
+        public void Full_Account_DailyAp_ShouldNotBeNull()
+        {
+            var sut = CreateFullSut(Json.DefaultJsonSerializerSettings);
+
             Assert.NotNull(sut.DailyAp);
         }
 
         [Fact]
         [Trait("Feature", "Accounts")]
         [Trait("Category", "Integration")]
-        public void Account_MonthlyAp_ShouldNotBeNull()
+        public void Basic_Account_MonthlyAp_ShouldBeNull()
         {
-            var sut = CreateSut(Json.DefaultJsonSerializerSettings);
+            var sut = CreateBasicSut(Json.DefaultJsonSerializerSettings);
 
-            // Can be null if token is missing Progression permission
+            Assert.Null(sut.MonthlyAp);
+        }
+
+        [Fact]
+        [Trait("Feature", "Accounts")]
+        [Trait("Category", "Integration")]
+        public void Full_Account_MonthlyAp_ShouldNotBeNull()
+        {
+            var sut = CreateFullSut(Json.DefaultJsonSerializerSettings);
+
             Assert.NotNull(sut.MonthlyAp);
         }
 
         [Fact]
         [Trait("Feature", "Accounts")]
         [Trait("Category", "Integration")]
-        public void Account_WvwRank_ShouldNotBeNull()
+        public void Basic_Account_WvwRank_ShouldBeNull()
         {
-            var sut = CreateSut(Json.DefaultJsonSerializerSettings);
+            var sut = CreateBasicSut(Json.DefaultJsonSerializerSettings);
 
-            // Can be null if token is missing Progression permission
+            Assert.Null(sut.WvwRank);
+        }
+
+        [Fact]
+        [Trait("Feature", "Accounts")]
+        [Trait("Category", "Integration")]
+        public void Full_Account_WvwRank_ShouldNotBeNull()
+        {
+            var sut = CreateFullSut(Json.DefaultJsonSerializerSettings);
+
             Assert.NotNull(sut.WvwRank);
         }
     }

@@ -33,7 +33,7 @@ namespace GW2SDK.Tests.Features.Tokens.Fixtures
 
         public async Task InitializeAsync()
         {
-            _http.UseAccessToken(_configuration.ApiKey);
+            _http.UseAccessToken(_configuration.ApiKeyFull);
             _http.UseLatestSchemaVersion();
 
             var service = new TokenInfoJsonService(_http);
