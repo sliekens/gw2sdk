@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using GW2SDK.Features.Colors.Infrastructure;
+using GW2SDK.Infrastructure.Colors;
 using Newtonsoft.Json.Linq;
 
 namespace GW2SDK.Tests.Features.Colors.Extensions

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace GW2SDK.Features.Accounts.Infrastructure
+namespace GW2SDK.Features.Accounts
 {
     public interface IAccountJsonService
     {

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace GW2SDK.Features.Tokens.Infrastructure
+namespace GW2SDK.Features.Tokens
 {
     public interface ITokenInfoJsonService
     {

@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using GW2SDK.Extensions;
-using GW2SDK.Features.Colors.Infrastructure;
 using GW2SDK.Features.Common;
 using GW2SDK.Infrastructure;
 using GW2SDK.Infrastructure.Common;

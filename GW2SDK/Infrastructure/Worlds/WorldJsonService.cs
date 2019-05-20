@@ -3,63 +3,68 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
 using GW2SDK.Extensions;
-using GW2SDK.Infrastructure;
+using GW2SDK.Features.Worlds;
 
-namespace GW2SDK.Features.Colors.Infrastructure
+namespace GW2SDK.Infrastructure.Worlds
 {
-    public sealed class ColorJsonService : IColorJsonService
+    public sealed class WorldJsonService : IWorldJsonService
     {
         private readonly HttpClient _http;
 
-        public ColorJsonService([NotNull] HttpClient http)
+        public WorldJsonService([NotNull] HttpClient http)
         {
             _http = http ?? throw new ArgumentNullException(nameof(http));
         }
 
-        public async Task<(string Json, Dictionary<string, string> MetaData)> GetColorIds()
+        public async Task<(string Json, Dictionary<string, string> MetaData)> GetWorldIds()
         {
             var resource = new UriBuilder(_http.BaseAddress)
             {
-                Path = "/v2/colors"
+                Path = "/v2/worlds"
+            };
+
+            return await _http.GetStringWithMetaDataAsync(resource.Uri).ConfigureAwait(false);
+        }
+
+        public async Task<(string Json, Dictionary<string, string> MetaData)> GetWorldById(int worldId)
+        {
+            var resource = new UriBuilder(_http.BaseAddress)
+            {
+                Path = "/v2/worlds",
+                Query = $"id={worldId}"
             };
             return await _http.GetStringWithMetaDataAsync(resource.Uri).ConfigureAwait(false);
         }
 
-        public async Task<(string Json, Dictionary<string, string> MetaData)> GetAllColors()
+        public async Task<(string Json, Dictionary<string, string> MetaData)> GetWorldsById(
+            [NotNull] IReadOnlyList<int> worldIds)
+        {
+            if (worldIds == null) throw new ArgumentNullException(nameof(worldIds));
+            var resource = new UriBuilder(_http.BaseAddress)
+            {
+                Path = "/v2/worlds",
+                Query = $"ids={worldIds.ToCsv()}"
+            };
+
+            return await _http.GetStringWithMetaDataAsync(resource.Uri).ConfigureAwait(false);
+        }
+
+        public async Task<(string Json, Dictionary<string, string> MetaData)> GetAllWorlds()
         {
             var resource = new UriBuilder(_http.BaseAddress)
             {
-                Path = "/v2/colors",
+                Path = "/v2/worlds",
                 Query = "ids=all"
             };
+
             return await _http.GetStringWithMetaDataAsync(resource.Uri).ConfigureAwait(false);
         }
 
-        public async Task<(string Json, Dictionary<string, string> MetaData)> GetColorById(int colorId)
+        public async Task<(string Json, Dictionary<string, string> MetaData)> GetWorldsByPage(int page, int? pageSize = null)
         {
             var resource = new UriBuilder(_http.BaseAddress)
             {
-                Path = "/v2/colors",
-                Query = $"id={colorId}"
-            };
-            return await _http.GetStringWithMetaDataAsync(resource.Uri).ConfigureAwait(false);
-        }
-
-        public async Task<(string Json, Dictionary<string, string> MetaData)> GetColorsById(IReadOnlyList<int> colorIds)
-        {
-            var resource = new UriBuilder(_http.BaseAddress)
-            {
-                Path = "/v2/colors",
-                Query = $"ids={colorIds.ToCsv()}"
-            };
-            return await _http.GetStringWithMetaDataAsync(resource.Uri).ConfigureAwait(false);
-        }
-
-        public async Task<(string Json, Dictionary<string, string> MetaData)> GetColorsPage(int page, int? pageSize)
-        {
-            var resource = new UriBuilder(_http.BaseAddress)
-            {
-                Path = "/v2/colors",
+                Path = "/v2/worlds",
                 Query = $"page={page}"
             };
 

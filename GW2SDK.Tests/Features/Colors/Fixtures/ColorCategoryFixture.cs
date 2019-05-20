@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
 using GW2SDK.Extensions;
-using GW2SDK.Features.Colors.Infrastructure;
+using GW2SDK.Infrastructure.Colors;
 using GW2SDK.Tests.Features.Colors.Extensions;
 using GW2SDK.Tests.Shared.Fixtures;
 using Microsoft.Extensions.Http;

@@ -3,7 +3,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using GW2SDK.Extensions;
 using GW2SDK.Features.Common;
-using GW2SDK.Features.Worlds.Infrastructure;
+using GW2SDK.Infrastructure.Worlds;
 using GW2SDK.Tests.Shared.Fixtures;
 using Microsoft.Extensions.Http;
 using Polly;

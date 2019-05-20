@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
 using GW2SDK.Extensions;
-using GW2SDK.Infrastructure;
+using GW2SDK.Features.Builds;
 
-namespace GW2SDK.Features.Builds.Infrastructure
+namespace GW2SDK.Infrastructure.Builds
 {
     public sealed class BuildJsonService : IBuildJsonService
     {

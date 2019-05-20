@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace GW2SDK.Features.Colors.Infrastructure
+namespace GW2SDK.Features.Colors
 {
     public interface IColorJsonService
     {

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Threading.Tasks;
-using GW2SDK.Features.Accounts.Infrastructure;
 using GW2SDK.Infrastructure;
 using Newtonsoft.Json;
 
