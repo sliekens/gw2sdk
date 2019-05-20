@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Net.Http;
 using System.Net.Http.Headers;
-using System.Threading.Tasks;
 using GW2SDK.Infrastructure;
 
 namespace GW2SDK.Extensions
@@ -10,21 +8,6 @@ namespace GW2SDK.Extensions
     [UsedImplicitly(ImplicitUseTargetFlags.WithMembers)]
     public static class HttpClientExtensions
     {
-        public static async Task<(string Json, Dictionary<string, string> MetaData)> GetStringWithContextAsync(
-            [NotNull] this HttpClient instance, Uri requestUri)
-        {
-            if (instance == null) throw new ArgumentNullException(nameof(instance));
-            using (var request = new HttpRequestMessage(HttpMethod.Get, requestUri))
-            using (var response = await instance.SendAsync(request, HttpCompletionOption.ResponseHeadersRead)
-                .ConfigureAwait(false))
-            {
-                response.EnsureSuccessStatusCode();
-                var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
-                var context = response.Headers.GetContext();
-                return (json, context);
-            }
-        }
-
         public static void UseBaseAddress([NotNull] this HttpClient instance, [NotNull] Uri baseAddress)
         {
             if (instance == null) throw new ArgumentNullException(nameof(instance));

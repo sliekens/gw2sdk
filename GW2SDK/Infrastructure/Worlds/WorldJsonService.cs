@@ -16,28 +16,27 @@ namespace GW2SDK.Infrastructure.Worlds
             _http = http ?? throw new ArgumentNullException(nameof(http));
         }
 
-        public async Task<(string Json, Dictionary<string, string> MetaData)> GetWorldIds()
+        public async Task<HttpResponseMessage> GetWorldIds()
         {
             var resource = new UriBuilder(_http.BaseAddress)
             {
                 Path = "/v2/worlds"
             };
 
-            return await _http.GetStringWithContextAsync(resource.Uri).ConfigureAwait(false);
+            return await _http.GetAsync(resource.Uri, HttpCompletionOption.ResponseHeadersRead).ConfigureAwait(false);
         }
 
-        public async Task<(string Json, Dictionary<string, string> MetaData)> GetWorldById(int worldId)
+        public async Task<HttpResponseMessage> GetWorldById(int worldId)
         {
             var resource = new UriBuilder(_http.BaseAddress)
             {
                 Path = "/v2/worlds",
                 Query = $"id={worldId}"
             };
-            return await _http.GetStringWithContextAsync(resource.Uri).ConfigureAwait(false);
+            return await _http.GetAsync(resource.Uri, HttpCompletionOption.ResponseHeadersRead).ConfigureAwait(false);
         }
 
-        public async Task<(string Json, Dictionary<string, string> MetaData)> GetWorldsById(
-            [NotNull] IReadOnlyList<int> worldIds)
+        public async Task<HttpResponseMessage> GetWorldsById([NotNull] IReadOnlyList<int> worldIds)
         {
             if (worldIds == null) throw new ArgumentNullException(nameof(worldIds));
             var resource = new UriBuilder(_http.BaseAddress)
@@ -46,10 +45,10 @@ namespace GW2SDK.Infrastructure.Worlds
                 Query = $"ids={worldIds.ToCsv()}"
             };
 
-            return await _http.GetStringWithContextAsync(resource.Uri).ConfigureAwait(false);
+            return await _http.GetAsync(resource.Uri, HttpCompletionOption.ResponseHeadersRead).ConfigureAwait(false);
         }
 
-        public async Task<(string Json, Dictionary<string, string> MetaData)> GetAllWorlds()
+        public async Task<HttpResponseMessage> GetAllWorlds()
         {
             var resource = new UriBuilder(_http.BaseAddress)
             {
@@ -57,10 +56,10 @@ namespace GW2SDK.Infrastructure.Worlds
                 Query = "ids=all"
             };
 
-            return await _http.GetStringWithContextAsync(resource.Uri).ConfigureAwait(false);
+            return await _http.GetAsync(resource.Uri, HttpCompletionOption.ResponseHeadersRead).ConfigureAwait(false);
         }
 
-        public async Task<(string Json, Dictionary<string, string> MetaData)> GetWorldsByPage(int page, int? pageSize = null)
+        public async Task<HttpResponseMessage> GetWorldsByPage(int page, int? pageSize)
         {
             var resource = new UriBuilder(_http.BaseAddress)
             {
@@ -73,7 +72,7 @@ namespace GW2SDK.Infrastructure.Worlds
                 resource.Query += $"&page_size={pageSize}";
             }
 
-            return await _http.GetStringWithContextAsync(resource.Uri).ConfigureAwait(false);
+            return await _http.GetAsync(resource.Uri, HttpCompletionOption.ResponseHeadersRead).ConfigureAwait(false);
         }
     }
 }

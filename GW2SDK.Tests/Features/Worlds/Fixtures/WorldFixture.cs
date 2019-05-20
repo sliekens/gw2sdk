@@ -40,9 +40,10 @@ namespace GW2SDK.Tests.Features.Worlds.Fixtures
 
             var service = new WorldJsonService(_http);
 
-            var (json, metaData) = await service.GetAllWorlds();
-            JsonArrayOfWorlds = json;
-            ListContext = metaData.GetListContext();
+            var response = await service.GetAllWorlds();
+            response.EnsureSuccessStatusCode();
+            JsonArrayOfWorlds = await response.Content.ReadAsStringAsync();
+            ListContext = response.Headers.GetListContext();
         }
 
         public Task DisposeAsync()

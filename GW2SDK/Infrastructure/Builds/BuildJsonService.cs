@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
-using GW2SDK.Extensions;
 using GW2SDK.Features.Builds;
 
 namespace GW2SDK.Infrastructure.Builds
@@ -16,14 +14,14 @@ namespace GW2SDK.Infrastructure.Builds
             _http = http ?? throw new ArgumentNullException(nameof(http));
         }
 
-        public async Task<(string Json, Dictionary<string, string> MetaData)> GetBuild()
+        public async Task<HttpResponseMessage> GetBuild()
         {
             var resource = new UriBuilder(_http.BaseAddress)
             {
                 Path = "/v2/build"
             };
 
-            return await _http.GetStringWithContextAsync(resource.Uri).ConfigureAwait(false);
+            return await _http.GetAsync(resource.Uri, HttpCompletionOption.ResponseHeadersRead).ConfigureAwait(false);
         }
     }
 }

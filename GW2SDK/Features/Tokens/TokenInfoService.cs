@@ -16,7 +16,11 @@ namespace GW2SDK.Features.Tokens
 
         public async Task<TokenInfo> GetTokenInfo([CanBeNull] JsonSerializerSettings settings = null)
         {
-            var (json, _) = await _api.GetTokenInfo();
+            var response = await _api.GetTokenInfo().ConfigureAwait(false);
+
+            // TODO: check authorization
+            response.EnsureSuccessStatusCode();
+            var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
             return JsonConvert.DeserializeObject<TokenInfo>(json, settings ?? Json.DefaultJsonSerializerSettings);
         }
     }

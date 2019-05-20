@@ -44,13 +44,20 @@ namespace GW2SDK.Tests.Features.Accounts.Fixtures
 
             _http.UseAccessToken(_configuration.ApiKeyFull);
             _http.UseSchemaVersion(_configuration.Configuration["KnownSchemaVersion:Account"]);
-            (AccountJsonObjectKnownSchemaFull, _) = await service.GetAccount();
+            AccountJsonObjectKnownSchemaFull = await GetAccountJson();
 
             _http.UseLatestSchemaVersion();
-            (AccountJsonObjectLatestSchemaFull, _) = await service.GetAccount();
+            AccountJsonObjectLatestSchemaFull = await GetAccountJson();
 
             var worldService = new WorldService(new WorldJsonService(_http));
             WorldIds = await worldService.GetWorldIds();
+
+            async Task<string> GetAccountJson()
+            {
+                var response = await service.GetAccount();
+                response.EnsureSuccessStatusCode();
+                return await response.Content.ReadAsStringAsync();
+            }
         }
 
         public Task DisposeAsync()

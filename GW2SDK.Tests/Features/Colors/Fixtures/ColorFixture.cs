@@ -35,7 +35,9 @@ namespace GW2SDK.Tests.Features.Colors.Fixtures
 
             var service = new ColorJsonService(_http);
 
-            (JsonArrayOfColors, _) = await service.GetAllColors();
+            var response = await service.GetAllColors();
+            response.EnsureSuccessStatusCode();
+            JsonArrayOfColors = await response.Content.ReadAsStringAsync();
         }
 
         public Task DisposeAsync() => Task.CompletedTask;

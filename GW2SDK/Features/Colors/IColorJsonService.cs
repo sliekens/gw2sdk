@@ -1,18 +1,19 @@
 ﻿using System.Collections.Generic;
+using System.Net.Http;
 using System.Threading.Tasks;
 
 namespace GW2SDK.Features.Colors
 {
     public interface IColorJsonService
     {
-        Task<(string Json, Dictionary<string, string> MetaData)> GetColorIds();
+        Task<HttpResponseMessage> GetColorIds();
 
-        Task<(string Json, Dictionary<string, string> MetaData)> GetColorById(int colorId);
+        Task<HttpResponseMessage> GetColorById(int colorId);
 
-        Task<(string Json, Dictionary<string, string> MetaData)> GetColorsById(IReadOnlyList<int> colorIds);
+        Task<HttpResponseMessage> GetColorsById(IReadOnlyList<int> colorIds);
 
-        Task<(string Json, Dictionary<string, string> MetaData)> GetAllColors();
+        Task<HttpResponseMessage> GetAllColors();
 
-        Task<(string Json, Dictionary<string, string> MetaData)> GetColorsPage(int page, int? pageSize);
+        Task<HttpResponseMessage> GetColorsPage(int page, int? pageSize);
     }
 }

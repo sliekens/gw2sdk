@@ -38,7 +38,9 @@ namespace GW2SDK.Tests.Features.Tokens.Fixtures
 
             var service = new TokenInfoJsonService(_http);
 
-            (JsonTokenInfoObject, _) = await service.GetTokenInfo();
+            var response = await service.GetTokenInfo();
+            response.EnsureSuccessStatusCode();
+            JsonTokenInfoObject = await response.Content.ReadAsStringAsync();
         }
 
         public Task DisposeAsync()

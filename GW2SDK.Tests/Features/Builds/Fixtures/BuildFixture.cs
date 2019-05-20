@@ -37,7 +37,9 @@ namespace GW2SDK.Tests.Features.Builds.Fixtures
 
             var service = new BuildJsonService(_http);
 
-            (JsonBuildObject, _) = await service.GetBuild();
+            var response = await service.GetBuild();
+            response.EnsureSuccessStatusCode();
+            JsonBuildObject = await response.Content.ReadAsStringAsync();
         }
 
         public Task DisposeAsync()

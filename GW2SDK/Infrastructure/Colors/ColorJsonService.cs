@@ -16,46 +16,46 @@ namespace GW2SDK.Infrastructure.Colors
             _http = http ?? throw new ArgumentNullException(nameof(http));
         }
 
-        public async Task<(string Json, Dictionary<string, string> MetaData)> GetColorIds()
+        public async Task<HttpResponseMessage> GetColorIds()
         {
             var resource = new UriBuilder(_http.BaseAddress)
             {
                 Path = "/v2/colors"
             };
-            return await _http.GetStringWithContextAsync(resource.Uri).ConfigureAwait(false);
+            return await _http.GetAsync(resource.Uri, HttpCompletionOption.ResponseHeadersRead).ConfigureAwait(false);
         }
 
-        public async Task<(string Json, Dictionary<string, string> MetaData)> GetAllColors()
+        public async Task<HttpResponseMessage> GetAllColors()
         {
             var resource = new UriBuilder(_http.BaseAddress)
             {
                 Path = "/v2/colors",
                 Query = "ids=all"
             };
-            return await _http.GetStringWithContextAsync(resource.Uri).ConfigureAwait(false);
+            return await _http.GetAsync(resource.Uri, HttpCompletionOption.ResponseHeadersRead).ConfigureAwait(false);
         }
 
-        public async Task<(string Json, Dictionary<string, string> MetaData)> GetColorById(int colorId)
+        public async Task<HttpResponseMessage> GetColorById(int colorId)
         {
             var resource = new UriBuilder(_http.BaseAddress)
             {
                 Path = "/v2/colors",
                 Query = $"id={colorId}"
             };
-            return await _http.GetStringWithContextAsync(resource.Uri).ConfigureAwait(false);
+            return await _http.GetAsync(resource.Uri, HttpCompletionOption.ResponseHeadersRead).ConfigureAwait(false);
         }
 
-        public async Task<(string Json, Dictionary<string, string> MetaData)> GetColorsById(IReadOnlyList<int> colorIds)
+        public async Task<HttpResponseMessage> GetColorsById(IReadOnlyList<int> colorIds)
         {
             var resource = new UriBuilder(_http.BaseAddress)
             {
                 Path = "/v2/colors",
                 Query = $"ids={colorIds.ToCsv()}"
             };
-            return await _http.GetStringWithContextAsync(resource.Uri).ConfigureAwait(false);
+            return await _http.GetAsync(resource.Uri, HttpCompletionOption.ResponseHeadersRead).ConfigureAwait(false);
         }
 
-        public async Task<(string Json, Dictionary<string, string> MetaData)> GetColorsPage(int page, int? pageSize)
+        public async Task<HttpResponseMessage> GetColorsPage(int page, int? pageSize)
         {
             var resource = new UriBuilder(_http.BaseAddress)
             {
@@ -68,7 +68,7 @@ namespace GW2SDK.Infrastructure.Colors
                 resource.Query += $"&page_size={pageSize}";
             }
 
-            return await _http.GetStringWithContextAsync(resource.Uri).ConfigureAwait(false);
+            return await _http.GetAsync(resource.Uri, HttpCompletionOption.ResponseHeadersRead).ConfigureAwait(false);
         }
     }
 }

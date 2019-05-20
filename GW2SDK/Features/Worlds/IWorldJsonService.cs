@@ -1,18 +1,19 @@
 ﻿using System.Collections.Generic;
+using System.Net.Http;
 using System.Threading.Tasks;
 
 namespace GW2SDK.Features.Worlds
 {
     public interface IWorldJsonService
     {
-        Task<(string Json, Dictionary<string, string> MetaData)> GetWorldIds();
+        Task<HttpResponseMessage> GetWorldIds();
 
-        Task<(string Json, Dictionary<string, string> MetaData)> GetWorldById(int worldId);
+        Task<HttpResponseMessage> GetWorldById(int worldId);
 
-        Task<(string Json, Dictionary<string, string> MetaData)> GetWorldsById(IReadOnlyList<int> worldIds);
+        Task<HttpResponseMessage> GetWorldsById(IReadOnlyList<int> worldIds);
 
-        Task<(string Json, Dictionary<string, string> MetaData)> GetAllWorlds();
+        Task<HttpResponseMessage> GetAllWorlds();
 
-        Task<(string Json, Dictionary<string, string> MetaData)> GetWorldsByPage(int page, int? pageSize);
+        Task<HttpResponseMessage> GetWorldsByPage(int page, int? pageSize);
     }
 }

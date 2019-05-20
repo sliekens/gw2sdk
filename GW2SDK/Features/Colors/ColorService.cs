@@ -20,15 +20,20 @@ namespace GW2SDK.Features.Colors
 
         public async Task<IDataTransferList<int>> GetColorIds([CanBeNull] JsonSerializerSettings settings = null)
         {
-            var list = new List<int>();
-            var (json, metaData) = await _api.GetColorIds().ConfigureAwait(false);
+            var response = await _api.GetColorIds().ConfigureAwait(false);
+            response.EnsureSuccessStatusCode();
+            var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
+            var listContext = response.Headers.GetListContext();
+            var list = new List<int>(listContext.ResultCount);
             JsonConvert.PopulateObject(json, list, settings ?? Json.DefaultJsonSerializerSettings);
-            return new DataTransferList<int>(list, metaData.GetListContext());
+            return new DataTransferList<int>(list, listContext);
         }
 
         public async Task<Color> GetColorById(int colorId, [CanBeNull] JsonSerializerSettings settings = null)
         {
-            var (json, _) = await _api.GetColorById(colorId);
+            var response = await _api.GetColorById(colorId).ConfigureAwait(false);
+            response.EnsureSuccessStatusCode();
+            var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
             return JsonConvert.DeserializeObject<Color>(json, settings ?? Json.DefaultJsonSerializerSettings);
         }
 
@@ -36,28 +41,36 @@ namespace GW2SDK.Features.Colors
             [CanBeNull] JsonSerializerSettings settings = null)
         {
             if (colorIds == null) throw new ArgumentNullException(nameof(colorIds));
-            var list = new List<Color>();
-            var (json, metaData) = await _api.GetColorsById(colorIds).ConfigureAwait(false);
+            var response = await _api.GetColorsById(colorIds).ConfigureAwait(false);
+            response.EnsureSuccessStatusCode();
+            var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
+            var listContext = response.Headers.GetListContext();
+            var list = new List<Color>(listContext.ResultCount);
             JsonConvert.PopulateObject(json, list, settings ?? Json.DefaultJsonSerializerSettings);
-            return new DataTransferList<Color>(list, metaData.GetListContext());
+            return new DataTransferList<Color>(list, listContext);
         }
 
         public async Task<IDataTransferList<Color>> GetAllColors([CanBeNull] JsonSerializerSettings settings = null)
         {
-            var list = new List<Color>();
-            var (json, metaData) = await _api.GetAllColors().ConfigureAwait(false);
+            var response = await _api.GetAllColors().ConfigureAwait(false);
+            response.EnsureSuccessStatusCode();
+            var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
+            var listContext = response.Headers.GetListContext();
+            var list = new List<Color>(listContext.ResultCount);
             JsonConvert.PopulateObject(json, list, settings ?? Json.DefaultJsonSerializerSettings);
-            return new DataTransferList<Color>(list, metaData.GetListContext());
+            return new DataTransferList<Color>(list, listContext);
         }
 
         public async Task<IDataTransferPage<Color>> GetColorsPage(int page, int? pageSize,
             [CanBeNull] JsonSerializerSettings settings = null)
         {
-            
-            var list = new List<Color>();
-            var (json, metaData) = await _api.GetColorsPage(page, pageSize).ConfigureAwait(false);
+            var response = await _api.GetColorsPage(page, pageSize).ConfigureAwait(false);
+            response.EnsureSuccessStatusCode();
+            var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
+            var pageContext = response.Headers.GetPageContext();
+            var list = new List<Color>(pageContext.PageSize);
             JsonConvert.PopulateObject(json, list, settings ?? Json.DefaultJsonSerializerSettings);
-            return new DataTransferPage<Color>(list, metaData.GetPageContext());
+            return new DataTransferPage<Color>(list, pageContext);
         }
     }
 }
