@@ -27,7 +27,7 @@ namespace GW2SDK.Tests.Features.Colors
 
         private ColorService CreateSut()
         {
-            var policy = Policy.TimeoutAsync<HttpResponseMessage>(TimeSpan.FromSeconds(2));
+            var policy = Policy.TimeoutAsync<HttpResponseMessage>(TimeSpan.FromSeconds(3));
             var handler = new PolicyHttpMessageHandler(policy)
             {
                 InnerHandler = new SocketsHttpHandler()

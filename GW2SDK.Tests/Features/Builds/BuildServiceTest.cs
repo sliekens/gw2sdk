@@ -22,7 +22,7 @@ namespace GW2SDK.Tests.Features.Builds
 
         private BuildService CreateSut()
         {
-            var policy = Policy.TimeoutAsync<HttpResponseMessage>(TimeSpan.FromSeconds(2));
+            var policy = Policy.TimeoutAsync<HttpResponseMessage>(TimeSpan.FromSeconds(3));
             var handler = new PolicyHttpMessageHandler(policy)
             {
                 InnerHandler = new SocketsHttpHandler()
