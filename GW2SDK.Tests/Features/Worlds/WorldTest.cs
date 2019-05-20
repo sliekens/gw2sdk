@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using GW2SDK.Extensions;
 using GW2SDK.Features.Common;
-using GW2SDK.Features.Common.Infrastructure;
 using GW2SDK.Features.Worlds;
 using GW2SDK.Infrastructure;
+using GW2SDK.Infrastructure.Common;
 using GW2SDK.Tests.Features.Worlds.Fixtures;
 using Newtonsoft.Json;
 using Xunit;
@@ -28,10 +28,7 @@ namespace GW2SDK.Tests.Features.Worlds
             _output.WriteLine(_fixture.JsonArrayOfWorlds);
             var list = new List<World>();
             JsonConvert.PopulateObject(_fixture.JsonArrayOfWorlds, list, jsonSerializerSettings);
-            return new DataTransferList<World>(list)
-            {
-                MetaData = _fixture.ListMetaData
-            };
+            return new DataTransferList<World>(list, _fixture.ListContext);
         }
 
         [Fact]

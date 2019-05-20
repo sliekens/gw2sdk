@@ -1,6 +1,6 @@
 ﻿namespace GW2SDK.Features.Common
 {
-    public interface IPagedListMetaData : IListMetaData
+    public interface IPageContext : IListContext
     {
         int PageTotal { get; }
 

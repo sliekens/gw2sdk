@@ -2,7 +2,7 @@
 
 namespace GW2SDK.Features.Common
 {
-    public interface IDataTransferList<out T> : IReadOnlyList<T>, IListContext
+    public interface IDataTransferPage<out T> : IReadOnlyList<T>, IPageContext
     {
     }
 }

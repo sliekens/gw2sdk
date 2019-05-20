@@ -4,8 +4,8 @@ using System.Threading.Tasks;
 using GW2SDK.Extensions;
 using GW2SDK.Features.Colors.Infrastructure;
 using GW2SDK.Features.Common;
-using GW2SDK.Features.Common.Infrastructure;
 using GW2SDK.Infrastructure;
+using GW2SDK.Infrastructure.Common;
 using Newtonsoft.Json;
 
 namespace GW2SDK.Features.Colors
@@ -24,10 +24,7 @@ namespace GW2SDK.Features.Colors
             var list = new List<int>();
             var (json, metaData) = await _api.GetColorIds().ConfigureAwait(false);
             JsonConvert.PopulateObject(json, list, settings ?? Json.DefaultJsonSerializerSettings);
-            return new DataTransferList<int>(list)
-            {
-                MetaData = metaData.GetListMetaData()
-            };
+            return new DataTransferList<int>(list, metaData.GetListContext());
         }
 
         public async Task<Color> GetColorById(int colorId, [CanBeNull] JsonSerializerSettings settings = null)
@@ -43,10 +40,7 @@ namespace GW2SDK.Features.Colors
             var list = new List<Color>();
             var (json, metaData) = await _api.GetColorsById(colorIds).ConfigureAwait(false);
             JsonConvert.PopulateObject(json, list, settings ?? Json.DefaultJsonSerializerSettings);
-            return new DataTransferList<Color>(list)
-            {
-                MetaData = metaData.GetListMetaData()
-            };
+            return new DataTransferList<Color>(list, metaData.GetListContext());
         }
 
         public async Task<IDataTransferList<Color>> GetAllColors([CanBeNull] JsonSerializerSettings settings = null)
@@ -54,23 +48,17 @@ namespace GW2SDK.Features.Colors
             var list = new List<Color>();
             var (json, metaData) = await _api.GetAllColors().ConfigureAwait(false);
             JsonConvert.PopulateObject(json, list, settings ?? Json.DefaultJsonSerializerSettings);
-            return new DataTransferList<Color>(list)
-            {
-                MetaData = metaData.GetListMetaData()
-            };
+            return new DataTransferList<Color>(list, metaData.GetListContext());
         }
 
-        public async Task<IDataTransferPagedList<Color>> GetColorsPage(int page, int? pageSize,
+        public async Task<IDataTransferPage<Color>> GetColorsPage(int page, int? pageSize,
             [CanBeNull] JsonSerializerSettings settings = null)
         {
             
             var list = new List<Color>();
             var (json, metaData) = await _api.GetColorsPage(page, pageSize).ConfigureAwait(false);
             JsonConvert.PopulateObject(json, list, settings ?? Json.DefaultJsonSerializerSettings);
-            return new DataTransferPagedList<Color>(list)
-            {
-                MetaData = metaData.GetPagedListMetaData()
-            };
+            return new DataTransferPage<Color>(list, metaData.GetPageContext());
         }
     }
 }

@@ -32,7 +32,7 @@ namespace GW2SDK.Tests.Features.Worlds.Fixtures
 
         public string JsonArrayOfWorlds { get; private set; }
 
-        public IListMetaData ListMetaData { get; private set; }
+        public IListContext ListContext { get; private set; }
 
         public async Task InitializeAsync()
         {
@@ -42,7 +42,7 @@ namespace GW2SDK.Tests.Features.Worlds.Fixtures
 
             var (json, metaData) = await service.GetAllWorlds();
             JsonArrayOfWorlds = json;
-            ListMetaData = metaData.GetListMetaData();
+            ListContext = metaData.GetListContext();
         }
 
         public Task DisposeAsync()

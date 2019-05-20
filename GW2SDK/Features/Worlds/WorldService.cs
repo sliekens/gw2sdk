@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using GW2SDK.Extensions;
 using GW2SDK.Features.Common;
-using GW2SDK.Features.Common.Infrastructure;
 using GW2SDK.Features.Worlds.Infrastructure;
 using GW2SDK.Infrastructure;
+using GW2SDK.Infrastructure.Common;
 using Newtonsoft.Json;
 
 namespace GW2SDK.Features.Worlds
@@ -24,10 +24,7 @@ namespace GW2SDK.Features.Worlds
             var list = new List<int>();
             var (json, metaData) = await _api.GetWorldIds().ConfigureAwait(false);
             JsonConvert.PopulateObject(json, list, settings ?? Json.DefaultJsonSerializerSettings);
-            return new DataTransferList<int>(list)
-            {
-                MetaData = metaData.GetListMetaData()
-            };
+            return new DataTransferList<int>(list, metaData.GetListContext());
         }
 
         public async Task<World> GetWorldById(int worldId, [CanBeNull] JsonSerializerSettings settings = null)
@@ -43,10 +40,7 @@ namespace GW2SDK.Features.Worlds
             var list = new List<World>();
             var (json, metaData) = await _api.GetWorldsById(worldIds).ConfigureAwait(false);
             JsonConvert.PopulateObject(json, list, settings ?? Json.DefaultJsonSerializerSettings);
-            return new DataTransferList<World>(list)
-            {
-                MetaData = metaData.GetListMetaData()
-            };
+            return new DataTransferList<World>(list, metaData.GetListContext());
         }
 
         public async Task<IDataTransferList<World>> GetAllWorlds([CanBeNull] JsonSerializerSettings settings = null)
@@ -54,22 +48,16 @@ namespace GW2SDK.Features.Worlds
             var list = new List<World>();
             var (json, metaData) = await _api.GetAllWorlds().ConfigureAwait(false);
             JsonConvert.PopulateObject(json, list, settings ?? Json.DefaultJsonSerializerSettings);
-            return new DataTransferList<World>(list)
-            {
-                MetaData = metaData.GetListMetaData()
-            };
+            return new DataTransferList<World>(list, metaData.GetListContext());
         }
 
-        public async Task<IDataTransferPagedList<World>> GetWorldsByPage(int page, int? pageSize = null,
+        public async Task<IDataTransferPage<World>> GetWorldsByPage(int page, int? pageSize = null,
             [CanBeNull] JsonSerializerSettings settings = null)
         {
             var list = new List<World>();
             var (json, metaData) = await _api.GetWorldsByPage(page, pageSize).ConfigureAwait(false);
             JsonConvert.PopulateObject(json, list, settings ?? Json.DefaultJsonSerializerSettings);
-            return new DataTransferPagedList<World>(list)
-            {
-                MetaData = metaData.GetPagedListMetaData()
-            };
+            return new DataTransferPage<World>(list, metaData.GetPageContext());
         }
     }
 }

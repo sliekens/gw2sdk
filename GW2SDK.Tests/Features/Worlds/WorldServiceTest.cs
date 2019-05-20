@@ -54,9 +54,8 @@ namespace GW2SDK.Tests.Features.Worlds
             _output.WriteLine("GetWorldIds: {0}", actual.ToCsv());
 
             Assert.NotEmpty(actual);
-            Assert.NotNull(actual.MetaData);
-            Assert.Equal(actual.MetaData.ResultCount, actual.Count);
-            Assert.Equal(actual.MetaData.ResultTotal, actual.Count);
+            Assert.Equal(actual.ResultCount, actual.Count);
+            Assert.Equal(actual.ResultTotal, actual.Count);
         }
 
 
@@ -101,9 +100,8 @@ namespace GW2SDK.Tests.Features.Worlds
             var actual = await sut.GetAllWorlds();
 
             Assert.NotEmpty(actual);
-            Assert.NotNull(actual.MetaData);
-            Assert.Equal(actual.Count, actual.MetaData.ResultTotal);
-            Assert.Equal(actual.Count, actual.MetaData.ResultCount);
+            Assert.Equal(actual.Count, actual.ResultTotal);
+            Assert.Equal(actual.Count, actual.ResultCount);
         }
 
         [Fact]
@@ -116,11 +114,10 @@ namespace GW2SDK.Tests.Features.Worlds
             var actual = await sut.GetWorldsByPage(0, 200);
 
             Assert.NotEmpty(actual);
-            Assert.NotNull(actual.MetaData);
-            Assert.Equal(actual.Count, actual.MetaData.ResultTotal);
-            Assert.Equal(actual.Count, actual.MetaData.ResultCount);
-            Assert.Equal(200, actual.MetaData.PageSize);
-            Assert.Equal(1, actual.MetaData.PageTotal);
+            Assert.Equal(actual.Count, actual.ResultTotal);
+            Assert.Equal(actual.Count, actual.ResultCount);
+            Assert.Equal(200, actual.PageSize);
+            Assert.Equal(1, actual.PageTotal);
         }
     }
 }

@@ -1,6 +1,6 @@
 ﻿namespace GW2SDK.Features.Common
 {
-    public interface IListMetaData
+    public interface IListContext
     {
         int ResultTotal { get; }
 
