@@ -6,7 +6,7 @@ namespace GW2SDK.Extensions
 {
     public static class HttpResponseHeaderExtensions
     {
-        public static Dictionary<string, string> GetMetaData(this HttpResponseHeaders headers)
+        public static Dictionary<string, string> GetContext(this HttpResponseHeaders headers)
         {
             return headers.ToDictionary(header => header.Key, header => header.Value.ToCsv());
         }

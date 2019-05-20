@@ -23,7 +23,7 @@ namespace GW2SDK.Infrastructure.Tokens
             {
                 Path = "/v2/tokeninfo"
             };
-            return await _http.GetStringWithMetaDataAsync(resource.Uri).ConfigureAwait(false);
+            return await _http.GetStringWithContextAsync(resource.Uri).ConfigureAwait(false);
         }
     }
 }

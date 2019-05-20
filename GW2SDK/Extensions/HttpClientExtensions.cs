@@ -10,7 +10,7 @@ namespace GW2SDK.Extensions
     [UsedImplicitly(ImplicitUseTargetFlags.WithMembers)]
     public static class HttpClientExtensions
     {
-        public static async Task<(string Json, Dictionary<string, string> MetaData)> GetStringWithMetaDataAsync(
+        public static async Task<(string Json, Dictionary<string, string> MetaData)> GetStringWithContextAsync(
             [NotNull] this HttpClient instance, Uri requestUri)
         {
             if (instance == null) throw new ArgumentNullException(nameof(instance));
@@ -19,9 +19,9 @@ namespace GW2SDK.Extensions
                 .ConfigureAwait(false))
             {
                 response.EnsureSuccessStatusCode();
-                var metaData = response.Headers.GetMetaData();
                 var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
-                return (json, metaData);
+                var context = response.Headers.GetContext();
+                return (json, context);
             }
         }
 

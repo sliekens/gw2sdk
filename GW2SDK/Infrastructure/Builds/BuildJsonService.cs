@@ -23,7 +23,7 @@ namespace GW2SDK.Infrastructure.Builds
                 Path = "/v2/build"
             };
 
-            return await _http.GetStringWithMetaDataAsync(resource.Uri).ConfigureAwait(false);
+            return await _http.GetStringWithContextAsync(resource.Uri).ConfigureAwait(false);
         }
     }
 }

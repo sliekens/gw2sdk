@@ -22,7 +22,7 @@ namespace GW2SDK.Infrastructure.Accounts
             {
                 Path = "/v2/account"
             };
-            return await _http.GetStringWithMetaDataAsync(resource.Uri).ConfigureAwait(false);
+            return await _http.GetStringWithContextAsync(resource.Uri).ConfigureAwait(false);
         }
     }
 }

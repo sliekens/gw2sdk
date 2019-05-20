@@ -22,7 +22,7 @@ namespace GW2SDK.Infrastructure.Colors
             {
                 Path = "/v2/colors"
             };
-            return await _http.GetStringWithMetaDataAsync(resource.Uri).ConfigureAwait(false);
+            return await _http.GetStringWithContextAsync(resource.Uri).ConfigureAwait(false);
         }
 
         public async Task<(string Json, Dictionary<string, string> MetaData)> GetAllColors()
@@ -32,7 +32,7 @@ namespace GW2SDK.Infrastructure.Colors
                 Path = "/v2/colors",
                 Query = "ids=all"
             };
-            return await _http.GetStringWithMetaDataAsync(resource.Uri).ConfigureAwait(false);
+            return await _http.GetStringWithContextAsync(resource.Uri).ConfigureAwait(false);
         }
 
         public async Task<(string Json, Dictionary<string, string> MetaData)> GetColorById(int colorId)
@@ -42,7 +42,7 @@ namespace GW2SDK.Infrastructure.Colors
                 Path = "/v2/colors",
                 Query = $"id={colorId}"
             };
-            return await _http.GetStringWithMetaDataAsync(resource.Uri).ConfigureAwait(false);
+            return await _http.GetStringWithContextAsync(resource.Uri).ConfigureAwait(false);
         }
 
         public async Task<(string Json, Dictionary<string, string> MetaData)> GetColorsById(IReadOnlyList<int> colorIds)
@@ -52,7 +52,7 @@ namespace GW2SDK.Infrastructure.Colors
                 Path = "/v2/colors",
                 Query = $"ids={colorIds.ToCsv()}"
             };
-            return await _http.GetStringWithMetaDataAsync(resource.Uri).ConfigureAwait(false);
+            return await _http.GetStringWithContextAsync(resource.Uri).ConfigureAwait(false);
         }
 
         public async Task<(string Json, Dictionary<string, string> MetaData)> GetColorsPage(int page, int? pageSize)
@@ -68,7 +68,7 @@ namespace GW2SDK.Infrastructure.Colors
                 resource.Query += $"&page_size={pageSize}";
             }
 
-            return await _http.GetStringWithMetaDataAsync(resource.Uri).ConfigureAwait(false);
+            return await _http.GetStringWithContextAsync(resource.Uri).ConfigureAwait(false);
         }
     }
 }

@@ -23,7 +23,7 @@ namespace GW2SDK.Infrastructure.Worlds
                 Path = "/v2/worlds"
             };
 
-            return await _http.GetStringWithMetaDataAsync(resource.Uri).ConfigureAwait(false);
+            return await _http.GetStringWithContextAsync(resource.Uri).ConfigureAwait(false);
         }
 
         public async Task<(string Json, Dictionary<string, string> MetaData)> GetWorldById(int worldId)
@@ -33,7 +33,7 @@ namespace GW2SDK.Infrastructure.Worlds
                 Path = "/v2/worlds",
                 Query = $"id={worldId}"
             };
-            return await _http.GetStringWithMetaDataAsync(resource.Uri).ConfigureAwait(false);
+            return await _http.GetStringWithContextAsync(resource.Uri).ConfigureAwait(false);
         }
 
         public async Task<(string Json, Dictionary<string, string> MetaData)> GetWorldsById(
@@ -46,7 +46,7 @@ namespace GW2SDK.Infrastructure.Worlds
                 Query = $"ids={worldIds.ToCsv()}"
             };
 
-            return await _http.GetStringWithMetaDataAsync(resource.Uri).ConfigureAwait(false);
+            return await _http.GetStringWithContextAsync(resource.Uri).ConfigureAwait(false);
         }
 
         public async Task<(string Json, Dictionary<string, string> MetaData)> GetAllWorlds()
@@ -57,7 +57,7 @@ namespace GW2SDK.Infrastructure.Worlds
                 Query = "ids=all"
             };
 
-            return await _http.GetStringWithMetaDataAsync(resource.Uri).ConfigureAwait(false);
+            return await _http.GetStringWithContextAsync(resource.Uri).ConfigureAwait(false);
         }
 
         public async Task<(string Json, Dictionary<string, string> MetaData)> GetWorldsByPage(int page, int? pageSize = null)
@@ -73,7 +73,7 @@ namespace GW2SDK.Infrastructure.Worlds
                 resource.Query += $"&page_size={pageSize}";
             }
 
-            return await _http.GetStringWithMetaDataAsync(resource.Uri).ConfigureAwait(false);
+            return await _http.GetStringWithContextAsync(resource.Uri).ConfigureAwait(false);
         }
     }
 }
