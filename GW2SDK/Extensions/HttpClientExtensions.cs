@@ -55,5 +55,13 @@ namespace GW2SDK.Extensions
             // (There is no format string that does all this in, I checked)
             instance.UseSchemaVersion(version.ToOffset(TimeSpan.Zero).ToString(sortable) + "Z");
         }
+
+        public static void UseLanguage([NotNull] this HttpClient instance, string lang)
+        {
+            if (instance == null) throw new ArgumentNullException(nameof(instance));
+            if (lang == null) throw new ArgumentNullException(nameof(lang));
+
+            instance.DefaultRequestHeaders.AcceptLanguage.ParseAdd(lang);
+        }
     }
 }
