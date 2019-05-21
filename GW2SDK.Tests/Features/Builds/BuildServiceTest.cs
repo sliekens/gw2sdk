@@ -28,10 +28,11 @@ namespace GW2SDK.Tests.Features.Builds
                 InnerHandler = new SocketsHttpHandler()
             };
             var http = new HttpClient(handler)
-                {
-                    BaseAddress = _configuration.BaseAddress
-                }
-                .WithLatestSchemaVersion();
+            {
+                BaseAddress = _configuration.BaseAddress
+            };
+
+            http.UseLatestSchemaVersion();
 
             var api = new BuildJsonService(http);
             return new BuildService(api);

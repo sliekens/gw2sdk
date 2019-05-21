@@ -14,27 +14,11 @@ namespace GW2SDK.Extensions
             instance.BaseAddress = baseAddress ?? throw new ArgumentNullException(nameof(baseAddress));
         }
 
-        public static HttpClient WithBaseAddress([NotNull] this HttpClient instance, [NotNull] Uri baseAddress)
-        {
-            if (instance == null) throw new ArgumentNullException(nameof(instance));
-            if (baseAddress == null) throw new ArgumentNullException(nameof(baseAddress));
-            instance.UseBaseAddress(baseAddress);
-            return instance;
-        }
-
         public static void UseAccessToken([NotNull] this HttpClient instance, [NotNull] string accessToken)
         {
             if (instance == null) throw new ArgumentNullException(nameof(instance));
             if (accessToken == null) throw new ArgumentNullException(nameof(accessToken));
             instance.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
-        }
-
-        public static HttpClient WithAccessToken([NotNull] this HttpClient instance, [NotNull] string accessToken)
-        {
-            if (instance == null) throw new ArgumentNullException(nameof(instance));
-            if (accessToken == null) throw new ArgumentNullException(nameof(accessToken));
-            instance.UseAccessToken(accessToken);
-            return instance;
         }
 
         public static void UseSchemaVersion([NotNull] this HttpClient instance, [NotNull] string version)
@@ -51,25 +35,10 @@ namespace GW2SDK.Extensions
             }
         }
 
-        public static HttpClient WithSchemaVersion([NotNull] this HttpClient instance, [NotNull] string version)
-        {
-            if (instance == null) throw new ArgumentNullException(nameof(instance));
-            if (version == null) throw new ArgumentNullException(nameof(version));
-            instance.UseSchemaVersion(version);
-            return instance;
-        }
-
         public static void UseLatestSchemaVersion([NotNull] this HttpClient instance)
         {
             if (instance == null) throw new ArgumentNullException(nameof(instance));
             instance.UseSchemaVersion("latest");
-        }
-
-        public static HttpClient WithLatestSchemaVersion([NotNull] this HttpClient instance)
-        {
-            if (instance == null) throw new ArgumentNullException(nameof(instance));
-            instance.UseLatestSchemaVersion();
-            return instance;
         }
 
         public static void UseSchemaVersion([NotNull] this HttpClient instance, DateTimeOffset version)
@@ -85,14 +54,6 @@ namespace GW2SDK.Extensions
             // eg. 2019-05-16T10:43:57Z
             // (There is no format string that does all this in, I checked)
             instance.UseSchemaVersion(version.ToOffset(TimeSpan.Zero).ToString(sortable) + "Z");
-        }
-
-        public static HttpClient WithSchemaVersion([NotNull] this HttpClient instance, DateTimeOffset version)
-        {
-            if (instance == null) throw new ArgumentNullException(nameof(instance));
-            if (version == null) throw new ArgumentNullException(nameof(version));
-            instance.UseSchemaVersion(version);
-            return instance;
         }
     }
 }

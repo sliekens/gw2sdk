@@ -32,11 +32,12 @@ namespace GW2SDK.Tests.Features.Tokens
                 InnerHandler = new SocketsHttpHandler()
             };
             var http = new HttpClient(handler)
-                {
-                    BaseAddress = _configuration.BaseAddress
-                }
-                .WithAccessToken(_configuration.ApiKeyFull)
-                .WithLatestSchemaVersion();
+            {
+                BaseAddress = _configuration.BaseAddress
+            };
+
+            http.UseAccessToken(_configuration.ApiKeyFull);
+            http.UseLatestSchemaVersion();
 
             var api = new TokenInfoJsonService(http);
             return new TokenInfoService(api);

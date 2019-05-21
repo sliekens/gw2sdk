@@ -33,10 +33,10 @@ namespace GW2SDK.Tests.Features.Colors
                 InnerHandler = new SocketsHttpHandler()
             };
             var http = new HttpClient(handler)
-                {
-                    BaseAddress = _configuration.BaseAddress
-                }
-                .WithLatestSchemaVersion();
+            {
+                BaseAddress = _configuration.BaseAddress
+            };
+            http.UseLatestSchemaVersion();
 
             var api = new ColorJsonService(http);
             return new ColorService(api);
