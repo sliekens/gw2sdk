@@ -10,5 +10,7 @@ namespace GW2SDK.Features.Tokens
         public string Name { get; set; }
 
         public Permission[] Permissions { get; set; }
+
+        public TokenType? Type { get; set; }
     }
 }

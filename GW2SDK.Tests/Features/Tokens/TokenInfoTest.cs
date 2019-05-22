@@ -22,7 +22,6 @@ namespace GW2SDK.Tests.Features.Tokens
 
         private readonly ITestOutputHelper _output;
 
-
         private TokenInfo CreateSut(JsonSerializerSettings jsonSerializerSettings)
         {
             _output.WriteLine(_fixture.JsonTokenInfoObject);
