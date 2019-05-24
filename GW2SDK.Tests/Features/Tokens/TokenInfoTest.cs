@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Linq;
-using GW2SDK.Extensions;
 using GW2SDK.Features.Tokens;
 using GW2SDK.Infrastructure;
 using GW2SDK.Tests.Features.Tokens.Fixtures;
+using GW2SDK.Tests.Shared;
 using Newtonsoft.Json;
 using Xunit;
 using Xunit.Abstractions;
@@ -24,7 +24,6 @@ namespace GW2SDK.Tests.Features.Tokens
 
         private TokenInfo CreateSut(JsonSerializerSettings jsonSerializerSettings)
         {
-            _output.WriteLine(_fixture.JsonTokenInfoObject);
             var sut = new TokenInfo();
             JsonConvert.PopulateObject(_fixture.JsonTokenInfoObject, sut, jsonSerializerSettings);
             return sut;
@@ -36,7 +35,10 @@ namespace GW2SDK.Tests.Features.Tokens
         [Trait("Importance", "Critical")]
         public void TokenInfo_ShouldHaveNoMissingMembers()
         {
-            _ = CreateSut(Json.DefaultJsonSerializerSettings.WithMissingMemberHandling(MissingMemberHandling.Error));
+            _ = CreateSut(new JsonSerializerSettingsBuilder()
+                .UseMissingMemberHandling(MissingMemberHandling.Error)
+                .UseTraceWriter(new XunitTraceWriter(_output))
+                .Build());
         }
 
         [Fact]
@@ -44,7 +46,9 @@ namespace GW2SDK.Tests.Features.Tokens
         [Trait("Category", "Integration")]
         public void TokenInfo_Id_ShouldNotBeEmpty()
         {
-            var sut = CreateSut(Json.DefaultJsonSerializerSettings);
+            var sut = CreateSut(new JsonSerializerSettingsBuilder()
+                .UseTraceWriter(new XunitTraceWriter(_output))
+                .Build());
 
             Assert.NotEmpty(sut.Id);
         }
@@ -54,7 +58,9 @@ namespace GW2SDK.Tests.Features.Tokens
         [Trait("Category", "Integration")]
         public void TokenInfo_Name_ShouldBeGW2SDKDev()
         {
-            var sut = CreateSut(Json.DefaultJsonSerializerSettings);
+            var sut = CreateSut(new JsonSerializerSettingsBuilder()
+                .UseTraceWriter(new XunitTraceWriter(_output))
+                .Build());
 
             // This is not intended to improve account security, only to prevent key abuse
             // The reason is that some services like GW2BLTC.com associate keys with logins but require you to use a key name of their choice
@@ -67,7 +73,9 @@ namespace GW2SDK.Tests.Features.Tokens
         [Trait("Category", "Integration")]
         public void TokenInfo_Permissions_ShouldHaveFullPermissions()
         {
-            var sut = CreateSut(Json.DefaultJsonSerializerSettings);
+            var sut = CreateSut(new JsonSerializerSettingsBuilder()
+                .UseTraceWriter(new XunitTraceWriter(_output))
+                .Build());
 
             var expected = Enum.GetValues(typeof(Permission)).Cast<Permission>().ToHashSet();
 
