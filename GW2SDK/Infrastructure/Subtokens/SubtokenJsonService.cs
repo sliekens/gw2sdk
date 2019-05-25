@@ -11,23 +11,22 @@ namespace GW2SDK.Infrastructure.Subtokens
     {
         private readonly HttpClient _http;
 
-        // This is a little weird but in order for this to work, you need to add a token to HttpClient.DefaultRequestHeaders
         public SubtokenJsonService([NotNull] HttpClient http)
         {
             _http = http ?? throw new ArgumentNullException(nameof(http));
         }
 
+        // This is a little weird but in order for this to work, you need to add a token to HttpClient.DefaultRequestHeaders
         public async Task<HttpResponseMessage> CreateSubtoken(
             IReadOnlyList<Permission> permissions = default,
             IReadOnlyList<Uri> urls = default,
             DateTimeOffset? expire = default)
         {
-            var resource = new UriBuilder(_http.BaseAddress)
+            // TODO: pass arguments!
+            using (var request = new CreateSubtokenRequest())
             {
-                Path = "/v2/createsubtoken"
-            };
-
-            return await _http.GetAsync(resource.Uri, HttpCompletionOption.ResponseHeadersRead).ConfigureAwait(false);
+                return await _http.SendAsync(request, HttpCompletionOption.ResponseHeadersRead).ConfigureAwait(false);
+            }
         }
     }
 }

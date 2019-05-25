@@ -17,11 +17,10 @@ namespace GW2SDK.Infrastructure.Tokens
         // This is a little weird but in order for this to work, you need to add a token to HttpClient.DefaultRequestHeaders
         public async Task<HttpResponseMessage> GetTokenInfo()
         {
-            var resource = new UriBuilder(_http.BaseAddress)
+            using (var request = new GetTokenInfoRequest())
             {
-                Path = "/v2/tokeninfo"
-            };
-            return await _http.GetAsync(resource.Uri, HttpCompletionOption.ResponseHeadersRead).ConfigureAwait(false);
+                return await _http.SendAsync(request, HttpCompletionOption.ResponseHeadersRead).ConfigureAwait(false);
+            }
         }
     }
 }

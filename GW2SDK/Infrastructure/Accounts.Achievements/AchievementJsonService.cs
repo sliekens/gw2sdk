@@ -16,11 +16,10 @@ namespace GW2SDK.Infrastructure.Accounts.Achievements
 
         public async Task<HttpResponseMessage> GetAchievements()
         {
-            var resource = new UriBuilder(_http.BaseAddress)
+            using (var request = new GetAchievementsRequest())
             {
-                Path = "/v2/account/achievements"
-            };
-            return await _http.GetAsync(resource.Uri, HttpCompletionOption.ResponseHeadersRead).ConfigureAwait(false);
+                return await _http.SendAsync(request, HttpCompletionOption.ResponseHeadersRead).ConfigureAwait(false);
+            }
         }
     }
 }

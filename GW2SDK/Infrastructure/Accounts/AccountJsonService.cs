@@ -16,11 +16,10 @@ namespace GW2SDK.Infrastructure.Accounts
 
         public async Task<HttpResponseMessage> GetAccount()
         {
-            var resource = new UriBuilder(_http.BaseAddress)
+            using (var request = new GetAccountRequest())
             {
-                Path = "/v2/account"
-            };
-            return await _http.GetAsync(resource.Uri, HttpCompletionOption.ResponseHeadersRead).ConfigureAwait(false);
+                return await _http.SendAsync(request, HttpCompletionOption.ResponseHeadersRead).ConfigureAwait(false);
+            }
         }
     }
 }

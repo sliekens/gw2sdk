@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
-using GW2SDK.Extensions;
 using GW2SDK.Features.Worlds;
 
 namespace GW2SDK.Infrastructure.Worlds
@@ -18,61 +17,42 @@ namespace GW2SDK.Infrastructure.Worlds
 
         public async Task<HttpResponseMessage> GetWorldIds()
         {
-            var resource = new UriBuilder(_http.BaseAddress)
+            using (var request = new GetWorldIdsRequest())
             {
-                Path = "/v2/worlds"
-            };
-
-            return await _http.GetAsync(resource.Uri, HttpCompletionOption.ResponseHeadersRead).ConfigureAwait(false);
+                return await _http.SendAsync(request, HttpCompletionOption.ResponseHeadersRead).ConfigureAwait(false);
+            }
         }
 
         public async Task<HttpResponseMessage> GetWorldById(int worldId)
         {
-            var resource = new UriBuilder(_http.BaseAddress)
+            using (var request = new GetWorldByIdRequest(worldId))
             {
-                Path = "/v2/worlds",
-                Query = $"id={worldId}"
-            };
-            return await _http.GetAsync(resource.Uri, HttpCompletionOption.ResponseHeadersRead).ConfigureAwait(false);
+                return await _http.SendAsync(request, HttpCompletionOption.ResponseHeadersRead).ConfigureAwait(false);
+            }
         }
 
         public async Task<HttpResponseMessage> GetWorldsById([NotNull] IReadOnlyList<int> worldIds)
         {
-            if (worldIds == null) throw new ArgumentNullException(nameof(worldIds));
-            var resource = new UriBuilder(_http.BaseAddress)
+            using (var request = new GetWorldsByIdRequest(worldIds))
             {
-                Path = "/v2/worlds",
-                Query = $"ids={worldIds.ToCsv()}"
-            };
-
-            return await _http.GetAsync(resource.Uri, HttpCompletionOption.ResponseHeadersRead).ConfigureAwait(false);
+                return await _http.SendAsync(request, HttpCompletionOption.ResponseHeadersRead).ConfigureAwait(false);
+            }
         }
 
         public async Task<HttpResponseMessage> GetAllWorlds()
         {
-            var resource = new UriBuilder(_http.BaseAddress)
+            using (var request = new GetAllWorldsRequest())
             {
-                Path = "/v2/worlds",
-                Query = "ids=all"
-            };
-
-            return await _http.GetAsync(resource.Uri, HttpCompletionOption.ResponseHeadersRead).ConfigureAwait(false);
+                return await _http.SendAsync(request, HttpCompletionOption.ResponseHeadersRead).ConfigureAwait(false);
+            }
         }
 
         public async Task<HttpResponseMessage> GetWorldsByPage(int page, int? pageSize)
         {
-            var resource = new UriBuilder(_http.BaseAddress)
+            using (var request = new GetWorldsByPageRequest(page, pageSize))
             {
-                Path = "/v2/worlds",
-                Query = $"page={page}"
-            };
-
-            if (pageSize.HasValue)
-            {
-                resource.Query += $"&page_size={pageSize}";
+                return await _http.SendAsync(request, HttpCompletionOption.ResponseHeadersRead).ConfigureAwait(false);
             }
-
-            return await _http.GetAsync(resource.Uri, HttpCompletionOption.ResponseHeadersRead).ConfigureAwait(false);
         }
     }
 }

@@ -16,12 +16,10 @@ namespace GW2SDK.Infrastructure.Builds
 
         public async Task<HttpResponseMessage> GetBuild()
         {
-            var resource = new UriBuilder(_http.BaseAddress)
+            using (var request = new GetBuildRequest())
             {
-                Path = "/v2/build"
-            };
-
-            return await _http.GetAsync(resource.Uri, HttpCompletionOption.ResponseHeadersRead).ConfigureAwait(false);
+                return await _http.SendAsync(request, HttpCompletionOption.ResponseHeadersRead).ConfigureAwait(false);
+            }
         }
     }
 }
