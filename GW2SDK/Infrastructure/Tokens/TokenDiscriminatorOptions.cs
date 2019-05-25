@@ -8,11 +8,11 @@ namespace GW2SDK.Infrastructure.Tokens
     {
         public override Type BaseType => typeof(TokenInfo);
 
-        public override string Discriminator => "type";
+        public override string DiscriminatorFieldName => "type";
 
         public override bool SerializeDiscriminator => false;
 
-        public override IEnumerable<(string TypeName, Type Type)> GetTypes()
+        public override IEnumerable<(string TypeName, Type Type)> GetDiscriminatedTypes()
         {
             yield return ("APIKey", typeof(ApiKeyInfo));
         }

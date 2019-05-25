@@ -12,13 +12,13 @@ namespace GW2SDK.Infrastructure
         public abstract Type BaseType { get; }
 
         /// <summary>Gets the name of the discriminator field.</summary>
-        public abstract string Discriminator { get; }
+        public abstract string DiscriminatorFieldName { get; }
 
         /// <summary>Returns true if the discriminator should be serialized to the CLR type; otherwise false.</summary>
         public abstract bool SerializeDiscriminator { get; }
 
         /// <summary>Gets the mappings from discriminator values to CLR types.</summary>
-        public abstract IEnumerable<(string TypeName, Type Type)> GetTypes();
+        public abstract IEnumerable<(string TypeName, Type Type)> GetDiscriminatedTypes();
 
         /// <summary>Creates an object which will then be populated by the serializer.</summary>
         public abstract object Create(Type objectType);

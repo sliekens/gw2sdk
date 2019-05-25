@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
@@ -15,7 +16,8 @@ namespace GW2SDK.Infrastructure
 
         public DiscriminatedJsonConverter([NotNull] DiscriminatorOptions discriminatorOptions)
         {
-            _discriminatorOptions = discriminatorOptions ?? throw new ArgumentNullException(nameof(discriminatorOptions));
+            _discriminatorOptions =
+                discriminatorOptions ?? throw new ArgumentNullException(nameof(discriminatorOptions));
         }
 
         public override bool CanConvert(Type objectType) => _discriminatorOptions.BaseType.IsAssignableFrom(objectType);
@@ -29,22 +31,46 @@ namespace GW2SDK.Infrastructure
             }
 
             var json = JObject.Load(reader);
-            var discriminator = json.Property(_discriminatorOptions.Discriminator);
-            if (!_discriminatorOptions.SerializeDiscriminator)
+            var discriminatorField = json.Property(_discriminatorOptions.DiscriminatorFieldName);
+            if (discriminatorField is null)
             {
-                discriminator.Remove();
+                serializer.TraceWriter?.Trace(
+                    TraceLevel.Error,
+                    $"Could not find discriminator field '{_discriminatorOptions.DiscriminatorFieldName}'.",
+                    null);
+                throw new JsonSerializationException(
+                    $"Could not find discriminator field with name '{_discriminatorOptions.DiscriminatorFieldName}'.");
             }
 
-            var jsonTypeName = discriminator.Value.ToString();
-            foreach (var typeInfo in _discriminatorOptions.GetTypes())
+            var discriminatorFieldValue = discriminatorField.Value.ToString();
+            serializer.TraceWriter?.Trace(
+                TraceLevel.Info,
+                $"Found discriminator field '{discriminatorField.Name}' with value '{discriminatorFieldValue}'.",
+                null);
+            if (!_discriminatorOptions.SerializeDiscriminator)
             {
-                var (typeName, type) = typeInfo;
-                if (jsonTypeName == typeName)
+                // Remove the discriminator field from the JSON for two possible reasons:
+                // 1. the user doesn't want to copy the discriminator value from JSON to the CLR object, only the other way around
+                // 2. the CLR object doesn't even have a discriminator property, in which case MissingMemberHandling.Error would throw
+                discriminatorField.Remove();
+            }
+
+            foreach (var (typeName, type) in _discriminatorOptions.GetDiscriminatedTypes())
+            {
+                if (discriminatorFieldValue == typeName)
                 {
+                    serializer.TraceWriter?.Trace(
+                        TraceLevel.Info,
+                        $"Discriminator value '{discriminatorFieldValue}' was used to select Type '{type}'.",
+                        null);
                     return ReadJsonImpl(json.CreateReader(), type, serializer);
                 }
             }
 
+            serializer.TraceWriter?.Trace(
+                TraceLevel.Warning,
+                $"Discriminator value '{discriminatorFieldValue}' has no corresponding Type. Continuing anyway with Type '{objectType}'.",
+                null);
             return ReadJsonImpl(json.CreateReader(), objectType, serializer);
         }
 
