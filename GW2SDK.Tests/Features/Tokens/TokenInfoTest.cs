@@ -22,12 +22,8 @@ namespace GW2SDK.Tests.Features.Tokens
 
         private readonly ITestOutputHelper _output;
 
-        private TokenInfo CreateSut(JsonSerializerSettings jsonSerializerSettings)
-        {
-            var sut = new TokenInfo();
-            JsonConvert.PopulateObject(_fixture.JsonTokenInfoObject, sut, jsonSerializerSettings);
-            return sut;
-        }
+        private TokenInfo CreateSut(JsonSerializerSettings jsonSerializerSettings) =>
+            JsonConvert.DeserializeObject<TokenInfo>(_fixture.JsonTokenInfoObject, jsonSerializerSettings);
 
         [Fact]
         [Trait("Feature", "Tokens")]
