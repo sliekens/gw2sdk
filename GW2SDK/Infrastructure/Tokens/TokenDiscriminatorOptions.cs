@@ -15,6 +15,7 @@ namespace GW2SDK.Infrastructure.Tokens
         public override IEnumerable<(string TypeName, Type Type)> GetDiscriminatedTypes()
         {
             yield return ("APIKey", typeof(ApiKeyInfo));
+            yield return ("Subtoken", typeof(SubtokenInfo));
         }
 
         public override object Create(Type objectType)
@@ -22,6 +23,11 @@ namespace GW2SDK.Infrastructure.Tokens
             if (objectType == typeof(ApiKeyInfo))
             {
                 return new ApiKeyInfo();
+            }
+
+            if (objectType == typeof(SubtokenInfo))
+            {
+                return new SubtokenInfo();
             }
 
             return new TokenInfo();
