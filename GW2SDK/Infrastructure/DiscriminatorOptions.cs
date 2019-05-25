@@ -14,9 +14,6 @@ namespace GW2SDK.Infrastructure
         /// <summary>Gets the name of the discriminator field.</summary>
         public abstract string Discriminator { get; }
 
-        /// <summary>Gets the CLR type that will be used if no suitable type is found.</summary>
-        public abstract Type FallbackType { get; }
-
         /// <summary>Returns true if the discriminator should be serialized to the CLR type; otherwise false.</summary>
         public abstract bool SerializeDiscriminator { get; }
 

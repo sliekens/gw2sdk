@@ -8,7 +8,7 @@ namespace GW2SDK.Infrastructure
     {
         private readonly DiscriminatorOptions _discriminatorOptions;
 
-        public DiscriminatedJsonConverter(Type concreteDiscriminatorOptionsType)
+        public DiscriminatedJsonConverter([NotNull] Type concreteDiscriminatorOptionsType)
             : this((DiscriminatorOptions) Activator.CreateInstance(concreteDiscriminatorOptionsType))
         {
         }
@@ -45,7 +45,7 @@ namespace GW2SDK.Infrastructure
                 }
             }
 
-            return ReadJsonImpl(json.CreateReader(), _discriminatorOptions.FallbackType, serializer);
+            return ReadJsonImpl(json.CreateReader(), objectType, serializer);
         }
 
         private object ReadJsonImpl(JsonReader reader, Type objectType, JsonSerializer serializer)
