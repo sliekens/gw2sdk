@@ -14,7 +14,7 @@ namespace GW2SDK.Infrastructure.Tokens
             _http = http ?? throw new ArgumentNullException(nameof(http));
         }
 
-        // This is a little weird but in order for this to work, you need to add the token to HttpClient.DefaultRequestHeaders
+        // This is a little weird but in order for this to work, you need to add a token to HttpClient.DefaultRequestHeaders
         public async Task<HttpResponseMessage> GetTokenInfo()
         {
             var resource = new UriBuilder(_http.BaseAddress)
