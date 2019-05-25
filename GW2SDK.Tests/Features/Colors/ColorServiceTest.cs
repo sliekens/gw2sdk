@@ -21,18 +21,12 @@ namespace GW2SDK.Tests.Features.Colors
 
         private readonly ITestOutputHelper _output;
 
-        private ColorService CreateSut()
-        {
-            var api = new ColorJsonService(_http.Http);
-            return new ColorService(api);
-        }
-
         [Fact]
         [Trait("Feature", "Colors")]
         [Trait("Category", "E2E")]
         public async Task GetColorIds_ShouldNotReturnEmptyCollection()
         {
-            var sut = CreateSut();
+            var sut = new ColorService(_http.Http);
 
             var actual = await sut.GetColorIds();
 
@@ -46,7 +40,7 @@ namespace GW2SDK.Tests.Features.Colors
         [Trait("Category", "E2E")]
         public async Task GetColorById_ShouldNotReturnNull()
         {
-            var sut = CreateSut();
+            var sut = new ColorService(_http.Http);
 
             const int dyeRemoverId = 1;
 
@@ -60,7 +54,7 @@ namespace GW2SDK.Tests.Features.Colors
         [Trait("Category", "E2E")]
         public async Task GetColorsById_ShouldReturnExpectedRange()
         {
-            var sut = CreateSut();
+            var sut = new ColorService(_http.Http);
 
             var ids = Enumerable.Range(1, 5).ToList();
 
@@ -74,7 +68,7 @@ namespace GW2SDK.Tests.Features.Colors
         [Trait("Category", "E2E")]
         public async Task GetColorsPage_ShouldReturnExpectedLimit()
         {
-            var sut = CreateSut();
+            var sut = new ColorService(_http.Http);
 
             var limit = 50;
 

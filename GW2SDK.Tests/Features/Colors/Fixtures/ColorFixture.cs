@@ -1,11 +1,6 @@
-﻿using System;
-using System.Net.Http;
-using System.Threading.Tasks;
-using GW2SDK.Extensions;
+﻿using System.Threading.Tasks;
 using GW2SDK.Infrastructure.Colors;
 using GW2SDK.Tests.Shared.Fixtures;
-using Microsoft.Extensions.Http;
-using Polly;
 using Xunit;
 
 namespace GW2SDK.Tests.Features.Colors.Fixtures
@@ -18,13 +13,12 @@ namespace GW2SDK.Tests.Features.Colors.Fixtures
         {
             var http = new HttpFixture();
 
-            var service = new ColorJsonService(http.Http);
-
-            var response = await service.GetAllColors();
-
-            response.EnsureSuccessStatusCode();
-
-            JsonArrayOfColors = await response.Content.ReadAsStringAsync();
+            using (var request = new GetAllColorsRequest())
+            using (var response = await http.Http.SendAsync(request))
+            {
+                response.EnsureSuccessStatusCode();
+                JsonArrayOfColors = await response.Content.ReadAsStringAsync();
+            }
         }
 
         public Task DisposeAsync() => Task.CompletedTask;

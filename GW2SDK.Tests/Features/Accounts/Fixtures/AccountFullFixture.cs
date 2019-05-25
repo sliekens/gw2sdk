@@ -3,7 +3,6 @@ using System.Threading.Tasks;
 using GW2SDK.Extensions;
 using GW2SDK.Features.Worlds;
 using GW2SDK.Infrastructure.Accounts;
-using GW2SDK.Infrastructure.Worlds;
 using GW2SDK.Tests.Shared.Fixtures;
 using Xunit;
 
@@ -22,23 +21,29 @@ namespace GW2SDK.Tests.Features.Accounts.Fixtures
         public async Task InitializeAsync()
         {
             var http = new HttpFixture();
-            var service = new AccountJsonService(http.HttpFullAccess);
+            using (var request = new GetAccountRequest())
+            {
+                http.HttpFullAccess.UseSchemaVersion(_configuration.Configuration["KnownSchemaVersion:Account"]);
+                using (var response = await http.HttpFullAccess.SendAsync(request))
+                {
+                    response.EnsureSuccessStatusCode();
+                    AccountJsonObjectKnownSchemaFull = await response.Content.ReadAsStringAsync();
+                }
+            }
 
-            http.HttpFullAccess.UseSchemaVersion(_configuration.Configuration["KnownSchemaVersion:Account"]);
-            AccountJsonObjectKnownSchemaFull = await GetAccountJson();
+            using (var request = new GetAccountRequest())
+            {
+                http.HttpFullAccess.UseLatestSchemaVersion();
+                using (var response = await http.HttpFullAccess.SendAsync(request))
+                {
+                    response.EnsureSuccessStatusCode();
+                    AccountJsonObjectLatestSchemaFull = await response.Content.ReadAsStringAsync();
+                }
+            }
 
-            http.HttpFullAccess.UseLatestSchemaVersion();
-            AccountJsonObjectLatestSchemaFull = await GetAccountJson();
-
-            var worldService = new WorldService(new WorldJsonService(http.Http));
+            var worldService = new WorldService(http.Http);
             WorldIds = await worldService.GetWorldIds();
 
-            async Task<string> GetAccountJson()
-            {
-                var response = await service.GetAccount();
-                response.EnsureSuccessStatusCode();
-                return await response.Content.ReadAsStringAsync();
-            }
         }
 
         public Task DisposeAsync() => Task.CompletedTask;

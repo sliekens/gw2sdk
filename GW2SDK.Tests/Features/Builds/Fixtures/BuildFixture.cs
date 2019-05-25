@@ -13,11 +13,12 @@ namespace GW2SDK.Tests.Features.Builds.Fixtures
         {
             var http = new HttpFixture();
 
-            var service = new BuildJsonService(http.Http);
-
-            var response = await service.GetBuild();
-            response.EnsureSuccessStatusCode();
-            JsonBuildObject = await response.Content.ReadAsStringAsync();
+            using (var request = new GetBuildRequest())
+            using (var response = await http.Http.SendAsync(request))
+            {
+                response.EnsureSuccessStatusCode();
+                JsonBuildObject = await response.Content.ReadAsStringAsync();
+            }
         }
 
         public Task DisposeAsync() => Task.CompletedTask;

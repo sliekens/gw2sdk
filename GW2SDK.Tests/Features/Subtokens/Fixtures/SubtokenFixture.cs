@@ -1,26 +1,24 @@
 ﻿using System.Net.Http;
 using GW2SDK.Features.Subtokens;
 using GW2SDK.Features.Tokens;
-using GW2SDK.Infrastructure.Subtokens;
-using GW2SDK.Infrastructure.Tokens;
 using GW2SDK.Tests.Shared.Fixtures;
 
 namespace GW2SDK.Tests.Features.Subtokens.Fixtures
 {
     public class SubtokenFixture
     {
-        public HttpClient Http { get; }
-
         public SubtokenFixture()
         {
             var http = new HttpFixture();
 
             Http = http.HttpFullAccess;
 
-            SubtokenService = new SubtokenService(new SubtokenJsonService(Http));
+            SubtokenService = new SubtokenService(Http);
 
-            TokenInfoService = new TokenInfoService(new TokenInfoJsonService(Http));
+            TokenInfoService = new TokenInfoService(Http);
         }
+
+        public HttpClient Http { get; }
 
         public SubtokenService SubtokenService { get; }
 

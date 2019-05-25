@@ -13,11 +13,12 @@ namespace GW2SDK.Tests.Features.Tokens.Fixtures
         {
             var http = new HttpFixture();
 
-            var service = new TokenInfoJsonService(http.HttpFullAccess);
-
-            var response = await service.GetTokenInfo();
-            response.EnsureSuccessStatusCode();
-            JsonTokenInfoObject = await response.Content.ReadAsStringAsync();
+            using (var request = new GetTokenInfoRequest())
+            using (var response = await http.HttpFullAccess.SendAsync(request))
+            {
+                response.EnsureSuccessStatusCode();
+                JsonTokenInfoObject = await response.Content.ReadAsStringAsync();
+            }
         }
 
         public Task DisposeAsync() => Task.CompletedTask;

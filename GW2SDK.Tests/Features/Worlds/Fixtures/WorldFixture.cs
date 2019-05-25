@@ -17,12 +17,13 @@ namespace GW2SDK.Tests.Features.Worlds.Fixtures
         {
             var http = new HttpFixture();
 
-            var service = new WorldJsonService(http.Http);
-
-            var response = await service.GetAllWorlds();
-            response.EnsureSuccessStatusCode();
-            JsonArrayOfWorlds = await response.Content.ReadAsStringAsync();
-            ListContext = response.Headers.GetListContext();
+            using (var request = new GetAllWorldsRequest())
+            using (var response = await http.Http.SendAsync(request))
+            {
+                response.EnsureSuccessStatusCode();
+                JsonArrayOfWorlds = await response.Content.ReadAsStringAsync();
+                ListContext = response.Headers.GetListContext();
+            }
         }
 
         public Task DisposeAsync() => Task.CompletedTask;

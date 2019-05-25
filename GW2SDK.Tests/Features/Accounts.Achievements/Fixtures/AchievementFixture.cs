@@ -13,17 +13,14 @@ namespace GW2SDK.Tests.Features.Accounts.Achievements.Fixtures
         {
             var http = new HttpFixture();
 
-            var service = new AchievementJsonService(http.HttpFullAccess);
-
-            var response = await service.GetAchievements();
-            response.EnsureSuccessStatusCode();
-
-            AchievementJsonArray = await response.Content.ReadAsStringAsync();
+            using (var request = new GetAchievementsRequest())
+            using (var response = await http.HttpFullAccess.SendAsync(request))
+            {
+                response.EnsureSuccessStatusCode();
+                AchievementJsonArray = await response.Content.ReadAsStringAsync();
+            }
         }
 
-        public Task DisposeAsync()
-        {
-            return Task.CompletedTask;
-        }
+        public Task DisposeAsync() => Task.CompletedTask;
     }
 }

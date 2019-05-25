@@ -1,9 +1,5 @@
-﻿using System;
-using System.Net.Http;
-using System.Threading.Tasks;
-using GW2SDK.Extensions;
+﻿using System.Threading.Tasks;
 using GW2SDK.Features.Subtokens;
-using GW2SDK.Infrastructure.Subtokens;
 using GW2SDK.Tests.Shared.Fixtures;
 using Xunit;
 
@@ -18,16 +14,10 @@ namespace GW2SDK.Tests.Features.Subtokens
 
         private readonly HttpFixture _http;
 
-        private SubtokenService CreateSut()
-        {
-            var api = new SubtokenJsonService(_http.HttpFullAccess);
-            return new SubtokenService(api);
-        }
-
         [Fact]
         public async Task CreateSubtoken_ShouldNotBeNull()
         {
-            var sut = CreateSut();
+            var sut = new SubtokenService(_http.HttpFullAccess);
 
             var actual = await sut.CreateSubtoken();
 

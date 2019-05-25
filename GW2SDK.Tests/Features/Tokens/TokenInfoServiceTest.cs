@@ -1,6 +1,5 @@
 ﻿using System.Threading.Tasks;
 using GW2SDK.Features.Tokens;
-using GW2SDK.Infrastructure.Tokens;
 using GW2SDK.Tests.Shared.Fixtures;
 using Xunit;
 using Xunit.Abstractions;
@@ -19,11 +18,7 @@ namespace GW2SDK.Tests.Features.Tokens
 
         private readonly ITestOutputHelper _output;
 
-        private TokenInfoService CreateSut()
-        {
-            var api = new TokenInfoJsonService(_http.HttpFullAccess);
-            return new TokenInfoService(api);
-        }
+        private TokenInfoService CreateSut() => new TokenInfoService(_http.HttpFullAccess);
 
         [Fact]
         [Trait("Feature", "Tokens")]

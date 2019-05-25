@@ -2,7 +2,6 @@
 using System.Threading.Tasks;
 using GW2SDK.Extensions;
 using GW2SDK.Features.Worlds;
-using GW2SDK.Infrastructure.Worlds;
 using GW2SDK.Tests.Shared.Fixtures;
 using Xunit;
 using Xunit.Abstractions;
@@ -21,18 +20,12 @@ namespace GW2SDK.Tests.Features.Worlds
 
         private readonly ITestOutputHelper _output;
 
-        private WorldService CreateSut()
-        {
-            var api = new WorldJsonService(_http.Http);
-            return new WorldService(api);
-        }
-
         [Fact]
         [Trait("Feature", "Worlds")]
         [Trait("Category", "E2E")]
         public async Task GetWorldIds_ShouldReturnAllWorldIds()
         {
-            var sut = CreateSut();
+            var sut = new WorldService(_http.Http);
 
             var actual = await sut.GetWorldIds();
 
@@ -49,7 +42,7 @@ namespace GW2SDK.Tests.Features.Worlds
         [Trait("Category", "E2E")]
         public async Task GetWorldById_ShouldReturnRequestedWorld()
         {
-            var sut = CreateSut();
+            var sut = new WorldService(_http.Http);
 
             const int input = 1001;
 
@@ -64,7 +57,7 @@ namespace GW2SDK.Tests.Features.Worlds
         [Trait("Category", "E2E")]
         public async Task GetWorldsById_ShouldReturnRequestedWorlds()
         {
-            var sut = CreateSut();
+            var sut = new WorldService(_http.Http);
 
             var actual = await sut.GetWorldsById(new List<int> {1001, 1002, 1003});
 
@@ -80,7 +73,7 @@ namespace GW2SDK.Tests.Features.Worlds
         [Trait("Category", "E2E")]
         public async Task GetAllWorlds_ShouldReturnAllWorlds()
         {
-            var sut = CreateSut();
+            var sut = new WorldService(_http.Http);
 
             var actual = await sut.GetAllWorlds();
 
@@ -94,7 +87,7 @@ namespace GW2SDK.Tests.Features.Worlds
         [Trait("Category", "E2E")]
         public async Task GetWorldsByPage_ShouldReturnAllWorlds()
         {
-            var sut = CreateSut();
+            var sut = new WorldService(_http.Http);
 
             var actual = await sut.GetWorldsByPage(0, 200);
 
