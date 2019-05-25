@@ -1,3 +1,4 @@
+using System;
 using GW2SDK.Features.Common;
 using GW2SDK.Infrastructure;
 using GW2SDK.Infrastructure.Tokens;
@@ -23,5 +24,8 @@ namespace GW2SDK.Features.Tokens
 
     public sealed class SubtokenInfo : TokenInfo
     {
+        public DateTimeOffset ExpiresAt { get; set; }
+
+        public DateTimeOffset IssuedAt { get; set; }
     }
 }

@@ -5,6 +5,7 @@ using GW2SDK.Infrastructure;
 using GW2SDK.Tests.Features.Subtokens.Fixtures;
 using GW2SDK.Tests.Shared;
 using GW2SDK.Tests.Shared.Fixtures;
+using Newtonsoft.Json;
 using Xunit;
 using Xunit.Abstractions;
 
@@ -24,7 +25,7 @@ namespace GW2SDK.Tests.Features.Subtokens
         private readonly ConfigurationFixture _configuration;
 
         private readonly SubtokenFixture _services;
-
+        
         [Fact]
         public async Task After_CreateSubtoken_Then_GetTokenInfo_ShouldBeSubtokenInfo()
         {
@@ -41,6 +42,28 @@ namespace GW2SDK.Tests.Features.Subtokens
             var tokenInfo = await _services.TokenInfoService.GetTokenInfo(settings);
 
             Assert.IsType<SubtokenInfo>(tokenInfo);
+        }
+
+        
+        [Fact]
+        public async Task Basic_SubtokenInfo_ShouldHaveNoMissingMembers()
+        {
+            var settings = new JsonSerializerSettingsBuilder()
+                .UseTraceWriter(new XunitTraceWriter(_output))
+                .Build();
+
+            _services.Http.UseAccessToken(_configuration.ApiKeyFull);
+
+            var createdSubtoken = await _services.SubtokenService.CreateSubtoken(settings);
+
+            settings = new JsonSerializerSettingsBuilder()
+                .UseMissingMemberHandling(MissingMemberHandling.Error)
+                .UseTraceWriter(new XunitTraceWriter(_output))
+                .Build();
+
+            _services.Http.UseAccessToken(createdSubtoken.Subtoken);
+
+            _ = await _services.TokenInfoService.GetTokenInfo(settings);
         }
     }
 }
