@@ -1,8 +1,8 @@
 ﻿using System;
-using GW2SDK.Features.Tokens;
+using GW2SDK.Features.Common;
 using Xunit;
 
-namespace GW2SDK.Tests.Features.Tokens
+namespace GW2SDK.Tests.Features.Common
 {
     public class PermissionTest
     {

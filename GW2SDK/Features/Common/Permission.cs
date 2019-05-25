@@ -1,4 +1,4 @@
-﻿namespace GW2SDK.Features.Tokens
+﻿namespace GW2SDK.Features.Common
 {
     public enum Permission
     {

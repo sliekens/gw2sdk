@@ -1,4 +1,5 @@
-﻿using GW2SDK.Infrastructure;
+using GW2SDK.Features.Common;
+using GW2SDK.Infrastructure;
 using GW2SDK.Infrastructure.Tokens;
 using Newtonsoft.Json;
 

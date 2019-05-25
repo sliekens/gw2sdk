@@ -1,5 +1,5 @@
 ﻿using System;
-using GW2SDK.Features.Tokens;
+using GW2SDK.Features.Common;
 
 namespace GW2SDK.Infrastructure
 {
