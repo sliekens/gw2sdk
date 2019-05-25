@@ -12,28 +12,18 @@ namespace GW2SDK.Tests.Features.Colors.Fixtures
 {
     public class ColorFixture : IAsyncLifetime
     {
-        private readonly HttpClient _http;
-
-        public ColorFixture()
-        {
-            var policy = Policy.TimeoutAsync<HttpResponseMessage>(TimeSpan.FromSeconds(3));
-            var handler = new PolicyHttpMessageHandler(policy)
-            {
-                InnerHandler = new SocketsHttpHandler()
-            };
-            _http = new HttpClient(handler, true);
-        }
-
         public string JsonArrayOfColors { get; private set; }
 
         public async Task InitializeAsync()
         {
-            var configuration = new ConfigurationFixture();
-            _http.UseBaseAddress(configuration.BaseAddress);
-            _http.UseLatestSchemaVersion();
-            var service = new ColorJsonService(_http);
+            var http = new HttpFixture();
+
+            var service = new ColorJsonService(http.Http);
+
             var response = await service.GetAllColors();
+
             response.EnsureSuccessStatusCode();
+
             JsonArrayOfColors = await response.Content.ReadAsStringAsync();
         }
 

@@ -1,44 +1,29 @@
-﻿using System;
-using System.Linq;
-using System.Net.Http;
+﻿using System.Linq;
 using System.Threading.Tasks;
 using GW2SDK.Extensions;
 using GW2SDK.Features.Colors;
 using GW2SDK.Infrastructure.Colors;
 using GW2SDK.Tests.Shared.Fixtures;
-using Microsoft.Extensions.Http;
-using Polly;
 using Xunit;
 using Xunit.Abstractions;
 
 namespace GW2SDK.Tests.Features.Colors
 {
-    public class ColorServiceTest : IClassFixture<ConfigurationFixture>
+    public class ColorServiceTest : IClassFixture<HttpFixture>
     {
-        public ColorServiceTest(ConfigurationFixture configuration, ITestOutputHelper output)
+        public ColorServiceTest(HttpFixture http, ITestOutputHelper output)
         {
-            _configuration = configuration;
+            _http = http;
             _output = output;
         }
 
-        private readonly ConfigurationFixture _configuration;
+        private readonly HttpFixture _http;
 
         private readonly ITestOutputHelper _output;
 
         private ColorService CreateSut()
         {
-            var policy = Policy.TimeoutAsync<HttpResponseMessage>(TimeSpan.FromSeconds(3));
-            var handler = new PolicyHttpMessageHandler(policy)
-            {
-                InnerHandler = new SocketsHttpHandler()
-            };
-            var http = new HttpClient(handler)
-            {
-                BaseAddress = _configuration.BaseAddress
-            };
-            http.UseLatestSchemaVersion();
-
-            var api = new ColorJsonService(http);
+            var api = new ColorJsonService(_http.Http);
             return new ColorService(api);
         }
 

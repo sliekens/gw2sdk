@@ -1,5 +1,4 @@
 ﻿using System.Net.Http;
-using GW2SDK.Extensions;
 using GW2SDK.Features.Subtokens;
 using GW2SDK.Features.Tokens;
 using GW2SDK.Infrastructure.Subtokens;
@@ -14,13 +13,9 @@ namespace GW2SDK.Tests.Features.Subtokens.Fixtures
 
         public SubtokenFixture()
         {
-            var configuration = new ConfigurationFixture();
+            var http = new HttpFixture();
 
-            Http = new HttpClient
-            {
-                BaseAddress = configuration.BaseAddress
-            };
-            Http.UseLatestSchemaVersion();
+            Http = http.HttpFullAccess;
 
             SubtokenService = new SubtokenService(new SubtokenJsonService(Http));
 

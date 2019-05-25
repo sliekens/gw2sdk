@@ -1,44 +1,29 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Net.Http;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using GW2SDK.Extensions;
 using GW2SDK.Features.Worlds;
 using GW2SDK.Infrastructure.Worlds;
 using GW2SDK.Tests.Shared.Fixtures;
-using Microsoft.Extensions.Http;
-using Polly;
 using Xunit;
 using Xunit.Abstractions;
 
 namespace GW2SDK.Tests.Features.Worlds
 {
-    public class WorldServiceTest : IClassFixture<ConfigurationFixture>
+    public class WorldServiceTest : IClassFixture<HttpFixture>
     {
-        public WorldServiceTest(ConfigurationFixture configuration, ITestOutputHelper output)
+        public WorldServiceTest(HttpFixture http, ITestOutputHelper output)
         {
-            _configuration = configuration;
+            _http = http;
             _output = output;
         }
 
-        private readonly ConfigurationFixture _configuration;
+        private readonly HttpFixture _http;
 
         private readonly ITestOutputHelper _output;
 
         private WorldService CreateSut()
         {
-            var policy = Policy.TimeoutAsync<HttpResponseMessage>(TimeSpan.FromSeconds(3));
-            var handler = new PolicyHttpMessageHandler(policy)
-            {
-                InnerHandler = new SocketsHttpHandler()
-            };
-            var http = new HttpClient(handler)
-            {
-                BaseAddress = _configuration.BaseAddress
-            };
-            http.UseLatestSchemaVersion();
-
-            var api = new WorldJsonService(http);
+            var api = new WorldJsonService(_http.Http);
             return new WorldService(api);
         }
 

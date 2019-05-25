@@ -1,6 +1,4 @@
-﻿using System.Net.Http;
-using System.Threading.Tasks;
-using GW2SDK.Extensions;
+﻿using System.Threading.Tasks;
 using GW2SDK.Infrastructure.Subtokens;
 using GW2SDK.Tests.Shared.Fixtures;
 using Xunit;
@@ -8,28 +6,19 @@ using Xunit.Abstractions;
 
 namespace GW2SDK.Tests.Features.Subtokens
 {
-    public class SubtokenJsonServiceTest : IClassFixture<ConfigurationFixture>
+    public class SubtokenJsonServiceTest : IClassFixture<HttpFixture>
     {
-        public SubtokenJsonServiceTest(ConfigurationFixture configuration, ITestOutputHelper output)
+        public SubtokenJsonServiceTest(HttpFixture http, ITestOutputHelper output)
         {
-            _configuration = configuration;
+            _http = http;
             _output = output;
         }
 
-        private readonly ConfigurationFixture _configuration;
+        private readonly HttpFixture _http;
 
         private readonly ITestOutputHelper _output;
 
-        private SubtokenJsonService CreateSut()
-        {
-            var http = new HttpClient
-            {
-                BaseAddress = _configuration.BaseAddress
-            };
-            http.UseAccessToken(_configuration.ApiKeyFull);
-            http.UseLatestSchemaVersion();
-            return new SubtokenJsonService(http);
-        }
+        private SubtokenJsonService CreateSut() => new SubtokenJsonService(_http.HttpFullAccess);
 
         [Fact]
         public async Task CreateSubtoken_ShouldNotBeEmpty()
