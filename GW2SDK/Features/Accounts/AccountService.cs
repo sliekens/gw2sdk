@@ -22,8 +22,7 @@ namespace GW2SDK.Features.Accounts
         public async Task<Account> GetAccount([CanBeNull] JsonSerializerSettings settings = null)
         {
             using (var request = new GetAccountRequest())
-            using (var response = await _http.SendAsync(request, HttpCompletionOption.ResponseHeadersRead)
-                .ConfigureAwait(false))
+            using (var response = await _http.SendAsync(request).ConfigureAwait(false))
             {
                 var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
                 if (response.StatusCode == HttpStatusCode.Forbidden)

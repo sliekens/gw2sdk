@@ -23,8 +23,7 @@ namespace GW2SDK.Features.Colors
         public async Task<IDataTransferList<int>> GetColorIds([CanBeNull] JsonSerializerSettings settings = null)
         {
             using (var request = new GetColorIdsRequest())
-            using (var response = await _http.SendAsync(request, HttpCompletionOption.ResponseHeadersRead)
-                .ConfigureAwait(false))
+            using (var response = await _http.SendAsync(request).ConfigureAwait(false))
             {
                 response.EnsureSuccessStatusCode();
                 var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
@@ -38,8 +37,7 @@ namespace GW2SDK.Features.Colors
         public async Task<Color> GetColorById(int colorId, [CanBeNull] JsonSerializerSettings settings = null)
         {
             using (var request = new GetColorByIdRequest(colorId))
-            using (var response = await _http.SendAsync(request, HttpCompletionOption.ResponseHeadersRead)
-                .ConfigureAwait(false))
+            using (var response = await _http.SendAsync(request).ConfigureAwait(false))
             {
                 response.EnsureSuccessStatusCode();
                 var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
@@ -52,8 +50,7 @@ namespace GW2SDK.Features.Colors
         {
             if (colorIds == null) throw new ArgumentNullException(nameof(colorIds));
             using (var request = new GetColorsByIdRequest(colorIds))
-            using (var response = await _http.SendAsync(request, HttpCompletionOption.ResponseHeadersRead)
-                .ConfigureAwait(false))
+            using (var response = await _http.SendAsync(request).ConfigureAwait(false))
             {
                 response.EnsureSuccessStatusCode();
                 var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
@@ -67,8 +64,7 @@ namespace GW2SDK.Features.Colors
         public async Task<IDataTransferList<Color>> GetAllColors([CanBeNull] JsonSerializerSettings settings = null)
         {
             using (var request = new GetAllColorsRequest())
-            using (var response = await _http.SendAsync(request, HttpCompletionOption.ResponseHeadersRead)
-                .ConfigureAwait(false))
+            using (var response = await _http.SendAsync(request).ConfigureAwait(false))
             {
                 response.EnsureSuccessStatusCode();
                 var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
@@ -83,8 +79,7 @@ namespace GW2SDK.Features.Colors
             [CanBeNull] JsonSerializerSettings settings = null)
         {
             using (var request = new GetColorsPageRequest(page, pageSize))
-            using (var response = await _http.SendAsync(request, HttpCompletionOption.ResponseHeadersRead)
-                .ConfigureAwait(false))
+            using (var response = await _http.SendAsync(request).ConfigureAwait(false))
             {
                 response.EnsureSuccessStatusCode();
                 var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);

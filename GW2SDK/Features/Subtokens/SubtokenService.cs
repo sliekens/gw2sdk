@@ -23,8 +23,7 @@ namespace GW2SDK.Features.Subtokens
         {
             // TODO: pass arguments!
             using (var request = new CreateSubtokenRequest())
-            using (var response = await _http.SendAsync(request, HttpCompletionOption.ResponseHeadersRead)
-                .ConfigureAwait(false))
+            using (var response = await _http.SendAsync(request).ConfigureAwait(false))
             {
                 var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
                 if (response.StatusCode == HttpStatusCode.Forbidden)

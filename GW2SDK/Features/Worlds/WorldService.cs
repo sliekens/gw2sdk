@@ -23,8 +23,7 @@ namespace GW2SDK.Features.Worlds
         public async Task<IDataTransferList<int>> GetWorldIds([CanBeNull] JsonSerializerSettings settings = null)
         {
             using (var request = new GetWorldIdsRequest())
-            using (var response = await _http.SendAsync(request, HttpCompletionOption.ResponseHeadersRead)
-                .ConfigureAwait(false))
+            using (var response = await _http.SendAsync(request).ConfigureAwait(false))
             {
                 response.EnsureSuccessStatusCode();
                 var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
@@ -38,8 +37,7 @@ namespace GW2SDK.Features.Worlds
         public async Task<World> GetWorldById(int worldId, [CanBeNull] JsonSerializerSettings settings = null)
         {
             using (var request = new GetWorldByIdRequest(worldId))
-            using (var response = await _http.SendAsync(request, HttpCompletionOption.ResponseHeadersRead)
-                .ConfigureAwait(false))
+            using (var response = await _http.SendAsync(request).ConfigureAwait(false))
             {
                 response.EnsureSuccessStatusCode();
                 var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
@@ -52,8 +50,7 @@ namespace GW2SDK.Features.Worlds
         {
             if (worldIds == null) throw new ArgumentNullException(nameof(worldIds));
             using (var request = new GetWorldsByIdRequest(worldIds))
-            using (var response = await _http.SendAsync(request, HttpCompletionOption.ResponseHeadersRead)
-                .ConfigureAwait(false))
+            using (var response = await _http.SendAsync(request).ConfigureAwait(false))
             {
                 response.EnsureSuccessStatusCode();
                 var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
@@ -67,8 +64,7 @@ namespace GW2SDK.Features.Worlds
         public async Task<IDataTransferList<World>> GetAllWorlds([CanBeNull] JsonSerializerSettings settings = null)
         {
             using (var request = new GetAllWorldsRequest())
-            using (var response = await _http.SendAsync(request, HttpCompletionOption.ResponseHeadersRead)
-                .ConfigureAwait(false))
+            using (var response = await _http.SendAsync(request).ConfigureAwait(false))
             {
                 response.EnsureSuccessStatusCode();
                 var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
@@ -83,8 +79,7 @@ namespace GW2SDK.Features.Worlds
             [CanBeNull] JsonSerializerSettings settings = null)
         {
             using (var request = new GetWorldsByPageRequest(page, pageSize))
-            using (var response = await _http.SendAsync(request, HttpCompletionOption.ResponseHeadersRead)
-                .ConfigureAwait(false))
+            using (var response = await _http.SendAsync(request).ConfigureAwait(false))
             {
                 response.EnsureSuccessStatusCode();
                 var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);

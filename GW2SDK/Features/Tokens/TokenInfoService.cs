@@ -22,8 +22,7 @@ namespace GW2SDK.Features.Tokens
         public async Task<TokenInfo> GetTokenInfo([CanBeNull] JsonSerializerSettings settings = null)
         {
             using (var request = new GetTokenInfoRequest())
-            using (var response = await _http.SendAsync(request, HttpCompletionOption.ResponseHeadersRead)
-                .ConfigureAwait(false))
+            using (var response = await _http.SendAsync(request).ConfigureAwait(false))
             {
                 var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
                 if (response.StatusCode == HttpStatusCode.Forbidden)

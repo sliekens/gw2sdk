@@ -19,8 +19,7 @@ namespace GW2SDK.Features.Builds
         public async Task<Build> GetBuild([CanBeNull] JsonSerializerSettings settings = null)
         {
             using (var request = new GetBuildRequest())
-            using (var response = await _http.SendAsync(request, HttpCompletionOption.ResponseHeadersRead)
-                .ConfigureAwait(false))
+            using (var response = await _http.SendAsync(request).ConfigureAwait(false))
             {
                 response.EnsureSuccessStatusCode();
                 var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
