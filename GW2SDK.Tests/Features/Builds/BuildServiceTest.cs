@@ -1,40 +1,23 @@
-﻿using System;
-using System.Net.Http;
-using System.Threading.Tasks;
-using GW2SDK.Extensions;
+﻿using System.Threading.Tasks;
 using GW2SDK.Features.Builds;
 using GW2SDK.Infrastructure.Builds;
 using GW2SDK.Tests.Shared.Fixtures;
-using Microsoft.Extensions.Http;
-using Polly;
 using Xunit;
 
 namespace GW2SDK.Tests.Features.Builds
 {
-    public class BuildServiceTest : IClassFixture<ConfigurationFixture>
+    public class BuildServiceTest : IClassFixture<ConfigurationFixture>, IClassFixture<HttpFixture>
     {
-        public BuildServiceTest(ConfigurationFixture configuration)
+        public BuildServiceTest(HttpFixture http)
         {
-            _configuration = configuration;
+            _http = http;
         }
 
-        private readonly ConfigurationFixture _configuration;
+        private readonly HttpFixture _http;
 
         private BuildService CreateSut()
         {
-            var policy = Policy.TimeoutAsync<HttpResponseMessage>(TimeSpan.FromSeconds(3));
-            var handler = new PolicyHttpMessageHandler(policy)
-            {
-                InnerHandler = new SocketsHttpHandler()
-            };
-            var http = new HttpClient(handler)
-            {
-                BaseAddress = _configuration.BaseAddress
-            };
-
-            http.UseLatestSchemaVersion();
-
-            var api = new BuildJsonService(http);
+            var api = new BuildJsonService(_http.Http);
             return new BuildService(api);
         }
 
