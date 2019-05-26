@@ -1,0 +1,43 @@
+﻿using System.IO;
+using System.Net.Http;
+using System.Threading.Tasks;
+using GW2SDK.Infrastructure.Accounts;
+using GW2SDK.Tests.Shared.Fixtures;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using Xunit;
+
+namespace GW2SDK.Tests.Features.Accounts.Fixtures
+{
+    public class AccountFixture : IAsyncLifetime
+    {
+        public InMemoryAccountDb Db { get; } = new InMemoryAccountDb();
+
+        public async Task InitializeAsync()
+        {
+            using (var http = new HttpFixture())
+            {
+                var basic = await GetAccountRaw(http.HttpBasicAccess);
+                Db.SetBasicAccount(basic);
+
+                var full = await GetAccountRaw(http.HttpFullAccess);
+                Db.SetFullAccount(full);
+            }
+        }
+
+        public Task DisposeAsync() => Task.CompletedTask;
+
+        private async Task<string> GetAccountRaw(HttpClient http)
+        {
+            using (var request = new GetAccountRequest())
+            using (var response = await http.SendAsync(request))
+            using (var responseReader = new StreamReader(await response.Content.ReadAsStreamAsync()))
+            using (var jsonReader = new JsonTextReader(responseReader))
+            {
+                response.EnsureSuccessStatusCode();
+                var obj = await JToken.ReadFromAsync(jsonReader);
+                return obj.ToString(Formatting.None);
+            }
+        }
+    }
+}
