@@ -4,7 +4,6 @@ using GW2SDK.Features.Worlds;
 using GW2SDK.Infrastructure;
 using GW2SDK.Tests.Shared;
 using GW2SDK.Tests.Shared.Fixtures;
-using Newtonsoft.Json;
 using Xunit;
 using Xunit.Abstractions;
 
@@ -116,57 +115,6 @@ namespace GW2SDK.Tests.Features.Worlds
             Assert.Equal(actual.Count, actual.ResultCount);
             Assert.Equal(200, actual.PageSize);
             Assert.Equal(1, actual.PageTotal);
-        }
-
-        [Fact]
-        [Trait("Feature", "Worlds")]
-        [Trait("Category", "Integration")]
-        [Trait("Importance", "Critical")]
-        public async Task World_ShouldHaveNoMissingMembers()
-        {
-            var sut = new WorldService(_http.Http);
-
-            var settings = new JsonSerializerSettingsBuilder()
-                .UseMissingMemberHandling(MissingMemberHandling.Error)
-                .UseTraceWriter(new XunitTraceWriter(_output))
-                .Build();
-
-            // Next statement throws if there are missing members
-            _ = await sut.GetAllWorlds(settings);
-        }
-
-        [Fact]
-        [Trait("Feature", "Worlds")]
-        [Trait("Category", "Integration")]
-        public async Task World_Id_ShouldBePositive()
-        {
-            var sut = new WorldService(_http.Http);
-
-            var settings = new JsonSerializerSettingsBuilder()
-                .UseTraceWriter(new XunitTraceWriter(_output))
-                .Build();
-
-            var actual = await sut.GetAllWorlds(settings);
-
-            Assert.All(actual,
-                world => Assert.InRange(world.Id, 1, int.MaxValue));
-        }
-
-        [Fact]
-        [Trait("Feature", "Worlds")]
-        [Trait("Category", "Integration")]
-        public async Task World_Name_ShouldNotBeEmpty()
-        {
-            var sut = new WorldService(_http.Http);
-
-            var settings = new JsonSerializerSettingsBuilder()
-                .UseTraceWriter(new XunitTraceWriter(_output))
-                .Build();
-
-            var actual = await sut.GetAllWorlds(settings);
-
-            Assert.All(actual,
-                world => Assert.NotEmpty(world.Name));
         }
     }
 }
