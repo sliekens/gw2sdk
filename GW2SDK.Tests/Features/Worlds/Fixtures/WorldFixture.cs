@@ -23,7 +23,7 @@ namespace GW2SDK.Tests.Features.Worlds.Fixtures
             {
                 var ids = await GetWorldIds(http.Http);
 
-                ids = ids.Except(Db.GetIds()).ToList();
+                ids = ids.Except(Db.Index).ToList();
 
                 while (ids.Count != 0)
                 {

@@ -1,5 +1,4 @@
-﻿using System.Threading.Tasks;
-using GW2SDK.Features.Worlds;
+﻿using GW2SDK.Features.Worlds;
 using GW2SDK.Infrastructure;
 using GW2SDK.Tests.Features.Worlds.Fixtures;
 using GW2SDK.Tests.Shared;
