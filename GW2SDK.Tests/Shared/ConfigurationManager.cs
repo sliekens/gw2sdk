@@ -1,15 +1,15 @@
 ﻿using System;
 using Microsoft.Extensions.Configuration;
 
-namespace GW2SDK.Tests.Shared.Fixtures
+namespace GW2SDK.Tests.Shared
 {
-    public class ConfigurationFixture
+    public class ConfigurationManager
     {
-        public ConfigurationFixture()
+        public ConfigurationManager()
         {
             Configuration = new ConfigurationBuilder()
                 .AddJsonFile("appsettings.json")
-                .AddUserSecrets<ConfigurationFixture>()
+                .AddUserSecrets<ConfigurationManager>()
                 .Build();
 
             // 2-phase build, because the next part requires configuration of its own
@@ -17,7 +17,6 @@ namespace GW2SDK.Tests.Shared.Fixtures
                 .AddConfiguration(Configuration)
                 .AddAzureKeyVault($"https://{Configuration["KeyVaultName"]}.vault.azure.net/")
                 .Build();
-
         }
 
         public IConfigurationRoot Configuration { get; }
@@ -27,5 +26,7 @@ namespace GW2SDK.Tests.Shared.Fixtures
         public string ApiKeyFull => Configuration["ApiKeyFull"];
 
         public Uri BaseAddress => new Uri(Configuration["Authority"], UriKind.Absolute);
+
+        public static ConfigurationManager Instance { get; } = new ConfigurationManager();
     }
 }

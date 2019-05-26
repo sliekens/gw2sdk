@@ -4,7 +4,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 using GW2SDK.Infrastructure.Worlds;
-using GW2SDK.Tests.Shared.Fixtures;
+using GW2SDK.Tests.Shared;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Xunit;
@@ -17,26 +17,21 @@ namespace GW2SDK.Tests.Features.Worlds.Fixtures
 
         public async Task InitializeAsync()
         {
-            await Db.LoadSnapshot();
+            var http = HttpClientFactory.CreateDefault();
 
-            using (var http = new HttpFixture())
+            var ids = await GetWorldIds(http);
+
+            ids = ids.Except(Db.Index).ToList();
+
+            while (ids.Count != 0)
             {
-                var ids = await GetWorldIds(http.Http);
-
-                ids = ids.Except(Db.Index).ToList();
-
-                while (ids.Count != 0)
+                var batch = ids.Take(200).ToList();
+                foreach (var world in await GetWorldsByIdRaw(http, batch))
                 {
-                    var batch = ids.Take(200).ToList();
-                    foreach (var world in await GetWorldsByIdRaw(http.Http, batch))
-                    {
-                        Db.AddWorld(world);
-                        ids = ids.Except(batch).ToList();
-                    }
+                    Db.AddWorld(world);
+                    ids = ids.Except(batch).ToList();
                 }
             }
-
-            await Db.CreateSnapshot();
         }
 
         public Task DisposeAsync() => Task.CompletedTask;

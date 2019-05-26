@@ -4,7 +4,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 using GW2SDK.Infrastructure.Colors;
-using GW2SDK.Tests.Shared.Fixtures;
+using GW2SDK.Tests.Shared;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Xunit;
@@ -17,26 +17,21 @@ namespace GW2SDK.Tests.Features.Colors.Fixtures
 
         public async Task InitializeAsync()
         {
-            await Db.LoadSnapshot();
+            var http = HttpClientFactory.CreateDefault();
 
-            using (var http = new HttpFixture())
+            var ids = await GetColorIds(http);
+
+            ids = ids.Except(Db.Index).ToList();
+
+            while (ids.Count != 0)
             {
-                var ids = await GetColorIds(http.Http);
-
-                ids = ids.Except(Db.Index).ToList();
-
-                while (ids.Count != 0)
+                var batch = ids.Take(200).ToList();
+                foreach (var color in await GetColorsByIdRaw(http, batch))
                 {
-                    var batch = ids.Take(200).ToList();
-                    foreach (var color in await GetColorsByIdRaw(http.Http, batch))
-                    {
-                        Db.AddColor(color);
-                        ids = ids.Except(batch).ToList();
-                    }
+                    Db.AddColor(color);
+                    ids = ids.Except(batch).ToList();
                 }
             }
-
-            await Db.CreateSnapshot();
         }
 
         public Task DisposeAsync() => Task.CompletedTask;

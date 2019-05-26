@@ -3,21 +3,17 @@ using System.Threading.Tasks;
 using GW2SDK.Features.Colors;
 using GW2SDK.Infrastructure;
 using GW2SDK.Tests.Shared;
-using GW2SDK.Tests.Shared.Fixtures;
 using Xunit;
 using Xunit.Abstractions;
 
 namespace GW2SDK.Tests.Features.Colors
 {
-    public class ColorServiceTest : IClassFixture<HttpFixture>
+    public class ColorServiceTest
     {
-        public ColorServiceTest(HttpFixture http, ITestOutputHelper output)
+        public ColorServiceTest(ITestOutputHelper output)
         {
-            _http = http;
             _output = output;
         }
-
-        private readonly HttpFixture _http;
 
         private readonly ITestOutputHelper _output;
 
@@ -26,7 +22,9 @@ namespace GW2SDK.Tests.Features.Colors
         [Trait("Category", "Integration")]
         public async Task GetColorIds_ShouldNotReturnEmptyCollection()
         {
-            var sut = new ColorService(_http.Http);
+            var http = HttpClientFactory.CreateDefault();
+
+            var sut = new ColorService(http);
 
             var settings = new JsonSerializerSettingsBuilder()
                 .UseTraceWriter(new XunitTraceWriter(_output))
@@ -42,7 +40,9 @@ namespace GW2SDK.Tests.Features.Colors
         [Trait("Category", "Integration")]
         public async Task GetColorById_ShouldNotReturnNull()
         {
-            var sut = new ColorService(_http.Http);
+            var http = HttpClientFactory.CreateDefault();
+
+            var sut = new ColorService(http);
 
             const int dyeRemoverId = 1;
 
@@ -60,7 +60,9 @@ namespace GW2SDK.Tests.Features.Colors
         [Trait("Category", "Integration")]
         public async Task GetColorsById_ShouldReturnExpectedRange()
         {
-            var sut = new ColorService(_http.Http);
+            var http = HttpClientFactory.CreateDefault();
+
+            var sut = new ColorService(http);
 
             var ids = Enumerable.Range(1, 5).ToList();
 
@@ -78,7 +80,9 @@ namespace GW2SDK.Tests.Features.Colors
         [Trait("Category", "Integration")]
         public async Task GetColorsPage_ShouldReturnExpectedLimit()
         {
-            var sut = new ColorService(_http.Http);
+            var http = HttpClientFactory.CreateDefault();
+
+            var sut = new ColorService(http);
 
             var limit = 50;
 

@@ -1,8 +1,9 @@
 ﻿using System.IO;
 using System.Net.Http;
 using System.Threading.Tasks;
+using GW2SDK.Extensions;
 using GW2SDK.Infrastructure.Accounts;
-using GW2SDK.Tests.Shared.Fixtures;
+using GW2SDK.Tests.Shared;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Xunit;
@@ -15,14 +16,15 @@ namespace GW2SDK.Tests.Features.Accounts.Fixtures
 
         public async Task InitializeAsync()
         {
-            using (var http = new HttpFixture())
-            {
-                var basic = await GetAccountRaw(http.HttpBasicAccess);
-                Db.SetBasicAccount(basic);
+            var http = HttpClientFactory.CreateDefault();
 
-                var full = await GetAccountRaw(http.HttpFullAccess);
-                Db.SetFullAccount(full);
-            }
+            http.UseAccessToken(ConfigurationManager.Instance.ApiKeyBasic);
+            var basic = await GetAccountRaw(http);
+            Db.SetBasicAccount(basic);
+
+            http.UseAccessToken(ConfigurationManager.Instance.ApiKeyFull);
+            var full = await GetAccountRaw(http);
+            Db.SetFullAccount(full);
         }
 
         public Task DisposeAsync() => Task.CompletedTask;

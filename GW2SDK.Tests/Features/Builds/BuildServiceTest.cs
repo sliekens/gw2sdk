@@ -2,31 +2,28 @@
 using GW2SDK.Features.Builds;
 using GW2SDK.Infrastructure;
 using GW2SDK.Tests.Shared;
-using GW2SDK.Tests.Shared.Fixtures;
 using Newtonsoft.Json;
 using Xunit;
 using Xunit.Abstractions;
 
 namespace GW2SDK.Tests.Features.Builds
 {
-    public class BuildServiceTest : IClassFixture<HttpFixture>
+    public class BuildServiceTest
     {
-        public BuildServiceTest(HttpFixture http, ITestOutputHelper output)
+        public BuildServiceTest(ITestOutputHelper output)
         {
-            _http = http;
             _output = output;
         }
 
         private readonly ITestOutputHelper _output;
-
-        private readonly HttpFixture _http;
 
         [Fact]
         [Trait("Feature", "Builds")]
         [Trait("Category", "Integration")]
         public async Task GetBuild_ShouldReturnBuild()
         {
-            var sut = new BuildService(_http.Http);
+            var http = HttpClientFactory.CreateDefault();
+            var sut = new BuildService(http);
 
             var settings = new JsonSerializerSettingsBuilder()
                 .UseTraceWriter(new XunitTraceWriter(_output))
@@ -43,7 +40,8 @@ namespace GW2SDK.Tests.Features.Builds
         [Trait("Importance", "Critical")]
         public async Task Build_ShouldHaveNoMissingMembers()
         {
-            var sut = new BuildService(_http.Http);
+            var http = HttpClientFactory.CreateDefault();
+            var sut = new BuildService(http);
 
             var settings = new JsonSerializerSettingsBuilder()
                 .UseMissingMemberHandling(MissingMemberHandling.Error)
@@ -59,7 +57,8 @@ namespace GW2SDK.Tests.Features.Builds
         [Trait("Category", "Integration")]
         public async Task Build_Id_ShouldBePositive()
         {
-            var sut = new BuildService(_http.Http);
+            var http = HttpClientFactory.CreateDefault();
+            var sut = new BuildService(http);
 
             var settings = new JsonSerializerSettingsBuilder()
                 .UseTraceWriter(new XunitTraceWriter(_output))

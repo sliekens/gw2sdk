@@ -1,26 +1,23 @@
 ﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
+using GW2SDK.Extensions;
 using GW2SDK.Features.Common;
 using GW2SDK.Features.Tokens;
 using GW2SDK.Infrastructure;
 using GW2SDK.Tests.Shared;
-using GW2SDK.Tests.Shared.Fixtures;
 using Newtonsoft.Json;
 using Xunit;
 using Xunit.Abstractions;
 
 namespace GW2SDK.Tests.Features.Tokens
 {
-    public class TokenInfoServiceTest : IClassFixture<HttpFixture>
+    public class TokenInfoServiceTest 
     {
-        public TokenInfoServiceTest(HttpFixture http, ITestOutputHelper output)
+        public TokenInfoServiceTest(ITestOutputHelper output)
         {
-            _http = http;
             _output = output;
         }
-
-        private readonly HttpFixture _http;
 
         private readonly ITestOutputHelper _output;
 
@@ -29,7 +26,10 @@ namespace GW2SDK.Tests.Features.Tokens
         [Trait("Category", "Integration")]
         public async Task GetTokenInfo_ShouldReturnTokenInfo()
         {
-            var sut = new TokenInfoService(_http.HttpFullAccess);
+            var http = HttpClientFactory.CreateDefault();
+            http.UseAccessToken(ConfigurationManager.Instance.ApiKeyFull);
+
+            var sut = new TokenInfoService(http);
             
             var settings = new JsonSerializerSettingsBuilder()
                 .UseTraceWriter(new XunitTraceWriter(_output))
@@ -46,7 +46,10 @@ namespace GW2SDK.Tests.Features.Tokens
         [Trait("Importance", "Critical")]
         public async Task TokenInfo_ShouldHaveNoMissingMembers()
         {
-            var sut = new TokenInfoService(_http.HttpFullAccess);
+            var http = HttpClientFactory.CreateDefault();
+            http.UseAccessToken(ConfigurationManager.Instance.ApiKeyFull);
+
+            var sut = new TokenInfoService(http);
 
             var settings = new JsonSerializerSettingsBuilder()
                 .UseMissingMemberHandling(MissingMemberHandling.Error)
@@ -62,7 +65,10 @@ namespace GW2SDK.Tests.Features.Tokens
         [Trait("Category", "Integration")]
         public async Task TokenInfo_Id_ShouldNotBeEmpty()
         {
-            var sut = new TokenInfoService(_http.HttpFullAccess);
+            var http = HttpClientFactory.CreateDefault();
+            http.UseAccessToken(ConfigurationManager.Instance.ApiKeyFull);
+
+            var sut = new TokenInfoService(http);
 
             var settings = new JsonSerializerSettingsBuilder()
                 .UseMissingMemberHandling(MissingMemberHandling.Error)
@@ -79,7 +85,10 @@ namespace GW2SDK.Tests.Features.Tokens
         [Trait("Category", "Integration")]
         public async Task TokenInfo_Name_ShouldBeGW2SDKDev()
         {
-            var sut = new TokenInfoService(_http.HttpFullAccess);
+            var http = HttpClientFactory.CreateDefault();
+            http.UseAccessToken(ConfigurationManager.Instance.ApiKeyFull);
+
+            var sut = new TokenInfoService(http);
 
             var settings = new JsonSerializerSettingsBuilder()
                 .UseMissingMemberHandling(MissingMemberHandling.Error)
@@ -99,7 +108,10 @@ namespace GW2SDK.Tests.Features.Tokens
         [Trait("Category", "Integration")]
         public async Task TokenInfo_Permissions_ShouldHaveFullPermissions()
         {
-            var sut = new TokenInfoService(_http.HttpFullAccess);
+            var http = HttpClientFactory.CreateDefault();
+            http.UseAccessToken(ConfigurationManager.Instance.ApiKeyFull);
+
+            var sut = new TokenInfoService(http);
 
             var settings = new JsonSerializerSettingsBuilder()
                 .UseMissingMemberHandling(MissingMemberHandling.Error)
