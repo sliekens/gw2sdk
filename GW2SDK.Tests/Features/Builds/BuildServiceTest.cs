@@ -41,7 +41,7 @@ namespace GW2SDK.Tests.Features.Builds
         [Trait("Feature", "Builds")]
         [Trait("Category", "Integration")]
         [Trait("Importance", "Critical")]
-        public async Task After_GetBuild_Then_Build_ShouldHaveNoMissingMembers()
+        public async Task Build_ShouldHaveNoMissingMembers()
         {
             var sut = new BuildService(_http.Http);
 
@@ -57,7 +57,7 @@ namespace GW2SDK.Tests.Features.Builds
         [Fact]
         [Trait("Feature", "Builds")]
         [Trait("Category", "Integration")]
-        public async Task After_GetBuild_Then_Build_Id_ShouldBePositive()
+        public async Task Build_Id_ShouldBePositive()
         {
             var sut = new BuildService(_http.Http);
 
