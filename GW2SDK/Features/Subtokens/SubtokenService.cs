@@ -22,13 +22,7 @@ namespace GW2SDK.Features.Subtokens
         public async Task<CreatedSubtoken> CreateSubtoken([CanBeNull] string accessToken, [CanBeNull] JsonSerializerSettings settings = null)
         {
             // TODO: pass other arguments!
-            var requestBuilder = new CreateSubtokenRequestBuilder();
-            if (!string.IsNullOrEmpty(accessToken))
-            {
-                requestBuilder.UseAccessToken(accessToken);
-            }
-
-            using (var request = requestBuilder.Build())
+            using (var request = new CreateSubtokenRequest.Builder(accessToken).GetRequest())
             using (var response = await _http.SendAsync(request).ConfigureAwait(false))
             {
                 var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);

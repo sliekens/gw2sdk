@@ -1,23 +1,37 @@
-﻿using System.Net.Http;
+﻿using System;
+using System.Net.Http;
 
 namespace GW2SDK.Infrastructure.Worlds
 {
     public sealed class GetWorldsByPageRequest : HttpRequestMessage
     {
-        public GetWorldsByPageRequest(int page, int? pageSize)
-            : base(HttpMethod.Get, GetResource(page, pageSize))
+        private GetWorldsByPageRequest([NotNull] Uri requestUri)
+            : base(HttpMethod.Get, requestUri)
         {
         }
 
-        public static string GetResource(int page, int? pageSize)
+        public sealed class Builder
         {
-            var resource = $"/v2/worlds?page={page}";
-            if (pageSize.HasValue)
+            private readonly int _page;
+
+            private readonly int? _pageSize;
+
+            public Builder(int page, int? pageSize)
             {
-                resource += $"&page_size={pageSize.Value}";
+                _page = page;
+                _pageSize = pageSize;
             }
 
-            return resource;
+            public GetWorldsByPageRequest GetRequest()
+            {
+                var resource = $"/v2/worlds?page={_page}";
+                if (_pageSize.HasValue)
+                {
+                    resource += $"&page_size={_pageSize.Value}";
+                }
+
+                return new GetWorldsByPageRequest(new Uri(resource, UriKind.Relative));
+            }
         }
     }
 }

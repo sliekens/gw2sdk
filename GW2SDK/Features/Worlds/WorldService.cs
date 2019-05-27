@@ -36,7 +36,7 @@ namespace GW2SDK.Features.Worlds
 
         public async Task<World> GetWorldById(int worldId, [CanBeNull] JsonSerializerSettings settings = null)
         {
-            using (var request = new GetWorldByIdRequest(worldId))
+            using (var request = new GetWorldByIdRequest.Builder(worldId).GetRequest())
             using (var response = await _http.SendAsync(request).ConfigureAwait(false))
             {
                 response.EnsureSuccessStatusCode();
@@ -45,11 +45,10 @@ namespace GW2SDK.Features.Worlds
             }
         }
 
-        public async Task<IDataTransferList<World>> GetWorldsById([NotNull] IReadOnlyList<int> worldIds,
-            [CanBeNull] JsonSerializerSettings settings = null)
+        public async Task<IDataTransferList<World>> GetWorldsById([NotNull] IReadOnlyList<int> worldIds, [CanBeNull] JsonSerializerSettings settings = null)
         {
             if (worldIds == null) throw new ArgumentNullException(nameof(worldIds));
-            using (var request = new GetWorldsByIdRequest(worldIds))
+            using (var request = new GetWorldsByIdRequest.Builder(worldIds).GetRequest())
             using (var response = await _http.SendAsync(request).ConfigureAwait(false))
             {
                 response.EnsureSuccessStatusCode();
@@ -75,10 +74,9 @@ namespace GW2SDK.Features.Worlds
             }
         }
 
-        public async Task<IDataTransferPage<World>> GetWorldsByPage(int page, int? pageSize = null,
-            [CanBeNull] JsonSerializerSettings settings = null)
+        public async Task<IDataTransferPage<World>> GetWorldsByPage(int page, int? pageSize = null, [CanBeNull] JsonSerializerSettings settings = null)
         {
-            using (var request = new GetWorldsByPageRequest(page, pageSize))
+            using (var request = new GetWorldsByPageRequest.Builder(page, pageSize).GetRequest())
             using (var response = await _http.SendAsync(request).ConfigureAwait(false))
             {
                 response.EnsureSuccessStatusCode();

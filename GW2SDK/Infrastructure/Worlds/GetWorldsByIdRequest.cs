@@ -7,15 +7,36 @@ namespace GW2SDK.Infrastructure.Worlds
 {
     public sealed class GetWorldsByIdRequest : HttpRequestMessage
     {
-        public GetWorldsByIdRequest([NotNull] IReadOnlyList<int> worldIds)
-            : base(HttpMethod.Get, GetResource(worldIds))
+        private GetWorldsByIdRequest([NotNull] Uri requestUri)
+            : base(HttpMethod.Get, requestUri)
         {
         }
 
-        public static string GetResource([NotNull] IReadOnlyList<int> worldIds)
+        public sealed class Builder
         {
-            if (worldIds == null) throw new ArgumentNullException(nameof(worldIds));
-            return $"/v2/worlds?ids={worldIds.ToCsv(false)}";
+            [NotNull]
+            private readonly IReadOnlyList<int> _worldIds;
+
+            public Builder([NotNull] IReadOnlyList<int> worldIds)
+            {
+                if (worldIds == null)
+                {
+                    throw new ArgumentNullException(nameof(worldIds));
+                }
+
+                if (worldIds.Count == 0)
+                {
+                    throw new ArgumentException("World IDs cannot be an empty collection.", nameof(worldIds));
+                }
+
+                _worldIds = worldIds;
+            }
+
+            public GetWorldsByIdRequest GetRequest()
+            {
+                var ids = _worldIds.ToCsv(false);
+                return new GetWorldsByIdRequest(new Uri($"/v2/worlds?ids={ids}", UriKind.Relative));
+            }
         }
     }
 }

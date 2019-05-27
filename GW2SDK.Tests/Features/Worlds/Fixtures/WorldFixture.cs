@@ -51,7 +51,7 @@ namespace GW2SDK.Tests.Features.Worlds.Fixtures
 
         private async Task<List<string>> GetWorldsByIdRaw(HttpClient http, IReadOnlyList<int> worldIds)
         {
-            using (var request = new GetWorldsByIdRequest(worldIds))
+            using (var request = new GetWorldsByIdRequest.Builder(worldIds).GetRequest())
             using (var response = await http.SendAsync(request))
             using (var responseReader = new StreamReader(await response.Content.ReadAsStreamAsync()))
             using (var jsonReader = new JsonTextReader(responseReader))

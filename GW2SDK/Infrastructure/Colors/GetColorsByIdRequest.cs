@@ -7,15 +7,36 @@ namespace GW2SDK.Infrastructure.Colors
 {
     public sealed class GetColorsByIdRequest : HttpRequestMessage
     {
-        public GetColorsByIdRequest([NotNull] IReadOnlyList<int> colorIds)
-            : base(HttpMethod.Get, GetResource(colorIds))
+        private GetColorsByIdRequest([NotNull] Uri requestUri)
+            : base(HttpMethod.Get, requestUri)
         {
         }
 
-        public static string GetResource([NotNull] IReadOnlyList<int> colorIds)
+        public sealed class Builder
         {
-            if (colorIds == null) throw new ArgumentNullException(nameof(colorIds));
-            return $"/v2/colors?ids={colorIds.ToCsv(false)}";
+            [NotNull]
+            private readonly IReadOnlyList<int> _colorIds;
+
+            public Builder([NotNull] IReadOnlyList<int> colorIds)
+            {
+                if (colorIds == null)
+                {
+                    throw new ArgumentNullException(nameof(colorIds));
+                }
+
+                if (colorIds.Count == 0)
+                {
+                    throw new ArgumentException("Color IDs cannot be an empty collection.", nameof(colorIds));
+                }
+
+                _colorIds = colorIds;
+            }
+
+            public GetColorsByIdRequest GetRequest()
+            {
+                var ids = _colorIds.ToCsv(false);
+                return new GetColorsByIdRequest(new Uri($"/v2/colors?ids={ids}", UriKind.Relative));
+            }
         }
     }
 }

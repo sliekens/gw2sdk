@@ -13,10 +13,7 @@ namespace GW2SDK.Tests.Features.Subtokens.Fixtures
         {
             var http = HttpClientFactory.CreateDefault();
 
-            var requestBuilder = new CreateSubtokenRequestBuilder();
-            requestBuilder.UseAccessToken(ConfigurationManager.Instance.ApiKeyFull);
-
-            using (var request = requestBuilder.Build())
+            using (var request = new CreateSubtokenRequest.Builder(ConfigurationManager.Instance.ApiKeyFull).GetRequest())
             using (var response = await http.SendAsync(request).ConfigureAwait(false))
             {
                 response.EnsureSuccessStatusCode();
