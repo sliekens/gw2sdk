@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
-using GW2SDK.Extensions;
 using GW2SDK.Features.Common;
 using GW2SDK.Features.Tokens;
 using GW2SDK.Infrastructure;
@@ -46,7 +45,6 @@ namespace GW2SDK.Tests.Features.Tokens
         public async Task TokenInfo_ShouldHaveNoMissingMembers()
         {
             var http = HttpClientFactory.CreateDefault();
-            http.UseAccessToken(ConfigurationManager.Instance.ApiKeyFull);
 
             var sut = new TokenInfoService(http);
 
@@ -56,7 +54,7 @@ namespace GW2SDK.Tests.Features.Tokens
                 .Build();
                 
             // Next statement throws if there are missing members
-            _ = await sut.GetTokenInfo(settings);
+            _ = await sut.GetTokenInfo(ConfigurationManager.Instance.ApiKeyFull, settings);
         }
 
         [Fact]
@@ -65,7 +63,6 @@ namespace GW2SDK.Tests.Features.Tokens
         public async Task TokenInfo_Id_ShouldNotBeEmpty()
         {
             var http = HttpClientFactory.CreateDefault();
-            http.UseAccessToken(ConfigurationManager.Instance.ApiKeyFull);
 
             var sut = new TokenInfoService(http);
 
@@ -74,7 +71,7 @@ namespace GW2SDK.Tests.Features.Tokens
                 .UseTraceWriter(new XunitTraceWriter(_output))
                 .Build();
                 
-            var actual = await sut.GetTokenInfo(settings);
+            var actual = await sut.GetTokenInfo(ConfigurationManager.Instance.ApiKeyFull, settings);
 
             Assert.NotEmpty(actual.Id);
         }
@@ -85,7 +82,6 @@ namespace GW2SDK.Tests.Features.Tokens
         public async Task TokenInfo_Name_ShouldBeGW2SDKDev()
         {
             var http = HttpClientFactory.CreateDefault();
-            http.UseAccessToken(ConfigurationManager.Instance.ApiKeyFull);
 
             var sut = new TokenInfoService(http);
 
@@ -94,7 +90,7 @@ namespace GW2SDK.Tests.Features.Tokens
                 .UseTraceWriter(new XunitTraceWriter(_output))
                 .Build();
                 
-            var actual = await sut.GetTokenInfo(settings);
+            var actual = await sut.GetTokenInfo(ConfigurationManager.Instance.ApiKeyFull, settings);
 
             // This is not intended to improve account security, only to prevent key abuse
             // The reason is that some services like GW2BLTC.com associate keys with logins but require you to use a key name of their choice
@@ -108,7 +104,6 @@ namespace GW2SDK.Tests.Features.Tokens
         public async Task TokenInfo_Permissions_ShouldHaveFullPermissions()
         {
             var http = HttpClientFactory.CreateDefault();
-            http.UseAccessToken(ConfigurationManager.Instance.ApiKeyFull);
 
             var sut = new TokenInfoService(http);
 
@@ -119,7 +114,7 @@ namespace GW2SDK.Tests.Features.Tokens
                 
             var expected = Enum.GetValues(typeof(Permission)).Cast<Permission>().ToHashSet();
 
-            var actual = await sut.GetTokenInfo(settings);
+            var actual = await sut.GetTokenInfo(ConfigurationManager.Instance.ApiKeyFull, settings);
 
             Assert.Equal(expected, actual.Permissions.ToHashSet());
         }

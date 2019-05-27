@@ -19,30 +19,15 @@ namespace GW2SDK.Features.Tokens
             _http = http ?? throw new ArgumentNullException(nameof(http));
         }
 
-        public async Task<TokenInfo> GetTokenInfo([CanBeNull] JsonSerializerSettings settings = null)
+        public async Task<TokenInfo> GetTokenInfo([CanBeNull] string accessToken, [CanBeNull] JsonSerializerSettings settings = null)
         {
-            using (var request = new GetTokenInfoRequest())
+            var requestBuilder = new GetTokenInfoRequestBuilder();
+            if (!string.IsNullOrEmpty(accessToken))
             {
-                return await HandleRequest(request, settings).ConfigureAwait(false);
-            }
-        }
-
-        public async Task<TokenInfo> GetTokenInfo([NotNull] string accessToken,
-            [CanBeNull] JsonSerializerSettings settings = null)
-        {
-            if (string.IsNullOrEmpty(accessToken))
-            {
-                throw new ArgumentException("Value cannot be null or empty.", nameof(accessToken));
+                requestBuilder.UseAccessToken(accessToken);
             }
 
-            using (var request = new GetTokenInfoRequest(accessToken))
-            {
-                return await HandleRequest(request, settings).ConfigureAwait(false);
-            }
-        }
-
-        private async Task<TokenInfo> HandleRequest(GetTokenInfoRequest request, JsonSerializerSettings settings)
-        {
+            using (var request = requestBuilder.Build())
             using (var response = await _http.SendAsync(request).ConfigureAwait(false))
             {
                 var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
