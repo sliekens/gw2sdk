@@ -18,7 +18,7 @@ namespace GW2SDK.Tests.Features.Accounts
         private readonly ITestOutputHelper _output;
 
         [Fact]
-        [Trait("Feature", "Accounts")]
+        [Trait("Feature",  "Accounts")]
         [Trait("Category", "Integration")]
         public async Task GetAccount_ShouldReturnAccount()
         {
@@ -27,9 +27,7 @@ namespace GW2SDK.Tests.Features.Accounts
 
             var sut = new AccountService(http);
 
-            var settings = new JsonSerializerSettingsBuilder()
-                .UseTraceWriter(new XunitTraceWriter(_output))
-                .Build();
+            var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output)).Build();
 
             var actual = await sut.GetAccount(settings);
 

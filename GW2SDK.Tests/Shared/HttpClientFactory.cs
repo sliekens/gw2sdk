@@ -9,11 +9,7 @@ namespace GW2SDK.Tests.Shared
         public static HttpClient CreateDefault()
         {
             var socketsHandler = new SocketsHttpHandler();
-            var policyHttpMessageHandler =
-                new PolicyHttpMessageHandler(HttpPolicy.SelectPolicy)
-                {
-                    InnerHandler = socketsHandler
-                };
+            var policyHttpMessageHandler = new PolicyHttpMessageHandler(HttpPolicy.SelectPolicy) { InnerHandler = socketsHandler };
 
             var http = new HttpClient(policyHttpMessageHandler, true);
             http.UseBaseAddress(ConfigurationManager.Instance.BaseAddress);

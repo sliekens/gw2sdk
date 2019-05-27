@@ -7,7 +7,7 @@ namespace GW2SDK.Tests.Features.Common
     public class PermissionTest
     {
         [Fact]
-        [Trait("Feature", "Tokens")]
+        [Trait("Feature",  "Tokens")]
         [Trait("Category", "Unit")]
         public void Permission_ShouldNotDefineDefaultValue()
         {

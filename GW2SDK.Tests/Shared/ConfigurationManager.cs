@@ -7,16 +7,12 @@ namespace GW2SDK.Tests.Shared
     {
         public ConfigurationManager()
         {
-            Configuration = new ConfigurationBuilder()
-                .AddJsonFile("appsettings.json")
-                .AddUserSecrets<ConfigurationManager>()
-                .Build();
+            Configuration = new ConfigurationBuilder().AddJsonFile("appsettings.json").AddUserSecrets<ConfigurationManager>().Build();
 
             // 2-phase build, because the next part requires configuration of its own
-            Configuration = new ConfigurationBuilder()
-                .AddConfiguration(Configuration)
-                .AddAzureKeyVault($"https://{Configuration["KeyVaultName"]}.vault.azure.net/")
-                .Build();
+            Configuration = new ConfigurationBuilder().AddConfiguration(Configuration)
+                                                      .AddAzureKeyVault($"https://{Configuration["KeyVaultName"]}.vault.azure.net/")
+                                                      .Build();
         }
 
         public IConfigurationRoot Configuration { get; }

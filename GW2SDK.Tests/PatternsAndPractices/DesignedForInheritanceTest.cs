@@ -37,8 +37,7 @@ namespace GW2SDK.Tests.PatternsAndPractices
                     continue;
                 }
 
-                throw new ApplicationException(
-                    $"Type '{type}' is public but not abstract, seal it or mark it as [Inheritable].");
+                throw new ApplicationException($"Type '{type}' is public but not abstract, seal it or mark it as [Inheritable].");
             }
         }
     }

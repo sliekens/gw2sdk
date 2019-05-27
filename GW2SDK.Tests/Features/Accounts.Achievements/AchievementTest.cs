@@ -18,8 +18,8 @@ namespace GW2SDK.Tests.Features.Accounts.Achievements
         private readonly ITestOutputHelper _output;
 
         [Fact]
-        [Trait("Feature", "Accounts.Achievements")]
-        [Trait("Category", "Integration")]
+        [Trait("Feature",    "Accounts.Achievements")]
+        [Trait("Category",   "Integration")]
         [Trait("Importance", "Critical")]
         public void Achievement_ShouldHaveNoMissingMembers()
         {
@@ -28,11 +28,11 @@ namespace GW2SDK.Tests.Features.Accounts.Achievements
 
             var sut = new AchievementService(http);
 
-            var settings = new JsonSerializerSettingsBuilder()
-                .UseMissingMemberHandling(MissingMemberHandling.Error)
-                .UseTraceWriter(new XunitTraceWriter(_output))
-                .Build();
+            var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output))
+                                                              .UseMissingMemberHandling(MissingMemberHandling.Error)
+                                                              .Build();
 
+            // Next statement throws if there are missing members
             _ = sut.GetAchievements(settings);
         }
     }

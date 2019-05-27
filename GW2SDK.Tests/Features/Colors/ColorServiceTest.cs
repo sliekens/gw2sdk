@@ -18,7 +18,7 @@ namespace GW2SDK.Tests.Features.Colors
         private readonly ITestOutputHelper _output;
 
         [Fact]
-        [Trait("Feature", "Colors")]
+        [Trait("Feature",  "Colors")]
         [Trait("Category", "Integration")]
         public async Task GetColorIds_ShouldNotReturnEmptyCollection()
         {
@@ -26,9 +26,7 @@ namespace GW2SDK.Tests.Features.Colors
 
             var sut = new ColorService(http);
 
-            var settings = new JsonSerializerSettingsBuilder()
-                .UseTraceWriter(new XunitTraceWriter(_output))
-                .Build();
+            var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output)).Build();
 
             var actual = await sut.GetColorIds(settings);
 
@@ -36,7 +34,7 @@ namespace GW2SDK.Tests.Features.Colors
         }
 
         [Fact]
-        [Trait("Feature", "Colors")]
+        [Trait("Feature",  "Colors")]
         [Trait("Category", "Integration")]
         public async Task GetColorById_ShouldNotReturnNull()
         {
@@ -46,9 +44,7 @@ namespace GW2SDK.Tests.Features.Colors
 
             const int dyeRemoverId = 1;
 
-            var settings = new JsonSerializerSettingsBuilder()
-                .UseTraceWriter(new XunitTraceWriter(_output))
-                .Build();
+            var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output)).Build();
 
             var actual = await sut.GetColorById(dyeRemoverId, settings);
 
@@ -56,7 +52,7 @@ namespace GW2SDK.Tests.Features.Colors
         }
 
         [Fact]
-        [Trait("Feature", "Colors")]
+        [Trait("Feature",  "Colors")]
         [Trait("Category", "Integration")]
         public async Task GetColorsById_ShouldReturnExpectedRange()
         {
@@ -66,9 +62,7 @@ namespace GW2SDK.Tests.Features.Colors
 
             var ids = Enumerable.Range(1, 5).ToList();
 
-            var settings = new JsonSerializerSettingsBuilder()
-                .UseTraceWriter(new XunitTraceWriter(_output))
-                .Build();
+            var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output)).Build();
 
             var actual = await sut.GetColorsById(ids, settings);
 
@@ -76,7 +70,7 @@ namespace GW2SDK.Tests.Features.Colors
         }
 
         [Fact]
-        [Trait("Feature", "Colors")]
+        [Trait("Feature",  "Colors")]
         [Trait("Category", "Integration")]
         public async Task GetColorsPage_ShouldReturnExpectedLimit()
         {
@@ -86,9 +80,7 @@ namespace GW2SDK.Tests.Features.Colors
 
             var limit = 50;
 
-            var settings = new JsonSerializerSettingsBuilder()
-                .UseTraceWriter(new XunitTraceWriter(_output))
-                .Build();
+            var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output)).Build();
 
             var actual = await sut.GetColorsPage(0, limit, settings);
 

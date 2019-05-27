@@ -1,5 +1,4 @@
-﻿using GW2SDK.Features.Accounts;
-using GW2SDK.Features.Subtokens;
+﻿using GW2SDK.Features.Subtokens;
 using GW2SDK.Infrastructure;
 using GW2SDK.Tests.Features.Subtokens.Fixtures;
 using GW2SDK.Tests.Shared;
@@ -18,6 +17,7 @@ namespace GW2SDK.Tests.Features.Subtokens
         }
 
         private readonly SubtokenFixture _fixture;
+
         private readonly ITestOutputHelper _output;
 
         [Fact]
@@ -26,8 +26,8 @@ namespace GW2SDK.Tests.Features.Subtokens
         [Trait("Importance", "Critical")]
         public void Subtoken_ShouldHaveNoMissingMembers()
         {
-            var settings = new JsonSerializerSettingsBuilder().UseMissingMemberHandling(MissingMemberHandling.Error)
-                                                              .UseTraceWriter(new XunitTraceWriter(_output))
+            var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output))
+                                                              .UseMissingMemberHandling(MissingMemberHandling.Error)
                                                               .Build();
 
             // Next statement throws if there are missing members

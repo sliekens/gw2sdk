@@ -21,53 +21,51 @@ namespace GW2SDK.Tests.Features.Worlds
         private readonly ITestOutputHelper _output;
 
         [Fact]
-        [Trait("Feature", "Worlds")]
-        [Trait("Category", "Integration")]
+        [Trait("Feature",    "Worlds")]
+        [Trait("Category",   "Integration")]
         [Trait("Importance", "Critical")]
         public void World_ShouldHaveNoMissingMembers()
         {
-            var settings = new JsonSerializerSettingsBuilder()
-                .UseMissingMemberHandling(MissingMemberHandling.Error)
-                .UseTraceWriter(new XunitTraceWriter(_output))
-                .Build();
+            var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output))
+                                                              .UseMissingMemberHandling(MissingMemberHandling.Error)
+                                                              .Build();
 
-            Assert.All(_fixture.Db.Worlds, json =>
-            {
-                // Next statement throws if there are missing members
-                _ = JsonConvert.DeserializeObject<World>(json, settings);
-            });
+            Assert.All(_fixture.Db.Worlds,
+                json =>
+                {
+                    // Next statement throws if there are missing members
+                    _ = JsonConvert.DeserializeObject<World>(json, settings);
+                });
         }
 
         [Fact]
-        [Trait("Feature", "Worlds")]
+        [Trait("Feature",  "Worlds")]
         [Trait("Category", "Integration")]
         public void World_Id_ShouldBePositive()
         {
-            var settings = new JsonSerializerSettingsBuilder()
-                .UseTraceWriter(new XunitTraceWriter(_output))
-                .Build();
+            var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output)).Build();
 
-            Assert.All(_fixture.Db.Worlds, json =>
-            {
-                var actual = JsonConvert.DeserializeObject<World>(json, settings);
-                Assert.InRange(actual.Id, 1, int.MaxValue);
-            });
+            Assert.All(_fixture.Db.Worlds,
+                json =>
+                {
+                    var actual = JsonConvert.DeserializeObject<World>(json, settings);
+                    Assert.InRange(actual.Id, 1, int.MaxValue);
+                });
         }
 
         [Fact]
-        [Trait("Feature", "Worlds")]
+        [Trait("Feature",  "Worlds")]
         [Trait("Category", "Integration")]
         public void World_Name_ShouldNotBeEmpty()
         {
-            var settings = new JsonSerializerSettingsBuilder()
-                .UseTraceWriter(new XunitTraceWriter(_output))
-                .Build();
+            var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output)).Build();
 
-            Assert.All(_fixture.Db.Worlds, json =>
-            {
-                var actual = JsonConvert.DeserializeObject<World>(json, settings);
-                Assert.NotEmpty(actual.Name);
-            });
+            Assert.All(_fixture.Db.Worlds,
+                json =>
+                {
+                    var actual = JsonConvert.DeserializeObject<World>(json, settings);
+                    Assert.NotEmpty(actual.Name);
+                });
         }
     }
 }

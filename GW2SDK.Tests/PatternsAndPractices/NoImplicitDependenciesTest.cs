@@ -27,8 +27,7 @@ namespace GW2SDK.Tests.PatternsAndPractices
                     continue;
                 }
 
-                Assert.True(parameterInfo.GetCustomAttribute<NotNullAttribute>() is object
-                            || parameterInfo.GetCustomAttribute<CanBeNullAttribute>() is object,
+                Assert.True(parameterInfo.GetCustomAttribute<NotNullAttribute>() is object || parameterInfo.GetCustomAttribute<CanBeNullAttribute>() is object,
                     $"Mark parameter '{parameterInfo}' as [NotNull] or [CanBeNull] in constructors of type '{@class}'.");
             }
         }

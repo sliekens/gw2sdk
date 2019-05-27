@@ -8,17 +8,13 @@ namespace GW2SDK.Tests.Shared
 {
     public class HttpPolicy
     {
-        public static IAsyncPolicy<HttpResponseMessage> Retry = HttpPolicyExtensions.HandleTransientHttpError()
-            .Or<TimeoutRejectedException>()
-            .RetryAsync(3);
+        public static IAsyncPolicy<HttpResponseMessage> Retry = HttpPolicyExtensions.HandleTransientHttpError().Or<TimeoutRejectedException>().RetryAsync(3);
 
         public static IAsyncPolicy<HttpResponseMessage> Bulkhead = Policy.BulkheadAsync<HttpResponseMessage>(600);
 
-        public static IAsyncPolicy<HttpResponseMessage> InnerTimeout =
-            Policy.TimeoutAsync<HttpResponseMessage>(TimeSpan.FromSeconds(10));
+        public static IAsyncPolicy<HttpResponseMessage> InnerTimeout = Policy.TimeoutAsync<HttpResponseMessage>(TimeSpan.FromSeconds(10));
 
-        public static IAsyncPolicy<HttpResponseMessage> OuterTimeout =
-            Policy.TimeoutAsync<HttpResponseMessage>(TimeSpan.FromSeconds(60));
+        public static IAsyncPolicy<HttpResponseMessage> OuterTimeout = Policy.TimeoutAsync<HttpResponseMessage>(TimeSpan.FromSeconds(60));
 
         public static IAsyncPolicy<HttpResponseMessage> SelectPolicy(HttpRequestMessage request)
         {

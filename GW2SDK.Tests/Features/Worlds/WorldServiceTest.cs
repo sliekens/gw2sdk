@@ -18,7 +18,7 @@ namespace GW2SDK.Tests.Features.Worlds
         private readonly ITestOutputHelper _output;
 
         [Fact]
-        [Trait("Feature", "Worlds")]
+        [Trait("Feature",  "Worlds")]
         [Trait("Category", "Integration")]
         public async Task GetWorldIds_ShouldReturnAllWorldIds()
         {
@@ -26,9 +26,7 @@ namespace GW2SDK.Tests.Features.Worlds
 
             var sut = new WorldService(http);
 
-            var settings = new JsonSerializerSettingsBuilder()
-                .UseTraceWriter(new XunitTraceWriter(_output))
-                .Build();
+            var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output)).Build();
 
             var actual = await sut.GetWorldIds(settings);
 
@@ -39,7 +37,7 @@ namespace GW2SDK.Tests.Features.Worlds
 
 
         [Fact]
-        [Trait("Feature", "Worlds")]
+        [Trait("Feature",  "Worlds")]
         [Trait("Category", "Integration")]
         public async Task GetWorldById_ShouldReturnRequestedWorld()
         {
@@ -49,9 +47,7 @@ namespace GW2SDK.Tests.Features.Worlds
 
             const int input = 1001;
 
-            var settings = new JsonSerializerSettingsBuilder()
-                .UseTraceWriter(new XunitTraceWriter(_output))
-                .Build();
+            var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output)).Build();
 
             var actual = await sut.GetWorldById(input, settings);
 
@@ -60,7 +56,7 @@ namespace GW2SDK.Tests.Features.Worlds
         }
 
         [Fact]
-        [Trait("Feature", "Worlds")]
+        [Trait("Feature",  "Worlds")]
         [Trait("Category", "Integration")]
         public async Task GetWorldsById_ShouldReturnRequestedWorlds()
         {
@@ -68,21 +64,16 @@ namespace GW2SDK.Tests.Features.Worlds
 
             var sut = new WorldService(http);
 
-            var settings = new JsonSerializerSettingsBuilder()
-                .UseTraceWriter(new XunitTraceWriter(_output))
-                .Build();
+            var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output)).Build();
 
-            var actual = await sut.GetWorldsById(new List<int> {1001, 1002, 1003}, settings);
+            var actual = await sut.GetWorldsById(new List<int> { 1001, 1002, 1003 }, settings);
 
             Assert.NotEmpty(actual);
-            Assert.Collection(actual,
-                world => Assert.Equal(1001, world.Id),
-                world => Assert.Equal(1002, world.Id),
-                world => Assert.Equal(1003, world.Id));
+            Assert.Collection(actual, world => Assert.Equal(1001, world.Id), world => Assert.Equal(1002, world.Id), world => Assert.Equal(1003, world.Id));
         }
 
         [Fact]
-        [Trait("Feature", "Worlds")]
+        [Trait("Feature",  "Worlds")]
         [Trait("Category", "Integration")]
         public async Task GetAllWorlds_ShouldReturnAllWorlds()
         {
@@ -90,9 +81,7 @@ namespace GW2SDK.Tests.Features.Worlds
 
             var sut = new WorldService(http);
 
-            var settings = new JsonSerializerSettingsBuilder()
-                .UseTraceWriter(new XunitTraceWriter(_output))
-                .Build();
+            var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output)).Build();
 
             var actual = await sut.GetAllWorlds(settings);
 
@@ -102,7 +91,7 @@ namespace GW2SDK.Tests.Features.Worlds
         }
 
         [Fact]
-        [Trait("Feature", "Worlds")]
+        [Trait("Feature",  "Worlds")]
         [Trait("Category", "Integration")]
         public async Task GetWorldsByPage_ShouldReturnAllWorlds()
         {
@@ -110,17 +99,15 @@ namespace GW2SDK.Tests.Features.Worlds
 
             var sut = new WorldService(http);
 
-            var settings = new JsonSerializerSettingsBuilder()
-                .UseTraceWriter(new XunitTraceWriter(_output))
-                .Build();
+            var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output)).Build();
 
             var actual = await sut.GetWorldsByPage(0, 200, settings);
 
             Assert.NotEmpty(actual);
             Assert.Equal(actual.Count, actual.ResultTotal);
             Assert.Equal(actual.Count, actual.ResultCount);
-            Assert.Equal(200, actual.PageSize);
-            Assert.Equal(1, actual.PageTotal);
+            Assert.Equal(200,          actual.PageSize);
+            Assert.Equal(1,            actual.PageTotal);
         }
     }
 }

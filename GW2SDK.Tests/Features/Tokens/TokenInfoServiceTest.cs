@@ -11,7 +11,7 @@ using Xunit.Abstractions;
 
 namespace GW2SDK.Tests.Features.Tokens
 {
-    public class TokenInfoServiceTest 
+    public class TokenInfoServiceTest
     {
         public TokenInfoServiceTest(ITestOutputHelper output)
         {
@@ -21,17 +21,15 @@ namespace GW2SDK.Tests.Features.Tokens
         private readonly ITestOutputHelper _output;
 
         [Fact]
-        [Trait("Feature", "Tokens")]
+        [Trait("Feature",  "Tokens")]
         [Trait("Category", "Integration")]
         public async Task GetTokenInfo_OfApiKey_ShouldReturnApiKeyInfo()
         {
             var http = HttpClientFactory.CreateDefault();
 
             var sut = new TokenInfoService(http);
-            
-            var settings = new JsonSerializerSettingsBuilder()
-                .UseTraceWriter(new XunitTraceWriter(_output))
-                .Build();
+
+            var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output)).Build();
 
             var actual = await sut.GetTokenInfo(ConfigurationManager.Instance.ApiKeyFull, settings);
 
@@ -39,8 +37,8 @@ namespace GW2SDK.Tests.Features.Tokens
         }
 
         [Fact]
-        [Trait("Feature", "Tokens")]
-        [Trait("Category", "Integration")]
+        [Trait("Feature",    "Tokens")]
+        [Trait("Category",   "Integration")]
         [Trait("Importance", "Critical")]
         public async Task TokenInfo_ShouldHaveNoMissingMembers()
         {
@@ -48,17 +46,16 @@ namespace GW2SDK.Tests.Features.Tokens
 
             var sut = new TokenInfoService(http);
 
-            var settings = new JsonSerializerSettingsBuilder()
-                .UseMissingMemberHandling(MissingMemberHandling.Error)
-                .UseTraceWriter(new XunitTraceWriter(_output))
-                .Build();
-                
+            var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output))
+                                                              .UseMissingMemberHandling(MissingMemberHandling.Error)
+                                                              .Build();
+
             // Next statement throws if there are missing members
             _ = await sut.GetTokenInfo(ConfigurationManager.Instance.ApiKeyFull, settings);
         }
 
         [Fact]
-        [Trait("Feature", "Tokens")]
+        [Trait("Feature",  "Tokens")]
         [Trait("Category", "Integration")]
         public async Task TokenInfo_Id_ShouldNotBeEmpty()
         {
@@ -66,18 +63,17 @@ namespace GW2SDK.Tests.Features.Tokens
 
             var sut = new TokenInfoService(http);
 
-            var settings = new JsonSerializerSettingsBuilder()
-                .UseMissingMemberHandling(MissingMemberHandling.Error)
-                .UseTraceWriter(new XunitTraceWriter(_output))
-                .Build();
-                
+            var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output))
+                                                              .UseMissingMemberHandling(MissingMemberHandling.Error)
+                                                              .Build();
+
             var actual = await sut.GetTokenInfo(ConfigurationManager.Instance.ApiKeyFull, settings);
 
             Assert.NotEmpty(actual.Id);
         }
 
         [Fact]
-        [Trait("Feature", "Tokens")]
+        [Trait("Feature",  "Tokens")]
         [Trait("Category", "Integration")]
         public async Task TokenInfo_Name_ShouldBeGW2SDKDev()
         {
@@ -85,11 +81,10 @@ namespace GW2SDK.Tests.Features.Tokens
 
             var sut = new TokenInfoService(http);
 
-            var settings = new JsonSerializerSettingsBuilder()
-                .UseMissingMemberHandling(MissingMemberHandling.Error)
-                .UseTraceWriter(new XunitTraceWriter(_output))
-                .Build();
-                
+            var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output))
+                                                              .UseMissingMemberHandling(MissingMemberHandling.Error)
+                                                              .Build();
+
             var actual = await sut.GetTokenInfo(ConfigurationManager.Instance.ApiKeyFull, settings);
 
             // This is not intended to improve account security, only to prevent key abuse
@@ -99,7 +94,7 @@ namespace GW2SDK.Tests.Features.Tokens
         }
 
         [Fact]
-        [Trait("Feature", "Tokens")]
+        [Trait("Feature",  "Tokens")]
         [Trait("Category", "Integration")]
         public async Task TokenInfo_Permissions_ShouldHaveFullPermissions()
         {
@@ -107,11 +102,10 @@ namespace GW2SDK.Tests.Features.Tokens
 
             var sut = new TokenInfoService(http);
 
-            var settings = new JsonSerializerSettingsBuilder()
-                .UseMissingMemberHandling(MissingMemberHandling.Error)
-                .UseTraceWriter(new XunitTraceWriter(_output))
-                .Build();
-                
+            var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output))
+                                                              .UseMissingMemberHandling(MissingMemberHandling.Error)
+                                                              .Build();
+
             var expected = Enum.GetValues(typeof(Permission)).Cast<Permission>().ToHashSet();
 
             var actual = await sut.GetTokenInfo(ConfigurationManager.Instance.ApiKeyFull, settings);

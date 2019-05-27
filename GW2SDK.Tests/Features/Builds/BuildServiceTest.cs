@@ -18,16 +18,14 @@ namespace GW2SDK.Tests.Features.Builds
         private readonly ITestOutputHelper _output;
 
         [Fact]
-        [Trait("Feature", "Builds")]
+        [Trait("Feature",  "Builds")]
         [Trait("Category", "Integration")]
         public async Task GetBuild_ShouldReturnBuild()
         {
             var http = HttpClientFactory.CreateDefault();
             var sut = new BuildService(http);
 
-            var settings = new JsonSerializerSettingsBuilder()
-                .UseTraceWriter(new XunitTraceWriter(_output))
-                .Build();
+            var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output)).Build();
 
             var actual = await sut.GetBuild(settings);
 
@@ -35,34 +33,31 @@ namespace GW2SDK.Tests.Features.Builds
         }
 
         [Fact]
-        [Trait("Feature", "Builds")]
-        [Trait("Category", "Integration")]
+        [Trait("Feature",    "Builds")]
+        [Trait("Category",   "Integration")]
         [Trait("Importance", "Critical")]
         public async Task Build_ShouldHaveNoMissingMembers()
         {
             var http = HttpClientFactory.CreateDefault();
             var sut = new BuildService(http);
 
-            var settings = new JsonSerializerSettingsBuilder()
-                .UseMissingMemberHandling(MissingMemberHandling.Error)
-                .UseTraceWriter(new XunitTraceWriter(_output))
-                .Build();
+            var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output))
+                                                              .UseMissingMemberHandling(MissingMemberHandling.Error)
+                                                              .Build();
 
             // Next statement throws if there are missing members
             _ = await sut.GetBuild(settings);
         }
 
         [Fact]
-        [Trait("Feature", "Builds")]
+        [Trait("Feature",  "Builds")]
         [Trait("Category", "Integration")]
         public async Task Build_Id_ShouldBePositive()
         {
             var http = HttpClientFactory.CreateDefault();
             var sut = new BuildService(http);
 
-            var settings = new JsonSerializerSettingsBuilder()
-                .UseTraceWriter(new XunitTraceWriter(_output))
-                .Build();
+            var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output)).Build();
 
             var actual = await sut.GetBuild(settings);
 
