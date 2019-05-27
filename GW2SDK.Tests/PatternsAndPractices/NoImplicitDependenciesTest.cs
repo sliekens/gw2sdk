@@ -19,7 +19,7 @@ namespace GW2SDK.Tests.PatternsAndPractices
         {
             var classes = _fixture.Assembly.GetTypes().Where(type => type.IsClass).ToList();
             foreach (var @class in classes)
-            foreach (var constructorInfo in @class.GetConstructors())
+            foreach (var constructorInfo in @class.GetConstructors(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic))
             foreach (var parameterInfo in constructorInfo.GetParameters())
             {
                 if (parameterInfo.ParameterType.IsValueType)
