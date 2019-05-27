@@ -20,13 +20,12 @@ namespace GW2SDK.Infrastructure.Tokens
             AccessToken = new AuthenticationHeaderValue("Bearer", accessToken);
         }
 
-        public GetTokenInfoRequest Build() =>
-            new GetTokenInfoRequest(HttpMethod.Get, new Uri(Path, UriKind.Relative))
+        public GetTokenInfoRequest Build() => new GetTokenInfoRequest(HttpMethod.Get, new Uri(Path, UriKind.Relative))
+        {
+            Headers =
             {
-                Headers =
-                {
-                    Authorization = AccessToken
-                }
-            };
+                Authorization = AccessToken
+            }
+        };
     }
 }
