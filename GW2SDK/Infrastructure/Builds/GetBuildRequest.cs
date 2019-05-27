@@ -6,10 +6,8 @@ namespace GW2SDK.Infrastructure.Builds
     public sealed class GetBuildRequest : HttpRequestMessage
     {
         public GetBuildRequest()
-            : base(HttpMethod.Get, Resource)
+            : base(HttpMethod.Get, new Uri("/v2/build", UriKind.Relative))
         {
         }
-
-        public static Uri Resource => new Uri("/v2/build", UriKind.Relative);
     }
 }
