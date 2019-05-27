@@ -24,10 +24,9 @@ namespace GW2SDK.Tests.Features.Tokens
         [Fact]
         [Trait("Feature", "Tokens")]
         [Trait("Category", "Integration")]
-        public async Task GetTokenInfo_ShouldReturnTokenInfo()
+        public async Task GetTokenInfo_OfApiKey_ShouldReturnApiKeyInfo()
         {
             var http = HttpClientFactory.CreateDefault();
-            http.UseAccessToken(ConfigurationManager.Instance.ApiKeyFull);
 
             var sut = new TokenInfoService(http);
             
@@ -35,9 +34,9 @@ namespace GW2SDK.Tests.Features.Tokens
                 .UseTraceWriter(new XunitTraceWriter(_output))
                 .Build();
 
-            var actual = await sut.GetTokenInfo(settings);
+            var actual = await sut.GetTokenInfo(ConfigurationManager.Instance.ApiKeyFull, settings);
 
-            Assert.IsAssignableFrom<TokenInfo>(actual);
+            Assert.IsType<ApiKeyInfo>(actual);
         }
 
         [Fact]
