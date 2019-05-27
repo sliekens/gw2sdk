@@ -5,7 +5,8 @@ namespace GW2SDK.Infrastructure.Tokens
 {
     public sealed class GetTokenInfoRequest : HttpRequestMessage
     {
-        public GetTokenInfoRequest(HttpMethod method, Uri requestUri) : base(method, requestUri)
+        public GetTokenInfoRequest([NotNull] HttpMethod method, [NotNull] Uri requestUri)
+            : base(method, requestUri)
         {
         }
     }

@@ -5,7 +5,7 @@ namespace GW2SDK.Infrastructure.Subtokens
 {
     public sealed class CreateSubtokenRequest : HttpRequestMessage
     {
-        public CreateSubtokenRequest(HttpMethod method, Uri requestUri) : base(method, requestUri)
+        public CreateSubtokenRequest([NotNull] HttpMethod method, [NotNull] Uri requestUri) : base(method, requestUri)
         {
         }
     }
