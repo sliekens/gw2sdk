@@ -1,5 +1,4 @@
 ﻿using System.Threading.Tasks;
-using GW2SDK.Extensions;
 using GW2SDK.Features.Subtokens;
 using GW2SDK.Infrastructure;
 using GW2SDK.Tests.Shared;
@@ -21,15 +20,12 @@ namespace GW2SDK.Tests.Features.Subtokens
         public async Task CreateSubtoken_ShouldReturnCreatedSubtoken()
         {
             var http = HttpClientFactory.CreateDefault();
-            http.UseAccessToken(ConfigurationManager.Instance.ApiKeyFull);
 
             var sut = new SubtokenService(http);
 
-            var settings = new JsonSerializerSettingsBuilder()
-                .UseTraceWriter(new XunitTraceWriter(_output))
-                .Build();
+            var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output)).Build();
 
-            var actual = await sut.CreateSubtoken(settings);
+            var actual = await sut.CreateSubtoken(ConfigurationManager.Instance.ApiKeyFull, settings);
 
             Assert.IsType<CreatedSubtoken>(actual);
         }
