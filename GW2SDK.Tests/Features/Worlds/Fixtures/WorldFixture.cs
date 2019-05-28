@@ -19,7 +19,7 @@ namespace GW2SDK.Tests.Features.Worlds.Fixtures
         {
             var http = HttpClientFactory.CreateDefault();
 
-            // Seed InMemoryColorDb with API data for later use in integration tests
+            // Seed InMemoryWorldDb with API data for later use in integration tests
             foreach (var world in await GetAllWorldsRaw(http))
             {
                 Db.AddWorld(world);
