@@ -19,44 +19,25 @@ namespace GW2SDK.Tests.Features.Worlds.Fixtures
         {
             var http = HttpClientFactory.CreateDefault();
 
-            var ids = await GetWorldIds(http);
-
-            ids = ids.Except(Db.Index).ToList();
-
-            while (ids.Count != 0)
+            // Seed InMemoryColorDb with API data for later use in integration tests
+            foreach (var world in await GetAllWorldsRaw(http))
             {
-                var batch = ids.Take(200).ToList();
-                foreach (var world in await GetWorldsByIdRaw(http, batch))
-                {
-                    Db.AddWorld(world);
-                    ids = ids.Except(batch).ToList();
-                }
+                Db.AddWorld(world);
             }
         }
 
         public Task DisposeAsync() => Task.CompletedTask;
 
-        private async Task<List<int>> GetWorldIds(HttpClient http)
+        private async Task<List<string>> GetAllWorldsRaw(HttpClient http)
         {
-            using (var request = new GetWorldIdsRequest())
+            using (var request = new GetAllWorldsRequest())
             using (var response = await http.SendAsync(request))
             using (var responseReader = new StreamReader(await response.Content.ReadAsStreamAsync()))
             using (var jsonReader = new JsonTextReader(responseReader))
             {
                 response.EnsureSuccessStatusCode();
-                var serializer = new JsonSerializer();
-                return serializer.Deserialize<List<int>>(jsonReader);
-            }
-        }
 
-        private async Task<List<string>> GetWorldsByIdRaw(HttpClient http, IReadOnlyList<int> worldIds)
-        {
-            using (var request = new GetWorldsByIdRequest.Builder(worldIds).GetRequest())
-            using (var response = await http.SendAsync(request))
-            using (var responseReader = new StreamReader(await response.Content.ReadAsStreamAsync()))
-            using (var jsonReader = new JsonTextReader(responseReader))
-            {
-                response.EnsureSuccessStatusCode();
+                // API returns a JSON array but we want a List of JSON objects instead
                 var array = await JToken.ReadFromAsync(jsonReader);
                 return array.Children<JObject>().Select(world => world.ToString(Formatting.None)).ToList();
             }
