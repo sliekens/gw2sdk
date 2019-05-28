@@ -20,7 +20,7 @@ namespace GW2SDK.Tests.Features.Worlds.Fixtures
             var http = HttpClientFactory.CreateDefault();
 
             // Seed InMemoryWorldDb with API data for later use in integration tests
-            foreach (var world in await GetAllWorldsRaw(http))
+            foreach (var world in await GetAllJsonWorlds(http))
             {
                 Db.AddWorld(world);
             }
@@ -28,7 +28,7 @@ namespace GW2SDK.Tests.Features.Worlds.Fixtures
 
         public Task DisposeAsync() => Task.CompletedTask;
 
-        private async Task<List<string>> GetAllWorldsRaw(HttpClient http)
+        private async Task<List<string>> GetAllJsonWorlds(HttpClient http)
         {
             using (var request = new GetAllWorldsRequest())
             using (var response = await http.SendAsync(request))

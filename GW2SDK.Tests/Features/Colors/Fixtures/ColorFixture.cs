@@ -20,7 +20,7 @@ namespace GW2SDK.Tests.Features.Colors.Fixtures
             var http = HttpClientFactory.CreateDefault();
 
             // Seed InMemoryColorDb with API data for later use in integration tests
-            foreach (var color in await GetAllColorsRaw(http))
+            foreach (var color in await GetAllJsonColors(http))
             {
                 Db.AddColor(color);
             }
@@ -28,7 +28,7 @@ namespace GW2SDK.Tests.Features.Colors.Fixtures
 
         public Task DisposeAsync() => Task.CompletedTask;
 
-        private async Task<List<string>> GetAllColorsRaw(HttpClient http)
+        private async Task<List<string>> GetAllJsonColors(HttpClient http)
         {
             using (var request = new GetAllColorsRequest())
             using (var response = await http.SendAsync(request))
