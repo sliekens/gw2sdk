@@ -3,7 +3,7 @@
 namespace GW2SDK.Features.Accounts.Achievements
 {
     [DataTransferObject]
-    public sealed class Achievement
+    public sealed class AccountAchievement
     {
         public int Id { get; set; }
 
@@ -16,10 +16,8 @@ namespace GW2SDK.Features.Accounts.Achievements
 
         public bool Done { get; set; }
 
-        [CanBeNull]
         public int? Repeated { get; set; }
 
-        [CanBeNull]
         public bool? Unlocked { get; set; }
     }
 }
