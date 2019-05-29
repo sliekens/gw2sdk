@@ -5,9 +5,9 @@ using GW2SDK.Extensions;
 
 namespace GW2SDK.Infrastructure.Colors
 {
-    public sealed class GetColorsByIdRequest : HttpRequestMessage
+    public sealed class GetColorsByIdsRequest : HttpRequestMessage
     {
-        private GetColorsByIdRequest([NotNull] Uri requestUri)
+        private GetColorsByIdsRequest([NotNull] Uri requestUri)
             : base(HttpMethod.Get, requestUri)
         {
         }
@@ -32,10 +32,10 @@ namespace GW2SDK.Infrastructure.Colors
                 _colorIds = colorIds;
             }
 
-            public GetColorsByIdRequest GetRequest()
+            public GetColorsByIdsRequest GetRequest()
             {
                 var ids = _colorIds.ToCsv(false);
-                return new GetColorsByIdRequest(new Uri($"/v2/colors?ids={ids}", UriKind.Relative));
+                return new GetColorsByIdsRequest(new Uri($"/v2/colors?ids={ids}", UriKind.Relative));
             }
         }
     }

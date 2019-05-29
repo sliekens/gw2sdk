@@ -30,7 +30,7 @@ namespace GW2SDK.Tests.Features.Colors.Fixtures
 
         private async Task<List<string>> GetAllJsonColors(HttpClient http)
         {
-            using (var request = new GetAllColorsRequest())
+            using (var request = new GetColorsRequest())
             using (var response = await http.SendAsync(request))
             using (var responseReader = new StreamReader(await response.Content.ReadAsStreamAsync()))
             using (var jsonReader = new JsonTextReader(responseReader))

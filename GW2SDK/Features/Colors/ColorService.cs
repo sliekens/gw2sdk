@@ -45,11 +45,11 @@ namespace GW2SDK.Features.Colors
             }
         }
 
-        public async Task<IDataTransferList<Color>> GetColorsById([NotNull] IReadOnlyList<int> colorIds,
+        public async Task<IDataTransferList<Color>> GetColorsByIds([NotNull] IReadOnlyList<int> colorIds,
             [CanBeNull] JsonSerializerSettings settings = null)
         {
             if (colorIds == null) throw new ArgumentNullException(nameof(colorIds));
-            using (var request = new GetColorsByIdRequest.Builder(colorIds).GetRequest())
+            using (var request = new GetColorsByIdsRequest.Builder(colorIds).GetRequest())
             using (var response = await _http.SendAsync(request).ConfigureAwait(false))
             {
                 response.EnsureSuccessStatusCode();
@@ -61,9 +61,9 @@ namespace GW2SDK.Features.Colors
             }
         }
 
-        public async Task<IDataTransferList<Color>> GetAllColors([CanBeNull] JsonSerializerSettings settings = null)
+        public async Task<IDataTransferList<Color>> GetColors([CanBeNull] JsonSerializerSettings settings = null)
         {
-            using (var request = new GetAllColorsRequest())
+            using (var request = new GetColorsRequest())
             using (var response = await _http.SendAsync(request).ConfigureAwait(false))
             {
                 response.EnsureSuccessStatusCode();
@@ -75,10 +75,10 @@ namespace GW2SDK.Features.Colors
             }
         }
 
-        public async Task<IDataTransferPage<Color>> GetColorsPage(int page, int? pageSize,
+        public async Task<IDataTransferPage<Color>> GetColorsByPage(int page, int? pageSize,
             [CanBeNull] JsonSerializerSettings settings = null)
         {
-            using (var request = new GetColorsPageRequest.Builder(page, pageSize).GetRequest())
+            using (var request = new GetColorsByPageRequest.Builder(page, pageSize).GetRequest())
             using (var response = await _http.SendAsync(request).ConfigureAwait(false))
             {
                 response.EnsureSuccessStatusCode();

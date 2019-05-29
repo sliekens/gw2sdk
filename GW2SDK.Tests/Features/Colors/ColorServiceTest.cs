@@ -54,7 +54,7 @@ namespace GW2SDK.Tests.Features.Colors
         [Fact]
         [Trait("Feature",  "Colors")]
         [Trait("Category", "Integration")]
-        public async Task GetColorsById_ShouldReturnExpectedRange()
+        public async Task GetColorsByIds_ShouldReturnExpectedRange()
         {
             var http = HttpClientFactory.CreateDefault();
 
@@ -64,7 +64,7 @@ namespace GW2SDK.Tests.Features.Colors
 
             var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output)).Build();
 
-            var actual = await sut.GetColorsById(ids, settings);
+            var actual = await sut.GetColorsByIds(ids, settings);
 
             Assert.Equal(ids, actual.Select(color => color.Id));
         }
@@ -72,7 +72,7 @@ namespace GW2SDK.Tests.Features.Colors
         [Fact]
         [Trait("Feature",  "Colors")]
         [Trait("Category", "Integration")]
-        public async Task GetColorsPage_ShouldReturnExpectedLimit()
+        public async Task GetColorsByPage_ShouldReturnExpectedLimit()
         {
             var http = HttpClientFactory.CreateDefault();
 
@@ -82,7 +82,7 @@ namespace GW2SDK.Tests.Features.Colors
 
             var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output)).Build();
 
-            var actual = await sut.GetColorsPage(0, limit, settings);
+            var actual = await sut.GetColorsByPage(0, limit, settings);
 
             Assert.InRange(actual.Count, 0, limit);
         }

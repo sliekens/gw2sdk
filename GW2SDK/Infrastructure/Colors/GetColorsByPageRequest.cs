@@ -3,9 +3,9 @@ using System.Net.Http;
 
 namespace GW2SDK.Infrastructure.Colors
 {
-    public sealed class GetColorsPageRequest : HttpRequestMessage
+    public sealed class GetColorsByPageRequest : HttpRequestMessage
     {
-        private GetColorsPageRequest([NotNull] Uri requestUri)
+        private GetColorsByPageRequest([NotNull] Uri requestUri)
             : base(HttpMethod.Get, requestUri)
         {
         }
@@ -22,7 +22,7 @@ namespace GW2SDK.Infrastructure.Colors
                 _pageSize = pageSize;
             }
 
-            public GetColorsPageRequest GetRequest()
+            public GetColorsByPageRequest GetRequest()
             {
                 var resource = $"/v2/colors?page={_page}";
                 if (_pageSize.HasValue)
@@ -30,7 +30,7 @@ namespace GW2SDK.Infrastructure.Colors
                     resource += $"&page_size={_pageSize.Value}";
                 }
 
-                return new GetColorsPageRequest(new Uri(resource, UriKind.Relative));
+                return new GetColorsByPageRequest(new Uri(resource, UriKind.Relative));
             }
         }
     }
