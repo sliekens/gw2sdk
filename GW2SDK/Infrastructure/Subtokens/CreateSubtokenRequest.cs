@@ -13,7 +13,7 @@ namespace GW2SDK.Infrastructure.Subtokens
 
         public sealed class Builder
         {
-            public Builder([CanBeNull] string accessToken)
+            public Builder([CanBeNull] string accessToken = null)
             {
                 if (!string.IsNullOrEmpty(accessToken))
                 {
