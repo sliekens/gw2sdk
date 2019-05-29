@@ -19,7 +19,7 @@ namespace GW2SDK.Features.Subtokens
             _http = http ?? throw new ArgumentNullException(nameof(http));
         }
 
-        public async Task<CreatedSubtoken> CreateSubtoken([CanBeNull] string accessToken, [CanBeNull] JsonSerializerSettings settings = null)
+        public async Task<CreatedSubtoken> CreateSubtoken([CanBeNull] string accessToken = null, [CanBeNull] JsonSerializerSettings settings = null)
         {
             // TODO: pass other arguments!
             using (var request = new CreateSubtokenRequest.Builder(accessToken).GetRequest())
