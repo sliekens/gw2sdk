@@ -47,7 +47,16 @@ namespace GW2SDK.Features.Worlds
 
         public async Task<IDataTransferList<World>> GetWorldsByIds([NotNull] IReadOnlyList<int> worldIds, [CanBeNull] JsonSerializerSettings settings = null)
         {
-            if (worldIds == null) throw new ArgumentNullException(nameof(worldIds));
+            if (worldIds == null)
+            {
+                throw new ArgumentNullException(nameof(worldIds));
+            }
+
+            if (worldIds.Count == 0)
+            {
+                throw new ArgumentException("World IDs cannot be an empty collection.", nameof(worldIds));
+            }
+
             using (var request = new GetWorldsByIdsRequest.Builder(worldIds).GetRequest())
             using (var response = await _http.SendAsync(request).ConfigureAwait(false))
             {

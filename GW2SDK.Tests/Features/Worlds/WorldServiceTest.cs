@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using GW2SDK.Features.Worlds;
 using GW2SDK.Infrastructure;
@@ -70,6 +72,36 @@ namespace GW2SDK.Tests.Features.Worlds
 
             Assert.NotEmpty(actual);
             Assert.Collection(actual, world => Assert.Equal(1001, world.Id), world => Assert.Equal(1002, world.Id), world => Assert.Equal(1003, world.Id));
+        }
+        
+        [Fact]
+        [Trait("Feature",  "Worlds")]
+        [Trait("Category", "Unit")]
+        public async Task GetWorldsByIds_WithIdsNull_ShouldThrowArgumentNullException()
+        {
+            var http = HttpClientFactory.CreateDefault();
+
+            var sut = new WorldService(http);
+
+            await Assert.ThrowsAsync<ArgumentNullException>("worldIds", async () =>
+            {
+                await sut.GetWorldsByIds(null);
+            });
+        }
+        
+        [Fact]
+        [Trait("Feature",  "Worlds")]
+        [Trait("Category", "Unit")]
+        public async Task GetWorldsByIds_WithIdsEmpty_ShouldThrowArgumentException()
+        {
+            var http = HttpClientFactory.CreateDefault();
+
+            var sut = new WorldService(http);
+
+            await Assert.ThrowsAsync<ArgumentException>("worldIds", async () =>
+            {
+                await sut.GetWorldsByIds(Enumerable.Empty<int>().ToList());
+            });
         }
 
         [Fact]

@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 using GW2SDK.Features.Colors;
 using GW2SDK.Infrastructure;
@@ -49,6 +50,36 @@ namespace GW2SDK.Tests.Features.Colors
             var actual = await sut.GetColorById(dyeRemoverId, settings);
 
             Assert.NotNull(actual);
+        }
+
+        [Fact]
+        [Trait("Feature",  "Colors")]
+        [Trait("Category", "Unit")]
+        public async Task GetColorsByIds_WithIdsNull_ShouldThrowArgumentNullException()
+        {
+            var http = HttpClientFactory.CreateDefault();
+
+            var sut = new ColorService(http);
+
+            await Assert.ThrowsAsync<ArgumentNullException>("colorIds", async () =>
+            {
+                await sut.GetColorsByIds(null);
+            });
+        }
+
+        [Fact]
+        [Trait("Feature",  "Colors")]
+        [Trait("Category", "Unit")]
+        public async Task GetColorsByIds_WithIdsEmpty_ShouldThrowArgumentNullException()
+        {
+            var http = HttpClientFactory.CreateDefault();
+
+            var sut = new ColorService(http);
+
+            await Assert.ThrowsAsync<ArgumentException>("colorIds", async () =>
+            {
+                await sut.GetColorsByIds(Enumerable.Empty<int>().ToList());
+            });
         }
 
         [Fact]

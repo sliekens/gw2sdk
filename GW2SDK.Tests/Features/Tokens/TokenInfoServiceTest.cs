@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
+using GW2SDK.Extensions;
 using GW2SDK.Features.Common;
 using GW2SDK.Features.Tokens;
 using GW2SDK.Infrastructure;
@@ -23,7 +24,7 @@ namespace GW2SDK.Tests.Features.Tokens
         [Fact]
         [Trait("Feature",  "Tokens")]
         [Trait("Category", "Integration")]
-        public async Task GetTokenInfo_OfApiKey_ShouldReturnApiKeyInfo()
+        public async Task GetTokenInfo_WithApiKey_ShouldReturnApiKeyInfo()
         {
             var http = HttpClientFactory.CreateDefault();
 
@@ -34,6 +35,42 @@ namespace GW2SDK.Tests.Features.Tokens
             var actual = await sut.GetTokenInfo(ConfigurationManager.Instance.ApiKeyFull, settings);
 
             Assert.IsType<ApiKeyInfo>(actual);
+        }
+
+        [Fact]
+        [Trait("Feature",  "Tokens")]
+        [Trait("Category", "Integration")]
+        public async Task GetTokenInfo_WithApiKeyInDefaultRequestHeaders_ShouldReturnApiKeyInfo()
+        {
+            var http = HttpClientFactory.CreateDefault();
+            http.UseAccessToken(ConfigurationManager.Instance.ApiKeyFull);
+
+            var sut = new TokenInfoService(http);
+
+            var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output)).Build();
+
+            var actual = await sut.GetTokenInfo(null, settings);
+
+            Assert.IsType<ApiKeyInfo>(actual);
+        }
+
+        [Fact]
+        [Trait("Feature",  "Tokens")]
+        [Trait("Category", "Integration")]
+        public async Task GetTokenInfo_WithAccessTokenNull_ShouldThrowUnauthorizedOperationException()
+        {
+            var http = HttpClientFactory.CreateDefault();
+
+            var sut = new TokenInfoService(http);
+
+            var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output)).Build();
+
+
+            await Assert.ThrowsAsync<UnauthorizedOperationException>(async () =>
+            {
+                // Next statement should throw because argument is null and HttpClient.DefaultRequestHeaders is not configured
+                _ = await sut.GetTokenInfo(null, settings);
+            });
         }
 
         [Fact]
