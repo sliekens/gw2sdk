@@ -29,7 +29,7 @@ namespace GW2SDK.Tests.Features.Subtokens
 
             var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output)).Build();
 
-            var actual = await sut.CreateSubtoken(ConfigurationManager.Instance.ApiKeyFull, settings);
+            var actual = await sut.CreateSubtoken(ConfigurationManager.Instance.ApiKeyFull, settings: settings);
 
             Assert.IsType<CreatedSubtoken>(actual);
         }
@@ -46,7 +46,7 @@ namespace GW2SDK.Tests.Features.Subtokens
 
             var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output)).Build();
 
-            var actual = await sut.CreateSubtoken(null, settings);
+            var actual = await sut.CreateSubtoken(null, settings: settings);
 
             Assert.IsType<CreatedSubtoken>(actual);
         }
@@ -65,7 +65,7 @@ namespace GW2SDK.Tests.Features.Subtokens
             await Assert.ThrowsAsync<UnauthorizedOperationException>(async () =>
             {
                 // Next statement should throw because argument is null and HttpClient.DefaultRequestHeaders is not configured
-                _ = await sut.CreateSubtoken(null, settings);
+                _ = await sut.CreateSubtoken(null, settings: settings);
             });
         }
     }
