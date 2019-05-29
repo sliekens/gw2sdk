@@ -45,10 +45,10 @@ namespace GW2SDK.Features.Worlds
             }
         }
 
-        public async Task<IDataTransferList<World>> GetWorldsById([NotNull] IReadOnlyList<int> worldIds, [CanBeNull] JsonSerializerSettings settings = null)
+        public async Task<IDataTransferList<World>> GetWorldsByIds([NotNull] IReadOnlyList<int> worldIds, [CanBeNull] JsonSerializerSettings settings = null)
         {
             if (worldIds == null) throw new ArgumentNullException(nameof(worldIds));
-            using (var request = new GetWorldsByIdRequest.Builder(worldIds).GetRequest())
+            using (var request = new GetWorldsByIdsRequest.Builder(worldIds).GetRequest())
             using (var response = await _http.SendAsync(request).ConfigureAwait(false))
             {
                 response.EnsureSuccessStatusCode();
@@ -60,9 +60,9 @@ namespace GW2SDK.Features.Worlds
             }
         }
 
-        public async Task<IDataTransferList<World>> GetAllWorlds([CanBeNull] JsonSerializerSettings settings = null)
+        public async Task<IDataTransferList<World>> GetWorlds([CanBeNull] JsonSerializerSettings settings = null)
         {
-            using (var request = new GetAllWorldsRequest())
+            using (var request = new GetWorldsRequest())
             using (var response = await _http.SendAsync(request).ConfigureAwait(false))
             {
                 response.EnsureSuccessStatusCode();

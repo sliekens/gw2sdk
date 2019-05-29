@@ -5,9 +5,9 @@ using GW2SDK.Extensions;
 
 namespace GW2SDK.Infrastructure.Worlds
 {
-    public sealed class GetWorldsByIdRequest : HttpRequestMessage
+    public sealed class GetWorldsByIdsRequest : HttpRequestMessage
     {
-        private GetWorldsByIdRequest([NotNull] Uri requestUri)
+        private GetWorldsByIdsRequest([NotNull] Uri requestUri)
             : base(HttpMethod.Get, requestUri)
         {
         }
@@ -32,10 +32,10 @@ namespace GW2SDK.Infrastructure.Worlds
                 _worldIds = worldIds;
             }
 
-            public GetWorldsByIdRequest GetRequest()
+            public GetWorldsByIdsRequest GetRequest()
             {
                 var ids = _worldIds.ToCsv(false);
-                return new GetWorldsByIdRequest(new Uri($"/v2/worlds?ids={ids}", UriKind.Relative));
+                return new GetWorldsByIdsRequest(new Uri($"/v2/worlds?ids={ids}", UriKind.Relative));
             }
         }
     }

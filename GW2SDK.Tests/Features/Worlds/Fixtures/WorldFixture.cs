@@ -30,7 +30,7 @@ namespace GW2SDK.Tests.Features.Worlds.Fixtures
 
         private async Task<List<string>> GetAllJsonWorlds(HttpClient http)
         {
-            using (var request = new GetAllWorldsRequest())
+            using (var request = new GetWorldsRequest())
             using (var response = await http.SendAsync(request))
             using (var responseReader = new StreamReader(await response.Content.ReadAsStreamAsync()))
             using (var jsonReader = new JsonTextReader(responseReader))
