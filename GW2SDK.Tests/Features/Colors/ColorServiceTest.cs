@@ -106,6 +106,24 @@ namespace GW2SDK.Tests.Features.Colors
         [Fact]
         [Trait("Feature",  "Colors")]
         [Trait("Category", "Integration")]
+        public async Task GetColors_ShouldReturnAllColors()
+        {
+            var http = HttpClientFactory.CreateDefault();
+
+            var sut = new ColorService(http);
+
+            var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output)).Build();
+
+            var actual = await sut.GetColors(settings);
+
+            Assert.NotEmpty(actual);
+            Assert.Equal(actual.Count, actual.ResultTotal);
+            Assert.Equal(actual.Count, actual.ResultCount);
+        }
+
+        [Fact]
+        [Trait("Feature",  "Colors")]
+        [Trait("Category", "Integration")]
         public async Task GetColorsByPage_ShouldReturnExpectedLimit()
         {
             var http = HttpClientFactory.CreateDefault();
