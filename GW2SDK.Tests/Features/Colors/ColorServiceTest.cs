@@ -39,19 +39,20 @@ namespace GW2SDK.Tests.Features.Colors
         [Fact]
         [Trait("Feature",  "Colors")]
         [Trait("Category", "Integration")]
-        public async Task GetColorById_ShouldNotReturnNull()
+        public async Task GetColorById_ShouldReturnRequestedColor()
         {
             var http = HttpClientFactory.CreateDefault();
 
             var sut = new ColorService(http);
 
-            const int dyeRemoverId = 1;
+            // Randomly chosen
+            const int colorId = 1;
 
             var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output)).Build();
 
-            var actual = await sut.GetColorById(dyeRemoverId, settings);
+            var actual = await sut.GetColorById(colorId, settings);
 
-            Assert.NotNull(actual);
+            Assert.Equal(colorId, actual.Id);
         }
 
         [Fact]
