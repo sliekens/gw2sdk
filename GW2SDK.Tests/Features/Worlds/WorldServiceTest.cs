@@ -47,14 +47,13 @@ namespace GW2SDK.Tests.Features.Worlds
 
             var sut = new WorldService(http);
 
-            const int input = 1001;
+            const int worldId = 1001;
 
             var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output)).Build();
 
-            var actual = await sut.GetWorldById(input, settings);
+            var actual = await sut.GetWorldById(worldId, settings);
 
-            Assert.NotNull(actual);
-            Assert.Equal(input, actual.Id);
+            Assert.Equal(worldId, actual.Id);
         }
 
         [Fact]
