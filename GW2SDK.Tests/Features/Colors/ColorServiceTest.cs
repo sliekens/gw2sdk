@@ -21,7 +21,7 @@ namespace GW2SDK.Tests.Features.Colors
         [Fact]
         [Trait("Feature",  "Colors")]
         [Trait("Category", "Integration")]
-        public async Task GetColorIds_ShouldNotReturnEmptyCollection()
+        public async Task GetColorIds_ShouldReturnAllColorIds()
         {
             var http = HttpClientFactory.CreateDefault();
 
@@ -30,8 +30,10 @@ namespace GW2SDK.Tests.Features.Colors
             var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output)).Build();
 
             var actual = await sut.GetColorIds(settings);
-
+            
             Assert.NotEmpty(actual);
+            Assert.Equal(actual.ResultCount, actual.Count);
+            Assert.Equal(actual.ResultTotal, actual.Count);
         }
 
         [Fact]
