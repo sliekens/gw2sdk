@@ -5,6 +5,7 @@ using GW2SDK.Extensions;
 using GW2SDK.Features.Common;
 using GW2SDK.Features.Tokens;
 using GW2SDK.Infrastructure;
+using GW2SDK.Tests.Features.Tokens.Fixtures;
 using GW2SDK.Tests.Shared;
 using Newtonsoft.Json;
 using Xunit;
@@ -12,12 +13,15 @@ using Xunit.Abstractions;
 
 namespace GW2SDK.Tests.Features.Tokens
 {
-    public class TokenInfoServiceTest
+    public class TokenInfoServiceTest : IClassFixture<TokenInfoFixture>
     {
-        public TokenInfoServiceTest(ITestOutputHelper output)
+        public TokenInfoServiceTest(TokenInfoFixture fixture, ITestOutputHelper output)
         {
+            _fixture = fixture;
             _output = output;
         }
+
+        private readonly TokenInfoFixture _fixture;
 
         private readonly ITestOutputHelper _output;
 
@@ -65,12 +69,27 @@ namespace GW2SDK.Tests.Features.Tokens
 
             var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output)).Build();
 
-
             await Assert.ThrowsAsync<UnauthorizedOperationException>(async () =>
             {
                 // Next statement should throw because argument is null and HttpClient.DefaultRequestHeaders is not configured
                 _ = await sut.GetTokenInfo(null, settings);
             });
+        }
+
+        [Fact]
+        [Trait("Feature",  "Tokens")]
+        [Trait("Category", "Integration")]
+        public async Task GetTokenInfo_WithSubtoken_ShouldReturnSubtokenInfo()
+        {
+            var http = HttpClientFactory.CreateDefault();
+
+            var sut = new TokenInfoService(http);
+
+            var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output)).Build();
+            
+            var actual = await sut.GetTokenInfo(_fixture.SubtokenBasic.Subtoken, settings);
+
+            Assert.IsType<SubtokenInfo>(actual);
         }
 
         [Fact]
