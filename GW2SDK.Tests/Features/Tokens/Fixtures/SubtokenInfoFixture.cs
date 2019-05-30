@@ -28,7 +28,8 @@ namespace GW2SDK.Tests.Features.Tokens.Fixtures
 
             SubtokenPermissions = Enum.GetValues(typeof(Permission)).Cast<Permission>().ToList();
 
-            ExpiresAt = DateTimeOffset.FromUnixTimeSeconds(DateTimeOffset.Now.ToUnixTimeSeconds());
+            var exp = DateTimeOffset.Now.AddDays(1);
+            ExpiresAt = DateTimeOffset.FromUnixTimeSeconds(exp.ToUnixTimeSeconds());
 
             var createdSubtoken = await subtokenService.CreateSubtoken(ConfigurationManager.Instance.ApiKeyFull, SubtokenPermissions, ExpiresAt);
 
