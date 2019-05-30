@@ -104,5 +104,19 @@ namespace GW2SDK.Tests.Features.Tokens
 
             Assert.Equal(_fixture.ExpiresAt, actual.ExpiresAt);
         }
+
+        
+
+        [Fact]
+        [Trait("Feature",  "Tokens")]
+        [Trait("Category", "Integration")]
+        public void SubtokenInfo_Urls_ShouldBeExpectedUrls()
+        {
+            var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output)).Build();
+
+            var actual = JsonConvert.DeserializeObject<SubtokenInfo>(_fixture.SubtokenInfoJson, settings);
+
+            Assert.Equal(_fixture.Urls, actual.Urls.Select(url => Uri.UnescapeDataString(url.ToString())).ToList());
+        }
     }
 }

@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using GW2SDK.Extensions;
 using GW2SDK.Features.Common;
@@ -82,8 +84,10 @@ namespace GW2SDK.Tests.Features.Subtokens
 
             var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output)).Build();
 
-            // Get a date that is truncated to seconds: API probably doesn't support milliseconds
-            var expirationDate = DateTimeOffset.FromUnixTimeSeconds(DateTimeOffset.Now.ToUnixTimeSeconds());
+            var expirationDate = DateTimeOffset.Now.AddDays(1);
+
+            // Truncate to seconds: API probably doesn't support milliseconds
+            expirationDate = DateTimeOffset.FromUnixTimeSeconds(DateTimeOffset.Now.ToUnixTimeSeconds());
 
             var actual = await sut.CreateSubtoken(ConfigurationManager.Instance.ApiKeyFull, absoluteExpirationDate: expirationDate, settings: settings);
 
@@ -92,6 +96,28 @@ namespace GW2SDK.Tests.Features.Subtokens
             var subtokenInfo = Assert.IsType<SubtokenInfo>(tokenInfo);
 
             Assert.Equal(expirationDate, subtokenInfo.ExpiresAt);
+        }
+
+        [Fact]
+        [Trait("Feature",  "Subtokens")]
+        [Trait("Category", "Integration")]
+        public async Task CreateSubtoken_WithUrls_ShouldReturnCreatedSubtokenWithSpecifiedUrls()
+        {
+            var http = HttpClientFactory.CreateDefault();
+
+            var sut = new SubtokenService(http);
+
+            var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output)).Build();
+
+            var urls = new List<string> { "/v2/tokeninfo", "/v2/account", "/v2/account/home/cats" };
+
+            var actual = await sut.CreateSubtoken(ConfigurationManager.Instance.ApiKeyFull, urls: urls, settings: settings);
+
+            var tokenInfo = await new TokenInfoService(http).GetTokenInfo(actual.Subtoken);
+
+            var subtokenInfo = Assert.IsType<SubtokenInfo>(tokenInfo);
+
+            Assert.Equal(urls, subtokenInfo.Urls.Select(url => url.ToString()).ToList());
         }
 
     }

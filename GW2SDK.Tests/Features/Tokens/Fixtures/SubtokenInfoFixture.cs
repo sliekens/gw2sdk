@@ -20,6 +20,8 @@ namespace GW2SDK.Tests.Features.Tokens.Fixtures
 
         public DateTimeOffset ExpiresAt { get; private set; }
 
+        public IReadOnlyList<string> Urls { get; private set; }
+
         public async Task InitializeAsync()
         {
             var http = HttpClientFactory.CreateDefault();
@@ -29,9 +31,13 @@ namespace GW2SDK.Tests.Features.Tokens.Fixtures
             SubtokenPermissions = Enum.GetValues(typeof(Permission)).Cast<Permission>().ToList();
 
             var exp = DateTimeOffset.Now.AddDays(1);
+
+            // Truncate to seconds: API probably doesn't support milliseconds
             ExpiresAt = DateTimeOffset.FromUnixTimeSeconds(exp.ToUnixTimeSeconds());
 
-            var createdSubtoken = await subtokenService.CreateSubtoken(ConfigurationManager.Instance.ApiKeyFull, SubtokenPermissions, ExpiresAt);
+            Urls = new List<string> { "/v2/tokeninfo", "/v2/account", "/v2/characters/My Cool Character" };
+
+            var createdSubtoken = await subtokenService.CreateSubtoken(ConfigurationManager.Instance.ApiKeyFull, SubtokenPermissions, ExpiresAt, Urls);
 
             using (var request = new GetTokenInfoRequest.Builder(createdSubtoken.Subtoken).GetRequest())
             using (var response = await http.SendAsync(request))

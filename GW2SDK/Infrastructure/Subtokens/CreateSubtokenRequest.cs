@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using GW2SDK.Extensions;
@@ -21,10 +22,14 @@ namespace GW2SDK.Infrastructure.Subtokens
             [CanBeNull]
             private readonly IReadOnlyList<Permission> _permissions;
 
+            [CanBeNull]
+            private readonly IReadOnlyList<string> _urls;
+
             public Builder(
                 [CanBeNull] string accessToken = null,
                 [CanBeNull] IReadOnlyList<Permission> permissions = null,
-                DateTimeOffset? absoluteExpirationDate = null)
+                DateTimeOffset? absoluteExpirationDate = null,
+                [CanBeNull] IReadOnlyList<string> urls = null)
             {
                 if (!string.IsNullOrEmpty(accessToken))
                 {
@@ -33,6 +38,7 @@ namespace GW2SDK.Infrastructure.Subtokens
 
                 _permissions = permissions;
                 _absoluteExpirationDate = absoluteExpirationDate;
+                _urls = urls;
             }
 
             public AuthenticationHeaderValue AccessToken { get; }
@@ -50,6 +56,11 @@ namespace GW2SDK.Infrastructure.Subtokens
                 if (_absoluteExpirationDate.HasValue)
                 {
                     arguments.Add($"expire={_absoluteExpirationDate.Value.ToUniversalTime():s}");
+                }
+
+                if (_urls is object && _urls.Count != default)
+                {
+                    arguments.Add($"urls={_urls.Select(Uri.EscapeDataString).ToCsv()}");
                 }
 
                 if (arguments.Count != 0)
