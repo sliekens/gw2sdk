@@ -5,6 +5,6 @@ namespace GW2SDK.Extensions
 {
     public static class EnumerableExtensions
     {
-        public static string ToCsv(this IEnumerable values, bool spacing = true) => string.Join(spacing ? ", " : ",", values.Cast<object>());
+        public static string ToCsv(this IEnumerable values) => string.Join(",", values.Cast<object>());
     }
 }

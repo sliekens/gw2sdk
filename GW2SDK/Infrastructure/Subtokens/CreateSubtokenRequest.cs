@@ -44,7 +44,7 @@ namespace GW2SDK.Infrastructure.Subtokens
                 var arguments = new List<string>();
                 if (_permissions is object && _permissions.Count != default)
                 {
-                    arguments.Add($"permissions={_permissions.ToCsv(false).ToLowerInvariant()}");
+                    arguments.Add($"permissions={_permissions.ToCsv().ToLowerInvariant()}");
                 }
 
                 if (_absoluteExpirationDate.HasValue)

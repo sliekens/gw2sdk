@@ -34,7 +34,7 @@ namespace GW2SDK.Infrastructure.Worlds
 
             public GetWorldsByIdsRequest GetRequest()
             {
-                var ids = _worldIds.ToCsv(false);
+                var ids = _worldIds.ToCsv();
                 return new GetWorldsByIdsRequest(new Uri($"/v2/worlds?ids={ids}", UriKind.Relative));
             }
         }

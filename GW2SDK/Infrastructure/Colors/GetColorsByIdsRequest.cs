@@ -34,7 +34,7 @@ namespace GW2SDK.Infrastructure.Colors
 
             public GetColorsByIdsRequest GetRequest()
             {
-                var ids = _colorIds.ToCsv(false);
+                var ids = _colorIds.ToCsv();
                 return new GetColorsByIdsRequest(new Uri($"/v2/colors?ids={ids}", UriKind.Relative));
             }
         }

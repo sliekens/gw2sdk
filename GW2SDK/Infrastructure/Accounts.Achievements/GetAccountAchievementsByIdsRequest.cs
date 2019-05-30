@@ -34,7 +34,7 @@ namespace GW2SDK.Infrastructure.Accounts.Achievements
 
             public GetAccountAchievementsByIdsRequest GetRequest()
             {
-                var ids = _achievementIds.ToCsv(false);
+                var ids = _achievementIds.ToCsv();
                 return new GetAccountAchievementsByIdsRequest(new Uri($"/v2/account/achievements?ids={ids}", UriKind.Relative));
             }
         }
