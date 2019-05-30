@@ -102,9 +102,7 @@ namespace GW2SDK.Tests.Features.Tokens
 
             var actual = JsonConvert.DeserializeObject<SubtokenInfo>(_fixture.SubtokenInfoJson, settings);
 
-            var expected = actual.IssuedAt.AddDays(30);
-
-            Assert.Equal(expected, actual.ExpiresAt);
+            Assert.Equal(_fixture.ExpiresAt, actual.ExpiresAt);
         }
     }
 }

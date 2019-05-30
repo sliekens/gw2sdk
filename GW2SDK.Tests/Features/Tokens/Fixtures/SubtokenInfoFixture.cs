@@ -18,6 +18,8 @@ namespace GW2SDK.Tests.Features.Tokens.Fixtures
 
         public DateTimeOffset CreatedSubtokenDate { get; private set; }
 
+        public DateTimeOffset ExpiresAt { get; private set; }
+
         public async Task InitializeAsync()
         {
             var http = HttpClientFactory.CreateDefault();
@@ -26,7 +28,9 @@ namespace GW2SDK.Tests.Features.Tokens.Fixtures
 
             SubtokenPermissions = Enum.GetValues(typeof(Permission)).Cast<Permission>().ToList();
 
-            var createdSubtoken = await subtokenService.CreateSubtoken(ConfigurationManager.Instance.ApiKeyFull, SubtokenPermissions);
+            ExpiresAt = DateTimeOffset.FromUnixTimeSeconds(DateTimeOffset.Now.ToUnixTimeSeconds());
+
+            var createdSubtoken = await subtokenService.CreateSubtoken(ConfigurationManager.Instance.ApiKeyFull, SubtokenPermissions, ExpiresAt);
 
             using (var request = new GetTokenInfoRequest.Builder(createdSubtoken.Subtoken).GetRequest())
             using (var response = await http.SendAsync(request))

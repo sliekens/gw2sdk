@@ -1,7 +1,9 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using GW2SDK.Extensions;
 using GW2SDK.Features.Common;
 using GW2SDK.Features.Subtokens;
+using GW2SDK.Features.Tokens;
 using GW2SDK.Infrastructure;
 using GW2SDK.Tests.Shared;
 using Xunit;
@@ -68,5 +70,29 @@ namespace GW2SDK.Tests.Features.Subtokens
                 _ = await sut.CreateSubtoken(null, settings: settings);
             });
         }
+
+        [Fact]
+        [Trait("Feature",  "Subtokens")]
+        [Trait("Category", "Integration")]
+        public async Task CreateSubtoken_WithExpirationDate_ShouldReturnCreatedSubtokenWithSpecifiedExpirationDate()
+        {
+            var http = HttpClientFactory.CreateDefault();
+
+            var sut = new SubtokenService(http);
+
+            var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output)).Build();
+
+            // Get a date that is truncated to seconds: API probably doesn't support milliseconds
+            var expirationDate = DateTimeOffset.FromUnixTimeSeconds(DateTimeOffset.Now.ToUnixTimeSeconds());
+
+            var actual = await sut.CreateSubtoken(ConfigurationManager.Instance.ApiKeyFull, absoluteExpirationDate: expirationDate, settings: settings);
+
+            var tokenInfo = await new TokenInfoService(http).GetTokenInfo(actual.Subtoken);
+
+            var subtokenInfo = Assert.IsType<SubtokenInfo>(tokenInfo);
+
+            Assert.Equal(expirationDate, subtokenInfo.ExpiresAt);
+        }
+
     }
 }

@@ -20,10 +20,10 @@ namespace GW2SDK.Features.Subtokens
             _http = http ?? throw new ArgumentNullException(nameof(http));
         }
 
-        public async Task<CreatedSubtoken> CreateSubtoken([CanBeNull] string accessToken = null, [CanBeNull] IReadOnlyList<Permission> permissions = null, [CanBeNull] JsonSerializerSettings settings = null)
+        public async Task<CreatedSubtoken> CreateSubtoken([CanBeNull] string accessToken = null, [CanBeNull] IReadOnlyList<Permission> permissions = null, DateTimeOffset? absoluteExpirationDate = null, [CanBeNull] JsonSerializerSettings settings = null)
         {
-            // TODO: pass expire, urls!
-            using (var request = new CreateSubtokenRequest.Builder(accessToken, permissions).GetRequest())
+            // TODO: pass urls!
+            using (var request = new CreateSubtokenRequest.Builder(accessToken, permissions, absoluteExpirationDate).GetRequest())
             using (var response = await _http.SendAsync(request).ConfigureAwait(false))
             {
                 var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);

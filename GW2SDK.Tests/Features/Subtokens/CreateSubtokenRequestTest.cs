@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using GW2SDK.Features.Common;
 using GW2SDK.Infrastructure.Subtokens;
@@ -50,6 +51,18 @@ namespace GW2SDK.Tests.Features.Subtokens
             var sut = new CreateSubtokenRequest.Builder(permissions: permissions).GetRequest();
 
             Assert.Equal("/v2/createsubtoken", sut.RequestUri.ToString());
+        }
+        
+        [Fact]
+        [Trait("Feature",  "Subtokens")]
+        [Trait("Category", "Unit")]
+        public void CreateSubtokenRequest_WithExpirationDate_ShouldSerializeDateAsQueryString()
+        {
+            var expirationDate = new DateTimeOffset(2019, 12, 25, 12, 34, 56, TimeSpan.Zero);
+
+            var sut = new CreateSubtokenRequest.Builder(absoluteExpirationDate: expirationDate).GetRequest();
+
+            Assert.Equal("/v2/createsubtoken?expire=2019-12-25T12:34:56", sut.RequestUri.ToString());
         }
     }
 }

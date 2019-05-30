@@ -16,10 +16,15 @@ namespace GW2SDK.Infrastructure.Subtokens
 
         public sealed class Builder
         {
+            private readonly DateTimeOffset? _absoluteExpirationDate;
+
             [CanBeNull]
             private readonly IReadOnlyList<Permission> _permissions;
 
-            public Builder([CanBeNull] string accessToken = null, [CanBeNull] IReadOnlyList<Permission> permissions = null)
+            public Builder(
+                [CanBeNull] string accessToken = null,
+                [CanBeNull] IReadOnlyList<Permission> permissions = null,
+                DateTimeOffset? absoluteExpirationDate = null)
             {
                 if (!string.IsNullOrEmpty(accessToken))
                 {
@@ -27,6 +32,7 @@ namespace GW2SDK.Infrastructure.Subtokens
                 }
 
                 _permissions = permissions;
+                _absoluteExpirationDate = absoluteExpirationDate;
             }
 
             public AuthenticationHeaderValue AccessToken { get; }
@@ -34,9 +40,21 @@ namespace GW2SDK.Infrastructure.Subtokens
             public CreateSubtokenRequest GetRequest()
             {
                 var resource = "/v2/createsubtoken";
+
+                var arguments = new List<string>();
                 if (_permissions is object && _permissions.Count != default)
                 {
-                    resource += $"?permissions={_permissions.ToCsv(false).ToLowerInvariant()}";
+                    arguments.Add($"permissions={_permissions.ToCsv(false).ToLowerInvariant()}");
+                }
+
+                if (_absoluteExpirationDate.HasValue)
+                {
+                    arguments.Add($"expire={_absoluteExpirationDate.Value.ToUniversalTime():s}");
+                }
+
+                if (arguments.Count != 0)
+                {
+                    resource += "?" + string.Join("&", arguments);
                 }
 
                 return new CreateSubtokenRequest(new Uri(resource, UriKind.Relative)) { Headers = { Authorization = AccessToken } };
