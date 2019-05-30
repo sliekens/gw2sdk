@@ -13,15 +13,15 @@ using Xunit.Abstractions;
 
 namespace GW2SDK.Tests.Features.Tokens
 {
-    public class TokenInfoServiceTest : IClassFixture<TokenInfoFixture>
+    public class TokenInfoServiceTest : IClassFixture<TokenInfoServiceFixture>
     {
-        public TokenInfoServiceTest(TokenInfoFixture fixture, ITestOutputHelper output)
+        public TokenInfoServiceTest(TokenInfoServiceFixture serviceFixture, ITestOutputHelper output)
         {
-            _fixture = fixture;
+            _serviceFixture = serviceFixture;
             _output = output;
         }
 
-        private readonly TokenInfoFixture _fixture;
+        private readonly TokenInfoServiceFixture _serviceFixture;
 
         private readonly ITestOutputHelper _output;
 
@@ -87,7 +87,7 @@ namespace GW2SDK.Tests.Features.Tokens
 
             var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output)).Build();
             
-            var actual = await sut.GetTokenInfo(_fixture.SubtokenBasic.Subtoken, settings);
+            var actual = await sut.GetTokenInfo(_serviceFixture.SubtokenBasic.Subtoken, settings);
 
             Assert.IsType<SubtokenInfo>(actual);
         }

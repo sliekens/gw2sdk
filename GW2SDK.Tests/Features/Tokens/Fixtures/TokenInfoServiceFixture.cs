@@ -5,7 +5,7 @@ using Xunit;
 
 namespace GW2SDK.Tests.Features.Tokens.Fixtures
 {
-    public class TokenInfoFixture : IAsyncLifetime
+    public class TokenInfoServiceFixture : IAsyncLifetime
     {
         public CreatedSubtoken SubtokenBasic { get; private set; }
 
