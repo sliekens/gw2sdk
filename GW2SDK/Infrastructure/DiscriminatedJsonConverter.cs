@@ -16,14 +16,12 @@ namespace GW2SDK.Infrastructure
 
         public DiscriminatedJsonConverter([NotNull] DiscriminatorOptions discriminatorOptions)
         {
-            _discriminatorOptions =
-                discriminatorOptions ?? throw new ArgumentNullException(nameof(discriminatorOptions));
+            _discriminatorOptions = discriminatorOptions ?? throw new ArgumentNullException(nameof(discriminatorOptions));
         }
 
         public override bool CanConvert(Type objectType) => _discriminatorOptions.BaseType.IsAssignableFrom(objectType);
 
-        public override object ReadJson(JsonReader reader, Type objectType, object existingValue,
-            JsonSerializer serializer)
+        public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
         {
             if (reader.TokenType == JsonToken.Null)
             {
@@ -34,17 +32,12 @@ namespace GW2SDK.Infrastructure
             var discriminatorField = json.Property(_discriminatorOptions.DiscriminatorFieldName);
             if (discriminatorField is null)
             {
-                serializer.TraceWriter?.Trace(
-                    TraceLevel.Error,
-                    $"Could not find discriminator field '{_discriminatorOptions.DiscriminatorFieldName}'.",
-                    null);
-                throw new JsonSerializationException(
-                    $"Could not find discriminator field with name '{_discriminatorOptions.DiscriminatorFieldName}'.");
+                serializer.TraceWriter?.Trace(TraceLevel.Error, $"Could not find discriminator field '{_discriminatorOptions.DiscriminatorFieldName}'.", null);
+                throw new JsonSerializationException($"Could not find discriminator field with name '{_discriminatorOptions.DiscriminatorFieldName}'.");
             }
 
             var discriminatorFieldValue = discriminatorField.Value.ToString();
-            serializer.TraceWriter?.Trace(
-                TraceLevel.Info,
+            serializer.TraceWriter?.Trace(TraceLevel.Info,
                 $"Found discriminator field '{discriminatorField.Name}' with value '{discriminatorFieldValue}'.",
                 null);
             if (!_discriminatorOptions.SerializeDiscriminator)
@@ -59,27 +52,23 @@ namespace GW2SDK.Infrastructure
             {
                 if (discriminatorFieldValue == typeName)
                 {
-                    serializer.TraceWriter?.Trace(
-                        TraceLevel.Info,
-                        $"Discriminator value '{discriminatorFieldValue}' was used to select Type '{type}'.",
-                        null);
-                    return ReadJsonImpl(json.CreateReader(), type, serializer);
+                    serializer.TraceWriter?.Trace(TraceLevel.Info, $"Discriminator value '{discriminatorFieldValue}' was used to select Type '{type}'.", null);
+                    return ReadJsonImpl(json.CreateReader(), discriminatorFieldValue, type, serializer);
                 }
             }
 
-            serializer.TraceWriter?.Trace(
-                TraceLevel.Warning,
+            serializer.TraceWriter?.Trace(TraceLevel.Warning,
                 $"Discriminator value '{discriminatorFieldValue}' has no corresponding Type. Continuing anyway with Type '{objectType}'.",
                 null);
-            return ReadJsonImpl(json.CreateReader(), objectType, serializer);
+            return ReadJsonImpl(json.CreateReader(), discriminatorFieldValue, null, serializer);
         }
 
-        private object ReadJsonImpl(JsonReader reader, Type objectType, JsonSerializer serializer)
+        private object ReadJsonImpl(JsonReader reader, string discriminator, Type objectType, JsonSerializer serializer)
         {
             var value = _discriminatorOptions.Create(objectType);
             if (value == null)
             {
-                throw new JsonSerializationException("No object created.");
+                throw new JsonSerializationException($"No object created for discriminator '{discriminator}'.");
             }
 
             serializer.Populate(reader, value);
