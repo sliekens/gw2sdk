@@ -87,7 +87,7 @@ namespace GW2SDK.Tests.Features.Subtokens
             var expirationDate = DateTimeOffset.Now.AddDays(1);
 
             // Truncate to seconds: API probably doesn't support milliseconds
-            expirationDate = DateTimeOffset.FromUnixTimeSeconds(DateTimeOffset.Now.ToUnixTimeSeconds());
+            expirationDate = DateTimeOffset.FromUnixTimeSeconds(expirationDate.ToUnixTimeSeconds());
 
             var actual = await sut.CreateSubtoken(ConfigurationManager.Instance.ApiKeyFull, absoluteExpirationDate: expirationDate, settings: settings);
 
