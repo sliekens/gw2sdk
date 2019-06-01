@@ -52,7 +52,7 @@ namespace GW2SDK.Tests.Features.Subtokens
 
             Assert.Equal("/v2/createsubtoken", sut.RequestUri.ToString());
         }
-        
+
         [Fact]
         [Trait("Feature",  "Subtokens")]
         [Trait("Category", "Unit")]
@@ -64,17 +64,13 @@ namespace GW2SDK.Tests.Features.Subtokens
 
             Assert.Equal("/v2/createsubtoken?expire=2019-12-25T12:34:56", sut.RequestUri.ToString());
         }
-        
+
         [Fact]
         [Trait("Feature",  "Subtokens")]
         [Trait("Category", "Unit")]
         public void CreateSubtokenRequest_WithUrls_ShouldSerializeUrlsAsQueryString()
         {
-            var urls = new List<string>
-            {
-                "/v2/characters/My Cool Character",
-                "/v2/account/home/cats"
-            };
+            var urls = new List<string> { "/v2/characters/My Cool Character", "/v2/account/home/cats" };
 
             var sut = new CreateSubtokenRequest.Builder(urls: urls).GetRequest();
 

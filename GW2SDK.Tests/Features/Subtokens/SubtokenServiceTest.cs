@@ -119,6 +119,5 @@ namespace GW2SDK.Tests.Features.Subtokens
 
             Assert.Equal(urls, subtokenInfo.Urls.Select(url => url.ToString()).ToList());
         }
-
     }
 }

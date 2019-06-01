@@ -30,7 +30,7 @@ namespace GW2SDK.Tests.Features.Colors
             var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output)).Build();
 
             var actual = await sut.GetColorIds(settings);
-            
+
             Assert.NotEmpty(actual);
             Assert.Equal(actual.ResultCount, actual.Count);
             Assert.Equal(actual.ResultTotal, actual.Count);
@@ -64,10 +64,11 @@ namespace GW2SDK.Tests.Features.Colors
 
             var sut = new ColorService(http);
 
-            await Assert.ThrowsAsync<ArgumentNullException>("colorIds", async () =>
-            {
-                await sut.GetColorsByIds(null);
-            });
+            await Assert.ThrowsAsync<ArgumentNullException>("colorIds",
+                async () =>
+                {
+                    await sut.GetColorsByIds(null);
+                });
         }
 
         [Fact]
@@ -79,10 +80,11 @@ namespace GW2SDK.Tests.Features.Colors
 
             var sut = new ColorService(http);
 
-            await Assert.ThrowsAsync<ArgumentException>("colorIds", async () =>
-            {
-                await sut.GetColorsByIds(Enumerable.Empty<int>().ToList());
-            });
+            await Assert.ThrowsAsync<ArgumentException>("colorIds",
+                async () =>
+                {
+                    await sut.GetColorsByIds(Enumerable.Empty<int>().ToList());
+                });
         }
 
         [Fact]

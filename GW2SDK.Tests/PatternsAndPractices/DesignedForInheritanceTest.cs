@@ -15,7 +15,6 @@ namespace GW2SDK.Tests.PatternsAndPractices
 
         private readonly AssemblyFixture _fixture;
 
-
         [Fact]
         public void EveryExportedClass_ShouldBeInheritableOrSealed()
         {

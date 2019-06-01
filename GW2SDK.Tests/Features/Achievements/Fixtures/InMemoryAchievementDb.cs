@@ -39,7 +39,7 @@ namespace GW2SDK.Tests.Features.Achievements.Fixtures
                     select flags.Select(token => token.ToString())).SelectMany(types => types)
                                                                    .Distinct();
         }
-        
+
         public IEnumerable<string> GetAchievementRewardTypeNames()
         {
             return (
@@ -49,7 +49,7 @@ namespace GW2SDK.Tests.Features.Achievements.Fixtures
                     select flags.Select(token => token.ToString())).SelectMany(types => types)
                                                                    .Distinct();
         }
-        
+
         public IEnumerable<string> GetAchievementBitTypeNames()
         {
             return (
@@ -59,7 +59,7 @@ namespace GW2SDK.Tests.Features.Achievements.Fixtures
                     select flags.Select(token => token.ToString())).SelectMany(types => types)
                                                                    .Distinct();
         }
-        
+
         public IEnumerable<string> GetAchievementMasteryRegionNames()
         {
             return (

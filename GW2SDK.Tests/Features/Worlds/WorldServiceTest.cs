@@ -37,7 +37,6 @@ namespace GW2SDK.Tests.Features.Worlds
             Assert.Equal(actual.ResultTotal, actual.Count);
         }
 
-
         [Fact]
         [Trait("Feature",  "Worlds")]
         [Trait("Category", "Integration")]
@@ -72,7 +71,7 @@ namespace GW2SDK.Tests.Features.Worlds
             Assert.NotEmpty(actual);
             Assert.Collection(actual, world => Assert.Equal(1001, world.Id), world => Assert.Equal(1002, world.Id), world => Assert.Equal(1003, world.Id));
         }
-        
+
         [Fact]
         [Trait("Feature",  "Worlds")]
         [Trait("Category", "Unit")]
@@ -82,12 +81,13 @@ namespace GW2SDK.Tests.Features.Worlds
 
             var sut = new WorldService(http);
 
-            await Assert.ThrowsAsync<ArgumentNullException>("worldIds", async () =>
-            {
-                await sut.GetWorldsByIds(null);
-            });
+            await Assert.ThrowsAsync<ArgumentNullException>("worldIds",
+                async () =>
+                {
+                    await sut.GetWorldsByIds(null);
+                });
         }
-        
+
         [Fact]
         [Trait("Feature",  "Worlds")]
         [Trait("Category", "Unit")]
@@ -97,10 +97,11 @@ namespace GW2SDK.Tests.Features.Worlds
 
             var sut = new WorldService(http);
 
-            await Assert.ThrowsAsync<ArgumentException>("worldIds", async () =>
-            {
-                await sut.GetWorldsByIds(Enumerable.Empty<int>().ToList());
-            });
+            await Assert.ThrowsAsync<ArgumentException>("worldIds",
+                async () =>
+                {
+                    await sut.GetWorldsByIds(Enumerable.Empty<int>().ToList());
+                });
         }
 
         [Fact]

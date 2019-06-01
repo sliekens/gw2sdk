@@ -27,7 +27,7 @@ namespace GW2SDK.Tests.Features.Tokens
         [Trait("Feature",    "Tokens")]
         [Trait("Category",   "Integration")]
         [Trait("Importance", "Critical")]
-        public void ApiKeyInfo_ShouldHaveNoMissingMembers()
+        public void AllMembers_ShouldHaveNoMissingMembers()
         {
             var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output))
                                                               .UseMissingMemberHandling(MissingMemberHandling.Error)
@@ -40,7 +40,7 @@ namespace GW2SDK.Tests.Features.Tokens
         [Fact]
         [Trait("Feature",  "Tokens")]
         [Trait("Category", "Integration")]
-        public void ApiKeyInfo_Id_ShouldNotBeEmpty()
+        public void Id_ShouldNotBeEmpty()
         {
             var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output)).Build();
 
@@ -52,7 +52,7 @@ namespace GW2SDK.Tests.Features.Tokens
         [Fact]
         [Trait("Feature",  "Tokens")]
         [Trait("Category", "Integration")]
-        public void ApiKeyInfo_Name_ShouldBeGW2SDKFull()
+        public void Name_ShouldBeGW2SDKFull()
         {
             var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output)).Build();
 
@@ -67,7 +67,7 @@ namespace GW2SDK.Tests.Features.Tokens
         [Fact]
         [Trait("Feature",  "Tokens")]
         [Trait("Category", "Integration")]
-        public void ApiKeyInfo_Permissions_ShouldHaveFullPermissions()
+        public void Permissions_ShouldHaveFullPermissions()
         {
             var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output)).Build();
 

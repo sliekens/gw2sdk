@@ -24,7 +24,7 @@ namespace GW2SDK.Tests.Features.Builds
         [Trait("Feature",    "Builds")]
         [Trait("Category",   "Integration")]
         [Trait("Importance", "Critical")]
-        public void Build_ShouldHaveNoMissingMembers()
+        public void AllMembers_ShouldHaveNoMissingMembers()
         {
             var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output))
                                                               .UseMissingMemberHandling(MissingMemberHandling.Error)
@@ -34,11 +34,10 @@ namespace GW2SDK.Tests.Features.Builds
             _ = JsonConvert.DeserializeObject<Build>(_fixture.Build, settings);
         }
 
-
         [Fact]
         [Trait("Feature",  "Builds")]
         [Trait("Category", "Integration")]
-        public void Build_Id_ShouldBePositive()
+        public void Id_ShouldBePositive()
         {
             var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output)).Build();
 

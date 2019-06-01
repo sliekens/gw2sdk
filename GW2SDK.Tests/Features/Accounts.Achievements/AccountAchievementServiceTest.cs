@@ -58,7 +58,7 @@ namespace GW2SDK.Tests.Features.Accounts.Achievements
 
             Assert.Equal(ids, actual.Select(accountAchievement => accountAchievement.Id));
         }
-        
+
         [Fact]
         [Trait("Feature",  "Accounts.Achievements")]
         [Trait("Category", "Unit")]
@@ -68,12 +68,13 @@ namespace GW2SDK.Tests.Features.Accounts.Achievements
 
             var sut = new AccountAchievementService(http);
 
-            await Assert.ThrowsAsync<ArgumentNullException>("achievementIds", async () =>
-            {
-                await sut.GetAccountAchievementsByIds(null);
-            });
+            await Assert.ThrowsAsync<ArgumentNullException>("achievementIds",
+                async () =>
+                {
+                    await sut.GetAccountAchievementsByIds(null);
+                });
         }
-        
+
         [Fact]
         [Trait("Feature",  "Accounts.Achievements")]
         [Trait("Category", "Unit")]
@@ -83,10 +84,11 @@ namespace GW2SDK.Tests.Features.Accounts.Achievements
 
             var sut = new AccountAchievementService(http);
 
-            await Assert.ThrowsAsync<ArgumentException>("achievementIds", async () =>
-            {
-                await sut.GetAccountAchievementsByIds(Enumerable.Empty<int>().ToList());
-            });
+            await Assert.ThrowsAsync<ArgumentException>("achievementIds",
+                async () =>
+                {
+                    await sut.GetAccountAchievementsByIds(Enumerable.Empty<int>().ToList());
+                });
         }
 
         [Fact]
@@ -106,7 +108,6 @@ namespace GW2SDK.Tests.Features.Accounts.Achievements
             Assert.Equal(actual.Count, actual.ResultTotal);
             Assert.Equal(actual.Count, actual.ResultCount);
         }
-
 
         [Fact]
         [Trait("Feature",  "Accounts.Achievements")]

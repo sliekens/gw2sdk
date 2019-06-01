@@ -24,7 +24,7 @@ namespace GW2SDK.Tests.Features.Subtokens
         [Trait("Feature",    "Subtokens")]
         [Trait("Category",   "Integration")]
         [Trait("Importance", "Critical")]
-        public void Subtoken_ShouldHaveNoMissingMembers()
+        public void AllMembers_ShouldHaveNoMissingMembers()
         {
             var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output))
                                                               .UseMissingMemberHandling(MissingMemberHandling.Error)

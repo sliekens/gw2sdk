@@ -24,13 +24,12 @@ namespace GW2SDK.Tests.Features.Accounts.Achievements
         [Trait("Feature",    "Accounts.Achievements")]
         [Trait("Category",   "Integration")]
         [Trait("Importance", "Critical")]
-        public void AccountAchievement_ShouldHaveNoMissingMembers()
+        public void AllMembers_ShouldHaveNoMissingMembers()
         {
             var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output))
                                                               .UseMissingMemberHandling(MissingMemberHandling.Error)
                                                               .Build();
 
-            // Next statement throws if there are missing members
             Assert.All(_fixture.Db.AccountAchievements,
                 json =>
                 {

@@ -32,8 +32,12 @@ namespace GW2SDK.Tests.Features.Achievements
                                                               .UseMissingMemberHandling(MissingMemberHandling.Error)
                                                               .Build();
 
-            // Next statement throws if there are missing members
-            _ = _fixture.Db.Achievements.Select(json => JsonConvert.DeserializeObject<Achievement>(json, settings)).ToList();
+            Assert.All(_fixture.Db.Achievements,
+                json =>
+                {
+                    // Next statement throws if there are missing members
+                    _ = JsonConvert.DeserializeObject<Achievement>(json, settings);
+                });
         }
 
         [Fact]
@@ -251,7 +255,7 @@ namespace GW2SDK.Tests.Features.Achievements
             var achievements = _fixture.Db.Achievements.Select(json => JsonConvert.DeserializeObject<Achievement>(json, settings)).ToList();
 
             var masteryRewards = achievements.Where(achievement => achievement.Rewards is object)
-                                           .SelectMany(achievement => achievement.Rewards.OfType<MasteryReward>());
+                                             .SelectMany(achievement => achievement.Rewards.OfType<MasteryReward>());
 
             Assert.All(masteryRewards,
                 actual =>
@@ -270,7 +274,7 @@ namespace GW2SDK.Tests.Features.Achievements
             var achievements = _fixture.Db.Achievements.Select(json => JsonConvert.DeserializeObject<Achievement>(json, settings)).ToList();
 
             var itemRewards = achievements.Where(achievement => achievement.Rewards is object)
-                                           .SelectMany(achievement => achievement.Rewards.OfType<ItemReward>());
+                                          .SelectMany(achievement => achievement.Rewards.OfType<ItemReward>());
 
             Assert.All(itemRewards,
                 actual =>
@@ -289,7 +293,7 @@ namespace GW2SDK.Tests.Features.Achievements
             var achievements = _fixture.Db.Achievements.Select(json => JsonConvert.DeserializeObject<Achievement>(json, settings)).ToList();
 
             var itemRewards = achievements.Where(achievement => achievement.Rewards is object)
-                                           .SelectMany(achievement => achievement.Rewards.OfType<ItemReward>());
+                                          .SelectMany(achievement => achievement.Rewards.OfType<ItemReward>());
 
             Assert.All(itemRewards,
                 actual =>
@@ -308,7 +312,7 @@ namespace GW2SDK.Tests.Features.Achievements
             var achievements = _fixture.Db.Achievements.Select(json => JsonConvert.DeserializeObject<Achievement>(json, settings)).ToList();
 
             var itemRewards = achievements.Where(achievement => achievement.Rewards is object)
-                                           .SelectMany(achievement => achievement.Rewards.OfType<CoinsReward>());
+                                          .SelectMany(achievement => achievement.Rewards.OfType<CoinsReward>());
 
             Assert.All(itemRewards,
                 actual =>
@@ -397,7 +401,7 @@ namespace GW2SDK.Tests.Features.Achievements
 
             Assert.All(textBits, actual => Assert.InRange(actual.Id, 1, int.MaxValue));
         }
-        
+
         [Fact]
         [Trait("Feature",  "Achievements")]
         [Trait("Category", "Integration")]
@@ -412,7 +416,7 @@ namespace GW2SDK.Tests.Features.Achievements
 
             Assert.All(textBits, actual => Assert.InRange(actual.Id, 1, int.MaxValue));
         }
-        
+
         [Fact]
         [Trait("Feature",  "Achievements")]
         [Trait("Category", "Integration")]
@@ -427,7 +431,7 @@ namespace GW2SDK.Tests.Features.Achievements
 
             Assert.All(textBits, actual => Assert.InRange(actual.Id, 1, int.MaxValue));
         }
-        
+
         [Fact]
         [Trait("Feature",  "Achievements")]
         [Trait("Category", "Integration")]
@@ -459,7 +463,7 @@ namespace GW2SDK.Tests.Features.Achievements
                     }
                 });
         }
-        
+
         [Fact]
         [Trait("Feature",  "Achievements")]
         [Trait("Category", "Integration")]
@@ -491,7 +495,7 @@ namespace GW2SDK.Tests.Features.Achievements
                     }
                 });
         }
-        
+
         [Fact]
         [Trait("Feature",  "Achievements")]
         [Trait("Category", "Integration")]
@@ -500,7 +504,7 @@ namespace GW2SDK.Tests.Features.Achievements
             var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output)).Build();
 
             var achievements = _fixture.Db.Achievements.Select(json => JsonConvert.DeserializeObject<Achievement>(json, settings)).ToList();
-            
+
             Assert.Contains(achievements, actual => actual.Icon is null);
             Assert.Contains(achievements, actual => actual.Icon is object);
         }

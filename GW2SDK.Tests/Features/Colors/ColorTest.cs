@@ -20,11 +20,11 @@ namespace GW2SDK.Tests.Features.Colors
 
         private readonly ITestOutputHelper _output;
 
-
         [Fact]
         [Trait("Feature",  "Colors")]
         [Trait("Category", "Integration")]
-        public void Color_ShouldHaveNoMissingMembers()
+        [Trait("Importance", "Critical")]
+        public void AllMembers_ShouldHaveNoMissingMembers()
         {
             var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output))
                                                               .UseMissingMemberHandling(MissingMemberHandling.Error)
@@ -41,7 +41,7 @@ namespace GW2SDK.Tests.Features.Colors
         [Fact]
         [Trait("Feature",  "Colors")]
         [Trait("Category", "Integration")]
-        public void Color_Id_ShouldBePositive()
+        public void Id_ShouldBePositive()
         {
             var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output)).Build();
 
@@ -57,7 +57,7 @@ namespace GW2SDK.Tests.Features.Colors
         [Fact]
         [Trait("Feature",  "Colors")]
         [Trait("Category", "Integration")]
-        public void Color_Name_ShouldNotBeEmpty()
+        public void Name_ShouldNotBeEmpty()
         {
             var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output)).Build();
 
@@ -73,7 +73,7 @@ namespace GW2SDK.Tests.Features.Colors
         [Fact]
         [Trait("Feature",  "Colors")]
         [Trait("Category", "Integration")]
-        public void Color_Cloth_ShouldNotBeNull()
+        public void Cloth_ShouldNotBeNull()
         {
             var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output)).Build();
 
@@ -89,7 +89,7 @@ namespace GW2SDK.Tests.Features.Colors
         [Fact]
         [Trait("Feature",  "Colors")]
         [Trait("Category", "Integration")]
-        public void Color_Leather_ShouldNotBeNull()
+        public void Leather_ShouldNotBeNull()
         {
             var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output)).Build();
 
@@ -105,7 +105,7 @@ namespace GW2SDK.Tests.Features.Colors
         [Fact]
         [Trait("Feature",  "Colors")]
         [Trait("Category", "Integration")]
-        public void Color_Metal_ShouldNotBeNull()
+        public void Metal_ShouldNotBeNull()
         {
             var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output)).Build();
 
@@ -121,7 +121,7 @@ namespace GW2SDK.Tests.Features.Colors
         [Fact(Skip = "Some dyes like Hydra (1594) don't have a 'fur' property. Bug in API?")]
         [Trait("Feature",  "Colors")]
         [Trait("Category", "Integration")]
-        public void Color_Fur_ShouldNotBeNull()
+        public void Fur_ShouldNotBeNull()
         {
             var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output)).Build();
 
@@ -137,7 +137,7 @@ namespace GW2SDK.Tests.Features.Colors
         [Fact]
         [Trait("Feature",  "Colors")]
         [Trait("Category", "Integration")]
-        public void Color_Categories_ShouldNotBeNull()
+        public void Categories_ShouldNotBeNull()
         {
             var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output)).Build();
 
@@ -153,7 +153,7 @@ namespace GW2SDK.Tests.Features.Colors
         [Fact]
         [Trait("Feature",  "Colors")]
         [Trait("Category", "Integration")]
-        public void Color_BaseRgb_ShouldBeRgbTuple()
+        public void BaseRgb_ShouldBeRgbTuple()
         {
             var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output)).Build();
 

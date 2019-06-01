@@ -9,15 +9,15 @@ namespace GW2SDK.Tests.Features.Achievements
     [Collection(nameof(AchievementDbCollection))]
     public class MasteryRegionNameTest
     {
-        private readonly AchievementFixture _fixture;
-
         public MasteryRegionNameTest(AchievementFixture fixture)
         {
             _fixture = fixture;
         }
 
+        private readonly AchievementFixture _fixture;
+
         [Fact]
-        [Trait("Feature", "Achievements")]
+        [Trait("Feature",  "Achievements")]
         [Trait("Category", "Unit")]
         public void DefaultMember_ShouldBeUndefined()
         {
@@ -25,8 +25,8 @@ namespace GW2SDK.Tests.Features.Achievements
         }
 
         [Fact]
-        [Trait("Feature", "Achievements")]
-        [Trait("Category", "Integration")]
+        [Trait("Feature",    "Achievements")]
+        [Trait("Category",   "Integration")]
         [Trait("Importance", "Critical")]
         public void AllMembers_ShouldNotHaveMissingMembers()
         {

@@ -27,7 +27,7 @@ namespace GW2SDK.Tests.Features.Tokens
         [Trait("Feature",    "Tokens")]
         [Trait("Category",   "Integration")]
         [Trait("Importance", "Critical")]
-        public void SubtokenInfo_ShouldHaveNoMissingMembers()
+        public void AllMembers_ShouldHaveNoMissingMembers()
         {
             var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output))
                                                               .UseMissingMemberHandling(MissingMemberHandling.Error)
@@ -40,7 +40,7 @@ namespace GW2SDK.Tests.Features.Tokens
         [Fact]
         [Trait("Feature",  "Tokens")]
         [Trait("Category", "Integration")]
-        public void SubtokenInfo_Id_ShouldNotBeEmpty()
+        public void Id_ShouldNotBeEmpty()
         {
             var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output)).Build();
 
@@ -52,7 +52,7 @@ namespace GW2SDK.Tests.Features.Tokens
         [Fact]
         [Trait("Feature",  "Tokens")]
         [Trait("Category", "Integration")]
-        public void SubtokenInfo_Name_ShouldBeGW2SDKFull()
+        public void Name_ShouldBeGW2SDKFull()
         {
             var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output)).Build();
 
@@ -63,11 +63,11 @@ namespace GW2SDK.Tests.Features.Tokens
             // If this key leaks to the outside world, it still can't be (ab)used to login with GW2BLTC.com or similar sites
             Assert.Equal("GW2SDK-Full", actual.Name);
         }
-        
+
         [Fact]
         [Trait("Feature",  "Tokens")]
         [Trait("Category", "Integration")]
-        public void SubtokenInfo_Permissions_ShouldHaveExpectedPermissions()
+        public void Permissions_ShouldHaveExpectedPermissions()
         {
             var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output)).Build();
 
@@ -81,7 +81,7 @@ namespace GW2SDK.Tests.Features.Tokens
         [Fact]
         [Trait("Feature",  "Tokens")]
         [Trait("Category", "Integration")]
-        public void SubtokenInfo_IssuedAt_ShouldHaveExpectedIssueTime()
+        public void IssuedAt_ShouldHaveExpectedIssueTime()
         {
             var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output)).Build();
 
@@ -96,7 +96,7 @@ namespace GW2SDK.Tests.Features.Tokens
         [Fact]
         [Trait("Feature",  "Tokens")]
         [Trait("Category", "Integration")]
-        public void SubtokenInfo_ExpiresAt_ShouldHaveExpectedExpirationTime()
+        public void ExpiresAt_ShouldHaveExpectedExpirationTime()
         {
             var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output)).Build();
 
@@ -105,12 +105,10 @@ namespace GW2SDK.Tests.Features.Tokens
             Assert.Equal(_fixture.ExpiresAt, actual.ExpiresAt);
         }
 
-        
-
         [Fact]
         [Trait("Feature",  "Tokens")]
         [Trait("Category", "Integration")]
-        public void SubtokenInfo_Urls_ShouldBeExpectedUrls()
+        public void Urls_ShouldBeExpectedUrls()
         {
             var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output)).Build();
 
