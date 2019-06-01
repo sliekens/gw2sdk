@@ -7,7 +7,7 @@ namespace GW2SDK.Tests.Features.Worlds
     public class PopulationTest
     {
         [Fact]
-        [Trait("Feature",  "Colors")]
+        [Trait("Feature",  "Worlds")]
         [Trait("Category", "Unit")]
         public void Population_ShouldNotDefineDefaultValue()
         {

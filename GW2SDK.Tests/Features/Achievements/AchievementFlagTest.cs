@@ -17,6 +17,8 @@ namespace GW2SDK.Tests.Features.Achievements
         private readonly AchievementFixture _fixture;
 
         [Fact]
+        [Trait("Feature",  "Achievements")]
+        [Trait("Category", "Unit")]
         public void DefaultMember_ShouldBeUndefined()
         {
             var actual = Enum.IsDefined(typeof(AchievementFlag), default(AchievementFlag));
