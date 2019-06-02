@@ -8,7 +8,8 @@ using Xunit.Abstractions;
 
 namespace GW2SDK.Tests.Features.Colors
 {
-    public class ColorTest : IClassFixture<ColorFixture>
+    [Collection(nameof(ColorDbCollection))]
+    public class ColorTest
     {
         public ColorTest(ColorFixture fixture, ITestOutputHelper output)
         {

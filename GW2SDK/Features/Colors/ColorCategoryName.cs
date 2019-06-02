@@ -1,6 +1,6 @@
 ﻿namespace GW2SDK.Features.Colors
 {
-    public enum ColorCategory
+    public enum ColorCategoryName
     {
         // Skip index 0 so that Enum.IsDefined returns false for default(ColorCategory)
         Blue = 1,

@@ -21,6 +21,6 @@ namespace GW2SDK.Features.Colors
 
         public int? Item { get; set; }
 
-        public ColorCategory[] Categories { get; set; }
+        public ColorCategoryName[] Categories { get; set; }
     }
 }

@@ -19,5 +19,16 @@ namespace GW2SDK.Tests.Features.Colors.Fixtures
             var id = (JValue) jobject.SelectToken("id");
             _db.Add(Convert.ToInt32(id.Value), json);
         }
+
+        public IEnumerable<string> GetColorCategoryNames()
+        {
+            return (
+                    from json in _db.Values
+                    let jobject = JObject.Parse(json)
+                    let flags = jobject.SelectTokens("categories[*]")
+                    select flags.Select(token => token.ToString())).SelectMany(entries => entries)
+                                                                   .Distinct();
+        }
+
     }
 }
