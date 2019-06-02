@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "GW2SDK.TestDataHelper": {
+      "commandName": "Project",
+      "commandLineArgs": ""
+    }
+  }
+}
