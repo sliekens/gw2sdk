@@ -375,7 +375,7 @@ namespace GW2SDK.Tests.Features.Achievements
         [Fact]
         [Trait("Feature",  "Achievements")]
         [Trait("Category", "Integration")]
-        public void Bits_OfTypeAchievementTextBit_Text_ShouldNotBeEmpty()
+        public void Bits_OfTypeAchievementTextBit_Text_ShouldNotBeNull()
         {
             var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output)).Build();
 
