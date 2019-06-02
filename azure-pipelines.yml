@@ -1,0 +1,36 @@
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger:
+- azure-pipelines
+
+pool:
+  vmImage: 'ubuntu-latest'
+steps:
+- task: UseDotNet@2
+  displayName: 'Use .NET Core sdk'
+  inputs:
+    version: 2.2.x
+- task: DotNetCoreCLI@2
+  inputs:
+    command: 'custom'
+    custom: 'user-secrets'
+    arguments: 'set ApiKeyBasic $(ApiKeyBasic)'
+    workingDirectory: '$(System.DefaultWorkingDirectory)/GW2SDK.Tests'
+  displayName: 'Configure ApiKeyBasic'
+- task: DotNetCoreCLI@2
+  inputs:
+    command: 'custom'
+    custom: 'user-secrets'
+    arguments: 'set ApiKeyFull $(ApiKeyFull)'
+    workingDirectory: '$(System.DefaultWorkingDirectory)/GW2SDK.Tests'
+  displayName: 'Configure ApiKeyFull'
+- task: DotNetCoreCLI@2
+  inputs:
+    command: 'build'
+  displayName: 'Build All Projects'
+- task: DotNetCoreCLI@2
+  inputs:
+    command: 'test'
+    azureSubscription: 'Azure'
+  displayName: 'Test All Projects'
