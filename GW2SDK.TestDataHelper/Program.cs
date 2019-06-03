@@ -54,6 +54,16 @@ namespace GW2SDK.TestDataHelper
                         Console.WriteLine(json);
                     }
                 }
+
+                if (feature == FeatureName.Items)
+                {
+                    var service = new JsonItemService(http);
+                    var jsons = await service.GetAllJsonItems(indented);
+                    foreach (var json in jsons)
+                    {
+                        Console.WriteLine(json);
+                    }
+                }
             }
         }
     }
@@ -66,6 +76,8 @@ namespace GW2SDK.TestDataHelper
 
         Colors,
 
-        Worlds
+        Worlds,
+
+        Items
     }
 }
