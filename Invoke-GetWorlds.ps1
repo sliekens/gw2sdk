@@ -1,0 +1,1 @@
+dotnet run -p .\GW2SDK.TestDataHelper\ --feature:worlds --out-file $ExecutionContext.SessionState.Path.GetUnresolvedProviderPathFromPSPath('.\GW2SDK.Tests\Data\worlds.json') 

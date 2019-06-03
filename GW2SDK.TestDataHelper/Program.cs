@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Net.Http;
 using System.Threading.Tasks;
 
@@ -6,8 +7,15 @@ namespace GW2SDK.TestDataHelper
 {
     public class Program
     {
-        public static async Task Main(FeatureName feature, bool indented = false, string baseAddress = "https://api.guildwars2.com")
+        public static async Task Main(FeatureName feature, bool indented = false, string baseAddress = "https://api.guildwars2.com", string outFile = null)
         {
+            if (outFile != null)
+            {
+                Directory.CreateDirectory(Path.GetDirectoryName(outFile));
+                Console.SetOut(File.CreateText(outFile));
+            }
+
+            using (Console.Out)
             using (var http = new HttpClient { BaseAddress = new Uri(baseAddress, UriKind.Absolute) })
             {
                 if (feature == FeatureName.Build)
