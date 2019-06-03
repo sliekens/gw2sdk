@@ -1,0 +1,1 @@
+dotnet run -p .\GW2SDK.TestDataHelper\ --feature:recipes --out-file $ExecutionContext.SessionState.Path.GetUnresolvedProviderPathFromPSPath('.\GW2SDK.Tests\Data\recipes.json') 

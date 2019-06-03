@@ -12,6 +12,7 @@
 
   <ItemGroup>
     <Folder Include="Features\Items\" />
+    <Folder Include="Features\Recipes\" />
   </ItemGroup>
 
 </Project>
