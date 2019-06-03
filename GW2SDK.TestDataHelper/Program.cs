@@ -64,6 +64,16 @@ namespace GW2SDK.TestDataHelper
                         Console.WriteLine(json);
                     }
                 }
+
+                if (feature == FeatureName.Recipes)
+                {
+                    var service = new JsonRecipeService(http);
+                    var jsons = await service.GetAllJsonRecipes(indented);
+                    foreach (var json in jsons)
+                    {
+                        Console.WriteLine(json);
+                    }
+                }
             }
         }
     }
@@ -78,6 +88,8 @@ namespace GW2SDK.TestDataHelper
 
         Worlds,
 
-        Items
+        Items,
+
+        Recipes
     }
 }
