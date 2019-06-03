@@ -22,13 +22,10 @@ namespace GW2SDK.TestDataHelper
         {
             var ids = await GetAchievementIds();
             var list = new List<string>(ids.Count);
-            foreach (var subset in ids.Buffer(200))
+            var tasks = ids.Buffer(200).Select(subset => GetJsonAchievementsByIds(subset.ToList(), indented));
+            foreach (var result in await Task.WhenAll(tasks))
             {
-                var achievements = await GetJsonAchievementsByIds(subset.ToList(), indented);
-                foreach (var achievement in achievements)
-                {
-                    list.Add(achievement);
-                }
+                list.AddRange(result);
             }
 
             return list;
