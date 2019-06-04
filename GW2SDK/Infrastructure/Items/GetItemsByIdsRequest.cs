@@ -5,9 +5,9 @@ using GW2SDK.Extensions;
 
 namespace GW2SDK.Infrastructure.Items
 {
-    public class GetItemsByIdsRequest : HttpRequestMessage
+    public sealed class GetItemsByIdsRequest : HttpRequestMessage
     {
-        private GetItemsByIdsRequest(Uri requestUri)
+        private GetItemsByIdsRequest([NotNull] Uri requestUri)
             : base(HttpMethod.Get, requestUri)
         {
         }

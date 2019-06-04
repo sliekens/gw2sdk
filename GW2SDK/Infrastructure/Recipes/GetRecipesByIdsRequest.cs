@@ -5,9 +5,9 @@ using GW2SDK.Extensions;
 
 namespace GW2SDK.Infrastructure.Recipes
 {
-    public class GetRecipesByIdsRequest : HttpRequestMessage
+    public sealed class GetRecipesByIdsRequest : HttpRequestMessage
     {
-        private GetRecipesByIdsRequest(Uri requestUri)
+        private GetRecipesByIdsRequest([NotNull] Uri requestUri)
             : base(HttpMethod.Get, requestUri)
         {
         }
