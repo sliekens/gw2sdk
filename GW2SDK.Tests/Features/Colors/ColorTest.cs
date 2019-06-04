@@ -22,8 +22,8 @@ namespace GW2SDK.Tests.Features.Colors
         private readonly ITestOutputHelper _output;
 
         [Fact]
-        [Trait("Feature",  "Colors")]
-        [Trait("Category", "Integration")]
+        [Trait("Feature",    "Colors")]
+        [Trait("Category",   "Integration")]
         [Trait("Importance", "Critical")]
         public void AllMembers_ShouldHaveNoMissingMembers()
         {
@@ -31,7 +31,7 @@ namespace GW2SDK.Tests.Features.Colors
                                                               .UseMissingMemberHandling(MissingMemberHandling.Error)
                                                               .Build();
 
-            Assert.All(_fixture.Db.Colors,
+            AssertEx.ForEach(_fixture.Db.Colors,
                 json =>
                 {
                     // Next statement throws if there are missing members
@@ -46,7 +46,7 @@ namespace GW2SDK.Tests.Features.Colors
         {
             var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output)).Build();
 
-            Assert.All(_fixture.Db.Colors,
+            AssertEx.ForEach(_fixture.Db.Colors,
                 json =>
                 {
                     var actual = JsonConvert.DeserializeObject<Color>(json, settings);
@@ -62,7 +62,7 @@ namespace GW2SDK.Tests.Features.Colors
         {
             var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output)).Build();
 
-            Assert.All(_fixture.Db.Colors,
+            AssertEx.ForEach(_fixture.Db.Colors,
                 json =>
                 {
                     var actual = JsonConvert.DeserializeObject<Color>(json, settings);
@@ -78,7 +78,7 @@ namespace GW2SDK.Tests.Features.Colors
         {
             var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output)).Build();
 
-            Assert.All(_fixture.Db.Colors,
+            AssertEx.ForEach(_fixture.Db.Colors,
                 json =>
                 {
                     var actual = JsonConvert.DeserializeObject<Color>(json, settings);
@@ -94,7 +94,7 @@ namespace GW2SDK.Tests.Features.Colors
         {
             var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output)).Build();
 
-            Assert.All(_fixture.Db.Colors,
+            AssertEx.ForEach(_fixture.Db.Colors,
                 json =>
                 {
                     var actual = JsonConvert.DeserializeObject<Color>(json, settings);
@@ -110,7 +110,7 @@ namespace GW2SDK.Tests.Features.Colors
         {
             var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output)).Build();
 
-            Assert.All(_fixture.Db.Colors,
+            AssertEx.ForEach(_fixture.Db.Colors,
                 json =>
                 {
                     var actual = JsonConvert.DeserializeObject<Color>(json, settings);
@@ -126,7 +126,7 @@ namespace GW2SDK.Tests.Features.Colors
         {
             var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output)).Build();
 
-            Assert.All(_fixture.Db.Colors,
+            AssertEx.ForEach(_fixture.Db.Colors,
                 json =>
                 {
                     var actual = JsonConvert.DeserializeObject<Color>(json, settings);
@@ -142,7 +142,7 @@ namespace GW2SDK.Tests.Features.Colors
         {
             var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output)).Build();
 
-            Assert.All(_fixture.Db.Colors,
+            AssertEx.ForEach(_fixture.Db.Colors,
                 json =>
                 {
                     var actual = JsonConvert.DeserializeObject<Color>(json, settings);
@@ -158,7 +158,7 @@ namespace GW2SDK.Tests.Features.Colors
         {
             var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output)).Build();
 
-            Assert.All(_fixture.Db.Colors,
+            AssertEx.ForEach(_fixture.Db.Colors,
                 json =>
                 {
                     var actual = JsonConvert.DeserializeObject<Color>(json, settings);

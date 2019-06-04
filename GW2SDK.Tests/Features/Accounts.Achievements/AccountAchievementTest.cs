@@ -30,7 +30,7 @@ namespace GW2SDK.Tests.Features.Accounts.Achievements
                                                               .UseMissingMemberHandling(MissingMemberHandling.Error)
                                                               .Build();
 
-            Assert.All(_fixture.Db.AccountAchievements,
+            AssertEx.ForEach(_fixture.Db.AccountAchievements,
                 json =>
                 {
                     // Next statement throws if there are missing members
