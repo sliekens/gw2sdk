@@ -30,7 +30,7 @@ namespace GW2SDK.Tests.Features.Worlds
                                                               .UseMissingMemberHandling(MissingMemberHandling.Error)
                                                               .Build();
 
-            Assert.All(_fixture.Db.Worlds,
+            AssertEx.ForEach(_fixture.Db.Worlds,
                 json =>
                 {
                     // Next statement throws if there are missing members
@@ -45,7 +45,7 @@ namespace GW2SDK.Tests.Features.Worlds
         {
             var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output)).Build();
 
-            Assert.All(_fixture.Db.Worlds,
+            AssertEx.ForEach(_fixture.Db.Worlds,
                 json =>
                 {
                     var actual = JsonConvert.DeserializeObject<World>(json, settings);
@@ -60,7 +60,7 @@ namespace GW2SDK.Tests.Features.Worlds
         {
             var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output)).Build();
 
-            Assert.All(_fixture.Db.Worlds,
+            AssertEx.ForEach(_fixture.Db.Worlds,
                 json =>
                 {
                     var actual = JsonConvert.DeserializeObject<World>(json, settings);

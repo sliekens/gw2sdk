@@ -32,7 +32,7 @@ namespace GW2SDK.Tests.Features.Achievements
                                                               .UseMissingMemberHandling(MissingMemberHandling.Error)
                                                               .Build();
 
-            Assert.All(_fixture.Db.Achievements,
+            AssertEx.ForEach(_fixture.Db.Achievements,
                 json =>
                 {
                     // Next statement throws if there are missing members
@@ -49,7 +49,7 @@ namespace GW2SDK.Tests.Features.Achievements
 
             var achievements = _fixture.Db.Achievements.Select(json => JsonConvert.DeserializeObject<Achievement>(json, settings)).ToList();
 
-            Assert.All(achievements, actual => Assert.InRange(actual.Id, 1, int.MaxValue));
+            AssertEx.ForEach(achievements, actual => Assert.InRange(actual.Id, 1, int.MaxValue));
         }
 
         [Fact]
@@ -61,7 +61,7 @@ namespace GW2SDK.Tests.Features.Achievements
 
             var achievements = _fixture.Db.Achievements.Select(json => JsonConvert.DeserializeObject<Achievement>(json, settings)).ToList();
 
-            Assert.All(achievements, actual => Assert.NotEmpty(actual.Name));
+            AssertEx.ForEach(achievements, actual => Assert.NotEmpty(actual.Name));
         }
 
         [Fact]
@@ -73,7 +73,7 @@ namespace GW2SDK.Tests.Features.Achievements
 
             var achievements = _fixture.Db.Achievements.Select(json => JsonConvert.DeserializeObject<Achievement>(json, settings)).ToList();
 
-            Assert.All(achievements, actual => Assert.NotNull(actual.Description));
+            AssertEx.ForEach(achievements, actual => Assert.NotNull(actual.Description));
         }
 
         [Fact]
@@ -98,7 +98,7 @@ namespace GW2SDK.Tests.Features.Achievements
 
             var achievements = _fixture.Db.Achievements.Select(json => JsonConvert.DeserializeObject<Achievement>(json, settings)).ToList();
 
-            Assert.All(achievements, actual => Assert.NotNull(actual.Requirement));
+            AssertEx.ForEach(achievements, actual => Assert.NotNull(actual.Requirement));
         }
 
         [Fact]
@@ -123,7 +123,7 @@ namespace GW2SDK.Tests.Features.Achievements
 
             var achievements = _fixture.Db.Achievements.Select(json => JsonConvert.DeserializeObject<Achievement>(json, settings)).ToList();
 
-            Assert.All(achievements, actual => Assert.NotNull(actual.LockedText));
+            AssertEx.ForEach(achievements, actual => Assert.NotNull(actual.LockedText));
         }
 
         [Fact]
@@ -148,7 +148,7 @@ namespace GW2SDK.Tests.Features.Achievements
 
             var achievements = _fixture.Db.Achievements.Select(json => JsonConvert.DeserializeObject<Achievement>(json, settings)).ToList();
 
-            Assert.All(achievements, actual => Assert.NotEmpty(actual.Flags));
+            AssertEx.ForEach(achievements, actual => Assert.NotEmpty(actual.Flags));
         }
 
         [Fact]
@@ -160,7 +160,7 @@ namespace GW2SDK.Tests.Features.Achievements
 
             var achievements = _fixture.Db.Achievements.Select(json => JsonConvert.DeserializeObject<Achievement>(json, settings)).ToList();
 
-            Assert.All(achievements, actual => Assert.NotEmpty(actual.Tiers));
+            AssertEx.ForEach(achievements, actual => Assert.NotEmpty(actual.Tiers));
         }
 
         [Fact]
@@ -172,7 +172,7 @@ namespace GW2SDK.Tests.Features.Achievements
 
             var achievements = _fixture.Db.Achievements.Select(json => JsonConvert.DeserializeObject<Achievement>(json, settings)).ToList();
 
-            Assert.All(achievements, actual => Assert.DoesNotContain(null, actual.Tiers));
+            AssertEx.ForEach(achievements, actual => Assert.DoesNotContain(null, actual.Tiers));
         }
 
         [Fact]
@@ -197,7 +197,7 @@ namespace GW2SDK.Tests.Features.Achievements
 
             var achievements = _fixture.Db.Achievements.Select(json => JsonConvert.DeserializeObject<Achievement>(json, settings)).ToList();
 
-            Assert.All(achievements,
+            AssertEx.ForEach(achievements,
                 actual =>
                 {
                     if (actual.Rewards is object)
@@ -216,7 +216,7 @@ namespace GW2SDK.Tests.Features.Achievements
 
             var achievements = _fixture.Db.Achievements.Select(json => JsonConvert.DeserializeObject<Achievement>(json, settings)).ToList();
 
-            Assert.All(achievements,
+            AssertEx.ForEach(achievements,
                 actual =>
                 {
                     if (actual.Rewards is object)
@@ -238,7 +238,7 @@ namespace GW2SDK.Tests.Features.Achievements
             var titleRewards = achievements.Where(achievement => achievement.Rewards is object)
                                            .SelectMany(achievement => achievement.Rewards.OfType<TitleReward>());
 
-            Assert.All(titleRewards,
+            AssertEx.ForEach(titleRewards,
                 actual =>
                 {
                     Assert.InRange(actual.Id, 1, int.MaxValue);
@@ -257,7 +257,7 @@ namespace GW2SDK.Tests.Features.Achievements
             var masteryRewards = achievements.Where(achievement => achievement.Rewards is object)
                                              .SelectMany(achievement => achievement.Rewards.OfType<MasteryReward>());
 
-            Assert.All(masteryRewards,
+            AssertEx.ForEach(masteryRewards,
                 actual =>
                 {
                     Assert.InRange(actual.Id, 1, int.MaxValue);
@@ -276,7 +276,7 @@ namespace GW2SDK.Tests.Features.Achievements
             var itemRewards = achievements.Where(achievement => achievement.Rewards is object)
                                           .SelectMany(achievement => achievement.Rewards.OfType<ItemReward>());
 
-            Assert.All(itemRewards,
+            AssertEx.ForEach(itemRewards,
                 actual =>
                 {
                     Assert.InRange(actual.Id, 1, int.MaxValue);
@@ -295,7 +295,7 @@ namespace GW2SDK.Tests.Features.Achievements
             var itemRewards = achievements.Where(achievement => achievement.Rewards is object)
                                           .SelectMany(achievement => achievement.Rewards.OfType<ItemReward>());
 
-            Assert.All(itemRewards,
+            AssertEx.ForEach(itemRewards,
                 actual =>
                 {
                     Assert.InRange(actual.Count, 1, int.MaxValue);
@@ -314,7 +314,7 @@ namespace GW2SDK.Tests.Features.Achievements
             var itemRewards = achievements.Where(achievement => achievement.Rewards is object)
                                           .SelectMany(achievement => achievement.Rewards.OfType<CoinsReward>());
 
-            Assert.All(itemRewards,
+            AssertEx.ForEach(itemRewards,
                 actual =>
                 {
                     Assert.InRange(actual.Count, 1, int.MaxValue);
@@ -343,7 +343,7 @@ namespace GW2SDK.Tests.Features.Achievements
 
             var achievements = _fixture.Db.Achievements.Select(json => JsonConvert.DeserializeObject<Achievement>(json, settings)).ToList();
 
-            Assert.All(achievements,
+            AssertEx.ForEach(achievements,
                 actual =>
                 {
                     if (actual.Bits is object)
@@ -362,7 +362,7 @@ namespace GW2SDK.Tests.Features.Achievements
 
             var achievements = _fixture.Db.Achievements.Select(json => JsonConvert.DeserializeObject<Achievement>(json, settings)).ToList();
 
-            Assert.All(achievements,
+            AssertEx.ForEach(achievements,
                 actual =>
                 {
                     if (actual.Bits is object)
@@ -384,7 +384,7 @@ namespace GW2SDK.Tests.Features.Achievements
             var textBits = achievements.Where(achievement => achievement.Bits is object)
                                        .SelectMany(achievement => achievement.Bits.OfType<AchievementTextBit>());
 
-            Assert.All(textBits, actual => Assert.NotNull(actual.Text));
+            AssertEx.ForEach(textBits, actual => Assert.NotNull(actual.Text));
         }
 
         [Fact]
@@ -399,7 +399,7 @@ namespace GW2SDK.Tests.Features.Achievements
             var textBits = achievements.Where(achievement => achievement.Bits is object)
                                        .SelectMany(achievement => achievement.Bits.OfType<AchievementMinipetBit>());
 
-            Assert.All(textBits, actual => Assert.InRange(actual.Id, 1, int.MaxValue));
+            AssertEx.ForEach(textBits, actual => Assert.InRange(actual.Id, 1, int.MaxValue));
         }
 
         [Fact]
@@ -414,7 +414,7 @@ namespace GW2SDK.Tests.Features.Achievements
             var textBits = achievements.Where(achievement => achievement.Bits is object)
                                        .SelectMany(achievement => achievement.Bits.OfType<AchievementItemBit>());
 
-            Assert.All(textBits, actual => Assert.InRange(actual.Id, 1, int.MaxValue));
+            AssertEx.ForEach(textBits, actual => Assert.InRange(actual.Id, 1, int.MaxValue));
         }
 
         [Fact]
@@ -429,7 +429,7 @@ namespace GW2SDK.Tests.Features.Achievements
             var textBits = achievements.Where(achievement => achievement.Bits is object)
                                        .SelectMany(achievement => achievement.Bits.OfType<AchievementSkinBit>());
 
-            Assert.All(textBits, actual => Assert.InRange(actual.Id, 1, int.MaxValue));
+            AssertEx.ForEach(textBits, actual => Assert.InRange(actual.Id, 1, int.MaxValue));
         }
 
         [Fact]
@@ -454,7 +454,7 @@ namespace GW2SDK.Tests.Features.Achievements
 
             var achievements = _fixture.Db.Achievements.Select(json => JsonConvert.DeserializeObject<Achievement>(json, settings)).ToList();
 
-            Assert.All(achievements,
+            AssertEx.ForEach(achievements,
                 actual =>
                 {
                     if (actual.Prerequisites is object)
@@ -486,7 +486,7 @@ namespace GW2SDK.Tests.Features.Achievements
 
             var achievements = _fixture.Db.Achievements.Select(json => JsonConvert.DeserializeObject<Achievement>(json, settings)).ToList();
 
-            Assert.All(achievements,
+            AssertEx.ForEach(achievements,
                 actual =>
                 {
                     if (actual.PointCap.HasValue && actual.PointCap.Value != -1)
@@ -518,7 +518,7 @@ namespace GW2SDK.Tests.Features.Achievements
 
             var achievements = _fixture.Db.Achievements.Select(json => JsonConvert.DeserializeObject<Achievement>(json, settings)).ToList();
 
-            Assert.All(achievements,
+            AssertEx.ForEach(achievements,
                 actual =>
                 {
                     if (actual.Icon is object)
