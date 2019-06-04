@@ -20,6 +20,6 @@ namespace GW2SDK.Tests.Shared
             _output.WriteLine("{0}: {1}", level.ToString(), message);
         }
 
-        public TraceLevel LevelFilter => TraceLevel.Verbose;
+        public TraceLevel LevelFilter => TraceLevel.Info;
     }
 }
