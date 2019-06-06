@@ -17,9 +17,12 @@ namespace GW2SDK.Tests.Shared
 
         public void Trace(TraceLevel level, string message, Exception ex)
         {
-            _output.WriteLine("{0}: {1}", level.ToString(), message);
+            if (level <= LevelFilter)
+            {
+                _output.WriteLine("{0}: {1}", level.ToString(), message);
+            }
         }
 
-        public TraceLevel LevelFilter => TraceLevel.Info;
+        public TraceLevel LevelFilter => TraceLevel.Warning;
     }
 }
