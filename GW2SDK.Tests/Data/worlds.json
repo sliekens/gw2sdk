@@ -2,7 +2,7 @@
 {"id":1002,"name":"Borlis Pass","population":"Medium"}
 {"id":1003,"name":"Yak's Bend","population":"Full"}
 {"id":1004,"name":"Henge of Denravi","population":"VeryHigh"}
-{"id":1005,"name":"Maguuma","population":"High"}
+{"id":1005,"name":"Maguuma","population":"VeryHigh"}
 {"id":1006,"name":"Sorrow's Furnace","population":"Full"}
 {"id":1007,"name":"Gate of Madness","population":"High"}
 {"id":1008,"name":"Jade Quarry","population":"High"}
@@ -11,7 +11,7 @@
 {"id":1011,"name":"Stormbluff Isle","population":"Full"}
 {"id":1012,"name":"Darkhaven","population":"Medium"}
 {"id":1013,"name":"Sanctum of Rall","population":"Medium"}
-{"id":1014,"name":"Crystal Desert","population":"VeryHigh"}
+{"id":1014,"name":"Crystal Desert","population":"High"}
 {"id":1015,"name":"Isle of Janthir","population":"Medium"}
 {"id":1016,"name":"Sea of Sorrows","population":"VeryHigh"}
 {"id":1017,"name":"Tarnished Coast","population":"Full"}
@@ -30,13 +30,13 @@
 {"id":2006,"name":"Underworld","population":"High"}
 {"id":2007,"name":"Far Shiverpeaks","population":"High"}
 {"id":2008,"name":"Whiteside Ridge","population":"VeryHigh"}
-{"id":2009,"name":"Ruins of Surmia","population":"VeryHigh"}
+{"id":2009,"name":"Ruins of Surmia","population":"High"}
 {"id":2010,"name":"Seafarer's Rest","population":"VeryHigh"}
-{"id":2011,"name":"Vabbi","population":"High"}
+{"id":2011,"name":"Vabbi","population":"Medium"}
 {"id":2012,"name":"Piken Square","population":"Full"}
 {"id":2013,"name":"Aurora Glade","population":"High"}
-{"id":2014,"name":"Gunnar's Hold","population":"Medium"}
-{"id":2101,"name":"Jade Sea [FR]","population":"Full"}
+{"id":2014,"name":"Gunnar's Hold","population":"High"}
+{"id":2101,"name":"Jade Sea [FR]","population":"VeryHigh"}
 {"id":2102,"name":"Fort Ranik [FR]","population":"Medium"}
 {"id":2103,"name":"Augury Rock [FR]","population":"VeryHigh"}
 {"id":2104,"name":"Vizunah Square [FR]","population":"Medium"}
