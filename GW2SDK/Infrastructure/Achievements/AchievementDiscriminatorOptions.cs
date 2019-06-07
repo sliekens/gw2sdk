@@ -6,6 +6,11 @@ namespace GW2SDK.Infrastructure.Achievements
 {
     public sealed class AchievementDiscriminatorOptions : DiscriminatorOptions
     {
+        public AchievementDiscriminatorOptions()
+        {
+            Activator = Create;
+        }
+
         public override Type BaseType => typeof(Achievement);
 
         public override string DiscriminatorFieldName => "type";
@@ -18,18 +23,10 @@ namespace GW2SDK.Infrastructure.Achievements
             yield return ("ItemSet", typeof(ItemSetAchievement));
         }
 
-        public override object Create(Type objectType)
+        public object Create(Type objectType)
         {
-            if (objectType == typeof(Achievement))
-            {
-                return new Achievement();
-            }
-
-            if (objectType == typeof(ItemSetAchievement))
-            {
-                return new ItemSetAchievement();
-            }
-
+            if (objectType == typeof(Achievement)) return new Achievement();
+            if (objectType == typeof(ItemSetAchievement)) return new ItemSetAchievement();
             return new Achievement();
         }
     }

@@ -21,6 +21,6 @@ namespace GW2SDK.Infrastructure
         public abstract IEnumerable<(string TypeName, Type Type)> GetDiscriminatedTypes();
 
         /// <summary>Creates an object which will then be populated by the serializer.</summary>
-        public abstract object Create(Type objectType);
+        public virtual Func<Type, object> Activator { get; protected set; } = null;
     }
 }
