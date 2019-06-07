@@ -6,12 +6,17 @@ namespace GW2SDK.Infrastructure.Achievements
 {
     public sealed class AchievementRewardDiscriminatorOptions : DiscriminatorOptions
     {
+        public AchievementRewardDiscriminatorOptions()
+        {
+            Activator = Create;
+        }
+
         public override Type BaseType => typeof(AchievementReward);
 
         public override string DiscriminatorFieldName => "type";
-        
+
         public override bool SerializeDiscriminator => false;
-        
+
         public override IEnumerable<(string TypeName, Type Type)> GetDiscriminatedTypes()
         {
             yield return ("Title", typeof(TitleReward));
@@ -20,28 +25,12 @@ namespace GW2SDK.Infrastructure.Achievements
             yield return ("Coins", typeof(CoinsReward));
         }
 
-        public override object Create(Type objectType)
+        public object Create(Type objectType)
         {
-            if (objectType == typeof(TitleReward))
-            {
-                return new TitleReward();
-            }
-
-            if (objectType == typeof(MasteryReward))
-            {
-                return new MasteryReward();
-            }
-
-            if (objectType == typeof(ItemReward))
-            {
-                return new ItemReward();
-            }
-
-            if (objectType == typeof(CoinsReward))
-            {
-                return new CoinsReward();
-            }
-
+            if (objectType == typeof(TitleReward)) return new TitleReward();
+            if (objectType == typeof(MasteryReward)) return new MasteryReward();
+            if (objectType == typeof(ItemReward)) return new ItemReward();
+            if (objectType == typeof(CoinsReward)) return new CoinsReward();
             return new AchievementReward();
         }
     }

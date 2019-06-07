@@ -65,7 +65,8 @@ namespace GW2SDK.Infrastructure
 
         private object ReadJsonImpl(JsonReader reader, string discriminator, Type objectType, JsonSerializer serializer)
         {
-            var value = _discriminatorOptions.Create(objectType);
+            var activator = _discriminatorOptions.Activator ?? Activator.CreateInstance;
+            var value = activator(objectType);
             if (value == null)
             {
                 throw new JsonSerializationException($"No object created for discriminator '{discriminator}'.");

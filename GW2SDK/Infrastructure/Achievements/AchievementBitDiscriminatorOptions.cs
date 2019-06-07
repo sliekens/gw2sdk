@@ -6,6 +6,11 @@ namespace GW2SDK.Infrastructure.Achievements
 {
     public sealed class AchievementBitDiscriminatorOptions : DiscriminatorOptions
     {
+        public AchievementBitDiscriminatorOptions()
+        {
+            Activator = Create;
+        }
+
         public override Type BaseType => typeof(AchievementBit);
 
         public override string DiscriminatorFieldName => "type";
@@ -20,29 +25,12 @@ namespace GW2SDK.Infrastructure.Achievements
             yield return ("Skin", typeof(AchievementSkinBit));
         }
 
-        public override object Create(Type objectType)
+        public object Create(Type objectType)
         {
-            if (objectType == typeof(AchievementTextBit))
-            {
-                return new AchievementTextBit();
-            }
-
-            if (objectType == typeof(AchievementMinipetBit))
-            {
-                return new AchievementMinipetBit();
-            }
-
-
-            if (objectType == typeof(AchievementItemBit))
-            {
-                return new AchievementItemBit();
-            }
-
-            if (objectType == typeof(AchievementSkinBit))
-            {
-                return new AchievementSkinBit();
-            }
-
+            if (objectType == typeof(AchievementTextBit)) return new AchievementTextBit();
+            if (objectType == typeof(AchievementMinipetBit)) return new AchievementMinipetBit();
+            if (objectType == typeof(AchievementItemBit)) return new AchievementItemBit();
+            if (objectType == typeof(AchievementSkinBit)) return new AchievementSkinBit();
             return new AchievementBit();
         }
     }

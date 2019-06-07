@@ -6,6 +6,11 @@ namespace GW2SDK.Infrastructure.Tokens
 {
     public sealed class TokenDiscriminatorOptions : DiscriminatorOptions
     {
+        public TokenDiscriminatorOptions()
+        {
+            Activator = Create;
+        }
+
         public override Type BaseType => typeof(TokenInfo);
 
         public override string DiscriminatorFieldName => "type";
@@ -18,18 +23,10 @@ namespace GW2SDK.Infrastructure.Tokens
             yield return ("Subtoken", typeof(SubtokenInfo));
         }
 
-        public override object Create(Type objectType)
+        public object Create(Type objectType)
         {
-            if (objectType == typeof(ApiKeyInfo))
-            {
-                return new ApiKeyInfo();
-            }
-
-            if (objectType == typeof(SubtokenInfo))
-            {
-                return new SubtokenInfo();
-            }
-
+            if (objectType == typeof(ApiKeyInfo)) return new ApiKeyInfo();
+            if (objectType == typeof(SubtokenInfo)) return new SubtokenInfo();
             return new TokenInfo();
         }
     }
