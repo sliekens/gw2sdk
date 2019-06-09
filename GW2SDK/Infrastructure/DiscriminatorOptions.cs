@@ -1,8 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using Newtonsoft.Json.Linq;
 
 namespace GW2SDK.Infrastructure
 {
+   public delegate object CustomObjectCreator([NotNull] Type discriminatedType);
+
+   public delegate void JsonPreprocessor([NotNull] string discriminator, [NotNull] JObject jsonObject);
+
     /// <summary>
     ///     Extend this class to configure a type with a discriminator field.
     /// </summary>
@@ -20,7 +25,10 @@ namespace GW2SDK.Infrastructure
         /// <summary>Gets the mappings from discriminator values to CLR types.</summary>
         public abstract IEnumerable<(string TypeName, Type Type)> GetDiscriminatedTypes();
 
-        /// <summary>Creates an object which will then be populated by the serializer.</summary>
-        public virtual Func<Type, object> Activator { get; protected set; } = null;
+        /// <summary>Callback that creates an object which will then be populated by the serializer.</summary>
+        public CustomObjectCreator Activator { get; protected set; } = null;
+
+        /// <summary>Callback that can optionally mutate the JObject before it is converted.</summary>
+        public JsonPreprocessor Preprocessor { get; protected set; } = null;
     }
 }

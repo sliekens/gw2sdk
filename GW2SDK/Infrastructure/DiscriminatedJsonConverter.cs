@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Linq;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
@@ -32,14 +33,44 @@ namespace GW2SDK.Infrastructure
             var discriminatorField = json.Property(_discriminatorOptions.DiscriminatorFieldName);
             if (discriminatorField is null)
             {
-                serializer.TraceWriter?.Trace(TraceLevel.Error, $"Could not find discriminator field '{_discriminatorOptions.DiscriminatorFieldName}'.", null);
+                if (serializer.TraceWriter?.LevelFilter >= TraceLevel.Error)
+                {
+                    serializer.TraceWriter.Trace(TraceLevel.Error,
+                        $"Could not find discriminator field '{_discriminatorOptions.DiscriminatorFieldName}'.",
+                        null);
+                }
+
                 throw new JsonSerializationException($"Could not find discriminator field with name '{_discriminatorOptions.DiscriminatorFieldName}'.");
             }
 
             var discriminatorFieldValue = discriminatorField.Value.ToString();
-            serializer.TraceWriter?.Trace(TraceLevel.Info,
-                $"Found discriminator field '{discriminatorField.Name}' with value '{discriminatorFieldValue}'.",
-                null);
+            if (serializer.TraceWriter?.LevelFilter >= TraceLevel.Info)
+            {
+                serializer.TraceWriter.Trace(TraceLevel.Info,
+                    $"Found discriminator field '{discriminatorField.Name}' with value '{discriminatorFieldValue}'.",
+                    null);
+            }
+
+            var found = _discriminatorOptions.GetDiscriminatedTypes().FirstOrDefault(tuple => tuple.TypeName == discriminatorFieldValue).Type;
+            if (found == null)
+            {
+                found = objectType;
+                if (serializer.TraceWriter?.LevelFilter >= TraceLevel.Warning)
+                {
+                    serializer.TraceWriter.Trace(TraceLevel.Warning,
+                        $"Discriminator value '{discriminatorFieldValue}' has no corresponding Type. Continuing anyway with Type '{objectType}'.",
+                        null);
+                }
+            }
+            else
+            {
+                if (serializer.TraceWriter?.LevelFilter >= TraceLevel.Warning)
+                {
+                    serializer.TraceWriter.Trace(TraceLevel.Info, $"Discriminator value '{discriminatorFieldValue}' was used to select Type '{found}'.", null);
+                }
+            }
+
+            _discriminatorOptions.Preprocessor?.Invoke(discriminatorFieldValue, json);
             if (!_discriminatorOptions.SerializeDiscriminator)
             {
                 // Remove the discriminator field from the JSON for two possible reasons:
@@ -48,31 +79,16 @@ namespace GW2SDK.Infrastructure
                 discriminatorField.Remove();
             }
 
-            foreach (var (typeName, type) in _discriminatorOptions.GetDiscriminatedTypes())
+            // There might be a different converter on the 'found' type
+            // Use Deserialize to let Json.NET choose the next converter
+            // Use Populate to ignore any remaining converters (prevents recursion when the next converter is the same as this)
+            if (found != objectType && found.CustomAttributes.Any(attribute => attribute.AttributeType == typeof(JsonConverterAttribute)))
             {
-                if (discriminatorFieldValue == typeName)
-                {
-                    serializer.TraceWriter?.Trace(TraceLevel.Info, $"Discriminator value '{discriminatorFieldValue}' was used to select Type '{type}'.", null);
-                    return ReadJsonImpl(json.CreateReader(), discriminatorFieldValue, type, serializer);
-                }
+                return serializer.Deserialize(json.CreateReader(), found);
             }
 
-            serializer.TraceWriter?.Trace(TraceLevel.Warning,
-                $"Discriminator value '{discriminatorFieldValue}' has no corresponding Type. Continuing anyway with Type '{objectType}'.",
-                null);
-            return ReadJsonImpl(json.CreateReader(), discriminatorFieldValue, null, serializer);
-        }
-
-        private object ReadJsonImpl(JsonReader reader, string discriminator, Type objectType, JsonSerializer serializer)
-        {
-            var activator = _discriminatorOptions.Activator ?? Activator.CreateInstance;
-            var value = activator(objectType);
-            if (value == null)
-            {
-                throw new JsonSerializationException($"No object created for discriminator '{discriminator}'.");
-            }
-
-            serializer.Populate(reader, value);
+            var value = _discriminatorOptions.Activator?.Invoke(found) ?? Activator.CreateInstance(found);
+            serializer.Populate(json.CreateReader(), value);
             return value;
         }
 
