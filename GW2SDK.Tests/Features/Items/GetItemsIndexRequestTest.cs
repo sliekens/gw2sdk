@@ -5,14 +5,14 @@ using Xunit;
 
 namespace GW2SDK.Tests.Features.Items
 {
-    public class GetItemIdsRequestTest
+    public class GetItemsIndexRequestTest
     {
         [Fact]
         [Trait("Feature",  "Items")]
         [Trait("Category", "Unit")]
         public void Method_ShouldBeGet()
         {
-            var sut = new GetItemIdsRequest();
+            var sut = new GetItemsIndexRequest();
 
             Assert.Equal(HttpMethod.Get, sut.Method);
         }
@@ -22,7 +22,7 @@ namespace GW2SDK.Tests.Features.Items
         [Trait("Category", "Unit")]
         public void RequestUri_ShouldBeV2Items()
         {
-            var sut = new GetItemIdsRequest();
+            var sut = new GetItemsIndexRequest();
 
             var expected = new Uri("/v2/items", UriKind.Relative);
 

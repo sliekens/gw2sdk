@@ -20,7 +20,7 @@ namespace GW2SDK.TestDataHelper
 
         public async Task<List<string>> GetAllJsonItems(bool indented)
         {
-            var ids = await GetItemIds();
+            var ids = await GetItemsIndex();
             var list = new List<string>(ids.Count);
             var tasks = ids.Buffer(200).Select(subset => GetJsonItemsByIds(subset.ToList(), indented));
             foreach (var result in await Task.WhenAll(tasks))
@@ -31,9 +31,9 @@ namespace GW2SDK.TestDataHelper
             return list;
         }
 
-        private async Task<List<int>> GetItemIds()
+        private async Task<List<int>> GetItemsIndex()
         {
-            using (var request = new GetItemIdsRequest())
+            using (var request = new GetItemsIndexRequest())
             using (var response = await _http.SendAsync(request))
             {
                 var json = await response.Content.ReadAsStringAsync();
