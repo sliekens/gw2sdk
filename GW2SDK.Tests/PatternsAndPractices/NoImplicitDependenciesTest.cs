@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Reflection;
 using GW2SDK.Infrastructure;
 using Xunit;
@@ -18,7 +19,7 @@ namespace GW2SDK.Tests.PatternsAndPractices
         public void EveryConstructor_ShouldBeExplicitAboutNullability()
         {
             var classes = _fixture.Assembly.GetTypes().Where(type => type.IsClass).ToList();
-            foreach (var @class in classes)
+            foreach (var @class in classes.Where(c => !typeof(MulticastDelegate).IsAssignableFrom(c)))
             foreach (var constructorInfo in @class.GetConstructors(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic))
             foreach (var parameterInfo in constructorInfo.GetParameters())
             {
