@@ -4,6 +4,9 @@
 trigger:
 - master
 
+variables:
+  BuildConfiguration: Release
+
 pool:
   vmImage: 'ubuntu-latest'
 steps:
@@ -28,9 +31,28 @@ steps:
 - task: DotNetCoreCLI@2
   inputs:
     command: 'build'
+    arguments: '--configuration $(BuildConfiguration)'
   displayName: 'Build All Projects'
 - task: DotNetCoreCLI@2
   inputs:
     command: 'test'
+    arguments: '--configuration $(BuildConfiguration)'
     azureSubscription: 'Azure'
   displayName: 'Test All Projects'
+- task: DotNetCoreCLI@2
+  inputs:
+    command: 'pack'
+    searchPatternPack: 'GW2SDK'
+    versioningScheme: 'byPrereleaseNumber'
+    majorVersion: '1'
+    minorVersion: '0'
+    patchVersion: '0'
+    nobuild: true
+    verbosityPack: Normal
+    
+  displayName: 'Package Artifacts'
+- task: PublishPipelineArtifact@0
+  inputs:
+    artifactName: 'nupkg'
+    targetPath: $(Build.ArtifactStagingDirectory)
+  displayName: 'Publish Artifacts'
