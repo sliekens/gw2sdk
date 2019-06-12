@@ -91,7 +91,7 @@ namespace GW2SDK.Tests.Features.Subtokens
 
             var actual = await sut.CreateSubtoken(ConfigurationManager.Instance.ApiKeyFull, absoluteExpirationDate: expirationDate, settings: settings);
 
-            // This test is flaky: GetTokenInfo occassionally fails
+            // This test is flaky: GetTokenInfo occassionally fails right after the subtoken is created
             // Adding a delay seems to help, possibly because of clock skew?
             await Task.Delay(1000);
 
@@ -117,7 +117,7 @@ namespace GW2SDK.Tests.Features.Subtokens
 
             var actual = await sut.CreateSubtoken(ConfigurationManager.Instance.ApiKeyFull, urls: urls, settings: settings);
             
-            // This test is flaky: GetTokenInfo occassionally fails
+            // This test is flaky: GetTokenInfo occassionally fails right after the subtoken is created
             // Adding a delay seems to help, possibly because of clock skew?
             await Task.Delay(1000);
 
