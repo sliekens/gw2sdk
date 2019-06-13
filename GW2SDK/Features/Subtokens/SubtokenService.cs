@@ -31,7 +31,7 @@ namespace GW2SDK.Features.Subtokens
             using (var response = await _http.SendAsync(request).ConfigureAwait(false))
             {
                 var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
-                if (response.StatusCode == HttpStatusCode.Forbidden)
+                if (response.StatusCode == HttpStatusCode.Unauthorized)
                 {
                     var text = JObject.Parse(json)["text"].ToString();
                     throw new UnauthorizedOperationException(text);
