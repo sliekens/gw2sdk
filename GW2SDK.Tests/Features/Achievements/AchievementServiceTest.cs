@@ -30,7 +30,7 @@ namespace GW2SDK.Tests.Features.Achievements
 
             var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output)).Build();
 
-            var actual = await sut.GetAchievementIds(settings);
+            var actual = await sut.GetAchievementIndex(settings);
 
             Assert.NotEmpty(actual);
             Assert.Equal(actual.ResultCount, actual.Count);

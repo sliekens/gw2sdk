@@ -30,7 +30,7 @@ namespace GW2SDK.Tests.Features.Worlds
 
             var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output)).Build();
 
-            var actual = await sut.GetWorldIds(settings);
+            var actual = await sut.GetWorldsIndex(settings);
 
             Assert.NotEmpty(actual);
             Assert.Equal(actual.ResultCount, actual.Count);

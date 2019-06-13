@@ -20,9 +20,9 @@ namespace GW2SDK.Features.Colors
             _http = http ?? throw new ArgumentNullException(nameof(http));
         }
 
-        public async Task<IDataTransferList<int>> GetColorIds([CanBeNull] JsonSerializerSettings settings = null)
+        public async Task<IDataTransferList<int>> GetColorsIndex([CanBeNull] JsonSerializerSettings settings = null)
         {
-            using (var request = new GetColorIdsRequest())
+            using (var request = new GetColorsIndexRequest())
             using (var response = await _http.SendAsync(request).ConfigureAwait(false))
             {
                 response.EnsureSuccessStatusCode();

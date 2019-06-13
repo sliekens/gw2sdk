@@ -33,7 +33,7 @@ namespace GW2SDK.TestDataHelper
 
         private async Task<List<int>> GetAchievementIds()
         {
-            using (var request = new GetAchievementIdsRequest())
+            using (var request = new GetAchievementsIndexRequest())
             using (var response = await _http.SendAsync(request))
             {
                 var json = await response.Content.ReadAsStringAsync();

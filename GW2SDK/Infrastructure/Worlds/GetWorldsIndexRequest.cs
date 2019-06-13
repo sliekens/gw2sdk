@@ -3,9 +3,9 @@ using System.Net.Http;
 
 namespace GW2SDK.Infrastructure.Worlds
 {
-    public sealed class GetWorldIdsRequest : HttpRequestMessage
+    public sealed class GetWorldsIndexRequest : HttpRequestMessage
     {
-        public GetWorldIdsRequest()
+        public GetWorldsIndexRequest()
             : base(HttpMethod.Get, new Uri("/v2/worlds", UriKind.Relative))
         {
         }
