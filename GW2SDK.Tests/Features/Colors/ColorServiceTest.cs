@@ -29,7 +29,7 @@ namespace GW2SDK.Tests.Features.Colors
 
             var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output)).Build();
 
-            var actual = await sut.GetColorIds(settings);
+            var actual = await sut.GetColorsIndex(settings);
 
             Assert.NotEmpty(actual);
             Assert.Equal(actual.ResultCount, actual.Count);

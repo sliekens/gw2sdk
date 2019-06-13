@@ -3,9 +3,9 @@ using System.Net.Http;
 
 namespace GW2SDK.Infrastructure.Achievements
 {
-    public sealed class GetAchievementIdsRequest : HttpRequestMessage
+    public sealed class GetAchievementsIndexRequest : HttpRequestMessage
     {
-        public GetAchievementIdsRequest()
+        public GetAchievementsIndexRequest()
             : base(HttpMethod.Get, new Uri("/v2/achievements", UriKind.Relative))
         {
         }

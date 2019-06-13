@@ -20,9 +20,9 @@ namespace GW2SDK.Features.Achievements
             _http = http ?? throw new ArgumentNullException(nameof(http));
         }
 
-        public async Task<IDataTransferList<int>> GetAchievementIds([CanBeNull] JsonSerializerSettings settings = null)
+        public async Task<IDataTransferList<int>> GetAchievementIndex([CanBeNull] JsonSerializerSettings settings = null)
         {
-            using (var request = new GetAchievementIdsRequest())
+            using (var request = new GetAchievementsIndexRequest())
             using (var response = await _http.SendAsync(request).ConfigureAwait(false))
             {
                 response.EnsureSuccessStatusCode();

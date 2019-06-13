@@ -20,9 +20,9 @@ namespace GW2SDK.Features.Worlds
             _http = http ?? throw new ArgumentNullException(nameof(http));
         }
 
-        public async Task<IDataTransferList<int>> GetWorldIds([CanBeNull] JsonSerializerSettings settings = null)
+        public async Task<IDataTransferList<int>> GetWorldsIndex([CanBeNull] JsonSerializerSettings settings = null)
         {
-            using (var request = new GetWorldIdsRequest())
+            using (var request = new GetWorldsIndexRequest())
             using (var response = await _http.SendAsync(request).ConfigureAwait(false))
             {
                 response.EnsureSuccessStatusCode();

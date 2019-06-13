@@ -3,9 +3,9 @@ using System.Net.Http;
 
 namespace GW2SDK.Infrastructure.Recipes
 {
-    public sealed class GetRecipeIdsRequest : HttpRequestMessage
+    public sealed class GetRecipesIndexRequest : HttpRequestMessage
     {
-        public GetRecipeIdsRequest()
+        public GetRecipesIndexRequest()
             : base(HttpMethod.Get, new Uri("/v2/recipes", UriKind.Relative))
         {
         }
