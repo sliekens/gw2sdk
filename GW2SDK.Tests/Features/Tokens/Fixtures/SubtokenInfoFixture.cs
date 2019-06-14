@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Threading.Tasks;
 using GW2SDK.Features.Common;
 using GW2SDK.Features.Subtokens;
@@ -24,7 +25,7 @@ namespace GW2SDK.Tests.Features.Tokens.Fixtures
 
         public async Task InitializeAsync()
         {
-            var http = HttpClientFactory.CreateDefault();
+            var http = new Container().Resolve<IHttpClientFactory>().CreateClient("GW2SDK");
 
             var subtokenService = new SubtokenService(http);
 
