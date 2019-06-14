@@ -1,13 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using GW2SDK.Features.Common;
 using GW2SDK.Infrastructure;
 using GW2SDK.Infrastructure.Subtokens;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 
 namespace GW2SDK.Features.Subtokens
 {
@@ -30,14 +28,8 @@ namespace GW2SDK.Features.Subtokens
             using (var request = new CreateSubtokenRequest.Builder(accessToken, permissions, absoluteExpirationDate, urls).GetRequest())
             using (var response = await _http.SendAsync(request).ConfigureAwait(false))
             {
-                var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
-                if (response.StatusCode == HttpStatusCode.Unauthorized)
-                {
-                    var text = JObject.Parse(json)["text"].ToString();
-                    throw new UnauthorizedOperationException(text);
-                }
-
                 response.EnsureSuccessStatusCode();
+                var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
                 var dto = new CreatedSubtoken();
                 JsonConvert.PopulateObject(json, dto, settings ?? Json.DefaultJsonSerializerSettings);
                 return dto;
