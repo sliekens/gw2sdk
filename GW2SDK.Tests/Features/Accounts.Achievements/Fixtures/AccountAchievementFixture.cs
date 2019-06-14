@@ -18,7 +18,7 @@ namespace GW2SDK.Tests.Features.Accounts.Achievements.Fixtures
 
         public async Task InitializeAsync()
         {
-            var http = HttpClientFactory.CreateDefault();
+            var http = new Container().Resolve<IHttpClientFactory>().CreateClient("GW2SDK");
             http.UseAccessToken(ConfigurationManager.Instance.ApiKeyFull);
 
             // Seed InMemoryColorDb with API data for later use in integration tests

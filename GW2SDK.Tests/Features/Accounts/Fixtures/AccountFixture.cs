@@ -16,7 +16,7 @@ namespace GW2SDK.Tests.Features.Accounts.Fixtures
 
         public async Task InitializeAsync()
         {
-            var http = HttpClientFactory.CreateDefault();
+            var http = new Container().Resolve<IHttpClientFactory>().CreateClient("GW2SDK");
 
             http.UseAccessToken(ConfigurationManager.Instance.ApiKeyBasic);
             var basic = await GetAccountRaw(http);
