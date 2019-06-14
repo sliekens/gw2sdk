@@ -112,7 +112,7 @@ namespace GW2SDK.Tests.Features.Achievements
         [Fact]
         [Trait("Feature",  "Achievements")]
         [Trait("Category", "Integration")]
-        public async Task GetWorldsByPage_ShouldReturnThePage()
+        public async Task GetAchievementsByPage_ShouldReturnThePage()
         {
             var http = HttpClientFactory.CreateDefault();
 
