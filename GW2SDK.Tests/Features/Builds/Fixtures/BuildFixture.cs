@@ -1,6 +1,6 @@
-﻿using System.Threading.Tasks;
+﻿using System.Net.Http;
+using System.Threading.Tasks;
 using GW2SDK.Infrastructure.Builds;
-using GW2SDK.Tests.Shared;
 using Xunit;
 
 namespace GW2SDK.Tests.Features.Builds.Fixtures
@@ -11,7 +11,7 @@ namespace GW2SDK.Tests.Features.Builds.Fixtures
 
         public async Task InitializeAsync()
         {
-            var http = HttpClientFactory.CreateDefault();
+            var http = new Container().Resolve<IHttpClientFactory>().CreateClient("GW2SDK");
 
             using (var request = new GetBuildRequest())
             using (var response = await http.SendAsync(request).ConfigureAwait(false))
