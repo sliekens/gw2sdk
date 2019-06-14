@@ -21,7 +21,7 @@ namespace GW2SDK.Features.Subtokens
         }
 
         public async Task<CreatedSubtoken> CreateSubtoken(
-            [CanBeNull] string accessToken = null,
+            [CanBeNull] string accessToken,
             [CanBeNull] IReadOnlyList<Permission> permissions = null,
             DateTimeOffset? absoluteExpirationDate = null,
             [CanBeNull] IReadOnlyList<string> urls = null,
