@@ -10,6 +10,7 @@ using GW2SDK.Features.Items;
 using GW2SDK.Features.Subtokens;
 using GW2SDK.Features.Tokens;
 using GW2SDK.Features.Worlds;
+using GW2SDK.Infrastructure.Common;
 using GW2SDK.Tests.Shared;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -23,6 +24,7 @@ namespace GW2SDK.Tests
         {
             var services = new ServiceCollection();
             services.AddTransient<SocketsHttpHandler>();
+            services.AddTransient<UnauthorizedMessageHandler>();
             var httpBuilder = services.AddHttpClient("GW2SDK",
                                           http =>
                                           {
@@ -30,6 +32,7 @@ namespace GW2SDK.Tests
                                               http.UseLatestSchemaVersion();
                                           })
                                       .ConfigurePrimaryHttpMessageHandler(sp => sp.GetRequiredService<SocketsHttpHandler>())
+                                      .AddHttpMessageHandler<UnauthorizedMessageHandler>()
                                       .AddPolicyHandler(HttpPolicy.SelectPolicy)
                                       .AddTypedClient<AccountService>()
                                       .AddTypedClient<AccountAchievementService>()

@@ -28,20 +28,15 @@ namespace GW2SDK.Features.Accounts.Achievements
             using (var request = new GetAccountAchievementByIdRequest.Builder(achievementId).GetRequest())
             using (var response = await _http.SendAsync(request).ConfigureAwait(false))
             {
-                var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
-                if (response.StatusCode == HttpStatusCode.Unauthorized)
-                {
-                    var text = JObject.Parse(json)["text"].ToString();
-                    throw new UnauthorizedOperationException(text);
-                }
-
                 response.EnsureSuccessStatusCode();
+                var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
                 return JsonConvert.DeserializeObject<AccountAchievement>(json, settings ?? Json.DefaultJsonSerializerSettings);
             }
         }
 
         [Scope(Permission.Progression)]
-        public async Task<IDataTransferList<AccountAchievement>> GetAccountAchievementsByIds([NotNull] IReadOnlyList<int> achievementIds,
+        public async Task<IDataTransferList<AccountAchievement>> GetAccountAchievementsByIds(
+            [NotNull] IReadOnlyList<int> achievementIds,
             [CanBeNull] JsonSerializerSettings settings = null)
         {
             if (achievementIds == null)
@@ -57,14 +52,8 @@ namespace GW2SDK.Features.Accounts.Achievements
             using (var request = new GetAccountAchievementsByIdsRequest.Builder(achievementIds).GetRequest())
             using (var response = await _http.SendAsync(request).ConfigureAwait(false))
             {
-                var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
-                if (response.StatusCode == HttpStatusCode.Unauthorized)
-                {
-                    var text = JObject.Parse(json)["text"].ToString();
-                    throw new UnauthorizedOperationException(text);
-                }
-
                 response.EnsureSuccessStatusCode();
+                var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
                 var listContext = response.Headers.GetListContext();
                 var list = new List<AccountAchievement>(listContext.ResultCount);
                 JsonConvert.PopulateObject(json, list, settings ?? Json.DefaultJsonSerializerSettings);
@@ -78,14 +67,8 @@ namespace GW2SDK.Features.Accounts.Achievements
             using (var request = new GetAllAccountAchievementsRequest())
             using (var response = await _http.SendAsync(request).ConfigureAwait(false))
             {
-                var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
-                if (response.StatusCode == HttpStatusCode.Unauthorized)
-                {
-                    var text = JObject.Parse(json)["text"].ToString();
-                    throw new UnauthorizedOperationException(text);
-                }
-
                 response.EnsureSuccessStatusCode();
+                var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
                 var listContext = response.Headers.GetListContext();
                 var list = new List<AccountAchievement>(listContext.ResultCount);
                 JsonConvert.PopulateObject(json, list, settings ?? Json.DefaultJsonSerializerSettings);
@@ -94,7 +77,10 @@ namespace GW2SDK.Features.Accounts.Achievements
         }
 
         [Scope(Permission.Progression)]
-        public async Task<IDataTransferPage<AccountAchievement>> GetAccountAchievementsByPage(int page, int? pageSize, [CanBeNull] JsonSerializerSettings settings = null)
+        public async Task<IDataTransferPage<AccountAchievement>> GetAccountAchievementsByPage(
+            int page,
+            int? pageSize,
+            [CanBeNull] JsonSerializerSettings settings = null)
         {
             using (var request = new GetAccountAchievementsByPageRequest.Builder(page, pageSize).GetRequest())
             using (var response = await _http.SendAsync(request).ConfigureAwait(false))
@@ -104,12 +90,6 @@ namespace GW2SDK.Features.Accounts.Achievements
                 {
                     var text = JObject.Parse(json)["text"].ToString();
                     throw new ArgumentException(text);
-                }
-
-                if (response.StatusCode == HttpStatusCode.Unauthorized)
-                {
-                    var text = JObject.Parse(json)["text"].ToString();
-                    throw new UnauthorizedOperationException(text);
                 }
 
                 response.EnsureSuccessStatusCode();
