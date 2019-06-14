@@ -2,34 +2,21 @@
 using System.Linq;
 using System.Threading.Tasks;
 using GW2SDK.Features.Colors;
-using GW2SDK.Infrastructure;
-using GW2SDK.Tests.Shared;
 using Xunit;
-using Xunit.Abstractions;
 
 namespace GW2SDK.Tests.Features.Colors
 {
     public class ColorServiceTest
     {
-        public ColorServiceTest(ITestOutputHelper output)
-        {
-            _output = output;
-        }
-
-        private readonly ITestOutputHelper _output;
-
         [Fact]
         [Trait("Feature",  "Colors")]
         [Trait("Category", "Integration")]
         public async Task GetColorIds_ShouldReturnAllColorIds()
         {
-            var http = HttpClientFactory.CreateDefault();
+            var services = new Container();
+            var sut = services.Resolve<ColorService>();
 
-            var sut = new ColorService(http);
-
-            var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output)).Build();
-
-            var actual = await sut.GetColorsIndex(settings);
+            var actual = await sut.GetColorsIndex();
 
             Assert.NotEmpty(actual);
             Assert.Equal(actual.ResultCount, actual.Count);
@@ -41,16 +28,13 @@ namespace GW2SDK.Tests.Features.Colors
         [Trait("Category", "Integration")]
         public async Task GetColorById_ShouldReturnRequestedColor()
         {
-            var http = HttpClientFactory.CreateDefault();
-
-            var sut = new ColorService(http);
+            var services = new Container();
+            var sut = services.Resolve<ColorService>();
 
             // Randomly chosen
             const int colorId = 1;
 
-            var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output)).Build();
-
-            var actual = await sut.GetColorById(colorId, settings);
+            var actual = await sut.GetColorById(colorId);
 
             Assert.Equal(colorId, actual.Id);
         }
@@ -60,9 +44,8 @@ namespace GW2SDK.Tests.Features.Colors
         [Trait("Category", "Unit")]
         public async Task GetColorsByIds_WithIdsNull_ShouldThrowArgumentNullException()
         {
-            var http = HttpClientFactory.CreateDefault();
-
-            var sut = new ColorService(http);
+            var services = new Container();
+            var sut = services.Resolve<ColorService>();
 
             await Assert.ThrowsAsync<ArgumentNullException>("colorIds",
                 async () =>
@@ -76,9 +59,8 @@ namespace GW2SDK.Tests.Features.Colors
         [Trait("Category", "Unit")]
         public async Task GetColorsByIds_WithIdsEmpty_ShouldThrowArgumentNullException()
         {
-            var http = HttpClientFactory.CreateDefault();
-
-            var sut = new ColorService(http);
+            var services = new Container();
+            var sut = services.Resolve<ColorService>();
 
             await Assert.ThrowsAsync<ArgumentException>("colorIds",
                 async () =>
@@ -92,15 +74,12 @@ namespace GW2SDK.Tests.Features.Colors
         [Trait("Category", "Integration")]
         public async Task GetColorsByIds_ShouldReturnExpectedRange()
         {
-            var http = HttpClientFactory.CreateDefault();
-
-            var sut = new ColorService(http);
+            var services = new Container();
+            var sut = services.Resolve<ColorService>();
 
             var ids = Enumerable.Range(1, 5).ToList();
 
-            var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output)).Build();
-
-            var actual = await sut.GetColorsByIds(ids, settings);
+            var actual = await sut.GetColorsByIds(ids);
 
             Assert.Equal(ids, actual.Select(color => color.Id));
         }
@@ -110,13 +89,10 @@ namespace GW2SDK.Tests.Features.Colors
         [Trait("Category", "Integration")]
         public async Task GetColors_ShouldReturnAllColors()
         {
-            var http = HttpClientFactory.CreateDefault();
+            var services = new Container();
+            var sut = services.Resolve<ColorService>();
 
-            var sut = new ColorService(http);
-
-            var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output)).Build();
-
-            var actual = await sut.GetColors(settings);
+            var actual = await sut.GetColors();
 
             Assert.NotEmpty(actual);
             Assert.Equal(actual.Count, actual.ResultTotal);
@@ -128,15 +104,12 @@ namespace GW2SDK.Tests.Features.Colors
         [Trait("Category", "Integration")]
         public async Task GetColorsByPage_ShouldReturnExpectedLimit()
         {
-            var http = HttpClientFactory.CreateDefault();
-
-            var sut = new ColorService(http);
+            var services = new Container();
+            var sut = services.Resolve<ColorService>();
 
             var limit = 50;
 
-            var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output)).Build();
-
-            var actual = await sut.GetColorsByPage(0, limit, settings);
+            var actual = await sut.GetColorsByPage(0, limit);
 
             Assert.InRange(actual.Count, 0, limit);
         }

@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using GW2SDK.Features.Items;
-using GW2SDK.Tests.Shared;
 using Xunit;
 
 namespace GW2SDK.Tests.Features.Items
@@ -15,9 +14,8 @@ namespace GW2SDK.Tests.Features.Items
         [Trait("Category", "Integration")]
         public async Task GetItemIndex_ShouldReturnAllItemIds()
         {
-            var http = HttpClientFactory.CreateDefault();
-
-            var sut = new ItemService(http);
+            var services = new Container();
+            var sut = services.Resolve<ItemService>();
 
             var actual = await sut.GetItemIndex();
 
@@ -31,9 +29,8 @@ namespace GW2SDK.Tests.Features.Items
         [Trait("Category", "Integration")]
         public async Task GetItemById_ShouldReturnRequestedItem()
         {
-            var http = HttpClientFactory.CreateDefault();
-
-            var sut = new ItemService(http);
+            var services = new Container();
+            var sut = services.Resolve<ItemService>();
 
             const int itemId = 24;
 
@@ -47,9 +44,8 @@ namespace GW2SDK.Tests.Features.Items
         [Trait("Category", "Integration")]
         public async Task GetItemsByIds_ShouldReturnRequestedItems()
         {
-            var http = HttpClientFactory.CreateDefault();
-
-            var sut = new ItemService(http);
+            var services = new Container();
+            var sut = services.Resolve<ItemService>();
 
             var actual = await sut.GetItemsByIds(new List<int> { 24, 46, 56 });
 
@@ -62,9 +58,8 @@ namespace GW2SDK.Tests.Features.Items
         [Trait("Category", "Unit")]
         public async Task GetItemsByIds_WithIdsNull_ShouldThrowArgumentNullException()
         {
-            var http = HttpClientFactory.CreateDefault();
-
-            var sut = new ItemService(http);
+            var services = new Container();
+            var sut = services.Resolve<ItemService>();
 
             await Assert.ThrowsAsync<ArgumentNullException>("itemIds",
                 async () =>
@@ -78,9 +73,8 @@ namespace GW2SDK.Tests.Features.Items
         [Trait("Category", "Unit")]
         public async Task GetItemsByIds_WithIdsEmpty_ShouldThrowArgumentException()
         {
-            var http = HttpClientFactory.CreateDefault();
-
-            var sut = new ItemService(http);
+            var services = new Container();
+            var sut = services.Resolve<ItemService>();
 
             await Assert.ThrowsAsync<ArgumentException>("itemIds",
                 async () =>
@@ -94,9 +88,8 @@ namespace GW2SDK.Tests.Features.Items
         [Trait("Category", "Integration")]
         public async Task GetItemsByPage_WithPageSize200_ShouldReturn200Items()
         {
-            var http = HttpClientFactory.CreateDefault();
-
-            var sut = new ItemService(http);
+            var services = new Container();
+            var sut = services.Resolve<ItemService>();
 
             var actual = await sut.GetItemsByPage(0, 200);
 
