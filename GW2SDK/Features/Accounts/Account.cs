@@ -1,10 +1,12 @@
 ﻿using System;
+using System.Diagnostics;
 using GW2SDK.Features.Common;
 using GW2SDK.Infrastructure;
 using Newtonsoft.Json;
 
 namespace GW2SDK.Features.Accounts
 {
+    [DebuggerDisplay("{Name,nq}")]
     [DataTransferObject]
     public sealed class Account
     {

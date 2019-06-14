@@ -1,9 +1,11 @@
-﻿using GW2SDK.Infrastructure;
+﻿using System.Diagnostics;
+using GW2SDK.Infrastructure;
 using GW2SDK.Infrastructure.Items;
 using Newtonsoft.Json;
 
 namespace GW2SDK.Features.Items
 {
+    [DebuggerDisplay("{Name,nq}")]
     [Inheritable]
     [DataTransferObject]
     [JsonConverter(typeof(DiscriminatedJsonConverter), typeof(ItemDiscriminatorOptions))]
