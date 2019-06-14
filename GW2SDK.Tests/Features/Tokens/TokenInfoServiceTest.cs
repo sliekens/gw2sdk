@@ -1,39 +1,30 @@
 ﻿using System.Threading.Tasks;
-using GW2SDK.Extensions;
 using GW2SDK.Features.Common;
 using GW2SDK.Features.Tokens;
-using GW2SDK.Infrastructure;
 using GW2SDK.Tests.Features.Tokens.Fixtures;
 using GW2SDK.Tests.Shared;
 using Xunit;
-using Xunit.Abstractions;
 
 namespace GW2SDK.Tests.Features.Tokens
 {
     public class TokenInfoServiceTest : IClassFixture<TokenInfoServiceFixture>
     {
-        public TokenInfoServiceTest(TokenInfoServiceFixture serviceFixture, ITestOutputHelper output)
+        public TokenInfoServiceTest(TokenInfoServiceFixture serviceFixture)
         {
             _serviceFixture = serviceFixture;
-            _output = output;
         }
 
         private readonly TokenInfoServiceFixture _serviceFixture;
-
-        private readonly ITestOutputHelper _output;
 
         [Fact]
         [Trait("Feature",  "Tokens")]
         [Trait("Category", "Integration")]
         public async Task GetTokenInfo_WithApiKey_ShouldReturnApiKeyInfo()
         {
-            var http = HttpClientFactory.CreateDefault();
+            var services = new Container();
+            var sut = services.Resolve<TokenInfoService>();
 
-            var sut = new TokenInfoService(http);
-
-            var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output)).Build();
-
-            var actual = await sut.GetTokenInfo(ConfigurationManager.Instance.ApiKeyFull, settings);
+            var actual = await sut.GetTokenInfo(ConfigurationManager.Instance.ApiKeyFull);
 
             Assert.IsType<ApiKeyInfo>(actual);
         }
@@ -43,14 +34,10 @@ namespace GW2SDK.Tests.Features.Tokens
         [Trait("Category", "Integration")]
         public async Task GetTokenInfo_WithApiKeyInDefaultRequestHeaders_ShouldReturnApiKeyInfo()
         {
-            var http = HttpClientFactory.CreateDefault();
-            http.UseAccessToken(ConfigurationManager.Instance.ApiKeyFull);
+            var services = new Container(ConfigurationManager.Instance.ApiKeyFull);
+            var sut = services.Resolve<TokenInfoService>();
 
-            var sut = new TokenInfoService(http);
-
-            var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output)).Build();
-
-            var actual = await sut.GetTokenInfo(null, settings);
+            var actual = await sut.GetTokenInfo(null);
 
             Assert.IsType<ApiKeyInfo>(actual);
         }
@@ -60,16 +47,13 @@ namespace GW2SDK.Tests.Features.Tokens
         [Trait("Category", "Integration")]
         public async Task GetTokenInfo_WithAccessTokenNull_ShouldThrowUnauthorizedOperationException()
         {
-            var http = HttpClientFactory.CreateDefault();
-
-            var sut = new TokenInfoService(http);
-
-            var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output)).Build();
+            var services = new Container();
+            var sut = services.Resolve<TokenInfoService>();
 
             await Assert.ThrowsAsync<UnauthorizedOperationException>(async () =>
             {
                 // Next statement should throw because argument is null and HttpClient.DefaultRequestHeaders is not configured
-                _ = await sut.GetTokenInfo(null, settings);
+                _ = await sut.GetTokenInfo(null);
             });
         }
 
@@ -78,13 +62,10 @@ namespace GW2SDK.Tests.Features.Tokens
         [Trait("Category", "Integration")]
         public async Task GetTokenInfo_WithSubtoken_ShouldReturnSubtokenInfo()
         {
-            var http = HttpClientFactory.CreateDefault();
+            var services = new Container();
+            var sut = services.Resolve<TokenInfoService>();
 
-            var sut = new TokenInfoService(http);
-
-            var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output)).Build();
-
-            var actual = await sut.GetTokenInfo(_serviceFixture.SubtokenBasic.Subtoken, settings);
+            var actual = await sut.GetTokenInfo(_serviceFixture.SubtokenBasic.Subtoken);
 
             Assert.IsType<SubtokenInfo>(actual);
         }
