@@ -25,6 +25,7 @@ namespace GW2SDK.Tests
             var services = new ServiceCollection();
             services.AddTransient<SocketsHttpHandler>();
             services.AddTransient<UnauthorizedMessageHandler>();
+            services.AddTransient<BadMessageHandler>();
             var httpBuilder = services.AddHttpClient("GW2SDK",
                                           http =>
                                           {
@@ -33,6 +34,7 @@ namespace GW2SDK.Tests
                                           })
                                       .ConfigurePrimaryHttpMessageHandler(sp => sp.GetRequiredService<SocketsHttpHandler>())
                                       .AddHttpMessageHandler<UnauthorizedMessageHandler>()
+                                      .AddHttpMessageHandler<BadMessageHandler>()
                                       .AddPolicyHandler(HttpPolicy.SelectPolicy)
                                       .AddTypedClient<AccountService>()
                                       .AddTypedClient<AccountAchievementService>()
