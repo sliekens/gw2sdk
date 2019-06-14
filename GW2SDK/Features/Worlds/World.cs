@@ -1,7 +1,9 @@
-﻿using GW2SDK.Infrastructure;
+﻿using System.Diagnostics;
+using GW2SDK.Infrastructure;
 
 namespace GW2SDK.Features.Worlds
 {
+    [DebuggerDisplay("{Name,nq}")]
     [DataTransferObject]
     public sealed class World
     {
