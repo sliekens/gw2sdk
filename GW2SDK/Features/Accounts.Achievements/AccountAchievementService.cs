@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using GW2SDK.Extensions;
@@ -9,7 +8,6 @@ using GW2SDK.Infrastructure;
 using GW2SDK.Infrastructure.Accounts.Achievements;
 using GW2SDK.Infrastructure.Common;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 
 namespace GW2SDK.Features.Accounts.Achievements
 {
@@ -85,14 +83,8 @@ namespace GW2SDK.Features.Accounts.Achievements
             using (var request = new GetAccountAchievementsByPageRequest.Builder(page, pageSize).GetRequest())
             using (var response = await _http.SendAsync(request).ConfigureAwait(false))
             {
-                var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
-                if (response.StatusCode == HttpStatusCode.BadRequest)
-                {
-                    var text = JObject.Parse(json)["text"].ToString();
-                    throw new ArgumentException(text);
-                }
-
                 response.EnsureSuccessStatusCode();
+                var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
                 var pageContext = response.Headers.GetPageContext();
                 var list = new List<AccountAchievement>(pageContext.ResultCount);
                 JsonConvert.PopulateObject(json, list, settings ?? Json.DefaultJsonSerializerSettings);
