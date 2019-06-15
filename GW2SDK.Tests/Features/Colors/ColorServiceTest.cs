@@ -11,7 +11,7 @@ namespace GW2SDK.Tests.Features.Colors
         [Fact]
         [Trait("Feature",  "Colors")]
         [Trait("Category", "Integration")]
-        public async Task GetColorIds_ShouldReturnAllColorIds()
+        public async Task GetColorsIndex_ShouldReturnAllIds()
         {
             var services = new Container();
             var sut = services.Resolve<ColorService>();
