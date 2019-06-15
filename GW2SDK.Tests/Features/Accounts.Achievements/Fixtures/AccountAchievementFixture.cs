@@ -32,7 +32,7 @@ namespace GW2SDK.Tests.Features.Accounts.Achievements.Fixtures
 
         private async Task<List<string>> GetAllJsonAchievements(HttpClient http)
         {
-            using (var request = new GetAllAccountAchievementsRequest())
+            using (var request = new GetAccountAchievementsRequest())
             using (var response = await http.SendAsync(request))
             using (var responseReader = new StreamReader(await response.Content.ReadAsStreamAsync()))
             using (var jsonReader = new JsonTextReader(responseReader))
