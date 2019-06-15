@@ -36,8 +36,7 @@ steps:
 - task: DotNetCoreCLI@2
   inputs:
     command: 'test'
-    arguments: '--configuration $(BuildConfiguration)'
-    azureSubscription: 'Azure'
+    arguments: '--configuration $(BuildConfiguration) --collect:"XPlat Code Coverage"'
   displayName: 'Test All Projects'
 - task: DotNetCoreCLI@2
   inputs:
