@@ -34,10 +34,10 @@ namespace GW2SDK.Tests
                                               http.UseLatestSchemaVersion();
                                           })
                                       .ConfigurePrimaryHttpMessageHandler(sp => sp.GetRequiredService<SocketsHttpHandler>())
+                                      .AddPolicyHandler(HttpPolicy.SelectPolicy)
                                       .AddHttpMessageHandler<UnauthorizedMessageHandler>()
                                       .AddHttpMessageHandler<BadMessageHandler>()
                                       .AddHttpMessageHandler<RateLimitHandler>()
-                                      .AddPolicyHandler(HttpPolicy.SelectPolicy)
                                       .AddTypedClient<AccountService>()
                                       .AddTypedClient<AccountAchievementService>()
                                       .AddTypedClient<AchievementService>()
