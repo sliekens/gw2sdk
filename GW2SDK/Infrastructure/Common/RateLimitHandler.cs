@@ -23,7 +23,7 @@ namespace GW2SDK.Infrastructure.Common
             if (response.StatusCode == HttpStatusCodeEx.TooManyRequests)
             {
                 var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
-                var text = JObject.Parse(json)["error"].ToString();
+                var text = JObject.Parse(json)["text"].ToString();
                 throw new TooManyRequestsException(text);
             }
 
