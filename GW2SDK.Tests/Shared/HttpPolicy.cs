@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Net.Http;
+using GW2SDK.Features.Common;
 using Polly;
 using Polly.Extensions.Http;
 using Polly.Timeout;
@@ -8,13 +9,13 @@ namespace GW2SDK.Tests.Shared
 {
     public class HttpPolicy
     {
-        public static IAsyncPolicy<HttpResponseMessage> Retry = HttpPolicyExtensions.HandleTransientHttpError().Or<TimeoutRejectedException>().RetryAsync(3);
+        public static IAsyncPolicy<HttpResponseMessage> Retry = HttpPolicyExtensions.HandleTransientHttpError().Or<TooManyRequestsException>().Or<TimeoutRejectedException>().RetryAsync(10);
 
         public static IAsyncPolicy<HttpResponseMessage> Bulkhead = Policy.BulkheadAsync<HttpResponseMessage>(600);
 
         public static IAsyncPolicy<HttpResponseMessage> InnerTimeout = Policy.TimeoutAsync<HttpResponseMessage>(TimeSpan.FromSeconds(10));
 
-        public static IAsyncPolicy<HttpResponseMessage> OuterTimeout = Policy.TimeoutAsync<HttpResponseMessage>(TimeSpan.FromSeconds(60));
+        public static IAsyncPolicy<HttpResponseMessage> OuterTimeout = Policy.TimeoutAsync<HttpResponseMessage>(TimeSpan.FromSeconds(100));
 
         public static IAsyncPolicy<HttpResponseMessage> SelectPolicy(HttpRequestMessage request)
         {
