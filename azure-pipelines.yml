@@ -38,6 +38,10 @@ steps:
     command: 'test'
     arguments: '--configuration $(BuildConfiguration) --collect:"XPlat Code Coverage"'
   displayName: 'Test All Projects'
+- task: PublishCodeCoverageResults@1
+  inputs:
+    codeCoverageTool: 'Cobertura'
+    summaryFileLocation: '**/coverage.cobertura.xml'
 - task: DotNetCoreCLI@2
   inputs:
     command: 'pack'
