@@ -24,7 +24,7 @@ namespace GW2SDK.Tests.Features.Accounts
         [Fact]
         [Trait("Feature",  "Accounts")]
         [Trait("Category", "Integration")]
-        public async Task GetAccount_WithoutAccessToken_ShouldReturnAccount()
+        public async Task GetAccount_WithoutAccessToken_ShouldThrowUnauthorizedOperationException()
         {
             var services = new Container();
             var sut = services.Resolve<AccountService>();
