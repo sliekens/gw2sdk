@@ -74,12 +74,12 @@ namespace GW2SDK.Tests.Features.Accounts.Achievements
         [Fact]
         [Trait("Feature",  "Accounts.Achievements")]
         [Trait("Category", "Integration")]
-        public async Task GetAllAccountAchievements_ShouldReturnAllAccountAchievements()
+        public async Task GetAccountAchievements_ShouldReturnAllAccountAchievements()
         {
             var services = new Container(ConfigurationManager.Instance.ApiKeyFull);
             var sut = services.Resolve<AccountAchievementService>();
 
-            var actual = await sut.GetAllAccountAchievements();
+            var actual = await sut.GetAccountAchievements();
 
             Assert.Equal(actual.Count, actual.ResultTotal);
             Assert.Equal(actual.Count, actual.ResultCount);
