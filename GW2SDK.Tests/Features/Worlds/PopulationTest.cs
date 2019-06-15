@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using GW2SDK.Features.Worlds;
 using Xunit;
 
@@ -9,9 +11,22 @@ namespace GW2SDK.Tests.Features.Worlds
         [Fact]
         [Trait("Feature",  "Worlds")]
         [Trait("Category", "Unit")]
-        public void Population_ShouldNotDefineDefaultValue()
+        public void DefaultMember_ShouldBeUndefined()
         {
             Assert.False(Enum.IsDefined(typeof(Population), default(Population)));
+        }
+
+        [Fact]
+        [Trait("Feature",    "Worlds")]
+        [Trait("Category",   "Integration")]
+        [Trait("Importance", "Critical")]
+        public void AllMembers_ShouldNotHaveMissingMembers()
+        {
+            var expected = new HashSet<string> { "Low", "Medium", "High", "VeryHigh", "Full" };
+
+            var actual = Enum.GetNames(typeof(Population)).ToHashSet();
+
+            Assert.Equal(expected, actual);
         }
     }
 }
