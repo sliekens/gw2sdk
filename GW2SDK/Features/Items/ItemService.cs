@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 using GW2SDK.Extensions;
@@ -22,7 +21,7 @@ namespace GW2SDK.Features.Items
             _http = http ?? throw new ArgumentNullException(nameof(http));
         }
 
-        public async Task<IDataTransferList<int>> GetItemIndex([CanBeNull] JsonSerializerSettings settings = null)
+        public async Task<IDataTransferList<int>> GetItemsIndex([CanBeNull] JsonSerializerSettings settings = null)
         {
             using (var request = new GetItemsIndexRequest())
             using (var response = await _http.SendAsync(request).ConfigureAwait(false))

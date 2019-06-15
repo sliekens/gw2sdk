@@ -12,7 +12,7 @@ namespace GW2SDK.Tests.Features.Worlds
         [Fact]
         [Trait("Feature",  "Worlds")]
         [Trait("Category", "Integration")]
-        public async Task GetWorldIds_ShouldReturnAllWorldIds()
+        public async Task GetWorldsIndex_ShouldReturnAllIds()
         {
             var services = new Container();
             var sut = services.Resolve<WorldService>();

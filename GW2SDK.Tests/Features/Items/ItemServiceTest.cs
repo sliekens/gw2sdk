@@ -12,12 +12,12 @@ namespace GW2SDK.Tests.Features.Items
         [Fact]
         [Trait("Feature",  "Items")]
         [Trait("Category", "Integration")]
-        public async Task GetItemIndex_ShouldReturnAllItemIds()
+        public async Task GetItemsIndex_ShouldReturnAllIds()
         {
             var services = new Container();
             var sut = services.Resolve<ItemService>();
 
-            var actual = await sut.GetItemIndex();
+            var actual = await sut.GetItemsIndex();
 
             Assert.NotEmpty(actual);
             Assert.Equal(actual.ResultCount, actual.Count);

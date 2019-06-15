@@ -12,12 +12,12 @@ namespace GW2SDK.Tests.Features.Achievements
         [Fact]
         [Trait("Feature",  "Achievements")]
         [Trait("Category", "Integration")]
-        public async Task GetAchievementIds_ShouldReturnAllAchievementIds()
+        public async Task GetAchievementsIndex_ShouldReturnAllIds()
         {
             var services = new Container();
             var sut = services.Resolve<AchievementService>();
 
-            var actual = await sut.GetAchievementIndex();
+            var actual = await sut.GetAchievementsIndex();
 
             Assert.NotEmpty(actual);
             Assert.Equal(actual.ResultCount, actual.Count);
