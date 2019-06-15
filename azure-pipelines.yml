@@ -41,7 +41,7 @@ steps:
 - task: PublishCodeCoverageResults@1
   inputs:
     codeCoverageTool: 'Cobertura'
-    summaryFileLocation: '**/coverage.cobertura.xml'
+    summaryFileLocation: '$(Agent.TempDirectory)/**/coverage.cobertura.xml'
 - task: DotNetCoreCLI@2
   inputs:
     command: 'pack'
