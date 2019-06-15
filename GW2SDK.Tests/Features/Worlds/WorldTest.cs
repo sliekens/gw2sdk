@@ -1,4 +1,5 @@
-﻿using GW2SDK.Features.Worlds;
+﻿using System;
+using GW2SDK.Features.Worlds;
 using GW2SDK.Infrastructure;
 using GW2SDK.Tests.Features.Worlds.Fixtures;
 using GW2SDK.Tests.Shared;
@@ -65,6 +66,21 @@ namespace GW2SDK.Tests.Features.Worlds
                 {
                     var actual = JsonConvert.DeserializeObject<World>(json, settings);
                     Assert.NotEmpty(actual.Name);
+                });
+        }
+
+        [Fact]
+        [Trait("Feature",  "Worlds")]
+        [Trait("Category", "Integration")]
+        public void Population_ShouldBeDefined()
+        {
+            var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output)).Build();
+
+            AssertEx.ForEach(_fixture.Db.Worlds,
+                json =>
+                {
+                    var actual = JsonConvert.DeserializeObject<World>(json, settings);
+                    Assert.True(Enum.IsDefined(typeof(Population), actual.Population));
                 });
         }
     }
