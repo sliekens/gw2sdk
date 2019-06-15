@@ -26,6 +26,7 @@ namespace GW2SDK.Tests
             services.AddTransient<SocketsHttpHandler>();
             services.AddTransient<UnauthorizedMessageHandler>();
             services.AddTransient<BadMessageHandler>();
+            services.AddTransient<RateLimitHandler>();
             var httpBuilder = services.AddHttpClient("GW2SDK",
                                           http =>
                                           {
@@ -35,6 +36,7 @@ namespace GW2SDK.Tests
                                       .ConfigurePrimaryHttpMessageHandler(sp => sp.GetRequiredService<SocketsHttpHandler>())
                                       .AddHttpMessageHandler<UnauthorizedMessageHandler>()
                                       .AddHttpMessageHandler<BadMessageHandler>()
+                                      .AddHttpMessageHandler<RateLimitHandler>()
                                       .AddPolicyHandler(HttpPolicy.SelectPolicy)
                                       .AddTypedClient<AccountService>()
                                       .AddTypedClient<AccountAchievementService>()
