@@ -3,7 +3,6 @@ using System.Linq;
 using GW2SDK.Features.Colors;
 using GW2SDK.Tests.Features.Colors.Fixtures;
 using Xunit;
-using Xunit.Abstractions;
 
 namespace GW2SDK.Tests.Features.Colors
 {
@@ -12,12 +11,9 @@ namespace GW2SDK.Tests.Features.Colors
     {
         private readonly ColorFixture _fixture;
 
-        private readonly ITestOutputHelper _output;
-
-        public ColorCategoryNameTest(ColorFixture fixture, ITestOutputHelper output)
+        public ColorCategoryNameTest(ColorFixture fixture)
         {
             _fixture = fixture;
-            _output = output;
         }
 
         [Fact]
