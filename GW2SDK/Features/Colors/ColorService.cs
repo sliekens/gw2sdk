@@ -83,7 +83,7 @@ namespace GW2SDK.Features.Colors
             }
         }
 
-        public async Task<IDataTransferPage<Color>> GetColorsByPage(int page, int? pageSize, [CanBeNull] JsonSerializerSettings settings = null)
+        public async Task<IDataTransferPage<Color>> GetColorsByPage(int page, int? pageSize = null, [CanBeNull] JsonSerializerSettings settings = null)
         {
             using (var request = new GetColorsByPageRequest.Builder(page, pageSize).GetRequest())
             using (var response = await _http.SendAsync(request).ConfigureAwait(false))
