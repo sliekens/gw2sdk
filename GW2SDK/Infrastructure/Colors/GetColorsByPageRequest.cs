@@ -16,7 +16,7 @@ namespace GW2SDK.Infrastructure.Colors
 
             private readonly int? _pageSize;
 
-            public Builder(int page, int? pageSize)
+            public Builder(int page, int? pageSize = null)
             {
                 _page = page;
                 _pageSize = pageSize;
