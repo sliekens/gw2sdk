@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
 using GW2SDK.Infrastructure.Achievements;
 using Xunit;
@@ -29,7 +28,7 @@ namespace GW2SDK.Tests.Features.Achievements
             Assert.Throws<ArgumentException>("achievementIds",
                 () =>
                 {
-                    _ = new GetAchievementsByIdsRequest.Builder(Enumerable.Empty<int>().ToList());
+                    _ = new GetAchievementsByIdsRequest.Builder(new int[0]);
                 });
         }
 

@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using GW2SDK.Features.Items;
 using Xunit;
@@ -19,15 +17,13 @@ namespace GW2SDK.Tests.Features.Items
 
             var actual = await sut.GetItemsIndex();
 
-            Assert.NotEmpty(actual);
-            Assert.Equal(actual.ResultCount, actual.Count);
             Assert.Equal(actual.ResultTotal, actual.Count);
         }
 
         [Fact]
         [Trait("Feature",  "Items")]
         [Trait("Category", "Integration")]
-        public async Task GetItemById_ShouldReturnRequestedItem()
+        public async Task GetItemById_ShouldReturnThatItem()
         {
             var services = new Container();
             var sut = services.Resolve<ItemService>();
@@ -37,20 +33,6 @@ namespace GW2SDK.Tests.Features.Items
             var actual = await sut.GetItemById(itemId);
 
             Assert.Equal(itemId, actual.Id);
-        }
-
-        [Fact]
-        [Trait("Feature",  "Items")]
-        [Trait("Category", "Integration")]
-        public async Task GetItemsByIds_ShouldReturnRequestedItems()
-        {
-            var services = new Container();
-            var sut = services.Resolve<ItemService>();
-
-            var actual = await sut.GetItemsByIds(new List<int> { 24, 46, 56 });
-
-            Assert.NotEmpty(actual);
-            Assert.Collection(actual, item => Assert.Equal(24, item.Id), item => Assert.Equal(46, item.Id), item => Assert.Equal(56, item.Id));
         }
 
         [Fact]
@@ -79,8 +61,23 @@ namespace GW2SDK.Tests.Features.Items
             await Assert.ThrowsAsync<ArgumentException>("itemIds",
                 async () =>
                 {
-                    await sut.GetItemsByIds(Enumerable.Empty<int>().ToList());
+                    await sut.GetItemsByIds(new int[0]);
                 });
+        }
+
+        [Fact]
+        [Trait("Feature",  "Items")]
+        [Trait("Category", "Integration")]
+        public async Task GetItemsByIds_ShouldReturnThoseItems()
+        {
+            var services = new Container();
+            var sut = services.Resolve<ItemService>();
+
+            var ids = new[] { 24, 46, 56 };
+
+            var actual = await sut.GetItemsByIds(ids);
+
+            Assert.Collection(actual, item => Assert.Equal(24, item.Id), item => Assert.Equal(46, item.Id), item => Assert.Equal(56, item.Id));
         }
 
         [Fact]

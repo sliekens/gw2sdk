@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 using System.Threading.Tasks;
 using GW2SDK.Features.Colors;
 using Xunit;
@@ -11,6 +10,19 @@ namespace GW2SDK.Tests.Features.Colors
         [Fact]
         [Trait("Feature",  "Colors")]
         [Trait("Category", "Integration")]
+        public async Task GetColors_ShouldReturnAllColors()
+        {
+            var services = new Container();
+            var sut = services.Resolve<ColorService>();
+
+            var actual = await sut.GetColors();
+
+            Assert.Equal(actual.ResultTotal, actual.Count);
+        }
+
+        [Fact]
+        [Trait("Feature",  "Colors")]
+        [Trait("Category", "Integration")]
         public async Task GetColorsIndex_ShouldReturnAllIds()
         {
             var services = new Container();
@@ -18,20 +30,17 @@ namespace GW2SDK.Tests.Features.Colors
 
             var actual = await sut.GetColorsIndex();
 
-            Assert.NotEmpty(actual);
-            Assert.Equal(actual.ResultCount, actual.Count);
             Assert.Equal(actual.ResultTotal, actual.Count);
         }
 
         [Fact]
         [Trait("Feature",  "Colors")]
         [Trait("Category", "Integration")]
-        public async Task GetColorById_ShouldReturnRequestedColor()
+        public async Task GetColorById_ShouldReturnThatColor()
         {
             var services = new Container();
             var sut = services.Resolve<ColorService>();
 
-            // Randomly chosen
             const int colorId = 1;
 
             var actual = await sut.GetColorById(colorId);
@@ -57,7 +66,7 @@ namespace GW2SDK.Tests.Features.Colors
         [Fact]
         [Trait("Feature",  "Colors")]
         [Trait("Category", "Unit")]
-        public async Task GetColorsByIds_WithIdsEmpty_ShouldThrowArgumentNullException()
+        public async Task GetColorsByIds_WithIdsEmpty_ShouldThrowArgumentException()
         {
             var services = new Container();
             var sut = services.Resolve<ColorService>();
@@ -65,38 +74,23 @@ namespace GW2SDK.Tests.Features.Colors
             await Assert.ThrowsAsync<ArgumentException>("colorIds",
                 async () =>
                 {
-                    await sut.GetColorsByIds(Enumerable.Empty<int>().ToList());
+                    await sut.GetColorsByIds(new int[0]);
                 });
         }
 
         [Fact]
         [Trait("Feature",  "Colors")]
         [Trait("Category", "Integration")]
-        public async Task GetColorsByIds_ShouldReturnExpectedRange()
+        public async Task GetColorsByIds_ShouldReturnThoseColors()
         {
             var services = new Container();
             var sut = services.Resolve<ColorService>();
 
-            var ids = Enumerable.Range(1, 5).ToList();
+            var ids = new[] { 1, 2, 3 };
 
             var actual = await sut.GetColorsByIds(ids);
 
-            Assert.Equal(ids, actual.Select(color => color.Id));
-        }
-
-        [Fact]
-        [Trait("Feature",  "Colors")]
-        [Trait("Category", "Integration")]
-        public async Task GetColors_ShouldReturnAllColors()
-        {
-            var services = new Container();
-            var sut = services.Resolve<ColorService>();
-
-            var actual = await sut.GetColors();
-
-            Assert.NotEmpty(actual);
-            Assert.Equal(actual.Count, actual.ResultTotal);
-            Assert.Equal(actual.Count, actual.ResultCount);
+            Assert.Collection(actual, first => Assert.Equal(1, first.Id), second => Assert.Equal(2, second.Id), third => Assert.Equal(3, third.Id));
         }
 
         [Fact]

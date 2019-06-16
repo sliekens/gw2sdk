@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using GW2SDK.Features.Worlds;
 using Xunit;
@@ -12,6 +10,19 @@ namespace GW2SDK.Tests.Features.Worlds
         [Fact]
         [Trait("Feature",  "Worlds")]
         [Trait("Category", "Integration")]
+        public async Task GetWorlds_ShouldReturnAllWorlds()
+        {
+            var services = new Container();
+            var sut = services.Resolve<WorldService>();
+
+            var actual = await sut.GetWorlds();
+
+            Assert.Equal(actual.ResultTotal, actual.Count);
+        }
+
+        [Fact]
+        [Trait("Feature",  "Worlds")]
+        [Trait("Category", "Integration")]
         public async Task GetWorldsIndex_ShouldReturnAllIds()
         {
             var services = new Container();
@@ -19,15 +30,13 @@ namespace GW2SDK.Tests.Features.Worlds
 
             var actual = await sut.GetWorldsIndex();
 
-            Assert.NotEmpty(actual);
-            Assert.Equal(actual.ResultCount, actual.Count);
             Assert.Equal(actual.ResultTotal, actual.Count);
         }
 
         [Fact]
         [Trait("Feature",  "Worlds")]
         [Trait("Category", "Integration")]
-        public async Task GetWorldById_ShouldReturnRequestedWorld()
+        public async Task GetWorldById_ShouldReturnThatWorld()
         {
             var services = new Container();
             var sut = services.Resolve<WorldService>();
@@ -37,20 +46,6 @@ namespace GW2SDK.Tests.Features.Worlds
             var actual = await sut.GetWorldById(worldId);
 
             Assert.Equal(worldId, actual.Id);
-        }
-
-        [Fact]
-        [Trait("Feature",  "Worlds")]
-        [Trait("Category", "Integration")]
-        public async Task GetWorldsByIds_ShouldReturnRequestedWorlds()
-        {
-            var services = new Container();
-            var sut = services.Resolve<WorldService>();
-
-            var actual = await sut.GetWorldsByIds(new List<int> { 1001, 1002, 1003 });
-
-            Assert.NotEmpty(actual);
-            Assert.Collection(actual, world => Assert.Equal(1001, world.Id), world => Assert.Equal(1002, world.Id), world => Assert.Equal(1003, world.Id));
         }
 
         [Fact]
@@ -79,23 +74,23 @@ namespace GW2SDK.Tests.Features.Worlds
             await Assert.ThrowsAsync<ArgumentException>("worldIds",
                 async () =>
                 {
-                    await sut.GetWorldsByIds(Enumerable.Empty<int>().ToList());
+                    await sut.GetWorldsByIds(new int[0]);
                 });
         }
 
         [Fact]
         [Trait("Feature",  "Worlds")]
         [Trait("Category", "Integration")]
-        public async Task GetWorlds_ShouldReturnAllWorlds()
+        public async Task GetWorldsByIds_ShouldReturnThoseWorlds()
         {
             var services = new Container();
             var sut = services.Resolve<WorldService>();
 
-            var actual = await sut.GetWorlds();
+            var ids = new[] { 1001, 1002, 1003 };
 
-            Assert.NotEmpty(actual);
-            Assert.Equal(actual.Count, actual.ResultTotal);
-            Assert.Equal(actual.Count, actual.ResultCount);
+            var actual = await sut.GetWorldsByIds(ids);
+
+            Assert.Collection(actual, world => Assert.Equal(1001, world.Id), world => Assert.Equal(1002, world.Id), world => Assert.Equal(1003, world.Id));
         }
 
         [Fact]
