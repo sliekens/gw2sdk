@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 using System.Threading.Tasks;
 using GW2SDK.Features.Accounts.Achievements;
 using GW2SDK.Tests.Shared;
@@ -12,33 +11,29 @@ namespace GW2SDK.Tests.Features.Accounts.Achievements
         [Fact]
         [Trait("Feature",  "Accounts.Achievements")]
         [Trait("Category", "Integration")]
-        public async Task GetAccountAchievementById_ShouldReturnAccountAchievement()
+        public async Task GetAccountAchievements_ShouldReturnAllAccountAchievements()
         {
             var services = new Container(ConfigurationManager.Instance.ApiKeyFull);
             var sut = services.Resolve<AccountAchievementService>();
 
-            // Randomly chosen
-            var achievementId = 1;
+            var actual = await sut.GetAccountAchievements();
 
-            var actual = await sut.GetAccountAchievementById(achievementId);
-
-            Assert.IsType<AccountAchievement>(actual);
+            Assert.Equal(actual.ResultTotal, actual.Count);
         }
 
         [Fact]
         [Trait("Feature",  "Accounts.Achievements")]
         [Trait("Category", "Integration")]
-        public async Task GetAccountAchievementsByIds_ShouldReturnExpectedRange()
+        public async Task GetAccountAchievementById_ShouldReturnThatAccountAchievement()
         {
             var services = new Container(ConfigurationManager.Instance.ApiKeyFull);
             var sut = services.Resolve<AccountAchievementService>();
 
-            // Randomly chosen
-            var ids = new[] { 1, 2, 3, 4, 5 };
+            const int achievementId = 1;
 
-            var actual = await sut.GetAccountAchievementsByIds(ids);
+            var actual = await sut.GetAccountAchievementById(achievementId);
 
-            Assert.Equal(ids, actual.Select(accountAchievement => accountAchievement.Id));
+            Assert.Equal(achievementId, actual.Id);
         }
 
         [Fact]
@@ -67,22 +62,23 @@ namespace GW2SDK.Tests.Features.Accounts.Achievements
             await Assert.ThrowsAsync<ArgumentException>("achievementIds",
                 async () =>
                 {
-                    await sut.GetAccountAchievementsByIds(Enumerable.Empty<int>().ToList());
+                    await sut.GetAccountAchievementsByIds(new int[0]);
                 });
         }
 
         [Fact]
         [Trait("Feature",  "Accounts.Achievements")]
         [Trait("Category", "Integration")]
-        public async Task GetAccountAchievements_ShouldReturnAllAccountAchievements()
+        public async Task GetAccountAchievementsByIds_ShouldReturnThoseAccountAchievements()
         {
             var services = new Container(ConfigurationManager.Instance.ApiKeyFull);
             var sut = services.Resolve<AccountAchievementService>();
 
-            var actual = await sut.GetAccountAchievements();
+            var ids = new[] { 1, 2, 3 };
 
-            Assert.Equal(actual.Count, actual.ResultTotal);
-            Assert.Equal(actual.Count, actual.ResultCount);
+            var actual = await sut.GetAccountAchievementsByIds(ids);
+
+            Assert.Collection(actual, first => Assert.Equal(1, first.Id), second => Assert.Equal(2, second.Id), third => Assert.Equal(3, third.Id));
         }
 
         [Fact]

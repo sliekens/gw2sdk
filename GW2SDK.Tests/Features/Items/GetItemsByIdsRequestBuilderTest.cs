@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
-using System.Text;
 using GW2SDK.Infrastructure.Items;
 using Xunit;
 
@@ -30,7 +28,7 @@ namespace GW2SDK.Tests.Features.Items
             Assert.Throws<ArgumentException>("itemIds",
                 () =>
                 {
-                    _ = new GetItemsByIdsRequest.Builder(Enumerable.Empty<int>().ToList());
+                    _ = new GetItemsByIdsRequest.Builder(new int[0]);
                 });
         }
 

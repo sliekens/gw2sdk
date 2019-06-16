@@ -1,45 +1,45 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Net.Http;
-using GW2SDK.Infrastructure.Recipes;
+using GW2SDK.Infrastructure.Colors;
 using Xunit;
 
-namespace GW2SDK.Tests.Features.Recipes
+namespace GW2SDK.Tests.Features.Colors
 {
-    public class GetRecipesByIdsRequestBuilderTest
+    public class GetColorsByIdsRequestBuilderTest
     {
         [Fact]
-        [Trait("Feature",  "Recipes")]
+        [Trait("Feature",  "Colors")]
         [Trait("Category", "Unit")]
         public void Constructor_WithIdsNull_ShouldThrowArgumentNullException()
         {
-            Assert.Throws<ArgumentNullException>("recipeIds",
+            Assert.Throws<ArgumentNullException>("colorIds",
                 () =>
                 {
-                    _ = new GetRecipesByIdsRequest.Builder(null);
+                    _ = new GetColorsByIdsRequest.Builder(null);
                 });
         }
 
         [Fact]
-        [Trait("Feature",  "Recipes")]
+        [Trait("Feature",  "Colors")]
         [Trait("Category", "Unit")]
         public void Constructor_WithIdsEmpty_ShouldThrowArgumentException()
         {
-            Assert.Throws<ArgumentException>("recipeIds",
+            Assert.Throws<ArgumentException>("colorIds",
                 () =>
                 {
-                    _ = new GetRecipesByIdsRequest.Builder(new int[0]);
+                    _ = new GetColorsByIdsRequest.Builder(new int[0]);
                 });
         }
 
         [Fact]
-        [Trait("Feature",  "Recipes")]
+        [Trait("Feature",  "Colors")]
         [Trait("Category", "Unit")]
         public void GetRequest_MethodShouldBeGet()
         {
             var ids = new List<int> { 1, 2, 3 };
 
-            var sut = new GetRecipesByIdsRequest.Builder(ids);
+            var sut = new GetColorsByIdsRequest.Builder(ids);
 
             var actual = sut.GetRequest();
 
@@ -47,17 +47,17 @@ namespace GW2SDK.Tests.Features.Recipes
         }
 
         [Fact]
-        [Trait("Feature",  "Recipes")]
+        [Trait("Feature",  "Colors")]
         [Trait("Category", "Unit")]
         public void GetRequest_ShouldSerializeIdsAsQueryString()
         {
             var ids = new List<int> { 1, 2, 3 };
 
-            var sut = new GetRecipesByIdsRequest.Builder(ids);
+            var sut = new GetColorsByIdsRequest.Builder(ids);
 
             var actual = sut.GetRequest();
 
-            var expected = new Uri("/v2/recipes?ids=1,2,3", UriKind.Relative);
+            var expected = new Uri("/v2/colors?ids=1,2,3", UriKind.Relative);
 
             Assert.Equal(expected, actual.RequestUri);
         }

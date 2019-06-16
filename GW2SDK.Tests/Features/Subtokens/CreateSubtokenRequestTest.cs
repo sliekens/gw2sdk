@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using GW2SDK.Features.Common;
 using GW2SDK.Infrastructure.Subtokens;
 using Xunit;
@@ -46,7 +45,7 @@ namespace GW2SDK.Tests.Features.Subtokens
         [Trait("Category", "Unit")]
         public void CreateSubtokenRequest_WithPermissionsEmpty_ShouldNotHavePermissionsInQueryString()
         {
-            var permissions = Enumerable.Empty<Permission>().ToList();
+            var permissions = new Permission[0];
 
             var sut = new CreateSubtokenRequest.Builder(permissions: permissions).GetRequest();
 
