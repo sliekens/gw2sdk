@@ -5,6 +5,7 @@ using GW2SDK.Extensions;
 using GW2SDK.Features.Accounts;
 using GW2SDK.Features.Accounts.Achievements;
 using GW2SDK.Features.Achievements;
+using GW2SDK.Features.Achievements.Categories;
 using GW2SDK.Features.Builds;
 using GW2SDK.Features.Colors;
 using GW2SDK.Features.Items;
@@ -43,6 +44,7 @@ namespace GW2SDK.Tests
                                       .AddTypedClient<AccountService>()
                                       .AddTypedClient<AccountAchievementService>()
                                       .AddTypedClient<AchievementService>()
+                                      .AddTypedClient<AchievementCategoryService>()
                                       .AddTypedClient<BuildService>()
                                       .AddTypedClient<ColorService>()
                                       .AddTypedClient<ItemService>()

@@ -1,7 +1,9 @@
-﻿using GW2SDK.Infrastructure;
+﻿using System.Diagnostics;
+using GW2SDK.Infrastructure;
 
 namespace GW2SDK.Features.Achievements.Categories
 {
+    [DebuggerDisplay("{Name,nq}")]
     [PublicAPI]
     [DataTransferObject]
     public sealed class AchievementCategory
