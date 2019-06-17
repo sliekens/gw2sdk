@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Net;
 using System.Net.Http;
 using GW2SDK.Extensions;
 using GW2SDK.Features.Accounts;
@@ -23,7 +24,7 @@ namespace GW2SDK.Tests
         public Container(string accessToken = null)
         {
             var services = new ServiceCollection();
-            services.AddTransient<SocketsHttpHandler>();
+            services.AddTransient(sp => new SocketsHttpHandler { AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate });
             services.AddTransient<UnauthorizedMessageHandler>();
             services.AddTransient<BadMessageHandler>();
             services.AddTransient<RateLimitHandler>();
@@ -32,6 +33,7 @@ namespace GW2SDK.Tests
                                           {
                                               http.UseBaseAddress(ConfigurationManager.Instance.BaseAddress);
                                               http.UseLatestSchemaVersion();
+                                              http.UseDataCompression();
                                           })
                                       .ConfigurePrimaryHttpMessageHandler(sp => sp.GetRequiredService<SocketsHttpHandler>())
                                       .AddPolicyHandler(HttpPolicy.SelectPolicy)
