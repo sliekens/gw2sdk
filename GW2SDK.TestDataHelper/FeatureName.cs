@@ -8,6 +8,8 @@
 
         AchievementCategories,
 
+        AchievementGroups,
+
         Colors,
 
         Worlds,
