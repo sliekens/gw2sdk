@@ -1,1 +1,1 @@
-dotnet run -p .\GW2SDK.TestDataHelper\ --feature:colors --out-file $ExecutionContext.SessionState.Path.GetUnresolvedProviderPathFromPSPath('.\GW2SDK.Tests\Data\colors.json') 
+dotnet run -p .\GW2SDK.TestDataHelper\ --feature:colors --out-file:"$PSScriptRoot\GW2SDK.Tests\Data\colors.json" 
