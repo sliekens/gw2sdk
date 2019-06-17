@@ -13,6 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Features\Achievements.Categories\" />
     <Folder Include="Features\Skins\" />
     <Folder Include="Features\Recipes\" />
   </ItemGroup>
