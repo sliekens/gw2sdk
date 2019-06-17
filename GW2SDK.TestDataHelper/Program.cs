@@ -35,6 +35,16 @@ namespace GW2SDK.TestDataHelper
                     }
                 }
 
+                if (feature == FeatureName.AchievementCategories)
+                {
+                    var service = new JsonAchievementCategoriesService(http);
+                    var jsons = await service.GetAllJsonAchievementCategories(indented);
+                    foreach (var json in jsons)
+                    {
+                        Console.WriteLine(json);
+                    }
+                }
+
                 if (feature == FeatureName.Colors)
                 {
                     var service = new JsonColorService(http);

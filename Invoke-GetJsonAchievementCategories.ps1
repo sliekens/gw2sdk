@@ -1,0 +1,1 @@
+dotnet run -p .\GW2SDK.TestDataHelper\ --feature:achievementCategories --out-file:"$PSScriptRoot\GW2SDK.Tests\Data\achievementCategories.json"

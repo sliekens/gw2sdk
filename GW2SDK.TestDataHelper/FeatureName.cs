@@ -6,6 +6,8 @@
 
         Achievements,
 
+        AchievementCategories,
+
         Colors,
 
         Worlds,
