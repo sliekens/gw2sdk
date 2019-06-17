@@ -12,6 +12,8 @@
 
         Items,
 
-        Recipes
+        Recipes,
+
+        Skins
     }
 }

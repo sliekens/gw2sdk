@@ -74,6 +74,16 @@ namespace GW2SDK.TestDataHelper
                         Console.WriteLine(json);
                     }
                 }
+
+                if (feature == FeatureName.Skins)
+                {
+                    var service = new JsonSkinService(http);
+                    var jsons = await service.GetAllJsonSkins(indented);
+                    foreach (var json in jsons)
+                    {
+                        Console.WriteLine(json);
+                    }
+                }
             }
         }
     }
