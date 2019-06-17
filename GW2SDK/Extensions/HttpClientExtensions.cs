@@ -63,5 +63,13 @@ namespace GW2SDK.Extensions
 
             instance.DefaultRequestHeaders.AcceptLanguage.ParseAdd(lang);
         }
+
+        public static void UseDataCompression([NotNull] this HttpClient instance)
+        {
+            if (instance == null) throw new ArgumentNullException(nameof(instance));
+            instance.DefaultRequestHeaders.AcceptEncoding.Add(new StringWithQualityHeaderValue("gzip"));
+            instance.DefaultRequestHeaders.AcceptEncoding.Add(new StringWithQualityHeaderValue("deflate", 0.5));
+            instance.DefaultRequestHeaders.AcceptEncoding.Add(new StringWithQualityHeaderValue("identity", 0));
+        }
     }
 }
