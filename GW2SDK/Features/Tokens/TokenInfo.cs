@@ -1,4 +1,3 @@
-using System;
 using System.Diagnostics;
 using GW2SDK.Features.Common;
 using GW2SDK.Infrastructure;
@@ -18,18 +17,5 @@ namespace GW2SDK.Features.Tokens
         public string Name { get; set; }
 
         public Permission[] Permissions { get; set; }
-    }
-
-    public sealed class ApiKeyInfo : TokenInfo
-    {
-    }
-
-    public sealed class SubtokenInfo : TokenInfo
-    {
-        public DateTimeOffset ExpiresAt { get; set; }
-
-        public DateTimeOffset IssuedAt { get; set; }
-
-        public Uri[] Urls { get; set; }
     }
 }
