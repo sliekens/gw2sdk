@@ -14,6 +14,7 @@
 
   <ItemGroup>
     <Folder Include="Features\Achievements.Categories\" />
+    <Folder Include="Features\Achievements.Groups\" />
     <Folder Include="Features\Skins\" />
     <Folder Include="Features\Recipes\" />
   </ItemGroup>
