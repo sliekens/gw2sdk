@@ -1,13 +1,12 @@
 ﻿using System;
 using System.IO;
-using System.Net.Http;
 using System.Threading.Tasks;
 
 namespace GW2SDK.TestDataHelper
 {
     public class Program
     {
-        public static async Task Main(FeatureName feature, bool indented = false, string baseAddress = "https://api.guildwars2.com", string outFile = null)
+        public static async Task Main(FeatureName feature, bool indented = false, string outFile = null)
         {
             if (outFile != null)
             {
@@ -15,19 +14,20 @@ namespace GW2SDK.TestDataHelper
                 Console.SetOut(File.CreateText(outFile));
             }
 
+            var services = new Container();
+
             using (Console.Out)
-            using (var http = new HttpClient { BaseAddress = new Uri(baseAddress, UriKind.Absolute) })
             {
                 if (feature == FeatureName.Build)
                 {
-                    var service = new JsonBuildService(http);
+                    var service = services.Resolve<JsonBuildService>();
                     var json = await service.GetJsonBuild(indented);
                     Console.WriteLine(json);
                 }
 
                 if (feature == FeatureName.Achievements)
                 {
-                    var service = new JsonAchievementService(http);
+                    var service = services.Resolve<JsonAchievementService>();
                     var jsons = await service.GetAllJsonAchievements(indented);
                     foreach (var json in jsons)
                     {
@@ -37,7 +37,7 @@ namespace GW2SDK.TestDataHelper
 
                 if (feature == FeatureName.AchievementCategories)
                 {
-                    var service = new JsonAchievementCategoriesService(http);
+                    var service = services.Resolve<JsonAchievementCategoriesService>();
                     var jsons = await service.GetAllJsonAchievementCategories(indented);
                     foreach (var json in jsons)
                     {
@@ -47,7 +47,7 @@ namespace GW2SDK.TestDataHelper
 
                 if (feature == FeatureName.Colors)
                 {
-                    var service = new JsonColorService(http);
+                    var service = services.Resolve<JsonColorService>();
                     var jsons = await service.GetAllJsonColors(indented);
                     foreach (var json in jsons)
                     {
@@ -57,7 +57,7 @@ namespace GW2SDK.TestDataHelper
 
                 if (feature == FeatureName.Worlds)
                 {
-                    var service = new JsonWorldService(http);
+                    var service = services.Resolve<JsonWorldService>();
                     var jsons = await service.GetAllJsonWorlds(indented);
                     foreach (var json in jsons)
                     {
@@ -67,7 +67,7 @@ namespace GW2SDK.TestDataHelper
 
                 if (feature == FeatureName.Items)
                 {
-                    var service = new JsonItemService(http);
+                    var service = services.Resolve<JsonItemService>();
                     var jsons = await service.GetAllJsonItems(indented);
                     foreach (var json in jsons)
                     {
@@ -77,7 +77,7 @@ namespace GW2SDK.TestDataHelper
 
                 if (feature == FeatureName.Recipes)
                 {
-                    var service = new JsonRecipeService(http);
+                    var service = services.Resolve<JsonRecipeService>();
                     var jsons = await service.GetAllJsonRecipes(indented);
                     foreach (var json in jsons)
                     {
@@ -87,7 +87,7 @@ namespace GW2SDK.TestDataHelper
 
                 if (feature == FeatureName.Skins)
                 {
-                    var service = new JsonSkinService(http);
+                    var service = services.Resolve<JsonSkinService>();
                     var jsons = await service.GetAllJsonSkins(indented);
                     foreach (var json in jsons)
                     {
