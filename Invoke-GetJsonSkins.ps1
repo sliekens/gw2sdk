@@ -1,0 +1,1 @@
+dotnet run -p .\GW2SDK.TestDataHelper\ --feature:skins --out-file:"$PSScriptRoot\GW2SDK.Tests\Data\skins.json"
