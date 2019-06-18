@@ -28,7 +28,7 @@ namespace GW2SDK.Tests.Features.Achievements
         [Trait("Feature",    "Achievements")]
         [Trait("Category",   "Integration")]
         [Trait("Importance", "Critical")]
-        public void AllMembers_ShouldNotHaveMissingMembers()
+        public void Enum_ShouldHaveNoMissingMembers()
         {
             var expected = _fixture.Db.GetAchievementMasteryRegionNames().ToHashSet();
 
