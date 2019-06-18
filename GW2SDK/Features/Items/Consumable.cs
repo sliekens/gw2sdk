@@ -5,6 +5,7 @@ using Newtonsoft.Json;
 
 namespace GW2SDK.Features.Items
 {
+    [PublicAPI]
     [Inheritable]
     [JsonConverter(typeof(DiscriminatedJsonConverter), typeof(ConsumableDiscriminatorOptions))]
     public class Consumable : Item

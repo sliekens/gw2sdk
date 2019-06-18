@@ -2,6 +2,7 @@
 
 namespace GW2SDK.Features.Colors
 {
+    [PublicAPI]
     [DataTransferObject(RootObject = false)]
     public sealed class ColorInfo
     {

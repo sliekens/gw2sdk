@@ -3,8 +3,8 @@ using GW2SDK.Infrastructure;
 
 namespace GW2SDK.Features.Achievements.Categories
 {
-    [DebuggerDisplay("{Name,nq}")]
     [PublicAPI]
+    [DebuggerDisplay("{Name,nq}")]
     [DataTransferObject]
     public sealed class AchievementCategory
     {

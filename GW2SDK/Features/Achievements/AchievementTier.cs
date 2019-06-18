@@ -2,6 +2,7 @@
 
 namespace GW2SDK.Features.Achievements
 {
+    [PublicAPI]
     [DataTransferObject(RootObject = false)]
     public sealed class AchievementTier
     {

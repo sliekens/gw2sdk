@@ -2,6 +2,8 @@
 
 namespace GW2SDK.Features.Items
 {
+    [PublicAPI]
+    [DataTransferObject(RootObject = false)]
     public sealed class Buff
     {
         public int SkillId { get; set; }

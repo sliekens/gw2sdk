@@ -1,5 +1,8 @@
-﻿namespace GW2SDK.Features.Common
+﻿using GW2SDK.Infrastructure;
+
+namespace GW2SDK.Features.Common
 {
+    [PublicAPI]
     public interface IPageContext
     {
         int PageTotal { get; }

@@ -3,6 +3,7 @@ using GW2SDK.Infrastructure;
 
 namespace GW2SDK.Features.Colors
 {
+    [PublicAPI]
     [DebuggerDisplay("{Name,nq}")]
     [DataTransferObject]
     public sealed class Color

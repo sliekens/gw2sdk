@@ -2,6 +2,7 @@
 
 namespace GW2SDK.Features.Achievements
 {
+    [PublicAPI]
     public sealed class AchievementTextBit : AchievementBit
     {
         [NotNull]

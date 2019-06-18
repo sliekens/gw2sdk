@@ -7,6 +7,7 @@ using Newtonsoft.Json;
 
 namespace GW2SDK.Features.Tokens
 {
+    [PublicAPI]
     public sealed class TokenInfoService
     {
         private readonly HttpClient _http;

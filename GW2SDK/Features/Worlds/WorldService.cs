@@ -11,6 +11,7 @@ using Newtonsoft.Json;
 
 namespace GW2SDK.Features.Worlds
 {
+    [PublicAPI]
     public sealed class WorldService
     {
         private readonly HttpClient _http;
@@ -18,6 +19,20 @@ namespace GW2SDK.Features.Worlds
         public WorldService([NotNull] HttpClient http)
         {
             _http = http ?? throw new ArgumentNullException(nameof(http));
+        }
+
+        public async Task<IDataTransferList<World>> GetWorlds([CanBeNull] JsonSerializerSettings settings = null)
+        {
+            using (var request = new GetWorldsRequest())
+            using (var response = await _http.SendAsync(request).ConfigureAwait(false))
+            {
+                response.EnsureSuccessStatusCode();
+                var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
+                var listContext = response.Headers.GetListContext();
+                var list = new List<World>();
+                JsonConvert.PopulateObject(json, list, settings ?? Json.DefaultJsonSerializerSettings);
+                return new DataTransferList<World>(list, listContext);
+            }
         }
 
         public async Task<IDataTransferList<int>> GetWorldsIndex([CanBeNull] JsonSerializerSettings settings = null)
@@ -64,20 +79,6 @@ namespace GW2SDK.Features.Worlds
                 var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
                 var listContext = response.Headers.GetListContext();
                 var list = new List<World>(listContext.ResultCount);
-                JsonConvert.PopulateObject(json, list, settings ?? Json.DefaultJsonSerializerSettings);
-                return new DataTransferList<World>(list, listContext);
-            }
-        }
-
-        public async Task<IDataTransferList<World>> GetWorlds([CanBeNull] JsonSerializerSettings settings = null)
-        {
-            using (var request = new GetWorldsRequest())
-            using (var response = await _http.SendAsync(request).ConfigureAwait(false))
-            {
-                response.EnsureSuccessStatusCode();
-                var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
-                var listContext = response.Headers.GetListContext();
-                var list = new List<World>();
                 JsonConvert.PopulateObject(json, list, settings ?? Json.DefaultJsonSerializerSettings);
                 return new DataTransferList<World>(list, listContext);
             }

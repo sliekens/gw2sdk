@@ -6,6 +6,7 @@ using Newtonsoft.Json;
 
 namespace GW2SDK.Features.Accounts
 {
+    [PublicAPI]
     [DebuggerDisplay("{Name,nq}")]
     [DataTransferObject]
     public sealed class Account

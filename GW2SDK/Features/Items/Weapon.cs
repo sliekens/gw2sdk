@@ -4,6 +4,7 @@ using Newtonsoft.Json;
 
 namespace GW2SDK.Features.Items
 {
+    [PublicAPI]
     [Inheritable]
     [JsonConverter(typeof(DiscriminatedJsonConverter), typeof(WeaponDiscriminatorOptions))]
     public class Weapon : Equipment
