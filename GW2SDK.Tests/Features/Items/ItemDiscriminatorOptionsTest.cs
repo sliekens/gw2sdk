@@ -46,7 +46,7 @@ namespace GW2SDK.Tests.Features.Items
         [Trait("Category", "Integration")]
         public void Create_ShouldReturnObjectAssignableFromBaseType()
         {
-            var sut = new ConsumableDiscriminatorOptions();
+            var sut = new ItemDiscriminatorOptions();
 
             var actual = sut.GetDiscriminatedTypes().Select(x => x.Type).ToList();
 
