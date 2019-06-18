@@ -28,5 +28,29 @@ namespace GW2SDK.Tests.Features.Achievements
 
             Assert.Equal(expected, actual);
         }
+
+        [Fact]
+        [Trait("Feature",  "Achievements")]
+        [Trait("Category", "Integration")]
+        public void Create_ShouldReturnExpectedObject()
+        {
+            var sut = new AchievementBitDiscriminatorOptions();
+
+            var actual = sut.GetDiscriminatedTypes().Select(x => x.Type).ToList();
+
+            Assert.All(actual, type => Assert.IsType(type, sut.Create(type)));
+        }
+
+        [Fact]
+        [Trait("Feature",  "Achievements")]
+        [Trait("Category", "Integration")]
+        public void Create_ShouldReturnObjectAssignableFromBaseType()
+        {
+            var sut = new AchievementBitDiscriminatorOptions();
+
+            var actual = sut.GetDiscriminatedTypes().Select(x => x.Type).ToList();
+
+            Assert.All(actual, type => Assert.IsAssignableFrom(sut.BaseType, sut.Create(type)));
+        }
     }
 }
