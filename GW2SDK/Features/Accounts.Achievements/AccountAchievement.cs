@@ -2,6 +2,7 @@
 
 namespace GW2SDK.Features.Accounts.Achievements
 {
+    [PublicAPI]
     [DataTransferObject]
     public sealed class AccountAchievement
     {

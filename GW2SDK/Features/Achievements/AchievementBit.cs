@@ -4,6 +4,7 @@ using Newtonsoft.Json;
 
 namespace GW2SDK.Features.Achievements
 {
+    [PublicAPI]
     [Inheritable]
     [DataTransferObject(RootObject = false)]
     [JsonConverter(typeof(DiscriminatedJsonConverter), typeof(AchievementBitDiscriminatorOptions))]

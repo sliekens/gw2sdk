@@ -7,6 +7,7 @@ using Newtonsoft.Json;
 
 namespace GW2SDK.Features.Builds
 {
+    [PublicAPI]
     public sealed class BuildService
     {
         private readonly HttpClient _http;

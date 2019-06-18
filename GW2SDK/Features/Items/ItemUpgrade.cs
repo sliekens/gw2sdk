@@ -2,6 +2,7 @@
 
 namespace GW2SDK.Features.Items
 {
+    [PublicAPI]
     [DataTransferObject(RootObject = false)]
     public sealed class ItemUpgrade
     {

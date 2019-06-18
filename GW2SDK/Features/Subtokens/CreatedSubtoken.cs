@@ -2,6 +2,7 @@
 
 namespace GW2SDK.Features.Subtokens
 {
+    [PublicAPI]
     [DataTransferObject]
     public sealed class CreatedSubtoken
     {

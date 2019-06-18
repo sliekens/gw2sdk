@@ -2,6 +2,7 @@
 
 namespace GW2SDK.Features.Items
 {
+    [PublicAPI]
     public sealed class Transmutation : Consumable
     {
         [NotNull]

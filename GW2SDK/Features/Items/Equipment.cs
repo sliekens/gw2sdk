@@ -2,6 +2,7 @@
 
 namespace GW2SDK.Features.Items
 {
+    [PublicAPI]
     public abstract class Equipment : Item
     {
         public int Level { get; set; }

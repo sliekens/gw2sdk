@@ -2,6 +2,7 @@
 
 namespace GW2SDK.Features.Builds
 {
+    [PublicAPI]
     [DataTransferObject]
     public sealed class Build
     {

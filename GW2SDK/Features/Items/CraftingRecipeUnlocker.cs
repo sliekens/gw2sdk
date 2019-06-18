@@ -2,6 +2,7 @@
 
 namespace GW2SDK.Features.Items
 {
+    [PublicAPI]
     public sealed class CraftingRecipeUnlocker : Unlocker
     {
         public int RecipeId { get; set; }

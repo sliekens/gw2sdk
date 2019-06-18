@@ -11,6 +11,7 @@ using Newtonsoft.Json;
 
 namespace GW2SDK.Features.Accounts.Achievements
 {
+    [PublicAPI]
     public sealed class AccountAchievementService
     {
         private readonly HttpClient _http;

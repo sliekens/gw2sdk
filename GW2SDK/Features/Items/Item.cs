@@ -5,6 +5,7 @@ using Newtonsoft.Json;
 
 namespace GW2SDK.Features.Items
 {
+    [PublicAPI]
     [DebuggerDisplay("{Name,nq}")]
     [Inheritable]
     [DataTransferObject]

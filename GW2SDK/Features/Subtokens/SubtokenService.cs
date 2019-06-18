@@ -9,6 +9,7 @@ using Newtonsoft.Json;
 
 namespace GW2SDK.Features.Subtokens
 {
+    [PublicAPI]
     public sealed class SubtokenService
     {
         private readonly HttpClient _http;

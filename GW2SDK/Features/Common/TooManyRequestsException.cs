@@ -3,6 +3,7 @@ using GW2SDK.Infrastructure;
 
 namespace GW2SDK.Features.Common
 {
+    [PublicAPI]
     public sealed class TooManyRequestsException : InvalidOperationException
     {
         public TooManyRequestsException()
