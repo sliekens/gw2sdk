@@ -29,7 +29,7 @@ namespace GW2SDK.Tests.Features.Achievements
         [Fact]
         [Trait("Feature",  "Achievements")]
         [Trait("Category", "Integration")]
-        public void AllMembers_ShouldHaveNoMissingMembers()
+        public void Class_ShouldHaveNoMissingMembers()
         {
             var expected = Enum.GetNames(typeof(AchievementFlag)).ToHashSet();
 

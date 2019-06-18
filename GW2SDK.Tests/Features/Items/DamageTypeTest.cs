@@ -28,7 +28,7 @@ namespace GW2SDK.Tests.Features.Items
         [Trait("Feature",    "Items")]
         [Trait("Category",   "Integration")]
         [Trait("Importance", "Critical")]
-        public void AllMembers_ShouldNotHaveMissingMembers()
+        public void Enum_ShouldHaveNoMissingMembers()
         {
             var expected = _fixture.Db.GetWeaponDamageTypes().ToHashSet();
 

@@ -27,7 +27,7 @@ namespace GW2SDK.Tests.Features.Tokens
         [Trait("Feature",    "Tokens")]
         [Trait("Category",   "Integration")]
         [Trait("Importance", "Critical")]
-        public void AllMembers_ShouldHaveNoMissingMembers()
+        public void Class_ShouldHaveNoMissingMembers()
         {
             var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output))
                                                               .UseMissingMemberHandling(MissingMemberHandling.Error)

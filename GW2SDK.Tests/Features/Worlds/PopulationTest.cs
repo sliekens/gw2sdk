@@ -20,7 +20,7 @@ namespace GW2SDK.Tests.Features.Worlds
         [Trait("Feature",    "Worlds")]
         [Trait("Category",   "Integration")]
         [Trait("Importance", "Critical")]
-        public void AllMembers_ShouldNotHaveMissingMembers()
+        public void Enum_ShouldHaveNoMissingMembers()
         {
             var expected = new HashSet<string> { "Low", "Medium", "High", "VeryHigh", "Full" };
 

@@ -28,7 +28,7 @@ namespace GW2SDK.Tests.Features.Accounts
         [Trait("Feature",    "Accounts")]
         [Trait("Category",   "Integration")]
         [Trait("Importance", "Critical")]
-        public void AllMembers_ShouldHaveNoMissingMembers()
+        public void Class_ShouldHaveNoMissingMembers()
         {
             var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output))
                                                               .UseMissingMemberHandling(MissingMemberHandling.Error)
