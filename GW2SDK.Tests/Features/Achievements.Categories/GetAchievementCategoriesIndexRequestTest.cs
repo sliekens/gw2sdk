@@ -5,14 +5,14 @@ using Xunit;
 
 namespace GW2SDK.Tests.Features.Achievements.Categories
 {
-    public class GetAchievementCategoriesRequestTest
+    public class GetAchievementCategoriesIndexRequestTest
     {
         [Fact]
         [Trait("Feature",  "Achievements.Categories")]
         [Trait("Category", "Unit")]
         public void Method_ShouldBeGet()
         {
-            var sut = new GetAchievementCategoriesRequest();
+            var sut = new GetAchievementCategoriesIndexRequest();
 
             Assert.Equal(HttpMethod.Get, sut.Method);
         }
@@ -20,11 +20,11 @@ namespace GW2SDK.Tests.Features.Achievements.Categories
         [Fact]
         [Trait("Feature",  "Achievements.Categories")]
         [Trait("Category", "Unit")]
-        public void RequestUri_ShouldBeV2AchievementsCategoriesBulk()
+        public void RequestUri_ShouldBeV2AchievementsCategories()
         {
-            var sut = new GetAchievementCategoriesRequest();
+            var sut = new GetAchievementCategoriesIndexRequest();
 
-            var expected = new Uri("/v2/achievements/categories?ids=all", UriKind.Relative);
+            var expected = new Uri("/v2/achievements/categories", UriKind.Relative);
 
             Assert.Equal(expected, sut.RequestUri);
         }
