@@ -81,7 +81,7 @@ namespace GW2SDK.Tests.Features.Achievements.Categories
         [Fact]
         [Trait("Feature",  "Achievements.Categories")]
         [Trait("Category", "Integration")]
-        public async Task GetAchievementCategoriesByIds_ShouldReturnThoseColors()
+        public async Task GetAchievementCategoriesByIds_ShouldReturnThoseAchievementCategories()
         {
             var services = new Container();
             var sut = services.Resolve<AchievementCategoryService>();
