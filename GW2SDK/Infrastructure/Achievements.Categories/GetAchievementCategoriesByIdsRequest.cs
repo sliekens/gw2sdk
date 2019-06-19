@@ -26,7 +26,7 @@ namespace GW2SDK.Infrastructure.Achievements.Categories
 
                 if (achievementCategoryIds.Count == 0)
                 {
-                    throw new ArgumentException("Achievement categories IDs cannot be an empty collection.", nameof(achievementCategoryIds));
+                    throw new ArgumentException("Achievement category IDs cannot be an empty collection.", nameof(achievementCategoryIds));
                 }
 
                 _achievementCategoryIds = achievementCategoryIds;
