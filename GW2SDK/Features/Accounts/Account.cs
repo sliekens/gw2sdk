@@ -11,7 +11,8 @@ namespace GW2SDK.Features.Accounts
     [DataTransferObject]
     public sealed class Account
     {
-        public Guid Id { get; set; }
+        [NotNull]
+        public string Id { get; set; }
 
         public string Name { get; set; }
 
@@ -22,11 +23,14 @@ namespace GW2SDK.Features.Accounts
 
         public int World { get; set; }
 
-        public Guid[] Guilds { get; set; }
+        [NotNull]
+        [ItemNotNull]
+        public string[] Guilds { get; set; }
 
         [CanBeNull]
+        [ItemNotNull]
         [Scope(Permission.Guilds)]
-        public Guid[] GuildLeader { get; set; }
+        public string[] GuildLeader { get; set; }
 
         public DateTimeOffset Created { get; set; }
 

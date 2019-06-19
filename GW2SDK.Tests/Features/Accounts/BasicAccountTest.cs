@@ -1,4 +1,5 @@
-﻿using GW2SDK.Features.Accounts;
+﻿using System;
+using GW2SDK.Features.Accounts;
 using GW2SDK.Infrastructure;
 using GW2SDK.Tests.Features.Accounts.Fixtures;
 using GW2SDK.Tests.Features.Worlds.Fixtures;
@@ -41,13 +42,13 @@ namespace GW2SDK.Tests.Features.Accounts
         [Fact]
         [Trait("Feature",  "Accounts")]
         [Trait("Category", "Integration")]
-        public void Id_ShouldNotBeDefaultValue()
+        public void Id_ShouldNotBeNull()
         {
             var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output)).Build();
 
             var actual = JsonConvert.DeserializeObject<Account>(_fixture.Db.BasicAccount, settings);
 
-            Assert.NotEqual(default, actual.Id);
+            Assert.NotEmpty(actual.Id);
         }
 
         [Fact]
@@ -132,6 +133,18 @@ namespace GW2SDK.Tests.Features.Accounts
             var actual = JsonConvert.DeserializeObject<Account>(_fixture.Db.BasicAccount, settings);
 
             Assert.NotNull(actual.Guilds);
+        }
+
+        [Fact]
+        [Trait("Feature",  "Accounts")]
+        [Trait("Category", "Integration")]
+        public void Guilds_ShouldNotContainEmpty()
+        {
+            var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output)).Build();
+
+            var actual = JsonConvert.DeserializeObject<Account>(_fixture.Db.BasicAccount, settings);
+
+            Assert.All(actual.Guilds, Assert.NotEmpty);
         }
 
         [Fact]
