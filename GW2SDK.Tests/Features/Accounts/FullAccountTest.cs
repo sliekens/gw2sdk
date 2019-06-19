@@ -37,17 +37,17 @@ namespace GW2SDK.Tests.Features.Accounts
             // Next statement throws if there are missing members
             _ = JsonConvert.DeserializeObject<Account>(_fixture.Db.FullAccount, settings);
         }
-
+        
         [Fact]
         [Trait("Feature",  "Accounts")]
         [Trait("Category", "Integration")]
-        public void Id_ShouldNotBeDefaultValue()
+        public void Id_ShouldNotBeNull()
         {
             var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output)).Build();
 
             var actual = JsonConvert.DeserializeObject<Account>(_fixture.Db.FullAccount, settings);
 
-            Assert.NotEqual(default, actual.Id);
+            Assert.NotEmpty(actual.Id);
         }
 
         [Fact]
@@ -137,6 +137,19 @@ namespace GW2SDK.Tests.Features.Accounts
         [Fact]
         [Trait("Feature",  "Accounts")]
         [Trait("Category", "Integration")]
+        public void Guilds_ShouldNotContainEmpty()
+        {
+            var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output)).Build();
+
+            var actual = JsonConvert.DeserializeObject<Account>(_fixture.Db.FullAccount, settings);
+
+            Assert.All(actual.Guilds, Assert.NotEmpty);
+        }
+
+
+        [Fact]
+        [Trait("Feature",  "Accounts")]
+        [Trait("Category", "Integration")]
         public void GuildLeader_ShouldNotBeNull()
         {
             var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output)).Build();
@@ -145,6 +158,19 @@ namespace GW2SDK.Tests.Features.Accounts
 
             Assert.NotNull(actual.GuildLeader);
         }
+
+        [Fact]
+        [Trait("Feature",  "Accounts")]
+        [Trait("Category", "Integration")]
+        public void GuildLeader_ShouldNotContainEmpty()
+        {
+            var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output)).Build();
+
+            var actual = JsonConvert.DeserializeObject<Account>(_fixture.Db.FullAccount, settings);
+
+            Assert.All(actual.GuildLeader, Assert.NotEmpty);
+        }
+
 
         [Fact]
         [Trait("Feature",  "Accounts")]
