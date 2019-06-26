@@ -79,20 +79,41 @@ namespace GW2SDK.Tests.Features.Items
 
             Assert.Collection(actual, item => Assert.Equal(24, item.Id), item => Assert.Equal(46, item.Id), item => Assert.Equal(56, item.Id));
         }
-
+        
         [Fact]
         [Trait("Feature",  "Items")]
         [Trait("Category", "Integration")]
-        public async Task GetItemsByPage_WithPageSize200_ShouldReturn200Items()
+        public async Task GetItemsByPage_WithInvalidPage_ShouldThrowArgumentException()
         {
             var services = new Container();
             var sut = services.Resolve<ItemService>();
 
-            var actual = await sut.GetItemsByPage(0, 200);
+            await Assert.ThrowsAsync<ArgumentException>(async () => await sut.GetItemsByPage(-1, 3));
+        }
 
-            Assert.NotEmpty(actual);
-            Assert.Equal(actual.Count, actual.ResultCount);
-            Assert.Equal(200,          actual.PageSize);
+        [Fact]
+        [Trait("Feature",  "Items")]
+        [Trait("Category", "Integration")]
+        public async Task GetItemsByPage_WithInvalidPageSize_ShouldThrowArgumentException()
+        {
+            var services = new Container();
+            var sut = services.Resolve<ItemService>();
+
+            await Assert.ThrowsAsync<ArgumentException>(async () => await sut.GetItemsByPage(1, -3));
+        }
+
+        [Fact]
+        [Trait("Feature",  "Items")]
+        [Trait("Category", "Integration")]
+        public async Task GetItemsByPage_WithPage1AndPageSize3_ShouldReturnThatPage()
+        {
+            var services = new Container();
+            var sut = services.Resolve<ItemService>();
+
+            var actual = await sut.GetItemsByPage(1, 3);
+
+            Assert.Equal(3, actual.Count);
+            Assert.Equal(3, actual.PageSize);
         }
     }
 }
