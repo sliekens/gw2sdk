@@ -22,7 +22,7 @@ namespace GW2SDK.Tests.Features.Achievements.Categories
         private readonly ITestOutputHelper _output;
 
         [Fact]
-        [Trait("Feature",    "Achievement.Categories")]
+        [Trait("Feature",    "Achievements.Categories")]
         [Trait("Category",   "Integration")]
         [Trait("Importance", "Critical")]
         public void Class_ShouldHaveNoMissingMembers()
@@ -40,7 +40,7 @@ namespace GW2SDK.Tests.Features.Achievements.Categories
         }
 
         [Fact]
-        [Trait("Feature",  "Achievement.Categories")]
+        [Trait("Feature",  "Achievements.Categories")]
         [Trait("Category", "Integration")]
         public void Id_ShouldBePositive()
         {
@@ -54,7 +54,7 @@ namespace GW2SDK.Tests.Features.Achievements.Categories
         }
 
         [Fact]
-        [Trait("Feature",  "Achievement.Categories")]
+        [Trait("Feature",  "Achievements.Categories")]
         [Trait("Category", "Integration")]
         public void Name_ShouldNotBeNull()
         {
@@ -68,7 +68,7 @@ namespace GW2SDK.Tests.Features.Achievements.Categories
         }
 
         [Fact]
-        [Trait("Feature",  "Achievement.Categories")]
+        [Trait("Feature",  "Achievements.Categories")]
         [Trait("Category", "Integration")]
         public void Description_ShouldNotBeNull()
         {
@@ -82,7 +82,7 @@ namespace GW2SDK.Tests.Features.Achievements.Categories
         }
 
         [Fact]
-        [Trait("Feature",  "Achievement.Categories")]
+        [Trait("Feature",  "Achievements.Categories")]
         [Trait("Category", "Integration")]
         public void Order_ShouldNotBeNegative()
         {
@@ -96,7 +96,7 @@ namespace GW2SDK.Tests.Features.Achievements.Categories
         }
         
         [Fact]
-        [Trait("Feature",  "Achievement.Categories")]
+        [Trait("Feature",  "Achievements.Categories")]
         [Trait("Category", "Integration")]
         public void Icon_ShouldNotBeNull()
         {
@@ -110,7 +110,7 @@ namespace GW2SDK.Tests.Features.Achievements.Categories
         }
         
         [Fact]
-        [Trait("Feature",  "Achievement.Categories")]
+        [Trait("Feature",  "Achievements.Categories")]
         [Trait("Category", "Integration")]
         public void Achievements_ShouldNotBeNull()
         {

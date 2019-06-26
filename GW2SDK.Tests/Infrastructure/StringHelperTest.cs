@@ -4,6 +4,7 @@ using Xunit;
 
 namespace GW2SDK.Tests.Infrastructure
 {
+    [Trait("Category", "Unit")]
     public class StringHelperTest
     {
         [Fact]

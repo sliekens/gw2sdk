@@ -8,7 +8,7 @@ namespace GW2SDK.Tests.Features.Achievements.Groups
     public class GetAchievementGroupsByIdsRequestBuilderTest
     {
         [Fact]
-        [Trait("Feature",  "Achievement.Groups")]
+        [Trait("Feature",  "Achievements.Groups")]
         [Trait("Category", "Unit")]
         public void Constructor_WithIdsNull_ShouldThrowArgumentNullException()
         {
@@ -20,7 +20,7 @@ namespace GW2SDK.Tests.Features.Achievements.Groups
         }
 
         [Fact]
-        [Trait("Feature",  "Achievement.Groups")]
+        [Trait("Feature",  "Achievements.Groups")]
         [Trait("Category", "Unit")]
         public void Constructor_WithIdsEmpty_ShouldThrowArgumentException()
         {
@@ -32,7 +32,7 @@ namespace GW2SDK.Tests.Features.Achievements.Groups
         }
 
         [Fact]
-        [Trait("Feature",  "Achievement.Groups")]
+        [Trait("Feature",  "Achievements.Groups")]
         [Trait("Category", "Unit")]
         public void Constructor_WithIdsContainingNull_ShouldThrowArgumentException()
         {
@@ -51,7 +51,7 @@ namespace GW2SDK.Tests.Features.Achievements.Groups
         }
 
         [Fact]
-        [Trait("Feature",  "Achievement.Groups")]
+        [Trait("Feature",  "Achievements.Groups")]
         [Trait("Category", "Unit")]
         public void Constructor_WithIdsContainingEmpty_ShouldThrowArgumentException()
         {
@@ -70,7 +70,7 @@ namespace GW2SDK.Tests.Features.Achievements.Groups
         }
 
         [Fact]
-        [Trait("Feature",  "Achievement.Groups")]
+        [Trait("Feature",  "Achievements.Groups")]
         [Trait("Category", "Unit")]
         public void GetRequest_MethodShouldBeGet()
         {
@@ -89,7 +89,7 @@ namespace GW2SDK.Tests.Features.Achievements.Groups
         }
 
         [Fact]
-        [Trait("Feature",  "Achievement.Groups")]
+        [Trait("Feature",  "Achievements.Groups")]
         [Trait("Category", "Unit")]
         public void GetRequest_ShouldSerializeIdsAsQueryString()
         {

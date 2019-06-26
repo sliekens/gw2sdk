@@ -8,7 +8,7 @@ namespace GW2SDK.Tests.Features.Achievements.Groups
     public class GetAchievementGroupsRequestTest
     {
         [Fact]
-        [Trait("Feature",  "Colors")]
+        [Trait("Feature",  "Achievements.Groups")]
         [Trait("Category", "Unit")]
         public void Method_ShouldBeGet()
         {
@@ -18,7 +18,7 @@ namespace GW2SDK.Tests.Features.Achievements.Groups
         }
 
         [Fact]
-        [Trait("Feature",  "Colors")]
+        [Trait("Feature",  "Achievements.Groups")]
         [Trait("Category", "Unit")]
         public void RequestUri_ShouldBeV2AchievementsGroupsBulk()
         {
