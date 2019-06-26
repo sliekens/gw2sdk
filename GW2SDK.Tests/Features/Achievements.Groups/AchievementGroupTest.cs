@@ -23,7 +23,7 @@ namespace GW2SDK.Tests.Features.Achievements.Groups
         private readonly ITestOutputHelper _output;
 
         [Fact]
-        [Trait("Feature",    "Achievement.Groups")]
+        [Trait("Feature",    "Achievements.Groups")]
         [Trait("Category",   "Integration")]
         [Trait("Importance", "Critical")]
         public void Class_ShouldHaveNoMissingMembers()
@@ -41,7 +41,7 @@ namespace GW2SDK.Tests.Features.Achievements.Groups
         }
 
         [Fact]
-        [Trait("Feature", "Achievement.Groups")]
+        [Trait("Feature", "Achievements.Groups")]
         [Trait("Category", "Integration")]
         public void Id_ShouldNotBeNull()
         {
@@ -55,7 +55,7 @@ namespace GW2SDK.Tests.Features.Achievements.Groups
         }
 
         [Fact]
-        [Trait("Feature", "Achievement.Groups")]
+        [Trait("Feature", "Achievements.Groups")]
         [Trait("Category", "Integration")]
         public void Name_ShouldNotBeNull()
         {
@@ -69,7 +69,7 @@ namespace GW2SDK.Tests.Features.Achievements.Groups
         }
 
         [Fact]
-        [Trait("Feature", "Achievement.Groups")]
+        [Trait("Feature", "Achievements.Groups")]
         [Trait("Category", "Integration")]
         public void Description_ShouldNotBeNull()
         {
@@ -83,7 +83,7 @@ namespace GW2SDK.Tests.Features.Achievements.Groups
         }
 
         [Fact]
-        [Trait("Feature", "Achievement.Groups")]
+        [Trait("Feature", "Achievements.Groups")]
         [Trait("Category", "Integration")]
         public void Order_ShouldNotBeNegative()
         {
@@ -97,7 +97,7 @@ namespace GW2SDK.Tests.Features.Achievements.Groups
         }
 
         [Fact]
-        [Trait("Feature", "Achievement.Groups")]
+        [Trait("Feature", "Achievements.Groups")]
         [Trait("Category", "Integration")]
         public void Categories_ShouldNotBeNull()
         {

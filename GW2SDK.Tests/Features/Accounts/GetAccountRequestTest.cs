@@ -18,7 +18,7 @@ namespace GW2SDK.Tests.Features.Accounts
         }
 
         [Fact]
-        [Trait("Feature",  "Achievements")]
+        [Trait("Feature",  "Accounts")]
         [Trait("Category", "Unit")]
         public void RequestUri_ShouldBeV2Account()
         {
