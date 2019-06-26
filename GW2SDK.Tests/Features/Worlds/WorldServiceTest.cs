@@ -92,22 +92,41 @@ namespace GW2SDK.Tests.Features.Worlds
 
             Assert.Collection(actual, world => Assert.Equal(1001, world.Id), world => Assert.Equal(1002, world.Id), world => Assert.Equal(1003, world.Id));
         }
-
+        
         [Fact]
         [Trait("Feature",  "Worlds")]
         [Trait("Category", "Integration")]
-        public async Task GetWorldsByPage_ShouldReturnAllWorlds()
+        public async Task GetWorldsByPage_WithInvalidPage_ShouldThrowArgumentException()
         {
             var services = new Container();
             var sut = services.Resolve<WorldService>();
 
-            var actual = await sut.GetWorldsByPage(0, 200);
+            await Assert.ThrowsAsync<ArgumentException>(async () => await sut.GetWorldsByPage(-1, 3));
+        }
 
-            Assert.NotEmpty(actual);
-            Assert.Equal(actual.Count, actual.ResultTotal);
-            Assert.Equal(actual.Count, actual.ResultCount);
-            Assert.Equal(200,          actual.PageSize);
-            Assert.Equal(1,            actual.PageTotal);
+        [Fact]
+        [Trait("Feature",  "Worlds")]
+        [Trait("Category", "Integration")]
+        public async Task GetWorldsByPage_WithInvalidPageSize_ShouldThrowArgumentException()
+        {
+            var services = new Container();
+            var sut = services.Resolve<WorldService>();
+
+            await Assert.ThrowsAsync<ArgumentException>(async () => await sut.GetWorldsByPage(1, -3));
+        }
+
+        [Fact]
+        [Trait("Feature",  "Worlds")]
+        [Trait("Category", "Integration")]
+        public async Task GetWorldsByPage_WithPage1AndPageSize3_ShouldReturnThatPage()
+        {
+            var services = new Container();
+            var sut = services.Resolve<WorldService>();
+
+            var actual = await sut.GetWorldsByPage(1, 3);
+
+            Assert.Equal(3, actual.Count);
+            Assert.Equal(3, actual.PageSize);
         }
     }
 }

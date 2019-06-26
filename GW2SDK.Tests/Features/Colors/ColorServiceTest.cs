@@ -92,20 +92,41 @@ namespace GW2SDK.Tests.Features.Colors
 
             Assert.Collection(actual, first => Assert.Equal(1, first.Id), second => Assert.Equal(2, second.Id), third => Assert.Equal(3, third.Id));
         }
-
+        
         [Fact]
         [Trait("Feature",  "Colors")]
         [Trait("Category", "Integration")]
-        public async Task GetColorsByPage_ShouldReturnExpectedLimit()
+        public async Task GetColorsByPage_WithInvalidPage_ShouldThrowArgumentException()
         {
             var services = new Container();
             var sut = services.Resolve<ColorService>();
 
-            var limit = 50;
+            await Assert.ThrowsAsync<ArgumentException>(async () => await sut.GetColorsByPage(-1, 3));
+        }
 
-            var actual = await sut.GetColorsByPage(0, limit);
+        [Fact]
+        [Trait("Feature",  "Colors")]
+        [Trait("Category", "Integration")]
+        public async Task GetColorsByPage_WithInvalidPageSize_ShouldThrowArgumentException()
+        {
+            var services = new Container();
+            var sut = services.Resolve<ColorService>();
 
-            Assert.InRange(actual.Count, 0, limit);
+            await Assert.ThrowsAsync<ArgumentException>(async () => await sut.GetColorsByPage(1, -3));
+        }
+
+        [Fact]
+        [Trait("Feature",  "Colors")]
+        [Trait("Category", "Integration")]
+        public async Task GetColorsByPage_WithPage1AndPageSize3_ShouldReturnThatPage()
+        {
+            var services = new Container();
+            var sut = services.Resolve<ColorService>();
+
+            var actual = await sut.GetColorsByPage(1, 3);
+
+            Assert.Equal(3, actual.Count);
+            Assert.Equal(3, actual.PageSize);
         }
     }
 }

@@ -84,27 +84,37 @@ namespace GW2SDK.Tests.Features.Accounts.Achievements
         [Fact]
         [Trait("Feature",  "Accounts.Achievements")]
         [Trait("Category", "Integration")]
-        public async Task GetAccountAchievementsByPage_ShouldThrowArgumentExceptionForInvalidPage()
+        public async Task GetAccountAchievementsByPage_WithInvalidPage_ShouldThrowArgumentException()
         {
             var services = new Container(ConfigurationManager.Instance.ApiKeyFull);
             var sut = services.Resolve<AccountAchievementService>();
 
-            await Assert.ThrowsAsync<ArgumentException>(async () => await sut.GetAccountAchievementsByPage(-1, 50));
+            await Assert.ThrowsAsync<ArgumentException>(async () => await sut.GetAccountAchievementsByPage(-1, 3));
         }
 
         [Fact]
         [Trait("Feature",  "Accounts.Achievements")]
         [Trait("Category", "Integration")]
-        public async Task GetAccountAchievementsByPage_ShouldReturnExpectedLimit()
+        public async Task GetAccountAchievementsByPage_WithInvalidPageSize_ShouldThrowArgumentException()
         {
             var services = new Container(ConfigurationManager.Instance.ApiKeyFull);
             var sut = services.Resolve<AccountAchievementService>();
 
-            var limit = 50;
+            await Assert.ThrowsAsync<ArgumentException>(async () => await sut.GetAccountAchievementsByPage(1, -3));
+        }
 
-            var actual = await sut.GetAccountAchievementsByPage(0, limit);
+        [Fact]
+        [Trait("Feature",  "Accounts.Achievements")]
+        [Trait("Category", "Integration")]
+        public async Task GetAccountAchievementsByPage_WithPage1AndPageSize3_ShouldReturnThatPage()
+        {
+            var services = new Container(ConfigurationManager.Instance.ApiKeyFull);
+            var sut = services.Resolve<AccountAchievementService>();
 
-            Assert.InRange(actual.Count, 0, limit);
+            var actual = await sut.GetAccountAchievementsByPage(1, 3);
+
+            Assert.Equal(3, actual.Count);
+            Assert.Equal(3, actual.PageSize);
         }
     }
 }

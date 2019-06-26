@@ -133,6 +133,28 @@ namespace GW2SDK.Tests.Features.Achievements.Groups
         [Fact]
         [Trait("Feature",  "Achievements.Groups")]
         [Trait("Category", "Integration")]
+        public async Task GetAchievementGroupsByPage_WithInvalidPage_ShouldThrowArgumentException()
+        {
+            var services = new Container();
+            var sut = services.Resolve<AchievementGroupService>();
+
+            await Assert.ThrowsAsync<ArgumentException>(async () => await sut.GetAchievementGroupsByPage(-1, 3));
+        }
+
+        [Fact]
+        [Trait("Feature",  "Achievements.Groups")]
+        [Trait("Category", "Integration")]
+        public async Task GetAchievementGroupsByPage_WithInvalidPageSize_ShouldThrowArgumentException()
+        {
+            var services = new Container();
+            var sut = services.Resolve<AchievementGroupService>();
+
+            await Assert.ThrowsAsync<ArgumentException>(async () => await sut.GetAchievementGroupsByPage(1, -3));
+        }
+
+        [Fact]
+        [Trait("Feature",  "Achievements.Groups")]
+        [Trait("Category", "Integration")]
         public async Task GetAchievementGroupsByPage_WithPage1AndPageSize3_ShouldReturnThatPage()
         {
             var services = new Container();

@@ -82,20 +82,41 @@ namespace GW2SDK.Tests.Features.Achievements
                 achievement => Assert.Equal(2, achievement.Id),
                 achievement => Assert.Equal(3, achievement.Id));
         }
-
+        
         [Fact]
         [Trait("Feature",  "Achievements")]
         [Trait("Category", "Integration")]
-        public async Task GetAchievementsByPage_ShouldReturnThePage()
+        public async Task GetAchievementsByPage_WithInvalidPage_ShouldThrowArgumentException()
         {
             var services = new Container();
             var sut = services.Resolve<AchievementService>();
 
-            var actual = await sut.GetAchievementsByPage(0, 200);
+            await Assert.ThrowsAsync<ArgumentException>(async () => await sut.GetAchievementsByPage(-1, 3));
+        }
 
-            Assert.NotEmpty(actual);
-            Assert.Equal(actual.Count, actual.ResultCount);
-            Assert.Equal(200,          actual.PageSize);
+        [Fact]
+        [Trait("Feature",  "Achievements")]
+        [Trait("Category", "Integration")]
+        public async Task GetAchievementsByPage_WithInvalidPageSize_ShouldThrowArgumentException()
+        {
+            var services = new Container();
+            var sut = services.Resolve<AchievementService>();
+
+            await Assert.ThrowsAsync<ArgumentException>(async () => await sut.GetAchievementsByPage(1, -3));
+        }
+
+        [Fact]
+        [Trait("Feature",  "Achievements")]
+        [Trait("Category", "Integration")]
+        public async Task GetAchievementsByPage_WithPage1AndPageSize3_ShouldReturnThatPage()
+        {
+            var services = new Container();
+            var sut = services.Resolve<AchievementService>();
+
+            var actual = await sut.GetAchievementsByPage(1, 3);
+
+            Assert.Equal(3, actual.Count);
+            Assert.Equal(3, actual.PageSize);
         }
     }
 }
