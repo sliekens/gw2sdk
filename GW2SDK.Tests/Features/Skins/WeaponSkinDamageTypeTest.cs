@@ -1,20 +1,20 @@
 ﻿using System;
 using System.Linq;
-using GW2SDK.Features.Items;
-using GW2SDK.Tests.Features.Items.Fixtures;
+using GW2SDK.Features.Common;
+using GW2SDK.Tests.Features.Skins.Fixtures;
 using Xunit;
 
-namespace GW2SDK.Tests.Features.Items
+namespace GW2SDK.Tests.Features.Skins
 {
-    [Collection(nameof(ItemDbCollection))]
-    public class DamageTypeTest
+    [Collection(nameof(SkinDbCollection))]
+    public class WeaponSkinDamageTypeTest
     {
-        public DamageTypeTest(ItemFixture fixture)
+        public WeaponSkinDamageTypeTest(SkinFixture fixture)
         {
             _fixture = fixture;
         }
 
-        private readonly ItemFixture _fixture;
+        private readonly SkinFixture _fixture;
 
         [Fact]
         [Trait("Feature",  "Items")]
