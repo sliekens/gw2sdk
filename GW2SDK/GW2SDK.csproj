@@ -13,7 +13,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Features\Skins\" />
     <Folder Include="Features\Recipes\" />
   </ItemGroup>
 

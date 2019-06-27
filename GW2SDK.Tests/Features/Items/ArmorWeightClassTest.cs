@@ -7,9 +7,9 @@ using Xunit;
 namespace GW2SDK.Tests.Features.Items
 {
     [Collection(nameof(ItemDbCollection))]
-    public class ItemRarityTest
+    public class ArmorWeightClassTest
     {
-        public ItemRarityTest(ItemFixture fixture)
+        public ArmorWeightClassTest(ItemFixture fixture)
         {
             _fixture = fixture;
         }
@@ -21,7 +21,7 @@ namespace GW2SDK.Tests.Features.Items
         [Trait("Category", "Unit")]
         public void DefaultMember_ShouldBeUndefined()
         {
-            Assert.False(Enum.IsDefined(typeof(Rarity), default(Rarity)));
+            Assert.False(Enum.IsDefined(typeof(WeightClass), default(WeightClass)));
         }
 
         [Fact]
@@ -30,11 +30,11 @@ namespace GW2SDK.Tests.Features.Items
         [Trait("Importance", "Critical")]
         public void Enum_ShouldHaveNoMissingMembers()
         {
-            var expected = _fixture.Db.GetItemRarities().ToHashSet();
+            var expected = _fixture.Db.GetArmorWeightClasses().ToHashSet();
 
-            var actual = Enum.GetNames(typeof(Rarity)).ToHashSet();
+            var actual = Enum.GetNames(typeof(WeightClass)).ToHashSet();
 
-            Assert.Superset(expected, actual);
+            Assert.Equal(expected, actual);
         }
     }
 }

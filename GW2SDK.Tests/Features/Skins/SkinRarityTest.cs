@@ -1,23 +1,23 @@
 ﻿using System;
 using System.Linq;
 using GW2SDK.Features.Common;
-using GW2SDK.Tests.Features.Items.Fixtures;
+using GW2SDK.Tests.Features.Skins.Fixtures;
 using Xunit;
 
-namespace GW2SDK.Tests.Features.Items
+namespace GW2SDK.Tests.Features.Skins
 {
-    [Collection(nameof(ItemDbCollection))]
-    public class ItemRarityTest
+    [Collection(nameof(SkinDbCollection))]
+    public class SkinRarityTest
     {
-        public ItemRarityTest(ItemFixture fixture)
+        public SkinRarityTest(SkinFixture fixture)
         {
             _fixture = fixture;
         }
 
-        private readonly ItemFixture _fixture;
+        private readonly SkinFixture _fixture;
 
         [Fact]
-        [Trait("Feature",  "Items")]
+        [Trait("Feature",  "Skins")]
         [Trait("Category", "Unit")]
         public void DefaultMember_ShouldBeUndefined()
         {
@@ -25,12 +25,12 @@ namespace GW2SDK.Tests.Features.Items
         }
 
         [Fact]
-        [Trait("Feature",    "Items")]
+        [Trait("Feature",    "Skins")]
         [Trait("Category",   "Integration")]
         [Trait("Importance", "Critical")]
         public void Enum_ShouldHaveNoMissingMembers()
         {
-            var expected = _fixture.Db.GetItemRarities().ToHashSet();
+            var expected = _fixture.Db.GetSkinRarities().ToHashSet();
 
             var actual = Enum.GetNames(typeof(Rarity)).ToHashSet();
 

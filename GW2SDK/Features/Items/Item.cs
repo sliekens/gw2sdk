@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics;
+using GW2SDK.Features.Common;
 using GW2SDK.Infrastructure;
 using GW2SDK.Infrastructure.Items;
 using Newtonsoft.Json;
@@ -21,7 +22,7 @@ namespace GW2SDK.Features.Items
         [CanBeNull]
         public string Description { get; set; }
 
-        public ItemRarity Rarity { get; set; }
+        public Rarity Rarity { get; set; }
 
         public int VendorValue { get; set; }
 

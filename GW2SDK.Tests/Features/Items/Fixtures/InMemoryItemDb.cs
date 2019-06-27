@@ -27,6 +27,7 @@ namespace GW2SDK.Tests.Features.Items.Fixtures
                     let jobject = JObject.Parse(json)
                     let entries = jobject.SelectTokens("flags[*]")
                     select entries.Select(token => token.ToString())).SelectMany(values => values)
+                                                                     .OrderBy(s => s)
                                                                      .Distinct();
         }
 
@@ -179,7 +180,7 @@ namespace GW2SDK.Tests.Features.Items.Fixtures
                 select entries.Select(token => token.ToString())).SelectMany(values => values)
                                                                  .OrderBy(s => s)
                                                                  .Distinct();
-        
+
         public IEnumerable<string> GetInfusionSlotFlags() =>
             (
                 from json in _db.Values

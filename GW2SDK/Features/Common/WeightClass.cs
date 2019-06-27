@@ -1,6 +1,6 @@
 ﻿using GW2SDK.Infrastructure;
 
-namespace GW2SDK.Features.Items
+namespace GW2SDK.Features.Common
 {
     [PublicAPI]
     public enum WeightClass
