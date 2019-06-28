@@ -8,7 +8,6 @@ namespace GW2SDK.Features.Skins
     {
         public int ColorId { get; set; }
 
-        // TODO: material should be an enum
-        public string Material { get; set; }
+        public Material Material { get; set; }
     }
 }
