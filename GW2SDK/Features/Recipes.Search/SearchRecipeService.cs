@@ -1,0 +1,52 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Net.Http;
+using System.Threading.Tasks;
+using GW2SDK.Extensions;
+using GW2SDK.Features.Common;
+using GW2SDK.Infrastructure;
+using GW2SDK.Infrastructure.Common;
+using GW2SDK.Infrastructure.Recipes.Search;
+using Newtonsoft.Json;
+
+namespace GW2SDK.Features.Recipes.Search
+{
+    [PublicAPI]
+    public sealed class SearchRecipeService
+    {
+        private readonly HttpClient _http;
+
+        public SearchRecipeService([NotNull] HttpClient http)
+        {
+            _http = http ?? throw new ArgumentNullException(nameof(http));
+        }
+
+        public async Task<IDataTransferList<int>> GetRecipesIndexByIngredientId(int ingredientId, [CanBeNull] JsonSerializerSettings settings = null)
+        {
+            using (var request = new GetRecipesIndexByIngredientIdRequest.Builder(ingredientId).GetRequest())
+            using (var response = await _http.SendAsync(request).ConfigureAwait(false))
+            {
+                response.EnsureSuccessStatusCode();
+                var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
+                var listContext = response.Headers.GetListContext();
+                var list = new List<int>(listContext.ResultCount);
+                JsonConvert.PopulateObject(json, list, settings ?? Json.DefaultJsonSerializerSettings);
+                return new DataTransferList<int>(list, listContext);
+            }
+        }
+
+        public async Task<IDataTransferList<int>> GetRecipesIndexByItemId(int itemId, [CanBeNull] JsonSerializerSettings settings = null)
+        {
+            using (var request = new GetRecipesIndexByItemIdRequest.Builder(itemId).GetRequest())
+            using (var response = await _http.SendAsync(request).ConfigureAwait(false))
+            {
+                response.EnsureSuccessStatusCode();
+                var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
+                var listContext = response.Headers.GetListContext();
+                var list = new List<int>(listContext.ResultCount);
+                JsonConvert.PopulateObject(json, list, settings ?? Json.DefaultJsonSerializerSettings);
+                return new DataTransferList<int>(list, listContext);
+            }
+        }
+    }
+}

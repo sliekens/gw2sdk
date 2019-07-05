@@ -11,6 +11,7 @@ using GW2SDK.Features.Builds;
 using GW2SDK.Features.Colors;
 using GW2SDK.Features.Items;
 using GW2SDK.Features.Recipes;
+using GW2SDK.Features.Recipes.Search;
 using GW2SDK.Features.Skins;
 using GW2SDK.Features.Subtokens;
 using GW2SDK.Features.Tokens;
@@ -53,6 +54,7 @@ namespace GW2SDK.Tests
                                       .AddTypedClient<ColorService>()
                                       .AddTypedClient<ItemService>()
                                       .AddTypedClient<RecipeService>()
+                                      .AddTypedClient<SearchRecipeService>()
                                       .AddTypedClient<SkinService>()
                                       .AddTypedClient<SubtokenService>()
                                       .AddTypedClient<TokenInfoService>()
