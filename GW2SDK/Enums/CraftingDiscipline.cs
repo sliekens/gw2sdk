@@ -1,11 +1,11 @@
 ﻿using GW2SDK.Annotations;
 
-namespace GW2SDK.Recipes
+namespace GW2SDK.Enums
 {
     [PublicAPI]
-    public enum Discipline
+    public enum CraftingDiscipline
     {
-        // Skip index 0 so that Enum.IsDefined returns false for default(Discipline)
+        // Skip index 0 so that Enum.IsDefined returns false for default(CraftingDiscipline)
         Armorsmith = 1,
 
         Artificer,

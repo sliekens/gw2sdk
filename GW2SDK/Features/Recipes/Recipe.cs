@@ -1,6 +1,6 @@
 ﻿using System;
 using GW2SDK.Annotations;
-using GW2SDK.Impl;
+using GW2SDK.Enums;
 using GW2SDK.Impl.JsonConverters;
 using GW2SDK.Recipes.Impl;
 using Newtonsoft.Json;
@@ -26,7 +26,7 @@ namespace GW2SDK.Recipes
         public TimeSpan TimeToCraft { get; set; }
 
         [NotNull]
-        public Discipline[] Disciplines { get; set; }
+        public CraftingDiscipline[] Disciplines { get; set; }
 
         [NotNull]
         public RecipeFlag[] Flags { get; set; }

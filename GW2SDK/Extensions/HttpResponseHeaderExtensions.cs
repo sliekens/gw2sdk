@@ -7,17 +7,6 @@ namespace GW2SDK.Extensions
 {
     public static class HttpResponseHeaderExtensions
     {
-        private static class ResponseHeaderName
-        {
-            internal const string PageTotal = "X-Page-Total";
-
-            internal const string PageSize = "X-Page-Size";
-
-            internal const string ResultTotal = "X-Result-Total";
-
-            internal const string ResultCount = "X-Result-Count";
-        }
-
         public static IListContext GetListContext([NotNull] this HttpResponseHeaders instance)
         {
             if (instance == null) throw new ArgumentNullException(nameof(instance));
@@ -34,6 +23,17 @@ namespace GW2SDK.Extensions
             var resultTotal = int.Parse(instance.GetValues(ResponseHeaderName.ResultTotal).ToCsv());
             var resultCount = int.Parse(instance.GetValues(ResponseHeaderName.ResultCount).ToCsv());
             return new PageContext(resultTotal, resultCount, pageTotal, pageSize);
+        }
+
+        private static class ResponseHeaderName
+        {
+            internal const string PageTotal = "X-Page-Total";
+
+            internal const string PageSize = "X-Page-Size";
+
+            internal const string ResultTotal = "X-Result-Total";
+
+            internal const string ResultCount = "X-Result-Count";
         }
     }
 }

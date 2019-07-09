@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using GW2SDK.Impl;
 using GW2SDK.Impl.JsonConverters;
 
 namespace GW2SDK.Skins.Impl

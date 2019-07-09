@@ -10,11 +10,13 @@ namespace GW2SDK.Exceptions
         {
         }
 
-        public UnauthorizedOperationException([CanBeNull] string message) : base(message)
+        public UnauthorizedOperationException([CanBeNull] string message)
+            : base(message)
         {
         }
 
-        public UnauthorizedOperationException([CanBeNull] string message, [CanBeNull] Exception innerException) : base(message, innerException)
+        public UnauthorizedOperationException([CanBeNull] string message, [CanBeNull] Exception innerException)
+            : base(message, innerException)
         {
         }
     }

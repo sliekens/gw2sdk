@@ -6,10 +6,10 @@ namespace GW2SDK.Items
     public abstract class Equipment : Item
     {
         public int Level { get; set; }
-        
+
         [NotNull]
         public InfusionSlot[] InfusionSlots { get; set; }
-        
+
         [NotNull]
         public InfixUpgrade InfixUpgrade { get; set; }
 

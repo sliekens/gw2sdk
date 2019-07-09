@@ -1,6 +1,6 @@
 ﻿using GW2SDK.Annotations;
 
-namespace GW2SDK.Items
+namespace GW2SDK.Enums
 {
     [PublicAPI]
     public enum ItemFlag

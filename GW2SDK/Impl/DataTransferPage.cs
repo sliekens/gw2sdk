@@ -9,7 +9,8 @@ namespace GW2SDK.Impl
     {
         private readonly IPageContext _context;
 
-        public DataTransferPage([NotNull] IList<T> list, [NotNull] IPageContext context) : base(list)
+        public DataTransferPage([NotNull] IList<T> list, [NotNull] IPageContext context)
+            : base(list)
         {
             _context = context ?? throw new ArgumentNullException(nameof(context));
         }

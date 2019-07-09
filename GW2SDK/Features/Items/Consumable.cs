@@ -1,6 +1,5 @@
 ﻿using System;
 using GW2SDK.Annotations;
-using GW2SDK.Impl;
 using GW2SDK.Impl.JsonConverters;
 using GW2SDK.Items.Impl;
 using Newtonsoft.Json;
@@ -13,7 +12,7 @@ namespace GW2SDK.Items
     public class Consumable : Item
     {
         public int Level { get; set; }
-        
+
         [JsonProperty("duration_ms")]
         [JsonConverter(typeof(MillisecondsConverter))]
         public TimeSpan? Duration { get; set; }

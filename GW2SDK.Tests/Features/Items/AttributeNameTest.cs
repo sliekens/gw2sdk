@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using GW2SDK.Enums;
 using GW2SDK.Items;
 using GW2SDK.Tests.Features.Items.Fixtures;
 using Xunit;
@@ -21,7 +22,7 @@ namespace GW2SDK.Tests.Features.Items
         [Trait("Category", "Unit")]
         public void DefaultMember_ShouldBeUndefined()
         {
-            Assert.False(Enum.IsDefined(typeof(AttributeName), default(AttributeName)));
+            Assert.False(Enum.IsDefined(typeof(UpgradeAttributeName), default(UpgradeAttributeName)));
         }
 
         [Fact]
@@ -32,7 +33,7 @@ namespace GW2SDK.Tests.Features.Items
         {
             var expected = _fixture.Db.GetInfixUpgradeAttributeNames().ToHashSet();
 
-            var actual = Enum.GetNames(typeof(AttributeName)).ToHashSet();
+            var actual = Enum.GetNames(typeof(UpgradeAttributeName)).ToHashSet();
 
             Assert.Equal(expected, actual);
         }

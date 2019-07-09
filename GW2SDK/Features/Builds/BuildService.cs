@@ -3,7 +3,6 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using GW2SDK.Annotations;
 using GW2SDK.Builds.Impl;
-using GW2SDK.Impl;
 using GW2SDK.Impl.JsonConverters;
 using Newtonsoft.Json;
 

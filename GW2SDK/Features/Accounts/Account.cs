@@ -2,7 +2,6 @@
 using System.Diagnostics;
 using GW2SDK.Annotations;
 using GW2SDK.Enums;
-using GW2SDK.Impl;
 using GW2SDK.Impl.JsonConverters;
 using Newtonsoft.Json;
 

@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics;
 using GW2SDK.Annotations;
+using GW2SDK.Enums;
 
 namespace GW2SDK.Worlds
 {
@@ -12,6 +13,6 @@ namespace GW2SDK.Worlds
 
         public string Name { get; set; }
 
-        public Population Population { get; set; }
+        public WorldPopulation Population { get; set; }
     }
 }

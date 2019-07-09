@@ -49,7 +49,7 @@ namespace GW2SDK.Achievements.Groups
                 return new DataTransferList<string>(list, listContext);
             }
         }
-        
+
         public async Task<AchievementGroup> GetAchievementGroupById([NotNull] string achievementGroupId, [CanBeNull] JsonSerializerSettings settings = null)
         {
             using (var request = new GetAchievementGroupByIdRequest.Builder(achievementGroupId).GetRequest())
@@ -61,7 +61,9 @@ namespace GW2SDK.Achievements.Groups
             }
         }
 
-        public async Task<IDataTransferList<AchievementGroup>> GetAchievementGroupsByIds([NotNull] [ItemNotNull] IReadOnlyList<string> achievementGroupIds, [CanBeNull] JsonSerializerSettings settings = null)
+        public async Task<IDataTransferList<AchievementGroup>> GetAchievementGroupsByIds(
+            [NotNull] [ItemNotNull] IReadOnlyList<string> achievementGroupIds,
+            [CanBeNull] JsonSerializerSettings settings = null)
         {
             if (achievementGroupIds == null)
             {
@@ -90,7 +92,10 @@ namespace GW2SDK.Achievements.Groups
             }
         }
 
-        public async Task<IDataTransferPage<AchievementGroup>> GetAchievementGroupsByPage(int page, int? pageSize = null, [CanBeNull] JsonSerializerSettings settings = null)
+        public async Task<IDataTransferPage<AchievementGroup>> GetAchievementGroupsByPage(
+            int page,
+            int? pageSize = null,
+            [CanBeNull] JsonSerializerSettings settings = null)
         {
             using (var request = new GetAchievementGroupsByPageRequest.Builder(page, pageSize).GetRequest())
             using (var response = await _http.SendAsync(request).ConfigureAwait(false))

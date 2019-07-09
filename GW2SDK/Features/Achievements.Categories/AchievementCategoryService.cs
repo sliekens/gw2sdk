@@ -48,7 +48,7 @@ namespace GW2SDK.Achievements.Categories
                 return new DataTransferList<int>(list, listContext);
             }
         }
-        
+
         public async Task<AchievementCategory> GetAchievementCategoryById(int achievementCategoryId, [CanBeNull] JsonSerializerSettings settings = null)
         {
             using (var request = new GetAchievementCategoryByIdRequest.Builder(achievementCategoryId).GetRequest())
@@ -60,7 +60,9 @@ namespace GW2SDK.Achievements.Categories
             }
         }
 
-        public async Task<IDataTransferList<AchievementCategory>> GetAchievementCategoriesByIds([NotNull] IReadOnlyList<int> achievementCategoryIds, [CanBeNull] JsonSerializerSettings settings = null)
+        public async Task<IDataTransferList<AchievementCategory>> GetAchievementCategoriesByIds(
+            [NotNull] IReadOnlyList<int> achievementCategoryIds,
+            [CanBeNull] JsonSerializerSettings settings = null)
         {
             if (achievementCategoryIds == null)
             {
@@ -84,7 +86,10 @@ namespace GW2SDK.Achievements.Categories
             }
         }
 
-        public async Task<IDataTransferPage<AchievementCategory>> GetAchievementCategoriesByPage(int page, int? pageSize = null, [CanBeNull] JsonSerializerSettings settings = null)
+        public async Task<IDataTransferPage<AchievementCategory>> GetAchievementCategoriesByPage(
+            int page,
+            int? pageSize = null,
+            [CanBeNull] JsonSerializerSettings settings = null)
         {
             using (var request = new GetAchievementCategoriesByPageRequest.Builder(page, pageSize).GetRequest())
             using (var response = await _http.SendAsync(request).ConfigureAwait(false))
