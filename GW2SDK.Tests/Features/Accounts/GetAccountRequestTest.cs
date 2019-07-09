@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Net.Http;
-using GW2SDK.Infrastructure.Accounts;
+using GW2SDK.Accounts.Impl;
 using Xunit;
 
 namespace GW2SDK.Tests.Features.Accounts

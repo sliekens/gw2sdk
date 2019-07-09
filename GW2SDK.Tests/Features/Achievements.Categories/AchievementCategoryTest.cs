@@ -1,7 +1,8 @@
-﻿using GW2SDK.Features.Achievements.Categories;
-using GW2SDK.Infrastructure;
+﻿using GW2SDK.Achievements.Categories;
+using GW2SDK.Impl;
+using GW2SDK.Impl.JsonConverters;
 using GW2SDK.Tests.Features.Achievements.Categories.Fixtures;
-using GW2SDK.Tests.Shared;
+using GW2SDK.Tests.TestInfrastructure;
 using Newtonsoft.Json;
 using Xunit;
 using Xunit.Abstractions;

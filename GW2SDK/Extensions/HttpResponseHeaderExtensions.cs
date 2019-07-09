@@ -1,13 +1,23 @@
 ﻿using System;
 using System.Net.Http.Headers;
-using GW2SDK.Features.Common;
-using GW2SDK.Infrastructure;
-using GW2SDK.Infrastructure.Common;
+using GW2SDK.Annotations;
+using GW2SDK.Impl;
 
 namespace GW2SDK.Extensions
 {
     public static class HttpResponseHeaderExtensions
     {
+        private static class ResponseHeaderName
+        {
+            internal const string PageTotal = "X-Page-Total";
+
+            internal const string PageSize = "X-Page-Size";
+
+            internal const string ResultTotal = "X-Result-Total";
+
+            internal const string ResultCount = "X-Result-Count";
+        }
+
         public static IListContext GetListContext([NotNull] this HttpResponseHeaders instance)
         {
             if (instance == null) throw new ArgumentNullException(nameof(instance));

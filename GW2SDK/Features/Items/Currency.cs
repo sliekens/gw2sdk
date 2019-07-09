@@ -1,6 +1,6 @@
-﻿using GW2SDK.Infrastructure;
+﻿using GW2SDK.Annotations;
 
-namespace GW2SDK.Features.Items
+namespace GW2SDK.Items
 {
     [PublicAPI]
     public sealed class Currency : Consumable

@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Net.Http;
-using GW2SDK.Infrastructure.Achievements.Categories;
+using GW2SDK.Achievements.Categories.Impl;
 using Xunit;
 
 namespace GW2SDK.Tests.Features.Achievements.Categories

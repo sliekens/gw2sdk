@@ -3,7 +3,7 @@ using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
-using GW2SDK.Infrastructure.Achievements.Groups;
+using GW2SDK.Achievements.Groups.Impl;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 

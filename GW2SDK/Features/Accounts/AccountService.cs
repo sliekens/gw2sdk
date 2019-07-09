@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Net.Http;
 using System.Threading.Tasks;
-using GW2SDK.Infrastructure;
-using GW2SDK.Infrastructure.Accounts;
+using GW2SDK.Accounts.Impl;
+using GW2SDK.Annotations;
+using GW2SDK.Impl;
+using GW2SDK.Impl.JsonConverters;
 using Newtonsoft.Json;
 
-namespace GW2SDK.Features.Accounts
+namespace GW2SDK.Accounts
 {
     [PublicAPI]
     public sealed class AccountService

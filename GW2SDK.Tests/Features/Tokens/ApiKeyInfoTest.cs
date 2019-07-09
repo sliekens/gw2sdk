@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Linq;
-using GW2SDK.Features.Common;
-using GW2SDK.Features.Tokens;
-using GW2SDK.Infrastructure;
+using GW2SDK.Enums;
+using GW2SDK.Impl;
+using GW2SDK.Impl.JsonConverters;
 using GW2SDK.Tests.Features.Tokens.Fixtures;
-using GW2SDK.Tests.Shared;
+using GW2SDK.Tests.TestInfrastructure;
+using GW2SDK.Tokens;
 using Newtonsoft.Json;
 using Xunit;
 using Xunit.Abstractions;

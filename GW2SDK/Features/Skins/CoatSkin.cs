@@ -1,6 +1,6 @@
-﻿using GW2SDK.Infrastructure;
+﻿using GW2SDK.Annotations;
 
-namespace GW2SDK.Features.Skins
+namespace GW2SDK.Skins
 {
     [PublicAPI]
     public sealed class CoatSkin : ArmorSkin

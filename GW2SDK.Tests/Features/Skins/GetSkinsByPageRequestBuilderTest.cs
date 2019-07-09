@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Net.Http;
-using GW2SDK.Infrastructure.Skins;
+using GW2SDK.Skins.Impl;
 using Xunit;
 
 namespace GW2SDK.Tests.Features.Skins

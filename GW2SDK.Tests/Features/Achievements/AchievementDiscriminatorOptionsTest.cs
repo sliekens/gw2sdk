@@ -1,5 +1,5 @@
 ﻿using System.Linq;
-using GW2SDK.Infrastructure.Achievements;
+using GW2SDK.Achievements.Impl;
 using GW2SDK.Tests.Features.Achievements.Fixtures;
 using Xunit;
 

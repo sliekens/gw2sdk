@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Net.Http;
-using GW2SDK.Infrastructure.Achievements.Groups;
+using GW2SDK.Achievements.Groups.Impl;
 using Xunit;
 
 namespace GW2SDK.Tests.Features.Achievements.Groups

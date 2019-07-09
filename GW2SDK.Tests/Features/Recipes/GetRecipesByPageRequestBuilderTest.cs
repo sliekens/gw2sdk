@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Net.Http;
-using GW2SDK.Infrastructure.Recipes;
+using GW2SDK.Recipes.Impl;
 using Xunit;
 
 namespace GW2SDK.Tests.Features.Recipes

@@ -1,9 +1,11 @@
 ﻿using System.Diagnostics;
-using GW2SDK.Infrastructure;
-using GW2SDK.Infrastructure.Achievements;
+using GW2SDK.Achievements.Impl;
+using GW2SDK.Annotations;
+using GW2SDK.Impl;
+using GW2SDK.Impl.JsonConverters;
 using Newtonsoft.Json;
 
-namespace GW2SDK.Features.Achievements
+namespace GW2SDK.Achievements
 {
     [PublicAPI]
     [DebuggerDisplay("{Name,nq}")]

@@ -1,7 +1,7 @@
 ﻿using System.Net.Http;
 using System.Threading.Tasks;
-using GW2SDK.Infrastructure.Subtokens;
-using GW2SDK.Tests.Shared;
+using GW2SDK.Subtokens.Impl;
+using GW2SDK.Tests.TestInfrastructure;
 using Xunit;
 
 namespace GW2SDK.Tests.Features.Subtokens.Fixtures

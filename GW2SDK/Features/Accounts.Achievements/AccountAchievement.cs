@@ -1,6 +1,6 @@
-﻿using GW2SDK.Infrastructure;
+﻿using GW2SDK.Annotations;
 
-namespace GW2SDK.Features.Accounts.Achievements
+namespace GW2SDK.Accounts.Achievements
 {
     [PublicAPI]
     [DataTransferObject]

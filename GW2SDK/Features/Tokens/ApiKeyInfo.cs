@@ -1,6 +1,6 @@
-using GW2SDK.Infrastructure;
+using GW2SDK.Annotations;
 
-namespace GW2SDK.Features.Tokens
+namespace GW2SDK.Tokens
 {
     [PublicAPI]
     public sealed class ApiKeyInfo : TokenInfo

@@ -1,8 +1,10 @@
-﻿using GW2SDK.Features.Accounts;
-using GW2SDK.Infrastructure;
+﻿using GW2SDK.Accounts;
+using GW2SDK.Enums;
+using GW2SDK.Impl;
+using GW2SDK.Impl.JsonConverters;
 using GW2SDK.Tests.Features.Accounts.Fixtures;
 using GW2SDK.Tests.Features.Worlds.Fixtures;
-using GW2SDK.Tests.Shared;
+using GW2SDK.Tests.TestInfrastructure;
 using Newtonsoft.Json;
 using Xunit;
 using Xunit.Abstractions;

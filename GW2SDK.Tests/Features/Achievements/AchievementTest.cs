@@ -1,8 +1,9 @@
 ﻿using System.Linq;
-using GW2SDK.Features.Achievements;
-using GW2SDK.Infrastructure;
+using GW2SDK.Achievements;
+using GW2SDK.Impl;
+using GW2SDK.Impl.JsonConverters;
 using GW2SDK.Tests.Features.Achievements.Fixtures;
-using GW2SDK.Tests.Shared;
+using GW2SDK.Tests.TestInfrastructure;
 using Newtonsoft.Json;
 using Xunit;
 using Xunit.Abstractions;

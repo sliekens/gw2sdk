@@ -1,7 +1,7 @@
-﻿using GW2SDK.Infrastructure;
+﻿using GW2SDK.Annotations;
 using Newtonsoft.Json;
 
-namespace GW2SDK.Features.Skins
+namespace GW2SDK.Skins
 {
     [PublicAPI]
     [DataTransferObject(RootObject = false)]

@@ -1,7 +1,7 @@
 ﻿using System.Diagnostics;
-using GW2SDK.Infrastructure;
+using GW2SDK.Annotations;
 
-namespace GW2SDK.Features.Worlds
+namespace GW2SDK.Worlds
 {
     [PublicAPI]
     [DebuggerDisplay("{Name,nq}")]

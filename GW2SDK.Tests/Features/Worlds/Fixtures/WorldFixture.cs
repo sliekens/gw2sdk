@@ -1,4 +1,4 @@
-﻿using GW2SDK.Tests.Shared;
+﻿using GW2SDK.Tests.TestInfrastructure;
 
 namespace GW2SDK.Tests.Features.Worlds.Fixtures
 {

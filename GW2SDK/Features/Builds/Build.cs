@@ -1,6 +1,6 @@
-﻿using GW2SDK.Infrastructure;
+﻿using GW2SDK.Annotations;
 
-namespace GW2SDK.Features.Builds
+namespace GW2SDK.Builds
 {
     [PublicAPI]
     [DataTransferObject]
