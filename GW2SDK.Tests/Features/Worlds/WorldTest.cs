@@ -1,4 +1,5 @@
 ﻿using System;
+using GW2SDK.Enums;
 using GW2SDK.Impl;
 using GW2SDK.Impl.JsonConverters;
 using GW2SDK.Tests.Features.Worlds.Fixtures;
@@ -81,7 +82,7 @@ namespace GW2SDK.Tests.Features.Worlds
                 json =>
                 {
                     var actual = JsonConvert.DeserializeObject<World>(json, settings);
-                    Assert.True(Enum.IsDefined(typeof(Population), actual.Population));
+                    Assert.True(Enum.IsDefined(typeof(WorldPopulation), actual.Population));
                 });
         }
     }

@@ -1,6 +1,6 @@
 ﻿using GW2SDK.Annotations;
 
-namespace GW2SDK.Recipes
+namespace GW2SDK.Enums
 {
     [PublicAPI]
     public enum RecipeFlag

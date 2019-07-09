@@ -1,5 +1,4 @@
 ﻿using GW2SDK.Annotations;
-using GW2SDK.Impl;
 using GW2SDK.Impl.JsonConverters;
 using GW2SDK.Items.Impl;
 using Newtonsoft.Json;

@@ -8,7 +8,7 @@ namespace GW2SDK
         int PageTotal { get; }
 
         int PageSize { get; }
-        
+
         int ResultTotal { get; }
 
         int ResultCount { get; }

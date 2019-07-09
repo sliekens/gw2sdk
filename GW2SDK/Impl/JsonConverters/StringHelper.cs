@@ -14,7 +14,7 @@ namespace GW2SDK.Impl.JsonConverters
 
             if (text.Length > 1)
             {
-                bool inWord = false;
+                var inWord = false;
                 for (var i = text.Length - 1; i > 0; i--)
                 {
                     if (char.IsLower(text[i]))
@@ -30,7 +30,6 @@ namespace GW2SDK.Impl.JsonConverters
 
                         inWord = false;
                     }
-                    
                 }
             }
 

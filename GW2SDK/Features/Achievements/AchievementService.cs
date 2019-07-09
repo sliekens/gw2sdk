@@ -72,7 +72,10 @@ namespace GW2SDK.Achievements
             }
         }
 
-        public async Task<IDataTransferPage<Achievement>> GetAchievementsByPage(int page, int? pageSize = null, [CanBeNull] JsonSerializerSettings settings = null)
+        public async Task<IDataTransferPage<Achievement>> GetAchievementsByPage(
+            int page,
+            int? pageSize = null,
+            [CanBeNull] JsonSerializerSettings settings = null)
         {
             using (var request = new GetAchievementsByPageRequest.Builder(page, pageSize).GetRequest())
             using (var response = await _http.SendAsync(request).ConfigureAwait(false))

@@ -23,14 +23,12 @@ namespace GW2SDK.Impl.JsonConverters
             return this;
         }
 
-        public JsonSerializerSettings Build() => new JsonSerializerSettings
-        {
-            MissingMemberHandling = _missingMemberHandling,
-            ContractResolver = new DefaultContractResolver
+        public JsonSerializerSettings Build() =>
+            new JsonSerializerSettings
             {
-                NamingStrategy = _namingStrategy
-            },
-            TraceWriter = _traceWriter
-        };
+                MissingMemberHandling = _missingMemberHandling,
+                ContractResolver = new DefaultContractResolver { NamingStrategy = _namingStrategy },
+                TraceWriter = _traceWriter
+            };
     }
 }

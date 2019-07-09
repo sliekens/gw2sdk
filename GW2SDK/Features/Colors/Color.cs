@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics;
 using GW2SDK.Annotations;
+using GW2SDK.Enums;
 
 namespace GW2SDK.Colors
 {

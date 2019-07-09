@@ -5,12 +5,7 @@ namespace GW2SDK.Impl.JsonConverters
 {
     public static class Json
     {
-        public static JsonSerializerSettings DefaultJsonSerializerSettings => new JsonSerializerSettings
-        {
-            ContractResolver = new DefaultContractResolver
-            {
-                NamingStrategy = new SnakeCaseNamingStrategy()
-            }
-        };
+        public static JsonSerializerSettings DefaultJsonSerializerSettings =>
+            new JsonSerializerSettings { ContractResolver = new DefaultContractResolver { NamingStrategy = new SnakeCaseNamingStrategy() } };
     }
 }
