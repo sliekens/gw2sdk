@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Net.Http;
-using GW2SDK.Infrastructure.Achievements;
+using GW2SDK.Achievements.Impl;
 using Xunit;
 
 namespace GW2SDK.Tests.Features.Achievements

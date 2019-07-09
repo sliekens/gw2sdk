@@ -2,14 +2,14 @@
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
+using GW2SDK.Annotations;
 using GW2SDK.Extensions;
-using GW2SDK.Features.Common;
-using GW2SDK.Infrastructure;
-using GW2SDK.Infrastructure.Common;
-using GW2SDK.Infrastructure.Recipes;
+using GW2SDK.Impl;
+using GW2SDK.Impl.JsonConverters;
+using GW2SDK.Recipes.Impl;
 using Newtonsoft.Json;
 
-namespace GW2SDK.Features.Recipes
+namespace GW2SDK.Recipes
 {
     [PublicAPI]
     public sealed class RecipeService

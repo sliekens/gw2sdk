@@ -2,7 +2,8 @@
 using System.Net;
 using System.Net.Http;
 using GW2SDK.Extensions;
-using GW2SDK.Infrastructure.Common;
+using GW2SDK.Impl;
+using GW2SDK.Impl.HttpMessageHandlers;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace GW2SDK.TestDataHelper

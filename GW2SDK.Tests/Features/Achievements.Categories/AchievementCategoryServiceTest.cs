@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
-using GW2SDK.Features.Achievements.Categories;
+using GW2SDK.Achievements.Categories;
+using GW2SDK.Tests.TestInfrastructure;
 using Xunit;
 
 namespace GW2SDK.Tests.Features.Achievements.Categories

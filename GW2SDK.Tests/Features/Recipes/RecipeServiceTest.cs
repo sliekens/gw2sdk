@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
-using GW2SDK.Features.Recipes;
+using GW2SDK.Recipes;
+using GW2SDK.Tests.TestInfrastructure;
 using Xunit;
 
 namespace GW2SDK.Tests.Features.Recipes

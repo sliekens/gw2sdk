@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Threading.Tasks;
-using GW2SDK.Features.Items;
+using GW2SDK.Items;
 using Xunit;
+using Container = GW2SDK.Tests.TestInfrastructure.Container;
 
 namespace GW2SDK.Tests.Features.Items
 {

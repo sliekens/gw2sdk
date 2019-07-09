@@ -1,8 +1,7 @@
-﻿using System;
-using System.Diagnostics;
-using GW2SDK.Infrastructure;
+﻿using System.Diagnostics;
+using GW2SDK.Annotations;
 
-namespace GW2SDK.Features.Achievements.Groups
+namespace GW2SDK.Achievements.Groups
 {
     [PublicAPI]
     [DebuggerDisplay("{Name,nq}")]

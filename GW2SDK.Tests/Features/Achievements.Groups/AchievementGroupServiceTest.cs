@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
-using GW2SDK.Features.Achievements.Groups;
+using GW2SDK.Achievements.Groups;
+using GW2SDK.Tests.TestInfrastructure;
 using Xunit;
 
 namespace GW2SDK.Tests.Features.Achievements.Groups

@@ -1,8 +1,8 @@
 ﻿using System.Threading.Tasks;
-using GW2SDK.Features.Common;
-using GW2SDK.Features.Tokens;
+using GW2SDK.Exceptions;
 using GW2SDK.Tests.Features.Tokens.Fixtures;
-using GW2SDK.Tests.Shared;
+using GW2SDK.Tests.TestInfrastructure;
+using GW2SDK.Tokens;
 using Xunit;
 
 namespace GW2SDK.Tests.Features.Tokens

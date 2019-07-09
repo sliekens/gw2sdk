@@ -2,14 +2,14 @@
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
+using GW2SDK.Achievements.Categories.Impl;
+using GW2SDK.Annotations;
 using GW2SDK.Extensions;
-using GW2SDK.Features.Common;
-using GW2SDK.Infrastructure;
-using GW2SDK.Infrastructure.Achievements.Categories;
-using GW2SDK.Infrastructure.Common;
+using GW2SDK.Impl;
+using GW2SDK.Impl.JsonConverters;
 using Newtonsoft.Json;
 
-namespace GW2SDK.Features.Achievements.Categories
+namespace GW2SDK.Achievements.Categories
 {
     [PublicAPI]
     public sealed class AchievementCategoryService

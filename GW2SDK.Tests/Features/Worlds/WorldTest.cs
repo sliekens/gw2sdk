@@ -1,8 +1,9 @@
 ﻿using System;
-using GW2SDK.Features.Worlds;
-using GW2SDK.Infrastructure;
+using GW2SDK.Impl;
+using GW2SDK.Impl.JsonConverters;
 using GW2SDK.Tests.Features.Worlds.Fixtures;
-using GW2SDK.Tests.Shared;
+using GW2SDK.Tests.TestInfrastructure;
+using GW2SDK.Worlds;
 using Newtonsoft.Json;
 using Xunit;
 using Xunit.Abstractions;

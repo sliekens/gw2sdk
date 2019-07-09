@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Net.Http;
-using GW2SDK.Infrastructure.Recipes.Search;
+using GW2SDK.Recipes.Search.Impl;
 using Xunit;
 
 namespace GW2SDK.Tests.Features.Recipes.Search

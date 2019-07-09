@@ -1,8 +1,10 @@
-﻿using GW2SDK.Infrastructure;
-using GW2SDK.Infrastructure.Skins;
+﻿using GW2SDK.Annotations;
+using GW2SDK.Impl;
+using GW2SDK.Impl.JsonConverters;
+using GW2SDK.Skins.Impl;
 using Newtonsoft.Json;
 
-namespace GW2SDK.Features.Skins
+namespace GW2SDK.Skins
 {
     [PublicAPI]
     [Inheritable]

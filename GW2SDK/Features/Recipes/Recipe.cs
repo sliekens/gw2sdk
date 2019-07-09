@@ -1,9 +1,11 @@
 ﻿using System;
-using GW2SDK.Infrastructure;
-using GW2SDK.Infrastructure.Recipes;
+using GW2SDK.Annotations;
+using GW2SDK.Impl;
+using GW2SDK.Impl.JsonConverters;
+using GW2SDK.Recipes.Impl;
 using Newtonsoft.Json;
 
-namespace GW2SDK.Features.Recipes
+namespace GW2SDK.Recipes
 {
     [PublicAPI]
     [Inheritable]

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Net.Http;
 using System.Net.Http.Headers;
-using GW2SDK.Infrastructure;
+using GW2SDK.Annotations;
 
 namespace GW2SDK.Extensions
 {

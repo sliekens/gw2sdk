@@ -2,14 +2,15 @@
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
+using GW2SDK.Accounts.Achievements.Impl;
+using GW2SDK.Annotations;
+using GW2SDK.Enums;
 using GW2SDK.Extensions;
-using GW2SDK.Features.Common;
-using GW2SDK.Infrastructure;
-using GW2SDK.Infrastructure.Accounts.Achievements;
-using GW2SDK.Infrastructure.Common;
+using GW2SDK.Impl;
+using GW2SDK.Impl.JsonConverters;
 using Newtonsoft.Json;
 
-namespace GW2SDK.Features.Accounts.Achievements
+namespace GW2SDK.Accounts.Achievements
 {
     [PublicAPI]
     public sealed class AccountAchievementService

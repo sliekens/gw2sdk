@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
-using GW2SDK.Features.Skins;
+using GW2SDK.Skins;
+using GW2SDK.Tests.TestInfrastructure;
 using Xunit;
 
 namespace GW2SDK.Tests.Features.Skins

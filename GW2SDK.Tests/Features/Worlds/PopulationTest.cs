@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using GW2SDK.Features.Worlds;
+using GW2SDK.Worlds;
 using Xunit;
 
 namespace GW2SDK.Tests.Features.Worlds

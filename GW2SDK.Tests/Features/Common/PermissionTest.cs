@@ -1,5 +1,5 @@
 ﻿using System;
-using GW2SDK.Features.Common;
+using GW2SDK.Enums;
 using Xunit;
 
 namespace GW2SDK.Tests.Features.Common

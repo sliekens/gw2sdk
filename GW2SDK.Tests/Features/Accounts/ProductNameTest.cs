@@ -1,4 +1,5 @@
-﻿using GW2SDK.Features.Accounts;
+﻿using GW2SDK.Accounts;
+using GW2SDK.Enums;
 using Xunit;
 
 namespace GW2SDK.Tests.Features.Accounts

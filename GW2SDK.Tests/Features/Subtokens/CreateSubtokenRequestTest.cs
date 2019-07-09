@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using GW2SDK.Features.Common;
-using GW2SDK.Infrastructure.Subtokens;
+using GW2SDK.Enums;
+using GW2SDK.Subtokens.Impl;
 using Xunit;
 
 namespace GW2SDK.Tests.Features.Subtokens

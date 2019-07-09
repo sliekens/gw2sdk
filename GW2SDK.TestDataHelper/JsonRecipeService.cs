@@ -3,7 +3,7 @@ using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
-using GW2SDK.Infrastructure.Recipes;
+using GW2SDK.Recipes.Impl;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 

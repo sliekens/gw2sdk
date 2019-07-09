@@ -1,7 +1,8 @@
-﻿using GW2SDK.Features.Colors;
-using GW2SDK.Infrastructure;
+﻿using GW2SDK.Colors;
+using GW2SDK.Impl;
+using GW2SDK.Impl.JsonConverters;
 using GW2SDK.Tests.Features.Colors.Fixtures;
-using GW2SDK.Tests.Shared;
+using GW2SDK.Tests.TestInfrastructure;
 using Newtonsoft.Json;
 using Xunit;
 using Xunit.Abstractions;

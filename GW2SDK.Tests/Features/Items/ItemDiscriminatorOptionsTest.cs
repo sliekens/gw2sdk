@@ -1,5 +1,5 @@
 ﻿using System.Linq;
-using GW2SDK.Infrastructure.Items;
+using GW2SDK.Items.Impl;
 using GW2SDK.Tests.Features.Items.Fixtures;
 using Xunit;
 

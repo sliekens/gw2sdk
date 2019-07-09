@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
-using GW2SDK.Features.Recipes.Search;
+using GW2SDK.Recipes.Search;
+using GW2SDK.Tests.TestInfrastructure;
 using Xunit;
 
 namespace GW2SDK.Tests.Features.Recipes.Search

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
-using GW2SDK.Features.Accounts.Achievements;
-using GW2SDK.Tests.Shared;
+using GW2SDK.Accounts.Achievements;
+using GW2SDK.Tests.TestInfrastructure;
 using Xunit;
 
 namespace GW2SDK.Tests.Features.Accounts.Achievements

@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
-using GW2SDK.Features.Builds;
+using GW2SDK.Builds;
+using GW2SDK.Tests.TestInfrastructure;
 using Xunit;
 
 namespace GW2SDK.Tests.Features.Builds
