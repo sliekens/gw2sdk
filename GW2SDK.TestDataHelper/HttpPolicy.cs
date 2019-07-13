@@ -11,7 +11,7 @@ namespace GW2SDK.TestDataHelper
     {
         public static IAsyncPolicy<HttpResponseMessage> Retry = HttpPolicyExtensions.HandleTransientHttpError().Or<TimeoutRejectedException>().RetryAsync(10);
 
-        public static IAsyncPolicy<HttpResponseMessage> Bulkhead = Policy.BulkheadAsync<HttpResponseMessage>(600);
+        public static IAsyncPolicy<HttpResponseMessage> Bulkhead = Policy.BulkheadAsync<HttpResponseMessage>(8, 600);
 
         public static IAsyncPolicy<HttpResponseMessage> InnerTimeout = Policy.TimeoutAsync<HttpResponseMessage>(TimeSpan.FromSeconds(10));
 
