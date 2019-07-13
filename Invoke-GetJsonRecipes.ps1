@@ -1,1 +1,0 @@
-dotnet run -p .\GW2SDK.TestDataHelper\ --feature:recipes --out-file:"$PSScriptRoot\GW2SDK.Tests\Data\recipes.json"

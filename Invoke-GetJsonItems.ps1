@@ -1,1 +1,0 @@
-dotnet run -p .\GW2SDK.TestDataHelper\ --feature:items --out-file:"$PSScriptRoot\GW2SDK.Tests\Data\items.json" 

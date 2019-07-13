@@ -1,0 +1,1 @@
+dotnet run -p .\GW2SDK.TestDataHelper\ --out-dir:"$PSScriptRoot\GW2SDK.Tests\Data"

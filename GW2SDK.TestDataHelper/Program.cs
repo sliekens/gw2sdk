@@ -6,103 +6,94 @@ namespace GW2SDK.TestDataHelper
 {
     public class Program
     {
-        public static async Task Main(FeatureName feature, bool indented = false, string outFile = null)
+        public static async Task Main(string outDir, bool indented = false)
         {
-            if (outFile != null)
+            Directory.CreateDirectory(outDir);
+            var services = new Container();
+            using (var file = File.CreateText(Path.Combine(outDir, "build.json")))
             {
-                Directory.CreateDirectory(Path.GetDirectoryName(outFile));
-                Console.SetOut(File.CreateText(outFile));
+                var service = services.Resolve<JsonBuildService>();
+                var json = await service.GetJsonBuild(indented);
+                file.WriteLine(json);
             }
 
-            var services = new Container();
-
-            using (Console.Out)
+            using (var file = File.CreateText(Path.Combine(outDir, "achievements.json")))
             {
-                if (feature == FeatureName.Build)
+                var service = services.Resolve<JsonAchievementService>();
+                var jsons = await service.GetAllJsonAchievements(indented);
+                foreach (var json in jsons)
                 {
-                    var service = services.Resolve<JsonBuildService>();
-                    var json = await service.GetJsonBuild(indented);
-                    Console.WriteLine(json);
+                    file.WriteLine(json);
                 }
+            }
 
-                if (feature == FeatureName.Achievements)
+            using (var file = File.CreateText(Path.Combine(outDir, "achievementCategories.json")))
+            {
+                var service = services.Resolve<JsonAchievementCategoriesService>();
+                var jsons = await service.GetAllJsonAchievementCategories(indented);
+                foreach (var json in jsons)
                 {
-                    var service = services.Resolve<JsonAchievementService>();
-                    var jsons = await service.GetAllJsonAchievements(indented);
-                    foreach (var json in jsons)
-                    {
-                        Console.WriteLine(json);
-                    }
+                    file.WriteLine(json);
                 }
+            }
 
-                if (feature == FeatureName.AchievementCategories)
+            using (var file = File.CreateText(Path.Combine(outDir, "achievementGroups.json")))
+            {
+                var service = services.Resolve<JsonAchievementGroupsService>();
+                var jsons = await service.GetAllJsonAchievementGroups(indented);
+                foreach (var json in jsons)
                 {
-                    var service = services.Resolve<JsonAchievementCategoriesService>();
-                    var jsons = await service.GetAllJsonAchievementCategories(indented);
-                    foreach (var json in jsons)
-                    {
-                        Console.WriteLine(json);
-                    }
+                    file.WriteLine(json);
                 }
+            }
 
-                if (feature == FeatureName.AchievementGroups)
+            using (var file = File.CreateText(Path.Combine(outDir, "colors.json")))
+            {
+                var service = services.Resolve<JsonColorService>();
+                var jsons = await service.GetAllJsonColors(indented);
+                foreach (var json in jsons)
                 {
-                    var service = services.Resolve<JsonAchievementGroupsService>();
-                    var jsons = await service.GetAllJsonAchievementGroups(indented);
-                    foreach (var json in jsons)
-                    {
-                        Console.WriteLine(json);
-                    }
+                    file.WriteLine(json);
                 }
+            }
 
-                if (feature == FeatureName.Colors)
+            using (var file = File.CreateText(Path.Combine(outDir, "worlds.json")))
+            {
+                var service = services.Resolve<JsonWorldService>();
+                var jsons = await service.GetAllJsonWorlds(indented);
+                foreach (var json in jsons)
                 {
-                    var service = services.Resolve<JsonColorService>();
-                    var jsons = await service.GetAllJsonColors(indented);
-                    foreach (var json in jsons)
-                    {
-                        Console.WriteLine(json);
-                    }
+                    file.WriteLine(json);
                 }
+            }
 
-                if (feature == FeatureName.Worlds)
+            using (var file = File.CreateText(Path.Combine(outDir, "items.json")))
+            {
+                var service = services.Resolve<JsonItemService>();
+                var jsons = await service.GetAllJsonItems(indented);
+                foreach (var json in jsons)
                 {
-                    var service = services.Resolve<JsonWorldService>();
-                    var jsons = await service.GetAllJsonWorlds(indented);
-                    foreach (var json in jsons)
-                    {
-                        Console.WriteLine(json);
-                    }
+                    file.WriteLine(json);
                 }
+            }
 
-                if (feature == FeatureName.Items)
+            using (var file = File.CreateText(Path.Combine(outDir, "recipes.json")))
+            {
+                var service = services.Resolve<JsonRecipeService>();
+                var jsons = await service.GetAllJsonRecipes(indented);
+                foreach (var json in jsons)
                 {
-                    var service = services.Resolve<JsonItemService>();
-                    var jsons = await service.GetAllJsonItems(indented);
-                    foreach (var json in jsons)
-                    {
-                        Console.WriteLine(json);
-                    }
+                    file.WriteLine(json);
                 }
+            }
 
-                if (feature == FeatureName.Recipes)
+            using (var file = File.CreateText(Path.Combine(outDir, "skins.json")))
+            {
+                var service = services.Resolve<JsonSkinService>();
+                var jsons = await service.GetAllJsonSkins(indented);
+                foreach (var json in jsons)
                 {
-                    var service = services.Resolve<JsonRecipeService>();
-                    var jsons = await service.GetAllJsonRecipes(indented);
-                    foreach (var json in jsons)
-                    {
-                        Console.WriteLine(json);
-                    }
-                }
-
-                if (feature == FeatureName.Skins)
-                {
-                    var service = services.Resolve<JsonSkinService>();
-                    var jsons = await service.GetAllJsonSkins(indented);
-                    foreach (var json in jsons)
-                    {
-                        Console.WriteLine(json);
-                    }
+                    file.WriteLine(json);
                 }
             }
         }

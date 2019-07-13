@@ -1,1 +1,0 @@
-dotnet run -p .\GW2SDK.TestDataHelper\ --feature:colors --out-file:"$PSScriptRoot\GW2SDK.Tests\Data\colors.json" 
