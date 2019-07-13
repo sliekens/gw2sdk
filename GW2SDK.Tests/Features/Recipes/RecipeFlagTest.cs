@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Linq;
 using GW2SDK.Enums;
-using GW2SDK.Recipes;
 using GW2SDK.Tests.Features.Recipes.Fixtures;
 using Xunit;
 

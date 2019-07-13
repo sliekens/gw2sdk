@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using Newtonsoft.Json.Linq;
 
@@ -7,23 +6,17 @@ namespace GW2SDK.Tests.Features.Achievements.Fixtures
 {
     public class InMemoryAchievementDb
     {
-        private readonly Dictionary<int, string> _db = new Dictionary<int, string>();
-
-        public IReadOnlyList<int> Index => _db.Keys.ToList().AsReadOnly();
-
-        public IReadOnlyList<string> Achievements => _db.Values.ToList().AsReadOnly();
-
-        public void AddAchievement(string json)
+        public InMemoryAchievementDb(IEnumerable<string> objects)
         {
-            var jobject = JObject.Parse(json);
-            var id = (JValue) jobject.SelectToken("id");
-            _db.Add(Convert.ToInt32(id.Value), json);
+            Achievements = objects.ToList().AsReadOnly();
         }
+
+        public IReadOnlyList<string> Achievements { get; }
 
         public IEnumerable<string> GetAchievementFlags()
         {
             return (
-                    from json in _db.Values
+                    from json in Achievements
                     let jobject = JObject.Parse(json)
                     let flags = jobject.SelectTokens("flags[*]")
                     select flags.Select(token => token.ToString())).SelectMany(flags => flags)
@@ -33,7 +26,7 @@ namespace GW2SDK.Tests.Features.Achievements.Fixtures
         public IEnumerable<string> GetAchievementTypeNames()
         {
             return (
-                    from json in _db.Values
+                    from json in Achievements
                     let jobject = JObject.Parse(json)
                     let flags = jobject.SelectTokens("type")
                     select flags.Select(token => token.ToString())).SelectMany(types => types)
@@ -43,7 +36,7 @@ namespace GW2SDK.Tests.Features.Achievements.Fixtures
         public IEnumerable<string> GetAchievementRewardTypeNames()
         {
             return (
-                    from json in _db.Values
+                    from json in Achievements
                     let jobject = JObject.Parse(json)
                     let flags = jobject.SelectTokens("rewards[*].type")
                     select flags.Select(token => token.ToString())).SelectMany(types => types)
@@ -53,7 +46,7 @@ namespace GW2SDK.Tests.Features.Achievements.Fixtures
         public IEnumerable<string> GetAchievementBitTypeNames()
         {
             return (
-                    from json in _db.Values
+                    from json in Achievements
                     let jobject = JObject.Parse(json)
                     let flags = jobject.SelectTokens("bits[*].type")
                     select flags.Select(token => token.ToString())).SelectMany(types => types)
@@ -63,7 +56,7 @@ namespace GW2SDK.Tests.Features.Achievements.Fixtures
         public IEnumerable<string> GetAchievementMasteryRegionNames()
         {
             return (
-                    from json in _db.Values
+                    from json in Achievements
                     let jobject = JObject.Parse(json)
                     let flags = jobject.SelectTokens("rewards[*].region")
                     select flags.Select(token => token.ToString())).SelectMany(types => types)

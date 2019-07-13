@@ -1,5 +1,4 @@
-﻿using GW2SDK.Impl;
-using GW2SDK.Impl.JsonConverters;
+﻿using GW2SDK.Impl.JsonConverters;
 using GW2SDK.Subtokens;
 using GW2SDK.Tests.Features.Subtokens.Fixtures;
 using GW2SDK.Tests.TestInfrastructure;

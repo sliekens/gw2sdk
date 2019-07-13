@@ -14,18 +14,13 @@ namespace GW2SDK.Tests.Features.Accounts.Achievements.Fixtures
 {
     public class AccountAchievementFixture : IAsyncLifetime
     {
-        public InMemoryAccountAchievementsDb Db { get; } = new InMemoryAccountAchievementsDb();
+        public InMemoryAccountAchievementsDb Db { get; private set; }
 
         public async Task InitializeAsync()
         {
             var http = new Container().Resolve<IHttpClientFactory>().CreateClient("GW2SDK");
             http.UseAccessToken(ConfigurationManager.Instance.ApiKeyFull);
-
-            // Seed InMemoryColorDb with API data for later use in integration tests
-            foreach (var color in await GetAllJsonAchievements(http))
-            {
-                Db.AddAccountAchievement(color);
-            }
+            Db = new InMemoryAccountAchievementsDb(await GetAllJsonAchievements(http));
         }
 
         public Task DisposeAsync() => Task.CompletedTask;

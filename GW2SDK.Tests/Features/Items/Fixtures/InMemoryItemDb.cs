@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using Newtonsoft.Json.Linq;
 
@@ -7,23 +6,17 @@ namespace GW2SDK.Tests.Features.Items.Fixtures
 {
     public class InMemoryItemDb
     {
-        private readonly Dictionary<int, string> _db = new Dictionary<int, string>();
-
-        public IReadOnlyList<int> Index => _db.Keys.ToList().AsReadOnly();
-
-        public IReadOnlyList<string> Items => _db.Values.ToList().AsReadOnly();
-
-        public void AddItem(string json)
+        public InMemoryItemDb(IEnumerable<string> objects)
         {
-            var jobject = JObject.Parse(json);
-            var id = (JValue) jobject.SelectToken("id");
-            _db.Add(Convert.ToInt32(id.Value), json);
+            Items = objects.ToList().AsReadOnly();
         }
+
+        public IReadOnlyList<string> Items { get; }
 
         public IEnumerable<string> GetItemFlags()
         {
             return (
-                    from json in _db.Values
+                    from json in Items
                     let jobject = JObject.Parse(json)
                     let entries = jobject.SelectTokens("flags[*]")
                     select entries.Select(token => token.ToString())).SelectMany(values => values)
@@ -34,7 +27,7 @@ namespace GW2SDK.Tests.Features.Items.Fixtures
         public IEnumerable<string> GetItemTypeNames()
         {
             return (
-                    from json in _db.Values
+                    from json in Items
                     let jobject = JObject.Parse(json)
                     select jobject.SelectToken("type").ToString()).OrderBy(s => s)
                                                                   .Distinct();
@@ -42,7 +35,7 @@ namespace GW2SDK.Tests.Features.Items.Fixtures
 
         public IEnumerable<string> GetConsumableTypeNames() =>
             (
-                from json in _db.Values
+                from json in Items
                 let jobject = JObject.Parse(json)
                 where jobject.SelectToken("type").ToString() == "Consumable"
                 select jobject.SelectToken("$.details.type").ToString()).OrderBy(s => s)
@@ -50,7 +43,7 @@ namespace GW2SDK.Tests.Features.Items.Fixtures
 
         public IEnumerable<string> GetUnlockerTypeNames() =>
             (
-                from json in _db.Values
+                from json in Items
                 let jobject = JObject.Parse(json)
                 where jobject.SelectToken("$.type").ToString() == "Consumable"
                 where jobject.SelectToken("$.details.type").ToString() == "Unlock"
@@ -59,7 +52,7 @@ namespace GW2SDK.Tests.Features.Items.Fixtures
 
         public IEnumerable<string> GetContainerTypeNames() =>
             (
-                from json in _db.Values
+                from json in Items
                 let jobject = JObject.Parse(json)
                 where jobject.SelectToken("type").ToString() == "Container"
                 select jobject.SelectToken("$.details.type").ToString()).OrderBy(s => s)
@@ -67,7 +60,7 @@ namespace GW2SDK.Tests.Features.Items.Fixtures
 
         public IEnumerable<string> GetGizmoTypeNames() =>
             (
-                from json in _db.Values
+                from json in Items
                 let jobject = JObject.Parse(json)
                 where jobject.SelectToken("type").ToString() == "Gizmo"
                 select jobject.SelectToken("$.details.type").ToString()).OrderBy(s => s)
@@ -110,7 +103,7 @@ namespace GW2SDK.Tests.Features.Items.Fixtures
                                                                         .Distinct();
 
         public IEnumerable<JObject> GetItemsByType(string typeName) =>
-            from json in _db.Values
+            from json in Items
             let jobject = JObject.Parse(json)
             where jobject.SelectToken("type").ToString() == typeName
             select jobject;
@@ -136,7 +129,7 @@ namespace GW2SDK.Tests.Features.Items.Fixtures
         public IEnumerable<string> GetItemRarities()
         {
             return (
-                    from json in _db.Values
+                    from json in Items
                     let jobject = JObject.Parse(json)
                     let entries = jobject.SelectTokens("rarity")
                     select entries.Select(token => token.ToString())).SelectMany(values => values)
@@ -147,7 +140,7 @@ namespace GW2SDK.Tests.Features.Items.Fixtures
         public IEnumerable<string> GetItemGameTypes()
         {
             return (
-                    from json in _db.Values
+                    from json in Items
                     let jobject = JObject.Parse(json)
                     let entries = jobject.SelectTokens("game_types[*]")
                     select entries.Select(token => token.ToString())).SelectMany(values => values)
@@ -158,7 +151,7 @@ namespace GW2SDK.Tests.Features.Items.Fixtures
         public IEnumerable<string> GetItemRestrictions()
         {
             return (
-                    from json in _db.Values
+                    from json in Items
                     let jobject = JObject.Parse(json)
                     let entries = jobject.SelectTokens("restrictions[*]")
                     select entries.Select(token => token.ToString())).SelectMany(values => values)
@@ -174,7 +167,7 @@ namespace GW2SDK.Tests.Features.Items.Fixtures
 
         public IEnumerable<string> GetInfixUpgradeAttributeNames() =>
             (
-                from json in _db.Values
+                from json in Items
                 let jobject = JObject.Parse(json)
                 let entries = jobject.SelectTokens("$.details.infix_upgrade.attributes[*].attribute")
                 select entries.Select(token => token.ToString())).SelectMany(values => values)
@@ -183,7 +176,7 @@ namespace GW2SDK.Tests.Features.Items.Fixtures
 
         public IEnumerable<string> GetInfusionSlotFlags() =>
             (
-                from json in _db.Values
+                from json in Items
                 let jobject = JObject.Parse(json)
                 let entries = jobject.SelectTokens("$.details.infusion_slots[*].flags[*]")
                 select entries.Select(token => token.ToString())).SelectMany(values => values)
@@ -214,7 +207,7 @@ namespace GW2SDK.Tests.Features.Items.Fixtures
 
         public IEnumerable<string> GetUpgradedItemTypes() =>
             (
-                from json in _db.Values
+                from json in Items
                 let jobject = JObject.Parse(json)
                 let entries = jobject.SelectTokens("$.upgrades_into[*].upgrade")
                 select entries.Select(token => token.ToString())).SelectMany(values => values)

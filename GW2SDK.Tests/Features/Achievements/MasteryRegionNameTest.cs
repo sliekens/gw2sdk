@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Linq;
-using GW2SDK.Achievements;
 using GW2SDK.Enums;
 using GW2SDK.Tests.Features.Achievements.Fixtures;
 using Xunit;

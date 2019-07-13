@@ -1,6 +1,4 @@
-﻿using System.Linq;
-using GW2SDK.Impl;
-using GW2SDK.Impl.JsonConverters;
+﻿using GW2SDK.Impl.JsonConverters;
 using GW2SDK.Skins;
 using GW2SDK.Tests.Features.Skins.Fixtures;
 using GW2SDK.Tests.TestInfrastructure;

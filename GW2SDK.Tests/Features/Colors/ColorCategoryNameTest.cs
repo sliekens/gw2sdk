@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Linq;
-using GW2SDK.Colors;
 using GW2SDK.Enums;
 using GW2SDK.Tests.Features.Colors.Fixtures;
 using Xunit;

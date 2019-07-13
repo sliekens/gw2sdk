@@ -9,7 +9,6 @@ using GW2SDK.Achievements.Groups;
 using GW2SDK.Builds;
 using GW2SDK.Colors;
 using GW2SDK.Extensions;
-using GW2SDK.Impl;
 using GW2SDK.Impl.HttpMessageHandlers;
 using GW2SDK.Items;
 using GW2SDK.Recipes;

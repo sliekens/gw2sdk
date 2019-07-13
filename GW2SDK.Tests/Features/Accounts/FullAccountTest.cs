@@ -1,9 +1,7 @@
 ﻿using GW2SDK.Accounts;
 using GW2SDK.Enums;
-using GW2SDK.Impl;
 using GW2SDK.Impl.JsonConverters;
 using GW2SDK.Tests.Features.Accounts.Fixtures;
-using GW2SDK.Tests.Features.Worlds.Fixtures;
 using GW2SDK.Tests.TestInfrastructure;
 using Newtonsoft.Json;
 using Xunit;
@@ -11,18 +9,15 @@ using Xunit.Abstractions;
 
 namespace GW2SDK.Tests.Features.Accounts
 {
-    public class FullAccountTest : IClassFixture<AccountFixture>, IClassFixture<WorldFixture>
+    public class FullAccountTest : IClassFixture<AccountFixture>
     {
-        public FullAccountTest(AccountFixture fixture, WorldFixture worlds, ITestOutputHelper output)
+        public FullAccountTest(AccountFixture fixture, ITestOutputHelper output)
         {
             _fixture = fixture;
-            _worlds = worlds;
             _output = output;
         }
 
         private readonly AccountFixture _fixture;
-
-        private readonly WorldFixture _worlds;
 
         private readonly ITestOutputHelper _output;
 
@@ -39,7 +34,7 @@ namespace GW2SDK.Tests.Features.Accounts
             // Next statement throws if there are missing members
             _ = JsonConvert.DeserializeObject<Account>(_fixture.Db.FullAccount, settings);
         }
-        
+
         [Fact]
         [Trait("Feature",  "Accounts")]
         [Trait("Category", "Integration")]
@@ -115,18 +110,6 @@ namespace GW2SDK.Tests.Features.Accounts
         [Fact]
         [Trait("Feature",  "Accounts")]
         [Trait("Category", "Integration")]
-        public void World_ShouldBeValidId()
-        {
-            var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output)).Build();
-
-            var actual = JsonConvert.DeserializeObject<Account>(_fixture.Db.FullAccount, settings);
-
-            Assert.Contains(actual.World, _worlds.Db.Index);
-        }
-
-        [Fact]
-        [Trait("Feature",  "Accounts")]
-        [Trait("Category", "Integration")]
         public void Guilds_ShouldNotBeNull()
         {
             var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output)).Build();
@@ -147,7 +130,6 @@ namespace GW2SDK.Tests.Features.Accounts
 
             Assert.All(actual.Guilds, Assert.NotEmpty);
         }
-
 
         [Fact]
         [Trait("Feature",  "Accounts")]
@@ -172,7 +154,6 @@ namespace GW2SDK.Tests.Features.Accounts
 
             Assert.All(actual.GuildLeader, Assert.NotEmpty);
         }
-
 
         [Fact]
         [Trait("Feature",  "Accounts")]

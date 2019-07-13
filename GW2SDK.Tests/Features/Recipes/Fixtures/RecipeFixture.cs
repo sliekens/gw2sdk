@@ -8,12 +8,9 @@ namespace GW2SDK.Tests.Features.Recipes.Fixtures
         {
             var reader = new JsonFlatFileReader();
 
-            foreach (var item in reader.Read("Data/recipes.json"))
-            {
-                Db.AddRecipe(item);
-            }
+            Db = new InMemoryRecipeDb(reader.Read("Data/recipes.json"));
         }
 
-        public InMemoryRecipeDb Db { get; } = new InMemoryRecipeDb();
+        public InMemoryRecipeDb Db { get; }
     }
 }

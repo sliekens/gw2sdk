@@ -1,5 +1,4 @@
 ﻿using GW2SDK.Accounts.Achievements;
-using GW2SDK.Impl;
 using GW2SDK.Impl.JsonConverters;
 using GW2SDK.Tests.Features.Accounts.Achievements.Fixtures;
 using GW2SDK.Tests.TestInfrastructure;
