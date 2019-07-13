@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using GW2SDK.Enums;
-using GW2SDK.Worlds;
 using Xunit;
 
 namespace GW2SDK.Tests.Features.Worlds

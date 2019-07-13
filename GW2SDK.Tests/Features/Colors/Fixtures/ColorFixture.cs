@@ -7,13 +7,9 @@ namespace GW2SDK.Tests.Features.Colors.Fixtures
         public ColorFixture()
         {
             var reader = new JsonFlatFileReader();
-
-            foreach (var color in reader.Read("Data/colors.json"))
-            {
-                Db.AddColor(color);
-            }
+            Db = new InMemoryColorDb(reader.Read("Data/colors.json"));
         }
 
-        public InMemoryColorDb Db { get; } = new InMemoryColorDb();
+        public InMemoryColorDb Db { get; }
     }
 }

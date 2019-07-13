@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Linq;
 using GW2SDK.Enums;
-using GW2SDK.Impl;
 using GW2SDK.Impl.JsonConverters;
 using GW2SDK.Tests.Features.Tokens.Fixtures;
 using GW2SDK.Tests.TestInfrastructure;
