@@ -5,7 +5,7 @@
 {"id":1005,"name":"Maguuma","population":"Full"}
 {"id":1006,"name":"Sorrow's Furnace","population":"Full"}
 {"id":1007,"name":"Gate of Madness","population":"Medium"}
-{"id":1008,"name":"Jade Quarry","population":"Full"}
+{"id":1008,"name":"Jade Quarry","population":"VeryHigh"}
 {"id":1009,"name":"Fort Aspenwood","population":"Full"}
 {"id":1010,"name":"Ehmry Bay","population":"Medium"}
 {"id":1011,"name":"Stormbluff Isle","population":"High"}
@@ -24,12 +24,12 @@
 {"id":1024,"name":"Eredon Terrace","population":"Medium"}
 {"id":2001,"name":"Fissure of Woe","population":"Medium"}
 {"id":2002,"name":"Desolation","population":"High"}
-{"id":2003,"name":"Gandara","population":"High"}
+{"id":2003,"name":"Gandara","population":"VeryHigh"}
 {"id":2004,"name":"Blacktide","population":"Medium"}
 {"id":2005,"name":"Ring of Fire","population":"Medium"}
-{"id":2006,"name":"Underworld","population":"High"}
+{"id":2006,"name":"Underworld","population":"Medium"}
 {"id":2007,"name":"Far Shiverpeaks","population":"High"}
-{"id":2008,"name":"Whiteside Ridge","population":"High"}
+{"id":2008,"name":"Whiteside Ridge","population":"VeryHigh"}
 {"id":2009,"name":"Ruins of Surmia","population":"Medium"}
 {"id":2010,"name":"Seafarer's Rest","population":"High"}
 {"id":2011,"name":"Vabbi","population":"Medium"}
@@ -42,7 +42,7 @@
 {"id":2104,"name":"Vizunah Square [FR]","population":"Medium"}
 {"id":2105,"name":"Arborstone [FR]","population":"Medium"}
 {"id":2201,"name":"Kodash [DE]","population":"Medium"}
-{"id":2202,"name":"Riverside [DE]","population":"High"}
+{"id":2202,"name":"Riverside [DE]","population":"VeryHigh"}
 {"id":2203,"name":"Elona Reach [DE]","population":"VeryHigh"}
 {"id":2204,"name":"Abaddon's Mouth [DE]","population":"Medium"}
 {"id":2205,"name":"Drakkar Lake [DE]","population":"Medium"}
