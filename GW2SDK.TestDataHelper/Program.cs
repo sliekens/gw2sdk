@@ -1,5 +1,4 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 using System.Threading.Tasks;
 
 namespace GW2SDK.TestDataHelper
@@ -91,6 +90,36 @@ namespace GW2SDK.TestDataHelper
             {
                 var service = services.Resolve<JsonSkinService>();
                 var jsons = await service.GetAllJsonSkins(indented);
+                foreach (var json in jsons)
+                {
+                    file.WriteLine(json);
+                }
+            }
+
+            using (var file = File.CreateText(Path.Combine(outDir, "continents.json")))
+            {
+                var service = services.Resolve<JsonContinentService>();
+                var jsons = await service.GetAllJsonContinents(indented);
+                foreach (var json in jsons)
+                {
+                    file.WriteLine(json);
+                }
+            }
+
+            using (var file = File.CreateText(Path.Combine(outDir, "continents_1_floors.json")))
+            {
+                var service = services.Resolve<JsonFloorService>();
+                var jsons = await service.GetAllJsonFloors(1, indented);
+                foreach (var json in jsons)
+                {
+                    file.WriteLine(json);
+                }
+            }
+
+            using (var file = File.CreateText(Path.Combine(outDir, "continents_2_floors.json")))
+            {
+                var service = services.Resolve<JsonFloorService>();
+                var jsons = await service.GetAllJsonFloors(2, indented);
                 foreach (var json in jsons)
                 {
                     file.WriteLine(json);

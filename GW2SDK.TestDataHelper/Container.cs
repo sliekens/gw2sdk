@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Net;
 using System.Net.Http;
+using GW2SDK.Continents;
 using GW2SDK.Extensions;
-using GW2SDK.Impl;
 using GW2SDK.Impl.HttpMessageHandlers;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -31,11 +31,14 @@ namespace GW2SDK.TestDataHelper
                     .AddHttpMessageHandler<UnauthorizedMessageHandler>()
                     .AddHttpMessageHandler<BadMessageHandler>()
                     .AddHttpMessageHandler<RateLimitHandler>()
+                    .AddTypedClient<ContinentService>()
                     .AddTypedClient<JsonAchievementService>()
                     .AddTypedClient<JsonAchievementCategoriesService>()
                     .AddTypedClient<JsonAchievementGroupsService>()
                     .AddTypedClient<JsonBuildService>()
                     .AddTypedClient<JsonColorService>()
+                    .AddTypedClient<JsonContinentService>()
+                    .AddTypedClient<JsonFloorService>()
                     .AddTypedClient<JsonItemService>()
                     .AddTypedClient<JsonRecipeService>()
                     .AddTypedClient<JsonSkinService>()

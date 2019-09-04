@@ -16,7 +16,7 @@ namespace GW2SDK.Tests.TestInfrastructure
                 throw new ArgumentException("Path cannot be null or empty.", nameof(path));
             }
 
-            using (var file = File.Open(path, FileMode.Open, FileAccess.Read, FileShare.Read))
+            using (var file = File.Open(path, FileMode.Open, FileAccess.Read, FileShare.None))
             using (var stringReader = new StreamReader(file))
             using (var jsonReader = new JsonTextReader(stringReader))
             {
