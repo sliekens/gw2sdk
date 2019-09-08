@@ -1,4 +1,5 @@
-﻿using GW2SDK.Accounts;
+﻿using System;
+using GW2SDK.Accounts;
 using GW2SDK.Enums;
 using GW2SDK.Impl.JsonConverters;
 using GW2SDK.Tests.Features.Accounts.Fixtures;
@@ -25,7 +26,7 @@ namespace GW2SDK.Tests.Features.Accounts
         [Trait("Feature",    "Accounts")]
         [Trait("Category",   "Integration")]
         [Trait("Importance", "Critical")]
-        public void Class_ShouldHaveNoMissingMembers()
+        public void Account_can_be_fully_serialized_from_json_with_all_scopes()
         {
             var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output))
                                                               .UseMissingMemberHandling(MissingMemberHandling.Error)
@@ -38,19 +39,7 @@ namespace GW2SDK.Tests.Features.Accounts
         [Fact]
         [Trait("Feature",  "Accounts")]
         [Trait("Category", "Integration")]
-        public void Id_ShouldNotBeNull()
-        {
-            var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output)).Build();
-
-            var actual = JsonConvert.DeserializeObject<Account>(_fixture.Db.FullAccount, settings);
-
-            Assert.NotEmpty(actual.Id);
-        }
-
-        [Fact]
-        [Trait("Feature",  "Accounts")]
-        [Trait("Category", "Integration")]
-        public void Name_ShouldNotBeEmpty()
+        public void Name_is_never_empty()
         {
             var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output)).Build();
 
@@ -62,7 +51,7 @@ namespace GW2SDK.Tests.Features.Accounts
         [Fact]
         [Trait("Feature",  "Accounts")]
         [Trait("Category", "Integration")]
-        public void Access_ShouldNotBeEmpty()
+        public void Access_is_never_empty()
         {
             var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output)).Build();
 
@@ -74,67 +63,7 @@ namespace GW2SDK.Tests.Features.Accounts
         [Fact]
         [Trait("Feature",  "Accounts")]
         [Trait("Category", "Integration")]
-        public void Access_ShouldNotContainNone()
-        {
-            var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output)).Build();
-
-            var actual = JsonConvert.DeserializeObject<Account>(_fixture.Db.FullAccount, settings);
-
-            Assert.DoesNotContain(ProductName.None, actual.Access);
-        }
-
-        [Fact]
-        [Trait("Feature",  "Accounts")]
-        [Trait("Category", "Integration")]
-        public void Age_ShouldNotBeDefaultValue()
-        {
-            var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output)).Build();
-
-            var actual = JsonConvert.DeserializeObject<Account>(_fixture.Db.FullAccount, settings);
-
-            Assert.NotEqual(default, actual.Age);
-        }
-
-        [Fact]
-        [Trait("Feature",  "Accounts")]
-        [Trait("Category", "Integration")]
-        public void LastModified_ShouldNotBeDefaultValue()
-        {
-            var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output)).Build();
-
-            var actual = JsonConvert.DeserializeObject<Account>(_fixture.Db.FullAccount, settings);
-
-            Assert.NotEqual(default, actual.LastModified);
-        }
-
-        [Fact]
-        [Trait("Feature",  "Accounts")]
-        [Trait("Category", "Integration")]
-        public void Guilds_ShouldNotBeNull()
-        {
-            var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output)).Build();
-
-            var actual = JsonConvert.DeserializeObject<Account>(_fixture.Db.FullAccount, settings);
-
-            Assert.NotNull(actual.Guilds);
-        }
-
-        [Fact]
-        [Trait("Feature",  "Accounts")]
-        [Trait("Category", "Integration")]
-        public void Guilds_ShouldNotContainEmpty()
-        {
-            var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output)).Build();
-
-            var actual = JsonConvert.DeserializeObject<Account>(_fixture.Db.FullAccount, settings);
-
-            Assert.All(actual.Guilds, Assert.NotEmpty);
-        }
-
-        [Fact]
-        [Trait("Feature",  "Accounts")]
-        [Trait("Category", "Integration")]
-        public void GuildLeader_ShouldNotBeNull()
+        public void GuildLeader_is_included_by_guilds_scope()
         {
             var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output)).Build();
 
@@ -146,15 +75,27 @@ namespace GW2SDK.Tests.Features.Accounts
         [Fact]
         [Trait("Feature",  "Accounts")]
         [Trait("Category", "Integration")]
-        public void GuildLeader_ShouldNotContainEmpty()
+        public void Access_is_never_none()
         {
             var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output)).Build();
 
             var actual = JsonConvert.DeserializeObject<Account>(_fixture.Db.FullAccount, settings);
 
-            Assert.All(actual.GuildLeader, Assert.NotEmpty);
+            Assert.DoesNotContain(ProductName.None, actual.Access);
         }
 
+        [Fact]
+        [Trait("Feature",  "Accounts")]
+        [Trait("Category", "Integration")]
+        public void Age_is_never_zero()
+        {
+            var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output)).Build();
+
+            var actual = JsonConvert.DeserializeObject<Account>(_fixture.Db.FullAccount, settings);
+
+            Assert.NotEqual(TimeSpan.Zero, actual.Age);
+        }
+        
         [Fact]
         [Trait("Feature",  "Accounts")]
         [Trait("Category", "Integration")]
@@ -170,7 +111,7 @@ namespace GW2SDK.Tests.Features.Accounts
         [Fact]
         [Trait("Feature",  "Accounts")]
         [Trait("Category", "Integration")]
-        public void FractalLevel_ShouldNotBeNull()
+        public void FractalLevel_is_included_by_progression_scope()
         {
             var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output)).Build();
 
@@ -182,7 +123,7 @@ namespace GW2SDK.Tests.Features.Accounts
         [Fact]
         [Trait("Feature",  "Accounts")]
         [Trait("Category", "Integration")]
-        public void DailyAp_ShouldNotBeNull()
+        public void DailyAp_is_included_by_progression_scope()
         {
             var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output)).Build();
 
@@ -194,7 +135,7 @@ namespace GW2SDK.Tests.Features.Accounts
         [Fact]
         [Trait("Feature",  "Accounts")]
         [Trait("Category", "Integration")]
-        public void MonthlyAp_ShouldNotBeNull()
+        public void MonthlyAp_is_included_by_progression_scope()
         {
             var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output)).Build();
 
@@ -206,7 +147,7 @@ namespace GW2SDK.Tests.Features.Accounts
         [Fact]
         [Trait("Feature",  "Accounts")]
         [Trait("Category", "Integration")]
-        public void WvwRank_ShouldNotBeNull()
+        public void WvwRank_is_included_by_progression_scope()
         {
             var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output)).Build();
 

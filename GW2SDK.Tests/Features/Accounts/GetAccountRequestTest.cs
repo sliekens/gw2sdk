@@ -10,7 +10,7 @@ namespace GW2SDK.Tests.Features.Accounts
         [Fact]
         [Trait("Feature",  "Accounts")]
         [Trait("Category", "Unit")]
-        public void Method_ShouldBeGet()
+        public void Method_is_GET()
         {
             var sut = new GetAccountRequest();
 
@@ -20,7 +20,7 @@ namespace GW2SDK.Tests.Features.Accounts
         [Fact]
         [Trait("Feature",  "Accounts")]
         [Trait("Category", "Unit")]
-        public void RequestUri_ShouldBeV2Account()
+        public void RequestUri_is_v2_account()
         {
             var sut = new GetAccountRequest();
 
