@@ -8,7 +8,7 @@ namespace GW2SDK.Tests.Features.Accounts
         [Fact]
         [Trait("Feature",  "Accounts")]
         [Trait("Category", "Unit")]
-        public void ProductName_None_ShouldBeDefault()
+        public void Default_ProductName_is_None()
         {
             Assert.Equal(ProductName.None, default);
         }

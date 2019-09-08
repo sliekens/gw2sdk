@@ -13,46 +13,60 @@ namespace GW2SDK.Accounts
     public sealed class Account
     {
         [NotNull]
+        [JsonProperty(Required = Required.Always)]
         public string Id { get; set; }
 
+        [JsonProperty(Required = Required.Always)]
         public string Name { get; set; }
 
+        [JsonProperty(Required = Required.Always)]
         [JsonConverter(typeof(SecondsConverter))]
         public TimeSpan Age { get; set; }
 
+        [JsonProperty(Required = Required.Always)]
         public DateTimeOffset LastModified { get; set; }
 
+        [JsonProperty(Required = Required.Always)]
         public int World { get; set; }
 
         [NotNull]
         [ItemNotNull]
+        [JsonProperty(Required = Required.Always)]
         public string[] Guilds { get; set; }
 
+        [Scope(Permission.Guilds)]
         [CanBeNull]
         [ItemNotNull]
-        [Scope(Permission.Guilds)]
+        [JsonProperty(Required = Required.DisallowNull)]
         public string[] GuildLeader { get; set; }
 
+        [JsonProperty(Required = Required.Always)]
         public DateTimeOffset Created { get; set; }
 
+        [JsonProperty(Required = Required.Always)]
         public ProductName[] Access { get; set; }
 
+        [JsonProperty(Required = Required.Always)]
         public bool Commander { get; set; }
 
-        [CanBeNull]
         [Scope(Permission.Progression)]
+        [CanBeNull]
+        [JsonProperty(Required = Required.DisallowNull)]
         public int? FractalLevel { get; set; }
 
-        [CanBeNull]
         [Scope(Permission.Progression)]
+        [CanBeNull]
+        [JsonProperty(Required = Required.DisallowNull)]
         public int? DailyAp { get; set; }
 
-        [CanBeNull]
         [Scope(Permission.Progression)]
+        [CanBeNull]
+        [JsonProperty(Required = Required.DisallowNull)]
         public int? MonthlyAp { get; set; }
 
-        [CanBeNull]
         [Scope(Permission.Progression)]
+        [CanBeNull]
+        [JsonProperty(Required = Required.DisallowNull)]
         public int? WvwRank { get; set; }
     }
 }

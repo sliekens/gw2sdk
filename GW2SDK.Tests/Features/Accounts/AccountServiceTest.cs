@@ -11,7 +11,7 @@ namespace GW2SDK.Tests.Features.Accounts
         [Fact]
         [Trait("Feature",  "Accounts")]
         [Trait("Category", "Integration")]
-        public async Task GetAccount_WithApiKey_ShouldReturnAccount()
+        public async Task Account_requires_an_access_token()
         {
             var services = new Container(ConfigurationManager.Instance.ApiKeyFull);
             var sut = services.Resolve<AccountService>();
