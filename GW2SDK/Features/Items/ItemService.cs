@@ -70,9 +70,9 @@ namespace GW2SDK.Items
             }
         }
 
-        public async Task<IDataTransferPage<Item>> GetItemsByPage(int page, int? pageSize = null, [CanBeNull] JsonSerializerSettings settings = null)
+        public async Task<IDataTransferPage<Item>> GetItemsByPage(int pageIndex, int? pageSize = null, [CanBeNull] JsonSerializerSettings settings = null)
         {
-            using (var request = new GetItemsByPageRequest.Builder(page, pageSize).GetRequest())
+            using (var request = new GetItemsByPageRequest.Builder(pageIndex, pageSize).GetRequest())
             using (var response = await _http.SendAsync(request).ConfigureAwait(false))
             {
                 response.EnsureSuccessStatusCode();

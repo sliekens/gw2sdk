@@ -93,11 +93,11 @@ namespace GW2SDK.Achievements.Groups
         }
 
         public async Task<IDataTransferPage<AchievementGroup>> GetAchievementGroupsByPage(
-            int page,
+            int pageIndex,
             int? pageSize = null,
             [CanBeNull] JsonSerializerSettings settings = null)
         {
-            using (var request = new GetAchievementGroupsByPageRequest.Builder(page, pageSize).GetRequest())
+            using (var request = new GetAchievementGroupsByPageRequest.Builder(pageIndex, pageSize).GetRequest())
             using (var response = await _http.SendAsync(request).ConfigureAwait(false))
             {
                 response.EnsureSuccessStatusCode();

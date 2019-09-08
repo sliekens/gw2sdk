@@ -13,19 +13,19 @@ namespace GW2SDK.Items.Impl
 
         public sealed class Builder
         {
-            private readonly int _page;
+            private readonly int _pageIndex;
 
             private readonly int? _pageSize;
 
-            public Builder(int page, int? pageSize = null)
+            public Builder(int pageIndex, int? pageSize = null)
             {
-                _page = page;
+                _pageIndex = pageIndex;
                 _pageSize = pageSize;
             }
 
             public GetItemsByPageRequest GetRequest()
             {
-                var resource = $"/v2/items?page={_page}";
+                var resource = $"/v2/items?page={_pageIndex}";
                 if (_pageSize.HasValue)
                 {
                     resource += $"&page_size={_pageSize.Value}";

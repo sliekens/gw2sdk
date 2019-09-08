@@ -70,9 +70,9 @@ namespace GW2SDK.Skins
             }
         }
 
-        public async Task<IDataTransferPage<Skin>> GetSkinsByPage(int page, int? pageSize = null, [CanBeNull] JsonSerializerSettings settings = null)
+        public async Task<IDataTransferPage<Skin>> GetSkinsByPage(int pageIndex, int? pageSize = null, [CanBeNull] JsonSerializerSettings settings = null)
         {
-            using (var request = new GetSkinsByPageRequest.Builder(page, pageSize).GetRequest())
+            using (var request = new GetSkinsByPageRequest.Builder(pageIndex, pageSize).GetRequest())
             using (var response = await _http.SendAsync(request).ConfigureAwait(false))
             {
                 response.EnsureSuccessStatusCode();
