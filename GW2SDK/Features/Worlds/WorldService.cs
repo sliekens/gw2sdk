@@ -84,9 +84,9 @@ namespace GW2SDK.Worlds
             }
         }
 
-        public async Task<IDataTransferPage<World>> GetWorldsByPage(int page, int? pageSize = null, [CanBeNull] JsonSerializerSettings settings = null)
+        public async Task<IDataTransferPage<World>> GetWorldsByPage(int pageIndex, int? pageSize = null, [CanBeNull] JsonSerializerSettings settings = null)
         {
-            using (var request = new GetWorldsByPageRequest.Builder(page, pageSize).GetRequest())
+            using (var request = new GetWorldsByPageRequest.Builder(pageIndex, pageSize).GetRequest())
             using (var response = await _http.SendAsync(request).ConfigureAwait(false))
             {
                 response.EnsureSuccessStatusCode();

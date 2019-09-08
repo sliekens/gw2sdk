@@ -78,11 +78,11 @@ namespace GW2SDK.Accounts.Achievements
 
         [Scope(Permission.Progression)]
         public async Task<IDataTransferPage<AccountAchievement>> GetAccountAchievementsByPage(
-            int page,
+            int pageIndex,
             int? pageSize,
             [CanBeNull] JsonSerializerSettings settings = null)
         {
-            using (var request = new GetAccountAchievementsByPageRequest.Builder(page, pageSize).GetRequest())
+            using (var request = new GetAccountAchievementsByPageRequest.Builder(pageIndex, pageSize).GetRequest())
             using (var response = await _http.SendAsync(request).ConfigureAwait(false))
             {
                 response.EnsureSuccessStatusCode();

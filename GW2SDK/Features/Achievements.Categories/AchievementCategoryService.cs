@@ -87,11 +87,11 @@ namespace GW2SDK.Achievements.Categories
         }
 
         public async Task<IDataTransferPage<AchievementCategory>> GetAchievementCategoriesByPage(
-            int page,
+            int pageIndex,
             int? pageSize = null,
             [CanBeNull] JsonSerializerSettings settings = null)
         {
-            using (var request = new GetAchievementCategoriesByPageRequest.Builder(page, pageSize).GetRequest())
+            using (var request = new GetAchievementCategoriesByPageRequest.Builder(pageIndex, pageSize).GetRequest())
             using (var response = await _http.SendAsync(request).ConfigureAwait(false))
             {
                 response.EnsureSuccessStatusCode();

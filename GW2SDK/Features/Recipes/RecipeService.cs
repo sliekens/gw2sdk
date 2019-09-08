@@ -70,9 +70,9 @@ namespace GW2SDK.Recipes
             }
         }
 
-        public async Task<IDataTransferPage<Recipe>> GetRecipesByPage(int page, int? pageSize = null, [CanBeNull] JsonSerializerSettings settings = null)
+        public async Task<IDataTransferPage<Recipe>> GetRecipesByPage(int pageIndex, int? pageSize = null, [CanBeNull] JsonSerializerSettings settings = null)
         {
-            using (var request = new GetRecipesByPageRequest.Builder(page, pageSize).GetRequest())
+            using (var request = new GetRecipesByPageRequest.Builder(pageIndex, pageSize).GetRequest())
             using (var response = await _http.SendAsync(request).ConfigureAwait(false))
             {
                 response.EnsureSuccessStatusCode();
