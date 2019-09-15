@@ -10,7 +10,7 @@ namespace GW2SDK.Tests.Features.Builds
         [Fact]
         [Trait("Feature",  "Builds")]
         [Trait("Category", "Integration")]
-        public async Task GetBuild_ShouldReturnBuild()
+        public async Task Get_the_current_build()
         {
             var services = new Container();
             var sut = services.Resolve<BuildService>();
