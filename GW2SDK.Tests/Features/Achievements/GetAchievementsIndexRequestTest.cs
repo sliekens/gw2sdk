@@ -10,7 +10,7 @@ namespace GW2SDK.Tests.Features.Achievements
         [Fact]
         [Trait("Feature",  "Achievements")]
         [Trait("Category", "Unit")]
-        public void Method_ShouldBeGet()
+        public void Method_is_GET()
         {
             var sut = new GetAchievementsIndexRequest();
 
@@ -20,7 +20,7 @@ namespace GW2SDK.Tests.Features.Achievements
         [Fact]
         [Trait("Feature",  "Achievements")]
         [Trait("Category", "Unit")]
-        public void RequestUri_ShouldBeV2Achievements()
+        public void RequestUri_is_v2_achievements()
         {
             var sut = new GetAchievementsIndexRequest();
 

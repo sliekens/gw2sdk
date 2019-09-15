@@ -18,24 +18,24 @@ namespace GW2SDK.Tests.Features.Achievements
 
         [Fact]
         [Trait("Feature",  "Achievements")]
-        [Trait("Category", "Unit")]
-        public void DefaultMember_ShouldBeUndefined()
-        {
-            var actual = Enum.IsDefined(typeof(AchievementFlag), default(AchievementFlag));
-
-            Assert.False(actual);
-        }
-
-        [Fact]
-        [Trait("Feature",  "Achievements")]
         [Trait("Category", "Integration")]
-        public void Class_ShouldHaveNoMissingMembers()
+        public void AchievementFlag_can_be_serialized_from_json()
         {
             var expected = Enum.GetNames(typeof(AchievementFlag)).ToHashSet();
 
             var actual = _fixture.Db.GetAchievementFlags().ToHashSet();
 
             Assert.Equal(expected, actual);
+        }
+
+        [Fact]
+        [Trait("Feature",  "Achievements")]
+        [Trait("Category", "Unit")]
+        public void AchievementFlag_has_no_default_member()
+        {
+            var actual = Enum.IsDefined(typeof(AchievementFlag), default(AchievementFlag));
+
+            Assert.False(actual);
         }
     }
 }
