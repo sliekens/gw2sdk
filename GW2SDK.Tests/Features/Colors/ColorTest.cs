@@ -25,7 +25,7 @@ namespace GW2SDK.Tests.Features.Colors
         [Trait("Feature",    "Colors")]
         [Trait("Category",   "Integration")]
         [Trait("Importance", "Critical")]
-        public void Class_ShouldHaveNoMissingMembers()
+        public void Colors_can_be_serialized_from_json()
         {
             var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output))
                                                               .UseMissingMemberHandling(MissingMemberHandling.Error)
@@ -42,119 +42,7 @@ namespace GW2SDK.Tests.Features.Colors
         [Fact]
         [Trait("Feature",  "Colors")]
         [Trait("Category", "Integration")]
-        public void Id_ShouldBePositive()
-        {
-            var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output)).Build();
-
-            AssertEx.ForEach(_fixture.Db.Colors,
-                json =>
-                {
-                    var actual = JsonConvert.DeserializeObject<Color>(json, settings);
-
-                    Assert.InRange(actual.Id, 1, int.MaxValue);
-                });
-        }
-
-        [Fact]
-        [Trait("Feature",  "Colors")]
-        [Trait("Category", "Integration")]
-        public void Name_ShouldNotBeEmpty()
-        {
-            var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output)).Build();
-
-            AssertEx.ForEach(_fixture.Db.Colors,
-                json =>
-                {
-                    var actual = JsonConvert.DeserializeObject<Color>(json, settings);
-
-                    Assert.NotEmpty(actual.Name);
-                });
-        }
-
-        [Fact]
-        [Trait("Feature",  "Colors")]
-        [Trait("Category", "Integration")]
-        public void Cloth_ShouldNotBeNull()
-        {
-            var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output)).Build();
-
-            AssertEx.ForEach(_fixture.Db.Colors,
-                json =>
-                {
-                    var actual = JsonConvert.DeserializeObject<Color>(json, settings);
-
-                    Assert.NotNull(actual.Cloth);
-                });
-        }
-
-        [Fact]
-        [Trait("Feature",  "Colors")]
-        [Trait("Category", "Integration")]
-        public void Leather_ShouldNotBeNull()
-        {
-            var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output)).Build();
-
-            AssertEx.ForEach(_fixture.Db.Colors,
-                json =>
-                {
-                    var actual = JsonConvert.DeserializeObject<Color>(json, settings);
-
-                    Assert.NotNull(actual.Leather);
-                });
-        }
-
-        [Fact]
-        [Trait("Feature",  "Colors")]
-        [Trait("Category", "Integration")]
-        public void Metal_ShouldNotBeNull()
-        {
-            var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output)).Build();
-
-            AssertEx.ForEach(_fixture.Db.Colors,
-                json =>
-                {
-                    var actual = JsonConvert.DeserializeObject<Color>(json, settings);
-
-                    Assert.NotNull(actual.Metal);
-                });
-        }
-
-        [Fact(Skip = "Some dyes like Hydra (1594) don't have a 'fur' property. Bug in API?")]
-        [Trait("Feature",  "Colors")]
-        [Trait("Category", "Integration")]
-        public void Fur_ShouldNotBeNull()
-        {
-            var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output)).Build();
-
-            AssertEx.ForEach(_fixture.Db.Colors,
-                json =>
-                {
-                    var actual = JsonConvert.DeserializeObject<Color>(json, settings);
-
-                    Assert.NotNull(actual.Fur);
-                });
-        }
-
-        [Fact]
-        [Trait("Feature",  "Colors")]
-        [Trait("Category", "Integration")]
-        public void Categories_ShouldNotBeNull()
-        {
-            var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output)).Build();
-
-            AssertEx.ForEach(_fixture.Db.Colors,
-                json =>
-                {
-                    var actual = JsonConvert.DeserializeObject<Color>(json, settings);
-
-                    Assert.NotNull(actual.Categories);
-                });
-        }
-
-        [Fact]
-        [Trait("Feature",  "Colors")]
-        [Trait("Category", "Integration")]
-        public void BaseRgb_ShouldBeRgbTuple()
+        public void Base_rgb_contains_red_green_blue()
         {
             var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output)).Build();
 

@@ -10,7 +10,7 @@ namespace GW2SDK.Tests.Features.Colors
         [Fact]
         [Trait("Feature",  "Colors")]
         [Trait("Category", "Unit")]
-        public void Method_ShouldBeGet()
+        public void Method_is_GET()
         {
             var sut = new GetColorsRequest();
 
@@ -20,7 +20,7 @@ namespace GW2SDK.Tests.Features.Colors
         [Fact]
         [Trait("Feature",  "Colors")]
         [Trait("Category", "Unit")]
-        public void RequestUri_ShouldBeV2ColorsBulk()
+        public void RequestUri_is_v2_colors_bulk()
         {
             var sut = new GetColorsRequest();
 
