@@ -10,7 +10,7 @@ namespace GW2SDK.Tests.Features.Recipes
         [Fact]
         [Trait("Feature",  "Recipes")]
         [Trait("Category", "Unit")]
-        public void Method_ShouldBeGet()
+        public void Method_is_GET()
         {
             var sut = new GetRecipesIndexRequest();
 
@@ -20,7 +20,7 @@ namespace GW2SDK.Tests.Features.Recipes
         [Fact]
         [Trait("Feature",  "Recipes")]
         [Trait("Category", "Unit")]
-        public void RequestUri_ShouldBeV2Recipes()
+        public void RequestUri_is_v2_recipes()
         {
             var sut = new GetRecipesIndexRequest();
 

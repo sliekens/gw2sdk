@@ -11,31 +11,7 @@ namespace GW2SDK.Tests.Features.Recipes
         [Fact]
         [Trait("Feature",  "Recipes")]
         [Trait("Category", "Unit")]
-        public void Constructor_WithIdsNull_ShouldThrowArgumentNullException()
-        {
-            Assert.Throws<ArgumentNullException>("recipeIds",
-                () =>
-                {
-                    _ = new GetRecipesByIdsRequest.Builder(null);
-                });
-        }
-
-        [Fact]
-        [Trait("Feature",  "Recipes")]
-        [Trait("Category", "Unit")]
-        public void Constructor_WithIdsEmpty_ShouldThrowArgumentException()
-        {
-            Assert.Throws<ArgumentException>("recipeIds",
-                () =>
-                {
-                    _ = new GetRecipesByIdsRequest.Builder(new int[0]);
-                });
-        }
-
-        [Fact]
-        [Trait("Feature",  "Recipes")]
-        [Trait("Category", "Unit")]
-        public void GetRequest_MethodShouldBeGet()
+        public void Method_is_GET()
         {
             var ids = new List<int> { 1, 2, 3 };
 
@@ -49,7 +25,7 @@ namespace GW2SDK.Tests.Features.Recipes
         [Fact]
         [Trait("Feature",  "Recipes")]
         [Trait("Category", "Unit")]
-        public void GetRequest_ShouldSerializeIdsAsQueryString()
+        public void RequestUri_contains_specified_ids()
         {
             var ids = new List<int> { 1, 2, 3 };
 
@@ -60,6 +36,30 @@ namespace GW2SDK.Tests.Features.Recipes
             var expected = new Uri("/v2/recipes?ids=1,2,3", UriKind.Relative);
 
             Assert.Equal(expected, actual.RequestUri);
+        }
+
+        [Fact]
+        [Trait("Feature",  "Recipes")]
+        [Trait("Category", "Unit")]
+        public void Recipe_ids_cannot_be_null()
+        {
+            Assert.Throws<ArgumentNullException>("recipeIds",
+                () =>
+                {
+                    _ = new GetRecipesByIdsRequest.Builder(null);
+                });
+        }
+
+        [Fact]
+        [Trait("Feature",  "Recipes")]
+        [Trait("Category", "Unit")]
+        public void Recipe_ids_cannot_be_empty()
+        {
+            Assert.Throws<ArgumentException>("recipeIds",
+                () =>
+                {
+                    _ = new GetRecipesByIdsRequest.Builder(new int[0]);
+                });
         }
     }
 }
