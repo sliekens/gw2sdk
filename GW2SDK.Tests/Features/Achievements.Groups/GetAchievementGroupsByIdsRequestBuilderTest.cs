@@ -10,69 +10,7 @@ namespace GW2SDK.Tests.Features.Achievements.Groups
         [Fact]
         [Trait("Feature",  "Achievements.Groups")]
         [Trait("Category", "Unit")]
-        public void Constructor_WithIdsNull_ShouldThrowArgumentNullException()
-        {
-            Assert.Throws<ArgumentNullException>("achievementGroupIds",
-                () =>
-                {
-                    _ = new GetAchievementGroupsByIdsRequest.Builder(null);
-                });
-        }
-
-        [Fact]
-        [Trait("Feature",  "Achievements.Groups")]
-        [Trait("Category", "Unit")]
-        public void Constructor_WithIdsEmpty_ShouldThrowArgumentException()
-        {
-            Assert.Throws<ArgumentException>("achievementGroupIds",
-                () =>
-                {
-                    _ = new GetAchievementGroupsByIdsRequest.Builder(new string[0]);
-                });
-        }
-
-        [Fact]
-        [Trait("Feature",  "Achievements.Groups")]
-        [Trait("Category", "Unit")]
-        public void Constructor_WithIdsContainingNull_ShouldThrowArgumentException()
-        {
-            var ids = new[]
-            {
-                "A4ED8379-5B6B-4ECC-B6E1-70C350C902D2",
-                null,
-                "B42E2379-9599-46CA-9D4A-40A27E192BBE"
-            };
-
-            Assert.Throws<ArgumentException>("achievementGroupIds",
-                () =>
-                {
-                    _ = new GetAchievementGroupsByIdsRequest.Builder(ids);
-                });
-        }
-
-        [Fact]
-        [Trait("Feature",  "Achievements.Groups")]
-        [Trait("Category", "Unit")]
-        public void Constructor_WithIdsContainingEmpty_ShouldThrowArgumentException()
-        {
-            var ids = new[]
-            {
-                "A4ED8379-5B6B-4ECC-B6E1-70C350C902D2",
-                "",
-                "B42E2379-9599-46CA-9D4A-40A27E192BBE"
-            };
-
-            Assert.Throws<ArgumentException>("achievementGroupIds",
-                () =>
-                {
-                    _ = new GetAchievementGroupsByIdsRequest.Builder(ids);
-                });
-        }
-
-        [Fact]
-        [Trait("Feature",  "Achievements.Groups")]
-        [Trait("Category", "Unit")]
-        public void GetRequest_MethodShouldBeGet()
+        public void Method_is_GET()
         {
             var ids = new[]
             {
@@ -91,7 +29,7 @@ namespace GW2SDK.Tests.Features.Achievements.Groups
         [Fact]
         [Trait("Feature",  "Achievements.Groups")]
         [Trait("Category", "Unit")]
-        public void GetRequest_ShouldSerializeIdsAsQueryString()
+        public void RequestUri_contains_specified_ids()
         {
             var ids = new[]
             {
@@ -109,6 +47,68 @@ namespace GW2SDK.Tests.Features.Achievements.Groups
                 UriKind.Relative);
 
             Assert.Equal(expected, actual.RequestUri);
+        }
+
+        [Fact]
+        [Trait("Feature",  "Achievements.Groups")]
+        [Trait("Category", "Unit")]
+        public void Achievement_group_ids_cannot_be_null()
+        {
+            Assert.Throws<ArgumentNullException>("achievementGroupIds",
+                () =>
+                {
+                    _ = new GetAchievementGroupsByIdsRequest.Builder(null);
+                });
+        }
+
+        [Fact]
+        [Trait("Feature",  "Achievements.Groups")]
+        [Trait("Category", "Unit")]
+        public void Achievement_group_ids_cannot_be_empty()
+        {
+            Assert.Throws<ArgumentException>("achievementGroupIds",
+                () =>
+                {
+                    _ = new GetAchievementGroupsByIdsRequest.Builder(new string[0]);
+                });
+        }
+
+        [Fact]
+        [Trait("Feature",  "Achievements.Groups")]
+        [Trait("Category", "Unit")]
+        public void Achievement_group_ids_cannot_contain_null()
+        {
+            var ids = new[]
+            {
+                "A4ED8379-5B6B-4ECC-B6E1-70C350C902D2",
+                null,
+                "B42E2379-9599-46CA-9D4A-40A27E192BBE"
+            };
+
+            Assert.Throws<ArgumentException>("achievementGroupIds",
+                () =>
+                {
+                    _ = new GetAchievementGroupsByIdsRequest.Builder(ids);
+                });
+        }
+
+        [Fact]
+        [Trait("Feature",  "Achievements.Groups")]
+        [Trait("Category", "Unit")]
+        public void Achievement_group_ids_cannot_contain_empty_id()
+        {
+            var ids = new[]
+            {
+                "A4ED8379-5B6B-4ECC-B6E1-70C350C902D2",
+                "",
+                "B42E2379-9599-46CA-9D4A-40A27E192BBE"
+            };
+
+            Assert.Throws<ArgumentException>("achievementGroupIds",
+                () =>
+                {
+                    _ = new GetAchievementGroupsByIdsRequest.Builder(ids);
+                });
         }
     }
 }

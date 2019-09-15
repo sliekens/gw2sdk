@@ -10,7 +10,7 @@ namespace GW2SDK.Tests.Features.Achievements.Groups
         [Fact]
         [Trait("Feature",  "Achievements.Groups")]
         [Trait("Category", "Unit")]
-        public void GetRequest_MethodShouldBeGet()
+        public void Method_is_GET()
         {
             var id = "A4ED8379-5B6B-4ECC-B6E1-70C350C902D2";
 
@@ -24,7 +24,7 @@ namespace GW2SDK.Tests.Features.Achievements.Groups
         [Fact]
         [Trait("Feature",  "Achievements.Groups")]
         [Trait("Category", "Unit")]
-        public void GetRequest_ShouldSerializeIdAsQueryString()
+        public void RequestUri_contains_specified_id()
         {
             var id = "A4ED8379-5B6B-4ECC-B6E1-70C350C902D2";
 

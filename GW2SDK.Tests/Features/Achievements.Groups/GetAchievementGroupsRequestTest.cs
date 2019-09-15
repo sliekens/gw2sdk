@@ -10,7 +10,7 @@ namespace GW2SDK.Tests.Features.Achievements.Groups
         [Fact]
         [Trait("Feature",  "Achievements.Groups")]
         [Trait("Category", "Unit")]
-        public void Method_ShouldBeGet()
+        public void Method_is_GET()
         {
             var sut = new GetAchievementGroupsRequest();
 
@@ -20,7 +20,7 @@ namespace GW2SDK.Tests.Features.Achievements.Groups
         [Fact]
         [Trait("Feature",  "Achievements.Groups")]
         [Trait("Category", "Unit")]
-        public void RequestUri_ShouldBeV2AchievementsGroupsBulk()
+        public void RequestUri_is_v2_achievements_groups_bulk()
         {
             var sut = new GetAchievementGroupsRequest();
 
