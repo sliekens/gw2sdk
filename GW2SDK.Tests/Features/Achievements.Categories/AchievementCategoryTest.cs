@@ -25,7 +25,7 @@ namespace GW2SDK.Tests.Features.Achievements.Categories
         [Trait("Feature",    "Achievements.Categories")]
         [Trait("Category",   "Integration")]
         [Trait("Importance", "Critical")]
-        public void Class_ShouldHaveNoMissingMembers()
+        public void Achievement_categories_can_be_serialized_from_json()
         {
             var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output))
                                                               .UseMissingMemberHandling(MissingMemberHandling.Error)
@@ -42,49 +42,7 @@ namespace GW2SDK.Tests.Features.Achievements.Categories
         [Fact]
         [Trait("Feature",  "Achievements.Categories")]
         [Trait("Category", "Integration")]
-        public void Id_ShouldBePositive()
-        {
-            var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output)).Build();
-            AssertEx.ForEach(_fixture.Db.AchievementCategories,
-                json =>
-                {
-                    var actual = JsonConvert.DeserializeObject<AchievementCategory>(json, settings);
-                    Assert.InRange(actual.Id, 1, int.MaxValue);
-                });
-        }
-
-        [Fact]
-        [Trait("Feature",  "Achievements.Categories")]
-        [Trait("Category", "Integration")]
-        public void Name_ShouldNotBeNull()
-        {
-            var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output)).Build();
-            AssertEx.ForEach(_fixture.Db.AchievementCategories,
-                json =>
-                {
-                    var actual = JsonConvert.DeserializeObject<AchievementCategory>(json, settings);
-                    Assert.NotNull(actual.Name);
-                });
-        }
-
-        [Fact]
-        [Trait("Feature",  "Achievements.Categories")]
-        [Trait("Category", "Integration")]
-        public void Description_ShouldNotBeNull()
-        {
-            var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output)).Build();
-            AssertEx.ForEach(_fixture.Db.AchievementCategories,
-                json =>
-                {
-                    var actual = JsonConvert.DeserializeObject<AchievementCategory>(json, settings);
-                    Assert.NotNull(actual.Description);
-                });
-        }
-
-        [Fact]
-        [Trait("Feature",  "Achievements.Categories")]
-        [Trait("Category", "Integration")]
-        public void Order_ShouldNotBeNegative()
+        public void Order_is_not_negative()
         {
             var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output)).Build();
             AssertEx.ForEach(_fixture.Db.AchievementCategories,
@@ -92,34 +50,6 @@ namespace GW2SDK.Tests.Features.Achievements.Categories
                 {
                     var actual = JsonConvert.DeserializeObject<AchievementCategory>(json, settings);
                     Assert.InRange(actual.Order, 0, int.MaxValue);
-                });
-        }
-        
-        [Fact]
-        [Trait("Feature",  "Achievements.Categories")]
-        [Trait("Category", "Integration")]
-        public void Icon_ShouldNotBeNull()
-        {
-            var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output)).Build();
-            AssertEx.ForEach(_fixture.Db.AchievementCategories,
-                json =>
-                {
-                    var actual = JsonConvert.DeserializeObject<AchievementCategory>(json, settings);
-                    Assert.NotNull(actual.Icon);
-                });
-        }
-        
-        [Fact]
-        [Trait("Feature",  "Achievements.Categories")]
-        [Trait("Category", "Integration")]
-        public void Achievements_ShouldNotBeNull()
-        {
-            var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output)).Build();
-            AssertEx.ForEach(_fixture.Db.AchievementCategories,
-                json =>
-                {
-                    var actual = JsonConvert.DeserializeObject<AchievementCategory>(json, settings);
-                    Assert.NotNull(actual.Achievements);
                 });
         }
     }

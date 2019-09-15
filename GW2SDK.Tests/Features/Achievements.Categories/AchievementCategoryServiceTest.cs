@@ -11,7 +11,7 @@ namespace GW2SDK.Tests.Features.Achievements.Categories
         [Fact]
         [Trait("Feature",  "Achievements.Categories")]
         [Trait("Category", "Integration")]
-        public async Task GetAchievementCategories_ShouldReturnAllAchievementCategories()
+        public async Task Get_all_achievement_categories()
         {
             var services = new Container();
             var sut = services.Resolve<AchievementCategoryService>();
@@ -24,7 +24,7 @@ namespace GW2SDK.Tests.Features.Achievements.Categories
         [Fact]
         [Trait("Feature",  "Achievements.Categories")]
         [Trait("Category", "Integration")]
-        public async Task GetAchievementCategoriesIndex_ShouldReturnAllIds()
+        public async Task Get_all_achievement_category_ids()
         {
             var services = new Container();
             var sut = services.Resolve<AchievementCategoryService>();
@@ -37,7 +37,7 @@ namespace GW2SDK.Tests.Features.Achievements.Categories
         [Fact]
         [Trait("Feature",  "Achievements.Categories")]
         [Trait("Category", "Integration")]
-        public async Task GetAchievementCategoryById_ShouldReturnThatAchievementCategory()
+        public async Task Get_an_achievement_category_by_id()
         {
             var services = new Container();
             var sut = services.Resolve<AchievementCategoryService>();
@@ -51,8 +51,23 @@ namespace GW2SDK.Tests.Features.Achievements.Categories
 
         [Fact]
         [Trait("Feature",  "Achievements.Categories")]
+        [Trait("Category", "Integration")]
+        public async Task Get_achievement_categories_by_id()
+        {
+            var services = new Container();
+            var sut = services.Resolve<AchievementCategoryService>();
+
+            var ids = new[] { 1, 2, 3 };
+
+            var actual = await sut.GetAchievementCategoriesByIds(ids);
+
+            Assert.Collection(actual, first => Assert.Equal(1, first.Id), second => Assert.Equal(2, second.Id), third => Assert.Equal(3, third.Id));
+        }
+
+        [Fact]
+        [Trait("Feature",  "Achievements.Categories")]
         [Trait("Category", "Unit")]
-        public async Task GetAchievementCategoriesByIds_WithIdsNull_ShouldThrowArgumentNullException()
+        public async Task Achievement_category_ids_cannot_be_null()
         {
             var services = new Container();
             var sut = services.Resolve<AchievementCategoryService>();
@@ -67,7 +82,7 @@ namespace GW2SDK.Tests.Features.Achievements.Categories
         [Fact]
         [Trait("Feature",  "Achievements.Categories")]
         [Trait("Category", "Unit")]
-        public async Task GetAchievementCategoriesByIds_WithIdsEmpty_ShouldThrowArgumentException()
+        public async Task Achievement_category_ids_cannot_be_empty()
         {
             var services = new Container();
             var sut = services.Resolve<AchievementCategoryService>();
@@ -82,22 +97,21 @@ namespace GW2SDK.Tests.Features.Achievements.Categories
         [Fact]
         [Trait("Feature",  "Achievements.Categories")]
         [Trait("Category", "Integration")]
-        public async Task GetAchievementCategoriesByIds_ShouldReturnThoseAchievementCategories()
+        public async Task Get_achievement_categories_by_page()
         {
             var services = new Container();
             var sut = services.Resolve<AchievementCategoryService>();
 
-            var ids = new[] { 1, 2, 3 };
+            var actual = await sut.GetAchievementCategoriesByPage(1, 3);
 
-            var actual = await sut.GetAchievementCategoriesByIds(ids);
-
-            Assert.Collection(actual, first => Assert.Equal(1, first.Id), second => Assert.Equal(2, second.Id), third => Assert.Equal(3, third.Id));
+            Assert.Equal(3, actual.Count);
+            Assert.Equal(3, actual.PageSize);
         }
 
         [Fact]
         [Trait("Feature",  "Achievements.Categories")]
         [Trait("Category", "Integration")]
-        public async Task GetAchievementCategoriesByPage_WithInvalidPage_ShouldThrowArgumentException()
+        public async Task Page_index_cannot_be_negative()
         {
             var services = new Container();
             var sut = services.Resolve<AchievementCategoryService>();
@@ -108,26 +122,12 @@ namespace GW2SDK.Tests.Features.Achievements.Categories
         [Fact]
         [Trait("Feature",  "Achievements.Categories")]
         [Trait("Category", "Integration")]
-        public async Task GetAchievementCategoriesByPage_WithInvalidPageSize_ShouldThrowArgumentException()
+        public async Task Page_size_cannot_be_negative()
         {
             var services = new Container();
             var sut = services.Resolve<AchievementCategoryService>();
 
             await Assert.ThrowsAsync<ArgumentException>(async () => await sut.GetAchievementCategoriesByPage(1, -3));
-        }
-
-        [Fact]
-        [Trait("Feature",  "Achievements.Categories")]
-        [Trait("Category", "Integration")]
-        public async Task GetAchievementCategoriesByPage_WithPage1AndPageSize3_ShouldReturnThatPage()
-        {
-            var services = new Container();
-            var sut = services.Resolve<AchievementCategoryService>();
-
-            var actual = await sut.GetAchievementCategoriesByPage(1, 3);
-
-            Assert.Equal(3, actual.Count);
-            Assert.Equal(3, actual.PageSize);
         }
     }
 }
