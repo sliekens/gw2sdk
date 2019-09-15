@@ -10,7 +10,7 @@ namespace GW2SDK.Tests.Features.Achievements.Categories
         [Fact]
         [Trait("Feature",  "Achievements.Categories")]
         [Trait("Category", "Unit")]
-        public void GetRequest_MethodShouldBeGet()
+        public void Method_is_GET()
         {
             var sut = new GetAchievementCategoriesByPageRequest.Builder(0);
 
@@ -22,7 +22,7 @@ namespace GW2SDK.Tests.Features.Achievements.Categories
         [Fact]
         [Trait("Feature",  "Achievements.Categories")]
         [Trait("Category", "Unit")]
-        public void GetRequest_ShouldSerializePageAsQueryString()
+        public void RequestUri_contains_specified_page()
         {
             var sut = new GetAchievementCategoriesByPageRequest.Builder(1);
 
@@ -36,7 +36,7 @@ namespace GW2SDK.Tests.Features.Achievements.Categories
         [Fact]
         [Trait("Feature",  "Achievements.Categories")]
         [Trait("Category", "Unit")]
-        public void GetRequest_WithPageSize_ShouldSerializePageSizeAsQueryString()
+        public void RequestUri_contains_specified_page_size()
         {
             var sut = new GetAchievementCategoriesByPageRequest.Builder(1, 200);
 
