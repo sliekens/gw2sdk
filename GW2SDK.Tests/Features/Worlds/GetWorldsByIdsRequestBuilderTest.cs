@@ -11,31 +11,7 @@ namespace GW2SDK.Tests.Features.Worlds
         [Fact]
         [Trait("Feature",  "Worlds")]
         [Trait("Category", "Unit")]
-        public void Constructor_WithIdsNull_ShouldThrowArgumentNullException()
-        {
-            Assert.Throws<ArgumentNullException>("worldIds",
-                () =>
-                {
-                    _ = new GetWorldsByIdsRequest.Builder(null);
-                });
-        }
-
-        [Fact]
-        [Trait("Feature",  "Worlds")]
-        [Trait("Category", "Unit")]
-        public void Constructor_WithIdsEmpty_ShouldThrowArgumentException()
-        {
-            Assert.Throws<ArgumentException>("worldIds",
-                () =>
-                {
-                    _ = new GetWorldsByIdsRequest.Builder(new int[0]);
-                });
-        }
-
-        [Fact]
-        [Trait("Feature",  "Worlds")]
-        [Trait("Category", "Unit")]
-        public void GetRequest_MethodShouldBeGet()
+        public void Method_is_GET()
         {
             var ids = new List<int> { 1, 2, 3 };
 
@@ -49,7 +25,7 @@ namespace GW2SDK.Tests.Features.Worlds
         [Fact]
         [Trait("Feature",  "Worlds")]
         [Trait("Category", "Unit")]
-        public void GetRequest_ShouldSerializeIdsAsQueryString()
+        public void RequestUri_contains_specified_ids()
         {
             var ids = new List<int> { 1, 2, 3 };
 
@@ -60,6 +36,30 @@ namespace GW2SDK.Tests.Features.Worlds
             var expected = new Uri("/v2/worlds?ids=1,2,3", UriKind.Relative);
 
             Assert.Equal(expected, actual.RequestUri);
+        }
+
+        [Fact]
+        [Trait("Feature",  "Worlds")]
+        [Trait("Category", "Unit")]
+        public void World_ids_cannot_be_null()
+        {
+            Assert.Throws<ArgumentNullException>("worldIds",
+                () =>
+                {
+                    _ = new GetWorldsByIdsRequest.Builder(null);
+                });
+        }
+
+        [Fact]
+        [Trait("Feature",  "Worlds")]
+        [Trait("Category", "Unit")]
+        public void World_ids_cannot_be_empty()
+        {
+            Assert.Throws<ArgumentException>("worldIds",
+                () =>
+                {
+                    _ = new GetWorldsByIdsRequest.Builder(new int[0]);
+                });
         }
     }
 }

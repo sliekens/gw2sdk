@@ -11,7 +11,7 @@ namespace GW2SDK.Tests.Features.Worlds
         [Fact]
         [Trait("Feature",  "Worlds")]
         [Trait("Category", "Integration")]
-        public async Task GetWorlds_ShouldReturnAllWorlds()
+        public async Task Get_all_worlds()
         {
             var services = new Container();
             var sut = services.Resolve<WorldService>();
@@ -24,7 +24,7 @@ namespace GW2SDK.Tests.Features.Worlds
         [Fact]
         [Trait("Feature",  "Worlds")]
         [Trait("Category", "Integration")]
-        public async Task GetWorldsIndex_ShouldReturnAllIds()
+        public async Task Get_all_world_ids()
         {
             var services = new Container();
             var sut = services.Resolve<WorldService>();
@@ -37,7 +37,7 @@ namespace GW2SDK.Tests.Features.Worlds
         [Fact]
         [Trait("Feature",  "Worlds")]
         [Trait("Category", "Integration")]
-        public async Task GetWorldById_ShouldReturnThatWorld()
+        public async Task Get_a_world_by_id()
         {
             var services = new Container();
             var sut = services.Resolve<WorldService>();
@@ -51,8 +51,23 @@ namespace GW2SDK.Tests.Features.Worlds
 
         [Fact]
         [Trait("Feature",  "Worlds")]
+        [Trait("Category", "Integration")]
+        public async Task Get_worlds_by_id()
+        {
+            var services = new Container();
+            var sut = services.Resolve<WorldService>();
+
+            var ids = new[] { 1001, 1002, 1003 };
+
+            var actual = await sut.GetWorldsByIds(ids);
+
+            Assert.Collection(actual, world => Assert.Equal(1001, world.Id), world => Assert.Equal(1002, world.Id), world => Assert.Equal(1003, world.Id));
+        }
+
+        [Fact]
+        [Trait("Feature",  "Worlds")]
         [Trait("Category", "Unit")]
-        public async Task GetWorldsByIds_WithIdsNull_ShouldThrowArgumentNullException()
+        public async Task World_ids_cannot_be_null()
         {
             var services = new Container();
             var sut = services.Resolve<WorldService>();
@@ -67,7 +82,7 @@ namespace GW2SDK.Tests.Features.Worlds
         [Fact]
         [Trait("Feature",  "Worlds")]
         [Trait("Category", "Unit")]
-        public async Task GetWorldsByIds_WithIdsEmpty_ShouldThrowArgumentException()
+        public async Task World_ids_cannot_be_empty()
         {
             var services = new Container();
             var sut = services.Resolve<WorldService>();
@@ -82,22 +97,21 @@ namespace GW2SDK.Tests.Features.Worlds
         [Fact]
         [Trait("Feature",  "Worlds")]
         [Trait("Category", "Integration")]
-        public async Task GetWorldsByIds_ShouldReturnThoseWorlds()
+        public async Task Get_worlds_by_page()
         {
             var services = new Container();
             var sut = services.Resolve<WorldService>();
 
-            var ids = new[] { 1001, 1002, 1003 };
+            var actual = await sut.GetWorldsByPage(1, 3);
 
-            var actual = await sut.GetWorldsByIds(ids);
-
-            Assert.Collection(actual, world => Assert.Equal(1001, world.Id), world => Assert.Equal(1002, world.Id), world => Assert.Equal(1003, world.Id));
+            Assert.Equal(3, actual.Count);
+            Assert.Equal(3, actual.PageSize);
         }
-        
+
         [Fact]
         [Trait("Feature",  "Worlds")]
         [Trait("Category", "Integration")]
-        public async Task GetWorldsByPage_WithInvalidPage_ShouldThrowArgumentException()
+        public async Task Page_index_cannot_be_negative()
         {
             var services = new Container();
             var sut = services.Resolve<WorldService>();
@@ -108,26 +122,12 @@ namespace GW2SDK.Tests.Features.Worlds
         [Fact]
         [Trait("Feature",  "Worlds")]
         [Trait("Category", "Integration")]
-        public async Task GetWorldsByPage_WithInvalidPageSize_ShouldThrowArgumentException()
+        public async Task Page_size_cannot_be_negative()
         {
             var services = new Container();
             var sut = services.Resolve<WorldService>();
 
             await Assert.ThrowsAsync<ArgumentException>(async () => await sut.GetWorldsByPage(1, -3));
-        }
-
-        [Fact]
-        [Trait("Feature",  "Worlds")]
-        [Trait("Category", "Integration")]
-        public async Task GetWorldsByPage_WithPage1AndPageSize3_ShouldReturnThatPage()
-        {
-            var services = new Container();
-            var sut = services.Resolve<WorldService>();
-
-            var actual = await sut.GetWorldsByPage(1, 3);
-
-            Assert.Equal(3, actual.Count);
-            Assert.Equal(3, actual.PageSize);
         }
     }
 }
