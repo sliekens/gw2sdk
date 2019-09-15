@@ -11,21 +11,27 @@ namespace GW2SDK.Items
     [JsonConverter(typeof(DiscriminatedJsonConverter), typeof(UpgradeComponentDiscriminatorOptions))]
     public class UpgradeComponent : Item
     {
+        [JsonProperty(Required = Required.Always)]
         public int Level { get; set; }
 
         [NotNull]
+        [JsonProperty(Required = Required.Always)]
         public UpgradeComponentFlag[] UpgradeComponentFlags { get; set; }
 
-        [CanBeNull]
+        [NotNull]
+        [JsonProperty(Required = Required.Always)]
         public InfusionSlotFlag[] InfusionUpgradeFlags { get; set; }
 
         [NotNull]
+        [JsonProperty(Required = Required.Always)]
         public InfixUpgrade InfixUpgrade { get; set; }
 
         [CanBeNull]
+        [JsonProperty(Required = Required.DisallowNull)]
         public string[] Bonuses { get; set; }
 
         [CanBeNull]
+        [JsonProperty(Required = Required.Always)]
         public string Suffix { get; set; }
     }
 }

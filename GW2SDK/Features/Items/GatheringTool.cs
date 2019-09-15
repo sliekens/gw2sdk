@@ -10,6 +10,7 @@ namespace GW2SDK.Items
     [JsonConverter(typeof(DiscriminatedJsonConverter), typeof(GatheringToolDiscriminatorOptions))]
     public class GatheringTool : Item
     {
+        [JsonProperty(Required = Required.Always)]
         public int Level { get; set; }
     }
 }

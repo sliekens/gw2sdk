@@ -10,6 +10,7 @@ namespace GW2SDK.Items
     [JsonConverter(typeof(DiscriminatedJsonConverter), typeof(ContainerDiscriminatorOptions))]
     public class Container : Item
     {
+        [JsonProperty(Required = Required.Always)]
         public int Level { get; set; }
     }
 }

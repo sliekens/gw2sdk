@@ -10,7 +10,7 @@ namespace GW2SDK.Tests.Features.Items
         [Fact]
         [Trait("Feature",  "Items")]
         [Trait("Category", "Unit")]
-        public void Method_ShouldBeGet()
+        public void Method_is_GET()
         {
             var sut = new GetItemsIndexRequest();
 
@@ -20,7 +20,7 @@ namespace GW2SDK.Tests.Features.Items
         [Fact]
         [Trait("Feature",  "Items")]
         [Trait("Category", "Unit")]
-        public void RequestUri_ShouldBeV2Items()
+        public void RequestUri_is_v2_items()
         {
             var sut = new GetItemsIndexRequest();
 

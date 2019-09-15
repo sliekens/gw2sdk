@@ -11,7 +11,7 @@ namespace GW2SDK.Tests.Features.Items
         [Fact]
         [Trait("Feature",  "Items")]
         [Trait("Category", "Integration")]
-        public async Task GetItemsIndex_ShouldReturnAllIds()
+        public async Task Get_all_item_ids()
         {
             var services = new Container();
             var sut = services.Resolve<ItemService>();
@@ -24,7 +24,7 @@ namespace GW2SDK.Tests.Features.Items
         [Fact]
         [Trait("Feature",  "Items")]
         [Trait("Category", "Integration")]
-        public async Task GetItemById_ShouldReturnThatItem()
+        public async Task Get_an_item_by_id()
         {
             var services = new Container();
             var sut = services.Resolve<ItemService>();
@@ -38,8 +38,23 @@ namespace GW2SDK.Tests.Features.Items
 
         [Fact]
         [Trait("Feature",  "Items")]
+        [Trait("Category", "Integration")]
+        public async Task Get_items_by_id()
+        {
+            var services = new Container();
+            var sut = services.Resolve<ItemService>();
+
+            var ids = new[] { 24, 46, 56 };
+
+            var actual = await sut.GetItemsByIds(ids);
+
+            Assert.Collection(actual, item => Assert.Equal(24, item.Id), item => Assert.Equal(46, item.Id), item => Assert.Equal(56, item.Id));
+        }
+
+        [Fact]
+        [Trait("Feature",  "Items")]
         [Trait("Category", "Unit")]
-        public async Task GetItemsByIds_WithIdsNull_ShouldThrowArgumentNullException()
+        public async Task Item_ids_cannot_be_null()
         {
             var services = new Container();
             var sut = services.Resolve<ItemService>();
@@ -54,7 +69,7 @@ namespace GW2SDK.Tests.Features.Items
         [Fact]
         [Trait("Feature",  "Items")]
         [Trait("Category", "Unit")]
-        public async Task GetItemsByIds_WithIdsEmpty_ShouldThrowArgumentException()
+        public async Task Item_ids_cannot_be_empty()
         {
             var services = new Container();
             var sut = services.Resolve<ItemService>();
@@ -69,22 +84,21 @@ namespace GW2SDK.Tests.Features.Items
         [Fact]
         [Trait("Feature",  "Items")]
         [Trait("Category", "Integration")]
-        public async Task GetItemsByIds_ShouldReturnThoseItems()
+        public async Task Get_items_by_page()
         {
             var services = new Container();
             var sut = services.Resolve<ItemService>();
 
-            var ids = new[] { 24, 46, 56 };
+            var actual = await sut.GetItemsByPage(1, 3);
 
-            var actual = await sut.GetItemsByIds(ids);
-
-            Assert.Collection(actual, item => Assert.Equal(24, item.Id), item => Assert.Equal(46, item.Id), item => Assert.Equal(56, item.Id));
+            Assert.Equal(3, actual.Count);
+            Assert.Equal(3, actual.PageSize);
         }
-        
+
         [Fact]
         [Trait("Feature",  "Items")]
         [Trait("Category", "Integration")]
-        public async Task GetItemsByPage_WithInvalidPage_ShouldThrowArgumentException()
+        public async Task Page_index_cannot_be_negative()
         {
             var services = new Container();
             var sut = services.Resolve<ItemService>();
@@ -95,26 +109,12 @@ namespace GW2SDK.Tests.Features.Items
         [Fact]
         [Trait("Feature",  "Items")]
         [Trait("Category", "Integration")]
-        public async Task GetItemsByPage_WithInvalidPageSize_ShouldThrowArgumentException()
+        public async Task Page_size_cannot_be_negative()
         {
             var services = new Container();
             var sut = services.Resolve<ItemService>();
 
             await Assert.ThrowsAsync<ArgumentException>(async () => await sut.GetItemsByPage(1, -3));
-        }
-
-        [Fact]
-        [Trait("Feature",  "Items")]
-        [Trait("Category", "Integration")]
-        public async Task GetItemsByPage_WithPage1AndPageSize3_ShouldReturnThatPage()
-        {
-            var services = new Container();
-            var sut = services.Resolve<ItemService>();
-
-            var actual = await sut.GetItemsByPage(1, 3);
-
-            Assert.Equal(3, actual.Count);
-            Assert.Equal(3, actual.PageSize);
         }
     }
 }

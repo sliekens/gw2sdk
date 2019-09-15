@@ -25,7 +25,7 @@ namespace GW2SDK.Tests.Features.Items
         [Trait("Feature",    "Items")]
         [Trait("Category",   "Integration")]
         [Trait("Importance", "Critical")]
-        public void Class_ShouldHaveNoMissingMembers()
+        public void Items_can_be_serialized_from_json()
         {
             var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output))
                                                               .UseMissingMemberHandling(MissingMemberHandling.Error)
@@ -41,7 +41,7 @@ namespace GW2SDK.Tests.Features.Items
         [Fact]
         [Trait("Feature",  "Items")]
         [Trait("Category", "Integration")]
-        public void Id_ShouldBePositive()
+        public void Id_is_positive()
         {
             var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output)).Build();
             AssertEx.ForEach(_fixture.Db.Items,
@@ -55,21 +55,7 @@ namespace GW2SDK.Tests.Features.Items
         [Fact]
         [Trait("Feature",  "Items")]
         [Trait("Category", "Integration")]
-        public void Name_ShouldNotBeNull()
-        {
-            var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output)).Build();
-            AssertEx.ForEach(_fixture.Db.Items,
-                json =>
-                {
-                    var actual = JsonConvert.DeserializeObject<Item>(json, settings);
-                    Assert.NotNull(actual.Name);
-                });
-        }
-
-        [Fact]
-        [Trait("Feature",  "Items")]
-        [Trait("Category", "Integration")]
-        public void VendorValue_ShouldNotBeNegative()
+        public void Vendor_value_cannot_be_negative()
         {
             var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output)).Build();
             AssertEx.ForEach(_fixture.Db.Items,
@@ -83,63 +69,7 @@ namespace GW2SDK.Tests.Features.Items
         [Fact]
         [Trait("Feature",  "Items")]
         [Trait("Category", "Integration")]
-        public void GameTypes_ShouldNotBeNull()
-        {
-            var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output)).Build();
-            AssertEx.ForEach(_fixture.Db.Items,
-                json =>
-                {
-                    var actual = JsonConvert.DeserializeObject<Item>(json, settings);
-                    Assert.NotNull(actual.GameTypes);
-                });
-        }
-
-        [Fact]
-        [Trait("Feature",  "Items")]
-        [Trait("Category", "Integration")]
-        public void Flags_ShouldNotBeNull()
-        {
-            var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output)).Build();
-            AssertEx.ForEach(_fixture.Db.Items,
-                json =>
-                {
-                    var actual = JsonConvert.DeserializeObject<Item>(json, settings);
-                    Assert.NotNull(actual.Flags);
-                });
-        }
-
-        [Fact]
-        [Trait("Feature",  "Items")]
-        [Trait("Category", "Integration")]
-        public void Restrictions_ShouldNotBeNull()
-        {
-            var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output)).Build();
-            AssertEx.ForEach(_fixture.Db.Items,
-                json =>
-                {
-                    var actual = JsonConvert.DeserializeObject<Item>(json, settings);
-                    Assert.NotNull(actual.Restrictions);
-                });
-        }
-
-        [Fact]
-        [Trait("Feature",  "Items")]
-        [Trait("Category", "Integration")]
-        public void ChatLink_ShouldNotBeNull()
-        {
-            var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output)).Build();
-            AssertEx.ForEach(_fixture.Db.Items,
-                json =>
-                {
-                    var actual = JsonConvert.DeserializeObject<Item>(json, settings);
-                    Assert.NotNull(actual.ChatLink);
-                });
-        }
-
-        [Fact]
-        [Trait("Feature",  "Items")]
-        [Trait("Category", "Integration")]
-        public void ConsumableLevel_ShouldNotBeNegative()
+        public void Consumable_level_cannot_be_negative()
         {
             var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output)).Build();
             AssertEx.ForEach(_fixture.Db.GetConsumableItems(),
@@ -153,7 +83,7 @@ namespace GW2SDK.Tests.Features.Items
         [Fact]
         [Trait("Feature",  "Items")]
         [Trait("Category", "Integration")]
-        public void WeaponLevel_ShouldNotBeNegative()
+        public void Weapon_level_cannot_be_negative()
         {
             var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output)).Build();
             AssertEx.ForEach(_fixture.Db.GetWeaponItems(),
@@ -167,7 +97,7 @@ namespace GW2SDK.Tests.Features.Items
         [Fact]
         [Trait("Feature",  "Items")]
         [Trait("Category", "Integration")]
-        public void WeaponMinPower_ShouldNotBeNegative()
+        public void Weapon_min_power_cannot_be_negative()
         {
             var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output)).Build();
             AssertEx.ForEach(_fixture.Db.GetWeaponItems(),
@@ -181,7 +111,7 @@ namespace GW2SDK.Tests.Features.Items
         [Fact]
         [Trait("Feature",  "Items")]
         [Trait("Category", "Integration")]
-        public void WeaponMaxPower_ShouldNotBeNegative()
+        public void Weapon_max_power_cannot_be_negative()
         {
             var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output)).Build();
             AssertEx.ForEach(_fixture.Db.GetWeaponItems(),
@@ -195,7 +125,7 @@ namespace GW2SDK.Tests.Features.Items
         [Fact]
         [Trait("Feature",  "Items")]
         [Trait("Category", "Integration")]
-        public void WeaponDefense_ShouldNotBeNegative()
+        public void Weapon_defense_cannot_be_negative()
         {
             var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output)).Build();
             AssertEx.ForEach(_fixture.Db.GetWeaponItems(),
@@ -209,35 +139,7 @@ namespace GW2SDK.Tests.Features.Items
         [Fact]
         [Trait("Feature",  "Items")]
         [Trait("Category", "Integration")]
-        public void WeaponInfusionSlots_ShouldNotBeNull()
-        {
-            var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output)).Build();
-            AssertEx.ForEach(_fixture.Db.GetWeaponItems(),
-                json =>
-                {
-                    var actual = (Weapon) JsonConvert.DeserializeObject<Item>(json, settings);
-                    Assert.NotNull(actual.InfusionSlots);
-                });
-        }
-
-        [Fact]
-        [Trait("Feature",  "Items")]
-        [Trait("Category", "Integration")]
-        public void WeaponSecondarySuffixItemId_ShouldNotBeNull()
-        {
-            var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output)).Build();
-            AssertEx.ForEach(_fixture.Db.GetWeaponItems(),
-                json =>
-                {
-                    var actual = (Weapon) JsonConvert.DeserializeObject<Item>(json, settings);
-                    Assert.NotNull(actual.SecondarySuffixItemId);
-                });
-        }
-
-        [Fact]
-        [Trait("Feature",  "Items")]
-        [Trait("Category", "Integration")]
-        public void WeaponInfixUpgradeId_ShouldBePositive()
+        public void Weapon_infix_upgrade_id_is_positive()
         {
             var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output)).Build();
             AssertEx.ForEach(_fixture.Db.GetWeaponItems(),
@@ -254,24 +156,7 @@ namespace GW2SDK.Tests.Features.Items
         [Fact]
         [Trait("Feature",  "Items")]
         [Trait("Category", "Integration")]
-        public void WeaponInfixUpgradeAttributes_ShouldNotBeNull()
-        {
-            var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output)).Build();
-            AssertEx.ForEach(_fixture.Db.GetWeaponItems(),
-                json =>
-                {
-                    var actual = (Weapon) JsonConvert.DeserializeObject<Item>(json, settings);
-                    if (actual.InfixUpgrade is InfixUpgrade)
-                    {
-                        Assert.NotNull(actual.InfixUpgrade.Attributes);
-                    }
-                });
-        }
-
-        [Fact]
-        [Trait("Feature",  "Items")]
-        [Trait("Category", "Integration")]
-        public void WeaponInfixUpgradeModifiers_ShouldBePositive()
+        public void Weapon_infix_upgrade_modifiers_are_positive()
         {
             var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output)).Build();
             AssertEx.ForEach(_fixture.Db.GetWeaponItems(),
@@ -288,7 +173,7 @@ namespace GW2SDK.Tests.Features.Items
         [Fact]
         [Trait("Feature",  "Items")]
         [Trait("Category", "Integration")]
-        public void BackItemLevel_ShouldNotBeNegative()
+        public void Back_item_level_cannot_be_negative()
         {
             var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output)).Build();
             AssertEx.ForEach(_fixture.Db.GetBackItems(),
@@ -302,35 +187,7 @@ namespace GW2SDK.Tests.Features.Items
         [Fact]
         [Trait("Feature",  "Items")]
         [Trait("Category", "Integration")]
-        public void BackItemDefaultSkin_ShouldNotBeNull()
-        {
-            var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output)).Build();
-            AssertEx.ForEach(_fixture.Db.GetBackItems(),
-                json =>
-                {
-                    var actual = (BackItem) JsonConvert.DeserializeObject<Item>(json, settings);
-                    Assert.NotNull(actual.DefaultSkin);
-                });
-        }
-
-        [Fact]
-        [Trait("Feature",  "Items")]
-        [Trait("Category", "Integration")]
-        public void BackItemInfusionSlots_ShouldNotBeNull()
-        {
-            var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output)).Build();
-            AssertEx.ForEach(_fixture.Db.GetBackItems(),
-                json =>
-                {
-                    var actual = (BackItem) JsonConvert.DeserializeObject<Item>(json, settings);
-                    Assert.NotNull(actual.InfusionSlots);
-                });
-        }
-
-        [Fact]
-        [Trait("Feature",  "Items")]
-        [Trait("Category", "Integration")]
-        public void BackItemInfixUpgradeId_ShouldBePositive()
+        public void Back_item_infix_upgrade_id_is_positive()
         {
             var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output)).Build();
             AssertEx.ForEach(_fixture.Db.GetBackItems(),
@@ -347,24 +204,7 @@ namespace GW2SDK.Tests.Features.Items
         [Fact]
         [Trait("Feature",  "Items")]
         [Trait("Category", "Integration")]
-        public void BackItemInfixUpgradeAttributes_ShouldNotBeNull()
-        {
-            var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output)).Build();
-            AssertEx.ForEach(_fixture.Db.GetBackItems(),
-                json =>
-                {
-                    var actual = (BackItem) JsonConvert.DeserializeObject<Item>(json, settings);
-                    if (actual.InfixUpgrade is InfixUpgrade)
-                    {
-                        Assert.NotNull(actual.InfixUpgrade.Attributes);
-                    }
-                });
-        }
-
-        [Fact]
-        [Trait("Feature",  "Items")]
-        [Trait("Category", "Integration")]
-        public void BackItemInfixUpgradeModifiers_ShouldBePositive()
+        public void Back_item_infix_upgrade_modifiers_are_positive()
         {
             var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output)).Build();
             AssertEx.ForEach(_fixture.Db.GetBackItems(),
@@ -381,21 +221,7 @@ namespace GW2SDK.Tests.Features.Items
         [Fact]
         [Trait("Feature",  "Items")]
         [Trait("Category", "Integration")]
-        public void BackItemSecondarySuffixItemId_ShouldNotBeNull()
-        {
-            var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output)).Build();
-            AssertEx.ForEach(_fixture.Db.GetBackItems(),
-                json =>
-                {
-                    var actual = (BackItem) JsonConvert.DeserializeObject<Item>(json, settings);
-                    Assert.NotNull(actual.SecondarySuffixItemId);
-                });
-        }
-
-        [Fact]
-        [Trait("Feature",  "Items")]
-        [Trait("Category", "Integration")]
-        public void BackItemSuffixItemId_WhenSuffixItemIdHasValue_ShouldBePositive()
+        public void Back_item_suffix_item_id_is_null_or_positive()
         {
             var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output)).Build();
             AssertEx.ForEach(_fixture.Db.GetBackItems(),
@@ -412,7 +238,7 @@ namespace GW2SDK.Tests.Features.Items
         [Fact]
         [Trait("Feature",  "Items")]
         [Trait("Category", "Integration")]
-        public void ArmorLevel_ShouldNotBeNegative()
+        public void Armor_level_cannot_be_negative()
         {
             var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output)).Build();
             AssertEx.ForEach(_fixture.Db.GetArmorItems(),
@@ -426,21 +252,7 @@ namespace GW2SDK.Tests.Features.Items
         [Fact]
         [Trait("Feature",  "Items")]
         [Trait("Category", "Integration")]
-        public void ArmorDefaultSkin_ShouldNotBeNull()
-        {
-            var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output)).Build();
-            AssertEx.ForEach(_fixture.Db.GetArmorItems(),
-                json =>
-                {
-                    var actual = (Armor) JsonConvert.DeserializeObject<Item>(json, settings);
-                    Assert.NotNull(actual.DefaultSkin);
-                });
-        }
-
-        [Fact]
-        [Trait("Feature",  "Items")]
-        [Trait("Category", "Integration")]
-        public void ArmorDefense_ShouldNotBeNegative()
+        public void Armor_defense_cannot_be_negative()
         {
             var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output)).Build();
             AssertEx.ForEach(_fixture.Db.GetArmorItems(),
@@ -454,21 +266,7 @@ namespace GW2SDK.Tests.Features.Items
         [Fact]
         [Trait("Feature",  "Items")]
         [Trait("Category", "Integration")]
-        public void ArmorInfusionSlots_ShouldNotBeNull()
-        {
-            var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output)).Build();
-            AssertEx.ForEach(_fixture.Db.GetArmorItems(),
-                json =>
-                {
-                    var actual = (Armor) JsonConvert.DeserializeObject<Item>(json, settings);
-                    Assert.NotNull(actual.InfusionSlots);
-                });
-        }
-
-        [Fact]
-        [Trait("Feature",  "Items")]
-        [Trait("Category", "Integration")]
-        public void ArmorInfixUpgradeId_ShouldBePositive()
+        public void Armor_infix_upgrade_id_is_positive()
         {
             var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output)).Build();
             AssertEx.ForEach(_fixture.Db.GetArmorItems(),
@@ -485,24 +283,7 @@ namespace GW2SDK.Tests.Features.Items
         [Fact]
         [Trait("Feature",  "Items")]
         [Trait("Category", "Integration")]
-        public void ArmorInfixUpgradeAttributes_ShouldNotBeNull()
-        {
-            var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output)).Build();
-            AssertEx.ForEach(_fixture.Db.GetArmorItems(),
-                json =>
-                {
-                    var actual = (Armor) JsonConvert.DeserializeObject<Item>(json, settings);
-                    if (actual.InfixUpgrade is InfixUpgrade)
-                    {
-                        Assert.NotNull(actual.InfixUpgrade.Attributes);
-                    }
-                });
-        }
-
-        [Fact]
-        [Trait("Feature",  "Items")]
-        [Trait("Category", "Integration")]
-        public void ArmorInfixUpgradeModifiers_ShouldBePositive()
+        public void Armor_infix_upgrade_modifiers_are_positive()
         {
             var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output)).Build();
             AssertEx.ForEach(_fixture.Db.GetArmorItems(),
@@ -519,21 +300,7 @@ namespace GW2SDK.Tests.Features.Items
         [Fact]
         [Trait("Feature",  "Items")]
         [Trait("Category", "Integration")]
-        public void ArmorSecondarySuffixItemId_ShouldNotBeNull()
-        {
-            var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output)).Build();
-            AssertEx.ForEach(_fixture.Db.GetArmorItems(),
-                json =>
-                {
-                    var actual = (Armor) JsonConvert.DeserializeObject<Item>(json, settings);
-                    Assert.NotNull(actual.SecondarySuffixItemId);
-                });
-        }
-
-        [Fact]
-        [Trait("Feature",  "Items")]
-        [Trait("Category", "Integration")]
-        public void ArmorSuffixItemId_WhenSuffixItemIdHasValue_ShouldBePositive()
+        public void Armor_suffix_item_id_is_null_or_positive()
         {
             var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output)).Build();
             AssertEx.ForEach(_fixture.Db.GetArmorItems(),
@@ -550,7 +317,7 @@ namespace GW2SDK.Tests.Features.Items
         [Fact]
         [Trait("Feature",  "Items")]
         [Trait("Category", "Integration")]
-        public void ArmorStatChoices_WhenNotNull_ShouldNotBeEmpty()
+        public void Armor_stat_choices_are_null_or_not_empty()
         {
             var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output)).Build();
             AssertEx.ForEach(_fixture.Db.GetArmorItems(),
@@ -567,7 +334,7 @@ namespace GW2SDK.Tests.Features.Items
         [Fact]
         [Trait("Feature",  "Items")]
         [Trait("Category", "Integration")]
-        public void TrophyLevel_ShouldNotBeNegative()
+        public void Trophy_level_cannot_be_negative()
         {
             var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output)).Build();
             AssertEx.ForEach(_fixture.Db.GetTrophyItems(),
@@ -581,7 +348,7 @@ namespace GW2SDK.Tests.Features.Items
         [Fact]
         [Trait("Feature",  "Items")]
         [Trait("Category", "Integration")]
-        public void TransmutationSkins_ShouldNotBeEmpty()
+        public void Transmutation_skins_cannot_be_empty()
         {
             var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output)).Build();
             AssertEx.ForEach(_fixture.Db.GetConsumableTransmutationItems(),
@@ -589,20 +356,6 @@ namespace GW2SDK.Tests.Features.Items
                 {
                     var actual = (Transmutation) JsonConvert.DeserializeObject<Item>(json, settings);
                     Assert.NotEmpty(actual.Skins);
-                });
-        }
-
-        [Fact]
-        [Trait("Feature",  "Items")]
-        [Trait("Category", "Integration")]
-        public void UpgradeComponentFlags_ShouldNotBeNull()
-        {
-            var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output)).Build();
-            AssertEx.ForEach(_fixture.Db.GetUpgradeComponentItems(),
-                json =>
-                {
-                    var actual = (UpgradeComponent) JsonConvert.DeserializeObject<Item>(json, settings);
-                    Assert.NotNull(actual.UpgradeComponentFlags);
                 });
         }
     }
