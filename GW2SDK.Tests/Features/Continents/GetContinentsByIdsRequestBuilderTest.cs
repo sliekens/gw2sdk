@@ -11,31 +11,7 @@ namespace GW2SDK.Tests.Features.Continents
         [Fact]
         [Trait("Feature",  "Continents")]
         [Trait("Category", "Unit")]
-        public void Constructor_WithIdsNull_ShouldThrowArgumentNullException()
-        {
-            Assert.Throws<ArgumentNullException>("continentIds",
-                () =>
-                {
-                    _ = new GetContinentsByIdsRequest.Builder(null);
-                });
-        }
-
-        [Fact]
-        [Trait("Feature",  "Continents")]
-        [Trait("Category", "Unit")]
-        public void Constructor_WithIdsEmpty_ShouldThrowArgumentException()
-        {
-            Assert.Throws<ArgumentException>("continentIds",
-                () =>
-                {
-                    _ = new GetContinentsByIdsRequest.Builder(new int[0]);
-                });
-        }
-
-        [Fact]
-        [Trait("Feature",  "Continents")]
-        [Trait("Category", "Unit")]
-        public void GetRequest_MethodShouldBeGet()
+        public void Method_is_GET()
         {
             var ids = new List<int> { 1, 2, 3 };
 
@@ -49,7 +25,7 @@ namespace GW2SDK.Tests.Features.Continents
         [Fact]
         [Trait("Feature",  "Continents")]
         [Trait("Category", "Unit")]
-        public void GetRequest_ShouldSerializeIdsAsQueryString()
+        public void RequestUri_contains_specified_ids()
         {
             var ids = new List<int> { 1, 2, 3 };
 
@@ -60,6 +36,30 @@ namespace GW2SDK.Tests.Features.Continents
             var expected = new Uri("/v2/continents?ids=1,2,3", UriKind.Relative);
 
             Assert.Equal(expected, actual.RequestUri);
+        }
+
+        [Fact]
+        [Trait("Feature",  "Continents")]
+        [Trait("Category", "Unit")]
+        public void Continent_ids_cannot_be_null()
+        {
+            Assert.Throws<ArgumentNullException>("continentIds",
+                () =>
+                {
+                    _ = new GetContinentsByIdsRequest.Builder(null);
+                });
+        }
+
+        [Fact]
+        [Trait("Feature",  "Continents")]
+        [Trait("Category", "Unit")]
+        public void Continent_ids_cannot_be_empty()
+        {
+            Assert.Throws<ArgumentException>("continentIds",
+                () =>
+                {
+                    _ = new GetContinentsByIdsRequest.Builder(new int[0]);
+                });
         }
     }
 }

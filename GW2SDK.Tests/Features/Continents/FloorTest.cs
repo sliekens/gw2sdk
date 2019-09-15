@@ -42,7 +42,7 @@ namespace GW2SDK.Tests.Features.Continents
         [Fact]
         [Trait("Feature",  "Continents")]
         [Trait("Category", "Integration")]
-        public void TextureDimensions_contains_width_and_height()
+        public void Texture_dimensions_contains_width_and_height()
         {
             var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output)).Build();
 
@@ -58,7 +58,7 @@ namespace GW2SDK.Tests.Features.Continents
         [Fact]
         [Trait("Feature",  "Continents")]
         [Trait("Category", "Integration")]
-        public void LabelCoordinates_of_a_region_contains_a_point()
+        public void Label_coordinates_of_a_region_contains_a_point()
         {
             var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output)).Build();
             AssertEx.ForEach(_fixture.Db.Floors,
@@ -76,7 +76,7 @@ namespace GW2SDK.Tests.Features.Continents
         [Fact]
         [Trait("Feature",  "Continents")]
         [Trait("Category", "Integration")]
-        public void ContinentRectangle_of_a_region_contains_2_points()
+        public void Continent_rectangle_of_a_region_contains_2_points()
         {
             var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output)).Build();
 
