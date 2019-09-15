@@ -25,7 +25,7 @@ namespace GW2SDK.Tests.Features.Achievements.Groups
         [Trait("Feature",    "Achievements.Groups")]
         [Trait("Category",   "Integration")]
         [Trait("Importance", "Critical")]
-        public void Class_ShouldHaveNoMissingMembers()
+        public void Achievement_groups_can_be_serialized_from_json()
         {
             var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output))
                                                               .UseMissingMemberHandling(MissingMemberHandling.Error)
@@ -42,49 +42,7 @@ namespace GW2SDK.Tests.Features.Achievements.Groups
         [Fact]
         [Trait("Feature", "Achievements.Groups")]
         [Trait("Category", "Integration")]
-        public void Id_ShouldNotBeNull()
-        {
-            var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output)).Build();
-            AssertEx.ForEach(_fixture.Db.AchievementGroups,
-                json =>
-                {
-                    var actual = JsonConvert.DeserializeObject<AchievementGroup>(json, settings);
-                    Assert.NotNull(actual.Id);
-                });
-        }
-
-        [Fact]
-        [Trait("Feature", "Achievements.Groups")]
-        [Trait("Category", "Integration")]
-        public void Name_ShouldNotBeNull()
-        {
-            var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output)).Build();
-            AssertEx.ForEach(_fixture.Db.AchievementGroups,
-                json =>
-                {
-                    var actual = JsonConvert.DeserializeObject<AchievementGroup>(json, settings);
-                    Assert.NotNull(actual.Name);
-                });
-        }
-
-        [Fact]
-        [Trait("Feature", "Achievements.Groups")]
-        [Trait("Category", "Integration")]
-        public void Description_ShouldNotBeNull()
-        {
-            var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output)).Build();
-            AssertEx.ForEach(_fixture.Db.AchievementGroups,
-                json =>
-                {
-                    var actual = JsonConvert.DeserializeObject<AchievementGroup>(json, settings);
-                    Assert.NotNull(actual.Description);
-                });
-        }
-
-        [Fact]
-        [Trait("Feature", "Achievements.Groups")]
-        [Trait("Category", "Integration")]
-        public void Order_ShouldNotBeNegative()
+        public void Order_is_not_negative()
         {
             var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output)).Build();
             AssertEx.ForEach(_fixture.Db.AchievementGroups,
@@ -92,20 +50,6 @@ namespace GW2SDK.Tests.Features.Achievements.Groups
                 {
                     var actual = JsonConvert.DeserializeObject<AchievementGroup>(json, settings);
                     Assert.InRange(actual.Order, 0, int.MaxValue);
-                });
-        }
-
-        [Fact]
-        [Trait("Feature", "Achievements.Groups")]
-        [Trait("Category", "Integration")]
-        public void Categories_ShouldNotBeNull()
-        {
-            var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output)).Build();
-            AssertEx.ForEach(_fixture.Db.AchievementGroups,
-                json =>
-                {
-                    var actual = JsonConvert.DeserializeObject<AchievementGroup>(json, settings);
-                    Assert.NotNull(actual.Categories);
                 });
         }
     }
