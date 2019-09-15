@@ -1,4 +1,5 @@
 ﻿using GW2SDK.Annotations;
+using Newtonsoft.Json;
 
 namespace GW2SDK.Achievements
 {
@@ -6,6 +7,7 @@ namespace GW2SDK.Achievements
     public sealed class AchievementTextBit : AchievementBit
     {
         [NotNull]
+        [JsonProperty(Required = Required.Always)]
         public string Text { get; set; }
     }
 }
