@@ -1,4 +1,5 @@
 ﻿using GW2SDK.Annotations;
+using Newtonsoft.Json;
 
 namespace GW2SDK.Accounts.Achievements
 {
@@ -6,19 +7,26 @@ namespace GW2SDK.Accounts.Achievements
     [DataTransferObject]
     public sealed class AccountAchievement
     {
+        [JsonProperty(Required = Required.Always)]
         public int Id { get; set; }
 
         [CanBeNull]
+        [JsonProperty(Required = Required.DisallowNull)]
         public int[] Bits { get; set; }
 
+        [JsonProperty(Required = Required.Always)]
         public int Current { get; set; }
 
+        [JsonProperty(Required = Required.Always)]
         public int Max { get; set; }
 
+        [JsonProperty(Required = Required.Always)]
         public bool Done { get; set; }
 
+        [JsonProperty(Required = Required.DisallowNull)]
         public int? Repeated { get; set; }
 
+        [JsonProperty(Required = Required.DisallowNull)]
         public bool? Unlocked { get; set; }
     }
 }
