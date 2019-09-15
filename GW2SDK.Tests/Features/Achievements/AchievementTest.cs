@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using GW2SDK.Achievements;
+using GW2SDK.Enums;
 using GW2SDK.Impl.JsonConverters;
 using GW2SDK.Tests.Features.Achievements.Fixtures;
 using GW2SDK.Tests.TestInfrastructure;
@@ -26,7 +27,7 @@ namespace GW2SDK.Tests.Features.Achievements
         [Trait("Feature",    "Achievements")]
         [Trait("Category",   "Integration")]
         [Trait("Importance", "Critical")]
-        public void Class_ShouldHaveNoMissingMembers()
+        public void Achievements_can_be_serialized_from_json()
         {
             var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output))
                                                               .UseMissingMemberHandling(MissingMemberHandling.Error)
@@ -43,19 +44,7 @@ namespace GW2SDK.Tests.Features.Achievements
         [Fact]
         [Trait("Feature",  "Achievements")]
         [Trait("Category", "Integration")]
-        public void Id_ShouldBePositive()
-        {
-            var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output)).Build();
-
-            var achievements = _fixture.Db.Achievements.Select(json => JsonConvert.DeserializeObject<Achievement>(json, settings)).ToList();
-
-            AssertEx.ForEach(achievements, actual => Assert.InRange(actual.Id, 1, int.MaxValue));
-        }
-
-        [Fact]
-        [Trait("Feature",  "Achievements")]
-        [Trait("Category", "Integration")]
-        public void Name_ShouldNotBeEmpty()
+        public void Name_is_never_empty()
         {
             var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output)).Build();
 
@@ -67,19 +56,7 @@ namespace GW2SDK.Tests.Features.Achievements
         [Fact]
         [Trait("Feature",  "Achievements")]
         [Trait("Category", "Integration")]
-        public void Description_ShouldNotBeNull()
-        {
-            var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output)).Build();
-
-            var achievements = _fixture.Db.Achievements.Select(json => JsonConvert.DeserializeObject<Achievement>(json, settings)).ToList();
-
-            AssertEx.ForEach(achievements, actual => Assert.NotNull(actual.Description));
-        }
-
-        [Fact]
-        [Trait("Feature",  "Achievements")]
-        [Trait("Category", "Integration")]
-        public void Description_CouldBeEmpty()
+        public void Description_can_be_empty()
         {
             var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output)).Build();
 
@@ -92,57 +69,33 @@ namespace GW2SDK.Tests.Features.Achievements
         [Fact]
         [Trait("Feature",  "Achievements")]
         [Trait("Category", "Integration")]
-        public void Requirement_ShouldNotBeNull()
+        public void Requirement_can_be_empty()
         {
             var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output)).Build();
 
             var achievements = _fixture.Db.Achievements.Select(json => JsonConvert.DeserializeObject<Achievement>(json, settings)).ToList();
 
-            AssertEx.ForEach(achievements, actual => Assert.NotNull(actual.Requirement));
+            Assert.Contains(achievements, actual => actual.Requirement == "");
+            Assert.Contains(achievements, actual => actual.Requirement != "");
         }
 
         [Fact]
         [Trait("Feature",  "Achievements")]
         [Trait("Category", "Integration")]
-        public void Requirement_CouldBeEmpty()
+        public void LockedText_can_be_empty()
         {
             var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output)).Build();
 
             var achievements = _fixture.Db.Achievements.Select(json => JsonConvert.DeserializeObject<Achievement>(json, settings)).ToList();
-
-            Assert.Contains(achievements, actual => actual.Description.Length == 0);
-            Assert.Contains(achievements, actual => actual.Description.Length != 0);
+            
+            Assert.Contains(achievements, actual => actual.LockedText == "");
+            Assert.Contains(achievements, actual => actual.LockedText != "");
         }
 
         [Fact]
         [Trait("Feature",  "Achievements")]
         [Trait("Category", "Integration")]
-        public void LockedText_ShouldNotBeNull()
-        {
-            var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output)).Build();
-
-            var achievements = _fixture.Db.Achievements.Select(json => JsonConvert.DeserializeObject<Achievement>(json, settings)).ToList();
-
-            AssertEx.ForEach(achievements, actual => Assert.NotNull(actual.LockedText));
-        }
-
-        [Fact]
-        [Trait("Feature",  "Achievements")]
-        [Trait("Category", "Integration")]
-        public void LockedText_CouldBeEmpty()
-        {
-            var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output)).Build();
-
-            var achievements = _fixture.Db.Achievements.Select(json => JsonConvert.DeserializeObject<Achievement>(json, settings)).ToList();
-
-            Assert.Contains(achievements, actual => actual.LockedText.Length == 0);
-            Assert.Contains(achievements, actual => actual.LockedText.Length != 0);
-        }
-
-        [Fact]
-        [Trait("Feature",  "Achievements")]
-        [Trait("Category", "Integration")]
-        public void Flags_ShouldNotBeEmpty()
+        public void Flags_is_never_empty()
         {
             var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output)).Build();
 
@@ -154,7 +107,7 @@ namespace GW2SDK.Tests.Features.Achievements
         [Fact]
         [Trait("Feature",  "Achievements")]
         [Trait("Category", "Integration")]
-        public void Tiers_ShouldNotBeEmpty()
+        public void Tiers_is_never_empty()
         {
             var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output)).Build();
 
@@ -166,7 +119,7 @@ namespace GW2SDK.Tests.Features.Achievements
         [Fact]
         [Trait("Feature",  "Achievements")]
         [Trait("Category", "Integration")]
-        public void Tiers_ShouldNotContainNull()
+        public void Tiers_never_contains_null()
         {
             var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output)).Build();
 
@@ -178,39 +131,21 @@ namespace GW2SDK.Tests.Features.Achievements
         [Fact]
         [Trait("Feature",  "Achievements")]
         [Trait("Category", "Integration")]
-        public void Rewards_CouldBeNull()
+        public void Subset_of_achievements_has_no_rewards()
         {
             var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output)).Build();
 
-            var achievements = _fixture.Db.Achievements.Select(json => JsonConvert.DeserializeObject<Achievement>(json, settings)).ToList();
+            var achievements = _fixture.Db.Achievements.Select(json => JsonConvert.DeserializeObject<Achievement>(json, settings)).ToHashSet();
 
-            Assert.Contains(achievements, actual => actual.Rewards is null);
-            Assert.Contains(achievements, actual => actual.Rewards is object);
+            var withoutRewards = achievements.Where(achievement => achievement.Rewards is null).ToHashSet();
+
+            Assert.ProperSubset(achievements, withoutRewards);
         }
 
         [Fact]
         [Trait("Feature",  "Achievements")]
         [Trait("Category", "Integration")]
-        public void Rewards_WhenNotNull_ShouldNotBeEmpty()
-        {
-            var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output)).Build();
-
-            var achievements = _fixture.Db.Achievements.Select(json => JsonConvert.DeserializeObject<Achievement>(json, settings)).ToList();
-
-            AssertEx.ForEach(achievements,
-                actual =>
-                {
-                    if (actual.Rewards is object)
-                    {
-                        Assert.NotEmpty(actual.Rewards);
-                    }
-                });
-        }
-
-        [Fact]
-        [Trait("Feature",  "Achievements")]
-        [Trait("Category", "Integration")]
-        public void Rewards_WhenNotNull_ShouldNotContainNull()
+        public void Rewards_never_contains_null()
         {
             var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output)).Build();
 
@@ -229,134 +164,21 @@ namespace GW2SDK.Tests.Features.Achievements
         [Fact]
         [Trait("Feature",  "Achievements")]
         [Trait("Category", "Integration")]
-        public void Rewards_OfTypeTitleReward_Id_ShouldBePositive()
+        public void Subset_of_achievements_has_bits()
         {
             var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output)).Build();
 
-            var achievements = _fixture.Db.Achievements.Select(json => JsonConvert.DeserializeObject<Achievement>(json, settings)).ToList();
+            var achievements = _fixture.Db.Achievements.Select(json => JsonConvert.DeserializeObject<Achievement>(json, settings)).ToHashSet();
 
-            var titleRewards = achievements.Where(achievement => achievement.Rewards is object)
-                                           .SelectMany(achievement => achievement.Rewards.OfType<TitleReward>());
+            var withBits = achievements.Where(achievement => achievement.Bits is object && achievement.Bits.Length != 0).ToHashSet();
 
-            AssertEx.ForEach(titleRewards,
-                actual =>
-                {
-                    Assert.InRange(actual.Id, 1, int.MaxValue);
-                });
+            Assert.ProperSubset(achievements, withBits);
         }
 
         [Fact]
         [Trait("Feature",  "Achievements")]
         [Trait("Category", "Integration")]
-        public void Rewards_OfTypeMasteryReward_Id_ShouldBePositive()
-        {
-            var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output)).Build();
-
-            var achievements = _fixture.Db.Achievements.Select(json => JsonConvert.DeserializeObject<Achievement>(json, settings)).ToList();
-
-            var masteryRewards = achievements.Where(achievement => achievement.Rewards is object)
-                                             .SelectMany(achievement => achievement.Rewards.OfType<MasteryReward>());
-
-            AssertEx.ForEach(masteryRewards,
-                actual =>
-                {
-                    Assert.InRange(actual.Id, 1, int.MaxValue);
-                });
-        }
-
-        [Fact]
-        [Trait("Feature",  "Achievements")]
-        [Trait("Category", "Integration")]
-        public void Rewards_OfTypeItemReward_Id_ShouldBePositive()
-        {
-            var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output)).Build();
-
-            var achievements = _fixture.Db.Achievements.Select(json => JsonConvert.DeserializeObject<Achievement>(json, settings)).ToList();
-
-            var itemRewards = achievements.Where(achievement => achievement.Rewards is object)
-                                          .SelectMany(achievement => achievement.Rewards.OfType<ItemReward>());
-
-            AssertEx.ForEach(itemRewards,
-                actual =>
-                {
-                    Assert.InRange(actual.Id, 1, int.MaxValue);
-                });
-        }
-
-        [Fact]
-        [Trait("Feature",  "Achievements")]
-        [Trait("Category", "Integration")]
-        public void Rewards_OfTypeItemReward_Count_ShouldBePositive()
-        {
-            var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output)).Build();
-
-            var achievements = _fixture.Db.Achievements.Select(json => JsonConvert.DeserializeObject<Achievement>(json, settings)).ToList();
-
-            var itemRewards = achievements.Where(achievement => achievement.Rewards is object)
-                                          .SelectMany(achievement => achievement.Rewards.OfType<ItemReward>());
-
-            AssertEx.ForEach(itemRewards,
-                actual =>
-                {
-                    Assert.InRange(actual.Count, 1, int.MaxValue);
-                });
-        }
-
-        [Fact]
-        [Trait("Feature",  "Achievements")]
-        [Trait("Category", "Integration")]
-        public void Rewards_OfTypeCoinsReward_Count_ShouldBePositive()
-        {
-            var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output)).Build();
-
-            var achievements = _fixture.Db.Achievements.Select(json => JsonConvert.DeserializeObject<Achievement>(json, settings)).ToList();
-
-            var itemRewards = achievements.Where(achievement => achievement.Rewards is object)
-                                          .SelectMany(achievement => achievement.Rewards.OfType<CoinsReward>());
-
-            AssertEx.ForEach(itemRewards,
-                actual =>
-                {
-                    Assert.InRange(actual.Count, 1, int.MaxValue);
-                });
-        }
-
-        [Fact]
-        [Trait("Feature",  "Achievements")]
-        [Trait("Category", "Integration")]
-        public void Bits_CouldBeNull()
-        {
-            var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output)).Build();
-
-            var achievements = _fixture.Db.Achievements.Select(json => JsonConvert.DeserializeObject<Achievement>(json, settings)).ToList();
-
-            Assert.Contains(achievements, actual => actual.Bits is null);
-            Assert.Contains(achievements, actual => actual.Bits is object);
-        }
-
-        [Fact]
-        [Trait("Feature",  "Achievements")]
-        [Trait("Category", "Integration")]
-        public void Bits_WhenNotNull_ShouldNotBeEmpty()
-        {
-            var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output)).Build();
-
-            var achievements = _fixture.Db.Achievements.Select(json => JsonConvert.DeserializeObject<Achievement>(json, settings)).ToList();
-
-            AssertEx.ForEach(achievements,
-                actual =>
-                {
-                    if (actual.Bits is object)
-                    {
-                        Assert.NotEmpty(actual.Bits);
-                    }
-                });
-        }
-
-        [Fact]
-        [Trait("Feature",  "Achievements")]
-        [Trait("Category", "Integration")]
-        public void Bits_WhenNotNull_ShouldNotContainNull()
+        public void Bits_never_contains_null()
         {
             var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output)).Build();
 
@@ -375,157 +197,60 @@ namespace GW2SDK.Tests.Features.Achievements
         [Fact]
         [Trait("Feature",  "Achievements")]
         [Trait("Category", "Integration")]
-        public void Bits_OfTypeAchievementTextBit_Text_ShouldNotBeNull()
+        public void Subset_of_achievements_has_prerequisites()
         {
             var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output)).Build();
 
-            var achievements = _fixture.Db.Achievements.Select(json => JsonConvert.DeserializeObject<Achievement>(json, settings)).ToList();
+            var achievements = _fixture.Db.Achievements.Select(json => JsonConvert.DeserializeObject<Achievement>(json, settings)).ToHashSet();
+            
+            var withPrerequisites = achievements.Where(achievement => achievement.Prerequisites is object && achievement.Prerequisites.Length != 0).ToHashSet();
 
-            var textBits = achievements.Where(achievement => achievement.Bits is object)
-                                       .SelectMany(achievement => achievement.Bits.OfType<AchievementTextBit>());
-
-            AssertEx.ForEach(textBits, actual => Assert.NotNull(actual.Text));
+            Assert.ProperSubset(achievements, withPrerequisites);
         }
 
         [Fact]
         [Trait("Feature",  "Achievements")]
         [Trait("Category", "Integration")]
-        public void Bits_OfTypeAchievementMinipetBit_Id_ShouldBePositive()
+        public void Subset_of_achievements_has_a_point_cap()
         {
             var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output)).Build();
 
-            var achievements = _fixture.Db.Achievements.Select(json => JsonConvert.DeserializeObject<Achievement>(json, settings)).ToList();
+            var achievements = _fixture.Db.Achievements.Select(json => JsonConvert.DeserializeObject<Achievement>(json, settings)).ToHashSet();
+            
+            var withPointCap = achievements.Where(achievement => achievement.PointCap.HasValue).ToHashSet();
 
-            var textBits = achievements.Where(achievement => achievement.Bits is object)
-                                       .SelectMany(achievement => achievement.Bits.OfType<AchievementMinipetBit>());
-
-            AssertEx.ForEach(textBits, actual => Assert.InRange(actual.Id, 1, int.MaxValue));
+            Assert.ProperSubset(achievements, withPointCap);
         }
 
         [Fact]
         [Trait("Feature",  "Achievements")]
         [Trait("Category", "Integration")]
-        public void Bits_OfTypeAchievementItemBit_Id_ShouldBePositive()
+        public void PointCap_is_negative_1_for_repeatable_achievements_without_points()
         {
             var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output)).Build();
 
             var achievements = _fixture.Db.Achievements.Select(json => JsonConvert.DeserializeObject<Achievement>(json, settings)).ToList();
 
-            var textBits = achievements.Where(achievement => achievement.Bits is object)
-                                       .SelectMany(achievement => achievement.Bits.OfType<AchievementItemBit>());
-
-            AssertEx.ForEach(textBits, actual => Assert.InRange(actual.Id, 1, int.MaxValue));
-        }
-
-        [Fact]
-        [Trait("Feature",  "Achievements")]
-        [Trait("Category", "Integration")]
-        public void Bits_OfTypeAchievementSkinBit_Id_ShouldBePositive()
-        {
-            var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output)).Build();
-
-            var achievements = _fixture.Db.Achievements.Select(json => JsonConvert.DeserializeObject<Achievement>(json, settings)).ToList();
-
-            var textBits = achievements.Where(achievement => achievement.Bits is object)
-                                       .SelectMany(achievement => achievement.Bits.OfType<AchievementSkinBit>());
-
-            AssertEx.ForEach(textBits, actual => Assert.InRange(actual.Id, 1, int.MaxValue));
-        }
-
-        [Fact]
-        [Trait("Feature",  "Achievements")]
-        [Trait("Category", "Integration")]
-        public void Prerequisites_CouldBeNull()
-        {
-            var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output)).Build();
-
-            var achievements = _fixture.Db.Achievements.Select(json => JsonConvert.DeserializeObject<Achievement>(json, settings)).ToList();
-
-            Assert.Contains(achievements, actual => actual.Prerequisites is null);
-            Assert.Contains(achievements, actual => actual.Prerequisites is object);
-        }
-
-        [Fact]
-        [Trait("Feature",  "Achievements")]
-        [Trait("Category", "Integration")]
-        public void Prerequisites_WhenNotNull_ShouldNotBeEmpty()
-        {
-            var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output)).Build();
-
-            var achievements = _fixture.Db.Achievements.Select(json => JsonConvert.DeserializeObject<Achievement>(json, settings)).ToList();
-
-            AssertEx.ForEach(achievements,
+            var pointlessRepetition = achievements.Where(a => a.Flags.Contains(AchievementFlag.Repeatable) && a.Tiers.All(tier => tier.Points == 0)).ToHashSet();
+            AssertEx.ForEach(pointlessRepetition,
                 actual =>
                 {
-                    if (actual.Prerequisites is object)
-                    {
-                        Assert.NotEmpty(actual.Prerequisites);
-                    }
+                    Assert.Equal(-1, actual.PointCap);
                 });
         }
 
         [Fact]
         [Trait("Feature",  "Achievements")]
         [Trait("Category", "Integration")]
-        public void PointCap_CouldBeNull()
+        public void Subset_of_achievements_has_no_icon()
         {
             var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output)).Build();
+            
+            var achievements = _fixture.Db.Achievements.Select(json => JsonConvert.DeserializeObject<Achievement>(json, settings)).ToHashSet();
 
-            var achievements = _fixture.Db.Achievements.Select(json => JsonConvert.DeserializeObject<Achievement>(json, settings)).ToList();
+            var withoutIcon = achievements.Where(achievement => achievement.Icon is null).ToHashSet();
 
-            Assert.Contains(achievements, actual => !actual.PointCap.HasValue);
-            Assert.Contains(achievements, actual => actual.PointCap.HasValue);
-        }
-
-        [Fact]
-        [Trait("Feature",  "Achievements")]
-        [Trait("Category", "Integration")]
-        public void PointCap_WhenNotNull_ShouldBePositiveOrMinusOne()
-        {
-            var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output)).Build();
-
-            var achievements = _fixture.Db.Achievements.Select(json => JsonConvert.DeserializeObject<Achievement>(json, settings)).ToList();
-
-            AssertEx.ForEach(achievements,
-                actual =>
-                {
-                    if (actual.PointCap.HasValue && actual.PointCap.Value != -1)
-                    {
-                        Assert.InRange(actual.PointCap.Value, 1, int.MaxValue);
-                    }
-                });
-        }
-
-        [Fact]
-        [Trait("Feature",  "Achievements")]
-        [Trait("Category", "Integration")]
-        public void Icon_CouldBeNull()
-        {
-            var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output)).Build();
-
-            var achievements = _fixture.Db.Achievements.Select(json => JsonConvert.DeserializeObject<Achievement>(json, settings)).ToList();
-
-            Assert.Contains(achievements, actual => actual.Icon is null);
-            Assert.Contains(achievements, actual => actual.Icon is object);
-        }
-
-        [Fact]
-        [Trait("Feature",  "Achievements")]
-        [Trait("Category", "Integration")]
-        public void Icon_WhenNotNull_ShouldNotBeEmpty()
-        {
-            var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output)).Build();
-
-            var achievements = _fixture.Db.Achievements.Select(json => JsonConvert.DeserializeObject<Achievement>(json, settings)).ToList();
-
-            AssertEx.ForEach(achievements,
-                actual =>
-                {
-                    if (actual.Icon is object)
-                    {
-                        Assert.NotEmpty(actual.Icon);
-                    }
-                });
+            Assert.ProperSubset(achievements, withoutIcon);
         }
     }
 }

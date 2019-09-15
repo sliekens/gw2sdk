@@ -11,31 +11,7 @@ namespace GW2SDK.Tests.Features.Achievements
         [Fact]
         [Trait("Feature",  "Achievements")]
         [Trait("Category", "Unit")]
-        public void Constructor_WithIdsNull_ShouldThrowArgumentNullException()
-        {
-            Assert.Throws<ArgumentNullException>("achievementIds",
-                () =>
-                {
-                    _ = new GetAchievementsByIdsRequest.Builder(null);
-                });
-        }
-
-        [Fact]
-        [Trait("Feature",  "Achievements")]
-        [Trait("Category", "Unit")]
-        public void Constructor_WithIdsEmpty_ShouldThrowArgumentException()
-        {
-            Assert.Throws<ArgumentException>("achievementIds",
-                () =>
-                {
-                    _ = new GetAchievementsByIdsRequest.Builder(new int[0]);
-                });
-        }
-
-        [Fact]
-        [Trait("Feature",  "Achievements")]
-        [Trait("Category", "Unit")]
-        public void GetRequest_MethodShouldBeGet()
+        public void Method_is_GET()
         {
             var ids = new List<int> { 1, 2, 3 };
 
@@ -49,7 +25,31 @@ namespace GW2SDK.Tests.Features.Achievements
         [Fact]
         [Trait("Feature",  "Achievements")]
         [Trait("Category", "Unit")]
-        public void GetRequest_ShouldSerializeIdsAsQueryString()
+        public void Achievement_ids_cannot_be_null()
+        {
+            Assert.Throws<ArgumentNullException>("achievementIds",
+                () =>
+                {
+                    _ = new GetAchievementsByIdsRequest.Builder(null);
+                });
+        }
+
+        [Fact]
+        [Trait("Feature",  "Achievements")]
+        [Trait("Category", "Unit")]
+        public void Achievement_ids_cannot_be_empty()
+        {
+            Assert.Throws<ArgumentException>("achievementIds",
+                () =>
+                {
+                    _ = new GetAchievementsByIdsRequest.Builder(new int[0]);
+                });
+        }
+
+        [Fact]
+        [Trait("Feature",  "Achievements")]
+        [Trait("Category", "Unit")]
+        public void RequestUri_contains_specified_ids()
         {
             var ids = new List<int> { 1, 2, 3 };
 
