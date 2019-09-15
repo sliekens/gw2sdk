@@ -27,7 +27,7 @@ namespace GW2SDK.Tests.Features.Tokens
         [Trait("Feature",    "Tokens")]
         [Trait("Category",   "Integration")]
         [Trait("Importance", "Critical")]
-        public void Class_ShouldHaveNoMissingMembers()
+        public void SubtokenInfo_can_be_serialized_from_json()
         {
             var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output))
                                                               .UseMissingMemberHandling(MissingMemberHandling.Error)
@@ -40,7 +40,7 @@ namespace GW2SDK.Tests.Features.Tokens
         [Fact]
         [Trait("Feature",  "Tokens")]
         [Trait("Category", "Integration")]
-        public void Id_ShouldNotBeEmpty()
+        public void Id_is_not_empty()
         {
             var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output)).Build();
 
@@ -52,12 +52,13 @@ namespace GW2SDK.Tests.Features.Tokens
         [Fact]
         [Trait("Feature",  "Tokens")]
         [Trait("Category", "Integration")]
-        public void Name_ShouldBeGW2SDKFull()
+        public void Name_is_GW2SDK_Full()
         {
             var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output)).Build();
 
             var actual = JsonConvert.DeserializeObject<SubtokenInfo>(_fixture.SubtokenInfoJson, settings);
 
+            // Your API key must be named GW2SDK-Full to pass this test
             // This is not intended to improve account security, only to prevent key abuse
             // The reason is that some services like GW2BLTC.com associate keys with logins but require you to use a key name of their choice
             // If this key leaks to the outside world, it still can't be (ab)used to login with GW2BLTC.com or similar sites
@@ -67,7 +68,7 @@ namespace GW2SDK.Tests.Features.Tokens
         [Fact]
         [Trait("Feature",  "Tokens")]
         [Trait("Category", "Integration")]
-        public void Permissions_ShouldHaveExpectedPermissions()
+        public void Token_has_full_permissions()
         {
             var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output)).Build();
 
@@ -81,7 +82,7 @@ namespace GW2SDK.Tests.Features.Tokens
         [Fact]
         [Trait("Feature",  "Tokens")]
         [Trait("Category", "Integration")]
-        public void IssuedAt_ShouldHaveExpectedIssueTime()
+        public void Issue_date_matches_time_of_creation()
         {
             var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output)).Build();
 
@@ -96,7 +97,7 @@ namespace GW2SDK.Tests.Features.Tokens
         [Fact]
         [Trait("Feature",  "Tokens")]
         [Trait("Category", "Integration")]
-        public void ExpiresAt_ShouldHaveExpectedExpirationTime()
+        public void Expiry_date_is_requested_expiry_date()
         {
             var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output)).Build();
 
@@ -108,7 +109,7 @@ namespace GW2SDK.Tests.Features.Tokens
         [Fact]
         [Trait("Feature",  "Tokens")]
         [Trait("Category", "Integration")]
-        public void Urls_ShouldBeExpectedUrls()
+        public void Urls_contains_requested_urls()
         {
             var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output)).Build();
 

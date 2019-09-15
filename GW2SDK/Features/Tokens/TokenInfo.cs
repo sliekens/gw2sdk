@@ -14,10 +14,16 @@ namespace GW2SDK.Tokens
     [JsonConverter(typeof(DiscriminatedJsonConverter), typeof(TokenDiscriminatorOptions))]
     public class TokenInfo
     {
+        [NotNull]
+        [JsonProperty(Required = Required.Always)]
         public string Id { get; set; }
 
+        [NotNull]
+        [JsonProperty(Required = Required.Always)]
         public string Name { get; set; }
 
+        [NotNull]
+        [JsonProperty(Required = Required.Always)]
         public Permission[] Permissions { get; set; }
     }
 }

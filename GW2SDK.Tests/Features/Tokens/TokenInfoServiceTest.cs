@@ -19,7 +19,7 @@ namespace GW2SDK.Tests.Features.Tokens
         [Fact]
         [Trait("Feature",  "Tokens")]
         [Trait("Category", "Integration")]
-        public async Task GetTokenInfo_WithApiKey_ShouldReturnApiKeyInfo()
+        public async Task Get_token_info_for_api_key()
         {
             var services = new Container();
             var sut = services.Resolve<TokenInfoService>();
@@ -32,7 +32,7 @@ namespace GW2SDK.Tests.Features.Tokens
         [Fact]
         [Trait("Feature",  "Tokens")]
         [Trait("Category", "Integration")]
-        public async Task GetTokenInfo_WithApiKeyInDefaultRequestHeaders_ShouldReturnApiKeyInfo()
+        public async Task Get_token_info_for_default_authorization()
         {
             var services = new Container(ConfigurationManager.Instance.ApiKeyFull);
             var sut = services.Resolve<TokenInfoService>();
@@ -45,7 +45,7 @@ namespace GW2SDK.Tests.Features.Tokens
         [Fact]
         [Trait("Feature",  "Tokens")]
         [Trait("Category", "Integration")]
-        public async Task GetTokenInfo_WithAccessTokenNull_ShouldThrowUnauthorizedOperationException()
+        public async Task Access_token_cannot_be_null()
         {
             var services = new Container();
             var sut = services.Resolve<TokenInfoService>();
@@ -60,7 +60,7 @@ namespace GW2SDK.Tests.Features.Tokens
         [Fact]
         [Trait("Feature",  "Tokens")]
         [Trait("Category", "Integration")]
-        public async Task GetTokenInfo_WithSubtoken_ShouldReturnSubtokenInfo()
+        public async Task Get_token_info_for_subtoken()
         {
             var services = new Container();
             var sut = services.Resolve<TokenInfoService>();
