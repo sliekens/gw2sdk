@@ -15,7 +15,7 @@ namespace GW2SDK.Tests.Features.Subtokens
         [Fact]
         [Trait("Feature",  "Subtokens")]
         [Trait("Category", "Integration")]
-        public async Task CreateSubtoken_WithAccessToken_ShouldReturnCreatedSubtoken()
+        public async Task Create_a_subtoken_from_api_key()
         {
             var services = new Container();
             var sut = services.Resolve<SubtokenService>();
@@ -28,7 +28,7 @@ namespace GW2SDK.Tests.Features.Subtokens
         [Fact]
         [Trait("Feature",  "Subtokens")]
         [Trait("Category", "Integration")]
-        public async Task CreateSubtoken_WithAccessTokenInDefaultRequestHeaders_ShouldReturnCreatedSubtoken()
+        public async Task Create_a_subtoken_from_default_authorization()
         {
             var services = new Container(ConfigurationManager.Instance.ApiKeyFull);
             var sut = services.Resolve<SubtokenService>();
@@ -41,7 +41,7 @@ namespace GW2SDK.Tests.Features.Subtokens
         [Fact]
         [Trait("Feature",  "Subtokens")]
         [Trait("Category", "Integration")]
-        public async Task CreateSubtoken_WithAccessTokenNull_ShouldThrowUnauthorizedOperationException()
+        public async Task Access_token_cannot_be_null()
         {
             var services = new Container();
             var sut = services.Resolve<SubtokenService>();
@@ -56,7 +56,7 @@ namespace GW2SDK.Tests.Features.Subtokens
         [Fact]
         [Trait("Feature",  "Subtokens")]
         [Trait("Category", "Integration")]
-        public async Task CreateSubtoken_WithExpirationDate_ShouldReturnCreatedSubtokenWithSpecifiedExpirationDate()
+        public async Task Create_a_subtoken_with_custom_expiration_date()
         {
             var services = new Container();
             var sut = services.Resolve<SubtokenService>();
@@ -82,7 +82,7 @@ namespace GW2SDK.Tests.Features.Subtokens
         [Fact]
         [Trait("Feature",  "Subtokens")]
         [Trait("Category", "Integration")]
-        public async Task CreateSubtoken_WithUrls_ShouldReturnCreatedSubtokenWithSpecifiedUrls()
+        public async Task Create_a_subtoken_with_url_filters()
         {
             var services = new Container();
             var sut = services.Resolve<SubtokenService>();
