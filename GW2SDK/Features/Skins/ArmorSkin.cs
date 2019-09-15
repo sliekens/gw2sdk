@@ -11,8 +11,11 @@ namespace GW2SDK.Skins
     [JsonConverter(typeof(DiscriminatedJsonConverter), typeof(ArmorSkinDiscriminatorOptions))]
     public class ArmorSkin : Skin
     {
+        [JsonProperty(Required = Required.Always)]
         public WeightClass WeightClass { get; set; }
 
+        [CanBeNull]
+        [JsonProperty(Required = Required.DisallowNull)]
         public DyeSlotInfo DyeSlots { get; set; }
     }
 }

@@ -18,7 +18,7 @@ namespace GW2SDK.Tests.Features.Skins
         [Fact]
         [Trait("Feature",  "Skins")]
         [Trait("Category", "Integration")]
-        public void GetDiscriminatedTypes_ShouldReturnEveryTypeName()
+        public void It_supports_every_known_type_name()
         {
             var sut = new ArmorSkinDiscriminatorOptions();
 
@@ -32,7 +32,7 @@ namespace GW2SDK.Tests.Features.Skins
         [Fact]
         [Trait("Feature",  "Skins")]
         [Trait("Category", "Integration")]
-        public void Create_ShouldReturnExpectedObject()
+        public void It_can_create_objects_of_each_supported_type()
         {
             var sut = new ArmorSkinDiscriminatorOptions();
 
@@ -44,7 +44,7 @@ namespace GW2SDK.Tests.Features.Skins
         [Fact]
         [Trait("Feature",  "Skins")]
         [Trait("Category", "Integration")]
-        public void Create_ShouldReturnObjectAssignableFromBaseType()
+        public void It_only_creates_objects_that_extend_the_correct_base_type()
         {
             var sut = new ArmorSkinDiscriminatorOptions();
 

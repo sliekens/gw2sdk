@@ -17,24 +17,24 @@ namespace GW2SDK.Tests.Features.Skins
         private readonly SkinFixture _fixture;
 
         [Fact]
-        [Trait("Feature",  "Skins")]
-        [Trait("Category", "Unit")]
-        public void DefaultMember_ShouldBeUndefined()
-        {
-            Assert.False(Enum.IsDefined(typeof(SkinFlag), default(SkinFlag)));
-        }
-
-        [Fact]
         [Trait("Feature",    "Skins")]
         [Trait("Category",   "Integration")]
         [Trait("Importance", "Critical")]
-        public void Enum_ShouldHaveNoMissingMembers()
+        public void Skin_flag_can_be_serialized_from_json()
         {
             var expected = _fixture.Db.GetSkinFlags().ToHashSet();
 
             var actual = Enum.GetNames(typeof(SkinFlag)).ToHashSet();
 
             Assert.Equal(expected, actual);
+        }
+
+        [Fact]
+        [Trait("Feature",  "Skins")]
+        [Trait("Category", "Unit")]
+        public void Skin_flag_has_no_default_member()
+        {
+            Assert.False(Enum.IsDefined(typeof(SkinFlag), default(SkinFlag)));
         }
     }
 }

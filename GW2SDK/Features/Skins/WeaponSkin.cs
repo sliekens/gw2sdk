@@ -11,6 +11,7 @@ namespace GW2SDK.Skins
     [JsonConverter(typeof(DiscriminatedJsonConverter), typeof(WeaponSkinDiscriminatorOptions))]
     public class WeaponSkin : Skin
     {
+        [JsonProperty(Required = Required.Always)]
         public DamageType DamageType { get; set; }
     }
 }
