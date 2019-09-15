@@ -26,7 +26,7 @@ namespace GW2SDK.Tests.Features.Worlds
         [Trait("Feature",    "Worlds")]
         [Trait("Category",   "Integration")]
         [Trait("Importance", "Critical")]
-        public void Class_ShouldHaveNoMissingMembers()
+        public void Worlds_can_be_serialized_from_json()
         {
             var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output))
                                                               .UseMissingMemberHandling(MissingMemberHandling.Error)
@@ -43,7 +43,7 @@ namespace GW2SDK.Tests.Features.Worlds
         [Fact]
         [Trait("Feature",  "Worlds")]
         [Trait("Category", "Integration")]
-        public void Id_ShouldBePositive()
+        public void Id_is_positive()
         {
             var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output)).Build();
 
@@ -58,7 +58,7 @@ namespace GW2SDK.Tests.Features.Worlds
         [Fact]
         [Trait("Feature",  "Worlds")]
         [Trait("Category", "Integration")]
-        public void Name_ShouldNotBeEmpty()
+        public void Name_is_not_empty()
         {
             var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output)).Build();
 
@@ -73,7 +73,7 @@ namespace GW2SDK.Tests.Features.Worlds
         [Fact]
         [Trait("Feature",  "Worlds")]
         [Trait("Category", "Integration")]
-        public void Population_ShouldBeDefined()
+        public void World_population_type_is_supported()
         {
             var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output)).Build();
 

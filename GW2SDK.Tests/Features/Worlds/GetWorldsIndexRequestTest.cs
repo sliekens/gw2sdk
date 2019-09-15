@@ -10,7 +10,7 @@ namespace GW2SDK.Tests.Features.Worlds
         [Fact]
         [Trait("Feature",  "Worlds")]
         [Trait("Category", "Unit")]
-        public void Method_ShouldBeGet()
+        public void Method_is_GET()
         {
             var sut = new GetWorldsIndexRequest();
 
@@ -20,7 +20,7 @@ namespace GW2SDK.Tests.Features.Worlds
         [Fact]
         [Trait("Feature",  "Worlds")]
         [Trait("Category", "Unit")]
-        public void RequestUri_ShouldBeV2Worlds()
+        public void RequestUri_is_v2_worlds()
         {
             var sut = new GetWorldsIndexRequest();
 
