@@ -11,7 +11,7 @@ namespace GW2SDK.Tests.Features.Skins
         [Fact]
         [Trait("Feature",  "Skins")]
         [Trait("Category", "Integration")]
-        public async Task GetSkinsIndex_ShouldReturnAllIds()
+        public async Task Get_all_skin_ids()
         {
             var services = new Container();
             var sut = services.Resolve<SkinService>();
@@ -24,7 +24,7 @@ namespace GW2SDK.Tests.Features.Skins
         [Fact]
         [Trait("Feature",  "Skins")]
         [Trait("Category", "Integration")]
-        public async Task GetSkinById_ShouldReturnThatSkin()
+        public async Task Get_a_skin_by_id()
         {
             var services = new Container();
             var sut = services.Resolve<SkinService>();
@@ -38,8 +38,23 @@ namespace GW2SDK.Tests.Features.Skins
 
         [Fact]
         [Trait("Feature",  "Skins")]
+        [Trait("Category", "Integration")]
+        public async Task Get_skins_by_id()
+        {
+            var services = new Container();
+            var sut = services.Resolve<SkinService>();
+
+            var ids = new[] { 1, 2, 3 };
+
+            var actual = await sut.GetSkinsByIds(ids);
+
+            Assert.Collection(actual, skin => Assert.Equal(1, skin.Id), skin => Assert.Equal(2, skin.Id), skin => Assert.Equal(3, skin.Id));
+        }
+
+        [Fact]
+        [Trait("Feature",  "Skins")]
         [Trait("Category", "Unit")]
-        public async Task GetSkinsByIds_WithIdsNull_ShouldThrowArgumentNullException()
+        public async Task Skin_ids_cannot_be_null()
         {
             var services = new Container();
             var sut = services.Resolve<SkinService>();
@@ -54,7 +69,7 @@ namespace GW2SDK.Tests.Features.Skins
         [Fact]
         [Trait("Feature",  "Skins")]
         [Trait("Category", "Unit")]
-        public async Task GetSkinsByIds_WithIdsEmpty_ShouldThrowArgumentException()
+        public async Task Skin_ids_cannot_be_empty()
         {
             var services = new Container();
             var sut = services.Resolve<SkinService>();
@@ -69,22 +84,21 @@ namespace GW2SDK.Tests.Features.Skins
         [Fact]
         [Trait("Feature",  "Skins")]
         [Trait("Category", "Integration")]
-        public async Task GetSkinsByIds_ShouldReturnThoseSkins()
+        public async Task Get_skins_by_page()
         {
             var services = new Container();
             var sut = services.Resolve<SkinService>();
 
-            var ids = new[] { 1, 2, 3 };
+            var actual = await sut.GetSkinsByPage(1, 3);
 
-            var actual = await sut.GetSkinsByIds(ids);
-
-            Assert.Collection(actual, skin => Assert.Equal(1, skin.Id), skin => Assert.Equal(2, skin.Id), skin => Assert.Equal(3, skin.Id));
+            Assert.Equal(3, actual.Count);
+            Assert.Equal(3, actual.PageSize);
         }
-        
+
         [Fact]
         [Trait("Feature",  "Skins")]
         [Trait("Category", "Integration")]
-        public async Task GetSkinsByPage_WithInvalidPage_ShouldThrowArgumentException()
+        public async Task Page_index_cannot_be_negative()
         {
             var services = new Container();
             var sut = services.Resolve<SkinService>();
@@ -95,26 +109,12 @@ namespace GW2SDK.Tests.Features.Skins
         [Fact]
         [Trait("Feature",  "Skins")]
         [Trait("Category", "Integration")]
-        public async Task GetSkinsByPage_WithInvalidPageSize_ShouldThrowArgumentException()
+        public async Task Page_size_cannot_be_negative()
         {
             var services = new Container();
             var sut = services.Resolve<SkinService>();
 
             await Assert.ThrowsAsync<ArgumentException>(async () => await sut.GetSkinsByPage(1, -3));
-        }
-
-        [Fact]
-        [Trait("Feature",  "Skins")]
-        [Trait("Category", "Integration")]
-        public async Task GetSkinsByPage_WithPage1AndPageSize3_ShouldReturnThatPage()
-        {
-            var services = new Container();
-            var sut = services.Resolve<SkinService>();
-
-            var actual = await sut.GetSkinsByPage(1, 3);
-
-            Assert.Equal(3, actual.Count);
-            Assert.Equal(3, actual.PageSize);
         }
     }
 }

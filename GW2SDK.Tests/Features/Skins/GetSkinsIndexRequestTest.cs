@@ -10,7 +10,7 @@ namespace GW2SDK.Tests.Features.Skins
         [Fact]
         [Trait("Feature",  "Skins")]
         [Trait("Category", "Unit")]
-        public void Method_ShouldBeGet()
+        public void Method_is_GET()
         {
             var sut = new GetSkinsIndexRequest();
 
@@ -20,7 +20,7 @@ namespace GW2SDK.Tests.Features.Skins
         [Fact]
         [Trait("Feature",  "Skins")]
         [Trait("Category", "Unit")]
-        public void RequestUri_ShouldBeV2Skins()
+        public void RequestUri_is_v2_skins()
         {
             var sut = new GetSkinsIndexRequest();
 
