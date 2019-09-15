@@ -10,7 +10,7 @@ namespace GW2SDK.Tests.Features.Recipes
         [Fact]
         [Trait("Feature",  "Recipes")]
         [Trait("Category", "Unit")]
-        public void GetRequest_MethodShouldBeGet()
+        public void Method_is_GET()
         {
             var id = 1;
 
@@ -24,7 +24,7 @@ namespace GW2SDK.Tests.Features.Recipes
         [Fact]
         [Trait("Feature",  "Recipes")]
         [Trait("Category", "Unit")]
-        public void GetRequest_ShouldSerializeIdAsQueryString()
+        public void RequestUri_contains_specified_id()
         {
             var id = 1;
 

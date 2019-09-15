@@ -25,7 +25,7 @@ namespace GW2SDK.Tests.Features.Recipes
         [Trait("Feature",    "Recipes")]
         [Trait("Category",   "Integration")]
         [Trait("Importance", "Critical")]
-        public void Class_ShouldHaveNoMissingMembers()
+        public void Recipes_can_be_serialized_from_json()
         {
             var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output))
                                                               .UseMissingMemberHandling(MissingMemberHandling.Error)
@@ -41,7 +41,7 @@ namespace GW2SDK.Tests.Features.Recipes
         [Fact]
         [Trait("Feature",  "Recipes")]
         [Trait("Category", "Integration")]
-        public void Id_ShouldBePositive()
+        public void Id_is_positive()
         {
             var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output)).Build();
             AssertEx.ForEach(_fixture.Db.Recipes,
@@ -55,7 +55,7 @@ namespace GW2SDK.Tests.Features.Recipes
         [Fact]
         [Trait("Feature",  "Recipes")]
         [Trait("Category", "Integration")]
-        public void OutputItemId_ShouldBePositive()
+        public void Output_item_id_is_positive()
         {
             var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output)).Build();
             AssertEx.ForEach(_fixture.Db.Recipes,
@@ -69,7 +69,7 @@ namespace GW2SDK.Tests.Features.Recipes
         [Fact]
         [Trait("Feature",  "Recipes")]
         [Trait("Category", "Integration")]
-        public void OutputItemCount_ShouldBePositive()
+        public void Output_item_count_is_positive()
         {
             var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output)).Build();
             AssertEx.ForEach(_fixture.Db.Recipes,
@@ -83,7 +83,7 @@ namespace GW2SDK.Tests.Features.Recipes
         [Fact]
         [Trait("Feature",  "Recipes")]
         [Trait("Category", "Integration")]
-        public void MinRating_ShouldBeBetween0And500()
+        public void Min_rating_is_between_0_and_500()
         {
             var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output)).Build();
             AssertEx.ForEach(_fixture.Db.Recipes,
@@ -97,7 +97,7 @@ namespace GW2SDK.Tests.Features.Recipes
         [Fact]
         [Trait("Feature",  "Recipes")]
         [Trait("Category", "Integration")]
-        public void TimeToCraft_ShouldBePositive()
+        public void Time_to_craft_is_positive()
         {
             var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output)).Build();
             AssertEx.ForEach(_fixture.Db.Recipes,
@@ -105,62 +105,6 @@ namespace GW2SDK.Tests.Features.Recipes
                 {
                     var actual = JsonConvert.DeserializeObject<Recipe>(json, settings);
                     Assert.InRange(actual.TimeToCraft.Ticks, 1, long.MaxValue);
-                });
-        }
-
-        [Fact]
-        [Trait("Feature",  "Recipes")]
-        [Trait("Category", "Integration")]
-        public void Disciplines_ShouldNotBeNull()
-        {
-            var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output)).Build();
-            AssertEx.ForEach(_fixture.Db.Recipes,
-                json =>
-                {
-                    var actual = JsonConvert.DeserializeObject<Recipe>(json, settings);
-                    Assert.NotNull(actual.Disciplines);
-                });
-        }
-
-        [Fact]
-        [Trait("Feature", "Recipes")]
-        [Trait("Category", "Integration")]
-        public void Flags_ShouldNotBeNull()
-        {
-            var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output)).Build();
-            AssertEx.ForEach(_fixture.Db.Recipes,
-                json =>
-                {
-                    var actual = JsonConvert.DeserializeObject<Recipe>(json, settings);
-                    Assert.NotNull(actual.Flags);
-                });
-        }
-
-        [Fact]
-        [Trait("Feature", "Recipes")]
-        [Trait("Category", "Integration")]
-        public void Ingredients_ShouldNotBeNull()
-        {
-            var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output)).Build();
-            AssertEx.ForEach(_fixture.Db.Recipes,
-                json =>
-                {
-                    var actual = JsonConvert.DeserializeObject<Recipe>(json, settings);
-                    Assert.NotNull(actual.Ingredients);
-                });
-        }
-
-        [Fact]
-        [Trait("Feature",  "Recipes")]
-        [Trait("Category", "Integration")]
-        public void ChatLink_ShouldNotBeNull()
-        {
-            var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output)).Build();
-            AssertEx.ForEach(_fixture.Db.Recipes,
-                json =>
-                {
-                    var actual = JsonConvert.DeserializeObject<Recipe>(json, settings);
-                    Assert.NotNull(actual.ChatLink);
                 });
         }
     }

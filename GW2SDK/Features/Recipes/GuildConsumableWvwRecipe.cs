@@ -1,10 +1,12 @@
 ﻿using GW2SDK.Annotations;
+using Newtonsoft.Json;
 
 namespace GW2SDK.Recipes
 {
     [PublicAPI]
     public sealed class GuildConsumableWvwRecipe : Recipe
     {
-        public int OutputUpgradeId { get; set; }
+        [JsonProperty(Required = Required.DisallowNull)]
+        public int? OutputUpgradeId { get; set; }
     }
 }
