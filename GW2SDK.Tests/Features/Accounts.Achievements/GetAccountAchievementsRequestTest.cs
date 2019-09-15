@@ -10,7 +10,7 @@ namespace GW2SDK.Tests.Features.Accounts.Achievements
         [Fact]
         [Trait("Feature",  "Accounts.Achievements")]
         [Trait("Category", "Unit")]
-        public void Method_ShouldBeGet()
+        public void Method_is_GET()
         {
             var sut = new GetAccountAchievementsRequest();
 

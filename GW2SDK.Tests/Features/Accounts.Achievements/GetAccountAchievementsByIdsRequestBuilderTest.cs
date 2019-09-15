@@ -11,7 +11,7 @@ namespace GW2SDK.Tests.Features.Accounts.Achievements
         [Fact]
         [Trait("Feature",  "Accounts.Achievements")]
         [Trait("Category", "Unit")]
-        public void Constructor_WithIdsNull_ShouldThrowArgumentNullException()
+        public void Achievement_ids_cannot_be_null()
         {
             Assert.Throws<ArgumentNullException>("achievementIds",
                 () =>
@@ -23,7 +23,7 @@ namespace GW2SDK.Tests.Features.Accounts.Achievements
         [Fact]
         [Trait("Feature",  "Accounts.Achievements")]
         [Trait("Category", "Unit")]
-        public void Constructor_WithIdsEmpty_ShouldThrowArgumentException()
+        public void Achievement_ids_cannot_be_empty()
         {
             Assert.Throws<ArgumentException>("achievementIds",
                 () =>
@@ -35,7 +35,7 @@ namespace GW2SDK.Tests.Features.Accounts.Achievements
         [Fact]
         [Trait("Feature",  "Accounts.Achievements")]
         [Trait("Category", "Unit")]
-        public void GetRequest_MethodShouldBeGet()
+        public void Method_is_GET()
         {
             var ids = new List<int> { 1, 2, 3 };
 
@@ -49,7 +49,7 @@ namespace GW2SDK.Tests.Features.Accounts.Achievements
         [Fact]
         [Trait("Feature",  "Accounts.Achievements")]
         [Trait("Category", "Unit")]
-        public void GetRequest_ShouldSerializeIdsAsQueryString()
+        public void RequestUri_contains_specified_ids()
         {
             var ids = new List<int> { 1, 2, 3 };
 
