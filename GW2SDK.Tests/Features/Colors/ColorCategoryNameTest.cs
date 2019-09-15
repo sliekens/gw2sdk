@@ -17,24 +17,24 @@ namespace GW2SDK.Tests.Features.Colors
         }
 
         [Fact]
-        [Trait("Feature",  "Colors")]
-        [Trait("Category", "Unit")]
-        public void DefaultMember_ShouldBeUndefined()
-        {
-            Assert.False(Enum.IsDefined(typeof(ColorCategoryName), default(ColorCategoryName)));
-        }
-
-        [Fact]
         [Trait("Feature",    "Colors")]
         [Trait("Category",   "Integration")]
         [Trait("Importance", "Critical")]
-        public void Enum_ShouldHaveNoMissingMembers()
+        public void Color_category_names_can_be_serialized_from_json()
         {
             var expected = _fixture.Db.GetColorCategoryNames().ToHashSet();
 
             var actual = Enum.GetNames(typeof(ColorCategoryName)).ToHashSet();
 
             Assert.Equal(expected, actual);
+        }
+
+        [Fact]
+        [Trait("Feature",  "Colors")]
+        [Trait("Category", "Unit")]
+        public void There_is_no_default_color_category_name()
+        {
+            Assert.False(Enum.IsDefined(typeof(ColorCategoryName), default(ColorCategoryName)));
         }
     }
 }
