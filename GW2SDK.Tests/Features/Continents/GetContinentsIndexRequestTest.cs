@@ -10,7 +10,7 @@ namespace GW2SDK.Tests.Features.Continents
         [Fact]
         [Trait("Feature",  "Continents")]
         [Trait("Category", "Unit")]
-        public void Method_ShouldBeGet()
+        public void Method_is_GET()
         {
             var sut = new GetContinentsIndexRequest();
 
@@ -20,7 +20,7 @@ namespace GW2SDK.Tests.Features.Continents
         [Fact]
         [Trait("Feature",  "Continents")]
         [Trait("Category", "Unit")]
-        public void RequestUri_ShouldBeV2Continents()
+        public void RequestUri_is_v2_continents()
         {
             var sut = new GetContinentsIndexRequest();
 
