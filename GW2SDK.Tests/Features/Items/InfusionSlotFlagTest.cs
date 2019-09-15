@@ -17,18 +17,10 @@ namespace GW2SDK.Tests.Features.Items
         private readonly ItemFixture _fixture;
 
         [Fact]
-        [Trait("Feature",  "Items")]
-        [Trait("Category", "Unit")]
-        public void DefaultMember_ShouldBeUndefined()
-        {
-            Assert.False(Enum.IsDefined(typeof(InfusionSlotFlag), default(InfusionSlotFlag)));
-        }
-
-        [Fact]
         [Trait("Feature",    "Items")]
         [Trait("Category",   "Integration")]
         [Trait("Importance", "Critical")]
-        public void Enum_ShouldHaveNoMissingMembers()
+        public void Infusion_slot_flag_can_be_serialized_from_json()
         {
             var expected = _fixture.Db.GetInfusionSlotFlags()
                                    .Concat(_fixture.Db.GetUpgradeComponentInfusionUpgradeFlags())
@@ -39,6 +31,14 @@ namespace GW2SDK.Tests.Features.Items
             var actual = Enum.GetNames(typeof(InfusionSlotFlag)).ToHashSet();
 
             Assert.Equal(expected, actual);
+        }
+
+        [Fact]
+        [Trait("Feature",  "Items")]
+        [Trait("Category", "Unit")]
+        public void Infusion_slot_flag_has_no_default_member()
+        {
+            Assert.False(Enum.IsDefined(typeof(InfusionSlotFlag), default(InfusionSlotFlag)));
         }
     }
 }

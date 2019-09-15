@@ -11,14 +11,19 @@ namespace GW2SDK.Items
     [JsonConverter(typeof(DiscriminatedJsonConverter), typeof(WeaponDiscriminatorOptions))]
     public class Weapon : Equipment
     {
+        [JsonProperty(Required = Required.Always)]
         public int DefaultSkin { get; set; }
 
+        [JsonProperty(Required = Required.Always)]
         public DamageType DamageType { get; set; }
 
+        [JsonProperty(Required = Required.Always)]
         public int MinPower { get; set; }
 
+        [JsonProperty(Required = Required.Always)]
         public int MaxPower { get; set; }
 
+        [JsonProperty(Required = Required.Always)]
         public int Defense { get; set; }
     }
 }
