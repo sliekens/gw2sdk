@@ -125,6 +125,16 @@ namespace GW2SDK.TestDataHelper
                     file.WriteLine(json);
                 }
             }
+
+            using (var file = File.CreateText(Path.Combine(outDir, "prices.json")))
+            {
+                var service = services.Resolve<JsonItemPriceService>();
+                var jsons = await service.GetAllJsonItemPrices(indented);
+                foreach (var json in jsons)
+                {
+                    file.WriteLine(json);
+                }
+            }
         }
     }
 }
