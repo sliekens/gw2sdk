@@ -8,6 +8,7 @@ using GW2SDK.Achievements.Categories;
 using GW2SDK.Achievements.Groups;
 using GW2SDK.Builds;
 using GW2SDK.Colors;
+using GW2SDK.Commerce.Prices;
 using GW2SDK.Continents;
 using GW2SDK.Extensions;
 using GW2SDK.Impl.HttpMessageHandlers;
@@ -54,6 +55,7 @@ namespace GW2SDK.Tests.TestInfrastructure
                                       .AddTypedClient<ColorService>()
                                       .AddTypedClient<ContinentService>()
                                       .AddTypedClient<ItemService>()
+                                      .AddTypedClient<ItemPriceService>()
                                       .AddTypedClient<RecipeService>()
                                       .AddTypedClient<SearchRecipeService>()
                                       .AddTypedClient<SkinService>()

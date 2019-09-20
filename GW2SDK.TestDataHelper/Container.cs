@@ -40,6 +40,7 @@ namespace GW2SDK.TestDataHelper
                     .AddTypedClient<JsonContinentService>()
                     .AddTypedClient<JsonFloorService>()
                     .AddTypedClient<JsonItemService>()
+                    .AddTypedClient<JsonItemPriceService>()
                     .AddTypedClient<JsonRecipeService>()
                     .AddTypedClient<JsonSkinService>()
                     .AddTypedClient<JsonWorldService>();
