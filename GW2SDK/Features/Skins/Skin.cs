@@ -1,8 +1,6 @@
 ﻿using System.Diagnostics;
 using GW2SDK.Annotations;
 using GW2SDK.Enums;
-using GW2SDK.Impl.JsonConverters;
-using GW2SDK.Skins.Impl;
 using Newtonsoft.Json;
 
 namespace GW2SDK.Skins
@@ -11,7 +9,6 @@ namespace GW2SDK.Skins
     [DebuggerDisplay("{Name,nq}")]
     [Inheritable]
     [DataTransferObject]
-    [JsonConverter(typeof(DiscriminatedJsonConverter), typeof(SkinDiscriminatorOptions))]
     public class Skin
     {
         [JsonProperty(Required = Required.Always)]

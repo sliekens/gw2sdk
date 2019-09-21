@@ -2,7 +2,6 @@
 using GW2SDK.Annotations;
 using GW2SDK.Enums;
 using GW2SDK.Impl.JsonConverters;
-using GW2SDK.Recipes.Impl;
 using Newtonsoft.Json;
 
 namespace GW2SDK.Recipes
@@ -10,7 +9,6 @@ namespace GW2SDK.Recipes
     [PublicAPI]
     [Inheritable]
     [DataTransferObject]
-    [JsonConverter(typeof(DiscriminatedJsonConverter), typeof(RecipeDiscriminatorOptions))]
     public class Recipe
     {
         [JsonProperty(Required = Required.Always)]

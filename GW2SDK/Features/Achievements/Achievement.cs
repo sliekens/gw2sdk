@@ -1,8 +1,6 @@
 ﻿using System.Diagnostics;
-using GW2SDK.Achievements.Impl;
 using GW2SDK.Annotations;
 using GW2SDK.Enums;
-using GW2SDK.Impl.JsonConverters;
 using Newtonsoft.Json;
 
 namespace GW2SDK.Achievements
@@ -11,7 +9,6 @@ namespace GW2SDK.Achievements
     [DebuggerDisplay("{Name,nq}")]
     [Inheritable]
     [DataTransferObject]
-    [JsonConverter(typeof(DiscriminatedJsonConverter), typeof(AchievementDiscriminatorOptions))]
     public class Achievement
     {
         [JsonProperty(Required = Required.Always)]

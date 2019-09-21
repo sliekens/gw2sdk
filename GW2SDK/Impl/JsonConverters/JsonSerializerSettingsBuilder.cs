@@ -28,7 +28,8 @@ namespace GW2SDK.Impl.JsonConverters
             {
                 MissingMemberHandling = _missingMemberHandling,
                 ContractResolver = new DefaultContractResolver { NamingStrategy = _namingStrategy },
-                TraceWriter = _traceWriter
+                TraceWriter = _traceWriter,
+                Converters = Json.GetJsonConverters()
             };
     }
 }

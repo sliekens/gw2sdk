@@ -1,8 +1,6 @@
 ﻿using System.Diagnostics;
 using GW2SDK.Annotations;
 using GW2SDK.Enums;
-using GW2SDK.Impl.JsonConverters;
-using GW2SDK.Items.Impl;
 using Newtonsoft.Json;
 
 namespace GW2SDK.Items
@@ -11,7 +9,6 @@ namespace GW2SDK.Items
     [DebuggerDisplay("{Name,nq}")]
     [Inheritable]
     [DataTransferObject]
-    [JsonConverter(typeof(DiscriminatedJsonConverter), typeof(ItemDiscriminatorOptions))]
     public class Item
     {
         [JsonProperty(Required = Required.Always)]
