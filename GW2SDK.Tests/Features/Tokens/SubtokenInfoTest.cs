@@ -34,7 +34,7 @@ namespace GW2SDK.Tests.Features.Tokens
                                                               .Build();
 
             // Next statement throws if there are missing members
-            _ = JsonConvert.DeserializeObject<SubtokenInfo>(_fixture.SubtokenInfoJson, settings);
+            _ = Assert.IsType<SubtokenInfo>(JsonConvert.DeserializeObject<TokenInfo>(_fixture.SubtokenInfoJson, settings));
         }
 
         [Fact]
@@ -44,7 +44,7 @@ namespace GW2SDK.Tests.Features.Tokens
         {
             var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output)).Build();
 
-            var actual = JsonConvert.DeserializeObject<SubtokenInfo>(_fixture.SubtokenInfoJson, settings);
+            var actual = Assert.IsType<SubtokenInfo>(JsonConvert.DeserializeObject<TokenInfo>(_fixture.SubtokenInfoJson, settings));
 
             Assert.NotEmpty(actual.Id);
         }
@@ -56,7 +56,7 @@ namespace GW2SDK.Tests.Features.Tokens
         {
             var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output)).Build();
 
-            var actual = JsonConvert.DeserializeObject<SubtokenInfo>(_fixture.SubtokenInfoJson, settings);
+            var actual = Assert.IsType<SubtokenInfo>(JsonConvert.DeserializeObject<TokenInfo>(_fixture.SubtokenInfoJson, settings));
 
             // Your API key must be named GW2SDK-Full to pass this test
             // This is not intended to improve account security, only to prevent key abuse
@@ -72,7 +72,7 @@ namespace GW2SDK.Tests.Features.Tokens
         {
             var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output)).Build();
 
-            var actual = JsonConvert.DeserializeObject<SubtokenInfo>(_fixture.SubtokenInfoJson, settings);
+            var actual = Assert.IsType<SubtokenInfo>(JsonConvert.DeserializeObject<TokenInfo>(_fixture.SubtokenInfoJson, settings));
 
             var expected = Enum.GetValues(typeof(Permission)).Cast<Permission>().ToHashSet();
 
@@ -86,7 +86,7 @@ namespace GW2SDK.Tests.Features.Tokens
         {
             var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output)).Build();
 
-            var actual = JsonConvert.DeserializeObject<SubtokenInfo>(_fixture.SubtokenInfoJson, settings);
+            var actual = Assert.IsType<SubtokenInfo>(JsonConvert.DeserializeObject<TokenInfo>(_fixture.SubtokenInfoJson, settings));
 
             // Ensure that the IssuedAt date is close to the Date response header
             // Allow up to 1 minute of delays to compensate for latency issues

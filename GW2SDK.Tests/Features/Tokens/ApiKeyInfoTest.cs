@@ -34,7 +34,7 @@ namespace GW2SDK.Tests.Features.Tokens
                                                               .Build();
 
             // Next statement throws if there are missing members
-            _ = JsonConvert.DeserializeObject<ApiKeyInfo>(_fixture.ApiKeyInfoJson, settings);
+            _ = Assert.IsType<ApiKeyInfo>(JsonConvert.DeserializeObject<TokenInfo>(_fixture.ApiKeyInfoJson, settings));
         }
 
         [Fact]
@@ -44,7 +44,7 @@ namespace GW2SDK.Tests.Features.Tokens
         {
             var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output)).Build();
 
-            var actual = JsonConvert.DeserializeObject<ApiKeyInfo>(_fixture.ApiKeyInfoJson, settings);
+            var actual = Assert.IsType<ApiKeyInfo>(JsonConvert.DeserializeObject<TokenInfo>(_fixture.ApiKeyInfoJson, settings));
 
             Assert.NotEmpty(actual.Id);
         }
@@ -56,7 +56,7 @@ namespace GW2SDK.Tests.Features.Tokens
         {
             var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output)).Build();
 
-            var actual = JsonConvert.DeserializeObject<ApiKeyInfo>(_fixture.ApiKeyInfoJson, settings);
+            var actual = Assert.IsType<ApiKeyInfo>(JsonConvert.DeserializeObject<TokenInfo>(_fixture.ApiKeyInfoJson, settings));
 
             // Your API key must be named GW2SDK-Full to pass this test
             // This is not intended to improve account security, only to prevent key abuse
@@ -72,7 +72,7 @@ namespace GW2SDK.Tests.Features.Tokens
         {
             var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output)).Build();
 
-            var actual = JsonConvert.DeserializeObject<ApiKeyInfo>(_fixture.ApiKeyInfoJson, settings);
+            var actual = Assert.IsType<ApiKeyInfo>(JsonConvert.DeserializeObject<TokenInfo>(_fixture.ApiKeyInfoJson, settings));
 
             var expected = Enum.GetValues(typeof(Permission)).Cast<Permission>().ToHashSet();
 

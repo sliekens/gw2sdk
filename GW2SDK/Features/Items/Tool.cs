@@ -7,7 +7,6 @@ namespace GW2SDK.Items
 {
     [PublicAPI]
     [Inheritable]
-    [JsonConverter(typeof(DiscriminatedJsonConverter), typeof(ToolDiscriminatorOptions))]
     public class Tool : Item
     {
         [JsonProperty(Required = Required.Always)]
