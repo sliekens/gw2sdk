@@ -15,7 +15,7 @@ namespace GW2SDK.Tokens
 
         [CanBeNull]
         [ItemNotNull]
-        [JsonProperty(Required = Required.DisallowNull)]
+        [JsonProperty(Required = Required.DisallowNull, NullValueHandling = NullValueHandling.Ignore)]
         public Uri[] Urls { get; set; }
     }
 }

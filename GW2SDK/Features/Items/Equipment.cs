@@ -14,10 +14,10 @@ namespace GW2SDK.Items
         public InfusionSlot[] InfusionSlots { get; set; }
 
         [CanBeNull]
-        [JsonProperty(Required = Required.DisallowNull)]
+        [JsonProperty(Required = Required.DisallowNull, NullValueHandling = NullValueHandling.Ignore)]
         public InfixUpgrade InfixUpgrade { get; set; }
 
-        [JsonProperty(Required = Required.DisallowNull)]
+        [JsonProperty(Required = Required.DisallowNull, NullValueHandling = NullValueHandling.Ignore)]
         public int? SuffixItemId { get; set; }
 
         [NotNull]
@@ -25,7 +25,7 @@ namespace GW2SDK.Items
         public string SecondarySuffixItemId { get; set; }
 
         [CanBeNull]
-        [JsonProperty(Required = Required.DisallowNull)]
+        [JsonProperty(Required = Required.DisallowNull, NullValueHandling = NullValueHandling.Ignore)]
         public int[] StatChoices { get; set; }
     }
 }

@@ -11,7 +11,7 @@ namespace GW2SDK.Accounts.Achievements
         public int Id { get; set; }
 
         [CanBeNull]
-        [JsonProperty(Required = Required.DisallowNull)]
+        [JsonProperty(Required = Required.DisallowNull, NullValueHandling = NullValueHandling.Ignore)]
         public int[] Bits { get; set; }
 
         [JsonProperty(Required = Required.Always)]
@@ -23,10 +23,10 @@ namespace GW2SDK.Accounts.Achievements
         [JsonProperty(Required = Required.Always)]
         public bool Done { get; set; }
 
-        [JsonProperty(Required = Required.DisallowNull)]
+        [JsonProperty(Required = Required.DisallowNull, NullValueHandling = NullValueHandling.Ignore)]
         public int? Repeated { get; set; }
 
-        [JsonProperty(Required = Required.DisallowNull)]
+        [JsonProperty(Required = Required.DisallowNull, NullValueHandling = NullValueHandling.Ignore)]
         public bool? Unlocked { get; set; }
     }
 }

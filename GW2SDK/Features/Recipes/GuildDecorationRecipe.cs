@@ -7,7 +7,7 @@ namespace GW2SDK.Recipes
     public sealed class GuildDecorationRecipe : Recipe
     {
         [CanBeNull]
-        [JsonProperty(Required = Required.DisallowNull)]
+        [JsonProperty(Required = Required.DisallowNull, NullValueHandling = NullValueHandling.Ignore)]
         public GuildIngredient[] GuildIngredients { get; set; }
 
         [JsonProperty(Required = Required.Always)]

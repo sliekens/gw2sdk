@@ -24,7 +24,7 @@ namespace GW2SDK.Items
         public InfixUpgrade InfixUpgrade { get; set; }
 
         [CanBeNull]
-        [JsonProperty(Required = Required.DisallowNull)]
+        [JsonProperty(Required = Required.DisallowNull, NullValueHandling = NullValueHandling.Ignore)]
         public string[] Bonuses { get; set; }
 
         [CanBeNull]

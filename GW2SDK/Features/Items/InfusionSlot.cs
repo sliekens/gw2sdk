@@ -12,7 +12,7 @@ namespace GW2SDK.Items
         [JsonProperty(Required = Required.Always)]
         public InfusionSlotFlag[] Flags { get; set; }
 
-        [JsonProperty(Required = Required.DisallowNull)]
+        [JsonProperty(Required = Required.DisallowNull, NullValueHandling = NullValueHandling.Ignore)]
         public int? ItemId { get; set; }
     }
 }

@@ -8,7 +8,7 @@ namespace GW2SDK.Continents
     public sealed class Vista : PointOfInterest
     {
         [CanBeNull]
-        [JsonProperty(Required = Required.DisallowNull)]
+        [JsonProperty(Required = Required.DisallowNull, NullValueHandling = NullValueHandling.Ignore)]
         public string Name { get; set; }
     }
 }

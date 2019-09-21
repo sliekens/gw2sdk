@@ -27,7 +27,7 @@ namespace GW2SDK.Continents
         public int DefaultFloor { get; set; }
 
         [CanBeNull]
-        [JsonProperty("label_coord", Required = Required.DisallowNull)]
+        [JsonProperty("label_coord", Required = Required.DisallowNull, NullValueHandling = NullValueHandling.Ignore)]
         public int[] LabelCoordinates { get; set; }
 
         [NotNull]
@@ -63,7 +63,7 @@ namespace GW2SDK.Continents
         public MasteryPoint[] MasteryPoints { get; set; }
 
         [CanBeNull]
-        [JsonProperty(Required = Required.DisallowNull)]
+        [JsonProperty(Required = Required.DisallowNull, NullValueHandling = NullValueHandling.Ignore)]
         public GodShrine[] GodShrines { get; set; }
     }
 }
