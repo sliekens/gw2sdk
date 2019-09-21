@@ -13,7 +13,7 @@ namespace GW2SDK.Continents
         public int Id { get; set; }
 
         [CanBeNull]
-        [JsonProperty(Required = Required.DisallowNull)]
+        [JsonProperty(Required = Required.DisallowNull, NullValueHandling = NullValueHandling.Ignore)]
         public string Name { get; set; }
         
         [JsonProperty(Required = Required.Always)]

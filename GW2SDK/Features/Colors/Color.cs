@@ -34,10 +34,10 @@ namespace GW2SDK.Colors
         public ColorInfo Metal { get; set; }
 
         [CanBeNull]
-        [JsonProperty(Required = Required.DisallowNull)]
+        [JsonProperty(Required = Required.DisallowNull, NullValueHandling = NullValueHandling.Ignore)]
         public ColorInfo Fur { get; set; }
 
-        [JsonProperty(Required = Required.DisallowNull)]
+        [JsonProperty(Required = Required.DisallowNull, NullValueHandling = NullValueHandling.Ignore)]
         public int? Item { get; set; }
 
         [NotNull]

@@ -37,7 +37,7 @@ namespace GW2SDK.Accounts
         [Scope(Permission.Guilds)]
         [CanBeNull]
         [ItemNotNull]
-        [JsonProperty(Required = Required.DisallowNull)]
+        [JsonProperty(Required = Required.DisallowNull, NullValueHandling = NullValueHandling.Ignore)]
         public string[] GuildLeader { get; set; }
 
         [JsonProperty(Required = Required.Always)]
@@ -51,22 +51,22 @@ namespace GW2SDK.Accounts
 
         [Scope(Permission.Progression)]
         [CanBeNull]
-        [JsonProperty(Required = Required.DisallowNull)]
+        [JsonProperty(Required = Required.DisallowNull, NullValueHandling = NullValueHandling.Ignore)]
         public int? FractalLevel { get; set; }
 
         [Scope(Permission.Progression)]
         [CanBeNull]
-        [JsonProperty(Required = Required.DisallowNull)]
+        [JsonProperty(Required = Required.DisallowNull, NullValueHandling = NullValueHandling.Ignore)]
         public int? DailyAp { get; set; }
 
         [Scope(Permission.Progression)]
         [CanBeNull]
-        [JsonProperty(Required = Required.DisallowNull)]
+        [JsonProperty(Required = Required.DisallowNull, NullValueHandling = NullValueHandling.Ignore)]
         public int? MonthlyAp { get; set; }
 
         [Scope(Permission.Progression)]
         [CanBeNull]
-        [JsonProperty(Required = Required.DisallowNull)]
+        [JsonProperty(Required = Required.DisallowNull, NullValueHandling = NullValueHandling.Ignore)]
         public int? WvwRank { get; set; }
     }
 }

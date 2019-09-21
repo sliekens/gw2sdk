@@ -19,7 +19,7 @@ namespace GW2SDK.Achievements
         public string Name { get; set; }
 
         [CanBeNull]
-        [JsonProperty(Required = Required.DisallowNull)]
+        [JsonProperty(Required = Required.DisallowNull, NullValueHandling = NullValueHandling.Ignore)]
         public string Icon { get; set; }
 
         /// <remarks>Description can be an empty string but not null.</remarks>
@@ -49,19 +49,19 @@ namespace GW2SDK.Achievements
         /// <remarks>Rewards can be null but it cannot be an empty array or contain null.</remarks>
         [CanBeNull]
         [ItemNotNull]
-        [JsonProperty(Required = Required.DisallowNull)]
+        [JsonProperty(Required = Required.DisallowNull, NullValueHandling = NullValueHandling.Ignore)]
         public AchievementReward[] Rewards { get; set; }
 
         [CanBeNull]
-        [JsonProperty(Required = Required.DisallowNull)]
+        [JsonProperty(Required = Required.DisallowNull, NullValueHandling = NullValueHandling.Ignore)]
         public AchievementBit[] Bits { get; set; }
 
         [CanBeNull]
-        [JsonProperty(Required = Required.DisallowNull)]
+        [JsonProperty(Required = Required.DisallowNull, NullValueHandling = NullValueHandling.Ignore)]
         public int[] Prerequisites { get; set; }
 
         /// <remarks>Can be -1 for repeatable achievements that don't award points.</remarks>
-        [JsonProperty(Required = Required.DisallowNull)]
+        [JsonProperty(Required = Required.DisallowNull, NullValueHandling = NullValueHandling.Ignore)]
         public int? PointCap { get; set; }
     }
 }

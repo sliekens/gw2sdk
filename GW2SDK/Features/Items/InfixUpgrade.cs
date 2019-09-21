@@ -15,7 +15,7 @@ namespace GW2SDK.Items
         public UpgradeAttribute[] Attributes { get; set; }
 
         [CanBeNull]
-        [JsonProperty(Required = Required.DisallowNull)]
+        [JsonProperty(Required = Required.DisallowNull, NullValueHandling = NullValueHandling.Ignore)]
         public Buff Buff { get; set; }
     }
 }

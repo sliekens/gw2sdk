@@ -20,7 +20,7 @@ namespace GW2SDK.Skins
         public string Name { get; set; }
 
         [CanBeNull]
-        [JsonProperty(Required = Required.DisallowNull)]
+        [JsonProperty(Required = Required.DisallowNull, NullValueHandling = NullValueHandling.Ignore)]
         public string Description { get; set; }
 
         /// <remarks>Flags can be an empty array but not null.</remarks>
@@ -37,7 +37,7 @@ namespace GW2SDK.Skins
         public Rarity Rarity { get; set; }
 
         [CanBeNull]
-        [JsonProperty(Required = Required.DisallowNull)]
+        [JsonProperty(Required = Required.DisallowNull, NullValueHandling = NullValueHandling.Ignore)]
         public string Icon { get; set; }
     }
 }

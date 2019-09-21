@@ -17,7 +17,7 @@ namespace GW2SDK.Continents
 
         [CanBeNull]
         [ItemNotNull]
-        [JsonProperty(Required = Required.DisallowNull)]
+        [JsonProperty(Required = Required.DisallowNull, NullValueHandling = NullValueHandling.Ignore)]
         public int[][] ClampedView { get; set; }
 
         [NotNull]
