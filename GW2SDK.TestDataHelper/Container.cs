@@ -31,22 +31,51 @@ namespace GW2SDK.TestDataHelper
                     .AddHttpMessageHandler<UnauthorizedMessageHandler>()
                     .AddHttpMessageHandler<BadMessageHandler>()
                     .AddHttpMessageHandler<RateLimitHandler>()
-                    .AddTypedClient<ContinentService>()
-                    .AddTypedClient<JsonAchievementService>()
-                    .AddTypedClient<JsonAchievementCategoriesService>()
-                    .AddTypedClient<JsonAchievementGroupsService>()
-                    .AddTypedClient<JsonBuildService>()
-                    .AddTypedClient<JsonColorService>()
-                    .AddTypedClient<JsonContinentService>()
-                    .AddTypedClient<JsonFloorService>()
-                    .AddTypedClient<JsonItemService>()
-                    .AddTypedClient<JsonItemPriceService>()
-                    .AddTypedClient<JsonRecipeService>()
-                    .AddTypedClient<JsonSkinService>()
-                    .AddTypedClient<JsonWorldService>();
+                    .AddTypedClient(http => new ContinentService(http))
+                    .AddTypedClient(http => new JsonAchievementService(http))
+                    .AddTypedClient(http => new JsonAchievementCategoriesService(http))
+                    .AddTypedClient(http => new JsonAchievementGroupsService(http))
+                    .AddTypedClient(http => new JsonBuildService(http))
+                    .AddTypedClient(http => new JsonColorService(http))
+                    .AddTypedClient(http => new JsonContinentService(http))
+                    .AddTypedClient(http => new JsonFloorService(http))
+                    .AddTypedClient(http => new JsonItemService(http))
+                    .AddTypedClient(http => new JsonItemPriceService(http))
+                    .AddTypedClient(http => new JsonRecipeService(http))
+                    .AddTypedClient(http => new JsonSkinService(http))
+                    .AddTypedClient(http => new JsonWorldService(http));
             _services = services.BuildServiceProvider();
         }
 
         public T Resolve<T>() => _services.GetRequiredService<T>();
+    }
+
+    internal static class HttpClientFactoryRegressionWorkaround
+    {
+        internal static IHttpClientBuilder AddTypedClient<TClient>(this IHttpClientBuilder builder, Func<HttpClient, TClient> factory)
+            where TClient : class
+        {
+            if (builder == null)
+            {
+                throw new ArgumentNullException(nameof(builder));
+            }
+
+            if (factory == null)
+            {
+                throw new ArgumentNullException(nameof(factory));
+            }
+
+            // ReserveClient(builder, typeof(TClient), builder.Name);
+
+            builder.Services.AddTransient<TClient>(s =>
+            {
+                var httpClientFactory = s.GetRequiredService<IHttpClientFactory>();
+                var httpClient = httpClientFactory.CreateClient(builder.Name);
+
+                return factory(httpClient);
+            });
+
+            return builder;
+        }
     }
 }
