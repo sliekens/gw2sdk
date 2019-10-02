@@ -46,22 +46,22 @@ namespace GW2SDK.Tests.TestInfrastructure
                                       .AddHttpMessageHandler<UnauthorizedMessageHandler>()
                                       .AddHttpMessageHandler<BadMessageHandler>()
                                       .AddHttpMessageHandler<RateLimitHandler>()
-                                      .AddTypedClient<AccountService>()
-                                      .AddTypedClient<AccountAchievementService>()
-                                      .AddTypedClient<AchievementService>()
-                                      .AddTypedClient<AchievementCategoryService>()
-                                      .AddTypedClient<AchievementGroupService>()
-                                      .AddTypedClient<BuildService>()
-                                      .AddTypedClient<ColorService>()
-                                      .AddTypedClient<ContinentService>()
-                                      .AddTypedClient<ItemService>()
-                                      .AddTypedClient<ItemPriceService>()
-                                      .AddTypedClient<RecipeService>()
-                                      .AddTypedClient<SearchRecipeService>()
-                                      .AddTypedClient<SkinService>()
-                                      .AddTypedClient<SubtokenService>()
-                                      .AddTypedClient<TokenInfoService>()
-                                      .AddTypedClient<WorldService>();
+                                      .AddTypedClient(http => new AccountService(http))
+                                      .AddTypedClient(http => new AccountAchievementService(http))
+                                      .AddTypedClient(http => new AchievementService(http))
+                                      .AddTypedClient(http => new AchievementCategoryService(http))
+                                      .AddTypedClient(http => new AchievementGroupService(http))
+                                      .AddTypedClient(http => new BuildService(http))
+                                      .AddTypedClient(http => new ColorService(http))
+                                      .AddTypedClient(http => new ContinentService(http))
+                                      .AddTypedClient(http => new ItemService(http))
+                                      .AddTypedClient(http => new ItemPriceService(http))
+                                      .AddTypedClient(http => new RecipeService(http))
+                                      .AddTypedClient(http => new SearchRecipeService(http))
+                                      .AddTypedClient(http => new SkinService(http))
+                                      .AddTypedClient(http => new SubtokenService(http))
+                                      .AddTypedClient(http => new TokenInfoService(http))
+                                      .AddTypedClient(http => new WorldService(http));
             if (accessToken is string)
             {
                 httpBuilder.ConfigureHttpClient(client => client.UseAccessToken(accessToken));
@@ -71,5 +71,34 @@ namespace GW2SDK.Tests.TestInfrastructure
         }
 
         public T Resolve<T>() => _services.GetRequiredService<T>();
+    }
+
+    internal static class HttpClientFactoryRegressionWorkaround
+    {
+        internal static IHttpClientBuilder AddTypedClient<TClient>(this IHttpClientBuilder builder, Func<HttpClient, TClient> factory)
+            where TClient : class
+        {
+            if (builder == null)
+            {
+                throw new ArgumentNullException(nameof(builder));
+            }
+
+            if (factory == null)
+            {
+                throw new ArgumentNullException(nameof(factory));
+            }
+
+            // ReserveClient(builder, typeof(TClient), builder.Name);
+
+            builder.Services.AddTransient<TClient>(s =>
+            {
+                var httpClientFactory = s.GetRequiredService<IHttpClientFactory>();
+                var httpClient = httpClientFactory.CreateClient(builder.Name);
+
+                return factory(httpClient);
+            });
+
+            return builder;
+        }
     }
 }
