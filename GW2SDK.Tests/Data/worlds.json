@@ -3,7 +3,7 @@
 {"id":1003,"name":"Yak's Bend","population":"High"}
 {"id":1004,"name":"Henge of Denravi","population":"Medium"}
 {"id":1005,"name":"Maguuma","population":"Medium"}
-{"id":1006,"name":"Sorrow's Furnace","population":"VeryHigh"}
+{"id":1006,"name":"Sorrow's Furnace","population":"High"}
 {"id":1007,"name":"Gate of Madness","population":"Medium"}
 {"id":1008,"name":"Jade Quarry","population":"Medium"}
 {"id":1009,"name":"Fort Aspenwood","population":"VeryHigh"}
@@ -29,14 +29,14 @@
 {"id":2005,"name":"Ring of Fire","population":"Medium"}
 {"id":2006,"name":"Underworld","population":"Medium"}
 {"id":2007,"name":"Far Shiverpeaks","population":"High"}
-{"id":2008,"name":"Whiteside Ridge","population":"Full"}
+{"id":2008,"name":"Whiteside Ridge","population":"VeryHigh"}
 {"id":2009,"name":"Ruins of Surmia","population":"Medium"}
 {"id":2010,"name":"Seafarer's Rest","population":"VeryHigh"}
 {"id":2011,"name":"Vabbi","population":"Medium"}
 {"id":2012,"name":"Piken Square","population":"Full"}
 {"id":2013,"name":"Aurora Glade","population":"Medium"}
 {"id":2014,"name":"Gunnar's Hold","population":"Medium"}
-{"id":2101,"name":"Jade Sea [FR]","population":"Full"}
+{"id":2101,"name":"Jade Sea [FR]","population":"VeryHigh"}
 {"id":2102,"name":"Fort Ranik [FR]","population":"Medium"}
 {"id":2103,"name":"Augury Rock [FR]","population":"VeryHigh"}
 {"id":2104,"name":"Vizunah Square [FR]","population":"Medium"}
@@ -44,7 +44,7 @@
 {"id":2201,"name":"Kodash [DE]","population":"Medium"}
 {"id":2202,"name":"Riverside [DE]","population":"High"}
 {"id":2203,"name":"Elona Reach [DE]","population":"High"}
-{"id":2204,"name":"Abaddon's Mouth [DE]","population":"VeryHigh"}
+{"id":2204,"name":"Abaddon's Mouth [DE]","population":"High"}
 {"id":2205,"name":"Drakkar Lake [DE]","population":"High"}
 {"id":2206,"name":"Miller's Sound [DE]","population":"Medium"}
 {"id":2207,"name":"Dzagonur [DE]","population":"VeryHigh"}
