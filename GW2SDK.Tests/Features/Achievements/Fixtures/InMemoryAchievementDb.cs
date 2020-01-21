@@ -53,7 +53,7 @@ namespace GW2SDK.Tests.Features.Achievements.Fixtures
                                                                    .Distinct();
         }
 
-        public IEnumerable<string> GetAchievementMasteryRegionNames()
+        public IEnumerable<string> GetMasteryRegionNames()
         {
             return (
                     from json in Achievements
