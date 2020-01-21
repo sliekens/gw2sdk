@@ -68,5 +68,10 @@ namespace GW2SDK.Accounts
         [CanBeNull]
         [JsonProperty(Required = Required.DisallowNull, NullValueHandling = NullValueHandling.Ignore)]
         public int? WvwRank { get; set; }
+
+        [Scope(Permission.Builds)]
+        [CanBeNull]
+        [JsonProperty(Required = Required.DisallowNull, NullValueHandling = NullValueHandling.Ignore)]
+        public int? BuildStorageSlots { get; set; }
     }
 }
