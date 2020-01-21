@@ -24,5 +24,15 @@ namespace GW2SDK.Tests.Features.Continents.Fixtures
                     select flags.Select(token => token.ToString())).SelectMany(flags => flags)
                                                                    .Distinct();
         }
+
+        public IEnumerable<string> GetMasteryRegionNames()
+        {
+            return (
+                    from json in Floors
+                    let jobject = JObject.Parse(json)
+                    let flags = jobject.SelectTokens("$.regions.*.maps.*.mastery_points[*].region")
+                    select flags.Select(token => token.ToString())).SelectMany(types => types)
+                                                                   .Distinct();
+        }
     }
 }

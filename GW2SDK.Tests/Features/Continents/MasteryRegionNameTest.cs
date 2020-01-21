@@ -1,23 +1,23 @@
 ﻿using System;
 using System.Linq;
 using GW2SDK.Enums;
-using GW2SDK.Tests.Features.Achievements.Fixtures;
+using GW2SDK.Tests.Features.Continents.Fixtures;
 using Xunit;
 
-namespace GW2SDK.Tests.Features.Achievements
+namespace GW2SDK.Tests.Features.Continents
 {
-    [Collection(nameof(AchievementDbCollection))]
+    [Collection(nameof(ContinentDbCollection))]
     public class MasteryRegionNameTest
     {
-        public MasteryRegionNameTest(AchievementFixture fixture)
+        public MasteryRegionNameTest(FloorFixture fixture)
         {
             _fixture = fixture;
         }
 
-        private readonly AchievementFixture _fixture;
+        private readonly FloorFixture _fixture;
 
         [Fact]
-        [Trait("Feature",    "Achievements")]
+        [Trait("Feature",    "Continents")]
         [Trait("Category",   "Integration")]
         [Trait("Importance", "Critical")]
         public void Mastery_region_names_can_be_serialized_from_json()
