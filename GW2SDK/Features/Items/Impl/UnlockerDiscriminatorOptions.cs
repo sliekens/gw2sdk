@@ -21,11 +21,14 @@ namespace GW2SDK.Items.Impl
         {
             yield return ("BagSlot", typeof(BagSlotUnlocker));
             yield return ("BankTab", typeof(BankTabUnlocker));
+            yield return ("BuildLibrarySlot", typeof(BuildLibrarySlot));
+            yield return ("BuildLoadoutTab", typeof(BuildLoadoutTab));
             yield return ("Champion", typeof(ChampionUnlocker));
             yield return ("CollectibleCapacity", typeof(CollectibleCapacityUnlocker));
             yield return ("Content", typeof(ContentUnlocker));
             yield return ("CraftingRecipe", typeof(CraftingRecipeUnlocker));
             yield return ("Dye", typeof(DyeUnlocker));
+            yield return ("GearLoadoutTab", typeof(GearLoadoutTab));
             yield return ("GliderSkin", typeof(GliderSkinUnlocker));
             yield return ("Minipet", typeof(MinipetUnlocker));
             yield return ("Ms", typeof(MsUnlocker));
@@ -35,19 +38,22 @@ namespace GW2SDK.Items.Impl
 
         public object Create(Type objectType)
         {
-            if (objectType == typeof(Unlocker)) return new Unlocker();
             if (objectType == typeof(BagSlotUnlocker)) return new BagSlotUnlocker();
             if (objectType == typeof(BankTabUnlocker)) return new BankTabUnlocker();
+            if (objectType == typeof(BuildLibrarySlot)) return new BuildLibrarySlot();
+            if (objectType == typeof(BuildLoadoutTab)) return new BuildLoadoutTab();
             if (objectType == typeof(ChampionUnlocker)) return new ChampionUnlocker();
             if (objectType == typeof(CollectibleCapacityUnlocker)) return new CollectibleCapacityUnlocker();
             if (objectType == typeof(ContentUnlocker)) return new ContentUnlocker();
             if (objectType == typeof(CraftingRecipeUnlocker)) return new CraftingRecipeUnlocker();
             if (objectType == typeof(DyeUnlocker)) return new DyeUnlocker();
+            if (objectType == typeof(GearLoadoutTab)) return new GearLoadoutTab();
             if (objectType == typeof(GliderSkinUnlocker)) return new GliderSkinUnlocker();
             if (objectType == typeof(MinipetUnlocker)) return new MinipetUnlocker();
             if (objectType == typeof(MsUnlocker)) return new MsUnlocker();
             if (objectType == typeof(OutfitUnlocker)) return new OutfitUnlocker();
             if (objectType == typeof(SharedSlotUnlocker)) return new SharedSlotUnlocker();
+            if (objectType == typeof(Unlocker)) return new Unlocker();
             return new Unlocker();
         }
     }
