@@ -11,16 +11,13 @@ namespace GW2SDK.Tokens
     [DataTransferObject]
     public class TokenInfo
     {
-        [NotNull]
         [JsonProperty(Required = Required.Always)]
-        public string Id { get; set; }
+        public string Id { get; set; } = "";
 
-        [NotNull]
         [JsonProperty(Required = Required.Always)]
-        public string Name { get; set; }
+        public string Name { get; set; } = "";
 
-        [NotNull]
         [JsonProperty(Required = Required.Always)]
-        public Permission[] Permissions { get; set; }
+        public Permission[] Permissions { get; set; } = new Permission[0];
     }
 }

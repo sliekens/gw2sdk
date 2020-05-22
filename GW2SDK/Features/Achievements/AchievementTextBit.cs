@@ -6,8 +6,7 @@ namespace GW2SDK.Achievements
     [PublicAPI]
     public sealed class AchievementTextBit : AchievementBit
     {
-        [NotNull]
         [JsonProperty(Required = Required.Always)]
-        public string Text { get; set; }
+        public string Text { get; set; } = "";
     }
 }

@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Net.Http;
-using GW2SDK.Annotations;
 
 namespace GW2SDK.Commerce.Prices.Impl
 {
     public sealed class GetItemPriceByIdRequest : HttpRequestMessage
     {
-        public GetItemPriceByIdRequest([NotNull] Uri requestUri)
+        public GetItemPriceByIdRequest(Uri requestUri)
             : base(HttpMethod.Get, requestUri)
         {
         }

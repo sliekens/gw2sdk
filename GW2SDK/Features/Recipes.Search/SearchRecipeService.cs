@@ -16,12 +16,12 @@ namespace GW2SDK.Recipes.Search
     {
         private readonly HttpClient _http;
 
-        public SearchRecipeService([NotNull] HttpClient http)
+        public SearchRecipeService(HttpClient http)
         {
             _http = http ?? throw new ArgumentNullException(nameof(http));
         }
 
-        public async Task<IDataTransferList<int>> GetRecipesIndexByIngredientId(int ingredientId, [CanBeNull] JsonSerializerSettings settings = null)
+        public async Task<IDataTransferList<int>> GetRecipesIndexByIngredientId(int ingredientId, JsonSerializerSettings? settings = null)
         {
             using (var request = new GetRecipesIndexByIngredientIdRequest.Builder(ingredientId).GetRequest())
             using (var response = await _http.SendAsync(request).ConfigureAwait(false))
@@ -35,7 +35,7 @@ namespace GW2SDK.Recipes.Search
             }
         }
 
-        public async Task<IDataTransferList<int>> GetRecipesIndexByItemId(int itemId, [CanBeNull] JsonSerializerSettings settings = null)
+        public async Task<IDataTransferList<int>> GetRecipesIndexByItemId(int itemId, JsonSerializerSettings? settings = null)
         {
             using (var request = new GetRecipesIndexByItemIdRequest.Builder(itemId).GetRequest())
             using (var response = await _http.SendAsync(request).ConfigureAwait(false))

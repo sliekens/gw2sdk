@@ -14,8 +14,7 @@ namespace GW2SDK.Continents
         [JsonProperty(Required = Required.Always)]
         public MasteryRegionName Region { get; set; }
 
-        [NotNull]
         [JsonProperty("coord", Required = Required.Always)]
-        public double[] Coordinates { get; set; }
+        public double[] Coordinates { get; set; } = new double[0];
     }
 }

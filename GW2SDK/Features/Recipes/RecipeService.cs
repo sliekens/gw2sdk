@@ -16,12 +16,12 @@ namespace GW2SDK.Recipes
     {
         private readonly HttpClient _http;
 
-        public RecipeService([NotNull] HttpClient http)
+        public RecipeService(HttpClient http)
         {
             _http = http ?? throw new ArgumentNullException(nameof(http));
         }
 
-        public async Task<IDataTransferList<int>> GetRecipesIndex([CanBeNull] JsonSerializerSettings settings = null)
+        public async Task<IDataTransferList<int>> GetRecipesIndex(JsonSerializerSettings? settings = null)
         {
             using (var request = new GetRecipesIndexRequest())
             using (var response = await _http.SendAsync(request).ConfigureAwait(false))
@@ -35,7 +35,7 @@ namespace GW2SDK.Recipes
             }
         }
 
-        public async Task<Recipe> GetRecipeById(int recipeId, [CanBeNull] JsonSerializerSettings settings = null)
+        public async Task<Recipe?> GetRecipeById(int recipeId, JsonSerializerSettings? settings = null)
         {
             using (var request = new GetRecipeByIdRequest.Builder(recipeId).GetRequest())
             using (var response = await _http.SendAsync(request).ConfigureAwait(false))
@@ -46,7 +46,7 @@ namespace GW2SDK.Recipes
             }
         }
 
-        public async Task<IDataTransferList<Recipe>> GetRecipesByIds([NotNull] IReadOnlyList<int> recipeIds, [CanBeNull] JsonSerializerSettings settings = null)
+        public async Task<IDataTransferList<Recipe>> GetRecipesByIds(IReadOnlyList<int> recipeIds, JsonSerializerSettings? settings = null)
         {
             if (recipeIds == null)
             {
@@ -70,7 +70,7 @@ namespace GW2SDK.Recipes
             }
         }
 
-        public async Task<IDataTransferPage<Recipe>> GetRecipesByPage(int pageIndex, int? pageSize = null, [CanBeNull] JsonSerializerSettings settings = null)
+        public async Task<IDataTransferPage<Recipe>> GetRecipesByPage(int pageIndex, int? pageSize = null, JsonSerializerSettings? settings = null)
         {
             using (var request = new GetRecipesByPageRequest.Builder(pageIndex, pageSize).GetRequest())
             using (var response = await _http.SendAsync(request).ConfigureAwait(false))

@@ -13,12 +13,12 @@ namespace GW2SDK.Accounts
     {
         private readonly HttpClient _http;
 
-        public AccountService([NotNull] HttpClient http)
+        public AccountService(HttpClient http)
         {
             _http = http ?? throw new ArgumentNullException(nameof(http));
         }
 
-        public async Task<Account> GetAccount([CanBeNull] JsonSerializerSettings settings = null)
+        public async Task<Account?> GetAccount(JsonSerializerSettings? settings = null)
         {
             using (var request = new GetAccountRequest())
             using (var response = await _http.SendAsync(request).ConfigureAwait(false))

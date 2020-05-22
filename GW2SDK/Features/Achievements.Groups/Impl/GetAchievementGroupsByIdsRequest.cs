@@ -2,25 +2,22 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
-using GW2SDK.Annotations;
 using GW2SDK.Extensions;
 
 namespace GW2SDK.Achievements.Groups.Impl
 {
     public sealed class GetAchievementGroupsByIdsRequest : HttpRequestMessage
     {
-        private GetAchievementGroupsByIdsRequest([NotNull] Uri requestUri)
+        private GetAchievementGroupsByIdsRequest(Uri requestUri)
             : base(HttpMethod.Get, requestUri)
         {
         }
 
         public sealed class Builder
         {
-            [NotNull]
-            [ItemNotNull]
             private readonly IReadOnlyList<string> _achievementGroupIds;
 
-            public Builder([NotNull] [ItemNotNull] IReadOnlyList<string> achievementGroupIds)
+            public Builder(IReadOnlyList<string> achievementGroupIds)
             {
                 if (achievementGroupIds == null)
                 {

@@ -9,23 +9,19 @@ namespace GW2SDK.Items
         [JsonProperty(Required = Required.Always)]
         public int Level { get; set; }
 
-        [NotNull]
         [JsonProperty(Required = Required.Always)]
-        public InfusionSlot[] InfusionSlots { get; set; }
+        public InfusionSlot[] InfusionSlots { get; set; } = new InfusionSlot[0];
 
-        [CanBeNull]
         [JsonProperty(Required = Required.DisallowNull, NullValueHandling = NullValueHandling.Ignore)]
-        public InfixUpgrade InfixUpgrade { get; set; }
+        public InfixUpgrade? InfixUpgrade { get; set; }
 
         [JsonProperty(Required = Required.DisallowNull, NullValueHandling = NullValueHandling.Ignore)]
         public int? SuffixItemId { get; set; }
 
-        [NotNull]
         [JsonProperty(Required = Required.Always)]
-        public string SecondarySuffixItemId { get; set; }
+        public string SecondarySuffixItemId { get; set; } = "";
 
-        [CanBeNull]
         [JsonProperty(Required = Required.DisallowNull, NullValueHandling = NullValueHandling.Ignore)]
-        public int[] StatChoices { get; set; }
+        public int[]? StatChoices { get; set; }
     }
 }

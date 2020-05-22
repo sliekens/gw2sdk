@@ -9,8 +9,7 @@ namespace GW2SDK.Items
         [JsonProperty(Required = Required.Always)]
         public int RecipeId { get; set; }
 
-        [CanBeNull]
         [JsonProperty(Required = Required.DisallowNull, NullValueHandling = NullValueHandling.Ignore)]
-        public int[] ExtraRecipeIds { get; set; }
+        public int[]? ExtraRecipeIds { get; set; }
     }
 }

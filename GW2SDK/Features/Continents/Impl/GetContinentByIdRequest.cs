@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Net.Http;
-using GW2SDK.Annotations;
 
 namespace GW2SDK.Continents.Impl
 {
     public sealed class GetContinentByIdRequest : HttpRequestMessage
     {
-        private GetContinentByIdRequest([NotNull] Uri requestUri)
+        private GetContinentByIdRequest(Uri requestUri)
             : base(HttpMethod.Get, requestUri)
         {
         }

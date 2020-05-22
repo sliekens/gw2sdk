@@ -1,24 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Net.Http;
-using GW2SDK.Annotations;
 using GW2SDK.Extensions;
 
 namespace GW2SDK.Colors.Impl
 {
     public sealed class GetColorsByIdsRequest : HttpRequestMessage
     {
-        private GetColorsByIdsRequest([NotNull] Uri requestUri)
+        private GetColorsByIdsRequest(Uri requestUri)
             : base(HttpMethod.Get, requestUri)
         {
         }
 
         public sealed class Builder
         {
-            [NotNull]
             private readonly IReadOnlyList<int> _colorIds;
 
-            public Builder([NotNull] IReadOnlyList<int> colorIds)
+            public Builder(IReadOnlyList<int> colorIds)
             {
                 if (colorIds == null)
                 {

@@ -8,9 +8,8 @@ namespace GW2SDK.Items
     [DataTransferObject(RootObject = false)]
     public sealed class InfusionSlot
     {
-        [NotNull]
         [JsonProperty(Required = Required.Always)]
-        public InfusionSlotFlag[] Flags { get; set; }
+        public InfusionSlotFlag[] Flags { get; set; } = new InfusionSlotFlag[0];
 
         [JsonProperty(Required = Required.DisallowNull, NullValueHandling = NullValueHandling.Ignore)]
         public int? ItemId { get; set; }

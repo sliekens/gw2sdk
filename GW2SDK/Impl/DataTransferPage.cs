@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using GW2SDK.Annotations;
 
 namespace GW2SDK.Impl
 {
@@ -9,7 +8,7 @@ namespace GW2SDK.Impl
     {
         private readonly IPageContext _context;
 
-        public DataTransferPage([NotNull] IList<T> list, [NotNull] IPageContext context)
+        public DataTransferPage(IList<T> list, IPageContext context)
             : base(list)
         {
             _context = context ?? throw new ArgumentNullException(nameof(context));

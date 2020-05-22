@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Net.Http;
-using GW2SDK.Annotations;
 
 namespace GW2SDK.Skins.Impl
 {
     public sealed class GetSkinByIdRequest : HttpRequestMessage
     {
-        private GetSkinByIdRequest([NotNull] Uri requestUri)
+        private GetSkinByIdRequest(Uri requestUri)
             : base(HttpMethod.Get, requestUri)
         {
         }

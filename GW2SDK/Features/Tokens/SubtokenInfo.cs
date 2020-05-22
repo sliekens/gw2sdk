@@ -13,9 +13,7 @@ namespace GW2SDK.Tokens
         [JsonProperty(Required = Required.Always)]
         public DateTimeOffset IssuedAt { get; set; }
 
-        [CanBeNull]
-        [ItemNotNull]
         [JsonProperty(Required = Required.DisallowNull, NullValueHandling = NullValueHandling.Ignore)]
-        public Uri[] Urls { get; set; }
+        public Uri[]? Urls { get; set; }
     }
 }

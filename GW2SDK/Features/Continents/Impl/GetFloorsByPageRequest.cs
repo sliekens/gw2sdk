@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Net.Http;
-using GW2SDK.Annotations;
 
 namespace GW2SDK.Continents.Impl
 {
     public sealed class GetFloorsByPageRequest : HttpRequestMessage
     {
-        private GetFloorsByPageRequest([NotNull] Uri requestUri)
+        private GetFloorsByPageRequest(Uri requestUri)
             : base(HttpMethod.Get, requestUri)
         {
         }

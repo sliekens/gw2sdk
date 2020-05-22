@@ -26,10 +26,9 @@ namespace GW2SDK.Skins.Impl
             // Skins can have extra fields depending on the type of skin
             // Anet decided to put those extra fields in a "details" property
             // For us it's much more convenient to flatten the root object before serializing the JSON to CLR objects
-            if (json.ContainsKey("details"))
+            if (json.Property("details")?.Value is JObject details)
             {
-                var details = json.Property("details");
-                foreach (var property in ((JObject) details.Value).Properties())
+                foreach (var property in details.Properties())
                 {
                     // There can be a naming collision that prevents a clean merge
                     // Prefix those duplicate names with the discriminator
@@ -44,7 +43,7 @@ namespace GW2SDK.Skins.Impl
                 }
 
                 // Details should now be removed because all its properties have been added to the root object.
-                details.Remove();
+                json.Remove("details");
             }
         }
 

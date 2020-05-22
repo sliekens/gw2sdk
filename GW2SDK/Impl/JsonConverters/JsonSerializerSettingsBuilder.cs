@@ -9,7 +9,7 @@ namespace GW2SDK.Impl.JsonConverters
 
         private MissingMemberHandling _missingMemberHandling;
 
-        private ITraceWriter _traceWriter;
+        private ITraceWriter? _traceWriter;
 
         public JsonSerializerSettingsBuilder UseMissingMemberHandling(MissingMemberHandling missingMemberHandling)
         {

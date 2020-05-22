@@ -10,9 +10,8 @@ namespace GW2SDK.Items
         [JsonProperty(Required = Required.Always)]
         public int Level { get; set; }
 
-        [CanBeNull]
         [JsonProperty(Required = Required.DisallowNull, NullValueHandling = NullValueHandling.Ignore)]
-        public int[] VendorIds { get; set; }
+        public int[]? VendorIds { get; set; }
 
         [JsonProperty(Required = Required.DisallowNull, NullValueHandling = NullValueHandling.Ignore)]
         public int? GuildUpgradeId { get; set; }

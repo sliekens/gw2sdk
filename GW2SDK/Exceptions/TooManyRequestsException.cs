@@ -10,12 +10,12 @@ namespace GW2SDK.Exceptions
         {
         }
 
-        public TooManyRequestsException([CanBeNull] string message)
+        public TooManyRequestsException(string? message)
             : base(message)
         {
         }
 
-        public TooManyRequestsException([CanBeNull] string message, [CanBeNull] Exception innerException)
+        public TooManyRequestsException(string? message, Exception? innerException)
             : base(message, innerException)
         {
         }

@@ -1,14 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Net.Http;
-using GW2SDK.Annotations;
 using GW2SDK.Extensions;
 
 namespace GW2SDK.Continents.Impl
 {
     public sealed class GetFloorsByIdsRequest : HttpRequestMessage
     {
-        private GetFloorsByIdsRequest([NotNull] Uri requestUri)
+        private GetFloorsByIdsRequest(Uri requestUri)
             : base(HttpMethod.Get, requestUri)
         {
         }
@@ -17,10 +16,9 @@ namespace GW2SDK.Continents.Impl
         {
             private readonly int _continentId;
 
-            [NotNull]
             private readonly IReadOnlyList<int> _floorIds;
 
-            public Builder(int continentId, [NotNull] IReadOnlyList<int> floorIds)
+            public Builder(int continentId, IReadOnlyList<int> floorIds)
             {
                 if (floorIds == null)
                 {

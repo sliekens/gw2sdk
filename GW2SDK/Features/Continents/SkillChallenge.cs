@@ -7,12 +7,10 @@ namespace GW2SDK.Continents
     [DataTransferObject(RootObject = false)]
     public sealed class SkillChallenge
     {
-        [NotNull]
         [JsonProperty(Required = Required.Always)]
-        public string Id { get; set; }
+        public string Id { get; set; } = "";
 
-        [NotNull]
         [JsonProperty("coord", Required = Required.Always)]
-        public double[] Coordinates { get; set; }
+        public double[] Coordinates { get; set; } = new double[0];
     }
 }

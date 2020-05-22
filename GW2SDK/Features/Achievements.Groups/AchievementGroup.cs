@@ -9,23 +9,19 @@ namespace GW2SDK.Achievements.Groups
     [DataTransferObject]
     public sealed class AchievementGroup
     {
-        [NotNull]
         [JsonProperty(Required = Required.Always)]
-        public string Id { get; set; }
+        public string Id { get; set; } = "";
 
-        [NotNull]
         [JsonProperty(Required = Required.Always)]
-        public string Name { get; set; }
+        public string Name { get; set; } = "";
 
-        [NotNull]
         [JsonProperty(Required = Required.Always)]
-        public string Description { get; set; }
+        public string Description { get; set; } = "";
 
         [JsonProperty(Required = Required.Always)]
         public int Order { get; set; }
 
-        [NotNull]
         [JsonProperty(Required = Required.Always)]
-        public int[] Categories { get; set; }
+        public int[] Categories { get; set; } = new int[0];
     }
 }

@@ -13,9 +13,8 @@ namespace GW2SDK.Continents
         [JsonProperty(Required = Required.Always)]
         public int Id { get; set; }
 
-        [NotNull]
         [JsonProperty(Required = Required.Always)]
-        public string Name { get; set; }
+        public string Name { get; set; } = "";
 
         [JsonProperty(Required = Required.Always)]
         public int MinLevel { get; set; }
@@ -26,44 +25,34 @@ namespace GW2SDK.Continents
         [JsonProperty(Required = Required.Always)]
         public int DefaultFloor { get; set; }
 
-        [CanBeNull]
         [JsonProperty("label_coord", Required = Required.DisallowNull, NullValueHandling = NullValueHandling.Ignore)]
-        public int[] LabelCoordinates { get; set; }
+        public int[]? LabelCoordinates { get; set; }
 
-        [NotNull]
         [JsonProperty("map_rect", Required = Required.Always)]
-        public int[][] MapRectangle { get; set; }
+        public int[][] MapRectangle { get; set; } = new int[0][];
 
-        [NotNull]
         [JsonProperty("continent_rect", Required = Required.Always)]
-        public int[][] ContinentRectangle { get; set; }
+        public int[][] ContinentRectangle { get; set; } = new int[0][];
 
-        [NotNull]
         [JsonProperty(Required = Required.Always)]
-        public Dictionary<int, PointOfInterest> PointsOfInterest { get; set; }
+        public Dictionary<int, PointOfInterest> PointsOfInterest { get; set; } = new Dictionary<int, PointOfInterest>(0);
         
-        [NotNull]
         [JsonProperty(Required = Required.Always)]
-        public Dictionary<int, MapTask> Tasks { get; set; }
+        public Dictionary<int, MapTask> Tasks { get; set; } = new Dictionary<int, MapTask>(0);
 
-        [NotNull]
         [JsonProperty(Required = Required.Always)]
-        public SkillChallenge[] SkillChallenges { get; set; }
+        public SkillChallenge[] SkillChallenges { get; set; } = new SkillChallenge[0];
 
-        [NotNull]
         [JsonProperty(Required = Required.Always)]
-        public Dictionary<int, MapSector> Sectors { get; set; }
+        public Dictionary<int, MapSector> Sectors { get; set; } = new Dictionary<int, MapSector>(0);
 
-        [NotNull]
         [JsonProperty(Required = Required.Always)]
-        public Adventure[] Adventures { get; set; }
+        public Adventure[] Adventures { get; set; } = new Adventure[0];
 
-        [NotNull]
         [JsonProperty(Required = Required.Always)]
-        public MasteryPoint[] MasteryPoints { get; set; }
+        public MasteryPoint[] MasteryPoints { get; set; } = new MasteryPoint[0];
 
-        [CanBeNull]
         [JsonProperty(Required = Required.DisallowNull, NullValueHandling = NullValueHandling.Ignore)]
-        public GodShrine[] GodShrines { get; set; }
+        public GodShrine[]? GodShrines { get; set; }
     }
 }

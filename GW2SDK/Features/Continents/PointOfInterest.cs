@@ -14,12 +14,10 @@ namespace GW2SDK.Continents
         [JsonProperty(Required = Required.Always)]
         public int Floor { get; set; }
 
-        [NotNull]
         [JsonProperty("coord", Required = Required.Always)]
-        public int[] Coordinates { get; set; }
+        public int[] Coordinates { get; set; } = new int[0];
 
-        [NotNull]
         [JsonProperty(Required = Required.Always)]
-        public string ChatLink { get; set; }
+        public string ChatLink { get; set; } = "";
     }
 }

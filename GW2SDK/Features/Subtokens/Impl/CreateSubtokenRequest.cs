@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
-using GW2SDK.Annotations;
 using GW2SDK.Enums;
 using GW2SDK.Extensions;
 
@@ -11,7 +10,7 @@ namespace GW2SDK.Subtokens.Impl
 {
     public sealed class CreateSubtokenRequest : HttpRequestMessage
     {
-        private CreateSubtokenRequest([NotNull] Uri requestUri)
+        private CreateSubtokenRequest(Uri requestUri)
             : base(HttpMethod.Get, requestUri)
         {
         }
@@ -20,17 +19,15 @@ namespace GW2SDK.Subtokens.Impl
         {
             private readonly DateTimeOffset? _absoluteExpirationDate;
 
-            [CanBeNull]
-            private readonly IReadOnlyList<Permission> _permissions;
+            private readonly IReadOnlyList<Permission>? _permissions;
 
-            [CanBeNull]
-            private readonly IReadOnlyList<string> _urls;
+            private readonly IReadOnlyList<string>? _urls;
 
             public Builder(
-                [CanBeNull] string accessToken = null,
-                [CanBeNull] IReadOnlyList<Permission> permissions = null,
+                string? accessToken = null,
+                IReadOnlyList<Permission>? permissions = null,
                 DateTimeOffset? absoluteExpirationDate = null,
-                [CanBeNull] IReadOnlyList<string> urls = null)
+                IReadOnlyList<string>? urls = null)
             {
                 if (!string.IsNullOrEmpty(accessToken))
                 {
@@ -42,7 +39,7 @@ namespace GW2SDK.Subtokens.Impl
                 _urls = urls;
             }
 
-            public AuthenticationHeaderValue AccessToken { get; }
+            public AuthenticationHeaderValue? AccessToken { get; }
 
             public CreateSubtokenRequest GetRequest()
             {

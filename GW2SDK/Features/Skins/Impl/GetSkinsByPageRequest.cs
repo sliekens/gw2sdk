@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Net.Http;
-using GW2SDK.Annotations;
 
 namespace GW2SDK.Skins.Impl
 {
     public sealed class GetSkinsByPageRequest : HttpRequestMessage
     {
-        private GetSkinsByPageRequest([NotNull] Uri requestUri)
+        private GetSkinsByPageRequest(Uri requestUri)
             : base(HttpMethod.Get, requestUri)
         {
         }

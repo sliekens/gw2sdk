@@ -1,5 +1,6 @@
 ﻿using System;
 
+#nullable disable
 namespace GW2SDK.Annotations
 {
     /// <summary>
@@ -12,3 +13,4 @@ namespace GW2SDK.Annotations
     {
     }
 }
+#nullable restore

@@ -1,24 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Net.Http;
-using GW2SDK.Annotations;
 using GW2SDK.Extensions;
 
 namespace GW2SDK.Accounts.Achievements.Impl
 {
     public sealed class GetAccountAchievementsByIdsRequest : HttpRequestMessage
     {
-        private GetAccountAchievementsByIdsRequest([NotNull] Uri requestUri)
+        private GetAccountAchievementsByIdsRequest(Uri requestUri)
             : base(HttpMethod.Get, requestUri)
         {
         }
 
         public sealed class Builder
         {
-            [NotNull]
             private readonly IReadOnlyList<int> _achievementIds;
 
-            public Builder([NotNull] IReadOnlyList<int> achievementIds)
+            public Builder(IReadOnlyList<int> achievementIds)
             {
                 if (achievementIds == null)
                 {

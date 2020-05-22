@@ -7,13 +7,10 @@ namespace GW2SDK.Skins
     [DataTransferObject(RootObject = false)]
     public sealed class DyeSlotInfo
     {
-        [NotNull]
-        [ItemCanBeNull]
         [JsonProperty(Required = Required.Always)]
-        public DyeSlot[] Default { get; set; }
+        public DyeSlot?[] Default { get; set; } = new DyeSlot?[0];
 
-        [NotNull]
         [JsonProperty(Required = Required.Always)]
-        public DyeSlotOverrideInfo Overrides { get; set; }
+        public DyeSlotOverrideInfo Overrides { get; set; } = new DyeSlotOverrideInfo();
     }
 }

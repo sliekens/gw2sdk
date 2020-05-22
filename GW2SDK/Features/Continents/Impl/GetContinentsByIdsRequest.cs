@@ -1,24 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Net.Http;
-using GW2SDK.Annotations;
 using GW2SDK.Extensions;
 
 namespace GW2SDK.Continents.Impl
 {
     public sealed class GetContinentsByIdsRequest : HttpRequestMessage
     {
-        private GetContinentsByIdsRequest([NotNull] Uri requestUri)
+        private GetContinentsByIdsRequest(Uri requestUri)
             : base(HttpMethod.Get, requestUri)
         {
         }
 
         public sealed class Builder
         {
-            [NotNull]
             private readonly IReadOnlyList<int> _continentIds;
 
-            public Builder([NotNull] IReadOnlyList<int> continentIds)
+            public Builder(IReadOnlyList<int> continentIds)
             {
                 if (continentIds == null)
                 {

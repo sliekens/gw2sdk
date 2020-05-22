@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Diagnostics;
-using GW2SDK.Annotations;
 using Newtonsoft.Json.Serialization;
 using Xunit.Abstractions;
 
@@ -10,7 +9,7 @@ namespace GW2SDK.Tests.TestInfrastructure
     {
         private readonly ITestOutputHelper _output;
 
-        public XunitTraceWriter([NotNull] ITestOutputHelper output)
+        public XunitTraceWriter(ITestOutputHelper output)
         {
             _output = output ?? throw new ArgumentNullException(nameof(output));
         }

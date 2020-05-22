@@ -13,12 +13,12 @@ namespace GW2SDK.Tokens
     {
         private readonly HttpClient _http;
 
-        public TokenInfoService([NotNull] HttpClient http)
+        public TokenInfoService(HttpClient http)
         {
             _http = http ?? throw new ArgumentNullException(nameof(http));
         }
 
-        public async Task<TokenInfo> GetTokenInfo([CanBeNull] string accessToken, [CanBeNull] JsonSerializerSettings settings = null)
+        public async Task<TokenInfo?> GetTokenInfo(string? accessToken, JsonSerializerSettings? settings = null)
         {
             using (var request = new GetTokenInfoRequest.Builder(accessToken).GetRequest())
             using (var response = await _http.SendAsync(request).ConfigureAwait(false))

@@ -12,23 +12,19 @@ namespace GW2SDK.Achievements.Categories
         [JsonProperty(Required = Required.Always)]
         public int Id { get; set; }
 
-        [NotNull]
         [JsonProperty(Required = Required.Always)]
-        public string Name { get; set; }
+        public string Name { get; set; } = "";
 
-        [NotNull]
         [JsonProperty(Required = Required.Always)]
-        public string Description { get; set; }
+        public string Description { get; set; } = "";
 
         [JsonProperty(Required = Required.Always)]
         public int Order { get; set; }
 
-        [NotNull]
         [JsonProperty(Required = Required.Always)]
-        public string Icon { get; set; }
+        public string Icon { get; set; } = "";
 
-        [NotNull]
         [JsonProperty(Required = Required.Always)]
-        public int[] Achievements { get; set; }
+        public int[] Achievements { get; set; } = new int[0];
     }
 }

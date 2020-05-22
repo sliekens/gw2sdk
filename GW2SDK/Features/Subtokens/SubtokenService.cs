@@ -15,17 +15,17 @@ namespace GW2SDK.Subtokens
     {
         private readonly HttpClient _http;
 
-        public SubtokenService([NotNull] HttpClient http)
+        public SubtokenService(HttpClient http)
         {
             _http = http ?? throw new ArgumentNullException(nameof(http));
         }
 
         public async Task<CreatedSubtoken> CreateSubtoken(
-            [CanBeNull] string accessToken,
-            [CanBeNull] IReadOnlyList<Permission> permissions = null,
+            string? accessToken,
+            IReadOnlyList<Permission>? permissions = null,
             DateTimeOffset? absoluteExpirationDate = null,
-            [CanBeNull] IReadOnlyList<string> urls = null,
-            [CanBeNull] JsonSerializerSettings settings = null)
+            IReadOnlyList<string>? urls = null,
+            JsonSerializerSettings? settings = null)
         {
             using (var request = new CreateSubtokenRequest.Builder(accessToken, permissions, absoluteExpirationDate, urls).GetRequest())
             using (var response = await _http.SendAsync(request).ConfigureAwait(false))

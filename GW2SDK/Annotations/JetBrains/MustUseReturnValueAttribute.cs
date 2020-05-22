@@ -1,5 +1,6 @@
 ﻿using System;
 
+#nullable disable
 namespace GW2SDK.Annotations
 {
     /// <summary>
@@ -28,3 +29,4 @@ namespace GW2SDK.Annotations
         [CanBeNull] public string Justification { get; }
     }
 }
+#nullable restore

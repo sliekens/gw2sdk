@@ -16,12 +16,12 @@ namespace GW2SDK.Commerce.Prices
     {
         private readonly HttpClient _http;
 
-        public ItemPriceService([NotNull] HttpClient http)
+        public ItemPriceService(HttpClient http)
         {
             _http = http ?? throw new ArgumentNullException(nameof(http));
         }
 
-        public async Task<IDataTransferList<int>> GetItemPricesIndex([CanBeNull] JsonSerializerSettings settings = null)
+        public async Task<IDataTransferList<int>> GetItemPricesIndex(JsonSerializerSettings? settings = null)
         {
             using (var request = new GetItemPricesIndexRequest())
             using (var response = await _http.SendAsync(request).ConfigureAwait(false))
@@ -35,7 +35,7 @@ namespace GW2SDK.Commerce.Prices
             }
         }
 
-        public async Task<ItemPrice> GetItemPriceById(int itemId, [CanBeNull] JsonSerializerSettings settings = null)
+        public async Task<ItemPrice?> GetItemPriceById(int itemId, JsonSerializerSettings? settings = null)
         {
             using (var request = new GetItemPriceByIdRequest.Builder(itemId).GetRequest())
             using (var response = await _http.SendAsync(request).ConfigureAwait(false))
@@ -46,7 +46,7 @@ namespace GW2SDK.Commerce.Prices
             }
         }
 
-        public async Task<IDataTransferList<ItemPrice>> GetItemPricesByIds([NotNull] IReadOnlyList<int> itemIds, [CanBeNull] JsonSerializerSettings settings = null)
+        public async Task<IDataTransferList<ItemPrice>> GetItemPricesByIds(IReadOnlyList<int> itemIds, JsonSerializerSettings? settings = null)
         {
             if (itemIds == null)
             {

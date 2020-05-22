@@ -14,9 +14,9 @@ namespace GW2SDK.Commerce.Prices
         public bool Whitelisted { get; set; }
 
         [JsonProperty("buys", Required = Required.Always)]
-        public ItemBuyers Buyers { get; set; }
+        public ItemBuyers Buyers { get; set; } = new ItemBuyers();
 
         [JsonProperty("sells", Required = Required.Always)]
-        public ItemSellers Sellers { get; set; }
+        public ItemSellers Sellers { get; set; } = new ItemSellers();
     }
 }

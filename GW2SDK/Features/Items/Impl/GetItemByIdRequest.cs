@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Net.Http;
-using GW2SDK.Annotations;
 
 namespace GW2SDK.Items.Impl
 {
     public sealed class GetItemByIdRequest : HttpRequestMessage
     {
-        public GetItemByIdRequest([NotNull] Uri requestUri)
+        public GetItemByIdRequest(Uri requestUri)
             : base(HttpMethod.Get, requestUri)
         {
         }

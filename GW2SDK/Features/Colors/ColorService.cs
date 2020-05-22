@@ -16,12 +16,12 @@ namespace GW2SDK.Colors
     {
         private readonly HttpClient _http;
 
-        public ColorService([NotNull] HttpClient http)
+        public ColorService(HttpClient http)
         {
             _http = http ?? throw new ArgumentNullException(nameof(http));
         }
 
-        public async Task<IDataTransferList<Color>> GetColors([CanBeNull] JsonSerializerSettings settings = null)
+        public async Task<IDataTransferList<Color>> GetColors(JsonSerializerSettings? settings = null)
         {
             using (var request = new GetColorsRequest())
             using (var response = await _http.SendAsync(request).ConfigureAwait(false))
@@ -35,7 +35,7 @@ namespace GW2SDK.Colors
             }
         }
 
-        public async Task<IDataTransferList<int>> GetColorsIndex([CanBeNull] JsonSerializerSettings settings = null)
+        public async Task<IDataTransferList<int>> GetColorsIndex(JsonSerializerSettings? settings = null)
         {
             using (var request = new GetColorsIndexRequest())
             using (var response = await _http.SendAsync(request).ConfigureAwait(false))
@@ -49,7 +49,7 @@ namespace GW2SDK.Colors
             }
         }
 
-        public async Task<Color> GetColorById(int colorId, [CanBeNull] JsonSerializerSettings settings = null)
+        public async Task<Color?> GetColorById(int colorId, JsonSerializerSettings? settings = null)
         {
             using (var request = new GetColorByIdRequest.Builder(colorId).GetRequest())
             using (var response = await _http.SendAsync(request).ConfigureAwait(false))
@@ -60,7 +60,7 @@ namespace GW2SDK.Colors
             }
         }
 
-        public async Task<IDataTransferList<Color>> GetColorsByIds([NotNull] IReadOnlyList<int> colorIds, [CanBeNull] JsonSerializerSettings settings = null)
+        public async Task<IDataTransferList<Color>> GetColorsByIds(IReadOnlyList<int> colorIds, JsonSerializerSettings? settings = null)
         {
             if (colorIds == null)
             {
@@ -84,7 +84,7 @@ namespace GW2SDK.Colors
             }
         }
 
-        public async Task<IDataTransferPage<Color>> GetColorsByPage(int pageIndex, int? pageSize = null, [CanBeNull] JsonSerializerSettings settings = null)
+        public async Task<IDataTransferPage<Color>> GetColorsByPage(int pageIndex, int? pageSize = null, JsonSerializerSettings? settings = null)
         {
             using (var request = new GetColorsByPageRequest.Builder(pageIndex, pageSize).GetRequest())
             using (var response = await _http.SendAsync(request).ConfigureAwait(false))

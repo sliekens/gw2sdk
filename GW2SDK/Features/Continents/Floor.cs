@@ -11,17 +11,13 @@ namespace GW2SDK.Continents
         [JsonProperty(Required = Required.Always)]
         public int Id { get; set; }
 
-        [NotNull]
         [JsonProperty("texture_dims", Required = Required.Always)]
-        public int[] TextureDimensions { get; set; }
+        public int[] TextureDimensions { get; set; } = new int[0];
 
-        [CanBeNull]
-        [ItemNotNull]
         [JsonProperty(Required = Required.DisallowNull, NullValueHandling = NullValueHandling.Ignore)]
-        public int[][] ClampedView { get; set; }
+        public int[][]? ClampedView { get; set; }
 
-        [NotNull]
         [JsonProperty(Required = Required.Always)]
-        public Dictionary<int, Region> Regions { get; set; }
+        public Dictionary<int, Region> Regions { get; set; } = new Dictionary<int, Region>(0);
     }
 }

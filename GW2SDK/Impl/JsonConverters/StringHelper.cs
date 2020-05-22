@@ -1,11 +1,10 @@
 ﻿using System;
-using GW2SDK.Annotations;
 
 namespace GW2SDK.Impl.JsonConverters
 {
     internal static class StringHelper
     {
-        internal static string ToSnakeCase([NotNull] string text)
+        internal static string ToSnakeCase(string text)
         {
             if (text == null)
             {

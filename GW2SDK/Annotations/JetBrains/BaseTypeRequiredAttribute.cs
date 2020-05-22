@@ -1,5 +1,6 @@
 ﻿using System;
 
+#nullable disable
 namespace GW2SDK.Annotations
 {
     /// <summary>
@@ -25,3 +26,4 @@ namespace GW2SDK.Annotations
         [NotNull] public Type BaseType { get; }
     }
 }
+#nullable restore

@@ -17,13 +17,13 @@ namespace GW2SDK.Accounts.Achievements
     {
         private readonly HttpClient _http;
 
-        public AccountAchievementService([NotNull] HttpClient http)
+        public AccountAchievementService(HttpClient http)
         {
             _http = http ?? throw new ArgumentNullException(nameof(http));
         }
 
         [Scope(Permission.Progression)]
-        public async Task<AccountAchievement> GetAccountAchievementById(int achievementId, [CanBeNull] JsonSerializerSettings settings = null)
+        public async Task<AccountAchievement?> GetAccountAchievementById(int achievementId, JsonSerializerSettings? settings = null)
         {
             using (var request = new GetAccountAchievementByIdRequest.Builder(achievementId).GetRequest())
             using (var response = await _http.SendAsync(request).ConfigureAwait(false))
@@ -36,8 +36,8 @@ namespace GW2SDK.Accounts.Achievements
 
         [Scope(Permission.Progression)]
         public async Task<IDataTransferList<AccountAchievement>> GetAccountAchievementsByIds(
-            [NotNull] IReadOnlyList<int> achievementIds,
-            [CanBeNull] JsonSerializerSettings settings = null)
+            IReadOnlyList<int> achievementIds,
+            JsonSerializerSettings? settings = null)
         {
             if (achievementIds == null)
             {
@@ -62,7 +62,7 @@ namespace GW2SDK.Accounts.Achievements
         }
 
         [Scope(Permission.Progression)]
-        public async Task<IDataTransferList<AccountAchievement>> GetAccountAchievements([CanBeNull] JsonSerializerSettings settings = null)
+        public async Task<IDataTransferList<AccountAchievement>> GetAccountAchievements(JsonSerializerSettings? settings = null)
         {
             using (var request = new GetAccountAchievementsRequest())
             using (var response = await _http.SendAsync(request).ConfigureAwait(false))
@@ -80,7 +80,7 @@ namespace GW2SDK.Accounts.Achievements
         public async Task<IDataTransferPage<AccountAchievement>> GetAccountAchievementsByPage(
             int pageIndex,
             int? pageSize,
-            [CanBeNull] JsonSerializerSettings settings = null)
+            JsonSerializerSettings? settings = null)
         {
             using (var request = new GetAccountAchievementsByPageRequest.Builder(pageIndex, pageSize).GetRequest())
             using (var response = await _http.SendAsync(request).ConfigureAwait(false))

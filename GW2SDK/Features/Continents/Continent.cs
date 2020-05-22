@@ -12,13 +12,11 @@ namespace GW2SDK.Continents
         [JsonProperty(Required = Required.Always)]
         public int Id { get; set; }
 
-        [NotNull]
         [JsonProperty(Required = Required.Always)]
-        public string Name { get; set; }
+        public string Name { get; set; } = "";
 
-        [NotNull]
         [JsonProperty("continent_dims", Required = Required.Always)]
-        public int[] ContinentDimensions { get; set; }
+        public int[] ContinentDimensions { get; set; } = new int[0];
 
         [JsonProperty(Required = Required.Always)]
         public int MinZoom { get; set; }
@@ -26,8 +24,7 @@ namespace GW2SDK.Continents
         [JsonProperty(Required = Required.Always)]
         public int MaxZoom { get; set; }
 
-        [NotNull]
         [JsonProperty(Required = Required.Always)]
-        public int[] Floors { get; set; }
+        public int[] Floors { get; set; } = new int[0];
     }
 }

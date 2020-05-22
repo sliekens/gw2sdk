@@ -8,20 +8,20 @@ namespace GW2SDK.Extensions
     [UsedImplicitly(ImplicitUseTargetFlags.WithMembers)]
     public static class HttpClientExtensions
     {
-        public static void UseBaseAddress([NotNull] this HttpClient instance, [NotNull] Uri baseAddress)
+        public static void UseBaseAddress(this HttpClient instance, Uri baseAddress)
         {
             if (instance == null) throw new ArgumentNullException(nameof(instance));
             instance.BaseAddress = baseAddress ?? throw new ArgumentNullException(nameof(baseAddress));
         }
 
-        public static void UseAccessToken([NotNull] this HttpClient instance, [NotNull] string accessToken)
+        public static void UseAccessToken(this HttpClient instance, string accessToken)
         {
             if (instance == null) throw new ArgumentNullException(nameof(instance));
             if (accessToken == null) throw new ArgumentNullException(nameof(accessToken));
             instance.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
         }
 
-        public static void UseSchemaVersion([NotNull] this HttpClient instance, [NotNull] string version)
+        public static void UseSchemaVersion(this HttpClient instance, string version)
         {
             if (instance == null) throw new ArgumentNullException(nameof(instance));
             if (version == null) throw new ArgumentNullException(nameof(version));
@@ -35,13 +35,13 @@ namespace GW2SDK.Extensions
             }
         }
 
-        public static void UseLatestSchemaVersion([NotNull] this HttpClient instance)
+        public static void UseLatestSchemaVersion(this HttpClient instance)
         {
             if (instance == null) throw new ArgumentNullException(nameof(instance));
             instance.UseSchemaVersion("latest");
         }
 
-        public static void UseSchemaVersion([NotNull] this HttpClient instance, DateTimeOffset version)
+        public static void UseSchemaVersion(this HttpClient instance, DateTimeOffset version)
         {
             if (instance == null) throw new ArgumentNullException(nameof(instance));
             if (version == null) throw new ArgumentNullException(nameof(version));
@@ -56,7 +56,7 @@ namespace GW2SDK.Extensions
             instance.UseSchemaVersion(version.ToOffset(TimeSpan.Zero).ToString(sortable) + "Z");
         }
 
-        public static void UseLanguage([NotNull] this HttpClient instance, string lang)
+        public static void UseLanguage(this HttpClient instance, string lang)
         {
             if (instance == null) throw new ArgumentNullException(nameof(instance));
             if (lang == null) throw new ArgumentNullException(nameof(lang));
@@ -64,7 +64,7 @@ namespace GW2SDK.Extensions
             instance.DefaultRequestHeaders.AcceptLanguage.ParseAdd(lang);
         }
 
-        public static void UseDataCompression([NotNull] this HttpClient instance)
+        public static void UseDataCompression(this HttpClient instance)
         {
             if (instance == null) throw new ArgumentNullException(nameof(instance));
             instance.DefaultRequestHeaders.AcceptEncoding.Add(new StringWithQualityHeaderValue("gzip"));

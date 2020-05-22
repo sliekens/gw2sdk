@@ -14,7 +14,7 @@ namespace GW2SDK.Worlds
         public int Id { get; set; }
 
         [JsonProperty(Required = Required.Always)]
-        public string Name { get; set; }
+        public string Name { get; set; } = "";
 
         [JsonProperty(Required = Required.Always)]
         public WorldPopulation Population { get; set; }
