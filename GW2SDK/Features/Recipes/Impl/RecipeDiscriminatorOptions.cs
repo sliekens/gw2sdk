@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using GW2SDK.Impl.JsonConverters;
-using Newtonsoft.Json.Linq;
 
 namespace GW2SDK.Recipes.Impl
 {
@@ -10,7 +9,6 @@ namespace GW2SDK.Recipes.Impl
         public RecipeDiscriminatorOptions()
         {
             Activator = Create;
-            Preprocessor = Preprocess;
         }
 
         public override Type BaseType => typeof(Recipe);
@@ -18,35 +16,6 @@ namespace GW2SDK.Recipes.Impl
         public override string DiscriminatorFieldName => "type";
 
         public override bool SerializeDiscriminator => false;
-
-        private void Preprocess(string discriminator, JObject json)
-        {
-            var @namespace = StringHelper.ToSnakeCase(discriminator);
-
-            // Recipes can have extra fields depending on the type of recipe
-            // Anet decided to put those extra fields in a "details" property
-            // For us it's much more convenient to flatten the root object before serializing the JSON to CLR objects
-            if (json.ContainsKey("details"))
-            {
-                var details = json.Property("details");
-                foreach (var property in ((JObject) details.Value).Properties())
-                {
-                    // There can be a naming collision that prevents a clean merge
-                    // Prefix those duplicate names with the discriminator
-                    if (json.ContainsKey(property.Name))
-                    {
-                        json.Add($"{@namespace}_{property.Name}", property.Value);
-                    }
-                    else
-                    {
-                        json.Add(property.Name, property.Value);
-                    }
-                }
-
-                // Details should now be removed because all its properties have been added to the root object.
-                details.Remove();
-            }
-        }
 
         public override IEnumerable<(string TypeName, Type Type)> GetDiscriminatedTypes()
         {
