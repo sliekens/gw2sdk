@@ -23,27 +23,23 @@ namespace GW2SDK.Items
 
         public async Task<IDataTransferList<int>> GetItemsIndex(JsonSerializerSettings? settings = null)
         {
-            using (var request = new GetItemsIndexRequest())
-            using (var response = await _http.SendAsync(request).ConfigureAwait(false))
-            {
-                response.EnsureSuccessStatusCode();
-                var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
-                var listContext = response.Headers.GetListContext();
-                var list = new List<int>(listContext.ResultCount);
-                JsonConvert.PopulateObject(json, list, settings ?? Json.DefaultJsonSerializerSettings);
-                return new DataTransferList<int>(list, listContext);
-            }
+            using var request = new GetItemsIndexRequest();
+            using var response = await _http.SendAsync(request).ConfigureAwait(false);
+            response.EnsureSuccessStatusCode();
+            var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
+            var listContext = response.Headers.GetListContext();
+            var list = new List<int>(listContext.ResultCount);
+            JsonConvert.PopulateObject(json, list, settings ?? Json.DefaultJsonSerializerSettings);
+            return new DataTransferList<int>(list, listContext);
         }
 
         public async Task<Item?> GetItemById(int itemId, JsonSerializerSettings? settings = null)
         {
-            using (var request = new GetItemByIdRequest.Builder(itemId).GetRequest())
-            using (var response = await _http.SendAsync(request).ConfigureAwait(false))
-            {
-                response.EnsureSuccessStatusCode();
-                var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
-                return JsonConvert.DeserializeObject<Item>(json, settings ?? Json.DefaultJsonSerializerSettings);
-            }
+            using var request = new GetItemByIdRequest.Builder(itemId).GetRequest();
+            using var response = await _http.SendAsync(request).ConfigureAwait(false);
+            response.EnsureSuccessStatusCode();
+            var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
+            return JsonConvert.DeserializeObject<Item>(json, settings ?? Json.DefaultJsonSerializerSettings);
         }
 
         public async Task<IDataTransferList<Item>> GetItemsByIds(IReadOnlyList<int> itemIds, JsonSerializerSettings? settings = null)
@@ -58,30 +54,26 @@ namespace GW2SDK.Items
                 throw new ArgumentException("Item IDs cannot be an empty collection.", nameof(itemIds));
             }
 
-            using (var request = new GetItemsByIdsRequest.Builder(itemIds).GetRequest())
-            using (var response = await _http.SendAsync(request).ConfigureAwait(false))
-            {
-                response.EnsureSuccessStatusCode();
-                var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
-                var listContext = response.Headers.GetListContext();
-                var list = new List<Item>(listContext.ResultCount);
-                JsonConvert.PopulateObject(json, list, settings ?? Json.DefaultJsonSerializerSettings);
-                return new DataTransferList<Item>(list, listContext);
-            }
+            using var request = new GetItemsByIdsRequest.Builder(itemIds).GetRequest();
+            using var response = await _http.SendAsync(request).ConfigureAwait(false);
+            response.EnsureSuccessStatusCode();
+            var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
+            var listContext = response.Headers.GetListContext();
+            var list = new List<Item>(listContext.ResultCount);
+            JsonConvert.PopulateObject(json, list, settings ?? Json.DefaultJsonSerializerSettings);
+            return new DataTransferList<Item>(list, listContext);
         }
 
         public async Task<IDataTransferPage<Item>> GetItemsByPage(int pageIndex, int? pageSize = null, JsonSerializerSettings? settings = null)
         {
-            using (var request = new GetItemsByPageRequest.Builder(pageIndex, pageSize).GetRequest())
-            using (var response = await _http.SendAsync(request).ConfigureAwait(false))
-            {
-                response.EnsureSuccessStatusCode();
-                var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
-                var pageContext = response.Headers.GetPageContext();
-                var list = new List<Item>(pageContext.PageSize);
-                JsonConvert.PopulateObject(json, list, settings ?? Json.DefaultJsonSerializerSettings);
-                return new DataTransferPage<Item>(list, pageContext);
-            }
+            using var request = new GetItemsByPageRequest.Builder(pageIndex, pageSize).GetRequest();
+            using var response = await _http.SendAsync(request).ConfigureAwait(false);
+            response.EnsureSuccessStatusCode();
+            var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
+            var pageContext = response.Headers.GetPageContext();
+            var list = new List<Item>(pageContext.PageSize);
+            JsonConvert.PopulateObject(json, list, settings ?? Json.DefaultJsonSerializerSettings);
+            return new DataTransferPage<Item>(list, pageContext);
         }
     }
 }

@@ -27,15 +27,13 @@ namespace GW2SDK.Subtokens
             IReadOnlyList<string>? urls = null,
             JsonSerializerSettings? settings = null)
         {
-            using (var request = new CreateSubtokenRequest.Builder(accessToken, permissions, absoluteExpirationDate, urls).GetRequest())
-            using (var response = await _http.SendAsync(request).ConfigureAwait(false))
-            {
-                response.EnsureSuccessStatusCode();
-                var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
-                var dto = new CreatedSubtoken();
-                JsonConvert.PopulateObject(json, dto, settings ?? Json.DefaultJsonSerializerSettings);
-                return dto;
-            }
+            using var request = new CreateSubtokenRequest.Builder(accessToken, permissions, absoluteExpirationDate, urls).GetRequest();
+            using var response = await _http.SendAsync(request).ConfigureAwait(false);
+            response.EnsureSuccessStatusCode();
+            var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
+            var dto = new CreatedSubtoken();
+            JsonConvert.PopulateObject(json, dto, settings ?? Json.DefaultJsonSerializerSettings);
+            return dto;
         }
     }
 }

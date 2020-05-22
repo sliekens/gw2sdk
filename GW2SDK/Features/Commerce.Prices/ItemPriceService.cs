@@ -23,27 +23,23 @@ namespace GW2SDK.Commerce.Prices
 
         public async Task<IDataTransferList<int>> GetItemPricesIndex(JsonSerializerSettings? settings = null)
         {
-            using (var request = new GetItemPricesIndexRequest())
-            using (var response = await _http.SendAsync(request).ConfigureAwait(false))
-            {
-                response.EnsureSuccessStatusCode();
-                var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
-                var listContext = response.Headers.GetListContext();
-                var list = new List<int>(listContext.ResultCount);
-                JsonConvert.PopulateObject(json, list, settings ?? Json.DefaultJsonSerializerSettings);
-                return new DataTransferList<int>(list, listContext);
-            }
+            using var request = new GetItemPricesIndexRequest();
+            using var response = await _http.SendAsync(request).ConfigureAwait(false);
+            response.EnsureSuccessStatusCode();
+            var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
+            var listContext = response.Headers.GetListContext();
+            var list = new List<int>(listContext.ResultCount);
+            JsonConvert.PopulateObject(json, list, settings ?? Json.DefaultJsonSerializerSettings);
+            return new DataTransferList<int>(list, listContext);
         }
 
         public async Task<ItemPrice?> GetItemPriceById(int itemId, JsonSerializerSettings? settings = null)
         {
-            using (var request = new GetItemPriceByIdRequest.Builder(itemId).GetRequest())
-            using (var response = await _http.SendAsync(request).ConfigureAwait(false))
-            {
-                response.EnsureSuccessStatusCode();
-                var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
-                return JsonConvert.DeserializeObject<ItemPrice>(json, settings ?? Json.DefaultJsonSerializerSettings);
-            }
+            using var request = new GetItemPriceByIdRequest.Builder(itemId).GetRequest();
+            using var response = await _http.SendAsync(request).ConfigureAwait(false);
+            response.EnsureSuccessStatusCode();
+            var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
+            return JsonConvert.DeserializeObject<ItemPrice>(json, settings ?? Json.DefaultJsonSerializerSettings);
         }
 
         public async Task<IDataTransferList<ItemPrice>> GetItemPricesByIds(IReadOnlyList<int> itemIds, JsonSerializerSettings? settings = null)
@@ -58,16 +54,14 @@ namespace GW2SDK.Commerce.Prices
                 throw new ArgumentException("Item IDs cannot be an empty collection.", nameof(itemIds));
             }
 
-            using (var request = new GetItemPricesByIdsRequest.Builder(itemIds).GetRequest())
-            using (var response = await _http.SendAsync(request).ConfigureAwait(false))
-            {
-                response.EnsureSuccessStatusCode();
-                var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
-                var listContext = response.Headers.GetListContext();
-                var list = new List<ItemPrice>(listContext.ResultCount);
-                JsonConvert.PopulateObject(json, list, settings ?? Json.DefaultJsonSerializerSettings);
-                return new DataTransferList<ItemPrice>(list, listContext);
-            }
+            using var request = new GetItemPricesByIdsRequest.Builder(itemIds).GetRequest();
+            using var response = await _http.SendAsync(request).ConfigureAwait(false);
+            response.EnsureSuccessStatusCode();
+            var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
+            var listContext = response.Headers.GetListContext();
+            var list = new List<ItemPrice>(listContext.ResultCount);
+            JsonConvert.PopulateObject(json, list, settings ?? Json.DefaultJsonSerializerSettings);
+            return new DataTransferList<ItemPrice>(list, listContext);
         }
     }
 }
