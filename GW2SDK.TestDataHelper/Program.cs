@@ -9,14 +9,14 @@ namespace GW2SDK.TestDataHelper
         {
             Directory.CreateDirectory(outDir);
             var services = new Container();
-            using (var file = File.CreateText(Path.Combine(outDir, "build.json")))
+            await using (var file = File.CreateText(Path.Combine(outDir, "build.json")))
             {
                 var service = services.Resolve<JsonBuildService>();
                 var json = await service.GetJsonBuild(indented);
                 file.WriteLine(json);
             }
 
-            using (var file = File.CreateText(Path.Combine(outDir, "achievements.json")))
+            await using (var file = File.CreateText(Path.Combine(outDir, "achievements.json")))
             {
                 var service = services.Resolve<JsonAchievementService>();
                 var jsons = await service.GetAllJsonAchievements(indented);
@@ -26,7 +26,7 @@ namespace GW2SDK.TestDataHelper
                 }
             }
 
-            using (var file = File.CreateText(Path.Combine(outDir, "achievementCategories.json")))
+            await using (var file = File.CreateText(Path.Combine(outDir, "achievementCategories.json")))
             {
                 var service = services.Resolve<JsonAchievementCategoriesService>();
                 var jsons = await service.GetAllJsonAchievementCategories(indented);
@@ -36,7 +36,7 @@ namespace GW2SDK.TestDataHelper
                 }
             }
 
-            using (var file = File.CreateText(Path.Combine(outDir, "achievementGroups.json")))
+            await using (var file = File.CreateText(Path.Combine(outDir, "achievementGroups.json")))
             {
                 var service = services.Resolve<JsonAchievementGroupsService>();
                 var jsons = await service.GetAllJsonAchievementGroups(indented);
@@ -46,7 +46,7 @@ namespace GW2SDK.TestDataHelper
                 }
             }
 
-            using (var file = File.CreateText(Path.Combine(outDir, "colors.json")))
+            await using (var file = File.CreateText(Path.Combine(outDir, "colors.json")))
             {
                 var service = services.Resolve<JsonColorService>();
                 var jsons = await service.GetAllJsonColors(indented);
@@ -56,7 +56,7 @@ namespace GW2SDK.TestDataHelper
                 }
             }
 
-            using (var file = File.CreateText(Path.Combine(outDir, "worlds.json")))
+            await using (var file = File.CreateText(Path.Combine(outDir, "worlds.json")))
             {
                 var service = services.Resolve<JsonWorldService>();
                 var jsons = await service.GetAllJsonWorlds(indented);
@@ -66,7 +66,7 @@ namespace GW2SDK.TestDataHelper
                 }
             }
 
-            using (var file = File.CreateText(Path.Combine(outDir, "items.json")))
+            await using (var file = File.CreateText(Path.Combine(outDir, "items.json")))
             {
                 var service = services.Resolve<JsonItemService>();
                 var jsons = await service.GetAllJsonItems(indented);
@@ -76,7 +76,7 @@ namespace GW2SDK.TestDataHelper
                 }
             }
 
-            using (var file = File.CreateText(Path.Combine(outDir, "recipes.json")))
+            await using (var file = File.CreateText(Path.Combine(outDir, "recipes.json")))
             {
                 var service = services.Resolve<JsonRecipeService>();
                 var jsons = await service.GetAllJsonRecipes(indented);
@@ -86,7 +86,7 @@ namespace GW2SDK.TestDataHelper
                 }
             }
 
-            using (var file = File.CreateText(Path.Combine(outDir, "skins.json")))
+            await using (var file = File.CreateText(Path.Combine(outDir, "skins.json")))
             {
                 var service = services.Resolve<JsonSkinService>();
                 var jsons = await service.GetAllJsonSkins(indented);
@@ -96,7 +96,7 @@ namespace GW2SDK.TestDataHelper
                 }
             }
 
-            using (var file = File.CreateText(Path.Combine(outDir, "continents.json")))
+            await using (var file = File.CreateText(Path.Combine(outDir, "continents.json")))
             {
                 var service = services.Resolve<JsonContinentService>();
                 var jsons = await service.GetAllJsonContinents(indented);
@@ -106,7 +106,7 @@ namespace GW2SDK.TestDataHelper
                 }
             }
 
-            using (var file = File.CreateText(Path.Combine(outDir, "continents_1_floors.json")))
+            await using (var file = File.CreateText(Path.Combine(outDir, "continents_1_floors.json")))
             {
                 var service = services.Resolve<JsonFloorService>();
                 var jsons = await service.GetAllJsonFloors(1, indented);
@@ -116,7 +116,7 @@ namespace GW2SDK.TestDataHelper
                 }
             }
 
-            using (var file = File.CreateText(Path.Combine(outDir, "continents_2_floors.json")))
+            await using (var file = File.CreateText(Path.Combine(outDir, "continents_2_floors.json")))
             {
                 var service = services.Resolve<JsonFloorService>();
                 var jsons = await service.GetAllJsonFloors(2, indented);
@@ -126,7 +126,7 @@ namespace GW2SDK.TestDataHelper
                 }
             }
 
-            using (var file = File.CreateText(Path.Combine(outDir, "prices.json")))
+            await using (var file = File.CreateText(Path.Combine(outDir, "prices.json")))
             {
                 var service = services.Resolve<JsonItemPriceService>();
                 var jsons = await service.GetAllJsonItemPrices(indented);
