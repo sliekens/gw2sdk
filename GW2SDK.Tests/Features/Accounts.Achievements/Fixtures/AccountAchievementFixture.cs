@@ -27,17 +27,15 @@ namespace GW2SDK.Tests.Features.Accounts.Achievements.Fixtures
 
         private async Task<List<string>> GetAllJsonAchievements(HttpClient http)
         {
-            using (var request = new GetAccountAchievementsRequest())
-            using (var response = await http.SendAsync(request))
-            using (var responseReader = new StreamReader(await response.Content.ReadAsStreamAsync()))
-            using (var jsonReader = new JsonTextReader(responseReader))
-            {
-                response.EnsureSuccessStatusCode();
+            using var request = new GetAccountAchievementsRequest();
+            using var response = await http.SendAsync(request);
+            using var responseReader = new StreamReader(await response.Content.ReadAsStreamAsync());
+            using var jsonReader = new JsonTextReader(responseReader);
+            response.EnsureSuccessStatusCode();
 
-                // API returns a JSON array but we want a List of JSON objects instead
-                var array = await JToken.ReadFromAsync(jsonReader);
-                return array.Children<JObject>().Select(obj => obj.ToString(Formatting.None)).ToList();
-            }
+            // API returns a JSON array but we want a List of JSON objects instead
+            var array = await JToken.ReadFromAsync(jsonReader);
+            return array.Children<JObject>().Select(obj => obj.ToString(Formatting.None)).ToList();
         }
     }
 }

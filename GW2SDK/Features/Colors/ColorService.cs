@@ -23,41 +23,35 @@ namespace GW2SDK.Colors
 
         public async Task<IDataTransferList<Color>> GetColors(JsonSerializerSettings? settings = null)
         {
-            using (var request = new GetColorsRequest())
-            using (var response = await _http.SendAsync(request).ConfigureAwait(false))
-            {
-                response.EnsureSuccessStatusCode();
-                var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
-                var listContext = response.Headers.GetListContext();
-                var list = new List<Color>(listContext.ResultCount);
-                JsonConvert.PopulateObject(json, list, settings ?? Json.DefaultJsonSerializerSettings);
-                return new DataTransferList<Color>(list, listContext);
-            }
+            using var request = new GetColorsRequest();
+            using var response = await _http.SendAsync(request).ConfigureAwait(false);
+            response.EnsureSuccessStatusCode();
+            var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
+            var listContext = response.Headers.GetListContext();
+            var list = new List<Color>(listContext.ResultCount);
+            JsonConvert.PopulateObject(json, list, settings ?? Json.DefaultJsonSerializerSettings);
+            return new DataTransferList<Color>(list, listContext);
         }
 
         public async Task<IDataTransferList<int>> GetColorsIndex(JsonSerializerSettings? settings = null)
         {
-            using (var request = new GetColorsIndexRequest())
-            using (var response = await _http.SendAsync(request).ConfigureAwait(false))
-            {
-                response.EnsureSuccessStatusCode();
-                var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
-                var listContext = response.Headers.GetListContext();
-                var list = new List<int>(listContext.ResultCount);
-                JsonConvert.PopulateObject(json, list, settings ?? Json.DefaultJsonSerializerSettings);
-                return new DataTransferList<int>(list, listContext);
-            }
+            using var request = new GetColorsIndexRequest();
+            using var response = await _http.SendAsync(request).ConfigureAwait(false);
+            response.EnsureSuccessStatusCode();
+            var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
+            var listContext = response.Headers.GetListContext();
+            var list = new List<int>(listContext.ResultCount);
+            JsonConvert.PopulateObject(json, list, settings ?? Json.DefaultJsonSerializerSettings);
+            return new DataTransferList<int>(list, listContext);
         }
 
         public async Task<Color?> GetColorById(int colorId, JsonSerializerSettings? settings = null)
         {
-            using (var request = new GetColorByIdRequest.Builder(colorId).GetRequest())
-            using (var response = await _http.SendAsync(request).ConfigureAwait(false))
-            {
-                response.EnsureSuccessStatusCode();
-                var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
-                return JsonConvert.DeserializeObject<Color>(json, settings ?? Json.DefaultJsonSerializerSettings);
-            }
+            using var request = new GetColorByIdRequest.Builder(colorId).GetRequest();
+            using var response = await _http.SendAsync(request).ConfigureAwait(false);
+            response.EnsureSuccessStatusCode();
+            var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
+            return JsonConvert.DeserializeObject<Color>(json, settings ?? Json.DefaultJsonSerializerSettings);
         }
 
         public async Task<IDataTransferList<Color>> GetColorsByIds(IReadOnlyList<int> colorIds, JsonSerializerSettings? settings = null)
@@ -72,30 +66,26 @@ namespace GW2SDK.Colors
                 throw new ArgumentException("Color IDs cannot be an empty collection.", nameof(colorIds));
             }
 
-            using (var request = new GetColorsByIdsRequest.Builder(colorIds).GetRequest())
-            using (var response = await _http.SendAsync(request).ConfigureAwait(false))
-            {
-                response.EnsureSuccessStatusCode();
-                var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
-                var listContext = response.Headers.GetListContext();
-                var list = new List<Color>(listContext.ResultCount);
-                JsonConvert.PopulateObject(json, list, settings ?? Json.DefaultJsonSerializerSettings);
-                return new DataTransferList<Color>(list, listContext);
-            }
+            using var request = new GetColorsByIdsRequest.Builder(colorIds).GetRequest();
+            using var response = await _http.SendAsync(request).ConfigureAwait(false);
+            response.EnsureSuccessStatusCode();
+            var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
+            var listContext = response.Headers.GetListContext();
+            var list = new List<Color>(listContext.ResultCount);
+            JsonConvert.PopulateObject(json, list, settings ?? Json.DefaultJsonSerializerSettings);
+            return new DataTransferList<Color>(list, listContext);
         }
 
         public async Task<IDataTransferPage<Color>> GetColorsByPage(int pageIndex, int? pageSize = null, JsonSerializerSettings? settings = null)
         {
-            using (var request = new GetColorsByPageRequest.Builder(pageIndex, pageSize).GetRequest())
-            using (var response = await _http.SendAsync(request).ConfigureAwait(false))
-            {
-                response.EnsureSuccessStatusCode();
-                var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
-                var pageContext = response.Headers.GetPageContext();
-                var list = new List<Color>(pageContext.PageSize);
-                JsonConvert.PopulateObject(json, list, settings ?? Json.DefaultJsonSerializerSettings);
-                return new DataTransferPage<Color>(list, pageContext);
-            }
+            using var request = new GetColorsByPageRequest.Builder(pageIndex, pageSize).GetRequest();
+            using var response = await _http.SendAsync(request).ConfigureAwait(false);
+            response.EnsureSuccessStatusCode();
+            var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
+            var pageContext = response.Headers.GetPageContext();
+            var list = new List<Color>(pageContext.PageSize);
+            JsonConvert.PopulateObject(json, list, settings ?? Json.DefaultJsonSerializerSettings);
+            return new DataTransferPage<Color>(list, pageContext);
         }
     }
 }

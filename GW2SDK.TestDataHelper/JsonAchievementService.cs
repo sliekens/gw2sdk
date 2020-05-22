@@ -33,28 +33,24 @@ namespace GW2SDK.TestDataHelper
 
         private async Task<List<int>> GetAchievementIds()
         {
-            using (var request = new GetAchievementsIndexRequest())
-            using (var response = await _http.SendAsync(request))
-            {
-                var json = await response.Content.ReadAsStringAsync();
-                response.EnsureSuccessStatusCode();
-                return JsonConvert.DeserializeObject<List<int>>(json);
-            }
+            using var request = new GetAchievementsIndexRequest();
+            using var response = await _http.SendAsync(request);
+            var json = await response.Content.ReadAsStringAsync();
+            response.EnsureSuccessStatusCode();
+            return JsonConvert.DeserializeObject<List<int>>(json);
         }
 
         private async Task<List<string>> GetJsonAchievementsByIds(IReadOnlyList<int> achievementIds, bool indented)
         {
-            using (var request = new GetAchievementsByIdsRequest.Builder(achievementIds).GetRequest())
-            using (var response = await _http.SendAsync(request))
-            using (var responseReader = new StreamReader(await response.Content.ReadAsStreamAsync()))
-            using (var jsonReader = new JsonTextReader(responseReader))
-            {
-                response.EnsureSuccessStatusCode();
+            using var request = new GetAchievementsByIdsRequest.Builder(achievementIds).GetRequest();
+            using var response = await _http.SendAsync(request);
+            using var responseReader = new StreamReader(await response.Content.ReadAsStreamAsync());
+            using var jsonReader = new JsonTextReader(responseReader);
+            response.EnsureSuccessStatusCode();
 
-                // API returns a JSON array but we want a List of JSON objects instead
-                var array = await JToken.ReadFromAsync(jsonReader);
-                return array.Children<JObject>().Select(achievement => achievement.ToString(indented ? Formatting.Indented : Formatting.None)).ToList();
-            }
+            // API returns a JSON array but we want a List of JSON objects instead
+            var array = await JToken.ReadFromAsync(jsonReader);
+            return array.Children<JObject>().Select(achievement => achievement.ToString(indented ? Formatting.Indented : Formatting.None)).ToList();
         }
     }
 }

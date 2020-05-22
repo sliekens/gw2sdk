@@ -44,13 +44,11 @@ namespace GW2SDK.Tests.Features.Tokens.Fixtures
             // Adding a delay seems to help, possibly because of clock skew?
             await Task.Delay(1000);
 
-            using (var request = new GetTokenInfoRequest.Builder(createdSubtoken.Subtoken).GetRequest())
-            using (var response = await http.SendAsync(request))
-            {
-                response.EnsureSuccessStatusCode();
-                CreatedSubtokenDate = response.Headers.Date.GetValueOrDefault(DateTimeOffset.Now);
-                SubtokenInfoJson = await response.Content.ReadAsStringAsync();
-            }
+            using var request = new GetTokenInfoRequest.Builder(createdSubtoken.Subtoken).GetRequest();
+            using var response = await http.SendAsync(request);
+            response.EnsureSuccessStatusCode();
+            CreatedSubtokenDate = response.Headers.Date.GetValueOrDefault(DateTimeOffset.Now);
+            SubtokenInfoJson = await response.Content.ReadAsStringAsync();
         }
 
         public Task DisposeAsync() => Task.CompletedTask;

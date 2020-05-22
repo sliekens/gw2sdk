@@ -31,15 +31,13 @@ namespace GW2SDK.Tests.Features.Accounts.Fixtures
 
         private async Task<string> GetAccountRaw(HttpClient http)
         {
-            using (var request = new GetAccountRequest())
-            using (var response = await http.SendAsync(request))
-            using (var responseReader = new StreamReader(await response.Content.ReadAsStreamAsync()))
-            using (var jsonReader = new JsonTextReader(responseReader))
-            {
-                response.EnsureSuccessStatusCode();
-                var obj = await JToken.ReadFromAsync(jsonReader);
-                return obj.ToString(Formatting.None);
-            }
+            using var request = new GetAccountRequest();
+            using var response = await http.SendAsync(request);
+            using var responseReader = new StreamReader(await response.Content.ReadAsStreamAsync());
+            using var jsonReader = new JsonTextReader(responseReader);
+            response.EnsureSuccessStatusCode();
+            var obj = await JToken.ReadFromAsync(jsonReader);
+            return obj.ToString(Formatting.None);
         }
     }
 }
