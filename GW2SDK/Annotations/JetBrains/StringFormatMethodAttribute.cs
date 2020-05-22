@@ -1,5 +1,6 @@
 ﻿using System;
 
+#nullable disable
 namespace GW2SDK.Annotations
 {
     /// <summary>
@@ -31,3 +32,4 @@ namespace GW2SDK.Annotations
         [NotNull] public string FormatParameterName { get; }
     }
 }
+#nullable restore

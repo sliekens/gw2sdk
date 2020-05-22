@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Net.Http;
-using GW2SDK.Annotations;
 using Polly;
 using Polly.Caching;
 
@@ -10,7 +9,7 @@ namespace GW2SDK.Tests.TestInfrastructure
     {
         private readonly HttpRequestMessage _request;
 
-        public HttpRequestCacheKeyStrategy([NotNull] HttpRequestMessage request)
+        public HttpRequestCacheKeyStrategy(HttpRequestMessage request)
         {
             _request = request ?? throw new ArgumentNullException(nameof(request));
         }

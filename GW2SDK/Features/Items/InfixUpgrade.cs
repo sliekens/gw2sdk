@@ -10,12 +10,10 @@ namespace GW2SDK.Items
         [JsonProperty(Required = Required.Always)]
         public int Id { get; set; }
 
-        [NotNull]
         [JsonProperty(Required = Required.Always)]
-        public UpgradeAttribute[] Attributes { get; set; }
+        public UpgradeAttribute[] Attributes { get; set; } = new UpgradeAttribute[0];
 
-        [CanBeNull]
         [JsonProperty(Required = Required.DisallowNull, NullValueHandling = NullValueHandling.Ignore)]
-        public Buff Buff { get; set; }
+        public Buff? Buff { get; set; }
     }
 }

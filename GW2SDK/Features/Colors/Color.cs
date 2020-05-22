@@ -13,35 +13,28 @@ namespace GW2SDK.Colors
         [JsonProperty(Required = Required.Always)]
         public int Id { get; set; }
 
-        [NotNull]
         [JsonProperty(Required = Required.Always)]
-        public string Name { get; set; }
+        public string Name { get; set; } = "";
 
-        [NotNull]
         [JsonProperty(Required = Required.Always)]
-        public int[] BaseRgb { get; set; }
+        public int[] BaseRgb { get; set; } = new int[0];
 
-        [NotNull]
         [JsonProperty(Required = Required.Always)]
-        public ColorInfo Cloth { get; set; }
+        public ColorInfo Cloth { get; set; } = new ColorInfo();
 
-        [NotNull]
         [JsonProperty(Required = Required.Always)]
-        public ColorInfo Leather { get; set; }
+        public ColorInfo Leather { get; set; } = new ColorInfo();
 
-        [NotNull]
         [JsonProperty(Required = Required.Always)]
-        public ColorInfo Metal { get; set; }
+        public ColorInfo Metal { get; set; } = new ColorInfo();
 
-        [CanBeNull]
         [JsonProperty(Required = Required.DisallowNull, NullValueHandling = NullValueHandling.Ignore)]
-        public ColorInfo Fur { get; set; }
+        public ColorInfo? Fur { get; set; }
 
         [JsonProperty(Required = Required.DisallowNull, NullValueHandling = NullValueHandling.Ignore)]
         public int? Item { get; set; }
 
-        [NotNull]
         [JsonProperty(Required = Required.Always)]
-        public ColorCategoryName[] Categories { get; set; }
+        public ColorCategoryName[] Categories { get; set; } = new ColorCategoryName[0];
     }
 }

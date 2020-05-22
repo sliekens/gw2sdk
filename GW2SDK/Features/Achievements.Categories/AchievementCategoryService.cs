@@ -16,12 +16,12 @@ namespace GW2SDK.Achievements.Categories
     {
         private readonly HttpClient _http;
 
-        public AchievementCategoryService([NotNull] HttpClient http)
+        public AchievementCategoryService(HttpClient http)
         {
             _http = http ?? throw new ArgumentNullException(nameof(http));
         }
 
-        public async Task<IDataTransferList<AchievementCategory>> GetAchievementCategories([CanBeNull] JsonSerializerSettings settings = null)
+        public async Task<IDataTransferList<AchievementCategory>> GetAchievementCategories(JsonSerializerSettings? settings = null)
         {
             using (var request = new GetAchievementCategoriesRequest())
             using (var response = await _http.SendAsync(request).ConfigureAwait(false))
@@ -35,7 +35,7 @@ namespace GW2SDK.Achievements.Categories
             }
         }
 
-        public async Task<IDataTransferList<int>> GetAchievementCategoriesIndex([CanBeNull] JsonSerializerSettings settings = null)
+        public async Task<IDataTransferList<int>> GetAchievementCategoriesIndex(JsonSerializerSettings? settings = null)
         {
             using (var request = new GetAchievementCategoriesIndexRequest())
             using (var response = await _http.SendAsync(request).ConfigureAwait(false))
@@ -49,7 +49,7 @@ namespace GW2SDK.Achievements.Categories
             }
         }
 
-        public async Task<AchievementCategory> GetAchievementCategoryById(int achievementCategoryId, [CanBeNull] JsonSerializerSettings settings = null)
+        public async Task<AchievementCategory?> GetAchievementCategoryById(int achievementCategoryId, JsonSerializerSettings? settings = null)
         {
             using (var request = new GetAchievementCategoryByIdRequest.Builder(achievementCategoryId).GetRequest())
             using (var response = await _http.SendAsync(request).ConfigureAwait(false))
@@ -61,8 +61,8 @@ namespace GW2SDK.Achievements.Categories
         }
 
         public async Task<IDataTransferList<AchievementCategory>> GetAchievementCategoriesByIds(
-            [NotNull] IReadOnlyList<int> achievementCategoryIds,
-            [CanBeNull] JsonSerializerSettings settings = null)
+            IReadOnlyList<int> achievementCategoryIds,
+            JsonSerializerSettings? settings = null)
         {
             if (achievementCategoryIds == null)
             {
@@ -89,7 +89,7 @@ namespace GW2SDK.Achievements.Categories
         public async Task<IDataTransferPage<AchievementCategory>> GetAchievementCategoriesByPage(
             int pageIndex,
             int? pageSize = null,
-            [CanBeNull] JsonSerializerSettings settings = null)
+            JsonSerializerSettings? settings = null)
         {
             using (var request = new GetAchievementCategoriesByPageRequest.Builder(pageIndex, pageSize).GetRequest())
             using (var response = await _http.SendAsync(request).ConfigureAwait(false))

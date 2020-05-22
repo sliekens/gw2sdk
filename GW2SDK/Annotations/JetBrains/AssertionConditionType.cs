@@ -1,4 +1,5 @@
-﻿namespace GW2SDK.Annotations
+﻿#nullable disable
+namespace GW2SDK.Annotations
 {
     /// <summary>
     /// Specifies assertion type. If the assertion method argument satisfies the condition,
@@ -19,3 +20,4 @@
         IS_NOT_NULL = 3,
     }
 }
+#nullable restore

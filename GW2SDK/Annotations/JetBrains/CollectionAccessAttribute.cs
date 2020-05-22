@@ -1,5 +1,6 @@
 ﻿using System;
 
+#nullable disable
 namespace GW2SDK.Annotations
 {
     /// <summary>
@@ -40,3 +41,4 @@ namespace GW2SDK.Annotations
         public CollectionAccessType CollectionAccessType { get; }
     }
 }
+#nullable restore

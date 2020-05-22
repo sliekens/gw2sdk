@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Net.Http;
-using GW2SDK.Annotations;
 
 namespace GW2SDK.Recipes.Impl
 {
     public sealed class GetRecipeByIdRequest : HttpRequestMessage
     {
-        private GetRecipeByIdRequest([NotNull] Uri requestUri)
+        private GetRecipeByIdRequest(Uri requestUri)
             : base(HttpMethod.Get, requestUri)
         {
         }

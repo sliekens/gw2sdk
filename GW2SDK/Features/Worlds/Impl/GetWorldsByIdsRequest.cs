@@ -1,24 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Net.Http;
-using GW2SDK.Annotations;
 using GW2SDK.Extensions;
 
 namespace GW2SDK.Worlds.Impl
 {
     public sealed class GetWorldsByIdsRequest : HttpRequestMessage
     {
-        private GetWorldsByIdsRequest([NotNull] Uri requestUri)
+        private GetWorldsByIdsRequest(Uri requestUri)
             : base(HttpMethod.Get, requestUri)
         {
         }
 
         public sealed class Builder
         {
-            [NotNull]
             private readonly IReadOnlyList<int> _worldIds;
 
-            public Builder([NotNull] IReadOnlyList<int> worldIds)
+            public Builder(IReadOnlyList<int> worldIds)
             {
                 if (worldIds == null)
                 {

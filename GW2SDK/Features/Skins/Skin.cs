@@ -14,30 +14,22 @@ namespace GW2SDK.Skins
         [JsonProperty(Required = Required.Always)]
         public int Id { get; set; }
 
-        /// <remarks>Name can be an empty string but not null.</remarks>
-        [NotNull]
         [JsonProperty(Required = Required.Always)]
-        public string Name { get; set; }
+        public string Name { get; set; } = "";
 
-        [CanBeNull]
         [JsonProperty(Required = Required.DisallowNull, NullValueHandling = NullValueHandling.Ignore)]
-        public string Description { get; set; }
+        public string? Description { get; set; }
 
-        /// <remarks>Flags can be an empty array but not null.</remarks>
-        [NotNull]
         [JsonProperty(Required = Required.Always)]
-        public SkinFlag[] Flags { get; set; }
+        public SkinFlag[] Flags { get; set; } = new SkinFlag[0];
 
-        /// <remarks>Restrictions can be an empty array but not null.</remarks>
-        [NotNull]
         [JsonProperty(Required = Required.Always)]
-        public SkinRestriction[] Restrictions { get; set; }
+        public SkinRestriction[] Restrictions { get; set; } = new SkinRestriction[0];
 
         [JsonProperty(Required = Required.Always)]
         public Rarity Rarity { get; set; }
 
-        [CanBeNull]
         [JsonProperty(Required = Required.DisallowNull, NullValueHandling = NullValueHandling.Ignore)]
-        public string Icon { get; set; }
+        public string? Icon { get; set; }
     }
 }

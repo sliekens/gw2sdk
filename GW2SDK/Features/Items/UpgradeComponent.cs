@@ -11,24 +11,19 @@ namespace GW2SDK.Items
         [JsonProperty(Required = Required.Always)]
         public int Level { get; set; }
 
-        [NotNull]
         [JsonProperty(Required = Required.Always)]
-        public UpgradeComponentFlag[] UpgradeComponentFlags { get; set; }
+        public UpgradeComponentFlag[] UpgradeComponentFlags { get; set; } = new UpgradeComponentFlag[0];
 
-        [NotNull]
         [JsonProperty(Required = Required.Always)]
-        public InfusionSlotFlag[] InfusionUpgradeFlags { get; set; }
+        public InfusionSlotFlag[] InfusionUpgradeFlags { get; set; } = new InfusionSlotFlag[0];
 
-        [NotNull]
         [JsonProperty(Required = Required.Always)]
-        public InfixUpgrade InfixUpgrade { get; set; }
+        public InfixUpgrade InfixUpgrade { get; set; } = new InfixUpgrade();
 
-        [CanBeNull]
         [JsonProperty(Required = Required.DisallowNull, NullValueHandling = NullValueHandling.Ignore)]
-        public string[] Bonuses { get; set; }
+        public string[]? Bonuses { get; set; }
 
-        [CanBeNull]
         [JsonProperty(Required = Required.Always)]
-        public string Suffix { get; set; }
+        public string? Suffix { get; set; }
     }
 }

@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Net.Http;
-using GW2SDK.Annotations;
 
 namespace GW2SDK.Worlds.Impl
 {
     public sealed class GetWorldByIdRequest : HttpRequestMessage
     {
-        public GetWorldByIdRequest([NotNull] Uri requestUri)
+        public GetWorldByIdRequest(Uri requestUri)
             : base(HttpMethod.Get, requestUri)
         {
         }

@@ -1,14 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Net.Http;
-using GW2SDK.Annotations;
 using GW2SDK.Extensions;
 
 namespace GW2SDK.Skins.Impl
 {
     public sealed class GetSkinsByIdsRequest : HttpRequestMessage
     {
-        private GetSkinsByIdsRequest([NotNull] Uri requestUri)
+        private GetSkinsByIdsRequest(Uri requestUri)
             : base(HttpMethod.Get, requestUri)
         {
         }
@@ -17,7 +16,7 @@ namespace GW2SDK.Skins.Impl
         {
             private readonly IReadOnlyList<int> _skinIds;
 
-            public Builder([NotNull] IReadOnlyList<int> skinIds)
+            public Builder(IReadOnlyList<int> skinIds)
             {
                 if (skinIds == null)
                 {

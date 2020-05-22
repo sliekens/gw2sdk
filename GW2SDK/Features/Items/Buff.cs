@@ -10,8 +10,7 @@ namespace GW2SDK.Items
         [JsonProperty(Required = Required.Always)]
         public int SkillId { get; set; }
 
-        [CanBeNull]
         [JsonProperty(Required = Required.DisallowNull, NullValueHandling = NullValueHandling.Ignore)]
-        public string Description { get; set; }
+        public string? Description { get; set; }
     }
 }

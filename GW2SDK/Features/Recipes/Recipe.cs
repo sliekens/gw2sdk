@@ -27,20 +27,16 @@ namespace GW2SDK.Recipes
         [JsonConverter(typeof(MillisecondsConverter))]
         public TimeSpan TimeToCraft { get; set; }
 
-        [NotNull]
         [JsonProperty(Required = Required.Always)]
-        public CraftingDiscipline[] Disciplines { get; set; }
+        public CraftingDiscipline[] Disciplines { get; set; } = new CraftingDiscipline[0];
 
-        [NotNull]
         [JsonProperty(Required = Required.Always)]
-        public RecipeFlag[] Flags { get; set; }
+        public RecipeFlag[] Flags { get; set; } = new RecipeFlag[0];
 
-        [NotNull]
         [JsonProperty(Required = Required.Always)]
-        public Ingredient[] Ingredients { get; set; }
+        public Ingredient[] Ingredients { get; set; } = new Ingredient[0];
 
-        [NotNull]
         [JsonProperty(Required = Required.Always)]
-        public string ChatLink { get; set; }
+        public string ChatLink { get; set; } = "";
     }
 }

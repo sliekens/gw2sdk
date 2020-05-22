@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Net.Http;
-using GW2SDK.Annotations;
 
 namespace GW2SDK.Recipes.Search.Impl
 {
     public sealed class GetRecipesIndexByIngredientIdRequest : HttpRequestMessage
     {
-        private GetRecipesIndexByIngredientIdRequest([NotNull] Uri requestUri)
+        private GetRecipesIndexByIngredientIdRequest(Uri requestUri)
             : base(HttpMethod.Get, requestUri)
         {
         }

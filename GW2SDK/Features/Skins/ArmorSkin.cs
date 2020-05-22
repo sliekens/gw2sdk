@@ -11,8 +11,7 @@ namespace GW2SDK.Skins
         [JsonProperty(Required = Required.Always)]
         public WeightClass WeightClass { get; set; }
 
-        [CanBeNull]
         [JsonProperty(Required = Required.DisallowNull, NullValueHandling = NullValueHandling.Ignore)]
-        public DyeSlotInfo DyeSlots { get; set; }
+        public DyeSlotInfo? DyeSlots { get; set; }
     }
 }

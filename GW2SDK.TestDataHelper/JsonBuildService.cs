@@ -1,5 +1,4 @@
-﻿using System;
-using System.Net.Http;
+﻿using System.Net.Http;
 using System.Threading.Tasks;
 using GW2SDK.Builds.Impl;
 using Newtonsoft.Json;

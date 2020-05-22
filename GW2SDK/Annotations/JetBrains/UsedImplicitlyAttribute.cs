@@ -1,5 +1,6 @@
 ﻿using System;
 
+#nullable disable
 namespace GW2SDK.Annotations
 {
     /// <summary>
@@ -35,3 +36,4 @@ namespace GW2SDK.Annotations
         public ImplicitUseTargetFlags TargetFlags { get; }
     }
 }
+#nullable restore

@@ -10,9 +10,8 @@ namespace GW2SDK.Accounts.Achievements
         [JsonProperty(Required = Required.Always)]
         public int Id { get; set; }
 
-        [CanBeNull]
         [JsonProperty(Required = Required.DisallowNull, NullValueHandling = NullValueHandling.Ignore)]
-        public int[] Bits { get; set; }
+        public int[]? Bits { get; set; }
 
         [JsonProperty(Required = Required.Always)]
         public int Current { get; set; }

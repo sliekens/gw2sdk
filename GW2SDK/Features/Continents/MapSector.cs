@@ -12,24 +12,19 @@ namespace GW2SDK.Continents
         [JsonProperty(Required = Required.Always)]
         public int Id { get; set; }
 
-        [CanBeNull]
         [JsonProperty(Required = Required.DisallowNull, NullValueHandling = NullValueHandling.Ignore)]
-        public string Name { get; set; }
+        public string? Name { get; set; }
         
         [JsonProperty(Required = Required.Always)]
         public int Level { get; set; }
 
-        [NotNull]
         [JsonProperty("coord", Required = Required.Always)]
-        public double[] Coordinates { get; set; }
+        public double[] Coordinates { get; set; } = new double[0];
 
-        [NotNull]
-        [ItemNotNull]
         [JsonProperty("bounds", Required = Required.Always)]
-        public double[][] Boundaries { get; set; }
-        
-        [NotNull]
+        public double[][] Boundaries { get; set; } = new double[0][];
+
         [JsonProperty(Required = Required.Always)]
-        public string ChatLink { get; set; }
+        public string ChatLink { get; set; } = "";
     }
 }

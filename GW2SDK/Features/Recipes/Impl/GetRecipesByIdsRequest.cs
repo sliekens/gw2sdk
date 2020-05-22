@@ -1,14 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Net.Http;
-using GW2SDK.Annotations;
 using GW2SDK.Extensions;
 
 namespace GW2SDK.Recipes.Impl
 {
     public sealed class GetRecipesByIdsRequest : HttpRequestMessage
     {
-        private GetRecipesByIdsRequest([NotNull] Uri requestUri)
+        private GetRecipesByIdsRequest(Uri requestUri)
             : base(HttpMethod.Get, requestUri)
         {
         }
@@ -17,7 +16,7 @@ namespace GW2SDK.Recipes.Impl
         {
             private readonly IReadOnlyList<int> _recipeIds;
 
-            public Builder([NotNull] IReadOnlyList<int> recipeIds)
+            public Builder(IReadOnlyList<int> recipeIds)
             {
                 if (recipeIds == null)
                 {

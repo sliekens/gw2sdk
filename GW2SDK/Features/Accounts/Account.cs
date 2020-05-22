@@ -12,12 +12,11 @@ namespace GW2SDK.Accounts
     [DataTransferObject]
     public sealed class Account
     {
-        [NotNull]
         [JsonProperty(Required = Required.Always)]
-        public string Id { get; set; }
+        public string Id { get; set; } = "";
 
         [JsonProperty(Required = Required.Always)]
-        public string Name { get; set; }
+        public string Name { get; set; } = "";
 
         [JsonProperty(Required = Required.Always)]
         [JsonConverter(typeof(SecondsConverter))]
@@ -29,48 +28,39 @@ namespace GW2SDK.Accounts
         [JsonProperty(Required = Required.Always)]
         public int World { get; set; }
 
-        [NotNull]
-        [ItemNotNull]
         [JsonProperty(Required = Required.Always)]
-        public string[] Guilds { get; set; }
+        public string[] Guilds { get; set; } = new string[0];
 
         [Scope(Permission.Guilds)]
-        [CanBeNull]
-        [ItemNotNull]
         [JsonProperty(Required = Required.DisallowNull, NullValueHandling = NullValueHandling.Ignore)]
-        public string[] GuildLeader { get; set; }
+        public string[]? GuildLeader { get; set; }
 
         [JsonProperty(Required = Required.Always)]
         public DateTimeOffset Created { get; set; }
 
         [JsonProperty(Required = Required.Always)]
-        public ProductName[] Access { get; set; }
+        public ProductName[] Access { get; set; } = new ProductName[0];
 
         [JsonProperty(Required = Required.Always)]
         public bool Commander { get; set; }
 
         [Scope(Permission.Progression)]
-        [CanBeNull]
         [JsonProperty(Required = Required.DisallowNull, NullValueHandling = NullValueHandling.Ignore)]
         public int? FractalLevel { get; set; }
 
         [Scope(Permission.Progression)]
-        [CanBeNull]
         [JsonProperty(Required = Required.DisallowNull, NullValueHandling = NullValueHandling.Ignore)]
         public int? DailyAp { get; set; }
 
         [Scope(Permission.Progression)]
-        [CanBeNull]
         [JsonProperty(Required = Required.DisallowNull, NullValueHandling = NullValueHandling.Ignore)]
         public int? MonthlyAp { get; set; }
 
         [Scope(Permission.Progression)]
-        [CanBeNull]
         [JsonProperty(Required = Required.DisallowNull, NullValueHandling = NullValueHandling.Ignore)]
         public int? WvwRank { get; set; }
 
         [Scope(Permission.Builds)]
-        [CanBeNull]
         [JsonProperty(Required = Required.DisallowNull, NullValueHandling = NullValueHandling.Ignore)]
         public int? BuildStorageSlots { get; set; }
     }

@@ -1,7 +1,6 @@
 ﻿using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
-using GW2SDK.Annotations;
 using GW2SDK.Exceptions;
 using Newtonsoft.Json.Linq;
 
@@ -13,7 +12,7 @@ namespace GW2SDK.Impl.HttpMessageHandlers
         {
         }
 
-        public RateLimitHandler([NotNull] HttpMessageHandler innerHandler)
+        public RateLimitHandler(HttpMessageHandler innerHandler)
             : base(innerHandler)
         {
         }
@@ -24,7 +23,7 @@ namespace GW2SDK.Impl.HttpMessageHandlers
             if (response.StatusCode == HttpStatusCodeEx.TooManyRequests)
             {
                 var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
-                var text = JObject.Parse(json)["text"].ToString();
+                var text = JObject.Parse(json)?["text"]?.ToString();
                 throw new TooManyRequestsException(text);
             }
 

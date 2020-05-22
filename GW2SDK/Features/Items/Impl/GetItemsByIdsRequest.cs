@@ -1,14 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Net.Http;
-using GW2SDK.Annotations;
 using GW2SDK.Extensions;
 
 namespace GW2SDK.Items.Impl
 {
     public sealed class GetItemsByIdsRequest : HttpRequestMessage
     {
-        private GetItemsByIdsRequest([NotNull] Uri requestUri)
+        private GetItemsByIdsRequest(Uri requestUri)
             : base(HttpMethod.Get, requestUri)
         {
         }
@@ -17,7 +16,7 @@ namespace GW2SDK.Items.Impl
         {
             private readonly IReadOnlyList<int> _itemIds;
 
-            public Builder([NotNull] IReadOnlyList<int> itemIds)
+            public Builder(IReadOnlyList<int> itemIds)
             {
                 if (itemIds == null)
                 {

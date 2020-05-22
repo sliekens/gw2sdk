@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Net.Http.Headers;
-using GW2SDK.Annotations;
 using GW2SDK.Impl;
 
 namespace GW2SDK.Extensions
 {
     public static class HttpResponseHeaderExtensions
     {
-        public static IListContext GetListContext([NotNull] this HttpResponseHeaders instance)
+        public static IListContext GetListContext(this HttpResponseHeaders instance)
         {
             if (instance == null) throw new ArgumentNullException(nameof(instance));
             var resultTotal = int.Parse(instance.GetValues(ResponseHeaderName.ResultTotal).ToCsv());
@@ -15,7 +14,7 @@ namespace GW2SDK.Extensions
             return new ListContext(resultTotal, resultCount);
         }
 
-        public static IPageContext GetPageContext([NotNull] this HttpResponseHeaders instance)
+        public static IPageContext GetPageContext(this HttpResponseHeaders instance)
         {
             if (instance == null) throw new ArgumentNullException(nameof(instance));
             var pageTotal = int.Parse(instance.GetValues(ResponseHeaderName.PageTotal).ToCsv());

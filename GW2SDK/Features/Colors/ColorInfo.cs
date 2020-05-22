@@ -16,6 +16,6 @@ namespace GW2SDK.Colors
 
         public double Lightness { get; set; }
 
-        public int[] Rgb { get; set; }
+        public int[] Rgb { get; set; } = new int[0];
     }
 }

@@ -3,7 +3,6 @@ using System.Net;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
-using GW2SDK.Annotations;
 using Newtonsoft.Json.Linq;
 
 namespace GW2SDK.Impl.HttpMessageHandlers
@@ -14,7 +13,7 @@ namespace GW2SDK.Impl.HttpMessageHandlers
         {
         }
 
-        public BadMessageHandler([NotNull] HttpMessageHandler innerHandler)
+        public BadMessageHandler(HttpMessageHandler innerHandler)
             : base(innerHandler)
         {
         }
@@ -25,7 +24,7 @@ namespace GW2SDK.Impl.HttpMessageHandlers
             if (response.StatusCode == HttpStatusCode.BadRequest)
             {
                 var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
-                var text = JObject.Parse(json)["text"].ToString();
+                var text = JObject.Parse(json)?["text"]?.ToString();
                 throw new ArgumentException(text);
             }
 

@@ -8,9 +8,8 @@ namespace GW2SDK.Items
     [Inheritable]
     public class Armor : Equipment
     {
-        [NotNull]
         [JsonProperty(Required = Required.Always)]
-        public string DefaultSkin { get; set; }
+        public string DefaultSkin { get; set; } = "";
 
         [JsonProperty(Required = Required.Always)]
         public WeightClass WeightClass { get; set; }

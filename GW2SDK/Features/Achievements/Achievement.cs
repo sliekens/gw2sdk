@@ -14,51 +14,35 @@ namespace GW2SDK.Achievements
         [JsonProperty(Required = Required.Always)]
         public int Id { get; set; }
 
-        [NotNull]
         [JsonProperty(Required = Required.Always)]
-        public string Name { get; set; }
+        public string Name { get; set; } = "";
 
-        [CanBeNull]
         [JsonProperty(Required = Required.DisallowNull, NullValueHandling = NullValueHandling.Ignore)]
-        public string Icon { get; set; }
+        public string? Icon { get; set; }
 
-        /// <remarks>Description can be an empty string but not null.</remarks>
-        [NotNull]
         [JsonProperty(Required = Required.Always)]
-        public string Description { get; set; }
+        public string Description { get; set; } = "";
 
-        /// <remarks>Requirement can be an empty string but not null.</remarks>
-        [NotNull]
         [JsonProperty(Required = Required.Always)]
-        public string Requirement { get; set; }
+        public string Requirement { get; set; } = "";
 
-        /// <remarks>LockedText can be an empty string but not null.</remarks>
-        [NotNull]
         [JsonProperty(Required = Required.Always)]
-        public string LockedText { get; set; }
+        public string LockedText { get; set; } = "";
 
-        [NotNull]
         [JsonProperty(Required = Required.Always)]
-        public AchievementFlag[] Flags { get; set; }
+        public AchievementFlag[] Flags { get; set; } = new AchievementFlag[0];
 
-        [NotNull]
-        [ItemNotNull]
         [JsonProperty(Required = Required.Always)]
-        public AchievementTier[] Tiers { get; set; }
+        public AchievementTier[] Tiers { get; set; } = new AchievementTier[0];
 
-        /// <remarks>Rewards can be null but it cannot be an empty array or contain null.</remarks>
-        [CanBeNull]
-        [ItemNotNull]
         [JsonProperty(Required = Required.DisallowNull, NullValueHandling = NullValueHandling.Ignore)]
-        public AchievementReward[] Rewards { get; set; }
+        public AchievementReward[]? Rewards { get; set; }
 
-        [CanBeNull]
         [JsonProperty(Required = Required.DisallowNull, NullValueHandling = NullValueHandling.Ignore)]
-        public AchievementBit[] Bits { get; set; }
+        public AchievementBit[]? Bits { get; set; }
 
-        [CanBeNull]
         [JsonProperty(Required = Required.DisallowNull, NullValueHandling = NullValueHandling.Ignore)]
-        public int[] Prerequisites { get; set; }
+        public int[]? Prerequisites { get; set; }
 
         /// <remarks>Can be -1 for repeatable achievements that don't award points.</remarks>
         [JsonProperty(Required = Required.DisallowNull, NullValueHandling = NullValueHandling.Ignore)]

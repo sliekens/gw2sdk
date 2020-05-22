@@ -13,20 +13,16 @@ namespace GW2SDK.Continents
         [JsonProperty(Required = Required.Always)]
         public int Id { get; set; }
 
-        [NotNull]
         [JsonProperty(Required = Required.Always)]
-        public string Name { get; set; }
+        public string Name { get; set; } = "";
 
-        [NotNull]
         [JsonProperty("label_coord", Required = Required.Always)]
-        public int[] LabelCoordinates { get; set; }
+        public int[] LabelCoordinates { get; set; } = new int[0];
 
-        [NotNull]
         [JsonProperty("continent_rect", Required = Required.Always)]
-        public int[][] ContinentRectangle { get; set; }
+        public int[][] ContinentRectangle { get; set; } = new int[0][];
 
-        [NotNull]
         [JsonProperty(Required = Required.Always)]
-        public Dictionary<int, Map> Maps { get; set; }
+        public Dictionary<int, Map> Maps { get; set; } = new Dictionary<int, Map>(0);
     }
 }

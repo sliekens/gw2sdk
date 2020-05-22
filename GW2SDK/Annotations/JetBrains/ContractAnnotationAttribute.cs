@@ -1,5 +1,6 @@
 ﻿using System;
 
+#nullable disable
 namespace GW2SDK.Annotations
 {
     /// <summary>
@@ -65,3 +66,4 @@ namespace GW2SDK.Annotations
         public bool ForceFullStates { get; }
     }
 }
+#nullable restore

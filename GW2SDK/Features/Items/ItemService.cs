@@ -16,12 +16,12 @@ namespace GW2SDK.Items
     {
         private readonly HttpClient _http;
 
-        public ItemService([NotNull] HttpClient http)
+        public ItemService(HttpClient http)
         {
             _http = http ?? throw new ArgumentNullException(nameof(http));
         }
 
-        public async Task<IDataTransferList<int>> GetItemsIndex([CanBeNull] JsonSerializerSettings settings = null)
+        public async Task<IDataTransferList<int>> GetItemsIndex(JsonSerializerSettings? settings = null)
         {
             using (var request = new GetItemsIndexRequest())
             using (var response = await _http.SendAsync(request).ConfigureAwait(false))
@@ -35,7 +35,7 @@ namespace GW2SDK.Items
             }
         }
 
-        public async Task<Item> GetItemById(int itemId, [CanBeNull] JsonSerializerSettings settings = null)
+        public async Task<Item?> GetItemById(int itemId, JsonSerializerSettings? settings = null)
         {
             using (var request = new GetItemByIdRequest.Builder(itemId).GetRequest())
             using (var response = await _http.SendAsync(request).ConfigureAwait(false))
@@ -46,7 +46,7 @@ namespace GW2SDK.Items
             }
         }
 
-        public async Task<IDataTransferList<Item>> GetItemsByIds([NotNull] IReadOnlyList<int> itemIds, [CanBeNull] JsonSerializerSettings settings = null)
+        public async Task<IDataTransferList<Item>> GetItemsByIds(IReadOnlyList<int> itemIds, JsonSerializerSettings? settings = null)
         {
             if (itemIds == null)
             {
@@ -70,7 +70,7 @@ namespace GW2SDK.Items
             }
         }
 
-        public async Task<IDataTransferPage<Item>> GetItemsByPage(int pageIndex, int? pageSize = null, [CanBeNull] JsonSerializerSettings settings = null)
+        public async Task<IDataTransferPage<Item>> GetItemsByPage(int pageIndex, int? pageSize = null, JsonSerializerSettings? settings = null)
         {
             using (var request = new GetItemsByPageRequest.Builder(pageIndex, pageSize).GetRequest())
             using (var response = await _http.SendAsync(request).ConfigureAwait(false))

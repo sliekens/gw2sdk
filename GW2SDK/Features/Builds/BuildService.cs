@@ -13,12 +13,12 @@ namespace GW2SDK.Builds
     {
         private readonly HttpClient _http;
 
-        public BuildService([NotNull] HttpClient http)
+        public BuildService(HttpClient http)
         {
             _http = http ?? throw new ArgumentNullException(nameof(http));
         }
 
-        public async Task<Build> GetBuild([CanBeNull] JsonSerializerSettings settings = null)
+        public async Task<Build?> GetBuild(JsonSerializerSettings? settings = null)
         {
             using (var request = new GetBuildRequest())
             using (var response = await _http.SendAsync(request).ConfigureAwait(false))

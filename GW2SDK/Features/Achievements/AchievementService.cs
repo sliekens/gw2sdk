@@ -16,12 +16,12 @@ namespace GW2SDK.Achievements
     {
         private readonly HttpClient _http;
 
-        public AchievementService([NotNull] HttpClient http)
+        public AchievementService(HttpClient http)
         {
             _http = http ?? throw new ArgumentNullException(nameof(http));
         }
 
-        public async Task<IDataTransferList<int>> GetAchievementsIndex([CanBeNull] JsonSerializerSettings settings = null)
+        public async Task<IDataTransferList<int>> GetAchievementsIndex(JsonSerializerSettings? settings = null)
         {
             using (var request = new GetAchievementsIndexRequest())
             using (var response = await _http.SendAsync(request).ConfigureAwait(false))
@@ -35,7 +35,7 @@ namespace GW2SDK.Achievements
             }
         }
 
-        public async Task<Achievement> GetAchievementById(int achievementId, [CanBeNull] JsonSerializerSettings settings = null)
+        public async Task<Achievement?> GetAchievementById(int achievementId, JsonSerializerSettings? settings = null)
         {
             using (var request = new GetAchievementByIdRequest.Builder(achievementId).GetRequest())
             using (var response = await _http.SendAsync(request).ConfigureAwait(false))
@@ -47,8 +47,8 @@ namespace GW2SDK.Achievements
         }
 
         public async Task<IDataTransferList<Achievement>> GetAchievementsByIds(
-            [NotNull] IReadOnlyList<int> achievementIds,
-            [CanBeNull] JsonSerializerSettings settings = null)
+            IReadOnlyList<int> achievementIds,
+            JsonSerializerSettings? settings = null)
         {
             if (achievementIds == null)
             {
@@ -75,7 +75,7 @@ namespace GW2SDK.Achievements
         public async Task<IDataTransferPage<Achievement>> GetAchievementsByPage(
             int pageIndex,
             int? pageSize = null,
-            [CanBeNull] JsonSerializerSettings settings = null)
+            JsonSerializerSettings? settings = null)
         {
             using (var request = new GetAchievementsByPageRequest.Builder(pageIndex, pageSize).GetRequest())
             using (var response = await _http.SendAsync(request).ConfigureAwait(false))

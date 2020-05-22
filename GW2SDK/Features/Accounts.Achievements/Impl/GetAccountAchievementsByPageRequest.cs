@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Net.Http;
-using GW2SDK.Annotations;
 
 namespace GW2SDK.Accounts.Achievements.Impl
 {
     public sealed class GetAccountAchievementsByPageRequest : HttpRequestMessage
     {
-        private GetAccountAchievementsByPageRequest([NotNull] Uri requestUri)
+        private GetAccountAchievementsByPageRequest(Uri requestUri)
             : base(HttpMethod.Get, requestUri)
         {
         }

@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Net.Http;
-using GW2SDK.Annotations;
 
 namespace GW2SDK.Colors.Impl
 {
     public sealed class GetColorsByPageRequest : HttpRequestMessage
     {
-        private GetColorsByPageRequest([NotNull] Uri requestUri)
+        private GetColorsByPageRequest(Uri requestUri)
             : base(HttpMethod.Get, requestUri)
         {
         }

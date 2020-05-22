@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Linq;
-using GW2SDK.Annotations;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
@@ -11,12 +10,12 @@ namespace GW2SDK.Impl.JsonConverters
     {
         private readonly DiscriminatorOptions _discriminatorOptions;
 
-        public DiscriminatedJsonConverter([NotNull] Type concreteDiscriminatorOptionsType)
+        public DiscriminatedJsonConverter(Type concreteDiscriminatorOptionsType)
             : this((DiscriminatorOptions) Activator.CreateInstance(concreteDiscriminatorOptionsType))
         {
         }
 
-        public DiscriminatedJsonConverter([NotNull] DiscriminatorOptions discriminatorOptions)
+        public DiscriminatedJsonConverter(DiscriminatorOptions discriminatorOptions)
         {
             _discriminatorOptions = discriminatorOptions ?? throw new ArgumentNullException(nameof(discriminatorOptions));
         }
@@ -30,7 +29,7 @@ namespace GW2SDK.Impl.JsonConverters
             return objectType == _discriminatorOptions.BaseType;
         }
 
-        public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+        public override object? ReadJson(JsonReader reader, Type objectType, object? existingValue, JsonSerializer serializer)
         {
             if (reader.TokenType == JsonToken.Null)
             {
@@ -102,7 +101,7 @@ namespace GW2SDK.Impl.JsonConverters
             return value;
         }
 
-        public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+        public override void WriteJson(JsonWriter writer, object? value, JsonSerializer serializer)
         {
             throw new NotSupportedException("DiscriminatedJsonConverter should only be used while deserializing.");
         }
