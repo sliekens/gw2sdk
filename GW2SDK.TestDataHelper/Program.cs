@@ -13,7 +13,7 @@ namespace GW2SDK.TestDataHelper
             {
                 var service = services.Resolve<JsonBuildService>();
                 var json = await service.GetJsonBuild(indented);
-                file.WriteLine(json);
+                await file.WriteLineAsync(json);
             }
 
             await using (var file = File.CreateText(Path.Combine(outDir, "achievements.json")))
@@ -22,7 +22,7 @@ namespace GW2SDK.TestDataHelper
                 var jsons = await service.GetAllJsonAchievements(indented);
                 foreach (var json in jsons)
                 {
-                    file.WriteLine(json);
+                    await file.WriteLineAsync(json);
                 }
             }
 
@@ -32,7 +32,7 @@ namespace GW2SDK.TestDataHelper
                 var jsons = await service.GetAllJsonAchievementCategories(indented);
                 foreach (var json in jsons)
                 {
-                    file.WriteLine(json);
+                    await file.WriteLineAsync(json);
                 }
             }
 
@@ -42,7 +42,7 @@ namespace GW2SDK.TestDataHelper
                 var jsons = await service.GetAllJsonAchievementGroups(indented);
                 foreach (var json in jsons)
                 {
-                    file.WriteLine(json);
+                    await file.WriteLineAsync(json);
                 }
             }
 
@@ -52,7 +52,7 @@ namespace GW2SDK.TestDataHelper
                 var jsons = await service.GetAllJsonColors(indented);
                 foreach (var json in jsons)
                 {
-                    file.WriteLine(json);
+                    await file.WriteLineAsync(json);
                 }
             }
 
@@ -62,7 +62,7 @@ namespace GW2SDK.TestDataHelper
                 var jsons = await service.GetAllJsonWorlds(indented);
                 foreach (var json in jsons)
                 {
-                    file.WriteLine(json);
+                    await file.WriteLineAsync(json);
                 }
             }
 
@@ -72,7 +72,7 @@ namespace GW2SDK.TestDataHelper
                 var jsons = await service.GetAllJsonItems(indented);
                 foreach (var json in jsons)
                 {
-                    file.WriteLine(json);
+                    await file.WriteLineAsync(json);
                 }
             }
 
@@ -82,7 +82,7 @@ namespace GW2SDK.TestDataHelper
                 var jsons = await service.GetAllJsonRecipes(indented);
                 foreach (var json in jsons)
                 {
-                    file.WriteLine(json);
+                    await file.WriteLineAsync(json);
                 }
             }
 
@@ -92,7 +92,7 @@ namespace GW2SDK.TestDataHelper
                 var jsons = await service.GetAllJsonSkins(indented);
                 foreach (var json in jsons)
                 {
-                    file.WriteLine(json);
+                    await file.WriteLineAsync(json);
                 }
             }
 
@@ -102,7 +102,7 @@ namespace GW2SDK.TestDataHelper
                 var jsons = await service.GetAllJsonContinents(indented);
                 foreach (var json in jsons)
                 {
-                    file.WriteLine(json);
+                    await file.WriteLineAsync(json);
                 }
             }
 
@@ -112,7 +112,7 @@ namespace GW2SDK.TestDataHelper
                 var jsons = await service.GetAllJsonFloors(1, indented);
                 foreach (var json in jsons)
                 {
-                    file.WriteLine(json);
+                    await file.WriteLineAsync(json);
                 }
             }
 
@@ -122,7 +122,7 @@ namespace GW2SDK.TestDataHelper
                 var jsons = await service.GetAllJsonFloors(2, indented);
                 foreach (var json in jsons)
                 {
-                    file.WriteLine(json);
+                    await file.WriteLineAsync(json);
                 }
             }
 
@@ -132,7 +132,7 @@ namespace GW2SDK.TestDataHelper
                 var jsons = await service.GetAllJsonItemPrices(indented);
                 foreach (var json in jsons)
                 {
-                    file.WriteLine(json);
+                    await file.WriteLineAsync(json);
                 }
             }
         }
