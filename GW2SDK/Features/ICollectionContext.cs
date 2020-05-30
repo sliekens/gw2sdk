@@ -3,7 +3,7 @@
 namespace GW2SDK
 {
     [PublicAPI]
-    public interface IListContext
+    public interface ICollectionContext
     {
         int ResultTotal { get; }
 

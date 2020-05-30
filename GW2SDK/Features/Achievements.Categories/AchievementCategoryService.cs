@@ -21,28 +21,28 @@ namespace GW2SDK.Achievements.Categories
             _http = http ?? throw new ArgumentNullException(nameof(http));
         }
 
-        public async Task<IDataTransferList<AchievementCategory>> GetAchievementCategories(JsonSerializerSettings? settings = null)
+        public async Task<IDataTransferCollection<AchievementCategory>> GetAchievementCategories(JsonSerializerSettings? settings = null)
         {
             using var request = new GetAchievementCategoriesRequest();
             using var response = await _http.SendAsync(request).ConfigureAwait(false);
             response.EnsureSuccessStatusCode();
             var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
-            var listContext = response.Headers.GetListContext();
-            var list = new List<AchievementCategory>(listContext.ResultCount);
+            var context = response.Headers.GetCollectionContext();
+            var list = new List<AchievementCategory>(context.ResultCount);
             JsonConvert.PopulateObject(json, list, settings ?? Json.DefaultJsonSerializerSettings);
-            return new DataTransferList<AchievementCategory>(list, listContext);
+            return new DataTransferCollection<AchievementCategory>(list, context);
         }
 
-        public async Task<IDataTransferList<int>> GetAchievementCategoriesIndex(JsonSerializerSettings? settings = null)
+        public async Task<IDataTransferCollection<int>> GetAchievementCategoriesIndex(JsonSerializerSettings? settings = null)
         {
             using var request = new GetAchievementCategoriesIndexRequest();
             using var response = await _http.SendAsync(request).ConfigureAwait(false);
             response.EnsureSuccessStatusCode();
             var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
-            var listContext = response.Headers.GetListContext();
-            var list = new List<int>(listContext.ResultCount);
+            var context = response.Headers.GetCollectionContext();
+            var list = new List<int>(context.ResultCount);
             JsonConvert.PopulateObject(json, list, settings ?? Json.DefaultJsonSerializerSettings);
-            return new DataTransferList<int>(list, listContext);
+            return new DataTransferCollection<int>(list, context);
         }
 
         public async Task<AchievementCategory?> GetAchievementCategoryById(int achievementCategoryId, JsonSerializerSettings? settings = null)
@@ -54,8 +54,8 @@ namespace GW2SDK.Achievements.Categories
             return JsonConvert.DeserializeObject<AchievementCategory>(json, settings ?? Json.DefaultJsonSerializerSettings);
         }
 
-        public async Task<IDataTransferList<AchievementCategory>> GetAchievementCategoriesByIds(
-            IReadOnlyList<int> achievementCategoryIds,
+        public async Task<IDataTransferCollection<AchievementCategory>> GetAchievementCategoriesByIds(
+            IReadOnlyCollection<int> achievementCategoryIds,
             JsonSerializerSettings? settings = null)
         {
             if (achievementCategoryIds == null)
@@ -72,10 +72,10 @@ namespace GW2SDK.Achievements.Categories
             using var response = await _http.SendAsync(request).ConfigureAwait(false);
             response.EnsureSuccessStatusCode();
             var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
-            var listContext = response.Headers.GetListContext();
-            var list = new List<AchievementCategory>(listContext.ResultCount);
+            var context = response.Headers.GetCollectionContext();
+            var list = new List<AchievementCategory>(context.ResultCount);
             JsonConvert.PopulateObject(json, list, settings ?? Json.DefaultJsonSerializerSettings);
-            return new DataTransferList<AchievementCategory>(list, listContext);
+            return new DataTransferCollection<AchievementCategory>(list, context);
         }
 
         public async Task<IDataTransferPage<AchievementCategory>> GetAchievementCategoriesByPage(

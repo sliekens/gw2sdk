@@ -4,7 +4,7 @@ using GW2SDK.Annotations;
 namespace GW2SDK
 {
     [PublicAPI]
-    public interface IDataTransferPage<out T> : IReadOnlyList<T>, IPageContext
+    public interface IDataTransferPage<out T> : IReadOnlyCollection<T>, IPageContext
     {
     }
 }

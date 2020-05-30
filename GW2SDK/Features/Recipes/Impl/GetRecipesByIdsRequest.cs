@@ -14,9 +14,9 @@ namespace GW2SDK.Recipes.Impl
 
         public sealed class Builder
         {
-            private readonly IReadOnlyList<int> _recipeIds;
+            private readonly IReadOnlyCollection<int> _recipeIds;
 
-            public Builder(IReadOnlyList<int> recipeIds)
+            public Builder(IReadOnlyCollection<int> recipeIds)
             {
                 if (recipeIds == null)
                 {

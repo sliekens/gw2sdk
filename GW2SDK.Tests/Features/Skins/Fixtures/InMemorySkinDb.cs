@@ -11,7 +11,7 @@ namespace GW2SDK.Tests.Features.Skins.Fixtures
             Skins = objects.ToList().AsReadOnly();
         }
 
-        public IReadOnlyList<string> Skins { get; }
+        public IReadOnlyCollection<string> Skins { get; }
 
         public IEnumerable<string> GetSkinFlags()
         {

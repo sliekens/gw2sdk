@@ -21,16 +21,16 @@ namespace GW2SDK.Commerce.Prices
             _http = http ?? throw new ArgumentNullException(nameof(http));
         }
 
-        public async Task<IDataTransferList<int>> GetItemPricesIndex(JsonSerializerSettings? settings = null)
+        public async Task<IDataTransferCollection<int>> GetItemPricesIndex(JsonSerializerSettings? settings = null)
         {
             using var request = new GetItemPricesIndexRequest();
             using var response = await _http.SendAsync(request).ConfigureAwait(false);
             response.EnsureSuccessStatusCode();
             var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
-            var listContext = response.Headers.GetListContext();
-            var list = new List<int>(listContext.ResultCount);
+            var context = response.Headers.GetCollectionContext();
+            var list = new List<int>(context.ResultCount);
             JsonConvert.PopulateObject(json, list, settings ?? Json.DefaultJsonSerializerSettings);
-            return new DataTransferList<int>(list, listContext);
+            return new DataTransferCollection<int>(list, context);
         }
 
         public async Task<ItemPrice?> GetItemPriceById(int itemId, JsonSerializerSettings? settings = null)
@@ -42,7 +42,7 @@ namespace GW2SDK.Commerce.Prices
             return JsonConvert.DeserializeObject<ItemPrice>(json, settings ?? Json.DefaultJsonSerializerSettings);
         }
 
-        public async Task<IDataTransferList<ItemPrice>> GetItemPricesByIds(IReadOnlyList<int> itemIds, JsonSerializerSettings? settings = null)
+        public async Task<IDataTransferCollection<ItemPrice>> GetItemPricesByIds(IReadOnlyCollection<int> itemIds, JsonSerializerSettings? settings = null)
         {
             if (itemIds == null)
             {
@@ -58,10 +58,10 @@ namespace GW2SDK.Commerce.Prices
             using var response = await _http.SendAsync(request).ConfigureAwait(false);
             response.EnsureSuccessStatusCode();
             var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
-            var listContext = response.Headers.GetListContext();
-            var list = new List<ItemPrice>(listContext.ResultCount);
+            var context = response.Headers.GetCollectionContext();
+            var list = new List<ItemPrice>(context.ResultCount);
             JsonConvert.PopulateObject(json, list, settings ?? Json.DefaultJsonSerializerSettings);
-            return new DataTransferList<ItemPrice>(list, listContext);
+            return new DataTransferCollection<ItemPrice>(list, context);
         }
     }
 }

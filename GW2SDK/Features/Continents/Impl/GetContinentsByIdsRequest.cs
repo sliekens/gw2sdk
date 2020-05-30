@@ -14,9 +14,9 @@ namespace GW2SDK.Continents.Impl
 
         public sealed class Builder
         {
-            private readonly IReadOnlyList<int> _continentIds;
+            private readonly IReadOnlyCollection<int> _continentIds;
 
-            public Builder(IReadOnlyList<int> continentIds)
+            public Builder(IReadOnlyCollection<int> continentIds)
             {
                 if (continentIds == null)
                 {

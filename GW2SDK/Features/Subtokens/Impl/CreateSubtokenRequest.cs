@@ -19,15 +19,15 @@ namespace GW2SDK.Subtokens.Impl
         {
             private readonly DateTimeOffset? _absoluteExpirationDate;
 
-            private readonly IReadOnlyList<Permission>? _permissions;
+            private readonly IReadOnlyCollection<Permission>? _permissions;
 
-            private readonly IReadOnlyList<string>? _urls;
+            private readonly IReadOnlyCollection<string>? _urls;
 
             public Builder(
                 string? accessToken = null,
-                IReadOnlyList<Permission>? permissions = null,
+                IReadOnlyCollection<Permission>? permissions = null,
                 DateTimeOffset? absoluteExpirationDate = null,
-                IReadOnlyList<string>? urls = null)
+                IReadOnlyCollection<string>? urls = null)
             {
                 if (!string.IsNullOrEmpty(accessToken))
                 {

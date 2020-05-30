@@ -21,28 +21,28 @@ namespace GW2SDK.Continents
             _http = http ?? throw new ArgumentNullException(nameof(http));
         }
 
-        public async Task<IDataTransferList<Continent>> GetContinents(JsonSerializerSettings? settings = null)
+        public async Task<IDataTransferCollection<Continent>> GetContinents(JsonSerializerSettings? settings = null)
         {
             using var request = new GetContinentsRequest();
             using var response = await _http.SendAsync(request).ConfigureAwait(false);
             response.EnsureSuccessStatusCode();
             var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
-            var listContext = response.Headers.GetListContext();
-            var list = new List<Continent>(listContext.ResultCount);
+            var context = response.Headers.GetCollectionContext();
+            var list = new List<Continent>(context.ResultCount);
             JsonConvert.PopulateObject(json, list, settings ?? Json.DefaultJsonSerializerSettings);
-            return new DataTransferList<Continent>(list, listContext);
+            return new DataTransferCollection<Continent>(list, context);
         }
 
-        public async Task<IDataTransferList<int>> GetContinentsIndex(JsonSerializerSettings? settings = null)
+        public async Task<IDataTransferCollection<int>> GetContinentsIndex(JsonSerializerSettings? settings = null)
         {
             using var request = new GetContinentsIndexRequest();
             using var response = await _http.SendAsync(request).ConfigureAwait(false);
             response.EnsureSuccessStatusCode();
             var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
-            var listContext = response.Headers.GetListContext();
-            var list = new List<int>(listContext.ResultCount);
+            var context = response.Headers.GetCollectionContext();
+            var list = new List<int>(context.ResultCount);
             JsonConvert.PopulateObject(json, list, settings ?? Json.DefaultJsonSerializerSettings);
-            return new DataTransferList<int>(list, listContext);
+            return new DataTransferCollection<int>(list, context);
         }
 
         public async Task<Continent?> GetContinentById(int continentId, JsonSerializerSettings? settings = null)
@@ -54,8 +54,8 @@ namespace GW2SDK.Continents
             return JsonConvert.DeserializeObject<Continent>(json, settings ?? Json.DefaultJsonSerializerSettings);
         }
 
-        public async Task<IDataTransferList<Continent>> GetContinentsByIds(
-            IReadOnlyList<int> continentIds,
+        public async Task<IDataTransferCollection<Continent>> GetContinentsByIds(
+            IReadOnlyCollection<int> continentIds,
             JsonSerializerSettings? settings = null)
         {
             if (continentIds == null)
@@ -72,10 +72,10 @@ namespace GW2SDK.Continents
             using var response = await _http.SendAsync(request).ConfigureAwait(false);
             response.EnsureSuccessStatusCode();
             var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
-            var listContext = response.Headers.GetListContext();
-            var list = new List<Continent>(listContext.ResultCount);
+            var context = response.Headers.GetCollectionContext();
+            var list = new List<Continent>(context.ResultCount);
             JsonConvert.PopulateObject(json, list, settings ?? Json.DefaultJsonSerializerSettings);
-            return new DataTransferList<Continent>(list, listContext);
+            return new DataTransferCollection<Continent>(list, context);
         }
 
         public async Task<IDataTransferPage<Continent>> GetContinentsByPage(
@@ -93,28 +93,28 @@ namespace GW2SDK.Continents
             return new DataTransferPage<Continent>(list, pageContext);
         }
 
-        public async Task<IDataTransferList<Floor>> GetFloors(int continentId, JsonSerializerSettings? settings = null)
+        public async Task<IDataTransferCollection<Floor>> GetFloors(int continentId, JsonSerializerSettings? settings = null)
         {
             using var request = new GetFloorsRequest(continentId);
             using var response = await _http.SendAsync(request).ConfigureAwait(false);
             response.EnsureSuccessStatusCode();
             var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
-            var listContext = response.Headers.GetListContext();
-            var list = new List<Floor>(listContext.ResultCount);
+            var context = response.Headers.GetCollectionContext();
+            var list = new List<Floor>(context.ResultCount);
             JsonConvert.PopulateObject(json, list, settings ?? Json.DefaultJsonSerializerSettings);
-            return new DataTransferList<Floor>(list, listContext);
+            return new DataTransferCollection<Floor>(list, context);
         }
 
-        public async Task<IDataTransferList<int>> GetFloorsIndex(int continentId, JsonSerializerSettings? settings = null)
+        public async Task<IDataTransferCollection<int>> GetFloorsIndex(int continentId, JsonSerializerSettings? settings = null)
         {
             using var request = new GetFloorsIndexRequest(continentId);
             using var response = await _http.SendAsync(request).ConfigureAwait(false);
             response.EnsureSuccessStatusCode();
             var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
-            var listContext = response.Headers.GetListContext();
-            var list = new List<int>(listContext.ResultCount);
+            var context = response.Headers.GetCollectionContext();
+            var list = new List<int>(context.ResultCount);
             JsonConvert.PopulateObject(json, list, settings ?? Json.DefaultJsonSerializerSettings);
-            return new DataTransferList<int>(list, listContext);
+            return new DataTransferCollection<int>(list, context);
         }
 
         public async Task<Floor?> GetFloorById(int continentId, int floorId, JsonSerializerSettings? settings = null)
@@ -126,7 +126,7 @@ namespace GW2SDK.Continents
             return JsonConvert.DeserializeObject<Floor>(json, settings ?? Json.DefaultJsonSerializerSettings);
         }
 
-        public async Task<IDataTransferList<Floor>> GetFloorsByIds(int continentId, IReadOnlyList<int> floorIds, JsonSerializerSettings? settings = null)
+        public async Task<IDataTransferCollection<Floor>> GetFloorsByIds(int continentId, IReadOnlyCollection<int> floorIds, JsonSerializerSettings? settings = null)
         {
             if (floorIds == null)
             {
@@ -142,10 +142,10 @@ namespace GW2SDK.Continents
             using var response = await _http.SendAsync(request).ConfigureAwait(false);
             response.EnsureSuccessStatusCode();
             var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
-            var listContext = response.Headers.GetListContext();
-            var list = new List<Floor>(listContext.ResultCount);
+            var context = response.Headers.GetCollectionContext();
+            var list = new List<Floor>(context.ResultCount);
             JsonConvert.PopulateObject(json, list, settings ?? Json.DefaultJsonSerializerSettings);
-            return new DataTransferList<Floor>(list, listContext);
+            return new DataTransferCollection<Floor>(list, context);
         }
 
         public async Task<IDataTransferPage<Floor>> GetFloorsByPage(int continentId, int pageIndex, int? pageSize = null, JsonSerializerSettings? settings = null)

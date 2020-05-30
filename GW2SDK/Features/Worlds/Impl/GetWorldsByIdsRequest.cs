@@ -14,9 +14,9 @@ namespace GW2SDK.Worlds.Impl
 
         public sealed class Builder
         {
-            private readonly IReadOnlyList<int> _worldIds;
+            private readonly IReadOnlyCollection<int> _worldIds;
 
-            public Builder(IReadOnlyList<int> worldIds)
+            public Builder(IReadOnlyCollection<int> worldIds)
             {
                 if (worldIds == null)
                 {

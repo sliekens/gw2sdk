@@ -15,9 +15,9 @@ namespace GW2SDK.Achievements.Groups.Impl
 
         public sealed class Builder
         {
-            private readonly IReadOnlyList<string> _achievementGroupIds;
+            private readonly IReadOnlyCollection<string> _achievementGroupIds;
 
-            public Builder(IReadOnlyList<string> achievementGroupIds)
+            public Builder(IReadOnlyCollection<string> achievementGroupIds)
             {
                 if (achievementGroupIds == null)
                 {

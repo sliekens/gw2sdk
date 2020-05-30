@@ -21,16 +21,16 @@ namespace GW2SDK.Achievements
             _http = http ?? throw new ArgumentNullException(nameof(http));
         }
 
-        public async Task<IDataTransferList<int>> GetAchievementsIndex(JsonSerializerSettings? settings = null)
+        public async Task<IDataTransferCollection<int>> GetAchievementsIndex(JsonSerializerSettings? settings = null)
         {
             using var request = new GetAchievementsIndexRequest();
             using var response = await _http.SendAsync(request).ConfigureAwait(false);
             response.EnsureSuccessStatusCode();
             var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
-            var listContext = response.Headers.GetListContext();
-            var list = new List<int>(listContext.ResultCount);
+            var context = response.Headers.GetCollectionContext();
+            var list = new List<int>(context.ResultCount);
             JsonConvert.PopulateObject(json, list, settings ?? Json.DefaultJsonSerializerSettings);
-            return new DataTransferList<int>(list, listContext);
+            return new DataTransferCollection<int>(list, context);
         }
 
         public async Task<Achievement?> GetAchievementById(int achievementId, JsonSerializerSettings? settings = null)
@@ -42,8 +42,8 @@ namespace GW2SDK.Achievements
             return JsonConvert.DeserializeObject<Achievement>(json, settings ?? Json.DefaultJsonSerializerSettings);
         }
 
-        public async Task<IDataTransferList<Achievement>> GetAchievementsByIds(
-            IReadOnlyList<int> achievementIds,
+        public async Task<IDataTransferCollection<Achievement>> GetAchievementsByIds(
+            IReadOnlyCollection<int> achievementIds,
             JsonSerializerSettings? settings = null)
         {
             if (achievementIds == null)
@@ -60,10 +60,10 @@ namespace GW2SDK.Achievements
             using var response = await _http.SendAsync(request).ConfigureAwait(false);
             response.EnsureSuccessStatusCode();
             var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
-            var listContext = response.Headers.GetListContext();
-            var list = new List<Achievement>(listContext.ResultCount);
+            var context = response.Headers.GetCollectionContext();
+            var list = new List<Achievement>(context.ResultCount);
             JsonConvert.PopulateObject(json, list, settings ?? Json.DefaultJsonSerializerSettings);
-            return new DataTransferList<Achievement>(list, listContext);
+            return new DataTransferCollection<Achievement>(list, context);
         }
 
         public async Task<IDataTransferPage<Achievement>> GetAchievementsByPage(

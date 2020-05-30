@@ -11,7 +11,7 @@ namespace GW2SDK.Tests.Features.Recipes.Fixtures
             Recipes = objects.ToList().AsReadOnly();
         }
 
-        public IReadOnlyList<string> Recipes { get; }
+        public IReadOnlyCollection<string> Recipes { get; }
 
         public IEnumerable<string> GetRecipeFlags()
         {

@@ -14,9 +14,9 @@ namespace GW2SDK.Skins.Impl
 
         public sealed class Builder
         {
-            private readonly IReadOnlyList<int> _skinIds;
+            private readonly IReadOnlyCollection<int> _skinIds;
 
-            public Builder(IReadOnlyList<int> skinIds)
+            public Builder(IReadOnlyCollection<int> skinIds)
             {
                 if (skinIds == null)
                 {

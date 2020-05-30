@@ -40,7 +40,7 @@ namespace GW2SDK.TestDataHelper
             return JsonConvert.DeserializeObject<List<int>>(json);
         }
 
-        private async Task<List<string>> GetJsonItemsByIds(IReadOnlyList<int> itemIds, bool indented)
+        private async Task<List<string>> GetJsonItemsByIds(IReadOnlyCollection<int> itemIds, bool indented)
         {
             using var request = new GetItemsByIdsRequest.Builder(itemIds).GetRequest();
             using var response = await _http.SendAsync(request);

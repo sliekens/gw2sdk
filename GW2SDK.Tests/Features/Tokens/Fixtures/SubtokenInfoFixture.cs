@@ -15,13 +15,13 @@ namespace GW2SDK.Tests.Features.Tokens.Fixtures
     {
         public string SubtokenInfoJson { get; private set; }
 
-        public IReadOnlyList<Permission> SubtokenPermissions { get; private set; }
+        public IReadOnlyCollection<Permission> SubtokenPermissions { get; private set; }
 
         public DateTimeOffset CreatedSubtokenDate { get; private set; }
 
         public DateTimeOffset ExpiresAt { get; private set; }
 
-        public IReadOnlyList<string> Urls { get; private set; }
+        public IReadOnlyCollection<string> Urls { get; private set; }
 
         public async Task InitializeAsync()
         {

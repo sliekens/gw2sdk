@@ -10,6 +10,6 @@ namespace GW2SDK.Tests.Features.Commerce.Prices.Fixtures
             ItemPrices = objects.ToList().AsReadOnly();
         }
 
-        public IReadOnlyList<string> ItemPrices { get; }
+        public IReadOnlyCollection<string> ItemPrices { get; }
     }
 }
