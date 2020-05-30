@@ -11,7 +11,7 @@ namespace GW2SDK.Tests.Features.Items.Fixtures
             Items = objects.ToList().AsReadOnly();
         }
 
-        public IReadOnlyList<string> Items { get; }
+        public IReadOnlyCollection<string> Items { get; }
 
         public IEnumerable<string> GetItemFlags()
         {

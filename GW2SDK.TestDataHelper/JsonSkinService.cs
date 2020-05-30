@@ -40,7 +40,7 @@ namespace GW2SDK.TestDataHelper
             return JsonConvert.DeserializeObject<List<int>>(json);
         }
 
-        private async Task<List<string>> GetJsonSkinsByIds(IReadOnlyList<int> skinIds, bool indented)
+        private async Task<List<string>> GetJsonSkinsByIds(IReadOnlyCollection<int> skinIds, bool indented)
         {
             using var request = new GetSkinsByIdsRequest.Builder(skinIds).GetRequest();
             using var response = await _http.SendAsync(request);

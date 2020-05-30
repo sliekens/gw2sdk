@@ -13,7 +13,7 @@ namespace GW2SDK.Tests.Features.Continents.Fixtures
             _db = items.ToList();
         }
 
-        public IReadOnlyList<string> Floors => _db.AsReadOnly();
+        public IReadOnlyCollection<string> Floors => _db.AsReadOnly();
 
         public IEnumerable<string> GetPointOfInterestTypeNames()
         {

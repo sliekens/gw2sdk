@@ -10,6 +10,6 @@ namespace GW2SDK.Tests.Features.Accounts.Achievements.Fixtures
             AccountAchievements = objects.ToList().AsReadOnly();
         }
 
-        public IReadOnlyList<string> AccountAchievements { get; }
+        public IReadOnlyCollection<string> AccountAchievements { get; }
     }
 }

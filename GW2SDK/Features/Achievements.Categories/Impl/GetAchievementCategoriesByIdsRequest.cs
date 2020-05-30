@@ -14,9 +14,9 @@ namespace GW2SDK.Achievements.Categories.Impl
 
         public sealed class Builder
         {
-            private readonly IReadOnlyList<int> _achievementCategoryIds;
+            private readonly IReadOnlyCollection<int> _achievementCategoryIds;
 
-            public Builder(IReadOnlyList<int> achievementCategoryIds)
+            public Builder(IReadOnlyCollection<int> achievementCategoryIds)
             {
                 if (achievementCategoryIds == null)
                 {

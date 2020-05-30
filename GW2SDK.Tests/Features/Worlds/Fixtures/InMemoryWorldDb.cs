@@ -10,6 +10,6 @@ namespace GW2SDK.Tests.Features.Worlds.Fixtures
             Worlds = objects.ToList().AsReadOnly();
         }
 
-        public IReadOnlyList<string> Worlds { get; }
+        public IReadOnlyCollection<string> Worlds { get; }
     }
 }

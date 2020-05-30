@@ -6,12 +6,12 @@ namespace GW2SDK.Extensions
 {
     public static class HttpResponseHeaderExtensions
     {
-        public static IListContext GetListContext(this HttpResponseHeaders instance)
+        public static ICollectionContext GetCollectionContext(this HttpResponseHeaders instance)
         {
             if (instance == null) throw new ArgumentNullException(nameof(instance));
             var resultTotal = int.Parse(instance.GetValues(ResponseHeaderName.ResultTotal).ToCsv());
             var resultCount = int.Parse(instance.GetValues(ResponseHeaderName.ResultCount).ToCsv());
-            return new ListContext(resultTotal, resultCount);
+            return new CollectionContext(resultTotal, resultCount);
         }
 
         public static IPageContext GetPageContext(this HttpResponseHeaders instance)

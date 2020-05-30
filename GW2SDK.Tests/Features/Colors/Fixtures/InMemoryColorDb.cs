@@ -11,7 +11,7 @@ namespace GW2SDK.Tests.Features.Colors.Fixtures
             Colors = objects.ToList().AsReadOnly();
         }
 
-        public IReadOnlyList<string> Colors { get; }
+        public IReadOnlyCollection<string> Colors { get; }
 
         public IEnumerable<string> GetColorCategoryNames()
         {

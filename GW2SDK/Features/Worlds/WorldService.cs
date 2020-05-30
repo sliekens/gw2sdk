@@ -21,28 +21,28 @@ namespace GW2SDK.Worlds
             _http = http ?? throw new ArgumentNullException(nameof(http));
         }
 
-        public async Task<IDataTransferList<World>> GetWorlds(JsonSerializerSettings? settings = null)
+        public async Task<IDataTransferCollection<World>> GetWorlds(JsonSerializerSettings? settings = null)
         {
             using var request = new GetWorldsRequest();
             using var response = await _http.SendAsync(request).ConfigureAwait(false);
             response.EnsureSuccessStatusCode();
             var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
-            var listContext = response.Headers.GetListContext();
+            var context = response.Headers.GetCollectionContext();
             var list = new List<World>();
             JsonConvert.PopulateObject(json, list, settings ?? Json.DefaultJsonSerializerSettings);
-            return new DataTransferList<World>(list, listContext);
+            return new DataTransferCollection<World>(list, context);
         }
 
-        public async Task<IDataTransferList<int>> GetWorldsIndex(JsonSerializerSettings? settings = null)
+        public async Task<IDataTransferCollection<int>> GetWorldsIndex(JsonSerializerSettings? settings = null)
         {
             using var request = new GetWorldsIndexRequest();
             using var response = await _http.SendAsync(request).ConfigureAwait(false);
             response.EnsureSuccessStatusCode();
             var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
-            var listContext = response.Headers.GetListContext();
-            var list = new List<int>(listContext.ResultCount);
+            var context = response.Headers.GetCollectionContext();
+            var list = new List<int>(context.ResultCount);
             JsonConvert.PopulateObject(json, list, settings ?? Json.DefaultJsonSerializerSettings);
-            return new DataTransferList<int>(list, listContext);
+            return new DataTransferCollection<int>(list, context);
         }
 
         public async Task<World?> GetWorldById(int worldId, JsonSerializerSettings? settings = null)
@@ -54,7 +54,7 @@ namespace GW2SDK.Worlds
             return JsonConvert.DeserializeObject<World>(json, settings ?? Json.DefaultJsonSerializerSettings);
         }
 
-        public async Task<IDataTransferList<World>> GetWorldsByIds(IReadOnlyList<int> worldIds, JsonSerializerSettings? settings = null)
+        public async Task<IDataTransferCollection<World>> GetWorldsByIds(IReadOnlyCollection<int> worldIds, JsonSerializerSettings? settings = null)
         {
             if (worldIds == null)
             {
@@ -70,10 +70,10 @@ namespace GW2SDK.Worlds
             using var response = await _http.SendAsync(request).ConfigureAwait(false);
             response.EnsureSuccessStatusCode();
             var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
-            var listContext = response.Headers.GetListContext();
-            var list = new List<World>(listContext.ResultCount);
+            var context = response.Headers.GetCollectionContext();
+            var list = new List<World>(context.ResultCount);
             JsonConvert.PopulateObject(json, list, settings ?? Json.DefaultJsonSerializerSettings);
-            return new DataTransferList<World>(list, listContext);
+            return new DataTransferCollection<World>(list, context);
         }
 
         public async Task<IDataTransferPage<World>> GetWorldsByPage(int pageIndex, int? pageSize = null, JsonSerializerSettings? settings = null)

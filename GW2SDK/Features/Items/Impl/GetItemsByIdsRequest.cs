@@ -14,9 +14,9 @@ namespace GW2SDK.Items.Impl
 
         public sealed class Builder
         {
-            private readonly IReadOnlyList<int> _itemIds;
+            private readonly IReadOnlyCollection<int> _itemIds;
 
-            public Builder(IReadOnlyList<int> itemIds)
+            public Builder(IReadOnlyCollection<int> itemIds)
             {
                 if (itemIds == null)
                 {

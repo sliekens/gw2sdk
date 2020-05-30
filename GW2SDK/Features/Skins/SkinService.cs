@@ -21,16 +21,16 @@ namespace GW2SDK.Skins
             _http = http ?? throw new ArgumentNullException(nameof(http));
         }
 
-        public async Task<IDataTransferList<int>> GetSkinsIndex(JsonSerializerSettings? settings = null)
+        public async Task<IDataTransferCollection<int>> GetSkinsIndex(JsonSerializerSettings? settings = null)
         {
             using var request = new GetSkinsIndexRequest();
             using var response = await _http.SendAsync(request).ConfigureAwait(false);
             response.EnsureSuccessStatusCode();
             var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
-            var listContext = response.Headers.GetListContext();
-            var list = new List<int>(listContext.ResultCount);
+            var context = response.Headers.GetCollectionContext();
+            var list = new List<int>(context.ResultCount);
             JsonConvert.PopulateObject(json, list, settings ?? Json.DefaultJsonSerializerSettings);
-            return new DataTransferList<int>(list, listContext);
+            return new DataTransferCollection<int>(list, context);
         }
 
         public async Task<Skin?> GetSkinById(int skinId, JsonSerializerSettings? settings = null)
@@ -42,7 +42,7 @@ namespace GW2SDK.Skins
             return JsonConvert.DeserializeObject<Skin>(json, settings ?? Json.DefaultJsonSerializerSettings);
         }
 
-        public async Task<IDataTransferList<Skin>> GetSkinsByIds(IReadOnlyList<int> skinIds, JsonSerializerSettings? settings = null)
+        public async Task<IDataTransferCollection<Skin>> GetSkinsByIds(IReadOnlyCollection<int> skinIds, JsonSerializerSettings? settings = null)
         {
             if (skinIds == null)
             {
@@ -58,10 +58,10 @@ namespace GW2SDK.Skins
             using var response = await _http.SendAsync(request).ConfigureAwait(false);
             response.EnsureSuccessStatusCode();
             var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
-            var listContext = response.Headers.GetListContext();
-            var list = new List<Skin>(listContext.ResultCount);
+            var context = response.Headers.GetCollectionContext();
+            var list = new List<Skin>(context.ResultCount);
             JsonConvert.PopulateObject(json, list, settings ?? Json.DefaultJsonSerializerSettings);
-            return new DataTransferList<Skin>(list, listContext);
+            return new DataTransferCollection<Skin>(list, context);
         }
 
         public async Task<IDataTransferPage<Skin>> GetSkinsByPage(int pageIndex, int? pageSize = null, JsonSerializerSettings? settings = null)

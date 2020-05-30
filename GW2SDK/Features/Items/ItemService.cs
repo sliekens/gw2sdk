@@ -21,16 +21,16 @@ namespace GW2SDK.Items
             _http = http ?? throw new ArgumentNullException(nameof(http));
         }
 
-        public async Task<IDataTransferList<int>> GetItemsIndex(JsonSerializerSettings? settings = null)
+        public async Task<IDataTransferCollection<int>> GetItemsIndex(JsonSerializerSettings? settings = null)
         {
             using var request = new GetItemsIndexRequest();
             using var response = await _http.SendAsync(request).ConfigureAwait(false);
             response.EnsureSuccessStatusCode();
             var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
-            var listContext = response.Headers.GetListContext();
-            var list = new List<int>(listContext.ResultCount);
+            var context = response.Headers.GetCollectionContext();
+            var list = new List<int>(context.ResultCount);
             JsonConvert.PopulateObject(json, list, settings ?? Json.DefaultJsonSerializerSettings);
-            return new DataTransferList<int>(list, listContext);
+            return new DataTransferCollection<int>(list, context);
         }
 
         public async Task<Item?> GetItemById(int itemId, JsonSerializerSettings? settings = null)
@@ -42,7 +42,7 @@ namespace GW2SDK.Items
             return JsonConvert.DeserializeObject<Item>(json, settings ?? Json.DefaultJsonSerializerSettings);
         }
 
-        public async Task<IDataTransferList<Item>> GetItemsByIds(IReadOnlyList<int> itemIds, JsonSerializerSettings? settings = null)
+        public async Task<IDataTransferCollection<Item>> GetItemsByIds(IReadOnlyCollection<int> itemIds, JsonSerializerSettings? settings = null)
         {
             if (itemIds == null)
             {
@@ -58,10 +58,10 @@ namespace GW2SDK.Items
             using var response = await _http.SendAsync(request).ConfigureAwait(false);
             response.EnsureSuccessStatusCode();
             var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
-            var listContext = response.Headers.GetListContext();
-            var list = new List<Item>(listContext.ResultCount);
+            var context = response.Headers.GetCollectionContext();
+            var list = new List<Item>(context.ResultCount);
             JsonConvert.PopulateObject(json, list, settings ?? Json.DefaultJsonSerializerSettings);
-            return new DataTransferList<Item>(list, listContext);
+            return new DataTransferCollection<Item>(list, context);
         }
 
         public async Task<IDataTransferPage<Item>> GetItemsByPage(int pageIndex, int? pageSize = null, JsonSerializerSettings? settings = null)

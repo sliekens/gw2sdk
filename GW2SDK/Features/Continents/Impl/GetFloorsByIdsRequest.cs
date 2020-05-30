@@ -16,9 +16,9 @@ namespace GW2SDK.Continents.Impl
         {
             private readonly int _continentId;
 
-            private readonly IReadOnlyList<int> _floorIds;
+            private readonly IReadOnlyCollection<int> _floorIds;
 
-            public Builder(int continentId, IReadOnlyList<int> floorIds)
+            public Builder(int continentId, IReadOnlyCollection<int> floorIds)
             {
                 if (floorIds == null)
                 {

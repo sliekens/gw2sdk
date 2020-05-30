@@ -11,7 +11,7 @@ namespace GW2SDK.Tests.Features.Achievements.Fixtures
             Achievements = objects.ToList().AsReadOnly();
         }
 
-        public IReadOnlyList<string> Achievements { get; }
+        public IReadOnlyCollection<string> Achievements { get; }
 
         public IEnumerable<string> GetAchievementFlags()
         {

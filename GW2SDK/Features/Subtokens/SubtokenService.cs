@@ -22,9 +22,9 @@ namespace GW2SDK.Subtokens
 
         public async Task<CreatedSubtoken> CreateSubtoken(
             string? accessToken,
-            IReadOnlyList<Permission>? permissions = null,
+            IReadOnlyCollection<Permission>? permissions = null,
             DateTimeOffset? absoluteExpirationDate = null,
-            IReadOnlyList<string>? urls = null,
+            IReadOnlyCollection<string>? urls = null,
             JsonSerializerSettings? settings = null)
         {
             using var request = new CreateSubtokenRequest.Builder(accessToken, permissions, absoluteExpirationDate, urls).GetRequest();

@@ -12,6 +12,6 @@ namespace GW2SDK.Tests.Features.Continents.Fixtures
             _db = items.ToList();
         }
 
-        public IReadOnlyList<string> Continents => _db.AsReadOnly();
+        public IReadOnlyCollection<string> Continents => _db.AsReadOnly();
     }
 }

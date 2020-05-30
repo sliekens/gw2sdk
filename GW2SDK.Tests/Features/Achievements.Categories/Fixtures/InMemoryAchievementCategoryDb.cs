@@ -10,6 +10,6 @@ namespace GW2SDK.Tests.Features.Achievements.Categories.Fixtures
             AchievementCategories = objects.ToList().AsReadOnly();
         }
 
-        public IReadOnlyList<string> AchievementCategories { get; }
+        public IReadOnlyCollection<string> AchievementCategories { get; }
     }
 }

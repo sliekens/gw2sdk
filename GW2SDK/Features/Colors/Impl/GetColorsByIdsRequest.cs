@@ -14,9 +14,9 @@ namespace GW2SDK.Colors.Impl
 
         public sealed class Builder
         {
-            private readonly IReadOnlyList<int> _colorIds;
+            private readonly IReadOnlyCollection<int> _colorIds;
 
-            public Builder(IReadOnlyList<int> colorIds)
+            public Builder(IReadOnlyCollection<int> colorIds)
             {
                 if (colorIds == null)
                 {
