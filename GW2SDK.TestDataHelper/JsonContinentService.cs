@@ -20,7 +20,7 @@ namespace GW2SDK.TestDataHelper
 
         public async Task<List<string>> GetAllJsonContinents(bool indented)
         {
-            using var request = new GetContinentsRequest();
+            var request = new ContinentsRequest();
             using var response = await _http.SendAsync(request);
             using var responseReader = new StreamReader(await response.Content.ReadAsStreamAsync());
             using var jsonReader = new JsonTextReader(responseReader);

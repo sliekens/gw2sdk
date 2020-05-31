@@ -33,7 +33,7 @@ namespace GW2SDK.TestDataHelper
 
         private async Task<List<int>> GetRecipeIds()
         {
-            using var request = new GetRecipesIndexRequest();
+            var request = new RecipesIndexRequest();
             using var response = await _http.SendAsync(request);
             var json = await response.Content.ReadAsStringAsync();
             response.EnsureSuccessStatusCode();
@@ -42,7 +42,7 @@ namespace GW2SDK.TestDataHelper
 
         private async Task<List<string>> GetJsonRecipesByIds(IReadOnlyCollection<int> recipeIds, bool indented)
         {
-            using var request = new GetRecipesByIdsRequest.Builder(recipeIds).GetRequest();
+            var request = new RecipesByIdsRequest(recipeIds);
             using var response = await _http.SendAsync(request);
             using var responseReader = new StreamReader(await response.Content.ReadAsStreamAsync());
             using var jsonReader = new JsonTextReader(responseReader);

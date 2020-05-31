@@ -25,7 +25,7 @@ namespace GW2SDK.Accounts.Achievements
         [Scope(Permission.Progression)]
         public async Task<AccountAchievement?> GetAccountAchievementById(int achievementId, JsonSerializerSettings? settings = null)
         {
-            using var request = new GetAccountAchievementByIdRequest.Builder(achievementId).GetRequest();
+            var request = new AccountAchievementByIdRequest(achievementId);
             using var response = await _http.SendAsync(request).ConfigureAwait(false);
             response.EnsureSuccessStatusCode();
             var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
@@ -47,7 +47,7 @@ namespace GW2SDK.Accounts.Achievements
                 throw new ArgumentException("Achiement IDs cannot be an empty collection.", nameof(achievementIds));
             }
 
-            using var request = new GetAccountAchievementsByIdsRequest.Builder(achievementIds).GetRequest();
+            var request = new AccountAchievementsByIdsRequest(achievementIds);
             using var response = await _http.SendAsync(request).ConfigureAwait(false);
             response.EnsureSuccessStatusCode();
             var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
@@ -60,7 +60,7 @@ namespace GW2SDK.Accounts.Achievements
         [Scope(Permission.Progression)]
         public async Task<IDataTransferCollection<AccountAchievement>> GetAccountAchievements(JsonSerializerSettings? settings = null)
         {
-            using var request = new GetAccountAchievementsRequest();
+            var request = new AccountAchievementsRequest();
             using var response = await _http.SendAsync(request).ConfigureAwait(false);
             response.EnsureSuccessStatusCode();
             var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
@@ -76,7 +76,7 @@ namespace GW2SDK.Accounts.Achievements
             int? pageSize,
             JsonSerializerSettings? settings = null)
         {
-            using var request = new GetAccountAchievementsByPageRequest.Builder(pageIndex, pageSize).GetRequest();
+            var request = new AccountAchievementsByPageRequest(pageIndex, pageSize);
             using var response = await _http.SendAsync(request).ConfigureAwait(false);
             response.EnsureSuccessStatusCode();
             var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);

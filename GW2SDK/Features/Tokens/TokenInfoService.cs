@@ -20,7 +20,7 @@ namespace GW2SDK.Tokens
 
         public async Task<TokenInfo?> GetTokenInfo(string? accessToken, JsonSerializerSettings? settings = null)
         {
-            using var request = new GetTokenInfoRequest.Builder(accessToken).GetRequest();
+            var request = new TokenInfoRequest(accessToken);
             using var response = await _http.SendAsync(request).ConfigureAwait(false);
             response.EnsureSuccessStatusCode();
             var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Net.Http.Headers;
 using GW2SDK.Impl;
 
@@ -9,18 +10,54 @@ namespace GW2SDK.Extensions
         public static ICollectionContext GetCollectionContext(this HttpResponseHeaders instance)
         {
             if (instance == null) throw new ArgumentNullException(nameof(instance));
-            var resultTotal = int.Parse(instance.GetValues(ResponseHeaderName.ResultTotal).ToCsv());
-            var resultCount = int.Parse(instance.GetValues(ResponseHeaderName.ResultCount).ToCsv());
+            int resultTotal = default,
+                resultCount = default;
+            if (instance.TryGetValues(ResponseHeaderName.ResultTotal, out var resultTotals))
+            {
+                // Assume that there is exactly one value for this header
+                resultTotal = int.Parse(resultTotals.Single());
+            }
+
+            if (instance.TryGetValues(ResponseHeaderName.ResultCount, out var resultCounts))
+            {
+                // Assume that there is exactly one value for this header
+                resultCount = int.Parse(resultCounts.Single());
+            }
+
             return new CollectionContext(resultTotal, resultCount);
         }
 
         public static IPageContext GetPageContext(this HttpResponseHeaders instance)
         {
             if (instance == null) throw new ArgumentNullException(nameof(instance));
-            var pageTotal = int.Parse(instance.GetValues(ResponseHeaderName.PageTotal).ToCsv());
-            var pageSize = int.Parse(instance.GetValues(ResponseHeaderName.PageSize).ToCsv());
-            var resultTotal = int.Parse(instance.GetValues(ResponseHeaderName.ResultTotal).ToCsv());
-            var resultCount = int.Parse(instance.GetValues(ResponseHeaderName.ResultCount).ToCsv());
+            int pageTotal = default,
+                pageSize = default,
+                resultTotal = default,
+                resultCount = default;
+            if (instance.TryGetValues(ResponseHeaderName.PageTotal, out var pageTotals))
+            {
+                // Assume that there is exactly one value for this header
+                pageTotal = int.Parse(pageTotals.Single());
+            }
+
+            if (instance.TryGetValues(ResponseHeaderName.PageSize, out var pageSizes))
+            {
+                // Assume that there is exactly one value for this header
+                pageSize = int.Parse(pageSizes.Single());
+            }
+
+            if (instance.TryGetValues(ResponseHeaderName.ResultTotal, out var resultTotals))
+            {
+                // Assume that there is exactly one value for this header
+                resultTotal = int.Parse(resultTotals.Single());
+            }
+
+            if (instance.TryGetValues(ResponseHeaderName.ResultCount, out var resultCounts))
+            {
+                // Assume that there is exactly one value for this header
+                resultCount = int.Parse(resultCounts.Single());
+            }
+
             return new PageContext(resultTotal, resultCount, pageTotal, pageSize);
         }
 

@@ -33,7 +33,7 @@ namespace GW2SDK.TestDataHelper
 
         private async Task<List<int>> GetAchievementIds()
         {
-            using var request = new GetAchievementsIndexRequest();
+            var request = new AchievementsIndexRequest();
             using var response = await _http.SendAsync(request);
             var json = await response.Content.ReadAsStringAsync();
             response.EnsureSuccessStatusCode();
@@ -42,7 +42,7 @@ namespace GW2SDK.TestDataHelper
 
         private async Task<List<string>> GetJsonAchievementsByIds(IReadOnlyCollection<int> achievementIds, bool indented)
         {
-            using var request = new GetAchievementsByIdsRequest.Builder(achievementIds).GetRequest();
+            var request = new AchievementsByIdsRequest(achievementIds);
             using var response = await _http.SendAsync(request);
             using var responseReader = new StreamReader(await response.Content.ReadAsStreamAsync());
             using var jsonReader = new JsonTextReader(responseReader);

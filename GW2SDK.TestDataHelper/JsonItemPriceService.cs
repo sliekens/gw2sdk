@@ -33,7 +33,7 @@ namespace GW2SDK.TestDataHelper
 
         private async Task<List<int>> GetItemPriceIds()
         {
-            using var request = new GetItemPricesIndexRequest();
+            var request = new ItemPricesIndexRequest();
             using var response = await _http.SendAsync(request);
             var json = await response.Content.ReadAsStringAsync();
             response.EnsureSuccessStatusCode();
@@ -42,7 +42,7 @@ namespace GW2SDK.TestDataHelper
 
         private async Task<List<string>> GetJsonItemPricesById(IReadOnlyCollection<int> itemIds, bool indented)
         {
-            using var request = new GetItemPricesByIdsRequest.Builder(itemIds).GetRequest();
+            var request = new ItemPricesByIdsRequest(itemIds);
             using var response = await _http.SendAsync(request);
             using var responseReader = new StreamReader(await response.Content.ReadAsStreamAsync());
             using var jsonReader = new JsonTextReader(responseReader);

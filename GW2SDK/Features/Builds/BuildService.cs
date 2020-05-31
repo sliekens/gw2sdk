@@ -20,7 +20,7 @@ namespace GW2SDK.Builds
 
         public async Task<Build?> GetBuild(JsonSerializerSettings? settings = null)
         {
-            using var request = new GetBuildRequest();
+            var request = new BuildRequest();
             using var response = await _http.SendAsync(request).ConfigureAwait(false);
             response.EnsureSuccessStatusCode();
             var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);

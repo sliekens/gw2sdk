@@ -14,7 +14,7 @@ namespace GW2SDK.Tests.Features.Builds.Fixtures
         {
             var http = new Container().Resolve<IHttpClientFactory>().CreateClient("GW2SDK");
 
-            using var request = new GetBuildRequest();
+            var request = new BuildRequest();
             using var response = await http.SendAsync(request).ConfigureAwait(false);
             response.EnsureSuccessStatusCode();
             Build = await response.Content.ReadAsStringAsync().ConfigureAwait(false);

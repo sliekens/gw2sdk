@@ -23,7 +23,7 @@ namespace GW2SDK.Continents
 
         public async Task<IDataTransferCollection<Continent>> GetContinents(JsonSerializerSettings? settings = null)
         {
-            using var request = new GetContinentsRequest();
+            var request = new ContinentsRequest();
             using var response = await _http.SendAsync(request).ConfigureAwait(false);
             response.EnsureSuccessStatusCode();
             var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
@@ -35,7 +35,7 @@ namespace GW2SDK.Continents
 
         public async Task<IDataTransferCollection<int>> GetContinentsIndex(JsonSerializerSettings? settings = null)
         {
-            using var request = new GetContinentsIndexRequest();
+            var request = new ContinentsIndexRequest();
             using var response = await _http.SendAsync(request).ConfigureAwait(false);
             response.EnsureSuccessStatusCode();
             var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
@@ -47,7 +47,7 @@ namespace GW2SDK.Continents
 
         public async Task<Continent?> GetContinentById(int continentId, JsonSerializerSettings? settings = null)
         {
-            using var request = new GetContinentByIdRequest.Builder(continentId).GetRequest();
+            var request = new ContinentByIdRequest(continentId);
             using var response = await _http.SendAsync(request).ConfigureAwait(false);
             response.EnsureSuccessStatusCode();
             var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
@@ -68,7 +68,7 @@ namespace GW2SDK.Continents
                 throw new ArgumentException("Continent IDs cannot be an empty collection.", nameof(continentIds));
             }
 
-            using var request = new GetContinentsByIdsRequest.Builder(continentIds).GetRequest();
+            var request = new ContinentsByIdsRequest(continentIds);
             using var response = await _http.SendAsync(request).ConfigureAwait(false);
             response.EnsureSuccessStatusCode();
             var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
@@ -83,7 +83,7 @@ namespace GW2SDK.Continents
             int? pageSize = null,
             JsonSerializerSettings? settings = null)
         {
-            using var request = new GetContinentsByPageRequest.Builder(pageIndex, pageSize).GetRequest();
+            var request = new ContinentsByPageRequest(pageIndex, pageSize);
             using var response = await _http.SendAsync(request).ConfigureAwait(false);
             response.EnsureSuccessStatusCode();
             var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
@@ -95,7 +95,7 @@ namespace GW2SDK.Continents
 
         public async Task<IDataTransferCollection<Floor>> GetFloors(int continentId, JsonSerializerSettings? settings = null)
         {
-            using var request = new GetFloorsRequest(continentId);
+            var request = new FloorsRequest(continentId);
             using var response = await _http.SendAsync(request).ConfigureAwait(false);
             response.EnsureSuccessStatusCode();
             var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
@@ -107,7 +107,7 @@ namespace GW2SDK.Continents
 
         public async Task<IDataTransferCollection<int>> GetFloorsIndex(int continentId, JsonSerializerSettings? settings = null)
         {
-            using var request = new GetFloorsIndexRequest(continentId);
+            var request = new FloorsIndexRequest(continentId);
             using var response = await _http.SendAsync(request).ConfigureAwait(false);
             response.EnsureSuccessStatusCode();
             var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
@@ -119,7 +119,7 @@ namespace GW2SDK.Continents
 
         public async Task<Floor?> GetFloorById(int continentId, int floorId, JsonSerializerSettings? settings = null)
         {
-            using var request = new GetFloorByIdRequest.Builder(continentId, floorId).GetRequest();
+            var request = new FloorByIdRequest(continentId, floorId);
             using var response = await _http.SendAsync(request).ConfigureAwait(false);
             response.EnsureSuccessStatusCode();
             var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
@@ -138,7 +138,7 @@ namespace GW2SDK.Continents
                 throw new ArgumentException("Floor IDs cannot be an empty collection.", nameof(floorIds));
             }
 
-            using var request = new GetFloorsByIdsRequest.Builder(continentId, floorIds).GetRequest();
+            var request = new FloorsByIdsRequest(continentId, floorIds);
             using var response = await _http.SendAsync(request).ConfigureAwait(false);
             response.EnsureSuccessStatusCode();
             var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
@@ -150,7 +150,7 @@ namespace GW2SDK.Continents
 
         public async Task<IDataTransferPage<Floor>> GetFloorsByPage(int continentId, int pageIndex, int? pageSize = null, JsonSerializerSettings? settings = null)
         {
-            using var request = new GetFloorsByPageRequest.Builder(continentId, pageIndex, pageSize).GetRequest();
+            var request = new FloorsByPageRequest(continentId, pageIndex, pageSize);
             using var response = await _http.SendAsync(request).ConfigureAwait(false);
             response.EnsureSuccessStatusCode();
             var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
