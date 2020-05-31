@@ -21,7 +21,7 @@ namespace GW2SDK.Tests.Features.Tokens.Fixtures
 
         private async Task<string> GetTokenInfoJson(HttpClient http, string accessToken)
         {
-            using var request = new GetTokenInfoRequest.Builder(accessToken).GetRequest();
+            var request = new TokenInfoRequest(accessToken);
             using var response = await http.SendAsync(request);
             response.EnsureSuccessStatusCode();
             return await response.Content.ReadAsStringAsync();

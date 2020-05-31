@@ -23,7 +23,7 @@ namespace GW2SDK.Skins
 
         public async Task<IDataTransferCollection<int>> GetSkinsIndex(JsonSerializerSettings? settings = null)
         {
-            using var request = new GetSkinsIndexRequest();
+            var request = new SkinsIndexRequest();
             using var response = await _http.SendAsync(request).ConfigureAwait(false);
             response.EnsureSuccessStatusCode();
             var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
@@ -35,7 +35,7 @@ namespace GW2SDK.Skins
 
         public async Task<Skin?> GetSkinById(int skinId, JsonSerializerSettings? settings = null)
         {
-            using var request = new GetSkinByIdRequest.Builder(skinId).GetRequest();
+            var request = new SkinByIdRequest(skinId);
             using var response = await _http.SendAsync(request).ConfigureAwait(false);
             response.EnsureSuccessStatusCode();
             var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
@@ -54,7 +54,7 @@ namespace GW2SDK.Skins
                 throw new ArgumentException("Skin IDs cannot be an empty collection.", nameof(skinIds));
             }
 
-            using var request = new GetSkinsByIdsRequest.Builder(skinIds).GetRequest();
+            var request = new SkinsByIdsRequest(skinIds);
             using var response = await _http.SendAsync(request).ConfigureAwait(false);
             response.EnsureSuccessStatusCode();
             var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
@@ -66,7 +66,7 @@ namespace GW2SDK.Skins
 
         public async Task<IDataTransferPage<Skin>> GetSkinsByPage(int pageIndex, int? pageSize = null, JsonSerializerSettings? settings = null)
         {
-            using var request = new GetSkinsByPageRequest.Builder(pageIndex, pageSize).GetRequest();
+            var request = new SkinsByPageRequest(pageIndex, pageSize);
             using var response = await _http.SendAsync(request).ConfigureAwait(false);
             response.EnsureSuccessStatusCode();
             var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);

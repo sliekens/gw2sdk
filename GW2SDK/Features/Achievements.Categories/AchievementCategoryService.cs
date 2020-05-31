@@ -23,7 +23,7 @@ namespace GW2SDK.Achievements.Categories
 
         public async Task<IDataTransferCollection<AchievementCategory>> GetAchievementCategories(JsonSerializerSettings? settings = null)
         {
-            using var request = new GetAchievementCategoriesRequest();
+            var request = new AchievementCategoriesRequest();
             using var response = await _http.SendAsync(request).ConfigureAwait(false);
             response.EnsureSuccessStatusCode();
             var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
@@ -35,7 +35,7 @@ namespace GW2SDK.Achievements.Categories
 
         public async Task<IDataTransferCollection<int>> GetAchievementCategoriesIndex(JsonSerializerSettings? settings = null)
         {
-            using var request = new GetAchievementCategoriesIndexRequest();
+            var request = new AchievementCategoriesIndexRequest();
             using var response = await _http.SendAsync(request).ConfigureAwait(false);
             response.EnsureSuccessStatusCode();
             var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
@@ -47,7 +47,7 @@ namespace GW2SDK.Achievements.Categories
 
         public async Task<AchievementCategory?> GetAchievementCategoryById(int achievementCategoryId, JsonSerializerSettings? settings = null)
         {
-            using var request = new GetAchievementCategoryByIdRequest.Builder(achievementCategoryId).GetRequest();
+            var request = new AchievementCategoryByIdRequest(achievementCategoryId);
             using var response = await _http.SendAsync(request).ConfigureAwait(false);
             response.EnsureSuccessStatusCode();
             var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
@@ -68,7 +68,7 @@ namespace GW2SDK.Achievements.Categories
                 throw new ArgumentException("Achievement category IDs cannot be an empty collection.", nameof(achievementCategoryIds));
             }
 
-            using var request = new GetAchievementCategoriesByIdsRequest.Builder(achievementCategoryIds).GetRequest();
+            var request = new AchievementCategoriesByIdsRequest(achievementCategoryIds);
             using var response = await _http.SendAsync(request).ConfigureAwait(false);
             response.EnsureSuccessStatusCode();
             var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
@@ -83,7 +83,7 @@ namespace GW2SDK.Achievements.Categories
             int? pageSize = null,
             JsonSerializerSettings? settings = null)
         {
-            using var request = new GetAchievementCategoriesByPageRequest.Builder(pageIndex, pageSize).GetRequest();
+            var request = new AchievementCategoriesByPageRequest(pageIndex, pageSize);
             using var response = await _http.SendAsync(request).ConfigureAwait(false);
             response.EnsureSuccessStatusCode();
             var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);

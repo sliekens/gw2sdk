@@ -23,7 +23,7 @@ namespace GW2SDK.Commerce.Prices
 
         public async Task<IDataTransferCollection<int>> GetItemPricesIndex(JsonSerializerSettings? settings = null)
         {
-            using var request = new GetItemPricesIndexRequest();
+            var request = new ItemPricesIndexRequest();
             using var response = await _http.SendAsync(request).ConfigureAwait(false);
             response.EnsureSuccessStatusCode();
             var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
@@ -35,7 +35,7 @@ namespace GW2SDK.Commerce.Prices
 
         public async Task<ItemPrice?> GetItemPriceById(int itemId, JsonSerializerSettings? settings = null)
         {
-            using var request = new GetItemPriceByIdRequest.Builder(itemId).GetRequest();
+            var request = new ItemPriceByIdRequest(itemId);
             using var response = await _http.SendAsync(request).ConfigureAwait(false);
             response.EnsureSuccessStatusCode();
             var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
@@ -54,7 +54,7 @@ namespace GW2SDK.Commerce.Prices
                 throw new ArgumentException("Item IDs cannot be an empty collection.", nameof(itemIds));
             }
 
-            using var request = new GetItemPricesByIdsRequest.Builder(itemIds).GetRequest();
+            var request = new ItemPricesByIdsRequest(itemIds);
             using var response = await _http.SendAsync(request).ConfigureAwait(false);
             response.EnsureSuccessStatusCode();
             var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);

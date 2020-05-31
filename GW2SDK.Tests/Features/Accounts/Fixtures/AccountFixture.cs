@@ -31,8 +31,8 @@ namespace GW2SDK.Tests.Features.Accounts.Fixtures
 
         private async Task<string> GetAccountRaw(HttpClient http)
         {
-            using var request = new GetAccountRequest();
-            using var response = await http.SendAsync(request);
+            var request = new AccountRequest();
+            using var response = await http.SendAsync(request).ConfigureAwait(false);
             using var responseReader = new StreamReader(await response.Content.ReadAsStreamAsync());
             using var jsonReader = new JsonTextReader(responseReader);
             response.EnsureSuccessStatusCode();

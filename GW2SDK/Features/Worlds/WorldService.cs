@@ -23,7 +23,7 @@ namespace GW2SDK.Worlds
 
         public async Task<IDataTransferCollection<World>> GetWorlds(JsonSerializerSettings? settings = null)
         {
-            using var request = new GetWorldsRequest();
+            var request = new WorldsRequest();
             using var response = await _http.SendAsync(request).ConfigureAwait(false);
             response.EnsureSuccessStatusCode();
             var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
@@ -35,7 +35,7 @@ namespace GW2SDK.Worlds
 
         public async Task<IDataTransferCollection<int>> GetWorldsIndex(JsonSerializerSettings? settings = null)
         {
-            using var request = new GetWorldsIndexRequest();
+            var request = new WorldsIndexRequest();
             using var response = await _http.SendAsync(request).ConfigureAwait(false);
             response.EnsureSuccessStatusCode();
             var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
@@ -47,7 +47,7 @@ namespace GW2SDK.Worlds
 
         public async Task<World?> GetWorldById(int worldId, JsonSerializerSettings? settings = null)
         {
-            using var request = new GetWorldByIdRequest.Builder(worldId).GetRequest();
+            var request = new WorldByIdRequest(worldId);
             using var response = await _http.SendAsync(request).ConfigureAwait(false);
             response.EnsureSuccessStatusCode();
             var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
@@ -66,7 +66,7 @@ namespace GW2SDK.Worlds
                 throw new ArgumentException("World IDs cannot be an empty collection.", nameof(worldIds));
             }
 
-            using var request = new GetWorldsByIdsRequest.Builder(worldIds).GetRequest();
+            var request = new WorldsByIdsRequest(worldIds);
             using var response = await _http.SendAsync(request).ConfigureAwait(false);
             response.EnsureSuccessStatusCode();
             var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
@@ -78,7 +78,7 @@ namespace GW2SDK.Worlds
 
         public async Task<IDataTransferPage<World>> GetWorldsByPage(int pageIndex, int? pageSize = null, JsonSerializerSettings? settings = null)
         {
-            using var request = new GetWorldsByPageRequest.Builder(pageIndex, pageSize).GetRequest();
+            var request = new WorldsByPageRequest(pageIndex, pageSize);
             using var response = await _http.SendAsync(request).ConfigureAwait(false);
             response.EnsureSuccessStatusCode();
             var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);

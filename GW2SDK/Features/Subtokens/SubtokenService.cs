@@ -27,7 +27,7 @@ namespace GW2SDK.Subtokens
             IReadOnlyCollection<string>? urls = null,
             JsonSerializerSettings? settings = null)
         {
-            using var request = new CreateSubtokenRequest.Builder(accessToken, permissions, absoluteExpirationDate, urls).GetRequest();
+            var request = new CreateSubtokenRequest(accessToken, permissions, absoluteExpirationDate, urls);
             using var response = await _http.SendAsync(request).ConfigureAwait(false);
             response.EnsureSuccessStatusCode();
             var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);

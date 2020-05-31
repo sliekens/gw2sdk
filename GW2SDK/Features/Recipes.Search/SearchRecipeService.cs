@@ -23,7 +23,7 @@ namespace GW2SDK.Recipes.Search
 
         public async Task<IDataTransferCollection<int>> GetRecipesIndexByIngredientId(int ingredientId, JsonSerializerSettings? settings = null)
         {
-            using var request = new GetRecipesIndexByIngredientIdRequest.Builder(ingredientId).GetRequest();
+            var request = new RecipesIndexByIngredientIdRequest(ingredientId);
             using var response = await _http.SendAsync(request).ConfigureAwait(false);
             response.EnsureSuccessStatusCode();
             var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
@@ -35,7 +35,7 @@ namespace GW2SDK.Recipes.Search
 
         public async Task<IDataTransferCollection<int>> GetRecipesIndexByItemId(int itemId, JsonSerializerSettings? settings = null)
         {
-            using var request = new GetRecipesIndexByItemIdRequest.Builder(itemId).GetRequest();
+            var request = new RecipesIndexByItemIdRequest(itemId);
             using var response = await _http.SendAsync(request).ConfigureAwait(false);
             response.EnsureSuccessStatusCode();
             var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);

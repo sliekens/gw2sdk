@@ -20,7 +20,7 @@ namespace GW2SDK.TestDataHelper
 
         public async Task<List<string>> GetAllJsonFloors(int continentId, bool indented)
         {
-            using var request = new GetFloorsRequest(continentId);
+            var request = new FloorsRequest(continentId);
             using var response = await _http.SendAsync(request);
             using var responseReader = new StreamReader(await response.Content.ReadAsStreamAsync());
             using var jsonReader = new JsonTextReader(responseReader);

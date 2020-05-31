@@ -20,7 +20,7 @@ namespace GW2SDK.TestDataHelper
 
         public async Task<List<string>> GetAllJsonColors(bool indented)
         {
-            using var request = new GetColorsRequest();
+            var request = new ColorsRequest();
             using var response = await _http.SendAsync(request);
             using var responseReader = new StreamReader(await response.Content.ReadAsStreamAsync());
             using var jsonReader = new JsonTextReader(responseReader);

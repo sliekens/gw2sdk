@@ -33,7 +33,7 @@ namespace GW2SDK.TestDataHelper
 
         private async Task<List<int>> GetSkinIds()
         {
-            using var request = new GetSkinsIndexRequest();
+            var request = new SkinsIndexRequest();
             using var response = await _http.SendAsync(request);
             var json = await response.Content.ReadAsStringAsync();
             response.EnsureSuccessStatusCode();
@@ -42,7 +42,7 @@ namespace GW2SDK.TestDataHelper
 
         private async Task<List<string>> GetJsonSkinsByIds(IReadOnlyCollection<int> skinIds, bool indented)
         {
-            using var request = new GetSkinsByIdsRequest.Builder(skinIds).GetRequest();
+            var request = new SkinsByIdsRequest(skinIds);
             using var response = await _http.SendAsync(request);
             using var responseReader = new StreamReader(await response.Content.ReadAsStreamAsync());
             using var jsonReader = new JsonTextReader(responseReader);

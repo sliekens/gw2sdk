@@ -20,7 +20,7 @@ namespace GW2SDK.Accounts
 
         public async Task<Account?> GetAccount(JsonSerializerSettings? settings = null)
         {
-            using var request = new GetAccountRequest();
+            var request = new AccountRequest();
             using var response = await _http.SendAsync(request).ConfigureAwait(false);
             response.EnsureSuccessStatusCode();
             var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);

@@ -23,7 +23,7 @@ namespace GW2SDK.Achievements
 
         public async Task<IDataTransferCollection<int>> GetAchievementsIndex(JsonSerializerSettings? settings = null)
         {
-            using var request = new GetAchievementsIndexRequest();
+            var request = new AchievementsIndexRequest();
             using var response = await _http.SendAsync(request).ConfigureAwait(false);
             response.EnsureSuccessStatusCode();
             var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
@@ -35,7 +35,7 @@ namespace GW2SDK.Achievements
 
         public async Task<Achievement?> GetAchievementById(int achievementId, JsonSerializerSettings? settings = null)
         {
-            using var request = new GetAchievementByIdRequest.Builder(achievementId).GetRequest();
+            var request = new AchievementByIdRequest(achievementId);
             using var response = await _http.SendAsync(request).ConfigureAwait(false);
             response.EnsureSuccessStatusCode();
             var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
@@ -56,7 +56,7 @@ namespace GW2SDK.Achievements
                 throw new ArgumentException("Achievement IDs cannot be an empty collection.", nameof(achievementIds));
             }
 
-            using var request = new GetAchievementsByIdsRequest.Builder(achievementIds).GetRequest();
+            var request = new AchievementsByIdsRequest(achievementIds);
             using var response = await _http.SendAsync(request).ConfigureAwait(false);
             response.EnsureSuccessStatusCode();
             var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
@@ -71,7 +71,7 @@ namespace GW2SDK.Achievements
             int? pageSize = null,
             JsonSerializerSettings? settings = null)
         {
-            using var request = new GetAchievementsByPageRequest.Builder(pageIndex, pageSize).GetRequest();
+            var request = new AchievementsByPageRequest(pageIndex, pageSize);
             using var response = await _http.SendAsync(request).ConfigureAwait(false);
             response.EnsureSuccessStatusCode();
             var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);

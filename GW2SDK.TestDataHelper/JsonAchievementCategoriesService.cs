@@ -20,7 +20,7 @@ namespace GW2SDK.TestDataHelper
 
         public async Task<List<string>> GetAllJsonAchievementCategories(bool indented)
         {
-            using var request = new GetAchievementCategoriesRequest();
+            var request = new AchievementCategoriesRequest();
             using var response = await _http.SendAsync(request);
             using var responseReader = new StreamReader(await response.Content.ReadAsStreamAsync());
             using var jsonReader = new JsonTextReader(responseReader);
