@@ -21,7 +21,7 @@ namespace GW2SDK.Tests.Features.Tokens
         [Trait("Category", "Integration")]
         public async Task Get_token_info_for_api_key()
         {
-            var services = new Container();
+            await using var services = new Container();
             var sut = services.Resolve<TokenInfoService>();
 
             var actual = await sut.GetTokenInfo(ConfigurationManager.Instance.ApiKeyFull);
@@ -47,7 +47,7 @@ namespace GW2SDK.Tests.Features.Tokens
         [Trait("Category", "Integration")]
         public async Task Access_token_cannot_be_null()
         {
-            var services = new Container();
+            await using var services = new Container();
             var sut = services.Resolve<TokenInfoService>();
 
             await Assert.ThrowsAsync<UnauthorizedOperationException>(async () =>
@@ -62,7 +62,7 @@ namespace GW2SDK.Tests.Features.Tokens
         [Trait("Category", "Integration")]
         public async Task Get_token_info_for_subtoken()
         {
-            var services = new Container();
+            await using var services = new Container();
             var sut = services.Resolve<TokenInfoService>();
 
             var actual = await sut.GetTokenInfo(_serviceFixture.SubtokenBasic.Subtoken);

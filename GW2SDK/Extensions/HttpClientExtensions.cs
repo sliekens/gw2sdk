@@ -18,6 +18,7 @@ namespace GW2SDK.Extensions
         {
             if (instance == null) throw new ArgumentNullException(nameof(instance));
             if (accessToken == null) throw new ArgumentNullException(nameof(accessToken));
+            if (string.IsNullOrWhiteSpace(accessToken)) throw new ArgumentException("Access token cannot be null or whitespace.", nameof(accessToken));
             instance.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
         }
 

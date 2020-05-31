@@ -12,7 +12,7 @@ namespace GW2SDK.Tests.Features.Recipes.Search
         [Trait("Category", "Integration")]
         public async Task Recipes_with_iron_ore_as_ingredient_contains_recipe_id_for_iron_ingot()
         {
-            var services = new Container();
+            await using var services = new Container();
             var sut = services.Resolve<SearchRecipeService>();
 
             const int ironOre = 19699;
@@ -27,7 +27,7 @@ namespace GW2SDK.Tests.Features.Recipes.Search
         [Trait("Category", "Integration")]
         public async Task Recipes_with_iron_ingot_as_output_contains_recipe_id_for_iron_ingot()
         {
-            var services = new Container();
+            await using var services = new Container();
             var sut = services.Resolve<SearchRecipeService>();
 
             const int ironIngot = 19683;

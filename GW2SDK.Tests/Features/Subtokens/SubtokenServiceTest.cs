@@ -17,7 +17,7 @@ namespace GW2SDK.Tests.Features.Subtokens
         [Trait("Category", "Integration")]
         public async Task Create_a_subtoken_from_api_key()
         {
-            var services = new Container();
+            await using var services = new Container();
             var sut = services.Resolve<SubtokenService>();
 
             var actual = await sut.CreateSubtoken(ConfigurationManager.Instance.ApiKeyFull);
@@ -43,7 +43,7 @@ namespace GW2SDK.Tests.Features.Subtokens
         [Trait("Category", "Integration")]
         public async Task Access_token_cannot_be_null()
         {
-            var services = new Container();
+            await using var services = new Container();
             var sut = services.Resolve<SubtokenService>();
 
             await Assert.ThrowsAsync<UnauthorizedOperationException>(async () =>
@@ -58,7 +58,7 @@ namespace GW2SDK.Tests.Features.Subtokens
         [Trait("Category", "Integration")]
         public async Task Create_a_subtoken_with_custom_expiration_date()
         {
-            var services = new Container();
+            await using var services = new Container();
             var sut = services.Resolve<SubtokenService>();
 
             var expirationDate = DateTimeOffset.Now.AddDays(1);
@@ -84,7 +84,7 @@ namespace GW2SDK.Tests.Features.Subtokens
         [Trait("Category", "Integration")]
         public async Task Create_a_subtoken_with_url_filters()
         {
-            var services = new Container();
+            await using var services = new Container();
             var sut = services.Resolve<SubtokenService>();
 
             var urls = new List<string> { "/v2/tokeninfo", "/v2/account", "/v2/account/home/cats" };

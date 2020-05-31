@@ -17,11 +17,7 @@ namespace GW2SDK.Subtokens.Impl
             DateTimeOffset? absoluteExpirationDate = null,
             IReadOnlyCollection<string>? urls = null)
         {
-            if (!string.IsNullOrEmpty(accessToken))
-            {
-                AccessToken = new AuthenticationHeaderValue("Bearer", accessToken);
-            }
-
+            AccessToken = accessToken;
             Permissions = permissions;
             AbsoluteExpirationDate = absoluteExpirationDate;
             Urls = urls;
@@ -33,7 +29,7 @@ namespace GW2SDK.Subtokens.Impl
 
         public IReadOnlyCollection<string>? Urls { get; }
 
-        public AuthenticationHeaderValue? AccessToken { get; }
+        public string? AccessToken { get; }
 
         public static implicit operator HttpRequestMessage(CreateSubtokenRequest r)
         {
@@ -60,7 +56,15 @@ namespace GW2SDK.Subtokens.Impl
             }
 
             var location = new Uri(uriString, UriKind.Relative);
-            return new HttpRequestMessage(Get, location) { Headers = { Authorization = r.AccessToken } };
+            return new HttpRequestMessage(Get, location)
+            {
+                Headers =
+                {
+                    Authorization = string.IsNullOrWhiteSpace(r.AccessToken)
+                        ? default
+                        : new AuthenticationHeaderValue("Bearer", r.AccessToken)
+                }
+            };
         }
     }
 }

@@ -13,7 +13,7 @@ namespace GW2SDK.Tests.Features.Recipes
         [Trait("Category", "Integration")]
         public async Task Get_all_recipe_ids()
         {
-            var services = new Container();
+            await using var services = new Container();
             var sut = services.Resolve<RecipeService>();
 
             var actual = await sut.GetRecipesIndex();
@@ -26,7 +26,7 @@ namespace GW2SDK.Tests.Features.Recipes
         [Trait("Category", "Integration")]
         public async Task Get_a_recipe_by_id()
         {
-            var services = new Container();
+            await using var services = new Container();
             var sut = services.Resolve<RecipeService>();
 
             const int recipeId = 1;
@@ -41,7 +41,7 @@ namespace GW2SDK.Tests.Features.Recipes
         [Trait("Category", "Integration")]
         public async Task Get_recipes_by_id()
         {
-            var services = new Container();
+            await using var services = new Container();
             var sut = services.Resolve<RecipeService>();
 
             var ids = new[] { 1, 2, 3 };
@@ -56,7 +56,7 @@ namespace GW2SDK.Tests.Features.Recipes
         [Trait("Category", "Unit")]
         public async Task Recipe_ids_cannot_be_null()
         {
-            var services = new Container();
+            await using var services = new Container();
             var sut = services.Resolve<RecipeService>();
 
             await Assert.ThrowsAsync<ArgumentNullException>("recipeIds",
@@ -71,7 +71,7 @@ namespace GW2SDK.Tests.Features.Recipes
         [Trait("Category", "Unit")]
         public async Task Recipe_ids_cannot_be_empty()
         {
-            var services = new Container();
+            await using var services = new Container();
             var sut = services.Resolve<RecipeService>();
 
             await Assert.ThrowsAsync<ArgumentException>("recipeIds",
@@ -86,7 +86,7 @@ namespace GW2SDK.Tests.Features.Recipes
         [Trait("Category", "Integration")]
         public async Task Get_recipes_by_page()
         {
-            var services = new Container();
+            await using var services = new Container();
             var sut = services.Resolve<RecipeService>();
 
             var actual = await sut.GetRecipesByPage(1, 3);
@@ -100,7 +100,7 @@ namespace GW2SDK.Tests.Features.Recipes
         [Trait("Category", "Integration")]
         public async Task Page_index_cannot_be_negative()
         {
-            var services = new Container();
+            await using var services = new Container();
             var sut = services.Resolve<RecipeService>();
 
             await Assert.ThrowsAsync<ArgumentException>(async () => await sut.GetRecipesByPage(-1, 3));
@@ -111,7 +111,7 @@ namespace GW2SDK.Tests.Features.Recipes
         [Trait("Category", "Integration")]
         public async Task Page_size_cannot_be_negative()
         {
-            var services = new Container();
+            await using var services = new Container();
             var sut = services.Resolve<RecipeService>();
 
             await Assert.ThrowsAsync<ArgumentException>(async () => await sut.GetRecipesByPage(1, -3));

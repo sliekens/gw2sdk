@@ -18,16 +18,17 @@ namespace GW2SDK.Tests.Features.Accounts.Achievements.Fixtures
 
         public async Task InitializeAsync()
         {
-            var http = new Container().Resolve<IHttpClientFactory>().CreateClient("GW2SDK");
-            http.UseAccessToken(ConfigurationManager.Instance.ApiKeyFull);
-            Db = new InMemoryAccountAchievementsDb(await GetAllJsonAchievements(http));
+            await using var container = new Container();
+            var http = container.Resolve<IHttpClientFactory>().CreateClient("GW2SDK"); ;
+            var json = await GetAllJsonAchievements(http, ConfigurationManager.Instance.ApiKeyFull);
+            Db = new InMemoryAccountAchievementsDb(json);
         }
 
         public Task DisposeAsync() => Task.CompletedTask;
 
-        private async Task<List<string>> GetAllJsonAchievements(HttpClient http)
+        private async Task<List<string>> GetAllJsonAchievements(HttpClient http, string accessToken)
         {
-            var request = new AccountAchievementsRequest();
+            var request = new AccountAchievementsRequest(accessToken);
             using var response = await http.SendAsync(request);
             using var responseReader = new StreamReader(await response.Content.ReadAsStreamAsync());
             using var jsonReader = new JsonTextReader(responseReader);

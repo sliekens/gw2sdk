@@ -13,7 +13,7 @@ namespace GW2SDK.Tests.Features.Items
         [Trait("Category", "Integration")]
         public async Task Get_all_item_ids()
         {
-            var services = new Container();
+            await using var services = new Container();
             var sut = services.Resolve<ItemService>();
 
             var actual = await sut.GetItemsIndex();
@@ -26,7 +26,7 @@ namespace GW2SDK.Tests.Features.Items
         [Trait("Category", "Integration")]
         public async Task Get_an_item_by_id()
         {
-            var services = new Container();
+            await using var services = new Container();
             var sut = services.Resolve<ItemService>();
 
             const int itemId = 24;
@@ -41,7 +41,7 @@ namespace GW2SDK.Tests.Features.Items
         [Trait("Category", "Integration")]
         public async Task Get_items_by_id()
         {
-            var services = new Container();
+            await using var services = new Container();
             var sut = services.Resolve<ItemService>();
 
             var ids = new[] { 24, 46, 56 };
@@ -56,7 +56,7 @@ namespace GW2SDK.Tests.Features.Items
         [Trait("Category", "Unit")]
         public async Task Item_ids_cannot_be_null()
         {
-            var services = new Container();
+            await using var services = new Container();
             var sut = services.Resolve<ItemService>();
 
             await Assert.ThrowsAsync<ArgumentNullException>("itemIds",
@@ -71,7 +71,7 @@ namespace GW2SDK.Tests.Features.Items
         [Trait("Category", "Unit")]
         public async Task Item_ids_cannot_be_empty()
         {
-            var services = new Container();
+            await using var services = new Container();
             var sut = services.Resolve<ItemService>();
 
             await Assert.ThrowsAsync<ArgumentException>("itemIds",
@@ -86,7 +86,7 @@ namespace GW2SDK.Tests.Features.Items
         [Trait("Category", "Integration")]
         public async Task Get_items_by_page()
         {
-            var services = new Container();
+            await using var services = new Container();
             var sut = services.Resolve<ItemService>();
 
             var actual = await sut.GetItemsByPage(1, 3);
@@ -100,7 +100,7 @@ namespace GW2SDK.Tests.Features.Items
         [Trait("Category", "Integration")]
         public async Task Page_index_cannot_be_negative()
         {
-            var services = new Container();
+            await using var services = new Container();
             var sut = services.Resolve<ItemService>();
 
             await Assert.ThrowsAsync<ArgumentException>(async () => await sut.GetItemsByPage(-1, 3));
@@ -111,7 +111,7 @@ namespace GW2SDK.Tests.Features.Items
         [Trait("Category", "Integration")]
         public async Task Page_size_cannot_be_negative()
         {
-            var services = new Container();
+            await using var services = new Container();
             var sut = services.Resolve<ItemService>();
 
             await Assert.ThrowsAsync<ArgumentException>(async () => await sut.GetItemsByPage(1, -3));
