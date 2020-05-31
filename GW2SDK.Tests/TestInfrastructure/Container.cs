@@ -71,11 +71,11 @@ namespace GW2SDK.Tests.TestInfrastructure
             _services = services.BuildServiceProvider();
         }
 
-        public T Resolve<T>() => _services.GetRequiredService<T>();
+        public ValueTask DisposeAsync() => _services.DisposeAsync();
 
         public void Dispose() => _services.Dispose();
 
-        public ValueTask DisposeAsync() => _services.DisposeAsync();
+        public T Resolve<T>() => _services.GetRequiredService<T>();
     }
 
     internal static class HttpClientFactoryRegressionWorkaround
@@ -95,7 +95,7 @@ namespace GW2SDK.Tests.TestInfrastructure
 
             // ReserveClient(builder, typeof(TClient), builder.Name);
 
-            builder.Services.AddTransient<TClient>(s =>
+            builder.Services.AddTransient(s =>
             {
                 var httpClientFactory = s.GetRequiredService<IHttpClientFactory>();
                 var httpClient = httpClientFactory.CreateClient(builder.Name);

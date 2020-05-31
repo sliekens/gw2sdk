@@ -13,10 +13,10 @@ namespace GW2SDK.Tests.Features.Accounts.Achievements
         [Trait("Category", "Integration")]
         public async Task Get_all_account_achievements()
         {
-            var services = new Container(ConfigurationManager.Instance.ApiKeyFull);
+            await using var services = new Container();
             var sut = services.Resolve<AccountAchievementService>();
 
-            var actual = await sut.GetAccountAchievements();
+            var actual = await sut.GetAccountAchievements(ConfigurationManager.Instance.ApiKeyFull);
 
             Assert.Equal(actual.ResultTotal, actual.Count);
         }
@@ -26,12 +26,12 @@ namespace GW2SDK.Tests.Features.Accounts.Achievements
         [Trait("Category", "Integration")]
         public async Task Get_an_account_achievement_by_id()
         {
-            var services = new Container(ConfigurationManager.Instance.ApiKeyFull);
+            await using var services = new Container();
             var sut = services.Resolve<AccountAchievementService>();
 
             const int achievementId = 1;
 
-            var actual = await sut.GetAccountAchievementById(achievementId);
+            var actual = await sut.GetAccountAchievementById(achievementId, ConfigurationManager.Instance.ApiKeyFull);
 
             Assert.Equal(achievementId, actual.Id);
         }
@@ -41,12 +41,12 @@ namespace GW2SDK.Tests.Features.Accounts.Achievements
         [Trait("Category", "Integration")]
         public async Task Get_account_achievements_by_id()
         {
-            var services = new Container(ConfigurationManager.Instance.ApiKeyFull);
+            await using var services = new Container();
             var sut = services.Resolve<AccountAchievementService>();
 
             var ids = new[] { 1, 2, 3 };
 
-            var actual = await sut.GetAccountAchievementsByIds(ids);
+            var actual = await sut.GetAccountAchievementsByIds(ids, ConfigurationManager.Instance.ApiKeyFull);
 
             Assert.Collection(actual, first => Assert.Equal(1, first.Id), second => Assert.Equal(2, second.Id), third => Assert.Equal(3, third.Id));
         }
@@ -56,13 +56,13 @@ namespace GW2SDK.Tests.Features.Accounts.Achievements
         [Trait("Category", "Unit")]
         public async Task Achievement_ids_cannot_be_null()
         {
-            var services = new Container(ConfigurationManager.Instance.ApiKeyFull);
+            await using var services = new Container();
             var sut = services.Resolve<AccountAchievementService>();
 
             await Assert.ThrowsAsync<ArgumentNullException>("achievementIds",
                 async () =>
                 {
-                    await sut.GetAccountAchievementsByIds(null);
+                    await sut.GetAccountAchievementsByIds(null!, ConfigurationManager.Instance.ApiKeyFull);
                 });
         }
 
@@ -71,13 +71,13 @@ namespace GW2SDK.Tests.Features.Accounts.Achievements
         [Trait("Category", "Unit")]
         public async Task Achievement_ids_cannot_be_empty()
         {
-            var services = new Container(ConfigurationManager.Instance.ApiKeyFull);
+            await using var services = new Container();
             var sut = services.Resolve<AccountAchievementService>();
 
             await Assert.ThrowsAsync<ArgumentException>("achievementIds",
                 async () =>
                 {
-                    await sut.GetAccountAchievementsByIds(new int[0]);
+                    await sut.GetAccountAchievementsByIds(new int[0], ConfigurationManager.Instance.ApiKeyFull);
                 });
         }
 
@@ -86,10 +86,10 @@ namespace GW2SDK.Tests.Features.Accounts.Achievements
         [Trait("Category", "Integration")]
         public async Task Get_account_achievements_by_page()
         {
-            var services = new Container(ConfigurationManager.Instance.ApiKeyFull);
+            await using var services = new Container();
             var sut = services.Resolve<AccountAchievementService>();
 
-            var actual = await sut.GetAccountAchievementsByPage(1, 3);
+            var actual = await sut.GetAccountAchievementsByPage(1, 3, ConfigurationManager.Instance.ApiKeyFull);
 
             Assert.Equal(3, actual.Count);
             Assert.Equal(3, actual.PageSize);
@@ -100,10 +100,10 @@ namespace GW2SDK.Tests.Features.Accounts.Achievements
         [Trait("Category", "Integration")]
         public async Task Page_index_cannot_be_negative()
         {
-            var services = new Container(ConfigurationManager.Instance.ApiKeyFull);
+            await using var services = new Container();
             var sut = services.Resolve<AccountAchievementService>();
 
-            await Assert.ThrowsAsync<ArgumentException>(async () => await sut.GetAccountAchievementsByPage(-1, 3));
+            await Assert.ThrowsAsync<ArgumentException>(async () => await sut.GetAccountAchievementsByPage(-1, 3, ConfigurationManager.Instance.ApiKeyFull));
         }
 
         [Fact]
@@ -111,10 +111,10 @@ namespace GW2SDK.Tests.Features.Accounts.Achievements
         [Trait("Category", "Integration")]
         public async Task Page_size_cannot_be_negative()
         {
-            var services = new Container(ConfigurationManager.Instance.ApiKeyFull);
+            await using var services = new Container();
             var sut = services.Resolve<AccountAchievementService>();
 
-            await Assert.ThrowsAsync<ArgumentException>(async () => await sut.GetAccountAchievementsByPage(1, -3));
+            await Assert.ThrowsAsync<ArgumentException>(async () => await sut.GetAccountAchievementsByPage(1, -3, ConfigurationManager.Instance.ApiKeyFull));
         }
     }
 }
