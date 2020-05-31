@@ -13,7 +13,7 @@ namespace GW2SDK.Tests.Features.Worlds
         [Trait("Category", "Integration")]
         public async Task Get_all_worlds()
         {
-            var services = new Container();
+            await using var services = new Container();
             var sut = services.Resolve<WorldService>();
 
             var actual = await sut.GetWorlds();
@@ -26,7 +26,7 @@ namespace GW2SDK.Tests.Features.Worlds
         [Trait("Category", "Integration")]
         public async Task Get_all_world_ids()
         {
-            var services = new Container();
+            await using var services = new Container();
             var sut = services.Resolve<WorldService>();
 
             var actual = await sut.GetWorldsIndex();
@@ -39,7 +39,7 @@ namespace GW2SDK.Tests.Features.Worlds
         [Trait("Category", "Integration")]
         public async Task Get_a_world_by_id()
         {
-            var services = new Container();
+            await using var services = new Container();
             var sut = services.Resolve<WorldService>();
 
             const int worldId = 1001;
@@ -54,7 +54,7 @@ namespace GW2SDK.Tests.Features.Worlds
         [Trait("Category", "Integration")]
         public async Task Get_worlds_by_id()
         {
-            var services = new Container();
+            await using var services = new Container();
             var sut = services.Resolve<WorldService>();
 
             var ids = new[] { 1001, 1002, 1003 };
@@ -69,7 +69,7 @@ namespace GW2SDK.Tests.Features.Worlds
         [Trait("Category", "Unit")]
         public async Task World_ids_cannot_be_null()
         {
-            var services = new Container();
+            await using var services = new Container();
             var sut = services.Resolve<WorldService>();
 
             await Assert.ThrowsAsync<ArgumentNullException>("worldIds",
@@ -84,7 +84,7 @@ namespace GW2SDK.Tests.Features.Worlds
         [Trait("Category", "Unit")]
         public async Task World_ids_cannot_be_empty()
         {
-            var services = new Container();
+            await using var services = new Container();
             var sut = services.Resolve<WorldService>();
 
             await Assert.ThrowsAsync<ArgumentException>("worldIds",
@@ -99,7 +99,7 @@ namespace GW2SDK.Tests.Features.Worlds
         [Trait("Category", "Integration")]
         public async Task Get_worlds_by_page()
         {
-            var services = new Container();
+            await using var services = new Container();
             var sut = services.Resolve<WorldService>();
 
             var actual = await sut.GetWorldsByPage(1, 3);
@@ -113,7 +113,7 @@ namespace GW2SDK.Tests.Features.Worlds
         [Trait("Category", "Integration")]
         public async Task Page_index_cannot_be_negative()
         {
-            var services = new Container();
+            await using var services = new Container();
             var sut = services.Resolve<WorldService>();
 
             await Assert.ThrowsAsync<ArgumentException>(async () => await sut.GetWorldsByPage(-1, 3));
@@ -124,7 +124,7 @@ namespace GW2SDK.Tests.Features.Worlds
         [Trait("Category", "Integration")]
         public async Task Page_size_cannot_be_negative()
         {
-            var services = new Container();
+            await using var services = new Container();
             var sut = services.Resolve<WorldService>();
 
             await Assert.ThrowsAsync<ArgumentException>(async () => await sut.GetWorldsByPage(1, -3));

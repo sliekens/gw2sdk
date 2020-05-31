@@ -13,7 +13,7 @@ namespace GW2SDK.Tests.Features.Achievements
         [Trait("Category", "Integration")]
         public async Task Get_all_achievement_ids()
         {
-            var services = new Container();
+            await using var services = new Container();
             var sut = services.Resolve<AchievementService>();
 
             var actual = await sut.GetAchievementsIndex();
@@ -26,7 +26,7 @@ namespace GW2SDK.Tests.Features.Achievements
         [Trait("Category", "Integration")]
         public async Task Get_an_achievement_by_id()
         {
-            var services = new Container();
+            await using var services = new Container();
             var sut = services.Resolve<AchievementService>();
 
             const int achievementId = 1;
@@ -41,7 +41,7 @@ namespace GW2SDK.Tests.Features.Achievements
         [Trait("Category", "Integration")]
         public async Task Get_achievements_by_id()
         {
-            var services = new Container();
+            await using var services = new Container();
             var sut = services.Resolve<AchievementService>();
 
             var achievementIds = new[] { 1, 2, 3 };
@@ -59,7 +59,7 @@ namespace GW2SDK.Tests.Features.Achievements
         [Trait("Category", "Unit")]
         public async Task Achievement_ids_cannot_be_null()
         {
-            var services = new Container();
+            await using var services = new Container();
             var sut = services.Resolve<AchievementService>();
 
             await Assert.ThrowsAsync<ArgumentNullException>("achievementIds",
@@ -74,7 +74,7 @@ namespace GW2SDK.Tests.Features.Achievements
         [Trait("Category", "Unit")]
         public async Task Achievement_ids_cannot_be_empty()
         {
-            var services = new Container();
+            await using var services = new Container();
             var sut = services.Resolve<AchievementService>();
 
             await Assert.ThrowsAsync<ArgumentException>("achievementIds",
@@ -89,7 +89,7 @@ namespace GW2SDK.Tests.Features.Achievements
         [Trait("Category", "Integration")]
         public async Task Get_achievements_by_page()
         {
-            var services = new Container();
+            await using var services = new Container();
             var sut = services.Resolve<AchievementService>();
 
             var actual = await sut.GetAchievementsByPage(1, 3);
@@ -103,7 +103,7 @@ namespace GW2SDK.Tests.Features.Achievements
         [Trait("Category", "Integration")]
         public async Task Page_index_cannot_be_negative()
         {
-            var services = new Container();
+            await using var services = new Container();
             var sut = services.Resolve<AchievementService>();
 
             await Assert.ThrowsAsync<ArgumentException>(async () => await sut.GetAchievementsByPage(-1, 3));
@@ -114,7 +114,7 @@ namespace GW2SDK.Tests.Features.Achievements
         [Trait("Category", "Integration")]
         public async Task Page_size_cannot_be_negative()
         {
-            var services = new Container();
+            await using var services = new Container();
             var sut = services.Resolve<AchievementService>();
 
             await Assert.ThrowsAsync<ArgumentException>(async () => await sut.GetAchievementsByPage(1, -3));

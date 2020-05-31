@@ -13,7 +13,7 @@ namespace GW2SDK.Tests.Features.Continents
         [Trait("Category", "Integration")]
         public async Task Get_all_continents()
         {
-            var services = new Container();
+            await using var services = new Container();
             var sut = services.Resolve<ContinentService>();
 
             var actual = await sut.GetContinents();
@@ -26,7 +26,7 @@ namespace GW2SDK.Tests.Features.Continents
         [Trait("Category", "Integration")]
         public async Task Get_all_continent_ids()
         {
-            var services = new Container();
+            await using var services = new Container();
             var sut = services.Resolve<ContinentService>();
 
             var actual = await sut.GetContinentsIndex();
@@ -39,7 +39,7 @@ namespace GW2SDK.Tests.Features.Continents
         [Trait("Category", "Integration")]
         public async Task Get_a_continent_by_id()
         {
-            var services = new Container();
+            await using var services = new Container();
             var sut = services.Resolve<ContinentService>();
 
             const int continentId = 1;
@@ -54,7 +54,7 @@ namespace GW2SDK.Tests.Features.Continents
         [Trait("Category", "Integration")]
         public async Task Get_continents_by_id()
         {
-            var services = new Container();
+            await using var services = new Container();
             var sut = services.Resolve<ContinentService>();
 
             var ids = new[] { 1, 2 };
@@ -69,7 +69,7 @@ namespace GW2SDK.Tests.Features.Continents
         [Trait("Category", "Unit")]
         public async Task Continent_ids_cannot_be_null()
         {
-            var services = new Container();
+            await using var services = new Container();
             var sut = services.Resolve<ContinentService>();
 
             await Assert.ThrowsAsync<ArgumentNullException>("continentIds",
@@ -84,7 +84,7 @@ namespace GW2SDK.Tests.Features.Continents
         [Trait("Category", "Unit")]
         public async Task Continent_ids_cannot_be_empty()
         {
-            var services = new Container();
+            await using var services = new Container();
             var sut = services.Resolve<ContinentService>();
 
             await Assert.ThrowsAsync<ArgumentException>("continentIds",
@@ -99,7 +99,7 @@ namespace GW2SDK.Tests.Features.Continents
         [Trait("Category", "Integration")]
         public async Task Get_continents_by_page()
         {
-            var services = new Container();
+            await using var services = new Container();
             var sut = services.Resolve<ContinentService>();
 
             var actual = await sut.GetContinentsByPage(0, 2);
@@ -113,7 +113,7 @@ namespace GW2SDK.Tests.Features.Continents
         [Trait("Category", "Integration")]
         public async Task Continent_page_index_cannot_be_negative()
         {
-            var services = new Container();
+            await using var services = new Container();
             var sut = services.Resolve<ContinentService>();
 
             await Assert.ThrowsAsync<ArgumentException>(async () => await sut.GetContinentsByPage(-1, 3));
@@ -124,7 +124,7 @@ namespace GW2SDK.Tests.Features.Continents
         [Trait("Category", "Integration")]
         public async Task Continent_page_size_cannot_be_negative()
         {
-            var services = new Container();
+            await using var services = new Container();
             var sut = services.Resolve<ContinentService>();
 
             await Assert.ThrowsAsync<ArgumentException>(async () => await sut.GetContinentsByPage(1, -3));
@@ -135,7 +135,7 @@ namespace GW2SDK.Tests.Features.Continents
         [Trait("Category", "Integration")]
         public async Task Get_all_floors_by_continent_id()
         {
-            var services = new Container();
+            await using var services = new Container();
             var sut = services.Resolve<ContinentService>();
 
             const int continentId = 1;
@@ -150,7 +150,7 @@ namespace GW2SDK.Tests.Features.Continents
         [Trait("Category", "Integration")]
         public async Task Get_all_floor_ids_by_continent_id()
         {
-            var services = new Container();
+            await using var services = new Container();
             var sut = services.Resolve<ContinentService>();
 
             const int continentId = 1;
@@ -165,7 +165,7 @@ namespace GW2SDK.Tests.Features.Continents
         [Trait("Category", "Integration")]
         public async Task Get_a_floor_by_continent_id_and_floor_id()
         {
-            var services = new Container();
+            await using var services = new Container();
             var sut = services.Resolve<ContinentService>();
 
             const int continentId = 1;
@@ -181,7 +181,7 @@ namespace GW2SDK.Tests.Features.Continents
         [Trait("Category", "Integration")]
         public async Task Get_floors_by_continent_id_and_floor_ids()
         {
-            var services = new Container();
+            await using var services = new Container();
             var sut = services.Resolve<ContinentService>();
 
             const int continentId = 1;
@@ -197,7 +197,7 @@ namespace GW2SDK.Tests.Features.Continents
         [Trait("Category", "Unit")]
         public async Task Floor_ids_cannot_be_null()
         {
-            var services = new Container();
+            await using var services = new Container();
             var sut = services.Resolve<ContinentService>();
 
             const int continentId = 1;
@@ -214,7 +214,7 @@ namespace GW2SDK.Tests.Features.Continents
         [Trait("Category", "Unit")]
         public async Task Floor_ids_cannot_be_empty()
         {
-            var services = new Container();
+            await using var services = new Container();
             var sut = services.Resolve<ContinentService>();
 
             const int continentId = 1;
@@ -231,7 +231,7 @@ namespace GW2SDK.Tests.Features.Continents
         [Trait("Category", "Integration")]
         public async Task Get_floors_by_continent_id_and_page()
         {
-            var services = new Container();
+            await using var services = new Container();
             var sut = services.Resolve<ContinentService>();
 
             const int continentId = 1;
@@ -247,7 +247,7 @@ namespace GW2SDK.Tests.Features.Continents
         [Trait("Category", "Integration")]
         public async Task Floor_page_index_cannot_be_negative()
         {
-            var services = new Container();
+            await using var services = new Container();
             var sut = services.Resolve<ContinentService>();
 
             const int continentId = 1;
@@ -260,7 +260,7 @@ namespace GW2SDK.Tests.Features.Continents
         [Trait("Category", "Integration")]
         public async Task Floor_page_size_cannot_be_negative()
         {
-            var services = new Container();
+            await using var services = new Container();
             var sut = services.Resolve<ContinentService>();
 
             const int continentId = 1;

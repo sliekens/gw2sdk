@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Net;
 using System.Net.Http;
+using System.Threading.Tasks;
 using GW2SDK.Accounts;
 using GW2SDK.Accounts.Achievements;
 using GW2SDK.Achievements;
@@ -23,9 +24,9 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace GW2SDK.Tests.TestInfrastructure
 {
-    public class Container
+    public class Container : IDisposable, IAsyncDisposable
     {
-        private readonly IServiceProvider _services;
+        private readonly ServiceProvider _services;
 
         public Container(string accessToken = null)
         {
@@ -71,6 +72,10 @@ namespace GW2SDK.Tests.TestInfrastructure
         }
 
         public T Resolve<T>() => _services.GetRequiredService<T>();
+
+        public void Dispose() => _services.Dispose();
+
+        public ValueTask DisposeAsync() => _services.DisposeAsync();
     }
 
     internal static class HttpClientFactoryRegressionWorkaround

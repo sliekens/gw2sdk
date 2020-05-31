@@ -12,7 +12,8 @@ namespace GW2SDK.Tests.Features.Builds.Fixtures
 
         public async Task InitializeAsync()
         {
-            var http = new Container().Resolve<IHttpClientFactory>().CreateClient("GW2SDK");
+            await using var container = new Container();
+            var http = container.Resolve<IHttpClientFactory>().CreateClient("GW2SDK");
 
             var request = new BuildRequest();
             using var response = await http.SendAsync(request).ConfigureAwait(false);

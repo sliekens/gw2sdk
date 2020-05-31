@@ -12,7 +12,8 @@ namespace GW2SDK.Tests.Features.Tokens.Fixtures
 
         public async Task InitializeAsync()
         {
-            var http = new Container().Resolve<IHttpClientFactory>().CreateClient("GW2SDK");
+            await using var container = new Container();
+            var http = container.Resolve<IHttpClientFactory>().CreateClient("GW2SDK");
 
             ApiKeyInfoJson = await GetTokenInfoJson(http, ConfigurationManager.Instance.ApiKeyFull);
         }

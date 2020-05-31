@@ -13,7 +13,7 @@ namespace GW2SDK.Tests.Features.Skins
         [Trait("Category", "Integration")]
         public async Task Get_all_skin_ids()
         {
-            var services = new Container();
+            await using var services = new Container();
             var sut = services.Resolve<SkinService>();
 
             var actual = await sut.GetSkinsIndex();
@@ -26,7 +26,7 @@ namespace GW2SDK.Tests.Features.Skins
         [Trait("Category", "Integration")]
         public async Task Get_a_skin_by_id()
         {
-            var services = new Container();
+            await using var services = new Container();
             var sut = services.Resolve<SkinService>();
 
             const int skinId = 1;
@@ -41,7 +41,7 @@ namespace GW2SDK.Tests.Features.Skins
         [Trait("Category", "Integration")]
         public async Task Get_skins_by_id()
         {
-            var services = new Container();
+            await using var services = new Container();
             var sut = services.Resolve<SkinService>();
 
             var ids = new[] { 1, 2, 3 };
@@ -56,7 +56,7 @@ namespace GW2SDK.Tests.Features.Skins
         [Trait("Category", "Unit")]
         public async Task Skin_ids_cannot_be_null()
         {
-            var services = new Container();
+            await using var services = new Container();
             var sut = services.Resolve<SkinService>();
 
             await Assert.ThrowsAsync<ArgumentNullException>("skinIds",
@@ -71,7 +71,7 @@ namespace GW2SDK.Tests.Features.Skins
         [Trait("Category", "Unit")]
         public async Task Skin_ids_cannot_be_empty()
         {
-            var services = new Container();
+            await using var services = new Container();
             var sut = services.Resolve<SkinService>();
 
             await Assert.ThrowsAsync<ArgumentException>("skinIds",
@@ -86,7 +86,7 @@ namespace GW2SDK.Tests.Features.Skins
         [Trait("Category", "Integration")]
         public async Task Get_skins_by_page()
         {
-            var services = new Container();
+            await using var services = new Container();
             var sut = services.Resolve<SkinService>();
 
             var actual = await sut.GetSkinsByPage(1, 3);
@@ -100,7 +100,7 @@ namespace GW2SDK.Tests.Features.Skins
         [Trait("Category", "Integration")]
         public async Task Page_index_cannot_be_negative()
         {
-            var services = new Container();
+            await using var services = new Container();
             var sut = services.Resolve<SkinService>();
 
             await Assert.ThrowsAsync<ArgumentException>(async () => await sut.GetSkinsByPage(-1, 3));
@@ -111,7 +111,7 @@ namespace GW2SDK.Tests.Features.Skins
         [Trait("Category", "Integration")]
         public async Task Page_size_cannot_be_negative()
         {
-            var services = new Container();
+            await using var services = new Container();
             var sut = services.Resolve<SkinService>();
 
             await Assert.ThrowsAsync<ArgumentException>(async () => await sut.GetSkinsByPage(1, -3));

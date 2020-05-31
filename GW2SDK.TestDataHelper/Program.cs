@@ -8,7 +8,7 @@ namespace GW2SDK.TestDataHelper
         public static async Task Main(string outDir, bool indented = false)
         {
             Directory.CreateDirectory(outDir);
-            var services = new Container();
+            await using var services = new Container();
             await using (var file = File.CreateText(Path.Combine(outDir, "build.json")))
             {
                 var service = services.Resolve<JsonBuildService>();

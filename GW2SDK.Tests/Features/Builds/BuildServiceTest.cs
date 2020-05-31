@@ -12,7 +12,7 @@ namespace GW2SDK.Tests.Features.Builds
         [Trait("Category", "Integration")]
         public async Task Get_the_current_build()
         {
-            var services = new Container();
+            await using var services = new Container();
             var sut = services.Resolve<BuildService>();
 
             var actual = await sut.GetBuild();

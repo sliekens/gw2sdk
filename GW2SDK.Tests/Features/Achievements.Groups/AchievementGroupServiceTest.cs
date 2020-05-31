@@ -13,7 +13,7 @@ namespace GW2SDK.Tests.Features.Achievements.Groups
         [Trait("Category", "Integration")]
         public async Task Get_all_achievement_groups()
         {
-            var services = new Container();
+            await using var services = new Container();
             var sut = services.Resolve<AchievementGroupService>();
 
             var actual = await sut.GetAchievementGroups();
@@ -26,7 +26,7 @@ namespace GW2SDK.Tests.Features.Achievements.Groups
         [Trait("Category", "Integration")]
         public async Task Get_all_achievement_group_ids()
         {
-            var services = new Container();
+            await using var services = new Container();
             var sut = services.Resolve<AchievementGroupService>();
 
             var actual = await sut.GetAchievementGroupsIndex();
@@ -39,7 +39,7 @@ namespace GW2SDK.Tests.Features.Achievements.Groups
         [Trait("Category", "Integration")]
         public async Task Get_an_achievement_group_by_id()
         {
-            var services = new Container();
+            await using var services = new Container();
             var sut = services.Resolve<AchievementGroupService>();
 
             var achievementCategoryId = "A4ED8379-5B6B-4ECC-B6E1-70C350C902D2";
@@ -54,7 +54,7 @@ namespace GW2SDK.Tests.Features.Achievements.Groups
         [Trait("Category", "Unit")]
         public async Task Achievement_group_ids_cannot_be_null()
         {
-            var services = new Container();
+            await using var services = new Container();
             var sut = services.Resolve<AchievementGroupService>();
 
             await Assert.ThrowsAsync<ArgumentNullException>("achievementGroupIds",
@@ -69,7 +69,7 @@ namespace GW2SDK.Tests.Features.Achievements.Groups
         [Trait("Category", "Unit")]
         public async Task Achievement_group_ids_cannot_contain_null()
         {
-            var services = new Container();
+            await using var services = new Container();
             var sut = services.Resolve<AchievementGroupService>();
 
             var ids = new[] { "A4ED8379-5B6B-4ECC-B6E1-70C350C902D2", null, "B42E2379-9599-46CA-9D4A-40A27E192BBE" };
@@ -86,7 +86,7 @@ namespace GW2SDK.Tests.Features.Achievements.Groups
         [Trait("Category", "Unit")]
         public async Task Achievement_group_ids_cannot_be_empty()
         {
-            var services = new Container();
+            await using var services = new Container();
             var sut = services.Resolve<AchievementGroupService>();
 
             await Assert.ThrowsAsync<ArgumentException>("achievementGroupIds",
@@ -101,7 +101,7 @@ namespace GW2SDK.Tests.Features.Achievements.Groups
         [Trait("Category", "Unit")]
         public async Task Achievement_group_ids_cannot_contain_empty_id()
         {
-            var services = new Container();
+            await using var services = new Container();
             var sut = services.Resolve<AchievementGroupService>();
 
             var ids = new[] { "A4ED8379-5B6B-4ECC-B6E1-70C350C902D2", "", "B42E2379-9599-46CA-9D4A-40A27E192BBE" };
@@ -118,7 +118,7 @@ namespace GW2SDK.Tests.Features.Achievements.Groups
         [Trait("Category", "Integration")]
         public async Task Get_achievement_groups_by_id()
         {
-            var services = new Container();
+            await using var services = new Container();
             var sut = services.Resolve<AchievementGroupService>();
 
             var ids = new[] { "A4ED8379-5B6B-4ECC-B6E1-70C350C902D2", "56A82BB9-6B07-4AB0-89EE-E4A6D68F5C47", "B42E2379-9599-46CA-9D4A-40A27E192BBE" };
@@ -136,7 +136,7 @@ namespace GW2SDK.Tests.Features.Achievements.Groups
         [Trait("Category", "Integration")]
         public async Task Get_achievement_groups_by_page()
         {
-            var services = new Container();
+            await using var services = new Container();
             var sut = services.Resolve<AchievementGroupService>();
 
             var actual = await sut.GetAchievementGroupsByPage(1, 3);
@@ -150,7 +150,7 @@ namespace GW2SDK.Tests.Features.Achievements.Groups
         [Trait("Category", "Integration")]
         public async Task Page_index_cannot_be_negative()
         {
-            var services = new Container();
+            await using var services = new Container();
             var sut = services.Resolve<AchievementGroupService>();
 
             await Assert.ThrowsAsync<ArgumentException>(async () => await sut.GetAchievementGroupsByPage(-1, 3));
@@ -161,7 +161,7 @@ namespace GW2SDK.Tests.Features.Achievements.Groups
         [Trait("Category", "Integration")]
         public async Task Page_size_cannot_be_negative()
         {
-            var services = new Container();
+            await using var services = new Container();
             var sut = services.Resolve<AchievementGroupService>();
 
             await Assert.ThrowsAsync<ArgumentException>(async () => await sut.GetAchievementGroupsByPage(1, -3));
