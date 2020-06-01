@@ -1,4 +1,23 @@
-{"name":"Chainmail Leggings","type":"Armor","flags":["ShowInWardrobe"],"restrictions":[],"rarity":"Basic","id":1,"icon":"https://render.guildwars2.com/file/9321FD09DF90E8D10D80B5C41D722F357FE5970A/61104.png","details":{"type":"Leggings","weight_class":"Heavy","dye_slots":{"default":[{"color_id":1,"material":"metal"},{"color_id":1,"material":"metal"},{"color_id":1,"material":"leather"},null],"overrides":{}}}}
+{
+    "name": "Chainmail Leggings",
+    "type": "Armor",
+    "flags": ["ShowInWardrobe"],
+    "restrictions": [],
+    "rarity": "Basic",
+    "id": 1,
+    "icon": "https://render.guildwars2.com/file/9321FD09DF90E8D10D80B5C41D722F357FE5970A/61104.png",
+    "details": {
+        "type": "Leggings",
+        "weight_class": "Heavy",
+        "dye_slots": {
+            "default": [
+                { "color_id": 1, "material": "metal" }, { "color_id": 1, "material": "metal" },
+                { "color_id": 1, "material": "leather" }, null
+            ],
+            "overrides": {}
+        }
+    }
+}
 {"name":"Chainmail Chestpiece","type":"Armor","flags":["ShowInWardrobe"],"restrictions":[],"rarity":"Basic","id":2,"icon":"https://render.guildwars2.com/file/A2D0D6DA90056E76F1BE244F0C9EF333F95D9746/61098.png","details":{"type":"Coat","weight_class":"Heavy","dye_slots":{"default":[{"color_id":19,"material":"metal"},{"color_id":456,"material":"metal"},{"color_id":482,"material":"leather"},null],"overrides":{}}}}
 {"name":"Apprentice Pants","type":"Armor","flags":["ShowInWardrobe"],"restrictions":[],"rarity":"Basic","id":3,"icon":"https://render.guildwars2.com/file/AAB41A903B03C7DEB833A8CC4E08CF0A02A67BD5/61404.png","details":{"type":"Leggings","weight_class":"Light","dye_slots":{"default":[{"color_id":1,"material":"cloth"},{"color_id":1,"material":"metal"},{"color_id":1,"material":"cloth"},null],"overrides":{}}}}
 {"name":"Apprentice Coat","type":"Armor","flags":["ShowInWardrobe"],"restrictions":[],"rarity":"Basic","id":4,"icon":"https://render.guildwars2.com/file/DB0264EE5C0079BB3996EC7B0297CEE1BD48EF07/61403.png","details":{"type":"Coat","weight_class":"Light","dye_slots":{"default":[{"color_id":1,"material":"cloth"},{"color_id":1,"material":"metal"},{"color_id":1,"material":"cloth"},null],"overrides":{}}}}

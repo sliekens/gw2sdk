@@ -17,10 +17,7 @@ namespace GW2SDK.Tests.TestInfrastructure
 
             using var file = File.Open(path, FileMode.Open, FileAccess.Read, FileShare.None);
             using var stringReader = new StreamReader(file);
-            using var jsonReader = new JsonTextReader(stringReader)
-            {
-                SupportMultipleContent = true
-            };
+            using var jsonReader = new JsonTextReader(stringReader) { SupportMultipleContent = true };
             while (jsonReader.Read())
             {
                 yield return JToken.ReadFrom(jsonReader).ToString(Formatting.Indented);

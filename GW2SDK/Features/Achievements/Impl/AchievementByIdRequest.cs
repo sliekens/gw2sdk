@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Net.Http;
-using GW2SDK.Impl;
 using static System.Net.Http.HttpMethod;
 
 namespace GW2SDK.Achievements.Impl

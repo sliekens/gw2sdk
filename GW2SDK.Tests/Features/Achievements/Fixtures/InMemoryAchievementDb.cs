@@ -19,8 +19,9 @@ namespace GW2SDK.Tests.Features.Achievements.Fixtures
                     from json in Achievements
                     let jobject = JObject.Parse(json)
                     let flags = jobject.SelectTokens("flags[*]")
-                    select flags.Select(token => token.ToString())).SelectMany(flags => flags)
-                                                                   .Distinct();
+                    select flags.Select(token => token.ToString()))
+                .SelectMany(flags => flags)
+                .Distinct();
         }
 
         public IEnumerable<string> GetAchievementTypeNames()
@@ -29,8 +30,9 @@ namespace GW2SDK.Tests.Features.Achievements.Fixtures
                     from json in Achievements
                     let jobject = JObject.Parse(json)
                     let flags = jobject.SelectTokens("type")
-                    select flags.Select(token => token.ToString())).SelectMany(types => types)
-                                                                   .Distinct();
+                    select flags.Select(token => token.ToString()))
+                .SelectMany(types => types)
+                .Distinct();
         }
 
         public IEnumerable<string> GetAchievementRewardTypeNames()
@@ -39,8 +41,9 @@ namespace GW2SDK.Tests.Features.Achievements.Fixtures
                     from json in Achievements
                     let jobject = JObject.Parse(json)
                     let flags = jobject.SelectTokens("rewards[*].type")
-                    select flags.Select(token => token.ToString())).SelectMany(types => types)
-                                                                   .Distinct();
+                    select flags.Select(token => token.ToString()))
+                .SelectMany(types => types)
+                .Distinct();
         }
 
         public IEnumerable<string> GetAchievementBitTypeNames()
@@ -49,8 +52,9 @@ namespace GW2SDK.Tests.Features.Achievements.Fixtures
                     from json in Achievements
                     let jobject = JObject.Parse(json)
                     let flags = jobject.SelectTokens("bits[*].type")
-                    select flags.Select(token => token.ToString())).SelectMany(types => types)
-                                                                   .Distinct();
+                    select flags.Select(token => token.ToString()))
+                .SelectMany(types => types)
+                .Distinct();
         }
 
         public IEnumerable<string> GetMasteryRegionNames()
@@ -59,8 +63,9 @@ namespace GW2SDK.Tests.Features.Achievements.Fixtures
                     from json in Achievements
                     let jobject = JObject.Parse(json)
                     let flags = jobject.SelectTokens("rewards[*].region")
-                    select flags.Select(token => token.ToString())).SelectMany(types => types)
-                                                                   .Distinct();
+                    select flags.Select(token => token.ToString()))
+                .SelectMany(types => types)
+                .Distinct();
         }
     }
 }

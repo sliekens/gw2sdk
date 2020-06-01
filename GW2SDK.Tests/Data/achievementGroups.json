@@ -1,4 +1,13 @@
-{"id":"A4ED8379-5B6B-4ECC-B6E1-70C350C902D2","name":"Story Journal","description":"Achievements related to the story journal.","order":3,"categories":[164,154,209,253,147,144,241,224,216,226,139,236,251,183,187,188,121,122,123,104,68,100,81,83,82,71,72,70,171,246,203,196]}
+{
+    "id": "A4ED8379-5B6B-4ECC-B6E1-70C350C902D2",
+    "name": "Story Journal",
+    "description": "Achievements related to the story journal.",
+    "order": 3,
+    "categories": [
+        164, 154, 209, 253, 147, 144, 241, 224, 216, 226, 139, 236, 251, 183, 187, 188, 121, 122, 123, 104, 68, 100, 81,
+        83, 82, 71, 72, 70, 171, 246, 203, 196
+    ]
+}
 {"id":"56A82BB9-6B07-4AB0-89EE-E4A6D68F5C47","name":"General","description":"Achievements for accomplishments throughout Central Tyria.","order":4,"categories":[247,169,10,1,133,5,2,27,58,7,51,47,14,6,11,16,4,80,69,206,245]}
 {"id":"B42E2379-9599-46CA-9D4A-40A27E192BBE","name":"Path of Fire","description":"Achievements for accomplishments throughout the desert.","order":5,"categories":[174,176,178,179,181,182,185,189,190]}
 {"id":"45410F60-AB66-4146-A0F7-CE99250C4CB0","name":"Collections","description":"Achievements for collecting items and unlocking skins in the wardrobe.","order":11,"categories":[77,75,114,76,117,118,173,237,125]}

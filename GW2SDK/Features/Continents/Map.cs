@@ -36,7 +36,7 @@ namespace GW2SDK.Continents
 
         [JsonProperty(Required = Required.Always)]
         public Dictionary<int, PointOfInterest> PointsOfInterest { get; set; } = new Dictionary<int, PointOfInterest>(0);
-        
+
         [JsonProperty(Required = Required.Always)]
         public Dictionary<int, MapTask> Tasks { get; set; } = new Dictionary<int, MapTask>(0);
 

@@ -1,4 +1,9 @@
-{"id":24,"whitelisted":false,"buys":{"quantity":65800,"unit_price":280},"sells":{"quantity":28735,"unit_price":494}}
+{
+    "id": 24,
+    "whitelisted": false,
+    "buys": { "quantity": 65800, "unit_price": 280 },
+    "sells": { "quantity": 28735, "unit_price": 494 }
+}
 {"id":68,"whitelisted":false,"buys":{"quantity":2293,"unit_price":73},"sells":{"quantity":395,"unit_price":110}}
 {"id":69,"whitelisted":false,"buys":{"quantity":1997,"unit_price":91},"sells":{"quantity":730,"unit_price":198}}
 {"id":70,"whitelisted":false,"buys":{"quantity":3472,"unit_price":91},"sells":{"quantity":398,"unit_price":188}}

@@ -22,8 +22,8 @@ namespace GW2SDK.TestDataHelper
         public static IAsyncPolicy<HttpResponseMessage> SelectPolicy(HttpRequestMessage request)
         {
             var rateLimit = Policy.Handle<TooManyRequestsException>()
-                                  .WaitAndRetryForeverAsync(retryAttempt =>
-                                      TimeSpan.FromSeconds(Math.Pow(2, retryAttempt)) + TimeSpan.FromMilliseconds(Jitterer.Next(0, 1000)));
+                .WaitAndRetryForeverAsync(retryAttempt =>
+                    TimeSpan.FromSeconds(Math.Pow(2, retryAttempt)) + TimeSpan.FromMilliseconds(Jitterer.Next(0, 1000)));
 
             bool IsRetryable(HttpRequestMessage requestMessage)
             {

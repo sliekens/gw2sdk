@@ -14,7 +14,7 @@ namespace GW2SDK.Continents
 
         [JsonProperty(Required = Required.DisallowNull, NullValueHandling = NullValueHandling.Ignore)]
         public string? Name { get; set; }
-        
+
         [JsonProperty(Required = Required.Always)]
         public int Level { get; set; }
 

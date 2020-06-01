@@ -1,7 +1,5 @@
-﻿using System.Net.Http;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using GW2SDK.Exceptions;
-using GW2SDK.Extensions;
 using GW2SDK.Tests.Features.Tokens.Fixtures;
 using GW2SDK.Tests.TestInfrastructure;
 using GW2SDK.Tokens;

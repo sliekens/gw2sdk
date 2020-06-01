@@ -30,8 +30,8 @@ namespace GW2SDK.Tests.Features.Achievements
         public void Achievements_can_be_serialized_from_json()
         {
             var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output))
-                                                              .UseMissingMemberHandling(MissingMemberHandling.Error)
-                                                              .Build();
+                .UseMissingMemberHandling(MissingMemberHandling.Error)
+                .Build();
 
             AssertEx.ForEach(_fixture.Db.Achievements,
                 json =>
@@ -87,7 +87,7 @@ namespace GW2SDK.Tests.Features.Achievements
             var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output)).Build();
 
             var achievements = _fixture.Db.Achievements.Select(json => JsonConvert.DeserializeObject<Achievement>(json, settings)).ToList();
-            
+
             Assert.Contains(achievements, actual => actual.LockedText == "");
             Assert.Contains(achievements, actual => actual.LockedText != "");
         }
@@ -202,7 +202,7 @@ namespace GW2SDK.Tests.Features.Achievements
             var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output)).Build();
 
             var achievements = _fixture.Db.Achievements.Select(json => JsonConvert.DeserializeObject<Achievement>(json, settings)).ToHashSet();
-            
+
             var withPrerequisites = achievements.Where(achievement => achievement.Prerequisites is object && achievement.Prerequisites.Length != 0).ToHashSet();
 
             Assert.ProperSubset(achievements, withPrerequisites);
@@ -216,7 +216,7 @@ namespace GW2SDK.Tests.Features.Achievements
             var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output)).Build();
 
             var achievements = _fixture.Db.Achievements.Select(json => JsonConvert.DeserializeObject<Achievement>(json, settings)).ToHashSet();
-            
+
             var withPointCap = achievements.Where(achievement => achievement.PointCap.HasValue).ToHashSet();
 
             Assert.ProperSubset(achievements, withPointCap);
@@ -231,7 +231,8 @@ namespace GW2SDK.Tests.Features.Achievements
 
             var achievements = _fixture.Db.Achievements.Select(json => JsonConvert.DeserializeObject<Achievement>(json, settings)).ToList();
 
-            var pointlessRepetition = achievements.Where(a => a.Flags.Contains(AchievementFlag.Repeatable) && a.Tiers.All(tier => tier.Points == 0)).ToHashSet();
+            var pointlessRepetition =
+                achievements.Where(a => a.Flags.Contains(AchievementFlag.Repeatable) && a.Tiers.All(tier => tier.Points == 0)).ToHashSet();
             AssertEx.ForEach(pointlessRepetition,
                 actual =>
                 {
@@ -245,7 +246,7 @@ namespace GW2SDK.Tests.Features.Achievements
         public void Subset_of_achievements_has_no_icon()
         {
             var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output)).Build();
-            
+
             var achievements = _fixture.Db.Achievements.Select(json => JsonConvert.DeserializeObject<Achievement>(json, settings)).ToHashSet();
 
             var withoutIcon = achievements.Where(achievement => achievement.Icon is null).ToHashSet();

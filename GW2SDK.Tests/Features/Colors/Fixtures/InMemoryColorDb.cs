@@ -19,8 +19,9 @@ namespace GW2SDK.Tests.Features.Colors.Fixtures
                     from json in Colors
                     let jobject = JObject.Parse(json)
                     let flags = jobject.SelectTokens("categories[*]")
-                    select flags.Select(token => token.ToString())).SelectMany(entries => entries)
-                                                                   .Distinct();
+                    select flags.Select(token => token.ToString()))
+                .SelectMany(entries => entries)
+                .Distinct();
         }
     }
 }

@@ -29,8 +29,8 @@ namespace GW2SDK.Tests.Features.Accounts
         public void Account_can_be_fully_serialized_from_json_with_all_scopes()
         {
             var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output))
-                                                              .UseMissingMemberHandling(MissingMemberHandling.Error)
-                                                              .Build();
+                .UseMissingMemberHandling(MissingMemberHandling.Error)
+                .Build();
 
             // Next statement throws if there are missing members
             _ = JsonConvert.DeserializeObject<Account>(_fixture.Db.FullAccount, settings);
@@ -95,7 +95,7 @@ namespace GW2SDK.Tests.Features.Accounts
 
             Assert.NotEqual(TimeSpan.Zero, actual.Age);
         }
-        
+
         [Fact]
         [Trait("Feature",  "Accounts")]
         [Trait("Category", "Integration")]

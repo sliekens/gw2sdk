@@ -59,7 +59,9 @@ namespace GW2SDK.Accounts.Achievements
         }
 
         [Scope(Permission.Progression)]
-        public async Task<IDataTransferCollection<AccountAchievement>> GetAccountAchievements(string? accessToken = null, JsonSerializerSettings? settings = null)
+        public async Task<IDataTransferCollection<AccountAchievement>> GetAccountAchievements(
+            string? accessToken = null,
+            JsonSerializerSettings? settings = null)
         {
             var request = new AccountAchievementsRequest(accessToken);
             using var response = await _http.SendAsync(request).ConfigureAwait(false);

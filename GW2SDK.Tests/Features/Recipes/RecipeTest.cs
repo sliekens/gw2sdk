@@ -28,8 +28,8 @@ namespace GW2SDK.Tests.Features.Recipes
         public void Recipes_can_be_serialized_from_json()
         {
             var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output))
-                                                              .UseMissingMemberHandling(MissingMemberHandling.Error)
-                                                              .Build();
+                .UseMissingMemberHandling(MissingMemberHandling.Error)
+                .Build();
             AssertEx.ForEach(_fixture.Db.Recipes,
                 json =>
                 {

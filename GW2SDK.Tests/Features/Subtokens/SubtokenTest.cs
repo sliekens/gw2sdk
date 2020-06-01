@@ -27,8 +27,8 @@ namespace GW2SDK.Tests.Features.Subtokens
         public void Subtokens_can_be_serialized_from_json()
         {
             var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output))
-                                                              .UseMissingMemberHandling(MissingMemberHandling.Error)
-                                                              .Build();
+                .UseMissingMemberHandling(MissingMemberHandling.Error)
+                .Build();
 
             // Next statement throws if there are missing members
             _ = JsonConvert.DeserializeObject<CreatedSubtoken>(_fixture.CreatedSubtoken, settings);

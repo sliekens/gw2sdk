@@ -28,8 +28,8 @@ namespace GW2SDK.Tests.Features.Achievements.Groups
         public void Achievement_groups_can_be_serialized_from_json()
         {
             var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output))
-                                                              .UseMissingMemberHandling(MissingMemberHandling.Error)
-                                                              .Build();
+                .UseMissingMemberHandling(MissingMemberHandling.Error)
+                .Build();
 
             AssertEx.ForEach(_fixture.Db.AchievementGroups,
                 json =>
@@ -40,7 +40,7 @@ namespace GW2SDK.Tests.Features.Achievements.Groups
         }
 
         [Fact]
-        [Trait("Feature", "Achievements.Groups")]
+        [Trait("Feature",  "Achievements.Groups")]
         [Trait("Category", "Integration")]
         public void Order_is_not_negative()
         {
