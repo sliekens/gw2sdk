@@ -14,8 +14,8 @@
 {"id":1014,"name":"Crystal Desert","population":"High"}
 {"id":1015,"name":"Isle of Janthir","population":"Medium"}
 {"id":1016,"name":"Sea of Sorrows","population":"Full"}
-{"id":1017,"name":"Tarnished Coast","population":"VeryHigh"}
-{"id":1018,"name":"Northern Shiverpeaks","population":"High"}
+{"id":1017,"name":"Tarnished Coast","population":"Full"}
+{"id":1018,"name":"Northern Shiverpeaks","population":"VeryHigh"}
 {"id":1019,"name":"Blackgate","population":"Full"}
 {"id":1020,"name":"Ferguson's Crossing","population":"VeryHigh"}
 {"id":1021,"name":"Dragonbrand","population":"Full"}
@@ -30,7 +30,7 @@
 {"id":2006,"name":"Underworld","population":"Medium"}
 {"id":2007,"name":"Far Shiverpeaks","population":"VeryHigh"}
 {"id":2008,"name":"Whiteside Ridge","population":"Full"}
-{"id":2009,"name":"Ruins of Surmia","population":"Medium"}
+{"id":2009,"name":"Ruins of Surmia","population":"High"}
 {"id":2010,"name":"Seafarer's Rest","population":"Full"}
 {"id":2011,"name":"Vabbi","population":"Medium"}
 {"id":2012,"name":"Piken Square","population":"Full"}
