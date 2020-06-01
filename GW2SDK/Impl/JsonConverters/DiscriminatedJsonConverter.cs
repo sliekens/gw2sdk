@@ -38,24 +38,26 @@ namespace GW2SDK.Impl.JsonConverters
 
             var json = JObject.Load(reader);
             var discriminatorField = json.Property(_discriminatorOptions.DiscriminatorFieldName);
+            string discriminatorFieldValue;
             if (discriminatorField is null)
             {
-                if (serializer.TraceWriter?.LevelFilter >= TraceLevel.Error)
+                discriminatorFieldValue = "";
+                if (serializer.TraceWriter?.LevelFilter >= TraceLevel.Warning)
                 {
-                    serializer.TraceWriter.Trace(TraceLevel.Error,
+                    serializer.TraceWriter.Trace(TraceLevel.Warning,
                         $"Could not find discriminator field '{_discriminatorOptions.DiscriminatorFieldName}'.",
                         null);
                 }
-
-                throw new JsonSerializationException($"Could not find discriminator field with name '{_discriminatorOptions.DiscriminatorFieldName}'.");
             }
-
-            var discriminatorFieldValue = discriminatorField.Value.ToString();
-            if (serializer.TraceWriter?.LevelFilter >= TraceLevel.Info)
+            else
             {
-                serializer.TraceWriter.Trace(TraceLevel.Info,
-                    $"Found discriminator field '{discriminatorField.Name}' with value '{discriminatorFieldValue}'.",
-                    null);
+                discriminatorFieldValue = discriminatorField.Value.ToString();
+                if (serializer.TraceWriter?.LevelFilter >= TraceLevel.Info)
+                {
+                    serializer.TraceWriter.Trace(TraceLevel.Info,
+                        $"Found discriminator field '{discriminatorField.Name}' with value '{discriminatorFieldValue}'.",
+                        null);
+                }
             }
 
             var found = _discriminatorOptions.GetDiscriminatedTypes().FirstOrDefault(tuple => tuple.TypeName == discriminatorFieldValue).Type;
@@ -78,7 +80,7 @@ namespace GW2SDK.Impl.JsonConverters
             }
 
             _discriminatorOptions.Preprocessor?.Invoke(discriminatorFieldValue, json);
-            if (!_discriminatorOptions.SerializeDiscriminator)
+            if (discriminatorField is object && !_discriminatorOptions.SerializeDiscriminator)
             {
                 // Remove the discriminator field from the JSON for two possible reasons:
                 // 1. the user doesn't want to copy the discriminator value from JSON to the CLR object, only the other way around
