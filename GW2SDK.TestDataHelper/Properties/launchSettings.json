@@ -1,8 +1,8 @@
 {
-  "profiles": {
-    "GW2SDK.TestDataHelper": {
-      "commandName": "Project",
-      "commandLineArgs": "--out-dir data"
+    "profiles": {
+        "GW2SDK.TestDataHelper": {
+            "commandName": "Project",
+            "commandLineArgs": "--out-dir data"
+        }
     }
-  }
 }

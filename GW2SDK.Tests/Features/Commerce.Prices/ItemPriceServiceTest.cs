@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Threading.Tasks;
 using GW2SDK.Commerce.Prices;
+using GW2SDK.Tests.TestInfrastructure;
 using Xunit;
-using Container = GW2SDK.Tests.TestInfrastructure.Container;
 
 namespace GW2SDK.Tests.Features.Commerce.Prices
 {
@@ -48,10 +48,10 @@ namespace GW2SDK.Tests.Features.Commerce.Prices
 
             var actual = await sut.GetItemPricesByIds(ids);
 
-            Assert.Collection(actual, 
-                first => Assert.Equal(24, first.Id),
+            Assert.Collection(actual,
+                first => Assert.Equal(24,     first.Id),
                 second => Assert.Equal(19699, second.Id),
-                third => Assert.Equal(35984, third.Id));
+                third => Assert.Equal(35984,  third.Id));
         }
 
         [Fact]

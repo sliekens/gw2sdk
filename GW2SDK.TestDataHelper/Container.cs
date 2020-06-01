@@ -21,38 +21,38 @@ namespace GW2SDK.TestDataHelper
             services.AddTransient<BadMessageHandler>();
             services.AddTransient<RateLimitHandler>();
             services.AddHttpClient("GW2SDK",
-                        http =>
-                        {
-                            http.UseBaseAddress(new Uri("https://api.guildwars2.com", UriKind.Absolute));
-                            http.UseLatestSchemaVersion();
-                            http.UseDataCompression();
-                        })
-                    .ConfigurePrimaryHttpMessageHandler(sp => sp.GetRequiredService<SocketsHttpHandler>())
-                    .AddPolicyHandler(HttpPolicy.SelectPolicy)
-                    .AddHttpMessageHandler<UnauthorizedMessageHandler>()
-                    .AddHttpMessageHandler<BadMessageHandler>()
-                    .AddHttpMessageHandler<RateLimitHandler>()
-                    .AddTypedClient(http => new ContinentService(http))
-                    .AddTypedClient(http => new JsonAchievementService(http))
-                    .AddTypedClient(http => new JsonAchievementCategoriesService(http))
-                    .AddTypedClient(http => new JsonAchievementGroupsService(http))
-                    .AddTypedClient(http => new JsonBuildService(http))
-                    .AddTypedClient(http => new JsonColorService(http))
-                    .AddTypedClient(http => new JsonContinentService(http))
-                    .AddTypedClient(http => new JsonFloorService(http))
-                    .AddTypedClient(http => new JsonItemService(http))
-                    .AddTypedClient(http => new JsonItemPriceService(http))
-                    .AddTypedClient(http => new JsonRecipeService(http))
-                    .AddTypedClient(http => new JsonSkinService(http))
-                    .AddTypedClient(http => new JsonWorldService(http));
+                    http =>
+                    {
+                        http.UseBaseAddress(new Uri("https://api.guildwars2.com", UriKind.Absolute));
+                        http.UseLatestSchemaVersion();
+                        http.UseDataCompression();
+                    })
+                .ConfigurePrimaryHttpMessageHandler(sp => sp.GetRequiredService<SocketsHttpHandler>())
+                .AddPolicyHandler(HttpPolicy.SelectPolicy)
+                .AddHttpMessageHandler<UnauthorizedMessageHandler>()
+                .AddHttpMessageHandler<BadMessageHandler>()
+                .AddHttpMessageHandler<RateLimitHandler>()
+                .AddTypedClient(http => new ContinentService(http))
+                .AddTypedClient(http => new JsonAchievementService(http))
+                .AddTypedClient(http => new JsonAchievementCategoriesService(http))
+                .AddTypedClient(http => new JsonAchievementGroupsService(http))
+                .AddTypedClient(http => new JsonBuildService(http))
+                .AddTypedClient(http => new JsonColorService(http))
+                .AddTypedClient(http => new JsonContinentService(http))
+                .AddTypedClient(http => new JsonFloorService(http))
+                .AddTypedClient(http => new JsonItemService(http))
+                .AddTypedClient(http => new JsonItemPriceService(http))
+                .AddTypedClient(http => new JsonRecipeService(http))
+                .AddTypedClient(http => new JsonSkinService(http))
+                .AddTypedClient(http => new JsonWorldService(http));
             _services = services.BuildServiceProvider();
         }
 
-        public T Resolve<T>() => _services.GetRequiredService<T>();
+        public ValueTask DisposeAsync() => _services.DisposeAsync();
 
         public void Dispose() => _services.Dispose();
 
-        public ValueTask DisposeAsync() => _services.DisposeAsync();
+        public T Resolve<T>() => _services.GetRequiredService<T>();
     }
 
     internal static class HttpClientFactoryRegressionWorkaround
@@ -72,7 +72,7 @@ namespace GW2SDK.TestDataHelper
 
             // ReserveClient(builder, typeof(TClient), builder.Name);
 
-            builder.Services.AddTransient<TClient>(s =>
+            builder.Services.AddTransient(s =>
             {
                 var httpClientFactory = s.GetRequiredService<IHttpClientFactory>();
                 var httpClient = httpClientFactory.CreateClient(builder.Name);

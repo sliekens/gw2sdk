@@ -9,12 +9,12 @@ namespace GW2SDK.Tests.Features.Colors
     [Collection(nameof(ColorDbCollection))]
     public class ColorCategoryNameTest
     {
-        private readonly ColorFixture _fixture;
-
         public ColorCategoryNameTest(ColorFixture fixture)
         {
             _fixture = fixture;
         }
+
+        private readonly ColorFixture _fixture;
 
         [Fact]
         [Trait("Feature",    "Colors")]

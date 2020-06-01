@@ -15,7 +15,7 @@ namespace GW2SDK.Tests.Features.Skins
         }
 
         private readonly SkinFixture _fixture;
-        
+
         [Fact]
         [Trait("Feature",    "Items")]
         [Trait("Category",   "Integration")]

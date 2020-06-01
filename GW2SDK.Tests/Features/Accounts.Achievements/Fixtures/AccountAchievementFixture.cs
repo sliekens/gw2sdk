@@ -4,7 +4,6 @@ using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 using GW2SDK.Accounts.Achievements.Impl;
-using GW2SDK.Extensions;
 using GW2SDK.Tests.TestInfrastructure;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -19,7 +18,7 @@ namespace GW2SDK.Tests.Features.Accounts.Achievements.Fixtures
         public async Task InitializeAsync()
         {
             await using var container = new Container();
-            var http = container.Resolve<IHttpClientFactory>().CreateClient("GW2SDK"); ;
+            var http = container.Resolve<IHttpClientFactory>().CreateClient("GW2SDK");
             var json = await GetAllJsonAchievements(http, ConfigurationManager.Instance.ApiKeyFull);
             Db = new InMemoryAccountAchievementsDb(json);
         }

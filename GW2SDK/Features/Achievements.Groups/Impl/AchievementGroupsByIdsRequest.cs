@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
-using GW2SDK.Extensions;
 using GW2SDK.Impl;
 using static System.Net.Http.HttpMethod;
 
@@ -10,8 +9,6 @@ namespace GW2SDK.Achievements.Groups.Impl
 {
     public sealed class AchievementGroupsByIdsRequest
     {
-        public IReadOnlyCollection<string> AchievementGroupIds { get; }
-
         public AchievementGroupsByIdsRequest(IReadOnlyCollection<string> achievementGroupIds)
         {
             if (achievementGroupIds == null)
@@ -31,6 +28,8 @@ namespace GW2SDK.Achievements.Groups.Impl
 
             AchievementGroupIds = achievementGroupIds;
         }
+
+        public IReadOnlyCollection<string> AchievementGroupIds { get; }
 
         public static implicit operator HttpRequestMessage(AchievementGroupsByIdsRequest r)
         {

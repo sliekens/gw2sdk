@@ -1,4 +1,15 @@
-{"type":"Refinement","output_item_id":19713,"output_item_count":1,"min_rating":75,"time_to_craft_ms":2000,"disciplines":["Artificer","Weaponsmith","Scribe","Huntsman"],"flags":["AutoLearned"],"ingredients":[{"item_id":19726,"count":2}],"id":1,"chat_link":"[&CQEAAAA=]"}
+{
+    "type": "Refinement",
+    "output_item_id": 19713,
+    "output_item_count": 1,
+    "min_rating": 75,
+    "time_to_craft_ms": 2000,
+    "disciplines": ["Artificer", "Weaponsmith", "Scribe", "Huntsman"],
+    "flags": ["AutoLearned"],
+    "ingredients": [{ "item_id": 19726, "count": 2 }],
+    "id": 1,
+    "chat_link": "[&CQEAAAA=]"
+}
 {"type":"Refinement","output_item_id":19712,"output_item_count":1,"min_rating":400,"time_to_craft_ms":2000,"disciplines":["Artificer","Weaponsmith","Scribe","Huntsman"],"flags":["AutoLearned"],"ingredients":[{"item_id":19725,"count":3}],"id":2,"chat_link":"[&CQIAAAA=]"}
 {"type":"Refinement","output_item_id":19710,"output_item_count":1,"min_rating":0,"time_to_craft_ms":2000,"disciplines":["Artificer","Weaponsmith","Scribe","Huntsman"],"flags":["AutoLearned"],"ingredients":[{"item_id":19723,"count":3}],"id":3,"chat_link":"[&CQMAAAA=]"}
 {"type":"Refinement","output_item_id":19711,"output_item_count":1,"min_rating":225,"time_to_craft_ms":2000,"disciplines":["Artificer","Weaponsmith","Scribe","Huntsman"],"flags":["AutoLearned"],"ingredients":[{"item_id":19724,"count":3}],"id":4,"chat_link":"[&CQQAAAA=]"}

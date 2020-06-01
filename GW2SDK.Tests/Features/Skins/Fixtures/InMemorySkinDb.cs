@@ -19,9 +19,10 @@ namespace GW2SDK.Tests.Features.Skins.Fixtures
                     from json in Skins
                     let jobject = JObject.Parse(json)
                     let entries = jobject.SelectTokens("flags[*]")
-                    select entries.Select(token => token.ToString())).SelectMany(values => values)
-                                                                     .OrderBy(s => s)
-                                                                     .Distinct();
+                    select entries.Select(token => token.ToString()))
+                .SelectMany(values => values)
+                .OrderBy(s => s)
+                .Distinct();
         }
 
         public IEnumerable<string> GetSkinTypeNames()
@@ -30,26 +31,26 @@ namespace GW2SDK.Tests.Features.Skins.Fixtures
                     from json in Skins
                     let jobject = JObject.Parse(json)
                     select jobject.SelectToken("type").ToString()).OrderBy(s => s)
-                                                                  .Distinct();
+                .Distinct();
         }
 
         public IEnumerable<string> GetWeaponTypeNames() =>
             (
                 from jobject in GetSkinsByType("Weapon")
                 select jobject.SelectToken("$.details.type").ToString()).OrderBy(s => s)
-                                                                        .Distinct();
+            .Distinct();
 
         public IEnumerable<string> GetArmorTypeNames() =>
             (
                 from jobject in GetSkinsByType("Armor")
                 select jobject.SelectToken("$.details.type").ToString()).OrderBy(s => s)
-                                                                        .Distinct();
+            .Distinct();
 
         public IEnumerable<string> GetGatheringToolTypeNames() =>
             (
                 from jobject in GetSkinsByType("Gathering")
                 select jobject.SelectToken("$.details.type").ToString()).OrderBy(s => s)
-                                                                        .Distinct();
+            .Distinct();
 
         public IEnumerable<JObject> GetSkinsByType(string typeName) =>
             from json in Skins
@@ -63,9 +64,10 @@ namespace GW2SDK.Tests.Features.Skins.Fixtures
                     from json in Skins
                     let jobject = JObject.Parse(json)
                     let entries = jobject.SelectTokens("rarity")
-                    select entries.Select(token => token.ToString())).SelectMany(values => values)
-                                                                     .OrderBy(s => s)
-                                                                     .Distinct();
+                    select entries.Select(token => token.ToString()))
+                .SelectMany(values => values)
+                .OrderBy(s => s)
+                .Distinct();
         }
 
         public IEnumerable<string> GetSkinRestrictions()
@@ -74,21 +76,22 @@ namespace GW2SDK.Tests.Features.Skins.Fixtures
                     from json in Skins
                     let jobject = JObject.Parse(json)
                     let entries = jobject.SelectTokens("restrictions[*]")
-                    select entries.Select(token => token.ToString())).SelectMany(values => values)
-                                                                     .OrderBy(s => s)
-                                                                     .Distinct();
+                    select entries.Select(token => token.ToString()))
+                .SelectMany(values => values)
+                .OrderBy(s => s)
+                .Distinct();
         }
 
         public IEnumerable<string> GetWeaponDamageTypes() =>
             (
                 from jobject in GetSkinsByType("Weapon")
                 select jobject.SelectToken("$.details.damage_type").ToString()).OrderBy(s => s)
-                                                                               .Distinct();
+            .Distinct();
 
         public IEnumerable<string> GetArmorWeightClasses() =>
             (
                 from jobject in GetSkinsByType("Armor")
                 select jobject.SelectToken("$.details.weight_class").ToString()).OrderBy(s => s)
-                                                                                .Distinct();
+            .Distinct();
     }
 }

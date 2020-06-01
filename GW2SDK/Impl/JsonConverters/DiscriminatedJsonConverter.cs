@@ -24,10 +24,7 @@ namespace GW2SDK.Impl.JsonConverters
 
         public override bool CanWrite => false;
 
-        public override bool CanConvert(Type objectType)
-        {
-            return objectType == _discriminatorOptions.BaseType;
-        }
+        public override bool CanConvert(Type objectType) => objectType == _discriminatorOptions.BaseType;
 
         public override object? ReadJson(JsonReader reader, Type objectType, object? existingValue, JsonSerializer serializer)
         {
@@ -91,9 +88,9 @@ namespace GW2SDK.Impl.JsonConverters
             // There might be a different converter on the 'found' type
             // Use Deserialize to let Json.NET choose the next converter
             // Use Populate to ignore any remaining converters (prevents recursion when the next converter is the same as this)
-            if (found != objectType 
+            if (found != objectType
                 && (found.CustomAttributes.Any(attribute => attribute.AttributeType == typeof(JsonConverterAttribute))
-                || serializer.Converters.Any(converter => converter.CanConvert(found))))
+                    || serializer.Converters.Any(converter => converter.CanConvert(found))))
             {
                 return serializer.Deserialize(json.CreateReader(), found);
             }

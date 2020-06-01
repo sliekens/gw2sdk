@@ -14,7 +14,14 @@ namespace GW2SDK.Tests.Features.Worlds
         [Trait("Importance", "Critical")]
         public void World_population_can_be_serialized_from_json()
         {
-            var expected = new HashSet<string> { "Low", "Medium", "High", "VeryHigh", "Full" };
+            var expected = new HashSet<string>
+            {
+                "Low",
+                "Medium",
+                "High",
+                "VeryHigh",
+                "Full"
+            };
 
             var actual = Enum.GetNames(typeof(WorldPopulation)).ToHashSet();
 

@@ -25,7 +25,27 @@ namespace GW2SDK.Tests.Features.Common
             protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken) =>
                 Task.FromResult(new HttpResponseMessage(_code) { Content = new StringContent(_body) });
         }
-        
+
+        [Theory]
+        [Trait("Category", "Unit")]
+        [InlineData(HttpStatusCode.OK,                 "{}")]
+        [InlineData(HttpStatusCode.BadRequest,         "{}")]
+        [InlineData(HttpStatusCode.Forbidden,          "{}")]
+        [InlineData(HttpStatusCode.ServiceUnavailable, "{}")]
+        public async Task SendAsync_WhenResponseCodeIsNot401_ShouldReturnResponse(HttpStatusCode responseStatus, string responseBody)
+        {
+            var request = new HttpRequestMessage(HttpMethod.Get, "https://api.guildwars2.com/v2.json");
+            var stubHttpMessageHandler = new StubHttpMessageHandler(responseStatus, responseBody);
+
+            var sut = new UnauthorizedMessageHandler(stubHttpMessageHandler);
+
+            var httpClient = new HttpClient(sut);
+
+            var response = await httpClient.SendAsync(request);
+
+            Assert.NotNull(response);
+        }
+
         [Fact]
         [Trait("Category", "Unit")]
         public async Task SendAsync_WhenResponseCodeIs401_ShouldThrowUnauthorizedOperationException()
@@ -44,26 +64,6 @@ namespace GW2SDK.Tests.Features.Common
             var reason = Assert.IsType<UnauthorizedOperationException>(exception);
 
             Assert.Equal("Invalid access token", reason.Message);
-        }
-
-        [Theory]
-        [Trait("Category", "Unit")]
-        [InlineData(HttpStatusCode.OK, "{}")]
-        [InlineData(HttpStatusCode.BadRequest, "{}")]
-        [InlineData(HttpStatusCode.Forbidden, "{}")]
-        [InlineData(HttpStatusCode.ServiceUnavailable, "{}")]
-        public async Task SendAsync_WhenResponseCodeIsNot401_ShouldReturnResponse(HttpStatusCode responseStatus, string responseBody)
-        {
-            var request = new HttpRequestMessage(HttpMethod.Get, "https://api.guildwars2.com/v2.json");
-            var stubHttpMessageHandler = new StubHttpMessageHandler(responseStatus, responseBody);
-
-            var sut = new UnauthorizedMessageHandler(stubHttpMessageHandler);
-
-            var httpClient = new HttpClient(sut);
-
-            var response = await httpClient.SendAsync(request);
-
-            Assert.NotNull(response);
         }
     }
 }

@@ -14,13 +14,13 @@ namespace GW2SDK.Continents
 
         [JsonProperty(Required = Required.Always)]
         public string Objective { get; set; } = "";
-        
+
         [JsonProperty(Required = Required.Always)]
         public int Level { get; set; }
 
         [JsonProperty("coord", Required = Required.Always)]
         public double[] Coordinates { get; set; } = new double[0];
-        
+
         [JsonProperty("bounds", Required = Required.Always)]
         public double[][] Boundaries { get; set; } = new double[0][];
 

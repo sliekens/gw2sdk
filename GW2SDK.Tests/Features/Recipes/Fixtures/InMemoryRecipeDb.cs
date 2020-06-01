@@ -19,9 +19,10 @@ namespace GW2SDK.Tests.Features.Recipes.Fixtures
                     from json in Recipes
                     let jobject = JObject.Parse(json)
                     let entries = jobject.SelectTokens("flags[*]")
-                    select entries.Select(token => token.ToString())).SelectMany(values => values)
-                                                                     .OrderBy(s => s)
-                                                                     .Distinct();
+                    select entries.Select(token => token.ToString()))
+                .SelectMany(values => values)
+                .OrderBy(s => s)
+                .Distinct();
         }
 
         public IEnumerable<string> GetRecipeTypeNames()
@@ -29,8 +30,10 @@ namespace GW2SDK.Tests.Features.Recipes.Fixtures
             return (
                     from json in Recipes
                     let jobject = JObject.Parse(json)
-                    select jobject.SelectToken("type").ToString()).OrderBy(s => s)
-                                                                  .Distinct();
+                    select jobject.SelectToken("type")
+                        .ToString())
+                .OrderBy(s => s)
+                .Distinct();
         }
 
         public IEnumerable<string> GetRecipeDisciplines() =>
@@ -38,8 +41,9 @@ namespace GW2SDK.Tests.Features.Recipes.Fixtures
                 from json in Recipes
                 let jobject = JObject.Parse(json)
                 let entries = jobject.SelectTokens("disciplines[*]")
-                select entries.Select(token => token.ToString())).SelectMany(values => values)
-                                                                 .OrderBy(s => s)
-                                                                 .Distinct();
+                select entries.Select(token => token.ToString()))
+            .SelectMany(values => values)
+            .OrderBy(s => s)
+            .Distinct();
     }
 }

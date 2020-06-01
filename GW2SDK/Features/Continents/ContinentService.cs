@@ -126,7 +126,10 @@ namespace GW2SDK.Continents
             return JsonConvert.DeserializeObject<Floor>(json, settings ?? Json.DefaultJsonSerializerSettings);
         }
 
-        public async Task<IDataTransferCollection<Floor>> GetFloorsByIds(int continentId, IReadOnlyCollection<int> floorIds, JsonSerializerSettings? settings = null)
+        public async Task<IDataTransferCollection<Floor>> GetFloorsByIds(
+            int continentId,
+            IReadOnlyCollection<int> floorIds,
+            JsonSerializerSettings? settings = null)
         {
             if (floorIds == null)
             {
@@ -148,7 +151,11 @@ namespace GW2SDK.Continents
             return new DataTransferCollection<Floor>(list, context);
         }
 
-        public async Task<IDataTransferPage<Floor>> GetFloorsByPage(int continentId, int pageIndex, int? pageSize = null, JsonSerializerSettings? settings = null)
+        public async Task<IDataTransferPage<Floor>> GetFloorsByPage(
+            int continentId,
+            int pageIndex,
+            int? pageSize = null,
+            JsonSerializerSettings? settings = null)
         {
             var request = new FloorsByPageRequest(continentId, pageIndex, pageSize);
             using var response = await _http.SendAsync(request).ConfigureAwait(false);

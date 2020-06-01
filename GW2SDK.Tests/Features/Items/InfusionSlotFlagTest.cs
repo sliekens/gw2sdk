@@ -23,10 +23,10 @@ namespace GW2SDK.Tests.Features.Items
         public void Infusion_slot_flag_can_be_serialized_from_json()
         {
             var expected = _fixture.Db.GetInfusionSlotFlags()
-                                   .Concat(_fixture.Db.GetUpgradeComponentInfusionUpgradeFlags())
-                                   .OrderBy(name => name)
-                                   .Distinct()
-                                   .ToHashSet();
+                .Concat(_fixture.Db.GetUpgradeComponentInfusionUpgradeFlags())
+                .OrderBy(name => name)
+                .Distinct()
+                .ToHashSet();
 
             var actual = Enum.GetNames(typeof(InfusionSlotFlag)).ToHashSet();
 

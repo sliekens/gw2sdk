@@ -40,7 +40,7 @@ namespace GW2SDK.Tests.Features.Tokens.Fixtures
             Urls = new List<string> { "/v2/tokeninfo", "/v2/account", "/v2/characters/My Cool Character" };
 
             var createdSubtoken = await subtokenService.CreateSubtoken(ConfigurationManager.Instance.ApiKeyFull, SubtokenPermissions, ExpiresAt, Urls);
-            
+
             // All tests that use this fixture are flaky: GetTokenInfo occassionally fails right after the subtoken is created
             // Adding a delay seems to help, possibly because of clock skew?
             await Task.Delay(1000);
