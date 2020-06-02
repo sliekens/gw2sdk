@@ -20,7 +20,7 @@ namespace GW2SDK.Tests.Features.Items
         [Trait("Feature",    "Items")]
         [Trait("Category",   "Integration")]
         [Trait("Importance", "Critical")]
-        public void Item_flag_can_be_serialized_from_json()
+        public void Item_flag_can_be_created_from_json()
         {
             var expected = _fixture.Db.GetItemFlags().ToHashSet();
 

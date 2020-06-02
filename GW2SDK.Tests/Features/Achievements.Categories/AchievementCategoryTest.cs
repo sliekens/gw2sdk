@@ -21,11 +21,16 @@ namespace GW2SDK.Tests.Features.Achievements.Categories
 
         private readonly ITestOutputHelper _output;
 
+        private static class AchievementCategoryFact
+        {
+            public static void Order_is_not_negative(AchievementCategory actual) => Assert.InRange(actual.Order, 0, int.MaxValue);
+        }
+
         [Fact]
         [Trait("Feature",    "Achievements.Categories")]
         [Trait("Category",   "Integration")]
         [Trait("Importance", "Critical")]
-        public void Achievement_categories_can_be_serialized_from_json()
+        public void Achievement_categories_can_be_created_from_json()
         {
             var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output))
                 .UseMissingMemberHandling(MissingMemberHandling.Error)
@@ -34,22 +39,8 @@ namespace GW2SDK.Tests.Features.Achievements.Categories
             AssertEx.ForEach(_fixture.Db.AchievementCategories,
                 json =>
                 {
-                    // Next statement throws if there are missing members
-                    _ = JsonConvert.DeserializeObject<AchievementCategory>(json, settings);
-                });
-        }
-
-        [Fact]
-        [Trait("Feature",  "Achievements.Categories")]
-        [Trait("Category", "Integration")]
-        public void Order_is_not_negative()
-        {
-            var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output)).Build();
-            AssertEx.ForEach(_fixture.Db.AchievementCategories,
-                json =>
-                {
                     var actual = JsonConvert.DeserializeObject<AchievementCategory>(json, settings);
-                    Assert.InRange(actual.Order, 0, int.MaxValue);
+                    AchievementCategoryFact.Order_is_not_negative(actual);
                 });
         }
     }

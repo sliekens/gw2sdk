@@ -21,40 +21,30 @@ namespace GW2SDK.Tests.Features.Colors
 
         private readonly ITestOutputHelper _output;
 
+        private static class ColorFact
+        {
+            public static void Base_rgb_contains_red_green_blue(Color actual) => Assert.Collection(actual.BaseRgb,
+                red => Assert.InRange(red,     1, 255),
+                green => Assert.InRange(green, 1, 255),
+                blue => Assert.InRange(blue,   1, 255));
+        }
+
         [Fact]
         [Trait("Feature",    "Colors")]
         [Trait("Category",   "Integration")]
         [Trait("Importance", "Critical")]
-        public void Colors_can_be_serialized_from_json()
+        public void Colors_can_be_created_from_json()
         {
-            var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output))
+            var settings = new JsonSerializerSettingsBuilder()
+                .UseTraceWriter(new XunitTraceWriter(_output))
                 .UseMissingMemberHandling(MissingMemberHandling.Error)
                 .Build();
 
             AssertEx.ForEach(_fixture.Db.Colors,
                 json =>
                 {
-                    // Next statement throws if there are missing members
-                    _ = JsonConvert.DeserializeObject<Color>(json, settings);
-                });
-        }
-
-        [Fact]
-        [Trait("Feature",  "Colors")]
-        [Trait("Category", "Integration")]
-        public void Base_rgb_contains_red_green_blue()
-        {
-            var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output)).Build();
-
-            AssertEx.ForEach(_fixture.Db.Colors,
-                json =>
-                {
                     var actual = JsonConvert.DeserializeObject<Color>(json, settings);
-
-                    Assert.Collection(actual.BaseRgb,
-                        red => Assert.InRange(red,     1, 255),
-                        green => Assert.InRange(green, 1, 255),
-                        blue => Assert.InRange(blue,   1, 255));
+                    ColorFact.Base_rgb_contains_red_green_blue(actual);
                 });
         }
     }

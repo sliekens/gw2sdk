@@ -21,21 +21,28 @@ namespace GW2SDK.Tests.Features.Continents
 
         private readonly ITestOutputHelper _output;
 
+        private static class ContinentFact
+        {
+            public static void Id_is_1_or_2(Continent actual) => Assert.InRange(actual.Id, 1, 2);
+        }
+
         [Fact]
         [Trait("Feature",    "Continents")]
         [Trait("Category",   "Integration")]
         [Trait("Importance", "Critical")]
-        public void Continents_can_be_serialized_from_json()
+        public void Continents_can_be_created_from_json()
         {
-            var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output))
+            var settings = new JsonSerializerSettingsBuilder()
+                .UseTraceWriter(new XunitTraceWriter(_output))
                 .UseMissingMemberHandling(MissingMemberHandling.Error)
                 .Build();
 
             AssertEx.ForEach(_fixture.Db.Continents,
                 json =>
                 {
-                    // Next statement throws if there are missing members
-                    _ = JsonConvert.DeserializeObject<Continent>(json, settings);
+                    var actual = JsonConvert.DeserializeObject<Continent>(json, settings);
+
+                    ContinentFact.Id_is_1_or_2(actual);
                 });
         }
     }

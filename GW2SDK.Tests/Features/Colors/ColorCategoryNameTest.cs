@@ -20,7 +20,7 @@ namespace GW2SDK.Tests.Features.Colors
         [Trait("Feature",    "Colors")]
         [Trait("Category",   "Integration")]
         [Trait("Importance", "Critical")]
-        public void Color_category_names_can_be_serialized_from_json()
+        public void Color_category_names_can_be_created_from_json()
         {
             var expected = _fixture.Db.GetColorCategoryNames().ToHashSet();
 

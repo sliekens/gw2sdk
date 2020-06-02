@@ -20,7 +20,7 @@ namespace GW2SDK.Tests.Features.Skins
         [Trait("Feature",    "Skins")]
         [Trait("Category",   "Integration")]
         [Trait("Importance", "Critical")]
-        public void Skin_restriction_can_be_serialized_from_json()
+        public void Skin_restriction_can_be_created_from_json()
         {
             var expected = _fixture.Db.GetSkinRestrictions().ToHashSet();
 
