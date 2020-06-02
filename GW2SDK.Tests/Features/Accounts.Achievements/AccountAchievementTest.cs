@@ -20,11 +20,16 @@ namespace GW2SDK.Tests.Features.Accounts.Achievements
 
         private readonly ITestOutputHelper _output;
 
+        private static class AccountAchievementFact
+        {
+            public static void Id_is_positive(AccountAchievement actual) => Assert.InRange(actual.Id, 1, int.MaxValue);
+        }
+
         [Fact]
         [Trait("Feature",    "Accounts.Achievements")]
         [Trait("Category",   "Integration")]
         [Trait("Importance", "Critical")]
-        public void Account_achievements_can_be_serialized_from_json()
+        public void Account_achievements_can_be_created_from_json()
         {
             var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output))
                 .UseMissingMemberHandling(MissingMemberHandling.Error)
@@ -33,8 +38,9 @@ namespace GW2SDK.Tests.Features.Accounts.Achievements
             AssertEx.ForEach(_fixture.Db.AccountAchievements,
                 json =>
                 {
-                    // Next statement throws if there are missing members
-                    _ = JsonConvert.DeserializeObject<AccountAchievement>(json, settings);
+                    var actual = JsonConvert.DeserializeObject<AccountAchievement>(json, settings);
+
+                    AccountAchievementFact.Id_is_positive(actual);
                 });
         }
     }

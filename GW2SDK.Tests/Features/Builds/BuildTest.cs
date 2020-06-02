@@ -20,30 +20,25 @@ namespace GW2SDK.Tests.Features.Builds
 
         private readonly ITestOutputHelper _output;
 
+        private static class BuildFact
+        {
+            public static void Id_is_positive(Build actual) => Assert.InRange(actual.Id, 1, int.MaxValue);
+        }
+
         [Fact]
         [Trait("Feature",    "Builds")]
         [Trait("Category",   "Integration")]
         [Trait("Importance", "Critical")]
-        public void Builds_can_be_serialized_from_json()
+        public void Build_can_be_created_from_json()
         {
-            var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output))
+            var settings = new JsonSerializerSettingsBuilder()
+                .UseTraceWriter(new XunitTraceWriter(_output))
                 .UseMissingMemberHandling(MissingMemberHandling.Error)
                 .Build();
 
-            // Next statement throws if there are missing members
-            _ = JsonConvert.DeserializeObject<Build>(_fixture.Build, settings);
-        }
-
-        [Fact]
-        [Trait("Feature",  "Builds")]
-        [Trait("Category", "Integration")]
-        public void Id_is_positive()
-        {
-            var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output)).Build();
-
             var actual = JsonConvert.DeserializeObject<Build>(_fixture.Build, settings);
 
-            Assert.InRange(actual.Id, 1, int.MaxValue);
+            BuildFact.Id_is_positive(actual);
         }
     }
 }

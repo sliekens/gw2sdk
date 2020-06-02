@@ -21,11 +21,30 @@ namespace GW2SDK.Tests.Features.Continents
 
         private readonly ITestOutputHelper _output;
 
+        private static class FloorFact
+        {
+            public static void Texture_dimensions_contains_width_and_height(Floor actual) => Assert.Equal(2, actual.TextureDimensions.Length);
+
+            public static void Label_coordinates_of_a_region_contains_a_point(Floor actual) => Assert.All(actual.Regions.Values,
+                region =>
+                {
+                    Assert.Equal(2, region.LabelCoordinates.Length);
+                });
+
+            public static void Continent_rectangle_of_a_region_contains_2_points(Floor actual) => Assert.All(actual.Regions.Values,
+                region =>
+                {
+                    Assert.Equal(2, region.ContinentRectangle.Length);
+                    Assert.Equal(2, region.ContinentRectangle[0].Length);
+                    Assert.Equal(2, region.ContinentRectangle[1].Length);
+                });
+        }
+
         [Fact]
         [Trait("Feature",    "Continents")]
         [Trait("Category",   "Integration")]
         [Trait("Importance", "Critical")]
-        public void Floors_can_be_serialized_from_json()
+        public void Floors_can_be_created_from_json()
         {
             var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output))
                 .UseMissingMemberHandling(MissingMemberHandling.Error)
@@ -34,63 +53,11 @@ namespace GW2SDK.Tests.Features.Continents
             AssertEx.ForEach(_fixture.Db.Floors,
                 json =>
                 {
-                    // Next statement throws if there are missing members
-                    _ = JsonConvert.DeserializeObject<Floor>(json, settings);
-                });
-        }
-
-        [Fact]
-        [Trait("Feature",  "Continents")]
-        [Trait("Category", "Integration")]
-        public void Texture_dimensions_contains_width_and_height()
-        {
-            var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output)).Build();
-
-            AssertEx.ForEach(_fixture.Db.Floors,
-                json =>
-                {
                     var actual = JsonConvert.DeserializeObject<Floor>(json, settings);
 
-                    Assert.Equal(2, actual.TextureDimensions.Length);
-                });
-        }
-
-        [Fact]
-        [Trait("Feature",  "Continents")]
-        [Trait("Category", "Integration")]
-        public void Label_coordinates_of_a_region_contains_a_point()
-        {
-            var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output)).Build();
-            AssertEx.ForEach(_fixture.Db.Floors,
-                json =>
-                {
-                    var floor = JsonConvert.DeserializeObject<Floor>(json, settings);
-                    Assert.All(floor.Regions.Values,
-                        actual =>
-                        {
-                            Assert.Equal(2, actual.LabelCoordinates.Length);
-                        });
-                });
-        }
-
-        [Fact]
-        [Trait("Feature",  "Continents")]
-        [Trait("Category", "Integration")]
-        public void Continent_rectangle_of_a_region_contains_2_points()
-        {
-            var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output)).Build();
-
-            AssertEx.ForEach(_fixture.Db.Floors,
-                json =>
-                {
-                    var floor = JsonConvert.DeserializeObject<Floor>(json, settings);
-                    Assert.All(floor.Regions.Values,
-                        actual =>
-                        {
-                            Assert.Equal(2, actual.ContinentRectangle.Length);
-                            Assert.Equal(2, actual.ContinentRectangle[0].Length);
-                            Assert.Equal(2, actual.ContinentRectangle[1].Length);
-                        });
+                    FloorFact.Texture_dimensions_contains_width_and_height(actual);
+                    FloorFact.Label_coordinates_of_a_region_contains_a_point(actual);
+                    FloorFact.Continent_rectangle_of_a_region_contains_2_points(actual);
                 });
         }
     }

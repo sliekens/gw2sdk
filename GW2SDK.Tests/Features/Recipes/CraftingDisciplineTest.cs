@@ -20,7 +20,7 @@ namespace GW2SDK.Tests.Features.Recipes
         [Trait("Feature",    "Recipes")]
         [Trait("Category",   "Integration")]
         [Trait("Importance", "Critical")]
-        public void Crafting_discipline_can_be_serialized_from_json()
+        public void Crafting_discipline_can_be_created_from_json()
         {
             var expected = _fixture.Db.GetRecipeDisciplines().ToHashSet();
 

@@ -24,14 +24,16 @@ namespace GW2SDK.Tests.Features.Subtokens
         [Trait("Feature",    "Subtokens")]
         [Trait("Category",   "Integration")]
         [Trait("Importance", "Critical")]
-        public void Subtokens_can_be_serialized_from_json()
+        public void Subtokens_can_be_created_from_json()
         {
-            var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output))
+            var settings = new JsonSerializerSettingsBuilder()
+                .UseTraceWriter(new XunitTraceWriter(_output))
                 .UseMissingMemberHandling(MissingMemberHandling.Error)
                 .Build();
 
-            // Next statement throws if there are missing members
-            _ = JsonConvert.DeserializeObject<CreatedSubtoken>(_fixture.CreatedSubtoken, settings);
+            var actual = JsonConvert.DeserializeObject<CreatedSubtoken>(_fixture.CreatedSubtoken, settings);
+
+            Assert.NotEmpty(actual.Subtoken);
         }
     }
 }

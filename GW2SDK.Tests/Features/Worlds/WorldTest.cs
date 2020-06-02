@@ -22,66 +22,34 @@ namespace GW2SDK.Tests.Features.Worlds
 
         private readonly ITestOutputHelper _output;
 
+        private static class WorldFact
+        {
+            public static void Id_is_positive(World actual) => Assert.InRange(actual.Id, 1, int.MaxValue);
+
+            public static void Name_is_not_empty(World actual) => Assert.NotEmpty(actual.Name);
+
+            public static void World_population_type_is_supported(World actual) => Assert.True(Enum.IsDefined(typeof(WorldPopulation), actual.Population));
+        }
+
         [Fact]
         [Trait("Feature",    "Worlds")]
         [Trait("Category",   "Integration")]
         [Trait("Importance", "Critical")]
-        public void Worlds_can_be_serialized_from_json()
+        public void Worlds_can_be_created_from_json()
         {
-            var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output))
+            var settings = new JsonSerializerSettingsBuilder()
+                .UseTraceWriter(new XunitTraceWriter(_output))
                 .UseMissingMemberHandling(MissingMemberHandling.Error)
                 .Build();
 
             AssertEx.ForEach(_fixture.Db.Worlds,
                 json =>
                 {
-                    // Next statement throws if there are missing members
-                    _ = JsonConvert.DeserializeObject<World>(json, settings);
-                });
-        }
-
-        [Fact]
-        [Trait("Feature",  "Worlds")]
-        [Trait("Category", "Integration")]
-        public void Id_is_positive()
-        {
-            var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output)).Build();
-
-            AssertEx.ForEach(_fixture.Db.Worlds,
-                json =>
-                {
                     var actual = JsonConvert.DeserializeObject<World>(json, settings);
-                    Assert.InRange(actual.Id, 1, int.MaxValue);
-                });
-        }
 
-        [Fact]
-        [Trait("Feature",  "Worlds")]
-        [Trait("Category", "Integration")]
-        public void Name_is_not_empty()
-        {
-            var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output)).Build();
-
-            AssertEx.ForEach(_fixture.Db.Worlds,
-                json =>
-                {
-                    var actual = JsonConvert.DeserializeObject<World>(json, settings);
-                    Assert.NotEmpty(actual.Name);
-                });
-        }
-
-        [Fact]
-        [Trait("Feature",  "Worlds")]
-        [Trait("Category", "Integration")]
-        public void World_population_type_is_supported()
-        {
-            var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output)).Build();
-
-            AssertEx.ForEach(_fixture.Db.Worlds,
-                json =>
-                {
-                    var actual = JsonConvert.DeserializeObject<World>(json, settings);
-                    Assert.True(Enum.IsDefined(typeof(WorldPopulation), actual.Population));
+                    WorldFact.Id_is_positive(actual);
+                    WorldFact.Name_is_not_empty(actual);
+                    WorldFact.World_population_type_is_supported(actual);
                 });
         }
     }

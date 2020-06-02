@@ -12,7 +12,7 @@ namespace GW2SDK.Tests.Features.Worlds
         [Trait("Feature",    "Worlds")]
         [Trait("Category",   "Integration")]
         [Trait("Importance", "Critical")]
-        public void World_population_can_be_serialized_from_json()
+        public void World_population_can_be_created_from_json()
         {
             var expected = new HashSet<string>
             {

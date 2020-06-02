@@ -19,7 +19,7 @@ namespace GW2SDK.Tests.Features.Achievements
         [Fact]
         [Trait("Feature",  "Achievements")]
         [Trait("Category", "Integration")]
-        public void AchievementFlag_can_be_serialized_from_json()
+        public void AchievementFlag_can_be_created_from_json()
         {
             var expected = Enum.GetNames(typeof(AchievementFlag)).ToHashSet();
 

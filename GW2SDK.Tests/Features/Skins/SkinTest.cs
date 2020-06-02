@@ -21,11 +21,16 @@ namespace GW2SDK.Tests.Features.Skins
 
         private readonly ITestOutputHelper _output;
 
+        private static class SkinFact
+        {
+            public static void Id_is_positive(Skin actual) => Assert.InRange(actual.Id, 1, int.MaxValue);
+        }
+
         [Fact]
         [Trait("Feature",    "Skins")]
         [Trait("Category",   "Integration")]
         [Trait("Importance", "Critical")]
-        public void Skins_can_be_serialized_from_json()
+        public void Skins_can_be_created_from_json()
         {
             var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output))
                 .UseMissingMemberHandling(MissingMemberHandling.Error)
@@ -33,22 +38,9 @@ namespace GW2SDK.Tests.Features.Skins
             AssertEx.ForEach(_fixture.Db.Skins,
                 json =>
                 {
-                    // Next statement throws if there are missing members
-                    _ = JsonConvert.DeserializeObject<Skin>(json, settings);
-                });
-        }
-
-        [Fact]
-        [Trait("Feature",  "Skins")]
-        [Trait("Category", "Integration")]
-        public void Id_is_positive()
-        {
-            var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output)).Build();
-            AssertEx.ForEach(_fixture.Db.Skins,
-                json =>
-                {
                     var actual = JsonConvert.DeserializeObject<Skin>(json, settings);
-                    Assert.InRange(actual.Id, 1, int.MaxValue);
+
+                    SkinFact.Id_is_positive(actual);
                 });
         }
     }

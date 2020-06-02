@@ -21,11 +21,16 @@ namespace GW2SDK.Tests.Features.Commerce.Prices
 
         private readonly ITestOutputHelper _output;
 
+        private static class ItemPriceFact
+        {
+            public static void Id_is_positive(ItemPrice actual) => Assert.InRange(actual.Id, 1, int.MaxValue);
+        }
+
         [Fact]
         [Trait("Feature",    "Commerce.Prices")]
         [Trait("Category",   "Integration")]
         [Trait("Importance", "Critical")]
-        public void Item_prices_can_be_serialized_from_json()
+        public void Item_prices_can_be_created_from_json()
         {
             var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output))
                 .UseMissingMemberHandling(MissingMemberHandling.Error)
@@ -33,8 +38,9 @@ namespace GW2SDK.Tests.Features.Commerce.Prices
             AssertEx.ForEach(_fixture.Db.ItemPrices,
                 json =>
                 {
-                    // Next statement throws if there are missing members
-                    _ = JsonConvert.DeserializeObject<ItemPrice>(json, settings);
+                    var actual = JsonConvert.DeserializeObject<ItemPrice>(json, settings);
+
+                    ItemPriceFact.Id_is_positive(actual);
                 });
         }
     }

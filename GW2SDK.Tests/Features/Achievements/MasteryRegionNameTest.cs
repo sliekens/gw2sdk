@@ -20,7 +20,7 @@ namespace GW2SDK.Tests.Features.Achievements
         [Trait("Feature",    "Achievements")]
         [Trait("Category",   "Integration")]
         [Trait("Importance", "Critical")]
-        public void Mastery_region_names_can_be_serialized_from_json()
+        public void Mastery_region_names_can_be_created_from_json()
         {
             var expected = _fixture.Db.GetMasteryRegionNames().ToHashSet();
 

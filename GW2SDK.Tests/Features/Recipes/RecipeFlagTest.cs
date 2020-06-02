@@ -20,7 +20,7 @@ namespace GW2SDK.Tests.Features.Recipes
         [Trait("Feature",    "Recipes")]
         [Trait("Category",   "Integration")]
         [Trait("Importance", "Critical")]
-        public void Recipe_flag_can_be_serialized_from_json()
+        public void Recipe_flag_can_be_created_from_json()
         {
             var expected = _fixture.Db.GetRecipeFlags().ToHashSet();
 
