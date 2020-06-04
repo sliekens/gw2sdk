@@ -31,7 +31,6 @@ namespace GW2SDK.Tests.TestInfrastructure
         public Container()
         {
             var services = new ServiceCollection();
-            services.AddTransient(sp => new SocketsHttpHandler { AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate });
             services.AddTransient<UnauthorizedMessageHandler>();
             services.AddTransient<BadMessageHandler>();
             services.AddTransient<RateLimitHandler>();
@@ -42,27 +41,28 @@ namespace GW2SDK.Tests.TestInfrastructure
                         http.UseLatestSchemaVersion();
                         http.UseDataCompression();
                     })
-                .ConfigurePrimaryHttpMessageHandler(sp => sp.GetRequiredService<SocketsHttpHandler>())
+                .ConfigurePrimaryHttpMessageHandler(() =>
+                    new SocketsHttpHandler { AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate })
                 .AddPolicyHandler(HttpPolicy.SelectPolicy)
                 .AddHttpMessageHandler<UnauthorizedMessageHandler>()
                 .AddHttpMessageHandler<BadMessageHandler>()
                 .AddHttpMessageHandler<RateLimitHandler>()
-                .AddTypedClient(http => new AccountService(http))
-                .AddTypedClient(http => new AccountAchievementService(http))
-                .AddTypedClient(http => new AchievementService(http))
-                .AddTypedClient(http => new AchievementCategoryService(http))
-                .AddTypedClient(http => new AchievementGroupService(http))
-                .AddTypedClient(http => new BuildService(http))
-                .AddTypedClient(http => new ColorService(http))
-                .AddTypedClient(http => new ContinentService(http))
-                .AddTypedClient(http => new ItemService(http))
-                .AddTypedClient(http => new ItemPriceService(http))
-                .AddTypedClient(http => new RecipeService(http))
-                .AddTypedClient(http => new SearchRecipeService(http))
-                .AddTypedClient(http => new SkinService(http))
-                .AddTypedClient(http => new SubtokenService(http))
-                .AddTypedClient(http => new TokenInfoService(http))
-                .AddTypedClient(http => new WorldService(http));
+                .AddTypedClient<AccountService>()
+                .AddTypedClient<AccountAchievementService>()
+                .AddTypedClient<AchievementService>()
+                .AddTypedClient<AchievementCategoryService>()
+                .AddTypedClient<AchievementGroupService>()
+                .AddTypedClient<BuildService>()
+                .AddTypedClient<ColorService>()
+                .AddTypedClient<ContinentService>()
+                .AddTypedClient<ItemService>()
+                .AddTypedClient<ItemPriceService>()
+                .AddTypedClient<RecipeService>()
+                .AddTypedClient<SearchRecipeService>()
+                .AddTypedClient<SkinService>()
+                .AddTypedClient<SubtokenService>()
+                .AddTypedClient<TokenInfoService>()
+                .AddTypedClient<WorldService>();
 
             _services = services.BuildServiceProvider();
         }
