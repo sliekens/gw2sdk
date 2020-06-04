@@ -16,7 +16,6 @@ namespace GW2SDK.TestDataHelper
         public Container()
         {
             var services = new ServiceCollection();
-            services.AddTransient(sp => new SocketsHttpHandler { AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate });
             services.AddTransient<UnauthorizedMessageHandler>();
             services.AddTransient<BadMessageHandler>();
             services.AddTransient<RateLimitHandler>();
@@ -27,24 +26,25 @@ namespace GW2SDK.TestDataHelper
                         http.UseLatestSchemaVersion();
                         http.UseDataCompression();
                     })
-                .ConfigurePrimaryHttpMessageHandler(sp => sp.GetRequiredService<SocketsHttpHandler>())
+                .ConfigurePrimaryHttpMessageHandler(() =>
+                    new SocketsHttpHandler { AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate })
                 .AddPolicyHandler(HttpPolicy.SelectPolicy)
                 .AddHttpMessageHandler<UnauthorizedMessageHandler>()
                 .AddHttpMessageHandler<BadMessageHandler>()
                 .AddHttpMessageHandler<RateLimitHandler>()
-                .AddTypedClient(http => new ContinentService(http))
-                .AddTypedClient(http => new JsonAchievementService(http))
-                .AddTypedClient(http => new JsonAchievementCategoriesService(http))
-                .AddTypedClient(http => new JsonAchievementGroupsService(http))
-                .AddTypedClient(http => new JsonBuildService(http))
-                .AddTypedClient(http => new JsonColorService(http))
-                .AddTypedClient(http => new JsonContinentService(http))
-                .AddTypedClient(http => new JsonFloorService(http))
-                .AddTypedClient(http => new JsonItemService(http))
-                .AddTypedClient(http => new JsonItemPriceService(http))
-                .AddTypedClient(http => new JsonRecipeService(http))
-                .AddTypedClient(http => new JsonSkinService(http))
-                .AddTypedClient(http => new JsonWorldService(http));
+                .AddTypedClient<ContinentService>()
+                .AddTypedClient<JsonAchievementService>()
+                .AddTypedClient<JsonAchievementCategoriesService>()
+                .AddTypedClient<JsonAchievementGroupsService>()
+                .AddTypedClient<JsonBuildService>()
+                .AddTypedClient<JsonColorService>()
+                .AddTypedClient<JsonContinentService>()
+                .AddTypedClient<JsonFloorService>()
+                .AddTypedClient<JsonItemService>()
+                .AddTypedClient<JsonItemPriceService>()
+                .AddTypedClient<JsonRecipeService>()
+                .AddTypedClient<JsonSkinService>()
+                .AddTypedClient<JsonWorldService>();
             _services = services.BuildServiceProvider();
         }
 
