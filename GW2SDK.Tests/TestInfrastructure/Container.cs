@@ -28,14 +28,14 @@ namespace GW2SDK.Tests.TestInfrastructure
     {
         private readonly ServiceProvider _services;
 
-        public Container(string accessToken = null)
+        public Container()
         {
             var services = new ServiceCollection();
             services.AddTransient(sp => new SocketsHttpHandler { AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate });
             services.AddTransient<UnauthorizedMessageHandler>();
             services.AddTransient<BadMessageHandler>();
             services.AddTransient<RateLimitHandler>();
-            var httpBuilder = services.AddHttpClient("GW2SDK",
+            services.AddHttpClient("GW2SDK",
                     http =>
                     {
                         http.UseBaseAddress(ConfigurationManager.Instance.BaseAddress);
@@ -63,10 +63,6 @@ namespace GW2SDK.Tests.TestInfrastructure
                 .AddTypedClient(http => new SubtokenService(http))
                 .AddTypedClient(http => new TokenInfoService(http))
                 .AddTypedClient(http => new WorldService(http));
-            if (accessToken is string)
-            {
-                httpBuilder.ConfigureHttpClient(client => client.UseAccessToken(accessToken));
-            }
 
             _services = services.BuildServiceProvider();
         }

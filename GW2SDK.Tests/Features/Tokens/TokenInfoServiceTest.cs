@@ -1,5 +1,7 @@
-﻿using System.Threading.Tasks;
+﻿using System.Net.Http;
+using System.Threading.Tasks;
 using GW2SDK.Exceptions;
+using GW2SDK.Extensions;
 using GW2SDK.Tests.Features.Tokens.Fixtures;
 using GW2SDK.Tests.TestInfrastructure;
 using GW2SDK.Tokens;
@@ -34,9 +36,11 @@ namespace GW2SDK.Tests.Features.Tokens
         [Trait("Category", "Integration")]
         public async Task Get_token_info_for_default_authorization()
         {
-            await using var services = new Container(ConfigurationManager.Instance.ApiKeyFull);
+            await using var services = new Container();
 
-            var sut = services.Resolve<TokenInfoService>();
+            var http = services.Resolve<IHttpClientFactory>().CreateClient("GW2SDK");
+            http.UseAccessToken(ConfigurationManager.Instance.ApiKeyFull);
+            var sut = new TokenInfoService(http);
 
             var actual = await sut.GetTokenInfo(null);
 
