@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Threading.Tasks;
 using GW2SDK.Exceptions;
+using GW2SDK.Extensions;
 using GW2SDK.Subtokens;
 using GW2SDK.Tests.TestInfrastructure;
 using GW2SDK.Tokens;
@@ -30,9 +32,12 @@ namespace GW2SDK.Tests.Features.Subtokens
         [Trait("Category", "Integration")]
         public async Task Create_a_subtoken_from_default_authorization()
         {
-            await using var services = new Container(ConfigurationManager.Instance.ApiKeyFull);
+            await using var services = new Container();
 
-            var sut = services.Resolve<SubtokenService>();
+            var http = services.Resolve<IHttpClientFactory>().CreateClient("GW2SDK");
+            http.UseAccessToken(ConfigurationManager.Instance.ApiKeyFull);
+            var sut = new SubtokenService(http);
+
 
             var actual = await sut.CreateSubtoken(null);
 
