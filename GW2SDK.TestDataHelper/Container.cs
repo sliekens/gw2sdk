@@ -54,33 +54,4 @@ namespace GW2SDK.TestDataHelper
 
         public T Resolve<T>() => _services.GetRequiredService<T>();
     }
-
-    internal static class HttpClientFactoryRegressionWorkaround
-    {
-        internal static IHttpClientBuilder AddTypedClient<TClient>(this IHttpClientBuilder builder, Func<HttpClient, TClient> factory)
-            where TClient : class
-        {
-            if (builder == null)
-            {
-                throw new ArgumentNullException(nameof(builder));
-            }
-
-            if (factory == null)
-            {
-                throw new ArgumentNullException(nameof(factory));
-            }
-
-            // ReserveClient(builder, typeof(TClient), builder.Name);
-
-            builder.Services.AddTransient(s =>
-            {
-                var httpClientFactory = s.GetRequiredService<IHttpClientFactory>();
-                var httpClient = httpClientFactory.CreateClient(builder.Name);
-
-                return factory(httpClient);
-            });
-
-            return builder;
-        }
-    }
 }
