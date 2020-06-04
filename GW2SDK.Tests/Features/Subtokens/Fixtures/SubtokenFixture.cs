@@ -16,9 +16,9 @@ namespace GW2SDK.Tests.Features.Subtokens.Fixtures
             var http = container.Resolve<IHttpClientFactory>().CreateClient("GW2SDK");
 
             var request = new CreateSubtokenRequest(ConfigurationManager.Instance.ApiKeyFull);
-            using var response = await http.SendAsync(request).ConfigureAwait(false);
+            using var response = await http.SendAsync(request);
             response.EnsureSuccessStatusCode();
-            CreatedSubtoken = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
+            CreatedSubtoken = await response.Content.ReadAsStringAsync();
         }
 
         public Task DisposeAsync() => Task.CompletedTask;
