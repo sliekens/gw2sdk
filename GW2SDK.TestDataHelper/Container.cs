@@ -9,21 +9,9 @@ using GW2SDK.Impl.HttpMessageHandlers;
 using Microsoft.Extensions.DependencyInjection;
 using Polly;
 using Polly.Timeout;
-using AsyncRetryTResultSyntax = Polly.AsyncRetryTResultSyntax;
-using Policy = Polly.Policy;
 
 namespace GW2SDK.TestDataHelper
 {
-    internal class Fiddler : WebProxy
-    {
-        private Fiddler()
-            : base("localhost", 8888)
-        {
-        }
-
-        public static Fiddler Instance { get; } = new Fiddler();
-    }
-
     public class Container : IDisposable, IAsyncDisposable
     {
         private static readonly Random Jitterer = new Random();
@@ -34,10 +22,9 @@ namespace GW2SDK.TestDataHelper
             var services = new ServiceCollection();
             var policies = services.AddPolicyRegistry();
             var innerTimeout = Policy.TimeoutAsync<HttpResponseMessage>(TimeSpan.FromSeconds(10), TimeoutStrategy.Optimistic);
-            var immediateRetry = Policy.Handle<HttpRequestException>()
+            var immediateRetry = AsyncRetryTResultSyntax.RetryForeverAsync(Policy.Handle<HttpRequestException>()
                 .Or<TimeoutRejectedException>()
-                .OrResult<HttpResponseMessage>(r => (int) r.StatusCode >= 500)
-                .RetryForeverAsync();
+                .OrResult<HttpResponseMessage>(r => (int) r.StatusCode >= 500));
             var rateLimit = Policy.Handle<TooManyRequestsException>()
                 .WaitAndRetryForeverAsync(retryAttempt =>
                     TimeSpan.FromSeconds(Math.Min(8, Math.Pow(2, retryAttempt))) + TimeSpan.FromMilliseconds(Jitterer.Next(0, 1000)));
@@ -54,13 +41,7 @@ namespace GW2SDK.TestDataHelper
                         http.UseDataCompression();
                     })
                 .ConfigurePrimaryHttpMessageHandler(() =>
-                    new SocketsHttpHandler
-                    {
-                        MaxConnectionsPerServer = 8,
-                        AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate,
-                        UseProxy = true,
-                        Proxy = Fiddler.Instance
-                    })
+                    new SocketsHttpHandler { MaxConnectionsPerServer = 8, AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate })
                 .AddPolicyHandlerFromRegistry((registry, message) => message.Method == HttpMethod.Post || message.Method == HttpMethod.Patch
                     ? registry.Get<IAsyncPolicy<HttpResponseMessage>>("Http")
                     : registry.Get<IAsyncPolicy<HttpResponseMessage>>("HttpIdempotent"))
