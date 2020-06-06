@@ -60,9 +60,7 @@ namespace GW2SDK.Tests.TestInfrastructure
                     new SocketsHttpHandler
                     {
                         MaxConnectionsPerServer = 10,
-                        AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate,
-                        UseProxy = true,
-                        Proxy = Fiddler.Instance
+                        AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate
                     })
                 .AddPolicyHandlerFromRegistry((registry, message) => message.Method == HttpMethod.Post || message.Method == HttpMethod.Patch
                     ? registry.Get<IAsyncPolicy<HttpResponseMessage>>("Http")
@@ -95,15 +93,5 @@ namespace GW2SDK.Tests.TestInfrastructure
         public void Dispose() => _services.Dispose();
 
         public T Resolve<T>() => _services.GetRequiredService<T>();
-
-        internal class Fiddler : WebProxy
-        {
-            private Fiddler()
-                : base("localhost", 8888)
-            {
-            }
-
-            public static Fiddler Instance { get; } = new Fiddler();
-        }
     }
 }
