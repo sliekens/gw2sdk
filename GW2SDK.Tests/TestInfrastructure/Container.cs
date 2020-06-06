@@ -11,6 +11,7 @@ using GW2SDK.Builds;
 using GW2SDK.Colors;
 using GW2SDK.Commerce.Prices;
 using GW2SDK.Continents;
+using GW2SDK.Exceptions;
 using GW2SDK.Extensions;
 using GW2SDK.Impl.HttpMessageHandlers;
 using GW2SDK.Items;
@@ -21,16 +22,30 @@ using GW2SDK.Subtokens;
 using GW2SDK.Tokens;
 using GW2SDK.Worlds;
 using Microsoft.Extensions.DependencyInjection;
+using Polly;
+using Polly.Timeout;
 
 namespace GW2SDK.Tests.TestInfrastructure
 {
     public class Container : IDisposable, IAsyncDisposable
     {
+        private static readonly Random Jitterer = new Random();
+
         private readonly ServiceProvider _services;
 
         public Container()
         {
             var services = new ServiceCollection();
+            var policies = services.AddPolicyRegistry();
+            var innerTimeout = Policy.TimeoutAsync<HttpResponseMessage>(TimeSpan.FromSeconds(10), TimeoutStrategy.Optimistic);
+            var immediateRetry = Policy.Handle<HttpRequestException>()
+                .Or<TimeoutRejectedException>()
+                .OrResult<HttpResponseMessage>(r => (int) r.StatusCode >= 500).RetryForeverAsync();
+            var rateLimit = Policy.Handle<TooManyRequestsException>()
+                .WaitAndRetryForeverAsync(retryAttempt =>
+                    TimeSpan.FromSeconds(Math.Min(8, Math.Pow(2, retryAttempt))) + TimeSpan.FromMilliseconds(Jitterer.Next(0, 1000)));
+            policies.Add("Http",           rateLimit.WrapAsync(innerTimeout));
+            policies.Add("HttpIdempotent", rateLimit.WrapAsync(immediateRetry).WrapAsync(innerTimeout));
             services.AddTransient<UnauthorizedMessageHandler>();
             services.AddTransient<BadMessageHandler>();
             services.AddTransient<RateLimitHandler>();
@@ -42,8 +57,16 @@ namespace GW2SDK.Tests.TestInfrastructure
                         http.UseDataCompression();
                     })
                 .ConfigurePrimaryHttpMessageHandler(() =>
-                    new SocketsHttpHandler { AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate })
-                .AddPolicyHandler(HttpPolicy.SelectPolicy)
+                    new SocketsHttpHandler
+                    {
+                        MaxConnectionsPerServer = 10,
+                        AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate,
+                        UseProxy = true,
+                        Proxy = Fiddler.Instance
+                    })
+                .AddPolicyHandlerFromRegistry((registry, message) => message.Method == HttpMethod.Post || message.Method == HttpMethod.Patch
+                    ? registry.Get<IAsyncPolicy<HttpResponseMessage>>("Http")
+                    : registry.Get<IAsyncPolicy<HttpResponseMessage>>("HttpIdempotent"))
                 .AddHttpMessageHandler<UnauthorizedMessageHandler>()
                 .AddHttpMessageHandler<BadMessageHandler>()
                 .AddHttpMessageHandler<RateLimitHandler>()
@@ -72,5 +95,15 @@ namespace GW2SDK.Tests.TestInfrastructure
         public void Dispose() => _services.Dispose();
 
         public T Resolve<T>() => _services.GetRequiredService<T>();
+
+        internal class Fiddler : WebProxy
+        {
+            private Fiddler()
+                : base("localhost", 8888)
+            {
+            }
+
+            public static Fiddler Instance { get; } = new Fiddler();
+        }
     }
 }
