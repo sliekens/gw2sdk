@@ -22,7 +22,7 @@ namespace GW2SDK.Achievements.Groups
             _http = http ?? throw new ArgumentNullException(nameof(http));
         }
 
-        public async Task<IDataTransferCollection<AchievementGroup>> GetAchievementGroups(JsonSerializerSettings? settings = null)
+        public async Task<IDataTransferCollection<AchievementGroup>> GetAchievementGroups()
         {
             var request = new AchievementGroupsRequest();
             using var response = await _http.SendAsync(request).ConfigureAwait(false);
@@ -30,11 +30,11 @@ namespace GW2SDK.Achievements.Groups
             var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
             var context = response.Headers.GetCollectionContext();
             var list = new List<AchievementGroup>(context.ResultCount);
-            JsonConvert.PopulateObject(json, list, settings ?? Json.DefaultJsonSerializerSettings);
+            JsonConvert.PopulateObject(json, list, Json.DefaultJsonSerializerSettings);
             return new DataTransferCollection<AchievementGroup>(list, context);
         }
 
-        public async Task<IDataTransferCollection<string>> GetAchievementGroupsIndex(JsonSerializerSettings? settings = null)
+        public async Task<IDataTransferCollection<string>> GetAchievementGroupsIndex()
         {
             var request = new AchievementGroupsIndexRequest();
             using var response = await _http.SendAsync(request).ConfigureAwait(false);
@@ -42,22 +42,20 @@ namespace GW2SDK.Achievements.Groups
             var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
             var context = response.Headers.GetCollectionContext();
             var list = new List<string>(context.ResultCount);
-            JsonConvert.PopulateObject(json, list, settings ?? Json.DefaultJsonSerializerSettings);
+            JsonConvert.PopulateObject(json, list, Json.DefaultJsonSerializerSettings);
             return new DataTransferCollection<string>(list, context);
         }
 
-        public async Task<AchievementGroup?> GetAchievementGroupById(string achievementGroupId, JsonSerializerSettings? settings = null)
+        public async Task<AchievementGroup?> GetAchievementGroupById(string achievementGroupId)
         {
             var request = new AchievementGroupByIdRequest(achievementGroupId);
             using var response = await _http.SendAsync(request).ConfigureAwait(false);
             response.EnsureSuccessStatusCode();
             var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
-            return JsonConvert.DeserializeObject<AchievementGroup>(json, settings ?? Json.DefaultJsonSerializerSettings);
+            return JsonConvert.DeserializeObject<AchievementGroup>(json, Json.DefaultJsonSerializerSettings);
         }
 
-        public async Task<IDataTransferCollection<AchievementGroup>> GetAchievementGroupsByIds(
-            IReadOnlyCollection<string> achievementGroupIds,
-            JsonSerializerSettings? settings = null)
+        public async Task<IDataTransferCollection<AchievementGroup>> GetAchievementGroupsByIds(IReadOnlyCollection<string> achievementGroupIds)
         {
             if (achievementGroupIds == null)
             {
@@ -80,14 +78,11 @@ namespace GW2SDK.Achievements.Groups
             var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
             var context = response.Headers.GetCollectionContext();
             var list = new List<AchievementGroup>(context.ResultCount);
-            JsonConvert.PopulateObject(json, list, settings ?? Json.DefaultJsonSerializerSettings);
+            JsonConvert.PopulateObject(json, list, Json.DefaultJsonSerializerSettings);
             return new DataTransferCollection<AchievementGroup>(list, context);
         }
 
-        public async Task<IDataTransferPage<AchievementGroup>> GetAchievementGroupsByPage(
-            int pageIndex,
-            int? pageSize = null,
-            JsonSerializerSettings? settings = null)
+        public async Task<IDataTransferPage<AchievementGroup>> GetAchievementGroupsByPage(int pageIndex, int? pageSize = null)
         {
             var request = new AchievementGroupsByPageRequest(pageIndex, pageSize);
             using var response = await _http.SendAsync(request).ConfigureAwait(false);
@@ -95,7 +90,7 @@ namespace GW2SDK.Achievements.Groups
             var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
             var pageContext = response.Headers.GetPageContext();
             var list = new List<AchievementGroup>(pageContext.PageSize);
-            JsonConvert.PopulateObject(json, list, settings ?? Json.DefaultJsonSerializerSettings);
+            JsonConvert.PopulateObject(json, list, Json.DefaultJsonSerializerSettings);
             return new DataTransferPage<AchievementGroup>(list, pageContext);
         }
     }

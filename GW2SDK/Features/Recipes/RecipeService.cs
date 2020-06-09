@@ -21,7 +21,7 @@ namespace GW2SDK.Recipes
             _http = http ?? throw new ArgumentNullException(nameof(http));
         }
 
-        public async Task<IDataTransferCollection<int>> GetRecipesIndex(JsonSerializerSettings? settings = null)
+        public async Task<IDataTransferCollection<int>> GetRecipesIndex()
         {
             var request = new RecipesIndexRequest();
             using var response = await _http.SendAsync(request).ConfigureAwait(false);
@@ -29,20 +29,20 @@ namespace GW2SDK.Recipes
             var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
             var context = response.Headers.GetCollectionContext();
             var list = new List<int>(context.ResultCount);
-            JsonConvert.PopulateObject(json, list, settings ?? Json.DefaultJsonSerializerSettings);
+            JsonConvert.PopulateObject(json, list, Json.DefaultJsonSerializerSettings);
             return new DataTransferCollection<int>(list, context);
         }
 
-        public async Task<Recipe?> GetRecipeById(int recipeId, JsonSerializerSettings? settings = null)
+        public async Task<Recipe?> GetRecipeById(int recipeId)
         {
             var request = new RecipeByIdRequest(recipeId);
             using var response = await _http.SendAsync(request).ConfigureAwait(false);
             response.EnsureSuccessStatusCode();
             var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
-            return JsonConvert.DeserializeObject<Recipe>(json, settings ?? Json.DefaultJsonSerializerSettings);
+            return JsonConvert.DeserializeObject<Recipe>(json, Json.DefaultJsonSerializerSettings);
         }
 
-        public async Task<IDataTransferCollection<Recipe>> GetRecipesByIds(IReadOnlyCollection<int> recipeIds, JsonSerializerSettings? settings = null)
+        public async Task<IDataTransferCollection<Recipe>> GetRecipesByIds(IReadOnlyCollection<int> recipeIds)
         {
             if (recipeIds == null)
             {
@@ -60,11 +60,11 @@ namespace GW2SDK.Recipes
             var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
             var context = response.Headers.GetCollectionContext();
             var list = new List<Recipe>(context.ResultCount);
-            JsonConvert.PopulateObject(json, list, settings ?? Json.DefaultJsonSerializerSettings);
+            JsonConvert.PopulateObject(json, list, Json.DefaultJsonSerializerSettings);
             return new DataTransferCollection<Recipe>(list, context);
         }
 
-        public async Task<IDataTransferPage<Recipe>> GetRecipesByPage(int pageIndex, int? pageSize = null, JsonSerializerSettings? settings = null)
+        public async Task<IDataTransferPage<Recipe>> GetRecipesByPage(int pageIndex, int? pageSize = null)
         {
             var request = new RecipesByPageRequest(pageIndex, pageSize);
             using var response = await _http.SendAsync(request).ConfigureAwait(false);
@@ -72,7 +72,7 @@ namespace GW2SDK.Recipes
             var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
             var pageContext = response.Headers.GetPageContext();
             var list = new List<Recipe>(pageContext.PageSize);
-            JsonConvert.PopulateObject(json, list, settings ?? Json.DefaultJsonSerializerSettings);
+            JsonConvert.PopulateObject(json, list, Json.DefaultJsonSerializerSettings);
             return new DataTransferPage<Recipe>(list, pageContext);
         }
     }

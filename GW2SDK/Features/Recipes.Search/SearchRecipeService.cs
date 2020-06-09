@@ -21,7 +21,7 @@ namespace GW2SDK.Recipes.Search
             _http = http ?? throw new ArgumentNullException(nameof(http));
         }
 
-        public async Task<IDataTransferCollection<int>> GetRecipesIndexByIngredientId(int ingredientId, JsonSerializerSettings? settings = null)
+        public async Task<IDataTransferCollection<int>> GetRecipesIndexByIngredientId(int ingredientId)
         {
             var request = new RecipesIndexByIngredientIdRequest(ingredientId);
             using var response = await _http.SendAsync(request).ConfigureAwait(false);
@@ -29,11 +29,11 @@ namespace GW2SDK.Recipes.Search
             var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
             var context = response.Headers.GetCollectionContext();
             var list = new List<int>(context.ResultCount);
-            JsonConvert.PopulateObject(json, list, settings ?? Json.DefaultJsonSerializerSettings);
+            JsonConvert.PopulateObject(json, list, Json.DefaultJsonSerializerSettings);
             return new DataTransferCollection<int>(list, context);
         }
 
-        public async Task<IDataTransferCollection<int>> GetRecipesIndexByItemId(int itemId, JsonSerializerSettings? settings = null)
+        public async Task<IDataTransferCollection<int>> GetRecipesIndexByItemId(int itemId)
         {
             var request = new RecipesIndexByItemIdRequest(itemId);
             using var response = await _http.SendAsync(request).ConfigureAwait(false);
@@ -41,7 +41,7 @@ namespace GW2SDK.Recipes.Search
             var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
             var context = response.Headers.GetCollectionContext();
             var list = new List<int>(context.ResultCount);
-            JsonConvert.PopulateObject(json, list, settings ?? Json.DefaultJsonSerializerSettings);
+            JsonConvert.PopulateObject(json, list, Json.DefaultJsonSerializerSettings);
             return new DataTransferCollection<int>(list, context);
         }
     }

@@ -18,13 +18,13 @@ namespace GW2SDK.Builds
             _http = http ?? throw new ArgumentNullException(nameof(http));
         }
 
-        public async Task<Build?> GetBuild(JsonSerializerSettings? settings = null)
+        public async Task<Build?> GetBuild()
         {
             var request = new BuildRequest();
             using var response = await _http.SendAsync(request).ConfigureAwait(false);
             response.EnsureSuccessStatusCode();
             var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
-            return JsonConvert.DeserializeObject<Build>(json, settings ?? Json.DefaultJsonSerializerSettings);
+            return JsonConvert.DeserializeObject<Build>(json, Json.DefaultJsonSerializerSettings);
         }
     }
 }

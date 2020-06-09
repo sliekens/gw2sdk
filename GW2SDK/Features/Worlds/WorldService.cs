@@ -21,7 +21,7 @@ namespace GW2SDK.Worlds
             _http = http ?? throw new ArgumentNullException(nameof(http));
         }
 
-        public async Task<IDataTransferCollection<World>> GetWorlds(JsonSerializerSettings? settings = null)
+        public async Task<IDataTransferCollection<World>> GetWorlds()
         {
             var request = new WorldsRequest();
             using var response = await _http.SendAsync(request).ConfigureAwait(false);
@@ -29,11 +29,11 @@ namespace GW2SDK.Worlds
             var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
             var context = response.Headers.GetCollectionContext();
             var list = new List<World>();
-            JsonConvert.PopulateObject(json, list, settings ?? Json.DefaultJsonSerializerSettings);
+            JsonConvert.PopulateObject(json, list, Json.DefaultJsonSerializerSettings);
             return new DataTransferCollection<World>(list, context);
         }
 
-        public async Task<IDataTransferCollection<int>> GetWorldsIndex(JsonSerializerSettings? settings = null)
+        public async Task<IDataTransferCollection<int>> GetWorldsIndex()
         {
             var request = new WorldsIndexRequest();
             using var response = await _http.SendAsync(request).ConfigureAwait(false);
@@ -41,20 +41,20 @@ namespace GW2SDK.Worlds
             var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
             var context = response.Headers.GetCollectionContext();
             var list = new List<int>(context.ResultCount);
-            JsonConvert.PopulateObject(json, list, settings ?? Json.DefaultJsonSerializerSettings);
+            JsonConvert.PopulateObject(json, list, Json.DefaultJsonSerializerSettings);
             return new DataTransferCollection<int>(list, context);
         }
 
-        public async Task<World?> GetWorldById(int worldId, JsonSerializerSettings? settings = null)
+        public async Task<World?> GetWorldById(int worldId)
         {
             var request = new WorldByIdRequest(worldId);
             using var response = await _http.SendAsync(request).ConfigureAwait(false);
             response.EnsureSuccessStatusCode();
             var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
-            return JsonConvert.DeserializeObject<World>(json, settings ?? Json.DefaultJsonSerializerSettings);
+            return JsonConvert.DeserializeObject<World>(json, Json.DefaultJsonSerializerSettings);
         }
 
-        public async Task<IDataTransferCollection<World>> GetWorldsByIds(IReadOnlyCollection<int> worldIds, JsonSerializerSettings? settings = null)
+        public async Task<IDataTransferCollection<World>> GetWorldsByIds(IReadOnlyCollection<int> worldIds)
         {
             if (worldIds == null)
             {
@@ -72,11 +72,11 @@ namespace GW2SDK.Worlds
             var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
             var context = response.Headers.GetCollectionContext();
             var list = new List<World>(context.ResultCount);
-            JsonConvert.PopulateObject(json, list, settings ?? Json.DefaultJsonSerializerSettings);
+            JsonConvert.PopulateObject(json, list, Json.DefaultJsonSerializerSettings);
             return new DataTransferCollection<World>(list, context);
         }
 
-        public async Task<IDataTransferPage<World>> GetWorldsByPage(int pageIndex, int? pageSize = null, JsonSerializerSettings? settings = null)
+        public async Task<IDataTransferPage<World>> GetWorldsByPage(int pageIndex, int? pageSize = null)
         {
             var request = new WorldsByPageRequest(pageIndex, pageSize);
             using var response = await _http.SendAsync(request).ConfigureAwait(false);
@@ -84,7 +84,7 @@ namespace GW2SDK.Worlds
             var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
             var pageContext = response.Headers.GetPageContext();
             var list = new List<World>(pageContext.PageSize);
-            JsonConvert.PopulateObject(json, list, settings ?? Json.DefaultJsonSerializerSettings);
+            JsonConvert.PopulateObject(json, list, Json.DefaultJsonSerializerSettings);
             return new DataTransferPage<World>(list, pageContext);
         }
     }

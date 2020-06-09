@@ -18,13 +18,13 @@ namespace GW2SDK.Accounts
             _http = http ?? throw new ArgumentNullException(nameof(http));
         }
 
-        public async Task<Account?> GetAccount(string? accessToken = null, JsonSerializerSettings? settings = null)
+        public async Task<Account?> GetAccount(string? accessToken = null)
         {
             var request = new AccountRequest(accessToken);
             using var response = await _http.SendAsync(request).ConfigureAwait(false);
             response.EnsureSuccessStatusCode();
             var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
-            return JsonConvert.DeserializeObject<Account>(json, settings ?? Json.DefaultJsonSerializerSettings);
+            return JsonConvert.DeserializeObject<Account>(json, Json.DefaultJsonSerializerSettings);
         }
     }
 }
