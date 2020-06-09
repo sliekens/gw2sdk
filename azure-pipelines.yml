@@ -53,10 +53,16 @@ steps:
     patchVersion: '0'
     nobuild: true
     verbosityPack: Normal
-    
   displayName: 'Package Artifacts'
 - task: PublishPipelineArtifact@0
   inputs:
     artifactName: 'nupkg'
     targetPath: $(Build.ArtifactStagingDirectory)
   displayName: 'Publish Artifacts'
+
+- task: NuGetCommand@2
+  inputs:
+    command: 'push'
+    packagesToPush: '$(Build.ArtifactStagingDirectory)/**/*.nupkg;!$(Build.ArtifactStagingDirectory)/**/*.symbols.nupkg'
+    nuGetFeedType: 'external'
+    publishFeedCredentials: 'GitHub Packages'
