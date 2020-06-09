@@ -21,7 +21,7 @@ namespace GW2SDK.Colors
             _http = http ?? throw new ArgumentNullException(nameof(http));
         }
 
-        public async Task<IDataTransferCollection<Color>> GetColors(JsonSerializerSettings? settings = null)
+        public async Task<IDataTransferCollection<Color>> GetColors()
         {
             var request = new ColorsRequest();
             using var response = await _http.SendAsync(request).ConfigureAwait(false);
@@ -29,11 +29,11 @@ namespace GW2SDK.Colors
             var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
             var context = response.Headers.GetCollectionContext();
             var list = new List<Color>(context.ResultCount);
-            JsonConvert.PopulateObject(json, list, settings ?? Json.DefaultJsonSerializerSettings);
+            JsonConvert.PopulateObject(json, list, Json.DefaultJsonSerializerSettings);
             return new DataTransferCollection<Color>(list, context);
         }
 
-        public async Task<IDataTransferCollection<int>> GetColorsIndex(JsonSerializerSettings? settings = null)
+        public async Task<IDataTransferCollection<int>> GetColorsIndex()
         {
             var request = new ColorsIndexRequest();
             using var response = await _http.SendAsync(request).ConfigureAwait(false);
@@ -41,20 +41,20 @@ namespace GW2SDK.Colors
             var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
             var context = response.Headers.GetCollectionContext();
             var list = new List<int>(context.ResultCount);
-            JsonConvert.PopulateObject(json, list, settings ?? Json.DefaultJsonSerializerSettings);
+            JsonConvert.PopulateObject(json, list, Json.DefaultJsonSerializerSettings);
             return new DataTransferCollection<int>(list, context);
         }
 
-        public async Task<Color?> GetColorById(int colorId, JsonSerializerSettings? settings = null)
+        public async Task<Color?> GetColorById(int colorId)
         {
             var request = new ColorByIdRequest(colorId);
             using var response = await _http.SendAsync(request).ConfigureAwait(false);
             response.EnsureSuccessStatusCode();
             var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
-            return JsonConvert.DeserializeObject<Color>(json, settings ?? Json.DefaultJsonSerializerSettings);
+            return JsonConvert.DeserializeObject<Color>(json, Json.DefaultJsonSerializerSettings);
         }
 
-        public async Task<IDataTransferCollection<Color>> GetColorsByIds(IReadOnlyCollection<int> colorIds, JsonSerializerSettings? settings = null)
+        public async Task<IDataTransferCollection<Color>> GetColorsByIds(IReadOnlyCollection<int> colorIds)
         {
             if (colorIds == null)
             {
@@ -72,11 +72,11 @@ namespace GW2SDK.Colors
             var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
             var context = response.Headers.GetCollectionContext();
             var list = new List<Color>(context.ResultCount);
-            JsonConvert.PopulateObject(json, list, settings ?? Json.DefaultJsonSerializerSettings);
+            JsonConvert.PopulateObject(json, list, Json.DefaultJsonSerializerSettings);
             return new DataTransferCollection<Color>(list, context);
         }
 
-        public async Task<IDataTransferPage<Color>> GetColorsByPage(int pageIndex, int? pageSize = null, JsonSerializerSettings? settings = null)
+        public async Task<IDataTransferPage<Color>> GetColorsByPage(int pageIndex, int? pageSize = null)
         {
             var request = new ColorsByPageRequest(pageIndex, pageSize);
             using var response = await _http.SendAsync(request).ConfigureAwait(false);
@@ -84,7 +84,7 @@ namespace GW2SDK.Colors
             var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
             var pageContext = response.Headers.GetPageContext();
             var list = new List<Color>(pageContext.PageSize);
-            JsonConvert.PopulateObject(json, list, settings ?? Json.DefaultJsonSerializerSettings);
+            JsonConvert.PopulateObject(json, list, Json.DefaultJsonSerializerSettings);
             return new DataTransferPage<Color>(list, pageContext);
         }
     }

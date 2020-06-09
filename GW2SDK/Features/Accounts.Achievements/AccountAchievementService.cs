@@ -23,20 +23,19 @@ namespace GW2SDK.Accounts.Achievements
         }
 
         [Scope(Permission.Progression)]
-        public async Task<AccountAchievement?> GetAccountAchievementById(int achievementId, string? accessToken = null, JsonSerializerSettings? settings = null)
+        public async Task<AccountAchievement?> GetAccountAchievementById(int achievementId, string? accessToken = null)
         {
             var request = new AccountAchievementByIdRequest(achievementId, accessToken);
             using var response = await _http.SendAsync(request).ConfigureAwait(false);
             response.EnsureSuccessStatusCode();
             var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
-            return JsonConvert.DeserializeObject<AccountAchievement>(json, settings ?? Json.DefaultJsonSerializerSettings);
+            return JsonConvert.DeserializeObject<AccountAchievement>(json, Json.DefaultJsonSerializerSettings);
         }
 
         [Scope(Permission.Progression)]
         public async Task<IDataTransferCollection<AccountAchievement>> GetAccountAchievementsByIds(
             IReadOnlyCollection<int> achievementIds,
-            string? accessToken = null,
-            JsonSerializerSettings? settings = null)
+            string? accessToken = null)
         {
             if (achievementIds == null)
             {
@@ -54,14 +53,12 @@ namespace GW2SDK.Accounts.Achievements
             var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
             var context = response.Headers.GetCollectionContext();
             var list = new List<AccountAchievement>(context.ResultCount);
-            JsonConvert.PopulateObject(json, list, settings ?? Json.DefaultJsonSerializerSettings);
+            JsonConvert.PopulateObject(json, list, Json.DefaultJsonSerializerSettings);
             return new DataTransferCollection<AccountAchievement>(list, context);
         }
 
         [Scope(Permission.Progression)]
-        public async Task<IDataTransferCollection<AccountAchievement>> GetAccountAchievements(
-            string? accessToken = null,
-            JsonSerializerSettings? settings = null)
+        public async Task<IDataTransferCollection<AccountAchievement>> GetAccountAchievements(string? accessToken = null)
         {
             var request = new AccountAchievementsRequest(accessToken);
             using var response = await _http.SendAsync(request).ConfigureAwait(false);
@@ -69,16 +66,12 @@ namespace GW2SDK.Accounts.Achievements
             var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
             var context = response.Headers.GetCollectionContext();
             var list = new List<AccountAchievement>(context.ResultCount);
-            JsonConvert.PopulateObject(json, list, settings ?? Json.DefaultJsonSerializerSettings);
+            JsonConvert.PopulateObject(json, list, Json.DefaultJsonSerializerSettings);
             return new DataTransferCollection<AccountAchievement>(list, context);
         }
 
         [Scope(Permission.Progression)]
-        public async Task<IDataTransferPage<AccountAchievement>> GetAccountAchievementsByPage(
-            int pageIndex,
-            int? pageSize,
-            string? accessToken = null,
-            JsonSerializerSettings? settings = null)
+        public async Task<IDataTransferPage<AccountAchievement>> GetAccountAchievementsByPage(int pageIndex, int? pageSize, string? accessToken = null)
         {
             var request = new AccountAchievementsByPageRequest(pageIndex, pageSize, accessToken);
             using var response = await _http.SendAsync(request).ConfigureAwait(false);
@@ -86,7 +79,7 @@ namespace GW2SDK.Accounts.Achievements
             var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
             var pageContext = response.Headers.GetPageContext();
             var list = new List<AccountAchievement>(pageContext.ResultCount);
-            JsonConvert.PopulateObject(json, list, settings ?? Json.DefaultJsonSerializerSettings);
+            JsonConvert.PopulateObject(json, list, Json.DefaultJsonSerializerSettings);
             return new DataTransferPage<AccountAchievement>(list, pageContext);
         }
     }

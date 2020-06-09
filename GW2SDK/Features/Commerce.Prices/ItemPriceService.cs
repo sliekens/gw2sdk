@@ -21,7 +21,7 @@ namespace GW2SDK.Commerce.Prices
             _http = http ?? throw new ArgumentNullException(nameof(http));
         }
 
-        public async Task<IDataTransferCollection<int>> GetItemPricesIndex(JsonSerializerSettings? settings = null)
+        public async Task<IDataTransferCollection<int>> GetItemPricesIndex()
         {
             var request = new ItemPricesIndexRequest();
             using var response = await _http.SendAsync(request).ConfigureAwait(false);
@@ -29,20 +29,20 @@ namespace GW2SDK.Commerce.Prices
             var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
             var context = response.Headers.GetCollectionContext();
             var list = new List<int>(context.ResultCount);
-            JsonConvert.PopulateObject(json, list, settings ?? Json.DefaultJsonSerializerSettings);
+            JsonConvert.PopulateObject(json, list, Json.DefaultJsonSerializerSettings);
             return new DataTransferCollection<int>(list, context);
         }
 
-        public async Task<ItemPrice?> GetItemPriceById(int itemId, JsonSerializerSettings? settings = null)
+        public async Task<ItemPrice?> GetItemPriceById(int itemId)
         {
             var request = new ItemPriceByIdRequest(itemId);
             using var response = await _http.SendAsync(request).ConfigureAwait(false);
             response.EnsureSuccessStatusCode();
             var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
-            return JsonConvert.DeserializeObject<ItemPrice>(json, settings ?? Json.DefaultJsonSerializerSettings);
+            return JsonConvert.DeserializeObject<ItemPrice>(json, Json.DefaultJsonSerializerSettings);
         }
 
-        public async Task<IDataTransferCollection<ItemPrice>> GetItemPricesByIds(IReadOnlyCollection<int> itemIds, JsonSerializerSettings? settings = null)
+        public async Task<IDataTransferCollection<ItemPrice>> GetItemPricesByIds(IReadOnlyCollection<int> itemIds)
         {
             if (itemIds == null)
             {
@@ -60,7 +60,7 @@ namespace GW2SDK.Commerce.Prices
             var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
             var context = response.Headers.GetCollectionContext();
             var list = new List<ItemPrice>(context.ResultCount);
-            JsonConvert.PopulateObject(json, list, settings ?? Json.DefaultJsonSerializerSettings);
+            JsonConvert.PopulateObject(json, list, Json.DefaultJsonSerializerSettings);
             return new DataTransferCollection<ItemPrice>(list, context);
         }
     }
