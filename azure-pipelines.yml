@@ -15,6 +15,7 @@ steps:
   inputs:
     packageType: 'sdk'
     useGlobalJson: true
+
 - task: DotNetCoreCLI@2
   inputs:
     command: 'custom'
@@ -22,6 +23,7 @@ steps:
     arguments: 'set ApiKeyBasic $(ApiKeyBasic)'
     workingDirectory: '$(System.DefaultWorkingDirectory)/GW2SDK.Tests'
   displayName: 'Configure ApiKeyBasic'
+
 - task: DotNetCoreCLI@2
   inputs:
     command: 'custom'
@@ -29,20 +31,24 @@ steps:
     arguments: 'set ApiKeyFull $(ApiKeyFull)'
     workingDirectory: '$(System.DefaultWorkingDirectory)/GW2SDK.Tests'
   displayName: 'Configure ApiKeyFull'
+
 - task: DotNetCoreCLI@2
   inputs:
     command: 'build'
     arguments: '--configuration $(BuildConfiguration)'
   displayName: 'Build All Projects'
+
 - task: DotNetCoreCLI@2
   inputs:
     command: 'test'
     arguments: '--configuration $(BuildConfiguration) --settings $(System.DefaultWorkingDirectory)/coverletArgs.runsettings'
   displayName: 'Test All Projects'
+
 - task: PublishCodeCoverageResults@1
   inputs:
     codeCoverageTool: 'Cobertura'
     summaryFileLocation: '$(Agent.TempDirectory)/**/coverage.cobertura.xml'
+
 - task: DotNetCoreCLI@2
   inputs:
     command: 'pack'
@@ -54,11 +60,16 @@ steps:
     nobuild: true
     verbosityPack: Normal
   displayName: 'Package Artifacts'
+
 - task: PublishPipelineArtifact@0
   inputs:
     artifactName: 'nupkg'
     targetPath: $(Build.ArtifactStagingDirectory)
   displayName: 'Publish Artifacts'
+
+- task: NuGetToolInstaller@1
+  inputs:
+    versionSpec: '5.5.1'
 
 - task: NuGetCommand@2
   inputs:
