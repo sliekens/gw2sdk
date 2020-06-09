@@ -60,10 +60,6 @@ steps:
     targetPath: $(Build.ArtifactStagingDirectory)
   displayName: 'Publish Artifacts'
 
-- task: NuGetAuthenticate@0
-  inputs:
-    nuGetServiceConnections: 'GitHub Packages'
-
 - task: NuGetCommand@2
   inputs:
     command: 'push'
