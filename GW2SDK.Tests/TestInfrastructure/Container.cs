@@ -4,6 +4,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using GW2SDK.Accounts;
 using GW2SDK.Accounts.Achievements;
+using GW2SDK.Accounts.Banks;
 using GW2SDK.Achievements;
 using GW2SDK.Achievements.Categories;
 using GW2SDK.Achievements.Groups;
@@ -73,6 +74,7 @@ namespace GW2SDK.Tests.TestInfrastructure
                 .AddTypedClient<AchievementService>()
                 .AddTypedClient<AchievementCategoryService>()
                 .AddTypedClient<AchievementGroupService>()
+                .AddTypedClient<BankService>()
                 .AddTypedClient<BuildService>()
                 .AddTypedClient<ColorService>()
                 .AddTypedClient<ContinentService>()

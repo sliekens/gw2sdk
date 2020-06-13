@@ -4,66 +4,68 @@ using System.Threading;
 using System.Threading.Tasks;
 using GW2SDK.Exceptions;
 using GW2SDK.Impl.HttpMessageHandlers;
-using Newtonsoft.Json;
 using Xunit;
 
 namespace GW2SDK.Tests.Features.Common
 {
     public class UnauthorizedMessageHandlerTest
     {
-        public class StubHttpMessageHandler : HttpMessageHandler
+        [Theory]
+        [Trait("Category", "Unit")]
+        [InlineData(HttpStatusCode.OK)]
+        [InlineData(HttpStatusCode.BadRequest)]
+        [InlineData(HttpStatusCode.ServiceUnavailable)]
+        [InlineData(HttpStatusCode.InternalServerError)]
+        public async Task Handler_returns_response_when_request_is_authorized(HttpStatusCode statusCode)
         {
-            private readonly string _body;
-            private readonly HttpStatusCode _code;
+            var request = new HttpRequestMessage(HttpMethod.Get, "https://api.guildwars2.com/v2.json");
+            var stubHttpMessageHandler = new StubHttpMessageHandler(statusCode, @"{ ""success"": true }");
 
-            public StubHttpMessageHandler(HttpStatusCode code, string body)
-            {
-                _code = code;
-                _body = body;
-            }
+            var sut = new UnauthorizedMessageHandler(stubHttpMessageHandler);
 
-            protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken) =>
-                Task.FromResult(new HttpResponseMessage(_code) { Content = new StringContent(_body) });
+            var httpClient = new HttpClient(sut);
+
+            var actual = await httpClient.SendAsync(request);
+
+            Assert.NotNull(actual);
+            Assert.Equal(stubHttpMessageHandler.Code, actual.StatusCode);
+            Assert.Equal(stubHttpMessageHandler.Content, await actual.Content.ReadAsStringAsync());
         }
 
         [Theory]
         [Trait("Category", "Unit")]
-        [InlineData(HttpStatusCode.OK,                 "{}")]
-        [InlineData(HttpStatusCode.BadRequest,         "{}")]
-        [InlineData(HttpStatusCode.Forbidden,          "{}")]
-        [InlineData(HttpStatusCode.ServiceUnavailable, "{}")]
-        public async Task SendAsync_WhenResponseCodeIsNot401_ShouldReturnResponse(HttpStatusCode responseStatus, string responseBody)
+        [InlineData(HttpStatusCode.Unauthorized, "Invalid access token")]
+        [InlineData(HttpStatusCode.Forbidden, "requires scope")]
+        public async Task Handlers_throws_when_request_is_authorized(HttpStatusCode statusCode, string message)
         {
             var request = new HttpRequestMessage(HttpMethod.Get, "https://api.guildwars2.com/v2.json");
-            var stubHttpMessageHandler = new StubHttpMessageHandler(responseStatus, responseBody);
+            var stubHttpMessageHandler = new StubHttpMessageHandler(statusCode, @$"{{ ""text"": ""{message}""}}");
 
             var sut = new UnauthorizedMessageHandler(stubHttpMessageHandler);
 
             var httpClient = new HttpClient(sut);
 
-            var response = await httpClient.SendAsync(request);
+            var actual = await Record.ExceptionAsync(async () => await httpClient.SendAsync(request));
 
-            Assert.NotNull(response);
+            var reason = Assert.IsType<UnauthorizedOperationException>(actual);
+
+            Assert.Equal(message, reason.Message);
         }
 
-        [Fact]
-        [Trait("Category", "Unit")]
-        public async Task SendAsync_WhenResponseCodeIs401_ShouldThrowUnauthorizedOperationException()
+        private class StubHttpMessageHandler : HttpMessageHandler
         {
-            var request = new HttpRequestMessage(HttpMethod.Get, "https://api.guildwars2.com/v2.json");
-            var responseStatus = HttpStatusCode.Unauthorized;
-            var responseBody = JsonConvert.SerializeObject(new { text = "Invalid access token" });
-            var stubHttpMessageHandler = new StubHttpMessageHandler(responseStatus, responseBody);
+            public StubHttpMessageHandler(HttpStatusCode code, string content)
+            {
+                Code = code;
+                Content = content;
+            }
 
-            var sut = new UnauthorizedMessageHandler(stubHttpMessageHandler);
+            public HttpStatusCode Code { get; }
 
-            var httpClient = new HttpClient(sut);
+            public string Content { get; }
 
-            var exception = await Record.ExceptionAsync(async () => await httpClient.SendAsync(request));
-
-            var reason = Assert.IsType<UnauthorizedOperationException>(exception);
-
-            Assert.Equal("Invalid access token", reason.Message);
+            protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken) =>
+                Task.FromResult(new HttpResponseMessage(Code) { Content = new StringContent(Content) });
         }
     }
 }

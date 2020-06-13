@@ -1,9 +1,9 @@
-﻿using System.Net;
-using System.Net.Http;
+﻿using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 using GW2SDK.Exceptions;
 using Newtonsoft.Json.Linq;
+using static System.Net.HttpStatusCode;
 
 namespace GW2SDK.Impl.HttpMessageHandlers
 {
@@ -21,7 +21,7 @@ namespace GW2SDK.Impl.HttpMessageHandlers
         protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
         {
             var response = await base.SendAsync(request, cancellationToken).ConfigureAwait(false);
-            if (response.StatusCode == HttpStatusCode.Unauthorized)
+            if (response.StatusCode == Unauthorized || response.StatusCode == Forbidden)
             {
                 var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
                 var text = JObject.Parse(json)?["text"]?.ToString();
