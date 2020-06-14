@@ -93,11 +93,12 @@ stages:
   - deployment: push_github
     strategy:
       runOnce:
-        steps:
-          - task: NuGetCommand@2
-            displayName: Push package to GitHub Packages
-            inputs:
-              command: push
-              packagesToPush: '$(System.ArtifactsDirectory)/**/*.nupkg;!$(System.ArtifactsDirectory)/**/*.symbols.nupkg'
-              nuGetFeedType: 'external'
-              publishFeedCredentials: 'GitHub Packages'
+        deploy:
+          steps:
+            - task: NuGetCommand@2
+              displayName: Push package to GitHub Packages
+              inputs:
+                command: push
+                packagesToPush: '$(System.ArtifactsDirectory)/**/*.nupkg;!$(System.ArtifactsDirectory)/**/*.symbols.nupkg'
+                nuGetFeedType: 'external'
+                publishFeedCredentials: 'GitHub Packages'
