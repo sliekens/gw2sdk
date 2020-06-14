@@ -72,7 +72,7 @@ stages:
           artifactName: 'nupkg'
           targetPath: $(Build.ArtifactStagingDirectory)
 
-- stage: deploy-azdo
+- stage: deploy_azdo
   dependsOn: build
   jobs:
     - job: push_internal
@@ -86,7 +86,7 @@ stages:
 
       
 
-- stage: deploy-gh
+- stage: deploy_gh
   dependsOn: build
   jobs:
   - job: push_github
