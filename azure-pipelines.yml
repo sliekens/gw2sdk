@@ -44,6 +44,7 @@ stages:
       inputs:
         command: test
         arguments: --configuration $(BuildConfiguration) --no-build --settings $(System.DefaultWorkingDirectory)/coverletArgs.runsettings
+        publishTestResults: true
     - task: PublishCodeCoverageResults@1
       displayName: Publish code coverage results
       enabled: false
