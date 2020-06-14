@@ -7,73 +7,95 @@ trigger:
 variables:
   BuildConfiguration: Release
 
-pool:
-  vmImage: 'ubuntu-latest'
-steps:
-- task: UseDotNet@2
-  displayName: 'Use .NET Core sdk'
-  inputs:
-    packageType: 'sdk'
-    useGlobalJson: true
+stages:
+- stage: build
+  jobs:
+    - job: run_build
+      pool: 
+        vmImage: ubuntu-latest
+      steps:
+      - task: UseDotNet@2
+        displayName: 'Use .NET Core sdk'
+        inputs:
+          packageType: 'sdk'
+          useGlobalJson: true
 
-- task: DotNetCoreCLI@2
-  inputs:
-    command: 'custom'
-    custom: 'user-secrets'
-    arguments: 'set ApiKeyBasic $(ApiKeyBasic)'
-    workingDirectory: '$(System.DefaultWorkingDirectory)/GW2SDK.Tests'
-  displayName: 'Configure ApiKeyBasic'
+      - task: DotNetCoreCLI@2
+        displayName: 'Configure ApiKeyBasic'
+        inputs:
+          command: 'custom'
+          custom: 'user-secrets'
+          arguments: 'set ApiKeyBasic $(ApiKeyBasic)'
+          workingDirectory: '$(System.DefaultWorkingDirectory)/GW2SDK.Tests'
 
-- task: DotNetCoreCLI@2
-  inputs:
-    command: 'custom'
-    custom: 'user-secrets'
-    arguments: 'set ApiKeyFull $(ApiKeyFull)'
-    workingDirectory: '$(System.DefaultWorkingDirectory)/GW2SDK.Tests'
-  displayName: 'Configure ApiKeyFull'
+      - task: DotNetCoreCLI@2
+        displayName: 'Configure ApiKeyFull'
+        inputs:
+          command: 'custom'
+          custom: 'user-secrets'
+          arguments: 'set ApiKeyFull $(ApiKeyFull)'
+          workingDirectory: '$(System.DefaultWorkingDirectory)/GW2SDK.Tests'
 
-- task: DotNetCoreCLI@2
-  inputs:
-    command: 'build'
-    arguments: '--configuration $(BuildConfiguration)'
-  displayName: 'Build All Projects'
+      - task: DotNetCoreCLI@2
+        displayName: 'Build all projects'
+        inputs:
+          command: 'build'
+          arguments: '--configuration $(BuildConfiguration)'
 
-- task: DotNetCoreCLI@2
-  inputs:
-    command: 'test'
-    arguments: '--configuration $(BuildConfiguration) --no-build --settings $(System.DefaultWorkingDirectory)/coverletArgs.runsettings'
-  displayName: 'Test All Projects'
+      - task: DotNetCoreCLI@2
+        displayName: 'Test all projects'
+        inputs:
+          command: 'test'
+          arguments: '--configuration $(BuildConfiguration) --no-build --settings $(System.DefaultWorkingDirectory)/coverletArgs.runsettings'
 
-- task: PublishCodeCoverageResults@1
-  inputs:
-    codeCoverageTool: 'Cobertura'
-    summaryFileLocation: '$(Agent.TempDirectory)/**/coverage.cobertura.xml'
+      - task: PublishCodeCoverageResults@1
+        displayName: Publish code coverage results
+        inputs:
+          codeCoverageTool: 'Cobertura'
+          summaryFileLocation: '$(Agent.TempDirectory)/**/coverage.cobertura.xml'
 
-- task: DotNetCoreCLI@2
-  inputs:
-    command: 'pack'
-    searchPatternPack: 'GW2SDK'
-    versioningScheme: 'byPrereleaseNumber'
-    majorVersion: '1'
-    minorVersion: '0'
-    patchVersion: '0'
-    nobuild: true
-    verbosityPack: Normal
-  displayName: 'Package Artifacts'
+      - task: DotNetCoreCLI@2
+        displayName: 'Create NuGet package'
+        inputs:
+          command: 'pack'
+          searchPatternPack: 'GW2SDK'
+          versioningScheme: 'byPrereleaseNumber'
+          majorVersion: '1'
+          minorVersion: '0'
+          patchVersion: '0'
+          nobuild: true
+          verbosityPack: Normal
 
-- task: PublishPipelineArtifact@0
-  inputs:
-    artifactName: 'nupkg'
-    targetPath: $(Build.ArtifactStagingDirectory)
-  displayName: 'Publish Artifacts'
+      - task: PublishPipelineArtifact@0
+        displayName: 'Push packages to Artifacts'
+        inputs:
+          artifactName: 'nupkg'
+          targetPath: $(Build.ArtifactStagingDirectory)
 
-- task: NuGetToolInstaller@1
-  inputs:
-    versionSpec: '5.5.1'
+- stage: deploy-azdo
+  dependsOn: build
+  jobs:
+    - job: push_internal
+      steps:
+      - task: NuGetCommand@2
+        displayName: 'Push package to internal feed'
+        inputs:
+          command: push
+          packagesToPush: '$(System.ArtifactsDirectory)/**/*.nupkg;!$(System.ArtifactsDirectory)/**/*.symbols.nupkg'
+          publishVstsFeed: '/d9c605b4-f00a-49a3-9816-aa5bf6835c05'
 
-- task: NuGetCommand@2
-  inputs:
-    command: 'push'
-    packagesToPush: '$(Build.ArtifactStagingDirectory)/**/*.nupkg;!$(Build.ArtifactStagingDirectory)/**/*.symbols.nupkg'
-    nuGetFeedType: 'external'
-    publishFeedCredentials: 'GitHub Packages'
+      
+
+- stage: deploy-gh
+  dependsOn: build
+  jobs:
+  - job: push_github
+    steps:
+      - task: NuGetCommand@2
+        displayName: Push package to GitHub Packages
+        inputs:
+          command: push
+          packagesToPush: '$(System.ArtifactsDirectory)/**/*.nupkg;!$(System.ArtifactsDirectory)/**/*.symbols.nupkg'
+          nuGetFeedType: 'external'
+          publishFeedCredentials: 'GitHub Packages'
+
