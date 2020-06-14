@@ -78,6 +78,7 @@ stages:
   jobs:
   - job: push_internal
     steps:
+    - checkout: none
     - download: current
       artifact: nupkg
     - task: NuGetCommand@2
@@ -92,6 +93,7 @@ stages:
   jobs:
   - job: push_github
     steps:
+    - checkout: none
     - download: current
       artifact: nupkg
     - task: NuGetCommand@2
