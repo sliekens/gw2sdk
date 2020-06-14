@@ -20,7 +20,6 @@ stages:
       inputs:
         packageType: sdk
         useGlobalJson: true
-
     - task: DotNetCoreCLI@2
       displayName: Configure ApiKeyBasic
       inputs:
@@ -28,7 +27,6 @@ stages:
         custom: user-secrets
         arguments: set ApiKeyBasic $(ApiKeyBasic)
         workingDirectory: $(System.DefaultWorkingDirectory)/GW2SDK.Tests
-
     - task: DotNetCoreCLI@2
       displayName: Configure ApiKeyFull
       inputs:
@@ -36,25 +34,21 @@ stages:
         custom: user-secrets
         arguments: set ApiKeyFull $(ApiKeyFull)
         workingDirectory: $(System.DefaultWorkingDirectory)/GW2SDK.Tests
-
     - task: DotNetCoreCLI@2
       displayName: Build all projects
       inputs:
         command: build
         arguments: --configuration $(BuildConfiguration)
-
     - task: DotNetCoreCLI@2
       displayName: Test all projects
       inputs:
         command: test
         arguments: --configuration $(BuildConfiguration) --no-build --settings $(System.DefaultWorkingDirectory)/coverletArgs.runsettings
-
     - task: PublishCodeCoverageResults@1
       displayName: Publish code coverage results
       inputs:
         codeCoverageTool: Cobertura
         summaryFileLocation: $(Agent.TempDirectory)/**/coverage.cobertura.xml
-
     - task: DotNetCoreCLI@2
       displayName: Create NuGet package
       inputs:
@@ -66,7 +60,6 @@ stages:
         patchVersion: 0
         nobuild: true
         verbosityPack: Normal
-
     - task: PublishPipelineArtifact@0
       displayName: Push packages to Artifacts
       inputs:
@@ -81,12 +74,12 @@ stages:
     - checkout: none
     - download: current
       artifact: nupkg
-    - task: NuGetCommand@2
-      displayName: Push package to internal feed
+    - task: DotNetCoreCLI@2
       inputs:
         command: push
-        packagesToPush: $(Pipeline.Workspace)/nupkg/*.nupkg;!$(Pipeline.Workspace)/nupkg/*.symbols.nupkg
-        publishVstsFeed: /d9c605b4-f00a-49a3-9816-aa5bf6835c05
+        packagesToPush: $(Pipeline.Workspace)/nupkg/*.nupkg
+        nuGetFeedType: internal
+        publishVstsFeed: d9c605b4-f00a-49a3-9816-aa5bf6835c05
 
 - stage: deploy_gh
   dependsOn: build
@@ -99,15 +92,7 @@ stages:
     - task: DotNetCoreCLI@2
       displayName: Push package to GitHub Packages
       inputs:
-        command: 'push'
-        packagesToPush: '$(Pipeline.Workspace)/nupkg/*.nupkg'
-        nuGetFeedType: 'external'
-        publishFeedCredentials: 'GitHub Packages'
-    - task: NuGetCommand@2
-      enabled: false
-      displayName: Push package to GitHub Packages
-      inputs:
         command: push
-        packagesToPush: $(Pipeline.Workspace)/nupkg/*.nupkg;!$(Pipeline.Workspace)/nupkg/*.symbols.nupkg
+        packagesToPush: $(Pipeline.Workspace)/nupkg/*.nupkg
         nuGetFeedType: external
-        publishFeedCredentials: GitHub Packages
+        publishFeedCredentials: 'GitHub Packages'
