@@ -96,7 +96,15 @@ stages:
     - checkout: none
     - download: current
       artifact: nupkg
+    - task: DotNetCoreCLI@2
+      displayName: Push package to GitHub Packages
+      inputs:
+        command: 'push'
+        packagesToPush: '$(Pipeline.Workspace)/nupkg/*.nupkg'
+        nuGetFeedType: 'external'
+        publishFeedCredentials: 'GitHub Packages'
     - task: NuGetCommand@2
+      enabled: false
       displayName: Push package to GitHub Packages
       inputs:
         command: push
