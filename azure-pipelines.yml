@@ -2,7 +2,10 @@
 # https://aka.ms/yaml
 
 trigger:
-- master
+- main
+
+pr:
+- main
 
 variables:
   BuildConfiguration: Release
