@@ -41,7 +41,7 @@ steps:
 - task: DotNetCoreCLI@2
   inputs:
     command: 'test'
-    arguments: '--configuration $(BuildConfiguration) --settings $(System.DefaultWorkingDirectory)/coverletArgs.runsettings'
+    arguments: '--configuration $(BuildConfiguration) --no-build --settings $(System.DefaultWorkingDirectory)/coverletArgs.runsettings'
   displayName: 'Test All Projects'
 
 - task: PublishCodeCoverageResults@1
