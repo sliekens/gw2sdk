@@ -76,6 +76,7 @@ stages:
   dependsOn: build
   jobs:
   - deployment: push_internal
+    environment: Internal feed
     strategy:
      runOnce:
        deploy:
@@ -91,6 +92,7 @@ stages:
   dependsOn: build
   jobs:
   - deployment: push_github
+    environment: GitHub
     strategy:
       runOnce:
         deploy:
