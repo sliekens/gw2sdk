@@ -46,6 +46,7 @@ stages:
         arguments: --configuration $(BuildConfiguration) --no-build --settings $(System.DefaultWorkingDirectory)/coverletArgs.runsettings
     - task: PublishCodeCoverageResults@1
       displayName: Publish code coverage results
+      enabled: false
       inputs:
         codeCoverageTool: Cobertura
         summaryFileLocation: $(Agent.TempDirectory)/**/coverage.cobertura.xml
