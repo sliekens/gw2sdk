@@ -7,6 +7,7 @@ using GW2SDK.Accounts.Achievements;
 using GW2SDK.Accounts.Banks;
 using GW2SDK.Achievements;
 using GW2SDK.Achievements.Categories;
+using GW2SDK.Achievements.Dailies;
 using GW2SDK.Achievements.Groups;
 using GW2SDK.Builds;
 using GW2SDK.Colors;
@@ -78,6 +79,7 @@ namespace GW2SDK.Tests.TestInfrastructure
                 .AddTypedClient<BuildService>()
                 .AddTypedClient<ColorService>()
                 .AddTypedClient<ContinentService>()
+                .AddTypedClient<DailyAchievementService>()
                 .AddTypedClient<ItemService>()
                 .AddTypedClient<ItemPriceService>()
                 .AddTypedClient<RecipeService>()
