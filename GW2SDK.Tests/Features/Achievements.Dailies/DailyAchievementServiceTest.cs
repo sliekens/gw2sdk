@@ -7,13 +7,15 @@ namespace GW2SDK.Tests.Features.Achievements.Dailies
 {
     public class DailyAchievementServiceTest
     {
-        [Fact]
-        public async Task Get_the_daily_achievements()
+        [Theory]
+        [InlineData(Day.Today)]
+        [InlineData(Day.Tomorrow)]
+        public async Task Can_get_daily_achievements(Day day)
         {
             await using var services = new Container();
             var sut = services.Resolve<DailyAchievementService>();
 
-            var actual = await sut.GetDailyAchievements();
+            var actual = await sut.GetDailyAchievements(day);
 
             Assert.IsType<DailyAchievementGroup>(actual);
         }

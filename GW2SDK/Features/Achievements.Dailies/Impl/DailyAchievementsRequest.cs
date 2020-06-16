@@ -6,9 +6,22 @@ namespace GW2SDK.Achievements.Dailies.Impl
 {
     public sealed class DailyAchievementsRequest
     {
-        public static implicit operator HttpRequestMessage(DailyAchievementsRequest _)
+        public DailyAchievementsRequest(Day day = Day.Today)
         {
-            var location = new Uri("/v2/achievements/daily", UriKind.Relative);
+            Day = day;
+        }
+
+        private Day Day { get; }
+
+        public static implicit operator HttpRequestMessage(DailyAchievementsRequest r)
+        {
+            var path = r.Day switch
+            {
+                Day.Today => "/v2/achievements/daily",
+                Day.Tomorrow => "/v2/achievements/daily/tomorrow",
+                _ => throw new ArgumentOutOfRangeException()
+            };
+            var location = new Uri(path, UriKind.Relative);
             return new HttpRequestMessage(Get, location);
         }
     }

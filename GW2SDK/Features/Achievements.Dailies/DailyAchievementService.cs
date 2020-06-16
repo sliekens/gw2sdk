@@ -18,9 +18,9 @@ namespace GW2SDK.Achievements.Dailies
             _http = http ?? throw new ArgumentNullException(nameof(http));
         }
 
-        public async Task<DailyAchievementGroup?> GetDailyAchievements()
+        public async Task<DailyAchievementGroup?> GetDailyAchievements(Day day = Day.Today)
         {
-            var request = new DailyAchievementsRequest();
+            var request = new DailyAchievementsRequest(day);
             using var response = await _http.SendAsync(request).ConfigureAwait(false);
             response.EnsureSuccessStatusCode();
             var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);

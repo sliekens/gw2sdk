@@ -14,15 +14,57 @@ namespace GW2SDK.Tests.Features.Achievements.Dailies
 {
     public class DailyAchievementGroupTest : IClassFixture<DailyAchievementFixture>
     {
+        private readonly DailyAchievementFixture _fixture;
+
+        private readonly ITestOutputHelper _output;
+
         public DailyAchievementGroupTest(ITestOutputHelper output, DailyAchievementFixture fixture)
         {
             _output = output;
             _fixture = fixture;
         }
 
-        private readonly ITestOutputHelper _output;
+        [Theory]
+        [InlineData(Day.Today)]
+        [InlineData(Day.Tomorrow)]
+        public void Daily_achievement_group_can_be_created_from_json(Day day)
+        {
+            var settings = new JsonSerializerSettingsBuilder()
+                .UseTraceWriter(new XunitTraceWriter(_output))
+                .UseMissingMemberHandling(MissingMemberHandling.Error)
+                .Build();
 
-        private readonly DailyAchievementFixture _fixture;
+            var json = day switch
+            {
+                Day.Today => _fixture.Today,
+                Day.Tomorrow => _fixture.Tomorrow,
+                _ => throw new ArgumentOutOfRangeException(nameof(day), day, null)
+            };
+
+            var actual = JsonConvert.DeserializeObject<DailyAchievementGroup>(json, settings);
+
+            Assert.NotNull(actual);
+            Assert.All(actual.Pve,      DailyAchievementFact.Id_is_positive);
+            Assert.All(actual.Pvp,      DailyAchievementFact.Id_is_positive);
+            Assert.All(actual.Wvw,      DailyAchievementFact.Id_is_positive);
+            Assert.All(actual.Fractals, DailyAchievementFact.Id_is_positive);
+            Assert.All(actual.Special,  DailyAchievementFact.Id_is_positive);
+            Assert.All(actual.Pve,      DailyAchievementFact.Min_level_is_between_1_and_80);
+            Assert.All(actual.Pvp,      DailyAchievementFact.Min_level_is_between_1_and_80);
+            Assert.All(actual.Wvw,      DailyAchievementFact.Min_level_is_between_1_and_80);
+            Assert.All(actual.Fractals, DailyAchievementFact.Min_level_is_between_1_and_80);
+            Assert.All(actual.Special,  DailyAchievementFact.Min_level_is_between_1_and_80);
+            Assert.All(actual.Pve,      DailyAchievementFact.Max_level_is_between_1_and_80);
+            Assert.All(actual.Pvp,      DailyAchievementFact.Max_level_is_between_1_and_80);
+            Assert.All(actual.Wvw,      DailyAchievementFact.Max_level_is_between_1_and_80);
+            Assert.All(actual.Fractals, DailyAchievementFact.Max_level_is_between_1_and_80);
+            Assert.All(actual.Special,  DailyAchievementFact.Max_level_is_between_1_and_80);
+            Assert.All(actual.Pve,      DailyAchievementFact.Can_have_a_product_requirement);
+            Assert.All(actual.Pvp,      DailyAchievementFact.Can_have_a_product_requirement);
+            Assert.All(actual.Wvw,      DailyAchievementFact.Can_have_a_product_requirement);
+            Assert.All(actual.Fractals, DailyAchievementFact.Can_have_a_product_requirement);
+            Assert.All(actual.Special,  DailyAchievementFact.Can_have_a_product_requirement);
+        }
 
         private static class DailyAchievementFact
         {
@@ -42,39 +84,6 @@ namespace GW2SDK.Tests.Features.Achievements.Dailies
                     Assert.True(Enum.IsDefined(typeof(AccessCondition), actual.RequiredAccess.Condition));
                 }
             }
-        }
-
-        [Fact]
-        public void Daily_achievement_group_can_be_created_from_json()
-        {
-            var settings = new JsonSerializerSettingsBuilder()
-                .UseTraceWriter(new XunitTraceWriter(_output))
-                .UseMissingMemberHandling(MissingMemberHandling.Error)
-                .Build();
-
-            var actual = JsonConvert.DeserializeObject<DailyAchievementGroup>(_fixture.DailyAchievements, settings);
-
-            Assert.NotNull(actual);
-            Assert.All(actual.Pve, DailyAchievementFact.Id_is_positive);
-            Assert.All(actual.Pvp, DailyAchievementFact.Id_is_positive);
-            Assert.All(actual.Wvw, DailyAchievementFact.Id_is_positive);
-            Assert.All(actual.Fractals, DailyAchievementFact.Id_is_positive);
-            Assert.All(actual.Special, DailyAchievementFact.Id_is_positive);
-            Assert.All(actual.Pve, DailyAchievementFact.Min_level_is_between_1_and_80);
-            Assert.All(actual.Pvp, DailyAchievementFact.Min_level_is_between_1_and_80);
-            Assert.All(actual.Wvw, DailyAchievementFact.Min_level_is_between_1_and_80);
-            Assert.All(actual.Fractals, DailyAchievementFact.Min_level_is_between_1_and_80);
-            Assert.All(actual.Special, DailyAchievementFact.Min_level_is_between_1_and_80);
-            Assert.All(actual.Pve, DailyAchievementFact.Max_level_is_between_1_and_80);
-            Assert.All(actual.Pvp, DailyAchievementFact.Max_level_is_between_1_and_80);
-            Assert.All(actual.Wvw, DailyAchievementFact.Max_level_is_between_1_and_80);
-            Assert.All(actual.Fractals, DailyAchievementFact.Max_level_is_between_1_and_80);
-            Assert.All(actual.Special, DailyAchievementFact.Max_level_is_between_1_and_80);
-            Assert.All(actual.Pve, DailyAchievementFact.Can_have_a_product_requirement);
-            Assert.All(actual.Pvp, DailyAchievementFact.Can_have_a_product_requirement);
-            Assert.All(actual.Wvw, DailyAchievementFact.Can_have_a_product_requirement);
-            Assert.All(actual.Fractals, DailyAchievementFact.Can_have_a_product_requirement);
-            Assert.All(actual.Special, DailyAchievementFact.Can_have_a_product_requirement);
         }
     }
 }
