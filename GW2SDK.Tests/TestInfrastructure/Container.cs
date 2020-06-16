@@ -9,6 +9,7 @@ using GW2SDK.Achievements;
 using GW2SDK.Achievements.Categories;
 using GW2SDK.Achievements.Dailies;
 using GW2SDK.Achievements.Groups;
+using GW2SDK.Backstories;
 using GW2SDK.Builds;
 using GW2SDK.Colors;
 using GW2SDK.Commerce.Prices;
@@ -75,6 +76,7 @@ namespace GW2SDK.Tests.TestInfrastructure
                 .AddTypedClient<AchievementService>()
                 .AddTypedClient<AchievementCategoryService>()
                 .AddTypedClient<AchievementGroupService>()
+                .AddTypedClient<BackstoryService>()
                 .AddTypedClient<BankService>()
                 .AddTypedClient<BuildService>()
                 .AddTypedClient<ColorService>()
