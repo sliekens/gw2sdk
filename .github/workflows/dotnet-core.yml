@@ -17,16 +17,27 @@ jobs:
     runs-on: ubuntu-latest
     
     env:
-      BUILDCONFIGURATION: Release
+      build-configuration: Release
 
     steps:
     - uses: actions/checkout@v2
     - name: Setup .NET Core
       uses: actions/setup-dotnet@v1
+    - name: Cache dependencies
+      uses: actions/cache@v2
+      env:
+        cache-name: cache-nuget-packages
+      with:
+        path: ~/.nuget/packages
+        key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/packages.lock.json') }}
+        restore-keys: |
+          ${{ runner.os }}-build-${{ env.cache-name }}-
+          ${{ runner.os }}-build-
+          ${{ runner.os }}-
     - name: Install dependencies
       run: dotnet restore
     - name: Build
-      run: dotnet build --configuration $BUILDCONFIGURATION --no-restore
+      run: dotnet build --configuration ${{ env.build-configuration }} --no-restore
     - name: Azure Login
       uses: Azure/login@v1.1
       with:
@@ -42,4 +53,4 @@ jobs:
         echo "::set-env name=ApiKeyBasic::${{ steps.keyvault.outputs.ApiKeyBasic}}"
         echo "::set-env name=ApiKeyFull::${{ steps.keyvault.outputs.ApiKeyFull}}"
     - name: Test
-      run: dotnet test --configuration $BUILDCONFIGURATION --no-build
+      run: dotnet test --configuration ${{ env.build-configuration }} --no-build
