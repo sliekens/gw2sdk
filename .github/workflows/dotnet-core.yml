@@ -6,17 +6,27 @@ on:
   pull_request:
     branches: [ main ]
 
+env:
+  DOTNET_NOLOGO: true
+  DOTNET_CLI_TELEMETRY_OPTOUT: true
+  DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
+
 jobs:
   build:
     name: Build
     runs-on: ubuntu-latest
     
     env:
-      DOTNET_NOLOGO: true
-      DOTNET_CLI_TELEMETRY_OPTOUT: true
-      DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
+      BUILDCONFIGURATION: Release
 
     steps:
+    - uses: actions/checkout@v2
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v1
+    - name: Install dependencies
+      run: dotnet restore
+    - name: Build
+      run: dotnet build --configuration $BUILDCONFIGURATION --no-restore
     - name: Azure Login
       uses: Azure/login@v1.1
       with:
@@ -31,12 +41,5 @@ jobs:
       run: |
         echo "::set-env name=ApiKeyBasic::${{ steps.keyvault.outputs.ApiKeyBasic}}"
         echo "::set-env name=ApiKeyFull::${{ steps.keyvault.outputs.ApiKeyFull}}"
-    - uses: actions/checkout@v2
-    - name: Setup .NET Core
-      uses: actions/setup-dotnet@v1
-    - name: Install dependencies
-      run: dotnet restore
-    - name: Build
-      run: dotnet build --configuration Release --no-restore
     - name: Test
-      run: dotnet test --no-restore --verbosity normal
+      run: dotnet test --configuration $BUILDCONFIGURATION --no-build
