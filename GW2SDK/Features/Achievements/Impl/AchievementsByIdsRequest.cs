@@ -10,7 +10,7 @@ namespace GW2SDK.Achievements.Impl
     {
         public AchievementsByIdsRequest(IReadOnlyCollection<int> achievementIds)
         {
-            if (achievementIds == null)
+            if (achievementIds is null)
             {
                 throw new ArgumentNullException(nameof(achievementIds));
             }

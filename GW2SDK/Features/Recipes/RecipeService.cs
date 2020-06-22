@@ -44,7 +44,7 @@ namespace GW2SDK.Recipes
 
         public async Task<IDataTransferCollection<Recipe>> GetRecipesByIds(IReadOnlyCollection<int> recipeIds)
         {
-            if (recipeIds == null)
+            if (recipeIds is null)
             {
                 throw new ArgumentNullException(nameof(recipeIds));
             }

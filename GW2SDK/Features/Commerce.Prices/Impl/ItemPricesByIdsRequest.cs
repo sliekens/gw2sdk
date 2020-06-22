@@ -10,7 +10,7 @@ namespace GW2SDK.Commerce.Prices.Impl
     {
         public ItemPricesByIdsRequest(IReadOnlyCollection<int> itemIds)
         {
-            if (itemIds == null)
+            if (itemIds is null)
             {
                 throw new ArgumentNullException(nameof(itemIds));
             }

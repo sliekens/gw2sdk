@@ -44,7 +44,7 @@ namespace GW2SDK.Commerce.Prices
 
         public async Task<IDataTransferCollection<ItemPrice>> GetItemPricesByIds(IReadOnlyCollection<int> itemIds)
         {
-            if (itemIds == null)
+            if (itemIds is null)
             {
                 throw new ArgumentNullException(nameof(itemIds));
             }

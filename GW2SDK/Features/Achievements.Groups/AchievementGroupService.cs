@@ -57,7 +57,7 @@ namespace GW2SDK.Achievements.Groups
 
         public async Task<IDataTransferCollection<AchievementGroup>> GetAchievementGroupsByIds(IReadOnlyCollection<string> achievementGroupIds)
         {
-            if (achievementGroupIds == null)
+            if (achievementGroupIds is null)
             {
                 throw new ArgumentNullException(nameof(achievementGroupIds));
             }

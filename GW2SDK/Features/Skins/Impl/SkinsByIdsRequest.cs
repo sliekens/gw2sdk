@@ -10,7 +10,7 @@ namespace GW2SDK.Skins.Impl
     {
         public SkinsByIdsRequest(IReadOnlyCollection<int> skinIds)
         {
-            if (skinIds == null)
+            if (skinIds is null)
             {
                 throw new ArgumentNullException(nameof(skinIds));
             }

@@ -10,7 +10,7 @@ namespace GW2SDK.Backstories.Questions.Impl
     {
         public BackstoryQuestionsByIdsRequest(IReadOnlyCollection<int> questionIds)
         {
-            if (questionIds == null)
+            if (questionIds is null)
             {
                 throw new ArgumentNullException(nameof(questionIds));
             }

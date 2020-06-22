@@ -56,7 +56,7 @@ namespace GW2SDK.Worlds
 
         public async Task<IDataTransferCollection<World>> GetWorldsByIds(IReadOnlyCollection<int> worldIds)
         {
-            if (worldIds == null)
+            if (worldIds is null)
             {
                 throw new ArgumentNullException(nameof(worldIds));
             }
