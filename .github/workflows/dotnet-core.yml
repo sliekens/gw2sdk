@@ -53,7 +53,7 @@ jobs:
         echo "::set-env name=ApiKeyBasic::${{ steps.keyvault.outputs.ApiKeyBasic}}"
         echo "::set-env name=ApiKeyFull::${{ steps.keyvault.outputs.ApiKeyFull}}"
     - name: Test
-      run: dotnet test --configuration ${{ env.build-configuration }} --no-build --settings ${{ github.workspace }}/coverletArgs.runsettings
+      run: dotnet test --no-restore --settings ${{ github.workspace }}/coverletArgs.runsettings
     - name: Upload coverage
       uses: actions/upload-artifact@v2
       with:
