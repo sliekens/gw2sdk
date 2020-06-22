@@ -56,7 +56,7 @@ namespace GW2SDK.Continents
 
         public async Task<IDataTransferCollection<Continent>> GetContinentsByIds(IReadOnlyCollection<int> continentIds)
         {
-            if (continentIds == null)
+            if (continentIds is null)
             {
                 throw new ArgumentNullException(nameof(continentIds));
             }
@@ -123,7 +123,7 @@ namespace GW2SDK.Continents
 
         public async Task<IDataTransferCollection<Floor>> GetFloorsByIds(int continentId, IReadOnlyCollection<int> floorIds)
         {
-            if (floorIds == null)
+            if (floorIds is null)
             {
                 throw new ArgumentNullException(nameof(floorIds));
             }

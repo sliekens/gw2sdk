@@ -44,7 +44,7 @@ namespace GW2SDK.Skins
 
         public async Task<IDataTransferCollection<Skin>> GetSkinsByIds(IReadOnlyCollection<int> skinIds)
         {
-            if (skinIds == null)
+            if (skinIds is null)
             {
                 throw new ArgumentNullException(nameof(skinIds));
             }

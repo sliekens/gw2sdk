@@ -10,7 +10,7 @@ namespace GW2SDK.Recipes.Impl
     {
         public RecipesByIdsRequest(IReadOnlyCollection<int> recipeIds)
         {
-            if (recipeIds == null)
+            if (recipeIds is null)
             {
                 throw new ArgumentNullException(nameof(recipeIds));
             }

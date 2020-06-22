@@ -10,7 +10,7 @@ namespace GW2SDK.Items.Impl
     {
         public ItemsByIdsRequest(IReadOnlyCollection<int> itemIds)
         {
-            if (itemIds == null)
+            if (itemIds is null)
             {
                 throw new ArgumentNullException(nameof(itemIds));
             }

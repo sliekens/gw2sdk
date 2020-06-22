@@ -9,7 +9,7 @@ namespace GW2SDK.Extensions
     {
         public static ICollectionContext GetCollectionContext(this HttpResponseHeaders instance)
         {
-            if (instance == null) throw new ArgumentNullException(nameof(instance));
+            if (instance is null) throw new ArgumentNullException(nameof(instance));
             int resultTotal = default,
                 resultCount = default;
             if (instance.TryGetValues(ResponseHeaderName.ResultTotal, out var resultTotals))
@@ -29,7 +29,7 @@ namespace GW2SDK.Extensions
 
         public static IPageContext GetPageContext(this HttpResponseHeaders instance)
         {
-            if (instance == null) throw new ArgumentNullException(nameof(instance));
+            if (instance is null) throw new ArgumentNullException(nameof(instance));
             int pageTotal = default,
                 pageSize = default,
                 resultTotal = default,

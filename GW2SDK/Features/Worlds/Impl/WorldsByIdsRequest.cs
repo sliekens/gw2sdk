@@ -10,7 +10,7 @@ namespace GW2SDK.Worlds.Impl
     {
         public WorldsByIdsRequest(IReadOnlyCollection<int> worldIds)
         {
-            if (worldIds == null)
+            if (worldIds is null)
             {
                 throw new ArgumentNullException(nameof(worldIds));
             }

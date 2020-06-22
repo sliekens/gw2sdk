@@ -10,7 +10,7 @@ namespace GW2SDK.Colors.Impl
     {
         public ColorsByIdsRequest(IReadOnlyCollection<int> colorIds)
         {
-            if (colorIds == null)
+            if (colorIds is null)
             {
                 throw new ArgumentNullException(nameof(colorIds));
             }

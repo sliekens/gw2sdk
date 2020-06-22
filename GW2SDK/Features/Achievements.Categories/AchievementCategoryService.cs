@@ -56,7 +56,7 @@ namespace GW2SDK.Achievements.Categories
 
         public async Task<IDataTransferCollection<AchievementCategory>> GetAchievementCategoriesByIds(IReadOnlyCollection<int> achievementCategoryIds)
         {
-            if (achievementCategoryIds == null)
+            if (achievementCategoryIds is null)
             {
                 throw new ArgumentNullException(nameof(achievementCategoryIds));
             }

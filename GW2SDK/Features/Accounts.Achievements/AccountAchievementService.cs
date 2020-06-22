@@ -37,7 +37,7 @@ namespace GW2SDK.Accounts.Achievements
             IReadOnlyCollection<int> achievementIds,
             string? accessToken = null)
         {
-            if (achievementIds == null)
+            if (achievementIds is null)
             {
                 throw new ArgumentNullException(nameof(achievementIds));
             }

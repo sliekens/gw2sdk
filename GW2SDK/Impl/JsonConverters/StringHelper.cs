@@ -6,7 +6,7 @@ namespace GW2SDK.Impl.JsonConverters
     {
         internal static string ToSnakeCase(string text)
         {
-            if (text == null)
+            if (text is null)
             {
                 throw new ArgumentNullException(nameof(text));
             }

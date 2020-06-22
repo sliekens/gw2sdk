@@ -93,7 +93,7 @@ namespace GW2SDK.Backstories
 
         public async Task<IDataTransferCollection<BackstoryQuestion>> GetBackstoryQuestionsByIds(IReadOnlyCollection<int> questionIds)
         {
-            if (questionIds == null)
+            if (questionIds is null)
             {
                 throw new ArgumentNullException(nameof(questionIds));
             }
@@ -115,7 +115,7 @@ namespace GW2SDK.Backstories
 
         public async Task<IDataTransferCollection<BackstoryAnswer>> GetBackstoryAnswersByIds(IReadOnlyCollection<string> answerIds)
         {
-            if (answerIds == null)
+            if (answerIds is null)
             {
                 throw new ArgumentNullException(nameof(answerIds));
             }

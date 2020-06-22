@@ -44,7 +44,7 @@ namespace GW2SDK.Items
 
         public async Task<IDataTransferCollection<Item>> GetItemsByIds(IReadOnlyCollection<int> itemIds)
         {
-            if (itemIds == null)
+            if (itemIds is null)
             {
                 throw new ArgumentNullException(nameof(itemIds));
             }

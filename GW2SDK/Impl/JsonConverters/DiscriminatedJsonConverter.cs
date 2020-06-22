@@ -58,7 +58,7 @@ namespace GW2SDK.Impl.JsonConverters
             }
 
             var found = _discriminatorOptions.GetDiscriminatedTypes().FirstOrDefault(tuple => tuple.TypeName == discriminatorFieldValue).Type;
-            if (found == null)
+            if (found is null)
             {
                 found = objectType;
                 if (serializer.TraceWriter?.LevelFilter >= TraceLevel.Warning)

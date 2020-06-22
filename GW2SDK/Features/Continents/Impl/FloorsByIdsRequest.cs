@@ -10,7 +10,7 @@ namespace GW2SDK.Continents.Impl
     {
         public FloorsByIdsRequest(int continentId, IReadOnlyCollection<int> floorIds)
         {
-            if (floorIds == null)
+            if (floorIds is null)
             {
                 throw new ArgumentNullException(nameof(floorIds));
             }

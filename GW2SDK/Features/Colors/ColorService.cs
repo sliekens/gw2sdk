@@ -56,7 +56,7 @@ namespace GW2SDK.Colors
 
         public async Task<IDataTransferCollection<Color>> GetColorsByIds(IReadOnlyCollection<int> colorIds)
         {
-            if (colorIds == null)
+            if (colorIds is null)
             {
                 throw new ArgumentNullException(nameof(colorIds));
             }
