@@ -38,18 +38,18 @@ jobs:
 #           ${{ runner.os }}-
     - name: Install dependencies
       run: dotnet restore
-    - name: Test
-      run: dotnet test --no-restore --settings ${{ github.workspace }}/coverletArgs.runsettings
-      env:
-        ApiKeyBasic: ${{ secrets.API_TOKEN_BASIC }}
-        ApiKeyFull: ${{ secrets.API_TOKEN_FULL }}
-    - name: Upload coverage
-      uses: actions/upload-artifact@v2
-      with:
-        name: coverage
-        path: "**/coverage.cobertura.xml"
-    - name: Upload coverage to Codecov
-      uses: codecov/codecov-action@v1.0.7
+#     - name: Test
+#       run: dotnet test --no-restore --settings ${{ github.workspace }}/coverletArgs.runsettings
+#       env:
+#         ApiKeyBasic: ${{ secrets.API_TOKEN_BASIC }}
+#         ApiKeyFull: ${{ secrets.API_TOKEN_FULL }}
+#     - name: Upload coverage
+#       uses: actions/upload-artifact@v2
+#       with:
+#         name: coverage
+#         path: "**/coverage.cobertura.xml"
+#     - name: Upload coverage to Codecov
+#       uses: codecov/codecov-action@v1.0.7
     - name: Build
       run: dotnet build --configuration ${{ env.build-configuration }} --no-restore
     - name: Pack artifacts
@@ -60,4 +60,4 @@ jobs:
         name: packages
         path: artifacts
     - name: Upload packages to GitHub Packages
-      run: dotnet nuget push artifacts/*.nupkg
+      run: dotnet nuget push artifacts/*.nupkg -k ${{ secrets.GPR_TOKEN }}
