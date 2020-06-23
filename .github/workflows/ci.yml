@@ -24,7 +24,7 @@ jobs:
       with:
         source-url: https://nuget.pkg.github.com/stevenliekens/index.json
       env:
-        NUGET_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        NUGET_AUTH_TOKEN: ${{ secrets.GPR_TOKEN }}
 #     - name: Cache dependencies
 #       uses: actions/cache@v2
 #       env:
