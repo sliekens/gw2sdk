@@ -25,17 +25,17 @@ jobs:
         source-url: https://nuget.pkg.github.com/StevenLiekens/index.json
       env:
         NUGET_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-    - name: Cache dependencies
-      uses: actions/cache@v2
-      env:
-        cache-name: cache-nuget-packages
-      with:
-        path: ~/.nuget/packages
-        key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/packages.lock.json') }}
-        restore-keys: |
-          ${{ runner.os }}-build-${{ env.cache-name }}-
-          ${{ runner.os }}-build-
-          ${{ runner.os }}-
+#     - name: Cache dependencies
+#       uses: actions/cache@v2
+#       env:
+#         cache-name: cache-nuget-packages
+#       with:
+#         path: ~/.nuget/packages
+#         key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/packages.lock.json') }}
+#         restore-keys: |
+#           ${{ runner.os }}-build-${{ env.cache-name }}-
+#           ${{ runner.os }}-build-
+#           ${{ runner.os }}-
     - name: Install dependencies
       run: dotnet restore
     - name: Test
