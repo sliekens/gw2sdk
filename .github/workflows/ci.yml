@@ -23,6 +23,7 @@ jobs:
       uses: actions/setup-dotnet@v1
       with:
         source-url: https://nuget.pkg.github.com/stevenliekens/index.json
+        owner: StevenLiekens
       env:
         NUGET_AUTH_TOKEN: ${{ secrets.GPR_TOKEN }}
 #     - name: Cache dependencies
