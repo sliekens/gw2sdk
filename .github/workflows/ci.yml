@@ -49,7 +49,7 @@ jobs:
     - name: Build
       run: dotnet build --configuration ${{ env.build-configuration }} --no-restore
     - name: Pack artifacts
-      run: dotnet pack --configuration ${{ env.build-configuration }} --no-build --output artifacts
+      run: dotnet pack --configuration ${{ env.build-configuration }} --no-build --output artifacts --version-suffix CI
     - name: Upload artifacts
       uses: actions/upload-artifact@v2
       with:
