@@ -26,17 +26,6 @@ jobs:
         owner: StevenLiekens
       env:
         NUGET_AUTH_TOKEN: ${{ secrets.GPR_TOKEN }}
-#     - name: Cache dependencies
-#       uses: actions/cache@v2
-#       env:
-#         cache-name: cache-nuget-packages
-#       with:
-#         path: ~/.nuget/packages
-#         key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/packages.lock.json') }}
-#         restore-keys: |
-#           ${{ runner.os }}-build-${{ env.cache-name }}-
-#           ${{ runner.os }}-build-
-#           ${{ runner.os }}-
     - name: Install dependencies
       run: dotnet restore
 #     - name: Test
@@ -62,3 +51,4 @@ jobs:
         path: artifacts
     - name: Upload packages to GitHub Packages
       run: dotnet nuget push artifacts/*.nupkg
+      if:  ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
