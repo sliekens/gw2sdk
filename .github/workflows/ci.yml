@@ -56,4 +56,4 @@ jobs:
         name: packages
         path: artifacts
     - name: Upload packages to GitHub Packages
-      run: dotnet nuget push artifacts/*.nupkg --source https://nuget.pkg.github.com/StevenLiekens/index.json --api-key ${{ secrets.GITHUB_TOKEN }}
+      run: dotnet nuget push artifacts/*.nupkg --source https://nuget.pkg.github.com/stevenliekens/index.json --api-key ${{ secrets.GITHUB_TOKEN }}
