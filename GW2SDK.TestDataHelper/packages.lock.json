@@ -36,12 +36,12 @@
       },
       "System.CommandLine.DragonFruit": {
         "type": "Direct",
-        "requested": "[0.2.0-alpha.19174.3, )",
-        "resolved": "0.2.0-alpha.19174.3",
-        "contentHash": "YtwUWDTkIaj9bUnF7/xifxZ04gp6XKF27Y8EmZpwjMpDeSh+V9uOVjtC1O3BAwQlst4Nr5d3Ytn02aWPOu82YQ==",
+        "requested": "[0.3.0-alpha.20303.1, )",
+        "resolved": "0.3.0-alpha.20303.1",
+        "contentHash": "7aTJ6e3TYpqIDG1IpeSOWaIoCRcyTZ6AD/olb/Ow/7CB5OaEnqXI8aDXnD3lVqXqQsVrJ+OZHfeS+udZHPCD1Q==",
         "dependencies": {
-          "System.CommandLine.Experimental": "0.2.0-alpha.19174.3",
-          "System.CommandLine.Rendering": "0.2.0-alpha.19174.3"
+          "System.CommandLine": "2.0.0-beta1.20303.1",
+          "System.CommandLine.Rendering": "0.3.0-alpha.20303.1"
         }
       },
       "System.Interactive": {
@@ -132,21 +132,27 @@
           "Polly": "7.1.0"
         }
       },
-      "System.CommandLine.Experimental": {
+      "System.CommandLine": {
         "type": "Transitive",
-        "resolved": "0.2.0-alpha.19174.3",
-        "contentHash": "PTJCVcj0rkIYPZzKZbU4uLdEvosmnX2CQR98rY6+efIn96zRtbljl74sPFRFZlLxeLprt42FeZNsYH+QdxCHPA==",
+        "resolved": "2.0.0-beta1.20303.1",
+        "contentHash": "2CknrYJXyL+tV523KL3Sm9UBq/ZaAXwToU+d+ScqTZOuaVmGpeAOXOHxkBYeuabTBuhWAij/Quv4dpeqSzHsxA==",
         "dependencies": {
-          "Microsoft.CSharp": "4.4.1"
+          "Microsoft.CSharp": "4.4.1",
+          "system.memory": "4.5.4"
         }
       },
       "System.CommandLine.Rendering": {
         "type": "Transitive",
-        "resolved": "0.2.0-alpha.19174.3",
-        "contentHash": "TbLA9yUwzdd/DRlyWS53x/NlOkJ0k1WI+YE8Ne2w/Wk+H9w3XqzRBVZBoL7b2JpHvW2s0mNi4tQRCCi5qgmxkQ==",
+        "resolved": "0.3.0-alpha.20303.1",
+        "contentHash": "Dx4UQO+kjcrKE5Q9Rz0/rgXhhXrzIXuWW26ZmQw4wEOW7n6yHyavgT+uJ7dbW/4gA/KdzCayyr+umDEu//u5pg==",
         "dependencies": {
-          "System.CommandLine.Experimental": "0.2.0-alpha.19174.3"
+          "System.CommandLine": "2.0.0-beta1.20303.1"
         }
+      },
+      "System.Memory": {
+        "type": "Transitive",
+        "resolved": "4.5.4",
+        "contentHash": "1MbJTHS1lZ4bS4FmsJjnuGJOu88ZzTT2rLvrhW7Ygic+pC0NWA+3hgAen0HRdsocuQXCkUTdFn9yHJJhsijDXw=="
       },
       "gw2sdk": {
         "type": "Project",
