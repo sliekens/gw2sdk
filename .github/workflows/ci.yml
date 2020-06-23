@@ -10,15 +10,12 @@ env:
   DOTNET_NOLOGO: true
   DOTNET_CLI_TELEMETRY_OPTOUT: true
   DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
+  build-configuration: Release
 
 jobs:
   build:
     name: Build
     runs-on: ubuntu-latest
-    
-    env:
-      build-configuration: Release
-
     steps:
     - uses: actions/checkout@v2
     - name: Setup .NET Core
@@ -61,4 +58,16 @@ jobs:
         path: "**/coverage.cobertura.xml"
     - name: Upload coverage to Codecov
       uses: codecov/codecov-action@v1.0.7
+  deploy:
+    name: Deploy
+    needs: [build]
+    runs-on: ubuntu-latest
+    steps:
+    - name: Pack artifacts
+      run: dotnet pack --configuration ${{ env.build-configuration }} --no-build
+    - name: Upload artifacts
+      uses: actions/upload-artifact@v2
+      with:
+        name: packages
+        path: "**/*.[s]nupkg"
         
