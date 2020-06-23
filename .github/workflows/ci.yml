@@ -10,11 +10,12 @@ env:
   DOTNET_NOLOGO: true
   DOTNET_CLI_TELEMETRY_OPTOUT: true
   DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
-  build-configuration: Release
 
 jobs:
   build-and-deploy:
     name: Build and deploy
+    env:
+      build-configuration: Release
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
@@ -33,22 +34,11 @@ jobs:
           ${{ runner.os }}-
     - name: Install dependencies
       run: dotnet restore
-    - name: Azure Login
-      uses: Azure/login@v1.1
-      with:
-        creds: ${{ secrets.AZURE_CREDENTIALS }}
-    - name: Azure key vault - Get Secrets
-      uses: Azure/get-keyvault-secrets@v1
-      with:
-        keyvault: GW2SDK-Keys
-        secrets: ApiKeyBasic, ApiKeyFull
-      id: keyvault
-    - name: Export keys
-      run: |
-        echo "::set-env name=ApiKeyBasic::${{ steps.keyvault.outputs.ApiKeyBasic}}"
-        echo "::set-env name=ApiKeyFull::${{ steps.keyvault.outputs.ApiKeyFull}}"
     - name: Test
       run: dotnet test --no-restore --settings ${{ github.workspace }}/coverletArgs.runsettings
+      env:
+        ApiKeyBasic: ${{ secrets.API_TOKEN_BASIC }}
+        ApiKeyFull: ${{ secrets.API_TOKEN_FULL }}
     - name: Upload coverage
       uses: actions/upload-artifact@v2
       with:
@@ -59,10 +49,10 @@ jobs:
     - name: Build
       run: dotnet build --configuration ${{ env.build-configuration }} --no-restore
     - name: Pack artifacts
-      run: dotnet pack --configuration ${{ env.build-configuration }} --no-build
+      run: dotnet pack --configuration ${{ env.build-configuration }} --no-build --output artifacts
     - name: Upload artifacts
       uses: actions/upload-artifact@v2
       with:
         name: packages
-        path: "**/*.[s]nupkg"
+        path: artifacts
         
