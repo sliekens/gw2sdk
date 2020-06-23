@@ -61,4 +61,4 @@ jobs:
         name: packages
         path: artifacts
     - name: Upload packages to GitHub Packages
-      run: dotnet nuget push artifacts/*.nupkg -k ${{ secrets.GPR_TOKEN }}
+      run: dotnet nuget push artifacts/*.nupkg
