@@ -28,13 +28,5 @@ namespace GW2SDK.Tests.Features.Items
 
             Assert.Superset(expected, actual);
         }
-
-        [Fact]
-        [Trait("Feature",  "Items")]
-        [Trait("Category", "Unit")]
-        public void Rarity_has_no_default_member()
-        {
-            Assert.False(Enum.IsDefined(typeof(Rarity), default(Rarity)));
-        }
     }
 }

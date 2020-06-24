@@ -27,15 +27,5 @@ namespace GW2SDK.Tests.Features.Achievements
 
             Assert.Equal(expected, actual);
         }
-
-        [Fact]
-        [Trait("Feature",  "Achievements")]
-        [Trait("Category", "Unit")]
-        public void AchievementFlag_has_no_default_member()
-        {
-            var actual = Enum.IsDefined(typeof(AchievementFlag), default(AchievementFlag));
-
-            Assert.False(actual);
-        }
     }
 }

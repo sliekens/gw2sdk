@@ -5,7 +5,6 @@ namespace GW2SDK.Enums
     [PublicAPI]
     public enum ItemRestriction
     {
-        // Skip index 0 so that Enum.IsDefined returns false for default(ItemRestriction)
         Asura = 1,
 
         Charr,
