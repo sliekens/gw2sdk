@@ -1,8 +1,8 @@
 {"id":1001,"name":"Anvil Rock","population":"Full"}
-{"id":1002,"name":"Borlis Pass","population":"High"}
-{"id":1003,"name":"Yak's Bend","population":"Full"}
+{"id":1002,"name":"Borlis Pass","population":"VeryHigh"}
+{"id":1003,"name":"Yak's Bend","population":"VeryHigh"}
 {"id":1004,"name":"Henge of Denravi","population":"Full"}
-{"id":1005,"name":"Maguuma","population":"Full"}
+{"id":1005,"name":"Maguuma","population":"VeryHigh"}
 {"id":1006,"name":"Sorrow's Furnace","population":"High"}
 {"id":1007,"name":"Gate of Madness","population":"High"}
 {"id":1008,"name":"Jade Quarry","population":"Full"}
@@ -10,7 +10,7 @@
 {"id":1010,"name":"Ehmry Bay","population":"Medium"}
 {"id":1011,"name":"Stormbluff Isle","population":"Full"}
 {"id":1012,"name":"Darkhaven","population":"High"}
-{"id":1013,"name":"Sanctum of Rall","population":"High"}
+{"id":1013,"name":"Sanctum of Rall","population":"VeryHigh"}
 {"id":1014,"name":"Crystal Desert","population":"High"}
 {"id":1015,"name":"Isle of Janthir","population":"Medium"}
 {"id":1016,"name":"Sea of Sorrows","population":"Full"}
@@ -32,17 +32,17 @@
 {"id":2008,"name":"Whiteside Ridge","population":"Full"}
 {"id":2009,"name":"Ruins of Surmia","population":"High"}
 {"id":2010,"name":"Seafarer's Rest","population":"Full"}
-{"id":2011,"name":"Vabbi","population":"Medium"}
+{"id":2011,"name":"Vabbi","population":"High"}
 {"id":2012,"name":"Piken Square","population":"Full"}
-{"id":2013,"name":"Aurora Glade","population":"High"}
-{"id":2014,"name":"Gunnar's Hold","population":"VeryHigh"}
-{"id":2101,"name":"Jade Sea [FR]","population":"Full"}
+{"id":2013,"name":"Aurora Glade","population":"VeryHigh"}
+{"id":2014,"name":"Gunnar's Hold","population":"Full"}
+{"id":2101,"name":"Jade Sea [FR]","population":"VeryHigh"}
 {"id":2102,"name":"Fort Ranik [FR]","population":"Medium"}
 {"id":2103,"name":"Augury Rock [FR]","population":"Full"}
 {"id":2104,"name":"Vizunah Square [FR]","population":"High"}
 {"id":2105,"name":"Arborstone [FR]","population":"Medium"}
-{"id":2201,"name":"Kodash [DE]","population":"Medium"}
-{"id":2202,"name":"Riverside [DE]","population":"VeryHigh"}
+{"id":2201,"name":"Kodash [DE]","population":"High"}
+{"id":2202,"name":"Riverside [DE]","population":"Full"}
 {"id":2203,"name":"Elona Reach [DE]","population":"Full"}
 {"id":2204,"name":"Abaddon's Mouth [DE]","population":"High"}
 {"id":2205,"name":"Drakkar Lake [DE]","population":"VeryHigh"}
