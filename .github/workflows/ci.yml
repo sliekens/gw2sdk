@@ -18,9 +18,9 @@ jobs:
       build-configuration: Release
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@7df9f59802b508a78c4e4e0f48c27ed646a9158c
+    - uses: actions/checkout@v2
     - name: Setup .NET Core
-      uses: actions/setup-dotnet@v1
+      uses: actions/setup-dotnet@7df9f59802b508a78c4e4e0f48c27ed646a9158c
       with:
         source-url: https://nuget.pkg.github.com/stevenliekens/index.json
       env:
