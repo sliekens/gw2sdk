@@ -27,13 +27,5 @@ namespace GW2SDK.Tests.Features.Worlds
 
             Assert.Equal(expected, actual);
         }
-
-        [Fact]
-        [Trait("Feature",  "Worlds")]
-        [Trait("Category", "Unit")]
-        public void World_population_has_no_default_member()
-        {
-            Assert.False(Enum.IsDefined(typeof(WorldPopulation), default(WorldPopulation)));
-        }
     }
 }

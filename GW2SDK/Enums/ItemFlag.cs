@@ -5,7 +5,6 @@ namespace GW2SDK.Enums
     [PublicAPI]
     public enum ItemFlag
     {
-        // Skip index 0 so that Enum.IsDefined returns false for default(ItemFlag)
         AccountBindOnUse = 1,
 
         AccountBound,

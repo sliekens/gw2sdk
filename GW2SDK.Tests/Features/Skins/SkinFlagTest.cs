@@ -28,13 +28,5 @@ namespace GW2SDK.Tests.Features.Skins
 
             Assert.Equal(expected, actual);
         }
-
-        [Fact]
-        [Trait("Feature",  "Skins")]
-        [Trait("Category", "Unit")]
-        public void Skin_flag_has_no_default_member()
-        {
-            Assert.False(Enum.IsDefined(typeof(SkinFlag), default(SkinFlag)));
-        }
     }
 }

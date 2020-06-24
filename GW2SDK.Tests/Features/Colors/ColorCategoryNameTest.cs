@@ -28,13 +28,5 @@ namespace GW2SDK.Tests.Features.Colors
 
             Assert.Equal(expected, actual);
         }
-
-        [Fact]
-        [Trait("Feature",  "Colors")]
-        [Trait("Category", "Unit")]
-        public void There_is_no_default_color_category_name()
-        {
-            Assert.False(Enum.IsDefined(typeof(ColorCategoryName), default(ColorCategoryName)));
-        }
     }
 }

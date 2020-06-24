@@ -28,13 +28,5 @@ namespace GW2SDK.Tests.Features.Recipes
 
             Assert.Equal(expected, actual);
         }
-
-        [Fact]
-        [Trait("Feature",  "Recipes")]
-        [Trait("Category", "Unit")]
-        public void Crafting_discipline_has_no_default_member()
-        {
-            Assert.False(Enum.IsDefined(typeof(CraftingDiscipline), default(CraftingDiscipline)));
-        }
     }
 }

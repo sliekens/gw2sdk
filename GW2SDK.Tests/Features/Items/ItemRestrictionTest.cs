@@ -28,13 +28,5 @@ namespace GW2SDK.Tests.Features.Items
 
             Assert.Equal(expected, actual);
         }
-
-        [Fact]
-        [Trait("Feature",  "Items")]
-        [Trait("Category", "Unit")]
-        public void Item_restriction_has_no_default_member()
-        {
-            Assert.False(Enum.IsDefined(typeof(ItemRestriction), default(ItemRestriction)));
-        }
     }
 }
