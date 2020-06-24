@@ -47,10 +47,10 @@ jobs:
     - name: Upload packages to GitHub Packages
       run: |
         dotnet nuget add source https://nuget.pkg.github.com/stevenliekens/index.json \
-          --name GPR \
+          --name GPR2 \
           --username StevenLiekens \
           --password ${{ secrets.GITHUB_TOKEN }} \
           --store-password-in-clear-text \
           --configfile nuget.config
-        dotnet nuget push artifacts/*.nupkg --source GPR
+        dotnet nuget push artifacts/*.nupkg --source GPR2
       if:  ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
