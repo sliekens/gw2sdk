@@ -5,7 +5,6 @@ C# client SDK for interacting with the Guild Wars 2 API
 
 ## Quick navigation
 
-- Azure DevOps project (retiring soon): <https://dev.azure.com/stevenliekens/GW2SDK>
 - Code coverage: <https://codecov.io/gh/StevenLiekens/gw2sdk>
 - API reference: <https://wiki.guildwars2.com/wiki/API:Main>
 
