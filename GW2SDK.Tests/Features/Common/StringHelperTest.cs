@@ -9,28 +9,12 @@ namespace GW2SDK.Tests.Features.Common
     {
         [Theory]
         [InlineData("A", "a")]
-        [InlineData("Z", "z")]
-        public void ToSnakeCase_WithOneUpperCaseLetter_ShouldBeLowerCaseText(string input, string expected)
-        {
-            var actual = StringHelper.ToSnakeCase(input);
-
-            Assert.Equal(expected, actual);
-        }
-
-        [Theory]
         [InlineData("AB", "ab")]
-        [InlineData("ZZ", "zz")]
-        public void ToSnakeCase_WithTwoUpperCaseLetters_ShouldBeLowerCaseText(string input, string expected)
-        {
-            var actual = StringHelper.ToSnakeCase(input);
-
-            Assert.Equal(expected, actual);
-        }
-
-        [Theory]
         [InlineData("ABC", "abc")]
+        [InlineData("Z", "z")]
+        [InlineData("ZZ", "zz")]
         [InlineData("ZZZ", "zzz")]
-        public void ToSnakeCase_WithThreeUpperCaseLetters_ShouldBeLowerCaseText(string input, string expected)
+        public void It_can_convert_uppercase_letters_to_snake_case(string input, string expected)
         {
             var actual = StringHelper.ToSnakeCase(input);
 
@@ -38,9 +22,10 @@ namespace GW2SDK.Tests.Features.Common
         }
 
         [Theory]
-        [InlineData("HTTP", "http")]
+        [InlineData("TLS",  "tls")]
+        [InlineData("HTTPS", "https")]
         [InlineData("API",  "api")]
-        public void ToSnakeCase_WithAcronym_ShouldBeLowerCaseText(string input, string expected)
+        public void It_can_convert_abbreviations_to_snake_case(string input, string expected)
         {
             var actual = StringHelper.ToSnakeCase(input);
 
@@ -50,7 +35,7 @@ namespace GW2SDK.Tests.Features.Common
         [Theory]
         [InlineData("IPAddress", "ip_address")]
         [InlineData("GW2SDK",    "gw2_sdk")]
-        public void ToSnakeCase_WithAcronymAndText_ShouldBeSnakeCaseText(string input, string expected)
+        public void It_can_convert_abbreviations_followed_by_other_text_to_snake_case(string input, string expected)
         {
             var actual = StringHelper.ToSnakeCase(input);
 
@@ -58,13 +43,13 @@ namespace GW2SDK.Tests.Features.Common
         }
 
         [Fact]
-        public void ToSnakeCase_WithNull_ShouldThrowArgumentNullException()
+        public void It_cant_convert_null_to_snake_case()
         {
-            Assert.Throws<ArgumentNullException>(() => StringHelper.ToSnakeCase(null));
+            Assert.Throws<ArgumentNullException>(() => StringHelper.ToSnakeCase(null!));
         }
 
         [Fact]
-        public void ToSnakeCase_WithEmptyString_ShouldBeEmptyString()
+        public void It_can_convert_empty_string_to_snake_case_empty_string()
         {
             var actual = StringHelper.ToSnakeCase("");
 
@@ -72,7 +57,7 @@ namespace GW2SDK.Tests.Features.Common
         }
 
         [Fact]
-        public void ToSnakeCase_WithCamelCaseText_ShouldBeSnakeCaseText()
+        public void It_can_convert_camel_case_to_snake_case()
         {
             var actual = StringHelper.ToSnakeCase("camelCase");
 
@@ -80,7 +65,7 @@ namespace GW2SDK.Tests.Features.Common
         }
 
         [Fact]
-        public void ToSnakeCase_WithPascalCaseText_ShouldBeSnakeCaseText()
+        public void It_can_convert_pascal_case_to_snake_case()
         {
             var actual = StringHelper.ToSnakeCase("PascalCase");
 

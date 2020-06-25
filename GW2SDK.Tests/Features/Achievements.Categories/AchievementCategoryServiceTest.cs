@@ -11,7 +11,7 @@ namespace GW2SDK.Tests.Features.Achievements.Categories
         [Fact]
         [Trait("Feature",  "Achievements.Categories")]
         [Trait("Category", "Integration")]
-        public async Task Get_all_achievement_categories()
+        public async Task It_can_get_all_achievement_categories()
         {
             await using var services = new Container();
             var sut = services.Resolve<AchievementCategoryService>();
@@ -24,7 +24,7 @@ namespace GW2SDK.Tests.Features.Achievements.Categories
         [Fact]
         [Trait("Feature",  "Achievements.Categories")]
         [Trait("Category", "Integration")]
-        public async Task Get_all_achievement_category_ids()
+        public async Task It_can_get_all_achievement_category_ids()
         {
             await using var services = new Container();
             var sut = services.Resolve<AchievementCategoryService>();
@@ -37,7 +37,7 @@ namespace GW2SDK.Tests.Features.Achievements.Categories
         [Fact]
         [Trait("Feature",  "Achievements.Categories")]
         [Trait("Category", "Integration")]
-        public async Task Get_an_achievement_category_by_id()
+        public async Task It_can_get_an_achievement_category_by_id()
         {
             await using var services = new Container();
             var sut = services.Resolve<AchievementCategoryService>();
@@ -52,7 +52,7 @@ namespace GW2SDK.Tests.Features.Achievements.Categories
         [Fact]
         [Trait("Feature",  "Achievements.Categories")]
         [Trait("Category", "Integration")]
-        public async Task Get_achievement_categories_by_id()
+        public async Task It_can_get_achievement_categories_by_id()
         {
             await using var services = new Container();
             var sut = services.Resolve<AchievementCategoryService>();
@@ -97,7 +97,7 @@ namespace GW2SDK.Tests.Features.Achievements.Categories
         [Fact]
         [Trait("Feature",  "Achievements.Categories")]
         [Trait("Category", "Integration")]
-        public async Task Get_achievement_categories_by_page()
+        public async Task It_can_get_achievement_categories_by_page()
         {
             await using var services = new Container();
             var sut = services.Resolve<AchievementCategoryService>();

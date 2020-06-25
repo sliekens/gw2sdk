@@ -17,7 +17,7 @@ namespace GW2SDK.Tests.PatternsAndPractices
         private readonly AssemblyFixture _fixture;
 
         [Fact]
-        public void EveryExportedClass_ShouldBeInheritableOrSealed()
+        public void Every_exported_class_is_designed_for_inheritance_or_sealed()
         {
             var classes = _fixture.Assembly.ExportedTypes.Where(type => type.IsClass).ToList();
             foreach (var type in classes)

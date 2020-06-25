@@ -11,7 +11,7 @@ namespace GW2SDK.Tests.Features.Backstories
         [Fact]
         [Trait("Feature",  "Backstories")]
         [Trait("Category", "Integration")]
-        public async Task Get_all_backstory_questions()
+        public async Task It_can_get_all_backstory_questions()
         {
             await using var services = new Container();
             var sut = services.Resolve<BackstoryService>();
@@ -24,7 +24,7 @@ namespace GW2SDK.Tests.Features.Backstories
         [Fact]
         [Trait("Feature",  "Backstories")]
         [Trait("Category", "Integration")]
-        public async Task Get_all_backstory_answers()
+        public async Task It_can_get_all_backstory_answers()
         {
             await using var services = new Container();
             var sut = services.Resolve<BackstoryService>();
@@ -37,7 +37,7 @@ namespace GW2SDK.Tests.Features.Backstories
         [Fact]
         [Trait("Feature",  "Backstories")]
         [Trait("Category", "Integration")]
-        public async Task Get_all_backstory_question_ids()
+        public async Task It_can_get_all_backstory_question_ids()
         {
             await using var services = new Container();
             var sut = services.Resolve<BackstoryService>();
@@ -50,7 +50,7 @@ namespace GW2SDK.Tests.Features.Backstories
         [Fact]
         [Trait("Feature",  "Backstories")]
         [Trait("Category", "Integration")]
-        public async Task Get_all_backstory_answer_ids()
+        public async Task It_can_get_all_backstory_answer_ids()
         {
             await using var services = new Container();
             var sut = services.Resolve<BackstoryService>();
@@ -63,7 +63,7 @@ namespace GW2SDK.Tests.Features.Backstories
         [Fact]
         [Trait("Feature",  "Backstories")]
         [Trait("Category", "Integration")]
-        public async Task Get_a_backstory_question_by_id()
+        public async Task It_can_get_a_backstory_question_by_id()
         {
             await using var services = new Container();
             var sut = services.Resolve<BackstoryService>();
@@ -78,7 +78,7 @@ namespace GW2SDK.Tests.Features.Backstories
         [Fact]
         [Trait("Feature",  "Backstories")]
         [Trait("Category", "Integration")]
-        public async Task Get_a_backstory_answer_by_id()
+        public async Task It_can_get_a_backstory_answer_by_id()
         {
             await using var services = new Container();
             var sut = services.Resolve<BackstoryService>();
@@ -199,7 +199,7 @@ namespace GW2SDK.Tests.Features.Backstories
         [Fact]
         [Trait("Feature",  "Backstories")]
         [Trait("Category", "Integration")]
-        public async Task Get_backstory_questions_by_id()
+        public async Task It_can_get_backstory_questions_by_id()
         {
             await using var services = new Container();
             var sut = services.Resolve<BackstoryService>();
@@ -217,7 +217,7 @@ namespace GW2SDK.Tests.Features.Backstories
         [Fact]
         [Trait("Feature",  "Backstories")]
         [Trait("Category", "Integration")]
-        public async Task Get_backstory_answers_by_id()
+        public async Task It_can_get_backstory_answers_by_id()
         {
             await using var services = new Container();
             var sut = services.Resolve<BackstoryService>();
@@ -235,7 +235,7 @@ namespace GW2SDK.Tests.Features.Backstories
         [Fact]
         [Trait("Feature",  "Backstories")]
         [Trait("Category", "Integration")]
-        public async Task Get_backstory_questions_by_page()
+        public async Task It_can_get_backstory_questions_by_page()
         {
             await using var services = new Container();
             var sut = services.Resolve<BackstoryService>();
@@ -249,7 +249,7 @@ namespace GW2SDK.Tests.Features.Backstories
         [Fact]
         [Trait("Feature",  "Backstories")]
         [Trait("Category", "Integration")]
-        public async Task Get_backstory_answers_by_page()
+        public async Task It_can_get_backstory_answers_by_page()
         {
             await using var services = new Container();
             var sut = services.Resolve<BackstoryService>();
