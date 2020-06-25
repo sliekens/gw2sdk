@@ -15,8 +15,7 @@ using GW2SDK.Colors;
 using GW2SDK.Commerce.Prices;
 using GW2SDK.Continents;
 using GW2SDK.Exceptions;
-using GW2SDK.Extensions;
-using GW2SDK.Impl.HttpMessageHandlers;
+using GW2SDK.Http;
 using GW2SDK.Items;
 using GW2SDK.Recipes;
 using GW2SDK.Recipes.Search;
@@ -55,7 +54,7 @@ namespace GW2SDK.Tests.TestInfrastructure
             services.AddHttpClient("GW2SDK",
                     http =>
                     {
-                        http.UseBaseAddress(ConfigurationManager.Instance.BaseAddress);
+                        http.BaseAddress = ConfigurationManager.Instance.BaseAddress;
                         http.UseLatestSchemaVersion();
                         http.UseDataCompression();
                     })

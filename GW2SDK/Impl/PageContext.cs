@@ -1,8 +1,8 @@
 ﻿namespace GW2SDK.Impl
 {
-    public sealed class PageContext : IPageContext
+    internal sealed class PageContext : IPageContext
     {
-        public PageContext(int resultTotal, int resultCount, int pageTotal, int pageSize)
+        internal PageContext(int resultTotal, int resultCount, int pageTotal, int pageSize)
         {
             ResultTotal = resultTotal;
             ResultCount = resultCount;

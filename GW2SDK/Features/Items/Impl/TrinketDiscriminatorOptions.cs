@@ -4,31 +4,26 @@ using GW2SDK.Impl.JsonConverters;
 
 namespace GW2SDK.Items.Impl
 {
-    public sealed class TrinketDiscriminatorOptions : DiscriminatorOptions
+    internal sealed class TrinketDiscriminatorOptions : DiscriminatorOptions
     {
-        public TrinketDiscriminatorOptions()
-        {
-            Activator = Create;
-        }
+        internal override Type BaseType => typeof(Trinket);
 
-        public override Type BaseType => typeof(Trinket);
+        internal override string DiscriminatorFieldName => "trinket_type";
 
-        public override string DiscriminatorFieldName => "trinket_type";
+        internal override bool SerializeDiscriminator => false;
 
-        public override bool SerializeDiscriminator => false;
-
-        public override IEnumerable<(string TypeName, Type Type)> GetDiscriminatedTypes()
+        internal override IEnumerable<(string TypeName, Type Type)> GetDiscriminatedTypes()
         {
             yield return ("Accessory", typeof(Accessory));
             yield return ("Amulet", typeof(Amulet));
             yield return ("Ring", typeof(Ring));
         }
 
-        public object Create(Type objectType)
+        internal override object CreateInstance(Type discriminatedType)
         {
-            if (objectType == typeof(Accessory)) return new Accessory();
-            if (objectType == typeof(Amulet)) return new Amulet();
-            if (objectType == typeof(Ring)) return new Ring();
+            if (discriminatedType == typeof(Accessory)) return new Accessory();
+            if (discriminatedType == typeof(Amulet)) return new Amulet();
+            if (discriminatedType == typeof(Ring)) return new Ring();
             return new Trinket();
         }
     }

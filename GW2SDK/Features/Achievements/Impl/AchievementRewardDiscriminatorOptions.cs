@@ -4,20 +4,15 @@ using GW2SDK.Impl.JsonConverters;
 
 namespace GW2SDK.Achievements.Impl
 {
-    public sealed class AchievementRewardDiscriminatorOptions : DiscriminatorOptions
+    internal sealed class AchievementRewardDiscriminatorOptions : DiscriminatorOptions
     {
-        public AchievementRewardDiscriminatorOptions()
-        {
-            Activator = Create;
-        }
+        internal override Type BaseType => typeof(AchievementReward);
 
-        public override Type BaseType => typeof(AchievementReward);
+        internal override string DiscriminatorFieldName => "type";
 
-        public override string DiscriminatorFieldName => "type";
+        internal override bool SerializeDiscriminator => false;
 
-        public override bool SerializeDiscriminator => false;
-
-        public override IEnumerable<(string TypeName, Type Type)> GetDiscriminatedTypes()
+        internal override IEnumerable<(string TypeName, Type Type)> GetDiscriminatedTypes()
         {
             yield return ("Title", typeof(TitleReward));
             yield return ("Mastery", typeof(MasteryReward));
@@ -25,12 +20,12 @@ namespace GW2SDK.Achievements.Impl
             yield return ("Coins", typeof(CoinsReward));
         }
 
-        public object Create(Type objectType)
+        internal override object CreateInstance(Type discriminatedType)
         {
-            if (objectType == typeof(TitleReward)) return new TitleReward();
-            if (objectType == typeof(MasteryReward)) return new MasteryReward();
-            if (objectType == typeof(ItemReward)) return new ItemReward();
-            if (objectType == typeof(CoinsReward)) return new CoinsReward();
+            if (discriminatedType == typeof(TitleReward)) return new TitleReward();
+            if (discriminatedType == typeof(MasteryReward)) return new MasteryReward();
+            if (discriminatedType == typeof(ItemReward)) return new ItemReward();
+            if (discriminatedType == typeof(CoinsReward)) return new CoinsReward();
             return new AchievementReward();
         }
     }

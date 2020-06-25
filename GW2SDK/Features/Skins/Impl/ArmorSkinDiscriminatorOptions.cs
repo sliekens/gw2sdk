@@ -4,20 +4,15 @@ using GW2SDK.Impl.JsonConverters;
 
 namespace GW2SDK.Skins.Impl
 {
-    public sealed class ArmorSkinDiscriminatorOptions : DiscriminatorOptions
+    internal sealed class ArmorSkinDiscriminatorOptions : DiscriminatorOptions
     {
-        public ArmorSkinDiscriminatorOptions()
-        {
-            Activator = Create;
-        }
+        internal override Type BaseType => typeof(ArmorSkin);
 
-        public override Type BaseType => typeof(ArmorSkin);
+        internal override string DiscriminatorFieldName => "armor_type";
 
-        public override string DiscriminatorFieldName => "armor_type";
+        internal override bool SerializeDiscriminator => false;
 
-        public override bool SerializeDiscriminator => false;
-
-        public override IEnumerable<(string TypeName, Type Type)> GetDiscriminatedTypes()
+        internal override IEnumerable<(string TypeName, Type Type)> GetDiscriminatedTypes()
         {
             yield return ("Boots", typeof(BootsSkin));
             yield return ("Coat", typeof(CoatSkin));
@@ -28,15 +23,15 @@ namespace GW2SDK.Skins.Impl
             yield return ("Shoulders", typeof(ShouldersSkin));
         }
 
-        public object Create(Type objectType)
+        internal override object CreateInstance(Type discriminatedType)
         {
-            if (objectType == typeof(BootsSkin)) return new BootsSkin();
-            if (objectType == typeof(CoatSkin)) return new CoatSkin();
-            if (objectType == typeof(GlovesSkin)) return new GlovesSkin();
-            if (objectType == typeof(HelmSkin)) return new HelmSkin();
-            if (objectType == typeof(HelmAquaticSkin)) return new HelmAquaticSkin();
-            if (objectType == typeof(LeggingsSkin)) return new LeggingsSkin();
-            if (objectType == typeof(ShouldersSkin)) return new ShouldersSkin();
+            if (discriminatedType == typeof(BootsSkin)) return new BootsSkin();
+            if (discriminatedType == typeof(CoatSkin)) return new CoatSkin();
+            if (discriminatedType == typeof(GlovesSkin)) return new GlovesSkin();
+            if (discriminatedType == typeof(HelmSkin)) return new HelmSkin();
+            if (discriminatedType == typeof(HelmAquaticSkin)) return new HelmAquaticSkin();
+            if (discriminatedType == typeof(LeggingsSkin)) return new LeggingsSkin();
+            if (discriminatedType == typeof(ShouldersSkin)) return new ShouldersSkin();
             return new ArmorSkin();
         }
     }

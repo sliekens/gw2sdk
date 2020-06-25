@@ -1,9 +1,10 @@
-﻿using Newtonsoft.Json;
+﻿using GW2SDK.Impl.JsonConverters;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 
-namespace GW2SDK.Impl.JsonConverters
+namespace GW2SDK.Tests.TestInfrastructure
 {
-    public sealed class JsonSerializerSettingsBuilder
+    internal sealed class JsonSerializerSettingsBuilder
     {
         private readonly NamingStrategy _namingStrategy = new SnakeCaseNamingStrategy();
 
@@ -11,19 +12,19 @@ namespace GW2SDK.Impl.JsonConverters
 
         private ITraceWriter? _traceWriter;
 
-        public JsonSerializerSettingsBuilder UseMissingMemberHandling(MissingMemberHandling missingMemberHandling)
+        internal JsonSerializerSettingsBuilder UseMissingMemberHandling(MissingMemberHandling missingMemberHandling)
         {
             _missingMemberHandling = missingMemberHandling;
             return this;
         }
 
-        public JsonSerializerSettingsBuilder UseTraceWriter(ITraceWriter traceWriter)
+        internal JsonSerializerSettingsBuilder UseTraceWriter(ITraceWriter traceWriter)
         {
             _traceWriter = traceWriter;
             return this;
         }
 
-        public JsonSerializerSettings Build() =>
+        internal JsonSerializerSettings Build() =>
             new JsonSerializerSettings
             {
                 MissingMemberHandling = _missingMemberHandling,

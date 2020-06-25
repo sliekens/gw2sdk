@@ -4,20 +4,15 @@ using GW2SDK.Impl.JsonConverters;
 
 namespace GW2SDK.Items.Impl
 {
-    public sealed class UnlockerDiscriminatorOptions : DiscriminatorOptions
+    internal sealed class UnlockerDiscriminatorOptions : DiscriminatorOptions
     {
-        public UnlockerDiscriminatorOptions()
-        {
-            Activator = Create;
-        }
+        internal override Type BaseType => typeof(Unlocker);
 
-        public override Type BaseType => typeof(Unlocker);
+        internal override string DiscriminatorFieldName => "unlock_type";
 
-        public override string DiscriminatorFieldName => "unlock_type";
+        internal override bool SerializeDiscriminator => false;
 
-        public override bool SerializeDiscriminator => false;
-
-        public override IEnumerable<(string TypeName, Type Type)> GetDiscriminatedTypes()
+        internal override IEnumerable<(string TypeName, Type Type)> GetDiscriminatedTypes()
         {
             yield return ("BagSlot", typeof(BagSlotUnlocker));
             yield return ("BankTab", typeof(BankTabUnlocker));
@@ -36,24 +31,24 @@ namespace GW2SDK.Items.Impl
             yield return ("SharedSlot", typeof(SharedSlotUnlocker));
         }
 
-        public object Create(Type objectType)
+        internal override object CreateInstance(Type discriminatedType)
         {
-            if (objectType == typeof(BagSlotUnlocker)) return new BagSlotUnlocker();
-            if (objectType == typeof(BankTabUnlocker)) return new BankTabUnlocker();
-            if (objectType == typeof(BuildLibrarySlot)) return new BuildLibrarySlot();
-            if (objectType == typeof(BuildLoadoutTab)) return new BuildLoadoutTab();
-            if (objectType == typeof(ChampionUnlocker)) return new ChampionUnlocker();
-            if (objectType == typeof(CollectibleCapacityUnlocker)) return new CollectibleCapacityUnlocker();
-            if (objectType == typeof(ContentUnlocker)) return new ContentUnlocker();
-            if (objectType == typeof(CraftingRecipeUnlocker)) return new CraftingRecipeUnlocker();
-            if (objectType == typeof(DyeUnlocker)) return new DyeUnlocker();
-            if (objectType == typeof(GearLoadoutTab)) return new GearLoadoutTab();
-            if (objectType == typeof(GliderSkinUnlocker)) return new GliderSkinUnlocker();
-            if (objectType == typeof(MinipetUnlocker)) return new MinipetUnlocker();
-            if (objectType == typeof(MsUnlocker)) return new MsUnlocker();
-            if (objectType == typeof(OutfitUnlocker)) return new OutfitUnlocker();
-            if (objectType == typeof(SharedSlotUnlocker)) return new SharedSlotUnlocker();
-            if (objectType == typeof(Unlocker)) return new Unlocker();
+            if (discriminatedType == typeof(BagSlotUnlocker)) return new BagSlotUnlocker();
+            if (discriminatedType == typeof(BankTabUnlocker)) return new BankTabUnlocker();
+            if (discriminatedType == typeof(BuildLibrarySlot)) return new BuildLibrarySlot();
+            if (discriminatedType == typeof(BuildLoadoutTab)) return new BuildLoadoutTab();
+            if (discriminatedType == typeof(ChampionUnlocker)) return new ChampionUnlocker();
+            if (discriminatedType == typeof(CollectibleCapacityUnlocker)) return new CollectibleCapacityUnlocker();
+            if (discriminatedType == typeof(ContentUnlocker)) return new ContentUnlocker();
+            if (discriminatedType == typeof(CraftingRecipeUnlocker)) return new CraftingRecipeUnlocker();
+            if (discriminatedType == typeof(DyeUnlocker)) return new DyeUnlocker();
+            if (discriminatedType == typeof(GearLoadoutTab)) return new GearLoadoutTab();
+            if (discriminatedType == typeof(GliderSkinUnlocker)) return new GliderSkinUnlocker();
+            if (discriminatedType == typeof(MinipetUnlocker)) return new MinipetUnlocker();
+            if (discriminatedType == typeof(MsUnlocker)) return new MsUnlocker();
+            if (discriminatedType == typeof(OutfitUnlocker)) return new OutfitUnlocker();
+            if (discriminatedType == typeof(SharedSlotUnlocker)) return new SharedSlotUnlocker();
+            if (discriminatedType == typeof(Unlocker)) return new Unlocker();
             return new Unlocker();
         }
     }

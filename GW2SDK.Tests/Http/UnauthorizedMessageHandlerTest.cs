@@ -3,10 +3,10 @@ using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 using GW2SDK.Exceptions;
-using GW2SDK.Impl.HttpMessageHandlers;
+using GW2SDK.Http;
 using Xunit;
 
-namespace GW2SDK.Tests.Features.Common
+namespace GW2SDK.Tests.Http
 {
     public class UnauthorizedMessageHandlerTest
     {

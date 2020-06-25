@@ -2,9 +2,10 @@
 using System.Threading;
 using System.Threading.Tasks;
 using GW2SDK.Exceptions;
+using GW2SDK.Impl;
 using Newtonsoft.Json.Linq;
 
-namespace GW2SDK.Impl.HttpMessageHandlers
+namespace GW2SDK.Http
 {
     public sealed class RateLimitHandler : DelegatingHandler
     {

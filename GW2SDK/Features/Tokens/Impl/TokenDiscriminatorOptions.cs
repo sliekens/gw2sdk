@@ -4,29 +4,24 @@ using GW2SDK.Impl.JsonConverters;
 
 namespace GW2SDK.Tokens.Impl
 {
-    public sealed class TokenDiscriminatorOptions : DiscriminatorOptions
+    internal sealed class TokenDiscriminatorOptions : DiscriminatorOptions
     {
-        public TokenDiscriminatorOptions()
-        {
-            Activator = Create;
-        }
+        internal override Type BaseType => typeof(TokenInfo);
 
-        public override Type BaseType => typeof(TokenInfo);
+        internal override string DiscriminatorFieldName => "type";
 
-        public override string DiscriminatorFieldName => "type";
+        internal override bool SerializeDiscriminator => false;
 
-        public override bool SerializeDiscriminator => false;
-
-        public override IEnumerable<(string TypeName, Type Type)> GetDiscriminatedTypes()
+        internal override IEnumerable<(string TypeName, Type Type)> GetDiscriminatedTypes()
         {
             yield return ("APIKey", typeof(ApiKeyInfo));
             yield return ("Subtoken", typeof(SubtokenInfo));
         }
 
-        public object Create(Type objectType)
+        internal override object CreateInstance(Type discriminatedType)
         {
-            if (objectType == typeof(ApiKeyInfo)) return new ApiKeyInfo();
-            if (objectType == typeof(SubtokenInfo)) return new SubtokenInfo();
+            if (discriminatedType == typeof(ApiKeyInfo)) return new ApiKeyInfo();
+            if (discriminatedType == typeof(SubtokenInfo)) return new SubtokenInfo();
             return new TokenInfo();
         }
     }

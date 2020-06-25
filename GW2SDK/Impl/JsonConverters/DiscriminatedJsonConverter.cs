@@ -6,16 +6,16 @@ using Newtonsoft.Json.Linq;
 
 namespace GW2SDK.Impl.JsonConverters
 {
-    public sealed class DiscriminatedJsonConverter : JsonConverter
+    internal sealed class DiscriminatedJsonConverter : JsonConverter
     {
         private readonly DiscriminatorOptions _discriminatorOptions;
 
-        public DiscriminatedJsonConverter(Type concreteDiscriminatorOptionsType)
+        internal DiscriminatedJsonConverter(Type concreteDiscriminatorOptionsType)
             : this((DiscriminatorOptions) Activator.CreateInstance(concreteDiscriminatorOptionsType))
         {
         }
 
-        public DiscriminatedJsonConverter(DiscriminatorOptions discriminatorOptions)
+        internal DiscriminatedJsonConverter(DiscriminatorOptions discriminatorOptions)
         {
             _discriminatorOptions = discriminatorOptions ?? throw new ArgumentNullException(nameof(discriminatorOptions));
         }
@@ -76,7 +76,7 @@ namespace GW2SDK.Impl.JsonConverters
                 }
             }
 
-            _discriminatorOptions.Preprocessor?.Invoke(discriminatorFieldValue, json);
+            _discriminatorOptions.Preprocess(discriminatorFieldValue, json);
             if (discriminatorField is object && !_discriminatorOptions.SerializeDiscriminator)
             {
                 // Remove the discriminator field from the JSON for two possible reasons:
@@ -95,7 +95,7 @@ namespace GW2SDK.Impl.JsonConverters
                 return serializer.Deserialize(json.CreateReader(), found);
             }
 
-            var value = _discriminatorOptions.Activator?.Invoke(found) ?? Activator.CreateInstance(found);
+            var value = _discriminatorOptions.CreateInstance(found);
             serializer.Populate(json.CreateReader(), value);
             return value;
         }

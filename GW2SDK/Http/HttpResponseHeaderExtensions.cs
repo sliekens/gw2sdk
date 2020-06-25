@@ -3,7 +3,7 @@ using System.Linq;
 using System.Net.Http.Headers;
 using GW2SDK.Impl;
 
-namespace GW2SDK.Extensions
+namespace GW2SDK.Http
 {
     public static class HttpResponseHeaderExtensions
     {

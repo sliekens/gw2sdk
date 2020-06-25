@@ -4,20 +4,15 @@ using GW2SDK.Impl.JsonConverters;
 
 namespace GW2SDK.Items.Impl
 {
-    public sealed class ArmorDiscriminatorOptions : DiscriminatorOptions
+    internal sealed class ArmorDiscriminatorOptions : DiscriminatorOptions
     {
-        public ArmorDiscriminatorOptions()
-        {
-            Activator = Create;
-        }
+        internal override Type BaseType => typeof(Armor);
 
-        public override Type BaseType => typeof(Armor);
+        internal override string DiscriminatorFieldName => "armor_type";
 
-        public override string DiscriminatorFieldName => "armor_type";
+        internal override bool SerializeDiscriminator => false;
 
-        public override bool SerializeDiscriminator => false;
-
-        public override IEnumerable<(string TypeName, Type Type)> GetDiscriminatedTypes()
+        internal override IEnumerable<(string TypeName, Type Type)> GetDiscriminatedTypes()
         {
             yield return ("Boots", typeof(Boots));
             yield return ("Coat", typeof(Coat));
@@ -28,15 +23,15 @@ namespace GW2SDK.Items.Impl
             yield return ("Shoulders", typeof(Shoulders));
         }
 
-        public object Create(Type objectType)
+        internal override object CreateInstance(Type discriminatedType)
         {
-            if (objectType == typeof(Boots)) return new Boots();
-            if (objectType == typeof(Coat)) return new Coat();
-            if (objectType == typeof(Gloves)) return new Gloves();
-            if (objectType == typeof(Helm)) return new Helm();
-            if (objectType == typeof(HelmAquatic)) return new HelmAquatic();
-            if (objectType == typeof(Leggings)) return new Leggings();
-            if (objectType == typeof(Shoulders)) return new Shoulders();
+            if (discriminatedType == typeof(Boots)) return new Boots();
+            if (discriminatedType == typeof(Coat)) return new Coat();
+            if (discriminatedType == typeof(Gloves)) return new Gloves();
+            if (discriminatedType == typeof(Helm)) return new Helm();
+            if (discriminatedType == typeof(HelmAquatic)) return new HelmAquatic();
+            if (discriminatedType == typeof(Leggings)) return new Leggings();
+            if (discriminatedType == typeof(Shoulders)) return new Shoulders();
             return new Armor();
         }
     }

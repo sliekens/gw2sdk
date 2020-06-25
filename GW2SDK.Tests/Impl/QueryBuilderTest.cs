@@ -1,7 +1,7 @@
 ﻿using GW2SDK.Impl;
 using Xunit;
 
-namespace GW2SDK.Tests
+namespace GW2SDK.Tests.Impl
 {
     public class QueryBuilderTest
     {

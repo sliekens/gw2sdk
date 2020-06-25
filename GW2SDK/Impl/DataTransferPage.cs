@@ -4,11 +4,11 @@ using System.Collections.ObjectModel;
 
 namespace GW2SDK.Impl
 {
-    public sealed class DataTransferPage<T> : ReadOnlyCollection<T>, IDataTransferPage<T>
+    internal sealed class DataTransferPage<T> : ReadOnlyCollection<T>, IDataTransferPage<T>
     {
         private readonly IPageContext _context;
 
-        public DataTransferPage(IList<T> list, IPageContext context)
+        internal DataTransferPage(IList<T> list, IPageContext context)
             : base(list)
         {
             _context = context ?? throw new ArgumentNullException(nameof(context));

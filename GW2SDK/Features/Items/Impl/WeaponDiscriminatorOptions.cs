@@ -4,20 +4,15 @@ using GW2SDK.Impl.JsonConverters;
 
 namespace GW2SDK.Items.Impl
 {
-    public sealed class WeaponDiscriminatorOptions : DiscriminatorOptions
+    internal sealed class WeaponDiscriminatorOptions : DiscriminatorOptions
     {
-        public WeaponDiscriminatorOptions()
-        {
-            Activator = Create;
-        }
+        internal override Type BaseType => typeof(Weapon);
 
-        public override Type BaseType => typeof(Weapon);
+        internal override string DiscriminatorFieldName => "weapon_type";
 
-        public override string DiscriminatorFieldName => "weapon_type";
+        internal override bool SerializeDiscriminator => false;
 
-        public override bool SerializeDiscriminator => false;
-
-        public override IEnumerable<(string TypeName, Type Type)> GetDiscriminatedTypes()
+        internal override IEnumerable<(string TypeName, Type Type)> GetDiscriminatedTypes()
         {
             yield return ("Axe", typeof(Axe));
             yield return ("Dagger", typeof(Dagger));
@@ -44,31 +39,31 @@ namespace GW2SDK.Items.Impl
             yield return ("Warhorn", typeof(Warhorn));
         }
 
-        public object Create(Type objectType)
+        internal override object CreateInstance(Type discriminatedType)
         {
-            if (objectType == typeof(Axe)) return new Axe();
-            if (objectType == typeof(Dagger)) return new Dagger();
-            if (objectType == typeof(Focus)) return new Focus();
-            if (objectType == typeof(Greatsword)) return new Greatsword();
-            if (objectType == typeof(Hammer)) return new Hammer();
-            if (objectType == typeof(Harpoon)) return new Harpoon();
-            if (objectType == typeof(LargeBundle)) return new LargeBundle();
-            if (objectType == typeof(LongBow)) return new LongBow();
-            if (objectType == typeof(Mace)) return new Mace();
-            if (objectType == typeof(Pistol)) return new Pistol();
-            if (objectType == typeof(Rifle)) return new Rifle();
-            if (objectType == typeof(Scepter)) return new Scepter();
-            if (objectType == typeof(Shield)) return new Shield();
-            if (objectType == typeof(ShortBow)) return new ShortBow();
-            if (objectType == typeof(SmallBundle)) return new SmallBundle();
-            if (objectType == typeof(Speargun)) return new Speargun();
-            if (objectType == typeof(Staff)) return new Staff();
-            if (objectType == typeof(Sword)) return new Sword();
-            if (objectType == typeof(Torch)) return new Torch();
-            if (objectType == typeof(Toy)) return new Toy();
-            if (objectType == typeof(ToyTwoHanded)) return new ToyTwoHanded();
-            if (objectType == typeof(Trident)) return new Trident();
-            if (objectType == typeof(Warhorn)) return new Warhorn();
+            if (discriminatedType == typeof(Axe)) return new Axe();
+            if (discriminatedType == typeof(Dagger)) return new Dagger();
+            if (discriminatedType == typeof(Focus)) return new Focus();
+            if (discriminatedType == typeof(Greatsword)) return new Greatsword();
+            if (discriminatedType == typeof(Hammer)) return new Hammer();
+            if (discriminatedType == typeof(Harpoon)) return new Harpoon();
+            if (discriminatedType == typeof(LargeBundle)) return new LargeBundle();
+            if (discriminatedType == typeof(LongBow)) return new LongBow();
+            if (discriminatedType == typeof(Mace)) return new Mace();
+            if (discriminatedType == typeof(Pistol)) return new Pistol();
+            if (discriminatedType == typeof(Rifle)) return new Rifle();
+            if (discriminatedType == typeof(Scepter)) return new Scepter();
+            if (discriminatedType == typeof(Shield)) return new Shield();
+            if (discriminatedType == typeof(ShortBow)) return new ShortBow();
+            if (discriminatedType == typeof(SmallBundle)) return new SmallBundle();
+            if (discriminatedType == typeof(Speargun)) return new Speargun();
+            if (discriminatedType == typeof(Staff)) return new Staff();
+            if (discriminatedType == typeof(Sword)) return new Sword();
+            if (discriminatedType == typeof(Torch)) return new Torch();
+            if (discriminatedType == typeof(Toy)) return new Toy();
+            if (discriminatedType == typeof(ToyTwoHanded)) return new ToyTwoHanded();
+            if (discriminatedType == typeof(Trident)) return new Trident();
+            if (discriminatedType == typeof(Warhorn)) return new Warhorn();
             return new Weapon();
         }
     }

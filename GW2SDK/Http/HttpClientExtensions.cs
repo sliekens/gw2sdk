@@ -3,17 +3,11 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using GW2SDK.Annotations;
 
-namespace GW2SDK.Extensions
+namespace GW2SDK.Http
 {
     [UsedImplicitly(ImplicitUseTargetFlags.WithMembers)]
     public static class HttpClientExtensions
     {
-        public static void UseBaseAddress(this HttpClient instance, Uri baseAddress)
-        {
-            if (instance is null) throw new ArgumentNullException(nameof(instance));
-            instance.BaseAddress = baseAddress ?? throw new ArgumentNullException(nameof(baseAddress));
-        }
-
         public static void UseAccessToken(this HttpClient instance, string accessToken)
         {
             if (instance is null) throw new ArgumentNullException(nameof(instance));
@@ -22,38 +16,10 @@ namespace GW2SDK.Extensions
             instance.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
         }
 
-        public static void UseSchemaVersion(this HttpClient instance, string version)
-        {
-            if (instance is null) throw new ArgumentNullException(nameof(instance));
-            if (version is null) throw new ArgumentNullException(nameof(version));
-
-            // Lock to make this a little more thread-safe, assuming nobody tries to mutate X-Schema-Version directly
-            lock (instance)
-            {
-                // Don't care if Remove returns true or false
-                _ = instance.DefaultRequestHeaders.Remove("X-Schema-Version");
-                instance.DefaultRequestHeaders.Add("X-Schema-Version", version);
-            }
-        }
-
         public static void UseLatestSchemaVersion(this HttpClient instance)
         {
             if (instance is null) throw new ArgumentNullException(nameof(instance));
-            instance.UseSchemaVersion("latest");
-        }
-
-        public static void UseSchemaVersion(this HttpClient instance, DateTimeOffset version)
-        {
-            if (instance is null) throw new ArgumentNullException(nameof(instance));
-
-            // Use the sortable format (which is ISO 8601)
-            // eg. 2019-05-16T12:43:57
-            const string sortable = "s";
-
-            // Make sure to remove the offset and append "Z" to indicate that it is UTC
-            // eg. 2019-05-16T10:43:57Z
-            // (There is no format string that does all this in, I checked)
-            instance.UseSchemaVersion(version.ToOffset(TimeSpan.Zero).ToString(sortable) + "Z");
+            instance.DefaultRequestHeaders.Add("X-Schema-Version", "latest");
         }
 
         public static void UseLanguage(this HttpClient instance, string lang)

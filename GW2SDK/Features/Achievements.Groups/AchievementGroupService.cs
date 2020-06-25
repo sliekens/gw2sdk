@@ -5,7 +5,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using GW2SDK.Achievements.Groups.Impl;
 using GW2SDK.Annotations;
-using GW2SDK.Extensions;
+using GW2SDK.Http;
 using GW2SDK.Impl;
 using GW2SDK.Impl.JsonConverters;
 using Newtonsoft.Json;
