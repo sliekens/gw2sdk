@@ -10,7 +10,7 @@ namespace GW2SDK.Tests.TestInfrastructure
 
         private MissingMemberHandling _missingMemberHandling;
 
-        private ITraceWriter? _traceWriter;
+        private ITraceWriter _traceWriter;
 
         internal JsonSerializerSettingsBuilder UseMissingMemberHandling(MissingMemberHandling missingMemberHandling)
         {
