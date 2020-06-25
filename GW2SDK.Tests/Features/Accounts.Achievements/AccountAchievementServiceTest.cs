@@ -11,7 +11,7 @@ namespace GW2SDK.Tests.Features.Accounts.Achievements
         [Fact]
         [Trait("Feature",  "Accounts.Achievements")]
         [Trait("Category", "Integration")]
-        public async Task Get_all_account_achievements()
+        public async Task It_can_get_all_account_achievements()
         {
             await using var services = new Container();
             var sut = services.Resolve<AccountAchievementService>();
@@ -24,7 +24,7 @@ namespace GW2SDK.Tests.Features.Accounts.Achievements
         [Fact]
         [Trait("Feature",  "Accounts.Achievements")]
         [Trait("Category", "Integration")]
-        public async Task Get_an_account_achievement_by_id()
+        public async Task It_can_get_an_account_achievement_by_id()
         {
             await using var services = new Container();
             var sut = services.Resolve<AccountAchievementService>();
@@ -39,7 +39,7 @@ namespace GW2SDK.Tests.Features.Accounts.Achievements
         [Fact]
         [Trait("Feature",  "Accounts.Achievements")]
         [Trait("Category", "Integration")]
-        public async Task Get_account_achievements_by_id()
+        public async Task It_can_get_account_achievements_by_id()
         {
             await using var services = new Container();
             var sut = services.Resolve<AccountAchievementService>();
@@ -84,7 +84,7 @@ namespace GW2SDK.Tests.Features.Accounts.Achievements
         [Fact]
         [Trait("Feature",  "Accounts.Achievements")]
         [Trait("Category", "Integration")]
-        public async Task Get_account_achievements_by_page()
+        public async Task It_can_get_account_achievements_by_page()
         {
             await using var services = new Container();
             var sut = services.Resolve<AccountAchievementService>();

@@ -33,7 +33,7 @@ namespace GW2SDK.Tests.Features.Backstories.Answers
         }
 
         [Fact]
-        public void Backstory_questions_can_be_created_from_json()
+        public void Backstory_answers_can_be_created_from_json()
         {
             var settings = new JsonSerializerSettingsBuilder()
                 .UseTraceWriter(new XunitTraceWriter(_output))

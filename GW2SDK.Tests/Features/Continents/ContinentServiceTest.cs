@@ -11,7 +11,7 @@ namespace GW2SDK.Tests.Features.Continents
         [Fact]
         [Trait("Feature",  "Continents")]
         [Trait("Category", "Integration")]
-        public async Task Get_all_continents()
+        public async Task It_can_get_all_continents()
         {
             await using var services = new Container();
             var sut = services.Resolve<ContinentService>();
@@ -24,7 +24,7 @@ namespace GW2SDK.Tests.Features.Continents
         [Fact]
         [Trait("Feature",  "Continents")]
         [Trait("Category", "Integration")]
-        public async Task Get_all_continent_ids()
+        public async Task It_can_get_all_continent_ids()
         {
             await using var services = new Container();
             var sut = services.Resolve<ContinentService>();
@@ -37,7 +37,7 @@ namespace GW2SDK.Tests.Features.Continents
         [Fact]
         [Trait("Feature",  "Continents")]
         [Trait("Category", "Integration")]
-        public async Task Get_a_continent_by_id()
+        public async Task It_can_get_a_continent_by_id()
         {
             await using var services = new Container();
             var sut = services.Resolve<ContinentService>();
@@ -52,7 +52,7 @@ namespace GW2SDK.Tests.Features.Continents
         [Fact]
         [Trait("Feature",  "Continents")]
         [Trait("Category", "Integration")]
-        public async Task Get_continents_by_id()
+        public async Task It_can_get_continents_by_id()
         {
             await using var services = new Container();
             var sut = services.Resolve<ContinentService>();
@@ -97,7 +97,7 @@ namespace GW2SDK.Tests.Features.Continents
         [Fact]
         [Trait("Feature",  "Continents")]
         [Trait("Category", "Integration")]
-        public async Task Get_continents_by_page()
+        public async Task It_can_get_continents_by_page()
         {
             await using var services = new Container();
             var sut = services.Resolve<ContinentService>();
@@ -133,7 +133,7 @@ namespace GW2SDK.Tests.Features.Continents
         [Fact]
         [Trait("Feature",  "Continents")]
         [Trait("Category", "Integration")]
-        public async Task Get_all_floors_by_continent_id()
+        public async Task It_can_get_all_floors_by_continent_id()
         {
             await using var services = new Container();
             var sut = services.Resolve<ContinentService>();
@@ -148,7 +148,7 @@ namespace GW2SDK.Tests.Features.Continents
         [Fact]
         [Trait("Feature",  "Continents")]
         [Trait("Category", "Integration")]
-        public async Task Get_all_floor_ids_by_continent_id()
+        public async Task It_can_get_all_floor_ids_by_continent_id()
         {
             await using var services = new Container();
             var sut = services.Resolve<ContinentService>();
@@ -163,7 +163,7 @@ namespace GW2SDK.Tests.Features.Continents
         [Fact]
         [Trait("Feature",  "Continents")]
         [Trait("Category", "Integration")]
-        public async Task Get_a_floor_by_continent_id_and_floor_id()
+        public async Task It_can_get_a_floor_by_continent_id_and_floor_id()
         {
             await using var services = new Container();
             var sut = services.Resolve<ContinentService>();
@@ -179,7 +179,7 @@ namespace GW2SDK.Tests.Features.Continents
         [Fact]
         [Trait("Feature",  "Continents")]
         [Trait("Category", "Integration")]
-        public async Task Get_floors_by_continent_id_and_floor_ids()
+        public async Task It_can_get_floors_by_continent_id_and_floor_ids()
         {
             await using var services = new Container();
             var sut = services.Resolve<ContinentService>();
@@ -229,7 +229,7 @@ namespace GW2SDK.Tests.Features.Continents
         [Fact]
         [Trait("Feature",  "Continents")]
         [Trait("Category", "Integration")]
-        public async Task Get_floors_by_continent_id_and_page()
+        public async Task It_can_get_floors_by_continent_id_and_page()
         {
             await using var services = new Container();
             var sut = services.Resolve<ContinentService>();

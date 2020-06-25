@@ -11,7 +11,7 @@ namespace GW2SDK.Tests.Features.Recipes
         [Fact]
         [Trait("Feature",  "Recipes")]
         [Trait("Category", "Integration")]
-        public async Task Get_all_recipe_ids()
+        public async Task It_can_get_all_recipe_ids()
         {
             await using var services = new Container();
             var sut = services.Resolve<RecipeService>();
@@ -24,7 +24,7 @@ namespace GW2SDK.Tests.Features.Recipes
         [Fact]
         [Trait("Feature",  "Recipes")]
         [Trait("Category", "Integration")]
-        public async Task Get_a_recipe_by_id()
+        public async Task It_can_get_a_recipe_by_id()
         {
             await using var services = new Container();
             var sut = services.Resolve<RecipeService>();
@@ -39,7 +39,7 @@ namespace GW2SDK.Tests.Features.Recipes
         [Fact]
         [Trait("Feature",  "Recipes")]
         [Trait("Category", "Integration")]
-        public async Task Get_recipes_by_id()
+        public async Task It_can_get_recipes_by_id()
         {
             await using var services = new Container();
             var sut = services.Resolve<RecipeService>();
@@ -84,7 +84,7 @@ namespace GW2SDK.Tests.Features.Recipes
         [Fact]
         [Trait("Feature",  "Recipes")]
         [Trait("Category", "Integration")]
-        public async Task Get_recipes_by_page()
+        public async Task It_can_get_recipes_by_page()
         {
             await using var services = new Container();
             var sut = services.Resolve<RecipeService>();

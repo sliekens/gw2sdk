@@ -9,7 +9,7 @@ namespace GW2SDK.Tests.Features.Accounts.Banks
     public class BankServiceTest
     {
         [Fact]
-        public async Task Get_the_bank()
+        public async Task It_can_get_the_bank()
         {
             await using var services = new Container();
             var sut = services.Resolve<BankService>();
@@ -20,7 +20,7 @@ namespace GW2SDK.Tests.Features.Accounts.Banks
         }
 
         [Fact]
-        public async Task The_bank_requires_a_valid_access_token()
+        public async Task It_cant_get_the_bank_without_an_access_token()
         {
             await using var services = new Container();
             var sut = services.Resolve<BankService>();
@@ -36,7 +36,7 @@ namespace GW2SDK.Tests.Features.Accounts.Banks
         }
 
         [Fact]
-        public async Task The_bank_requires_inventories_scope()
+        public async Task It_cant_get_the_bank_without_the_inventories_scope()
         {
             await using var services = new Container();
             var sut = services.Resolve<BankService>();

@@ -11,7 +11,7 @@ namespace GW2SDK.Tests.Features.Commerce.Prices
         [Fact]
         [Trait("Feature",  "Commerce.Prices")]
         [Trait("Category", "Integration")]
-        public async Task Get_all_item_price_ids()
+        public async Task It_can_get_all_item_price_ids()
         {
             await using var services = new Container();
             var sut = services.Resolve<ItemPriceService>();
@@ -24,7 +24,7 @@ namespace GW2SDK.Tests.Features.Commerce.Prices
         [Fact]
         [Trait("Feature",  "Commerce.Prices")]
         [Trait("Category", "Integration")]
-        public async Task Get_an_item_price_by_id()
+        public async Task It_can_get_an_item_price_by_id()
         {
             await using var services = new Container();
             var sut = services.Resolve<ItemPriceService>();
@@ -39,7 +39,7 @@ namespace GW2SDK.Tests.Features.Commerce.Prices
         [Fact]
         [Trait("Feature",  "Commerce.Prices")]
         [Trait("Category", "Integration")]
-        public async Task Get_item_prices_by_id()
+        public async Task It_can_get_item_prices_by_id()
         {
             await using var services = new Container();
             var sut = services.Resolve<ItemPriceService>();

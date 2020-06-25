@@ -36,7 +36,7 @@ namespace GW2SDK.Tests.Features.Common
         [Trait("Category", "Unit")]
         [InlineData(HttpStatusCode.Unauthorized, "Invalid access token")]
         [InlineData(HttpStatusCode.Forbidden, "requires scope")]
-        public async Task Handlers_throws_when_request_is_authorized(HttpStatusCode statusCode, string message)
+        public async Task Handlers_throws_when_request_is_unauthorized(HttpStatusCode statusCode, string message)
         {
             var request = new HttpRequestMessage(HttpMethod.Get, "https://api.guildwars2.com/v2.json");
             var stubHttpMessageHandler = new StubHttpMessageHandler(statusCode, @$"{{ ""text"": ""{message}""}}");

@@ -11,7 +11,7 @@ namespace GW2SDK.Tests.Features.Accounts
         [Fact]
         [Trait("Feature",  "Accounts")]
         [Trait("Category", "Integration")]
-        public async Task Account_requires_an_access_token()
+        public async Task It_can_get_the_account()
         {
             await using var services = new Container();
             var sut = services.Resolve<AccountService>();
@@ -24,11 +24,16 @@ namespace GW2SDK.Tests.Features.Accounts
         [Fact]
         [Trait("Feature",  "Accounts")]
         [Trait("Category", "Integration")]
-        public async Task GetAccount_WithoutAccessToken_ShouldThrowUnauthorizedOperationException()
+        public async Task It_cant_get_the_account_without_an_access_token()
         {
             await using var services = new Container();
             var sut = services.Resolve<AccountService>();
-            await Assert.ThrowsAsync<UnauthorizedOperationException>(async () => await sut.GetAccount());
+            var actual = await Record.ExceptionAsync(async () =>
+            {
+                _ = await sut.GetAccount();
+            });
+
+            Assert.IsType<UnauthorizedOperationException>(actual);
         }
     }
 }

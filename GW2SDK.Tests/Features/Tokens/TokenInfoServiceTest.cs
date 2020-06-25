@@ -1,7 +1,5 @@
-﻿using System.Net.Http;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using GW2SDK.Exceptions;
-using GW2SDK.Extensions;
 using GW2SDK.Tests.Features.Tokens.Fixtures;
 using GW2SDK.Tests.TestInfrastructure;
 using GW2SDK.Tokens;
@@ -21,7 +19,7 @@ namespace GW2SDK.Tests.Features.Tokens
         [Fact]
         [Trait("Feature",  "Tokens")]
         [Trait("Category", "Integration")]
-        public async Task Get_token_info_for_api_key()
+        public async Task It_can_get_the_token_info_for_an_api_key()
         {
             await using var services = new Container();
             var sut = services.Resolve<TokenInfoService>();
@@ -34,23 +32,7 @@ namespace GW2SDK.Tests.Features.Tokens
         [Fact]
         [Trait("Feature",  "Tokens")]
         [Trait("Category", "Integration")]
-        public async Task Get_token_info_for_default_authorization()
-        {
-            await using var services = new Container();
-
-            var http = services.Resolve<IHttpClientFactory>().CreateClient("GW2SDK");
-            http.UseAccessToken(ConfigurationManager.Instance.ApiKeyFull);
-            var sut = new TokenInfoService(http);
-
-            var actual = await sut.GetTokenInfo(null);
-
-            Assert.IsType<ApiKeyInfo>(actual);
-        }
-
-        [Fact]
-        [Trait("Feature",  "Tokens")]
-        [Trait("Category", "Integration")]
-        public async Task Access_token_cannot_be_null()
+        public async Task It_cant_get_the_token_info_without_an_access_token()
         {
             await using var services = new Container();
             var sut = services.Resolve<TokenInfoService>();
@@ -65,7 +47,7 @@ namespace GW2SDK.Tests.Features.Tokens
         [Fact]
         [Trait("Feature",  "Tokens")]
         [Trait("Category", "Integration")]
-        public async Task Get_token_info_for_subtoken()
+        public async Task It_can_get_the_token_info_for_a_subtoken()
         {
             await using var services = new Container();
             var sut = services.Resolve<TokenInfoService>();

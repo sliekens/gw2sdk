@@ -11,7 +11,7 @@ namespace GW2SDK.Tests.Features.Achievements.Groups
         [Fact]
         [Trait("Feature",  "Achievements.Groups")]
         [Trait("Category", "Integration")]
-        public async Task Get_all_achievement_groups()
+        public async Task It_can_get_all_achievement_groups()
         {
             await using var services = new Container();
             var sut = services.Resolve<AchievementGroupService>();
@@ -24,7 +24,7 @@ namespace GW2SDK.Tests.Features.Achievements.Groups
         [Fact]
         [Trait("Feature",  "Achievements.Groups")]
         [Trait("Category", "Integration")]
-        public async Task Get_all_achievement_group_ids()
+        public async Task It_can_get_all_achievement_group_ids()
         {
             await using var services = new Container();
             var sut = services.Resolve<AchievementGroupService>();
@@ -37,7 +37,7 @@ namespace GW2SDK.Tests.Features.Achievements.Groups
         [Fact]
         [Trait("Feature",  "Achievements.Groups")]
         [Trait("Category", "Integration")]
-        public async Task Get_an_achievement_group_by_id()
+        public async Task It_can_get_an_achievement_group_by_id()
         {
             await using var services = new Container();
             var sut = services.Resolve<AchievementGroupService>();
@@ -116,7 +116,7 @@ namespace GW2SDK.Tests.Features.Achievements.Groups
         [Fact]
         [Trait("Feature",  "Achievements.Groups")]
         [Trait("Category", "Integration")]
-        public async Task Get_achievement_groups_by_id()
+        public async Task It_can_get_achievement_groups_by_id()
         {
             await using var services = new Container();
             var sut = services.Resolve<AchievementGroupService>();
@@ -134,7 +134,7 @@ namespace GW2SDK.Tests.Features.Achievements.Groups
         [Fact]
         [Trait("Feature",  "Achievements.Groups")]
         [Trait("Category", "Integration")]
-        public async Task Get_achievement_groups_by_page()
+        public async Task It_can_get_achievement_groups_by_page()
         {
             await using var services = new Container();
             var sut = services.Resolve<AchievementGroupService>();

@@ -11,7 +11,7 @@ namespace GW2SDK.Tests.Features.Skins
         [Fact]
         [Trait("Feature",  "Skins")]
         [Trait("Category", "Integration")]
-        public async Task Get_all_skin_ids()
+        public async Task It_can_get_all_skin_ids()
         {
             await using var services = new Container();
             var sut = services.Resolve<SkinService>();
@@ -24,7 +24,7 @@ namespace GW2SDK.Tests.Features.Skins
         [Fact]
         [Trait("Feature",  "Skins")]
         [Trait("Category", "Integration")]
-        public async Task Get_a_skin_by_id()
+        public async Task It_can_get_a_skin_by_id()
         {
             await using var services = new Container();
             var sut = services.Resolve<SkinService>();
@@ -39,7 +39,7 @@ namespace GW2SDK.Tests.Features.Skins
         [Fact]
         [Trait("Feature",  "Skins")]
         [Trait("Category", "Integration")]
-        public async Task Get_skins_by_id()
+        public async Task It_can_get_skins_by_id()
         {
             await using var services = new Container();
             var sut = services.Resolve<SkinService>();
@@ -84,7 +84,7 @@ namespace GW2SDK.Tests.Features.Skins
         [Fact]
         [Trait("Feature",  "Skins")]
         [Trait("Category", "Integration")]
-        public async Task Get_skins_by_page()
+        public async Task It_can_get_skins_by_page()
         {
             await using var services = new Container();
             var sut = services.Resolve<SkinService>();

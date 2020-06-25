@@ -11,7 +11,7 @@ namespace GW2SDK.Tests.Features.Colors
         [Fact]
         [Trait("Feature",  "Colors")]
         [Trait("Category", "Integration")]
-        public async Task Get_all_colors()
+        public async Task It_can_get_all_colors()
         {
             await using var services = new Container();
             var sut = services.Resolve<ColorService>();
@@ -24,7 +24,7 @@ namespace GW2SDK.Tests.Features.Colors
         [Fact]
         [Trait("Feature",  "Colors")]
         [Trait("Category", "Integration")]
-        public async Task Get_all_color_ids()
+        public async Task It_can_get_all_color_ids()
         {
             await using var services = new Container();
             var sut = services.Resolve<ColorService>();
@@ -37,7 +37,7 @@ namespace GW2SDK.Tests.Features.Colors
         [Fact]
         [Trait("Feature",  "Colors")]
         [Trait("Category", "Integration")]
-        public async Task Get_a_color_by_id()
+        public async Task It_can_get_a_color_by_id()
         {
             await using var services = new Container();
             var sut = services.Resolve<ColorService>();
@@ -52,7 +52,7 @@ namespace GW2SDK.Tests.Features.Colors
         [Fact]
         [Trait("Feature",  "Colors")]
         [Trait("Category", "Integration")]
-        public async Task Get_colors_by_id()
+        public async Task It_can_get_colors_by_id()
         {
             await using var services = new Container();
             var sut = services.Resolve<ColorService>();
@@ -97,7 +97,7 @@ namespace GW2SDK.Tests.Features.Colors
         [Fact]
         [Trait("Feature",  "Colors")]
         [Trait("Category", "Integration")]
-        public async Task Get_colors_by_page()
+        public async Task It_can_get_colors_by_page()
         {
             await using var services = new Container();
             var sut = services.Resolve<ColorService>();

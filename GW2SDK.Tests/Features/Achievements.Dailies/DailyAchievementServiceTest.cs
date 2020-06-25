@@ -10,7 +10,7 @@ namespace GW2SDK.Tests.Features.Achievements.Dailies
         [Theory]
         [InlineData(Day.Today)]
         [InlineData(Day.Tomorrow)]
-        public async Task Can_get_daily_achievements(Day day)
+        public async Task It_can_get_get_daily_achievements(Day day)
         {
             await using var services = new Container();
             var sut = services.Resolve<DailyAchievementService>();

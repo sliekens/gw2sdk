@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net.Http;
 using System.Threading.Tasks;
 using GW2SDK.Exceptions;
-using GW2SDK.Extensions;
 using GW2SDK.Subtokens;
 using GW2SDK.Tests.TestInfrastructure;
 using GW2SDK.Tokens;
@@ -17,7 +15,7 @@ namespace GW2SDK.Tests.Features.Subtokens
         [Fact]
         [Trait("Feature",  "Subtokens")]
         [Trait("Category", "Integration")]
-        public async Task Create_a_subtoken_from_api_key()
+        public async Task It_can_create_a_subtoken()
         {
             await using var services = new Container();
             var sut = services.Resolve<SubtokenService>();
@@ -30,24 +28,7 @@ namespace GW2SDK.Tests.Features.Subtokens
         [Fact]
         [Trait("Feature",  "Subtokens")]
         [Trait("Category", "Integration")]
-        public async Task Create_a_subtoken_from_default_authorization()
-        {
-            await using var services = new Container();
-
-            var http = services.Resolve<IHttpClientFactory>().CreateClient("GW2SDK");
-            http.UseAccessToken(ConfigurationManager.Instance.ApiKeyFull);
-            var sut = new SubtokenService(http);
-
-
-            var actual = await sut.CreateSubtoken(null);
-
-            Assert.IsType<CreatedSubtoken>(actual);
-        }
-
-        [Fact]
-        [Trait("Feature",  "Subtokens")]
-        [Trait("Category", "Integration")]
-        public async Task Access_token_cannot_be_null()
+        public async Task It_cant_create_a_subtoken_without_an_access_token()
         {
             await using var services = new Container();
             var sut = services.Resolve<SubtokenService>();
@@ -62,7 +43,7 @@ namespace GW2SDK.Tests.Features.Subtokens
         [Fact]
         [Trait("Feature",  "Subtokens")]
         [Trait("Category", "Integration")]
-        public async Task Create_a_subtoken_with_custom_expiration_date()
+        public async Task It_can_create_a_subtoken_with_custom_expiration_date()
         {
             await using var services = new Container();
             var sut = services.Resolve<SubtokenService>();
@@ -88,7 +69,7 @@ namespace GW2SDK.Tests.Features.Subtokens
         [Fact]
         [Trait("Feature",  "Subtokens")]
         [Trait("Category", "Integration")]
-        public async Task Create_a_subtoken_with_url_filters()
+        public async Task It_can_create_a_subtoken_with_url_filters()
         {
             await using var services = new Container();
             var sut = services.Resolve<SubtokenService>();
