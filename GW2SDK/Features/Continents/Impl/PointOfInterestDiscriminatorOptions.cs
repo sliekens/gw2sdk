@@ -4,20 +4,15 @@ using GW2SDK.Impl.JsonConverters;
 
 namespace GW2SDK.Continents.Impl
 {
-    public sealed class PointOfInterestDiscriminatorOptions : DiscriminatorOptions
+    internal sealed class PointOfInterestDiscriminatorOptions : DiscriminatorOptions
     {
-        public PointOfInterestDiscriminatorOptions()
-        {
-            Activator = Create;
-        }
+        internal override Type BaseType => typeof(PointOfInterest);
 
-        public override Type BaseType => typeof(PointOfInterest);
+        internal override string DiscriminatorFieldName => "type";
 
-        public override string DiscriminatorFieldName => "type";
+        internal override bool SerializeDiscriminator => false;
 
-        public override bool SerializeDiscriminator => false;
-
-        public override IEnumerable<(string TypeName, Type Type)> GetDiscriminatedTypes()
+        internal override IEnumerable<(string TypeName, Type Type)> GetDiscriminatedTypes()
         {
             yield return ("landmark", typeof(Landmark));
             yield return ("waypoint", typeof(Waypoint));
@@ -25,12 +20,12 @@ namespace GW2SDK.Continents.Impl
             yield return ("unlock", typeof(UnlockerPointOfInterest));
         }
 
-        public object Create(Type objectType)
+        internal override object CreateInstance(Type discriminatedType)
         {
-            if (objectType == typeof(Landmark)) return new Landmark();
-            if (objectType == typeof(Waypoint)) return new Waypoint();
-            if (objectType == typeof(Vista)) return new Vista();
-            if (objectType == typeof(UnlockerPointOfInterest)) return new UnlockerPointOfInterest();
+            if (discriminatedType == typeof(Landmark)) return new Landmark();
+            if (discriminatedType == typeof(Waypoint)) return new Waypoint();
+            if (discriminatedType == typeof(Vista)) return new Vista();
+            if (discriminatedType == typeof(UnlockerPointOfInterest)) return new UnlockerPointOfInterest();
             return new PointOfInterest();
         }
     }

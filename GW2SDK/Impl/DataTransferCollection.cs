@@ -4,11 +4,11 @@ using System.Collections.ObjectModel;
 
 namespace GW2SDK.Impl
 {
-    public sealed class DataTransferCollection<T> : ReadOnlyCollection<T>, IDataTransferCollection<T>
+    internal sealed class DataTransferCollection<T> : ReadOnlyCollection<T>, IDataTransferCollection<T>
     {
         private readonly ICollectionContext _context;
 
-        public DataTransferCollection(IList<T> list, ICollectionContext context)
+        internal DataTransferCollection(IList<T> list, ICollectionContext context)
             : base(list)
         {
             _context = context ?? throw new ArgumentNullException(nameof(context));

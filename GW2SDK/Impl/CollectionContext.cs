@@ -1,8 +1,8 @@
 ﻿namespace GW2SDK.Impl
 {
-    public sealed class CollectionContext : ICollectionContext
+    internal sealed class CollectionContext : ICollectionContext
     {
-        public CollectionContext(int resultTotal, int resultCount)
+        internal CollectionContext(int resultTotal, int resultCount)
         {
             ResultTotal = resultTotal;
             ResultCount = resultCount;

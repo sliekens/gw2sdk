@@ -4,20 +4,15 @@ using GW2SDK.Impl.JsonConverters;
 
 namespace GW2SDK.Achievements.Impl
 {
-    public sealed class AchievementBitDiscriminatorOptions : DiscriminatorOptions
+    internal sealed class AchievementBitDiscriminatorOptions : DiscriminatorOptions
     {
-        public AchievementBitDiscriminatorOptions()
-        {
-            Activator = Create;
-        }
+        internal override Type BaseType => typeof(AchievementBit);
 
-        public override Type BaseType => typeof(AchievementBit);
+        internal override string DiscriminatorFieldName => "type";
 
-        public override string DiscriminatorFieldName => "type";
+        internal override bool SerializeDiscriminator => false;
 
-        public override bool SerializeDiscriminator => false;
-
-        public override IEnumerable<(string TypeName, Type Type)> GetDiscriminatedTypes()
+        internal override IEnumerable<(string TypeName, Type Type)> GetDiscriminatedTypes()
         {
             yield return ("Text", typeof(AchievementTextBit));
             yield return ("Minipet", typeof(AchievementMinipetBit));
@@ -25,12 +20,12 @@ namespace GW2SDK.Achievements.Impl
             yield return ("Skin", typeof(AchievementSkinBit));
         }
 
-        public object Create(Type objectType)
+        internal override object CreateInstance(Type discriminatedType)
         {
-            if (objectType == typeof(AchievementTextBit)) return new AchievementTextBit();
-            if (objectType == typeof(AchievementMinipetBit)) return new AchievementMinipetBit();
-            if (objectType == typeof(AchievementItemBit)) return new AchievementItemBit();
-            if (objectType == typeof(AchievementSkinBit)) return new AchievementSkinBit();
+            if (discriminatedType == typeof(AchievementTextBit)) return new AchievementTextBit();
+            if (discriminatedType == typeof(AchievementMinipetBit)) return new AchievementMinipetBit();
+            if (discriminatedType == typeof(AchievementItemBit)) return new AchievementItemBit();
+            if (discriminatedType == typeof(AchievementSkinBit)) return new AchievementSkinBit();
             return new AchievementBit();
         }
     }

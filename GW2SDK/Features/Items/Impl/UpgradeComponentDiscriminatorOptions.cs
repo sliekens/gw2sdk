@@ -4,20 +4,15 @@ using GW2SDK.Impl.JsonConverters;
 
 namespace GW2SDK.Items.Impl
 {
-    public sealed class UpgradeComponentDiscriminatorOptions : DiscriminatorOptions
+    internal sealed class UpgradeComponentDiscriminatorOptions : DiscriminatorOptions
     {
-        public UpgradeComponentDiscriminatorOptions()
-        {
-            Activator = Create;
-        }
+        internal override Type BaseType => typeof(UpgradeComponent);
 
-        public override Type BaseType => typeof(UpgradeComponent);
+        internal override string DiscriminatorFieldName => "upgrade_component_type";
 
-        public override string DiscriminatorFieldName => "upgrade_component_type";
+        internal override bool SerializeDiscriminator => false;
 
-        public override bool SerializeDiscriminator => false;
-
-        public override IEnumerable<(string TypeName, Type Type)> GetDiscriminatedTypes()
+        internal override IEnumerable<(string TypeName, Type Type)> GetDiscriminatedTypes()
         {
             yield return ("Default", typeof(UpgradeComponent));
             yield return ("Gem", typeof(Gem));
@@ -25,12 +20,12 @@ namespace GW2SDK.Items.Impl
             yield return ("Sigil", typeof(Sigil));
         }
 
-        public object Create(Type objectType)
+        internal override object CreateInstance(Type discriminatedType)
         {
-            if (objectType == typeof(UpgradeComponent)) return new UpgradeComponent();
-            if (objectType == typeof(Gem)) return new Gem();
-            if (objectType == typeof(Rune)) return new Rune();
-            if (objectType == typeof(Sigil)) return new Sigil();
+            if (discriminatedType == typeof(UpgradeComponent)) return new UpgradeComponent();
+            if (discriminatedType == typeof(Gem)) return new Gem();
+            if (discriminatedType == typeof(Rune)) return new Rune();
+            if (discriminatedType == typeof(Sigil)) return new Sigil();
             return new UpgradeComponent();
         }
     }

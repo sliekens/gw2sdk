@@ -4,20 +4,15 @@ using GW2SDK.Impl.JsonConverters;
 
 namespace GW2SDK.Items.Impl
 {
-    public sealed class ContainerDiscriminatorOptions : DiscriminatorOptions
+    internal sealed class ContainerDiscriminatorOptions : DiscriminatorOptions
     {
-        public ContainerDiscriminatorOptions()
-        {
-            Activator = Create;
-        }
+        internal override Type BaseType => typeof(Container);
 
-        public override Type BaseType => typeof(Container);
+        internal override string DiscriminatorFieldName => "container_type";
 
-        public override string DiscriminatorFieldName => "container_type";
+        internal override bool SerializeDiscriminator => false;
 
-        public override bool SerializeDiscriminator => false;
-
-        public override IEnumerable<(string TypeName, Type Type)> GetDiscriminatedTypes()
+        internal override IEnumerable<(string TypeName, Type Type)> GetDiscriminatedTypes()
         {
             yield return ("Default", typeof(Container));
             yield return ("GiftBox", typeof(GiftBoxContainer));
@@ -25,12 +20,12 @@ namespace GW2SDK.Items.Impl
             yield return ("OpenUI", typeof(OpenUiContainer));
         }
 
-        public object Create(Type objectType)
+        internal override object CreateInstance(Type discriminatedType)
         {
-            if (objectType == typeof(Container)) return new Container();
-            if (objectType == typeof(GiftBoxContainer)) return new GiftBoxContainer();
-            if (objectType == typeof(ImmediateContainer)) return new ImmediateContainer();
-            if (objectType == typeof(OpenUiContainer)) return new OpenUiContainer();
+            if (discriminatedType == typeof(Container)) return new Container();
+            if (discriminatedType == typeof(GiftBoxContainer)) return new GiftBoxContainer();
+            if (discriminatedType == typeof(ImmediateContainer)) return new ImmediateContainer();
+            if (discriminatedType == typeof(OpenUiContainer)) return new OpenUiContainer();
             return new Container();
         }
     }

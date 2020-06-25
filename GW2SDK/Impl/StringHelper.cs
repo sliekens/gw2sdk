@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace GW2SDK.Impl.JsonConverters
+namespace GW2SDK.Impl
 {
     internal static class StringHelper
     {

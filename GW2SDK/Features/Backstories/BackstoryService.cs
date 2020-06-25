@@ -8,7 +8,7 @@ using GW2SDK.Backstories.Answers;
 using GW2SDK.Backstories.Answers.Impl;
 using GW2SDK.Backstories.Questions;
 using GW2SDK.Backstories.Questions.Impl;
-using GW2SDK.Extensions;
+using GW2SDK.Http;
 using GW2SDK.Impl;
 using GW2SDK.Impl.JsonConverters;
 using Newtonsoft.Json;

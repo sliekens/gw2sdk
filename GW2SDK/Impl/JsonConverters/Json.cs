@@ -10,15 +10,15 @@ using Newtonsoft.Json.Serialization;
 
 namespace GW2SDK.Impl.JsonConverters
 {
-    public static class Json
+    internal static class Json
     {
-        public static JsonSerializerSettings DefaultJsonSerializerSettings =>
+        internal static JsonSerializerSettings DefaultJsonSerializerSettings =>
             new JsonSerializerSettings
             {
                 Converters = GetJsonConverters(), ContractResolver = new DefaultContractResolver { NamingStrategy = new SnakeCaseNamingStrategy() }
             };
 
-        public static List<JsonConverter> GetJsonConverters() =>
+        internal static List<JsonConverter> GetJsonConverters() =>
             new List<JsonConverter>
             {
                 new DiscriminatedJsonConverter(new AchievementDiscriminatorOptions()),

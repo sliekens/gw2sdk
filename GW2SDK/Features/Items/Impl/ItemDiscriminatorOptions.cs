@@ -1,53 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
+using GW2SDK.Impl;
 using GW2SDK.Impl.JsonConverters;
 using Newtonsoft.Json.Linq;
 
 namespace GW2SDK.Items.Impl
 {
-    public sealed class ItemDiscriminatorOptions : DiscriminatorOptions
+    internal sealed class ItemDiscriminatorOptions : DiscriminatorOptions
     {
-        public ItemDiscriminatorOptions()
-        {
-            Activator = Create;
-            Preprocessor = Preprocess;
-        }
+        internal override Type BaseType => typeof(Item);
 
-        public override Type BaseType => typeof(Item);
+        internal override string DiscriminatorFieldName => "type";
 
-        public override string DiscriminatorFieldName => "type";
+        internal override bool SerializeDiscriminator => false;
 
-        public override bool SerializeDiscriminator => false;
-
-        private void Preprocess(string discriminator, JObject json)
-        {
-            var @namespace = StringHelper.ToSnakeCase(discriminator);
-
-            // Items can have extra fields depending on the type of item (e.g. weapons have max_power, trophies don't)
-            // Anet decided to put those extra fields in a "details" property
-            // For us it's much more convenient to flatten the root object before serializing the JSON to CLR objects
-            if (json.Property("details")?.Value is JObject details)
-            {
-                foreach (var property in details.Properties())
-                {
-                    // There can be a naming collision that prevents a clean merge
-                    // Prefix those duplicate names with the discriminator
-                    if (json.ContainsKey(property.Name))
-                    {
-                        json.Add($"{@namespace}_{property.Name}", property.Value);
-                    }
-                    else
-                    {
-                        json.Add(property.Name, property.Value);
-                    }
-                }
-
-                // Details should now be removed because all its properties have been added to the root object.
-                json.Remove("details");
-            }
-        }
-
-        public override IEnumerable<(string TypeName, Type Type)> GetDiscriminatedTypes()
+        internal override IEnumerable<(string TypeName, Type Type)> GetDiscriminatedTypes()
         {
             yield return ("Armor", typeof(Armor));
             yield return ("Back", typeof(BackItem));
@@ -66,23 +33,51 @@ namespace GW2SDK.Items.Impl
             yield return ("Weapon", typeof(Weapon));
         }
 
-        public object Create(Type objectType)
+        internal override void Preprocess(string discriminator, JObject jsonObject)
         {
-            if (objectType == typeof(Armor)) return new Armor();
-            if (objectType == typeof(BackItem)) return new BackItem();
-            if (objectType == typeof(Bag)) return new Bag();
-            if (objectType == typeof(Consumable)) return new Consumable();
-            if (objectType == typeof(Container)) return new Container();
-            if (objectType == typeof(CraftingMaterial)) return new CraftingMaterial();
-            if (objectType == typeof(GatheringTool)) return new GatheringTool();
-            if (objectType == typeof(Gizmo)) return new Gizmo();
-            if (objectType == typeof(Key)) return new Key();
-            if (objectType == typeof(Minipet)) return new Minipet();
-            if (objectType == typeof(Tool)) return new Tool();
-            if (objectType == typeof(Trinket)) return new Trinket();
-            if (objectType == typeof(Trophy)) return new Trophy();
-            if (objectType == typeof(UpgradeComponent)) return new UpgradeComponent();
-            if (objectType == typeof(Weapon)) return new Weapon();
+            var @namespace = StringHelper.ToSnakeCase(discriminator);
+
+            // Items can have extra fields depending on the type of item (e.g. weapons have max_power, trophies don't)
+            // Anet decided to put those extra fields in a "details" property
+            // For us it's much more convenient to flatten the root object before serializing the jsonObject to CLR objects
+            if (jsonObject.Property("details")?.Value is JObject details)
+            {
+                foreach (var property in details.Properties())
+                {
+                    // There can be a naming collision that prevents a clean merge
+                    // Prefix those duplicate names with the discriminator
+                    if (jsonObject.ContainsKey(property.Name))
+                    {
+                        jsonObject.Add($"{@namespace}_{property.Name}", property.Value);
+                    }
+                    else
+                    {
+                        jsonObject.Add(property.Name, property.Value);
+                    }
+                }
+
+                // Details should now be removed because all its properties have been added to the root object.
+                jsonObject.Remove("details");
+            }
+        }
+
+        internal override object CreateInstance(Type discriminatedType)
+        {
+            if (discriminatedType == typeof(Armor)) return new Armor();
+            if (discriminatedType == typeof(BackItem)) return new BackItem();
+            if (discriminatedType == typeof(Bag)) return new Bag();
+            if (discriminatedType == typeof(Consumable)) return new Consumable();
+            if (discriminatedType == typeof(Container)) return new Container();
+            if (discriminatedType == typeof(CraftingMaterial)) return new CraftingMaterial();
+            if (discriminatedType == typeof(GatheringTool)) return new GatheringTool();
+            if (discriminatedType == typeof(Gizmo)) return new Gizmo();
+            if (discriminatedType == typeof(Key)) return new Key();
+            if (discriminatedType == typeof(Minipet)) return new Minipet();
+            if (discriminatedType == typeof(Tool)) return new Tool();
+            if (discriminatedType == typeof(Trinket)) return new Trinket();
+            if (discriminatedType == typeof(Trophy)) return new Trophy();
+            if (discriminatedType == typeof(UpgradeComponent)) return new UpgradeComponent();
+            if (discriminatedType == typeof(Weapon)) return new Weapon();
             return new Item();
         }
     }

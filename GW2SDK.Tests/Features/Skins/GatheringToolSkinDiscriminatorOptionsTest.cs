@@ -38,7 +38,7 @@ namespace GW2SDK.Tests.Features.Skins
 
             var actual = sut.GetDiscriminatedTypes().Select(x => x.Type).ToList();
 
-            Assert.All(actual, type => Assert.IsType(type, sut.Create(type)));
+            Assert.All(actual, type => Assert.IsType(type, sut.CreateInstance(type)));
         }
 
         [Fact]
@@ -50,7 +50,7 @@ namespace GW2SDK.Tests.Features.Skins
 
             var actual = sut.GetDiscriminatedTypes().Select(x => x.Type).ToList();
 
-            Assert.All(actual, type => Assert.IsAssignableFrom(sut.BaseType, sut.Create(type)));
+            Assert.All(actual, type => Assert.IsAssignableFrom(sut.BaseType, sut.CreateInstance(type)));
         }
     }
 }

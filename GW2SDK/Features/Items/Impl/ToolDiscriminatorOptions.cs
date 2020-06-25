@@ -4,27 +4,22 @@ using GW2SDK.Impl.JsonConverters;
 
 namespace GW2SDK.Items.Impl
 {
-    public sealed class ToolDiscriminatorOptions : DiscriminatorOptions
+    internal sealed class ToolDiscriminatorOptions : DiscriminatorOptions
     {
-        public ToolDiscriminatorOptions()
-        {
-            Activator = Create;
-        }
+        internal override Type BaseType => typeof(Tool);
 
-        public override Type BaseType => typeof(Tool);
+        internal override string DiscriminatorFieldName => "tool_type";
 
-        public override string DiscriminatorFieldName => "tool_type";
+        internal override bool SerializeDiscriminator => false;
 
-        public override bool SerializeDiscriminator => false;
-
-        public override IEnumerable<(string TypeName, Type Type)> GetDiscriminatedTypes()
+        internal override IEnumerable<(string TypeName, Type Type)> GetDiscriminatedTypes()
         {
             yield return ("Salvage", typeof(SalvageTool));
         }
 
-        public object Create(Type objectType)
+        internal override object CreateInstance(Type discriminatedType)
         {
-            if (objectType == typeof(SalvageTool)) return new SalvageTool();
+            if (discriminatedType == typeof(SalvageTool)) return new SalvageTool();
             return new Tool();
         }
     }

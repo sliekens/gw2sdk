@@ -4,31 +4,26 @@ using GW2SDK.Impl.JsonConverters;
 
 namespace GW2SDK.Skins.Impl
 {
-    public sealed class GatheringToolSkinDiscriminatorOptions : DiscriminatorOptions
+    internal sealed class GatheringToolSkinDiscriminatorOptions : DiscriminatorOptions
     {
-        public GatheringToolSkinDiscriminatorOptions()
-        {
-            Activator = Create;
-        }
+        internal override Type BaseType => typeof(GatheringToolSkin);
 
-        public override Type BaseType => typeof(GatheringToolSkin);
+        internal override string DiscriminatorFieldName => "gathering_type";
 
-        public override string DiscriminatorFieldName => "gathering_type";
+        internal override bool SerializeDiscriminator => false;
 
-        public override bool SerializeDiscriminator => false;
-
-        public override IEnumerable<(string TypeName, Type Type)> GetDiscriminatedTypes()
+        internal override IEnumerable<(string TypeName, Type Type)> GetDiscriminatedTypes()
         {
             yield return ("Foraging", typeof(ForagingToolSkin));
             yield return ("Logging", typeof(LoggingToolSkin));
             yield return ("Mining", typeof(MiningToolSkin));
         }
 
-        public object Create(Type objectType)
+        internal override object CreateInstance(Type discriminatedType)
         {
-            if (objectType == typeof(ForagingToolSkin)) return new ForagingToolSkin();
-            if (objectType == typeof(LoggingToolSkin)) return new LoggingToolSkin();
-            if (objectType == typeof(MiningToolSkin)) return new MiningToolSkin();
+            if (discriminatedType == typeof(ForagingToolSkin)) return new ForagingToolSkin();
+            if (discriminatedType == typeof(LoggingToolSkin)) return new LoggingToolSkin();
+            if (discriminatedType == typeof(MiningToolSkin)) return new MiningToolSkin();
             return new GatheringToolSkin();
         }
     }

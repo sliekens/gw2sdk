@@ -4,29 +4,24 @@ using GW2SDK.Impl.JsonConverters;
 
 namespace GW2SDK.Achievements.Impl
 {
-    public sealed class AchievementDiscriminatorOptions : DiscriminatorOptions
+    internal sealed class AchievementDiscriminatorOptions : DiscriminatorOptions
     {
-        public AchievementDiscriminatorOptions()
-        {
-            Activator = Create;
-        }
+        internal override Type BaseType => typeof(Achievement);
 
-        public override Type BaseType => typeof(Achievement);
+        internal override string DiscriminatorFieldName => "type";
 
-        public override string DiscriminatorFieldName => "type";
+        internal override bool SerializeDiscriminator => false;
 
-        public override bool SerializeDiscriminator => false;
-
-        public override IEnumerable<(string TypeName, Type Type)> GetDiscriminatedTypes()
+        internal override IEnumerable<(string TypeName, Type Type)> GetDiscriminatedTypes()
         {
             yield return ("Default", typeof(Achievement));
             yield return ("ItemSet", typeof(ItemSetAchievement));
         }
 
-        public object Create(Type objectType)
+        internal override object CreateInstance(Type discriminatedType)
         {
-            if (objectType == typeof(Achievement)) return new Achievement();
-            if (objectType == typeof(ItemSetAchievement)) return new ItemSetAchievement();
+            if (discriminatedType == typeof(Achievement)) return new Achievement();
+            if (discriminatedType == typeof(ItemSetAchievement)) return new ItemSetAchievement();
             return new Achievement();
         }
     }

@@ -4,8 +4,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using GW2SDK.Continents;
 using GW2SDK.Exceptions;
-using GW2SDK.Extensions;
-using GW2SDK.Impl.HttpMessageHandlers;
+using GW2SDK.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Polly;
 using Polly.Timeout;
@@ -36,7 +35,7 @@ namespace GW2SDK.TestDataHelper
             services.AddHttpClient("GW2SDK",
                     http =>
                     {
-                        http.UseBaseAddress(new Uri("https://api.guildwars2.com", UriKind.Absolute));
+                        http.BaseAddress = new Uri("https://api.guildwars2.com", UriKind.Absolute);
                         http.UseLatestSchemaVersion();
                         http.UseDataCompression();
                     })

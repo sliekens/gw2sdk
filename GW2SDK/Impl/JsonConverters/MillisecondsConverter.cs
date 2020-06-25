@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 
 namespace GW2SDK.Impl.JsonConverters
 {
-    public sealed class MillisecondsConverter : JsonConverter<TimeSpan>
+    internal sealed class MillisecondsConverter : JsonConverter<TimeSpan>
     {
         public override void WriteJson(JsonWriter writer, TimeSpan value, JsonSerializer serializer) => writer.WriteValue(value.TotalMilliseconds);
 

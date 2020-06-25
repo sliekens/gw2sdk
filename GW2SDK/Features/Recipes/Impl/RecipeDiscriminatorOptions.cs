@@ -4,20 +4,15 @@ using GW2SDK.Impl.JsonConverters;
 
 namespace GW2SDK.Recipes.Impl
 {
-    public sealed class RecipeDiscriminatorOptions : DiscriminatorOptions
+    internal sealed class RecipeDiscriminatorOptions : DiscriminatorOptions
     {
-        public RecipeDiscriminatorOptions()
-        {
-            Activator = Create;
-        }
+        internal override Type BaseType => typeof(Recipe);
 
-        public override Type BaseType => typeof(Recipe);
+        internal override string DiscriminatorFieldName => "type";
 
-        public override string DiscriminatorFieldName => "type";
+        internal override bool SerializeDiscriminator => false;
 
-        public override bool SerializeDiscriminator => false;
-
-        public override IEnumerable<(string TypeName, Type Type)> GetDiscriminatedTypes()
+        internal override IEnumerable<(string TypeName, Type Type)> GetDiscriminatedTypes()
         {
             yield return ("Amulet", typeof(AmuletRecipe));
             yield return ("Axe", typeof(AxeRecipe));
@@ -73,60 +68,60 @@ namespace GW2SDK.Recipes.Impl
             yield return ("Warhorn", typeof(WarhornRecipe));
         }
 
-        public object Create(Type objectType)
+        internal override object CreateInstance(Type discriminatedType)
         {
-            if (objectType == typeof(AmuletRecipe)) return new AmuletRecipe();
-            if (objectType == typeof(AxeRecipe)) return new AxeRecipe();
-            if (objectType == typeof(BackpackRecipe)) return new BackpackRecipe();
-            if (objectType == typeof(BagRecipe)) return new BagRecipe();
-            if (objectType == typeof(BootsRecipe)) return new BootsRecipe();
-            if (objectType == typeof(BulkRecipe)) return new BulkRecipe();
-            if (objectType == typeof(CoatRecipe)) return new CoatRecipe();
-            if (objectType == typeof(ComponentRecipe)) return new ComponentRecipe();
-            if (objectType == typeof(ConsumableRecipe)) return new ConsumableRecipe();
-            if (objectType == typeof(DaggerRecipe)) return new DaggerRecipe();
-            if (objectType == typeof(DessertRecipe)) return new DessertRecipe();
-            if (objectType == typeof(DyeRecipe)) return new DyeRecipe();
-            if (objectType == typeof(EarringRecipe)) return new EarringRecipe();
-            if (objectType == typeof(FeastRecipe)) return new FeastRecipe();
-            if (objectType == typeof(FocusRecipe)) return new FocusRecipe();
-            if (objectType == typeof(GlovesRecipe)) return new GlovesRecipe();
-            if (objectType == typeof(GreatswordRecipe)) return new GreatswordRecipe();
-            if (objectType == typeof(GuildConsumableRecipe)) return new GuildConsumableRecipe();
-            if (objectType == typeof(GuildConsumableWvwRecipe)) return new GuildConsumableWvwRecipe();
-            if (objectType == typeof(GuildDecorationRecipe)) return new GuildDecorationRecipe();
-            if (objectType == typeof(HammerRecipe)) return new HammerRecipe();
-            if (objectType == typeof(HarpoonRecipe)) return new HarpoonRecipe();
-            if (objectType == typeof(HelmRecipe)) return new HelmRecipe();
-            if (objectType == typeof(IngredientCookingRecipe)) return new IngredientCookingRecipe();
-            if (objectType == typeof(InscriptionRecipe)) return new InscriptionRecipe();
-            if (objectType == typeof(InsigniaRecipe)) return new InsigniaRecipe();
-            if (objectType == typeof(LegendaryComponentRecipe)) return new LegendaryComponentRecipe();
-            if (objectType == typeof(LeggingsRecipe)) return new LeggingsRecipe();
-            if (objectType == typeof(LongBowRecipe)) return new LongBowRecipe();
-            if (objectType == typeof(MaceRecipe)) return new MaceRecipe();
-            if (objectType == typeof(MealRecipe)) return new MealRecipe();
-            if (objectType == typeof(PistolRecipe)) return new PistolRecipe();
-            if (objectType == typeof(PotionRecipe)) return new PotionRecipe();
-            if (objectType == typeof(RefinementRecipe)) return new RefinementRecipe();
-            if (objectType == typeof(RefinementEctoplasmRecipe)) return new RefinementEctoplasmRecipe();
-            if (objectType == typeof(RefinementObsidianRecipe)) return new RefinementObsidianRecipe();
-            if (objectType == typeof(RifleRecipe)) return new RifleRecipe();
-            if (objectType == typeof(RingRecipe)) return new RingRecipe();
-            if (objectType == typeof(ScepterRecipe)) return new ScepterRecipe();
-            if (objectType == typeof(SeasoningRecipe)) return new SeasoningRecipe();
-            if (objectType == typeof(ShieldRecipe)) return new ShieldRecipe();
-            if (objectType == typeof(ShortBowRecipe)) return new ShortBowRecipe();
-            if (objectType == typeof(ShouldersRecipe)) return new ShouldersRecipe();
-            if (objectType == typeof(SnackRecipe)) return new SnackRecipe();
-            if (objectType == typeof(SoupRecipe)) return new SoupRecipe();
-            if (objectType == typeof(SpeargunRecipe)) return new SpeargunRecipe();
-            if (objectType == typeof(StaffRecipe)) return new StaffRecipe();
-            if (objectType == typeof(SwordRecipe)) return new SwordRecipe();
-            if (objectType == typeof(TorchRecipe)) return new TorchRecipe();
-            if (objectType == typeof(TridentRecipe)) return new TridentRecipe();
-            if (objectType == typeof(UpgradeComponentRecipe)) return new UpgradeComponentRecipe();
-            if (objectType == typeof(WarhornRecipe)) return new WarhornRecipe();
+            if (discriminatedType == typeof(AmuletRecipe)) return new AmuletRecipe();
+            if (discriminatedType == typeof(AxeRecipe)) return new AxeRecipe();
+            if (discriminatedType == typeof(BackpackRecipe)) return new BackpackRecipe();
+            if (discriminatedType == typeof(BagRecipe)) return new BagRecipe();
+            if (discriminatedType == typeof(BootsRecipe)) return new BootsRecipe();
+            if (discriminatedType == typeof(BulkRecipe)) return new BulkRecipe();
+            if (discriminatedType == typeof(CoatRecipe)) return new CoatRecipe();
+            if (discriminatedType == typeof(ComponentRecipe)) return new ComponentRecipe();
+            if (discriminatedType == typeof(ConsumableRecipe)) return new ConsumableRecipe();
+            if (discriminatedType == typeof(DaggerRecipe)) return new DaggerRecipe();
+            if (discriminatedType == typeof(DessertRecipe)) return new DessertRecipe();
+            if (discriminatedType == typeof(DyeRecipe)) return new DyeRecipe();
+            if (discriminatedType == typeof(EarringRecipe)) return new EarringRecipe();
+            if (discriminatedType == typeof(FeastRecipe)) return new FeastRecipe();
+            if (discriminatedType == typeof(FocusRecipe)) return new FocusRecipe();
+            if (discriminatedType == typeof(GlovesRecipe)) return new GlovesRecipe();
+            if (discriminatedType == typeof(GreatswordRecipe)) return new GreatswordRecipe();
+            if (discriminatedType == typeof(GuildConsumableRecipe)) return new GuildConsumableRecipe();
+            if (discriminatedType == typeof(GuildConsumableWvwRecipe)) return new GuildConsumableWvwRecipe();
+            if (discriminatedType == typeof(GuildDecorationRecipe)) return new GuildDecorationRecipe();
+            if (discriminatedType == typeof(HammerRecipe)) return new HammerRecipe();
+            if (discriminatedType == typeof(HarpoonRecipe)) return new HarpoonRecipe();
+            if (discriminatedType == typeof(HelmRecipe)) return new HelmRecipe();
+            if (discriminatedType == typeof(IngredientCookingRecipe)) return new IngredientCookingRecipe();
+            if (discriminatedType == typeof(InscriptionRecipe)) return new InscriptionRecipe();
+            if (discriminatedType == typeof(InsigniaRecipe)) return new InsigniaRecipe();
+            if (discriminatedType == typeof(LegendaryComponentRecipe)) return new LegendaryComponentRecipe();
+            if (discriminatedType == typeof(LeggingsRecipe)) return new LeggingsRecipe();
+            if (discriminatedType == typeof(LongBowRecipe)) return new LongBowRecipe();
+            if (discriminatedType == typeof(MaceRecipe)) return new MaceRecipe();
+            if (discriminatedType == typeof(MealRecipe)) return new MealRecipe();
+            if (discriminatedType == typeof(PistolRecipe)) return new PistolRecipe();
+            if (discriminatedType == typeof(PotionRecipe)) return new PotionRecipe();
+            if (discriminatedType == typeof(RefinementRecipe)) return new RefinementRecipe();
+            if (discriminatedType == typeof(RefinementEctoplasmRecipe)) return new RefinementEctoplasmRecipe();
+            if (discriminatedType == typeof(RefinementObsidianRecipe)) return new RefinementObsidianRecipe();
+            if (discriminatedType == typeof(RifleRecipe)) return new RifleRecipe();
+            if (discriminatedType == typeof(RingRecipe)) return new RingRecipe();
+            if (discriminatedType == typeof(ScepterRecipe)) return new ScepterRecipe();
+            if (discriminatedType == typeof(SeasoningRecipe)) return new SeasoningRecipe();
+            if (discriminatedType == typeof(ShieldRecipe)) return new ShieldRecipe();
+            if (discriminatedType == typeof(ShortBowRecipe)) return new ShortBowRecipe();
+            if (discriminatedType == typeof(ShouldersRecipe)) return new ShouldersRecipe();
+            if (discriminatedType == typeof(SnackRecipe)) return new SnackRecipe();
+            if (discriminatedType == typeof(SoupRecipe)) return new SoupRecipe();
+            if (discriminatedType == typeof(SpeargunRecipe)) return new SpeargunRecipe();
+            if (discriminatedType == typeof(StaffRecipe)) return new StaffRecipe();
+            if (discriminatedType == typeof(SwordRecipe)) return new SwordRecipe();
+            if (discriminatedType == typeof(TorchRecipe)) return new TorchRecipe();
+            if (discriminatedType == typeof(TridentRecipe)) return new TridentRecipe();
+            if (discriminatedType == typeof(UpgradeComponentRecipe)) return new UpgradeComponentRecipe();
+            if (discriminatedType == typeof(WarhornRecipe)) return new WarhornRecipe();
             return new Recipe();
         }
     }

@@ -1,19 +1,19 @@
-﻿using System;
-using System.Net;
-using System.Net.Http;
+﻿using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
+using GW2SDK.Exceptions;
 using Newtonsoft.Json.Linq;
+using static System.Net.HttpStatusCode;
 
-namespace GW2SDK.Impl.HttpMessageHandlers
+namespace GW2SDK.Http
 {
-    public sealed class BadMessageHandler : DelegatingHandler
+    public sealed class UnauthorizedMessageHandler : DelegatingHandler
     {
-        public BadMessageHandler()
+        public UnauthorizedMessageHandler()
         {
         }
 
-        public BadMessageHandler(HttpMessageHandler innerHandler)
+        public UnauthorizedMessageHandler(HttpMessageHandler innerHandler)
             : base(innerHandler)
         {
         }
@@ -21,11 +21,11 @@ namespace GW2SDK.Impl.HttpMessageHandlers
         protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
         {
             var response = await base.SendAsync(request, cancellationToken).ConfigureAwait(false);
-            if (response.StatusCode == HttpStatusCode.BadRequest)
+            if (response.StatusCode == Unauthorized || response.StatusCode == Forbidden)
             {
                 var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
                 var text = JObject.Parse(json)?["text"]?.ToString();
-                throw new ArgumentException(text);
+                throw new UnauthorizedOperationException(text);
             }
 
             return response;

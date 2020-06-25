@@ -4,31 +4,26 @@ using GW2SDK.Impl.JsonConverters;
 
 namespace GW2SDK.Items.Impl
 {
-    public sealed class GatheringToolDiscriminatorOptions : DiscriminatorOptions
+    internal sealed class GatheringToolDiscriminatorOptions : DiscriminatorOptions
     {
-        public GatheringToolDiscriminatorOptions()
-        {
-            Activator = Create;
-        }
+        internal override Type BaseType => typeof(GatheringTool);
 
-        public override Type BaseType => typeof(GatheringTool);
+        internal override string DiscriminatorFieldName => "gathering_type";
 
-        public override string DiscriminatorFieldName => "gathering_type";
+        internal override bool SerializeDiscriminator => false;
 
-        public override bool SerializeDiscriminator => false;
-
-        public override IEnumerable<(string TypeName, Type Type)> GetDiscriminatedTypes()
+        internal override IEnumerable<(string TypeName, Type Type)> GetDiscriminatedTypes()
         {
             yield return ("Foraging", typeof(ForagingTool));
             yield return ("Logging", typeof(LoggingTool));
             yield return ("Mining", typeof(MiningTool));
         }
 
-        public object Create(Type objectType)
+        internal override object CreateInstance(Type discriminatedType)
         {
-            if (objectType == typeof(ForagingTool)) return new ForagingTool();
-            if (objectType == typeof(LoggingTool)) return new LoggingTool();
-            if (objectType == typeof(MiningTool)) return new MiningTool();
+            if (discriminatedType == typeof(ForagingTool)) return new ForagingTool();
+            if (discriminatedType == typeof(LoggingTool)) return new LoggingTool();
+            if (discriminatedType == typeof(MiningTool)) return new MiningTool();
             return new GatheringTool();
         }
     }

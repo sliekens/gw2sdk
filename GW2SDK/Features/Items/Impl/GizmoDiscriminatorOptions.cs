@@ -4,20 +4,15 @@ using GW2SDK.Impl.JsonConverters;
 
 namespace GW2SDK.Items.Impl
 {
-    public sealed class GizmoDiscriminatorOptions : DiscriminatorOptions
+    internal sealed class GizmoDiscriminatorOptions : DiscriminatorOptions
     {
-        public GizmoDiscriminatorOptions()
-        {
-            Activator = Create;
-        }
+        internal override Type BaseType => typeof(Gizmo);
 
-        public override Type BaseType => typeof(Gizmo);
+        internal override string DiscriminatorFieldName => "gizmo_type";
 
-        public override string DiscriminatorFieldName => "gizmo_type";
+        internal override bool SerializeDiscriminator => false;
 
-        public override bool SerializeDiscriminator => false;
-
-        public override IEnumerable<(string TypeName, Type Type)> GetDiscriminatedTypes()
+        internal override IEnumerable<(string TypeName, Type Type)> GetDiscriminatedTypes()
         {
             yield return ("ContainerKey", typeof(ContainerKey));
             yield return ("Default", typeof(Gizmo));
@@ -25,12 +20,12 @@ namespace GW2SDK.Items.Impl
             yield return ("UnlimitedConsumable", typeof(UnlimitedConsumable));
         }
 
-        public object Create(Type objectType)
+        internal override object CreateInstance(Type discriminatedType)
         {
-            if (objectType == typeof(Gizmo)) return new Gizmo();
-            if (objectType == typeof(ContainerKey)) return new ContainerKey();
-            if (objectType == typeof(RentableContractNpc)) return new RentableContractNpc();
-            if (objectType == typeof(UnlimitedConsumable)) return new UnlimitedConsumable();
+            if (discriminatedType == typeof(Gizmo)) return new Gizmo();
+            if (discriminatedType == typeof(ContainerKey)) return new ContainerKey();
+            if (discriminatedType == typeof(RentableContractNpc)) return new RentableContractNpc();
+            if (discriminatedType == typeof(UnlimitedConsumable)) return new UnlimitedConsumable();
             return new Gizmo();
         }
     }

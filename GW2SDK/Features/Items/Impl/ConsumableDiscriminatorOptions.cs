@@ -4,20 +4,15 @@ using GW2SDK.Impl.JsonConverters;
 
 namespace GW2SDK.Items.Impl
 {
-    public sealed class ConsumableDiscriminatorOptions : DiscriminatorOptions
+    internal sealed class ConsumableDiscriminatorOptions : DiscriminatorOptions
     {
-        public ConsumableDiscriminatorOptions()
-        {
-            Activator = Create;
-        }
+        internal override Type BaseType => typeof(Consumable);
 
-        public override Type BaseType => typeof(Consumable);
+        internal override string DiscriminatorFieldName => "consumable_type";
 
-        public override string DiscriminatorFieldName => "consumable_type";
+        internal override bool SerializeDiscriminator => false;
 
-        public override bool SerializeDiscriminator => false;
-
-        public override IEnumerable<(string TypeName, Type Type)> GetDiscriminatedTypes()
+        internal override IEnumerable<(string TypeName, Type Type)> GetDiscriminatedTypes()
         {
             yield return ("AppearanceChange", typeof(AppearanceChanger));
             yield return ("Booze", typeof(Booze));
@@ -36,23 +31,23 @@ namespace GW2SDK.Items.Impl
             yield return ("Utility", typeof(Utility));
         }
 
-        public object Create(Type objectType)
+        internal override object CreateInstance(Type discriminatedType)
         {
-            if (objectType == typeof(Consumable)) return new Consumable();
-            if (objectType == typeof(AppearanceChanger)) return new AppearanceChanger();
-            if (objectType == typeof(Booze)) return new Booze();
-            if (objectType == typeof(ContractNpc)) return new ContractNpc();
-            if (objectType == typeof(Currency)) return new Currency();
-            if (objectType == typeof(Food)) return new Food();
-            if (objectType == typeof(HalloweenConsumable)) return new HalloweenConsumable();
-            if (objectType == typeof(ImmediateConsumable)) return new ImmediateConsumable();
-            if (objectType == typeof(MountRandomUnlocker)) return new MountRandomUnlocker();
-            if (objectType == typeof(RandomUnlocker)) return new RandomUnlocker();
-            if (objectType == typeof(TeleportToFriend)) return new TeleportToFriend();
-            if (objectType == typeof(Transmutation)) return new Transmutation();
-            if (objectType == typeof(Unlocker)) return new Unlocker();
-            if (objectType == typeof(UpgradeRemover)) return new UpgradeRemover();
-            if (objectType == typeof(Utility)) return new Utility();
+            if (discriminatedType == typeof(Consumable)) return new Consumable();
+            if (discriminatedType == typeof(AppearanceChanger)) return new AppearanceChanger();
+            if (discriminatedType == typeof(Booze)) return new Booze();
+            if (discriminatedType == typeof(ContractNpc)) return new ContractNpc();
+            if (discriminatedType == typeof(Currency)) return new Currency();
+            if (discriminatedType == typeof(Food)) return new Food();
+            if (discriminatedType == typeof(HalloweenConsumable)) return new HalloweenConsumable();
+            if (discriminatedType == typeof(ImmediateConsumable)) return new ImmediateConsumable();
+            if (discriminatedType == typeof(MountRandomUnlocker)) return new MountRandomUnlocker();
+            if (discriminatedType == typeof(RandomUnlocker)) return new RandomUnlocker();
+            if (discriminatedType == typeof(TeleportToFriend)) return new TeleportToFriend();
+            if (discriminatedType == typeof(Transmutation)) return new Transmutation();
+            if (discriminatedType == typeof(Unlocker)) return new Unlocker();
+            if (discriminatedType == typeof(UpgradeRemover)) return new UpgradeRemover();
+            if (discriminatedType == typeof(Utility)) return new Utility();
             return new Consumable();
         }
     }
