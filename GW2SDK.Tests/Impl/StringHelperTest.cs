@@ -1,6 +1,5 @@
 ﻿using System;
 using GW2SDK.Impl;
-using GW2SDK.Impl.JsonConverters;
 using Xunit;
 
 namespace GW2SDK.Tests.Impl

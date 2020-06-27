@@ -1,5 +1,4 @@
 ﻿using GW2SDK.Backstories.Questions;
-using GW2SDK.Impl.JsonConverters;
 using GW2SDK.Tests.Features.Backstories.Questions.Fixtures;
 using GW2SDK.Tests.TestInfrastructure;
 using Newtonsoft.Json;
@@ -35,8 +34,8 @@ namespace GW2SDK.Tests.Features.Backstories.Questions
         public void Backstory_questions_can_be_created_from_json()
         {
             var settings = new JsonSerializerSettingsBuilder()
-                .UseTraceWriter(new XunitTraceWriter(_output))
-                .UseMissingMemberHandling(MissingMemberHandling.Error)
+                .UseTraceWriter(_output)
+                .ThrowErrorOnMissingMember()
                 .Build();
 
             AssertEx.ForEach(_fixture.BackstoryQuestions,

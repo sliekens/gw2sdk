@@ -1,6 +1,7 @@
 ﻿using GW2SDK.Impl.JsonConverters;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
+using Xunit.Abstractions;
 
 namespace GW2SDK.Tests.TestInfrastructure
 {
@@ -12,15 +13,15 @@ namespace GW2SDK.Tests.TestInfrastructure
 
         private ITraceWriter _traceWriter;
 
-        internal JsonSerializerSettingsBuilder UseMissingMemberHandling(MissingMemberHandling missingMemberHandling)
+        internal JsonSerializerSettingsBuilder ThrowErrorOnMissingMember()
         {
-            _missingMemberHandling = missingMemberHandling;
+            _missingMemberHandling = MissingMemberHandling.Error;
             return this;
         }
 
-        internal JsonSerializerSettingsBuilder UseTraceWriter(ITraceWriter traceWriter)
+        internal JsonSerializerSettingsBuilder UseTraceWriter(ITestOutputHelper output)
         {
-            _traceWriter = traceWriter;
+            _traceWriter = new XunitTraceWriter(output);
             return this;
         }
 

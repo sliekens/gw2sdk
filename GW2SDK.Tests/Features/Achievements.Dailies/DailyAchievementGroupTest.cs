@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using GW2SDK.Achievements.Dailies;
 using GW2SDK.Enums;
-using GW2SDK.Impl.JsonConverters;
 using GW2SDK.Tests.Features.Achievements.Dailies.Fixtures;
 using GW2SDK.Tests.TestInfrastructure;
 using Newtonsoft.Json;
@@ -30,8 +29,8 @@ namespace GW2SDK.Tests.Features.Achievements.Dailies
         public void Daily_achievement_group_can_be_created_from_json(Day day)
         {
             var settings = new JsonSerializerSettingsBuilder()
-                .UseTraceWriter(new XunitTraceWriter(_output))
-                .UseMissingMemberHandling(MissingMemberHandling.Error)
+                .UseTraceWriter(_output)
+                .ThrowErrorOnMissingMember()
                 .Build();
 
             var json = day switch

@@ -1,6 +1,5 @@
 ﻿using System;
 using GW2SDK.Enums;
-using GW2SDK.Impl.JsonConverters;
 using GW2SDK.Tests.Features.Worlds.Fixtures;
 using GW2SDK.Tests.TestInfrastructure;
 using GW2SDK.Worlds;
@@ -38,8 +37,8 @@ namespace GW2SDK.Tests.Features.Worlds
         public void Worlds_can_be_created_from_json()
         {
             var settings = new JsonSerializerSettingsBuilder()
-                .UseTraceWriter(new XunitTraceWriter(_output))
-                .UseMissingMemberHandling(MissingMemberHandling.Error)
+                .UseTraceWriter(_output)
+                .ThrowErrorOnMissingMember()
                 .Build();
 
             AssertEx.ForEach(_fixture.Db.Worlds,

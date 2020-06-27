@@ -1,5 +1,4 @@
 ﻿using GW2SDK.Accounts.Banks;
-using GW2SDK.Impl.JsonConverters;
 using GW2SDK.Tests.Features.Accounts.Banks.Fixtures;
 using GW2SDK.Tests.TestInfrastructure;
 using Newtonsoft.Json;
@@ -23,8 +22,8 @@ namespace GW2SDK.Tests.Features.Accounts.Banks
         [Fact]
         public void Bank_can_be_created_from_json()
         {
-            var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output))
-                .UseMissingMemberHandling(MissingMemberHandling.Error)
+            var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(_output)
+                .ThrowErrorOnMissingMember()
                 .Build();
 
             var actual = JsonConvert.DeserializeObject<Bank>(_fixture.Bank, settings);

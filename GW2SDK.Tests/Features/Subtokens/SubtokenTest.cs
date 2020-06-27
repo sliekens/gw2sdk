@@ -1,5 +1,4 @@
-﻿using GW2SDK.Impl.JsonConverters;
-using GW2SDK.Subtokens;
+﻿using GW2SDK.Subtokens;
 using GW2SDK.Tests.Features.Subtokens.Fixtures;
 using GW2SDK.Tests.TestInfrastructure;
 using Newtonsoft.Json;
@@ -27,8 +26,8 @@ namespace GW2SDK.Tests.Features.Subtokens
         public void Subtokens_can_be_created_from_json()
         {
             var settings = new JsonSerializerSettingsBuilder()
-                .UseTraceWriter(new XunitTraceWriter(_output))
-                .UseMissingMemberHandling(MissingMemberHandling.Error)
+                .UseTraceWriter(_output)
+                .ThrowErrorOnMissingMember()
                 .Build();
 
             var actual = JsonConvert.DeserializeObject<CreatedSubtoken>(_fixture.CreatedSubtoken, settings);

@@ -1,5 +1,4 @@
 ﻿using GW2SDK.Achievements.Groups;
-using GW2SDK.Impl.JsonConverters;
 using GW2SDK.Tests.Features.Achievements.Groups.Fixtures;
 using GW2SDK.Tests.TestInfrastructure;
 using Newtonsoft.Json;
@@ -33,8 +32,8 @@ namespace GW2SDK.Tests.Features.Achievements.Groups
         public void Achievement_groups_can_be_created_from_json()
         {
             var settings = new JsonSerializerSettingsBuilder()
-                .UseTraceWriter(new XunitTraceWriter(_output))
-                .UseMissingMemberHandling(MissingMemberHandling.Error)
+                .UseTraceWriter(_output)
+                .ThrowErrorOnMissingMember()
                 .Build();
 
             AssertEx.ForEach(_fixture.Db.AchievementGroups,
