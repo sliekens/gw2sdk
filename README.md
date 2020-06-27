@@ -27,8 +27,8 @@ You must replace:
 
 By default, your token is stored in encrypted format in your user directory.
 
-- %userprofile%\.nuget\packages on windows
-- ~/.nuget/packages on Mac/Linux
+- Windows: `%userprofile%\.nuget\packages`
+- Mac/Linux: `~/.nuget/packages`
 
 Encryption is not supported on every platform. If you get an error, try the command again with `--store-password-in-clear-text`.
 
