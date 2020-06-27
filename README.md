@@ -12,7 +12,7 @@ C# client SDK for interacting with the Guild Wars 2 API
 
 GW2SDK is still under development. Preview packages will be published to nuget.org later.
 
-You can install development packages from GitHub. These packages are updated on every commit to the main branch and versioned by date and time. (Format: 1.0.0-CI-YYYYMMDD-hhmmss)
+You can install development packages from GitHub from [here][packages]. These packages are updated on every commit to the main branch and versioned by date and time. (Format: 1.0.0-CI-YYYYMMDD-hhmmss)
 
 First create a personal access token [here][tokens] with the _read:packages_ scope. Then run the following command.
 
@@ -32,7 +32,10 @@ By default, your token is stored in encrypted format in your user directory.
 
 Encryption is not supported on every platform. If you get an error, try the command again with `--store-password-in-clear-text`.
 
-Now you can install packages from [here][packages].
+To stop using development packages, you can remove the NuGet source from your machine. This will remove the source and your token.
+``` sh
+dotnet nuget remove source sliekens
+```
 
 [//]:# (add links to the section below)
 [actions]:https://github.com/StevenLiekens/gw2sdk/actions?query=workflow%3A%22Continuous+Integration%22
