@@ -1,5 +1,4 @@
 ﻿using GW2SDK.Builds;
-using GW2SDK.Impl.JsonConverters;
 using GW2SDK.Tests.Features.Builds.Fixtures;
 using GW2SDK.Tests.TestInfrastructure;
 using Newtonsoft.Json;
@@ -32,8 +31,8 @@ namespace GW2SDK.Tests.Features.Builds
         public void Build_can_be_created_from_json()
         {
             var settings = new JsonSerializerSettingsBuilder()
-                .UseTraceWriter(new XunitTraceWriter(_output))
-                .UseMissingMemberHandling(MissingMemberHandling.Error)
+                .UseTraceWriter(_output)
+                .ThrowErrorOnMissingMember()
                 .Build();
 
             var actual = JsonConvert.DeserializeObject<Build>(_fixture.Build, settings);

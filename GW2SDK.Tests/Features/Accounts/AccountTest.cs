@@ -1,7 +1,6 @@
 ﻿using System;
 using GW2SDK.Accounts;
 using GW2SDK.Enums;
-using GW2SDK.Impl.JsonConverters;
 using GW2SDK.Tests.Features.Accounts.Fixtures;
 using GW2SDK.Tests.TestInfrastructure;
 using Newtonsoft.Json;
@@ -73,8 +72,8 @@ namespace GW2SDK.Tests.Features.Accounts
         public void Account_can_be_partially_created_from_json_with_limited_scopes()
         {
             var settings = new JsonSerializerSettingsBuilder()
-                .UseTraceWriter(new XunitTraceWriter(_output))
-                .UseMissingMemberHandling(MissingMemberHandling.Error)
+                .UseTraceWriter(_output)
+                .ThrowErrorOnMissingMember()
                 .Build();
 
             var actual = JsonConvert.DeserializeObject<Account>(_fixture.Db.BasicAccount, settings);
@@ -96,8 +95,8 @@ namespace GW2SDK.Tests.Features.Accounts
         [Trait("Importance", "Critical")]
         public void Account_can_be_fully_created_from_json_with_all_scopes()
         {
-            var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output))
-                .UseMissingMemberHandling(MissingMemberHandling.Error)
+            var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(_output)
+                .ThrowErrorOnMissingMember()
                 .Build();
 
             var actual = JsonConvert.DeserializeObject<Account>(_fixture.Db.FullAccount, settings);

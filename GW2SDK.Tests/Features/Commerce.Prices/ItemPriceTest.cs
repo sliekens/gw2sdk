@@ -1,5 +1,4 @@
 ﻿using GW2SDK.Commerce.Prices;
-using GW2SDK.Impl.JsonConverters;
 using GW2SDK.Tests.Features.Commerce.Prices.Fixtures;
 using GW2SDK.Tests.TestInfrastructure;
 using Newtonsoft.Json;
@@ -32,8 +31,8 @@ namespace GW2SDK.Tests.Features.Commerce.Prices
         [Trait("Importance", "Critical")]
         public void Item_prices_can_be_created_from_json()
         {
-            var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(new XunitTraceWriter(_output))
-                .UseMissingMemberHandling(MissingMemberHandling.Error)
+            var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(_output)
+                .ThrowErrorOnMissingMember()
                 .Build();
             AssertEx.ForEach(_fixture.Db.ItemPrices,
                 json =>

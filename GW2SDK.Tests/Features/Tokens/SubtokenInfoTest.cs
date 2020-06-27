@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Linq;
 using GW2SDK.Enums;
-using GW2SDK.Impl.JsonConverters;
 using GW2SDK.Tests.Features.Tokens.Fixtures;
 using GW2SDK.Tests.TestInfrastructure;
 using GW2SDK.Tokens;
@@ -30,8 +29,8 @@ namespace GW2SDK.Tests.Features.Tokens
         public void SubtokenInfo_can_be_created_from_json()
         {
             var settings = new JsonSerializerSettingsBuilder()
-                .UseTraceWriter(new XunitTraceWriter(_output))
-                .UseMissingMemberHandling(MissingMemberHandling.Error)
+                .UseTraceWriter(_output)
+                .ThrowErrorOnMissingMember()
                 .Build();
 
             var actual = Assert.IsType<SubtokenInfo>(JsonConvert.DeserializeObject<TokenInfo>(_fixture.SubtokenInfoJson, settings));
