@@ -51,6 +51,7 @@ namespace GW2SDK.TestDataHelper
                 .AddTypedClient<JsonAchievementService>()
                 .AddTypedClient<JsonAchievementCategoriesService>()
                 .AddTypedClient<JsonAchievementGroupsService>()
+                .AddTypedClient<JsonApiInfoService>()
                 .AddTypedClient<JsonBuildService>()
                 .AddTypedClient<JsonColorService>()
                 .AddTypedClient<JsonContinentService>()
