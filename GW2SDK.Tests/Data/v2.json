@@ -1,0 +1,967 @@
+{
+  "langs": [
+    "en",
+    "es",
+    "de",
+    "fr",
+    "zh"
+  ],
+  "routes": [
+    {
+      "path": "/v2/account",
+      "lang": false,
+      "auth": true,
+      "active": true
+    },
+    {
+      "path": "/v2/account/achievements",
+      "lang": false,
+      "auth": true,
+      "active": true
+    },
+    {
+      "path": "/v2/account/bank",
+      "lang": false,
+      "auth": true,
+      "active": true
+    },
+    {
+      "path": "/v2/account/buildstorage",
+      "lang": false,
+      "auth": true,
+      "active": true
+    },
+    {
+      "path": "/v2/account/dailycrafting",
+      "lang": false,
+      "auth": true,
+      "active": true
+    },
+    {
+      "path": "/v2/account/dungeons",
+      "lang": false,
+      "auth": true,
+      "active": true
+    },
+    {
+      "path": "/v2/account/dyes",
+      "lang": false,
+      "auth": true,
+      "active": true
+    },
+    {
+      "path": "/v2/account/emotes",
+      "lang": false,
+      "auth": true,
+      "active": true
+    },
+    {
+      "path": "/v2/account/finishers",
+      "lang": false,
+      "auth": true,
+      "active": true
+    },
+    {
+      "path": "/v2/account/gliders",
+      "lang": false,
+      "auth": true,
+      "active": true
+    },
+    {
+      "path": "/v2/account/home",
+      "lang": false,
+      "auth": false,
+      "active": true
+    },
+    {
+      "path": "/v2/account/home/cats",
+      "lang": false,
+      "auth": true,
+      "active": true
+    },
+    {
+      "path": "/v2/account/home/nodes",
+      "lang": false,
+      "auth": true,
+      "active": true
+    },
+    {
+      "path": "/v2/account/inventory",
+      "lang": false,
+      "auth": true,
+      "active": true
+    },
+    {
+      "path": "/v2/account/luck",
+      "lang": false,
+      "auth": true,
+      "active": true
+    },
+    {
+      "path": "/v2/account/mail",
+      "lang": false,
+      "auth": true,
+      "active": false
+    },
+    {
+      "path": "/v2/account/mailcarriers",
+      "lang": false,
+      "auth": true,
+      "active": true
+    },
+    {
+      "path": "/v2/account/mapchests",
+      "lang": false,
+      "auth": true,
+      "active": true
+    },
+    {
+      "path": "/v2/account/masteries",
+      "lang": false,
+      "auth": true,
+      "active": true
+    },
+    {
+      "path": "/v2/account/mastery/points",
+      "lang": false,
+      "auth": true,
+      "active": true
+    },
+    {
+      "path": "/v2/account/materials",
+      "lang": false,
+      "auth": true,
+      "active": true
+    },
+    {
+      "path": "/v2/account/minis",
+      "lang": false,
+      "auth": true,
+      "active": true
+    },
+    {
+      "path": "/v2/account/mounts",
+      "lang": false,
+      "auth": false,
+      "active": true
+    },
+    {
+      "path": "/v2/account/mounts/skins",
+      "lang": false,
+      "auth": true,
+      "active": true
+    },
+    {
+      "path": "/v2/account/mounts/types",
+      "lang": false,
+      "auth": true,
+      "active": true
+    },
+    {
+      "path": "/v2/account/novelties",
+      "lang": false,
+      "auth": true,
+      "active": true
+    },
+    {
+      "path": "/v2/account/outfits",
+      "lang": false,
+      "auth": true,
+      "active": true
+    },
+    {
+      "path": "/v2/account/pvp/heroes",
+      "lang": false,
+      "auth": true,
+      "active": true
+    },
+    {
+      "path": "/v2/account/raids",
+      "lang": false,
+      "auth": true,
+      "active": true
+    },
+    {
+      "path": "/v2/account/recipes",
+      "lang": false,
+      "auth": true,
+      "active": true
+    },
+    {
+      "path": "/v2/account/skins",
+      "lang": false,
+      "auth": true,
+      "active": true
+    },
+    {
+      "path": "/v2/account/titles",
+      "lang": false,
+      "auth": true,
+      "active": true
+    },
+    {
+      "path": "/v2/account/wallet",
+      "lang": false,
+      "auth": true,
+      "active": true
+    },
+    {
+      "path": "/v2/account/worldbosses",
+      "lang": false,
+      "auth": true,
+      "active": true
+    },
+    {
+      "path": "/v2/achievements",
+      "lang": true,
+      "auth": false,
+      "active": true
+    },
+    {
+      "path": "/v2/achievements/categories",
+      "lang": true,
+      "auth": false,
+      "active": true
+    },
+    {
+      "path": "/v2/achievements/daily",
+      "lang": false,
+      "auth": false,
+      "active": true
+    },
+    {
+      "path": "/v2/achievements/daily/tomorrow",
+      "lang": false,
+      "auth": false,
+      "active": true
+    },
+    {
+      "path": "/v2/achievements/groups",
+      "lang": true,
+      "auth": false,
+      "active": true
+    },
+    {
+      "path": "/v2/adventures",
+      "lang": true,
+      "auth": false,
+      "active": false
+    },
+    {
+      "path": "/v2/adventures/:id/leaderboards",
+      "lang": false,
+      "auth": false,
+      "active": false
+    },
+    {
+      "path": "/v2/adventures/:id/leaderboards/:board/:region",
+      "lang": false,
+      "auth": false,
+      "active": false
+    },
+    {
+      "path": "/v2/backstory/answers",
+      "lang": true,
+      "auth": false,
+      "active": true
+    },
+    {
+      "path": "/v2/backstory/questions",
+      "lang": true,
+      "auth": false,
+      "active": true
+    },
+    {
+      "path": "/v2/build",
+      "lang": false,
+      "auth": false,
+      "active": true
+    },
+    {
+      "path": "/v2/characters",
+      "lang": false,
+      "auth": true,
+      "active": true
+    },
+    {
+      "path": "/v2/characters/:id/backstory",
+      "lang": false,
+      "auth": true,
+      "active": true
+    },
+    {
+      "path": "/v2/characters/:id/buildtabs",
+      "lang": false,
+      "auth": true,
+      "active": true
+    },
+    {
+      "path": "/v2/characters/:id/buildtabs/active",
+      "lang": false,
+      "auth": true,
+      "active": true
+    },
+    {
+      "path": "/v2/characters/:id/core",
+      "lang": false,
+      "auth": true,
+      "active": true
+    },
+    {
+      "path": "/v2/characters/:id/crafting",
+      "lang": false,
+      "auth": true,
+      "active": true
+    },
+    {
+      "path": "/v2/characters/:id/dungeons",
+      "lang": false,
+      "auth": true,
+      "active": false
+    },
+    {
+      "path": "/v2/characters/:id/equipment",
+      "lang": false,
+      "auth": true,
+      "active": true
+    },
+    {
+      "path": "/v2/characters/:id/equipmenttabs",
+      "lang": false,
+      "auth": true,
+      "active": true
+    },
+    {
+      "path": "/v2/characters/:id/equipmenttabs/active",
+      "lang": false,
+      "auth": true,
+      "active": true
+    },
+    {
+      "path": "/v2/characters/:id/heropoints",
+      "lang": false,
+      "auth": true,
+      "active": true
+    },
+    {
+      "path": "/v2/characters/:id/inventory",
+      "lang": false,
+      "auth": true,
+      "active": true
+    },
+    {
+      "path": "/v2/characters/:id/quests",
+      "lang": false,
+      "auth": true,
+      "active": true
+    },
+    {
+      "path": "/v2/characters/:id/recipes",
+      "lang": false,
+      "auth": true,
+      "active": true
+    },
+    {
+      "path": "/v2/characters/:id/sab",
+      "lang": false,
+      "auth": true,
+      "active": true
+    },
+    {
+      "path": "/v2/characters/:id/skills",
+      "lang": false,
+      "auth": true,
+      "active": true
+    },
+    {
+      "path": "/v2/characters/:id/specializations",
+      "lang": false,
+      "auth": true,
+      "active": true
+    },
+    {
+      "path": "/v2/characters/:id/training",
+      "lang": false,
+      "auth": true,
+      "active": true
+    },
+    {
+      "path": "/v2/colors",
+      "lang": true,
+      "auth": false,
+      "active": true
+    },
+    {
+      "path": "/v2/commerce/delivery",
+      "lang": false,
+      "auth": true,
+      "active": true
+    },
+    {
+      "path": "/v2/commerce/exchange",
+      "lang": false,
+      "auth": false,
+      "active": true
+    },
+    {
+      "path": "/v2/commerce/listings",
+      "lang": false,
+      "auth": false,
+      "active": true
+    },
+    {
+      "path": "/v2/commerce/prices",
+      "lang": false,
+      "auth": false,
+      "active": true
+    },
+    {
+      "path": "/v2/commerce/transactions",
+      "lang": false,
+      "auth": true,
+      "active": true
+    },
+    {
+      "path": "/v2/continents",
+      "lang": true,
+      "auth": false,
+      "active": true
+    },
+    {
+      "path": "/v2/createsubtoken",
+      "lang": false,
+      "auth": true,
+      "active": true
+    },
+    {
+      "path": "/v2/currencies",
+      "lang": true,
+      "auth": false,
+      "active": true
+    },
+    {
+      "path": "/v2/dailycrafting",
+      "lang": false,
+      "auth": false,
+      "active": true
+    },
+    {
+      "path": "/v2/dungeons",
+      "lang": true,
+      "auth": false,
+      "active": true
+    },
+    {
+      "path": "/v2/emblem",
+      "lang": false,
+      "auth": false,
+      "active": true
+    },
+    {
+      "path": "/v2/emotes",
+      "lang": false,
+      "auth": false,
+      "active": true
+    },
+    {
+      "path": "/v2/events",
+      "lang": true,
+      "auth": false,
+      "active": false
+    },
+    {
+      "path": "/v2/events-state",
+      "lang": false,
+      "auth": false,
+      "active": false
+    },
+    {
+      "path": "/v2/files",
+      "lang": false,
+      "auth": false,
+      "active": true
+    },
+    {
+      "path": "/v2/finishers",
+      "lang": true,
+      "auth": false,
+      "active": true
+    },
+    {
+      "path": "/v2/gemstore/catalog",
+      "lang": true,
+      "auth": false,
+      "active": false
+    },
+    {
+      "path": "/v2/gliders",
+      "lang": true,
+      "auth": false,
+      "active": true
+    },
+    {
+      "path": "/v2/guild/:id",
+      "lang": false,
+      "auth": true,
+      "active": true
+    },
+    {
+      "path": "/v2/guild/:id/log",
+      "lang": false,
+      "auth": true,
+      "active": true
+    },
+    {
+      "path": "/v2/guild/:id/members",
+      "lang": false,
+      "auth": true,
+      "active": true
+    },
+    {
+      "path": "/v2/guild/:id/ranks",
+      "lang": false,
+      "auth": true,
+      "active": true
+    },
+    {
+      "path": "/v2/guild/:id/stash",
+      "lang": false,
+      "auth": true,
+      "active": true
+    },
+    {
+      "path": "/v2/guild/:id/storage",
+      "lang": false,
+      "auth": true,
+      "active": true
+    },
+    {
+      "path": "/v2/guild/:id/teams",
+      "lang": false,
+      "auth": true,
+      "active": true
+    },
+    {
+      "path": "/v2/guild/:id/treasury",
+      "lang": false,
+      "auth": true,
+      "active": true
+    },
+    {
+      "path": "/v2/guild/:id/upgrades",
+      "lang": false,
+      "auth": true,
+      "active": true
+    },
+    {
+      "path": "/v2/guild/permissions",
+      "lang": true,
+      "auth": false,
+      "active": true
+    },
+    {
+      "path": "/v2/guild/search",
+      "lang": false,
+      "auth": false,
+      "active": true
+    },
+    {
+      "path": "/v2/guild/upgrades",
+      "lang": true,
+      "auth": false,
+      "active": true
+    },
+    {
+      "path": "/v2/home",
+      "lang": false,
+      "auth": false,
+      "active": true
+    },
+    {
+      "path": "/v2/home/cats",
+      "lang": false,
+      "auth": false,
+      "active": true
+    },
+    {
+      "path": "/v2/home/nodes",
+      "lang": false,
+      "auth": false,
+      "active": true
+    },
+    {
+      "path": "/v2/items",
+      "lang": true,
+      "auth": false,
+      "active": true
+    },
+    {
+      "path": "/v2/itemstats",
+      "lang": true,
+      "auth": false,
+      "active": true
+    },
+    {
+      "path": "/v2/legends",
+      "lang": false,
+      "auth": false,
+      "active": true
+    },
+    {
+      "path": "/v2/mailcarriers",
+      "lang": true,
+      "auth": false,
+      "active": true
+    },
+    {
+      "path": "/v2/mapchests",
+      "lang": false,
+      "auth": false,
+      "active": true
+    },
+    {
+      "path": "/v2/maps",
+      "lang": true,
+      "auth": false,
+      "active": true
+    },
+    {
+      "path": "/v2/masteries",
+      "lang": true,
+      "auth": false,
+      "active": true
+    },
+    {
+      "path": "/v2/materials",
+      "lang": true,
+      "auth": false,
+      "active": true
+    },
+    {
+      "path": "/v2/minis",
+      "lang": true,
+      "auth": false,
+      "active": true
+    },
+    {
+      "path": "/v2/mounts",
+      "lang": false,
+      "auth": false,
+      "active": true
+    },
+    {
+      "path": "/v2/mounts/skins",
+      "lang": true,
+      "auth": false,
+      "active": true
+    },
+    {
+      "path": "/v2/mounts/types",
+      "lang": true,
+      "auth": false,
+      "active": true
+    },
+    {
+      "path": "/v2/novelties",
+      "lang": true,
+      "auth": false,
+      "active": true
+    },
+    {
+      "path": "/v2/outfits",
+      "lang": true,
+      "auth": false,
+      "active": true
+    },
+    {
+      "path": "/v2/pets",
+      "lang": true,
+      "auth": false,
+      "active": true
+    },
+    {
+      "path": "/v2/professions",
+      "lang": true,
+      "auth": false,
+      "active": true
+    },
+    {
+      "path": "/v2/pvp",
+      "lang": false,
+      "auth": false,
+      "active": true
+    },
+    {
+      "path": "/v2/pvp/amulets",
+      "lang": true,
+      "auth": false,
+      "active": true
+    },
+    {
+      "path": "/v2/pvp/games",
+      "lang": false,
+      "auth": true,
+      "active": true
+    },
+    {
+      "path": "/v2/pvp/heroes",
+      "lang": true,
+      "auth": false,
+      "active": true
+    },
+    {
+      "path": "/v2/pvp/ranks",
+      "lang": true,
+      "auth": false,
+      "active": true
+    },
+    {
+      "path": "/v2/pvp/rewardtracks",
+      "lang": true,
+      "auth": false,
+      "active": false
+    },
+    {
+      "path": "/v2/pvp/runes",
+      "lang": true,
+      "auth": false,
+      "active": false
+    },
+    {
+      "path": "/v2/pvp/seasons",
+      "lang": true,
+      "auth": false,
+      "active": true
+    },
+    {
+      "path": "/v2/pvp/seasons/:id/leaderboards",
+      "lang": false,
+      "auth": false,
+      "active": true
+    },
+    {
+      "path": "/v2/pvp/seasons/:id/leaderboards/:board/:region",
+      "lang": false,
+      "auth": false,
+      "active": true
+    },
+    {
+      "path": "/v2/pvp/sigils",
+      "lang": true,
+      "auth": false,
+      "active": false
+    },
+    {
+      "path": "/v2/pvp/standings",
+      "lang": false,
+      "auth": true,
+      "active": true
+    },
+    {
+      "path": "/v2/pvp/stats",
+      "lang": false,
+      "auth": true,
+      "active": true
+    },
+    {
+      "path": "/v2/quaggans",
+      "lang": false,
+      "auth": false,
+      "active": true
+    },
+    {
+      "path": "/v2/quests",
+      "lang": true,
+      "auth": false,
+      "active": true
+    },
+    {
+      "path": "/v2/races",
+      "lang": true,
+      "auth": false,
+      "active": true
+    },
+    {
+      "path": "/v2/raids",
+      "lang": true,
+      "auth": false,
+      "active": true
+    },
+    {
+      "path": "/v2/recipes",
+      "lang": false,
+      "auth": false,
+      "active": true
+    },
+    {
+      "path": "/v2/recipes/search",
+      "lang": false,
+      "auth": false,
+      "active": true
+    },
+    {
+      "path": "/v2/skills",
+      "lang": true,
+      "auth": false,
+      "active": true
+    },
+    {
+      "path": "/v2/skins",
+      "lang": true,
+      "auth": false,
+      "active": true
+    },
+    {
+      "path": "/v2/specializations",
+      "lang": true,
+      "auth": false,
+      "active": true
+    },
+    {
+      "path": "/v2/stories",
+      "lang": true,
+      "auth": false,
+      "active": true
+    },
+    {
+      "path": "/v2/stories/seasons",
+      "lang": true,
+      "auth": false,
+      "active": true
+    },
+    {
+      "path": "/v2/titles",
+      "lang": true,
+      "auth": false,
+      "active": true
+    },
+    {
+      "path": "/v2/tokeninfo",
+      "lang": false,
+      "auth": true,
+      "active": true
+    },
+    {
+      "path": "/v2/traits",
+      "lang": true,
+      "auth": false,
+      "active": true
+    },
+    {
+      "path": "/v2/vendors",
+      "lang": true,
+      "auth": false,
+      "active": false
+    },
+    {
+      "path": "/v2/worldbosses",
+      "lang": false,
+      "auth": false,
+      "active": true
+    },
+    {
+      "path": "/v2/worlds",
+      "lang": true,
+      "auth": false,
+      "active": true
+    },
+    {
+      "path": "/v2/wvw/abilities",
+      "lang": true,
+      "auth": false,
+      "active": true
+    },
+    {
+      "path": "/v2/wvw/matches",
+      "lang": false,
+      "auth": false,
+      "active": true
+    },
+    {
+      "path": "/v2/wvw/matches/overview",
+      "lang": false,
+      "auth": false,
+      "active": true
+    },
+    {
+      "path": "/v2/wvw/matches/scores",
+      "lang": false,
+      "auth": false,
+      "active": true
+    },
+    {
+      "path": "/v2/wvw/matches/stats",
+      "lang": false,
+      "auth": false,
+      "active": true
+    },
+    {
+      "path": "/v2/wvw/matches/stats/:id/guilds/:guild_id",
+      "lang": false,
+      "auth": false,
+      "active": true
+    },
+    {
+      "path": "/v2/wvw/matches/stats/:id/teams/:team/top/kdr",
+      "lang": false,
+      "auth": false,
+      "active": true
+    },
+    {
+      "path": "/v2/wvw/matches/stats/:id/teams/:team/top/kills",
+      "lang": false,
+      "auth": false,
+      "active": true
+    },
+    {
+      "path": "/v2/wvw/objectives",
+      "lang": true,
+      "auth": false,
+      "active": true
+    },
+    {
+      "path": "/v2/wvw/ranks",
+      "lang": true,
+      "auth": false,
+      "active": true
+    },
+    {
+      "path": "/v2/wvw/rewardtracks",
+      "lang": true,
+      "auth": false,
+      "active": false
+    },
+    {
+      "path": "/v2/wvw/upgrades",
+      "lang": true,
+      "auth": false,
+      "active": true
+    }
+  ],
+  "schema_versions": [
+    {
+      "v": "2019-02-21T00:00:00.000Z",
+      "desc": "Add `last_modified` field to account and character records."
+    },
+    {
+      "v": "2019-03-22T00:00:00.000Z",
+      "desc": "Change `/v2/account/home/cats` to just list cat ids"
+    },
+    {
+      "v": "2019-05-16T00:00:00.000Z",
+      "desc": "Change the `access_required` field in `v2/achievements/daily` to show product conditions"
+    },
+    {
+      "v": "2019-05-21T23:00:00.000Z",
+      "desc": "Add `schema_versions` to `/v2.json`"
+    },
+    {
+      "v": "2019-05-22T00:00:00.000Z",
+      "desc": "Change `/v2/tokeninfo` to show subtoken information when one is provided."
+    },
+    {
+      "v": "2019-12-19T00:00:00.000Z",
+      "desc": "Add `code` and `skills_by_palette` to `/v2/professions`. Add `code` to `/v2/legends`. Add `build_storage_slots` to `/v2/account`. Add `build_tabs_unlocked`, `active_build_tab`, `build_tabs`, `equipment_tabs_unlocked`, `active_equipment_tab` and `equipment_tabs` to `/v2/characters/:id`. Add `equipment[i].location` and `equipment[i].tabs` to `/v2/characters/:id`. Remove `skills` and `specializations` from `/v2/characters/:id`."
+    }
+  ]
+}

@@ -9,6 +9,13 @@ namespace GW2SDK.TestDataHelper
         {
             Directory.CreateDirectory(outDir);
             await using var services = new Container();
+            await using (var file = File.CreateText(Path.Combine(outDir, "v2.json")))
+            {
+                var service = services.Resolve<JsonApiInfoService>();
+                var json = await service.GetJsonApiInfo();
+                await file.WriteLineAsync(json);
+            }
+
             await using (var file = File.CreateText(Path.Combine(outDir, "build.json")))
             {
                 var service = services.Resolve<JsonBuildService>();

@@ -16,6 +16,7 @@ using GW2SDK.Commerce.Prices;
 using GW2SDK.Continents;
 using GW2SDK.Exceptions;
 using GW2SDK.Http;
+using GW2SDK.Impl.V2;
 using GW2SDK.Items;
 using GW2SDK.Recipes;
 using GW2SDK.Recipes.Search;
@@ -70,6 +71,7 @@ namespace GW2SDK.Tests.TestInfrastructure
                 .AddHttpMessageHandler<UnauthorizedMessageHandler>()
                 .AddHttpMessageHandler<BadMessageHandler>()
                 .AddHttpMessageHandler<RateLimitHandler>()
+                .AddTypedClient<ApiInfoService>()
                 .AddTypedClient<AccountService>()
                 .AddTypedClient<AccountAchievementService>()
                 .AddTypedClient<AchievementService>()

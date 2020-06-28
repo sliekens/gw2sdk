@@ -19,7 +19,7 @@ namespace GW2SDK.Http
         public static void UseLatestSchemaVersion(this HttpClient instance)
         {
             if (instance is null) throw new ArgumentNullException(nameof(instance));
-            instance.DefaultRequestHeaders.Add("X-Schema-Version", "latest");
+            instance.DefaultRequestHeaders.Add("X-Schema-Version", SchemaVersion.Latest.Version);
         }
 
         public static void UseLanguage(this HttpClient instance, string lang)
