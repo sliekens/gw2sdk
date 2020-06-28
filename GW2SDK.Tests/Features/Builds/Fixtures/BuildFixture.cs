@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using GW2SDK.Tests.TestInfrastructure;
+﻿using System.IO;
 
 namespace GW2SDK.Tests.Features.Builds.Fixtures
 {
@@ -7,8 +6,7 @@ namespace GW2SDK.Tests.Features.Builds.Fixtures
     {
         public BuildFixture()
         {
-            var reader = new JsonFlatFileReader();
-            Build = reader.Read("Data/build.json").Single();
+            Build = File.ReadAllText("Data/build.json");
         }
 
         public string Build { get; }

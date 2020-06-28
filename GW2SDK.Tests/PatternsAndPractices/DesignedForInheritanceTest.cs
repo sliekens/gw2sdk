@@ -20,25 +20,26 @@ namespace GW2SDK.Tests.PatternsAndPractices
         public void Every_exported_class_is_designed_for_inheritance_or_sealed()
         {
             var classes = _fixture.Assembly.ExportedTypes.Where(type => type.IsClass).ToList();
-            foreach (var type in classes)
-            {
-                if (type.IsAbstract)
+            Assert.All(classes,
+                type =>
                 {
-                    continue;
-                }
+                    if (type.IsAbstract)
+                    {
+                        return;
+                    }
 
-                if (type.IsSealed)
-                {
-                    continue;
-                }
+                    if (type.IsSealed)
+                    {
+                        return;
+                    }
 
-                if (type.GetCustomAttribute<InheritableAttribute>() is object)
-                {
-                    continue;
-                }
+                    if (type.GetCustomAttribute<InheritableAttribute>() is object)
+                    {
+                        return;
+                    }
 
-                throw new ApplicationException($"Type '{type}' is public but not abstract, seal it or mark it as [Inheritable].");
-            }
+                    throw new ApplicationException($"Type '{type}' is public but not abstract, seal it or mark it as [Inheritable].");
+                });
         }
     }
 }
