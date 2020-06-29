@@ -18,6 +18,16 @@ namespace GW2SDK.Impl
 
         public int ResultCount => _context.ResultCount;
 
+        public ContinuationToken? Previous => _context.Previous;
+
+        public ContinuationToken? Next => _context.Next;
+
+        public ContinuationToken First => _context.First;
+
+        public ContinuationToken Self => _context.Self;
+
+        public ContinuationToken Last => _context.Last;
+
         public int PageTotal => _context.PageTotal;
 
         public int PageSize => _context.PageSize;
