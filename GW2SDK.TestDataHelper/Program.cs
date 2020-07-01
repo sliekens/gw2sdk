@@ -63,6 +63,16 @@ namespace GW2SDK.TestDataHelper
                 }
             }
 
+            await using (var file = File.CreateText(Path.Combine(outDir, "currencies.json")))
+            {
+                var service = services.Resolve<JsonCurrencyService>();
+                var jsons = await service.GetAllJsonCurrencies(indented);
+                foreach (var json in jsons)
+                {
+                    await file.WriteLineAsync(json);
+                }
+            }
+
             await using (var file = File.CreateText(Path.Combine(outDir, "worlds.json")))
             {
                 var service = services.Resolve<JsonWorldService>();

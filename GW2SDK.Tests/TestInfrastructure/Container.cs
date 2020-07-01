@@ -14,6 +14,7 @@ using GW2SDK.Builds;
 using GW2SDK.Colors;
 using GW2SDK.Commerce.Prices;
 using GW2SDK.Continents;
+using GW2SDK.Currencies;
 using GW2SDK.Exceptions;
 using GW2SDK.Http;
 using GW2SDK.Impl.V2;
@@ -82,6 +83,7 @@ namespace GW2SDK.Tests.TestInfrastructure
                 .AddTypedClient<BuildService>()
                 .AddTypedClient<ColorService>()
                 .AddTypedClient<ContinentService>()
+                .AddTypedClient<CurrencyService>()
                 .AddTypedClient<DailyAchievementService>()
                 .AddTypedClient<ItemService>()
                 .AddTypedClient<ItemPriceService>()
