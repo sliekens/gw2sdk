@@ -76,7 +76,7 @@ namespace GW2SDK
 
         public static readonly Location Account_Mail = new Location("/v2/account/mail");
 
-        public static readonly Location Account_Mailcarriers = new Location("/v2/account/mailcarriers");
+        public static readonly Location Account_MailCarriers = new Location("/v2/account/mailcarriers");
 
         public static readonly Location Account_Mapchests = new Location("/v2/account/mapchests");
 
