@@ -19,6 +19,7 @@ using GW2SDK.Exceptions;
 using GW2SDK.Http;
 using GW2SDK.Impl.V2;
 using GW2SDK.Items;
+using GW2SDK.MailCarriers;
 using GW2SDK.Recipes;
 using GW2SDK.Recipes.Search;
 using GW2SDK.Skins;
@@ -85,8 +86,9 @@ namespace GW2SDK.Tests.TestInfrastructure
                 .AddTypedClient<ContinentService>()
                 .AddTypedClient<CurrencyService>()
                 .AddTypedClient<DailyAchievementService>()
-                .AddTypedClient<ItemService>()
                 .AddTypedClient<ItemPriceService>()
+                .AddTypedClient<ItemService>()
+                .AddTypedClient<MailCarrierService>()
                 .AddTypedClient<RecipeService>()
                 .AddTypedClient<SearchRecipeService>()
                 .AddTypedClient<SkinService>()
