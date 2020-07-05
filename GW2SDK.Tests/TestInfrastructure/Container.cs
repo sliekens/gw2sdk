@@ -24,6 +24,7 @@ using GW2SDK.Recipes;
 using GW2SDK.Recipes.Search;
 using GW2SDK.Skins;
 using GW2SDK.Subtokens;
+using GW2SDK.Titles;
 using GW2SDK.Tokens;
 using GW2SDK.Worlds;
 using Microsoft.Extensions.DependencyInjection;
@@ -93,6 +94,7 @@ namespace GW2SDK.Tests.TestInfrastructure
                 .AddTypedClient<SearchRecipeService>()
                 .AddTypedClient<SkinService>()
                 .AddTypedClient<SubtokenService>()
+                .AddTypedClient<TitleService>()
                 .AddTypedClient<TokenInfoService>()
                 .AddTypedClient<WorldService>();
 
