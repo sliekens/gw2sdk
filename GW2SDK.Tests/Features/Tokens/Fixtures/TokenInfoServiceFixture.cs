@@ -18,10 +18,6 @@ namespace GW2SDK.Tests.Features.Tokens.Fixtures
             var subtokenService = new SubtokenService(http);
 
             SubtokenBasic = await subtokenService.CreateSubtoken(ConfigurationManager.Instance.ApiKeyBasic);
-
-            // GetTokenInfo occassionally fails right after the subtoken is created
-            // Adding a delay seems to help, possibly because of clock skew?
-            await Task.Delay(1000);
         }
 
         public Task DisposeAsync() => Task.CompletedTask;

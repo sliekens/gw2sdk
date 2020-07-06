@@ -55,10 +55,6 @@ namespace GW2SDK.Tests.Features.Subtokens
 
             var actual = await sut.CreateSubtoken(ConfigurationManager.Instance.ApiKeyFull, absoluteExpirationDate: expirationDate);
 
-            // This test is flaky: GetTokenInfo occassionally fails right after the subtoken is created
-            // Adding a delay seems to help, possibly because of clock skew?
-            await Task.Delay(1000);
-
             var tokenInfo = await services.Resolve<TokenInfoService>().GetTokenInfo(actual.Subtoken);
 
             var subtokenInfo = Assert.IsType<SubtokenInfo>(tokenInfo);
@@ -77,10 +73,6 @@ namespace GW2SDK.Tests.Features.Subtokens
             var urls = new List<string> { "/v2/tokeninfo", "/v2/account", "/v2/account/home/cats" };
 
             var actual = await sut.CreateSubtoken(ConfigurationManager.Instance.ApiKeyFull, urls: urls);
-
-            // This test is flaky: GetTokenInfo occassionally fails right after the subtoken is created
-            // Adding a delay seems to help, possibly because of clock skew?
-            await Task.Delay(1000);
 
             var tokenInfo = await services.Resolve<TokenInfoService>().GetTokenInfo(actual.Subtoken);
 
