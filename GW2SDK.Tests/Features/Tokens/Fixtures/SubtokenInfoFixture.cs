@@ -37,13 +37,9 @@ namespace GW2SDK.Tests.Features.Tokens.Fixtures
             // Truncate to seconds: API probably doesn't support milliseconds
             ExpiresAt = DateTimeOffset.FromUnixTimeSeconds(exp.ToUnixTimeSeconds());
 
-            Urls = new List<string> { "/v2/tokeninfo", "/v2/account", "/v2/characters/My Cool Character" };
+            Urls = new List<string> { Location.Tokeninfo, Location.Account, Location.Characters + "/My Cool Character" };
 
             var createdSubtoken = await subtokenService.CreateSubtoken(ConfigurationManager.Instance.ApiKeyFull, SubtokenPermissions, ExpiresAt, Urls);
-
-            // All tests that use this fixture are flaky: GetTokenInfo occassionally fails right after the subtoken is created
-            // Adding a delay seems to help, possibly because of clock skew?
-            await Task.Delay(1000);
 
             var request = new TokenInfoRequest(createdSubtoken.Subtoken);
             using var response = await http.SendAsync(request);
