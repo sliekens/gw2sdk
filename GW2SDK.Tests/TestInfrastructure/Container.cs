@@ -26,6 +26,7 @@ using GW2SDK.Skins;
 using GW2SDK.Subtokens;
 using GW2SDK.Titles;
 using GW2SDK.Tokens;
+using GW2SDK.Traits;
 using GW2SDK.Worlds;
 using Microsoft.Extensions.DependencyInjection;
 using Polly;
@@ -99,6 +100,7 @@ namespace GW2SDK.Tests.TestInfrastructure
                 .AddTypedClient<SkinService>()
                 .AddTypedClient<SubtokenService>()
                 .AddTypedClient<TitleService>()
+                .AddTypedClient<TraitService>()
                 .AddTypedClient<TokenInfoService>()
                 .AddTypedClient<WorldService>();
 
