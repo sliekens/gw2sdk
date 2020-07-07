@@ -8,7 +8,7 @@ namespace GW2SDK.Skins.Impl
     {
         internal override Type BaseType => typeof(GatheringToolSkin);
 
-        internal override string DiscriminatorFieldName => "gathering_type";
+        internal override string DiscriminatorFieldName => "type";
 
         internal override bool SerializeDiscriminator => false;
 

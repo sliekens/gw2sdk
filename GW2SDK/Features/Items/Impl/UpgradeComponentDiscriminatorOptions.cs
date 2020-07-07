@@ -8,7 +8,7 @@ namespace GW2SDK.Items.Impl
     {
         internal override Type BaseType => typeof(UpgradeComponent);
 
-        internal override string DiscriminatorFieldName => "upgrade_component_type";
+        internal override string DiscriminatorFieldName => "type";
 
         internal override bool SerializeDiscriminator => false;
 

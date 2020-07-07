@@ -8,7 +8,7 @@ namespace GW2SDK.Items.Impl
     {
         internal override Type BaseType => typeof(Armor);
 
-        internal override string DiscriminatorFieldName => "armor_type";
+        internal override string DiscriminatorFieldName => "type";
 
         internal override bool SerializeDiscriminator => false;
 

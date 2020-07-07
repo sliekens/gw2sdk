@@ -8,7 +8,7 @@ namespace GW2SDK.Items.Impl
     {
         internal override Type BaseType => typeof(Tool);
 
-        internal override string DiscriminatorFieldName => "tool_type";
+        internal override string DiscriminatorFieldName => "type";
 
         internal override bool SerializeDiscriminator => false;
 
