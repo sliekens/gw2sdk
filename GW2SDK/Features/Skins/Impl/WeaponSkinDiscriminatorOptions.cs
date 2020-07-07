@@ -8,7 +8,7 @@ namespace GW2SDK.Skins.Impl
     {
         internal override Type BaseType => typeof(WeaponSkin);
 
-        internal override string DiscriminatorFieldName => "weapon_type";
+        internal override string DiscriminatorFieldName => "type";
 
         internal override bool SerializeDiscriminator => false;
 

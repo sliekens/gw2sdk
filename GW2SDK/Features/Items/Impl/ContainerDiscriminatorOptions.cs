@@ -8,7 +8,7 @@ namespace GW2SDK.Items.Impl
     {
         internal override Type BaseType => typeof(Container);
 
-        internal override string DiscriminatorFieldName => "container_type";
+        internal override string DiscriminatorFieldName => "type";
 
         internal override bool SerializeDiscriminator => false;
 
