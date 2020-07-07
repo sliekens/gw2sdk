@@ -147,6 +147,17 @@ namespace GW2SDK.TestDataHelper
                 }
             }
 
+            await using (var file = File.CreateText(Path.Combine(outDir, "traits.json")))
+            {
+                Console.WriteLine("Getting traits.");
+                var service = services.Resolve<JsonTraitsService>();
+                var jsons = await service.GetAllJsonTraits(indented);
+                foreach (var json in jsons)
+                {
+                    await file.WriteLineAsync(json);
+                }
+            }
+
             await using (var file = File.CreateText(Path.Combine(outDir, "continents.json")))
             {
                 Console.WriteLine("Getting continents.");
