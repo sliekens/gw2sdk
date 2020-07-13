@@ -25,6 +25,13 @@ namespace GW2SDK.Http
             {
                 var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
                 var text = JObject.Parse(json)?["text"]?.ToString();
+                if (text == "ErrTimeout")
+                {
+                    // Sometimes the API responds with 400 Bad Request and message ErrTimeout
+                    // That's not a user error and should be handled as 503 Service Unavailable
+                    throw new TimeoutException();
+                }
+
                 throw new ArgumentException(text);
             }
 

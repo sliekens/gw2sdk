@@ -46,6 +46,7 @@ namespace GW2SDK.Tests.TestInfrastructure
             var policies = services.AddPolicyRegistry();
             var innerTimeout = Policy.TimeoutAsync<HttpResponseMessage>(TimeSpan.FromSeconds(10), TimeoutStrategy.Optimistic);
             var immediateRetry = Policy.Handle<HttpRequestException>()
+                .Or<TimeoutException>()
                 .Or<TimeoutRejectedException>()
                 .OrResult<HttpResponseMessage>(r => (int) r.StatusCode >= 500).RetryForeverAsync();
 
