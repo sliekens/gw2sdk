@@ -21,9 +21,10 @@ namespace GW2SDK.TestDataHelper
             var services = new ServiceCollection();
             var policies = services.AddPolicyRegistry();
             var innerTimeout = Policy.TimeoutAsync<HttpResponseMessage>(TimeSpan.FromSeconds(10), TimeoutStrategy.Optimistic);
-            var immediateRetry = AsyncRetryTResultSyntax.RetryForeverAsync(Policy.Handle<HttpRequestException>()
+            var immediateRetry = Policy.Handle<HttpRequestException>()
+                .Or<TimeoutException>()
                 .Or<TimeoutRejectedException>()
-                .OrResult<HttpResponseMessage>(r => (int) r.StatusCode >= 500));
+                .OrResult<HttpResponseMessage>(r => (int) r.StatusCode >= 500).RetryForeverAsync();
             var rateLimit = Policy.Handle<TooManyRequestsException>()
                 .WaitAndRetryForeverAsync(retryAttempt =>
                     TimeSpan.FromSeconds(Math.Min(8, Math.Pow(2, retryAttempt))) + TimeSpan.FromMilliseconds(Jitterer.Next(0, 1000)));
