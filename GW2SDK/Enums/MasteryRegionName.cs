@@ -13,6 +13,8 @@ namespace GW2SDK.Enums
 
         Maguuma,
 
-        Desert
+        Desert,
+
+        Tundra
     }
 }

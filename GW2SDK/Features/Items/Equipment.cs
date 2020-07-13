@@ -6,6 +6,9 @@ namespace GW2SDK.Items
     [PublicAPI]
     public abstract class Equipment : Item
     {
+        [JsonProperty("attribute_adjustment", Required = Required.Always)]
+        public double AttributeAdjustment { get; set; }
+
         [JsonProperty(Required = Required.Always)]
         public int Level { get; set; }
 

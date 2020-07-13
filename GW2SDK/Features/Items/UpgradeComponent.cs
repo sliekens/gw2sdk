@@ -17,6 +17,9 @@ namespace GW2SDK.Items
         [JsonProperty(Required = Required.Always)]
         public InfusionSlotFlag[] InfusionUpgradeFlags { get; set; } = new InfusionSlotFlag[0];
 
+        [JsonProperty("attribute_adjustment", Required = Required.Always)]
+        public double AttributeAdjustment { get; set; }
+
         [JsonProperty(Required = Required.Always)]
         public InfixUpgrade InfixUpgrade { get; set; } = new InfixUpgrade();
 

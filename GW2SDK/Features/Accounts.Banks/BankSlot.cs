@@ -22,6 +22,12 @@ namespace GW2SDK.Accounts.Banks
         [JsonProperty(Required = Required.DisallowNull)]
         public int[]? Upgrades { get; set; }
 
+        /// <summary>
+        /// Indicates which upgrade slots are in use. (0-based)
+        /// </summary>
+        [JsonProperty(Required = Required.DisallowNull)]
+        public int[]? UpgradeSlotIndices { get; set; }
+
         [JsonProperty(Required = Required.DisallowNull)]
         public int[]? Infusions { get; set; }
 
