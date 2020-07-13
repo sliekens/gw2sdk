@@ -1,23 +1,18 @@
 ﻿using GW2SDK.Builds;
+using GW2SDK.Builds.Impl;
 using GW2SDK.Tests.Features.Builds.Fixtures;
-using GW2SDK.Tests.TestInfrastructure;
-using Newtonsoft.Json;
 using Xunit;
-using Xunit.Abstractions;
 
 namespace GW2SDK.Tests.Features.Builds
 {
     public class BuildTest : IClassFixture<BuildFixture>
     {
-        public BuildTest(BuildFixture fixture, ITestOutputHelper output)
+        public BuildTest(BuildFixture fixture)
         {
             _fixture = fixture;
-            _output = output;
         }
 
         private readonly BuildFixture _fixture;
-
-        private readonly ITestOutputHelper _output;
 
         private static class BuildFact
         {
@@ -30,12 +25,9 @@ namespace GW2SDK.Tests.Features.Builds
         [Trait("Importance", "Critical")]
         public void Build_can_be_created_from_json()
         {
-            var settings = new JsonSerializerSettingsBuilder()
-                .UseTraceWriter(_output)
-                .ThrowErrorOnMissingMember()
-                .Build();
+            var sut = new BuildJsonReader();
 
-            var actual = JsonConvert.DeserializeObject<Build>(_fixture.Build, settings);
+            var actual = sut.Read(_fixture.Build.RootElement);
 
             BuildFact.Id_is_positive(actual);
         }

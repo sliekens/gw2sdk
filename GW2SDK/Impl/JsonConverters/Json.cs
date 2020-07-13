@@ -34,7 +34,6 @@ namespace GW2SDK.Impl.JsonConverters
                 new DiscriminatedJsonConverter(new ItemDiscriminatorOptions()),
                 new DiscriminatedJsonConverter(new GatheringToolDiscriminatorOptions()),
                 new DiscriminatedJsonConverter(new ToolDiscriminatorOptions()),
-                new DiscriminatedJsonConverter(new TraitFactDiscriminatorOptions()),
                 new DiscriminatedJsonConverter(new TrinketDiscriminatorOptions()),
                 new DiscriminatedJsonConverter(new UnlockerDiscriminatorOptions()),
                 new DiscriminatedJsonConverter(new UpgradeComponentDiscriminatorOptions()),

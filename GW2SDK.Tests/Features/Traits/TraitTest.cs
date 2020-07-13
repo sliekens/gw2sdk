@@ -1,28 +1,23 @@
-﻿using GW2SDK.Tests.Features.Traits.Fixtures;
-using GW2SDK.Tests.TestInfrastructure;
+﻿using System.Linq;
+using GW2SDK.Tests.Features.Traits.Fixtures;
 using GW2SDK.Traits;
-using Newtonsoft.Json;
+using GW2SDK.Traits.Impl;
 using Xunit;
-using Xunit.Abstractions;
 
 namespace GW2SDK.Tests.Features.Traits
 {
     public class TraitTest : IClassFixture<TraitsFixture>
     {
-        public TraitTest(TraitsFixture fixture, ITestOutputHelper output)
+        public TraitTest(TraitsFixture fixture)
         {
             _fixture = fixture;
-            _output = output;
         }
 
         private readonly TraitsFixture _fixture;
 
-        private readonly ITestOutputHelper _output;
-
         private static class TraitFact
         {
             public static void Id_is_positive(Trait actual) => Assert.InRange(actual.Id, 1, int.MaxValue);
-
         }
 
         [Fact]
@@ -31,15 +26,12 @@ namespace GW2SDK.Tests.Features.Traits
         [Trait("Importance", "Critical")]
         public void Traits_can_be_created_from_json()
         {
-            var settings = new JsonSerializerSettingsBuilder()
-                .UseTraceWriter(_output)
-                .ThrowErrorOnMissingMember()
-                .Build();
-
-            AssertEx.ForEach(_fixture.Traits,
+            var sut = new TraitJsonReader();
+            Assert.All(_fixture.Traits,
                 json =>
                 {
-                    var actual = JsonConvert.DeserializeObject<Trait>(json, settings);
+                    var actual = sut.Read(json.RootElement);
+
                     TraitFact.Id_is_positive(actual);
                 });
         }

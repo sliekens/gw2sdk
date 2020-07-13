@@ -7,10 +7,8 @@ namespace GW2SDK.Traits
     [DataTransferObject(RootObject = false)]
     public sealed class DamageTraitFact : TraitFact
     {
-        [JsonProperty("hit_count", Required = Required.Always)]
         public int HitCount { get; set; }
 
-        [JsonProperty("dmg_multiplier", Required = Required.Always)]
         public double DamageMultiplier { get; set; }
     }
 }

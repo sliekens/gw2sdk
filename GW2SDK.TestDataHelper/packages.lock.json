@@ -50,6 +50,12 @@
         "resolved": "4.1.1",
         "contentHash": "pL6aZm6Im/KSpQADvJMr3sK5d/Q/iQbC4TQ2zQfiDZ+qzAskuMgrtgnCheAwLX1vC5YDTXpXnVjeMzfxUZzfjQ=="
       },
+      "System.Text.Json": {
+        "type": "Direct",
+        "requested": "[4.7.2, )",
+        "resolved": "4.7.2",
+        "contentHash": "TcMd95wcrubm9nHvJEQs70rC0H/8omiSGGpU4FQ/ZA1URIqD4pjmFJh2Mfv1yH1eHgJDWTi2hMDXwTET+zOOyg=="
+      },
       "Microsoft.CSharp": {
         "type": "Transitive",
         "resolved": "4.4.1",
@@ -157,7 +163,8 @@
       "gw2sdk": {
         "type": "Project",
         "dependencies": {
-          "Newtonsoft.Json": "12.0.3"
+          "Newtonsoft.Json": "12.0.3",
+          "System.Text.Json": "4.7.2"
         }
       }
     }

@@ -2,14 +2,11 @@
 
 namespace GW2SDK.Traits
 {
+    /// <summary>Sometimes used to indicate the life force cost for the Necromancer's Shroud skills.</summary>
     [PublicAPI]
     [DataTransferObject(RootObject = false)]
-    public sealed class BuffConversionTraitFact : TraitFact
+    public sealed class LifeForceCostTraitFact : TraitFact
     {
         public int Percent { get; set; }
-
-        public TraitTarget Source { get; set; }
-
-        public TraitTarget Target { get; set; }
     }
 }
