@@ -14,6 +14,128 @@ namespace GW2SDK.Impl.JsonReaders
 
         public void Require(string propertyName, Expression<Func<TObject, string>> propertyExpression)
         {
+            var propertySeen = Variable(typeof(bool),    propertyName + "_seen");
+            var propertyValue = Variable(typeof(string), propertyName + "_value");
+            _readers.Add(
+                new ReaderInfo
+                {
+                    Required = true,
+                    PropertyName = propertyName,
+                    PropertySeen = propertySeen,
+                    PropertyValue = propertyValue,
+                    Destination = ((MemberExpression) propertyExpression.Body).Member,
+                    OnMatch = (currentMember, continueLabel) => Block(
+                        Assign(propertySeen,  Constant(true)),
+                        Assign(propertyValue, Call(Property(currentMember, JsonPropertyInfo.Value), JsonElementInfo.GetString)),
+                        Continue(continueLabel)
+                    )
+                }
+            );
+        }
+
+        public void Require(string propertyName, Expression<Func<TObject, float>> propertyExpression)
+        {
+            var propertySeen = Variable(typeof(bool),   propertyName + "_seen");
+            var propertyValue = Variable(typeof(float), propertyName + "_value");
+            _readers.Add(
+                new ReaderInfo
+                {
+                    Required = true,
+                    PropertyName = propertyName,
+                    PropertySeen = propertySeen,
+                    PropertyValue = propertyValue,
+                    Destination = ((MemberExpression) propertyExpression.Body).Member,
+                    OnMatch = (currentMember, continueLabel) => Block(
+                        Assign(propertySeen,  Constant(true)),
+                        Assign(propertyValue, Call(Property(currentMember, JsonPropertyInfo.Value), JsonElementInfo.GetSingle)),
+                        Continue(continueLabel)
+                    )
+                }
+            );
+        }
+
+        public void Require(string propertyName, Expression<Func<TObject, double>> propertyExpression)
+        {
+            var propertySeen = Variable(typeof(bool),    propertyName + "_seen");
+            var propertyValue = Variable(typeof(double), propertyName + "_value");
+            _readers.Add(
+                new ReaderInfo
+                {
+                    Required = true,
+                    PropertyName = propertyName,
+                    PropertySeen = propertySeen,
+                    PropertyValue = propertyValue,
+                    Destination = ((MemberExpression) propertyExpression.Body).Member,
+                    OnMatch = (currentMember, continueLabel) => Block(
+                        Assign(propertySeen,  Constant(true)),
+                        Assign(propertyValue, Call(Property(currentMember, JsonPropertyInfo.Value), JsonElementInfo.GetDouble)),
+                        Continue(continueLabel)
+                    )
+                }
+            );
+        }
+
+        public void Require(string propertyName, Expression<Func<TObject, decimal>> propertyExpression)
+        {
+            var propertySeen = Variable(typeof(bool),     propertyName + "_seen");
+            var propertyValue = Variable(typeof(decimal), propertyName + "_value");
+            _readers.Add(
+                new ReaderInfo
+                {
+                    Required = true,
+                    PropertyName = propertyName,
+                    PropertySeen = propertySeen,
+                    PropertyValue = propertyValue,
+                    Destination = ((MemberExpression) propertyExpression.Body).Member,
+                    OnMatch = (currentMember, continueLabel) => Block(
+                        Assign(propertySeen,  Constant(true)),
+                        Assign(propertyValue, Call(Property(currentMember, JsonPropertyInfo.Value), JsonElementInfo.GetDecimal)),
+                        Continue(continueLabel)
+                    )
+                }
+            );
+        }
+
+        public void Require(string propertyName, Expression<Func<TObject, sbyte>> propertyExpression)
+        {
+            var propertySeen = Variable(typeof(bool),   propertyName + "_seen");
+            var propertyValue = Variable(typeof(sbyte), propertyName + "_value");
+            _readers.Add(
+                new ReaderInfo
+                {
+                    Required = true,
+                    PropertyName = propertyName,
+                    PropertySeen = propertySeen,
+                    PropertyValue = propertyValue,
+                    Destination = ((MemberExpression) propertyExpression.Body).Member,
+                    OnMatch = (currentMember, continueLabel) => Block(
+                        Assign(propertySeen,  Constant(true)),
+                        Assign(propertyValue, Call(Property(currentMember, JsonPropertyInfo.Value), JsonElementInfo.GetSByte)),
+                        Continue(continueLabel)
+                    )
+                }
+            );
+        }
+
+        public void Require(string propertyName, Expression<Func<TObject, short>> propertyExpression)
+        {
+            var propertySeen = Variable(typeof(bool),   propertyName + "_seen");
+            var propertyValue = Variable(typeof(short), propertyName + "_value");
+            _readers.Add(
+                new ReaderInfo
+                {
+                    Required = true,
+                    PropertyName = propertyName,
+                    PropertySeen = propertySeen,
+                    PropertyValue = propertyValue,
+                    Destination = ((MemberExpression) propertyExpression.Body).Member,
+                    OnMatch = (currentMember, continueLabel) => Block(
+                        Assign(propertySeen,  Constant(true)),
+                        Assign(propertyValue, Call(Property(currentMember, JsonPropertyInfo.Value), JsonElementInfo.GetInt16)),
+                        Continue(continueLabel)
+                    )
+                }
+            );
         }
 
         public void Require(string propertyName, Expression<Func<TObject, int>> propertyExpression)
@@ -30,18 +152,201 @@ namespace GW2SDK.Impl.JsonReaders
                     Destination = ((MemberExpression) propertyExpression.Body).Member,
                     OnMatch = (currentMember, continueLabel) => Block(
                         Assign(propertySeen,  Constant(true)),
-                        Assign(propertyValue, GetInt32(GetValue(currentMember))),
+                        Assign(propertyValue, Call(Property(currentMember, JsonPropertyInfo.Value), JsonElementInfo.GetInt32)),
                         Continue(continueLabel)
                     )
                 }
             );
         }
 
-        private static Expression GetName(Expression jsonPropertyExpression) => Property(jsonPropertyExpression, Member.Name);
+        public void Require(string propertyName, Expression<Func<TObject, long>> propertyExpression)
+        {
+            var propertySeen = Variable(typeof(bool),  propertyName + "_seen");
+            var propertyValue = Variable(typeof(long), propertyName + "_value");
+            _readers.Add(
+                new ReaderInfo
+                {
+                    Required = true,
+                    PropertyName = propertyName,
+                    PropertySeen = propertySeen,
+                    PropertyValue = propertyValue,
+                    Destination = ((MemberExpression) propertyExpression.Body).Member,
+                    OnMatch = (currentMember, continueLabel) => Block(
+                        Assign(propertySeen,  Constant(true)),
+                        Assign(propertyValue, Call(Property(currentMember, JsonPropertyInfo.Value), JsonElementInfo.GetInt64)),
+                        Continue(continueLabel)
+                    )
+                }
+            );
+        }
 
-        private static Expression GetValue(Expression jsonPropertyExpression) => Property(jsonPropertyExpression, Member.Value);
+        public void Require(string propertyName, Expression<Func<TObject, byte>> propertyExpression)
+        {
+            var propertySeen = Variable(typeof(bool),  propertyName + "_seen");
+            var propertyValue = Variable(typeof(byte), propertyName + "_value");
+            _readers.Add(
+                new ReaderInfo
+                {
+                    Required = true,
+                    PropertyName = propertyName,
+                    PropertySeen = propertySeen,
+                    PropertyValue = propertyValue,
+                    Destination = ((MemberExpression) propertyExpression.Body).Member,
+                    OnMatch = (currentMember, continueLabel) => Block(
+                        Assign(propertySeen,  Constant(true)),
+                        Assign(propertyValue, Call(Property(currentMember, JsonPropertyInfo.Value), JsonElementInfo.GetByte)),
+                        Continue(continueLabel)
+                    )
+                }
+            );
+        }
 
-        private static Expression GetInt32(Expression jsonElementExpression) => Call(jsonElementExpression, Member.GetInt32);
+        public void Require(string propertyName, Expression<Func<TObject, ushort>> propertyExpression)
+        {
+            var propertySeen = Variable(typeof(bool),    propertyName + "_seen");
+            var propertyValue = Variable(typeof(ushort), propertyName + "_value");
+            _readers.Add(
+                new ReaderInfo
+                {
+                    Required = true,
+                    PropertyName = propertyName,
+                    PropertySeen = propertySeen,
+                    PropertyValue = propertyValue,
+                    Destination = ((MemberExpression) propertyExpression.Body).Member,
+                    OnMatch = (currentMember, continueLabel) => Block(
+                        Assign(propertySeen,  Constant(true)),
+                        Assign(propertyValue, Call(Property(currentMember, JsonPropertyInfo.Value), JsonElementInfo.GetUInt16)),
+                        Continue(continueLabel)
+                    )
+                }
+            );
+        }
+
+        public void Require(string propertyName, Expression<Func<TObject, uint>> propertyExpression)
+        {
+            var propertySeen = Variable(typeof(bool),  propertyName + "_seen");
+            var propertyValue = Variable(typeof(uint), propertyName + "_value");
+            _readers.Add(
+                new ReaderInfo
+                {
+                    Required = true,
+                    PropertyName = propertyName,
+                    PropertySeen = propertySeen,
+                    PropertyValue = propertyValue,
+                    Destination = ((MemberExpression) propertyExpression.Body).Member,
+                    OnMatch = (currentMember, continueLabel) => Block(
+                        Assign(propertySeen,  Constant(true)),
+                        Assign(propertyValue, Call(Property(currentMember, JsonPropertyInfo.Value), JsonElementInfo.GetUInt32)),
+                        Continue(continueLabel)
+                    )
+                }
+            );
+        }
+
+        public void Require(string propertyName, Expression<Func<TObject, ulong>> propertyExpression)
+        {
+            var propertySeen = Variable(typeof(bool),   propertyName + "_seen");
+            var propertyValue = Variable(typeof(ulong), propertyName + "_value");
+            _readers.Add(
+                new ReaderInfo
+                {
+                    Required = true,
+                    PropertyName = propertyName,
+                    PropertySeen = propertySeen,
+                    PropertyValue = propertyValue,
+                    Destination = ((MemberExpression) propertyExpression.Body).Member,
+                    OnMatch = (currentMember, continueLabel) => Block(
+                        Assign(propertySeen,  Constant(true)),
+                        Assign(propertyValue, Call(Property(currentMember, JsonPropertyInfo.Value), JsonElementInfo.GetUInt64)),
+                        Continue(continueLabel)
+                    )
+                }
+            );
+        }
+
+        public void Require(string propertyName, Expression<Func<TObject, bool>> propertyExpression)
+        {
+            var propertySeen = Variable(typeof(bool),  propertyName + "_seen");
+            var propertyValue = Variable(typeof(bool), propertyName + "_value");
+            _readers.Add(
+                new ReaderInfo
+                {
+                    Required = true,
+                    PropertyName = propertyName,
+                    PropertySeen = propertySeen,
+                    PropertyValue = propertyValue,
+                    Destination = ((MemberExpression) propertyExpression.Body).Member,
+                    OnMatch = (currentMember, continueLabel) => Block(
+                        Assign(propertySeen,  Constant(true)),
+                        Assign(propertyValue, Call(Property(currentMember, JsonPropertyInfo.Value), JsonElementInfo.GetBoolean)),
+                        Continue(continueLabel)
+                    )
+                }
+            );
+        }
+
+        public void Require(string propertyName, Expression<Func<TObject, DateTime>> propertyExpression)
+        {
+            var propertySeen = Variable(typeof(bool),      propertyName + "_seen");
+            var propertyValue = Variable(typeof(DateTime), propertyName + "_value");
+            _readers.Add(
+                new ReaderInfo
+                {
+                    Required = true,
+                    PropertyName = propertyName,
+                    PropertySeen = propertySeen,
+                    PropertyValue = propertyValue,
+                    Destination = ((MemberExpression) propertyExpression.Body).Member,
+                    OnMatch = (currentMember, continueLabel) => Block(
+                        Assign(propertySeen,  Constant(true)),
+                        Assign(propertyValue, Call(Property(currentMember, JsonPropertyInfo.Value), JsonElementInfo.GetDateTime)),
+                        Continue(continueLabel)
+                    )
+                }
+            );
+        }
+
+        public void Require(string propertyName, Expression<Func<TObject, DateTimeOffset>> propertyExpression)
+        {
+            var propertySeen = Variable(typeof(bool),            propertyName + "_seen");
+            var propertyValue = Variable(typeof(DateTimeOffset), propertyName + "_value");
+            _readers.Add(
+                new ReaderInfo
+                {
+                    Required = true,
+                    PropertyName = propertyName,
+                    PropertySeen = propertySeen,
+                    PropertyValue = propertyValue,
+                    Destination = ((MemberExpression) propertyExpression.Body).Member,
+                    OnMatch = (currentMember, continueLabel) => Block(
+                        Assign(propertySeen,  Constant(true)),
+                        Assign(propertyValue, Call(Property(currentMember, JsonPropertyInfo.Value), JsonElementInfo.GetDateTimeOffset)),
+                        Continue(continueLabel)
+                    )
+                }
+            );
+        }
+
+        public void Require(string propertyName, Expression<Func<TObject, Guid>> propertyExpression)
+        {
+            var propertySeen = Variable(typeof(bool),  propertyName + "_seen");
+            var propertyValue = Variable(typeof(Guid), propertyName + "_value");
+            _readers.Add(
+                new ReaderInfo
+                {
+                    Required = true,
+                    PropertyName = propertyName,
+                    PropertySeen = propertySeen,
+                    PropertyValue = propertyValue,
+                    Destination = ((MemberExpression) propertyExpression.Body).Member,
+                    OnMatch = (currentMember, continueLabel) => Block(
+                        Assign(propertySeen,  Constant(true)),
+                        Assign(propertyValue, Call(Property(currentMember, JsonPropertyInfo.Value), JsonElementInfo.GetGuid)),
+                        Continue(continueLabel)
+                    )
+                }
+            );
+        }
 
         public Func<JsonElement, TObject> Compile()
         {
@@ -87,7 +392,7 @@ namespace GW2SDK.Impl.JsonReaders
             {
                 var format = typeof(string).GetMethod(nameof(string.Format), new[] { typeof(string), typeof(object) });
                 var template = Constant("Could not find member '{0}' on object of type '" + typeof(TObject).Name + "'", typeof(string));
-                return Call(null, format, template, GetName(member));
+                return Call(null, format, template, Property(member, JsonPropertyInfo.Name));
             }
 
             Expression EnsureValueKindIsObject()
@@ -97,14 +402,14 @@ namespace GW2SDK.Impl.JsonReaders
 
             Expression ValueKindNotObject()
             {
-                var actual = Property(json, Member.ValueKind);
+                var actual = Property(json, JsonPropertyInfo.ValueKind);
                 var expected = Constant(JsonValueKind.Object);
                 return NotEqual(actual, expected);
             }
 
             Expression ThrowJsonException(Expression message)
             {
-                var constructorInfo = Member.JsonExceptionConstructor;
+                var constructorInfo = JsonExceptionInfo.JsonExceptionConstructor;
                 var exception = New(constructorInfo, message);
                 return Throw(exception, exception.Type);
             }
@@ -138,22 +443,22 @@ namespace GW2SDK.Impl.JsonReaders
 
             Expression GetCurrent(ParameterExpression enumerator)
             {
-                return Property(enumerator, Member.Current);
+                return Property(enumerator, JsonElementInfo.Current);
             }
 
             MethodCallExpression MoveNext(ParameterExpression enumerator)
             {
-                return Call(enumerator, Member.MoveNext);
+                return Call(enumerator, JsonElementInfo.MoveNext);
             }
 
             MethodCallExpression GetObjectEnumerator()
             {
-                return Call(json, Member.EnumerateObject);
+                return Call(json, JsonElementInfo.EnumerateObject);
             }
 
             Expression NameEquals(Expression jsonPropertyExpression, Expression textExpression)
             {
-                return Call(jsonPropertyExpression, Member.NameEquals, textExpression);
+                return Call(jsonPropertyExpression, JsonPropertyInfo.NameEquals, textExpression);
             }
 
             Expression EnsureMemberseen(string propertyName, ParameterExpression check)
@@ -162,7 +467,7 @@ namespace GW2SDK.Impl.JsonReaders
                     IsFalse(check),
                     Throw(
                         New(
-                            Member.JsonExceptionConstructor,
+                            JsonExceptionInfo.JsonExceptionConstructor,
                             Constant($"Missing required property '{propertyName}' for object of type '{typeof(TObject).Name}'.")
                         )
                     )
@@ -185,25 +490,58 @@ namespace GW2SDK.Impl.JsonReaders
             public Process OnMatch { get; set; } = default!;
         }
 
-        private static class Member
+        private static class JsonExceptionInfo
         {
-            public static readonly PropertyInfo ValueKind = typeof(JsonElement).GetProperty(nameof(JsonElement.ValueKind));
-
-            public static readonly MethodInfo NameEquals = typeof(JsonProperty).GetMethod(nameof(JsonProperty.NameEquals), new[] { typeof(string) });
-
-            public static readonly PropertyInfo Name = typeof(JsonProperty).GetProperty(nameof(JsonProperty.Name));
-
-            public static readonly PropertyInfo Value = typeof(JsonProperty).GetProperty(nameof(JsonProperty.Value));
-
             public static readonly ConstructorInfo JsonExceptionConstructor = typeof(JsonException).GetConstructor(new[] { typeof(string) });
+        }
+
+        private static class JsonPropertyInfo
+        {
+            public static readonly PropertyInfo Name = typeof(JsonProperty).GetProperty(nameof(JsonProperty.Name));
+            public static readonly PropertyInfo Value = typeof(JsonProperty).GetProperty(nameof(JsonProperty.Value));
+            public static readonly MethodInfo NameEquals = typeof(JsonProperty).GetMethod(nameof(JsonProperty.NameEquals), new[] { typeof(string) });
+            public static readonly PropertyInfo ValueKind = typeof(JsonElement).GetProperty(nameof(JsonElement.ValueKind));
+        }
+
+        private static class JsonElementInfo
+        {
+            public static readonly MethodInfo GetString = typeof(JsonElement).GetMethod(nameof(JsonElement.GetString));
+
+            public static readonly MethodInfo GetDateTime = typeof(JsonElement).GetMethod(nameof(JsonElement.GetDateTime));
+
+            public static readonly MethodInfo GetDateTimeOffset = typeof(JsonElement).GetMethod(nameof(JsonElement.GetDateTimeOffset));
+
+            public static readonly MethodInfo GetBoolean = typeof(JsonElement).GetMethod(nameof(JsonElement.GetBoolean));
+
+            public static readonly MethodInfo GetGuid = typeof(JsonElement).GetMethod(nameof(JsonElement.GetGuid));
+
+            public static readonly MethodInfo GetDouble = typeof(JsonElement).GetMethod(nameof(JsonElement.GetDouble));
+
+            public static readonly MethodInfo GetSingle = typeof(JsonElement).GetMethod(nameof(JsonElement.GetSingle));
+
+            public static readonly MethodInfo GetByte = typeof(JsonElement).GetMethod(nameof(JsonElement.GetByte));
+
+            public static readonly MethodInfo GetDecimal = typeof(JsonElement).GetMethod(nameof(JsonElement.GetDecimal));
+
+            public static readonly MethodInfo GetInt16 = typeof(JsonElement).GetMethod(nameof(JsonElement.GetInt16));
 
             public static readonly MethodInfo GetInt32 = typeof(JsonElement).GetMethod(nameof(JsonElement.GetInt32));
+
+            public static readonly MethodInfo GetInt64 = typeof(JsonElement).GetMethod(nameof(JsonElement.GetInt64));
+
+            public static readonly MethodInfo GetSByte = typeof(JsonElement).GetMethod(nameof(JsonElement.GetSByte));
+
+            public static readonly MethodInfo GetUInt16 = typeof(JsonElement).GetMethod(nameof(JsonElement.GetUInt16));
+
+            public static readonly MethodInfo GetUInt32 = typeof(JsonElement).GetMethod(nameof(JsonElement.GetUInt32));
+
+            public static readonly MethodInfo GetUInt64 = typeof(JsonElement).GetMethod(nameof(JsonElement.GetUInt64));
+
+            public static readonly MethodInfo EnumerateObject = typeof(JsonElement).GetMethod(nameof(JsonElement.EnumerateObject));
 
             public static readonly PropertyInfo Current = typeof(JsonElement.ObjectEnumerator).GetProperty(nameof(JsonElement.ObjectEnumerator.Current));
 
             public static readonly MethodInfo MoveNext = typeof(JsonElement.ObjectEnumerator).GetMethod(nameof(JsonElement.ObjectEnumerator.MoveNext));
-
-            public static readonly MethodInfo EnumerateObject = typeof(JsonElement).GetMethod(nameof(JsonElement.EnumerateObject));
         }
     }
 }
