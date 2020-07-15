@@ -8,14 +8,60 @@ using static System.Linq.Expressions.Expression;
 
 namespace GW2SDK.Impl.JsonReaders
 {
-    public class JsonReader<TObject>
+    public sealed class JsonReader<TObject>
     {
+        private bool _needsCompilation = true;
+
+        private Func<JsonElement, TObject> _reader = element => default!;
+
         private readonly List<ReaderInfo> _readers = new List<ReaderInfo>();
+
+        public TObject Read(JsonDocument value) => Read(value.RootElement);
+
+        public TObject Read(JsonElement value)
+        {
+            if (_needsCompilation)
+            {
+                Compile();
+            }
+
+            return _reader(value);
+        }
+
+        public void Require<TValue>(string propertyName, Expression<Func<TObject, TValue>> propertyExpression, JsonReader<TValue> objectReader)
+        {
+            var propertySeen = Variable(typeof(bool),    $"saw {propertyName}");
+            var propertyValue = Variable(typeof(TValue), $"value of {propertyName}");
+            _readers.Add(
+                new ReaderInfo
+                {
+                    Required = true,
+                    PropertyName = propertyName,
+                    PropertySeen = propertySeen,
+                    PropertyValue = propertyValue,
+                    Destination = ((MemberExpression) propertyExpression.Body).Member,
+                    OnMatch = (currentMember, continueLabel) => Block(
+                        Assign(propertySeen,  Constant(true)),
+                        Assign(propertyValue, ((Func<Expression>)(() =>
+                        {
+                            var valueExpression = Property(currentMember, JsonPropertyInfo.Value);
+                            var readerExpression = Constant(objectReader);
+                            var readInfo = objectReader.GetType().GetMethod(nameof(Read), new[] { typeof(JsonElement) });
+                            return Call(readerExpression, readInfo, valueExpression);
+                        }))()),
+                        Continue(continueLabel)
+                    )
+                }
+            );
+            _needsCompilation = true;
+        }
+
+        Expression Expr(Func<Expression> impl) => impl();
 
         public void Require(string propertyName, Expression<Func<TObject, string>> propertyExpression)
         {
-            var propertySeen = Variable(typeof(bool),    propertyName + "_seen");
-            var propertyValue = Variable(typeof(string), propertyName + "_value");
+            var propertySeen = Variable(typeof(bool),    $"saw {propertyName}");
+            var propertyValue = Variable(typeof(string), $"value of {propertyName}");
             _readers.Add(
                 new ReaderInfo
                 {
@@ -31,12 +77,13 @@ namespace GW2SDK.Impl.JsonReaders
                     )
                 }
             );
+            _needsCompilation = true;
         }
 
         public void Require(string propertyName, Expression<Func<TObject, float>> propertyExpression)
         {
-            var propertySeen = Variable(typeof(bool),   propertyName + "_seen");
-            var propertyValue = Variable(typeof(float), propertyName + "_value");
+            var propertySeen = Variable(typeof(bool),   $"saw {propertyName}");
+            var propertyValue = Variable(typeof(float), $"value of {propertyName}");
             _readers.Add(
                 new ReaderInfo
                 {
@@ -52,12 +99,13 @@ namespace GW2SDK.Impl.JsonReaders
                     )
                 }
             );
+            _needsCompilation = true;
         }
 
         public void Require(string propertyName, Expression<Func<TObject, double>> propertyExpression)
         {
-            var propertySeen = Variable(typeof(bool),    propertyName + "_seen");
-            var propertyValue = Variable(typeof(double), propertyName + "_value");
+            var propertySeen = Variable(typeof(bool),    $"saw {propertyName}");
+            var propertyValue = Variable(typeof(double), $"value of {propertyName}");
             _readers.Add(
                 new ReaderInfo
                 {
@@ -73,12 +121,13 @@ namespace GW2SDK.Impl.JsonReaders
                     )
                 }
             );
+            _needsCompilation = true;
         }
 
         public void Require(string propertyName, Expression<Func<TObject, decimal>> propertyExpression)
         {
-            var propertySeen = Variable(typeof(bool),     propertyName + "_seen");
-            var propertyValue = Variable(typeof(decimal), propertyName + "_value");
+            var propertySeen = Variable(typeof(bool),     $"saw {propertyName}");
+            var propertyValue = Variable(typeof(decimal), $"value of {propertyName}");
             _readers.Add(
                 new ReaderInfo
                 {
@@ -94,12 +143,13 @@ namespace GW2SDK.Impl.JsonReaders
                     )
                 }
             );
+            _needsCompilation = true;
         }
 
         public void Require(string propertyName, Expression<Func<TObject, sbyte>> propertyExpression)
         {
-            var propertySeen = Variable(typeof(bool),   propertyName + "_seen");
-            var propertyValue = Variable(typeof(sbyte), propertyName + "_value");
+            var propertySeen = Variable(typeof(bool),   $"saw {propertyName}");
+            var propertyValue = Variable(typeof(sbyte), $"value of {propertyName}");
             _readers.Add(
                 new ReaderInfo
                 {
@@ -115,12 +165,13 @@ namespace GW2SDK.Impl.JsonReaders
                     )
                 }
             );
+            _needsCompilation = true;
         }
 
         public void Require(string propertyName, Expression<Func<TObject, short>> propertyExpression)
         {
-            var propertySeen = Variable(typeof(bool),   propertyName + "_seen");
-            var propertyValue = Variable(typeof(short), propertyName + "_value");
+            var propertySeen = Variable(typeof(bool),   $"saw {propertyName}");
+            var propertyValue = Variable(typeof(short), $"value of {propertyName}");
             _readers.Add(
                 new ReaderInfo
                 {
@@ -136,12 +187,13 @@ namespace GW2SDK.Impl.JsonReaders
                     )
                 }
             );
+            _needsCompilation = true;
         }
 
         public void Require(string propertyName, Expression<Func<TObject, int>> propertyExpression)
         {
-            var propertySeen = Variable(typeof(bool), propertyName + "_seen");
-            var propertyValue = Variable(typeof(int), propertyName + "_value");
+            var propertySeen = Variable(typeof(bool), $"saw {propertyName}");
+            var propertyValue = Variable(typeof(int), $"value of {propertyName}");
             _readers.Add(
                 new ReaderInfo
                 {
@@ -157,12 +209,13 @@ namespace GW2SDK.Impl.JsonReaders
                     )
                 }
             );
+            _needsCompilation = true;
         }
 
         public void Require(string propertyName, Expression<Func<TObject, long>> propertyExpression)
         {
-            var propertySeen = Variable(typeof(bool),  propertyName + "_seen");
-            var propertyValue = Variable(typeof(long), propertyName + "_value");
+            var propertySeen = Variable(typeof(bool),  $"saw {propertyName}");
+            var propertyValue = Variable(typeof(long), $"value of {propertyName}");
             _readers.Add(
                 new ReaderInfo
                 {
@@ -178,12 +231,13 @@ namespace GW2SDK.Impl.JsonReaders
                     )
                 }
             );
+            _needsCompilation = true;
         }
 
         public void Require(string propertyName, Expression<Func<TObject, byte>> propertyExpression)
         {
-            var propertySeen = Variable(typeof(bool),  propertyName + "_seen");
-            var propertyValue = Variable(typeof(byte), propertyName + "_value");
+            var propertySeen = Variable(typeof(bool),  $"saw {propertyName}");
+            var propertyValue = Variable(typeof(byte), $"value of {propertyName}");
             _readers.Add(
                 new ReaderInfo
                 {
@@ -199,12 +253,13 @@ namespace GW2SDK.Impl.JsonReaders
                     )
                 }
             );
+            _needsCompilation = true;
         }
 
         public void Require(string propertyName, Expression<Func<TObject, ushort>> propertyExpression)
         {
-            var propertySeen = Variable(typeof(bool),    propertyName + "_seen");
-            var propertyValue = Variable(typeof(ushort), propertyName + "_value");
+            var propertySeen = Variable(typeof(bool),    $"saw {propertyName}");
+            var propertyValue = Variable(typeof(ushort), $"value of {propertyName}");
             _readers.Add(
                 new ReaderInfo
                 {
@@ -220,12 +275,13 @@ namespace GW2SDK.Impl.JsonReaders
                     )
                 }
             );
+            _needsCompilation = true;
         }
 
         public void Require(string propertyName, Expression<Func<TObject, uint>> propertyExpression)
         {
-            var propertySeen = Variable(typeof(bool),  propertyName + "_seen");
-            var propertyValue = Variable(typeof(uint), propertyName + "_value");
+            var propertySeen = Variable(typeof(bool),  $"saw {propertyName}");
+            var propertyValue = Variable(typeof(uint), $"value of {propertyName}");
             _readers.Add(
                 new ReaderInfo
                 {
@@ -241,12 +297,13 @@ namespace GW2SDK.Impl.JsonReaders
                     )
                 }
             );
+            _needsCompilation = true;
         }
 
         public void Require(string propertyName, Expression<Func<TObject, ulong>> propertyExpression)
         {
-            var propertySeen = Variable(typeof(bool),   propertyName + "_seen");
-            var propertyValue = Variable(typeof(ulong), propertyName + "_value");
+            var propertySeen = Variable(typeof(bool),   $"saw {propertyName}");
+            var propertyValue = Variable(typeof(ulong), $"value of {propertyName}");
             _readers.Add(
                 new ReaderInfo
                 {
@@ -262,12 +319,13 @@ namespace GW2SDK.Impl.JsonReaders
                     )
                 }
             );
+            _needsCompilation = true;
         }
 
         public void Require(string propertyName, Expression<Func<TObject, bool>> propertyExpression)
         {
-            var propertySeen = Variable(typeof(bool),  propertyName + "_seen");
-            var propertyValue = Variable(typeof(bool), propertyName + "_value");
+            var propertySeen = Variable(typeof(bool),  $"saw {propertyName}");
+            var propertyValue = Variable(typeof(bool), $"value of {propertyName}");
             _readers.Add(
                 new ReaderInfo
                 {
@@ -283,12 +341,13 @@ namespace GW2SDK.Impl.JsonReaders
                     )
                 }
             );
+            _needsCompilation = true;
         }
 
         public void Require(string propertyName, Expression<Func<TObject, DateTime>> propertyExpression)
         {
-            var propertySeen = Variable(typeof(bool),      propertyName + "_seen");
-            var propertyValue = Variable(typeof(DateTime), propertyName + "_value");
+            var propertySeen = Variable(typeof(bool),      $"saw {propertyName}");
+            var propertyValue = Variable(typeof(DateTime), $"value of {propertyName}");
             _readers.Add(
                 new ReaderInfo
                 {
@@ -304,12 +363,13 @@ namespace GW2SDK.Impl.JsonReaders
                     )
                 }
             );
+            _needsCompilation = true;
         }
 
         public void Require(string propertyName, Expression<Func<TObject, DateTimeOffset>> propertyExpression)
         {
-            var propertySeen = Variable(typeof(bool),            propertyName + "_seen");
-            var propertyValue = Variable(typeof(DateTimeOffset), propertyName + "_value");
+            var propertySeen = Variable(typeof(bool),            $"saw {propertyName}");
+            var propertyValue = Variable(typeof(DateTimeOffset), $"value of {propertyName}");
             _readers.Add(
                 new ReaderInfo
                 {
@@ -325,12 +385,13 @@ namespace GW2SDK.Impl.JsonReaders
                     )
                 }
             );
+            _needsCompilation = true;
         }
 
         public void Require(string propertyName, Expression<Func<TObject, Guid>> propertyExpression)
         {
-            var propertySeen = Variable(typeof(bool),  propertyName + "_seen");
-            var propertyValue = Variable(typeof(Guid), propertyName + "_value");
+            var propertySeen = Variable(typeof(bool),  $"saw {propertyName}");
+            var propertyValue = Variable(typeof(Guid), $"value of {propertyName}");
             _readers.Add(
                 new ReaderInfo
                 {
@@ -346,9 +407,10 @@ namespace GW2SDK.Impl.JsonReaders
                     )
                 }
             );
+            _needsCompilation = true;
         }
 
-        public Func<JsonElement, TObject> Compile()
+        public void Compile()
         {
             var json = Parameter(typeof(JsonElement), "json");
 
@@ -386,12 +448,13 @@ namespace GW2SDK.Impl.JsonReaders
             );
 
             var f = Lambda<Func<JsonElement, TObject>>(block, json);
-            return f.Compile();
+            _reader = f.Compile();
+            _needsCompilation = false;
 
             Expression MissingMember(ParameterExpression member)
             {
                 var format = typeof(string).GetMethod(nameof(string.Format), new[] { typeof(string), typeof(object) });
-                var template = Constant("Could not find member '{0}' on object of type '" + typeof(TObject).Name + "'", typeof(string));
+                var template = Constant("JSON property '{0}' was unexpected for type '" + typeof(TObject).Name + "'.", typeof(string));
                 return Call(null, format, template, Property(member, JsonPropertyInfo.Name));
             }
 
