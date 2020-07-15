@@ -2,8 +2,10 @@
 
 namespace GW2SDK.Impl.JsonReaders
 {
-    internal interface IJsonReader<out T>
+    public interface IJsonReader<out T>
     {
+        T Read(in JsonDocument json) => Read(json.RootElement);
+
         T Read(in JsonElement json);
     }
 }

@@ -27,7 +27,7 @@ namespace GW2SDK.Tests.Features.Builds
         {
             var sut = new BuildJsonReader();
 
-            var actual = sut.Read(_fixture.Build.RootElement);
+            var actual = sut.Read(_fixture.Build);
 
             BuildFact.Id_is_positive(actual);
         }

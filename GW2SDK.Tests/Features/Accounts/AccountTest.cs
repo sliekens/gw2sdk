@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Text.Json;
 using GW2SDK.Accounts;
 using GW2SDK.Enums;
 using GW2SDK.Tests.Features.Accounts.Fixtures;
+using GW2SDK.Tests.Features.Tokens;
 using GW2SDK.Tests.TestInfrastructure;
 using Newtonsoft.Json;
 using Xunit;
@@ -99,7 +101,13 @@ namespace GW2SDK.Tests.Features.Accounts
                 .ThrowErrorOnMissingMember()
                 .Build();
 
-            var actual = JsonConvert.DeserializeObject<Account>(_fixture.Db.FullAccount, settings);
+            var json = JsonDocument.Parse(_fixture.Db.FullAccount);
+
+            var sut = new AccountJsonReader();
+
+            _output.WriteLine(_fixture.Db.FullAccount);
+
+            var actual = sut.Read(json);
 
             FullAccountFact.Name_is_never_empty(actual);
             FullAccountFact.Access_is_never_empty(actual);

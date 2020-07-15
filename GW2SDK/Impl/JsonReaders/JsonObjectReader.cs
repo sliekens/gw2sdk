@@ -8,17 +8,27 @@ using static System.Linq.Expressions.Expression;
 
 namespace GW2SDK.Impl.JsonReaders
 {
-    public sealed class JsonReader<TObject>
+    public class JsonObjectReader<TObject> : IJsonReader<TObject>
     {
-        private bool _needsCompilation = true;
-
-        private Func<JsonElement, TObject> _reader = element => default!;
-
         private readonly List<ReaderInfo> _readers = new List<ReaderInfo>();
 
-        public TObject Read(JsonDocument value) => Read(value.RootElement);
+        private bool _needsCompilation = true;
 
-        public TObject Read(JsonElement value)
+        private ReadJson<TObject> _reader = (in JsonElement json) => default!;
+
+        private UnexpectedPropertyBehavior _unexpectedPropertyBehavior;
+
+        public UnexpectedPropertyBehavior UnexpectedPropertyBehavior
+        {
+            get => _unexpectedPropertyBehavior;
+            set
+            {
+                _unexpectedPropertyBehavior = value;
+                _needsCompilation = true;
+            }
+        }
+
+        public TObject Read(in JsonElement value)
         {
             if (_needsCompilation)
             {
@@ -28,27 +38,63 @@ namespace GW2SDK.Impl.JsonReaders
             return _reader(value);
         }
 
-        public void Require<TValue>(string propertyName, Expression<Func<TObject, TValue>> propertyExpression, JsonReader<TValue> objectReader)
+        public TObject Read(in JsonDocument value) => Read(value.RootElement);
+
+        public void Ignore(string propertyName)
         {
-            var propertySeen = Variable(typeof(bool),    $"saw {propertyName}");
-            var propertyValue = Variable(typeof(TValue), $"value of {propertyName}");
             _readers.Add(
                 new ReaderInfo
                 {
-                    Required = true,
+                    PropertySignificance = PropertySignificance.Ignored,
+                    PropertyName = propertyName,
+                    OnMatch = (currentMember, continueLabel) => Block(Continue(continueLabel))
+                }
+            );
+            _needsCompilation = true;
+        }
+
+        //public void Map(string propertyName, Expression<Func<TObject, IEnumerable<int>>> propertyExpression)
+        //{
+        //    var propertySeen = Variable(typeof(bool), $"saw {propertyName}");
+        //    var propertyValue = Variable(typeof(int), $"value of {propertyName}");
+        //    _readers.Add(
+        //        new ReaderInfo
+        //        {
+        //            PropertySignificance = PropertySignificance.Required,
+        //            PropertyName = propertyName,
+        //            PropertySeen = propertySeen,
+        //            PropertyValue = propertyValue,
+        //            Destination = ((MemberExpression) propertyExpression.Body).Member,
+        //            OnMatch = (currentMember, continueLabel) => Block(
+        //                Assign(propertySeen,  Constant(true)),
+        //                Assign(propertyValue, Call(Property(currentMember, JsonPropertyInfo.Value), JsonElementInfo.GetInt32)),
+        //                Continue(continueLabel)
+        //            )
+        //        }
+        //    );
+        //    _needsCompilation = true;
+        //}
+
+        public void Map<TValue>(string propertyName, Expression<Func<TObject, TValue>> propertyExpression, IJsonReader<TValue> objectReader)
+        {
+            var propertySeen = Variable(typeof(bool),    $"saw {propertyName}");
+            var propertyValue = Variable(typeof(TValue), $"value of {propertyName}");
+            var readerExpression = Constant(objectReader);
+            var readInfo = objectReader.GetType().GetMethod(nameof(Read), new[] { typeof(JsonElement).MakeByRefType() });
+            _readers.Add(
+                new ReaderInfo
+                {
+                    PropertySignificance = PropertySignificance.Required,
                     PropertyName = propertyName,
                     PropertySeen = propertySeen,
                     PropertyValue = propertyValue,
                     Destination = ((MemberExpression) propertyExpression.Body).Member,
                     OnMatch = (currentMember, continueLabel) => Block(
-                        Assign(propertySeen,  Constant(true)),
-                        Assign(propertyValue, ((Func<Expression>)(() =>
-                        {
-                            var valueExpression = Property(currentMember, JsonPropertyInfo.Value);
-                            var readerExpression = Constant(objectReader);
-                            var readInfo = objectReader.GetType().GetMethod(nameof(Read), new[] { typeof(JsonElement) });
-                            return Call(readerExpression, readInfo, valueExpression);
-                        }))()),
+                        Assign(propertySeen, Constant(true)),
+                        Assign(
+                            propertyValue,
+                            Call(readerExpression, readInfo, Property(currentMember, JsonPropertyInfo.Value))
+                        ),
                         Continue(continueLabel)
                     )
                 }
@@ -56,16 +102,14 @@ namespace GW2SDK.Impl.JsonReaders
             _needsCompilation = true;
         }
 
-        Expression Expr(Func<Expression> impl) => impl();
-
-        public void Require(string propertyName, Expression<Func<TObject, string>> propertyExpression)
+        public void Map(string propertyName, Expression<Func<TObject, string>> propertyExpression)
         {
             var propertySeen = Variable(typeof(bool),    $"saw {propertyName}");
             var propertyValue = Variable(typeof(string), $"value of {propertyName}");
             _readers.Add(
                 new ReaderInfo
                 {
-                    Required = true,
+                    PropertySignificance = PropertySignificance.Required,
                     PropertyName = propertyName,
                     PropertySeen = propertySeen,
                     PropertyValue = propertyValue,
@@ -80,14 +124,14 @@ namespace GW2SDK.Impl.JsonReaders
             _needsCompilation = true;
         }
 
-        public void Require(string propertyName, Expression<Func<TObject, float>> propertyExpression)
+        public void Map(string propertyName, Expression<Func<TObject, float>> propertyExpression)
         {
             var propertySeen = Variable(typeof(bool),   $"saw {propertyName}");
             var propertyValue = Variable(typeof(float), $"value of {propertyName}");
             _readers.Add(
                 new ReaderInfo
                 {
-                    Required = true,
+                    PropertySignificance = PropertySignificance.Required,
                     PropertyName = propertyName,
                     PropertySeen = propertySeen,
                     PropertyValue = propertyValue,
@@ -102,14 +146,34 @@ namespace GW2SDK.Impl.JsonReaders
             _needsCompilation = true;
         }
 
-        public void Require(string propertyName, Expression<Func<TObject, double>> propertyExpression)
+
+        public void Map(string propertyName, Expression<Func<TObject, float?>> propertyExpression)
+        {
+            var propertyValue = Variable(typeof(float?), $"value of {propertyName}");
+            _readers.Add(
+                new ReaderInfo
+                {
+                    PropertySignificance = PropertySignificance.Optional,
+                    PropertyName = propertyName,
+                    PropertyValue = propertyValue,
+                    Destination = ((MemberExpression) propertyExpression.Body).Member,
+                    OnMatch = (currentMember, continueLabel) => Block(
+                        Assign(propertyValue, Call(Property(currentMember, JsonPropertyInfo.Value), JsonElementInfo.GetSingle)),
+                        Continue(continueLabel)
+                    )
+                }
+            );
+            _needsCompilation = true;
+        }
+
+        public void Map(string propertyName, Expression<Func<TObject, double>> propertyExpression)
         {
             var propertySeen = Variable(typeof(bool),    $"saw {propertyName}");
             var propertyValue = Variable(typeof(double), $"value of {propertyName}");
             _readers.Add(
                 new ReaderInfo
                 {
-                    Required = true,
+                    PropertySignificance = PropertySignificance.Required,
                     PropertyName = propertyName,
                     PropertySeen = propertySeen,
                     PropertyValue = propertyValue,
@@ -124,14 +188,33 @@ namespace GW2SDK.Impl.JsonReaders
             _needsCompilation = true;
         }
 
-        public void Require(string propertyName, Expression<Func<TObject, decimal>> propertyExpression)
+        public void Map(string propertyName, Expression<Func<TObject, double?>> propertyExpression)
+        {
+            var propertyValue = Variable(typeof(double?), $"value of {propertyName}");
+            _readers.Add(
+                new ReaderInfo
+                {
+                    PropertySignificance = PropertySignificance.Optional,
+                    PropertyName = propertyName,
+                    PropertyValue = propertyValue,
+                    Destination = ((MemberExpression) propertyExpression.Body).Member,
+                    OnMatch = (currentMember, continueLabel) => Block(
+                        Assign(propertyValue, Call(Property(currentMember, JsonPropertyInfo.Value), JsonElementInfo.GetDouble)),
+                        Continue(continueLabel)
+                    )
+                }
+            );
+            _needsCompilation = true;
+        }
+
+        public void Map(string propertyName, Expression<Func<TObject, decimal>> propertyExpression)
         {
             var propertySeen = Variable(typeof(bool),     $"saw {propertyName}");
             var propertyValue = Variable(typeof(decimal), $"value of {propertyName}");
             _readers.Add(
                 new ReaderInfo
                 {
-                    Required = true,
+                    PropertySignificance = PropertySignificance.Required,
                     PropertyName = propertyName,
                     PropertySeen = propertySeen,
                     PropertyValue = propertyValue,
@@ -145,15 +228,34 @@ namespace GW2SDK.Impl.JsonReaders
             );
             _needsCompilation = true;
         }
-
-        public void Require(string propertyName, Expression<Func<TObject, sbyte>> propertyExpression)
+        
+        public void Map(string propertyName, Expression<Func<TObject, decimal?>> propertyExpression)
+        {
+            var propertyValue = Variable(typeof(decimal?), $"value of {propertyName}");
+            _readers.Add(
+                new ReaderInfo
+                {
+                    PropertySignificance = PropertySignificance.Optional,
+                    PropertyName = propertyName,
+                    PropertyValue = propertyValue,
+                    Destination = ((MemberExpression) propertyExpression.Body).Member,
+                    OnMatch = (currentMember, continueLabel) => Block(
+                        Assign(propertyValue, Call(Property(currentMember, JsonPropertyInfo.Value), JsonElementInfo.GetDecimal)),
+                        Continue(continueLabel)
+                    )
+                }
+            );
+            _needsCompilation = true;
+        }
+        
+        public void Map(string propertyName, Expression<Func<TObject, sbyte>> propertyExpression)
         {
             var propertySeen = Variable(typeof(bool),   $"saw {propertyName}");
             var propertyValue = Variable(typeof(sbyte), $"value of {propertyName}");
             _readers.Add(
                 new ReaderInfo
                 {
-                    Required = true,
+                    PropertySignificance = PropertySignificance.Required,
                     PropertyName = propertyName,
                     PropertySeen = propertySeen,
                     PropertyValue = propertyValue,
@@ -167,15 +269,34 @@ namespace GW2SDK.Impl.JsonReaders
             );
             _needsCompilation = true;
         }
+     
+        public void Map(string propertyName, Expression<Func<TObject, sbyte?>> propertyExpression)
+        {
+            var propertyValue = Variable(typeof(sbyte?), $"value of {propertyName}");
+            _readers.Add(
+                new ReaderInfo
+                {
+                    PropertySignificance = PropertySignificance.Optional,
+                    PropertyName = propertyName,
+                    PropertyValue = propertyValue,
+                    Destination = ((MemberExpression) propertyExpression.Body).Member,
+                    OnMatch = (currentMember, continueLabel) => Block(
+                        Assign(propertyValue, Call(Property(currentMember, JsonPropertyInfo.Value), JsonElementInfo.GetSByte)),
+                        Continue(continueLabel)
+                    )
+                }
+            );
+            _needsCompilation = true;
+        }
 
-        public void Require(string propertyName, Expression<Func<TObject, short>> propertyExpression)
+        public void Map(string propertyName, Expression<Func<TObject, short>> propertyExpression)
         {
             var propertySeen = Variable(typeof(bool),   $"saw {propertyName}");
             var propertyValue = Variable(typeof(short), $"value of {propertyName}");
             _readers.Add(
                 new ReaderInfo
                 {
-                    Required = true,
+                    PropertySignificance = PropertySignificance.Required,
                     PropertyName = propertyName,
                     PropertySeen = propertySeen,
                     PropertyValue = propertyValue,
@@ -190,14 +311,33 @@ namespace GW2SDK.Impl.JsonReaders
             _needsCompilation = true;
         }
 
-        public void Require(string propertyName, Expression<Func<TObject, int>> propertyExpression)
+        public void Map(string propertyName, Expression<Func<TObject, short?>> propertyExpression)
+        {
+            var propertyValue = Variable(typeof(short?), $"value of {propertyName}");
+            _readers.Add(
+                new ReaderInfo
+                {
+                    PropertySignificance = PropertySignificance.Optional,
+                    PropertyName = propertyName,
+                    PropertyValue = propertyValue,
+                    Destination = ((MemberExpression) propertyExpression.Body).Member,
+                    OnMatch = (currentMember, continueLabel) => Block(
+                        Assign(propertyValue, Call(Property(currentMember, JsonPropertyInfo.Value), JsonElementInfo.GetInt16)),
+                        Continue(continueLabel)
+                    )
+                }
+            );
+            _needsCompilation = true;
+        }
+
+        public void Map(string propertyName, Expression<Func<TObject, int>> propertyExpression)
         {
             var propertySeen = Variable(typeof(bool), $"saw {propertyName}");
             var propertyValue = Variable(typeof(int), $"value of {propertyName}");
             _readers.Add(
                 new ReaderInfo
                 {
-                    Required = true,
+                    PropertySignificance = PropertySignificance.Required,
                     PropertyName = propertyName,
                     PropertySeen = propertySeen,
                     PropertyValue = propertyValue,
@@ -212,14 +352,33 @@ namespace GW2SDK.Impl.JsonReaders
             _needsCompilation = true;
         }
 
-        public void Require(string propertyName, Expression<Func<TObject, long>> propertyExpression)
+        public void Map(string propertyName, Expression<Func<TObject, int?>> propertyExpression)
+        {
+            var propertyValue = Variable(typeof(int?), $"value of {propertyName}");
+            _readers.Add(
+                new ReaderInfo
+                {
+                    PropertySignificance = PropertySignificance.Optional,
+                    PropertyName = propertyName,
+                    PropertyValue = propertyValue,
+                    Destination = ((MemberExpression) propertyExpression.Body).Member,
+                    OnMatch = (currentMember, continueLabel) => Block(
+                        Assign(propertyValue, Convert(Call(Property(currentMember, JsonPropertyInfo.Value), JsonElementInfo.GetInt32), propertyValue.Type)),
+                        Continue(continueLabel)
+                    )
+                }
+            );
+            _needsCompilation = true;
+        }
+
+        public void Map(string propertyName, Expression<Func<TObject, long>> propertyExpression)
         {
             var propertySeen = Variable(typeof(bool),  $"saw {propertyName}");
             var propertyValue = Variable(typeof(long), $"value of {propertyName}");
             _readers.Add(
                 new ReaderInfo
                 {
-                    Required = true,
+                    PropertySignificance = PropertySignificance.Required,
                     PropertyName = propertyName,
                     PropertySeen = propertySeen,
                     PropertyValue = propertyValue,
@@ -234,14 +393,33 @@ namespace GW2SDK.Impl.JsonReaders
             _needsCompilation = true;
         }
 
-        public void Require(string propertyName, Expression<Func<TObject, byte>> propertyExpression)
+        public void Map(string propertyName, Expression<Func<TObject, long?>> propertyExpression)
+        {
+            var propertyValue = Variable(typeof(long?), $"value of {propertyName}");
+            _readers.Add(
+                new ReaderInfo
+                {
+                    PropertySignificance = PropertySignificance.Optional,
+                    PropertyName = propertyName,
+                    PropertyValue = propertyValue,
+                    Destination = ((MemberExpression) propertyExpression.Body).Member,
+                    OnMatch = (currentMember, continueLabel) => Block(
+                        Assign(propertyValue, Call(Property(currentMember, JsonPropertyInfo.Value), JsonElementInfo.GetInt64)),
+                        Continue(continueLabel)
+                    )
+                }
+            );
+            _needsCompilation = true;
+        }
+
+        public void Map(string propertyName, Expression<Func<TObject, byte>> propertyExpression)
         {
             var propertySeen = Variable(typeof(bool),  $"saw {propertyName}");
             var propertyValue = Variable(typeof(byte), $"value of {propertyName}");
             _readers.Add(
                 new ReaderInfo
                 {
-                    Required = true,
+                    PropertySignificance = PropertySignificance.Required,
                     PropertyName = propertyName,
                     PropertySeen = propertySeen,
                     PropertyValue = propertyValue,
@@ -256,14 +434,33 @@ namespace GW2SDK.Impl.JsonReaders
             _needsCompilation = true;
         }
 
-        public void Require(string propertyName, Expression<Func<TObject, ushort>> propertyExpression)
+        public void Map(string propertyName, Expression<Func<TObject, byte?>> propertyExpression)
+        {
+            var propertyValue = Variable(typeof(byte?), $"value of {propertyName}");
+            _readers.Add(
+                new ReaderInfo
+                {
+                    PropertySignificance = PropertySignificance.Optional,
+                    PropertyName = propertyName,
+                    PropertyValue = propertyValue,
+                    Destination = ((MemberExpression) propertyExpression.Body).Member,
+                    OnMatch = (currentMember, continueLabel) => Block(
+                        Assign(propertyValue, Call(Property(currentMember, JsonPropertyInfo.Value), JsonElementInfo.GetByte)),
+                        Continue(continueLabel)
+                    )
+                }
+            );
+            _needsCompilation = true;
+        }
+
+        public void Map(string propertyName, Expression<Func<TObject, ushort>> propertyExpression)
         {
             var propertySeen = Variable(typeof(bool),    $"saw {propertyName}");
             var propertyValue = Variable(typeof(ushort), $"value of {propertyName}");
             _readers.Add(
                 new ReaderInfo
                 {
-                    Required = true,
+                    PropertySignificance = PropertySignificance.Required,
                     PropertyName = propertyName,
                     PropertySeen = propertySeen,
                     PropertyValue = propertyValue,
@@ -278,14 +475,33 @@ namespace GW2SDK.Impl.JsonReaders
             _needsCompilation = true;
         }
 
-        public void Require(string propertyName, Expression<Func<TObject, uint>> propertyExpression)
+        public void Map(string propertyName, Expression<Func<TObject, ushort?>> propertyExpression)
+        {
+            var propertyValue = Variable(typeof(ushort?), $"value of {propertyName}");
+            _readers.Add(
+                new ReaderInfo
+                {
+                    PropertySignificance = PropertySignificance.Optional,
+                    PropertyName = propertyName,
+                    PropertyValue = propertyValue,
+                    Destination = ((MemberExpression) propertyExpression.Body).Member,
+                    OnMatch = (currentMember, continueLabel) => Block(
+                        Assign(propertyValue, Call(Property(currentMember, JsonPropertyInfo.Value), JsonElementInfo.GetUInt16)),
+                        Continue(continueLabel)
+                    )
+                }
+            );
+            _needsCompilation = true;
+        }
+
+        public void Map(string propertyName, Expression<Func<TObject, uint>> propertyExpression)
         {
             var propertySeen = Variable(typeof(bool),  $"saw {propertyName}");
             var propertyValue = Variable(typeof(uint), $"value of {propertyName}");
             _readers.Add(
                 new ReaderInfo
                 {
-                    Required = true,
+                    PropertySignificance = PropertySignificance.Required,
                     PropertyName = propertyName,
                     PropertySeen = propertySeen,
                     PropertyValue = propertyValue,
@@ -300,14 +516,33 @@ namespace GW2SDK.Impl.JsonReaders
             _needsCompilation = true;
         }
 
-        public void Require(string propertyName, Expression<Func<TObject, ulong>> propertyExpression)
+        public void Map(string propertyName, Expression<Func<TObject, uint?>> propertyExpression)
+        {
+            var propertyValue = Variable(typeof(uint?), $"value of {propertyName}");
+            _readers.Add(
+                new ReaderInfo
+                {
+                    PropertySignificance = PropertySignificance.Optional,
+                    PropertyName = propertyName,
+                    PropertyValue = propertyValue,
+                    Destination = ((MemberExpression) propertyExpression.Body).Member,
+                    OnMatch = (currentMember, continueLabel) => Block(
+                        Assign(propertyValue, Call(Property(currentMember, JsonPropertyInfo.Value), JsonElementInfo.GetUInt32)),
+                        Continue(continueLabel)
+                    )
+                }
+            );
+            _needsCompilation = true;
+        }
+
+        public void Map(string propertyName, Expression<Func<TObject, ulong>> propertyExpression)
         {
             var propertySeen = Variable(typeof(bool),   $"saw {propertyName}");
             var propertyValue = Variable(typeof(ulong), $"value of {propertyName}");
             _readers.Add(
                 new ReaderInfo
                 {
-                    Required = true,
+                    PropertySignificance = PropertySignificance.Required,
                     PropertyName = propertyName,
                     PropertySeen = propertySeen,
                     PropertyValue = propertyValue,
@@ -322,14 +557,14 @@ namespace GW2SDK.Impl.JsonReaders
             _needsCompilation = true;
         }
 
-        public void Require(string propertyName, Expression<Func<TObject, bool>> propertyExpression)
+        public void Map(string propertyName, Expression<Func<TObject, bool>> propertyExpression)
         {
             var propertySeen = Variable(typeof(bool),  $"saw {propertyName}");
             var propertyValue = Variable(typeof(bool), $"value of {propertyName}");
             _readers.Add(
                 new ReaderInfo
                 {
-                    Required = true,
+                    PropertySignificance = PropertySignificance.Required,
                     PropertyName = propertyName,
                     PropertySeen = propertySeen,
                     PropertyValue = propertyValue,
@@ -344,14 +579,14 @@ namespace GW2SDK.Impl.JsonReaders
             _needsCompilation = true;
         }
 
-        public void Require(string propertyName, Expression<Func<TObject, DateTime>> propertyExpression)
+        public void Map(string propertyName, Expression<Func<TObject, DateTime>> propertyExpression)
         {
             var propertySeen = Variable(typeof(bool),      $"saw {propertyName}");
             var propertyValue = Variable(typeof(DateTime), $"value of {propertyName}");
             _readers.Add(
                 new ReaderInfo
                 {
-                    Required = true,
+                    PropertySignificance = PropertySignificance.Required,
                     PropertyName = propertyName,
                     PropertySeen = propertySeen,
                     PropertyValue = propertyValue,
@@ -366,14 +601,14 @@ namespace GW2SDK.Impl.JsonReaders
             _needsCompilation = true;
         }
 
-        public void Require(string propertyName, Expression<Func<TObject, DateTimeOffset>> propertyExpression)
+        public void Map(string propertyName, Expression<Func<TObject, DateTimeOffset>> propertyExpression)
         {
             var propertySeen = Variable(typeof(bool),            $"saw {propertyName}");
             var propertyValue = Variable(typeof(DateTimeOffset), $"value of {propertyName}");
             _readers.Add(
                 new ReaderInfo
                 {
-                    Required = true,
+                    PropertySignificance = PropertySignificance.Required,
                     PropertyName = propertyName,
                     PropertySeen = propertySeen,
                     PropertyValue = propertyValue,
@@ -388,14 +623,14 @@ namespace GW2SDK.Impl.JsonReaders
             _needsCompilation = true;
         }
 
-        public void Require(string propertyName, Expression<Func<TObject, Guid>> propertyExpression)
+        public void Map(string propertyName, Expression<Func<TObject, Guid>> propertyExpression)
         {
             var propertySeen = Variable(typeof(bool),  $"saw {propertyName}");
             var propertyValue = Variable(typeof(Guid), $"value of {propertyName}");
             _readers.Add(
                 new ReaderInfo
                 {
-                    Required = true,
+                    PropertySignificance = PropertySignificance.Required,
                     PropertyName = propertyName,
                     PropertySeen = propertySeen,
                     PropertyValue = propertyValue,
@@ -412,9 +647,24 @@ namespace GW2SDK.Impl.JsonReaders
 
         public void Compile()
         {
-            var json = Parameter(typeof(JsonElement), "json");
+            var json = Parameter(typeof(JsonElement).MakeByRefType(), "json");
 
-            var vars = _readers.SelectMany(reader => new[] { reader.PropertySeen, reader.PropertyValue });
+            var vars = _readers.Aggregate(
+                Enumerable.Empty<ParameterExpression>(),
+                (varBag, reader) =>
+                {
+                    switch(reader.PropertySignificance)
+                    {
+                        case PropertySignificance.Optional:
+                            return varBag.Append(reader.PropertyValue);
+                        case PropertySignificance.Required:
+                            return varBag.Concat(new[] { reader.PropertySeen, reader.PropertyValue });
+                        default:
+                            return varBag;
+                    }
+                }
+            );
+
             var currentMember = Variable(typeof(JsonProperty), "currentMember");
 
             var expressions = Enumerable.Empty<Expression>();
@@ -428,26 +678,44 @@ namespace GW2SDK.Impl.JsonReaders
                         ForEachJsonProperty(
                             currentMember,
                             continueLabel => Block(
-                                _readers.Select(
-                                        reader => IfThen(
-                                            NameEquals(currentMember, Constant(reader.PropertyName, typeof(string))),
-                                            reader.OnMatch(currentMember, continueLabel)
-                                        )
-                                    )
-                                    .Append(ThrowJsonException(MissingMember(currentMember)))
+                                ((Func<IEnumerable<Expression>>) (() =>
+                                {
+                                    var memberHandling = new List<Expression>(_readers.Count + 1);
+                                    foreach (var reader in _readers)
+                                    {
+                                        memberHandling.Add(
+                                            IfThen(
+                                                NameEquals(currentMember, Constant(reader.PropertyName, typeof(string))),
+                                                reader.OnMatch(currentMember, continueLabel)
+                                            )
+                                        );
+                                    }
+
+                                    if (UnexpectedPropertyBehavior == UnexpectedPropertyBehavior.Error)
+                                    {
+                                        memberHandling.Add(ThrowJsonException(MissingMember(currentMember)));
+                                    }
+
+                                    return memberHandling;
+                                }))()
                             )
                         )
                     )
-                    .Concat(_readers.Select(reader => reader.Required ? EnsureMemberseen(reader.PropertyName, reader.PropertySeen) : null))
+                    .Concat(
+                        _readers.Where(reader => reader.PropertySignificance == PropertySignificance.Required)
+                            .Select(reader => EnsureMemberseen(reader.PropertyName, reader.PropertySeen))
+                    )
                     .Append(
                         MemberInit(
                             New(typeof(TObject)),
-                            _readers.Select(reader => Bind(reader.Destination, reader.PropertyValue))
+                            from reader in _readers
+                            where reader.PropertySignificance != PropertySignificance.Ignored
+                            select Bind(reader.Destination, reader.PropertyValue)
                         )
                     )
             );
 
-            var f = Lambda<Func<JsonElement, TObject>>(block, json);
+            var f = Lambda<ReadJson<TObject>>(block, json);
             _reader = f.Compile();
             _needsCompilation = false;
 
@@ -538,9 +806,13 @@ namespace GW2SDK.Impl.JsonReaders
             }
         }
 
+        private delegate TValue ReadJson<out TValue>(in JsonElement json);
+
         private class ReaderInfo
         {
-            public bool Required { get; set; }
+            public delegate BlockExpression Process(ParameterExpression jsonPropertyExpression, LabelTarget continueLabel);
+
+            public PropertySignificance PropertySignificance { get; set; }
 
             public string PropertyName { get; set; } = default!;
 
@@ -606,5 +878,21 @@ namespace GW2SDK.Impl.JsonReaders
 
             public static readonly MethodInfo MoveNext = typeof(JsonElement.ObjectEnumerator).GetMethod(nameof(JsonElement.ObjectEnumerator.MoveNext));
         }
+    }
+
+    public enum PropertySignificance
+    {
+        Optional,
+
+        Required,
+
+        Ignored
+    }
+
+    public enum UnexpectedPropertyBehavior
+    {
+        Error,
+
+        Ignore
     }
 }

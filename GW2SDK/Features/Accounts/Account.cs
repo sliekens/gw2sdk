@@ -3,10 +3,34 @@ using System.Diagnostics;
 using GW2SDK.Annotations;
 using GW2SDK.Enums;
 using GW2SDK.Impl.JsonConverters;
+using GW2SDK.Impl.JsonReaders;
 using Newtonsoft.Json;
 
 namespace GW2SDK.Accounts
 {
+    internal sealed class AccountJsonReader : JsonObjectReader<Account>
+    {
+        public AccountJsonReader()
+        {
+            Map("id", account => account.Id);
+            Map("name", account => account.Name);
+            Map("age", account => account.Age, SecondsJsonReader.Instance);
+            Map("last_modified", account => account.LastModified);
+            Map("world", account => account.World);
+            Ignore("guilds");
+            Ignore("guild_leader");
+            Map("created", account => account.Created);
+            Ignore("access");
+            Map("commander", account => account.Commander);
+            Map("fractal_level", account => account.FractalLevel);
+            Map("daily_ap", account => account.FractalLevel);
+            Map("monthly_ap", account => account.FractalLevel);
+            Map("wvw_rank", account => account.FractalLevel);
+            Map("build_storage_slots", account => account.FractalLevel);
+            Compile();
+        }
+    }
+
     [PublicAPI]
     [DebuggerDisplay("{Name,nq}")]
     [DataTransferObject]

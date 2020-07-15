@@ -18,16 +18,19 @@ namespace GW2SDK.Tests.Impl
         public sealed class Other
         {
             public bool Value { get; set; }
+
+            public int[] Numbers { get; set; }
         }
 
         [Fact]
         public void It_can_create_build_parser()
         {
-            var sut = new JsonReader<Build>();
-            sut.Require("id", build => build.Id);
-            var otherReader = new JsonReader<Other>();
-            otherReader.Require("value", other => other.Value);
-            sut.Require("other", build => build.Other, otherReader);
+            var sut = new JsonObjectReader<Build>();
+            var otherReader = new JsonObjectReader<Other>();
+            sut.Map("id", build => build.Id);
+            sut.Map("other", build => build.Other, otherReader);
+            otherReader.Map("value", other => other.Value);
+            //otherReader.Require("nums", other => other.Numbers);
 
             var json = JsonDocument.Parse("{\"id\": 12345, \"other\": { \"value\": true }}");
 
