@@ -73,12 +73,11 @@ namespace GW2SDK.Tests.Features.Accounts
         [Trait("Importance", "Critical")]
         public void Account_can_be_partially_created_from_json_with_limited_scopes()
         {
-            var settings = new JsonSerializerSettingsBuilder()
-                .UseTraceWriter(_output)
-                .ThrowErrorOnMissingMember()
-                .Build();
+            var sut = new AccountJsonReader();
 
-            var actual = JsonConvert.DeserializeObject<Account>(_fixture.Db.BasicAccount, settings);
+            _output.WriteLine(_fixture.Db.BasicAccount);
+
+            var actual = sut.Read(_fixture.Db.BasicAccount);
 
             BasicAccountFact.Name_is_never_empty(actual);
             BasicAccountFact.Access_is_never_empty(actual);
@@ -97,17 +96,11 @@ namespace GW2SDK.Tests.Features.Accounts
         [Trait("Importance", "Critical")]
         public void Account_can_be_fully_created_from_json_with_all_scopes()
         {
-            var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(_output)
-                .ThrowErrorOnMissingMember()
-                .Build();
-
-            var json = JsonDocument.Parse(_fixture.Db.FullAccount);
-
             var sut = new AccountJsonReader();
 
             _output.WriteLine(_fixture.Db.FullAccount);
 
-            var actual = sut.Read(json);
+            var actual = sut.Read(_fixture.Db.FullAccount);
 
             FullAccountFact.Name_is_never_empty(actual);
             FullAccountFact.Access_is_never_empty(actual);

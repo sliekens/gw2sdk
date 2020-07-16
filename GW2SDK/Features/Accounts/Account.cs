@@ -17,16 +17,16 @@ namespace GW2SDK.Accounts
             Map("age", account => account.Age, SecondsJsonReader.Instance);
             Map("last_modified", account => account.LastModified);
             Map("world", account => account.World);
-            Ignore("guilds");
-            Ignore("guild_leader");
+            Map("guilds", account => account.Guilds);
+            Map("guild_leader", account => account.GuildLeader, PropertySignificance.Optional);
             Map("created", account => account.Created);
-            Ignore("access");
+            Map("access", account => account.Access, new JsonStringEnumReader<ProductName>());
             Map("commander", account => account.Commander);
             Map("fractal_level", account => account.FractalLevel);
-            Map("daily_ap", account => account.FractalLevel);
-            Map("monthly_ap", account => account.FractalLevel);
-            Map("wvw_rank", account => account.FractalLevel);
-            Map("build_storage_slots", account => account.FractalLevel);
+            Map("daily_ap", account => account.DailyAp);
+            Map("monthly_ap", account => account.MonthlyAp);
+            Map("wvw_rank", account => account.WvwRank);
+            Map("build_storage_slots", account => account.BuildStorageSlots);
             Compile();
         }
     }
