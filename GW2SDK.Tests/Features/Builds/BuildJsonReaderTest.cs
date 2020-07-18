@@ -5,9 +5,9 @@ using Xunit;
 
 namespace GW2SDK.Tests.Features.Builds
 {
-    public class BuildTest : IClassFixture<BuildFixture>
+    public class BuildJsonReaderTest : IClassFixture<BuildFixture>
     {
-        public BuildTest(BuildFixture fixture)
+        public BuildJsonReaderTest(BuildFixture fixture)
         {
             _fixture = fixture;
         }
@@ -25,7 +25,7 @@ namespace GW2SDK.Tests.Features.Builds
         [Trait("Importance", "Critical")]
         public void Build_can_be_created_from_json()
         {
-            var sut = new BuildJsonReader();
+            var sut = BuildJsonReader.Instance;
 
             var actual = sut.Read(_fixture.Build);
 

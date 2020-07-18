@@ -1,27 +1,20 @@
 ﻿using System;
-using System.Text.Json;
 using GW2SDK.Accounts;
+using GW2SDK.Accounts.Impl;
 using GW2SDK.Enums;
 using GW2SDK.Tests.Features.Accounts.Fixtures;
-using GW2SDK.Tests.Features.Tokens;
-using GW2SDK.Tests.TestInfrastructure;
-using Newtonsoft.Json;
 using Xunit;
-using Xunit.Abstractions;
 
 namespace GW2SDK.Tests.Features.Accounts
 {
-    public class AccountTest : IClassFixture<AccountFixture>
+    public class AccountJsonReaderTest : IClassFixture<AccountFixture>
     {
-        public AccountTest(AccountFixture fixture, ITestOutputHelper output)
+        public AccountJsonReaderTest(AccountFixture fixture)
         {
             _fixture = fixture;
-            _output = output;
         }
 
         private readonly AccountFixture _fixture;
-
-        private readonly ITestOutputHelper _output;
 
         private static class BasicAccountFact
         {
@@ -73,11 +66,9 @@ namespace GW2SDK.Tests.Features.Accounts
         [Trait("Importance", "Critical")]
         public void Account_can_be_partially_created_from_json_with_limited_scopes()
         {
-            var sut = new AccountJsonReader();
+            var sut = AccountJsonReader.Instance;
 
-            _output.WriteLine(_fixture.Db.BasicAccount);
-
-            var actual = sut.Read(_fixture.Db.BasicAccount);
+            var actual = sut.Read(_fixture.BasicAccount);
 
             BasicAccountFact.Name_is_never_empty(actual);
             BasicAccountFact.Access_is_never_empty(actual);
@@ -96,11 +87,9 @@ namespace GW2SDK.Tests.Features.Accounts
         [Trait("Importance", "Critical")]
         public void Account_can_be_fully_created_from_json_with_all_scopes()
         {
-            var sut = new AccountJsonReader();
+            var sut = AccountJsonReader.Instance;
 
-            _output.WriteLine(_fixture.Db.FullAccount);
-
-            var actual = sut.Read(_fixture.Db.FullAccount);
+            var actual = sut.Read(_fixture.FullAccount);
 
             FullAccountFact.Name_is_never_empty(actual);
             FullAccountFact.Access_is_never_empty(actual);

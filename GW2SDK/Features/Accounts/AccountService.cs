@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Net.Http;
+using System.Text.Json;
 using System.Threading.Tasks;
 using GW2SDK.Accounts.Impl;
 using GW2SDK.Annotations;
-using GW2SDK.Impl.JsonConverters;
-using Newtonsoft.Json;
 
 namespace GW2SDK.Accounts
 {
@@ -23,8 +22,9 @@ namespace GW2SDK.Accounts
             var request = new AccountRequest(accessToken);
             using var response = await _http.SendAsync(request).ConfigureAwait(false);
             response.EnsureSuccessStatusCode();
-            var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
-            return JsonConvert.DeserializeObject<Account>(json, Json.DefaultJsonSerializerSettings);
+            await using var json = await response.Content.ReadAsStreamAsync().ConfigureAwait(false);
+            using var jsonDocument = await JsonDocument.ParseAsync(json).ConfigureAwait(false);
+            return AccountJsonReader.Instance.Read(jsonDocument.RootElement);
         }
     }
 }

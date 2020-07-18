@@ -22,5 +22,7 @@ namespace GW2SDK.Impl.JsonReaders
 
             return json.EnumerateArray().Select(item => _itemReader.Read(item)).ToList();
         }
+
+        public bool CanRead(in JsonElement json) => json.ValueKind == JsonValueKind.Array;
     }
 }

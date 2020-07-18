@@ -151,5 +151,7 @@ namespace GW2SDK.Traits.Impl
                 ChatLink = chatLink
             };
         }
+
+        public bool CanRead(in JsonElement json) => json.ValueKind == JsonValueKind.Object;
     }
 }

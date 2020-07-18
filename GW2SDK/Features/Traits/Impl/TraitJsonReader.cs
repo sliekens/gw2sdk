@@ -168,5 +168,7 @@ namespace GW2SDK.Traits.Impl
                 Skills = skills
             };
         }
+
+        public bool CanRead(in JsonElement json) => json.ValueKind == JsonValueKind.Object;
     }
 }

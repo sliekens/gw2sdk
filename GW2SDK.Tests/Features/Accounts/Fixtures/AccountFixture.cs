@@ -1,41 +1,41 @@
-﻿using System.IO;
-using System.Net.Http;
+﻿using System.Net.Http;
+using System.Text.Json;
 using System.Threading.Tasks;
 using GW2SDK.Accounts.Impl;
 using GW2SDK.Tests.TestInfrastructure;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 using Xunit;
 
 namespace GW2SDK.Tests.Features.Accounts.Fixtures
 {
     public class AccountFixture : IAsyncLifetime
     {
-        public InMemoryAccountDb Db { get; } = new InMemoryAccountDb();
+        public JsonDocument BasicAccount { get; private set; }
+
+        public JsonDocument FullAccount { get; private set; }
 
         public async Task InitializeAsync()
         {
             await using var container = new Container();
             var http = container.Resolve<IHttpClientFactory>().CreateClient("GW2SDK");
 
-            var basic = await GetAccountRaw(http, ConfigurationManager.Instance.ApiKeyBasic);
-            Db.SetBasicAccount(basic);
+            BasicAccount = await GetAccountRaw(http, ConfigurationManager.Instance.ApiKeyBasic);
 
-            var full = await GetAccountRaw(http, ConfigurationManager.Instance.ApiKeyFull);
-            Db.SetFullAccount(full);
+            FullAccount = await GetAccountRaw(http, ConfigurationManager.Instance.ApiKeyFull);
         }
 
-        public Task DisposeAsync() => Task.CompletedTask;
-
-        private async Task<string> GetAccountRaw(HttpClient http, string accessToken)
+        public Task DisposeAsync()
         {
-            var request = new AccountRequest(accessToken);
-            using var response = await http.SendAsync(request);
-            using var responseReader = new StreamReader(await response.Content.ReadAsStreamAsync());
-            using var jsonReader = new JsonTextReader(responseReader);
+            BasicAccount.Dispose();
+            FullAccount.Dispose();
+            return Task.CompletedTask;
+        }
+
+        private async Task<JsonDocument> GetAccountRaw(HttpClient http, string accessToken)
+        {
+            using var response = await http.SendAsync(new AccountRequest(accessToken));
             response.EnsureSuccessStatusCode();
-            var obj = await JToken.ReadFromAsync(jsonReader);
-            return obj.ToString(Formatting.None);
+            await using var json = await response.Content.ReadAsStreamAsync();
+            return await JsonDocument.ParseAsync(json);
         }
     }
 }

@@ -40,6 +40,8 @@ namespace GW2SDK.Traits.Impl
             };
         }
 
+        public bool CanRead(in JsonElement json) => json.ValueKind == JsonValueKind.Object;
+
         private LifeForceCostTraitFact ReadLifeForceCostTraitFact(in JsonElement json)
         {
             string? text = default;

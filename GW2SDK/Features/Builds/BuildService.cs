@@ -4,15 +4,12 @@ using System.Text.Json;
 using System.Threading.Tasks;
 using GW2SDK.Annotations;
 using GW2SDK.Builds.Impl;
-using GW2SDK.Impl.JsonReaders;
 
 namespace GW2SDK.Builds
 {
     [PublicAPI]
     public sealed class BuildService
     {
-        private static readonly IJsonReader<Build> Reader = new BuildJsonReader();
-
         private readonly HttpClient _http;
 
         public BuildService(HttpClient http)
@@ -27,7 +24,7 @@ namespace GW2SDK.Builds
             response.EnsureSuccessStatusCode();
             await using var json = await response.Content.ReadAsStreamAsync().ConfigureAwait(false);
             using var jsonDocument = await JsonDocument.ParseAsync(json).ConfigureAwait(false);
-            return Reader.Read(jsonDocument.RootElement);
+            return BuildJsonReader.Instance.Read(jsonDocument.RootElement);
         }
     }
 }
