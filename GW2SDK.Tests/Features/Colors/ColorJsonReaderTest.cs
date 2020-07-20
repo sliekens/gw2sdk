@@ -1,4 +1,5 @@
 ﻿using GW2SDK.Colors;
+using GW2SDK.Colors.Impl;
 using GW2SDK.Tests.Features.Colors.Fixtures;
 using GW2SDK.Tests.TestInfrastructure;
 using Xunit;
@@ -17,6 +18,14 @@ namespace GW2SDK.Tests.Features.Colors
         private static class ColorFact
         {
             public static void Id_is_positive(Color actual) => Assert.InRange(actual.Id, 1, int.MaxValue);
+
+            public static void Item_id_is_positive(Color actual)
+            {
+                if (actual.Item.HasValue)
+                {
+                    Assert.InRange(actual.Item.Value, 1, int.MaxValue);
+                }
+            }
 
             public static void Base_rgb_contains_red_green_blue(Color actual) =>
                 Assert.Collection(
@@ -40,6 +49,7 @@ namespace GW2SDK.Tests.Features.Colors
                 {
                     var actual = sut.Read(json);
                     ColorFact.Id_is_positive(actual);
+                    ColorFact.Item_id_is_positive(actual);
                     ColorFact.Base_rgb_contains_red_green_blue(actual);
                 }
             );

@@ -22,7 +22,7 @@ namespace GW2SDK.Impl.V2
             using var response = await _http.SendAsync(request).ConfigureAwait(false);
             response.EnsureSuccessStatusCode();
             var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
-            return JsonConvert.DeserializeObject<ApiInfo>(json, Json.DefaultJsonSerializerSettings);
+            return JsonConvert.DeserializeObject<ApiInfo>(json, JsonConverters.Json.DefaultJsonSerializerSettings);
         }
     }
 }

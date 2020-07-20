@@ -4,14 +4,13 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 using System.Text.Json;
+using GW2SDK.Impl.Json;
 using static System.Linq.Expressions.Expression;
 
 namespace GW2SDK.Impl.JsonReaders
 {
     internal static class Expr
     {
-        internal delegate Expression DoFor(LabelTarget @break, LabelTarget @continue);
-
         internal static Expression For(ParameterExpression indexExpr, Expression lengthExpr, DoFor bodyExpr)
         {
             var breakTarget = Label();
@@ -30,50 +29,12 @@ namespace GW2SDK.Impl.JsonReaders
             );
         }
 
-        //internal static Expression ForEach(ParameterExpression current, Expression collection, Func<LabelTarget, Expression> body)
-        //{
-        //    Expression enumerableExpr = default!;
-        //    Expression enumeratorExpr;
-
-        //    var enumerator = Variable(typeof(JsonElement.ObjectEnumerator), "enumerator");
-        //    var breakLabel = Label();
-        //    var continueLabelExpr = Label();
-        //    return Block(
-        //        new[]
-        //        {
-        //            enumerator
-        //        },
-        //        Assign(enumerator, GetObjectEnumerator()),
-        //        Loop(
-        //            IfThenElse(
-        //                MoveNext(enumerator),
-        //                Block(
-        //                    new[] { current },
-        //                    Assign(current, GetCurrent(enumerator)),
-        //                    body(continueLabelExpr)
-        //                ),
-        //                Break(breakLabel)
-        //            ),
-        //            breakLabel,
-        //            continueLabelExpr
-        //        )
-        //    );
-
-        //    Expression GetCurrent(ParameterExpression enumerator)
-        //    {
-        //        return Property(enumerator, JsonElementInfo.Current);
-        //    }
-
-        //    MethodCallExpression MoveNext(ParameterExpression enumerator)
-        //    {
-        //        return Call(enumerator, JsonElementInfo.MoveNext);
-        //    }
-        //}
-
+        internal delegate Expression DoFor(LabelTarget @break, LabelTarget @continue);
     }
 
     public class JsonObjectReader<TObject> : IJsonReader<TObject>
     {
+        private static readonly ConstantExpression TypeNameExpr = Constant(typeof(TObject).Name, typeof(string));
         private readonly List<ReaderInfo> _readers = new List<ReaderInfo>();
 
         private ReadJson<TObject> _compilation = (in JsonElement json) => default!;
@@ -139,7 +100,7 @@ namespace GW2SDK.Impl.JsonReaders
                     propertySeenExpr = propertySeenExpr,
                     propertyValueExpr = propertyValueExpr,
                     Destination = ((MemberExpression) propertyExpression.Body).Member,
-                    OnMatch = (jsonPropertyExpr, continueLabelExpr) => Block(
+                    OnMatch = (jsonPropertyExpr, _) => Block(
                         new[]
                         {
                             arrayLengthExpr,
@@ -147,7 +108,7 @@ namespace GW2SDK.Impl.JsonReaders
                         },
                         Assign(propertySeenExpr,  Constant(true)),
                         Assign(indexExpr,         Constant(0)),
-                        Assign(arrayLengthExpr,   Call(JsonPropertyValue(jsonPropertyExpr), JsonElementInfo.GetArrayLength)),
+                        Assign(arrayLengthExpr,   Call(JsonPropertyExpr.GetValue(jsonPropertyExpr), JsonElementInfo.GetArrayLength)),
                         Assign(propertyValueExpr, NewArrayBounds(typeof(int), arrayLengthExpr)),
                         Expr.For(
                             indexExpr,
@@ -155,10 +116,9 @@ namespace GW2SDK.Impl.JsonReaders
                             (_, __) => AssignArray(
                                 propertyValueExpr,
                                 indexExpr,
-                                Call(MakeIndex(JsonPropertyValue(jsonPropertyExpr), JsonPropertyInfo.Item, new[] { indexExpr }), JsonElementInfo.GetInt32)
+                                JsonElementExpr.GetInt32(MakeIndex(JsonPropertyExpr.GetValue(jsonPropertyExpr), JsonPropertyInfo.Item, new[] { indexExpr }))
                             )
-                        ),
-                        Continue(continueLabelExpr)
+                        )
                     )
                 }
             );
@@ -185,7 +145,7 @@ namespace GW2SDK.Impl.JsonReaders
                             propertySeenExpr = propertySeenExpr,
                             propertyValueExpr = propertyValueExpr,
                             Destination = ((MemberExpression) propertyExpression.Body).Member,
-                            OnMatch = (jsonPropertyExpr, continueLabelExpr) => Block(
+                            OnMatch = (jsonPropertyExpr, _) => Block(
                                 new[]
                                 {
                                     arrayLengthExpr,
@@ -193,7 +153,7 @@ namespace GW2SDK.Impl.JsonReaders
                                 },
                                 Assign(propertySeenExpr,  Constant(true)),
                                 Assign(indexExpr,         Constant(0)),
-                                Assign(arrayLengthExpr,   Call(JsonPropertyValue(jsonPropertyExpr), JsonElementInfo.GetArrayLength)),
+                                Assign(arrayLengthExpr,   Call(JsonPropertyExpr.GetValue(jsonPropertyExpr), JsonElementInfo.GetArrayLength)),
                                 Assign(propertyValueExpr, NewArrayBounds(typeof(string), arrayLengthExpr)),
                                 Expr.For(
                                     indexExpr,
@@ -201,10 +161,11 @@ namespace GW2SDK.Impl.JsonReaders
                                     (_, __) => AssignArray(
                                         propertyValueExpr,
                                         indexExpr,
-                                        Call(MakeIndex(JsonPropertyValue(jsonPropertyExpr), JsonPropertyInfo.Item, new[] { indexExpr }), JsonElementInfo.GetString)
+                                        JsonElementExpr.GetString(
+                                            MakeIndex(JsonPropertyExpr.GetValue(jsonPropertyExpr), JsonPropertyInfo.Item, new[] { indexExpr })
+                                        )
                                     )
-                                ),
-                                Continue(continueLabelExpr)
+                                )
                             )
                         }
                     );
@@ -217,14 +178,14 @@ namespace GW2SDK.Impl.JsonReaders
                             PropertyName = propertyName,
                             propertyValueExpr = propertyValueExpr,
                             Destination = ((MemberExpression) propertyExpression.Body).Member,
-                            OnMatch = (jsonPropertyExpr, continueLabelExpr) => Block(
+                            OnMatch = (jsonPropertyExpr, _) => Block(
                                 new[]
                                 {
                                     arrayLengthExpr,
                                     indexExpr
                                 },
                                 Assign(indexExpr,         Constant(0)),
-                                Assign(arrayLengthExpr,   Call(JsonPropertyValue(jsonPropertyExpr), JsonElementInfo.GetArrayLength)),
+                                Assign(arrayLengthExpr,   Call(JsonPropertyExpr.GetValue(jsonPropertyExpr), JsonElementInfo.GetArrayLength)),
                                 Assign(propertyValueExpr, NewArrayBounds(typeof(string), arrayLengthExpr)),
                                 Expr.For(
                                     indexExpr,
@@ -232,10 +193,11 @@ namespace GW2SDK.Impl.JsonReaders
                                     (_, __) => AssignArray(
                                         propertyValueExpr,
                                         indexExpr,
-                                        Call(MakeIndex(JsonPropertyValue(jsonPropertyExpr), JsonPropertyInfo.Item, new[] { indexExpr }), JsonElementInfo.GetString)
+                                        JsonElementExpr.GetString(
+                                            MakeIndex(JsonPropertyExpr.GetValue(jsonPropertyExpr), JsonPropertyInfo.Item, new[] { indexExpr })
+                                        )
                                     )
-                                ),
-                                Continue(continueLabelExpr)
+                                )
                             )
                         }
                     );
@@ -271,7 +233,7 @@ namespace GW2SDK.Impl.JsonReaders
                             propertySeenExpr = propertySeenExpr,
                             propertyValueExpr = propertyValueExpr,
                             Destination = ((MemberExpression) propertyExpression.Body).Member,
-                            OnMatch = (jsonPropertyExpr, continueLabelExpr) => Block(
+                            OnMatch = (jsonPropertyExpr, _) => Block(
                                 new[]
                                 {
                                     arrayLengthExpr,
@@ -279,7 +241,7 @@ namespace GW2SDK.Impl.JsonReaders
                                 },
                                 Assign(propertySeenExpr,  Constant(true)),
                                 Assign(indexExpr,         Constant(0)),
-                                Assign(arrayLengthExpr,   Call(JsonPropertyValue(jsonPropertyExpr), JsonElementInfo.GetArrayLength)),
+                                Assign(arrayLengthExpr,   Call(JsonPropertyExpr.GetValue(jsonPropertyExpr), JsonElementInfo.GetArrayLength)),
                                 Assign(propertyValueExpr, NewArrayBounds(typeof(TValue), arrayLengthExpr)),
                                 Expr.For(
                                     indexExpr,
@@ -290,11 +252,10 @@ namespace GW2SDK.Impl.JsonReaders
                                         Call(
                                             readerExpression,
                                             readInfo,
-                                            MakeIndex(JsonPropertyValue(jsonPropertyExpr), JsonPropertyInfo.Item, new[] { indexExpr })
+                                            MakeIndex(JsonPropertyExpr.GetValue(jsonPropertyExpr), JsonPropertyInfo.Item, new[] { indexExpr })
                                         )
                                     )
-                                ),
-                                Continue(continueLabelExpr)
+                                )
                             )
                         }
                     );
@@ -307,14 +268,14 @@ namespace GW2SDK.Impl.JsonReaders
                             PropertyName = propertyName,
                             propertyValueExpr = propertyValueExpr,
                             Destination = ((MemberExpression) propertyExpression.Body).Member,
-                            OnMatch = (jsonPropertyExpr, continueLabelExpr) => Block(
+                            OnMatch = (jsonPropertyExpr, _) => Block(
                                 new[]
                                 {
                                     arrayLengthExpr,
                                     indexExpr
                                 },
                                 Assign(indexExpr,         Constant(0)),
-                                Assign(arrayLengthExpr,   Call(JsonPropertyValue(jsonPropertyExpr), JsonElementInfo.GetArrayLength)),
+                                Assign(arrayLengthExpr,   JsonElementExpr.GetArrayLength(JsonPropertyExpr.GetValue(jsonPropertyExpr))),
                                 Assign(propertyValueExpr, NewArrayBounds(typeof(TValue), arrayLengthExpr)),
                                 Expr.For(
                                     indexExpr,
@@ -325,11 +286,10 @@ namespace GW2SDK.Impl.JsonReaders
                                         Call(
                                             readerExpression,
                                             readInfo,
-                                            MakeIndex(JsonPropertyValue(jsonPropertyExpr), JsonPropertyInfo.Item, new[] { indexExpr })
+                                            MakeIndex(JsonPropertyExpr.GetValue(jsonPropertyExpr), JsonPropertyInfo.Item, new[] { indexExpr })
                                         )
                                     )
-                                ),
-                                Continue(continueLabelExpr)
+                                )
                             )
                         }
                     );
@@ -341,8 +301,6 @@ namespace GW2SDK.Impl.JsonReaders
 
             _needsCompilation = true;
         }
-
-        private static MemberExpression JsonPropertyValue(ParameterExpression jsonPropertyExpr) => Property(jsonPropertyExpr, JsonPropertyInfo.Value);
 
         public void Map<TValue>(
             string propertyName,
@@ -365,13 +323,12 @@ namespace GW2SDK.Impl.JsonReaders
                             propertySeenExpr = propertySeenExpr,
                             propertyValueExpr = propertyValueExpr,
                             Destination = ((MemberExpression) propertyExpression.Body).Member,
-                            OnMatch = (jsonPropertyExpr, continueLabelExpr) => Block(
+                            OnMatch = (jsonPropertyExpr, _) => Block(
                                 Assign(propertySeenExpr, Constant(true)),
                                 Assign(
                                     propertyValueExpr,
-                                    Call(readerExpr, readInfo, Property(jsonPropertyExpr, JsonPropertyInfo.Value))
-                                ),
-                                Continue(continueLabelExpr)
+                                    Call(readerExpr, readInfo, JsonPropertyExpr.GetValue(jsonPropertyExpr))
+                                )
                             )
                         }
                     );
@@ -384,12 +341,11 @@ namespace GW2SDK.Impl.JsonReaders
                             PropertyName = propertyName,
                             propertyValueExpr = propertyValueExpr,
                             Destination = ((MemberExpression) propertyExpression.Body).Member,
-                            OnMatch = (jsonPropertyExpr, continueLabelExpr) => Block(
+                            OnMatch = (jsonPropertyExpr, _) => Block(
                                 Assign(
                                     propertyValueExpr,
-                                    Call(readerExpr, readInfo, Property(jsonPropertyExpr, JsonPropertyInfo.Value))
-                                ),
-                                Continue(continueLabelExpr)
+                                    Call(readerExpr, readInfo, JsonPropertyExpr.GetValue(jsonPropertyExpr))
+                                )
                             )
                         }
                     );
@@ -417,10 +373,9 @@ namespace GW2SDK.Impl.JsonReaders
                     propertySeenExpr = propertySeenExpr,
                     propertyValueExpr = propertyValueExpr,
                     Destination = ((MemberExpression) propertyExpression.Body).Member,
-                    OnMatch = (jsonPropertyExpr, continueLabelExpr) => Block(
+                    OnMatch = (jsonPropertyExpr, _) => Block(
                         Assign(propertySeenExpr,  Constant(true)),
-                        Assign(propertyValueExpr, Call(Property(jsonPropertyExpr, JsonPropertyInfo.Value), JsonElementInfo.GetString)),
-                        Continue(continueLabelExpr)
+                        Assign(propertyValueExpr, JsonElementExpr.GetString(JsonPropertyExpr.GetValue(jsonPropertyExpr)))
                     )
                 }
             );
@@ -439,10 +394,9 @@ namespace GW2SDK.Impl.JsonReaders
                     propertySeenExpr = propertySeenExpr,
                     propertyValueExpr = propertyValueExpr,
                     Destination = ((MemberExpression) propertyExpression.Body).Member,
-                    OnMatch = (jsonPropertyExpr, continueLabelExpr) => Block(
+                    OnMatch = (jsonPropertyExpr, _) => Block(
                         Assign(propertySeenExpr,  Constant(true)),
-                        Assign(propertyValueExpr, Call(Property(jsonPropertyExpr, JsonPropertyInfo.Value), JsonElementInfo.GetSingle)),
-                        Continue(continueLabelExpr)
+                        Assign(propertyValueExpr, JsonElementExpr.GetSingle(JsonPropertyExpr.GetValue(jsonPropertyExpr)))
                     )
                 }
             );
@@ -459,9 +413,8 @@ namespace GW2SDK.Impl.JsonReaders
                     PropertyName = propertyName,
                     propertyValueExpr = propertyValueExpr,
                     Destination = ((MemberExpression) propertyExpression.Body).Member,
-                    OnMatch = (jsonPropertyExpr, continueLabelExpr) => Block(
-                        Assign(propertyValueExpr, Call(Property(jsonPropertyExpr, JsonPropertyInfo.Value), JsonElementInfo.GetSingle)),
-                        Continue(continueLabelExpr)
+                    OnMatch = (jsonPropertyExpr, _) => Block(
+                        Assign(propertyValueExpr, JsonElementExpr.GetSingleOrNull(JsonPropertyExpr.GetValue(jsonPropertyExpr)))
                     )
                 }
             );
@@ -480,10 +433,9 @@ namespace GW2SDK.Impl.JsonReaders
                     propertySeenExpr = propertySeenExpr,
                     propertyValueExpr = propertyValueExpr,
                     Destination = ((MemberExpression) propertyExpression.Body).Member,
-                    OnMatch = (jsonPropertyExpr, continueLabelExpr) => Block(
+                    OnMatch = (jsonPropertyExpr, _) => Block(
                         Assign(propertySeenExpr,  Constant(true)),
-                        Assign(propertyValueExpr, Call(Property(jsonPropertyExpr, JsonPropertyInfo.Value), JsonElementInfo.GetDouble)),
-                        Continue(continueLabelExpr)
+                        Assign(propertyValueExpr, JsonElementExpr.GetDouble(JsonPropertyExpr.GetValue(jsonPropertyExpr)))
                     )
                 }
             );
@@ -500,9 +452,8 @@ namespace GW2SDK.Impl.JsonReaders
                     PropertyName = propertyName,
                     propertyValueExpr = propertyValueExpr,
                     Destination = ((MemberExpression) propertyExpression.Body).Member,
-                    OnMatch = (jsonPropertyExpr, continueLabelExpr) => Block(
-                        Assign(propertyValueExpr, Call(Property(jsonPropertyExpr, JsonPropertyInfo.Value), JsonElementInfo.GetDouble)),
-                        Continue(continueLabelExpr)
+                    OnMatch = (jsonPropertyExpr, _) => Block(
+                        Assign(propertyValueExpr, JsonElementExpr.GetDoubleOrNull(JsonPropertyExpr.GetValue(jsonPropertyExpr)))
                     )
                 }
             );
@@ -521,10 +472,9 @@ namespace GW2SDK.Impl.JsonReaders
                     propertySeenExpr = propertySeenExpr,
                     propertyValueExpr = propertyValueExpr,
                     Destination = ((MemberExpression) propertyExpression.Body).Member,
-                    OnMatch = (jsonPropertyExpr, continueLabelExpr) => Block(
+                    OnMatch = (jsonPropertyExpr, _) => Block(
                         Assign(propertySeenExpr,  Constant(true)),
-                        Assign(propertyValueExpr, Call(Property(jsonPropertyExpr, JsonPropertyInfo.Value), JsonElementInfo.GetDecimal)),
-                        Continue(continueLabelExpr)
+                        Assign(propertyValueExpr, JsonElementExpr.GetDecimal(JsonPropertyExpr.GetValue(jsonPropertyExpr)))
                     )
                 }
             );
@@ -541,9 +491,8 @@ namespace GW2SDK.Impl.JsonReaders
                     PropertyName = propertyName,
                     propertyValueExpr = propertyValueExpr,
                     Destination = ((MemberExpression) propertyExpression.Body).Member,
-                    OnMatch = (jsonPropertyExpr, continueLabelExpr) => Block(
-                        Assign(propertyValueExpr, Call(Property(jsonPropertyExpr, JsonPropertyInfo.Value), JsonElementInfo.GetDecimal)),
-                        Continue(continueLabelExpr)
+                    OnMatch = (jsonPropertyExpr, _) => Block(
+                        Assign(propertyValueExpr, JsonElementExpr.GetDecimalOrNull(JsonPropertyExpr.GetValue(jsonPropertyExpr)))
                     )
                 }
             );
@@ -562,10 +511,9 @@ namespace GW2SDK.Impl.JsonReaders
                     propertySeenExpr = propertySeenExpr,
                     propertyValueExpr = propertyValueExpr,
                     Destination = ((MemberExpression) propertyExpression.Body).Member,
-                    OnMatch = (jsonPropertyExpr, continueLabelExpr) => Block(
+                    OnMatch = (jsonPropertyExpr, _) => Block(
                         Assign(propertySeenExpr,  Constant(true)),
-                        Assign(propertyValueExpr, Call(Property(jsonPropertyExpr, JsonPropertyInfo.Value), JsonElementInfo.GetSByte)),
-                        Continue(continueLabelExpr)
+                        Assign(propertyValueExpr, Call(JsonPropertyExpr.GetValue(jsonPropertyExpr), JsonElementInfo.GetSByte))
                     )
                 }
             );
@@ -582,9 +530,8 @@ namespace GW2SDK.Impl.JsonReaders
                     PropertyName = propertyName,
                     propertyValueExpr = propertyValueExpr,
                     Destination = ((MemberExpression) propertyExpression.Body).Member,
-                    OnMatch = (jsonPropertyExpr, continueLabelExpr) => Block(
-                        Assign(propertyValueExpr, Call(Property(jsonPropertyExpr, JsonPropertyInfo.Value), JsonElementInfo.GetSByte)),
-                        Continue(continueLabelExpr)
+                    OnMatch = (jsonPropertyExpr, _) => Block(
+                        Assign(propertyValueExpr, Call(JsonPropertyExpr.GetValue(jsonPropertyExpr), JsonElementInfo.GetSByte))
                     )
                 }
             );
@@ -603,10 +550,9 @@ namespace GW2SDK.Impl.JsonReaders
                     propertySeenExpr = propertySeenExpr,
                     propertyValueExpr = propertyValueExpr,
                     Destination = ((MemberExpression) propertyExpression.Body).Member,
-                    OnMatch = (jsonPropertyExpr, continueLabelExpr) => Block(
+                    OnMatch = (jsonPropertyExpr, _) => Block(
                         Assign(propertySeenExpr,  Constant(true)),
-                        Assign(propertyValueExpr, Call(Property(jsonPropertyExpr, JsonPropertyInfo.Value), JsonElementInfo.GetInt16)),
-                        Continue(continueLabelExpr)
+                        Assign(propertyValueExpr, JsonElementExpr.GetInt16(JsonPropertyExpr.GetValue(jsonPropertyExpr)))
                     )
                 }
             );
@@ -623,9 +569,8 @@ namespace GW2SDK.Impl.JsonReaders
                     PropertyName = propertyName,
                     propertyValueExpr = propertyValueExpr,
                     Destination = ((MemberExpression) propertyExpression.Body).Member,
-                    OnMatch = (jsonPropertyExpr, continueLabelExpr) => Block(
-                        Assign(propertyValueExpr, Call(Property(jsonPropertyExpr, JsonPropertyInfo.Value), JsonElementInfo.GetInt16)),
-                        Continue(continueLabelExpr)
+                    OnMatch = (jsonPropertyExpr, _) => Block(
+                        Assign(propertyValueExpr, JsonElementExpr.GetInt16OrNull(JsonPropertyExpr.GetValue(jsonPropertyExpr)))
                     )
                 }
             );
@@ -644,10 +589,9 @@ namespace GW2SDK.Impl.JsonReaders
                     propertySeenExpr = propertySeenExpr,
                     propertyValueExpr = propertyValueExpr,
                     Destination = ((MemberExpression) propertyExpression.Body).Member,
-                    OnMatch = (jsonPropertyExpr, continueLabelExpr) => Block(
+                    OnMatch = (jsonPropertyExpr, _) => Block(
                         Assign(propertySeenExpr,  Constant(true)),
-                        Assign(propertyValueExpr, Call(Property(jsonPropertyExpr, JsonPropertyInfo.Value), JsonElementInfo.GetInt32)),
-                        Continue(continueLabelExpr)
+                        Assign(propertyValueExpr, JsonElementExpr.GetInt32(JsonPropertyExpr.GetValue(jsonPropertyExpr)))
                     )
                 }
             );
@@ -664,9 +608,8 @@ namespace GW2SDK.Impl.JsonReaders
                     PropertyName = propertyName,
                     propertyValueExpr = propertyValueExpr,
                     Destination = ((MemberExpression) propertyExpression.Body).Member,
-                    OnMatch = (jsonPropertyExpr, continueLabelExpr) => Block(
-                        Assign(propertyValueExpr, Convert(Call(Property(jsonPropertyExpr, JsonPropertyInfo.Value), JsonElementInfo.GetInt32), propertyValueExpr.Type)),
-                        Continue(continueLabelExpr)
+                    OnMatch = (jsonPropertyExpr, _) => Block(
+                        Assign(propertyValueExpr, JsonElementExpr.GetInt32OrNull(JsonPropertyExpr.GetValue(jsonPropertyExpr)))
                     )
                 }
             );
@@ -685,10 +628,9 @@ namespace GW2SDK.Impl.JsonReaders
                     propertySeenExpr = propertySeenExpr,
                     propertyValueExpr = propertyValueExpr,
                     Destination = ((MemberExpression) propertyExpression.Body).Member,
-                    OnMatch = (jsonPropertyExpr, continueLabelExpr) => Block(
+                    OnMatch = (jsonPropertyExpr, _) => Block(
                         Assign(propertySeenExpr,  Constant(true)),
-                        Assign(propertyValueExpr, Call(Property(jsonPropertyExpr, JsonPropertyInfo.Value), JsonElementInfo.GetInt64)),
-                        Continue(continueLabelExpr)
+                        Assign(propertyValueExpr, JsonElementExpr.GetInt64(JsonPropertyExpr.GetValue(jsonPropertyExpr)))
                     )
                 }
             );
@@ -705,9 +647,8 @@ namespace GW2SDK.Impl.JsonReaders
                     PropertyName = propertyName,
                     propertyValueExpr = propertyValueExpr,
                     Destination = ((MemberExpression) propertyExpression.Body).Member,
-                    OnMatch = (jsonPropertyExpr, continueLabelExpr) => Block(
-                        Assign(propertyValueExpr, Call(Property(jsonPropertyExpr, JsonPropertyInfo.Value), JsonElementInfo.GetInt64)),
-                        Continue(continueLabelExpr)
+                    OnMatch = (jsonPropertyExpr, _) => Block(
+                        Assign(propertyValueExpr, JsonElementExpr.GetInt64OrNull(JsonPropertyExpr.GetValue(jsonPropertyExpr)))
                     )
                 }
             );
@@ -726,10 +667,9 @@ namespace GW2SDK.Impl.JsonReaders
                     propertySeenExpr = propertySeenExpr,
                     propertyValueExpr = propertyValueExpr,
                     Destination = ((MemberExpression) propertyExpression.Body).Member,
-                    OnMatch = (jsonPropertyExpr, continueLabelExpr) => Block(
+                    OnMatch = (jsonPropertyExpr, _) => Block(
                         Assign(propertySeenExpr,  Constant(true)),
-                        Assign(propertyValueExpr, Call(Property(jsonPropertyExpr, JsonPropertyInfo.Value), JsonElementInfo.GetByte)),
-                        Continue(continueLabelExpr)
+                        Assign(propertyValueExpr, JsonElementExpr.GetByte(JsonPropertyExpr.GetValue(jsonPropertyExpr)))
                     )
                 }
             );
@@ -746,9 +686,8 @@ namespace GW2SDK.Impl.JsonReaders
                     PropertyName = propertyName,
                     propertyValueExpr = propertyValueExpr,
                     Destination = ((MemberExpression) propertyExpression.Body).Member,
-                    OnMatch = (jsonPropertyExpr, continueLabelExpr) => Block(
-                        Assign(propertyValueExpr, Call(Property(jsonPropertyExpr, JsonPropertyInfo.Value), JsonElementInfo.GetByte)),
-                        Continue(continueLabelExpr)
+                    OnMatch = (jsonPropertyExpr, _) => Block(
+                        Assign(propertyValueExpr, JsonElementExpr.GetByteOrNull(JsonPropertyExpr.GetValue(jsonPropertyExpr)))
                     )
                 }
             );
@@ -767,10 +706,9 @@ namespace GW2SDK.Impl.JsonReaders
                     propertySeenExpr = propertySeenExpr,
                     propertyValueExpr = propertyValueExpr,
                     Destination = ((MemberExpression) propertyExpression.Body).Member,
-                    OnMatch = (jsonPropertyExpr, continueLabelExpr) => Block(
+                    OnMatch = (jsonPropertyExpr, _) => Block(
                         Assign(propertySeenExpr,  Constant(true)),
-                        Assign(propertyValueExpr, Call(Property(jsonPropertyExpr, JsonPropertyInfo.Value), JsonElementInfo.GetUInt16)),
-                        Continue(continueLabelExpr)
+                        Assign(propertyValueExpr, JsonElementExpr.GetUInt16(JsonPropertyExpr.GetValue(jsonPropertyExpr)))
                     )
                 }
             );
@@ -787,9 +725,8 @@ namespace GW2SDK.Impl.JsonReaders
                     PropertyName = propertyName,
                     propertyValueExpr = propertyValueExpr,
                     Destination = ((MemberExpression) propertyExpression.Body).Member,
-                    OnMatch = (jsonPropertyExpr, continueLabelExpr) => Block(
-                        Assign(propertyValueExpr, Call(Property(jsonPropertyExpr, JsonPropertyInfo.Value), JsonElementInfo.GetUInt16)),
-                        Continue(continueLabelExpr)
+                    OnMatch = (jsonPropertyExpr, _) => Block(
+                        Assign(propertyValueExpr, JsonElementExpr.GetUInt16OrNull(JsonPropertyExpr.GetValue(jsonPropertyExpr)))
                     )
                 }
             );
@@ -808,10 +745,9 @@ namespace GW2SDK.Impl.JsonReaders
                     propertySeenExpr = propertySeenExpr,
                     propertyValueExpr = propertyValueExpr,
                     Destination = ((MemberExpression) propertyExpression.Body).Member,
-                    OnMatch = (jsonPropertyExpr, continueLabelExpr) => Block(
+                    OnMatch = (jsonPropertyExpr, _) => Block(
                         Assign(propertySeenExpr,  Constant(true)),
-                        Assign(propertyValueExpr, Call(Property(jsonPropertyExpr, JsonPropertyInfo.Value), JsonElementInfo.GetUInt32)),
-                        Continue(continueLabelExpr)
+                        Assign(propertyValueExpr, JsonElementExpr.GetUInt32(JsonPropertyExpr.GetValue(jsonPropertyExpr)))
                     )
                 }
             );
@@ -828,9 +764,8 @@ namespace GW2SDK.Impl.JsonReaders
                     PropertyName = propertyName,
                     propertyValueExpr = propertyValueExpr,
                     Destination = ((MemberExpression) propertyExpression.Body).Member,
-                    OnMatch = (jsonPropertyExpr, continueLabelExpr) => Block(
-                        Assign(propertyValueExpr, Call(Property(jsonPropertyExpr, JsonPropertyInfo.Value), JsonElementInfo.GetUInt32)),
-                        Continue(continueLabelExpr)
+                    OnMatch = (jsonPropertyExpr, _) => Block(
+                        Assign(propertyValueExpr, JsonElementExpr.GetUInt32OrNull(JsonPropertyExpr.GetValue(jsonPropertyExpr)))
                     )
                 }
             );
@@ -849,10 +784,27 @@ namespace GW2SDK.Impl.JsonReaders
                     propertySeenExpr = propertySeenExpr,
                     propertyValueExpr = propertyValueExpr,
                     Destination = ((MemberExpression) propertyExpression.Body).Member,
-                    OnMatch = (jsonPropertyExpr, continueLabelExpr) => Block(
+                    OnMatch = (jsonPropertyExpr, _) => Block(
                         Assign(propertySeenExpr,  Constant(true)),
-                        Assign(propertyValueExpr, Call(Property(jsonPropertyExpr, JsonPropertyInfo.Value), JsonElementInfo.GetUInt64)),
-                        Continue(continueLabelExpr)
+                        Assign(propertyValueExpr, JsonElementExpr.GetUInt64(JsonPropertyExpr.GetValue(jsonPropertyExpr)))
+                    )
+                }
+            );
+            _needsCompilation = true;
+        }
+
+        public void Map(string propertyName, Expression<Func<TObject, ulong?>> propertyExpression)
+        {
+            var propertyValueExpr = Variable(typeof(ulong?), $"value of {propertyName}");
+            _readers.Add(
+                new ReaderInfo
+                {
+                    PropertySignificance = PropertySignificance.Optional,
+                    PropertyName = propertyName,
+                    propertyValueExpr = propertyValueExpr,
+                    Destination = ((MemberExpression) propertyExpression.Body).Member,
+                    OnMatch = (jsonPropertyExpr, _) => Block(
+                        Assign(propertyValueExpr, JsonElementExpr.GetUInt64OrNull(JsonPropertyExpr.GetValue(jsonPropertyExpr)))
                     )
                 }
             );
@@ -871,10 +823,27 @@ namespace GW2SDK.Impl.JsonReaders
                     propertySeenExpr = propertySeenExpr,
                     propertyValueExpr = propertyValueExpr,
                     Destination = ((MemberExpression) propertyExpression.Body).Member,
-                    OnMatch = (jsonPropertyExpr, continueLabelExpr) => Block(
+                    OnMatch = (jsonPropertyExpr, _) => Block(
                         Assign(propertySeenExpr,  Constant(true)),
-                        Assign(propertyValueExpr, Call(Property(jsonPropertyExpr, JsonPropertyInfo.Value), JsonElementInfo.GetBoolean)),
-                        Continue(continueLabelExpr)
+                        Assign(propertyValueExpr, JsonElementExpr.GetBoolean(JsonPropertyExpr.GetValue(jsonPropertyExpr)))
+                    )
+                }
+            );
+            _needsCompilation = true;
+        }
+
+        public void Map(string propertyName, Expression<Func<TObject, bool?>> propertyExpression)
+        {
+            var propertyValueExpr = Variable(typeof(bool?), $"value of {propertyName}");
+            _readers.Add(
+                new ReaderInfo
+                {
+                    PropertySignificance = PropertySignificance.Optional,
+                    PropertyName = propertyName,
+                    propertyValueExpr = propertyValueExpr,
+                    Destination = ((MemberExpression) propertyExpression.Body).Member,
+                    OnMatch = (jsonPropertyExpr, _) => Block(
+                        Assign(propertyValueExpr, JsonElementExpr.GetBooleanOrNull(JsonPropertyExpr.GetValue(jsonPropertyExpr)))
                     )
                 }
             );
@@ -893,10 +862,27 @@ namespace GW2SDK.Impl.JsonReaders
                     propertySeenExpr = propertySeenExpr,
                     propertyValueExpr = propertyValueExpr,
                     Destination = ((MemberExpression) propertyExpression.Body).Member,
-                    OnMatch = (jsonPropertyExpr, continueLabelExpr) => Block(
+                    OnMatch = (jsonPropertyExpr, _) => Block(
                         Assign(propertySeenExpr,  Constant(true)),
-                        Assign(propertyValueExpr, Call(Property(jsonPropertyExpr, JsonPropertyInfo.Value), JsonElementInfo.GetDateTime)),
-                        Continue(continueLabelExpr)
+                        Assign(propertyValueExpr, JsonElementExpr.GetDateTime(JsonPropertyExpr.GetValue(jsonPropertyExpr)))
+                    )
+                }
+            );
+            _needsCompilation = true;
+        }
+
+        public void Map(string propertyName, Expression<Func<TObject, DateTime?>> propertyExpression)
+        {
+            var propertyValueExpr = Variable(typeof(DateTime), $"value of {propertyName}");
+            _readers.Add(
+                new ReaderInfo
+                {
+                    PropertySignificance = PropertySignificance.Optional,
+                    PropertyName = propertyName,
+                    propertyValueExpr = propertyValueExpr,
+                    Destination = ((MemberExpression) propertyExpression.Body).Member,
+                    OnMatch = (jsonPropertyExpr, _) => Block(
+                        Assign(propertyValueExpr, JsonElementExpr.GetDateTimeOrNull(JsonPropertyExpr.GetValue(jsonPropertyExpr)))
                     )
                 }
             );
@@ -915,10 +901,28 @@ namespace GW2SDK.Impl.JsonReaders
                     propertySeenExpr = propertySeenExpr,
                     propertyValueExpr = propertyValueExpr,
                     Destination = ((MemberExpression) propertyExpression.Body).Member,
-                    OnMatch = (jsonPropertyExpr, continueLabelExpr) => Block(
+                    OnMatch = (jsonPropertyExpr, _) => Block(
                         Assign(propertySeenExpr,  Constant(true)),
-                        Assign(propertyValueExpr, Call(Property(jsonPropertyExpr, JsonPropertyInfo.Value), JsonElementInfo.GetDateTimeOffset)),
-                        Continue(continueLabelExpr)
+                        Assign(propertyValueExpr, JsonElementExpr.GetDateTimeOffset(JsonPropertyExpr.GetValue(jsonPropertyExpr)))
+                    )
+                }
+            );
+            _needsCompilation = true;
+        }
+
+        public void Map(string propertyName, Expression<Func<TObject, DateTimeOffset?>> propertyExpression)
+        {
+            var propertySeenExpr = Variable(typeof(bool),             $"saw {propertyName}");
+            var propertyValueExpr = Variable(typeof(DateTimeOffset?), $"value of {propertyName}");
+            _readers.Add(
+                new ReaderInfo
+                {
+                    PropertySignificance = PropertySignificance.Optional,
+                    PropertyName = propertyName,
+                    propertyValueExpr = propertyValueExpr,
+                    Destination = ((MemberExpression) propertyExpression.Body).Member,
+                    OnMatch = (jsonPropertyExpr, _) => Block(
+                        Assign(propertyValueExpr, JsonElementExpr.GetDateTimeOffsetOrNull(JsonPropertyExpr.GetValue(jsonPropertyExpr)))
                     )
                 }
             );
@@ -937,10 +941,27 @@ namespace GW2SDK.Impl.JsonReaders
                     propertySeenExpr = propertySeenExpr,
                     propertyValueExpr = propertyValueExpr,
                     Destination = ((MemberExpression) propertyExpression.Body).Member,
-                    OnMatch = (jsonPropertyExpr, continueLabelExpr) => Block(
+                    OnMatch = (jsonPropertyExpr, _) => Block(
                         Assign(propertySeenExpr,  Constant(true)),
-                        Assign(propertyValueExpr, Call(Property(jsonPropertyExpr, JsonPropertyInfo.Value), JsonElementInfo.GetGuid)),
-                        Continue(continueLabelExpr)
+                        Assign(propertyValueExpr, JsonElementExpr.GetGuid(JsonPropertyExpr.GetValue(jsonPropertyExpr)))
+                    )
+                }
+            );
+            _needsCompilation = true;
+        }
+
+        public void Map(string propertyName, Expression<Func<TObject, Guid?>> propertyExpression)
+        {
+            var propertyValueExpr = Variable(typeof(Guid?), $"value of {propertyName}");
+            _readers.Add(
+                new ReaderInfo
+                {
+                    PropertySignificance = PropertySignificance.Optional,
+                    PropertyName = propertyName,
+                    propertyValueExpr = propertyValueExpr,
+                    Destination = ((MemberExpression) propertyExpression.Body).Member,
+                    OnMatch = (jsonPropertyExpr, _) => Block(
+                        Assign(propertyValueExpr, JsonElementExpr.GetGuidOrNull(JsonPropertyExpr.GetValue(jsonPropertyExpr)))
                     )
                 }
             );
@@ -979,28 +1000,7 @@ namespace GW2SDK.Impl.JsonReaders
                     .Append(
                         ForEachJsonProperty(
                             jsonPropertyExpr,
-                            continueLabelExpr => Block(
-                                ((Func<IEnumerable<Expression>>) (() =>
-                                {
-                                    var memberHandling = new List<Expression>(_readers.Count + 1);
-                                    foreach (var reader in _readers)
-                                    {
-                                        memberHandling.Add(
-                                            IfThen(
-                                                NameEquals(jsonPropertyExpr, Constant(reader.PropertyName, typeof(string))),
-                                                reader.OnMatch(jsonPropertyExpr, continueLabelExpr)
-                                            )
-                                        );
-                                    }
-
-                                    if (UnexpectedPropertyBehavior == UnexpectedPropertyBehavior.Error)
-                                    {
-                                        memberHandling.Add(ThrowJsonException(MissingMember(jsonPropertyExpr)));
-                                    }
-
-                                    return memberHandling;
-                                }))()
-                            )
+                            @continue => Read(jsonPropertyExpr, @continue, _readers, 0)
                         )
                     )
                     .Concat(
@@ -1022,11 +1022,32 @@ namespace GW2SDK.Impl.JsonReaders
             _compilation = source.Compile();
             _needsCompilation = false;
 
+            Expression Read(ParameterExpression jsonPropertyExpr, LabelTarget @continue, IReadOnlyList<ReaderInfo> readers, int index)
+            {
+                var reader = readers[index];
+                var test = NameEquals(jsonPropertyExpr, Constant(reader.PropertyName, typeof(string)));
+                var ifTrue = reader.OnMatch(jsonPropertyExpr, @continue);
+                Expression? ifFalse;
+                if (index + 1 < readers.Count)
+                {
+                    ifFalse = Read(jsonPropertyExpr, @continue, readers, index + 1);
+                }
+                else if (UnexpectedPropertyBehavior == UnexpectedPropertyBehavior.Error)
+                {
+                    ifFalse = ThrowJsonException(MissingMember(jsonPropertyExpr));
+                }
+                else
+                {
+                    ifFalse = default;
+                }
+
+                return ifFalse is null ? IfThen(test, ifTrue) : IfThenElse(test, ifTrue, ifFalse);
+            }
+
             Expression MissingMember(ParameterExpression member)
             {
-                var format = typeof(string).GetMethod(nameof(string.Format), new[] { typeof(string), typeof(object) });
-                var template = Constant("JSON property '{0}' was unexpected for type '" + typeof(TObject).Name + "'.", typeof(string));
-                return Call(null, format, template, Property(member, JsonPropertyInfo.Name));
+                var format = Constant("JSON property '{0}' was unexpected for type '{1}'.", typeof(string));
+                return StringExpr.Format(format, Property(member, JsonPropertyInfo.Name), TypeNameExpr);
             }
 
             Expression EnsureValueKindIsObject()
@@ -1036,7 +1057,7 @@ namespace GW2SDK.Impl.JsonReaders
 
             Expression ValueKindNotObject()
             {
-                var actual = Property(json, JsonPropertyInfo.ValueKind);
+                var actual = Property(json, JsonElementInfo.ValueKind);
                 var expected = Constant(JsonValueKind.Object);
                 return NotEqual(actual, expected);
             }
@@ -1126,63 +1147,6 @@ namespace GW2SDK.Impl.JsonReaders
             public MemberInfo Destination { get; set; } = default!;
 
             public Process OnMatch { get; set; } = default!;
-        }
-
-        private static class JsonExceptionInfo
-        {
-            public static readonly ConstructorInfo JsonExceptionConstructor = typeof(JsonException).GetConstructor(new[] { typeof(string) });
-        }
-
-        private static class JsonPropertyInfo
-        {
-            public static readonly PropertyInfo Name = typeof(JsonProperty).GetProperty(nameof(JsonProperty.Name));
-            public static readonly PropertyInfo Value = typeof(JsonProperty).GetProperty(nameof(JsonProperty.Value));
-            public static readonly MethodInfo NameEquals = typeof(JsonProperty).GetMethod(nameof(JsonProperty.NameEquals), new[] { typeof(string) });
-            public static readonly PropertyInfo ValueKind = typeof(JsonElement).GetProperty(nameof(JsonElement.ValueKind));
-            public static readonly PropertyInfo Item = typeof(JsonElement).GetProperty("Item");
-        }
-
-        private static class JsonElementInfo
-        {
-            public static readonly MethodInfo GetString = typeof(JsonElement).GetMethod(nameof(JsonElement.GetString));
-
-            public static readonly MethodInfo GetDateTime = typeof(JsonElement).GetMethod(nameof(JsonElement.GetDateTime));
-
-            public static readonly MethodInfo GetDateTimeOffset = typeof(JsonElement).GetMethod(nameof(JsonElement.GetDateTimeOffset));
-
-            public static readonly MethodInfo GetBoolean = typeof(JsonElement).GetMethod(nameof(JsonElement.GetBoolean));
-
-            public static readonly MethodInfo GetGuid = typeof(JsonElement).GetMethod(nameof(JsonElement.GetGuid));
-
-            public static readonly MethodInfo GetDouble = typeof(JsonElement).GetMethod(nameof(JsonElement.GetDouble));
-
-            public static readonly MethodInfo GetSingle = typeof(JsonElement).GetMethod(nameof(JsonElement.GetSingle));
-
-            public static readonly MethodInfo GetByte = typeof(JsonElement).GetMethod(nameof(JsonElement.GetByte));
-
-            public static readonly MethodInfo GetDecimal = typeof(JsonElement).GetMethod(nameof(JsonElement.GetDecimal));
-
-            public static readonly MethodInfo GetInt16 = typeof(JsonElement).GetMethod(nameof(JsonElement.GetInt16));
-
-            public static readonly MethodInfo GetInt32 = typeof(JsonElement).GetMethod(nameof(JsonElement.GetInt32));
-
-            public static readonly MethodInfo GetInt64 = typeof(JsonElement).GetMethod(nameof(JsonElement.GetInt64));
-
-            public static readonly MethodInfo GetSByte = typeof(JsonElement).GetMethod(nameof(JsonElement.GetSByte));
-
-            public static readonly MethodInfo GetUInt16 = typeof(JsonElement).GetMethod(nameof(JsonElement.GetUInt16));
-
-            public static readonly MethodInfo GetUInt32 = typeof(JsonElement).GetMethod(nameof(JsonElement.GetUInt32));
-
-            public static readonly MethodInfo GetUInt64 = typeof(JsonElement).GetMethod(nameof(JsonElement.GetUInt64));
-
-            public static readonly MethodInfo GetArrayLength = typeof(JsonElement).GetMethod(nameof(JsonElement.GetArrayLength));
-
-            public static readonly MethodInfo EnumerateObject = typeof(JsonElement).GetMethod(nameof(JsonElement.EnumerateObject));
-
-            public static readonly PropertyInfo Current = typeof(JsonElement.ObjectEnumerator).GetProperty(nameof(JsonElement.ObjectEnumerator.Current));
-
-            public static readonly MethodInfo MoveNext = typeof(JsonElement.ObjectEnumerator).GetMethod(nameof(JsonElement.ObjectEnumerator.MoveNext));
         }
     }
 
