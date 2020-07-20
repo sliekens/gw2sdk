@@ -86,42 +86,88 @@ namespace GW2SDK.Impl.JsonReaders
 
         public Expression AssignArray(Expression arrayExpr, Expression indexExpr, Expression valueExpr) => Assign(ArrayAccess(arrayExpr, indexExpr), valueExpr);
 
-        public void Map(string propertyName, Expression<Func<TObject, IEnumerable<int>>> propertyExpression)
+        public void Map(
+            string propertyName,
+            Expression<Func<TObject, IEnumerable<int>?>> propertyExpression,
+            PropertySignificance significance = PropertySignificance.Required)
         {
             var propertySeenExpr = Variable(typeof(bool),   $"saw {propertyName}");
             var propertyValueExpr = Variable(typeof(int[]), $"value of {propertyName}");
             var arrayLengthExpr = Variable(typeof(int),     $"length of {propertyName}");
             var indexExpr = Variable(typeof(int),           "i");
-            _readers.Add(
-                new ReaderInfo
-                {
-                    PropertySignificance = PropertySignificance.Required,
-                    PropertyName = propertyName,
-                    propertySeenExpr = propertySeenExpr,
-                    propertyValueExpr = propertyValueExpr,
-                    Destination = ((MemberExpression) propertyExpression.Body).Member,
-                    OnMatch = (jsonPropertyExpr, _) => Block(
-                        new[]
+            switch (significance)
+            {
+                case PropertySignificance.Required:
+                    _readers.Add(
+                        new ReaderInfo
                         {
-                            arrayLengthExpr,
-                            indexExpr
-                        },
-                        Assign(propertySeenExpr,  Constant(true)),
-                        Assign(indexExpr,         Constant(0)),
-                        Assign(arrayLengthExpr,   Call(JsonPropertyExpr.GetValue(jsonPropertyExpr), JsonElementInfo.GetArrayLength)),
-                        Assign(propertyValueExpr, NewArrayBounds(typeof(int), arrayLengthExpr)),
-                        Expr.For(
-                            indexExpr,
-                            arrayLengthExpr,
-                            (_, __) => AssignArray(
-                                propertyValueExpr,
-                                indexExpr,
-                                JsonElementExpr.GetInt32(MakeIndex(JsonPropertyExpr.GetValue(jsonPropertyExpr), JsonPropertyInfo.Item, new[] { indexExpr }))
+                            PropertySignificance = PropertySignificance.Required,
+                            PropertyName = propertyName,
+                            propertySeenExpr = propertySeenExpr,
+                            propertyValueExpr = propertyValueExpr,
+                            Destination = ((MemberExpression) propertyExpression.Body).Member,
+                            OnMatch = (jsonPropertyExpr, _) => Block(
+                                new[]
+                                {
+                                    arrayLengthExpr,
+                                    indexExpr
+                                },
+                                Assign(propertySeenExpr,  Constant(true)),
+                                Assign(indexExpr,         Constant(0)),
+                                Assign(arrayLengthExpr,   Call(JsonPropertyExpr.GetValue(jsonPropertyExpr), JsonElementInfo.GetArrayLength)),
+                                Assign(propertyValueExpr, NewArrayBounds(typeof(int), arrayLengthExpr)),
+                                Expr.For(
+                                    indexExpr,
+                                    arrayLengthExpr,
+                                    (_, __) => AssignArray(
+                                        propertyValueExpr,
+                                        indexExpr,
+                                        JsonElementExpr.GetInt32(
+                                            MakeIndex(JsonPropertyExpr.GetValue(jsonPropertyExpr), JsonPropertyInfo.Item, new[] { indexExpr })
+                                        )
+                                    )
+                                )
                             )
-                        )
-                    )
-                }
-            );
+                        }
+                    );
+                    break;
+                case PropertySignificance.Optional:
+                    _readers.Add(
+                        new ReaderInfo
+                        {
+                            PropertySignificance = PropertySignificance.Optional,
+                            PropertyName = propertyName,
+                            propertyValueExpr = propertyValueExpr,
+                            Destination = ((MemberExpression) propertyExpression.Body).Member,
+                            OnMatch = (jsonPropertyExpr, _) => Block(
+                                new[]
+                                {
+                                    arrayLengthExpr,
+                                    indexExpr
+                                },
+                                Assign(indexExpr,         Constant(0)),
+                                Assign(arrayLengthExpr,   Call(JsonPropertyExpr.GetValue(jsonPropertyExpr), JsonElementInfo.GetArrayLength)),
+                                Assign(propertyValueExpr, NewArrayBounds(typeof(int), arrayLengthExpr)),
+                                Expr.For(
+                                    indexExpr,
+                                    arrayLengthExpr,
+                                    (_, __) => AssignArray(
+                                        propertyValueExpr,
+                                        indexExpr,
+                                        JsonElementExpr.GetInt32(
+                                            MakeIndex(JsonPropertyExpr.GetValue(jsonPropertyExpr), JsonPropertyInfo.Item, new[] { indexExpr })
+                                        )
+                                    )
+                                )
+                            )
+                        }
+                    );
+                    break;
+                default:
+                    Ignore(propertyName);
+                    break;
+            }
+
             _needsCompilation = true;
         }
 
@@ -202,7 +248,7 @@ namespace GW2SDK.Impl.JsonReaders
                         }
                     );
                     break;
-                case PropertySignificance.Ignored:
+                default:
                     Ignore(propertyName);
                     break;
             }

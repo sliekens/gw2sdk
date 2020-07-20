@@ -1,19 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Net.Http;
+using System.Text.Json;
 using System.Threading.Tasks;
 using GW2SDK.Annotations;
 using GW2SDK.Http;
 using GW2SDK.Impl;
-using GW2SDK.Impl.JsonConverters;
+using GW2SDK.Impl.JsonReaders;
 using GW2SDK.Titles.Impl;
-using Newtonsoft.Json;
 
 namespace GW2SDK.Titles
 {
     [PublicAPI]
     public sealed class TitleService
     {
+        private static readonly IJsonReader<int> KeyReader = new Int32JsonReader();
+        private static readonly IJsonReader<IEnumerable<int>> KeyArrayReader = new JsonArrayReader<int>(KeyReader);
+        private static readonly IJsonReader<Title> ValueReader = TitleJsonReader.Instance;
+        private static readonly IJsonReader<IEnumerable<Title>> ValueArrayReader = new JsonArrayReader<Title>(ValueReader);
+
         private readonly HttpClient _http;
 
         public TitleService(HttpClient http)
@@ -26,10 +31,11 @@ namespace GW2SDK.Titles
             var request = new TitlesRequest();
             using var response = await _http.SendAsync(request).ConfigureAwait(false);
             response.EnsureSuccessStatusCode();
-            var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
+            await using var json = await response.Content.ReadAsStreamAsync().ConfigureAwait(false);
+            using var jsonDocument = await JsonDocument.ParseAsync(json).ConfigureAwait(false);
             var context = response.Headers.GetCollectionContext();
             var list = new List<Title>(context.ResultCount);
-            JsonConvert.PopulateObject(json, list, Json.DefaultJsonSerializerSettings);
+            list.AddRange(ValueArrayReader.Read(jsonDocument.RootElement));
             return new DataTransferCollection<Title>(list, context);
         }
 
@@ -38,10 +44,11 @@ namespace GW2SDK.Titles
             var request = new TitlesIndexRequest();
             using var response = await _http.SendAsync(request).ConfigureAwait(false);
             response.EnsureSuccessStatusCode();
-            var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
+            await using var json = await response.Content.ReadAsStreamAsync().ConfigureAwait(false);
+            using var jsonDocument = await JsonDocument.ParseAsync(json).ConfigureAwait(false);
             var context = response.Headers.GetCollectionContext();
             var list = new List<int>(context.ResultCount);
-            JsonConvert.PopulateObject(json, list, Json.DefaultJsonSerializerSettings);
+            list.AddRange(KeyArrayReader.Read(jsonDocument.RootElement));
             return new DataTransferCollection<int>(list, context);
         }
 
@@ -50,8 +57,9 @@ namespace GW2SDK.Titles
             var request = new TitleByIdRequest(titleId);
             using var response = await _http.SendAsync(request).ConfigureAwait(false);
             response.EnsureSuccessStatusCode();
-            var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
-            return JsonConvert.DeserializeObject<Title>(json, Json.DefaultJsonSerializerSettings);
+            await using var json = await response.Content.ReadAsStreamAsync().ConfigureAwait(false);
+            using var jsonDocument = await JsonDocument.ParseAsync(json).ConfigureAwait(false);
+            return ValueReader.Read(jsonDocument.RootElement);
         }
 
         public async Task<IDataTransferCollection<Title>> GetTitlesByIds(IReadOnlyCollection<int> titleIds)
@@ -69,10 +77,11 @@ namespace GW2SDK.Titles
             var request = new TitlesByIdsRequest(titleIds);
             using var response = await _http.SendAsync(request).ConfigureAwait(false);
             response.EnsureSuccessStatusCode();
-            var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
+            await using var json = await response.Content.ReadAsStreamAsync().ConfigureAwait(false);
+            using var jsonDocument = await JsonDocument.ParseAsync(json).ConfigureAwait(false);
             var context = response.Headers.GetCollectionContext();
             var list = new List<Title>(context.ResultCount);
-            JsonConvert.PopulateObject(json, list, Json.DefaultJsonSerializerSettings);
+            list.AddRange(ValueArrayReader.Read(jsonDocument.RootElement));
             return new DataTransferCollection<Title>(list, context);
         }
 
@@ -81,10 +90,11 @@ namespace GW2SDK.Titles
             var request = new TitlesByPageRequest(pageIndex, pageSize);
             using var response = await _http.SendAsync(request).ConfigureAwait(false);
             response.EnsureSuccessStatusCode();
-            var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
+            await using var json = await response.Content.ReadAsStreamAsync().ConfigureAwait(false);
+            using var jsonDocument = await JsonDocument.ParseAsync(json).ConfigureAwait(false);
             var pageContext = response.Headers.GetPageContext();
             var list = new List<Title>(pageContext.PageSize);
-            JsonConvert.PopulateObject(json, list, Json.DefaultJsonSerializerSettings);
+            list.AddRange(ValueArrayReader.Read(jsonDocument.RootElement));
             return new DataTransferPage<Title>(list, pageContext);
         }
     }

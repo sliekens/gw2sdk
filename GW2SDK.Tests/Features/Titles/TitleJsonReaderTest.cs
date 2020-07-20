@@ -1,23 +1,19 @@
 ﻿using GW2SDK.Tests.Features.Titles.Fixtures;
 using GW2SDK.Tests.TestInfrastructure;
 using GW2SDK.Titles;
-using Newtonsoft.Json;
+using GW2SDK.Titles.Impl;
 using Xunit;
-using Xunit.Abstractions;
 
 namespace GW2SDK.Tests.Features.Titles
 {
-    public class TitleTest : IClassFixture<TitlesFixture>
+    public class TitleJsonReaderTest : IClassFixture<TitlesFixture>
     {
-        public TitleTest(TitlesFixture fixture, ITestOutputHelper output)
+        public TitleJsonReaderTest(TitlesFixture fixture)
         {
             _fixture = fixture;
-            _output = output;
         }
 
         private readonly TitlesFixture _fixture;
-
-        private readonly ITestOutputHelper _output;
 
         private static class TitleFact
         {
@@ -44,19 +40,18 @@ namespace GW2SDK.Tests.Features.Titles
         [Trait("Importance", "Critical")]
         public void Titles_can_be_created_from_json()
         {
-            var settings = new JsonSerializerSettingsBuilder()
-                .UseTraceWriter(_output)
-                .ThrowErrorOnMissingMember()
-                .Build();
+            var sut = TitleJsonReader.Instance;
 
-            AssertEx.ForEach(_fixture.Titles,
+            AssertEx.ForEach(
+                _fixture.Titles,
                 json =>
                 {
-                    var actual = JsonConvert.DeserializeObject<Title>(json, settings);
+                    var actual = sut.Read(json);
                     TitleFact.Id_is_positive(actual);
                     TitleFact.Name_is_not_empty(actual);
                     TitleFact.Can_be_unlocked_by_achievements_or_achievement_points(actual);
-                });
+                }
+            );
         }
     }
 }

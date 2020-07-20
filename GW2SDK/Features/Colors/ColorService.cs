@@ -7,9 +7,7 @@ using GW2SDK.Annotations;
 using GW2SDK.Colors.Impl;
 using GW2SDK.Http;
 using GW2SDK.Impl;
-using GW2SDK.Impl.JsonConverters;
 using GW2SDK.Impl.JsonReaders;
-using Newtonsoft.Json;
 
 namespace GW2SDK.Colors
 {
