@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Net.Http;
+using System.Text.Json;
 using System.Threading.Tasks;
 using GW2SDK.Annotations;
 using GW2SDK.Colors.Impl;
 using GW2SDK.Http;
 using GW2SDK.Impl;
 using GW2SDK.Impl.JsonConverters;
+using GW2SDK.Impl.JsonReaders;
 using Newtonsoft.Json;
 
 namespace GW2SDK.Colors
@@ -14,6 +16,11 @@ namespace GW2SDK.Colors
     [PublicAPI]
     public sealed class ColorService
     {
+        private static readonly IJsonReader<int> KeyReader = new Int32JsonReader();
+        private static readonly IJsonReader<IEnumerable<int>> KeyArrayReader = new JsonArrayReader<int>(KeyReader);
+        private static readonly IJsonReader<Color> ValueReader = ColorJsonReader.Instance;
+        private static readonly IJsonReader<IEnumerable<Color>> ValueArrayReader = new JsonArrayReader<Color>(ValueReader);
+
         private readonly HttpClient _http;
 
         public ColorService(HttpClient http)
@@ -26,10 +33,11 @@ namespace GW2SDK.Colors
             var request = new ColorsRequest();
             using var response = await _http.SendAsync(request).ConfigureAwait(false);
             response.EnsureSuccessStatusCode();
-            var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
+            await using var json = await response.Content.ReadAsStreamAsync().ConfigureAwait(false);
+            using var jsonDocument = await JsonDocument.ParseAsync(json).ConfigureAwait(false);
             var context = response.Headers.GetCollectionContext();
             var list = new List<Color>(context.ResultCount);
-            JsonConvert.PopulateObject(json, list, Json.DefaultJsonSerializerSettings);
+            list.AddRange(ValueArrayReader.Read(jsonDocument.RootElement));
             return new DataTransferCollection<Color>(list, context);
         }
 
@@ -38,10 +46,11 @@ namespace GW2SDK.Colors
             var request = new ColorsIndexRequest();
             using var response = await _http.SendAsync(request).ConfigureAwait(false);
             response.EnsureSuccessStatusCode();
-            var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
+            await using var json = await response.Content.ReadAsStreamAsync().ConfigureAwait(false);
+            using var jsonDocument = await JsonDocument.ParseAsync(json).ConfigureAwait(false);
             var context = response.Headers.GetCollectionContext();
             var list = new List<int>(context.ResultCount);
-            JsonConvert.PopulateObject(json, list, Json.DefaultJsonSerializerSettings);
+            list.AddRange(KeyArrayReader.Read(jsonDocument.RootElement));
             return new DataTransferCollection<int>(list, context);
         }
 
@@ -50,8 +59,9 @@ namespace GW2SDK.Colors
             var request = new ColorByIdRequest(colorId);
             using var response = await _http.SendAsync(request).ConfigureAwait(false);
             response.EnsureSuccessStatusCode();
-            var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
-            return JsonConvert.DeserializeObject<Color>(json, Json.DefaultJsonSerializerSettings);
+            await using var json = await response.Content.ReadAsStreamAsync().ConfigureAwait(false);
+            using var jsonDocument = await JsonDocument.ParseAsync(json).ConfigureAwait(false);
+            return ValueReader.Read(jsonDocument.RootElement);
         }
 
         public async Task<IDataTransferCollection<Color>> GetColorsByIds(IReadOnlyCollection<int> colorIds)
@@ -69,10 +79,11 @@ namespace GW2SDK.Colors
             var request = new ColorsByIdsRequest(colorIds);
             using var response = await _http.SendAsync(request).ConfigureAwait(false);
             response.EnsureSuccessStatusCode();
-            var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
+            await using var json = await response.Content.ReadAsStreamAsync().ConfigureAwait(false);
+            using var jsonDocument = await JsonDocument.ParseAsync(json).ConfigureAwait(false);
             var context = response.Headers.GetCollectionContext();
             var list = new List<Color>(context.ResultCount);
-            JsonConvert.PopulateObject(json, list, Json.DefaultJsonSerializerSettings);
+            list.AddRange(ValueArrayReader.Read(jsonDocument.RootElement));
             return new DataTransferCollection<Color>(list, context);
         }
 
@@ -81,10 +92,11 @@ namespace GW2SDK.Colors
             var request = new ColorsByPageRequest(pageIndex, pageSize);
             using var response = await _http.SendAsync(request).ConfigureAwait(false);
             response.EnsureSuccessStatusCode();
-            var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
+            await using var json = await response.Content.ReadAsStreamAsync().ConfigureAwait(false);
+            using var jsonDocument = await JsonDocument.ParseAsync(json).ConfigureAwait(false);
             var pageContext = response.Headers.GetPageContext();
             var list = new List<Color>(pageContext.PageSize);
-            JsonConvert.PopulateObject(json, list, Json.DefaultJsonSerializerSettings);
+            list.AddRange(ValueArrayReader.Read(jsonDocument.RootElement));
             return new DataTransferPage<Color>(list, pageContext);
         }
     }
