@@ -6,16 +6,6 @@ using static GW2SDK.Impl.Json.ExpressionDebug;
 
 namespace GW2SDK.Impl.Json
 {
-    internal static class JsonPropertyExpr
-    {
-        internal static Expression GetValue(Expression jsonPropertyExpression)
-        {
-            AssertType<JsonProperty>(jsonPropertyExpression);
-            return Property(jsonPropertyExpression, JsonPropertyInfo.Value);
-        }
-
-    }
-
     internal static class JsonElementExpr
     {
         internal static MethodCallExpression GetRawText(Expression jsonElementExpr)
@@ -35,6 +25,55 @@ namespace GW2SDK.Impl.Json
             AssertType<JsonElement>(jsonElementExpr);
             return Call(jsonElementExpr, JsonElementInfo.GetArrayLength);
         }
+
+        internal static Expression EnumerateObject(Expression jsonElementExpr)
+        {
+            AssertType<JsonElement>(jsonElementExpr);
+            return Call(jsonElementExpr, JsonElementInfo.EnumerateObject);
+        }
+        
+
+        internal static Expression GetCurrent(ParameterExpression objectEnumeratorExpr)
+        {
+            AssertType<JsonElement.ObjectEnumerator>(objectEnumeratorExpr);
+            return Property(objectEnumeratorExpr, JsonElementInfo.Current);
+        }
+
+        internal static MethodCallExpression MoveNext(ParameterExpression objectEnumeratorExpr)
+        {
+            AssertType<JsonElement.ObjectEnumerator>(objectEnumeratorExpr);
+            return Call(objectEnumeratorExpr, JsonElementInfo.MoveNext);
+        }
+
+        internal static Expression ForEachProperty(Expression jsonElementExpr, ParameterExpression current, Func<LabelTarget, Expression> body)
+        {
+            AssertType<JsonElement>(jsonElementExpr);
+            AssertType<JsonProperty>(current);
+            var enumerator = Variable(typeof(JsonElement.ObjectEnumerator), "enumerator");
+            var breakLabel = Label();
+            var continueLabelExpr = Label();
+            return Block(
+                new[]
+                {
+                    enumerator
+                },
+                Assign(enumerator, EnumerateObject(jsonElementExpr)),
+                Loop(
+                    IfThenElse(
+                        MoveNext(enumerator),
+                        Block(
+                            new[] { current },
+                            Assign(current, GetCurrent(enumerator)),
+                            body(continueLabelExpr)
+                        ),
+                        Break(breakLabel)
+                    ),
+                    breakLabel,
+                    continueLabelExpr
+                )
+            );
+        }
+
 
         /// <summary>
         ///     An expression that returns the value of a JsonElement as a string, or throws JsonException.

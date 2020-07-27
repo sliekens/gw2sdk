@@ -12,7 +12,7 @@ namespace GW2SDK.Titles.Impl
             Map("name", to => to.Name);
             // This property should not be used because some titles can be unlocked by more than one achievement. Use 'achievements' instead.
             Ignore("achievement");
-            Map("achievements", to => to.Achievements, PropertySignificance.Optional);
+            Map("achievements", to => to.Achievements, MappingSignificance.Optional);
             Map("ap_required",  to => to.AchievementPointsRequired);
             Compile();
         }

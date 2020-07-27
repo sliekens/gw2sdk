@@ -15,7 +15,7 @@ namespace GW2SDK.Colors.Impl
             Map("cloth",    to => to.Cloth,   ColorInfoJsonReader.Instance);
             Map("leather",  to => to.Leather, ColorInfoJsonReader.Instance);
             Map("metal",    to => to.Metal,   ColorInfoJsonReader.Instance);
-            Map("fur",      to => to.Fur,     ColorInfoJsonReader.Instance, PropertySignificance.Optional);
+            Map("fur",      to => to.Fur,     ColorInfoJsonReader.Instance, MappingSignificance.Optional);
             Map("item",     to => to.Item);
 
             // TODO: map color categories to a value object with 3 enum properties instead of a mixed enum collection

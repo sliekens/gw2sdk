@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Text.Json;
 using GW2SDK.Impl.JsonReaders;
+using JsonValueKind = System.Text.Json.JsonValueKind;
 
 namespace GW2SDK.Traits.Impl
 {

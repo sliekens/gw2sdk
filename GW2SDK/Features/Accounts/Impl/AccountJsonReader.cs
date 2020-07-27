@@ -13,7 +13,7 @@ namespace GW2SDK.Accounts.Impl
             Map("last_modified",       to => to.LastModified);
             Map("world",               to => to.World);
             Map("guilds",              to => to.Guilds);
-            Map("guild_leader",        to => to.GuildLeader, PropertySignificance.Optional);
+            Map("guild_leader",        to => to.GuildLeader, MappingSignificance.Optional);
             Map("created",             to => to.Created);
             Map("access",              to => to.Access, new JsonStringEnumReader<ProductName>());
             Map("commander",           to => to.Commander);

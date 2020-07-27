@@ -48,5 +48,7 @@ namespace GW2SDK.Impl.Json
         internal static readonly PropertyInfo Current = typeof(JsonElement.ObjectEnumerator).GetProperty(nameof(JsonElement.ObjectEnumerator.Current));
 
         internal static readonly MethodInfo MoveNext = typeof(JsonElement.ObjectEnumerator).GetMethod(nameof(JsonElement.ObjectEnumerator.MoveNext));
+
+        internal static readonly PropertyInfo Item = typeof(JsonElement).GetProperty(@"Item");
     }
 }

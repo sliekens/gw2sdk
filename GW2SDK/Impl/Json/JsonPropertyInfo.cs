@@ -10,7 +10,5 @@ namespace GW2SDK.Impl.Json
         internal static readonly PropertyInfo Value = typeof(JsonProperty).GetProperty(nameof(JsonProperty.Value));
 
         internal static readonly MethodInfo NameEquals = typeof(JsonProperty).GetMethod(nameof(JsonProperty.NameEquals), new[] { typeof(string) });
-
-        internal static readonly PropertyInfo Item = typeof(JsonElement).GetProperty("Item");
     }
 }

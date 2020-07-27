@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text.Json;
 using System.Threading.Tasks;
 using GW2SDK.Titles;
 using GW2SDK.Tests.TestInfrastructure;
