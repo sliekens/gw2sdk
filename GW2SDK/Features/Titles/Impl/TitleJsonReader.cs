@@ -5,8 +5,6 @@ namespace GW2SDK.Titles.Impl
 {
     public class TitleJsonReader : JsonObjectReader2<Title>
     {
-        public static IJsonReader<Title> Instance { get; } = new TitleJsonReader();
-
         private TitleJsonReader()
         {
             Configure(
@@ -18,8 +16,10 @@ namespace GW2SDK.Titles.Impl
                     title.Ignore("achievement");
                     title.Map("achievements", to => to.Achievements, MappingSignificance.Optional);
                     title.Map("ap_required",  to => to.AchievementPointsRequired);
-                });
-            
+                }
+            );
         }
+
+        public static IJsonReader<Title> Instance { get; } = new TitleJsonReader();
     }
 }
