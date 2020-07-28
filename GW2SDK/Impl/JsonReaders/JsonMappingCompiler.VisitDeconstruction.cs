@@ -5,9 +5,9 @@ using static System.Linq.Expressions.Expression;
 
 namespace GW2SDK.Impl.JsonReaders
 {
-    public partial class JsonReaderCompiler<TObject>
+    public partial class JsonMappingCompiler<TObject>
     {
-        public void VisitAggregate<TValue>(JsonAggregateMapping<TValue> mapping)
+        public void VisitDeconstruction<TValue>(JsonDeconstructionMapping<TValue> mapping)
         {
             var name = mapping.ParentNode?.Name ?? mapping.Name;
             var nodes = new List<PropertyNode>();
@@ -19,12 +19,12 @@ namespace GW2SDK.Impl.JsonReaders
             }
 
             Nodes.Push(
-                new RootNode
+                new DeconstructorNode
                 {
                     Mapping = mapping,
                     Children = nodes,
                     UnexpectedPropertyBehavior = mapping.UnexpectedPropertyBehavior,
-                    ValueSeenExpr = Variable(typeof(bool), $"{name}_seen")
+                    ObjectSeenExpr = Variable(typeof(bool), $"{name}_object_seen")
                 }
             );
         }

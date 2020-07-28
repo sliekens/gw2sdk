@@ -8,12 +8,22 @@ namespace GW2SDK.Impl.JsonReaders.Mappings
 
         public UnexpectedPropertyBehavior UnexpectedPropertyBehavior { get; set; } = UnexpectedPropertyBehavior.Error;
 
+        public override void Accept(IJsonMappingVisitor visitor) => visitor.VisitObject(this);
+
         public List<JsonPropertyMapping> Children { get; } = new List<JsonPropertyMapping>();
 
-        public override void Accept(IJsonMappingVisitor visitor)
+        public void Ignore(string propertyName)
         {
-            visitor.VisitObject(this);
+            var jsonPropertyMapping = new JsonPropertyMapping
+            {
+                Name = propertyName,
+                Significance = MappingSignificance.Ignored,
+                ParentNode = this
+            };
+
+            Children.Add(jsonPropertyMapping);
         }
+
 
         public override string JsonPath => ParentNode?.JsonPath ?? "$";
     }

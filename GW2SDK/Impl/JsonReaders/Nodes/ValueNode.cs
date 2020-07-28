@@ -1,27 +1,18 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq.Expressions;
-using GW2SDK.Impl.Json;
 using GW2SDK.Impl.JsonReaders.Mappings;
+using static System.Linq.Expressions.Expression;
 
 namespace GW2SDK.Impl.JsonReaders.Nodes
 {
-    public class LeafNode : JsonNode
+    public class ValueNode : JsonNode
     {
         public ParameterExpression ActualValueExpr { get; set; } = default!;
 
-        public Expression MapExpr(Expression jsonElementExpr)
-        {
-            // TODO: other types
-            switch (Mapping.Significance)
-            {
-                case MappingSignificance.Required:
-                    return Expression.Assign(ActualValueExpr, JsonElementExpr.GetInt32(jsonElementExpr));
-                case MappingSignificance.Optional:
-                    return Expression.Assign(ActualValueExpr, JsonElementExpr.GetInt32OrNull(jsonElementExpr));
-                default:
-                    return Expression.Empty();
-            }
-        }
+        public Func<Expression, Expression> MapExprFactory { get; set; } = expression => Empty();
+
+        public Expression MapExpr(Expression jsonElementExpr) => MapExprFactory(jsonElementExpr);
 
         public override IEnumerable<ParameterExpression> GetVariables()
         {
@@ -44,7 +35,7 @@ namespace GW2SDK.Impl.JsonReaders.Nodes
                 yield break;
             }
 
-            yield return Expression.Bind(Mapping.Destination, ActualValueExpr);
+            yield return Bind(Mapping.Destination, ActualValueExpr);
         }
     }
 }

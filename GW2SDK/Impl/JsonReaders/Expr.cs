@@ -54,10 +54,11 @@ namespace GW2SDK.Impl.JsonReaders
             return ifFalse is null ? Expression.IfThen(test, ifTrue) : Expression.IfThenElse(test, ifTrue, ifFalse);
         }
 
-        internal static Expression UnexpectedProperty(Expression jsonPropertyExpr)
+        internal static Expression UnexpectedProperty(Expression jsonPathExpr, Expression jsonPropertyExpr)
         {
-            var format = Expression.Constant("Unexpected property '{0}'.", typeof(string));
-            return StringExpr.Format(format, Expression.Property(jsonPropertyExpr, JsonPropertyInfo.Name));
+            var format = Expression.Constant("Unexpected property '{0}.{1}'.", typeof(string));
+            var nameExpr = Expression.Property(jsonPropertyExpr, JsonPropertyInfo.Name);
+            return StringExpr.Format(format, jsonPathExpr, nameExpr);
         }
 
         internal static Expression MissingMember(Expression typeNameExpr, Expression member)

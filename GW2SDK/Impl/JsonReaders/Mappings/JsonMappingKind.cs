@@ -4,11 +4,11 @@
     {
         Raw,
 
-        Aggregate,
+        Object,
 
         Array,
 
-        Object,
+        Deconstruction,
 
         Value,
 

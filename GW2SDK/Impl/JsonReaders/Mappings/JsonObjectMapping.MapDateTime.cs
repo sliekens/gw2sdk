@@ -5,11 +5,11 @@ namespace GW2SDK.Impl.JsonReaders.Mappings
 {
     public partial class JsonObjectMapping<TValue>
     {
-        public void Map(string propertyName, Expression<Func<TValue, int>> propertyExpression)
+        public void Map(string propertyName, Expression<Func<TValue, DateTime>> propertyExpression)
         {
-            var jsonValueMapping = new JsonValueMapping<int>
+            var jsonValueMapping = new JsonValueMapping<DateTime>
             {
-                ValueKind = JsonValueMappingKind.Int32,
+                ValueKind = JsonValueMappingKind.DateTime,
                 Significance = MappingSignificance.Required
             };
 
@@ -26,11 +26,11 @@ namespace GW2SDK.Impl.JsonReaders.Mappings
             Children.Add(jsonPropertyMapping);
         }
 
-        public void Map(string propertyName, Expression<Func<TValue, int?>> propertyExpression)
+        public void Map(string propertyName, Expression<Func<TValue, DateTime?>> propertyExpression)
         {
-            var jsonValueMapping = new JsonValueMapping<int?>
+            var jsonValueMapping = new JsonValueMapping<DateTime?>
             {
-                ValueKind = JsonValueMappingKind.Int32,
+                ValueKind = JsonValueMappingKind.DateTime,
                 Significance = MappingSignificance.Optional
             };
 

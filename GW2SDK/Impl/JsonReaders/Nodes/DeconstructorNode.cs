@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Text.Json;
@@ -9,16 +8,11 @@ using static System.Linq.Expressions.Expression;
 
 namespace GW2SDK.Impl.JsonReaders.Nodes
 {
-    public class ObjectNode : JsonNode
+    public class DeconstructorNode : JsonNode
     {
-        public Type ObjectType { get; set; } = typeof(object);
-
-        public ParameterExpression ActualValueExpr { get; set; } = default!;
-
         public List<PropertyNode> Children { get; set; } = new List<PropertyNode>();
 
         public UnexpectedPropertyBehavior UnexpectedPropertyBehavior { get; set; }
-
         public ParameterExpression ObjectSeenExpr { get; set; } = default!;
 
         public Expression DeconstructExpr(Expression jsonElementExpr)
@@ -53,65 +47,12 @@ namespace GW2SDK.Impl.JsonReaders.Nodes
             }
         }
 
-        public Expression MapExpr(Expression jsonElementExpr) => Assign(ActualValueExpr, CreateExpr(jsonElementExpr));
-
-        public Expression CreateExpr(Expression jsonElementExpr)
-        {
-            if (Mapping.Significance == MappingSignificance.Ignored)
-            {
-                return Empty();
-            }
-
-            var source = new List<Expression>();
-            source.Add(
-                IfThen(
-                    Equal(JsonElementExpr.GetValueKind(jsonElementExpr), Constant(JsonValueKind.Object)),
-                    Block(
-                        Assign(ObjectSeenExpr, Constant(true)),
-                        Children.Count == 0
-                            ? Empty()
-                            : JsonElementExpr.ForEachProperty(
-                                jsonElementExpr,
-                                (jsonPropertyExpr, @continue) => MapPropertyExpression(jsonPropertyExpr, @continue)
-                            )
-                    )
-                )
-            );
-            source.AddRange(GetValidations());
-            source.Add(CreateInstanceExpr());
-
-            return Block(
-                GetVariables(),
-                source
-            );
-
-            Expression MapPropertyExpression(Expression jsonPropertyExpr, LabelTarget @continue, int index = 0)
-            {
-                var child = Children[index];
-                return IfThenElse(
-                    child.TestExpr(jsonPropertyExpr),
-                    child.MapExpr(jsonPropertyExpr),
-                    index + 1 < Children.Count
-                        ? MapPropertyExpression(jsonPropertyExpr, @continue, index + 1)
-                        : UnexpectedPropertyBehavior == UnexpectedPropertyBehavior.Error
-                            ? Expr.ThrowJsonException(Expr.UnexpectedProperty(Constant(Mapping.JsonPath, typeof(string)), jsonPropertyExpr))
-                            : Continue(@continue)
-                );
-            }
-        }
-
-        public Expression CreateInstanceExpr() =>
-            MemberInit(
-                New(ObjectType),
-                GetBindings()
-            );
 
         public override IEnumerable<ParameterExpression> GetVariables()
         {
             if (Mapping.Significance != MappingSignificance.Ignored)
             {
                 yield return ObjectSeenExpr;
-                yield return ActualValueExpr;
                 foreach (var child in Children)
                 {
                     foreach (var variable in child.GetVariables())
@@ -148,22 +89,10 @@ namespace GW2SDK.Impl.JsonReaders.Nodes
                             Block(childValidators)
                         );
                     }
-
                     break;
             }
         }
 
-        public override IEnumerable<MemberBinding> GetBindings()
-        {
-            if (Mapping.Significance == MappingSignificance.Ignored)
-            {
-                yield break;
-            }
-
-            foreach (var binding in Children.SelectMany(child => child.GetBindings()))
-            {
-                yield return binding;
-            }
-        }
+        public override IEnumerable<MemberBinding> GetBindings() => Children.SelectMany(child => child.GetBindings());
     }
 }

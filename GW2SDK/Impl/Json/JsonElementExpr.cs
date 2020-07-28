@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq.Expressions;
 using System.Text.Json;
+using GW2SDK.Impl.JsonReaders;
 using static System.Linq.Expressions.Expression;
 using static GW2SDK.Impl.Json.ExpressionDebug;
 
@@ -638,6 +639,15 @@ namespace GW2SDK.Impl.Json
 
         internal static Expression GetUInt64OrNull(Expression jsonElementExpr) => GetValueOrNull<ulong?>(jsonElementExpr, GetUInt64(jsonElementExpr));
 
+        internal static Expression GetCustom<TValue>(Expression jsonElementExpr, IJsonReader<TValue> jsonReader)
+        {
+            AssertType<JsonElement>(jsonElementExpr);
+            var readerExpr = Constant(jsonReader);
+            var readInfo = jsonReader.GetType().GetMethod("Read", new[] { typeof(JsonElement).MakeByRefType() });
+            return Call(readerExpr, readInfo, jsonElementExpr);
+        }
+
+        internal static Expression GetCustomOrNull<TValue>(Expression jsonElementExpr, IJsonReader<TValue> jsonReader) => GetValueOrNull<TValue>(jsonElementExpr, GetCustom(jsonElementExpr, jsonReader));
 
         private static Expression GetValueOrNull<TValue>(Expression jsonElementExpr, Expression ifNotNull)
         {

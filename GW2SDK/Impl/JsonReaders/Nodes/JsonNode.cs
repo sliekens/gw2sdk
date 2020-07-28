@@ -8,8 +8,6 @@ namespace GW2SDK.Impl.JsonReaders.Nodes
     {
         public JsonMapping Mapping { get; set; } = default!;
 
-        public ParameterExpression ValueSeenExpr { get; set; } = default!;
-
         public abstract IEnumerable<ParameterExpression> GetVariables();
 
         public abstract IEnumerable<Expression> GetValidations();
