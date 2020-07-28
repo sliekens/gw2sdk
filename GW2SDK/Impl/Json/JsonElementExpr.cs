@@ -45,11 +45,11 @@ namespace GW2SDK.Impl.Json
             return Call(objectEnumeratorExpr, JsonElementInfo.MoveNext);
         }
 
-        internal static Expression ForEachProperty(Expression jsonElementExpr, ParameterExpression current, Func<LabelTarget, Expression> body)
+        internal static Expression ForEachProperty(Expression jsonElementExpr, Func<Expression, LabelTarget, Expression> body)
         {
             AssertType<JsonElement>(jsonElementExpr);
-            AssertType<JsonProperty>(current);
-            var enumerator = Variable(typeof(JsonElement.ObjectEnumerator), "enumerator");
+            var currentExpr = Variable(typeof(JsonProperty), "property");
+            var enumerator = Variable(typeof(JsonElement.ObjectEnumerator), $"{currentExpr.Name}_enumerator");
             var breakLabel = Label();
             var continueLabelExpr = Label();
             return Block(
@@ -62,9 +62,9 @@ namespace GW2SDK.Impl.Json
                     IfThenElse(
                         MoveNext(enumerator),
                         Block(
-                            new[] { current },
-                            Assign(current, GetCurrent(enumerator)),
-                            body(continueLabelExpr)
+                            new[] { currentExpr },
+                            Assign(currentExpr, GetCurrent(enumerator)),
+                            body(currentExpr, continueLabelExpr)
                         ),
                         Break(breakLabel)
                     ),

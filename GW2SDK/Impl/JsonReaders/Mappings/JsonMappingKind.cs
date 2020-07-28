@@ -10,6 +10,8 @@
 
         Object,
 
-        Value
+        Value,
+
+        Property
     }
 }

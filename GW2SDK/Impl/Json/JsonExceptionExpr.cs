@@ -8,9 +8,14 @@ namespace GW2SDK.Impl.Json
         internal static Expression ThrowJsonException(Expression messageExpr)
         {
             ExpressionDebug.AssertType<string>(messageExpr);
-            var constructorInfo = JsonExceptionInfo.JsonExceptionConstructor;
-            var exception = New(constructorInfo, messageExpr);
+            var exception = Create(messageExpr);
             return Throw(exception, exception.Type);
+        }
+
+        internal static NewExpression Create(Expression messageExpr)
+        {
+            ExpressionDebug.AssertType<string>(messageExpr);
+            return New(JsonExceptionInfo.JsonExceptionConstructor, messageExpr);
         }
     }
 }

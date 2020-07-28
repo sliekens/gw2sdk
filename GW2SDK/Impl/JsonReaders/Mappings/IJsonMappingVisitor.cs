@@ -7,5 +7,7 @@
         void VisitValue<TValue>(JsonValueMapping<TValue> mapping);
 
         void VisitObject<TValue>(JsonObjectMapping<TValue> mapping);
+
+        void VisitProperty(JsonPropertyMapping mapping);
     }
 }

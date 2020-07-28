@@ -5,34 +5,33 @@ namespace GW2SDK.Impl.JsonReaders.TestCase
 {
     public class MyItemReader : IJsonReader<MyItem>
     {
-        private readonly JsonAggregateMapping<MyItem> _el = new JsonAggregateMapping<MyItem>
+        private readonly JsonAggregateMapping<MyItem> _mapping = new JsonAggregateMapping<MyItem>
         {
-            Name = "RootObject"
+            Name = "$"
         };
 
         public MyItemReader()
         {
-            _el.Map("id", to => to.Id);
-            _el.Map("level", to => to.Level);
-            _el.Map(
+            _mapping.UnexpectedPropertyBehavior = UnexpectedPropertyBehavior.Ignore;
+            _mapping.Map("id", to => to.Id);
+            _mapping.Map("level", to => to.Level);
+            _mapping.Map(
                 "details",
                 details =>
                 {
                     details.Map("vendor_value", to => to.VendorValue);
-                }
+                },
+                MappingSignificance.Required
             );
             //_el.Map("upgrade", to => to.Upgrade, new MyItemUpgradeReader());
         }
 
         public MyItem Read(in JsonElement json)
         {
-            var visitor = new JsonReaderCompiler<MyItem>
-            {
-                UnexpectedPropertyBehavior = UnexpectedPropertyBehavior.Ignore
-            };
-            _el.Accept(visitor);
+            var compiler = new JsonReaderCompiler<MyItem>();
+
+            var reader = compiler.Compile(_mapping);
             
-            var reader = visitor.Source!.Compile();
             return reader(json);
         }
 
