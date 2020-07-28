@@ -54,7 +54,7 @@ namespace GW2SDK.Impl.JsonReaders
             return ifFalse is null ? Expression.IfThen(test, ifTrue) : Expression.IfThenElse(test, ifTrue, ifFalse);
         }
 
-        internal static Expression MissingMember(Expression typeNameExpr, ParameterExpression member)
+        internal static Expression MissingMember(Expression typeNameExpr, Expression member)
         {
             var format = Expression.Constant("JSON property '{0}' was unexpected for type '{1}'.", typeof(string));
             return StringExpr.Format(format, Expression.Property(member, JsonPropertyInfo.Name), typeNameExpr);

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Text.Json;
 using GW2SDK.Impl.Json;
+using GW2SDK.Impl.JsonReaders.Mappings;
 using static System.Linq.Expressions.Expression;
 
 namespace GW2SDK.Impl.JsonReaders
@@ -79,8 +80,8 @@ namespace GW2SDK.Impl.JsonReaders
                         {
                             MappingSignificance = MappingSignificance.Required,
                             PropertyName = propertyName,
-                            propertySeenExpr = propertySeenExpr,
-                            propertyValueExpr = propertyValueExpr,
+                            PropertySeenExpr = propertySeenExpr,
+                            PropertyValueExpr = propertyValueExpr,
                             Destination = ((MemberExpression) propertyExpression.Body).Member,
                             OnMatch = (jsonPropertyExpr, _) => Block(
                                 new[]
@@ -113,7 +114,7 @@ namespace GW2SDK.Impl.JsonReaders
                         {
                             MappingSignificance = MappingSignificance.Optional,
                             PropertyName = propertyName,
-                            propertyValueExpr = propertyValueExpr,
+                            PropertyValueExpr = propertyValueExpr,
                             Destination = ((MemberExpression) propertyExpression.Body).Member,
                             OnMatch = (jsonPropertyExpr, _) => Block(
                                 new[]
@@ -164,8 +165,8 @@ namespace GW2SDK.Impl.JsonReaders
                         {
                             MappingSignificance = MappingSignificance.Required,
                             PropertyName = propertyName,
-                            propertySeenExpr = propertySeenExpr,
-                            propertyValueExpr = propertyValueExpr,
+                            PropertySeenExpr = propertySeenExpr,
+                            PropertyValueExpr = propertyValueExpr,
                             Destination = ((MemberExpression) propertyExpression.Body).Member,
                             OnMatch = (jsonPropertyExpr, _) => Block(
                                 new[]
@@ -198,7 +199,7 @@ namespace GW2SDK.Impl.JsonReaders
                         {
                             MappingSignificance = MappingSignificance.Optional,
                             PropertyName = propertyName,
-                            propertyValueExpr = propertyValueExpr,
+                            PropertyValueExpr = propertyValueExpr,
                             Destination = ((MemberExpression) propertyExpression.Body).Member,
                             OnMatch = (jsonPropertyExpr, _) => Block(
                                 new[]
@@ -252,8 +253,8 @@ namespace GW2SDK.Impl.JsonReaders
                         {
                             MappingSignificance = MappingSignificance.Required,
                             PropertyName = propertyName,
-                            propertySeenExpr = propertySeenExpr,
-                            propertyValueExpr = propertyValueExpr,
+                            PropertySeenExpr = propertySeenExpr,
+                            PropertyValueExpr = propertyValueExpr,
                             Destination = ((MemberExpression) propertyExpression.Body).Member,
                             OnMatch = (jsonPropertyExpr, _) => Block(
                                 new[]
@@ -288,7 +289,7 @@ namespace GW2SDK.Impl.JsonReaders
                         {
                             MappingSignificance = MappingSignificance.Optional,
                             PropertyName = propertyName,
-                            propertyValueExpr = propertyValueExpr,
+                            PropertyValueExpr = propertyValueExpr,
                             Destination = ((MemberExpression) propertyExpression.Body).Member,
                             OnMatch = (jsonPropertyExpr, _) => Block(
                                 new[]
@@ -342,8 +343,8 @@ namespace GW2SDK.Impl.JsonReaders
                         {
                             MappingSignificance = MappingSignificance.Required,
                             PropertyName = propertyName,
-                            propertySeenExpr = propertySeenExpr,
-                            propertyValueExpr = propertyValueExpr,
+                            PropertySeenExpr = propertySeenExpr,
+                            PropertyValueExpr = propertyValueExpr,
                             Destination = ((MemberExpression) propertyExpression.Body).Member,
                             OnMatch = (jsonPropertyExpr, _) => Block(
                                 Assign(propertySeenExpr, Constant(true)),
@@ -361,7 +362,7 @@ namespace GW2SDK.Impl.JsonReaders
                         {
                             MappingSignificance = MappingSignificance.Optional,
                             PropertyName = propertyName,
-                            propertyValueExpr = propertyValueExpr,
+                            PropertyValueExpr = propertyValueExpr,
                             Destination = ((MemberExpression) propertyExpression.Body).Member,
                             OnMatch = (jsonPropertyExpr, _) => Block(
                                 Assign(
@@ -392,8 +393,8 @@ namespace GW2SDK.Impl.JsonReaders
                 {
                     MappingSignificance = significance,
                     PropertyName = propertyName,
-                    propertySeenExpr = propertySeenExpr,
-                    propertyValueExpr = propertyValueExpr,
+                    PropertySeenExpr = propertySeenExpr,
+                    PropertyValueExpr = propertyValueExpr,
                     Destination = ((MemberExpression) propertyExpression.Body).Member,
                     OnMatch = (jsonPropertyExpr, _) => Block(
                         Assign(propertySeenExpr,  Constant(true)),
@@ -413,8 +414,8 @@ namespace GW2SDK.Impl.JsonReaders
                 {
                     MappingSignificance = MappingSignificance.Required,
                     PropertyName = propertyName,
-                    propertySeenExpr = propertySeenExpr,
-                    propertyValueExpr = propertyValueExpr,
+                    PropertySeenExpr = propertySeenExpr,
+                    PropertyValueExpr = propertyValueExpr,
                     Destination = ((MemberExpression) propertyExpression.Body).Member,
                     OnMatch = (jsonPropertyExpr, _) => Block(
                         Assign(propertySeenExpr,  Constant(true)),
@@ -433,7 +434,7 @@ namespace GW2SDK.Impl.JsonReaders
                 {
                     MappingSignificance = MappingSignificance.Optional,
                     PropertyName = propertyName,
-                    propertyValueExpr = propertyValueExpr,
+                    PropertyValueExpr = propertyValueExpr,
                     Destination = ((MemberExpression) propertyExpression.Body).Member,
                     OnMatch = (jsonPropertyExpr, _) => Block(
                         Assign(propertyValueExpr, JsonElementExpr.GetSingleOrNull(JsonPropertyExpr.GetValue(jsonPropertyExpr)))
@@ -452,8 +453,8 @@ namespace GW2SDK.Impl.JsonReaders
                 {
                     MappingSignificance = MappingSignificance.Required,
                     PropertyName = propertyName,
-                    propertySeenExpr = propertySeenExpr,
-                    propertyValueExpr = propertyValueExpr,
+                    PropertySeenExpr = propertySeenExpr,
+                    PropertyValueExpr = propertyValueExpr,
                     Destination = ((MemberExpression) propertyExpression.Body).Member,
                     OnMatch = (jsonPropertyExpr, _) => Block(
                         Assign(propertySeenExpr,  Constant(true)),
@@ -472,7 +473,7 @@ namespace GW2SDK.Impl.JsonReaders
                 {
                     MappingSignificance = MappingSignificance.Optional,
                     PropertyName = propertyName,
-                    propertyValueExpr = propertyValueExpr,
+                    PropertyValueExpr = propertyValueExpr,
                     Destination = ((MemberExpression) propertyExpression.Body).Member,
                     OnMatch = (jsonPropertyExpr, _) => Block(
                         Assign(propertyValueExpr, JsonElementExpr.GetDoubleOrNull(JsonPropertyExpr.GetValue(jsonPropertyExpr)))
@@ -491,8 +492,8 @@ namespace GW2SDK.Impl.JsonReaders
                 {
                     MappingSignificance = MappingSignificance.Required,
                     PropertyName = propertyName,
-                    propertySeenExpr = propertySeenExpr,
-                    propertyValueExpr = propertyValueExpr,
+                    PropertySeenExpr = propertySeenExpr,
+                    PropertyValueExpr = propertyValueExpr,
                     Destination = ((MemberExpression) propertyExpression.Body).Member,
                     OnMatch = (jsonPropertyExpr, _) => Block(
                         Assign(propertySeenExpr,  Constant(true)),
@@ -511,7 +512,7 @@ namespace GW2SDK.Impl.JsonReaders
                 {
                     MappingSignificance = MappingSignificance.Optional,
                     PropertyName = propertyName,
-                    propertyValueExpr = propertyValueExpr,
+                    PropertyValueExpr = propertyValueExpr,
                     Destination = ((MemberExpression) propertyExpression.Body).Member,
                     OnMatch = (jsonPropertyExpr, _) => Block(
                         Assign(propertyValueExpr, JsonElementExpr.GetDecimalOrNull(JsonPropertyExpr.GetValue(jsonPropertyExpr)))
@@ -530,8 +531,8 @@ namespace GW2SDK.Impl.JsonReaders
                 {
                     MappingSignificance = MappingSignificance.Required,
                     PropertyName = propertyName,
-                    propertySeenExpr = propertySeenExpr,
-                    propertyValueExpr = propertyValueExpr,
+                    PropertySeenExpr = propertySeenExpr,
+                    PropertyValueExpr = propertyValueExpr,
                     Destination = ((MemberExpression) propertyExpression.Body).Member,
                     OnMatch = (jsonPropertyExpr, _) => Block(
                         Assign(propertySeenExpr,  Constant(true)),
@@ -550,7 +551,7 @@ namespace GW2SDK.Impl.JsonReaders
                 {
                     MappingSignificance = MappingSignificance.Optional,
                     PropertyName = propertyName,
-                    propertyValueExpr = propertyValueExpr,
+                    PropertyValueExpr = propertyValueExpr,
                     Destination = ((MemberExpression) propertyExpression.Body).Member,
                     OnMatch = (jsonPropertyExpr, _) => Block(
                         Assign(propertyValueExpr, Call(JsonPropertyExpr.GetValue(jsonPropertyExpr), JsonElementInfo.GetSByte))
@@ -569,8 +570,8 @@ namespace GW2SDK.Impl.JsonReaders
                 {
                     MappingSignificance = MappingSignificance.Required,
                     PropertyName = propertyName,
-                    propertySeenExpr = propertySeenExpr,
-                    propertyValueExpr = propertyValueExpr,
+                    PropertySeenExpr = propertySeenExpr,
+                    PropertyValueExpr = propertyValueExpr,
                     Destination = ((MemberExpression) propertyExpression.Body).Member,
                     OnMatch = (jsonPropertyExpr, _) => Block(
                         Assign(propertySeenExpr,  Constant(true)),
@@ -589,7 +590,7 @@ namespace GW2SDK.Impl.JsonReaders
                 {
                     MappingSignificance = MappingSignificance.Optional,
                     PropertyName = propertyName,
-                    propertyValueExpr = propertyValueExpr,
+                    PropertyValueExpr = propertyValueExpr,
                     Destination = ((MemberExpression) propertyExpression.Body).Member,
                     OnMatch = (jsonPropertyExpr, _) => Block(
                         Assign(propertyValueExpr, JsonElementExpr.GetInt16OrNull(JsonPropertyExpr.GetValue(jsonPropertyExpr)))
@@ -608,8 +609,8 @@ namespace GW2SDK.Impl.JsonReaders
                 {
                     MappingSignificance = MappingSignificance.Required,
                     PropertyName = propertyName,
-                    propertySeenExpr = propertySeenExpr,
-                    propertyValueExpr = propertyValueExpr,
+                    PropertySeenExpr = propertySeenExpr,
+                    PropertyValueExpr = propertyValueExpr,
                     Destination = ((MemberExpression) propertyExpression.Body).Member,
                     OnMatch = (jsonPropertyExpr, _) => Block(
                         Assign(propertySeenExpr,  Constant(true)),
@@ -628,7 +629,7 @@ namespace GW2SDK.Impl.JsonReaders
                 {
                     MappingSignificance = MappingSignificance.Optional,
                     PropertyName = propertyName,
-                    propertyValueExpr = propertyValueExpr,
+                    PropertyValueExpr = propertyValueExpr,
                     Destination = ((MemberExpression) propertyExpression.Body).Member,
                     OnMatch = (jsonPropertyExpr, _) => Block(
                         Assign(propertyValueExpr, JsonElementExpr.GetInt32OrNull(JsonPropertyExpr.GetValue(jsonPropertyExpr)))
@@ -647,8 +648,8 @@ namespace GW2SDK.Impl.JsonReaders
                 {
                     MappingSignificance = MappingSignificance.Required,
                     PropertyName = propertyName,
-                    propertySeenExpr = propertySeenExpr,
-                    propertyValueExpr = propertyValueExpr,
+                    PropertySeenExpr = propertySeenExpr,
+                    PropertyValueExpr = propertyValueExpr,
                     Destination = ((MemberExpression) propertyExpression.Body).Member,
                     OnMatch = (jsonPropertyExpr, _) => Block(
                         Assign(propertySeenExpr,  Constant(true)),
@@ -667,7 +668,7 @@ namespace GW2SDK.Impl.JsonReaders
                 {
                     MappingSignificance = MappingSignificance.Optional,
                     PropertyName = propertyName,
-                    propertyValueExpr = propertyValueExpr,
+                    PropertyValueExpr = propertyValueExpr,
                     Destination = ((MemberExpression) propertyExpression.Body).Member,
                     OnMatch = (jsonPropertyExpr, _) => Block(
                         Assign(propertyValueExpr, JsonElementExpr.GetInt64OrNull(JsonPropertyExpr.GetValue(jsonPropertyExpr)))
@@ -686,8 +687,8 @@ namespace GW2SDK.Impl.JsonReaders
                 {
                     MappingSignificance = MappingSignificance.Required,
                     PropertyName = propertyName,
-                    propertySeenExpr = propertySeenExpr,
-                    propertyValueExpr = propertyValueExpr,
+                    PropertySeenExpr = propertySeenExpr,
+                    PropertyValueExpr = propertyValueExpr,
                     Destination = ((MemberExpression) propertyExpression.Body).Member,
                     OnMatch = (jsonPropertyExpr, _) => Block(
                         Assign(propertySeenExpr,  Constant(true)),
@@ -706,7 +707,7 @@ namespace GW2SDK.Impl.JsonReaders
                 {
                     MappingSignificance = MappingSignificance.Optional,
                     PropertyName = propertyName,
-                    propertyValueExpr = propertyValueExpr,
+                    PropertyValueExpr = propertyValueExpr,
                     Destination = ((MemberExpression) propertyExpression.Body).Member,
                     OnMatch = (jsonPropertyExpr, _) => Block(
                         Assign(propertyValueExpr, JsonElementExpr.GetByteOrNull(JsonPropertyExpr.GetValue(jsonPropertyExpr)))
@@ -725,8 +726,8 @@ namespace GW2SDK.Impl.JsonReaders
                 {
                     MappingSignificance = MappingSignificance.Required,
                     PropertyName = propertyName,
-                    propertySeenExpr = propertySeenExpr,
-                    propertyValueExpr = propertyValueExpr,
+                    PropertySeenExpr = propertySeenExpr,
+                    PropertyValueExpr = propertyValueExpr,
                     Destination = ((MemberExpression) propertyExpression.Body).Member,
                     OnMatch = (jsonPropertyExpr, _) => Block(
                         Assign(propertySeenExpr,  Constant(true)),
@@ -745,7 +746,7 @@ namespace GW2SDK.Impl.JsonReaders
                 {
                     MappingSignificance = MappingSignificance.Optional,
                     PropertyName = propertyName,
-                    propertyValueExpr = propertyValueExpr,
+                    PropertyValueExpr = propertyValueExpr,
                     Destination = ((MemberExpression) propertyExpression.Body).Member,
                     OnMatch = (jsonPropertyExpr, _) => Block(
                         Assign(propertyValueExpr, JsonElementExpr.GetUInt16OrNull(JsonPropertyExpr.GetValue(jsonPropertyExpr)))
@@ -764,8 +765,8 @@ namespace GW2SDK.Impl.JsonReaders
                 {
                     MappingSignificance = MappingSignificance.Required,
                     PropertyName = propertyName,
-                    propertySeenExpr = propertySeenExpr,
-                    propertyValueExpr = propertyValueExpr,
+                    PropertySeenExpr = propertySeenExpr,
+                    PropertyValueExpr = propertyValueExpr,
                     Destination = ((MemberExpression) propertyExpression.Body).Member,
                     OnMatch = (jsonPropertyExpr, _) => Block(
                         Assign(propertySeenExpr,  Constant(true)),
@@ -784,7 +785,7 @@ namespace GW2SDK.Impl.JsonReaders
                 {
                     MappingSignificance = MappingSignificance.Optional,
                     PropertyName = propertyName,
-                    propertyValueExpr = propertyValueExpr,
+                    PropertyValueExpr = propertyValueExpr,
                     Destination = ((MemberExpression) propertyExpression.Body).Member,
                     OnMatch = (jsonPropertyExpr, _) => Block(
                         Assign(propertyValueExpr, JsonElementExpr.GetUInt32OrNull(JsonPropertyExpr.GetValue(jsonPropertyExpr)))
@@ -803,8 +804,8 @@ namespace GW2SDK.Impl.JsonReaders
                 {
                     MappingSignificance = MappingSignificance.Required,
                     PropertyName = propertyName,
-                    propertySeenExpr = propertySeenExpr,
-                    propertyValueExpr = propertyValueExpr,
+                    PropertySeenExpr = propertySeenExpr,
+                    PropertyValueExpr = propertyValueExpr,
                     Destination = ((MemberExpression) propertyExpression.Body).Member,
                     OnMatch = (jsonPropertyExpr, _) => Block(
                         Assign(propertySeenExpr,  Constant(true)),
@@ -823,7 +824,7 @@ namespace GW2SDK.Impl.JsonReaders
                 {
                     MappingSignificance = MappingSignificance.Optional,
                     PropertyName = propertyName,
-                    propertyValueExpr = propertyValueExpr,
+                    PropertyValueExpr = propertyValueExpr,
                     Destination = ((MemberExpression) propertyExpression.Body).Member,
                     OnMatch = (jsonPropertyExpr, _) => Block(
                         Assign(propertyValueExpr, JsonElementExpr.GetUInt64OrNull(JsonPropertyExpr.GetValue(jsonPropertyExpr)))
@@ -842,8 +843,8 @@ namespace GW2SDK.Impl.JsonReaders
                 {
                     MappingSignificance = MappingSignificance.Required,
                     PropertyName = propertyName,
-                    propertySeenExpr = propertySeenExpr,
-                    propertyValueExpr = propertyValueExpr,
+                    PropertySeenExpr = propertySeenExpr,
+                    PropertyValueExpr = propertyValueExpr,
                     Destination = ((MemberExpression) propertyExpression.Body).Member,
                     OnMatch = (jsonPropertyExpr, _) => Block(
                         Assign(propertySeenExpr,  Constant(true)),
@@ -862,7 +863,7 @@ namespace GW2SDK.Impl.JsonReaders
                 {
                     MappingSignificance = MappingSignificance.Optional,
                     PropertyName = propertyName,
-                    propertyValueExpr = propertyValueExpr,
+                    PropertyValueExpr = propertyValueExpr,
                     Destination = ((MemberExpression) propertyExpression.Body).Member,
                     OnMatch = (jsonPropertyExpr, _) => Block(
                         Assign(propertyValueExpr, JsonElementExpr.GetBooleanOrNull(JsonPropertyExpr.GetValue(jsonPropertyExpr)))
@@ -881,8 +882,8 @@ namespace GW2SDK.Impl.JsonReaders
                 {
                     MappingSignificance = MappingSignificance.Required,
                     PropertyName = propertyName,
-                    propertySeenExpr = propertySeenExpr,
-                    propertyValueExpr = propertyValueExpr,
+                    PropertySeenExpr = propertySeenExpr,
+                    PropertyValueExpr = propertyValueExpr,
                     Destination = ((MemberExpression) propertyExpression.Body).Member,
                     OnMatch = (jsonPropertyExpr, _) => Block(
                         Assign(propertySeenExpr,  Constant(true)),
@@ -901,7 +902,7 @@ namespace GW2SDK.Impl.JsonReaders
                 {
                     MappingSignificance = MappingSignificance.Optional,
                     PropertyName = propertyName,
-                    propertyValueExpr = propertyValueExpr,
+                    PropertyValueExpr = propertyValueExpr,
                     Destination = ((MemberExpression) propertyExpression.Body).Member,
                     OnMatch = (jsonPropertyExpr, _) => Block(
                         Assign(propertyValueExpr, JsonElementExpr.GetDateTimeOrNull(JsonPropertyExpr.GetValue(jsonPropertyExpr)))
@@ -920,8 +921,8 @@ namespace GW2SDK.Impl.JsonReaders
                 {
                     MappingSignificance = MappingSignificance.Required,
                     PropertyName = propertyName,
-                    propertySeenExpr = propertySeenExpr,
-                    propertyValueExpr = propertyValueExpr,
+                    PropertySeenExpr = propertySeenExpr,
+                    PropertyValueExpr = propertyValueExpr,
                     Destination = ((MemberExpression) propertyExpression.Body).Member,
                     OnMatch = (jsonPropertyExpr, _) => Block(
                         Assign(propertySeenExpr,  Constant(true)),
@@ -941,7 +942,7 @@ namespace GW2SDK.Impl.JsonReaders
                 {
                     MappingSignificance = MappingSignificance.Optional,
                     PropertyName = propertyName,
-                    propertyValueExpr = propertyValueExpr,
+                    PropertyValueExpr = propertyValueExpr,
                     Destination = ((MemberExpression) propertyExpression.Body).Member,
                     OnMatch = (jsonPropertyExpr, _) => Block(
                         Assign(propertyValueExpr, JsonElementExpr.GetDateTimeOffsetOrNull(JsonPropertyExpr.GetValue(jsonPropertyExpr)))
@@ -960,8 +961,8 @@ namespace GW2SDK.Impl.JsonReaders
                 {
                     MappingSignificance = MappingSignificance.Required,
                     PropertyName = propertyName,
-                    propertySeenExpr = propertySeenExpr,
-                    propertyValueExpr = propertyValueExpr,
+                    PropertySeenExpr = propertySeenExpr,
+                    PropertyValueExpr = propertyValueExpr,
                     Destination = ((MemberExpression) propertyExpression.Body).Member,
                     OnMatch = (jsonPropertyExpr, _) => Block(
                         Assign(propertySeenExpr,  Constant(true)),
@@ -980,7 +981,7 @@ namespace GW2SDK.Impl.JsonReaders
                 {
                     MappingSignificance = MappingSignificance.Optional,
                     PropertyName = propertyName,
-                    propertyValueExpr = propertyValueExpr,
+                    PropertyValueExpr = propertyValueExpr,
                     Destination = ((MemberExpression) propertyExpression.Body).Member,
                     OnMatch = (jsonPropertyExpr, _) => Block(
                         Assign(propertyValueExpr, JsonElementExpr.GetGuidOrNull(JsonPropertyExpr.GetValue(jsonPropertyExpr)))
@@ -1001,9 +1002,9 @@ namespace GW2SDK.Impl.JsonReaders
                     switch (reader.MappingSignificance)
                     {
                         case MappingSignificance.Optional:
-                            return varBag.Append(reader.propertyValueExpr);
+                            return varBag.Append(reader.PropertyValueExpr);
                         case MappingSignificance.Required:
-                            return varBag.Concat(new[] { reader.propertySeenExpr, reader.propertyValueExpr });
+                            return varBag.Concat(new[] { reader.PropertySeenExpr, reader.PropertyValueExpr });
                         default:
                             return varBag;
                     }
@@ -1028,14 +1029,14 @@ namespace GW2SDK.Impl.JsonReaders
                     )
                     .Concat(
                         _readers.Where(reader => reader.MappingSignificance == MappingSignificance.Required)
-                            .Select(reader => Expr.EnsureMemberseen(reader.PropertyName, reader.propertySeenExpr, typeof(TObject).Name))
+                            .Select(reader => Expr.EnsureMemberseen(reader.PropertyName, reader.PropertySeenExpr, typeof(TObject).Name))
                     )
                     .Append(
                         MemberInit(
                             New(typeof(TObject)),
                             from reader in _readers
                             where reader.MappingSignificance != MappingSignificance.Ignored
-                            select Bind(reader.Destination, reader.propertyValueExpr)
+                            select Bind(reader.Destination, reader.PropertyValueExpr)
                         )
                     )
             );

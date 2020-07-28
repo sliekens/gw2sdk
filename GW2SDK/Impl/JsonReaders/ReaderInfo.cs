@@ -1,5 +1,6 @@
 ﻿using System.Linq.Expressions;
 using System.Reflection;
+using GW2SDK.Impl.JsonReaders.Mappings;
 
 namespace GW2SDK.Impl.JsonReaders
 {
@@ -11,9 +12,9 @@ namespace GW2SDK.Impl.JsonReaders
 
         public string PropertyName { get; set; } = default!;
 
-        public ParameterExpression propertySeenExpr { get; set; } = default!;
+        public ParameterExpression PropertySeenExpr { get; set; } = default!;
 
-        public ParameterExpression propertyValueExpr { get; set; } = default!;
+        public ParameterExpression PropertyValueExpr { get; set; } = default!;
 
         public MemberInfo Destination { get; set; } = default!;
 

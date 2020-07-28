@@ -12,58 +12,67 @@ namespace GW2SDK.Impl.JsonReaders
     {
         public UnexpectedPropertyBehavior UnexpectedPropertyBehavior { get; set; }
 
-        public RootState Root { get; set; } = new RootState();
+        public Stack<JsonReaderState> Nodes { get; } = new Stack<JsonReaderState>();
 
         public Expression<ReadJson<TObject>>? Source { get; set; }
 
         public void VisitAggregate<TValue>(JsonAggregateMapping<TValue> mapping)
         {
+            var inputExpr = Parameter(typeof(JsonElement).MakeByRefType(), "json");
+            var rootNode = new RootNodeState
+            {
+                JsonElementExpr = inputExpr,
+                JsonPropertyExpr = Variable(typeof(JsonProperty), "root_property")
+            };
+            Nodes.Push(rootNode);
             foreach (var child in mapping.Children)
             {
                 child.Accept(this);
             }
 
+            Nodes.Pop();
+
             var source = new List<Expression>();
-            source.Add(
-                JsonElementExpr.ForEachProperty(
-                    Root.InputExpr,
-                    Root.JsonPropertyExpr,
-                    @continue => MapPropertyExpression(@continue)
-                )
-            );
+            if (mapping.Children.Count != 0)
+            {
+                source.Add(
+                    JsonElementExpr.ForEachProperty(
+                        rootNode.JsonElementExpr,
+                        rootNode.JsonPropertyExpr,
+                        @continue => MapPropertyExpression(@continue)
+                    )
+                );
+            }
 
             source.AddRange(
-                from child in Root.Children
+                from child in rootNode.Children
                 where child.Mapping.Significance == MappingSignificance.Required
-                select Expr.EnsureMemberseen(child.Mapping.Name, child.ChildSeenExpr, typeof(TObject).Name)
+                select child.MissingExpr
             );
 
             source.Add(
                 MemberInit(
                     New(typeof(TObject)),
-                    from child in Root.Children
-                    where child.Mapping.Significance != MappingSignificance.Ignored
-                    select Bind(child.Mapping.Destination, child.ChildValueExpr)
-                )
+                    rootNode.GetBindings()                )
             );
 
             var body = Block(
-                Root.GetVariables(),
+                rootNode.GetVariables(),
                 source
             );
 
-            Source = Lambda<ReadJson<TObject>>(body, Root.InputExpr);
+            Source = Lambda<ReadJson<TObject>>(body, inputExpr);
 
             Expression MapPropertyExpression(LabelTarget @continue, int index = 0)
             {
-                var child = Root.Children[index];
+                var child = rootNode.Children[index];
                 return IfThenElse(
                     child.TestExpr,
                     child.MapExpr,
-                    index + 1 < Root.Children.Count
+                    index + 1 < rootNode.Children.Count
                         ? MapPropertyExpression(@continue, index + 1)
                         : UnexpectedPropertyBehavior == UnexpectedPropertyBehavior.Error
-                            ? Expr.ThrowJsonException(Expr.MissingMember(Constant(typeof(TObject).Name), Root.JsonPropertyExpr))
+                            ? Expr.ThrowJsonException(Expr.MissingMember(Constant(typeof(TObject).Name), rootNode.JsonPropertyExpr))
                             : Continue(@continue)
                 );
             }
@@ -71,37 +80,111 @@ namespace GW2SDK.Impl.JsonReaders
 
         public void VisitObject<TValue>(JsonObjectMapping<TValue> mapping)
         {
+            var parentNode = (ObjectNodeState)Nodes.Peek();
+
+            var currentNode = new ObjectNodeState
+            {
+                Mapping = mapping,
+                JsonElementExpr = JsonPropertyExpr.GetValue(parentNode.JsonPropertyExpr),
+                JsonPropertyExpr = Variable(typeof(JsonProperty), $"{mapping.Name}_property"),
+                TestExpr = JsonPropertyExpr.NameEquals(parentNode.JsonPropertyExpr, Constant(mapping.Name, typeof(string)))
+            };
+
+            Nodes.Push(currentNode);
+            foreach (var child in mapping.Children)
+            {
+                child.Accept(this);
+            }
+
+            Nodes.Pop();
+
+            var source = new List<Expression>();
+            if (mapping.Children.Count != 0)
+            {
+                source.Add(
+                    JsonElementExpr.ForEachProperty(
+                        currentNode.JsonElementExpr,
+                        currentNode.JsonPropertyExpr,
+                        @continue => MapPropertyExpression(@continue)
+                    )
+                );
+            }
+
+            source.AddRange(
+                from child in currentNode.Children
+                where child.Mapping.Significance == MappingSignificance.Required
+                select child.MissingExpr
+            );
+
+            currentNode.MapExpr = Block(source);
+            parentNode.Children.Add(currentNode);
+
+            Expression MapPropertyExpression(LabelTarget @continue, int index = 0)
+            {
+                var child = currentNode.Children[index];
+                return IfThenElse(
+                    child.TestExpr,
+                    child.MapExpr,
+                    index + 1 < currentNode.Children.Count
+                        ? MapPropertyExpression(@continue, index + 1)
+                        : UnexpectedPropertyBehavior == UnexpectedPropertyBehavior.Error
+                            ? Expr.ThrowJsonException(Expr.MissingMember(Constant(typeof(TObject).Name), currentNode.JsonPropertyExpr))
+                            : Continue(@continue)
+                );
+            }
         }
 
         public void VisitValue<TValue>(JsonValueMapping<TValue> mapping)
         {
             var propertySeenExpr = Variable(typeof(bool), $"{mapping.Name}_seen");
             var propertyValueExpr = Variable(typeof(int), $"{mapping.Name}_value");
-            ChildState state = new ChildState
+            var node = (ObjectNodeState)Nodes.Peek();
+            node.Children.Add(new ValueChildState
             {
                 Mapping = mapping,
                 ChildSeenExpr = propertySeenExpr,
                 ChildValueExpr = propertyValueExpr,
-                TestExpr = JsonPropertyExpr.NameEquals(Root.JsonPropertyExpr, Constant(mapping.Name, typeof(string))),
+                TestExpr = JsonPropertyExpr.NameEquals(node.JsonPropertyExpr, Constant(mapping.Name, typeof(string))),
                 MapExpr = Block(
                     Assign(propertySeenExpr,  Constant(true)),
-                    Assign(propertyValueExpr, JsonElementExpr.GetInt32(JsonPropertyExpr.GetValue(Root.JsonPropertyExpr)))
-                )
-            };
-
-            Root.Children.Add(state);
+                    Assign(propertyValueExpr, JsonElementExpr.GetInt32(JsonPropertyExpr.GetValue(node.JsonPropertyExpr)))
+                ),
+                MissingExpr = Expr.EnsureMemberseen(mapping.Name, propertySeenExpr, typeof(TObject).Name),
+                BindExpr = propertyValueExpr
+            });
         }
     }
 
-    public class RootState
+    public abstract class JsonReaderState
     {
-        public ParameterExpression InputExpr { get; } = Parameter(typeof(JsonElement).MakeByRefType(), "json");
+        public List<JsonReaderState> Children { get; set; } = new List<JsonReaderState>();
 
-        public ParameterExpression JsonPropertyExpr { get; } = Variable(typeof(JsonProperty), "json_property");
+        public JsonMapping Mapping { get; set; } = default!;
 
-        public List<ChildState> Children { get; set; } = new List<ChildState>();
+        public Expression TestExpr { get; set; } = default!;
 
-        public IEnumerable<ParameterExpression> GetVariables()
+        public Expression MapExpr { get; set; } = default!;
+
+        public Expression MissingExpr { get; set; } = default!;
+
+        public Expression BindExpr { get; set; } = default!;
+
+        public abstract IEnumerable<ParameterExpression> GetVariables();
+
+        public abstract IEnumerable<MemberBinding> GetBindings();
+    }
+
+    public class RootNodeState : ObjectNodeState
+    {
+    }
+
+    public class ObjectNodeState : JsonReaderState
+    {
+        public Expression JsonElementExpr { get; set; } = default!;
+
+        public ParameterExpression JsonPropertyExpr { get; set; } = default!;
+        
+        public override IEnumerable<ParameterExpression> GetVariables()
         {
             foreach (var child in Children)
             {
@@ -111,21 +194,26 @@ namespace GW2SDK.Impl.JsonReaders
                 }
             }
         }
+
+        public override IEnumerable<MemberBinding> GetBindings()
+        {
+            foreach (var child in Children)
+            {
+                foreach (var binding in child.GetBindings())
+                {
+                    yield return binding;
+                }
+            }
+        }
     }
 
-    public class ChildState
+    public class ValueChildState : JsonReaderState
     {
-        public JsonMapping Mapping { get; set; } = default!;
-
         public ParameterExpression ChildSeenExpr { get; set; } = default!;
 
         public ParameterExpression ChildValueExpr { get; set; } = default!;
 
-        public Expression TestExpr { get; set; } = default!;
-
-        public Expression MapExpr { get; set; } = default!;
-
-        public IEnumerable<ParameterExpression> GetVariables()
+        public override IEnumerable<ParameterExpression> GetVariables()
         {
             if (Mapping.Significance == MappingSignificance.Required)
             {
@@ -136,6 +224,15 @@ namespace GW2SDK.Impl.JsonReaders
             {
                 yield return ChildValueExpr;
             }
+        }
+
+        public override IEnumerable<MemberBinding> GetBindings()
+        {
+            if (Mapping.Significance == MappingSignificance.Ignored)
+            {
+                yield break;
+            }
+            yield return Bind(Mapping.Destination, ChildValueExpr);
         }
     }
 }

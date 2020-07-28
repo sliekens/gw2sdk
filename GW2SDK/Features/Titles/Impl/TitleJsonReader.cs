@@ -1,4 +1,5 @@
 ﻿using GW2SDK.Impl.JsonReaders;
+using GW2SDK.Impl.JsonReaders.Mappings;
 
 namespace GW2SDK.Titles.Impl
 {

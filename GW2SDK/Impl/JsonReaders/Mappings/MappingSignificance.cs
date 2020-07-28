@@ -1,4 +1,4 @@
-﻿namespace GW2SDK.Impl.JsonReaders
+﻿namespace GW2SDK.Impl.JsonReaders.Mappings
 {
     public enum MappingSignificance
     {

@@ -14,13 +14,13 @@ namespace GW2SDK.Impl.JsonReaders.TestCase
         {
             _el.Map("id", to => to.Id);
             _el.Map("level", to => to.Level);
-            //_el.Map(
-            //    "details",
-            //    details =>
-            //    {
-            //        details.Map("vendor_value", to => to.VendorValue);
-            //    }
-            //);
+            _el.Map(
+                "details",
+                details =>
+                {
+                    details.Map("vendor_value", to => to.VendorValue);
+                }
+            );
             //_el.Map("upgrade", to => to.Upgrade, new MyItemUpgradeReader());
         }
 
