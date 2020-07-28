@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq.Expressions;
 using GW2SDK.Impl.JsonReaders.Mappings;
 using GW2SDK.Impl.JsonReaders.Nodes;
 using static System.Linq.Expressions.Expression;
@@ -24,8 +25,7 @@ namespace GW2SDK.Impl.JsonReaders
                     ObjectType = typeof(TValue),
                     Children = nodes,
                     UnexpectedPropertyBehavior = mapping.UnexpectedPropertyBehavior,
-                    ObjectSeenExpr = Variable(typeof(bool), $"{mapping.Name}_object_seen"),
-                    ActualValueExpr = Variable(typeof(TValue), $"{mapping.Name}_value")
+                    ObjectSeenExpr = Variable(typeof(bool), $"{mapping.Name}_object_seen")
                 }
             );
         }

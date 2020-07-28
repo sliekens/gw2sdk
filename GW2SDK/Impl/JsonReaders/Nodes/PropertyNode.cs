@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Reflection;
 using System.Text.Json;
 using GW2SDK.Impl.Json;
 using GW2SDK.Impl.JsonReaders.Mappings;
@@ -13,6 +14,8 @@ namespace GW2SDK.Impl.JsonReaders.Nodes
         public JsonNode ValueNode { get; set; } = default!;
 
         public ParameterExpression PropertySeenExpr { get; set; } = default!;
+
+        public MemberInfo? Destination { get; set; }
 
         public override IEnumerable<ParameterExpression> GetVariables()
         {
@@ -47,6 +50,9 @@ namespace GW2SDK.Impl.JsonReaders.Nodes
                     break;
                 case DeconstructorNode deconstructor:
                     expressions.Add(deconstructor.DeconstructExpr(JsonPropertyExpr.GetValue(jsonPropertyExpr)));
+                    break;
+                case ArrayNode array:
+                    expressions.Add(array.MapExpr(JsonPropertyExpr.GetValue(jsonPropertyExpr)));
                     break;
                 default:
                     throw new JsonException("Mapping is not yet supported for " + ValueNode.GetType());
@@ -92,11 +98,16 @@ namespace GW2SDK.Impl.JsonReaders.Nodes
             switch (ValueNode)
             {
                 case ValueNode value:
-                    yield return Bind(Mapping.Destination, value.ActualValueExpr);
+                    yield return Bind(Destination, value.ActualValueExpr);
                     break;
                 case ObjectNode obj:
-                    yield return Bind(Mapping.Destination, obj.CreateInstanceExpr());
+                    yield return Bind(Destination, obj.CreateInstanceExpr());
                     break;
+
+                case ArrayNode array:
+                    yield return Bind(Destination, array.ActualValueExpr);
+                    break;
+
                 case DeconstructorNode deconstructor:
                     foreach (var binding in deconstructor.Children.SelectMany(propertyNode => propertyNode.GetBindings()))
                     {

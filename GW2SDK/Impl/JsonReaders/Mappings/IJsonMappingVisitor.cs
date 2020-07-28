@@ -9,5 +9,7 @@
         void VisitDeconstruction<TValue>(JsonDeconstructionMapping<TValue> mapping);
 
         void VisitProperty(JsonPropertyMapping mapping);
+
+        void VisitArray<TValue>(JsonArrayMapping<TValue> mapping);
     }
 }

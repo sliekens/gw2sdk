@@ -1,49 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text.Json;
 using GW2SDK.Impl.JsonConverters;
-using GW2SDK.Impl.JsonReaders;
-using JsonValueKind = System.Text.Json.JsonValueKind;
 
 namespace GW2SDK.Items.Impl
 {
-    public class ItemJsonReader : IJsonReader<Item>
-    {
-        public Item Read(in JsonElement json)
-        {
-            if (json.TryGetProperty("type", out var discriminator))
-            {
-                if (discriminator.ValueEquals("Armor"))
-                {
-                    if (json.TryGetProperty("details", out var details))
-                    {
-                        if (json.TryGetProperty("type", out var armorDiscriminator))
-                        {
-                            if (armorDiscriminator.ValueEquals("Boots"))
-                            {
-                                return new ArmorJsonReader().Read(json);
-                            }
-                        }
-                    }
-                }
-            }
-
-            throw new NotSupportedException();
-        }
-
-        public bool CanRead(in JsonElement json) => json.ValueKind == JsonValueKind.Object;
-    }
-
-    public class ArmorJsonReader : JsonObjectReader<Armor>
-    {
-        public ArmorJsonReader()
-        {
-            Map("id", to => to.Id);
-            Map("details.defense", to => to.Defense);
-        }
-
-    }
-
     internal sealed class ArmorDiscriminatorOptions : DiscriminatorOptions
     {
         internal override Type BaseType => typeof(Armor);

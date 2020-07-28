@@ -30,12 +30,7 @@ namespace GW2SDK.Impl.JsonReaders.Nodes
 
         public override IEnumerable<MemberBinding> GetBindings()
         {
-            if (Mapping.Significance == MappingSignificance.Ignored)
-            {
-                yield break;
-            }
-
-            yield return Bind(Mapping.Destination, ActualValueExpr);
+            yield break;
         }
     }
 }

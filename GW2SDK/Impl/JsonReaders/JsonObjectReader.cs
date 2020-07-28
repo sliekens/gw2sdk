@@ -9,6 +9,34 @@ using static System.Linq.Expressions.Expression;
 
 namespace GW2SDK.Impl.JsonReaders
 {
+    public class JsonObjectReader2<TObject> : IJsonReader<TObject>
+    {
+        private readonly JsonObjectMapping<TObject> _mapping = new JsonObjectMapping<TObject>
+        {
+            Name = "$"
+        };
+
+        private Expression<ReadJson<TObject>>? _source;
+
+        private ReadJson<TObject>? _read;
+
+        public void Configure(Action<JsonObjectMapping<TObject>> configureAction)
+        {
+            var compiler = new JsonMappingCompiler<TObject>();
+            configureAction(_mapping);
+            _source = compiler.Build(_mapping);
+            _read = _source.Compile();
+        }
+
+        public TObject Read(in JsonElement json)
+        {
+            if (_read is null) throw new InvalidOperationException("Call Configure before attempting to Read.");
+            return _read(json);
+        }
+
+        public bool CanRead(in JsonElement json) => json.ValueKind == JsonValueKind.Object;
+    }
+
     public class JsonObjectReader<TObject> : IJsonReader<TObject>
     {
         private static readonly ConstantExpression TypeNameExpr = Constant(typeof(TObject).Name, typeof(string));
@@ -17,8 +45,6 @@ namespace GW2SDK.Impl.JsonReaders
         private ReadJson<TObject> _compilation = (in JsonElement json) => default!;
 
         private bool _needsCompilation = true;
-
-        private Expression<ReadJson<TObject>>? _source;
 
         private UnexpectedPropertyBehavior _unexpectedPropertyBehavior;
 
@@ -61,7 +87,8 @@ namespace GW2SDK.Impl.JsonReaders
             _needsCompilation = true;
         }
 
-        public Expression AssignArray(Expression arrayExpr, Expression indexExpr, Expression valueExpr) => Assign(ArrayAccess(arrayExpr, indexExpr), valueExpr);
+        public Expression AssignArray(Expression arrayExpr, Expression indexExpr, Expression valueExpr) 
+            => Assign(ArrayAccess(arrayExpr, indexExpr), valueExpr);
 
         public void Map(
             string propertyName,
@@ -405,45 +432,6 @@ namespace GW2SDK.Impl.JsonReaders
             _needsCompilation = true;
         }
 
-        public void Map(string propertyName, Expression<Func<TObject, float>> propertyExpression)
-        {
-            var propertySeenExpr = Variable(typeof(bool),   $"saw {propertyName}");
-            var propertyValueExpr = Variable(typeof(float), $"value of {propertyName}");
-            _readers.Add(
-                new ReaderInfo
-                {
-                    MappingSignificance = MappingSignificance.Required,
-                    PropertyName = propertyName,
-                    PropertySeenExpr = propertySeenExpr,
-                    PropertyValueExpr = propertyValueExpr,
-                    Destination = ((MemberExpression) propertyExpression.Body).Member,
-                    OnMatch = (jsonPropertyExpr, _) => Block(
-                        Assign(propertySeenExpr,  Constant(true)),
-                        Assign(propertyValueExpr, JsonElementExpr.GetSingle(JsonPropertyExpr.GetValue(jsonPropertyExpr)))
-                    )
-                }
-            );
-            _needsCompilation = true;
-        }
-
-        public void Map(string propertyName, Expression<Func<TObject, float?>> propertyExpression)
-        {
-            var propertyValueExpr = Variable(typeof(float?), $"value of {propertyName}");
-            _readers.Add(
-                new ReaderInfo
-                {
-                    MappingSignificance = MappingSignificance.Optional,
-                    PropertyName = propertyName,
-                    PropertyValueExpr = propertyValueExpr,
-                    Destination = ((MemberExpression) propertyExpression.Body).Member,
-                    OnMatch = (jsonPropertyExpr, _) => Block(
-                        Assign(propertyValueExpr, JsonElementExpr.GetSingleOrNull(JsonPropertyExpr.GetValue(jsonPropertyExpr)))
-                    )
-                }
-            );
-            _needsCompilation = true;
-        }
-
         public void Map(string propertyName, Expression<Func<TObject, double>> propertyExpression)
         {
             var propertySeenExpr = Variable(typeof(bool),    $"saw {propertyName}");
@@ -459,141 +447,6 @@ namespace GW2SDK.Impl.JsonReaders
                     OnMatch = (jsonPropertyExpr, _) => Block(
                         Assign(propertySeenExpr,  Constant(true)),
                         Assign(propertyValueExpr, JsonElementExpr.GetDouble(JsonPropertyExpr.GetValue(jsonPropertyExpr)))
-                    )
-                }
-            );
-            _needsCompilation = true;
-        }
-
-        public void Map(string propertyName, Expression<Func<TObject, double?>> propertyExpression)
-        {
-            var propertyValueExpr = Variable(typeof(double?), $"value of {propertyName}");
-            _readers.Add(
-                new ReaderInfo
-                {
-                    MappingSignificance = MappingSignificance.Optional,
-                    PropertyName = propertyName,
-                    PropertyValueExpr = propertyValueExpr,
-                    Destination = ((MemberExpression) propertyExpression.Body).Member,
-                    OnMatch = (jsonPropertyExpr, _) => Block(
-                        Assign(propertyValueExpr, JsonElementExpr.GetDoubleOrNull(JsonPropertyExpr.GetValue(jsonPropertyExpr)))
-                    )
-                }
-            );
-            _needsCompilation = true;
-        }
-
-        public void Map(string propertyName, Expression<Func<TObject, decimal>> propertyExpression)
-        {
-            var propertySeenExpr = Variable(typeof(bool),     $"saw {propertyName}");
-            var propertyValueExpr = Variable(typeof(decimal), $"value of {propertyName}");
-            _readers.Add(
-                new ReaderInfo
-                {
-                    MappingSignificance = MappingSignificance.Required,
-                    PropertyName = propertyName,
-                    PropertySeenExpr = propertySeenExpr,
-                    PropertyValueExpr = propertyValueExpr,
-                    Destination = ((MemberExpression) propertyExpression.Body).Member,
-                    OnMatch = (jsonPropertyExpr, _) => Block(
-                        Assign(propertySeenExpr,  Constant(true)),
-                        Assign(propertyValueExpr, JsonElementExpr.GetDecimal(JsonPropertyExpr.GetValue(jsonPropertyExpr)))
-                    )
-                }
-            );
-            _needsCompilation = true;
-        }
-
-        public void Map(string propertyName, Expression<Func<TObject, decimal?>> propertyExpression)
-        {
-            var propertyValueExpr = Variable(typeof(decimal?), $"value of {propertyName}");
-            _readers.Add(
-                new ReaderInfo
-                {
-                    MappingSignificance = MappingSignificance.Optional,
-                    PropertyName = propertyName,
-                    PropertyValueExpr = propertyValueExpr,
-                    Destination = ((MemberExpression) propertyExpression.Body).Member,
-                    OnMatch = (jsonPropertyExpr, _) => Block(
-                        Assign(propertyValueExpr, JsonElementExpr.GetDecimalOrNull(JsonPropertyExpr.GetValue(jsonPropertyExpr)))
-                    )
-                }
-            );
-            _needsCompilation = true;
-        }
-
-        public void Map(string propertyName, Expression<Func<TObject, sbyte>> propertyExpression)
-        {
-            var propertySeenExpr = Variable(typeof(bool),   $"saw {propertyName}");
-            var propertyValueExpr = Variable(typeof(sbyte), $"value of {propertyName}");
-            _readers.Add(
-                new ReaderInfo
-                {
-                    MappingSignificance = MappingSignificance.Required,
-                    PropertyName = propertyName,
-                    PropertySeenExpr = propertySeenExpr,
-                    PropertyValueExpr = propertyValueExpr,
-                    Destination = ((MemberExpression) propertyExpression.Body).Member,
-                    OnMatch = (jsonPropertyExpr, _) => Block(
-                        Assign(propertySeenExpr,  Constant(true)),
-                        Assign(propertyValueExpr, Call(JsonPropertyExpr.GetValue(jsonPropertyExpr), JsonElementInfo.GetSByte))
-                    )
-                }
-            );
-            _needsCompilation = true;
-        }
-
-        public void Map(string propertyName, Expression<Func<TObject, sbyte?>> propertyExpression)
-        {
-            var propertyValueExpr = Variable(typeof(sbyte?), $"value of {propertyName}");
-            _readers.Add(
-                new ReaderInfo
-                {
-                    MappingSignificance = MappingSignificance.Optional,
-                    PropertyName = propertyName,
-                    PropertyValueExpr = propertyValueExpr,
-                    Destination = ((MemberExpression) propertyExpression.Body).Member,
-                    OnMatch = (jsonPropertyExpr, _) => Block(
-                        Assign(propertyValueExpr, Call(JsonPropertyExpr.GetValue(jsonPropertyExpr), JsonElementInfo.GetSByte))
-                    )
-                }
-            );
-            _needsCompilation = true;
-        }
-
-        public void Map(string propertyName, Expression<Func<TObject, short>> propertyExpression)
-        {
-            var propertySeenExpr = Variable(typeof(bool),   $"saw {propertyName}");
-            var propertyValueExpr = Variable(typeof(short), $"value of {propertyName}");
-            _readers.Add(
-                new ReaderInfo
-                {
-                    MappingSignificance = MappingSignificance.Required,
-                    PropertyName = propertyName,
-                    PropertySeenExpr = propertySeenExpr,
-                    PropertyValueExpr = propertyValueExpr,
-                    Destination = ((MemberExpression) propertyExpression.Body).Member,
-                    OnMatch = (jsonPropertyExpr, _) => Block(
-                        Assign(propertySeenExpr,  Constant(true)),
-                        Assign(propertyValueExpr, JsonElementExpr.GetInt16(JsonPropertyExpr.GetValue(jsonPropertyExpr)))
-                    )
-                }
-            );
-            _needsCompilation = true;
-        }
-
-        public void Map(string propertyName, Expression<Func<TObject, short?>> propertyExpression)
-        {
-            var propertyValueExpr = Variable(typeof(short?), $"value of {propertyName}");
-            _readers.Add(
-                new ReaderInfo
-                {
-                    MappingSignificance = MappingSignificance.Optional,
-                    PropertyName = propertyName,
-                    PropertyValueExpr = propertyValueExpr,
-                    Destination = ((MemberExpression) propertyExpression.Body).Member,
-                    OnMatch = (jsonPropertyExpr, _) => Block(
-                        Assign(propertyValueExpr, JsonElementExpr.GetInt16OrNull(JsonPropertyExpr.GetValue(jsonPropertyExpr)))
                     )
                 }
             );
@@ -639,201 +492,6 @@ namespace GW2SDK.Impl.JsonReaders
             _needsCompilation = true;
         }
 
-        public void Map(string propertyName, Expression<Func<TObject, long>> propertyExpression)
-        {
-            var propertySeenExpr = Variable(typeof(bool),  $"saw {propertyName}");
-            var propertyValueExpr = Variable(typeof(long), $"value of {propertyName}");
-            _readers.Add(
-                new ReaderInfo
-                {
-                    MappingSignificance = MappingSignificance.Required,
-                    PropertyName = propertyName,
-                    PropertySeenExpr = propertySeenExpr,
-                    PropertyValueExpr = propertyValueExpr,
-                    Destination = ((MemberExpression) propertyExpression.Body).Member,
-                    OnMatch = (jsonPropertyExpr, _) => Block(
-                        Assign(propertySeenExpr,  Constant(true)),
-                        Assign(propertyValueExpr, JsonElementExpr.GetInt64(JsonPropertyExpr.GetValue(jsonPropertyExpr)))
-                    )
-                }
-            );
-            _needsCompilation = true;
-        }
-
-        public void Map(string propertyName, Expression<Func<TObject, long?>> propertyExpression)
-        {
-            var propertyValueExpr = Variable(typeof(long?), $"value of {propertyName}");
-            _readers.Add(
-                new ReaderInfo
-                {
-                    MappingSignificance = MappingSignificance.Optional,
-                    PropertyName = propertyName,
-                    PropertyValueExpr = propertyValueExpr,
-                    Destination = ((MemberExpression) propertyExpression.Body).Member,
-                    OnMatch = (jsonPropertyExpr, _) => Block(
-                        Assign(propertyValueExpr, JsonElementExpr.GetInt64OrNull(JsonPropertyExpr.GetValue(jsonPropertyExpr)))
-                    )
-                }
-            );
-            _needsCompilation = true;
-        }
-
-        public void Map(string propertyName, Expression<Func<TObject, byte>> propertyExpression)
-        {
-            var propertySeenExpr = Variable(typeof(bool),  $"saw {propertyName}");
-            var propertyValueExpr = Variable(typeof(byte), $"value of {propertyName}");
-            _readers.Add(
-                new ReaderInfo
-                {
-                    MappingSignificance = MappingSignificance.Required,
-                    PropertyName = propertyName,
-                    PropertySeenExpr = propertySeenExpr,
-                    PropertyValueExpr = propertyValueExpr,
-                    Destination = ((MemberExpression) propertyExpression.Body).Member,
-                    OnMatch = (jsonPropertyExpr, _) => Block(
-                        Assign(propertySeenExpr,  Constant(true)),
-                        Assign(propertyValueExpr, JsonElementExpr.GetByte(JsonPropertyExpr.GetValue(jsonPropertyExpr)))
-                    )
-                }
-            );
-            _needsCompilation = true;
-        }
-
-        public void Map(string propertyName, Expression<Func<TObject, byte?>> propertyExpression)
-        {
-            var propertyValueExpr = Variable(typeof(byte?), $"value of {propertyName}");
-            _readers.Add(
-                new ReaderInfo
-                {
-                    MappingSignificance = MappingSignificance.Optional,
-                    PropertyName = propertyName,
-                    PropertyValueExpr = propertyValueExpr,
-                    Destination = ((MemberExpression) propertyExpression.Body).Member,
-                    OnMatch = (jsonPropertyExpr, _) => Block(
-                        Assign(propertyValueExpr, JsonElementExpr.GetByteOrNull(JsonPropertyExpr.GetValue(jsonPropertyExpr)))
-                    )
-                }
-            );
-            _needsCompilation = true;
-        }
-
-        public void Map(string propertyName, Expression<Func<TObject, ushort>> propertyExpression)
-        {
-            var propertySeenExpr = Variable(typeof(bool),    $"saw {propertyName}");
-            var propertyValueExpr = Variable(typeof(ushort), $"value of {propertyName}");
-            _readers.Add(
-                new ReaderInfo
-                {
-                    MappingSignificance = MappingSignificance.Required,
-                    PropertyName = propertyName,
-                    PropertySeenExpr = propertySeenExpr,
-                    PropertyValueExpr = propertyValueExpr,
-                    Destination = ((MemberExpression) propertyExpression.Body).Member,
-                    OnMatch = (jsonPropertyExpr, _) => Block(
-                        Assign(propertySeenExpr,  Constant(true)),
-                        Assign(propertyValueExpr, JsonElementExpr.GetUInt16(JsonPropertyExpr.GetValue(jsonPropertyExpr)))
-                    )
-                }
-            );
-            _needsCompilation = true;
-        }
-
-        public void Map(string propertyName, Expression<Func<TObject, ushort?>> propertyExpression)
-        {
-            var propertyValueExpr = Variable(typeof(ushort?), $"value of {propertyName}");
-            _readers.Add(
-                new ReaderInfo
-                {
-                    MappingSignificance = MappingSignificance.Optional,
-                    PropertyName = propertyName,
-                    PropertyValueExpr = propertyValueExpr,
-                    Destination = ((MemberExpression) propertyExpression.Body).Member,
-                    OnMatch = (jsonPropertyExpr, _) => Block(
-                        Assign(propertyValueExpr, JsonElementExpr.GetUInt16OrNull(JsonPropertyExpr.GetValue(jsonPropertyExpr)))
-                    )
-                }
-            );
-            _needsCompilation = true;
-        }
-
-        public void Map(string propertyName, Expression<Func<TObject, uint>> propertyExpression)
-        {
-            var propertySeenExpr = Variable(typeof(bool),  $"saw {propertyName}");
-            var propertyValueExpr = Variable(typeof(uint), $"value of {propertyName}");
-            _readers.Add(
-                new ReaderInfo
-                {
-                    MappingSignificance = MappingSignificance.Required,
-                    PropertyName = propertyName,
-                    PropertySeenExpr = propertySeenExpr,
-                    PropertyValueExpr = propertyValueExpr,
-                    Destination = ((MemberExpression) propertyExpression.Body).Member,
-                    OnMatch = (jsonPropertyExpr, _) => Block(
-                        Assign(propertySeenExpr,  Constant(true)),
-                        Assign(propertyValueExpr, JsonElementExpr.GetUInt32(JsonPropertyExpr.GetValue(jsonPropertyExpr)))
-                    )
-                }
-            );
-            _needsCompilation = true;
-        }
-
-        public void Map(string propertyName, Expression<Func<TObject, uint?>> propertyExpression)
-        {
-            var propertyValueExpr = Variable(typeof(uint?), $"value of {propertyName}");
-            _readers.Add(
-                new ReaderInfo
-                {
-                    MappingSignificance = MappingSignificance.Optional,
-                    PropertyName = propertyName,
-                    PropertyValueExpr = propertyValueExpr,
-                    Destination = ((MemberExpression) propertyExpression.Body).Member,
-                    OnMatch = (jsonPropertyExpr, _) => Block(
-                        Assign(propertyValueExpr, JsonElementExpr.GetUInt32OrNull(JsonPropertyExpr.GetValue(jsonPropertyExpr)))
-                    )
-                }
-            );
-            _needsCompilation = true;
-        }
-
-        public void Map(string propertyName, Expression<Func<TObject, ulong>> propertyExpression)
-        {
-            var propertySeenExpr = Variable(typeof(bool),   $"saw {propertyName}");
-            var propertyValueExpr = Variable(typeof(ulong), $"value of {propertyName}");
-            _readers.Add(
-                new ReaderInfo
-                {
-                    MappingSignificance = MappingSignificance.Required,
-                    PropertyName = propertyName,
-                    PropertySeenExpr = propertySeenExpr,
-                    PropertyValueExpr = propertyValueExpr,
-                    Destination = ((MemberExpression) propertyExpression.Body).Member,
-                    OnMatch = (jsonPropertyExpr, _) => Block(
-                        Assign(propertySeenExpr,  Constant(true)),
-                        Assign(propertyValueExpr, JsonElementExpr.GetUInt64(JsonPropertyExpr.GetValue(jsonPropertyExpr)))
-                    )
-                }
-            );
-            _needsCompilation = true;
-        }
-
-        public void Map(string propertyName, Expression<Func<TObject, ulong?>> propertyExpression)
-        {
-            var propertyValueExpr = Variable(typeof(ulong?), $"value of {propertyName}");
-            _readers.Add(
-                new ReaderInfo
-                {
-                    MappingSignificance = MappingSignificance.Optional,
-                    PropertyName = propertyName,
-                    PropertyValueExpr = propertyValueExpr,
-                    Destination = ((MemberExpression) propertyExpression.Body).Member,
-                    OnMatch = (jsonPropertyExpr, _) => Block(
-                        Assign(propertyValueExpr, JsonElementExpr.GetUInt64OrNull(JsonPropertyExpr.GetValue(jsonPropertyExpr)))
-                    )
-                }
-            );
-            _needsCompilation = true;
-        }
-
         public void Map(string propertyName, Expression<Func<TObject, bool>> propertyExpression)
         {
             var propertySeenExpr = Variable(typeof(bool),  $"saw {propertyName}");
@@ -855,63 +513,6 @@ namespace GW2SDK.Impl.JsonReaders
             _needsCompilation = true;
         }
 
-        public void Map(string propertyName, Expression<Func<TObject, bool?>> propertyExpression)
-        {
-            var propertyValueExpr = Variable(typeof(bool?), $"value of {propertyName}");
-            _readers.Add(
-                new ReaderInfo
-                {
-                    MappingSignificance = MappingSignificance.Optional,
-                    PropertyName = propertyName,
-                    PropertyValueExpr = propertyValueExpr,
-                    Destination = ((MemberExpression) propertyExpression.Body).Member,
-                    OnMatch = (jsonPropertyExpr, _) => Block(
-                        Assign(propertyValueExpr, JsonElementExpr.GetBooleanOrNull(JsonPropertyExpr.GetValue(jsonPropertyExpr)))
-                    )
-                }
-            );
-            _needsCompilation = true;
-        }
-
-        public void Map(string propertyName, Expression<Func<TObject, DateTime>> propertyExpression)
-        {
-            var propertySeenExpr = Variable(typeof(bool),      $"saw {propertyName}");
-            var propertyValueExpr = Variable(typeof(DateTime), $"value of {propertyName}");
-            _readers.Add(
-                new ReaderInfo
-                {
-                    MappingSignificance = MappingSignificance.Required,
-                    PropertyName = propertyName,
-                    PropertySeenExpr = propertySeenExpr,
-                    PropertyValueExpr = propertyValueExpr,
-                    Destination = ((MemberExpression) propertyExpression.Body).Member,
-                    OnMatch = (jsonPropertyExpr, _) => Block(
-                        Assign(propertySeenExpr,  Constant(true)),
-                        Assign(propertyValueExpr, JsonElementExpr.GetDateTime(JsonPropertyExpr.GetValue(jsonPropertyExpr)))
-                    )
-                }
-            );
-            _needsCompilation = true;
-        }
-
-        public void Map(string propertyName, Expression<Func<TObject, DateTime?>> propertyExpression)
-        {
-            var propertyValueExpr = Variable(typeof(DateTime), $"value of {propertyName}");
-            _readers.Add(
-                new ReaderInfo
-                {
-                    MappingSignificance = MappingSignificance.Optional,
-                    PropertyName = propertyName,
-                    PropertyValueExpr = propertyValueExpr,
-                    Destination = ((MemberExpression) propertyExpression.Body).Member,
-                    OnMatch = (jsonPropertyExpr, _) => Block(
-                        Assign(propertyValueExpr, JsonElementExpr.GetDateTimeOrNull(JsonPropertyExpr.GetValue(jsonPropertyExpr)))
-                    )
-                }
-            );
-            _needsCompilation = true;
-        }
-
         public void Map(string propertyName, Expression<Func<TObject, DateTimeOffset>> propertyExpression)
         {
             var propertySeenExpr = Variable(typeof(bool),            $"saw {propertyName}");
@@ -927,64 +528,6 @@ namespace GW2SDK.Impl.JsonReaders
                     OnMatch = (jsonPropertyExpr, _) => Block(
                         Assign(propertySeenExpr,  Constant(true)),
                         Assign(propertyValueExpr, JsonElementExpr.GetDateTimeOffset(JsonPropertyExpr.GetValue(jsonPropertyExpr)))
-                    )
-                }
-            );
-            _needsCompilation = true;
-        }
-
-        public void Map(string propertyName, Expression<Func<TObject, DateTimeOffset?>> propertyExpression)
-        {
-            var propertySeenExpr = Variable(typeof(bool),             $"saw {propertyName}");
-            var propertyValueExpr = Variable(typeof(DateTimeOffset?), $"value of {propertyName}");
-            _readers.Add(
-                new ReaderInfo
-                {
-                    MappingSignificance = MappingSignificance.Optional,
-                    PropertyName = propertyName,
-                    PropertyValueExpr = propertyValueExpr,
-                    Destination = ((MemberExpression) propertyExpression.Body).Member,
-                    OnMatch = (jsonPropertyExpr, _) => Block(
-                        Assign(propertyValueExpr, JsonElementExpr.GetDateTimeOffsetOrNull(JsonPropertyExpr.GetValue(jsonPropertyExpr)))
-                    )
-                }
-            );
-            _needsCompilation = true;
-        }
-
-        public void Map(string propertyName, Expression<Func<TObject, Guid>> propertyExpression)
-        {
-            var propertySeenExpr = Variable(typeof(bool),  $"saw {propertyName}");
-            var propertyValueExpr = Variable(typeof(Guid), $"value of {propertyName}");
-            _readers.Add(
-                new ReaderInfo
-                {
-                    MappingSignificance = MappingSignificance.Required,
-                    PropertyName = propertyName,
-                    PropertySeenExpr = propertySeenExpr,
-                    PropertyValueExpr = propertyValueExpr,
-                    Destination = ((MemberExpression) propertyExpression.Body).Member,
-                    OnMatch = (jsonPropertyExpr, _) => Block(
-                        Assign(propertySeenExpr,  Constant(true)),
-                        Assign(propertyValueExpr, JsonElementExpr.GetGuid(JsonPropertyExpr.GetValue(jsonPropertyExpr)))
-                    )
-                }
-            );
-            _needsCompilation = true;
-        }
-
-        public void Map(string propertyName, Expression<Func<TObject, Guid?>> propertyExpression)
-        {
-            var propertyValueExpr = Variable(typeof(Guid?), $"value of {propertyName}");
-            _readers.Add(
-                new ReaderInfo
-                {
-                    MappingSignificance = MappingSignificance.Optional,
-                    PropertyName = propertyName,
-                    PropertyValueExpr = propertyValueExpr,
-                    Destination = ((MemberExpression) propertyExpression.Body).Member,
-                    OnMatch = (jsonPropertyExpr, _) => Block(
-                        Assign(propertyValueExpr, JsonElementExpr.GetGuidOrNull(JsonPropertyExpr.GetValue(jsonPropertyExpr)))
                     )
                 }
             );
@@ -1041,9 +584,7 @@ namespace GW2SDK.Impl.JsonReaders
                     )
             );
 
-            var source = Lambda<ReadJson<TObject>>(block, json);
-            _source = source;
-            _compilation = source.Compile();
+            _compilation = Lambda<ReadJson<TObject>>(block, json).Compile();
             _needsCompilation = false;
         }
     }

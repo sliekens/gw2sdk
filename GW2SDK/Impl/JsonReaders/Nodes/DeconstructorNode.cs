@@ -13,6 +13,7 @@ namespace GW2SDK.Impl.JsonReaders.Nodes
         public List<PropertyNode> Children { get; set; } = new List<PropertyNode>();
 
         public UnexpectedPropertyBehavior UnexpectedPropertyBehavior { get; set; }
+
         public ParameterExpression ObjectSeenExpr { get; set; } = default!;
 
         public Expression DeconstructExpr(Expression jsonElementExpr)

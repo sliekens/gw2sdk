@@ -13,13 +13,11 @@ namespace GW2SDK.Impl.JsonReaders.Nodes
     {
         public Type ObjectType { get; set; } = typeof(object);
 
-        public ParameterExpression ActualValueExpr { get; set; } = default!;
+        public ParameterExpression ObjectSeenExpr { get; set; } = default!;
 
         public List<PropertyNode> Children { get; set; } = new List<PropertyNode>();
 
         public UnexpectedPropertyBehavior UnexpectedPropertyBehavior { get; set; }
-
-        public ParameterExpression ObjectSeenExpr { get; set; } = default!;
 
         public Expression DeconstructExpr(Expression jsonElementExpr)
         {
@@ -52,8 +50,6 @@ namespace GW2SDK.Impl.JsonReaders.Nodes
                 );
             }
         }
-
-        public Expression MapExpr(Expression jsonElementExpr) => Assign(ActualValueExpr, CreateExpr(jsonElementExpr));
 
         public Expression CreateExpr(Expression jsonElementExpr)
         {
@@ -111,7 +107,6 @@ namespace GW2SDK.Impl.JsonReaders.Nodes
             if (Mapping.Significance != MappingSignificance.Ignored)
             {
                 yield return ObjectSeenExpr;
-                yield return ActualValueExpr;
                 foreach (var child in Children)
                 {
                     foreach (var variable in child.GetVariables())

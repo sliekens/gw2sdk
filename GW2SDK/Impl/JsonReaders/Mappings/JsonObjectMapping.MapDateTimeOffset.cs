@@ -43,7 +43,7 @@ namespace GW2SDK.Impl.JsonReaders.Mappings
                 ParentNode = this
             };
 
-            jsonValueMapping.ParentNode = jsonValueMapping;
+            jsonValueMapping.ParentNode = jsonPropertyMapping;
             Children.Add(jsonPropertyMapping);
         }
     }

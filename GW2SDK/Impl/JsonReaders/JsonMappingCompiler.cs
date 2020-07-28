@@ -11,9 +11,7 @@ namespace GW2SDK.Impl.JsonReaders
     {
         public Stack<JsonNode> Nodes { get; } = new Stack<JsonNode>();
 
-        public Expression<ReadJson<TObject>>? Source { get; set; }
-
-        public ReadJson<TObject> Compile(JsonObjectMapping<TObject> mapping)
+        public Expression<ReadJson<TObject>> Build(JsonObjectMapping<TObject> mapping)
         {
             var inputExpr = Parameter(typeof(JsonElement).MakeByRefType(), "json");
 
@@ -21,9 +19,7 @@ namespace GW2SDK.Impl.JsonReaders
 
             var root = (ObjectNode) Nodes.Pop();
 
-            var reader = Lambda<ReadJson<TObject>>(root.CreateExpr(inputExpr), inputExpr);
-            Source = reader;
-            return reader.Compile();
+            return Lambda<ReadJson<TObject>>(root.CreateExpr(inputExpr), inputExpr);
         }
     }
 }

@@ -29,6 +29,7 @@ namespace GW2SDK.Impl.JsonReaders
                     new PropertyNode
                     {
                         Mapping = mapping,
+                        Destination = mapping.Destination,
                         ValueNode = value,
                         PropertySeenExpr = propertySeenExpr
                     }

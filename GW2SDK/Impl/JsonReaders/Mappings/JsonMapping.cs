@@ -12,8 +12,6 @@ namespace GW2SDK.Impl.JsonReaders.Mappings
 
         public MappingSignificance Significance { get; set; } = MappingSignificance.Required;
 
-        public MemberInfo? Destination { get; set; }
-
         public abstract void Accept(IJsonMappingVisitor visitor);
 
         public abstract string JsonPath { get; }

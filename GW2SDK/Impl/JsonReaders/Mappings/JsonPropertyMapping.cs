@@ -1,4 +1,6 @@
-﻿namespace GW2SDK.Impl.JsonReaders.Mappings
+﻿using System.Reflection;
+
+namespace GW2SDK.Impl.JsonReaders.Mappings
 {
     public class JsonPropertyMapping : JsonMapping
     {
@@ -12,5 +14,6 @@
         }
 
         public override string JsonPath => $"{ParentNode!.JsonPath}.{Name}";
+        public MemberInfo? Destination { get; set; }
     }
 }

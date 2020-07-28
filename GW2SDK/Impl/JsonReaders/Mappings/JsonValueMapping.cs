@@ -6,8 +6,6 @@
 
         public JsonValueMappingKind ValueKind { get; set; }
 
-        public JsonObjectMapping<TValue>? ObjectMapping { get; set; }
-
         public IJsonReader<TValue>? JsonReader { get; set; }
 
         public override void Accept(IJsonMappingVisitor visitor)
