@@ -4,7 +4,7 @@ using GW2SDK.Impl.JsonReaders.Mappings;
 
 namespace GW2SDK.Accounts.Impl
 {
-    internal sealed class AccountJsonReader : JsonObjectReader2<Account>
+    internal sealed class AccountJsonReader : JsonObjectReader<Account>
     {
         private AccountJsonReader()
         {

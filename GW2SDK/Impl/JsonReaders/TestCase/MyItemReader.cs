@@ -1,6 +1,6 @@
 ﻿namespace GW2SDK.Impl.JsonReaders.TestCase
 {
-    public class MyItemReader : JsonObjectReader2<MyItem>
+    public class MyItemReader : JsonObjectReader<MyItem>
     {
         public MyItemReader()
         {

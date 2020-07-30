@@ -2,7 +2,7 @@
 
 namespace GW2SDK.Currencies.Impl
 {
-    public sealed class CurrencyJsonReader : JsonObjectReader2<Currency>
+    public sealed class CurrencyJsonReader : JsonObjectReader<Currency>
     {
         private CurrencyJsonReader()
         {

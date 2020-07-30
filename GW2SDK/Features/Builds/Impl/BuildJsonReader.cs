@@ -2,7 +2,7 @@
 
 namespace GW2SDK.Builds.Impl
 {
-    internal sealed class BuildJsonReader : JsonObjectReader2<Build>
+    internal sealed class BuildJsonReader : JsonObjectReader<Build>
     {
         private BuildJsonReader()
         {

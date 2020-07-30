@@ -3,7 +3,7 @@ using GW2SDK.Impl.JsonReaders.Mappings;
 
 namespace GW2SDK.Titles.Impl
 {
-    public class TitleJsonReader : JsonObjectReader2<Title>
+    public class TitleJsonReader : JsonObjectReader<Title>
     {
         private TitleJsonReader()
         {
