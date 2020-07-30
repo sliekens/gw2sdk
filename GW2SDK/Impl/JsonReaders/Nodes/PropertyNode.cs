@@ -55,7 +55,7 @@ namespace GW2SDK.Impl.JsonReaders.Nodes
                     expressions.Add(array.MapExpr(JsonPropertyExpr.GetValue(jsonPropertyExpr)));
                     break;
                 default:
-                    throw new JsonException("Mapping is not yet supported for " + ValueNode.GetType());
+                    throw new JsonException("Mapping properties is not yet supported for " + ValueNode.GetType());
             }
 
             return Block(expressions);

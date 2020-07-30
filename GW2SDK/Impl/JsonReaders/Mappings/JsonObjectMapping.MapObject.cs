@@ -3,11 +3,11 @@ using System.Linq.Expressions;
 
 namespace GW2SDK.Impl.JsonReaders.Mappings
 {
-    public partial class JsonObjectMapping<TValue>
+    public partial class JsonObjectMapping<TObject>
     {
-        public void Map(string propertyName, Action<JsonDeconstructionMapping<TValue>> map, MappingSignificance significance = MappingSignificance.Required)
+        public void Map(string propertyName, Action<JsonDeconstructionMapping<TObject>> map, MappingSignificance significance = MappingSignificance.Required)
         {
-            var jsonObjectMapping = new JsonDeconstructionMapping<TValue>
+            var jsonObjectMapping = new JsonDeconstructionMapping<TObject>
             {
                 Significance = significance
             };
@@ -23,13 +23,13 @@ namespace GW2SDK.Impl.JsonReaders.Mappings
             Children.Add(jsonPropertyMapping);
         }
 
-        public void Map<TObject>(
+        public void Map<TProperty>(
             string propertyName,
-            Expression<Func<TValue, TObject>> propertyExpression,
-            Action<JsonObjectMapping<TObject>> map,
+            Expression<Func<TObject, TProperty>> propertyExpression,
+            Action<JsonObjectMapping<TProperty>> map,
             MappingSignificance significance = MappingSignificance.Required)
         {
-            var jsonObjectMapping = new JsonObjectMapping<TObject>
+            var jsonObjectMapping = new JsonObjectMapping<TProperty>
             {
                 Name = propertyName,
                 Significance = significance

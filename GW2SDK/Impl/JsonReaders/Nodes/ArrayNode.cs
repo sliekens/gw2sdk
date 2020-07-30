@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Text.Json;
 using GW2SDK.Impl.Json;
@@ -9,6 +10,10 @@ namespace GW2SDK.Impl.JsonReaders.Nodes
 {
     public class ArrayNode : JsonNode
     {
+        public JsonNode ItemNode { get; set; } = default!;
+
+        public Type ItemType { get; set; } = typeof(object);
+
         public ParameterExpression ArraySeenExpr { get; set; } = default!;
 
         public ParameterExpression ActualValueExpr { get; set; } = default!;
@@ -34,14 +39,20 @@ namespace GW2SDK.Impl.JsonReaders.Nodes
                     Assign(ArraySeenExpr,   Constant(true)),
                     Assign(indexExpr,       Constant(0)),
                     Assign(arrayLengthExpr, Call(jsonElementExpr, JsonElementInfo.GetArrayLength)),
-                    Assign(ActualValueExpr, NewArrayBounds(typeof(int), arrayLengthExpr)),
+                    Assign(ActualValueExpr, NewArrayBounds(ItemType, arrayLengthExpr)),
                     Expr.For(
                         indexExpr,
                         arrayLengthExpr,
                         (_, __) =>
                         {
                             var indexExpression = MakeIndex(jsonElementExpr, JsonElementInfo.Item, new[] { indexExpr });
-                            var valueExpr = JsonElementExpr.GetInt32(indexExpression);
+                            var valueExpr = ItemNode switch
+                            {
+                                ValueNode value => value.MapExpr(indexExpression),
+                                ObjectNode obj => obj.MapExpr(indexExpr),
+                                ArrayNode array => array.MapExpr(indexExpr),
+                                _ => throw new JsonException("Mapping arrays is not yet supported for " + ItemNode.GetType())
+                            };
                             return Assign(ArrayAccess(ActualValueExpr, indexExpr), valueExpr);
                         }
                     )
@@ -55,6 +66,10 @@ namespace GW2SDK.Impl.JsonReaders.Nodes
             {
                 yield return ArraySeenExpr;
                 yield return ActualValueExpr;
+                foreach (var child in ItemNode.GetVariables())
+                {
+                    yield return child;
+                }
             }
         }
 
@@ -67,6 +82,8 @@ namespace GW2SDK.Impl.JsonReaders.Nodes
                     Throw(JsonExceptionExpr.Create(Constant($"Missing required value for '{Mapping.JsonPath}'.")))
                 );
             }
+
+            // TODO: item validations?
         }
 
         public override IEnumerable<MemberBinding> GetBindings()

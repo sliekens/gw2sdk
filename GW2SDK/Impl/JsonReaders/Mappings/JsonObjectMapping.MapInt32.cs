@@ -4,9 +4,9 @@ using System.Linq.Expressions;
 
 namespace GW2SDK.Impl.JsonReaders.Mappings
 {
-    public partial class JsonObjectMapping<TValue>
+    public partial class JsonObjectMapping<TObject>
     {
-        public void Map(string propertyName, Expression<Func<TValue, int>> propertyExpression)
+        public void Map(string propertyName, Expression<Func<TObject, int>> propertyExpression)
         {
             var jsonValueMapping = new JsonValueMapping<int>
             {
@@ -27,7 +27,7 @@ namespace GW2SDK.Impl.JsonReaders.Mappings
             Children.Add(jsonPropertyMapping);
         }
 
-        public void Map(string propertyName, Expression<Func<TValue, int?>> propertyExpression)
+        public void Map(string propertyName, Expression<Func<TObject, int?>> propertyExpression)
         {
             var jsonValueMapping = new JsonValueMapping<int?>
             {
@@ -50,13 +50,54 @@ namespace GW2SDK.Impl.JsonReaders.Mappings
         
         public void Map(
             string propertyName,
-            Expression<Func<TValue, IEnumerable<int>?>> propertyExpression,
+            Expression<Func<TObject, IEnumerable<int>?>> propertyExpression,
             MappingSignificance significance = MappingSignificance.Required)
         {
-            var jsonArrayMapping = new JsonArrayMapping<int>()
+            var jsonValueMapping = new JsonValueMapping<int>
             {
-                Significance = significance
+                ValueKind = JsonValueMappingKind.Int32,
+                Significance = MappingSignificance.Required
             };
+
+            var jsonArrayMapping = new JsonArrayMapping<int>
+            {
+                ValueMapping = jsonValueMapping,
+                Significance = MappingSignificance.Required
+            };
+
+            jsonValueMapping.ParentNode = jsonArrayMapping;
+
+            var jsonPropertyMapping = new JsonPropertyMapping
+            {
+                Name = propertyName,
+                Destination = ((MemberExpression) propertyExpression.Body).Member,
+                Significance = significance,
+                ValueNode = jsonArrayMapping,
+                ParentNode = this
+            };
+
+            jsonArrayMapping.ParentNode = jsonPropertyMapping;
+            Children.Add(jsonPropertyMapping);
+        }
+        
+        public void Map(
+            string propertyName,
+            Expression<Func<TObject, IEnumerable<int?>?>> propertyExpression,
+            MappingSignificance significance = MappingSignificance.Required)
+        {
+            var jsonValueMapping = new JsonValueMapping<int?>
+            {
+                ValueKind = JsonValueMappingKind.Int32,
+                Significance = MappingSignificance.Optional
+            };
+
+            var jsonArrayMapping = new JsonArrayMapping<int?>()
+            {
+                ValueMapping = jsonValueMapping,
+                Significance = MappingSignificance.Optional
+            };
+
+            jsonValueMapping.ParentNode = jsonArrayMapping;
 
             var jsonPropertyMapping = new JsonPropertyMapping
             {

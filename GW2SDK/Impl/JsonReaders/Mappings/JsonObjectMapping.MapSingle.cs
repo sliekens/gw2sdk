@@ -3,9 +3,9 @@ using System.Linq.Expressions;
 
 namespace GW2SDK.Impl.JsonReaders.Mappings
 {
-    public partial class JsonObjectMapping<TValue>
+    public partial class JsonObjectMapping<TObject>
     {
-        public void Map(string propertyName, Expression<Func<TValue, float>> propertyExpression)
+        public void Map(string propertyName, Expression<Func<TObject, float>> propertyExpression)
         {
             var jsonValueMapping = new JsonValueMapping<float>
             {
@@ -26,7 +26,7 @@ namespace GW2SDK.Impl.JsonReaders.Mappings
             Children.Add(jsonPropertyMapping);
         }
 
-        public void Map(string propertyName, Expression<Func<TValue, float?>> propertyExpression)
+        public void Map(string propertyName, Expression<Func<TObject, float?>> propertyExpression)
         {
             var jsonValueMapping = new JsonValueMapping<float?>
             {

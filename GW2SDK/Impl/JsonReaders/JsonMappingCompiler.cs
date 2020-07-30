@@ -19,7 +19,7 @@ namespace GW2SDK.Impl.JsonReaders
 
             var root = (ObjectNode) Nodes.Pop();
 
-            return Lambda<ReadJson<TObject>>(root.CreateExpr(inputExpr), inputExpr);
+            return Lambda<ReadJson<TObject>>(root.MapExpr(inputExpr), inputExpr);
         }
     }
 }

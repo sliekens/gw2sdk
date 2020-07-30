@@ -2,11 +2,11 @@
 {
     public interface IJsonMappingVisitor
     {
-        void VisitObject<TValue>(JsonObjectMapping<TValue> mapping);
+        void VisitObject<TObject>(JsonObjectMapping<TObject> mapping);
 
         void VisitValue<TValue>(JsonValueMapping<TValue> mapping);
 
-        void VisitDeconstruction<TValue>(JsonDeconstructionMapping<TValue> mapping);
+        void VisitDeconstruction<TObject>(JsonDeconstructionMapping<TObject> mapping);
 
         void VisitProperty(JsonPropertyMapping mapping);
 

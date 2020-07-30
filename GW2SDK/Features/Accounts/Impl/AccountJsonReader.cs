@@ -4,28 +4,32 @@ using GW2SDK.Impl.JsonReaders.Mappings;
 
 namespace GW2SDK.Accounts.Impl
 {
-    internal sealed class AccountJsonReader : JsonObjectReader<Account>
+    internal sealed class AccountJsonReader : JsonObjectReader2<Account>
     {
         private AccountJsonReader()
         {
-            Map("id",                  to => to.Id);
-            Map("name",                to => to.Name);
-            Map("age",                 to => to.Age, SecondsJsonReader.Instance);
-            Map("last_modified",       to => to.LastModified);
-            Map("world",               to => to.World);
-            Map("guilds",              to => to.Guilds);
-            Map("guild_leader",        to => to.GuildLeader, MappingSignificance.Optional);
-            Map("created",             to => to.Created);
-            Map("access",              to => to.Access, new JsonStringEnumReader<ProductName>());
-            Map("commander",           to => to.Commander);
-            Map("fractal_level",       to => to.FractalLevel);
-            Map("daily_ap",            to => to.DailyAp);
-            Map("monthly_ap",          to => to.MonthlyAp);
-            Map("wvw_rank",            to => to.WvwRank);
-            Map("build_storage_slots", to => to.BuildStorageSlots);
-            Compile();
+            Configure(
+                account =>
+                {
+                    account.Map("id",                  to => to.Id);
+                    account.Map("name",                to => to.Name);
+                    account.Map("age",                 to => to.Age, SecondsJsonReader.Instance);
+                    account.Map("last_modified",       to => to.LastModified);
+                    account.Map("world",               to => to.World);
+                    account.Map("guilds",              to => to.Guilds);
+                    account.Map("guild_leader",        to => to.GuildLeader, MappingSignificance.Optional);
+                    account.Map("created",             to => to.Created);
+                    account.Map("access",              to => to.Access, new JsonStringEnumReader<ProductName>());
+                    account.Map("commander",           to => to.Commander);
+                    account.Map("fractal_level",       to => to.FractalLevel);
+                    account.Map("daily_ap",            to => to.DailyAp);
+                    account.Map("monthly_ap",          to => to.MonthlyAp);
+                    account.Map("wvw_rank",            to => to.WvwRank);
+                    account.Map("build_storage_slots", to => to.BuildStorageSlots);
+                }
+            );
         }
 
-        internal static AccountJsonReader Instance { get; } = new AccountJsonReader();
+        internal static IJsonReader<Account> Instance { get; } = new AccountJsonReader();
     }
 }

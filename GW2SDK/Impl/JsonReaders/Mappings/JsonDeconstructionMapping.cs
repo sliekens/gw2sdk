@@ -1,6 +1,6 @@
 ﻿namespace GW2SDK.Impl.JsonReaders.Mappings
 {
-    public class JsonDeconstructionMapping<TValue> : JsonObjectMapping<TValue>
+    public class JsonDeconstructionMapping<TObject> : JsonObjectMapping<TObject>
     {
         public override JsonMappingKind Kind => JsonMappingKind.Deconstruction;
 

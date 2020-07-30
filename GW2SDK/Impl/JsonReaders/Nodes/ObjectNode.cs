@@ -51,7 +51,7 @@ namespace GW2SDK.Impl.JsonReaders.Nodes
             }
         }
 
-        public Expression CreateExpr(Expression jsonElementExpr)
+        public Expression MapExpr(Expression jsonElementExpr)
         {
             if (Mapping.Significance == MappingSignificance.Ignored)
             {

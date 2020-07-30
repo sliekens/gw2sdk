@@ -2,7 +2,7 @@
 
 namespace GW2SDK.Impl.JsonReaders.Mappings
 {
-    public partial class JsonObjectMapping<TValue> : JsonMapping
+    public partial class JsonObjectMapping<TObject> : JsonMapping
     {
         public override JsonMappingKind Kind => JsonMappingKind.Object;
 
