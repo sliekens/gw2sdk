@@ -13,6 +13,6 @@ namespace GW2SDK.Impl.JsonReaders
 
         public TimeSpan Read(in JsonElement json) => TimeSpan.FromSeconds(json.GetDouble());
 
-        public bool CanRead(in JsonElement json) => json.ValueKind == System.Text.Json.JsonValueKind.Number;
+        public bool CanRead(in JsonElement json) => json.ValueKind == JsonValueKind.Number;
     }
 }

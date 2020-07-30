@@ -8,7 +8,7 @@ namespace GW2SDK.Impl.JsonReaders.Mappings
     {
         public void Map<TProperty>(
             string propertyName,
-            Expression<Func<TObject, TProperty>> propertyExpression,
+            Expression<Func<TObject, TProperty>> custom,
             IJsonReader<TProperty> jsonReader,
             MappingSignificance significance = MappingSignificance.Required)
         {
@@ -22,7 +22,7 @@ namespace GW2SDK.Impl.JsonReaders.Mappings
             var jsonPropertyMapping = new JsonPropertyMapping
             {
                 Name = propertyName,
-                Destination = ((MemberExpression) propertyExpression.Body).Member,
+                Destination = ((MemberExpression) custom.Body).Member,
                 Significance = significance,
                 ValueNode = jsonValueMapping,
                 ParentNode = this
@@ -34,7 +34,7 @@ namespace GW2SDK.Impl.JsonReaders.Mappings
         
         public void Map<TProperty>(
             string propertyName,
-            Expression<Func<TObject, IEnumerable<TProperty>?>> propertyExpression,
+            Expression<Func<TObject, IEnumerable<TProperty>?>> custom,
             IJsonReader<TProperty> jsonReader,
             MappingSignificance significance = MappingSignificance.Required,
             MappingSignificance itemSignificance = MappingSignificance.Required)
@@ -57,7 +57,7 @@ namespace GW2SDK.Impl.JsonReaders.Mappings
             var jsonPropertyMapping = new JsonPropertyMapping
             {
                 Name = propertyName,
-                Destination = ((MemberExpression) propertyExpression.Body).Member,
+                Destination = ((MemberExpression) custom.Body).Member,
                 Significance = significance,
                 ValueNode = jsonArrayMapping,
                 ParentNode = this

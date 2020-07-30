@@ -25,7 +25,7 @@ namespace GW2SDK.Impl.JsonReaders.Mappings
 
         public void Map<TProperty>(
             string propertyName,
-            Expression<Func<TObject, TProperty>> propertyExpression,
+            Expression<Func<TObject, TProperty>> @object,
             Action<JsonObjectMapping<TProperty>> map,
             MappingSignificance significance = MappingSignificance.Required)
         {
@@ -38,7 +38,7 @@ namespace GW2SDK.Impl.JsonReaders.Mappings
             var jsonPropertyMapping = new JsonPropertyMapping
             {
                 Name = propertyName,
-                Destination = ((MemberExpression) propertyExpression.Body).Member,
+                Destination = ((MemberExpression) @object.Body).Member,
                 Significance = significance,
                 ValueNode = jsonObjectMapping,
                 ParentNode = this
