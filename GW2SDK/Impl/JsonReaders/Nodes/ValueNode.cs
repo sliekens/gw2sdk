@@ -22,7 +22,7 @@ namespace GW2SDK.Impl.JsonReaders.Nodes
             }
         }
 
-        public override IEnumerable<Expression> GetValidations()
+        public override IEnumerable<Expression> GetValidations(Type targetType)
         {
             // validations are done in-line (at least for now)
             yield break;

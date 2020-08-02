@@ -11,8 +11,7 @@ namespace GW2SDK.Impl.JsonReaders
     {
         public void VisitValue<TValue>(JsonValueMapping<TValue> mapping)
         {
-            var name = mapping.ParentNode?.Name ?? mapping.Name;
-            ParameterExpression actualValueExpr = Variable(typeof(TValue), $"{name}_value");
+            ParameterExpression actualValueExpr = Variable(typeof(TValue), $"{mapping.Name}_value");
 
             Nodes.Push(
                 new ValueNode

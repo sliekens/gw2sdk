@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Text.Json;
@@ -10,6 +11,8 @@ namespace GW2SDK.Impl.JsonReaders.Nodes
 {
     public class DeconstructorNode : JsonNode
     {
+        public Type TargetType { get; set; } = typeof(object);
+
         public List<PropertyNode> Children { get; set; } = new List<PropertyNode>();
 
         public UnexpectedPropertyBehavior UnexpectedPropertyBehavior { get; set; }
@@ -42,12 +45,11 @@ namespace GW2SDK.Impl.JsonReaders.Nodes
                     index + 1 < Children.Count
                         ? MapPropertyExpression(jsonPropertyExpr, @continue, index + 1)
                         : UnexpectedPropertyBehavior == UnexpectedPropertyBehavior.Error
-                            ? Expr.ThrowJsonException(Expr.UnexpectedProperty(Constant(Mapping.JsonPath, typeof(string)), jsonPropertyExpr))
+                            ? JsonExceptionExpr.ThrowJsonException(Expr.UnexpectedProperty(Constant(Mapping.Name, typeof(string)), jsonPropertyExpr, TargetType))
                             : Continue(@continue)
                 );
             }
         }
-
 
         public override IEnumerable<ParameterExpression> GetVariables()
         {
@@ -64,7 +66,7 @@ namespace GW2SDK.Impl.JsonReaders.Nodes
             }
         }
 
-        public override IEnumerable<Expression> GetValidations()
+        public override IEnumerable<Expression> GetValidations(Type targetType)
         {
             switch (Mapping.Significance)
             {
@@ -72,9 +74,9 @@ namespace GW2SDK.Impl.JsonReaders.Nodes
                 {
                     yield return IfThen(
                         IsFalse(ObjectSeenExpr),
-                        Throw(JsonExceptionExpr.Create(Constant($"Missing required value for '{Mapping.JsonPath}'.")))
+                        Throw(JsonExceptionExpr.Create(Constant($"Missing required value for '{Mapping.Name}'.")))
                     );
-                    foreach (var validation in Children.SelectMany(child => child.GetValidations()))
+                    foreach (var validation in Children.SelectMany(child => child.GetValidations(TargetType)))
                     {
                         yield return validation;
                     }
@@ -82,7 +84,7 @@ namespace GW2SDK.Impl.JsonReaders.Nodes
                     break;
                 }
                 case MappingSignificance.Optional:
-                    var childValidators = Children.SelectMany(child => child.GetValidations()).ToList();
+                    var childValidators = Children.SelectMany(child => child.GetValidations(TargetType)).ToList();
                     if (childValidators.Count != 0)
                     {
                         yield return IfThen(

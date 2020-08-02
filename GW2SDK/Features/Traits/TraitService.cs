@@ -16,7 +16,7 @@ namespace GW2SDK.Traits
     {
         private static readonly IJsonReader<int> KeyReader = new Int32JsonReader();
         private static readonly IJsonReader<IEnumerable<int>> KeyArrayReader = new JsonArrayReader<int>(KeyReader);
-        private static readonly IJsonReader<Trait> ValueReader = new TraitJsonReader();
+        private static readonly IJsonReader<Trait> ValueReader = TraitJsonReader.Instance;
         private static readonly IJsonReader<IEnumerable<Trait>> ValueArrayReader = new JsonArrayReader<Trait>(ValueReader);
 
         private readonly HttpClient _http;

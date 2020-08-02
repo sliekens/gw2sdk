@@ -29,8 +29,6 @@ namespace GW2SDK.Impl.Json
 
         internal static readonly MethodInfo TryGetInt64 = typeof(JsonElement).GetMethod(nameof(JsonElement.TryGetInt64));
 
-        internal static readonly MethodInfo GetSByte = typeof(JsonElement).GetMethod(nameof(JsonElement.GetSByte));
-
         internal static readonly MethodInfo TryGetSByte = typeof(JsonElement).GetMethod(nameof(JsonElement.TryGetSByte));
 
         internal static readonly MethodInfo TryGetUInt16 = typeof(JsonElement).GetMethod(nameof(JsonElement.TryGetUInt16));

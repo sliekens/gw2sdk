@@ -7,44 +7,32 @@ namespace GW2SDK.Impl.JsonReaders.Mappings
     {
         public void Map(string propertyName, Expression<Func<TObject, uint>> uint32)
         {
-            var jsonValueMapping = new JsonValueMapping<uint>
-            {
-                ValueKind = JsonValueMappingKind.UInt32,
-                Significance = MappingSignificance.Required
-            };
-
-            var jsonPropertyMapping = new JsonPropertyMapping
+            Children.Add(new JsonPropertyMapping
             {
                 Name = propertyName,
                 Destination = ((MemberExpression) uint32.Body).Member,
                 Significance = MappingSignificance.Required,
-                ValueNode = jsonValueMapping,
-                ParentNode = this
-            };
-
-            jsonValueMapping.ParentNode = jsonPropertyMapping;
-            Children.Add(jsonPropertyMapping);
+                ValueNode = new JsonValueMapping<uint>
+                {
+                    ValueKind = JsonValueMappingKind.UInt32,
+                    Significance = MappingSignificance.Required
+                }
+            });
         }
 
         public void Map(string propertyName, Expression<Func<TObject, uint?>> uint32)
         {
-            var jsonValueMapping = new JsonValueMapping<uint?>
-            {
-                ValueKind = JsonValueMappingKind.UInt32,
-                Significance = MappingSignificance.Optional
-            };
-
-            var jsonPropertyMapping = new JsonPropertyMapping
+            Children.Add(new JsonPropertyMapping
             {
                 Name = propertyName,
                 Destination = ((MemberExpression) uint32.Body).Member,
                 Significance = MappingSignificance.Optional,
-                ValueNode = jsonValueMapping,
-                ParentNode = this
-            };
-
-            jsonValueMapping.ParentNode = jsonPropertyMapping;
-            Children.Add(jsonPropertyMapping);
+                ValueNode = new JsonValueMapping<uint?>
+                {
+                    ValueKind = JsonValueMappingKind.UInt32,
+                    Significance = MappingSignificance.Optional
+                }
+            });
         }
     }
 }

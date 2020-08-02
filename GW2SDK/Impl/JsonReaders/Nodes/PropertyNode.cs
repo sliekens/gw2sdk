@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
@@ -15,7 +16,7 @@ namespace GW2SDK.Impl.JsonReaders.Nodes
 
         public ParameterExpression PropertySeenExpr { get; set; } = default!;
 
-        public MemberInfo? Destination { get; set; }
+        public MemberInfo Destination { get; set; } = default!;
 
         public override IEnumerable<ParameterExpression> GetVariables()
         {
@@ -61,7 +62,7 @@ namespace GW2SDK.Impl.JsonReaders.Nodes
             return Block(expressions);
         }
 
-        public override IEnumerable<Expression> GetValidations()
+        public override IEnumerable<Expression> GetValidations(Type targetType)
         {
             switch (Mapping.Significance)
             {
@@ -69,10 +70,10 @@ namespace GW2SDK.Impl.JsonReaders.Nodes
                 {
                     yield return IfThen(
                         IsFalse(PropertySeenExpr),
-                        Throw(JsonExceptionExpr.Create(Constant($"Missing required value for '{Mapping.JsonPath}'.")))
+                        Throw(JsonExceptionExpr.Create(Constant($"Missing required value for '{Mapping.Name}' for object of type '{targetType.Name}'.")))
                     );
 
-                    foreach (var validation in ValueNode.GetValidations())
+                    foreach (var validation in ValueNode.GetValidations(targetType))
                     {
                         yield return validation;
                     }
@@ -80,7 +81,7 @@ namespace GW2SDK.Impl.JsonReaders.Nodes
                     break;
                 }
                 case MappingSignificance.Optional:
-                    var childValidators = ValueNode.GetValidations().ToList();
+                    var childValidators = ValueNode.GetValidations(targetType).ToList();
                     if (childValidators.Count != 0)
                     {
                         yield return IfThen(

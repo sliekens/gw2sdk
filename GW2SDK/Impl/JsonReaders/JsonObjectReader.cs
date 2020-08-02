@@ -16,10 +16,10 @@ namespace GW2SDK.Impl.JsonReaders
 
         private ReadJson<TObject>? _read;
 
-        public void Configure(Action<JsonObjectMapping<TObject>> configureAction)
+        public void Configure(Action<JsonObjectMapping<TObject>> configure)
         {
             var compiler = new JsonMappingCompiler<TObject>();
-            configureAction(_mapping);
+            configure(_mapping);
             _source = compiler.Build(_mapping);
             _read = _source.Compile();
         }

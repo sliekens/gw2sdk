@@ -38,7 +38,7 @@ namespace GW2SDK.Impl.JsonReaders.Nodes
                     },
                     Assign(ArraySeenExpr,   Constant(true)),
                     Assign(indexExpr,       Constant(0)),
-                    Assign(arrayLengthExpr, Call(jsonElementExpr, JsonElementInfo.GetArrayLength)),
+                    Assign(arrayLengthExpr, JsonElementExpr.GetArrayLength(jsonElementExpr)),
                     Assign(ActualValueExpr, NewArrayBounds(ItemType, arrayLengthExpr)),
                     Expr.For(
                         indexExpr,
@@ -73,13 +73,13 @@ namespace GW2SDK.Impl.JsonReaders.Nodes
             }
         }
 
-        public override IEnumerable<Expression> GetValidations()
+        public override IEnumerable<Expression> GetValidations(Type targetType)
         {
             if (Mapping.Significance == MappingSignificance.Required)
             {
                 yield return IfThen(
                     IsFalse(ArraySeenExpr),
-                    Throw(JsonExceptionExpr.Create(Constant($"Missing required value for '{Mapping.JsonPath}'.")))
+                    Throw(JsonExceptionExpr.Create(Constant($"Missing required value for '{Mapping.Name}'.")))
                 );
             }
 

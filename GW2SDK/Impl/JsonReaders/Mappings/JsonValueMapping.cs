@@ -12,7 +12,5 @@
         {
             visitor.VisitValue(this);
         }
-
-        public override string JsonPath => ParentNode?.JsonPath ?? "$";
     }
 }

@@ -30,14 +30,19 @@ namespace GW2SDK.Impl.JsonReaders.Nodes
                 Equal(JsonElementExpr.GetValueKind(jsonElementExpr), Constant(JsonValueKind.Object)),
                 Block(
                     Assign(ObjectSeenExpr, Constant(true)),
-                    Children.Count == 0
-                        ? Empty()
-                        : JsonElementExpr.ForEachProperty(jsonElementExpr, (jsonPropertyExpr, @continue) => MapPropertyExpression(jsonPropertyExpr, @continue))
+                    JsonElementExpr.ForEachProperty(jsonElementExpr, (jsonPropertyExpr, @continue) => MapPropertyExpression(jsonPropertyExpr, @continue))
                 )
             );
 
             Expression MapPropertyExpression(Expression jsonPropertyExpr, LabelTarget @continue, int index = 0)
             {
+                if (Children.Count == 0)
+                {
+                    return UnexpectedPropertyBehavior == UnexpectedPropertyBehavior.Error
+                        ? JsonExceptionExpr.ThrowJsonException(Expr.UnexpectedProperty(Constant(Mapping.Name, typeof(string)), jsonPropertyExpr, ObjectType))
+                        : Continue(@continue);
+                }
+
                 var child = Children[index];
                 return IfThenElse(
                     child.TestExpr(jsonPropertyExpr),
@@ -45,12 +50,13 @@ namespace GW2SDK.Impl.JsonReaders.Nodes
                     index + 1 < Children.Count
                         ? MapPropertyExpression(jsonPropertyExpr, @continue, index + 1)
                         : UnexpectedPropertyBehavior == UnexpectedPropertyBehavior.Error
-                            ? Expr.ThrowJsonException(Expr.UnexpectedProperty(Constant(Mapping.JsonPath, typeof(string)), jsonPropertyExpr))
+                            ? JsonExceptionExpr.ThrowJsonException(Expr.UnexpectedProperty(Constant(Mapping.Name, typeof(string)), jsonPropertyExpr, ObjectType))
                             : Continue(@continue)
                 );
             }
         }
 
+        // TODO: deduplicate code
         public Expression MapExpr(Expression jsonElementExpr)
         {
             if (Mapping.Significance == MappingSignificance.Ignored)
@@ -64,16 +70,14 @@ namespace GW2SDK.Impl.JsonReaders.Nodes
                     Equal(JsonElementExpr.GetValueKind(jsonElementExpr), Constant(JsonValueKind.Object)),
                     Block(
                         Assign(ObjectSeenExpr, Constant(true)),
-                        Children.Count == 0
-                            ? Empty()
-                            : JsonElementExpr.ForEachProperty(
-                                jsonElementExpr,
-                                (jsonPropertyExpr, @continue) => MapPropertyExpression(jsonPropertyExpr, @continue)
-                            )
+                        JsonElementExpr.ForEachProperty(
+                            jsonElementExpr,
+                            (jsonPropertyExpr, @continue) => MapPropertyExpression(jsonPropertyExpr, @continue)
+                        )
                     )
                 )
             );
-            source.AddRange(GetValidations());
+            source.AddRange(GetValidations(ObjectType));
             source.Add(CreateInstanceExpr());
 
             return Block(
@@ -83,6 +87,13 @@ namespace GW2SDK.Impl.JsonReaders.Nodes
 
             Expression MapPropertyExpression(Expression jsonPropertyExpr, LabelTarget @continue, int index = 0)
             {
+                if (Children.Count == 0)
+                {
+                    return UnexpectedPropertyBehavior == UnexpectedPropertyBehavior.Error
+                        ? JsonExceptionExpr.ThrowJsonException(Expr.UnexpectedProperty(Constant(Mapping.Name, typeof(string)), jsonPropertyExpr, ObjectType))
+                        : Continue(@continue);
+                }
+
                 var child = Children[index];
                 return IfThenElse(
                     child.TestExpr(jsonPropertyExpr),
@@ -90,7 +101,7 @@ namespace GW2SDK.Impl.JsonReaders.Nodes
                     index + 1 < Children.Count
                         ? MapPropertyExpression(jsonPropertyExpr, @continue, index + 1)
                         : UnexpectedPropertyBehavior == UnexpectedPropertyBehavior.Error
-                            ? Expr.ThrowJsonException(Expr.UnexpectedProperty(Constant(Mapping.JsonPath, typeof(string)), jsonPropertyExpr))
+                            ? JsonExceptionExpr.ThrowJsonException(Expr.UnexpectedProperty(Constant(Mapping.Name, typeof(string)), jsonPropertyExpr, ObjectType))
                             : Continue(@continue)
                 );
             }
@@ -117,7 +128,7 @@ namespace GW2SDK.Impl.JsonReaders.Nodes
             }
         }
 
-        public override IEnumerable<Expression> GetValidations()
+        public override IEnumerable<Expression> GetValidations(Type targetType)
         {
             switch (Mapping.Significance)
             {
@@ -125,9 +136,9 @@ namespace GW2SDK.Impl.JsonReaders.Nodes
                 {
                     yield return IfThen(
                         IsFalse(ObjectSeenExpr),
-                        Throw(JsonExceptionExpr.Create(Constant($"Missing required value for '{Mapping.JsonPath}'.")))
+                        Throw(JsonExceptionExpr.Create(Constant($"Missing required value for '{Mapping.Name}'.")))
                     );
-                    foreach (var validation in Children.SelectMany(child => child.GetValidations()))
+                    foreach (var validation in Children.SelectMany(child => child.GetValidations(ObjectType)))
                     {
                         yield return validation;
                     }
@@ -135,7 +146,7 @@ namespace GW2SDK.Impl.JsonReaders.Nodes
                     break;
                 }
                 case MappingSignificance.Optional:
-                    var childValidators = Children.SelectMany(child => child.GetValidations()).ToList();
+                    var childValidators = Children.SelectMany(child => child.GetValidations(ObjectType)).ToList();
                     if (childValidators.Count != 0)
                     {
                         yield return IfThen(

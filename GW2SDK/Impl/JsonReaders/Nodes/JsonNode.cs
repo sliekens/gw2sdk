@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq.Expressions;
 using GW2SDK.Impl.JsonReaders.Mappings;
 
@@ -10,7 +11,7 @@ namespace GW2SDK.Impl.JsonReaders.Nodes
 
         public abstract IEnumerable<ParameterExpression> GetVariables();
 
-        public abstract IEnumerable<Expression> GetValidations();
+        public abstract IEnumerable<Expression> GetValidations(Type targetType);
 
         public abstract IEnumerable<MemberBinding> GetBindings();
     }

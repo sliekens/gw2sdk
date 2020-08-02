@@ -11,16 +11,13 @@ namespace GW2SDK.Impl.JsonReaders.Mappings
             {
                 Significance = significance
             };
-            var jsonPropertyMapping = new JsonPropertyMapping
+            map(jsonObjectMapping);
+            Children.Add(new JsonPropertyMapping
             {
                 Name = propertyName,
                 Significance = significance,
-                ValueNode = jsonObjectMapping,
-                ParentNode = this
-            };
-            jsonObjectMapping.ParentNode = jsonPropertyMapping;
-            map(jsonObjectMapping);
-            Children.Add(jsonPropertyMapping);
+                ValueNode = jsonObjectMapping
+            });
         }
 
         public void Map<TProperty>(
@@ -34,19 +31,14 @@ namespace GW2SDK.Impl.JsonReaders.Mappings
                 Name = propertyName,
                 Significance = significance
             };
-
-            var jsonPropertyMapping = new JsonPropertyMapping
+            map(jsonObjectMapping);
+            Children.Add(new JsonPropertyMapping
             {
                 Name = propertyName,
                 Destination = ((MemberExpression) @object.Body).Member,
                 Significance = significance,
-                ValueNode = jsonObjectMapping,
-                ParentNode = this
-            };
-
-            jsonObjectMapping.ParentNode = jsonPropertyMapping;
-            map(jsonObjectMapping);
-            Children.Add(jsonPropertyMapping);
+                ValueNode = jsonObjectMapping
+            });
         }
     }
 }

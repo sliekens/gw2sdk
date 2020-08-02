@@ -1,14 +1,13 @@
-﻿using System.Linq;
-using GW2SDK.Tests.Features.Traits.Fixtures;
+﻿using GW2SDK.Tests.Features.Traits.Fixtures;
 using GW2SDK.Traits;
 using GW2SDK.Traits.Impl;
 using Xunit;
 
 namespace GW2SDK.Tests.Features.Traits
 {
-    public class TraitTest : IClassFixture<TraitsFixture>
+    public class TraitJsonReaderTest : IClassFixture<TraitsFixture>
     {
-        public TraitTest(TraitsFixture fixture)
+        public TraitJsonReaderTest(TraitsFixture fixture)
         {
             _fixture = fixture;
         }
@@ -26,7 +25,7 @@ namespace GW2SDK.Tests.Features.Traits
         [Trait("Importance", "Critical")]
         public void Traits_can_be_created_from_json()
         {
-            var sut = new TraitJsonReader();
+            var sut = TraitJsonReader.Instance;
             Assert.All(_fixture.Traits,
                 json =>
                 {

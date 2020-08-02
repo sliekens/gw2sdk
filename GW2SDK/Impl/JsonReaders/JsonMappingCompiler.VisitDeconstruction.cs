@@ -9,7 +9,6 @@ namespace GW2SDK.Impl.JsonReaders
     {
         public void VisitDeconstruction<TValue>(JsonDeconstructionMapping<TValue> mapping)
         {
-            var name = mapping.ParentNode?.Name ?? mapping.Name;
             var nodes = new List<PropertyNode>();
             foreach (var child in mapping.Children)
             {
@@ -22,9 +21,10 @@ namespace GW2SDK.Impl.JsonReaders
                 new DeconstructorNode
                 {
                     Mapping = mapping,
+                    TargetType = typeof(TValue),
                     Children = nodes,
                     UnexpectedPropertyBehavior = mapping.UnexpectedPropertyBehavior,
-                    ObjectSeenExpr = Variable(typeof(bool), $"{name}_object_seen")
+                    ObjectSeenExpr = Variable(typeof(bool), $"{mapping.Name}_object_seen")
                 }
             );
         }

@@ -13,7 +13,6 @@ namespace GW2SDK.Impl.JsonReaders.Mappings
             visitor.VisitProperty(this);
         }
 
-        public override string JsonPath => $"{ParentNode!.JsonPath}.{Name}";
-        public MemberInfo? Destination { get; set; }
+        public MemberInfo Destination { get; set; } = default!;
     }
 }

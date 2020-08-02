@@ -12,24 +12,18 @@ namespace GW2SDK.Impl.JsonReaders.Mappings
             IJsonReader<TProperty> jsonReader,
             MappingSignificance significance = MappingSignificance.Required)
         {
-            var jsonValueMapping = new JsonValueMapping<TProperty>
-            {
-                ValueKind = JsonValueMappingKind.Custom,
-                JsonReader = jsonReader,
-                Significance = significance
-            };
-
-            var jsonPropertyMapping = new JsonPropertyMapping
+            Children.Add(new JsonPropertyMapping
             {
                 Name = propertyName,
                 Destination = ((MemberExpression) custom.Body).Member,
                 Significance = significance,
-                ValueNode = jsonValueMapping,
-                ParentNode = this
-            };
-
-            jsonValueMapping.ParentNode = jsonPropertyMapping;
-            Children.Add(jsonPropertyMapping);
+                ValueNode = new JsonValueMapping<TProperty>
+                {
+                    ValueKind = JsonValueMappingKind.Custom,
+                    JsonReader = jsonReader,
+                    Significance = significance
+                }
+            });
         }
         
         public void Map<TProperty>(
@@ -39,32 +33,22 @@ namespace GW2SDK.Impl.JsonReaders.Mappings
             MappingSignificance significance = MappingSignificance.Required,
             MappingSignificance itemSignificance = MappingSignificance.Required)
         {
-            var jsonValueMapping = new JsonValueMapping<TProperty>
-            {
-                ValueKind = JsonValueMappingKind.Custom,
-                JsonReader = jsonReader,
-                Significance = itemSignificance
-            };
-
-            var jsonArrayMapping = new JsonArrayMapping<TProperty>()
-            {
-                ValueMapping = jsonValueMapping,
-                Significance = significance
-            };
-
-            jsonValueMapping.ParentNode = jsonArrayMapping;
-
-            var jsonPropertyMapping = new JsonPropertyMapping
+            Children.Add(new JsonPropertyMapping
             {
                 Name = propertyName,
                 Destination = ((MemberExpression) custom.Body).Member,
                 Significance = significance,
-                ValueNode = jsonArrayMapping,
-                ParentNode = this
-            };
-
-            jsonArrayMapping.ParentNode = jsonPropertyMapping;
-            Children.Add(jsonPropertyMapping);
+                ValueNode = new JsonArrayMapping<TProperty>()
+                {
+                    ValueMapping = new JsonValueMapping<TProperty>
+                    {
+                        ValueKind = JsonValueMappingKind.Custom,
+                        JsonReader = jsonReader,
+                        Significance = itemSignificance
+                    },
+                    Significance = significance
+                }
+            });
         }
     }
 }
