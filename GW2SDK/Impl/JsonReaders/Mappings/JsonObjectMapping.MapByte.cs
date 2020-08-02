@@ -7,32 +7,38 @@ namespace GW2SDK.Impl.JsonReaders.Mappings
     {
         public void Map(string propertyName, Expression<Func<TObject, byte>> @byte)
         {
-            Children.Add(new JsonPropertyMapping
-            {
-                Name = propertyName,
-                Destination = ((MemberExpression) @byte.Body).Member,
-                Significance = MappingSignificance.Required,
-                ValueNode = new JsonValueMapping<byte>
+            Children.Add(
+                new JsonPropertyMapping
                 {
-                    ValueKind = JsonValueMappingKind.Byte,
-                    Significance = MappingSignificance.Required
+                    Name = propertyName,
+                    Destination = ((MemberExpression) @byte.Body).Member,
+                    Significance = MappingSignificance.Required,
+                    ValueNode = new JsonValueMapping<byte>
+                    {
+                        Name = propertyName,
+                        ValueKind = JsonValueMappingKind.Byte,
+                        Significance = MappingSignificance.Required
+                    }
                 }
-            });
+            );
         }
 
         public void Map(string propertyName, Expression<Func<TObject, byte?>> @byte)
         {
-            Children.Add(new JsonPropertyMapping
-            {
-                Name = propertyName,
-                Destination = ((MemberExpression) @byte.Body).Member,
-                Significance = MappingSignificance.Optional,
-                ValueNode = new JsonValueMapping<byte?>
+            Children.Add(
+                new JsonPropertyMapping
                 {
-                    ValueKind = JsonValueMappingKind.Byte,
-                    Significance = MappingSignificance.Optional
+                    Name = propertyName,
+                    Destination = ((MemberExpression) @byte.Body).Member,
+                    Significance = MappingSignificance.Optional,
+                    ValueNode = new JsonValueMapping<byte?>
+                    {
+                        Name = propertyName,
+                        ValueKind = JsonValueMappingKind.Byte,
+                        Significance = MappingSignificance.Optional
+                    }
                 }
-            });
+            );
         }
     }
 }

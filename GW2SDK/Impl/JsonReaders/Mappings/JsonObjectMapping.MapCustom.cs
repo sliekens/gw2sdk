@@ -12,20 +12,23 @@ namespace GW2SDK.Impl.JsonReaders.Mappings
             IJsonReader<TProperty> jsonReader,
             MappingSignificance significance = MappingSignificance.Required)
         {
-            Children.Add(new JsonPropertyMapping
-            {
-                Name = propertyName,
-                Destination = ((MemberExpression) custom.Body).Member,
-                Significance = significance,
-                ValueNode = new JsonValueMapping<TProperty>
+            Children.Add(
+                new JsonPropertyMapping
                 {
-                    ValueKind = JsonValueMappingKind.Custom,
-                    JsonReader = jsonReader,
-                    Significance = significance
+                    Name = propertyName,
+                    Destination = ((MemberExpression) custom.Body).Member,
+                    Significance = significance,
+                    ValueNode = new JsonValueMapping<TProperty>
+                    {
+                        Name = propertyName,
+                        ValueKind = JsonValueMappingKind.Custom,
+                        JsonReader = jsonReader,
+                        Significance = significance
+                    }
                 }
-            });
+            );
         }
-        
+
         public void Map<TProperty>(
             string propertyName,
             Expression<Func<TObject, IEnumerable<TProperty>?>> custom,
@@ -33,22 +36,26 @@ namespace GW2SDK.Impl.JsonReaders.Mappings
             MappingSignificance significance = MappingSignificance.Required,
             MappingSignificance itemSignificance = MappingSignificance.Required)
         {
-            Children.Add(new JsonPropertyMapping
-            {
-                Name = propertyName,
-                Destination = ((MemberExpression) custom.Body).Member,
-                Significance = significance,
-                ValueNode = new JsonArrayMapping<TProperty>()
+            Children.Add(
+                new JsonPropertyMapping
                 {
-                    ValueMapping = new JsonValueMapping<TProperty>
+                    Name = propertyName,
+                    Destination = ((MemberExpression) custom.Body).Member,
+                    Significance = significance,
+                    ValueNode = new JsonArrayMapping<TProperty>
                     {
-                        ValueKind = JsonValueMappingKind.Custom,
-                        JsonReader = jsonReader,
-                        Significance = itemSignificance
-                    },
-                    Significance = significance
+                        Name = propertyName,
+                        ValueMapping = new JsonValueMapping<TProperty>
+                        {
+                            Name = propertyName,
+                            ValueKind = JsonValueMappingKind.Custom,
+                            JsonReader = jsonReader,
+                            Significance = itemSignificance
+                        },
+                        Significance = significance
+                    }
                 }
-            });
+            );
         }
     }
 }

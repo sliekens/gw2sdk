@@ -7,32 +7,38 @@ namespace GW2SDK.Impl.JsonReaders.Mappings
     {
         public void Map(string propertyName, Expression<Func<TObject, float>> single)
         {
-            Children.Add(new JsonPropertyMapping
-            {
-                Name = propertyName,
-                Destination = ((MemberExpression) single.Body).Member,
-                Significance = MappingSignificance.Required,
-                ValueNode = new JsonValueMapping<float>
+            Children.Add(
+                new JsonPropertyMapping
                 {
-                    ValueKind = JsonValueMappingKind.Single,
-                    Significance = MappingSignificance.Required
+                    Name = propertyName,
+                    Destination = ((MemberExpression) single.Body).Member,
+                    Significance = MappingSignificance.Required,
+                    ValueNode = new JsonValueMapping<float>
+                    {
+                        Name = propertyName,
+                        ValueKind = JsonValueMappingKind.Single,
+                        Significance = MappingSignificance.Required
+                    }
                 }
-            });
+            );
         }
 
         public void Map(string propertyName, Expression<Func<TObject, float?>> single)
         {
-            Children.Add(new JsonPropertyMapping
-            {
-                Name = propertyName,
-                Destination = ((MemberExpression) single.Body).Member,
-                Significance = MappingSignificance.Optional,
-                ValueNode = new JsonValueMapping<float?>
+            Children.Add(
+                new JsonPropertyMapping
                 {
-                    ValueKind = JsonValueMappingKind.Single,
-                    Significance = MappingSignificance.Optional
+                    Name = propertyName,
+                    Destination = ((MemberExpression) single.Body).Member,
+                    Significance = MappingSignificance.Optional,
+                    ValueNode = new JsonValueMapping<float?>
+                    {
+                        Name = propertyName,
+                        ValueKind = JsonValueMappingKind.Single,
+                        Significance = MappingSignificance.Optional
+                    }
                 }
-            });
+            );
         }
     }
 }

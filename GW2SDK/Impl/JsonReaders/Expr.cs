@@ -24,11 +24,11 @@ namespace GW2SDK.Impl.JsonReaders
             );
         }
 
-        internal static Expression UnexpectedProperty(Expression jsonPathExpr, Expression jsonPropertyExpr, Type type)
+        internal static Expression UnexpectedProperty(Expression jsonPropertyExpr, Type targetType)
         {
-            var format = Expression.Constant($"Unexpected property '{{0}}.{{1}}' for object of type '{type.Name}'.", typeof(string));
+            var format = Expression.Constant($"Unexpected property '{{0}}' for object of type '{targetType.Name}'.", typeof(string));
             var nameExpr = Expression.Property(jsonPropertyExpr, JsonPropertyInfo.Name);
-            return StringExpr.Format(format, jsonPathExpr, nameExpr);
+            return StringExpr.Format(format, nameExpr);
         }
 
         internal delegate Expression DoFor(LabelTarget @break, LabelTarget @continue);

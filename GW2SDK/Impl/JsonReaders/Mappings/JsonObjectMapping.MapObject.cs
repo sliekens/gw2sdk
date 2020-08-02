@@ -9,15 +9,18 @@ namespace GW2SDK.Impl.JsonReaders.Mappings
         {
             var jsonObjectMapping = new JsonDeconstructionMapping<TObject>
             {
+                Name = propertyName,
                 Significance = significance
             };
             map(jsonObjectMapping);
-            Children.Add(new JsonPropertyMapping
-            {
-                Name = propertyName,
-                Significance = significance,
-                ValueNode = jsonObjectMapping
-            });
+            Children.Add(
+                new JsonPropertyMapping
+                {
+                    Name = propertyName,
+                    Significance = significance,
+                    ValueNode = jsonObjectMapping
+                }
+            );
         }
 
         public void Map<TProperty>(
@@ -32,13 +35,15 @@ namespace GW2SDK.Impl.JsonReaders.Mappings
                 Significance = significance
             };
             map(jsonObjectMapping);
-            Children.Add(new JsonPropertyMapping
-            {
-                Name = propertyName,
-                Destination = ((MemberExpression) @object.Body).Member,
-                Significance = significance,
-                ValueNode = jsonObjectMapping
-            });
+            Children.Add(
+                new JsonPropertyMapping
+                {
+                    Name = propertyName,
+                    Destination = ((MemberExpression) @object.Body).Member,
+                    Significance = significance,
+                    ValueNode = jsonObjectMapping
+                }
+            );
         }
     }
 }

@@ -8,76 +8,90 @@ namespace GW2SDK.Impl.JsonReaders.Mappings
     {
         public void Map(string propertyName, Expression<Func<TObject, Guid>> guid)
         {
-            Children.Add(new JsonPropertyMapping
-            {
-                Name = propertyName,
-                Destination = ((MemberExpression) guid.Body).Member,
-                Significance = MappingSignificance.Required,
-                ValueNode = new JsonValueMapping<Guid>
+            Children.Add(
+                new JsonPropertyMapping
                 {
-                    ValueKind = JsonValueMappingKind.Guid,
-                    Significance = MappingSignificance.Required
+                    Name = propertyName,
+                    Destination = ((MemberExpression) guid.Body).Member,
+                    Significance = MappingSignificance.Required,
+                    ValueNode = new JsonValueMapping<Guid>
+                    {
+                        Name = propertyName,
+                        ValueKind = JsonValueMappingKind.Guid,
+                        Significance = MappingSignificance.Required
+                    }
                 }
-            });
+            );
         }
 
         public void Map(string propertyName, Expression<Func<TObject, Guid?>> guid)
         {
-            Children.Add(new JsonPropertyMapping
-            {
-                Name = propertyName,
-                Destination = ((MemberExpression) guid.Body).Member,
-                Significance = MappingSignificance.Optional,
-                ValueNode = new JsonValueMapping<Guid?>
+            Children.Add(
+                new JsonPropertyMapping
                 {
-                    ValueKind = JsonValueMappingKind.Guid,
-                    Significance = MappingSignificance.Optional
+                    Name = propertyName,
+                    Destination = ((MemberExpression) guid.Body).Member,
+                    Significance = MappingSignificance.Optional,
+                    ValueNode = new JsonValueMapping<Guid?>
+                    {
+                        Name = propertyName,
+                        ValueKind = JsonValueMappingKind.Guid,
+                        Significance = MappingSignificance.Optional
+                    }
                 }
-            });
+            );
         }
-        
+
         public void Map(
             string propertyName,
             Expression<Func<TObject, IEnumerable<Guid>?>> guids,
             MappingSignificance significance = MappingSignificance.Required)
         {
-            Children.Add(new JsonPropertyMapping
-            {
-                Name = propertyName,
-                Destination = ((MemberExpression) guids.Body).Member,
-                Significance = significance,
-                ValueNode = new JsonArrayMapping<Guid>
+            Children.Add(
+                new JsonPropertyMapping
                 {
-                    ValueMapping = new JsonValueMapping<Guid>
+                    Name = propertyName,
+                    Destination = ((MemberExpression) guids.Body).Member,
+                    Significance = significance,
+                    ValueNode = new JsonArrayMapping<Guid>
                     {
-                        ValueKind = JsonValueMappingKind.Guid,
-                        Significance = MappingSignificance.Required
-                    },
-                    Significance = significance
+                        Name = propertyName,
+                        ValueMapping = new JsonValueMapping<Guid>
+                        {
+                            Name = propertyName,
+                            ValueKind = JsonValueMappingKind.Guid,
+                            Significance = MappingSignificance.Required
+                        },
+                        Significance = significance
+                    }
                 }
-            });
+            );
         }
-        
+
         public void Map(
             string propertyName,
             Expression<Func<TObject, IEnumerable<Guid?>?>> guids,
             MappingSignificance significance = MappingSignificance.Required)
         {
-            Children.Add(new JsonPropertyMapping
-            {
-                Name = propertyName,
-                Destination = ((MemberExpression) guids.Body).Member,
-                Significance = significance,
-                ValueNode = new JsonArrayMapping<Guid?>
+            Children.Add(
+                new JsonPropertyMapping
                 {
-                    ValueMapping = new JsonValueMapping<Guid?>
+                    Name = propertyName,
+                    Destination = ((MemberExpression) guids.Body).Member,
+                    Significance = significance,
+                    ValueNode = new JsonArrayMapping<Guid?>
                     {
-                        ValueKind = JsonValueMappingKind.Guid,
-                        Significance = MappingSignificance.Optional
-                    },
-                    Significance = significance
+                        Name = propertyName,
+                        ValueMapping = new JsonValueMapping<Guid?>
+                        {
+                            Name = propertyName,
+                            ValueKind = JsonValueMappingKind.Guid,
+                            Significance = MappingSignificance.Optional
+                        },
+                        Significance = significance
+                    }
                 }
-            });
+            );
         }
     }
 }

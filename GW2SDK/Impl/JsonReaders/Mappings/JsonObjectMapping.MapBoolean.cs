@@ -7,32 +7,38 @@ namespace GW2SDK.Impl.JsonReaders.Mappings
     {
         public void Map(string propertyName, Expression<Func<TObject, bool>> boolean)
         {
-            Children.Add(new JsonPropertyMapping
-            {
-                Name = propertyName,
-                Destination = ((MemberExpression) boolean.Body).Member,
-                Significance = MappingSignificance.Required,
-                ValueNode = new JsonValueMapping<bool>
+            Children.Add(
+                new JsonPropertyMapping
                 {
-                    ValueKind = JsonValueMappingKind.Boolean,
-                    Significance = MappingSignificance.Required
+                    Name = propertyName,
+                    Destination = ((MemberExpression) boolean.Body).Member,
+                    Significance = MappingSignificance.Required,
+                    ValueNode = new JsonValueMapping<bool>
+                    {
+                        Name = propertyName,
+                        ValueKind = JsonValueMappingKind.Boolean,
+                        Significance = MappingSignificance.Required
+                    }
                 }
-            });
+            );
         }
 
         public void Map(string propertyName, Expression<Func<TObject, bool?>> boolean)
         {
-            Children.Add(new JsonPropertyMapping
-            {
-                Name = propertyName,
-                Destination = ((MemberExpression) boolean.Body).Member,
-                Significance = MappingSignificance.Optional,
-                ValueNode = new JsonValueMapping<bool?>
+            Children.Add(
+                new JsonPropertyMapping
                 {
-                    ValueKind = JsonValueMappingKind.Boolean,
-                    Significance = MappingSignificance.Optional
+                    Name = propertyName,
+                    Destination = ((MemberExpression) boolean.Body).Member,
+                    Significance = MappingSignificance.Optional,
+                    ValueNode = new JsonValueMapping<bool?>
+                    {
+                        Name = propertyName,
+                        ValueKind = JsonValueMappingKind.Boolean,
+                        Significance = MappingSignificance.Optional
+                    }
                 }
-            });
+            );
         }
     }
 }

@@ -7,32 +7,38 @@ namespace GW2SDK.Impl.JsonReaders.Mappings
     {
         public void Map(string propertyName, Expression<Func<TObject, DateTime>> dateTime)
         {
-            Children.Add(new JsonPropertyMapping
-            {
-                Name = propertyName,
-                Destination = ((MemberExpression) dateTime.Body).Member,
-                Significance = MappingSignificance.Required,
-                ValueNode = new JsonValueMapping<DateTime>
+            Children.Add(
+                new JsonPropertyMapping
                 {
-                    ValueKind = JsonValueMappingKind.DateTime,
-                    Significance = MappingSignificance.Required
+                    Name = propertyName,
+                    Destination = ((MemberExpression) dateTime.Body).Member,
+                    Significance = MappingSignificance.Required,
+                    ValueNode = new JsonValueMapping<DateTime>
+                    {
+                        Name = propertyName,
+                        ValueKind = JsonValueMappingKind.DateTime,
+                        Significance = MappingSignificance.Required
+                    }
                 }
-            });
+            );
         }
 
         public void Map(string propertyName, Expression<Func<TObject, DateTime?>> dateTime)
         {
-            Children.Add(new JsonPropertyMapping
-            {
-                Name = propertyName,
-                Destination = ((MemberExpression) dateTime.Body).Member,
-                Significance = MappingSignificance.Optional,
-                ValueNode = new JsonValueMapping<DateTime?>
+            Children.Add(
+                new JsonPropertyMapping
                 {
-                    ValueKind = JsonValueMappingKind.DateTime,
-                    Significance = MappingSignificance.Optional
+                    Name = propertyName,
+                    Destination = ((MemberExpression) dateTime.Body).Member,
+                    Significance = MappingSignificance.Optional,
+                    ValueNode = new JsonValueMapping<DateTime?>
+                    {
+                        Name = propertyName,
+                        ValueKind = JsonValueMappingKind.DateTime,
+                        Significance = MappingSignificance.Optional
+                    }
                 }
-            });
+            );
         }
     }
 }

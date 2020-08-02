@@ -7,32 +7,38 @@ namespace GW2SDK.Impl.JsonReaders.Mappings
     {
         public void Map(string propertyName, Expression<Func<TObject, decimal>> @decimal)
         {
-            Children.Add(new JsonPropertyMapping
-            {
-                Name = propertyName,
-                Destination = ((MemberExpression) @decimal.Body).Member,
-                Significance = MappingSignificance.Required,
-                ValueNode = new JsonValueMapping<decimal>
+            Children.Add(
+                new JsonPropertyMapping
                 {
-                    ValueKind = JsonValueMappingKind.Decimal,
-                    Significance = MappingSignificance.Required
+                    Name = propertyName,
+                    Destination = ((MemberExpression) @decimal.Body).Member,
+                    Significance = MappingSignificance.Required,
+                    ValueNode = new JsonValueMapping<decimal>
+                    {
+                        Name = propertyName,
+                        ValueKind = JsonValueMappingKind.Decimal,
+                        Significance = MappingSignificance.Required
+                    }
                 }
-            });
+            );
         }
 
         public void Map(string propertyName, Expression<Func<TObject, decimal?>> @decimal)
         {
-            Children.Add(new JsonPropertyMapping
-            {
-                Name = propertyName,
-                Destination = ((MemberExpression) @decimal.Body).Member,
-                Significance = MappingSignificance.Optional,
-                ValueNode = new JsonValueMapping<decimal?>
+            Children.Add(
+                new JsonPropertyMapping
                 {
-                    ValueKind = JsonValueMappingKind.Decimal,
-                    Significance = MappingSignificance.Optional
+                    Name = propertyName,
+                    Destination = ((MemberExpression) @decimal.Body).Member,
+                    Significance = MappingSignificance.Optional,
+                    ValueNode = new JsonValueMapping<decimal?>
+                    {
+                        Name = propertyName,
+                        ValueKind = JsonValueMappingKind.Decimal,
+                        Significance = MappingSignificance.Optional
+                    }
                 }
-            });
+            );
         }
     }
 }

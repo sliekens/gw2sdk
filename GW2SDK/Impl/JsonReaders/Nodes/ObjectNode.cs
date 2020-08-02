@@ -39,7 +39,7 @@ namespace GW2SDK.Impl.JsonReaders.Nodes
                 if (Children.Count == 0)
                 {
                     return UnexpectedPropertyBehavior == UnexpectedPropertyBehavior.Error
-                        ? JsonExceptionExpr.ThrowJsonException(Expr.UnexpectedProperty(Constant(Mapping.Name, typeof(string)), jsonPropertyExpr, ObjectType))
+                        ? JsonExceptionExpr.ThrowJsonException(Expr.UnexpectedProperty(jsonPropertyExpr, ObjectType))
                         : Continue(@continue);
                 }
 
@@ -50,7 +50,7 @@ namespace GW2SDK.Impl.JsonReaders.Nodes
                     index + 1 < Children.Count
                         ? MapPropertyExpression(jsonPropertyExpr, @continue, index + 1)
                         : UnexpectedPropertyBehavior == UnexpectedPropertyBehavior.Error
-                            ? JsonExceptionExpr.ThrowJsonException(Expr.UnexpectedProperty(Constant(Mapping.Name, typeof(string)), jsonPropertyExpr, ObjectType))
+                            ? JsonExceptionExpr.ThrowJsonException(Expr.UnexpectedProperty(jsonPropertyExpr, ObjectType))
                             : Continue(@continue)
                 );
             }
@@ -90,7 +90,7 @@ namespace GW2SDK.Impl.JsonReaders.Nodes
                 if (Children.Count == 0)
                 {
                     return UnexpectedPropertyBehavior == UnexpectedPropertyBehavior.Error
-                        ? JsonExceptionExpr.ThrowJsonException(Expr.UnexpectedProperty(Constant(Mapping.Name, typeof(string)), jsonPropertyExpr, ObjectType))
+                        ? JsonExceptionExpr.ThrowJsonException(Expr.UnexpectedProperty(jsonPropertyExpr, ObjectType))
                         : Continue(@continue);
                 }
 
@@ -101,7 +101,7 @@ namespace GW2SDK.Impl.JsonReaders.Nodes
                     index + 1 < Children.Count
                         ? MapPropertyExpression(jsonPropertyExpr, @continue, index + 1)
                         : UnexpectedPropertyBehavior == UnexpectedPropertyBehavior.Error
-                            ? JsonExceptionExpr.ThrowJsonException(Expr.UnexpectedProperty(Constant(Mapping.Name, typeof(string)), jsonPropertyExpr, ObjectType))
+                            ? JsonExceptionExpr.ThrowJsonException(Expr.UnexpectedProperty(jsonPropertyExpr, ObjectType))
                             : Continue(@continue)
                 );
             }
