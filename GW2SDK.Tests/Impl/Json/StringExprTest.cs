@@ -11,7 +11,7 @@ namespace GW2SDK.Tests.Impl.Json
         public void It_can_format_strings_with_one_arg()
         {
             var formatExpr = Expression.Constant("First '{0}'.", typeof(string));
-            
+
             var arg0Expr = Expression.Constant("one", typeof(string));
 
             var expr = StringExpr.Format(formatExpr, arg0Expr);
@@ -29,7 +29,7 @@ namespace GW2SDK.Tests.Impl.Json
         public void It_can_format_strings_with_two_args()
         {
             var formatExpr = Expression.Constant("First '{0}', then '{1}'.", typeof(string));
-            
+
             var arg0Expr = Expression.Constant("one", typeof(string));
 
             var arg1Expr = Expression.Constant("two", typeof(string));
@@ -49,7 +49,7 @@ namespace GW2SDK.Tests.Impl.Json
         public void It_can_format_strings_with_three_args()
         {
             var formatExpr = Expression.Constant("First '{0}', then '{1}' and finally '{2}'.", typeof(string));
-            
+
             var arg0Expr = Expression.Constant("one", typeof(string));
 
             var arg1Expr = Expression.Constant("two", typeof(string));

@@ -2,7 +2,6 @@
 using System.Linq.Expressions;
 using System.Text.Json;
 using GW2SDK.Impl.Json;
-using GW2SDK.Impl.JsonReaders;
 using Xunit;
 
 namespace GW2SDK.Tests.Impl.Json
