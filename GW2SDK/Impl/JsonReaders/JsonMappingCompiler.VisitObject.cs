@@ -21,8 +21,8 @@ namespace GW2SDK.Impl.JsonReaders
                 new ObjectNode
                 {
                     Mapping = mapping,
-                    ObjectType = typeof(TValue),
-                    Children = nodes,
+                    TargetType = typeof(TValue),
+                    Properties = nodes,
                     UnexpectedPropertyBehavior = mapping.UnexpectedPropertyBehavior,
                     ObjectSeenExpr = Variable(typeof(bool), $"{mapping.Name}_object_seen")
                 }

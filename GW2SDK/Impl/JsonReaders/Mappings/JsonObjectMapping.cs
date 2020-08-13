@@ -4,8 +4,6 @@ namespace GW2SDK.Impl.JsonReaders.Mappings
 {
     public partial class JsonObjectMapping<TObject> : JsonMapping
     {
-        public override JsonMappingKind Kind => JsonMappingKind.Object;
-
         public UnexpectedPropertyBehavior UnexpectedPropertyBehavior { get; set; } = UnexpectedPropertyBehavior.Error;
 
         public List<JsonPropertyMapping> Children { get; } = new List<JsonPropertyMapping>();

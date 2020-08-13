@@ -14,4 +14,8 @@
     <ItemGroup>
         <SourceRoot Include="$(MSBuildThisFileDirectory)/"/>
     </ItemGroup>
+    <ItemGroup>
+        <ProjectCapability Include="DynamicDependentFile" />
+        <ProjectCapability Include="DynamicFileNesting" />
+    </ItemGroup>
 </Project>

@@ -5,9 +5,9 @@ namespace GW2SDK.Impl.JsonReaders.Mappings
 {
     public partial class JsonObjectMapping<TObject>
     {
-        public void Map(string propertyName, Action<JsonDeconstructionMapping<TObject>> map, MappingSignificance significance = MappingSignificance.Required)
+        public void Map(string propertyName, Action<JsonObjectMapping<TObject>> map, MappingSignificance significance = MappingSignificance.Required)
         {
-            var jsonObjectMapping = new JsonDeconstructionMapping<TObject>
+            var jsonObjectMapping = new JsonObjectMapping<TObject>
             {
                 Name = propertyName,
                 Significance = significance

@@ -49,9 +49,6 @@ namespace GW2SDK.Impl.JsonReaders.Nodes
                 case ObjectNode obj:
                     expressions.Add(obj.DeconstructExpr(JsonPropertyExpr.GetValue(jsonPropertyExpr)));
                     break;
-                case DeconstructorNode deconstructor:
-                    expressions.Add(deconstructor.DeconstructExpr(JsonPropertyExpr.GetValue(jsonPropertyExpr)));
-                    break;
                 case ArrayNode array:
                     expressions.Add(array.MapExpr(JsonPropertyExpr.GetValue(jsonPropertyExpr)));
                     break;
@@ -101,20 +98,19 @@ namespace GW2SDK.Impl.JsonReaders.Nodes
                 case ValueNode value:
                     yield return Bind(Destination, value.ActualValueExpr);
                     break;
+                case ObjectNode deconstruction when Destination is null:
+                    foreach (var binding in deconstruction.Properties.SelectMany(propertyNode => propertyNode.GetBindings()))
+                    {
+                        yield return binding;
+                    }
+
+                    break;
                 case ObjectNode obj:
                     yield return Bind(Destination, obj.CreateInstanceExpr());
                     break;
 
                 case ArrayNode array:
                     yield return Bind(Destination, array.ActualValueExpr);
-                    break;
-
-                case DeconstructorNode deconstructor:
-                    foreach (var binding in deconstructor.Children.SelectMany(propertyNode => propertyNode.GetBindings()))
-                    {
-                        yield return binding;
-                    }
-
                     break;
             }
         }

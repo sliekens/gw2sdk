@@ -5,7 +5,6 @@ using GW2SDK.Items.Impl;
 using GW2SDK.Recipes.Impl;
 using GW2SDK.Skins.Impl;
 using GW2SDK.Tokens.Impl;
-using GW2SDK.Traits.Impl;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 

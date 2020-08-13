@@ -2,8 +2,6 @@
 {
     public class JsonValueMapping<TValue> : JsonMapping
     {
-        public override JsonMappingKind Kind => JsonMappingKind.Value;
-
         public JsonValueMappingKind ValueKind { get; set; }
 
         public IJsonReader<TValue>? JsonReader { get; set; }

@@ -11,11 +11,11 @@ namespace GW2SDK.Impl.JsonReaders.Nodes
 {
     public class ObjectNode : JsonNode
     {
-        public Type ObjectType { get; set; } = typeof(object);
+        public Type TargetType { get; set; } = typeof(object);
 
         public ParameterExpression ObjectSeenExpr { get; set; } = default!;
 
-        public List<PropertyNode> Children { get; set; } = new List<PropertyNode>();
+        public List<PropertyNode> Properties { get; set; } = new List<PropertyNode>();
 
         public UnexpectedPropertyBehavior UnexpectedPropertyBehavior { get; set; }
 
@@ -36,27 +36,26 @@ namespace GW2SDK.Impl.JsonReaders.Nodes
 
             Expression MapPropertyExpression(Expression jsonPropertyExpr, LabelTarget @continue, int index = 0)
             {
-                if (Children.Count == 0)
+                if (Properties.Count == 0)
                 {
                     return UnexpectedPropertyBehavior == UnexpectedPropertyBehavior.Error
-                        ? JsonExceptionExpr.ThrowJsonException(Expr.UnexpectedProperty(jsonPropertyExpr, ObjectType))
+                        ? JsonExceptionExpr.ThrowJsonException(Expr.UnexpectedProperty(jsonPropertyExpr, TargetType))
                         : Continue(@continue);
                 }
 
-                var child = Children[index];
+                var child = Properties[index];
                 return IfThenElse(
                     child.TestExpr(jsonPropertyExpr),
                     child.MapExpr(jsonPropertyExpr),
-                    index + 1 < Children.Count
+                    index + 1 < Properties.Count
                         ? MapPropertyExpression(jsonPropertyExpr, @continue, index + 1)
                         : UnexpectedPropertyBehavior == UnexpectedPropertyBehavior.Error
-                            ? JsonExceptionExpr.ThrowJsonException(Expr.UnexpectedProperty(jsonPropertyExpr, ObjectType))
+                            ? JsonExceptionExpr.ThrowJsonException(Expr.UnexpectedProperty(jsonPropertyExpr, TargetType))
                             : Continue(@continue)
                 );
             }
         }
 
-        // TODO: deduplicate code
         public Expression MapExpr(Expression jsonElementExpr)
         {
             if (Mapping.Significance == MappingSignificance.Ignored)
@@ -77,7 +76,7 @@ namespace GW2SDK.Impl.JsonReaders.Nodes
                     )
                 )
             );
-            source.AddRange(GetValidations(ObjectType));
+            source.AddRange(GetValidations(TargetType));
             source.Add(CreateInstanceExpr());
 
             return Block(
@@ -87,21 +86,21 @@ namespace GW2SDK.Impl.JsonReaders.Nodes
 
             Expression MapPropertyExpression(Expression jsonPropertyExpr, LabelTarget @continue, int index = 0)
             {
-                if (Children.Count == 0)
+                if (Properties.Count == 0)
                 {
                     return UnexpectedPropertyBehavior == UnexpectedPropertyBehavior.Error
-                        ? JsonExceptionExpr.ThrowJsonException(Expr.UnexpectedProperty(jsonPropertyExpr, ObjectType))
+                        ? JsonExceptionExpr.ThrowJsonException(Expr.UnexpectedProperty(jsonPropertyExpr, TargetType))
                         : Continue(@continue);
                 }
 
-                var child = Children[index];
+                var child = Properties[index];
                 return IfThenElse(
                     child.TestExpr(jsonPropertyExpr),
                     child.MapExpr(jsonPropertyExpr),
-                    index + 1 < Children.Count
+                    index + 1 < Properties.Count
                         ? MapPropertyExpression(jsonPropertyExpr, @continue, index + 1)
                         : UnexpectedPropertyBehavior == UnexpectedPropertyBehavior.Error
-                            ? JsonExceptionExpr.ThrowJsonException(Expr.UnexpectedProperty(jsonPropertyExpr, ObjectType))
+                            ? JsonExceptionExpr.ThrowJsonException(Expr.UnexpectedProperty(jsonPropertyExpr, TargetType))
                             : Continue(@continue)
                 );
             }
@@ -109,8 +108,8 @@ namespace GW2SDK.Impl.JsonReaders.Nodes
 
         public Expression CreateInstanceExpr() =>
             MemberInit(
-                New(ObjectType),
-                GetBindings()
+                New(TargetType),
+                Properties.SelectMany(child => child.GetBindings())
             );
 
         public override IEnumerable<ParameterExpression> GetVariables()
@@ -118,7 +117,7 @@ namespace GW2SDK.Impl.JsonReaders.Nodes
             if (Mapping.Significance != MappingSignificance.Ignored)
             {
                 yield return ObjectSeenExpr;
-                foreach (var child in Children)
+                foreach (var child in Properties)
                 {
                     foreach (var variable in child.GetVariables())
                     {
@@ -138,7 +137,7 @@ namespace GW2SDK.Impl.JsonReaders.Nodes
                         IsFalse(ObjectSeenExpr),
                         Throw(JsonExceptionExpr.Create(Constant($"Missing required value for '{Mapping.Name}'.")))
                     );
-                    foreach (var validation in Children.SelectMany(child => child.GetValidations(ObjectType)))
+                    foreach (var validation in Properties.SelectMany(child => child.GetValidations(TargetType)))
                     {
                         yield return validation;
                     }
@@ -146,7 +145,7 @@ namespace GW2SDK.Impl.JsonReaders.Nodes
                     break;
                 }
                 case MappingSignificance.Optional:
-                    var childValidators = Children.SelectMany(child => child.GetValidations(ObjectType)).ToList();
+                    var childValidators = Properties.SelectMany(child => child.GetValidations(TargetType)).ToList();
                     if (childValidators.Count != 0)
                     {
                         yield return IfThen(
@@ -161,15 +160,7 @@ namespace GW2SDK.Impl.JsonReaders.Nodes
 
         public override IEnumerable<MemberBinding> GetBindings()
         {
-            if (Mapping.Significance == MappingSignificance.Ignored)
-            {
-                yield break;
-            }
-
-            foreach (var binding in Children.SelectMany(child => child.GetBindings()))
-            {
-                yield return binding;
-            }
+            yield break;
         }
     }
 }
