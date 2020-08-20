@@ -24,10 +24,10 @@ namespace GW2SDK.Impl.JsonReaders
             _read = _source.Compile();
         }
 
-        public TObject Read(in JsonElement json)
+        public TObject Read(in JsonElement json, in JsonPath path)
         {
             if (_read is null) throw new InvalidOperationException("Call Configure before attempting to Read.");
-            return _read(json);
+            return _read(json, path);
         }
 
         public bool CanRead(in JsonElement json) => json.ValueKind == JsonValueKind.Object;

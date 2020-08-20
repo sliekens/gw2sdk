@@ -6,7 +6,7 @@ namespace GW2SDK.Traits.Impl
 {
     internal sealed class TraitJsonReader : JsonObjectReader<Trait>
     {
-        public static JsonObjectReader<Trait> Instance { get; } = new TraitJsonReader(UnexpectedPropertyBehavior.Error);
+        public static IJsonReader<Trait> Instance { get; } = new TraitJsonReader(UnexpectedPropertyBehavior.Error);
 
         private TraitJsonReader(UnexpectedPropertyBehavior unexpectedPropertyBehavior)
         {

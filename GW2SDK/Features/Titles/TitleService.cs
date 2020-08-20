@@ -35,7 +35,7 @@ namespace GW2SDK.Titles
             using var jsonDocument = await JsonDocument.ParseAsync(json).ConfigureAwait(false);
             var context = response.Headers.GetCollectionContext();
             var list = new List<Title>(context.ResultCount);
-            list.AddRange(ValueArrayReader.Read(jsonDocument.RootElement));
+            list.AddRange(ValueArrayReader.Read(jsonDocument));
             return new DataTransferCollection<Title>(list, context);
         }
 
@@ -48,7 +48,7 @@ namespace GW2SDK.Titles
             using var jsonDocument = await JsonDocument.ParseAsync(json).ConfigureAwait(false);
             var context = response.Headers.GetCollectionContext();
             var list = new List<int>(context.ResultCount);
-            list.AddRange(KeyArrayReader.Read(jsonDocument.RootElement));
+            list.AddRange(KeyArrayReader.Read(jsonDocument));
             return new DataTransferCollection<int>(list, context);
         }
 
@@ -59,7 +59,7 @@ namespace GW2SDK.Titles
             response.EnsureSuccessStatusCode();
             await using var json = await response.Content.ReadAsStreamAsync().ConfigureAwait(false);
             using var jsonDocument = await JsonDocument.ParseAsync(json).ConfigureAwait(false);
-            return ValueReader.Read(jsonDocument.RootElement);
+            return ValueReader.Read(jsonDocument);
         }
 
         public async Task<IDataTransferCollection<Title>> GetTitlesByIds(IReadOnlyCollection<int> titleIds)
@@ -81,7 +81,7 @@ namespace GW2SDK.Titles
             using var jsonDocument = await JsonDocument.ParseAsync(json).ConfigureAwait(false);
             var context = response.Headers.GetCollectionContext();
             var list = new List<Title>(context.ResultCount);
-            list.AddRange(ValueArrayReader.Read(jsonDocument.RootElement));
+            list.AddRange(ValueArrayReader.Read(jsonDocument));
             return new DataTransferCollection<Title>(list, context);
         }
 
@@ -94,7 +94,7 @@ namespace GW2SDK.Titles
             using var jsonDocument = await JsonDocument.ParseAsync(json).ConfigureAwait(false);
             var pageContext = response.Headers.GetPageContext();
             var list = new List<Title>(pageContext.PageSize);
-            list.AddRange(ValueArrayReader.Read(jsonDocument.RootElement));
+            list.AddRange(ValueArrayReader.Read(jsonDocument));
             return new DataTransferPage<Title>(list, pageContext);
         }
     }

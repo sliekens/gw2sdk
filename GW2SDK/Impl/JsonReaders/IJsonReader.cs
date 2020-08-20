@@ -6,9 +6,9 @@ namespace GW2SDK.Impl.JsonReaders
     {
         T Read(in string json) => Read(JsonDocument.Parse(json));
 
-        T Read(in JsonDocument json) => Read(json.RootElement);
+        T Read(in JsonDocument json) => Read(json.RootElement, JsonPath.Root);
 
-        T Read(in JsonElement json);
+        T Read(in JsonElement json, in JsonPath path);
 
         bool CanRead(in JsonElement json);
     }

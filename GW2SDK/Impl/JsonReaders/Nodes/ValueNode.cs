@@ -10,9 +10,9 @@ namespace GW2SDK.Impl.JsonReaders.Nodes
     {
         public ParameterExpression ActualValueExpr { get; set; } = default!;
 
-        public Func<Expression, Expression> MapExprFactory { get; set; } = expression => Empty();
+        public Func<Expression, Expression, Expression> MapExprFactory { get; set; } = (jsonElementExpr, pathExpr) => Empty();
 
-        public Expression MapExpr(Expression jsonElementExpr) => MapExprFactory(jsonElementExpr);
+        public Expression MapExpr(Expression jsonElementExpr, Expression pathExpr) => MapExprFactory(jsonElementExpr, pathExpr);
 
         public override IEnumerable<ParameterExpression> GetVariables()
         {

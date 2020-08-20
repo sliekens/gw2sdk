@@ -29,7 +29,7 @@ namespace GW2SDK.Tests.Features.Traits
             Assert.All(_fixture.Traits,
                 json =>
                 {
-                    var actual = sut.Read(json.RootElement);
+                    var actual = sut.Read(json);
 
                     TraitFact.Id_is_positive(actual);
                 });

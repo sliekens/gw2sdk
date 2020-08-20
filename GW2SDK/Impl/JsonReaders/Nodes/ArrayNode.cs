@@ -18,7 +18,7 @@ namespace GW2SDK.Impl.JsonReaders.Nodes
 
         public ParameterExpression ActualValueExpr { get; set; } = default!;
 
-        public Expression MapExpr(Expression jsonElementExpr)
+        public Expression MapExpr(Expression jsonElementExpr, Expression pathExpr)
         {
             if (Mapping.Significance == MappingSignificance.Ignored)
             {
@@ -46,11 +46,12 @@ namespace GW2SDK.Impl.JsonReaders.Nodes
                         (_, __) =>
                         {
                             var indexExpression = MakeIndex(jsonElementExpr, JsonElementInfo.Item, new[] { indexExpr });
+                            var indexPathExpr = JsonPathExpr.AccessArrayIndex(pathExpr, indexExpr);
                             var valueExpr = ItemNode switch
                             {
-                                ValueNode value => value.MapExpr(indexExpression),
-                                ObjectNode obj => obj.MapExpr(indexExpr),
-                                ArrayNode array => array.MapExpr(indexExpr),
+                                ValueNode value => value.MapExpr(indexExpression, indexPathExpr),
+                                ObjectNode obj => obj.MapExpr(indexExpr, indexPathExpr),
+                                ArrayNode array => array.MapExpr(indexExpr, indexPathExpr),
                                 _ => throw new JsonException("Mapping arrays is not yet supported for " + ItemNode.GetType())
                             };
                             return Assign(ArrayAccess(ActualValueExpr, indexExpr), valueExpr);

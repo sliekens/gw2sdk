@@ -24,7 +24,7 @@ namespace GW2SDK.Accounts
             response.EnsureSuccessStatusCode();
             await using var json = await response.Content.ReadAsStreamAsync().ConfigureAwait(false);
             using var jsonDocument = await JsonDocument.ParseAsync(json).ConfigureAwait(false);
-            return AccountJsonReader.Instance.Read(jsonDocument.RootElement);
+            return AccountJsonReader.Instance.Read(jsonDocument);
         }
     }
 }

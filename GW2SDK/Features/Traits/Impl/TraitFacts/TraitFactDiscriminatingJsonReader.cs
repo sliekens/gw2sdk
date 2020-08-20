@@ -12,37 +12,37 @@ namespace GW2SDK.Traits.Impl.TraitFacts
             _unexpectedPropertyBehavior = unexpectedPropertyBehavior;
         }
 
-        public TraitFact Read(in JsonElement json)
+        public TraitFact Read(in JsonElement json, in JsonPath path)
         {
             if (json.ValueKind != JsonValueKind.Object)
             {
-                throw new JsonException("JSON is not an object.");
+                throw new JsonException($"Value at '{path.ToString()}' is not an object.");
             }
 
             var discriminator = json.TryGetProperty("type", out var type) ? type.GetString() : "";
             return discriminator switch
             {
-                "AttributeAdjust" => AttributeAdjustTraitFactJsonReader.Instance.Read(json),
-                "Buff" => BuffTraitFactJsonReader.Instance.Read(json),
-                "BuffConversion" => BuffConversionTraitFactJsonReader.Instance.Read(json),
-                "ComboField" => ComboFieldTraitFactJsonReader.Instance.Read(json),
-                "ComboFinisher" => ComboFinisherTraitFactJsonReader.Instance.Read(json),
-                "Damage" => DamageTraitFactJsonReader.Instance.Read(json),
-                "Distance" => DistanceTraitFactJsonReader.Instance.Read(json),
-                "NoData" => NoDataTraitFactJsonReader.Instance.Read(json),
-                "Number" => NumberTraitFactJsonReader.Instance.Read(json),
-                "Percent" => PercentTraitFactJsonReader.Instance.Read(json),
-                "PrefixedBuff" => PrefixedBuffTraitFactJsonReader.Instance.Read(json),
-                "Radius" => RadiusTraitFactJsonReader.Instance.Read(json),
-                "Range" => RangeTraitFactJsonReader.Instance.Read(json),
-                "Recharge" => RechargeTraitFactJsonReader.Instance.Read(json),
-                "StunBreak" => StunBreakTraitFactJsonReader.Instance.Read(json),
-                "Time" => TimeTraitFactJsonReader.Instance.Read(json),
-                "Unblockable" => UnblockableTraitFactJsonReader.Instance.Read(json),
+                "AttributeAdjust" => AttributeAdjustTraitFactJsonReader.Instance.Read(json, path),
+                "Buff" => BuffTraitFactJsonReader.Instance.Read(json, path),
+                "BuffConversion" => BuffConversionTraitFactJsonReader.Instance.Read(json, path),
+                "ComboField" => ComboFieldTraitFactJsonReader.Instance.Read(json, path),
+                "ComboFinisher" => ComboFinisherTraitFactJsonReader.Instance.Read(json, path),
+                "Damage" => DamageTraitFactJsonReader.Instance.Read(json, path),
+                "Distance" => DistanceTraitFactJsonReader.Instance.Read(json, path),
+                "NoData" => NoDataTraitFactJsonReader.Instance.Read(json, path),
+                "Number" => NumberTraitFactJsonReader.Instance.Read(json, path),
+                "Percent" => PercentTraitFactJsonReader.Instance.Read(json, path),
+                "PrefixedBuff" => PrefixedBuffTraitFactJsonReader.Instance.Read(json, path),
+                "Radius" => RadiusTraitFactJsonReader.Instance.Read(json, path),
+                "Range" => RangeTraitFactJsonReader.Instance.Read(json, path),
+                "Recharge" => RechargeTraitFactJsonReader.Instance.Read(json, path),
+                "StunBreak" => StunBreakTraitFactJsonReader.Instance.Read(json, path),
+                "Time" => TimeTraitFactJsonReader.Instance.Read(json, path),
+                "Unblockable" => UnblockableTraitFactJsonReader.Instance.Read(json, path),
                 // BUG: Life Force Cost trait facts don't have a 'type'
-                _ when json.TryGetProperty("percent", out _) => LifeForceCostTraitFactJsonReader.Instance.Read(json),
-                _ when _unexpectedPropertyBehavior == UnexpectedPropertyBehavior.Ignore => TraitFactJsonReader<TraitFact>.Instance.Read(json),
-                _ => throw new JsonException($"Could not find a type derived from 'TraitFact' for value '{discriminator}'")
+                _ when json.TryGetProperty("percent", out _) => LifeForceCostTraitFactJsonReader.Instance.Read(json, path),
+                _ when _unexpectedPropertyBehavior == UnexpectedPropertyBehavior.Ignore => TraitFactJsonReader<TraitFact>.Instance.Read(json, path),
+                _ => throw new JsonException($"Could not find a type derived from 'TraitFact' for value '{discriminator}' at '{path.ToString()}'.")
             };
 
         }

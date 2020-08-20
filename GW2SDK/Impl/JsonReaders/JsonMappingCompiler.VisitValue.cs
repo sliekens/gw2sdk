@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Linq.Expressions;
-using GW2SDK.Impl.Json;
 using GW2SDK.Impl.JsonReaders.Mappings;
 using GW2SDK.Impl.JsonReaders.Nodes;
 using static System.Linq.Expressions.Expression;
+using static GW2SDK.Impl.Json.JsonElementExpr;
 
 namespace GW2SDK.Impl.JsonReaders
 {
@@ -22,9 +22,9 @@ namespace GW2SDK.Impl.JsonReaders
                 }
             );
 
-            Func<Expression, Expression> MapExpr()
+            Func<Expression, Expression, Expression> MapExpr()
             {
-                return jsonElementExpr =>
+                return (jsonElementExpr, jsonPathExpr) =>
                 {
                     return Assign(
                         actualValueExpr,
@@ -32,44 +32,44 @@ namespace GW2SDK.Impl.JsonReaders
                         {
                             MappingSignificance.Required => mapping.ValueKind switch
                             {
-                                JsonValueMappingKind.Custom => JsonElementExpr.GetCustom(jsonElementExpr, mapping.JsonReader!),
-                                JsonValueMappingKind.String => JsonElementExpr.GetString(jsonElementExpr),
-                                JsonValueMappingKind.DateTime => JsonElementExpr.GetDateTime(jsonElementExpr),
-                                JsonValueMappingKind.DateTimeOffset => JsonElementExpr.GetDateTimeOffset(jsonElementExpr),
-                                JsonValueMappingKind.Guid => JsonElementExpr.GetGuid(jsonElementExpr),
-                                JsonValueMappingKind.Boolean => JsonElementExpr.GetBoolean(jsonElementExpr),
-                                JsonValueMappingKind.Single => JsonElementExpr.GetSingle(jsonElementExpr),
-                                JsonValueMappingKind.Double => JsonElementExpr.GetDouble(jsonElementExpr),
-                                JsonValueMappingKind.Decimal => JsonElementExpr.GetDecimal(jsonElementExpr),
-                                JsonValueMappingKind.SByte => JsonElementExpr.GetSByte(jsonElementExpr),
-                                JsonValueMappingKind.Int16 => JsonElementExpr.GetInt16(jsonElementExpr),
-                                JsonValueMappingKind.Int32 => JsonElementExpr.GetInt32(jsonElementExpr),
-                                JsonValueMappingKind.Int64 => JsonElementExpr.GetInt64(jsonElementExpr),
-                                JsonValueMappingKind.Byte => JsonElementExpr.GetByte(jsonElementExpr),
-                                JsonValueMappingKind.UInt16 => JsonElementExpr.GetUInt16(jsonElementExpr),
-                                JsonValueMappingKind.UInt32 => JsonElementExpr.GetUInt32(jsonElementExpr),
-                                JsonValueMappingKind.UInt64 => JsonElementExpr.GetUInt64(jsonElementExpr),
+                                JsonValueMappingKind.Custom => GetCustom(jsonElementExpr, jsonPathExpr, mapping.JsonReader!),
+                                JsonValueMappingKind.String => GetString(jsonElementExpr, jsonPathExpr),
+                                JsonValueMappingKind.DateTime => GetDateTime(jsonElementExpr, jsonPathExpr),
+                                JsonValueMappingKind.DateTimeOffset => GetDateTimeOffset(jsonElementExpr, jsonPathExpr),
+                                JsonValueMappingKind.Guid => GetGuid(jsonElementExpr, jsonPathExpr),
+                                JsonValueMappingKind.Boolean => GetBoolean(jsonElementExpr, jsonPathExpr),
+                                JsonValueMappingKind.Single => GetSingle(jsonElementExpr, jsonPathExpr),
+                                JsonValueMappingKind.Double => GetDouble(jsonElementExpr, jsonPathExpr),
+                                JsonValueMappingKind.Decimal => GetDecimal(jsonElementExpr, jsonPathExpr),
+                                JsonValueMappingKind.SByte => GetSByte(jsonElementExpr, jsonPathExpr),
+                                JsonValueMappingKind.Int16 => GetInt16(jsonElementExpr, jsonPathExpr),
+                                JsonValueMappingKind.Int32 => GetInt32(jsonElementExpr, jsonPathExpr),
+                                JsonValueMappingKind.Int64 => GetInt64(jsonElementExpr, jsonPathExpr),
+                                JsonValueMappingKind.Byte => GetByte(jsonElementExpr, jsonPathExpr),
+                                JsonValueMappingKind.UInt16 => GetUInt16(jsonElementExpr, jsonPathExpr),
+                                JsonValueMappingKind.UInt32 => GetUInt32(jsonElementExpr, jsonPathExpr),
+                                JsonValueMappingKind.UInt64 => GetUInt64(jsonElementExpr, jsonPathExpr),
                                 _ => Empty()
                             },
                             MappingSignificance.Optional => mapping.ValueKind switch
                             {
-                                JsonValueMappingKind.Custom => JsonElementExpr.GetCustomOrNull(jsonElementExpr, mapping.JsonReader!),
-                                JsonValueMappingKind.String => JsonElementExpr.GetStringOrNull(jsonElementExpr),
-                                JsonValueMappingKind.DateTime => JsonElementExpr.GetDateTimeOrNull(jsonElementExpr),
-                                JsonValueMappingKind.DateTimeOffset => JsonElementExpr.GetDateTimeOffsetOrNull(jsonElementExpr),
-                                JsonValueMappingKind.Guid => JsonElementExpr.GetGuidOrNull(jsonElementExpr),
-                                JsonValueMappingKind.Boolean => JsonElementExpr.GetBooleanOrNull(jsonElementExpr),
-                                JsonValueMappingKind.Single => JsonElementExpr.GetSingleOrNull(jsonElementExpr),
-                                JsonValueMappingKind.Double => JsonElementExpr.GetDoubleOrNull(jsonElementExpr),
-                                JsonValueMappingKind.Decimal => JsonElementExpr.GetDecimalOrNull(jsonElementExpr),
-                                JsonValueMappingKind.SByte => JsonElementExpr.GetSByteOrNull(jsonElementExpr),
-                                JsonValueMappingKind.Int16 => JsonElementExpr.GetInt16OrNull(jsonElementExpr),
-                                JsonValueMappingKind.Int32 => JsonElementExpr.GetInt32OrNull(jsonElementExpr),
-                                JsonValueMappingKind.Int64 => JsonElementExpr.GetInt64OrNull(jsonElementExpr),
-                                JsonValueMappingKind.Byte => JsonElementExpr.GetByteOrNull(jsonElementExpr),
-                                JsonValueMappingKind.UInt16 => JsonElementExpr.GetUInt16OrNull(jsonElementExpr),
-                                JsonValueMappingKind.UInt32 => JsonElementExpr.GetUInt32OrNull(jsonElementExpr),
-                                JsonValueMappingKind.UInt64 => JsonElementExpr.GetUInt64OrNull(jsonElementExpr),
+                                JsonValueMappingKind.Custom => GetCustomOrNull(jsonElementExpr, jsonPathExpr, mapping.JsonReader!),
+                                JsonValueMappingKind.String => GetStringOrNull(jsonElementExpr, jsonPathExpr),
+                                JsonValueMappingKind.DateTime => GetDateTimeOrNull(jsonElementExpr, jsonPathExpr),
+                                JsonValueMappingKind.DateTimeOffset => GetDateTimeOffsetOrNull(jsonElementExpr, jsonPathExpr),
+                                JsonValueMappingKind.Guid => GetGuidOrNull(jsonElementExpr, jsonPathExpr),
+                                JsonValueMappingKind.Boolean => GetBooleanOrNull(jsonElementExpr, jsonPathExpr),
+                                JsonValueMappingKind.Single => GetSingleOrNull(jsonElementExpr, jsonPathExpr),
+                                JsonValueMappingKind.Double => GetDoubleOrNull(jsonElementExpr, jsonPathExpr),
+                                JsonValueMappingKind.Decimal => GetDecimalOrNull(jsonElementExpr, jsonPathExpr),
+                                JsonValueMappingKind.SByte => GetSByteOrNull(jsonElementExpr, jsonPathExpr),
+                                JsonValueMappingKind.Int16 => GetInt16OrNull(jsonElementExpr, jsonPathExpr),
+                                JsonValueMappingKind.Int32 => GetInt32OrNull(jsonElementExpr, jsonPathExpr),
+                                JsonValueMappingKind.Int64 => GetInt64OrNull(jsonElementExpr, jsonPathExpr),
+                                JsonValueMappingKind.Byte => GetByteOrNull(jsonElementExpr, jsonPathExpr),
+                                JsonValueMappingKind.UInt16 => GetUInt16OrNull(jsonElementExpr, jsonPathExpr),
+                                JsonValueMappingKind.UInt32 => GetUInt32OrNull(jsonElementExpr, jsonPathExpr),
+                                JsonValueMappingKind.UInt64 => GetUInt64OrNull(jsonElementExpr, jsonPathExpr),
                                 _ => Empty()
                             },
                             _ => Empty()

@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Diagnostics;
 using System.Linq.Expressions;
 
 namespace GW2SDK.Impl.Json
@@ -10,6 +11,12 @@ namespace GW2SDK.Impl.Json
         internal static void AssertType<T>(Expression expression)
         {
             Debug.Assert(expression.Type == typeof(T), $"Unexpected expression type '{expression.Type.Name}', expected '{typeof(T).Name}'.");
+        }
+
+        [Conditional("DEBUG")]
+        internal static void AssertType(Type expected, Expression expression)
+        {
+            Debug.Assert(expression.Type == expected, $"Unexpected expression type '{expression.Type.Name}', expected '{expected.Name}'.");
         }
         
         // ReSharper disable once ParameterOnlyUsedForPreconditionCheck.Global

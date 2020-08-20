@@ -14,12 +14,13 @@ namespace GW2SDK.Impl.JsonReaders
         public Expression<ReadJson<TObject>> Build(JsonObjectMapping<TObject> mapping)
         {
             var inputExpr = Parameter(typeof(JsonElement).MakeByRefType(), "json");
+            var pathExpr = Parameter(typeof(JsonPath).MakeByRefType(), "path");
 
             mapping.Accept(this);
 
             var root = (ObjectNode) Nodes.Pop();
 
-            return Lambda<ReadJson<TObject>>(root.MapExpr(inputExpr), inputExpr);
+            return Lambda<ReadJson<TObject>>(root.MapExpr(inputExpr, pathExpr), inputExpr, pathExpr);
         }
     }
 }

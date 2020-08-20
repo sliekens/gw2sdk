@@ -19,7 +19,7 @@ namespace GW2SDK.Impl.JsonReaders.Nodes
 
         public UnexpectedPropertyBehavior UnexpectedPropertyBehavior { get; set; }
 
-        public Expression DeconstructExpr(Expression jsonElementExpr)
+        public Expression DeconstructExpr(Expression jsonElementExpr, Expression objectPathExpr)
         {
             if (Mapping.Significance == MappingSignificance.Ignored)
             {
@@ -43,10 +43,10 @@ namespace GW2SDK.Impl.JsonReaders.Nodes
                         : Continue(@continue);
                 }
 
-                var child = Properties[index];
+                var propertyNode = Properties[index];
                 return IfThenElse(
-                    child.TestExpr(jsonPropertyExpr),
-                    child.MapExpr(jsonPropertyExpr),
+                    propertyNode.TestExpr(jsonPropertyExpr),
+                    propertyNode.MapExpr(jsonPropertyExpr, objectPathExpr),
                     index + 1 < Properties.Count
                         ? MapPropertyExpression(jsonPropertyExpr, @continue, index + 1)
                         : UnexpectedPropertyBehavior == UnexpectedPropertyBehavior.Error
@@ -56,7 +56,7 @@ namespace GW2SDK.Impl.JsonReaders.Nodes
             }
         }
 
-        public Expression MapExpr(Expression jsonElementExpr)
+        public Expression MapExpr(Expression jsonElementExpr, Expression objectPathExpr)
         {
             if (Mapping.Significance == MappingSignificance.Ignored)
             {
@@ -93,10 +93,10 @@ namespace GW2SDK.Impl.JsonReaders.Nodes
                         : Continue(@continue);
                 }
 
-                var child = Properties[index];
+                var propertyNode = Properties[index];
                 return IfThenElse(
-                    child.TestExpr(jsonPropertyExpr),
-                    child.MapExpr(jsonPropertyExpr),
+                    propertyNode.TestExpr(jsonPropertyExpr),
+                    propertyNode.MapExpr(jsonPropertyExpr, objectPathExpr),
                     index + 1 < Properties.Count
                         ? MapPropertyExpression(jsonPropertyExpr, @continue, index + 1)
                         : UnexpectedPropertyBehavior == UnexpectedPropertyBehavior.Error

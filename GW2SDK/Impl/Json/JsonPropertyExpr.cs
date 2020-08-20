@@ -1,27 +1,29 @@
 ﻿using System.Linq.Expressions;
 using System.Text.Json;
+using static System.Linq.Expressions.Expression;
+using static GW2SDK.Impl.Json.ExpressionDebug;
 
 namespace GW2SDK.Impl.Json
 {
     internal static class JsonPropertyExpr
     {
-        internal static Expression GetName(Expression jsonPropertyExpression)
+        internal static Expression GetName(Expression jsonPropertyExpr)
         {
-            ExpressionDebug.AssertType<JsonProperty>(jsonPropertyExpression);
-            return Expression.Property(jsonPropertyExpression, JsonPropertyInfo.Name);
+            AssertType<JsonProperty>(jsonPropertyExpr);
+            return Property(jsonPropertyExpr, JsonPropertyInfo.Name);
         }
 
-        internal static Expression GetValue(Expression jsonPropertyExpression)
+        internal static Expression GetValue(Expression jsonPropertyExpr)
         {
-            ExpressionDebug.AssertType<JsonProperty>(jsonPropertyExpression);
-            return Expression.Property(jsonPropertyExpression, JsonPropertyInfo.Value);
+            AssertType<JsonProperty>(jsonPropertyExpr);
+            return Property(jsonPropertyExpr, JsonPropertyInfo.Value);
         }
 
-        internal static Expression NameEquals(Expression jsonPropertyExpression, Expression textExpression)
+        internal static Expression NameEquals(Expression jsonPropertyExpr, Expression textExpr)
         {
-            ExpressionDebug.AssertType<JsonProperty>(jsonPropertyExpression);
-            ExpressionDebug.AssertType<string>(textExpression);
-            return Expression.Call(jsonPropertyExpression, JsonPropertyInfo.NameEquals, textExpression);
+            AssertType<JsonProperty>(jsonPropertyExpr);
+            AssertType<string>(textExpr);
+            return Call(jsonPropertyExpr, JsonPropertyInfo.NameEquals, textExpr);
         }
     }
 }

@@ -32,7 +32,7 @@ namespace GW2SDK.Impl.JsonReaders.Nodes
 
         public Expression TestExpr(Expression jsonPropertyExpr) => JsonPropertyExpr.NameEquals(jsonPropertyExpr, Constant(Mapping.Name, typeof(string)));
 
-        public Expression MapExpr(Expression jsonPropertyExpr)
+        public Expression MapExpr(Expression jsonPropertyExpr, Expression objectPathExpr)
         {
             if (Mapping.Significance == MappingSignificance.Ignored)
             {
@@ -41,16 +41,19 @@ namespace GW2SDK.Impl.JsonReaders.Nodes
 
             var expressions = new List<Expression>();
             expressions.Add(Assign(PropertySeenExpr, Constant(true)));
+            var propertyNameExpr = JsonPropertyExpr.GetName(jsonPropertyExpr);
+            var propertyValueExpr = JsonPropertyExpr.GetValue(jsonPropertyExpr);
+            var propertyPathExpr = JsonPathExpr.AccessProperty(objectPathExpr, propertyNameExpr);
             switch (ValueNode)
             {
                 case ValueNode value:
-                    expressions.Add(value.MapExpr(JsonPropertyExpr.GetValue(jsonPropertyExpr)));
+                    expressions.Add(value.MapExpr(propertyValueExpr, propertyPathExpr));
                     break;
                 case ObjectNode obj:
-                    expressions.Add(obj.DeconstructExpr(JsonPropertyExpr.GetValue(jsonPropertyExpr)));
+                    expressions.Add(obj.DeconstructExpr(propertyValueExpr, propertyPathExpr));
                     break;
                 case ArrayNode array:
-                    expressions.Add(array.MapExpr(JsonPropertyExpr.GetValue(jsonPropertyExpr)));
+                    expressions.Add(array.MapExpr(propertyValueExpr, propertyPathExpr));
                     break;
                 default:
                     throw new JsonException("Mapping properties is not yet supported for " + ValueNode.GetType());

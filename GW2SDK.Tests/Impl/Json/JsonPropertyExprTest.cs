@@ -4,6 +4,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Text.Json;
 using GW2SDK.Impl.Json;
+using GW2SDK.Impl.JsonReaders;
 using Xunit;
 
 namespace GW2SDK.Tests.Impl.Json
@@ -89,7 +90,7 @@ namespace GW2SDK.Tests.Impl.Json
             using var document = JsonDocument.Parse(json);
 
             var input = Expression.Constant(document.RootElement, typeof(JsonElement));
-
+            
             var expr = JsonElementExpr.GetRawText(input);
 
             var compilation = Expression.Lambda<Func<string>>(expr);
@@ -139,7 +140,9 @@ namespace GW2SDK.Tests.Impl.Json
 
             var input = Expression.Constant(document.RootElement, typeof(JsonElement));
 
-            var expr = JsonElementExpr.GetDateTime(input);
+            var path = JsonPathExpr.Root();
+
+            var expr = JsonElementExpr.GetDateTime(input, path);
 
             var compilation = Expression.Lambda<Func<DateTime>>(expr);
 
@@ -158,7 +161,9 @@ namespace GW2SDK.Tests.Impl.Json
 
             var input = Expression.Constant(document.RootElement, typeof(JsonElement));
 
-            var expr = JsonElementExpr.GetDateTimeOrNull(input);
+            var path = JsonPathExpr.Root();
+
+            var expr = JsonElementExpr.GetDateTimeOrNull(input, path);
 
             var compilation = Expression.Lambda<Func<DateTime?>>(expr);
 
@@ -177,7 +182,9 @@ namespace GW2SDK.Tests.Impl.Json
 
             var input = Expression.Constant(document.RootElement, typeof(JsonElement));
 
-            var expr = JsonElementExpr.GetDateTimeOffset(input);
+            var path = JsonPathExpr.Root();
+
+            var expr = JsonElementExpr.GetDateTimeOffset(input, path);
 
             var compilation = Expression.Lambda<Func<DateTimeOffset>>(expr);
 
@@ -196,7 +203,9 @@ namespace GW2SDK.Tests.Impl.Json
 
             var input = Expression.Constant(document.RootElement, typeof(JsonElement));
 
-            var expr = JsonElementExpr.GetDateTimeOffsetOrNull(input);
+            var path = JsonPathExpr.Root();
+
+            var expr = JsonElementExpr.GetDateTimeOffsetOrNull(input, path);
 
             var compilation = Expression.Lambda<Func<DateTimeOffset?>>(expr);
 
@@ -215,7 +224,9 @@ namespace GW2SDK.Tests.Impl.Json
 
             var input = Expression.Constant(document.RootElement, typeof(JsonElement));
 
-            var expr = JsonElementExpr.GetGuid(input);
+            var path = JsonPathExpr.Root();
+
+            var expr = JsonElementExpr.GetGuid(input, path);
 
             var compilation = Expression.Lambda<Func<Guid>>(expr);
 
@@ -234,7 +245,9 @@ namespace GW2SDK.Tests.Impl.Json
 
             var input = Expression.Constant(document.RootElement, typeof(JsonElement));
 
-            var expr = JsonElementExpr.GetGuidOrNull(input);
+            var path = JsonPathExpr.Root();
+
+            var expr = JsonElementExpr.GetGuidOrNull(input, path);
 
             var compilation = Expression.Lambda<Func<Guid?>>(expr);
 
@@ -254,7 +267,9 @@ namespace GW2SDK.Tests.Impl.Json
 
             var input = Expression.Constant(document.RootElement, typeof(JsonElement));
 
-            var expr = JsonElementExpr.GetString(input);
+            var path = JsonPathExpr.Root();
+
+            var expr = JsonElementExpr.GetString(input, path);
 
             var compilation = Expression.Lambda<Func<string>>(expr);
 
@@ -275,7 +290,9 @@ namespace GW2SDK.Tests.Impl.Json
 
             var input = Expression.Constant(document.RootElement, typeof(JsonElement));
 
-            var expr = JsonElementExpr.GetStringOrNull(input);
+            var path = JsonPathExpr.Root();
+
+            var expr = JsonElementExpr.GetStringOrNull(input, path);
 
             var compilation = Expression.Lambda<Func<string>>(expr);
 
@@ -295,7 +312,9 @@ namespace GW2SDK.Tests.Impl.Json
 
             var input = Expression.Constant(document.RootElement, typeof(JsonElement));
 
-            var expr = JsonElementExpr.GetBoolean(input);
+            var path = JsonPathExpr.Root();
+
+            var expr = JsonElementExpr.GetBoolean(input, path);
 
             var compilation = Expression.Lambda<Func<bool>>(expr);
 
@@ -316,7 +335,9 @@ namespace GW2SDK.Tests.Impl.Json
 
             var input = Expression.Constant(document.RootElement, typeof(JsonElement));
 
-            var expr = JsonElementExpr.GetBooleanOrNull(input);
+            var path = JsonPathExpr.Root();
+
+            var expr = JsonElementExpr.GetBooleanOrNull(input, path);
 
             var compilation = Expression.Lambda<Func<bool?>>(expr);
 
@@ -342,7 +363,9 @@ namespace GW2SDK.Tests.Impl.Json
 
             var input = Expression.Constant(document.RootElement, typeof(JsonElement));
 
-            var expr = JsonElementExpr.GetBoolean(input);
+            var path = JsonPathExpr.Root();
+
+            var expr = JsonElementExpr.GetBoolean(input, path);
 
             var compilation = Expression.Lambda<Func<bool>>(expr);
 
@@ -369,7 +392,9 @@ namespace GW2SDK.Tests.Impl.Json
 
             var input = Expression.Constant(document.RootElement, typeof(JsonElement));
 
-            var expr = JsonElementExpr.GetString(input);
+            var path = JsonPathExpr.Root();
+
+            var expr = JsonElementExpr.GetString(input, path);
 
             var compilation = Expression.Lambda<Func<string>>(expr);
 
@@ -392,7 +417,9 @@ namespace GW2SDK.Tests.Impl.Json
 
             var input = Expression.Constant(document.RootElement, typeof(JsonElement));
 
-            var expr = JsonElementExpr.GetSingle(input);
+            var path = JsonPathExpr.Root();
+
+            var expr = JsonElementExpr.GetSingle(input, path);
 
             var compilation = Expression.Lambda<Func<float>>(expr);
 
@@ -415,7 +442,9 @@ namespace GW2SDK.Tests.Impl.Json
 
             var input = Expression.Constant(document.RootElement, typeof(JsonElement));
 
-            var expr = JsonElementExpr.GetDouble(input);
+            var path = JsonPathExpr.Root();
+
+            var expr = JsonElementExpr.GetDouble(input, path);
 
             var compilation = Expression.Lambda<Func<double>>(expr);
 
@@ -436,7 +465,9 @@ namespace GW2SDK.Tests.Impl.Json
 
             var input = Expression.Constant(document.RootElement, typeof(JsonElement));
 
-            var expr = JsonElementExpr.GetInt16(input);
+            var path = JsonPathExpr.Root();
+
+            var expr = JsonElementExpr.GetInt16(input, path);
 
             var compilation = Expression.Lambda<Func<short>>(expr);
 
@@ -458,7 +489,9 @@ namespace GW2SDK.Tests.Impl.Json
 
             var input = Expression.Constant(document.RootElement, typeof(JsonElement));
 
-            var expr = JsonElementExpr.GetInt16OrNull(input);
+            var path = JsonPathExpr.Root();
+
+            var expr = JsonElementExpr.GetInt16OrNull(input, path);
 
             var compilation = Expression.Lambda<Func<short?>>(expr);
 
@@ -486,7 +519,9 @@ namespace GW2SDK.Tests.Impl.Json
 
             var input = Expression.Constant(document.RootElement, typeof(JsonElement));
 
-            var expr = JsonElementExpr.GetInt16(input);
+            var path = JsonPathExpr.Root();
+
+            var expr = JsonElementExpr.GetInt16(input, path);
 
             var compilation = Expression.Lambda<Func<short>>(expr);
 
@@ -507,7 +542,9 @@ namespace GW2SDK.Tests.Impl.Json
 
             var input = Expression.Constant(document.RootElement, typeof(JsonElement));
 
-            var expr = JsonElementExpr.GetInt32(input);
+            var path = JsonPathExpr.Root();
+
+            var expr = JsonElementExpr.GetInt32(input, path);
 
             var compilation = Expression.Lambda<Func<int>>(expr);
 
@@ -529,7 +566,9 @@ namespace GW2SDK.Tests.Impl.Json
 
             var input = Expression.Constant(document.RootElement, typeof(JsonElement));
 
-            var expr = JsonElementExpr.GetInt32OrNull(input);
+            var path = JsonPathExpr.Root();
+
+            var expr = JsonElementExpr.GetInt32OrNull(input, path);
 
             var compilation = Expression.Lambda<Func<int?>>(expr);
 
@@ -557,7 +596,9 @@ namespace GW2SDK.Tests.Impl.Json
 
             var input = Expression.Constant(document.RootElement, typeof(JsonElement));
 
-            var expr = JsonElementExpr.GetInt32(input);
+            var path = JsonPathExpr.Root();
+
+            var expr = JsonElementExpr.GetInt32(input, path);
 
             var compilation = Expression.Lambda<Func<int>>(expr);
 
@@ -578,7 +619,9 @@ namespace GW2SDK.Tests.Impl.Json
 
             var input = Expression.Constant(document.RootElement, typeof(JsonElement));
 
-            var expr = JsonElementExpr.GetInt64(input);
+            var path = JsonPathExpr.Root();
+
+            var expr = JsonElementExpr.GetInt64(input, path);
 
             var compilation = Expression.Lambda<Func<long>>(expr);
 
@@ -600,7 +643,9 @@ namespace GW2SDK.Tests.Impl.Json
 
             var input = Expression.Constant(document.RootElement, typeof(JsonElement));
 
-            var expr = JsonElementExpr.GetInt64OrNull(input);
+            var path = JsonPathExpr.Root();
+
+            var expr = JsonElementExpr.GetInt64OrNull(input, path);
 
             var compilation = Expression.Lambda<Func<long?>>(expr);
 
@@ -628,7 +673,9 @@ namespace GW2SDK.Tests.Impl.Json
 
             var input = Expression.Constant(document.RootElement, typeof(JsonElement));
 
-            var expr = JsonElementExpr.GetInt64(input);
+            var path = JsonPathExpr.Root();
+
+            var expr = JsonElementExpr.GetInt64(input, path);
 
             var compilation = Expression.Lambda<Func<long>>(expr);
 

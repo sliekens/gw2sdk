@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using System.Text.Json;
 
 namespace GW2SDK.Impl.JsonReaders
@@ -13,14 +12,21 @@ namespace GW2SDK.Impl.JsonReaders
             _itemReader = itemReader;
         }
 
-        public IEnumerable<T> Read(in JsonElement json)
+        public IEnumerable<T> Read(in JsonElement json, in JsonPath path)
         {
             if (json.ValueKind != JsonValueKind.Array)
             {
-                throw new JsonException("JSON is not an array.");
+                throw new JsonException($"Value at '{path.ToString()}' is not an array.");
             }
 
-            return json.EnumerateArray().Select(item => _itemReader.Read(item)).ToList();
+            var index = 0;
+            var result = new List<T>(json.GetArrayLength());
+            foreach (var item in json.EnumerateArray())
+            {
+                result.Add(_itemReader.Read(item, path.AccessArrayIndex(index++)));
+            }
+
+            return result;
         }
 
         public bool CanRead(in JsonElement json) => json.ValueKind == JsonValueKind.Array;

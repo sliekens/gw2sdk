@@ -11,7 +11,7 @@ namespace GW2SDK.Impl.JsonReaders
 
         public static IJsonReader<TimeSpan?> Instance { get; } = new OptionalSecondsJsonReader();
 
-        public TimeSpan? Read(in JsonElement json) => json.ValueKind == JsonValueKind.Null ? (TimeSpan?) null : TimeSpan.FromSeconds(json.GetDouble());
+        public TimeSpan? Read(in JsonElement json, in JsonPath _) => json.ValueKind == JsonValueKind.Null ? (TimeSpan?) null : TimeSpan.FromSeconds(json.GetDouble());
 
         public bool CanRead(in JsonElement json) => json.ValueKind == JsonValueKind.Number;
     }

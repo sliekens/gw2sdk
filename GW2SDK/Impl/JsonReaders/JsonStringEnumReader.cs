@@ -9,8 +9,8 @@ namespace GW2SDK.Impl.JsonReaders
 
         public JsonStringEnumReader(bool ignoreCase = false) => _ignoreCase = ignoreCase;
 
-        public TEnum Read(in JsonElement json) => Enum.Parse<TEnum>(json.GetString(), _ignoreCase);
+        public TEnum Read(in JsonElement json, in JsonPath _) => Enum.Parse<TEnum>(json.GetString(), _ignoreCase);
 
-        public bool CanRead(in JsonElement json) => json.ValueKind == System.Text.Json.JsonValueKind.String && Enum.IsDefined(typeof(TEnum), json.GetString());
+        public bool CanRead(in JsonElement json) => json.ValueKind == JsonValueKind.String && Enum.IsDefined(typeof(TEnum), json.GetString());
     }
 }
