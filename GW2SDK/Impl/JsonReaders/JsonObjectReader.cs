@@ -9,7 +9,7 @@ namespace GW2SDK.Impl.JsonReaders
     {
         private readonly JsonObjectMapping<TObject> _mapping = new JsonObjectMapping<TObject>
         {
-            Name = "$"
+            Name = "root_node"
         };
 
         private Expression<ReadJson<TObject>>? _source;

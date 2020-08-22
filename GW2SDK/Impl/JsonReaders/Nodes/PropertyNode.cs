@@ -16,7 +16,8 @@ namespace GW2SDK.Impl.JsonReaders.Nodes
 
         public ParameterExpression PropertySeenExpr { get; set; } = default!;
 
-        public MemberInfo Destination { get; set; } = default!;
+        /// <summary>The property or field to bind a JSON value to (one-to-one mapping), or null if the JSON property is being deconstructed (one-to-many mapping).</summary>
+        public MemberInfo? Destination { get; set; }
 
         public override IEnumerable<ParameterExpression> GetVariables()
         {
