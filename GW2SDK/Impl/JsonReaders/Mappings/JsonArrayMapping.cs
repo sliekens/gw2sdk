@@ -2,7 +2,7 @@
 {
     public class JsonArrayMapping<TValue> : JsonMapping
     {
-        public JsonValueMapping<TValue> ValueMapping { get; set; } = default!;
+        public JsonMapping ValueMapping { get; set; } = default!;
 
         public override void Accept(IJsonMappingVisitor visitor) => visitor.VisitArray(this);
     }

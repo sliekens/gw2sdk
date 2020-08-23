@@ -5,7 +5,7 @@ namespace GW2SDK.Impl.JsonReaders.Mappings
 {
     public partial class JsonObjectMapping<TObject>
     {
-        public void Map(string propertyName, Expression<Func<TObject, decimal>> @decimal)
+        public void Map(string propertyName, Expression<SelectProperty<TObject, decimal>> @decimal)
         {
             Children.Add(
                 new JsonPropertyMapping
@@ -23,7 +23,7 @@ namespace GW2SDK.Impl.JsonReaders.Mappings
             );
         }
 
-        public void Map(string propertyName, Expression<Func<TObject, decimal?>> @decimal)
+        public void Map(string propertyName, Expression<SelectProperty<TObject, decimal?>> @decimal)
         {
             Children.Add(
                 new JsonPropertyMapping

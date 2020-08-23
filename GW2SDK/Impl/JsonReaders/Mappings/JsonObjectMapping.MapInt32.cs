@@ -6,7 +6,7 @@ namespace GW2SDK.Impl.JsonReaders.Mappings
 {
     public partial class JsonObjectMapping<TObject>
     {
-        public void Map(string propertyName, Expression<Func<TObject, int>> int32)
+        public void Map(string propertyName, Expression<SelectProperty<TObject, int>> int32)
         {
             Children.Add(
                 new JsonPropertyMapping
@@ -24,7 +24,7 @@ namespace GW2SDK.Impl.JsonReaders.Mappings
             );
         }
 
-        public void Map(string propertyName, Expression<Func<TObject, int?>> int32)
+        public void Map(string propertyName, Expression<SelectProperty<TObject, int?>> int32)
         {
             Children.Add(
                 new JsonPropertyMapping

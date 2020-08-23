@@ -8,7 +8,7 @@ namespace GW2SDK.Impl.JsonReaders.Mappings
     {
         public void Map(
             string propertyName,
-            Expression<Func<TObject, string?>> @string,
+            Expression<SelectProperty<TObject, string?>> @string,
             MappingSignificance significance = MappingSignificance.Required)
         {
             Children.Add(
@@ -29,7 +29,7 @@ namespace GW2SDK.Impl.JsonReaders.Mappings
 
         public void Map(
             string propertyName,
-            Expression<Func<TObject, IEnumerable<string?>?>> strings,
+            Expression<SelectProperty<TObject, IEnumerable<string?>?>> strings,
             MappingSignificance significance = MappingSignificance.Required,
             MappingSignificance itemSignificance = MappingSignificance.Required)
         {

@@ -1,4 +1,5 @@
 ﻿using GW2SDK.Impl.JsonReaders;
+using GW2SDK.Impl.JsonReaders.Mappings;
 
 namespace GW2SDK.Builds.Impl
 {
@@ -6,14 +7,14 @@ namespace GW2SDK.Builds.Impl
     {
         private BuildJsonReader()
         {
-            Configure(
-                build =>
-                {
-                    build.Map("id", to => to.Id);
-                }
-            );
+            Configure(MapBuild);
         }
 
         internal static IJsonReader<Build> Instance { get; } = new BuildJsonReader();
+
+        private static void MapBuild(JsonObjectMapping<Build> build)
+        {
+            build.Map("id", to => to.Id);
+        }
     }
 }
