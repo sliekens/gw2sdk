@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq.Expressions;
 using GW2SDK.Impl.Json;
+using static System.Linq.Expressions.Expression;
 
 namespace GW2SDK.Impl.JsonReaders
 {
@@ -8,27 +9,28 @@ namespace GW2SDK.Impl.JsonReaders
     {
         internal static Expression For(ParameterExpression indexExpr, Expression lengthExpr, DoFor bodyExpr)
         {
-            var breakTarget = Expression.Label();
-            var continueTarget = Expression.Label();
-            return Expression.Loop(
-                Expression.IfThenElse(
-                    Expression.LessThan(indexExpr, lengthExpr),
-                    Expression.Block(
+            var breakTarget = Label();
+            var continueTarget = Label();
+            return Loop(
+                IfThenElse(
+                    LessThan(indexExpr, lengthExpr),
+                    Block(
                         bodyExpr(breakTarget, continueTarget),
-                        Expression.PostIncrementAssign(indexExpr)
+                        PostIncrementAssign(indexExpr)
                     ),
-                    Expression.Break(breakTarget)
+                    Break(breakTarget)
                 ),
                 breakTarget,
                 continueTarget
             );
         }
 
-        internal static Expression UnexpectedProperty(Expression jsonPropertyExpr, Type targetType)
+        internal static Expression UnexpectedProperty(Expression jsonPropertyExpr, Expression propertyPathExpr, Type targetType)
         {
-            var format = Expression.Constant($"Unexpected property '{{0}}' for object of type '{targetType.Name}'.", typeof(string));
-            var nameExpr = Expression.Property(jsonPropertyExpr, JsonPropertyInfo.Name);
-            return StringExpr.Format(format, nameExpr);
+            var format = Constant($"Unexpected property '{{0}}' at '{{1}}' for object of type '{targetType.Name}'.", typeof(string));
+            var nameExpr = Property(jsonPropertyExpr, JsonPropertyInfo.Name);
+            var pathExpr = JsonPathExpr.ToString(propertyPathExpr);
+            return StringExpr.Format(format, nameExpr, pathExpr);
         }
 
         internal delegate Expression DoFor(LabelTarget @break, LabelTarget @continue);

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq.Expressions;
 using GW2SDK.Impl.JsonReaders.Mappings;
 
@@ -14,16 +13,8 @@ namespace GW2SDK.Impl.JsonReaders.Nodes
         /// </summary>
         public abstract IEnumerable<ParameterExpression> GetVariables();
 
-        /// <summary>
-        /// Gets expressions to run after reading a JsonElement.
-        /// </summary>
-        /// <param name="targetType"></param>
-        public abstract IEnumerable<Expression> GetValidations(Type targetType);
+        public abstract Expression MapNode(Expression jsonNodeExpr, Expression pathExpr);
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <returns></returns>
-        public abstract IEnumerable<MemberBinding> GetBindings();
+        public abstract Expression GetResult();
     }
 }

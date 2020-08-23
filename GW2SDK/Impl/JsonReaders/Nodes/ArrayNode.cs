@@ -18,8 +18,19 @@ namespace GW2SDK.Impl.JsonReaders.Nodes
 
         public ParameterExpression ActualValueExpr { get; set; } = default!;
 
-        public Expression MapExpr(Expression jsonElementExpr, Expression pathExpr)
+        public override IEnumerable<ParameterExpression> GetVariables()
         {
+            if (Mapping.Significance != MappingSignificance.Ignored)
+            {
+                yield return ArraySeenExpr;
+                yield return ActualValueExpr;
+            }
+        }
+
+        public override Expression MapNode(Expression jsonNodeExpr, Expression pathExpr)
+        {
+            ExpressionDebug.AssertType(typeof(JsonElement), jsonNodeExpr);
+            ExpressionDebug.AssertType(typeof(JsonPath),    pathExpr);
             if (Mapping.Significance == MappingSignificance.Ignored)
             {
                 return Empty();
@@ -28,68 +39,52 @@ namespace GW2SDK.Impl.JsonReaders.Nodes
             var arrayLengthExpr = Variable(typeof(int), "length");
             var indexExpr = Variable(typeof(int),       "index");
 
-            return IfThen(
-                Equal(JsonElementExpr.GetValueKind(jsonElementExpr), Constant(JsonValueKind.Array)),
-                Block(
-                    new[]
+            var variables = new List<ParameterExpression>
+            {
+                arrayLengthExpr, indexExpr
+            };
+            variables.AddRange(ItemNode.GetVariables());
+
+            var source = new List<Expression>
+            {
+                Assign(ArraySeenExpr,   Constant(true)),
+                Assign(indexExpr,       Constant(0)),
+                Assign(arrayLengthExpr, JsonElementExpr.GetArrayLength(jsonNodeExpr)),
+                Assign(ActualValueExpr, NewArrayBounds(ItemType, arrayLengthExpr)),
+                Expr.For(
+                    indexExpr,
+                    arrayLengthExpr,
+                    (_, __) =>
                     {
-                        arrayLengthExpr,
-                        indexExpr
-                    },
-                    Assign(ArraySeenExpr,   Constant(true)),
-                    Assign(indexExpr,       Constant(0)),
-                    Assign(arrayLengthExpr, JsonElementExpr.GetArrayLength(jsonElementExpr)),
-                    Assign(ActualValueExpr, NewArrayBounds(ItemType, arrayLengthExpr)),
-                    Expr.For(
-                        indexExpr,
-                        arrayLengthExpr,
-                        (_, __) =>
-                        {
-                            var indexExpression = MakeIndex(jsonElementExpr, JsonElementInfo.Item, new[] { indexExpr });
-                            var indexPathExpr = JsonPathExpr.AccessArrayIndex(pathExpr, indexExpr);
-                            var valueExpr = ItemNode switch
-                            {
-                                ValueNode value => value.MapExpr(indexExpression, indexPathExpr),
-                                ObjectNode obj => obj.MapExpr(indexExpr, indexPathExpr),
-                                ArrayNode array => array.MapExpr(indexExpr, indexPathExpr),
-                                _ => throw new JsonException("Mapping arrays is not yet supported for " + ItemNode.GetType())
-                            };
-                            return Assign(ArrayAccess(ActualValueExpr, indexExpr), valueExpr);
-                        }
+                        var indexExpression = MakeIndex(jsonNodeExpr, JsonElementInfo.Item, new[] { indexExpr });
+                        var indexPathExpr = JsonPathExpr.AccessArrayIndex(pathExpr, indexExpr);
+                        return Block(
+                            ItemNode.MapNode(indexExpression, indexPathExpr),
+                            Assign(ArrayAccess(ActualValueExpr, indexExpr), ItemNode.GetResult())
+                        );
+                    }
+                )
+            };
+
+            if (Mapping.Significance == MappingSignificance.Required)
+            {
+                source.Add(
+                    IfThen(
+                        IsFalse(ArraySeenExpr),
+                        Throw(JsonExceptionExpr.Create(Constant($"Missing required value for '{Mapping.Name}'.")))
                     )
+                );
+            }
+
+            return IfThen(
+                Equal(JsonElementExpr.GetValueKind(jsonNodeExpr), Constant(JsonValueKind.Array)),
+                Block(
+                    variables,
+                    source
                 )
             );
         }
 
-        public override IEnumerable<ParameterExpression> GetVariables()
-        {
-            if (Mapping.Significance != MappingSignificance.Ignored)
-            {
-                yield return ArraySeenExpr;
-                yield return ActualValueExpr;
-                foreach (var child in ItemNode.GetVariables())
-                {
-                    yield return child;
-                }
-            }
-        }
-
-        public override IEnumerable<Expression> GetValidations(Type targetType)
-        {
-            if (Mapping.Significance == MappingSignificance.Required)
-            {
-                yield return IfThen(
-                    IsFalse(ArraySeenExpr),
-                    Throw(JsonExceptionExpr.Create(Constant($"Missing required value for '{Mapping.Name}'.")))
-                );
-            }
-
-            // TODO: item validations?
-        }
-
-        public override IEnumerable<MemberBinding> GetBindings()
-        {
-            yield break;
-        }
+        public override Expression GetResult() => ActualValueExpr;
     }
 }

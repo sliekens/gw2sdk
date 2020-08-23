@@ -19,148 +19,106 @@ namespace GW2SDK.Impl.JsonReaders.Nodes
 
         public UnexpectedPropertyBehavior UnexpectedPropertyBehavior { get; set; }
 
-        public Expression DeconstructExpr(Expression jsonElementExpr, Expression objectPathExpr)
+        public override IEnumerable<ParameterExpression> GetVariables()
         {
-            if (Mapping.Significance == MappingSignificance.Ignored)
+            if (Mapping.Significance != MappingSignificance.Ignored)
             {
-                return Empty();
-            }
-
-            return IfThen(
-                Equal(JsonElementExpr.GetValueKind(jsonElementExpr), Constant(JsonValueKind.Object)),
-                Block(
-                    Assign(ObjectSeenExpr, Constant(true)),
-                    JsonElementExpr.ForEachProperty(jsonElementExpr, (jsonPropertyExpr, @continue) => MapPropertyExpression(jsonPropertyExpr, @continue))
-                )
-            );
-
-            Expression MapPropertyExpression(Expression jsonPropertyExpr, LabelTarget @continue, int index = 0)
-            {
-                if (Properties.Count == 0)
+                yield return ObjectSeenExpr;
+                foreach (var variable in Properties.SelectMany(property => property.GetVariables()))
                 {
-                    return UnexpectedPropertyBehavior == UnexpectedPropertyBehavior.Error
-                        ? JsonExceptionExpr.ThrowJsonException(Expr.UnexpectedProperty(jsonPropertyExpr, TargetType))
-                        : Continue(@continue);
+                    yield return variable;
                 }
-
-                var propertyNode = Properties[index];
-                return IfThenElse(
-                    propertyNode.TestExpr(jsonPropertyExpr),
-                    propertyNode.MapExpr(jsonPropertyExpr, objectPathExpr),
-                    index + 1 < Properties.Count
-                        ? MapPropertyExpression(jsonPropertyExpr, @continue, index + 1)
-                        : UnexpectedPropertyBehavior == UnexpectedPropertyBehavior.Error
-                            ? JsonExceptionExpr.ThrowJsonException(Expr.UnexpectedProperty(jsonPropertyExpr, TargetType))
-                            : Continue(@continue)
-                );
             }
         }
 
-        public Expression MapExpr(Expression jsonElementExpr, Expression objectPathExpr)
+        public override Expression MapNode(Expression jsonNodeExpr, Expression pathExpr)
         {
+            ExpressionDebug.AssertType(typeof(JsonElement), jsonNodeExpr);
+            ExpressionDebug.AssertType(typeof(JsonPath),    pathExpr);
             if (Mapping.Significance == MappingSignificance.Ignored)
             {
                 return Empty();
             }
 
             var source = new List<Expression>();
+
+            // Important: ensure all variables are initialized to their default before mapping anything
+            foreach (var variable in GetVariables())
+            {
+                source.Add(Assign(variable, Default(variable.Type)));
+            }
+
             source.Add(
                 IfThen(
-                    Equal(JsonElementExpr.GetValueKind(jsonElementExpr), Constant(JsonValueKind.Object)),
+                    Equal(JsonElementExpr.GetValueKind(jsonNodeExpr), Constant(JsonValueKind.Object)),
                     Block(
                         Assign(ObjectSeenExpr, Constant(true)),
                         JsonElementExpr.ForEachProperty(
-                            jsonElementExpr,
+                            jsonNodeExpr,
                             (jsonPropertyExpr, @continue) => MapPropertyExpression(jsonPropertyExpr, @continue)
                         )
                     )
                 )
             );
-            source.AddRange(GetValidations(TargetType));
-            source.Add(CreateInstanceExpr());
 
-            return Block(
-                GetVariables(),
-                source
-            );
+            var propertyValidations = Properties.SelectMany(property => property.GetValidations(TargetType));
+            switch (Mapping.Significance)
+            {
+                case MappingSignificance.Required:
+                {
+                    source.Add(
+                        IfThen(
+                            IsFalse(ObjectSeenExpr),
+                            Throw(JsonExceptionExpr.Create(Constant($"Missing required value for '{Mapping.Name}' for object of type '{TargetType.Name}'.")))
+                        )
+                    );
+                    source.AddRange(propertyValidations);
+
+                    break;
+                }
+                case MappingSignificance.Optional:
+                    // Only validate properties when the object is found
+                    // because when the object is optional and missing, it doesn't make sense to validate its mapped properties.
+                    // This means that an object can be optional and still have required properties, but they will only be validated if the object is found.
+                    source.Add(
+                        IfThen(
+                            IsTrue(ObjectSeenExpr),
+                            Block(propertyValidations.DefaultIfEmpty(Empty()))
+                        )
+                    );
+                    break;
+            }
+
+            return Block(source);
 
             Expression MapPropertyExpression(Expression jsonPropertyExpr, LabelTarget @continue, int index = 0)
             {
+                var propertyNameExpr = JsonPropertyExpr.GetName(jsonPropertyExpr);
+                var propertyPathExpr = JsonPathExpr.AccessProperty(pathExpr, propertyNameExpr);
                 if (Properties.Count == 0)
                 {
                     return UnexpectedPropertyBehavior == UnexpectedPropertyBehavior.Error
-                        ? JsonExceptionExpr.ThrowJsonException(Expr.UnexpectedProperty(jsonPropertyExpr, TargetType))
+                        ? JsonExceptionExpr.ThrowJsonException(Expr.UnexpectedProperty(jsonPropertyExpr, propertyPathExpr, TargetType))
                         : Continue(@continue);
                 }
 
                 var propertyNode = Properties[index];
                 return IfThenElse(
                     propertyNode.TestExpr(jsonPropertyExpr),
-                    propertyNode.MapExpr(jsonPropertyExpr, objectPathExpr),
+                    propertyNode.MapNode(jsonPropertyExpr, propertyPathExpr),
                     index + 1 < Properties.Count
                         ? MapPropertyExpression(jsonPropertyExpr, @continue, index + 1)
                         : UnexpectedPropertyBehavior == UnexpectedPropertyBehavior.Error
-                            ? JsonExceptionExpr.ThrowJsonException(Expr.UnexpectedProperty(jsonPropertyExpr, TargetType))
+                            ? JsonExceptionExpr.ThrowJsonException(Expr.UnexpectedProperty(jsonPropertyExpr, propertyPathExpr, TargetType))
                             : Continue(@continue)
                 );
             }
         }
 
-        public Expression CreateInstanceExpr() =>
+        public override Expression GetResult() =>
             MemberInit(
                 New(TargetType),
-                Properties.SelectMany(child => child.GetBindings())
+                Properties.SelectMany(property => property.GetBindings())
             );
-
-        public override IEnumerable<ParameterExpression> GetVariables()
-        {
-            if (Mapping.Significance != MappingSignificance.Ignored)
-            {
-                yield return ObjectSeenExpr;
-                foreach (var child in Properties)
-                {
-                    foreach (var variable in child.GetVariables())
-                    {
-                        yield return variable;
-                    }
-                }
-            }
-        }
-
-        public override IEnumerable<Expression> GetValidations(Type targetType)
-        {
-            switch (Mapping.Significance)
-            {
-                case MappingSignificance.Required:
-                {
-                    yield return IfThen(
-                        IsFalse(ObjectSeenExpr),
-                        Throw(JsonExceptionExpr.Create(Constant($"Missing required value for '{Mapping.Name}'.")))
-                    );
-                    foreach (var validation in Properties.SelectMany(child => child.GetValidations(TargetType)))
-                    {
-                        yield return validation;
-                    }
-
-                    break;
-                }
-                case MappingSignificance.Optional:
-                    var childValidators = Properties.SelectMany(child => child.GetValidations(TargetType)).ToList();
-                    if (childValidators.Count != 0)
-                    {
-                        yield return IfThen(
-                            IsTrue(ObjectSeenExpr),
-                            Block(childValidators)
-                        );
-                    }
-
-                    break;
-            }
-        }
-
-        public override IEnumerable<MemberBinding> GetBindings()
-        {
-            yield break;
-        }
     }
 }

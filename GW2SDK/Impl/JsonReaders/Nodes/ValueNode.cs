@@ -1,6 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq.Expressions;
+using System.Text.Json;
+using GW2SDK.Impl.Json;
 using GW2SDK.Impl.JsonReaders.Mappings;
 using static System.Linq.Expressions.Expression;
 
@@ -20,26 +21,19 @@ namespace GW2SDK.Impl.JsonReaders.Nodes
             }
         }
 
-        public Expression MapExpr(Expression jsonElementExpr, Expression pathExpr)
+        public override Expression MapNode(Expression jsonNodeExpr, Expression pathExpr)
         {
+            ExpressionDebug.AssertType(typeof(JsonElement), jsonNodeExpr);
+            ExpressionDebug.AssertType(typeof(JsonPath),    pathExpr);
             if (Mapping.Significance == MappingSignificance.Ignored)
             {
                 return Empty();
             }
 
-            var mapValueExpr = ValueExpressionMapper.MapValueExpr(jsonElementExpr, pathExpr);
+            var mapValueExpr = ValueExpressionMapper.MapValueExpr(jsonNodeExpr, pathExpr);
             return Assign(ActualValueExpr, mapValueExpr);
         }
 
-        public override IEnumerable<Expression> GetValidations(Type targetType)
-        {
-            // validations are done in-line (at least for now)
-            yield break;
-        }
-
-        public override IEnumerable<MemberBinding> GetBindings()
-        {
-            yield break;
-        }
+        public override Expression GetResult() => ActualValueExpr;
     }
 }

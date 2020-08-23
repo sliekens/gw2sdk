@@ -33,74 +33,23 @@ namespace GW2SDK.Impl.JsonReaders.Nodes
 
         public Expression TestExpr(Expression jsonPropertyExpr) => JsonPropertyExpr.NameEquals(jsonPropertyExpr, Constant(Mapping.Name, typeof(string)));
 
-        public Expression MapExpr(Expression jsonPropertyExpr, Expression objectPathExpr)
+        public IEnumerable<Expression> GetValidations(Type targetType)
         {
-            if (Mapping.Significance == MappingSignificance.Ignored)
+            if (Mapping.Significance == MappingSignificance.Required)
             {
-                return Empty();
-            }
-
-            var expressions = new List<Expression>();
-            expressions.Add(Assign(PropertySeenExpr, Constant(true)));
-            var propertyNameExpr = JsonPropertyExpr.GetName(jsonPropertyExpr);
-            var propertyValueExpr = JsonPropertyExpr.GetValue(jsonPropertyExpr);
-            var propertyPathExpr = JsonPathExpr.AccessProperty(objectPathExpr, propertyNameExpr);
-            switch (ValueNode)
-            {
-                case ValueNode value:
-                    expressions.Add(value.MapExpr(propertyValueExpr, propertyPathExpr));
-                    break;
-                case ObjectNode obj:
-                    expressions.Add(obj.DeconstructExpr(propertyValueExpr, propertyPathExpr));
-                    break;
-                case ArrayNode array:
-                    expressions.Add(array.MapExpr(propertyValueExpr, propertyPathExpr));
-                    break;
-                default:
-                    throw new JsonException("Mapping properties is not yet supported for " + ValueNode.GetType());
-            }
-
-            return Block(expressions);
-        }
-
-        public override IEnumerable<Expression> GetValidations(Type targetType)
-        {
-            switch (Mapping.Significance)
-            {
-                case MappingSignificance.Required:
-                {
-                    yield return IfThen(
-                        IsFalse(PropertySeenExpr),
-                        Throw(JsonExceptionExpr.Create(Constant($"Missing required value for '{Mapping.Name}' for object of type '{targetType.Name}'.")))
-                    );
-
-                    foreach (var validation in ValueNode.GetValidations(targetType))
-                    {
-                        yield return validation;
-                    }
-
-                    break;
-                }
-                case MappingSignificance.Optional:
-                    var childValidators = ValueNode.GetValidations(targetType).ToList();
-                    if (childValidators.Count != 0)
-                    {
-                        yield return IfThen(
-                            IsTrue(PropertySeenExpr),
-                            Block(childValidators)
-                        );
-                    }
-
-                    break;
+                yield return IfThen(
+                    IsFalse(PropertySeenExpr),
+                    Throw(JsonExceptionExpr.Create(Constant($"Missing required value for '{Mapping.Name}' for object of type '{targetType.Name}'.")))
+                );
             }
         }
 
-        public override IEnumerable<MemberBinding> GetBindings()
+        public IEnumerable<MemberBinding> GetBindings()
         {
             switch (ValueNode)
             {
                 case ValueNode value:
-                    yield return Bind(Destination, value.ActualValueExpr);
+                    yield return Bind(Destination, value.GetResult());
                     break;
                 case ObjectNode deconstruction when Destination is null:
                     foreach (var binding in deconstruction.Properties.SelectMany(propertyNode => propertyNode.GetBindings()))
@@ -110,13 +59,45 @@ namespace GW2SDK.Impl.JsonReaders.Nodes
 
                     break;
                 case ObjectNode obj:
-                    yield return Bind(Destination, obj.CreateInstanceExpr());
+                    yield return Bind(Destination, obj.GetResult());
                     break;
 
                 case ArrayNode array:
-                    yield return Bind(Destination, array.ActualValueExpr);
+                    yield return Bind(Destination, array.GetResult());
                     break;
             }
         }
+
+        public override Expression MapNode(Expression jsonNodeExpr, Expression pathExpr)
+        {
+            ExpressionDebug.AssertType(typeof(JsonProperty), jsonNodeExpr);
+            ExpressionDebug.AssertType(typeof(JsonPath),     pathExpr);
+            if (Mapping.Significance == MappingSignificance.Ignored)
+            {
+                return Empty();
+            }
+
+            var expressions = new List<Expression>();
+            expressions.Add(Assign(PropertySeenExpr, Constant(true)));;
+            var propertyValueExpr = JsonPropertyExpr.GetValue(jsonNodeExpr);
+            switch (ValueNode)
+            {
+                case ValueNode value:
+                    expressions.Add(value.MapNode(propertyValueExpr, pathExpr));
+                    break;
+                case ObjectNode obj:
+                    expressions.Add(obj.MapNode(propertyValueExpr, pathExpr));
+                    break;
+                case ArrayNode array:
+                    expressions.Add(array.MapNode(propertyValueExpr, pathExpr));
+                    break;
+                default:
+                    throw new JsonException("Mapping properties is not yet supported for " + ValueNode.GetType());
+            }
+
+            return Block(expressions);
+        }
+
+        public override Expression GetResult() => ValueNode.GetResult();
     }
 }
