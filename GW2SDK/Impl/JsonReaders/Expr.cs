@@ -1,6 +1,4 @@
-﻿using System;
-using System.Linq.Expressions;
-using GW2SDK.Impl.Json;
+﻿using System.Linq.Expressions;
 using static System.Linq.Expressions.Expression;
 
 namespace GW2SDK.Impl.JsonReaders
@@ -23,14 +21,6 @@ namespace GW2SDK.Impl.JsonReaders
                 breakTarget,
                 continueTarget
             );
-        }
-
-        internal static Expression UnexpectedProperty(Expression jsonPropertyExpr, Expression propertyPathExpr, Type targetType)
-        {
-            var format = Constant($"Unexpected property '{{0}}' at '{{1}}' for object of type '{targetType.Name}'.", typeof(string));
-            var nameExpr = Property(jsonPropertyExpr, JsonPropertyInfo.Name);
-            var pathExpr = JsonPathExpr.ToString(propertyPathExpr);
-            return StringExpr.Format(format, nameExpr, pathExpr);
         }
 
         internal delegate Expression DoFor(LabelTarget @break, LabelTarget @continue);

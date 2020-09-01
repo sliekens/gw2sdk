@@ -16,7 +16,10 @@ namespace GW2SDK.Impl.JsonReaders.Nodes
 
         public ParameterExpression PropertySeenExpr { get; set; } = default!;
 
-        /// <summary>The property or field to bind a JSON value to (one-to-one mapping), or null if the JSON property is being deconstructed (one-to-many mapping).</summary>
+        /// <summary>
+        ///     The property or field to bind a JSON value to (one-to-one mapping), or null if the JSON property is being
+        ///     deconstructed (one-to-many mapping).
+        /// </summary>
         public MemberInfo? Destination { get; set; }
 
         public override IEnumerable<ParameterExpression> GetVariables()
@@ -33,13 +36,19 @@ namespace GW2SDK.Impl.JsonReaders.Nodes
 
         public Expression TestExpr(Expression jsonPropertyExpr) => JsonPropertyExpr.NameEquals(jsonPropertyExpr, Constant(Mapping.Name, typeof(string)));
 
-        public IEnumerable<Expression> GetValidations(Type targetType)
+        public IEnumerable<Expression> GetValidations(Type targetType, Expression pathExpr)
         {
+            ExpressionDebug.AssertType(typeof(JsonPath), pathExpr);
             if (Mapping.Significance == MappingSignificance.Required)
             {
                 yield return IfThen(
                     IsFalse(PropertySeenExpr),
-                    Throw(JsonExceptionExpr.Create(Constant($"Missing required value for '{Mapping.Name}' for object of type '{targetType.Name}'.")))
+                    Throw(
+                        JsonExceptionExpr.Create(
+                            Constant($"Missing required value for '{Mapping.Name}' for object of type '{targetType.Name}'."),
+                            JsonPathExpr.ToString(pathExpr)
+                        )
+                    )
                 );
             }
         }
@@ -71,14 +80,15 @@ namespace GW2SDK.Impl.JsonReaders.Nodes
         public override Expression MapNode(Expression jsonNodeExpr, Expression pathExpr)
         {
             ExpressionDebug.AssertType(typeof(JsonProperty), jsonNodeExpr);
-            ExpressionDebug.AssertType(typeof(JsonPath),     pathExpr);
+            ExpressionDebug.AssertType(typeof(JsonPath), pathExpr);
             if (Mapping.Significance == MappingSignificance.Ignored)
             {
                 return Empty();
             }
 
             var expressions = new List<Expression>();
-            expressions.Add(Assign(PropertySeenExpr, Constant(true)));;
+            expressions.Add(Assign(PropertySeenExpr, Constant(true)));
+            ;
             var propertyValueExpr = JsonPropertyExpr.GetValue(jsonNodeExpr);
             switch (ValueNode)
             {

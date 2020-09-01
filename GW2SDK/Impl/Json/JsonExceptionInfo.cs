@@ -5,6 +5,6 @@ namespace GW2SDK.Impl.Json
 {
     internal static class JsonExceptionInfo
     {
-        internal static readonly ConstructorInfo JsonExceptionConstructor = typeof(JsonException).GetConstructor(new[] { typeof(string) });
+        internal static readonly ConstructorInfo JsonExceptionConstructor = typeof(JsonException).GetConstructor(new[] { typeof(string), typeof(string), typeof(long?), typeof(long?) });
     }
 }

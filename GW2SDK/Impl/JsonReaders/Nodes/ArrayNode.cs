@@ -71,7 +71,7 @@ namespace GW2SDK.Impl.JsonReaders.Nodes
                 source.Add(
                     IfThen(
                         IsFalse(ArraySeenExpr),
-                        Throw(JsonExceptionExpr.Create(Constant($"Missing required value for '{Mapping.Name}'.")))
+                        Throw(JsonExceptionExpr.Create(Constant($"Missing required value for '{Mapping.Name}'."), JsonPathExpr.ToString(pathExpr)))
                     )
                 );
             }

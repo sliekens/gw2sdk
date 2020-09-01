@@ -61,7 +61,13 @@ namespace GW2SDK.Impl.JsonReaders.Nodes
                 )
             );
 
-            var propertyValidations = Properties.SelectMany(property => property.GetValidations(TargetType));
+            var propertyValidations = Properties.SelectMany(property =>
+                {
+                    var propertyNameExpr = Constant(property.Mapping.Name, typeof(string));
+                    var propertyPathExpr = JsonPathExpr.AccessProperty(pathExpr, propertyNameExpr);
+                    return property.GetValidations(TargetType, propertyPathExpr);
+                }
+            );
             switch (Mapping.Significance)
             {
                 case MappingSignificance.Required:
@@ -69,7 +75,7 @@ namespace GW2SDK.Impl.JsonReaders.Nodes
                     source.Add(
                         IfThen(
                             IsFalse(ObjectSeenExpr),
-                            Throw(JsonExceptionExpr.Create(Constant($"Missing required value for '{Mapping.Name}' for object of type '{TargetType.Name}'.")))
+                            Throw(JsonExceptionExpr.Create(Constant($"Missing required value for object of type '{TargetType.Name}'."), JsonPathExpr.ToString(pathExpr)))
                         )
                     );
                     source.AddRange(propertyValidations);
@@ -98,7 +104,7 @@ namespace GW2SDK.Impl.JsonReaders.Nodes
                 if (Properties.Count == 0)
                 {
                     return UnexpectedPropertyBehavior == UnexpectedPropertyBehavior.Error
-                        ? JsonExceptionExpr.ThrowJsonException(Expr.UnexpectedProperty(jsonPropertyExpr, propertyPathExpr, TargetType))
+                        ? JsonExceptionExpr.ThrowJsonException(Constant($"Unexpected property for object of type '{TargetType.Name}'.", typeof(string)), JsonPathExpr.ToString(propertyPathExpr))
                         : Continue(@continue);
                 }
 
@@ -109,7 +115,7 @@ namespace GW2SDK.Impl.JsonReaders.Nodes
                     index + 1 < Properties.Count
                         ? MapPropertyExpression(jsonPropertyExpr, @continue, index + 1)
                         : UnexpectedPropertyBehavior == UnexpectedPropertyBehavior.Error
-                            ? JsonExceptionExpr.ThrowJsonException(Expr.UnexpectedProperty(jsonPropertyExpr, propertyPathExpr, TargetType))
+                            ? JsonExceptionExpr.ThrowJsonException(Constant($"Unexpected property for object of type '{TargetType.Name}'.", typeof(string)), JsonPathExpr.ToString(propertyPathExpr))
                             : Continue(@continue)
                 );
             }

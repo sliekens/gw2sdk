@@ -12,16 +12,16 @@ namespace GW2SDK.Impl.JsonReaders
             _itemReader = itemReader;
         }
 
-        public IEnumerable<T> Read(in JsonElement json, in JsonPath path)
+        public IEnumerable<T> Read(in JsonElement element, in JsonPath path)
         {
-            if (json.ValueKind != JsonValueKind.Array)
+            if (element.ValueKind != JsonValueKind.Array)
             {
-                throw new JsonException($"Value at '{path.ToString()}' is not an array.");
+                throw new JsonException($"Value is not an array.", path.ToString(), null, null);
             }
 
             var index = 0;
-            var result = new List<T>(json.GetArrayLength());
-            foreach (var item in json.EnumerateArray())
+            var result = new List<T>(element.GetArrayLength());
+            foreach (var item in element.EnumerateArray())
             {
                 result.Add(_itemReader.Read(item, path.AccessArrayIndex(index++)));
             }

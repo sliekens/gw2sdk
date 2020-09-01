@@ -2,6 +2,7 @@
 using System.Linq.Expressions;
 using System.Text.Json;
 using GW2SDK.Impl.Json;
+using GW2SDK.Impl.JsonReaders;
 using Xunit;
 
 namespace GW2SDK.Tests.Impl.Json
@@ -13,7 +14,9 @@ namespace GW2SDK.Tests.Impl.Json
         {
             var message = Expression.Constant("An error");
 
-            var expr = JsonExceptionExpr.ThrowJsonException(message);
+            var path = JsonPathExpr.Root();
+
+            var expr = JsonExceptionExpr.ThrowJsonException(message, JsonPathExpr.ToString(path));
 
             var compilation = Expression.Lambda<Action>(expr);
 
@@ -24,6 +27,7 @@ namespace GW2SDK.Tests.Impl.Json
             var reason = Assert.IsType<JsonException>(actual);
 
             Assert.Equal("An error", reason.Message);
+            Assert.Equal("$", reason.Path);
         }
     }
 }

@@ -94,11 +94,11 @@ namespace GW2SDK.Impl.Json
                     Not(Equal(valueKindExpr, expectedValueKindExpr)),
                     JsonExceptionExpr.ThrowJsonException(
                         StringExpr.Format(
-                            Constant("Expected value of type String at '{0}', found {1}: '{2}'.", typeof(string)),
-                            JsonPathExpr.ToString(jsonPathExpr),
+                            Constant("Expected value of type String, found {0}: '{1}'.", typeof(string)),
                             GetValueKind(jsonElementExpr),
                             GetRawText(jsonElementExpr)
-                        )
+                        ),
+                        JsonPathExpr.ToString(jsonPathExpr)
                     ),
                     Assign(valueExpr, Call(jsonElementExpr, JsonElementInfo.GetString))
                 ),
@@ -131,11 +131,11 @@ namespace GW2SDK.Impl.Json
                     ),
                     JsonExceptionExpr.ThrowJsonException(
                         StringExpr.Format(
-                            Constant("Expected value of type DateTime at '{0}', found {1}: '{2}'.", typeof(string)),
-                            JsonPathExpr.ToString(jsonPathExpr),
+                            Constant("Expected value of type DateTime, found {0}: '{1}'.", typeof(string)),
                             GetValueKind(jsonElementExpr),
                             GetRawText(jsonElementExpr)
-                        )
+                        ),
+                        JsonPathExpr.ToString(jsonPathExpr)
                     )
                 ),
                 valueExpr
@@ -167,11 +167,11 @@ namespace GW2SDK.Impl.Json
                     ),
                     JsonExceptionExpr.ThrowJsonException(
                         StringExpr.Format(
-                            Constant("Expected value of type DateTimeOffset at '{0'}, found {1}: '{2}'.", typeof(string)),
-                            JsonPathExpr.ToString(jsonPathExpr),
+                            Constant("Expected value of type DateTimeOffset, found {0}: '{1}'.", typeof(string)),
                             GetValueKind(jsonElementExpr),
                             GetRawText(jsonElementExpr)
-                        )
+                        ),
+                        JsonPathExpr.ToString(jsonPathExpr)
                     )
                 ),
                 valueExpr
@@ -204,11 +204,11 @@ namespace GW2SDK.Impl.Json
                     ),
                     JsonExceptionExpr.ThrowJsonException(
                         StringExpr.Format(
-                            Constant("Expected value of type Guid at '{0}', found {1}: '{2}'.", typeof(string)),
-                            JsonPathExpr.ToString(jsonPathExpr),
+                            Constant("Expected value of type Guid, found {0}: '{1}'.", typeof(string)),
                             GetValueKind(jsonElementExpr),
                             GetRawText(jsonElementExpr)
-                        )
+                        ),
+                        JsonPathExpr.ToString(jsonPathExpr)
                     )
                 ),
                 valueExpr
@@ -235,11 +235,11 @@ namespace GW2SDK.Impl.Json
                     Block(
                         JsonExceptionExpr.ThrowJsonException(
                             StringExpr.Format(
-                                Constant("Expected value of type Boolean at '{0}', found {1}: '{2}'.", typeof(string)),
-                                JsonPathExpr.ToString(jsonPathExpr),
+                                Constant("Expected value of type Boolean, found {0}: '{1}'.", typeof(string)),
                                 GetValueKind(jsonElementExpr),
                                 GetRawText(jsonElementExpr)
-                            )
+                            ),
+                            JsonPathExpr.ToString(jsonPathExpr)
                         ),
                         Assign(valueExpr, Constant(false, typeof(bool)))
                     ),
@@ -281,11 +281,11 @@ namespace GW2SDK.Impl.Json
                     ),
                     JsonExceptionExpr.ThrowJsonException(
                         StringExpr.Format(
-                            Constant("Expected value of type Single at '{0}', found {1}: '{2}'.", typeof(string)),
-                            JsonPathExpr.ToString(jsonPathExpr),
+                            Constant("Expected value of type Single, found {0}: '{1}'.", typeof(string)),
                             GetValueKind(jsonElementExpr),
                             GetRawText(jsonElementExpr)
-                        )
+                        ),
+                        JsonPathExpr.ToString(jsonPathExpr)
                     )
                 ),
                 valueExpr
@@ -317,11 +317,11 @@ namespace GW2SDK.Impl.Json
                     ),
                     JsonExceptionExpr.ThrowJsonException(
                         StringExpr.Format(
-                            Constant("Expected value of type Double at '{0}', found {1}: '{2}'.", typeof(string)),
-                            JsonPathExpr.ToString(jsonPathExpr),
+                            Constant("Expected value of type Double, found {0}: '{1}'.", typeof(string)),
                             GetValueKind(jsonElementExpr),
                             GetRawText(jsonElementExpr)
-                        )
+                        ),
+                        JsonPathExpr.ToString(jsonPathExpr)
                     )
                 ),
                 valueExpr
@@ -353,11 +353,11 @@ namespace GW2SDK.Impl.Json
                     ),
                     JsonExceptionExpr.ThrowJsonException(
                         StringExpr.Format(
-                            Constant("Expected value of type Decimal at '{0}', found {1}: '{2}'.", typeof(string)),
-                            JsonPathExpr.ToString(jsonPathExpr),
+                            Constant("Expected value of type Decimal, found {0}: '{1}'.", typeof(string)),
                             GetValueKind(jsonElementExpr),
                             GetRawText(jsonElementExpr)
-                        )
+                        ),
+                        JsonPathExpr.ToString(jsonPathExpr)
                     )
                 ),
                 valueExpr
@@ -389,11 +389,11 @@ namespace GW2SDK.Impl.Json
                     ),
                     JsonExceptionExpr.ThrowJsonException(
                         StringExpr.Format(
-                            Constant("Expected value of type SByte at '{0}', found {1}: '{2}'.", typeof(string)),
-                            JsonPathExpr.ToString(jsonPathExpr),
+                            Constant("Expected value of type SByte, found {0}: '{1}'.", typeof(string)),
                             GetValueKind(jsonElementExpr),
                             GetRawText(jsonElementExpr)
-                        )
+                        ),
+                        JsonPathExpr.ToString(jsonPathExpr)
                     )
                 ),
                 valueExpr
@@ -426,11 +426,11 @@ namespace GW2SDK.Impl.Json
                     ),
                     JsonExceptionExpr.ThrowJsonException(
                         StringExpr.Format(
-                            Constant("Expected value of type Int16 at '{0}', found {1}: '{2}'.", typeof(string)),
-                            JsonPathExpr.ToString(jsonPathExpr),
+                            Constant("Expected value of type Int16, found {0}: '{1}'.", typeof(string)),
                             GetValueKind(jsonElementExpr),
                             GetRawText(jsonElementExpr)
-                        )
+                        ),
+                        JsonPathExpr.ToString(jsonPathExpr)
                     )
                 ),
                 valueExpr
@@ -463,11 +463,11 @@ namespace GW2SDK.Impl.Json
                     ),
                     JsonExceptionExpr.ThrowJsonException(
                         StringExpr.Format(
-                            Constant("Expected value of type Int32 at '{0}', found {1}: '{2}'.", typeof(string)),
-                            JsonPathExpr.ToString(jsonPathExpr),
+                            Constant("Expected value of type Int32, found {0}: '{1}'.", typeof(string)),
                             GetValueKind(jsonElementExpr),
                             GetRawText(jsonElementExpr)
-                        )
+                        ),
+                        JsonPathExpr.ToString(jsonPathExpr)
                     )
                 ),
                 valueExpr
@@ -499,11 +499,11 @@ namespace GW2SDK.Impl.Json
                     ),
                     JsonExceptionExpr.ThrowJsonException(
                         StringExpr.Format(
-                            Constant("Expected value of type Int64 at '{0}', found {1}: '{2}'.", typeof(string)),
-                            JsonPathExpr.ToString(jsonPathExpr),
+                            Constant("Expected value of type Int64, found {0}: '{1}'.", typeof(string)),
                             GetValueKind(jsonElementExpr),
                             GetRawText(jsonElementExpr)
-                        )
+                        ),
+                        JsonPathExpr.ToString(jsonPathExpr)
                     )
                 ),
                 valueExpr
@@ -535,11 +535,11 @@ namespace GW2SDK.Impl.Json
                     ),
                     JsonExceptionExpr.ThrowJsonException(
                         StringExpr.Format(
-                            Constant("Expected value of type Byte at '{0}', found {1}: '{2}'.", typeof(string)),
-                            JsonPathExpr.ToString(jsonPathExpr),
+                            Constant("Expected value of type Byte, found {0}: '{1}'.", typeof(string)),
                             GetValueKind(jsonElementExpr),
                             GetRawText(jsonElementExpr)
-                        )
+                        ),
+                        JsonPathExpr.ToString(jsonPathExpr)
                     )
                 ),
                 valueExpr
@@ -571,11 +571,11 @@ namespace GW2SDK.Impl.Json
                     ),
                     JsonExceptionExpr.ThrowJsonException(
                         StringExpr.Format(
-                            Constant("Expected value of type UInt16 at '{0}', found {1}: '{2}'.", typeof(string)),
-                            JsonPathExpr.ToString(jsonPathExpr),
+                            Constant("Expected value of type UInt16, found {0}: '{1}'.", typeof(string)),
                             GetValueKind(jsonElementExpr),
                             GetRawText(jsonElementExpr)
-                        )
+                        ),
+                        JsonPathExpr.ToString(jsonPathExpr)
                     )
                 ),
                 valueExpr
@@ -607,11 +607,11 @@ namespace GW2SDK.Impl.Json
                     ),
                     JsonExceptionExpr.ThrowJsonException(
                         StringExpr.Format(
-                            Constant("Expected value of type UInt32 at '{0}', found {1}: '{2}'.", typeof(string)),
-                            JsonPathExpr.ToString(jsonPathExpr),
+                            Constant("Expected value of type UInt32, found {0}: '{1}'.", typeof(string)),
                             GetValueKind(jsonElementExpr),
                             GetRawText(jsonElementExpr)
-                        )
+                        ),
+                        JsonPathExpr.ToString(jsonPathExpr)
                     )
                 ),
                 valueExpr
@@ -643,11 +643,11 @@ namespace GW2SDK.Impl.Json
                     ),
                     JsonExceptionExpr.ThrowJsonException(
                         StringExpr.Format(
-                            Constant("Expected value of type UInt64 at '{0}', found {1}: '{2}'.", typeof(string)),
-                            JsonPathExpr.ToString(jsonPathExpr),
+                            Constant("Expected value of type UInt64, found {0}: '{1}'.", typeof(string)),
                             GetValueKind(jsonElementExpr),
                             GetRawText(jsonElementExpr)
-                        )
+                        ),
+                        JsonPathExpr.ToString(jsonPathExpr)
                     )
                 ),
                 valueExpr
@@ -656,16 +656,14 @@ namespace GW2SDK.Impl.Json
 
         internal static Expression GetUInt64OrNull(Expression jsonElementExpr, Expression jsonPathExpr) => GetValueOrNull<ulong?>(jsonElementExpr, GetUInt64(jsonElementExpr, jsonPathExpr));
 
-        internal static Expression GetCustom<TValue>(Expression jsonElementExpr, Expression jsonPathExpr, IJsonReader<TValue> jsonReader)
+        internal static Expression GetAny<TValue>(Expression jsonElementExpr, Expression jsonPathExpr, ConvertJsonElement<TValue> converter)
         {
             AssertType<JsonElement>(jsonElementExpr);
             AssertType(typeof(JsonPath), jsonPathExpr);
-            var readerExpr = Constant(jsonReader);
-            var readInfo = jsonReader.GetType().GetMethod("Read", new[] { typeof(JsonElement).MakeByRefType(), typeof(JsonPath).MakeByRefType() });
-            return Call(readerExpr, readInfo, jsonElementExpr, jsonPathExpr);
+            return Invoke(Constant(converter), jsonElementExpr, jsonPathExpr);
         }
 
-        internal static Expression GetCustomOrNull<TValue>(Expression jsonElementExpr, Expression jsonPathExpr, IJsonReader<TValue> jsonReader) => GetValueOrNull<TValue>(jsonElementExpr, GetCustom(jsonElementExpr, jsonPathExpr, jsonReader));
+        internal static Expression GetAnyOrNull<TValue>(Expression jsonElementExpr, Expression jsonPathExpr, ConvertJsonElement<TValue> converter) => GetValueOrNull<TValue>(jsonElementExpr, GetAny(jsonElementExpr, jsonPathExpr, converter));
 
         private static Expression GetValueOrNull<TValue>(Expression jsonElementExpr, Expression ifNotNull)
         {

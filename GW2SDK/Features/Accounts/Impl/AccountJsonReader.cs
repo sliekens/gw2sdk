@@ -1,4 +1,6 @@
-﻿using GW2SDK.Enums;
+﻿using System;
+using System.Text.Json;
+using GW2SDK.Enums;
 using GW2SDK.Impl.JsonReaders;
 using GW2SDK.Impl.JsonReaders.Mappings;
 
@@ -17,13 +19,13 @@ namespace GW2SDK.Accounts.Impl
         {
             account.Map("id", to => to.Id);
             account.Map("name", to => to.Name);
-            account.Map("age", to => to.Age, SecondsJsonReader.Instance);
+            account.Map("age", to => to.Age, (in JsonElement element, in JsonPath path) => TimeSpan.FromSeconds(element.GetDouble()));
             account.Map("last_modified", to => to.LastModified);
             account.Map("world", to => to.World);
             account.Map("guilds", to => to.Guilds);
             account.Map("guild_leader", to => to.GuildLeader, MappingSignificance.Optional);
             account.Map("created", to => to.Created);
-            account.Map("access", to => to.Access, new JsonStringEnumReader<ProductName>());
+            account.Map("access", to => to.Access, (in JsonElement element, in JsonPath path) => Enum.Parse<ProductName>(element.GetString(), false));
             account.Map("commander", to => to.Commander);
             account.Map("fractal_level", to => to.FractalLevel);
             account.Map("daily_ap", to => to.DailyAp);

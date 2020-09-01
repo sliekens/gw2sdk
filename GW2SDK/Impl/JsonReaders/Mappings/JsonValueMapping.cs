@@ -4,7 +4,7 @@
     {
         public JsonValueMappingKind ValueKind { get; set; }
 
-        public IJsonReader<TValue>? JsonReader { get; set; }
+        public ConvertJsonElement<TValue>? JsonConverter { get; set; }
 
         public override void Accept(IJsonMappingVisitor visitor)
         {

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net.Http;
 using System.Text.Json;
 using System.Threading.Tasks;
@@ -14,8 +15,6 @@ namespace GW2SDK.Colors
     [PublicAPI]
     public sealed class ColorService
     {
-        private static readonly IJsonReader<int> KeyReader = new Int32JsonReader();
-        private static readonly IJsonReader<IEnumerable<int>> KeyArrayReader = new JsonArrayReader<int>(KeyReader);
         private static readonly IJsonReader<Color> ValueReader = ColorJsonReader.Instance;
         private static readonly IJsonReader<IEnumerable<Color>> ValueArrayReader = new JsonArrayReader<Color>(ValueReader);
 
@@ -48,7 +47,7 @@ namespace GW2SDK.Colors
             using var jsonDocument = await JsonDocument.ParseAsync(json).ConfigureAwait(false);
             var context = response.Headers.GetCollectionContext();
             var list = new List<int>(context.ResultCount);
-            list.AddRange(KeyArrayReader.Read(jsonDocument));
+            list.AddRange(jsonDocument.RootElement.EnumerateArray().Select(item => item.GetInt32()));
             return new DataTransferCollection<int>(list, context);
         }
 

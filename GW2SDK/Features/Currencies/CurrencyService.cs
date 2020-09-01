@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net.Http;
 using System.Text.Json;
 using System.Threading.Tasks;
@@ -14,8 +15,6 @@ namespace GW2SDK.Currencies
     [PublicAPI]
     public sealed class CurrencyService
     {
-        private static readonly IJsonReader<int> KeyReader = new Int32JsonReader();
-        private static readonly IJsonReader<IEnumerable<int>> KeyArrayReader = new JsonArrayReader<int>(KeyReader);
         private static readonly IJsonReader<Currency> ValueReader = CurrencyJsonReader.Instance;
         private static readonly IJsonReader<IEnumerable<Currency>> ValueArrayReader = new JsonArrayReader<Currency>(ValueReader);
 
@@ -47,8 +46,8 @@ namespace GW2SDK.Currencies
             await using var json = await response.Content.ReadAsStreamAsync().ConfigureAwait(false);
             using var jsonDocument = await JsonDocument.ParseAsync(json).ConfigureAwait(false);
             var context = response.Headers.GetCollectionContext();
-            var list = new List<int>(context.ResultCount);
-            list.AddRange(KeyArrayReader.Read(jsonDocument));
+            var list = new List<int>(context.ResultCount);      
+            list.AddRange(jsonDocument.RootElement.EnumerateArray().Select(item => item.GetInt32()));
             return new DataTransferCollection<int>(list, context);
         }
 

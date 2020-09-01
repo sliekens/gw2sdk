@@ -25,7 +25,7 @@ namespace GW2SDK.Impl.JsonReaders
             {
                 MappingSignificance.Required => _mapping.ValueKind switch
                 {
-                    JsonValueMappingKind.Any => JsonElementExpr.GetCustom(jsonElementExpr, jsonPathExpr, _mapping.JsonReader!),
+                    JsonValueMappingKind.Any => JsonElementExpr.GetAny(jsonElementExpr, jsonPathExpr, _mapping.JsonConverter!),
                     JsonValueMappingKind.String => JsonElementExpr.GetString(jsonElementExpr, jsonPathExpr),
                     JsonValueMappingKind.DateTime => JsonElementExpr.GetDateTime(jsonElementExpr, jsonPathExpr),
                     JsonValueMappingKind.DateTimeOffset => JsonElementExpr.GetDateTimeOffset(jsonElementExpr, jsonPathExpr),
@@ -46,7 +46,7 @@ namespace GW2SDK.Impl.JsonReaders
                 },
                 MappingSignificance.Optional => _mapping.ValueKind switch
                 {
-                    JsonValueMappingKind.Any => JsonElementExpr.GetCustomOrNull(jsonElementExpr, jsonPathExpr, _mapping.JsonReader!),
+                    JsonValueMappingKind.Any => JsonElementExpr.GetAnyOrNull(jsonElementExpr, jsonPathExpr, _mapping.JsonConverter!),
                     JsonValueMappingKind.String => JsonElementExpr.GetStringOrNull(jsonElementExpr, jsonPathExpr),
                     JsonValueMappingKind.DateTime => JsonElementExpr.GetDateTimeOrNull(jsonElementExpr, jsonPathExpr),
                     JsonValueMappingKind.DateTimeOffset => JsonElementExpr.GetDateTimeOffsetOrNull(jsonElementExpr, jsonPathExpr),
