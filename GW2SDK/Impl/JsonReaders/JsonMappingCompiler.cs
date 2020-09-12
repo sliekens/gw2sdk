@@ -7,11 +7,11 @@ using static System.Linq.Expressions.Expression;
 
 namespace GW2SDK.Impl.JsonReaders
 {
-    public partial class JsonMappingCompiler<TObject> : IJsonMappingVisitor
+    public partial class JsonMappingCompiler<TRootElement> : IJsonMappingVisitor
     {
         public Stack<JsonNode> Nodes { get; } = new Stack<JsonNode>();
 
-        public Expression<ReadJson<TObject>> Build(JsonObjectMapping<TObject> mapping)
+        public Expression<ReadJson<TRootElement>> Build(IJsonObjectMapping mapping)
         {
             var inputExpr = Parameter(typeof(JsonElement).MakeByRefType(), "json");
             var pathExpr = Parameter(typeof(JsonPath).MakeByRefType(),     "path");
@@ -20,7 +20,7 @@ namespace GW2SDK.Impl.JsonReaders
 
             var root = (ObjectNode) Nodes.Pop();
 
-            return Lambda<ReadJson<TObject>>(
+            return Lambda<ReadJson<TRootElement>>(
                 Block(
                     root.GetVariables(),
                     root.MapNode(inputExpr, pathExpr),

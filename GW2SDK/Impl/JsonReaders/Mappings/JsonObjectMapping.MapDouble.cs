@@ -13,7 +13,7 @@ namespace GW2SDK.Impl.JsonReaders.Mappings
                     Name = propertyName,
                     Destination = ((MemberExpression) @double.Body).Member,
                     Significance = MappingSignificance.Required,
-                    ValueNode = new JsonValueMapping<double>
+                    ValueMapping = new JsonValueMapping<double>
                     {
                         Name = propertyName,
                         ValueKind = JsonValueMappingKind.Double,
@@ -31,7 +31,7 @@ namespace GW2SDK.Impl.JsonReaders.Mappings
                     Name = propertyName,
                     Destination = ((MemberExpression) @double.Body).Member,
                     Significance = MappingSignificance.Optional,
-                    ValueNode = new JsonValueMapping<double?>
+                    ValueMapping = new JsonValueMapping<double?>
                     {
                         Name = propertyName,
                         ValueKind = JsonValueMappingKind.Double,

@@ -1,30 +1,26 @@
 ﻿using System.Collections.Generic;
 using GW2SDK.Impl.JsonReaders.Mappings;
 using GW2SDK.Impl.JsonReaders.Nodes;
-using static System.Linq.Expressions.Expression;
 
 namespace GW2SDK.Impl.JsonReaders
 {
-    public partial class JsonMappingCompiler<TObject>
+    public partial class JsonMappingCompiler<TRootElement>
     {
-        public void VisitObject<TValue>(JsonObjectMapping<TValue> mapping)
+        public void VisitObject(IJsonObjectMapping mapping)
         {
-            var nodes = new List<PropertyNode>();
+            var properties = new List<PropertyNode>();
             foreach (var child in mapping.Children)
             {
                 child.Accept(this);
                 var propertyNode = (PropertyNode) Nodes.Pop();
-                nodes.Add(propertyNode);
+                properties.Add(propertyNode);
             }
 
-            Nodes.Push(
-                new ObjectNode
+            Nodes.Push
+            (
+                new ObjectNode(mapping)
                 {
-                    Mapping = mapping,
-                    TargetType = typeof(TValue),
-                    Properties = nodes,
-                    UnexpectedPropertyBehavior = mapping.UnexpectedPropertyBehavior,
-                    ObjectSeenExpr = Variable(typeof(bool), $"{mapping.Name}_object_seen")
+                    Properties = properties
                 }
             );
         }

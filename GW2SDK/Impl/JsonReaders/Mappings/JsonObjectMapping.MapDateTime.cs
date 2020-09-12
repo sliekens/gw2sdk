@@ -13,7 +13,7 @@ namespace GW2SDK.Impl.JsonReaders.Mappings
                     Name = propertyName,
                     Destination = ((MemberExpression) dateTime.Body).Member,
                     Significance = MappingSignificance.Required,
-                    ValueNode = new JsonValueMapping<DateTime>
+                    ValueMapping = new JsonValueMapping<DateTime>
                     {
                         Name = propertyName,
                         ValueKind = JsonValueMappingKind.DateTime,
@@ -31,7 +31,7 @@ namespace GW2SDK.Impl.JsonReaders.Mappings
                     Name = propertyName,
                     Destination = ((MemberExpression) dateTime.Body).Member,
                     Significance = MappingSignificance.Optional,
-                    ValueNode = new JsonValueMapping<DateTime?>
+                    ValueMapping = new JsonValueMapping<DateTime?>
                     {
                         Name = propertyName,
                         ValueKind = JsonValueMappingKind.DateTime,

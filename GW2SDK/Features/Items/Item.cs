@@ -36,7 +36,7 @@ namespace GW2SDK.Items
         public ItemRestriction[] Restrictions { get; set; } = new ItemRestriction[0];
 
         [JsonProperty(Required = Required.Always)]
-        public string? ChatLink { get; set; }
+        public string ChatLink { get; set; } = "";
 
         [JsonProperty(Required = Required.DisallowNull, NullValueHandling = NullValueHandling.Ignore)]
         public string? Icon { get; set; }

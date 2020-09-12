@@ -17,7 +17,7 @@ namespace GW2SDK.Impl.JsonReaders.Mappings
                     Name = propertyName,
                     Destination = ((MemberExpression) @string.Body).Member,
                     Significance = significance,
-                    ValueNode = new JsonValueMapping<string>
+                    ValueMapping = new JsonValueMapping<string>
                     {
                         Name = propertyName,
                         ValueKind = JsonValueMappingKind.String,
@@ -39,7 +39,7 @@ namespace GW2SDK.Impl.JsonReaders.Mappings
                     Name = propertyName,
                     Destination = ((MemberExpression) strings.Body).Member,
                     Significance = significance,
-                    ValueNode = new JsonArrayMapping<string>
+                    ValueMapping = new JsonArrayMapping<string>
                     {
                         ValueMapping = new JsonValueMapping<string>
                         {

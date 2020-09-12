@@ -1,12 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq.Expressions;
 
 namespace GW2SDK.Impl.JsonReaders.Mappings
 {
+    public delegate void MapObject<TObject>(JsonObjectMapping<TObject> map);
+
     public partial class JsonObjectMapping<TObject>
     {
-        public void Map(string propertyName, MapProperty<TObject> map, MappingSignificance significance = MappingSignificance.Required)
+        public void Map
+        (
+            string propertyName,
+            MapObject<TObject> map,
+            MappingSignificance significance = MappingSignificance.Required
+        )
         {
             var jsonObjectMapping = new JsonObjectMapping<TObject>
             {
@@ -16,21 +22,24 @@ namespace GW2SDK.Impl.JsonReaders.Mappings
 
             map(jsonObjectMapping);
 
-            Children.Add(
+            Children.Add
+            (
                 new JsonPropertyMapping
                 {
                     Name = propertyName,
                     Significance = significance,
-                    ValueNode = jsonObjectMapping
+                    ValueMapping = jsonObjectMapping
                 }
             );
         }
 
-        public void Map<TProperty>(
+        public void Map<TProperty>
+        (
             string propertyName,
             Expression<SelectProperty<TObject, TProperty>> @object,
-            MapProperty<TProperty> map,
-            MappingSignificance significance = MappingSignificance.Required)
+            MapObject<TProperty> map,
+            MappingSignificance significance = MappingSignificance.Required
+        )
         {
             var jsonObjectMapping = new JsonObjectMapping<TProperty>
             {
@@ -40,23 +49,26 @@ namespace GW2SDK.Impl.JsonReaders.Mappings
 
             map(jsonObjectMapping);
 
-            Children.Add(
+            Children.Add
+            (
                 new JsonPropertyMapping
                 {
                     Name = propertyName,
                     Destination = ((MemberExpression) @object.Body).Member,
                     Significance = significance,
-                    ValueNode = jsonObjectMapping
+                    ValueMapping = jsonObjectMapping
                 }
             );
         }
 
-        public void Map<TProperty>(
+        public void Map<TProperty>
+        (
             string propertyName,
             Expression<SelectProperty<TObject, IEnumerable<TProperty>?>> @object,
-            MapProperty<TProperty> map,
+            MapObject<TProperty> map,
             MappingSignificance significance = MappingSignificance.Required,
-            MappingSignificance itemSignificance = MappingSignificance.Required)
+            MappingSignificance itemSignificance = MappingSignificance.Required
+        )
         {
             var jsonObjectMapping = new JsonObjectMapping<TProperty>
             {
@@ -66,13 +78,14 @@ namespace GW2SDK.Impl.JsonReaders.Mappings
 
             map(jsonObjectMapping);
 
-            Children.Add(
+            Children.Add
+            (
                 new JsonPropertyMapping
                 {
                     Name = propertyName,
                     Destination = ((MemberExpression) @object.Body).Member,
                     Significance = significance,
-                    ValueNode = new JsonArrayMapping<TProperty>
+                    ValueMapping = new JsonArrayMapping<TProperty>
                     {
                         Name = propertyName,
                         ValueMapping = jsonObjectMapping,

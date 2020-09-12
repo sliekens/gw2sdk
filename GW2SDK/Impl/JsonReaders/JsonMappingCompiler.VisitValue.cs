@@ -1,21 +1,13 @@
 ﻿using GW2SDK.Impl.JsonReaders.Mappings;
 using GW2SDK.Impl.JsonReaders.Nodes;
-using static System.Linq.Expressions.Expression;
 
 namespace GW2SDK.Impl.JsonReaders
 {
-    public partial class JsonMappingCompiler<TObject>
+    public partial class JsonMappingCompiler<TRootElement>
     {
-        public void VisitValue<TValue>(JsonValueMapping<TValue> mapping)
+        public void VisitValue(IJsonValueMapping mapping)
         {
-            Nodes.Push(
-                new ValueNode
-                {
-                    Mapping = mapping,
-                    ActualValueExpr = Variable(typeof(TValue), $"{mapping.Name}_value"),
-                    ValueExpressionMapper = new ValueExpressionMapper<TValue>(mapping)
-                }
-            );
+            Nodes.Push(new ValueNode(mapping));
         }
     }
 }

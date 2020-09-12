@@ -1,39 +1,23 @@
 ﻿using GW2SDK.Impl.JsonReaders.Mappings;
 using GW2SDK.Impl.JsonReaders.Nodes;
-using static System.Linq.Expressions.Expression;
 
 namespace GW2SDK.Impl.JsonReaders
 {
-    public partial class JsonMappingCompiler<TObject>
+    public partial class JsonMappingCompiler<TRootElement>
     {
-        public void VisitProperty(JsonPropertyMapping mapping)
+        public void VisitProperty(IJsonPropertyMapping mapping)
         {
-            var propertySeenExpr = Variable(typeof(bool), $"{mapping.Name}_key_seen");
             if (mapping.Significance == MappingSignificance.Ignored)
             {
-                Nodes.Push(
-                    new PropertyNode
-                    {
-                        Mapping = mapping,
-                        PropertySeenExpr = propertySeenExpr
-                    }
-                );
+                Nodes.Push(new PropertyNode(mapping, null));
             }
             else
             {
-                mapping.ValueNode.Accept(this);
+                mapping.ValueMapping.Accept(this);
 
                 var value = Nodes.Pop();
 
-                Nodes.Push(
-                    new PropertyNode
-                    {
-                        Mapping = mapping,
-                        Destination = mapping.Destination,
-                        ValueNode = value,
-                        PropertySeenExpr = propertySeenExpr
-                    }
-                );
+                Nodes.Push(new PropertyNode(mapping, value));
             }
         }
     }

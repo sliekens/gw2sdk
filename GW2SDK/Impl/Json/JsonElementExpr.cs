@@ -2,6 +2,7 @@
 using System.Linq.Expressions;
 using System.Text.Json;
 using GW2SDK.Impl.JsonReaders;
+using GW2SDK.Impl.JsonReaders.Mappings;
 using static System.Linq.Expressions.Expression;
 using static GW2SDK.Impl.Json.ExpressionDebug;
 
@@ -655,6 +656,26 @@ namespace GW2SDK.Impl.Json
         }
 
         internal static Expression GetUInt64OrNull(Expression jsonElementExpr, Expression jsonPathExpr) => GetValueOrNull<ulong?>(jsonElementExpr, GetUInt64(jsonElementExpr, jsonPathExpr));
+       
+        internal static Expression GetAny(Type elementType, Expression jsonElementExpr, Expression jsonPathExpr, ConvertJsonElement converter)
+        {
+            AssertType<JsonElement>(jsonElementExpr);
+            AssertType(typeof(JsonPath), jsonPathExpr);
+            return Convert(Invoke(Constant(converter), jsonElementExpr, jsonPathExpr), elementType);
+        }
+
+        internal static Expression GetAnyOrNull(Type elementType, Expression jsonElementExpr, Expression jsonPathExpr, ConvertJsonElement converter)
+        {
+            AssertType<JsonElement>(jsonElementExpr);
+            AssertType(typeof(JsonPath), jsonPathExpr);
+            var valueKindExpr = GetValueKind(jsonElementExpr);
+            var expectedValueKindExpr = Constant(JsonValueKind.Null, typeof(JsonValueKind));
+            return Condition(
+                Equal(valueKindExpr, expectedValueKindExpr),
+                Constant(null, elementType),
+                Convert(GetAny(elementType, jsonElementExpr, jsonPathExpr, converter), elementType)
+            );
+        }
 
         internal static Expression GetAny<TValue>(Expression jsonElementExpr, Expression jsonPathExpr, ConvertJsonElement<TValue> converter)
         {

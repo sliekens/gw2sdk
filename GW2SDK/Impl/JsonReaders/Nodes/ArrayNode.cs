@@ -10,13 +10,21 @@ namespace GW2SDK.Impl.JsonReaders.Nodes
 {
     public class ArrayNode : JsonNode
     {
-        public JsonNode ItemNode { get; set; } = default!;
+        public ArrayNode(IJsonArrayMapping mapping, JsonNode itemNode)
+        {
+            Mapping = mapping;
+            ItemNode = itemNode;
+            ArraySeenExpr = Variable(typeof(bool), $"{mapping.Name}_array_seen");
+            ActualValueExpr = Variable(mapping.ValueType.MakeArrayType(), $"{mapping.Name}_value");
+        }
 
-        public Type ItemType { get; set; } = typeof(object);
+        public IJsonArrayMapping Mapping { get; }
 
-        public ParameterExpression ArraySeenExpr { get; set; } = default!;
+        public JsonNode ItemNode { get; }
 
-        public ParameterExpression ActualValueExpr { get; set; } = default!;
+        public ParameterExpression ArraySeenExpr { get; }
+
+        public ParameterExpression ActualValueExpr { get; }
 
         public override IEnumerable<ParameterExpression> GetVariables()
         {
@@ -27,10 +35,10 @@ namespace GW2SDK.Impl.JsonReaders.Nodes
             }
         }
 
-        public override Expression MapNode(Expression jsonNodeExpr, Expression pathExpr)
+        public override Expression MapNode(Expression jsonElementExpr, Expression jsonPathExpr)
         {
-            ExpressionDebug.AssertType(typeof(JsonElement), jsonNodeExpr);
-            ExpressionDebug.AssertType(typeof(JsonPath),    pathExpr);
+            ExpressionDebug.AssertType(typeof(JsonElement), jsonElementExpr);
+            ExpressionDebug.AssertType(typeof(JsonPath),    jsonPathExpr);
             if (Mapping.Significance == MappingSignificance.Ignored)
             {
                 return Empty();
@@ -49,15 +57,15 @@ namespace GW2SDK.Impl.JsonReaders.Nodes
             {
                 Assign(ArraySeenExpr,   Constant(true)),
                 Assign(indexExpr,       Constant(0)),
-                Assign(arrayLengthExpr, JsonElementExpr.GetArrayLength(jsonNodeExpr)),
-                Assign(ActualValueExpr, NewArrayBounds(ItemType, arrayLengthExpr)),
+                Assign(arrayLengthExpr, JsonElementExpr.GetArrayLength(jsonElementExpr)),
+                Assign(ActualValueExpr, NewArrayBounds(Mapping.ValueType, arrayLengthExpr)),
                 Expr.For(
                     indexExpr,
                     arrayLengthExpr,
                     (_, __) =>
                     {
-                        var indexExpression = MakeIndex(jsonNodeExpr, JsonElementInfo.Item, new[] { indexExpr });
-                        var indexPathExpr = JsonPathExpr.AccessArrayIndex(pathExpr, indexExpr);
+                        var indexExpression = MakeIndex(jsonElementExpr, JsonElementInfo.Item, new[] { indexExpr });
+                        var indexPathExpr = JsonPathExpr.AccessArrayIndex(jsonPathExpr, indexExpr);
                         return Block(
                             ItemNode.MapNode(indexExpression, indexPathExpr),
                             Assign(ArrayAccess(ActualValueExpr, indexExpr), ItemNode.GetResult())
@@ -71,13 +79,13 @@ namespace GW2SDK.Impl.JsonReaders.Nodes
                 source.Add(
                     IfThen(
                         IsFalse(ArraySeenExpr),
-                        Throw(JsonExceptionExpr.Create(Constant($"Missing required value for '{Mapping.Name}'."), JsonPathExpr.ToString(pathExpr)))
+                        Throw(JsonExceptionExpr.Create(Constant($"Missing required value for '{Mapping.Name}'."), JsonPathExpr.ToString(jsonPathExpr)))
                     )
                 );
             }
 
             return IfThen(
-                Equal(JsonElementExpr.GetValueKind(jsonNodeExpr), Constant(JsonValueKind.Array)),
+                Equal(JsonElementExpr.GetValueKind(jsonElementExpr), Constant(JsonValueKind.Array)),
                 Block(
                     variables,
                     source

@@ -2,15 +2,15 @@
 
 namespace GW2SDK.Impl.JsonReaders.Mappings
 {
-    public class JsonPropertyMapping : JsonMapping
+    public class JsonPropertyMapping : JsonMapping, IJsonPropertyMapping
     {
-        public JsonMapping ValueNode { get; set; } = default!;
+        public IJsonMapping ValueMapping { get; set; } = default!;
 
         public override void Accept(IJsonMappingVisitor visitor)
         {
             visitor.VisitProperty(this);
         }
 
-        public MemberInfo Destination { get; set; } = default!;
+        public MemberInfo? Destination { get; set; }
     }
 }

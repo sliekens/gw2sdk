@@ -1,16 +1,57 @@
-﻿using GW2SDK.Items;
+﻿using System.Reflection.Metadata.Ecma335;
+using System.Text.Json;
+using GW2SDK.Impl.JsonReaders;
+using GW2SDK.Items;
+using GW2SDK.Items.Impl;
 using GW2SDK.Tests.Features.Items.Fixtures;
 using GW2SDK.Tests.TestInfrastructure;
-using Newtonsoft.Json;
 using Xunit;
 using Xunit.Abstractions;
 
 namespace GW2SDK.Tests.Features.Items
 {
+    //public class Impl
+    //{
+    //    public void Read(JsonElement element)
+    //    {
+    //        int id = default;
+    //        string name = default;
+
+    //        var discriminator = GetDiscriminator(element);
+    //        foreach (var prop in element.EnumerateObject())
+    //        {
+    //            if (prop.NameEquals("id"))
+    //            {
+    //                id = prop.Value.GetInt32();
+    //            } else if (prop.NameEquals("name"))
+    //            {
+    //                name = prop.Value.GetString();
+    //            } else if (discriminator == "Armor")
+    //            {
+    //                int level = default;
+    //                if (prop.NameEquals("level"))
+    //                {
+    //                    level = prop.Value.GetInt32();
+    //                }
+
+    //                return new Armor
+    //                {
+    //                    Id = id,
+    //                    Name = name,
+    //                    Level = level
+    //                };
+    //            }
+    //        }
+    //    }
+
+    //    string GetDiscriminator(JsonElement element) => element.GetProperty("type").GetString();
+    //}
+
+
     [Collection(nameof(ItemDbCollection))]
-    public class ItemTest
+    public class ItemJsonReaderTest
     {
-        public ItemTest(ItemFixture fixture, ITestOutputHelper output)
+        public ItemJsonReaderTest(ItemFixture fixture, ITestOutputHelper output)
         {
             _fixture = fixture;
             _output = output;
@@ -125,16 +166,14 @@ namespace GW2SDK.Tests.Features.Items
         [Trait("Importance", "Critical")]
         public void Items_can_be_created_from_json()
         {
-            var settings = new JsonSerializerSettingsBuilder()
-                .UseTraceWriter(_output)
-                .ThrowErrorOnMissingMember()
-                .Build();
+            IJsonReader<Item> sut = new ItemJsonReader();
 
             AssertEx.ForEach(_fixture.Db.Items,
                 json =>
                 {
-                    var actual = JsonConvert.DeserializeObject<Item>(json, settings);
-
+                    if (!json.Contains("\"type\": \"Armor\"")) return;
+                    using var document = JsonDocument.Parse(json);
+                    var actual = sut.Read(document);
                     ItemFacts.Id_is_positive(actual);
                     ItemFacts.Vendor_value_cannot_be_negative(actual);
                     switch (actual)

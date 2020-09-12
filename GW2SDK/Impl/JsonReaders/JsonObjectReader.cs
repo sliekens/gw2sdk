@@ -12,9 +12,18 @@ namespace GW2SDK.Impl.JsonReaders
             Name = "root_node"
         };
 
+        private ReadJson<TObject>? _read;
+
         private Expression<ReadJson<TObject>>? _source;
 
-        private ReadJson<TObject>? _read;
+        public TObject Read(in JsonElement element, in JsonPath path)
+        {
+            if (_read is null)
+                throw new InvalidOperationException("Call Configure before attempting to Read.");
+            return _read(element, path);
+        }
+
+        public bool CanRead(in JsonElement json) => json.ValueKind == JsonValueKind.Object;
 
         public void Configure(Action<JsonObjectMapping<TObject>> configure)
         {
@@ -23,13 +32,5 @@ namespace GW2SDK.Impl.JsonReaders
             _source = compiler.Build(_mapping);
             _read = _source.Compile();
         }
-
-        public TObject Read(in JsonElement element, in JsonPath path)
-        {
-            if (_read is null) throw new InvalidOperationException("Call Configure before attempting to Read.");
-            return _read(element, path);
-        }
-
-        public bool CanRead(in JsonElement json) => json.ValueKind == JsonValueKind.Object;
     }
 }

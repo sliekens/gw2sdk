@@ -14,7 +14,7 @@ namespace GW2SDK.Impl.JsonReaders.Mappings
                     Name = propertyName,
                     Destination = ((MemberExpression) guid.Body).Member,
                     Significance = MappingSignificance.Required,
-                    ValueNode = new JsonValueMapping<Guid>
+                    ValueMapping = new JsonValueMapping<Guid>
                     {
                         Name = propertyName,
                         ValueKind = JsonValueMappingKind.Guid,
@@ -32,7 +32,7 @@ namespace GW2SDK.Impl.JsonReaders.Mappings
                     Name = propertyName,
                     Destination = ((MemberExpression) guid.Body).Member,
                     Significance = MappingSignificance.Optional,
-                    ValueNode = new JsonValueMapping<Guid?>
+                    ValueMapping = new JsonValueMapping<Guid?>
                     {
                         Name = propertyName,
                         ValueKind = JsonValueMappingKind.Guid,
@@ -53,7 +53,7 @@ namespace GW2SDK.Impl.JsonReaders.Mappings
                     Name = propertyName,
                     Destination = ((MemberExpression) guids.Body).Member,
                     Significance = significance,
-                    ValueNode = new JsonArrayMapping<Guid>
+                    ValueMapping = new JsonArrayMapping<Guid>
                     {
                         Name = propertyName,
                         ValueMapping = new JsonValueMapping<Guid>
@@ -79,7 +79,7 @@ namespace GW2SDK.Impl.JsonReaders.Mappings
                     Name = propertyName,
                     Destination = ((MemberExpression) guids.Body).Member,
                     Significance = significance,
-                    ValueNode = new JsonArrayMapping<Guid?>
+                    ValueMapping = new JsonArrayMapping<Guid?>
                     {
                         Name = propertyName,
                         ValueMapping = new JsonValueMapping<Guid?>
