@@ -1,5 +1,5 @@
-﻿using GW2SDK.Impl.JsonReaders.Mappings;
-using GW2SDK.Impl.JsonReaders.Nodes;
+﻿using GW2SDK.Impl.JsonReaders.Linq;
+using GW2SDK.Impl.JsonReaders.Mappings;
 
 namespace GW2SDK.Impl.JsonReaders
 {
@@ -9,7 +9,7 @@ namespace GW2SDK.Impl.JsonReaders
         {
             if (mapping.Significance == MappingSignificance.Ignored)
             {
-                Nodes.Push(new PropertyNode(mapping, null));
+                Nodes.Push(new PropertyDescriptor(mapping, null));
             }
             else
             {
@@ -17,7 +17,7 @@ namespace GW2SDK.Impl.JsonReaders
 
                 var value = Nodes.Pop();
 
-                Nodes.Push(new PropertyNode(mapping, value));
+                Nodes.Push(new PropertyDescriptor(mapping, value));
             }
         }
     }

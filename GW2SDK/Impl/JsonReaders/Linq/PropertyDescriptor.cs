@@ -7,20 +7,22 @@ using GW2SDK.Impl.Json;
 using GW2SDK.Impl.JsonReaders.Mappings;
 using static System.Linq.Expressions.Expression;
 
-namespace GW2SDK.Impl.JsonReaders.Nodes
+namespace GW2SDK.Impl.JsonReaders.Linq
 {
-    public class PropertyNode : JsonNode
+    public class PropertyDescriptor : JsonDescriptor
     {
-        public PropertyNode(IJsonPropertyMapping mapping, JsonNode? valueNode)
+        public PropertyDescriptor(IJsonPropertyMapping mapping, JsonDescriptor? valueDescriptor)
         {
             Mapping = mapping;
-            ValueNode = valueNode;
+            ValueDescriptor = valueDescriptor;
             PropertySeenExpr = Variable(typeof(bool), $"{mapping.Name}_key_seen");
         }
 
+        public override JsonDescriptorType DescriptorType => JsonDescriptorType.Property;
+
         public IJsonPropertyMapping Mapping { get; }
 
-        public JsonNode? ValueNode { get; }
+        public JsonDescriptor? ValueDescriptor { get; }
 
         public ParameterExpression PropertySeenExpr { get; }
 
@@ -29,7 +31,7 @@ namespace GW2SDK.Impl.JsonReaders.Nodes
             if (Mapping.Significance != MappingSignificance.Ignored)
             {
                 yield return PropertySeenExpr;
-                foreach (var child in ValueNode!.GetVariables())
+                foreach (var child in ValueDescriptor!.GetVariables())
                 {
                     yield return child;
                 }
@@ -65,12 +67,12 @@ namespace GW2SDK.Impl.JsonReaders.Nodes
 
         public IEnumerable<MemberBinding> GetBindings()
         {
-            switch (ValueNode)
+            switch (ValueDescriptor)
             {
-                case ValueNode value:
+                case ValueDescriptor value:
                     yield return Bind(Mapping.Destination, value.GetResult());
                     break;
-                case ObjectNode deconstruction when Mapping.Destination is null:
+                case ObjectDescriptor deconstruction when Mapping.Destination is null:
                     foreach (var binding in deconstruction.Properties.SelectMany
                         (propertyNode => propertyNode.GetBindings()))
                     {
@@ -78,17 +80,17 @@ namespace GW2SDK.Impl.JsonReaders.Nodes
                     }
 
                     break;
-                case ObjectNode obj:
+                case ObjectDescriptor obj:
                     yield return Bind(Mapping.Destination, obj.GetResult());
                     break;
 
-                case ArrayNode array:
+                case ArrayDescriptor array:
                     yield return Bind(Mapping.Destination, array.GetResult());
                     break;
             }
         }
 
-        public override Expression MapNode(Expression jsonElementExpr, Expression jsonPathExpr)
+        public override Expression MapElement(Expression jsonElementExpr, Expression jsonPathExpr)
         {
             ExpressionDebug.AssertType(typeof(JsonProperty), jsonElementExpr);
             ExpressionDebug.AssertType(typeof(JsonPath), jsonPathExpr);
@@ -101,25 +103,25 @@ namespace GW2SDK.Impl.JsonReaders.Nodes
             expressions.Add(Assign(PropertySeenExpr, Constant(true)));
             ;
             var propertyValueExpr = JsonPropertyExpr.GetValue(jsonElementExpr);
-            switch (ValueNode)
+            switch (ValueDescriptor)
             {
-                case ValueNode value:
-                    expressions.Add(value.MapNode(propertyValueExpr, jsonPathExpr));
+                case ValueDescriptor value:
+                    expressions.Add(value.MapElement(propertyValueExpr, jsonPathExpr));
                     break;
-                case ObjectNode obj:
-                    expressions.Add(obj.MapNode(propertyValueExpr, jsonPathExpr));
+                case ObjectDescriptor obj:
+                    expressions.Add(obj.MapElement(propertyValueExpr, jsonPathExpr));
                     break;
-                case ArrayNode array:
-                    expressions.Add(array.MapNode(propertyValueExpr, jsonPathExpr));
+                case ArrayDescriptor array:
+                    expressions.Add(array.MapElement(propertyValueExpr, jsonPathExpr));
                     break;
                 default:
                     throw new JsonException
-                        ("Mapping properties is not yet supported for " + ValueNode!.GetType());
+                        ("Mapping properties is not yet supported for " + ValueDescriptor!.GetType());
             }
 
             return Block(expressions);
         }
 
-        public override Expression GetResult() => ValueNode!.GetResult();
+        public override Expression GetResult() => ValueDescriptor!.GetResult();
     }
 }

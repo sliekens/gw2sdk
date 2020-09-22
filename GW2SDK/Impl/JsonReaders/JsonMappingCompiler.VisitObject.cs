@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
+using GW2SDK.Impl.JsonReaders.Linq;
 using GW2SDK.Impl.JsonReaders.Mappings;
-using GW2SDK.Impl.JsonReaders.Nodes;
 
 namespace GW2SDK.Impl.JsonReaders
 {
@@ -8,17 +8,17 @@ namespace GW2SDK.Impl.JsonReaders
     {
         public void VisitObject(IJsonObjectMapping mapping)
         {
-            var properties = new List<PropertyNode>();
+            var properties = new List<PropertyDescriptor>();
             foreach (var child in mapping.Children)
             {
                 child.Accept(this);
-                var propertyNode = (PropertyNode) Nodes.Pop();
+                var propertyNode = (PropertyDescriptor) Nodes.Pop();
                 properties.Add(propertyNode);
             }
 
             Nodes.Push
             (
-                new ObjectNode(mapping)
+                new ObjectDescriptor(mapping)
                 {
                     Properties = properties
                 }

@@ -6,21 +6,43 @@ using GW2SDK.Impl.Json;
 using GW2SDK.Impl.JsonReaders.Mappings;
 using static System.Linq.Expressions.Expression;
 
-namespace GW2SDK.Impl.JsonReaders.Nodes
+namespace GW2SDK.Impl.JsonReaders.Linq
 {
-    public class ObjectNode : JsonNode
+    public class DiscriminatorDescriptor : JsonDescriptor
     {
-        public ObjectNode(IJsonObjectMapping mapping)
+        public DiscriminatorDescriptor(IJsonDiscriminatorMapping mapping)
+        {
+            Mapping = mapping;
+        }
+
+        public override JsonDescriptorType DescriptorType => JsonDescriptorType.Discriminator;
+
+        public IJsonDiscriminatorMapping Mapping { get; }
+
+        public override IEnumerable<ParameterExpression> GetVariables() => throw new System.NotImplementedException();
+
+        public override Expression MapElement(Expression jsonElementExpr, Expression jsonPathExpr) => throw new System.NotImplementedException();
+
+        public override Expression GetResult() => throw new System.NotImplementedException();
+    }
+
+    public class ObjectDescriptor : JsonDescriptor
+    {
+        public ObjectDescriptor(IJsonObjectMapping mapping)
         {
             Mapping = mapping;
             ObjectSeenExpr = Variable(typeof(bool), $"{mapping.Name}_object_seen");
         }
 
+        public override JsonDescriptorType DescriptorType => JsonDescriptorType.Object;
+
         public IJsonObjectMapping Mapping { get; }
 
         public ParameterExpression ObjectSeenExpr { get; }
 
-        public List<PropertyNode> Properties { get; set; } = new List<PropertyNode>();
+        public List<PropertyDescriptor> Properties { get; set; } = new List<PropertyDescriptor>();
+
+        public DiscriminatorDescriptor? Discriminator { get; set; }
 
         public UnexpectedPropertyBehavior UnexpectedPropertyBehavior =>
             Mapping.UnexpectedPropertyBehavior;
@@ -30,6 +52,14 @@ namespace GW2SDK.Impl.JsonReaders.Nodes
             if (Mapping.Significance != MappingSignificance.Ignored)
             {
                 yield return ObjectSeenExpr;
+                if (Discriminator is object)
+                {
+                    foreach (var variable in Discriminator.GetVariables())
+                    {
+                        yield return variable;
+                    }
+                }
+
                 foreach (var variable in Properties.SelectMany(property => property.GetVariables()))
                 {
                     yield return variable;
@@ -37,7 +67,7 @@ namespace GW2SDK.Impl.JsonReaders.Nodes
             }
         }
 
-        public override Expression MapNode(Expression jsonElementExpr, Expression jsonPathExpr)
+        public override Expression MapElement(Expression jsonElementExpr, Expression jsonPathExpr)
         {
             ExpressionDebug.AssertType(typeof(JsonElement), jsonElementExpr);
             ExpressionDebug.AssertType(typeof(JsonPath), jsonPathExpr);
@@ -65,7 +95,6 @@ namespace GW2SDK.Impl.JsonReaders.Nodes
                     ),
                     Block
                     (
-                        Assign(ObjectSeenExpr, Constant(true)),
                         MapObjectExpr(jsonElementExpr, jsonPathExpr)
                     )
                 )
@@ -126,16 +155,32 @@ namespace GW2SDK.Impl.JsonReaders.Nodes
             return Block(source);
         }
 
-        private Expression MapObjectExpr(Expression jsonNodeExpr, Expression pathExpr)
+        private IEnumerable<Expression> MapObjectExpr(Expression jsonElementExpr, Expression jsonPathExpr)
         {
-            return JsonElementExpr.ForEachProperty
+            yield return Assign(ObjectSeenExpr, Constant(true));
+            if (Discriminator is object)
+            {
+                // Set discriminator seen
+                // Get discriminator value
+                // hoist variables
+                // enumerate properties
+
+                if (Discriminator.Mapping.Significance == MappingSignificance.Required)
+                {
+                    // throw if discriminator not seen
+                }
+
+                // 
+            }
+
+            yield return JsonElementExpr.ForEachProperty
             (
-                jsonNodeExpr,
+                jsonElementExpr,
                 (
                     jsonPropertyExpr,
                     @continue
                 ) => MapPropertyExpression
-                    (jsonPropertyExpr, @continue, pathExpr)
+                    (jsonPropertyExpr, @continue, jsonPathExpr)
             );
         }
 
@@ -168,7 +213,7 @@ namespace GW2SDK.Impl.JsonReaders.Nodes
             return IfThenElse
             (
                 propertyNode.TestExpr(jsonPropertyExpr),
-                propertyNode.MapNode(jsonPropertyExpr, propertyPathExpr),
+                propertyNode.MapElement(jsonPropertyExpr, propertyPathExpr),
                 index + 1 < Properties.Count
                     ? MapPropertyExpression
                     (

@@ -1,15 +1,15 @@
 ﻿using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Text.Json;
+using GW2SDK.Impl.JsonReaders.Linq;
 using GW2SDK.Impl.JsonReaders.Mappings;
-using GW2SDK.Impl.JsonReaders.Nodes;
 using static System.Linq.Expressions.Expression;
 
 namespace GW2SDK.Impl.JsonReaders
 {
     public partial class JsonMappingCompiler<TRootElement> : IJsonMappingVisitor
     {
-        public Stack<JsonNode> Nodes { get; } = new Stack<JsonNode>();
+        public Stack<JsonDescriptor> Nodes { get; } = new Stack<JsonDescriptor>();
 
         public Expression<ReadJson<TRootElement>> Build(IJsonObjectMapping mapping)
         {
@@ -18,12 +18,12 @@ namespace GW2SDK.Impl.JsonReaders
 
             mapping.Accept(this);
 
-            var root = (ObjectNode) Nodes.Pop();
+            var root = (ObjectDescriptor) Nodes.Pop();
 
             return Lambda<ReadJson<TRootElement>>(
                 Block(
                     root.GetVariables(),
-                    root.MapNode(inputExpr, pathExpr),
+                    root.MapElement(inputExpr, pathExpr),
                     root.GetResult()
                 ),
                 inputExpr,

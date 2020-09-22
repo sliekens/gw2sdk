@@ -5,15 +5,17 @@ using GW2SDK.Impl.Json;
 using GW2SDK.Impl.JsonReaders.Mappings;
 using static System.Linq.Expressions.Expression;
 
-namespace GW2SDK.Impl.JsonReaders.Nodes
+namespace GW2SDK.Impl.JsonReaders.Linq
 {
-    public class ValueNode : JsonNode
+    public class ValueDescriptor : JsonDescriptor
     {
-        public ValueNode(IJsonValueMapping mapping)
+        public ValueDescriptor(IJsonValueMapping mapping)
         {
             Mapping = mapping;
             ActualValueExpr = Variable(mapping.ValueType, $"{mapping.Name}_value");
         }
+
+        public override JsonDescriptorType DescriptorType => JsonDescriptorType.Value;
 
         public IJsonValueMapping Mapping { get; }
 
@@ -27,7 +29,7 @@ namespace GW2SDK.Impl.JsonReaders.Nodes
             }
         }
 
-        public override Expression MapNode(Expression jsonElementExpr, Expression jsonPathExpr)
+        public override Expression MapElement(Expression jsonElementExpr, Expression jsonPathExpr)
         {
             ExpressionDebug.AssertType(typeof(JsonElement), jsonElementExpr);
             ExpressionDebug.AssertType(typeof(JsonPath), jsonPathExpr);

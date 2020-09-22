@@ -1,5 +1,5 @@
-﻿using GW2SDK.Impl.JsonReaders.Mappings;
-using GW2SDK.Impl.JsonReaders.Nodes;
+﻿using GW2SDK.Impl.JsonReaders.Linq;
+using GW2SDK.Impl.JsonReaders.Mappings;
 
 namespace GW2SDK.Impl.JsonReaders
 {
@@ -11,7 +11,7 @@ namespace GW2SDK.Impl.JsonReaders
 
             var itemNode = Nodes.Pop();
 
-            Nodes.Push(new ArrayNode(mapping, itemNode));
+            Nodes.Push(new ArrayDescriptor(mapping, itemNode));
         }
     }
 }

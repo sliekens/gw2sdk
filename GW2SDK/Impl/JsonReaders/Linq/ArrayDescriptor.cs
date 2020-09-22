@@ -1,26 +1,27 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Text.Json;
 using GW2SDK.Impl.Json;
 using GW2SDK.Impl.JsonReaders.Mappings;
 using static System.Linq.Expressions.Expression;
 
-namespace GW2SDK.Impl.JsonReaders.Nodes
+namespace GW2SDK.Impl.JsonReaders.Linq
 {
-    public class ArrayNode : JsonNode
+    public class ArrayDescriptor : JsonDescriptor
     {
-        public ArrayNode(IJsonArrayMapping mapping, JsonNode itemNode)
+        public ArrayDescriptor(IJsonArrayMapping mapping, JsonDescriptor itemDescriptor)
         {
             Mapping = mapping;
-            ItemNode = itemNode;
+            ItemDescriptor = itemDescriptor;
             ArraySeenExpr = Variable(typeof(bool), $"{mapping.Name}_array_seen");
             ActualValueExpr = Variable(mapping.ValueType.MakeArrayType(), $"{mapping.Name}_value");
         }
 
+        public override JsonDescriptorType DescriptorType => JsonDescriptorType.Array;
+
         public IJsonArrayMapping Mapping { get; }
 
-        public JsonNode ItemNode { get; }
+        public JsonDescriptor ItemDescriptor { get; }
 
         public ParameterExpression ArraySeenExpr { get; }
 
@@ -35,7 +36,7 @@ namespace GW2SDK.Impl.JsonReaders.Nodes
             }
         }
 
-        public override Expression MapNode(Expression jsonElementExpr, Expression jsonPathExpr)
+        public override Expression MapElement(Expression jsonElementExpr, Expression jsonPathExpr)
         {
             ExpressionDebug.AssertType(typeof(JsonElement), jsonElementExpr);
             ExpressionDebug.AssertType(typeof(JsonPath),    jsonPathExpr);
@@ -51,7 +52,7 @@ namespace GW2SDK.Impl.JsonReaders.Nodes
             {
                 arrayLengthExpr, indexExpr
             };
-            variables.AddRange(ItemNode.GetVariables());
+            variables.AddRange(ItemDescriptor.GetVariables());
 
             var source = new List<Expression>
             {
@@ -67,8 +68,8 @@ namespace GW2SDK.Impl.JsonReaders.Nodes
                         var indexExpression = MakeIndex(jsonElementExpr, JsonElementInfo.Item, new[] { indexExpr });
                         var indexPathExpr = JsonPathExpr.AccessArrayIndex(jsonPathExpr, indexExpr);
                         return Block(
-                            ItemNode.MapNode(indexExpression, indexPathExpr),
-                            Assign(ArrayAccess(ActualValueExpr, indexExpr), ItemNode.GetResult())
+                            ItemDescriptor.MapElement(indexExpression, indexPathExpr),
+                            Assign(ArrayAccess(ActualValueExpr, indexExpr), ItemDescriptor.GetResult())
                         );
                     }
                 )

@@ -1,5 +1,5 @@
-﻿using GW2SDK.Impl.JsonReaders.Mappings;
-using GW2SDK.Impl.JsonReaders.Nodes;
+﻿using GW2SDK.Impl.JsonReaders.Linq;
+using GW2SDK.Impl.JsonReaders.Mappings;
 
 namespace GW2SDK.Impl.JsonReaders
 {
@@ -7,7 +7,7 @@ namespace GW2SDK.Impl.JsonReaders
     {
         public void VisitValue(IJsonValueMapping mapping)
         {
-            Nodes.Push(new ValueNode(mapping));
+            Nodes.Push(new ValueDescriptor(mapping));
         }
     }
 }
