@@ -13,6 +13,7 @@ namespace GW2SDK.Impl.JsonReaders.Linq
 
         public ReadJson<TValue> Compile<TValue>(IJsonMapping descriptor)
         {
+            Builder = new BlockBuilder { ReturnType = typeof(TValue) };
             var inputExpr = Expression.Parameter(typeof(JsonElement).MakeByRefType(), "json");
             var pathExpr = Expression.Parameter(typeof(JsonPath).MakeByRefType(),     "path");
             Context.Push(new JsonContext(inputExpr, pathExpr));

@@ -1,6 +1,5 @@
 ﻿using System;
 using GW2SDK.Impl.JsonReaders.Mappings;
-using static System.Linq.Expressions.Expression;
 
 namespace GW2SDK.Impl.JsonReaders.Linq
 {
@@ -8,16 +7,13 @@ namespace GW2SDK.Impl.JsonReaders.Linq
     {
         public void VisitDiscriminator<TObject>(IJsonDiscriminatorMapping mapping)
         {
-            var ctx = Context.Peek();
-            
             if (mapping.Significance == MappingSignificance.Ignored)
             {
-                Builder.Body.Add(Empty());
+                return;
             }
-            else
-            {
-                throw new NotImplementedException();
-            }
+
+            var ctx = Context.Peek();
+            throw new NotImplementedException();
         }
     }
 }

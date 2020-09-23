@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using System.Linq.Expressions;
+using static System.Linq.Expressions.Expression;
 
 namespace GW2SDK.Impl.JsonReaders.Linq
 {
@@ -11,9 +13,19 @@ namespace GW2SDK.Impl.JsonReaders.Linq
 
         public List<ParameterExpression> Variables { get; } = new List<ParameterExpression>();
 
-        public List<Expression> Body { get; } = new List<Expression>();
+        private List<Expression> Body { get; } = new List<Expression>();
+
+        public List<Expression> AfterBody { get; } = new List<Expression>();
 
         public Type? ReturnType { get; set; }
+
+        public void Then(Expression expr)
+        {
+            Body.Add(expr);
+        }
+
+        public IEnumerable<Expression> GetBody() =>
+            Body.DefaultIfEmpty(ReturnType is null ? Empty() : Default(ReturnType));
 
         public BlockBuilder RootScope()
         {
@@ -40,10 +52,10 @@ namespace GW2SDK.Impl.JsonReaders.Linq
         {
             if (ReturnType is Type)
             {
-                return Expression.Block(ReturnType, Variables, Body);
+                return Block(ReturnType, Variables, GetBody());
             }
 
-            return Expression.Block(Variables, Body);
+            return Block(Variables, GetBody());
         }
     }
 }

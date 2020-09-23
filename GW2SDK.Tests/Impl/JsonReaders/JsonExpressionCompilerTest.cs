@@ -8,40 +8,6 @@ namespace GW2SDK.Tests.Impl.JsonReaders
 {
     public class JsonExpressionCompilerTest
     {
-        [Fact]
-        public void It_can_parse_string()
-        {
-            var sut = new JsonExpressionCompiler();
-
-            var reader = sut.Compile<string>(new JsonValueMapping<string>
-            {
-                ValueKind = JsonValueMappingKind.String
-            });
-
-            using var json = JsonDocument.Parse("\"it works\"");
-
-            var actual = reader(json.RootElement, JsonPath.Root);
-
-            Assert.Equal("it works", actual);
-        }
-        
-        [Fact]
-        public void It_can_parse_double()
-        {
-            var sut = new JsonExpressionCompiler();
-
-            var reader = sut.Compile<double>(new JsonValueMapping<double>
-            {
-                ValueKind = JsonValueMappingKind.Double
-            });
-
-            using var json = JsonDocument.Parse("3.14");
-
-            var actual = reader(json.RootElement, JsonPath.Root);
-
-            Assert.Equal(3.14d, actual);
-        }
-
         [Theory]
         [InlineData("3.14", 3.14d)]
         [InlineData("null", null)]
@@ -49,11 +15,14 @@ namespace GW2SDK.Tests.Impl.JsonReaders
         {
             var sut = new JsonExpressionCompiler();
 
-            var reader = sut.Compile<double?>(new JsonValueMapping<double?>
-            {
-                ValueKind = JsonValueMappingKind.Double,
-                Significance = MappingSignificance.Optional
-            });
+            var reader = sut.Compile<double?>
+            (
+                new JsonValueMapping<double?>
+                {
+                    ValueKind = JsonValueMappingKind.Double,
+                    Significance = MappingSignificance.Optional
+                }
+            );
 
             using var json = JsonDocument.Parse(input);
 
@@ -62,27 +31,74 @@ namespace GW2SDK.Tests.Impl.JsonReaders
             Assert.Equal(expected, actual);
         }
 
-        [Fact]
-        public void It_can_parse_arrays()
+        [Theory]
+        [InlineData(MappingSignificance.Required, MappingSignificance.Required)]
+        [InlineData(MappingSignificance.Required, MappingSignificance.Optional)]
+        [InlineData(MappingSignificance.Optional, MappingSignificance.Optional)]
+        [InlineData(MappingSignificance.Optional, MappingSignificance.Required)]
+        public void It_can_parse_arrays
+            (MappingSignificance significance, MappingSignificance itemSignificance)
         {
             var sut = new JsonExpressionCompiler();
 
-            var reader = sut.Compile<int[]>
+            var reader = sut.Compile<string[]>
             (
-                new JsonArrayMapping<int>
+                new JsonArrayMapping<string>
                 {
-                    ValueMapping = new JsonValueMapping<int>
+                    Significance = significance,
+                    ValueMapping = new JsonValueMapping<string>
                     {
-                        ValueKind = JsonValueMappingKind.Int32
+                        Significance = itemSignificance,
+                        ValueKind = JsonValueMappingKind.String
                     }
                 }
             );
 
-            using var json = JsonDocument.Parse("[1, 2, 3]");
+            using var json = JsonDocument.Parse("[\"1\", \"2\", \"3\"]");
 
             var actual = reader(json.RootElement, JsonPath.Root);
 
-            Assert.Equal(new [] { 1, 2, 3}, actual);
+            Assert.Equal(new[] { "1", "2", "3" }, actual);
+        }
+
+        [Fact]
+        public void It_can_parse_string()
+        {
+            var sut = new JsonExpressionCompiler();
+
+            var reader = sut.Compile<string>
+            (
+                new JsonValueMapping<string>
+                {
+                    ValueKind = JsonValueMappingKind.String
+                }
+            );
+
+            using var json = JsonDocument.Parse("\"it works\"");
+
+            var actual = reader(json.RootElement, JsonPath.Root);
+
+            Assert.Equal("it works", actual);
+        }
+
+        [Fact]
+        public void It_can_parse_double()
+        {
+            var sut = new JsonExpressionCompiler();
+
+            var reader = sut.Compile<double>
+            (
+                new JsonValueMapping<double>
+                {
+                    ValueKind = JsonValueMappingKind.Double
+                }
+            );
+
+            using var json = JsonDocument.Parse("3.14");
+
+            var actual = reader(json.RootElement, JsonPath.Root);
+
+            Assert.Equal(3.14d, actual);
         }
     }
 }

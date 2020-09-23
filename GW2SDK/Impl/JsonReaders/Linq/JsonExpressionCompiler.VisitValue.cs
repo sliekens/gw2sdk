@@ -8,15 +8,15 @@ namespace GW2SDK.Impl.JsonReaders.Linq
     {
         public void VisitValue(IJsonValueMapping mapping)
         {
-            var ctx = Context.Peek();
-
             if (mapping.Significance == MappingSignificance.Ignored)
             {
-                Builder.Body.Add(Expression.Empty());
+                return;
             }
-            else
-            {
-                Builder.Body.Add(mapping.Significance switch
+
+            var ctx = Context.Peek();
+            Builder.Then
+            (
+                mapping.Significance switch
                 {
                     MappingSignificance.Required => mapping.ValueKind switch
                     {
@@ -106,8 +106,8 @@ namespace GW2SDK.Impl.JsonReaders.Linq
                         _ => Expression.Empty()
                     },
                     _ => Expression.Empty()
-                });
-            }
+                }
+            );
         }
     }
 }

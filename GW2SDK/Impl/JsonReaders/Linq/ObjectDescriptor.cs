@@ -158,20 +158,6 @@ namespace GW2SDK.Impl.JsonReaders.Linq
         private IEnumerable<Expression> MapObjectExpr(Expression jsonElementExpr, Expression jsonPathExpr)
         {
             yield return Assign(ObjectSeenExpr, Constant(true));
-            if (Discriminator is object)
-            {
-                // Set discriminator seen
-                // Get discriminator value
-                // hoist variables
-                // enumerate properties
-
-                if (Discriminator.Mapping.Significance == MappingSignificance.Required)
-                {
-                    // throw if discriminator not seen
-                }
-
-                // 
-            }
 
             yield return JsonElementExpr.ForEachProperty
             (
