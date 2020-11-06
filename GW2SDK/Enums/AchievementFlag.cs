@@ -23,6 +23,8 @@ namespace GW2SDK.Enums
 
         RequiresUnlock,
 
-        Permanent
+        Permanent,
+
+        Weekly
     }
 }
