@@ -1,5 +1,4 @@
 ﻿using System.Threading.Tasks;
-using GW2SDK.Accounts.Banks;
 using GW2SDK.Accounts.Recipes;
 using GW2SDK.Exceptions;
 using GW2SDK.Tests.TestInfrastructure;
@@ -27,9 +26,9 @@ namespace GW2SDK.Tests.Features.Accounts.Recipes
             await using var services = new Container();
             var sut = services.Resolve<AccountRecipesService>();
 
-            var actual = await Record.ExceptionAsync(async() =>
+            var actual = await Record.ExceptionAsync(async () =>
             {
-                var _ = await sut.GetUnlockedRecipes(accessToken: null);
+                var _ = await sut.GetUnlockedRecipes(null);
             });
 
             var reason = Assert.IsType<UnauthorizedOperationException>(actual);
@@ -43,7 +42,7 @@ namespace GW2SDK.Tests.Features.Accounts.Recipes
             await using var services = new Container();
             var sut = services.Resolve<AccountRecipesService>();
 
-            var actual = await Record.ExceptionAsync(async() =>
+            var actual = await Record.ExceptionAsync(async () =>
             {
                 var _ = await sut.GetUnlockedRecipes(ConfigurationManager.Instance.ApiKeyBasic);
             });

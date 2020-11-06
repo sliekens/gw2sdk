@@ -8,9 +8,14 @@ namespace GW2SDK.Annotations
     {
         public ScopeAttribute(Permission permission)
         {
-            Permission = permission;
+            Permission = new [] { permission };
         }
 
-        public Permission Permission { get; }
+        public ScopeAttribute(params Permission[] permissions)
+        {
+            Permission = permissions;
+        }
+
+        public Permission[] Permission { get; }
     }
 }

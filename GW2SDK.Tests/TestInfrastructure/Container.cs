@@ -12,6 +12,7 @@ using GW2SDK.Achievements.Dailies;
 using GW2SDK.Achievements.Groups;
 using GW2SDK.Backstories;
 using GW2SDK.Builds;
+using GW2SDK.Characters.Recipes;
 using GW2SDK.Colors;
 using GW2SDK.Commerce.Prices;
 using GW2SDK.Continents;
@@ -85,6 +86,7 @@ namespace GW2SDK.Tests.TestInfrastructure
                 .AddTypedClient<AccountService>()
                 .AddTypedClient<AccountAchievementService>()
                 .AddTypedClient<AccountRecipesService>()
+                .AddTypedClient<CharacterRecipesService>()
                 .AddTypedClient<AchievementService>()
                 .AddTypedClient<AchievementCategoryService>()
                 .AddTypedClient<AchievementGroupService>()
