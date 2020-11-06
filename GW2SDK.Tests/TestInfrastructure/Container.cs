@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using GW2SDK.Accounts;
 using GW2SDK.Accounts.Achievements;
 using GW2SDK.Accounts.Banks;
+using GW2SDK.Accounts.Recipes;
 using GW2SDK.Achievements;
 using GW2SDK.Achievements.Categories;
 using GW2SDK.Achievements.Dailies;
@@ -83,6 +84,7 @@ namespace GW2SDK.Tests.TestInfrastructure
                 .AddTypedClient<ApiInfoService>()
                 .AddTypedClient<AccountService>()
                 .AddTypedClient<AccountAchievementService>()
+                .AddTypedClient<AccountRecipesService>()
                 .AddTypedClient<AchievementService>()
                 .AddTypedClient<AchievementCategoryService>()
                 .AddTypedClient<AchievementGroupService>()
