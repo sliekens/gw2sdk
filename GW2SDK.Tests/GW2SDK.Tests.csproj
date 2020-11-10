@@ -15,7 +15,7 @@
         </PackageReference>
         <PackageReference Include="Microsoft.Extensions.Configuration.EnvironmentVariables" Version="3.1.5" />
         <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="3.1.5" />
-        <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="3.1.5" />
+        <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="5.0.0" />
         <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="3.1.5" />
         <PackageReference Include="Microsoft.Extensions.Http.Polly" Version="3.1.5" />
         <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.6.1" />
