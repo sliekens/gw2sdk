@@ -14,7 +14,7 @@
         <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
         <PackageReference Include="Polly" Version="7.2.1" />
         <PackageReference Include="System.CommandLine.DragonFruit" Version="0.3.0-alpha.20303.1" />
-        <PackageReference Include="System.Interactive" Version="4.1.1" />
+        <PackageReference Include="System.Interactive" Version="5.0.0" />
     </ItemGroup>
 
     <ItemGroup>
