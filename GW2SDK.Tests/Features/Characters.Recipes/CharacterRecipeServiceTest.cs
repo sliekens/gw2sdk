@@ -15,7 +15,7 @@ namespace GW2SDK.Tests.Features.Characters.Recipes
             await using var services = new Container();
             var sut = services.Resolve<CharacterRecipesService>();
 
-            var actual = await sut.GetUnlockedRecipes("Isaac Newerton", ConfigurationManager.Instance.ApiKeyFull);
+            var actual = await sut.GetUnlockedRecipes(ConfigurationManager.Instance.CharacterName, ConfigurationManager.Instance.ApiKeyFull);
 
             Assert.NotEmpty(actual.Recipes);
             Assert.All(actual.Recipes, id => Assert.NotEqual(0, id));
@@ -29,7 +29,7 @@ namespace GW2SDK.Tests.Features.Characters.Recipes
 
             var actual = await Record.ExceptionAsync(async () =>
             {
-                var _ = await sut.GetUnlockedRecipes("Isaac Newerton", null);
+                var _ = await sut.GetUnlockedRecipes("Nobody", null);
             });
 
             var reason = Assert.IsType<UnauthorizedOperationException>(actual);
@@ -61,7 +61,7 @@ namespace GW2SDK.Tests.Features.Characters.Recipes
 
             var actual = await Record.ExceptionAsync(async () =>
             {
-                var _ = await sut.GetUnlockedRecipes("Isaac Newerton", ConfigurationManager.Instance.ApiKeyBasic);
+                var _ = await sut.GetUnlockedRecipes("Nobody", ConfigurationManager.Instance.ApiKeyBasic);
             });
 
             var reason = Assert.IsType<UnauthorizedOperationException>(actual);

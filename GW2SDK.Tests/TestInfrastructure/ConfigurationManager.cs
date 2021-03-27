@@ -20,6 +20,8 @@ namespace GW2SDK.Tests.TestInfrastructure
 
         public string ApiKeyFull => Configuration["ApiKeyFull"] ?? throw new InvalidOperationException("Missing ApiKeyFull.");
 
+        public string CharacterName => Configuration["CharacterName"] ?? throw new InvalidOperationException("Missing CharacterName.");
+
         public Uri BaseAddress => new Uri(Configuration["Authority"], UriKind.Absolute);
 
         public static ConfigurationManager Instance { get; } = new ConfigurationManager();

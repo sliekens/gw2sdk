@@ -962,6 +962,10 @@
     {
       "v": "2019-12-19T00:00:00.000Z",
       "desc": "Add `code` and `skills_by_palette` to `/v2/professions`. Add `code` to `/v2/legends`. Add `build_storage_slots` to `/v2/account`. Add `build_tabs_unlocked`, `active_build_tab`, `build_tabs`, `equipment_tabs_unlocked`, `active_equipment_tab` and `equipment_tabs` to `/v2/characters/:id`. Add `equipment[i].location` and `equipment[i].tabs` to `/v2/characters/:id`. Remove `skills` and `specializations` from `/v2/characters/:id`."
+    },
+    {
+      "v": "2020-11-17T00:30:00.000Z",
+      "desc": "Change the type of `details.secondary_suffix_item_id` from `/v2/items` to be an optional int."
     }
   ]
 }
