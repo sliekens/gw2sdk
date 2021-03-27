@@ -76,6 +76,6 @@ namespace GW2SDK.TestDataHelper
 
         public void Dispose() => _services.Dispose();
 
-        public T Resolve<T>() => _services.GetRequiredService<T>();
+        public T Resolve<T>() where T : notnull => _services.GetRequiredService<T>();
     }
 }
