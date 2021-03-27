@@ -21,8 +21,8 @@ namespace GW2SDK.Items
         [JsonProperty(Required = Required.DisallowNull, NullValueHandling = NullValueHandling.Ignore)]
         public int? SuffixItemId { get; set; }
 
-        [JsonProperty(Required = Required.Always)]
-        public string SecondarySuffixItemId { get; set; } = "";
+        [JsonProperty(Required = Required.DisallowNull, NullValueHandling = NullValueHandling.Ignore)]
+        public int? SecondarySuffixItemId { get; set; }
 
         [JsonProperty(Required = Required.DisallowNull, NullValueHandling = NullValueHandling.Ignore)]
         public int[]? StatChoices { get; set; }
