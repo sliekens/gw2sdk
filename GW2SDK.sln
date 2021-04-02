@@ -5,7 +5,16 @@ VisualStudioVersion = 16.0.28803.352
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GW2SDK", "GW2SDK\GW2SDK.csproj", "{94A2B678-DEB4-42F2-B5BA-935C1FB6DB19}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{122C3FD6-EB04-4A9F-AA27-641C364CE7C9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GW2SDK.Tests", "GW2SDK.Tests\GW2SDK.Tests.csproj", "{55D98C85-2530-4006-BBB9-57FC5C00E728}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GW2SDK.TestDataHelper", "GW2SDK.TestDataHelper\GW2SDK.TestDataHelper.csproj", "{3F9597CF-264D-4C23-9E61-A774782EEAFB}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{4EB0CF28-5D3A-47AD-B4E3-8E94F9289B5C}"
+	ProjectSection(SolutionItems) = preProject
+		.github\workflows\ci.yml = .github\workflows\ci.yml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "root", "root", "{63243B77-9BE8-41CE-B2F6-B306E3F150CB}"
 	ProjectSection(SolutionItems) = preProject
 		coverletArgs.runsettings = coverletArgs.runsettings
 		Directory.Build.props = Directory.Build.props
@@ -14,10 +23,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		nuget.config = nuget.config
 		README.md = README.md
 	EndProjectSection
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GW2SDK.Tests", "GW2SDK.Tests\GW2SDK.Tests.csproj", "{55D98C85-2530-4006-BBB9-57FC5C00E728}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GW2SDK.TestDataHelper", "GW2SDK.TestDataHelper\GW2SDK.TestDataHelper.csproj", "{3F9597CF-264D-4C23-9E61-A774782EEAFB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -40,6 +45,9 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{4EB0CF28-5D3A-47AD-B4E3-8E94F9289B5C} = {63243B77-9BE8-41CE-B2F6-B306E3F150CB}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {30CA8636-682D-4E26-943C-45133727C406}

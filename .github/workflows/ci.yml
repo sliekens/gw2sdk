@@ -18,13 +18,12 @@ jobs:
       build-configuration: Release
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
-    - name: Setup .NET Core
-      uses: actions/setup-dotnet@v1
+    - name: Checkout
+      uses: actions/checkout@v2.3.4
+    - name: Setup .NET Core SDK
+      uses: actions/setup-dotnet@v1.7.2
       with:
         source-url: https://nuget.pkg.github.com/stevenliekens/index.json
-      env:
-        NUGET_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     - name: Install dependencies
       run: dotnet restore
     - name: Test
