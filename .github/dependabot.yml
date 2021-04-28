@@ -1,0 +1,50 @@
+version: 2
+registries:
+  nuget-feed-nuget-pkg-github-com-stevenliekens-index-json:
+    type: nuget-feed
+    url: https://nuget.pkg.github.com/stevenliekens/index.json
+    username: "${{secrets.NUGET_FEED_NUGET_PKG_GITHUB_COM_STEVENLIEKENS_INDEX_JSON_USERNAME}}"
+    password: "${{secrets.NUGET_FEED_NUGET_PKG_GITHUB_COM_STEVENLIEKENS_INDEX_JSON_PASSWORD}}"
+
+updates:
+- package-ecosystem: nuget
+  directory: "/"
+  schedule:
+    interval: daily
+    time: "04:00"
+  open-pull-requests-limit: 10
+  ignore:
+  - dependency-name: Newtonsoft.Json
+    versions:
+    - 13.0.1
+  - dependency-name: Microsoft.NET.Test.Sdk
+    versions:
+    - 16.8.3
+    - 16.9.1
+  - dependency-name: coverlet.collector
+    versions:
+    - 3.0.2
+    - 3.0.3
+  - dependency-name: Microsoft.Extensions.Http.Polly
+    versions:
+    - 5.0.1
+  - dependency-name: Microsoft.Extensions.DependencyInjection
+    versions:
+    - 5.0.1
+  - dependency-name: System.Interactive
+    versions:
+    - 5.0.0
+  - dependency-name: Microsoft.Extensions.Configuration.Json
+    versions:
+    - 5.0.0
+  - dependency-name: Microsoft.Extensions.Configuration.EnvironmentVariables
+    versions:
+    - 5.0.0
+  - dependency-name: Microsoft.Extensions.Configuration.UserSecrets
+    versions:
+    - 5.0.0
+  - dependency-name: xunit.runner.visualstudio
+    versions:
+    - 2.4.3
+  registries:
+  - nuget-feed-nuget-pkg-github-com-stevenliekens-index-json
