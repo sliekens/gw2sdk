@@ -1,12 +1,11 @@
-﻿using System.Collections.Generic;
-using System.IO;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
-using GW2SDK.Backstories.Questions.Impl;
+using GW2SDK.Backstories.Questions.Http;
+using GW2SDK.Http;
 using GW2SDK.Tests.TestInfrastructure;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 using Xunit;
 
 namespace GW2SDK.Tests.Features.Backstories.Questions.Fixtures
@@ -18,7 +17,7 @@ namespace GW2SDK.Tests.Features.Backstories.Questions.Fixtures
         public async Task InitializeAsync()
         {
             await using var container = new Container();
-            var http = container.Resolve<IHttpClientFactory>().CreateClient("GW2SDK");
+            var http = container.Resolve<HttpClient>();
             BackstoryQuestions = await GetAllBackstoryQuestions(http);
         }
 
@@ -27,14 +26,16 @@ namespace GW2SDK.Tests.Features.Backstories.Questions.Fixtures
         private async Task<List<string>> GetAllBackstoryQuestions(HttpClient http)
         {
             var request = new BackstoryQuestionsRequest();
-            using var response = await http.SendAsync(request);
-            using var responseReader = new StreamReader(await response.Content.ReadAsStreamAsync());
-            using var jsonReader = new JsonTextReader(responseReader);
+            using var response = await http.SendAsync(request, HttpCompletionOption.ResponseHeadersRead);
             response.EnsureSuccessStatusCode();
 
             // API returns a JSON array but we want a List of JSON objects instead
-            var array = await JToken.ReadFromAsync(jsonReader);
-            return array.Children<JObject>().Select(obj => obj.ToString(Formatting.None)).ToList();
+            using var json = await response.Content.ReadAsJsonAsync().ConfigureAwait(false);
+            return json.Indent(false)
+                .RootElement.EnumerateArray()
+                .Select(item =>
+                    item.ToString() ?? throw new InvalidOperationException("Unexpected null in JSON array."))
+                .ToList();
         }
     }
 }

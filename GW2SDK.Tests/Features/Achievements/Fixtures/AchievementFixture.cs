@@ -6,7 +6,7 @@ namespace GW2SDK.Tests.Features.Achievements.Fixtures
     {
         public AchievementFixture()
         {
-            var reader = new JsonFlatFileReader();
+            var reader = new FlatFileReader();
             Db = new InMemoryAchievementDb(reader.Read("Data/achievements.json"));
         }
 

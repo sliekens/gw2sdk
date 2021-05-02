@@ -8,7 +8,7 @@ namespace GW2SDK.Tests.Features.Titles.Fixtures
     {
         public TitlesFixture()
         {
-            var reader = new JsonFlatFileReader();
+            var reader = new FlatFileReader();
             Titles = reader.Read("Data/titles.json").ToList().AsReadOnly();
         }
 

@@ -1,31 +1,23 @@
 ﻿using GW2SDK.Annotations;
-using Newtonsoft.Json;
 
 namespace GW2SDK.Backstories.Questions
 {
     [PublicAPI]
     [DataTransferObject]
-    public sealed class BackstoryQuestion
+    public sealed record BackstoryQuestion
     {
-        [JsonProperty(Required = Required.Always)]
-        public int Id { get; set; }
+        public int Id { get; init; }
 
-        [JsonProperty(Required = Required.Always)]
-        public string Title { get; set; } = "";
+        public string Title { get; init; } = "";
 
-        [JsonProperty(Required = Required.Always)]
-        public string Description { get; set; } = "";
+        public string Description { get; init; } = "";
 
-        [JsonProperty(Required = Required.Always)]
-        public string[] Answers { get; set; } = new string[0];
+        public string[] Answers { get; init; } = new string[0];
 
-        [JsonProperty(Required = Required.Always)]
-        public int Order { get; set; }
+        public int Order { get; init; }
 
-        [JsonProperty(Required = Required.DisallowNull)]
-        public Race[]? Races { get; set; }
+        public Race[]? Races { get; init; }
 
-        [JsonProperty(Required = Required.DisallowNull)]
-        public Profession[]? Professions { get; set; }
+        public Profession[]? Professions { get; init; }
     }
 }

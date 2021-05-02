@@ -1,4 +1,4 @@
-﻿using GW2SDK.Impl;
+﻿using GW2SDK.Http;
 using Xunit;
 
 namespace GW2SDK.Tests.Impl

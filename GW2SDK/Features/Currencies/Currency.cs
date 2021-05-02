@@ -1,27 +1,19 @@
-﻿using System.Diagnostics;
-using GW2SDK.Annotations;
-using Newtonsoft.Json;
+﻿using GW2SDK.Annotations;
 
 namespace GW2SDK.Currencies
 {
     [PublicAPI]
     [DataTransferObject]
-    [DebuggerDisplay("{Name,nq}")]
-    public sealed class Currency
+    public sealed record Currency
     {
-        [JsonProperty("id", Required = Required.Always)]
-        public int Id { get; set; }
+        public int Id { get; init; }
 
-        [JsonProperty("name", Required = Required.Always)]
-        public string Name { get; set; } = "";
+        public string Name { get; init; } = "";
 
-        [JsonProperty("description", Required = Required.Always)]
-        public string Description { get; set; } = "";
+        public string Description { get; init; } = "";
 
-        [JsonProperty("order", Required = Required.Always)]
-        public int Order { get; set; }
+        public int Order { get; init; }
 
-        [JsonProperty("icon", Required = Required.Always)]
-        public string Icon { get; set; } = "";
+        public string Icon { get; init; } = "";
     }
 }

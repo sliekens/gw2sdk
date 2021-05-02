@@ -1,23 +1,21 @@
-﻿using GW2SDK.Accounts.Achievements;
+﻿using System.Text.Json;
+using GW2SDK.Accounts.Achievements;
+using GW2SDK.Json;
 using GW2SDK.Tests.Features.Accounts.Achievements.Fixtures;
 using GW2SDK.Tests.TestInfrastructure;
-using Newtonsoft.Json;
 using Xunit;
-using Xunit.Abstractions;
 
 namespace GW2SDK.Tests.Features.Accounts.Achievements
 {
     public class AccountAchievementTest : IClassFixture<AccountAchievementFixture>
     {
-        public AccountAchievementTest(AccountAchievementFixture fixture, ITestOutputHelper output)
+        public AccountAchievementTest(AccountAchievementFixture fixture)
         {
             _fixture = fixture;
-            _output = output;
         }
 
         private readonly AccountAchievementFixture _fixture;
 
-        private readonly ITestOutputHelper _output;
 
         private static class AccountAchievementFact
         {
@@ -30,15 +28,15 @@ namespace GW2SDK.Tests.Features.Accounts.Achievements
         [Trait("Importance", "Critical")]
         public void Account_achievements_can_be_created_from_json()
         {
-            var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(_output)
-                .ThrowErrorOnMissingMember()
-                .Build();
+            var sut = new AccountAchievementReader();
 
             AssertEx.ForEach(_fixture.Db.AccountAchievements,
                 json =>
                 {
-                    var actual = JsonConvert.DeserializeObject<AccountAchievement>(json, settings);
+                    using var document = JsonDocument.Parse(json);
 
+                    var actual = sut.Read(document.RootElement, MissingMemberBehavior.Error);
+                    
                     AccountAchievementFact.Id_is_positive(actual);
                 });
         }

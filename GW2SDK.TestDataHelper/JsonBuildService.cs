@@ -1,8 +1,8 @@
-﻿using System.Net.Http;
+﻿using System;
+using System.Net.Http;
 using System.Threading.Tasks;
-using GW2SDK.Builds.Impl;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
+using GW2SDK.Builds.Http;
+using GW2SDK.Http;
 
 namespace GW2SDK.TestDataHelper
 {
@@ -18,11 +18,11 @@ namespace GW2SDK.TestDataHelper
         public async Task<string> GetJsonBuild(bool indented)
         {
             var request = new BuildRequest();
-            using var response = await _http.SendAsync(request).ConfigureAwait(false);
+            using var response = await _http.SendAsync(request, HttpCompletionOption.ResponseHeadersRead)
+                .ConfigureAwait(false);
             response.EnsureSuccessStatusCode();
-            var json = await response.Content.ReadAsStringAsync();
-
-            return JToken.Parse(json).ToString(indented ? Formatting.Indented : Formatting.None);
+            using var json = await response.Content.ReadAsJsonAsync().ConfigureAwait(false);
+            return json.Indent(indented).RootElement.ToString() ?? throw new InvalidOperationException();
         }
     }
 }

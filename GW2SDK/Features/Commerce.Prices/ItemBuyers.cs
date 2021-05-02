@@ -1,16 +1,13 @@
 ﻿using GW2SDK.Annotations;
-using Newtonsoft.Json;
 
 namespace GW2SDK.Commerce.Prices
 {
     [PublicAPI]
     [DataTransferObject(RootObject = false)]
-    public sealed class ItemBuyers
+    public sealed record ItemBuyers
     {
-        [JsonProperty("quantity", Required = Required.Always)]
-        public int OpenBuyOrders { get; set; }
+        public int OpenBuyOrders { get; init; }
 
-        [JsonProperty("unit_price", Required = Required.Always)]
-        public int BestBid { get; set; }
+        public int BestBid { get; init; }
     }
 }

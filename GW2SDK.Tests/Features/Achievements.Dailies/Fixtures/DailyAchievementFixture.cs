@@ -1,7 +1,6 @@
 ﻿using System.Net.Http;
 using System.Threading.Tasks;
-using GW2SDK.Achievements.Dailies;
-using GW2SDK.Achievements.Dailies.Impl;
+using GW2SDK.Achievements.Dailies.Http;
 using GW2SDK.Tests.TestInfrastructure;
 using Xunit;
 
@@ -16,12 +15,12 @@ namespace GW2SDK.Tests.Features.Achievements.Dailies.Fixtures
         public async Task InitializeAsync()
         {
             await using var container = new Container();
-            var http = container.Resolve<IHttpClientFactory>().CreateClient("GW2SDK");
+            var http = container.Resolve<HttpClient>();
 
-            using var today = await http.SendAsync(new DailyAchievementsRequest());
+            using var today = await http.SendAsync(new DailyAchievementsRequest(), HttpCompletionOption.ResponseHeadersRead);
             Today = await today.Content.ReadAsStringAsync();
 
-            using var tomorrow = await http.SendAsync(new DailyAchievementsRequest(Day.Tomorrow));
+            using var tomorrow = await http.SendAsync(new DailyAchievementsRequest(Day.Tomorrow), HttpCompletionOption.ResponseHeadersRead);
             Tomorrow = await tomorrow.Content.ReadAsStringAsync();
         }
 

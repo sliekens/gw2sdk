@@ -7,8 +7,9 @@ namespace GW2SDK.Annotations
     /// This attribute is intended to mark publicly available API
     /// which should not be removed and so is treated as used.
     /// </summary>
+    [PublicAPI]
     [MeansImplicitUse(ImplicitUseTargetFlags.WithMembers)]
-    internal sealed class PublicAPIAttribute : Attribute
+    public sealed class PublicAPIAttribute : Attribute
     {
         public PublicAPIAttribute()
         {

@@ -1,7 +1,7 @@
 ﻿using System.Net.Http;
 using System.Threading.Tasks;
 using GW2SDK.Tests.TestInfrastructure;
-using GW2SDK.Tokens.Impl;
+using GW2SDK.Tokens.Http;
 using Xunit;
 
 namespace GW2SDK.Tests.Features.Tokens.Fixtures
@@ -13,7 +13,7 @@ namespace GW2SDK.Tests.Features.Tokens.Fixtures
         public async Task InitializeAsync()
         {
             await using var container = new Container();
-            var http = container.Resolve<IHttpClientFactory>().CreateClient("GW2SDK");
+            var http = container.Resolve<HttpClient>();
 
             ApiKeyInfoJson = await GetTokenInfoJson(http, ConfigurationManager.Instance.ApiKeyFull);
         }
@@ -23,7 +23,7 @@ namespace GW2SDK.Tests.Features.Tokens.Fixtures
         private async Task<string> GetTokenInfoJson(HttpClient http, string accessToken)
         {
             var request = new TokenInfoRequest(accessToken);
-            using var response = await http.SendAsync(request);
+            using var response = await http.SendAsync(request, HttpCompletionOption.ResponseHeadersRead);
             response.EnsureSuccessStatusCode();
             return await response.Content.ReadAsStringAsync();
         }

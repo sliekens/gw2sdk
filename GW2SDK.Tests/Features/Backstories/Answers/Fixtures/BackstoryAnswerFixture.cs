@@ -1,12 +1,10 @@
 ﻿using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
-using GW2SDK.Backstories.Answers.Impl;
+using GW2SDK.Backstories.Answers.Http;
+using GW2SDK.Http;
 using GW2SDK.Tests.TestInfrastructure;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 using Xunit;
 
 namespace GW2SDK.Tests.Features.Backstories.Answers.Fixtures
@@ -18,7 +16,7 @@ namespace GW2SDK.Tests.Features.Backstories.Answers.Fixtures
         public async Task InitializeAsync()
         {
             await using var container = new Container();
-            var http = container.Resolve<IHttpClientFactory>().CreateClient("GW2SDK");
+            var http = container.Resolve<HttpClient>();
             BackstoryAnswers = await GetAllBackstoryAnswers(http);
         }
 
@@ -27,14 +25,12 @@ namespace GW2SDK.Tests.Features.Backstories.Answers.Fixtures
         private async Task<List<string>> GetAllBackstoryAnswers(HttpClient http)
         {
             var request = new BackstoryAnswersRequest();
-            using var response = await http.SendAsync(request);
-            using var responseReader = new StreamReader(await response.Content.ReadAsStreamAsync());
-            using var jsonReader = new JsonTextReader(responseReader);
+            using var response = await http.SendAsync(request, HttpCompletionOption.ResponseHeadersRead);
             response.EnsureSuccessStatusCode();
 
             // API returns a JSON array but we want a List of JSON objects instead
-            var array = await JToken.ReadFromAsync(jsonReader);
-            return array.Children<JObject>().Select(obj => obj.ToString(Formatting.None)).ToList();
+            using var json = await response.Content.ReadAsJsonAsync();
+            return json.Indent(false).RootElement.EnumerateArray().Select(item => item.ToString()).ToList();
         }
     }
 }

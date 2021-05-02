@@ -1,7 +1,6 @@
 ﻿using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
-using GW2SDK.Exceptions;
 using GW2SDK.Http;
 using Xunit;
 
@@ -24,7 +23,7 @@ namespace GW2SDK.Tests.Http
 
             var httpClient = new HttpClient(sut);
 
-            var actual = await httpClient.SendAsync(request);
+            var actual = await httpClient.SendAsync(request, HttpCompletionOption.ResponseHeadersRead);
 
             Assert.NotNull(actual);
             Assert.Equal(stubHttpMessageHandler.Code, actual.StatusCode);
@@ -44,7 +43,7 @@ namespace GW2SDK.Tests.Http
 
             var httpClient = new HttpClient(sut);
 
-            var actual = await Record.ExceptionAsync(async () => await httpClient.SendAsync(request));
+            var actual = await Record.ExceptionAsync(async () => await httpClient.SendAsync(request, HttpCompletionOption.ResponseHeadersRead));
 
             var reason = Assert.IsType<UnauthorizedOperationException>(actual);
 

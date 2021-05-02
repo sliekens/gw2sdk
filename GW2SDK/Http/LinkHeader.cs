@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using GW2SDK.Impl;
+using GW2SDK.Annotations;
 
 namespace GW2SDK.Http
 {
-    internal sealed class LinkHeader
+    [PublicAPI]
+    public sealed class LinkHeader
     {
         public LinkHeader(IEnumerable<LinkHeaderValue> links)
         {
@@ -14,7 +15,7 @@ namespace GW2SDK.Http
 
         public IReadOnlyCollection<LinkHeaderValue> Links { get; }
 
-        internal static LinkHeader Parse(string input) => new LinkHeader(ParseImpl(input.AsSpan()));
+        public static LinkHeader Parse(string input) => new(ParseImpl(input));
 
         private static IEnumerable<LinkHeaderValue> ParseImpl(ReadOnlySpan<char> input)
         {
@@ -60,8 +61,8 @@ namespace GW2SDK.Http
         private static (string name, string value) ParseAttribute(ReadOnlySpan<char> input)
         {
             var splitIndex = input.IndexOf('=');
-            var name = input.Slice(0, splitIndex).Trim();
-            var value = input.Slice(splitIndex + 1).Trim();
+            var name = input[..splitIndex].Trim();
+            var value = input[(splitIndex + 1)..].Trim();
             return (name: name.ToString(), value.ToString());
         }
 

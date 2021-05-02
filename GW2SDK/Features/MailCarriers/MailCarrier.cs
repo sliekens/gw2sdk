@@ -1,30 +1,21 @@
-﻿using System.Diagnostics;
-using GW2SDK.Annotations;
-using Newtonsoft.Json;
+﻿using GW2SDK.Annotations;
 
 namespace GW2SDK.MailCarriers
 {
     [PublicAPI]
-    [DebuggerDisplay("{Name,nq}")]
     [DataTransferObject]
-    public sealed class MailCarrier
+    public sealed record MailCarrier
     {
-        [JsonProperty("id", Required = Required.Always)]
-        public int Id { get; set; }
+        public int Id { get; init; }
 
-        [JsonProperty("unlock_items", Required = Required.Always)]
-        public int[] UnlockItems { get; set; } = new int[0];
-        
-        [JsonProperty("order", Required = Required.Always)]
-        public int Order { get; set; }
-        
-        [JsonProperty("icon", Required = Required.Always)]
-        public string Icon { get; set; } = "";
-        
-        [JsonProperty("name", Required = Required.Always)]
-        public string Name { get; set; } = "";
+        public int[] UnlockItems { get; init; } = new int[0];
 
-        [JsonProperty("flags", Required = Required.Always)]
-        public MailCarrierFlag[] flags { get; set; } = new MailCarrierFlag[0];
+        public int Order { get; init; }
+
+        public string Icon { get; init; } = "";
+
+        public string Name { get; init; } = "";
+
+        public MailCarrierFlag[] Flags { get; init; } = new MailCarrierFlag[0];
     }
 }

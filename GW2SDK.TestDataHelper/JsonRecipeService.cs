@@ -1,11 +1,10 @@
-﻿using System.Collections.Generic;
-using System.IO;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
-using GW2SDK.Recipes.Impl;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
+using GW2SDK.Http;
+using GW2SDK.Recipes.Http;
 
 namespace GW2SDK.TestDataHelper
 {
@@ -20,10 +19,10 @@ namespace GW2SDK.TestDataHelper
 
         public async Task<List<string>> GetAllJsonRecipes(bool indented)
         {
-            var ids = await GetRecipeIds();
+            var ids = await GetRecipeIds().ConfigureAwait(false);
             var list = new List<string>(ids.Count);
             var tasks = ids.Buffer(200).Select(subset => GetJsonRecipesByIds(subset.ToList(), indented));
-            foreach (var result in await Task.WhenAll(tasks))
+            foreach (var result in await Task.WhenAll(tasks).ConfigureAwait(false))
             {
                 list.AddRange(result);
             }
@@ -34,23 +33,27 @@ namespace GW2SDK.TestDataHelper
         private async Task<List<int>> GetRecipeIds()
         {
             var request = new RecipesIndexRequest();
-            using var response = await _http.SendAsync(request);
-            var json = await response.Content.ReadAsStringAsync();
+            using var response = await _http.SendAsync(request, HttpCompletionOption.ResponseHeadersRead)
+                .ConfigureAwait(false);
             response.EnsureSuccessStatusCode();
-            return JsonConvert.DeserializeObject<List<int>>(json) ?? new List<int>();
+            using var json = await response.Content.ReadAsJsonAsync().ConfigureAwait(false);
+            return json.RootElement.EnumerateArray().Select(item => item.GetInt32()).ToList();
         }
 
         private async Task<List<string>> GetJsonRecipesByIds(IReadOnlyCollection<int> recipeIds, bool indented)
         {
             var request = new RecipesByIdsRequest(recipeIds);
-            using var response = await _http.SendAsync(request);
-            using var responseReader = new StreamReader(await response.Content.ReadAsStreamAsync());
-            using var jsonReader = new JsonTextReader(responseReader);
+            using var response = await _http.SendAsync(request, HttpCompletionOption.ResponseHeadersRead)
+                .ConfigureAwait(false);
             response.EnsureSuccessStatusCode();
 
             // API returns a JSON array but we want a List of JSON objects instead
-            var array = await JToken.ReadFromAsync(jsonReader);
-            return array.Children<JObject>().Select(recipe => recipe.ToString(indented ? Formatting.Indented : Formatting.None)).ToList();
+            using var json = await response.Content.ReadAsJsonAsync().ConfigureAwait(false);
+            return json.Indent(indented)
+                .RootElement.EnumerateArray()
+                .Select(item =>
+                    item.ToString() ?? throw new InvalidOperationException("Unexpected null in JSON array."))
+                .ToList();
         }
     }
 }

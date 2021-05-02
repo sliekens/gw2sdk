@@ -2,9 +2,8 @@
 using System.Net.Http;
 using System.Threading.Tasks;
 using GW2SDK.Annotations;
-using GW2SDK.Builds.Impl;
-using GW2SDK.Impl.JsonConverters;
-using Newtonsoft.Json;
+using GW2SDK.Builds.Http;
+using GW2SDK.Http;
 
 namespace GW2SDK.Builds
 {
@@ -13,18 +12,21 @@ namespace GW2SDK.Builds
     {
         private readonly HttpClient _http;
 
-        public BuildService(HttpClient http)
+        private readonly IBuildReader _buildReader;
+
+        public BuildService(HttpClient http, IBuildReader buildReader)
         {
             _http = http ?? throw new ArgumentNullException(nameof(http));
+            _buildReader = buildReader ?? throw new ArgumentNullException(nameof(buildReader));
         }
 
         public async Task<Build?> GetBuild()
         {
             var request = new BuildRequest();
-            using var response = await _http.SendAsync(request).ConfigureAwait(false);
+            using var response = await _http.SendAsync(request, HttpCompletionOption.ResponseHeadersRead).ConfigureAwait(false);
             response.EnsureSuccessStatusCode();
-            var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
-            return JsonConvert.DeserializeObject<Build>(json, Json.DefaultJsonSerializerSettings);
+            using var json = await response.Content.ReadAsJsonAsync().ConfigureAwait(false);
+            return _buildReader.Read(json);
         }
     }
 }

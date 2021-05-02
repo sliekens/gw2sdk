@@ -4,6 +4,7 @@ using static System.String;
 
 namespace GW2SDK
 {
+    [PublicAPI]
     public sealed class SchemaVersion : IComparable
     {
         public static readonly SchemaVersion Latest = new SchemaVersion("latest");

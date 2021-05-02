@@ -1,26 +1,21 @@
 ﻿using System;
 using System.Linq;
-using GW2SDK.Enums;
+using System.Text.Json;
+using GW2SDK.Json;
 using GW2SDK.Tests.Features.Tokens.Fixtures;
-using GW2SDK.Tests.TestInfrastructure;
 using GW2SDK.Tokens;
-using Newtonsoft.Json;
 using Xunit;
-using Xunit.Abstractions;
 
 namespace GW2SDK.Tests.Features.Tokens
 {
     public class ApiKeyInfoTest : IClassFixture<ApiKeyInfoFixture>
     {
-        public ApiKeyInfoTest(ApiKeyInfoFixture fixture, ITestOutputHelper output)
+        public ApiKeyInfoTest(ApiKeyInfoFixture fixture)
         {
             _fixture = fixture;
-            _output = output;
         }
 
         private readonly ApiKeyInfoFixture _fixture;
-
-        private readonly ITestOutputHelper _output;
 
         [Fact]
         [Trait("Feature",    "Tokens")]
@@ -28,12 +23,11 @@ namespace GW2SDK.Tests.Features.Tokens
         [Trait("Importance", "Critical")]
         public void ApiKeyInfo_can_be_created_from_json()
         {
-            var settings = new JsonSerializerSettingsBuilder()
-                .UseTraceWriter(_output)
-                .ThrowErrorOnMissingMember()
-                .Build();
+            var sut = new TokenInfoReader();
 
-            var actual = Assert.IsType<ApiKeyInfo>(JsonConvert.DeserializeObject<TokenInfo>(_fixture.ApiKeyInfoJson, settings));
+            using var document = JsonDocument.Parse(_fixture.ApiKeyInfoJson);
+
+            var actual = Assert.IsType<ApiKeyInfo>(sut.Read(document.RootElement, MissingMemberBehavior.Error));
 
             Assert.NotEmpty(actual.Id);
 

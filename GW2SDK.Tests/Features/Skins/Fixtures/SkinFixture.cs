@@ -6,7 +6,7 @@ namespace GW2SDK.Tests.Features.Skins.Fixtures
     {
         public SkinFixture()
         {
-            var reader = new JsonFlatFileReader();
+            var reader = new FlatFileReader();
             Db = new InMemorySkinDb(reader.Read("Data/skins.json"));
         }
 

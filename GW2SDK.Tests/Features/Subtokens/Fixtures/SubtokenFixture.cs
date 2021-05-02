@@ -1,6 +1,6 @@
 ﻿using System.Net.Http;
 using System.Threading.Tasks;
-using GW2SDK.Subtokens.Impl;
+using GW2SDK.Subtokens.Http;
 using GW2SDK.Tests.TestInfrastructure;
 using Xunit;
 
@@ -13,10 +13,10 @@ namespace GW2SDK.Tests.Features.Subtokens.Fixtures
         public async Task InitializeAsync()
         {
             await using var container = new Container();
-            var http = container.Resolve<IHttpClientFactory>().CreateClient("GW2SDK");
+            var http = container.Resolve<HttpClient>();
 
             var request = new CreateSubtokenRequest(ConfigurationManager.Instance.ApiKeyFull);
-            using var response = await http.SendAsync(request);
+            using var response = await http.SendAsync(request, HttpCompletionOption.ResponseHeadersRead);
             response.EnsureSuccessStatusCode();
             CreatedSubtoken = await response.Content.ReadAsStringAsync();
         }

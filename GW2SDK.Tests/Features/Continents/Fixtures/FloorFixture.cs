@@ -7,7 +7,7 @@ namespace GW2SDK.Tests.Features.Continents.Fixtures
     {
         public FloorFixture()
         {
-            var reader = new JsonFlatFileReader();
+            var reader = new FlatFileReader();
             Db = new InMemoryFloorDb(reader.Read("Data/continents_1_floors.json").Concat(reader.Read("Data/continents_2_floors.json")));
         }
 

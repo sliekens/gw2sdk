@@ -8,7 +8,7 @@ namespace GW2SDK.Tests.Features.Traits.Fixtures
     {
         public TraitsFixture()
         {
-            var reader = new JsonFlatFileReader();
+            var reader = new FlatFileReader();
             Traits = reader.Read("Data/traits.json").ToList().AsReadOnly();
         }
 
