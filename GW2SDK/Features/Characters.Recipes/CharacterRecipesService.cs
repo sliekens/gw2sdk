@@ -2,6 +2,7 @@
 using System.Net.Http;
 using System.Threading.Tasks;
 using GW2SDK.Annotations;
+using JetBrains.Annotations;
 using GW2SDK.Characters.Recipes.Http;
 using GW2SDK.Http;
 

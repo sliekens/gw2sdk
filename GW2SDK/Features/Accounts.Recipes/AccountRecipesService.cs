@@ -4,6 +4,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using GW2SDK.Accounts.Recipes.Http;
 using GW2SDK.Annotations;
+using JetBrains.Annotations;
 using GW2SDK.Http;
 
 namespace GW2SDK.Accounts.Recipes

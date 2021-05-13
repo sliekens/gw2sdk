@@ -1,4 +1,4 @@
-﻿using GW2SDK.Annotations;
+﻿using JetBrains.Annotations;
 using GW2SDK.Backstories.Questions;
 using GW2SDK.Json;
 

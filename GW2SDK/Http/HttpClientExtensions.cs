@@ -3,7 +3,7 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text.Json;
 using System.Threading.Tasks;
-using GW2SDK.Annotations;
+using JetBrains.Annotations;
 
 namespace GW2SDK.Http
 {

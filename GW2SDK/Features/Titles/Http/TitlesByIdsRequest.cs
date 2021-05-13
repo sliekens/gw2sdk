@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Net.Http;
-using GW2SDK.Annotations;
+using JetBrains.Annotations;
 using GW2SDK.Http;
 using static System.Net.Http.HttpMethod;
 

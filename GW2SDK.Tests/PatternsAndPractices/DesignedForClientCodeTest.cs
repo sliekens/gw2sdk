@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Reflection;
-using GW2SDK.Annotations;
+using JetBrains.Annotations;
 using GW2SDK.Tests.TestInfrastructure;
 using Xunit;
 
@@ -30,7 +30,7 @@ namespace GW2SDK.Tests.PatternsAndPractices
             Assert.All(visible,
                 type =>
                 {
-                    if (type.GetCustomAttribute<PublicAPIAttribute>() is object)
+                    if (type.GetCustomAttributes().Any(att => att.GetType().Name == "PublicAPIAttribute"))
                     {
                         return;
                     }
@@ -46,7 +46,7 @@ namespace GW2SDK.Tests.PatternsAndPractices
             Assert.All(invisible,
                 type =>
                 {
-                    if (type.GetCustomAttribute<PublicAPIAttribute>() is object)
+                    if (type.GetCustomAttributes().Any(att => att.GetType().Name == "PublicAPIAttribute"))
                     {
                         throw new ApplicationException($"Type '{type}' is invisible to client code, make it public or remove [PublicAPI].");
                     }

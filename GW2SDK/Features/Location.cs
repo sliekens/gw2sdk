@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using GW2SDK.Annotations;
+using JetBrains.Annotations;
 using static System.Reflection.BindingFlags;
 using static System.String;
 

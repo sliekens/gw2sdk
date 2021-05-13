@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Net.Http;
 using System.Threading.Tasks;
-using GW2SDK.Annotations;
+using JetBrains.Annotations;
 using GW2SDK.Http;
 using GW2SDK.Tokens.Http;
 

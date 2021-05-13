@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text.Json;
-using GW2SDK.Annotations;
+using JetBrains.Annotations;
 using GW2SDK.Json;
 
 namespace GW2SDK.Accounts.Banks

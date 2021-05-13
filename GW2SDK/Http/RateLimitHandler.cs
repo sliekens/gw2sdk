@@ -1,7 +1,7 @@
 ﻿using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
-using GW2SDK.Annotations;
+using JetBrains.Annotations;
 using static GW2SDK.Http.HttpStatusCodeEx;
 
 namespace GW2SDK.Http
