@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Linq;
 using System.Net.Http.Headers;
-using GW2SDK.Impl;
+using GW2SDK.Annotations;
 
 namespace GW2SDK.Http
 {
+    [PublicAPI]
     public static class HttpResponseHeaderExtensions
     {
         public static ICollectionContext GetCollectionContext(this HttpResponseHeaders instance)

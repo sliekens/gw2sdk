@@ -1,10 +1,8 @@
-﻿using System.IO;
-using System.Net.Http;
+﻿using System.Net.Http;
 using System.Threading.Tasks;
-using GW2SDK.Accounts.Banks.Impl;
+using GW2SDK.Accounts.Banks.Http;
+using GW2SDK.Http;
 using GW2SDK.Tests.TestInfrastructure;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 using Xunit;
 
 namespace GW2SDK.Tests.Features.Accounts.Banks.Fixtures
@@ -16,15 +14,12 @@ namespace GW2SDK.Tests.Features.Accounts.Banks.Fixtures
         public async Task InitializeAsync()
         {
             await using var container = new Container();
-            var http = container.Resolve<IHttpClientFactory>().CreateClient("GW2SDK");
+            var http = container.Resolve<HttpClient>();
             var request = new BankRequest(ConfigurationManager.Instance.ApiKeyFull);
-            using var response = await http.SendAsync(request);
-            using var responseReader = new StreamReader(await response.Content.ReadAsStreamAsync());
-            using var jsonReader = new JsonTextReader(responseReader);
+            using var response = await http.SendAsync(request, HttpCompletionOption.ResponseHeadersRead);
             response.EnsureSuccessStatusCode();
-
-            var array = await JArray.LoadAsync(jsonReader);
-            Bank = array.ToString(Formatting.None);
+            using var json = await response.Content.ReadAsJsonAsync();
+            Bank = json.Indent(false).RootElement.ToString();
         }
 
         public Task DisposeAsync() => Task.CompletedTask;

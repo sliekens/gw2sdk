@@ -1,10 +1,8 @@
-﻿using System.IO;
-using System.Net.Http;
+﻿using System.Net.Http;
 using System.Threading.Tasks;
-using GW2SDK.Accounts.Impl;
+using GW2SDK.Accounts.Http;
+using GW2SDK.Http;
 using GW2SDK.Tests.TestInfrastructure;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 using Xunit;
 
 namespace GW2SDK.Tests.Features.Accounts.Fixtures
@@ -16,7 +14,7 @@ namespace GW2SDK.Tests.Features.Accounts.Fixtures
         public async Task InitializeAsync()
         {
             await using var container = new Container();
-            var http = container.Resolve<IHttpClientFactory>().CreateClient("GW2SDK");
+            var http = container.Resolve<HttpClient>();
 
             var basic = await GetAccountRaw(http, ConfigurationManager.Instance.ApiKeyBasic);
             Db.SetBasicAccount(basic);
@@ -30,12 +28,10 @@ namespace GW2SDK.Tests.Features.Accounts.Fixtures
         private async Task<string> GetAccountRaw(HttpClient http, string accessToken)
         {
             var request = new AccountRequest(accessToken);
-            using var response = await http.SendAsync(request);
-            using var responseReader = new StreamReader(await response.Content.ReadAsStreamAsync());
-            using var jsonReader = new JsonTextReader(responseReader);
+            using var response = await http.SendAsync(request, HttpCompletionOption.ResponseHeadersRead);
             response.EnsureSuccessStatusCode();
-            var obj = await JToken.ReadFromAsync(jsonReader);
-            return obj.ToString(Formatting.None);
+            using var json = await response.Content.ReadAsJsonAsync();
+            return json.Indent(false).RootElement.ToString();
         }
     }
 }

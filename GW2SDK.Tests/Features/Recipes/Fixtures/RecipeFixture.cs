@@ -6,7 +6,7 @@ namespace GW2SDK.Tests.Features.Recipes.Fixtures
     {
         public RecipeFixture()
         {
-            var reader = new JsonFlatFileReader();
+            var reader = new FlatFileReader();
 
             Db = new InMemoryRecipeDb(reader.Read("Data/recipes.json"));
         }

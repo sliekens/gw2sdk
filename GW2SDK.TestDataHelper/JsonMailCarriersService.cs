@@ -1,11 +1,10 @@
-﻿using System.Collections.Generic;
-using System.IO;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
-using GW2SDK.MailCarriers.Impl;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
+using GW2SDK.Http;
+using GW2SDK.MailCarriers.Http;
 
 namespace GW2SDK.TestDataHelper
 {
@@ -21,14 +20,17 @@ namespace GW2SDK.TestDataHelper
         public async Task<List<string>> GetAllJsonMailCarriers(bool indented)
         {
             var request = new MailCarriersRequest();
-            using var response = await _http.SendAsync(request);
-            using var responseReader = new StreamReader(await response.Content.ReadAsStreamAsync());
-            using var jsonReader = new JsonTextReader(responseReader);
+            using var response = await _http.SendAsync(request, HttpCompletionOption.ResponseHeadersRead)
+                .ConfigureAwait(false);
             response.EnsureSuccessStatusCode();
 
             // API returns a JSON array but we want a List of JSON objects instead
-            var array = await JToken.ReadFromAsync(jsonReader);
-            return array.Children<JObject>().Select(obj => obj.ToString(indented ? Formatting.Indented : Formatting.None)).ToList();
+            using var json = await response.Content.ReadAsJsonAsync().ConfigureAwait(false);
+            return json.Indent(indented)
+                .RootElement.EnumerateArray()
+                .Select(item =>
+                    item.ToString() ?? throw new InvalidOperationException("Unexpected null in JSON array."))
+                .ToList();
         }
     }
 }

@@ -1,7 +1,7 @@
 ﻿using System;
 using GW2SDK.Annotations;
 
-namespace GW2SDK.Exceptions
+namespace GW2SDK
 {
     [PublicAPI]
     public sealed class UnauthorizedOperationException : InvalidOperationException

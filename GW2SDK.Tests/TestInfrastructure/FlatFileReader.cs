@@ -1,0 +1,25 @@
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
+
+namespace GW2SDK.Tests.TestInfrastructure
+{
+    public sealed class FlatFileReader
+    {
+        public IEnumerable<string> Read(string path)
+        {
+            if (string.IsNullOrEmpty(path))
+            {
+                throw new ArgumentException("Path cannot be null or empty.", nameof(path));
+            }
+
+            using var file = File.Open(path, FileMode.Open, FileAccess.Read, FileShare.None);
+            using var stringReader = new StreamReader(file);
+            string line;
+            while ((line = stringReader.ReadLine()) is string)
+            {
+                yield return line;
+            }
+        }
+    }
+}

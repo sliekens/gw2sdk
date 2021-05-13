@@ -2,11 +2,9 @@
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
-using GW2SDK.Accounts.Recipes.Impl;
+using GW2SDK.Accounts.Recipes.Http;
 using GW2SDK.Annotations;
-using GW2SDK.Enums;
-using GW2SDK.Impl.JsonConverters;
-using Newtonsoft.Json;
+using GW2SDK.Http;
 
 namespace GW2SDK.Accounts.Recipes
 {
@@ -15,20 +13,23 @@ namespace GW2SDK.Accounts.Recipes
     {
         private readonly HttpClient _http;
 
-        public AccountRecipesService(HttpClient http)
+        private readonly IAccountRecipeReader _accountRecipeReader;
+
+        public AccountRecipesService(HttpClient http, IAccountRecipeReader accountRecipeReader)
         {
             _http = http ?? throw new ArgumentNullException(nameof(http));
+            _accountRecipeReader = accountRecipeReader ?? throw new ArgumentNullException(nameof(accountRecipeReader));
         }
 
         [Scope(Permission.Unlocks)]
         public async Task<IReadOnlyCollection<int>> GetUnlockedRecipes(string? accessToken = null)
         {
             var request = new UnlockedRecipesRequest(accessToken);
-            using var response = await _http.SendAsync(request).ConfigureAwait(false);
+            using var response = await _http.SendAsync(request, HttpCompletionOption.ResponseHeadersRead).ConfigureAwait(false);
             response.EnsureSuccessStatusCode();
-            var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
+            using var json = await response.Content.ReadAsJsonAsync().ConfigureAwait(false);
             var list = new List<int>();
-            JsonConvert.PopulateObject(json, list, Json.DefaultJsonSerializerSettings);
+            list.AddRange(_accountRecipeReader.Id.ReadArray(json));
             return list.AsReadOnly();
         }
     }

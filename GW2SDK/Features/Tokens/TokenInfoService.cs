@@ -2,9 +2,8 @@
 using System.Net.Http;
 using System.Threading.Tasks;
 using GW2SDK.Annotations;
-using GW2SDK.Impl.JsonConverters;
-using GW2SDK.Tokens.Impl;
-using Newtonsoft.Json;
+using GW2SDK.Http;
+using GW2SDK.Tokens.Http;
 
 namespace GW2SDK.Tokens
 {
@@ -13,18 +12,21 @@ namespace GW2SDK.Tokens
     {
         private readonly HttpClient _http;
 
-        public TokenInfoService(HttpClient http)
+        private readonly ITokenInfoReader _tokenInfoReader;
+
+        public TokenInfoService(HttpClient http, ITokenInfoReader tokenInfoReader)
         {
             _http = http ?? throw new ArgumentNullException(nameof(http));
+            _tokenInfoReader = tokenInfoReader ?? throw new ArgumentNullException(nameof(tokenInfoReader));
         }
 
         public async Task<TokenInfo?> GetTokenInfo(string? accessToken)
         {
             var request = new TokenInfoRequest(accessToken);
-            using var response = await _http.SendAsync(request).ConfigureAwait(false);
+            using var response = await _http.SendAsync(request, HttpCompletionOption.ResponseHeadersRead).ConfigureAwait(false);
             response.EnsureSuccessStatusCode();
-            var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
-            return JsonConvert.DeserializeObject<TokenInfo>(json, Json.DefaultJsonSerializerSettings);
+            using var json = await response.Content.ReadAsJsonAsync().ConfigureAwait(false);
+            return _tokenInfoReader.Read(json);
         }
     }
 }

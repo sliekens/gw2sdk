@@ -27,7 +27,7 @@ jobs:
       env:
         NUGET_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
     - name: Install dependencies
-      run: dotnet restore
+      run: dotnet restore --locked-mode
     - name: Test
       run: dotnet test --no-restore --settings ${{ github.workspace }}/coverletArgs.runsettings
       env:

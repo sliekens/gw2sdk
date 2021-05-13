@@ -19,6 +19,9 @@ namespace GW2SDK.Tests.PatternsAndPractices
         [Fact]
         public void Every_exported_class_is_designed_for_inheritance_or_sealed()
         {
+            /*
+             * The goal of this test is to ensure that all unsealed types are designed for inheritance.
+             */
             var classes = _fixture.Assembly.ExportedTypes.Where(type => type.IsClass).ToList();
             Assert.All(classes,
                 type =>

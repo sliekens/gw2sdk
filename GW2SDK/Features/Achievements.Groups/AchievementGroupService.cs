@@ -3,12 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
-using GW2SDK.Achievements.Groups.Impl;
+using GW2SDK.Achievements.Groups.Http;
 using GW2SDK.Annotations;
 using GW2SDK.Http;
-using GW2SDK.Impl;
-using GW2SDK.Impl.JsonConverters;
-using Newtonsoft.Json;
 
 namespace GW2SDK.Achievements.Groups
 {
@@ -17,42 +14,45 @@ namespace GW2SDK.Achievements.Groups
     {
         private readonly HttpClient _http;
 
-        public AchievementGroupService(HttpClient http)
+        private readonly IAchievementGroupReader _achievementGroupReader;
+
+        public AchievementGroupService(HttpClient http, IAchievementGroupReader achievementGroupReader)
         {
             _http = http ?? throw new ArgumentNullException(nameof(http));
+            _achievementGroupReader = achievementGroupReader ?? throw new ArgumentNullException(nameof(achievementGroupReader));
         }
 
         public async Task<IDataTransferCollection<AchievementGroup>> GetAchievementGroups()
         {
             var request = new AchievementGroupsRequest();
-            using var response = await _http.SendAsync(request).ConfigureAwait(false);
+            using var response = await _http.SendAsync(request, HttpCompletionOption.ResponseHeadersRead).ConfigureAwait(false);
             response.EnsureSuccessStatusCode();
-            var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
+            using var json = await response.Content.ReadAsJsonAsync().ConfigureAwait(false);
             var context = response.Headers.GetCollectionContext();
             var list = new List<AchievementGroup>(context.ResultCount);
-            JsonConvert.PopulateObject(json, list, Json.DefaultJsonSerializerSettings);
+            list.AddRange(_achievementGroupReader.ReadArray(json));
             return new DataTransferCollection<AchievementGroup>(list, context);
         }
 
         public async Task<IDataTransferCollection<string>> GetAchievementGroupsIndex()
         {
             var request = new AchievementGroupsIndexRequest();
-            using var response = await _http.SendAsync(request).ConfigureAwait(false);
+            using var response = await _http.SendAsync(request, HttpCompletionOption.ResponseHeadersRead).ConfigureAwait(false);
             response.EnsureSuccessStatusCode();
-            var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
+            using var json = await response.Content.ReadAsJsonAsync().ConfigureAwait(false);
             var context = response.Headers.GetCollectionContext();
             var list = new List<string>(context.ResultCount);
-            JsonConvert.PopulateObject(json, list, Json.DefaultJsonSerializerSettings);
+            list.AddRange(_achievementGroupReader.Id.ReadArray(json));
             return new DataTransferCollection<string>(list, context);
         }
 
         public async Task<AchievementGroup?> GetAchievementGroupById(string achievementGroupId)
         {
             var request = new AchievementGroupByIdRequest(achievementGroupId);
-            using var response = await _http.SendAsync(request).ConfigureAwait(false);
+            using var response = await _http.SendAsync(request, HttpCompletionOption.ResponseHeadersRead).ConfigureAwait(false);
             response.EnsureSuccessStatusCode();
-            var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
-            return JsonConvert.DeserializeObject<AchievementGroup>(json, Json.DefaultJsonSerializerSettings);
+            using var json = await response.Content.ReadAsJsonAsync().ConfigureAwait(false);
+            return _achievementGroupReader.Read(json);
         }
 
         public async Task<IDataTransferCollection<AchievementGroup>> GetAchievementGroupsByIds(IReadOnlyCollection<string> achievementGroupIds)
@@ -73,24 +73,24 @@ namespace GW2SDK.Achievements.Groups
             }
 
             var request = new AchievementGroupsByIdsRequest(achievementGroupIds);
-            using var response = await _http.SendAsync(request).ConfigureAwait(false);
+            using var response = await _http.SendAsync(request, HttpCompletionOption.ResponseHeadersRead).ConfigureAwait(false);
             response.EnsureSuccessStatusCode();
-            var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
+            using var json = await response.Content.ReadAsJsonAsync().ConfigureAwait(false);
             var context = response.Headers.GetCollectionContext();
             var list = new List<AchievementGroup>(context.ResultCount);
-            JsonConvert.PopulateObject(json, list, Json.DefaultJsonSerializerSettings);
+            list.AddRange(_achievementGroupReader.ReadArray(json));
             return new DataTransferCollection<AchievementGroup>(list, context);
         }
 
         public async Task<IDataTransferPage<AchievementGroup>> GetAchievementGroupsByPage(int pageIndex, int? pageSize = null)
         {
             var request = new AchievementGroupsByPageRequest(pageIndex, pageSize);
-            using var response = await _http.SendAsync(request).ConfigureAwait(false);
+            using var response = await _http.SendAsync(request, HttpCompletionOption.ResponseHeadersRead).ConfigureAwait(false);
             response.EnsureSuccessStatusCode();
-            var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
+            using var json = await response.Content.ReadAsJsonAsync().ConfigureAwait(false);
             var pageContext = response.Headers.GetPageContext();
             var list = new List<AchievementGroup>(pageContext.PageSize);
-            JsonConvert.PopulateObject(json, list, Json.DefaultJsonSerializerSettings);
+            list.AddRange(_achievementGroupReader.ReadArray(json));
             return new DataTransferPage<AchievementGroup>(list, pageContext);
         }
     }

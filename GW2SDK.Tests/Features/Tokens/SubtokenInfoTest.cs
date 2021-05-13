@@ -1,26 +1,21 @@
 ﻿using System;
 using System.Linq;
-using GW2SDK.Enums;
+using System.Text.Json;
+using GW2SDK.Json;
 using GW2SDK.Tests.Features.Tokens.Fixtures;
-using GW2SDK.Tests.TestInfrastructure;
 using GW2SDK.Tokens;
-using Newtonsoft.Json;
 using Xunit;
-using Xunit.Abstractions;
 
 namespace GW2SDK.Tests.Features.Tokens
 {
     public class SubtokenInfoTest : IClassFixture<SubtokenInfoFixture>
     {
-        public SubtokenInfoTest(SubtokenInfoFixture fixture, ITestOutputHelper output)
+        public SubtokenInfoTest(SubtokenInfoFixture fixture)
         {
             _fixture = fixture;
-            _output = output;
         }
 
         private readonly SubtokenInfoFixture _fixture;
-
-        private readonly ITestOutputHelper _output;
 
         [Fact]
         [Trait("Feature",    "Tokens")]
@@ -28,12 +23,11 @@ namespace GW2SDK.Tests.Features.Tokens
         [Trait("Importance", "Critical")]
         public void SubtokenInfo_can_be_created_from_json()
         {
-            var settings = new JsonSerializerSettingsBuilder()
-                .UseTraceWriter(_output)
-                .ThrowErrorOnMissingMember()
-                .Build();
+            var sut = new TokenInfoReader();
 
-            var actual = Assert.IsType<SubtokenInfo>(JsonConvert.DeserializeObject<TokenInfo>(_fixture.SubtokenInfoJson, settings));
+            using var document = JsonDocument.Parse(_fixture.SubtokenInfoJson);
+
+            var actual = Assert.IsType<SubtokenInfo>(sut.Read(document.RootElement, MissingMemberBehavior.Error));
 
             Assert.NotEmpty(actual.Id);
 
