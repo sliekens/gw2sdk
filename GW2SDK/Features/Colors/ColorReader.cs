@@ -17,7 +17,7 @@ namespace GW2SDK.Colors
             var leather = new RequiredMember<ColorInfo>("leather");
             var metal = new RequiredMember<ColorInfo>("metal");
             var fur = new OptionalMember<ColorInfo>("fur");
-            var item = new NullableMember<int>("item");
+            var itemId = new NullableMember<int>("item");
             var categories = new RequiredMember<ColorCategoryName[]>("categories");
 
             foreach (var member in json.EnumerateObject())
@@ -50,9 +50,9 @@ namespace GW2SDK.Colors
                 {
                     fur = fur.From(member.Value);
                 }
-                else if (member.NameEquals(item.Name))
+                else if (member.NameEquals(itemId.Name))
                 {
-                    item = item.From(member.Value);
+                    itemId = itemId.From(member.Value);
                 }
                 else if (member.NameEquals(categories.Name))
                 {
@@ -73,7 +73,7 @@ namespace GW2SDK.Colors
                 Leather = leather.Select(value => ReadColorInfo(value, missingMemberBehavior)),
                 Metal = metal.Select(value => ReadColorInfo(value, missingMemberBehavior)),
                 Fur = fur.Select(value => ReadColorInfo(value, missingMemberBehavior)),
-                Item = item.GetValue(),
+                Item = itemId.GetValue(),
                 Categories = categories.GetValue()
             };
         }

@@ -3,7 +3,5 @@
 namespace GW2SDK.Recipes
 {
     [PublicAPI]
-    public sealed record RefinementObsidianRecipe : Recipe
-    {
-    }
+    public sealed record RefinementObsidianRecipe : Recipe;
 }

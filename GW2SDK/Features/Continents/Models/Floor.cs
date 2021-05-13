@@ -13,6 +13,6 @@ namespace GW2SDK.Continents
 
         public double[][]? ClampedView { get; init; }
 
-        public Dictionary<int, Region> Regions { get; init; } = new Dictionary<int, Region>(0);
+        public Dictionary<int, Region> Regions { get; init; } = new(0);
     }
 }

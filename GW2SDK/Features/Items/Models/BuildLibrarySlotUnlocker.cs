@@ -3,7 +3,5 @@
 namespace GW2SDK.Items
 {
     [PublicAPI]
-    public sealed record BuildLibrarySlotUnlocker : Unlocker
-    {
-    }
+    public sealed record BuildLibrarySlotUnlocker : Unlocker;
 }

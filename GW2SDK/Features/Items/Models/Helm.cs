@@ -3,7 +3,5 @@
 namespace GW2SDK.Items
 {
     [PublicAPI]
-    public sealed record Helm : Armor
-    {
-    }
+    public sealed record Helm : Armor;
 }

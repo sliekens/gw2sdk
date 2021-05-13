@@ -30,7 +30,7 @@ namespace GW2SDK
 
         public override bool Equals(object obj)
         {
-            if (!(obj is Location other))
+            if (obj is not Location other)
             {
                 return false;
             }

@@ -3,7 +3,5 @@
 namespace GW2SDK.Recipes
 {
     [PublicAPI]
-    public sealed record ShortbowRecipe : Recipe
-    {
-    }
+    public sealed record ShortbowRecipe : Recipe;
 }

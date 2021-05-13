@@ -5,7 +5,5 @@ namespace GW2SDK.Achievements
     [PublicAPI]
     [Inheritable]
     [DataTransferObject(RootObject = false)]
-    public record AchievementReward
-    {
-    }
+    public record AchievementReward;
 }

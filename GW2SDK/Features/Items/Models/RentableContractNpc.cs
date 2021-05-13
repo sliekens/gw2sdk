@@ -3,7 +3,5 @@
 namespace GW2SDK.Items
 {
     [PublicAPI]
-    public sealed record RentableContractNpc : Gizmo
-    {
-    }
+    public sealed record RentableContractNpc : Gizmo;
 }

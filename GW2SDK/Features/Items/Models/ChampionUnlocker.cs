@@ -3,7 +3,5 @@
 namespace GW2SDK.Items
 {
     [PublicAPI]
-    public sealed record ChampionUnlocker : Unlocker
-    {
-    }
+    public sealed record ChampionUnlocker : Unlocker;
 }

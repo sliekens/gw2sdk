@@ -3,7 +3,5 @@
 namespace GW2SDK.Items
 {
     [PublicAPI]
-    public sealed record UpgradeRemover : Consumable
-    {
-    }
+    public sealed record UpgradeRemover : Consumable;
 }

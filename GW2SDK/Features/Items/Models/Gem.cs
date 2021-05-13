@@ -3,7 +3,5 @@
 namespace GW2SDK.Items
 {
     [PublicAPI]
-    public sealed record Gem : UpgradeComponent
-    {
-    }
+    public sealed record Gem : UpgradeComponent;
 }

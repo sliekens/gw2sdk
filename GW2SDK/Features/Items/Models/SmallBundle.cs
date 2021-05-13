@@ -3,7 +3,5 @@
 namespace GW2SDK.Items
 {
     [PublicAPI]
-    public sealed record SmallBundle : Weapon
-    {
-    }
+    public sealed record SmallBundle : Weapon;
 }

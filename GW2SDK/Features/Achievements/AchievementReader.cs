@@ -322,6 +322,7 @@ namespace GW2SDK.Achievements
                 }
             }
 
+            // ReSharper disable once ForeachCanBePartlyConvertedToQueryUsingAnotherGetEnumerator
             foreach (var member in json.EnumerateObject())
             {
                 if (missingMemberBehavior == MissingMemberBehavior.Error)
@@ -447,6 +448,7 @@ namespace GW2SDK.Achievements
                     return ReadTitleReward(json, missingMemberBehavior);
             }
 
+            // ReSharper disable once ForeachCanBePartlyConvertedToQueryUsingAnotherGetEnumerator
             foreach (var member in json.EnumerateObject())
             {
                 if (missingMemberBehavior == MissingMemberBehavior.Error)

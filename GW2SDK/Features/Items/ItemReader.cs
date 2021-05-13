@@ -7224,7 +7224,7 @@ namespace GW2SDK.Items
                 }
             }
 
-            return new Minipet()
+            return new Minipet
             {
                 Id = id.GetValue(),
                 Name = name.GetValue(),

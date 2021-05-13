@@ -4,7 +4,5 @@ namespace GW2SDK.Items
 {
     [PublicAPI]
     [Inheritable]
-    public record Consumable : Item
-    {
-    }
+    public record Consumable : Item;
 }

@@ -3,7 +3,5 @@
 namespace GW2SDK.Skins
 {
     [PublicAPI]
-    public sealed record CoatSkin : ArmorSkin
-    {
-    }
+    public sealed record CoatSkin : ArmorSkin;
 }

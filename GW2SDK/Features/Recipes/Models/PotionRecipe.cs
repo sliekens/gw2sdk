@@ -3,7 +3,5 @@
 namespace GW2SDK.Recipes
 {
     [PublicAPI]
-    public sealed record PotionRecipe : Recipe
-    {
-    }
+    public sealed record PotionRecipe : Recipe;
 }

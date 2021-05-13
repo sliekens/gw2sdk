@@ -3,7 +3,5 @@
 namespace GW2SDK.Items
 {
     [PublicAPI]
-    public sealed record Dagger : Weapon
-    {
-    }
+    public sealed record Dagger : Weapon;
 }

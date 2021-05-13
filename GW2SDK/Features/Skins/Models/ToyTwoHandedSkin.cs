@@ -3,7 +3,5 @@
 namespace GW2SDK.Skins
 {
     [PublicAPI]
-    public sealed record ToyTwoHandedSkin : WeaponSkin
-    {
-    }
+    public sealed record ToyTwoHandedSkin : WeaponSkin;
 }

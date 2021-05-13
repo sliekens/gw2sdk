@@ -3,7 +3,5 @@
 namespace GW2SDK.Items
 {
     [PublicAPI]
-    public sealed record LoggingTool : GatheringTool
-    {
-    }
+    public sealed record LoggingTool : GatheringTool;
 }

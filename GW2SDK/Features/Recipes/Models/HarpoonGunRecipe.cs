@@ -3,7 +3,5 @@
 namespace GW2SDK.Recipes
 {
     [PublicAPI]
-    public sealed record HarpoonGunRecipe : Recipe
-    {
-    }
+    public sealed record HarpoonGunRecipe : Recipe;
 }

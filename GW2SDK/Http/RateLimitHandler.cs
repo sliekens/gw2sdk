@@ -24,22 +24,24 @@ namespace GW2SDK.Http
         )
         {
             var response = await base.SendAsync(request, cancellationToken).ConfigureAwait(false);
-            if (response.StatusCode is TooManyRequests)
+            if (response.StatusCode is not TooManyRequests)
             {
-                if (response.Content.Headers.ContentType.MediaType == "application/json")
-                {
-                    using var json = await response.Content.ReadAsJsonAsync().ConfigureAwait(false);
-                    if (json.RootElement.TryGetProperty("text", out var text))
-                    {
-                        var reason = text.GetString();
-                        throw new TooManyRequestsException(reason);
-                    }
-                }
+                return response;
+            }
 
+            if (response.Content.Headers.ContentType.MediaType != "application/json")
+            {
                 throw new TooManyRequestsException("");
             }
 
-            return response;
+            using var json = await response.Content.ReadAsJsonAsync().ConfigureAwait(false);
+            if (!json.RootElement.TryGetProperty("text", out var text))
+            {
+                throw new TooManyRequestsException("");
+            }
+
+            var reason = text.GetString();
+            throw new TooManyRequestsException(reason);
         }
     }
 }

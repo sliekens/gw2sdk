@@ -1,6 +1,4 @@
 ﻿namespace GW2SDK.Continents
 {
-    public sealed record Vista : PointOfInterest
-    {
-    }
+    public sealed record Vista : PointOfInterest;
 }

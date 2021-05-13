@@ -39,7 +39,7 @@ namespace GW2SDK.V2
             return new ApiInfo
             {
                 Languages = languages.Select(value => ReadLanguages(value)),
-                Routes = routes.Select(json => ReadRoutes(json, missingMemberBehavior)), 
+                Routes = routes.Select(value => ReadRoutes(value, missingMemberBehavior)), 
                 SchemaVersions = schemaVersions.Select(value => ReadApiVersions(value, missingMemberBehavior))
             };
         }

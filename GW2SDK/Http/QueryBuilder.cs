@@ -7,7 +7,7 @@ using Argument = System.Collections.Generic.KeyValuePair<string, string>;
 
 namespace GW2SDK.Http
 {
-    /// <summary>Used to build a query string, e.g. <c>"id=123&lang=fr"</c>. Not meant to be used directly.</summary>
+    /// <summary>Used to build a query string, e.g. <c>"id=123&amp;lang=fr"</c>. Not meant to be used directly.</summary>
     [PublicAPI]
     public sealed class QueryBuilder
     {

@@ -3,7 +3,5 @@
 namespace GW2SDK.Items
 {
     [PublicAPI]
-    public sealed record ContainerKey : Gizmo
-    {
-    }
+    public sealed record ContainerKey : Gizmo;
 }

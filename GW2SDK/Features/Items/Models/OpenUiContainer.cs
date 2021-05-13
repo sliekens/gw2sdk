@@ -3,7 +3,5 @@
 namespace GW2SDK.Items
 {
     [PublicAPI]
-    public sealed record OpenUiContainer : Container
-    {
-    }
+    public sealed record OpenUiContainer : Container;
 }
