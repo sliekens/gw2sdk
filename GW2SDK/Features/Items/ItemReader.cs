@@ -8281,10 +8281,8 @@ namespace GW2SDK.Items
                 Restrictions = restrictions.GetValue(),
                 ChatLink = chatLink.GetValue(),
                 Icon = icon.GetValueOrNull(),
-                UpgradeComponentFlags =
-                    upgradeComponentFlags.Select(value => value.GetArray(item => Enum.Parse<UpgradeComponentFlag>(item.GetString(), true))),
-                InfusionUpgradeFlags =
-                    infusionUpgradeFlags.Select(value => value.GetArray(item => Enum.Parse<InfusionSlotFlag>(item.GetString(), true))),
+                UpgradeComponentFlags = upgradeComponentFlags.GetValue(),
+                InfusionUpgradeFlags = infusionUpgradeFlags.GetValue(),
                 AttributeAdjustment = attributeAdjustment.GetValue(),
                 Suffix = infixUpgrade.Select(value => ReadInfixUpgrade(value, missingMemberBehavior)),
                 SuffixName = suffix.GetValue()
@@ -8423,10 +8421,8 @@ namespace GW2SDK.Items
                 Restrictions = restrictions.GetValue(),
                 ChatLink = chatLink.GetValue(),
                 Icon = icon.GetValueOrNull(),
-                UpgradeComponentFlags =
-                    upgradeComponentFlags.Select(value => value.GetArray(item => Enum.Parse<UpgradeComponentFlag>(item.GetString(), true))),
-                InfusionUpgradeFlags =
-                    infusionUpgradeFlags.Select(value => value.GetArray(item => Enum.Parse<InfusionSlotFlag>(item.GetString(), true))),
+                UpgradeComponentFlags = upgradeComponentFlags.GetValue(),
+                InfusionUpgradeFlags = infusionUpgradeFlags.GetValue(),
                 AttributeAdjustment = attributeAdjustment.GetValue(),
                 Suffix = infixUpgrade.Select(value => ReadInfixUpgrade(value, missingMemberBehavior)),
                 SuffixName = suffix.GetValue(),
@@ -8562,10 +8558,8 @@ namespace GW2SDK.Items
                 Restrictions = restrictions.GetValue(),
                 ChatLink = chatLink.GetValue(),
                 Icon = icon.GetValueOrNull(),
-                UpgradeComponentFlags =
-                    upgradeComponentFlags.Select(value => value.GetArray(item => Enum.Parse<UpgradeComponentFlag>(item.GetString(), true))),
-                InfusionUpgradeFlags =
-                    infusionUpgradeFlags.Select(value => value.GetArray(item => Enum.Parse<InfusionSlotFlag>(item.GetString(), true))),
+                UpgradeComponentFlags = upgradeComponentFlags.GetValue(),
+                InfusionUpgradeFlags = infusionUpgradeFlags.GetValue(),
                 AttributeAdjustment = attributeAdjustment.GetValue(),
                 Suffix = infixUpgrade.Select(value => ReadInfixUpgrade(value, missingMemberBehavior)),
                 SuffixName = suffix.GetValue()
@@ -8706,9 +8700,9 @@ namespace GW2SDK.Items
                 ChatLink = chatLink.GetValue(),
                 Icon = icon.GetValueOrNull(),
                 UpgradeComponentFlags =
-                    upgradeComponentFlags.Select(value => value.GetArray(item => Enum.Parse<UpgradeComponentFlag>(item.GetString(), true))),
+                    upgradeComponentFlags.GetValue(),
                 InfusionUpgradeFlags =
-                    infusionUpgradeFlags.Select(value => value.GetArray(item => Enum.Parse<InfusionSlotFlag>(item.GetString(), true))),
+                    infusionUpgradeFlags.GetValue(),
                 AttributeAdjustment = attributeAdjustment.GetValue(),
                 Suffix = infixUpgrade.Select(value => ReadInfixUpgrade(value, missingMemberBehavior)),
                 SuffixName = suffix.GetValue(),
@@ -8845,9 +8839,9 @@ namespace GW2SDK.Items
                 ChatLink = chatLink.GetValue(),
                 Icon = icon.GetValueOrNull(),
                 UpgradeComponentFlags =
-                    upgradeComponentFlags.Select(value => value.GetArray(item => Enum.Parse<UpgradeComponentFlag>(item.GetString(), true))),
+                    upgradeComponentFlags.GetValue(),
                 InfusionUpgradeFlags =
-                    infusionUpgradeFlags.Select(value => value.GetArray(item => Enum.Parse<InfusionSlotFlag>(item.GetString(), true))),
+                    infusionUpgradeFlags.GetValue(),
                 AttributeAdjustment = attributeAdjustment.GetValue(),
                 Suffix = infixUpgrade.Select(value => ReadInfixUpgrade(value, missingMemberBehavior)),
                 SuffixName = suffix.GetValue()

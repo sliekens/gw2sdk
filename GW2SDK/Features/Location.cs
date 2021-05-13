@@ -12,7 +12,7 @@ namespace GW2SDK
     // Against: not every route parameter has a placeholder, e.g. "/v2/continents/:id" is missing
     // 
     [PublicAPI]
-    public sealed class Location : IComparable
+    public sealed class Location
     {
         private Location(string path)
         {
@@ -25,20 +25,6 @@ namespace GW2SDK
         }
 
         public string Path { get; }
-
-        public int CompareTo(object obj) => Compare(Path, ((Location) obj).Path, StringComparison.Ordinal);
-
-        public override bool Equals(object obj)
-        {
-            if (obj is not Location other)
-            {
-                return false;
-            }
-
-            return Path == other.Path;
-        }
-
-        public override int GetHashCode() => Path.GetHashCode();
 
         public override string ToString() => Path;
 

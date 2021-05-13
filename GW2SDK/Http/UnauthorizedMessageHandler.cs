@@ -29,7 +29,7 @@ namespace GW2SDK.Http
                 return response;
             }
 
-            if (response.Content.Headers.ContentType.MediaType != "application/json")
+            if (response.Content.Headers.ContentType?.MediaType != "application/json")
             {
                 throw new UnauthorizedOperationException("");
             }
