@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using GW2SDK.Annotations;
+using JetBrains.Annotations;
 using static System.Globalization.NumberFormatInfo;
 using Argument = System.Collections.Generic.KeyValuePair<string, string>;
 

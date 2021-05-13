@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Reflection;
-using GW2SDK.Annotations;
+using JetBrains.Annotations;
 using GW2SDK.Tests.TestInfrastructure;
 using Xunit;
 
@@ -36,7 +36,7 @@ namespace GW2SDK.Tests.PatternsAndPractices
                         return;
                     }
 
-                    if (type.GetCustomAttribute<InheritableAttribute>() is object)
+                    if (type.GetCustomAttributes().Any(att => att.GetType().Name == "InheritableAttribute"))
                     {
                         return;
                     }

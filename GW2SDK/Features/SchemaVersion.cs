@@ -1,5 +1,5 @@
 ﻿using System;
-using GW2SDK.Annotations;
+using JetBrains.Annotations;
 using static System.String;
 
 namespace GW2SDK

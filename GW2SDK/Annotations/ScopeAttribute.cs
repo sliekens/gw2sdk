@@ -2,9 +2,8 @@
 
 namespace GW2SDK.Annotations
 {
-    [PublicAPI]
     [AttributeUsage(AttributeTargets.Method | AttributeTargets.Property)]
-    public sealed class ScopeAttribute : Attribute
+    internal sealed class ScopeAttribute : Attribute
     {
         public ScopeAttribute(Permission permission)
         {

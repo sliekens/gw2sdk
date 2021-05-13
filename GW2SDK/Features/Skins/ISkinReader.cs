@@ -1,4 +1,4 @@
-﻿using GW2SDK.Annotations;
+﻿using JetBrains.Annotations;
 using GW2SDK.Json;
 
 namespace GW2SDK.Skins
