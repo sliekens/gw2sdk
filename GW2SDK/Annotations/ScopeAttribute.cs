@@ -1,8 +1,8 @@
 ﻿using System;
-using GW2SDK.Enums;
 
 namespace GW2SDK.Annotations
 {
+    [PublicAPI]
     [AttributeUsage(AttributeTargets.Method | AttributeTargets.Property)]
     public sealed class ScopeAttribute : Attribute
     {

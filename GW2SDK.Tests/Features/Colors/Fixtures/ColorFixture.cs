@@ -6,7 +6,7 @@ namespace GW2SDK.Tests.Features.Colors.Fixtures
     {
         public ColorFixture()
         {
-            var reader = new JsonFlatFileReader();
+            var reader = new FlatFileReader();
             Db = new InMemoryColorDb(reader.Read("Data/colors.json"));
         }
 

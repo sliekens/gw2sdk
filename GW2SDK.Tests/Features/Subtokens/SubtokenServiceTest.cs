@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using GW2SDK.Exceptions;
 using GW2SDK.Subtokens;
 using GW2SDK.Tests.TestInfrastructure;
 using GW2SDK.Tokens;

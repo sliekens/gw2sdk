@@ -3,10 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
-using GW2SDK.Enums;
 using GW2SDK.Subtokens;
 using GW2SDK.Tests.TestInfrastructure;
-using GW2SDK.Tokens.Impl;
+using GW2SDK.Tokens.Http;
 using Xunit;
 
 namespace GW2SDK.Tests.Features.Tokens.Fixtures
@@ -26,9 +25,9 @@ namespace GW2SDK.Tests.Features.Tokens.Fixtures
         public async Task InitializeAsync()
         {
             await using var container = new Container();
-            var http = container.Resolve<IHttpClientFactory>().CreateClient("GW2SDK");
+            var http = container.Resolve<HttpClient>();
 
-            var subtokenService = new SubtokenService(http);
+            var subtokenService = container.Resolve<SubtokenService>();
 
             SubtokenPermissions = Enum.GetValues(typeof(Permission)).Cast<Permission>().ToList();
 
@@ -42,7 +41,7 @@ namespace GW2SDK.Tests.Features.Tokens.Fixtures
             var createdSubtoken = await subtokenService.CreateSubtoken(ConfigurationManager.Instance.ApiKeyFull, SubtokenPermissions, ExpiresAt, Urls);
 
             var request = new TokenInfoRequest(createdSubtoken.Subtoken);
-            using var response = await http.SendAsync(request);
+            using var response = await http.SendAsync(request, HttpCompletionOption.ResponseHeadersRead);
             response.EnsureSuccessStatusCode();
             CreatedSubtokenDate = response.Headers.Date.GetValueOrDefault(DateTimeOffset.Now);
             SubtokenInfoJson = await response.Content.ReadAsStringAsync();

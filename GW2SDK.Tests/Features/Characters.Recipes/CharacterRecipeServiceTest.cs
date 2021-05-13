@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
 using GW2SDK.Characters.Recipes;
-using GW2SDK.Exceptions;
 using GW2SDK.Tests.TestInfrastructure;
 using Xunit;
 

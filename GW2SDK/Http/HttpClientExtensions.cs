@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Text.Json;
+using System.Threading.Tasks;
 using GW2SDK.Annotations;
 
 namespace GW2SDK.Http
 {
-    [UsedImplicitly(ImplicitUseTargetFlags.WithMembers)]
+    [PublicAPI]
     public static class HttpClientExtensions
     {
         public static void UseAccessToken(this HttpClient instance, string accessToken)
@@ -42,6 +44,13 @@ namespace GW2SDK.Http
             instance.DefaultRequestHeaders.AcceptEncoding.Add(new StringWithQualityHeaderValue("gzip"));
             instance.DefaultRequestHeaders.AcceptEncoding.Add(new StringWithQualityHeaderValue("deflate",  0.5));
             instance.DefaultRequestHeaders.AcceptEncoding.Add(new StringWithQualityHeaderValue("identity", 0));
+        }
+
+        public static async Task<JsonDocument> ReadAsJsonAsync(this HttpContent instance)
+        {
+            if (instance == null) throw new ArgumentNullException(nameof(instance));
+            await using var content = await instance.ReadAsStreamAsync().ConfigureAwait(false);
+            return await JsonDocument.ParseAsync(content).ConfigureAwait(false);
         }
     }
 }

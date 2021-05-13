@@ -1,6 +1,6 @@
 ﻿using System.Net.Http;
 using System.Threading.Tasks;
-using GW2SDK.Impl.V2.Impl;
+using GW2SDK.V2.Http;
 
 namespace GW2SDK.TestDataHelper
 {
@@ -16,9 +16,9 @@ namespace GW2SDK.TestDataHelper
         public async Task<string> GetJsonApiInfo()
         {
             var request = new ApiInfoRequest();
-            using var response = await _http.SendAsync(request).ConfigureAwait(false);
+            using var response = await _http.SendAsync(request, HttpCompletionOption.ResponseHeadersRead).ConfigureAwait(false);
             response.EnsureSuccessStatusCode();
-            return await response.Content.ReadAsStringAsync();
+            return await response.Content.ReadAsStringAsync().ConfigureAwait(false);
         }
     }
 }

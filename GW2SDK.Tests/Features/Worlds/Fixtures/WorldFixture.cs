@@ -6,7 +6,7 @@ namespace GW2SDK.Tests.Features.Worlds.Fixtures
     {
         public WorldFixture()
         {
-            var reader = new JsonFlatFileReader();
+            var reader = new FlatFileReader();
             Db = new InMemoryWorldDb(reader.Read("Data/worlds.json"));
         }
 

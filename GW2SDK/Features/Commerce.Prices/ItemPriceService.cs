@@ -3,11 +3,8 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
 using GW2SDK.Annotations;
-using GW2SDK.Commerce.Prices.Impl;
+using GW2SDK.Commerce.Prices.Http;
 using GW2SDK.Http;
-using GW2SDK.Impl;
-using GW2SDK.Impl.JsonConverters;
-using Newtonsoft.Json;
 
 namespace GW2SDK.Commerce.Prices
 {
@@ -16,30 +13,33 @@ namespace GW2SDK.Commerce.Prices
     {
         private readonly HttpClient _http;
 
-        public ItemPriceService(HttpClient http)
+        private readonly IItemPriceReader _itemPriceReader;
+
+        public ItemPriceService(HttpClient http, IItemPriceReader itemPriceReader)
         {
             _http = http ?? throw new ArgumentNullException(nameof(http));
+            _itemPriceReader = itemPriceReader ?? throw new ArgumentNullException(nameof(itemPriceReader));
         }
 
         public async Task<IDataTransferCollection<int>> GetItemPricesIndex()
         {
             var request = new ItemPricesIndexRequest();
-            using var response = await _http.SendAsync(request).ConfigureAwait(false);
+            using var response = await _http.SendAsync(request, HttpCompletionOption.ResponseHeadersRead).ConfigureAwait(false);
             response.EnsureSuccessStatusCode();
-            var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
+            using var json = await response.Content.ReadAsJsonAsync().ConfigureAwait(false);
             var context = response.Headers.GetCollectionContext();
             var list = new List<int>(context.ResultCount);
-            JsonConvert.PopulateObject(json, list, Json.DefaultJsonSerializerSettings);
+            list.AddRange(_itemPriceReader.Id.ReadArray(json));
             return new DataTransferCollection<int>(list, context);
         }
 
-        public async Task<ItemPrice?> GetItemPriceById(int itemId)
+        public async Task<ItemPrice> GetItemPriceById(int itemId)
         {
             var request = new ItemPriceByIdRequest(itemId);
-            using var response = await _http.SendAsync(request).ConfigureAwait(false);
+            using var response = await _http.SendAsync(request, HttpCompletionOption.ResponseHeadersRead).ConfigureAwait(false);
             response.EnsureSuccessStatusCode();
-            var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
-            return JsonConvert.DeserializeObject<ItemPrice>(json, Json.DefaultJsonSerializerSettings);
+            using var json = await response.Content.ReadAsJsonAsync().ConfigureAwait(false);
+            return _itemPriceReader.Read(json);
         }
 
         public async Task<IDataTransferCollection<ItemPrice>> GetItemPricesByIds(IReadOnlyCollection<int> itemIds)
@@ -55,12 +55,12 @@ namespace GW2SDK.Commerce.Prices
             }
 
             var request = new ItemPricesByIdsRequest(itemIds);
-            using var response = await _http.SendAsync(request).ConfigureAwait(false);
+            using var response = await _http.SendAsync(request, HttpCompletionOption.ResponseHeadersRead).ConfigureAwait(false);
             response.EnsureSuccessStatusCode();
-            var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
+            using var json = await response.Content.ReadAsJsonAsync().ConfigureAwait(false);
             var context = response.Headers.GetCollectionContext();
             var list = new List<ItemPrice>(context.ResultCount);
-            JsonConvert.PopulateObject(json, list, Json.DefaultJsonSerializerSettings);
+            list.AddRange(_itemPriceReader.ReadArray(json));
             return new DataTransferCollection<ItemPrice>(list, context);
         }
     }

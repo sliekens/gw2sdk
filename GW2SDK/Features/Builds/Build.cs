@@ -1,13 +1,11 @@
 ﻿using GW2SDK.Annotations;
-using Newtonsoft.Json;
 
 namespace GW2SDK.Builds
 {
     [PublicAPI]
     [DataTransferObject]
-    public sealed class Build
+    public sealed record Build
     {
-        [JsonProperty(Required = Required.Always)]
-        public int Id { get; set; }
+        public int Id { get; init; }
     }
 }

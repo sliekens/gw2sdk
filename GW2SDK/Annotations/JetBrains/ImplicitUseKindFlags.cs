@@ -1,4 +1,5 @@
 ﻿using System;
+// ReSharper disable All
 
 #nullable disable
 namespace GW2SDK.Annotations

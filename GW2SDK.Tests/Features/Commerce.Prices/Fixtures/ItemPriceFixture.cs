@@ -6,7 +6,7 @@ namespace GW2SDK.Tests.Features.Commerce.Prices.Fixtures
     {
         public ItemPriceFixture()
         {
-            var reader = new JsonFlatFileReader();
+            var reader = new FlatFileReader();
             Db = new InMemoryItemPriceDb(reader.Read("Data/prices.json"));
         }
 

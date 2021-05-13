@@ -8,7 +8,7 @@ namespace GW2SDK.Tests.Features.MailCarriers.Fixtures
     {
         public MailCarriersFixture()
         {
-            var reader = new JsonFlatFileReader();
+            var reader = new FlatFileReader();
             MailCarriers = reader.Read("Data/mailCarriers.json").ToList().AsReadOnly();
         }
 

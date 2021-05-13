@@ -6,7 +6,7 @@ namespace GW2SDK.Tests.Features.Continents.Fixtures
     {
         public ContinentFixture()
         {
-            var reader = new JsonFlatFileReader();
+            var reader = new FlatFileReader();
             Db = new InMemoryContinentDb(reader.Read("Data/continents.json"));
         }
 

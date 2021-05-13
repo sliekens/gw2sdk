@@ -2,7 +2,7 @@
 
 namespace GW2SDK.Annotations
 {
-    [MeansImplicitUse(ImplicitUseTargetFlags.WithMembers)]
+    [PublicAPI]
     [AttributeUsage(AttributeTargets.Class)]
     public sealed class DataTransferObjectAttribute : Attribute
     {

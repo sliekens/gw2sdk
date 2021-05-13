@@ -1,5 +1,6 @@
 ﻿using System.Net;
 using System.Net.Http;
+using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -18,6 +19,6 @@ namespace GW2SDK.Tests.Http
         internal string Content { get; }
 
         protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken) =>
-            Task.FromResult(new HttpResponseMessage(Code) { Content = new StringContent(Content) });
+            Task.FromResult(new HttpResponseMessage(Code) { Content = new StringContent(Content, Encoding.UTF8, "application/json") });
     }
 }

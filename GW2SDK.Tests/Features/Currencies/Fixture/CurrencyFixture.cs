@@ -8,7 +8,7 @@ namespace GW2SDK.Tests.Features.Currencies.Fixture
     {
         public CurrencyFixture()
         {
-            var reader = new JsonFlatFileReader();
+            var reader = new FlatFileReader();
             Currencies = reader.Read("Data/currencies.json").ToList().AsReadOnly();
         }
 

@@ -3,11 +3,8 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
 using GW2SDK.Annotations;
-using GW2SDK.Currencies.Impl;
+using GW2SDK.Currencies.Http;
 using GW2SDK.Http;
-using GW2SDK.Impl;
-using GW2SDK.Impl.JsonConverters;
-using Newtonsoft.Json;
 
 namespace GW2SDK.Currencies
 {
@@ -15,43 +12,45 @@ namespace GW2SDK.Currencies
     public sealed class CurrencyService
     {
         private readonly HttpClient _http;
+        private readonly ICurrencyReader _currencyReader;
 
-        public CurrencyService(HttpClient http)
+        public CurrencyService(HttpClient http, ICurrencyReader currencyReader)
         {
             _http = http ?? throw new ArgumentNullException(nameof(http));
+            _currencyReader = currencyReader ?? throw new ArgumentNullException(nameof(currencyReader));
         }
 
         public async Task<IDataTransferCollection<Currency>> GetCurrencies()
         {
             var request = new CurrenciesRequest();
-            using var response = await _http.SendAsync(request).ConfigureAwait(false);
+            using var response = await _http.SendAsync(request, HttpCompletionOption.ResponseHeadersRead).ConfigureAwait(false);
             response.EnsureSuccessStatusCode();
-            var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
+            using var json = await response.Content.ReadAsJsonAsync().ConfigureAwait(false);
             var context = response.Headers.GetCollectionContext();
             var list = new List<Currency>(context.ResultCount);
-            JsonConvert.PopulateObject(json, list, Json.DefaultJsonSerializerSettings);
+            list.AddRange(_currencyReader.ReadArray(json));
             return new DataTransferCollection<Currency>(list, context);
         }
 
         public async Task<IDataTransferCollection<int>> GetCurrenciesIndex()
         {
             var request = new CurrenciesIndexRequest();
-            using var response = await _http.SendAsync(request).ConfigureAwait(false);
+            using var response = await _http.SendAsync(request, HttpCompletionOption.ResponseHeadersRead).ConfigureAwait(false);
             response.EnsureSuccessStatusCode();
-            var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
+            using var json = await response.Content.ReadAsJsonAsync().ConfigureAwait(false);
             var context = response.Headers.GetCollectionContext();
             var list = new List<int>(context.ResultCount);
-            JsonConvert.PopulateObject(json, list, Json.DefaultJsonSerializerSettings);
+            list.AddRange(_currencyReader.Id.ReadArray(json));
             return new DataTransferCollection<int>(list, context);
         }
 
-        public async Task<Currency?> GetCurrencyById(int currencyId)
+        public async Task<Currency> GetCurrencyById(int currencyId)
         {
             var request = new CurrencyByIdRequest(currencyId);
-            using var response = await _http.SendAsync(request).ConfigureAwait(false);
+            using var response = await _http.SendAsync(request, HttpCompletionOption.ResponseHeadersRead).ConfigureAwait(false);
             response.EnsureSuccessStatusCode();
-            var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
-            return JsonConvert.DeserializeObject<Currency>(json, Json.DefaultJsonSerializerSettings);
+            using var json = await response.Content.ReadAsJsonAsync().ConfigureAwait(false);
+            return _currencyReader.Read(json);
         }
 
         public async Task<IDataTransferCollection<Currency>> GetCurrenciesByIds(IReadOnlyCollection<int> currencyIds)
@@ -67,24 +66,24 @@ namespace GW2SDK.Currencies
             }
 
             var request = new CurrenciesByIdsRequest(currencyIds);
-            using var response = await _http.SendAsync(request).ConfigureAwait(false);
+            using var response = await _http.SendAsync(request, HttpCompletionOption.ResponseHeadersRead).ConfigureAwait(false);
             response.EnsureSuccessStatusCode();
-            var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
+            using var json = await response.Content.ReadAsJsonAsync().ConfigureAwait(false);
             var context = response.Headers.GetCollectionContext();
             var list = new List<Currency>(context.ResultCount);
-            JsonConvert.PopulateObject(json, list, Json.DefaultJsonSerializerSettings);
+            list.AddRange(_currencyReader.ReadArray(json));
             return new DataTransferCollection<Currency>(list, context);
         }
 
         public async Task<IDataTransferPage<Currency>> GetCurrenciesByPage(int pageIndex, int? pageSize = null)
         {
             var request = new CurrenciesByPageRequest(pageIndex, pageSize);
-            using var response = await _http.SendAsync(request).ConfigureAwait(false);
+            using var response = await _http.SendAsync(request, HttpCompletionOption.ResponseHeadersRead).ConfigureAwait(false);
             response.EnsureSuccessStatusCode();
-            var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
+            using var json = await response.Content.ReadAsJsonAsync().ConfigureAwait(false);
             var pageContext = response.Headers.GetPageContext();
             var list = new List<Currency>(pageContext.PageSize);
-            JsonConvert.PopulateObject(json, list, Json.DefaultJsonSerializerSettings);
+            list.AddRange(_currencyReader.ReadArray(json));
             return new DataTransferPage<Currency>(list, pageContext);
         }
     }

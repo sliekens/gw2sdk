@@ -1,24 +1,21 @@
-﻿using GW2SDK.Continents;
+﻿using System.Text.Json;
+using GW2SDK.Continents;
+using GW2SDK.Json;
 using GW2SDK.Tests.Features.Continents.Fixtures;
 using GW2SDK.Tests.TestInfrastructure;
-using Newtonsoft.Json;
 using Xunit;
-using Xunit.Abstractions;
 
 namespace GW2SDK.Tests.Features.Continents
 {
     [Collection(nameof(ContinentDbCollection))]
     public class FloorTest
     {
-        public FloorTest(FloorFixture fixture, ITestOutputHelper output)
+        public FloorTest(FloorFixture fixture)
         {
             _fixture = fixture;
-            _output = output;
         }
 
         private readonly FloorFixture _fixture;
-
-        private readonly ITestOutputHelper _output;
 
         private static class FloorFact
         {
@@ -45,14 +42,14 @@ namespace GW2SDK.Tests.Features.Continents
         [Trait("Importance", "Critical")]
         public void Floors_can_be_created_from_json()
         {
-            var settings = new JsonSerializerSettingsBuilder().UseTraceWriter(_output)
-                .ThrowErrorOnMissingMember()
-                .Build();
+            var sut = new ContinentReader();
 
             AssertEx.ForEach(_fixture.Db.Floors,
                 json =>
                 {
-                    var actual = JsonConvert.DeserializeObject<Floor>(json, settings);
+                    using var document = JsonDocument.Parse(json);
+
+                    var actual = sut.Floor.Read(document.RootElement, MissingMemberBehavior.Error);
 
                     FloorFact.Texture_dimensions_contains_width_and_height(actual);
                     FloorFact.Label_coordinates_of_a_region_contains_a_point(actual);

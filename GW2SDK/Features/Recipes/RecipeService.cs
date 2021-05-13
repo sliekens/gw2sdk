@@ -4,10 +4,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using GW2SDK.Annotations;
 using GW2SDK.Http;
-using GW2SDK.Impl;
-using GW2SDK.Impl.JsonConverters;
-using GW2SDK.Recipes.Impl;
-using Newtonsoft.Json;
+using GW2SDK.Recipes.Http;
 
 namespace GW2SDK.Recipes
 {
@@ -16,30 +13,33 @@ namespace GW2SDK.Recipes
     {
         private readonly HttpClient _http;
 
-        public RecipeService(HttpClient http)
+        private readonly IRecipeReader _recipeReader;
+
+        public RecipeService(HttpClient http, IRecipeReader recipeReader)
         {
             _http = http ?? throw new ArgumentNullException(nameof(http));
+            _recipeReader = recipeReader ?? throw new ArgumentNullException(nameof(recipeReader));
         }
 
         public async Task<IDataTransferCollection<int>> GetRecipesIndex()
         {
             var request = new RecipesIndexRequest();
-            using var response = await _http.SendAsync(request).ConfigureAwait(false);
+            using var response = await _http.SendAsync(request, HttpCompletionOption.ResponseHeadersRead).ConfigureAwait(false);
             response.EnsureSuccessStatusCode();
-            var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
+            using var json = await response.Content.ReadAsJsonAsync().ConfigureAwait(false);
             var context = response.Headers.GetCollectionContext();
             var list = new List<int>(context.ResultCount);
-            JsonConvert.PopulateObject(json, list, Json.DefaultJsonSerializerSettings);
+            list.AddRange(_recipeReader.Id.ReadArray(json));
             return new DataTransferCollection<int>(list, context);
         }
 
         public async Task<Recipe?> GetRecipeById(int recipeId)
         {
             var request = new RecipeByIdRequest(recipeId);
-            using var response = await _http.SendAsync(request).ConfigureAwait(false);
+            using var response = await _http.SendAsync(request, HttpCompletionOption.ResponseHeadersRead).ConfigureAwait(false);
             response.EnsureSuccessStatusCode();
-            var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
-            return JsonConvert.DeserializeObject<Recipe>(json, Json.DefaultJsonSerializerSettings);
+            using var json = await response.Content.ReadAsJsonAsync().ConfigureAwait(false);
+            return _recipeReader.Read(json);
         }
 
         public async Task<IDataTransferCollection<Recipe>> GetRecipesByIds(IReadOnlyCollection<int> recipeIds)
@@ -55,24 +55,24 @@ namespace GW2SDK.Recipes
             }
 
             var request = new RecipesByIdsRequest(recipeIds);
-            using var response = await _http.SendAsync(request).ConfigureAwait(false);
+            using var response = await _http.SendAsync(request, HttpCompletionOption.ResponseHeadersRead).ConfigureAwait(false);
             response.EnsureSuccessStatusCode();
-            var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
+            using var json = await response.Content.ReadAsJsonAsync().ConfigureAwait(false);
             var context = response.Headers.GetCollectionContext();
             var list = new List<Recipe>(context.ResultCount);
-            JsonConvert.PopulateObject(json, list, Json.DefaultJsonSerializerSettings);
+            list.AddRange(_recipeReader.ReadArray(json));
             return new DataTransferCollection<Recipe>(list, context);
         }
 
         public async Task<IDataTransferPage<Recipe>> GetRecipesByPage(int pageIndex, int? pageSize = null)
         {
             var request = new RecipesByPageRequest(pageIndex, pageSize);
-            using var response = await _http.SendAsync(request).ConfigureAwait(false);
+            using var response = await _http.SendAsync(request, HttpCompletionOption.ResponseHeadersRead).ConfigureAwait(false);
             response.EnsureSuccessStatusCode();
-            var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
+            using var json = await response.Content.ReadAsJsonAsync().ConfigureAwait(false);
             var pageContext = response.Headers.GetPageContext();
             var list = new List<Recipe>(pageContext.PageSize);
-            JsonConvert.PopulateObject(json, list, Json.DefaultJsonSerializerSettings);
+            list.AddRange(_recipeReader.ReadArray(json));
             return new DataTransferPage<Recipe>(list, pageContext);
         }
     }

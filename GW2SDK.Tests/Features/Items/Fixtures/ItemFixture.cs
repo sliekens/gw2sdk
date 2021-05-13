@@ -6,7 +6,7 @@ namespace GW2SDK.Tests.Features.Items.Fixtures
     {
         public ItemFixture()
         {
-            var reader = new JsonFlatFileReader();
+            var reader = new FlatFileReader();
             Db = new InMemoryItemDb(reader.Read("Data/items.json"));
         }
 

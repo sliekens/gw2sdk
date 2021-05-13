@@ -9,7 +9,7 @@ namespace GW2SDK.Tests.Features.Traits
     public class TraitServiceTest
     {
         [Fact]
-        [Trait("Feature",  "Traits")]
+        [Trait("Feature", "Traits")]
         [Trait("Category", "Integration")]
         public async Task It_can_get_all_traits()
         {
@@ -22,7 +22,7 @@ namespace GW2SDK.Tests.Features.Traits
         }
 
         [Fact]
-        [Trait("Feature",  "Traits")]
+        [Trait("Feature", "Traits")]
         [Trait("Category", "Integration")]
         public async Task It_can_get_all_trait_ids()
         {
@@ -35,7 +35,7 @@ namespace GW2SDK.Tests.Features.Traits
         }
 
         [Fact]
-        [Trait("Feature",  "Traits")]
+        [Trait("Feature", "Traits")]
         [Trait("Category", "Integration")]
         public async Task It_can_get_a_trait_by_id()
         {
@@ -50,14 +50,19 @@ namespace GW2SDK.Tests.Features.Traits
         }
 
         [Fact]
-        [Trait("Feature",  "Traits")]
+        [Trait("Feature", "Traits")]
         [Trait("Category", "Integration")]
         public async Task It_can_get_traits_by_id()
         {
             await using var services = new Container();
             var sut = services.Resolve<TraitService>();
 
-            var ids = new[] { 214, 221, 222 };
+            var ids = new[]
+            {
+                214,
+                221,
+                222
+            };
 
             var actual = await sut.GetTraitsByIds(ids);
 
@@ -65,7 +70,7 @@ namespace GW2SDK.Tests.Features.Traits
         }
 
         [Fact]
-        [Trait("Feature",  "Traits")]
+        [Trait("Feature", "Traits")]
         [Trait("Category", "Unit")]
         public async Task Trait_ids_cannot_be_null()
         {
@@ -80,7 +85,7 @@ namespace GW2SDK.Tests.Features.Traits
         }
 
         [Fact]
-        [Trait("Feature",  "Traits")]
+        [Trait("Feature", "Traits")]
         [Trait("Category", "Unit")]
         public async Task Trait_ids_cannot_be_empty()
         {
@@ -95,7 +100,7 @@ namespace GW2SDK.Tests.Features.Traits
         }
 
         [Fact]
-        [Trait("Feature",  "Traits")]
+        [Trait("Feature", "Traits")]
         [Trait("Category", "Integration")]
         public async Task It_can_get_traits_by_page()
         {
@@ -109,7 +114,7 @@ namespace GW2SDK.Tests.Features.Traits
         }
 
         [Fact]
-        [Trait("Feature",  "Traits")]
+        [Trait("Feature", "Traits")]
         [Trait("Category", "Integration")]
         public async Task Page_index_cannot_be_negative()
         {
@@ -120,7 +125,7 @@ namespace GW2SDK.Tests.Features.Traits
         }
 
         [Fact]
-        [Trait("Feature",  "Traits")]
+        [Trait("Feature", "Traits")]
         [Trait("Category", "Integration")]
         public async Task Page_size_cannot_be_negative()
         {
