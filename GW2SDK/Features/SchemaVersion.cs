@@ -5,7 +5,7 @@ using static System.String;
 namespace GW2SDK
 {
     [PublicAPI]
-    public sealed class SchemaVersion : IComparable
+    public sealed class SchemaVersion
     {
         public static readonly SchemaVersion Latest = new("latest");
 
@@ -36,20 +36,6 @@ namespace GW2SDK
         }
 
         public string Version { get; }
-
-        public int CompareTo(object obj) => Compare(Version, ((SchemaVersion) obj).Version, StringComparison.Ordinal);
-
-        public override bool Equals(object obj)
-        {
-            if (obj is not SchemaVersion other)
-            {
-                return false;
-            }
-
-            return Version == other.Version;
-        }
-
-        public override int GetHashCode() => Version.GetHashCode();
 
         public override string ToString() => Version;
 
