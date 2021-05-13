@@ -39,7 +39,7 @@ jobs:
         name: coverage
         path: "**/coverage.cobertura.xml"
     - name: Upload coverage to Codecov
-      uses: codecov/codecov-action@v1.0.7
+      uses: codecov/codecov-action@v1.5.0
     - name: Build
       run: dotnet build --configuration ${{ env.build-configuration }} --no-restore
     - name: Pack artifacts
