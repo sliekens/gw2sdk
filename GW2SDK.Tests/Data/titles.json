@@ -69,7 +69,7 @@
 {"id":175,"name":"The Sunbringer","achievement":910,"achievements":[910]}
 {"id":178,"name":"Finders Keepers","achievement":3268,"achievements":[3268]}
 {"id":180,"name":"Great Jungle Wurm Slayer","achievement":1342,"achievements":[1342]}
-{"id":181,"name":"Wurm's Bane","achievement":1459,"achievements":[1459]}
+{"id":181,"name":"Wurm\u0027s Bane","achievement":1459,"achievements":[1459]}
 {"id":184,"name":"Fashion Collector","achievement":1567,"achievements":[1567]}
 {"id":185,"name":"The Blazing Light","achievement":4320,"achievements":[4320]}
 {"id":186,"name":"Twice-Told Legend","achievement":1621,"achievements":[1621]}
@@ -80,6 +80,7 @@
 {"id":192,"name":"Relentless","achievement":1685,"achievements":[1685]}
 {"id":193,"name":"Devoted","achievement":1686,"achievements":[1686]}
 {"id":194,"name":"Victorious","achievement":1687,"achievements":[1687]}
+{"id":195,"name":"Dedicated","achievement":1688,"achievements":[1688]}
 {"id":198,"name":"Uncontrollable Achiever","ap_required":60000}
 {"id":199,"name":"Insatiable Achiever","ap_required":55000}
 {"id":200,"name":"Exotic Hunter","achievement":1748,"achievements":[1748]}
@@ -113,7 +114,7 @@
 {"id":238,"name":"Slippery Slubling","achievement":2835,"achievements":[2835]}
 {"id":239,"name":"Indomitable Legend","achievement":3004,"achievements":[3004]}
 {"id":245,"name":"Salty Sea Dog","achievement":3085,"achievements":[3085]}
-{"id":246,"name":"I'm rich, you know.","achievement":3127,"achievements":[3127]}
+{"id":246,"name":"I\u0027m rich, you know.","achievement":3127,"achievements":[3127]}
 {"id":247,"name":"Eternal Gladiator","achievement":3143,"achievements":[3143]}
 {"id":248,"name":"Grandmaster of Golden Arms","achievement":2279,"achievements":[2279]}
 {"id":249,"name":"Good Apple","achievement":3104,"achievements":[3104]}
@@ -127,7 +128,7 @@
 {"id":257,"name":"Immortal Legend","achievement":3247,"achievements":[3247]}
 {"id":258,"name":"Ruthless Legend","achievement":3272,"achievements":[3272]}
 {"id":259,"name":"Toymaker","achievement":3250,"achievements":[3250]}
-{"id":260,"name":"Dusk's Champion","achievement":3357,"achievements":[3357]}
+{"id":260,"name":"Dusk\u0027s Champion","achievement":3357,"achievements":[3357]}
 {"id":261,"name":"Monster Hunter","achievement":3363,"achievements":[3363]}
 {"id":262,"name":"Silent Savior","achievement":3299,"achievements":[3299]}
 {"id":263,"name":"Cannoneer","achievement":3324,"achievements":[3324]}
@@ -136,13 +137,13 @@
 {"id":266,"name":"Silent Killer","achievement":3331,"achievements":[3331]}
 {"id":267,"name":"Lord Slayer","achievement":3355,"achievements":[3355]}
 {"id":268,"name":"Siege Breaker","achievement":3325,"achievements":[3325]}
-{"id":269,"name":"Demon's Demise","achievement":3392,"achievements":[3392]}
+{"id":269,"name":"Demon\u0027s Demise","achievement":3392,"achievements":[3392]}
 {"id":270,"name":"Knight of the Thorn","achievement":3391,"achievements":[3391]}
 {"id":271,"name":"Rock Star","achievement":3440,"achievements":[3440]}
 {"id":272,"name":"Fancy Flyer","achievement":3430,"achievements":[3430]}
 {"id":274,"name":"Storyteller of Orr","achievement":3487,"achievements":[3487]}
 {"id":275,"name":"The Archdesigner","achievement":3465,"achievements":[3465]}
-{"id":276,"name":"Envoy's Herald","achievement":3459,"achievements":[3459]}
+{"id":276,"name":"Envoy\u0027s Herald","achievement":3459,"achievements":[3459]}
 {"id":277,"name":"Leaves No Hero Behind","achievement":3535,"achievements":[3535]}
 {"id":278,"name":"Master of Secrets","achievement":3520,"achievements":[3520]}
 {"id":280,"name":"Best of the Best","achievement":3688,"achievements":[3688]}
@@ -210,12 +211,16 @@
 {"id":352,"name":"Corvus Luminiferous","achievement":5146,"achievements":[5146]}
 {"id":353,"name":"The Truly Nimble","achievement":5148,"achievements":[5148]}
 {"id":354,"name":"Queller of Profane Whispers","achievement":5116,"achievements":[5116]}
+{"id":355,"name":"2v2 Contender","achievement":5166,"achievements":[5166]}
 {"id":356,"name":"2v2 Elite","achievement":5162,"achievements":[5162]}
 {"id":357,"name":"Romantic","achievement":5224,"achievements":[5224]}
 {"id":358,"name":"Forged Steel","achievement":5203,"achievements":[5203]}
+{"id":360,"name":"3v3 Contender","achievement":5272,"achievements":[5272]}
 {"id":361,"name":"Stormcaller","achievement":5271,"achievements":[5271]}
 {"id":362,"name":"Community Conqueror","achievement":5302,"achievements":[5302]}
 {"id":363,"name":"Pupil of Owl","achievement":5423,"achievements":[5423]}
 {"id":364,"name":"God of WvW","achievement":5433,"achievements":[5433]}
 {"id":365,"name":"Defier of Doubt","achievement":5443,"achievements":[5443]}
 {"id":366,"name":"Dances with Demons","achievement":5439,"achievements":[5439]}
+{"id":367,"name":"Master of Draconic Fire","achievement":5647,"achievements":[5647]}
+{"id":368,"name":"Master of Draconic Ice","achievement":5633,"achievements":[5633]}

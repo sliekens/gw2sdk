@@ -23,6 +23,8 @@ namespace GW2SDK
 
         public static readonly SchemaVersion V20201117 = new("2020-11-17T00:30:00.000Z");
 
+        public static readonly SchemaVersion V20210406 = new("2021-04-06T21:00:00.000Z");
+
         private SchemaVersion(string version)
         {
             if (IsNullOrWhiteSpace(version))
