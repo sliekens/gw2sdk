@@ -36,7 +36,7 @@ namespace GW2SDK.Tests.TestInfrastructure
                     http =>
                     {
                         http.BaseAddress = ConfigurationManager.Instance.BaseAddress;
-                        http.UseLatestSchemaVersion();
+                        http.UseSchemaVersion(SchemaVersion.Latest);
                     })
                 .ConfigurePrimaryHttpMessageHandler(() => new SocketsHttpHandler
                 {

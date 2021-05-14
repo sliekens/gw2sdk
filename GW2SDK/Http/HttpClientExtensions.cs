@@ -26,12 +26,6 @@ namespace GW2SDK.Http
             instance.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
         }
 
-        public static void UseLatestSchemaVersion(this HttpClient instance)
-        {
-            if (instance is null) throw new ArgumentNullException(nameof(instance));
-            instance.DefaultRequestHeaders.Add("X-Schema-Version", "latest");
-        }
-
         public static void UseSchemaVersion(this HttpClient instance, SchemaVersion version)
         {
             if (instance is null) throw new ArgumentNullException(nameof(instance));

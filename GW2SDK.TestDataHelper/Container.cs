@@ -36,7 +36,7 @@ namespace GW2SDK.TestDataHelper
                     http =>
                     {
                         http.BaseAddress = new Uri("https://api.guildwars2.com", UriKind.Absolute);
-                        http.UseLatestSchemaVersion();
+                        http.UseSchemaVersion(SchemaVersion.Latest);
                     })
                 .ConfigurePrimaryHttpMessageHandler(() =>
                     new SocketsHttpHandler { MaxConnectionsPerServer = 8, AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate })
