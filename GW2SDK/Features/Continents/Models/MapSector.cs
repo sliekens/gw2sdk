@@ -9,7 +9,7 @@ namespace GW2SDK.Continents
     {
         public int Id { get; init; }
 
-        public string? Name { get; init; }
+        public string Name { get; init; } = "";
 
         public int Level { get; init; }
 
