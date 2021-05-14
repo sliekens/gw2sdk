@@ -20,7 +20,7 @@ namespace GW2SDK.Builds
             _buildReader = buildReader ?? throw new ArgumentNullException(nameof(buildReader));
         }
 
-        public async Task<Build?> GetBuild()
+        public async Task<Build> GetBuild()
         {
             var request = new BuildRequest();
             using var response = await _http.SendAsync(request, HttpCompletionOption.ResponseHeadersRead).ConfigureAwait(false);

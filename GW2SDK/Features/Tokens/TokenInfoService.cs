@@ -20,7 +20,7 @@ namespace GW2SDK.Tokens
             _tokenInfoReader = tokenInfoReader ?? throw new ArgumentNullException(nameof(tokenInfoReader));
         }
 
-        public async Task<TokenInfo?> GetTokenInfo(string? accessToken)
+        public async Task<TokenInfo> GetTokenInfo(string? accessToken)
         {
             var request = new TokenInfoRequest(accessToken);
             using var response = await _http.SendAsync(request, HttpCompletionOption.ResponseHeadersRead).ConfigureAwait(false);

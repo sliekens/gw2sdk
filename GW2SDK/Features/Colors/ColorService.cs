@@ -47,7 +47,7 @@ namespace GW2SDK.Colors
             return new DataTransferCollection<int>(list, context);
         }
 
-        public async Task<Color?> GetColorById(int colorId)
+        public async Task<Color> GetColorById(int colorId)
         {
             var request = new ColorByIdRequest(colorId);
             using var response = await _http.SendAsync(request, HttpCompletionOption.ResponseHeadersRead)

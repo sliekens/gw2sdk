@@ -32,7 +32,7 @@ namespace GW2SDK.Items
             return new DataTransferCollection<int>(list, context);
         }
 
-        public async Task<Item?> GetItemById(int itemId)
+        public async Task<Item> GetItemById(int itemId)
         {
             var request = new ItemByIdRequest(itemId);
             using var response = await _http.SendAsync(request, HttpCompletionOption.ResponseHeadersRead).ConfigureAwait(false);
