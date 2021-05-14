@@ -16,8 +16,8 @@ namespace GW2SDK.Tests.Features.Backstories.Questions.Fixtures
 
         public async Task InitializeAsync()
         {
-            await using var container = new Container();
-            var http = container.Resolve<HttpClient>();
+            await using var services = new Composer();
+            var http = services.Resolve<HttpClient>();
             BackstoryQuestions = await GetAllBackstoryQuestions(http);
         }
 

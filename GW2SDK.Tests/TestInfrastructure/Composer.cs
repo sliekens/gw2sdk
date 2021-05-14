@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using GW2SDK.Accounts;
@@ -17,7 +16,6 @@ using GW2SDK.Colors;
 using GW2SDK.Commerce.Prices;
 using GW2SDK.Continents;
 using GW2SDK.Currencies;
-using GW2SDK.Http;
 using GW2SDK.Items;
 using GW2SDK.MailCarriers;
 using GW2SDK.Recipes;
@@ -28,32 +26,21 @@ using GW2SDK.Tokens;
 using GW2SDK.Traits;
 using GW2SDK.V2;
 using GW2SDK.Worlds;
-using Microsoft.Extensions.DependencyInjection;
-using Polly;
-using Polly.Timeout;
 
 namespace GW2SDK.Tests.TestInfrastructure
 {
-    public class Container : IDisposable, IAsyncDisposable, IServiceProvider
+    public class Composer : IServiceProvider, IAsyncDisposable
     {
         private readonly CompositeDisposable _disposables = new();
 
         private readonly IHttpClientFactory _httpClientFactory;
 
-        public Container()
+        public Composer()
         {
-            var httpClientProvider = BuildHttpClientProvider();
-            _httpClientFactory = httpClientProvider.GetRequiredService<IHttpClientFactory>();
-            _disposables.Add(httpClientProvider);
+            var gw2HttpClientFactory = new TestHttpClientFactory();
+            _disposables.Add(gw2HttpClientFactory);
+            _httpClientFactory = gw2HttpClientFactory;
         }
-
-        public ValueTask DisposeAsync()
-        {
-            Dispose();
-            return ValueTask.CompletedTask;
-        }
-
-        public void Dispose() => _disposables.Dispose();
 
         public object GetService(Type serviceType)
         {
@@ -193,55 +180,10 @@ namespace GW2SDK.Tests.TestInfrastructure
         public T Resolve<T>() =>
             (T) GetService(typeof(T)) ?? throw new InvalidOperationException($"Unable to compose type '{typeof(T)}'");
 
-        /// <summary>Creates a service provider for the HTTP factory which is unfortunately very dependent on ServiceCollection.</summary>
-        /// <returns></returns>
-        private ServiceProvider BuildHttpClientProvider()
+        public async ValueTask DisposeAsync()
         {
-            var jitterer = new Random();
-            var services = new ServiceCollection();
-            var policies = services.AddPolicyRegistry();
-            var innerTimeout =
-                Policy.TimeoutAsync<HttpResponseMessage>(TimeSpan.FromSeconds(10), TimeoutStrategy.Optimistic);
-            var immediateRetry = Policy.Handle<HttpRequestException>()
-                .Or<TimeoutException>()
-                .Or<TimeoutRejectedException>()
-                .OrResult<HttpResponseMessage>(r => (int) r.StatusCode >= 500)
-                .RetryForeverAsync();
-
-            // The API sometimes rejects valid tokens... retry up to 3 times on auth errors to (hopefully) eliminate false failures
-            var tokenRetry = Policy.Handle<UnauthorizedOperationException>()
-                .WaitAndRetryAsync(3, _ => TimeSpan.FromSeconds(1));
-            var rateLimit = Policy.Handle<TooManyRequestsException>()
-                .WaitAndRetryForeverAsync(retryAttempt =>
-                    TimeSpan.FromSeconds(Math.Min(8, Math.Pow(2, retryAttempt))) +
-                    TimeSpan.FromMilliseconds(jitterer.Next(0, 1000)));
-            policies.Add("Http", rateLimit.WrapAsync(tokenRetry).WrapAsync(innerTimeout));
-            policies.Add("HttpIdempotent",
-                rateLimit.WrapAsync(tokenRetry).WrapAsync(immediateRetry).WrapAsync(innerTimeout));
-            services.AddTransient<UnauthorizedMessageHandler>();
-            services.AddTransient<BadMessageHandler>();
-            services.AddTransient<RateLimitHandler>();
-            services.AddHttpClient("GW2SDK",
-                    http =>
-                    {
-                        http.BaseAddress = ConfigurationManager.Instance.BaseAddress;
-                        http.UseLatestSchemaVersion();
-                        http.UseDataCompression();
-                    })
-                .ConfigurePrimaryHttpMessageHandler(() => new SocketsHttpHandler
-                {
-                    MaxConnectionsPerServer = 10,
-                    AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate
-                })
-                .AddPolicyHandlerFromRegistry((registry, message) =>
-                    message.Method == HttpMethod.Post || message.Method == HttpMethod.Patch
-                        ? registry.Get<IAsyncPolicy<HttpResponseMessage>>("Http")
-                        : registry.Get<IAsyncPolicy<HttpResponseMessage>>("HttpIdempotent"))
-                .AddHttpMessageHandler<UnauthorizedMessageHandler>()
-                .AddHttpMessageHandler<BadMessageHandler>()
-                .AddHttpMessageHandler<RateLimitHandler>();
-
-            return services.BuildServiceProvider();
+            await _disposables.DisposeAsync().ConfigureAwait(false);
+            GC.SuppressFinalize(this);
         }
     }
 }

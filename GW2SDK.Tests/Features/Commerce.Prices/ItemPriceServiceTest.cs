@@ -13,7 +13,7 @@ namespace GW2SDK.Tests.Features.Commerce.Prices
         [Trait("Category", "Integration")]
         public async Task It_can_get_all_item_price_ids()
         {
-            await using var services = new Container();
+            await using var services = new Composer();
             var sut = services.Resolve<ItemPriceService>();
 
             var actual = await sut.GetItemPricesIndex();
@@ -26,7 +26,7 @@ namespace GW2SDK.Tests.Features.Commerce.Prices
         [Trait("Category", "Integration")]
         public async Task It_can_get_an_item_price_by_id()
         {
-            await using var services = new Container();
+            await using var services = new Composer();
             var sut = services.Resolve<ItemPriceService>();
 
             const int itemId = 24;
@@ -41,7 +41,7 @@ namespace GW2SDK.Tests.Features.Commerce.Prices
         [Trait("Category", "Integration")]
         public async Task It_can_get_item_prices_by_id()
         {
-            await using var services = new Container();
+            await using var services = new Composer();
             var sut = services.Resolve<ItemPriceService>();
 
             var ids = new[] { 24, 19699, 35984 };
@@ -59,7 +59,7 @@ namespace GW2SDK.Tests.Features.Commerce.Prices
         [Trait("Category", "Unit")]
         public async Task Item_ids_cannot_be_null()
         {
-            await using var services = new Container();
+            await using var services = new Composer();
             var sut = services.Resolve<ItemPriceService>();
 
             await Assert.ThrowsAsync<ArgumentNullException>("itemIds",
@@ -74,7 +74,7 @@ namespace GW2SDK.Tests.Features.Commerce.Prices
         [Trait("Category", "Unit")]
         public async Task Item_ids_cannot_be_empty()
         {
-            await using var services = new Container();
+            await using var services = new Composer();
             var sut = services.Resolve<ItemPriceService>();
 
             await Assert.ThrowsAsync<ArgumentException>("itemIds",

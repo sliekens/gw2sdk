@@ -13,7 +13,7 @@ namespace GW2SDK.Tests.Features.Recipes
         [Trait("Category", "Integration")]
         public async Task It_can_get_all_recipe_ids()
         {
-            await using var services = new Container();
+            await using var services = new Composer();
             var sut = services.Resolve<RecipeService>();
 
             var actual = await sut.GetRecipesIndex();
@@ -26,7 +26,7 @@ namespace GW2SDK.Tests.Features.Recipes
         [Trait("Category", "Integration")]
         public async Task It_can_get_a_recipe_by_id()
         {
-            await using var services = new Container();
+            await using var services = new Composer();
             var sut = services.Resolve<RecipeService>();
 
             const int recipeId = 1;
@@ -41,7 +41,7 @@ namespace GW2SDK.Tests.Features.Recipes
         [Trait("Category", "Integration")]
         public async Task It_can_get_recipes_by_id()
         {
-            await using var services = new Container();
+            await using var services = new Composer();
             var sut = services.Resolve<RecipeService>();
 
             var ids = new[] { 1, 2, 3 };
@@ -56,7 +56,7 @@ namespace GW2SDK.Tests.Features.Recipes
         [Trait("Category", "Unit")]
         public async Task Recipe_ids_cannot_be_null()
         {
-            await using var services = new Container();
+            await using var services = new Composer();
             var sut = services.Resolve<RecipeService>();
 
             await Assert.ThrowsAsync<ArgumentNullException>("recipeIds",
@@ -71,7 +71,7 @@ namespace GW2SDK.Tests.Features.Recipes
         [Trait("Category", "Unit")]
         public async Task Recipe_ids_cannot_be_empty()
         {
-            await using var services = new Container();
+            await using var services = new Composer();
             var sut = services.Resolve<RecipeService>();
 
             await Assert.ThrowsAsync<ArgumentException>("recipeIds",
@@ -86,7 +86,7 @@ namespace GW2SDK.Tests.Features.Recipes
         [Trait("Category", "Integration")]
         public async Task It_can_get_recipes_by_page()
         {
-            await using var services = new Container();
+            await using var services = new Composer();
             var sut = services.Resolve<RecipeService>();
 
             var actual = await sut.GetRecipesByPage(1, 3);
@@ -100,7 +100,7 @@ namespace GW2SDK.Tests.Features.Recipes
         [Trait("Category", "Integration")]
         public async Task Page_index_cannot_be_negative()
         {
-            await using var services = new Container();
+            await using var services = new Composer();
             var sut = services.Resolve<RecipeService>();
 
             await Assert.ThrowsAsync<ArgumentException>(async () => await sut.GetRecipesByPage(-1, 3));
@@ -111,7 +111,7 @@ namespace GW2SDK.Tests.Features.Recipes
         [Trait("Category", "Integration")]
         public async Task Page_size_cannot_be_negative()
         {
-            await using var services = new Container();
+            await using var services = new Composer();
             var sut = services.Resolve<RecipeService>();
 
             await Assert.ThrowsAsync<ArgumentException>(async () => await sut.GetRecipesByPage(1, -3));
@@ -122,7 +122,7 @@ namespace GW2SDK.Tests.Features.Recipes
         [Trait("Category", "Integration")]
         public async Task Recipes_with_iron_ore_as_ingredient_contains_recipe_id_for_iron_ingot()
         {
-            await using var services = new Container();
+            await using var services = new Composer();
             var sut = services.Resolve<RecipeService>();
 
             const int ironOre = 19699;
@@ -137,7 +137,7 @@ namespace GW2SDK.Tests.Features.Recipes
         [Trait("Category", "Integration")]
         public async Task Recipes_with_iron_ingot_as_output_contains_recipe_id_for_iron_ingot()
         {
-            await using var services = new Container();
+            await using var services = new Composer();
             var sut = services.Resolve<RecipeService>();
 
             const int ironIngot = 19683;

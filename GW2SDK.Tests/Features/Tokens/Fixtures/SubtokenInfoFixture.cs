@@ -24,10 +24,10 @@ namespace GW2SDK.Tests.Features.Tokens.Fixtures
 
         public async Task InitializeAsync()
         {
-            await using var container = new Container();
-            var http = container.Resolve<HttpClient>();
+            await using var services = new Composer();
+            var http = services.Resolve<HttpClient>();
 
-            var subtokenService = container.Resolve<SubtokenService>();
+            var subtokenService = services.Resolve<SubtokenService>();
 
             SubtokenPermissions = Enum.GetValues(typeof(Permission)).Cast<Permission>().ToList();
 

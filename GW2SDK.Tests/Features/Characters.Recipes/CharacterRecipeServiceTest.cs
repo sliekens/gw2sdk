@@ -11,7 +11,7 @@ namespace GW2SDK.Tests.Features.Characters.Recipes
         [Fact]
         public async Task It_can_get_the_unlocked_recipes()
         {
-            await using var services = new Container();
+            await using var services = new Composer();
             var sut = services.Resolve<CharacterRecipesService>();
 
             var actual = await sut.GetUnlockedRecipes(ConfigurationManager.Instance.CharacterName, ConfigurationManager.Instance.ApiKeyFull);
@@ -23,7 +23,7 @@ namespace GW2SDK.Tests.Features.Characters.Recipes
         [Fact]
         public async Task It_cant_get_the_recipes_without_an_access_token()
         {
-            await using var services = new Container();
+            await using var services = new Composer();
             var sut = services.Resolve<CharacterRecipesService>();
 
             var actual = await Record.ExceptionAsync(async () =>
@@ -39,7 +39,7 @@ namespace GW2SDK.Tests.Features.Characters.Recipes
         [Fact]
         public async Task It_cant_get_the_recipes_for_a_deleted_character()
         {
-            await using var services = new Container();
+            await using var services = new Composer();
             var sut = services.Resolve<CharacterRecipesService>();
 
             var actual = await Record.ExceptionAsync(async () =>
@@ -55,7 +55,7 @@ namespace GW2SDK.Tests.Features.Characters.Recipes
         [Fact]
         public async Task It_cant_get_the_recipes_without_the_characters_or_inventories_scope()
         {
-            await using var services = new Container();
+            await using var services = new Composer();
             var sut = services.Resolve<CharacterRecipesService>();
 
             var actual = await Record.ExceptionAsync(async () =>

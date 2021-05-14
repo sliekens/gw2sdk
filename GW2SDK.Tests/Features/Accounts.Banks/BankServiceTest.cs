@@ -10,7 +10,7 @@ namespace GW2SDK.Tests.Features.Accounts.Banks
         [Fact]
         public async Task It_can_get_the_bank()
         {
-            await using var services = new Container();
+            await using var services = new Composer();
             var sut = services.Resolve<BankService>();
 
             var actual = await sut.GetBank(ConfigurationManager.Instance.ApiKeyFull);
@@ -21,7 +21,7 @@ namespace GW2SDK.Tests.Features.Accounts.Banks
         [Fact]
         public async Task It_cant_get_the_bank_without_an_access_token()
         {
-            await using var services = new Container();
+            await using var services = new Composer();
             var sut = services.Resolve<BankService>();
 
             var actual = await Record.ExceptionAsync(async() =>
@@ -37,7 +37,7 @@ namespace GW2SDK.Tests.Features.Accounts.Banks
         [Fact]
         public async Task It_cant_get_the_bank_without_the_inventories_scope()
         {
-            await using var services = new Container();
+            await using var services = new Composer();
             var sut = services.Resolve<BankService>();
 
             var actual = await Record.ExceptionAsync(async() =>

@@ -13,7 +13,7 @@ namespace GW2SDK.Tests.Features.Traits
         [Trait("Category", "Integration")]
         public async Task It_can_get_all_traits()
         {
-            await using var services = new Container();
+            await using var services = new Composer();
             var sut = services.Resolve<TraitService>();
 
             var actual = await sut.GetTraits();
@@ -26,7 +26,7 @@ namespace GW2SDK.Tests.Features.Traits
         [Trait("Category", "Integration")]
         public async Task It_can_get_all_trait_ids()
         {
-            await using var services = new Container();
+            await using var services = new Composer();
             var sut = services.Resolve<TraitService>();
 
             var actual = await sut.GetTraitsIndex();
@@ -39,7 +39,7 @@ namespace GW2SDK.Tests.Features.Traits
         [Trait("Category", "Integration")]
         public async Task It_can_get_a_trait_by_id()
         {
-            await using var services = new Container();
+            await using var services = new Composer();
             var sut = services.Resolve<TraitService>();
 
             const int traitId = 214;
@@ -54,7 +54,7 @@ namespace GW2SDK.Tests.Features.Traits
         [Trait("Category", "Integration")]
         public async Task It_can_get_traits_by_id()
         {
-            await using var services = new Container();
+            await using var services = new Composer();
             var sut = services.Resolve<TraitService>();
 
             var ids = new[]
@@ -74,7 +74,7 @@ namespace GW2SDK.Tests.Features.Traits
         [Trait("Category", "Unit")]
         public async Task Trait_ids_cannot_be_null()
         {
-            await using var services = new Container();
+            await using var services = new Composer();
             var sut = services.Resolve<TraitService>();
 
             await Assert.ThrowsAsync<ArgumentNullException>("traitIds",
@@ -89,7 +89,7 @@ namespace GW2SDK.Tests.Features.Traits
         [Trait("Category", "Unit")]
         public async Task Trait_ids_cannot_be_empty()
         {
-            await using var services = new Container();
+            await using var services = new Composer();
             var sut = services.Resolve<TraitService>();
 
             await Assert.ThrowsAsync<ArgumentException>("traitIds",
@@ -104,7 +104,7 @@ namespace GW2SDK.Tests.Features.Traits
         [Trait("Category", "Integration")]
         public async Task It_can_get_traits_by_page()
         {
-            await using var services = new Container();
+            await using var services = new Composer();
             var sut = services.Resolve<TraitService>();
 
             var actual = await sut.GetTraitsByPage(1, 3);
@@ -118,7 +118,7 @@ namespace GW2SDK.Tests.Features.Traits
         [Trait("Category", "Integration")]
         public async Task Page_index_cannot_be_negative()
         {
-            await using var services = new Container();
+            await using var services = new Composer();
             var sut = services.Resolve<TraitService>();
 
             await Assert.ThrowsAsync<ArgumentException>(async () => await sut.GetTraitsByPage(-1, 3));
@@ -129,7 +129,7 @@ namespace GW2SDK.Tests.Features.Traits
         [Trait("Category", "Integration")]
         public async Task Page_size_cannot_be_negative()
         {
-            await using var services = new Container();
+            await using var services = new Composer();
             var sut = services.Resolve<TraitService>();
 
             await Assert.ThrowsAsync<ArgumentException>(async () => await sut.GetTraitsByPage(1, -3));

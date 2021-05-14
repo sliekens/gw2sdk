@@ -15,8 +15,8 @@ namespace GW2SDK.Tests.Features.Accounts.Achievements.Fixtures
 
         public async Task InitializeAsync()
         {
-            await using var container = new Container();
-            var http = container.Resolve<HttpClient>();
+            await using var services = new Composer();
+            var http = services.Resolve<HttpClient>();
             var json = await GetAllJsonAchievements(http, ConfigurationManager.Instance.ApiKeyFull);
             Db = new InMemoryAccountAchievementsDb(json);
         }
