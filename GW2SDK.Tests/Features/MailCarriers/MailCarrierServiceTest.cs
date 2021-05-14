@@ -13,7 +13,7 @@ namespace GW2SDK.Tests.Features.MailCarriers
         [Trait("Category", "Integration")]
         public async Task It_can_get_all_mail_carriers()
         {
-            await using var services = new Container();
+            await using var services = new Composer();
             var sut = services.Resolve<MailCarrierService>();
 
             var actual = await sut.GetMailCarriers();
@@ -26,7 +26,7 @@ namespace GW2SDK.Tests.Features.MailCarriers
         [Trait("Category", "Integration")]
         public async Task It_can_get_all_mail_carrier_ids()
         {
-            await using var services = new Container();
+            await using var services = new Composer();
             var sut = services.Resolve<MailCarrierService>();
 
             var actual = await sut.GetMailCarriersIndex();
@@ -39,7 +39,7 @@ namespace GW2SDK.Tests.Features.MailCarriers
         [Trait("Category", "Integration")]
         public async Task It_can_get_a_mail_carrier_by_id()
         {
-            await using var services = new Container();
+            await using var services = new Composer();
             var sut = services.Resolve<MailCarrierService>();
 
             const int mailCarrierId = 1;
@@ -54,7 +54,7 @@ namespace GW2SDK.Tests.Features.MailCarriers
         [Trait("Category", "Integration")]
         public async Task It_can_get_mail_carriers_by_id()
         {
-            await using var services = new Container();
+            await using var services = new Composer();
             var sut = services.Resolve<MailCarrierService>();
 
             var ids = new[] { 1, 2, 3 };
@@ -69,7 +69,7 @@ namespace GW2SDK.Tests.Features.MailCarriers
         [Trait("Category", "Unit")]
         public async Task Mail_carrier_ids_cannot_be_null()
         {
-            await using var services = new Container();
+            await using var services = new Composer();
             var sut = services.Resolve<MailCarrierService>();
 
             await Assert.ThrowsAsync<ArgumentNullException>("mailCarrierIds",
@@ -84,7 +84,7 @@ namespace GW2SDK.Tests.Features.MailCarriers
         [Trait("Category", "Unit")]
         public async Task Mail_carrier_ids_cannot_be_empty()
         {
-            await using var services = new Container();
+            await using var services = new Composer();
             var sut = services.Resolve<MailCarrierService>();
 
             await Assert.ThrowsAsync<ArgumentException>("mailCarrierIds",
@@ -99,7 +99,7 @@ namespace GW2SDK.Tests.Features.MailCarriers
         [Trait("Category", "Integration")]
         public async Task It_can_get_mail_carriers_by_page()
         {
-            await using var services = new Container();
+            await using var services = new Composer();
             var sut = services.Resolve<MailCarrierService>();
 
             var actual = await sut.GetMailCarriersByPage(1, 3);
@@ -113,7 +113,7 @@ namespace GW2SDK.Tests.Features.MailCarriers
         [Trait("Category", "Integration")]
         public async Task Page_index_cannot_be_negative()
         {
-            await using var services = new Container();
+            await using var services = new Composer();
             var sut = services.Resolve<MailCarrierService>();
 
             await Assert.ThrowsAsync<ArgumentException>(async () => await sut.GetMailCarriersByPage(-1, 3));
@@ -124,7 +124,7 @@ namespace GW2SDK.Tests.Features.MailCarriers
         [Trait("Category", "Integration")]
         public async Task Page_size_cannot_be_negative()
         {
-            await using var services = new Container();
+            await using var services = new Composer();
             var sut = services.Resolve<MailCarrierService>();
 
             await Assert.ThrowsAsync<ArgumentException>(async () => await sut.GetMailCarriersByPage(1, -3));

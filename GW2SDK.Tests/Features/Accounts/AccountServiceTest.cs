@@ -12,7 +12,7 @@ namespace GW2SDK.Tests.Features.Accounts
         [Trait("Category", "Integration")]
         public async Task It_can_get_the_account()
         {
-            await using var services = new Container();
+            await using var services = new Composer();
             var sut = services.Resolve<AccountService>();
 
             var actual = await sut.GetAccount(ConfigurationManager.Instance.ApiKeyFull);
@@ -25,7 +25,7 @@ namespace GW2SDK.Tests.Features.Accounts
         [Trait("Category", "Integration")]
         public async Task It_cant_get_the_account_without_an_access_token()
         {
-            await using var services = new Container();
+            await using var services = new Composer();
             var sut = services.Resolve<AccountService>();
             var actual = await Record.ExceptionAsync(async () =>
             {

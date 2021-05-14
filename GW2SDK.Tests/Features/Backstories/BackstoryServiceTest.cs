@@ -13,7 +13,7 @@ namespace GW2SDK.Tests.Features.Backstories
         [Trait("Category", "Integration")]
         public async Task It_can_get_all_backstory_questions()
         {
-            await using var services = new Container();
+            await using var services = new Composer();
             var sut = services.Resolve<BackstoryService>();
 
             var actual = await sut.GetBackstoryQuestions();
@@ -26,7 +26,7 @@ namespace GW2SDK.Tests.Features.Backstories
         [Trait("Category", "Integration")]
         public async Task It_can_get_all_backstory_answers()
         {
-            await using var services = new Container();
+            await using var services = new Composer();
             var sut = services.Resolve<BackstoryService>();
 
             var actual = await sut.GetBackstoryAnswers();
@@ -39,7 +39,7 @@ namespace GW2SDK.Tests.Features.Backstories
         [Trait("Category", "Integration")]
         public async Task It_can_get_all_backstory_question_ids()
         {
-            await using var services = new Container();
+            await using var services = new Composer();
             var sut = services.Resolve<BackstoryService>();
 
             var actual = await sut.GetBackstoryQuestionsIndex();
@@ -52,7 +52,7 @@ namespace GW2SDK.Tests.Features.Backstories
         [Trait("Category", "Integration")]
         public async Task It_can_get_all_backstory_answer_ids()
         {
-            await using var services = new Container();
+            await using var services = new Composer();
             var sut = services.Resolve<BackstoryService>();
 
             var actual = await sut.GetBackstoryAnswersIndex();
@@ -65,7 +65,7 @@ namespace GW2SDK.Tests.Features.Backstories
         [Trait("Category", "Integration")]
         public async Task It_can_get_a_backstory_question_by_id()
         {
-            await using var services = new Container();
+            await using var services = new Composer();
             var sut = services.Resolve<BackstoryService>();
 
             var questionId = 7;
@@ -80,7 +80,7 @@ namespace GW2SDK.Tests.Features.Backstories
         [Trait("Category", "Integration")]
         public async Task It_can_get_a_backstory_answer_by_id()
         {
-            await using var services = new Container();
+            await using var services = new Composer();
             var sut = services.Resolve<BackstoryService>();
 
             var answerId = "7-53";
@@ -95,7 +95,7 @@ namespace GW2SDK.Tests.Features.Backstories
         [Trait("Category", "Unit")]
         public async Task Backstory_question_ids_cannot_be_null()
         {
-            await using var services = new Container();
+            await using var services = new Composer();
             var sut = services.Resolve<BackstoryService>();
 
             var actual = await Record.ExceptionAsync(async () =>
@@ -112,7 +112,7 @@ namespace GW2SDK.Tests.Features.Backstories
         [Trait("Category", "Unit")]
         public async Task Backstory_answer_ids_cannot_be_null()
         {
-            await using var services = new Container();
+            await using var services = new Composer();
             var sut = services.Resolve<BackstoryService>();
 
             var actual = await Record.ExceptionAsync(async () =>
@@ -129,7 +129,7 @@ namespace GW2SDK.Tests.Features.Backstories
         [Trait("Category", "Unit")]
         public async Task Backstory_question_ids_cannot_be_empty()
         {
-            await using var services = new Container();
+            await using var services = new Composer();
             var sut = services.Resolve<BackstoryService>();
 
             var actual = await Record.ExceptionAsync(async () =>
@@ -146,7 +146,7 @@ namespace GW2SDK.Tests.Features.Backstories
         [Trait("Category", "Unit")]
         public async Task Backstory_answer_ids_cannot_be_empty()
         {
-            await using var services = new Container();
+            await using var services = new Composer();
             var sut = services.Resolve<BackstoryService>();
 
             var actual = await Record.ExceptionAsync(async () =>
@@ -163,7 +163,7 @@ namespace GW2SDK.Tests.Features.Backstories
         [Trait("Category", "Unit")]
         public async Task Backstory_answer_ids_cannot_contain_null()
         {
-            await using var services = new Container();
+            await using var services = new Composer();
             var sut = services.Resolve<BackstoryService>();
 
             var ids = new[] { "7-53", null, "7-55" };
@@ -182,7 +182,7 @@ namespace GW2SDK.Tests.Features.Backstories
         [Trait("Category", "Unit")]
         public async Task Backstory_answer_ids_cannot_contain_empty_id()
         {
-            await using var services = new Container();
+            await using var services = new Composer();
             var sut = services.Resolve<BackstoryService>();
 
             var ids = new[] { "7-53", "", "7-55" };
@@ -201,7 +201,7 @@ namespace GW2SDK.Tests.Features.Backstories
         [Trait("Category", "Integration")]
         public async Task It_can_get_backstory_questions_by_id()
         {
-            await using var services = new Container();
+            await using var services = new Composer();
             var sut = services.Resolve<BackstoryService>();
 
             var ids = new[] { 7, 10, 11 };
@@ -219,7 +219,7 @@ namespace GW2SDK.Tests.Features.Backstories
         [Trait("Category", "Integration")]
         public async Task It_can_get_backstory_answers_by_id()
         {
-            await using var services = new Container();
+            await using var services = new Composer();
             var sut = services.Resolve<BackstoryService>();
 
             var ids = new[] { "7-53", "7-54", "7-55" };
@@ -237,7 +237,7 @@ namespace GW2SDK.Tests.Features.Backstories
         [Trait("Category", "Integration")]
         public async Task It_can_get_backstory_questions_by_page()
         {
-            await using var services = new Container();
+            await using var services = new Composer();
             var sut = services.Resolve<BackstoryService>();
 
             var actual = await sut.GetBackstoryQuestionsByPage(1, 3);
@@ -251,7 +251,7 @@ namespace GW2SDK.Tests.Features.Backstories
         [Trait("Category", "Integration")]
         public async Task It_can_get_backstory_answers_by_page()
         {
-            await using var services = new Container();
+            await using var services = new Composer();
             var sut = services.Resolve<BackstoryService>();
 
             var actual = await sut.GetBackstoryAnswersByPage(1, 3);
@@ -265,7 +265,7 @@ namespace GW2SDK.Tests.Features.Backstories
         [Trait("Category", "Integration")]
         public async Task Backstory_questions_page_index_cannot_be_negative()
         {
-            await using var services = new Container();
+            await using var services = new Composer();
             var sut = services.Resolve<BackstoryService>();
 
             var actual = await Record.ExceptionAsync(async () =>
@@ -281,7 +281,7 @@ namespace GW2SDK.Tests.Features.Backstories
         [Trait("Category", "Integration")]
         public async Task Backstory_answers_page_index_cannot_be_negative()
         {
-            await using var services = new Container();
+            await using var services = new Composer();
             var sut = services.Resolve<BackstoryService>();
 
             var actual = await Record.ExceptionAsync(async () =>
@@ -297,7 +297,7 @@ namespace GW2SDK.Tests.Features.Backstories
         [Trait("Category", "Integration")]
         public async Task Backstory_questions_page_size_cannot_be_negative()
         {
-            await using var services = new Container();
+            await using var services = new Composer();
             var sut = services.Resolve<BackstoryService>();
 
             var actual = await Record.ExceptionAsync(async () =>
@@ -313,7 +313,7 @@ namespace GW2SDK.Tests.Features.Backstories
         [Trait("Category", "Integration")]
         public async Task Backstory_answers_page_size_cannot_be_negative()
         {
-            await using var services = new Container();
+            await using var services = new Composer();
             var sut = services.Resolve<BackstoryService>();
 
             var actual = await Record.ExceptionAsync(async () =>

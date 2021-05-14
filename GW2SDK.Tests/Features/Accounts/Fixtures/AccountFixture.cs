@@ -13,8 +13,8 @@ namespace GW2SDK.Tests.Features.Accounts.Fixtures
 
         public async Task InitializeAsync()
         {
-            await using var container = new Container();
-            var http = container.Resolve<HttpClient>();
+            await using var services = new Composer();
+            var http = services.Resolve<HttpClient>();
 
             var basic = await GetAccountRaw(http, ConfigurationManager.Instance.ApiKeyBasic);
             Db.SetBasicAccount(basic);

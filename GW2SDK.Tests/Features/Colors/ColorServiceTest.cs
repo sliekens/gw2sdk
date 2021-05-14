@@ -13,7 +13,7 @@ namespace GW2SDK.Tests.Features.Colors
         [Trait("Category", "Integration")]
         public async Task It_can_get_all_colors()
         {
-            await using var services = new Container();
+            await using var services = new Composer();
             var sut = services.Resolve<ColorService>();
 
             var actual = await sut.GetColors();
@@ -26,7 +26,7 @@ namespace GW2SDK.Tests.Features.Colors
         [Trait("Category", "Integration")]
         public async Task It_can_get_all_color_ids()
         {
-            await using var services = new Container();
+            await using var services = new Composer();
             var sut = services.Resolve<ColorService>();
 
             var actual = await sut.GetColorsIndex();
@@ -39,7 +39,7 @@ namespace GW2SDK.Tests.Features.Colors
         [Trait("Category", "Integration")]
         public async Task It_can_get_a_color_by_id()
         {
-            await using var services = new Container();
+            await using var services = new Composer();
             var sut = services.Resolve<ColorService>();
 
             const int colorId = 1;
@@ -54,7 +54,7 @@ namespace GW2SDK.Tests.Features.Colors
         [Trait("Category", "Integration")]
         public async Task It_can_get_colors_by_id()
         {
-            await using var services = new Container();
+            await using var services = new Composer();
             var sut = services.Resolve<ColorService>();
 
             var ids = new[] { 1, 2, 3 };
@@ -69,7 +69,7 @@ namespace GW2SDK.Tests.Features.Colors
         [Trait("Category", "Unit")]
         public async Task Color_ids_cannot_be_null()
         {
-            await using var services = new Container();
+            await using var services = new Composer();
             var sut = services.Resolve<ColorService>();
 
             await Assert.ThrowsAsync<ArgumentNullException>("colorIds",
@@ -84,7 +84,7 @@ namespace GW2SDK.Tests.Features.Colors
         [Trait("Category", "Unit")]
         public async Task Color_ids_cannot_be_empty()
         {
-            await using var services = new Container();
+            await using var services = new Composer();
             var sut = services.Resolve<ColorService>();
 
             await Assert.ThrowsAsync<ArgumentException>("colorIds",
@@ -99,7 +99,7 @@ namespace GW2SDK.Tests.Features.Colors
         [Trait("Category", "Integration")]
         public async Task It_can_get_colors_by_page()
         {
-            await using var services = new Container();
+            await using var services = new Composer();
             var sut = services.Resolve<ColorService>();
 
             var actual = await sut.GetColorsByPage(1, 3);
@@ -113,7 +113,7 @@ namespace GW2SDK.Tests.Features.Colors
         [Trait("Category", "Integration")]
         public async Task Page_index_cannot_be_negative()
         {
-            await using var services = new Container();
+            await using var services = new Composer();
             var sut = services.Resolve<ColorService>();
 
             await Assert.ThrowsAsync<ArgumentException>(async () => await sut.GetColorsByPage(-1, 3));
@@ -124,7 +124,7 @@ namespace GW2SDK.Tests.Features.Colors
         [Trait("Category", "Integration")]
         public async Task Page_size_cannot_be_negative()
         {
-            await using var services = new Container();
+            await using var services = new Composer();
             var sut = services.Resolve<ColorService>();
 
             await Assert.ThrowsAsync<ArgumentException>(async () => await sut.GetColorsByPage(1, -3));

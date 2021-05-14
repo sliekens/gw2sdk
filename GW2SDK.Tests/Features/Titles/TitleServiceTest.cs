@@ -13,7 +13,7 @@ namespace GW2SDK.Tests.Features.Titles
         [Trait("Category", "Integration")]
         public async Task It_can_get_all_titles()
         {
-            await using var services = new Container();
+            await using var services = new Composer();
             var sut = services.Resolve<TitleService>();
 
             var actual = await sut.GetTitles();
@@ -26,7 +26,7 @@ namespace GW2SDK.Tests.Features.Titles
         [Trait("Category", "Integration")]
         public async Task It_can_get_all_title_ids()
         {
-            await using var services = new Container();
+            await using var services = new Composer();
             var sut = services.Resolve<TitleService>();
 
             var actual = await sut.GetTitlesIndex();
@@ -39,7 +39,7 @@ namespace GW2SDK.Tests.Features.Titles
         [Trait("Category", "Integration")]
         public async Task It_can_get_a_title_by_id()
         {
-            await using var services = new Container();
+            await using var services = new Composer();
             var sut = services.Resolve<TitleService>();
 
             const int titleId = 1;
@@ -54,7 +54,7 @@ namespace GW2SDK.Tests.Features.Titles
         [Trait("Category", "Integration")]
         public async Task It_can_get_titles_by_id()
         {
-            await using var services = new Container();
+            await using var services = new Composer();
             var sut = services.Resolve<TitleService>();
 
             var ids = new[] { 1, 2, 3 };
@@ -69,7 +69,7 @@ namespace GW2SDK.Tests.Features.Titles
         [Trait("Category", "Unit")]
         public async Task Title_ids_cannot_be_null()
         {
-            await using var services = new Container();
+            await using var services = new Composer();
             var sut = services.Resolve<TitleService>();
 
             await Assert.ThrowsAsync<ArgumentNullException>("titleIds",
@@ -84,7 +84,7 @@ namespace GW2SDK.Tests.Features.Titles
         [Trait("Category", "Unit")]
         public async Task Title_ids_cannot_be_empty()
         {
-            await using var services = new Container();
+            await using var services = new Composer();
             var sut = services.Resolve<TitleService>();
 
             await Assert.ThrowsAsync<ArgumentException>("titleIds",
@@ -99,7 +99,7 @@ namespace GW2SDK.Tests.Features.Titles
         [Trait("Category", "Integration")]
         public async Task It_can_get_titles_by_page()
         {
-            await using var services = new Container();
+            await using var services = new Composer();
             var sut = services.Resolve<TitleService>();
 
             var actual = await sut.GetTitlesByPage(1, 3);
@@ -113,7 +113,7 @@ namespace GW2SDK.Tests.Features.Titles
         [Trait("Category", "Integration")]
         public async Task Page_index_cannot_be_negative()
         {
-            await using var services = new Container();
+            await using var services = new Composer();
             var sut = services.Resolve<TitleService>();
 
             await Assert.ThrowsAsync<ArgumentException>(async () => await sut.GetTitlesByPage(-1, 3));
@@ -124,7 +124,7 @@ namespace GW2SDK.Tests.Features.Titles
         [Trait("Category", "Integration")]
         public async Task Page_size_cannot_be_negative()
         {
-            await using var services = new Container();
+            await using var services = new Composer();
             var sut = services.Resolve<TitleService>();
 
             await Assert.ThrowsAsync<ArgumentException>(async () => await sut.GetTitlesByPage(1, -3));
