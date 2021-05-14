@@ -21,7 +21,6 @@ using GW2SDK.Http;
 using GW2SDK.Items;
 using GW2SDK.MailCarriers;
 using GW2SDK.Recipes;
-using GW2SDK.Recipes.Search;
 using GW2SDK.Skins;
 using GW2SDK.Subtokens;
 using GW2SDK.Titles;
@@ -151,11 +150,6 @@ namespace GW2SDK.Tests.TestInfrastructure
             if (serviceType == typeof(RecipeService))
             {
                 return new RecipeService(Resolve<HttpClient>(), new RecipeReader());
-            }
-
-            if (serviceType == typeof(SearchRecipeService))
-            {
-                return new SearchRecipeService(Resolve<HttpClient>(), new RecipeReader());
             }
 
             if (serviceType == typeof(SkinService))

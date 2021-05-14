@@ -116,5 +116,35 @@ namespace GW2SDK.Tests.Features.Recipes
 
             await Assert.ThrowsAsync<ArgumentException>(async () => await sut.GetRecipesByPage(1, -3));
         }
+        
+        [Fact]
+        [Trait("Feature",  "Recipes.Search")]
+        [Trait("Category", "Integration")]
+        public async Task Recipes_with_iron_ore_as_ingredient_contains_recipe_id_for_iron_ingot()
+        {
+            await using var services = new Container();
+            var sut = services.Resolve<RecipeService>();
+
+            const int ironOre = 19699;
+            var actual = await sut.GetRecipesIndexByIngredientItemId(ironOre);
+
+            const int ironIngotRecipe = 19;
+            Assert.Contains(ironIngotRecipe, actual);
+        }
+
+        [Fact]
+        [Trait("Feature",  "Recipes.Search")]
+        [Trait("Category", "Integration")]
+        public async Task Recipes_with_iron_ingot_as_output_contains_recipe_id_for_iron_ingot()
+        {
+            await using var services = new Container();
+            var sut = services.Resolve<RecipeService>();
+
+            const int ironIngot = 19683;
+            var actual = await sut.GetRecipesIndexByOutputItemId(ironIngot);
+
+            const int ironIngotRecipe = 19;
+            Assert.Contains(ironIngotRecipe, actual);
+        }
     }
 }

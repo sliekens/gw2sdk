@@ -75,5 +75,30 @@ namespace GW2SDK.Recipes
             list.AddRange(_recipeReader.ReadArray(json));
             return new DataTransferPage<Recipe>(list, pageContext);
         }
+        
+
+        public async Task<IDataTransferCollection<int>> GetRecipesIndexByIngredientItemId(int ingredientItemId)
+        {
+            var request = new RecipesIndexByIngredientItemIdRequest(ingredientItemId);
+            using var response = await _http.SendAsync(request, HttpCompletionOption.ResponseHeadersRead).ConfigureAwait(false);
+            response.EnsureSuccessStatusCode();
+            using var json = await response.Content.ReadAsJsonAsync().ConfigureAwait(false);
+            var context = response.Headers.GetCollectionContext();
+            var list = new List<int>(context.ResultCount);
+            list.AddRange(_recipeReader.Id.ReadArray(json));
+            return new DataTransferCollection<int>(list, context);
+        }
+
+        public async Task<IDataTransferCollection<int>> GetRecipesIndexByOutputItemId(int outputItemId)
+        {
+            var request = new RecipesIndexByOutputItemIdRequest(outputItemId);
+            using var response = await _http.SendAsync(request, HttpCompletionOption.ResponseHeadersRead).ConfigureAwait(false);
+            response.EnsureSuccessStatusCode();
+            using var json = await response.Content.ReadAsJsonAsync().ConfigureAwait(false);
+            var context = response.Headers.GetCollectionContext();
+            var list = new List<int>(context.ResultCount);
+            list.AddRange(_recipeReader.Id.ReadArray(json));
+            return new DataTransferCollection<int>(list, context);
+        }
     }
 }
