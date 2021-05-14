@@ -36,16 +36,13 @@ namespace GW2SDK.Tests.TestInfrastructure
                 .OrResult<HttpResponseMessage>(r => (int) r.StatusCode >= 500)
                 .RetryForeverAsync();
 
-            // The API sometimes rejects valid tokens... retry up to 3 times on auth errors to (hopefully) eliminate false failures
-            var tokenRetry = Policy.Handle<UnauthorizedOperationException>()
-                .WaitAndRetryAsync(3, _ => TimeSpan.FromSeconds(1));
             var rateLimit = Policy.Handle<TooManyRequestsException>()
                 .WaitAndRetryForeverAsync(retryAttempt =>
                     TimeSpan.FromSeconds(Math.Min(8, Math.Pow(2, retryAttempt))) +
                     TimeSpan.FromMilliseconds(jitterer.Next(0, 1000)));
-            policies.Add("Http", rateLimit.WrapAsync(tokenRetry).WrapAsync(innerTimeout));
+            policies.Add("Http", rateLimit.WrapAsync(innerTimeout));
             policies.Add("HttpIdempotent",
-                rateLimit.WrapAsync(tokenRetry).WrapAsync(immediateRetry).WrapAsync(innerTimeout));
+                rateLimit.WrapAsync(immediateRetry).WrapAsync(innerTimeout));
             services.AddTransient<UnauthorizedMessageHandler>();
             services.AddTransient<BadMessageHandler>();
             services.AddTransient<RateLimitHandler>();
