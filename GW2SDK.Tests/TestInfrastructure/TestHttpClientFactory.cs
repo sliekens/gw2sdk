@@ -25,24 +25,10 @@ namespace GW2SDK.Tests.TestInfrastructure
         /// <summary>Creates a service provider for the HTTP factory which is unfortunately very dependent on ServiceCollection.</summary>
         private static ServiceProvider BuildHttpClientProvider()
         {
-            var jitterer = new Random();
             var services = new ServiceCollection();
-            var policies = services.AddPolicyRegistry();
-            var innerTimeout =
-                Policy.TimeoutAsync<HttpResponseMessage>(TimeSpan.FromSeconds(10), TimeoutStrategy.Optimistic);
-            var immediateRetry = Policy.Handle<HttpRequestException>()
-                .Or<TimeoutException>()
-                .Or<TimeoutRejectedException>()
-                .OrResult<HttpResponseMessage>(r => (int) r.StatusCode >= 500)
-                .RetryForeverAsync();
+            
+            AddPolicies(services);
 
-            var rateLimit = Policy.Handle<TooManyRequestsException>()
-                .WaitAndRetryForeverAsync(retryAttempt =>
-                    TimeSpan.FromSeconds(Math.Min(8, Math.Pow(2, retryAttempt))) +
-                    TimeSpan.FromMilliseconds(jitterer.Next(0, 1000)));
-            policies.Add("Http", rateLimit.WrapAsync(innerTimeout));
-            policies.Add("HttpIdempotent",
-                rateLimit.WrapAsync(immediateRetry).WrapAsync(innerTimeout));
             services.AddTransient<UnauthorizedMessageHandler>();
             services.AddTransient<BadMessageHandler>();
             services.AddTransient<RateLimitHandler>();
@@ -58,15 +44,56 @@ namespace GW2SDK.Tests.TestInfrastructure
                     MaxConnectionsPerServer = 10,
                     AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate
                 })
-                .AddPolicyHandlerFromRegistry((registry, message) =>
-                    message.Method == HttpMethod.Post || message.Method == HttpMethod.Patch
-                        ? registry.Get<IAsyncPolicy<HttpResponseMessage>>("Http")
-                        : registry.Get<IAsyncPolicy<HttpResponseMessage>>("HttpIdempotent"))
+                .AddPolicyHandlerFromRegistry("api.guildwars2.com")
                 .AddHttpMessageHandler<UnauthorizedMessageHandler>()
                 .AddHttpMessageHandler<BadMessageHandler>()
                 .AddHttpMessageHandler<RateLimitHandler>();
-
+            
             return services.BuildServiceProvider();
+        }
+
+        private static void AddPolicies(ServiceCollection services)
+        {
+            var jitterer = new Random();
+            var policies = services.AddPolicyRegistry();
+
+            // Any individual request should be able to complete in 30 seconds or less
+            var innerTimeout = Policy.TimeoutAsync<HttpResponseMessage>(TimeSpan.FromSeconds(30), TimeoutStrategy.Optimistic);
+
+            // Unfortunately the API limits the number of requests over time from the same IP address.
+            // This is annoying because we can't do anything to stay within the limit.
+            // Other processes on the same machine (or on another machine on the same network) could also be using the API and contributing to the limit.
+            // Basically, we might already be at the limit on a cold startup.
+            // A circuit breaker wouldn't help in this case. (Only when you can guarantee that there are no other API users using the same IP address.)
+            // The only thing that works well in all environments is automatic retries with exponential and jittered sleep durations.
+            var rateLimit = Policy<HttpResponseMessage>.Handle<TooManyRequestsException>()
+                .WaitAndRetryForeverAsync(retryAttempt => TimeSpan.FromSeconds(Math.Min(8, Math.Pow(2, retryAttempt))) +
+                    TimeSpan.FromMilliseconds(jitterer.Next(0, 1000)));
+
+            // Give up when there is no usable response within a reasonable time
+            //
+            // Let's look at a very pessimistic scenario that still completes successfully to determine what is reasonable
+            // * The rate limit is reached
+            // * The latency is high (possibly because the network is saturated)
+            // * The API returns a success response on the third retry (four attempts total)
+            //
+            //              Duration    Total duration
+            // Request         500ms             500ms
+            // X-Rate error    500ms           1,000ms
+            // Sleep         3,000ms           4,000ms
+            // Request         500ms           4,500ms
+            // X-Rate error    500ms           5,000ms
+            // Sleep         5,000ms          10,000ms
+            // Request         500ms          10,500ms
+            // X-Rate error    500ms          11,000ms
+            // Sleep         9,000ms          20,000ms
+            // Request         500ms          20,500ms
+            // OK result    29,999ms          50,499ms
+            //
+            // This is already very pessimistic but let's round it up to a minute just to be sure we're not being unreasonable
+            var timeout = Policy.TimeoutAsync<HttpResponseMessage>(TimeSpan.FromSeconds(60), TimeoutStrategy.Optimistic);
+
+            policies.Add("api.guildwars2.com", Policy.WrapAsync(timeout, rateLimit, innerTimeout));
         }
     }
 }
