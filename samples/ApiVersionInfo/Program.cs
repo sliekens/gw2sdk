@@ -15,6 +15,7 @@ namespace ApiVersionInfo
     {
         static Program()
         {
+            CultureInfo.CurrentCulture = CultureInfo.GetCultureInfo("en");
             CultureInfo.CurrentUICulture = CultureInfo.GetCultureInfo("en");
         }
 
