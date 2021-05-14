@@ -10,11 +10,19 @@ namespace GW2SDK.Http
     [PublicAPI]
     public static class HttpClientExtensions
     {
+        /// <summary>Sets the <see cref="HttpClient.BaseAddress" /> to <c>"https://api.guildwars2.com"</c>.</summary>
+        public static void UseGuildWars2(this HttpClient instance)
+        {
+            if (instance is null) throw new ArgumentNullException(nameof(instance));
+            instance.BaseAddress = new Uri("https://api.guildwars2.com", UriKind.Absolute);
+        }
+
         public static void UseAccessToken(this HttpClient instance, string accessToken)
         {
             if (instance is null) throw new ArgumentNullException(nameof(instance));
             if (accessToken is null) throw new ArgumentNullException(nameof(accessToken));
-            if (string.IsNullOrWhiteSpace(accessToken)) throw new ArgumentException("Access token cannot be null or whitespace.", nameof(accessToken));
+            if (string.IsNullOrWhiteSpace(accessToken))
+                throw new ArgumentException("Access token cannot be null or whitespace.", nameof(accessToken));
             instance.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
         }
 
@@ -36,14 +44,6 @@ namespace GW2SDK.Http
             if (lang is null) throw new ArgumentNullException(nameof(lang));
 
             instance.DefaultRequestHeaders.AcceptLanguage.ParseAdd(lang);
-        }
-
-        public static void UseDataCompression(this HttpClient instance)
-        {
-            if (instance is null) throw new ArgumentNullException(nameof(instance));
-            instance.DefaultRequestHeaders.AcceptEncoding.Add(new StringWithQualityHeaderValue("gzip"));
-            instance.DefaultRequestHeaders.AcceptEncoding.Add(new StringWithQualityHeaderValue("deflate",  0.5));
-            instance.DefaultRequestHeaders.AcceptEncoding.Add(new StringWithQualityHeaderValue("identity", 0));
         }
 
         public static async Task<JsonDocument> ReadAsJsonAsync(this HttpContent instance)
