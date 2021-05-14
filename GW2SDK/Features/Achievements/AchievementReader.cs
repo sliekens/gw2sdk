@@ -15,9 +15,9 @@ namespace GW2SDK.Achievements
             switch (json.GetProperty("type").GetString())
             {
                 case "Default":
-                    return Default.Read(json, missingMemberBehavior);
+                    return ((IJsonReader<DefaultAchievement>) this).Read(json, missingMemberBehavior);
                 case "ItemSet":
-                    return ItemSet.Read(json, missingMemberBehavior);
+                    return ((IJsonReader<ItemSetAchievement>) this).Read(json, missingMemberBehavior);
             }
 
             var id = new RequiredMember<int>("id");
@@ -594,9 +594,5 @@ namespace GW2SDK.Achievements
         }
 
         public IJsonReader<int> Id { get; } = new Int32JsonReader();
-
-        public IJsonReader<DefaultAchievement> Default => this;
-
-        public IJsonReader<ItemSetAchievement> ItemSet => this;
     }
 }

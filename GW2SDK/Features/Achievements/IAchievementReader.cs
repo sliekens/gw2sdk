@@ -7,9 +7,5 @@ namespace GW2SDK.Achievements
     public interface IAchievementReader : IJsonReader<Achievement>
     {
         IJsonReader<int> Id { get; }
-
-        IJsonReader<DefaultAchievement> Default { get; }
-
-        IJsonReader<ItemSetAchievement> ItemSet { get; }
     }
 }
