@@ -1,0 +1,104 @@
+﻿using System;
+using System.Globalization;
+using System.Net;
+using System.Net.Http;
+using System.Threading.Tasks;
+using GW2SDK;
+using GW2SDK.Builds;
+using GW2SDK.Http;
+using GW2SDK.V2;
+using Spectre.Console;
+
+namespace ApiVersionInfo
+{
+    internal class Program
+    {
+        static Program()
+        {
+            CultureInfo.CurrentUICulture = CultureInfo.GetCultureInfo("en");
+        }
+
+        private static async Task Main(string[] args)
+        {
+            // First configure the HttpClient
+            // There are many ways to do this, but this sample takes a minimalistic approach.
+            using var http = new HttpClient(new SocketsHttpHandler
+            {
+                // Enable compression to save network bandwidth (at the cost of some negligible CPU usage)
+                AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate
+            }, disposeHandler: true);
+
+            // Convenience method, sets the BaseAddress
+            http.UseGuildWars2();
+
+            // Convenience method, sets the Accept-Language header
+            http.UseLanguage("en");
+
+            // Convenience method, sets the X-Schema-Version to the recommended version
+            // (where recommended means that it is the least likely to cause JSON conversion errors)
+            http.UseSchemaVersion(SchemaVersion.Recommended);
+
+            // End of HttpClient config
+            // This is just the minimal setup to get things going without exceptions under normal conditions.
+            // In a real application, you would use Polly and IHttpClientFactory to add resiliency etc.
+
+            // From here on out, you can create GW2SDK services, pass the HttpClient and a JSON reader object.
+            // The default JSON reader should work fine, but can be replaced with a custom implementation.
+            var buildService = new BuildService(http, new BuildReader());
+            var infoService = new ApiInfoService(http, new ApiInfoReader());
+
+            await AnsiConsole.Status()
+                .StartAsync("Retrieving the current game version...",
+                    async ctx =>
+                    {
+                        // Get the game version
+                        var build = await buildService.GetBuild();
+
+                        // Render game version to console
+                        AnsiConsole.MarkupLine($"Gw2: [white on dodgerblue2]{build.Id}[/]");
+                    });
+
+            await AnsiConsole.Status()
+                .StartAsync("Retrieving API endpoints...",
+                    async ctx =>
+                    {
+                        // Get the API metadata
+                        var metadata = await infoService.GetApiInfo();
+
+                        // Render info to console
+                        var routes = new Table().MinimalBorder()
+                            .AddColumn("Route")
+                            .AddColumn("Authorization")
+                            .AddColumn("Localization");
+
+                        foreach (var route in metadata.Routes)
+                        {
+                            if (route.Active)
+                            {
+                                routes.AddRow(route.Path.EscapeMarkup(),
+                                    route.RequiresAuthorization ? "Requires token" : "Anonymous",
+                                    route.Multilingual ? string.Join(", ", metadata.Languages) : "");
+                            }
+                            else
+                            {
+                                routes.AddRow($"[dim]{route.Path.EscapeMarkup()}[/]",
+                                    route.RequiresAuthorization ? "Requires token" : "Anonymous",
+                                    route.Multilingual ? string.Join(", ", metadata.Languages) : "");
+                            }
+                        }
+
+                        var changes = new Table().MinimalBorder().AddColumn("Change").AddColumn("Description");
+                        foreach (var schema in metadata.SchemaVersions)
+                        {
+                            var formatted = DateTimeOffset.Parse(schema.Version).ToString("D");
+                            changes.AddRow(formatted.EscapeMarkup(), schema.Description.EscapeMarkup());
+                        }
+
+                        AnsiConsole.WriteLine("The following paths are exposed by this API:");
+                        AnsiConsole.Render(routes);
+                        AnsiConsole.Render(new Rule("Notable changes").LeftAligned());
+                        AnsiConsole.Render(changes);
+                    });
+        }
+    }
+}
