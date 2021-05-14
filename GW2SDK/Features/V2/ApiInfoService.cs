@@ -19,7 +19,7 @@ namespace GW2SDK.V2
             _apiInfoReader = apiInfoReader ?? throw new ArgumentNullException(nameof(apiInfoReader));
         }
 
-        public async Task<ApiInfo?> GetApiInfo()
+        public async Task<ApiInfo> GetApiInfo()
         {
             var request = new ApiInfoRequest();
             using var response = await _http.SendAsync(request, HttpCompletionOption.ResponseHeadersRead)

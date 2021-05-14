@@ -73,7 +73,7 @@ namespace GW2SDK.Backstories
             return new DataTransferCollection<string>(list, context);
         }
 
-        public async Task<BackstoryQuestion?> GetBackstoryQuestionById(int questionId)
+        public async Task<BackstoryQuestion> GetBackstoryQuestionById(int questionId)
         {
             var request = new BackstoryQuestionByIdRequest(questionId);
             using var response = await _http.SendAsync(request, HttpCompletionOption.ResponseHeadersRead).ConfigureAwait(false);
@@ -82,7 +82,7 @@ namespace GW2SDK.Backstories
             return _backstoryReader.Question.Read(json);
         }
 
-        public async Task<BackstoryAnswer?> GetBackstoryAnswerById(string answerId)
+        public async Task<BackstoryAnswer> GetBackstoryAnswerById(string answerId)
         {
             var request = new BackstoryAnswerByIdRequest(answerId);
             using var response = await _http.SendAsync(request, HttpCompletionOption.ResponseHeadersRead).ConfigureAwait(false);

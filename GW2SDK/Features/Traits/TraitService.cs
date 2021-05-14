@@ -44,7 +44,7 @@ namespace GW2SDK.Traits
             return new DataTransferCollection<int>(list, context);
         }
 
-        public async Task<Trait?> GetTraitById(int traitId)
+        public async Task<Trait> GetTraitById(int traitId)
         {
             var request = new TraitByIdRequest(traitId);
             using var response = await _http.SendAsync(request, HttpCompletionOption.ResponseHeadersRead).ConfigureAwait(false);

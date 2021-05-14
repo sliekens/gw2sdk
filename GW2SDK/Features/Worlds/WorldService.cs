@@ -45,7 +45,7 @@ namespace GW2SDK.Worlds
             return new DataTransferCollection<int>(list, context);
         }
 
-        public async Task<World?> GetWorldById(int worldId)
+        public async Task<World> GetWorldById(int worldId)
         {
             var request = new WorldByIdRequest(worldId);
             using var response = await _http.SendAsync(request, HttpCompletionOption.ResponseHeadersRead).ConfigureAwait(false);
