@@ -31,21 +31,6 @@ namespace GW2SDK.Tests.Features.Tokens
         [Fact]
         [Trait("Feature",  "Tokens")]
         [Trait("Category", "Integration")]
-        public async Task It_cant_get_the_token_info_without_an_access_token()
-        {
-            await using var services = new Composer();
-            var sut = services.Resolve<TokenInfoService>();
-
-            await Assert.ThrowsAsync<UnauthorizedOperationException>(async () =>
-            {
-                // Next statement should throw because argument is null and HttpClient.DefaultRequestHeaders is not configured
-                _ = await sut.GetTokenInfo(null);
-            });
-        }
-
-        [Fact]
-        [Trait("Feature",  "Tokens")]
-        [Trait("Category", "Integration")]
         public async Task It_can_get_the_token_info_for_a_subtoken()
         {
             await using var services = new Composer();

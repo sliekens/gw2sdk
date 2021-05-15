@@ -41,21 +41,6 @@ namespace GW2SDK.Tests.Features.Subtokens
         [Fact]
         [Trait("Feature", "Subtokens")]
         [Trait("Category", "Integration")]
-        public async Task It_cant_create_a_subtoken_without_an_access_token()
-        {
-            await using var services = new Composer();
-            var sut = services.Resolve<SubtokenService>();
-
-            await Assert.ThrowsAsync<UnauthorizedOperationException>(async () =>
-            {
-                // Next statement should throw because argument is null and HttpClient.DefaultRequestHeaders is not configured
-                _ = await sut.CreateSubtoken(null);
-            });
-        }
-
-        [Fact]
-        [Trait("Feature", "Subtokens")]
-        [Trait("Category", "Integration")]
         public async Task It_can_create_a_subtoken_with_custom_expiration_date()
         {
             await using var services = new Composer();

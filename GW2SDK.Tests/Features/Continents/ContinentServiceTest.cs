@@ -111,28 +111,6 @@ namespace GW2SDK.Tests.Features.Continents
         [Fact]
         [Trait("Feature",  "Continents")]
         [Trait("Category", "Integration")]
-        public async Task Continent_page_index_cannot_be_negative()
-        {
-            await using var services = new Composer();
-            var sut = services.Resolve<ContinentService>();
-
-            await Assert.ThrowsAsync<ArgumentException>(async () => await sut.GetContinentsByPage(-1, 3));
-        }
-
-        [Fact]
-        [Trait("Feature",  "Continents")]
-        [Trait("Category", "Integration")]
-        public async Task Continent_page_size_cannot_be_negative()
-        {
-            await using var services = new Composer();
-            var sut = services.Resolve<ContinentService>();
-
-            await Assert.ThrowsAsync<ArgumentException>(async () => await sut.GetContinentsByPage(1, -3));
-        }
-
-        [Fact]
-        [Trait("Feature",  "Continents")]
-        [Trait("Category", "Integration")]
         public async Task It_can_get_all_floors_by_continent_id()
         {
             await using var services = new Composer();
@@ -240,32 +218,6 @@ namespace GW2SDK.Tests.Features.Continents
 
             Assert.Equal(3, actual.Count);
             Assert.Equal(3, actual.PageSize);
-        }
-
-        [Fact]
-        [Trait("Feature",  "Continents")]
-        [Trait("Category", "Integration")]
-        public async Task Floor_page_index_cannot_be_negative()
-        {
-            await using var services = new Composer();
-            var sut = services.Resolve<ContinentService>();
-
-            const int continentId = 1;
-
-            await Assert.ThrowsAsync<ArgumentException>(async () => await sut.GetFloorsByPage(continentId, -1, 3));
-        }
-
-        [Fact]
-        [Trait("Feature",  "Continents")]
-        [Trait("Category", "Integration")]
-        public async Task Floor_page_size_cannot_be_negative()
-        {
-            await using var services = new Composer();
-            var sut = services.Resolve<ContinentService>();
-
-            const int continentId = 1;
-
-            await Assert.ThrowsAsync<ArgumentException>(async () => await sut.GetFloorsByPage(continentId, 1, -3));
         }
     }
 }

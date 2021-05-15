@@ -107,27 +107,5 @@ namespace GW2SDK.Tests.Features.Colors
             Assert.Equal(3, actual.Count);
             Assert.Equal(3, actual.PageSize);
         }
-
-        [Fact]
-        [Trait("Feature",  "Colors")]
-        [Trait("Category", "Integration")]
-        public async Task Page_index_cannot_be_negative()
-        {
-            await using var services = new Composer();
-            var sut = services.Resolve<ColorService>();
-
-            await Assert.ThrowsAsync<ArgumentException>(async () => await sut.GetColorsByPage(-1, 3));
-        }
-
-        [Fact]
-        [Trait("Feature",  "Colors")]
-        [Trait("Category", "Integration")]
-        public async Task Page_size_cannot_be_negative()
-        {
-            await using var services = new Composer();
-            var sut = services.Resolve<ColorService>();
-
-            await Assert.ThrowsAsync<ArgumentException>(async () => await sut.GetColorsByPage(1, -3));
-        }
     }
 }

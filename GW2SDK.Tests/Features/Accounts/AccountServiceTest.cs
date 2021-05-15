@@ -19,20 +19,5 @@ namespace GW2SDK.Tests.Features.Accounts
 
             Assert.IsType<Account>(actual);
         }
-
-        [Fact]
-        [Trait("Feature",  "Accounts")]
-        [Trait("Category", "Integration")]
-        public async Task It_cant_get_the_account_without_an_access_token()
-        {
-            await using var services = new Composer();
-            var sut = services.Resolve<AccountService>();
-            var actual = await Record.ExceptionAsync(async () =>
-            {
-                _ = await sut.GetAccount();
-            });
-
-            Assert.IsType<UnauthorizedOperationException>(actual);
-        }
     }
 }
