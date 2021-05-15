@@ -100,5 +100,22 @@ namespace GW2SDK.Recipes
             list.AddRange(_recipeReader.Id.ReadArray(json));
             return new DataTransferCollection<int>(list, context);
         }
+
+        /// <summary>
+        /// Retrieves a page, using a token obtained from a previous page result.
+        /// </summary>
+        /// <param name="token">One of <see cref="IPageContext.First"/>, <see cref="IPageContext.Previous"/>, <see cref="IPageContext.Self"/>, <see cref="IPageContext.Next"/> or <see cref="IPageContext.Last"/>.</param>
+        /// <returns>The page specified by the token.</returns>
+        public async Task<IDataTransferPage<Recipe>> GetRecipesByPage(ContinuationToken token)
+        {
+            var request = new ContinuationRequest(token);
+            using var response = await _http.SendAsync(request, HttpCompletionOption.ResponseHeadersRead).ConfigureAwait(false);
+            response.EnsureSuccessStatusCode();
+            using var json = await response.Content.ReadAsJsonAsync().ConfigureAwait(false);
+            var pageContext = response.Headers.GetPageContext();
+            var list = new List<Recipe>(pageContext.PageSize);
+            list.AddRange(_recipeReader.ReadArray(json));
+            return new DataTransferPage<Recipe>(list, pageContext);
+        }
     }
 }

@@ -1,0 +1,53 @@
+{
+  "version": 1,
+  "dependencies": {
+    ".NETCoreApp,Version=v5.0": {
+      "Spectre.Console": {
+        "type": "Direct",
+        "requested": "[0.39.0, )",
+        "resolved": "0.39.0",
+        "contentHash": "7GgJ/gJV2Xge7khTQ6LlaukwYPldSIkew+j3OOhBmExlgzS4f9wC1iXs3df0hbtbHYd2fB02NxOWZTFcnwsYlg==",
+        "dependencies": {
+          "Wcwidth": "0.2.0"
+        }
+      },
+      "Spectre.Console.ImageSharp": {
+        "type": "Direct",
+        "requested": "[0.39.0, )",
+        "resolved": "0.39.0",
+        "contentHash": "QXh0K08QSqBLZHCcfBKSbZXY2+i7VzZAK1StDXN8Pytv8zKORKiTKuJ4byR6Ai/d01Ygh2kkxgNzC0k+v+Ha+g==",
+        "dependencies": {
+          "SixLabors.ImageSharp": "1.0.2",
+          "Spectre.Console": "0.39.0"
+        }
+      },
+      "System.Interactive": {
+        "type": "Direct",
+        "requested": "[5.0.0, )",
+        "resolved": "5.0.0",
+        "contentHash": "ePZVkHmihIDChuXwghL5+ywHlbbLOLeDQsITXvHvugMv3sVZe9KUN1MK/VlfVLiFlLTi6QDc2xgZSFX/66i/jQ=="
+      },
+      "SixLabors.ImageSharp": {
+        "type": "Transitive",
+        "resolved": "1.0.2",
+        "contentHash": "iZJ37Iss3pUkFl961x1aka85QuvgY9oNZabHijzVnHs4QTz6EMNx3zjJDyvK/0+Ryj6JPv/PC7GVIJXLHtu2nQ=="
+      },
+      "System.Text.Json": {
+        "type": "Transitive",
+        "resolved": "5.0.2",
+        "contentHash": "I47dVIGiV6SfAyppphxqupertT/5oZkYLDCX6vC3HpOI4ZLjyoKAreUoem2ie6G0RbRuFrlqz/PcTQjfb2DOfQ=="
+      },
+      "Wcwidth": {
+        "type": "Transitive",
+        "resolved": "0.2.0",
+        "contentHash": "H7no2W0vuLJTvSPanlrijtG3UdJNVoeWBOp2a5dJFVa2tqSQuP5GfbJw1xAtPG9agRW310nFTUUsyPz5tuVIxw=="
+      },
+      "gw2sdk": {
+        "type": "Project",
+        "dependencies": {
+          "System.Text.Json": "5.0.2"
+        }
+      }
+    }
+  }
+}
