@@ -18,37 +18,5 @@ namespace GW2SDK.Tests.Features.Accounts.Recipes
             Assert.NotEmpty(actual);
             Assert.All(actual, id => Assert.NotEqual(0, id));
         }
-
-        [Fact]
-        public async Task It_cant_get_the_recipes_without_an_access_token()
-        {
-            await using var services = new Composer();
-            var sut = services.Resolve<AccountRecipesService>();
-
-            var actual = await Record.ExceptionAsync(async () =>
-            {
-                var _ = await sut.GetUnlockedRecipes(null);
-            });
-
-            var reason = Assert.IsType<UnauthorizedOperationException>(actual);
-
-            Assert.Equal("Invalid access token", reason.Message);
-        }
-
-        [Fact]
-        public async Task It_cant_get_the_recipes_without_the_unlock_scope()
-        {
-            await using var services = new Composer();
-            var sut = services.Resolve<AccountRecipesService>();
-
-            var actual = await Record.ExceptionAsync(async () =>
-            {
-                var _ = await sut.GetUnlockedRecipes(ConfigurationManager.Instance.ApiKeyBasic);
-            });
-
-            var reason = Assert.IsType<UnauthorizedOperationException>(actual);
-
-            Assert.Equal("requires scope unlocks", reason.Message);
-        }
     }
 }

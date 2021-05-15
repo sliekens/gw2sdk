@@ -94,27 +94,5 @@ namespace GW2SDK.Tests.Features.Items
             Assert.Equal(3, actual.Count);
             Assert.Equal(3, actual.PageSize);
         }
-
-        [Fact]
-        [Trait("Feature",  "Items")]
-        [Trait("Category", "Integration")]
-        public async Task Page_index_cannot_be_negative()
-        {
-            await using var services = new Composer();
-            var sut = services.Resolve<ItemService>();
-
-            await Assert.ThrowsAsync<ArgumentException>(async () => await sut.GetItemsByPage(-1, 3));
-        }
-
-        [Fact]
-        [Trait("Feature",  "Items")]
-        [Trait("Category", "Integration")]
-        public async Task Page_size_cannot_be_negative()
-        {
-            await using var services = new Composer();
-            var sut = services.Resolve<ItemService>();
-
-            await Assert.ThrowsAsync<ArgumentException>(async () => await sut.GetItemsByPage(1, -3));
-        }
     }
 }

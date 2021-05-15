@@ -26,7 +26,7 @@ namespace GW2SDK.Tests.TestInfrastructure
         private static ServiceProvider BuildHttpClientProvider()
         {
             var services = new ServiceCollection();
-            
+
             AddPolicies(services);
 
             services.AddTransient<UnauthorizedMessageHandler>();
@@ -47,7 +47,7 @@ namespace GW2SDK.Tests.TestInfrastructure
                 .AddHttpMessageHandler<UnauthorizedMessageHandler>()
                 .AddHttpMessageHandler<BadMessageHandler>()
                 .AddHttpMessageHandler<RateLimitHandler>();
-            
+
             return services.BuildServiceProvider();
         }
 
@@ -57,7 +57,8 @@ namespace GW2SDK.Tests.TestInfrastructure
             var policies = services.AddPolicyRegistry();
 
             // Any individual request should be able to complete in 30 seconds or less
-            var innerTimeout = Policy.TimeoutAsync<HttpResponseMessage>(TimeSpan.FromSeconds(30), TimeoutStrategy.Optimistic);
+            var innerTimeout =
+                Policy.TimeoutAsync<HttpResponseMessage>(TimeSpan.FromSeconds(30), TimeoutStrategy.Optimistic);
 
             // Unfortunately the API limits the number of requests over time from the same IP address.
             // This is annoying because we can't do anything to stay within the limit.
@@ -90,7 +91,8 @@ namespace GW2SDK.Tests.TestInfrastructure
             // OK result    29,999ms          50,499ms
             //
             // This is already very pessimistic but let's round it up to a minute just to be sure we're not being unreasonable
-            var timeout = Policy.TimeoutAsync<HttpResponseMessage>(TimeSpan.FromSeconds(60), TimeoutStrategy.Optimistic);
+            var timeout =
+                Policy.TimeoutAsync<HttpResponseMessage>(TimeSpan.FromSeconds(60), TimeoutStrategy.Optimistic);
 
             policies.Add("api.guildwars2.com", Policy.WrapAsync(timeout, rateLimit, innerTimeout));
         }

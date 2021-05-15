@@ -144,27 +144,5 @@ namespace GW2SDK.Tests.Features.Achievements.Groups
             Assert.Equal(3, actual.Count);
             Assert.Equal(3, actual.PageSize);
         }
-
-        [Fact]
-        [Trait("Feature",  "Achievements.Groups")]
-        [Trait("Category", "Integration")]
-        public async Task Page_index_cannot_be_negative()
-        {
-            await using var services = new Composer();
-            var sut = services.Resolve<AchievementGroupService>();
-
-            await Assert.ThrowsAsync<ArgumentException>(async () => await sut.GetAchievementGroupsByPage(-1, 3));
-        }
-
-        [Fact]
-        [Trait("Feature",  "Achievements.Groups")]
-        [Trait("Category", "Integration")]
-        public async Task Page_size_cannot_be_negative()
-        {
-            await using var services = new Composer();
-            var sut = services.Resolve<AchievementGroupService>();
-
-            await Assert.ThrowsAsync<ArgumentException>(async () => await sut.GetAchievementGroupsByPage(1, -3));
-        }
     }
 }

@@ -94,28 +94,6 @@ namespace GW2SDK.Tests.Features.Recipes
             Assert.Equal(3, actual.Count);
             Assert.Equal(3, actual.PageSize);
         }
-
-        [Fact]
-        [Trait("Feature",  "Recipes")]
-        [Trait("Category", "Integration")]
-        public async Task Page_index_cannot_be_negative()
-        {
-            await using var services = new Composer();
-            var sut = services.Resolve<RecipeService>();
-
-            await Assert.ThrowsAsync<ArgumentException>(async () => await sut.GetRecipesByPage(-1, 3));
-        }
-
-        [Fact]
-        [Trait("Feature",  "Recipes")]
-        [Trait("Category", "Integration")]
-        public async Task Page_size_cannot_be_negative()
-        {
-            await using var services = new Composer();
-            var sut = services.Resolve<RecipeService>();
-
-            await Assert.ThrowsAsync<ArgumentException>(async () => await sut.GetRecipesByPage(1, -3));
-        }
         
         [Fact]
         [Trait("Feature",  "Recipes.Search")]

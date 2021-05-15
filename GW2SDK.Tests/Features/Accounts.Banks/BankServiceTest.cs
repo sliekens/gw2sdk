@@ -17,37 +17,5 @@ namespace GW2SDK.Tests.Features.Accounts.Banks
 
             Assert.IsType<Bank>(actual);
         }
-
-        [Fact]
-        public async Task It_cant_get_the_bank_without_an_access_token()
-        {
-            await using var services = new Composer();
-            var sut = services.Resolve<BankService>();
-
-            var actual = await Record.ExceptionAsync(async() =>
-            {
-                var _ = await sut.GetBank(accessToken: null);
-            });
-
-            var reason = Assert.IsType<UnauthorizedOperationException>(actual);
-
-            Assert.Equal("Invalid access token", reason.Message);
-        }
-
-        [Fact]
-        public async Task It_cant_get_the_bank_without_the_inventories_scope()
-        {
-            await using var services = new Composer();
-            var sut = services.Resolve<BankService>();
-
-            var actual = await Record.ExceptionAsync(async() =>
-            {
-                var _ = await sut.GetBank(ConfigurationManager.Instance.ApiKeyBasic);
-            });
-
-            var reason = Assert.IsType<UnauthorizedOperationException>(actual);
-
-            Assert.Equal("requires scope inventories", reason.Message);
-        }
     }
 }
