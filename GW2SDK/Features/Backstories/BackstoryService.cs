@@ -25,73 +25,49 @@ namespace GW2SDK.Backstories
             _backstoryReader = backstoryReader ?? throw new ArgumentNullException(nameof(backstoryReader));
         }
 
-        public async Task<IDataTransferCollection<BackstoryQuestion>> GetBackstoryQuestions()
+        public async Task<IDataTransferSet<BackstoryQuestion>> GetBackstoryQuestions()
         {
             var request = new BackstoryQuestionsRequest();
-            using var response = await _http.SendAsync(request, HttpCompletionOption.ResponseHeadersRead).ConfigureAwait(false);
-            response.EnsureSuccessStatusCode();
-            using var json = await response.Content.ReadAsJsonAsync().ConfigureAwait(false);
-            var context = response.Headers.GetCollectionContext();
-            var list = new List<BackstoryQuestion>(context.ResultCount);
-            list.AddRange(_backstoryReader.Question.ReadArray(json));
-            return new DataTransferCollection<BackstoryQuestion>(list, context);
+            return await _http.GetResourcesSet(request, json => _backstoryReader.Question.ReadArray(json))
+                .ConfigureAwait(false);
         }
 
-        public async Task<IDataTransferCollection<BackstoryAnswer>> GetBackstoryAnswers()
+        public async Task<IDataTransferSet<BackstoryAnswer>> GetBackstoryAnswers()
         {
             var request = new BackstoryAnswersRequest();
-            using var response = await _http.SendAsync(request, HttpCompletionOption.ResponseHeadersRead).ConfigureAwait(false);
-            response.EnsureSuccessStatusCode();
-            using var json = await response.Content.ReadAsJsonAsync().ConfigureAwait(false);
-            var context = response.Headers.GetCollectionContext();
-            var list = new List<BackstoryAnswer>(context.ResultCount);
-            list.AddRange(_backstoryReader.Answer.ReadArray(json));
-            return new DataTransferCollection<BackstoryAnswer>(list, context);
+            return await _http.GetResourcesSet(request, json => _backstoryReader.Answer.ReadArray(json))
+                .ConfigureAwait(false);
         }
 
-        public async Task<IDataTransferCollection<int>> GetBackstoryQuestionsIndex()
+        public async Task<IDataTransferSet<int>> GetBackstoryQuestionsIndex()
         {
             var request = new BackstoryQuestionsIndexRequest();
-            using var response = await _http.SendAsync(request, HttpCompletionOption.ResponseHeadersRead).ConfigureAwait(false);
-            response.EnsureSuccessStatusCode();
-            using var json = await response.Content.ReadAsJsonAsync().ConfigureAwait(false);
-            var context = response.Headers.GetCollectionContext();
-            var list = new List<int>(context.ResultCount);
-            list.AddRange(_backstoryReader.Question.Id.ReadArray(json));
-            return new DataTransferCollection<int>(list, context);
+            return await _http.GetResourcesSet(request, json => _backstoryReader.Question.Id.ReadArray(json))
+                .ConfigureAwait(false);
         }
 
-        public async Task<IDataTransferCollection<string>> GetBackstoryAnswersIndex()
+        public async Task<IDataTransferSet<string>> GetBackstoryAnswersIndex()
         {
             var request = new BackstoryAnswersIndexRequest();
-            using var response = await _http.SendAsync(request, HttpCompletionOption.ResponseHeadersRead).ConfigureAwait(false);
-            response.EnsureSuccessStatusCode();
-            using var json = await response.Content.ReadAsJsonAsync().ConfigureAwait(false);
-            var context = response.Headers.GetCollectionContext();
-            var list = new List<string>(context.ResultCount);
-            list.AddRange(_backstoryReader.Answer.Id.ReadArray(json));
-            return new DataTransferCollection<string>(list, context);
+            return await _http.GetResourcesSet(request, json => _backstoryReader.Answer.Id.ReadArray(json))
+                .ConfigureAwait(false);
         }
 
         public async Task<BackstoryQuestion> GetBackstoryQuestionById(int questionId)
         {
             var request = new BackstoryQuestionByIdRequest(questionId);
-            using var response = await _http.SendAsync(request, HttpCompletionOption.ResponseHeadersRead).ConfigureAwait(false);
-            response.EnsureSuccessStatusCode();
-            using var json = await response.Content.ReadAsJsonAsync().ConfigureAwait(false);
-            return _backstoryReader.Question.Read(json);
+            return await _http.GetResource(request, json => _backstoryReader.Question.Read(json))
+                .ConfigureAwait(false);
         }
 
         public async Task<BackstoryAnswer> GetBackstoryAnswerById(string answerId)
         {
             var request = new BackstoryAnswerByIdRequest(answerId);
-            using var response = await _http.SendAsync(request, HttpCompletionOption.ResponseHeadersRead).ConfigureAwait(false);
-            response.EnsureSuccessStatusCode();
-            using var json = await response.Content.ReadAsJsonAsync().ConfigureAwait(false);
-            return _backstoryReader.Answer.Read(json);
+            return await _http.GetResource(request, json => _backstoryReader.Answer.Read(json))
+                .ConfigureAwait(false);
         }
 
-        public async Task<IDataTransferCollection<BackstoryQuestion>> GetBackstoryQuestionsByIds(IReadOnlyCollection<int> questionIds)
+        public async Task<IDataTransferSet<BackstoryQuestion>> GetBackstoryQuestionsByIds(IReadOnlyCollection<int> questionIds)
         {
             if (questionIds is null)
             {
@@ -104,16 +80,11 @@ namespace GW2SDK.Backstories
             }
 
             var request = new BackstoryQuestionsByIdsRequest(questionIds);
-            using var response = await _http.SendAsync(request, HttpCompletionOption.ResponseHeadersRead).ConfigureAwait(false);
-            response.EnsureSuccessStatusCode();
-            using var json = await response.Content.ReadAsJsonAsync().ConfigureAwait(false);
-            var context = response.Headers.GetCollectionContext();
-            var list = new List<BackstoryQuestion>(context.ResultCount);
-            list.AddRange(_backstoryReader.Question.ReadArray(json));
-            return new DataTransferCollection<BackstoryQuestion>(list, context);
+            return await _http.GetResourcesSet(request, json => _backstoryReader.Question.ReadArray(json))
+                .ConfigureAwait(false);
         }
 
-        public async Task<IDataTransferCollection<BackstoryAnswer>> GetBackstoryAnswersByIds(IReadOnlyCollection<string> answerIds)
+        public async Task<IDataTransferSet<BackstoryAnswer>> GetBackstoryAnswersByIds(IReadOnlyCollection<string> answerIds)
         {
             if (answerIds is null)
             {
@@ -131,37 +102,22 @@ namespace GW2SDK.Backstories
             }
 
             var request = new BackstoryAnswersByIdsRequest(answerIds);
-            using var response = await _http.SendAsync(request, HttpCompletionOption.ResponseHeadersRead).ConfigureAwait(false);
-            response.EnsureSuccessStatusCode();
-            using var json = await response.Content.ReadAsJsonAsync().ConfigureAwait(false);
-            var context = response.Headers.GetCollectionContext();
-            var list = new List<BackstoryAnswer>(context.ResultCount);
-            list.AddRange(_backstoryReader.Answer.ReadArray(json));
-            return new DataTransferCollection<BackstoryAnswer>(list, context);
+            return await _http.GetResourcesSet(request, json => _backstoryReader.Answer.ReadArray(json))
+                .ConfigureAwait(false);
         }
 
         public async Task<IDataTransferPage<BackstoryQuestion>> GetBackstoryQuestionsByPage(int pageIndex, int? pageSize = null)
         {
             var request = new BackstoryQuestionsByPageRequest(pageIndex, pageSize);
-            using var response = await _http.SendAsync(request, HttpCompletionOption.ResponseHeadersRead).ConfigureAwait(false);
-            response.EnsureSuccessStatusCode();
-            using var json = await response.Content.ReadAsJsonAsync().ConfigureAwait(false);
-            var pageContext = response.Headers.GetPageContext();
-            var list = new List<BackstoryQuestion>(pageContext.PageSize);
-            list.AddRange(_backstoryReader.Question.ReadArray(json));
-            return new DataTransferPage<BackstoryQuestion>(list, pageContext);
+            return await _http.GetResourcesPage(request, json => _backstoryReader.Question.ReadArray(json))
+                .ConfigureAwait(false);
         }
 
         public async Task<IDataTransferPage<BackstoryAnswer>> GetBackstoryAnswersByPage(int pageIndex, int? pageSize = null)
         {
             var request = new BackstoryAnswersByPageRequest(pageIndex, pageSize);
-            using var response = await _http.SendAsync(request, HttpCompletionOption.ResponseHeadersRead).ConfigureAwait(false);
-            response.EnsureSuccessStatusCode();
-            using var json = await response.Content.ReadAsJsonAsync().ConfigureAwait(false);
-            var pageContext = response.Headers.GetPageContext();
-            var list = new List<BackstoryAnswer>(pageContext.PageSize);
-            list.AddRange(_backstoryReader.Answer.ReadArray(json));
-            return new DataTransferPage<BackstoryAnswer>(list, pageContext);
+            return await _http.GetResourcesPage(request, json => _backstoryReader.Answer.ReadArray(json))
+                .ConfigureAwait(false);
         }
     }
 }

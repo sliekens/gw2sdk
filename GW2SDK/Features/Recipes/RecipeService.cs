@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
-using JetBrains.Annotations;
 using GW2SDK.Http;
 using GW2SDK.Recipes.Http;
+using JetBrains.Annotations;
 
 namespace GW2SDK.Recipes
 {
@@ -21,28 +21,21 @@ namespace GW2SDK.Recipes
             _recipeReader = recipeReader ?? throw new ArgumentNullException(nameof(recipeReader));
         }
 
-        public async Task<IDataTransferCollection<int>> GetRecipesIndex()
+        public async Task<IDataTransferSet<int>> GetRecipesIndex()
         {
             var request = new RecipesIndexRequest();
-            using var response = await _http.SendAsync(request, HttpCompletionOption.ResponseHeadersRead).ConfigureAwait(false);
-            response.EnsureSuccessStatusCode();
-            using var json = await response.Content.ReadAsJsonAsync().ConfigureAwait(false);
-            var context = response.Headers.GetCollectionContext();
-            var list = new List<int>(context.ResultCount);
-            list.AddRange(_recipeReader.Id.ReadArray(json));
-            return new DataTransferCollection<int>(list, context);
+            return await _http.GetResourcesSet(request, json => _recipeReader.Id.ReadArray(json))
+                .ConfigureAwait(false);
         }
 
         public async Task<Recipe> GetRecipeById(int recipeId)
         {
             var request = new RecipeByIdRequest(recipeId);
-            using var response = await _http.SendAsync(request, HttpCompletionOption.ResponseHeadersRead).ConfigureAwait(false);
-            response.EnsureSuccessStatusCode();
-            using var json = await response.Content.ReadAsJsonAsync().ConfigureAwait(false);
-            return _recipeReader.Read(json);
+            return await _http.GetResource(request, json => _recipeReader.Read(json))
+                .ConfigureAwait(false);
         }
 
-        public async Task<IDataTransferCollection<Recipe>> GetRecipesByIds(IReadOnlyCollection<int> recipeIds)
+        public async Task<IDataTransferSet<Recipe>> GetRecipesByIds(IReadOnlyCollection<int> recipeIds)
         {
             if (recipeIds is null)
             {
@@ -55,67 +48,40 @@ namespace GW2SDK.Recipes
             }
 
             var request = new RecipesByIdsRequest(recipeIds);
-            using var response = await _http.SendAsync(request, HttpCompletionOption.ResponseHeadersRead).ConfigureAwait(false);
-            response.EnsureSuccessStatusCode();
-            using var json = await response.Content.ReadAsJsonAsync().ConfigureAwait(false);
-            var context = response.Headers.GetCollectionContext();
-            var list = new List<Recipe>(context.ResultCount);
-            list.AddRange(_recipeReader.ReadArray(json));
-            return new DataTransferCollection<Recipe>(list, context);
+            return await _http.GetResourcesSet(request, json => _recipeReader.ReadArray(json))
+                .ConfigureAwait(false);
         }
 
         public async Task<IDataTransferPage<Recipe>> GetRecipesByPage(int pageIndex, int? pageSize = null)
         {
             var request = new RecipesByPageRequest(pageIndex, pageSize);
-            using var response = await _http.SendAsync(request, HttpCompletionOption.ResponseHeadersRead).ConfigureAwait(false);
-            response.EnsureSuccessStatusCode();
-            using var json = await response.Content.ReadAsJsonAsync().ConfigureAwait(false);
-            var pageContext = response.Headers.GetPageContext();
-            var list = new List<Recipe>(pageContext.PageSize);
-            list.AddRange(_recipeReader.ReadArray(json));
-            return new DataTransferPage<Recipe>(list, pageContext);
+            return await _http.GetResourcesPage(request, json => _recipeReader.ReadArray(json))
+                .ConfigureAwait(false);
         }
-        
 
-        public async Task<IDataTransferCollection<int>> GetRecipesIndexByIngredientItemId(int ingredientItemId)
+        public async Task<IDataTransferSet<int>> GetRecipesIndexByIngredientItemId(int ingredientItemId)
         {
             var request = new RecipesIndexByIngredientItemIdRequest(ingredientItemId);
-            using var response = await _http.SendAsync(request, HttpCompletionOption.ResponseHeadersRead).ConfigureAwait(false);
-            response.EnsureSuccessStatusCode();
-            using var json = await response.Content.ReadAsJsonAsync().ConfigureAwait(false);
-            var context = response.Headers.GetCollectionContext();
-            var list = new List<int>(context.ResultCount);
-            list.AddRange(_recipeReader.Id.ReadArray(json));
-            return new DataTransferCollection<int>(list, context);
+            return await _http.GetResourcesSet(request, json => _recipeReader.Id.ReadArray(json))
+                .ConfigureAwait(false);
         }
 
-        public async Task<IDataTransferCollection<int>> GetRecipesIndexByOutputItemId(int outputItemId)
+        public async Task<IDataTransferSet<int>> GetRecipesIndexByOutputItemId(int outputItemId)
         {
             var request = new RecipesIndexByOutputItemIdRequest(outputItemId);
-            using var response = await _http.SendAsync(request, HttpCompletionOption.ResponseHeadersRead).ConfigureAwait(false);
-            response.EnsureSuccessStatusCode();
-            using var json = await response.Content.ReadAsJsonAsync().ConfigureAwait(false);
-            var context = response.Headers.GetCollectionContext();
-            var list = new List<int>(context.ResultCount);
-            list.AddRange(_recipeReader.Id.ReadArray(json));
-            return new DataTransferCollection<int>(list, context);
+            return await _http.GetResourcesSet(request, json => _recipeReader.Id.ReadArray(json))
+                .ConfigureAwait(false);
         }
 
-        /// <summary>
-        /// Retrieves a page, using a token obtained from a previous page result.
-        /// </summary>
-        /// <param name="token">One of <see cref="IPageContext.First"/>, <see cref="IPageContext.Previous"/>, <see cref="IPageContext.Self"/>, <see cref="IPageContext.Next"/> or <see cref="IPageContext.Last"/>.</param>
+        /// <summary>Retrieves a page, using a token obtained from a previous page result.</summary>
+        /// <param name="token">One of <see cref="IPageContext.First" />, <see cref="IPageContext.Previous" />,
+        /// <see cref="IPageContext.Self" />, <see cref="IPageContext.Next" /> or <see cref="IPageContext.Last" />.</param>
         /// <returns>The page specified by the token.</returns>
         public async Task<IDataTransferPage<Recipe>> GetRecipesByPage(ContinuationToken token)
         {
             var request = new ContinuationRequest(token);
-            using var response = await _http.SendAsync(request, HttpCompletionOption.ResponseHeadersRead).ConfigureAwait(false);
-            response.EnsureSuccessStatusCode();
-            using var json = await response.Content.ReadAsJsonAsync().ConfigureAwait(false);
-            var pageContext = response.Headers.GetPageContext();
-            var list = new List<Recipe>(pageContext.PageSize);
-            list.AddRange(_recipeReader.ReadArray(json));
-            return new DataTransferPage<Recipe>(list, pageContext);
+            return await _http.GetResourcesPage(request, json => _recipeReader.ReadArray(json))
+                .ConfigureAwait(false);
         }
     }
 }

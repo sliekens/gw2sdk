@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Net.Http;
 using System.Threading.Tasks;
-using JetBrains.Annotations;
 using GW2SDK.Http;
 using GW2SDK.V2.Http;
+using JetBrains.Annotations;
 
 namespace GW2SDK.V2
 {
@@ -22,11 +22,8 @@ namespace GW2SDK.V2
         public async Task<ApiInfo> GetApiInfo()
         {
             var request = new ApiInfoRequest();
-            using var response = await _http.SendAsync(request, HttpCompletionOption.ResponseHeadersRead)
+            return await _http.GetResource(request, json => _apiInfoReader.Read(json))
                 .ConfigureAwait(false);
-            response.EnsureSuccessStatusCode();
-            using var json = await response.Content.ReadAsJsonAsync().ConfigureAwait(false);
-            return _apiInfoReader.Read(json);
         }
     }
 }

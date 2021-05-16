@@ -21,28 +21,21 @@ namespace GW2SDK.Commerce.Prices
             _itemPriceReader = itemPriceReader ?? throw new ArgumentNullException(nameof(itemPriceReader));
         }
 
-        public async Task<IDataTransferCollection<int>> GetItemPricesIndex()
+        public async Task<IDataTransferSet<int>> GetItemPricesIndex()
         {
             var request = new ItemPricesIndexRequest();
-            using var response = await _http.SendAsync(request, HttpCompletionOption.ResponseHeadersRead).ConfigureAwait(false);
-            response.EnsureSuccessStatusCode();
-            using var json = await response.Content.ReadAsJsonAsync().ConfigureAwait(false);
-            var context = response.Headers.GetCollectionContext();
-            var list = new List<int>(context.ResultCount);
-            list.AddRange(_itemPriceReader.Id.ReadArray(json));
-            return new DataTransferCollection<int>(list, context);
+            return await _http.GetResourcesSet(request, json => _itemPriceReader.Id.ReadArray(json))
+                .ConfigureAwait(false);
         }
 
         public async Task<ItemPrice> GetItemPriceById(int itemId)
         {
             var request = new ItemPriceByIdRequest(itemId);
-            using var response = await _http.SendAsync(request, HttpCompletionOption.ResponseHeadersRead).ConfigureAwait(false);
-            response.EnsureSuccessStatusCode();
-            using var json = await response.Content.ReadAsJsonAsync().ConfigureAwait(false);
-            return _itemPriceReader.Read(json);
+            return await _http.GetResource(request, json => _itemPriceReader.Read(json))
+                .ConfigureAwait(false);
         }
 
-        public async Task<IDataTransferCollection<ItemPrice>> GetItemPricesByIds(IReadOnlyCollection<int> itemIds)
+        public async Task<IDataTransferSet<ItemPrice>> GetItemPricesByIds(IReadOnlyCollection<int> itemIds)
         {
             if (itemIds is null)
             {
@@ -55,13 +48,8 @@ namespace GW2SDK.Commerce.Prices
             }
 
             var request = new ItemPricesByIdsRequest(itemIds);
-            using var response = await _http.SendAsync(request, HttpCompletionOption.ResponseHeadersRead).ConfigureAwait(false);
-            response.EnsureSuccessStatusCode();
-            using var json = await response.Content.ReadAsJsonAsync().ConfigureAwait(false);
-            var context = response.Headers.GetCollectionContext();
-            var list = new List<ItemPrice>(context.ResultCount);
-            list.AddRange(_itemPriceReader.ReadArray(json));
-            return new DataTransferCollection<ItemPrice>(list, context);
+            return await _http.GetResourcesSet(request, json => _itemPriceReader.ReadArray(json))
+                .ConfigureAwait(false);
         }
     }
 }

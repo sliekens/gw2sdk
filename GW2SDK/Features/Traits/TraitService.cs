@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
-using JetBrains.Annotations;
 using GW2SDK.Http;
 using GW2SDK.Traits.Http;
+using JetBrains.Annotations;
 
 namespace GW2SDK.Traits
 {
@@ -20,40 +20,28 @@ namespace GW2SDK.Traits
             _traitReader = traitReader ?? throw new ArgumentNullException(nameof(traitReader));
         }
 
-        public async Task<IDataTransferCollection<Trait>> GetTraits()
+        public async Task<IDataTransferSet<Trait>> GetTraits()
         {
             var request = new TraitsRequest();
-            using var response = await _http.SendAsync(request, HttpCompletionOption.ResponseHeadersRead).ConfigureAwait(false);
-            response.EnsureSuccessStatusCode();
-            using var json = await response.Content.ReadAsJsonAsync().ConfigureAwait(false);
-            var context = response.Headers.GetCollectionContext();
-            var list = new List<Trait>(context.ResultCount);
-            list.AddRange(_traitReader.ReadArray(json));
-            return new DataTransferCollection<Trait>(list, context);
+            return await _http.GetResourcesSet(request, json => _traitReader.ReadArray(json))
+                .ConfigureAwait(false);
         }
 
-        public async Task<IDataTransferCollection<int>> GetTraitsIndex()
+        public async Task<IDataTransferSet<int>> GetTraitsIndex()
         {
             var request = new TraitsIndexRequest();
-            using var response = await _http.SendAsync(request, HttpCompletionOption.ResponseHeadersRead).ConfigureAwait(false);
-            response.EnsureSuccessStatusCode();
-            using var json = await response.Content.ReadAsJsonAsync().ConfigureAwait(false);
-            var context = response.Headers.GetCollectionContext();
-            var list = new List<int>(context.ResultCount);
-            list.AddRange(_traitReader.Id.ReadArray(json));
-            return new DataTransferCollection<int>(list, context);
+            return await _http.GetResourcesSet(request, json => _traitReader.Id.ReadArray(json))
+                .ConfigureAwait(false);
         }
 
         public async Task<Trait> GetTraitById(int traitId)
         {
             var request = new TraitByIdRequest(traitId);
-            using var response = await _http.SendAsync(request, HttpCompletionOption.ResponseHeadersRead).ConfigureAwait(false);
-            response.EnsureSuccessStatusCode();
-            using var json = await response.Content.ReadAsJsonAsync().ConfigureAwait(false);
-            return _traitReader.Read(json);
+            return await _http.GetResource(request, json => _traitReader.Read(json))
+                .ConfigureAwait(false);
         }
 
-        public async Task<IDataTransferCollection<Trait>> GetTraitsByIds(IReadOnlyCollection<int> traitIds)
+        public async Task<IDataTransferSet<Trait>> GetTraitsByIds(IReadOnlyCollection<int> traitIds)
         {
             if (traitIds is null)
             {
@@ -66,25 +54,15 @@ namespace GW2SDK.Traits
             }
 
             var request = new TraitsByIdsRequest(traitIds);
-            using var response = await _http.SendAsync(request, HttpCompletionOption.ResponseHeadersRead).ConfigureAwait(false);
-            response.EnsureSuccessStatusCode();
-            using var json = await response.Content.ReadAsJsonAsync().ConfigureAwait(false);
-            var context = response.Headers.GetCollectionContext();
-            var list = new List<Trait>(context.ResultCount);
-            list.AddRange(_traitReader.ReadArray(json));
-            return new DataTransferCollection<Trait>(list, context);
+            return await _http.GetResourcesSet(request, json => _traitReader.ReadArray(json))
+                .ConfigureAwait(false);
         }
 
         public async Task<IDataTransferPage<Trait>> GetTraitsByPage(int pageIndex, int? pageSize = null)
         {
             var request = new TraitsByPageRequest(pageIndex, pageSize);
-            using var response = await _http.SendAsync(request, HttpCompletionOption.ResponseHeadersRead).ConfigureAwait(false);
-            response.EnsureSuccessStatusCode();
-            using var json = await response.Content.ReadAsJsonAsync().ConfigureAwait(false);
-            var pageContext = response.Headers.GetPageContext();
-            var list = new List<Trait>(pageContext.PageSize);
-            list.AddRange(_traitReader.ReadArray(json));
-            return new DataTransferPage<Trait>(list, pageContext);
+            return await _http.GetResourcesPage(request, json => _traitReader.ReadArray(json))
+                .ConfigureAwait(false);
         }
     }
 }

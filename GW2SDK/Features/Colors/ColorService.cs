@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
-using JetBrains.Annotations;
 using GW2SDK.Colors.Http;
 using GW2SDK.Http;
+using JetBrains.Annotations;
 
 namespace GW2SDK.Colors
 {
@@ -21,43 +21,28 @@ namespace GW2SDK.Colors
             _colorReader = colorReader ?? throw new ArgumentNullException(nameof(colorReader));
         }
 
-        public async Task<IDataTransferCollection<Color>> GetColors()
+        public async Task<IDataTransferSet<Color>> GetColors()
         {
             var request = new ColorsRequest();
-            using var response = await _http.SendAsync(request, HttpCompletionOption.ResponseHeadersRead)
+            return await _http.GetResourcesSet(request, json => _colorReader.ReadArray(json))
                 .ConfigureAwait(false);
-            response.EnsureSuccessStatusCode();
-            using var json = await response.Content.ReadAsJsonAsync().ConfigureAwait(false);
-            var context = response.Headers.GetCollectionContext();
-            var list = new List<Color>(context.ResultCount);
-            list.AddRange(_colorReader.ReadArray(json));
-            return new DataTransferCollection<Color>(list, context);
         }
 
-        public async Task<IDataTransferCollection<int>> GetColorsIndex()
+        public async Task<IDataTransferSet<int>> GetColorsIndex()
         {
             var request = new ColorsIndexRequest();
-            using var response = await _http.SendAsync(request, HttpCompletionOption.ResponseHeadersRead)
+            return await _http.GetResourcesSet(request, json => _colorReader.Id.ReadArray(json))
                 .ConfigureAwait(false);
-            response.EnsureSuccessStatusCode();
-            using var json = await response.Content.ReadAsJsonAsync().ConfigureAwait(false);
-            var context = response.Headers.GetCollectionContext();
-            var list = new List<int>(context.ResultCount);
-            list.AddRange(_colorReader.Id.ReadArray(json));
-            return new DataTransferCollection<int>(list, context);
         }
 
         public async Task<Color> GetColorById(int colorId)
         {
             var request = new ColorByIdRequest(colorId);
-            using var response = await _http.SendAsync(request, HttpCompletionOption.ResponseHeadersRead)
+            return await _http.GetResource(request, json => _colorReader.Read(json))
                 .ConfigureAwait(false);
-            response.EnsureSuccessStatusCode();
-            using var json = await response.Content.ReadAsJsonAsync().ConfigureAwait(false);
-            return _colorReader.Read(json);
         }
 
-        public async Task<IDataTransferCollection<Color>> GetColorsByIds(IReadOnlyCollection<int> colorIds)
+        public async Task<IDataTransferSet<Color>> GetColorsByIds(IReadOnlyCollection<int> colorIds)
         {
             if (colorIds is null)
             {
@@ -70,27 +55,15 @@ namespace GW2SDK.Colors
             }
 
             var request = new ColorsByIdsRequest(colorIds);
-            using var response = await _http.SendAsync(request, HttpCompletionOption.ResponseHeadersRead)
+            return await _http.GetResourcesSet(request, json => _colorReader.ReadArray(json))
                 .ConfigureAwait(false);
-            response.EnsureSuccessStatusCode();
-            using var json = await response.Content.ReadAsJsonAsync().ConfigureAwait(false);
-            var context = response.Headers.GetCollectionContext();
-            var list = new List<Color>(context.ResultCount);
-            list.AddRange(_colorReader.ReadArray(json));
-            return new DataTransferCollection<Color>(list, context);
         }
 
         public async Task<IDataTransferPage<Color>> GetColorsByPage(int pageIndex, int? pageSize = null)
         {
             var request = new ColorsByPageRequest(pageIndex, pageSize);
-            using var response = await _http.SendAsync(request, HttpCompletionOption.ResponseHeadersRead)
+            return await _http.GetResourcesPage(request, json => _colorReader.ReadArray(json))
                 .ConfigureAwait(false);
-            response.EnsureSuccessStatusCode();
-            using var json = await response.Content.ReadAsJsonAsync().ConfigureAwait(false);
-            var pageContext = response.Headers.GetPageContext();
-            var list = new List<Color>(pageContext.PageSize);
-            list.AddRange(_colorReader.ReadArray(json));
-            return new DataTransferPage<Color>(list, pageContext);
         }
     }
 }

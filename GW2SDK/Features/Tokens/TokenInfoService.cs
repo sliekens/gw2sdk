@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Net.Http;
 using System.Threading.Tasks;
-using JetBrains.Annotations;
 using GW2SDK.Http;
 using GW2SDK.Tokens.Http;
+using JetBrains.Annotations;
 
 namespace GW2SDK.Tokens
 {
@@ -23,10 +23,8 @@ namespace GW2SDK.Tokens
         public async Task<TokenInfo> GetTokenInfo(string? accessToken)
         {
             var request = new TokenInfoRequest(accessToken);
-            using var response = await _http.SendAsync(request, HttpCompletionOption.ResponseHeadersRead).ConfigureAwait(false);
-            response.EnsureSuccessStatusCode();
-            using var json = await response.Content.ReadAsJsonAsync().ConfigureAwait(false);
-            return _tokenInfoReader.Read(json);
+            return await _http.GetResource(request, json => _tokenInfoReader.Read(json))
+                .ConfigureAwait(false);
         }
     }
 }

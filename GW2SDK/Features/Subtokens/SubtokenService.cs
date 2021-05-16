@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
-using JetBrains.Annotations;
 using GW2SDK.Http;
 using GW2SDK.Subtokens.Http;
+using JetBrains.Annotations;
 
 namespace GW2SDK.Subtokens
 {
@@ -29,11 +29,8 @@ namespace GW2SDK.Subtokens
         )
         {
             var request = new CreateSubtokenRequest(accessToken, permissions, absoluteExpirationDate, urls);
-            using var response = await _http.SendAsync(request, HttpCompletionOption.ResponseHeadersRead)
+            return await _http.GetResource(request, json => _subtokenReader.Read(json))
                 .ConfigureAwait(false);
-            response.EnsureSuccessStatusCode();
-            using var json = await response.Content.ReadAsJsonAsync().ConfigureAwait(false);
-            return _subtokenReader.Read(json);
         }
     }
 }

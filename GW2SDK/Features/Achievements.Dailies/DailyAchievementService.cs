@@ -2,8 +2,8 @@
 using System.Net.Http;
 using System.Threading.Tasks;
 using GW2SDK.Achievements.Dailies.Http;
-using JetBrains.Annotations;
 using GW2SDK.Http;
+using JetBrains.Annotations;
 
 namespace GW2SDK.Achievements.Dailies
 {
@@ -16,16 +16,15 @@ namespace GW2SDK.Achievements.Dailies
         public DailyAchievementService(HttpClient http, IDailyAchievementReader dailyAchievementReader)
         {
             _http = http ?? throw new ArgumentNullException(nameof(http));
-            _dailyAchievementReader = dailyAchievementReader ?? throw new ArgumentNullException(nameof(dailyAchievementReader));
+            _dailyAchievementReader =
+                dailyAchievementReader ?? throw new ArgumentNullException(nameof(dailyAchievementReader));
         }
 
         public async Task<DailyAchievementGroup> GetDailyAchievements(Day day = Day.Today)
         {
             var request = new DailyAchievementsRequest(day);
-            using var response = await _http.SendAsync(request, HttpCompletionOption.ResponseHeadersRead).ConfigureAwait(false);
-            response.EnsureSuccessStatusCode();
-            using var json = await response.Content.ReadAsJsonAsync().ConfigureAwait(false);
-            return _dailyAchievementReader.Read(json);
+            return await _http.GetResource(request, json => _dailyAchievementReader.Read(json))
+                .ConfigureAwait(false);
         }
     }
 }

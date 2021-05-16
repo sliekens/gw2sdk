@@ -2,8 +2,8 @@
 using System.Net.Http;
 using System.Threading.Tasks;
 using GW2SDK.Accounts.Http;
-using JetBrains.Annotations;
 using GW2SDK.Http;
+using JetBrains.Annotations;
 
 namespace GW2SDK.Accounts
 {
@@ -22,11 +22,8 @@ namespace GW2SDK.Accounts
         public async Task<Account> GetAccount(string? accessToken = null)
         {
             var request = new AccountRequest(accessToken);
-            using var response = await _http.SendAsync(request, HttpCompletionOption.ResponseHeadersRead)
+            return await _http.GetResource(request, json => _accountReader.Read(json))
                 .ConfigureAwait(false);
-            response.EnsureSuccessStatusCode();
-            using var json = await response.Content.ReadAsJsonAsync().ConfigureAwait(false);
-            return _accountReader.Read(json);
         }
     }
 }

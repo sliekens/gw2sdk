@@ -21,40 +21,28 @@ namespace GW2SDK.MailCarriers
             _mailCarrierReader = mailCarrierReader ?? throw new ArgumentNullException(nameof(mailCarrierReader));
         }
 
-        public async Task<IDataTransferCollection<MailCarrier>> GetMailCarriers()
+        public async Task<IDataTransferSet<MailCarrier>> GetMailCarriers()
         {
             var request = new MailCarriersRequest();
-            using var response = await _http.SendAsync(request, HttpCompletionOption.ResponseHeadersRead).ConfigureAwait(false);
-            response.EnsureSuccessStatusCode();
-            using var json = await response.Content.ReadAsJsonAsync().ConfigureAwait(false);
-            var context = response.Headers.GetCollectionContext();
-            var list = new List<MailCarrier>(context.ResultCount);
-            list.AddRange(_mailCarrierReader.ReadArray(json));
-            return new DataTransferCollection<MailCarrier>(list, context);
+            return await _http.GetResourcesSet(request, json => _mailCarrierReader.ReadArray(json))
+                .ConfigureAwait(false);
         }
 
-        public async Task<IDataTransferCollection<int>> GetMailCarriersIndex()
+        public async Task<IDataTransferSet<int>> GetMailCarriersIndex()
         {
             var request = new MailCarriersIndexRequest();
-            using var response = await _http.SendAsync(request, HttpCompletionOption.ResponseHeadersRead).ConfigureAwait(false);
-            response.EnsureSuccessStatusCode();
-            using var json = await response.Content.ReadAsJsonAsync().ConfigureAwait(false);
-            var context = response.Headers.GetCollectionContext();
-            var list = new List<int>(context.ResultCount);
-            list.AddRange(_mailCarrierReader.Id.ReadArray(json));
-            return new DataTransferCollection<int>(list, context);
+            return await _http.GetResourcesSet(request, json => _mailCarrierReader.Id.ReadArray(json))
+                .ConfigureAwait(false);
         }
 
         public async Task<MailCarrier> GetMailCarrierById(int mailCarrierId)
         {
             var request = new MailCarrierByIdRequest(mailCarrierId);
-            using var response = await _http.SendAsync(request, HttpCompletionOption.ResponseHeadersRead).ConfigureAwait(false);
-            response.EnsureSuccessStatusCode();
-            using var json = await response.Content.ReadAsJsonAsync().ConfigureAwait(false);
-            return _mailCarrierReader.Read(json);
+            return await _http.GetResource(request, json => _mailCarrierReader.Read(json))
+                .ConfigureAwait(false);
         }
 
-        public async Task<IDataTransferCollection<MailCarrier>> GetMailCarriersByIds(IReadOnlyCollection<int> mailCarrierIds)
+        public async Task<IDataTransferSet<MailCarrier>> GetMailCarriersByIds(IReadOnlyCollection<int> mailCarrierIds)
         {
             if (mailCarrierIds is null)
             {
@@ -67,25 +55,15 @@ namespace GW2SDK.MailCarriers
             }
 
             var request = new MailCarriersByIdsRequest(mailCarrierIds);
-            using var response = await _http.SendAsync(request, HttpCompletionOption.ResponseHeadersRead).ConfigureAwait(false);
-            response.EnsureSuccessStatusCode();
-            using var json = await response.Content.ReadAsJsonAsync().ConfigureAwait(false);
-            var context = response.Headers.GetCollectionContext();
-            var list = new List<MailCarrier>(context.ResultCount);
-            list.AddRange(_mailCarrierReader.ReadArray(json));
-            return new DataTransferCollection<MailCarrier>(list, context);
+            return await _http.GetResourcesSet(request, json => _mailCarrierReader.ReadArray(json))
+                .ConfigureAwait(false);
         }
 
         public async Task<IDataTransferPage<MailCarrier>> GetMailCarriersByPage(int pageIndex, int? pageSize = null)
         {
             var request = new MailCarriersByPageRequest(pageIndex, pageSize);
-            using var response = await _http.SendAsync(request, HttpCompletionOption.ResponseHeadersRead).ConfigureAwait(false);
-            response.EnsureSuccessStatusCode();
-            using var json = await response.Content.ReadAsJsonAsync().ConfigureAwait(false);
-            var pageContext = response.Headers.GetPageContext();
-            var list = new List<MailCarrier>(pageContext.PageSize);
-            list.AddRange(_mailCarrierReader.ReadArray(json));
-            return new DataTransferPage<MailCarrier>(list, pageContext);
+            return await _http.GetResourcesPage(request, json => _mailCarrierReader.ReadArray(json))
+                .ConfigureAwait(false);
         }
     }
 }
