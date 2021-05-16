@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
-using JetBrains.Annotations;
 using GW2SDK.Http;
 using GW2SDK.Worlds.Http;
+using JetBrains.Annotations;
 
 namespace GW2SDK.Worlds
 {
@@ -21,40 +21,28 @@ namespace GW2SDK.Worlds
             _worldReader = worldReader ?? throw new ArgumentNullException(nameof(worldReader));
         }
 
-        public async Task<IDataTransferCollection<World>> GetWorlds()
+        public async Task<IDataTransferSet<World>> GetWorlds()
         {
             var request = new WorldsRequest();
-            using var response = await _http.SendAsync(request, HttpCompletionOption.ResponseHeadersRead).ConfigureAwait(false);
-            response.EnsureSuccessStatusCode();
-            using var json = await response.Content.ReadAsJsonAsync().ConfigureAwait(false);
-            var context = response.Headers.GetCollectionContext();
-            var list = new List<World>();
-            list.AddRange(_worldReader.ReadArray(json));
-            return new DataTransferCollection<World>(list, context);
+            return await _http.GetResourcesSet(request, json => _worldReader.ReadArray(json))
+                .ConfigureAwait(false);
         }
 
-        public async Task<IDataTransferCollection<int>> GetWorldsIndex()
+        public async Task<IDataTransferSet<int>> GetWorldsIndex()
         {
             var request = new WorldsIndexRequest();
-            using var response = await _http.SendAsync(request, HttpCompletionOption.ResponseHeadersRead).ConfigureAwait(false);
-            response.EnsureSuccessStatusCode();
-            using var json = await response.Content.ReadAsJsonAsync().ConfigureAwait(false);
-            var context = response.Headers.GetCollectionContext();
-            var list = new List<int>(context.ResultCount);
-            list.AddRange(_worldReader.Id.ReadArray(json));
-            return new DataTransferCollection<int>(list, context);
+            return await _http.GetResourcesSet(request, json => _worldReader.Id.ReadArray(json))
+                .ConfigureAwait(false);
         }
 
         public async Task<World> GetWorldById(int worldId)
         {
             var request = new WorldByIdRequest(worldId);
-            using var response = await _http.SendAsync(request, HttpCompletionOption.ResponseHeadersRead).ConfigureAwait(false);
-            response.EnsureSuccessStatusCode();
-            using var json = await response.Content.ReadAsJsonAsync().ConfigureAwait(false);
-            return _worldReader.Read(json);
+            return await _http.GetResource(request, json => _worldReader.Read(json))
+                .ConfigureAwait(false);
         }
 
-        public async Task<IDataTransferCollection<World>> GetWorldsByIds(IReadOnlyCollection<int> worldIds)
+        public async Task<IDataTransferSet<World>> GetWorldsByIds(IReadOnlyCollection<int> worldIds)
         {
             if (worldIds is null)
             {
@@ -67,25 +55,15 @@ namespace GW2SDK.Worlds
             }
 
             var request = new WorldsByIdsRequest(worldIds);
-            using var response = await _http.SendAsync(request, HttpCompletionOption.ResponseHeadersRead).ConfigureAwait(false);
-            response.EnsureSuccessStatusCode();
-            using var json = await response.Content.ReadAsJsonAsync().ConfigureAwait(false);
-            var context = response.Headers.GetCollectionContext();
-            var list = new List<World>(context.ResultCount);
-            list.AddRange(_worldReader.ReadArray(json));
-            return new DataTransferCollection<World>(list, context);
+            return await _http.GetResourcesSet(request, json => _worldReader.ReadArray(json))
+                .ConfigureAwait(false);
         }
 
         public async Task<IDataTransferPage<World>> GetWorldsByPage(int pageIndex, int? pageSize = null)
         {
             var request = new WorldsByPageRequest(pageIndex, pageSize);
-            using var response = await _http.SendAsync(request, HttpCompletionOption.ResponseHeadersRead).ConfigureAwait(false);
-            response.EnsureSuccessStatusCode();
-            using var json = await response.Content.ReadAsJsonAsync().ConfigureAwait(false);
-            var pageContext = response.Headers.GetPageContext();
-            var list = new List<World>(pageContext.PageSize);
-            list.AddRange(_worldReader.ReadArray(json));
-            return new DataTransferPage<World>(list, pageContext);
+            return await _http.GetResourcesPage(request, json => _worldReader.ReadArray(json))
+                .ConfigureAwait(false);
         }
     }
 }

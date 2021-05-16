@@ -3,8 +3,8 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using GW2SDK.Accounts.Banks.Http;
 using GW2SDK.Annotations;
-using JetBrains.Annotations;
 using GW2SDK.Http;
+using JetBrains.Annotations;
 
 namespace GW2SDK.Accounts.Banks
 {
@@ -24,11 +24,8 @@ namespace GW2SDK.Accounts.Banks
         public async Task<Bank> GetBank(string? accessToken = null)
         {
             var request = new BankRequest(accessToken);
-            using var response = await _http.SendAsync(request, HttpCompletionOption.ResponseHeadersRead)
+            return await _http.GetResource(request, json => _bankReader.Read(json))
                 .ConfigureAwait(false);
-            response.EnsureSuccessStatusCode();
-            using var json = await response.Content.ReadAsJsonAsync().ConfigureAwait(false);
-            return _bankReader.Read(json);
         }
     }
 }

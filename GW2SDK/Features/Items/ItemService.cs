@@ -20,28 +20,21 @@ namespace GW2SDK.Items
             _itemReader = itemReader ?? throw new ArgumentNullException(nameof(itemReader));
         }
 
-        public async Task<IDataTransferCollection<int>> GetItemsIndex()
+        public async Task<IDataTransferSet<int>> GetItemsIndex()
         {
             var request = new ItemsIndexRequest();
-            using var response = await _http.SendAsync(request, HttpCompletionOption.ResponseHeadersRead).ConfigureAwait(false);
-            response.EnsureSuccessStatusCode();
-            using var json = await response.Content.ReadAsJsonAsync().ConfigureAwait(false);
-            var context = response.Headers.GetCollectionContext();
-            var list = new List<int>(context.ResultCount);
-            list.AddRange(_itemReader.Id.ReadArray(json));
-            return new DataTransferCollection<int>(list, context);
+            return await _http.GetResourcesSet(request, json => _itemReader.Id.ReadArray(json))
+                .ConfigureAwait(false);
         }
 
         public async Task<Item> GetItemById(int itemId)
         {
             var request = new ItemByIdRequest(itemId);
-            using var response = await _http.SendAsync(request, HttpCompletionOption.ResponseHeadersRead).ConfigureAwait(false);
-            response.EnsureSuccessStatusCode();
-            using var json = await response.Content.ReadAsJsonAsync().ConfigureAwait(false);
-            return _itemReader.Read(json);
+            return await _http.GetResource(request, json => _itemReader.Read(json))
+                .ConfigureAwait(false);
         }
 
-        public async Task<IDataTransferCollection<Item>> GetItemsByIds(IReadOnlyCollection<int> itemIds)
+        public async Task<IDataTransferSet<Item>> GetItemsByIds(IReadOnlyCollection<int> itemIds)
         {
             if (itemIds is null)
             {
@@ -53,26 +46,16 @@ namespace GW2SDK.Items
                 throw new ArgumentException("Item IDs cannot be an empty collection.", nameof(itemIds));
             }
 
-            var request = new ItemsByIdsRequest(itemIds);
-            using var response = await _http.SendAsync(request, HttpCompletionOption.ResponseHeadersRead).ConfigureAwait(false);
-            response.EnsureSuccessStatusCode();
-            using var json = await response.Content.ReadAsJsonAsync().ConfigureAwait(false);
-            var context = response.Headers.GetCollectionContext();
-            var list = new List<Item>(context.ResultCount);
-            list.AddRange(_itemReader.ReadArray(json));
-            return new DataTransferCollection<Item>(list, context);
+            var request = new ItemsByIdsRequest(itemIds); 
+            return await _http.GetResourcesSet(request, json => _itemReader.ReadArray(json))
+                .ConfigureAwait(false);
         }
 
         public async Task<IDataTransferPage<Item>> GetItemsByPage(int pageIndex, int? pageSize = null)
         {
             var request = new ItemsByPageRequest(pageIndex, pageSize);
-            using var response = await _http.SendAsync(request, HttpCompletionOption.ResponseHeadersRead).ConfigureAwait(false);
-            response.EnsureSuccessStatusCode();
-            using var json = await response.Content.ReadAsJsonAsync().ConfigureAwait(false);
-            var pageContext = response.Headers.GetPageContext();
-            var list = new List<Item>(pageContext.PageSize);
-            list.AddRange(_itemReader.ReadArray(json));
-            return new DataTransferPage<Item>(list, pageContext);
+            return await _http.GetResourcesPage(request, json => _itemReader.ReadArray(json))
+                .ConfigureAwait(false);
         }
     }
 }

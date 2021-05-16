@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text.Json;
@@ -22,7 +24,10 @@ namespace GW2SDK.Http
             if (instance is null) throw new ArgumentNullException(nameof(instance));
             if (accessToken is null) throw new ArgumentNullException(nameof(accessToken));
             if (string.IsNullOrWhiteSpace(accessToken))
+            {
                 throw new ArgumentException("Access token cannot be null or whitespace.", nameof(accessToken));
+            }
+
             instance.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
         }
 
@@ -43,8 +48,72 @@ namespace GW2SDK.Http
         public static async Task<JsonDocument> ReadAsJsonAsync(this HttpContent instance)
         {
             if (instance == null) throw new ArgumentNullException(nameof(instance));
-            await using var content = await instance.ReadAsStreamAsync().ConfigureAwait(false);
-            return await JsonDocument.ParseAsync(content).ConfigureAwait(false);
+            await using var content = await instance.ReadAsStreamAsync()
+                .ConfigureAwait(false);
+            return await JsonDocument.ParseAsync(content)
+                .ConfigureAwait(false);
+        }
+
+        internal static async Task<T> GetResource<T>(
+            this HttpClient instance,
+            HttpRequestMessage request,
+            Func<JsonDocument, T> resultSelector
+        )
+        {
+            using var response = await instance.SendAsync(request, HttpCompletionOption.ResponseHeadersRead)
+                .ConfigureAwait(false);
+            response.EnsureSuccessStatusCode();
+            using var json = await response.Content.ReadAsJsonAsync()
+                .ConfigureAwait(false);
+            return resultSelector(json);
+        }
+
+        internal static async Task<IReadOnlySet<T>> GetResourcesSetSimple<T>(
+            this HttpClient instance,
+            HttpRequestMessage request,
+            Func<JsonDocument, IEnumerable<T>> resultSelector
+        )
+        {
+            using var response = await instance.SendAsync(request, HttpCompletionOption.ResponseHeadersRead)
+                .ConfigureAwait(false);
+            response.EnsureSuccessStatusCode();
+            using var json = await response.Content.ReadAsJsonAsync()
+                .ConfigureAwait(false);
+            return new HashSet<T>(resultSelector(json));
+        }
+
+        internal static async Task<IDataTransferSet<T>> GetResourcesSet<T>(
+            this HttpClient instance,
+            HttpRequestMessage request,
+            Func<JsonDocument, IEnumerable<T>> resultSelector
+        )
+        {
+            using var response = await instance.SendAsync(request, HttpCompletionOption.ResponseHeadersRead)
+                .ConfigureAwait(false);
+            response.EnsureSuccessStatusCode();
+            using var json = await response.Content.ReadAsJsonAsync()
+                .ConfigureAwait(false);
+            var context = response.Headers.GetCollectionContext();
+            var set = new HashSet<T>(context.ResultCount);
+            set.UnionWith(resultSelector(json));
+            return new DataTransferSet<T>(set, context);
+        }
+
+        internal static async Task<IDataTransferPage<T>> GetResourcesPage<T>(
+            this HttpClient instance,
+            HttpRequestMessage request,
+            Func<JsonDocument, IEnumerable<T>> resultSelector
+        )
+        {
+            using var response = await instance.SendAsync(request, HttpCompletionOption.ResponseHeadersRead)
+                .ConfigureAwait(false);
+            response.EnsureSuccessStatusCode();
+            using var json = await response.Content.ReadAsJsonAsync()
+                .ConfigureAwait(false);
+            var pageContext = response.Headers.GetPageContext();
+            var set = new HashSet<T>(pageContext.ResultCount);
+            set.UnionWith(resultSelector(json));
+            return new DataTransferPage<T>(set, pageContext);
         }
     }
 }

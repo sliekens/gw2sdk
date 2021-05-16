@@ -4,13 +4,13 @@ using System.Collections.Generic;
 
 namespace GW2SDK
 {
-    internal sealed class DataTransferPage<T> : IDataTransferPage<T>
+    internal sealed class DataTransferSet<T> : IDataTransferSet<T>
     {
-        private readonly IPageContext _context;
+        private readonly ICollectionContext _context;
 
         private readonly IReadOnlySet<T> _inner;
 
-        public DataTransferPage(IReadOnlySet<T> inner, IPageContext context)
+        public DataTransferSet(IReadOnlySet<T> inner, ICollectionContext context)
         {
             _inner = inner ?? throw new ArgumentNullException(nameof(inner));
             _context = context ?? throw new ArgumentNullException(nameof(context));
@@ -19,20 +19,6 @@ namespace GW2SDK
         public int ResultTotal => _context.ResultTotal;
 
         public int ResultCount => _context.ResultCount;
-
-        public ContinuationToken? Previous => _context.Previous;
-
-        public ContinuationToken? Next => _context.Next;
-
-        public ContinuationToken First => _context.First;
-
-        public ContinuationToken Self => _context.Self;
-
-        public ContinuationToken Last => _context.Last;
-
-        public int PageTotal => _context.PageTotal;
-
-        public int PageSize => _context.PageSize;
 
         public IEnumerator<T> GetEnumerator() => _inner.GetEnumerator();
 

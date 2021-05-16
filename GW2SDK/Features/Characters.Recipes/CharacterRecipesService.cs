@@ -2,9 +2,9 @@
 using System.Net.Http;
 using System.Threading.Tasks;
 using GW2SDK.Annotations;
-using JetBrains.Annotations;
 using GW2SDK.Characters.Recipes.Http;
 using GW2SDK.Http;
+using JetBrains.Annotations;
 
 namespace GW2SDK.Characters.Recipes
 {
@@ -24,11 +24,8 @@ namespace GW2SDK.Characters.Recipes
         public async Task<Character> GetUnlockedRecipes(string characterId, string? accessToken = null)
         {
             var request = new UnlockedRecipesRequest(characterId, accessToken);
-            using var response = await _http.SendAsync(request, HttpCompletionOption.ResponseHeadersRead)
+            return await _http.GetResource(request, json => _characterReader.Read(json))
                 .ConfigureAwait(false);
-            response.EnsureSuccessStatusCode();
-            using var json = await response.Content.ReadAsJsonAsync().ConfigureAwait(false);
-            return _characterReader.Read(json);
         }
     }
 }
