@@ -94,11 +94,11 @@ namespace GW2SDK.Tests.Features.Recipes
             Assert.Equal(3, actual.Count);
             Assert.Equal(3, actual.PageSize);
         }
-        
+
         [Fact]
         [Trait("Feature",  "Recipes.Search")]
         [Trait("Category", "Integration")]
-        public async Task Recipes_with_iron_ore_as_ingredient_contains_recipe_id_for_iron_ingot()
+        public async Task Recipes_ids_with_iron_ore_ingredient_contains_recipe_id_for_iron_ingot()
         {
             await using var services = new Composer();
             var sut = services.Resolve<RecipeService>();
@@ -113,7 +113,37 @@ namespace GW2SDK.Tests.Features.Recipes
         [Fact]
         [Trait("Feature",  "Recipes.Search")]
         [Trait("Category", "Integration")]
-        public async Task Recipes_with_iron_ingot_as_output_contains_recipe_id_for_iron_ingot()
+        public async Task Recipes_with_iron_ore_ingredient_contains_recipe_for_iron_ingot()
+        {
+            await using var services = new Composer();
+            var sut = services.Resolve<RecipeService>();
+
+            const int ironOre = 19699;
+            var actual = await sut.GetRecipesByIngredientItemId(ironOre);
+
+            const int ironIngotRecipe = 19;
+            Assert.Contains(actual, recipe => recipe.Id == ironIngotRecipe);
+        }
+
+        [Fact]
+        [Trait("Feature",  "Recipes.Search")]
+        [Trait("Category", "Integration")]
+        public async Task Recipes_page_with_iron_ore_ingredient_contains_recipe_for_iron_ingot()
+        {
+            await using var services = new Composer();
+            var sut = services.Resolve<RecipeService>();
+
+            const int ironOre = 19699;
+            var actual = await sut.GetRecipesByIngredientItemIdByPage(ironOre, 0, 20);
+
+            const int ironIngotRecipe = 19;
+            Assert.Contains(actual, recipe => recipe.Id == ironIngotRecipe);
+        }
+
+        [Fact]
+        [Trait("Feature",  "Recipes.Search")]
+        [Trait("Category", "Integration")]
+        public async Task Recipes_ids_with_iron_ingot_output_contains_recipe_id_for_iron_ingot()
         {
             await using var services = new Composer();
             var sut = services.Resolve<RecipeService>();
@@ -123,6 +153,56 @@ namespace GW2SDK.Tests.Features.Recipes
 
             const int ironIngotRecipe = 19;
             Assert.Contains(ironIngotRecipe, actual);
+        }
+
+        [Fact]
+        [Trait("Feature",  "Recipes.Search")]
+        [Trait("Category", "Integration")]
+        public async Task Recipes_with_iron_ingot_output_contains_recipe_for_iron_ingot()
+        {
+            await using var services = new Composer();
+            var sut = services.Resolve<RecipeService>();
+
+            const int ironIngot = 19683;
+            var actual = await sut.GetRecipesByOutputItemId(ironIngot);
+
+            const int ironIngotRecipe = 19;
+            Assert.Contains(actual, recipe => recipe.Id == ironIngotRecipe);
+        }
+
+        [Fact]
+        [Trait("Feature",  "Recipes.Search")]
+        [Trait("Category", "Integration")]
+        public async Task Recipes_page_with_iron_ingot_output_contains_recipe_for_iron_ingot()
+        {
+            await using var services = new Composer();
+            var sut = services.Resolve<RecipeService>();
+
+            const int ironIngot = 19683;
+            var actual = await sut.GetRecipesByOutputItemIdByPage(ironIngot, 0, 20);
+
+            const int ironIngotRecipe = 19;
+            Assert.Contains(actual, recipe => recipe.Id == ironIngotRecipe);
+        }
+        
+        [Fact]
+        [Trait("Feature",  "Recipes.Search")]
+        [Trait("Category", "Integration")]
+        public async Task It_can_get_all_recipes_for_vision_crystal()
+        {
+            // Normally the limit for ids=all is 200 items
+            //   but that doesn't seem to apply for recipes search by input/output item
+            // There are 800+ recipes that require a vision crystal
+            await using var services = new Composer();
+            var sut = services.Resolve<RecipeService>();
+
+            const int visionCrystal = 46746;
+            var actual = await sut.GetRecipesByIngredientItemId(visionCrystal);
+
+            Assert.NotInRange(actual.Count, 0, 200); // Greater than 200
+            Assert.Equal(actual.ResultTotal, actual.Count);
+            Assert.Equal(actual.ResultTotal, actual.ResultCount);
+            Assert.All(actual, recipe => Assert.Contains(recipe.Ingredients, ingredient => ingredient.ItemId == visionCrystal));
         }
     }
 }
