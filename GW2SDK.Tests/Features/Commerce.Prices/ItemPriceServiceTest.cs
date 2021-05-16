@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 using GW2SDK.Commerce.Prices;
 using GW2SDK.Tests.TestInfrastructure;

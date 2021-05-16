@@ -19,11 +19,19 @@ namespace GW2SDK.Tests.Features.Commerce.Prices
         private static class ItemPriceFact
         {
             public static void Id_is_positive(ItemPrice actual) => Assert.InRange(actual.Id, 1, int.MaxValue);
+
+            public static void Best_ask_is_greater_than_best_bid(ItemPrice actual)
+            {
+                if (actual.TotalDemand > 0 && actual.TotalSupply > 0)
+                {
+                    Assert.True(actual.BestAsk - actual.BestBid > 0);
+                }
+            }
         }
 
         [Fact]
-        [Trait("Feature",    "Commerce.Prices")]
-        [Trait("Category",   "Integration")]
+        [Trait("Feature", "Commerce.Prices")]
+        [Trait("Category", "Integration")]
         [Trait("Importance", "Critical")]
         public void Item_prices_can_be_created_from_json()
         {
@@ -37,6 +45,7 @@ namespace GW2SDK.Tests.Features.Commerce.Prices
                     var actual = sut.Read(document.RootElement, MissingMemberBehavior.Error);
 
                     ItemPriceFact.Id_is_positive(actual);
+                    ItemPriceFact.Best_ask_is_greater_than_best_bid(actual);
                 });
         }
     }

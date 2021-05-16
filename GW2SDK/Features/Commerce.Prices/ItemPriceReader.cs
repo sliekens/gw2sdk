@@ -12,8 +12,10 @@ namespace GW2SDK.Commerce.Prices
         {
             var id = new RequiredMember<int>("id");
             var whitelisted = new RequiredMember<bool>("whitelisted");
-            var buys = new RequiredMember<ItemBuyers>("buys");
-            var sells = new RequiredMember<ItemSellers>("sells");
+            var demand = new RequiredMember<int>("quantity");
+            var bestBid = new RequiredMember<int>("unit_price");
+            var supply = new RequiredMember<int>("quantity");
+            var bestAsk = new RequiredMember<int>("unit_price");
 
             foreach (var member in json.EnumerateObject())
             {
@@ -25,13 +27,41 @@ namespace GW2SDK.Commerce.Prices
                 {
                     whitelisted = whitelisted.From(member.Value);
                 }
-                else if (member.NameEquals(buys.Name))
+                else if (member.NameEquals("buys"))
                 {
-                    buys = buys.From(member.Value);
+                    foreach (var buy in member.Value.EnumerateObject())
+                    {
+                        if (buy.NameEquals(demand.Name))
+                        {
+                            demand = demand.From(buy.Value);
+                        }
+                        else if (buy.NameEquals(bestBid.Name))
+                        {
+                            bestBid = bestBid.From(buy.Value);
+                        }
+                        else if (missingMemberBehavior == MissingMemberBehavior.Error)
+                        {
+                            throw new InvalidOperationException($"Unexpected member '{buy.Name}'.");
+                        }
+                    }
                 }
-                else if (member.NameEquals(sells.Name))
+                else if (member.NameEquals("sells"))
                 {
-                    sells = sells.From(member.Value);
+                    foreach (var sell in member.Value.EnumerateObject())
+                    {
+                        if (sell.NameEquals(supply.Name))
+                        {
+                            supply = supply.From(sell.Value);
+                        }
+                        else if (sell.NameEquals(bestAsk.Name))
+                        {
+                            bestAsk = bestAsk.From(sell.Value);
+                        }
+                        else if (missingMemberBehavior == MissingMemberBehavior.Error)
+                        {
+                            throw new InvalidOperationException($"Unexpected member '{sell.Name}'.");
+                        }
+                    }
                 }
                 else if (missingMemberBehavior == MissingMemberBehavior.Error)
                 {
@@ -43,67 +73,13 @@ namespace GW2SDK.Commerce.Prices
             {
                 Id = id.GetValue(),
                 Whitelisted = whitelisted.GetValue(),
-                Buyers = buys.Select(value => ReadItemBuyers(value, missingMemberBehavior)),
-                Sellers = sells.Select(value => ReadItemSellers(value, missingMemberBehavior))
+                TotalDemand = demand.GetValue(),
+                TotalSupply = supply.GetValue(),
+                BestBid = bestBid.GetValue(),
+                BestAsk = bestAsk.GetValue()
             };
         }
 
         public IJsonReader<int> Id { get; } = new Int32JsonReader();
-
-        private ItemSellers ReadItemSellers(JsonElement json, MissingMemberBehavior missingMemberBehavior)
-        {
-            var quantity = new RequiredMember<int>("quantity");
-            var unitPrice = new RequiredMember<int>("unit_price");
-
-            foreach (var member in json.EnumerateObject())
-            {
-                if (member.NameEquals(quantity.Name))
-                {
-                    quantity = quantity.From(member.Value);
-                }
-                else if (member.NameEquals(unitPrice.Name))
-                {
-                    unitPrice = unitPrice.From(member.Value);
-                }
-                else if (missingMemberBehavior == MissingMemberBehavior.Error)
-                {
-                    throw new InvalidOperationException($"Unexpected member '{member.Name}'.");
-                }
-            }
-
-            return new ItemSellers
-            {
-                OpenSellOrders = quantity.GetValue(),
-                BestAsk = unitPrice.GetValue()
-            };
-        }
-
-        private ItemBuyers ReadItemBuyers(JsonElement json, MissingMemberBehavior missingMemberBehavior)
-        {
-            var quantity = new RequiredMember<int>("quantity");
-            var unitPrice = new RequiredMember<int>("unit_price");
-
-            foreach (var member in json.EnumerateObject())
-            {
-                if (member.NameEquals(quantity.Name))
-                {
-                    quantity = quantity.From(member.Value);
-                }
-                else if (member.NameEquals(unitPrice.Name))
-                {
-                    unitPrice = unitPrice.From(member.Value);
-                }
-                else if (missingMemberBehavior == MissingMemberBehavior.Error)
-                {
-                    throw new InvalidOperationException($"Unexpected member '{member.Name}'.");
-                }
-            }
-
-            return new ItemBuyers
-            {
-                OpenBuyOrders = quantity.GetValue(),
-                BestBid = unitPrice.GetValue()
-            };
-        }
     }
 }
