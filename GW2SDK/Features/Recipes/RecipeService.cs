@@ -66,10 +66,38 @@ namespace GW2SDK.Recipes
                 .ConfigureAwait(false);
         }
 
+        public async Task<IDataTransferSet<Recipe>> GetRecipesByIngredientItemId(int ingredientItemId)
+        {
+            var request = new RecipesByIngredientItemIdRequest(ingredientItemId);
+            return await _http.GetResourcesSet(request, json => _recipeReader.ReadArray(json))
+                .ConfigureAwait(false);
+        }
+
+        public async Task<IDataTransferPage<Recipe>> GetRecipesByIngredientItemIdByPage(int ingredientItemId, int pageIndex, int? pageSize = null)
+        {
+            var request = new RecipesByIngredientItemIdByPageRequest(ingredientItemId, pageIndex, pageSize);
+            return await _http.GetResourcesPage(request, json => _recipeReader.ReadArray(json))
+                .ConfigureAwait(false);
+        }
+
         public async Task<IDataTransferSet<int>> GetRecipesIndexByOutputItemId(int outputItemId)
         {
             var request = new RecipesIndexByOutputItemIdRequest(outputItemId);
             return await _http.GetResourcesSet(request, json => _recipeReader.Id.ReadArray(json))
+                .ConfigureAwait(false);
+        }
+
+        public async Task<IDataTransferSet<Recipe>> GetRecipesByOutputItemId(int outputItemId)
+        {
+            var request = new RecipesByOutputItemIdRequest(outputItemId);
+            return await _http.GetResourcesSet(request, json => _recipeReader.ReadArray(json))
+                .ConfigureAwait(false);
+        }
+
+        public async Task<IDataTransferPage<Recipe>> GetRecipesByOutputItemIdByPage(int outputItemId, int pageIndex, int? pageSize = null)
+        {
+            var request = new RecipesByOutputItemIdByPageRequest(outputItemId, pageIndex, pageSize);
+            return await _http.GetResourcesPage(request, json => _recipeReader.ReadArray(json))
                 .ConfigureAwait(false);
         }
 
