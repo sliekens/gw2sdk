@@ -13,6 +13,7 @@ using GW2SDK.Backstories;
 using GW2SDK.Builds;
 using GW2SDK.Characters.Recipes;
 using GW2SDK.Colors;
+using GW2SDK.Commerce.Exchange;
 using GW2SDK.Commerce.Listings;
 using GW2SDK.Commerce.Prices;
 using GW2SDK.Continents;
@@ -178,6 +179,11 @@ namespace GW2SDK.Tests.TestInfrastructure
             if (serviceType == typeof(WorldService))
             {
                 return new WorldService(Resolve<HttpClient>(), new WorldReader());
+            }
+
+            if (serviceType == typeof(ExchangeService))
+            {
+                return new ExchangeService(Resolve<HttpClient>(), new ExchangeReader());
             }
 
             return null;
