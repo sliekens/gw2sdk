@@ -24,10 +24,11 @@ namespace ApiVersionInfo
             // First configure the HttpClient
             // There are many ways to do this, but this sample takes a minimalistic approach.
             using var http = new HttpClient(new SocketsHttpHandler
-            {
-                // Enable compression to save network bandwidth (at the cost of some negligible CPU usage)
-                AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate
-            }, disposeHandler: true);
+                {
+                    // Enable compression to save network bandwidth (at the cost of some negligible CPU usage)
+                    AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate
+                },
+                true);
 
             // Convenience method, sets the BaseAddress
             http.UseGuildWars2();
@@ -48,58 +49,62 @@ namespace ApiVersionInfo
             var buildService = new BuildService(http, new BuildReader());
             var infoService = new ApiInfoService(http, new ApiInfoReader());
 
-            await AnsiConsole.Status()
-                .StartAsync("Retrieving the current game version...",
-                    async ctx =>
-                    {
-                        // Get the game version
-                        var build = await buildService.GetBuild();
+            var build = await AnsiConsole.Status()
+                .StartAsync("Retrieving the current game version...", async ctx => await buildService.GetBuild());
 
-                        // Render game version to console
-                        AnsiConsole.MarkupLine($"Gw2: [white on dodgerblue2]{build.Id}[/]");
-                    });
+            AnsiConsole.MarkupLine($"Gw2: [white on dodgerblue2]{build.Id}[/]");
 
-            await AnsiConsole.Status()
+            var metadata = await AnsiConsole.Status()
                 .StartAsync("Retrieving API endpoints...",
                     async ctx =>
                     {
-                        // Get the API metadata
-                        var metadata = await infoService.GetApiInfo();
-
-                        // Render info to console
-                        var routes = new Table().MinimalBorder()
-                            .AddColumn("Route")
-                            .AddColumn("Authorization")
-                            .AddColumn("Localization");
-
-                        foreach (var route in metadata.Routes)
-                        {
-                            if (route.Active)
-                            {
-                                routes.AddRow(route.Path.EscapeMarkup(),
-                                    route.RequiresAuthorization ? "Requires token" : "Anonymous",
-                                    route.Multilingual ? string.Join(", ", metadata.Languages) : "");
-                            }
-                            else
-                            {
-                                routes.AddRow($"[dim]{route.Path.EscapeMarkup()}[/]",
-                                    route.RequiresAuthorization ? "Requires token" : "Anonymous",
-                                    route.Multilingual ? string.Join(", ", metadata.Languages) : "");
-                            }
-                        }
-
-                        var changes = new Table().MinimalBorder().AddColumn("Change").AddColumn("Description");
-                        foreach (var schema in metadata.SchemaVersions)
-                        {
-                            var formatted = DateTimeOffset.Parse(schema.Version).ToString("D");
-                            changes.AddRow(formatted.EscapeMarkup(), schema.Description.EscapeMarkup());
-                        }
-
-                        AnsiConsole.WriteLine("The following paths are exposed by this API:");
-                        AnsiConsole.Render(routes);
-                        AnsiConsole.Render(new Rule("Notable changes").LeftAligned());
-                        AnsiConsole.Render(changes);
+                        return await infoService.GetApiInfo();
                     });
+
+            var showDisabled = AnsiConsole.Confirm("Show disabled routes?", false);
+
+            var showAuthorized = AnsiConsole.Confirm("Show routes that require an account?");
+
+            var routes = new Table().MinimalBorder()
+                .AddColumn("Route")
+                .AddColumn("Authorization")
+                .AddColumn("Localization");
+
+            foreach (var route in metadata.Routes)
+            {
+                if (!showAuthorized && route.RequiresAuthorization)
+                {
+                    continue;
+                }
+
+                if (route.Active)
+                {
+                    routes.AddRow(route.Path.EscapeMarkup(),
+                        route.RequiresAuthorization ? "Requires token" : "Anonymous",
+                        route.Multilingual ? string.Join(", ", metadata.Languages) : "");
+                }
+                else if (showDisabled)
+                {
+                    routes.AddRow($"[dim]{route.Path.EscapeMarkup()}[/]",
+                        route.RequiresAuthorization ? "Requires token" : "Anonymous",
+                        route.Multilingual ? string.Join(", ", metadata.Languages) : "");
+                }
+            }
+
+            var changes = new Table().MinimalBorder()
+                .AddColumn("Change")
+                .AddColumn("Description");
+            foreach (var schema in metadata.SchemaVersions)
+            {
+                var formatted = DateTimeOffset.Parse(schema.Version)
+                    .ToString("D");
+                changes.AddRow(formatted.EscapeMarkup(), schema.Description.EscapeMarkup());
+            }
+
+            AnsiConsole.WriteLine("The following paths are exposed by this API:");
+            AnsiConsole.Render(routes);
+            AnsiConsole.Render(new Rule("Notable changes").LeftAligned());
+            AnsiConsole.Render(changes);
         }
     }
 }
