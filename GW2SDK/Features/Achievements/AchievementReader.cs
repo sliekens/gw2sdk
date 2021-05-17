@@ -547,7 +547,7 @@ namespace GW2SDK.Achievements
 
         private CoinsReward ReadCoinsReward(JsonElement json, MissingMemberBehavior missingMemberBehavior)
         {
-            var count = new RequiredMember<int>("count");
+            var coins = new RequiredMember<int>("count");
             foreach (var member in json.EnumerateObject())
             {
                 if (member.NameEquals("type"))
@@ -557,9 +557,9 @@ namespace GW2SDK.Achievements
                         throw new InvalidOperationException($"Invalid type '{member.Value.GetString()}'.");
                     }
                 }
-                else if (member.NameEquals(count.Name))
+                else if (member.NameEquals(coins.Name))
                 {
-                    count = count.From(member.Value);
+                    coins = coins.From(member.Value);
                 }
                 else if (missingMemberBehavior == MissingMemberBehavior.Error)
                 {
@@ -567,7 +567,7 @@ namespace GW2SDK.Achievements
                 }
             }
 
-            return new CoinsReward { Count = count.GetValue() };
+            return new CoinsReward { Coins = coins.GetValue() };
         }
 
         private AchievementTier ReadAchievementTier(JsonElement json, MissingMemberBehavior missingMemberBehavior)
