@@ -57,6 +57,7 @@ namespace GW2SDK.TestDataHelper
                 .AddTypedClient<JsonCurrencyService>()
                 .AddTypedClient<JsonFloorService>()
                 .AddTypedClient<JsonItemPriceService>()
+                .AddTypedClient<JsonItemListingService>()
                 .AddTypedClient<JsonItemService>()
                 .AddTypedClient<JsonMailCarriersService>()
                 .AddTypedClient<JsonRecipeService>()
