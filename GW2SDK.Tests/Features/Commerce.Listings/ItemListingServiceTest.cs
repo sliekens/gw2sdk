@@ -1,52 +1,52 @@
 ﻿using System;
 using System.Threading.Tasks;
-using GW2SDK.Commerce.Prices;
+using GW2SDK.Commerce.Listings;
 using GW2SDK.Tests.TestInfrastructure;
 using Xunit;
 
-namespace GW2SDK.Tests.Features.Commerce.Prices
+namespace GW2SDK.Tests.Features.Commerce.Listings
 {
-    public class ItemPriceServiceTest
+    public class ItemListingServiceTest
     {
         [Fact]
-        [Trait("Feature",  "Commerce.Prices")]
+        [Trait("Feature",  "Commerce.Listings")]
         [Trait("Category", "Integration")]
-        public async Task It_can_get_all_item_price_ids()
+        public async Task It_can_get_all_item_listing_ids()
         {
             await using var services = new Composer();
-            var sut = services.Resolve<ItemPriceService>();
+            var sut = services.Resolve<ItemListingService>();
 
-            var actual = await sut.GetItemPricesIndex();
+            var actual = await sut.GetItemListingsIndex();
 
             Assert.Equal(actual.ResultTotal, actual.Count);
         }
 
         [Fact]
-        [Trait("Feature",  "Commerce.Prices")]
+        [Trait("Feature",  "Commerce.Listings")]
         [Trait("Category", "Integration")]
-        public async Task It_can_get_an_item_price_by_id()
+        public async Task It_can_get_an_item_listing_by_id()
         {
             await using var services = new Composer();
-            var sut = services.Resolve<ItemPriceService>();
+            var sut = services.Resolve<ItemListingService>();
 
             const int itemId = 24;
 
-            var actual = await sut.GetItemPriceById(itemId);
+            var actual = await sut.GetItemListingById(itemId);
 
             Assert.Equal(itemId, actual.Id);
         }
 
         [Fact]
-        [Trait("Feature",  "Commerce.Prices")]
+        [Trait("Feature",  "Commerce.Listings")]
         [Trait("Category", "Integration")]
-        public async Task It_can_get_item_prices_by_id()
+        public async Task It_can_get_item_listings_by_id()
         {
             await using var services = new Composer();
-            var sut = services.Resolve<ItemPriceService>();
+            var sut = services.Resolve<ItemListingService>();
 
             var ids = new[] { 24, 19699, 35984 };
 
-            var actual = await sut.GetItemPricesByIds(ids);
+            var actual = await sut.GetItemListingsByIds(ids);
 
             Assert.Collection(actual,
                 first => Assert.Equal(24,     first.Id),
@@ -60,12 +60,12 @@ namespace GW2SDK.Tests.Features.Commerce.Prices
         public async Task Item_ids_cannot_be_null()
         {
             await using var services = new Composer();
-            var sut = services.Resolve<ItemPriceService>();
+            var sut = services.Resolve<ItemListingService>();
 
             await Assert.ThrowsAsync<ArgumentNullException>("itemIds",
                 async () =>
                 {
-                    await sut.GetItemPricesByIds(null);
+                    await sut.GetItemListingsByIds(null);
                 });
         }
 
@@ -75,12 +75,12 @@ namespace GW2SDK.Tests.Features.Commerce.Prices
         public async Task Item_ids_cannot_be_empty()
         {
             await using var services = new Composer();
-            var sut = services.Resolve<ItemPriceService>();
+            var sut = services.Resolve<ItemListingService>();
 
             await Assert.ThrowsAsync<ArgumentException>("itemIds",
                 async () =>
                 {
-                    await sut.GetItemPricesByIds(new int[0]);
+                    await sut.GetItemListingsByIds(new int[0]);
                 });
         }
     }

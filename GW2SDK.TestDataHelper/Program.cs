@@ -201,6 +201,17 @@ namespace GW2SDK.TestDataHelper
                     await file.WriteLineAsync(json);
                 }
             }
+
+            await using (var file = File.CreateText(Path.Combine(outDir, "listings.json")))
+            {
+                Console.WriteLine("Getting item listings.");
+                var service = services.Resolve<JsonItemListingService>();
+                var jsons = await service.GetAllJsonItemListing(indented);
+                foreach (var json in jsons)
+                {
+                    await file.WriteLineAsync(json);
+                }
+            }
         }
     }
 }

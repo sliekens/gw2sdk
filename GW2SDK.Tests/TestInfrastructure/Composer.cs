@@ -13,6 +13,7 @@ using GW2SDK.Backstories;
 using GW2SDK.Builds;
 using GW2SDK.Characters.Recipes;
 using GW2SDK.Colors;
+using GW2SDK.Commerce.Listings;
 using GW2SDK.Commerce.Prices;
 using GW2SDK.Continents;
 using GW2SDK.Currencies;
@@ -112,6 +113,11 @@ namespace GW2SDK.Tests.TestInfrastructure
             if (serviceType == typeof(ItemPriceService))
             {
                 return new ItemPriceService(Resolve<HttpClient>(), new ItemPriceReader());
+            }
+
+            if (serviceType == typeof(ItemListingService))
+            {
+                return new ItemListingService(Resolve<HttpClient>(), new ItemListingReader());
             }
 
             if (serviceType == typeof(ContinentService))
