@@ -31,7 +31,8 @@ namespace GW2SDK.Tests.Features.Achievements
 
             public static void Tiers_is_not_empty(Achievement actual) => Assert.NotEmpty(actual.Tiers);
 
-            public static void Tiers_does_not_contain_null(Achievement actual) => Assert.DoesNotContain(null, actual.Tiers);
+            public static void Tiers_does_not_contain_null(Achievement actual) =>
+                Assert.DoesNotContain(null, actual.Tiers);
 
             public static void Rewards_does_not_contain_null(Achievement actual)
             {
@@ -59,8 +60,8 @@ namespace GW2SDK.Tests.Features.Achievements
         }
 
         [Fact]
-        [Trait("Feature",    "Achievements")]
-        [Trait("Category",   "Integration")]
+        [Trait("Feature", "Achievements")]
+        [Trait("Category", "Integration")]
         [Trait("Importance", "Critical")]
         public void Achievements_can_be_created_from_json()
         {
