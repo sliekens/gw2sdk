@@ -17,11 +17,18 @@ namespace GW2SDK.TestDataHelper
             _http = http;
         }
 
-        public async Task<List<string>> GetAllJsonItemPrices(bool indented)
+        public async Task<List<string>> GetJsonItemPrices(bool indented)
         {
+            // For this data set, I decided to limit the results
+            // - because the data is really pretty much the same across all items
             var ids = await GetItemPriceIds().ConfigureAwait(false);
-            var list = new List<string>(ids.Count);
-            var tasks = ids.Buffer(200).Select(subset => GetJsonItemPricesById(subset.ToList(), indented));
+            var list = new List<string>();
+            var head = ids.Take(100);
+            var body = ids.Skip(100)
+                .Where((_, index) => index % 100 == 0);
+            var tail = ids.TakeLast(100);
+            var dataSet = head.Concat(body).Concat(tail).ToList();
+            var tasks = dataSet.Buffer(200).Select(subset => GetJsonItemPricesById(subset.ToList(), indented));
             foreach (var result in await Task.WhenAll(tasks).ConfigureAwait(false))
             {
                 list.AddRange(result);
