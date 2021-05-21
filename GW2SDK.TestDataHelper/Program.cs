@@ -195,7 +195,7 @@ namespace GW2SDK.TestDataHelper
             {
                 Console.WriteLine("Getting item prices.");
                 var service = services.Resolve<JsonItemPriceService>();
-                var jsons = await service.GetAllJsonItemPrices(indented);
+                var jsons = await service.GetJsonItemPrices(indented);
                 foreach (var json in jsons)
                 {
                     await file.WriteLineAsync(json);
@@ -206,7 +206,7 @@ namespace GW2SDK.TestDataHelper
             {
                 Console.WriteLine("Getting item listings.");
                 var service = services.Resolve<JsonItemListingService>();
-                var jsons = await service.GetAllJsonItemListing(indented);
+                var jsons = await service.GetJsonItemListing(indented);
                 foreach (var json in jsons)
                 {
                     await file.WriteLineAsync(json);

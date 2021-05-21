@@ -17,13 +17,19 @@ namespace GW2SDK.TestDataHelper
             _http = http;
         }
 
-        public async Task<List<string>> GetAllJsonItemListing(bool indented)
+        public async Task<List<string>> GetJsonItemListing(bool indented)
         {
-            var ids = await GetItemListingIds()
-                .ConfigureAwait(false);
-            var list = new List<string>(ids.Count);
-            var tasks = ids.Buffer(200)
-                .Select(subset => GetJsonItemListingsById(subset.ToList(), indented));
+            // For this data set, I decided to limit the results
+            // - because the data is really pretty much the same across all items
+            // - because all results add up to almost 200MB(!)
+            var ids = await GetItemListingIds().ConfigureAwait(false);
+            var list = new List<string>();
+            var head = ids.Take(100);
+            var body = ids.Skip(100)
+                .Where((_, index) => index % 100 == 0);
+            var tail = ids.TakeLast(100);
+            var dataSet = head.Concat(body).Concat(tail).ToList();
+            var tasks = dataSet.Buffer(200).Select(subset => GetJsonItemListingsById(subset.ToList(), indented));
             foreach (var result in await Task.WhenAll(tasks)
                 .ConfigureAwait(false))
             {
