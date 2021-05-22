@@ -40,7 +40,7 @@ namespace GW2SDK.Achievements.Dailies
                 }
                 else if (missingMemberBehavior == MissingMemberBehavior.Error)
                 {
-                    throw new InvalidOperationException($"Unexpected member '{member.Name}'.");
+                    throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
                 }
             }
 
@@ -76,7 +76,7 @@ namespace GW2SDK.Achievements.Dailies
                 }
                 else if (missingMemberBehavior == MissingMemberBehavior.Error)
                 {
-                    throw new InvalidOperationException($"Unexpected member '{member.Name}'.");
+                    throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
                 }
             }
 
@@ -105,7 +105,7 @@ namespace GW2SDK.Achievements.Dailies
                 }
                 else if (missingMemberBehavior == MissingMemberBehavior.Error)
                 {
-                    throw new InvalidOperationException($"Unexpected member '{member.Name}'.");
+                    throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
                 }
             }
 
@@ -133,7 +133,7 @@ namespace GW2SDK.Achievements.Dailies
                 }
                 else if (missingMemberBehavior == MissingMemberBehavior.Error)
                 {
-                    throw new InvalidOperationException($"Unexpected member '{member.Name}'.");
+                    throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
                 }
             }
 

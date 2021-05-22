@@ -70,7 +70,7 @@ namespace GW2SDK.Traits
                 }
                 else if (missingMemberBehavior == MissingMemberBehavior.Error)
                 {
-                    throw new InvalidOperationException($"Unexpected member '{member.Name}'.");
+                    throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
                 }
             }
 
@@ -147,7 +147,7 @@ namespace GW2SDK.Traits
                 {
                     if (missingMemberBehavior == MissingMemberBehavior.Error)
                     {
-                        throw new InvalidOperationException($"Unexpected discriminator '{member.Value.GetString()}'.");
+                        throw new InvalidOperationException(Strings.UnexpectedDiscriminator(member.Value.GetString()));
                     }
                 }
                 else if (member.NameEquals("requires_trait"))
@@ -168,7 +168,7 @@ namespace GW2SDK.Traits
                 }
                 else if (missingMemberBehavior == MissingMemberBehavior.Error)
                 {
-                    throw new InvalidOperationException($"Unexpected member '{member.Name}'.");
+                    throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
                 }
             }
 
@@ -197,7 +197,7 @@ namespace GW2SDK.Traits
                 {
                     if (!member.Value.ValueEquals("AttributeAdjust"))
                     {
-                        throw new InvalidOperationException($"Invalid type '{member.Value.GetString()}'.");
+                        throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
                     }
                 }
                 else if (member.NameEquals("requires_trait"))
@@ -226,7 +226,7 @@ namespace GW2SDK.Traits
                 }
                 else if (missingMemberBehavior == MissingMemberBehavior.Error)
                 {
-                    throw new InvalidOperationException($"Unexpected member '{member.Name}'.");
+                    throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
                 }
             }
 
@@ -255,7 +255,7 @@ namespace GW2SDK.Traits
                 {
                     if (!member.Value.ValueEquals("Buff"))
                     {
-                        throw new InvalidOperationException($"Invalid type '{member.Value.GetString()}'.");
+                        throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
                     }
                 }
                 else if (member.NameEquals("requires_trait"))
@@ -292,7 +292,7 @@ namespace GW2SDK.Traits
                 }
                 else if (missingMemberBehavior == MissingMemberBehavior.Error)
                 {
-                    throw new InvalidOperationException($"Unexpected member '{member.Name}'.");
+                    throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
                 }
             }
 
@@ -326,7 +326,7 @@ namespace GW2SDK.Traits
                 {
                     if (!member.Value.ValueEquals("BuffConversion"))
                     {
-                        throw new InvalidOperationException($"Invalid type '{member.Value.GetString()}'.");
+                        throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
                     }
                 }
                 else if (member.NameEquals("requires_trait"))
@@ -359,7 +359,7 @@ namespace GW2SDK.Traits
                 }
                 else if (missingMemberBehavior == MissingMemberBehavior.Error)
                 {
-                    throw new InvalidOperationException($"Unexpected member '{member.Name}'.");
+                    throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
                 }
             }
 
@@ -390,7 +390,7 @@ namespace GW2SDK.Traits
                 {
                     if (!member.Value.ValueEquals("ComboField"))
                     {
-                        throw new InvalidOperationException($"Invalid type '{member.Value.GetString()}'.");
+                        throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
                     }
                 }
                 else if (member.NameEquals("requires_trait"))
@@ -415,7 +415,7 @@ namespace GW2SDK.Traits
                 }
                 else if (missingMemberBehavior == MissingMemberBehavior.Error)
                 {
-                    throw new InvalidOperationException($"Unexpected member '{member.Name}'.");
+                    throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
                 }
             }
 
@@ -445,7 +445,7 @@ namespace GW2SDK.Traits
                 {
                     if (!member.Value.ValueEquals("ComboFinisher"))
                     {
-                        throw new InvalidOperationException($"Invalid type '{member.Value.GetString()}'.");
+                        throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
                     }
                 }
                 else if (member.NameEquals("requires_trait"))
@@ -474,7 +474,7 @@ namespace GW2SDK.Traits
                 }
                 else if (missingMemberBehavior == MissingMemberBehavior.Error)
                 {
-                    throw new InvalidOperationException($"Unexpected member '{member.Name}'.");
+                    throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
                 }
             }
 
@@ -501,7 +501,7 @@ namespace GW2SDK.Traits
                 {
                     if (!member.Value.ValueEquals("Damage"))
                     {
-                        throw new InvalidOperationException($"Invalid type '{member.Value.GetString()}'.");
+                        throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
                     }
                 }
                 else if (member.NameEquals("requires_trait"))
@@ -530,7 +530,7 @@ namespace GW2SDK.Traits
                 }
                 else if (missingMemberBehavior == MissingMemberBehavior.Error)
                 {
-                    throw new InvalidOperationException($"Unexpected member '{member.Name}'.");
+                    throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
                 }
             }
 
@@ -560,7 +560,7 @@ namespace GW2SDK.Traits
                 {
                     if (!member.Value.ValueEquals("Distance"))
                     {
-                        throw new InvalidOperationException($"Invalid type '{member.Value.GetString()}'.");
+                        throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
                     }
                 }
                 else if (member.NameEquals("requires_trait"))
@@ -585,7 +585,7 @@ namespace GW2SDK.Traits
                 }
                 else if (missingMemberBehavior == MissingMemberBehavior.Error)
                 {
-                    throw new InvalidOperationException($"Unexpected member '{member.Name}'.");
+                    throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
                 }
             }
 
@@ -609,7 +609,7 @@ namespace GW2SDK.Traits
                 {
                     if (!member.Value.ValueEquals("NoData"))
                     {
-                        throw new InvalidOperationException($"Invalid type '{member.Value.GetString()}'.");
+                        throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
                     }
                 }
                 else if (member.NameEquals("requires_trait"))
@@ -630,7 +630,7 @@ namespace GW2SDK.Traits
                 }
                 else if (missingMemberBehavior == MissingMemberBehavior.Error)
                 {
-                    throw new InvalidOperationException($"Unexpected member '{member.Name}'.");
+                    throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
                 }
             }
 
@@ -654,7 +654,7 @@ namespace GW2SDK.Traits
                 {
                     if (!member.Value.ValueEquals("Number"))
                     {
-                        throw new InvalidOperationException($"Invalid type '{member.Value.GetString()}'.");
+                        throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
                     }
                 }
                 else if (member.NameEquals("requires_trait"))
@@ -679,7 +679,7 @@ namespace GW2SDK.Traits
                 }
                 else if (missingMemberBehavior == MissingMemberBehavior.Error)
                 {
-                    throw new InvalidOperationException($"Unexpected member '{member.Name}'.");
+                    throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
                 }
             }
 
@@ -704,7 +704,7 @@ namespace GW2SDK.Traits
                 {
                     if (!member.Value.ValueEquals("Percent"))
                     {
-                        throw new InvalidOperationException($"Invalid type '{member.Value.GetString()}'.");
+                        throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
                     }
                 }
                 else if (member.NameEquals("requires_trait"))
@@ -729,7 +729,7 @@ namespace GW2SDK.Traits
                 }
                 else if (missingMemberBehavior == MissingMemberBehavior.Error)
                 {
-                    throw new InvalidOperationException($"Unexpected member '{member.Name}'.");
+                    throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
                 }
             }
 
@@ -762,7 +762,7 @@ namespace GW2SDK.Traits
                 {
                     if (!member.Value.ValueEquals("PrefixedBuff"))
                     {
-                        throw new InvalidOperationException($"Invalid type '{member.Value.GetString()}'.");
+                        throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
                     }
                 }
                 else if (member.NameEquals("requires_trait"))
@@ -803,7 +803,7 @@ namespace GW2SDK.Traits
                 }
                 else if (missingMemberBehavior == MissingMemberBehavior.Error)
                 {
-                    throw new InvalidOperationException($"Unexpected member '{member.Name}'.");
+                    throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
                 }
             }
 
@@ -845,7 +845,7 @@ namespace GW2SDK.Traits
                 }
                 else if (missingMemberBehavior == MissingMemberBehavior.Error)
                 {
-                    throw new InvalidOperationException($"Unexpected member '{member.Name}'.");
+                    throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
                 }
             }
 
@@ -871,7 +871,7 @@ namespace GW2SDK.Traits
                 {
                     if (!member.Value.ValueEquals("Radius"))
                     {
-                        throw new InvalidOperationException($"Invalid type '{member.Value.GetString()}'.");
+                        throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
                     }
                 }
                 else if (member.NameEquals("requires_trait"))
@@ -896,7 +896,7 @@ namespace GW2SDK.Traits
                 }
                 else if (missingMemberBehavior == MissingMemberBehavior.Error)
                 {
-                    throw new InvalidOperationException($"Unexpected member '{member.Name}'.");
+                    throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
                 }
             }
 
@@ -921,7 +921,7 @@ namespace GW2SDK.Traits
                 {
                     if (!member.Value.ValueEquals("Range"))
                     {
-                        throw new InvalidOperationException($"Invalid type '{member.Value.GetString()}'.");
+                        throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
                     }
                 }
                 else if (member.NameEquals("requires_trait"))
@@ -946,7 +946,7 @@ namespace GW2SDK.Traits
                 }
                 else if (missingMemberBehavior == MissingMemberBehavior.Error)
                 {
-                    throw new InvalidOperationException($"Unexpected member '{member.Name}'.");
+                    throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
                 }
             }
 
@@ -975,7 +975,7 @@ namespace GW2SDK.Traits
                 {
                     if (!member.Value.ValueEquals("Recharge"))
                     {
-                        throw new InvalidOperationException($"Invalid type '{member.Value.GetString()}'.");
+                        throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
                     }
                 }
                 else if (member.NameEquals("requires_trait"))
@@ -1000,7 +1000,7 @@ namespace GW2SDK.Traits
                 }
                 else if (missingMemberBehavior == MissingMemberBehavior.Error)
                 {
-                    throw new InvalidOperationException($"Unexpected member '{member.Name}'.");
+                    throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
                 }
             }
 
@@ -1029,7 +1029,7 @@ namespace GW2SDK.Traits
                 {
                     if (!member.Value.ValueEquals("StunBreak"))
                     {
-                        throw new InvalidOperationException($"Invalid type '{member.Value.GetString()}'.");
+                        throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
                     }
                 }
                 else if (member.NameEquals("requires_trait"))
@@ -1054,7 +1054,7 @@ namespace GW2SDK.Traits
                 }
                 else if (missingMemberBehavior == MissingMemberBehavior.Error)
                 {
-                    throw new InvalidOperationException($"Unexpected member '{member.Name}'.");
+                    throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
                 }
             }
 
@@ -1079,7 +1079,7 @@ namespace GW2SDK.Traits
                 {
                     if (!member.Value.ValueEquals("Time"))
                     {
-                        throw new InvalidOperationException($"Invalid type '{member.Value.GetString()}'.");
+                        throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
                     }
                 }
                 else if (member.NameEquals("requires_trait"))
@@ -1104,7 +1104,7 @@ namespace GW2SDK.Traits
                 }
                 else if (missingMemberBehavior == MissingMemberBehavior.Error)
                 {
-                    throw new InvalidOperationException($"Unexpected member '{member.Name}'.");
+                    throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
                 }
             }
 
@@ -1133,7 +1133,7 @@ namespace GW2SDK.Traits
                 {
                     if (!member.Value.ValueEquals("Unblockable"))
                     {
-                        throw new InvalidOperationException($"Invalid type '{member.Value.GetString()}'.");
+                        throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
                     }
                 }
                 else if (member.NameEquals("requires_trait"))
@@ -1158,7 +1158,7 @@ namespace GW2SDK.Traits
                 }
                 else if (missingMemberBehavior == MissingMemberBehavior.Error)
                 {
-                    throw new InvalidOperationException($"Unexpected member '{member.Name}'.");
+                    throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
                 }
             }
 
@@ -1218,7 +1218,7 @@ namespace GW2SDK.Traits
                     // This seems to be always empty, just ignore it until one day it isn't
                     if (missingMemberBehavior == MissingMemberBehavior.Error && member.Value.GetArrayLength() != 0)
                     {
-                        throw new InvalidOperationException($"Unexpected member '{member.Name}'.");
+                        throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
                     }
                 }
                 else if (member.NameEquals(id.Name))
@@ -1235,7 +1235,7 @@ namespace GW2SDK.Traits
                 }
                 else if (missingMemberBehavior == MissingMemberBehavior.Error)
                 {
-                    throw new InvalidOperationException($"Unexpected member '{member.Name}'.");
+                    throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
                 }
             }
 

@@ -41,7 +41,7 @@ namespace GW2SDK.Commerce.Prices
                         }
                         else if (missingMemberBehavior == MissingMemberBehavior.Error)
                         {
-                            throw new InvalidOperationException($"Unexpected member '{buy.Name}'.");
+                            throw new InvalidOperationException(Strings.UnexpectedMember(buy.Name));
                         }
                     }
                 }
@@ -59,13 +59,13 @@ namespace GW2SDK.Commerce.Prices
                         }
                         else if (missingMemberBehavior == MissingMemberBehavior.Error)
                         {
-                            throw new InvalidOperationException($"Unexpected member '{sell.Name}'.");
+                            throw new InvalidOperationException(Strings.UnexpectedMember(sell.Name));
                         }
                     }
                 }
                 else if (missingMemberBehavior == MissingMemberBehavior.Error)
                 {
-                    throw new InvalidOperationException($"Unexpected member '{member.Name}'.");
+                    throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
                 }
             }
 
