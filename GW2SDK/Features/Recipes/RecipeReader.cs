@@ -133,8 +133,8 @@ namespace GW2SDK.Recipes
                 OutputItemCount = outputItemCount.GetValue(),
                 MinRating = minRating.GetValue(),
                 TimeToCraft = timeToCraft.Select(value => TimeSpan.FromMilliseconds(value.GetDouble())),
-                Disciplines = disciplines.GetValue(),
-                Flags = flags.GetValue(),
+                Disciplines = disciplines.GetValue(missingMemberBehavior),
+                Flags = flags.GetValue(missingMemberBehavior),
                 Ingredients = ingredients.Select(value => value.GetArray(item => ReadIngredient(item, missingMemberBehavior))),
                 ChatLink = chatLink.GetValue()
             };
@@ -213,8 +213,8 @@ namespace GW2SDK.Recipes
                 OutputItemCount = outputItemCount.GetValue(),
                 MinRating = minRating.GetValue(),
                 TimeToCraft = timeToCraft.Select(value => TimeSpan.FromMilliseconds(value.GetDouble())),
-                Disciplines = disciplines.GetValue(),
-                Flags = flags.GetValue(),
+                Disciplines = disciplines.GetValue(missingMemberBehavior),
+                Flags = flags.GetValue(missingMemberBehavior),
                 Ingredients = ingredients.Select(value => value.GetArray(item => ReadIngredient(item, missingMemberBehavior))),
                 ChatLink = chatLink.GetValue()
             };
@@ -293,8 +293,8 @@ namespace GW2SDK.Recipes
                 OutputItemCount = outputItemCount.GetValue(),
                 MinRating = minRating.GetValue(),
                 TimeToCraft = timeToCraft.Select(value => TimeSpan.FromMilliseconds(value.GetDouble())),
-                Disciplines = disciplines.GetValue(),
-                Flags = flags.GetValue(),
+                Disciplines = disciplines.GetValue(missingMemberBehavior),
+                Flags = flags.GetValue(missingMemberBehavior),
                 Ingredients = ingredients.Select(value => value.GetArray(item => ReadIngredient(item, missingMemberBehavior))),
                 ChatLink = chatLink.GetValue()
             };
@@ -373,8 +373,8 @@ namespace GW2SDK.Recipes
                 OutputItemCount = outputItemCount.GetValue(),
                 MinRating = minRating.GetValue(),
                 TimeToCraft = timeToCraft.Select(value => TimeSpan.FromMilliseconds(value.GetDouble())),
-                Disciplines = disciplines.GetValue(),
-                Flags = flags.GetValue(),
+                Disciplines = disciplines.GetValue(missingMemberBehavior),
+                Flags = flags.GetValue(missingMemberBehavior),
                 Ingredients = ingredients.Select(value => value.GetArray(item => ReadIngredient(item, missingMemberBehavior))),
                 ChatLink = chatLink.GetValue()
             };
@@ -453,8 +453,8 @@ namespace GW2SDK.Recipes
                 OutputItemCount = outputItemCount.GetValue(),
                 MinRating = minRating.GetValue(),
                 TimeToCraft = timeToCraft.Select(value => TimeSpan.FromMilliseconds(value.GetDouble())),
-                Disciplines = disciplines.GetValue(),
-                Flags = flags.GetValue(),
+                Disciplines = disciplines.GetValue(missingMemberBehavior),
+                Flags = flags.GetValue(missingMemberBehavior),
                 Ingredients = ingredients.Select(value => value.GetArray(item => ReadIngredient(item, missingMemberBehavior))),
                 ChatLink = chatLink.GetValue()
             };
@@ -533,8 +533,8 @@ namespace GW2SDK.Recipes
                 OutputItemCount = outputItemCount.GetValue(),
                 MinRating = minRating.GetValue(),
                 TimeToCraft = timeToCraft.Select(value => TimeSpan.FromMilliseconds(value.GetDouble())),
-                Disciplines = disciplines.GetValue(),
-                Flags = flags.GetValue(),
+                Disciplines = disciplines.GetValue(missingMemberBehavior),
+                Flags = flags.GetValue(missingMemberBehavior),
                 Ingredients = ingredients.Select(value => value.GetArray(item => ReadIngredient(item, missingMemberBehavior))),
                 ChatLink = chatLink.GetValue()
             };
@@ -613,8 +613,8 @@ namespace GW2SDK.Recipes
                 OutputItemCount = outputItemCount.GetValue(),
                 MinRating = minRating.GetValue(),
                 TimeToCraft = timeToCraft.Select(value => TimeSpan.FromMilliseconds(value.GetDouble())),
-                Disciplines = disciplines.GetValue(),
-                Flags = flags.GetValue(),
+                Disciplines = disciplines.GetValue(missingMemberBehavior),
+                Flags = flags.GetValue(missingMemberBehavior),
                 Ingredients = ingredients.Select(value => value.GetArray(item => ReadIngredient(item, missingMemberBehavior))),
                 ChatLink = chatLink.GetValue()
             };
@@ -693,8 +693,8 @@ namespace GW2SDK.Recipes
                 OutputItemCount = outputItemCount.GetValue(),
                 MinRating = minRating.GetValue(),
                 TimeToCraft = timeToCraft.Select(value => TimeSpan.FromMilliseconds(value.GetDouble())),
-                Disciplines = disciplines.GetValue(),
-                Flags = flags.GetValue(),
+                Disciplines = disciplines.GetValue(missingMemberBehavior),
+                Flags = flags.GetValue(missingMemberBehavior),
                 Ingredients = ingredients.Select(value => value.GetArray(item => ReadIngredient(item, missingMemberBehavior))),
                 ChatLink = chatLink.GetValue()
             };
@@ -773,8 +773,8 @@ namespace GW2SDK.Recipes
                 OutputItemCount = outputItemCount.GetValue(),
                 MinRating = minRating.GetValue(),
                 TimeToCraft = timeToCraft.Select(value => TimeSpan.FromMilliseconds(value.GetDouble())),
-                Disciplines = disciplines.GetValue(),
-                Flags = flags.GetValue(),
+                Disciplines = disciplines.GetValue(missingMemberBehavior),
+                Flags = flags.GetValue(missingMemberBehavior),
                 Ingredients = ingredients.Select(value => value.GetArray(item => ReadIngredient(item, missingMemberBehavior))),
                 ChatLink = chatLink.GetValue()
             };
@@ -853,8 +853,8 @@ namespace GW2SDK.Recipes
                 OutputItemCount = outputItemCount.GetValue(),
                 MinRating = minRating.GetValue(),
                 TimeToCraft = timeToCraft.Select(value => TimeSpan.FromMilliseconds(value.GetDouble())),
-                Disciplines = disciplines.GetValue(),
-                Flags = flags.GetValue(),
+                Disciplines = disciplines.GetValue(missingMemberBehavior),
+                Flags = flags.GetValue(missingMemberBehavior),
                 Ingredients = ingredients.Select(value => value.GetArray(item => ReadIngredient(item, missingMemberBehavior))),
                 ChatLink = chatLink.GetValue()
             };
@@ -933,8 +933,8 @@ namespace GW2SDK.Recipes
                 OutputItemCount = outputItemCount.GetValue(),
                 MinRating = minRating.GetValue(),
                 TimeToCraft = timeToCraft.Select(value => TimeSpan.FromMilliseconds(value.GetDouble())),
-                Disciplines = disciplines.GetValue(),
-                Flags = flags.GetValue(),
+                Disciplines = disciplines.GetValue(missingMemberBehavior),
+                Flags = flags.GetValue(missingMemberBehavior),
                 Ingredients = ingredients.Select(value => value.GetArray(item => ReadIngredient(item, missingMemberBehavior))),
                 ChatLink = chatLink.GetValue()
             };
@@ -1013,8 +1013,8 @@ namespace GW2SDK.Recipes
                 OutputItemCount = outputItemCount.GetValue(),
                 MinRating = minRating.GetValue(),
                 TimeToCraft = timeToCraft.Select(value => TimeSpan.FromMilliseconds(value.GetDouble())),
-                Disciplines = disciplines.GetValue(),
-                Flags = flags.GetValue(),
+                Disciplines = disciplines.GetValue(missingMemberBehavior),
+                Flags = flags.GetValue(missingMemberBehavior),
                 Ingredients = ingredients.Select(value => value.GetArray(item => ReadIngredient(item, missingMemberBehavior))),
                 ChatLink = chatLink.GetValue()
             };
@@ -1093,8 +1093,8 @@ namespace GW2SDK.Recipes
                 OutputItemCount = outputItemCount.GetValue(),
                 MinRating = minRating.GetValue(),
                 TimeToCraft = timeToCraft.Select(value => TimeSpan.FromMilliseconds(value.GetDouble())),
-                Disciplines = disciplines.GetValue(),
-                Flags = flags.GetValue(),
+                Disciplines = disciplines.GetValue(missingMemberBehavior),
+                Flags = flags.GetValue(missingMemberBehavior),
                 Ingredients = ingredients.Select(value => value.GetArray(item => ReadIngredient(item, missingMemberBehavior))),
                 ChatLink = chatLink.GetValue()
             };
@@ -1173,8 +1173,8 @@ namespace GW2SDK.Recipes
                 OutputItemCount = outputItemCount.GetValue(),
                 MinRating = minRating.GetValue(),
                 TimeToCraft = timeToCraft.Select(value => TimeSpan.FromMilliseconds(value.GetDouble())),
-                Disciplines = disciplines.GetValue(),
-                Flags = flags.GetValue(),
+                Disciplines = disciplines.GetValue(missingMemberBehavior),
+                Flags = flags.GetValue(missingMemberBehavior),
                 Ingredients = ingredients.Select(value => value.GetArray(item => ReadIngredient(item, missingMemberBehavior))),
                 ChatLink = chatLink.GetValue()
             };
@@ -1253,8 +1253,8 @@ namespace GW2SDK.Recipes
                 OutputItemCount = outputItemCount.GetValue(),
                 MinRating = minRating.GetValue(),
                 TimeToCraft = timeToCraft.Select(value => TimeSpan.FromMilliseconds(value.GetDouble())),
-                Disciplines = disciplines.GetValue(),
-                Flags = flags.GetValue(),
+                Disciplines = disciplines.GetValue(missingMemberBehavior),
+                Flags = flags.GetValue(missingMemberBehavior),
                 Ingredients = ingredients.Select(value => value.GetArray(item => ReadIngredient(item, missingMemberBehavior))),
                 ChatLink = chatLink.GetValue()
             };
@@ -1333,8 +1333,8 @@ namespace GW2SDK.Recipes
                 OutputItemCount = outputItemCount.GetValue(),
                 MinRating = minRating.GetValue(),
                 TimeToCraft = timeToCraft.Select(value => TimeSpan.FromMilliseconds(value.GetDouble())),
-                Disciplines = disciplines.GetValue(),
-                Flags = flags.GetValue(),
+                Disciplines = disciplines.GetValue(missingMemberBehavior),
+                Flags = flags.GetValue(missingMemberBehavior),
                 Ingredients = ingredients.Select(value => value.GetArray(item => ReadIngredient(item, missingMemberBehavior))),
                 ChatLink = chatLink.GetValue()
             };
@@ -1413,8 +1413,8 @@ namespace GW2SDK.Recipes
                 OutputItemCount = outputItemCount.GetValue(),
                 MinRating = minRating.GetValue(),
                 TimeToCraft = timeToCraft.Select(value => TimeSpan.FromMilliseconds(value.GetDouble())),
-                Disciplines = disciplines.GetValue(),
-                Flags = flags.GetValue(),
+                Disciplines = disciplines.GetValue(missingMemberBehavior),
+                Flags = flags.GetValue(missingMemberBehavior),
                 Ingredients = ingredients.Select(value => value.GetArray(item => ReadIngredient(item, missingMemberBehavior))),
                 ChatLink = chatLink.GetValue()
             };
@@ -1503,8 +1503,8 @@ namespace GW2SDK.Recipes
                 OutputItemCount = outputItemCount.GetValue(),
                 MinRating = minRating.GetValue(),
                 TimeToCraft = timeToCraft.Select(value => TimeSpan.FromMilliseconds(value.GetDouble())),
-                Disciplines = disciplines.GetValue(),
-                Flags = flags.GetValue(),
+                Disciplines = disciplines.GetValue(missingMemberBehavior),
+                Flags = flags.GetValue(missingMemberBehavior),
                 Ingredients = ingredients.Select(value => value.GetArray(item => ReadIngredient(item, missingMemberBehavior))),
                 GuildIngredients = guildIngredients.Select(value => value.GetArray(item => ReadGuildIngredient(item, missingMemberBehavior))),
                 OutputUpgradeId = outputUpgradeId.GetValue(),
@@ -1590,8 +1590,8 @@ namespace GW2SDK.Recipes
                 OutputItemCount = outputItemCount.GetValue(),
                 MinRating = minRating.GetValue(),
                 TimeToCraft = timeToCraft.Select(value => TimeSpan.FromMilliseconds(value.GetDouble())),
-                Disciplines = disciplines.GetValue(),
-                Flags = flags.GetValue(),
+                Disciplines = disciplines.GetValue(missingMemberBehavior),
+                Flags = flags.GetValue(missingMemberBehavior),
                 Ingredients = ingredients.Select(value => value.GetArray(item => ReadIngredient(item, missingMemberBehavior))),
                 OutputUpgradeId = outputUpgradeId.GetValue(),
                 ChatLink = chatLink.GetValue()
@@ -1681,8 +1681,8 @@ namespace GW2SDK.Recipes
                 OutputItemCount = outputItemCount.GetValue(),
                 MinRating = minRating.GetValue(),
                 TimeToCraft = timeToCraft.Select(value => TimeSpan.FromMilliseconds(value.GetDouble())),
-                Disciplines = disciplines.GetValue(),
-                Flags = flags.GetValue(),
+                Disciplines = disciplines.GetValue(missingMemberBehavior),
+                Flags = flags.GetValue(missingMemberBehavior),
                 Ingredients = ingredients.Select(value => value.GetArray(item => ReadIngredient(item, missingMemberBehavior))),
                 GuildIngredients = guildIngredients.Select(value => value.GetArray(item => ReadGuildIngredient(item, missingMemberBehavior))),
                 OutputUpgradeId = outputUpgradeId.GetValue(),
@@ -1763,8 +1763,8 @@ namespace GW2SDK.Recipes
                 OutputItemCount = outputItemCount.GetValue(),
                 MinRating = minRating.GetValue(),
                 TimeToCraft = timeToCraft.Select(value => TimeSpan.FromMilliseconds(value.GetDouble())),
-                Disciplines = disciplines.GetValue(),
-                Flags = flags.GetValue(),
+                Disciplines = disciplines.GetValue(missingMemberBehavior),
+                Flags = flags.GetValue(missingMemberBehavior),
                 Ingredients = ingredients.Select(value => value.GetArray(item => ReadIngredient(item, missingMemberBehavior))),
                 ChatLink = chatLink.GetValue()
             };
@@ -1843,8 +1843,8 @@ namespace GW2SDK.Recipes
                 OutputItemCount = outputItemCount.GetValue(),
                 MinRating = minRating.GetValue(),
                 TimeToCraft = timeToCraft.Select(value => TimeSpan.FromMilliseconds(value.GetDouble())),
-                Disciplines = disciplines.GetValue(),
-                Flags = flags.GetValue(),
+                Disciplines = disciplines.GetValue(missingMemberBehavior),
+                Flags = flags.GetValue(missingMemberBehavior),
                 Ingredients = ingredients.Select(value => value.GetArray(item => ReadIngredient(item, missingMemberBehavior))),
                 ChatLink = chatLink.GetValue()
             };
@@ -1923,8 +1923,8 @@ namespace GW2SDK.Recipes
                 OutputItemCount = outputItemCount.GetValue(),
                 MinRating = minRating.GetValue(),
                 TimeToCraft = timeToCraft.Select(value => TimeSpan.FromMilliseconds(value.GetDouble())),
-                Disciplines = disciplines.GetValue(),
-                Flags = flags.GetValue(),
+                Disciplines = disciplines.GetValue(missingMemberBehavior),
+                Flags = flags.GetValue(missingMemberBehavior),
                 Ingredients = ingredients.Select(value => value.GetArray(item => ReadIngredient(item, missingMemberBehavior))),
                 ChatLink = chatLink.GetValue()
             };
@@ -2003,8 +2003,8 @@ namespace GW2SDK.Recipes
                 OutputItemCount = outputItemCount.GetValue(),
                 MinRating = minRating.GetValue(),
                 TimeToCraft = timeToCraft.Select(value => TimeSpan.FromMilliseconds(value.GetDouble())),
-                Disciplines = disciplines.GetValue(),
-                Flags = flags.GetValue(),
+                Disciplines = disciplines.GetValue(missingMemberBehavior),
+                Flags = flags.GetValue(missingMemberBehavior),
                 Ingredients = ingredients.Select(value => value.GetArray(item => ReadIngredient(item, missingMemberBehavior))),
                 ChatLink = chatLink.GetValue()
             };
@@ -2083,8 +2083,8 @@ namespace GW2SDK.Recipes
                 OutputItemCount = outputItemCount.GetValue(),
                 MinRating = minRating.GetValue(),
                 TimeToCraft = timeToCraft.Select(value => TimeSpan.FromMilliseconds(value.GetDouble())),
-                Disciplines = disciplines.GetValue(),
-                Flags = flags.GetValue(),
+                Disciplines = disciplines.GetValue(missingMemberBehavior),
+                Flags = flags.GetValue(missingMemberBehavior),
                 Ingredients = ingredients.Select(value => value.GetArray(item => ReadIngredient(item, missingMemberBehavior))),
                 ChatLink = chatLink.GetValue()
             };
@@ -2163,8 +2163,8 @@ namespace GW2SDK.Recipes
                 OutputItemCount = outputItemCount.GetValue(),
                 MinRating = minRating.GetValue(),
                 TimeToCraft = timeToCraft.Select(value => TimeSpan.FromMilliseconds(value.GetDouble())),
-                Disciplines = disciplines.GetValue(),
-                Flags = flags.GetValue(),
+                Disciplines = disciplines.GetValue(missingMemberBehavior),
+                Flags = flags.GetValue(missingMemberBehavior),
                 Ingredients = ingredients.Select(value => value.GetArray(item => ReadIngredient(item, missingMemberBehavior))),
                 ChatLink = chatLink.GetValue()
             };
@@ -2243,8 +2243,8 @@ namespace GW2SDK.Recipes
                 OutputItemCount = outputItemCount.GetValue(),
                 MinRating = minRating.GetValue(),
                 TimeToCraft = timeToCraft.Select(value => TimeSpan.FromMilliseconds(value.GetDouble())),
-                Disciplines = disciplines.GetValue(),
-                Flags = flags.GetValue(),
+                Disciplines = disciplines.GetValue(missingMemberBehavior),
+                Flags = flags.GetValue(missingMemberBehavior),
                 Ingredients = ingredients.Select(value => value.GetArray(item => ReadIngredient(item, missingMemberBehavior))),
                 ChatLink = chatLink.GetValue()
             };
@@ -2323,8 +2323,8 @@ namespace GW2SDK.Recipes
                 OutputItemCount = outputItemCount.GetValue(),
                 MinRating = minRating.GetValue(),
                 TimeToCraft = timeToCraft.Select(value => TimeSpan.FromMilliseconds(value.GetDouble())),
-                Disciplines = disciplines.GetValue(),
-                Flags = flags.GetValue(),
+                Disciplines = disciplines.GetValue(missingMemberBehavior),
+                Flags = flags.GetValue(missingMemberBehavior),
                 Ingredients = ingredients.Select(value => value.GetArray(item => ReadIngredient(item, missingMemberBehavior))),
                 ChatLink = chatLink.GetValue()
             };
@@ -2403,8 +2403,8 @@ namespace GW2SDK.Recipes
                 OutputItemCount = outputItemCount.GetValue(),
                 MinRating = minRating.GetValue(),
                 TimeToCraft = timeToCraft.Select(value => TimeSpan.FromMilliseconds(value.GetDouble())),
-                Disciplines = disciplines.GetValue(),
-                Flags = flags.GetValue(),
+                Disciplines = disciplines.GetValue(missingMemberBehavior),
+                Flags = flags.GetValue(missingMemberBehavior),
                 Ingredients = ingredients.Select(value => value.GetArray(item => ReadIngredient(item, missingMemberBehavior))),
                 ChatLink = chatLink.GetValue()
             };
@@ -2483,8 +2483,8 @@ namespace GW2SDK.Recipes
                 OutputItemCount = outputItemCount.GetValue(),
                 MinRating = minRating.GetValue(),
                 TimeToCraft = timeToCraft.Select(value => TimeSpan.FromMilliseconds(value.GetDouble())),
-                Disciplines = disciplines.GetValue(),
-                Flags = flags.GetValue(),
+                Disciplines = disciplines.GetValue(missingMemberBehavior),
+                Flags = flags.GetValue(missingMemberBehavior),
                 Ingredients = ingredients.Select(value => value.GetArray(item => ReadIngredient(item, missingMemberBehavior))),
                 ChatLink = chatLink.GetValue()
             };
@@ -2563,8 +2563,8 @@ namespace GW2SDK.Recipes
                 OutputItemCount = outputItemCount.GetValue(),
                 MinRating = minRating.GetValue(),
                 TimeToCraft = timeToCraft.Select(value => TimeSpan.FromMilliseconds(value.GetDouble())),
-                Disciplines = disciplines.GetValue(),
-                Flags = flags.GetValue(),
+                Disciplines = disciplines.GetValue(missingMemberBehavior),
+                Flags = flags.GetValue(missingMemberBehavior),
                 Ingredients = ingredients.Select(value => value.GetArray(item => ReadIngredient(item, missingMemberBehavior))),
                 ChatLink = chatLink.GetValue()
             };
@@ -2643,8 +2643,8 @@ namespace GW2SDK.Recipes
                 OutputItemCount = outputItemCount.GetValue(),
                 MinRating = minRating.GetValue(),
                 TimeToCraft = timeToCraft.Select(value => TimeSpan.FromMilliseconds(value.GetDouble())),
-                Disciplines = disciplines.GetValue(),
-                Flags = flags.GetValue(),
+                Disciplines = disciplines.GetValue(missingMemberBehavior),
+                Flags = flags.GetValue(missingMemberBehavior),
                 Ingredients = ingredients.Select(value => value.GetArray(item => ReadIngredient(item, missingMemberBehavior))),
                 ChatLink = chatLink.GetValue()
             };
@@ -2723,8 +2723,8 @@ namespace GW2SDK.Recipes
                 OutputItemCount = outputItemCount.GetValue(),
                 MinRating = minRating.GetValue(),
                 TimeToCraft = timeToCraft.Select(value => TimeSpan.FromMilliseconds(value.GetDouble())),
-                Disciplines = disciplines.GetValue(),
-                Flags = flags.GetValue(),
+                Disciplines = disciplines.GetValue(missingMemberBehavior),
+                Flags = flags.GetValue(missingMemberBehavior),
                 Ingredients = ingredients.Select(value => value.GetArray(item => ReadIngredient(item, missingMemberBehavior))),
                 ChatLink = chatLink.GetValue()
             };
@@ -2911,8 +2911,8 @@ namespace GW2SDK.Recipes
                 OutputItemCount = outputItemCount.GetValue(),
                 MinRating = minRating.GetValue(),
                 TimeToCraft = timeToCraft.Select(value => TimeSpan.FromMilliseconds(value.GetDouble())),
-                Disciplines = disciplines.GetValue(),
-                Flags = flags.GetValue(),
+                Disciplines = disciplines.GetValue(missingMemberBehavior),
+                Flags = flags.GetValue(missingMemberBehavior),
                 Ingredients = ingredients.Select(value => value.GetArray(item => ReadIngredient(item, missingMemberBehavior))),
                 ChatLink = chatLink.GetValue()
             };
@@ -3045,8 +3045,8 @@ namespace GW2SDK.Recipes
                 OutputItemCount = outputItemCount.GetValue(),
                 MinRating = minRating.GetValue(),
                 TimeToCraft = timeToCraft.Select(value => TimeSpan.FromMilliseconds(value.GetDouble())),
-                Disciplines = disciplines.GetValue(),
-                Flags = flags.GetValue(),
+                Disciplines = disciplines.GetValue(missingMemberBehavior),
+                Flags = flags.GetValue(missingMemberBehavior),
                 Ingredients = ingredients.Select(value => value.GetArray(item => ReadIngredient(item, missingMemberBehavior))),
                 ChatLink = chatLink.GetValue()
             };
@@ -3125,8 +3125,8 @@ namespace GW2SDK.Recipes
                 OutputItemCount = outputItemCount.GetValue(),
                 MinRating = minRating.GetValue(),
                 TimeToCraft = timeToCraft.Select(value => TimeSpan.FromMilliseconds(value.GetDouble())),
-                Disciplines = disciplines.GetValue(),
-                Flags = flags.GetValue(),
+                Disciplines = disciplines.GetValue(missingMemberBehavior),
+                Flags = flags.GetValue(missingMemberBehavior),
                 Ingredients = ingredients.Select(value => value.GetArray(item => ReadIngredient(item, missingMemberBehavior))),
                 ChatLink = chatLink.GetValue()
             };
@@ -3205,8 +3205,8 @@ namespace GW2SDK.Recipes
                 OutputItemCount = outputItemCount.GetValue(),
                 MinRating = minRating.GetValue(),
                 TimeToCraft = timeToCraft.Select(value => TimeSpan.FromMilliseconds(value.GetDouble())),
-                Disciplines = disciplines.GetValue(),
-                Flags = flags.GetValue(),
+                Disciplines = disciplines.GetValue(missingMemberBehavior),
+                Flags = flags.GetValue(missingMemberBehavior),
                 Ingredients = ingredients.Select(value => value.GetArray(item => ReadIngredient(item, missingMemberBehavior))),
                 ChatLink = chatLink.GetValue()
             };
@@ -3285,8 +3285,8 @@ namespace GW2SDK.Recipes
                 OutputItemCount = outputItemCount.GetValue(),
                 MinRating = minRating.GetValue(),
                 TimeToCraft = timeToCraft.Select(value => TimeSpan.FromMilliseconds(value.GetDouble())),
-                Disciplines = disciplines.GetValue(),
-                Flags = flags.GetValue(),
+                Disciplines = disciplines.GetValue(missingMemberBehavior),
+                Flags = flags.GetValue(missingMemberBehavior),
                 Ingredients = ingredients.Select(value => value.GetArray(item => ReadIngredient(item, missingMemberBehavior))),
                 ChatLink = chatLink.GetValue()
             };
@@ -3365,8 +3365,8 @@ namespace GW2SDK.Recipes
                 OutputItemCount = outputItemCount.GetValue(),
                 MinRating = minRating.GetValue(),
                 TimeToCraft = timeToCraft.Select(value => TimeSpan.FromMilliseconds(value.GetDouble())),
-                Disciplines = disciplines.GetValue(),
-                Flags = flags.GetValue(),
+                Disciplines = disciplines.GetValue(missingMemberBehavior),
+                Flags = flags.GetValue(missingMemberBehavior),
                 Ingredients = ingredients.Select(value => value.GetArray(item => ReadIngredient(item, missingMemberBehavior))),
                 ChatLink = chatLink.GetValue()
             };
@@ -3445,8 +3445,8 @@ namespace GW2SDK.Recipes
                 OutputItemCount = outputItemCount.GetValue(),
                 MinRating = minRating.GetValue(),
                 TimeToCraft = timeToCraft.Select(value => TimeSpan.FromMilliseconds(value.GetDouble())),
-                Disciplines = disciplines.GetValue(),
-                Flags = flags.GetValue(),
+                Disciplines = disciplines.GetValue(missingMemberBehavior),
+                Flags = flags.GetValue(missingMemberBehavior),
                 Ingredients = ingredients.Select(value => value.GetArray(item => ReadIngredient(item, missingMemberBehavior))),
                 ChatLink = chatLink.GetValue()
             };
@@ -3525,8 +3525,8 @@ namespace GW2SDK.Recipes
                 OutputItemCount = outputItemCount.GetValue(),
                 MinRating = minRating.GetValue(),
                 TimeToCraft = timeToCraft.Select(value => TimeSpan.FromMilliseconds(value.GetDouble())),
-                Disciplines = disciplines.GetValue(),
-                Flags = flags.GetValue(),
+                Disciplines = disciplines.GetValue(missingMemberBehavior),
+                Flags = flags.GetValue(missingMemberBehavior),
                 Ingredients = ingredients.Select(value => value.GetArray(item => ReadIngredient(item, missingMemberBehavior))),
                 ChatLink = chatLink.GetValue()
             };
@@ -3605,8 +3605,8 @@ namespace GW2SDK.Recipes
                 OutputItemCount = outputItemCount.GetValue(),
                 MinRating = minRating.GetValue(),
                 TimeToCraft = timeToCraft.Select(value => TimeSpan.FromMilliseconds(value.GetDouble())),
-                Disciplines = disciplines.GetValue(),
-                Flags = flags.GetValue(),
+                Disciplines = disciplines.GetValue(missingMemberBehavior),
+                Flags = flags.GetValue(missingMemberBehavior),
                 Ingredients = ingredients.Select(value => value.GetArray(item => ReadIngredient(item, missingMemberBehavior))),
                 ChatLink = chatLink.GetValue()
             };
@@ -3685,8 +3685,8 @@ namespace GW2SDK.Recipes
                 OutputItemCount = outputItemCount.GetValue(),
                 MinRating = minRating.GetValue(),
                 TimeToCraft = timeToCraft.Select(value => TimeSpan.FromMilliseconds(value.GetDouble())),
-                Disciplines = disciplines.GetValue(),
-                Flags = flags.GetValue(),
+                Disciplines = disciplines.GetValue(missingMemberBehavior),
+                Flags = flags.GetValue(missingMemberBehavior),
                 Ingredients = ingredients.Select(value => value.GetArray(item => ReadIngredient(item, missingMemberBehavior))),
                 ChatLink = chatLink.GetValue()
             };
@@ -3765,8 +3765,8 @@ namespace GW2SDK.Recipes
                 OutputItemCount = outputItemCount.GetValue(),
                 MinRating = minRating.GetValue(),
                 TimeToCraft = timeToCraft.Select(value => TimeSpan.FromMilliseconds(value.GetDouble())),
-                Disciplines = disciplines.GetValue(),
-                Flags = flags.GetValue(),
+                Disciplines = disciplines.GetValue(missingMemberBehavior),
+                Flags = flags.GetValue(missingMemberBehavior),
                 Ingredients = ingredients.Select(value => value.GetArray(item => ReadIngredient(item, missingMemberBehavior))),
                 ChatLink = chatLink.GetValue()
             };
@@ -3845,8 +3845,8 @@ namespace GW2SDK.Recipes
                 OutputItemCount = outputItemCount.GetValue(),
                 MinRating = minRating.GetValue(),
                 TimeToCraft = timeToCraft.Select(value => TimeSpan.FromMilliseconds(value.GetDouble())),
-                Disciplines = disciplines.GetValue(),
-                Flags = flags.GetValue(),
+                Disciplines = disciplines.GetValue(missingMemberBehavior),
+                Flags = flags.GetValue(missingMemberBehavior),
                 Ingredients = ingredients.Select(value => value.GetArray(item => ReadIngredient(item, missingMemberBehavior))),
                 ChatLink = chatLink.GetValue()
             };
@@ -3925,8 +3925,8 @@ namespace GW2SDK.Recipes
                 OutputItemCount = outputItemCount.GetValue(),
                 MinRating = minRating.GetValue(),
                 TimeToCraft = timeToCraft.Select(value => TimeSpan.FromMilliseconds(value.GetDouble())),
-                Disciplines = disciplines.GetValue(),
-                Flags = flags.GetValue(),
+                Disciplines = disciplines.GetValue(missingMemberBehavior),
+                Flags = flags.GetValue(missingMemberBehavior),
                 Ingredients = ingredients.Select(value => value.GetArray(item => ReadIngredient(item, missingMemberBehavior))),
                 ChatLink = chatLink.GetValue()
             };
@@ -4005,8 +4005,8 @@ namespace GW2SDK.Recipes
                 OutputItemCount = outputItemCount.GetValue(),
                 MinRating = minRating.GetValue(),
                 TimeToCraft = timeToCraft.Select(value => TimeSpan.FromMilliseconds(value.GetDouble())),
-                Disciplines = disciplines.GetValue(),
-                Flags = flags.GetValue(),
+                Disciplines = disciplines.GetValue(missingMemberBehavior),
+                Flags = flags.GetValue(missingMemberBehavior),
                 Ingredients = ingredients.Select(value => value.GetArray(item => ReadIngredient(item, missingMemberBehavior))),
                 ChatLink = chatLink.GetValue()
             };
@@ -4085,8 +4085,8 @@ namespace GW2SDK.Recipes
                 OutputItemCount = outputItemCount.GetValue(),
                 MinRating = minRating.GetValue(),
                 TimeToCraft = timeToCraft.Select(value => TimeSpan.FromMilliseconds(value.GetDouble())),
-                Disciplines = disciplines.GetValue(),
-                Flags = flags.GetValue(),
+                Disciplines = disciplines.GetValue(missingMemberBehavior),
+                Flags = flags.GetValue(missingMemberBehavior),
                 Ingredients = ingredients.Select(value => value.GetArray(item => ReadIngredient(item, missingMemberBehavior))),
                 ChatLink = chatLink.GetValue()
             };
@@ -4165,8 +4165,8 @@ namespace GW2SDK.Recipes
                 OutputItemCount = outputItemCount.GetValue(),
                 MinRating = minRating.GetValue(),
                 TimeToCraft = timeToCraft.Select(value => TimeSpan.FromMilliseconds(value.GetDouble())),
-                Disciplines = disciplines.GetValue(),
-                Flags = flags.GetValue(),
+                Disciplines = disciplines.GetValue(missingMemberBehavior),
+                Flags = flags.GetValue(missingMemberBehavior),
                 Ingredients = ingredients.Select(value => value.GetArray(item => ReadIngredient(item, missingMemberBehavior))),
                 ChatLink = chatLink.GetValue()
             };
@@ -4245,8 +4245,8 @@ namespace GW2SDK.Recipes
                 OutputItemCount = outputItemCount.GetValue(),
                 MinRating = minRating.GetValue(),
                 TimeToCraft = timeToCraft.Select(value => TimeSpan.FromMilliseconds(value.GetDouble())),
-                Disciplines = disciplines.GetValue(),
-                Flags = flags.GetValue(),
+                Disciplines = disciplines.GetValue(missingMemberBehavior),
+                Flags = flags.GetValue(missingMemberBehavior),
                 Ingredients = ingredients.Select(value => value.GetArray(item => ReadIngredient(item, missingMemberBehavior))),
                 ChatLink = chatLink.GetValue()
             };
@@ -4325,8 +4325,8 @@ namespace GW2SDK.Recipes
                 OutputItemCount = outputItemCount.GetValue(),
                 MinRating = minRating.GetValue(),
                 TimeToCraft = timeToCraft.Select(value => TimeSpan.FromMilliseconds(value.GetDouble())),
-                Disciplines = disciplines.GetValue(),
-                Flags = flags.GetValue(),
+                Disciplines = disciplines.GetValue(missingMemberBehavior),
+                Flags = flags.GetValue(missingMemberBehavior),
                 Ingredients = ingredients.Select(value => value.GetArray(item => ReadIngredient(item, missingMemberBehavior))),
                 ChatLink = chatLink.GetValue()
             };
@@ -4405,8 +4405,8 @@ namespace GW2SDK.Recipes
                 OutputItemCount = outputItemCount.GetValue(),
                 MinRating = minRating.GetValue(),
                 TimeToCraft = timeToCraft.Select(value => TimeSpan.FromMilliseconds(value.GetDouble())),
-                Disciplines = disciplines.GetValue(),
-                Flags = flags.GetValue(),
+                Disciplines = disciplines.GetValue(missingMemberBehavior),
+                Flags = flags.GetValue(missingMemberBehavior),
                 Ingredients = ingredients.Select(value => value.GetArray(item => ReadIngredient(item, missingMemberBehavior))),
                 ChatLink = chatLink.GetValue()
             };
@@ -4485,8 +4485,8 @@ namespace GW2SDK.Recipes
                 OutputItemCount = outputItemCount.GetValue(),
                 MinRating = minRating.GetValue(),
                 TimeToCraft = timeToCraft.Select(value => TimeSpan.FromMilliseconds(value.GetDouble())),
-                Disciplines = disciplines.GetValue(),
-                Flags = flags.GetValue(),
+                Disciplines = disciplines.GetValue(missingMemberBehavior),
+                Flags = flags.GetValue(missingMemberBehavior),
                 Ingredients = ingredients.Select(value => value.GetArray(item => ReadIngredient(item, missingMemberBehavior))),
                 ChatLink = chatLink.GetValue()
             };

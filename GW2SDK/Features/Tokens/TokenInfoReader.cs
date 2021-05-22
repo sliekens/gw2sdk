@@ -54,7 +54,7 @@ namespace GW2SDK.Tokens
             {
                 Id = id.GetValue(),
                 Name = name.GetValue(),
-                Permissions = permissions.GetValue()
+                Permissions = permissions.GetValue(missingMemberBehavior)
             };
         }
 
@@ -94,7 +94,7 @@ namespace GW2SDK.Tokens
             {
                 Id = id.GetValue(),
                 Name = name.GetValue(),
-                Permissions = permissions.GetValue()
+                Permissions = permissions.GetValue(missingMemberBehavior)
             };
         }
 
@@ -149,7 +149,7 @@ namespace GW2SDK.Tokens
             {
                 Id = id.GetValue(),
                 Name = name.GetValue(),
-                Permissions = permissions.GetValue(),
+                Permissions = permissions.GetValue(missingMemberBehavior),
                 ExpiresAt = expiresAt.GetValue(),
                 IssuedAt = issuedAt.GetValue(),
                 Urls = urls.Select(value => value.GetArray(

@@ -151,7 +151,7 @@ namespace GW2SDK.Continents
             {
                 Id = id.GetValue(),
                 Coordinates = coordinates.Select(value => value.GetArray(item => item.GetDouble())),
-                Region = region.GetValue()
+                Region = region.GetValue(missingMemberBehavior)
             };
         }
 

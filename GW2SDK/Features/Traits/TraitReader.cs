@@ -81,7 +81,7 @@ namespace GW2SDK.Traits
                 Order = order.GetValue(),
                 Name = name.GetValue(),
                 Description = description.GetValueOrEmpty(),
-                Slot = slot.GetValue(),
+                Slot = slot.GetValue(missingMemberBehavior),
                 Icon = icon.GetValue(),
                 SpezializationId = specialization.GetValue(),
                 Facts = facts.Select(value => value.GetArray(item => ReadTraitFact(item, missingMemberBehavior, out _, out _))),
@@ -235,7 +235,7 @@ namespace GW2SDK.Traits
                 Text = text.GetValueOrEmpty(),
                 Icon = icon.GetValueOrEmpty(),
                 Value = value.GetValue(),
-                Target = target.GetValue()
+                Target = target.GetValue(missingMemberBehavior)
             };
         }
 
@@ -368,8 +368,8 @@ namespace GW2SDK.Traits
                 Text = text.GetValueOrEmpty(),
                 Icon = icon.GetValueOrEmpty(),
                 Percent = percent.GetValue(),
-                Source = source.GetValue(),
-                Target = target.GetValue()
+                Source = source.GetValue(missingMemberBehavior),
+                Target = target.GetValue(missingMemberBehavior)
             };
         }
 
@@ -423,7 +423,7 @@ namespace GW2SDK.Traits
             {
                 Text = text.GetValueOrEmpty(),
                 Icon = icon.GetValueOrEmpty(),
-                Field = fieldType.GetValue()
+                Field = fieldType.GetValue(missingMemberBehavior)
             };
         }
 
@@ -483,7 +483,7 @@ namespace GW2SDK.Traits
                 Text = text.GetValueOrEmpty(),
                 Icon = icon.GetValueOrEmpty(),
                 Percent = percent.GetValue(),
-                FinisherName = finisherType.GetValue()
+                FinisherName = finisherType.GetValue(missingMemberBehavior)
             };
         }
 

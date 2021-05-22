@@ -37,7 +37,7 @@ namespace GW2SDK.Worlds
             {
                 Id = id.GetValue(),
                 Name = name.GetValue(),
-                Population = population.GetValue()
+                Population = population.GetValue(missingMemberBehavior)
             };
         }
 

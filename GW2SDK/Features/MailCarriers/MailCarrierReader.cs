@@ -56,7 +56,7 @@ namespace GW2SDK.MailCarriers
                 Order = order.GetValue(),
                 Icon = icon.GetValue(),
                 Name = name.GetValue(),
-                Flags = flags.GetValue()
+                Flags = flags.GetValue(missingMemberBehavior)
             };
         }
 

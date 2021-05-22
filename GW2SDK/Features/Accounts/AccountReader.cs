@@ -103,7 +103,7 @@ namespace GW2SDK.Accounts
                 Guilds = guilds.Select(value => value.GetArray(item => item.GetStringRequired())),
                 GuildLeader = guildLeader.Select(value => value.GetArray(item => item.GetStringRequired())),
                 Created = created.GetValue(),
-                Access = access.GetValue(),
+                Access = access.GetValue(missingMemberBehavior),
                 Commander = commander.GetValue(),
                 FractalLevel = fractalLevel.GetValue(),
                 DailyAp = dailyAp.GetValue(),

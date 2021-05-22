@@ -104,7 +104,7 @@ namespace GW2SDK.Achievements
                 Description = description.GetValue(),
                 Requirement = requirement.GetValue(),
                 LockedText = lockedText.GetValue(),
-                Flags = flags.GetValue(),
+                Flags = flags.GetValue(missingMemberBehavior),
                 Tiers = tiers.Select(value => value.GetArray(item => ReadAchievementTier(item, missingMemberBehavior))),
                 Prerequisites = prerequisites.Select(value => value.GetArray(item => item.GetInt32())),
                 Rewards = rewards.Select(value => value.GetArray(item => ReadAchievementReward(item, missingMemberBehavior))),
@@ -199,7 +199,7 @@ namespace GW2SDK.Achievements
                 Description = description.GetValue(),
                 Requirement = requirement.GetValue(),
                 LockedText = lockedText.GetValue(),
-                Flags = flags.GetValue(),
+                Flags = flags.GetValue(missingMemberBehavior),
                 Tiers = tiers.Select(value => value.GetArray(item => ReadAchievementTier(item, missingMemberBehavior))),
                 Prerequisites = prerequisites.Select(value => value.GetArray(item => item.GetInt32())),
                 Rewards = rewards.Select(value => value.GetArray(item => ReadAchievementReward(item, missingMemberBehavior))),
@@ -294,7 +294,7 @@ namespace GW2SDK.Achievements
                 Description = description.GetValue(),
                 Requirement = requirement.GetValue(),
                 LockedText = lockedText.GetValue(),
-                Flags = flags.GetValue(),
+                Flags = flags.GetValue(missingMemberBehavior),
                 Tiers = tiers.Select(value => value.GetArray(item => ReadAchievementTier(item, missingMemberBehavior))),
                 Prerequisites = prerequisites.Select(value => value.GetArray(item => item.GetInt32())),
                 Rewards = rewards.Select(value => value.GetArray(item => ReadAchievementReward(item, missingMemberBehavior))),
@@ -512,7 +512,7 @@ namespace GW2SDK.Achievements
                 }
             }
 
-            return new MasteryReward { Id = id.GetValue(), Region = region.GetValue() };
+            return new MasteryReward { Id = id.GetValue(), Region = region.GetValue(missingMemberBehavior) };
         }
 
         private ItemReward ReadItemReward(JsonElement json, MissingMemberBehavior missingMemberBehavior)
