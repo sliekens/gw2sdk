@@ -20,7 +20,7 @@ namespace GW2SDK.Subtokens
                 }
                 else if (missingMemberBehavior == MissingMemberBehavior.Error)
                 {
-                    throw new InvalidOperationException($"Unexpected member '{member.Name}'.");
+                    throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
                 }
             }
 

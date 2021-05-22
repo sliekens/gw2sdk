@@ -43,7 +43,7 @@ namespace GW2SDK.Titles
                         continue;
                     }
 
-                    throw new InvalidOperationException($"Unexpected member '{member.Name}'.");
+                    throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
                 }
             }
 

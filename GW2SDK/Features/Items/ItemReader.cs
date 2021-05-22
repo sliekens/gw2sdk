@@ -155,7 +155,7 @@ namespace GW2SDK.Items
                 {
                     if (missingMemberBehavior == MissingMemberBehavior.Error)
                     {
-                        throw new InvalidOperationException($"Unexpected discriminator '{member.Value.GetString()}'.");
+                        throw new InvalidOperationException(Strings.UnexpectedDiscriminator(member.Value.GetString()));
                     }
                 }
                 else if (member.NameEquals(name.Name))
@@ -204,7 +204,7 @@ namespace GW2SDK.Items
                 }
                 else if (missingMemberBehavior == MissingMemberBehavior.Error)
                 {
-                    throw new InvalidOperationException($"Unexpected member '{member.Name}'.");
+                    throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
                 }
             }
 
@@ -240,7 +240,7 @@ namespace GW2SDK.Items
                 }
                 else if (missingMemberBehavior == MissingMemberBehavior.Error)
                 {
-                    throw new InvalidOperationException($"Unexpected member '{member.Name}'.");
+                    throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
                 }
             }
 
@@ -263,7 +263,7 @@ namespace GW2SDK.Items
                 }
                 else if (missingMemberBehavior == MissingMemberBehavior.Error)
                 {
-                    throw new InvalidOperationException($"Unexpected member '{member.Name}'.");
+                    throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
                 }
             }
 
@@ -291,7 +291,7 @@ namespace GW2SDK.Items
                 }
                 else if (missingMemberBehavior == MissingMemberBehavior.Error)
                 {
-                    throw new InvalidOperationException($"Unexpected member '{member.Name}'.");
+                    throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
                 }
             }
 
@@ -319,7 +319,7 @@ namespace GW2SDK.Items
                 }
                 else if (missingMemberBehavior == MissingMemberBehavior.Error)
                 {
-                    throw new InvalidOperationException($"Unexpected member '{member.Name}'.");
+                    throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
                 }
             }
 
@@ -349,7 +349,7 @@ namespace GW2SDK.Items
                 }
                 else if (missingMemberBehavior == MissingMemberBehavior.Error)
                 {
-                    throw new InvalidOperationException($"Unexpected member '{member.Name}'.");
+                    throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
                 }
             }
 
@@ -401,7 +401,7 @@ namespace GW2SDK.Items
                 {
                     if (!member.Value.ValueEquals("Armor"))
                     {
-                        throw new InvalidOperationException($"Invalid type '{member.Value.GetString()}'.");
+                        throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
                     }
                 }
                 else if (member.NameEquals(name.Name))
@@ -460,7 +460,7 @@ namespace GW2SDK.Items
                         {
                             if (missingMemberBehavior == MissingMemberBehavior.Error)
                             {
-                                throw new InvalidOperationException($"Unexpected discriminator '{detail.Value.GetString()}'.");
+                                throw new InvalidOperationException(Strings.UnexpectedDiscriminator(detail.Value.GetString()));
                             }
                         }
                         else if (detail.NameEquals(weightClass.Name))
@@ -493,13 +493,13 @@ namespace GW2SDK.Items
                         }
                         else if (missingMemberBehavior == MissingMemberBehavior.Error)
                         {
-                            throw new InvalidOperationException($"Unexpected member '{detail.Name}'.");
+                            throw new InvalidOperationException(Strings.UnexpectedMember(detail.Name));
                         }
                     }
                 }
                 else if (missingMemberBehavior == MissingMemberBehavior.Error)
                 {
-                    throw new InvalidOperationException($"Unexpected member '{member.Name}'.");
+                    throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
                 }
             }
 
@@ -554,7 +554,7 @@ namespace GW2SDK.Items
                 {
                     if (!member.Value.ValueEquals("Armor"))
                     {
-                        throw new InvalidOperationException($"Invalid type '{member.Value.GetString()}'.");
+                        throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
                     }
                 }
                 else if (member.NameEquals(name.Name))
@@ -613,7 +613,7 @@ namespace GW2SDK.Items
                         {
                             if (!detail.Value.ValueEquals("Boots"))
                             {
-                                throw new InvalidOperationException($"Invalid type '{detail.Value.GetString()}'.");
+                                throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
                             }
                         }
                         else if (detail.NameEquals(weightClass.Name))
@@ -646,13 +646,13 @@ namespace GW2SDK.Items
                         }
                         else if (missingMemberBehavior == MissingMemberBehavior.Error)
                         {
-                            throw new InvalidOperationException($"Unexpected member '{detail.Name}'.");
+                            throw new InvalidOperationException(Strings.UnexpectedMember(detail.Name));
                         }
                     }
                 }
                 else if (missingMemberBehavior == MissingMemberBehavior.Error)
                 {
-                    throw new InvalidOperationException($"Unexpected member '{member.Name}'.");
+                    throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
                 }
             }
 
@@ -708,7 +708,7 @@ namespace GW2SDK.Items
                 {
                     if (!member.Value.ValueEquals("Armor"))
                     {
-                        throw new InvalidOperationException($"Invalid type '{member.Value.GetString()}'.");
+                        throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
                     }
                 }
                 else if (member.NameEquals(name.Name))
@@ -767,7 +767,7 @@ namespace GW2SDK.Items
                         {
                             if (!detail.Value.ValueEquals("Coat"))
                             {
-                                throw new InvalidOperationException($"Invalid type '{detail.Value.GetString()}'.");
+                                throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
                             }
                         }
                         else if (detail.NameEquals(weightClass.Name))
@@ -800,13 +800,13 @@ namespace GW2SDK.Items
                         }
                         else if (missingMemberBehavior == MissingMemberBehavior.Error)
                         {
-                            throw new InvalidOperationException($"Unexpected member '{detail.Name}'.");
+                            throw new InvalidOperationException(Strings.UnexpectedMember(detail.Name));
                         }
                     }
                 }
                 else if (missingMemberBehavior == MissingMemberBehavior.Error)
                 {
-                    throw new InvalidOperationException($"Unexpected member '{member.Name}'.");
+                    throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
                 }
             }
 
@@ -861,7 +861,7 @@ namespace GW2SDK.Items
                 {
                     if (!member.Value.ValueEquals("Armor"))
                     {
-                        throw new InvalidOperationException($"Invalid type '{member.Value.GetString()}'.");
+                        throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
                     }
                 }
                 else if (member.NameEquals(name.Name))
@@ -920,7 +920,7 @@ namespace GW2SDK.Items
                         {
                             if (!detail.Value.ValueEquals("Gloves"))
                             {
-                                throw new InvalidOperationException($"Invalid type '{detail.Value.GetString()}'.");
+                                throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
                             }
                         }
                         else if (detail.NameEquals(weightClass.Name))
@@ -953,13 +953,13 @@ namespace GW2SDK.Items
                         }
                         else if (missingMemberBehavior == MissingMemberBehavior.Error)
                         {
-                            throw new InvalidOperationException($"Unexpected member '{detail.Name}'.");
+                            throw new InvalidOperationException(Strings.UnexpectedMember(detail.Name));
                         }
                     }
                 }
                 else if (missingMemberBehavior == MissingMemberBehavior.Error)
                 {
-                    throw new InvalidOperationException($"Unexpected member '{member.Name}'.");
+                    throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
                 }
             }
 
@@ -1014,7 +1014,7 @@ namespace GW2SDK.Items
                 {
                     if (!member.Value.ValueEquals("Armor"))
                     {
-                        throw new InvalidOperationException($"Invalid type '{member.Value.GetString()}'.");
+                        throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
                     }
                 }
                 else if (member.NameEquals(name.Name))
@@ -1073,7 +1073,7 @@ namespace GW2SDK.Items
                         {
                             if (!detail.Value.ValueEquals("Helm"))
                             {
-                                throw new InvalidOperationException($"Invalid type '{detail.Value.GetString()}'.");
+                                throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
                             }
                         }
                         else if (detail.NameEquals(weightClass.Name))
@@ -1106,13 +1106,13 @@ namespace GW2SDK.Items
                         }
                         else if (missingMemberBehavior == MissingMemberBehavior.Error)
                         {
-                            throw new InvalidOperationException($"Unexpected member '{detail.Name}'.");
+                            throw new InvalidOperationException(Strings.UnexpectedMember(detail.Name));
                         }
                     }
                 }
                 else if (missingMemberBehavior == MissingMemberBehavior.Error)
                 {
-                    throw new InvalidOperationException($"Unexpected member '{member.Name}'.");
+                    throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
                 }
             }
 
@@ -1167,7 +1167,7 @@ namespace GW2SDK.Items
                 {
                     if (!member.Value.ValueEquals("Armor"))
                     {
-                        throw new InvalidOperationException($"Invalid type '{member.Value.GetString()}'.");
+                        throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
                     }
                 }
                 else if (member.NameEquals(name.Name))
@@ -1226,7 +1226,7 @@ namespace GW2SDK.Items
                         {
                             if (!detail.Value.ValueEquals("HelmAquatic"))
                             {
-                                throw new InvalidOperationException($"Invalid type '{detail.Value.GetString()}'.");
+                                throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
                             }
                         }
                         else if (detail.NameEquals(weightClass.Name))
@@ -1259,13 +1259,13 @@ namespace GW2SDK.Items
                         }
                         else if (missingMemberBehavior == MissingMemberBehavior.Error)
                         {
-                            throw new InvalidOperationException($"Unexpected member '{detail.Name}'.");
+                            throw new InvalidOperationException(Strings.UnexpectedMember(detail.Name));
                         }
                     }
                 }
                 else if (missingMemberBehavior == MissingMemberBehavior.Error)
                 {
-                    throw new InvalidOperationException($"Unexpected member '{member.Name}'.");
+                    throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
                 }
             }
 
@@ -1320,7 +1320,7 @@ namespace GW2SDK.Items
                 {
                     if (!member.Value.ValueEquals("Armor"))
                     {
-                        throw new InvalidOperationException($"Invalid type '{member.Value.GetString()}'.");
+                        throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
                     }
                 }
                 else if (member.NameEquals(name.Name))
@@ -1379,7 +1379,7 @@ namespace GW2SDK.Items
                         {
                             if (!detail.Value.ValueEquals("Leggings"))
                             {
-                                throw new InvalidOperationException($"Invalid type '{detail.Value.GetString()}'.");
+                                throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
                             }
                         }
                         else if (detail.NameEquals(weightClass.Name))
@@ -1412,13 +1412,13 @@ namespace GW2SDK.Items
                         }
                         else if (missingMemberBehavior == MissingMemberBehavior.Error)
                         {
-                            throw new InvalidOperationException($"Unexpected member '{detail.Name}'.");
+                            throw new InvalidOperationException(Strings.UnexpectedMember(detail.Name));
                         }
                     }
                 }
                 else if (missingMemberBehavior == MissingMemberBehavior.Error)
                 {
-                    throw new InvalidOperationException($"Unexpected member '{member.Name}'.");
+                    throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
                 }
             }
 
@@ -1473,7 +1473,7 @@ namespace GW2SDK.Items
                 {
                     if (!member.Value.ValueEquals("Armor"))
                     {
-                        throw new InvalidOperationException($"Invalid type '{member.Value.GetString()}'.");
+                        throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
                     }
                 }
                 else if (member.NameEquals(name.Name))
@@ -1532,7 +1532,7 @@ namespace GW2SDK.Items
                         {
                             if (!detail.Value.ValueEquals("Shoulders"))
                             {
-                                throw new InvalidOperationException($"Invalid type '{detail.Value.GetString()}'.");
+                                throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
                             }
                         }
                         else if (detail.NameEquals(weightClass.Name))
@@ -1565,13 +1565,13 @@ namespace GW2SDK.Items
                         }
                         else if (missingMemberBehavior == MissingMemberBehavior.Error)
                         {
-                            throw new InvalidOperationException($"Unexpected member '{detail.Name}'.");
+                            throw new InvalidOperationException(Strings.UnexpectedMember(detail.Name));
                         }
                     }
                 }
                 else if (missingMemberBehavior == MissingMemberBehavior.Error)
                 {
-                    throw new InvalidOperationException($"Unexpected member '{member.Name}'.");
+                    throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
                 }
             }
 
@@ -1626,7 +1626,7 @@ namespace GW2SDK.Items
                 {
                     if (!member.Value.ValueEquals("Back"))
                     {
-                        throw new InvalidOperationException($"Invalid type '{member.Value.GetString()}'.");
+                        throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
                     }
                 }
                 else if (member.NameEquals(name.Name))
@@ -1711,13 +1711,13 @@ namespace GW2SDK.Items
                         }
                         else if (missingMemberBehavior == MissingMemberBehavior.Error)
                         {
-                            throw new InvalidOperationException($"Unexpected member '{detail.Name}'.");
+                            throw new InvalidOperationException(Strings.UnexpectedMember(detail.Name));
                         }
                     }
                 }
                 else if (missingMemberBehavior == MissingMemberBehavior.Error)
                 {
-                    throw new InvalidOperationException($"Unexpected member '{member.Name}'.");
+                    throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
                 }
             }
 
@@ -1766,7 +1766,7 @@ namespace GW2SDK.Items
                 {
                     if (!member.Value.ValueEquals("Bag"))
                     {
-                        throw new InvalidOperationException($"Invalid type '{member.Value.GetString()}'.");
+                        throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
                     }
                 }
                 else if (member.NameEquals(name.Name))
@@ -1827,13 +1827,13 @@ namespace GW2SDK.Items
                         }
                         else if (missingMemberBehavior == MissingMemberBehavior.Error)
                         {
-                            throw new InvalidOperationException($"Unexpected member '{detail.Name}'.");
+                            throw new InvalidOperationException(Strings.UnexpectedMember(detail.Name));
                         }
                     }
                 }
                 else if (missingMemberBehavior == MissingMemberBehavior.Error)
                 {
-                    throw new InvalidOperationException($"Unexpected member '{member.Name}'.");
+                    throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
                 }
             }
 
@@ -1908,7 +1908,7 @@ namespace GW2SDK.Items
                 {
                     if (!member.Value.ValueEquals("Consumable"))
                     {
-                        throw new InvalidOperationException($"Invalid type '{member.Value.GetString()}'.");
+                        throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
                     }
                 }
                 else if (member.NameEquals(name.Name))
@@ -1963,18 +1963,18 @@ namespace GW2SDK.Items
                         {
                             if (missingMemberBehavior == MissingMemberBehavior.Error)
                             {
-                                throw new InvalidOperationException($"Unexpected discriminator '{detail.Value.GetString()}'.");
+                                throw new InvalidOperationException(Strings.UnexpectedDiscriminator(detail.Value.GetString()));
                             }
                         }
                         else if (missingMemberBehavior == MissingMemberBehavior.Error)
                         {
-                            throw new InvalidOperationException($"Unexpected member '{detail.Name}'.");
+                            throw new InvalidOperationException(Strings.UnexpectedMember(detail.Name));
                         }
                     }
                 }
                 else if (missingMemberBehavior == MissingMemberBehavior.Error)
                 {
-                    throw new InvalidOperationException($"Unexpected member '{member.Name}'.");
+                    throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
                 }
             }
 
@@ -2013,7 +2013,7 @@ namespace GW2SDK.Items
                 {
                     if (!member.Value.ValueEquals("Consumable"))
                     {
-                        throw new InvalidOperationException($"Invalid type '{member.Value.GetString()}'.");
+                        throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
                     }
                 }
                 else if (member.NameEquals(name.Name))
@@ -2068,18 +2068,18 @@ namespace GW2SDK.Items
                         {
                             if (!detail.Value.ValueEquals("AppearanceChange"))
                             {
-                                throw new InvalidOperationException($"Invalid type '{detail.Value.GetString()}'.");
+                                throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
                             }
                         }
                         else if (missingMemberBehavior == MissingMemberBehavior.Error)
                         {
-                            throw new InvalidOperationException($"Unexpected member '{detail.Name}'.");
+                            throw new InvalidOperationException(Strings.UnexpectedMember(detail.Name));
                         }
                     }
                 }
                 else if (missingMemberBehavior == MissingMemberBehavior.Error)
                 {
-                    throw new InvalidOperationException($"Unexpected member '{member.Name}'.");
+                    throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
                 }
             }
 
@@ -2118,7 +2118,7 @@ namespace GW2SDK.Items
                 {
                     if (!member.Value.ValueEquals("Consumable"))
                     {
-                        throw new InvalidOperationException($"Invalid type '{member.Value.GetString()}'.");
+                        throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
                     }
                 }
                 else if (member.NameEquals(name.Name))
@@ -2173,18 +2173,18 @@ namespace GW2SDK.Items
                         {
                             if (!detail.Value.ValueEquals("Booze"))
                             {
-                                throw new InvalidOperationException($"Invalid type '{detail.Value.GetString()}'.");
+                                throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
                             }
                         }
                         else if (missingMemberBehavior == MissingMemberBehavior.Error)
                         {
-                            throw new InvalidOperationException($"Unexpected member '{detail.Name}'.");
+                            throw new InvalidOperationException(Strings.UnexpectedMember(detail.Name));
                         }
                     }
                 }
                 else if (missingMemberBehavior == MissingMemberBehavior.Error)
                 {
-                    throw new InvalidOperationException($"Unexpected member '{member.Name}'.");
+                    throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
                 }
             }
 
@@ -2223,7 +2223,7 @@ namespace GW2SDK.Items
                 {
                     if (!member.Value.ValueEquals("Consumable"))
                     {
-                        throw new InvalidOperationException($"Invalid type '{member.Value.GetString()}'.");
+                        throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
                     }
                 }
                 else if (member.NameEquals(name.Name))
@@ -2278,18 +2278,18 @@ namespace GW2SDK.Items
                         {
                             if (!detail.Value.ValueEquals("ContractNpc"))
                             {
-                                throw new InvalidOperationException($"Invalid type '{detail.Value.GetString()}'.");
+                                throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
                             }
                         }
                         else if (missingMemberBehavior == MissingMemberBehavior.Error)
                         {
-                            throw new InvalidOperationException($"Unexpected member '{detail.Name}'.");
+                            throw new InvalidOperationException(Strings.UnexpectedMember(detail.Name));
                         }
                     }
                 }
                 else if (missingMemberBehavior == MissingMemberBehavior.Error)
                 {
-                    throw new InvalidOperationException($"Unexpected member '{member.Name}'.");
+                    throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
                 }
             }
 
@@ -2328,7 +2328,7 @@ namespace GW2SDK.Items
                 {
                     if (!member.Value.ValueEquals("Consumable"))
                     {
-                        throw new InvalidOperationException($"Invalid type '{member.Value.GetString()}'.");
+                        throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
                     }
                 }
                 else if (member.NameEquals(name.Name))
@@ -2383,18 +2383,18 @@ namespace GW2SDK.Items
                         {
                             if (!detail.Value.ValueEquals("Currency"))
                             {
-                                throw new InvalidOperationException($"Invalid type '{detail.Value.GetString()}'.");
+                                throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
                             }
                         }
                         else if (missingMemberBehavior == MissingMemberBehavior.Error)
                         {
-                            throw new InvalidOperationException($"Unexpected member '{detail.Name}'.");
+                            throw new InvalidOperationException(Strings.UnexpectedMember(detail.Name));
                         }
                     }
                 }
                 else if (missingMemberBehavior == MissingMemberBehavior.Error)
                 {
-                    throw new InvalidOperationException($"Unexpected member '{member.Name}'.");
+                    throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
                 }
             }
 
@@ -2438,7 +2438,7 @@ namespace GW2SDK.Items
                 {
                     if (!member.Value.ValueEquals("Consumable"))
                     {
-                        throw new InvalidOperationException($"Invalid type '{member.Value.GetString()}'.");
+                        throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
                     }
                 }
                 else if (member.NameEquals(name.Name))
@@ -2493,7 +2493,7 @@ namespace GW2SDK.Items
                         {
                             if (!detail.Value.ValueEquals("Food"))
                             {
-                                throw new InvalidOperationException($"Invalid type '{detail.Value.GetString()}'.");
+                                throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
                             }
                         }
                         else if (detail.NameEquals(duration.Name))
@@ -2518,13 +2518,13 @@ namespace GW2SDK.Items
                         }
                         else if (missingMemberBehavior == MissingMemberBehavior.Error)
                         {
-                            throw new InvalidOperationException($"Unexpected member '{detail.Name}'.");
+                            throw new InvalidOperationException(Strings.UnexpectedMember(detail.Name));
                         }
                     }
                 }
                 else if (missingMemberBehavior == MissingMemberBehavior.Error)
                 {
-                    throw new InvalidOperationException($"Unexpected member '{member.Name}'.");
+                    throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
                 }
             }
 
@@ -2574,7 +2574,7 @@ namespace GW2SDK.Items
                 {
                     if (!member.Value.ValueEquals("Consumable"))
                     {
-                        throw new InvalidOperationException($"Invalid type '{member.Value.GetString()}'.");
+                        throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
                     }
                 }
                 else if (member.NameEquals(name.Name))
@@ -2629,7 +2629,7 @@ namespace GW2SDK.Items
                         {
                             if (!detail.Value.ValueEquals("Generic"))
                             {
-                                throw new InvalidOperationException($"Invalid type '{detail.Value.GetString()}'.");
+                                throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
                             }
                         }
                         else if (detail.NameEquals(duration.Name))
@@ -2658,13 +2658,13 @@ namespace GW2SDK.Items
                         }
                         else if (missingMemberBehavior == MissingMemberBehavior.Error)
                         {
-                            throw new InvalidOperationException($"Unexpected member '{detail.Name}'.");
+                            throw new InvalidOperationException(Strings.UnexpectedMember(detail.Name));
                         }
                     }
                 }
                 else if (missingMemberBehavior == MissingMemberBehavior.Error)
                 {
-                    throw new InvalidOperationException($"Unexpected member '{member.Name}'.");
+                    throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
                 }
             }
 
@@ -2709,7 +2709,7 @@ namespace GW2SDK.Items
                 {
                     if (!member.Value.ValueEquals("Consumable"))
                     {
-                        throw new InvalidOperationException($"Invalid type '{member.Value.GetString()}'.");
+                        throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
                     }
                 }
                 else if (member.NameEquals(name.Name))
@@ -2764,18 +2764,18 @@ namespace GW2SDK.Items
                         {
                             if (!detail.Value.ValueEquals("Halloween"))
                             {
-                                throw new InvalidOperationException($"Invalid type '{detail.Value.GetString()}'.");
+                                throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
                             }
                         }
                         else if (missingMemberBehavior == MissingMemberBehavior.Error)
                         {
-                            throw new InvalidOperationException($"Unexpected member '{detail.Name}'.");
+                            throw new InvalidOperationException(Strings.UnexpectedMember(detail.Name));
                         }
                     }
                 }
                 else if (missingMemberBehavior == MissingMemberBehavior.Error)
                 {
-                    throw new InvalidOperationException($"Unexpected member '{member.Name}'.");
+                    throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
                 }
             }
 
@@ -2820,7 +2820,7 @@ namespace GW2SDK.Items
                 {
                     if (!member.Value.ValueEquals("Consumable"))
                     {
-                        throw new InvalidOperationException($"Invalid type '{member.Value.GetString()}'.");
+                        throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
                     }
                 }
                 else if (member.NameEquals(name.Name))
@@ -2875,7 +2875,7 @@ namespace GW2SDK.Items
                         {
                             if (!detail.Value.ValueEquals("Immediate"))
                             {
-                                throw new InvalidOperationException($"Invalid type '{detail.Value.GetString()}'.");
+                                throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
                             }
                         }
                         else if (detail.NameEquals(duration.Name))
@@ -2904,13 +2904,13 @@ namespace GW2SDK.Items
                         }
                         else if (missingMemberBehavior == MissingMemberBehavior.Error)
                         {
-                            throw new InvalidOperationException($"Unexpected member '{detail.Name}'.");
+                            throw new InvalidOperationException(Strings.UnexpectedMember(detail.Name));
                         }
                     }
                 }
                 else if (missingMemberBehavior == MissingMemberBehavior.Error)
                 {
-                    throw new InvalidOperationException($"Unexpected member '{member.Name}'.");
+                    throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
                 }
             }
 
@@ -2955,7 +2955,7 @@ namespace GW2SDK.Items
                 {
                     if (!member.Value.ValueEquals("Consumable"))
                     {
-                        throw new InvalidOperationException($"Invalid type '{member.Value.GetString()}'.");
+                        throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
                     }
                 }
                 else if (member.NameEquals(name.Name))
@@ -3010,18 +3010,18 @@ namespace GW2SDK.Items
                         {
                             if (!detail.Value.ValueEquals("MountRandomUnlock"))
                             {
-                                throw new InvalidOperationException($"Invalid type '{detail.Value.GetString()}'.");
+                                throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
                             }
                         }
                         else if (missingMemberBehavior == MissingMemberBehavior.Error)
                         {
-                            throw new InvalidOperationException($"Unexpected member '{detail.Name}'.");
+                            throw new InvalidOperationException(Strings.UnexpectedMember(detail.Name));
                         }
                     }
                 }
                 else if (missingMemberBehavior == MissingMemberBehavior.Error)
                 {
-                    throw new InvalidOperationException($"Unexpected member '{member.Name}'.");
+                    throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
                 }
             }
 
@@ -3060,7 +3060,7 @@ namespace GW2SDK.Items
                 {
                     if (!member.Value.ValueEquals("Consumable"))
                     {
-                        throw new InvalidOperationException($"Invalid type '{member.Value.GetString()}'.");
+                        throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
                     }
                 }
                 else if (member.NameEquals(name.Name))
@@ -3115,18 +3115,18 @@ namespace GW2SDK.Items
                         {
                             if (!detail.Value.ValueEquals("RandomUnlock"))
                             {
-                                throw new InvalidOperationException($"Invalid type '{detail.Value.GetString()}'.");
+                                throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
                             }
                         }
                         else if (missingMemberBehavior == MissingMemberBehavior.Error)
                         {
-                            throw new InvalidOperationException($"Unexpected member '{detail.Name}'.");
+                            throw new InvalidOperationException(Strings.UnexpectedMember(detail.Name));
                         }
                     }
                 }
                 else if (missingMemberBehavior == MissingMemberBehavior.Error)
                 {
-                    throw new InvalidOperationException($"Unexpected member '{member.Name}'.");
+                    throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
                 }
             }
 
@@ -3165,7 +3165,7 @@ namespace GW2SDK.Items
                 {
                     if (!member.Value.ValueEquals("Consumable"))
                     {
-                        throw new InvalidOperationException($"Invalid type '{member.Value.GetString()}'.");
+                        throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
                     }
                 }
                 else if (member.NameEquals(name.Name))
@@ -3220,18 +3220,18 @@ namespace GW2SDK.Items
                         {
                             if (!detail.Value.ValueEquals("TeleportToFriend"))
                             {
-                                throw new InvalidOperationException($"Invalid type '{detail.Value.GetString()}'.");
+                                throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
                             }
                         }
                         else if (missingMemberBehavior == MissingMemberBehavior.Error)
                         {
-                            throw new InvalidOperationException($"Unexpected member '{detail.Name}'.");
+                            throw new InvalidOperationException(Strings.UnexpectedMember(detail.Name));
                         }
                     }
                 }
                 else if (missingMemberBehavior == MissingMemberBehavior.Error)
                 {
-                    throw new InvalidOperationException($"Unexpected member '{member.Name}'.");
+                    throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
                 }
             }
 
@@ -3271,7 +3271,7 @@ namespace GW2SDK.Items
                 {
                     if (!member.Value.ValueEquals("Consumable"))
                     {
-                        throw new InvalidOperationException($"Invalid type '{member.Value.GetString()}'.");
+                        throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
                     }
                 }
                 else if (member.NameEquals(name.Name))
@@ -3326,7 +3326,7 @@ namespace GW2SDK.Items
                         {
                             if (!detail.Value.ValueEquals("Transmutation"))
                             {
-                                throw new InvalidOperationException($"Invalid type '{detail.Value.GetString()}'.");
+                                throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
                             }
                         }
                         else if (detail.NameEquals(skins.Name))
@@ -3335,13 +3335,13 @@ namespace GW2SDK.Items
                         }
                         else if (missingMemberBehavior == MissingMemberBehavior.Error)
                         {
-                            throw new InvalidOperationException($"Unexpected member '{detail.Name}'.");
+                            throw new InvalidOperationException(Strings.UnexpectedMember(detail.Name));
                         }
                     }
                 }
                 else if (missingMemberBehavior == MissingMemberBehavior.Error)
                 {
-                    throw new InvalidOperationException($"Unexpected member '{member.Name}'.");
+                    throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
                 }
             }
 
@@ -3415,7 +3415,7 @@ namespace GW2SDK.Items
                 {
                     if (!member.Value.ValueEquals("Consumable"))
                     {
-                        throw new InvalidOperationException($"Invalid type '{member.Value.GetString()}'.");
+                        throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
                     }
                 }
                 else if (member.NameEquals(name.Name))
@@ -3470,25 +3470,25 @@ namespace GW2SDK.Items
                         {
                             if (!detail.Value.ValueEquals("Unlock"))
                             {
-                                throw new InvalidOperationException($"Invalid type '{detail.Value.GetString()}'.");
+                                throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
                             }
                         }
                         else if (detail.NameEquals("unlock_type"))
                         {
                             if (missingMemberBehavior == MissingMemberBehavior.Error)
                             {
-                                throw new InvalidOperationException($"Unexpected discriminator '{detail.Value.GetString()}'.");
+                                throw new InvalidOperationException(Strings.UnexpectedDiscriminator(detail.Value.GetString()));
                             }
                         }
                         else if (missingMemberBehavior == MissingMemberBehavior.Error)
                         {
-                            throw new InvalidOperationException($"Unexpected member '{detail.Name}'.");
+                            throw new InvalidOperationException(Strings.UnexpectedMember(detail.Name));
                         }
                     }
                 }
                 else if (missingMemberBehavior == MissingMemberBehavior.Error)
                 {
-                    throw new InvalidOperationException($"Unexpected member '{member.Name}'.");
+                    throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
                 }
             }
 
@@ -3527,7 +3527,7 @@ namespace GW2SDK.Items
                 {
                     if (!member.Value.ValueEquals("Consumable"))
                     {
-                        throw new InvalidOperationException($"Invalid type '{member.Value.GetString()}'.");
+                        throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
                     }
                 }
                 else if (member.NameEquals(name.Name))
@@ -3582,25 +3582,25 @@ namespace GW2SDK.Items
                         {
                             if (!detail.Value.ValueEquals("Unlock"))
                             {
-                                throw new InvalidOperationException($"Invalid type '{detail.Value.GetString()}'.");
+                                throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
                             }
                         }
                         else if (detail.NameEquals("unlock_type"))
                         {
                             if (!detail.Value.ValueEquals("BagSlot"))
                             {
-                                throw new InvalidOperationException($"Invalid unlocker type '{detail.Value.GetString()}'.");
+                                throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
                             }
                         }
                         else if (missingMemberBehavior == MissingMemberBehavior.Error)
                         {
-                            throw new InvalidOperationException($"Unexpected member '{detail.Name}'.");
+                            throw new InvalidOperationException(Strings.UnexpectedMember(detail.Name));
                         }
                     }
                 }
                 else if (missingMemberBehavior == MissingMemberBehavior.Error)
                 {
-                    throw new InvalidOperationException($"Unexpected member '{member.Name}'.");
+                    throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
                 }
             }
 
@@ -3639,7 +3639,7 @@ namespace GW2SDK.Items
                 {
                     if (!member.Value.ValueEquals("Consumable"))
                     {
-                        throw new InvalidOperationException($"Invalid type '{member.Value.GetString()}'.");
+                        throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
                     }
                 }
                 else if (member.NameEquals(name.Name))
@@ -3694,25 +3694,25 @@ namespace GW2SDK.Items
                         {
                             if (!detail.Value.ValueEquals("Unlock"))
                             {
-                                throw new InvalidOperationException($"Invalid type '{detail.Value.GetString()}'.");
+                                throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
                             }
                         }
                         else if (detail.NameEquals("unlock_type"))
                         {
                             if (!detail.Value.ValueEquals("BankTab"))
                             {
-                                throw new InvalidOperationException($"Invalid unlocker type '{detail.Value.GetString()}'.");
+                                throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
                             }
                         }
                         else if (missingMemberBehavior == MissingMemberBehavior.Error)
                         {
-                            throw new InvalidOperationException($"Unexpected member '{detail.Name}'.");
+                            throw new InvalidOperationException(Strings.UnexpectedMember(detail.Name));
                         }
                     }
                 }
                 else if (missingMemberBehavior == MissingMemberBehavior.Error)
                 {
-                    throw new InvalidOperationException($"Unexpected member '{member.Name}'.");
+                    throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
                 }
             }
 
@@ -3751,7 +3751,7 @@ namespace GW2SDK.Items
                 {
                     if (!member.Value.ValueEquals("Consumable"))
                     {
-                        throw new InvalidOperationException($"Invalid type '{member.Value.GetString()}'.");
+                        throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
                     }
                 }
                 else if (member.NameEquals(name.Name))
@@ -3806,25 +3806,25 @@ namespace GW2SDK.Items
                         {
                             if (!detail.Value.ValueEquals("Unlock"))
                             {
-                                throw new InvalidOperationException($"Invalid type '{detail.Value.GetString()}'.");
+                                throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
                             }
                         }
                         else if (detail.NameEquals("unlock_type"))
                         {
                             if (!detail.Value.ValueEquals("BuildLibrarySlot"))
                             {
-                                throw new InvalidOperationException($"Invalid unlocker type '{detail.Value.GetString()}'.");
+                                throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
                             }
                         }
                         else if (missingMemberBehavior == MissingMemberBehavior.Error)
                         {
-                            throw new InvalidOperationException($"Unexpected member '{detail.Name}'.");
+                            throw new InvalidOperationException(Strings.UnexpectedMember(detail.Name));
                         }
                     }
                 }
                 else if (missingMemberBehavior == MissingMemberBehavior.Error)
                 {
-                    throw new InvalidOperationException($"Unexpected member '{member.Name}'.");
+                    throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
                 }
             }
 
@@ -3863,7 +3863,7 @@ namespace GW2SDK.Items
                 {
                     if (!member.Value.ValueEquals("Consumable"))
                     {
-                        throw new InvalidOperationException($"Invalid type '{member.Value.GetString()}'.");
+                        throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
                     }
                 }
                 else if (member.NameEquals(name.Name))
@@ -3918,25 +3918,25 @@ namespace GW2SDK.Items
                         {
                             if (!detail.Value.ValueEquals("Unlock"))
                             {
-                                throw new InvalidOperationException($"Invalid type '{detail.Value.GetString()}'.");
+                                throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
                             }
                         }
                         else if (detail.NameEquals("unlock_type"))
                         {
                             if (!detail.Value.ValueEquals("BuildLoadoutTab"))
                             {
-                                throw new InvalidOperationException($"Invalid unlocker type '{detail.Value.GetString()}'.");
+                                throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
                             }
                         }
                         else if (missingMemberBehavior == MissingMemberBehavior.Error)
                         {
-                            throw new InvalidOperationException($"Unexpected member '{detail.Name}'.");
+                            throw new InvalidOperationException(Strings.UnexpectedMember(detail.Name));
                         }
                     }
                 }
                 else if (missingMemberBehavior == MissingMemberBehavior.Error)
                 {
-                    throw new InvalidOperationException($"Unexpected member '{member.Name}'.");
+                    throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
                 }
             }
 
@@ -3975,7 +3975,7 @@ namespace GW2SDK.Items
                 {
                     if (!member.Value.ValueEquals("Consumable"))
                     {
-                        throw new InvalidOperationException($"Invalid type '{member.Value.GetString()}'.");
+                        throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
                     }
                 }
                 else if (member.NameEquals(name.Name))
@@ -4030,25 +4030,25 @@ namespace GW2SDK.Items
                         {
                             if (!detail.Value.ValueEquals("Unlock"))
                             {
-                                throw new InvalidOperationException($"Invalid type '{detail.Value.GetString()}'.");
+                                throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
                             }
                         }
                         else if (detail.NameEquals("unlock_type"))
                         {
                             if (!detail.Value.ValueEquals("Champion"))
                             {
-                                throw new InvalidOperationException($"Invalid unlocker type '{detail.Value.GetString()}'.");
+                                throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
                             }
                         }
                         else if (missingMemberBehavior == MissingMemberBehavior.Error)
                         {
-                            throw new InvalidOperationException($"Unexpected member '{detail.Name}'.");
+                            throw new InvalidOperationException(Strings.UnexpectedMember(detail.Name));
                         }
                     }
                 }
                 else if (missingMemberBehavior == MissingMemberBehavior.Error)
                 {
-                    throw new InvalidOperationException($"Unexpected member '{member.Name}'.");
+                    throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
                 }
             }
 
@@ -4087,7 +4087,7 @@ namespace GW2SDK.Items
                 {
                     if (!member.Value.ValueEquals("Consumable"))
                     {
-                        throw new InvalidOperationException($"Invalid type '{member.Value.GetString()}'.");
+                        throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
                     }
                 }
                 else if (member.NameEquals(name.Name))
@@ -4142,25 +4142,25 @@ namespace GW2SDK.Items
                         {
                             if (!detail.Value.ValueEquals("Unlock"))
                             {
-                                throw new InvalidOperationException($"Invalid type '{detail.Value.GetString()}'.");
+                                throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
                             }
                         }
                         else if (detail.NameEquals("unlock_type"))
                         {
                             if (!detail.Value.ValueEquals("CollectibleCapacity"))
                             {
-                                throw new InvalidOperationException($"Invalid unlocker type '{detail.Value.GetString()}'.");
+                                throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
                             }
                         }
                         else if (missingMemberBehavior == MissingMemberBehavior.Error)
                         {
-                            throw new InvalidOperationException($"Unexpected member '{detail.Name}'.");
+                            throw new InvalidOperationException(Strings.UnexpectedMember(detail.Name));
                         }
                     }
                 }
                 else if (missingMemberBehavior == MissingMemberBehavior.Error)
                 {
-                    throw new InvalidOperationException($"Unexpected member '{member.Name}'.");
+                    throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
                 }
             }
 
@@ -4199,7 +4199,7 @@ namespace GW2SDK.Items
                 {
                     if (!member.Value.ValueEquals("Consumable"))
                     {
-                        throw new InvalidOperationException($"Invalid type '{member.Value.GetString()}'.");
+                        throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
                     }
                 }
                 else if (member.NameEquals(name.Name))
@@ -4254,25 +4254,25 @@ namespace GW2SDK.Items
                         {
                             if (!detail.Value.ValueEquals("Unlock"))
                             {
-                                throw new InvalidOperationException($"Invalid type '{detail.Value.GetString()}'.");
+                                throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
                             }
                         }
                         else if (detail.NameEquals("unlock_type"))
                         {
                             if (!detail.Value.ValueEquals("Content"))
                             {
-                                throw new InvalidOperationException($"Invalid unlocker type '{detail.Value.GetString()}'.");
+                                throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
                             }
                         }
                         else if (missingMemberBehavior == MissingMemberBehavior.Error)
                         {
-                            throw new InvalidOperationException($"Unexpected member '{detail.Name}'.");
+                            throw new InvalidOperationException(Strings.UnexpectedMember(detail.Name));
                         }
                     }
                 }
                 else if (missingMemberBehavior == MissingMemberBehavior.Error)
                 {
-                    throw new InvalidOperationException($"Unexpected member '{member.Name}'.");
+                    throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
                 }
             }
 
@@ -4313,7 +4313,7 @@ namespace GW2SDK.Items
                 {
                     if (!member.Value.ValueEquals("Consumable"))
                     {
-                        throw new InvalidOperationException($"Invalid type '{member.Value.GetString()}'.");
+                        throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
                     }
                 }
                 else if (member.NameEquals(name.Name))
@@ -4368,14 +4368,14 @@ namespace GW2SDK.Items
                         {
                             if (!detail.Value.ValueEquals("Unlock"))
                             {
-                                throw new InvalidOperationException($"Invalid type '{detail.Value.GetString()}'.");
+                                throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
                             }
                         }
                         else if (detail.NameEquals("unlock_type"))
                         {
                             if (!detail.Value.ValueEquals("CraftingRecipe"))
                             {
-                                throw new InvalidOperationException($"Invalid unlocker type '{detail.Value.GetString()}'.");
+                                throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
                             }
                         }
                         else if (detail.NameEquals(recipeId.Name))
@@ -4388,13 +4388,13 @@ namespace GW2SDK.Items
                         }
                         else if (missingMemberBehavior == MissingMemberBehavior.Error)
                         {
-                            throw new InvalidOperationException($"Unexpected member '{detail.Name}'.");
+                            throw new InvalidOperationException(Strings.UnexpectedMember(detail.Name));
                         }
                     }
                 }
                 else if (missingMemberBehavior == MissingMemberBehavior.Error)
                 {
-                    throw new InvalidOperationException($"Unexpected member '{member.Name}'.");
+                    throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
                 }
             }
 
@@ -4436,7 +4436,7 @@ namespace GW2SDK.Items
                 {
                     if (!member.Value.ValueEquals("Consumable"))
                     {
-                        throw new InvalidOperationException($"Invalid type '{member.Value.GetString()}'.");
+                        throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
                     }
                 }
                 else if (member.NameEquals(name.Name))
@@ -4491,14 +4491,14 @@ namespace GW2SDK.Items
                         {
                             if (!detail.Value.ValueEquals("Unlock"))
                             {
-                                throw new InvalidOperationException($"Invalid type '{detail.Value.GetString()}'.");
+                                throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
                             }
                         }
                         else if (detail.NameEquals("unlock_type"))
                         {
                             if (!detail.Value.ValueEquals("Dye"))
                             {
-                                throw new InvalidOperationException($"Invalid unlocker type '{detail.Value.GetString()}'.");
+                                throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
                             }
                         }
                         else if (detail.NameEquals(colorId.Name))
@@ -4507,13 +4507,13 @@ namespace GW2SDK.Items
                         }
                         else if (missingMemberBehavior == MissingMemberBehavior.Error)
                         {
-                            throw new InvalidOperationException($"Unexpected member '{detail.Name}'.");
+                            throw new InvalidOperationException(Strings.UnexpectedMember(detail.Name));
                         }
                     }
                 }
                 else if (missingMemberBehavior == MissingMemberBehavior.Error)
                 {
-                    throw new InvalidOperationException($"Unexpected member '{member.Name}'.");
+                    throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
                 }
             }
 
@@ -4553,7 +4553,7 @@ namespace GW2SDK.Items
                 {
                     if (!member.Value.ValueEquals("Consumable"))
                     {
-                        throw new InvalidOperationException($"Invalid type '{member.Value.GetString()}'.");
+                        throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
                     }
                 }
                 else if (member.NameEquals(name.Name))
@@ -4608,25 +4608,25 @@ namespace GW2SDK.Items
                         {
                             if (!detail.Value.ValueEquals("Unlock"))
                             {
-                                throw new InvalidOperationException($"Invalid type '{detail.Value.GetString()}'.");
+                                throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
                             }
                         }
                         else if (detail.NameEquals("unlock_type"))
                         {
                             if (!detail.Value.ValueEquals("GearLoadoutTab"))
                             {
-                                throw new InvalidOperationException($"Invalid unlocker type '{detail.Value.GetString()}'.");
+                                throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
                             }
                         }
                         else if (missingMemberBehavior == MissingMemberBehavior.Error)
                         {
-                            throw new InvalidOperationException($"Unexpected member '{detail.Name}'.");
+                            throw new InvalidOperationException(Strings.UnexpectedMember(detail.Name));
                         }
                     }
                 }
                 else if (missingMemberBehavior == MissingMemberBehavior.Error)
                 {
-                    throw new InvalidOperationException($"Unexpected member '{member.Name}'.");
+                    throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
                 }
             }
 
@@ -4665,7 +4665,7 @@ namespace GW2SDK.Items
                 {
                     if (!member.Value.ValueEquals("Consumable"))
                     {
-                        throw new InvalidOperationException($"Invalid type '{member.Value.GetString()}'.");
+                        throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
                     }
                 }
                 else if (member.NameEquals(name.Name))
@@ -4720,25 +4720,25 @@ namespace GW2SDK.Items
                         {
                             if (!detail.Value.ValueEquals("Unlock"))
                             {
-                                throw new InvalidOperationException($"Invalid type '{detail.Value.GetString()}'.");
+                                throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
                             }
                         }
                         else if (detail.NameEquals("unlock_type"))
                         {
                             if (!detail.Value.ValueEquals("GliderSkin"))
                             {
-                                throw new InvalidOperationException($"Invalid unlocker type '{detail.Value.GetString()}'.");
+                                throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
                             }
                         }
                         else if (missingMemberBehavior == MissingMemberBehavior.Error)
                         {
-                            throw new InvalidOperationException($"Unexpected member '{detail.Name}'.");
+                            throw new InvalidOperationException(Strings.UnexpectedMember(detail.Name));
                         }
                     }
                 }
                 else if (missingMemberBehavior == MissingMemberBehavior.Error)
                 {
-                    throw new InvalidOperationException($"Unexpected member '{member.Name}'.");
+                    throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
                 }
             }
 
@@ -4777,7 +4777,7 @@ namespace GW2SDK.Items
                 {
                     if (!member.Value.ValueEquals("Consumable"))
                     {
-                        throw new InvalidOperationException($"Invalid type '{member.Value.GetString()}'.");
+                        throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
                     }
                 }
                 else if (member.NameEquals(name.Name))
@@ -4832,25 +4832,25 @@ namespace GW2SDK.Items
                         {
                             if (!detail.Value.ValueEquals("Unlock"))
                             {
-                                throw new InvalidOperationException($"Invalid type '{detail.Value.GetString()}'.");
+                                throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
                             }
                         }
                         else if (detail.NameEquals("unlock_type"))
                         {
                             if (!detail.Value.ValueEquals("Minipet"))
                             {
-                                throw new InvalidOperationException($"Invalid unlocker type '{detail.Value.GetString()}'.");
+                                throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
                             }
                         }
                         else if (missingMemberBehavior == MissingMemberBehavior.Error)
                         {
-                            throw new InvalidOperationException($"Unexpected member '{detail.Name}'.");
+                            throw new InvalidOperationException(Strings.UnexpectedMember(detail.Name));
                         }
                     }
                 }
                 else if (missingMemberBehavior == MissingMemberBehavior.Error)
                 {
-                    throw new InvalidOperationException($"Unexpected member '{member.Name}'.");
+                    throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
                 }
             }
 
@@ -4889,7 +4889,7 @@ namespace GW2SDK.Items
                 {
                     if (!member.Value.ValueEquals("Consumable"))
                     {
-                        throw new InvalidOperationException($"Invalid type '{member.Value.GetString()}'.");
+                        throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
                     }
                 }
                 else if (member.NameEquals(name.Name))
@@ -4944,25 +4944,25 @@ namespace GW2SDK.Items
                         {
                             if (!detail.Value.ValueEquals("Unlock"))
                             {
-                                throw new InvalidOperationException($"Invalid type '{detail.Value.GetString()}'.");
+                                throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
                             }
                         }
                         else if (detail.NameEquals("unlock_type"))
                         {
                             if (!detail.Value.ValueEquals("Ms"))
                             {
-                                throw new InvalidOperationException($"Invalid unlocker type '{detail.Value.GetString()}'.");
+                                throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
                             }
                         }
                         else if (missingMemberBehavior == MissingMemberBehavior.Error)
                         {
-                            throw new InvalidOperationException($"Unexpected member '{detail.Name}'.");
+                            throw new InvalidOperationException(Strings.UnexpectedMember(detail.Name));
                         }
                     }
                 }
                 else if (missingMemberBehavior == MissingMemberBehavior.Error)
                 {
-                    throw new InvalidOperationException($"Unexpected member '{member.Name}'.");
+                    throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
                 }
             }
 
@@ -5001,7 +5001,7 @@ namespace GW2SDK.Items
                 {
                     if (!member.Value.ValueEquals("Consumable"))
                     {
-                        throw new InvalidOperationException($"Invalid type '{member.Value.GetString()}'.");
+                        throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
                     }
                 }
                 else if (member.NameEquals(name.Name))
@@ -5056,25 +5056,25 @@ namespace GW2SDK.Items
                         {
                             if (!detail.Value.ValueEquals("Unlock"))
                             {
-                                throw new InvalidOperationException($"Invalid type '{detail.Value.GetString()}'.");
+                                throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
                             }
                         }
                         else if (detail.NameEquals("unlock_type"))
                         {
                             if (!detail.Value.ValueEquals("Outfit"))
                             {
-                                throw new InvalidOperationException($"Invalid unlocker type '{detail.Value.GetString()}'.");
+                                throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
                             }
                         }
                         else if (missingMemberBehavior == MissingMemberBehavior.Error)
                         {
-                            throw new InvalidOperationException($"Unexpected member '{detail.Name}'.");
+                            throw new InvalidOperationException(Strings.UnexpectedMember(detail.Name));
                         }
                     }
                 }
                 else if (missingMemberBehavior == MissingMemberBehavior.Error)
                 {
-                    throw new InvalidOperationException($"Unexpected member '{member.Name}'.");
+                    throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
                 }
             }
 
@@ -5113,7 +5113,7 @@ namespace GW2SDK.Items
                 {
                     if (!member.Value.ValueEquals("Consumable"))
                     {
-                        throw new InvalidOperationException($"Invalid type '{member.Value.GetString()}'.");
+                        throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
                     }
                 }
                 else if (member.NameEquals(name.Name))
@@ -5168,25 +5168,25 @@ namespace GW2SDK.Items
                         {
                             if (!detail.Value.ValueEquals("Unlock"))
                             {
-                                throw new InvalidOperationException($"Invalid type '{detail.Value.GetString()}'.");
+                                throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
                             }
                         }
                         else if (detail.NameEquals("unlock_type"))
                         {
                             if (!detail.Value.ValueEquals("SharedSlot"))
                             {
-                                throw new InvalidOperationException($"Invalid unlocker type '{detail.Value.GetString()}'.");
+                                throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
                             }
                         }
                         else if (missingMemberBehavior == MissingMemberBehavior.Error)
                         {
-                            throw new InvalidOperationException($"Unexpected member '{detail.Name}'.");
+                            throw new InvalidOperationException(Strings.UnexpectedMember(detail.Name));
                         }
                     }
                 }
                 else if (missingMemberBehavior == MissingMemberBehavior.Error)
                 {
-                    throw new InvalidOperationException($"Unexpected member '{member.Name}'.");
+                    throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
                 }
             }
 
@@ -5225,7 +5225,7 @@ namespace GW2SDK.Items
                 {
                     if (!member.Value.ValueEquals("Consumable"))
                     {
-                        throw new InvalidOperationException($"Invalid type '{member.Value.GetString()}'.");
+                        throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
                     }
                 }
                 else if (member.NameEquals(name.Name))
@@ -5280,18 +5280,18 @@ namespace GW2SDK.Items
                         {
                             if (!detail.Value.ValueEquals("UpgradeRemoval"))
                             {
-                                throw new InvalidOperationException($"Invalid type '{detail.Value.GetString()}'.");
+                                throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
                             }
                         }
                         else if (missingMemberBehavior == MissingMemberBehavior.Error)
                         {
-                            throw new InvalidOperationException($"Unexpected member '{detail.Name}'.");
+                            throw new InvalidOperationException(Strings.UnexpectedMember(detail.Name));
                         }
                     }
                 }
                 else if (missingMemberBehavior == MissingMemberBehavior.Error)
                 {
-                    throw new InvalidOperationException($"Unexpected member '{member.Name}'.");
+                    throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
                 }
             }
 
@@ -5335,7 +5335,7 @@ namespace GW2SDK.Items
                 {
                     if (!member.Value.ValueEquals("Consumable"))
                     {
-                        throw new InvalidOperationException($"Invalid type '{member.Value.GetString()}'.");
+                        throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
                     }
                 }
                 else if (member.NameEquals(name.Name))
@@ -5390,7 +5390,7 @@ namespace GW2SDK.Items
                         {
                             if (!detail.Value.ValueEquals("Utility"))
                             {
-                                throw new InvalidOperationException($"Invalid type '{detail.Value.GetString()}'.");
+                                throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
                             }
                         }
                         else if (detail.NameEquals(duration.Name))
@@ -5415,13 +5415,13 @@ namespace GW2SDK.Items
                         }
                         else if (missingMemberBehavior == MissingMemberBehavior.Error)
                         {
-                            throw new InvalidOperationException($"Unexpected member '{detail.Name}'.");
+                            throw new InvalidOperationException(Strings.UnexpectedMember(detail.Name));
                         }
                     }
                 }
                 else if (missingMemberBehavior == MissingMemberBehavior.Error)
                 {
-                    throw new InvalidOperationException($"Unexpected member '{member.Name}'.");
+                    throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
                 }
             }
 
@@ -5477,7 +5477,7 @@ namespace GW2SDK.Items
                 {
                     if (!member.Value.ValueEquals("Container"))
                     {
-                        throw new InvalidOperationException($"Invalid type '{member.Value.GetString()}'.");
+                        throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
                     }
                 }
                 else if (member.NameEquals(name.Name))
@@ -5532,18 +5532,18 @@ namespace GW2SDK.Items
                         {
                             if (missingMemberBehavior == MissingMemberBehavior.Error)
                             {
-                                throw new InvalidOperationException($"Unexpected discriminator '{detail.Value.GetString()}'.");
+                                throw new InvalidOperationException(Strings.UnexpectedDiscriminator(detail.Value.GetString()));
                             }
                         }
                         else if (missingMemberBehavior == MissingMemberBehavior.Error)
                         {
-                            throw new InvalidOperationException($"Unexpected member '{detail.Name}'.");
+                            throw new InvalidOperationException(Strings.UnexpectedMember(detail.Name));
                         }
                     }
                 }
                 else if (missingMemberBehavior == MissingMemberBehavior.Error)
                 {
-                    throw new InvalidOperationException($"Unexpected member '{member.Name}'.");
+                    throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
                 }
             }
 
@@ -5582,7 +5582,7 @@ namespace GW2SDK.Items
                 {
                     if (!member.Value.ValueEquals("Container"))
                     {
-                        throw new InvalidOperationException($"Invalid type '{member.Value.GetString()}'.");
+                        throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
                     }
                 }
                 else if (member.NameEquals(name.Name))
@@ -5637,18 +5637,18 @@ namespace GW2SDK.Items
                         {
                             if (!detail.Value.ValueEquals("Default"))
                             {
-                                throw new InvalidOperationException($"Invalid type '{detail.Value.GetString()}'.");
+                                throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
                             }
                         }
                         else if (missingMemberBehavior == MissingMemberBehavior.Error)
                         {
-                            throw new InvalidOperationException($"Unexpected member '{detail.Name}'.");
+                            throw new InvalidOperationException(Strings.UnexpectedMember(detail.Name));
                         }
                     }
                 }
                 else if (missingMemberBehavior == MissingMemberBehavior.Error)
                 {
-                    throw new InvalidOperationException($"Unexpected member '{member.Name}'.");
+                    throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
                 }
             }
 
@@ -5687,7 +5687,7 @@ namespace GW2SDK.Items
                 {
                     if (!member.Value.ValueEquals("Container"))
                     {
-                        throw new InvalidOperationException($"Invalid type '{member.Value.GetString()}'.");
+                        throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
                     }
                 }
                 else if (member.NameEquals(name.Name))
@@ -5742,18 +5742,18 @@ namespace GW2SDK.Items
                         {
                             if (!detail.Value.ValueEquals("GiftBox"))
                             {
-                                throw new InvalidOperationException($"Invalid type '{detail.Value.GetString()}'.");
+                                throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
                             }
                         }
                         else if (missingMemberBehavior == MissingMemberBehavior.Error)
                         {
-                            throw new InvalidOperationException($"Unexpected member '{detail.Name}'.");
+                            throw new InvalidOperationException(Strings.UnexpectedMember(detail.Name));
                         }
                     }
                 }
                 else if (missingMemberBehavior == MissingMemberBehavior.Error)
                 {
-                    throw new InvalidOperationException($"Unexpected member '{member.Name}'.");
+                    throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
                 }
             }
 
@@ -5792,7 +5792,7 @@ namespace GW2SDK.Items
                 {
                     if (!member.Value.ValueEquals("Container"))
                     {
-                        throw new InvalidOperationException($"Invalid type '{member.Value.GetString()}'.");
+                        throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
                     }
                 }
                 else if (member.NameEquals(name.Name))
@@ -5847,18 +5847,18 @@ namespace GW2SDK.Items
                         {
                             if (!detail.Value.ValueEquals("Immediate"))
                             {
-                                throw new InvalidOperationException($"Invalid type '{detail.Value.GetString()}'.");
+                                throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
                             }
                         }
                         else if (missingMemberBehavior == MissingMemberBehavior.Error)
                         {
-                            throw new InvalidOperationException($"Unexpected member '{detail.Name}'.");
+                            throw new InvalidOperationException(Strings.UnexpectedMember(detail.Name));
                         }
                     }
                 }
                 else if (missingMemberBehavior == MissingMemberBehavior.Error)
                 {
-                    throw new InvalidOperationException($"Unexpected member '{member.Name}'.");
+                    throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
                 }
             }
 
@@ -5897,7 +5897,7 @@ namespace GW2SDK.Items
                 {
                     if (!member.Value.ValueEquals("Container"))
                     {
-                        throw new InvalidOperationException($"Invalid type '{member.Value.GetString()}'.");
+                        throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
                     }
                 }
                 else if (member.NameEquals(name.Name))
@@ -5952,18 +5952,18 @@ namespace GW2SDK.Items
                         {
                             if (!detail.Value.ValueEquals("OpenUI"))
                             {
-                                throw new InvalidOperationException($"Invalid type '{detail.Value.GetString()}'.");
+                                throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
                             }
                         }
                         else if (missingMemberBehavior == MissingMemberBehavior.Error)
                         {
-                            throw new InvalidOperationException($"Unexpected member '{detail.Name}'.");
+                            throw new InvalidOperationException(Strings.UnexpectedMember(detail.Name));
                         }
                     }
                 }
                 else if (missingMemberBehavior == MissingMemberBehavior.Error)
                 {
-                    throw new InvalidOperationException($"Unexpected member '{member.Name}'.");
+                    throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
                 }
             }
 
@@ -6003,7 +6003,7 @@ namespace GW2SDK.Items
                 {
                     if (!member.Value.ValueEquals("CraftingMaterial"))
                     {
-                        throw new InvalidOperationException($"Invalid type '{member.Value.GetString()}'.");
+                        throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
                     }
                 }
                 else if (member.NameEquals(name.Name))
@@ -6056,7 +6056,7 @@ namespace GW2SDK.Items
                 }
                 else if (missingMemberBehavior == MissingMemberBehavior.Error)
                 {
-                    throw new InvalidOperationException($"Unexpected member '{member.Name}'.");
+                    throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
                 }
             }
 
@@ -6154,18 +6154,18 @@ namespace GW2SDK.Items
                         {
                             if (missingMemberBehavior == MissingMemberBehavior.Error)
                             {
-                                throw new InvalidOperationException($"Unexpected discriminator '{detail.Value.GetString()}'.");
+                                throw new InvalidOperationException(Strings.UnexpectedDiscriminator(detail.Value.GetString()));
                             }
                         }
                         else if (missingMemberBehavior == MissingMemberBehavior.Error)
                         {
-                            throw new InvalidOperationException($"Unexpected member '{detail.Name}'.");
+                            throw new InvalidOperationException(Strings.UnexpectedMember(detail.Name));
                         }
                     }
                 }
                 else if (missingMemberBehavior == MissingMemberBehavior.Error)
                 {
-                    throw new InvalidOperationException($"Unexpected member '{member.Name}'.");
+                    throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
                 }
             }
 
@@ -6204,7 +6204,7 @@ namespace GW2SDK.Items
                 {
                     if (!member.Value.ValueEquals("Gathering"))
                     {
-                        throw new InvalidOperationException($"Invalid type '{member.Value.GetString()}'.");
+                        throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
                     }
                 }
                 else if (member.NameEquals(name.Name))
@@ -6259,18 +6259,18 @@ namespace GW2SDK.Items
                         {
                             if (!detail.Value.ValueEquals("Foraging"))
                             {
-                                throw new InvalidOperationException($"Invalid type '{detail.Value.GetString()}'.");
+                                throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
                             }
                         }
                         else if (missingMemberBehavior == MissingMemberBehavior.Error)
                         {
-                            throw new InvalidOperationException($"Unexpected member '{detail.Name}'.");
+                            throw new InvalidOperationException(Strings.UnexpectedMember(detail.Name));
                         }
                     }
                 }
                 else if (missingMemberBehavior == MissingMemberBehavior.Error)
                 {
-                    throw new InvalidOperationException($"Unexpected member '{member.Name}'.");
+                    throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
                 }
             }
 
@@ -6309,7 +6309,7 @@ namespace GW2SDK.Items
                 {
                     if (!member.Value.ValueEquals("Gathering"))
                     {
-                        throw new InvalidOperationException($"Invalid type '{member.Value.GetString()}'.");
+                        throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
                     }
                 }
                 else if (member.NameEquals(name.Name))
@@ -6364,18 +6364,18 @@ namespace GW2SDK.Items
                         {
                             if (!detail.Value.ValueEquals("Logging"))
                             {
-                                throw new InvalidOperationException($"Invalid type '{detail.Value.GetString()}'.");
+                                throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
                             }
                         }
                         else if (missingMemberBehavior == MissingMemberBehavior.Error)
                         {
-                            throw new InvalidOperationException($"Unexpected member '{detail.Name}'.");
+                            throw new InvalidOperationException(Strings.UnexpectedMember(detail.Name));
                         }
                     }
                 }
                 else if (missingMemberBehavior == MissingMemberBehavior.Error)
                 {
-                    throw new InvalidOperationException($"Unexpected member '{member.Name}'.");
+                    throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
                 }
             }
 
@@ -6414,7 +6414,7 @@ namespace GW2SDK.Items
                 {
                     if (!member.Value.ValueEquals("Gathering"))
                     {
-                        throw new InvalidOperationException($"Invalid type '{member.Value.GetString()}'.");
+                        throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
                     }
                 }
                 else if (member.NameEquals(name.Name))
@@ -6469,18 +6469,18 @@ namespace GW2SDK.Items
                         {
                             if (!detail.Value.ValueEquals("Mining"))
                             {
-                                throw new InvalidOperationException($"Invalid type '{detail.Value.GetString()}'.");
+                                throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
                             }
                         }
                         else if (missingMemberBehavior == MissingMemberBehavior.Error)
                         {
-                            throw new InvalidOperationException($"Unexpected member '{detail.Name}'.");
+                            throw new InvalidOperationException(Strings.UnexpectedMember(detail.Name));
                         }
                     }
                 }
                 else if (missingMemberBehavior == MissingMemberBehavior.Error)
                 {
-                    throw new InvalidOperationException($"Unexpected member '{member.Name}'.");
+                    throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
                 }
             }
 
@@ -6531,7 +6531,7 @@ namespace GW2SDK.Items
                 {
                     if (!member.Value.ValueEquals("Gizmo"))
                     {
-                        throw new InvalidOperationException($"Invalid type '{member.Value.GetString()}'.");
+                        throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
                     }
                 }
                 else if (member.NameEquals(name.Name))
@@ -6586,18 +6586,18 @@ namespace GW2SDK.Items
                         {
                             if (missingMemberBehavior == MissingMemberBehavior.Error)
                             {
-                                throw new InvalidOperationException($"Unexpected discriminator '{detail.Value.GetString()}'.");
+                                throw new InvalidOperationException(Strings.UnexpectedDiscriminator(detail.Value.GetString()));
                             }
                         }
                         else if (missingMemberBehavior == MissingMemberBehavior.Error)
                         {
-                            throw new InvalidOperationException($"Unexpected member '{detail.Name}'.");
+                            throw new InvalidOperationException(Strings.UnexpectedMember(detail.Name));
                         }
                     }
                 }
                 else if (missingMemberBehavior == MissingMemberBehavior.Error)
                 {
-                    throw new InvalidOperationException($"Unexpected member '{member.Name}'.");
+                    throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
                 }
             }
 
@@ -6636,7 +6636,7 @@ namespace GW2SDK.Items
                 {
                     if (!member.Value.ValueEquals("Gizmo"))
                     {
-                        throw new InvalidOperationException($"Invalid type '{member.Value.GetString()}'.");
+                        throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
                     }
                 }
                 else if (member.NameEquals(name.Name))
@@ -6691,18 +6691,18 @@ namespace GW2SDK.Items
                         {
                             if (!detail.Value.ValueEquals("ContainerKey"))
                             {
-                                throw new InvalidOperationException($"Invalid type '{detail.Value.GetString()}'.");
+                                throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
                             }
                         }
                         else if (missingMemberBehavior == MissingMemberBehavior.Error)
                         {
-                            throw new InvalidOperationException($"Unexpected member '{detail.Name}'.");
+                            throw new InvalidOperationException(Strings.UnexpectedMember(detail.Name));
                         }
                     }
                 }
                 else if (missingMemberBehavior == MissingMemberBehavior.Error)
                 {
-                    throw new InvalidOperationException($"Unexpected member '{member.Name}'.");
+                    throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
                 }
             }
 
@@ -6743,7 +6743,7 @@ namespace GW2SDK.Items
                 {
                     if (!member.Value.ValueEquals("Gizmo"))
                     {
-                        throw new InvalidOperationException($"Invalid type '{member.Value.GetString()}'.");
+                        throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
                     }
                 }
                 else if (member.NameEquals(name.Name))
@@ -6798,7 +6798,7 @@ namespace GW2SDK.Items
                         {
                             if (!detail.Value.ValueEquals("Default"))
                             {
-                                throw new InvalidOperationException($"Invalid type '{detail.Value.GetString()}'.");
+                                throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
                             }
                         }
                         else if (detail.NameEquals(vendorIds.Name))
@@ -6811,13 +6811,13 @@ namespace GW2SDK.Items
                         }
                         else if (missingMemberBehavior == MissingMemberBehavior.Error)
                         {
-                            throw new InvalidOperationException($"Unexpected member '{detail.Name}'.");
+                            throw new InvalidOperationException(Strings.UnexpectedMember(detail.Name));
                         }
                     }
                 }
                 else if (missingMemberBehavior == MissingMemberBehavior.Error)
                 {
-                    throw new InvalidOperationException($"Unexpected member '{member.Name}'.");
+                    throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
                 }
             }
 
@@ -6858,7 +6858,7 @@ namespace GW2SDK.Items
                 {
                     if (!member.Value.ValueEquals("Gizmo"))
                     {
-                        throw new InvalidOperationException($"Invalid type '{member.Value.GetString()}'.");
+                        throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
                     }
                 }
                 else if (member.NameEquals(name.Name))
@@ -6913,18 +6913,18 @@ namespace GW2SDK.Items
                         {
                             if (!detail.Value.ValueEquals("RentableContractNpc"))
                             {
-                                throw new InvalidOperationException($"Invalid type '{detail.Value.GetString()}'.");
+                                throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
                             }
                         }
                         else if (missingMemberBehavior == MissingMemberBehavior.Error)
                         {
-                            throw new InvalidOperationException($"Unexpected member '{detail.Name}'.");
+                            throw new InvalidOperationException(Strings.UnexpectedMember(detail.Name));
                         }
                     }
                 }
                 else if (missingMemberBehavior == MissingMemberBehavior.Error)
                 {
-                    throw new InvalidOperationException($"Unexpected member '{member.Name}'.");
+                    throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
                 }
             }
 
@@ -6963,7 +6963,7 @@ namespace GW2SDK.Items
                 {
                     if (!member.Value.ValueEquals("Gizmo"))
                     {
-                        throw new InvalidOperationException($"Invalid type '{member.Value.GetString()}'.");
+                        throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
                     }
                 }
                 else if (member.NameEquals(name.Name))
@@ -7018,18 +7018,18 @@ namespace GW2SDK.Items
                         {
                             if (!detail.Value.ValueEquals("UnlimitedConsumable"))
                             {
-                                throw new InvalidOperationException($"Invalid type '{detail.Value.GetString()}'.");
+                                throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
                             }
                         }
                         else if (missingMemberBehavior == MissingMemberBehavior.Error)
                         {
-                            throw new InvalidOperationException($"Unexpected member '{detail.Name}'.");
+                            throw new InvalidOperationException(Strings.UnexpectedMember(detail.Name));
                         }
                     }
                 }
                 else if (missingMemberBehavior == MissingMemberBehavior.Error)
                 {
-                    throw new InvalidOperationException($"Unexpected member '{member.Name}'.");
+                    throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
                 }
             }
 
@@ -7068,7 +7068,7 @@ namespace GW2SDK.Items
                 {
                     if (!member.Value.ValueEquals("Key"))
                     {
-                        throw new InvalidOperationException($"Invalid type '{member.Value.GetString()}'.");
+                        throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
                     }
                 }
                 else if (member.NameEquals(name.Name))
@@ -7117,7 +7117,7 @@ namespace GW2SDK.Items
                 }
                 else if (missingMemberBehavior == MissingMemberBehavior.Error)
                 {
-                    throw new InvalidOperationException($"Unexpected member '{member.Name}'.");
+                    throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
                 }
             }
 
@@ -7157,7 +7157,7 @@ namespace GW2SDK.Items
                 {
                     if (!member.Value.ValueEquals("MiniPet"))
                     {
-                        throw new InvalidOperationException($"Invalid type '{member.Value.GetString()}'.");
+                        throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
                     }
                 }
                 else if (member.NameEquals(name.Name))
@@ -7214,13 +7214,13 @@ namespace GW2SDK.Items
                         }
                         else if (missingMemberBehavior == MissingMemberBehavior.Error)
                         {
-                            throw new InvalidOperationException($"Unexpected member '{detail.Name}'.");
+                            throw new InvalidOperationException(Strings.UnexpectedMember(detail.Name));
                         }
                     }
                 }
                 else if (missingMemberBehavior == MissingMemberBehavior.Error)
                 {
-                    throw new InvalidOperationException($"Unexpected member '{member.Name}'.");
+                    throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
                 }
             }
 
@@ -7314,18 +7314,18 @@ namespace GW2SDK.Items
                         {
                             if (missingMemberBehavior == MissingMemberBehavior.Error)
                             {
-                                throw new InvalidOperationException($"Unexpected discriminator '{detail.Value.GetString()}'.");
+                                throw new InvalidOperationException(Strings.UnexpectedDiscriminator(detail.Value.GetString()));
                             }
                         }
                         else if (missingMemberBehavior == MissingMemberBehavior.Error)
                         {
-                            throw new InvalidOperationException($"Unexpected member '{detail.Name}'.");
+                            throw new InvalidOperationException(Strings.UnexpectedMember(detail.Name));
                         }
                     }
                 }
                 else if (missingMemberBehavior == MissingMemberBehavior.Error)
                 {
-                    throw new InvalidOperationException($"Unexpected member '{member.Name}'.");
+                    throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
                 }
             }
 
@@ -7365,7 +7365,7 @@ namespace GW2SDK.Items
                 {
                     if (!member.Value.ValueEquals("Tool"))
                     {
-                        throw new InvalidOperationException($"Invalid type '{member.Value.GetString()}'.");
+                        throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
                     }
                 }
                 else if (member.NameEquals(name.Name))
@@ -7420,7 +7420,7 @@ namespace GW2SDK.Items
                         {
                             if (!detail.Value.ValueEquals("Salvage"))
                             {
-                                throw new InvalidOperationException($"Invalid type '{detail.Value.GetString()}'.");
+                                throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
                             }
                         }
                         else if (detail.NameEquals(charges.Name))
@@ -7429,13 +7429,13 @@ namespace GW2SDK.Items
                         }
                         else if (missingMemberBehavior == MissingMemberBehavior.Error)
                         {
-                            throw new InvalidOperationException($"Unexpected member '{detail.Name}'.");
+                            throw new InvalidOperationException(Strings.UnexpectedMember(detail.Name));
                         }
                     }
                 }
                 else if (missingMemberBehavior == MissingMemberBehavior.Error)
                 {
-                    throw new InvalidOperationException($"Unexpected member '{member.Name}'.");
+                    throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
                 }
             }
 
@@ -7492,7 +7492,7 @@ namespace GW2SDK.Items
                 {
                     if (!member.Value.ValueEquals("Gizmo"))
                     {
-                        throw new InvalidOperationException($"Invalid type '{member.Value.GetString()}'.");
+                        throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
                     }
                 }
                 else if (member.NameEquals(name.Name))
@@ -7555,7 +7555,7 @@ namespace GW2SDK.Items
                         {
                             if (missingMemberBehavior == MissingMemberBehavior.Error)
                             {
-                                throw new InvalidOperationException($"Unexpected discriminator '{detail.Value.GetString()}'.");
+                                throw new InvalidOperationException(Strings.UnexpectedDiscriminator(detail.Value.GetString()));
                             }
                         }
                         else if (detail.NameEquals(infusionSlots.Name))
@@ -7580,13 +7580,13 @@ namespace GW2SDK.Items
                         }
                         else if (missingMemberBehavior == MissingMemberBehavior.Error)
                         {
-                            throw new InvalidOperationException($"Unexpected member '{detail.Name}'.");
+                            throw new InvalidOperationException(Strings.UnexpectedMember(detail.Name));
                         }
                     }
                 }
                 else if (missingMemberBehavior == MissingMemberBehavior.Error)
                 {
-                    throw new InvalidOperationException($"Unexpected member '{member.Name}'.");
+                    throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
                 }
             }
 
@@ -7639,7 +7639,7 @@ namespace GW2SDK.Items
                 {
                     if (!member.Value.ValueEquals("Trinket"))
                     {
-                        throw new InvalidOperationException($"Invalid type '{member.Value.GetString()}'.");
+                        throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
                     }
                 }
                 else if (member.NameEquals(name.Name))
@@ -7702,7 +7702,7 @@ namespace GW2SDK.Items
                         {
                             if (!detail.Value.ValueEquals("Accessory"))
                             {
-                                throw new InvalidOperationException($"Invalid type '{detail.Value.GetString()}'.");
+                                throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
                             }
                         }
                         else if (detail.NameEquals(infusionSlots.Name))
@@ -7727,13 +7727,13 @@ namespace GW2SDK.Items
                         }
                         else if (missingMemberBehavior == MissingMemberBehavior.Error)
                         {
-                            throw new InvalidOperationException($"Unexpected member '{detail.Name}'.");
+                            throw new InvalidOperationException(Strings.UnexpectedMember(detail.Name));
                         }
                     }
                 }
                 else if (missingMemberBehavior == MissingMemberBehavior.Error)
                 {
-                    throw new InvalidOperationException($"Unexpected member '{member.Name}'.");
+                    throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
                 }
             }
 
@@ -7786,7 +7786,7 @@ namespace GW2SDK.Items
                 {
                     if (!member.Value.ValueEquals("Trinket"))
                     {
-                        throw new InvalidOperationException($"Invalid type '{member.Value.GetString()}'.");
+                        throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
                     }
                 }
                 else if (member.NameEquals(name.Name))
@@ -7849,7 +7849,7 @@ namespace GW2SDK.Items
                         {
                             if (!detail.Value.ValueEquals("Amulet"))
                             {
-                                throw new InvalidOperationException($"Invalid type '{detail.Value.GetString()}'.");
+                                throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
                             }
                         }
                         else if (detail.NameEquals(infusionSlots.Name))
@@ -7874,13 +7874,13 @@ namespace GW2SDK.Items
                         }
                         else if (missingMemberBehavior == MissingMemberBehavior.Error)
                         {
-                            throw new InvalidOperationException($"Unexpected member '{detail.Name}'.");
+                            throw new InvalidOperationException(Strings.UnexpectedMember(detail.Name));
                         }
                     }
                 }
                 else if (missingMemberBehavior == MissingMemberBehavior.Error)
                 {
-                    throw new InvalidOperationException($"Unexpected member '{member.Name}'.");
+                    throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
                 }
             }
 
@@ -7933,7 +7933,7 @@ namespace GW2SDK.Items
                 {
                     if (!member.Value.ValueEquals("Trinket"))
                     {
-                        throw new InvalidOperationException($"Invalid type '{member.Value.GetString()}'.");
+                        throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
                     }
                 }
                 else if (member.NameEquals(name.Name))
@@ -7996,7 +7996,7 @@ namespace GW2SDK.Items
                         {
                             if (!detail.Value.ValueEquals("Ring"))
                             {
-                                throw new InvalidOperationException($"Invalid type '{detail.Value.GetString()}'.");
+                                throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
                             }
                         }
                         else if (detail.NameEquals(infusionSlots.Name))
@@ -8021,13 +8021,13 @@ namespace GW2SDK.Items
                         }
                         else if (missingMemberBehavior == MissingMemberBehavior.Error)
                         {
-                            throw new InvalidOperationException($"Unexpected member '{detail.Name}'.");
+                            throw new InvalidOperationException(Strings.UnexpectedMember(detail.Name));
                         }
                     }
                 }
                 else if (missingMemberBehavior == MissingMemberBehavior.Error)
                 {
-                    throw new InvalidOperationException($"Unexpected member '{member.Name}'.");
+                    throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
                 }
             }
 
@@ -8073,7 +8073,7 @@ namespace GW2SDK.Items
                 {
                     if (!member.Value.ValueEquals("Trophy"))
                     {
-                        throw new InvalidOperationException($"Invalid type '{member.Value.GetString()}'.");
+                        throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
                     }
                 }
                 else if (member.NameEquals(name.Name))
@@ -8122,7 +8122,7 @@ namespace GW2SDK.Items
                 }
                 else if (missingMemberBehavior == MissingMemberBehavior.Error)
                 {
-                    throw new InvalidOperationException($"Unexpected member '{member.Name}'.");
+                    throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
                 }
             }
 
@@ -8178,7 +8178,7 @@ namespace GW2SDK.Items
                 {
                     if (!member.Value.ValueEquals("UpgradeComponent"))
                     {
-                        throw new InvalidOperationException($"Invalid type '{member.Value.GetString()}'.");
+                        throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
                     }
                 }
                 else if (member.NameEquals(name.Name))
@@ -8233,7 +8233,7 @@ namespace GW2SDK.Items
                         {
                             if (missingMemberBehavior == MissingMemberBehavior.Error)
                             {
-                                throw new InvalidOperationException($"Unexpected discriminator '{detail.Value.GetString()}'.");
+                                throw new InvalidOperationException(Strings.UnexpectedDiscriminator(detail.Value.GetString()));
                             }
                         }
                         else if (detail.NameEquals(upgradeComponentFlags.Name))
@@ -8258,13 +8258,13 @@ namespace GW2SDK.Items
                         }
                         else if (missingMemberBehavior == MissingMemberBehavior.Error)
                         {
-                            throw new InvalidOperationException($"Unexpected member '{detail.Name}'.");
+                            throw new InvalidOperationException(Strings.UnexpectedMember(detail.Name));
                         }
                     }
                 }
                 else if (missingMemberBehavior == MissingMemberBehavior.Error)
                 {
-                    throw new InvalidOperationException($"Unexpected member '{member.Name}'.");
+                    throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
                 }
             }
 
@@ -8314,7 +8314,7 @@ namespace GW2SDK.Items
                 {
                     if (!member.Value.ValueEquals("UpgradeComponent"))
                     {
-                        throw new InvalidOperationException($"Invalid type '{member.Value.GetString()}'.");
+                        throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
                     }
                 }
                 else if (member.NameEquals(name.Name))
@@ -8369,7 +8369,7 @@ namespace GW2SDK.Items
                         {
                             if (!detail.Value.ValueEquals("Default"))
                             {
-                                throw new InvalidOperationException($"Invalid type '{detail.Value.GetString()}'.");
+                                throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
                             }
                         }
                         else if (detail.NameEquals(upgradeComponentFlags.Name))
@@ -8398,13 +8398,13 @@ namespace GW2SDK.Items
                         }
                         else if (missingMemberBehavior == MissingMemberBehavior.Error)
                         {
-                            throw new InvalidOperationException($"Unexpected member '{detail.Name}'.");
+                            throw new InvalidOperationException(Strings.UnexpectedMember(detail.Name));
                         }
                     }
                 }
                 else if (missingMemberBehavior == MissingMemberBehavior.Error)
                 {
-                    throw new InvalidOperationException($"Unexpected member '{member.Name}'.");
+                    throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
                 }
             }
 
@@ -8454,7 +8454,7 @@ namespace GW2SDK.Items
                 {
                     if (!member.Value.ValueEquals("UpgradeComponent"))
                     {
-                        throw new InvalidOperationException($"Invalid type '{member.Value.GetString()}'.");
+                        throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
                     }
                 }
                 else if (member.NameEquals(name.Name))
@@ -8509,7 +8509,7 @@ namespace GW2SDK.Items
                         {
                             if (!detail.Value.ValueEquals("Gem"))
                             {
-                                throw new InvalidOperationException($"Invalid type '{detail.Value.GetString()}'.");
+                                throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
                             }
 
                         }
@@ -8535,13 +8535,13 @@ namespace GW2SDK.Items
                         }
                         else if (missingMemberBehavior == MissingMemberBehavior.Error)
                         {
-                            throw new InvalidOperationException($"Unexpected member '{detail.Name}'.");
+                            throw new InvalidOperationException(Strings.UnexpectedMember(detail.Name));
                         }
                     }
                 }
                 else if (missingMemberBehavior == MissingMemberBehavior.Error)
                 {
-                    throw new InvalidOperationException($"Unexpected member '{member.Name}'.");
+                    throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
                 }
             }
 
@@ -8591,7 +8591,7 @@ namespace GW2SDK.Items
                 {
                     if (!member.Value.ValueEquals("UpgradeComponent"))
                     {
-                        throw new InvalidOperationException($"Invalid type '{member.Value.GetString()}'.");
+                        throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
                     }
                 }
                 else if (member.NameEquals(name.Name))
@@ -8646,7 +8646,7 @@ namespace GW2SDK.Items
                         {
                             if (!detail.Value.ValueEquals("Rune"))
                             {
-                                throw new InvalidOperationException($"Invalid type '{detail.Value.GetString()}'.");
+                                throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
                             }
 
                         }
@@ -8676,13 +8676,13 @@ namespace GW2SDK.Items
                         }
                         else if (missingMemberBehavior == MissingMemberBehavior.Error)
                         {
-                            throw new InvalidOperationException($"Unexpected member '{detail.Name}'.");
+                            throw new InvalidOperationException(Strings.UnexpectedMember(detail.Name));
                         }
                     }
                 }
                 else if (missingMemberBehavior == MissingMemberBehavior.Error)
                 {
-                    throw new InvalidOperationException($"Unexpected member '{member.Name}'.");
+                    throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
                 }
             }
 
@@ -8734,7 +8734,7 @@ namespace GW2SDK.Items
                 {
                     if (!member.Value.ValueEquals("UpgradeComponent"))
                     {
-                        throw new InvalidOperationException($"Invalid type '{member.Value.GetString()}'.");
+                        throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
                     }
                 }
                 else if (member.NameEquals(name.Name))
@@ -8789,7 +8789,7 @@ namespace GW2SDK.Items
                         {
                             if (!detail.Value.ValueEquals("Sigil"))
                             {
-                                throw new InvalidOperationException($"Invalid type '{detail.Value.GetString()}'.");
+                                throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
                             }
 
                         }
@@ -8815,13 +8815,13 @@ namespace GW2SDK.Items
                         }
                         else if (missingMemberBehavior == MissingMemberBehavior.Error)
                         {
-                            throw new InvalidOperationException($"Unexpected member '{detail.Name}'.");
+                            throw new InvalidOperationException(Strings.UnexpectedMember(detail.Name));
                         }
                     }
                 }
                 else if (missingMemberBehavior == MissingMemberBehavior.Error)
                 {
-                    throw new InvalidOperationException($"Unexpected member '{member.Name}'.");
+                    throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
                 }
             }
 
@@ -8928,7 +8928,7 @@ namespace GW2SDK.Items
                 {
                     if (!member.Value.ValueEquals("Weapon"))
                     {
-                        throw new InvalidOperationException($"Invalid type '{member.Value.GetString()}'.");
+                        throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
                     }
                 }
                 else if (member.NameEquals(name.Name))
@@ -8987,7 +8987,7 @@ namespace GW2SDK.Items
                         {
                             if (missingMemberBehavior == MissingMemberBehavior.Error)
                             {
-                                throw new InvalidOperationException($"Unexpected discriminator '{detail.Value.GetString()}'.");
+                                throw new InvalidOperationException(Strings.UnexpectedDiscriminator(detail.Value.GetString()));
                             }
                         }
                         else if (detail.NameEquals(damageType.Name))
@@ -9032,13 +9032,13 @@ namespace GW2SDK.Items
                         }
                         else if (missingMemberBehavior == MissingMemberBehavior.Error)
                         {
-                            throw new InvalidOperationException($"Unexpected member '{detail.Name}'.");
+                            throw new InvalidOperationException(Strings.UnexpectedMember(detail.Name));
                         }
                     }
                 }
                 else if (missingMemberBehavior == MissingMemberBehavior.Error)
                 {
-                    throw new InvalidOperationException($"Unexpected member '{member.Name}'.");
+                    throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
                 }
             }
 
@@ -9099,7 +9099,7 @@ namespace GW2SDK.Items
                 {
                     if (!member.Value.ValueEquals("Weapon"))
                     {
-                        throw new InvalidOperationException($"Invalid type '{member.Value.GetString()}'.");
+                        throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
                     }
                 }
                 else if (member.NameEquals(name.Name))
@@ -9158,7 +9158,7 @@ namespace GW2SDK.Items
                         {
                             if (!detail.Value.ValueEquals("Axe"))
                             {
-                                throw new InvalidOperationException($"Invalid type '{detail.Value.GetString()}'.");
+                                throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
                             }
                         }
                         else if (detail.NameEquals(damageType.Name))
@@ -9203,13 +9203,13 @@ namespace GW2SDK.Items
                         }
                         else if (missingMemberBehavior == MissingMemberBehavior.Error)
                         {
-                            throw new InvalidOperationException($"Unexpected member '{detail.Name}'.");
+                            throw new InvalidOperationException(Strings.UnexpectedMember(detail.Name));
                         }
                     }
                 }
                 else if (missingMemberBehavior == MissingMemberBehavior.Error)
                 {
-                    throw new InvalidOperationException($"Unexpected member '{member.Name}'.");
+                    throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
                 }
             }
 
@@ -9270,7 +9270,7 @@ namespace GW2SDK.Items
                 {
                     if (!member.Value.ValueEquals("Weapon"))
                     {
-                        throw new InvalidOperationException($"Invalid type '{member.Value.GetString()}'.");
+                        throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
                     }
                 }
                 else if (member.NameEquals(name.Name))
@@ -9329,7 +9329,7 @@ namespace GW2SDK.Items
                         {
                             if (!detail.Value.ValueEquals("Dagger"))
                             {
-                                throw new InvalidOperationException($"Invalid type '{detail.Value.GetString()}'.");
+                                throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
                             }
                         }
                         else if (detail.NameEquals(damageType.Name))
@@ -9374,13 +9374,13 @@ namespace GW2SDK.Items
                         }
                         else if (missingMemberBehavior == MissingMemberBehavior.Error)
                         {
-                            throw new InvalidOperationException($"Unexpected member '{detail.Name}'.");
+                            throw new InvalidOperationException(Strings.UnexpectedMember(detail.Name));
                         }
                     }
                 }
                 else if (missingMemberBehavior == MissingMemberBehavior.Error)
                 {
-                    throw new InvalidOperationException($"Unexpected member '{member.Name}'.");
+                    throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
                 }
             }
 
@@ -9441,7 +9441,7 @@ namespace GW2SDK.Items
                 {
                     if (!member.Value.ValueEquals("Weapon"))
                     {
-                        throw new InvalidOperationException($"Invalid type '{member.Value.GetString()}'.");
+                        throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
                     }
                 }
                 else if (member.NameEquals(name.Name))
@@ -9500,7 +9500,7 @@ namespace GW2SDK.Items
                         {
                             if (!detail.Value.ValueEquals("Focus"))
                             {
-                                throw new InvalidOperationException($"Invalid type '{detail.Value.GetString()}'.");
+                                throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
                             }
                         }
                         else if (detail.NameEquals(damageType.Name))
@@ -9545,13 +9545,13 @@ namespace GW2SDK.Items
                         }
                         else if (missingMemberBehavior == MissingMemberBehavior.Error)
                         {
-                            throw new InvalidOperationException($"Unexpected member '{detail.Name}'.");
+                            throw new InvalidOperationException(Strings.UnexpectedMember(detail.Name));
                         }
                     }
                 }
                 else if (missingMemberBehavior == MissingMemberBehavior.Error)
                 {
-                    throw new InvalidOperationException($"Unexpected member '{member.Name}'.");
+                    throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
                 }
             }
 
@@ -9612,7 +9612,7 @@ namespace GW2SDK.Items
                 {
                     if (!member.Value.ValueEquals("Weapon"))
                     {
-                        throw new InvalidOperationException($"Invalid type '{member.Value.GetString()}'.");
+                        throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
                     }
                 }
                 else if (member.NameEquals(name.Name))
@@ -9671,7 +9671,7 @@ namespace GW2SDK.Items
                         {
                             if (!detail.Value.ValueEquals("Greatsword"))
                             {
-                                throw new InvalidOperationException($"Invalid type '{detail.Value.GetString()}'.");
+                                throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
                             }
                         }
                         else if (detail.NameEquals(damageType.Name))
@@ -9716,13 +9716,13 @@ namespace GW2SDK.Items
                         }
                         else if (missingMemberBehavior == MissingMemberBehavior.Error)
                         {
-                            throw new InvalidOperationException($"Unexpected member '{detail.Name}'.");
+                            throw new InvalidOperationException(Strings.UnexpectedMember(detail.Name));
                         }
                     }
                 }
                 else if (missingMemberBehavior == MissingMemberBehavior.Error)
                 {
-                    throw new InvalidOperationException($"Unexpected member '{member.Name}'.");
+                    throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
                 }
             }
 
@@ -9783,7 +9783,7 @@ namespace GW2SDK.Items
                 {
                     if (!member.Value.ValueEquals("Weapon"))
                     {
-                        throw new InvalidOperationException($"Invalid type '{member.Value.GetString()}'.");
+                        throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
                     }
                 }
                 else if (member.NameEquals(name.Name))
@@ -9842,7 +9842,7 @@ namespace GW2SDK.Items
                         {
                             if (!detail.Value.ValueEquals("Hammer"))
                             {
-                                throw new InvalidOperationException($"Invalid type '{detail.Value.GetString()}'.");
+                                throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
                             }
                         }
                         else if (detail.NameEquals(damageType.Name))
@@ -9887,13 +9887,13 @@ namespace GW2SDK.Items
                         }
                         else if (missingMemberBehavior == MissingMemberBehavior.Error)
                         {
-                            throw new InvalidOperationException($"Unexpected member '{detail.Name}'.");
+                            throw new InvalidOperationException(Strings.UnexpectedMember(detail.Name));
                         }
                     }
                 }
                 else if (missingMemberBehavior == MissingMemberBehavior.Error)
                 {
-                    throw new InvalidOperationException($"Unexpected member '{member.Name}'.");
+                    throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
                 }
             }
 
@@ -9954,7 +9954,7 @@ namespace GW2SDK.Items
                 {
                     if (!member.Value.ValueEquals("Weapon"))
                     {
-                        throw new InvalidOperationException($"Invalid type '{member.Value.GetString()}'.");
+                        throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
                     }
                 }
                 else if (member.NameEquals(name.Name))
@@ -10013,7 +10013,7 @@ namespace GW2SDK.Items
                         {
                             if (!detail.Value.ValueEquals("Harpoon"))
                             {
-                                throw new InvalidOperationException($"Invalid type '{detail.Value.GetString()}'.");
+                                throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
                             }
                         }
                         else if (detail.NameEquals(damageType.Name))
@@ -10058,13 +10058,13 @@ namespace GW2SDK.Items
                         }
                         else if (missingMemberBehavior == MissingMemberBehavior.Error)
                         {
-                            throw new InvalidOperationException($"Unexpected member '{detail.Name}'.");
+                            throw new InvalidOperationException(Strings.UnexpectedMember(detail.Name));
                         }
                     }
                 }
                 else if (missingMemberBehavior == MissingMemberBehavior.Error)
                 {
-                    throw new InvalidOperationException($"Unexpected member '{member.Name}'.");
+                    throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
                 }
             }
 
@@ -10125,7 +10125,7 @@ namespace GW2SDK.Items
                 {
                     if (!member.Value.ValueEquals("Weapon"))
                     {
-                        throw new InvalidOperationException($"Invalid type '{member.Value.GetString()}'.");
+                        throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
                     }
                 }
                 else if (member.NameEquals(name.Name))
@@ -10184,7 +10184,7 @@ namespace GW2SDK.Items
                         {
                             if (!detail.Value.ValueEquals("LargeBundle"))
                             {
-                                throw new InvalidOperationException($"Invalid type '{detail.Value.GetString()}'.");
+                                throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
                             }
                         }
                         else if (detail.NameEquals(damageType.Name))
@@ -10229,13 +10229,13 @@ namespace GW2SDK.Items
                         }
                         else if (missingMemberBehavior == MissingMemberBehavior.Error)
                         {
-                            throw new InvalidOperationException($"Unexpected member '{detail.Name}'.");
+                            throw new InvalidOperationException(Strings.UnexpectedMember(detail.Name));
                         }
                     }
                 }
                 else if (missingMemberBehavior == MissingMemberBehavior.Error)
                 {
-                    throw new InvalidOperationException($"Unexpected member '{member.Name}'.");
+                    throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
                 }
             }
 
@@ -10296,7 +10296,7 @@ namespace GW2SDK.Items
                 {
                     if (!member.Value.ValueEquals("Weapon"))
                     {
-                        throw new InvalidOperationException($"Invalid type '{member.Value.GetString()}'.");
+                        throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
                     }
                 }
                 else if (member.NameEquals(name.Name))
@@ -10355,7 +10355,7 @@ namespace GW2SDK.Items
                         {
                             if (!detail.Value.ValueEquals("LongBow"))
                             {
-                                throw new InvalidOperationException($"Invalid type '{detail.Value.GetString()}'.");
+                                throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
                             }
                         }
                         else if (detail.NameEquals(damageType.Name))
@@ -10400,13 +10400,13 @@ namespace GW2SDK.Items
                         }
                         else if (missingMemberBehavior == MissingMemberBehavior.Error)
                         {
-                            throw new InvalidOperationException($"Unexpected member '{detail.Name}'.");
+                            throw new InvalidOperationException(Strings.UnexpectedMember(detail.Name));
                         }
                     }
                 }
                 else if (missingMemberBehavior == MissingMemberBehavior.Error)
                 {
-                    throw new InvalidOperationException($"Unexpected member '{member.Name}'.");
+                    throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
                 }
             }
 
@@ -10467,7 +10467,7 @@ namespace GW2SDK.Items
                 {
                     if (!member.Value.ValueEquals("Weapon"))
                     {
-                        throw new InvalidOperationException($"Invalid type '{member.Value.GetString()}'.");
+                        throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
                     }
                 }
                 else if (member.NameEquals(name.Name))
@@ -10526,7 +10526,7 @@ namespace GW2SDK.Items
                         {
                             if (!detail.Value.ValueEquals("Mace"))
                             {
-                                throw new InvalidOperationException($"Invalid type '{detail.Value.GetString()}'.");
+                                throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
                             }
                         }
                         else if (detail.NameEquals(damageType.Name))
@@ -10571,13 +10571,13 @@ namespace GW2SDK.Items
                         }
                         else if (missingMemberBehavior == MissingMemberBehavior.Error)
                         {
-                            throw new InvalidOperationException($"Unexpected member '{detail.Name}'.");
+                            throw new InvalidOperationException(Strings.UnexpectedMember(detail.Name));
                         }
                     }
                 }
                 else if (missingMemberBehavior == MissingMemberBehavior.Error)
                 {
-                    throw new InvalidOperationException($"Unexpected member '{member.Name}'.");
+                    throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
                 }
             }
 
@@ -10638,7 +10638,7 @@ namespace GW2SDK.Items
                 {
                     if (!member.Value.ValueEquals("Weapon"))
                     {
-                        throw new InvalidOperationException($"Invalid type '{member.Value.GetString()}'.");
+                        throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
                     }
                 }
                 else if (member.NameEquals(name.Name))
@@ -10697,7 +10697,7 @@ namespace GW2SDK.Items
                         {
                             if (!detail.Value.ValueEquals("Pistol"))
                             {
-                                throw new InvalidOperationException($"Invalid type '{detail.Value.GetString()}'.");
+                                throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
                             }
                         }
                         else if (detail.NameEquals(damageType.Name))
@@ -10742,13 +10742,13 @@ namespace GW2SDK.Items
                         }
                         else if (missingMemberBehavior == MissingMemberBehavior.Error)
                         {
-                            throw new InvalidOperationException($"Unexpected member '{detail.Name}'.");
+                            throw new InvalidOperationException(Strings.UnexpectedMember(detail.Name));
                         }
                     }
                 }
                 else if (missingMemberBehavior == MissingMemberBehavior.Error)
                 {
-                    throw new InvalidOperationException($"Unexpected member '{member.Name}'.");
+                    throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
                 }
             }
 
@@ -10809,7 +10809,7 @@ namespace GW2SDK.Items
                 {
                     if (!member.Value.ValueEquals("Weapon"))
                     {
-                        throw new InvalidOperationException($"Invalid type '{member.Value.GetString()}'.");
+                        throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
                     }
                 }
                 else if (member.NameEquals(name.Name))
@@ -10868,7 +10868,7 @@ namespace GW2SDK.Items
                         {
                             if (!detail.Value.ValueEquals("Rifle"))
                             {
-                                throw new InvalidOperationException($"Invalid type '{detail.Value.GetString()}'.");
+                                throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
                             }
                         }
                         else if (detail.NameEquals(damageType.Name))
@@ -10913,13 +10913,13 @@ namespace GW2SDK.Items
                         }
                         else if (missingMemberBehavior == MissingMemberBehavior.Error)
                         {
-                            throw new InvalidOperationException($"Unexpected member '{detail.Name}'.");
+                            throw new InvalidOperationException(Strings.UnexpectedMember(detail.Name));
                         }
                     }
                 }
                 else if (missingMemberBehavior == MissingMemberBehavior.Error)
                 {
-                    throw new InvalidOperationException($"Unexpected member '{member.Name}'.");
+                    throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
                 }
             }
 
@@ -10980,7 +10980,7 @@ namespace GW2SDK.Items
                 {
                     if (!member.Value.ValueEquals("Weapon"))
                     {
-                        throw new InvalidOperationException($"Invalid type '{member.Value.GetString()}'.");
+                        throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
                     }
                 }
                 else if (member.NameEquals(name.Name))
@@ -11039,7 +11039,7 @@ namespace GW2SDK.Items
                         {
                             if (!detail.Value.ValueEquals("Scepter"))
                             {
-                                throw new InvalidOperationException($"Invalid type '{detail.Value.GetString()}'.");
+                                throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
                             }
                         }
                         else if (detail.NameEquals(damageType.Name))
@@ -11084,13 +11084,13 @@ namespace GW2SDK.Items
                         }
                         else if (missingMemberBehavior == MissingMemberBehavior.Error)
                         {
-                            throw new InvalidOperationException($"Unexpected member '{detail.Name}'.");
+                            throw new InvalidOperationException(Strings.UnexpectedMember(detail.Name));
                         }
                     }
                 }
                 else if (missingMemberBehavior == MissingMemberBehavior.Error)
                 {
-                    throw new InvalidOperationException($"Unexpected member '{member.Name}'.");
+                    throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
                 }
             }
 
@@ -11151,7 +11151,7 @@ namespace GW2SDK.Items
                 {
                     if (!member.Value.ValueEquals("Weapon"))
                     {
-                        throw new InvalidOperationException($"Invalid type '{member.Value.GetString()}'.");
+                        throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
                     }
                 }
                 else if (member.NameEquals(name.Name))
@@ -11210,7 +11210,7 @@ namespace GW2SDK.Items
                         {
                             if (!detail.Value.ValueEquals("Shield"))
                             {
-                                throw new InvalidOperationException($"Invalid type '{detail.Value.GetString()}'.");
+                                throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
                             }
                         }
                         else if (detail.NameEquals(damageType.Name))
@@ -11255,13 +11255,13 @@ namespace GW2SDK.Items
                         }
                         else if (missingMemberBehavior == MissingMemberBehavior.Error)
                         {
-                            throw new InvalidOperationException($"Unexpected member '{detail.Name}'.");
+                            throw new InvalidOperationException(Strings.UnexpectedMember(detail.Name));
                         }
                     }
                 }
                 else if (missingMemberBehavior == MissingMemberBehavior.Error)
                 {
-                    throw new InvalidOperationException($"Unexpected member '{member.Name}'.");
+                    throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
                 }
             }
 
@@ -11322,7 +11322,7 @@ namespace GW2SDK.Items
                 {
                     if (!member.Value.ValueEquals("Weapon"))
                     {
-                        throw new InvalidOperationException($"Invalid type '{member.Value.GetString()}'.");
+                        throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
                     }
                 }
                 else if (member.NameEquals(name.Name))
@@ -11381,7 +11381,7 @@ namespace GW2SDK.Items
                         {
                             if (!detail.Value.ValueEquals("ShortBow"))
                             {
-                                throw new InvalidOperationException($"Invalid type '{detail.Value.GetString()}'.");
+                                throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
                             }
                         }
                         else if (detail.NameEquals(damageType.Name))
@@ -11426,13 +11426,13 @@ namespace GW2SDK.Items
                         }
                         else if (missingMemberBehavior == MissingMemberBehavior.Error)
                         {
-                            throw new InvalidOperationException($"Unexpected member '{detail.Name}'.");
+                            throw new InvalidOperationException(Strings.UnexpectedMember(detail.Name));
                         }
                     }
                 }
                 else if (missingMemberBehavior == MissingMemberBehavior.Error)
                 {
-                    throw new InvalidOperationException($"Unexpected member '{member.Name}'.");
+                    throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
                 }
             }
 
@@ -11493,7 +11493,7 @@ namespace GW2SDK.Items
                 {
                     if (!member.Value.ValueEquals("Weapon"))
                     {
-                        throw new InvalidOperationException($"Invalid type '{member.Value.GetString()}'.");
+                        throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
                     }
                 }
                 else if (member.NameEquals(name.Name))
@@ -11552,7 +11552,7 @@ namespace GW2SDK.Items
                         {
                             if (!detail.Value.ValueEquals("SmallBundle"))
                             {
-                                throw new InvalidOperationException($"Invalid type '{detail.Value.GetString()}'.");
+                                throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
                             }
                         }
                         else if (detail.NameEquals(damageType.Name))
@@ -11597,13 +11597,13 @@ namespace GW2SDK.Items
                         }
                         else if (missingMemberBehavior == MissingMemberBehavior.Error)
                         {
-                            throw new InvalidOperationException($"Unexpected member '{detail.Name}'.");
+                            throw new InvalidOperationException(Strings.UnexpectedMember(detail.Name));
                         }
                     }
                 }
                 else if (missingMemberBehavior == MissingMemberBehavior.Error)
                 {
-                    throw new InvalidOperationException($"Unexpected member '{member.Name}'.");
+                    throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
                 }
             }
 
@@ -11664,7 +11664,7 @@ namespace GW2SDK.Items
                 {
                     if (!member.Value.ValueEquals("Weapon"))
                     {
-                        throw new InvalidOperationException($"Invalid type '{member.Value.GetString()}'.");
+                        throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
                     }
                 }
                 else if (member.NameEquals(name.Name))
@@ -11723,7 +11723,7 @@ namespace GW2SDK.Items
                         {
                             if (!detail.Value.ValueEquals("Speargun"))
                             {
-                                throw new InvalidOperationException($"Invalid type '{detail.Value.GetString()}'.");
+                                throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
                             }
                         }
                         else if (detail.NameEquals(damageType.Name))
@@ -11768,13 +11768,13 @@ namespace GW2SDK.Items
                         }
                         else if (missingMemberBehavior == MissingMemberBehavior.Error)
                         {
-                            throw new InvalidOperationException($"Unexpected member '{detail.Name}'.");
+                            throw new InvalidOperationException(Strings.UnexpectedMember(detail.Name));
                         }
                     }
                 }
                 else if (missingMemberBehavior == MissingMemberBehavior.Error)
                 {
-                    throw new InvalidOperationException($"Unexpected member '{member.Name}'.");
+                    throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
                 }
             }
 
@@ -11835,7 +11835,7 @@ namespace GW2SDK.Items
                 {
                     if (!member.Value.ValueEquals("Weapon"))
                     {
-                        throw new InvalidOperationException($"Invalid type '{member.Value.GetString()}'.");
+                        throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
                     }
                 }
                 else if (member.NameEquals(name.Name))
@@ -11894,7 +11894,7 @@ namespace GW2SDK.Items
                         {
                             if (!detail.Value.ValueEquals("Staff"))
                             {
-                                throw new InvalidOperationException($"Invalid type '{detail.Value.GetString()}'.");
+                                throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
                             }
                         }
                         else if (detail.NameEquals(damageType.Name))
@@ -11939,13 +11939,13 @@ namespace GW2SDK.Items
                         }
                         else if (missingMemberBehavior == MissingMemberBehavior.Error)
                         {
-                            throw new InvalidOperationException($"Unexpected member '{detail.Name}'.");
+                            throw new InvalidOperationException(Strings.UnexpectedMember(detail.Name));
                         }
                     }
                 }
                 else if (missingMemberBehavior == MissingMemberBehavior.Error)
                 {
-                    throw new InvalidOperationException($"Unexpected member '{member.Name}'.");
+                    throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
                 }
             }
 
@@ -12006,7 +12006,7 @@ namespace GW2SDK.Items
                 {
                     if (!member.Value.ValueEquals("Weapon"))
                     {
-                        throw new InvalidOperationException($"Invalid type '{member.Value.GetString()}'.");
+                        throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
                     }
                 }
                 else if (member.NameEquals(name.Name))
@@ -12065,7 +12065,7 @@ namespace GW2SDK.Items
                         {
                             if (!detail.Value.ValueEquals("Sword"))
                             {
-                                throw new InvalidOperationException($"Invalid type '{detail.Value.GetString()}'.");
+                                throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
                             }
                         }
                         else if (detail.NameEquals(damageType.Name))
@@ -12110,13 +12110,13 @@ namespace GW2SDK.Items
                         }
                         else if (missingMemberBehavior == MissingMemberBehavior.Error)
                         {
-                            throw new InvalidOperationException($"Unexpected member '{detail.Name}'.");
+                            throw new InvalidOperationException(Strings.UnexpectedMember(detail.Name));
                         }
                     }
                 }
                 else if (missingMemberBehavior == MissingMemberBehavior.Error)
                 {
-                    throw new InvalidOperationException($"Unexpected member '{member.Name}'.");
+                    throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
                 }
             }
 
@@ -12177,7 +12177,7 @@ namespace GW2SDK.Items
                 {
                     if (!member.Value.ValueEquals("Weapon"))
                     {
-                        throw new InvalidOperationException($"Invalid type '{member.Value.GetString()}'.");
+                        throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
                     }
                 }
                 else if (member.NameEquals(name.Name))
@@ -12236,7 +12236,7 @@ namespace GW2SDK.Items
                         {
                             if (!detail.Value.ValueEquals("Torch"))
                             {
-                                throw new InvalidOperationException($"Invalid type '{detail.Value.GetString()}'.");
+                                throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
                             }
                         }
                         else if (detail.NameEquals(damageType.Name))
@@ -12281,13 +12281,13 @@ namespace GW2SDK.Items
                         }
                         else if (missingMemberBehavior == MissingMemberBehavior.Error)
                         {
-                            throw new InvalidOperationException($"Unexpected member '{detail.Name}'.");
+                            throw new InvalidOperationException(Strings.UnexpectedMember(detail.Name));
                         }
                     }
                 }
                 else if (missingMemberBehavior == MissingMemberBehavior.Error)
                 {
-                    throw new InvalidOperationException($"Unexpected member '{member.Name}'.");
+                    throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
                 }
             }
 
@@ -12348,7 +12348,7 @@ namespace GW2SDK.Items
                 {
                     if (!member.Value.ValueEquals("Weapon"))
                     {
-                        throw new InvalidOperationException($"Invalid type '{member.Value.GetString()}'.");
+                        throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
                     }
                 }
                 else if (member.NameEquals(name.Name))
@@ -12407,7 +12407,7 @@ namespace GW2SDK.Items
                         {
                             if (!detail.Value.ValueEquals("Toy"))
                             {
-                                throw new InvalidOperationException($"Invalid type '{detail.Value.GetString()}'.");
+                                throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
                             }
                         }
                         else if (detail.NameEquals(damageType.Name))
@@ -12452,13 +12452,13 @@ namespace GW2SDK.Items
                         }
                         else if (missingMemberBehavior == MissingMemberBehavior.Error)
                         {
-                            throw new InvalidOperationException($"Unexpected member '{detail.Name}'.");
+                            throw new InvalidOperationException(Strings.UnexpectedMember(detail.Name));
                         }
                     }
                 }
                 else if (missingMemberBehavior == MissingMemberBehavior.Error)
                 {
-                    throw new InvalidOperationException($"Unexpected member '{member.Name}'.");
+                    throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
                 }
             }
 
@@ -12519,7 +12519,7 @@ namespace GW2SDK.Items
                 {
                     if (!member.Value.ValueEquals("Weapon"))
                     {
-                        throw new InvalidOperationException($"Invalid type '{member.Value.GetString()}'.");
+                        throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
                     }
                 }
                 else if (member.NameEquals(name.Name))
@@ -12578,7 +12578,7 @@ namespace GW2SDK.Items
                         {
                             if (!detail.Value.ValueEquals("ToyTwoHanded"))
                             {
-                                throw new InvalidOperationException($"Invalid type '{detail.Value.GetString()}'.");
+                                throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
                             }
                         }
                         else if (detail.NameEquals(damageType.Name))
@@ -12623,13 +12623,13 @@ namespace GW2SDK.Items
                         }
                         else if (missingMemberBehavior == MissingMemberBehavior.Error)
                         {
-                            throw new InvalidOperationException($"Unexpected member '{detail.Name}'.");
+                            throw new InvalidOperationException(Strings.UnexpectedMember(detail.Name));
                         }
                     }
                 }
                 else if (missingMemberBehavior == MissingMemberBehavior.Error)
                 {
-                    throw new InvalidOperationException($"Unexpected member '{member.Name}'.");
+                    throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
                 }
             }
 
@@ -12690,7 +12690,7 @@ namespace GW2SDK.Items
                 {
                     if (!member.Value.ValueEquals("Weapon"))
                     {
-                        throw new InvalidOperationException($"Invalid type '{member.Value.GetString()}'.");
+                        throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
                     }
                 }
                 else if (member.NameEquals(name.Name))
@@ -12749,7 +12749,7 @@ namespace GW2SDK.Items
                         {
                             if (!detail.Value.ValueEquals("Trident"))
                             {
-                                throw new InvalidOperationException($"Invalid type '{detail.Value.GetString()}'.");
+                                throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
                             }
                         }
                         else if (detail.NameEquals(damageType.Name))
@@ -12794,13 +12794,13 @@ namespace GW2SDK.Items
                         }
                         else if (missingMemberBehavior == MissingMemberBehavior.Error)
                         {
-                            throw new InvalidOperationException($"Unexpected member '{detail.Name}'.");
+                            throw new InvalidOperationException(Strings.UnexpectedMember(detail.Name));
                         }
                     }
                 }
                 else if (missingMemberBehavior == MissingMemberBehavior.Error)
                 {
-                    throw new InvalidOperationException($"Unexpected member '{member.Name}'.");
+                    throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
                 }
             }
 
@@ -12861,7 +12861,7 @@ namespace GW2SDK.Items
                 {
                     if (!member.Value.ValueEquals("Weapon"))
                     {
-                        throw new InvalidOperationException($"Invalid type '{member.Value.GetString()}'.");
+                        throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
                     }
                 }
                 else if (member.NameEquals(name.Name))
@@ -12920,7 +12920,7 @@ namespace GW2SDK.Items
                         {
                             if (!detail.Value.ValueEquals("Warhorn"))
                             {
-                                throw new InvalidOperationException($"Invalid type '{detail.Value.GetString()}'.");
+                                throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
                             }
                         }
                         else if (detail.NameEquals(damageType.Name))
@@ -12965,13 +12965,13 @@ namespace GW2SDK.Items
                         }
                         else if (missingMemberBehavior == MissingMemberBehavior.Error)
                         {
-                            throw new InvalidOperationException($"Unexpected member '{detail.Name}'.");
+                            throw new InvalidOperationException(Strings.UnexpectedMember(detail.Name));
                         }
                     }
                 }
                 else if (missingMemberBehavior == MissingMemberBehavior.Error)
                 {
-                    throw new InvalidOperationException($"Unexpected member '{member.Name}'.");
+                    throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
                 }
             }
 
