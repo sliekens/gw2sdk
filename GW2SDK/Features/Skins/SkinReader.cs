@@ -147,11 +147,11 @@ namespace GW2SDK.Skins
                 Id = id.GetValue(),
                 Name = name.GetValue(),
                 Description = description.GetValueOrEmpty(),
-                Rarity = rarity.GetValue(),
-                Flags = flags.GetValue(),
-                Restrictions = restrictions.GetValue(),
+                Rarity = rarity.GetValue(missingMemberBehavior),
+                Flags = flags.GetValue(missingMemberBehavior),
+                Restrictions = restrictions.GetValue(missingMemberBehavior),
                 Icon = icon.GetValueOrNull(),
-                WeightClass = weightClass.GetValue(),
+                WeightClass = weightClass.GetValue(missingMemberBehavior),
                 DyeSlots = dyeSlots.Select(value => ReadDyeSlots(value, missingMemberBehavior))
             };
         }
@@ -235,11 +235,11 @@ namespace GW2SDK.Skins
                 Id = id.GetValue(),
                 Name = name.GetValue(),
                 Description = description.GetValueOrEmpty(),
-                Rarity = rarity.GetValue(),
-                Flags = flags.GetValue(),
-                Restrictions = restrictions.GetValue(),
+                Rarity = rarity.GetValue(missingMemberBehavior),
+                Flags = flags.GetValue(missingMemberBehavior),
+                Restrictions = restrictions.GetValue(missingMemberBehavior),
                 Icon = icon.GetValueOrNull(),
-                DamageType = damageType.GetValue()
+                DamageType = damageType.GetValue(missingMemberBehavior)
             };
         }
 
@@ -300,9 +300,9 @@ namespace GW2SDK.Skins
                 Id = id.GetValue(),
                 Name = name.GetValue(),
                 Description = description.GetValueOrEmpty(),
-                Rarity = rarity.GetValue(),
-                Flags = flags.GetValue(),
-                Restrictions = restrictions.GetValue(),
+                Rarity = rarity.GetValue(missingMemberBehavior),
+                Flags = flags.GetValue(missingMemberBehavior),
+                Restrictions = restrictions.GetValue(missingMemberBehavior),
                 Icon = icon.GetValueOrNull()
             };
         }
@@ -391,11 +391,11 @@ namespace GW2SDK.Skins
                 Id = id.GetValue(),
                 Name = name.GetValue(),
                 Description = description.GetValueOrEmpty(),
-                Rarity = rarity.GetValue(),
-                Flags = flags.GetValue(),
-                Restrictions = restrictions.GetValue(),
+                Rarity = rarity.GetValue(missingMemberBehavior),
+                Flags = flags.GetValue(missingMemberBehavior),
+                Restrictions = restrictions.GetValue(missingMemberBehavior),
                 Icon = icon.GetValueOrNull(),
-                WeightClass = weightClass.GetValue(),
+                WeightClass = weightClass.GetValue(missingMemberBehavior),
                 DyeSlots = dyeSlots.Select(value => ReadDyeSlots(value, missingMemberBehavior))
             };
         }
@@ -484,11 +484,11 @@ namespace GW2SDK.Skins
                 Id = id.GetValue(),
                 Name = name.GetValue(),
                 Description = description.GetValueOrEmpty(),
-                Rarity = rarity.GetValue(),
-                Flags = flags.GetValue(),
-                Restrictions = restrictions.GetValue(),
+                Rarity = rarity.GetValue(missingMemberBehavior),
+                Flags = flags.GetValue(missingMemberBehavior),
+                Restrictions = restrictions.GetValue(missingMemberBehavior),
                 Icon = icon.GetValueOrNull(),
-                WeightClass = weightClass.GetValue(),
+                WeightClass = weightClass.GetValue(missingMemberBehavior),
                 DyeSlots = dyeSlots.Select(value => ReadDyeSlots(value, missingMemberBehavior))
             };
         }
@@ -572,11 +572,11 @@ namespace GW2SDK.Skins
                 Id = id.GetValue(),
                 Name = name.GetValue(),
                 Description = description.GetValueOrEmpty(),
-                Rarity = rarity.GetValue(),
-                Flags = flags.GetValue(),
-                Restrictions = restrictions.GetValue(),
+                Rarity = rarity.GetValue(missingMemberBehavior),
+                Flags = flags.GetValue(missingMemberBehavior),
+                Restrictions = restrictions.GetValue(missingMemberBehavior),
                 Icon = icon.GetValueOrNull(),
-                DamageType = damageType.GetValue()
+                DamageType = damageType.GetValue(missingMemberBehavior)
             };
         }
 
@@ -659,11 +659,11 @@ namespace GW2SDK.Skins
                 Id = id.GetValue(),
                 Name = name.GetValue(),
                 Description = description.GetValueOrEmpty(),
-                Rarity = rarity.GetValue(),
-                Flags = flags.GetValue(),
-                Restrictions = restrictions.GetValue(),
+                Rarity = rarity.GetValue(missingMemberBehavior),
+                Flags = flags.GetValue(missingMemberBehavior),
+                Restrictions = restrictions.GetValue(missingMemberBehavior),
                 Icon = icon.GetValueOrNull(),
-                DamageType = damageType.GetValue()
+                DamageType = damageType.GetValue(missingMemberBehavior)
             };
         }
 
@@ -741,9 +741,9 @@ namespace GW2SDK.Skins
                 Id = id.GetValue(),
                 Name = name.GetValue(),
                 Description = description.GetValueOrEmpty(),
-                Rarity = rarity.GetValue(),
-                Flags = flags.GetValue(),
-                Restrictions = restrictions.GetValue(),
+                Rarity = rarity.GetValue(missingMemberBehavior),
+                Flags = flags.GetValue(missingMemberBehavior),
+                Restrictions = restrictions.GetValue(missingMemberBehavior),
                 Icon = icon.GetValueOrNull()
             };
         }
@@ -832,9 +832,9 @@ namespace GW2SDK.Skins
                 Id = id.GetValue(),
                 Name = name.GetValue(),
                 Description = description.GetValueOrEmpty(),
-                Rarity = rarity.GetValue(),
-                Flags = flags.GetValue(),
-                Restrictions = restrictions.GetValue(),
+                Rarity = rarity.GetValue(missingMemberBehavior),
+                Flags = flags.GetValue(missingMemberBehavior),
+                Restrictions = restrictions.GetValue(missingMemberBehavior),
                 Icon = icon.GetValueOrNull()
             };
         }
@@ -923,11 +923,11 @@ namespace GW2SDK.Skins
                 Id = id.GetValue(),
                 Name = name.GetValue(),
                 Description = description.GetValueOrEmpty(),
-                Rarity = rarity.GetValue(),
-                Flags = flags.GetValue(),
-                Restrictions = restrictions.GetValue(),
+                Rarity = rarity.GetValue(missingMemberBehavior),
+                Flags = flags.GetValue(missingMemberBehavior),
+                Restrictions = restrictions.GetValue(missingMemberBehavior),
                 Icon = icon.GetValueOrNull(),
-                WeightClass = weightClass.GetValue(),
+                WeightClass = weightClass.GetValue(missingMemberBehavior),
                 DyeSlots = dyeSlots.Select(value => ReadDyeSlots(value, missingMemberBehavior))
             };
         }
@@ -1011,11 +1011,11 @@ namespace GW2SDK.Skins
                 Id = id.GetValue(),
                 Name = name.GetValue(),
                 Description = description.GetValueOrEmpty(),
-                Rarity = rarity.GetValue(),
-                Flags = flags.GetValue(),
-                Restrictions = restrictions.GetValue(),
+                Rarity = rarity.GetValue(missingMemberBehavior),
+                Flags = flags.GetValue(missingMemberBehavior),
+                Restrictions = restrictions.GetValue(missingMemberBehavior),
                 Icon = icon.GetValueOrNull(),
-                DamageType = damageType.GetValue()
+                DamageType = damageType.GetValue(missingMemberBehavior)
             };
         }
 
@@ -1098,11 +1098,11 @@ namespace GW2SDK.Skins
                 Id = id.GetValue(),
                 Name = name.GetValue(),
                 Description = description.GetValueOrEmpty(),
-                Rarity = rarity.GetValue(),
-                Flags = flags.GetValue(),
-                Restrictions = restrictions.GetValue(),
+                Rarity = rarity.GetValue(missingMemberBehavior),
+                Flags = flags.GetValue(missingMemberBehavior),
+                Restrictions = restrictions.GetValue(missingMemberBehavior),
                 Icon = icon.GetValueOrNull(),
-                DamageType = damageType.GetValue()
+                DamageType = damageType.GetValue(missingMemberBehavior)
             };
         }
 
@@ -1185,11 +1185,11 @@ namespace GW2SDK.Skins
                 Id = id.GetValue(),
                 Name = name.GetValue(),
                 Description = description.GetValueOrEmpty(),
-                Rarity = rarity.GetValue(),
-                Flags = flags.GetValue(),
-                Restrictions = restrictions.GetValue(),
+                Rarity = rarity.GetValue(missingMemberBehavior),
+                Flags = flags.GetValue(missingMemberBehavior),
+                Restrictions = restrictions.GetValue(missingMemberBehavior),
                 Icon = icon.GetValueOrNull(),
-                DamageType = damageType.GetValue()
+                DamageType = damageType.GetValue(missingMemberBehavior)
             };
         }
 
@@ -1277,11 +1277,11 @@ namespace GW2SDK.Skins
                 Id = id.GetValue(),
                 Name = name.GetValue(),
                 Description = description.GetValueOrEmpty(),
-                Rarity = rarity.GetValue(),
-                Flags = flags.GetValue(),
-                Restrictions = restrictions.GetValue(),
+                Rarity = rarity.GetValue(missingMemberBehavior),
+                Flags = flags.GetValue(missingMemberBehavior),
+                Restrictions = restrictions.GetValue(missingMemberBehavior),
                 Icon = icon.GetValueOrNull(),
-                WeightClass = weightClass.GetValue(),
+                WeightClass = weightClass.GetValue(missingMemberBehavior),
                 DyeSlots = dyeSlots.Select(value => ReadDyeSlots(value, missingMemberBehavior))
             };
         }
@@ -1370,11 +1370,11 @@ namespace GW2SDK.Skins
                 Id = id.GetValue(),
                 Name = name.GetValue(),
                 Description = description.GetValueOrEmpty(),
-                Rarity = rarity.GetValue(),
-                Flags = flags.GetValue(),
-                Restrictions = restrictions.GetValue(),
+                Rarity = rarity.GetValue(missingMemberBehavior),
+                Flags = flags.GetValue(missingMemberBehavior),
+                Restrictions = restrictions.GetValue(missingMemberBehavior),
                 Icon = icon.GetValueOrNull(),
-                WeightClass = weightClass.GetValue(),
+                WeightClass = weightClass.GetValue(missingMemberBehavior),
                 DyeSlots = dyeSlots.Select(value => ReadDyeSlots(value, missingMemberBehavior))
             };
         }
@@ -1458,11 +1458,11 @@ namespace GW2SDK.Skins
                 Id = id.GetValue(),
                 Name = name.GetValue(),
                 Description = description.GetValueOrEmpty(),
-                Rarity = rarity.GetValue(),
-                Flags = flags.GetValue(),
-                Restrictions = restrictions.GetValue(),
+                Rarity = rarity.GetValue(missingMemberBehavior),
+                Flags = flags.GetValue(missingMemberBehavior),
+                Restrictions = restrictions.GetValue(missingMemberBehavior),
                 Icon = icon.GetValueOrNull(),
-                DamageType = damageType.GetValue()
+                DamageType = damageType.GetValue(missingMemberBehavior)
             };
         }
 
@@ -1550,11 +1550,11 @@ namespace GW2SDK.Skins
                 Id = id.GetValue(),
                 Name = name.GetValue(),
                 Description = description.GetValueOrEmpty(),
-                Rarity = rarity.GetValue(),
-                Flags = flags.GetValue(),
-                Restrictions = restrictions.GetValue(),
+                Rarity = rarity.GetValue(missingMemberBehavior),
+                Flags = flags.GetValue(missingMemberBehavior),
+                Restrictions = restrictions.GetValue(missingMemberBehavior),
                 Icon = icon.GetValueOrNull(),
-                WeightClass = weightClass.GetValue(),
+                WeightClass = weightClass.GetValue(missingMemberBehavior),
                 DyeSlots = dyeSlots.Select(value => ReadDyeSlots(value, missingMemberBehavior))
             };
         }
@@ -1633,9 +1633,9 @@ namespace GW2SDK.Skins
                 Id = id.GetValue(),
                 Name = name.GetValue(),
                 Description = description.GetValueOrEmpty(),
-                Rarity = rarity.GetValue(),
-                Flags = flags.GetValue(),
-                Restrictions = restrictions.GetValue(),
+                Rarity = rarity.GetValue(missingMemberBehavior),
+                Flags = flags.GetValue(missingMemberBehavior),
+                Restrictions = restrictions.GetValue(missingMemberBehavior),
                 Icon = icon.GetValueOrNull()
             };
         }
@@ -1719,11 +1719,11 @@ namespace GW2SDK.Skins
                 Id = id.GetValue(),
                 Name = name.GetValue(),
                 Description = description.GetValueOrEmpty(),
-                Rarity = rarity.GetValue(),
-                Flags = flags.GetValue(),
-                Restrictions = restrictions.GetValue(),
+                Rarity = rarity.GetValue(missingMemberBehavior),
+                Flags = flags.GetValue(missingMemberBehavior),
+                Restrictions = restrictions.GetValue(missingMemberBehavior),
                 Icon = icon.GetValueOrNull(),
-                DamageType = damageType.GetValue()
+                DamageType = damageType.GetValue(missingMemberBehavior)
             };
         }
 
@@ -1806,11 +1806,11 @@ namespace GW2SDK.Skins
                 Id = id.GetValue(),
                 Name = name.GetValue(),
                 Description = description.GetValueOrEmpty(),
-                Rarity = rarity.GetValue(),
-                Flags = flags.GetValue(),
-                Restrictions = restrictions.GetValue(),
+                Rarity = rarity.GetValue(missingMemberBehavior),
+                Flags = flags.GetValue(missingMemberBehavior),
+                Restrictions = restrictions.GetValue(missingMemberBehavior),
                 Icon = icon.GetValueOrNull(),
-                DamageType = damageType.GetValue()
+                DamageType = damageType.GetValue(missingMemberBehavior)
             };
         }
 
@@ -1888,9 +1888,9 @@ namespace GW2SDK.Skins
                 Id = id.GetValue(),
                 Name = name.GetValue(),
                 Description = description.GetValueOrEmpty(),
-                Rarity = rarity.GetValue(),
-                Flags = flags.GetValue(),
-                Restrictions = restrictions.GetValue(),
+                Rarity = rarity.GetValue(missingMemberBehavior),
+                Flags = flags.GetValue(missingMemberBehavior),
+                Restrictions = restrictions.GetValue(missingMemberBehavior),
                 Icon = icon.GetValueOrNull()
             };
         }
@@ -1974,11 +1974,11 @@ namespace GW2SDK.Skins
                 Id = id.GetValue(),
                 Name = name.GetValue(),
                 Description = description.GetValueOrEmpty(),
-                Rarity = rarity.GetValue(),
-                Flags = flags.GetValue(),
-                Restrictions = restrictions.GetValue(),
+                Rarity = rarity.GetValue(missingMemberBehavior),
+                Flags = flags.GetValue(missingMemberBehavior),
+                Restrictions = restrictions.GetValue(missingMemberBehavior),
                 Icon = icon.GetValueOrNull(),
-                DamageType = damageType.GetValue()
+                DamageType = damageType.GetValue(missingMemberBehavior)
             };
         }
 
@@ -2061,11 +2061,11 @@ namespace GW2SDK.Skins
                 Id = id.GetValue(),
                 Name = name.GetValue(),
                 Description = description.GetValueOrEmpty(),
-                Rarity = rarity.GetValue(),
-                Flags = flags.GetValue(),
-                Restrictions = restrictions.GetValue(),
+                Rarity = rarity.GetValue(missingMemberBehavior),
+                Flags = flags.GetValue(missingMemberBehavior),
+                Restrictions = restrictions.GetValue(missingMemberBehavior),
                 Icon = icon.GetValueOrNull(),
-                DamageType = damageType.GetValue()
+                DamageType = damageType.GetValue(missingMemberBehavior)
             };
         }
 
@@ -2148,11 +2148,11 @@ namespace GW2SDK.Skins
                 Id = id.GetValue(),
                 Name = name.GetValue(),
                 Description = description.GetValueOrEmpty(),
-                Rarity = rarity.GetValue(),
-                Flags = flags.GetValue(),
-                Restrictions = restrictions.GetValue(),
+                Rarity = rarity.GetValue(missingMemberBehavior),
+                Flags = flags.GetValue(missingMemberBehavior),
+                Restrictions = restrictions.GetValue(missingMemberBehavior),
                 Icon = icon.GetValueOrNull(),
-                DamageType = damageType.GetValue()
+                DamageType = damageType.GetValue(missingMemberBehavior)
             };
         }
 
@@ -2235,11 +2235,11 @@ namespace GW2SDK.Skins
                 Id = id.GetValue(),
                 Name = name.GetValue(),
                 Description = description.GetValueOrEmpty(),
-                Rarity = rarity.GetValue(),
-                Flags = flags.GetValue(),
-                Restrictions = restrictions.GetValue(),
+                Rarity = rarity.GetValue(missingMemberBehavior),
+                Flags = flags.GetValue(missingMemberBehavior),
+                Restrictions = restrictions.GetValue(missingMemberBehavior),
                 Icon = icon.GetValueOrNull(),
-                DamageType = damageType.GetValue()
+                DamageType = damageType.GetValue(missingMemberBehavior)
             };
         }
 
@@ -2322,11 +2322,11 @@ namespace GW2SDK.Skins
                 Id = id.GetValue(),
                 Name = name.GetValue(),
                 Description = description.GetValueOrEmpty(),
-                Rarity = rarity.GetValue(),
-                Flags = flags.GetValue(),
-                Restrictions = restrictions.GetValue(),
+                Rarity = rarity.GetValue(missingMemberBehavior),
+                Flags = flags.GetValue(missingMemberBehavior),
+                Restrictions = restrictions.GetValue(missingMemberBehavior),
                 Icon = icon.GetValueOrNull(),
-                DamageType = damageType.GetValue()
+                DamageType = damageType.GetValue(missingMemberBehavior)
             };
         }
 
@@ -2414,11 +2414,11 @@ namespace GW2SDK.Skins
                 Id = id.GetValue(),
                 Name = name.GetValue(),
                 Description = description.GetValueOrEmpty(),
-                Rarity = rarity.GetValue(),
-                Flags = flags.GetValue(),
-                Restrictions = restrictions.GetValue(),
+                Rarity = rarity.GetValue(missingMemberBehavior),
+                Flags = flags.GetValue(missingMemberBehavior),
+                Restrictions = restrictions.GetValue(missingMemberBehavior),
                 Icon = icon.GetValueOrNull(),
-                WeightClass = weightClass.GetValue(),
+                WeightClass = weightClass.GetValue(missingMemberBehavior),
                 DyeSlots = dyeSlots.Select(value => ReadDyeSlots(value, missingMemberBehavior))
             };
         }
@@ -2492,9 +2492,9 @@ namespace GW2SDK.Skins
                 Id = id.GetValue(),
                 Name = name.GetValue(),
                 Description = description.GetValueOrEmpty(),
-                Rarity = rarity.GetValue(),
-                Flags = flags.GetValue(),
-                Restrictions = restrictions.GetValue(),
+                Rarity = rarity.GetValue(missingMemberBehavior),
+                Flags = flags.GetValue(missingMemberBehavior),
+                Restrictions = restrictions.GetValue(missingMemberBehavior),
                 Icon = icon.GetValueOrNull()
             };
         }
@@ -2578,11 +2578,11 @@ namespace GW2SDK.Skins
                 Id = id.GetValue(),
                 Name = name.GetValue(),
                 Description = description.GetValueOrEmpty(),
-                Rarity = rarity.GetValue(),
-                Flags = flags.GetValue(),
-                Restrictions = restrictions.GetValue(),
+                Rarity = rarity.GetValue(missingMemberBehavior),
+                Flags = flags.GetValue(missingMemberBehavior),
+                Restrictions = restrictions.GetValue(missingMemberBehavior),
                 Icon = icon.GetValueOrNull(),
-                DamageType = damageType.GetValue()
+                DamageType = damageType.GetValue(missingMemberBehavior)
             };
         }
 
@@ -2665,11 +2665,11 @@ namespace GW2SDK.Skins
                 Id = id.GetValue(),
                 Name = name.GetValue(),
                 Description = description.GetValueOrEmpty(),
-                Rarity = rarity.GetValue(),
-                Flags = flags.GetValue(),
-                Restrictions = restrictions.GetValue(),
+                Rarity = rarity.GetValue(missingMemberBehavior),
+                Flags = flags.GetValue(missingMemberBehavior),
+                Restrictions = restrictions.GetValue(missingMemberBehavior),
                 Icon = icon.GetValueOrNull(),
-                DamageType = damageType.GetValue()
+                DamageType = damageType.GetValue(missingMemberBehavior)
             };
         }
 
@@ -2752,11 +2752,11 @@ namespace GW2SDK.Skins
                 Id = id.GetValue(),
                 Name = name.GetValue(),
                 Description = description.GetValueOrEmpty(),
-                Rarity = rarity.GetValue(),
-                Flags = flags.GetValue(),
-                Restrictions = restrictions.GetValue(),
+                Rarity = rarity.GetValue(missingMemberBehavior),
+                Flags = flags.GetValue(missingMemberBehavior),
+                Restrictions = restrictions.GetValue(missingMemberBehavior),
                 Icon = icon.GetValueOrNull(),
-                DamageType = damageType.GetValue()
+                DamageType = damageType.GetValue(missingMemberBehavior)
             };
         }
 
@@ -2839,11 +2839,11 @@ namespace GW2SDK.Skins
                 Id = id.GetValue(),
                 Name = name.GetValue(),
                 Description = description.GetValueOrEmpty(),
-                Rarity = rarity.GetValue(),
-                Flags = flags.GetValue(),
-                Restrictions = restrictions.GetValue(),
+                Rarity = rarity.GetValue(missingMemberBehavior),
+                Flags = flags.GetValue(missingMemberBehavior),
+                Restrictions = restrictions.GetValue(missingMemberBehavior),
                 Icon = icon.GetValueOrNull(),
-                DamageType = damageType.GetValue()
+                DamageType = damageType.GetValue(missingMemberBehavior)
             };
         }
 
@@ -2926,11 +2926,11 @@ namespace GW2SDK.Skins
                 Id = id.GetValue(),
                 Name = name.GetValue(),
                 Description = description.GetValueOrEmpty(),
-                Rarity = rarity.GetValue(),
-                Flags = flags.GetValue(),
-                Restrictions = restrictions.GetValue(),
+                Rarity = rarity.GetValue(missingMemberBehavior),
+                Flags = flags.GetValue(missingMemberBehavior),
+                Restrictions = restrictions.GetValue(missingMemberBehavior),
                 Icon = icon.GetValueOrNull(),
-                DamageType = damageType.GetValue()
+                DamageType = damageType.GetValue(missingMemberBehavior)
             };
         }
 
@@ -3013,11 +3013,11 @@ namespace GW2SDK.Skins
                 Id = id.GetValue(),
                 Name = name.GetValue(),
                 Description = description.GetValueOrEmpty(),
-                Rarity = rarity.GetValue(),
-                Flags = flags.GetValue(),
-                Restrictions = restrictions.GetValue(),
+                Rarity = rarity.GetValue(missingMemberBehavior),
+                Flags = flags.GetValue(missingMemberBehavior),
+                Restrictions = restrictions.GetValue(missingMemberBehavior),
                 Icon = icon.GetValueOrNull(),
-                DamageType = damageType.GetValue()
+                DamageType = damageType.GetValue(missingMemberBehavior)
             };
         }
 
@@ -3100,11 +3100,11 @@ namespace GW2SDK.Skins
                 Id = id.GetValue(),
                 Name = name.GetValue(),
                 Description = description.GetValueOrEmpty(),
-                Rarity = rarity.GetValue(),
-                Flags = flags.GetValue(),
-                Restrictions = restrictions.GetValue(),
+                Rarity = rarity.GetValue(missingMemberBehavior),
+                Flags = flags.GetValue(missingMemberBehavior),
+                Restrictions = restrictions.GetValue(missingMemberBehavior),
                 Icon = icon.GetValueOrNull(),
-                DamageType = damageType.GetValue()
+                DamageType = damageType.GetValue(missingMemberBehavior)
             };
         }
 
@@ -3187,11 +3187,11 @@ namespace GW2SDK.Skins
                 Id = id.GetValue(),
                 Name = name.GetValue(),
                 Description = description.GetValueOrEmpty(),
-                Rarity = rarity.GetValue(),
-                Flags = flags.GetValue(),
-                Restrictions = restrictions.GetValue(),
+                Rarity = rarity.GetValue(missingMemberBehavior),
+                Flags = flags.GetValue(missingMemberBehavior),
+                Restrictions = restrictions.GetValue(missingMemberBehavior),
                 Icon = icon.GetValueOrNull(),
-                DamageType = damageType.GetValue()
+                DamageType = damageType.GetValue(missingMemberBehavior)
             };
         }
 
@@ -3274,11 +3274,11 @@ namespace GW2SDK.Skins
                 Id = id.GetValue(),
                 Name = name.GetValue(),
                 Description = description.GetValueOrEmpty(),
-                Rarity = rarity.GetValue(),
-                Flags = flags.GetValue(),
-                Restrictions = restrictions.GetValue(),
+                Rarity = rarity.GetValue(missingMemberBehavior),
+                Flags = flags.GetValue(missingMemberBehavior),
+                Restrictions = restrictions.GetValue(missingMemberBehavior),
                 Icon = icon.GetValueOrNull(),
-                DamageType = damageType.GetValue()
+                DamageType = damageType.GetValue(missingMemberBehavior)
             };
         }
 
@@ -3411,11 +3411,11 @@ namespace GW2SDK.Skins
                 Id = id.GetValue(),
                 Name = name.GetValue(),
                 Description = description.GetValueOrEmpty(),
-                Rarity = rarity.GetValue(),
-                Flags = flags.GetValue(),
-                Restrictions = restrictions.GetValue(),
+                Rarity = rarity.GetValue(missingMemberBehavior),
+                Flags = flags.GetValue(missingMemberBehavior),
+                Restrictions = restrictions.GetValue(missingMemberBehavior),
                 Icon = icon.GetValueOrNull(),
-                DamageType = damageType.GetValue()
+                DamageType = damageType.GetValue(missingMemberBehavior)
             };
         }
 
@@ -3554,7 +3554,7 @@ namespace GW2SDK.Skins
             return new DyeSlot
             {
                 ColorId = colorId.GetValue(),
-                Material = material.GetValue()
+                Material = material.GetValue(missingMemberBehavior)
             };
         }
 

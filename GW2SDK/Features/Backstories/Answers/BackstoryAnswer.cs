@@ -19,6 +19,6 @@ namespace GW2SDK.Backstories.Answers
 
         public Race[]? Races { get; init; }
 
-        public Profession[]? Professions { get; init; }
+        public ProfessionName[]? Professions { get; init; }
     }
 }

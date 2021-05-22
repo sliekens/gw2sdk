@@ -111,8 +111,8 @@ namespace GW2SDK.Achievements.Dailies
 
             return new DailyAchievementProductRequirement
             {
-                Product = product.GetValue(),
-                Condition = condition.GetValue()
+                Product = product.GetValue(missingMemberBehavior),
+                Condition = condition.GetValue(missingMemberBehavior)
             };
         }
 

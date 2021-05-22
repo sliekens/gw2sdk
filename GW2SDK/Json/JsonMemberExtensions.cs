@@ -59,14 +59,39 @@ namespace GW2SDK.Json
             return instance.Select(value => value.GetArray(item => Enum.Parse<TEnum>(item.GetStringRequired(), true)));
         }
 
-        internal static TEnum GetValue<TEnum>(this RequiredMember<TEnum> instance) where TEnum : struct, Enum
+        internal static TEnum GetValue<TEnum>(this RequiredMember<TEnum> instance, MissingMemberBehavior missingMemberBehavior) where TEnum : struct, Enum
         {
-            return instance.Select(value => Enum.Parse<TEnum>(value.GetStringRequired(), true));
+            return instance.Select(value => missingMemberBehavior == MissingMemberBehavior.Error
+                ? Enum.Parse<TEnum>(value.GetStringRequired(), true)
+                : TryHardParse<TEnum>(value.GetStringRequired()));
         }
 
-        internal static TEnum[] GetValue<TEnum>(this RequiredMember<TEnum[]> instance) where TEnum : struct, Enum
+        internal static TEnum[] GetValue<TEnum>(this RequiredMember<TEnum[]> instance, MissingMemberBehavior missingMemberBehavior) where TEnum : struct, Enum
         {
-            return instance.Select(value => value.GetArray(item => Enum.Parse<TEnum>(item.GetStringRequired(), true)));
+            return instance.Select(value => value.GetArray(item => missingMemberBehavior == MissingMemberBehavior.Error
+                ? Enum.Parse<TEnum>(item.GetStringRequired(), true)
+                : TryHardParse<TEnum>(item.GetStringRequired())));
+        }
+
+        /// <summary>
+        /// A variation on Enum.TryParse() that tries harder.
+        /// </summary>
+        /// <typeparam name="TEnum">The type of Enum to parse.</typeparam>
+        /// <param name="name">The name of a member of the Enum.</param>
+        /// <returns>The Enum value of the member with the specified name.</returns>
+        private static TEnum TryHardParse<TEnum>(string name) where TEnum : struct, Enum
+        {
+            if (Enum.TryParse(name, true, out TEnum result))
+            {
+                return result;
+            }
+
+            // When parsing fails, treat the value as a constant where the name is unknown
+            // i.e. unique strings receive a unique value
+            //      and duplicate strings receive the same value
+            // (Using hash code is not perfect because of collissions, but it's good enough.)
+            // The actual value should be treated as an opaque value
+            return (TEnum) Enum.ToObject(typeof(TEnum), name.GetDeterministicHashCode());
         }
     }
 }

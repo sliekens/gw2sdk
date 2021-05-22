@@ -74,7 +74,7 @@ namespace GW2SDK.Colors
                 Metal = metal.Select(value => ReadColorInfo(value, missingMemberBehavior)),
                 Fur = fur.Select(value => ReadColorInfo(value, missingMemberBehavior)),
                 Item = itemId.GetValue(),
-                Categories = categories.GetValue()
+                Categories = categories.GetValue(missingMemberBehavior)
             };
         }
 

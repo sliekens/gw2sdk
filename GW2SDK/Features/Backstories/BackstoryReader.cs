@@ -23,7 +23,7 @@ namespace GW2SDK.Backstories
             var description = new RequiredMember<string>("description");
             var answers = new RequiredMember<string[]>("answers");
             var order = new RequiredMember<int>("order");
-            var professions = new OptionalMember<Profession[]>("professions");
+            var professions = new OptionalMember<ProfessionName[]>("professions");
             var races = new OptionalMember<Race[]>("races");
             foreach (var member in json.EnumerateObject())
             {
@@ -82,7 +82,7 @@ namespace GW2SDK.Backstories
             var description = new RequiredMember<string>("description");
             var journal = new RequiredMember<string>("journal");
             var question = new RequiredMember<int>("question");
-            var professions = new OptionalMember<Profession[]>("professions");
+            var professions = new OptionalMember<ProfessionName[]>("professions");
             var races = new OptionalMember<Race[]>("races");
             foreach (var member in json.EnumerateObject())
             {
