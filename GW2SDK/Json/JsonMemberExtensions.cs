@@ -59,6 +59,13 @@ namespace GW2SDK.Json
             return instance.Select(value => value.GetArray(item => Enum.Parse<TEnum>(item.GetStringRequired(), true)));
         }
 
+        internal static TEnum? GetValue<TEnum>(this NullableMember<TEnum> instance, MissingMemberBehavior missingMemberBehavior) where TEnum : struct, Enum
+        {
+            return instance.Select(value => missingMemberBehavior == MissingMemberBehavior.Error
+                ? Enum.Parse<TEnum>(value.GetStringRequired(), true)
+                : TryHardParse<TEnum>(value.GetStringRequired()));
+        }
+
         internal static TEnum GetValue<TEnum>(this RequiredMember<TEnum> instance, MissingMemberBehavior missingMemberBehavior) where TEnum : struct, Enum
         {
             return instance.Select(value => missingMemberBehavior == MissingMemberBehavior.Error

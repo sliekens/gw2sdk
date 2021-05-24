@@ -3,23 +3,23 @@
 namespace GW2SDK
 {
     [PublicAPI]
-    public enum Profession
+    public enum ProfessionName
     {
-        Engineer = 1,
-
-        Guardian,
-
-        Ranger,
-
-        Necromancer,
+        Guardian = 1,
 
         Warrior,
 
-        Elementalist,
+        Engineer,
+
+        Ranger,
 
         Thief,
 
+        Elementalist,
+
         Mesmer,
+
+        Necromancer,
 
         Revenant
     }
