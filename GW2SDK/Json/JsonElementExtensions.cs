@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Text.Json;
 
 namespace GW2SDK.Json
@@ -36,6 +37,17 @@ namespace GW2SDK.Json
             {
                 var item = json[i];
                 values[i] = convert(item);
+            }
+
+            return values;
+        }
+        
+        internal static Dictionary<string, TValue> GetMap<TValue>(this JsonElement json, Func<JsonElement, TValue> convert)
+        {
+            var values = new Dictionary<string, TValue>();
+            foreach (var member in json.EnumerateObject())
+            {
+                values[member.Name] = convert(member.Value);
             }
 
             return values;
