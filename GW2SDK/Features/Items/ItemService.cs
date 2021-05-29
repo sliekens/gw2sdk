@@ -57,5 +57,16 @@ namespace GW2SDK.Items
             return await _http.GetResourcesPage(request, json => _itemReader.ReadArray(json))
                 .ConfigureAwait(false);
         }
+
+        /// <summary>Retrieves a page, using a token obtained from a previous page result.</summary>
+        /// <param name="token">One of <see cref="IPageContext.First" />, <see cref="IPageContext.Previous" />,
+        /// <see cref="IPageContext.Self" />, <see cref="IPageContext.Next" /> or <see cref="IPageContext.Last" />.</param>
+        /// <returns>The page specified by the token.</returns>
+        public async Task<IDataTransferPage<Item>> GetItemsByPage(ContinuationToken token)
+        {
+            var request = new ContinuationRequest(token);
+            return await _http.GetResourcesPage(request, json => _itemReader.ReadArray(json))
+                .ConfigureAwait(false);
+        }
     }
 }
