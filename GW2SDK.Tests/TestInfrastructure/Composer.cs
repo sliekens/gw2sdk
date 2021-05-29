@@ -19,6 +19,7 @@ using GW2SDK.Commerce.Prices;
 using GW2SDK.Continents;
 using GW2SDK.Currencies;
 using GW2SDK.Items;
+using GW2SDK.ItemStats;
 using GW2SDK.Json;
 using GW2SDK.MailCarriers;
 using GW2SDK.Professions;
@@ -191,6 +192,11 @@ namespace GW2SDK.Tests.TestInfrastructure
             if (serviceType == typeof(ProfessionService))
             {
                 return new ProfessionService(Resolve<HttpClient>(), new ProfessionReader(), MissingMemberBehavior.Error);
+            }
+
+            if (serviceType == typeof(ItemStatService))
+            {
+                return new ItemStatService(Resolve<HttpClient>(), new ItemStatReader(), MissingMemberBehavior.Error);
             }
 
             return null;
