@@ -17,18 +17,21 @@ namespace GW2SDK.TestDataHelper
             _http = http;
         }
 
-        public async Task<List<string>> GetAllJsonContinents(bool indented)
+        public async Task<List<string>> GetAllJsonContinents()
         {
             var request = new ContinentsRequest();
-            using var response = await _http.SendAsync(request, HttpCompletionOption.ResponseHeadersRead).ConfigureAwait(false);
+            using var response = await _http.SendAsync(request, HttpCompletionOption.ResponseHeadersRead)
+                .ConfigureAwait(false);
             response.EnsureSuccessStatusCode();
 
             // API returns a JSON array but we want a List of JSON objects instead
-            using var json = await response.Content.ReadAsJsonAsync().ConfigureAwait(false);
-            return json.Indent(indented)
-                .RootElement
-                .EnumerateArray()
-                .Select(item => item.ToString() ?? throw new InvalidOperationException("Unexpected null in JSON array."))
-                .ToList();}
+            using var json = await response.Content.ReadAsJsonAsync()
+                .ConfigureAwait(false);
+            return json.Indent(false)
+                .RootElement.EnumerateArray()
+                .Select(item =>
+                    item.ToString() ?? throw new InvalidOperationException("Unexpected null in JSON array."))
+                .ToList();
+        }
     }
 }

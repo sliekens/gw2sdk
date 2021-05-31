@@ -1,4 +1,6 @@
-﻿using GW2SDK.Tests.TestInfrastructure;
+﻿using System.Collections.Generic;
+using System.Linq;
+using GW2SDK.Tests.TestInfrastructure;
 
 namespace GW2SDK.Tests.Features.Continents.Fixtures
 {
@@ -7,9 +9,11 @@ namespace GW2SDK.Tests.Features.Continents.Fixtures
         public ContinentFixture()
         {
             var reader = new FlatFileReader();
-            Db = new InMemoryContinentDb(reader.Read("Data/continents.json"));
+            Continents = reader.Read("Data/continents.json.gz")
+                .ToList()
+                .AsReadOnly();
         }
 
-        public InMemoryContinentDb Db { get; }
+        public IReadOnlyCollection<string> Continents { get; }
     }
 }

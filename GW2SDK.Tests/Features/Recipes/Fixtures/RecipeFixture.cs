@@ -1,4 +1,6 @@
-﻿using GW2SDK.Tests.TestInfrastructure;
+﻿using System.Collections.Generic;
+using System.Linq;
+using GW2SDK.Tests.TestInfrastructure;
 
 namespace GW2SDK.Tests.Features.Recipes.Fixtures
 {
@@ -8,9 +10,11 @@ namespace GW2SDK.Tests.Features.Recipes.Fixtures
         {
             var reader = new FlatFileReader();
 
-            Db = new InMemoryRecipeDb(reader.Read("Data/recipes.json"));
+            Recipes = reader.Read("Data/recipes.json.gz")
+                .ToList()
+                .AsReadOnly();
         }
 
-        public InMemoryRecipeDb Db { get; }
+        public IReadOnlyCollection<string> Recipes { get; }
     }
 }

@@ -5,22 +5,22 @@ using GW2SDK.Http;
 using GW2SDK.Tests.TestInfrastructure;
 using Xunit;
 
-namespace GW2SDK.Tests.Features.Accounts.Fixtures
+namespace GW2SDK.Tests.Features.Accounts
 {
     public class AccountFixture : IAsyncLifetime
     {
-        public InMemoryAccountDb Db { get; } = new InMemoryAccountDb();
+        public string BasicAccount { get; private set; }
+
+        public string FullAccount { get; private set; }
 
         public async Task InitializeAsync()
         {
             await using var services = new Composer();
             var http = services.Resolve<HttpClient>();
 
-            var basic = await GetAccountRaw(http, ConfigurationManager.Instance.ApiKeyBasic);
-            Db.SetBasicAccount(basic);
+            BasicAccount = await GetAccountRaw(http, ConfigurationManager.Instance.ApiKeyBasic);
 
-            var full = await GetAccountRaw(http, ConfigurationManager.Instance.ApiKeyFull);
-            Db.SetFullAccount(full);
+            FullAccount = await GetAccountRaw(http, ConfigurationManager.Instance.ApiKeyFull);
         }
 
         public Task DisposeAsync() => Task.CompletedTask;

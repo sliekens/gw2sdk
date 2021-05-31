@@ -16,6 +16,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "root", "root", "{63243B77-9BE8-41CE-B2F6-B306E3F150CB}"
 	ProjectSection(SolutionItems) = preProject
+		.gitattributes = .gitattributes
 		coverletArgs.runsettings = coverletArgs.runsettings
 		Directory.Build.props = Directory.Build.props
 		global.json = global.json
@@ -29,7 +30,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "samples", "samples", "{8168
 		samples\Directory.Build.props = samples\Directory.Build.props
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApiVersionInfo", "samples\ApiVersionInfo\ApiVersionInfo.csproj", "{7322DA3F-5F6F-4EBA-BB85-DCFB67B3B620}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApiVersionInfo", "samples\ApiVersionInfo\ApiVersionInfo.csproj", "{7322DA3F-5F6F-4EBA-BB85-DCFB67B3B620}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MostVersatileMaterials", "samples\MostVersatileMaterials\MostVersatileMaterials.csproj", "{B374256A-3BF9-41AC-B68E-CA8FA39CA328}"
 EndProject

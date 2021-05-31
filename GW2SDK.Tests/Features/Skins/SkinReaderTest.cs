@@ -29,7 +29,7 @@ namespace GW2SDK.Tests.Features.Skins
         {
             var sut = new SkinReader();
 
-            AssertEx.ForEach(_fixture.Db.Skins,
+            AssertEx.ForEach(_fixture.Skins,
                 json =>
                 {
                     using var document = JsonDocument.Parse(json);

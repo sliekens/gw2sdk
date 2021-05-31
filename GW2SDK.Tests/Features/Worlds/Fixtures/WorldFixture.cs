@@ -1,4 +1,6 @@
-﻿using GW2SDK.Tests.TestInfrastructure;
+﻿using System.Collections.Generic;
+using System.Linq;
+using GW2SDK.Tests.TestInfrastructure;
 
 namespace GW2SDK.Tests.Features.Worlds.Fixtures
 {
@@ -7,9 +9,11 @@ namespace GW2SDK.Tests.Features.Worlds.Fixtures
         public WorldFixture()
         {
             var reader = new FlatFileReader();
-            Db = new InMemoryWorldDb(reader.Read("Data/worlds.json"));
+            Worlds = reader.Read("Data/worlds.json.gz")
+                .ToList()
+                .AsReadOnly();
         }
 
-        public InMemoryWorldDb Db { get; }
+        public IReadOnlyCollection<string> Worlds { get; }
     }
 }

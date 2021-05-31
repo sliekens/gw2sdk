@@ -16,19 +16,43 @@ namespace GW2SDK.TestDataHelper
         {
             _http = http;
         }
-
-        public async Task<List<string>> GetAllJsonSkins(bool indented)
+        
+        public async Task<ISet<string>> GetAllJsonSkins()
         {
-            var ids = await GetSkinIds().ConfigureAwait(false);
-            var list = new List<string>(ids.Count);
-            var tasks = ids.Buffer(200).Select(subset => GetJsonSkinsByIds(subset.ToList(), indented));
-            foreach (var result in await Task.WhenAll(tasks).ConfigureAwait(false))
+            var ids = await GetSkinIds()
+                .ConfigureAwait(false);
+
+            var batches = new Queue<IEnumerable<int>>(ids.Buffer(200));
+
+            var result = new List<string>();
+            var work = new List<Task<List<string>>>();
+
+            for (var i = 0; i < 12; i++)
             {
-                list.AddRange(result);
+                if (!batches.TryDequeue(out var batch))
+                {
+                    break;
+                }
+
+                work.Add(GetJsonSkinsByIds(batch.ToList()));
             }
 
-            return list;
+            while (work.Count > 0)
+            {
+                var done = await Task.WhenAny(work);
+                result.AddRange(done.Result);
+
+                work.Remove(done);
+
+                if (batches.TryDequeue(out var batch))
+                {
+                    work.Add(GetJsonSkinsByIds(batch.ToList()));
+                }
+            }
+
+            return new SortedSet<string>(result, StringComparer.Ordinal);
         }
+
 
         private async Task<List<int>> GetSkinIds()
         {
@@ -36,11 +60,14 @@ namespace GW2SDK.TestDataHelper
             using var response = await _http.SendAsync(request, HttpCompletionOption.ResponseHeadersRead)
                 .ConfigureAwait(false);
             response.EnsureSuccessStatusCode();
-            using var json = await response.Content.ReadAsJsonAsync().ConfigureAwait(false);
-            return json.RootElement.EnumerateArray().Select(item => item.GetInt32()).ToList();
+            using var json = await response.Content.ReadAsJsonAsync()
+                .ConfigureAwait(false);
+            return json.RootElement.EnumerateArray()
+                .Select(item => item.GetInt32())
+                .ToList();
         }
 
-        private async Task<List<string>> GetJsonSkinsByIds(IReadOnlyCollection<int> skinIds, bool indented)
+        private async Task<List<string>> GetJsonSkinsByIds(IReadOnlyCollection<int> skinIds)
         {
             var request = new SkinsByIdsRequest(skinIds);
             using var response = await _http.SendAsync(request, HttpCompletionOption.ResponseHeadersRead)
@@ -48,8 +75,9 @@ namespace GW2SDK.TestDataHelper
             response.EnsureSuccessStatusCode();
 
             // API returns a JSON array but we want a List of JSON objects instead
-            using var json = await response.Content.ReadAsJsonAsync().ConfigureAwait(false);
-            return json.Indent(indented)
+            using var json = await response.Content.ReadAsJsonAsync()
+                .ConfigureAwait(false);
+            return json.Indent(false)
                 .RootElement.EnumerateArray()
                 .Select(item =>
                     item.ToString() ?? throw new InvalidOperationException("Unexpected null in JSON array."))

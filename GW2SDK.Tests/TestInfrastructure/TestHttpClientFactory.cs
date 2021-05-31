@@ -41,7 +41,7 @@ namespace GW2SDK.Tests.TestInfrastructure
                 .ConfigurePrimaryHttpMessageHandler(() => new SocketsHttpHandler
                 {
                     MaxConnectionsPerServer = 10,
-                    AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate
+                    AutomaticDecompression = DecompressionMethods.GZip
                 })
                 .AddPolicyHandlerFromRegistry("api.guildwars2.com")
                 .AddHttpMessageHandler<UnauthorizedMessageHandler>()

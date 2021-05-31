@@ -9,7 +9,9 @@ namespace GW2SDK.Tests.Features.Traits.Fixtures
         public TraitsFixture()
         {
             var reader = new FlatFileReader();
-            Traits = reader.Read("Data/traits.json").ToList().AsReadOnly();
+            Traits = reader.Read("Data/traits.json.gz")
+                .ToList()
+                .AsReadOnly();
         }
 
         public IReadOnlyCollection<string> Traits { get; }

@@ -183,7 +183,7 @@ namespace GW2SDK.Tests.Features.Items
         {
             var sut = new ItemReader();
 
-            AssertEx.ForEach(_fixture.Db.Items,
+            AssertEx.ForEach(_fixture.Items,
                 json =>
                 {
                     using var document = JsonDocument.Parse(json);

@@ -29,7 +29,7 @@ namespace GW2SDK.Tests.Features.Achievements.Groups
         {
             var sut = new AchievementGroupReader();
 
-            AssertEx.ForEach(_fixture.Db.AchievementGroups,
+            AssertEx.ForEach(_fixture.AchievementGroups,
                 json =>
                 {
                     using var document = JsonDocument.Parse(json);

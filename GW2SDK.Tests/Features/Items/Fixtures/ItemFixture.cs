@@ -1,4 +1,6 @@
-﻿using GW2SDK.Tests.TestInfrastructure;
+﻿using System.Collections.Generic;
+using System.Linq;
+using GW2SDK.Tests.TestInfrastructure;
 
 namespace GW2SDK.Tests.Features.Items.Fixtures
 {
@@ -7,9 +9,9 @@ namespace GW2SDK.Tests.Features.Items.Fixtures
         public ItemFixture()
         {
             var reader = new FlatFileReader();
-            Db = new InMemoryItemDb(reader.Read("Data/items.json"));
+            Items = reader.Read("Data/items.json.gz").ToList().AsReadOnly();
         }
 
-        public InMemoryItemDb Db { get; }
+        public IReadOnlyCollection<string> Items { get; }
     }
 }

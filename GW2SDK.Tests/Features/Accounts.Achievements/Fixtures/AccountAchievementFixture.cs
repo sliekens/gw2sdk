@@ -11,14 +11,14 @@ namespace GW2SDK.Tests.Features.Accounts.Achievements.Fixtures
 {
     public class AccountAchievementFixture : IAsyncLifetime
     {
-        public InMemoryAccountAchievementsDb Db { get; private set; }
+        public IReadOnlyCollection<string> AccountAchievements { get; private set; }
 
         public async Task InitializeAsync()
         {
             await using var services = new Composer();
             var http = services.Resolve<HttpClient>();
             var json = await GetAllJsonAchievements(http, ConfigurationManager.Instance.ApiKeyFull);
-            Db = new InMemoryAccountAchievementsDb(json);
+            AccountAchievements = json.AsReadOnly();
         }
 
         public Task DisposeAsync() => Task.CompletedTask;

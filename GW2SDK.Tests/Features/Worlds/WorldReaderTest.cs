@@ -34,7 +34,7 @@ namespace GW2SDK.Tests.Features.Worlds
         {
             var sut = new WorldReader();
 
-            AssertEx.ForEach(_fixture.Db.Worlds,
+            AssertEx.ForEach(_fixture.Worlds,
                 json =>
                 {
                     using var document = JsonDocument.Parse(json);

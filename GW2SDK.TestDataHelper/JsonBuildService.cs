@@ -15,14 +15,14 @@ namespace GW2SDK.TestDataHelper
             _http = http;
         }
 
-        public async Task<string> GetJsonBuild(bool indented)
+        public async Task<string> GetJsonBuild()
         {
             var request = new BuildRequest();
             using var response = await _http.SendAsync(request, HttpCompletionOption.ResponseHeadersRead)
                 .ConfigureAwait(false);
             response.EnsureSuccessStatusCode();
             using var json = await response.Content.ReadAsJsonAsync().ConfigureAwait(false);
-            return json.Indent(indented).RootElement.ToString() ?? throw new InvalidOperationException();
+            return json.RootElement.ToString() ?? throw new InvalidOperationException();
         }
     }
 }

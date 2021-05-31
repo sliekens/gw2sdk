@@ -32,7 +32,7 @@ namespace GW2SDK.Tests.Features.Colors
         {
             var sut = new ColorReader();
 
-            AssertEx.ForEach(_fixture.Db.Colors,
+            AssertEx.ForEach(_fixture.Colors,
                 json =>
                 {
                     using var document = JsonDocument.Parse(json);

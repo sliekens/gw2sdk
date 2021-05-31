@@ -31,7 +31,7 @@ namespace GW2SDK.Tests.Features.Achievements.Categories
         {
             var sut = new AchievementCategoryReader();
 
-            AssertEx.ForEach(_fixture.Db.AchievementCategories,
+            AssertEx.ForEach(_fixture.AchievementCategories,
                 json =>
                 {
                     using var document = JsonDocument.Parse(json);

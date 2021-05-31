@@ -17,25 +17,42 @@ namespace GW2SDK.TestDataHelper
             _http = http;
         }
 
-        public async Task<List<string>> GetJsonItemPrices(bool indented)
+        public async Task<ISet<string>> GetJsonItemPrices()
         {
-            // For this data set, I decided to limit the results
-            // - because the data is really pretty much the same across all items
-            var ids = await GetItemPriceIds().ConfigureAwait(false);
-            var list = new List<string>();
-            var head = ids.Take(100);
-            var body = ids.Skip(100)
-                .Where((_, index) => index % 100 == 0);
-            var tail = ids.TakeLast(100);
-            var dataSet = head.Concat(body).Concat(tail).ToList();
-            var tasks = dataSet.Buffer(200).Select(subset => GetJsonItemPricesById(subset.ToList(), indented));
-            foreach (var result in await Task.WhenAll(tasks).ConfigureAwait(false))
+            var ids = await GetItemPriceIds()
+                .ConfigureAwait(false);
+
+            var batches = new Queue<IEnumerable<int>>(ids.Buffer(200));
+
+            var result = new List<string>();
+            var work = new List<Task<List<string>>>();
+
+            for (var i = 0; i < 12; i++)
             {
-                list.AddRange(result);
+                if (!batches.TryDequeue(out var batch))
+                {
+                    break;
+                }
+
+                work.Add(GetJsonItemPricesById(batch.ToList()));
             }
 
-            return list;
+            while (work.Count > 0)
+            {
+                var done = await Task.WhenAny(work);
+                result.AddRange(done.Result);
+
+                work.Remove(done);
+
+                if (batches.TryDequeue(out var batch))
+                {
+                    work.Add(GetJsonItemPricesById(batch.ToList()));
+                }
+            }
+
+            return new SortedSet<string>(result, StringComparer.Ordinal);
         }
+
 
         private async Task<List<int>> GetItemPriceIds()
         {
@@ -43,11 +60,14 @@ namespace GW2SDK.TestDataHelper
             using var response = await _http.SendAsync(request, HttpCompletionOption.ResponseHeadersRead)
                 .ConfigureAwait(false);
             response.EnsureSuccessStatusCode();
-            using var json = await response.Content.ReadAsJsonAsync().ConfigureAwait(false);
-            return json.RootElement.EnumerateArray().Select(item => item.GetInt32()).ToList();
+            using var json = await response.Content.ReadAsJsonAsync()
+                .ConfigureAwait(false);
+            return json.RootElement.EnumerateArray()
+                .Select(item => item.GetInt32())
+                .ToList();
         }
 
-        private async Task<List<string>> GetJsonItemPricesById(IReadOnlyCollection<int> itemIds, bool indented)
+        private async Task<List<string>> GetJsonItemPricesById(IReadOnlyCollection<int> itemIds)
         {
             var request = new ItemPricesByIdsRequest(itemIds);
             using var response = await _http.SendAsync(request, HttpCompletionOption.ResponseHeadersRead)
@@ -55,8 +75,9 @@ namespace GW2SDK.TestDataHelper
             response.EnsureSuccessStatusCode();
 
             // API returns a JSON array but we want a List of JSON objects instead
-            using var json = await response.Content.ReadAsJsonAsync().ConfigureAwait(false);
-            return json.Indent(indented)
+            using var json = await response.Content.ReadAsJsonAsync()
+                .ConfigureAwait(false);
+            return json.Indent(false)
                 .RootElement.EnumerateArray()
                 .Select(item =>
                     item.ToString() ?? throw new InvalidOperationException("Unexpected null in JSON array."))

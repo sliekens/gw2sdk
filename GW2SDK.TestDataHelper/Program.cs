@@ -1,12 +1,14 @@
 ﻿using System;
 using System.IO;
+using System.IO.Compression;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace GW2SDK.TestDataHelper
 {
     public class Program
     {
-        public static async Task Main(string outDir, bool indented = false)
+        public static async Task Main(string outDir)
         {
             Directory.CreateDirectory(outDir);
             await using var services = new Container();
@@ -22,196 +24,200 @@ namespace GW2SDK.TestDataHelper
             {
                 Console.WriteLine("Getting build number.");
                 var service = services.Resolve<JsonBuildService>();
-                var json = await service.GetJsonBuild(indented);
+                var json = await service.GetJsonBuild();
                 await file.WriteLineAsync(json);
             }
 
-            await using (var file = File.CreateText(Path.Combine(outDir, "achievements.json")))
+            // Compress everything else to save disk space
+
+            await using (var file = CreateTextCompressed(Path.Combine(outDir, "achievements.json.gz")))
             {
                 Console.WriteLine("Getting achievements.");
                 var service = services.Resolve<JsonAchievementService>();
-                var jsons = await service.GetAllJsonAchievements(indented);
+                var jsons = await service.GetAllJsonAchievements();
                 foreach (var json in jsons)
                 {
                     await file.WriteLineAsync(json);
                 }
             }
 
-            await using (var file = File.CreateText(Path.Combine(outDir, "achievementCategories.json")))
+            await using (var file = CreateTextCompressed(Path.Combine(outDir, "achievementCategories.json.gz")))
             {
                 Console.WriteLine("Getting achievement categories.");
                 var service = services.Resolve<JsonAchievementCategoriesService>();
-                var jsons = await service.GetAllJsonAchievementCategories(indented);
+                var jsons = await service.GetAllJsonAchievementCategories();
                 foreach (var json in jsons)
                 {
                     await file.WriteLineAsync(json);
                 }
             }
 
-            await using (var file = File.CreateText(Path.Combine(outDir, "achievementGroups.json")))
+            await using (var file = CreateTextCompressed(Path.Combine(outDir, "achievementGroups.json.gz")))
             {
                 Console.WriteLine("Getting achievement groups.");
                 var service = services.Resolve<JsonAchievementGroupsService>();
-                var jsons = await service.GetAllJsonAchievementGroups(indented);
+                var jsons = await service.GetAllJsonAchievementGroups();
                 foreach (var json in jsons)
                 {
                     await file.WriteLineAsync(json);
                 }
             }
 
-            await using (var file = File.CreateText(Path.Combine(outDir, "colors.json")))
+            await using (var file = CreateTextCompressed(Path.Combine(outDir, "colors.json.gz")))
             {
                 Console.WriteLine("Getting dyes.");
                 var service = services.Resolve<JsonColorService>();
-                var jsons = await service.GetAllJsonColors(indented);
+                var jsons = await service.GetAllJsonColors();
                 foreach (var json in jsons)
                 {
                     await file.WriteLineAsync(json);
                 }
             }
 
-            await using (var file = File.CreateText(Path.Combine(outDir, "currencies.json")))
+            await using (var file = CreateTextCompressed(Path.Combine(outDir, "currencies.json.gz")))
             {
                 Console.WriteLine("Getting currencies.");
                 var service = services.Resolve<JsonCurrencyService>();
-                var jsons = await service.GetAllJsonCurrencies(indented);
+                var jsons = await service.GetAllJsonCurrencies();
                 foreach (var json in jsons)
                 {
                     await file.WriteLineAsync(json);
                 }
             }
 
-            await using (var file = File.CreateText(Path.Combine(outDir, "worlds.json")))
+            await using (var file = CreateTextCompressed(Path.Combine(outDir, "worlds.json.gz")))
             {
                 Console.WriteLine("Getting worlds.");
                 var service = services.Resolve<JsonWorldService>();
-                var jsons = await service.GetAllJsonWorlds(indented);
+                var jsons = await service.GetAllJsonWorlds();
                 foreach (var json in jsons)
                 {
                     await file.WriteLineAsync(json);
                 }
             }
 
-            await using (var file = File.CreateText(Path.Combine(outDir, "items.json")))
+            await using (var file = CreateTextCompressed(Path.Combine(outDir, "items.json.gz")))
             {
                 Console.WriteLine("Getting items.");
                 var service = services.Resolve<JsonItemService>();
-                var jsons = await service.GetAllJsonItems(indented);
+                var jsons = await service.GetAllJsonItems();
                 foreach (var json in jsons)
                 {
                     await file.WriteLineAsync(json);
                 }
             }
 
-            await using (var file = File.CreateText(Path.Combine(outDir, "mailCarriers.json")))
+            await using (var file = CreateTextCompressed(Path.Combine(outDir, "mailCarriers.json.gz")))
             {
                 Console.WriteLine("Getting mail carriers.");
                 var service = services.Resolve<JsonMailCarriersService>();
-                var jsons = await service.GetAllJsonMailCarriers(indented);
+                var jsons = await service.GetAllJsonMailCarriers();
                 foreach (var json in jsons)
                 {
                     await file.WriteLineAsync(json);
                 }
             }
 
-            await using (var file = File.CreateText(Path.Combine(outDir, "recipes.json")))
+            await using (var file = CreateTextCompressed(Path.Combine(outDir, "recipes.json.gz")))
             {
                 Console.WriteLine("Getting recipes.");
                 var service = services.Resolve<JsonRecipeService>();
-                var jsons = await service.GetAllJsonRecipes(indented);
+                var jsons = await service.GetAllJsonRecipes();
                 foreach (var json in jsons)
                 {
                     await file.WriteLineAsync(json);
                 }
             }
 
-            await using (var file = File.CreateText(Path.Combine(outDir, "skins.json")))
+            await using (var file = CreateTextCompressed(Path.Combine(outDir, "skins.json.gz")))
             {
                 Console.WriteLine("Getting skins.");
                 var service = services.Resolve<JsonSkinService>();
-                var jsons = await service.GetAllJsonSkins(indented);
+                var jsons = await service.GetAllJsonSkins();
                 foreach (var json in jsons)
                 {
                     await file.WriteLineAsync(json);
                 }
             }
 
-            await using (var file = File.CreateText(Path.Combine(outDir, "titles.json")))
+            await using (var file = CreateTextCompressed(Path.Combine(outDir, "titles.json.gz")))
             {
                 Console.WriteLine("Getting titles.");
                 var service = services.Resolve<JsonTitlesService>();
-                var jsons = await service.GetAllJsonTitles(indented);
+                var jsons = await service.GetAllJsonTitles();
                 foreach (var json in jsons)
                 {
                     await file.WriteLineAsync(json);
                 }
             }
 
-            await using (var file = File.CreateText(Path.Combine(outDir, "traits.json")))
+            await using (var file = CreateTextCompressed(Path.Combine(outDir, "traits.json.gz")))
             {
                 Console.WriteLine("Getting traits.");
                 var service = services.Resolve<JsonTraitsService>();
-                var jsons = await service.GetAllJsonTraits(indented);
+                var jsons = await service.GetAllJsonTraits();
                 foreach (var json in jsons)
                 {
                     await file.WriteLineAsync(json);
                 }
             }
 
-            await using (var file = File.CreateText(Path.Combine(outDir, "continents.json")))
+            await using (var file = CreateTextCompressed(Path.Combine(outDir, "continents.json.gz")))
             {
                 Console.WriteLine("Getting continents.");
                 var service = services.Resolve<JsonContinentService>();
-                var jsons = await service.GetAllJsonContinents(indented);
+                var jsons = await service.GetAllJsonContinents();
                 foreach (var json in jsons)
                 {
                     await file.WriteLineAsync(json);
                 }
             }
 
-            await using (var file = File.CreateText(Path.Combine(outDir, "continents_1_floors.json")))
+            await using (var file = CreateTextCompressed(Path.Combine(outDir, "continents_1_floors.json.gz")))
             {
                 Console.WriteLine("Getting floors 1/2.");
                 var service = services.Resolve<JsonFloorService>();
-                var jsons = await service.GetAllJsonFloors(1, indented);
+                var jsons = await service.GetAllJsonFloors(1);
                 foreach (var json in jsons)
                 {
                     await file.WriteLineAsync(json);
                 }
             }
 
-            await using (var file = File.CreateText(Path.Combine(outDir, "continents_2_floors.json")))
+            await using (var file = CreateTextCompressed(Path.Combine(outDir, "continents_2_floors.json.gz")))
             {
                 Console.WriteLine("Getting floors 2/2.");
                 var service = services.Resolve<JsonFloorService>();
-                var jsons = await service.GetAllJsonFloors(2, indented);
+                var jsons = await service.GetAllJsonFloors(2);
                 foreach (var json in jsons)
                 {
                     await file.WriteLineAsync(json);
                 }
             }
 
-            await using (var file = File.CreateText(Path.Combine(outDir, "prices.json")))
+            await using (var file = CreateTextCompressed(Path.Combine(outDir, "prices.json.gz")))
             {
                 Console.WriteLine("Getting item prices.");
                 var service = services.Resolve<JsonItemPriceService>();
-                var jsons = await service.GetJsonItemPrices(indented);
+                var jsons = await service.GetJsonItemPrices();
                 foreach (var json in jsons)
                 {
                     await file.WriteLineAsync(json);
                 }
             }
 
-            await using (var file = File.CreateText(Path.Combine(outDir, "listings.json")))
+            await using (var file = CreateTextCompressed(Path.Combine(outDir, "listings.json.gz")))
             {
                 Console.WriteLine("Getting item listings.");
                 var service = services.Resolve<JsonItemListingService>();
-                var jsons = await service.GetJsonItemListing(indented);
+                var jsons = await service.GetJsonItemListing();
                 foreach (var json in jsons)
                 {
                     await file.WriteLineAsync(json);
                 }
             }
         }
+
+        private static StreamWriter CreateTextCompressed(string path) => new StreamWriter(new GZipStream(File.OpenWrite(path), CompressionMode.Compress), Encoding.UTF8);
     }
 }
