@@ -9,7 +9,9 @@ namespace GW2SDK.Tests.Features.Currencies.Fixture
         public CurrencyFixture()
         {
             var reader = new FlatFileReader();
-            Currencies = reader.Read("Data/currencies.json").ToList().AsReadOnly();
+            Currencies = reader.Read("Data/currencies.json.gz")
+                .ToList()
+                .AsReadOnly();
         }
 
         public IReadOnlyCollection<string> Currencies { get; }

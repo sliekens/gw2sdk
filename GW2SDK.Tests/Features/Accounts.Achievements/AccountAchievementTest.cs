@@ -30,7 +30,7 @@ namespace GW2SDK.Tests.Features.Accounts.Achievements
         {
             var sut = new AccountAchievementReader();
 
-            AssertEx.ForEach(_fixture.Db.AccountAchievements,
+            AssertEx.ForEach(_fixture.AccountAchievements,
                 json =>
                 {
                     using var document = JsonDocument.Parse(json);

@@ -2,7 +2,6 @@
 using System.Text.Json;
 using GW2SDK.Accounts;
 using GW2SDK.Json;
-using GW2SDK.Tests.Features.Accounts.Fixtures;
 using Xunit;
 
 namespace GW2SDK.Tests.Features.Accounts
@@ -68,7 +67,7 @@ namespace GW2SDK.Tests.Features.Accounts
         {
             var sut = new AccountReader();
 
-            using var document = JsonDocument.Parse(_fixture.Db.BasicAccount);
+            using var document = JsonDocument.Parse(_fixture.BasicAccount);
 
             var actual = sut.Read(document.RootElement, MissingMemberBehavior.Error);
 
@@ -91,7 +90,7 @@ namespace GW2SDK.Tests.Features.Accounts
         {
             var sut = new AccountReader();
 
-            using var document = JsonDocument.Parse(_fixture.Db.FullAccount);
+            using var document = JsonDocument.Parse(_fixture.FullAccount);
 
             var actual = sut.Read(document.RootElement, MissingMemberBehavior.Error);
 

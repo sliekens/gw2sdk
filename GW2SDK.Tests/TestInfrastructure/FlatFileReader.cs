@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.IO.Compression;
 
 namespace GW2SDK.Tests.TestInfrastructure
 {
@@ -13,7 +14,10 @@ namespace GW2SDK.Tests.TestInfrastructure
                 throw new ArgumentException("Path cannot be null or empty.", nameof(path));
             }
 
-            using var file = File.Open(path, FileMode.Open, FileAccess.Read, FileShare.None);
+            using Stream file = Path.GetExtension(path) == ".gz"
+                ? new GZipStream(File.Open(path, FileMode.Open, FileAccess.Read, FileShare.None), CompressionMode.Decompress)
+                : File.Open(path, FileMode.Open, FileAccess.Read, FileShare.None);
+
             using var stringReader = new StreamReader(file);
             string line;
             while ((line = stringReader.ReadLine()) is string)

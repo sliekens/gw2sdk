@@ -1,4 +1,6 @@
-﻿using GW2SDK.Tests.TestInfrastructure;
+﻿using System.Collections.Generic;
+using System.Linq;
+using GW2SDK.Tests.TestInfrastructure;
 
 namespace GW2SDK.Tests.Features.Skins.Fixtures
 {
@@ -7,9 +9,11 @@ namespace GW2SDK.Tests.Features.Skins.Fixtures
         public SkinFixture()
         {
             var reader = new FlatFileReader();
-            Db = new InMemorySkinDb(reader.Read("Data/skins.json"));
+            Skins = reader.Read("Data/skins.json.gz")
+                .ToList()
+                .AsReadOnly();
         }
 
-        public InMemorySkinDb Db { get; }
+        public IReadOnlyCollection<string> Skins { get; }
     }
 }

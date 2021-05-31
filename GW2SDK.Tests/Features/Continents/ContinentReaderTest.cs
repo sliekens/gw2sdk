@@ -30,7 +30,7 @@ namespace GW2SDK.Tests.Features.Continents
         {
             var sut = new ContinentReader();
 
-            AssertEx.ForEach(_fixture.Db.Continents,
+            AssertEx.ForEach(_fixture.Continents,
                 json =>
                 {
                     using var document = JsonDocument.Parse(json);

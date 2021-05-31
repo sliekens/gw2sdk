@@ -1,4 +1,6 @@
-﻿using GW2SDK.Tests.TestInfrastructure;
+﻿using System.Collections.Generic;
+using System.Linq;
+using GW2SDK.Tests.TestInfrastructure;
 
 namespace GW2SDK.Tests.Features.Achievements.Categories.Fixtures
 {
@@ -7,9 +9,11 @@ namespace GW2SDK.Tests.Features.Achievements.Categories.Fixtures
         public AchievementCategoryFixture()
         {
             var reader = new FlatFileReader();
-            Db = new InMemoryAchievementCategoryDb(reader.Read("Data/achievementCategories.json"));
+            AchievementCategories = reader.Read("Data/achievementCategories.json.gz")
+                .ToList()
+                .AsReadOnly();
         }
 
-        public InMemoryAchievementCategoryDb Db { get; }
+        public IReadOnlyCollection<string> AchievementCategories { get; }
     }
 }

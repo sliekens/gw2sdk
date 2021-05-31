@@ -37,7 +37,7 @@ namespace GW2SDK.Tests.Features.Commerce.Prices
         {
             var sut = new ItemPriceReader();
 
-            AssertEx.ForEach(_fixture.Db.ItemPrices,
+            AssertEx.ForEach(_fixture.ItemPrices,
                 json =>
                 {
                     using var document = JsonDocument.Parse(json);

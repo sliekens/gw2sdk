@@ -58,3 +58,4 @@
 #*.rtf   diff=astextplain
 #*.RTF   diff=astextplain
 GW2SDK.Tests/Data/*.json filter=lfs diff=lfs merge=lfs -text
+GW2SDK.Tests/Data/*.gz filter=lfs diff=lfs merge=lfs -text

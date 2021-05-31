@@ -37,7 +37,7 @@ namespace GW2SDK.Tests.Features.Recipes
         {
             var sut = new RecipeReader();
 
-            AssertEx.ForEach(_fixture.Db.Recipes,
+            AssertEx.ForEach(_fixture.Recipes,
                 json =>
                 {
                     using var document = JsonDocument.Parse(json);
