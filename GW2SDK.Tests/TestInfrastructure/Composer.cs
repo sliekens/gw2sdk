@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using GW2SDK.Accounts;
 using GW2SDK.Accounts.Achievements;
 using GW2SDK.Accounts.Banks;
+using GW2SDK.Accounts.DailyCrafting;
 using GW2SDK.Accounts.Recipes;
 using GW2SDK.Achievements;
 using GW2SDK.Achievements.Categories;
@@ -197,6 +198,11 @@ namespace GW2SDK.Tests.TestInfrastructure
             if (serviceType == typeof(ItemStatService))
             {
                 return new ItemStatService(Resolve<HttpClient>(), new ItemStatReader(), MissingMemberBehavior.Error);
+            }
+
+            if (serviceType == typeof(DailyCraftingService))
+            {
+                return new DailyCraftingService(Resolve<HttpClient>(), new DailyCraftingReader());
             }
 
             return null;
