@@ -12,7 +12,7 @@ namespace GW2SDK.Skins
 
         public string Name { get; init; } = "";
 
-        public string? Description { get; init; }
+        public string Description { get; init; } = "";
 
         public SkinFlag[] Flags { get; init; } = new SkinFlag[0];
 

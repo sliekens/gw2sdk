@@ -15,7 +15,7 @@ namespace GW2SDK.Traits
 
         public string Name { get; init; } = "";
 
-        public string? Description { get; init; }
+        public string Description { get; init; } = "";
 
         public TraitSlot Slot { get; init; }
 
