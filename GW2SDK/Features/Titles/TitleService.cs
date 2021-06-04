@@ -44,16 +44,6 @@ namespace GW2SDK.Titles
 
         public async Task<IDataTransferSet<Title>> GetTitlesByIds(IReadOnlyCollection<int> titleIds)
         {
-            if (titleIds is null)
-            {
-                throw new ArgumentNullException(nameof(titleIds));
-            }
-
-            if (titleIds.Count == 0)
-            {
-                throw new ArgumentException("Title IDs cannot be an empty collection.", nameof(titleIds));
-            }
-
             var request = new TitlesByIdsRequest(titleIds);
             return await _http.GetResourcesSet(request, json => _titleReader.ReadArray(json))
                 .ConfigureAwait(false);

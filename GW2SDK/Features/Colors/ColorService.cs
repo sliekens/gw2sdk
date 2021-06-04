@@ -44,16 +44,6 @@ namespace GW2SDK.Colors
 
         public async Task<IDataTransferSet<Color>> GetColorsByIds(IReadOnlyCollection<int> colorIds)
         {
-            if (colorIds is null)
-            {
-                throw new ArgumentNullException(nameof(colorIds));
-            }
-
-            if (colorIds.Count == 0)
-            {
-                throw new ArgumentException("Color IDs cannot be an empty collection.", nameof(colorIds));
-            }
-
             var request = new ColorsByIdsRequest(colorIds);
             return await _http.GetResourcesSet(request, json => _colorReader.ReadArray(json))
                 .ConfigureAwait(false);

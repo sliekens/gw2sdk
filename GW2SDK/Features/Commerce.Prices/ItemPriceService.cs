@@ -37,16 +37,6 @@ namespace GW2SDK.Commerce.Prices
 
         public async Task<IDataTransferSet<ItemPrice>> GetItemPricesByIds(IReadOnlyCollection<int> itemIds)
         {
-            if (itemIds is null)
-            {
-                throw new ArgumentNullException(nameof(itemIds));
-            }
-
-            if (itemIds.Count == 0)
-            {
-                throw new ArgumentException("Item IDs cannot be an empty collection.", nameof(itemIds));
-            }
-
             var request = new ItemPricesByIdsRequest(itemIds);
             return await _http.GetResourcesSet(request, json => _itemPriceReader.ReadArray(json))
                 .ConfigureAwait(false);

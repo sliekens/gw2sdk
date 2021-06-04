@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net.Http;
 using JetBrains.Annotations;
 using GW2SDK.Http;
@@ -20,6 +21,11 @@ namespace GW2SDK.Backstories.Answers.Http
             if (answerIds.Count == 0)
             {
                 throw new ArgumentException("Backstory answer IDs cannot be an empty collection.", nameof(answerIds));
+            }
+
+            if (answerIds.Any(string.IsNullOrEmpty))
+            {
+                throw new ArgumentException("Backstory answer IDs collection cannot contain empty values.", nameof(answerIds));
             }
 
             AnswerIds = answerIds;

@@ -37,16 +37,6 @@ namespace GW2SDK.Skins
 
         public async Task<IDataTransferSet<Skin>> GetSkinsByIds(IReadOnlyCollection<int> skinIds)
         {
-            if (skinIds is null)
-            {
-                throw new ArgumentNullException(nameof(skinIds));
-            }
-
-            if (skinIds.Count == 0)
-            {
-                throw new ArgumentException("Skin IDs cannot be an empty collection.", nameof(skinIds));
-            }
-
             var request = new SkinsByIdsRequest(skinIds);
             return await _http.GetResourcesSet(request, json => _skinReader.ReadArray(json))
                 .ConfigureAwait(false);

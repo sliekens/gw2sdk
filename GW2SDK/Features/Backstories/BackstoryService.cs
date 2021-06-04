@@ -69,16 +69,6 @@ namespace GW2SDK.Backstories
 
         public async Task<IDataTransferSet<BackstoryQuestion>> GetBackstoryQuestionsByIds(IReadOnlyCollection<int> questionIds)
         {
-            if (questionIds is null)
-            {
-                throw new ArgumentNullException(nameof(questionIds));
-            }
-
-            if (questionIds.Count == 0)
-            {
-                throw new ArgumentException("Backstory question IDs cannot be an empty collection.", nameof(questionIds));
-            }
-
             var request = new BackstoryQuestionsByIdsRequest(questionIds);
             return await _http.GetResourcesSet(request, json => _backstoryReader.Question.ReadArray(json))
                 .ConfigureAwait(false);
@@ -86,21 +76,6 @@ namespace GW2SDK.Backstories
 
         public async Task<IDataTransferSet<BackstoryAnswer>> GetBackstoryAnswersByIds(IReadOnlyCollection<string> answerIds)
         {
-            if (answerIds is null)
-            {
-                throw new ArgumentNullException(nameof(answerIds));
-            }
-
-            if (answerIds.Count == 0)
-            {
-                throw new ArgumentException("Backstory answer IDs cannot be an empty collection.", nameof(answerIds));
-            }
-
-            if (answerIds.Any(string.IsNullOrEmpty))
-            {
-                throw new ArgumentException("Backstory answer IDs collection cannot contain empty values.", nameof(answerIds));
-            }
-
             var request = new BackstoryAnswersByIdsRequest(answerIds);
             return await _http.GetResourcesSet(request, json => _backstoryReader.Answer.ReadArray(json))
                 .ConfigureAwait(false);
