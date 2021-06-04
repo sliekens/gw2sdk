@@ -44,16 +44,6 @@ namespace GW2SDK.MailCarriers
 
         public async Task<IDataTransferSet<MailCarrier>> GetMailCarriersByIds(IReadOnlyCollection<int> mailCarrierIds)
         {
-            if (mailCarrierIds is null)
-            {
-                throw new ArgumentNullException(nameof(mailCarrierIds));
-            }
-
-            if (mailCarrierIds.Count == 0)
-            {
-                throw new ArgumentException("Mail carrier IDs cannot be an empty collection.", nameof(mailCarrierIds));
-            }
-
             var request = new MailCarriersByIdsRequest(mailCarrierIds);
             return await _http.GetResourcesSet(request, json => _mailCarrierReader.ReadArray(json))
                 .ConfigureAwait(false);

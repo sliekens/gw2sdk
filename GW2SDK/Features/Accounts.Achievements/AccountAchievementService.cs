@@ -36,16 +36,6 @@ namespace GW2SDK.Accounts.Achievements
             string? accessToken = null
         )
         {
-            if (achievementIds is null)
-            {
-                throw new ArgumentNullException(nameof(achievementIds));
-            }
-
-            if (achievementIds.Count == 0)
-            {
-                throw new ArgumentException("Achiement IDs cannot be an empty collection.", nameof(achievementIds));
-            }
-
             var request = new AccountAchievementsByIdsRequest(achievementIds, accessToken);
             return await _http.GetResourcesSet(request, json => _accountAchievementReader.ReadArray(json))
                 .ConfigureAwait(false);

@@ -44,16 +44,6 @@ namespace GW2SDK.Worlds
 
         public async Task<IDataTransferSet<World>> GetWorldsByIds(IReadOnlyCollection<int> worldIds)
         {
-            if (worldIds is null)
-            {
-                throw new ArgumentNullException(nameof(worldIds));
-            }
-
-            if (worldIds.Count == 0)
-            {
-                throw new ArgumentException("World IDs cannot be an empty collection.", nameof(worldIds));
-            }
-
             var request = new WorldsByIdsRequest(worldIds);
             return await _http.GetResourcesSet(request, json => _worldReader.ReadArray(json))
                 .ConfigureAwait(false);

@@ -37,16 +37,6 @@ namespace GW2SDK.Recipes
 
         public async Task<IDataTransferSet<Recipe>> GetRecipesByIds(IReadOnlyCollection<int> recipeIds)
         {
-            if (recipeIds is null)
-            {
-                throw new ArgumentNullException(nameof(recipeIds));
-            }
-
-            if (recipeIds.Count == 0)
-            {
-                throw new ArgumentException("Recipe IDs cannot be an empty collection.", nameof(recipeIds));
-            }
-
             var request = new RecipesByIdsRequest(recipeIds);
             return await _http.GetResourcesSet(request, json => _recipeReader.ReadArray(json))
                 .ConfigureAwait(false);

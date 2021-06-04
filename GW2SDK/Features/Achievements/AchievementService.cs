@@ -38,16 +38,6 @@ namespace GW2SDK.Achievements
             IReadOnlyCollection<int> achievementIds
         )
         {
-            if (achievementIds is null)
-            {
-                throw new ArgumentNullException(nameof(achievementIds));
-            }
-
-            if (achievementIds.Count == 0)
-            {
-                throw new ArgumentException("Achievement IDs cannot be an empty collection.", nameof(achievementIds));
-            }
-
             var request = new AchievementsByIdsRequest(achievementIds);
             return await _http.GetResourcesSet(request, json => _achievementReader.ReadArray(json))
                 .ConfigureAwait(false);

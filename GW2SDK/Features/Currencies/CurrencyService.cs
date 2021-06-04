@@ -43,16 +43,6 @@ namespace GW2SDK.Currencies
 
         public async Task<IDataTransferSet<Currency>> GetCurrenciesByIds(IReadOnlyCollection<int> currencyIds)
         {
-            if (currencyIds is null)
-            {
-                throw new ArgumentNullException(nameof(currencyIds));
-            }
-
-            if (currencyIds.Count == 0)
-            {
-                throw new ArgumentException("Currency IDs cannot be an empty collection.", nameof(currencyIds));
-            }
-
             var request = new CurrenciesByIdsRequest(currencyIds);
             return await _http.GetResourcesSet(request, json => _currencyReader.ReadArray(json))
                 .ConfigureAwait(false);

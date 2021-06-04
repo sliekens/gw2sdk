@@ -45,21 +45,6 @@ namespace GW2SDK.Achievements.Groups
 
         public async Task<IDataTransferSet<AchievementGroup>> GetAchievementGroupsByIds(IReadOnlyCollection<string> achievementGroupIds)
         {
-            if (achievementGroupIds is null)
-            {
-                throw new ArgumentNullException(nameof(achievementGroupIds));
-            }
-
-            if (achievementGroupIds.Count == 0)
-            {
-                throw new ArgumentException("Achievement group IDs cannot be an empty collection.", nameof(achievementGroupIds));
-            }
-
-            if (achievementGroupIds.Any(string.IsNullOrEmpty))
-            {
-                throw new ArgumentException("Achievement group IDs collection cannot contain empty values.", nameof(achievementGroupIds));
-            }
-
             var request = new AchievementGroupsByIdsRequest(achievementGroupIds);
             return await _http.GetResourcesSet(request, json => _achievementGroupReader.ReadArray(json))
                 .ConfigureAwait(false);

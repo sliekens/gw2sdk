@@ -43,16 +43,6 @@ namespace GW2SDK.Traits
 
         public async Task<IDataTransferSet<Trait>> GetTraitsByIds(IReadOnlyCollection<int> traitIds)
         {
-            if (traitIds is null)
-            {
-                throw new ArgumentNullException(nameof(traitIds));
-            }
-
-            if (traitIds.Count == 0)
-            {
-                throw new ArgumentException("Trait IDs cannot be an empty collection.", nameof(traitIds));
-            }
-
             var request = new TraitsByIdsRequest(traitIds);
             return await _http.GetResourcesSet(request, json => _traitReader.ReadArray(json))
                 .ConfigureAwait(false);

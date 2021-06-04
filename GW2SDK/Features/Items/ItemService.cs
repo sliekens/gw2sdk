@@ -36,16 +36,6 @@ namespace GW2SDK.Items
 
         public async Task<IDataTransferSet<Item>> GetItemsByIds(IReadOnlyCollection<int> itemIds)
         {
-            if (itemIds is null)
-            {
-                throw new ArgumentNullException(nameof(itemIds));
-            }
-
-            if (itemIds.Count == 0)
-            {
-                throw new ArgumentException("Item IDs cannot be an empty collection.", nameof(itemIds));
-            }
-
             var request = new ItemsByIdsRequest(itemIds); 
             return await _http.GetResourcesSet(request, json => _itemReader.ReadArray(json))
                 .ConfigureAwait(false);

@@ -44,16 +44,6 @@ namespace GW2SDK.Continents
 
         public async Task<IDataTransferSet<Continent>> GetContinentsByIds(IReadOnlyCollection<int> continentIds)
         {
-            if (continentIds is null)
-            {
-                throw new ArgumentNullException(nameof(continentIds));
-            }
-
-            if (continentIds.Count == 0)
-            {
-                throw new ArgumentException("Continent IDs cannot be an empty collection.", nameof(continentIds));
-            }
-
             var request = new ContinentsByIdsRequest(continentIds);
             return await _http.GetResourcesSet(request, json => _continentReader.ReadArray(json))
                 .ConfigureAwait(false);
@@ -92,16 +82,6 @@ namespace GW2SDK.Continents
             IReadOnlyCollection<int> floorIds
         )
         {
-            if (floorIds is null)
-            {
-                throw new ArgumentNullException(nameof(floorIds));
-            }
-
-            if (floorIds.Count == 0)
-            {
-                throw new ArgumentException("Floor IDs cannot be an empty collection.", nameof(floorIds));
-            }
-
             var request = new FloorsByIdsRequest(continentId, floorIds);
             return await _http.GetResourcesSet(request, json => _continentReader.Floor.ReadArray(json))
                 .ConfigureAwait(false);
