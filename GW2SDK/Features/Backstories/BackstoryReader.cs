@@ -68,8 +68,8 @@ namespace GW2SDK.Backstories
                 Description = description.GetValue(),
                 Answers = answers.Select(value => value.GetArray(item => item.GetStringRequired())),
                 Order = order.GetValue(),
-                Professions = professions.GetValue(),
-                Races = races.GetValue()
+                Professions = professions.GetValue(missingMemberBehavior),
+                Races = races.GetValue(missingMemberBehavior)
             };
         }
 
@@ -127,8 +127,8 @@ namespace GW2SDK.Backstories
                 Description = description.GetValue(),
                 Journal = journal.GetValue(),
                 Question = question.GetValue(),
-                Professions = professions.GetValue(),
-                Races = races.GetValue()
+                Professions = professions.GetValue(missingMemberBehavior),
+                Races = races.GetValue(missingMemberBehavior)
             };
         }
 

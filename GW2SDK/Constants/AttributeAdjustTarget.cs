@@ -5,7 +5,7 @@ namespace GW2SDK
 {
     [PublicAPI]
     [DefaultValue(None)]
-    public enum TraitTarget
+    public enum AttributeAdjustTarget
     {
         None,
 

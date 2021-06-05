@@ -1,11 +1,11 @@
 ﻿using GW2SDK.Annotations;
 using JetBrains.Annotations;
 
-namespace GW2SDK.Traits
+namespace GW2SDK.Skills
 {
     [PublicAPI]
     [DataTransferObject(RootObject = false)]
-    public sealed record TraitCombinationFact
+    public sealed record TraitedSkillFact
     {
         /// <summary>The ID of the trait that activates this combination.</summary>
         public int RequiresTrait { get; init; }
@@ -14,6 +14,6 @@ namespace GW2SDK.Traits
         /// the existing facts.</summary>
         public int? Overrides { get; init; }
 
-        public TraitFact Fact { get; init; } = new();
+        public SkillFact Fact { get; init; } = new();
     }
 }

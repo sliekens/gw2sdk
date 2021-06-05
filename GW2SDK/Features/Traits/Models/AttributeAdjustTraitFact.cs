@@ -9,6 +9,6 @@ namespace GW2SDK.Traits
     {
         public int Value { get; init; }
 
-        public TraitTarget Target { get; init; }
+        public AttributeAdjustTarget Target { get; init; }
     }
 }

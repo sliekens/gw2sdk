@@ -1,9 +1,9 @@
 ﻿using JetBrains.Annotations;
 
-namespace GW2SDK.Traits
+namespace GW2SDK.Skills
 {
     [PublicAPI]
-    public sealed record ComboFinisherTraitFact : TraitFact
+    public sealed record ComboFinisherSkillFact : SkillFact
     {
         public int Percent { get; init; }
 

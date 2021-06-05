@@ -13,7 +13,7 @@ namespace GW2SDK.Traits
 
         public TraitFact[] Facts { get; init; } = new TraitFact[0];
 
-        public TraitCombinationFact[]? TraitedFacts { get; init; }
+        public CompoundTraitFact[]? TraitedFacts { get; init; }
 
         public string Description { get; init; } = "";
 

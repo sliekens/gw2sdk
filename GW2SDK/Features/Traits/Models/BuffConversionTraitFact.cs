@@ -9,8 +9,8 @@ namespace GW2SDK.Traits
     {
         public int Percent { get; init; }
 
-        public TraitTarget Source { get; init; }
+        public AttributeAdjustTarget Source { get; init; }
 
-        public TraitTarget Target { get; init; }
+        public AttributeAdjustTarget Target { get; init; }
     }
 }

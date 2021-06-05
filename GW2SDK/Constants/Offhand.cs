@@ -7,6 +7,8 @@ namespace GW2SDK
     {
         Nothing = 1,
 
+        None,
+
         Dagger,
 
         Pistol
