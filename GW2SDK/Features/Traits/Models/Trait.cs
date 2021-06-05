@@ -21,7 +21,7 @@ namespace GW2SDK.Traits
 
         public TraitFact[]? Facts { get; init; }
 
-        public TraitCombinationFact[]? TraitedFacts { get; init; }
+        public CompoundTraitFact[]? TraitedFacts { get; init; }
 
         public TraitSkill[]? Skills { get; init; }
 

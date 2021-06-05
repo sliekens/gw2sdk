@@ -1,9 +1,9 @@
 ﻿using JetBrains.Annotations;
 
-namespace GW2SDK.Traits
+namespace GW2SDK.Skills
 {
     [PublicAPI]
-    public sealed record NumberTraitFact : TraitFact
+    public sealed record NumberSkillFact : SkillFact
     {
         public int Value { get; init; }
     }

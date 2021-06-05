@@ -11,6 +11,8 @@ namespace GW2SDK
 
         Fire,
 
+        Ice,
+
         Light,
 
         Lightning,

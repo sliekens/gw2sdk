@@ -39,6 +39,10 @@ namespace GW2SDK
 
         Downed_3,
 
-        Downed_4
+        Downed_4,
+
+        Pet,
+
+        Toolbelt
     }
 }

@@ -25,6 +25,7 @@ using GW2SDK.Json;
 using GW2SDK.MailCarriers;
 using GW2SDK.Professions;
 using GW2SDK.Recipes;
+using GW2SDK.Skills;
 using GW2SDK.Skins;
 using GW2SDK.Subtokens;
 using GW2SDK.Titles;
@@ -203,6 +204,11 @@ namespace GW2SDK.Tests.TestInfrastructure
             if (serviceType == typeof(DailyCraftingService))
             {
                 return new DailyCraftingService(Resolve<HttpClient>(), new DailyCraftingReader());
+            }
+
+            if (serviceType == typeof(SkillService))
+            {
+                return new SkillService(Resolve<HttpClient>(), new SkillReader(), MissingMemberBehavior.Error);
             }
 
             return null;

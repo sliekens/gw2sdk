@@ -17,7 +17,7 @@ namespace GW2SDK.Traits
             var description = new OptionalMember<string>("description");
             var slot = new RequiredMember<TraitSlot>("slot");
             var facts = new OptionalMember<TraitFact[]>("facts");
-            var traitedFacts = new OptionalMember<TraitCombinationFact[]>("traited_facts");
+            var traitedFacts = new OptionalMember<CompoundTraitFact[]>("traited_facts");
             var skills = new OptionalMember<TraitSkill[]>("skills");
             var specialization = new RequiredMember<int>("specialization");
             var icon = new RequiredMember<string>("icon");
@@ -85,7 +85,7 @@ namespace GW2SDK.Traits
                 Icon = icon.GetValue(),
                 SpezializationId = specialization.GetValue(),
                 Facts = facts.Select(value => value.GetArray(item => ReadTraitFact(item, missingMemberBehavior, out _, out _))),
-                TraitedFacts = traitedFacts.Select(value => value.GetArray(item => ReadTraitCombinationFact(item, missingMemberBehavior))),
+                TraitedFacts = traitedFacts.Select(value => value.GetArray(item => ReadCompoundTraitFact(item, missingMemberBehavior))),
                 Skills = skills.Select(value => value.GetArray(item => ReadTraitSkill(item, missingMemberBehavior)))
             };
         }
@@ -190,7 +190,7 @@ namespace GW2SDK.Traits
             var text = new OptionalMember<string>("text");
             var icon = new OptionalMember<string>("icon");
             var value = new RequiredMember<int>("value");
-            var target = new RequiredMember<TraitTarget>("target");
+            var target = new RequiredMember<AttributeAdjustTarget>("target");
             foreach (var member in json.EnumerateObject())
             {
                 if (member.NameEquals("type"))
@@ -318,8 +318,8 @@ namespace GW2SDK.Traits
             var text = new OptionalMember<string>("text");
             var icon = new OptionalMember<string>("icon");
             var percent = new RequiredMember<int>("percent");
-            var source = new RequiredMember<TraitTarget>("source");
-            var target = new RequiredMember<TraitTarget>("target");
+            var source = new RequiredMember<AttributeAdjustTarget>("source");
+            var target = new RequiredMember<AttributeAdjustTarget>("target");
             foreach (var member in json.EnumerateObject())
             {
                 if (member.NameEquals("type"))
@@ -1170,10 +1170,10 @@ namespace GW2SDK.Traits
             };
         }
 
-        private TraitCombinationFact ReadTraitCombinationFact(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+        private CompoundTraitFact ReadCompoundTraitFact(JsonElement json, MissingMemberBehavior missingMemberBehavior)
         {
             var fact = ReadTraitFact(json, missingMemberBehavior, out var requiresTrait, out var overrides);
-            return new TraitCombinationFact
+            return new CompoundTraitFact
             {
                 Fact = fact,
                 RequiresTrait = requiresTrait.GetValueOrDefault(),
@@ -1185,7 +1185,7 @@ namespace GW2SDK.Traits
         {
             var name = new RequiredMember<string>("name");
             var facts = new RequiredMember<TraitFact[]>("facts");
-            var traitedFacts = new OptionalMember<TraitCombinationFact[]>("traited_facts");
+            var traitedFacts = new OptionalMember<CompoundTraitFact[]>("traited_facts");
             var description = new RequiredMember<string>("description");
             var icon = new RequiredMember<string>("icon");
             var id = new RequiredMember<int>("id");
@@ -1243,12 +1243,12 @@ namespace GW2SDK.Traits
             {
                 Name = name.GetValue(),
                 Facts = facts.Select(value => value.GetArray(item => ReadTraitFact(item, missingMemberBehavior, out _, out _))),
-                TraitedFacts = traitedFacts.Select(value => value.GetArray(item => ReadTraitCombinationFact(item, missingMemberBehavior))),
+                TraitedFacts = traitedFacts.Select(value => value.GetArray(item => ReadCompoundTraitFact(item, missingMemberBehavior))),
                 Description = description.GetValue(),
                 Icon = icon.GetValue(),
                 Id = id.GetValue(),
                 ChatLink = chatLink.GetValue(),
-                Categories = categories.GetValue()
+                Categories = categories.GetValue(missingMemberBehavior)
             };
         }
 
