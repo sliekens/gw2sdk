@@ -14,6 +14,7 @@ namespace GW2SDK.Skills
         IJsonReader<PetSkill>,
         IJsonReader<ProfessionSkill>,
         IJsonReader<ToolbeltSkill>,
+        IJsonReader<TransformSkill>,
         IJsonReader<UtilitySkill>,
         IJsonReader<WeaponSkill>
     {
@@ -824,7 +825,6 @@ namespace GW2SDK.Skills
         }
 
         ToolbeltSkill IJsonReader<ToolbeltSkill>.Read(JsonElement json, MissingMemberBehavior missingMemberBehavior)
-
         {
             var id = new RequiredMember<int>("id");
             var name = new RequiredMember<string>("name");
@@ -918,6 +918,124 @@ namespace GW2SDK.Skills
             }
 
             return new ToolbeltSkill
+            {
+                Id = id.GetValue(),
+                Name = name.GetValue(),
+                Facts =
+                    facts.Select(value =>
+                        value.GetArray(item => ReadSkillFact(item, missingMemberBehavior, out _, out _))),
+                TraitedFacts =
+                    traitedFacts.Select(value =>
+                        value.GetArray(item => ReadTraitedSkillFact(item, missingMemberBehavior))),
+                Description = description.GetValue(),
+                Icon = icon.GetValueOrNull(),
+                WeaponType = weaponType.GetValue(missingMemberBehavior),
+                Professions = professions.GetValue(missingMemberBehavior),
+                Slot = slot.GetValue(missingMemberBehavior),
+                FlipSkill = flipSkill.GetValue(),
+                NextChain = nextChain.GetValue(),
+                PreviousChain = prevChain.GetValue(),
+                SkillFlag = flags.GetValue(missingMemberBehavior),
+                ChatLink = chatLink.GetValue(),
+                Categories = categories.GetValue(missingMemberBehavior)
+            };
+        }
+
+        TransformSkill IJsonReader<TransformSkill>.
+            Read(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+        {
+            var id = new RequiredMember<int>("id");
+            var name = new RequiredMember<string>("name");
+            var facts = new OptionalMember<SkillFact[]>("facts");
+            var traitedFacts = new OptionalMember<TraitedSkillFact[]>("traited_facts");
+            var description = new RequiredMember<string>("description");
+            var icon = new OptionalMember<string>("icon");
+            var weaponType = new NullableMember<WeaponType>("weapon_type");
+            var professions = new OptionalMember<ProfessionName[]>("professions");
+            var slot = new NullableMember<SkillSlot>("slot");
+            var flipSkill = new NullableMember<int>("flip_skill");
+            var nextChain = new NullableMember<int>("next_chain");
+            var prevChain = new NullableMember<int>("prev_chain");
+            var flags = new RequiredMember<SkillFlag[]>("flags");
+            var chatLink = new RequiredMember<string>("chat_link");
+            var categories = new OptionalMember<SkillCategoryName[]>("categories");
+
+            foreach (var member in json.EnumerateObject())
+            {
+                if (member.NameEquals("type"))
+                {
+                    if (!member.Value.ValueEquals("Transform"))
+                    {
+                        throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    }
+                }
+                else if (member.NameEquals(name.Name))
+                {
+                    name = name.From(member.Value);
+                }
+                else if (member.NameEquals(facts.Name))
+                {
+                    facts = facts.From(member.Value);
+                }
+                else if (member.NameEquals(traitedFacts.Name))
+                {
+                    traitedFacts = traitedFacts.From(member.Value);
+                }
+                else if (member.NameEquals(description.Name))
+                {
+                    description = description.From(member.Value);
+                }
+                else if (member.NameEquals(icon.Name))
+                {
+                    icon = icon.From(member.Value);
+                }
+                else if (member.NameEquals(weaponType.Name))
+                {
+                    weaponType = weaponType.From(member.Value);
+                }
+                else if (member.NameEquals(professions.Name))
+                {
+                    professions = professions.From(member.Value);
+                }
+                else if (member.NameEquals(slot.Name))
+                {
+                    slot = slot.From(member.Value);
+                }
+                else if (member.NameEquals(flipSkill.Name))
+                {
+                    flipSkill = flipSkill.From(member.Value);
+                }
+                else if (member.NameEquals(nextChain.Name))
+                {
+                    nextChain = nextChain.From(member.Value);
+                }
+                else if (member.NameEquals(prevChain.Name))
+                {
+                    prevChain = prevChain.From(member.Value);
+                }
+                else if (member.NameEquals(flags.Name))
+                {
+                    flags = flags.From(member.Value);
+                }
+                else if (member.NameEquals(id.Name))
+                {
+                    id = id.From(member.Value);
+                }
+                else if (member.NameEquals(chatLink.Name))
+                {
+                    chatLink = chatLink.From(member.Value);
+                }
+                else if (member.NameEquals(categories.Name))
+                {
+                    categories = categories.From(member.Value);
+                }
+                else if (missingMemberBehavior == MissingMemberBehavior.Error)
+                {
+                    throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
+                }
+            }
+
+            return new TransformSkill
             {
                 Id = id.GetValue(),
                 Name = name.GetValue(),
@@ -1269,6 +1387,8 @@ namespace GW2SDK.Skills
                         return ((IJsonReader<ProfessionSkill>) this).Read(json, missingMemberBehavior);
                     case "Toolbelt":
                         return ((IJsonReader<ToolbeltSkill>) this).Read(json, missingMemberBehavior);
+                    case "Transform":
+                        return ((IJsonReader<TransformSkill>)this).Read(json, missingMemberBehavior);
                     case "Utility":
                         return ((IJsonReader<UtilitySkill>) this).Read(json, missingMemberBehavior);
                     case "Weapon":
