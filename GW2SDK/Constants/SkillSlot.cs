@@ -43,6 +43,8 @@ namespace GW2SDK
 
         Pet,
 
-        Toolbelt
+        Toolbelt,
+
+        Transform_1
     }
 }
