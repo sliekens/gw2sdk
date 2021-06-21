@@ -8,6 +8,14 @@ namespace GW2SDK.Tests.Features.Achievements.Categories
 {
     public class AchievementCategoryServiceTest
     {
+        private static class AchievementCategoryFact
+        {
+            public static void Id_is_positive(AchievementCategory actual) => Assert.InRange(actual.Id, 1, int.MaxValue);
+           
+            public static void Order_is_not_negative(AchievementCategory actual) => Assert.InRange(actual.Order, 0, int.MaxValue);
+        }
+
+
         [Fact]
         [Trait("Feature",  "Achievements.Categories")]
         [Trait("Category", "Integration")]
@@ -19,6 +27,12 @@ namespace GW2SDK.Tests.Features.Achievements.Categories
             var actual = await sut.GetAchievementCategories();
 
             Assert.Equal(actual.ResultTotal, actual.Count);
+            Assert.All(actual,
+                achievementCategory =>
+                {
+                    AchievementCategoryFact.Id_is_positive(achievementCategory);
+                    AchievementCategoryFact.Order_is_not_negative(achievementCategory);
+                });
         }
 
         [Fact]

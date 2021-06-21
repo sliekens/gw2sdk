@@ -81,7 +81,6 @@ namespace GW2SDK.TestDataHelper
                 .AddHttpMessageHandler<BadMessageHandler>()
                 .AddHttpMessageHandler<RateLimitHandler>().AddTypedClient<ContinentService>()
                 .AddTypedClient<JsonAchievementService>()
-                .AddTypedClient<JsonAchievementCategoriesService>()
                 .AddTypedClient<JsonAchievementGroupsService>()
                 .AddTypedClient<JsonApiInfoService>()
                 .AddTypedClient<JsonBuildService>()
