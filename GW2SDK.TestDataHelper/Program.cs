@@ -41,17 +41,6 @@ namespace GW2SDK.TestDataHelper
                 }
             }
 
-            await using (var file = CreateTextCompressed(Path.Combine(outDir, "achievementCategories.json.gz")))
-            {
-                Console.WriteLine("Getting achievement categories.");
-                var service = services.Resolve<JsonAchievementCategoriesService>();
-                var jsons = await service.GetAllJsonAchievementCategories();
-                foreach (var json in jsons)
-                {
-                    await file.WriteLineAsync(json);
-                }
-            }
-
             await using (var file = CreateTextCompressed(Path.Combine(outDir, "achievementGroups.json.gz")))
             {
                 Console.WriteLine("Getting achievement groups.");
