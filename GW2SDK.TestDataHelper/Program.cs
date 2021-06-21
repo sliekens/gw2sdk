@@ -41,17 +41,6 @@ namespace GW2SDK.TestDataHelper
                 }
             }
 
-            await using (var file = CreateTextCompressed(Path.Combine(outDir, "colors.json.gz")))
-            {
-                Console.WriteLine("Getting dyes.");
-                var service = services.Resolve<JsonColorService>();
-                var jsons = await service.GetAllJsonColors();
-                foreach (var json in jsons)
-                {
-                    await file.WriteLineAsync(json);
-                }
-            }
-
             await using (var file = CreateTextCompressed(Path.Combine(outDir, "worlds.json.gz")))
             {
                 Console.WriteLine("Getting worlds.");
