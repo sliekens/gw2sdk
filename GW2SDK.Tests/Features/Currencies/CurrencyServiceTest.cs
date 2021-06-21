@@ -8,6 +8,20 @@ namespace GW2SDK.Tests.Features.Currencies
 {
     public class CurrencyServiceTest
     {
+        private static class CurrencyFact
+        {
+            public static void Id_is_positive(Currency actual) => Assert.InRange(actual.Id, 1, int.MaxValue);
+
+            public static void Name_is_not_empty(Currency actual) => Assert.NotEmpty(actual.Name);
+
+            public static void Description_is_not_empty(Currency actual) => Assert.NotEmpty(actual.Description);
+
+            public static void Order_is_positive(Currency actual) => Assert.InRange(actual.Order, 1, 1000);
+
+            public static void Icon_is_not_empty(Currency actual) => Assert.NotEmpty(actual.Icon);
+        }
+
+
         [Fact]
         [Trait("Feature",  "Currencies")]
         [Trait("Category", "Integration")]
@@ -19,6 +33,15 @@ namespace GW2SDK.Tests.Features.Currencies
             var actual = await sut.GetCurrencies();
 
             Assert.Equal(actual.ResultTotal, actual.Count);
+            Assert.All(actual,
+                currency =>
+                {
+                    CurrencyFact.Id_is_positive(currency);
+                    CurrencyFact.Name_is_not_empty(currency);
+                    CurrencyFact.Description_is_not_empty(currency);
+                    CurrencyFact.Order_is_positive(currency);
+                    CurrencyFact.Icon_is_not_empty(currency);
+                });
         }
 
         [Fact]
