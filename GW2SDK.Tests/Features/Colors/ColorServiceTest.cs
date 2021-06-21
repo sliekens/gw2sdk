@@ -8,6 +8,14 @@ namespace GW2SDK.Tests.Features.Colors
 {
     public class ColorServiceTest
     {
+        private static class ColorFact
+        {
+            public static void Base_rgb_contains_red_green_blue(Color actual) => Assert.Collection(actual.BaseRgb,
+                red => Assert.InRange(red,     1, 255),
+                green => Assert.InRange(green, 1, 255),
+                blue => Assert.InRange(blue,   1, 255));
+        }
+
         [Fact]
         [Trait("Feature",  "Colors")]
         [Trait("Category", "Integration")]
@@ -19,6 +27,11 @@ namespace GW2SDK.Tests.Features.Colors
             var actual = await sut.GetColors();
 
             Assert.Equal(actual.ResultTotal, actual.Count);
+            Assert.All(actual,
+                color =>
+                {
+                    ColorFact.Base_rgb_contains_red_green_blue(color);
+                });
         }
 
         [Fact]
