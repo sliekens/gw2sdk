@@ -8,6 +8,11 @@ namespace GW2SDK.Tests.Features.Achievements.Groups
 {
     public class AchievementGroupServiceTest
     {
+        private static class AchievementGroupFact
+        {
+            public static void Order_is_not_negative(AchievementGroup actual) => Assert.InRange(actual.Order, 0, int.MaxValue);
+        }
+
         [Fact]
         [Trait("Feature",  "Achievements.Groups")]
         [Trait("Category", "Integration")]
@@ -19,6 +24,11 @@ namespace GW2SDK.Tests.Features.Achievements.Groups
             var actual = await sut.GetAchievementGroups();
 
             Assert.Equal(actual.ResultTotal, actual.Count);
+            Assert.All(actual,
+                achievementGroup =>
+                {
+                    AchievementGroupFact.Order_is_not_negative(achievementGroup);
+                });
         }
 
         [Fact]
