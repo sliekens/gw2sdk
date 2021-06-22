@@ -8,6 +8,11 @@ namespace GW2SDK.Tests.Features.Continents
 {
     public class ContinentServiceTest
     {
+        private static class ContinentFact
+        {
+            public static void Id_is_1_or_2(Continent actual) => Assert.InRange(actual.Id, 1, 2);
+        }
+
         [Fact]
         [Trait("Feature",  "Continents")]
         [Trait("Category", "Integration")]
@@ -19,6 +24,11 @@ namespace GW2SDK.Tests.Features.Continents
             var actual = await sut.GetContinents();
 
             Assert.Equal(actual.ResultTotal, actual.Count);
+            Assert.All(actual,
+                continent =>
+                {
+                    ContinentFact.Id_is_1_or_2(continent);
+                });
         }
 
         [Fact]
