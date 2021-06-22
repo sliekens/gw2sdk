@@ -7,7 +7,6 @@ using Xunit;
 
 namespace GW2SDK.Tests.Features.Continents
 {
-    [Collection(nameof(ContinentDbCollection))]
     public class FloorTest
     {
         public FloorTest(FloorFixture fixture)
