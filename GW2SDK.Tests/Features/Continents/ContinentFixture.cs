@@ -2,11 +2,11 @@
 using System.Linq;
 using GW2SDK.Tests.TestInfrastructure;
 
-namespace GW2SDK.Tests.Features.Continents.Fixtures
+namespace GW2SDK.Tests.Features.Continents
 {
-    public class FloorFixture
+    public class ContinentFixture
     {
-        public FloorFixture()
+        public ContinentFixture()
         {
             var reader = new FlatFileReader();
             Floors = reader.Read("Data/continents_1_floors.json.gz")
