@@ -1,20 +1,19 @@
 ﻿using System.Text.Json;
 using GW2SDK.Continents;
 using GW2SDK.Json;
-using GW2SDK.Tests.Features.Continents.Fixtures;
 using GW2SDK.Tests.TestInfrastructure;
 using Xunit;
 
 namespace GW2SDK.Tests.Features.Continents
 {
-    public class FloorTest
+    public class ContinentReaderTest : IClassFixture<ContinentFixture>
     {
-        public FloorTest(FloorFixture fixture)
+        public ContinentReaderTest(ContinentFixture fixture)
         {
             _fixture = fixture;
         }
 
-        private readonly FloorFixture _fixture;
+        private readonly ContinentFixture _fixture;
 
         private static class FloorFact
         {
