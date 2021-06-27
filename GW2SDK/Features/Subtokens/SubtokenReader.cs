@@ -8,7 +8,7 @@ namespace GW2SDK.Subtokens
     [PublicAPI]
     public sealed class SubtokenReader : ISubtokenReader
     {
-        public CreatedSubtoken Read(JsonElement json, MissingMemberBehavior missingMemberBehavior = default)
+        public CreatedSubtoken Read(JsonElement json, MissingMemberBehavior missingMemberBehavior)
         {
             var subtoken = new RequiredMember<string>("subtoken");
 

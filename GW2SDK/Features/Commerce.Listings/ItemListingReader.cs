@@ -8,7 +8,7 @@ namespace GW2SDK.Commerce.Listings
     [PublicAPI]
     public sealed class ItemListingReader : IItemListingReader
     {
-        public ItemListing Read(JsonElement json, MissingMemberBehavior missingMemberBehavior = default)
+        public ItemListing Read(JsonElement json, MissingMemberBehavior missingMemberBehavior)
         {
             var id = new RequiredMember<int>("id");
             var demand = new RequiredMember<ItemListingLine[]>("buys");

@@ -9,7 +9,7 @@ namespace GW2SDK.Accounts.Banks
     [PublicAPI]
     public sealed class BankReader : IBankReader
     {
-        public Bank Read(JsonElement json, MissingMemberBehavior missingMemberBehavior = default)
+        public Bank Read(JsonElement json, MissingMemberBehavior missingMemberBehavior)
         {
             var slots = new List<BankSlot?>(json.GetArrayLength());
 

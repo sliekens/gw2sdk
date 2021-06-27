@@ -8,7 +8,7 @@ namespace GW2SDK.ItemStats
     [PublicAPI]
     public sealed class ItemStatReader : IItemStatReader
     {
-        public ItemStat Read(JsonElement json, MissingMemberBehavior missingMemberBehavior = default)
+        public ItemStat Read(JsonElement json, MissingMemberBehavior missingMemberBehavior)
         {
             var id = new RequiredMember<int>("id");
             var name = new RequiredMember<string>("name");

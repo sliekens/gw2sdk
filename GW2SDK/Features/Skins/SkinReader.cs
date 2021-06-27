@@ -667,7 +667,10 @@ namespace GW2SDK.Skins
             };
         }
 
-        ForagingToolSkin IJsonReader<ForagingToolSkin>.Read(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+        ForagingToolSkin IJsonReader<ForagingToolSkin>.Read(
+            JsonElement json,
+            MissingMemberBehavior missingMemberBehavior
+        )
         {
             var name = new RequiredMember<string>("name");
             var description = new OptionalMember<string>("description");
@@ -748,7 +751,10 @@ namespace GW2SDK.Skins
             };
         }
 
-        GatheringToolSkin IJsonReader<GatheringToolSkin>.Read(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+        GatheringToolSkin IJsonReader<GatheringToolSkin>.Read(
+            JsonElement json,
+            MissingMemberBehavior missingMemberBehavior
+        )
         {
             switch (json.GetProperty("details").GetProperty("type").GetString())
             {
@@ -2423,7 +2429,7 @@ namespace GW2SDK.Skins
             };
         }
 
-        public Skin Read(JsonElement json, MissingMemberBehavior missingMemberBehavior = default)
+        public Skin Read(JsonElement json, MissingMemberBehavior missingMemberBehavior)
         {
             switch (json.GetProperty("type").GetString())
             {
@@ -3021,7 +3027,10 @@ namespace GW2SDK.Skins
             };
         }
 
-        ToyTwoHandedSkin IJsonReader<ToyTwoHandedSkin>.Read(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+        ToyTwoHandedSkin IJsonReader<ToyTwoHandedSkin>.Read(
+            JsonElement json,
+            MissingMemberBehavior missingMemberBehavior
+        )
         {
             var name = new RequiredMember<string>("name");
             var description = new OptionalMember<string>("description");

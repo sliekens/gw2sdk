@@ -10,7 +10,7 @@ namespace GW2SDK.Professions
     public sealed class ProfessionReader : IProfessionReader,
         IJsonReader<ProfessionName>
     {
-        public Profession Read(JsonElement json, MissingMemberBehavior missingMemberBehavior = default)
+        public Profession Read(JsonElement json, MissingMemberBehavior missingMemberBehavior)
         {
             var id = new RequiredMember<ProfessionName>("id");
             var name = new RequiredMember<string>("name");

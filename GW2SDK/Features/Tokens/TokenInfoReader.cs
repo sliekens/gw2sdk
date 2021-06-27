@@ -10,7 +10,7 @@ namespace GW2SDK.Tokens
         IJsonReader<ApiKeyInfo>,
         IJsonReader<SubtokenInfo>
     {
-        public TokenInfo Read(JsonElement json, MissingMemberBehavior missingMemberBehavior = default)
+        public TokenInfo Read(JsonElement json, MissingMemberBehavior missingMemberBehavior)
         {
             switch (json.GetProperty("type").GetString())
             {

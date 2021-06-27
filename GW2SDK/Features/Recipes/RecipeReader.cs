@@ -700,7 +700,10 @@ namespace GW2SDK.Recipes
             };
         }
 
-        ConsumableRecipe IJsonReader<ConsumableRecipe>.Read(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+        ConsumableRecipe IJsonReader<ConsumableRecipe>.Read(
+            JsonElement json,
+            MissingMemberBehavior missingMemberBehavior
+        )
         {
             var outputItemId = new RequiredMember<int>("output_item_id");
             var outputItemCount = new RequiredMember<int>("output_item_count");
@@ -1340,7 +1343,10 @@ namespace GW2SDK.Recipes
             };
         }
 
-        GreatswordRecipe IJsonReader<GreatswordRecipe>.Read(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+        GreatswordRecipe IJsonReader<GreatswordRecipe>.Read(
+            JsonElement json,
+            MissingMemberBehavior missingMemberBehavior
+        )
         {
             var outputItemId = new RequiredMember<int>("output_item_id");
             var outputItemCount = new RequiredMember<int>("output_item_count");
@@ -1420,7 +1426,10 @@ namespace GW2SDK.Recipes
             };
         }
 
-        GuildConsumableRecipe IJsonReader<GuildConsumableRecipe>.Read(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+        GuildConsumableRecipe IJsonReader<GuildConsumableRecipe>.Read(
+            JsonElement json,
+            MissingMemberBehavior missingMemberBehavior
+        )
         {
             var outputItemId = new RequiredMember<int>("output_item_id");
             var outputItemCount = new RequiredMember<int>("output_item_count");
@@ -1512,7 +1521,10 @@ namespace GW2SDK.Recipes
             };
         }
 
-        GuildConsumableWvwRecipe IJsonReader<GuildConsumableWvwRecipe>.Read(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+        GuildConsumableWvwRecipe IJsonReader<GuildConsumableWvwRecipe>.Read(
+            JsonElement json,
+            MissingMemberBehavior missingMemberBehavior
+        )
         {
             var outputItemId = new RequiredMember<int>("output_item_id");
             var outputItemCount = new RequiredMember<int>("output_item_count");
@@ -1598,7 +1610,10 @@ namespace GW2SDK.Recipes
             };
         }
 
-        GuildDecorationRecipe IJsonReader<GuildDecorationRecipe>.Read(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+        GuildDecorationRecipe IJsonReader<GuildDecorationRecipe>.Read(
+            JsonElement json,
+            MissingMemberBehavior missingMemberBehavior
+        )
         {
             var outputItemId = new RequiredMember<int>("output_item_id");
             var outputItemCount = new RequiredMember<int>("output_item_count");
@@ -1930,7 +1945,10 @@ namespace GW2SDK.Recipes
             };
         }
 
-        IngredientCookingRecipe IJsonReader<IngredientCookingRecipe>.Read(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+        IngredientCookingRecipe IJsonReader<IngredientCookingRecipe>.Read(
+            JsonElement json,
+            MissingMemberBehavior missingMemberBehavior
+        )
         {
             var outputItemId = new RequiredMember<int>("output_item_id");
             var outputItemCount = new RequiredMember<int>("output_item_count");
@@ -2010,7 +2028,10 @@ namespace GW2SDK.Recipes
             };
         }
 
-        InscriptionRecipe IJsonReader<InscriptionRecipe>.Read(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+        InscriptionRecipe IJsonReader<InscriptionRecipe>.Read(
+            JsonElement json,
+            MissingMemberBehavior missingMemberBehavior
+        )
         {
             var outputItemId = new RequiredMember<int>("output_item_id");
             var outputItemCount = new RequiredMember<int>("output_item_count");
@@ -2170,7 +2191,10 @@ namespace GW2SDK.Recipes
             };
         }
 
-        LegendaryComponentRecipe IJsonReader<LegendaryComponentRecipe>.Read(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+        LegendaryComponentRecipe IJsonReader<LegendaryComponentRecipe>.Read(
+            JsonElement json,
+            MissingMemberBehavior missingMemberBehavior
+        )
         {
             var outputItemId = new RequiredMember<int>("output_item_id");
             var outputItemCount = new RequiredMember<int>("output_item_count");
@@ -2972,7 +2996,10 @@ namespace GW2SDK.Recipes
             };
         }
 
-        RefinementEctoplasmRecipe IJsonReader<RefinementEctoplasmRecipe>.Read(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+        RefinementEctoplasmRecipe IJsonReader<RefinementEctoplasmRecipe>.Read(
+            JsonElement json,
+            MissingMemberBehavior missingMemberBehavior
+        )
         {
             var outputItemId = new RequiredMember<int>("output_item_id");
             var outputItemCount = new RequiredMember<int>("output_item_count");
@@ -3052,7 +3079,10 @@ namespace GW2SDK.Recipes
             };
         }
 
-        RefinementObsidianRecipe IJsonReader<RefinementObsidianRecipe>.Read(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+        RefinementObsidianRecipe IJsonReader<RefinementObsidianRecipe>.Read(
+            JsonElement json,
+            MissingMemberBehavior missingMemberBehavior
+        )
         {
             var outputItemId = new RequiredMember<int>("output_item_id");
             var outputItemCount = new RequiredMember<int>("output_item_count");
@@ -3132,7 +3162,10 @@ namespace GW2SDK.Recipes
             };
         }
 
-        RefinementRecipe IJsonReader<RefinementRecipe>.Read(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+        RefinementRecipe IJsonReader<RefinementRecipe>.Read(
+            JsonElement json,
+            MissingMemberBehavior missingMemberBehavior
+        )
         {
             var outputItemId = new RequiredMember<int>("output_item_id");
             var outputItemCount = new RequiredMember<int>("output_item_count");
@@ -3932,7 +3965,10 @@ namespace GW2SDK.Recipes
             };
         }
 
-        HarpoonGunRecipe IJsonReader<HarpoonGunRecipe>.Read(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+        HarpoonGunRecipe IJsonReader<HarpoonGunRecipe>.Read(
+            JsonElement json,
+            MissingMemberBehavior missingMemberBehavior
+        )
         {
             var outputItemId = new RequiredMember<int>("output_item_id");
             var outputItemCount = new RequiredMember<int>("output_item_count");
@@ -4332,7 +4368,10 @@ namespace GW2SDK.Recipes
             };
         }
 
-        UpgradeComponentRecipe IJsonReader<UpgradeComponentRecipe>.Read(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+        UpgradeComponentRecipe IJsonReader<UpgradeComponentRecipe>.Read(
+            JsonElement json,
+            MissingMemberBehavior missingMemberBehavior
+        )
         {
             var outputItemId = new RequiredMember<int>("output_item_id");
             var outputItemCount = new RequiredMember<int>("output_item_count");

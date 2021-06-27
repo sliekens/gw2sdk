@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using GW2SDK;
 using GW2SDK.Builds;
 using GW2SDK.Http;
+using GW2SDK.Json;
 using GW2SDK.V2;
 using Spectre.Console;
 
@@ -46,8 +47,8 @@ namespace ApiVersionInfo
 
             // From here on out, you can create GW2SDK services, pass the HttpClient and a JSON reader object.
             // The default JSON reader should work fine, but can be replaced with a custom implementation.
-            var buildService = new BuildService(http, new BuildReader());
-            var infoService = new ApiInfoService(http, new ApiInfoReader());
+            var buildService = new BuildService(http, new BuildReader(), MissingMemberBehavior.Undefined);
+            var infoService = new ApiInfoService(http, new ApiInfoReader(), MissingMemberBehavior.Undefined);
 
             var build = await AnsiConsole.Status()
                 .StartAsync("Retrieving the current game version...", async ctx => await buildService.GetBuild());

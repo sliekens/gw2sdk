@@ -10,7 +10,7 @@ namespace GW2SDK.Achievements.Groups
     {
         public IJsonReader<string> Id { get; } = new StringJsonReader();
 
-        public AchievementGroup Read(JsonElement json, MissingMemberBehavior missingMemberBehavior = default)
+        public AchievementGroup Read(JsonElement json, MissingMemberBehavior missingMemberBehavior)
         {
             var id = new RequiredMember<string>("id");
             var name = new RequiredMember<string>("name");

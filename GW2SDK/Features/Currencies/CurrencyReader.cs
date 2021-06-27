@@ -8,7 +8,7 @@ namespace GW2SDK.Currencies
     [PublicAPI]
     public sealed class CurrencyReader : ICurrencyReader
     {
-        public Currency Read(JsonElement json, MissingMemberBehavior missingMemberBehavior = default)
+        public Currency Read(JsonElement json, MissingMemberBehavior missingMemberBehavior)
         {
             var id = new RequiredMember<int>("id");
             var name = new RequiredMember<string>("name");

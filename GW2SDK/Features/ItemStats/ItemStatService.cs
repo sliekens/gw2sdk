@@ -16,12 +16,12 @@ namespace GW2SDK.ItemStats
 
         private readonly IItemStatReader _itemStatReader;
 
-        private MissingMemberBehavior _missingMemberBehavior;
+        private readonly MissingMemberBehavior _missingMemberBehavior;
 
         public ItemStatService(
             HttpClient http,
             IItemStatReader itemStatReader,
-            MissingMemberBehavior missingMemberBehavior = MissingMemberBehavior.Undefined
+            MissingMemberBehavior missingMemberBehavior
         )
         {
             _http = http ?? throw new ArgumentNullException(nameof(http));
@@ -71,7 +71,7 @@ namespace GW2SDK.ItemStats
         public async Task<IDataTransferPage<ItemStat>> GetItemStatsByPage(ContinuationToken token)
         {
             var request = new ContinuationRequest(token);
-            return await _http.GetResourcesPage(request, json => _itemStatReader.ReadArray(json))
+            return await _http.GetResourcesPage(request, json => _itemStatReader.ReadArray(json, _missingMemberBehavior))
                 .ConfigureAwait(false);
         }
     }

@@ -8,7 +8,7 @@ namespace GW2SDK.Characters.Recipes
     [PublicAPI]
     public sealed class CharacterReader : ICharacterReader
     {
-        public Character Read(JsonElement json, MissingMemberBehavior missingMemberBehavior = default)
+        public Character Read(JsonElement json, MissingMemberBehavior missingMemberBehavior)
         {
             var recipes = new RequiredMember<int[]>("recipes");
 

@@ -8,7 +8,7 @@ namespace GW2SDK.Continents
     [PublicAPI]
     public sealed class MapTaskReader : IJsonReader<MapTask>
     {
-        public MapTask Read(JsonElement json, MissingMemberBehavior missingMemberBehavior = default)
+        public MapTask Read(JsonElement json, MissingMemberBehavior missingMemberBehavior)
         {
             var objective = new RequiredMember<string>("objective");
             var level = new RequiredMember<int>("level");

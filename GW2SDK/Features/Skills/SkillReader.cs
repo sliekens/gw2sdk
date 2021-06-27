@@ -941,8 +941,7 @@ namespace GW2SDK.Skills
             };
         }
 
-        TransformSkill IJsonReader<TransformSkill>.
-            Read(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+        TransformSkill IJsonReader<TransformSkill>.Read(JsonElement json, MissingMemberBehavior missingMemberBehavior)
         {
             var id = new RequiredMember<int>("id");
             var name = new RequiredMember<string>("name");
@@ -1366,7 +1365,7 @@ namespace GW2SDK.Skills
             };
         }
 
-        public Skill Read(JsonElement json, MissingMemberBehavior missingMemberBehavior = default)
+        public Skill Read(JsonElement json, MissingMemberBehavior missingMemberBehavior)
         {
             // Unlike most models with a 'type' property, skills don't have always have it
             if (json.TryGetProperty("type", out var type))

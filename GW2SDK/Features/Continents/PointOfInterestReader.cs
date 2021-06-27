@@ -64,7 +64,7 @@ namespace GW2SDK.Continents
             };
         }
 
-        public PointOfInterest Read(JsonElement json, MissingMemberBehavior missingMemberBehavior = default)
+        public PointOfInterest Read(JsonElement json, MissingMemberBehavior missingMemberBehavior)
         {
             switch (json.GetProperty("type").GetString())
             {
@@ -128,7 +128,10 @@ namespace GW2SDK.Continents
             };
         }
 
-        UnlockerPointOfInterest IJsonReader<UnlockerPointOfInterest>.Read(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+        UnlockerPointOfInterest IJsonReader<UnlockerPointOfInterest>.Read(
+            JsonElement json,
+            MissingMemberBehavior missingMemberBehavior
+        )
         {
             var name = new OptionalMember<string>("name");
             var floor = new RequiredMember<int>("floor");

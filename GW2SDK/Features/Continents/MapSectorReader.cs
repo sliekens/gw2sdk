@@ -8,7 +8,7 @@ namespace GW2SDK.Continents
     [PublicAPI]
     public sealed class MapSectorReader : IJsonReader<MapSector>
     {
-        public MapSector Read(JsonElement json, MissingMemberBehavior missingMemberBehavior = default)
+        public MapSector Read(JsonElement json, MissingMemberBehavior missingMemberBehavior)
         {
             var name = new OptionalMember<string>("name");
             var level = new RequiredMember<int>("level");

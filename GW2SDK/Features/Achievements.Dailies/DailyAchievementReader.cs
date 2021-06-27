@@ -8,7 +8,7 @@ namespace GW2SDK.Achievements.Dailies
     [PublicAPI]
     public sealed class DailyAchievementReader : IDailyAchievementReader
     {
-        public DailyAchievementGroup Read(JsonElement json, MissingMemberBehavior missingMemberBehavior = default)
+        public DailyAchievementGroup Read(JsonElement json, MissingMemberBehavior missingMemberBehavior)
         {
             var pve = new RequiredMember<DailyAchievement[]>("pve");
             var pvp = new RequiredMember<DailyAchievement[]>("pvp");

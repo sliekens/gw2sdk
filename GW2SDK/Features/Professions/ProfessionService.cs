@@ -16,9 +16,9 @@ namespace GW2SDK.Professions
 
         private readonly IProfessionReader _professionReader;
 
-        private MissingMemberBehavior _missingMemberBehavior;
+        private readonly MissingMemberBehavior _missingMemberBehavior;
 
-        public ProfessionService(HttpClient http, IProfessionReader professionReader, MissingMemberBehavior missingMemberBehavior = MissingMemberBehavior.Undefined)
+        public ProfessionService(HttpClient http, IProfessionReader professionReader, MissingMemberBehavior missingMemberBehavior)
         {
             _http = http ?? throw new ArgumentNullException(nameof(http));
             _professionReader = professionReader ?? throw new ArgumentNullException(nameof(professionReader));

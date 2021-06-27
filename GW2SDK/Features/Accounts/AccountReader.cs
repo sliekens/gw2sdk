@@ -8,7 +8,7 @@ namespace GW2SDK.Accounts
     [PublicAPI]
     public sealed class AccountReader : IAccountReader
     {
-        public Account Read(JsonElement json, MissingMemberBehavior missingMemberBehavior = default)
+        public Account Read(JsonElement json, MissingMemberBehavior missingMemberBehavior)
         {
             var id = new RequiredMember<string>("id");
             var name = new RequiredMember<string>("name");
