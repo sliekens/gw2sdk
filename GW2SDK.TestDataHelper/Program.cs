@@ -63,17 +63,6 @@ namespace GW2SDK.TestDataHelper
                 }
             }
 
-            await using (var file = CreateTextCompressed(Path.Combine(outDir, "mailCarriers.json.gz")))
-            {
-                Console.WriteLine("Getting mail carriers.");
-                var service = services.Resolve<JsonMailCarriersService>();
-                var jsons = await service.GetAllJsonMailCarriers();
-                foreach (var json in jsons)
-                {
-                    await file.WriteLineAsync(json);
-                }
-            }
-
             await using (var file = CreateTextCompressed(Path.Combine(outDir, "recipes.json.gz")))
             {
                 Console.WriteLine("Getting recipes.");
