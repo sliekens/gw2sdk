@@ -22,6 +22,8 @@ namespace GW2SDK.Accounts.Banks
 
         public int[]? Infusions { get; init; }
 
+        public int[]? Dyes { get; init; }
+
         public ItemBinding Binding { get; init; }
 
         /// <summary>The name of the character when the item is Soulbound.</summary>
