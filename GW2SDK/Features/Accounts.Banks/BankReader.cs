@@ -37,6 +37,7 @@ namespace GW2SDK.Accounts.Banks
             var upgrades = new OptionalMember<int[]>("upgrades");
             var upgradeSlotIndices = new OptionalMember<int[]>("upgrade_slot_indices");
             var infusions = new OptionalMember<int[]>("infusions");
+            var dyes = new OptionalMember<int[]>("dyes");
             var binding = new OptionalMember<ItemBinding>("binding");
             var boundTo = new OptionalMember<string>("bound_to");
             var stats = new OptionalMember<SelectedStat>("stats");
@@ -70,6 +71,10 @@ namespace GW2SDK.Accounts.Banks
                 {
                     infusions = infusions.From(member.Value);
                 }
+                else if (member.NameEquals(dyes.Name))
+                {
+                    dyes = dyes.From(member.Value);
+                }
                 else if (member.NameEquals(binding.Name))
                 {
                     binding = binding.From(member.Value);
@@ -97,6 +102,7 @@ namespace GW2SDK.Accounts.Banks
                 Upgrades = upgrades.Select(value => value.GetArray(item => item.GetInt32())),
                 UpgradeSlotIndices = upgradeSlotIndices.Select(value => value.GetArray(item => item.GetInt32())),
                 Infusions = infusions.Select(value => value.GetArray(item => item.GetInt32())),
+                Dyes = dyes.Select(value => value.GetArray(item => item.GetInt32())),
                 Binding = binding.GetValue(),
                 BoundTo = boundTo.GetValueOrEmpty(),
                 Stats = stats.Select(value => ReadSelectedStat(value, missingMemberBehavior))
