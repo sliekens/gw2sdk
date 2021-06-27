@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 using GW2SDK.MailCarriers;
 using GW2SDK.Tests.TestInfrastructure;
@@ -8,6 +9,29 @@ namespace GW2SDK.Tests.Features.MailCarriers
 {
     public class MailCarrierServiceTest
     {
+        private static class MailCarrierFact
+        {
+            public static void Id_is_positive(MailCarrier actual) => Assert.InRange(actual.Id, 1, int.MaxValue);
+
+            public static void Non_default_carriers_can_be_unlocked(MailCarrier actual)
+            {
+                if (actual.Flags.SingleOrDefault() == MailCarrierFlag.Default)
+                {
+                    Assert.Empty(actual.UnlockItems);
+                }
+                else
+                {
+                    Assert.NotEmpty(actual.UnlockItems);
+                }
+            }
+
+            public static void Name_is_not_empty(MailCarrier actual) => Assert.NotEmpty(actual.Name);
+
+            public static void Order_is_not_negative(MailCarrier actual) => Assert.InRange(actual.Order, 0, 1000);
+
+            public static void Icon_is_not_empty(MailCarrier actual) => Assert.NotEmpty(actual.Icon);
+        }
+
         [Fact]
         [Trait("Feature",  "MailCarriers")]
         [Trait("Category", "Integration")]
@@ -19,6 +43,15 @@ namespace GW2SDK.Tests.Features.MailCarriers
             var actual = await sut.GetMailCarriers();
 
             Assert.Equal(actual.ResultTotal, actual.Count);
+            Assert.All(actual,
+                mailCarrier =>
+                {
+                    MailCarrierFact.Id_is_positive(mailCarrier);
+                    MailCarrierFact.Non_default_carriers_can_be_unlocked(mailCarrier);
+                    MailCarrierFact.Order_is_not_negative(mailCarrier);
+                    MailCarrierFact.Icon_is_not_empty(mailCarrier);
+                    MailCarrierFact.Name_is_not_empty(mailCarrier);
+                });
         }
 
         [Fact]
