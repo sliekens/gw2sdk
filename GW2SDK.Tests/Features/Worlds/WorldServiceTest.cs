@@ -8,6 +8,16 @@ namespace GW2SDK.Tests.Features.Worlds
 {
     public class WorldServiceTest
     {
+
+        private static class WorldFact
+        {
+            public static void Id_is_positive(World actual) => Assert.InRange(actual.Id, 1, int.MaxValue);
+
+            public static void Name_is_not_empty(World actual) => Assert.NotEmpty(actual.Name);
+
+            public static void World_population_type_is_supported(World actual) => Assert.True(Enum.IsDefined(typeof(WorldPopulation), actual.Population));
+        }
+
         [Fact]
         [Trait("Feature",  "Worlds")]
         [Trait("Category", "Integration")]
@@ -19,6 +29,13 @@ namespace GW2SDK.Tests.Features.Worlds
             var actual = await sut.GetWorlds();
 
             Assert.Equal(actual.ResultTotal, actual.Count);
+            Assert.All(actual,
+                world =>
+                {
+                    WorldFact.Id_is_positive(world);
+                    WorldFact.Name_is_not_empty(world);
+                    WorldFact.World_population_type_is_supported(world);
+                });
         }
 
         [Fact]

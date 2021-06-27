@@ -24,17 +24,6 @@ namespace GW2SDK.TestDataHelper
                 }
             }
 
-            await using (var file = CreateTextCompressed(Path.Combine(outDir, "worlds.json.gz")))
-            {
-                Console.WriteLine("Getting worlds.");
-                var service = services.Resolve<JsonWorldService>();
-                var jsons = await service.GetAllJsonWorlds();
-                foreach (var json in jsons)
-                {
-                    await file.WriteLineAsync(json);
-                }
-            }
-
             await using (var file = CreateTextCompressed(Path.Combine(outDir, "items.json.gz")))
             {
                 Console.WriteLine("Getting items.");
