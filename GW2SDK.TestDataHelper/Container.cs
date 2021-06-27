@@ -79,7 +79,8 @@ namespace GW2SDK.TestDataHelper
                 .AddPolicyHandlerFromRegistry("api.guildwars2.com")
                 .AddHttpMessageHandler<UnauthorizedMessageHandler>()
                 .AddHttpMessageHandler<BadMessageHandler>()
-                .AddHttpMessageHandler<RateLimitHandler>().AddTypedClient<ContinentService>()
+                .AddHttpMessageHandler<RateLimitHandler>()
+                .AddTypedClient<ContinentService>()
                 .AddTypedClient<JsonAchievementService>()
                 .AddTypedClient<JsonFloorService>()
                 .AddTypedClient<JsonItemPriceService>()
@@ -88,8 +89,7 @@ namespace GW2SDK.TestDataHelper
                 .AddTypedClient<JsonRecipeService>()
                 .AddTypedClient<JsonSkinService>()
                 .AddTypedClient<JsonTitlesService>()
-                .AddTypedClient<JsonTraitsService>()
-                .AddTypedClient<JsonWorldService>();
+                .AddTypedClient<JsonTraitsService>();
 
             _services = services.BuildServiceProvider();
         }
