@@ -8,6 +8,11 @@ namespace GW2SDK.Tests.Features.Traits
 {
     public class TraitServiceTest
     {
+        private static class TraitFact
+        {
+            public static void Id_is_positive(Trait actual) => Assert.InRange(actual.Id, 1, int.MaxValue);
+        }
+
         [Fact]
         [Trait("Feature", "Traits")]
         [Trait("Category", "Integration")]
@@ -19,6 +24,11 @@ namespace GW2SDK.Tests.Features.Traits
             var actual = await sut.GetTraits();
 
             Assert.Equal(actual.ResultTotal, actual.Count);
+            Assert.All(actual,
+                trait =>
+                {
+                    TraitFact.Id_is_positive(trait);
+                });
         }
 
         [Fact]
