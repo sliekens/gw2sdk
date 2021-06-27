@@ -8,6 +8,25 @@ namespace GW2SDK.Tests.Features.Titles
 {
     public class TitleServiceTest
     {
+        private static class TitleFact
+        {
+            public static void Id_is_positive(Title actual) => Assert.InRange(actual.Id, 1, int.MaxValue);
+
+            public static void Name_is_not_empty(Title actual) => Assert.NotEmpty(actual.Name);
+
+            public static void Can_be_unlocked_by_achievements_or_achievement_points(Title actual)
+            {
+                if (actual.AchievementPointsRequired.HasValue)
+                {
+                    Assert.InRange(actual.AchievementPointsRequired.Value, 1, 100000);
+                }
+                else
+                {
+                    Assert.NotEmpty(actual.Achievements!);
+                }
+            }
+        }
+
         [Fact]
         [Trait("Feature",  "Titles")]
         [Trait("Category", "Integration")]
@@ -19,6 +38,13 @@ namespace GW2SDK.Tests.Features.Titles
             var actual = await sut.GetTitles();
 
             Assert.Equal(actual.ResultTotal, actual.Count);
+            Assert.All(actual,
+                title =>
+                {
+                    TitleFact.Id_is_positive(title);
+                    TitleFact.Name_is_not_empty(title);
+                    TitleFact.Can_be_unlocked_by_achievements_or_achievement_points(title);
+                });
         }
 
         [Fact]
