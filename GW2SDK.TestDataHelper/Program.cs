@@ -12,23 +12,6 @@ namespace GW2SDK.TestDataHelper
         {
             Directory.CreateDirectory(outDir);
             await using var services = new Container();
-            await using (var file = File.CreateText(Path.Combine(outDir, "v2.json")))
-            {
-                Console.WriteLine("Getting API info.");
-                var service = services.Resolve<JsonApiInfoService>();
-                var json = await service.GetJsonApiInfo();
-                await file.WriteLineAsync(json);
-            }
-
-            await using (var file = File.CreateText(Path.Combine(outDir, "build.json")))
-            {
-                Console.WriteLine("Getting build number.");
-                var service = services.Resolve<JsonBuildService>();
-                var json = await service.GetJsonBuild();
-                await file.WriteLineAsync(json);
-            }
-
-            // Compress everything else to save disk space
 
             await using (var file = CreateTextCompressed(Path.Combine(outDir, "achievements.json.gz")))
             {

@@ -7,6 +7,11 @@ namespace GW2SDK.Tests.Features.Builds
 {
     public class BuildServiceTest
     {
+        private static class BuildFact
+        {
+            public static void Id_is_positive(Build actual) => Assert.InRange(actual.Id, 1, int.MaxValue);
+        }
+
         [Fact]
         [Trait("Feature",  "Builds")]
         [Trait("Category", "Integration")]
@@ -17,7 +22,7 @@ namespace GW2SDK.Tests.Features.Builds
 
             var actual = await sut.GetBuild();
 
-            Assert.IsType<Build>(actual);
+            BuildFact.Id_is_positive(actual);
         }
     }
 }
