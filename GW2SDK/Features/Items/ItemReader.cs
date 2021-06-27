@@ -102,7 +102,7 @@ namespace GW2SDK.Items
         IJsonReader<Trident>,
         IJsonReader<Warhorn>
     {
-        public Item Read(JsonElement json, MissingMemberBehavior missingMemberBehavior = default)
+        public Item Read(JsonElement json, MissingMemberBehavior missingMemberBehavior)
         {
             switch (json.GetProperty("type").GetString())
             {
@@ -1995,7 +1995,10 @@ namespace GW2SDK.Items
             };
         }
 
-        AppearanceChanger IJsonReader<AppearanceChanger>.Read(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+        AppearanceChanger IJsonReader<AppearanceChanger>.Read(
+            JsonElement json,
+            MissingMemberBehavior missingMemberBehavior
+        )
         {
             var name = new RequiredMember<string>("name");
             var description = new OptionalMember<string>("description");
@@ -2550,7 +2553,10 @@ namespace GW2SDK.Items
             };
         }
 
-        GenericConsumable IJsonReader<GenericConsumable>.Read(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+        GenericConsumable IJsonReader<GenericConsumable>.Read(
+            JsonElement json,
+            MissingMemberBehavior missingMemberBehavior
+        )
         {
             var name = new RequiredMember<string>("name");
             var description = new OptionalMember<string>("description");
@@ -2691,7 +2697,10 @@ namespace GW2SDK.Items
             };
         }
 
-        HalloweenConsumable IJsonReader<HalloweenConsumable>.Read(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+        HalloweenConsumable IJsonReader<HalloweenConsumable>.Read(
+            JsonElement json,
+            MissingMemberBehavior missingMemberBehavior
+        )
         {
             var name = new RequiredMember<string>("name");
             var description = new OptionalMember<string>("description");
@@ -2796,7 +2805,10 @@ namespace GW2SDK.Items
             };
         }
 
-        ImmediateConsumable IJsonReader<ImmediateConsumable>.Read(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+        ImmediateConsumable IJsonReader<ImmediateConsumable>.Read(
+            JsonElement json,
+            MissingMemberBehavior missingMemberBehavior
+        )
         {
             var name = new RequiredMember<string>("name");
             var description = new OptionalMember<string>("description");
@@ -2937,7 +2949,10 @@ namespace GW2SDK.Items
             };
         }
 
-        MountRandomUnlocker IJsonReader<MountRandomUnlocker>.Read(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+        MountRandomUnlocker IJsonReader<MountRandomUnlocker>.Read(
+            JsonElement json,
+            MissingMemberBehavior missingMemberBehavior
+        )
         {
             var name = new RequiredMember<string>("name");
             var description = new OptionalMember<string>("description");
@@ -3147,7 +3162,10 @@ namespace GW2SDK.Items
             };
         }
 
-        TeleportToFriend IJsonReader<TeleportToFriend>.Read(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+        TeleportToFriend IJsonReader<TeleportToFriend>.Read(
+            JsonElement json,
+            MissingMemberBehavior missingMemberBehavior
+        )
         {
             var name = new RequiredMember<string>("name");
             var description = new OptionalMember<string>("description");
@@ -3733,7 +3751,10 @@ namespace GW2SDK.Items
             };
         }
 
-        BuildLibrarySlotUnlocker IJsonReader<BuildLibrarySlotUnlocker>.Read(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+        BuildLibrarySlotUnlocker IJsonReader<BuildLibrarySlotUnlocker>.Read(
+            JsonElement json,
+            MissingMemberBehavior missingMemberBehavior
+        )
         {
             var name = new RequiredMember<string>("name");
             var description = new OptionalMember<string>("description");
@@ -3845,7 +3866,10 @@ namespace GW2SDK.Items
             };
         }
 
-        BuildLoadoutTabUnlocker IJsonReader<BuildLoadoutTabUnlocker>.Read(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+        BuildLoadoutTabUnlocker IJsonReader<BuildLoadoutTabUnlocker>.Read(
+            JsonElement json,
+            MissingMemberBehavior missingMemberBehavior
+        )
         {
             var name = new RequiredMember<string>("name");
             var description = new OptionalMember<string>("description");
@@ -3957,7 +3981,10 @@ namespace GW2SDK.Items
             };
         }
 
-        ChampionUnlocker IJsonReader<ChampionUnlocker>.Read(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+        ChampionUnlocker IJsonReader<ChampionUnlocker>.Read(
+            JsonElement json,
+            MissingMemberBehavior missingMemberBehavior
+        )
         {
             var name = new RequiredMember<string>("name");
             var description = new OptionalMember<string>("description");
@@ -4069,7 +4096,10 @@ namespace GW2SDK.Items
             };
         }
 
-        CollectibleCapacityUnlocker IJsonReader<CollectibleCapacityUnlocker>.Read(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+        CollectibleCapacityUnlocker IJsonReader<CollectibleCapacityUnlocker>.Read(
+            JsonElement json,
+            MissingMemberBehavior missingMemberBehavior
+        )
         {
             var name = new RequiredMember<string>("name");
             var description = new OptionalMember<string>("description");
@@ -4293,7 +4323,10 @@ namespace GW2SDK.Items
             };
         }
 
-        CraftingRecipeUnlocker IJsonReader<CraftingRecipeUnlocker>.Read(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+        CraftingRecipeUnlocker IJsonReader<CraftingRecipeUnlocker>.Read(
+            JsonElement json,
+            MissingMemberBehavior missingMemberBehavior
+        )
         {
             var name = new RequiredMember<string>("name");
             var description = new OptionalMember<string>("description");
@@ -4535,7 +4568,10 @@ namespace GW2SDK.Items
             };
         }
 
-        GearLoadoutTabUnlocker IJsonReader<GearLoadoutTabUnlocker>.Read(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+        GearLoadoutTabUnlocker IJsonReader<GearLoadoutTabUnlocker>.Read(
+            JsonElement json,
+            MissingMemberBehavior missingMemberBehavior
+        )
         {
             var name = new RequiredMember<string>("name");
             var description = new OptionalMember<string>("description");
@@ -4647,7 +4683,10 @@ namespace GW2SDK.Items
             };
         }
 
-        GliderSkinUnlocker IJsonReader<GliderSkinUnlocker>.Read(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+        GliderSkinUnlocker IJsonReader<GliderSkinUnlocker>.Read(
+            JsonElement json,
+            MissingMemberBehavior missingMemberBehavior
+        )
         {
             var name = new RequiredMember<string>("name");
             var description = new OptionalMember<string>("description");
@@ -5095,7 +5134,10 @@ namespace GW2SDK.Items
             };
         }
 
-        SharedSlotUnlocker IJsonReader<SharedSlotUnlocker>.Read(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+        SharedSlotUnlocker IJsonReader<SharedSlotUnlocker>.Read(
+            JsonElement json,
+            MissingMemberBehavior missingMemberBehavior
+        )
         {
             var name = new RequiredMember<string>("name");
             var description = new OptionalMember<string>("description");
@@ -5564,7 +5606,10 @@ namespace GW2SDK.Items
             };
         }
 
-        DefaultContainer IJsonReader<DefaultContainer>.Read(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+        DefaultContainer IJsonReader<DefaultContainer>.Read(
+            JsonElement json,
+            MissingMemberBehavior missingMemberBehavior
+        )
         {
             var name = new RequiredMember<string>("name");
             var description = new OptionalMember<string>("description");
@@ -5774,7 +5819,10 @@ namespace GW2SDK.Items
             };
         }
 
-        ImmediateContainer IJsonReader<ImmediateContainer>.Read(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+        ImmediateContainer IJsonReader<ImmediateContainer>.Read(
+            JsonElement json,
+            MissingMemberBehavior missingMemberBehavior
+        )
         {
             var name = new RequiredMember<string>("name");
             var description = new OptionalMember<string>("description");
@@ -5984,7 +6032,10 @@ namespace GW2SDK.Items
             };
         }
 
-        CraftingMaterial IJsonReader<CraftingMaterial>.Read(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+        CraftingMaterial IJsonReader<CraftingMaterial>.Read(
+            JsonElement json,
+            MissingMemberBehavior missingMemberBehavior
+        )
         {
             var name = new RequiredMember<string>("name");
             var description = new OptionalMember<string>("description");
@@ -6840,7 +6891,10 @@ namespace GW2SDK.Items
             };
         }
 
-        RentableContractNpc IJsonReader<RentableContractNpc>.Read(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+        RentableContractNpc IJsonReader<RentableContractNpc>.Read(
+            JsonElement json,
+            MissingMemberBehavior missingMemberBehavior
+        )
         {
             var name = new RequiredMember<string>("name");
             var description = new OptionalMember<string>("description");
@@ -6945,7 +6999,10 @@ namespace GW2SDK.Items
             };
         }
 
-        UnlimitedConsumable IJsonReader<UnlimitedConsumable>.Read(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+        UnlimitedConsumable IJsonReader<UnlimitedConsumable>.Read(
+            JsonElement json,
+            MissingMemberBehavior missingMemberBehavior
+        )
         {
             var name = new RequiredMember<string>("name");
             var description = new OptionalMember<string>("description");
@@ -8143,7 +8200,10 @@ namespace GW2SDK.Items
             };
         }
 
-        UpgradeComponent IJsonReader<UpgradeComponent>.Read(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+        UpgradeComponent IJsonReader<UpgradeComponent>.Read(
+            JsonElement json,
+            MissingMemberBehavior missingMemberBehavior
+        )
         {
             switch (json.GetProperty("details").GetProperty("type").GetString())
             {
@@ -8290,7 +8350,10 @@ namespace GW2SDK.Items
             };
         }
 
-        DefaultUpgradeComponent IJsonReader<DefaultUpgradeComponent>.Read(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+        DefaultUpgradeComponent IJsonReader<DefaultUpgradeComponent>.Read(
+            JsonElement json,
+            MissingMemberBehavior missingMemberBehavior
+        )
         {
             var name = new RequiredMember<string>("name");
             var description = new OptionalMember<string>("description");

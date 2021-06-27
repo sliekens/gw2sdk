@@ -8,7 +8,7 @@ namespace GW2SDK.Achievements.Categories
     [PublicAPI]
     public sealed class AchievementCategoryReader : IAchievementCategoryReader
     {
-        public AchievementCategory Read(JsonElement json, MissingMemberBehavior missingMemberBehavior = default)
+        public AchievementCategory Read(JsonElement json, MissingMemberBehavior missingMemberBehavior)
         {
             var id = new RequiredMember<int>("id");
             var name = new RequiredMember<string>("name");

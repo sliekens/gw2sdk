@@ -8,7 +8,7 @@ namespace GW2SDK.Worlds
     [PublicAPI]
     public sealed class WorldReader : IWorldReader
     {
-        public World Read(JsonElement json, MissingMemberBehavior missingMemberBehavior = default)
+        public World Read(JsonElement json, MissingMemberBehavior missingMemberBehavior)
         {
             var id = new RequiredMember<int>("id");
             var name = new RequiredMember<string>("name");

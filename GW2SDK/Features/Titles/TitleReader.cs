@@ -8,9 +8,7 @@ namespace GW2SDK.Titles
     [PublicAPI]
     public sealed class TitleReader : ITitleReader
     {
-        public Title Read(
-            JsonElement json,
-            MissingMemberBehavior missingMemberBehavior)
+        public Title Read(JsonElement json, MissingMemberBehavior missingMemberBehavior)
         {
             var id = new RequiredMember<int>("id");
             var name = new RequiredMember<string>("name");

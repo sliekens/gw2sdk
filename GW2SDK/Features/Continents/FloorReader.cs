@@ -13,7 +13,7 @@ namespace GW2SDK.Continents
 
         public IRegionReader Region { get; } = new RegionReader();
 
-        public Floor Read(JsonElement json, MissingMemberBehavior missingMemberBehavior = default)
+        public Floor Read(JsonElement json, MissingMemberBehavior missingMemberBehavior)
         {
             var textureDimensions = new RequiredMember<double[]>("texture_dims");
             var clampedView = new OptionalMember<double[][]>("clamped_view");

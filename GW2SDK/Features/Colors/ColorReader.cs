@@ -8,7 +8,7 @@ namespace GW2SDK.Colors
     [PublicAPI]
     public sealed class ColorReader : IColorReader
     {
-        public Color Read(JsonElement json, MissingMemberBehavior missingMemberBehavior = default)
+        public Color Read(JsonElement json, MissingMemberBehavior missingMemberBehavior)
         {
             var id = new RequiredMember<int>("id");
             var name = new RequiredMember<string>("name");

@@ -12,7 +12,7 @@ namespace GW2SDK.Continents
 
         public IFloorReader Floor { get; } = new FloorReader();
 
-        public Continent Read(JsonElement json, MissingMemberBehavior missingMemberBehavior = default)
+        public Continent Read(JsonElement json, MissingMemberBehavior missingMemberBehavior)
         {
             var name = new RequiredMember<string>("name");
             var continentDimensions = new RequiredMember<int[]>("continent_dims");

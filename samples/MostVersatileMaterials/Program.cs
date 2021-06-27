@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using GW2SDK;
 using GW2SDK.Http;
 using GW2SDK.Items;
+using GW2SDK.Json;
 using GW2SDK.Recipes;
 using Spectre.Console;
 
@@ -32,8 +33,8 @@ namespace MostVersatileMaterials
             http.UseLanguage("en");
             http.UseSchemaVersion(SchemaVersion.Recommended);
 
-            var recipesService = new RecipeService(http, new RecipeReader());
-            var itemsService = new ItemService(http, new ItemReader());
+            var recipesService = new RecipeService(http, new RecipeReader(), MissingMemberBehavior.Undefined);
+            var itemsService = new ItemService(http, new ItemReader(), MissingMemberBehavior.Undefined);
 
             var top = 600;
             var recipes = await Progress()

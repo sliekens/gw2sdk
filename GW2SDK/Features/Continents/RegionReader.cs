@@ -13,7 +13,7 @@ namespace GW2SDK.Continents
 
         public IMapReader Map { get; } = new MapReader();
 
-        public Region Read(JsonElement json, MissingMemberBehavior missingMemberBehavior = default)
+        public Region Read(JsonElement json, MissingMemberBehavior missingMemberBehavior)
         {
             var name = new RequiredMember<string>("name");
             var labelCoordinates = new RequiredMember<double[]>("label_coord");

@@ -17,7 +17,7 @@ namespace GW2SDK.Continents
 
         public IJsonReader<MapTask> Task { get; } = new MapTaskReader();
 
-        public Map Read(JsonElement json, MissingMemberBehavior missingMemberBehavior = default)
+        public Map Read(JsonElement json, MissingMemberBehavior missingMemberBehavior)
         {
             var name = new RequiredMember<string>("name");
             var minLevel = new RequiredMember<int>("min_level");

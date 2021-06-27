@@ -8,7 +8,7 @@ namespace GW2SDK.Accounts.Achievements
     [PublicAPI]
     public sealed class AccountAchievementReader : IAccountAchievementReader
     {
-        public AccountAchievement Read(JsonElement json, MissingMemberBehavior missingMemberBehavior = default)
+        public AccountAchievement Read(JsonElement json, MissingMemberBehavior missingMemberBehavior)
         {
             var id = new RequiredMember<int>("id");
             var current = new RequiredMember<int>("current");

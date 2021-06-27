@@ -8,9 +8,7 @@ namespace GW2SDK.V2
     [PublicAPI]
     public sealed class ApiInfoReader : IApiInfoReader
     {
-        public ApiInfo Read(
-            JsonElement json,
-            MissingMemberBehavior missingMemberBehavior)
+        public ApiInfo Read(JsonElement json, MissingMemberBehavior missingMemberBehavior)
         {
             var languages = new RequiredMember<string[]>("langs");
             var routes = new RequiredMember<ApiRoute[]>("routes");

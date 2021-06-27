@@ -8,9 +8,7 @@ namespace GW2SDK.Builds
     [PublicAPI]
     public sealed class BuildReader : IBuildReader
     {
-        public Build Read(
-            JsonElement json,
-            MissingMemberBehavior missingMemberBehavior)
+        public Build Read(JsonElement json, MissingMemberBehavior missingMemberBehavior)
         {
             var id = new RequiredMember<int>("id");
 

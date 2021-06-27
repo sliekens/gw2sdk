@@ -16,7 +16,10 @@ namespace GW2SDK.Backstories
 
         public IBackstoryAnswerReader Answer => this;
 
-        BackstoryQuestion IJsonReader<BackstoryQuestion>.Read(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+        BackstoryQuestion IJsonReader<BackstoryQuestion>.Read(
+            JsonElement json,
+            MissingMemberBehavior missingMemberBehavior
+        )
         {
             var id = new RequiredMember<int>("id");
             var title = new RequiredMember<string>("title");

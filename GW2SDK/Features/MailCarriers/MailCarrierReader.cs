@@ -8,7 +8,7 @@ namespace GW2SDK.MailCarriers
     [PublicAPI]
     public sealed class MailCarrierReader : IMailCarrierReader
     {
-        public MailCarrier Read(JsonElement json, MissingMemberBehavior missingMemberBehavior = default)
+        public MailCarrier Read(JsonElement json, MissingMemberBehavior missingMemberBehavior)
         {
             var id = new RequiredMember<int>("id");
             var unlockItems = new RequiredMember<int[]>("unlock_items");

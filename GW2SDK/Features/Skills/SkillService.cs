@@ -16,7 +16,7 @@ namespace GW2SDK.Skills
 
         private readonly ISkillReader _skillReader;
 
-        private MissingMemberBehavior _missingMemberBehavior;
+        private readonly MissingMemberBehavior _missingMemberBehavior;
 
         public SkillService(
             HttpClient http,

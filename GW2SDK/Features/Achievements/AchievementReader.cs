@@ -10,7 +10,7 @@ namespace GW2SDK.Achievements
         IJsonReader<DefaultAchievement>,
         IJsonReader<ItemSetAchievement>
     {
-        public Achievement Read(JsonElement json, MissingMemberBehavior missingMemberBehavior = default)
+        public Achievement Read(JsonElement json, MissingMemberBehavior missingMemberBehavior)
         {
             switch (json.GetProperty("type").GetString())
             {
@@ -113,7 +113,10 @@ namespace GW2SDK.Achievements
             };
         }
 
-        DefaultAchievement IJsonReader<DefaultAchievement>.Read(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+        DefaultAchievement IJsonReader<DefaultAchievement>.Read(
+            JsonElement json,
+            MissingMemberBehavior missingMemberBehavior
+        )
         {
             var id = new RequiredMember<int>("id");
             var icon = new OptionalMember<string>("icon");
@@ -208,7 +211,10 @@ namespace GW2SDK.Achievements
             };
         }
 
-        ItemSetAchievement IJsonReader<ItemSetAchievement>.Read(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+        ItemSetAchievement IJsonReader<ItemSetAchievement>.Read(
+            JsonElement json,
+            MissingMemberBehavior missingMemberBehavior
+        )
         {
             var id = new RequiredMember<int>("id");
             var icon = new OptionalMember<string>("icon");
