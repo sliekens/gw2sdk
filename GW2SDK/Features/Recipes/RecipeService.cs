@@ -33,7 +33,7 @@ namespace GW2SDK.Recipes
                 .ConfigureAwait(false);
         }
 
-        public async Task<Recipe> GetRecipeById(int recipeId)
+        public async Task<IDataTransfer<Recipe>> GetRecipeById(int recipeId)
         {
             var request = new RecipeByIdRequest(recipeId);
             return await _http.GetResource(request, json => _recipeReader.Read(json, _missingMemberBehavior))

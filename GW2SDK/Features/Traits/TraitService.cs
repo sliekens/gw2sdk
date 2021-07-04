@@ -39,7 +39,7 @@ namespace GW2SDK.Traits
                 .ConfigureAwait(false);
         }
 
-        public async Task<Trait> GetTraitById(int traitId)
+        public async Task<IDataTransfer<Trait>> GetTraitById(int traitId)
         {
             var request = new TraitByIdRequest(traitId);
             return await _http.GetResource(request, json => _traitReader.Read(json, _missingMemberBehavior))

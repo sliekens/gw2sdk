@@ -18,7 +18,7 @@ namespace GW2SDK.Tests.Features.Skills
 
             var actual = await sut.GetSkills();
 
-            Assert.Equal(actual.ResultTotal, actual.Count);
+            Assert.Equal(actual.Context.ResultTotal, actual.Values.Count);
         }
 
         [Fact]
@@ -31,7 +31,7 @@ namespace GW2SDK.Tests.Features.Skills
 
             var actual = await sut.GetSkillsIndex();
 
-            Assert.Equal(actual.ResultTotal, actual.Count);
+            Assert.Equal(actual.Context.ResultTotal, actual.Values.Count);
         }
 
         [Fact]
@@ -46,7 +46,7 @@ namespace GW2SDK.Tests.Features.Skills
 
             var actual = await sut.GetSkillById(skillId);
 
-            Assert.Equal(skillId, actual.Id);
+            Assert.Equal(skillId, actual.Value.Id);
         }
 
         [Fact]
@@ -67,7 +67,7 @@ namespace GW2SDK.Tests.Features.Skills
             var actual = await sut.GetSkillsByIds(ids);
 
              Assert.Collection(
-                actual,
+                actual.Values,
                 first => Assert.Equal(ids[0], first.Id), 
                 second => Assert.Equal(ids[1], second.Id), 
                 third => Assert.Equal(ids[2], third.Id));
@@ -113,8 +113,8 @@ namespace GW2SDK.Tests.Features.Skills
 
             var actual = await sut.GetSkillsByPage(1, 3);
 
-            Assert.Equal(3, actual.Count);
-            Assert.Equal(3, actual.PageSize);
+            Assert.Equal(3, actual.Values.Count);
+            Assert.Equal(3, actual.Context.PageSize);
         }
     }
 }

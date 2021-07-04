@@ -18,7 +18,7 @@ namespace GW2SDK.Tests.Features.Recipes
 
             var actual = await sut.GetRecipesIndex();
 
-            Assert.Equal(actual.ResultTotal, actual.Count);
+            Assert.Equal(actual.Context.ResultTotal, actual.Values.Count);
         }
 
         [Fact]
@@ -33,7 +33,7 @@ namespace GW2SDK.Tests.Features.Recipes
 
             var actual = await sut.GetRecipeById(recipeId);
 
-            Assert.Equal(recipeId, actual.Id);
+            Assert.Equal(recipeId, actual.Value.Id);
         }
 
         [Fact]
@@ -48,7 +48,7 @@ namespace GW2SDK.Tests.Features.Recipes
 
             var actual = await sut.GetRecipesByIds(ids);
 
-            Assert.Collection(actual, recipe => Assert.Equal(1, recipe.Id), recipe => Assert.Equal(2, recipe.Id), recipe => Assert.Equal(3, recipe.Id));
+            Assert.Collection(actual.Values, recipe => Assert.Equal(1, recipe.Id), recipe => Assert.Equal(2, recipe.Id), recipe => Assert.Equal(3, recipe.Id));
         }
 
         [Fact]
@@ -91,8 +91,8 @@ namespace GW2SDK.Tests.Features.Recipes
 
             var actual = await sut.GetRecipesByPage(1, 3);
 
-            Assert.Equal(3, actual.Count);
-            Assert.Equal(3, actual.PageSize);
+            Assert.Equal(3, actual.Values.Count);
+            Assert.Equal(3, actual.Context.PageSize);
         }
 
         [Fact]
@@ -107,7 +107,7 @@ namespace GW2SDK.Tests.Features.Recipes
             var actual = await sut.GetRecipesIndexByIngredientItemId(ironOre);
 
             const int ironIngotRecipe = 19;
-            Assert.Contains(ironIngotRecipe, actual);
+            Assert.Contains(ironIngotRecipe, actual.Values);
         }
 
         [Fact]
@@ -122,7 +122,7 @@ namespace GW2SDK.Tests.Features.Recipes
             var actual = await sut.GetRecipesByIngredientItemId(ironOre);
 
             const int ironIngotRecipe = 19;
-            Assert.Contains(actual, recipe => recipe.Id == ironIngotRecipe);
+            Assert.Contains(actual.Values, recipe => recipe.Id == ironIngotRecipe);
         }
 
         [Fact]
@@ -137,7 +137,7 @@ namespace GW2SDK.Tests.Features.Recipes
             var actual = await sut.GetRecipesByIngredientItemIdByPage(ironOre, 0, 20);
 
             const int ironIngotRecipe = 19;
-            Assert.Contains(actual, recipe => recipe.Id == ironIngotRecipe);
+            Assert.Contains(actual.Values, recipe => recipe.Id == ironIngotRecipe);
         }
 
         [Fact]
@@ -152,7 +152,7 @@ namespace GW2SDK.Tests.Features.Recipes
             var actual = await sut.GetRecipesIndexByOutputItemId(ironIngot);
 
             const int ironIngotRecipe = 19;
-            Assert.Contains(ironIngotRecipe, actual);
+            Assert.Contains(ironIngotRecipe, actual.Values);
         }
 
         [Fact]
@@ -167,7 +167,7 @@ namespace GW2SDK.Tests.Features.Recipes
             var actual = await sut.GetRecipesByOutputItemId(ironIngot);
 
             const int ironIngotRecipe = 19;
-            Assert.Contains(actual, recipe => recipe.Id == ironIngotRecipe);
+            Assert.Contains(actual.Values, recipe => recipe.Id == ironIngotRecipe);
         }
 
         [Fact]
@@ -182,7 +182,7 @@ namespace GW2SDK.Tests.Features.Recipes
             var actual = await sut.GetRecipesByOutputItemIdByPage(ironIngot, 0, 20);
 
             const int ironIngotRecipe = 19;
-            Assert.Contains(actual, recipe => recipe.Id == ironIngotRecipe);
+            Assert.Contains(actual.Values, recipe => recipe.Id == ironIngotRecipe);
         }
         
         [Fact]
@@ -199,10 +199,10 @@ namespace GW2SDK.Tests.Features.Recipes
             const int visionCrystal = 46746;
             var actual = await sut.GetRecipesByIngredientItemId(visionCrystal);
 
-            Assert.NotInRange(actual.Count, 0, 200); // Greater than 200
-            Assert.Equal(actual.ResultTotal, actual.Count);
-            Assert.Equal(actual.ResultTotal, actual.ResultCount);
-            Assert.All(actual, recipe => Assert.Contains(recipe.Ingredients, ingredient => ingredient.ItemId == visionCrystal));
+            Assert.NotInRange(actual.Values.Count, 0, 200); // Greater than 200
+            Assert.Equal(actual.Context.ResultTotal, actual.Values.Count);
+            Assert.Equal(actual.Context.ResultTotal, actual.Context.ResultCount);
+            Assert.All(actual.Values, recipe => Assert.Contains(recipe.Ingredients, ingredient => ingredient.ItemId == visionCrystal));
         }
     }
 }

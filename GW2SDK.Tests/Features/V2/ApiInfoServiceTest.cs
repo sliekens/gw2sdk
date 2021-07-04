@@ -50,9 +50,9 @@ namespace GW2SDK.Tests.Features.V2
 
             var actual = await sut.GetApiInfo();
 
-            ApiInfoFact.We_know_about_all_supported_languages(actual);
-            ApiInfoFact.We_know_about_all_routes(actual);
-            ApiInfoFact.We_know_about_all_schema_versions(actual);
+            ApiInfoFact.We_know_about_all_supported_languages(actual.Value);
+            ApiInfoFact.We_know_about_all_routes(actual.Value);
+            ApiInfoFact.We_know_about_all_schema_versions(actual.Value);
         }
     }
 }

@@ -28,8 +28,8 @@ namespace GW2SDK.Tests.Features.Worlds
 
             var actual = await sut.GetWorlds();
 
-            Assert.Equal(actual.ResultTotal, actual.Count);
-            Assert.All(actual,
+            Assert.Equal(actual.Context.ResultTotal, actual.Values.Count);
+            Assert.All(actual.Values,
                 world =>
                 {
                     WorldFact.Id_is_positive(world);
@@ -48,7 +48,7 @@ namespace GW2SDK.Tests.Features.Worlds
 
             var actual = await sut.GetWorldsIndex();
 
-            Assert.Equal(actual.ResultTotal, actual.Count);
+            Assert.Equal(actual.Context.ResultTotal, actual.Values.Count);
         }
 
         [Fact]
@@ -63,7 +63,7 @@ namespace GW2SDK.Tests.Features.Worlds
 
             var actual = await sut.GetWorldById(worldId);
 
-            Assert.Equal(worldId, actual.Id);
+            Assert.Equal(worldId, actual.Value.Id);
         }
 
         [Fact]
@@ -78,7 +78,7 @@ namespace GW2SDK.Tests.Features.Worlds
 
             var actual = await sut.GetWorldsByIds(ids);
 
-            Assert.Collection(actual, world => Assert.Equal(1001, world.Id), world => Assert.Equal(1002, world.Id), world => Assert.Equal(1003, world.Id));
+            Assert.Collection(actual.Values, world => Assert.Equal(1001, world.Id), world => Assert.Equal(1002, world.Id), world => Assert.Equal(1003, world.Id));
         }
 
         [Fact]
@@ -121,8 +121,8 @@ namespace GW2SDK.Tests.Features.Worlds
 
             var actual = await sut.GetWorldsByPage(1, 3);
 
-            Assert.Equal(3, actual.Count);
-            Assert.Equal(3, actual.PageSize);
+            Assert.Equal(3, actual.Values.Count);
+            Assert.Equal(3, actual.Context.PageSize);
         }
     }
 }

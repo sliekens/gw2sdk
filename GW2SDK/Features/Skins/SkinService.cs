@@ -33,7 +33,7 @@ namespace GW2SDK.Skins
                 .ConfigureAwait(false);
         }
 
-        public async Task<Skin> GetSkinById(int skinId)
+        public async Task<IDataTransfer<Skin>> GetSkinById(int skinId)
         {
             var request = new SkinByIdRequest(skinId);
             return await _http.GetResource(request, json => _skinReader.Read(json, _missingMemberBehavior))

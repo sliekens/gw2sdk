@@ -120,16 +120,16 @@ namespace MostVersatileMaterials
 
             var page = await recipesService.GetRecipesByPage(0, 200);
 
-            progress.MaxValue(page.ResultTotal)
-                .Value(page.ResultCount);
+            progress.MaxValue(page.Context.ResultTotal)
+                .Value(page.Context.ResultCount);
 
-            var recipes = new List<Recipe>(page) { Capacity = page.ResultTotal };
-            while (page.Next is not null)
+            var recipes = new List<Recipe>(page.Values) { Capacity = page.Context.ResultTotal };
+            while (page.Context.Next is not null)
             {
-                page = await recipesService.GetRecipesByPage(page.Next);
-                recipes.AddRange(page);
+                page = await recipesService.GetRecipesByPage(page.Context.Next);
+                recipes.AddRange(page.Values);
 
-                progress.Increment(page.ResultCount);
+                progress.Increment(page.Context.ResultCount);
             }
 
             progress.StopTask();
@@ -148,9 +148,9 @@ namespace MostVersatileMaterials
             var items = new List<Item>(itemIds.Count);
             foreach (var ids in itemIds.Buffer(200))
             {
-                var page = await itemsService.GetItemsByIds(ids.ToList());
-                items.AddRange(page);
-                progress.Increment(page.ResultCount);
+                var subset = await itemsService.GetItemsByIds(ids.ToList());
+                items.AddRange(subset.Values);
+                progress.Increment(subset.Context.ResultCount);
             }
 
             progress.StopTask();

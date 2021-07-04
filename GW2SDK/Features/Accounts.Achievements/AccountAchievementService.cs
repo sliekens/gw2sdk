@@ -30,7 +30,7 @@ namespace GW2SDK.Accounts.Achievements
         }
 
         [Scope(Permission.Progression)]
-        public async Task<AccountAchievement> GetAccountAchievementById(int achievementId, string? accessToken = null)
+        public async Task<IDataTransfer<AccountAchievement>> GetAccountAchievementById(int achievementId, string? accessToken = null)
         {
             var request = new AccountAchievementByIdRequest(achievementId, accessToken);
             return await _http.GetResource(request, json => _accountAchievementReader.Read(json, _missingMemberBehavior))

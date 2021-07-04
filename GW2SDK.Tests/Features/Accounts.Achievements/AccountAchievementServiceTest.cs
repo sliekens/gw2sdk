@@ -18,7 +18,7 @@ namespace GW2SDK.Tests.Features.Accounts.Achievements
 
             var actual = await sut.GetAccountAchievements(ConfigurationManager.Instance.ApiKeyFull);
 
-            Assert.Equal(actual.ResultTotal, actual.Count);
+            Assert.Equal(actual.Context.ResultTotal, actual.Values.Count);
         }
 
         [Fact]
@@ -33,7 +33,7 @@ namespace GW2SDK.Tests.Features.Accounts.Achievements
 
             var actual = await sut.GetAccountAchievementById(achievementId, ConfigurationManager.Instance.ApiKeyFull);
 
-            Assert.Equal(achievementId, actual.Id);
+            Assert.Equal(achievementId, actual.Value.Id);
         }
 
         [Fact]
@@ -48,7 +48,7 @@ namespace GW2SDK.Tests.Features.Accounts.Achievements
 
             var actual = await sut.GetAccountAchievementsByIds(ids, ConfigurationManager.Instance.ApiKeyFull);
 
-            Assert.Collection(actual, first => Assert.Equal(1, first.Id), second => Assert.Equal(2, second.Id), third => Assert.Equal(3, third.Id));
+            Assert.Collection(actual.Values, first => Assert.Equal(1, first.Id), second => Assert.Equal(2, second.Id), third => Assert.Equal(3, third.Id));
         }
 
         [Fact]
@@ -91,8 +91,8 @@ namespace GW2SDK.Tests.Features.Accounts.Achievements
 
             var actual = await sut.GetAccountAchievementsByPage(1, 3, ConfigurationManager.Instance.ApiKeyFull);
 
-            Assert.Equal(3, actual.Count);
-            Assert.Equal(3, actual.PageSize);
+            Assert.Equal(3, actual.Values.Count);
+            Assert.Equal(3, actual.Context.PageSize);
         }
     }
 }

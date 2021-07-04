@@ -42,8 +42,8 @@ namespace GW2SDK.Tests.Features.MailCarriers
 
             var actual = await sut.GetMailCarriers();
 
-            Assert.Equal(actual.ResultTotal, actual.Count);
-            Assert.All(actual,
+            Assert.Equal(actual.Context.ResultTotal, actual.Values.Count);
+            Assert.All(actual.Values,
                 mailCarrier =>
                 {
                     MailCarrierFact.Id_is_positive(mailCarrier);
@@ -64,7 +64,7 @@ namespace GW2SDK.Tests.Features.MailCarriers
 
             var actual = await sut.GetMailCarriersIndex();
 
-            Assert.Equal(actual.ResultTotal, actual.Count);
+            Assert.Equal(actual.Context.ResultTotal, actual.Values.Count);
         }
 
         [Fact]
@@ -79,7 +79,7 @@ namespace GW2SDK.Tests.Features.MailCarriers
 
             var actual = await sut.GetMailCarrierById(mailCarrierId);
 
-            Assert.Equal(mailCarrierId, actual.Id);
+            Assert.Equal(mailCarrierId, actual.Value.Id);
         }
 
         [Fact]
@@ -94,7 +94,7 @@ namespace GW2SDK.Tests.Features.MailCarriers
 
             var actual = await sut.GetMailCarriersByIds(ids);
 
-            Assert.Collection(actual, first => Assert.Equal(1, first.Id), second => Assert.Equal(2, second.Id), third => Assert.Equal(3, third.Id));
+            Assert.Collection(actual.Values, first => Assert.Equal(1, first.Id), second => Assert.Equal(2, second.Id), third => Assert.Equal(3, third.Id));
         }
 
         [Fact]
@@ -137,8 +137,8 @@ namespace GW2SDK.Tests.Features.MailCarriers
 
             var actual = await sut.GetMailCarriersByPage(1, 3);
 
-            Assert.Equal(3, actual.Count);
-            Assert.Equal(3, actual.PageSize);
+            Assert.Equal(3, actual.Values.Count);
+            Assert.Equal(3, actual.Context.PageSize);
         }
     }
 }

@@ -33,7 +33,7 @@ namespace GW2SDK.Commerce.Prices
                 .ConfigureAwait(false);
         }
 
-        public async Task<ItemPrice> GetItemPriceById(int itemId)
+        public async Task<IDataTransfer<ItemPrice>> GetItemPriceById(int itemId)
         {
             var request = new ItemPriceByIdRequest(itemId);
             return await _http.GetResource(request, json => _itemPriceReader.Read(json, _missingMemberBehavior))

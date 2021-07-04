@@ -37,8 +37,8 @@ namespace GW2SDK.Tests.Features.Titles
 
             var actual = await sut.GetTitles();
 
-            Assert.Equal(actual.ResultTotal, actual.Count);
-            Assert.All(actual,
+            Assert.Equal(actual.Context.ResultTotal, actual.Values.Count);
+            Assert.All(actual.Values,
                 title =>
                 {
                     TitleFact.Id_is_positive(title);
@@ -57,7 +57,7 @@ namespace GW2SDK.Tests.Features.Titles
 
             var actual = await sut.GetTitlesIndex();
 
-            Assert.Equal(actual.ResultTotal, actual.Count);
+            Assert.Equal(actual.Context.ResultTotal, actual.Values.Count);
         }
 
         [Fact]
@@ -72,7 +72,7 @@ namespace GW2SDK.Tests.Features.Titles
 
             var actual = await sut.GetTitleById(titleId);
 
-            Assert.Equal(titleId, actual.Id);
+            Assert.Equal(titleId, actual.Value.Id);
         }
 
         [Fact]
@@ -87,7 +87,7 @@ namespace GW2SDK.Tests.Features.Titles
 
             var actual = await sut.GetTitlesByIds(ids);
 
-            Assert.Collection(actual, first => Assert.Equal(1, first.Id), second => Assert.Equal(2, second.Id), third => Assert.Equal(3, third.Id));
+            Assert.Collection(actual.Values, first => Assert.Equal(1, first.Id), second => Assert.Equal(2, second.Id), third => Assert.Equal(3, third.Id));
         }
 
         [Fact]
@@ -130,8 +130,8 @@ namespace GW2SDK.Tests.Features.Titles
 
             var actual = await sut.GetTitlesByPage(1, 3);
 
-            Assert.Equal(3, actual.Count);
-            Assert.Equal(3, actual.PageSize);
+            Assert.Equal(3, actual.Values.Count);
+            Assert.Equal(3, actual.Context.PageSize);
         }
     }
 }

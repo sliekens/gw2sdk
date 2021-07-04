@@ -58,7 +58,7 @@ namespace GW2SDK.Tests.Features.Tokens.Fixtures
                 .WaitAndRetryAsync(10, attempt => TimeSpan.FromMilliseconds(200))
                 .ExecuteAsync(async () =>
                 {
-                    var request = new TokenInfoRequest(createdSubtoken.Subtoken);
+                    var request = new TokenInfoRequest(createdSubtoken.Value.Subtoken);
                     using var response = await http.SendAsync(request, HttpCompletionOption.ResponseHeadersRead);
                     response.EnsureSuccessStatusCode();
                     CreatedSubtokenDate = response.Headers.Date.GetValueOrDefault(DateTimeOffset.Now);

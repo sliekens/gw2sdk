@@ -39,7 +39,7 @@ namespace GW2SDK.Professions
                 .ConfigureAwait(false);
         }
 
-        public async Task<Profession> GetProfessionByName(ProfessionName professionName)
+        public async Task<IDataTransfer<Profession>> GetProfessionByName(ProfessionName professionName)
         {
             var request = new ProfessionByNameRequest(professionName);
             return await _http.GetResource(request, json => _professionReader.Read(json, _missingMemberBehavior))

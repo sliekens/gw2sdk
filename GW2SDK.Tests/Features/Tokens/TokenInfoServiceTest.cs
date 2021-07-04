@@ -25,7 +25,7 @@ namespace GW2SDK.Tests.Features.Tokens
 
             var actual = await sut.GetTokenInfo(ConfigurationManager.Instance.ApiKeyFull);
 
-            Assert.IsType<ApiKeyInfo>(actual);
+            Assert.IsType<ApiKeyInfo>(actual.Value);
         }
 
         [Fact]
@@ -38,7 +38,7 @@ namespace GW2SDK.Tests.Features.Tokens
 
             var actual = await sut.GetTokenInfo(_serviceFixture.SubtokenBasic.Subtoken);
 
-            Assert.IsType<SubtokenInfo>(actual);
+            Assert.IsType<SubtokenInfo>(actual.Value);
         }
     }
 }

@@ -53,7 +53,7 @@ namespace ApiVersionInfo
             var build = await AnsiConsole.Status()
                 .StartAsync("Retrieving the current game version...", async ctx => await buildService.GetBuild());
 
-            AnsiConsole.MarkupLine($"Gw2: [white on dodgerblue2]{build.Id}[/]");
+            AnsiConsole.MarkupLine($"Gw2: [white on dodgerblue2]{build.Value.Id}[/]");
 
             var metadata = await AnsiConsole.Status()
                 .StartAsync("Retrieving API endpoints...",
@@ -71,7 +71,7 @@ namespace ApiVersionInfo
                 .AddColumn("Authorization")
                 .AddColumn("Localization");
 
-            foreach (var route in metadata.Routes)
+            foreach (var route in metadata.Value.Routes)
             {
                 if (!showAuthorized && route.RequiresAuthorization)
                 {
@@ -82,20 +82,20 @@ namespace ApiVersionInfo
                 {
                     routes.AddRow(route.Path.EscapeMarkup(),
                         route.RequiresAuthorization ? "Requires token" : "Anonymous",
-                        route.Multilingual ? string.Join(", ", metadata.Languages) : "");
+                        route.Multilingual ? string.Join(", ", metadata.Value.Languages) : "");
                 }
                 else if (showDisabled)
                 {
                     routes.AddRow($"[dim]{route.Path.EscapeMarkup()}[/]",
                         route.RequiresAuthorization ? "Requires token" : "Anonymous",
-                        route.Multilingual ? string.Join(", ", metadata.Languages) : "");
+                        route.Multilingual ? string.Join(", ", metadata.Value.Languages) : "");
                 }
             }
 
             var changes = new Table().MinimalBorder()
                 .AddColumn("Change")
                 .AddColumn("Description");
-            foreach (var schema in metadata.SchemaVersions)
+            foreach (var schema in metadata.Value.SchemaVersions)
             {
                 var formatted = DateTimeOffset.Parse(schema.Version)
                     .ToString("D");

@@ -40,7 +40,7 @@ namespace GW2SDK.MailCarriers
                 .ConfigureAwait(false);
         }
 
-        public async Task<MailCarrier> GetMailCarrierById(int mailCarrierId)
+        public async Task<IDataTransfer<MailCarrier>> GetMailCarrierById(int mailCarrierId)
         {
             var request = new MailCarrierByIdRequest(mailCarrierId);
             return await _http.GetResource(request, json => _mailCarrierReader.Read(json, _missingMemberBehavior))

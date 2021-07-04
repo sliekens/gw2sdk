@@ -17,7 +17,7 @@ namespace GW2SDK.Tests.Features.Accounts
 
             var actual = await sut.GetAccount(ConfigurationManager.Instance.ApiKeyFull);
 
-            Assert.IsType<Account>(actual);
+            Assert.IsType<Account>(actual.Value);
         }
     }
 }

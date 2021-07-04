@@ -33,7 +33,7 @@ namespace GW2SDK.Commerce.Listings
                 .ConfigureAwait(false);
         }
 
-        public async Task<ItemListing> GetItemListingById(int itemId)
+        public async Task<IDataTransfer<ItemListing>> GetItemListingById(int itemId)
         {
             var request = new ItemListingByIdRequest(itemId);
             return await _http.GetResource(request, json => _itemListingReader.Read(json, _missingMemberBehavior))

@@ -22,7 +22,7 @@ namespace GW2SDK.Tests.Features.Builds
 
             var actual = await sut.GetBuild();
 
-            BuildFact.Id_is_positive(actual);
+            BuildFact.Id_is_positive(actual.Value);
         }
     }
 }

@@ -15,7 +15,9 @@ namespace GW2SDK.Tests.Features.Tokens.Fixtures
 
             var subtokenService = services.Resolve<SubtokenService>();
 
-            SubtokenBasic = await subtokenService.CreateSubtoken(ConfigurationManager.Instance.ApiKeyBasic);
+            var result = await subtokenService.CreateSubtoken(ConfigurationManager.Instance.ApiKeyBasic);
+
+            SubtokenBasic = result.Value;
         }
 
         public Task DisposeAsync() => Task.CompletedTask;
