@@ -25,7 +25,7 @@ namespace GW2SDK.Achievements.Dailies
             _missingMemberBehavior = missingMemberBehavior;
         }
 
-        public async Task<IDataTransfer<DailyAchievementGroup>> GetDailyAchievements(Day day = Day.Today)
+        public async Task<IReplica<DailyAchievementGroup>> GetDailyAchievements(Day day = Day.Today)
         {
             var request = new DailyAchievementsRequest(day);
             return await _http.GetResource(request, json => _dailyAchievementReader.Read(json, _missingMemberBehavior))

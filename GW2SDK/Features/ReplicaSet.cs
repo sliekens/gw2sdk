@@ -3,9 +3,9 @@ using System.Collections.Generic;
 
 namespace GW2SDK
 {
-    internal sealed class DataTransferSet<T> : IDataTransferSet<T>
+    internal sealed class ReplicaSet<T> : IReplicaSet<T>
     {
-        public DataTransferSet(
+        public ReplicaSet(
             bool hasValue,
             DateTimeOffset? update = null,
             IReadOnlySet<T>? value = default,

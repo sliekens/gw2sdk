@@ -26,35 +26,35 @@ namespace GW2SDK.Titles
             _missingMemberBehavior = missingMemberBehavior;
         }
 
-        public async Task<IDataTransferSet<Title>> GetTitles()
+        public async Task<IReplicaSet<Title>> GetTitles()
         {
             var request = new TitlesRequest();
             return await _http.GetResourcesSet(request, json => _titleReader.ReadArray(json, _missingMemberBehavior))
                 .ConfigureAwait(false);
         }
 
-        public async Task<IDataTransferSet<int>> GetTitlesIndex()
+        public async Task<IReplicaSet<int>> GetTitlesIndex()
         {
             var request = new TitlesIndexRequest();
             return await _http.GetResourcesSet(request, json => _titleReader.Id.ReadArray(json, _missingMemberBehavior))
                 .ConfigureAwait(false);
         }
 
-        public async Task<IDataTransfer<Title>> GetTitleById(int titleId)
+        public async Task<IReplica<Title>> GetTitleById(int titleId)
         {
             var request = new TitleByIdRequest(titleId);
             return await _http.GetResource(request, json => _titleReader.Read(json, _missingMemberBehavior))
                 .ConfigureAwait(false);
         }
 
-        public async Task<IDataTransferSet<Title>> GetTitlesByIds(IReadOnlyCollection<int> titleIds)
+        public async Task<IReplicaSet<Title>> GetTitlesByIds(IReadOnlyCollection<int> titleIds)
         {
             var request = new TitlesByIdsRequest(titleIds);
             return await _http.GetResourcesSet(request, json => _titleReader.ReadArray(json, _missingMemberBehavior))
                 .ConfigureAwait(false);
         }
 
-        public async Task<IDataTransferPage<Title>> GetTitlesByPage(int pageIndex, int? pageSize = null)
+        public async Task<IReplicaPage<Title>> GetTitlesByPage(int pageIndex, int? pageSize = null)
         {
             var request = new TitlesByPageRequest(pageIndex, pageSize);
             return await _http.GetResourcesPage(request, json => _titleReader.ReadArray(json, _missingMemberBehavior))

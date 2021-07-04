@@ -26,35 +26,35 @@ namespace GW2SDK.MailCarriers
             _missingMemberBehavior = missingMemberBehavior;
         }
 
-        public async Task<IDataTransferSet<MailCarrier>> GetMailCarriers()
+        public async Task<IReplicaSet<MailCarrier>> GetMailCarriers()
         {
             var request = new MailCarriersRequest();
             return await _http.GetResourcesSet(request, json => _mailCarrierReader.ReadArray(json, _missingMemberBehavior))
                 .ConfigureAwait(false);
         }
 
-        public async Task<IDataTransferSet<int>> GetMailCarriersIndex()
+        public async Task<IReplicaSet<int>> GetMailCarriersIndex()
         {
             var request = new MailCarriersIndexRequest();
             return await _http.GetResourcesSet(request, json => _mailCarrierReader.Id.ReadArray(json, _missingMemberBehavior))
                 .ConfigureAwait(false);
         }
 
-        public async Task<IDataTransfer<MailCarrier>> GetMailCarrierById(int mailCarrierId)
+        public async Task<IReplica<MailCarrier>> GetMailCarrierById(int mailCarrierId)
         {
             var request = new MailCarrierByIdRequest(mailCarrierId);
             return await _http.GetResource(request, json => _mailCarrierReader.Read(json, _missingMemberBehavior))
                 .ConfigureAwait(false);
         }
 
-        public async Task<IDataTransferSet<MailCarrier>> GetMailCarriersByIds(IReadOnlyCollection<int> mailCarrierIds)
+        public async Task<IReplicaSet<MailCarrier>> GetMailCarriersByIds(IReadOnlyCollection<int> mailCarrierIds)
         {
             var request = new MailCarriersByIdsRequest(mailCarrierIds);
             return await _http.GetResourcesSet(request, json => _mailCarrierReader.ReadArray(json, _missingMemberBehavior))
                 .ConfigureAwait(false);
         }
 
-        public async Task<IDataTransferPage<MailCarrier>> GetMailCarriersByPage(int pageIndex, int? pageSize = null)
+        public async Task<IReplicaPage<MailCarrier>> GetMailCarriersByPage(int pageIndex, int? pageSize = null)
         {
             var request = new MailCarriersByPageRequest(pageIndex, pageSize);
             return await _http.GetResourcesPage(request, json => _mailCarrierReader.ReadArray(json, _missingMemberBehavior))

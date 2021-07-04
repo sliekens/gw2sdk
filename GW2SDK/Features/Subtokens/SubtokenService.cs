@@ -26,7 +26,7 @@ namespace GW2SDK.Subtokens
             _missingMemberBehavior = missingMemberBehavior;
         }
 
-        public async Task<IDataTransfer<CreatedSubtoken>> CreateSubtoken(
+        public async Task<IReplica<CreatedSubtoken>> CreateSubtoken(
             string? accessToken,
             IReadOnlyCollection<Permission>? permissions = null,
             DateTimeOffset? absoluteExpirationDate = null,

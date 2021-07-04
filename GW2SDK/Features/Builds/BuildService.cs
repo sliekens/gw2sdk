@@ -24,7 +24,7 @@ namespace GW2SDK.Builds
             _missingMemberBehavior = missingMemberBehavior;
         }
 
-        public async Task<IDataTransfer<Build>> GetBuild()
+        public async Task<IReplica<Build>> GetBuild()
         {
             var request = new BuildRequest();
             return await _http.GetResource(request, json => _buildReader.Read(json, _missingMemberBehavior))

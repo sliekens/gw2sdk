@@ -30,7 +30,7 @@ namespace GW2SDK.Accounts.Achievements
         }
 
         [Scope(Permission.Progression)]
-        public async Task<IDataTransfer<AccountAchievement>> GetAccountAchievementById(int achievementId, string? accessToken = null)
+        public async Task<IReplica<AccountAchievement>> GetAccountAchievementById(int achievementId, string? accessToken = null)
         {
             var request = new AccountAchievementByIdRequest(achievementId, accessToken);
             return await _http.GetResource(request, json => _accountAchievementReader.Read(json, _missingMemberBehavior))
@@ -38,7 +38,7 @@ namespace GW2SDK.Accounts.Achievements
         }
 
         [Scope(Permission.Progression)]
-        public async Task<IDataTransferSet<AccountAchievement>> GetAccountAchievementsByIds(
+        public async Task<IReplicaSet<AccountAchievement>> GetAccountAchievementsByIds(
             IReadOnlyCollection<int> achievementIds,
             string? accessToken = null
         )
@@ -49,7 +49,7 @@ namespace GW2SDK.Accounts.Achievements
         }
 
         [Scope(Permission.Progression)]
-        public async Task<IDataTransferSet<AccountAchievement>> GetAccountAchievements(
+        public async Task<IReplicaSet<AccountAchievement>> GetAccountAchievements(
             string? accessToken = null
         )
         {
@@ -59,7 +59,7 @@ namespace GW2SDK.Accounts.Achievements
         }
 
         [Scope(Permission.Progression)]
-        public async Task<IDataTransferPage<AccountAchievement>> GetAccountAchievementsByPage(
+        public async Task<IReplicaPage<AccountAchievement>> GetAccountAchievementsByPage(
             int pageIndex,
             int? pageSize,
             string? accessToken = null

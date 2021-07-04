@@ -26,28 +26,28 @@ namespace GW2SDK.Skins
             _missingMemberBehavior = missingMemberBehavior;
         }
 
-        public async Task<IDataTransferSet<int>> GetSkinsIndex()
+        public async Task<IReplicaSet<int>> GetSkinsIndex()
         {
             var request = new SkinsIndexRequest();
             return await _http.GetResourcesSet(request, json => _skinReader.Id.ReadArray(json, _missingMemberBehavior))
                 .ConfigureAwait(false);
         }
 
-        public async Task<IDataTransfer<Skin>> GetSkinById(int skinId)
+        public async Task<IReplica<Skin>> GetSkinById(int skinId)
         {
             var request = new SkinByIdRequest(skinId);
             return await _http.GetResource(request, json => _skinReader.Read(json, _missingMemberBehavior))
                 .ConfigureAwait(false);
         }
 
-        public async Task<IDataTransferSet<Skin>> GetSkinsByIds(IReadOnlyCollection<int> skinIds)
+        public async Task<IReplicaSet<Skin>> GetSkinsByIds(IReadOnlyCollection<int> skinIds)
         {
             var request = new SkinsByIdsRequest(skinIds);
             return await _http.GetResourcesSet(request, json => _skinReader.ReadArray(json, _missingMemberBehavior))
                 .ConfigureAwait(false);
         }
 
-        public async Task<IDataTransferPage<Skin>> GetSkinsByPage(int pageIndex, int? pageSize = null)
+        public async Task<IReplicaPage<Skin>> GetSkinsByPage(int pageIndex, int? pageSize = null)
         {
             var request = new SkinsByPageRequest(pageIndex, pageSize);
             return await _http.GetResourcesPage(request, json => _skinReader.ReadArray(json, _missingMemberBehavior))

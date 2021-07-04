@@ -30,70 +30,70 @@ namespace GW2SDK.Backstories
             _missingMemberBehavior = missingMemberBehavior;
         }
 
-        public async Task<IDataTransferSet<BackstoryQuestion>> GetBackstoryQuestions()
+        public async Task<IReplicaSet<BackstoryQuestion>> GetBackstoryQuestions()
         {
             var request = new BackstoryQuestionsRequest();
             return await _http.GetResourcesSet(request, json => _backstoryReader.Question.ReadArray(json, _missingMemberBehavior))
                 .ConfigureAwait(false);
         }
 
-        public async Task<IDataTransferSet<BackstoryAnswer>> GetBackstoryAnswers()
+        public async Task<IReplicaSet<BackstoryAnswer>> GetBackstoryAnswers()
         {
             var request = new BackstoryAnswersRequest();
             return await _http.GetResourcesSet(request, json => _backstoryReader.Answer.ReadArray(json, _missingMemberBehavior))
                 .ConfigureAwait(false);
         }
 
-        public async Task<IDataTransferSet<int>> GetBackstoryQuestionsIndex()
+        public async Task<IReplicaSet<int>> GetBackstoryQuestionsIndex()
         {
             var request = new BackstoryQuestionsIndexRequest();
             return await _http.GetResourcesSet(request, json => _backstoryReader.Question.Id.ReadArray(json, _missingMemberBehavior))
                 .ConfigureAwait(false);
         }
 
-        public async Task<IDataTransferSet<string>> GetBackstoryAnswersIndex()
+        public async Task<IReplicaSet<string>> GetBackstoryAnswersIndex()
         {
             var request = new BackstoryAnswersIndexRequest();
             return await _http.GetResourcesSet(request, json => _backstoryReader.Answer.Id.ReadArray(json, _missingMemberBehavior))
                 .ConfigureAwait(false);
         }
 
-        public async Task<IDataTransfer<BackstoryQuestion>> GetBackstoryQuestionById(int questionId)
+        public async Task<IReplica<BackstoryQuestion>> GetBackstoryQuestionById(int questionId)
         {
             var request = new BackstoryQuestionByIdRequest(questionId);
             return await _http.GetResource(request, json => _backstoryReader.Question.Read(json, _missingMemberBehavior))
                 .ConfigureAwait(false);
         }
 
-        public async Task<IDataTransfer<BackstoryAnswer>> GetBackstoryAnswerById(string answerId)
+        public async Task<IReplica<BackstoryAnswer>> GetBackstoryAnswerById(string answerId)
         {
             var request = new BackstoryAnswerByIdRequest(answerId);
             return await _http.GetResource(request, json => _backstoryReader.Answer.Read(json, _missingMemberBehavior))
                 .ConfigureAwait(false);
         }
 
-        public async Task<IDataTransferSet<BackstoryQuestion>> GetBackstoryQuestionsByIds(IReadOnlyCollection<int> questionIds)
+        public async Task<IReplicaSet<BackstoryQuestion>> GetBackstoryQuestionsByIds(IReadOnlyCollection<int> questionIds)
         {
             var request = new BackstoryQuestionsByIdsRequest(questionIds);
             return await _http.GetResourcesSet(request, json => _backstoryReader.Question.ReadArray(json, _missingMemberBehavior))
                 .ConfigureAwait(false);
         }
 
-        public async Task<IDataTransferSet<BackstoryAnswer>> GetBackstoryAnswersByIds(IReadOnlyCollection<string> answerIds)
+        public async Task<IReplicaSet<BackstoryAnswer>> GetBackstoryAnswersByIds(IReadOnlyCollection<string> answerIds)
         {
             var request = new BackstoryAnswersByIdsRequest(answerIds);
             return await _http.GetResourcesSet(request, json => _backstoryReader.Answer.ReadArray(json, _missingMemberBehavior))
                 .ConfigureAwait(false);
         }
 
-        public async Task<IDataTransferPage<BackstoryQuestion>> GetBackstoryQuestionsByPage(int pageIndex, int? pageSize = null)
+        public async Task<IReplicaPage<BackstoryQuestion>> GetBackstoryQuestionsByPage(int pageIndex, int? pageSize = null)
         {
             var request = new BackstoryQuestionsByPageRequest(pageIndex, pageSize);
             return await _http.GetResourcesPage(request, json => _backstoryReader.Question.ReadArray(json, _missingMemberBehavior))
                 .ConfigureAwait(false);
         }
 
-        public async Task<IDataTransferPage<BackstoryAnswer>> GetBackstoryAnswersByPage(int pageIndex, int? pageSize = null)
+        public async Task<IReplicaPage<BackstoryAnswer>> GetBackstoryAnswersByPage(int pageIndex, int? pageSize = null)
         {
             var request = new BackstoryAnswersByPageRequest(pageIndex, pageSize);
             return await _http.GetResourcesPage(request, json => _backstoryReader.Answer.ReadArray(json, _missingMemberBehavior))

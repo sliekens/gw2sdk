@@ -25,35 +25,35 @@ namespace GW2SDK.Professions
             _missingMemberBehavior = missingMemberBehavior;
         }
 
-        public async Task<IDataTransferSet<Profession>> GetProfessions()
+        public async Task<IReplicaSet<Profession>> GetProfessions()
         {
             var request = new ProfessionsRequest();
             return await _http.GetResourcesSet(request, json => _professionReader.ReadArray(json, _missingMemberBehavior))
                 .ConfigureAwait(false);
         }
 
-        public async Task<IDataTransferSet<ProfessionName>> GetProfessionNames()
+        public async Task<IReplicaSet<ProfessionName>> GetProfessionNames()
         {
             var request = new ProfessionNamesRequest();
             return await _http.GetResourcesSet(request, json => _professionReader.Id.ReadArray(json, _missingMemberBehavior))
                 .ConfigureAwait(false);
         }
 
-        public async Task<IDataTransfer<Profession>> GetProfessionByName(ProfessionName professionName)
+        public async Task<IReplica<Profession>> GetProfessionByName(ProfessionName professionName)
         {
             var request = new ProfessionByNameRequest(professionName);
             return await _http.GetResource(request, json => _professionReader.Read(json, _missingMemberBehavior))
                 .ConfigureAwait(false);
         }
 
-        public async Task<IDataTransferSet<Profession>> GetProfessionsByIds(IReadOnlyCollection<ProfessionName> professionNames)
+        public async Task<IReplicaSet<Profession>> GetProfessionsByIds(IReadOnlyCollection<ProfessionName> professionNames)
         {
             var request = new ProfessionsByNamesRequest(professionNames);
             return await _http.GetResourcesSet(request, json => _professionReader.ReadArray(json, _missingMemberBehavior))
                 .ConfigureAwait(false);
         }
 
-        public async Task<IDataTransferPage<Profession>> GetProfessionsByPage(int pageIndex, int? pageSize = null)
+        public async Task<IReplicaPage<Profession>> GetProfessionsByPage(int pageIndex, int? pageSize = null)
         {
             var request = new ProfessionsByPageRequest(pageIndex, pageSize);
             return await _http.GetResourcesPage(request, json => _professionReader.ReadArray(json, _missingMemberBehavior))

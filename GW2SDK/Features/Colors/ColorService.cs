@@ -26,35 +26,35 @@ namespace GW2SDK.Colors
             _missingMemberBehavior = missingMemberBehavior;
         }
 
-        public async Task<IDataTransferSet<Color>> GetColors()
+        public async Task<IReplicaSet<Color>> GetColors()
         {
             var request = new ColorsRequest();
             return await _http.GetResourcesSet(request, json => _colorReader.ReadArray(json, _missingMemberBehavior))
                 .ConfigureAwait(false);
         }
 
-        public async Task<IDataTransferSet<int>> GetColorsIndex()
+        public async Task<IReplicaSet<int>> GetColorsIndex()
         {
             var request = new ColorsIndexRequest();
             return await _http.GetResourcesSet(request, json => _colorReader.Id.ReadArray(json, _missingMemberBehavior))
                 .ConfigureAwait(false);
         }
 
-        public async Task<IDataTransfer<Color>> GetColorById(int colorId)
+        public async Task<IReplica<Color>> GetColorById(int colorId)
         {
             var request = new ColorByIdRequest(colorId);
             return await _http.GetResource(request, json => _colorReader.Read(json, _missingMemberBehavior))
                 .ConfigureAwait(false);
         }
 
-        public async Task<IDataTransferSet<Color>> GetColorsByIds(IReadOnlyCollection<int> colorIds)
+        public async Task<IReplicaSet<Color>> GetColorsByIds(IReadOnlyCollection<int> colorIds)
         {
             var request = new ColorsByIdsRequest(colorIds);
             return await _http.GetResourcesSet(request, json => _colorReader.ReadArray(json, _missingMemberBehavior))
                 .ConfigureAwait(false);
         }
 
-        public async Task<IDataTransferPage<Color>> GetColorsByPage(int pageIndex, int? pageSize = null)
+        public async Task<IReplicaPage<Color>> GetColorsByPage(int pageIndex, int? pageSize = null)
         {
             var request = new ColorsByPageRequest(pageIndex, pageSize);
             return await _http.GetResourcesPage(request, json => _colorReader.ReadArray(json, _missingMemberBehavior))

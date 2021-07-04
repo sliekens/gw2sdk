@@ -4,7 +4,7 @@ using JetBrains.Annotations;
 namespace GW2SDK
 {
     [PublicAPI]
-    public interface IDataTransfer<T> : ITemporal
+    public interface IReplica<out T> : ITemporal
     {
         [MemberNotNullWhen(true, nameof(Value))]
         bool HasValue { get; }

@@ -28,35 +28,35 @@ namespace GW2SDK.Achievements.Groups
             _missingMemberBehavior = missingMemberBehavior;
         }
 
-        public async Task<IDataTransferSet<AchievementGroup>> GetAchievementGroups()
+        public async Task<IReplicaSet<AchievementGroup>> GetAchievementGroups()
         {
             var request = new AchievementGroupsRequest();
             return await _http.GetResourcesSet(request, json => _achievementGroupReader.ReadArray(json, _missingMemberBehavior))
                 .ConfigureAwait(false);
         }
 
-        public async Task<IDataTransferSet<string>> GetAchievementGroupsIndex()
+        public async Task<IReplicaSet<string>> GetAchievementGroupsIndex()
         {
             var request = new AchievementGroupsIndexRequest();
             return await _http.GetResourcesSet(request, json => _achievementGroupReader.Id.ReadArray(json, _missingMemberBehavior))
                 .ConfigureAwait(false);
         }
 
-        public async Task<IDataTransfer<AchievementGroup>> GetAchievementGroupById(string achievementGroupId)
+        public async Task<IReplica<AchievementGroup>> GetAchievementGroupById(string achievementGroupId)
         {
             var request = new AchievementGroupByIdRequest(achievementGroupId);
             return await _http.GetResource(request, json => _achievementGroupReader.Read(json, _missingMemberBehavior))
                 .ConfigureAwait(false);
         }
 
-        public async Task<IDataTransferSet<AchievementGroup>> GetAchievementGroupsByIds(IReadOnlyCollection<string> achievementGroupIds)
+        public async Task<IReplicaSet<AchievementGroup>> GetAchievementGroupsByIds(IReadOnlyCollection<string> achievementGroupIds)
         {
             var request = new AchievementGroupsByIdsRequest(achievementGroupIds);
             return await _http.GetResourcesSet(request, json => _achievementGroupReader.ReadArray(json, _missingMemberBehavior))
                 .ConfigureAwait(false);
         }
 
-        public async Task<IDataTransferPage<AchievementGroup>> GetAchievementGroupsByPage(int pageIndex, int? pageSize = null)
+        public async Task<IReplicaPage<AchievementGroup>> GetAchievementGroupsByPage(int pageIndex, int? pageSize = null)
         {
             var request = new AchievementGroupsByPageRequest(pageIndex, pageSize);
             return await _http.GetResourcesPage(request, json => _achievementGroupReader.ReadArray(json, _missingMemberBehavior))

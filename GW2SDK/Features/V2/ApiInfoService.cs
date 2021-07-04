@@ -24,7 +24,7 @@ namespace GW2SDK.V2
             _missingMemberBehavior = missingMemberBehavior;
         }
 
-        public async Task<IDataTransfer<ApiInfo>> GetApiInfo()
+        public async Task<IReplica<ApiInfo>> GetApiInfo()
         {
             var request = new ApiInfoRequest();
             return await _http.GetResource(request, json => _apiInfoReader.Read(json, _missingMemberBehavior))

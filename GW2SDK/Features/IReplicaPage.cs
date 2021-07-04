@@ -5,13 +5,13 @@ using JetBrains.Annotations;
 namespace GW2SDK
 {
     [PublicAPI]
-    public interface IDataTransferSet<T> : ITemporal
+    public interface IReplicaPage<T> : ITemporal
     {
         [MemberNotNullWhen(true, nameof(Values), nameof(Context))]
         bool HasValues { get; }
 
         IReadOnlySet<T>? Values { get; }
 
-        ICollectionContext? Context { get; }
+        IPageContext? Context { get; }
     }
 }

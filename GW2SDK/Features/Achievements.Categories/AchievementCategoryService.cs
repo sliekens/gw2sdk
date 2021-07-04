@@ -26,28 +26,28 @@ namespace GW2SDK.Achievements.Categories
             _missingMemberBehavior = missingMemberBehavior;
         }
 
-        public async Task<IDataTransferSet<AchievementCategory>> GetAchievementCategories()
+        public async Task<IReplicaSet<AchievementCategory>> GetAchievementCategories()
         {
             var request = new AchievementCategoriesRequest();
             return await _http.GetResourcesSet(request, json => _achievementCategoryReader.ReadArray(json, _missingMemberBehavior))
                 .ConfigureAwait(false);
         }
 
-        public async Task<IDataTransferSet<int>> GetAchievementCategoriesIndex()
+        public async Task<IReplicaSet<int>> GetAchievementCategoriesIndex()
         {
             var request = new AchievementCategoriesIndexRequest();
             return await _http.GetResourcesSet(request, json => _achievementCategoryReader.Id.ReadArray(json, _missingMemberBehavior))
                 .ConfigureAwait(false);
         }
 
-        public async Task<IDataTransfer<AchievementCategory>> GetAchievementCategoryById(int achievementCategoryId)
+        public async Task<IReplica<AchievementCategory>> GetAchievementCategoryById(int achievementCategoryId)
         {
             var request = new AchievementCategoryByIdRequest(achievementCategoryId);
             return await _http.GetResource(request, json => _achievementCategoryReader.Read(json, _missingMemberBehavior))
                 .ConfigureAwait(false);
         }
 
-        public async Task<IDataTransferSet<AchievementCategory>> GetAchievementCategoriesByIds(
+        public async Task<IReplicaSet<AchievementCategory>> GetAchievementCategoriesByIds(
             IReadOnlyCollection<int> achievementCategoryIds
         )
         {
@@ -56,7 +56,7 @@ namespace GW2SDK.Achievements.Categories
                 .ConfigureAwait(false);
         }
 
-        public async Task<IDataTransferPage<AchievementCategory>> GetAchievementCategoriesByPage(
+        public async Task<IReplicaPage<AchievementCategory>> GetAchievementCategoriesByPage(
             int pageIndex,
             int? pageSize = null
         )

@@ -25,28 +25,28 @@ namespace GW2SDK.Items
             _missingMemberBehavior = missingMemberBehavior;
         }
 
-        public async Task<IDataTransferSet<int>> GetItemsIndex()
+        public async Task<IReplicaSet<int>> GetItemsIndex()
         {
             var request = new ItemsIndexRequest();
             return await _http.GetResourcesSet(request, json => _itemReader.Id.ReadArray(json, _missingMemberBehavior))
                 .ConfigureAwait(false);
         }
 
-        public async Task<IDataTransfer<Item>> GetItemById(int itemId)
+        public async Task<IReplica<Item>> GetItemById(int itemId)
         {
             var request = new ItemByIdRequest(itemId);
             return await _http.GetResource(request, json => _itemReader.Read(json, _missingMemberBehavior))
                 .ConfigureAwait(false);
         }
 
-        public async Task<IDataTransferSet<Item>> GetItemsByIds(IReadOnlyCollection<int> itemIds)
+        public async Task<IReplicaSet<Item>> GetItemsByIds(IReadOnlyCollection<int> itemIds)
         {
             var request = new ItemsByIdsRequest(itemIds); 
             return await _http.GetResourcesSet(request, json => _itemReader.ReadArray(json, _missingMemberBehavior))
                 .ConfigureAwait(false);
         }
 
-        public async Task<IDataTransferPage<Item>> GetItemsByPage(int pageIndex, int? pageSize = null)
+        public async Task<IReplicaPage<Item>> GetItemsByPage(int pageIndex, int? pageSize = null)
         {
             var request = new ItemsByPageRequest(pageIndex, pageSize);
             return await _http.GetResourcesPage(request, json => _itemReader.ReadArray(json, _missingMemberBehavior))
@@ -57,7 +57,7 @@ namespace GW2SDK.Items
         /// <param name="token">One of <see cref="IPageContext.First" />, <see cref="IPageContext.Previous" />,
         /// <see cref="IPageContext.Self" />, <see cref="IPageContext.Next" /> or <see cref="IPageContext.Last" />.</param>
         /// <returns>The page specified by the token.</returns>
-        public async Task<IDataTransferPage<Item>> GetItemsByPage(ContinuationToken token)
+        public async Task<IReplicaPage<Item>> GetItemsByPage(ContinuationToken token)
         {
             var request = new ContinuationRequest(token);
             return await _http.GetResourcesPage(request, json => _itemReader.ReadArray(json, _missingMemberBehavior))

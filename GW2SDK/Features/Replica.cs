@@ -1,25 +1,22 @@
 ﻿using System;
-using System.Collections.Generic;
 
 namespace GW2SDK
 {
-    internal sealed class DataTransferPage<T> : IDataTransferPage<T>
+    internal sealed class Replica<T> : IReplica<T>
     {
-        public DataTransferPage(
+        public Replica(
             bool hasValue,
             DateTimeOffset? update = null,
-            IReadOnlySet<T>? value = default,
-            IPageContext? context = null,
+            T? value = default,
             DateTimeOffset? expires = null,
             DateTimeOffset? lastModified = null
         )
         {
-            HasValues = hasValue;
+            HasValue = hasValue;
             Update = update;
             if (hasValue)
             {
-                Values = value ?? throw new ArgumentNullException(nameof(value));
-                Context = context ?? throw new ArgumentNullException(nameof(context));
+                Value = value ?? throw new ArgumentNullException(nameof(value));
                 Expires = expires;
                 LastModified = lastModified;
             }
@@ -31,10 +28,10 @@ namespace GW2SDK
 
         public DateTimeOffset? LastModified { get; }
 
-        public bool HasValues { get; }
+        public bool HasValue { get; }
 
-        public IReadOnlySet<T>? Values { get; }
+        public T? Value { get; }
 
-        public IPageContext? Context { get; }
+        public static IReplica<T> NotModified(DateTimeOffset? date) => new Replica<T>(false, date);
     }
 }

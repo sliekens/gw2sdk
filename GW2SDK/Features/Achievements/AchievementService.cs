@@ -25,21 +25,21 @@ namespace GW2SDK.Achievements
             _missingMemberBehavior = missingMemberBehavior;
         }
 
-        public async Task<IDataTransferSet<int>> GetAchievementsIndex()
+        public async Task<IReplicaSet<int>> GetAchievementsIndex()
         {
             var request = new AchievementsIndexRequest();
             return await _http.GetResourcesSet(request, json => _achievementReader.Id.ReadArray(json, _missingMemberBehavior))
                 .ConfigureAwait(false);
         }
 
-        public async Task<IDataTransfer<Achievement>> GetAchievementById(int achievementId)
+        public async Task<IReplica<Achievement>> GetAchievementById(int achievementId)
         {
             var request = new AchievementByIdRequest(achievementId);
             return await _http.GetResource(request, json => _achievementReader.Read(json, _missingMemberBehavior))
                 .ConfigureAwait(false);
         }
 
-        public async Task<IDataTransferSet<Achievement>> GetAchievementsByIds(
+        public async Task<IReplicaSet<Achievement>> GetAchievementsByIds(
             IReadOnlyCollection<int> achievementIds
         )
         {
@@ -48,7 +48,7 @@ namespace GW2SDK.Achievements
                 .ConfigureAwait(false);
         }
 
-        public async Task<IDataTransferPage<Achievement>> GetAchievementsByPage(int pageIndex, int? pageSize = null)
+        public async Task<IReplicaPage<Achievement>> GetAchievementsByPage(int pageIndex, int? pageSize = null)
         {
             var request = new AchievementsByPageRequest(pageIndex, pageSize);
             return await _http.GetResourcesPage(request, json => _achievementReader.ReadArray(json, _missingMemberBehavior))

@@ -26,7 +26,7 @@ namespace GW2SDK.Accounts.Banks
         }
 
         [Scope(Permission.Inventories)]
-        public async Task<IDataTransfer<Bank>> GetBank(string? accessToken = null)
+        public async Task<IReplica<Bank>> GetBank(string? accessToken = null)
         {
             var request = new BankRequest(accessToken);
             return await _http.GetResource(request, json => _bankReader.Read(json, _missingMemberBehavior))
