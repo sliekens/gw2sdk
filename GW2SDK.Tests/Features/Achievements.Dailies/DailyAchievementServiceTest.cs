@@ -17,7 +17,7 @@ namespace GW2SDK.Tests.Features.Achievements.Dailies
 
             var actual = await sut.GetDailyAchievements(day);
 
-            Assert.IsType<DailyAchievementGroup>(actual);
+            Assert.IsType<DailyAchievementGroup>(actual.Value);
         }
     }
 }

@@ -17,7 +17,8 @@ namespace GW2SDK.Tests.Features.Accounts.DailyCrafting
             // For now I'll just maintain this by hand...
             // no clue how this can be solved without re-implementing the call to /v2/dailycrafting in test code (which makes the test pointless)
             var referenceData = await sut.GetDailyRecipes();
-
+            var dailyRecipes = referenceData.Value;
+            
             Assert.Equal(new[]
             {
                 "charged_quartz_crystal",
@@ -25,14 +26,14 @@ namespace GW2SDK.Tests.Features.Accounts.DailyCrafting
                 "lump_of_mithrilium",
                 "spool_of_silk_weaving_thread",
                 "spool_of_thick_elonian_cord"
-            }, referenceData);
+            }, dailyRecipes);
 
             // Again this next method is not deterministic...
             var actual = await sut.GetDailyRecipesOnCooldown(ConfigurationManager.Instance.ApiKeyFull);
 
             // The best we can do is verify that there are no unexpected recipes
             // i.e. all recipes must be present in the reference data
-            Assert.All(actual, recipeId => referenceData.Contains(recipeId));
+            Assert.All(actual.Value, recipeId => dailyRecipes.Contains(recipeId));
         }
     }
 }

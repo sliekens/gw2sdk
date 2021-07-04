@@ -23,8 +23,8 @@ namespace GW2SDK.Tests.Features.Continents
 
             var actual = await sut.GetContinents();
 
-            Assert.Equal(actual.ResultTotal, actual.Count);
-            Assert.All(actual,
+            Assert.Equal(actual.Context.ResultTotal, actual.Values.Count);
+            Assert.All(actual.Values,
                 continent =>
                 {
                     ContinentFact.Id_is_1_or_2(continent);
@@ -41,7 +41,7 @@ namespace GW2SDK.Tests.Features.Continents
 
             var actual = await sut.GetContinentsIndex();
 
-            Assert.Equal(actual.ResultTotal, actual.Count);
+            Assert.Equal(actual.Context.ResultTotal, actual.Values.Count);
         }
 
         [Fact]
@@ -56,7 +56,7 @@ namespace GW2SDK.Tests.Features.Continents
 
             var actual = await sut.GetContinentById(continentId);
 
-            Assert.Equal(continentId, actual.Id);
+            Assert.Equal(continentId, actual.Value.Id);
         }
 
         [Fact]
@@ -71,7 +71,7 @@ namespace GW2SDK.Tests.Features.Continents
 
             var actual = await sut.GetContinentsByIds(ids);
 
-            Assert.Collection(actual, first => Assert.Equal(1, first.Id), second => Assert.Equal(2, second.Id));
+            Assert.Collection(actual.Values, first => Assert.Equal(1, first.Id), second => Assert.Equal(2, second.Id));
         }
 
         [Fact]
@@ -114,8 +114,8 @@ namespace GW2SDK.Tests.Features.Continents
 
             var actual = await sut.GetContinentsByPage(0, 2);
 
-            Assert.Equal(2, actual.Count);
-            Assert.Equal(2, actual.PageSize);
+            Assert.Equal(2, actual.Values.Count);
+            Assert.Equal(2, actual.Context.PageSize);
         }
 
         [Fact]
@@ -130,7 +130,7 @@ namespace GW2SDK.Tests.Features.Continents
 
             var actual = await sut.GetFloors(continentId);
 
-            Assert.Equal(actual.ResultTotal, actual.Count);
+            Assert.Equal(actual.Context.ResultTotal, actual.Values.Count);
         }
 
         [Fact]
@@ -145,7 +145,7 @@ namespace GW2SDK.Tests.Features.Continents
 
             var actual = await sut.GetFloorsIndex(continentId);
 
-            Assert.Equal(actual.ResultTotal, actual.Count);
+            Assert.Equal(actual.Context.ResultTotal, actual.Values.Count);
         }
 
         [Fact]
@@ -161,7 +161,7 @@ namespace GW2SDK.Tests.Features.Continents
 
             var actual = await sut.GetFloorById(continentId, floorId);
 
-            Assert.Equal(floorId, actual.Id);
+            Assert.Equal(floorId, actual.Value.Id);
         }
 
         [Fact]
@@ -177,7 +177,7 @@ namespace GW2SDK.Tests.Features.Continents
 
             var actual = await sut.GetFloorsByIds(continentId, ids);
 
-            Assert.Collection(actual, first => Assert.Equal(1, first.Id), second => Assert.Equal(2, second.Id));
+            Assert.Collection(actual.Values, first => Assert.Equal(1, first.Id), second => Assert.Equal(2, second.Id));
         }
 
         [Fact]
@@ -226,8 +226,8 @@ namespace GW2SDK.Tests.Features.Continents
 
             var actual = await sut.GetFloorsByPage(continentId, 0, 3);
 
-            Assert.Equal(3, actual.Count);
-            Assert.Equal(3, actual.PageSize);
+            Assert.Equal(3, actual.Values.Count);
+            Assert.Equal(3, actual.Context.PageSize);
         }
     }
 }

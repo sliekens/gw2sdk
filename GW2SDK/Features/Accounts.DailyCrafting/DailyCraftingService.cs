@@ -27,7 +27,7 @@ namespace GW2SDK.Accounts.DailyCrafting
             _missingMemberBehavior = missingMemberBehavior;
         }
 
-        public async Task<IReadOnlySet<string>> GetDailyRecipes()
+        public async Task<IDataTransfer<IReadOnlySet<string>>> GetDailyRecipes()
         {
             var request = new DailyCraftingRequest();
             return await _http.GetResourcesSetSimple(request, json => _dailyCraftingReader.Id.ReadArray(json, _missingMemberBehavior))
@@ -35,7 +35,7 @@ namespace GW2SDK.Accounts.DailyCrafting
         }
 
         [Scope(Permission.Progression)]
-        public async Task<IReadOnlySet<string>> GetDailyRecipesOnCooldown(string? accessToken)
+        public async Task<IDataTransfer<IReadOnlySet<string>>> GetDailyRecipesOnCooldown(string? accessToken)
         {
             var request = new AccountDailyCraftingRequest(accessToken);
             return await _http.GetResourcesSetSimple(request, json => _dailyCraftingReader.Id.ReadArray(json, _missingMemberBehavior))

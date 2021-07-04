@@ -41,11 +41,11 @@ namespace GW2SDK.Tests.Features.Accounts.Banks
 
             var actual = await sut.GetBank(ConfigurationManager.Instance.ApiKeyFull);
 
-            BankFact.Bank_is_not_empty(actual);
+            BankFact.Bank_is_not_empty(actual.Value);
 
-            BankFact.Bank_tabs_have_30_slots(actual);
+            BankFact.Bank_tabs_have_30_slots(actual.Value);
 
-            Assert.All(actual,
+            Assert.All(actual.Value,
                 slot =>
                 {
                     if (slot is null) return;

@@ -40,7 +40,7 @@ namespace GW2SDK.Titles
                 .ConfigureAwait(false);
         }
 
-        public async Task<Title> GetTitleById(int titleId)
+        public async Task<IDataTransfer<Title>> GetTitleById(int titleId)
         {
             var request = new TitleByIdRequest(titleId);
             return await _http.GetResource(request, json => _titleReader.Read(json, _missingMemberBehavior))

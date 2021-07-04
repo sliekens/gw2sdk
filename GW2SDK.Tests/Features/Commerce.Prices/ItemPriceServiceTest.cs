@@ -18,7 +18,7 @@ namespace GW2SDK.Tests.Features.Commerce.Prices
 
             var actual = await sut.GetItemPricesIndex();
 
-            Assert.Equal(actual.ResultTotal, actual.Count);
+            Assert.Equal(actual.Context.ResultTotal, actual.Values.Count);
         }
 
         [Fact]
@@ -33,7 +33,7 @@ namespace GW2SDK.Tests.Features.Commerce.Prices
 
             var actual = await sut.GetItemPriceById(itemId);
 
-            Assert.Equal(itemId, actual.Id);
+            Assert.Equal(itemId, actual.Value.Id);
         }
 
         [Fact]
@@ -48,7 +48,7 @@ namespace GW2SDK.Tests.Features.Commerce.Prices
 
             var actual = await sut.GetItemPricesByIds(ids);
 
-            Assert.Collection(actual,
+            Assert.Collection(actual.Values,
                 first => Assert.Equal(24,     first.Id),
                 second => Assert.Equal(19699, second.Id),
                 third => Assert.Equal(35984,  third.Id));

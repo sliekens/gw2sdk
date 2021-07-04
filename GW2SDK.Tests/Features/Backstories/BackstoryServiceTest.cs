@@ -18,7 +18,7 @@ namespace GW2SDK.Tests.Features.Backstories
 
             var actual = await sut.GetBackstoryQuestions();
 
-            Assert.Equal(actual.ResultTotal, actual.Count);
+            Assert.Equal(actual.Context.ResultTotal, actual.Values.Count);
         }
 
         [Fact]
@@ -31,7 +31,7 @@ namespace GW2SDK.Tests.Features.Backstories
 
             var actual = await sut.GetBackstoryAnswers();
 
-            Assert.Equal(actual.ResultTotal, actual.Count);
+            Assert.Equal(actual.Context.ResultTotal, actual.Values.Count);
         }
 
         [Fact]
@@ -44,7 +44,7 @@ namespace GW2SDK.Tests.Features.Backstories
 
             var actual = await sut.GetBackstoryQuestionsIndex();
 
-            Assert.Equal(actual.ResultTotal, actual.Count);
+            Assert.Equal(actual.Context.ResultTotal, actual.Values.Count);
         }
 
         [Fact]
@@ -57,7 +57,7 @@ namespace GW2SDK.Tests.Features.Backstories
 
             var actual = await sut.GetBackstoryAnswersIndex();
 
-            Assert.Equal(actual.ResultTotal, actual.Count);
+            Assert.Equal(actual.Context.ResultTotal, actual.Values.Count);
         }
 
         [Fact]
@@ -72,7 +72,7 @@ namespace GW2SDK.Tests.Features.Backstories
 
             var actual = await sut.GetBackstoryQuestionById(questionId);
 
-            Assert.Equal(questionId, actual.Id);
+            Assert.Equal(questionId, actual.Value.Id);
         }
 
         [Fact]
@@ -87,7 +87,7 @@ namespace GW2SDK.Tests.Features.Backstories
 
             var actual = await sut.GetBackstoryAnswerById(answerId);
 
-            Assert.Equal(answerId, actual.Id);
+            Assert.Equal(answerId, actual.Value.Id);
         }
 
         [Fact]
@@ -223,7 +223,7 @@ namespace GW2SDK.Tests.Features.Backstories
 
             var actual = await sut.GetBackstoryQuestionsByIds(ids);
 
-            Assert.Collection(actual,
+            Assert.Collection(actual.Values,
                 first => Assert.Equal(ids[0], first.Id),
                 second => Assert.Equal(ids[1], second.Id),
                 third => Assert.Equal(ids[2], third.Id));
@@ -246,7 +246,7 @@ namespace GW2SDK.Tests.Features.Backstories
 
             var actual = await sut.GetBackstoryAnswersByIds(ids);
 
-            Assert.Collection(actual,
+            Assert.Collection(actual.Values,
                 first => Assert.Equal(ids[0], first.Id),
                 second => Assert.Equal(ids[1], second.Id),
                 third => Assert.Equal(ids[2], third.Id));
@@ -262,8 +262,8 @@ namespace GW2SDK.Tests.Features.Backstories
 
             var actual = await sut.GetBackstoryQuestionsByPage(1, 3);
 
-            Assert.Equal(3, actual.Count);
-            Assert.Equal(3, actual.PageSize);
+            Assert.Equal(3, actual.Values.Count);
+            Assert.Equal(3, actual.Context.PageSize);
         }
 
         [Fact]
@@ -276,8 +276,8 @@ namespace GW2SDK.Tests.Features.Backstories
 
             var actual = await sut.GetBackstoryAnswersByPage(1, 3);
 
-            Assert.Equal(3, actual.Count);
-            Assert.Equal(3, actual.PageSize);
+            Assert.Equal(3, actual.Values.Count);
+            Assert.Equal(3, actual.Context.PageSize);
         }
     }
 }

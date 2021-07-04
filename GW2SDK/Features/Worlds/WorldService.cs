@@ -40,7 +40,7 @@ namespace GW2SDK.Worlds
                 .ConfigureAwait(false);
         }
 
-        public async Task<World> GetWorldById(int worldId)
+        public async Task<IDataTransfer<World>> GetWorldById(int worldId)
         {
             var request = new WorldByIdRequest(worldId);
             return await _http.GetResource(request, json => _worldReader.Read(json, _missingMemberBehavior))

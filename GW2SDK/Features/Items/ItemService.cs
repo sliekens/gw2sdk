@@ -32,7 +32,7 @@ namespace GW2SDK.Items
                 .ConfigureAwait(false);
         }
 
-        public async Task<Item> GetItemById(int itemId)
+        public async Task<IDataTransfer<Item>> GetItemById(int itemId)
         {
             var request = new ItemByIdRequest(itemId);
             return await _http.GetResource(request, json => _itemReader.Read(json, _missingMemberBehavior))

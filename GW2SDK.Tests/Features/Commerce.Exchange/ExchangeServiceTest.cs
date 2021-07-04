@@ -17,8 +17,8 @@ namespace GW2SDK.Tests.Features.Commerce.Exchange
 
             var actual = await sut.ExchangeGoldForGems(coins);
 
-            Assert.True(actual.GemsToReceive > 0, "100 gold should be worth some gems.");
-            Assert.True(actual.CoinsPerGem > 0, "Gems can't be free.");
+            Assert.True(actual.Value.GemsToReceive > 0, "100 gold should be worth some gems.");
+            Assert.True(actual.Value.CoinsPerGem > 0, "Gems can't be free.");
         }
 
         [Fact]
@@ -31,8 +31,8 @@ namespace GW2SDK.Tests.Features.Commerce.Exchange
 
             var actual = await sut.ExchangeGemsForGold(gems);
 
-            Assert.True(actual.CoinsToReceive > 10000, "800 gems should be worth some gold.");
-            Assert.True(actual.CoinsPerGem > 0, "Gems can't be free.");
+            Assert.True(actual.Value.CoinsToReceive > 10000, "800 gems should be worth some gold.");
+            Assert.True(actual.Value.CoinsPerGem > 0, "Gems can't be free.");
         }
     }
 }

@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.Immutable;
+using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text.Json;
@@ -54,7 +54,7 @@ namespace GW2SDK.Http
                 .ConfigureAwait(false);
         }
 
-        internal static async Task<T> GetResource<T>(
+        internal static async Task<IDataTransfer<T>> GetResource<T>(
             this HttpClient instance,
             HttpRequestMessage request,
             Func<JsonDocument, T> resultSelector
@@ -62,13 +62,27 @@ namespace GW2SDK.Http
         {
             using var response = await instance.SendAsync(request, HttpCompletionOption.ResponseHeadersRead)
                 .ConfigureAwait(false);
+            var update = response.Headers.Date;
+            if (response.StatusCode == HttpStatusCode.NotModified)
+            {
+                return DataTransfer<T>.NotModified(update);
+            }
+
             response.EnsureSuccessStatusCode();
+
             using var json = await response.Content.ReadAsJsonAsync()
                 .ConfigureAwait(false);
-            return resultSelector(json);
+
+            var result = resultSelector(json);
+
+            return new DataTransfer<T>(true,
+                update,
+                result,
+                response.Content.Headers.Expires,
+                response.Content.Headers.LastModified);
         }
 
-        internal static async Task<IReadOnlySet<T>> GetResourcesSetSimple<T>(
+        internal static async Task<IDataTransfer<IReadOnlySet<T>>> GetResourcesSetSimple<T>(
             this HttpClient instance,
             HttpRequestMessage request,
             Func<JsonDocument, IEnumerable<T>> resultSelector
@@ -76,10 +90,19 @@ namespace GW2SDK.Http
         {
             using var response = await instance.SendAsync(request, HttpCompletionOption.ResponseHeadersRead)
                 .ConfigureAwait(false);
+            var update = response.Headers.Date;
             response.EnsureSuccessStatusCode();
+
             using var json = await response.Content.ReadAsJsonAsync()
                 .ConfigureAwait(false);
-            return new HashSet<T>(resultSelector(json));
+
+            var result = new HashSet<T>(resultSelector(json));
+
+            return new DataTransfer<IReadOnlySet<T>>(true,
+                update,
+                result,
+                response.Content.Headers.Expires,
+                response.Content.Headers.LastModified);
         }
 
         internal static async Task<IDataTransferSet<T>> GetResourcesSet<T>(
@@ -90,13 +113,21 @@ namespace GW2SDK.Http
         {
             using var response = await instance.SendAsync(request, HttpCompletionOption.ResponseHeadersRead)
                 .ConfigureAwait(false);
+            var update = response.Headers.Date;
             response.EnsureSuccessStatusCode();
+
             using var json = await response.Content.ReadAsJsonAsync()
                 .ConfigureAwait(false);
-            var context = response.Headers.GetCollectionContext();
-            var set = new HashSet<T>(context.ResultCount);
-            set.UnionWith(resultSelector(json));
-            return new DataTransferSet<T>(set, context);
+
+            var result = new HashSet<T>(response.Headers.GetCollectionContext().ResultCount);
+            result.UnionWith(resultSelector(json));
+
+            return new DataTransferSet<T>(true,
+                update,
+                result,
+                response.Headers.GetCollectionContext(),
+                response.Content.Headers.Expires,
+                response.Content.Headers.LastModified);
         }
 
         internal static async Task<IDataTransferPage<T>> GetResourcesPage<T>(
@@ -107,13 +138,21 @@ namespace GW2SDK.Http
         {
             using var response = await instance.SendAsync(request, HttpCompletionOption.ResponseHeadersRead)
                 .ConfigureAwait(false);
+            var update = response.Headers.Date;
             response.EnsureSuccessStatusCode();
+
             using var json = await response.Content.ReadAsJsonAsync()
                 .ConfigureAwait(false);
-            var pageContext = response.Headers.GetPageContext();
-            var set = new HashSet<T>(pageContext.ResultCount);
-            set.UnionWith(resultSelector(json));
-            return new DataTransferPage<T>(set, pageContext);
+
+            var result = new HashSet<T>(response.Headers.GetPageContext().ResultCount);
+            result.UnionWith(resultSelector(json));
+
+            return new DataTransferPage<T>(true,
+                update,
+                result,
+                response.Headers.GetPageContext(),
+                response.Content.Headers.Expires,
+                response.Content.Headers.LastModified);
         }
     }
 }

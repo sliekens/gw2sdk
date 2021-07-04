@@ -27,7 +27,7 @@ namespace GW2SDK.Accounts.Recipes
         }
 
         [Scope(Permission.Unlocks)]
-        public async Task<IReadOnlySet<int>> GetUnlockedRecipes(string? accessToken = null)
+        public async Task<IDataTransfer<IReadOnlySet<int>>> GetUnlockedRecipes(string? accessToken = null)
         {
             var request = new UnlockedRecipesRequest(accessToken);
             return await _http.GetResourcesSetSimple(request, json => _accountRecipeReader.Id.ReadArray(json, _missingMemberBehavior))

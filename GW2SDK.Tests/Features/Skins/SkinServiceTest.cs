@@ -18,7 +18,7 @@ namespace GW2SDK.Tests.Features.Skins
 
             var actual = await sut.GetSkinsIndex();
 
-            Assert.Equal(actual.ResultTotal, actual.Count);
+            Assert.Equal(actual.Context.ResultTotal, actual.Values.Count);
         }
 
         [Fact]
@@ -33,7 +33,7 @@ namespace GW2SDK.Tests.Features.Skins
 
             var actual = await sut.GetSkinById(skinId);
 
-            Assert.Equal(skinId, actual.Id);
+            Assert.Equal(skinId, actual.Value.Id);
         }
 
         [Fact]
@@ -48,7 +48,7 @@ namespace GW2SDK.Tests.Features.Skins
 
             var actual = await sut.GetSkinsByIds(ids);
 
-            Assert.Collection(actual, skin => Assert.Equal(1, skin.Id), skin => Assert.Equal(2, skin.Id), skin => Assert.Equal(3, skin.Id));
+            Assert.Collection(actual.Values, skin => Assert.Equal(1, skin.Id), skin => Assert.Equal(2, skin.Id), skin => Assert.Equal(3, skin.Id));
         }
 
         [Fact]
@@ -91,8 +91,8 @@ namespace GW2SDK.Tests.Features.Skins
 
             var actual = await sut.GetSkinsByPage(1, 3);
 
-            Assert.Equal(3, actual.Count);
-            Assert.Equal(3, actual.PageSize);
+            Assert.Equal(3, actual.Values.Count);
+            Assert.Equal(3, actual.Context.PageSize);
         }
     }
 }

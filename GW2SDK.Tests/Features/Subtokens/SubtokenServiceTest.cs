@@ -12,7 +12,7 @@ namespace GW2SDK.Tests.Features.Subtokens
 {
     public class SubtokenServiceTest
     {
-        private static async Task<TokenInfo> GetTokenInfo(TokenInfoService tokenInfoService, CreatedSubtoken actual)
+        private static async Task<IDataTransfer<TokenInfo>> GetTokenInfo(TokenInfoService tokenInfoService, CreatedSubtoken actual)
         {
             // BUG: /v2/tokeninfo sometimes fails with "Invalid access token" for recently created subtokens
             // I guess this is a timing problem, because a retry usually does pass.
@@ -35,7 +35,7 @@ namespace GW2SDK.Tests.Features.Subtokens
 
             var actual = await sut.CreateSubtoken(ConfigurationManager.Instance.ApiKeyFull);
 
-            Assert.IsType<CreatedSubtoken>(actual);
+            Assert.IsType<CreatedSubtoken>(actual.Value);
         }
 
         [Fact]
@@ -55,9 +55,9 @@ namespace GW2SDK.Tests.Features.Subtokens
             var actual = await sut.CreateSubtoken(ConfigurationManager.Instance.ApiKeyFull,
                 absoluteExpirationDate: expirationDate);
 
-            var tokenInfo = await GetTokenInfo(tokenInfoService, actual);
+            var tokenInfo = await GetTokenInfo(tokenInfoService, actual.Value);
 
-            var subtokenInfo = Assert.IsType<SubtokenInfo>(tokenInfo);
+            var subtokenInfo = Assert.IsType<SubtokenInfo>(tokenInfo.Value);
 
             Assert.Equal(expirationDate, subtokenInfo.ExpiresAt);
         }
@@ -80,9 +80,9 @@ namespace GW2SDK.Tests.Features.Subtokens
 
             var actual = await sut.CreateSubtoken(ConfigurationManager.Instance.ApiKeyFull, urls: urls);
 
-            var tokenInfo = await GetTokenInfo(tokenInfoService, actual);
+            var tokenInfo = await GetTokenInfo(tokenInfoService, actual.Value);
 
-            var subtokenInfo = Assert.IsType<SubtokenInfo>(tokenInfo);
+            var subtokenInfo = Assert.IsType<SubtokenInfo>(tokenInfo.Value);
 
             Assert.Equal(urls, subtokenInfo.Urls.Select(url => url.ToString()).ToList());
         }

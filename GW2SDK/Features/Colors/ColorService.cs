@@ -40,7 +40,7 @@ namespace GW2SDK.Colors
                 .ConfigureAwait(false);
         }
 
-        public async Task<Color> GetColorById(int colorId)
+        public async Task<IDataTransfer<Color>> GetColorById(int colorId)
         {
             var request = new ColorByIdRequest(colorId);
             return await _http.GetResource(request, json => _colorReader.Read(json, _missingMemberBehavior))

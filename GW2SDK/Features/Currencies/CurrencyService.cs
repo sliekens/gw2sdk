@@ -39,7 +39,7 @@ namespace GW2SDK.Currencies
                 .ConfigureAwait(false);
         }
 
-        public async Task<Currency> GetCurrencyById(int currencyId)
+        public async Task<IDataTransfer<Currency>> GetCurrencyById(int currencyId)
         {
             var request = new CurrencyByIdRequest(currencyId);
             return await _http.GetResource(request, json => _currencyReader.Read(json, _missingMemberBehavior))

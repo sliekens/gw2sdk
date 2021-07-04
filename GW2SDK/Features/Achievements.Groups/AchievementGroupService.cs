@@ -42,7 +42,7 @@ namespace GW2SDK.Achievements.Groups
                 .ConfigureAwait(false);
         }
 
-        public async Task<AchievementGroup> GetAchievementGroupById(string achievementGroupId)
+        public async Task<IDataTransfer<AchievementGroup>> GetAchievementGroupById(string achievementGroupId)
         {
             var request = new AchievementGroupByIdRequest(achievementGroupId);
             return await _http.GetResource(request, json => _achievementGroupReader.Read(json, _missingMemberBehavior))

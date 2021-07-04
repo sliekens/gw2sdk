@@ -1,43 +1,40 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 
 namespace GW2SDK
 {
     internal sealed class DataTransferSet<T> : IDataTransferSet<T>
     {
-        private readonly ICollectionContext _context;
-
-        private readonly IReadOnlySet<T> _inner;
-
-        public DataTransferSet(IReadOnlySet<T> inner, ICollectionContext context)
+        public DataTransferSet(
+            bool hasValue,
+            DateTimeOffset? update = null,
+            IReadOnlySet<T>? value = default,
+            ICollectionContext? context = null,
+            DateTimeOffset? expires = null,
+            DateTimeOffset? lastModified = null)
         {
-            _inner = inner ?? throw new ArgumentNullException(nameof(inner));
-            _context = context ?? throw new ArgumentNullException(nameof(context));
+
+            HasValues = hasValue;
+            Update = update;
+            if (hasValue)
+            {
+                Values = value ?? throw new ArgumentNullException(nameof(value));
+                Context = context ?? throw new ArgumentNullException(nameof(context));
+                Expires = expires;
+                LastModified = lastModified;
+            }
         }
 
-        public int ResultTotal => _context.ResultTotal;
+        public DateTimeOffset? Update { get; }
 
-        public int ResultCount => _context.ResultCount;
+        public DateTimeOffset? Expires { get; }
 
-        public IEnumerator<T> GetEnumerator() => _inner.GetEnumerator();
+        public DateTimeOffset? LastModified { get; }
 
-        IEnumerator IEnumerable.GetEnumerator() => ((IEnumerable) _inner).GetEnumerator();
+        public bool HasValues { get; }
 
-        public int Count => _inner.Count;
+        public IReadOnlySet<T>? Values { get; }
 
-        public bool Contains(T item) => _inner.Contains(item);
-
-        public bool IsProperSubsetOf(IEnumerable<T> other) => _inner.IsProperSubsetOf(other);
-
-        public bool IsProperSupersetOf(IEnumerable<T> other) => _inner.IsProperSupersetOf(other);
-
-        public bool IsSubsetOf(IEnumerable<T> other) => _inner.IsSubsetOf(other);
-
-        public bool IsSupersetOf(IEnumerable<T> other) => _inner.IsSupersetOf(other);
-
-        public bool Overlaps(IEnumerable<T> other) => _inner.Overlaps(other);
-
-        public bool SetEquals(IEnumerable<T> other) => _inner.SetEquals(other);
+        public ICollectionContext? Context { get; }
     }
 }

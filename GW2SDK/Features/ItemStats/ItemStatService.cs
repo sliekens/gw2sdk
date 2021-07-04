@@ -43,7 +43,7 @@ namespace GW2SDK.ItemStats
                 .ConfigureAwait(false);
         }
 
-        public async Task<ItemStat> GetItemStatById(int itemStatId)
+        public async Task<IDataTransfer<ItemStat>> GetItemStatById(int itemStatId)
         {
             var request = new ItemStatByIdRequest(itemStatId);
             return await _http.GetResource(request, json => _itemStatReader.Read(json, _missingMemberBehavior))

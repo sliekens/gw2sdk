@@ -43,7 +43,7 @@ namespace GW2SDK.Skills
                 .ConfigureAwait(false);
         }
 
-        public async Task<Skill> GetSkillById(int skillId)
+        public async Task<IDataTransfer<Skill>> GetSkillById(int skillId)
         {
             var request = new SkillByIdRequest(skillId);
             return await _http.GetResource(request, json => _skillReader.Read(json, _missingMemberBehavior))

@@ -40,7 +40,7 @@ namespace GW2SDK.Continents
                 .ConfigureAwait(false);
         }
 
-        public async Task<Continent> GetContinentById(int continentId)
+        public async Task<IDataTransfer<Continent>> GetContinentById(int continentId)
         {
             var request = new ContinentByIdRequest(continentId);
             return await _http.GetResource(request, json => _continentReader.Read(json, _missingMemberBehavior))
@@ -75,7 +75,7 @@ namespace GW2SDK.Continents
                 .ConfigureAwait(false);
         }
 
-        public async Task<Floor> GetFloorById(int continentId, int floorId)
+        public async Task<IDataTransfer<Floor>> GetFloorById(int continentId, int floorId)
         {
             var request = new FloorByIdRequest(continentId, floorId);
             return await _http.GetResource(request, json => _continentReader.Floor.Read(json, _missingMemberBehavior))

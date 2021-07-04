@@ -58,14 +58,14 @@ namespace GW2SDK.Backstories
                 .ConfigureAwait(false);
         }
 
-        public async Task<BackstoryQuestion> GetBackstoryQuestionById(int questionId)
+        public async Task<IDataTransfer<BackstoryQuestion>> GetBackstoryQuestionById(int questionId)
         {
             var request = new BackstoryQuestionByIdRequest(questionId);
             return await _http.GetResource(request, json => _backstoryReader.Question.Read(json, _missingMemberBehavior))
                 .ConfigureAwait(false);
         }
 
-        public async Task<BackstoryAnswer> GetBackstoryAnswerById(string answerId)
+        public async Task<IDataTransfer<BackstoryAnswer>> GetBackstoryAnswerById(string answerId)
         {
             var request = new BackstoryAnswerByIdRequest(answerId);
             return await _http.GetResource(request, json => _backstoryReader.Answer.Read(json, _missingMemberBehavior))

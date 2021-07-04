@@ -18,9 +18,9 @@ namespace GW2SDK.Tests.Features.Professions
 
             var actual = await sut.GetProfessions();
 
-            Assert.Equal(Enum.GetNames<ProfessionName>().Length, actual.Count);
+            Assert.Equal(Enum.GetNames<ProfessionName>().Length, actual.Values.Count);
 
-            foreach (var profession in actual)
+            foreach (var profession in actual.Values)
             {
                 Assert.True(Enum.IsDefined(profession.Id), "Enum.IsDefined(profession.Id)");
                 Assert.NotEmpty(profession.Name);
@@ -39,8 +39,8 @@ namespace GW2SDK.Tests.Features.Professions
 
             var actual = await sut.GetProfessionNames();
 
-            Assert.Equal(Enum.GetNames<ProfessionName>().Length, actual.Count);
-            Assert.All(actual, name => Assert.True(Enum.IsDefined(name), "Enum.IsDefined(name)"));
+            Assert.Equal(Enum.GetNames<ProfessionName>().Length, actual.Values.Count);
+            Assert.All(actual.Values, name => Assert.True(Enum.IsDefined(name), "Enum.IsDefined(name)"));
         }
 
         [Fact]
@@ -55,7 +55,7 @@ namespace GW2SDK.Tests.Features.Professions
 
             var actual = await sut.GetProfessionByName(name);
 
-            Assert.Equal(name, actual.Id);
+            Assert.Equal(name, actual.Value.Id);
         }
 
         [Fact]
@@ -70,7 +70,7 @@ namespace GW2SDK.Tests.Features.Professions
 
             var actual = await sut.GetProfessionsByIds(names);
 
-            Assert.Collection(actual,
+            Assert.Collection(actual.Values,
                 first => Assert.Equal(names[0],  first.Id),
                 second => Assert.Equal(names[1], second.Id),
                 third => Assert.Equal(names[2],  third.Id));
@@ -86,8 +86,8 @@ namespace GW2SDK.Tests.Features.Professions
 
             var actual = await sut.GetProfessionsByPage(1, 3);
 
-            Assert.Equal(3, actual.Count);
-            Assert.Equal(3, actual.PageSize);
+            Assert.Equal(3, actual.Values.Count);
+            Assert.Equal(3, actual.Context.PageSize);
         }
     }
 }

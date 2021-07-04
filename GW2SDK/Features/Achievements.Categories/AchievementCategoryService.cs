@@ -40,7 +40,7 @@ namespace GW2SDK.Achievements.Categories
                 .ConfigureAwait(false);
         }
 
-        public async Task<AchievementCategory> GetAchievementCategoryById(int achievementCategoryId)
+        public async Task<IDataTransfer<AchievementCategory>> GetAchievementCategoryById(int achievementCategoryId)
         {
             var request = new AchievementCategoryByIdRequest(achievementCategoryId);
             return await _http.GetResource(request, json => _achievementCategoryReader.Read(json, _missingMemberBehavior))

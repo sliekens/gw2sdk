@@ -17,7 +17,7 @@ namespace GW2SDK.Tests.Features.ItemStats
 
             var actual = await sut.GetItemStats();
 
-            Assert.Equal(actual.ResultTotal, actual.Count);
+            Assert.Equal(actual.Context.ResultTotal, actual.Values.Count);
         }
 
         [Fact]
@@ -30,7 +30,7 @@ namespace GW2SDK.Tests.Features.ItemStats
 
             var actual = await sut.GetItemStatsIndex();
 
-            Assert.Equal(actual.ResultTotal, actual.Count);
+            Assert.Equal(actual.Context.ResultTotal, actual.Values.Count);
         }
 
         [Fact]
@@ -45,7 +45,7 @@ namespace GW2SDK.Tests.Features.ItemStats
 
             var actual = await sut.GetItemStatById(itemStatId);
 
-            Assert.Equal(itemStatId, actual.Id);
+            Assert.Equal(itemStatId, actual.Value.Id);
         }
 
         [Fact]
@@ -65,7 +65,7 @@ namespace GW2SDK.Tests.Features.ItemStats
 
             var actual = await sut.GetItemStatsByIds(ids);
 
-            Assert.Collection(actual,
+            Assert.Collection(actual.Values,
                 first => Assert.Equal(ids[0], first.Id),
                 second => Assert.Equal(ids[1], second.Id),
                 third => Assert.Equal(ids[2], third.Id));
@@ -81,13 +81,13 @@ namespace GW2SDK.Tests.Features.ItemStats
 
             var actual = await sut.GetItemStatsByPage(1, 3);
 
-            Assert.Equal(3, actual.Count);
-            Assert.Equal(3, actual.PageSize);
-            Assert.NotNull(actual.Next);
+            Assert.Equal(3, actual.Values.Count);
+            Assert.Equal(3, actual.Context.PageSize);
+            Assert.NotNull(actual.Context.Next);
 
-            var next = await sut.GetItemStatsByPage(actual.Next);
+            var next = await sut.GetItemStatsByPage(actual.Context.Next);
 
-            Assert.Equal(actual.Next, next.Self);
+            Assert.Equal(actual.Context.Next, next.Context.Self);
         }
     }
 }
