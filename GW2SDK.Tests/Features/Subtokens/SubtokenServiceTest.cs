@@ -12,7 +12,7 @@ namespace GW2SDK.Tests.Features.Subtokens
 {
     public class SubtokenServiceTest
     {
-        private static async Task<IDataTransfer<TokenInfo>> GetTokenInfo(TokenInfoService tokenInfoService, CreatedSubtoken actual)
+        private static async Task<IReplica<TokenInfo>> GetTokenInfo(TokenInfoService tokenInfoService, CreatedSubtoken actual)
         {
             // BUG: /v2/tokeninfo sometimes fails with "Invalid access token" for recently created subtokens
             // I guess this is a timing problem, because a retry usually does pass.

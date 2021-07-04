@@ -24,7 +24,7 @@ namespace GW2SDK.Accounts
             _missingMemberBehavior = missingMemberBehavior;
         }
 
-        public async Task<IDataTransfer<Account>> GetAccount(string? accessToken = null)
+        public async Task<IReplica<Account>> GetAccount(string? accessToken = null)
         {
             var request = new AccountRequest(accessToken);
             return await _http.GetResource(request, json => _accountReader.Read(json, _missingMemberBehavior))

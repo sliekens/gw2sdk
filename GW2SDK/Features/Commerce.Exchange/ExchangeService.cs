@@ -24,14 +24,14 @@ namespace GW2SDK.Commerce.Exchange
             _missingMemberBehavior = missingMemberBehavior;
         }
 
-        public async Task<IDataTransfer<GemsForGoldExchange>> ExchangeGemsForGold(int gemsCount)
+        public async Task<IReplica<GemsForGoldExchange>> ExchangeGemsForGold(int gemsCount)
         {
             var request = new ExchangeGemsForGoldRequest(gemsCount);
             return await _http.GetResource(request, json => _exchangeReader.GemsForGold.Read(json, _missingMemberBehavior))
                 .ConfigureAwait(false);
         }
 
-        public async Task<IDataTransfer<GoldForGemsExchange>> ExchangeGoldForGems(Coin coinsCount)
+        public async Task<IReplica<GoldForGemsExchange>> ExchangeGoldForGems(Coin coinsCount)
         {
             var request = new ExchangeGoldForGemsRequest(coinsCount);
             return await _http.GetResource(request, json => _exchangeReader.GoldForGems.Read(json, _missingMemberBehavior))

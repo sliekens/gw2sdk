@@ -25,35 +25,35 @@ namespace GW2SDK.Currencies
             _missingMemberBehavior = missingMemberBehavior;
         }
 
-        public async Task<IDataTransferSet<Currency>> GetCurrencies()
+        public async Task<IReplicaSet<Currency>> GetCurrencies()
         {
             var request = new CurrenciesRequest();
             return await _http.GetResourcesSet(request, json => _currencyReader.ReadArray(json, _missingMemberBehavior))
                 .ConfigureAwait(false);
         }
 
-        public async Task<IDataTransferSet<int>> GetCurrenciesIndex()
+        public async Task<IReplicaSet<int>> GetCurrenciesIndex()
         {
             var request = new CurrenciesIndexRequest();
             return await _http.GetResourcesSet(request, json => _currencyReader.Id.ReadArray(json, _missingMemberBehavior))
                 .ConfigureAwait(false);
         }
 
-        public async Task<IDataTransfer<Currency>> GetCurrencyById(int currencyId)
+        public async Task<IReplica<Currency>> GetCurrencyById(int currencyId)
         {
             var request = new CurrencyByIdRequest(currencyId);
             return await _http.GetResource(request, json => _currencyReader.Read(json, _missingMemberBehavior))
                 .ConfigureAwait(false);
         }
 
-        public async Task<IDataTransferSet<Currency>> GetCurrenciesByIds(IReadOnlyCollection<int> currencyIds)
+        public async Task<IReplicaSet<Currency>> GetCurrenciesByIds(IReadOnlyCollection<int> currencyIds)
         {
             var request = new CurrenciesByIdsRequest(currencyIds);
             return await _http.GetResourcesSet(request, json => _currencyReader.ReadArray(json, _missingMemberBehavior))
                 .ConfigureAwait(false);
         }
 
-        public async Task<IDataTransferPage<Currency>> GetCurrenciesByPage(int pageIndex, int? pageSize = null)
+        public async Task<IReplicaPage<Currency>> GetCurrenciesByPage(int pageIndex, int? pageSize = null)
         {
             var request = new CurrenciesByPageRequest(pageIndex, pageSize);
             return await _http.GetResourcesPage(request, json => _currencyReader.ReadArray(json, _missingMemberBehavior))

@@ -26,7 +26,7 @@ namespace GW2SDK.Characters.Recipes
         }
 
         [Scope(Permission.Characters, Permission.Inventories)]
-        public async Task<IDataTransfer<Character>> GetUnlockedRecipes(string characterId, string? accessToken = null)
+        public async Task<IReplica<Character>> GetUnlockedRecipes(string characterId, string? accessToken = null)
         {
             var request = new UnlockedRecipesRequest(characterId, accessToken);
             return await _http.GetResource(request, json => _characterReader.Read(json, _missingMemberBehavior))

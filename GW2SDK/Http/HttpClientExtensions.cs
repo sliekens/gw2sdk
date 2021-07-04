@@ -54,7 +54,7 @@ namespace GW2SDK.Http
                 .ConfigureAwait(false);
         }
 
-        internal static async Task<IDataTransfer<T>> GetResource<T>(
+        internal static async Task<IReplica<T>> GetResource<T>(
             this HttpClient instance,
             HttpRequestMessage request,
             Func<JsonDocument, T> resultSelector
@@ -65,7 +65,7 @@ namespace GW2SDK.Http
             var update = response.Headers.Date;
             if (response.StatusCode == HttpStatusCode.NotModified)
             {
-                return DataTransfer<T>.NotModified(update);
+                return Replica<T>.NotModified(update);
             }
 
             response.EnsureSuccessStatusCode();
@@ -75,14 +75,14 @@ namespace GW2SDK.Http
 
             var result = resultSelector(json);
 
-            return new DataTransfer<T>(true,
+            return new Replica<T>(true,
                 update,
                 result,
                 response.Content.Headers.Expires,
                 response.Content.Headers.LastModified);
         }
 
-        internal static async Task<IDataTransfer<IReadOnlySet<T>>> GetResourcesSetSimple<T>(
+        internal static async Task<IReplica<IReadOnlySet<T>>> GetResourcesSetSimple<T>(
             this HttpClient instance,
             HttpRequestMessage request,
             Func<JsonDocument, IEnumerable<T>> resultSelector
@@ -98,14 +98,14 @@ namespace GW2SDK.Http
 
             var result = new HashSet<T>(resultSelector(json));
 
-            return new DataTransfer<IReadOnlySet<T>>(true,
+            return new Replica<IReadOnlySet<T>>(true,
                 update,
                 result,
                 response.Content.Headers.Expires,
                 response.Content.Headers.LastModified);
         }
 
-        internal static async Task<IDataTransferSet<T>> GetResourcesSet<T>(
+        internal static async Task<IReplicaSet<T>> GetResourcesSet<T>(
             this HttpClient instance,
             HttpRequestMessage request,
             Func<JsonDocument, IEnumerable<T>> resultSelector
@@ -122,7 +122,7 @@ namespace GW2SDK.Http
             var result = new HashSet<T>(response.Headers.GetCollectionContext().ResultCount);
             result.UnionWith(resultSelector(json));
 
-            return new DataTransferSet<T>(true,
+            return new ReplicaSet<T>(true,
                 update,
                 result,
                 response.Headers.GetCollectionContext(),
@@ -130,7 +130,7 @@ namespace GW2SDK.Http
                 response.Content.Headers.LastModified);
         }
 
-        internal static async Task<IDataTransferPage<T>> GetResourcesPage<T>(
+        internal static async Task<IReplicaPage<T>> GetResourcesPage<T>(
             this HttpClient instance,
             HttpRequestMessage request,
             Func<JsonDocument, IEnumerable<T>> resultSelector
@@ -147,7 +147,7 @@ namespace GW2SDK.Http
             var result = new HashSet<T>(response.Headers.GetPageContext().ResultCount);
             result.UnionWith(resultSelector(json));
 
-            return new DataTransferPage<T>(true,
+            return new ReplicaPage<T>(true,
                 update,
                 result,
                 response.Headers.GetPageContext(),

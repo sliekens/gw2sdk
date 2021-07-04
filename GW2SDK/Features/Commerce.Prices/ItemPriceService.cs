@@ -26,21 +26,21 @@ namespace GW2SDK.Commerce.Prices
             _missingMemberBehavior = missingMemberBehavior;
         }
 
-        public async Task<IDataTransferSet<int>> GetItemPricesIndex()
+        public async Task<IReplicaSet<int>> GetItemPricesIndex()
         {
             var request = new ItemPricesIndexRequest();
             return await _http.GetResourcesSet(request, json => _itemPriceReader.Id.ReadArray(json, _missingMemberBehavior))
                 .ConfigureAwait(false);
         }
 
-        public async Task<IDataTransfer<ItemPrice>> GetItemPriceById(int itemId)
+        public async Task<IReplica<ItemPrice>> GetItemPriceById(int itemId)
         {
             var request = new ItemPriceByIdRequest(itemId);
             return await _http.GetResource(request, json => _itemPriceReader.Read(json, _missingMemberBehavior))
                 .ConfigureAwait(false);
         }
 
-        public async Task<IDataTransferSet<ItemPrice>> GetItemPricesByIds(IReadOnlyCollection<int> itemIds)
+        public async Task<IReplicaSet<ItemPrice>> GetItemPricesByIds(IReadOnlyCollection<int> itemIds)
         {
             var request = new ItemPricesByIdsRequest(itemIds);
             return await _http.GetResourcesSet(request, json => _itemPriceReader.ReadArray(json, _missingMemberBehavior))

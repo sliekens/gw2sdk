@@ -27,7 +27,7 @@ namespace GW2SDK.Tokens
             _missingMemberBehavior = missingMemberBehavior;
         }
 
-        public async Task<IDataTransfer<TokenInfo>> GetTokenInfo(string? accessToken)
+        public async Task<IReplica<TokenInfo>> GetTokenInfo(string? accessToken)
         {
             var request = new TokenInfoRequest(accessToken);
             return await _http.GetResource(request, json => _tokenInfoReader.Read(json, _missingMemberBehavior))
