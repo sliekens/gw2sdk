@@ -1,7 +1,6 @@
 ﻿using System.Text.Json;
 using GW2SDK.Json;
 using GW2SDK.Recipes;
-using GW2SDK.Tests.Features.Recipes.Fixtures;
 using GW2SDK.Tests.TestInfrastructure;
 using Xunit;
 

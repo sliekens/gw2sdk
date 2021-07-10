@@ -2,7 +2,7 @@
 using System.Linq;
 using GW2SDK.Tests.TestInfrastructure;
 
-namespace GW2SDK.Tests.Features.Recipes.Fixtures
+namespace GW2SDK.Tests.Features.Recipes
 {
     public class RecipeFixture
     {

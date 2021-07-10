@@ -2,7 +2,7 @@
 using System.Linq;
 using GW2SDK.Tests.TestInfrastructure;
 
-namespace GW2SDK.Tests.Features.Commerce.Prices.Fixtures
+namespace GW2SDK.Tests.Features.Commerce.Prices
 {
     public class ItemPriceFixture
     {

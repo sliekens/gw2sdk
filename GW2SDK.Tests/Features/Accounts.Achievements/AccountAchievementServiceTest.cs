@@ -8,6 +8,11 @@ namespace GW2SDK.Tests.Features.Accounts.Achievements
 {
     public class AccountAchievementServiceTest
     {
+        private static class AccountAchievementFact
+        {
+            public static void Id_is_positive(AccountAchievement actual) => Assert.InRange(actual.Id, 1, int.MaxValue);
+        }
+
         [Fact]
         [Trait("Feature",  "Accounts.Achievements")]
         [Trait("Category", "Integration")]
@@ -19,6 +24,12 @@ namespace GW2SDK.Tests.Features.Accounts.Achievements
             var actual = await sut.GetAccountAchievements(ConfigurationManager.Instance.ApiKeyFull);
 
             Assert.Equal(actual.Context.ResultTotal, actual.Values.Count);
+
+            Assert.All(actual.Values,
+                achievement =>
+                {
+                    AccountAchievementFact.Id_is_positive(achievement);
+                });
         }
 
         [Fact]
