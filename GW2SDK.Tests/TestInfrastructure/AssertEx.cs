@@ -34,5 +34,10 @@ namespace GW2SDK.Tests.TestInfrastructure
                 }
             }
         }
+
+        public static void Equal(DateTimeOffset expected, DateTimeOffset actual, TimeSpan precision)
+        {
+            Assert.Equal(expected.LocalDateTime, actual.LocalDateTime, precision);
+        }
     }
 }
