@@ -2,7 +2,7 @@
 using System.Linq;
 using GW2SDK.Tests.TestInfrastructure;
 
-namespace GW2SDK.Tests.Features.Skins.Fixtures
+namespace GW2SDK.Tests.Features.Skins
 {
     public class SkinFixture
     {
