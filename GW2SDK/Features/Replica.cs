@@ -5,24 +5,24 @@ namespace GW2SDK
     internal sealed class Replica<T> : IReplica<T>
     {
         public Replica(
+            DateTimeOffset date,
             bool hasValue,
-            DateTimeOffset? update = null,
             T? value = default,
             DateTimeOffset? expires = null,
             DateTimeOffset? lastModified = null
         )
         {
-            HasValue = hasValue;
-            Update = update;
+            Date = date;
             if (hasValue)
             {
                 Value = value ?? throw new ArgumentNullException(nameof(value));
+                HasValue = true;
                 Expires = expires;
                 LastModified = lastModified;
             }
         }
 
-        public DateTimeOffset? Update { get; }
+        public DateTimeOffset Date { get; }
 
         public DateTimeOffset? Expires { get; }
 
@@ -32,6 +32,6 @@ namespace GW2SDK
 
         public T? Value { get; }
 
-        public static IReplica<T> NotModified(DateTimeOffset? date) => new Replica<T>(false, date);
+        public static IReplica<T> NotModified(DateTimeOffset date) => new Replica<T>(date, false);
     }
 }

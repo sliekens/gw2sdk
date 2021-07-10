@@ -6,26 +6,26 @@ namespace GW2SDK
     internal sealed class ReplicaPage<T> : IReplicaPage<T>
     {
         public ReplicaPage(
-            bool hasValue,
-            DateTimeOffset? update = null,
+            DateTimeOffset date,
+            bool hasValues,
             IReadOnlySet<T>? value = default,
             IPageContext? context = null,
             DateTimeOffset? expires = null,
             DateTimeOffset? lastModified = null
         )
         {
-            HasValues = hasValue;
-            Update = update;
-            if (hasValue)
+            Date = date;
+            if (hasValues)
             {
                 Values = value ?? throw new ArgumentNullException(nameof(value));
                 Context = context ?? throw new ArgumentNullException(nameof(context));
+                HasValues = true;
                 Expires = expires;
                 LastModified = lastModified;
             }
         }
 
-        public DateTimeOffset? Update { get; }
+        public DateTimeOffset Date { get; }
 
         public DateTimeOffset? Expires { get; }
 

@@ -6,26 +6,27 @@ namespace GW2SDK
     internal sealed class ReplicaSet<T> : IReplicaSet<T>
     {
         public ReplicaSet(
-            bool hasValue,
-            DateTimeOffset? update = null,
+            DateTimeOffset date,
+            bool hasValues,
             IReadOnlySet<T>? value = default,
             ICollectionContext? context = null,
             DateTimeOffset? expires = null,
-            DateTimeOffset? lastModified = null)
+            DateTimeOffset? lastModified = null
+        )
         {
 
-            HasValues = hasValue;
-            Update = update;
-            if (hasValue)
+            Date = date;
+            if (hasValues)
             {
                 Values = value ?? throw new ArgumentNullException(nameof(value));
                 Context = context ?? throw new ArgumentNullException(nameof(context));
+                HasValues = true;
                 Expires = expires;
                 LastModified = lastModified;
             }
         }
 
-        public DateTimeOffset? Update { get; }
+        public DateTimeOffset Date { get; }
 
         public DateTimeOffset? Expires { get; }
 

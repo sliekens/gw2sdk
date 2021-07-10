@@ -62,10 +62,10 @@ namespace GW2SDK.Http
         {
             using var response = await instance.SendAsync(request, HttpCompletionOption.ResponseHeadersRead)
                 .ConfigureAwait(false);
-            var update = response.Headers.Date;
+            var date = response.Headers.Date.GetValueOrDefault(DateTimeOffset.UtcNow);
             if (response.StatusCode == HttpStatusCode.NotModified)
             {
-                return Replica<T>.NotModified(update);
+                return Replica<T>.NotModified(date);
             }
 
             response.EnsureSuccessStatusCode();
@@ -75,8 +75,8 @@ namespace GW2SDK.Http
 
             var result = resultSelector(json);
 
-            return new Replica<T>(true,
-                update,
+            return new Replica<T>(date,
+                true,
                 result,
                 response.Content.Headers.Expires,
                 response.Content.Headers.LastModified);
@@ -90,7 +90,7 @@ namespace GW2SDK.Http
         {
             using var response = await instance.SendAsync(request, HttpCompletionOption.ResponseHeadersRead)
                 .ConfigureAwait(false);
-            var update = response.Headers.Date;
+            var date = response.Headers.Date.GetValueOrDefault(DateTimeOffset.UtcNow);
             response.EnsureSuccessStatusCode();
 
             using var json = await response.Content.ReadAsJsonAsync()
@@ -98,8 +98,8 @@ namespace GW2SDK.Http
 
             var result = new HashSet<T>(resultSelector(json));
 
-            return new Replica<IReadOnlySet<T>>(true,
-                update,
+            return new Replica<IReadOnlySet<T>>(date,
+                true,
                 result,
                 response.Content.Headers.Expires,
                 response.Content.Headers.LastModified);
@@ -113,7 +113,7 @@ namespace GW2SDK.Http
         {
             using var response = await instance.SendAsync(request, HttpCompletionOption.ResponseHeadersRead)
                 .ConfigureAwait(false);
-            var update = response.Headers.Date;
+            var date = response.Headers.Date.GetValueOrDefault(DateTimeOffset.UtcNow);
             response.EnsureSuccessStatusCode();
 
             using var json = await response.Content.ReadAsJsonAsync()
@@ -122,8 +122,8 @@ namespace GW2SDK.Http
             var result = new HashSet<T>(response.Headers.GetCollectionContext().ResultCount);
             result.UnionWith(resultSelector(json));
 
-            return new ReplicaSet<T>(true,
-                update,
+            return new ReplicaSet<T>(date,
+                true,
                 result,
                 response.Headers.GetCollectionContext(),
                 response.Content.Headers.Expires,
@@ -138,7 +138,7 @@ namespace GW2SDK.Http
         {
             using var response = await instance.SendAsync(request, HttpCompletionOption.ResponseHeadersRead)
                 .ConfigureAwait(false);
-            var update = response.Headers.Date;
+            var date = response.Headers.Date.GetValueOrDefault(DateTimeOffset.UtcNow);
             response.EnsureSuccessStatusCode();
 
             using var json = await response.Content.ReadAsJsonAsync()
@@ -147,8 +147,8 @@ namespace GW2SDK.Http
             var result = new HashSet<T>(response.Headers.GetPageContext().ResultCount);
             result.UnionWith(resultSelector(json));
 
-            return new ReplicaPage<T>(true,
-                update,
+            return new ReplicaPage<T>(date,
+                true,
                 result,
                 response.Headers.GetPageContext(),
                 response.Content.Headers.Expires,
