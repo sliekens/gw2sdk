@@ -14,10 +14,10 @@ namespace GW2SDK.Commerce.Prices
         public bool Whitelisted { get; init; }
 
         /// <summary>The highest price someone is willing to buy the item for.</summary>
-        public int BestBid { get; init; }
+        public Coin BestBid { get; init; }
 
         /// <summary>The lowest price someone is willing to sell the item for.</summary>
-        public int BestAsk { get; init; }
+        public Coin BestAsk { get; init; }
 
         /// <summary>The total number of items demanded (regardless of price level).</summary>
         /// <remarks>Use the Listing service to get the demand organized by price level.</remarks>

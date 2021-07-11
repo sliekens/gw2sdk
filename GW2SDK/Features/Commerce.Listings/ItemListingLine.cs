@@ -11,6 +11,6 @@ namespace GW2SDK.Commerce.Listings
 
         public int Quantity { get; init; }
 
-        public int UnitPrice { get; init; }
+        public Coin UnitPrice { get; init; }
     }
 }
