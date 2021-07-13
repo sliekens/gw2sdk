@@ -62,6 +62,8 @@ namespace GW2SDK
 
         public static readonly Location Account_Inventory = new("/v2/account/inventory");
 
+        public static readonly Location Account_LegendaryArmory = new("/v2/account/legendaryarmory");
+
         public static readonly Location Account_Luck = new("/v2/account/luck");
 
         public static readonly Location Account_Mail = new("/v2/account/mail");
@@ -233,6 +235,8 @@ namespace GW2SDK
         public static readonly Location Items = new("/v2/items");
 
         public static readonly Location ItemStats = new("/v2/itemstats");
+        
+        public static readonly Location LegendaryArmory = new("/v2/legendaryarmory");
 
         public static readonly Location Legends = new("/v2/legends");
 
