@@ -100,7 +100,7 @@ namespace GW2SDK.Tests.Features.Accounts.Achievements
             await using var services = new Composer();
             var sut = services.Resolve<AccountAchievementService>();
 
-            var actual = await sut.GetAccountAchievementsByPage(1, 3, ConfigurationManager.Instance.ApiKeyFull);
+            var actual = await sut.GetAccountAchievementsByPage(0, 3, ConfigurationManager.Instance.ApiKeyFull);
 
             Assert.Equal(3, actual.Values.Count);
             Assert.Equal(3, actual.Context.PageSize);

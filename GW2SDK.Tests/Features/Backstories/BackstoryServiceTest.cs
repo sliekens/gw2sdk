@@ -307,7 +307,7 @@ namespace GW2SDK.Tests.Features.Backstories
             await using var services = new Composer();
             var sut = services.Resolve<BackstoryService>();
 
-            var actual = await sut.GetBackstoryQuestionsByPage(1, 3);
+            var actual = await sut.GetBackstoryQuestionsByPage(0, 3);
 
             Assert.Equal(3, actual.Values.Count);
             Assert.Equal(3, actual.Context.PageSize);
@@ -321,7 +321,7 @@ namespace GW2SDK.Tests.Features.Backstories
             await using var services = new Composer();
             var sut = services.Resolve<BackstoryService>();
 
-            var actual = await sut.GetBackstoryAnswersByPage(1, 3);
+            var actual = await sut.GetBackstoryAnswersByPage(0, 3);
 
             Assert.Equal(3, actual.Values.Count);
             Assert.Equal(3, actual.Context.PageSize);

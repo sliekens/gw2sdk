@@ -125,7 +125,7 @@ namespace GW2SDK.Tests.Features.Currencies
             await using var services = new Composer();
             var sut = services.Resolve<CurrencyService>();
 
-            var actual = await sut.GetCurrenciesByPage(1, 3);
+            var actual = await sut.GetCurrenciesByPage(0, 3);
 
             Assert.Equal(3, actual.Values.Count);
             Assert.Equal(3, actual.Context.PageSize);

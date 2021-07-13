@@ -89,7 +89,7 @@ namespace GW2SDK.Tests.Features.Recipes
             await using var services = new Composer();
             var sut = services.Resolve<RecipeService>();
 
-            var actual = await sut.GetRecipesByPage(1, 3);
+            var actual = await sut.GetRecipesByPage(0, 3);
 
             Assert.Equal(3, actual.Values.Count);
             Assert.Equal(3, actual.Context.PageSize);

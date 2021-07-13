@@ -119,7 +119,7 @@ namespace GW2SDK.Tests.Features.Worlds
             await using var services = new Composer();
             var sut = services.Resolve<WorldService>();
 
-            var actual = await sut.GetWorldsByPage(1, 3);
+            var actual = await sut.GetWorldsByPage(0, 3);
 
             Assert.Equal(3, actual.Values.Count);
             Assert.Equal(3, actual.Context.PageSize);

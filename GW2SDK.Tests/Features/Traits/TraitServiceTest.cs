@@ -117,7 +117,7 @@ namespace GW2SDK.Tests.Features.Traits
             await using var services = new Composer();
             var sut = services.Resolve<TraitService>();
 
-            var actual = await sut.GetTraitsByPage(1, 3);
+            var actual = await sut.GetTraitsByPage(0, 3);
 
             Assert.Equal(3, actual.Values.Count);
             Assert.Equal(3, actual.Context.PageSize);

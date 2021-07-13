@@ -111,7 +111,7 @@ namespace GW2SDK.Tests.Features.Skills
             await using var services = new Composer();
             var sut = services.Resolve<SkillService>();
 
-            var actual = await sut.GetSkillsByPage(1, 3);
+            var actual = await sut.GetSkillsByPage(0, 3);
 
             Assert.Equal(3, actual.Values.Count);
             Assert.Equal(3, actual.Context.PageSize);
