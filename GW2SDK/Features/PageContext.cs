@@ -8,7 +8,7 @@
         ContinuationToken First,
         ContinuationToken Self,
         ContinuationToken Last,
-        ContinuationToken? Previous,
-        ContinuationToken? Next
+        ContinuationToken Previous,
+        ContinuationToken Next
     ) : IPageContext;
 }

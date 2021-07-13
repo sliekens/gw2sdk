@@ -11,6 +11,11 @@ namespace GW2SDK
     {
         public ContinuationRequest(ContinuationToken continuation)
         {
+            if (continuation is null or { IsEmpty: true })
+            {
+                throw new ArgumentException("Continuation token cannot be empty.", nameof(continuation));
+            }
+
             Continuation = continuation;
         }
 
