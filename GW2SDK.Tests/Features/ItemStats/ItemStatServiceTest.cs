@@ -79,11 +79,11 @@ namespace GW2SDK.Tests.Features.ItemStats
             await using var services = new Composer();
             var sut = services.Resolve<ItemStatService>();
 
-            var actual = await sut.GetItemStatsByPage(1, 3);
+            var actual = await sut.GetItemStatsByPage(0, 3);
 
             Assert.Equal(3, actual.Values.Count);
             Assert.Equal(3, actual.Context.PageSize);
-            Assert.NotNull(actual.Context.Next);
+            Assert.False(actual.Context.Next.IsEmpty);
 
             var next = await sut.GetItemStatsByPage(actual.Context.Next);
 

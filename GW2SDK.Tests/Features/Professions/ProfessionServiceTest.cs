@@ -84,7 +84,7 @@ namespace GW2SDK.Tests.Features.Professions
             await using var services = new Composer();
             var sut = services.Resolve<ProfessionService>();
 
-            var actual = await sut.GetProfessionsByPage(1, 3);
+            var actual = await sut.GetProfessionsByPage(0, 3);
 
             Assert.Equal(3, actual.Values.Count);
             Assert.Equal(3, actual.Context.PageSize);

@@ -115,7 +115,7 @@ namespace GW2SDK.Tests.Features.Colors
             await using var services = new Composer();
             var sut = services.Resolve<ColorService>();
 
-            var actual = await sut.GetColorsByPage(1, 3);
+            var actual = await sut.GetColorsByPage(0, 3);
 
             Assert.Equal(3, actual.Values.Count);
             Assert.Equal(3, actual.Context.PageSize);

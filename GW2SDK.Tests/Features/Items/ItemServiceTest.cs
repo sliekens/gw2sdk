@@ -89,7 +89,7 @@ namespace GW2SDK.Tests.Features.Items
             await using var services = new Composer();
             var sut = services.Resolve<ItemService>();
 
-            var actual = await sut.GetItemsByPage(1, 3);
+            var actual = await sut.GetItemsByPage(0, 3);
 
             Assert.Equal(3, actual.Values.Count);
             Assert.Equal(3, actual.Context.PageSize);

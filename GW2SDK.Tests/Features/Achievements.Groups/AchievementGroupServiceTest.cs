@@ -149,7 +149,7 @@ namespace GW2SDK.Tests.Features.Achievements.Groups
             await using var services = new Composer();
             var sut = services.Resolve<AchievementGroupService>();
 
-            var actual = await sut.GetAchievementGroupsByPage(1, 3);
+            var actual = await sut.GetAchievementGroupsByPage(0, 3);
 
             Assert.Equal(3, actual.Values.Count);
             Assert.Equal(3, actual.Context.PageSize);
