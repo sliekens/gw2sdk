@@ -6,5 +6,16 @@ namespace GW2SDK
     /// related resources or the URI of the original resource itself.</summary>
     /// <remarks>Not meant to be used directly.</remarks>
     [PublicAPI]
-    public sealed record ContinuationToken(string Token);
+    public sealed record ContinuationToken(string Token)
+    {
+        public static ContinuationToken None = new("");
+
+        public bool IsEmpty
+        {
+            get
+            {
+                return ReferenceEquals(this, None) || string.IsNullOrEmpty(Token);
+            }
+        }
+    }
 }

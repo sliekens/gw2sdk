@@ -35,11 +35,11 @@ namespace GW2SDK.Http
                 pageSize = default,
                 resultTotal = default,
                 resultCount = default;
-            ContinuationToken? previous = default,
-                next = default,
-                self = default,
-                first = default,
-                last = default;
+            ContinuationToken previous = ContinuationToken.None,
+                next = ContinuationToken.None,
+                self = ContinuationToken.None,
+                first = ContinuationToken.None,
+                last = ContinuationToken.None;
             if (instance.TryGetValues(ResponseHeaderName.PageTotal, out var pageTotals))
             {
                 // Assume that there is exactly one value for this header

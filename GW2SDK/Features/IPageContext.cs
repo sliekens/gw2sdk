@@ -13,9 +13,9 @@ namespace GW2SDK
 
         int ResultCount { get; }
 
-        ContinuationToken? Previous { get; }
+        ContinuationToken Previous { get; }
 
-        ContinuationToken? Next { get; }
+        ContinuationToken Next { get; }
 
         ContinuationToken First { get; }
 
