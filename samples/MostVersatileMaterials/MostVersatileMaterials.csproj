@@ -6,7 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Spectre.Console" Version="0.39.0" />
+    <PackageReference Include="Spectre.Console" Version="0.41.0" />
     <PackageReference Include="Spectre.Console.ImageSharp" Version="0.39.0" />
     <PackageReference Include="System.Interactive" Version="5.0.0" />
   </ItemGroup>
