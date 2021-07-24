@@ -27,7 +27,8 @@ namespace GW2SDK.Tests.Features.V2
                     v => Assert.Equal(SchemaVersion.V20190522, v.Version),
                     v => Assert.Equal(SchemaVersion.V20191219, v.Version),
                     v => Assert.Equal(SchemaVersion.V20201117, v.Version),
-                    v => Assert.Equal(SchemaVersion.V20210406, v.Version));
+                    v => Assert.Equal(SchemaVersion.V20210406, v.Version),
+                    v => Assert.Equal(SchemaVersion.V20210715, v.Version));
 
             public static void We_know_about_all_routes(ApiInfo expected)
             {
