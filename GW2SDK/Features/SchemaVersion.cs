@@ -25,8 +25,10 @@ namespace GW2SDK
 
         public static readonly SchemaVersion V20210406 = new("2021-04-06T21:00:00.000Z");
 
+        public static readonly SchemaVersion V20210715 = new("2021-07-15T13:00:00.000Z");
+
         /// <summary>The schema version that GW2SDK is optimized for.</summary>
-        public static readonly SchemaVersion Recommended = V20210406;
+        public static readonly SchemaVersion Recommended = V20210715;
 
         private SchemaVersion(string version)
         {
