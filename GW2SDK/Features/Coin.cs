@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Text;
 using JetBrains.Annotations;
 
@@ -10,8 +9,15 @@ namespace GW2SDK
     {
         public readonly int Quantity;
 
+        public static readonly Coin MinValue = 0;
+
         public Coin(int quantity)
         {
+            if (quantity < MinValue.Quantity)
+            {
+                throw new ArgumentOutOfRangeException(nameof(quantity), "The number of coins cannot be negative.");
+            }
+
             Quantity = quantity;
         }
 
@@ -24,15 +30,6 @@ namespace GW2SDK
         public static bool operator ==(Coin left, Coin right) => left.Equals(right);
 
         public static bool operator !=(Coin left, Coin right) => !left.Equals(right);
-
-        private sealed class CoinEqualityComparison : IEqualityComparer<Coin>
-        {
-            public bool Equals(Coin x, Coin y) => x.Quantity == y.Quantity;
-
-            public int GetHashCode(Coin obj) => obj.Quantity;
-        }
-
-        public static IEqualityComparer<Coin> CoinEqualityComparer { get; } = new CoinEqualityComparison();
 
         public int CompareTo(Coin other) => Quantity.CompareTo(other.Quantity);
 
@@ -52,12 +49,23 @@ namespace GW2SDK
 
         public static bool operator >=(Coin left, Coin right) => left.CompareTo(right) >= 0;
 
-        private sealed class CoinRelationalComparison : IComparer<Coin>
-        {
-            public int Compare(Coin x, Coin y) => x.Quantity.CompareTo(y.Quantity);
-        }
+        public static Coin operator +(Coin coin) => new (coin.Quantity);
 
-        public static IComparer<Coin> QualityComparer { get; } = new CoinRelationalComparison();
+        public static Coin operator -(Coin coin) => new (-coin.Quantity);
+
+        public static Coin operator ++(Coin coin) => new (coin.Quantity + 1);
+
+        public static Coin operator --(Coin coin) => new (coin.Quantity - 1);
+
+        public static Coin operator +(Coin left, Coin right) => new(left.Quantity + right.Quantity);
+
+        public static Coin operator -(Coin left, Coin right) => new(left.Quantity - right.Quantity);
+
+        public static Coin operator *(Coin left, Coin right) => new(left.Quantity * right.Quantity);
+
+        public static Coin operator /(Coin left, Coin right) => new(left.Quantity / right.Quantity);
+
+        public static Coin operator %(Coin left, Coin right) => new(left.Quantity % right.Quantity);
 
         public static implicit operator int(Coin coin) => coin.Quantity;
 
@@ -65,7 +73,7 @@ namespace GW2SDK
 
         public override string ToString()
         {
-            var str = new StringBuilder(15);
+            var str = new StringBuilder(32);
             var copper = Quantity;
             var gold = copper / 1_00_00;
             copper %= 1_00_00;
@@ -73,32 +81,32 @@ namespace GW2SDK
             copper %= 1_00;
             if (gold != 0)
             {
-                str.AppendFormat("{0:N0}g", gold);
+                str.AppendFormat("{0:N0} gold", gold);
             }
 
             if (silver != 0)
             {
                 if (str.Length != 0)
                 {
-                    str.Append(" ");
+                    str.Append(", ");
                 }
 
-                str.AppendFormat("{0:N0}s", silver);
+                str.AppendFormat("{0:N0} silver", silver);
             }
 
             if (copper != 0)
             {
                 if (str.Length != 0)
                 {
-                    str.Append(" ");
+                    str.Append(", ");
                 }
 
-                str.AppendFormat("{0:N0}c", copper);
+                str.AppendFormat("{0:N0} copper", copper);
             }
 
             if (str.Length == 0)
             {
-                str.Append("0");
+                str.Append("-");
             }
 
             return str.ToString();
