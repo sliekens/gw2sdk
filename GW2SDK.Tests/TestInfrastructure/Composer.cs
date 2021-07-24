@@ -6,6 +6,7 @@ using GW2SDK.Accounts.Achievements;
 using GW2SDK.Accounts.Banks;
 using GW2SDK.Accounts.DailyCrafting;
 using GW2SDK.Accounts.Recipes;
+using GW2SDK.Accounts.WorldBosses;
 using GW2SDK.Achievements;
 using GW2SDK.Achievements.Categories;
 using GW2SDK.Achievements.Dailies;
@@ -209,6 +210,11 @@ namespace GW2SDK.Tests.TestInfrastructure
             if (serviceType == typeof(SkillService))
             {
                 return new SkillService(Resolve<HttpClient>(), new SkillReader(), MissingMemberBehavior.Error);
+            }
+
+            if (serviceType == typeof(WorldBossService))
+            {
+                return new WorldBossService(Resolve<HttpClient>(), new WorldBossReader(), MissingMemberBehavior.Error);
             }
 
             return null;
