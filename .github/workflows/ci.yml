@@ -31,7 +31,7 @@ jobs:
     - name: Install dependencies
       run: dotnet restore --locked-mode
     - name: Test
-      run: dotnet test --no-restore --settings ${{ github.workspace }}/coverletArgs.runsettings
+      run: dotnet test --no-restore --settings ${{ github.workspace }}/coverletArgs.runsettings --framework net50
       env:
         ApiKeyBasic: ${{ secrets.API_TOKEN_BASIC }}
         ApiKeyFull: ${{ secrets.API_TOKEN_FULL }}
