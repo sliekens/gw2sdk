@@ -27,7 +27,7 @@ namespace GW2SDK.Tests.Features.Commerce.Exchange
             await using var services = new Composer();
             var sut = services.Resolve<ExchangeService>();
 
-            var gems = 800;
+            const int gems = 800;
 
             var actual = await sut.ExchangeGemsForGold(gems);
 

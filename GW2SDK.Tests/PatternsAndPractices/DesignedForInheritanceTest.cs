@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Linq;
 using System.Reflection;
-using JetBrains.Annotations;
 using GW2SDK.Tests.TestInfrastructure;
 using Xunit;
 

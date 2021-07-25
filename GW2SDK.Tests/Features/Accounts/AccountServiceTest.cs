@@ -28,9 +28,8 @@ namespace GW2SDK.Tests.Features.Accounts
 
             public static void WvwRank_requires_progression_scope(Account actual) => Assert.Null(actual.WvwRank);
         }
-        
 
-        public static class FullAccountFact
+        private static class FullAccountFact
         {
             public static void Name_is_never_empty(Account actual) => Assert.NotEmpty(actual.Name);
 

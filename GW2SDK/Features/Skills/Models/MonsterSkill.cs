@@ -3,7 +3,5 @@
 namespace GW2SDK.Skills
 {
     [PublicAPI]
-    public sealed record MonsterSkill : Skill
-    {
-    }
+    public sealed record MonsterSkill : Skill;
 }

@@ -8,8 +8,7 @@ namespace GW2SDK.Tests.Features.Skins
     {
         public SkinFixture()
         {
-            var reader = new FlatFileReader();
-            Skins = reader.Read("Data/skins.json.gz")
+            Skins = FlatFileReader.Read("Data/skins.json.gz")
                 .ToList()
                 .AsReadOnly();
         }

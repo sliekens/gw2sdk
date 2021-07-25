@@ -8,16 +8,6 @@ using GW2SDK.Items.Http;
 
 namespace GW2SDK.TestDataHelper
 {
-    internal class JsonItemServiceHelper
-    {
-        private readonly JsonItemService _itemService;
-
-        public JsonItemServiceHelper(JsonItemService itemService)
-        {
-            _itemService = itemService;
-        }
-    }
-
     public class JsonItemService
     {
         private readonly HttpClient _http;
@@ -76,7 +66,7 @@ namespace GW2SDK.TestDataHelper
                 .ToList();
         }
 
-        public async Task<List<string>> GetJsonItemsByIds(IReadOnlyCollection<int> itemIds)
+        private async Task<List<string>> GetJsonItemsByIds(IReadOnlyCollection<int> itemIds)
         {
             var request = new ItemsByIdsRequest(itemIds, default);
             using var response = await _http.SendAsync(request, HttpCompletionOption.ResponseHeadersRead)

@@ -5,9 +5,11 @@
     {
         internal static string UnexpectedMember(string memberName) => $"Unexpected member '{memberName}'.";
 
-        internal static string UnexpectedDiscriminator(string? discriminatorValue) => $"Unexpected discriminator value '{discriminatorValue}'.";
+        internal static string UnexpectedDiscriminator(string? discriminatorValue) =>
+            $"Unexpected discriminator value '{discriminatorValue}'.";
 
-        internal static string InvalidDiscriminator(string? discriminatorValue) => $"Invalid discriminator value '{discriminatorValue}'.";
+        internal static string InvalidDiscriminator(string? discriminatorValue) =>
+            $"Invalid discriminator value '{discriminatorValue}'.";
 
         internal static int GetDeterministicHashCode(this string str)
         {
@@ -22,11 +24,14 @@
                 {
                     hash1 = ((hash1 << 5) + hash1) ^ str[i];
                     if (i == str.Length - 1)
+                    {
                         break;
+                    }
+
                     hash2 = ((hash2 << 5) + hash2) ^ str[i + 1];
                 }
 
-                return hash1 + (hash2 * 1566083941);
+                return hash1 + hash2 * 1566083941;
             }
         }
     }

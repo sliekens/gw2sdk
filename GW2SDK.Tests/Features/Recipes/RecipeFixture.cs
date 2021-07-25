@@ -8,9 +8,7 @@ namespace GW2SDK.Tests.Features.Recipes
     {
         public RecipeFixture()
         {
-            var reader = new FlatFileReader();
-
-            Recipes = reader.Read("Data/recipes.json.gz")
+            Recipes = FlatFileReader.Read("Data/recipes.json.gz")
                 .ToList()
                 .AsReadOnly();
         }

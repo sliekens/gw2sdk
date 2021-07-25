@@ -8,8 +8,7 @@ namespace GW2SDK.Tests.Features.Achievements
     {
         public AchievementFixture()
         {
-            var reader = new FlatFileReader();
-            Achievements = reader.Read("Data/achievements.json.gz")
+            Achievements = FlatFileReader.Read("Data/achievements.json.gz")
                 .ToList()
                 .AsReadOnly();
         }

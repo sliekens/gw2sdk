@@ -8,8 +8,7 @@ namespace GW2SDK.Tests.Features.Commerce.Prices
     {
         public ItemPriceFixture()
         {
-            var reader = new FlatFileReader();
-            ItemPrices = reader.Read("Data/prices.json.gz")
+            ItemPrices = FlatFileReader.Read("Data/prices.json.gz")
                 .ToList()
                 .AsReadOnly();
         }

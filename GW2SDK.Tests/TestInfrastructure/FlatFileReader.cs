@@ -7,7 +7,7 @@ namespace GW2SDK.Tests.TestInfrastructure
 {
     public sealed class FlatFileReader
     {
-        public IEnumerable<string> Read(string path)
+        public static IEnumerable<string> Read(string path)
         {
             if (string.IsNullOrEmpty(path))
             {

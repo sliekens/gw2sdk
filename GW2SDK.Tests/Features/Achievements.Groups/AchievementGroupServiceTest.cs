@@ -52,7 +52,7 @@ namespace GW2SDK.Tests.Features.Achievements.Groups
             await using var services = new Composer();
             var sut = services.Resolve<AchievementGroupService>();
 
-            var achievementCategoryId = "A4ED8379-5B6B-4ECC-B6E1-70C350C902D2";
+            const string achievementCategoryId = "A4ED8379-5B6B-4ECC-B6E1-70C350C902D2";
 
             var actual = await sut.GetAchievementGroupById(achievementCategoryId);
 

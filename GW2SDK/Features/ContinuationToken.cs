@@ -10,12 +10,6 @@ namespace GW2SDK
     {
         public static ContinuationToken None = new("");
 
-        public bool IsEmpty
-        {
-            get
-            {
-                return ReferenceEquals(this, None) || string.IsNullOrEmpty(Token);
-            }
-        }
+        public bool IsEmpty => ReferenceEquals(this, None) || string.IsNullOrEmpty(Token);
     }
 }

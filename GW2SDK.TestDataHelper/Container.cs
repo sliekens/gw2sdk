@@ -12,7 +12,6 @@ namespace GW2SDK.TestDataHelper
 {
     public class Container : IDisposable, IAsyncDisposable
     {
-        private static readonly Random Jitterer = new Random();
         private readonly ServiceProvider _services;
 
         public Container()

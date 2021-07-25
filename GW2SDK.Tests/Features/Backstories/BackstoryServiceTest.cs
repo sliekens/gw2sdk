@@ -115,7 +115,7 @@ namespace GW2SDK.Tests.Features.Backstories
             await using var services = new Composer();
             var sut = services.Resolve<BackstoryService>();
 
-            var questionId = 7;
+            const int questionId = 7;
 
             var actual = await sut.GetBackstoryQuestionById(questionId);
 
@@ -130,7 +130,7 @@ namespace GW2SDK.Tests.Features.Backstories
             await using var services = new Composer();
             var sut = services.Resolve<BackstoryService>();
 
-            var answerId = "7-53";
+            const string answerId = "7-53";
 
             var actual = await sut.GetBackstoryAnswerById(answerId);
 

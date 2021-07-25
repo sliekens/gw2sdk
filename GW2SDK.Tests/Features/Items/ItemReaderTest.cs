@@ -21,9 +21,7 @@ namespace GW2SDK.Tests.Features.Items
 
             public static void Vendor_value_cannot_be_negative(Item actual) => Assert.InRange(actual.VendorValue, 0, int.MaxValue);
 
-            public static void Consumable_level_is_between_0_and_80(Consumable actual) => Assert.InRange(actual.Level, 0, 80);
-
-            public static void Weapon_level_is_between_0_and_80(Weapon actual) => Assert.InRange(actual.Level, 0, 80);
+            public static void Level_is_between_0_and_80(Item actual) => Assert.InRange(actual.Level, 0, 80);
 
             public static void Weapon_min_power_cannot_be_negative(Weapon actual) => Assert.InRange(actual.MinPower, 0, int.MaxValue);
 
@@ -58,8 +56,6 @@ namespace GW2SDK.Tests.Features.Items
                     Assert.Null(weapon.Prefix);
                 }
             }
-
-            public static void Backpack_level_is_between_0_and_80(Backpack actual) => Assert.InRange(actual.Level, 0, 80);
 
             public static void Backpack_infix_upgrade_id_is_positive(Backpack actual)
             {
@@ -96,8 +92,6 @@ namespace GW2SDK.Tests.Features.Items
                     Assert.Null(backpack.Prefix);
                 }
             }
-
-            public static void Armor_level_is_between_0_and_80(Armor actual) => Assert.InRange(actual.Level, 0, 80);
 
             public static void Armor_defense_cannot_be_negative(Armor actual) => Assert.InRange(actual.Defense, 0, 1000);
 
@@ -165,8 +159,6 @@ namespace GW2SDK.Tests.Features.Items
                 }
             }
 
-            public static void Trophy_level_is_between_0_and_80(Trophy actual) => Assert.InRange(actual.Level, 0, 80);
-
             public static void Transmutation_skins_cannot_be_empty(Transmutation actual) => Assert.NotEmpty(actual.Skins);
 
             public static void SalvageTool_has_charges(SalvageTool salvageTool) => Assert.InRange(salvageTool.Charges, 1, 255);
@@ -190,10 +182,10 @@ namespace GW2SDK.Tests.Features.Items
 
                     ItemFacts.Id_is_positive(actual);
                     ItemFacts.Vendor_value_cannot_be_negative(actual);
+                    ItemFacts.Level_is_between_0_and_80(actual);
                     switch (actual)
                     {
                         case Consumable consumable:
-                            ItemFacts.Consumable_level_is_between_0_and_80(consumable);
                             switch (consumable)
                             {
                                 case Transmutation transmutation:
@@ -203,7 +195,6 @@ namespace GW2SDK.Tests.Features.Items
 
                             break;
                         case Weapon weapon:
-                            ItemFacts.Weapon_level_is_between_0_and_80(weapon);
                             ItemFacts.Weapon_min_power_cannot_be_negative(weapon);
                             ItemFacts.Weapon_max_power_cannot_be_negative(weapon);
                             ItemFacts.Weapon_defense_cannot_be_negative(weapon);
@@ -212,14 +203,12 @@ namespace GW2SDK.Tests.Features.Items
                             ItemFacts.Weapon_prefix_and_stat_choices_are_mutually_exclusive(weapon);
                             break;
                         case Backpack backItem:
-                            ItemFacts.Backpack_level_is_between_0_and_80(backItem);
                             ItemFacts.Backpack_infix_upgrade_id_is_positive(backItem);
                             ItemFacts.Backpack_infix_upgrade_modifiers_are_positive(backItem);
                             ItemFacts.Backpack_suffix_item_id_is_null_or_positive(backItem);
                             ItemFacts.Backpack_prefix_and_stat_choices_are_mutually_exclusive(backItem);
                             break;
                         case Armor armor:
-                            ItemFacts.Armor_level_is_between_0_and_80(armor);
                             ItemFacts.Armor_defense_cannot_be_negative(armor);
                             ItemFacts.Armor_infix_upgrade_id_is_positive(armor);
                             ItemFacts.Armor_infix_upgrade_modifiers_are_positive(armor);
@@ -230,9 +219,6 @@ namespace GW2SDK.Tests.Features.Items
                             break;
                         case Trinket trinket:
                             ItemFacts.Trinket_prefix_and_stat_choices_are_mutually_exclusive(trinket);
-                            break;
-                        case Trophy trophy:
-                            ItemFacts.Trophy_level_is_between_0_and_80(trophy);
                             break;
                         case SalvageTool salvage:
                             ItemFacts.SalvageTool_has_charges(salvage);
