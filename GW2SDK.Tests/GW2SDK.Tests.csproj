@@ -19,6 +19,10 @@
         <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="5.0.1" />
         <PackageReference Include="Microsoft.Extensions.Http.Polly" Version="5.0.1" />
         <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.10.0" />
+        <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.2">
+          <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+          <PrivateAssets>all</PrivateAssets>
+        </PackageReference>
         <PackageReference Include="Polly" Version="7.2.2" />
         <PackageReference Include="System.Interactive" Version="5.0.0" />
         <PackageReference Include="xunit" Version="2.4.1" />
