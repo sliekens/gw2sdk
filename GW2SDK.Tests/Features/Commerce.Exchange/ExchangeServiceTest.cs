@@ -13,7 +13,7 @@ namespace GW2SDK.Tests.Features.Commerce.Exchange
             await using var services = new Composer();
             var sut = services.Resolve<ExchangeService>();
 
-            var coins = 100_00_00; // 100 gold
+            var coins = new Coin(100, 0, 0);
 
             var actual = await sut.ExchangeGoldForGems(coins);
 
