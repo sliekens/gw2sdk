@@ -14,9 +14,9 @@ namespace GW2SDK.Skills
     {
         private readonly HttpClient _http;
 
-        private readonly ISkillReader _skillReader;
-
         private readonly MissingMemberBehavior _missingMemberBehavior;
+
+        private readonly ISkillReader _skillReader;
 
         public SkillService(
             HttpClient http,
@@ -29,9 +29,9 @@ namespace GW2SDK.Skills
             _missingMemberBehavior = missingMemberBehavior;
         }
 
-        public async Task<IReplicaSet<Skill>> GetSkills()
+        public async Task<IReplicaSet<Skill>> GetSkills(Language? language = default)
         {
-            var request = new SkillsRequest();
+            var request = new SkillsRequest(language);
             return await _http.GetResourcesSet(request, json => _skillReader.ReadArray(json, _missingMemberBehavior))
                 .ConfigureAwait(false);
         }
@@ -43,23 +43,30 @@ namespace GW2SDK.Skills
                 .ConfigureAwait(false);
         }
 
-        public async Task<IReplica<Skill>> GetSkillById(int skillId)
+        public async Task<IReplica<Skill>> GetSkillById(int skillId, Language? language = default)
         {
-            var request = new SkillByIdRequest(skillId);
+            var request = new SkillByIdRequest(skillId, language);
             return await _http.GetResource(request, json => _skillReader.Read(json, _missingMemberBehavior))
                 .ConfigureAwait(false);
         }
 
-        public async Task<IReplicaSet<Skill>> GetSkillsByIds(IReadOnlyCollection<int> skillIds)
+        public async Task<IReplicaSet<Skill>> GetSkillsByIds(
+            IReadOnlyCollection<int> skillIds,
+            Language? language = default
+        )
         {
-            var request = new SkillsByIdsRequest(skillIds);
+            var request = new SkillsByIdsRequest(skillIds, language);
             return await _http.GetResourcesSet(request, json => _skillReader.ReadArray(json, _missingMemberBehavior))
                 .ConfigureAwait(false);
         }
 
-        public async Task<IReplicaPage<Skill>> GetSkillsByPage(int pageIndex, int? pageSize = null)
+        public async Task<IReplicaPage<Skill>> GetSkillsByPage(
+            int pageIndex,
+            int? pageSize = default,
+            Language? language = default
+        )
         {
-            var request = new SkillsByPageRequest(pageIndex, pageSize);
+            var request = new SkillsByPageRequest(pageIndex, pageSize, language);
             return await _http.GetResourcesPage(request, json => _skillReader.ReadArray(json, _missingMemberBehavior))
                 .ConfigureAwait(false);
         }

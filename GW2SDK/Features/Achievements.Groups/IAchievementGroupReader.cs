@@ -1,5 +1,5 @@
-﻿using JetBrains.Annotations;
-using GW2SDK.Json;
+﻿using GW2SDK.Json;
+using JetBrains.Annotations;
 
 namespace GW2SDK.Achievements.Groups
 {

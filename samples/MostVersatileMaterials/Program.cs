@@ -25,12 +25,12 @@ namespace MostVersatileMaterials
         {
             using var http = new HttpClient(new SocketsHttpHandler
                 {
-                    AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate
+                    AutomaticDecompression = DecompressionMethods.GZip
                 },
                 true);
 
             http.UseGuildWars2();
-            http.UseLanguage("en");
+            http.UseLanguage(Language.English);
             http.UseSchemaVersion(SchemaVersion.Recommended);
 
             var recipesService = new RecipeService(http, new RecipeReader(), MissingMemberBehavior.Undefined);

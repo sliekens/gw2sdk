@@ -15,9 +15,12 @@ namespace GW2SDK.Colors
         private readonly IColorReader _colorReader;
 
         private readonly HttpClient _http;
+
         private readonly MissingMemberBehavior _missingMemberBehavior;
 
-        public ColorService(HttpClient http, IColorReader colorReader,
+        public ColorService(
+            HttpClient http,
+            IColorReader colorReader,
             MissingMemberBehavior missingMemberBehavior
         )
         {
@@ -26,9 +29,9 @@ namespace GW2SDK.Colors
             _missingMemberBehavior = missingMemberBehavior;
         }
 
-        public async Task<IReplicaSet<Color>> GetColors()
+        public async Task<IReplicaSet<Color>> GetColors(Language? language = default)
         {
-            var request = new ColorsRequest();
+            var request = new ColorsRequest(language);
             return await _http.GetResourcesSet(request, json => _colorReader.ReadArray(json, _missingMemberBehavior))
                 .ConfigureAwait(false);
         }
@@ -40,23 +43,30 @@ namespace GW2SDK.Colors
                 .ConfigureAwait(false);
         }
 
-        public async Task<IReplica<Color>> GetColorById(int colorId)
+        public async Task<IReplica<Color>> GetColorById(int colorId, Language? language = default)
         {
-            var request = new ColorByIdRequest(colorId);
+            var request = new ColorByIdRequest(colorId, language);
             return await _http.GetResource(request, json => _colorReader.Read(json, _missingMemberBehavior))
                 .ConfigureAwait(false);
         }
 
-        public async Task<IReplicaSet<Color>> GetColorsByIds(IReadOnlyCollection<int> colorIds)
+        public async Task<IReplicaSet<Color>> GetColorsByIds(
+            IReadOnlyCollection<int> colorIds,
+            Language? language = default
+        )
         {
-            var request = new ColorsByIdsRequest(colorIds);
+            var request = new ColorsByIdsRequest(colorIds, language);
             return await _http.GetResourcesSet(request, json => _colorReader.ReadArray(json, _missingMemberBehavior))
                 .ConfigureAwait(false);
         }
 
-        public async Task<IReplicaPage<Color>> GetColorsByPage(int pageIndex, int? pageSize = null)
+        public async Task<IReplicaPage<Color>> GetColorsByPage(
+            int pageIndex,
+            int? pageSize = default,
+            Language? language = default
+        )
         {
-            var request = new ColorsByPageRequest(pageIndex, pageSize);
+            var request = new ColorsByPageRequest(pageIndex, pageSize, language);
             return await _http.GetResourcesPage(request, json => _colorReader.ReadArray(json, _missingMemberBehavior))
                 .ConfigureAwait(false);
         }

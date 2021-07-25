@@ -8,7 +8,7 @@ namespace GW2SDK.Recipes.Http
     [PublicAPI]
     public sealed class RecipesByOutputItemIdByPageRequest
     {
-        public RecipesByOutputItemIdByPageRequest(int outputItemId, int pageIndex, int? pageSize = null)
+        public RecipesByOutputItemIdByPageRequest(int outputItemId, int pageIndex, int? pageSize)
         {
             OutputItemId = outputItemId;
             PageIndex = pageIndex;

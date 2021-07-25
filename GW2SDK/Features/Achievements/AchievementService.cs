@@ -13,10 +13,14 @@ namespace GW2SDK.Achievements
     public sealed class AchievementService
     {
         private readonly IAchievementReader _achievementReader;
+
         private readonly HttpClient _http;
+
         private readonly MissingMemberBehavior _missingMemberBehavior;
 
-        public AchievementService(HttpClient http, IAchievementReader achievementReader,
+        public AchievementService(
+            HttpClient http,
+            IAchievementReader achievementReader,
             MissingMemberBehavior missingMemberBehavior
         )
         {
@@ -28,30 +32,38 @@ namespace GW2SDK.Achievements
         public async Task<IReplicaSet<int>> GetAchievementsIndex()
         {
             var request = new AchievementsIndexRequest();
-            return await _http.GetResourcesSet(request, json => _achievementReader.Id.ReadArray(json, _missingMemberBehavior))
+            return await _http.GetResourcesSet(request,
+                    json => _achievementReader.Id.ReadArray(json, _missingMemberBehavior))
                 .ConfigureAwait(false);
         }
 
-        public async Task<IReplica<Achievement>> GetAchievementById(int achievementId)
+        public async Task<IReplica<Achievement>> GetAchievementById(int achievementId, Language? language = default)
         {
-            var request = new AchievementByIdRequest(achievementId);
+            var request = new AchievementByIdRequest(achievementId, language);
             return await _http.GetResource(request, json => _achievementReader.Read(json, _missingMemberBehavior))
                 .ConfigureAwait(false);
         }
 
         public async Task<IReplicaSet<Achievement>> GetAchievementsByIds(
-            IReadOnlyCollection<int> achievementIds
+            IReadOnlyCollection<int> achievementIds,
+            Language? language = default
         )
         {
-            var request = new AchievementsByIdsRequest(achievementIds);
-            return await _http.GetResourcesSet(request, json => _achievementReader.ReadArray(json, _missingMemberBehavior))
+            var request = new AchievementsByIdsRequest(achievementIds, language);
+            return await _http
+                .GetResourcesSet(request, json => _achievementReader.ReadArray(json, _missingMemberBehavior))
                 .ConfigureAwait(false);
         }
 
-        public async Task<IReplicaPage<Achievement>> GetAchievementsByPage(int pageIndex, int? pageSize = null)
+        public async Task<IReplicaPage<Achievement>> GetAchievementsByPage(
+            int pageIndex,
+            int? pageSize = default,
+            Language? language = default
+        )
         {
-            var request = new AchievementsByPageRequest(pageIndex, pageSize);
-            return await _http.GetResourcesPage(request, json => _achievementReader.ReadArray(json, _missingMemberBehavior))
+            var request = new AchievementsByPageRequest(pageIndex, pageSize, language);
+            return await _http
+                .GetResourcesPage(request, json => _achievementReader.ReadArray(json, _missingMemberBehavior))
                 .ConfigureAwait(false);
         }
     }

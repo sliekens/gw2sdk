@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Net.Http;
-using JetBrains.Annotations;
 using GW2SDK.Http;
+using JetBrains.Annotations;
 using static System.Net.Http.HttpMethod;
 
 namespace GW2SDK.Backstories.Answers.Http
@@ -9,9 +9,14 @@ namespace GW2SDK.Backstories.Answers.Http
     [PublicAPI]
     public sealed class BackstoryAnswersByPageRequest
     {
-        public BackstoryAnswersByPageRequest(int pageIndex, int? pageSize = null)
+        public BackstoryAnswersByPageRequest(
+            int pageIndex,
+            int? pageSize,
+            Language? language
+        )
         {
             PageIndex = pageIndex;
+            Language = language;
             PageSize = pageSize;
         }
 
@@ -19,11 +24,14 @@ namespace GW2SDK.Backstories.Answers.Http
 
         public int? PageSize { get; }
 
+        public Language? Language { get; }
+
         public static implicit operator HttpRequestMessage(BackstoryAnswersByPageRequest r)
         {
             var search = new QueryBuilder();
             search.Add("page", r.PageIndex);
             if (r.PageSize.HasValue) search.Add("page_size", r.PageSize.Value);
+            if (r.Language is not null) search.Add("lang", r.Language.Alpha2Code);
             var location = new Uri($"/v2/backstory/answers?{search}", UriKind.Relative);
             return new HttpRequestMessage(Get, location);
         }

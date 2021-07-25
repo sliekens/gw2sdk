@@ -37,12 +37,12 @@ namespace GW2SDK.Http
             instance.DefaultRequestHeaders.Add("X-Schema-Version", version.Version);
         }
 
-        public static void UseLanguage(this HttpClient instance, string lang)
+        public static void UseLanguage(this HttpClient instance, Language language)
         {
             if (instance is null) throw new ArgumentNullException(nameof(instance));
-            if (lang is null) throw new ArgumentNullException(nameof(lang));
+            if (language is null) throw new ArgumentNullException(nameof(language));
 
-            instance.DefaultRequestHeaders.AcceptLanguage.ParseAdd(lang);
+            instance.DefaultRequestHeaders.AcceptLanguage.ParseAdd(language.Alpha2Code);
         }
 
         public static async Task<JsonDocument> ReadAsJsonAsync(this HttpContent instance)

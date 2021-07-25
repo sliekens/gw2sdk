@@ -13,10 +13,14 @@ namespace GW2SDK.Traits
     public sealed class TraitService
     {
         private readonly HttpClient _http;
-        private readonly ITraitReader _traitReader;
+
         private readonly MissingMemberBehavior _missingMemberBehavior;
 
-        public TraitService(HttpClient http, ITraitReader traitReader,
+        private readonly ITraitReader _traitReader;
+
+        public TraitService(
+            HttpClient http,
+            ITraitReader traitReader,
             MissingMemberBehavior missingMemberBehavior
         )
         {
@@ -25,9 +29,9 @@ namespace GW2SDK.Traits
             _missingMemberBehavior = missingMemberBehavior;
         }
 
-        public async Task<IReplicaSet<Trait>> GetTraits()
+        public async Task<IReplicaSet<Trait>> GetTraits(Language? language = default)
         {
-            var request = new TraitsRequest();
+            var request = new TraitsRequest(language);
             return await _http.GetResourcesSet(request, json => _traitReader.ReadArray(json, _missingMemberBehavior))
                 .ConfigureAwait(false);
         }
@@ -39,23 +43,30 @@ namespace GW2SDK.Traits
                 .ConfigureAwait(false);
         }
 
-        public async Task<IReplica<Trait>> GetTraitById(int traitId)
+        public async Task<IReplica<Trait>> GetTraitById(int traitId, Language? language = default)
         {
-            var request = new TraitByIdRequest(traitId);
+            var request = new TraitByIdRequest(traitId, language);
             return await _http.GetResource(request, json => _traitReader.Read(json, _missingMemberBehavior))
                 .ConfigureAwait(false);
         }
 
-        public async Task<IReplicaSet<Trait>> GetTraitsByIds(IReadOnlyCollection<int> traitIds)
+        public async Task<IReplicaSet<Trait>> GetTraitsByIds(
+            IReadOnlyCollection<int> traitIds,
+            Language? language = default
+        )
         {
-            var request = new TraitsByIdsRequest(traitIds);
+            var request = new TraitsByIdsRequest(traitIds, language);
             return await _http.GetResourcesSet(request, json => _traitReader.ReadArray(json, _missingMemberBehavior))
                 .ConfigureAwait(false);
         }
 
-        public async Task<IReplicaPage<Trait>> GetTraitsByPage(int pageIndex, int? pageSize = null)
+        public async Task<IReplicaPage<Trait>> GetTraitsByPage(
+            int pageIndex,
+            int? pageSize = default,
+            Language? language = default
+        )
         {
-            var request = new TraitsByPageRequest(pageIndex, pageSize);
+            var request = new TraitsByPageRequest(pageIndex, pageSize, language);
             return await _http.GetResourcesPage(request, json => _traitReader.ReadArray(json, _missingMemberBehavior))
                 .ConfigureAwait(false);
         }

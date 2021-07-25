@@ -47,7 +47,7 @@ namespace GW2SDK.Recipes
                 .ConfigureAwait(false);
         }
 
-        public async Task<IReplicaPage<Recipe>> GetRecipesByPage(int pageIndex, int? pageSize = null)
+        public async Task<IReplicaPage<Recipe>> GetRecipesByPage(int pageIndex, int? pageSize = default)
         {
             var request = new RecipesByPageRequest(pageIndex, pageSize);
             return await _http.GetResourcesPage(request, json => _recipeReader.ReadArray(json, _missingMemberBehavior))
@@ -68,7 +68,7 @@ namespace GW2SDK.Recipes
                 .ConfigureAwait(false);
         }
 
-        public async Task<IReplicaPage<Recipe>> GetRecipesByIngredientItemIdByPage(int ingredientItemId, int pageIndex, int? pageSize = null)
+        public async Task<IReplicaPage<Recipe>> GetRecipesByIngredientItemIdByPage(int ingredientItemId, int pageIndex, int? pageSize = default)
         {
             var request = new RecipesByIngredientItemIdByPageRequest(ingredientItemId, pageIndex, pageSize);
             return await _http.GetResourcesPage(request, json => _recipeReader.ReadArray(json, _missingMemberBehavior))
@@ -89,7 +89,7 @@ namespace GW2SDK.Recipes
                 .ConfigureAwait(false);
         }
 
-        public async Task<IReplicaPage<Recipe>> GetRecipesByOutputItemIdByPage(int outputItemId, int pageIndex, int? pageSize = null)
+        public async Task<IReplicaPage<Recipe>> GetRecipesByOutputItemIdByPage(int outputItemId, int pageIndex, int? pageSize = default)
         {
             var request = new RecipesByOutputItemIdByPageRequest(outputItemId, pageIndex, pageSize);
             return await _http.GetResourcesPage(request, json => _recipeReader.ReadArray(json, _missingMemberBehavior))

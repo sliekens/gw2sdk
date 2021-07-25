@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Text.Json;
-using JetBrains.Annotations;
 using GW2SDK.Json;
+using JetBrains.Annotations;
 
 namespace GW2SDK.Achievements.Groups
 {
@@ -16,7 +16,8 @@ namespace GW2SDK.Achievements.Groups
             var name = new RequiredMember<string>("name");
             var description = new RequiredMember<string>("description");
             var order = new RequiredMember<int>("order");
-            var categories = new RequiredMember<int[]>("categories");foreach (var member in json.EnumerateObject())
+            var categories = new RequiredMember<int[]>("categories");
+            foreach (var member in json.EnumerateObject())
             {
                 if (member.NameEquals(id.Name))
                 {

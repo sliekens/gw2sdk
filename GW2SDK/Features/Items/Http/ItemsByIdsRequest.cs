@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Net.Http;
-using JetBrains.Annotations;
 using GW2SDK.Http;
+using JetBrains.Annotations;
 using static System.Net.Http.HttpMethod;
 
 namespace GW2SDK.Items.Http
@@ -10,7 +10,7 @@ namespace GW2SDK.Items.Http
     [PublicAPI]
     public sealed class ItemsByIdsRequest
     {
-        public ItemsByIdsRequest(IReadOnlyCollection<int> itemIds)
+        public ItemsByIdsRequest(IReadOnlyCollection<int> itemIds, Language? language)
         {
             if (itemIds is null)
             {
@@ -23,14 +23,18 @@ namespace GW2SDK.Items.Http
             }
 
             ItemIds = itemIds;
+            Language = language;
         }
 
         public IReadOnlyCollection<int> ItemIds { get; }
+
+        public Language? Language { get; }
 
         public static implicit operator HttpRequestMessage(ItemsByIdsRequest r)
         {
             var search = new QueryBuilder();
             search.Add("ids", r.ItemIds);
+            if (r.Language is not null) search.Add("lang", r.Language.Alpha2Code);
             var location = new Uri($"/v2/items?{search}", UriKind.Relative);
             return new HttpRequestMessage(Get, location);
         }
