@@ -10,7 +10,7 @@ namespace GW2SDK.Professions.Http
     {
         public ProfessionByNameRequest(ProfessionName professionName, Language? language)
         {
-            if (!Enum.IsDefined(professionName))
+            if (!Enum.IsDefined(typeof(ProfessionName), professionName))
             {
                 throw new ArgumentException("Profession name must be defined.", nameof(professionName));
             }

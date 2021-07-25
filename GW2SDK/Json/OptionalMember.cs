@@ -7,6 +7,14 @@ namespace GW2SDK.Json
     {
         private readonly JsonMember _member;
 
+#if !NET // Because there is no implicit cast from String to ReadOnlySpan
+        internal OptionalMember(string name)
+        {
+            Name = name.AsSpan();
+            _member = default;
+        }
+#endif
+
         internal OptionalMember(ReadOnlySpan<char> name)
         {
             Name = name;
@@ -27,7 +35,7 @@ namespace GW2SDK.Json
             {
                 return default;
             }
-            
+
             try
             {
                 return selector(_member.Value);

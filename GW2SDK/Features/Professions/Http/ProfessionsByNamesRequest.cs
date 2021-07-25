@@ -22,7 +22,7 @@ namespace GW2SDK.Professions.Http
                 throw new ArgumentException("Profession names cannot be an empty collection.", nameof(professionNames));
             }
 
-            if (professionNames.Any(name => !Enum.IsDefined(name)))
+            if (professionNames.Any(name => !Enum.IsDefined(typeof(ProfessionName), name)))
             {
                 throw new ArgumentException("All profession names must be defined.", nameof(professionNames));
             }

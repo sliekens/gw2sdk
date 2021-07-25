@@ -3,11 +3,18 @@ using System.Text.Json;
 
 namespace GW2SDK.Json
 {
-    internal readonly ref struct NullableMember<T>
-        where T : struct
+    internal readonly ref struct NullableMember<T> where T : struct
     {
         private readonly JsonMember _member;
-        
+
+#if !NET // Because there is no implicit cast from String to ReadOnlySpan
+        internal NullableMember(string name)
+        {
+            Name = name.AsSpan();
+            _member = default;
+        }
+#endif
+
         internal NullableMember(ReadOnlySpan<char> name)
         {
             Name = name;
@@ -28,7 +35,7 @@ namespace GW2SDK.Json
             {
                 return default;
             }
-            
+
             try
             {
                 return selector(_member.Value);

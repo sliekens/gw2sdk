@@ -8,7 +8,11 @@ namespace GW2SDK
         public ReplicaPage(
             DateTimeOffset date,
             bool hasValues,
+#if NET
             IReadOnlySet<T>? value = default,
+#else
+            ISet<T>? value = default,
+#endif
             IPageContext? context = null,
             DateTimeOffset? expires = null,
             DateTimeOffset? lastModified = null
@@ -24,6 +28,15 @@ namespace GW2SDK
                 LastModified = lastModified;
             }
         }
+#if NET
+        public IReadOnlySet<T>? Values { get; }
+
+        public IPageContext? Context { get; }
+#else
+        public ISet<T> Values { get; } = default!;
+
+        public IPageContext Context { get; } = default!;
+#endif
 
         public DateTimeOffset Date { get; }
 
@@ -32,9 +45,5 @@ namespace GW2SDK
         public DateTimeOffset? LastModified { get; }
 
         public bool HasValues { get; }
-
-        public IReadOnlySet<T>? Values { get; }
-
-        public IPageContext? Context { get; }
     }
 }

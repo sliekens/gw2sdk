@@ -51,47 +51,69 @@ namespace GW2SDK.Json
 
         internal static TEnum GetValue<TEnum>(this OptionalMember<TEnum> instance) where TEnum : struct, Enum
         {
-            return instance.Select(value => Enum.Parse<TEnum>(value.GetStringRequired(), true));
+            return instance.Select(value => Parse<TEnum>(value.GetStringRequired()));
         }
 
-        internal static TEnum? GetValue<TEnum>(this NullableMember<TEnum> instance, MissingMemberBehavior missingMemberBehavior) where TEnum : struct, Enum
+        internal static TEnum? GetValue<TEnum>(
+            this NullableMember<TEnum> instance,
+            MissingMemberBehavior missingMemberBehavior
+        ) where TEnum : struct, Enum
         {
             return instance.Select(value => missingMemberBehavior == MissingMemberBehavior.Error
-                ? Enum.Parse<TEnum>(value.GetStringRequired(), true)
+                ? Parse<TEnum>(value.GetStringRequired())
                 : TryHardParse<TEnum>(value.GetStringRequired()));
         }
 
-        internal static TEnum GetValue<TEnum>(this RequiredMember<TEnum> instance, MissingMemberBehavior missingMemberBehavior) where TEnum : struct, Enum
+        internal static TEnum GetValue<TEnum>(
+            this RequiredMember<TEnum> instance,
+            MissingMemberBehavior missingMemberBehavior
+        ) where TEnum : struct, Enum
         {
             return instance.Select(value => missingMemberBehavior == MissingMemberBehavior.Error
-                ? Enum.Parse<TEnum>(value.GetStringRequired(), true)
+                ? Parse<TEnum>(value.GetStringRequired())
                 : TryHardParse<TEnum>(value.GetStringRequired()));
         }
 
-        internal static TEnum GetValue<TEnum>(this OptionalMember<TEnum> instance, MissingMemberBehavior missingMemberBehavior) where TEnum : struct, Enum
+        internal static TEnum GetValue<TEnum>(
+            this OptionalMember<TEnum> instance,
+            MissingMemberBehavior missingMemberBehavior
+        ) where TEnum : struct, Enum
         {
             return instance.Select(value => missingMemberBehavior == MissingMemberBehavior.Error
-                ? Enum.Parse<TEnum>(value.GetStringRequired(), true)
+                ? Parse<TEnum>(value.GetStringRequired())
                 : TryHardParse<TEnum>(value.GetStringRequired()));
         }
 
-        internal static TEnum[] GetValue<TEnum>(this RequiredMember<TEnum[]> instance, MissingMemberBehavior missingMemberBehavior) where TEnum : struct, Enum
+        internal static TEnum[] GetValue<TEnum>(
+            this RequiredMember<TEnum[]> instance,
+            MissingMemberBehavior missingMemberBehavior
+        ) where TEnum : struct, Enum
         {
             return instance.Select(value => value.GetArray(item => missingMemberBehavior == MissingMemberBehavior.Error
-                ? Enum.Parse<TEnum>(item.GetStringRequired(), true)
+                ? Parse<TEnum>(item.GetStringRequired())
                 : TryHardParse<TEnum>(item.GetStringRequired())));
         }
 
-        internal static TEnum[]? GetValue<TEnum>(this OptionalMember<TEnum[]> instance, MissingMemberBehavior missingMemberBehavior) where TEnum : struct, Enum
+        internal static TEnum[]? GetValue<TEnum>(
+            this OptionalMember<TEnum[]> instance,
+            MissingMemberBehavior missingMemberBehavior
+        ) where TEnum : struct, Enum
         {
             return instance.Select(value => value.GetArray(item => missingMemberBehavior == MissingMemberBehavior.Error
-                ? Enum.Parse<TEnum>(item.GetStringRequired(), true)
+                ? Parse<TEnum>(item.GetStringRequired())
                 : TryHardParse<TEnum>(item.GetStringRequired())));
         }
 
-        /// <summary>
-        /// A variation on Enum.TryParse() that tries harder.
-        /// </summary>
+        private static TEnum Parse<TEnum>(string name) where TEnum : struct, Enum
+        {
+#if NET
+            return Enum.Parse<TEnum>(name, true);
+#else
+            return (TEnum) Enum.Parse(typeof(TEnum), name, true);
+#endif
+        }
+
+        /// <summary>A variation on Enum.TryParse() that tries harder.</summary>
         /// <typeparam name="TEnum">The type of Enum to parse.</typeparam>
         /// <param name="name">The name of a member of the Enum.</param>
         /// <returns>The Enum value of the member with the specified name.</returns>

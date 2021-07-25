@@ -16,9 +16,12 @@ namespace GW2SDK.Accounts.DailyCrafting
         private readonly IDailyCraftingReader _dailyCraftingReader;
 
         private readonly HttpClient _http;
+
         private readonly MissingMemberBehavior _missingMemberBehavior;
 
-        public DailyCraftingService(HttpClient http, IDailyCraftingReader dailyCraftingReader,
+        public DailyCraftingService(
+            HttpClient http,
+            IDailyCraftingReader dailyCraftingReader,
             MissingMemberBehavior missingMemberBehavior
         )
         {
@@ -27,18 +30,28 @@ namespace GW2SDK.Accounts.DailyCrafting
             _missingMemberBehavior = missingMemberBehavior;
         }
 
+#if NET
         public async Task<IReplica<IReadOnlySet<string>>> GetDailyRecipes()
+#else
+        public async Task<IReplica<ISet<string>>> GetDailyRecipes()
+#endif
         {
             var request = new DailyCraftingRequest();
-            return await _http.GetResourcesSetSimple(request, json => _dailyCraftingReader.Id.ReadArray(json, _missingMemberBehavior))
+            return await _http.GetResourcesSetSimple(request,
+                    json => _dailyCraftingReader.Id.ReadArray(json, _missingMemberBehavior))
                 .ConfigureAwait(false);
         }
 
         [Scope(Permission.Progression)]
+#if NET
         public async Task<IReplica<IReadOnlySet<string>>> GetDailyRecipesOnCooldown(string? accessToken)
+#else
+        public async Task<IReplica<ISet<string>>> GetDailyRecipesOnCooldown(string? accessToken)
+#endif
         {
             var request = new AccountDailyCraftingRequest(accessToken);
-            return await _http.GetResourcesSetSimple(request, json => _dailyCraftingReader.Id.ReadArray(json, _missingMemberBehavior))
+            return await _http.GetResourcesSetSimple(request,
+                    json => _dailyCraftingReader.Id.ReadArray(json, _missingMemberBehavior))
                 .ConfigureAwait(false);
         }
     }

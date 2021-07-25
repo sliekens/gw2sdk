@@ -16,7 +16,7 @@ namespace GW2SDK.Http
 
         public IReadOnlyCollection<LinkHeaderValue> Links { get; }
 
-        public static LinkHeader Parse(string input) => new(ParseImpl(input));
+        public static LinkHeader Parse(string input) => new(ParseImpl(input.AsSpan()));
 
         private static IEnumerable<LinkHeaderValue> ParseImpl(ReadOnlySpan<char> input)
         {
