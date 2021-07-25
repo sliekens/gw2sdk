@@ -17,9 +17,12 @@ namespace GW2SDK.Tests.Features
         [Fact]
         public void Number_of_coins_cannot_be_negative()
         {
-            void NegativeCoins() => new Coin(-1);
+            static void NegativeCoins()
+            {
+                var coin = new Coin(-1);
+            }
 
-            Assert.Throws<ArgumentOutOfRangeException>("quantity", NegativeCoins);
+            Assert.Throws<ArgumentOutOfRangeException>("amount", NegativeCoins);
         }
 
         [Theory]
@@ -33,9 +36,9 @@ namespace GW2SDK.Tests.Features
         [InlineData("1 gold, 2 copper", 1_00_02)]
         [InlineData("1 gold, 2 silver", 1_02_00)]
         [InlineData("1 gold, 2 silver, 3 copper", 1_02_03)]
-        public void Coins_are_formatted_for_humans(string expected, int quantity)
+        public void Coins_are_formatted_for_humans(string expected, int amount)
         {
-            var sut = new Coin(quantity);
+            var sut = new Coin(amount);
 
             var actual = sut.ToString();
 
@@ -67,15 +70,15 @@ namespace GW2SDK.Tests.Features
             var body = new Coin(1_00);
             var tail = new Coin(1_00_00);
 
-            Assert.Equal(0, head.CompareTo(new Coin(head.Quantity)));
+            Assert.Equal(0, head.CompareTo(new Coin(head.Amount)));
             Assert.Equal(1, head.CompareTo(Coin.MinValue));
             Assert.Equal(-1, head.CompareTo(body));
             
-            Assert.Equal(0, body.CompareTo(new Coin(body.Quantity)));
+            Assert.Equal(0, body.CompareTo(new Coin(body.Amount)));
             Assert.Equal(1, body.CompareTo(head));
             Assert.Equal(-1, body.CompareTo(tail));
 
-            Assert.Equal(0, tail.CompareTo(new Coin(tail.Quantity)));
+            Assert.Equal(0, tail.CompareTo(new Coin(tail.Amount)));
             Assert.Equal(1, tail.CompareTo(body));
             Assert.Equal(-1, tail.CompareTo(new Coin(int.MaxValue)));
         }
@@ -88,7 +91,7 @@ namespace GW2SDK.Tests.Features
 
             var actual = part1 + part2;
 
-            Assert.Equal(3, actual.Quantity);
+            Assert.Equal(3, actual.Amount);
         }
 
         [Fact]
@@ -102,6 +105,25 @@ namespace GW2SDK.Tests.Features
             }
 
             Assert.Throws<DivideByZeroException>(DivideByZero);
+        }
+
+        [Fact]
+        public void Coins_can_be_specified_in_silvers()
+        {
+            var sut = new Coin(12, 00);
+
+            var actual = sut.Amount;
+
+            Assert.Equal(1200, actual);
+        }
+        [Fact]
+        public void Coins_can_be_specified_in_gold()
+        {
+            var sut = new Coin(12, 00, 00);
+
+            var actual = sut.Amount;
+
+            Assert.Equal(12_00_00, actual);
         }
     }
 }
