@@ -13,10 +13,14 @@ namespace GW2SDK.Achievements.Categories
     public sealed class AchievementCategoryService
     {
         private readonly IAchievementCategoryReader _achievementCategoryReader;
+
         private readonly HttpClient _http;
+
         private readonly MissingMemberBehavior _missingMemberBehavior;
 
-        public AchievementCategoryService(HttpClient http, IAchievementCategoryReader achievementCategoryReader,
+        public AchievementCategoryService(
+            HttpClient http,
+            IAchievementCategoryReader achievementCategoryReader,
             MissingMemberBehavior missingMemberBehavior
         )
         {
@@ -26,43 +30,53 @@ namespace GW2SDK.Achievements.Categories
             _missingMemberBehavior = missingMemberBehavior;
         }
 
-        public async Task<IReplicaSet<AchievementCategory>> GetAchievementCategories()
+        public async Task<IReplicaSet<AchievementCategory>> GetAchievementCategories(Language? language = default)
         {
-            var request = new AchievementCategoriesRequest();
-            return await _http.GetResourcesSet(request, json => _achievementCategoryReader.ReadArray(json, _missingMemberBehavior))
+            var request = new AchievementCategoriesRequest(language);
+            return await _http.GetResourcesSet(request,
+                    json => _achievementCategoryReader.ReadArray(json, _missingMemberBehavior))
                 .ConfigureAwait(false);
         }
 
         public async Task<IReplicaSet<int>> GetAchievementCategoriesIndex()
         {
             var request = new AchievementCategoriesIndexRequest();
-            return await _http.GetResourcesSet(request, json => _achievementCategoryReader.Id.ReadArray(json, _missingMemberBehavior))
+            return await _http.GetResourcesSet(request,
+                    json => _achievementCategoryReader.Id.ReadArray(json, _missingMemberBehavior))
                 .ConfigureAwait(false);
         }
 
-        public async Task<IReplica<AchievementCategory>> GetAchievementCategoryById(int achievementCategoryId)
+        public async Task<IReplica<AchievementCategory>> GetAchievementCategoryById(
+            int achievementCategoryId,
+            Language? language = default
+        )
         {
-            var request = new AchievementCategoryByIdRequest(achievementCategoryId);
-            return await _http.GetResource(request, json => _achievementCategoryReader.Read(json, _missingMemberBehavior))
+            var request = new AchievementCategoryByIdRequest(achievementCategoryId, language);
+            return await _http
+                .GetResource(request, json => _achievementCategoryReader.Read(json, _missingMemberBehavior))
                 .ConfigureAwait(false);
         }
 
         public async Task<IReplicaSet<AchievementCategory>> GetAchievementCategoriesByIds(
-            IReadOnlyCollection<int> achievementCategoryIds
+            IReadOnlyCollection<int> achievementCategoryIds,
+            Language? language = default
         )
         {
-            var request = new AchievementCategoriesByIdsRequest(achievementCategoryIds);
-            return await _http.GetResourcesSet(request, json => _achievementCategoryReader.ReadArray(json, _missingMemberBehavior))
+            var request = new AchievementCategoriesByIdsRequest(achievementCategoryIds, language);
+            return await _http.GetResourcesSet(request,
+                    json => _achievementCategoryReader.ReadArray(json, _missingMemberBehavior))
                 .ConfigureAwait(false);
         }
 
         public async Task<IReplicaPage<AchievementCategory>> GetAchievementCategoriesByPage(
             int pageIndex,
-            int? pageSize = null
+            int? pageSize = default,
+            Language? language = default
         )
         {
-            var request = new AchievementCategoriesByPageRequest(pageIndex, pageSize);
-            return await _http.GetResourcesPage(request, json => _achievementCategoryReader.ReadArray(json, _missingMemberBehavior))
+            var request = new AchievementCategoriesByPageRequest(pageIndex, pageSize, language);
+            return await _http.GetResourcesPage(request,
+                    json => _achievementCategoryReader.ReadArray(json, _missingMemberBehavior))
                 .ConfigureAwait(false);
         }
     }

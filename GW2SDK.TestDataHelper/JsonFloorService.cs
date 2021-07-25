@@ -19,7 +19,7 @@ namespace GW2SDK.TestDataHelper
 
         public async Task<List<string>> GetAllJsonFloors(int continentId)
         {
-            var request = new FloorsRequest(continentId);
+            var request = new FloorsRequest(continentId, default);
             using var response = await _http.SendAsync(request, HttpCompletionOption.ResponseHeadersRead)
                 .ConfigureAwait(false);
             response.EnsureSuccessStatusCode();

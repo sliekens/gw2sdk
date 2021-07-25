@@ -14,10 +14,13 @@ namespace GW2SDK.Skins
     {
         private readonly HttpClient _http;
 
-        private readonly ISkinReader _skinReader;
         private readonly MissingMemberBehavior _missingMemberBehavior;
 
-        public SkinService(HttpClient http, ISkinReader skinReader,
+        private readonly ISkinReader _skinReader;
+
+        public SkinService(
+            HttpClient http,
+            ISkinReader skinReader,
             MissingMemberBehavior missingMemberBehavior
         )
         {
@@ -33,23 +36,30 @@ namespace GW2SDK.Skins
                 .ConfigureAwait(false);
         }
 
-        public async Task<IReplica<Skin>> GetSkinById(int skinId)
+        public async Task<IReplica<Skin>> GetSkinById(int skinId, Language? language = default)
         {
-            var request = new SkinByIdRequest(skinId);
+            var request = new SkinByIdRequest(skinId, language);
             return await _http.GetResource(request, json => _skinReader.Read(json, _missingMemberBehavior))
                 .ConfigureAwait(false);
         }
 
-        public async Task<IReplicaSet<Skin>> GetSkinsByIds(IReadOnlyCollection<int> skinIds)
+        public async Task<IReplicaSet<Skin>> GetSkinsByIds(
+            IReadOnlyCollection<int> skinIds,
+            Language? language = default
+        )
         {
-            var request = new SkinsByIdsRequest(skinIds);
+            var request = new SkinsByIdsRequest(skinIds, language);
             return await _http.GetResourcesSet(request, json => _skinReader.ReadArray(json, _missingMemberBehavior))
                 .ConfigureAwait(false);
         }
 
-        public async Task<IReplicaPage<Skin>> GetSkinsByPage(int pageIndex, int? pageSize = null)
+        public async Task<IReplicaPage<Skin>> GetSkinsByPage(
+            int pageIndex,
+            int? pageSize = default,
+            Language? language = default
+        )
         {
-            var request = new SkinsByPageRequest(pageIndex, pageSize);
+            var request = new SkinsByPageRequest(pageIndex, pageSize, language);
             return await _http.GetResourcesPage(request, json => _skinReader.ReadArray(json, _missingMemberBehavior))
                 .ConfigureAwait(false);
         }

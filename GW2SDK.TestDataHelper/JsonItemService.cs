@@ -78,7 +78,7 @@ namespace GW2SDK.TestDataHelper
 
         public async Task<List<string>> GetJsonItemsByIds(IReadOnlyCollection<int> itemIds)
         {
-            var request = new ItemsByIdsRequest(itemIds);
+            var request = new ItemsByIdsRequest(itemIds, default);
             using var response = await _http.SendAsync(request, HttpCompletionOption.ResponseHeadersRead)
                 .ConfigureAwait(false);
             response.EnsureSuccessStatusCode();

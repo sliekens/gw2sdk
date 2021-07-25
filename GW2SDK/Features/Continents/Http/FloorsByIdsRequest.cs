@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Net.Http;
-using JetBrains.Annotations;
 using GW2SDK.Http;
+using JetBrains.Annotations;
 using static System.Net.Http.HttpMethod;
 
 namespace GW2SDK.Continents.Http
@@ -10,7 +10,11 @@ namespace GW2SDK.Continents.Http
     [PublicAPI]
     public sealed class FloorsByIdsRequest
     {
-        public FloorsByIdsRequest(int continentId, IReadOnlyCollection<int> floorIds)
+        public FloorsByIdsRequest(
+            int continentId,
+            IReadOnlyCollection<int> floorIds,
+            Language? language
+        )
         {
             if (floorIds is null)
             {
@@ -24,16 +28,20 @@ namespace GW2SDK.Continents.Http
 
             ContinentId = continentId;
             FloorIds = floorIds;
+            Language = language;
         }
 
         public int ContinentId { get; }
 
         public IReadOnlyCollection<int> FloorIds { get; }
 
+        public Language? Language { get; }
+
         public static implicit operator HttpRequestMessage(FloorsByIdsRequest r)
         {
             var search = new QueryBuilder();
             search.Add("ids", r.FloorIds);
+            if (r.Language is not null) search.Add("lang", r.Language.Alpha2Code);
             var location = new Uri($"/v2/continents/{r.ContinentId}/floors?{search}", UriKind.Relative);
             return new HttpRequestMessage(Get, location);
         }

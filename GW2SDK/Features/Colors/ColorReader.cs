@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Text.Json;
-using JetBrains.Annotations;
 using GW2SDK.Json;
+using JetBrains.Annotations;
 
 namespace GW2SDK.Colors
 {

@@ -16,7 +16,7 @@ namespace GW2SDK.TestDataHelper
         {
             _http = http;
         }
-        
+
         public async Task<ISet<string>> GetAllJsonSkins()
         {
             var ids = await GetSkinIds()
@@ -53,7 +53,6 @@ namespace GW2SDK.TestDataHelper
             return new SortedSet<string>(result, StringComparer.Ordinal);
         }
 
-
         private async Task<List<int>> GetSkinIds()
         {
             var request = new SkinsIndexRequest();
@@ -69,7 +68,7 @@ namespace GW2SDK.TestDataHelper
 
         private async Task<List<string>> GetJsonSkinsByIds(IReadOnlyCollection<int> skinIds)
         {
-            var request = new SkinsByIdsRequest(skinIds);
+            var request = new SkinsByIdsRequest(skinIds, default);
             using var response = await _http.SendAsync(request, HttpCompletionOption.ResponseHeadersRead)
                 .ConfigureAwait(false);
             response.EnsureSuccessStatusCode();

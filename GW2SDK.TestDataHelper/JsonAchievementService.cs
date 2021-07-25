@@ -53,7 +53,6 @@ namespace GW2SDK.TestDataHelper
             return new SortedSet<string>(result, StringComparer.Ordinal);
         }
 
-
         private async Task<List<int>> GetAchievementIds()
         {
             var request = new AchievementsIndexRequest();
@@ -69,7 +68,7 @@ namespace GW2SDK.TestDataHelper
 
         private async Task<List<string>> GetJsonAchievementsByIds(IReadOnlyCollection<int> achievementIds)
         {
-            var request = new AchievementsByIdsRequest(achievementIds);
+            var request = new AchievementsByIdsRequest(achievementIds, default);
             using var response = await _http.SendAsync(request, HttpCompletionOption.ResponseHeadersRead)
                 .ConfigureAwait(false);
             response.EnsureSuccessStatusCode();

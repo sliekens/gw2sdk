@@ -10,7 +10,7 @@ namespace GW2SDK.ItemStats.Http
     [PublicAPI]
     public sealed class ItemStatsByIdsRequest
     {
-        public ItemStatsByIdsRequest(IReadOnlyCollection<int> itemStatIds)
+        public ItemStatsByIdsRequest(IReadOnlyCollection<int> itemStatIds, Language? language)
         {
             if (itemStatIds is null)
             {
@@ -23,14 +23,18 @@ namespace GW2SDK.ItemStats.Http
             }
 
             ItemStatIds = itemStatIds;
+            Language = language;
         }
 
         public IReadOnlyCollection<int> ItemStatIds { get; }
+
+        public Language? Language { get; }
 
         public static implicit operator HttpRequestMessage(ItemStatsByIdsRequest r)
         {
             var search = new QueryBuilder();
             search.Add("ids", r.ItemStatIds);
+            if (r.Language is not null) search.Add("lang", r.Language.Alpha2Code);
             var location = new Uri($"/v2/itemstats?{search}", UriKind.Relative);
             return new HttpRequestMessage(Get, location);
         }

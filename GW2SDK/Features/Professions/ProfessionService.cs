@@ -14,49 +14,67 @@ namespace GW2SDK.Professions
     {
         private readonly HttpClient _http;
 
-        private readonly IProfessionReader _professionReader;
-
         private readonly MissingMemberBehavior _missingMemberBehavior;
 
-        public ProfessionService(HttpClient http, IProfessionReader professionReader, MissingMemberBehavior missingMemberBehavior)
+        private readonly IProfessionReader _professionReader;
+
+        public ProfessionService(
+            HttpClient http,
+            IProfessionReader professionReader,
+            MissingMemberBehavior missingMemberBehavior
+        )
         {
             _http = http ?? throw new ArgumentNullException(nameof(http));
             _professionReader = professionReader ?? throw new ArgumentNullException(nameof(professionReader));
             _missingMemberBehavior = missingMemberBehavior;
         }
 
-        public async Task<IReplicaSet<Profession>> GetProfessions()
+        public async Task<IReplicaSet<Profession>> GetProfessions(Language? language = default)
         {
-            var request = new ProfessionsRequest();
-            return await _http.GetResourcesSet(request, json => _professionReader.ReadArray(json, _missingMemberBehavior))
+            var request = new ProfessionsRequest(language);
+            return await _http
+                .GetResourcesSet(request, json => _professionReader.ReadArray(json, _missingMemberBehavior))
                 .ConfigureAwait(false);
         }
 
         public async Task<IReplicaSet<ProfessionName>> GetProfessionNames()
         {
             var request = new ProfessionNamesRequest();
-            return await _http.GetResourcesSet(request, json => _professionReader.Id.ReadArray(json, _missingMemberBehavior))
+            return await _http.GetResourcesSet(request,
+                    json => _professionReader.Id.ReadArray(json, _missingMemberBehavior))
                 .ConfigureAwait(false);
         }
 
-        public async Task<IReplica<Profession>> GetProfessionByName(ProfessionName professionName)
+        public async Task<IReplica<Profession>> GetProfessionByName(
+            ProfessionName professionName,
+            Language? language = default
+        )
         {
-            var request = new ProfessionByNameRequest(professionName);
+            var request = new ProfessionByNameRequest(professionName, language);
             return await _http.GetResource(request, json => _professionReader.Read(json, _missingMemberBehavior))
                 .ConfigureAwait(false);
         }
 
-        public async Task<IReplicaSet<Profession>> GetProfessionsByIds(IReadOnlyCollection<ProfessionName> professionNames)
+        public async Task<IReplicaSet<Profession>> GetProfessionsByIds(
+            IReadOnlyCollection<ProfessionName> professionNames,
+            Language? language = default
+        )
         {
-            var request = new ProfessionsByNamesRequest(professionNames);
-            return await _http.GetResourcesSet(request, json => _professionReader.ReadArray(json, _missingMemberBehavior))
+            var request = new ProfessionsByNamesRequest(professionNames, language);
+            return await _http
+                .GetResourcesSet(request, json => _professionReader.ReadArray(json, _missingMemberBehavior))
                 .ConfigureAwait(false);
         }
 
-        public async Task<IReplicaPage<Profession>> GetProfessionsByPage(int pageIndex, int? pageSize = null)
+        public async Task<IReplicaPage<Profession>> GetProfessionsByPage(
+            int pageIndex,
+            int? pageSize = default,
+            Language? language = default
+        )
         {
-            var request = new ProfessionsByPageRequest(pageIndex, pageSize);
-            return await _http.GetResourcesPage(request, json => _professionReader.ReadArray(json, _missingMemberBehavior))
+            var request = new ProfessionsByPageRequest(pageIndex, pageSize, language);
+            return await _http
+                .GetResourcesPage(request, json => _professionReader.ReadArray(json, _missingMemberBehavior))
                 .ConfigureAwait(false);
         }
     }

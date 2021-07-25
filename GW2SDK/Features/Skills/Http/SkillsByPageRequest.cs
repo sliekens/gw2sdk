@@ -9,21 +9,29 @@ namespace GW2SDK.Skills.Http
     [PublicAPI]
     public sealed class SkillsByPageRequest
     {
-        public SkillsByPageRequest(int pageIndex, int? pageSize = null)
+        public SkillsByPageRequest(
+            int pageIndex,
+            int? pageSize,
+            Language? language
+        )
         {
             PageIndex = pageIndex;
             PageSize = pageSize;
+            Language = language;
         }
 
         public int PageIndex { get; }
 
         public int? PageSize { get; }
 
+        public Language? Language { get; }
+
         public static implicit operator HttpRequestMessage(SkillsByPageRequest r)
         {
             var search = new QueryBuilder();
             search.Add("page", r.PageIndex);
             if (r.PageSize.HasValue) search.Add("page_size", r.PageSize.Value);
+            if (r.Language is not null) search.Add("lang", r.Language.Alpha2Code);
             var location = new Uri($"/v2/skills?{search}", UriKind.Relative);
             return new HttpRequestMessage(Get, location);
         }

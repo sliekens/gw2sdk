@@ -27,7 +27,7 @@ namespace ApiVersionInfo
             using var http = new HttpClient(new SocketsHttpHandler
                 {
                     // Enable compression to save network bandwidth (at the cost of some negligible CPU usage)
-                    AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate
+                    AutomaticDecompression = DecompressionMethods.GZip
                 },
                 true);
 
@@ -35,7 +35,7 @@ namespace ApiVersionInfo
             http.UseGuildWars2();
 
             // Convenience method, sets the Accept-Language header
-            http.UseLanguage("en");
+            http.UseLanguage(Language.English);
 
             // Convenience method, sets the X-Schema-Version to the recommended version
             // (where recommended means that it is the least likely to cause JSON conversion errors)
