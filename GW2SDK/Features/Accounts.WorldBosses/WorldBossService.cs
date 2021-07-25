@@ -14,7 +14,9 @@ namespace GW2SDK.Accounts.WorldBosses
     public sealed class WorldBossService
     {
         private readonly HttpClient _http;
+
         private readonly MissingMemberBehavior _missingMemberBehavior;
+
         private readonly IWorldBossReader _worldBossReader;
 
         public WorldBossService(
@@ -28,7 +30,11 @@ namespace GW2SDK.Accounts.WorldBosses
             _missingMemberBehavior = missingMemberBehavior;
         }
 
+#if NET
         public async Task<IReplica<IReadOnlySet<string>>> GetWorldBosses()
+#else
+        public async Task<IReplica<ISet<string>>> GetWorldBosses()
+#endif
         {
             var request = new WorldBossesRequest();
             return await _http.GetResourcesSetSimple(request,
@@ -37,7 +43,11 @@ namespace GW2SDK.Accounts.WorldBosses
         }
 
         [Scope(Permission.Progression)]
+#if NET
         public async Task<IReplica<IReadOnlySet<string>>> GetWorldBossesOnCooldown(string? accessToken)
+#else
+        public async Task<IReplica<ISet<string>>> GetWorldBossesOnCooldown(string? accessToken)
+#endif
         {
             var request = new AccountWorldBossesRequest(accessToken);
             return await _http.GetResourcesSetSimple(request,

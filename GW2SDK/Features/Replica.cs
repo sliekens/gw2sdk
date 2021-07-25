@@ -30,7 +30,11 @@ namespace GW2SDK
 
         public bool HasValue { get; }
 
+#if NET
         public T? Value { get; }
+#else
+        public T Value { get; } = default!;
+#endif
 
         public static IReplica<T> NotModified(DateTimeOffset date) => new Replica<T>(date, false);
     }

@@ -14,10 +14,14 @@ namespace GW2SDK.Accounts.Recipes
     public sealed class AccountRecipesService
     {
         private readonly IAccountRecipeReader _accountRecipeReader;
+
         private readonly HttpClient _http;
+
         private readonly MissingMemberBehavior _missingMemberBehavior;
 
-        public AccountRecipesService(HttpClient http, IAccountRecipeReader accountRecipeReader,
+        public AccountRecipesService(
+            HttpClient http,
+            IAccountRecipeReader accountRecipeReader,
             MissingMemberBehavior missingMemberBehavior
         )
         {
@@ -27,10 +31,15 @@ namespace GW2SDK.Accounts.Recipes
         }
 
         [Scope(Permission.Unlocks)]
+#if NET
         public async Task<IReplica<IReadOnlySet<int>>> GetUnlockedRecipes(string? accessToken = null)
+#else
+        public async Task<IReplica<ISet<int>>> GetUnlockedRecipes(string? accessToken = null)
+#endif
         {
             var request = new UnlockedRecipesRequest(accessToken);
-            return await _http.GetResourcesSetSimple(request, json => _accountRecipeReader.Id.ReadArray(json, _missingMemberBehavior))
+            return await _http.GetResourcesSetSimple(request,
+                    json => _accountRecipeReader.Id.ReadArray(json, _missingMemberBehavior))
                 .ConfigureAwait(false);
         }
     }

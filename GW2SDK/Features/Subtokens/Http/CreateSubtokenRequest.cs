@@ -37,7 +37,7 @@ namespace GW2SDK.Subtokens.Http
             var args = new QueryBuilder();
             if (r.Permissions is object && r.Permissions.Count != 0)
             {
-                args.Add("permissions", string.Join(',', r.Permissions).ToLowerInvariant());
+                args.Add("permissions", string.Join(",", r.Permissions).ToLowerInvariant());
             }
 
             if (r.AbsoluteExpirationDate.HasValue)
@@ -47,7 +47,7 @@ namespace GW2SDK.Subtokens.Http
 
             if (r.Urls is object && r.Urls.Count != 0)
             {
-                args.Add("urls", string.Join(',', r.Urls.Select(Uri.EscapeDataString)));
+                args.Add("urls", string.Join(",", r.Urls.Select(Uri.EscapeDataString)));
             }
 
             var uriString = "/v2/createsubtoken";

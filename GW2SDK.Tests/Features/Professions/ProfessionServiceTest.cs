@@ -18,11 +18,11 @@ namespace GW2SDK.Tests.Features.Professions
 
             var actual = await sut.GetProfessions();
 
-            Assert.Equal(Enum.GetNames<ProfessionName>().Length, actual.Values.Count);
+            Assert.Equal(Enum.GetNames(typeof(ProfessionName)).Length, actual.Values.Count);
 
             foreach (var profession in actual.Values)
             {
-                Assert.True(Enum.IsDefined(profession.Id), "Enum.IsDefined(profession.Id)");
+                Assert.True(Enum.IsDefined(typeof(ProfessionName), profession.Id), "Enum.IsDefined(profession.Id)");
                 Assert.NotEmpty(profession.Name);
                 Assert.NotEmpty(profession.Icon);
                 Assert.NotEmpty(profession.IconBig);
@@ -39,8 +39,8 @@ namespace GW2SDK.Tests.Features.Professions
 
             var actual = await sut.GetProfessionNames();
 
-            Assert.Equal(Enum.GetNames<ProfessionName>().Length, actual.Values.Count);
-            Assert.All(actual.Values, name => Assert.True(Enum.IsDefined(name), "Enum.IsDefined(name)"));
+            Assert.Equal(Enum.GetNames(typeof(ProfessionName)).Length, actual.Values.Count);
+            Assert.All(actual.Values, name => Assert.True(Enum.IsDefined(typeof(ProfessionName), name), "Enum.IsDefined(name)"));
         }
 
         [Fact]

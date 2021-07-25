@@ -48,8 +48,11 @@ namespace GW2SDK.Http
         public static async Task<JsonDocument> ReadAsJsonAsync(this HttpContent instance)
         {
             if (instance == null) throw new ArgumentNullException(nameof(instance));
-            await using var content = await instance.ReadAsStreamAsync()
-                .ConfigureAwait(false);
+#if NET
+            await
+#endif
+                using var content = await instance.ReadAsStreamAsync()
+                    .ConfigureAwait(false);
             return await JsonDocument.ParseAsync(content)
                 .ConfigureAwait(false);
         }
@@ -82,7 +85,11 @@ namespace GW2SDK.Http
                 response.Content.Headers.LastModified);
         }
 
+#if NET
         internal static async Task<IReplica<IReadOnlySet<T>>> GetResourcesSetSimple<T>(
+#else
+        internal static async Task<IReplica<ISet<T>>> GetResourcesSetSimple<T>(
+#endif
             this HttpClient instance,
             HttpRequestMessage request,
             Func<JsonDocument, IEnumerable<T>> resultSelector
@@ -98,7 +105,12 @@ namespace GW2SDK.Http
 
             var result = new HashSet<T>(resultSelector(json));
 
-            return new Replica<IReadOnlySet<T>>(date,
+#if NET
+            return new Replica<IReadOnlySet<T>>(
+#else
+            return new Replica<ISet<T>>(
+#endif
+                date,
                 true,
                 result,
                 response.Content.Headers.Expires,
@@ -119,7 +131,12 @@ namespace GW2SDK.Http
             using var json = await response.Content.ReadAsJsonAsync()
                 .ConfigureAwait(false);
 
-            var result = new HashSet<T>(response.Headers.GetCollectionContext().ResultCount);
+#if NET
+            var result = new HashSet<T>(response.Headers.GetCollectionContext()
+                .ResultCount);
+#else
+            var result = new HashSet<T>();
+#endif
             result.UnionWith(resultSelector(json));
 
             return new ReplicaSet<T>(date,
@@ -144,7 +161,12 @@ namespace GW2SDK.Http
             using var json = await response.Content.ReadAsJsonAsync()
                 .ConfigureAwait(false);
 
-            var result = new HashSet<T>(response.Headers.GetPageContext().ResultCount);
+#if NET
+            var result = new HashSet<T>(response.Headers.GetPageContext()
+                .ResultCount);
+#else
+            var result = new HashSet<T>();
+#endif
             result.UnionWith(resultSelector(json));
 
             return new ReplicaPage<T>(date,

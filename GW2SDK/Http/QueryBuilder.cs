@@ -21,7 +21,8 @@ namespace GW2SDK.Http
 
         public void Add(string key, IEnumerable<string> values) => _arguments.Add(new Argument(key, ToCsv(values)));
 
-        public void Add(string key, IEnumerable<int> values) => _arguments.Add(new Argument(key, ToCsv(ToString(values))));
+        public void Add(string key, IEnumerable<int> values) =>
+            _arguments.Add(new Argument(key, ToCsv(ToString(values))));
 
         public string Build()
         {
@@ -33,7 +34,7 @@ namespace GW2SDK.Http
                     query.Append("&");
                 }
 
-                query.AppendJoin('=', key, value);
+                query.AppendJoin("=", key, value);
             }
 
             return query.ToString();
@@ -43,8 +44,33 @@ namespace GW2SDK.Http
 
         private static IEnumerable<string> ToString(IEnumerable<int> values) => values.Select(ToString);
 
-        private static string ToCsv(IEnumerable<string> values) => string.Join(',', values);
+        private static string ToCsv(IEnumerable<string> values) => string.Join(",", values);
 
         public override string ToString() => Build();
     }
+
+#if !NET
+    internal static class QueryBuilderHelper
+    {
+        internal static void Deconstruct(
+            this KeyValuePair<string, string> instance,
+            out string key,
+            out string value
+        )
+        {
+            key = instance.Key;
+            value = instance.Value;
+        }
+
+        internal static void AppendJoin(
+            this StringBuilder instance,
+            string separator,
+            string first,
+            string second
+        )
+        {
+            instance.Append(string.Join(separator, first, second));
+        }
+    }
+#endif
 }

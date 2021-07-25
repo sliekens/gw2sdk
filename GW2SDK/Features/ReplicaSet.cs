@@ -8,13 +8,16 @@ namespace GW2SDK
         public ReplicaSet(
             DateTimeOffset date,
             bool hasValues,
+#if NET
             IReadOnlySet<T>? value = default,
+#else
+            ISet<T>? value = default,
+#endif
             ICollectionContext? context = null,
             DateTimeOffset? expires = null,
             DateTimeOffset? lastModified = null
         )
         {
-
             Date = date;
             if (hasValues)
             {
@@ -34,8 +37,14 @@ namespace GW2SDK
 
         public bool HasValues { get; }
 
+#if NET
         public IReadOnlySet<T>? Values { get; }
 
         public ICollectionContext? Context { get; }
+#else
+        public ISet<T> Values { get; } = default!;
+
+        public ICollectionContext Context { get; } = default!;
+#endif
     }
 }

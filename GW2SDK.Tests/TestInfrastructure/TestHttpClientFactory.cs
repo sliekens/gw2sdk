@@ -15,12 +15,14 @@ namespace GW2SDK.Tests.TestInfrastructure
 
         public async ValueTask DisposeAsync()
         {
-            await _httpClientProvider.DisposeAsync().ConfigureAwait(false);
+            await _httpClientProvider.DisposeAsync()
+                .ConfigureAwait(false);
             GC.SuppressFinalize(this);
         }
 
         public HttpClient CreateClient(string name) =>
-            _httpClientProvider.GetRequiredService<IHttpClientFactory>().CreateClient(name);
+            _httpClientProvider.GetRequiredService<IHttpClientFactory>()
+                .CreateClient(name);
 
         /// <summary>Creates a service provider for the HTTP factory which is unfortunately very dependent on ServiceCollection.</summary>
         private static ServiceProvider BuildHttpClientProvider()
@@ -38,10 +40,21 @@ namespace GW2SDK.Tests.TestInfrastructure
                         http.BaseAddress = ConfigurationManager.Instance.BaseAddress;
                         http.UseSchemaVersion(SchemaVersion.Latest);
                     })
-                .ConfigurePrimaryHttpMessageHandler(() => new SocketsHttpHandler
+                .ConfigurePrimaryHttpMessageHandler(() =>
                 {
-                    MaxConnectionsPerServer = 10,
-                    AutomaticDecompression = DecompressionMethods.GZip
+#if NET
+                    return new SocketsHttpHandler
+                    {
+                        MaxConnectionsPerServer = 10,
+                        AutomaticDecompression = DecompressionMethods.GZip
+                    };
+#else
+                    return new HttpClientHandler
+                    {
+                        MaxConnectionsPerServer = 10,
+                        AutomaticDecompression = DecompressionMethods.GZip
+                    };
+#endif
                 })
                 .AddPolicyHandlerFromRegistry("api.guildwars2.com")
                 .AddHttpMessageHandler<UnauthorizedMessageHandler>()
