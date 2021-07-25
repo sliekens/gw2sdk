@@ -8,9 +8,8 @@ namespace GW2SDK.Tests.Features.Continents
     {
         public ContinentFixture()
         {
-            var reader = new FlatFileReader();
-            Floors = reader.Read("Data/continents_1_floors.json.gz")
-                .Concat(reader.Read("Data/continents_2_floors.json.gz"))
+            Floors = FlatFileReader.Read("Data/continents_1_floors.json.gz")
+                .Concat(FlatFileReader.Read("Data/continents_2_floors.json.gz"))
                 .ToList()
                 .AsReadOnly();
         }

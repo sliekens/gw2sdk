@@ -51,7 +51,7 @@ namespace GW2SDK.Tests.TestInfrastructure
             return services.BuildServiceProvider();
         }
 
-        private static void AddPolicies(ServiceCollection services)
+        private static void AddPolicies(IServiceCollection services)
         {
             var jitterer = new Random();
             var policies = services.AddPolicyRegistry();

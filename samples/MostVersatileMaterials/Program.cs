@@ -36,7 +36,7 @@ namespace MostVersatileMaterials
             var recipesService = new RecipeService(http, new RecipeReader(), MissingMemberBehavior.Undefined);
             var itemsService = new ItemService(http, new ItemReader(), MissingMemberBehavior.Undefined);
 
-            var top = 600;
+            const int top = 600;
             var recipes = await Progress()
                 .StartAsync(async ctx =>
                 {
@@ -74,7 +74,7 @@ namespace MostVersatileMaterials
                     .UseConverter(item => item.Name)
                     .PageSize(20));
 
-                using var ingredientIcon = await http.GetStreamAsync(choice.Icon!);
+                await using var ingredientIcon = await http.GetStreamAsync(choice.Icon!);
                 var choiceTable = new Table().AddColumn("Icon")
                     .AddColumn("Ingredient")
                     .AddColumn("Description");
@@ -106,7 +106,7 @@ namespace MostVersatileMaterials
             } while (AnsiConsole.Confirm("Do you want to choose again?"));
         }
 
-        public static Progress Progress() =>
+        private static Progress Progress() =>
             AnsiConsole.Progress()
                 .Columns(new TaskDescriptionColumn(),
                     new ProgressBarColumn(),
@@ -140,7 +140,7 @@ namespace MostVersatileMaterials
         }
 
         private static async Task<List<Item>> GetItems(
-            List<int> itemIds,
+            IReadOnlyCollection<int> itemIds,
             ItemService itemsService,
             ProgressTask progress
         )

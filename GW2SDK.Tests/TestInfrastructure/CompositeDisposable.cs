@@ -35,8 +35,7 @@ namespace GW2SDK.Tests.TestInfrastructure
         public void Dispose()
         {
             if (_disposed) return;
-            Dispose(disposing: true);
-            GC.SuppressFinalize(this);
+            Dispose(true);
         }
 
         public async ValueTask DisposeAsync()
@@ -59,8 +58,7 @@ namespace GW2SDK.Tests.TestInfrastructure
                 }
             }
 
-            Dispose(disposing: false);
-            GC.SuppressFinalize(this);
+            Dispose(false);
         }
 
         private void Dispose(bool disposing)

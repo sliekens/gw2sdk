@@ -8,8 +8,7 @@ namespace GW2SDK.Tests.Features.Items
     {
         public ItemFixture()
         {
-            var reader = new FlatFileReader();
-            Items = reader.Read("Data/items.json.gz").ToList().AsReadOnly();
+            Items = FlatFileReader.Read("Data/items.json.gz").ToList().AsReadOnly();
         }
 
         public IReadOnlyCollection<string> Items { get; }

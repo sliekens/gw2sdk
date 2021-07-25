@@ -3,7 +3,5 @@
 namespace GW2SDK.Professions
 {
     [PublicAPI]
-    public sealed record HealingSkillReference : SkillReference
-    {
-    }
+    public sealed record HealingSkillReference : SkillReference;
 }

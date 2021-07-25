@@ -3,7 +3,5 @@
 namespace GW2SDK.Skills
 {
     [PublicAPI]
-    public sealed record PetSkill : Skill
-    {
-    }
+    public sealed record PetSkill : Skill;
 }

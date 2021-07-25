@@ -102,6 +102,6 @@ namespace GW2SDK.TestDataHelper
             }
         }
 
-        private static StreamWriter CreateTextCompressed(string path) => new StreamWriter(new GZipStream(File.OpenWrite(path), CompressionMode.Compress), Encoding.UTF8);
+        private static StreamWriter CreateTextCompressed(string path) => new(new GZipStream(File.OpenWrite(path), CompressionMode.Compress), Encoding.UTF8);
     }
 }

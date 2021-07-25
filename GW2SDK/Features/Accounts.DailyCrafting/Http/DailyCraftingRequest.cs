@@ -7,7 +7,7 @@ namespace GW2SDK.Accounts.DailyCrafting.Http
     [PublicAPI]
     public sealed class DailyCraftingRequest
     {
-        public static implicit operator HttpRequestMessage(DailyCraftingRequest r)
+        public static implicit operator HttpRequestMessage(DailyCraftingRequest _)
         {
             var location = new Uri("/v2/dailycrafting", UriKind.Relative);
             return new HttpRequestMessage(HttpMethod.Get, location);

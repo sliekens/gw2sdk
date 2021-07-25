@@ -51,7 +51,7 @@ namespace GW2SDK.Tests.Features.Professions
             await using var services = new Composer();
             var sut = services.Resolve<ProfessionService>();
 
-            var name = ProfessionName.Engineer;
+            const ProfessionName name = ProfessionName.Engineer;
 
             var actual = await sut.GetProfessionByName(name);
 
