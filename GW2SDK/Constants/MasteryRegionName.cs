@@ -7,7 +7,7 @@ namespace GW2SDK
     [DefaultValue(Unknown)]
     public enum MasteryRegionName
     {
-        Unknown ,
+        Unknown,
 
         Tyria,
 

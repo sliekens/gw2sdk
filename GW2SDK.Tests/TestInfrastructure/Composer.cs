@@ -24,6 +24,7 @@ using GW2SDK.Items;
 using GW2SDK.ItemStats;
 using GW2SDK.Json;
 using GW2SDK.MailCarriers;
+using GW2SDK.Masteries;
 using GW2SDK.Professions;
 using GW2SDK.Recipes;
 using GW2SDK.Skills;
@@ -215,6 +216,11 @@ namespace GW2SDK.Tests.TestInfrastructure
             if (serviceType == typeof(WorldBossService))
             {
                 return new WorldBossService(Resolve<HttpClient>(), new WorldBossReader(), MissingMemberBehavior.Error);
+            }
+
+            if (serviceType == typeof(MasteryService))
+            {
+                return new MasteryService(Resolve<HttpClient>(), new MasteryReader(), MissingMemberBehavior.Error);
             }
 
             return null;
