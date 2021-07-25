@@ -29,6 +29,7 @@ using GW2SDK.Professions;
 using GW2SDK.Recipes;
 using GW2SDK.Skills;
 using GW2SDK.Skins;
+using GW2SDK.Specializations;
 using GW2SDK.Subtokens;
 using GW2SDK.Titles;
 using GW2SDK.Tokens;
@@ -221,6 +222,11 @@ namespace GW2SDK.Tests.TestInfrastructure
             if (serviceType == typeof(MasteryService))
             {
                 return new MasteryService(Resolve<HttpClient>(), new MasteryReader(), MissingMemberBehavior.Error);
+            }
+
+            if (serviceType == typeof(SpecializationService))
+            {
+                return new SpecializationService(Resolve<HttpClient>(), new SpecializationReader(), MissingMemberBehavior.Error);
             }
 
             return null;
