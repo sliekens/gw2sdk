@@ -106,11 +106,12 @@ namespace GW2SDK.Json
 
         private static TEnum Parse<TEnum>(string name) where TEnum : struct, Enum
         {
-#if NET
-            return Enum.Parse<TEnum>(name, true);
-#else
-            return (TEnum) Enum.Parse(typeof(TEnum), name, true);
-#endif
+            if (!Enum.TryParse(name, true, out TEnum value))
+            {
+               throw new InvalidOperationException(Strings.UnexpectedMember(name));
+            }
+
+            return value;
         }
 
         /// <summary>A variation on Enum.TryParse() that tries harder.</summary>

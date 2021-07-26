@@ -68,7 +68,7 @@ namespace GW2SDK.Tests.Features.Professions
 
             var names = new[] { ProfessionName.Mesmer, ProfessionName.Necromancer, ProfessionName.Revenant };
 
-            var actual = await sut.GetProfessionsByIds(names);
+            var actual = await sut.GetProfessionsByNames(names);
 
             Assert.Collection(actual.Values,
                 first => Assert.Equal(names[0],  first.Id),
