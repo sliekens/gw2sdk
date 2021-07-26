@@ -25,6 +25,7 @@ using GW2SDK.ItemStats;
 using GW2SDK.Json;
 using GW2SDK.MailCarriers;
 using GW2SDK.Masteries;
+using GW2SDK.Mounts;
 using GW2SDK.Professions;
 using GW2SDK.Recipes;
 using GW2SDK.Skills;
@@ -227,6 +228,11 @@ namespace GW2SDK.Tests.TestInfrastructure
             if (serviceType == typeof(SpecializationService))
             {
                 return new SpecializationService(Resolve<HttpClient>(), new SpecializationReader(), MissingMemberBehavior.Error);
+            }
+
+            if (serviceType == typeof(MountService))
+            {
+                return new MountService(Resolve<HttpClient>(), new MountReader(), MissingMemberBehavior.Error);
             }
 
             return null;

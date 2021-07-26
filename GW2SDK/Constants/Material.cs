@@ -9,6 +9,8 @@ namespace GW2SDK
 
         Leather,
 
-        Metal
+        Metal,
+
+        Fur
     }
 }

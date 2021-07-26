@@ -548,6 +548,11 @@ namespace GW2SDK.Professions
                 return name;
             }
 
+            if (missingMemberBehavior == MissingMemberBehavior.Error)
+            {
+                throw new InvalidOperationException(Strings.UnexpectedMember(text));
+            }
+
             return (ProfessionName) text.GetDeterministicHashCode();
         }
     }

@@ -55,7 +55,7 @@ namespace GW2SDK.Professions
                 .ConfigureAwait(false);
         }
 
-        public async Task<IReplicaSet<Profession>> GetProfessionsByIds(
+        public async Task<IReplicaSet<Profession>> GetProfessionsByNames(
             IReadOnlyCollection<ProfessionName> professionNames,
             Language? language = default
         )
