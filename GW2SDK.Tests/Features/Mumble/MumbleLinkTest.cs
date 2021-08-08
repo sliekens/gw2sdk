@@ -1,6 +1,7 @@
 ﻿using System.IO;
 using System.IO.MemoryMappedFiles;
 using System.Threading.Tasks;
+using GW2SDK.Json;
 using GW2SDK.Mumble;
 using Xunit;
 
@@ -16,7 +17,7 @@ namespace GW2SDK.Tests.Features.Mumble
 
             var actual = sut.GetSnapshot();
 
-            Assert.Equal("Guild Wars 2", actual.name);
+            Assert.Equal("Guild Wars 2", actual.Name);
         }
 
         [MumbleLinkFact]
@@ -33,16 +34,24 @@ namespace GW2SDK.Tests.Features.Mumble
 
             Assert.True(second.UiTick > first.UiTick, "MumbleLink should be self-updating");
         }
-
+        
         [MumbleLinkFact]
         public void The_link_provides_context()
         {
             using var sut = MumbleLink.Open();
 
             var snapshot = sut.GetSnapshot();
-            var actual = snapshot.GetContext();
-
+            Assert.True(snapshot.TryGetContext(out var actual));
             Assert.True(actual.BuildId > 100_000, "Game build should be over 100,000");
+        }
+
+        [MumbleLinkFact]
+        public void The_link_provides_identity()
+        {
+            using var sut = MumbleLink.Open();
+
+            var snapshot = sut.GetSnapshot();
+            Assert.True(snapshot.TryGetIdentity(out var actual, MissingMemberBehavior.Error));
         }
     }
 

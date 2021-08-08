@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
 using GW2SDK.Tests.TestInfrastructure;
@@ -31,7 +32,7 @@ namespace GW2SDK.Tests.PatternsAndPractices
             Assert.All(enums,
                 type =>
                 {
-                    if (Enum.IsDefined(type, 0))
+                    if (HasDefaultMember(type))
                     {
                         var annotation = type.GetCustomAttribute<DefaultValueAttribute>();
                         if (annotation is null)
@@ -50,6 +51,22 @@ namespace GW2SDK.Tests.PatternsAndPractices
                         }
                     }
                 });
+
+            static bool HasDefaultMember(Type enumType)
+            {
+                var underlyingType = Enum.GetUnderlyingType(enumType);
+                if (underlyingType == typeof(int))
+                {
+                    return Enum.IsDefined(enumType, 0);
+                }
+
+                if (underlyingType == typeof(uint))
+                {
+                    return Enum.IsDefined(enumType, uint.MinValue);
+                }
+
+                throw new NotSupportedException("Enum type not supported");
+            }
         }
     }
 }

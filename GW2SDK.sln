@@ -34,6 +34,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApiVersionInfo", "samples\A
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MostVersatileMaterials", "samples\MostVersatileMaterials\MostVersatileMaterials.csproj", "{B374256A-3BF9-41AC-B68E-CA8FA39CA328}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mumble", "samples\Mumble\Mumble.csproj", "{506EA451-0D44-4B1F-BF58-ACB7BC312AEA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -60,6 +62,10 @@ Global
 		{B374256A-3BF9-41AC-B68E-CA8FA39CA328}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B374256A-3BF9-41AC-B68E-CA8FA39CA328}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B374256A-3BF9-41AC-B68E-CA8FA39CA328}.Release|Any CPU.Build.0 = Release|Any CPU
+		{506EA451-0D44-4B1F-BF58-ACB7BC312AEA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{506EA451-0D44-4B1F-BF58-ACB7BC312AEA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{506EA451-0D44-4B1F-BF58-ACB7BC312AEA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{506EA451-0D44-4B1F-BF58-ACB7BC312AEA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -68,6 +74,7 @@ Global
 		{4EB0CF28-5D3A-47AD-B4E3-8E94F9289B5C} = {63243B77-9BE8-41CE-B2F6-B306E3F150CB}
 		{7322DA3F-5F6F-4EBA-BB85-DCFB67B3B620} = {816817BB-0465-4D44-89A6-6CB64A1FF589}
 		{B374256A-3BF9-41AC-B68E-CA8FA39CA328} = {816817BB-0465-4D44-89A6-6CB64A1FF589}
+		{506EA451-0D44-4B1F-BF58-ACB7BC312AEA} = {816817BB-0465-4D44-89A6-6CB64A1FF589}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {30CA8636-682D-4E26-943C-45133727C406}
