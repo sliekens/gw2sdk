@@ -26,17 +26,19 @@ namespace GW2SDK.Mumble
 
         private readonly MemoryMappedFile _file;
 
+        private readonly byte[] _integrityBuffer;
+
         private readonly List<IObserver<Snapshot>> _subscribers = new();
 
-        private GCHandle _bufferHandle;
-
         private readonly Timer _timer;
+
+        private GCHandle _bufferHandle;
 
         private long _lastIssued = -1;
 
         private MumbleLink(MemoryMappedFile file, TimeSpan refreshRate)
         {
-            var safeInterval = TimeSpan.FromMilliseconds(20);
+            var safeInterval = TimeSpan.FromMilliseconds(1);
             var interval = refreshRate < safeInterval ? safeInterval : refreshRate;
             _timer = new Timer(interval.TotalMilliseconds)
             {
@@ -48,6 +50,7 @@ namespace GW2SDK.Mumble
             _file = file;
             _content = file.CreateViewStream(0, Length, MemoryMappedFileAccess.Read);
             _buffer = ArrayPool<byte>.Shared.Rent(Length);
+            _integrityBuffer = ArrayPool<byte>.Shared.Rent(Length);
             _bufferHandle = GCHandle.Alloc(_buffer, GCHandleType.Pinned);
             _bufferAddress = _bufferHandle.AddrOfPinnedObject();
         }
@@ -77,19 +80,31 @@ namespace GW2SDK.Mumble
 
         private void Publish(object sender, ElapsedEventArgs e)
         {
-            var snapshot = GetSnapshot();
-            if (snapshot.UiTick != _lastIssued)
+            try
             {
-                _lastIssued = snapshot.UiTick;
-                foreach (var subscriber in _subscribers.ToList())
+                var snapshot = GetSnapshot();
+                if (snapshot.UiTick != _lastIssued)
                 {
-                    subscriber.OnNext(snapshot);
+                    _lastIssued = snapshot.UiTick;
+                    foreach (var subscriber in _subscribers.ToList())
+                    {
+                        subscriber.OnNext(snapshot);
+                    }
+                }
+
+                if (_subscribers.Count != 0)
+                {
+                    _timer.Start();
                 }
             }
-
-            if (_subscribers.Count != 0)
+            catch (Exception reason)
             {
-                _timer.Start();
+                foreach (var subscriber in _subscribers.ToList())
+                {
+                    subscriber.OnError(reason);
+                }
+
+                _subscribers.Clear();
             }
         }
 
@@ -98,6 +113,7 @@ namespace GW2SDK.Mumble
             _content.Dispose();
             _file.Dispose();
             _bufferHandle.Free();
+            ArrayPool<byte>.Shared.Return(_integrityBuffer);
             ArrayPool<byte>.Shared.Return(_buffer);
         }
 
@@ -125,24 +141,43 @@ namespace GW2SDK.Mumble
 
         public Snapshot GetSnapshot()
         {
-#if NET
-            var buffered = _content.Read(_buffer);
-            if (buffered != Length)
+            // First buffer the entire content
+            // Then buffer the entire content again to check for integrity errors
+            // This check is designed to detect dirty reads 
+            // Note the need to specify the length because we use pooled arrays
+            var buffer = _buffer.AsSpan(0, Length);
+            var integrityBuffer = _integrityBuffer.AsSpan(0, Length);
+            do
             {
-                throw new InvalidOperationException($"Expected {Length} bytes but received {buffered}.");
-            }
-#else
-            var buffered = _content.Read(_buffer, 0, Length);
-            if (buffered != Length)
-            {
-                throw new InvalidOperationException($"Expected {Length} bytes but received {buffered}.");
-            }
-#endif
-
-            // Reset the view stream for the next call to GetSnapshot
-            _content.Position = 0;
+                BufferContent(_buffer);
+                BufferContent(_integrityBuffer);
+            } while (!buffer.SequenceEqual(integrityBuffer));
 
             return Marshal.PtrToStructure<Snapshot>(_bufferAddress);
+        }
+
+        private void BufferContent(byte[] buffer)
+        {
+            try
+            {
+                // Note the need to specify the length because we use pooled arrays
+#if NET
+                var buffered = _content.Read(buffer.AsSpan(0, Length));
+
+#else
+                var buffered = _content.Read(buffer, 0, Length);
+#endif
+                if (buffered != Length)
+                {
+                    throw new InvalidOperationException(
+                        $"Expected {Length} bytes but received {buffered}. This can happen when GetSnapshot is called concurrently because this class is not thread-safe. Synchronize access to GetSnapshot, or use multiple instances of MumbleLink to avoid this error.");
+                }
+            }
+            finally
+            {
+                // Reset the view stream for the next usage
+                _content.Position = 0;
+            }
         }
 
         private class Subscription : IDisposable

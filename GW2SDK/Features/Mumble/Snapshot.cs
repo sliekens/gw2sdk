@@ -15,10 +15,9 @@ namespace GW2SDK.Mumble
 
         public readonly uint UiTick;
 
-        /// <summary>Avatar position is the position of the player in the coordinate system of the map. While the game uses inches
-        /// as unit, mumble uses meters. Use <see cref="GetAvatarPositionInches" />.</summary>
+        /// <summary>Avatar position is the position of the player in the coordinate system of the map. While the game uses inches as unit, mumble uses meters.</summary>
         [MarshalAs(UnmanagedType.ByValArray, SizeConst = 3)]
-        public readonly float[] AvatarPositionMeters;
+        public readonly float[] AvatarPosition;
 
         [MarshalAs(UnmanagedType.ByValArray, SizeConst = 3)]
         public readonly float[] AvatarFront;
@@ -50,15 +49,6 @@ namespace GW2SDK.Mumble
 
         [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 2048)]
         public readonly string Description;
-
-        /// <summary>Avatar position is the position of the player in the coordinate system of the map.</summary>
-        public double[] GetAvatarPositionInches() =>
-            new[]
-            {
-                AvatarPositionMeters[0] * 39.3700787,
-                AvatarPositionMeters[1] * 39.3700787,
-                AvatarPositionMeters[2] * 39.3700787
-            };
 
         public bool TryGetContext(out Context context)
         {
