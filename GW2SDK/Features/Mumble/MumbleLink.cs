@@ -135,7 +135,7 @@ namespace GW2SDK.Mumble
         {
             name ??= "MumbleLink";
             const long size = Length;
-            var file = MemoryMappedFile.CreateOrOpen(name, size, MemoryMappedFileAccess.Read);
+            var file = MemoryMappedFile.CreateOrOpen(name, size, MemoryMappedFileAccess.ReadWrite);
             return new MumbleLink(file, refreshRate);
         }
 
