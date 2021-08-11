@@ -1,5 +1,7 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.IO.MemoryMappedFiles;
+using System.Threading;
 using System.Threading.Tasks;
 using GW2SDK.Json;
 using GW2SDK.Mumble;
@@ -8,6 +10,49 @@ using Xunit;
 #pragma warning disable CA1416
 namespace GW2SDK.Tests.Features.Mumble
 {
+    public class MumbleLinkTestObserver : IObserver<Snapshot>
+    {
+        private readonly TaskCompletionSource<bool> tcs;
+
+        public Task<bool> Handle => tcs.Task;
+
+        public bool HasFirst { get; private set; }
+        public Snapshot First { get; private set; }
+
+        public Snapshot Last { get; private set; }
+
+        public MumbleLinkTestObserver(CancellationToken ct)
+        {
+            tcs = new TaskCompletionSource<bool>();
+            ct.Register(tcs.SetCanceled);
+        }
+
+        public void OnCompleted()
+        {
+            tcs.SetResult(HasFirst);
+        }
+
+        public void OnError(Exception error)
+        {
+            tcs.SetException(error);
+        }
+
+        public void OnNext(Snapshot value)
+        {
+            // ReSharper disable once ConditionIsAlwaysTrueOrFalse
+            if (!HasFirst)
+            {
+                HasFirst = true;
+                First = value;
+            }
+            else
+            {
+                Last = value;
+                tcs.TrySetResult(true);
+            }
+        }
+    }
+
     public class MumbleLinkTest
     {
         [MumbleLinkFact]
@@ -25,14 +70,22 @@ namespace GW2SDK.Tests.Features.Mumble
         {
             using var sut = MumbleLink.Open();
 
-            var first = sut.GetSnapshot();
+            var cts = new CancellationTokenSource(TimeSpan.FromSeconds(3));
 
-            // The link should be updated every frame; you should safely be able to read from it 50 times a second (every 20ms)
-            await Task.Delay(20);
+            var actual = new MumbleLinkTestObserver(cts.Token);
 
-            var second = sut.GetSnapshot();
+            sut.Subscribe(actual);
 
-            Assert.True(second.UiTick > first.UiTick, "MumbleLink should be self-updating");
+            try
+            {
+                await actual.Handle;
+            }
+            catch (TaskCanceledException)
+            {
+                Assert.True(actual.Last.UiTick > actual.First.UiTick, "This test only works if you are in a map, not in a loading screen etc.");
+            }
+
+            Assert.True(actual.Last.UiTick > actual.First.UiTick, "MumbleLink should be self-updating");
         }
         
         [MumbleLinkFact]
