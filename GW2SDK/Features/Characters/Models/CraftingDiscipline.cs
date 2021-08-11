@@ -1,5 +1,8 @@
-﻿namespace GW2SDK.Characters
+﻿using JetBrains.Annotations;
+
+namespace GW2SDK.Characters
 {
+    [PublicAPI]
     public sealed record CraftingDiscipline
     {
         public CraftingDisciplineName Discipline { get; init; }
