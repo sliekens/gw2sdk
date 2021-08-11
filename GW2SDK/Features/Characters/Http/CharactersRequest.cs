@@ -1,27 +1,27 @@
 ﻿using System;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using GW2SDK.Http;
 using JetBrains.Annotations;
 using static System.Net.Http.HttpMethod;
 
-namespace GW2SDK.Characters.Recipes.Http
+namespace GW2SDK.Characters.Http
 {
     [PublicAPI]
-    public sealed class UnlockedRecipesRequest
+    public sealed class CharactersRequest
     {
-        public UnlockedRecipesRequest(string characterId, string? accessToken = null)
+        public CharactersRequest(string? accessToken)
         {
-            CharacterId = characterId;
             AccessToken = accessToken;
         }
 
-        public string CharacterId { get; }
-
         public string? AccessToken { get; }
 
-        public static implicit operator HttpRequestMessage(UnlockedRecipesRequest r)
+        public static implicit operator HttpRequestMessage(CharactersRequest r)
         {
-            var location = new Uri($"/v2/characters/{r.CharacterId}/recipes", UriKind.Relative);
+            var search = new QueryBuilder();
+            search.Add("ids", "all");
+            var location = new Uri($"/v2/characters?{search}", UriKind.Relative);
             return new HttpRequestMessage(Get, location)
             {
                 Headers =

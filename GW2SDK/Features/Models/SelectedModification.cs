@@ -1,8 +1,9 @@
 ﻿using GW2SDK.Annotations;
 using JetBrains.Annotations;
 
-namespace GW2SDK.Accounts.Banks
+namespace GW2SDK
 {
+    /// <summary>A combination of item attributes.</summary>
     [PublicAPI]
     [DataTransferObject(RootObject = false)]
     public sealed record SelectedModification

@@ -1,14 +1,14 @@
 ﻿using GW2SDK.Annotations;
 using JetBrains.Annotations;
 
-namespace GW2SDK.Accounts.Banks
+namespace GW2SDK.Characters
 {
     [PublicAPI]
     [DataTransferObject(RootObject = false)]
-    public sealed record SelectedStat
+    public sealed record WvwAbility
     {
         public int Id { get; init; }
 
-        public SelectedModification Attributes { get; init; } = new();
+        public int Rank { get; init; }
     }
 }
