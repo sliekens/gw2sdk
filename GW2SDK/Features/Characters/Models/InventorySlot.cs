@@ -1,11 +1,11 @@
 ﻿using GW2SDK.Annotations;
 using JetBrains.Annotations;
 
-namespace GW2SDK.Accounts.Banks
+namespace GW2SDK.Characters
 {
     [PublicAPI]
-    [DataTransferObject]
-    public sealed record BankSlot
+    [DataTransferObject(RootObject = false)]
+    public sealed record InventorySlot
     {
         public int Id { get; init; }
 
@@ -23,7 +23,7 @@ namespace GW2SDK.Accounts.Banks
         public int[]? Infusions { get; init; }
 
         // Always length 4
-        public int[]? Dyes { get; init; }
+        public int?[]? Dyes { get; init; }
 
         public ItemBinding Binding { get; init; }
 

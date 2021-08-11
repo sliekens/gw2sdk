@@ -66,7 +66,7 @@ namespace GW2SDK.Recipes
             var outputItemCount = new RequiredMember<int>("output_item_count");
             var minRating = new RequiredMember<int>("min_rating");
             var timeToCraft = new RequiredMember<TimeSpan>("time_to_craft_ms");
-            var disciplines = new RequiredMember<CraftingDiscipline[]>("disciplines");
+            var disciplines = new RequiredMember<CraftingDisciplineName[]>("disciplines");
             var flags = new RequiredMember<RecipeFlag[]>("flags");
             var ingredients = new RequiredMember<Ingredient[]>("ingredients");
             var id = new RequiredMember<int>("id");
@@ -146,7 +146,7 @@ namespace GW2SDK.Recipes
             var outputItemCount = new RequiredMember<int>("output_item_count");
             var minRating = new RequiredMember<int>("min_rating");
             var timeToCraft = new RequiredMember<TimeSpan>("time_to_craft_ms");
-            var disciplines = new RequiredMember<CraftingDiscipline[]>("disciplines");
+            var disciplines = new RequiredMember<CraftingDisciplineName[]>("disciplines");
             var flags = new RequiredMember<RecipeFlag[]>("flags");
             var ingredients = new RequiredMember<Ingredient[]>("ingredients");
             var id = new RequiredMember<int>("id");
@@ -226,7 +226,7 @@ namespace GW2SDK.Recipes
             var outputItemCount = new RequiredMember<int>("output_item_count");
             var minRating = new RequiredMember<int>("min_rating");
             var timeToCraft = new RequiredMember<TimeSpan>("time_to_craft_ms");
-            var disciplines = new RequiredMember<CraftingDiscipline[]>("disciplines");
+            var disciplines = new RequiredMember<CraftingDisciplineName[]>("disciplines");
             var flags = new RequiredMember<RecipeFlag[]>("flags");
             var ingredients = new RequiredMember<Ingredient[]>("ingredients");
             var id = new RequiredMember<int>("id");
@@ -306,7 +306,7 @@ namespace GW2SDK.Recipes
             var outputItemCount = new RequiredMember<int>("output_item_count");
             var minRating = new RequiredMember<int>("min_rating");
             var timeToCraft = new RequiredMember<TimeSpan>("time_to_craft_ms");
-            var disciplines = new RequiredMember<CraftingDiscipline[]>("disciplines");
+            var disciplines = new RequiredMember<CraftingDisciplineName[]>("disciplines");
             var flags = new RequiredMember<RecipeFlag[]>("flags");
             var ingredients = new RequiredMember<Ingredient[]>("ingredients");
             var id = new RequiredMember<int>("id");
@@ -386,7 +386,7 @@ namespace GW2SDK.Recipes
             var outputItemCount = new RequiredMember<int>("output_item_count");
             var minRating = new RequiredMember<int>("min_rating");
             var timeToCraft = new RequiredMember<TimeSpan>("time_to_craft_ms");
-            var disciplines = new RequiredMember<CraftingDiscipline[]>("disciplines");
+            var disciplines = new RequiredMember<CraftingDisciplineName[]>("disciplines");
             var flags = new RequiredMember<RecipeFlag[]>("flags");
             var ingredients = new RequiredMember<Ingredient[]>("ingredients");
             var id = new RequiredMember<int>("id");
@@ -466,7 +466,7 @@ namespace GW2SDK.Recipes
             var outputItemCount = new RequiredMember<int>("output_item_count");
             var minRating = new RequiredMember<int>("min_rating");
             var timeToCraft = new RequiredMember<TimeSpan>("time_to_craft_ms");
-            var disciplines = new RequiredMember<CraftingDiscipline[]>("disciplines");
+            var disciplines = new RequiredMember<CraftingDisciplineName[]>("disciplines");
             var flags = new RequiredMember<RecipeFlag[]>("flags");
             var ingredients = new RequiredMember<Ingredient[]>("ingredients");
             var id = new RequiredMember<int>("id");
@@ -546,7 +546,7 @@ namespace GW2SDK.Recipes
             var outputItemCount = new RequiredMember<int>("output_item_count");
             var minRating = new RequiredMember<int>("min_rating");
             var timeToCraft = new RequiredMember<TimeSpan>("time_to_craft_ms");
-            var disciplines = new RequiredMember<CraftingDiscipline[]>("disciplines");
+            var disciplines = new RequiredMember<CraftingDisciplineName[]>("disciplines");
             var flags = new RequiredMember<RecipeFlag[]>("flags");
             var ingredients = new RequiredMember<Ingredient[]>("ingredients");
             var id = new RequiredMember<int>("id");
@@ -626,7 +626,7 @@ namespace GW2SDK.Recipes
             var outputItemCount = new RequiredMember<int>("output_item_count");
             var minRating = new RequiredMember<int>("min_rating");
             var timeToCraft = new RequiredMember<TimeSpan>("time_to_craft_ms");
-            var disciplines = new RequiredMember<CraftingDiscipline[]>("disciplines");
+            var disciplines = new RequiredMember<CraftingDisciplineName[]>("disciplines");
             var flags = new RequiredMember<RecipeFlag[]>("flags");
             var ingredients = new RequiredMember<Ingredient[]>("ingredients");
             var id = new RequiredMember<int>("id");
@@ -709,7 +709,7 @@ namespace GW2SDK.Recipes
             var outputItemCount = new RequiredMember<int>("output_item_count");
             var minRating = new RequiredMember<int>("min_rating");
             var timeToCraft = new RequiredMember<TimeSpan>("time_to_craft_ms");
-            var disciplines = new RequiredMember<CraftingDiscipline[]>("disciplines");
+            var disciplines = new RequiredMember<CraftingDisciplineName[]>("disciplines");
             var flags = new RequiredMember<RecipeFlag[]>("flags");
             var ingredients = new RequiredMember<Ingredient[]>("ingredients");
             var id = new RequiredMember<int>("id");
@@ -789,7 +789,7 @@ namespace GW2SDK.Recipes
             var outputItemCount = new RequiredMember<int>("output_item_count");
             var minRating = new RequiredMember<int>("min_rating");
             var timeToCraft = new RequiredMember<TimeSpan>("time_to_craft_ms");
-            var disciplines = new RequiredMember<CraftingDiscipline[]>("disciplines");
+            var disciplines = new RequiredMember<CraftingDisciplineName[]>("disciplines");
             var flags = new RequiredMember<RecipeFlag[]>("flags");
             var ingredients = new RequiredMember<Ingredient[]>("ingredients");
             var id = new RequiredMember<int>("id");
@@ -869,7 +869,7 @@ namespace GW2SDK.Recipes
             var outputItemCount = new RequiredMember<int>("output_item_count");
             var minRating = new RequiredMember<int>("min_rating");
             var timeToCraft = new RequiredMember<TimeSpan>("time_to_craft_ms");
-            var disciplines = new RequiredMember<CraftingDiscipline[]>("disciplines");
+            var disciplines = new RequiredMember<CraftingDisciplineName[]>("disciplines");
             var flags = new RequiredMember<RecipeFlag[]>("flags");
             var ingredients = new RequiredMember<Ingredient[]>("ingredients");
             var id = new RequiredMember<int>("id");
@@ -949,7 +949,7 @@ namespace GW2SDK.Recipes
             var outputItemCount = new RequiredMember<int>("output_item_count");
             var minRating = new RequiredMember<int>("min_rating");
             var timeToCraft = new RequiredMember<TimeSpan>("time_to_craft_ms");
-            var disciplines = new RequiredMember<CraftingDiscipline[]>("disciplines");
+            var disciplines = new RequiredMember<CraftingDisciplineName[]>("disciplines");
             var flags = new RequiredMember<RecipeFlag[]>("flags");
             var ingredients = new RequiredMember<Ingredient[]>("ingredients");
             var id = new RequiredMember<int>("id");
@@ -1029,7 +1029,7 @@ namespace GW2SDK.Recipes
             var outputItemCount = new RequiredMember<int>("output_item_count");
             var minRating = new RequiredMember<int>("min_rating");
             var timeToCraft = new RequiredMember<TimeSpan>("time_to_craft_ms");
-            var disciplines = new RequiredMember<CraftingDiscipline[]>("disciplines");
+            var disciplines = new RequiredMember<CraftingDisciplineName[]>("disciplines");
             var flags = new RequiredMember<RecipeFlag[]>("flags");
             var ingredients = new RequiredMember<Ingredient[]>("ingredients");
             var id = new RequiredMember<int>("id");
@@ -1109,7 +1109,7 @@ namespace GW2SDK.Recipes
             var outputItemCount = new RequiredMember<int>("output_item_count");
             var minRating = new RequiredMember<int>("min_rating");
             var timeToCraft = new RequiredMember<TimeSpan>("time_to_craft_ms");
-            var disciplines = new RequiredMember<CraftingDiscipline[]>("disciplines");
+            var disciplines = new RequiredMember<CraftingDisciplineName[]>("disciplines");
             var flags = new RequiredMember<RecipeFlag[]>("flags");
             var ingredients = new RequiredMember<Ingredient[]>("ingredients");
             var id = new RequiredMember<int>("id");
@@ -1189,7 +1189,7 @@ namespace GW2SDK.Recipes
             var outputItemCount = new RequiredMember<int>("output_item_count");
             var minRating = new RequiredMember<int>("min_rating");
             var timeToCraft = new RequiredMember<TimeSpan>("time_to_craft_ms");
-            var disciplines = new RequiredMember<CraftingDiscipline[]>("disciplines");
+            var disciplines = new RequiredMember<CraftingDisciplineName[]>("disciplines");
             var flags = new RequiredMember<RecipeFlag[]>("flags");
             var ingredients = new RequiredMember<Ingredient[]>("ingredients");
             var id = new RequiredMember<int>("id");
@@ -1269,7 +1269,7 @@ namespace GW2SDK.Recipes
             var outputItemCount = new RequiredMember<int>("output_item_count");
             var minRating = new RequiredMember<int>("min_rating");
             var timeToCraft = new RequiredMember<TimeSpan>("time_to_craft_ms");
-            var disciplines = new RequiredMember<CraftingDiscipline[]>("disciplines");
+            var disciplines = new RequiredMember<CraftingDisciplineName[]>("disciplines");
             var flags = new RequiredMember<RecipeFlag[]>("flags");
             var ingredients = new RequiredMember<Ingredient[]>("ingredients");
             var id = new RequiredMember<int>("id");
@@ -1352,7 +1352,7 @@ namespace GW2SDK.Recipes
             var outputItemCount = new RequiredMember<int>("output_item_count");
             var minRating = new RequiredMember<int>("min_rating");
             var timeToCraft = new RequiredMember<TimeSpan>("time_to_craft_ms");
-            var disciplines = new RequiredMember<CraftingDiscipline[]>("disciplines");
+            var disciplines = new RequiredMember<CraftingDisciplineName[]>("disciplines");
             var flags = new RequiredMember<RecipeFlag[]>("flags");
             var ingredients = new RequiredMember<Ingredient[]>("ingredients");
             var id = new RequiredMember<int>("id");
@@ -1435,7 +1435,7 @@ namespace GW2SDK.Recipes
             var outputItemCount = new RequiredMember<int>("output_item_count");
             var minRating = new RequiredMember<int>("min_rating");
             var timeToCraft = new RequiredMember<TimeSpan>("time_to_craft_ms");
-            var disciplines = new RequiredMember<CraftingDiscipline[]>("disciplines");
+            var disciplines = new RequiredMember<CraftingDisciplineName[]>("disciplines");
             var flags = new RequiredMember<RecipeFlag[]>("flags");
             var ingredients = new RequiredMember<Ingredient[]>("ingredients");
             var guildIngredients = new OptionalMember<GuildIngredient[]>("guild_ingredients");
@@ -1530,7 +1530,7 @@ namespace GW2SDK.Recipes
             var outputItemCount = new RequiredMember<int>("output_item_count");
             var minRating = new RequiredMember<int>("min_rating");
             var timeToCraft = new RequiredMember<TimeSpan>("time_to_craft_ms");
-            var disciplines = new RequiredMember<CraftingDiscipline[]>("disciplines");
+            var disciplines = new RequiredMember<CraftingDisciplineName[]>("disciplines");
             var flags = new RequiredMember<RecipeFlag[]>("flags");
             var ingredients = new RequiredMember<Ingredient[]>("ingredients");
             var outputUpgradeId = new NullableMember<int>("output_upgrade_id");
@@ -1619,7 +1619,7 @@ namespace GW2SDK.Recipes
             var outputItemCount = new RequiredMember<int>("output_item_count");
             var minRating = new RequiredMember<int>("min_rating");
             var timeToCraft = new RequiredMember<TimeSpan>("time_to_craft_ms");
-            var disciplines = new RequiredMember<CraftingDiscipline[]>("disciplines");
+            var disciplines = new RequiredMember<CraftingDisciplineName[]>("disciplines");
             var flags = new RequiredMember<RecipeFlag[]>("flags");
             var ingredients = new RequiredMember<Ingredient[]>("ingredients");
             var guildIngredients = new OptionalMember<GuildIngredient[]>("guild_ingredients");
@@ -1711,7 +1711,7 @@ namespace GW2SDK.Recipes
             var outputItemCount = new RequiredMember<int>("output_item_count");
             var minRating = new RequiredMember<int>("min_rating");
             var timeToCraft = new RequiredMember<TimeSpan>("time_to_craft_ms");
-            var disciplines = new RequiredMember<CraftingDiscipline[]>("disciplines");
+            var disciplines = new RequiredMember<CraftingDisciplineName[]>("disciplines");
             var flags = new RequiredMember<RecipeFlag[]>("flags");
             var ingredients = new RequiredMember<Ingredient[]>("ingredients");
             var id = new RequiredMember<int>("id");
@@ -1791,7 +1791,7 @@ namespace GW2SDK.Recipes
             var outputItemCount = new RequiredMember<int>("output_item_count");
             var minRating = new RequiredMember<int>("min_rating");
             var timeToCraft = new RequiredMember<TimeSpan>("time_to_craft_ms");
-            var disciplines = new RequiredMember<CraftingDiscipline[]>("disciplines");
+            var disciplines = new RequiredMember<CraftingDisciplineName[]>("disciplines");
             var flags = new RequiredMember<RecipeFlag[]>("flags");
             var ingredients = new RequiredMember<Ingredient[]>("ingredients");
             var id = new RequiredMember<int>("id");
@@ -1871,7 +1871,7 @@ namespace GW2SDK.Recipes
             var outputItemCount = new RequiredMember<int>("output_item_count");
             var minRating = new RequiredMember<int>("min_rating");
             var timeToCraft = new RequiredMember<TimeSpan>("time_to_craft_ms");
-            var disciplines = new RequiredMember<CraftingDiscipline[]>("disciplines");
+            var disciplines = new RequiredMember<CraftingDisciplineName[]>("disciplines");
             var flags = new RequiredMember<RecipeFlag[]>("flags");
             var ingredients = new RequiredMember<Ingredient[]>("ingredients");
             var id = new RequiredMember<int>("id");
@@ -1954,7 +1954,7 @@ namespace GW2SDK.Recipes
             var outputItemCount = new RequiredMember<int>("output_item_count");
             var minRating = new RequiredMember<int>("min_rating");
             var timeToCraft = new RequiredMember<TimeSpan>("time_to_craft_ms");
-            var disciplines = new RequiredMember<CraftingDiscipline[]>("disciplines");
+            var disciplines = new RequiredMember<CraftingDisciplineName[]>("disciplines");
             var flags = new RequiredMember<RecipeFlag[]>("flags");
             var ingredients = new RequiredMember<Ingredient[]>("ingredients");
             var id = new RequiredMember<int>("id");
@@ -2037,7 +2037,7 @@ namespace GW2SDK.Recipes
             var outputItemCount = new RequiredMember<int>("output_item_count");
             var minRating = new RequiredMember<int>("min_rating");
             var timeToCraft = new RequiredMember<TimeSpan>("time_to_craft_ms");
-            var disciplines = new RequiredMember<CraftingDiscipline[]>("disciplines");
+            var disciplines = new RequiredMember<CraftingDisciplineName[]>("disciplines");
             var flags = new RequiredMember<RecipeFlag[]>("flags");
             var ingredients = new RequiredMember<Ingredient[]>("ingredients");
             var id = new RequiredMember<int>("id");
@@ -2117,7 +2117,7 @@ namespace GW2SDK.Recipes
             var outputItemCount = new RequiredMember<int>("output_item_count");
             var minRating = new RequiredMember<int>("min_rating");
             var timeToCraft = new RequiredMember<TimeSpan>("time_to_craft_ms");
-            var disciplines = new RequiredMember<CraftingDiscipline[]>("disciplines");
+            var disciplines = new RequiredMember<CraftingDisciplineName[]>("disciplines");
             var flags = new RequiredMember<RecipeFlag[]>("flags");
             var ingredients = new RequiredMember<Ingredient[]>("ingredients");
             var id = new RequiredMember<int>("id");
@@ -2200,7 +2200,7 @@ namespace GW2SDK.Recipes
             var outputItemCount = new RequiredMember<int>("output_item_count");
             var minRating = new RequiredMember<int>("min_rating");
             var timeToCraft = new RequiredMember<TimeSpan>("time_to_craft_ms");
-            var disciplines = new RequiredMember<CraftingDiscipline[]>("disciplines");
+            var disciplines = new RequiredMember<CraftingDisciplineName[]>("disciplines");
             var flags = new RequiredMember<RecipeFlag[]>("flags");
             var ingredients = new RequiredMember<Ingredient[]>("ingredients");
             var id = new RequiredMember<int>("id");
@@ -2280,7 +2280,7 @@ namespace GW2SDK.Recipes
             var outputItemCount = new RequiredMember<int>("output_item_count");
             var minRating = new RequiredMember<int>("min_rating");
             var timeToCraft = new RequiredMember<TimeSpan>("time_to_craft_ms");
-            var disciplines = new RequiredMember<CraftingDiscipline[]>("disciplines");
+            var disciplines = new RequiredMember<CraftingDisciplineName[]>("disciplines");
             var flags = new RequiredMember<RecipeFlag[]>("flags");
             var ingredients = new RequiredMember<Ingredient[]>("ingredients");
             var id = new RequiredMember<int>("id");
@@ -2360,7 +2360,7 @@ namespace GW2SDK.Recipes
             var outputItemCount = new RequiredMember<int>("output_item_count");
             var minRating = new RequiredMember<int>("min_rating");
             var timeToCraft = new RequiredMember<TimeSpan>("time_to_craft_ms");
-            var disciplines = new RequiredMember<CraftingDiscipline[]>("disciplines");
+            var disciplines = new RequiredMember<CraftingDisciplineName[]>("disciplines");
             var flags = new RequiredMember<RecipeFlag[]>("flags");
             var ingredients = new RequiredMember<Ingredient[]>("ingredients");
             var id = new RequiredMember<int>("id");
@@ -2440,7 +2440,7 @@ namespace GW2SDK.Recipes
             var outputItemCount = new RequiredMember<int>("output_item_count");
             var minRating = new RequiredMember<int>("min_rating");
             var timeToCraft = new RequiredMember<TimeSpan>("time_to_craft_ms");
-            var disciplines = new RequiredMember<CraftingDiscipline[]>("disciplines");
+            var disciplines = new RequiredMember<CraftingDisciplineName[]>("disciplines");
             var flags = new RequiredMember<RecipeFlag[]>("flags");
             var ingredients = new RequiredMember<Ingredient[]>("ingredients");
             var id = new RequiredMember<int>("id");
@@ -2520,7 +2520,7 @@ namespace GW2SDK.Recipes
             var outputItemCount = new RequiredMember<int>("output_item_count");
             var minRating = new RequiredMember<int>("min_rating");
             var timeToCraft = new RequiredMember<TimeSpan>("time_to_craft_ms");
-            var disciplines = new RequiredMember<CraftingDiscipline[]>("disciplines");
+            var disciplines = new RequiredMember<CraftingDisciplineName[]>("disciplines");
             var flags = new RequiredMember<RecipeFlag[]>("flags");
             var ingredients = new RequiredMember<Ingredient[]>("ingredients");
             var id = new RequiredMember<int>("id");
@@ -2600,7 +2600,7 @@ namespace GW2SDK.Recipes
             var outputItemCount = new RequiredMember<int>("output_item_count");
             var minRating = new RequiredMember<int>("min_rating");
             var timeToCraft = new RequiredMember<TimeSpan>("time_to_craft_ms");
-            var disciplines = new RequiredMember<CraftingDiscipline[]>("disciplines");
+            var disciplines = new RequiredMember<CraftingDisciplineName[]>("disciplines");
             var flags = new RequiredMember<RecipeFlag[]>("flags");
             var ingredients = new RequiredMember<Ingredient[]>("ingredients");
             var id = new RequiredMember<int>("id");
@@ -2680,7 +2680,7 @@ namespace GW2SDK.Recipes
             var outputItemCount = new RequiredMember<int>("output_item_count");
             var minRating = new RequiredMember<int>("min_rating");
             var timeToCraft = new RequiredMember<TimeSpan>("time_to_craft_ms");
-            var disciplines = new RequiredMember<CraftingDiscipline[]>("disciplines");
+            var disciplines = new RequiredMember<CraftingDisciplineName[]>("disciplines");
             var flags = new RequiredMember<RecipeFlag[]>("flags");
             var ingredients = new RequiredMember<Ingredient[]>("ingredients");
             var id = new RequiredMember<int>("id");
@@ -2868,7 +2868,7 @@ namespace GW2SDK.Recipes
             var outputItemCount = new RequiredMember<int>("output_item_count");
             var minRating = new RequiredMember<int>("min_rating");
             var timeToCraft = new RequiredMember<TimeSpan>("time_to_craft_ms");
-            var disciplines = new RequiredMember<CraftingDiscipline[]>("disciplines");
+            var disciplines = new RequiredMember<CraftingDisciplineName[]>("disciplines");
             var flags = new RequiredMember<RecipeFlag[]>("flags");
             var ingredients = new RequiredMember<Ingredient[]>("ingredients");
             var id = new RequiredMember<int>("id");
@@ -3005,7 +3005,7 @@ namespace GW2SDK.Recipes
             var outputItemCount = new RequiredMember<int>("output_item_count");
             var minRating = new RequiredMember<int>("min_rating");
             var timeToCraft = new RequiredMember<TimeSpan>("time_to_craft_ms");
-            var disciplines = new RequiredMember<CraftingDiscipline[]>("disciplines");
+            var disciplines = new RequiredMember<CraftingDisciplineName[]>("disciplines");
             var flags = new RequiredMember<RecipeFlag[]>("flags");
             var ingredients = new RequiredMember<Ingredient[]>("ingredients");
             var id = new RequiredMember<int>("id");
@@ -3088,7 +3088,7 @@ namespace GW2SDK.Recipes
             var outputItemCount = new RequiredMember<int>("output_item_count");
             var minRating = new RequiredMember<int>("min_rating");
             var timeToCraft = new RequiredMember<TimeSpan>("time_to_craft_ms");
-            var disciplines = new RequiredMember<CraftingDiscipline[]>("disciplines");
+            var disciplines = new RequiredMember<CraftingDisciplineName[]>("disciplines");
             var flags = new RequiredMember<RecipeFlag[]>("flags");
             var ingredients = new RequiredMember<Ingredient[]>("ingredients");
             var id = new RequiredMember<int>("id");
@@ -3171,7 +3171,7 @@ namespace GW2SDK.Recipes
             var outputItemCount = new RequiredMember<int>("output_item_count");
             var minRating = new RequiredMember<int>("min_rating");
             var timeToCraft = new RequiredMember<TimeSpan>("time_to_craft_ms");
-            var disciplines = new RequiredMember<CraftingDiscipline[]>("disciplines");
+            var disciplines = new RequiredMember<CraftingDisciplineName[]>("disciplines");
             var flags = new RequiredMember<RecipeFlag[]>("flags");
             var ingredients = new RequiredMember<Ingredient[]>("ingredients");
             var id = new RequiredMember<int>("id");
@@ -3251,7 +3251,7 @@ namespace GW2SDK.Recipes
             var outputItemCount = new RequiredMember<int>("output_item_count");
             var minRating = new RequiredMember<int>("min_rating");
             var timeToCraft = new RequiredMember<TimeSpan>("time_to_craft_ms");
-            var disciplines = new RequiredMember<CraftingDiscipline[]>("disciplines");
+            var disciplines = new RequiredMember<CraftingDisciplineName[]>("disciplines");
             var flags = new RequiredMember<RecipeFlag[]>("flags");
             var ingredients = new RequiredMember<Ingredient[]>("ingredients");
             var id = new RequiredMember<int>("id");
@@ -3331,7 +3331,7 @@ namespace GW2SDK.Recipes
             var outputItemCount = new RequiredMember<int>("output_item_count");
             var minRating = new RequiredMember<int>("min_rating");
             var timeToCraft = new RequiredMember<TimeSpan>("time_to_craft_ms");
-            var disciplines = new RequiredMember<CraftingDiscipline[]>("disciplines");
+            var disciplines = new RequiredMember<CraftingDisciplineName[]>("disciplines");
             var flags = new RequiredMember<RecipeFlag[]>("flags");
             var ingredients = new RequiredMember<Ingredient[]>("ingredients");
             var id = new RequiredMember<int>("id");
@@ -3411,7 +3411,7 @@ namespace GW2SDK.Recipes
             var outputItemCount = new RequiredMember<int>("output_item_count");
             var minRating = new RequiredMember<int>("min_rating");
             var timeToCraft = new RequiredMember<TimeSpan>("time_to_craft_ms");
-            var disciplines = new RequiredMember<CraftingDiscipline[]>("disciplines");
+            var disciplines = new RequiredMember<CraftingDisciplineName[]>("disciplines");
             var flags = new RequiredMember<RecipeFlag[]>("flags");
             var ingredients = new RequiredMember<Ingredient[]>("ingredients");
             var id = new RequiredMember<int>("id");
@@ -3491,7 +3491,7 @@ namespace GW2SDK.Recipes
             var outputItemCount = new RequiredMember<int>("output_item_count");
             var minRating = new RequiredMember<int>("min_rating");
             var timeToCraft = new RequiredMember<TimeSpan>("time_to_craft_ms");
-            var disciplines = new RequiredMember<CraftingDiscipline[]>("disciplines");
+            var disciplines = new RequiredMember<CraftingDisciplineName[]>("disciplines");
             var flags = new RequiredMember<RecipeFlag[]>("flags");
             var ingredients = new RequiredMember<Ingredient[]>("ingredients");
             var id = new RequiredMember<int>("id");
@@ -3571,7 +3571,7 @@ namespace GW2SDK.Recipes
             var outputItemCount = new RequiredMember<int>("output_item_count");
             var minRating = new RequiredMember<int>("min_rating");
             var timeToCraft = new RequiredMember<TimeSpan>("time_to_craft_ms");
-            var disciplines = new RequiredMember<CraftingDiscipline[]>("disciplines");
+            var disciplines = new RequiredMember<CraftingDisciplineName[]>("disciplines");
             var flags = new RequiredMember<RecipeFlag[]>("flags");
             var ingredients = new RequiredMember<Ingredient[]>("ingredients");
             var id = new RequiredMember<int>("id");
@@ -3651,7 +3651,7 @@ namespace GW2SDK.Recipes
             var outputItemCount = new RequiredMember<int>("output_item_count");
             var minRating = new RequiredMember<int>("min_rating");
             var timeToCraft = new RequiredMember<TimeSpan>("time_to_craft_ms");
-            var disciplines = new RequiredMember<CraftingDiscipline[]>("disciplines");
+            var disciplines = new RequiredMember<CraftingDisciplineName[]>("disciplines");
             var flags = new RequiredMember<RecipeFlag[]>("flags");
             var ingredients = new RequiredMember<Ingredient[]>("ingredients");
             var id = new RequiredMember<int>("id");
@@ -3731,7 +3731,7 @@ namespace GW2SDK.Recipes
             var outputItemCount = new RequiredMember<int>("output_item_count");
             var minRating = new RequiredMember<int>("min_rating");
             var timeToCraft = new RequiredMember<TimeSpan>("time_to_craft_ms");
-            var disciplines = new RequiredMember<CraftingDiscipline[]>("disciplines");
+            var disciplines = new RequiredMember<CraftingDisciplineName[]>("disciplines");
             var flags = new RequiredMember<RecipeFlag[]>("flags");
             var ingredients = new RequiredMember<Ingredient[]>("ingredients");
             var id = new RequiredMember<int>("id");
@@ -3811,7 +3811,7 @@ namespace GW2SDK.Recipes
             var outputItemCount = new RequiredMember<int>("output_item_count");
             var minRating = new RequiredMember<int>("min_rating");
             var timeToCraft = new RequiredMember<TimeSpan>("time_to_craft_ms");
-            var disciplines = new RequiredMember<CraftingDiscipline[]>("disciplines");
+            var disciplines = new RequiredMember<CraftingDisciplineName[]>("disciplines");
             var flags = new RequiredMember<RecipeFlag[]>("flags");
             var ingredients = new RequiredMember<Ingredient[]>("ingredients");
             var id = new RequiredMember<int>("id");
@@ -3891,7 +3891,7 @@ namespace GW2SDK.Recipes
             var outputItemCount = new RequiredMember<int>("output_item_count");
             var minRating = new RequiredMember<int>("min_rating");
             var timeToCraft = new RequiredMember<TimeSpan>("time_to_craft_ms");
-            var disciplines = new RequiredMember<CraftingDiscipline[]>("disciplines");
+            var disciplines = new RequiredMember<CraftingDisciplineName[]>("disciplines");
             var flags = new RequiredMember<RecipeFlag[]>("flags");
             var ingredients = new RequiredMember<Ingredient[]>("ingredients");
             var id = new RequiredMember<int>("id");
@@ -3974,7 +3974,7 @@ namespace GW2SDK.Recipes
             var outputItemCount = new RequiredMember<int>("output_item_count");
             var minRating = new RequiredMember<int>("min_rating");
             var timeToCraft = new RequiredMember<TimeSpan>("time_to_craft_ms");
-            var disciplines = new RequiredMember<CraftingDiscipline[]>("disciplines");
+            var disciplines = new RequiredMember<CraftingDisciplineName[]>("disciplines");
             var flags = new RequiredMember<RecipeFlag[]>("flags");
             var ingredients = new RequiredMember<Ingredient[]>("ingredients");
             var id = new RequiredMember<int>("id");
@@ -4054,7 +4054,7 @@ namespace GW2SDK.Recipes
             var outputItemCount = new RequiredMember<int>("output_item_count");
             var minRating = new RequiredMember<int>("min_rating");
             var timeToCraft = new RequiredMember<TimeSpan>("time_to_craft_ms");
-            var disciplines = new RequiredMember<CraftingDiscipline[]>("disciplines");
+            var disciplines = new RequiredMember<CraftingDisciplineName[]>("disciplines");
             var flags = new RequiredMember<RecipeFlag[]>("flags");
             var ingredients = new RequiredMember<Ingredient[]>("ingredients");
             var id = new RequiredMember<int>("id");
@@ -4134,7 +4134,7 @@ namespace GW2SDK.Recipes
             var outputItemCount = new RequiredMember<int>("output_item_count");
             var minRating = new RequiredMember<int>("min_rating");
             var timeToCraft = new RequiredMember<TimeSpan>("time_to_craft_ms");
-            var disciplines = new RequiredMember<CraftingDiscipline[]>("disciplines");
+            var disciplines = new RequiredMember<CraftingDisciplineName[]>("disciplines");
             var flags = new RequiredMember<RecipeFlag[]>("flags");
             var ingredients = new RequiredMember<Ingredient[]>("ingredients");
             var id = new RequiredMember<int>("id");
@@ -4214,7 +4214,7 @@ namespace GW2SDK.Recipes
             var outputItemCount = new RequiredMember<int>("output_item_count");
             var minRating = new RequiredMember<int>("min_rating");
             var timeToCraft = new RequiredMember<TimeSpan>("time_to_craft_ms");
-            var disciplines = new RequiredMember<CraftingDiscipline[]>("disciplines");
+            var disciplines = new RequiredMember<CraftingDisciplineName[]>("disciplines");
             var flags = new RequiredMember<RecipeFlag[]>("flags");
             var ingredients = new RequiredMember<Ingredient[]>("ingredients");
             var id = new RequiredMember<int>("id");
@@ -4294,7 +4294,7 @@ namespace GW2SDK.Recipes
             var outputItemCount = new RequiredMember<int>("output_item_count");
             var minRating = new RequiredMember<int>("min_rating");
             var timeToCraft = new RequiredMember<TimeSpan>("time_to_craft_ms");
-            var disciplines = new RequiredMember<CraftingDiscipline[]>("disciplines");
+            var disciplines = new RequiredMember<CraftingDisciplineName[]>("disciplines");
             var flags = new RequiredMember<RecipeFlag[]>("flags");
             var ingredients = new RequiredMember<Ingredient[]>("ingredients");
             var id = new RequiredMember<int>("id");
@@ -4377,7 +4377,7 @@ namespace GW2SDK.Recipes
             var outputItemCount = new RequiredMember<int>("output_item_count");
             var minRating = new RequiredMember<int>("min_rating");
             var timeToCraft = new RequiredMember<TimeSpan>("time_to_craft_ms");
-            var disciplines = new RequiredMember<CraftingDiscipline[]>("disciplines");
+            var disciplines = new RequiredMember<CraftingDisciplineName[]>("disciplines");
             var flags = new RequiredMember<RecipeFlag[]>("flags");
             var ingredients = new RequiredMember<Ingredient[]>("ingredients");
             var id = new RequiredMember<int>("id");
@@ -4457,7 +4457,7 @@ namespace GW2SDK.Recipes
             var outputItemCount = new RequiredMember<int>("output_item_count");
             var minRating = new RequiredMember<int>("min_rating");
             var timeToCraft = new RequiredMember<TimeSpan>("time_to_craft_ms");
-            var disciplines = new RequiredMember<CraftingDiscipline[]>("disciplines");
+            var disciplines = new RequiredMember<CraftingDisciplineName[]>("disciplines");
             var flags = new RequiredMember<RecipeFlag[]>("flags");
             var ingredients = new RequiredMember<Ingredient[]>("ingredients");
             var id = new RequiredMember<int>("id");

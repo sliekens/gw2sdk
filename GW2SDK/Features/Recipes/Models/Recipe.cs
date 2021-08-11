@@ -19,7 +19,7 @@ namespace GW2SDK.Recipes
 
         public TimeSpan TimeToCraft { get; init; }
 
-        public CraftingDiscipline[] Disciplines { get; init; } = new CraftingDiscipline[0];
+        public CraftingDisciplineName[] Disciplines { get; init; } = new CraftingDisciplineName[0];
 
         public RecipeFlag[] Flags { get; init; } = new RecipeFlag[0];
 

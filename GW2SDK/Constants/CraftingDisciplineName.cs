@@ -3,7 +3,7 @@
 namespace GW2SDK
 {
     [PublicAPI]
-    public enum CraftingDiscipline
+    public enum CraftingDisciplineName
     {
         Armorsmith = 1,
 

@@ -4,6 +4,7 @@ using JetBrains.Annotations;
 
 namespace GW2SDK
 {
+    /// <summary>Represents an amount of coins and provides methods to compare and convert coins to other formats.</summary>
     [PublicAPI]
     public readonly struct Coin : IEquatable<Coin>, IComparable<Coin>, IComparable
     {

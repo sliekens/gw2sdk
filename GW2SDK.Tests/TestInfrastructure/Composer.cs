@@ -13,7 +13,7 @@ using GW2SDK.Achievements.Dailies;
 using GW2SDK.Achievements.Groups;
 using GW2SDK.Backstories;
 using GW2SDK.Builds;
-using GW2SDK.Characters.Recipes;
+using GW2SDK.Characters;
 using GW2SDK.Colors;
 using GW2SDK.Commerce.Exchange;
 using GW2SDK.Commerce.Listings;
@@ -42,22 +42,39 @@ namespace GW2SDK.Tests.TestInfrastructure
 {
     public class Composer : IServiceProvider, IAsyncDisposable
     {
-        private readonly CompositeDisposable _disposables = new();
+        private readonly CompositeDisposable disposables = new();
 
-        private readonly IHttpClientFactory _httpClientFactory;
+        private readonly IHttpClientFactory httpClientFactory;
+
+        private readonly ConfigurationManager configuration = new ConfigurationManager();
 
         public Composer()
         {
             var gw2HttpClientFactory = new TestHttpClientFactory();
-            _disposables.Add(gw2HttpClientFactory);
-            _httpClientFactory = gw2HttpClientFactory;
+            disposables.Add(gw2HttpClientFactory);
+            httpClientFactory = gw2HttpClientFactory;
         }
 
         public object GetService(Type serviceType)
         {
+            if (serviceType == typeof(TestCharacterName))
+            {
+                return new TestCharacterName(configuration.CharacterName);
+            }
+
+            if (serviceType == typeof(ApiKeyBasic))
+            {
+                return new ApiKeyBasic(configuration.ApiKeyBasic);
+            }
+
+            if (serviceType == typeof(ApiKeyFull))
+            {
+                return new ApiKeyFull(configuration.ApiKeyFull);
+            }
+
             if (serviceType == typeof(HttpClient))
             {
-                return _httpClientFactory.CreateClient("GW2SDK");
+                return httpClientFactory.CreateClient("GW2SDK");
             }
 
             if (serviceType == typeof(AccountAchievementService))
@@ -110,9 +127,9 @@ namespace GW2SDK.Tests.TestInfrastructure
                 return new BuildService(Resolve<HttpClient>(), new BuildReader(), MissingMemberBehavior.Error);
             }
 
-            if (serviceType == typeof(CharacterRecipesService))
+            if (serviceType == typeof(CharacterService))
             {
-                return new CharacterRecipesService(Resolve<HttpClient>(), new CharacterReader(), MissingMemberBehavior.Error);
+                return new CharacterService(Resolve<HttpClient>(), new CharacterReader(), MissingMemberBehavior.Error);
             }
 
             if (serviceType == typeof(ColorService))
@@ -243,7 +260,7 @@ namespace GW2SDK.Tests.TestInfrastructure
 
         public async ValueTask DisposeAsync()
         {
-            await _disposables.DisposeAsync().ConfigureAwait(false);
+            await disposables.DisposeAsync().ConfigureAwait(false);
             GC.SuppressFinalize(this);
         }
     }
