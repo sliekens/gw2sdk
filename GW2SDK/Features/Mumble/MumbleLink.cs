@@ -18,63 +18,63 @@ namespace GW2SDK.Mumble
     {
         public const int Length = 0x2000;
 
-        private readonly byte[] _buffer;
+        private readonly byte[] buffer;
 
-        private readonly IntPtr _bufferAddress;
+        private readonly IntPtr bufferAddress;
 
-        private readonly MemoryMappedViewStream _content;
+        private readonly MemoryMappedViewStream content;
 
-        private readonly MemoryMappedFile _file;
+        private readonly MemoryMappedFile file;
 
-        private readonly byte[] _integrityBuffer;
+        private readonly byte[] integrityBuffer;
 
-        private readonly List<IObserver<Snapshot>> _subscribers = new();
+        private readonly List<IObserver<Snapshot>> subscribers = new();
 
-        private readonly Timer _timer;
+        private readonly Timer timer;
 
-        private GCHandle _bufferHandle;
+        private GCHandle bufferHandle;
 
-        private long _lastIssued = -1;
+        private long lastIssued = -1;
 
         private MumbleLink(MemoryMappedFile file, TimeSpan refreshRate)
         {
+            this.file = file;
             var safeInterval = TimeSpan.FromMilliseconds(1);
             var interval = refreshRate < safeInterval ? safeInterval : refreshRate;
-            _timer = new Timer(interval.TotalMilliseconds)
+            timer = new Timer(interval.TotalMilliseconds)
             {
                 AutoReset = false,
                 Enabled = false
             };
-            _timer.Elapsed += Publish;
-            _timer.Disposed += RealDispose;
-            _file = file;
-            _content = file.CreateViewStream(0, Length, MemoryMappedFileAccess.Read);
-            _buffer = ArrayPool<byte>.Shared.Rent(Length);
-            _integrityBuffer = ArrayPool<byte>.Shared.Rent(Length);
-            _bufferHandle = GCHandle.Alloc(_buffer, GCHandleType.Pinned);
-            _bufferAddress = _bufferHandle.AddrOfPinnedObject();
+            timer.Elapsed += Publish;
+            timer.Disposed += RealDispose;
+            content = file.CreateViewStream(0, Length, MemoryMappedFileAccess.Read);
+            buffer = ArrayPool<byte>.Shared.Rent(Length);
+            integrityBuffer = ArrayPool<byte>.Shared.Rent(Length);
+            bufferHandle = GCHandle.Alloc(buffer, GCHandleType.Pinned);
+            bufferAddress = bufferHandle.AddrOfPinnedObject();
         }
 
         public void Dispose()
         {
-            _timer.Stop();
-            _timer.Dispose();
+            timer.Stop();
+            timer.Dispose();
         }
 
         public IDisposable Subscribe(IObserver<Snapshot> observer)
         {
-            if (!_subscribers.Contains(observer))
+            if (!subscribers.Contains(observer))
             {
-                _subscribers.Add(observer);
+                subscribers.Add(observer);
             }
 
             var subscription = new Subscription();
             subscription.Unsubscribed += (_, _) =>
             {
-                _subscribers.Remove(observer);
+                subscribers.Remove(observer);
             };
 
-            _timer.Start();
+            timer.Start();
             return subscription;
         }
 
@@ -83,38 +83,38 @@ namespace GW2SDK.Mumble
             try
             {
                 var snapshot = GetSnapshot();
-                if (snapshot.UiTick != _lastIssued)
+                if (snapshot.UiTick != lastIssued)
                 {
-                    _lastIssued = snapshot.UiTick;
-                    foreach (var subscriber in _subscribers.ToList())
+                    lastIssued = snapshot.UiTick;
+                    foreach (var subscriber in subscribers.ToList())
                     {
                         subscriber.OnNext(snapshot);
                     }
                 }
 
-                if (_subscribers.Count != 0)
+                if (subscribers.Count != 0)
                 {
-                    _timer.Start();
+                    timer.Start();
                 }
             }
             catch (Exception reason)
             {
-                foreach (var subscriber in _subscribers.ToList())
+                foreach (var subscriber in subscribers.ToList())
                 {
                     subscriber.OnError(reason);
                 }
 
-                _subscribers.Clear();
+                subscribers.Clear();
             }
         }
 
         private void RealDispose(object? sender, EventArgs e)
         {
-            _content.Dispose();
-            _file.Dispose();
-            _bufferHandle.Free();
-            ArrayPool<byte>.Shared.Return(_integrityBuffer);
-            ArrayPool<byte>.Shared.Return(_buffer);
+            content.Dispose();
+            file.Dispose();
+            bufferHandle.Free();
+            ArrayPool<byte>.Shared.Return(integrityBuffer);
+            ArrayPool<byte>.Shared.Return(buffer);
         }
 
         public static bool IsSupported()
@@ -143,17 +143,27 @@ namespace GW2SDK.Mumble
         {
             // First buffer the entire content
             // Then buffer the entire content again to check for integrity errors
-            // This check is designed to detect dirty reads 
             // Note the need to specify the length because we use pooled arrays
-            var buffer = _buffer.AsSpan(0, Length);
-            var integrityBuffer = _integrityBuffer.AsSpan(0, Length);
-            do
-            {
-                BufferContent(_buffer);
-                BufferContent(_integrityBuffer);
-            } while (!buffer.SequenceEqual(integrityBuffer));
+            var next = buffer.AsSpan(0, Length);
+            var control = integrityBuffer.AsSpan(0, Length);
 
-            return Marshal.PtrToStructure<Snapshot>(_bufferAddress);
+            BufferContent(buffer);
+            
+            // This check is designed to detect dirty reads
+            // Read the memory mapped file again and again, until we get the same result 5 times in a row
+            // The number 5 seems magic but that's the minimum number of checks before I stopped getting invalid results
+            for (var samenessCount = 0; samenessCount < 4; samenessCount++)
+            {
+                BufferContent(integrityBuffer);
+                if (!next.SequenceEqual(control))
+                {
+                    // Change detected so replace the buffer with the latest contents of the memory mapped file, then reset the sameness counter
+                    control.CopyTo(next);
+                    samenessCount = 0;
+                }
+            }
+
+            return Marshal.PtrToStructure<Snapshot>(bufferAddress);
         }
 
         private void BufferContent(byte[] buffer)
@@ -162,10 +172,10 @@ namespace GW2SDK.Mumble
             {
                 // Note the need to specify the length because we use pooled arrays
 #if NET
-                var buffered = _content.Read(buffer.AsSpan(0, Length));
+                var buffered = content.Read(buffer.AsSpan(0, Length));
 
 #else
-                var buffered = _content.Read(buffer, 0, Length);
+                var buffered = content.Read(buffer, 0, Length);
 #endif
                 if (buffered != Length)
                 {
@@ -176,7 +186,7 @@ namespace GW2SDK.Mumble
             finally
             {
                 // Reset the view stream for the next usage
-                _content.Position = 0;
+                content.Position = 0;
             }
         }
 
