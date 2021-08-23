@@ -5,6 +5,6 @@ namespace GW2SDK
     [PublicAPI]
     public enum CharacterFlag
     {
-
+        Beta = 1
     }
 }
