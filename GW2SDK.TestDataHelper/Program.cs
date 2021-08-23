@@ -93,8 +93,8 @@ namespace GW2SDK.TestDataHelper
             await using (var file = CreateTextCompressed(Path.Combine(outDir, "listings.json.gz")))
             {
                 Console.WriteLine("Getting item listings.");
-                var service = services.Resolve<JsonItemListingService>();
-                var jsons = await service.GetJsonItemListing();
+                var service = services.Resolve<JsonOrderBookService>();
+                var jsons = await service.GetJsonOrderBooks();
                 foreach (var json in jsons)
                 {
                     await file.WriteLineAsync(json);

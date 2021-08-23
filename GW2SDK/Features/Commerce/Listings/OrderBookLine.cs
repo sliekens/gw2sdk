@@ -5,7 +5,7 @@ namespace GW2SDK.Commerce.Listings
 {
     [PublicAPI]
     [DataTransferObject(RootObject = false)]
-    public sealed record ItemListingLine
+    public sealed record OrderBookLine
     {
         public int Listings { get; init; }
 

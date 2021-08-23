@@ -1,13 +1,15 @@
 ﻿using System;
 using System.Text.Json;
-using JetBrains.Annotations;
 using GW2SDK.Json;
+using JetBrains.Annotations;
 
 namespace GW2SDK.Commerce.Prices
 {
     [PublicAPI]
-    public sealed class ItemPriceReader : IItemPriceReader
+    public sealed class ItemPriceReader : IJsonReader<ItemPrice>
     {
+        public IJsonReader<int> Id { get; } = new Int32JsonReader();
+
         public ItemPrice Read(JsonElement json, MissingMemberBehavior missingMemberBehavior)
         {
             var id = new RequiredMember<int>("id");
@@ -79,7 +81,5 @@ namespace GW2SDK.Commerce.Prices
                 BestAsk = bestAsk.GetValue()
             };
         }
-
-        public IJsonReader<int> Id { get; } = new Int32JsonReader();
     }
 }

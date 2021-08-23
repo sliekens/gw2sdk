@@ -8,18 +8,18 @@ using GW2SDK.Http;
 
 namespace GW2SDK.TestDataHelper
 {
-    public class JsonItemListingService
+    public class JsonOrderBookService
     {
-        private readonly HttpClient _http;
+        private readonly HttpClient http;
 
-        public JsonItemListingService(HttpClient http)
+        public JsonOrderBookService(HttpClient http)
         {
-            _http = http;
+            this.http = http;
         }
 
-        public async Task<ISet<string>> GetJsonItemListing()
+        public async Task<ISet<string>> GetJsonOrderBooks()
         {
-            var ids = await GetItemListingIds()
+            var ids = await GetOrderBookIds()
                 .ConfigureAwait(false);
 
             var batches = new Queue<IEnumerable<int>>(ids.Buffer(200));
@@ -53,10 +53,10 @@ namespace GW2SDK.TestDataHelper
             return new SortedSet<string>(result, StringComparer.Ordinal);
         }
 
-        private async Task<List<int>> GetItemListingIds()
+        private async Task<List<int>> GetOrderBookIds()
         {
-            var request = new ItemListingsIndexRequest();
-            using var response = await _http.SendAsync(request, HttpCompletionOption.ResponseHeadersRead)
+            var request = new OrderBooksIndexRequest();
+            using var response = await http.SendAsync(request, HttpCompletionOption.ResponseHeadersRead)
                 .ConfigureAwait(false);
             response.EnsureSuccessStatusCode();
             using var json = await response.Content.ReadAsJsonAsync()
@@ -68,8 +68,8 @@ namespace GW2SDK.TestDataHelper
 
         private async Task<List<string>> GetJsonItemListingsById(IReadOnlyCollection<int> itemIds)
         {
-            var request = new ItemListingsByIdsRequest(itemIds);
-            using var response = await _http.SendAsync(request, HttpCompletionOption.ResponseHeadersRead)
+            var request = new OrderBooksByIdsRequest(itemIds);
+            using var response = await http.SendAsync(request, HttpCompletionOption.ResponseHeadersRead)
                 .ConfigureAwait(false);
             response.EnsureSuccessStatusCode();
 

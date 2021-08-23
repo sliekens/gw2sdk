@@ -4,9 +4,9 @@ using GW2SDK.Tests.TestInfrastructure;
 
 namespace GW2SDK.Tests.Features.Commerce.Listings
 {
-    public class ItemListingFixture
+    public class OrderBookFixture
     {
-        public ItemListingFixture()
+        public OrderBookFixture()
         {
             ItemPrices = FlatFileReader.Read("Data/listings.json.gz")
                 .ToList()
