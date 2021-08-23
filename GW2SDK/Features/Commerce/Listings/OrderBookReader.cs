@@ -6,13 +6,13 @@ using JetBrains.Annotations;
 namespace GW2SDK.Commerce.Listings
 {
     [PublicAPI]
-    public sealed class ItemListingReader : IItemListingReader
+    public sealed class OrderBookReader : IJsonReader<OrderBook>
     {
-        public ItemListing Read(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+        public OrderBook Read(JsonElement json, MissingMemberBehavior missingMemberBehavior)
         {
             var id = new RequiredMember<int>("id");
-            var demand = new RequiredMember<ItemListingLine[]>("buys");
-            var supply = new RequiredMember<ItemListingLine[]>("sells");
+            var demand = new RequiredMember<OrderBookLine[]>("buys");
+            var supply = new RequiredMember<OrderBookLine[]>("sells");
 
             foreach (var member in json.EnumerateObject())
             {
@@ -34,7 +34,7 @@ namespace GW2SDK.Commerce.Listings
                 }
             }
 
-            return new ItemListing
+            return new OrderBook
             {
                 Id = id.GetValue(),
                 Demand = demand.Select(value =>
@@ -44,7 +44,7 @@ namespace GW2SDK.Commerce.Listings
             };
         }
 
-        private ItemListingLine ReadItemListingLine(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+        private OrderBookLine ReadItemListingLine(JsonElement json, MissingMemberBehavior missingMemberBehavior)
         {
             var listings = new RequiredMember<int>("listings");
             var unitPrice = new RequiredMember<int>("unit_price");
@@ -52,7 +52,6 @@ namespace GW2SDK.Commerce.Listings
 
             foreach (var member in json.EnumerateObject())
             {
-                
                 if (member.NameEquals(listings.Name))
                 {
                     listings = listings.From(member.Value);
@@ -71,14 +70,12 @@ namespace GW2SDK.Commerce.Listings
                 }
             }
 
-            return new ItemListingLine
+            return new OrderBookLine
             {
                 Listings = listings.GetValue(),
                 UnitPrice = unitPrice.GetValue(),
                 Quantity = quantity.GetValue()
             };
         }
-
-        public IJsonReader<int> Id { get; } = new Int32JsonReader();
     }
 }

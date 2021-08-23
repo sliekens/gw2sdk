@@ -83,7 +83,7 @@ namespace GW2SDK.TestDataHelper
                 .AddTypedClient<JsonAchievementService>()
                 .AddTypedClient<JsonFloorService>()
                 .AddTypedClient<JsonItemPriceService>()
-                .AddTypedClient<JsonItemListingService>()
+                .AddTypedClient<JsonOrderBookService>()
                 .AddTypedClient<JsonItemService>()
                 .AddTypedClient<JsonRecipeService>()
                 .AddTypedClient<JsonSkinService>();

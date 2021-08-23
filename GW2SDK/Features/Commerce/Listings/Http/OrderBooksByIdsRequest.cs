@@ -8,9 +8,9 @@ using static System.Net.Http.HttpMethod;
 namespace GW2SDK.Commerce.Listings.Http
 {
     [PublicAPI]
-    public sealed class ItemListingsByIdsRequest
+    public sealed class OrderBooksByIdsRequest
     {
-        public ItemListingsByIdsRequest(IReadOnlyCollection<int> itemIds)
+        public OrderBooksByIdsRequest(IReadOnlyCollection<int> itemIds)
         {
             if (itemIds is null)
             {
@@ -27,7 +27,7 @@ namespace GW2SDK.Commerce.Listings.Http
 
         public IReadOnlyCollection<int> ItemIds { get; }
 
-        public static implicit operator HttpRequestMessage(ItemListingsByIdsRequest r)
+        public static implicit operator HttpRequestMessage(OrderBooksByIdsRequest r)
         {
             var search = new QueryBuilder();
             search.Add("ids", r.ItemIds);

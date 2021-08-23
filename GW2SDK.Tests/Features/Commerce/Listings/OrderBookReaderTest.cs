@@ -6,26 +6,26 @@ using Xunit;
 
 namespace GW2SDK.Tests.Features.Commerce.Listings
 {
-    public class ItemListingReaderTest : IClassFixture<ItemListingFixture>
+    public class OrderBookReaderTest : IClassFixture<OrderBookFixture>
     {
-        public ItemListingReaderTest(ItemListingFixture fixture)
+        public OrderBookReaderTest(OrderBookFixture fixture)
         {
             _fixture = fixture;
         }
 
-        private readonly ItemListingFixture _fixture;
+        private readonly OrderBookFixture _fixture;
 
-        private static class ItemListingFact
+        private static class OrderBookFact
         {
-            public static void Id_is_positive(ItemListing actual) => Assert.InRange(actual.Id, 1, int.MaxValue);
+            public static void Id_is_positive(OrderBook actual) => Assert.InRange(actual.Id, 1, int.MaxValue);
         }
 
         [Fact]
         [Trait("Feature", "Commerce.Listings")]
         [Trait("Category", "Integration")]
-        public void Item_listings_can_be_created_from_json()
+        public void Order_book_can_be_created_from_json()
         {
-            var sut = new ItemListingReader();
+            var sut = new OrderBookReader();
 
             AssertEx.ForEach(_fixture.ItemPrices,
                 json =>
@@ -34,7 +34,7 @@ namespace GW2SDK.Tests.Features.Commerce.Listings
 
                     var actual = sut.Read(document.RootElement, MissingMemberBehavior.Error);
 
-                    ItemListingFact.Id_is_positive(actual);
+                    OrderBookFact.Id_is_positive(actual);
                 });
         }
     }

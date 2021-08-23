@@ -54,7 +54,6 @@
 
     <ItemGroup>
       <Folder Include="Features\Accounts.WorldBosses\" />
-      <Folder Include="Features\Commerce.Exchange\" />
     </ItemGroup>
 
 </Project>

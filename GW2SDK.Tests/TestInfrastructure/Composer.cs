@@ -15,6 +15,7 @@ using GW2SDK.Backstories;
 using GW2SDK.Builds;
 using GW2SDK.Characters;
 using GW2SDK.Colors;
+using GW2SDK.Commerce;
 using GW2SDK.Commerce.Exchange;
 using GW2SDK.Commerce.Listings;
 using GW2SDK.Commerce.Prices;
@@ -137,14 +138,9 @@ namespace GW2SDK.Tests.TestInfrastructure
                 return new ColorService(Resolve<HttpClient>(), new ColorReader(), MissingMemberBehavior.Error);
             }
 
-            if (serviceType == typeof(ItemPriceService))
+            if (serviceType == typeof(TradingPost))
             {
-                return new ItemPriceService(Resolve<HttpClient>(), new ItemPriceReader(), MissingMemberBehavior.Error);
-            }
-
-            if (serviceType == typeof(ItemListingService))
-            {
-                return new ItemListingService(Resolve<HttpClient>(), new ItemListingReader(), MissingMemberBehavior.Error);
+                return new TradingPost(Resolve<HttpClient>(), new TradingPostReader(), MissingMemberBehavior.Error);
             }
 
             if (serviceType == typeof(ContinentService))
@@ -205,11 +201,6 @@ namespace GW2SDK.Tests.TestInfrastructure
             if (serviceType == typeof(WorldService))
             {
                 return new WorldService(Resolve<HttpClient>(), new WorldReader(), MissingMemberBehavior.Error);
-            }
-
-            if (serviceType == typeof(ExchangeService))
-            {
-                return new ExchangeService(Resolve<HttpClient>(), new ExchangeReader(), MissingMemberBehavior.Error);
             }
 
             if (serviceType == typeof(ProfessionService))
