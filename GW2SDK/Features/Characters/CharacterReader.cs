@@ -16,7 +16,7 @@ namespace GW2SDK.Characters
             var flags = new RequiredMember<CharacterFlag[]>("flags");
             var profession = new RequiredMember<ProfessionName>("profession");
             var level = new RequiredMember<int>("level");
-            var guild = new RequiredMember<string>("guild");
+            var guild = new OptionalMember<string>("guild");
             var age = new RequiredMember<TimeSpan>("age");
             var lastModified = new RequiredMember<DateTimeOffset>("last_modified");
             var created = new RequiredMember<DateTimeOffset>("created");
@@ -34,7 +34,7 @@ namespace GW2SDK.Characters
             var equipmentTabs = new OptionalMember<EquipmentTab[]>("equipment_tabs");
             var recipes = new OptionalMember<int[]>("recipes");
             var training = new OptionalMember<TrainingObjective[]>("training");
-            var bags = new OptionalMember<Bag[]>("bags");
+            var bags = new OptionalMember<Bag?[]>("bags");
 
             foreach (var member in json.EnumerateObject())
             {
@@ -151,7 +151,7 @@ namespace GW2SDK.Characters
                 Gender = gender.GetValue(missingMemberBehavior),
                 Flags = flags.GetValue(missingMemberBehavior),
                 Level = level.GetValue(),
-                GuildId = guild.GetValue(),
+                GuildId = guild.GetValueOrEmpty(),
                 Profession = profession.GetValue(missingMemberBehavior),
                 Age = age.Select(value => TimeSpan.FromSeconds(value.GetDouble())),
                 LastModified = lastModified.GetValue(),
@@ -212,8 +212,14 @@ namespace GW2SDK.Characters
             };
         }
 
-        private Bag ReadBag(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+        private Bag? ReadBag(JsonElement json, MissingMemberBehavior missingMemberBehavior)
         {
+            // Empty slots are represented as null -- but maybe we should use a Null Object pattern here
+            if (json.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
+
             var id = new RequiredMember<int>("id");
             var size = new RequiredMember<int>("size");
             var inventory = new RequiredMember<InventorySlot?[]>("inventory");

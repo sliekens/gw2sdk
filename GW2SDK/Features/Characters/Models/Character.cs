@@ -22,6 +22,7 @@ namespace GW2SDK.Characters
 
         public int Level { get; init; }
 
+        /// <summary>Gets the current guild, or an empty string if the character is not currently representing a guild.</summary>
         public string GuildId { get; init; } = "";
 
         public TimeSpan Age { get; init; }
@@ -68,7 +69,9 @@ namespace GW2SDK.Characters
         [Scope(Permission.Builds)]
         public IEnumerable<TrainingObjective>? Training { get; init; }
 
+        /// <summary>The current character's bags, sorted by in-game order. Enumerated values can contain <c>null</c> when some bag
+        /// expansion slots are empty.</summary>
         [Scope(Permission.Inventories)]
-        public IEnumerable<Bag>? Bags { get; init; }
+        public IEnumerable<Bag?>? Bags { get; init; }
     }
 }
