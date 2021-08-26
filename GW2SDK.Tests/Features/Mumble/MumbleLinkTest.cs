@@ -70,7 +70,7 @@ namespace GW2SDK.Tests.Features.Mumble
         {
             using var sut = MumbleLink.Open();
 
-            var cts = new CancellationTokenSource(TimeSpan.FromSeconds(3));
+            using var cts = new CancellationTokenSource(TimeSpan.FromSeconds(3));
 
             var actual = new MumbleLinkTestObserver(cts.Token);
 
