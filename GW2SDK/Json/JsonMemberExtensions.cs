@@ -4,6 +4,11 @@ namespace GW2SDK.Json
 {
     internal static class JsonMemberExtensions
     {
+        internal static int GetValue(this RequiredMember<Coin> instance)
+        {
+            return instance.Select(json => new Coin(json.GetInt32()));
+        }
+
         internal static int GetValue(this RequiredMember<int> instance)
         {
             return instance.Select(json => json.GetInt32());
