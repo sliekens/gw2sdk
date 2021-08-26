@@ -142,7 +142,7 @@ namespace GW2SDK.Items
             var description = new OptionalMember<string>("description");
             var level = new RequiredMember<int>("level");
             var rarity = new RequiredMember<Rarity>("rarity");
-            var vendorValue = new RequiredMember<int>("vendor_value");
+            var vendorValue = new RequiredMember<Coin>("vendor_value");
             var gameTypes = new RequiredMember<GameType[]>("game_types");
             var flags = new RequiredMember<ItemFlag[]>("flags");
             var restrictions = new RequiredMember<ItemRestriction[]>("restrictions");
@@ -381,7 +381,7 @@ namespace GW2SDK.Items
             var description = new OptionalMember<string>("description");
             var level = new RequiredMember<int>("level");
             var rarity = new RequiredMember<Rarity>("rarity");
-            var vendorValue = new RequiredMember<int>("vendor_value");
+            var vendorValue = new RequiredMember<Coin>("vendor_value");
             var defaultSkin = new RequiredMember<int>("default_skin");
             var gameTypes = new RequiredMember<GameType[]>("game_types");
             var flags = new RequiredMember<ItemFlag[]>("flags");
@@ -534,7 +534,7 @@ namespace GW2SDK.Items
             var description = new OptionalMember<string>("description");
             var level = new RequiredMember<int>("level");
             var rarity = new RequiredMember<Rarity>("rarity");
-            var vendorValue = new RequiredMember<int>("vendor_value");
+            var vendorValue = new RequiredMember<Coin>("vendor_value");
             var defaultSkin = new RequiredMember<int>("default_skin");
             var gameTypes = new RequiredMember<GameType[]>("game_types");
             var flags = new RequiredMember<ItemFlag[]>("flags");
@@ -688,7 +688,7 @@ namespace GW2SDK.Items
             var description = new OptionalMember<string>("description");
             var level = new RequiredMember<int>("level");
             var rarity = new RequiredMember<Rarity>("rarity");
-            var vendorValue = new RequiredMember<int>("vendor_value");
+            var vendorValue = new RequiredMember<Coin>("vendor_value");
             var defaultSkin = new RequiredMember<int>("default_skin");
             var gameTypes = new RequiredMember<GameType[]>("game_types");
             var flags = new RequiredMember<ItemFlag[]>("flags");
@@ -841,7 +841,7 @@ namespace GW2SDK.Items
             var description = new OptionalMember<string>("description");
             var level = new RequiredMember<int>("level");
             var rarity = new RequiredMember<Rarity>("rarity");
-            var vendorValue = new RequiredMember<int>("vendor_value");
+            var vendorValue = new RequiredMember<Coin>("vendor_value");
             var defaultSkin = new RequiredMember<int>("default_skin");
             var gameTypes = new RequiredMember<GameType[]>("game_types");
             var flags = new RequiredMember<ItemFlag[]>("flags");
@@ -994,7 +994,7 @@ namespace GW2SDK.Items
             var description = new OptionalMember<string>("description");
             var level = new RequiredMember<int>("level");
             var rarity = new RequiredMember<Rarity>("rarity");
-            var vendorValue = new RequiredMember<int>("vendor_value");
+            var vendorValue = new RequiredMember<Coin>("vendor_value");
             var defaultSkin = new RequiredMember<int>("default_skin");
             var gameTypes = new RequiredMember<GameType[]>("game_types");
             var flags = new RequiredMember<ItemFlag[]>("flags");
@@ -1147,7 +1147,7 @@ namespace GW2SDK.Items
             var description = new OptionalMember<string>("description");
             var level = new RequiredMember<int>("level");
             var rarity = new RequiredMember<Rarity>("rarity");
-            var vendorValue = new RequiredMember<int>("vendor_value");
+            var vendorValue = new RequiredMember<Coin>("vendor_value");
             var defaultSkin = new RequiredMember<int>("default_skin");
             var gameTypes = new RequiredMember<GameType[]>("game_types");
             var flags = new RequiredMember<ItemFlag[]>("flags");
@@ -1300,7 +1300,7 @@ namespace GW2SDK.Items
             var description = new OptionalMember<string>("description");
             var level = new RequiredMember<int>("level");
             var rarity = new RequiredMember<Rarity>("rarity");
-            var vendorValue = new RequiredMember<int>("vendor_value");
+            var vendorValue = new RequiredMember<Coin>("vendor_value");
             var defaultSkin = new RequiredMember<int>("default_skin");
             var gameTypes = new RequiredMember<GameType[]>("game_types");
             var flags = new RequiredMember<ItemFlag[]>("flags");
@@ -1453,7 +1453,7 @@ namespace GW2SDK.Items
             var description = new OptionalMember<string>("description");
             var level = new RequiredMember<int>("level");
             var rarity = new RequiredMember<Rarity>("rarity");
-            var vendorValue = new RequiredMember<int>("vendor_value");
+            var vendorValue = new RequiredMember<Coin>("vendor_value");
             var defaultSkin = new RequiredMember<int>("default_skin");
             var gameTypes = new RequiredMember<GameType[]>("game_types");
             var flags = new RequiredMember<ItemFlag[]>("flags");
@@ -1606,7 +1606,7 @@ namespace GW2SDK.Items
             var description = new OptionalMember<string>("description");
             var level = new RequiredMember<int>("level");
             var rarity = new RequiredMember<Rarity>("rarity");
-            var vendorValue = new RequiredMember<int>("vendor_value");
+            var vendorValue = new RequiredMember<Coin>("vendor_value");
             var defaultSkin = new RequiredMember<int>("default_skin");
             var gameTypes = new RequiredMember<GameType[]>("game_types");
             var flags = new RequiredMember<ItemFlag[]>("flags");
@@ -1752,7 +1752,7 @@ namespace GW2SDK.Items
             var description = new OptionalMember<string>("description");
             var level = new RequiredMember<int>("level");
             var rarity = new RequiredMember<Rarity>("rarity");
-            var vendorValue = new RequiredMember<int>("vendor_value");
+            var vendorValue = new RequiredMember<Coin>("vendor_value");
             var gameTypes = new RequiredMember<GameType[]>("game_types");
             var flags = new RequiredMember<ItemFlag[]>("flags");
             var restrictions = new RequiredMember<ItemRestriction[]>("restrictions");
@@ -1896,7 +1896,7 @@ namespace GW2SDK.Items
             var description = new OptionalMember<string>("description");
             var level = new RequiredMember<int>("level");
             var rarity = new RequiredMember<Rarity>("rarity");
-            var vendorValue = new RequiredMember<int>("vendor_value");
+            var vendorValue = new RequiredMember<Coin>("vendor_value");
             var gameTypes = new RequiredMember<GameType[]>("game_types");
             var flags = new RequiredMember<ItemFlag[]>("flags");
             var restrictions = new RequiredMember<ItemRestriction[]>("restrictions");
@@ -2004,7 +2004,7 @@ namespace GW2SDK.Items
             var description = new OptionalMember<string>("description");
             var level = new RequiredMember<int>("level");
             var rarity = new RequiredMember<Rarity>("rarity");
-            var vendorValue = new RequiredMember<int>("vendor_value");
+            var vendorValue = new RequiredMember<Coin>("vendor_value");
             var gameTypes = new RequiredMember<GameType[]>("game_types");
             var flags = new RequiredMember<ItemFlag[]>("flags");
             var restrictions = new RequiredMember<ItemRestriction[]>("restrictions");
@@ -2109,7 +2109,7 @@ namespace GW2SDK.Items
             var description = new OptionalMember<string>("description");
             var level = new RequiredMember<int>("level");
             var rarity = new RequiredMember<Rarity>("rarity");
-            var vendorValue = new RequiredMember<int>("vendor_value");
+            var vendorValue = new RequiredMember<Coin>("vendor_value");
             var gameTypes = new RequiredMember<GameType[]>("game_types");
             var flags = new RequiredMember<ItemFlag[]>("flags");
             var restrictions = new RequiredMember<ItemRestriction[]>("restrictions");
@@ -2214,7 +2214,7 @@ namespace GW2SDK.Items
             var description = new OptionalMember<string>("description");
             var level = new RequiredMember<int>("level");
             var rarity = new RequiredMember<Rarity>("rarity");
-            var vendorValue = new RequiredMember<int>("vendor_value");
+            var vendorValue = new RequiredMember<Coin>("vendor_value");
             var gameTypes = new RequiredMember<GameType[]>("game_types");
             var flags = new RequiredMember<ItemFlag[]>("flags");
             var restrictions = new RequiredMember<ItemRestriction[]>("restrictions");
@@ -2319,7 +2319,7 @@ namespace GW2SDK.Items
             var description = new OptionalMember<string>("description");
             var level = new RequiredMember<int>("level");
             var rarity = new RequiredMember<Rarity>("rarity");
-            var vendorValue = new RequiredMember<int>("vendor_value");
+            var vendorValue = new RequiredMember<Coin>("vendor_value");
             var gameTypes = new RequiredMember<GameType[]>("game_types");
             var flags = new RequiredMember<ItemFlag[]>("flags");
             var restrictions = new RequiredMember<ItemRestriction[]>("restrictions");
@@ -2424,7 +2424,7 @@ namespace GW2SDK.Items
             var description = new OptionalMember<string>("description");
             var level = new RequiredMember<int>("level");
             var rarity = new RequiredMember<Rarity>("rarity");
-            var vendorValue = new RequiredMember<int>("vendor_value");
+            var vendorValue = new RequiredMember<Coin>("vendor_value");
             var gameTypes = new RequiredMember<GameType[]>("game_types");
             var flags = new RequiredMember<ItemFlag[]>("flags");
             var restrictions = new RequiredMember<ItemRestriction[]>("restrictions");
@@ -2562,7 +2562,7 @@ namespace GW2SDK.Items
             var description = new OptionalMember<string>("description");
             var level = new RequiredMember<int>("level");
             var rarity = new RequiredMember<Rarity>("rarity");
-            var vendorValue = new RequiredMember<int>("vendor_value");
+            var vendorValue = new RequiredMember<Coin>("vendor_value");
             var gameTypes = new RequiredMember<GameType[]>("game_types");
             var flags = new RequiredMember<ItemFlag[]>("flags");
             var restrictions = new RequiredMember<ItemRestriction[]>("restrictions");
@@ -2706,7 +2706,7 @@ namespace GW2SDK.Items
             var description = new OptionalMember<string>("description");
             var level = new RequiredMember<int>("level");
             var rarity = new RequiredMember<Rarity>("rarity");
-            var vendorValue = new RequiredMember<int>("vendor_value");
+            var vendorValue = new RequiredMember<Coin>("vendor_value");
             var gameTypes = new RequiredMember<GameType[]>("game_types");
             var flags = new RequiredMember<ItemFlag[]>("flags");
             var restrictions = new RequiredMember<ItemRestriction[]>("restrictions");
@@ -2814,7 +2814,7 @@ namespace GW2SDK.Items
             var description = new OptionalMember<string>("description");
             var level = new RequiredMember<int>("level");
             var rarity = new RequiredMember<Rarity>("rarity");
-            var vendorValue = new RequiredMember<int>("vendor_value");
+            var vendorValue = new RequiredMember<Coin>("vendor_value");
             var gameTypes = new RequiredMember<GameType[]>("game_types");
             var flags = new RequiredMember<ItemFlag[]>("flags");
             var restrictions = new RequiredMember<ItemRestriction[]>("restrictions");
@@ -2958,7 +2958,7 @@ namespace GW2SDK.Items
             var description = new OptionalMember<string>("description");
             var level = new RequiredMember<int>("level");
             var rarity = new RequiredMember<Rarity>("rarity");
-            var vendorValue = new RequiredMember<int>("vendor_value");
+            var vendorValue = new RequiredMember<Coin>("vendor_value");
             var gameTypes = new RequiredMember<GameType[]>("game_types");
             var flags = new RequiredMember<ItemFlag[]>("flags");
             var restrictions = new RequiredMember<ItemRestriction[]>("restrictions");
@@ -3063,7 +3063,7 @@ namespace GW2SDK.Items
             var description = new OptionalMember<string>("description");
             var level = new RequiredMember<int>("level");
             var rarity = new RequiredMember<Rarity>("rarity");
-            var vendorValue = new RequiredMember<int>("vendor_value");
+            var vendorValue = new RequiredMember<Coin>("vendor_value");
             var gameTypes = new RequiredMember<GameType[]>("game_types");
             var flags = new RequiredMember<ItemFlag[]>("flags");
             var restrictions = new RequiredMember<ItemRestriction[]>("restrictions");
@@ -3171,7 +3171,7 @@ namespace GW2SDK.Items
             var description = new OptionalMember<string>("description");
             var level = new RequiredMember<int>("level");
             var rarity = new RequiredMember<Rarity>("rarity");
-            var vendorValue = new RequiredMember<int>("vendor_value");
+            var vendorValue = new RequiredMember<Coin>("vendor_value");
             var gameTypes = new RequiredMember<GameType[]>("game_types");
             var flags = new RequiredMember<ItemFlag[]>("flags");
             var restrictions = new RequiredMember<ItemRestriction[]>("restrictions");
@@ -3276,7 +3276,7 @@ namespace GW2SDK.Items
             var description = new OptionalMember<string>("description");
             var level = new RequiredMember<int>("level");
             var rarity = new RequiredMember<Rarity>("rarity");
-            var vendorValue = new RequiredMember<int>("vendor_value");
+            var vendorValue = new RequiredMember<Coin>("vendor_value");
             var gameTypes = new RequiredMember<GameType[]>("game_types");
             var flags = new RequiredMember<ItemFlag[]>("flags");
             var restrictions = new RequiredMember<ItemRestriction[]>("restrictions");
@@ -3421,7 +3421,7 @@ namespace GW2SDK.Items
             var description = new OptionalMember<string>("description");
             var level = new RequiredMember<int>("level");
             var rarity = new RequiredMember<Rarity>("rarity");
-            var vendorValue = new RequiredMember<int>("vendor_value");
+            var vendorValue = new RequiredMember<Coin>("vendor_value");
             var gameTypes = new RequiredMember<GameType[]>("game_types");
             var flags = new RequiredMember<ItemFlag[]>("flags");
             var restrictions = new RequiredMember<ItemRestriction[]>("restrictions");
@@ -3533,7 +3533,7 @@ namespace GW2SDK.Items
             var description = new OptionalMember<string>("description");
             var level = new RequiredMember<int>("level");
             var rarity = new RequiredMember<Rarity>("rarity");
-            var vendorValue = new RequiredMember<int>("vendor_value");
+            var vendorValue = new RequiredMember<Coin>("vendor_value");
             var gameTypes = new RequiredMember<GameType[]>("game_types");
             var flags = new RequiredMember<ItemFlag[]>("flags");
             var restrictions = new RequiredMember<ItemRestriction[]>("restrictions");
@@ -3645,7 +3645,7 @@ namespace GW2SDK.Items
             var description = new OptionalMember<string>("description");
             var level = new RequiredMember<int>("level");
             var rarity = new RequiredMember<Rarity>("rarity");
-            var vendorValue = new RequiredMember<int>("vendor_value");
+            var vendorValue = new RequiredMember<Coin>("vendor_value");
             var gameTypes = new RequiredMember<GameType[]>("game_types");
             var flags = new RequiredMember<ItemFlag[]>("flags");
             var restrictions = new RequiredMember<ItemRestriction[]>("restrictions");
@@ -3760,7 +3760,7 @@ namespace GW2SDK.Items
             var description = new OptionalMember<string>("description");
             var level = new RequiredMember<int>("level");
             var rarity = new RequiredMember<Rarity>("rarity");
-            var vendorValue = new RequiredMember<int>("vendor_value");
+            var vendorValue = new RequiredMember<Coin>("vendor_value");
             var gameTypes = new RequiredMember<GameType[]>("game_types");
             var flags = new RequiredMember<ItemFlag[]>("flags");
             var restrictions = new RequiredMember<ItemRestriction[]>("restrictions");
@@ -3875,7 +3875,7 @@ namespace GW2SDK.Items
             var description = new OptionalMember<string>("description");
             var level = new RequiredMember<int>("level");
             var rarity = new RequiredMember<Rarity>("rarity");
-            var vendorValue = new RequiredMember<int>("vendor_value");
+            var vendorValue = new RequiredMember<Coin>("vendor_value");
             var gameTypes = new RequiredMember<GameType[]>("game_types");
             var flags = new RequiredMember<ItemFlag[]>("flags");
             var restrictions = new RequiredMember<ItemRestriction[]>("restrictions");
@@ -3990,7 +3990,7 @@ namespace GW2SDK.Items
             var description = new OptionalMember<string>("description");
             var level = new RequiredMember<int>("level");
             var rarity = new RequiredMember<Rarity>("rarity");
-            var vendorValue = new RequiredMember<int>("vendor_value");
+            var vendorValue = new RequiredMember<Coin>("vendor_value");
             var gameTypes = new RequiredMember<GameType[]>("game_types");
             var flags = new RequiredMember<ItemFlag[]>("flags");
             var restrictions = new RequiredMember<ItemRestriction[]>("restrictions");
@@ -4105,7 +4105,7 @@ namespace GW2SDK.Items
             var description = new OptionalMember<string>("description");
             var level = new RequiredMember<int>("level");
             var rarity = new RequiredMember<Rarity>("rarity");
-            var vendorValue = new RequiredMember<int>("vendor_value");
+            var vendorValue = new RequiredMember<Coin>("vendor_value");
             var gameTypes = new RequiredMember<GameType[]>("game_types");
             var flags = new RequiredMember<ItemFlag[]>("flags");
             var restrictions = new RequiredMember<ItemRestriction[]>("restrictions");
@@ -4217,7 +4217,7 @@ namespace GW2SDK.Items
             var description = new OptionalMember<string>("description");
             var level = new RequiredMember<int>("level");
             var rarity = new RequiredMember<Rarity>("rarity");
-            var vendorValue = new RequiredMember<int>("vendor_value");
+            var vendorValue = new RequiredMember<Coin>("vendor_value");
             var gameTypes = new RequiredMember<GameType[]>("game_types");
             var flags = new RequiredMember<ItemFlag[]>("flags");
             var restrictions = new RequiredMember<ItemRestriction[]>("restrictions");
@@ -4332,7 +4332,7 @@ namespace GW2SDK.Items
             var description = new OptionalMember<string>("description");
             var level = new RequiredMember<int>("level");
             var rarity = new RequiredMember<Rarity>("rarity");
-            var vendorValue = new RequiredMember<int>("vendor_value");
+            var vendorValue = new RequiredMember<Coin>("vendor_value");
             var gameTypes = new RequiredMember<GameType[]>("game_types");
             var flags = new RequiredMember<ItemFlag[]>("flags");
             var restrictions = new RequiredMember<ItemRestriction[]>("restrictions");
@@ -4456,7 +4456,7 @@ namespace GW2SDK.Items
             var description = new OptionalMember<string>("description");
             var level = new RequiredMember<int>("level");
             var rarity = new RequiredMember<Rarity>("rarity");
-            var vendorValue = new RequiredMember<int>("vendor_value");
+            var vendorValue = new RequiredMember<Coin>("vendor_value");
             var gameTypes = new RequiredMember<GameType[]>("game_types");
             var flags = new RequiredMember<ItemFlag[]>("flags");
             var restrictions = new RequiredMember<ItemRestriction[]>("restrictions");
@@ -4577,7 +4577,7 @@ namespace GW2SDK.Items
             var description = new OptionalMember<string>("description");
             var level = new RequiredMember<int>("level");
             var rarity = new RequiredMember<Rarity>("rarity");
-            var vendorValue = new RequiredMember<int>("vendor_value");
+            var vendorValue = new RequiredMember<Coin>("vendor_value");
             var gameTypes = new RequiredMember<GameType[]>("game_types");
             var flags = new RequiredMember<ItemFlag[]>("flags");
             var restrictions = new RequiredMember<ItemRestriction[]>("restrictions");
@@ -4692,7 +4692,7 @@ namespace GW2SDK.Items
             var description = new OptionalMember<string>("description");
             var level = new RequiredMember<int>("level");
             var rarity = new RequiredMember<Rarity>("rarity");
-            var vendorValue = new RequiredMember<int>("vendor_value");
+            var vendorValue = new RequiredMember<Coin>("vendor_value");
             var gameTypes = new RequiredMember<GameType[]>("game_types");
             var flags = new RequiredMember<ItemFlag[]>("flags");
             var restrictions = new RequiredMember<ItemRestriction[]>("restrictions");
@@ -4804,7 +4804,7 @@ namespace GW2SDK.Items
             var description = new OptionalMember<string>("description");
             var level = new RequiredMember<int>("level");
             var rarity = new RequiredMember<Rarity>("rarity");
-            var vendorValue = new RequiredMember<int>("vendor_value");
+            var vendorValue = new RequiredMember<Coin>("vendor_value");
             var gameTypes = new RequiredMember<GameType[]>("game_types");
             var flags = new RequiredMember<ItemFlag[]>("flags");
             var restrictions = new RequiredMember<ItemRestriction[]>("restrictions");
@@ -4916,7 +4916,7 @@ namespace GW2SDK.Items
             var description = new OptionalMember<string>("description");
             var level = new RequiredMember<int>("level");
             var rarity = new RequiredMember<Rarity>("rarity");
-            var vendorValue = new RequiredMember<int>("vendor_value");
+            var vendorValue = new RequiredMember<Coin>("vendor_value");
             var gameTypes = new RequiredMember<GameType[]>("game_types");
             var flags = new RequiredMember<ItemFlag[]>("flags");
             var restrictions = new RequiredMember<ItemRestriction[]>("restrictions");
@@ -5028,7 +5028,7 @@ namespace GW2SDK.Items
             var description = new OptionalMember<string>("description");
             var level = new RequiredMember<int>("level");
             var rarity = new RequiredMember<Rarity>("rarity");
-            var vendorValue = new RequiredMember<int>("vendor_value");
+            var vendorValue = new RequiredMember<Coin>("vendor_value");
             var gameTypes = new RequiredMember<GameType[]>("game_types");
             var flags = new RequiredMember<ItemFlag[]>("flags");
             var restrictions = new RequiredMember<ItemRestriction[]>("restrictions");
@@ -5143,7 +5143,7 @@ namespace GW2SDK.Items
             var description = new OptionalMember<string>("description");
             var level = new RequiredMember<int>("level");
             var rarity = new RequiredMember<Rarity>("rarity");
-            var vendorValue = new RequiredMember<int>("vendor_value");
+            var vendorValue = new RequiredMember<Coin>("vendor_value");
             var gameTypes = new RequiredMember<GameType[]>("game_types");
             var flags = new RequiredMember<ItemFlag[]>("flags");
             var restrictions = new RequiredMember<ItemRestriction[]>("restrictions");
@@ -5255,7 +5255,7 @@ namespace GW2SDK.Items
             var description = new OptionalMember<string>("description");
             var level = new RequiredMember<int>("level");
             var rarity = new RequiredMember<Rarity>("rarity");
-            var vendorValue = new RequiredMember<int>("vendor_value");
+            var vendorValue = new RequiredMember<Coin>("vendor_value");
             var gameTypes = new RequiredMember<GameType[]>("game_types");
             var flags = new RequiredMember<ItemFlag[]>("flags");
             var restrictions = new RequiredMember<ItemRestriction[]>("restrictions");
@@ -5360,7 +5360,7 @@ namespace GW2SDK.Items
             var description = new OptionalMember<string>("description");
             var level = new RequiredMember<int>("level");
             var rarity = new RequiredMember<Rarity>("rarity");
-            var vendorValue = new RequiredMember<int>("vendor_value");
+            var vendorValue = new RequiredMember<Coin>("vendor_value");
             var gameTypes = new RequiredMember<GameType[]>("game_types");
             var flags = new RequiredMember<ItemFlag[]>("flags");
             var restrictions = new RequiredMember<ItemRestriction[]>("restrictions");
@@ -5507,7 +5507,7 @@ namespace GW2SDK.Items
             var description = new OptionalMember<string>("description");
             var level = new RequiredMember<int>("level");
             var rarity = new RequiredMember<Rarity>("rarity");
-            var vendorValue = new RequiredMember<int>("vendor_value");
+            var vendorValue = new RequiredMember<Coin>("vendor_value");
             var gameTypes = new RequiredMember<GameType[]>("game_types");
             var flags = new RequiredMember<ItemFlag[]>("flags");
             var restrictions = new RequiredMember<ItemRestriction[]>("restrictions");
@@ -5615,7 +5615,7 @@ namespace GW2SDK.Items
             var description = new OptionalMember<string>("description");
             var level = new RequiredMember<int>("level");
             var rarity = new RequiredMember<Rarity>("rarity");
-            var vendorValue = new RequiredMember<int>("vendor_value");
+            var vendorValue = new RequiredMember<Coin>("vendor_value");
             var gameTypes = new RequiredMember<GameType[]>("game_types");
             var flags = new RequiredMember<ItemFlag[]>("flags");
             var restrictions = new RequiredMember<ItemRestriction[]>("restrictions");
@@ -5720,7 +5720,7 @@ namespace GW2SDK.Items
             var description = new OptionalMember<string>("description");
             var level = new RequiredMember<int>("level");
             var rarity = new RequiredMember<Rarity>("rarity");
-            var vendorValue = new RequiredMember<int>("vendor_value");
+            var vendorValue = new RequiredMember<Coin>("vendor_value");
             var gameTypes = new RequiredMember<GameType[]>("game_types");
             var flags = new RequiredMember<ItemFlag[]>("flags");
             var restrictions = new RequiredMember<ItemRestriction[]>("restrictions");
@@ -5828,7 +5828,7 @@ namespace GW2SDK.Items
             var description = new OptionalMember<string>("description");
             var level = new RequiredMember<int>("level");
             var rarity = new RequiredMember<Rarity>("rarity");
-            var vendorValue = new RequiredMember<int>("vendor_value");
+            var vendorValue = new RequiredMember<Coin>("vendor_value");
             var gameTypes = new RequiredMember<GameType[]>("game_types");
             var flags = new RequiredMember<ItemFlag[]>("flags");
             var restrictions = new RequiredMember<ItemRestriction[]>("restrictions");
@@ -5933,7 +5933,7 @@ namespace GW2SDK.Items
             var description = new OptionalMember<string>("description");
             var level = new RequiredMember<int>("level");
             var rarity = new RequiredMember<Rarity>("rarity");
-            var vendorValue = new RequiredMember<int>("vendor_value");
+            var vendorValue = new RequiredMember<Coin>("vendor_value");
             var gameTypes = new RequiredMember<GameType[]>("game_types");
             var flags = new RequiredMember<ItemFlag[]>("flags");
             var restrictions = new RequiredMember<ItemRestriction[]>("restrictions");
@@ -6041,7 +6041,7 @@ namespace GW2SDK.Items
             var description = new OptionalMember<string>("description");
             var level = new RequiredMember<int>("level");
             var rarity = new RequiredMember<Rarity>("rarity");
-            var vendorValue = new RequiredMember<int>("vendor_value");
+            var vendorValue = new RequiredMember<Coin>("vendor_value");
             var gameTypes = new RequiredMember<GameType[]>("game_types");
             var flags = new RequiredMember<ItemFlag[]>("flags");
             var restrictions = new RequiredMember<ItemRestriction[]>("restrictions");
@@ -6145,7 +6145,7 @@ namespace GW2SDK.Items
             var description = new OptionalMember<string>("description");
             var level = new RequiredMember<int>("level");
             var rarity = new RequiredMember<Rarity>("rarity");
-            var vendorValue = new RequiredMember<int>("vendor_value");
+            var vendorValue = new RequiredMember<Coin>("vendor_value");
             var gameTypes = new RequiredMember<GameType[]>("game_types");
             var flags = new RequiredMember<ItemFlag[]>("flags");
             var restrictions = new RequiredMember<ItemRestriction[]>("restrictions");
@@ -6243,7 +6243,7 @@ namespace GW2SDK.Items
             var description = new OptionalMember<string>("description");
             var level = new RequiredMember<int>("level");
             var rarity = new RequiredMember<Rarity>("rarity");
-            var vendorValue = new RequiredMember<int>("vendor_value");
+            var vendorValue = new RequiredMember<Coin>("vendor_value");
             var gameTypes = new RequiredMember<GameType[]>("game_types");
             var flags = new RequiredMember<ItemFlag[]>("flags");
             var restrictions = new RequiredMember<ItemRestriction[]>("restrictions");
@@ -6348,7 +6348,7 @@ namespace GW2SDK.Items
             var description = new OptionalMember<string>("description");
             var level = new RequiredMember<int>("level");
             var rarity = new RequiredMember<Rarity>("rarity");
-            var vendorValue = new RequiredMember<int>("vendor_value");
+            var vendorValue = new RequiredMember<Coin>("vendor_value");
             var gameTypes = new RequiredMember<GameType[]>("game_types");
             var flags = new RequiredMember<ItemFlag[]>("flags");
             var restrictions = new RequiredMember<ItemRestriction[]>("restrictions");
@@ -6453,7 +6453,7 @@ namespace GW2SDK.Items
             var description = new OptionalMember<string>("description");
             var level = new RequiredMember<int>("level");
             var rarity = new RequiredMember<Rarity>("rarity");
-            var vendorValue = new RequiredMember<int>("vendor_value");
+            var vendorValue = new RequiredMember<Coin>("vendor_value");
             var gameTypes = new RequiredMember<GameType[]>("game_types");
             var flags = new RequiredMember<ItemFlag[]>("flags");
             var restrictions = new RequiredMember<ItemRestriction[]>("restrictions");
@@ -6570,7 +6570,7 @@ namespace GW2SDK.Items
             var description = new OptionalMember<string>("description");
             var level = new RequiredMember<int>("level");
             var rarity = new RequiredMember<Rarity>("rarity");
-            var vendorValue = new RequiredMember<int>("vendor_value");
+            var vendorValue = new RequiredMember<Coin>("vendor_value");
             var gameTypes = new RequiredMember<GameType[]>("game_types");
             var flags = new RequiredMember<ItemFlag[]>("flags");
             var restrictions = new RequiredMember<ItemRestriction[]>("restrictions");
@@ -6675,7 +6675,7 @@ namespace GW2SDK.Items
             var description = new OptionalMember<string>("description");
             var level = new RequiredMember<int>("level");
             var rarity = new RequiredMember<Rarity>("rarity");
-            var vendorValue = new RequiredMember<int>("vendor_value");
+            var vendorValue = new RequiredMember<Coin>("vendor_value");
             var gameTypes = new RequiredMember<GameType[]>("game_types");
             var flags = new RequiredMember<ItemFlag[]>("flags");
             var restrictions = new RequiredMember<ItemRestriction[]>("restrictions");
@@ -6780,7 +6780,7 @@ namespace GW2SDK.Items
             var description = new OptionalMember<string>("description");
             var level = new RequiredMember<int>("level");
             var rarity = new RequiredMember<Rarity>("rarity");
-            var vendorValue = new RequiredMember<int>("vendor_value");
+            var vendorValue = new RequiredMember<Coin>("vendor_value");
             var gameTypes = new RequiredMember<GameType[]>("game_types");
             var flags = new RequiredMember<ItemFlag[]>("flags");
             var restrictions = new RequiredMember<ItemRestriction[]>("restrictions");
@@ -6900,7 +6900,7 @@ namespace GW2SDK.Items
             var description = new OptionalMember<string>("description");
             var level = new RequiredMember<int>("level");
             var rarity = new RequiredMember<Rarity>("rarity");
-            var vendorValue = new RequiredMember<int>("vendor_value");
+            var vendorValue = new RequiredMember<Coin>("vendor_value");
             var gameTypes = new RequiredMember<GameType[]>("game_types");
             var flags = new RequiredMember<ItemFlag[]>("flags");
             var restrictions = new RequiredMember<ItemRestriction[]>("restrictions");
@@ -7008,7 +7008,7 @@ namespace GW2SDK.Items
             var description = new OptionalMember<string>("description");
             var level = new RequiredMember<int>("level");
             var rarity = new RequiredMember<Rarity>("rarity");
-            var vendorValue = new RequiredMember<int>("vendor_value");
+            var vendorValue = new RequiredMember<Coin>("vendor_value");
             var gameTypes = new RequiredMember<GameType[]>("game_types");
             var flags = new RequiredMember<ItemFlag[]>("flags");
             var restrictions = new RequiredMember<ItemRestriction[]>("restrictions");
@@ -7113,7 +7113,7 @@ namespace GW2SDK.Items
             var description = new OptionalMember<string>("description");
             var level = new RequiredMember<int>("level");
             var rarity = new RequiredMember<Rarity>("rarity");
-            var vendorValue = new RequiredMember<int>("vendor_value");
+            var vendorValue = new RequiredMember<Coin>("vendor_value");
             var gameTypes = new RequiredMember<GameType[]>("game_types");
             var flags = new RequiredMember<ItemFlag[]>("flags");
             var restrictions = new RequiredMember<ItemRestriction[]>("restrictions");
@@ -7201,7 +7201,7 @@ namespace GW2SDK.Items
             var description = new OptionalMember<string>("description");
             var level = new RequiredMember<int>("level");
             var rarity = new RequiredMember<Rarity>("rarity");
-            var vendorValue = new RequiredMember<int>("vendor_value");
+            var vendorValue = new RequiredMember<Coin>("vendor_value");
             var gameTypes = new RequiredMember<GameType[]>("game_types");
             var flags = new RequiredMember<ItemFlag[]>("flags");
             var restrictions = new RequiredMember<ItemRestriction[]>("restrictions");
@@ -7311,7 +7311,7 @@ namespace GW2SDK.Items
             var description = new OptionalMember<string>("description");
             var level = new RequiredMember<int>("level");
             var rarity = new RequiredMember<Rarity>("rarity");
-            var vendorValue = new RequiredMember<int>("vendor_value");
+            var vendorValue = new RequiredMember<Coin>("vendor_value");
             var gameTypes = new RequiredMember<GameType[]>("game_types");
             var flags = new RequiredMember<ItemFlag[]>("flags");
             var restrictions = new RequiredMember<ItemRestriction[]>("restrictions");
@@ -7409,7 +7409,7 @@ namespace GW2SDK.Items
             var description = new OptionalMember<string>("description");
             var level = new RequiredMember<int>("level");
             var rarity = new RequiredMember<Rarity>("rarity");
-            var vendorValue = new RequiredMember<int>("vendor_value");
+            var vendorValue = new RequiredMember<Coin>("vendor_value");
             var gameTypes = new RequiredMember<GameType[]>("game_types");
             var flags = new RequiredMember<ItemFlag[]>("flags");
             var restrictions = new RequiredMember<ItemRestriction[]>("restrictions");
@@ -7530,7 +7530,7 @@ namespace GW2SDK.Items
             var description = new OptionalMember<string>("description");
             var level = new RequiredMember<int>("level");
             var rarity = new RequiredMember<Rarity>("rarity");
-            var vendorValue = new RequiredMember<int>("vendor_value");
+            var vendorValue = new RequiredMember<Coin>("vendor_value");
             var gameTypes = new RequiredMember<GameType[]>("game_types");
             var flags = new RequiredMember<ItemFlag[]>("flags");
             var restrictions = new RequiredMember<ItemRestriction[]>("restrictions");
@@ -7677,7 +7677,7 @@ namespace GW2SDK.Items
             var description = new OptionalMember<string>("description");
             var level = new RequiredMember<int>("level");
             var rarity = new RequiredMember<Rarity>("rarity");
-            var vendorValue = new RequiredMember<int>("vendor_value");
+            var vendorValue = new RequiredMember<Coin>("vendor_value");
             var gameTypes = new RequiredMember<GameType[]>("game_types");
             var flags = new RequiredMember<ItemFlag[]>("flags");
             var restrictions = new RequiredMember<ItemRestriction[]>("restrictions");
@@ -7824,7 +7824,7 @@ namespace GW2SDK.Items
             var description = new OptionalMember<string>("description");
             var level = new RequiredMember<int>("level");
             var rarity = new RequiredMember<Rarity>("rarity");
-            var vendorValue = new RequiredMember<int>("vendor_value");
+            var vendorValue = new RequiredMember<Coin>("vendor_value");
             var gameTypes = new RequiredMember<GameType[]>("game_types");
             var flags = new RequiredMember<ItemFlag[]>("flags");
             var restrictions = new RequiredMember<ItemRestriction[]>("restrictions");
@@ -7971,7 +7971,7 @@ namespace GW2SDK.Items
             var description = new OptionalMember<string>("description");
             var level = new RequiredMember<int>("level");
             var rarity = new RequiredMember<Rarity>("rarity");
-            var vendorValue = new RequiredMember<int>("vendor_value");
+            var vendorValue = new RequiredMember<Coin>("vendor_value");
             var gameTypes = new RequiredMember<GameType[]>("game_types");
             var flags = new RequiredMember<ItemFlag[]>("flags");
             var restrictions = new RequiredMember<ItemRestriction[]>("restrictions");
@@ -8118,7 +8118,7 @@ namespace GW2SDK.Items
             var description = new OptionalMember<string>("description");
             var level = new RequiredMember<int>("level");
             var rarity = new RequiredMember<Rarity>("rarity");
-            var vendorValue = new RequiredMember<int>("vendor_value");
+            var vendorValue = new RequiredMember<Coin>("vendor_value");
             var gameTypes = new RequiredMember<GameType[]>("game_types");
             var flags = new RequiredMember<ItemFlag[]>("flags");
             var restrictions = new RequiredMember<ItemRestriction[]>("restrictions");
@@ -8221,7 +8221,7 @@ namespace GW2SDK.Items
             var description = new OptionalMember<string>("description");
             var level = new RequiredMember<int>("level");
             var rarity = new RequiredMember<Rarity>("rarity");
-            var vendorValue = new RequiredMember<int>("vendor_value");
+            var vendorValue = new RequiredMember<Coin>("vendor_value");
             var gameTypes = new RequiredMember<GameType[]>("game_types");
             var flags = new RequiredMember<ItemFlag[]>("flags");
             var restrictions = new RequiredMember<ItemRestriction[]>("restrictions");
@@ -8359,7 +8359,7 @@ namespace GW2SDK.Items
             var description = new OptionalMember<string>("description");
             var level = new RequiredMember<int>("level");
             var rarity = new RequiredMember<Rarity>("rarity");
-            var vendorValue = new RequiredMember<int>("vendor_value");
+            var vendorValue = new RequiredMember<Coin>("vendor_value");
             var gameTypes = new RequiredMember<GameType[]>("game_types");
             var flags = new RequiredMember<ItemFlag[]>("flags");
             var restrictions = new RequiredMember<ItemRestriction[]>("restrictions");
@@ -8500,7 +8500,7 @@ namespace GW2SDK.Items
             var description = new OptionalMember<string>("description");
             var level = new RequiredMember<int>("level");
             var rarity = new RequiredMember<Rarity>("rarity");
-            var vendorValue = new RequiredMember<int>("vendor_value");
+            var vendorValue = new RequiredMember<Coin>("vendor_value");
             var gameTypes = new RequiredMember<GameType[]>("game_types");
             var flags = new RequiredMember<ItemFlag[]>("flags");
             var restrictions = new RequiredMember<ItemRestriction[]>("restrictions");
@@ -8636,7 +8636,7 @@ namespace GW2SDK.Items
             var description = new OptionalMember<string>("description");
             var level = new RequiredMember<int>("level");
             var rarity = new RequiredMember<Rarity>("rarity");
-            var vendorValue = new RequiredMember<int>("vendor_value");
+            var vendorValue = new RequiredMember<Coin>("vendor_value");
             var gameTypes = new RequiredMember<GameType[]>("game_types");
             var flags = new RequiredMember<ItemFlag[]>("flags");
             var restrictions = new RequiredMember<ItemRestriction[]>("restrictions");
@@ -8780,7 +8780,7 @@ namespace GW2SDK.Items
             var description = new OptionalMember<string>("description");
             var level = new RequiredMember<int>("level");
             var rarity = new RequiredMember<Rarity>("rarity");
-            var vendorValue = new RequiredMember<int>("vendor_value");
+            var vendorValue = new RequiredMember<Coin>("vendor_value");
             var gameTypes = new RequiredMember<GameType[]>("game_types");
             var flags = new RequiredMember<ItemFlag[]>("flags");
             var restrictions = new RequiredMember<ItemRestriction[]>("restrictions");
@@ -8968,7 +8968,7 @@ namespace GW2SDK.Items
             var description = new OptionalMember<string>("description");
             var level = new RequiredMember<int>("level");
             var rarity = new RequiredMember<Rarity>("rarity");
-            var vendorValue = new RequiredMember<int>("vendor_value");
+            var vendorValue = new RequiredMember<Coin>("vendor_value");
             var defaultSkin = new RequiredMember<int>("default_skin");
             var gameTypes = new RequiredMember<GameType[]>("game_types");
             var flags = new RequiredMember<ItemFlag[]>("flags");
@@ -9139,7 +9139,7 @@ namespace GW2SDK.Items
             var description = new OptionalMember<string>("description");
             var level = new RequiredMember<int>("level");
             var rarity = new RequiredMember<Rarity>("rarity");
-            var vendorValue = new RequiredMember<int>("vendor_value");
+            var vendorValue = new RequiredMember<Coin>("vendor_value");
             var defaultSkin = new RequiredMember<int>("default_skin");
             var gameTypes = new RequiredMember<GameType[]>("game_types");
             var flags = new RequiredMember<ItemFlag[]>("flags");
@@ -9310,7 +9310,7 @@ namespace GW2SDK.Items
             var description = new OptionalMember<string>("description");
             var level = new RequiredMember<int>("level");
             var rarity = new RequiredMember<Rarity>("rarity");
-            var vendorValue = new RequiredMember<int>("vendor_value");
+            var vendorValue = new RequiredMember<Coin>("vendor_value");
             var defaultSkin = new RequiredMember<int>("default_skin");
             var gameTypes = new RequiredMember<GameType[]>("game_types");
             var flags = new RequiredMember<ItemFlag[]>("flags");
@@ -9481,7 +9481,7 @@ namespace GW2SDK.Items
             var description = new OptionalMember<string>("description");
             var level = new RequiredMember<int>("level");
             var rarity = new RequiredMember<Rarity>("rarity");
-            var vendorValue = new RequiredMember<int>("vendor_value");
+            var vendorValue = new RequiredMember<Coin>("vendor_value");
             var defaultSkin = new RequiredMember<int>("default_skin");
             var gameTypes = new RequiredMember<GameType[]>("game_types");
             var flags = new RequiredMember<ItemFlag[]>("flags");
@@ -9652,7 +9652,7 @@ namespace GW2SDK.Items
             var description = new OptionalMember<string>("description");
             var level = new RequiredMember<int>("level");
             var rarity = new RequiredMember<Rarity>("rarity");
-            var vendorValue = new RequiredMember<int>("vendor_value");
+            var vendorValue = new RequiredMember<Coin>("vendor_value");
             var defaultSkin = new RequiredMember<int>("default_skin");
             var gameTypes = new RequiredMember<GameType[]>("game_types");
             var flags = new RequiredMember<ItemFlag[]>("flags");
@@ -9823,7 +9823,7 @@ namespace GW2SDK.Items
             var description = new OptionalMember<string>("description");
             var level = new RequiredMember<int>("level");
             var rarity = new RequiredMember<Rarity>("rarity");
-            var vendorValue = new RequiredMember<int>("vendor_value");
+            var vendorValue = new RequiredMember<Coin>("vendor_value");
             var defaultSkin = new RequiredMember<int>("default_skin");
             var gameTypes = new RequiredMember<GameType[]>("game_types");
             var flags = new RequiredMember<ItemFlag[]>("flags");
@@ -9994,7 +9994,7 @@ namespace GW2SDK.Items
             var description = new OptionalMember<string>("description");
             var level = new RequiredMember<int>("level");
             var rarity = new RequiredMember<Rarity>("rarity");
-            var vendorValue = new RequiredMember<int>("vendor_value");
+            var vendorValue = new RequiredMember<Coin>("vendor_value");
             var defaultSkin = new RequiredMember<int>("default_skin");
             var gameTypes = new RequiredMember<GameType[]>("game_types");
             var flags = new RequiredMember<ItemFlag[]>("flags");
@@ -10165,7 +10165,7 @@ namespace GW2SDK.Items
             var description = new OptionalMember<string>("description");
             var level = new RequiredMember<int>("level");
             var rarity = new RequiredMember<Rarity>("rarity");
-            var vendorValue = new RequiredMember<int>("vendor_value");
+            var vendorValue = new RequiredMember<Coin>("vendor_value");
             var defaultSkin = new RequiredMember<int>("default_skin");
             var gameTypes = new RequiredMember<GameType[]>("game_types");
             var flags = new RequiredMember<ItemFlag[]>("flags");
@@ -10336,7 +10336,7 @@ namespace GW2SDK.Items
             var description = new OptionalMember<string>("description");
             var level = new RequiredMember<int>("level");
             var rarity = new RequiredMember<Rarity>("rarity");
-            var vendorValue = new RequiredMember<int>("vendor_value");
+            var vendorValue = new RequiredMember<Coin>("vendor_value");
             var defaultSkin = new RequiredMember<int>("default_skin");
             var gameTypes = new RequiredMember<GameType[]>("game_types");
             var flags = new RequiredMember<ItemFlag[]>("flags");
@@ -10507,7 +10507,7 @@ namespace GW2SDK.Items
             var description = new OptionalMember<string>("description");
             var level = new RequiredMember<int>("level");
             var rarity = new RequiredMember<Rarity>("rarity");
-            var vendorValue = new RequiredMember<int>("vendor_value");
+            var vendorValue = new RequiredMember<Coin>("vendor_value");
             var defaultSkin = new RequiredMember<int>("default_skin");
             var gameTypes = new RequiredMember<GameType[]>("game_types");
             var flags = new RequiredMember<ItemFlag[]>("flags");
@@ -10678,7 +10678,7 @@ namespace GW2SDK.Items
             var description = new OptionalMember<string>("description");
             var level = new RequiredMember<int>("level");
             var rarity = new RequiredMember<Rarity>("rarity");
-            var vendorValue = new RequiredMember<int>("vendor_value");
+            var vendorValue = new RequiredMember<Coin>("vendor_value");
             var defaultSkin = new RequiredMember<int>("default_skin");
             var gameTypes = new RequiredMember<GameType[]>("game_types");
             var flags = new RequiredMember<ItemFlag[]>("flags");
@@ -10849,7 +10849,7 @@ namespace GW2SDK.Items
             var description = new OptionalMember<string>("description");
             var level = new RequiredMember<int>("level");
             var rarity = new RequiredMember<Rarity>("rarity");
-            var vendorValue = new RequiredMember<int>("vendor_value");
+            var vendorValue = new RequiredMember<Coin>("vendor_value");
             var defaultSkin = new RequiredMember<int>("default_skin");
             var gameTypes = new RequiredMember<GameType[]>("game_types");
             var flags = new RequiredMember<ItemFlag[]>("flags");
@@ -11020,7 +11020,7 @@ namespace GW2SDK.Items
             var description = new OptionalMember<string>("description");
             var level = new RequiredMember<int>("level");
             var rarity = new RequiredMember<Rarity>("rarity");
-            var vendorValue = new RequiredMember<int>("vendor_value");
+            var vendorValue = new RequiredMember<Coin>("vendor_value");
             var defaultSkin = new RequiredMember<int>("default_skin");
             var gameTypes = new RequiredMember<GameType[]>("game_types");
             var flags = new RequiredMember<ItemFlag[]>("flags");
@@ -11191,7 +11191,7 @@ namespace GW2SDK.Items
             var description = new OptionalMember<string>("description");
             var level = new RequiredMember<int>("level");
             var rarity = new RequiredMember<Rarity>("rarity");
-            var vendorValue = new RequiredMember<int>("vendor_value");
+            var vendorValue = new RequiredMember<Coin>("vendor_value");
             var defaultSkin = new RequiredMember<int>("default_skin");
             var gameTypes = new RequiredMember<GameType[]>("game_types");
             var flags = new RequiredMember<ItemFlag[]>("flags");
@@ -11362,7 +11362,7 @@ namespace GW2SDK.Items
             var description = new OptionalMember<string>("description");
             var level = new RequiredMember<int>("level");
             var rarity = new RequiredMember<Rarity>("rarity");
-            var vendorValue = new RequiredMember<int>("vendor_value");
+            var vendorValue = new RequiredMember<Coin>("vendor_value");
             var defaultSkin = new RequiredMember<int>("default_skin");
             var gameTypes = new RequiredMember<GameType[]>("game_types");
             var flags = new RequiredMember<ItemFlag[]>("flags");
@@ -11533,7 +11533,7 @@ namespace GW2SDK.Items
             var description = new OptionalMember<string>("description");
             var level = new RequiredMember<int>("level");
             var rarity = new RequiredMember<Rarity>("rarity");
-            var vendorValue = new RequiredMember<int>("vendor_value");
+            var vendorValue = new RequiredMember<Coin>("vendor_value");
             var defaultSkin = new RequiredMember<int>("default_skin");
             var gameTypes = new RequiredMember<GameType[]>("game_types");
             var flags = new RequiredMember<ItemFlag[]>("flags");
@@ -11704,7 +11704,7 @@ namespace GW2SDK.Items
             var description = new OptionalMember<string>("description");
             var level = new RequiredMember<int>("level");
             var rarity = new RequiredMember<Rarity>("rarity");
-            var vendorValue = new RequiredMember<int>("vendor_value");
+            var vendorValue = new RequiredMember<Coin>("vendor_value");
             var defaultSkin = new RequiredMember<int>("default_skin");
             var gameTypes = new RequiredMember<GameType[]>("game_types");
             var flags = new RequiredMember<ItemFlag[]>("flags");
@@ -11875,7 +11875,7 @@ namespace GW2SDK.Items
             var description = new OptionalMember<string>("description");
             var level = new RequiredMember<int>("level");
             var rarity = new RequiredMember<Rarity>("rarity");
-            var vendorValue = new RequiredMember<int>("vendor_value");
+            var vendorValue = new RequiredMember<Coin>("vendor_value");
             var defaultSkin = new RequiredMember<int>("default_skin");
             var gameTypes = new RequiredMember<GameType[]>("game_types");
             var flags = new RequiredMember<ItemFlag[]>("flags");
@@ -12046,7 +12046,7 @@ namespace GW2SDK.Items
             var description = new OptionalMember<string>("description");
             var level = new RequiredMember<int>("level");
             var rarity = new RequiredMember<Rarity>("rarity");
-            var vendorValue = new RequiredMember<int>("vendor_value");
+            var vendorValue = new RequiredMember<Coin>("vendor_value");
             var defaultSkin = new RequiredMember<int>("default_skin");
             var gameTypes = new RequiredMember<GameType[]>("game_types");
             var flags = new RequiredMember<ItemFlag[]>("flags");
@@ -12217,7 +12217,7 @@ namespace GW2SDK.Items
             var description = new OptionalMember<string>("description");
             var level = new RequiredMember<int>("level");
             var rarity = new RequiredMember<Rarity>("rarity");
-            var vendorValue = new RequiredMember<int>("vendor_value");
+            var vendorValue = new RequiredMember<Coin>("vendor_value");
             var defaultSkin = new RequiredMember<int>("default_skin");
             var gameTypes = new RequiredMember<GameType[]>("game_types");
             var flags = new RequiredMember<ItemFlag[]>("flags");
@@ -12388,7 +12388,7 @@ namespace GW2SDK.Items
             var description = new OptionalMember<string>("description");
             var level = new RequiredMember<int>("level");
             var rarity = new RequiredMember<Rarity>("rarity");
-            var vendorValue = new RequiredMember<int>("vendor_value");
+            var vendorValue = new RequiredMember<Coin>("vendor_value");
             var defaultSkin = new RequiredMember<int>("default_skin");
             var gameTypes = new RequiredMember<GameType[]>("game_types");
             var flags = new RequiredMember<ItemFlag[]>("flags");
@@ -12559,7 +12559,7 @@ namespace GW2SDK.Items
             var description = new OptionalMember<string>("description");
             var level = new RequiredMember<int>("level");
             var rarity = new RequiredMember<Rarity>("rarity");
-            var vendorValue = new RequiredMember<int>("vendor_value");
+            var vendorValue = new RequiredMember<Coin>("vendor_value");
             var defaultSkin = new RequiredMember<int>("default_skin");
             var gameTypes = new RequiredMember<GameType[]>("game_types");
             var flags = new RequiredMember<ItemFlag[]>("flags");
@@ -12730,7 +12730,7 @@ namespace GW2SDK.Items
             var description = new OptionalMember<string>("description");
             var level = new RequiredMember<int>("level");
             var rarity = new RequiredMember<Rarity>("rarity");
-            var vendorValue = new RequiredMember<int>("vendor_value");
+            var vendorValue = new RequiredMember<Coin>("vendor_value");
             var defaultSkin = new RequiredMember<int>("default_skin");
             var gameTypes = new RequiredMember<GameType[]>("game_types");
             var flags = new RequiredMember<ItemFlag[]>("flags");
@@ -12901,7 +12901,7 @@ namespace GW2SDK.Items
             var description = new OptionalMember<string>("description");
             var level = new RequiredMember<int>("level");
             var rarity = new RequiredMember<Rarity>("rarity");
-            var vendorValue = new RequiredMember<int>("vendor_value");
+            var vendorValue = new RequiredMember<Coin>("vendor_value");
             var defaultSkin = new RequiredMember<int>("default_skin");
             var gameTypes = new RequiredMember<GameType[]>("game_types");
             var flags = new RequiredMember<ItemFlag[]>("flags");

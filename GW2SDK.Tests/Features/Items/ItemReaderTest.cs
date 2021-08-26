@@ -19,7 +19,7 @@ namespace GW2SDK.Tests.Features.Items
         {
             public static void Id_is_positive(Item actual) => Assert.InRange(actual.Id, 1, int.MaxValue);
 
-            public static void Vendor_value_cannot_be_negative(Item actual) => Assert.InRange(actual.VendorValue, 0, int.MaxValue);
+            public static void Vendor_value_cannot_be_negative(Item actual) => Assert.InRange(actual.VendorValue.Amount, 0, int.MaxValue);
 
             public static void Level_is_between_0_and_80(Item actual) => Assert.InRange(actual.Level, 0, 80);
 

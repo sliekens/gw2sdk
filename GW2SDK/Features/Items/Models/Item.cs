@@ -18,7 +18,7 @@ namespace GW2SDK.Items
         
         public Rarity Rarity { get; init; }
         
-        public int VendorValue { get; init; }
+        public Coin VendorValue { get; init; }
         
         /// <remarks>Can be empty.</remarks>
         public GameType[] GameTypes { get; init; } = new GameType[0];
