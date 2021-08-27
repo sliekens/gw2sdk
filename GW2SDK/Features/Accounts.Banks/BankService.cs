@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
 using GW2SDK.Accounts.Banks.Http;
@@ -12,25 +13,60 @@ namespace GW2SDK.Accounts.Banks
     [PublicAPI]
     public sealed class BankService
     {
-        private readonly IBankReader _bankReader;
-        private readonly HttpClient _http;
-        private readonly MissingMemberBehavior _missingMemberBehavior;
+        private readonly IBankReader bankReader;
 
-        public BankService(HttpClient http, IBankReader bankReader,
+        private readonly HttpClient http;
+
+        private readonly MissingMemberBehavior missingMemberBehavior;
+
+        public BankService(
+            HttpClient http,
+            IBankReader bankReader,
             MissingMemberBehavior missingMemberBehavior
         )
         {
-            _http = http ?? throw new ArgumentNullException(nameof(http));
-            _bankReader = bankReader ?? throw new ArgumentNullException(nameof(bankReader));
-            _missingMemberBehavior = missingMemberBehavior;
+            this.http = http ?? throw new ArgumentNullException(nameof(http));
+            this.bankReader = bankReader ?? throw new ArgumentNullException(nameof(bankReader));
+            this.missingMemberBehavior = missingMemberBehavior;
         }
 
         [Scope(Permission.Inventories)]
-        public async Task<IReplica<Bank>> GetBank(string? accessToken = null)
+        public async Task<IReplica<AccountBank>> GetBank(string? accessToken = null)
         {
             var request = new BankRequest(accessToken);
-            return await _http.GetResource(request, json => _bankReader.Read(json, _missingMemberBehavior))
+            return await http.GetResource(request, json => bankReader.AccountBank.Read(json, missingMemberBehavior))
                 .ConfigureAwait(false);
+        }
+
+        public async Task<IReplicaSet<MaterialCategory>> GetMaterialCategories(Language? language = default)
+        {
+            var request = new MaterialCategoriesRequest(language);
+            return await http.GetResourcesSet(request, json => bankReader.MaterialCategory.ReadArray(json, missingMemberBehavior))
+                .ConfigureAwait(false);
+        }
+
+        public async Task<IReplicaSet<int>> GetMaterialCategoriesIndex()
+        {
+            var request = new MaterialCategoriesIndexRequest();
+            return await http.GetResourcesSet(request, json => bankReader.MaterialCategoryId.ReadArray(json, missingMemberBehavior))
+                .ConfigureAwait(false);
+        }
+
+        public async Task<IReplica<MaterialCategory>> GetMaterialCategoryById(int materialCategoryId, Language? language = default)
+        {
+            var request = new MaterialCategoryByIdRequest(materialCategoryId, language);
+            return await http.GetResource(request, json => bankReader.MaterialCategory.Read(json, missingMemberBehavior))
+                .ConfigureAwait(false);
+        }
+
+        public async Task<IReplicaSet<MaterialCategory>> GetMaterialCategoriesByIds(
+            IReadOnlyCollection<int> materialCategoryIds,
+            Language? language = default
+        )
+        {
+            var request = new MaterialCategoriesByIdsRequest(materialCategoryIds, language);
+            return await http.GetResourcesSet(request,
+                json => bankReader.MaterialCategory.ReadArray(json, missingMemberBehavior));
         }
     }
 }

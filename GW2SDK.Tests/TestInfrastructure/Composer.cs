@@ -16,9 +16,6 @@ using GW2SDK.Builds;
 using GW2SDK.Characters;
 using GW2SDK.Colors;
 using GW2SDK.Commerce;
-using GW2SDK.Commerce.Exchange;
-using GW2SDK.Commerce.Listings;
-using GW2SDK.Commerce.Prices;
 using GW2SDK.Continents;
 using GW2SDK.Currencies;
 using GW2SDK.Items;
@@ -43,17 +40,24 @@ namespace GW2SDK.Tests.TestInfrastructure
 {
     public class Composer : IServiceProvider, IAsyncDisposable
     {
+        private readonly ConfigurationManager configuration = new();
+
         private readonly CompositeDisposable disposables = new();
 
         private readonly IHttpClientFactory httpClientFactory;
-
-        private readonly ConfigurationManager configuration = new ConfigurationManager();
 
         public Composer()
         {
             var gw2HttpClientFactory = new TestHttpClientFactory();
             disposables.Add(gw2HttpClientFactory);
             httpClientFactory = gw2HttpClientFactory;
+        }
+
+        public async ValueTask DisposeAsync()
+        {
+            await disposables.DisposeAsync()
+                .ConfigureAwait(false);
+            GC.SuppressFinalize(this);
         }
 
         public object GetService(Type serviceType)
@@ -80,7 +84,9 @@ namespace GW2SDK.Tests.TestInfrastructure
 
             if (serviceType == typeof(AccountAchievementService))
             {
-                return new AccountAchievementService(Resolve<HttpClient>(), new AccountAchievementReader(), MissingMemberBehavior.Error);
+                return new AccountAchievementService(Resolve<HttpClient>(),
+                    new AccountAchievementReader(),
+                    MissingMemberBehavior.Error);
             }
 
             if (serviceType == typeof(BankService))
@@ -90,7 +96,9 @@ namespace GW2SDK.Tests.TestInfrastructure
 
             if (serviceType == typeof(AccountRecipesService))
             {
-                return new AccountRecipesService(Resolve<HttpClient>(), new AccountRecipeReader(), MissingMemberBehavior.Error);
+                return new AccountRecipesService(Resolve<HttpClient>(),
+                    new AccountRecipeReader(),
+                    MissingMemberBehavior.Error);
             }
 
             if (serviceType == typeof(AccountService))
@@ -100,22 +108,30 @@ namespace GW2SDK.Tests.TestInfrastructure
 
             if (serviceType == typeof(AchievementCategoryService))
             {
-                return new AchievementCategoryService(Resolve<HttpClient>(), new AchievementCategoryReader(), MissingMemberBehavior.Error);
+                return new AchievementCategoryService(Resolve<HttpClient>(),
+                    new AchievementCategoryReader(),
+                    MissingMemberBehavior.Error);
             }
 
             if (serviceType == typeof(DailyAchievementService))
             {
-                return new DailyAchievementService(Resolve<HttpClient>(), new DailyAchievementReader(), MissingMemberBehavior.Error);
+                return new DailyAchievementService(Resolve<HttpClient>(),
+                    new DailyAchievementReader(),
+                    MissingMemberBehavior.Error);
             }
 
             if (serviceType == typeof(AchievementGroupService))
             {
-                return new AchievementGroupService(Resolve<HttpClient>(), new AchievementGroupReader(), MissingMemberBehavior.Error);
+                return new AchievementGroupService(Resolve<HttpClient>(),
+                    new AchievementGroupReader(),
+                    MissingMemberBehavior.Error);
             }
 
             if (serviceType == typeof(AchievementService))
             {
-                return new AchievementService(Resolve<HttpClient>(), new AchievementReader(), MissingMemberBehavior.Error);
+                return new AchievementService(Resolve<HttpClient>(),
+                    new AchievementReader(),
+                    MissingMemberBehavior.Error);
             }
 
             if (serviceType == typeof(BackstoryService))
@@ -160,7 +176,9 @@ namespace GW2SDK.Tests.TestInfrastructure
 
             if (serviceType == typeof(MailCarrierService))
             {
-                return new MailCarrierService(Resolve<HttpClient>(), new MailCarrierReader(), MissingMemberBehavior.Error);
+                return new MailCarrierService(Resolve<HttpClient>(),
+                    new MailCarrierReader(),
+                    MissingMemberBehavior.Error);
             }
 
             if (serviceType == typeof(RecipeService))
@@ -205,7 +223,9 @@ namespace GW2SDK.Tests.TestInfrastructure
 
             if (serviceType == typeof(ProfessionService))
             {
-                return new ProfessionService(Resolve<HttpClient>(), new ProfessionReader(), MissingMemberBehavior.Error);
+                return new ProfessionService(Resolve<HttpClient>(),
+                    new ProfessionReader(),
+                    MissingMemberBehavior.Error);
             }
 
             if (serviceType == typeof(ItemStatService))
@@ -215,7 +235,9 @@ namespace GW2SDK.Tests.TestInfrastructure
 
             if (serviceType == typeof(DailyCraftingService))
             {
-                return new DailyCraftingService(Resolve<HttpClient>(), new DailyCraftingReader(), MissingMemberBehavior.Error);
+                return new DailyCraftingService(Resolve<HttpClient>(),
+                    new DailyCraftingReader(),
+                    MissingMemberBehavior.Error);
             }
 
             if (serviceType == typeof(SkillService))
@@ -235,7 +257,9 @@ namespace GW2SDK.Tests.TestInfrastructure
 
             if (serviceType == typeof(SpecializationService))
             {
-                return new SpecializationService(Resolve<HttpClient>(), new SpecializationReader(), MissingMemberBehavior.Error);
+                return new SpecializationService(Resolve<HttpClient>(),
+                    new SpecializationReader(),
+                    MissingMemberBehavior.Error);
             }
 
             if (serviceType == typeof(MountService))
@@ -248,11 +272,5 @@ namespace GW2SDK.Tests.TestInfrastructure
 
         public T Resolve<T>() =>
             (T) GetService(typeof(T)) ?? throw new InvalidOperationException($"Unable to compose type '{typeof(T)}'");
-
-        public async ValueTask DisposeAsync()
-        {
-            await disposables.DisposeAsync().ConfigureAwait(false);
-            GC.SuppressFinalize(this);
-        }
     }
 }
