@@ -1,4 +1,7 @@
-﻿namespace GW2SDK
+﻿using JetBrains.Annotations;
+
+namespace GW2SDK
 {
-    internal sealed record CollectionContext(int ResultTotal, int ResultCount) : ICollectionContext;
+    [PublicAPI]
+    public sealed record CollectionContext(int ResultTotal, int ResultCount) : ICollectionContext;
 }

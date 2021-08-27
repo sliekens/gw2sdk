@@ -1,6 +1,9 @@
-﻿namespace GW2SDK
+﻿using JetBrains.Annotations;
+
+namespace GW2SDK
 {
-    internal sealed record PageContext(
+    [PublicAPI]
+    public sealed record PageContext(
         int ResultTotal,
         int ResultCount,
         int PageTotal,
