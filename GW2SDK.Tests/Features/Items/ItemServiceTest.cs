@@ -33,7 +33,10 @@ namespace GW2SDK.Tests.Features.Items
 
             var actual = await sut.GetItemById(itemId);
 
-            Assert.Equal(itemId, actual.Value.Id);
+            if (actual.HasValue)
+            {
+                Assert.Equal(itemId, actual.Value.Id);
+            }
         }
 
         [Fact]
