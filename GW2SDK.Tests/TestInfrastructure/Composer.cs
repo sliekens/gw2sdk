@@ -25,6 +25,7 @@ using GW2SDK.MailCarriers;
 using GW2SDK.Masteries;
 using GW2SDK.Mounts;
 using GW2SDK.Professions;
+using GW2SDK.Quaggans;
 using GW2SDK.Recipes;
 using GW2SDK.Skills;
 using GW2SDK.Skins;
@@ -265,6 +266,11 @@ namespace GW2SDK.Tests.TestInfrastructure
             if (serviceType == typeof(MountService))
             {
                 return new MountService(Resolve<HttpClient>(), new MountReader(), MissingMemberBehavior.Error);
+            }
+
+            if (serviceType == typeof(QuagganService))
+            {
+                return new QuagganService(Resolve<HttpClient>(), new QuagganReader(), MissingMemberBehavior.Error);
             }
 
             return null;
