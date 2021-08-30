@@ -53,8 +53,6 @@ namespace GW2SDK.Tests.Features.Accounts
         }
 
         [Fact]
-        [Trait("Feature",  "Accounts")]
-        [Trait("Category", "Integration")]
         public async Task It_can_get_basic_account_info_with_any_access_token()
         {
             await using var services = new Composer();
@@ -75,8 +73,6 @@ namespace GW2SDK.Tests.Features.Accounts
         }
 
         [Fact]
-        [Trait("Feature",  "Accounts")]
-        [Trait("Category", "Integration")]
         public async Task It_can_get_full_details_when_authorized_by_scopes()
         {
             await using var services = new Composer();

@@ -14,8 +14,6 @@ namespace GW2SDK.Tests.Features.Achievements.Groups
         }
 
         [Fact]
-        [Trait("Feature",  "Achievements.Groups")]
-        [Trait("Category", "Integration")]
         public async Task It_can_get_all_achievement_groups()
         {
             await using var services = new Composer();
@@ -32,8 +30,6 @@ namespace GW2SDK.Tests.Features.Achievements.Groups
         }
 
         [Fact]
-        [Trait("Feature",  "Achievements.Groups")]
-        [Trait("Category", "Integration")]
         public async Task It_can_get_all_achievement_group_ids()
         {
             await using var services = new Composer();
@@ -45,8 +41,6 @@ namespace GW2SDK.Tests.Features.Achievements.Groups
         }
 
         [Fact]
-        [Trait("Feature",  "Achievements.Groups")]
-        [Trait("Category", "Integration")]
         public async Task It_can_get_an_achievement_group_by_id()
         {
             await using var services = new Composer();
@@ -60,8 +54,6 @@ namespace GW2SDK.Tests.Features.Achievements.Groups
         }
 
         [Fact]
-        [Trait("Feature",  "Achievements.Groups")]
-        [Trait("Category", "Unit")]
         public async Task Achievement_group_ids_cannot_be_null()
         {
             await using var services = new Composer();
@@ -75,8 +67,6 @@ namespace GW2SDK.Tests.Features.Achievements.Groups
         }
 
         [Fact]
-        [Trait("Feature",  "Achievements.Groups")]
-        [Trait("Category", "Unit")]
         public async Task Achievement_group_ids_cannot_contain_null()
         {
             await using var services = new Composer();
@@ -92,8 +82,6 @@ namespace GW2SDK.Tests.Features.Achievements.Groups
         }
 
         [Fact]
-        [Trait("Feature",  "Achievements.Groups")]
-        [Trait("Category", "Unit")]
         public async Task Achievement_group_ids_cannot_be_empty()
         {
             await using var services = new Composer();
@@ -107,8 +95,6 @@ namespace GW2SDK.Tests.Features.Achievements.Groups
         }
 
         [Fact]
-        [Trait("Feature",  "Achievements.Groups")]
-        [Trait("Category", "Unit")]
         public async Task Achievement_group_ids_cannot_contain_empty_id()
         {
             await using var services = new Composer();
@@ -124,8 +110,6 @@ namespace GW2SDK.Tests.Features.Achievements.Groups
         }
 
         [Fact]
-        [Trait("Feature",  "Achievements.Groups")]
-        [Trait("Category", "Integration")]
         public async Task It_can_get_achievement_groups_by_id()
         {
             await using var services = new Composer();
@@ -142,8 +126,6 @@ namespace GW2SDK.Tests.Features.Achievements.Groups
         }
 
         [Fact]
-        [Trait("Feature",  "Achievements.Groups")]
-        [Trait("Category", "Integration")]
         public async Task It_can_get_achievement_groups_by_page()
         {
             await using var services = new Composer();

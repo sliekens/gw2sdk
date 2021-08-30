@@ -12,8 +12,6 @@ namespace GW2SDK.Tests.Features.Tokens
     public class TokenInfoServiceTest
     {
         [Fact]
-        [Trait("Feature",  "Tokens")]
-        [Trait("Category", "Integration")]
         public async Task It_can_get_the_token_info_for_an_api_key()
         {
             await using var services = new Composer();
@@ -38,8 +36,6 @@ namespace GW2SDK.Tests.Features.Tokens
         }
 
         [Fact]
-        [Trait("Feature",  "Tokens")]
-        [Trait("Category", "Integration")]
         public async Task It_can_get_the_token_info_for_a_subtoken()
         {
             await using var services = new Composer();

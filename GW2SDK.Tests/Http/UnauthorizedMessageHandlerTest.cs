@@ -9,7 +9,6 @@ namespace GW2SDK.Tests.Http
     public class UnauthorizedMessageHandlerTest
     {
         [Theory]
-        [Trait("Category", "Unit")]
         [InlineData(HttpStatusCode.OK)]
         [InlineData(HttpStatusCode.BadRequest)]
         [InlineData(HttpStatusCode.ServiceUnavailable)]
@@ -31,7 +30,6 @@ namespace GW2SDK.Tests.Http
         }
 
         [Theory]
-        [Trait("Category", "Unit")]
         [InlineData(HttpStatusCode.Unauthorized, "Invalid access token")]
         [InlineData(HttpStatusCode.Forbidden, "requires scope")]
         public async Task Handlers_throws_when_request_is_unauthorized(HttpStatusCode statusCode, string message)

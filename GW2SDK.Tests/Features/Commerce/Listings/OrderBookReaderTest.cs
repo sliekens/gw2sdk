@@ -22,7 +22,6 @@ namespace GW2SDK.Tests.Features.Commerce.Listings
 
         [Fact]
         [Trait("Feature", "Commerce.Listings")]
-        [Trait("Category", "Integration")]
         public void Order_book_can_be_created_from_json()
         {
             var sut = new OrderBookReader();

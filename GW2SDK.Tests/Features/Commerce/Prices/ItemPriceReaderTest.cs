@@ -30,7 +30,6 @@ namespace GW2SDK.Tests.Features.Commerce.Prices
 
         [Fact]
         [Trait("Feature", "Commerce.Prices")]
-        [Trait("Category", "Integration")]
         [Trait("Importance", "Critical")]
         public void Item_prices_can_be_created_from_json()
         {

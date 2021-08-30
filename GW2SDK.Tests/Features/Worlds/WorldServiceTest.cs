@@ -19,8 +19,6 @@ namespace GW2SDK.Tests.Features.Worlds
         }
 
         [Fact]
-        [Trait("Feature",  "Worlds")]
-        [Trait("Category", "Integration")]
         public async Task It_can_get_all_worlds()
         {
             await using var services = new Composer();
@@ -39,8 +37,6 @@ namespace GW2SDK.Tests.Features.Worlds
         }
 
         [Fact]
-        [Trait("Feature",  "Worlds")]
-        [Trait("Category", "Integration")]
         public async Task It_can_get_all_world_ids()
         {
             await using var services = new Composer();
@@ -52,8 +48,6 @@ namespace GW2SDK.Tests.Features.Worlds
         }
 
         [Fact]
-        [Trait("Feature",  "Worlds")]
-        [Trait("Category", "Integration")]
         public async Task It_can_get_a_world_by_id()
         {
             await using var services = new Composer();
@@ -67,8 +61,6 @@ namespace GW2SDK.Tests.Features.Worlds
         }
 
         [Fact]
-        [Trait("Feature",  "Worlds")]
-        [Trait("Category", "Integration")]
         public async Task It_can_get_worlds_by_id()
         {
             await using var services = new Composer();
@@ -82,8 +74,6 @@ namespace GW2SDK.Tests.Features.Worlds
         }
 
         [Fact]
-        [Trait("Feature",  "Worlds")]
-        [Trait("Category", "Unit")]
         public async Task World_ids_cannot_be_null()
         {
             await using var services = new Composer();
@@ -97,8 +87,6 @@ namespace GW2SDK.Tests.Features.Worlds
         }
 
         [Fact]
-        [Trait("Feature",  "Worlds")]
-        [Trait("Category", "Unit")]
         public async Task World_ids_cannot_be_empty()
         {
             await using var services = new Composer();
@@ -112,8 +100,6 @@ namespace GW2SDK.Tests.Features.Worlds
         }
 
         [Fact]
-        [Trait("Feature",  "Worlds")]
-        [Trait("Category", "Integration")]
         public async Task It_can_get_worlds_by_page()
         {
             await using var services = new Composer();

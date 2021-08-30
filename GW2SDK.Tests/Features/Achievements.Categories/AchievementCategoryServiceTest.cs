@@ -17,8 +17,6 @@ namespace GW2SDK.Tests.Features.Achievements.Categories
 
 
         [Fact]
-        [Trait("Feature",  "Achievements.Categories")]
-        [Trait("Category", "Integration")]
         public async Task It_can_get_all_achievement_categories()
         {
             await using var services = new Composer();
@@ -36,8 +34,6 @@ namespace GW2SDK.Tests.Features.Achievements.Categories
         }
 
         [Fact]
-        [Trait("Feature",  "Achievements.Categories")]
-        [Trait("Category", "Integration")]
         public async Task It_can_get_all_achievement_category_ids()
         {
             await using var services = new Composer();
@@ -49,8 +45,6 @@ namespace GW2SDK.Tests.Features.Achievements.Categories
         }
 
         [Fact]
-        [Trait("Feature",  "Achievements.Categories")]
-        [Trait("Category", "Integration")]
         public async Task It_can_get_an_achievement_category_by_id()
         {
             await using var services = new Composer();
@@ -64,8 +58,6 @@ namespace GW2SDK.Tests.Features.Achievements.Categories
         }
 
         [Fact]
-        [Trait("Feature",  "Achievements.Categories")]
-        [Trait("Category", "Integration")]
         public async Task It_can_get_achievement_categories_by_id()
         {
             await using var services = new Composer();
@@ -79,8 +71,6 @@ namespace GW2SDK.Tests.Features.Achievements.Categories
         }
 
         [Fact]
-        [Trait("Feature",  "Achievements.Categories")]
-        [Trait("Category", "Unit")]
         public async Task Achievement_category_ids_cannot_be_null()
         {
             await using var services = new Composer();
@@ -94,8 +84,6 @@ namespace GW2SDK.Tests.Features.Achievements.Categories
         }
 
         [Fact]
-        [Trait("Feature",  "Achievements.Categories")]
-        [Trait("Category", "Unit")]
         public async Task Achievement_category_ids_cannot_be_empty()
         {
             await using var services = new Composer();
@@ -109,8 +97,6 @@ namespace GW2SDK.Tests.Features.Achievements.Categories
         }
 
         [Fact]
-        [Trait("Feature",  "Achievements.Categories")]
-        [Trait("Category", "Integration")]
         public async Task It_can_get_achievement_categories_by_page()
         {
             await using var services = new Composer();

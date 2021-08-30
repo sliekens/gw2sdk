@@ -28,8 +28,6 @@ namespace GW2SDK.Tests.Features.Titles
         }
 
         [Fact]
-        [Trait("Feature",  "Titles")]
-        [Trait("Category", "Integration")]
         public async Task It_can_get_all_titles()
         {
             await using var services = new Composer();
@@ -48,8 +46,6 @@ namespace GW2SDK.Tests.Features.Titles
         }
 
         [Fact]
-        [Trait("Feature",  "Titles")]
-        [Trait("Category", "Integration")]
         public async Task It_can_get_all_title_ids()
         {
             await using var services = new Composer();
@@ -61,8 +57,6 @@ namespace GW2SDK.Tests.Features.Titles
         }
 
         [Fact]
-        [Trait("Feature",  "Titles")]
-        [Trait("Category", "Integration")]
         public async Task It_can_get_a_title_by_id()
         {
             await using var services = new Composer();
@@ -76,8 +70,6 @@ namespace GW2SDK.Tests.Features.Titles
         }
 
         [Fact]
-        [Trait("Feature",  "Titles")]
-        [Trait("Category", "Integration")]
         public async Task It_can_get_titles_by_id()
         {
             await using var services = new Composer();
@@ -91,8 +83,6 @@ namespace GW2SDK.Tests.Features.Titles
         }
 
         [Fact]
-        [Trait("Feature",  "Titles")]
-        [Trait("Category", "Unit")]
         public async Task Title_ids_cannot_be_null()
         {
             await using var services = new Composer();
@@ -106,8 +96,6 @@ namespace GW2SDK.Tests.Features.Titles
         }
 
         [Fact]
-        [Trait("Feature",  "Titles")]
-        [Trait("Category", "Unit")]
         public async Task Title_ids_cannot_be_empty()
         {
             await using var services = new Composer();
@@ -121,8 +109,6 @@ namespace GW2SDK.Tests.Features.Titles
         }
 
         [Fact]
-        [Trait("Feature",  "Titles")]
-        [Trait("Category", "Integration")]
         public async Task It_can_get_titles_by_page()
         {
             await using var services = new Composer();

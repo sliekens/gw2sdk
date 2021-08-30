@@ -11,7 +11,6 @@ namespace GW2SDK.Tests.Features.Recipes
     {
         [Fact]
         [Trait("Feature", "Recipes")]
-        [Trait("Category", "Integration")]
         public async Task It_can_get_all_recipe_ids()
         {
             await using var services = new Composer();
@@ -24,7 +23,6 @@ namespace GW2SDK.Tests.Features.Recipes
 
         [Fact]
         [Trait("Feature", "Recipes")]
-        [Trait("Category", "Integration")]
         public async Task It_can_get_a_recipe_by_id()
         {
             await using var services = new Composer();
@@ -39,7 +37,6 @@ namespace GW2SDK.Tests.Features.Recipes
 
         [Fact]
         [Trait("Feature", "Recipes")]
-        [Trait("Category", "Integration")]
         public async Task It_can_get_recipes_by_id()
         {
             await using var services = new Composer();
@@ -63,7 +60,6 @@ namespace GW2SDK.Tests.Features.Recipes
 
         [Fact]
         [Trait("Feature", "Recipes")]
-        [Trait("Category", "Integration")]
         public async Task It_can_get_recipes_by_page()
         {
             await using var services = new Composer();
@@ -77,7 +73,6 @@ namespace GW2SDK.Tests.Features.Recipes
 
         [Fact]
         [Trait("Feature", "Recipes.Search")]
-        [Trait("Category", "Integration")]
         public async Task Recipes_ids_with_iron_ore_ingredient_contains_recipe_id_for_iron_ingot()
         {
             await using var services = new Composer();
@@ -92,7 +87,6 @@ namespace GW2SDK.Tests.Features.Recipes
 
         [Fact]
         [Trait("Feature", "Recipes.Search")]
-        [Trait("Category", "Integration")]
         public async Task Recipes_with_iron_ore_ingredient_contains_recipe_for_iron_ingot()
         {
             await using var services = new Composer();
@@ -107,7 +101,6 @@ namespace GW2SDK.Tests.Features.Recipes
 
         [Fact]
         [Trait("Feature", "Recipes.Search")]
-        [Trait("Category", "Integration")]
         public async Task Recipes_page_with_iron_ore_ingredient_contains_recipe_for_iron_ingot()
         {
             await using var services = new Composer();
@@ -122,7 +115,6 @@ namespace GW2SDK.Tests.Features.Recipes
 
         [Fact]
         [Trait("Feature", "Recipes.Search")]
-        [Trait("Category", "Integration")]
         public async Task Recipes_ids_with_iron_ingot_output_contains_recipe_id_for_iron_ingot()
         {
             await using var services = new Composer();
@@ -137,7 +129,6 @@ namespace GW2SDK.Tests.Features.Recipes
 
         [Fact]
         [Trait("Feature", "Recipes.Search")]
-        [Trait("Category", "Integration")]
         public async Task Recipes_with_iron_ingot_output_contains_recipe_for_iron_ingot()
         {
             await using var services = new Composer();
@@ -152,7 +143,6 @@ namespace GW2SDK.Tests.Features.Recipes
 
         [Fact]
         [Trait("Feature", "Recipes.Search")]
-        [Trait("Category", "Integration")]
         public async Task Recipes_page_with_iron_ingot_output_contains_recipe_for_iron_ingot()
         {
             await using var services = new Composer();

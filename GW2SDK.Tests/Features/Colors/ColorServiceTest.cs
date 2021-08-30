@@ -17,8 +17,6 @@ namespace GW2SDK.Tests.Features.Colors
         }
 
         [Fact]
-        [Trait("Feature",  "Colors")]
-        [Trait("Category", "Integration")]
         public async Task It_can_get_all_colors()
         {
             await using var services = new Composer();
@@ -35,8 +33,6 @@ namespace GW2SDK.Tests.Features.Colors
         }
 
         [Fact]
-        [Trait("Feature",  "Colors")]
-        [Trait("Category", "Integration")]
         public async Task It_can_get_all_color_ids()
         {
             await using var services = new Composer();
@@ -48,8 +44,6 @@ namespace GW2SDK.Tests.Features.Colors
         }
 
         [Fact]
-        [Trait("Feature",  "Colors")]
-        [Trait("Category", "Integration")]
         public async Task It_can_get_a_color_by_id()
         {
             await using var services = new Composer();
@@ -63,8 +57,6 @@ namespace GW2SDK.Tests.Features.Colors
         }
 
         [Fact]
-        [Trait("Feature",  "Colors")]
-        [Trait("Category", "Integration")]
         public async Task It_can_get_colors_by_id()
         {
             await using var services = new Composer();
@@ -78,8 +70,6 @@ namespace GW2SDK.Tests.Features.Colors
         }
 
         [Fact]
-        [Trait("Feature",  "Colors")]
-        [Trait("Category", "Unit")]
         public async Task Color_ids_cannot_be_null()
         {
             await using var services = new Composer();
@@ -93,8 +83,6 @@ namespace GW2SDK.Tests.Features.Colors
         }
 
         [Fact]
-        [Trait("Feature",  "Colors")]
-        [Trait("Category", "Unit")]
         public async Task Color_ids_cannot_be_empty()
         {
             await using var services = new Composer();
@@ -108,8 +96,6 @@ namespace GW2SDK.Tests.Features.Colors
         }
 
         [Fact]
-        [Trait("Feature",  "Colors")]
-        [Trait("Category", "Integration")]
         public async Task It_can_get_colors_by_page()
         {
             await using var services = new Composer();

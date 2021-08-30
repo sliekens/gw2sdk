@@ -60,7 +60,6 @@ namespace GW2SDK.Tests.Features.Achievements
 
         [Fact]
         [Trait("Feature", "Achievements")]
-        [Trait("Category", "Integration")]
         [Trait("Importance", "Critical")]
         public void Achievements_can_be_created_from_json()
         {

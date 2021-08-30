@@ -13,8 +13,6 @@ namespace GW2SDK.Tests.Features.Builds
         }
 
         [Fact]
-        [Trait("Feature",  "Builds")]
-        [Trait("Category", "Integration")]
         public async Task It_can_get_the_current_build()
         {
             await using var services = new Composer();
