@@ -13,11 +13,11 @@ namespace GW2SDK.Accounts.WorldBosses
     [PublicAPI]
     public sealed class WorldBossService
     {
-        private readonly HttpClient _http;
+        private readonly HttpClient http;
 
-        private readonly MissingMemberBehavior _missingMemberBehavior;
+        private readonly MissingMemberBehavior missingMemberBehavior;
 
-        private readonly IWorldBossReader _worldBossReader;
+        private readonly IWorldBossReader worldBossReader;
 
         public WorldBossService(
             HttpClient http,
@@ -25,9 +25,9 @@ namespace GW2SDK.Accounts.WorldBosses
             MissingMemberBehavior missingMemberBehavior
         )
         {
-            _http = http ?? throw new ArgumentNullException(nameof(http));
-            _worldBossReader = worldBossReader ?? throw new ArgumentNullException(nameof(worldBossReader));
-            _missingMemberBehavior = missingMemberBehavior;
+            this.http = http ?? throw new ArgumentNullException(nameof(http));
+            this.worldBossReader = worldBossReader ?? throw new ArgumentNullException(nameof(worldBossReader));
+            this.missingMemberBehavior = missingMemberBehavior;
         }
 
 #if NET
@@ -37,8 +37,8 @@ namespace GW2SDK.Accounts.WorldBosses
 #endif
         {
             var request = new WorldBossesRequest();
-            return await _http.GetResourcesSetSimple(request,
-                    json => _worldBossReader.Id.ReadArray(json, _missingMemberBehavior))
+            return await http.GetResourcesSetSimple(request,
+                    json => worldBossReader.Id.ReadArray(json, missingMemberBehavior))
                 .ConfigureAwait(false);
         }
 
@@ -50,8 +50,8 @@ namespace GW2SDK.Accounts.WorldBosses
 #endif
         {
             var request = new AccountWorldBossesRequest(accessToken);
-            return await _http.GetResourcesSetSimple(request,
-                    json => _worldBossReader.Id.ReadArray(json, _missingMemberBehavior))
+            return await http.GetResourcesSetSimple(request,
+                    json => worldBossReader.Id.ReadArray(json, missingMemberBehavior))
                 .ConfigureAwait(false);
         }
     }

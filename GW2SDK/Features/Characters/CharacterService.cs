@@ -12,11 +12,11 @@ namespace GW2SDK.Characters
     [PublicAPI]
     public sealed class CharacterService
     {
-        private readonly ICharacterReader _characterReader;
+        private readonly ICharacterReader characterReader;
 
-        private readonly HttpClient _http;
+        private readonly HttpClient http;
 
-        private readonly MissingMemberBehavior _missingMemberBehavior;
+        private readonly MissingMemberBehavior missingMemberBehavior;
 
         public CharacterService(
             HttpClient http,
@@ -24,17 +24,17 @@ namespace GW2SDK.Characters
             MissingMemberBehavior missingMemberBehavior
         )
         {
-            _http = http ?? throw new ArgumentNullException(nameof(http));
-            _characterReader = characterReader ?? throw new ArgumentNullException(nameof(characterReader));
-            _missingMemberBehavior = missingMemberBehavior;
+            this.http = http ?? throw new ArgumentNullException(nameof(http));
+            this.characterReader = characterReader ?? throw new ArgumentNullException(nameof(characterReader));
+            this.missingMemberBehavior = missingMemberBehavior;
         }
 
         [Scope(Permission.Account, Permission.Characters)]
         public async Task<IReplicaSet<string>> GetCharactersIndex(string? accessToken = default)
         {
             var request = new CharactersIndexRequest(accessToken);
-            return await _http.GetResourcesSet(request,
-                    json => _characterReader.Name.ReadArray(json, _missingMemberBehavior))
+            return await http.GetResourcesSet(request,
+                    json => characterReader.Name.ReadArray(json, missingMemberBehavior))
                 .ConfigureAwait(false);
         }
 
@@ -43,8 +43,8 @@ namespace GW2SDK.Characters
         public async Task<IReplica<Character>> GetCharacterByName(string characterName, string? accessToken = default)
         {
             var request = new CharacterByNameRequest(characterName, accessToken);
-            return await _http.GetResource(request,
-                    json => _characterReader.Read(json, _missingMemberBehavior))
+            return await http.GetResource(request,
+                    json => characterReader.Read(json, missingMemberBehavior))
                 .ConfigureAwait(false);
         }
 
@@ -53,8 +53,8 @@ namespace GW2SDK.Characters
         public async Task<IReplicaSet<Character>> GetCharacters(string? accessToken = default)
         {
             var request = new CharactersRequest(accessToken);
-            return await _http
-                .GetResourcesSet(request, json => _characterReader.ReadArray(json, _missingMemberBehavior))
+            return await http
+                .GetResourcesSet(request, json => characterReader.ReadArray(json, missingMemberBehavior))
                 .ConfigureAwait(false);
         }
 
@@ -65,7 +65,7 @@ namespace GW2SDK.Characters
         )
         {
             var request = new UnlockedRecipesRequest(characterId, accessToken);
-            return await _http.GetResource(request, json => _characterReader.Recipes.Read(json, _missingMemberBehavior))
+            return await http.GetResource(request, json => characterReader.Recipes.Read(json, missingMemberBehavior))
                 .ConfigureAwait(false);
         }
     }

@@ -100,7 +100,7 @@ namespace GW2SDK.Tests.Features.Continents
             await Assert.ThrowsAsync<ArgumentException>("continentIds",
                 async () =>
                 {
-                    await sut.GetContinentsByIds(new int[0]);
+                    await sut.GetContinentsByIds(Array.Empty<int>());
                 });
         }
 
@@ -210,7 +210,7 @@ namespace GW2SDK.Tests.Features.Continents
             await Assert.ThrowsAsync<ArgumentException>("floorIds",
                 async () =>
                 {
-                    await sut.GetFloorsByIds(continentId, new int[0]);
+                    await sut.GetFloorsByIds(continentId, Array.Empty<int>());
                 });
         }
 

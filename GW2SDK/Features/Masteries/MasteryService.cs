@@ -12,11 +12,11 @@ namespace GW2SDK.Masteries
     [PublicAPI]
     public sealed class MasteryService
     {
-        private readonly HttpClient _http;
+        private readonly HttpClient http;
 
-        private readonly IMasteryReader _masteryReader;
+        private readonly IMasteryReader masteryReader;
 
-        private readonly MissingMemberBehavior _missingMemberBehavior;
+        private readonly MissingMemberBehavior missingMemberBehavior;
 
         public MasteryService(
             HttpClient http,
@@ -24,30 +24,30 @@ namespace GW2SDK.Masteries
             MissingMemberBehavior missingMemberBehavior
         )
         {
-            _http = http ?? throw new ArgumentNullException(nameof(http));
-            _masteryReader = masteryReader ?? throw new ArgumentNullException(nameof(masteryReader));
-            _missingMemberBehavior = missingMemberBehavior;
+            this.http = http ?? throw new ArgumentNullException(nameof(http));
+            this.masteryReader = masteryReader ?? throw new ArgumentNullException(nameof(masteryReader));
+            this.missingMemberBehavior = missingMemberBehavior;
         }
 
         public async Task<IReplicaSet<Mastery>> GetMasteries(Language? language = default)
         {
             var request = new MasteriesRequest(language);
-            return await _http.GetResourcesSet(request, json => _masteryReader.ReadArray(json, _missingMemberBehavior))
+            return await http.GetResourcesSet(request, json => masteryReader.ReadArray(json, missingMemberBehavior))
                 .ConfigureAwait(false);
         }
 
         public async Task<IReplicaSet<int>> GetMasteriesIndex()
         {
             var request = new MasteriesIndexRequest();
-            return await _http
-                .GetResourcesSet(request, json => _masteryReader.Id.ReadArray(json, _missingMemberBehavior))
+            return await http
+                .GetResourcesSet(request, json => masteryReader.Id.ReadArray(json, missingMemberBehavior))
                 .ConfigureAwait(false);
         }
 
         public async Task<IReplica<Mastery>> GetMasteryById(int masteryId, Language? language = default)
         {
             var request = new MasteryByIdRequest(masteryId, language);
-            return await _http.GetResource(request, json => _masteryReader.Read(json, _missingMemberBehavior))
+            return await http.GetResource(request, json => masteryReader.Read(json, missingMemberBehavior))
                 .ConfigureAwait(false);
         }
 
@@ -57,7 +57,7 @@ namespace GW2SDK.Masteries
         )
         {
             var request = new MasteriesByIdsRequest(masteryIds, language);
-            return await _http.GetResourcesSet(request, json => _masteryReader.ReadArray(json, _missingMemberBehavior))
+            return await http.GetResourcesSet(request, json => masteryReader.ReadArray(json, missingMemberBehavior))
                 .ConfigureAwait(false);
         }
     }

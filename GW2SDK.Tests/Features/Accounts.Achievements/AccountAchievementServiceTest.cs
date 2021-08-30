@@ -20,8 +20,9 @@ namespace GW2SDK.Tests.Features.Accounts.Achievements
         {
             await using var services = new Composer();
             var sut = services.Resolve<AccountAchievementService>();
+            var accessToken = services.Resolve<ApiKeyFull>();
 
-            var actual = await sut.GetAccountAchievements(ConfigurationManager.Instance.ApiKeyFull);
+            var actual = await sut.GetAccountAchievements(accessToken.Key);
 
             Assert.Equal(actual.Context.ResultTotal, actual.Values.Count);
 
@@ -39,10 +40,11 @@ namespace GW2SDK.Tests.Features.Accounts.Achievements
         {
             await using var services = new Composer();
             var sut = services.Resolve<AccountAchievementService>();
+            var accessToken = services.Resolve<ApiKeyFull>();
 
             const int achievementId = 1;
 
-            var actual = await sut.GetAccountAchievementById(achievementId, ConfigurationManager.Instance.ApiKeyFull);
+            var actual = await sut.GetAccountAchievementById(achievementId, accessToken.Key);
 
             Assert.Equal(achievementId, actual.Value.Id);
         }
@@ -54,10 +56,11 @@ namespace GW2SDK.Tests.Features.Accounts.Achievements
         {
             await using var services = new Composer();
             var sut = services.Resolve<AccountAchievementService>();
+            var accessToken = services.Resolve<ApiKeyFull>();
 
             var ids = new[] { 1, 2, 3 };
 
-            var actual = await sut.GetAccountAchievementsByIds(ids, ConfigurationManager.Instance.ApiKeyFull);
+            var actual = await sut.GetAccountAchievementsByIds(ids, accessToken.Key);
 
             Assert.Collection(actual.Values, first => Assert.Equal(1, first.Id), second => Assert.Equal(2, second.Id), third => Assert.Equal(3, third.Id));
         }
@@ -69,11 +72,12 @@ namespace GW2SDK.Tests.Features.Accounts.Achievements
         {
             await using var services = new Composer();
             var sut = services.Resolve<AccountAchievementService>();
+            var accessToken = services.Resolve<ApiKeyFull>();
 
             await Assert.ThrowsAsync<ArgumentNullException>("achievementIds",
                 async () =>
                 {
-                    await sut.GetAccountAchievementsByIds(null!, ConfigurationManager.Instance.ApiKeyFull);
+                    await sut.GetAccountAchievementsByIds(null!, accessToken.Key);
                 });
         }
 
@@ -84,11 +88,12 @@ namespace GW2SDK.Tests.Features.Accounts.Achievements
         {
             await using var services = new Composer();
             var sut = services.Resolve<AccountAchievementService>();
+            var accessToken = services.Resolve<ApiKeyFull>();
 
             await Assert.ThrowsAsync<ArgumentException>("achievementIds",
                 async () =>
                 {
-                    await sut.GetAccountAchievementsByIds(new int[0], ConfigurationManager.Instance.ApiKeyFull);
+                    await sut.GetAccountAchievementsByIds(Array.Empty<int>(), accessToken.Key);
                 });
         }
 
@@ -99,8 +104,9 @@ namespace GW2SDK.Tests.Features.Accounts.Achievements
         {
             await using var services = new Composer();
             var sut = services.Resolve<AccountAchievementService>();
+            var accessToken = services.Resolve<ApiKeyFull>();
 
-            var actual = await sut.GetAccountAchievementsByPage(0, 3, ConfigurationManager.Instance.ApiKeyFull);
+            var actual = await sut.GetAccountAchievementsByPage(0, 3, accessToken.Key);
 
             Assert.Equal(3, actual.Values.Count);
             Assert.Equal(3, actual.Context.PageSize);

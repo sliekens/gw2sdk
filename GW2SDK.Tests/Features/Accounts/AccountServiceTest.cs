@@ -59,8 +59,9 @@ namespace GW2SDK.Tests.Features.Accounts
         {
             await using var services = new Composer();
             var sut = services.Resolve<AccountService>();
+            var accessToken = services.Resolve<ApiKeyBasic>();
 
-            var actual = await sut.GetAccount(ConfigurationManager.Instance.ApiKeyBasic);
+            var actual = await sut.GetAccount(accessToken.Key);
             
             BasicAccountFact.Name_is_never_empty(actual.Value);
             BasicAccountFact.Access_is_never_empty(actual.Value);
@@ -80,8 +81,9 @@ namespace GW2SDK.Tests.Features.Accounts
         {
             await using var services = new Composer();
             var sut = services.Resolve<AccountService>();
+            var accessToken = services.Resolve<ApiKeyFull>();
 
-            var actual = await sut.GetAccount(ConfigurationManager.Instance.ApiKeyFull);
+            var actual = await sut.GetAccount(accessToken.Key);
             
             FullAccountFact.Name_is_never_empty(actual.Value);
             FullAccountFact.Access_is_never_empty(actual.Value);

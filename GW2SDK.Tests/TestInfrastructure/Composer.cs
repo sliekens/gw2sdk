@@ -49,7 +49,7 @@ namespace GW2SDK.Tests.TestInfrastructure
 
         public Composer()
         {
-            var gw2HttpClientFactory = new TestHttpClientFactory();
+            var gw2HttpClientFactory = new TestHttpClientFactory(configuration.BaseAddress);
             disposables.Add(gw2HttpClientFactory);
             httpClientFactory = gw2HttpClientFactory;
         }

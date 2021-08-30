@@ -12,11 +12,11 @@ namespace GW2SDK.Titles
     [PublicAPI]
     public sealed class TitleService
     {
-        private readonly HttpClient _http;
+        private readonly HttpClient http;
 
-        private readonly MissingMemberBehavior _missingMemberBehavior;
+        private readonly MissingMemberBehavior missingMemberBehavior;
 
-        private readonly ITitleReader _titleReader;
+        private readonly ITitleReader titleReader;
 
         public TitleService(
             HttpClient http,
@@ -24,29 +24,29 @@ namespace GW2SDK.Titles
             MissingMemberBehavior missingMemberBehavior
         )
         {
-            _http = http ?? throw new ArgumentNullException(nameof(http));
-            _titleReader = titleReader ?? throw new ArgumentNullException(nameof(titleReader));
-            _missingMemberBehavior = missingMemberBehavior;
+            this.http = http ?? throw new ArgumentNullException(nameof(http));
+            this.titleReader = titleReader ?? throw new ArgumentNullException(nameof(titleReader));
+            this.missingMemberBehavior = missingMemberBehavior;
         }
 
         public async Task<IReplicaSet<Title>> GetTitles(Language? language = default)
         {
             var request = new TitlesRequest(language);
-            return await _http.GetResourcesSet(request, json => _titleReader.ReadArray(json, _missingMemberBehavior))
+            return await http.GetResourcesSet(request, json => titleReader.ReadArray(json, missingMemberBehavior))
                 .ConfigureAwait(false);
         }
 
         public async Task<IReplicaSet<int>> GetTitlesIndex()
         {
             var request = new TitlesIndexRequest();
-            return await _http.GetResourcesSet(request, json => _titleReader.Id.ReadArray(json, _missingMemberBehavior))
+            return await http.GetResourcesSet(request, json => titleReader.Id.ReadArray(json, missingMemberBehavior))
                 .ConfigureAwait(false);
         }
 
         public async Task<IReplica<Title>> GetTitleById(int titleId, Language? language = default)
         {
             var request = new TitleByIdRequest(titleId, language);
-            return await _http.GetResource(request, json => _titleReader.Read(json, _missingMemberBehavior))
+            return await http.GetResource(request, json => titleReader.Read(json, missingMemberBehavior))
                 .ConfigureAwait(false);
         }
 
@@ -56,7 +56,7 @@ namespace GW2SDK.Titles
         )
         {
             var request = new TitlesByIdsRequest(titleIds, language);
-            return await _http.GetResourcesSet(request, json => _titleReader.ReadArray(json, _missingMemberBehavior))
+            return await http.GetResourcesSet(request, json => titleReader.ReadArray(json, missingMemberBehavior))
                 .ConfigureAwait(false);
         }
 
@@ -67,7 +67,7 @@ namespace GW2SDK.Titles
         )
         {
             var request = new TitlesByPageRequest(pageIndex, pageSize, language);
-            return await _http.GetResourcesPage(request, json => _titleReader.ReadArray(json, _missingMemberBehavior))
+            return await http.GetResourcesPage(request, json => titleReader.ReadArray(json, missingMemberBehavior))
                 .ConfigureAwait(false);
         }
     }

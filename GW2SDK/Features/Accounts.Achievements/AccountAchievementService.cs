@@ -13,9 +13,9 @@ namespace GW2SDK.Accounts.Achievements
     [PublicAPI]
     public sealed class AccountAchievementService
     {
-        private readonly HttpClient _http;
-        private readonly IAccountAchievementReader _accountAchievementReader;
-        private readonly MissingMemberBehavior _missingMemberBehavior;
+        private readonly HttpClient http;
+        private readonly IAccountAchievementReader accountAchievementReader;
+        private readonly MissingMemberBehavior missingMemberBehavior;
 
         public AccountAchievementService(
             HttpClient http,
@@ -23,17 +23,17 @@ namespace GW2SDK.Accounts.Achievements
             MissingMemberBehavior missingMemberBehavior
         )
         {
-            _http = http ?? throw new ArgumentNullException(nameof(http));
-            _accountAchievementReader = accountAchievementReader ??
+            this.http = http ?? throw new ArgumentNullException(nameof(http));
+            this.accountAchievementReader = accountAchievementReader ??
                 throw new ArgumentNullException(nameof(accountAchievementReader));
-            _missingMemberBehavior = missingMemberBehavior;
+            this.missingMemberBehavior = missingMemberBehavior;
         }
 
         [Scope(Permission.Progression)]
         public async Task<IReplica<AccountAchievement>> GetAccountAchievementById(int achievementId, string? accessToken = null)
         {
             var request = new AccountAchievementByIdRequest(achievementId, accessToken);
-            return await _http.GetResource(request, json => _accountAchievementReader.Read(json, _missingMemberBehavior))
+            return await http.GetResource(request, json => accountAchievementReader.Read(json, missingMemberBehavior))
                 .ConfigureAwait(false);
         }
 
@@ -44,7 +44,7 @@ namespace GW2SDK.Accounts.Achievements
         )
         {
             var request = new AccountAchievementsByIdsRequest(achievementIds, accessToken);
-            return await _http.GetResourcesSet(request, json => _accountAchievementReader.ReadArray(json, _missingMemberBehavior))
+            return await http.GetResourcesSet(request, json => accountAchievementReader.ReadArray(json, missingMemberBehavior))
                 .ConfigureAwait(false);
         }
 
@@ -54,7 +54,7 @@ namespace GW2SDK.Accounts.Achievements
         )
         {
             var request = new AccountAchievementsRequest(accessToken);
-            return await _http.GetResourcesSet(request, json => _accountAchievementReader.ReadArray(json, _missingMemberBehavior))
+            return await http.GetResourcesSet(request, json => accountAchievementReader.ReadArray(json, missingMemberBehavior))
                 .ConfigureAwait(false);
         }
 
@@ -66,7 +66,7 @@ namespace GW2SDK.Accounts.Achievements
         )
         {
             var request = new AccountAchievementsByPageRequest(pageIndex, pageSize, accessToken);
-            return await _http.GetResourcesPage(request, json => _accountAchievementReader.ReadArray(json, _missingMemberBehavior))
+            return await http.GetResourcesPage(request, json => accountAchievementReader.ReadArray(json, missingMemberBehavior))
                 .ConfigureAwait(false);
         }
     }

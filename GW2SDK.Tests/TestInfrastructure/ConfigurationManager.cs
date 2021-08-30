@@ -25,8 +25,6 @@ namespace GW2SDK.Tests.TestInfrastructure
             Configuration["CharacterName"] ?? throw new InvalidOperationException("Missing CharacterName.");
 
         public Uri BaseAddress => new(Configuration["Authority"], UriKind.Absolute);
-
-        public static ConfigurationManager Instance { get; } = new();
     }
 
     public sealed class TestCharacterName

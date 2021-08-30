@@ -1,4 +1,5 @@
-﻿using GW2SDK.Annotations;
+﻿using System;
+using GW2SDK.Annotations;
 using JetBrains.Annotations;
 
 namespace GW2SDK.Achievements.Groups
@@ -15,6 +16,6 @@ namespace GW2SDK.Achievements.Groups
 
         public int Order { get; init; }
 
-        public int[] Categories { get; init; } = new int[0];
+        public int[] Categories { get; init; } = Array.Empty<int>();
     }
 }

@@ -1,27 +1,29 @@
-﻿using GW2SDK.Items;
+﻿using System.Diagnostics.CodeAnalysis;
+using GW2SDK.Items;
 using Xunit;
 
 namespace GW2SDK.Tests.Features.Items
 {
+    [SuppressMessage("ReSharper", "MemberCanBePrivate.Global")]
     internal static class ItemFacts
     {
-        public static void Id_is_positive(Item actual) => Assert.InRange(actual.Id, 1, int.MaxValue);
+        internal static void Id_is_positive(Item actual) => Assert.InRange(actual.Id, 1, int.MaxValue);
 
-        public static void Vendor_value_cannot_be_negative(Item actual) =>
+        internal static void Vendor_value_cannot_be_negative(Item actual) =>
             Assert.InRange(actual.VendorValue.Amount, 0, int.MaxValue);
 
-        public static void Level_is_between_0_and_80(Item actual) => Assert.InRange(actual.Level, 0, 80);
+        internal static void Level_is_between_0_and_80(Item actual) => Assert.InRange(actual.Level, 0, 80);
 
-        public static void Weapon_min_power_cannot_be_negative(Weapon actual) =>
+        internal static void Weapon_min_power_cannot_be_negative(Weapon actual) =>
             Assert.InRange(actual.MinPower, 0, int.MaxValue);
 
-        public static void Weapon_max_power_cannot_be_negative(Weapon actual) =>
+        internal static void Weapon_max_power_cannot_be_negative(Weapon actual) =>
             Assert.InRange(actual.MaxPower, 0, int.MaxValue);
 
-        public static void Weapon_defense_cannot_be_negative(Weapon actual) =>
+        internal static void Weapon_defense_cannot_be_negative(Weapon actual) =>
             Assert.InRange(actual.Defense, 0, int.MaxValue);
 
-        public static void Weapon_infix_upgrade_id_is_positive(Weapon actual)
+        internal static void Weapon_infix_upgrade_id_is_positive(Weapon actual)
         {
             if (actual.Prefix is InfixUpgrade)
             {
@@ -29,7 +31,7 @@ namespace GW2SDK.Tests.Features.Items
             }
         }
 
-        public static void Weapon_infix_upgrade_modifiers_are_positive(Weapon weapon)
+        internal static void Weapon_infix_upgrade_modifiers_are_positive(Weapon weapon)
         {
             if (weapon.Prefix is InfixUpgrade)
             {
@@ -37,7 +39,7 @@ namespace GW2SDK.Tests.Features.Items
             }
         }
 
-        public static void Weapon_prefix_and_stat_choices_are_mutually_exclusive(Weapon weapon)
+        internal static void Weapon_prefix_and_stat_choices_are_mutually_exclusive(Weapon weapon)
         {
             if (weapon.Prefix is not null)
             {
@@ -49,7 +51,7 @@ namespace GW2SDK.Tests.Features.Items
             }
         }
 
-        public static void Backpack_infix_upgrade_id_is_positive(Backpack actual)
+        internal static void Backpack_infix_upgrade_id_is_positive(Backpack actual)
         {
             if (actual.Prefix is InfixUpgrade)
             {
@@ -57,7 +59,7 @@ namespace GW2SDK.Tests.Features.Items
             }
         }
 
-        public static void Backpack_infix_upgrade_modifiers_are_positive(Backpack backpack)
+        internal static void Backpack_infix_upgrade_modifiers_are_positive(Backpack backpack)
         {
             if (backpack.Prefix is InfixUpgrade)
             {
@@ -65,7 +67,7 @@ namespace GW2SDK.Tests.Features.Items
             }
         }
 
-        public static void Backpack_suffix_item_id_is_null_or_positive(Backpack actual)
+        internal static void Backpack_suffix_item_id_is_null_or_positive(Backpack actual)
         {
             if (actual.SuffixItemId.HasValue)
             {
@@ -73,7 +75,7 @@ namespace GW2SDK.Tests.Features.Items
             }
         }
 
-        public static void Backpack_prefix_and_stat_choices_are_mutually_exclusive(Backpack backpack)
+        internal static void Backpack_prefix_and_stat_choices_are_mutually_exclusive(Backpack backpack)
         {
             if (backpack.Prefix is not null)
             {
@@ -85,10 +87,10 @@ namespace GW2SDK.Tests.Features.Items
             }
         }
 
-        public static void Armor_defense_cannot_be_negative(Armor actual) =>
+        internal static void Armor_defense_cannot_be_negative(Armor actual) =>
             Assert.InRange(actual.Defense, 0, 1000);
 
-        public static void Armor_infusion_slot_flags_cannot_be_empty(Armor actual)
+        internal static void Armor_infusion_slot_flags_cannot_be_empty(Armor actual)
         {
             foreach (var slot in actual.InfusionSlots)
             {
@@ -96,7 +98,7 @@ namespace GW2SDK.Tests.Features.Items
             }
         }
 
-        public static void Armor_infix_upgrade_id_is_positive(Armor actual)
+        internal static void Armor_infix_upgrade_id_is_positive(Armor actual)
         {
             if (actual.Prefix is InfixUpgrade)
             {
@@ -104,7 +106,7 @@ namespace GW2SDK.Tests.Features.Items
             }
         }
 
-        public static void Armor_infix_upgrade_modifiers_are_positive(Armor armor)
+        internal static void Armor_infix_upgrade_modifiers_are_positive(Armor armor)
         {
             if (armor.Prefix is InfixUpgrade)
             {
@@ -112,7 +114,7 @@ namespace GW2SDK.Tests.Features.Items
             }
         }
 
-        public static void Armor_suffix_item_id_is_null_or_positive(Armor actual)
+        internal static void Armor_suffix_item_id_is_null_or_positive(Armor actual)
         {
             if (actual.SuffixItemId.HasValue)
             {
@@ -120,7 +122,7 @@ namespace GW2SDK.Tests.Features.Items
             }
         }
 
-        public static void Armor_stat_choices_are_null_or_not_empty(Armor actual)
+        internal static void Armor_stat_choices_are_null_or_not_empty(Armor actual)
         {
             if (actual.StatChoices is int[])
             {
@@ -128,7 +130,7 @@ namespace GW2SDK.Tests.Features.Items
             }
         }
 
-        public static void Armor_prefix_and_stat_choices_are_mutually_exclusive(Armor armor)
+        internal static void Armor_prefix_and_stat_choices_are_mutually_exclusive(Armor armor)
         {
             if (armor.Prefix is not null)
             {
@@ -140,7 +142,7 @@ namespace GW2SDK.Tests.Features.Items
             }
         }
 
-        public static void Trinket_prefix_and_stat_choices_are_mutually_exclusive(Trinket trinket)
+        internal static void Trinket_prefix_and_stat_choices_are_mutually_exclusive(Trinket trinket)
         {
             if (trinket.Prefix is not null)
             {
@@ -152,16 +154,16 @@ namespace GW2SDK.Tests.Features.Items
             }
         }
 
-        public static void Transmutation_skins_cannot_be_empty(Transmutation actual) =>
+        internal static void Transmutation_skins_cannot_be_empty(Transmutation actual) =>
             Assert.NotEmpty(actual.Skins);
 
-        public static void SalvageTool_has_charges(SalvageTool salvageTool) =>
+        internal static void SalvageTool_has_charges(SalvageTool salvageTool) =>
             Assert.InRange(salvageTool.Charges, 1, 255);
 
-        public static void MinipetId_is_positive(Minipet minipet) =>
+        internal static void MinipetId_is_positive(Minipet minipet) =>
             Assert.InRange(minipet.MinipetId, 1, int.MaxValue);
 
-        public static void Validate(Item actual)
+        internal static void Validate(Item actual)
         {
             Id_is_positive(actual);
             Vendor_value_cannot_be_negative(actual);

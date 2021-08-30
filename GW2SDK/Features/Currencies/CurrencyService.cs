@@ -12,11 +12,11 @@ namespace GW2SDK.Currencies
     [PublicAPI]
     public sealed class CurrencyService
     {
-        private readonly ICurrencyReader _currencyReader;
+        private readonly ICurrencyReader currencyReader;
 
-        private readonly HttpClient _http;
+        private readonly HttpClient http;
 
-        private readonly MissingMemberBehavior _missingMemberBehavior;
+        private readonly MissingMemberBehavior missingMemberBehavior;
 
         public CurrencyService(
             HttpClient http,
@@ -24,30 +24,30 @@ namespace GW2SDK.Currencies
             MissingMemberBehavior missingMemberBehavior
         )
         {
-            _http = http ?? throw new ArgumentNullException(nameof(http));
-            _currencyReader = currencyReader ?? throw new ArgumentNullException(nameof(currencyReader));
-            _missingMemberBehavior = missingMemberBehavior;
+            this.http = http ?? throw new ArgumentNullException(nameof(http));
+            this.currencyReader = currencyReader ?? throw new ArgumentNullException(nameof(currencyReader));
+            this.missingMemberBehavior = missingMemberBehavior;
         }
 
         public async Task<IReplicaSet<Currency>> GetCurrencies(Language? language = default)
         {
             var request = new CurrenciesRequest(language);
-            return await _http.GetResourcesSet(request, json => _currencyReader.ReadArray(json, _missingMemberBehavior))
+            return await http.GetResourcesSet(request, json => currencyReader.ReadArray(json, missingMemberBehavior))
                 .ConfigureAwait(false);
         }
 
         public async Task<IReplicaSet<int>> GetCurrenciesIndex()
         {
             var request = new CurrenciesIndexRequest();
-            return await _http
-                .GetResourcesSet(request, json => _currencyReader.Id.ReadArray(json, _missingMemberBehavior))
+            return await http
+                .GetResourcesSet(request, json => currencyReader.Id.ReadArray(json, missingMemberBehavior))
                 .ConfigureAwait(false);
         }
 
         public async Task<IReplica<Currency>> GetCurrencyById(int currencyId, Language? language = default)
         {
             var request = new CurrencyByIdRequest(currencyId, language);
-            return await _http.GetResource(request, json => _currencyReader.Read(json, _missingMemberBehavior))
+            return await http.GetResource(request, json => currencyReader.Read(json, missingMemberBehavior))
                 .ConfigureAwait(false);
         }
 
@@ -57,7 +57,7 @@ namespace GW2SDK.Currencies
         )
         {
             var request = new CurrenciesByIdsRequest(currencyIds, language);
-            return await _http.GetResourcesSet(request, json => _currencyReader.ReadArray(json, _missingMemberBehavior))
+            return await http.GetResourcesSet(request, json => currencyReader.ReadArray(json, missingMemberBehavior))
                 .ConfigureAwait(false);
         }
 
@@ -68,8 +68,8 @@ namespace GW2SDK.Currencies
         )
         {
             var request = new CurrenciesByPageRequest(pageIndex, pageSize, language);
-            return await _http
-                .GetResourcesPage(request, json => _currencyReader.ReadArray(json, _missingMemberBehavior))
+            return await http
+                .GetResourcesPage(request, json => currencyReader.ReadArray(json, missingMemberBehavior))
                 .ConfigureAwait(false);
         }
     }

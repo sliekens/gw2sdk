@@ -1,4 +1,5 @@
-﻿using GW2SDK.Annotations;
+﻿using System;
+using GW2SDK.Annotations;
 using JetBrains.Annotations;
 
 namespace GW2SDK.Skins
@@ -7,7 +8,7 @@ namespace GW2SDK.Skins
     [DataTransferObject(RootObject = false)]
     public sealed record DyeSlotInfo
     {
-        public DyeSlot?[] Default { get; init; } = new DyeSlot?[0];
+        public DyeSlot?[] Default { get; init; } = Array.Empty<DyeSlot?>();
 
         public DyeSlot?[]? AsuraFemale { get; init; }
 

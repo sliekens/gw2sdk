@@ -12,11 +12,11 @@ namespace GW2SDK.Skins
     [PublicAPI]
     public sealed class SkinService
     {
-        private readonly HttpClient _http;
+        private readonly HttpClient http;
 
-        private readonly MissingMemberBehavior _missingMemberBehavior;
+        private readonly MissingMemberBehavior missingMemberBehavior;
 
-        private readonly ISkinReader _skinReader;
+        private readonly ISkinReader skinReader;
 
         public SkinService(
             HttpClient http,
@@ -24,22 +24,22 @@ namespace GW2SDK.Skins
             MissingMemberBehavior missingMemberBehavior
         )
         {
-            _http = http ?? throw new ArgumentNullException(nameof(http));
-            _skinReader = skinReader ?? throw new ArgumentNullException(nameof(skinReader));
-            _missingMemberBehavior = missingMemberBehavior;
+            this.http = http ?? throw new ArgumentNullException(nameof(http));
+            this.skinReader = skinReader ?? throw new ArgumentNullException(nameof(skinReader));
+            this.missingMemberBehavior = missingMemberBehavior;
         }
 
         public async Task<IReplicaSet<int>> GetSkinsIndex()
         {
             var request = new SkinsIndexRequest();
-            return await _http.GetResourcesSet(request, json => _skinReader.Id.ReadArray(json, _missingMemberBehavior))
+            return await http.GetResourcesSet(request, json => skinReader.Id.ReadArray(json, missingMemberBehavior))
                 .ConfigureAwait(false);
         }
 
         public async Task<IReplica<Skin>> GetSkinById(int skinId, Language? language = default)
         {
             var request = new SkinByIdRequest(skinId, language);
-            return await _http.GetResource(request, json => _skinReader.Read(json, _missingMemberBehavior))
+            return await http.GetResource(request, json => skinReader.Read(json, missingMemberBehavior))
                 .ConfigureAwait(false);
         }
 
@@ -49,7 +49,7 @@ namespace GW2SDK.Skins
         )
         {
             var request = new SkinsByIdsRequest(skinIds, language);
-            return await _http.GetResourcesSet(request, json => _skinReader.ReadArray(json, _missingMemberBehavior))
+            return await http.GetResourcesSet(request, json => skinReader.ReadArray(json, missingMemberBehavior))
                 .ConfigureAwait(false);
         }
 
@@ -60,7 +60,7 @@ namespace GW2SDK.Skins
         )
         {
             var request = new SkinsByPageRequest(pageIndex, pageSize, language);
-            return await _http.GetResourcesPage(request, json => _skinReader.ReadArray(json, _missingMemberBehavior))
+            return await http.GetResourcesPage(request, json => skinReader.ReadArray(json, missingMemberBehavior))
                 .ConfigureAwait(false);
         }
     }

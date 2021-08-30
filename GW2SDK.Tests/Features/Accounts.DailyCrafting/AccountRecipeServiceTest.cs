@@ -13,6 +13,7 @@ namespace GW2SDK.Tests.Features.Accounts.DailyCrafting
         {
             await using var services = new Composer();
             var sut = services.Resolve<DailyCraftingService>();
+            var accessToken = services.Resolve<ApiKeyFull>();
 
             // This is not resistant to recipes being added to the game, so not great :)
             // For now I'll just maintain this by hand...
@@ -30,7 +31,7 @@ namespace GW2SDK.Tests.Features.Accounts.DailyCrafting
             }, dailyRecipes);
 
             // Again this next method is not deterministic...
-            var actual = await sut.GetDailyRecipesOnCooldown(ConfigurationManager.Instance.ApiKeyFull);
+            var actual = await sut.GetDailyRecipesOnCooldown(accessToken.Key);
 
             // The best we can do is verify that there are no unexpected recipes
             // i.e. all recipes must be present in the reference data

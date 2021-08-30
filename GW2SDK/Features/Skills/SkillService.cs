@@ -12,11 +12,11 @@ namespace GW2SDK.Skills
     [PublicAPI]
     public sealed class SkillService
     {
-        private readonly HttpClient _http;
+        private readonly HttpClient http;
 
-        private readonly MissingMemberBehavior _missingMemberBehavior;
+        private readonly MissingMemberBehavior missingMemberBehavior;
 
-        private readonly ISkillReader _skillReader;
+        private readonly ISkillReader skillReader;
 
         public SkillService(
             HttpClient http,
@@ -24,29 +24,29 @@ namespace GW2SDK.Skills
             MissingMemberBehavior missingMemberBehavior
         )
         {
-            _http = http ?? throw new ArgumentNullException(nameof(http));
-            _skillReader = skillReader ?? throw new ArgumentNullException(nameof(skillReader));
-            _missingMemberBehavior = missingMemberBehavior;
+            this.http = http ?? throw new ArgumentNullException(nameof(http));
+            this.skillReader = skillReader ?? throw new ArgumentNullException(nameof(skillReader));
+            this.missingMemberBehavior = missingMemberBehavior;
         }
 
         public async Task<IReplicaSet<Skill>> GetSkills(Language? language = default)
         {
             var request = new SkillsRequest(language);
-            return await _http.GetResourcesSet(request, json => _skillReader.ReadArray(json, _missingMemberBehavior))
+            return await http.GetResourcesSet(request, json => skillReader.ReadArray(json, missingMemberBehavior))
                 .ConfigureAwait(false);
         }
 
         public async Task<IReplicaSet<int>> GetSkillsIndex()
         {
             var request = new SkillsIndexRequest();
-            return await _http.GetResourcesSet(request, json => _skillReader.Id.ReadArray(json, _missingMemberBehavior))
+            return await http.GetResourcesSet(request, json => skillReader.Id.ReadArray(json, missingMemberBehavior))
                 .ConfigureAwait(false);
         }
 
         public async Task<IReplica<Skill>> GetSkillById(int skillId, Language? language = default)
         {
             var request = new SkillByIdRequest(skillId, language);
-            return await _http.GetResource(request, json => _skillReader.Read(json, _missingMemberBehavior))
+            return await http.GetResource(request, json => skillReader.Read(json, missingMemberBehavior))
                 .ConfigureAwait(false);
         }
 
@@ -56,7 +56,7 @@ namespace GW2SDK.Skills
         )
         {
             var request = new SkillsByIdsRequest(skillIds, language);
-            return await _http.GetResourcesSet(request, json => _skillReader.ReadArray(json, _missingMemberBehavior))
+            return await http.GetResourcesSet(request, json => skillReader.ReadArray(json, missingMemberBehavior))
                 .ConfigureAwait(false);
         }
 
@@ -67,7 +67,7 @@ namespace GW2SDK.Skills
         )
         {
             var request = new SkillsByPageRequest(pageIndex, pageSize, language);
-            return await _http.GetResourcesPage(request, json => _skillReader.ReadArray(json, _missingMemberBehavior))
+            return await http.GetResourcesPage(request, json => skillReader.ReadArray(json, missingMemberBehavior))
                 .ConfigureAwait(false);
         }
     }

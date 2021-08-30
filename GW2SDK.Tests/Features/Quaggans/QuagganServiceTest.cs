@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Threading.Tasks;
 using GW2SDK.Quaggans;
 using GW2SDK.Tests.TestInfrastructure;
@@ -8,13 +9,14 @@ namespace GW2SDK.Tests.Features.Quaggans
 {
     public class QuagganServiceTest
     {
+        [SuppressMessage("ReSharper", "MemberCanBePrivate.Local")]
         private static class QuagganFact
         {
-            public static void Id_is_not_empty(QuagganRef actual) => Assert.NotEmpty(actual.Id);
+            internal static void Id_is_not_empty(QuagganRef actual) => Assert.NotEmpty(actual.Id);
 
-            public static void Quaggan_has_picture(QuagganRef actual) => Assert.True(Uri.IsWellFormedUriString(actual.PictureHref, UriKind.Absolute));
+            internal static void Quaggan_has_picture(QuagganRef actual) => Assert.True(Uri.IsWellFormedUriString(actual.PictureHref, UriKind.Absolute));
 
-            public static void Validate(QuagganRef actual)
+            internal static void Validate(QuagganRef actual)
             {
                 Id_is_not_empty(actual);
                 Quaggan_has_picture(actual);

@@ -1,4 +1,5 @@
-﻿using JetBrains.Annotations;
+﻿using System;
+using JetBrains.Annotations;
 
 namespace GW2SDK.Items
 {
@@ -7,7 +8,7 @@ namespace GW2SDK.Items
     {
         public int DefaultSkin { get; init; }
 
-        public InfusionSlot[] InfusionSlots { get; init; } = new InfusionSlot[0];
+        public InfusionSlot[] InfusionSlots { get; init; } = Array.Empty<InfusionSlot>();
 
         public double AttributeAdjustment { get; init; }
 

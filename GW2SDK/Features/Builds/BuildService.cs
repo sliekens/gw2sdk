@@ -11,23 +11,23 @@ namespace GW2SDK.Builds
     [PublicAPI]
     public sealed class BuildService
     {
-        private readonly IBuildReader _buildReader;
-        private readonly HttpClient _http;
-        private readonly MissingMemberBehavior _missingMemberBehavior;
+        private readonly IBuildReader buildReader;
+        private readonly HttpClient http;
+        private readonly MissingMemberBehavior missingMemberBehavior;
 
         public BuildService(HttpClient http, IBuildReader buildReader,
             MissingMemberBehavior missingMemberBehavior
         )
         {
-            _http = http ?? throw new ArgumentNullException(nameof(http));
-            _buildReader = buildReader ?? throw new ArgumentNullException(nameof(buildReader));
-            _missingMemberBehavior = missingMemberBehavior;
+            this.http = http ?? throw new ArgumentNullException(nameof(http));
+            this.buildReader = buildReader ?? throw new ArgumentNullException(nameof(buildReader));
+            this.missingMemberBehavior = missingMemberBehavior;
         }
 
         public async Task<IReplica<Build>> GetBuild()
         {
             var request = new BuildRequest();
-            return await _http.GetResource(request, json => _buildReader.Read(json, _missingMemberBehavior))
+            return await http.GetResource(request, json => buildReader.Read(json, missingMemberBehavior))
                 .ConfigureAwait(false);
         }
     }

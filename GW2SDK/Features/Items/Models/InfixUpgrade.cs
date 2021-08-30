@@ -1,4 +1,5 @@
-﻿using GW2SDK.Annotations;
+﻿using System;
+using GW2SDK.Annotations;
 using JetBrains.Annotations;
 
 namespace GW2SDK.Items
@@ -9,7 +10,7 @@ namespace GW2SDK.Items
     {
         public int ItemstatsId { get; init; }
 
-        public UpgradeAttribute[] Attributes { get; init; } = new UpgradeAttribute[0];
+        public UpgradeAttribute[] Attributes { get; init; } = Array.Empty<UpgradeAttribute>();
 
         public Buff? Buff { get; init; }
     }

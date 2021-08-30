@@ -4,7 +4,6 @@ using System.Globalization;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
-using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using GW2SDK;
 using GW2SDK.Http;
@@ -27,8 +26,7 @@ namespace MostVersatileMaterials
         {
             using var http = new HttpClient(new SocketsHttpHandler
                 {
-                    AutomaticDecompression = DecompressionMethods.GZip,
-                    MaxConnectionsPerServer = 20
+                    AutomaticDecompression = DecompressionMethods.GZip
                 },
                 true);
 
@@ -39,7 +37,7 @@ namespace MostVersatileMaterials
             var recipesService = new RecipeService(http, new RecipeReader(), MissingMemberBehavior.Undefined);
             var itemsService = new ItemService(http, new ItemReader(), MissingMemberBehavior.Undefined);
 
-            var recipes = await Progress()
+            var (ingredients, recipes) = await Progress()
                 .StartAsync(async ctx =>
                 {
                     var recipesProgress =
@@ -48,7 +46,7 @@ namespace MostVersatileMaterials
                         ctx.AddTask("Fetching ingredients", new ProgressTaskSettings { AutoStart = false });
 
                     var craftable = await GetRecipes(recipesService, recipesProgress);
-                    
+
                     var groupedByIngredient = craftable.SelectMany(recipe =>
                             recipe.Ingredients.Select(ingredient => (Ingredient: ingredient.ItemId, Recipe: recipe)))
                         .ToLookup(grouping => grouping.Ingredient, grouping => grouping.Recipe);
@@ -74,7 +72,7 @@ namespace MostVersatileMaterials
                 var choice = AnsiConsole.Prompt(new SelectionPrompt<Item>()
                     .Title("Pick an ingredient to see the available recipes")
                     .MoreChoicesText("Scroll down for less commonly used ingredients")
-                    .AddChoices(recipes.Ingredients)
+                    .AddChoices(ingredients)
                     .UseConverter(item => item.Name)
                     .PageSize(20));
 
@@ -92,7 +90,7 @@ namespace MostVersatileMaterials
                 var outputs = await Progress()
                     .StartAsync(async ctx =>
                     {
-                        var itemIds = recipes.Craftable[choice.Id]
+                        var itemIds = recipes[choice.Id]
                             .Select(recipe => recipe.OutputItemId)
                             .ToHashSet();
                         return await GetItems(itemIds, itemsService, ctx.AddTask("Fetching output items"));

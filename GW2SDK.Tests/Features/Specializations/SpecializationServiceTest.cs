@@ -131,7 +131,7 @@ namespace GW2SDK.Tests.Features.Specializations
             await Assert.ThrowsAsync<ArgumentException>("specializationIds",
                 async () =>
                 {
-                    await sut.GetSpecializationsByIds(new int[0]);
+                    await sut.GetSpecializationsByIds(Array.Empty<int>());
                 });
         }
     }

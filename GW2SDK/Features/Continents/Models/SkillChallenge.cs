@@ -1,4 +1,5 @@
-﻿using GW2SDK.Annotations;
+﻿using System;
+using GW2SDK.Annotations;
 using JetBrains.Annotations;
 
 namespace GW2SDK.Continents
@@ -9,6 +10,6 @@ namespace GW2SDK.Continents
     {
         public string Id { get; init; } = "";
 
-        public double[] Coordinates { get; init; } = new double[0];
+        public double[] Coordinates { get; init; } = Array.Empty<double>();
     }
 }

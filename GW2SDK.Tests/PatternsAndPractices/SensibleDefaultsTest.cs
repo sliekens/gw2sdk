@@ -1,6 +1,5 @@
 ﻿using System;
 using System.ComponentModel;
-using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
 using GW2SDK.Tests.TestInfrastructure;
@@ -12,10 +11,10 @@ namespace GW2SDK.Tests.PatternsAndPractices
     {
         public SensibleDefaultsTest(AssemblyFixture fixture)
         {
-            _fixture = fixture;
+            this.fixture = fixture;
         }
 
-        private readonly AssemblyFixture _fixture;
+        private readonly AssemblyFixture fixture;
 
         [Fact]
         public void Every_default_enum_member_is_intentional()
@@ -28,7 +27,7 @@ namespace GW2SDK.Tests.PatternsAndPractices
              * => Sunday
              *
              */
-            var enums = _fixture.Assembly.ExportedTypes.Where(type => type.IsEnum).ToList();
+            var enums = fixture.Assembly.ExportedTypes.Where(type => type.IsEnum).ToList();
             Assert.All(enums,
                 type =>
                 {

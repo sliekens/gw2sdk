@@ -1,4 +1,5 @@
-﻿using GW2SDK.Annotations;
+﻿using System;
+using GW2SDK.Annotations;
 using JetBrains.Annotations;
 
 namespace GW2SDK.Backstories.Questions
@@ -13,7 +14,7 @@ namespace GW2SDK.Backstories.Questions
 
         public string Description { get; init; } = "";
 
-        public string[] Answers { get; init; } = new string[0];
+        public string[] Answers { get; init; } = Array.Empty<string>();
 
         public int Order { get; init; }
 

@@ -1,4 +1,5 @@
-﻿using GW2SDK.Annotations;
+﻿using System;
+using GW2SDK.Annotations;
 using JetBrains.Annotations;
 
 namespace GW2SDK.Traits
@@ -11,7 +12,7 @@ namespace GW2SDK.Traits
 
         public string Name { get; init; } = "";
 
-        public TraitFact[] Facts { get; init; } = new TraitFact[0];
+        public TraitFact[] Facts { get; init; } = Array.Empty<TraitFact>();
 
         public CompoundTraitFact[]? TraitedFacts { get; init; }
 

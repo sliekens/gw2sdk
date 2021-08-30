@@ -57,10 +57,7 @@ namespace ApiVersionInfo
 
             var metadata = await AnsiConsole.Status()
                 .StartAsync("Retrieving API endpoints...",
-                    async ctx =>
-                    {
-                        return await infoService.GetApiInfo();
-                    });
+                    async ctx => await infoService.GetApiInfo());
 
             var showDisabled = AnsiConsole.Confirm("Show disabled routes?", false);
 

@@ -1,10 +1,12 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Diagnostics.CodeAnalysis;
 using static System.AttributeTargets;
 
 namespace GW2SDK.Annotations
 {
     [AttributeUsage(Class | Method | Property, AllowMultiple = true )]
+    [SuppressMessage("ReSharper", "MemberCanBePrivate.Global")]
     internal sealed class ScopeAttribute : Attribute
     {
         public ScopeAttribute(params Permission[] permissions)

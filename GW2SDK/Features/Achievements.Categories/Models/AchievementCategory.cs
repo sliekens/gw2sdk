@@ -1,4 +1,5 @@
-﻿using GW2SDK.Annotations;
+﻿using System;
+using GW2SDK.Annotations;
 using JetBrains.Annotations;
 
 namespace GW2SDK.Achievements.Categories
@@ -17,6 +18,6 @@ namespace GW2SDK.Achievements.Categories
 
         public string Icon { get; init; } = "";
 
-        public int[] Achievements { get; init; } = new int[0];
+        public int[] Achievements { get; init; } = Array.Empty<int>();
     }
 }

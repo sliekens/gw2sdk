@@ -181,7 +181,7 @@ namespace GW2SDK.Tests.Features.Backstories
 
             var actual = await Record.ExceptionAsync(async () =>
             {
-                var _ = await sut.GetBackstoryQuestionsByIds(new int[0]);
+                var _ = await sut.GetBackstoryQuestionsByIds(Array.Empty<int>());
             });
 
             var reason = Assert.IsType<ArgumentException>(actual);
@@ -198,7 +198,7 @@ namespace GW2SDK.Tests.Features.Backstories
 
             var actual = await Record.ExceptionAsync(async () =>
             {
-                var _ = await sut.GetBackstoryAnswersByIds(new string[0]);
+                var _ = await sut.GetBackstoryAnswersByIds(Array.Empty<string>());
             });
 
             var reason = Assert.IsType<ArgumentException>(actual);

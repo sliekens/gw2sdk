@@ -11,21 +11,26 @@ namespace GW2SDK.Tests.TestInfrastructure
 {
     public class TestHttpClientFactory : IHttpClientFactory, IAsyncDisposable
     {
-        private readonly ServiceProvider _httpClientProvider = BuildHttpClientProvider();
+        private readonly ServiceProvider httpClientProvider;
+
+        public TestHttpClientFactory(Uri baseAddress)
+        {
+            httpClientProvider = BuildHttpClientProvider(baseAddress);
+        }
 
         public async ValueTask DisposeAsync()
         {
-            await _httpClientProvider.DisposeAsync()
+            await httpClientProvider.DisposeAsync()
                 .ConfigureAwait(false);
             GC.SuppressFinalize(this);
         }
 
         public HttpClient CreateClient(string name) =>
-            _httpClientProvider.GetRequiredService<IHttpClientFactory>()
+            httpClientProvider.GetRequiredService<IHttpClientFactory>()
                 .CreateClient(name);
 
         /// <summary>Creates a service provider for the HTTP factory which is unfortunately very dependent on ServiceCollection.</summary>
-        private static ServiceProvider BuildHttpClientProvider()
+        private static ServiceProvider BuildHttpClientProvider(Uri baseAddress)
         {
             var services = new ServiceCollection();
 
@@ -37,7 +42,7 @@ namespace GW2SDK.Tests.TestInfrastructure
             services.AddHttpClient("GW2SDK",
                     http =>
                     {
-                        http.BaseAddress = ConfigurationManager.Instance.BaseAddress;
+                        http.BaseAddress = baseAddress;
                         http.UseSchemaVersion(SchemaVersion.Latest);
                     })
                 .ConfigurePrimaryHttpMessageHandler(() =>

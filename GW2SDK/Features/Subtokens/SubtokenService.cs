@@ -12,18 +12,18 @@ namespace GW2SDK.Subtokens
     [PublicAPI]
     public sealed class SubtokenService
     {
-        private readonly HttpClient _http;
+        private readonly HttpClient http;
 
-        private readonly ISubtokenReader _subtokenReader;
-        private readonly MissingMemberBehavior _missingMemberBehavior;
+        private readonly ISubtokenReader subtokenReader;
+        private readonly MissingMemberBehavior missingMemberBehavior;
 
         public SubtokenService(HttpClient http, ISubtokenReader subtokenReader,
             MissingMemberBehavior missingMemberBehavior
         )
         {
-            _http = http ?? throw new ArgumentNullException(nameof(http));
-            _subtokenReader = subtokenReader ?? throw new ArgumentNullException(nameof(subtokenReader));
-            _missingMemberBehavior = missingMemberBehavior;
+            this.http = http ?? throw new ArgumentNullException(nameof(http));
+            this.subtokenReader = subtokenReader ?? throw new ArgumentNullException(nameof(subtokenReader));
+            this.missingMemberBehavior = missingMemberBehavior;
         }
 
         public async Task<IReplica<CreatedSubtoken>> CreateSubtoken(
@@ -34,7 +34,7 @@ namespace GW2SDK.Subtokens
         )
         {
             var request = new CreateSubtokenRequest(accessToken, permissions, absoluteExpirationDate, urls);
-            return await _http.GetResource(request, json => _subtokenReader.Read(json, _missingMemberBehavior))
+            return await http.GetResource(request, json => subtokenReader.Read(json, missingMemberBehavior))
                 .ConfigureAwait(false);
         }
     }

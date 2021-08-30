@@ -5,40 +5,40 @@ namespace GW2SDK.Json
 {
     internal readonly ref struct NullableMember<T> where T : struct
     {
-        private readonly JsonMember _member;
+        private readonly JsonMember member;
 
 #if !NET // Because there is no implicit cast from String to ReadOnlySpan
         internal NullableMember(string name)
         {
             Name = name.AsSpan();
-            _member = default;
+            member = default;
         }
 #endif
 
         internal NullableMember(ReadOnlySpan<char> name)
         {
             Name = name;
-            _member = default;
+            member = default;
         }
 
         private NullableMember(ReadOnlySpan<char> name, JsonMember member)
         {
             Name = name;
-            _member = member;
+            this.member = member;
         }
 
         internal ReadOnlySpan<char> Name { get; }
 
         internal T? Select(Func<JsonElement, T?> selector)
         {
-            if (_member.IsMissing)
+            if (member.IsMissing)
             {
                 return default;
             }
 
             try
             {
-                return selector(_member.Value);
+                return selector(member.Value);
             }
             catch (Exception reason)
             {

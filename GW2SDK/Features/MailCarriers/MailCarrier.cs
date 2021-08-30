@@ -1,4 +1,5 @@
-﻿using GW2SDK.Annotations;
+﻿using System;
+using GW2SDK.Annotations;
 using JetBrains.Annotations;
 
 namespace GW2SDK.MailCarriers
@@ -9,7 +10,7 @@ namespace GW2SDK.MailCarriers
     {
         public int Id { get; init; }
 
-        public int[] UnlockItems { get; init; } = new int[0];
+        public int[] UnlockItems { get; init; } = Array.Empty<int>();
 
         public int Order { get; init; }
 
@@ -17,6 +18,6 @@ namespace GW2SDK.MailCarriers
 
         public string Name { get; init; } = "";
 
-        public MailCarrierFlag[] Flags { get; init; } = new MailCarrierFlag[0];
+        public MailCarrierFlag[] Flags { get; init; } = Array.Empty<MailCarrierFlag>();
     }
 }

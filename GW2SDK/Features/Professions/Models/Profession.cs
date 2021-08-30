@@ -20,7 +20,7 @@ namespace GW2SDK.Professions
 
         public string IconBig { get; init; } = "";
 
-        public int[] Specializations { get; init; } = new int[0];
+        public int[] Specializations { get; init; } = Array.Empty<int>();
 
         public IDictionary<string, WeaponProficiency> Weapons { get; init; } =
             new Dictionary<string, WeaponProficiency>();

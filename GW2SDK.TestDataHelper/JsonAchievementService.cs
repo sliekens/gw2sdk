@@ -10,11 +10,11 @@ namespace GW2SDK.TestDataHelper
 {
     public class JsonAchievementService
     {
-        private readonly HttpClient _http;
+        private readonly HttpClient http;
 
         public JsonAchievementService(HttpClient http)
         {
-            _http = http;
+            this.http = http;
         }
 
         public async Task<ISet<string>> GetAllJsonAchievements()
@@ -56,7 +56,7 @@ namespace GW2SDK.TestDataHelper
         private async Task<List<int>> GetAchievementIds()
         {
             var request = new AchievementsIndexRequest();
-            using var response = await _http.SendAsync(request, HttpCompletionOption.ResponseHeadersRead)
+            using var response = await http.SendAsync(request, HttpCompletionOption.ResponseHeadersRead)
                 .ConfigureAwait(false);
             response.EnsureSuccessStatusCode();
             using var json = await response.Content.ReadAsJsonAsync()
@@ -69,7 +69,7 @@ namespace GW2SDK.TestDataHelper
         private async Task<List<string>> GetJsonAchievementsByIds(IReadOnlyCollection<int> achievementIds)
         {
             var request = new AchievementsByIdsRequest(achievementIds, default);
-            using var response = await _http.SendAsync(request, HttpCompletionOption.ResponseHeadersRead)
+            using var response = await http.SendAsync(request, HttpCompletionOption.ResponseHeadersRead)
                 .ConfigureAwait(false);
             response.EnsureSuccessStatusCode();
 

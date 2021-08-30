@@ -12,11 +12,11 @@ namespace GW2SDK.ItemStats
     [PublicAPI]
     public sealed class ItemStatService
     {
-        private readonly HttpClient _http;
+        private readonly HttpClient http;
 
-        private readonly IItemStatReader _itemStatReader;
+        private readonly IItemStatReader itemStatReader;
 
-        private readonly MissingMemberBehavior _missingMemberBehavior;
+        private readonly MissingMemberBehavior missingMemberBehavior;
 
         public ItemStatService(
             HttpClient http,
@@ -24,30 +24,30 @@ namespace GW2SDK.ItemStats
             MissingMemberBehavior missingMemberBehavior
         )
         {
-            _http = http ?? throw new ArgumentNullException(nameof(http));
-            _itemStatReader = itemStatReader ?? throw new ArgumentNullException(nameof(itemStatReader));
-            _missingMemberBehavior = missingMemberBehavior;
+            this.http = http ?? throw new ArgumentNullException(nameof(http));
+            this.itemStatReader = itemStatReader ?? throw new ArgumentNullException(nameof(itemStatReader));
+            this.missingMemberBehavior = missingMemberBehavior;
         }
 
         public async Task<IReplicaSet<ItemStat>> GetItemStats(Language? language = default)
         {
             var request = new ItemStatsRequest(language);
-            return await _http.GetResourcesSet(request, json => _itemStatReader.ReadArray(json, _missingMemberBehavior))
+            return await http.GetResourcesSet(request, json => itemStatReader.ReadArray(json, missingMemberBehavior))
                 .ConfigureAwait(false);
         }
 
         public async Task<IReplicaSet<int>> GetItemStatsIndex()
         {
             var request = new ItemStatsIndexRequest();
-            return await _http
-                .GetResourcesSet(request, json => _itemStatReader.Id.ReadArray(json, _missingMemberBehavior))
+            return await http
+                .GetResourcesSet(request, json => itemStatReader.Id.ReadArray(json, missingMemberBehavior))
                 .ConfigureAwait(false);
         }
 
         public async Task<IReplica<ItemStat>> GetItemStatById(int itemStatId, Language? language = default)
         {
             var request = new ItemStatByIdRequest(itemStatId, language);
-            return await _http.GetResource(request, json => _itemStatReader.Read(json, _missingMemberBehavior))
+            return await http.GetResource(request, json => itemStatReader.Read(json, missingMemberBehavior))
                 .ConfigureAwait(false);
         }
 
@@ -57,7 +57,7 @@ namespace GW2SDK.ItemStats
         )
         {
             var request = new ItemStatsByIdsRequest(itemStatIds, language);
-            return await _http.GetResourcesSet(request, json => _itemStatReader.ReadArray(json, _missingMemberBehavior))
+            return await http.GetResourcesSet(request, json => itemStatReader.ReadArray(json, missingMemberBehavior))
                 .ConfigureAwait(false);
         }
 
@@ -68,8 +68,8 @@ namespace GW2SDK.ItemStats
         )
         {
             var request = new ItemStatsByPageRequest(pageIndex, pageSize, language);
-            return await _http
-                .GetResourcesPage(request, json => _itemStatReader.ReadArray(json, _missingMemberBehavior))
+            return await http
+                .GetResourcesPage(request, json => itemStatReader.ReadArray(json, missingMemberBehavior))
                 .ConfigureAwait(false);
         }
 
@@ -80,8 +80,8 @@ namespace GW2SDK.ItemStats
         public async Task<IReplicaPage<ItemStat>> GetItemStatsByPage(ContinuationToken token)
         {
             var request = new ContinuationRequest(token);
-            return await _http
-                .GetResourcesPage(request, json => _itemStatReader.ReadArray(json, _missingMemberBehavior))
+            return await http
+                .GetResourcesPage(request, json => itemStatReader.ReadArray(json, missingMemberBehavior))
                 .ConfigureAwait(false);
         }
     }

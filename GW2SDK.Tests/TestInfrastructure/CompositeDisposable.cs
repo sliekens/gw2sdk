@@ -6,47 +6,47 @@ namespace GW2SDK.Tests.TestInfrastructure
 {
     internal sealed class CompositeDisposable : IAsyncDisposable, IDisposable
     {
-        private bool _disposed;
+        private bool disposed;
 
-        private readonly List<IDisposable> _disposables = new();
+        private readonly List<IDisposable> disposables = new();
 
-        private readonly List<IAsyncDisposable> _asyncDisposables = new();
+        private readonly List<IAsyncDisposable> asyncDisposables = new();
 
         public void Add(IDisposable disposable)
         {
-            if (_disposed)
+            if (disposed)
             {
                 throw new ObjectDisposedException("CompositeDisposable cannot be reused once disposed. Create a new instance.");
             }
 
-            _disposables.Add(disposable);
+            disposables.Add(disposable);
         }
 
         public void Add(IAsyncDisposable disposable)
         {
-            if (_disposed)
+            if (disposed)
             {
                 throw new ObjectDisposedException("CompositeDisposable cannot be reused once disposed. Create a new instance.");
             }
 
-            _asyncDisposables.Add(disposable);
+            asyncDisposables.Add(disposable);
         }
 
         public void Dispose()
         {
-            if (_disposed) return;
+            if (disposed) return;
             Dispose(true);
         }
 
         public async ValueTask DisposeAsync()
         {
-            if (_disposed) return;
-            foreach (var asyncDisposable in _asyncDisposables)
+            if (disposed) return;
+            foreach (var asyncDisposable in asyncDisposables)
             {
                 await asyncDisposable.DisposeAsync().ConfigureAwait(false);
             }
 
-            foreach (var disposable in _disposables)
+            foreach (var disposable in disposables)
             {
                 if (disposable is IAsyncDisposable asyncDisposable)
                 {
@@ -65,20 +65,20 @@ namespace GW2SDK.Tests.TestInfrastructure
         {
             if (disposing)
             {
-                foreach (var disposable in _disposables)
+                foreach (var disposable in disposables)
                 {
                     disposable.Dispose();
                 }
 
-                foreach (var asyncDisposable in _asyncDisposables)
+                foreach (var asyncDisposable in asyncDisposables)
                 {
                     (asyncDisposable as IDisposable)?.Dispose();
                 }
             }
 
-            _disposed = true;
-            _disposables.Clear();
-            _asyncDisposables.Clear();
+            disposed = true;
+            disposables.Clear();
+            asyncDisposables.Clear();
         }
     }
 }

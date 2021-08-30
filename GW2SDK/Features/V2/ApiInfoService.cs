@@ -11,23 +11,23 @@ namespace GW2SDK.V2
     [PublicAPI]
     public sealed class ApiInfoService
     {
-        private readonly IApiInfoReader _apiInfoReader;
-        private readonly HttpClient _http;
-        private readonly MissingMemberBehavior _missingMemberBehavior;
+        private readonly IApiInfoReader apiInfoReader;
+        private readonly HttpClient http;
+        private readonly MissingMemberBehavior missingMemberBehavior;
 
         public ApiInfoService(HttpClient http, IApiInfoReader apiInfoReader,
             MissingMemberBehavior missingMemberBehavior
         )
         {
-            _http = http ?? throw new ArgumentNullException(nameof(http));
-            _apiInfoReader = apiInfoReader ?? throw new ArgumentNullException(nameof(apiInfoReader));
-            _missingMemberBehavior = missingMemberBehavior;
+            this.http = http ?? throw new ArgumentNullException(nameof(http));
+            this.apiInfoReader = apiInfoReader ?? throw new ArgumentNullException(nameof(apiInfoReader));
+            this.missingMemberBehavior = missingMemberBehavior;
         }
 
         public async Task<IReplica<ApiInfo>> GetApiInfo()
         {
             var request = new ApiInfoRequest();
-            return await _http.GetResource(request, json => _apiInfoReader.Read(json, _missingMemberBehavior))
+            return await http.GetResource(request, json => apiInfoReader.Read(json, missingMemberBehavior))
                 .ConfigureAwait(false);
         }
     }

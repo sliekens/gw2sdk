@@ -12,11 +12,11 @@ namespace GW2SDK.Mounts
     [PublicAPI]
     public sealed class MountService
     {
-        private readonly HttpClient _http;
+        private readonly HttpClient http;
 
-        private readonly MissingMemberBehavior _missingMemberBehavior;
+        private readonly MissingMemberBehavior missingMemberBehavior;
 
-        private readonly IMountReader _mountReader;
+        private readonly IMountReader mountReader;
 
         public MountService(
             HttpClient http,
@@ -24,31 +24,31 @@ namespace GW2SDK.Mounts
             MissingMemberBehavior missingMemberBehavior
         )
         {
-            _http = http ?? throw new ArgumentNullException(nameof(http));
-            _mountReader = mountReader ?? throw new ArgumentNullException(nameof(mountReader));
-            _missingMemberBehavior = missingMemberBehavior;
+            this.http = http ?? throw new ArgumentNullException(nameof(http));
+            this.mountReader = mountReader ?? throw new ArgumentNullException(nameof(mountReader));
+            this.missingMemberBehavior = missingMemberBehavior;
         }
 
         public async Task<IReplicaSet<Mount>> GetMounts(Language? language = default)
         {
             var request = new MountsRequest(language);
-            return await _http
-                .GetResourcesSet(request, json => _mountReader.Mount.ReadArray(json, _missingMemberBehavior))
+            return await http
+                .GetResourcesSet(request, json => mountReader.Mount.ReadArray(json, missingMemberBehavior))
                 .ConfigureAwait(false);
         }
 
         public async Task<IReplicaSet<MountName>> GetMountNames()
         {
             var request = new MountNamesRequest();
-            return await _http.GetResourcesSet(request,
-                    json => _mountReader.MountId.ReadArray(json, _missingMemberBehavior))
+            return await http.GetResourcesSet(request,
+                    json => mountReader.MountId.ReadArray(json, missingMemberBehavior))
                 .ConfigureAwait(false);
         }
 
         public async Task<IReplica<Mount>> GetMountByName(MountName mountName, Language? language = default)
         {
             var request = new MountByNameRequest(mountName, language);
-            return await _http.GetResource(request, json => _mountReader.Mount.Read(json, _missingMemberBehavior))
+            return await http.GetResource(request, json => mountReader.Mount.Read(json, missingMemberBehavior))
                 .ConfigureAwait(false);
         }
 
@@ -58,8 +58,8 @@ namespace GW2SDK.Mounts
         )
         {
             var request = new MountsByNamesRequest(mountNames, language);
-            return await _http
-                .GetResourcesSet(request, json => _mountReader.Mount.ReadArray(json, _missingMemberBehavior))
+            return await http
+                .GetResourcesSet(request, json => mountReader.Mount.ReadArray(json, missingMemberBehavior))
                 .ConfigureAwait(false);
         }
 
@@ -70,31 +70,31 @@ namespace GW2SDK.Mounts
         )
         {
             var request = new MountsByPageRequest(pageIndex, pageSize, language);
-            return await _http
-                .GetResourcesPage(request, json => _mountReader.Mount.ReadArray(json, _missingMemberBehavior))
+            return await http
+                .GetResourcesPage(request, json => mountReader.Mount.ReadArray(json, missingMemberBehavior))
                 .ConfigureAwait(false);
         }
 
         public async Task<IReplicaSet<MountSkin>> GetMountSkins(Language? language = default)
         {
             var request = new MountSkinsRequest(language);
-            return await _http.GetResourcesSet(request,
-                    json => _mountReader.MountSkin.ReadArray(json, _missingMemberBehavior))
+            return await http.GetResourcesSet(request,
+                    json => mountReader.MountSkin.ReadArray(json, missingMemberBehavior))
                 .ConfigureAwait(false);
         }
 
         public async Task<IReplicaSet<int>> GetMountSkinsIndex()
         {
             var request = new MountSkinsIndexRequest();
-            return await _http.GetResourcesSet(request,
-                    json => _mountReader.MountSkinId.ReadArray(json, _missingMemberBehavior))
+            return await http.GetResourcesSet(request,
+                    json => mountReader.MountSkinId.ReadArray(json, missingMemberBehavior))
                 .ConfigureAwait(false);
         }
 
         public async Task<IReplica<MountSkin>> GetMountSkinById(int mountSkinId, Language? language = default)
         {
             var request = new MountSkinByIdRequest(mountSkinId, language);
-            return await _http.GetResource(request, json => _mountReader.MountSkin.Read(json, _missingMemberBehavior))
+            return await http.GetResource(request, json => mountReader.MountSkin.Read(json, missingMemberBehavior))
                 .ConfigureAwait(false);
         }
 
@@ -104,8 +104,8 @@ namespace GW2SDK.Mounts
         )
         {
             var request = new MountSkinsByIdsRequest(mountSkinIds, language);
-            return await _http.GetResourcesSet(request,
-                    json => _mountReader.MountSkin.ReadArray(json, _missingMemberBehavior))
+            return await http.GetResourcesSet(request,
+                    json => mountReader.MountSkin.ReadArray(json, missingMemberBehavior))
                 .ConfigureAwait(false);
         }
 
@@ -116,8 +116,8 @@ namespace GW2SDK.Mounts
         )
         {
             var request = new MountSkinsByPageRequest(pageIndex, pageSize, language);
-            return await _http.GetResourcesPage(request,
-                    json => _mountReader.MountSkin.ReadArray(json, _missingMemberBehavior))
+            return await http.GetResourcesPage(request,
+                    json => mountReader.MountSkin.ReadArray(json, missingMemberBehavior))
                 .ConfigureAwait(false);
         }
     }

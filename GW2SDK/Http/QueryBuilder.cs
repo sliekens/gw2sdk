@@ -11,23 +11,23 @@ namespace GW2SDK.Http
     [PublicAPI]
     public sealed class QueryBuilder
     {
-        private readonly List<Argument> _arguments = new();
+        private readonly List<Argument> arguments = new();
 
-        public int Count => _arguments.Count;
+        public int Count => arguments.Count;
 
-        public void Add(string key, int value) => _arguments.Add(new Argument(key, ToString(value)));
+        public void Add(string key, int value) => arguments.Add(new Argument(key, ToString(value)));
 
-        public void Add(string key, string value) => _arguments.Add(new Argument(key, value));
+        public void Add(string key, string value) => arguments.Add(new Argument(key, value));
 
-        public void Add(string key, IEnumerable<string> values) => _arguments.Add(new Argument(key, ToCsv(values)));
+        public void Add(string key, IEnumerable<string> values) => arguments.Add(new Argument(key, ToCsv(values)));
 
         public void Add(string key, IEnumerable<int> values) =>
-            _arguments.Add(new Argument(key, ToCsv(ToString(values))));
+            arguments.Add(new Argument(key, ToCsv(ToString(values))));
 
         public string Build()
         {
             var query = new StringBuilder();
-            foreach (var (key, value) in _arguments)
+            foreach (var (key, value) in arguments)
             {
                 if (query.Length != 0)
                 {

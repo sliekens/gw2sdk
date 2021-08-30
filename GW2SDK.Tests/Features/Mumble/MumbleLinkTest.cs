@@ -16,7 +16,6 @@ namespace GW2SDK.Tests.Features.Mumble
 
         public Task<bool> Handle => tcs.Task;
 
-        public bool HasFirst { get; private set; }
         public Snapshot First { get; private set; }
 
         public Snapshot Last { get; private set; }
@@ -29,7 +28,7 @@ namespace GW2SDK.Tests.Features.Mumble
 
         public void OnCompleted()
         {
-            tcs.SetResult(HasFirst);
+            tcs.SetResult(true);
         }
 
         public void OnError(Exception error)
@@ -40,9 +39,8 @@ namespace GW2SDK.Tests.Features.Mumble
         public void OnNext(Snapshot value)
         {
             // ReSharper disable once ConditionIsAlwaysTrueOrFalse
-            if (!HasFirst)
+            if (First.UiTick == 0)
             {
-                HasFirst = true;
                 First = value;
             }
             else
@@ -78,7 +76,8 @@ namespace GW2SDK.Tests.Features.Mumble
 
             try
             {
-                await actual.Handle;
+                var success = await actual.Handle;
+                Assert.True(success, "MumbleLink should push updates to subscribers.");
             }
             catch (TaskCanceledException)
             {
@@ -96,6 +95,12 @@ namespace GW2SDK.Tests.Features.Mumble
             var snapshot = sut.GetSnapshot();
             Assert.True(snapshot.TryGetContext(out var actual));
             Assert.True(actual.BuildId > 100_000, "Game build should be over 100,000");
+
+            var server = actual.GetServerAddress();
+            Assert.NotEmpty(server.ToString());
+
+            // Port is not specified
+            Assert.Equal(0, server.Port);
         }
 
         [MumbleLinkFact]

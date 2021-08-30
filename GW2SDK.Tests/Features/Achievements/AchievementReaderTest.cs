@@ -11,10 +11,10 @@ namespace GW2SDK.Tests.Features.Achievements
     {
         public AchievementReaderTest(AchievementFixture fixture)
         {
-            _fixture = fixture;
+            this.fixture = fixture;
         }
 
-        private readonly AchievementFixture _fixture;
+        private readonly AchievementFixture fixture;
 
         private static class AchievementFact
         {
@@ -66,7 +66,7 @@ namespace GW2SDK.Tests.Features.Achievements
         {
             var sut = new AchievementReader();
 
-            AssertEx.ForEach(_fixture.Achievements,
+            AssertEx.ForEach(fixture.Achievements,
                 json =>
                 {
                     using var document = JsonDocument.Parse(json);
