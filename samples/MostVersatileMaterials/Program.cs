@@ -1,8 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using GW2SDK;
 using GW2SDK.Http;
@@ -25,7 +27,8 @@ namespace MostVersatileMaterials
         {
             using var http = new HttpClient(new SocketsHttpHandler
                 {
-                    AutomaticDecompression = DecompressionMethods.GZip
+                    AutomaticDecompression = DecompressionMethods.GZip,
+                    MaxConnectionsPerServer = 20
                 },
                 true);
 
@@ -36,7 +39,6 @@ namespace MostVersatileMaterials
             var recipesService = new RecipeService(http, new RecipeReader(), MissingMemberBehavior.Undefined);
             var itemsService = new ItemService(http, new ItemReader(), MissingMemberBehavior.Undefined);
 
-            const int top = 600;
             var recipes = await Progress()
                 .StartAsync(async ctx =>
                 {
@@ -46,21 +48,23 @@ namespace MostVersatileMaterials
                         ctx.AddTask("Fetching ingredients", new ProgressTaskSettings { AutoStart = false });
 
                     var craftable = await GetRecipes(recipesService, recipesProgress);
-
+                    
                     var groupedByIngredient = craftable.SelectMany(recipe =>
                             recipe.Ingredients.Select(ingredient => (Ingredient: ingredient.ItemId, Recipe: recipe)))
                         .ToLookup(grouping => grouping.Ingredient, grouping => grouping.Recipe);
 
+                    var ingredientIndex = groupedByIngredient.Select(grouping => grouping.Key)
+                        .ToHashSet();
+
+                    var ingredients = await GetItems(ingredientIndex, itemsService, ingredientsProgress);
+
+                    var ingredientsDictionary = ingredients.ToDictionary(item => item.Id);
+
                     var mostCommon = groupedByIngredient.OrderByDescending(grouping => grouping.Count())
-                        .Take(top)
+                        .Select(grouping => ingredientsDictionary[grouping.Key])
                         .ToList();
 
-                    var ingredientIds = mostCommon.Select(grouping => grouping.Key)
-                        .ToList();
-
-                    var ingredients = await GetItems(ingredientIds, itemsService, ingredientsProgress);
-
-                    return (Ingredients: ingredients, Craftable: groupedByIngredient);
+                    return (Ingredients: mostCommon, Craftable: groupedByIngredient);
                 });
 
             do
@@ -90,7 +94,7 @@ namespace MostVersatileMaterials
                     {
                         var itemIds = recipes.Craftable[choice.Id]
                             .Select(recipe => recipe.OutputItemId)
-                            .ToList();
+                            .ToHashSet();
                         return await GetItems(itemIds, itemsService, ctx.AddTask("Fetching output items"));
                     });
 
@@ -117,47 +121,52 @@ namespace MostVersatileMaterials
         private static async Task<List<Recipe>> GetRecipes(RecipeService recipesService, ProgressTask progress)
         {
             progress.StartTask();
-
-            var page = await recipesService.GetRecipesByPage(0, 200);
-
-            var context = page.Context;
-            progress.MaxValue(context.ResultTotal)
-                .Value(context.ResultCount);
-
-            var recipes = new List<Recipe>(page.Values) { Capacity = context.ResultTotal };
-            var next = context.Next;
-            while (!next.IsEmpty)
+            try
             {
-                page = await recipesService.GetRecipesByPage(next);
-                recipes.AddRange(page.Values);
-
-                progress.Increment(context.ResultCount);
+                return await recipesService.GetRecipes(progress: new ProgressTaskAdapter(progress))
+                    .Select(result => result.Value)
+                    .OrderByDescending(recipe => recipe.Id)
+                    .ToListAsync();
             }
-
-            progress.StopTask();
-
-            return recipes;
+            finally
+            {
+                progress.StopTask();
+            }
         }
 
         private static async Task<List<Item>> GetItems(
-            IReadOnlyCollection<int> itemIds,
+            IReadOnlySet<int> itemIds,
             ItemService itemsService,
             ProgressTask progress
         )
         {
-            progress.MaxValue(itemIds.Count)
-                .StartTask();
             var items = new List<Item>(itemIds.Count);
-            foreach (var ids in itemIds.Buffer(200))
+
+            progress.StartTask();
+            await foreach (var item in itemsService.GetItemsByIds(itemIds, progress: new ProgressTaskAdapter(progress)))
             {
-                var subset = await itemsService.GetItemsByIds(ids.ToList());
-                items.AddRange(subset.Values);
-                progress.Increment(subset.Context.ResultCount);
+                items.Add(item.Value);
             }
 
             progress.StopTask();
 
             return items;
+        }
+    }
+
+    internal class ProgressTaskAdapter : IProgress<ICollectionContext>
+    {
+        private readonly ProgressTask progressTask;
+
+        public ProgressTaskAdapter(ProgressTask progressTask)
+        {
+            this.progressTask = progressTask;
+        }
+
+        public void Report(ICollectionContext value)
+        {
+            progressTask.MaxValue(value.ResultTotal);
+            progressTask.Increment(value.ResultCount);
         }
     }
 }

@@ -45,13 +45,11 @@ namespace GW2SDK.Tests.TestInfrastructure
 #if NET
                     return new SocketsHttpHandler
                     {
-                        MaxConnectionsPerServer = 10,
                         AutomaticDecompression = DecompressionMethods.GZip
                     };
 #else
                     return new HttpClientHandler
                     {
-                        MaxConnectionsPerServer = 10,
                         AutomaticDecompression = DecompressionMethods.GZip
                     };
 #endif

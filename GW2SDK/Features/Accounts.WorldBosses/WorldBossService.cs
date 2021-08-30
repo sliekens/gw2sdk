@@ -33,7 +33,7 @@ namespace GW2SDK.Accounts.WorldBosses
 #if NET
         public async Task<IReplica<IReadOnlySet<string>>> GetWorldBosses()
 #else
-        public async Task<IReplica<ISet<string>>> GetWorldBosses()
+        public async Task<IReplica<IReadOnlyCollection<string>>> GetWorldBosses()
 #endif
         {
             var request = new WorldBossesRequest();
@@ -46,7 +46,7 @@ namespace GW2SDK.Accounts.WorldBosses
 #if NET
         public async Task<IReplica<IReadOnlySet<string>>> GetWorldBossesOnCooldown(string? accessToken)
 #else
-        public async Task<IReplica<ISet<string>>> GetWorldBossesOnCooldown(string? accessToken)
+        public async Task<IReplica<IReadOnlyCollection<string>>> GetWorldBossesOnCooldown(string? accessToken)
 #endif
         {
             var request = new AccountWorldBossesRequest(accessToken);

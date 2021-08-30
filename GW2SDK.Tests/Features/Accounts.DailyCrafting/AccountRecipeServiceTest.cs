@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Linq;
+using System.Threading.Tasks;
 using GW2SDK.Accounts.DailyCrafting;
 using GW2SDK.Tests.TestInfrastructure;
 using Xunit;

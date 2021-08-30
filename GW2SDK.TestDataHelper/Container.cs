@@ -72,7 +72,6 @@ namespace GW2SDK.TestDataHelper
                     })
                 .ConfigurePrimaryHttpMessageHandler(() => new SocketsHttpHandler
                 {
-                    MaxConnectionsPerServer = 20,
                     AutomaticDecompression = DecompressionMethods.GZip
                 })
                 .AddPolicyHandlerFromRegistry("api.guildwars2.com")

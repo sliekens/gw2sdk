@@ -1,4 +1,5 @@
-﻿using System;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using GW2SDK.Recipes;
 using GW2SDK.Tests.TestInfrastructure;
@@ -9,7 +10,7 @@ namespace GW2SDK.Tests.Features.Recipes
     public class RecipeServiceTest
     {
         [Fact]
-        [Trait("Feature",  "Recipes")]
+        [Trait("Feature", "Recipes")]
         [Trait("Category", "Integration")]
         public async Task It_can_get_all_recipe_ids()
         {
@@ -22,7 +23,7 @@ namespace GW2SDK.Tests.Features.Recipes
         }
 
         [Fact]
-        [Trait("Feature",  "Recipes")]
+        [Trait("Feature", "Recipes")]
         [Trait("Category", "Integration")]
         public async Task It_can_get_a_recipe_by_id()
         {
@@ -37,52 +38,31 @@ namespace GW2SDK.Tests.Features.Recipes
         }
 
         [Fact]
-        [Trait("Feature",  "Recipes")]
+        [Trait("Feature", "Recipes")]
         [Trait("Category", "Integration")]
         public async Task It_can_get_recipes_by_id()
         {
             await using var services = new Composer();
             var sut = services.Resolve<RecipeService>();
 
-            var ids = new[] { 1, 2, 3 };
+            var ids = new HashSet<int>
+            {
+                1,
+                2,
+                3
+            };
 
-            var actual = await sut.GetRecipesByIds(ids);
+            var actual = await sut.GetRecipesByIds(ids)
+                .ToListAsync();
 
-            Assert.Collection(actual.Values, recipe => Assert.Equal(1, recipe.Id), recipe => Assert.Equal(2, recipe.Id), recipe => Assert.Equal(3, recipe.Id));
+            Assert.Collection(actual,
+                recipe => Assert.Equal(1, recipe.Value.Id),
+                recipe => Assert.Equal(2, recipe.Value.Id),
+                recipe => Assert.Equal(3, recipe.Value.Id));
         }
 
         [Fact]
-        [Trait("Feature",  "Recipes")]
-        [Trait("Category", "Unit")]
-        public async Task Recipe_ids_cannot_be_null()
-        {
-            await using var services = new Composer();
-            var sut = services.Resolve<RecipeService>();
-
-            await Assert.ThrowsAsync<ArgumentNullException>("recipeIds",
-                async () =>
-                {
-                    await sut.GetRecipesByIds(null);
-                });
-        }
-
-        [Fact]
-        [Trait("Feature",  "Recipes")]
-        [Trait("Category", "Unit")]
-        public async Task Recipe_ids_cannot_be_empty()
-        {
-            await using var services = new Composer();
-            var sut = services.Resolve<RecipeService>();
-
-            await Assert.ThrowsAsync<ArgumentException>("recipeIds",
-                async () =>
-                {
-                    await sut.GetRecipesByIds(new int[0]);
-                });
-        }
-
-        [Fact]
-        [Trait("Feature",  "Recipes")]
+        [Trait("Feature", "Recipes")]
         [Trait("Category", "Integration")]
         public async Task It_can_get_recipes_by_page()
         {
@@ -96,7 +76,7 @@ namespace GW2SDK.Tests.Features.Recipes
         }
 
         [Fact]
-        [Trait("Feature",  "Recipes.Search")]
+        [Trait("Feature", "Recipes.Search")]
         [Trait("Category", "Integration")]
         public async Task Recipes_ids_with_iron_ore_ingredient_contains_recipe_id_for_iron_ingot()
         {
@@ -111,7 +91,7 @@ namespace GW2SDK.Tests.Features.Recipes
         }
 
         [Fact]
-        [Trait("Feature",  "Recipes.Search")]
+        [Trait("Feature", "Recipes.Search")]
         [Trait("Category", "Integration")]
         public async Task Recipes_with_iron_ore_ingredient_contains_recipe_for_iron_ingot()
         {
@@ -126,7 +106,7 @@ namespace GW2SDK.Tests.Features.Recipes
         }
 
         [Fact]
-        [Trait("Feature",  "Recipes.Search")]
+        [Trait("Feature", "Recipes.Search")]
         [Trait("Category", "Integration")]
         public async Task Recipes_page_with_iron_ore_ingredient_contains_recipe_for_iron_ingot()
         {
@@ -141,7 +121,7 @@ namespace GW2SDK.Tests.Features.Recipes
         }
 
         [Fact]
-        [Trait("Feature",  "Recipes.Search")]
+        [Trait("Feature", "Recipes.Search")]
         [Trait("Category", "Integration")]
         public async Task Recipes_ids_with_iron_ingot_output_contains_recipe_id_for_iron_ingot()
         {
@@ -156,7 +136,7 @@ namespace GW2SDK.Tests.Features.Recipes
         }
 
         [Fact]
-        [Trait("Feature",  "Recipes.Search")]
+        [Trait("Feature", "Recipes.Search")]
         [Trait("Category", "Integration")]
         public async Task Recipes_with_iron_ingot_output_contains_recipe_for_iron_ingot()
         {
@@ -171,7 +151,7 @@ namespace GW2SDK.Tests.Features.Recipes
         }
 
         [Fact]
-        [Trait("Feature",  "Recipes.Search")]
+        [Trait("Feature", "Recipes.Search")]
         [Trait("Category", "Integration")]
         public async Task Recipes_page_with_iron_ingot_output_contains_recipe_for_iron_ingot()
         {
@@ -184,10 +164,8 @@ namespace GW2SDK.Tests.Features.Recipes
             const int ironIngotRecipe = 19;
             Assert.Contains(actual.Values, recipe => recipe.Id == ironIngotRecipe);
         }
-        
+
         [Fact]
-        [Trait("Feature",  "Recipes.Search")]
-        [Trait("Category", "Integration")]
         public async Task It_can_get_all_recipes_for_vision_crystal()
         {
             // Normally the limit for ids=all is 200 items
@@ -202,7 +180,21 @@ namespace GW2SDK.Tests.Features.Recipes
             Assert.NotInRange(actual.Values.Count, 0, 200); // Greater than 200
             Assert.Equal(actual.Context.ResultTotal, actual.Values.Count);
             Assert.Equal(actual.Context.ResultTotal, actual.Context.ResultCount);
-            Assert.All(actual.Values, recipe => Assert.Contains(recipe.Ingredients, ingredient => ingredient.ItemId == visionCrystal));
+            Assert.All(actual.Values,
+                recipe => Assert.Contains(recipe.Ingredients, ingredient => ingredient.ItemId == visionCrystal));
+        }
+
+        [Fact(Skip =
+            "This test is best used interactively, otherwise it will hit rate limits in this as well as other tests.")]
+        public async Task It_can_get_all_recipes()
+        {
+            await using var services = new Composer();
+            var sut = services.Resolve<RecipeService>();
+
+            await foreach (var actual in sut.GetRecipes())
+            {
+                RecipeFacts.Validate(actual.Value);
+            }
         }
     }
 }

@@ -88,7 +88,7 @@ namespace GW2SDK.Http
 #if NET
         internal static async Task<IReplica<IReadOnlySet<T>>> GetResourcesSetSimple<T>(
 #else
-        internal static async Task<IReplica<ISet<T>>> GetResourcesSetSimple<T>(
+        internal static async Task<IReplica<IReadOnlyCollection<T>>> GetResourcesSetSimple<T>(
 #endif
             this HttpClient instance,
             HttpRequestMessage request,
@@ -108,7 +108,7 @@ namespace GW2SDK.Http
 #if NET
             return new Replica<IReadOnlySet<T>>(
 #else
-            return new Replica<ISet<T>>(
+            return new Replica<IReadOnlyCollection<T>>(
 #endif
                 date,
                 true,

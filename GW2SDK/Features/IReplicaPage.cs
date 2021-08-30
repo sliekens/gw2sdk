@@ -17,7 +17,7 @@ namespace GW2SDK
 #else
         bool HasValues { get; }
 
-        ISet<T> Values { get; }
+        IReadOnlyCollection<T> Values { get; }
 
         IPageContext Context { get; }
 #endif
