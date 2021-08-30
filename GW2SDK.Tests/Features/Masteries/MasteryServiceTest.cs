@@ -115,31 +115,5 @@ namespace GW2SDK.Tests.Features.Masteries
                 second => Assert.Equal(2, second.Id),
                 third => Assert.Equal(3, third.Id));
         }
-
-        [Fact]
-        public async Task Mastery_ids_cannot_be_null()
-        {
-            await using var services = new Composer();
-            var sut = services.Resolve<MasteryService>();
-
-            await Assert.ThrowsAsync<ArgumentNullException>("masteryIds",
-                async () =>
-                {
-                    await sut.GetMasteriesByIds(null);
-                });
-        }
-
-        [Fact]
-        public async Task Mastery_ids_cannot_be_empty()
-        {
-            await using var services = new Composer();
-            var sut = services.Resolve<MasteryService>();
-
-            await Assert.ThrowsAsync<ArgumentException>("masteryIds",
-                async () =>
-                {
-                    await sut.GetMasteriesByIds(Array.Empty<int>());
-                });
-        }
     }
 }

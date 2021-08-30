@@ -74,32 +74,6 @@ namespace GW2SDK.Tests.Features.Worlds
         }
 
         [Fact]
-        public async Task World_ids_cannot_be_null()
-        {
-            await using var services = new Composer();
-            var sut = services.Resolve<WorldService>();
-
-            await Assert.ThrowsAsync<ArgumentNullException>("worldIds",
-                async () =>
-                {
-                    await sut.GetWorldsByIds(null);
-                });
-        }
-
-        [Fact]
-        public async Task World_ids_cannot_be_empty()
-        {
-            await using var services = new Composer();
-            var sut = services.Resolve<WorldService>();
-
-            await Assert.ThrowsAsync<ArgumentException>("worldIds",
-                async () =>
-                {
-                    await sut.GetWorldsByIds(Array.Empty<int>());
-                });
-        }
-
-        [Fact]
         public async Task It_can_get_worlds_by_page()
         {
             await using var services = new Composer();

@@ -83,32 +83,6 @@ namespace GW2SDK.Tests.Features.Titles
         }
 
         [Fact]
-        public async Task Title_ids_cannot_be_null()
-        {
-            await using var services = new Composer();
-            var sut = services.Resolve<TitleService>();
-
-            await Assert.ThrowsAsync<ArgumentNullException>("titleIds",
-                async () =>
-                {
-                    await sut.GetTitlesByIds(null);
-                });
-        }
-
-        [Fact]
-        public async Task Title_ids_cannot_be_empty()
-        {
-            await using var services = new Composer();
-            var sut = services.Resolve<TitleService>();
-
-            await Assert.ThrowsAsync<ArgumentException>("titleIds",
-                async () =>
-                {
-                    await sut.GetTitlesByIds(Array.Empty<int>());
-                });
-        }
-
-        [Fact]
         public async Task It_can_get_titles_by_page()
         {
             await using var services = new Composer();

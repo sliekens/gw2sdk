@@ -9,18 +9,18 @@ namespace GW2SDK.Tests.Features.Items
     {
         internal static void Id_is_positive(Item actual) => Assert.InRange(actual.Id, 1, int.MaxValue);
 
-        internal static void Vendor_value_cannot_be_negative(Item actual) =>
+        internal static void Vendor_value_is_not_negative(Item actual) =>
             Assert.InRange(actual.VendorValue.Amount, 0, int.MaxValue);
 
         internal static void Level_is_between_0_and_80(Item actual) => Assert.InRange(actual.Level, 0, 80);
 
-        internal static void Weapon_min_power_cannot_be_negative(Weapon actual) =>
+        internal static void Weapon_min_power_is_not_negative(Weapon actual) =>
             Assert.InRange(actual.MinPower, 0, int.MaxValue);
 
-        internal static void Weapon_max_power_cannot_be_negative(Weapon actual) =>
+        internal static void Weapon_max_power_is_not_negative(Weapon actual) =>
             Assert.InRange(actual.MaxPower, 0, int.MaxValue);
 
-        internal static void Weapon_defense_cannot_be_negative(Weapon actual) =>
+        internal static void Weapon_defense_is_not_negative(Weapon actual) =>
             Assert.InRange(actual.Defense, 0, int.MaxValue);
 
         internal static void Weapon_infix_upgrade_id_is_positive(Weapon actual)
@@ -87,10 +87,10 @@ namespace GW2SDK.Tests.Features.Items
             }
         }
 
-        internal static void Armor_defense_cannot_be_negative(Armor actual) =>
+        internal static void Armor_defense_is_not_negative(Armor actual) =>
             Assert.InRange(actual.Defense, 0, 1000);
 
-        internal static void Armor_infusion_slot_flags_cannot_be_empty(Armor actual)
+        internal static void Armor_infusion_slot_flags_is_not_empty(Armor actual)
         {
             foreach (var slot in actual.InfusionSlots)
             {
@@ -154,7 +154,7 @@ namespace GW2SDK.Tests.Features.Items
             }
         }
 
-        internal static void Transmutation_skins_cannot_be_empty(Transmutation actual) =>
+        internal static void Transmutation_skins_is_not_empty(Transmutation actual) =>
             Assert.NotEmpty(actual.Skins);
 
         internal static void SalvageTool_has_charges(SalvageTool salvageTool) =>
@@ -166,7 +166,7 @@ namespace GW2SDK.Tests.Features.Items
         internal static void Validate(Item actual)
         {
             Id_is_positive(actual);
-            Vendor_value_cannot_be_negative(actual);
+            Vendor_value_is_not_negative(actual);
             Level_is_between_0_and_80(actual);
             switch (actual)
             {
@@ -174,15 +174,15 @@ namespace GW2SDK.Tests.Features.Items
                     switch (consumable)
                     {
                         case Transmutation transmutation:
-                            Transmutation_skins_cannot_be_empty(transmutation);
+                            Transmutation_skins_is_not_empty(transmutation);
                             break;
                     }
 
                     break;
                 case Weapon weapon:
-                    Weapon_min_power_cannot_be_negative(weapon);
-                    Weapon_max_power_cannot_be_negative(weapon);
-                    Weapon_defense_cannot_be_negative(weapon);
+                    Weapon_min_power_is_not_negative(weapon);
+                    Weapon_max_power_is_not_negative(weapon);
+                    Weapon_defense_is_not_negative(weapon);
                     Weapon_infix_upgrade_id_is_positive(weapon);
                     Weapon_infix_upgrade_modifiers_are_positive(weapon);
                     Weapon_prefix_and_stat_choices_are_mutually_exclusive(weapon);
@@ -194,12 +194,12 @@ namespace GW2SDK.Tests.Features.Items
                     Backpack_prefix_and_stat_choices_are_mutually_exclusive(backItem);
                     break;
                 case Armor armor:
-                    Armor_defense_cannot_be_negative(armor);
+                    Armor_defense_is_not_negative(armor);
                     Armor_infix_upgrade_id_is_positive(armor);
                     Armor_infix_upgrade_modifiers_are_positive(armor);
                     Armor_suffix_item_id_is_null_or_positive(armor);
                     Armor_stat_choices_are_null_or_not_empty(armor);
-                    Armor_infusion_slot_flags_cannot_be_empty(armor);
+                    Armor_infusion_slot_flags_is_not_empty(armor);
                     Armor_prefix_and_stat_choices_are_mutually_exclusive(armor);
                     break;
                 case Trinket trinket:

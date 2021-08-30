@@ -70,32 +70,6 @@ namespace GW2SDK.Tests.Features.Colors
         }
 
         [Fact]
-        public async Task Color_ids_cannot_be_null()
-        {
-            await using var services = new Composer();
-            var sut = services.Resolve<ColorService>();
-
-            await Assert.ThrowsAsync<ArgumentNullException>("colorIds",
-                async () =>
-                {
-                    await sut.GetColorsByIds(null);
-                });
-        }
-
-        [Fact]
-        public async Task Color_ids_cannot_be_empty()
-        {
-            await using var services = new Composer();
-            var sut = services.Resolve<ColorService>();
-
-            await Assert.ThrowsAsync<ArgumentException>("colorIds",
-                async () =>
-                {
-                    await sut.GetColorsByIds(Array.Empty<int>());
-                });
-        }
-
-        [Fact]
         public async Task It_can_get_colors_by_page()
         {
             await using var services = new Composer();

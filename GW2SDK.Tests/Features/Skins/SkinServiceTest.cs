@@ -46,32 +46,6 @@ namespace GW2SDK.Tests.Features.Skins
         }
 
         [Fact]
-        public async Task Skin_ids_cannot_be_null()
-        {
-            await using var services = new Composer();
-            var sut = services.Resolve<SkinService>();
-
-            await Assert.ThrowsAsync<ArgumentNullException>("skinIds",
-                async () =>
-                {
-                    await sut.GetSkinsByIds(null);
-                });
-        }
-
-        [Fact]
-        public async Task Skin_ids_cannot_be_empty()
-        {
-            await using var services = new Composer();
-            var sut = services.Resolve<SkinService>();
-
-            await Assert.ThrowsAsync<ArgumentException>("skinIds",
-                async () =>
-                {
-                    await sut.GetSkinsByIds(Array.Empty<int>());
-                });
-        }
-
-        [Fact]
         public async Task It_can_get_skins_by_page()
         {
             await using var services = new Composer();
