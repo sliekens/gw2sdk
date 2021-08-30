@@ -80,32 +80,6 @@ namespace GW2SDK.Tests.Features.Currencies
         }
 
         [Fact]
-        public async Task Currency_ids_cannot_be_null()
-        {
-            await using var services = new Composer();
-            var sut = services.Resolve<CurrencyService>();
-
-            await Assert.ThrowsAsync<ArgumentNullException>("currencyIds",
-                async () =>
-                {
-                    await sut.GetCurrenciesByIds(null);
-                });
-        }
-
-        [Fact]
-        public async Task Currency_ids_cannot_be_empty()
-        {
-            await using var services = new Composer();
-            var sut = services.Resolve<CurrencyService>();
-
-            await Assert.ThrowsAsync<ArgumentException>("currencyIds",
-                async () =>
-                {
-                    await sut.GetCurrenciesByIds(Array.Empty<int>());
-                });
-        }
-
-        [Fact]
         public async Task It_can_get_currencies_by_page()
         {
             await using var services = new Composer();

@@ -54,62 +54,6 @@ namespace GW2SDK.Tests.Features.Achievements.Groups
         }
 
         [Fact]
-        public async Task Achievement_group_ids_cannot_be_null()
-        {
-            await using var services = new Composer();
-            var sut = services.Resolve<AchievementGroupService>();
-
-            await Assert.ThrowsAsync<ArgumentNullException>("achievementGroupIds",
-                async () =>
-                {
-                    await sut.GetAchievementGroupsByIds(null);
-                });
-        }
-
-        [Fact]
-        public async Task Achievement_group_ids_cannot_contain_null()
-        {
-            await using var services = new Composer();
-            var sut = services.Resolve<AchievementGroupService>();
-
-            var ids = new[] { "A4ED8379-5B6B-4ECC-B6E1-70C350C902D2", null, "B42E2379-9599-46CA-9D4A-40A27E192BBE" };
-
-            await Assert.ThrowsAsync<ArgumentException>("achievementGroupIds",
-                async () =>
-                {
-                    await sut.GetAchievementGroupsByIds(ids);
-                });
-        }
-
-        [Fact]
-        public async Task Achievement_group_ids_cannot_be_empty()
-        {
-            await using var services = new Composer();
-            var sut = services.Resolve<AchievementGroupService>();
-
-            await Assert.ThrowsAsync<ArgumentException>("achievementGroupIds",
-                async () =>
-                {
-                    await sut.GetAchievementGroupsByIds(Array.Empty<string>());
-                });
-        }
-
-        [Fact]
-        public async Task Achievement_group_ids_cannot_contain_empty_id()
-        {
-            await using var services = new Composer();
-            var sut = services.Resolve<AchievementGroupService>();
-
-            var ids = new[] { "A4ED8379-5B6B-4ECC-B6E1-70C350C902D2", "", "B42E2379-9599-46CA-9D4A-40A27E192BBE" };
-
-            await Assert.ThrowsAsync<ArgumentException>("achievementGroupIds",
-                async () =>
-                {
-                    await sut.GetAchievementGroupsByIds(ids);
-                });
-        }
-
-        [Fact]
         public async Task It_can_get_achievement_groups_by_id()
         {
             await using var services = new Composer();

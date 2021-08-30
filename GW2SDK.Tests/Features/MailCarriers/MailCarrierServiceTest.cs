@@ -90,32 +90,6 @@ namespace GW2SDK.Tests.Features.MailCarriers
         }
 
         [Fact]
-        public async Task Mail_carrier_ids_cannot_be_null()
-        {
-            await using var services = new Composer();
-            var sut = services.Resolve<MailCarrierService>();
-
-            await Assert.ThrowsAsync<ArgumentNullException>("mailCarrierIds",
-                async () =>
-                {
-                    await sut.GetMailCarriersByIds(null);
-                });
-        }
-
-        [Fact]
-        public async Task Mail_carrier_ids_cannot_be_empty()
-        {
-            await using var services = new Composer();
-            var sut = services.Resolve<MailCarrierService>();
-
-            await Assert.ThrowsAsync<ArgumentException>("mailCarrierIds",
-                async () =>
-                {
-                    await sut.GetMailCarriersByIds(Array.Empty<int>());
-                });
-        }
-
-        [Fact]
         public async Task It_can_get_mail_carriers_by_page()
         {
             await using var services = new Composer();

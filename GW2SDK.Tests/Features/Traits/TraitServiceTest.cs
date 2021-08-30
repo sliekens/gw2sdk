@@ -72,32 +72,6 @@ namespace GW2SDK.Tests.Features.Traits
         }
 
         [Fact]
-        public async Task Trait_ids_cannot_be_null()
-        {
-            await using var services = new Composer();
-            var sut = services.Resolve<TraitService>();
-
-            await Assert.ThrowsAsync<ArgumentNullException>("traitIds",
-                async () =>
-                {
-                    await sut.GetTraitsByIds(null);
-                });
-        }
-
-        [Fact]
-        public async Task Trait_ids_cannot_be_empty()
-        {
-            await using var services = new Composer();
-            var sut = services.Resolve<TraitService>();
-
-            await Assert.ThrowsAsync<ArgumentException>("traitIds",
-                async () =>
-                {
-                    await sut.GetTraitsByIds(Array.Empty<int>());
-                });
-        }
-
-        [Fact]
         public async Task It_can_get_traits_by_page()
         {
             await using var services = new Composer();

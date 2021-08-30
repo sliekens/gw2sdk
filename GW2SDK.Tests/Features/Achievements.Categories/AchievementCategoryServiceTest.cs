@@ -71,32 +71,6 @@ namespace GW2SDK.Tests.Features.Achievements.Categories
         }
 
         [Fact]
-        public async Task Achievement_category_ids_cannot_be_null()
-        {
-            await using var services = new Composer();
-            var sut = services.Resolve<AchievementCategoryService>();
-
-            await Assert.ThrowsAsync<ArgumentNullException>("achievementCategoryIds",
-                async () =>
-                {
-                    await sut.GetAchievementCategoriesByIds(null);
-                });
-        }
-
-        [Fact]
-        public async Task Achievement_category_ids_cannot_be_empty()
-        {
-            await using var services = new Composer();
-            var sut = services.Resolve<AchievementCategoryService>();
-
-            await Assert.ThrowsAsync<ArgumentException>("achievementCategoryIds",
-                async () =>
-                {
-                    await sut.GetAchievementCategoriesByIds(Array.Empty<int>());
-                });
-        }
-
-        [Fact]
         public async Task It_can_get_achievement_categories_by_page()
         {
             await using var services = new Composer();

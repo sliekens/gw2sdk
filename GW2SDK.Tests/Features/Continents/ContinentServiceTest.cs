@@ -67,32 +67,6 @@ namespace GW2SDK.Tests.Features.Continents
         }
 
         [Fact]
-        public async Task Continent_ids_cannot_be_null()
-        {
-            await using var services = new Composer();
-            var sut = services.Resolve<ContinentService>();
-
-            await Assert.ThrowsAsync<ArgumentNullException>("continentIds",
-                async () =>
-                {
-                    await sut.GetContinentsByIds(null);
-                });
-        }
-
-        [Fact]
-        public async Task Continent_ids_cannot_be_empty()
-        {
-            await using var services = new Composer();
-            var sut = services.Resolve<ContinentService>();
-
-            await Assert.ThrowsAsync<ArgumentException>("continentIds",
-                async () =>
-                {
-                    await sut.GetContinentsByIds(Array.Empty<int>());
-                });
-        }
-
-        [Fact]
         public async Task It_can_get_continents_by_page()
         {
             await using var services = new Composer();
@@ -156,36 +130,6 @@ namespace GW2SDK.Tests.Features.Continents
             var actual = await sut.GetFloorsByIds(continentId, ids);
 
             Assert.Collection(actual.Values, first => Assert.Equal(1, first.Id), second => Assert.Equal(2, second.Id));
-        }
-
-        [Fact]
-        public async Task Floor_ids_cannot_be_null()
-        {
-            await using var services = new Composer();
-            var sut = services.Resolve<ContinentService>();
-
-            const int continentId = 1;
-
-            await Assert.ThrowsAsync<ArgumentNullException>("floorIds",
-                async () =>
-                {
-                    await sut.GetFloorsByIds(continentId, null);
-                });
-        }
-
-        [Fact]
-        public async Task Floor_ids_cannot_be_empty()
-        {
-            await using var services = new Composer();
-            var sut = services.Resolve<ContinentService>();
-
-            const int continentId = 1;
-
-            await Assert.ThrowsAsync<ArgumentException>("floorIds",
-                async () =>
-                {
-                    await sut.GetFloorsByIds(continentId, Array.Empty<int>());
-                });
         }
 
         [Fact]

@@ -60,34 +60,6 @@ namespace GW2SDK.Tests.Features.Accounts.Achievements
         }
 
         [Fact]
-        public async Task Achievement_ids_cannot_be_null()
-        {
-            await using var services = new Composer();
-            var sut = services.Resolve<AccountAchievementService>();
-            var accessToken = services.Resolve<ApiKeyFull>();
-
-            await Assert.ThrowsAsync<ArgumentNullException>("achievementIds",
-                async () =>
-                {
-                    await sut.GetAccountAchievementsByIds(null!, accessToken.Key);
-                });
-        }
-
-        [Fact]
-        public async Task Achievement_ids_cannot_be_empty()
-        {
-            await using var services = new Composer();
-            var sut = services.Resolve<AccountAchievementService>();
-            var accessToken = services.Resolve<ApiKeyFull>();
-
-            await Assert.ThrowsAsync<ArgumentException>("achievementIds",
-                async () =>
-                {
-                    await sut.GetAccountAchievementsByIds(Array.Empty<int>(), accessToken.Key);
-                });
-        }
-
-        [Fact]
         public async Task It_can_get_account_achievements_by_page()
         {
             await using var services = new Composer();

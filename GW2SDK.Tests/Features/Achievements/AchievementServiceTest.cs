@@ -49,32 +49,6 @@ namespace GW2SDK.Tests.Features.Achievements
         }
 
         [Fact]
-        public async Task Achievement_ids_cannot_be_null()
-        {
-            await using var services = new Composer();
-            var sut = services.Resolve<AchievementService>();
-
-            await Assert.ThrowsAsync<ArgumentNullException>("achievementIds",
-                async () =>
-                {
-                    await sut.GetAchievementsByIds(null);
-                });
-        }
-
-        [Fact]
-        public async Task Achievement_ids_cannot_be_empty()
-        {
-            await using var services = new Composer();
-            var sut = services.Resolve<AchievementService>();
-
-            await Assert.ThrowsAsync<ArgumentException>("achievementIds",
-                async () =>
-                {
-                    await sut.GetAchievementsByIds(Array.Empty<int>());
-                });
-        }
-
-        [Fact]
         public async Task It_can_get_achievements_by_page()
         {
             await using var services = new Composer();

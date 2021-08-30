@@ -96,31 +96,5 @@ namespace GW2SDK.Tests.Features.Specializations
                 second => Assert.Equal(2, second.Id),
                 third => Assert.Equal(3, third.Id));
         }
-
-        [Fact]
-        public async Task Specialization_ids_cannot_be_null()
-        {
-            await using var services = new Composer();
-            var sut = services.Resolve<SpecializationService>();
-
-            await Assert.ThrowsAsync<ArgumentNullException>("specializationIds",
-                async () =>
-                {
-                    await sut.GetSpecializationsByIds(null);
-                });
-        }
-
-        [Fact]
-        public async Task Specialization_ids_cannot_be_empty()
-        {
-            await using var services = new Composer();
-            var sut = services.Resolve<SpecializationService>();
-
-            await Assert.ThrowsAsync<ArgumentException>("specializationIds",
-                async () =>
-                {
-                    await sut.GetSpecializationsByIds(Array.Empty<int>());
-                });
-        }
     }
 }
