@@ -10,7 +10,6 @@ namespace GW2SDK.Tests.Features.Skills
     {
         [Fact]
         [Trait("Feature", "Skills")]
-        [Trait("Category", "Integration")]
         public async Task It_can_get_all_skills()
         {
             await using var services = new Composer();
@@ -23,7 +22,6 @@ namespace GW2SDK.Tests.Features.Skills
 
         [Fact]
         [Trait("Feature", "Skills")]
-        [Trait("Category", "Integration")]
         public async Task It_can_get_all_skill_ids()
         {
             await using var services = new Composer();
@@ -36,7 +34,6 @@ namespace GW2SDK.Tests.Features.Skills
 
         [Fact]
         [Trait("Feature", "Skills")]
-        [Trait("Category", "Integration")]
         public async Task It_can_get_a_skill_by_id()
         {
             await using var services = new Composer();
@@ -51,7 +48,6 @@ namespace GW2SDK.Tests.Features.Skills
 
         [Fact]
         [Trait("Feature", "Skills")]
-        [Trait("Category", "Integration")]
         public async Task It_can_get_skills_by_id()
         {
             await using var services = new Composer();
@@ -75,7 +71,6 @@ namespace GW2SDK.Tests.Features.Skills
 
         [Fact]
         [Trait("Feature", "Skills")]
-        [Trait("Category", "Unit")]
         public async Task Skill_ids_cannot_be_null()
         {
             await using var services = new Composer();
@@ -90,7 +85,6 @@ namespace GW2SDK.Tests.Features.Skills
 
         [Fact]
         [Trait("Feature", "Skills")]
-        [Trait("Category", "Unit")]
         public async Task Skill_ids_cannot_be_empty()
         {
             await using var services = new Composer();
@@ -105,7 +99,6 @@ namespace GW2SDK.Tests.Features.Skills
 
         [Fact]
         [Trait("Feature", "Skills")]
-        [Trait("Category", "Integration")]
         public async Task It_can_get_skills_by_page()
         {
             await using var services = new Composer();

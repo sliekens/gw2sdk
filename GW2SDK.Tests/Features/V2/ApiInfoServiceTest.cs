@@ -43,7 +43,6 @@ namespace GW2SDK.Tests.Features.V2
 
 
         [Fact]
-        [Trait("Category", "Integration")]
         public async Task It_can_get_the_current_api_info()
         {
             await using var services = new Composer();

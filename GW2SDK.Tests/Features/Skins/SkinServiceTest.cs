@@ -9,8 +9,6 @@ namespace GW2SDK.Tests.Features.Skins
     public class SkinServiceTest
     {
         [Fact]
-        [Trait("Feature",  "Skins")]
-        [Trait("Category", "Integration")]
         public async Task It_can_get_all_skin_ids()
         {
             await using var services = new Composer();
@@ -22,8 +20,6 @@ namespace GW2SDK.Tests.Features.Skins
         }
 
         [Fact]
-        [Trait("Feature",  "Skins")]
-        [Trait("Category", "Integration")]
         public async Task It_can_get_a_skin_by_id()
         {
             await using var services = new Composer();
@@ -37,8 +33,6 @@ namespace GW2SDK.Tests.Features.Skins
         }
 
         [Fact]
-        [Trait("Feature",  "Skins")]
-        [Trait("Category", "Integration")]
         public async Task It_can_get_skins_by_id()
         {
             await using var services = new Composer();
@@ -52,8 +46,6 @@ namespace GW2SDK.Tests.Features.Skins
         }
 
         [Fact]
-        [Trait("Feature",  "Skins")]
-        [Trait("Category", "Unit")]
         public async Task Skin_ids_cannot_be_null()
         {
             await using var services = new Composer();
@@ -67,8 +59,6 @@ namespace GW2SDK.Tests.Features.Skins
         }
 
         [Fact]
-        [Trait("Feature",  "Skins")]
-        [Trait("Category", "Unit")]
         public async Task Skin_ids_cannot_be_empty()
         {
             await using var services = new Composer();
@@ -82,8 +72,6 @@ namespace GW2SDK.Tests.Features.Skins
         }
 
         [Fact]
-        [Trait("Feature",  "Skins")]
-        [Trait("Category", "Integration")]
         public async Task It_can_get_skins_by_page()
         {
             await using var services = new Composer();

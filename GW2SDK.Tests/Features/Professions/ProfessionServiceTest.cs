@@ -9,8 +9,6 @@ namespace GW2SDK.Tests.Features.Professions
     public class ProfessionServiceTest
     {
         [Fact]
-        [Trait("Feature",  "Professions")]
-        [Trait("Category", "Integration")]
         public async Task It_can_get_all_professions()
         {
             await using var services = new Composer();
@@ -30,8 +28,6 @@ namespace GW2SDK.Tests.Features.Professions
         }
 
         [Fact]
-        [Trait("Feature",  "Professions")]
-        [Trait("Category", "Integration")]
         public async Task It_can_get_all_profession_names()
         {
             await using var services = new Composer();
@@ -44,8 +40,6 @@ namespace GW2SDK.Tests.Features.Professions
         }
 
         [Fact]
-        [Trait("Feature",  "Professions")]
-        [Trait("Category", "Integration")]
         public async Task It_can_get_a_profession_by_name()
         {
             await using var services = new Composer();
@@ -59,8 +53,6 @@ namespace GW2SDK.Tests.Features.Professions
         }
 
         [Fact]
-        [Trait("Feature",  "Professions")]
-        [Trait("Category", "Integration")]
         public async Task It_can_get_professions_by_name()
         {
             await using var services = new Composer();
@@ -77,8 +69,6 @@ namespace GW2SDK.Tests.Features.Professions
         }
 
         [Fact]
-        [Trait("Feature",  "Professions")]
-        [Trait("Category", "Integration")]
         public async Task It_can_get_professions_by_page()
         {
             await using var services = new Composer();

@@ -17,7 +17,6 @@ namespace GW2SDK.Tests.Features.Items
 
         [Fact]
         [Trait("Feature", "Items")]
-        [Trait("Category", "Integration")]
         [Trait("Importance", "Critical")]
         public void Items_can_be_created_from_json()
         {

@@ -11,7 +11,6 @@ namespace GW2SDK.Tests.Features.Items
     {
         [Fact]
         [Trait("Feature", "Items")]
-        [Trait("Category", "Integration")]
         public async Task It_can_get_all_item_ids()
         {
             await using var services = new Composer();
@@ -24,7 +23,6 @@ namespace GW2SDK.Tests.Features.Items
 
         [Fact]
         [Trait("Feature", "Items")]
-        [Trait("Category", "Integration")]
         public async Task It_can_get_an_item_by_id()
         {
             await using var services = new Composer();
@@ -42,7 +40,6 @@ namespace GW2SDK.Tests.Features.Items
 
         [Fact]
         [Trait("Feature", "Items")]
-        [Trait("Category", "Integration")]
         public async Task It_can_get_items_by_id()
         {
             await using var services = new Composer();
@@ -66,7 +63,6 @@ namespace GW2SDK.Tests.Features.Items
 
         [Fact]
         [Trait("Feature", "Items")]
-        [Trait("Category", "Integration")]
         public async Task It_can_get_items_by_page()
         {
             await using var services = new Composer();
@@ -81,7 +77,6 @@ namespace GW2SDK.Tests.Features.Items
         [Fact(Skip =
             "This test is best used interactively, otherwise it will hit rate limits in this as well as other tests.")]
         [Trait("Feature", "Items")]
-        [Trait("Category", "Integration")]
         public async Task It_can_get_all_items()
         {
             await using var services = new Composer();

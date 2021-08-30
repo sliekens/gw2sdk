@@ -9,8 +9,6 @@ namespace GW2SDK.Tests.Features.Achievements
     public class AchievementServiceTest
     {
         [Fact]
-        [Trait("Feature",  "Achievements")]
-        [Trait("Category", "Integration")]
         public async Task It_can_get_all_achievement_ids()
         {
             await using var services = new Composer();
@@ -22,8 +20,6 @@ namespace GW2SDK.Tests.Features.Achievements
         }
 
         [Fact]
-        [Trait("Feature",  "Achievements")]
-        [Trait("Category", "Integration")]
         public async Task It_can_get_an_achievement_by_id()
         {
             await using var services = new Composer();
@@ -37,8 +33,6 @@ namespace GW2SDK.Tests.Features.Achievements
         }
 
         [Fact]
-        [Trait("Feature",  "Achievements")]
-        [Trait("Category", "Integration")]
         public async Task It_can_get_achievements_by_id()
         {
             await using var services = new Composer();
@@ -55,8 +49,6 @@ namespace GW2SDK.Tests.Features.Achievements
         }
 
         [Fact]
-        [Trait("Feature",  "Achievements")]
-        [Trait("Category", "Unit")]
         public async Task Achievement_ids_cannot_be_null()
         {
             await using var services = new Composer();
@@ -70,8 +62,6 @@ namespace GW2SDK.Tests.Features.Achievements
         }
 
         [Fact]
-        [Trait("Feature",  "Achievements")]
-        [Trait("Category", "Unit")]
         public async Task Achievement_ids_cannot_be_empty()
         {
             await using var services = new Composer();
@@ -85,8 +75,6 @@ namespace GW2SDK.Tests.Features.Achievements
         }
 
         [Fact]
-        [Trait("Feature",  "Achievements")]
-        [Trait("Category", "Integration")]
         public async Task It_can_get_achievements_by_page()
         {
             await using var services = new Composer();

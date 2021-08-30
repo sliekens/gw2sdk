@@ -22,7 +22,6 @@ namespace GW2SDK.Tests.Features.Skins
 
         [Fact]
         [Trait("Feature", "Skins")]
-        [Trait("Category", "Integration")]
         [Trait("Importance", "Critical")]
         public void Skins_can_be_created_from_json()
         {

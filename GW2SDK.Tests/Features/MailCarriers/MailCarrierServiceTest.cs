@@ -33,8 +33,6 @@ namespace GW2SDK.Tests.Features.MailCarriers
         }
 
         [Fact]
-        [Trait("Feature",  "MailCarriers")]
-        [Trait("Category", "Integration")]
         public async Task It_can_get_all_mail_carriers()
         {
             await using var services = new Composer();
@@ -55,8 +53,6 @@ namespace GW2SDK.Tests.Features.MailCarriers
         }
 
         [Fact]
-        [Trait("Feature",  "MailCarriers")]
-        [Trait("Category", "Integration")]
         public async Task It_can_get_all_mail_carrier_ids()
         {
             await using var services = new Composer();
@@ -68,8 +64,6 @@ namespace GW2SDK.Tests.Features.MailCarriers
         }
 
         [Fact]
-        [Trait("Feature",  "MailCarriers")]
-        [Trait("Category", "Integration")]
         public async Task It_can_get_a_mail_carrier_by_id()
         {
             await using var services = new Composer();
@@ -83,8 +77,6 @@ namespace GW2SDK.Tests.Features.MailCarriers
         }
 
         [Fact]
-        [Trait("Feature",  "MailCarriers")]
-        [Trait("Category", "Integration")]
         public async Task It_can_get_mail_carriers_by_id()
         {
             await using var services = new Composer();
@@ -98,8 +90,6 @@ namespace GW2SDK.Tests.Features.MailCarriers
         }
 
         [Fact]
-        [Trait("Feature",  "MailCarriers")]
-        [Trait("Category", "Unit")]
         public async Task Mail_carrier_ids_cannot_be_null()
         {
             await using var services = new Composer();
@@ -113,8 +103,6 @@ namespace GW2SDK.Tests.Features.MailCarriers
         }
 
         [Fact]
-        [Trait("Feature",  "MailCarriers")]
-        [Trait("Category", "Unit")]
         public async Task Mail_carrier_ids_cannot_be_empty()
         {
             await using var services = new Composer();
@@ -128,8 +116,6 @@ namespace GW2SDK.Tests.Features.MailCarriers
         }
 
         [Fact]
-        [Trait("Feature",  "MailCarriers")]
-        [Trait("Category", "Integration")]
         public async Task It_can_get_mail_carriers_by_page()
         {
             await using var services = new Composer();

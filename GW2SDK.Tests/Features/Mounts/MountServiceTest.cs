@@ -9,8 +9,6 @@ namespace GW2SDK.Tests.Features.Mounts
     public class MountServiceTest
     {
         [Fact]
-        [Trait("Feature",  "Mounts")]
-        [Trait("Category", "Integration")]
         public async Task It_can_get_all_mounts()
         {
             await using var services = new Composer();
@@ -28,8 +26,6 @@ namespace GW2SDK.Tests.Features.Mounts
         }
 
         [Fact]
-        [Trait("Feature",  "Mounts")]
-        [Trait("Category", "Integration")]
         public async Task It_can_get_all_mount_names()
         {
             await using var services = new Composer();
@@ -42,8 +38,6 @@ namespace GW2SDK.Tests.Features.Mounts
         }
 
         [Fact]
-        [Trait("Feature",  "Mounts")]
-        [Trait("Category", "Integration")]
         public async Task It_can_get_a_mount_by_name()
         {
             await using var services = new Composer();
@@ -57,8 +51,6 @@ namespace GW2SDK.Tests.Features.Mounts
         }
 
         [Fact]
-        [Trait("Feature",  "Mounts")]
-        [Trait("Category", "Integration")]
         public async Task It_can_get_mounts_by_name()
         {
             await using var services = new Composer();
@@ -75,8 +67,6 @@ namespace GW2SDK.Tests.Features.Mounts
         }
 
         [Fact]
-        [Trait("Feature",  "Mounts")]
-        [Trait("Category", "Integration")]
         public async Task It_can_get_mounts_by_page()
         {
             await using var services = new Composer();
@@ -89,8 +79,6 @@ namespace GW2SDK.Tests.Features.Mounts
         }
 
         [Fact]
-        [Trait("Feature",  "Mounts")]
-        [Trait("Category", "Integration")]
         public async Task It_can_get_all_mount_skins()
         {
             await using var services = new Composer();
@@ -102,8 +90,6 @@ namespace GW2SDK.Tests.Features.Mounts
         }
 
         [Fact]
-        [Trait("Feature",  "Mounts")]
-        [Trait("Category", "Integration")]
         public async Task It_can_get_all_mount_skin_ids()
         {
             await using var services = new Composer();
@@ -115,8 +101,6 @@ namespace GW2SDK.Tests.Features.Mounts
         }
 
         [Fact]
-        [Trait("Feature",  "Mounts")]
-        [Trait("Category", "Integration")]
         public async Task It_can_get_a_mount_skin_by_id()
         {
             await using var services = new Composer();
@@ -130,8 +114,6 @@ namespace GW2SDK.Tests.Features.Mounts
         }
 
         [Fact]
-        [Trait("Feature",  "Mounts")]
-        [Trait("Category", "Integration")]
         public async Task It_can_get_mount_skins_by_id()
         {
             await using var services = new Composer();
@@ -145,8 +127,6 @@ namespace GW2SDK.Tests.Features.Mounts
         }
 
         [Fact]
-        [Trait("Feature",  "Mounts")]
-        [Trait("Category", "Integration")]
         public async Task It_can_get_mount_skins_by_page()
         {
             await using var services = new Composer();

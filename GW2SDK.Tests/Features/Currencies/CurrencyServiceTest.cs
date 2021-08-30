@@ -23,8 +23,6 @@ namespace GW2SDK.Tests.Features.Currencies
 
 
         [Fact]
-        [Trait("Feature",  "Currencies")]
-        [Trait("Category", "Integration")]
         public async Task It_can_get_all_currencies()
         {
             await using var services = new Composer();
@@ -45,8 +43,6 @@ namespace GW2SDK.Tests.Features.Currencies
         }
 
         [Fact]
-        [Trait("Feature",  "Currencies")]
-        [Trait("Category", "Integration")]
         public async Task It_can_get_all_currency_ids()
         {
             await using var services = new Composer();
@@ -58,8 +54,6 @@ namespace GW2SDK.Tests.Features.Currencies
         }
 
         [Fact]
-        [Trait("Feature",  "Currencies")]
-        [Trait("Category", "Integration")]
         public async Task It_can_get_a_currency_by_id()
         {
             await using var services = new Composer();
@@ -73,8 +67,6 @@ namespace GW2SDK.Tests.Features.Currencies
         }
 
         [Fact]
-        [Trait("Feature",  "Currencies")]
-        [Trait("Category", "Integration")]
         public async Task It_can_get_currencies_by_id()
         {
             await using var services = new Composer();
@@ -88,8 +80,6 @@ namespace GW2SDK.Tests.Features.Currencies
         }
 
         [Fact]
-        [Trait("Feature",  "Currencies")]
-        [Trait("Category", "Unit")]
         public async Task Currency_ids_cannot_be_null()
         {
             await using var services = new Composer();
@@ -103,8 +93,6 @@ namespace GW2SDK.Tests.Features.Currencies
         }
 
         [Fact]
-        [Trait("Feature",  "Currencies")]
-        [Trait("Category", "Unit")]
         public async Task Currency_ids_cannot_be_empty()
         {
             await using var services = new Composer();
@@ -118,8 +106,6 @@ namespace GW2SDK.Tests.Features.Currencies
         }
 
         [Fact]
-        [Trait("Feature",  "Currencies")]
-        [Trait("Category", "Integration")]
         public async Task It_can_get_currencies_by_page()
         {
             await using var services = new Composer();
