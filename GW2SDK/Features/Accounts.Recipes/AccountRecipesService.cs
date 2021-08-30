@@ -34,7 +34,7 @@ namespace GW2SDK.Accounts.Recipes
 #if NET
         public async Task<IReplica<IReadOnlySet<int>>> GetUnlockedRecipes(string? accessToken = null)
 #else
-        public async Task<IReplica<ISet<int>>> GetUnlockedRecipes(string? accessToken = null)
+        public async Task<IReplica<IReadOnlyCollection<int>>> GetUnlockedRecipes(string? accessToken = null)
 #endif
         {
             var request = new UnlockedRecipesRequest(accessToken);

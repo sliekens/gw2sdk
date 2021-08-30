@@ -1,4 +1,5 @@
-﻿using System;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using GW2SDK.Items;
 using GW2SDK.Tests.TestInfrastructure;
@@ -9,7 +10,7 @@ namespace GW2SDK.Tests.Features.Items
     public class ItemServiceTest
     {
         [Fact]
-        [Trait("Feature",  "Items")]
+        [Trait("Feature", "Items")]
         [Trait("Category", "Integration")]
         public async Task It_can_get_all_item_ids()
         {
@@ -22,7 +23,7 @@ namespace GW2SDK.Tests.Features.Items
         }
 
         [Fact]
-        [Trait("Feature",  "Items")]
+        [Trait("Feature", "Items")]
         [Trait("Category", "Integration")]
         public async Task It_can_get_an_item_by_id()
         {
@@ -40,52 +41,31 @@ namespace GW2SDK.Tests.Features.Items
         }
 
         [Fact]
-        [Trait("Feature",  "Items")]
+        [Trait("Feature", "Items")]
         [Trait("Category", "Integration")]
         public async Task It_can_get_items_by_id()
         {
             await using var services = new Composer();
             var sut = services.Resolve<ItemService>();
 
-            var ids = new[] { 24, 46, 56 };
+            var ids = new HashSet<int>
+            {
+                24,
+                46,
+                56
+            };
 
-            var actual = await sut.GetItemsByIds(ids);
+            var actual = await sut.GetItemsByIds(ids)
+                .ToListAsync();
 
-            Assert.Collection(actual.Values, item => Assert.Equal(24, item.Id), item => Assert.Equal(46, item.Id), item => Assert.Equal(56, item.Id));
+            Assert.Collection(actual,
+                item => Assert.Equal(24, item.Value.Id),
+                item => Assert.Equal(46, item.Value.Id),
+                item => Assert.Equal(56, item.Value.Id));
         }
 
         [Fact]
-        [Trait("Feature",  "Items")]
-        [Trait("Category", "Unit")]
-        public async Task Item_ids_cannot_be_null()
-        {
-            await using var services = new Composer();
-            var sut = services.Resolve<ItemService>();
-
-            await Assert.ThrowsAsync<ArgumentNullException>("itemIds",
-                async () =>
-                {
-                    await sut.GetItemsByIds(null);
-                });
-        }
-
-        [Fact]
-        [Trait("Feature",  "Items")]
-        [Trait("Category", "Unit")]
-        public async Task Item_ids_cannot_be_empty()
-        {
-            await using var services = new Composer();
-            var sut = services.Resolve<ItemService>();
-
-            await Assert.ThrowsAsync<ArgumentException>("itemIds",
-                async () =>
-                {
-                    await sut.GetItemsByIds(new int[0]);
-                });
-        }
-
-        [Fact]
-        [Trait("Feature",  "Items")]
+        [Trait("Feature", "Items")]
         [Trait("Category", "Integration")]
         public async Task It_can_get_items_by_page()
         {
@@ -96,6 +76,21 @@ namespace GW2SDK.Tests.Features.Items
 
             Assert.Equal(3, actual.Values.Count);
             Assert.Equal(3, actual.Context.PageSize);
+        }
+
+        [Fact(Skip =
+            "This test is best used interactively, otherwise it will hit rate limits in this as well as other tests.")]
+        [Trait("Feature", "Items")]
+        [Trait("Category", "Integration")]
+        public async Task It_can_get_all_items()
+        {
+            await using var services = new Composer();
+            var sut = services.Resolve<ItemService>();
+
+            await foreach (var actual in sut.GetItems())
+            {
+                ItemFacts.Validate(actual.Value);
+            }
         }
     }
 }

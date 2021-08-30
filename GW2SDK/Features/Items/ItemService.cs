@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Net.Http;
+using System.Runtime.CompilerServices;
+using System.Threading;
 using System.Threading.Tasks;
 using GW2SDK.Http;
 using GW2SDK.Items.Http;
@@ -12,11 +14,11 @@ namespace GW2SDK.Items
     [PublicAPI]
     public sealed class ItemService
     {
-        private readonly HttpClient _http;
+        private readonly HttpClient http;
 
-        private readonly IItemReader _itemReader;
+        private readonly IItemReader itemReader;
 
-        private readonly MissingMemberBehavior _missingMemberBehavior;
+        private readonly MissingMemberBehavior missingMemberBehavior;
 
         public ItemService(
             HttpClient http,
@@ -24,33 +26,50 @@ namespace GW2SDK.Items
             MissingMemberBehavior missingMemberBehavior
         )
         {
-            _http = http ?? throw new ArgumentNullException(nameof(http));
-            _itemReader = itemReader ?? throw new ArgumentNullException(nameof(itemReader));
-            _missingMemberBehavior = missingMemberBehavior;
+            this.http = http ?? throw new ArgumentNullException(nameof(http));
+            this.itemReader = itemReader ?? throw new ArgumentNullException(nameof(itemReader));
+            this.missingMemberBehavior = missingMemberBehavior;
         }
 
         public async Task<IReplicaSet<int>> GetItemsIndex()
         {
             var request = new ItemsIndexRequest();
-            return await _http.GetResourcesSet(request, json => _itemReader.Id.ReadArray(json, _missingMemberBehavior))
+            return await http.GetResourcesSet(request, json => itemReader.Id.ReadArray(json, missingMemberBehavior))
                 .ConfigureAwait(false);
         }
 
         public async Task<IReplica<Item>> GetItemById(int itemId, Language? language = default)
         {
             var request = new ItemByIdRequest(itemId, language);
-            return await _http.GetResource(request, json => _itemReader.Read(json, _missingMemberBehavior))
+            return await http.GetResource(request, json => itemReader.Read(json, missingMemberBehavior))
                 .ConfigureAwait(false);
         }
 
-        public async Task<IReplicaSet<Item>> GetItemsByIds(
+        public async IAsyncEnumerable<IReplica<Item>> GetItemsByIds(
+#if NET
+            IReadOnlySet<int> itemIds,
+#else
             IReadOnlyCollection<int> itemIds,
-            Language? language = default
+#endif
+            Language? language = default,
+            IProgress<ICollectionContext>? progress = default,
+            [EnumeratorCancellation] CancellationToken cancellationToken = default
         )
         {
-            var request = new ItemsByIdsRequest(itemIds, language);
-            return await _http.GetResourcesSet(request, json => _itemReader.ReadArray(json, _missingMemberBehavior))
-                .ConfigureAwait(false);
+            var splitQuery = SplitQuery.Create<int, Item>(Query, progress);
+            await foreach (var item in splitQuery.QueryAsync(new HashSet<int>(itemIds))
+                .WithCancellation(cancellationToken)
+                .ConfigureAwait(false))
+            {
+                yield return item;
+            }
+
+            async Task<IReplicaSet<Item>> Query(IReadOnlyCollection<int> keys, CancellationToken cancellationToken)
+            {
+                var request = new ItemsByIdsRequest(keys, language);
+                return await http.GetResourcesSet(request, json => itemReader.ReadArray(json, missingMemberBehavior))
+                    .ConfigureAwait(false);
+            }
         }
 
         public async Task<IReplicaPage<Item>> GetItemsByPage(
@@ -60,7 +79,7 @@ namespace GW2SDK.Items
         )
         {
             var request = new ItemsByPageRequest(pageIndex, pageSize, language);
-            return await _http.GetResourcesPage(request, json => _itemReader.ReadArray(json, _missingMemberBehavior))
+            return await http.GetResourcesPage(request, json => itemReader.ReadArray(json, missingMemberBehavior))
                 .ConfigureAwait(false);
         }
 
@@ -71,8 +90,29 @@ namespace GW2SDK.Items
         public async Task<IReplicaPage<Item>> GetItemsByPage(ContinuationToken token)
         {
             var request = new ContinuationRequest(token);
-            return await _http.GetResourcesPage(request, json => _itemReader.ReadArray(json, _missingMemberBehavior))
+            return await http.GetResourcesPage(request, json => itemReader.ReadArray(json, missingMemberBehavior))
                 .ConfigureAwait(false);
+        }
+
+        public async IAsyncEnumerable<IReplica<Item>> GetItems(
+            Language? language = default,
+            IProgress<ICollectionContext>? progress = default,
+            [EnumeratorCancellation] CancellationToken cancellationToken = default
+        )
+        {
+            var index = await GetItemsIndex()
+                .ConfigureAwait(false);
+            if (!index.HasValues)
+            {
+                yield break;
+            }
+
+            await foreach (var item in GetItemsByIds(index.Values, language, progress)
+                .WithCancellation(cancellationToken)
+                .ConfigureAwait(false))
+            {
+                yield return item;
+            }
         }
     }
 }

@@ -27,6 +27,12 @@
         "resolved": "5.0.0",
         "contentHash": "ePZVkHmihIDChuXwghL5+ywHlbbLOLeDQsITXvHvugMv3sVZe9KUN1MK/VlfVLiFlLTi6QDc2xgZSFX/66i/jQ=="
       },
+      "System.Linq.Async": {
+        "type": "Direct",
+        "requested": "[5.0.0, )",
+        "resolved": "5.0.0",
+        "contentHash": "cPtIuuH8TIjVHSi2ewwReWGW1PfChPE0LxPIDlfwVcLuTM9GANFTXiMB7k3aC4sk3f0cQU25LNKzx+jZMxijqw=="
+      },
       "SixLabors.ImageSharp": {
         "type": "Transitive",
         "resolved": "1.0.2",

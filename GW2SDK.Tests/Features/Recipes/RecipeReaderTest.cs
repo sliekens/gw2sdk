@@ -15,19 +15,6 @@ namespace GW2SDK.Tests.Features.Recipes
 
         private readonly RecipeFixture _fixture;
 
-        private static class RecipeFact
-        {
-            public static void Id_is_positive(Recipe actual) => Assert.InRange(actual.Id, 1, int.MaxValue);
-
-            public static void Output_item_id_is_positive(Recipe actual) => Assert.InRange(actual.OutputItemId, 1, int.MaxValue);
-
-            public static void Output_item_count_is_positive(Recipe actual) => Assert.InRange(actual.OutputItemCount, 1, int.MaxValue);
-
-            public static void Min_rating_is_between_0_and_500(Recipe actual) => Assert.InRange(actual.MinRating, 0, 500);
-
-            public static void Time_to_craft_is_positive(Recipe actual) => Assert.InRange(actual.TimeToCraft.Ticks, 1, long.MaxValue);
-        }
-
         [Fact]
         [Trait("Feature",    "Recipes")]
         [Trait("Category",   "Integration")]
@@ -42,11 +29,7 @@ namespace GW2SDK.Tests.Features.Recipes
                     using var document = JsonDocument.Parse(json);
                     var actual = sut.Read(document.RootElement, MissingMemberBehavior.Error);
 
-                    RecipeFact.Id_is_positive(actual);
-                    RecipeFact.Output_item_id_is_positive(actual);
-                    RecipeFact.Output_item_count_is_positive(actual);
-                    RecipeFact.Min_rating_is_between_0_and_500(actual);
-                    RecipeFact.Time_to_craft_is_positive(actual);
+                    RecipeFacts.Validate(actual);
                 });
         }
     }

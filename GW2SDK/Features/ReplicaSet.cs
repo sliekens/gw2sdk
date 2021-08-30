@@ -11,7 +11,7 @@ namespace GW2SDK
 #if NET
             IReadOnlySet<T>? value = default,
 #else
-            ISet<T>? value = default,
+            IReadOnlyCollection<T>? value = default,
 #endif
             ICollectionContext? context = null,
             DateTimeOffset? expires = null,
@@ -42,7 +42,7 @@ namespace GW2SDK
 
         public ICollectionContext? Context { get; }
 #else
-        public ISet<T> Values { get; } = default!;
+        public IReadOnlyCollection<T> Values { get; } = default!;
 
         public ICollectionContext Context { get; } = default!;
 #endif

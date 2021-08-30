@@ -18,7 +18,7 @@ namespace GW2SDK
 
         bool HasValues { get; }
 
-        ISet<T> Values { get; }
+        IReadOnlyCollection<T> Values { get; }
 
         ICollectionContext Context { get; }
 #endif

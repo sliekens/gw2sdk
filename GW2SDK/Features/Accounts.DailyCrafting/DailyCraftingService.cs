@@ -33,7 +33,7 @@ namespace GW2SDK.Accounts.DailyCrafting
 #if NET
         public async Task<IReplica<IReadOnlySet<string>>> GetDailyRecipes()
 #else
-        public async Task<IReplica<ISet<string>>> GetDailyRecipes()
+        public async Task<IReplica<IReadOnlyCollection<string>>> GetDailyRecipes()
 #endif
         {
             var request = new DailyCraftingRequest();
@@ -46,7 +46,7 @@ namespace GW2SDK.Accounts.DailyCrafting
 #if NET
         public async Task<IReplica<IReadOnlySet<string>>> GetDailyRecipesOnCooldown(string? accessToken)
 #else
-        public async Task<IReplica<ISet<string>>> GetDailyRecipesOnCooldown(string? accessToken)
+        public async Task<IReplica<IReadOnlyCollection<string>>> GetDailyRecipesOnCooldown(string? accessToken)
 #endif
         {
             var request = new AccountDailyCraftingRequest(accessToken);
