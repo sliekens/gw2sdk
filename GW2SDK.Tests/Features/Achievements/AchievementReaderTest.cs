@@ -59,8 +59,6 @@ namespace GW2SDK.Tests.Features.Achievements
         }
 
         [Fact]
-        [Trait("Feature", "Achievements")]
-        [Trait("Importance", "Critical")]
         public void Achievements_can_be_created_from_json()
         {
             var sut = new AchievementReader();

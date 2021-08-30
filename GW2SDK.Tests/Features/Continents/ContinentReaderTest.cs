@@ -35,9 +35,6 @@ namespace GW2SDK.Tests.Features.Continents
         }
 
         [Fact]
-        [Trait("Feature",    "Continents")]
-        [Trait("Category",   "Integration")]
-        [Trait("Importance", "Critical")]
         public void Floors_can_be_created_from_json()
         {
             var sut = new ContinentReader();

@@ -16,9 +16,6 @@ namespace GW2SDK.Tests.Features.Recipes
         private readonly RecipeFixture fixture;
 
         [Fact]
-        [Trait("Feature",    "Recipes")]
-        [Trait("Category",   "Integration")]
-        [Trait("Importance", "Critical")]
         public void Recipes_can_be_created_from_json()
         {
             var sut = new RecipeReader();

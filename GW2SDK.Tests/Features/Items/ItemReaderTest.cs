@@ -16,8 +16,6 @@ namespace GW2SDK.Tests.Features.Items
         private readonly ItemFixture fixture;
 
         [Fact]
-        [Trait("Feature", "Items")]
-        [Trait("Importance", "Critical")]
         public void Items_can_be_created_from_json()
         {
             var sut = new ItemReader();

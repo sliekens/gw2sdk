@@ -30,7 +30,6 @@ namespace GW2SDK.Tests.Features.Specializations
         }
 
         [Fact]
-        [Trait("Feature", "Specializations")]
         public async Task It_can_get_all_specializations()
         {
             await using var services = new Composer();
@@ -54,7 +53,6 @@ namespace GW2SDK.Tests.Features.Specializations
         }
 
         [Fact]
-        [Trait("Feature", "Specializations")]
         public async Task It_can_get_all_specialization_ids()
         {
             await using var services = new Composer();
@@ -66,7 +64,6 @@ namespace GW2SDK.Tests.Features.Specializations
         }
 
         [Fact]
-        [Trait("Feature", "Specializations")]
         public async Task It_can_get_a_specialization_by_id()
         {
             await using var services = new Composer();
@@ -80,7 +77,6 @@ namespace GW2SDK.Tests.Features.Specializations
         }
 
         [Fact]
-        [Trait("Feature", "Specializations")]
         public async Task It_can_get_specializations_by_id()
         {
             await using var services = new Composer();
@@ -102,7 +98,6 @@ namespace GW2SDK.Tests.Features.Specializations
         }
 
         [Fact]
-        [Trait("Feature", "Specializations")]
         public async Task Specialization_ids_cannot_be_null()
         {
             await using var services = new Composer();
@@ -116,7 +111,6 @@ namespace GW2SDK.Tests.Features.Specializations
         }
 
         [Fact]
-        [Trait("Feature", "Specializations")]
         public async Task Specialization_ids_cannot_be_empty()
         {
             await using var services = new Composer();

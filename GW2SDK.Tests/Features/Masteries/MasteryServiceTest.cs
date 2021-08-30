@@ -41,7 +41,6 @@ namespace GW2SDK.Tests.Features.Masteries
         }
 
         [Fact]
-        [Trait("Feature", "Masteries")]
         public async Task It_can_get_all_masteries()
         {
             await using var services = new Composer();
@@ -73,7 +72,6 @@ namespace GW2SDK.Tests.Features.Masteries
         }
 
         [Fact]
-        [Trait("Feature", "Masteries")]
         public async Task It_can_get_all_mastery_ids()
         {
             await using var services = new Composer();
@@ -85,7 +83,6 @@ namespace GW2SDK.Tests.Features.Masteries
         }
 
         [Fact]
-        [Trait("Feature", "Masteries")]
         public async Task It_can_get_a_mastery_by_id()
         {
             await using var services = new Composer();
@@ -99,7 +96,6 @@ namespace GW2SDK.Tests.Features.Masteries
         }
 
         [Fact]
-        [Trait("Feature", "Masteries")]
         public async Task It_can_get_masteries_by_id()
         {
             await using var services = new Composer();
@@ -121,7 +117,6 @@ namespace GW2SDK.Tests.Features.Masteries
         }
 
         [Fact]
-        [Trait("Feature", "Masteries")]
         public async Task Mastery_ids_cannot_be_null()
         {
             await using var services = new Composer();
@@ -135,7 +130,6 @@ namespace GW2SDK.Tests.Features.Masteries
         }
 
         [Fact]
-        [Trait("Feature", "Masteries")]
         public async Task Mastery_ids_cannot_be_empty()
         {
             await using var services = new Composer();
