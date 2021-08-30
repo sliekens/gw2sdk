@@ -9,9 +9,9 @@ namespace GW2SDK
             DateTimeOffset date,
             bool hasValues,
 #if NET
-            IReadOnlySet<T>? value = default,
+            IReadOnlySet<T>? values = default,
 #else
-            IReadOnlyCollection<T>? value = default,
+            IReadOnlyCollection<T>? values = default,
 #endif
             ICollectionContext? context = null,
             DateTimeOffset? expires = null,
@@ -21,7 +21,7 @@ namespace GW2SDK
             Date = date;
             if (hasValues)
             {
-                Values = value ?? throw new ArgumentNullException(nameof(value));
+                Values = values ?? throw new ArgumentNullException(nameof(values));
                 Context = context ?? throw new ArgumentNullException(nameof(context));
                 HasValues = true;
                 Expires = expires;

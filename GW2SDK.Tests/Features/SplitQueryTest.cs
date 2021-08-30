@@ -1,81 +1,108 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using GW2SDK.Quaggans;
-using GW2SDK.Tests.TestInfrastructure;
 using Xunit;
 
 namespace GW2SDK.Tests.Features
 {
     public class SplitQueryTest
     {
-        private class KeepLastProgress : IProgress<ICollectionContext>
-        {
-            public ICollectionContext Last { get; private set; }
-
-            public void Report(ICollectionContext value)
-            {
-                Last = value;
-            }
-        }
-
         [Fact]
         public async Task It_can_split_queries_into_buffers()
         {
-            await using var services = new Composer();
-            var quagganService = services.Resolve<QuagganService>();
+            // Simulate 1000 records
+            var index = Enumerable.Range(1, 1000)
+                .ToHashSet();
+            var records = index.Select(id => new StubRecord(id))
+                .ToList();
 
             const int bufferSize = 10;
-            var progressSpy = new KeepLastProgress();
-            var sut = SplitQuery.Create<string, QuagganRef>(async (indices, _) =>
-                    await quagganService.GetQuaggansByIds(indices),
-                progressSpy);
+            var sut = SplitQuery.Create<int, StubRecord>((keys, ct) =>
+            {
+                var found = records.Where(record => keys.Contains(record.Id))
+                    .ToHashSet();
+                return Task.FromResult((IReplicaSet<StubRecord>)new StubReplica(found));
+            });
 
-            var index = await quagganService.GetQuaggansIndex();
-
-            var producer = sut.QueryAsync(index.Values, bufferSize);
+            var producer = sut.QueryAsync(index, bufferSize);
             var actual = await (
-                from quaggan in producer
-                where quaggan.HasValue
-                select quaggan.Value).ToListAsync();
+                from record in producer
+                where record.HasValue
+                select record.Value).ToListAsync();
 
-            Assert.Equal(index.Values.Count, progressSpy.Last.ResultTotal);
-            Assert.Equal(index.Values.Count, progressSpy.Last.ResultCount);
-            Assert.Equal(index.Values.Count, actual.Count);
+            Assert.Equal(index.Count, actual.Count);
+            Assert.All(index, id => actual.Any(record => record.Id == id));
             Assert.All(actual,
-                quaggan =>
+                record =>
                 {
-                    index.Values.Contains(quaggan.Id);
+                    index.Contains(record.Id);
                 });
         }
 
         [Fact]
         public async Task It_can_skip_buffering_if_the_index_is_small_enough()
         {
-            await using var services = new Composer();
-            var quagganService = services.Resolve<QuagganService>();
+            // Simulate 100 records
+            var index = Enumerable.Range(1, 1000)
+                .ToHashSet();
+            var records = index.Select(id => new StubRecord(id))
+                .ToList();
 
-            var progressSpy = new KeepLastProgress();
-            var sut = SplitQuery.Create<string, QuagganRef>(async (indices, _) =>
-                    await quagganService.GetQuaggansByIds(indices),
-                progressSpy);
+            var sut = SplitQuery.Create<int, StubRecord>((keys, ct) =>
+            {
+                var found = records.Where(record => keys.Contains(record.Id))
+                    .ToHashSet();
+                return Task.FromResult((IReplicaSet<StubRecord>)new StubReplica(found));
+            });
 
-            var index = await quagganService.GetQuaggansIndex();
-
-            var producer = sut.QueryAsync(index.Values);
+            var producer = sut.QueryAsync(index);
             var actual = await (
-                from quaggan in producer
-                where quaggan.HasValue
-                select quaggan.Value).ToListAsync();
+                from record in producer
+                where record.HasValue
+                select record.Value).ToListAsync();
 
-            Assert.Equal(index.Values.Count, progressSpy.Last.ResultTotal);
-            Assert.Equal(index.Values.Count, progressSpy.Last.ResultCount);
-            Assert.Equal(index.Values.Count, actual.Count);
+            Assert.Equal(index.Count, actual.Count);
+            Assert.All(index, id => actual.Any(record => record.Id == id));
             Assert.All(actual,
-                quaggan =>
+                record =>
                 {
-                    index.Values.Contains(quaggan.Id);
+                    index.Contains(record.Id);
                 });
         }
+    }
+
+    internal sealed record StubRecord(int Id);
+
+    internal sealed class StubReplica : IReplicaSet<StubRecord>
+    {
+        public StubReplica(
+#if NET
+            IReadOnlySet<StubRecord> values
+#else
+                IReadOnlyCollection<StubRecord> values
+#endif
+        )
+        {
+            HasValues = true;
+            Values = values;
+            Context = new CollectionContext(values.Count, values.Count);
+        }
+
+        public DateTimeOffset Date { get; } = DateTimeOffset.UtcNow;
+
+        public DateTimeOffset? Expires { get; }
+
+        public DateTimeOffset? LastModified { get; }
+
+        public bool HasValues { get; }
+
+#if NET
+        public IReadOnlySet<StubRecord> Values { get; }
+#else
+        public IReadOnlyCollection<StubRecord> Values { get; }
+#endif
+
+        public ICollectionContext Context { get; }
     }
 }

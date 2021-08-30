@@ -8,6 +8,12 @@
         "resolved": "3.0.3",
         "contentHash": "PdyhdzG2LK7YUEtccObPql+3OuFODaFNeYayxdPoK1eHb2StZoeQf1WMb16QrKiIdi4fs5Kog8jxXtlZOgAEuA=="
       },
+      "IsExternalInit": {
+        "type": "Direct",
+        "requested": "[1.0.1, )",
+        "resolved": "1.0.1",
+        "contentHash": "Md/buF2kqLI/bvmqEwtsCGXKmgbZBzJRW1vz38lyTZKjP4YMXOOSATOSbWg2+S+tlRbrM/8qp9qOBDtqLHBgBw=="
+      },
       "Microsoft.Bcl.AsyncInterfaces": {
         "type": "Direct",
         "requested": "[5.0.0, )",
@@ -1312,6 +1318,12 @@
         "resolved": "3.0.3",
         "contentHash": "PdyhdzG2LK7YUEtccObPql+3OuFODaFNeYayxdPoK1eHb2StZoeQf1WMb16QrKiIdi4fs5Kog8jxXtlZOgAEuA=="
       },
+      "IsExternalInit": {
+        "type": "Direct",
+        "requested": "[1.0.1, )",
+        "resolved": "1.0.1",
+        "contentHash": "Md/buF2kqLI/bvmqEwtsCGXKmgbZBzJRW1vz38lyTZKjP4YMXOOSATOSbWg2+S+tlRbrM/8qp9qOBDtqLHBgBw=="
+      },
       "Microsoft.Bcl.AsyncInterfaces": {
         "type": "Direct",
         "requested": "[5.0.0, )",
@@ -1738,6 +1750,12 @@
         "requested": "[3.0.3, )",
         "resolved": "3.0.3",
         "contentHash": "PdyhdzG2LK7YUEtccObPql+3OuFODaFNeYayxdPoK1eHb2StZoeQf1WMb16QrKiIdi4fs5Kog8jxXtlZOgAEuA=="
+      },
+      "IsExternalInit": {
+        "type": "Direct",
+        "requested": "[1.0.1, )",
+        "resolved": "1.0.1",
+        "contentHash": "Md/buF2kqLI/bvmqEwtsCGXKmgbZBzJRW1vz38lyTZKjP4YMXOOSATOSbWg2+S+tlRbrM/8qp9qOBDtqLHBgBw=="
       },
       "Microsoft.Bcl.AsyncInterfaces": {
         "type": "Direct",
