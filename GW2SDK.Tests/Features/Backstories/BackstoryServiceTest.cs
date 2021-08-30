@@ -37,7 +37,6 @@ namespace GW2SDK.Tests.Features.Backstories
 
 
         [Fact]
-        [Trait("Feature", "Backstories")]
         public async Task It_can_get_all_backstory_questions()
         {
             await using var services = new Composer();
@@ -58,7 +57,6 @@ namespace GW2SDK.Tests.Features.Backstories
         }
 
         [Fact]
-        [Trait("Feature", "Backstories")]
         public async Task It_can_get_all_backstory_answers()
         {
             await using var services = new Composer();
@@ -80,7 +78,6 @@ namespace GW2SDK.Tests.Features.Backstories
         }
 
         [Fact]
-        [Trait("Feature", "Backstories")]
         public async Task It_can_get_all_backstory_question_ids()
         {
             await using var services = new Composer();
@@ -92,7 +89,6 @@ namespace GW2SDK.Tests.Features.Backstories
         }
 
         [Fact]
-        [Trait("Feature", "Backstories")]
         public async Task It_can_get_all_backstory_answer_ids()
         {
             await using var services = new Composer();
@@ -104,7 +100,6 @@ namespace GW2SDK.Tests.Features.Backstories
         }
 
         [Fact]
-        [Trait("Feature", "Backstories")]
         public async Task It_can_get_a_backstory_question_by_id()
         {
             await using var services = new Composer();
@@ -118,7 +113,6 @@ namespace GW2SDK.Tests.Features.Backstories
         }
 
         [Fact]
-        [Trait("Feature", "Backstories")]
         public async Task It_can_get_a_backstory_answer_by_id()
         {
             await using var services = new Composer();
@@ -132,7 +126,6 @@ namespace GW2SDK.Tests.Features.Backstories
         }
 
         [Fact]
-        [Trait("Feature", "Backstories")]
         public async Task Backstory_question_ids_cannot_be_null()
         {
             await using var services = new Composer();
@@ -148,7 +141,6 @@ namespace GW2SDK.Tests.Features.Backstories
         }
 
         [Fact]
-        [Trait("Feature", "Backstories")]
         public async Task Backstory_answer_ids_cannot_be_null()
         {
             await using var services = new Composer();
@@ -164,7 +156,6 @@ namespace GW2SDK.Tests.Features.Backstories
         }
 
         [Fact]
-        [Trait("Feature", "Backstories")]
         public async Task Backstory_question_ids_cannot_be_empty()
         {
             await using var services = new Composer();
@@ -180,7 +171,6 @@ namespace GW2SDK.Tests.Features.Backstories
         }
 
         [Fact]
-        [Trait("Feature", "Backstories")]
         public async Task Backstory_answer_ids_cannot_be_empty()
         {
             await using var services = new Composer();
@@ -196,7 +186,6 @@ namespace GW2SDK.Tests.Features.Backstories
         }
 
         [Fact]
-        [Trait("Feature", "Backstories")]
         public async Task Backstory_answer_ids_cannot_contain_null()
         {
             await using var services = new Composer();
@@ -219,7 +208,6 @@ namespace GW2SDK.Tests.Features.Backstories
         }
 
         [Fact]
-        [Trait("Feature", "Backstories")]
         public async Task Backstory_answer_ids_cannot_contain_empty_id()
         {
             await using var services = new Composer();
@@ -242,7 +230,6 @@ namespace GW2SDK.Tests.Features.Backstories
         }
 
         [Fact]
-        [Trait("Feature", "Backstories")]
         public async Task It_can_get_backstory_questions_by_id()
         {
             await using var services = new Composer();
@@ -264,7 +251,6 @@ namespace GW2SDK.Tests.Features.Backstories
         }
 
         [Fact]
-        [Trait("Feature", "Backstories")]
         public async Task It_can_get_backstory_answers_by_id()
         {
             await using var services = new Composer();
@@ -286,7 +272,6 @@ namespace GW2SDK.Tests.Features.Backstories
         }
 
         [Fact]
-        [Trait("Feature", "Backstories")]
         public async Task It_can_get_backstory_questions_by_page()
         {
             await using var services = new Composer();
@@ -299,7 +284,6 @@ namespace GW2SDK.Tests.Features.Backstories
         }
 
         [Fact]
-        [Trait("Feature", "Backstories")]
         public async Task It_can_get_backstory_answers_by_page()
         {
             await using var services = new Composer();
