@@ -10,17 +10,17 @@ namespace GW2SDK.TestDataHelper
 {
     public class JsonFloorService
     {
-        private readonly HttpClient _http;
+        private readonly HttpClient http;
 
         public JsonFloorService(HttpClient http)
         {
-            _http = http;
+            this.http = http;
         }
 
         public async Task<List<string>> GetAllJsonFloors(int continentId)
         {
             var request = new FloorsRequest(continentId, default);
-            using var response = await _http.SendAsync(request, HttpCompletionOption.ResponseHeadersRead)
+            using var response = await http.SendAsync(request, HttpCompletionOption.ResponseHeadersRead)
                 .ConfigureAwait(false);
             response.EnsureSuccessStatusCode();
 

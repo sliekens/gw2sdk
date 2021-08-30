@@ -10,10 +10,10 @@ namespace GW2SDK.Tests.Features.Recipes
     {
         public RecipeReaderTest(RecipeFixture fixture)
         {
-            _fixture = fixture;
+            this.fixture = fixture;
         }
 
-        private readonly RecipeFixture _fixture;
+        private readonly RecipeFixture fixture;
 
         [Fact]
         [Trait("Feature",    "Recipes")]
@@ -23,7 +23,7 @@ namespace GW2SDK.Tests.Features.Recipes
         {
             var sut = new RecipeReader();
 
-            AssertEx.ForEach(_fixture.Recipes,
+            AssertEx.ForEach(fixture.Recipes,
                 json =>
                 {
                     using var document = JsonDocument.Parse(json);

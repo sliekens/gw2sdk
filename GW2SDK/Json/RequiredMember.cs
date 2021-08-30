@@ -5,40 +5,40 @@ namespace GW2SDK.Json
 {
     internal readonly ref struct RequiredMember<T>
     {
-        private readonly JsonMember _member;
+        private readonly JsonMember member;
 
 #if !NET // Because there is no implicit cast from String to ReadOnlySpan
         internal RequiredMember(string name)
         {
             Name = name.AsSpan();
-            _member = default;
+            member = default;
         }
 #endif
 
         internal RequiredMember(ReadOnlySpan<char> name)
         {
             Name = name;
-            _member = default;
+            member = default;
         }
 
         private RequiredMember(ReadOnlySpan<char> name, JsonMember member)
         {
             Name = name;
-            _member = member;
+            this.member = member;
         }
 
         internal ReadOnlySpan<char> Name { get; }
 
         internal T Select(Func<JsonElement, T> selector)
         {
-            if (_member.IsMissing)
+            if (member.IsMissing)
             {
                 throw new InvalidOperationException($"Missing value for '{Name.ToString()}'.");
             }
 
             try
             {
-                return selector(_member.Value);
+                return selector(member.Value);
             }
             catch (Exception reason)
             {

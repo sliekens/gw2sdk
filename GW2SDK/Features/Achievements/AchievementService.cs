@@ -12,11 +12,11 @@ namespace GW2SDK.Achievements
     [PublicAPI]
     public sealed class AchievementService
     {
-        private readonly IAchievementReader _achievementReader;
+        private readonly IAchievementReader achievementReader;
 
-        private readonly HttpClient _http;
+        private readonly HttpClient http;
 
-        private readonly MissingMemberBehavior _missingMemberBehavior;
+        private readonly MissingMemberBehavior missingMemberBehavior;
 
         public AchievementService(
             HttpClient http,
@@ -24,23 +24,23 @@ namespace GW2SDK.Achievements
             MissingMemberBehavior missingMemberBehavior
         )
         {
-            _http = http ?? throw new ArgumentNullException(nameof(http));
-            _achievementReader = achievementReader ?? throw new ArgumentNullException(nameof(achievementReader));
-            _missingMemberBehavior = missingMemberBehavior;
+            this.http = http ?? throw new ArgumentNullException(nameof(http));
+            this.achievementReader = achievementReader ?? throw new ArgumentNullException(nameof(achievementReader));
+            this.missingMemberBehavior = missingMemberBehavior;
         }
 
         public async Task<IReplicaSet<int>> GetAchievementsIndex()
         {
             var request = new AchievementsIndexRequest();
-            return await _http.GetResourcesSet(request,
-                    json => _achievementReader.Id.ReadArray(json, _missingMemberBehavior))
+            return await http.GetResourcesSet(request,
+                    json => achievementReader.Id.ReadArray(json, missingMemberBehavior))
                 .ConfigureAwait(false);
         }
 
         public async Task<IReplica<Achievement>> GetAchievementById(int achievementId, Language? language = default)
         {
             var request = new AchievementByIdRequest(achievementId, language);
-            return await _http.GetResource(request, json => _achievementReader.Read(json, _missingMemberBehavior))
+            return await http.GetResource(request, json => achievementReader.Read(json, missingMemberBehavior))
                 .ConfigureAwait(false);
         }
 
@@ -50,8 +50,8 @@ namespace GW2SDK.Achievements
         )
         {
             var request = new AchievementsByIdsRequest(achievementIds, language);
-            return await _http
-                .GetResourcesSet(request, json => _achievementReader.ReadArray(json, _missingMemberBehavior))
+            return await http
+                .GetResourcesSet(request, json => achievementReader.ReadArray(json, missingMemberBehavior))
                 .ConfigureAwait(false);
         }
 
@@ -62,8 +62,8 @@ namespace GW2SDK.Achievements
         )
         {
             var request = new AchievementsByPageRequest(pageIndex, pageSize, language);
-            return await _http
-                .GetResourcesPage(request, json => _achievementReader.ReadArray(json, _missingMemberBehavior))
+            return await http
+                .GetResourcesPage(request, json => achievementReader.ReadArray(json, missingMemberBehavior))
                 .ConfigureAwait(false);
         }
     }

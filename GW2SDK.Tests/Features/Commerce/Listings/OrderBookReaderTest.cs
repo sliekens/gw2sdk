@@ -10,10 +10,10 @@ namespace GW2SDK.Tests.Features.Commerce.Listings
     {
         public OrderBookReaderTest(OrderBookFixture fixture)
         {
-            _fixture = fixture;
+            this.fixture = fixture;
         }
 
-        private readonly OrderBookFixture _fixture;
+        private readonly OrderBookFixture fixture;
 
         private static class OrderBookFact
         {
@@ -27,7 +27,7 @@ namespace GW2SDK.Tests.Features.Commerce.Listings
         {
             var sut = new OrderBookReader();
 
-            AssertEx.ForEach(_fixture.ItemPrices,
+            AssertEx.ForEach(fixture.ItemPrices,
                 json =>
                 {
                     using var document = JsonDocument.Parse(json);

@@ -18,8 +18,9 @@ namespace GW2SDK.Tests.Features.Tokens
         {
             await using var services = new Composer();
             var sut = services.Resolve<TokenInfoService>();
+            var accessToken = services.Resolve<ApiKeyFull>();
 
-            var actual = await sut.GetTokenInfo(ConfigurationManager.Instance.ApiKeyFull);
+            var actual = await sut.GetTokenInfo(accessToken.Key);
 
             var apiKey = Assert.IsType<ApiKeyInfo>(actual.Value);
 
@@ -43,7 +44,8 @@ namespace GW2SDK.Tests.Features.Tokens
         {
             await using var services = new Composer();
             var sut = services.Resolve<TokenInfoService>();
-            
+            var accessToken = services.Resolve<ApiKeyFull>();
+
             #region Create a new subtoken
             var subtokenService = services.Resolve<SubtokenService>();
 
@@ -60,7 +62,7 @@ namespace GW2SDK.Tests.Features.Tokens
                 Location.Characters + "/My Cool Character"
             };
 
-            var createdSubtoken = await subtokenService.CreateSubtoken(ConfigurationManager.Instance.ApiKeyFull,
+            var createdSubtoken = await subtokenService.CreateSubtoken(accessToken.Key,
                 subtokenPermissions,
                 expiresAt,
                 urls);

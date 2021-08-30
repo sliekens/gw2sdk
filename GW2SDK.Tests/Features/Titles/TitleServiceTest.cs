@@ -116,7 +116,7 @@ namespace GW2SDK.Tests.Features.Titles
             await Assert.ThrowsAsync<ArgumentException>("titleIds",
                 async () =>
                 {
-                    await sut.GetTitlesByIds(new int[0]);
+                    await sut.GetTitlesByIds(Array.Empty<int>());
                 });
         }
 

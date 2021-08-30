@@ -4,6 +4,7 @@ using GW2SDK.Tests.TestInfrastructure;
 
 namespace GW2SDK.Tests.Features.Commerce.Prices
 {
+    // ReSharper disable once ClassNeverInstantiated.Global
     public class ItemPriceFixture
     {
         public ItemPriceFixture()

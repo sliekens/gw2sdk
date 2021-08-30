@@ -12,11 +12,11 @@ namespace GW2SDK.Continents
     [PublicAPI]
     public sealed class ContinentService
     {
-        private readonly IContinentReader _continentReader;
+        private readonly IContinentReader continentReader;
 
-        private readonly HttpClient _http;
+        private readonly HttpClient http;
 
-        private readonly MissingMemberBehavior _missingMemberBehavior;
+        private readonly MissingMemberBehavior missingMemberBehavior;
 
         public ContinentService(
             HttpClient http,
@@ -24,31 +24,31 @@ namespace GW2SDK.Continents
             MissingMemberBehavior missingMemberBehavior
         )
         {
-            _http = http;
-            _continentReader = continentReader;
-            _missingMemberBehavior = missingMemberBehavior;
+            this.http = http;
+            this.continentReader = continentReader;
+            this.missingMemberBehavior = missingMemberBehavior;
         }
 
         public async Task<IReplicaSet<Continent>> GetContinents(Language? language = default)
         {
             var request = new ContinentsRequest(language);
-            return await _http
-                .GetResourcesSet(request, json => _continentReader.ReadArray(json, _missingMemberBehavior))
+            return await http
+                .GetResourcesSet(request, json => continentReader.ReadArray(json, missingMemberBehavior))
                 .ConfigureAwait(false);
         }
 
         public async Task<IReplicaSet<int>> GetContinentsIndex()
         {
             var request = new ContinentsIndexRequest();
-            return await _http
-                .GetResourcesSet(request, json => _continentReader.Id.ReadArray(json, _missingMemberBehavior))
+            return await http
+                .GetResourcesSet(request, json => continentReader.Id.ReadArray(json, missingMemberBehavior))
                 .ConfigureAwait(false);
         }
 
         public async Task<IReplica<Continent>> GetContinentById(int continentId, Language? language = default)
         {
             var request = new ContinentByIdRequest(continentId, language);
-            return await _http.GetResource(request, json => _continentReader.Read(json, _missingMemberBehavior))
+            return await http.GetResource(request, json => continentReader.Read(json, missingMemberBehavior))
                 .ConfigureAwait(false);
         }
 
@@ -58,8 +58,8 @@ namespace GW2SDK.Continents
         )
         {
             var request = new ContinentsByIdsRequest(continentIds, language);
-            return await _http
-                .GetResourcesSet(request, json => _continentReader.ReadArray(json, _missingMemberBehavior))
+            return await http
+                .GetResourcesSet(request, json => continentReader.ReadArray(json, missingMemberBehavior))
                 .ConfigureAwait(false);
         }
 
@@ -70,24 +70,24 @@ namespace GW2SDK.Continents
         )
         {
             var request = new ContinentsByPageRequest(pageIndex, pageSize, language);
-            return await _http
-                .GetResourcesPage(request, json => _continentReader.ReadArray(json, _missingMemberBehavior))
+            return await http
+                .GetResourcesPage(request, json => continentReader.ReadArray(json, missingMemberBehavior))
                 .ConfigureAwait(false);
         }
 
         public async Task<IReplicaSet<Floor>> GetFloors(int continentId, Language? language = default)
         {
             var request = new FloorsRequest(continentId, language);
-            return await _http.GetResourcesSet(request,
-                    json => _continentReader.Floor.ReadArray(json, _missingMemberBehavior))
+            return await http.GetResourcesSet(request,
+                    json => continentReader.Floor.ReadArray(json, missingMemberBehavior))
                 .ConfigureAwait(false);
         }
 
         public async Task<IReplicaSet<int>> GetFloorsIndex(int continentId)
         {
             var request = new FloorsIndexRequest(continentId);
-            return await _http.GetResourcesSet(request,
-                    json => _continentReader.Floor.Id.ReadArray(json, _missingMemberBehavior))
+            return await http.GetResourcesSet(request,
+                    json => continentReader.Floor.Id.ReadArray(json, missingMemberBehavior))
                 .ConfigureAwait(false);
         }
 
@@ -98,7 +98,7 @@ namespace GW2SDK.Continents
         )
         {
             var request = new FloorByIdRequest(continentId, floorId, language);
-            return await _http.GetResource(request, json => _continentReader.Floor.Read(json, _missingMemberBehavior))
+            return await http.GetResource(request, json => continentReader.Floor.Read(json, missingMemberBehavior))
                 .ConfigureAwait(false);
         }
 
@@ -109,8 +109,8 @@ namespace GW2SDK.Continents
         )
         {
             var request = new FloorsByIdsRequest(continentId, floorIds, language);
-            return await _http.GetResourcesSet(request,
-                    json => _continentReader.Floor.ReadArray(json, _missingMemberBehavior))
+            return await http.GetResourcesSet(request,
+                    json => continentReader.Floor.ReadArray(json, missingMemberBehavior))
                 .ConfigureAwait(false);
         }
 
@@ -122,8 +122,8 @@ namespace GW2SDK.Continents
         )
         {
             var request = new FloorsByPageRequest(continentId, pageIndex, pageSize, language);
-            return await _http.GetResourcesPage(request,
-                    json => _continentReader.Floor.ReadArray(json, _missingMemberBehavior))
+            return await http.GetResourcesPage(request,
+                    json => continentReader.Floor.ReadArray(json, missingMemberBehavior))
                 .ConfigureAwait(false);
         }
     }

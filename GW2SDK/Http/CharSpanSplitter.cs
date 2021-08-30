@@ -7,14 +7,14 @@ namespace GW2SDK.Http
     /// </summary>
     internal ref struct CharSpanSplitter
     {
-        private ReadOnlySpan<char> _value;
+        private ReadOnlySpan<char> value;
 
-        private readonly char _separator;
+        private readonly char separator;
 
         public CharSpanSplitter(ReadOnlySpan<char> value, char separator)
         {
-            _value = value;
-            _separator = separator;
+            this.value = value;
+            this.separator = separator;
             Current = ReadOnlySpan<char>.Empty;
         }
 
@@ -22,21 +22,21 @@ namespace GW2SDK.Http
 
         public bool MoveNext()
         {
-            if (_value == ReadOnlySpan<char>.Empty)
+            if (value == ReadOnlySpan<char>.Empty)
             {
                 return false;
             }
 
-            var index = _value.IndexOf(_separator);
+            var index = value.IndexOf(separator);
             if (index == -1)
             {
-                Current = _value;
-                _value = ReadOnlySpan<char>.Empty;
+                Current = value;
+                value = ReadOnlySpan<char>.Empty;
                 return true;
             }
 
-            Current = _value[..index];
-            _value = _value[(index + 1)..];
+            Current = value[..index];
+            value = value[(index + 1)..];
             return true;
         }
     }

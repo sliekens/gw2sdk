@@ -13,11 +13,11 @@ namespace GW2SDK.Accounts.DailyCrafting
     [PublicAPI]
     public sealed class DailyCraftingService
     {
-        private readonly IDailyCraftingReader _dailyCraftingReader;
+        private readonly IDailyCraftingReader dailyCraftingReader;
 
-        private readonly HttpClient _http;
+        private readonly HttpClient http;
 
-        private readonly MissingMemberBehavior _missingMemberBehavior;
+        private readonly MissingMemberBehavior missingMemberBehavior;
 
         public DailyCraftingService(
             HttpClient http,
@@ -25,9 +25,9 @@ namespace GW2SDK.Accounts.DailyCrafting
             MissingMemberBehavior missingMemberBehavior
         )
         {
-            _http = http ?? throw new ArgumentNullException(nameof(http));
-            _dailyCraftingReader = dailyCraftingReader ?? throw new ArgumentNullException(nameof(dailyCraftingReader));
-            _missingMemberBehavior = missingMemberBehavior;
+            this.http = http ?? throw new ArgumentNullException(nameof(http));
+            this.dailyCraftingReader = dailyCraftingReader ?? throw new ArgumentNullException(nameof(dailyCraftingReader));
+            this.missingMemberBehavior = missingMemberBehavior;
         }
 
 #if NET
@@ -37,8 +37,8 @@ namespace GW2SDK.Accounts.DailyCrafting
 #endif
         {
             var request = new DailyCraftingRequest();
-            return await _http.GetResourcesSetSimple(request,
-                    json => _dailyCraftingReader.Id.ReadArray(json, _missingMemberBehavior))
+            return await http.GetResourcesSetSimple(request,
+                    json => dailyCraftingReader.Id.ReadArray(json, missingMemberBehavior))
                 .ConfigureAwait(false);
         }
 
@@ -50,8 +50,8 @@ namespace GW2SDK.Accounts.DailyCrafting
 #endif
         {
             var request = new AccountDailyCraftingRequest(accessToken);
-            return await _http.GetResourcesSetSimple(request,
-                    json => _dailyCraftingReader.Id.ReadArray(json, _missingMemberBehavior))
+            return await http.GetResourcesSetSimple(request,
+                    json => dailyCraftingReader.Id.ReadArray(json, missingMemberBehavior))
                 .ConfigureAwait(false);
         }
     }

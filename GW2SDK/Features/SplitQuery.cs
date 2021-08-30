@@ -16,6 +16,7 @@ namespace GW2SDK
     /// <param name="token">Provides cancellation support.</param>
     /// <returns>The set of records found.</returns>
     [PublicAPI]
+    // ReSharper disable once TypeParameterCanBeVariant // it's a lie
     public delegate Task<IReplicaSet<TRecord>> InQuery<TKey, TRecord>(
 #if NET
         IReadOnlySet<TKey> keys,
@@ -112,13 +113,11 @@ namespace GW2SDK
 
                 var resultCount = 0;
 
-                var inflight = new List<Task<IReplicaSet<TRecord>>>(maxConcurrency);
-                foreach (var next in SplitIndex(index.ToList(), bufferSize))
-                {
-                    inflight.Add(Throttled(() => query(new HashSet<TKey>(next),cancellationToken),
+                var batches = SplitIndex(index.ToList(), bufferSize);
+                var inflight = batches.Select(next => Throttled(() => query(next, cancellationToken),
                         throttler,
-                        cancellationToken));
-                }
+                        cancellationToken))
+                    .ToList();
 
                 while (inflight.Count != 0)
                 {
@@ -132,7 +131,7 @@ namespace GW2SDK
                     {
                         continue;
                     }
-                    
+
                     resultCount += result.Context.ResultCount;
                     ReportProgress(resultTotal, resultCount);
                     foreach (var record in result.Explode())
@@ -162,11 +161,12 @@ namespace GW2SDK
             }
         }
 
-        private IEnumerable<List<TKey>> SplitIndex(List<TKey> indices, int bufferSize)
+        private IEnumerable<HashSet<TKey>> SplitIndex(List<TKey> indices, int bufferSize)
         {
             for (var offset = 0; offset < indices.Count; offset += bufferSize)
             {
-                yield return indices.GetRange(offset, Math.Min(bufferSize, indices.Count - offset));
+                var subset = indices.GetRange(offset, Math.Min(bufferSize, indices.Count - offset));
+                yield return new HashSet<TKey>(subset);
             }
         }
 

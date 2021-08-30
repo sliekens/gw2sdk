@@ -10,11 +10,11 @@ namespace GW2SDK.TestDataHelper
 {
     public class JsonRecipeService
     {
-        private readonly HttpClient _http;
+        private readonly HttpClient http;
 
         public JsonRecipeService(HttpClient http)
         {
-            _http = http;
+            this.http = http;
         }
 
         public async Task<ISet<string>> GetAllJsonRecipes()
@@ -56,7 +56,7 @@ namespace GW2SDK.TestDataHelper
         private async Task<List<int>> GetRecipeIds()
         {
             var request = new RecipesIndexRequest();
-            using var response = await _http.SendAsync(request, HttpCompletionOption.ResponseHeadersRead)
+            using var response = await http.SendAsync(request, HttpCompletionOption.ResponseHeadersRead)
                 .ConfigureAwait(false);
             response.EnsureSuccessStatusCode();
             using var json = await response.Content.ReadAsJsonAsync()
@@ -69,7 +69,7 @@ namespace GW2SDK.TestDataHelper
         private async Task<List<string>> GetJsonRecipesByIds(IReadOnlyCollection<int> recipeIds)
         {
             var request = new RecipesByIdsRequest(recipeIds);
-            using var response = await _http.SendAsync(request, HttpCompletionOption.ResponseHeadersRead)
+            using var response = await http.SendAsync(request, HttpCompletionOption.ResponseHeadersRead)
                 .ConfigureAwait(false);
             response.EnsureSuccessStatusCode();
 

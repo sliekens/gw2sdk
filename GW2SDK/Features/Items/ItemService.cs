@@ -56,19 +56,19 @@ namespace GW2SDK.Items
             [EnumeratorCancellation] CancellationToken cancellationToken = default
         )
         {
-            var splitQuery = SplitQuery.Create<int, Item>(Query, progress);
-            await foreach (var item in splitQuery.QueryAsync(new HashSet<int>(itemIds))
-                .WithCancellation(cancellationToken)
-                .ConfigureAwait(false))
-            {
-                yield return item;
-            }
-
-            async Task<IReplicaSet<Item>> Query(IReadOnlyCollection<int> keys, CancellationToken cancellationToken)
+            var splitQuery = SplitQuery.Create<int, Item>(async (keys, ct) =>
             {
                 var request = new ItemsByIdsRequest(keys, language);
                 return await http.GetResourcesSet(request, json => itemReader.ReadArray(json, missingMemberBehavior))
                     .ConfigureAwait(false);
+            }, progress);
+
+            var producer = splitQuery.QueryAsync(itemIds, cancellationToken: cancellationToken);
+            await foreach (var item in producer
+                .WithCancellation(cancellationToken)
+                .ConfigureAwait(false))
+            {
+                yield return item;
             }
         }
 
@@ -107,7 +107,8 @@ namespace GW2SDK.Items
                 yield break;
             }
 
-            await foreach (var item in GetItemsByIds(index.Values, language, progress)
+            var producer = GetItemsByIds(index.Values, language, progress, cancellationToken);
+            await foreach (var item in producer
                 .WithCancellation(cancellationToken)
                 .ConfigureAwait(false))
             {

@@ -1,4 +1,5 @@
-﻿using GW2SDK.Annotations;
+﻿using System;
+using GW2SDK.Annotations;
 using JetBrains.Annotations;
 
 namespace GW2SDK.Achievements
@@ -22,9 +23,9 @@ namespace GW2SDK.Achievements
 
         public string LockedText { get; init; } = "";
 
-        public AchievementFlag[] Flags { get; init; } = new AchievementFlag[0];
+        public AchievementFlag[] Flags { get; init; } = Array.Empty<AchievementFlag>();
 
-        public AchievementTier[] Tiers { get; init; } = new AchievementTier[0];
+        public AchievementTier[] Tiers { get; init; } = Array.Empty<AchievementTier>();
 
         public AchievementReward[]? Rewards { get; init; }
 

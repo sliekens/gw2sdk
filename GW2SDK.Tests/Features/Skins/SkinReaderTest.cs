@@ -10,10 +10,10 @@ namespace GW2SDK.Tests.Features.Skins
     {
         public SkinReaderTest(SkinFixture fixture)
         {
-            _fixture = fixture;
+            this.fixture = fixture;
         }
 
-        private readonly SkinFixture _fixture;
+        private readonly SkinFixture fixture;
 
         private static class SkinFact
         {
@@ -28,7 +28,7 @@ namespace GW2SDK.Tests.Features.Skins
         {
             var sut = new SkinReader();
 
-            AssertEx.ForEach(_fixture.Skins,
+            AssertEx.ForEach(fixture.Skins,
                 json =>
                 {
                     using var document = JsonDocument.Parse(json);

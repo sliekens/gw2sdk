@@ -11,10 +11,10 @@ namespace GW2SDK.Tokens
     [PublicAPI]
     public sealed class TokenInfoService
     {
-        private readonly HttpClient _http;
-        private readonly MissingMemberBehavior _missingMemberBehavior;
+        private readonly HttpClient http;
+        private readonly MissingMemberBehavior missingMemberBehavior;
 
-        private readonly ITokenInfoReader _tokenInfoReader;
+        private readonly ITokenInfoReader tokenInfoReader;
 
         public TokenInfoService(
             HttpClient http,
@@ -22,15 +22,15 @@ namespace GW2SDK.Tokens
             MissingMemberBehavior missingMemberBehavior
         )
         {
-            _http = http ?? throw new ArgumentNullException(nameof(http));
-            _tokenInfoReader = tokenInfoReader ?? throw new ArgumentNullException(nameof(tokenInfoReader));
-            _missingMemberBehavior = missingMemberBehavior;
+            this.http = http ?? throw new ArgumentNullException(nameof(http));
+            this.tokenInfoReader = tokenInfoReader ?? throw new ArgumentNullException(nameof(tokenInfoReader));
+            this.missingMemberBehavior = missingMemberBehavior;
         }
 
         public async Task<IReplica<TokenInfo>> GetTokenInfo(string? accessToken)
         {
             var request = new TokenInfoRequest(accessToken);
-            return await _http.GetResource(request, json => _tokenInfoReader.Read(json, _missingMemberBehavior))
+            return await http.GetResource(request, json => tokenInfoReader.Read(json, missingMemberBehavior))
                 .ConfigureAwait(false);
         }
     }

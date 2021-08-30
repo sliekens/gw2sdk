@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using GW2SDK.Quaggans;
@@ -26,7 +25,7 @@ namespace GW2SDK.Tests.Features
             await using var services = new Composer();
             var quagganService = services.Resolve<QuagganService>();
 
-            var bufferSize = 10;
+            const int bufferSize = 10;
             var progressSpy = new KeepLastProgress();
             var sut = SplitQuery.Create<string, QuagganRef>(async (indices, _) =>
                     await quagganService.GetQuaggansByIds(indices),
@@ -34,14 +33,11 @@ namespace GW2SDK.Tests.Features
 
             var index = await quagganService.GetQuaggansIndex();
 
-            var actual = new List<QuagganRef>();
-            await foreach (var quaggan in sut.QueryAsync(index.Values, bufferSize))
-            {
-                if (quaggan.HasValue)
-                {
-                    actual.Add(quaggan.Value);
-                }
-            }
+            var producer = sut.QueryAsync(index.Values, bufferSize);
+            var actual = await (
+                from quaggan in producer
+                where quaggan.HasValue
+                select quaggan.Value).ToListAsync();
 
             Assert.Equal(index.Values.Count, progressSpy.Last.ResultTotal);
             Assert.Equal(index.Values.Count, progressSpy.Last.ResultCount);
@@ -59,8 +55,6 @@ namespace GW2SDK.Tests.Features
             await using var services = new Composer();
             var quagganService = services.Resolve<QuagganService>();
 
-            // Less than the total amount of quaggans
-            var bufferSize = 200;
             var progressSpy = new KeepLastProgress();
             var sut = SplitQuery.Create<string, QuagganRef>(async (indices, _) =>
                     await quagganService.GetQuaggansByIds(indices),
@@ -68,14 +62,11 @@ namespace GW2SDK.Tests.Features
 
             var index = await quagganService.GetQuaggansIndex();
 
-            var actual = new List<QuagganRef>();
-            await foreach (var quaggan in sut.QueryAsync(index.Values, bufferSize))
-            {
-                if (quaggan.HasValue)
-                {
-                    actual.Add(quaggan.Value);
-                }
-            }
+            var producer = sut.QueryAsync(index.Values);
+            var actual = await (
+                from quaggan in producer
+                where quaggan.HasValue
+                select quaggan.Value).ToListAsync();
 
             Assert.Equal(index.Values.Count, progressSpy.Last.ResultTotal);
             Assert.Equal(index.Values.Count, progressSpy.Last.ResultCount);

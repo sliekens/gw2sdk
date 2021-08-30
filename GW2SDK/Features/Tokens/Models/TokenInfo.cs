@@ -1,3 +1,4 @@
+using System;
 using GW2SDK.Annotations;
 using JetBrains.Annotations;
 
@@ -12,6 +13,6 @@ namespace GW2SDK.Tokens
 
         public string Name { get; init; } = "";
 
-        public Permission[] Permissions { get; init; } = new Permission[0];
+        public Permission[] Permissions { get; init; } = Array.Empty<Permission>();
     }
 }

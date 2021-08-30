@@ -12,7 +12,7 @@ namespace GW2SDK.TestDataHelper
 {
     public class Container : IDisposable, IAsyncDisposable
     {
-        private readonly ServiceProvider _services;
+        private readonly ServiceProvider serviceProvider;
 
         public Container()
         {
@@ -87,13 +87,13 @@ namespace GW2SDK.TestDataHelper
                 .AddTypedClient<JsonRecipeService>()
                 .AddTypedClient<JsonSkinService>();
 
-            _services = services.BuildServiceProvider();
+            serviceProvider = services.BuildServiceProvider();
         }
 
-        public ValueTask DisposeAsync() => _services.DisposeAsync();
+        public ValueTask DisposeAsync() => serviceProvider.DisposeAsync();
 
-        public void Dispose() => _services.Dispose();
+        public void Dispose() => serviceProvider.Dispose();
 
-        public T Resolve<T>() where T : notnull => _services.GetRequiredService<T>();
+        public T Resolve<T>() where T : notnull => serviceProvider.GetRequiredService<T>();
     }
 }

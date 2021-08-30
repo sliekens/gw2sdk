@@ -10,10 +10,10 @@ namespace GW2SDK.Tests.Features.Items
     {
         public ItemReaderTest(ItemFixture fixture)
         {
-            _fixture = fixture;
+            this.fixture = fixture;
         }
 
-        private readonly ItemFixture _fixture;
+        private readonly ItemFixture fixture;
 
         [Fact]
         [Trait("Feature", "Items")]
@@ -23,7 +23,7 @@ namespace GW2SDK.Tests.Features.Items
         {
             var sut = new ItemReader();
 
-            AssertEx.ForEach(_fixture.Items,
+            AssertEx.ForEach(fixture.Items,
                 json =>
                 {
                     using var document = JsonDocument.Parse(json);

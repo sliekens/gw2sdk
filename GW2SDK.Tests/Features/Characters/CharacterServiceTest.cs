@@ -12,9 +12,9 @@ namespace GW2SDK.Tests.Features.Characters
         {
             await using var services = new Composer();
             var sut = services.Resolve<CharacterService>();
+            var accessToken = services.Resolve<ApiKeyFull>();
 
-            var actual = await sut.GetCharactersIndex(services.Resolve<ApiKeyFull>()
-                .Key);
+            var actual = await sut.GetCharactersIndex(accessToken.Key);
 
             var expected = services.Resolve<TestCharacterName>()
                 .Name;
@@ -28,9 +28,9 @@ namespace GW2SDK.Tests.Features.Characters
         {
             await using var services = new Composer();
             var sut = services.Resolve<CharacterService>();
+            var accessToken = services.Resolve<ApiKeyFull>();
 
-            var actual = await sut.GetCharacters(services.Resolve<ApiKeyFull>()
-                .Key);
+            var actual = await sut.GetCharacters(accessToken.Key);
 
             Assert.True(actual.HasValues);
             Assert.Equal(actual.Context.ResultTotal, actual.Values.Count);
@@ -41,15 +41,13 @@ namespace GW2SDK.Tests.Features.Characters
         {
             await using var services = new Composer();
             var sut = services.Resolve<CharacterService>();
+            var characterName = services.Resolve<TestCharacterName>();
+            var accessToken = services.Resolve<ApiKeyFull>();
 
-            var characterName = services.Resolve<TestCharacterName>()
-                .Name;
-            var actual = await sut.GetCharacterByName(characterName,
-                services.Resolve<ApiKeyFull>()
-                    .Key);
+            var actual = await sut.GetCharacterByName(characterName.Name, accessToken.Key);
 
             Assert.True(actual.HasValue);
-            Assert.Equal(characterName, actual.Value.Name);
+            Assert.Equal(characterName.Name, actual.Value.Name);
         }
 
         [Fact]
@@ -57,11 +55,10 @@ namespace GW2SDK.Tests.Features.Characters
         {
             await using var services = new Composer();
             var sut = services.Resolve<CharacterService>();
+            var characterName = services.Resolve<TestCharacterName>();
+            var accessToken = services.Resolve<ApiKeyFull>();
 
-            var actual = await sut.GetUnlockedRecipes(services.Resolve<TestCharacterName>()
-                    .Name,
-                services.Resolve<ApiKeyFull>()
-                    .Key);
+            var actual = await sut.GetUnlockedRecipes(characterName.Name, accessToken.Key);
 
             Assert.True(actual.HasValue);
             Assert.All(actual.Value.Recipes, id => Assert.NotEqual(0, id));

@@ -56,19 +56,20 @@ namespace GW2SDK.Recipes
             [EnumeratorCancellation] CancellationToken cancellationToken = default
         )
         {
-            var splitQuery = SplitQuery.Create<int, Recipe>(Query, progress);
-            await foreach (var item in splitQuery.QueryAsync(recipeIds)
-                .WithCancellation(cancellationToken)
+            var splitQuery = SplitQuery.Create<int, Recipe>(async (keys, ct) =>
+                {
+                    var request = new RecipesByIdsRequest(keys);
+                    return await http
+                        .GetResourcesSet(request, json => recipeReader.ReadArray(json, missingMemberBehavior))
+                        .ConfigureAwait(false);
+                },
+                progress);
+
+            var producer = splitQuery.QueryAsync(recipeIds, cancellationToken: cancellationToken);
+            await foreach (var item in producer.WithCancellation(cancellationToken)
                 .ConfigureAwait(false))
             {
                 yield return item;
-            }
-
-            async Task<IReplicaSet<Recipe>> Query(IReadOnlyCollection<int> keys, CancellationToken cancellationToken)
-            {
-                var request = new RecipesByIdsRequest(keys);
-                return await http.GetResourcesSet(request, json => recipeReader.ReadArray(json, missingMemberBehavior))
-                    .ConfigureAwait(false);
             }
         }
 
@@ -153,8 +154,8 @@ namespace GW2SDK.Recipes
                 yield break;
             }
 
-            await foreach (var recipe in GetRecipesByIds(index.Values, language, progress)
-                .WithCancellation(cancellationToken)
+            var producer = GetRecipesByIds(index.Values, language, progress, cancellationToken);
+            await foreach (var recipe in producer.WithCancellation(cancellationToken)
                 .ConfigureAwait(false))
             {
                 yield return recipe;

@@ -12,11 +12,11 @@ namespace GW2SDK.MailCarriers
     [PublicAPI]
     public sealed class MailCarrierService
     {
-        private readonly HttpClient _http;
+        private readonly HttpClient http;
 
-        private readonly IMailCarrierReader _mailCarrierReader;
+        private readonly IMailCarrierReader mailCarrierReader;
 
-        private readonly MissingMemberBehavior _missingMemberBehavior;
+        private readonly MissingMemberBehavior missingMemberBehavior;
 
         public MailCarrierService(
             HttpClient http,
@@ -24,31 +24,31 @@ namespace GW2SDK.MailCarriers
             MissingMemberBehavior missingMemberBehavior
         )
         {
-            _http = http ?? throw new ArgumentNullException(nameof(http));
-            _mailCarrierReader = mailCarrierReader ?? throw new ArgumentNullException(nameof(mailCarrierReader));
-            _missingMemberBehavior = missingMemberBehavior;
+            this.http = http ?? throw new ArgumentNullException(nameof(http));
+            this.mailCarrierReader = mailCarrierReader ?? throw new ArgumentNullException(nameof(mailCarrierReader));
+            this.missingMemberBehavior = missingMemberBehavior;
         }
 
         public async Task<IReplicaSet<MailCarrier>> GetMailCarriers(Language? language = default)
         {
             var request = new MailCarriersRequest(language);
-            return await _http
-                .GetResourcesSet(request, json => _mailCarrierReader.ReadArray(json, _missingMemberBehavior))
+            return await http
+                .GetResourcesSet(request, json => mailCarrierReader.ReadArray(json, missingMemberBehavior))
                 .ConfigureAwait(false);
         }
 
         public async Task<IReplicaSet<int>> GetMailCarriersIndex()
         {
             var request = new MailCarriersIndexRequest();
-            return await _http.GetResourcesSet(request,
-                    json => _mailCarrierReader.Id.ReadArray(json, _missingMemberBehavior))
+            return await http.GetResourcesSet(request,
+                    json => mailCarrierReader.Id.ReadArray(json, missingMemberBehavior))
                 .ConfigureAwait(false);
         }
 
         public async Task<IReplica<MailCarrier>> GetMailCarrierById(int mailCarrierId, Language? language = default)
         {
             var request = new MailCarrierByIdRequest(mailCarrierId, language);
-            return await _http.GetResource(request, json => _mailCarrierReader.Read(json, _missingMemberBehavior))
+            return await http.GetResource(request, json => mailCarrierReader.Read(json, missingMemberBehavior))
                 .ConfigureAwait(false);
         }
 
@@ -58,8 +58,8 @@ namespace GW2SDK.MailCarriers
         )
         {
             var request = new MailCarriersByIdsRequest(mailCarrierIds, language);
-            return await _http
-                .GetResourcesSet(request, json => _mailCarrierReader.ReadArray(json, _missingMemberBehavior))
+            return await http
+                .GetResourcesSet(request, json => mailCarrierReader.ReadArray(json, missingMemberBehavior))
                 .ConfigureAwait(false);
         }
 
@@ -70,8 +70,8 @@ namespace GW2SDK.MailCarriers
         )
         {
             var request = new MailCarriersByPageRequest(pageIndex, pageSize, language);
-            return await _http
-                .GetResourcesPage(request, json => _mailCarrierReader.ReadArray(json, _missingMemberBehavior))
+            return await http
+                .GetResourcesPage(request, json => mailCarrierReader.ReadArray(json, missingMemberBehavior))
                 .ConfigureAwait(false);
         }
     }

@@ -80,7 +80,7 @@ namespace GW2SDK.Tests.Features.Achievements
             await Assert.ThrowsAsync<ArgumentException>("achievementIds",
                 async () =>
                 {
-                    await sut.GetAchievementsByIds(new int[0]);
+                    await sut.GetAchievementsByIds(Array.Empty<int>());
                 });
         }
 

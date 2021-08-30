@@ -1,4 +1,5 @@
-﻿using GW2SDK.Annotations;
+﻿using System;
+using GW2SDK.Annotations;
 using JetBrains.Annotations;
 
 namespace GW2SDK.Items
@@ -7,9 +8,9 @@ namespace GW2SDK.Items
     [Inheritable]
     public record UpgradeComponent : Item
     {
-        public UpgradeComponentFlag[] UpgradeComponentFlags { get; init; } = new UpgradeComponentFlag[0];
+        public UpgradeComponentFlag[] UpgradeComponentFlags { get; init; } = Array.Empty<UpgradeComponentFlag>();
 
-        public InfusionSlotFlag[] InfusionUpgradeFlags { get; init; } = new InfusionSlotFlag[0];
+        public InfusionSlotFlag[] InfusionUpgradeFlags { get; init; } = Array.Empty<InfusionSlotFlag>();
 
         public double AttributeAdjustment { get; init; }
 

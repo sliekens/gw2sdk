@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using GW2SDK.Annotations;
 using JetBrains.Annotations;
 
@@ -10,7 +11,7 @@ namespace GW2SDK.Continents
     {
         public int Id { get; init; }
 
-        public double[] TextureDimensions { get; init; } = new double[0];
+        public double[] TextureDimensions { get; init; } = Array.Empty<double>();
 
         public double[][]? ClampedView { get; init; }
 

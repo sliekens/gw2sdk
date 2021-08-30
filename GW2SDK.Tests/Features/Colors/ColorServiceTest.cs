@@ -103,7 +103,7 @@ namespace GW2SDK.Tests.Features.Colors
             await Assert.ThrowsAsync<ArgumentException>("colorIds",
                 async () =>
                 {
-                    await sut.GetColorsByIds(new int[0]);
+                    await sut.GetColorsByIds(Array.Empty<int>());
                 });
         }
 

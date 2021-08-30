@@ -105,7 +105,7 @@ namespace GW2SDK.Tests.Features.Traits
             await Assert.ThrowsAsync<ArgumentException>("traitIds",
                 async () =>
                 {
-                    await sut.GetTraitsByIds(new int[0]);
+                    await sut.GetTraitsByIds(Array.Empty<int>());
                 });
         }
 

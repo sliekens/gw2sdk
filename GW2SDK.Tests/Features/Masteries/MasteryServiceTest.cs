@@ -150,7 +150,7 @@ namespace GW2SDK.Tests.Features.Masteries
             await Assert.ThrowsAsync<ArgumentException>("masteryIds",
                 async () =>
                 {
-                    await sut.GetMasteriesByIds(new int[0]);
+                    await sut.GetMasteriesByIds(Array.Empty<int>());
                 });
         }
     }

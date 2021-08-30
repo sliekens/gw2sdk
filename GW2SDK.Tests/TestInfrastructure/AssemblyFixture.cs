@@ -2,6 +2,7 @@
 
 namespace GW2SDK.Tests.TestInfrastructure
 {
+    // ReSharper disable once ClassNeverInstantiated.Global
     public class AssemblyFixture
     {
         public AssemblyFixture()

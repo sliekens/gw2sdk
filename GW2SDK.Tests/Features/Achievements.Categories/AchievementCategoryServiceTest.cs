@@ -104,7 +104,7 @@ namespace GW2SDK.Tests.Features.Achievements.Categories
             await Assert.ThrowsAsync<ArgumentException>("achievementCategoryIds",
                 async () =>
                 {
-                    await sut.GetAchievementCategoriesByIds(new int[0]);
+                    await sut.GetAchievementCategoriesByIds(Array.Empty<int>());
                 });
         }
 

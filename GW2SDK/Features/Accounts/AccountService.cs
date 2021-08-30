@@ -11,23 +11,23 @@ namespace GW2SDK.Accounts
     [PublicAPI]
     public sealed class AccountService
     {
-        private readonly HttpClient _http;
-        private readonly IAccountReader _accountReader;
-        private readonly MissingMemberBehavior _missingMemberBehavior;
+        private readonly HttpClient http;
+        private readonly IAccountReader accountReader;
+        private readonly MissingMemberBehavior missingMemberBehavior;
 
         public AccountService(HttpClient http, IAccountReader accountReader,
             MissingMemberBehavior missingMemberBehavior
         )
         {
-            _http = http ?? throw new ArgumentNullException(nameof(http));
-            _accountReader = accountReader ?? throw new ArgumentNullException(nameof(accountReader));
-            _missingMemberBehavior = missingMemberBehavior;
+            this.http = http ?? throw new ArgumentNullException(nameof(http));
+            this.accountReader = accountReader ?? throw new ArgumentNullException(nameof(accountReader));
+            this.missingMemberBehavior = missingMemberBehavior;
         }
 
         public async Task<IReplica<Account>> GetAccount(string? accessToken = null)
         {
             var request = new AccountRequest(accessToken);
-            return await _http.GetResource(request, json => _accountReader.Read(json, _missingMemberBehavior))
+            return await http.GetResource(request, json => accountReader.Read(json, missingMemberBehavior))
                 .ConfigureAwait(false);
         }
     }

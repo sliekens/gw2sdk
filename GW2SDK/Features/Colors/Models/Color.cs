@@ -1,4 +1,5 @@
-﻿using GW2SDK.Annotations;
+﻿using System;
+using GW2SDK.Annotations;
 using JetBrains.Annotations;
 
 namespace GW2SDK.Colors
@@ -11,7 +12,7 @@ namespace GW2SDK.Colors
 
         public string Name { get; init; } = "";
 
-        public int[] BaseRgb { get; init; } = new int[0];
+        public int[] BaseRgb { get; init; } = Array.Empty<int>();
 
         public ColorInfo Cloth { get; init; } = new();
 
@@ -23,6 +24,6 @@ namespace GW2SDK.Colors
 
         public int? Item { get; init; }
 
-        public ColorCategoryName[] Categories { get; init; } = new ColorCategoryName[0];
+        public ColorCategoryName[] Categories { get; init; } = Array.Empty<ColorCategoryName>();
     }
 }

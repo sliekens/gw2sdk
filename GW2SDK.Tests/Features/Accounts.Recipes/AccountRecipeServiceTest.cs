@@ -12,9 +12,11 @@ namespace GW2SDK.Tests.Features.Accounts.Recipes
         {
             await using var services = new Composer();
             var sut = services.Resolve<AccountRecipesService>();
+            var accessToken = services.Resolve<ApiKeyFull>();
 
-            var actual = await sut.GetUnlockedRecipes(ConfigurationManager.Instance.ApiKeyFull);
+            var actual = await sut.GetUnlockedRecipes(accessToken.Key);
 
+            Assert.True(actual.HasValue);
             Assert.NotEmpty(actual.Value);
             Assert.All(actual.Value, id => Assert.NotEqual(0, id));
         }

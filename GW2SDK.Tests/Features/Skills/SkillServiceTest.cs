@@ -99,7 +99,7 @@ namespace GW2SDK.Tests.Features.Skills
             await Assert.ThrowsAsync<ArgumentException>("skillIds",
                 async () =>
                 {
-                    await sut.GetSkillsByIds(new int[0]);
+                    await sut.GetSkillsByIds(Array.Empty<int>());
                 });
         }
 

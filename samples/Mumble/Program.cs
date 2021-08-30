@@ -34,7 +34,7 @@ namespace Mumble
             new Program().RealMain(cts.Token);
         }
 
-        public void RealMain(CancellationToken cancellationToken)
+        private void RealMain(CancellationToken cancellationToken)
         {
             if (!OperatingSystem.IsWindows())
             {
@@ -49,7 +49,7 @@ namespace Mumble
             WaitHandle.WaitAll(new[] { cancellationToken.WaitHandle });
         }
 
-        private void CallBack(object state)
+        private static void CallBack(object state)
         {
             var snapshot = (Snapshot) state;
             var pos = snapshot.AvatarPosition;

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using GW2SDK.Annotations;
 using JetBrains.Annotations;
 
@@ -12,9 +13,9 @@ namespace GW2SDK.Continents
 
         public string Name { get; init; } = "";
 
-        public double[] LabelCoordinates { get; init; } = new double[0];
+        public double[] LabelCoordinates { get; init; } = Array.Empty<double>();
 
-        public double[][] ContinentRectangle { get; init; } = new double[0][];
+        public double[][] ContinentRectangle { get; init; } = Array.Empty<double[]>();
 
         public Dictionary<int, Map> Maps { get; init; } = new(0);
     }

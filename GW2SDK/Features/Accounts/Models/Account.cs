@@ -18,14 +18,14 @@ namespace GW2SDK.Accounts
 
         public int World { get; init; }
 
-        public string[] Guilds { get; init; } = new string[0];
+        public string[] Guilds { get; init; } = Array.Empty<string>();
 
         [Scope(Permission.Guilds)]
         public string[]? GuildLeader { get; init; }
 
         public DateTimeOffset Created { get; init; }
 
-        public ProductName[] Access { get; init; } = new ProductName[0];
+        public ProductName[] Access { get; init; } = Array.Empty<ProductName>();
 
         public bool Commander { get; init; }
 

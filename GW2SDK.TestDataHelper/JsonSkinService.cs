@@ -10,11 +10,11 @@ namespace GW2SDK.TestDataHelper
 {
     public class JsonSkinService
     {
-        private readonly HttpClient _http;
+        private readonly HttpClient http;
 
         public JsonSkinService(HttpClient http)
         {
-            _http = http;
+            this.http = http;
         }
 
         public async Task<ISet<string>> GetAllJsonSkins()
@@ -56,7 +56,7 @@ namespace GW2SDK.TestDataHelper
         private async Task<List<int>> GetSkinIds()
         {
             var request = new SkinsIndexRequest();
-            using var response = await _http.SendAsync(request, HttpCompletionOption.ResponseHeadersRead)
+            using var response = await http.SendAsync(request, HttpCompletionOption.ResponseHeadersRead)
                 .ConfigureAwait(false);
             response.EnsureSuccessStatusCode();
             using var json = await response.Content.ReadAsJsonAsync()
@@ -69,7 +69,7 @@ namespace GW2SDK.TestDataHelper
         private async Task<List<string>> GetJsonSkinsByIds(IReadOnlyCollection<int> skinIds)
         {
             var request = new SkinsByIdsRequest(skinIds, default);
-            using var response = await _http.SendAsync(request, HttpCompletionOption.ResponseHeadersRead)
+            using var response = await http.SendAsync(request, HttpCompletionOption.ResponseHeadersRead)
                 .ConfigureAwait(false);
             response.EnsureSuccessStatusCode();
 

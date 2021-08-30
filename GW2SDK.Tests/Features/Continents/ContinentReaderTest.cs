@@ -10,10 +10,10 @@ namespace GW2SDK.Tests.Features.Continents
     {
         public ContinentReaderTest(ContinentFixture fixture)
         {
-            _fixture = fixture;
+            this.fixture = fixture;
         }
 
-        private readonly ContinentFixture _fixture;
+        private readonly ContinentFixture fixture;
 
         private static class FloorFact
         {
@@ -42,7 +42,7 @@ namespace GW2SDK.Tests.Features.Continents
         {
             var sut = new ContinentReader();
 
-            AssertEx.ForEach(_fixture.Floors,
+            AssertEx.ForEach(fixture.Floors,
                 json =>
                 {
                     using var document = JsonDocument.Parse(json);

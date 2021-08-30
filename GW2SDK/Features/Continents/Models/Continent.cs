@@ -1,4 +1,5 @@
-﻿using GW2SDK.Annotations;
+﻿using System;
+using GW2SDK.Annotations;
 using JetBrains.Annotations;
 
 namespace GW2SDK.Continents
@@ -11,12 +12,12 @@ namespace GW2SDK.Continents
 
         public string Name { get; init; } = "";
 
-        public int[] ContinentDimensions { get; init; } = new int[0];
+        public int[] ContinentDimensions { get; init; } = Array.Empty<int>();
 
         public int MinZoom { get; init; }
 
         public int MaxZoom { get; init; }
 
-        public int[] Floors { get; init; } = new int[0];
+        public int[] Floors { get; init; } = Array.Empty<int>();
     }
 }

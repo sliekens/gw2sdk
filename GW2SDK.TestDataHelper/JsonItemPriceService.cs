@@ -10,11 +10,11 @@ namespace GW2SDK.TestDataHelper
 {
     public class JsonItemPriceService
     {
-        private readonly HttpClient _http;
+        private readonly HttpClient http;
 
         public JsonItemPriceService(HttpClient http)
         {
-            _http = http;
+            this.http = http;
         }
 
         public async Task<ISet<string>> GetJsonItemPrices()
@@ -57,7 +57,7 @@ namespace GW2SDK.TestDataHelper
         private async Task<List<int>> GetItemPriceIds()
         {
             var request = new ItemPricesIndexRequest();
-            using var response = await _http.SendAsync(request, HttpCompletionOption.ResponseHeadersRead)
+            using var response = await http.SendAsync(request, HttpCompletionOption.ResponseHeadersRead)
                 .ConfigureAwait(false);
             response.EnsureSuccessStatusCode();
             using var json = await response.Content.ReadAsJsonAsync()
@@ -70,7 +70,7 @@ namespace GW2SDK.TestDataHelper
         private async Task<List<string>> GetJsonItemPricesById(IReadOnlyCollection<int> itemIds)
         {
             var request = new ItemPricesByIdsRequest(itemIds);
-            using var response = await _http.SendAsync(request, HttpCompletionOption.ResponseHeadersRead)
+            using var response = await http.SendAsync(request, HttpCompletionOption.ResponseHeadersRead)
                 .ConfigureAwait(false);
             response.EnsureSuccessStatusCode();
 

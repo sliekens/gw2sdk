@@ -1,4 +1,5 @@
-﻿using GW2SDK.Annotations;
+﻿using System;
+using GW2SDK.Annotations;
 using JetBrains.Annotations;
 
 namespace GW2SDK.V2
@@ -7,10 +8,10 @@ namespace GW2SDK.V2
     [DataTransferObject]
     public sealed record ApiInfo
     {
-        public string[] Languages { get; init; } = new string[0];
+        public string[] Languages { get; init; } = Array.Empty<string>();
 
-        public ApiRoute[] Routes { get; init; } = new ApiRoute[0];
+        public ApiRoute[] Routes { get; init; } = Array.Empty<ApiRoute>();
 
-        public ApiVersion[] SchemaVersions { get; init; } = new ApiVersion[0];
+        public ApiVersion[] SchemaVersions { get; init; } = Array.Empty<ApiVersion>();
     }
 }

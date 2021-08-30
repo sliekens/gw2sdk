@@ -1,14 +1,14 @@
 ﻿using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
 using JetBrains.Annotations;
 
 namespace GW2SDK
 {
     [PublicAPI]
+    // ReSharper disable once TypeParameterCanBeVariant // it's a lie
     public interface IReplicaPage<T> : ITemporal
     {
 #if NET
-        [MemberNotNullWhen(true, nameof(Values), nameof(Context))]
+        [System.Diagnostics.CodeAnalysis.MemberNotNullWhen(true, nameof(Values), nameof(Context))]
         bool HasValues { get; }
 
         IReadOnlySet<T>? Values { get; }

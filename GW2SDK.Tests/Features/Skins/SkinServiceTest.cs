@@ -77,7 +77,7 @@ namespace GW2SDK.Tests.Features.Skins
             await Assert.ThrowsAsync<ArgumentException>("skinIds",
                 async () =>
                 {
-                    await sut.GetSkinsByIds(new int[0]);
+                    await sut.GetSkinsByIds(Array.Empty<int>());
                 });
         }
 

@@ -12,11 +12,11 @@ namespace GW2SDK.Traits
     [PublicAPI]
     public sealed class TraitService
     {
-        private readonly HttpClient _http;
+        private readonly HttpClient http;
 
-        private readonly MissingMemberBehavior _missingMemberBehavior;
+        private readonly MissingMemberBehavior missingMemberBehavior;
 
-        private readonly ITraitReader _traitReader;
+        private readonly ITraitReader traitReader;
 
         public TraitService(
             HttpClient http,
@@ -24,29 +24,29 @@ namespace GW2SDK.Traits
             MissingMemberBehavior missingMemberBehavior
         )
         {
-            _http = http ?? throw new ArgumentNullException(nameof(http));
-            _traitReader = traitReader ?? throw new ArgumentNullException(nameof(traitReader));
-            _missingMemberBehavior = missingMemberBehavior;
+            this.http = http ?? throw new ArgumentNullException(nameof(http));
+            this.traitReader = traitReader ?? throw new ArgumentNullException(nameof(traitReader));
+            this.missingMemberBehavior = missingMemberBehavior;
         }
 
         public async Task<IReplicaSet<Trait>> GetTraits(Language? language = default)
         {
             var request = new TraitsRequest(language);
-            return await _http.GetResourcesSet(request, json => _traitReader.ReadArray(json, _missingMemberBehavior))
+            return await http.GetResourcesSet(request, json => traitReader.ReadArray(json, missingMemberBehavior))
                 .ConfigureAwait(false);
         }
 
         public async Task<IReplicaSet<int>> GetTraitsIndex()
         {
             var request = new TraitsIndexRequest();
-            return await _http.GetResourcesSet(request, json => _traitReader.Id.ReadArray(json, _missingMemberBehavior))
+            return await http.GetResourcesSet(request, json => traitReader.Id.ReadArray(json, missingMemberBehavior))
                 .ConfigureAwait(false);
         }
 
         public async Task<IReplica<Trait>> GetTraitById(int traitId, Language? language = default)
         {
             var request = new TraitByIdRequest(traitId, language);
-            return await _http.GetResource(request, json => _traitReader.Read(json, _missingMemberBehavior))
+            return await http.GetResource(request, json => traitReader.Read(json, missingMemberBehavior))
                 .ConfigureAwait(false);
         }
 
@@ -56,7 +56,7 @@ namespace GW2SDK.Traits
         )
         {
             var request = new TraitsByIdsRequest(traitIds, language);
-            return await _http.GetResourcesSet(request, json => _traitReader.ReadArray(json, _missingMemberBehavior))
+            return await http.GetResourcesSet(request, json => traitReader.ReadArray(json, missingMemberBehavior))
                 .ConfigureAwait(false);
         }
 
@@ -67,7 +67,7 @@ namespace GW2SDK.Traits
         )
         {
             var request = new TraitsByPageRequest(pageIndex, pageSize, language);
-            return await _http.GetResourcesPage(request, json => _traitReader.ReadArray(json, _missingMemberBehavior))
+            return await http.GetResourcesPage(request, json => traitReader.ReadArray(json, missingMemberBehavior))
                 .ConfigureAwait(false);
         }
     }

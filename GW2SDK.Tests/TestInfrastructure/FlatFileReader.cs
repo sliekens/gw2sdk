@@ -5,7 +5,7 @@ using System.IO.Compression;
 
 namespace GW2SDK.Tests.TestInfrastructure
 {
-    public sealed class FlatFileReader
+    public static class FlatFileReader
     {
         public static IEnumerable<string> Read(string path)
         {

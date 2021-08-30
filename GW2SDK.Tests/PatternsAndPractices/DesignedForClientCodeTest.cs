@@ -8,11 +8,11 @@ namespace GW2SDK.Tests.PatternsAndPractices
 {
     public class DesignedForClientCodeTest : IClassFixture<AssemblyFixture>
     {
-        private readonly AssemblyFixture _fixture;
+        private readonly AssemblyFixture fixture;
 
         public DesignedForClientCodeTest(AssemblyFixture fixture)
         {
-            _fixture = fixture;
+            this.fixture = fixture;
         }
 
         [Fact]
@@ -25,7 +25,7 @@ namespace GW2SDK.Tests.PatternsAndPractices
              * Note that the goal is not to make every helper object internal, but to think carefully about their class design.
              * Especially regarding how easily they can be replaced or evolved between versions.
              */
-            var visible = _fixture.Assembly.ExportedTypes.ToList();
+            var visible = fixture.Assembly.ExportedTypes.ToList();
             Assert.All(visible,
                 type =>
                 {
@@ -41,7 +41,7 @@ namespace GW2SDK.Tests.PatternsAndPractices
         [Fact]
         public void Every_type_designed_for_client_code_is_visible()
         {
-            var invisible = _fixture.Assembly.DefinedTypes.Where(type => type.IsNotPublic).ToList();
+            var invisible = fixture.Assembly.DefinedTypes.Where(type => type.IsNotPublic).ToList();
             Assert.All(invisible,
                 type =>
                 {

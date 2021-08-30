@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using GW2SDK.Annotations;
 using JetBrains.Annotations;
 
@@ -20,21 +21,21 @@ namespace GW2SDK.Continents
 
         public double[]? LabelCoordinates { get; init; }
 
-        public double[][] MapRectangle { get; init; } = new double[0][];
+        public double[][] MapRectangle { get; init; } = Array.Empty<double[]>();
 
-        public double[][] ContinentRectangle { get; init; } = new double[0][];
+        public double[][] ContinentRectangle { get; init; } = Array.Empty<double[]>();
 
         public Dictionary<int, PointOfInterest> PointsOfInterest { get; init; } = new(0);
 
         public Dictionary<int, MapTask> Tasks { get; init; } = new(0);
 
-        public SkillChallenge[] SkillChallenges { get; init; } = new SkillChallenge[0];
+        public SkillChallenge[] SkillChallenges { get; init; } = Array.Empty<SkillChallenge>();
 
         public Dictionary<int, MapSector> Sectors { get; init; } = new(0);
 
-        public Adventure[] Adventures { get; init; } = new Adventure[0];
+        public Adventure[] Adventures { get; init; } = Array.Empty<Adventure>();
 
-        public MasteryPoint[] MasteryPoints { get; init; } = new MasteryPoint[0];
+        public MasteryPoint[] MasteryPoints { get; init; } = Array.Empty<MasteryPoint>();
 
         public GodShrine[]? GodShrines { get; init; }
     }

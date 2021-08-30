@@ -107,7 +107,7 @@ namespace GW2SDK.Tests.Features.Worlds
             await Assert.ThrowsAsync<ArgumentException>("worldIds",
                 async () =>
                 {
-                    await sut.GetWorldsByIds(new int[0]);
+                    await sut.GetWorldsByIds(Array.Empty<int>());
                 });
         }
 

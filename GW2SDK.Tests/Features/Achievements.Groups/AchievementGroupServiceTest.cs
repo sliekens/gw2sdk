@@ -102,7 +102,7 @@ namespace GW2SDK.Tests.Features.Achievements.Groups
             await Assert.ThrowsAsync<ArgumentException>("achievementGroupIds",
                 async () =>
                 {
-                    await sut.GetAchievementGroupsByIds(new string[0]);
+                    await sut.GetAchievementGroupsByIds(Array.Empty<string>());
                 });
         }
 

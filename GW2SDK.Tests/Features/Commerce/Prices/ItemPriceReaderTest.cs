@@ -10,10 +10,10 @@ namespace GW2SDK.Tests.Features.Commerce.Prices
     {
         public ItemPriceReaderTest(ItemPriceFixture fixture)
         {
-            _fixture = fixture;
+            this.fixture = fixture;
         }
 
-        private readonly ItemPriceFixture _fixture;
+        private readonly ItemPriceFixture fixture;
 
         private static class ItemPriceFact
         {
@@ -36,7 +36,7 @@ namespace GW2SDK.Tests.Features.Commerce.Prices
         {
             var sut = new ItemPriceReader();
 
-            AssertEx.ForEach(_fixture.ItemPrices,
+            AssertEx.ForEach(fixture.ItemPrices,
                 json =>
                 {
                     using var document = JsonDocument.Parse(json);

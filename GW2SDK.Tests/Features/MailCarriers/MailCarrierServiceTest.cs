@@ -123,7 +123,7 @@ namespace GW2SDK.Tests.Features.MailCarriers
             await Assert.ThrowsAsync<ArgumentException>("mailCarrierIds",
                 async () =>
                 {
-                    await sut.GetMailCarriersByIds(new int[0]);
+                    await sut.GetMailCarriersByIds(Array.Empty<int>());
                 });
         }
 

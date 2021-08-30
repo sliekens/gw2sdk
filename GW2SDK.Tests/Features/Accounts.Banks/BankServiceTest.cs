@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Diagnostics.CodeAnalysis;
+using System.Threading.Tasks;
 using GW2SDK.Accounts.Banks;
 using GW2SDK.Tests.TestInfrastructure;
 using Xunit;
@@ -7,6 +8,7 @@ namespace GW2SDK.Tests.Features.Accounts.Banks
 {
     public class BankServiceTest
     {
+        [SuppressMessage("ReSharper", "SuggestBaseTypeForParameter")] // Yes the Bank is enumerable but its type has meaning
         private static class AccountBankFact
         {
             public static void Bank_is_not_empty(AccountBank actual) => Assert.NotEmpty(actual);
@@ -44,8 +46,9 @@ namespace GW2SDK.Tests.Features.Accounts.Banks
         {
             await using var services = new Composer();
             var sut = services.Resolve<BankService>();
+            var accessToken = services.Resolve<ApiKeyFull>();
 
-            var actual = await sut.GetBank(ConfigurationManager.Instance.ApiKeyFull);
+            var actual = await sut.GetBank(accessToken.Key);
 
             AccountBankFact.Bank_is_not_empty(actual.Value);
 

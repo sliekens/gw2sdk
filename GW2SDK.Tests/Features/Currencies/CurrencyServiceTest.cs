@@ -113,7 +113,7 @@ namespace GW2SDK.Tests.Features.Currencies
             await Assert.ThrowsAsync<ArgumentException>("currencyIds",
                 async () =>
                 {
-                    await sut.GetCurrenciesByIds(new int[0]);
+                    await sut.GetCurrenciesByIds(Array.Empty<int>());
                 });
         }
 
