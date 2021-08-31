@@ -2701,6 +2701,10 @@ namespace GW2SDK.Skills
                         throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
                     }
                 }
+                else if (member.NameEquals("chance") && IsDefaultInt32(member))
+                {
+                    // Ignore zero values, looks like unsanitized data
+                }
                 else if (member.NameEquals("requires_trait"))
                 {
                     requiresTrait = member.Value.GetInt32();
@@ -2738,6 +2742,11 @@ namespace GW2SDK.Skills
                 Percent = percent.GetValue(),
                 FinisherName = finisherType.GetValue(missingMemberBehavior)
             };
+
+            static bool IsDefaultInt32(JsonProperty jsonProperty)
+            {
+                return jsonProperty.Value.ValueKind == JsonValueKind.Number && jsonProperty.Value.TryGetInt32(out var value) && value == 0;
+            }
         }
 
         private SkillReference ReadSubskill(JsonElement json, MissingMemberBehavior missingMemberBehavior)
