@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
 using GW2SDK.Http;
 using JetBrains.Annotations;
@@ -13,22 +12,7 @@ namespace GW2SDK.Backstories.Answers.Http
     {
         public BackstoryAnswersByIdsRequest(IReadOnlyCollection<string> answerIds, Language? language)
         {
-            if (answerIds is null)
-            {
-                throw new ArgumentNullException(nameof(answerIds));
-            }
-
-            if (answerIds.Count == 0)
-            {
-                throw new ArgumentException("Backstory answer IDs cannot be an empty collection.", nameof(answerIds));
-            }
-
-            if (answerIds.Any(string.IsNullOrEmpty))
-            {
-                throw new ArgumentException("Backstory answer IDs collection cannot contain empty values.",
-                    nameof(answerIds));
-            }
-
+            Check.Collection(answerIds, nameof(answerIds));
             AnswerIds = answerIds;
             Language = language;
         }

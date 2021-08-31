@@ -11,12 +11,7 @@ namespace GW2SDK.Achievements.Groups.Http
     {
         public AchievementGroupByIdRequest(string achievementGroupId, Language? language)
         {
-            if (string.IsNullOrEmpty(achievementGroupId))
-            {
-                throw new ArgumentException("Achievement group ID cannot be an empty value.",
-                    nameof(achievementGroupId));
-            }
-
+            Check.String(achievementGroupId, nameof(achievementGroupId));
             AchievementGroupId = achievementGroupId;
             Language = language;
         }

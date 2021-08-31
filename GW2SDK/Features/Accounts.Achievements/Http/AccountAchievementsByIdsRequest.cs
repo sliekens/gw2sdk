@@ -13,16 +13,7 @@ namespace GW2SDK.Accounts.Achievements.Http
     {
         public AccountAchievementsByIdsRequest(IReadOnlyCollection<int> achievementIds, string? accessToken)
         {
-            if (achievementIds is null)
-            {
-                throw new ArgumentNullException(nameof(achievementIds));
-            }
-
-            if (achievementIds.Count == 0)
-            {
-                throw new ArgumentException("Achievement IDs cannot be an empty collection.", nameof(achievementIds));
-            }
-
+            Check.Collection(achievementIds, nameof(achievementIds));
             AchievementIds = achievementIds;
             AccessToken = accessToken;
         }

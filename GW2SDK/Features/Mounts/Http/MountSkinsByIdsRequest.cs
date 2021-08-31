@@ -12,16 +12,7 @@ namespace GW2SDK.Mounts.Http
     {
         public MountSkinsByIdsRequest(IReadOnlyCollection<int> mountSkinIds, Language? language)
         {
-            if (mountSkinIds is null)
-            {
-                throw new ArgumentNullException(nameof(mountSkinIds));
-            }
-
-            if (mountSkinIds.Count == 0)
-            {
-                throw new ArgumentException("Mount skin IDs cannot be an empty collection.", nameof(mountSkinIds));
-            }
-
+            Check.Collection(mountSkinIds, nameof(mountSkinIds));
             MountSkinIds = mountSkinIds;
             Language = language;
         }

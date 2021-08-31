@@ -12,16 +12,7 @@ namespace GW2SDK.MailCarriers.Http
     {
         public MailCarriersByIdsRequest(IReadOnlyCollection<int> mailCarrierIds, Language? language)
         {
-            if (mailCarrierIds is null)
-            {
-                throw new ArgumentNullException(nameof(mailCarrierIds));
-            }
-
-            if (mailCarrierIds.Count == 0)
-            {
-                throw new ArgumentException("Mail carrier IDs cannot be an empty collection.", nameof(mailCarrierIds));
-            }
-
+            Check.Collection(mailCarrierIds, nameof(mailCarrierIds));
             MailCarrierIds = mailCarrierIds;
             Language = language;
         }

@@ -12,21 +12,7 @@ namespace GW2SDK.Professions.Http
     {
         public ProfessionsByNamesRequest(IReadOnlyCollection<ProfessionName> professionNames, Language? language)
         {
-            if (professionNames is null)
-            {
-                throw new ArgumentNullException(nameof(professionNames));
-            }
-
-            if (professionNames.Count == 0)
-            {
-                throw new ArgumentException("Profession names cannot be an empty collection.", nameof(professionNames));
-            }
-
-            if (professionNames.Any(name => !Enum.IsDefined(typeof(ProfessionName), name)))
-            {
-                throw new ArgumentException("All profession names must be defined.", nameof(professionNames));
-            }
-
+            Check.Collection(professionNames, nameof(professionNames));
             ProfessionNames = professionNames;
             Language = language;
         }

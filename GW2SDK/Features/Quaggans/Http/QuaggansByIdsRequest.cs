@@ -11,16 +11,7 @@ namespace GW2SDK.Quaggans.Http
     {
         public QuaggansByIdsRequest(IReadOnlyCollection<string> quagganIds)
         {
-            if (quagganIds is null)
-            {
-                throw new ArgumentNullException(nameof(quagganIds));
-            }
-
-            if (quagganIds.Count == 0)
-            {
-                throw new ArgumentException("Quaggan IDs cannot be an empty collection.", nameof(quagganIds));
-            }
-
+            Check.Collection(quagganIds, nameof(quagganIds));
             QuagganIds = quagganIds;
         }
 

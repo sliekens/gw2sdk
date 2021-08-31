@@ -12,16 +12,7 @@ namespace GW2SDK.Colors.Http
     {
         public ColorsByIdsRequest(IReadOnlyCollection<int> colorIds, Language? language)
         {
-            if (colorIds is null)
-            {
-                throw new ArgumentNullException(nameof(colorIds));
-            }
-
-            if (colorIds.Count == 0)
-            {
-                throw new ArgumentException("Color IDs cannot be an empty collection.", nameof(colorIds));
-            }
-
+            Check.Collection(colorIds, nameof(colorIds));
             ColorIds = colorIds;
             Language = language;
         }

@@ -22,11 +22,7 @@ namespace GW2SDK.Http
         public static void UseAccessToken(this HttpClient instance, string accessToken)
         {
             if (instance is null) throw new ArgumentNullException(nameof(instance));
-            if (accessToken is null) throw new ArgumentNullException(nameof(accessToken));
-            if (string.IsNullOrWhiteSpace(accessToken))
-            {
-                throw new ArgumentException("Access token cannot be null or whitespace.", nameof(accessToken));
-            }
+            Check.String(accessToken, nameof(accessToken));
 
             instance.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
         }

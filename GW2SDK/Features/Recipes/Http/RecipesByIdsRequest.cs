@@ -12,16 +12,7 @@ namespace GW2SDK.Recipes.Http
     {
         public RecipesByIdsRequest(IReadOnlyCollection<int> recipeIds)
         {
-            if (recipeIds is null)
-            {
-                throw new ArgumentNullException(nameof(recipeIds));
-            }
-
-            if (recipeIds.Count == 0)
-            {
-                throw new ArgumentException("Recipe IDs cannot be an empty collection.", nameof(recipeIds));
-            }
-
+            Check.Collection(recipeIds, nameof(recipeIds));
             RecipeIds = recipeIds;
         }
 

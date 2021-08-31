@@ -12,16 +12,7 @@ namespace GW2SDK.Titles.Http
     {
         public TitlesByIdsRequest(IReadOnlyCollection<int> titleIds, Language? language)
         {
-            if (titleIds is null)
-            {
-                throw new ArgumentNullException(nameof(titleIds));
-            }
-
-            if (titleIds.Count == 0)
-            {
-                throw new ArgumentException("Title IDs cannot be an empty collection.", nameof(titleIds));
-            }
-
+            Check.Collection(titleIds, nameof(titleIds));
             TitleIds = titleIds;
             Language = language;
         }

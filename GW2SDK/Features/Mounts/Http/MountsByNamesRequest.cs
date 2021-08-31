@@ -12,21 +12,7 @@ namespace GW2SDK.Mounts.Http
     {
         public MountsByNamesRequest(IReadOnlyCollection<MountName> mountNames, Language? language)
         {
-            if (mountNames is null)
-            {
-                throw new ArgumentNullException(nameof(mountNames));
-            }
-
-            if (mountNames.Count == 0)
-            {
-                throw new ArgumentException("Mount names cannot be an empty collection.", nameof(mountNames));
-            }
-
-            if (mountNames.Any(name => !Enum.IsDefined(typeof(MountName), name)))
-            {
-                throw new ArgumentException("All mount names must be defined.", nameof(mountNames));
-            }
-
+            Check.Collection(mountNames, nameof(mountNames));
             MountNames = mountNames;
             Language = language;
         }
