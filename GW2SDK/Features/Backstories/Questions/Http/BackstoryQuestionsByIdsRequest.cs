@@ -12,17 +12,7 @@ namespace GW2SDK.Backstories.Questions.Http
     {
         public BackstoryQuestionsByIdsRequest(IReadOnlyCollection<int> questionIds, Language? language)
         {
-            if (questionIds is null)
-            {
-                throw new ArgumentNullException(nameof(questionIds));
-            }
-
-            if (questionIds.Count == 0)
-            {
-                throw new ArgumentException("Backstory question IDs cannot be an empty collection.",
-                    nameof(questionIds));
-            }
-
+            Check.Collection(questionIds, nameof(questionIds));
             QuestionIds = questionIds;
             Language = language;
         }

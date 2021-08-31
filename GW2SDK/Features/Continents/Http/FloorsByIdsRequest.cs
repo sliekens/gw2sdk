@@ -16,16 +16,7 @@ namespace GW2SDK.Continents.Http
             Language? language
         )
         {
-            if (floorIds is null)
-            {
-                throw new ArgumentNullException(nameof(floorIds));
-            }
-
-            if (floorIds.Count == 0)
-            {
-                throw new ArgumentException("Floor IDs cannot be an empty collection.", nameof(floorIds));
-            }
-
+            Check.Collection(floorIds, nameof(floorIds));
             ContinentId = continentId;
             FloorIds = floorIds;
             Language = language;

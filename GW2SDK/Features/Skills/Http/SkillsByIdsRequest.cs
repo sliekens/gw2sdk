@@ -12,16 +12,7 @@ namespace GW2SDK.Skills.Http
     {
         public SkillsByIdsRequest(IReadOnlyCollection<int> skillIds, Language? language)
         {
-            if (skillIds is null)
-            {
-                throw new ArgumentNullException(nameof(skillIds));
-            }
-
-            if (skillIds.Count == 0)
-            {
-                throw new ArgumentException("Skill IDs cannot be an empty collection.", nameof(skillIds));
-            }
-
+            Check.Collection(skillIds, nameof(skillIds));
             SkillIds = skillIds;
             Language = language;
         }

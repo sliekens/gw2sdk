@@ -12,16 +12,7 @@ namespace GW2SDK.Traits.Http
     {
         public TraitsByIdsRequest(IReadOnlyCollection<int> traitIds, Language? language)
         {
-            if (traitIds is null)
-            {
-                throw new ArgumentNullException(nameof(traitIds));
-            }
-
-            if (traitIds.Count == 0)
-            {
-                throw new ArgumentException("Trait IDs cannot be an empty collection.", nameof(traitIds));
-            }
-
+            Check.Collection(traitIds, nameof(traitIds));
             TraitIds = traitIds;
             Language = language;
         }

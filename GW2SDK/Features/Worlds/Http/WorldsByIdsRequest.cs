@@ -12,16 +12,7 @@ namespace GW2SDK.Worlds.Http
     {
         public WorldsByIdsRequest(IReadOnlyCollection<int> worldIds, Language? language)
         {
-            if (worldIds is null)
-            {
-                throw new ArgumentNullException(nameof(worldIds));
-            }
-
-            if (worldIds.Count == 0)
-            {
-                throw new ArgumentException("World IDs cannot be an empty collection.", nameof(worldIds));
-            }
-
+            Check.Collection(worldIds, nameof(worldIds));
             WorldIds = worldIds;
             Language = language;
         }

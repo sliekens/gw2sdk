@@ -11,17 +11,7 @@ namespace GW2SDK.Accounts.Banks.Http
     {
         public MaterialCategoriesByIdsRequest(IReadOnlyCollection<int> materialCategoriesIds, Language? language)
         {
-            if (materialCategoriesIds is null)
-            {
-                throw new ArgumentNullException(nameof(materialCategoriesIds));
-            }
-
-            if (materialCategoriesIds.Count == 0)
-            {
-                throw new ArgumentException("Material category IDs cannot be an empty collection.",
-                    nameof(materialCategoriesIds));
-            }
-
+            Check.Collection(materialCategoriesIds, nameof(materialCategoriesIds));
             MaterialCategoriesIds = materialCategoriesIds;
             Language = language;
         }

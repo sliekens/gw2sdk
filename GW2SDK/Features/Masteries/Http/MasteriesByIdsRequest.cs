@@ -12,16 +12,7 @@ namespace GW2SDK.Masteries.Http
     {
         public MasteriesByIdsRequest(IReadOnlyCollection<int> masteryIds, Language? language)
         {
-            if (masteryIds is null)
-            {
-                throw new ArgumentNullException(nameof(masteryIds));
-            }
-
-            if (masteryIds.Count == 0)
-            {
-                throw new ArgumentException("Mastery IDs cannot be an empty collection.", nameof(masteryIds));
-            }
-
+            Check.Collection(masteryIds, nameof(masteryIds));
             MasteryIds = masteryIds;
             Language = language;
         }

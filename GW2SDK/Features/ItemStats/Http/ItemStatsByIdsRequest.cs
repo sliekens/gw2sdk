@@ -12,16 +12,7 @@ namespace GW2SDK.ItemStats.Http
     {
         public ItemStatsByIdsRequest(IReadOnlyCollection<int> itemStatIds, Language? language)
         {
-            if (itemStatIds is null)
-            {
-                throw new ArgumentNullException(nameof(itemStatIds));
-            }
-
-            if (itemStatIds.Count == 0)
-            {
-                throw new ArgumentException("Item stat IDs cannot be an empty collection.", nameof(itemStatIds));
-            }
-
+            Check.Collection(itemStatIds, nameof(itemStatIds));
             ItemStatIds = itemStatIds;
             Language = language;
         }

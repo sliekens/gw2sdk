@@ -12,16 +12,7 @@ namespace GW2SDK.Currencies.Http
     {
         public CurrenciesByIdsRequest(IReadOnlyCollection<int> currencyIds, Language? language)
         {
-            if (currencyIds is null)
-            {
-                throw new ArgumentNullException(nameof(currencyIds));
-            }
-
-            if (currencyIds.Count == 0)
-            {
-                throw new ArgumentException("Currency IDs cannot be an empty collection.", nameof(currencyIds));
-            }
-
+            Check.Collection(currencyIds, nameof(currencyIds));
             CurrencyIds = currencyIds;
             Language = language;
         }

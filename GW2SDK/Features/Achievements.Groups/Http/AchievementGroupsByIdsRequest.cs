@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
 using GW2SDK.Http;
 using JetBrains.Annotations;
@@ -13,23 +12,7 @@ namespace GW2SDK.Achievements.Groups.Http
     {
         public AchievementGroupsByIdsRequest(IReadOnlyCollection<string> achievementGroupIds, Language? language)
         {
-            if (achievementGroupIds is null)
-            {
-                throw new ArgumentNullException(nameof(achievementGroupIds));
-            }
-
-            if (achievementGroupIds.Count == 0)
-            {
-                throw new ArgumentException("Achievement group IDs cannot be an empty collection.",
-                    nameof(achievementGroupIds));
-            }
-
-            if (achievementGroupIds.Any(string.IsNullOrEmpty))
-            {
-                throw new ArgumentException("Achievement group IDs collection cannot contain empty values.",
-                    nameof(achievementGroupIds));
-            }
-
+            Check.Collection(achievementGroupIds, nameof(achievementGroupIds));
             AchievementGroupIds = achievementGroupIds;
             Language = language;
         }

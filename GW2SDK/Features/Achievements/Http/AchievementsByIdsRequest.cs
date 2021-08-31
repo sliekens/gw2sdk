@@ -12,16 +12,7 @@ namespace GW2SDK.Achievements.Http
     {
         public AchievementsByIdsRequest(IReadOnlyCollection<int> achievementIds, Language? language)
         {
-            if (achievementIds is null)
-            {
-                throw new ArgumentNullException(nameof(achievementIds));
-            }
-
-            if (achievementIds.Count == 0)
-            {
-                throw new ArgumentException("Achievement IDs cannot be an empty collection.", nameof(achievementIds));
-            }
-
+            Check.Collection(achievementIds, nameof(achievementIds));
             AchievementIds = achievementIds;
             Language = language;
         }

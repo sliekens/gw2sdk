@@ -12,16 +12,7 @@ namespace GW2SDK.Skins.Http
     {
         public SkinsByIdsRequest(IReadOnlyCollection<int> skinIds, Language? language)
         {
-            if (skinIds is null)
-            {
-                throw new ArgumentNullException(nameof(skinIds));
-            }
-
-            if (skinIds.Count == 0)
-            {
-                throw new ArgumentException("Skin IDs cannot be an empty collection.", nameof(skinIds));
-            }
-
+            Check.Collection(skinIds, nameof(skinIds));
             SkinIds = skinIds;
             Language = language;
         }

@@ -12,16 +12,7 @@ namespace GW2SDK.Continents.Http
     {
         public ContinentsByIdsRequest(IReadOnlyCollection<int> continentIds, Language? language)
         {
-            if (continentIds is null)
-            {
-                throw new ArgumentNullException(nameof(continentIds));
-            }
-
-            if (continentIds.Count == 0)
-            {
-                throw new ArgumentException("Continent IDs cannot be an empty collection.", nameof(continentIds));
-            }
-
+            Check.Collection(continentIds, nameof(continentIds));
             ContinentIds = continentIds;
             Language = language;
         }

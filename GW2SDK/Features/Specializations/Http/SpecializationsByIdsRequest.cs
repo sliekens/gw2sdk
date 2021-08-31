@@ -12,16 +12,7 @@ namespace GW2SDK.Specializations.Http
     {
         public SpecializationsByIdsRequest(IReadOnlyCollection<int> specializationIds, Language? language)
         {
-            if (specializationIds is null)
-            {
-                throw new ArgumentNullException(nameof(specializationIds));
-            }
-
-            if (specializationIds.Count == 0)
-            {
-                throw new ArgumentException("Specialization IDs cannot be an empty collection.", nameof(specializationIds));
-            }
-
+            Check.Collection(specializationIds, nameof(specializationIds));
             SpecializationIds = specializationIds;
             Language = language;
         }

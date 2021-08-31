@@ -10,11 +10,7 @@ namespace GW2SDK.Mounts.Http
     {
         public MountByNameRequest(MountName mountName, Language? language)
         {
-            if (!Enum.IsDefined(typeof(MountName), mountName))
-            {
-                throw new ArgumentException("Mount name must be defined.", nameof(mountName));
-            }
-
+            Check.Constant(mountName, nameof(mountName));
             MountName = mountName;
             Language = language;
         }
