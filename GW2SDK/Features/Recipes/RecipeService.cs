@@ -169,7 +169,7 @@ namespace GW2SDK.Recipes
             [EnumeratorCancellation] CancellationToken cancellationToken = default
         )
         {
-            var index = await GetRecipesIndex()
+            var index = await GetRecipesIndex(cancellationToken)
                 .ConfigureAwait(false);
             if (!index.HasValues)
             {
