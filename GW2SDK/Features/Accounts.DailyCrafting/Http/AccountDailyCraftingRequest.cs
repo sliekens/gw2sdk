@@ -9,7 +9,7 @@ namespace GW2SDK.Accounts.DailyCrafting.Http
     [PublicAPI]
     public sealed class AccountDailyCraftingRequest
     {
-        public AccountDailyCraftingRequest(string? accessToken = null)
+        public AccountDailyCraftingRequest(string? accessToken)
         {
             AccessToken = accessToken;
         }

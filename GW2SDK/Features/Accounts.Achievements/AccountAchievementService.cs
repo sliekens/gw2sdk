@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Net.Http;
+using System.Threading;
 using System.Threading.Tasks;
 using GW2SDK.Accounts.Achievements.Http;
 using GW2SDK.Annotations;
@@ -30,31 +31,37 @@ namespace GW2SDK.Accounts.Achievements
         }
 
         [Scope(Permission.Progression)]
-        public async Task<IReplica<AccountAchievement>> GetAccountAchievementById(int achievementId, string? accessToken = null)
+        public async Task<IReplica<AccountAchievement>> GetAccountAchievementById(
+            int achievementId,
+            string? accessToken,
+            CancellationToken cancellationToken = default
+        )
         {
             var request = new AccountAchievementByIdRequest(achievementId, accessToken);
-            return await http.GetResource(request, json => accountAchievementReader.Read(json, missingMemberBehavior))
+            return await http.GetResource(request, json => accountAchievementReader.Read(json, missingMemberBehavior), cancellationToken)
                 .ConfigureAwait(false);
         }
 
         [Scope(Permission.Progression)]
         public async Task<IReplicaSet<AccountAchievement>> GetAccountAchievementsByIds(
             IReadOnlyCollection<int> achievementIds,
-            string? accessToken = null
+            string? accessToken,
+            CancellationToken cancellationToken = default
         )
         {
             var request = new AccountAchievementsByIdsRequest(achievementIds, accessToken);
-            return await http.GetResourcesSet(request, json => accountAchievementReader.ReadArray(json, missingMemberBehavior))
+            return await http.GetResourcesSet(request, json => accountAchievementReader.ReadArray(json, missingMemberBehavior), cancellationToken)
                 .ConfigureAwait(false);
         }
 
         [Scope(Permission.Progression)]
         public async Task<IReplicaSet<AccountAchievement>> GetAccountAchievements(
-            string? accessToken = null
+            string? accessToken,
+            CancellationToken cancellationToken = default
         )
         {
             var request = new AccountAchievementsRequest(accessToken);
-            return await http.GetResourcesSet(request, json => accountAchievementReader.ReadArray(json, missingMemberBehavior))
+            return await http.GetResourcesSet(request, json => accountAchievementReader.ReadArray(json, missingMemberBehavior), cancellationToken)
                 .ConfigureAwait(false);
         }
 
@@ -62,11 +69,12 @@ namespace GW2SDK.Accounts.Achievements
         public async Task<IReplicaPage<AccountAchievement>> GetAccountAchievementsByPage(
             int pageIndex,
             int? pageSize,
-            string? accessToken = null
+            string? accessToken,
+            CancellationToken cancellationToken = default
         )
         {
             var request = new AccountAchievementsByPageRequest(pageIndex, pageSize, accessToken);
-            return await http.GetResourcesPage(request, json => accountAchievementReader.ReadArray(json, missingMemberBehavior))
+            return await http.GetResourcesPage(request, json => accountAchievementReader.ReadArray(json, missingMemberBehavior), cancellationToken)
                 .ConfigureAwait(false);
         }
     }

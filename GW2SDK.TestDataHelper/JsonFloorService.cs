@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
+using System.Threading;
 using System.Threading.Tasks;
 using GW2SDK.Continents.Http;
 using GW2SDK.Http;
@@ -25,7 +26,7 @@ namespace GW2SDK.TestDataHelper
             response.EnsureSuccessStatusCode();
 
             // API returns a JSON array but we want a List of JSON objects instead
-            using var json = await response.Content.ReadAsJsonAsync()
+            using var json = await response.Content.ReadAsJsonAsync(CancellationToken.None)
                 .ConfigureAwait(false);
             return json.Indent(false)
                 .RootElement.EnumerateArray()

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Net.Http;
+using System.Threading;
 using System.Threading.Tasks;
 using GW2SDK.Accounts.Http;
 using GW2SDK.Http;
@@ -24,10 +25,13 @@ namespace GW2SDK.Accounts
             this.missingMemberBehavior = missingMemberBehavior;
         }
 
-        public async Task<IReplica<Account>> GetAccount(string? accessToken = null)
+        public async Task<IReplica<Account>> GetAccount(
+            string? accessToken,
+            CancellationToken cancellationToken = default
+        )
         {
             var request = new AccountRequest(accessToken);
-            return await http.GetResource(request, json => accountReader.Read(json, missingMemberBehavior))
+            return await http.GetResource(request, json => accountReader.Read(json, missingMemberBehavior), cancellationToken)
                 .ConfigureAwait(false);
         }
     }

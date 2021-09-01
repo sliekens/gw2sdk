@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Net.Http;
+using System.Threading;
 using System.Threading.Tasks;
 using GW2SDK.Http;
 using GW2SDK.Json;
@@ -29,45 +30,54 @@ namespace GW2SDK.Traits
             this.missingMemberBehavior = missingMemberBehavior;
         }
 
-        public async Task<IReplicaSet<Trait>> GetTraits(Language? language = default)
+        public async Task<IReplicaSet<Trait>> GetTraits(
+            Language? language = default,
+            CancellationToken cancellationToken = default
+        )
         {
             var request = new TraitsRequest(language);
-            return await http.GetResourcesSet(request, json => traitReader.ReadArray(json, missingMemberBehavior))
+            return await http.GetResourcesSet(request, json => traitReader.ReadArray(json, missingMemberBehavior), cancellationToken)
                 .ConfigureAwait(false);
         }
 
-        public async Task<IReplicaSet<int>> GetTraitsIndex()
+        public async Task<IReplicaSet<int>> GetTraitsIndex(CancellationToken cancellationToken = default)
         {
             var request = new TraitsIndexRequest();
-            return await http.GetResourcesSet(request, json => traitReader.Id.ReadArray(json, missingMemberBehavior))
+            return await http.GetResourcesSet(request, json => traitReader.Id.ReadArray(json, missingMemberBehavior), cancellationToken)
                 .ConfigureAwait(false);
         }
 
-        public async Task<IReplica<Trait>> GetTraitById(int traitId, Language? language = default)
+        public async Task<IReplica<Trait>> GetTraitById(
+            int traitId,
+            Language? language = default,
+            CancellationToken cancellationToken = default
+        )
         {
             var request = new TraitByIdRequest(traitId, language);
-            return await http.GetResource(request, json => traitReader.Read(json, missingMemberBehavior))
+            return await http.GetResource(request, json => traitReader.Read(json, missingMemberBehavior), cancellationToken)
                 .ConfigureAwait(false);
         }
 
         public async Task<IReplicaSet<Trait>> GetTraitsByIds(
             IReadOnlyCollection<int> traitIds,
-            Language? language = default
+            Language? language = default,
+            CancellationToken cancellationToken = default
         )
         {
             var request = new TraitsByIdsRequest(traitIds, language);
-            return await http.GetResourcesSet(request, json => traitReader.ReadArray(json, missingMemberBehavior))
+            return await http.GetResourcesSet(request, json => traitReader.ReadArray(json, missingMemberBehavior), cancellationToken)
                 .ConfigureAwait(false);
         }
 
         public async Task<IReplicaPage<Trait>> GetTraitsByPage(
             int pageIndex,
             int? pageSize = default,
-            Language? language = default
+            Language? language = default,
+            CancellationToken cancellationToken = default
         )
         {
             var request = new TraitsByPageRequest(pageIndex, pageSize, language);
-            return await http.GetResourcesPage(request, json => traitReader.ReadArray(json, missingMemberBehavior))
+            return await http.GetResourcesPage(request, json => traitReader.ReadArray(json, missingMemberBehavior), cancellationToken)
                 .ConfigureAwait(false);
         }
     }

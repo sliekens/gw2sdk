@@ -4,6 +4,7 @@ using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text.Json;
+using System.Threading;
 using System.Threading.Tasks;
 using JetBrains.Annotations;
 
@@ -41,14 +42,17 @@ namespace GW2SDK.Http
             instance.DefaultRequestHeaders.AcceptLanguage.ParseAdd(language.Alpha2Code);
         }
 
-        public static async Task<JsonDocument> ReadAsJsonAsync(this HttpContent instance)
+        public static async Task<JsonDocument> ReadAsJsonAsync(
+            this HttpContent instance,
+            CancellationToken cancellationToken
+        )
         {
             if (instance == null) throw new ArgumentNullException(nameof(instance));
 #if NET
             await
 #endif
-                using var content = await instance.ReadAsStreamAsync()
-                    .ConfigureAwait(false);
+            using var content = await instance.ReadAsStreamAsync()
+                .ConfigureAwait(false);
             return await JsonDocument.ParseAsync(content)
                 .ConfigureAwait(false);
         }
@@ -56,10 +60,12 @@ namespace GW2SDK.Http
         internal static async Task<IReplica<T>> GetResource<T>(
             this HttpClient instance,
             HttpRequestMessage request,
-            Func<JsonDocument, T> resultSelector
+            Func<JsonDocument, T> resultSelector,
+            CancellationToken cancellationToken
         )
         {
-            using var response = await instance.SendAsync(request, HttpCompletionOption.ResponseHeadersRead)
+            using var response = await instance
+                .SendAsync(request, HttpCompletionOption.ResponseHeadersRead, cancellationToken)
                 .ConfigureAwait(false);
             var date = response.Headers.Date.GetValueOrDefault(DateTimeOffset.UtcNow);
             if (response.StatusCode == HttpStatusCode.NotModified)
@@ -69,7 +75,7 @@ namespace GW2SDK.Http
 
             response.EnsureSuccessStatusCode();
 
-            using var json = await response.Content.ReadAsJsonAsync()
+            using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
                 .ConfigureAwait(false);
 
             var result = resultSelector(json);
@@ -88,15 +94,17 @@ namespace GW2SDK.Http
 #endif
             this HttpClient instance,
             HttpRequestMessage request,
-            Func<JsonDocument, IEnumerable<T>> resultSelector
+            Func<JsonDocument, IEnumerable<T>> resultSelector,
+            CancellationToken cancellationToken
         )
         {
-            using var response = await instance.SendAsync(request, HttpCompletionOption.ResponseHeadersRead)
+            using var response = await instance
+                .SendAsync(request, HttpCompletionOption.ResponseHeadersRead, cancellationToken)
                 .ConfigureAwait(false);
             var date = response.Headers.Date.GetValueOrDefault(DateTimeOffset.UtcNow);
             response.EnsureSuccessStatusCode();
 
-            using var json = await response.Content.ReadAsJsonAsync()
+            using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
                 .ConfigureAwait(false);
 
             var result = new HashSet<T>(resultSelector(json));
@@ -116,7 +124,8 @@ namespace GW2SDK.Http
         internal static async Task<IReplicaSet<T>> GetResourcesSet<T>(
             this HttpClient instance,
             HttpRequestMessage request,
-            Func<JsonDocument, IEnumerable<T>> resultSelector
+            Func<JsonDocument, IEnumerable<T>> resultSelector,
+            CancellationToken cancellationToken
         )
         {
             using var response = await instance.SendAsync(request, HttpCompletionOption.ResponseHeadersRead)
@@ -124,7 +133,7 @@ namespace GW2SDK.Http
             var date = response.Headers.Date.GetValueOrDefault(DateTimeOffset.UtcNow);
             response.EnsureSuccessStatusCode();
 
-            using var json = await response.Content.ReadAsJsonAsync()
+            using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
                 .ConfigureAwait(false);
 
 #if NET
@@ -146,7 +155,8 @@ namespace GW2SDK.Http
         internal static async Task<IReplicaPage<T>> GetResourcesPage<T>(
             this HttpClient instance,
             HttpRequestMessage request,
-            Func<JsonDocument, IEnumerable<T>> resultSelector
+            Func<JsonDocument, IEnumerable<T>> resultSelector,
+            CancellationToken cancellationToken
         )
         {
             using var response = await instance.SendAsync(request, HttpCompletionOption.ResponseHeadersRead)
@@ -154,7 +164,7 @@ namespace GW2SDK.Http
             var date = response.Headers.Date.GetValueOrDefault(DateTimeOffset.UtcNow);
             response.EnsureSuccessStatusCode();
 
-            using var json = await response.Content.ReadAsJsonAsync()
+            using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
                 .ConfigureAwait(false);
 
 #if NET

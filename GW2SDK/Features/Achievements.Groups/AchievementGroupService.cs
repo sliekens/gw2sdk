@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Net.Http;
+using System.Threading;
 using System.Threading.Tasks;
 using GW2SDK.Achievements.Groups.Http;
 using GW2SDK.Http;
@@ -30,52 +31,62 @@ namespace GW2SDK.Achievements.Groups
             this.missingMemberBehavior = missingMemberBehavior;
         }
 
-        public async Task<IReplicaSet<AchievementGroup>> GetAchievementGroups(Language? language = default)
+        public async Task<IReplicaSet<AchievementGroup>> GetAchievementGroups(
+            Language? language = default,
+            CancellationToken cancellationToken = default
+        )
         {
             var request = new AchievementGroupsRequest(language);
             return await http.GetResourcesSet(request,
-                    json => achievementGroupReader.ReadArray(json, missingMemberBehavior))
+                    json => achievementGroupReader.ReadArray(json, missingMemberBehavior),
+                    cancellationToken)
                 .ConfigureAwait(false);
         }
 
-        public async Task<IReplicaSet<string>> GetAchievementGroupsIndex()
+        public async Task<IReplicaSet<string>> GetAchievementGroupsIndex(CancellationToken cancellationToken = default)
         {
             var request = new AchievementGroupsIndexRequest();
             return await http.GetResourcesSet(request,
-                    json => achievementGroupReader.Id.ReadArray(json, missingMemberBehavior))
+                    json => achievementGroupReader.Id.ReadArray(json, missingMemberBehavior),
+                    cancellationToken)
                 .ConfigureAwait(false);
         }
 
         public async Task<IReplica<AchievementGroup>> GetAchievementGroupById(
             string achievementGroupId,
-            Language? language = default
+            Language? language = default,
+            CancellationToken cancellationToken = default
         )
         {
             var request = new AchievementGroupByIdRequest(achievementGroupId, language);
-            return await http.GetResource(request, json => achievementGroupReader.Read(json, missingMemberBehavior))
+            return await http.GetResource(request, json => achievementGroupReader.Read(json, missingMemberBehavior), cancellationToken)
                 .ConfigureAwait(false);
         }
 
         public async Task<IReplicaSet<AchievementGroup>> GetAchievementGroupsByIds(
             IReadOnlyCollection<string> achievementGroupIds,
-            Language? language = default
+            Language? language = default,
+            CancellationToken cancellationToken = default
         )
         {
             var request = new AchievementGroupsByIdsRequest(achievementGroupIds, language);
             return await http.GetResourcesSet(request,
-                    json => achievementGroupReader.ReadArray(json, missingMemberBehavior))
+                    json => achievementGroupReader.ReadArray(json, missingMemberBehavior),
+                    cancellationToken)
                 .ConfigureAwait(false);
         }
 
         public async Task<IReplicaPage<AchievementGroup>> GetAchievementGroupsByPage(
             int pageIndex,
             int? pageSize = default,
-            Language? language = default
+            Language? language = default,
+            CancellationToken cancellationToken = default
         )
         {
             var request = new AchievementGroupsByPageRequest(pageIndex, pageSize, language);
             return await http.GetResourcesPage(request,
-                    json => achievementGroupReader.ReadArray(json, missingMemberBehavior))
+                    json => achievementGroupReader.ReadArray(json, missingMemberBehavior),
+                    cancellationToken)
                 .ConfigureAwait(false);
         }
     }

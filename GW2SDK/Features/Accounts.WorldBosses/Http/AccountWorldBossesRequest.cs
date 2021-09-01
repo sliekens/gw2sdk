@@ -8,7 +8,7 @@ namespace GW2SDK.Accounts.WorldBosses.Http
     [PublicAPI]
     public sealed class AccountWorldBossesRequest
     {
-        public AccountWorldBossesRequest(string? accessToken = null)
+        public AccountWorldBossesRequest(string? accessToken)
         {
             AccessToken = accessToken;
         }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Net.Http;
+using System.Threading;
 using System.Threading.Tasks;
 using GW2SDK.Http;
 using GW2SDK.Json;
@@ -29,45 +30,54 @@ namespace GW2SDK.Skills
             this.missingMemberBehavior = missingMemberBehavior;
         }
 
-        public async Task<IReplicaSet<Skill>> GetSkills(Language? language = default)
+        public async Task<IReplicaSet<Skill>> GetSkills(
+            Language? language = default,
+            CancellationToken cancellationToken = default
+        )
         {
             var request = new SkillsRequest(language);
-            return await http.GetResourcesSet(request, json => skillReader.ReadArray(json, missingMemberBehavior))
+            return await http.GetResourcesSet(request, json => skillReader.ReadArray(json, missingMemberBehavior), cancellationToken)
                 .ConfigureAwait(false);
         }
 
-        public async Task<IReplicaSet<int>> GetSkillsIndex()
+        public async Task<IReplicaSet<int>> GetSkillsIndex(CancellationToken cancellationToken = default)
         {
             var request = new SkillsIndexRequest();
-            return await http.GetResourcesSet(request, json => skillReader.Id.ReadArray(json, missingMemberBehavior))
+            return await http.GetResourcesSet(request, json => skillReader.Id.ReadArray(json, missingMemberBehavior), cancellationToken)
                 .ConfigureAwait(false);
         }
 
-        public async Task<IReplica<Skill>> GetSkillById(int skillId, Language? language = default)
+        public async Task<IReplica<Skill>> GetSkillById(
+            int skillId,
+            Language? language = default,
+            CancellationToken cancellationToken = default
+        )
         {
             var request = new SkillByIdRequest(skillId, language);
-            return await http.GetResource(request, json => skillReader.Read(json, missingMemberBehavior))
+            return await http.GetResource(request, json => skillReader.Read(json, missingMemberBehavior), cancellationToken)
                 .ConfigureAwait(false);
         }
 
         public async Task<IReplicaSet<Skill>> GetSkillsByIds(
             IReadOnlyCollection<int> skillIds,
-            Language? language = default
+            Language? language = default,
+            CancellationToken cancellationToken = default
         )
         {
             var request = new SkillsByIdsRequest(skillIds, language);
-            return await http.GetResourcesSet(request, json => skillReader.ReadArray(json, missingMemberBehavior))
+            return await http.GetResourcesSet(request, json => skillReader.ReadArray(json, missingMemberBehavior), cancellationToken)
                 .ConfigureAwait(false);
         }
 
         public async Task<IReplicaPage<Skill>> GetSkillsByPage(
             int pageIndex,
             int? pageSize = default,
-            Language? language = default
+            Language? language = default,
+            CancellationToken cancellationToken = default
         )
         {
             var request = new SkillsByPageRequest(pageIndex, pageSize, language);
-            return await http.GetResourcesPage(request, json => skillReader.ReadArray(json, missingMemberBehavior))
+            return await http.GetResourcesPage(request, json => skillReader.ReadArray(json, missingMemberBehavior), cancellationToken)
                 .ConfigureAwait(false);
         }
     }

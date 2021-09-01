@@ -9,7 +9,7 @@ namespace GW2SDK.Accounts.Http
     [PublicAPI]
     public sealed class AccountRequest
     {
-        public AccountRequest(string? accessToken = null)
+        public AccountRequest(string? accessToken)
         {
             AccessToken = accessToken;
         }

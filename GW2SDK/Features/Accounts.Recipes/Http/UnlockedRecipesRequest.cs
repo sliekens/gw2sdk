@@ -9,7 +9,7 @@ namespace GW2SDK.Accounts.Recipes.Http
     [PublicAPI]
     public sealed class UnlockedRecipesRequest
     {
-        public UnlockedRecipesRequest(string? accessToken = null)
+        public UnlockedRecipesRequest(string? accessToken)
         {
             AccessToken = accessToken;
         }

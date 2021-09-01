@@ -13,7 +13,7 @@ namespace GW2SDK.Subtokens.Http
     public sealed class CreateSubtokenRequest
     {
         public CreateSubtokenRequest(
-            string? accessToken = null,
+            string? accessToken,
             IReadOnlyCollection<Permission>? permissions = null,
             DateTimeOffset? absoluteExpirationDate = null,
             IReadOnlyCollection<string>? urls = null)
