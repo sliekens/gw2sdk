@@ -119,7 +119,11 @@ namespace GW2SDK.Mounts
         }
 
         public async Task<IReplicaSet<MountSkin>> GetMountSkinsByIds(
+#if NET
+            IReadOnlySet<int> mountSkinIds,
+#else
             IReadOnlyCollection<int> mountSkinIds,
+#endif
             Language? language = default,
             CancellationToken cancellationToken = default
         )

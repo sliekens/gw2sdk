@@ -1,4 +1,5 @@
-﻿using System.Diagnostics.CodeAnalysis;
+﻿using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Threading.Tasks;
 using GW2SDK.Accounts.Banks;
 using GW2SDK.Tests.TestInfrastructure;
@@ -110,7 +111,7 @@ namespace GW2SDK.Tests.Features.Accounts.Banks
             await using var services = new Composer();
             var sut = services.Resolve<BankService>();
 
-            var ids = new[]
+            var ids = new HashSet<int>
             {
                 5,
                 6,
@@ -118,11 +119,11 @@ namespace GW2SDK.Tests.Features.Accounts.Banks
             };
 
             var actual = await sut.GetMaterialCategoriesByIds(ids);
-
+            
             Assert.Collection(actual.Values,
-                first => Assert.Equal(ids[0], first.Id),
-                second => Assert.Equal(ids[1], second.Id),
-                third => Assert.Equal(ids[2], third.Id));
+                first => Assert.Contains(first.Id, ids),
+                second => Assert.Contains(second.Id, ids),
+                third => Assert.Contains(third.Id, ids));
         }
     }
 }

@@ -60,7 +60,11 @@ namespace GW2SDK.Specializations
         }
 
         public async Task<IReplicaSet<Specialization>> GetSpecializationsByIds(
+#if NET
+            IReadOnlySet<int> specializationIds,
+#else
             IReadOnlyCollection<int> specializationIds,
+#endif
             Language? language = default,
             CancellationToken cancellationToken = default
         )

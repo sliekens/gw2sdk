@@ -99,7 +99,11 @@ namespace GW2SDK.Backstories
         }
 
         public async Task<IReplicaSet<BackstoryQuestion>> GetBackstoryQuestionsByIds(
+#if NET
+            IReadOnlySet<int> questionIds,
+#else
             IReadOnlyCollection<int> questionIds,
+#endif
             Language? language = default,
             CancellationToken cancellationToken = default
         )
@@ -112,7 +116,11 @@ namespace GW2SDK.Backstories
         }
 
         public async Task<IReplicaSet<BackstoryAnswer>> GetBackstoryAnswersByIds(
+#if NET
+            IReadOnlySet<string> answerIds,
+#else
             IReadOnlyCollection<string> answerIds,
+#endif
             Language? language = default,
             CancellationToken cancellationToken = default
         )

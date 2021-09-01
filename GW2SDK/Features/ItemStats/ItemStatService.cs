@@ -60,7 +60,11 @@ namespace GW2SDK.ItemStats
         }
 
         public async Task<IReplicaSet<ItemStat>> GetItemStatsByIds(
+#if NET
+            IReadOnlySet<int> itemStatIds,
+#else
             IReadOnlyCollection<int> itemStatIds,
+#endif
             Language? language = default,
             CancellationToken cancellationToken = default
         )

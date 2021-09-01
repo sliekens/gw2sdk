@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using GW2SDK.MailCarriers;
@@ -82,7 +83,7 @@ namespace GW2SDK.Tests.Features.MailCarriers
             await using var services = new Composer();
             var sut = services.Resolve<MailCarrierService>();
 
-            var ids = new[] { 1, 2, 3 };
+            var ids = new HashSet<int> { 1, 2, 3 };
 
             var actual = await sut.GetMailCarriersByIds(ids);
 

@@ -49,7 +49,11 @@ namespace GW2SDK.Skins
         }
 
         public async Task<IReplicaSet<Skin>> GetSkinsByIds(
+#if NET
+            IReadOnlySet<int> skinIds,
+#else
             IReadOnlyCollection<int> skinIds,
+#endif
             Language? language = default,
             CancellationToken cancellationToken = default
         )

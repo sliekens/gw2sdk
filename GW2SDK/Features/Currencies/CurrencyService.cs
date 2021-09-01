@@ -60,7 +60,11 @@ namespace GW2SDK.Currencies
         }
 
         public async Task<IReplicaSet<Currency>> GetCurrenciesByIds(
+#if NET
+            IReadOnlySet<int> currencyIds,
+#else
             IReadOnlyCollection<int> currencyIds,
+#endif
             Language? language = default,
             CancellationToken cancellationToken = default
         )

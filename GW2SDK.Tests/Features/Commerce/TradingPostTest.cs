@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using GW2SDK.Commerce;
 using GW2SDK.Tests.TestInfrastructure;
 using Xunit;
@@ -65,7 +66,7 @@ namespace GW2SDK.Tests.Features.Commerce
             await using var services = new Composer();
             var sut = services.Resolve<TradingPost>();
 
-            var ids = new[]
+            var ids = new HashSet<int>
             {
                 24,
                 19699,
@@ -110,7 +111,7 @@ namespace GW2SDK.Tests.Features.Commerce
             await using var services = new Composer();
             var sut = services.Resolve<TradingPost>();
 
-            var ids = new[]
+            var ids = new HashSet<int>
             {
                 24,
                 19699,

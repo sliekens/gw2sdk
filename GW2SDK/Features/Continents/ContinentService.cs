@@ -61,7 +61,11 @@ namespace GW2SDK.Continents
         }
 
         public async Task<IReplicaSet<Continent>> GetContinentsByIds(
+#if NET
+            IReadOnlySet<int> continentIds,
+#else
             IReadOnlyCollection<int> continentIds,
+#endif
             Language? language = default,
             CancellationToken cancellationToken = default
         )
@@ -124,7 +128,11 @@ namespace GW2SDK.Continents
 
         public async Task<IReplicaSet<Floor>> GetFloorsByIds(
             int continentId,
+#if NET
+            IReadOnlySet<int> floorIds,
+#else
             IReadOnlyCollection<int> floorIds,
+#endif
             Language? language = default,
             CancellationToken cancellationToken = default
         )

@@ -65,7 +65,11 @@ namespace GW2SDK.Achievements.Categories
         }
 
         public async Task<IReplicaSet<AchievementCategory>> GetAchievementCategoriesByIds(
+#if NET
+            IReadOnlySet<int> achievementCategoryIds,
+#else
             IReadOnlyCollection<int> achievementCategoryIds,
+#endif
             Language? language = default,
             CancellationToken cancellationToken = default
         )

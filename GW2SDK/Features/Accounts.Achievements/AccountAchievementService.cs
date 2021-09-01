@@ -44,7 +44,11 @@ namespace GW2SDK.Accounts.Achievements
 
         [Scope(Permission.Progression)]
         public async Task<IReplicaSet<AccountAchievement>> GetAccountAchievementsByIds(
+#if NET
+            IReadOnlySet<int> achievementIds,
+#else
             IReadOnlyCollection<int> achievementIds,
+#endif
             string? accessToken,
             CancellationToken cancellationToken = default
         )

@@ -73,7 +73,11 @@ namespace GW2SDK.Commerce
         }
 
         public async Task<IReplicaSet<ItemPrice>> GetItemPricesByIds(
+#if NET
+            IReadOnlySet<int> itemIds,
+#else
             IReadOnlyCollection<int> itemIds,
+#endif
             CancellationToken cancellationToken = default
         )
         {
@@ -100,7 +104,11 @@ namespace GW2SDK.Commerce
         }
 
         public async Task<IReplicaSet<OrderBook>> GetOrderBooksByIds(
+#if NET
+            IReadOnlySet<int> itemIds,
+#else
             IReadOnlyCollection<int> itemIds,
+#endif
             CancellationToken cancellationToken = default
         )
         {

@@ -59,7 +59,11 @@ namespace GW2SDK.Worlds
         }
 
         public async Task<IReplicaSet<World>> GetWorldsByIds(
+#if NET
+            IReadOnlySet<int> worldIds,
+#else
             IReadOnlyCollection<int> worldIds,
+#endif
             Language? language = default,
             CancellationToken cancellationToken = default
         )

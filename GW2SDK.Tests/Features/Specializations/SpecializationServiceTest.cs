@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using GW2SDK.Specializations;
 using GW2SDK.Tests.TestInfrastructure;
@@ -82,7 +83,7 @@ namespace GW2SDK.Tests.Features.Specializations
             await using var services = new Composer();
             var sut = services.Resolve<SpecializationService>();
 
-            var ids = new[]
+            var ids = new HashSet<int>
             {
                 1,
                 2,

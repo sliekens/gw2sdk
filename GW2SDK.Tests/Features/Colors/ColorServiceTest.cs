@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using GW2SDK.Colors;
 using GW2SDK.Tests.TestInfrastructure;
@@ -62,7 +63,7 @@ namespace GW2SDK.Tests.Features.Colors
             await using var services = new Composer();
             var sut = services.Resolve<ColorService>();
 
-            var ids = new[] { 1, 2, 3 };
+            var ids = new HashSet<int> { 1, 2, 3 };
 
             var actual = await sut.GetColorsByIds(ids);
 
