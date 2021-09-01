@@ -13,14 +13,14 @@ namespace GW2SDK
 
         int ResultCount { get; }
 
-        ContinuationToken Previous { get; }
+        HyperlinkReference Previous { get; }
 
-        ContinuationToken Next { get; }
+        HyperlinkReference Next { get; }
 
-        ContinuationToken First { get; }
+        HyperlinkReference First { get; }
 
-        ContinuationToken Self { get; }
+        HyperlinkReference Self { get; }
 
-        ContinuationToken Last { get; }
+        HyperlinkReference Last { get; }
     }
 }
