@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Net.Http;
+using System.Threading;
 using System.Threading.Tasks;
 using GW2SDK.Colors.Http;
 using GW2SDK.Http;
@@ -29,45 +30,54 @@ namespace GW2SDK.Colors
             this.missingMemberBehavior = missingMemberBehavior;
         }
 
-        public async Task<IReplicaSet<Color>> GetColors(Language? language = default)
+        public async Task<IReplicaSet<Color>> GetColors(
+            Language? language = default,
+            CancellationToken cancellationToken = default
+        )
         {
             var request = new ColorsRequest(language);
-            return await http.GetResourcesSet(request, json => colorReader.ReadArray(json, missingMemberBehavior))
+            return await http.GetResourcesSet(request, json => colorReader.ReadArray(json, missingMemberBehavior), cancellationToken)
                 .ConfigureAwait(false);
         }
 
-        public async Task<IReplicaSet<int>> GetColorsIndex()
+        public async Task<IReplicaSet<int>> GetColorsIndex(CancellationToken cancellationToken = default)
         {
             var request = new ColorsIndexRequest();
-            return await http.GetResourcesSet(request, json => colorReader.Id.ReadArray(json, missingMemberBehavior))
+            return await http.GetResourcesSet(request, json => colorReader.Id.ReadArray(json, missingMemberBehavior), cancellationToken)
                 .ConfigureAwait(false);
         }
 
-        public async Task<IReplica<Color>> GetColorById(int colorId, Language? language = default)
+        public async Task<IReplica<Color>> GetColorById(
+            int colorId,
+            Language? language = default,
+            CancellationToken cancellationToken = default
+        )
         {
             var request = new ColorByIdRequest(colorId, language);
-            return await http.GetResource(request, json => colorReader.Read(json, missingMemberBehavior))
+            return await http.GetResource(request, json => colorReader.Read(json, missingMemberBehavior), cancellationToken)
                 .ConfigureAwait(false);
         }
 
         public async Task<IReplicaSet<Color>> GetColorsByIds(
             IReadOnlyCollection<int> colorIds,
-            Language? language = default
+            Language? language = default,
+            CancellationToken cancellationToken = default
         )
         {
             var request = new ColorsByIdsRequest(colorIds, language);
-            return await http.GetResourcesSet(request, json => colorReader.ReadArray(json, missingMemberBehavior))
+            return await http.GetResourcesSet(request, json => colorReader.ReadArray(json, missingMemberBehavior), cancellationToken)
                 .ConfigureAwait(false);
         }
 
         public async Task<IReplicaPage<Color>> GetColorsByPage(
             int pageIndex,
             int? pageSize = default,
-            Language? language = default
+            Language? language = default,
+            CancellationToken cancellationToken = default
         )
         {
             var request = new ColorsByPageRequest(pageIndex, pageSize, language);
-            return await http.GetResourcesPage(request, json => colorReader.ReadArray(json, missingMemberBehavior))
+            return await http.GetResourcesPage(request, json => colorReader.ReadArray(json, missingMemberBehavior), cancellationToken)
                 .ConfigureAwait(false);
         }
     }

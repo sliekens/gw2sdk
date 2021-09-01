@@ -34,7 +34,7 @@ namespace GW2SDK.Http
                 throw new TooManyRequestsException("");
             }
 
-            using var json = await response.Content.ReadAsJsonAsync().ConfigureAwait(false);
+            using var json = await response.Content.ReadAsJsonAsync(cancellationToken).ConfigureAwait(false);
             if (!json.RootElement.TryGetProperty("text", out var text))
             {
                 throw new TooManyRequestsException("");

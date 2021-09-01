@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Net.Http;
+using System.Threading;
 using System.Threading.Tasks;
 using GW2SDK.Http;
 using GW2SDK.Json;
@@ -30,11 +31,12 @@ namespace GW2SDK.Subtokens
             string? accessToken,
             IReadOnlyCollection<Permission>? permissions = null,
             DateTimeOffset? absoluteExpirationDate = null,
-            IReadOnlyCollection<string>? urls = null
+            IReadOnlyCollection<string>? urls = null,
+            CancellationToken cancellationToken = default
         )
         {
             var request = new CreateSubtokenRequest(accessToken, permissions, absoluteExpirationDate, urls);
-            return await http.GetResource(request, json => subtokenReader.Read(json, missingMemberBehavior))
+            return await http.GetResource(request, json => subtokenReader.Read(json, missingMemberBehavior), cancellationToken)
                 .ConfigureAwait(false);
         }
     }

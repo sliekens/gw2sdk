@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Net.Http;
+using System.Threading;
 using System.Threading.Tasks;
 using GW2SDK.Http;
 using GW2SDK.Json;
@@ -27,10 +28,13 @@ namespace GW2SDK.Tokens
             this.missingMemberBehavior = missingMemberBehavior;
         }
 
-        public async Task<IReplica<TokenInfo>> GetTokenInfo(string? accessToken)
+        public async Task<IReplica<TokenInfo>> GetTokenInfo(
+            string? accessToken,
+            CancellationToken cancellationToken = default
+        )
         {
             var request = new TokenInfoRequest(accessToken);
-            return await http.GetResource(request, json => tokenInfoReader.Read(json, missingMemberBehavior))
+            return await http.GetResource(request, json => tokenInfoReader.Read(json, missingMemberBehavior), cancellationToken)
                 .ConfigureAwait(false);
         }
     }

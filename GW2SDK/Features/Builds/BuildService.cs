@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Net.Http;
+using System.Threading;
 using System.Threading.Tasks;
 using GW2SDK.Builds.Http;
 using GW2SDK.Http;
@@ -24,10 +25,10 @@ namespace GW2SDK.Builds
             this.missingMemberBehavior = missingMemberBehavior;
         }
 
-        public async Task<IReplica<Build>> GetBuild()
+        public async Task<IReplica<Build>> GetBuild(CancellationToken cancellationToken = default)
         {
             var request = new BuildRequest();
-            return await http.GetResource(request, json => buildReader.Read(json, missingMemberBehavior))
+            return await http.GetResource(request, json => buildReader.Read(json, missingMemberBehavior), cancellationToken)
                 .ConfigureAwait(false);
         }
     }

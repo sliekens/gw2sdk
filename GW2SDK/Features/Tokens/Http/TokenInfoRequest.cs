@@ -9,7 +9,7 @@ namespace GW2SDK.Tokens.Http
     [PublicAPI]
     public sealed class TokenInfoRequest
     {
-        public TokenInfoRequest(string? accessToken = null)
+        public TokenInfoRequest(string? accessToken)
         {
             AccessToken = accessToken;
         }

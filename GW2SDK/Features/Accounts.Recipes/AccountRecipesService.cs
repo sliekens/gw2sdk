@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Net.Http;
+using System.Threading;
 using System.Threading.Tasks;
 using GW2SDK.Accounts.Recipes.Http;
 using GW2SDK.Annotations;
@@ -32,14 +33,18 @@ namespace GW2SDK.Accounts.Recipes
 
         [Scope(Permission.Unlocks)]
 #if NET
-        public async Task<IReplica<IReadOnlySet<int>>> GetUnlockedRecipes(string? accessToken = null)
+        public async Task<IReplica<IReadOnlySet<int>>> GetUnlockedRecipes(string? accessToken, CancellationToken cancellationToken = default)
 #else
-        public async Task<IReplica<IReadOnlyCollection<int>>> GetUnlockedRecipes(string? accessToken = null)
+        public async Task<IReplica<IReadOnlyCollection<int>>> GetUnlockedRecipes(
+            string? accessToken,
+            CancellationToken cancellationToken = default
+        )
 #endif
         {
             var request = new UnlockedRecipesRequest(accessToken);
             return await http.GetResourcesSetSimple(request,
-                    json => accountRecipeReader.Id.ReadArray(json, missingMemberBehavior))
+                    json => accountRecipeReader.Id.ReadArray(json, missingMemberBehavior),
+                    cancellationToken)
                 .ConfigureAwait(false);
         }
     }

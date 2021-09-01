@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Net.Http;
+using System.Threading;
 using System.Threading.Tasks;
 using GW2SDK.Accounts.DailyCrafting.Http;
 using GW2SDK.Annotations;
@@ -26,32 +27,43 @@ namespace GW2SDK.Accounts.DailyCrafting
         )
         {
             this.http = http ?? throw new ArgumentNullException(nameof(http));
-            this.dailyCraftingReader = dailyCraftingReader ?? throw new ArgumentNullException(nameof(dailyCraftingReader));
+            this.dailyCraftingReader =
+                dailyCraftingReader ?? throw new ArgumentNullException(nameof(dailyCraftingReader));
             this.missingMemberBehavior = missingMemberBehavior;
         }
 
 #if NET
-        public async Task<IReplica<IReadOnlySet<string>>> GetDailyRecipes()
+        public async Task<IReplica<IReadOnlySet<string>>> GetDailyRecipes(CancellationToken cancellationToken = default)
 #else
-        public async Task<IReplica<IReadOnlyCollection<string>>> GetDailyRecipes()
+        public async Task<IReplica<IReadOnlyCollection<string>>> GetDailyRecipes(
+            CancellationToken cancellationToken = default
+        )
 #endif
         {
             var request = new DailyCraftingRequest();
             return await http.GetResourcesSetSimple(request,
-                    json => dailyCraftingReader.Id.ReadArray(json, missingMemberBehavior))
+                    json => dailyCraftingReader.Id.ReadArray(json, missingMemberBehavior),
+                    cancellationToken)
                 .ConfigureAwait(false);
         }
 
         [Scope(Permission.Progression)]
 #if NET
-        public async Task<IReplica<IReadOnlySet<string>>> GetDailyRecipesOnCooldown(string? accessToken)
+        public async Task<IReplica<IReadOnlySet<string>>> GetDailyRecipesOnCooldown(
+            string? accessToken,
+            CancellationToken cancellationToken = default
+        )
 #else
-        public async Task<IReplica<IReadOnlyCollection<string>>> GetDailyRecipesOnCooldown(string? accessToken)
+        public async Task<IReplica<IReadOnlyCollection<string>>> GetDailyRecipesOnCooldown(
+            string? accessToken,
+            CancellationToken cancellationToken = default
+        )
 #endif
         {
             var request = new AccountDailyCraftingRequest(accessToken);
             return await http.GetResourcesSetSimple(request,
-                    json => dailyCraftingReader.Id.ReadArray(json, missingMemberBehavior))
+                    json => dailyCraftingReader.Id.ReadArray(json, missingMemberBehavior),
+                    cancellationToken)
                 .ConfigureAwait(false);
         }
     }

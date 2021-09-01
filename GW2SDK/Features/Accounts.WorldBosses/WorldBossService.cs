@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Net.Http;
+using System.Threading;
 using System.Threading.Tasks;
 using GW2SDK.Accounts.WorldBosses.Http;
 using GW2SDK.Annotations;
@@ -31,27 +32,37 @@ namespace GW2SDK.Accounts.WorldBosses
         }
 
 #if NET
-        public async Task<IReplica<IReadOnlySet<string>>> GetWorldBosses()
+        public async Task<IReplica<IReadOnlySet<string>>> GetWorldBosses(CancellationToken cancellationToken = default)
 #else
-        public async Task<IReplica<IReadOnlyCollection<string>>> GetWorldBosses()
+        public async Task<IReplica<IReadOnlyCollection<string>>> GetWorldBosses(
+            CancellationToken cancellationToken = default
+        )
 #endif
         {
             var request = new WorldBossesRequest();
             return await http.GetResourcesSetSimple(request,
-                    json => worldBossReader.Id.ReadArray(json, missingMemberBehavior))
+                    json => worldBossReader.Id.ReadArray(json, missingMemberBehavior),
+                    cancellationToken)
                 .ConfigureAwait(false);
         }
 
         [Scope(Permission.Progression)]
 #if NET
-        public async Task<IReplica<IReadOnlySet<string>>> GetWorldBossesOnCooldown(string? accessToken)
+        public async Task<IReplica<IReadOnlySet<string>>> GetWorldBossesOnCooldown(
+            string? accessToken,
+            CancellationToken cancellationToken = default
+        )
 #else
-        public async Task<IReplica<IReadOnlyCollection<string>>> GetWorldBossesOnCooldown(string? accessToken)
+        public async Task<IReplica<IReadOnlyCollection<string>>> GetWorldBossesOnCooldown(
+            string? accessToken,
+            CancellationToken cancellationToken = default
+        )
 #endif
         {
             var request = new AccountWorldBossesRequest(accessToken);
             return await http.GetResourcesSetSimple(request,
-                    json => worldBossReader.Id.ReadArray(json, missingMemberBehavior))
+                    json => worldBossReader.Id.ReadArray(json, missingMemberBehavior),
+                    cancellationToken)
                 .ConfigureAwait(false);
         }
     }

@@ -9,7 +9,7 @@ namespace GW2SDK.Accounts.Achievements.Http
     [PublicAPI]
     public sealed class AccountAchievementsRequest
     {
-        public AccountAchievementsRequest(string? accessToken = null)
+        public AccountAchievementsRequest(string? accessToken)
         {
             AccessToken = accessToken;
         }

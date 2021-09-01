@@ -9,7 +9,7 @@ namespace GW2SDK.Accounts.Banks.Http
     [PublicAPI]
     public sealed class BankRequest
     {
-        public BankRequest(string? accessToken = null)
+        public BankRequest(string? accessToken)
         {
             AccessToken = accessToken;
         }

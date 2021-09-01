@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Net.Http;
+using System.Threading;
 using System.Threading.Tasks;
 using GW2SDK.Annotations;
 using GW2SDK.Characters.Http;
@@ -30,42 +31,52 @@ namespace GW2SDK.Characters
         }
 
         [Scope(Permission.Account, Permission.Characters)]
-        public async Task<IReplicaSet<string>> GetCharactersIndex(string? accessToken = default)
+        public async Task<IReplicaSet<string>> GetCharactersIndex(
+            string? accessToken,
+            CancellationToken cancellationToken = default
+        )
         {
             var request = new CharactersIndexRequest(accessToken);
             return await http.GetResourcesSet(request,
-                    json => characterReader.Name.ReadArray(json, missingMemberBehavior))
+                    json => characterReader.Name.ReadArray(json, missingMemberBehavior),
+                    cancellationToken)
                 .ConfigureAwait(false);
         }
 
         [Scope(Permission.Account, Permission.Characters)]
         [Scope(ScopeRequirement.Any, Permission.Builds, Permission.Inventories, Permission.Progression)]
-        public async Task<IReplica<Character>> GetCharacterByName(string characterName, string? accessToken = default)
+        public async Task<IReplica<Character>> GetCharacterByName(
+            string characterName,
+            string? accessToken,
+            CancellationToken cancellationToken = default
+        )
         {
             var request = new CharacterByNameRequest(characterName, accessToken);
-            return await http.GetResource(request,
-                    json => characterReader.Read(json, missingMemberBehavior))
+            return await http.GetResource(request, json => characterReader.Read(json, missingMemberBehavior), cancellationToken)
                 .ConfigureAwait(false);
         }
 
         [Scope(Permission.Account, Permission.Characters)]
         [Scope(ScopeRequirement.Any, Permission.Builds, Permission.Inventories, Permission.Progression)]
-        public async Task<IReplicaSet<Character>> GetCharacters(string? accessToken = default)
+        public async Task<IReplicaSet<Character>> GetCharacters(
+            string? accessToken,
+            CancellationToken cancellationToken = default
+        )
         {
             var request = new CharactersRequest(accessToken);
-            return await http
-                .GetResourcesSet(request, json => characterReader.ReadArray(json, missingMemberBehavior))
+            return await http.GetResourcesSet(request, json => characterReader.ReadArray(json, missingMemberBehavior), cancellationToken)
                 .ConfigureAwait(false);
         }
 
         [Scope(Permission.Characters, Permission.Inventories)]
         public async Task<IReplica<UnlockedRecipesView>> GetUnlockedRecipes(
             string characterId,
-            string? accessToken = null
+            string? accessToken,
+            CancellationToken cancellationToken = default
         )
         {
             var request = new UnlockedRecipesRequest(characterId, accessToken);
-            return await http.GetResource(request, json => characterReader.Recipes.Read(json, missingMemberBehavior))
+            return await http.GetResource(request, json => characterReader.Recipes.Read(json, missingMemberBehavior), cancellationToken)
                 .ConfigureAwait(false);
         }
     }

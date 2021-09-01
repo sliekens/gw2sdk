@@ -31,17 +31,17 @@ namespace GW2SDK.Recipes
             this.missingMemberBehavior = missingMemberBehavior;
         }
 
-        public async Task<IReplicaSet<int>> GetRecipesIndex()
+        public async Task<IReplicaSet<int>> GetRecipesIndex(CancellationToken cancellationToken = default)
         {
             var request = new RecipesIndexRequest();
-            return await http.GetResourcesSet(request, json => recipeReader.Id.ReadArray(json, missingMemberBehavior))
+            return await http.GetResourcesSet(request, json => recipeReader.Id.ReadArray(json, missingMemberBehavior), cancellationToken)
                 .ConfigureAwait(false);
         }
 
-        public async Task<IReplica<Recipe>> GetRecipeById(int recipeId)
+        public async Task<IReplica<Recipe>> GetRecipeById(int recipeId, CancellationToken cancellationToken = default)
         {
             var request = new RecipeByIdRequest(recipeId);
-            return await http.GetResource(request, json => recipeReader.Read(json, missingMemberBehavior))
+            return await http.GetResource(request, json => recipeReader.Read(json, missingMemberBehavior), cancellationToken)
                 .ConfigureAwait(false);
         }
 
@@ -60,7 +60,7 @@ namespace GW2SDK.Recipes
                 {
                     var request = new RecipesByIdsRequest(keys);
                     return await http
-                        .GetResourcesSet(request, json => recipeReader.ReadArray(json, missingMemberBehavior))
+                        .GetResourcesSet(request, json => recipeReader.ReadArray(json, missingMemberBehavior), ct)
                         .ConfigureAwait(false);
                 },
                 progress);
@@ -73,71 +73,93 @@ namespace GW2SDK.Recipes
             }
         }
 
-        public async Task<IReplicaPage<Recipe>> GetRecipesByPage(int pageIndex, int? pageSize = default)
+        public async Task<IReplicaPage<Recipe>> GetRecipesByPage(
+            int pageIndex,
+            int? pageSize = default,
+            CancellationToken cancellationToken = default
+        )
         {
             var request = new RecipesByPageRequest(pageIndex, pageSize);
-            return await http.GetResourcesPage(request, json => recipeReader.ReadArray(json, missingMemberBehavior))
+            return await http.GetResourcesPage(request, json => recipeReader.ReadArray(json, missingMemberBehavior), cancellationToken)
                 .ConfigureAwait(false);
         }
 
-        public async Task<IReplicaSet<int>> GetRecipesIndexByIngredientItemId(int ingredientItemId)
+        public async Task<IReplicaSet<int>> GetRecipesIndexByIngredientItemId(
+            int ingredientItemId,
+            CancellationToken cancellationToken = default
+        )
         {
             var request = new RecipesIndexByIngredientItemIdRequest(ingredientItemId);
-            return await http.GetResourcesSet(request, json => recipeReader.Id.ReadArray(json, missingMemberBehavior))
+            return await http.GetResourcesSet(request, json => recipeReader.Id.ReadArray(json, missingMemberBehavior), cancellationToken)
                 .ConfigureAwait(false);
         }
 
-        public async Task<IReplicaSet<Recipe>> GetRecipesByIngredientItemId(int ingredientItemId)
+        public async Task<IReplicaSet<Recipe>> GetRecipesByIngredientItemId(
+            int ingredientItemId,
+            CancellationToken cancellationToken = default
+        )
         {
             var request = new RecipesByIngredientItemIdRequest(ingredientItemId);
-            return await http.GetResourcesSet(request, json => recipeReader.ReadArray(json, missingMemberBehavior))
+            return await http.GetResourcesSet(request, json => recipeReader.ReadArray(json, missingMemberBehavior), cancellationToken)
                 .ConfigureAwait(false);
         }
 
         public async Task<IReplicaPage<Recipe>> GetRecipesByIngredientItemIdByPage(
             int ingredientItemId,
             int pageIndex,
-            int? pageSize = default
+            int? pageSize = default,
+            CancellationToken cancellationToken = default
         )
         {
             var request = new RecipesByIngredientItemIdByPageRequest(ingredientItemId, pageIndex, pageSize);
-            return await http.GetResourcesPage(request, json => recipeReader.ReadArray(json, missingMemberBehavior))
+            return await http.GetResourcesPage(request, json => recipeReader.ReadArray(json, missingMemberBehavior), cancellationToken)
                 .ConfigureAwait(false);
         }
 
-        public async Task<IReplicaSet<int>> GetRecipesIndexByOutputItemId(int outputItemId)
+        public async Task<IReplicaSet<int>> GetRecipesIndexByOutputItemId(
+            int outputItemId,
+            CancellationToken cancellationToken = default
+        )
         {
             var request = new RecipesIndexByOutputItemIdRequest(outputItemId);
-            return await http.GetResourcesSet(request, json => recipeReader.Id.ReadArray(json, missingMemberBehavior))
+            return await http.GetResourcesSet(request, json => recipeReader.Id.ReadArray(json, missingMemberBehavior), cancellationToken)
                 .ConfigureAwait(false);
         }
 
-        public async Task<IReplicaSet<Recipe>> GetRecipesByOutputItemId(int outputItemId)
+        public async Task<IReplicaSet<Recipe>> GetRecipesByOutputItemId(
+            int outputItemId,
+            CancellationToken cancellationToken = default
+        )
         {
             var request = new RecipesByOutputItemIdRequest(outputItemId);
-            return await http.GetResourcesSet(request, json => recipeReader.ReadArray(json, missingMemberBehavior))
+            return await http.GetResourcesSet(request, json => recipeReader.ReadArray(json, missingMemberBehavior), cancellationToken)
                 .ConfigureAwait(false);
         }
 
         public async Task<IReplicaPage<Recipe>> GetRecipesByOutputItemIdByPage(
             int outputItemId,
             int pageIndex,
-            int? pageSize = default
+            int? pageSize = default,
+            CancellationToken cancellationToken = default
         )
         {
             var request = new RecipesByOutputItemIdByPageRequest(outputItemId, pageIndex, pageSize);
-            return await http.GetResourcesPage(request, json => recipeReader.ReadArray(json, missingMemberBehavior))
+            return await http.GetResourcesPage(request, json => recipeReader.ReadArray(json, missingMemberBehavior), cancellationToken)
                 .ConfigureAwait(false);
         }
 
         /// <summary>Retrieves a page, using a token obtained from a previous page result.</summary>
         /// <param name="token">One of <see cref="IPageContext.First" />, <see cref="IPageContext.Previous" />,
         /// <see cref="IPageContext.Self" />, <see cref="IPageContext.Next" /> or <see cref="IPageContext.Last" />.</param>
+        /// <param name="cancellationToken"></param>
         /// <returns>The page specified by the token.</returns>
-        public async Task<IReplicaPage<Recipe>> GetRecipesByPage(ContinuationToken token)
+        public async Task<IReplicaPage<Recipe>> GetRecipesByPage(
+            ContinuationToken token,
+            CancellationToken cancellationToken = default
+        )
         {
             var request = new ContinuationRequest(token);
-            return await http.GetResourcesPage(request, json => recipeReader.ReadArray(json, missingMemberBehavior))
+            return await http.GetResourcesPage(request, json => recipeReader.ReadArray(json, missingMemberBehavior), cancellationToken)
                 .ConfigureAwait(false);
         }
 

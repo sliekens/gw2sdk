@@ -31,17 +31,21 @@ namespace GW2SDK.Items
             this.missingMemberBehavior = missingMemberBehavior;
         }
 
-        public async Task<IReplicaSet<int>> GetItemsIndex()
+        public async Task<IReplicaSet<int>> GetItemsIndex(CancellationToken cancellationToken = default)
         {
             var request = new ItemsIndexRequest();
-            return await http.GetResourcesSet(request, json => itemReader.Id.ReadArray(json, missingMemberBehavior))
+            return await http.GetResourcesSet(request, json => itemReader.Id.ReadArray(json, missingMemberBehavior), cancellationToken)
                 .ConfigureAwait(false);
         }
 
-        public async Task<IReplica<Item>> GetItemById(int itemId, Language? language = default)
+        public async Task<IReplica<Item>> GetItemById(
+            int itemId,
+            Language? language = default,
+            CancellationToken cancellationToken = default
+        )
         {
             var request = new ItemByIdRequest(itemId, language);
-            return await http.GetResource(request, json => itemReader.Read(json, missingMemberBehavior))
+            return await http.GetResource(request, json => itemReader.Read(json, missingMemberBehavior), cancellationToken)
                 .ConfigureAwait(false);
         }
 
@@ -59,7 +63,7 @@ namespace GW2SDK.Items
             var splitQuery = SplitQuery.Create<int, Item>(async (keys, ct) =>
             {
                 var request = new ItemsByIdsRequest(keys, language);
-                return await http.GetResourcesSet(request, json => itemReader.ReadArray(json, missingMemberBehavior))
+                return await http.GetResourcesSet(request, json => itemReader.ReadArray(json, missingMemberBehavior), ct)
                     .ConfigureAwait(false);
             }, progress);
 
@@ -75,22 +79,27 @@ namespace GW2SDK.Items
         public async Task<IReplicaPage<Item>> GetItemsByPage(
             int pageIndex,
             int? pageSize = default,
-            Language? language = default
+            Language? language = default,
+            CancellationToken cancellationToken = default
         )
         {
             var request = new ItemsByPageRequest(pageIndex, pageSize, language);
-            return await http.GetResourcesPage(request, json => itemReader.ReadArray(json, missingMemberBehavior))
+            return await http.GetResourcesPage(request, json => itemReader.ReadArray(json, missingMemberBehavior), cancellationToken)
                 .ConfigureAwait(false);
         }
 
         /// <summary>Retrieves a page, using a token obtained from a previous page result.</summary>
         /// <param name="token">One of <see cref="IPageContext.First" />, <see cref="IPageContext.Previous" />,
         /// <see cref="IPageContext.Self" />, <see cref="IPageContext.Next" /> or <see cref="IPageContext.Last" />.</param>
+        /// <param name="cancellationToken"></param>
         /// <returns>The page specified by the token.</returns>
-        public async Task<IReplicaPage<Item>> GetItemsByPage(ContinuationToken token)
+        public async Task<IReplicaPage<Item>> GetItemsByPage(
+            ContinuationToken token,
+            CancellationToken cancellationToken = default
+        )
         {
             var request = new ContinuationRequest(token);
-            return await http.GetResourcesPage(request, json => itemReader.ReadArray(json, missingMemberBehavior))
+            return await http.GetResourcesPage(request, json => itemReader.ReadArray(json, missingMemberBehavior), cancellationToken)
                 .ConfigureAwait(false);
         }
 

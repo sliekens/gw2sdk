@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Net.Http;
+using System.Threading;
 using System.Threading.Tasks;
 using GW2SDK.Achievements.Dailies.Http;
 using GW2SDK.Http;
@@ -25,10 +26,13 @@ namespace GW2SDK.Achievements.Dailies
             this.missingMemberBehavior = missingMemberBehavior;
         }
 
-        public async Task<IReplica<DailyAchievementGroup>> GetDailyAchievements(Day day = Day.Today)
+        public async Task<IReplica<DailyAchievementGroup>> GetDailyAchievements(
+            Day day = Day.Today,
+            CancellationToken cancellationToken = default
+        )
         {
             var request = new DailyAchievementsRequest(day);
-            return await http.GetResource(request, json => dailyAchievementReader.Read(json, missingMemberBehavior))
+            return await http.GetResource(request, json => dailyAchievementReader.Read(json, missingMemberBehavior), cancellationToken)
                 .ConfigureAwait(false);
         }
     }

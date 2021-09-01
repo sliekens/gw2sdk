@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Net.Http;
+using System.Threading;
 using System.Threading.Tasks;
 using GW2SDK.Http;
 using GW2SDK.Json;
@@ -29,45 +30,54 @@ namespace GW2SDK.Worlds
             this.missingMemberBehavior = missingMemberBehavior;
         }
 
-        public async Task<IReplicaSet<World>> GetWorlds(Language? language = default)
+        public async Task<IReplicaSet<World>> GetWorlds(
+            Language? language = default,
+            CancellationToken cancellationToken = default
+        )
         {
             var request = new WorldsRequest(language);
-            return await http.GetResourcesSet(request, json => worldReader.ReadArray(json, missingMemberBehavior))
+            return await http.GetResourcesSet(request, json => worldReader.ReadArray(json, missingMemberBehavior), cancellationToken)
                 .ConfigureAwait(false);
         }
 
-        public async Task<IReplicaSet<int>> GetWorldsIndex()
+        public async Task<IReplicaSet<int>> GetWorldsIndex(CancellationToken cancellationToken = default)
         {
             var request = new WorldsIndexRequest();
-            return await http.GetResourcesSet(request, json => worldReader.Id.ReadArray(json, missingMemberBehavior))
+            return await http.GetResourcesSet(request, json => worldReader.Id.ReadArray(json, missingMemberBehavior), cancellationToken)
                 .ConfigureAwait(false);
         }
 
-        public async Task<IReplica<World>> GetWorldById(int worldId, Language? language = default)
+        public async Task<IReplica<World>> GetWorldById(
+            int worldId,
+            Language? language = default,
+            CancellationToken cancellationToken = default
+        )
         {
             var request = new WorldByIdRequest(worldId, language);
-            return await http.GetResource(request, json => worldReader.Read(json, missingMemberBehavior))
+            return await http.GetResource(request, json => worldReader.Read(json, missingMemberBehavior), cancellationToken)
                 .ConfigureAwait(false);
         }
 
         public async Task<IReplicaSet<World>> GetWorldsByIds(
             IReadOnlyCollection<int> worldIds,
-            Language? language = default
+            Language? language = default,
+            CancellationToken cancellationToken = default
         )
         {
             var request = new WorldsByIdsRequest(worldIds, language);
-            return await http.GetResourcesSet(request, json => worldReader.ReadArray(json, missingMemberBehavior))
+            return await http.GetResourcesSet(request, json => worldReader.ReadArray(json, missingMemberBehavior), cancellationToken)
                 .ConfigureAwait(false);
         }
 
         public async Task<IReplicaPage<World>> GetWorldsByPage(
             int pageIndex,
             int? pageSize = default,
-            Language? language = default
+            Language? language = default,
+            CancellationToken cancellationToken = default
         )
         {
             var request = new WorldsByPageRequest(pageIndex, pageSize, language);
-            return await http.GetResourcesPage(request, json => worldReader.ReadArray(json, missingMemberBehavior))
+            return await http.GetResourcesPage(request, json => worldReader.ReadArray(json, missingMemberBehavior), cancellationToken)
                 .ConfigureAwait(false);
         }
     }
