@@ -109,7 +109,7 @@ namespace GW2SDK.Items
             [EnumeratorCancellation] CancellationToken cancellationToken = default
         )
         {
-            var index = await GetItemsIndex()
+            var index = await GetItemsIndex(cancellationToken)
                 .ConfigureAwait(false);
             if (!index.HasValues)
             {

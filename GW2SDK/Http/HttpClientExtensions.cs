@@ -53,7 +53,7 @@ namespace GW2SDK.Http
 #endif
             using var content = await instance.ReadAsStreamAsync()
                 .ConfigureAwait(false);
-            return await JsonDocument.ParseAsync(content)
+            return await JsonDocument.ParseAsync(content, cancellationToken: cancellationToken)
                 .ConfigureAwait(false);
         }
 
@@ -128,7 +128,7 @@ namespace GW2SDK.Http
             CancellationToken cancellationToken
         )
         {
-            using var response = await instance.SendAsync(request, HttpCompletionOption.ResponseHeadersRead)
+            using var response = await instance.SendAsync(request, HttpCompletionOption.ResponseHeadersRead, cancellationToken)
                 .ConfigureAwait(false);
             var date = response.Headers.Date.GetValueOrDefault(DateTimeOffset.UtcNow);
             response.EnsureSuccessStatusCode();
@@ -159,7 +159,7 @@ namespace GW2SDK.Http
             CancellationToken cancellationToken
         )
         {
-            using var response = await instance.SendAsync(request, HttpCompletionOption.ResponseHeadersRead)
+            using var response = await instance.SendAsync(request, HttpCompletionOption.ResponseHeadersRead, cancellationToken)
                 .ConfigureAwait(false);
             var date = response.Headers.Date.GetValueOrDefault(DateTimeOffset.UtcNow);
             response.EnsureSuccessStatusCode();
