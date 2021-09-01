@@ -35,11 +35,11 @@ namespace GW2SDK.Http
                 pageSize = default,
                 resultTotal = default,
                 resultCount = default;
-            ContinuationToken previous = ContinuationToken.None,
-                next = ContinuationToken.None,
-                self = ContinuationToken.None,
-                first = ContinuationToken.None,
-                last = ContinuationToken.None;
+            HyperlinkReference previous = HyperlinkReference.None,
+                next = HyperlinkReference.None,
+                self = HyperlinkReference.None,
+                first = HyperlinkReference.None,
+                last = HyperlinkReference.None;
             if (instance.TryGetValues(ResponseHeaderName.PageTotal, out var pageTotals))
             {
                 // Assume that there is exactly one value for this header
@@ -70,23 +70,23 @@ namespace GW2SDK.Http
                 var header = LinkHeader.Parse(links.Single());
                 foreach (var link in header.Links)
                 {
-                    var continuationToken = new ContinuationToken(link.Href);
+                    var href = new HyperlinkReference(link.Href);
                     switch (link.Rel)
                     {
                         case "previous":
-                            previous = continuationToken;
+                            previous = href;
                             break;
                         case "next":
-                            next = continuationToken;
+                            next = href;
                             break;
                         case "self":
-                            self = continuationToken;
+                            self = href;
                             break;
                         case "first":
-                            first = continuationToken;
+                            first = href;
                             break;
                         case "last":
-                            last = continuationToken;
+                            last = href;
                             break;
                     }
                 }

@@ -148,17 +148,17 @@ namespace GW2SDK.Recipes
                 .ConfigureAwait(false);
         }
 
-        /// <summary>Retrieves a page, using a token obtained from a previous page result.</summary>
-        /// <param name="token">One of <see cref="IPageContext.First" />, <see cref="IPageContext.Previous" />,
+        /// <summary>Retrieves a page, using a hyperlink obtained from a previous page result.</summary>
+        /// <param name="href">One of <see cref="IPageContext.First" />, <see cref="IPageContext.Previous" />,
         /// <see cref="IPageContext.Self" />, <see cref="IPageContext.Next" /> or <see cref="IPageContext.Last" />.</param>
         /// <param name="cancellationToken"></param>
-        /// <returns>The page specified by the token.</returns>
+        /// <returns>The page specified by the hyperlink.</returns>
         public async Task<IReplicaPage<Recipe>> GetRecipesByPage(
-            ContinuationToken token,
+            HyperlinkReference href,
             CancellationToken cancellationToken = default
         )
         {
-            var request = new ContinuationRequest(token);
+            var request = new PageRequest(href);
             return await http.GetResourcesPage(request, json => recipeReader.ReadArray(json, missingMemberBehavior), cancellationToken)
                 .ConfigureAwait(false);
         }

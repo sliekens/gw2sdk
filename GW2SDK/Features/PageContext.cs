@@ -8,10 +8,10 @@ namespace GW2SDK
         int ResultCount,
         int PageTotal,
         int PageSize,
-        ContinuationToken First,
-        ContinuationToken Self,
-        ContinuationToken Last,
-        ContinuationToken Previous,
-        ContinuationToken Next
+        HyperlinkReference First,
+        HyperlinkReference Self,
+        HyperlinkReference Last,
+        HyperlinkReference Previous,
+        HyperlinkReference Next
     ) : IPageContext;
 }
