@@ -59,7 +59,11 @@ namespace GW2SDK.Skills
         }
 
         public async Task<IReplicaSet<Skill>> GetSkillsByIds(
+#if NET
+            IReadOnlySet<int> skillIds,
+#else
             IReadOnlyCollection<int> skillIds,
+#endif
             Language? language = default,
             CancellationToken cancellationToken = default
         )

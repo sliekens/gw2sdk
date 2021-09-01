@@ -71,7 +71,11 @@ namespace GW2SDK.Accounts.Banks
         }
 
         public async Task<IReplicaSet<MaterialCategory>> GetMaterialCategoriesByIds(
+#if NET
+            IReadOnlySet<int> materialCategoryIds,
+#else
             IReadOnlyCollection<int> materialCategoryIds,
+#endif
             Language? language = default,
             CancellationToken cancellationToken = default
         )

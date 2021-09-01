@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using GW2SDK.Tests.TestInfrastructure;
 using GW2SDK.Worlds;
@@ -66,7 +67,7 @@ namespace GW2SDK.Tests.Features.Worlds
             await using var services = new Composer();
             var sut = services.Resolve<WorldService>();
 
-            var ids = new[] { 1001, 1002, 1003 };
+            var ids = new HashSet<int> { 1001, 1002, 1003 };
 
             var actual = await sut.GetWorldsByIds(ids);
 

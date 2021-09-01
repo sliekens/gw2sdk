@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using GW2SDK.Continents;
 using GW2SDK.Tests.TestInfrastructure;
@@ -59,7 +60,7 @@ namespace GW2SDK.Tests.Features.Continents
             await using var services = new Composer();
             var sut = services.Resolve<ContinentService>();
 
-            var ids = new[] { 1, 2 };
+            var ids = new HashSet<int> { 1, 2 };
 
             var actual = await sut.GetContinentsByIds(ids);
 
@@ -125,7 +126,7 @@ namespace GW2SDK.Tests.Features.Continents
             var sut = services.Resolve<ContinentService>();
 
             const int continentId = 1;
-            var ids = new[] { 1, 2 };
+            var ids = new HashSet<int> { 1, 2 };
 
             var actual = await sut.GetFloorsByIds(continentId, ids);
 

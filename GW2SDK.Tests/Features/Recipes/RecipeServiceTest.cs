@@ -48,11 +48,11 @@ namespace GW2SDK.Tests.Features.Recipes
 
             var actual = await sut.GetRecipesByIds(ids)
                 .ToListAsync();
-
+            
             Assert.Collection(actual,
-                recipe => Assert.Equal(1, recipe.Value.Id),
-                recipe => Assert.Equal(2, recipe.Value.Id),
-                recipe => Assert.Equal(3, recipe.Value.Id));
+                first => Assert.Contains(first.Value.Id, ids),
+                second => Assert.Contains(second.Value.Id, ids),
+                third => Assert.Contains(third.Value.Id, ids));
         }
 
         [Fact]

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using GW2SDK.Achievements.Groups;
 using GW2SDK.Tests.TestInfrastructure;
@@ -59,14 +60,14 @@ namespace GW2SDK.Tests.Features.Achievements.Groups
             await using var services = new Composer();
             var sut = services.Resolve<AchievementGroupService>();
 
-            var ids = new[] { "A4ED8379-5B6B-4ECC-B6E1-70C350C902D2", "56A82BB9-6B07-4AB0-89EE-E4A6D68F5C47", "B42E2379-9599-46CA-9D4A-40A27E192BBE" };
+            var ids = new HashSet<string> { "A4ED8379-5B6B-4ECC-B6E1-70C350C902D2", "56A82BB9-6B07-4AB0-89EE-E4A6D68F5C47", "B42E2379-9599-46CA-9D4A-40A27E192BBE" };
 
             var actual = await sut.GetAchievementGroupsByIds(ids);
-
+            
             Assert.Collection(actual.Values,
-                first => Assert.Equal(ids[0],  first.Id),
-                second => Assert.Equal(ids[1], second.Id),
-                third => Assert.Equal(ids[2],  third.Id));
+                first => Assert.Contains(first.Id, ids),
+                second => Assert.Contains(second.Id, ids),
+                third => Assert.Contains(third.Id, ids));
         }
 
         [Fact]

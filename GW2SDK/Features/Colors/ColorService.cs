@@ -59,7 +59,11 @@ namespace GW2SDK.Colors
         }
 
         public async Task<IReplicaSet<Color>> GetColorsByIds(
+#if NET
+            IReadOnlySet<int> colorIds,
+#else
             IReadOnlyCollection<int> colorIds,
+#endif
             Language? language = default,
             CancellationToken cancellationToken = default
         )

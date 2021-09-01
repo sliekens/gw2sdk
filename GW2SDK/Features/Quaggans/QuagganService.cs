@@ -57,7 +57,11 @@ namespace GW2SDK.Quaggans
         }
 
         public async Task<IReplicaSet<QuagganRef>> GetQuaggansByIds(
+#if NET
+            IReadOnlySet<string> quagganIds,
+#else
             IReadOnlyCollection<string> quagganIds,
+#endif
             CancellationToken cancellationToken = default
         )
         {

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using GW2SDK.Backstories;
 using GW2SDK.Backstories.Answers;
@@ -131,7 +132,7 @@ namespace GW2SDK.Tests.Features.Backstories
             await using var services = new Composer();
             var sut = services.Resolve<BackstoryService>();
 
-            var ids = new[]
+            var ids = new HashSet<int>
             {
                 7,
                 10,
@@ -141,9 +142,9 @@ namespace GW2SDK.Tests.Features.Backstories
             var actual = await sut.GetBackstoryQuestionsByIds(ids);
 
             Assert.Collection(actual.Values,
-                first => Assert.Equal(ids[0], first.Id),
-                second => Assert.Equal(ids[1], second.Id),
-                third => Assert.Equal(ids[2], third.Id));
+                first => Assert.Contains(first.Id, ids),
+                second => Assert.Contains(second.Id, ids),
+                third => Assert.Contains(third.Id, ids));
         }
 
         [Fact]
@@ -152,7 +153,7 @@ namespace GW2SDK.Tests.Features.Backstories
             await using var services = new Composer();
             var sut = services.Resolve<BackstoryService>();
 
-            var ids = new[]
+            var ids = new HashSet<string>
             {
                 "7-53",
                 "7-54",
@@ -160,11 +161,11 @@ namespace GW2SDK.Tests.Features.Backstories
             };
 
             var actual = await sut.GetBackstoryAnswersByIds(ids);
-
+            
             Assert.Collection(actual.Values,
-                first => Assert.Equal(ids[0], first.Id),
-                second => Assert.Equal(ids[1], second.Id),
-                third => Assert.Equal(ids[2], third.Id));
+                first => Assert.Contains(first.Id, ids),
+                second => Assert.Contains(second.Id, ids),
+                third => Assert.Contains(third.Id, ids));
         }
 
         [Fact]

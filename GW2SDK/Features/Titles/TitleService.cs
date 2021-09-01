@@ -59,7 +59,11 @@ namespace GW2SDK.Titles
         }
 
         public async Task<IReplicaSet<Title>> GetTitlesByIds(
+#if NET
+            IReadOnlySet<int> titleIds,
+#else
             IReadOnlyCollection<int> titleIds,
+#endif
             Language? language = default,
             CancellationToken cancellationToken = default
         )

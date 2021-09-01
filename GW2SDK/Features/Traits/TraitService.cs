@@ -59,7 +59,11 @@ namespace GW2SDK.Traits
         }
 
         public async Task<IReplicaSet<Trait>> GetTraitsByIds(
+#if NET
+            IReadOnlySet<int> traitIds,
+#else
             IReadOnlyCollection<int> traitIds,
+#endif
             Language? language = default,
             CancellationToken cancellationToken = default
         )

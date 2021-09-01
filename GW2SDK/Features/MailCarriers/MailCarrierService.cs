@@ -62,7 +62,11 @@ namespace GW2SDK.MailCarriers
         }
 
         public async Task<IReplicaSet<MailCarrier>> GetMailCarriersByIds(
+#if NET
+            IReadOnlySet<int> mailCarrierIds,
+#else
             IReadOnlyCollection<int> mailCarrierIds,
+#endif
             Language? language = default,
             CancellationToken cancellationToken = default
         )

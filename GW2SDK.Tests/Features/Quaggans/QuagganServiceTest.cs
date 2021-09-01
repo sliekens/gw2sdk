@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Threading.Tasks;
 using GW2SDK.Quaggans;
@@ -73,7 +74,7 @@ namespace GW2SDK.Tests.Features.Quaggans
             await using var services = new Composer();
             var sut = services.Resolve<QuagganService>();
 
-            var ids = new[]
+            var ids = new HashSet<string>
             {
                 "404",
                 "aloha",
@@ -85,9 +86,9 @@ namespace GW2SDK.Tests.Features.Quaggans
             Assert.True(actual.HasValues);
             Assert.All(actual.Values, QuagganFact.Validate);
             Assert.Collection(actual.Values,
-                first => Assert.Equal(ids[0], first.Id),
-                second => Assert.Equal(ids[1], second.Id),
-                third => Assert.Equal(ids[2], third.Id));
+                first => Assert.Contains(first.Id, ids),
+                second => Assert.Contains(second.Id, ids),
+                third => Assert.Contains(third.Id, ids));
         }
 
         [Fact]

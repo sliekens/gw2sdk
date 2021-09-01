@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using GW2SDK.Achievements;
 using GW2SDK.Tests.TestInfrastructure;
@@ -38,7 +39,7 @@ namespace GW2SDK.Tests.Features.Achievements
             await using var services = new Composer();
             var sut = services.Resolve<AchievementService>();
 
-            var achievementIds = new[] { 1, 2, 3 };
+            var achievementIds = new HashSet<int> { 1, 2, 3 };
 
             var actual = await sut.GetAchievementsByIds(achievementIds);
 

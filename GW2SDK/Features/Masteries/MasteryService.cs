@@ -60,7 +60,11 @@ namespace GW2SDK.Masteries
         }
 
         public async Task<IReplicaSet<Mastery>> GetMasteriesByIds(
+#if NET
+            IReadOnlySet<int> masteryIds,
+#else
             IReadOnlyCollection<int> masteryIds,
+#endif
             Language? language = default,
             CancellationToken cancellationToken = default
         )

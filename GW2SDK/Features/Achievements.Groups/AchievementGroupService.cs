@@ -64,7 +64,11 @@ namespace GW2SDK.Achievements.Groups
         }
 
         public async Task<IReplicaSet<AchievementGroup>> GetAchievementGroupsByIds(
+#if NET
+            IReadOnlySet<string> achievementGroupIds,
+#else
             IReadOnlyCollection<string> achievementGroupIds,
+#endif
             Language? language = default,
             CancellationToken cancellationToken = default
         )

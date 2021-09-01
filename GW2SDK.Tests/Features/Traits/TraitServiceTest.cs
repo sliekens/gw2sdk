@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using GW2SDK.Tests.TestInfrastructure;
 using GW2SDK.Traits;
@@ -59,7 +60,7 @@ namespace GW2SDK.Tests.Features.Traits
             await using var services = new Composer();
             var sut = services.Resolve<TraitService>();
 
-            var ids = new[]
+            var ids = new HashSet<int>
             {
                 214,
                 221,

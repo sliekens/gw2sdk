@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using GW2SDK.Mounts;
 using GW2SDK.Tests.TestInfrastructure;
@@ -119,7 +120,7 @@ namespace GW2SDK.Tests.Features.Mounts
             await using var services = new Composer();
             var sut = services.Resolve<MountService>();
 
-            var ids = new[] { 1, 2, 3 };
+            var ids = new HashSet<int> { 1, 2, 3 };
 
             var actual = await sut.GetMountSkinsByIds(ids);
 
