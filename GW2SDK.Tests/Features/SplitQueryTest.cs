@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using Xunit;
 
@@ -69,6 +70,50 @@ namespace GW2SDK.Tests.Features
                 {
                     index.Contains(record.Id);
                 });
+        }
+
+        [Theory]
+        [InlineData(1000, 10)]
+        [InlineData(150, 200)]
+        public async Task It_respects_cancellation_requested(int resultTotal, int bufferSize)
+        {
+            // Check if cancellation works in both scenarios where the buffer size is smaller or larger than the index
+            // because the implementation is slightly optimized for the case where buffering is not needed
+            var cancellationTokenSource = new CancellationTokenSource();
+
+            var index = Enumerable.Range(1, resultTotal)
+                .ToHashSet();
+            var records = index.Select(id => new StubRecord(id))
+                .ToList();
+
+            var sut = SplitQuery.Create<int, StubRecord>((keys, ct) =>
+            {
+                var found = records.Where(record => keys.Contains(record.Id))
+                    .ToHashSet();
+                return Task.FromResult((IReplicaSet<StubRecord>)new StubReplica(found));
+            }, bufferSize);
+
+            var received = 0;
+            var producer = sut.QueryAsync(index, cancellationToken: cancellationTokenSource.Token);
+            var reason = await Assert.ThrowsAsync<OperationCanceledException>(async () =>
+            {
+                await foreach (var record in producer.WithCancellation(cancellationTokenSource.Token))
+                {
+                    if (record.HasValue)
+                    {
+                        received++;
+                    }
+
+                    if (received == 107)
+                    {
+                        cancellationTokenSource.Cancel();
+                    }
+                }
+
+            });
+
+            Assert.True(cancellationTokenSource.Token.Equals(reason.CancellationToken));
+            Assert.Equal(107, received);
         }
     }
 

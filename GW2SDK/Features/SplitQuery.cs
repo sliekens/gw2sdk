@@ -104,6 +104,7 @@ namespace GW2SDK
                 ReportProgress(resultTotal, result.Context.ResultCount);
                 foreach (var record in result.Explode())
                 {
+                    cancellationToken.ThrowIfCancellationRequested();
                     yield return record;
                 }
             }
@@ -136,6 +137,7 @@ namespace GW2SDK
                     ReportProgress(resultTotal, resultCount);
                     foreach (var record in result.Explode())
                     {
+                        cancellationToken.ThrowIfCancellationRequested();
                         yield return record;
                     }
                 }

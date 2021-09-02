@@ -121,7 +121,7 @@ namespace MostVersatileMaterials
             progress.StartTask();
             try
             {
-                return await recipesService.GetRecipes(progress: new ProgressTaskAdapter(progress))
+                return await recipesService.GetRecipes(progress: new Progress<ICollectionContext>(ctx => UpdateProgress(ctx, progress)))
                     .Select(result => result.Value)
                     .OrderByDescending(recipe => recipe.Id)
                     .ToListAsync();
@@ -141,7 +141,7 @@ namespace MostVersatileMaterials
             var items = new List<Item>(itemIds.Count);
 
             progress.StartTask();
-            await foreach (var item in itemsService.GetItemsByIds(itemIds, progress: new ProgressTaskAdapter(progress)))
+            await foreach (var item in itemsService.GetItemsByIds(itemIds, progress: new Progress<ICollectionContext>(ctx => UpdateProgress(ctx, progress))))
             {
                 items.Add(item.Value);
             }
@@ -150,21 +150,11 @@ namespace MostVersatileMaterials
 
             return items;
         }
-    }
 
-    internal class ProgressTaskAdapter : IProgress<ICollectionContext>
-    {
-        private readonly ProgressTask progressTask;
-
-        public ProgressTaskAdapter(ProgressTask progressTask)
+        private static void UpdateProgress(ICollectionContext ctx, ProgressTask progressTask)
         {
-            this.progressTask = progressTask;
-        }
-
-        public void Report(ICollectionContext value)
-        {
-            progressTask.MaxValue(value.ResultTotal);
-            progressTask.Increment(value.ResultCount);
+            progressTask.MaxValue(ctx.ResultTotal);
+            progressTask.Increment(ctx.ResultCount);
         }
     }
 }
