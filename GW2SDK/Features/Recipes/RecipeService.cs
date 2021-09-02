@@ -52,8 +52,8 @@ namespace GW2SDK.Recipes
             IReadOnlyCollection<int> recipeIds,
 #endif
             Language? language = default,
-            IProgress<ICollectionContext>? progress = default,
-            [EnumeratorCancellation] CancellationToken cancellationToken = default
+            [EnumeratorCancellation] CancellationToken cancellationToken = default,
+            IProgress<ICollectionContext>? progress = default
         )
         {
             var splitQuery = SplitQuery.Create<int, Recipe>(async (keys, ct) =>
@@ -165,8 +165,8 @@ namespace GW2SDK.Recipes
 
         public async IAsyncEnumerable<IReplica<Recipe>> GetRecipes(
             Language? language = default,
-            IProgress<ICollectionContext>? progress = default,
-            [EnumeratorCancellation] CancellationToken cancellationToken = default
+            [EnumeratorCancellation] CancellationToken cancellationToken = default,
+            IProgress<ICollectionContext>? progress = default
         )
         {
             var index = await GetRecipesIndex(cancellationToken)
@@ -176,7 +176,7 @@ namespace GW2SDK.Recipes
                 yield break;
             }
 
-            var producer = GetRecipesByIds(index.Values, language, progress, cancellationToken);
+            var producer = GetRecipesByIds(index.Values, language, cancellationToken, progress);
             await foreach (var recipe in producer.WithCancellation(cancellationToken)
                 .ConfigureAwait(false))
             {

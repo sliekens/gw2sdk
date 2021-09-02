@@ -56,8 +56,8 @@ namespace GW2SDK.Items
             IReadOnlyCollection<int> itemIds,
 #endif
             Language? language = default,
-            IProgress<ICollectionContext>? progress = default,
-            [EnumeratorCancellation] CancellationToken cancellationToken = default
+            [EnumeratorCancellation] CancellationToken cancellationToken = default,
+            IProgress<ICollectionContext>? progress = default
         )
         {
             var splitQuery = SplitQuery.Create<int, Item>(async (keys, ct) =>
@@ -105,8 +105,8 @@ namespace GW2SDK.Items
 
         public async IAsyncEnumerable<IReplica<Item>> GetItems(
             Language? language = default,
-            IProgress<ICollectionContext>? progress = default,
-            [EnumeratorCancellation] CancellationToken cancellationToken = default
+            [EnumeratorCancellation] CancellationToken cancellationToken = default,
+            IProgress<ICollectionContext>? progress = default
         )
         {
             var index = await GetItemsIndex(cancellationToken)
@@ -116,7 +116,7 @@ namespace GW2SDK.Items
                 yield break;
             }
 
-            var producer = GetItemsByIds(index.Values, language, progress, cancellationToken);
+            var producer = GetItemsByIds(index.Values, language, cancellationToken, progress);
             await foreach (var item in producer
                 .WithCancellation(cancellationToken)
                 .ConfigureAwait(false))
