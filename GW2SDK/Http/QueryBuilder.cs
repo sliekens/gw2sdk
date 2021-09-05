@@ -48,29 +48,4 @@ namespace GW2SDK.Http
 
         public override string ToString() => Build();
     }
-
-#if !NET
-    internal static class QueryBuilderHelper
-    {
-        internal static void Deconstruct(
-            this KeyValuePair<string, string> instance,
-            out string key,
-            out string value
-        )
-        {
-            key = instance.Key;
-            value = instance.Value;
-        }
-
-        internal static void AppendJoin(
-            this StringBuilder instance,
-            string separator,
-            string first,
-            string second
-        )
-        {
-            instance.Append(string.Join(separator, first, second));
-        }
-    }
-#endif
 }
