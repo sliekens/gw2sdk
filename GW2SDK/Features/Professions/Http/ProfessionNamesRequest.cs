@@ -1,16 +1,18 @@
-﻿using System;
-using System.Net.Http;
+﻿using System.Net.Http;
+using GW2SDK.Http;
 using JetBrains.Annotations;
+using static System.Net.Http.HttpMethod;
 
 namespace GW2SDK.Professions.Http
 {
     [PublicAPI]
     public sealed class ProfessionNamesRequest
     {
-        public static implicit operator HttpRequestMessage(ProfessionNamesRequest _)
+        private static readonly HttpRequestMessageTemplate Template = new(Get, "/v2/professions")
         {
-            var location = new Uri("/v2/professions", UriKind.Relative);
-            return new HttpRequestMessage(HttpMethod.Get, location);
-        }
+            AcceptEncoding = "gzip"
+        };
+
+        public static implicit operator HttpRequestMessage(ProfessionNamesRequest _) => Template.Compile();
     }
 }

@@ -1,8 +1,6 @@
-﻿using System;
-using System.Net.Http;
-using System.Net.Http.Headers;
-using JetBrains.Annotations;
+﻿using System.Net.Http;
 using GW2SDK.Http;
+using JetBrains.Annotations;
 using static System.Net.Http.HttpMethod;
 
 namespace GW2SDK.Accounts.Achievements.Http
@@ -10,7 +8,16 @@ namespace GW2SDK.Accounts.Achievements.Http
     [PublicAPI]
     public sealed class AccountAchievementsByPageRequest
     {
-        public AccountAchievementsByPageRequest(int pageIndex, int? pageSize, string? accessToken)
+        private static readonly HttpRequestMessageTemplate Template = new(Get, "/v2/account/achievements")
+        {
+            AcceptEncoding = "gzip"
+        };
+
+        public AccountAchievementsByPageRequest(
+            int pageIndex,
+            int? pageSize,
+            string? accessToken
+        )
         {
             PageIndex = pageIndex;
             PageSize = pageSize;
@@ -28,16 +35,12 @@ namespace GW2SDK.Accounts.Achievements.Http
             var search = new QueryBuilder();
             search.Add("page", r.PageIndex);
             if (r.PageSize.HasValue) search.Add("page_size", r.PageSize.Value);
-            var location = new Uri($"/v2/account/achievements?{search}", UriKind.Relative);
-            return new HttpRequestMessage(Get, location)
+            var request = Template with
             {
-                Headers =
-                {
-                    Authorization = string.IsNullOrWhiteSpace(r.AccessToken)
-                        ? default
-                        : new AuthenticationHeaderValue("Bearer", r.AccessToken)
-                }
+                BearerToken = r.AccessToken,
+                Arguments = search
             };
+            return request.Compile();
         }
     }
 }

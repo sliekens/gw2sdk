@@ -1,16 +1,18 @@
-﻿using System;
-using System.Net.Http;
+﻿using System.Net.Http;
+using GW2SDK.Http;
 using JetBrains.Annotations;
+using static System.Net.Http.HttpMethod;
 
 namespace GW2SDK.Accounts.DailyCrafting.Http
 {
     [PublicAPI]
     public sealed class DailyCraftingRequest
     {
-        public static implicit operator HttpRequestMessage(DailyCraftingRequest _)
+        private static readonly HttpRequestMessageTemplate Template = new(Get, "/v2/dailycrafting")
         {
-            var location = new Uri("/v2/dailycrafting", UriKind.Relative);
-            return new HttpRequestMessage(HttpMethod.Get, location);
-        }
+            AcceptEncoding = "gzip"
+        };
+
+        public static implicit operator HttpRequestMessage(DailyCraftingRequest _) => Template.Compile();
     }
 }

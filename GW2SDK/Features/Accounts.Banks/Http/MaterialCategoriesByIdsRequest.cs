@@ -3,12 +3,18 @@ using System.Collections.Generic;
 using System.Net.Http;
 using GW2SDK.Http;
 using JetBrains.Annotations;
+using static System.Net.Http.HttpMethod;
 
 namespace GW2SDK.Accounts.Banks.Http
 {
     [PublicAPI]
     public sealed class MaterialCategoriesByIdsRequest
     {
+        private static readonly HttpRequestMessageTemplate Template = new(Get, "/v2/materials")
+        {
+            AcceptEncoding = "gzip"
+        };
+
         public MaterialCategoriesByIdsRequest(IReadOnlyCollection<int> materialCategoriesIds, Language? language)
         {
             Check.Collection(materialCategoriesIds, nameof(materialCategoriesIds));
@@ -24,9 +30,12 @@ namespace GW2SDK.Accounts.Banks.Http
         {
             var search = new QueryBuilder();
             search.Add("ids", r.MaterialCategoriesIds);
-            if (r.Language is not null) search.Add("lang", r.Language.Alpha2Code);
-            var location = new Uri($"/v2/materials?{search}", UriKind.Relative);
-            return new HttpRequestMessage(HttpMethod.Get, location);
+            var request = Template with
+            {
+                AcceptLanguage = r.Language?.Alpha2Code,
+                Arguments = search
+            };
+            return request.Compile();
         }
     }
 }

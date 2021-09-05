@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Net.Http;
 using GW2SDK.Http;
 using JetBrains.Annotations;
@@ -10,6 +9,11 @@ namespace GW2SDK.ItemStats.Http
     [PublicAPI]
     public sealed class ItemStatsByIdsRequest
     {
+        private static readonly HttpRequestMessageTemplate Template = new(Get, "/v2/itemstats")
+        {
+            AcceptEncoding = "gzip"
+        };
+
         public ItemStatsByIdsRequest(IReadOnlyCollection<int> itemStatIds, Language? language)
         {
             Check.Collection(itemStatIds, nameof(itemStatIds));
@@ -25,9 +29,12 @@ namespace GW2SDK.ItemStats.Http
         {
             var search = new QueryBuilder();
             search.Add("ids", r.ItemStatIds);
-            if (r.Language is not null) search.Add("lang", r.Language.Alpha2Code);
-            var location = new Uri($"/v2/itemstats?{search}", UriKind.Relative);
-            return new HttpRequestMessage(Get, location);
+            var request = Template with
+            {
+                AcceptLanguage = r.Language?.Alpha2Code,
+                Arguments = search
+            };
+            return request.Compile();
         }
     }
 }

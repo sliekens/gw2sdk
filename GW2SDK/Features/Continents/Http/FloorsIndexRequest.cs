@@ -1,5 +1,6 @@
-﻿using System;
+﻿using System.Globalization;
 using System.Net.Http;
+using GW2SDK.Http;
 using JetBrains.Annotations;
 using static System.Net.Http.HttpMethod;
 
@@ -8,6 +9,11 @@ namespace GW2SDK.Continents.Http
     [PublicAPI]
     public sealed class FloorsIndexRequest
     {
+        private static readonly HttpRequestMessageTemplate Template = new(Get, "/v2/continents/:id/floors")
+        {
+            AcceptEncoding = "gzip"
+        };
+
         public FloorsIndexRequest(int continentId)
         {
             ContinentId = continentId;
@@ -17,8 +23,11 @@ namespace GW2SDK.Continents.Http
 
         public static implicit operator HttpRequestMessage(FloorsIndexRequest r)
         {
-            var location = new Uri($"/v2/continents/{r.ContinentId}/floors", UriKind.Relative);
-            return new HttpRequestMessage(Get, location);
+            var request = Template with
+            {
+                Path = Template.Path.Replace(":id", r.ContinentId.ToString(CultureInfo.InvariantCulture))
+            };
+            return request.Compile();
         }
     }
 }

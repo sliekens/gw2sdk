@@ -10,6 +10,11 @@ namespace GW2SDK.Achievements.Http
     [PublicAPI]
     public sealed class AchievementsByIdsRequest
     {
+        private static readonly HttpRequestMessageTemplate Template = new(Get, "/v2/achievements")
+        {
+            AcceptEncoding = "gzip"
+        };
+
         public AchievementsByIdsRequest(IReadOnlyCollection<int> achievementIds, Language? language)
         {
             Check.Collection(achievementIds, nameof(achievementIds));
@@ -25,9 +30,12 @@ namespace GW2SDK.Achievements.Http
         {
             var search = new QueryBuilder();
             search.Add("ids", r.AchievementIds);
-            if (r.Language is not null) search.Add("lang", r.Language.Alpha2Code);
-            var location = new Uri($"/v2/achievements?{search}", UriKind.Relative);
-            return new HttpRequestMessage(Get, location);
+            var request = Template with
+            {
+                AcceptLanguage = r.Language?.Alpha2Code,
+                Arguments = search
+            };
+            return request.Compile();
         }
     }
 }

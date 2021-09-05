@@ -1,5 +1,5 @@
-﻿using System;
-using System.Net.Http;
+﻿using System.Net.Http;
+using GW2SDK.Http;
 using JetBrains.Annotations;
 using static System.Net.Http.HttpMethod;
 
@@ -8,6 +8,11 @@ namespace GW2SDK.Recipes.Http
     [PublicAPI]
     public sealed class RecipesIndexByOutputItemIdRequest
     {
+        private static readonly HttpRequestMessageTemplate Template = new(Get, "/v2/recipes/search")
+        {
+            AcceptEncoding = "gzip"
+        };
+
         public RecipesIndexByOutputItemIdRequest(int outputItemId)
         {
             OutputItemId = outputItemId;
@@ -17,8 +22,13 @@ namespace GW2SDK.Recipes.Http
 
         public static implicit operator HttpRequestMessage(RecipesIndexByOutputItemIdRequest r)
         {
-            var location = new Uri($"/v2/recipes/search?output={r.OutputItemId}", UriKind.Relative);
-            return new HttpRequestMessage(Get, location);
+            var search = new QueryBuilder();
+            search.Add("output", r.OutputItemId);
+            var request = Template with
+            {
+                Arguments = search
+            };
+            return request.Compile();
         }
     }
 }

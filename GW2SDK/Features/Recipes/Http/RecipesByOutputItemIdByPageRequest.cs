@@ -1,19 +1,29 @@
-﻿using System;
-using System.Net.Http;
+﻿using System.Net.Http;
 using GW2SDK.Http;
 using JetBrains.Annotations;
+using static System.Net.Http.HttpMethod;
 
 namespace GW2SDK.Recipes.Http
 {
     [PublicAPI]
     public sealed class RecipesByOutputItemIdByPageRequest
     {
-        public RecipesByOutputItemIdByPageRequest(int outputItemId, int pageIndex, int? pageSize)
+        private static readonly HttpRequestMessageTemplate Template = new(Get, "/v2/recipes/search")
+        {
+            AcceptEncoding = "gzip"
+        };
+
+        public RecipesByOutputItemIdByPageRequest(
+            int outputItemId,
+            int pageIndex,
+            int? pageSize
+        )
         {
             OutputItemId = outputItemId;
             PageIndex = pageIndex;
             PageSize = pageSize;
         }
+
         public int OutputItemId { get; }
 
         public int PageIndex { get; }
@@ -26,8 +36,11 @@ namespace GW2SDK.Recipes.Http
             search.Add("output", r.OutputItemId);
             search.Add("page", r.PageIndex);
             if (r.PageSize.HasValue) search.Add("page_size", r.PageSize.Value);
-            var location = new Uri($"/v2/recipes/search?{search}", UriKind.Relative);
-            return new HttpRequestMessage(HttpMethod.Get, location);
+            var request = Template with
+            {
+                Arguments = search
+            };
+            return request.Compile();
         }
     }
 }

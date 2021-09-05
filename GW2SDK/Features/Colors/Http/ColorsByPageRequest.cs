@@ -1,5 +1,4 @@
-﻿using System;
-using System.Net.Http;
+﻿using System.Net.Http;
 using GW2SDK.Http;
 using JetBrains.Annotations;
 using static System.Net.Http.HttpMethod;
@@ -9,6 +8,11 @@ namespace GW2SDK.Colors.Http
     [PublicAPI]
     public sealed class ColorsByPageRequest
     {
+        private static readonly HttpRequestMessageTemplate Template = new(Get, "/v2/colors")
+        {
+            AcceptEncoding = "gzip"
+        };
+
         public ColorsByPageRequest(
             int pageIndex,
             int? pageSize,
@@ -31,9 +35,12 @@ namespace GW2SDK.Colors.Http
             var search = new QueryBuilder();
             search.Add("page", r.PageIndex);
             if (r.PageSize.HasValue) search.Add("page_size", r.PageSize.Value);
-            if (r.Language is not null) search.Add("lang", r.Language.Alpha2Code);
-            var location = new Uri($"/v2/colors?{search}", UriKind.Relative);
-            return new HttpRequestMessage(Get, location);
+            var request = Template with
+            {
+                AcceptLanguage = r.Language?.Alpha2Code,
+                Arguments = search
+            };
+            return request.Compile();
         }
     }
 }

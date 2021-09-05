@@ -1,6 +1,5 @@
-﻿using System;
-using System.Net.Http;
-using System.Net.Http.Headers;
+﻿using System.Net.Http;
+using GW2SDK.Http;
 using JetBrains.Annotations;
 using static System.Net.Http.HttpMethod;
 
@@ -9,6 +8,11 @@ namespace GW2SDK.Accounts.Achievements.Http
     [PublicAPI]
     public sealed class AccountAchievementByIdRequest
     {
+        private static readonly HttpRequestMessageTemplate Template = new(Get, "/v2/account/achievements")
+        {
+            AcceptEncoding = "gzip"
+        };
+
         public AccountAchievementByIdRequest(int achievementId, string? accessToken)
         {
             AchievementId = achievementId;
@@ -21,16 +25,15 @@ namespace GW2SDK.Accounts.Achievements.Http
 
         public static implicit operator HttpRequestMessage(AccountAchievementByIdRequest r)
         {
-            var location = new Uri($"/v2/account/achievements?id={r.AchievementId}", UriKind.Relative);
-            return new HttpRequestMessage(Get, location)
+            var search = new QueryBuilder();
+            search.Add("id", r.AchievementId);
+            var request = Template with
             {
-                Headers =
-                {
-                    Authorization = string.IsNullOrWhiteSpace(r.AccessToken)
-                        ? default
-                        : new AuthenticationHeaderValue("Bearer", r.AccessToken)
-                }
+                BearerToken = r.AccessToken,
+                Arguments = search
             };
+
+            return request.Compile();
         }
     }
 }

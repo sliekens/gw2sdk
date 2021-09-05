@@ -1,13 +1,18 @@
-﻿using System;
-using System.Net.Http;
+﻿using System.Net.Http;
 using GW2SDK.Http;
 using JetBrains.Annotations;
+using static System.Net.Http.HttpMethod;
 
 namespace GW2SDK.Professions.Http
 {
     [PublicAPI]
     public sealed class ProfessionsRequest
     {
+        private static readonly HttpRequestMessageTemplate Template = new(Get, "/v2/professions")
+        {
+            AcceptEncoding = "gzip"
+        };
+
         public ProfessionsRequest(Language? language)
         {
             Language = language;
@@ -19,9 +24,12 @@ namespace GW2SDK.Professions.Http
         {
             var search = new QueryBuilder();
             search.Add("ids", "all");
-            if (r.Language is not null) search.Add("lang", r.Language.Alpha2Code);
-            var location = new Uri($"/v2/professions?{search}", UriKind.Relative);
-            return new HttpRequestMessage(HttpMethod.Get, location);
+            var request = Template with
+            {
+                AcceptLanguage = r.Language?.Alpha2Code,
+                Arguments = search
+            };
+            return request.Compile();
         }
     }
 }

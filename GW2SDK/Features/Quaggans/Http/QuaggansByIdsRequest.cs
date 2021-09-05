@@ -1,14 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Net.Http;
 using GW2SDK.Http;
 using JetBrains.Annotations;
+using static System.Net.Http.HttpMethod;
 
 namespace GW2SDK.Quaggans.Http
 {
     [PublicAPI]
     public sealed class QuaggansByIdsRequest
     {
+        private static readonly HttpRequestMessageTemplate Template = new(Get, "/v2/quaggans")
+        {
+            AcceptEncoding = "gzip"
+        };
+
         public QuaggansByIdsRequest(IReadOnlyCollection<string> quagganIds)
         {
             Check.Collection(quagganIds, nameof(quagganIds));
@@ -21,8 +26,11 @@ namespace GW2SDK.Quaggans.Http
         {
             var search = new QueryBuilder();
             search.Add("ids", r.QuagganIds);
-            var location = new Uri($"/v2/quaggans?{search}", UriKind.Relative);
-            return new HttpRequestMessage(HttpMethod.Get, location);
+            var request = Template with
+            {
+                Arguments = search
+            };
+            return request.Compile();
         }
     }
 }

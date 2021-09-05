@@ -1,17 +1,19 @@
-﻿using System;
-using System.Net.Http;
+﻿using System.Net.Http;
 using GW2SDK.Http;
 using JetBrains.Annotations;
+using static System.Net.Http.HttpMethod;
 
 namespace GW2SDK.Quaggans.Http
 {
     [PublicAPI]
     public sealed class QuaggansByPageRequest
     {
-        public QuaggansByPageRequest(
-            int pageIndex,
-            int? pageSize
-        )
+        private static readonly HttpRequestMessageTemplate Template = new(Get, "/v2/quaggans")
+        {
+            AcceptEncoding = "gzip"
+        };
+
+        public QuaggansByPageRequest(int pageIndex, int? pageSize)
         {
             PageIndex = pageIndex;
             PageSize = pageSize;
@@ -24,10 +26,13 @@ namespace GW2SDK.Quaggans.Http
         public static implicit operator HttpRequestMessage(QuaggansByPageRequest r)
         {
             var search = new QueryBuilder();
-            search.Add("page", (int)r.PageIndex);
+            search.Add("page", r.PageIndex);
             if (r.PageSize.HasValue) search.Add("page_size", r.PageSize.Value);
-            var location = new Uri($"/v2/quaggans?{search}", UriKind.Relative);
-            return new HttpRequestMessage(HttpMethod.Get, location);
+            var request = Template with
+            {
+                Arguments = search
+            };
+            return request.Compile();
         }
     }
 }
