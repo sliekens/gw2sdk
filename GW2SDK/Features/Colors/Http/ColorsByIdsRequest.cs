@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Net.Http;
 using GW2SDK.Http;
 using JetBrains.Annotations;
@@ -10,6 +9,11 @@ namespace GW2SDK.Colors.Http
     [PublicAPI]
     public sealed class ColorsByIdsRequest
     {
+        private static readonly HttpRequestMessageTemplate Template = new(Get, "/v2/colors")
+        {
+            AcceptEncoding = "gzip"
+        };
+
         public ColorsByIdsRequest(IReadOnlyCollection<int> colorIds, Language? language)
         {
             Check.Collection(colorIds, nameof(colorIds));
@@ -25,9 +29,12 @@ namespace GW2SDK.Colors.Http
         {
             var search = new QueryBuilder();
             search.Add("ids", r.ColorIds);
-            if (r.Language is not null) search.Add("lang", r.Language.Alpha2Code);
-            var location = new Uri($"/v2/colors?{search}", UriKind.Relative);
-            return new HttpRequestMessage(Get, location);
+            var request = Template with
+            {
+                AcceptLanguage = r.Language?.Alpha2Code,
+                Arguments = search
+            };
+            return request.Compile();
         }
     }
 }

@@ -1,8 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Net.Http;
-using JetBrains.Annotations;
 using GW2SDK.Http;
+using JetBrains.Annotations;
 using static System.Net.Http.HttpMethod;
 
 namespace GW2SDK.Commerce.Prices.Http
@@ -10,6 +9,11 @@ namespace GW2SDK.Commerce.Prices.Http
     [PublicAPI]
     public sealed class ItemPricesByIdsRequest
     {
+        private static readonly HttpRequestMessageTemplate Template = new(Get, "/v2/commerce/prices")
+        {
+            AcceptEncoding = "gzip"
+        };
+
         public ItemPricesByIdsRequest(IReadOnlyCollection<int> itemIds)
         {
             Check.Collection(itemIds, nameof(itemIds));
@@ -22,8 +26,11 @@ namespace GW2SDK.Commerce.Prices.Http
         {
             var search = new QueryBuilder();
             search.Add("ids", r.ItemIds);
-            var location = new Uri($"/v2/commerce/prices?{search}", UriKind.Relative);
-            return new HttpRequestMessage(Get, location);
+            var request = Template with
+            {
+                Arguments = search
+            };
+            return request.Compile();
         }
     }
 }

@@ -48,15 +48,9 @@ namespace GW2SDK.Tests.TestInfrastructure
                 .ConfigurePrimaryHttpMessageHandler(() =>
                 {
 #if NET
-                    return new SocketsHttpHandler
-                    {
-                        AutomaticDecompression = DecompressionMethods.GZip
-                    };
+                    return new SocketsHttpHandler();
 #else
-                    return new HttpClientHandler
-                    {
-                        AutomaticDecompression = DecompressionMethods.GZip
-                    };
+                    return new HttpClientHandler();
 #endif
                 })
                 .AddPolicyHandlerFromRegistry("api.guildwars2.com")

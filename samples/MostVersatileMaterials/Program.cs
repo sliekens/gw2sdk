@@ -24,11 +24,7 @@ namespace MostVersatileMaterials
 
         private static async Task Main(string[] args)
         {
-            using var http = new HttpClient(new SocketsHttpHandler
-                {
-                    AutomaticDecompression = DecompressionMethods.GZip
-                },
-                true);
+            using var http = new HttpClient(new SocketsHttpHandler(), true);
 
             http.UseGuildWars2();
             http.UseLanguage(Language.English);

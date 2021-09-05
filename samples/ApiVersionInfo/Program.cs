@@ -24,12 +24,7 @@ namespace ApiVersionInfo
         {
             // First configure the HttpClient
             // There are many ways to do this, but this sample takes a minimalistic approach.
-            using var http = new HttpClient(new SocketsHttpHandler
-                {
-                    // Enable compression to save network bandwidth (at the cost of some negligible CPU usage)
-                    AutomaticDecompression = DecompressionMethods.GZip
-                },
-                true);
+            using var http = new HttpClient(new SocketsHttpHandler(), true);
 
             // Convenience method, sets the BaseAddress
             http.UseGuildWars2();

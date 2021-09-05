@@ -10,6 +10,11 @@ namespace GW2SDK.Continents.Http
     [PublicAPI]
     public sealed class ContinentsByIdsRequest
     {
+        
+        private static readonly HttpRequestMessageTemplate Template = new(Get, "/v2/continents")
+        {
+            AcceptEncoding = "gzip"
+        };
         public ContinentsByIdsRequest(IReadOnlyCollection<int> continentIds, Language? language)
         {
             Check.Collection(continentIds, nameof(continentIds));
@@ -25,9 +30,12 @@ namespace GW2SDK.Continents.Http
         {
             var search = new QueryBuilder();
             search.Add("ids", r.ContinentIds);
-            if (r.Language is not null) search.Add("lang", r.Language.Alpha2Code);
-            var location = new Uri($"/v2/continents?{search}", UriKind.Relative);
-            return new HttpRequestMessage(Get, location);
+            var request = Template with
+            {
+                AcceptLanguage = r.Language?.Alpha2Code,
+                Arguments = search
+            };
+            return request.Compile();
         }
     }
 }

@@ -2,9 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
-using System.Net.Http.Headers;
-using JetBrains.Annotations;
 using GW2SDK.Http;
+using JetBrains.Annotations;
 using static System.Net.Http.HttpMethod;
 
 namespace GW2SDK.Subtokens.Http
@@ -12,11 +11,14 @@ namespace GW2SDK.Subtokens.Http
     [PublicAPI]
     public sealed class CreateSubtokenRequest
     {
+        private static readonly HttpRequestMessageTemplate Template = new(Get, "/v2/createsubtoken");
+
         public CreateSubtokenRequest(
             string? accessToken,
             IReadOnlyCollection<Permission>? permissions = null,
             DateTimeOffset? absoluteExpirationDate = null,
-            IReadOnlyCollection<string>? urls = null)
+            IReadOnlyCollection<string>? urls = null
+        )
         {
             AccessToken = accessToken;
             Permissions = permissions;
@@ -35,37 +37,32 @@ namespace GW2SDK.Subtokens.Http
         public static implicit operator HttpRequestMessage(CreateSubtokenRequest r)
         {
             var args = new QueryBuilder();
-            if (r.Permissions is object && r.Permissions.Count != 0)
+            if (r.Permissions is { Count: not 0 })
             {
-                args.Add("permissions", string.Join(",", r.Permissions).ToLowerInvariant());
+                args.Add("permissions",
+                    string.Join(",", r.Permissions)
+                        .ToLowerInvariant());
             }
 
             if (r.AbsoluteExpirationDate.HasValue)
             {
-                args.Add("expire", r.AbsoluteExpirationDate.Value.ToUniversalTime().ToString("s"));
+                args.Add("expire",
+                    r.AbsoluteExpirationDate.Value.ToUniversalTime()
+                        .ToString("s"));
             }
 
-            if (r.Urls is object && r.Urls.Count != 0)
+            if (r.Urls is { Count: not 0 })
             {
                 args.Add("urls", string.Join(",", r.Urls.Select(Uri.EscapeDataString)));
             }
 
-            var uriString = "/v2/createsubtoken";
-            if (args.Count != 0)
+            var request = Template with
             {
-                uriString += $"?{args}";
-            }
-
-            var location = new Uri(uriString, UriKind.Relative);
-            return new HttpRequestMessage(Get, location)
-            {
-                Headers =
-                {
-                    Authorization = string.IsNullOrWhiteSpace(r.AccessToken)
-                        ? default
-                        : new AuthenticationHeaderValue("Bearer", r.AccessToken)
-                }
+                BearerToken = r.AccessToken,
+                Arguments = args
             };
+
+            return request.Compile();
         }
     }
 }

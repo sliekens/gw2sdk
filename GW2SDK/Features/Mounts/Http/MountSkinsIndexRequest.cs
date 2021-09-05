@@ -1,5 +1,5 @@
-﻿using System;
-using System.Net.Http;
+﻿using System.Net.Http;
+using GW2SDK.Http;
 using JetBrains.Annotations;
 using static System.Net.Http.HttpMethod;
 
@@ -8,10 +8,11 @@ namespace GW2SDK.Mounts.Http
     [PublicAPI]
     public sealed class MountSkinsIndexRequest
     {
-        public static implicit operator HttpRequestMessage(MountSkinsIndexRequest _)
+        private static readonly HttpRequestMessageTemplate Template = new(Get, "/v2/mounts/skins")
         {
-            var location = new Uri("/v2/mounts/skins", UriKind.Relative);
-            return new HttpRequestMessage(Get, location);
-        }
+            AcceptEncoding = "gzip"
+        };
+
+        public static implicit operator HttpRequestMessage(MountSkinsIndexRequest _) => Template.Compile();
     }
 }

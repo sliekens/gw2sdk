@@ -1,5 +1,5 @@
-﻿using System;
-using System.Net.Http;
+﻿using System.Net.Http;
+using GW2SDK.Http;
 using JetBrains.Annotations;
 using static System.Net.Http.HttpMethod;
 
@@ -8,10 +8,11 @@ namespace GW2SDK.Backstories.Questions.Http
     [PublicAPI]
     public sealed class BackstoryQuestionsIndexRequest
     {
-        public static implicit operator HttpRequestMessage(BackstoryQuestionsIndexRequest _)
+        private static readonly HttpRequestMessageTemplate Template = new(Get, "/v2/backstory/questions")
         {
-            var location = new Uri("/v2/backstory/questions", UriKind.Relative);
-            return new HttpRequestMessage(Get, location);
-        }
+            AcceptEncoding = "gzip"
+        };
+
+        public static implicit operator HttpRequestMessage(BackstoryQuestionsIndexRequest _) => Template.Compile();
     }
 }

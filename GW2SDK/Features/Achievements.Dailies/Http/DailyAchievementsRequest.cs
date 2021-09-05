@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Net.Http;
+using GW2SDK.Http;
 using JetBrains.Annotations;
 using static System.Net.Http.HttpMethod;
 
@@ -8,6 +9,11 @@ namespace GW2SDK.Achievements.Dailies.Http
     [PublicAPI]
     public sealed class DailyAchievementsRequest
     {
+        private static readonly HttpRequestMessageTemplate Template = new(Get, "/v2/achievements/daily")
+        {
+            AcceptEncoding = "gzip"
+        };
+
         public DailyAchievementsRequest(Day day = Day.Today)
         {
             Day = day;
@@ -17,14 +23,16 @@ namespace GW2SDK.Achievements.Dailies.Http
 
         public static implicit operator HttpRequestMessage(DailyAchievementsRequest r)
         {
-            var path = r.Day switch
+            var request = Template with
             {
-                Day.Today => "/v2/achievements/daily",
-                Day.Tomorrow => "/v2/achievements/daily/tomorrow",
-                _ => throw new ArgumentOutOfRangeException()
+                Path = r.Day switch
+                {
+                    Day.Today => "/v2/achievements/daily",
+                    Day.Tomorrow => "/v2/achievements/daily/tomorrow",
+                    _ => throw new ArgumentOutOfRangeException()
+                }
             };
-            var location = new Uri(path, UriKind.Relative);
-            return new HttpRequestMessage(Get, location);
+            return request.Compile();
         }
     }
 }

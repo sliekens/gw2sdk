@@ -53,9 +53,9 @@ namespace GW2SDK.Tests.Features.Tokens
 
             var urls = new List<string>
             {
-                Location.Tokeninfo,
-                Location.Account,
-                Location.Characters + "/My Cool Character"
+                "/v2/tokeninfo",
+                "/v2/account",
+                "/v2/characters/My Cool Character"
             };
 
             var createdSubtoken = await subtokenService.CreateSubtoken(accessToken.Key,

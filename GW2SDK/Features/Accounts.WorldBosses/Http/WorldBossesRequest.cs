@@ -1,16 +1,18 @@
-﻿using System;
-using System.Net.Http;
+﻿using System.Net.Http;
+using GW2SDK.Http;
 using JetBrains.Annotations;
+using static System.Net.Http.HttpMethod;
 
 namespace GW2SDK.Accounts.WorldBosses.Http
 {
     [PublicAPI]
     public sealed class WorldBossesRequest
     {
-        public static implicit operator HttpRequestMessage(WorldBossesRequest _)
+        private static readonly HttpRequestMessageTemplate Template = new(Get, "/v2/worldbosses")
         {
-            var location = new Uri("/v2/worldbosses", UriKind.Relative);
-            return new HttpRequestMessage(HttpMethod.Get, location);
-        }
+            AcceptEncoding = "gzip"
+        };
+
+        public static implicit operator HttpRequestMessage(WorldBossesRequest _) => Template.Compile();
     }
 }

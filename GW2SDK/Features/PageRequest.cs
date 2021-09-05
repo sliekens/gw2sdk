@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Net.Http;
+using GW2SDK.Http;
 using JetBrains.Annotations;
 
 namespace GW2SDK
@@ -9,7 +10,7 @@ namespace GW2SDK
     [PublicAPI]
     public sealed class PageRequest
     {
-        public PageRequest(HyperlinkReference href)
+        public PageRequest(HyperlinkReference href, Language? language)
         {
             if (href is null or { IsEmpty: true })
             {
@@ -17,14 +18,21 @@ namespace GW2SDK
             }
 
             Href = href;
+            Language = language;
         }
 
         public HyperlinkReference Href { get; }
 
+        public Language? Language { get; }
+
         public static implicit operator HttpRequestMessage(PageRequest r)
         {
-            var location = new Uri(r.Href.Url, UriKind.Relative);
-            return new HttpRequestMessage(HttpMethod.Get, location);
+            var template = new HttpRequestMessageTemplate(HttpMethod.Get, r.Href.Url)
+            {
+                AcceptEncoding = "gzip",
+                AcceptLanguage = r.Language?.Alpha2Code
+            };
+            return template.Compile();
         }
     }
 }

@@ -4,12 +4,18 @@ using System.Linq;
 using System.Net.Http;
 using GW2SDK.Http;
 using JetBrains.Annotations;
+using static System.Net.Http.HttpMethod;
 
 namespace GW2SDK.Mounts.Http
 {
     [PublicAPI]
     public sealed class MountsByNamesRequest
     {
+        private static readonly HttpRequestMessageTemplate Template = new(Get, "/v2/mounts/types")
+        {
+            AcceptEncoding = "gzip"
+        };
+
         public MountsByNamesRequest(IReadOnlyCollection<MountName> mountNames, Language? language)
         {
             Check.Collection(mountNames, nameof(mountNames));
@@ -25,9 +31,12 @@ namespace GW2SDK.Mounts.Http
         {
             var search = new QueryBuilder();
             search.Add("ids", r.MountNames.Select(name => FormatMountName(name)));
-            if (r.Language is not null) search.Add("lang", r.Language.Alpha2Code);
-            var location = new Uri($"/v2/mounts/types?{search}", UriKind.Relative);
-            return new HttpRequestMessage(HttpMethod.Get, location);
+            var request = Template with
+            {
+                AcceptLanguage = r.Language?.Alpha2Code,
+                Arguments = search
+            };
+            return request.Compile();
         }
 
         private static string FormatMountName(MountName mountName)

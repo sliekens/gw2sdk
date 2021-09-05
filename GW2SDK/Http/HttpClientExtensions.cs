@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO.Compression;
+using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
@@ -49,12 +51,26 @@ namespace GW2SDK.Http
         {
             if (instance == null) throw new ArgumentNullException(nameof(instance));
 #if NET
-            await
+            var content = await instance.ReadAsStreamAsync(cancellationToken)
+                .ConfigureAwait(false);
+#else
+            var content = await instance.ReadAsStreamAsync()
+                .ConfigureAwait(false);
 #endif
-            using var content = await instance.ReadAsStreamAsync()
-                .ConfigureAwait(false);
-            return await JsonDocument.ParseAsync(content, cancellationToken: cancellationToken)
-                .ConfigureAwait(false);
+            if (instance.Headers.ContentEncoding.LastOrDefault() == "gzip")
+            {
+                content = new GZipStream(content, CompressionMode.Decompress, false);
+            }
+
+#if NET
+            await using (content)
+#else
+            using (content)
+#endif
+            {
+                return await JsonDocument.ParseAsync(content, cancellationToken: cancellationToken)
+                    .ConfigureAwait(false);
+            }
         }
 
         internal static async Task<IReplica<T>> GetResource<T>(
@@ -128,7 +144,8 @@ namespace GW2SDK.Http
             CancellationToken cancellationToken
         )
         {
-            using var response = await instance.SendAsync(request, HttpCompletionOption.ResponseHeadersRead, cancellationToken)
+            using var response = await instance
+                .SendAsync(request, HttpCompletionOption.ResponseHeadersRead, cancellationToken)
                 .ConfigureAwait(false);
             var date = response.Headers.Date.GetValueOrDefault(DateTimeOffset.UtcNow);
             response.EnsureSuccessStatusCode();
@@ -159,7 +176,8 @@ namespace GW2SDK.Http
             CancellationToken cancellationToken
         )
         {
-            using var response = await instance.SendAsync(request, HttpCompletionOption.ResponseHeadersRead, cancellationToken)
+            using var response = await instance
+                .SendAsync(request, HttpCompletionOption.ResponseHeadersRead, cancellationToken)
                 .ConfigureAwait(false);
             var date = response.Headers.Date.GetValueOrDefault(DateTimeOffset.UtcNow);
             response.EnsureSuccessStatusCode();

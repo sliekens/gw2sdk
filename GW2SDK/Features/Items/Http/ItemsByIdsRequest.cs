@@ -10,6 +10,11 @@ namespace GW2SDK.Items.Http
     [PublicAPI]
     public sealed class ItemsByIdsRequest
     {
+        private static readonly HttpRequestMessageTemplate Template = new(Get, "/v2/items")
+        {
+            AcceptEncoding = "gzip"
+        };
+
         public ItemsByIdsRequest(IReadOnlyCollection<int> itemIds, Language? language)
         {
             Check.Collection(itemIds, nameof(itemIds));
@@ -25,9 +30,12 @@ namespace GW2SDK.Items.Http
         {
             var search = new QueryBuilder();
             search.Add("ids", r.ItemIds);
-            if (r.Language is not null) search.Add("lang", r.Language.Alpha2Code);
-            var location = new Uri($"/v2/items?{search}", UriKind.Relative);
-            return new HttpRequestMessage(Get, location);
+            var request = Template with
+            {
+                AcceptLanguage = r.Language?.Alpha2Code,
+                Arguments = search
+            };
+            return request.Compile();
         }
     }
 }

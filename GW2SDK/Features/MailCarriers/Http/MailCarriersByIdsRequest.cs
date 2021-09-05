@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Net.Http;
 using GW2SDK.Http;
 using JetBrains.Annotations;
@@ -10,6 +9,11 @@ namespace GW2SDK.MailCarriers.Http
     [PublicAPI]
     public sealed class MailCarriersByIdsRequest
     {
+        private static readonly HttpRequestMessageTemplate Template = new(Get, "/v2/mailcarriers")
+        {
+            AcceptEncoding = "gzip"
+        };
+
         public MailCarriersByIdsRequest(IReadOnlyCollection<int> mailCarrierIds, Language? language)
         {
             Check.Collection(mailCarrierIds, nameof(mailCarrierIds));
@@ -25,9 +29,12 @@ namespace GW2SDK.MailCarriers.Http
         {
             var search = new QueryBuilder();
             search.Add("ids", r.MailCarrierIds);
-            if (r.Language is not null) search.Add("lang", r.Language.Alpha2Code);
-            var location = new Uri($"/v2/mailcarriers?{search}", UriKind.Relative);
-            return new HttpRequestMessage(Get, location);
+            var request = Template with
+            {
+                AcceptLanguage = r.Language?.Alpha2Code,
+                Arguments = search
+            };
+            return request.Compile();
         }
     }
 }

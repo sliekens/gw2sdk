@@ -9,6 +9,10 @@ namespace GW2SDK.Items.Http
     [PublicAPI]
     public sealed class ItemByIdRequest
     {
+        private static readonly HttpRequestMessageTemplate Template = new(Get, "/v2/items")
+        {
+            AcceptEncoding = "gzip"
+        };
         public ItemByIdRequest(int itemId, Language? language)
         {
             ItemId = itemId;
@@ -23,9 +27,12 @@ namespace GW2SDK.Items.Http
         {
             var search = new QueryBuilder();
             search.Add("id", r.ItemId);
-            if (r.Language is not null) search.Add("lang", r.Language.Alpha2Code);
-            var location = new Uri($"/v2/items?{search}", UriKind.Relative);
-            return new HttpRequestMessage(Get, location);
+            var request = Template with
+            {
+                AcceptLanguage = r.Language?.Alpha2Code,
+                Arguments = search
+            };
+            return request.Compile();
         }
     }
 }

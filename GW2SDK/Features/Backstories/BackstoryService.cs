@@ -82,8 +82,9 @@ namespace GW2SDK.Backstories
         )
         {
             var request = new BackstoryQuestionByIdRequest(questionId, language);
-            return await http
-                .GetResource(request, json => backstoryReader.Question.Read(json, missingMemberBehavior), cancellationToken)
+            return await http.GetResource(request,
+                    json => backstoryReader.Question.Read(json, missingMemberBehavior),
+                    cancellationToken)
                 .ConfigureAwait(false);
         }
 
@@ -94,7 +95,9 @@ namespace GW2SDK.Backstories
         )
         {
             var request = new BackstoryAnswerByIdRequest(answerId, language);
-            return await http.GetResource(request, json => backstoryReader.Answer.Read(json, missingMemberBehavior), cancellationToken)
+            return await http.GetResource(request,
+                    json => backstoryReader.Answer.Read(json, missingMemberBehavior),
+                    cancellationToken)
                 .ConfigureAwait(false);
         }
 

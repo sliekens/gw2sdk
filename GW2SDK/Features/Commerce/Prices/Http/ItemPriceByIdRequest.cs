@@ -1,7 +1,6 @@
-﻿using System;
-using System.Net.Http;
-using JetBrains.Annotations;
+﻿using System.Net.Http;
 using GW2SDK.Http;
+using JetBrains.Annotations;
 using static System.Net.Http.HttpMethod;
 
 namespace GW2SDK.Commerce.Prices.Http
@@ -9,6 +8,11 @@ namespace GW2SDK.Commerce.Prices.Http
     [PublicAPI]
     public sealed class ItemPriceByIdRequest
     {
+        private static readonly HttpRequestMessageTemplate Template = new(Get, "/v2/commerce/prices")
+        {
+            AcceptEncoding = "gzip"
+        };
+
         public ItemPriceByIdRequest(int itemId)
         {
             ItemId = itemId;
@@ -20,8 +24,11 @@ namespace GW2SDK.Commerce.Prices.Http
         {
             var search = new QueryBuilder();
             search.Add("id", r.ItemId);
-            var location = new Uri($"/v2/commerce/prices?{search}", UriKind.Relative);
-            return new HttpRequestMessage(Get, location);
+            var request = Template with
+            {
+                Arguments = search
+            };
+            return request.Compile();
         }
     }
 }
