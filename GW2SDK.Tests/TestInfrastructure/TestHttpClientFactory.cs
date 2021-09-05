@@ -1,13 +1,14 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
-using GW2SDK.Colors;
 using GW2SDK.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Polly;
 using Polly.Timeout;
+using StackExchange.Redis;
 
 namespace GW2SDK.Tests.TestInfrastructure
 {
@@ -38,6 +39,11 @@ namespace GW2SDK.Tests.TestInfrastructure
 
             AddPolicies(services);
 
+            services.AddSingleton<IHttpCache>(sp =>
+            {
+                var redis = ConnectionMultiplexer.Connect("localhost");
+                return new DefaultHttpCache(true, new RedisHttpCacheStore(redis));
+            });
             services.AddTransient<UnauthorizedMessageHandler>();
             services.AddTransient<BadMessageHandler>();
             services.AddTransient<RateLimitHandler>();
@@ -63,8 +69,7 @@ namespace GW2SDK.Tests.TestInfrastructure
                 .AddHttpMessageHandler<BadMessageHandler>()
                 .AddHttpMessageHandler<RateLimitHandler>()
                 .AddHttpMessageHandler<CachingDelegatingHandler>()
-                .AddHttpMessageHandler<VaryFixHandler>()
-                ;
+                .AddHttpMessageHandler<VaryFixHandler>();
 
             return services.BuildServiceProvider();
         }
@@ -112,7 +117,15 @@ namespace GW2SDK.Tests.TestInfrastructure
             var timeout =
                 Policy.TimeoutAsync<HttpResponseMessage>(TimeSpan.FromSeconds(60), TimeoutStrategy.Optimistic);
 
-            policies.Add("api.guildwars2.com", Policy.WrapAsync(timeout, rateLimit, innerTimeout));
+            // Disable timeouts for stepthrough sessions
+            if (Debugger.IsAttached)
+            {
+                policies.Add("api.guildwars2.com", rateLimit);
+            }
+            else
+            {
+                policies.Add("api.guildwars2.com", Policy.WrapAsync(timeout, rateLimit, innerTimeout));
+            }
         }
     }
 }

@@ -1,28 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Text.Json;
 
 namespace GW2SDK.Http
 {
-    #if !NET
-
-    internal static class ResponseHeadersHelper
-    {
-        internal static void Deconstruct<TKey, TValue>(
-            this KeyValuePair<TKey, TValue> pair,
-            out TKey key,
-            out TValue value
-        )
-        {
-            key = pair.Key;
-            value = pair.Value;
-        }
-    }
-
-    #endif
-
     public class ResponseCacheEntry
     {
         public Dictionary<string, List<string>> Vary { get; set; } = new();
@@ -113,6 +98,71 @@ namespace GW2SDK.Http
             response.Headers.Age = CalculateAge();
 
             return response;
+        }
+
+        public IEnumerable<KeyValuePair<string, string>> Serialize()
+        {
+            yield return new KeyValuePair<string, string>(nameof(Vary), JsonSerializer.Serialize(Vary));
+            yield return new KeyValuePair<string, string>(nameof(StatusCode), ((int)StatusCode).ToString());
+            if (Date.HasValue)
+            {
+                yield return new KeyValuePair<string, string>(nameof(Date), Date.Value.ToString("O", CultureInfo.InvariantCulture));
+            }
+            if (Age.HasValue)
+            {
+                yield return new KeyValuePair<string, string>(nameof(Age), Age.Value.ToString("c", CultureInfo.InvariantCulture));
+            }
+            yield return new KeyValuePair<string, string>(nameof(RequestTime), RequestTime.ToString("O", CultureInfo.InvariantCulture));
+            yield return new KeyValuePair<string, string>(nameof(ResponseTime), ResponseTime.ToString("O", CultureInfo.InvariantCulture));
+            yield return new KeyValuePair<string, string>(nameof(FreshnessLifetime), FreshnessLifetime.ToString("c", CultureInfo.InvariantCulture));
+            yield return new KeyValuePair<string, string>(nameof(ResponseHeaders), JsonSerializer.Serialize(ResponseHeaders));
+            yield return new KeyValuePair<string, string>(nameof(ContentHeaders), JsonSerializer.Serialize(ContentHeaders));
+            yield return new KeyValuePair<string, string>(nameof(Content), Convert.ToBase64String(Content));
+        }
+
+        public static ResponseCacheEntry Hydrate(IEnumerable<KeyValuePair<string, string>> values)
+        {
+            var entry = new ResponseCacheEntry();
+            foreach (var (name, value) in values)
+            {
+                switch (name)
+                {
+                    case nameof(StatusCode):
+                        entry.StatusCode = (HttpStatusCode)int.Parse(value);
+                        break;
+                    case nameof(Vary):
+                        entry.Vary = JsonSerializer.Deserialize<Dictionary<string, List<string>>>(value) ?? throw new Exception();
+                        break;
+                    case nameof(Date):
+                        entry.Date = DateTimeOffset.ParseExact(value, "O", CultureInfo.InvariantCulture);
+                        break;
+                    case nameof(Age):
+                        entry.Age = TimeSpan.ParseExact(value, "c", CultureInfo.InvariantCulture);
+                        break;
+                    case nameof(RequestTime):
+                        entry.RequestTime = DateTimeOffset.ParseExact(value, "O", CultureInfo.InvariantCulture);
+                        break;
+                    case nameof(ResponseTime):
+                        entry.ResponseTime = DateTimeOffset.ParseExact(value, "O", CultureInfo.InvariantCulture);
+                        break;
+                    case nameof(FreshnessLifetime):
+                        entry.FreshnessLifetime = TimeSpan.ParseExact(value, "c", CultureInfo.InvariantCulture);
+                        break;
+                    case nameof(ResponseHeaders):
+                        entry.ResponseHeaders = JsonSerializer.Deserialize<List<KeyValuePair<string, IEnumerable<string>>>>(value) ?? throw new Exception();
+                        break;
+                    case nameof(ContentHeaders):
+                        entry.ContentHeaders = JsonSerializer.Deserialize<List<KeyValuePair<string, IEnumerable<string>>>>(value) ?? throw new Exception();
+                        break;
+                    case nameof(Content):
+                        entry.Content = Convert.FromBase64String(value);
+                        break;
+                    default:
+                        throw new InvalidOperationException();
+                }
+            }
+
+            return entry;
         }
     }
 }
