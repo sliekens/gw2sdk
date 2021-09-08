@@ -7,16 +7,11 @@ namespace GW2SDK.Http.Caching
     [PublicAPI]
     public sealed class InMemoryHttpCacheStore : IHttpCacheStore
     {
-        private readonly Dictionary<string, List<ResponseCacheEntry>> responseCache = new();
+        private readonly Dictionary<string, ResponseCacheEntry> responseCache = new();
 
         public async IAsyncEnumerable<ResponseCacheEntry> GetEntries(string primaryKey)
         {
-            if (!responseCache.TryGetValue(primaryKey, out var cacheEntries))
-            {
-                yield break;
-            }
-
-            foreach (var entry in cacheEntries)
+            if (responseCache.TryGetValue(primaryKey, out var entry))
             {
                 yield return entry;
             }
@@ -26,12 +21,8 @@ namespace GW2SDK.Http.Caching
 
         public Task StoreEntry(string primaryKey, ResponseCacheEntry entry)
         {
-            if (!responseCache.TryGetValue(primaryKey, out var entries))
-            {
-                responseCache[primaryKey] = entries = new List<ResponseCacheEntry>();
-            }
+            responseCache[primaryKey] = entry;
 
-            entries.Add(entry);
             return Task.CompletedTask;
         }
     }
