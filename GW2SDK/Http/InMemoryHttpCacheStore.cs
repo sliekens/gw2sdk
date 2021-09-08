@@ -1,8 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using JetBrains.Annotations;
 
 namespace GW2SDK.Http
 {
+    [PublicAPI]
     public sealed class InMemoryHttpCacheStore : IHttpCacheStore
     {
         private readonly Dictionary<string, List<ResponseCacheEntry>> responseCache = new();

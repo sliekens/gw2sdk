@@ -1,8 +1,11 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using System.Net.Http;
+using JetBrains.Annotations;
 
 namespace GW2SDK.Http
 {
+    // TODO: revalidate support
+    [PublicAPI]
     public sealed class CacheResponse
     {
         public static readonly CacheResponse Miss = new(false, null);

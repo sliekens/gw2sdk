@@ -2,10 +2,12 @@
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
+using JetBrains.Annotations;
 
 namespace GW2SDK.Http
 {
-    public class CachingDelegatingHandler : DelegatingHandler
+    [PublicAPI]
+    public sealed class CachingDelegatingHandler : DelegatingHandler
     {
         private readonly IHttpCache cache;
 
@@ -25,9 +27,12 @@ namespace GW2SDK.Http
                 return cached.Response;
             }
 
+            // TODO: just put all this in TryReuseResponse and rework IHttpCache API
             var requestTime = DateTimeOffset.Now;
             var response = await base.SendAsync(request, cancellationToken).ConfigureAwait(false);
             var responseTime = DateTimeOffset.Now;
+
+            // TODO: follow RFC rules for when to store the response for reuse
             await cache.Store(request, response, requestTime, responseTime, cancellationToken).ConfigureAwait(false);
             return response;
         }

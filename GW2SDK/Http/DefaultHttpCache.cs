@@ -5,10 +5,12 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading;
 using System.Threading.Tasks;
+using JetBrains.Annotations;
 
 namespace GW2SDK.Http
 {
-    public class DefaultHttpCache : IHttpCache
+    [PublicAPI]
+    public sealed class DefaultHttpCache : IHttpCache
     {
         private readonly bool shared;
 
@@ -30,26 +32,35 @@ namespace GW2SDK.Http
             var primaryKey = $"{request.Method} {request.RequestUri}";
 
             ResponseCacheEntry? match = null;
+            DateTimeOffset? httpDate = null;
             await foreach (var cacheEntry in store.GetEntries(primaryKey))
             {
                 // First we need to check which cached responses can be used to satisfy the request
                 // Then we need to choose the newest one (most recent Date header)
-                if (Decide(request, cacheEntry) == ResponseCacheDecision.Hit)
+                var decision = Decide(request, cacheEntry);
+                if (decision == ResponseCacheDecision.Hit)
                 {
                     if (match is null)
                     {
                         match = cacheEntry;
+                        httpDate = cacheEntry.GetDate();
                     }
                     else
                     {
                         // Check if this cache entry has a newer Date than the last one
                         // If so, this is a better choice than the last entry
                         // If neither has a Date, proceed with the entry that was added last
-                        if (!match.Date.HasValue || cacheEntry.Date.GetValueOrDefault() > match.Date.Value)
+                        var date = cacheEntry.GetDate();
+                        if (!httpDate.HasValue || date.GetValueOrDefault() > httpDate.Value)
                         {
                             match = cacheEntry;
+                            httpDate = date;
                         }
                     }
+                }
+                else if (decision == ResponseCacheDecision.Validate)
+                {
+                    throw new NotImplementedException("// TODO");
                 }
             }
 
@@ -110,17 +121,22 @@ namespace GW2SDK.Http
 
             foreach (var varyBy in response.Headers.Vary)
             {
-                cacheEntry.Vary[varyBy] = request.Headers.GetValues(varyBy)
-                    .ToList();
+                if (request.Headers.TryGetValues(varyBy, out var found))
+                {
+                    cacheEntry.SecondaryKey[varyBy] = string.Join(",", found);
+                }
+                else
+                {
+                    cacheEntry.SecondaryKey[varyBy] = "";
+                }
             }
 
-            cacheEntry.StatusCode = response.StatusCode;
-            cacheEntry.Age = response.Headers.Age;
-            cacheEntry.Date = response.Headers.Date;
+            cacheEntry.StatusCode = (int)response.StatusCode;
             cacheEntry.RequestTime = requestTime;
             cacheEntry.ResponseTime = responseTime;
             cacheEntry.FreshnessLifetime = CalculateFreshness(response);
-
+            cacheEntry.ResponseHeaders = response.Headers.ToDictionary(header => header.Key, header => string.Join(",", header.Value));
+            cacheEntry.ContentHeaders = response.Content.Headers.ToDictionary(header => header.Key, header => string.Join(",", header.Value));
 #if NET
             cacheEntry.Content = await response.Content.ReadAsByteArrayAsync(cancellationToken)
                 .ConfigureAwait(false);
@@ -128,8 +144,6 @@ namespace GW2SDK.Http
             cacheEntry.Content = await response.Content.ReadAsByteArrayAsync()
                 .ConfigureAwait(false);
 #endif
-            cacheEntry.ResponseHeaders = response.Headers.ToList();
-            cacheEntry.ContentHeaders = response.Content.Headers.ToList();
             return cacheEntry;
         }
 
@@ -158,14 +172,15 @@ namespace GW2SDK.Http
 
         private static ResponseCacheDecision Decide(HttpRequestMessage request, ResponseCacheEntry cachedResponse)
         {
-            foreach (var (header, values) in cachedResponse.Vary)
+            foreach (var (field, value) in cachedResponse.SecondaryKey)
             {
-                if (!request.Headers.TryGetValues(header, out var found))
+                var fieldValue = "";
+                if (request.Headers.TryGetValues(field, out var found))
                 {
-                    return ResponseCacheDecision.Miss;
+                    fieldValue = string.Join(",", found);
                 }
 
-                if (!found.SequenceEqual(values, StringComparer.Ordinal))
+                if (!string.Equals(value, fieldValue, StringComparison.Ordinal))
                 {
                     return ResponseCacheDecision.Miss;
                 }
