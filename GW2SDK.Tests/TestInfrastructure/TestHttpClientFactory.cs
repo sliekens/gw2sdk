@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
-using System.Net;
 using System.Net.Http;
-using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using GW2SDK.Http;
 using Microsoft.Extensions.DependencyInjection;
@@ -54,7 +52,6 @@ namespace GW2SDK.Tests.TestInfrastructure
                     {
                         http.BaseAddress = baseAddress;
                         http.UseSchemaVersion(SchemaVersion.Latest);
-                        http.DefaultRequestHeaders.AcceptEncoding.Add(StringWithQualityHeaderValue.Parse("gzip"));
                     })
                 .ConfigurePrimaryHttpMessageHandler(() =>
                 {
