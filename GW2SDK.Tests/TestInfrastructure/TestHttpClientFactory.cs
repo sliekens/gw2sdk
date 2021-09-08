@@ -3,6 +3,7 @@ using System.Diagnostics;
 using System.Net.Http;
 using System.Threading.Tasks;
 using GW2SDK.Http;
+using GW2SDK.Http.Caching;
 using Microsoft.Extensions.DependencyInjection;
 using Polly;
 using Polly.Timeout;
@@ -37,11 +38,8 @@ namespace GW2SDK.Tests.TestInfrastructure
 
             AddPolicies(services);
 
-            services.AddSingleton<IHttpCache>(sp =>
-            {
-                var redis = ConnectionMultiplexer.Connect("localhost");
-                return new DefaultHttpCache(true, new RedisHttpCacheStore(redis));
-            });
+            services.AddSingleton<IHttpCacheStore, RedisHttpCacheStore>(sp =>
+                new RedisHttpCacheStore(ConnectionMultiplexer.Connect("localhost")));
             services.AddTransient<UnauthorizedMessageHandler>();
             services.AddTransient<BadMessageHandler>();
             services.AddTransient<RateLimitHandler>();
