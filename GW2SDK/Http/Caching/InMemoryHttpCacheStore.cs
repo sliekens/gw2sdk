@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using JetBrains.Annotations;
 
-namespace GW2SDK.Http
+namespace GW2SDK.Http.Caching
 {
     [PublicAPI]
     public sealed class InMemoryHttpCacheStore : IHttpCacheStore

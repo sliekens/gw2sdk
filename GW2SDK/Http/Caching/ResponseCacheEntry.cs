@@ -5,7 +5,7 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using JetBrains.Annotations;
 
-namespace GW2SDK.Http
+namespace GW2SDK.Http.Caching
 {
     [PublicAPI]
     public sealed class ResponseCacheEntry
@@ -26,26 +26,42 @@ namespace GW2SDK.Http
 
         public byte[] Content { get; set; } = Array.Empty<byte>();
 
+        private bool parsedDate;
+
+        private DateTimeOffset? date;
+
         public DateTimeOffset? GetDate()
         {
-            using var cachedResponse = new HttpResponseMessage();
-            if (ResponseHeaders.TryGetValue("Date", out var date))
+            if (!parsedDate)
             {
-                cachedResponse.Headers.Add("Date", date);
+                if (ResponseHeaders.TryGetValue("Date", out var found))
+                {
+                    using var cachedResponse = new HttpResponseMessage();
+                    cachedResponse.Headers.Add("Date", found);
+                    date = cachedResponse.Headers.Date;
+                    parsedDate = true;
+                }
             }
 
-            return cachedResponse.Headers.Date;
+            return date;
         }
 
+        private bool parsedAge;
+        private TimeSpan? age;
         public TimeSpan? GetAge()
         {
-            using var cachedResponse = new HttpResponseMessage();
-            if (ResponseHeaders.TryGetValue("Age", out var age))
+            if (!parsedAge)
             {
-                cachedResponse.Headers.Add("Age", age);
+                if (ResponseHeaders.TryGetValue("Age", out var found))
+                {
+                    using var cachedResponse = new HttpResponseMessage();
+                    cachedResponse.Headers.Add("Age", found);
+                    age = cachedResponse.Headers.Age;
+                    parsedAge = true;
+                }
             }
 
-            return cachedResponse.Headers.Age;
+            return age;
         }
 
         public TimeSpan CalculateAge()
@@ -57,14 +73,14 @@ namespace GW2SDK.Http
             return correctedInitialAge + residentTime;
         }
 
-        public CacheControlHeaderValue? GetCacheControl()
+        public bool NoCache()
         {
             if (ResponseHeaders.TryGetValue("Cache-Control", out var value))
             {
-                return CacheControlHeaderValue.Parse(value);
+                return CacheControlHeaderValue.Parse(value).NoCache;
             }
 
-            return null;
+            return false;
         }
 
         private TimeSpan CalculateApparentAge(DateTimeOffset? date)

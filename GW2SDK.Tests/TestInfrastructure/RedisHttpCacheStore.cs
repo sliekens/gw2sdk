@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Threading.Tasks;
 using GW2SDK.Http;
+using GW2SDK.Http.Caching;
 using StackExchange.Redis;
 
 namespace GW2SDK.Tests.TestInfrastructure

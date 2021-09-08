@@ -2,7 +2,7 @@
 using System.Net.Http;
 using JetBrains.Annotations;
 
-namespace GW2SDK.Http
+namespace GW2SDK.Http.Caching
 {
     // TODO: revalidate support
     [PublicAPI]
