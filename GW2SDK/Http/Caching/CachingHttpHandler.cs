@@ -10,16 +10,16 @@ using JetBrains.Annotations;
 namespace GW2SDK.Http.Caching
 {
     [PublicAPI]
-    public sealed class CachingDelegatingHandler : DelegatingHandler
+    public sealed class CachingHttpHandler : DelegatingHandler
     {
         private readonly IHttpCacheStore store;
 
-        public CachingDelegatingHandler(IHttpCacheStore? store)
+        public CachingHttpHandler(IHttpCacheStore? store = null)
         {
             this.store = store ?? new InMemoryHttpCacheStore();
         }
 
-        public CachingDelegatingHandler(HttpMessageHandler innerHandler, IHttpCacheStore? store)
+        public CachingHttpHandler(HttpMessageHandler innerHandler, IHttpCacheStore? store = null)
             : base(innerHandler)
         {
             this.store = store ?? new InMemoryHttpCacheStore();

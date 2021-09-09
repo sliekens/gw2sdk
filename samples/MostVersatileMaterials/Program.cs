@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using GW2SDK;
 using GW2SDK.Http;
+using GW2SDK.Http.Caching;
 using GW2SDK.Items;
 using GW2SDK.Json;
 using GW2SDK.Recipes;
@@ -24,7 +24,7 @@ namespace MostVersatileMaterials
 
         private static async Task Main(string[] args)
         {
-            using var http = new HttpClient(new SocketsHttpHandler(), true);
+            using var http = CreateHttpClient();
 
             http.UseGuildWars2();
             http.UseLanguage(Language.English);
@@ -36,10 +36,16 @@ namespace MostVersatileMaterials
             var (ingredients, recipes) = await Progress()
                 .StartAsync(async ctx =>
                 {
-                    var recipesProgress =
-                        ctx.AddTask("Fetching recipes", new ProgressTaskSettings { AutoStart = false });
-                    var ingredientsProgress =
-                        ctx.AddTask("Fetching ingredients", new ProgressTaskSettings { AutoStart = false });
+                    var recipesProgress = ctx.AddTask("Fetching recipes",
+                        new ProgressTaskSettings
+                        {
+                            AutoStart = false
+                        });
+                    var ingredientsProgress = ctx.AddTask("Fetching ingredients",
+                        new ProgressTaskSettings
+                        {
+                            AutoStart = false
+                        });
 
                     var craftable = await GetRecipes(recipesService, recipesProgress);
 
@@ -104,6 +110,24 @@ namespace MostVersatileMaterials
             } while (AnsiConsole.Confirm("Do you want to choose again?"));
         }
 
+        private static HttpClient CreateHttpClient()
+        {
+            var socketsHandler = new SocketsHttpHandler();
+
+            var fixVaryHandler = new FixVaryHandler
+            {
+                InnerHandler = socketsHandler
+            };
+
+            var cachingHandler = new CachingHttpHandler
+            {
+                InnerHandler = fixVaryHandler,
+                CachingBehavior = CachingBehavior.Private
+            };
+
+            return new HttpClient(cachingHandler, true);
+        }
+
         private static Progress Progress() =>
             AnsiConsole.Progress()
                 .Columns(new TaskDescriptionColumn(),
@@ -117,7 +141,8 @@ namespace MostVersatileMaterials
             progress.StartTask();
             try
             {
-                return await recipesService.GetRecipes(progress: new Progress<ICollectionContext>(ctx => UpdateProgress(ctx, progress)))
+                return await recipesService
+                    .GetRecipes(progress: new Progress<ICollectionContext>(ctx => UpdateProgress(ctx, progress)))
                     .Select(result => result.Value)
                     .OrderByDescending(recipe => recipe.Id)
                     .ToListAsync();
@@ -137,7 +162,8 @@ namespace MostVersatileMaterials
             var items = new List<Item>(itemIds.Count);
 
             progress.StartTask();
-            await foreach (var item in itemsService.GetItemsByIds(itemIds, progress: new Progress<ICollectionContext>(ctx => UpdateProgress(ctx, progress))))
+            await foreach (var item in itemsService.GetItemsByIds(itemIds,
+                progress: new Progress<ICollectionContext>(ctx => UpdateProgress(ctx, progress))))
             {
                 items.Add(item.Value);
             }

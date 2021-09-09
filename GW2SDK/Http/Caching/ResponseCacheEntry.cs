@@ -10,7 +10,15 @@ namespace GW2SDK.Http.Caching
     [PublicAPI]
     public sealed class ResponseCacheEntry
     {
+        private TimeSpan? age;
+
         public Dictionary<string, string> ContentHeaders = new();
+
+        private DateTimeOffset? date;
+
+        private bool parsedAge;
+
+        private bool parsedDate;
 
         public Dictionary<string, string> ResponseHeaders = new();
 
@@ -25,10 +33,6 @@ namespace GW2SDK.Http.Caching
         public TimeSpan FreshnessLifetime { get; set; }
 
         public byte[] Content { get; set; } = Array.Empty<byte>();
-
-        private bool parsedDate;
-
-        private DateTimeOffset? date;
 
         public DateTimeOffset? GetDate()
         {
@@ -46,8 +50,6 @@ namespace GW2SDK.Http.Caching
             return date;
         }
 
-        private bool parsedAge;
-        private TimeSpan? age;
         public TimeSpan? GetAge()
         {
             if (!parsedAge)
@@ -64,6 +66,19 @@ namespace GW2SDK.Http.Caching
             return age;
         }
 
+        public bool NoCache()
+        {
+            if (ResponseHeaders.TryGetValue("Cache-Control", out var value))
+            {
+                if (CacheControlHeaderValue.TryParse(value, out var parsed))
+                {
+                    return parsed!.NoCache;
+                }
+            }
+
+            return false;
+        }
+
         public TimeSpan CalculateAge()
         {
             var apparentAge = CalculateApparentAge(GetDate());
@@ -71,16 +86,6 @@ namespace GW2SDK.Http.Caching
             var correctedInitialAge = Max(apparentAge, correctedAge);
             var residentTime = DateTimeOffset.Now - ResponseTime;
             return correctedInitialAge + residentTime;
-        }
-
-        public bool NoCache()
-        {
-            if (ResponseHeaders.TryGetValue("Cache-Control", out var value))
-            {
-                return CacheControlHeaderValue.Parse(value).NoCache;
-            }
-
-            return false;
         }
 
         private TimeSpan CalculateApparentAge(DateTimeOffset? date)

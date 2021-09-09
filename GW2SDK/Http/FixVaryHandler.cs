@@ -7,7 +7,7 @@ namespace GW2SDK.Http
 {
     /// <summary>Adds missing headers to the 'Vary' list.</summary>
     [PublicAPI]
-    public sealed class VaryFixHandler : DelegatingHandler
+    public sealed class FixVaryHandler : DelegatingHandler
     {
         protected override async Task<HttpResponseMessage> SendAsync(
             HttpRequestMessage request,
