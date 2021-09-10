@@ -16,11 +16,17 @@ namespace GW2SDK.Http.Caching
 
         private DateTimeOffset? date;
 
+        private DateTimeOffset? lastModified;
+
         private bool parsedAge;
 
         private bool parsedDate;
 
+        private bool parsedLastModified;
+
         public Dictionary<string, string> ResponseHeaders = new();
+
+        public Guid Id { get; set; }
 
         public Dictionary<string, string> SecondaryKey { get; set; } = new();
 
@@ -77,6 +83,22 @@ namespace GW2SDK.Http.Caching
             }
 
             return false;
+        }
+
+        public DateTimeOffset? LastModified()
+        {
+            if (!parsedLastModified)
+            {
+                if (ResponseHeaders.TryGetValue("Last-Modified", out var value))
+                {
+                    using var cachedResponse = new HttpResponseMessage();
+                    cachedResponse.Content.Headers.Add("Last-Modified", value);
+                    lastModified = cachedResponse.Content.Headers.LastModified;
+                    parsedLastModified = true;
+                }
+            }
+
+            return lastModified;
         }
 
         public TimeSpan CalculateAge()

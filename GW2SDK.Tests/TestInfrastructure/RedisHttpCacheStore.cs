@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Threading.Tasks;
-using GW2SDK.Http;
 using GW2SDK.Http.Caching;
 using StackExchange.Redis;
 
@@ -17,7 +16,7 @@ namespace GW2SDK.Tests.TestInfrastructure
             this.redis = redis ?? throw new ArgumentNullException(nameof(redis));
         }
 
-        public async IAsyncEnumerable<ResponseCacheEntry> GetEntries(string primaryKey)
+        public async IAsyncEnumerable<ResponseCacheEntry> GetEntriesAsync(string primaryKey)
         {
             var db = redis.GetDatabase();
 
@@ -42,15 +41,18 @@ namespace GW2SDK.Tests.TestInfrastructure
                     }
                     else if (kvp.Name == "request-time")
                     {
-                        retVal.RequestTime = DateTimeOffset.ParseExact(kvp.Value.ToString(), "O", CultureInfo.InvariantCulture);
+                        retVal.RequestTime =
+                            DateTimeOffset.ParseExact(kvp.Value.ToString(), "O", CultureInfo.InvariantCulture);
                     }
                     else if (kvp.Name == "response-time")
                     {
-                        retVal.ResponseTime = DateTimeOffset.ParseExact(kvp.Value.ToString(), "O", CultureInfo.InvariantCulture);
+                        retVal.ResponseTime =
+                            DateTimeOffset.ParseExact(kvp.Value.ToString(), "O", CultureInfo.InvariantCulture);
                     }
                     else if (kvp.Name == "freshness-lifetime")
                     {
-                        retVal.FreshnessLifetime = TimeSpan.ParseExact(kvp.Value.ToString(), "c", CultureInfo.InvariantCulture);
+                        retVal.FreshnessLifetime =
+                            TimeSpan.ParseExact(kvp.Value.ToString(), "c", CultureInfo.InvariantCulture);
                     }
                     else if (kvp.Name.StartsWith("response-header-field:"))
                     {
@@ -80,32 +82,38 @@ namespace GW2SDK.Tests.TestInfrastructure
             }
         }
 
-        public async Task StoreEntry(string primaryKey, ResponseCacheEntry entry)
+        public async Task StoreEntryAsync(string primaryKey, ResponseCacheEntry entry)
         {
             var db = redis.GetDatabase();
             var expires = DateTime.UtcNow.Add(entry.FreshnessLifetime - entry.CalculateAge());
 
-            var responseId = await StoreResponse(db, entry, expires);
-
             RedisKey key = primaryKey;
-            await db.ListLeftPushAsync(key, responseId.ToByteArray());
+
+            // TODO: make transactional
+            if (entry.Id == default)
+            {
+                entry.Id = Guid.NewGuid();
+                await db.ListLeftPushAsync(key, entry.Id.ToByteArray());
+            }
+
+            await StoreResponse(db, entry, expires);
             await db.ListTrimAsync(key, 0, 99);
         }
 
-        private static async Task<Guid> StoreResponse(
+        private static async Task StoreResponse(
             IDatabase db,
             ResponseCacheEntry entry,
             DateTime expires
         )
         {
-            var id = Guid.NewGuid();
-
-            RedisKey key = id.ToByteArray();
+            RedisKey key = entry.Id.ToByteArray();
 
             await db.HashSetAsync(key, "status-code", entry.StatusCode);
             await db.HashSetAsync(key, "request-time", entry.RequestTime.ToString("O", CultureInfo.InvariantCulture));
             await db.HashSetAsync(key, "response-time", entry.ResponseTime.ToString("O", CultureInfo.InvariantCulture));
-            await db.HashSetAsync(key, "freshness-lifetime", entry.FreshnessLifetime.ToString("c", CultureInfo.InvariantCulture));
+            await db.HashSetAsync(key,
+                "freshness-lifetime",
+                entry.FreshnessLifetime.ToString("c", CultureInfo.InvariantCulture));
 
             foreach (var kvp in entry.ResponseHeaders)
             {
@@ -125,8 +133,6 @@ namespace GW2SDK.Tests.TestInfrastructure
             await db.HashSetAsync(key, "message-body", entry.Content);
 
             await db.KeyExpireAsync(key, expires);
-
-            return id;
         }
     }
 }

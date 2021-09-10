@@ -10,7 +10,7 @@ namespace GW2SDK.Http.Caching
     {
         private readonly ConcurrentDictionary<string, ResponseCacheEntry> responseCache = new();
 
-        public async IAsyncEnumerable<ResponseCacheEntry> GetEntries(string primaryKey)
+        public async IAsyncEnumerable<ResponseCacheEntry> GetEntriesAsync(string primaryKey)
         {
             if (responseCache.TryGetValue(primaryKey, out var entry))
             {
@@ -20,7 +20,7 @@ namespace GW2SDK.Http.Caching
             await Task.CompletedTask.ConfigureAwait(false);
         }
 
-        public Task StoreEntry(string primaryKey, ResponseCacheEntry entry)
+        public Task StoreEntryAsync(string primaryKey, ResponseCacheEntry entry)
         {
             responseCache[primaryKey] = entry;
 

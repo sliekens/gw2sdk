@@ -6,6 +6,7 @@ using System.Net.Http.Headers;
 using System.Threading;
 using System.Threading.Tasks;
 using JetBrains.Annotations;
+using static System.Net.Http.HttpMethod;
 
 namespace GW2SDK.Http.Caching
 {
@@ -35,8 +36,8 @@ namespace GW2SDK.Http.Caching
             var primaryKey = $"{request.Method} {request.RequestUri}";
 
             var cachePolicy = ResponseCacheDecision.Miss;
-            ResponseCacheEntry? match = null;
-            await foreach (var cacheEntry in store.GetEntries(primaryKey)
+            ResponseCacheEntry? cachedResponse = null;
+            await foreach (var cacheEntry in store.GetEntriesAsync(primaryKey)
                 .WithCancellation(cancellationToken))
             {
                 // First we need to check which cached responses can be used to satisfy the request
@@ -47,16 +48,16 @@ namespace GW2SDK.Http.Caching
                     continue;
                 }
 
-                if (match is null || cacheEntry.GetDate() > match.GetDate())
+                if (cachedResponse is null || cacheEntry.GetDate() > cachedResponse.GetDate())
                 {
-                    match = cacheEntry;
+                    cachedResponse = cacheEntry;
                     cachePolicy = decision;
                 }
             }
 
             if (cachePolicy == ResponseCacheDecision.Hit)
             {
-                return match!.CreateResponse(request);
+                return cachedResponse!.CreateResponse(request);
             }
 
             if (cachePolicy == ResponseCacheDecision.Stale)
@@ -64,7 +65,7 @@ namespace GW2SDK.Http.Caching
                 throw new NotImplementedException("// TODO");
             }
 
-            if (cachePolicy == ResponseCacheDecision.Validate)
+            if (cachePolicy == ResponseCacheDecision.Validate && cachedResponse is not null)
             {
                 throw new NotImplementedException("// TODO");
             }
@@ -76,7 +77,7 @@ namespace GW2SDK.Http.Caching
 
             if (CanStore(response))
             {
-                await Store(request, response, requestTime, responseTime, cancellationToken)
+                await Insert(primaryKey, request, response, requestTime, responseTime, cancellationToken)
                     .ConfigureAwait(false);
             }
 
@@ -119,9 +120,8 @@ namespace GW2SDK.Http.Caching
                 }
             }
 
-            // TODO: support HEAD and POST
-            var request = response.RequestMessage;
-            if (request?.Method != HttpMethod.Get)
+            var request = response.RequestMessage ?? throw new InvalidOperationException("Response must be associated with a request.");
+            if (request.Method != Get)
             {
                 return false;
             }
@@ -225,10 +225,13 @@ namespace GW2SDK.Http.Caching
                 return response.Content.Headers.Expires.Value - response.Headers.Date.Value;
             }
 
-            return TimeSpan.FromMinutes(5);
+            // TODO: Calculating Heuristic Freshness
+            // https://datatracker.ietf.org/doc/html/rfc7234#section-4.2.2
+            return TimeSpan.Zero;
         }
 
-        public async Task Store(
+        public async Task Insert(
+            string primaryKey,
             HttpRequestMessage request,
             HttpResponseMessage response,
             DateTimeOffset requestTime,
@@ -236,10 +239,9 @@ namespace GW2SDK.Http.Caching
             CancellationToken cancellationToken
         )
         {
-            var primaryKey = $"{request.Method} {request.RequestUri}";
+            var cacheEntry = new ResponseCacheEntry();
             cancellationToken.ThrowIfCancellationRequested();
 
-            var cacheEntry = new ResponseCacheEntry();
             foreach (var varyBy in response.Headers.Vary)
             {
                 if (request.Headers.TryGetValues(varyBy, out var found))
@@ -267,7 +269,7 @@ namespace GW2SDK.Http.Caching
             cacheEntry.Content = await response.Content.ReadAsByteArrayAsync()
                 .ConfigureAwait(false);
 #endif
-            await store.StoreEntry(primaryKey, cacheEntry)
+            await store.StoreEntryAsync(primaryKey, cacheEntry)
                 .ConfigureAwait(false);
         }
     }
