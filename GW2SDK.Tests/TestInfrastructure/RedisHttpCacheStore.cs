@@ -97,11 +97,14 @@ namespace GW2SDK.Tests.TestInfrastructure
             if (entry.Id == default)
             {
                 entry.Id = Guid.NewGuid();
-                await db.ListLeftPushAsync(key, entry.Id.ToByteArray());
+                var length = await db.ListLeftPushAsync(key, entry.Id.ToByteArray());
+                if (length > 100)
+                {
+                    await db.ListTrimAsync(key, 0, 99);
+                }
             }
 
             await StoreResponse(db, entry, ttl);
-            await db.ListTrimAsync(key, 0, 99);
         }
 
         private static async Task StoreResponse(
@@ -111,31 +114,31 @@ namespace GW2SDK.Tests.TestInfrastructure
         )
         {
             RedisKey key = entry.Id.ToByteArray();
-
-            await db.HashSetAsync(key, "status-code", entry.StatusCode);
-            await db.HashSetAsync(key, "request-time", entry.RequestTime.ToString("O", CultureInfo.InvariantCulture));
-            await db.HashSetAsync(key, "response-time", entry.ResponseTime.ToString("O", CultureInfo.InvariantCulture));
-            await db.HashSetAsync(key,
-                "freshness-lifetime",
-                entry.FreshnessLifetime.ToString("c", CultureInfo.InvariantCulture));
+            var entries = new List<HashEntry>
+            {
+                new("status-code", entry.StatusCode),
+                new("request-time", entry.RequestTime.ToString("O", CultureInfo.InvariantCulture)),
+                new("response-time", entry.ResponseTime.ToString("O", CultureInfo.InvariantCulture)),
+                new("freshness-lifetime", entry.FreshnessLifetime.ToString("c", CultureInfo.InvariantCulture)),
+                new("message-body", entry.Content),
+            };
 
             foreach (var kvp in entry.ResponseHeaders)
             {
-                await db.HashSetAsync(key, $"response-header-field:{kvp.Key}", kvp.Value);
+                entries.Add(new HashEntry($"response-header-field:{kvp.Key}", kvp.Value));
             }
 
             foreach (var kvp in entry.ContentHeaders)
             {
-                await db.HashSetAsync(key, $"content-header-field:{kvp.Key}", kvp.Value);
+                entries.Add(new HashEntry($"content-header-field:{kvp.Key}", kvp.Value));
             }
 
             foreach (var kvp in entry.SecondaryKey)
             {
-                await db.HashSetAsync(key, $"vary:{kvp.Key}", kvp.Value);
+                entries.Add(new HashEntry($"vary:{kvp.Key}", kvp.Value));
             }
 
-            await db.HashSetAsync(key, "message-body", entry.Content);
-
+            await db.HashSetAsync(key, entries.ToArray());
             await db.KeyExpireAsync(key, ttl);
         }
     }
