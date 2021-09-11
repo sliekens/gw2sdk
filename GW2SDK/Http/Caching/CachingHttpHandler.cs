@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -13,6 +14,8 @@ namespace GW2SDK.Http.Caching
     [PublicAPI]
     public sealed class CachingHttpHandler : DelegatingHandler
     {
+        private static readonly NameValueHeaderValue NoCache = NameValueHeaderValue.Parse("no-cache");
+
         private readonly IHttpCacheStore store;
 
         public CachingHttpHandler(IHttpCacheStore? store = null)
@@ -36,7 +39,7 @@ namespace GW2SDK.Http.Caching
             var primaryKey = $"{request.Method} {request.RequestUri}";
 
             var cachePolicy = ResponseCacheDecision.Miss;
-            ResponseCacheEntry? cachedResponse = null;
+            ResponseCacheEntry? selectedResponse = null;
             await foreach (var cacheEntry in store.GetEntriesAsync(primaryKey)
                 .WithCancellation(cancellationToken))
             {
@@ -48,25 +51,37 @@ namespace GW2SDK.Http.Caching
                     continue;
                 }
 
-                if (cachedResponse is null || cacheEntry.GetDate() > cachedResponse.GetDate())
+                if (selectedResponse is null || MoreRecent(cacheEntry, selectedResponse))
                 {
-                    cachedResponse = cacheEntry;
+                    selectedResponse = cacheEntry;
                     cachePolicy = decision;
                 }
+
+                static bool MoreRecent(ResponseCacheEntry next, ResponseCacheEntry selected) =>
+                    next.GetResponseHeaders()
+                        .Date > selected.GetResponseHeaders()
+                        .Date;
             }
 
-            if (cachePolicy == ResponseCacheDecision.Hit)
+            if (cachePolicy == ResponseCacheDecision.Fresh)
             {
-                return cachedResponse!.CreateResponse(request);
+                return selectedResponse!.CreateResponse(request);
             }
 
             if (cachePolicy == ResponseCacheDecision.Stale)
             {
-                throw new NotImplementedException("// TODO");
+                // Serving Stale Responses
+                // https://datatracker.ietf.org/doc/html/rfc7234#section-4.2.4
+                var staleResponse = selectedResponse!.CreateResponse(request);
+                staleResponse.Headers.Warning.Add(new WarningHeaderValue(110, "-", "Response is Stale"));
+                return staleResponse;
             }
 
-            if (cachePolicy == ResponseCacheDecision.Validate && cachedResponse is not null)
+            if (cachePolicy == ResponseCacheDecision.MustValidate)
             {
+                // Validation
+                // https://datatracker.ietf.org/doc/html/rfc7234#section-4.3
+                Debug.Assert(selectedResponse is not null);
                 throw new NotImplementedException("// TODO");
             }
 
@@ -120,7 +135,8 @@ namespace GW2SDK.Http.Caching
                 }
             }
 
-            var request = response.RequestMessage ?? throw new InvalidOperationException("Response must be associated with a request.");
+            var request = response.RequestMessage ??
+                throw new InvalidOperationException("Response must be associated with a request.");
             if (request.Method != Get)
             {
                 return false;
@@ -165,10 +181,12 @@ namespace GW2SDK.Http.Caching
             return CanStore(response, true);
         }
 
-        private static ResponseCacheDecision CanReuse(HttpRequestMessage request, ResponseCacheEntry cachedResponse)
+        private ResponseCacheDecision CanReuse(HttpRequestMessage request, ResponseCacheEntry cachedResponse)
         {
             // Constructing Responses from Caches
             // https://datatracker.ietf.org/doc/html/rfc7234#section-4
+
+            // First ensure the response can be used for Vary-ed requests, to avoid sending back the wrong content even though the URL matches
             foreach (var (field, value) in cachedResponse.SecondaryKey)
             {
                 var fieldValue = "";
@@ -183,26 +201,54 @@ namespace GW2SDK.Http.Caching
                 }
             }
 
-            if (request.Headers.CacheControl?.NoCache == true ||
-                request.Headers.Pragma.Contains(NameValueHeaderValue.Parse("no-cache")))
+            // Then check all the 'no-cache' directives, which all mean check the origin before returning a cached response
+            var responseHeaders = cachedResponse.GetResponseHeaders();
+            if (request.Headers.CacheControl?.NoCache == true || request.Headers.Pragma.Contains(NoCache) ||
+                responseHeaders.CacheControl?.NoCache == true)
             {
-                return ResponseCacheDecision.Validate;
+                return ResponseCacheDecision.MustValidate;
             }
 
-            if (cachedResponse.NoCache())
+            // Then check if the response is stale and if we can maybe still use it
+            var calculatedAge = cachedResponse.CalculateAge();
+            if (cachedResponse.FreshnessLifetime <= calculatedAge)
             {
-                return ResponseCacheDecision.Validate;
+                if (request.Headers.CacheControl?.MaxStale == false)
+                {
+                    return ResponseCacheDecision.MustValidate;
+                }
+
+                if (request.Headers.CacheControl?.MaxStaleLimit.HasValue == true)
+                {
+                    var staleness = calculatedAge - cachedResponse.FreshnessLifetime;
+                    if (staleness > request.Headers.CacheControl.MaxStaleLimit)
+                    {
+                        return ResponseCacheDecision.MustValidate;
+                    }
+                }
+
+                if (responseHeaders.CacheControl?.MustRevalidate == true)
+                {
+                    return ResponseCacheDecision.MustValidate;
+                }
+
+                if (CachingBehavior == CachingBehavior.Public)
+                {
+                    if (responseHeaders.CacheControl?.SharedMaxAge.HasValue == true)
+                    {
+                        return ResponseCacheDecision.MustValidate;
+                    }
+
+                    if (responseHeaders.CacheControl?.ProxyRevalidate == true)
+                    {
+                        return ResponseCacheDecision.MustValidate;
+                    }
+                }
+
+                return ResponseCacheDecision.Stale;
             }
 
-            if (cachedResponse.CalculateAge() < cachedResponse.FreshnessLifetime)
-            {
-                return ResponseCacheDecision.Hit;
-            }
-
-            // TODO: support serving stale responses if directives allow it
-            // Serving Stale Responses
-            // https://datatracker.ietf.org/doc/html/rfc7234#section-4.2.4
-            return ResponseCacheDecision.Validate;
+            return ResponseCacheDecision.Fresh;
         }
 
         private TimeSpan CalculateFreshness(HttpResponseMessage response)

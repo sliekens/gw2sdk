@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
@@ -10,19 +11,11 @@ namespace GW2SDK.Http.Caching
     [PublicAPI]
     public sealed class ResponseCacheEntry
     {
-        private TimeSpan? age;
+        private HttpContentHeaders? contentHeaders;
 
         public Dictionary<string, string> ContentHeaders = new();
 
-        private DateTimeOffset? date;
-
-        private DateTimeOffset? lastModified;
-
-        private bool parsedAge;
-
-        private bool parsedDate;
-
-        private bool parsedLastModified;
+        private HttpResponseHeaders? responseHeaders;
 
         public Dictionary<string, string> ResponseHeaders = new();
 
@@ -40,71 +33,55 @@ namespace GW2SDK.Http.Caching
 
         public byte[] Content { get; set; } = Array.Empty<byte>();
 
-        public DateTimeOffset? GetDate()
+        [MemberNotNull(nameof(responseHeaders))]
+        private void ParseResponseHeaders()
         {
-            if (!parsedDate)
+            if (responseHeaders is null)
             {
-                if (ResponseHeaders.TryGetValue("Date", out var found))
+                using var cachedResponse = new HttpResponseMessage();
+                foreach (var (fieldName, fieldValue) in ResponseHeaders)
                 {
-                    using var cachedResponse = new HttpResponseMessage();
-                    cachedResponse.Headers.Add("Date", found);
-                    date = cachedResponse.Headers.Date;
-                    parsedDate = true;
+                    cachedResponse.Headers.Add(fieldName, fieldValue);
                 }
-            }
 
-            return date;
+                responseHeaders = cachedResponse.Headers;
+            }
         }
 
-        public TimeSpan? GetAge()
+        [MemberNotNull(nameof(contentHeaders))]
+        private void ParseContentHeaders()
         {
-            if (!parsedAge)
+            if (contentHeaders is null)
             {
-                if (ResponseHeaders.TryGetValue("Age", out var found))
+                using var cachedResponse = new HttpResponseMessage();
+                foreach (var (fieldName, fieldValue) in ContentHeaders)
                 {
-                    using var cachedResponse = new HttpResponseMessage();
-                    cachedResponse.Headers.Add("Age", found);
-                    age = cachedResponse.Headers.Age;
-                    parsedAge = true;
+                    cachedResponse.Content.Headers.Add(fieldName, fieldValue);
                 }
-            }
 
-            return age;
+                contentHeaders = cachedResponse.Content.Headers;
+            }
+        }
+        
+
+        public HttpResponseHeaders GetResponseHeaders()
+        {
+            ParseResponseHeaders();
+            return responseHeaders;
         }
 
-        public bool NoCache()
+        public HttpContentHeaders GetContentHeaders()
         {
-            if (ResponseHeaders.TryGetValue("Cache-Control", out var value))
-            {
-                if (CacheControlHeaderValue.TryParse(value, out var parsed))
-                {
-                    return parsed!.NoCache;
-                }
-            }
-
-            return false;
-        }
-
-        public DateTimeOffset? LastModified()
-        {
-            if (!parsedLastModified)
-            {
-                if (ResponseHeaders.TryGetValue("Last-Modified", out var value))
-                {
-                    using var cachedResponse = new HttpResponseMessage();
-                    cachedResponse.Content.Headers.Add("Last-Modified", value);
-                    lastModified = cachedResponse.Content.Headers.LastModified;
-                    parsedLastModified = true;
-                }
-            }
-
-            return lastModified;
+            ParseContentHeaders();
+            return contentHeaders;
         }
 
         public TimeSpan CalculateAge()
         {
-            var apparentAge = CalculateApparentAge(GetDate());
-            var correctedAge = CalculateCorrectedAge(GetAge());
+            var apparentAge = CalculateApparentAge(GetResponseHeaders()
+                .Date);
+            var correctedAge = CalculateCorrectedAge(GetResponseHeaders()
+                .Age);
             var correctedInitialAge = Max(apparentAge, correctedAge);
             var residentTime = DateTimeOffset.Now - ResponseTime;
             return correctedInitialAge + residentTime;

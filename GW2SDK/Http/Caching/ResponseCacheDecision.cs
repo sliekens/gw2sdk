@@ -7,16 +7,16 @@ namespace GW2SDK.Http.Caching
     [DefaultValue(Miss)]
     public enum ResponseCacheDecision
     {
-        /// <summary>Indicates that no stored response can be reused for a request.</summary>
+        /// <summary>Indicates that the origin must be contacted for a request.</summary>
         Miss,
 
         /// <summary>Indicates that a stored response can be reused for a request.</summary>
-        Hit,
+        Fresh,
 
-        /// <summary>Indicates that a stored response was found but must be validated with the origin server.</summary>
-        Validate,
+        /// <summary>Indicates that a stored response exists for a request, but it must be validated with the origin.</summary>
+        MustValidate,
 
-        /// <summary>Indicates that a stored response past its freshness lifetime can be reused (either explicitly or because the origin server is unreachable).</summary>
+        /// <summary>Indicates that a stale response can be reused for a request without validating.</summary>
         Stale
     }
 }

@@ -85,7 +85,11 @@ namespace GW2SDK.Tests.TestInfrastructure
         public async Task StoreEntryAsync(string primaryKey, ResponseCacheEntry entry)
         {
             var db = redis.GetDatabase();
-            var expires = DateTime.UtcNow.Add(entry.FreshnessLifetime - entry.CalculateAge());
+
+            var ttl = entry.FreshnessLifetime - entry.CalculateAge();
+
+            // Add a bit of margin for processing responses with a small freshness
+            ttl += TimeSpan.FromMinutes(5);
 
             RedisKey key = primaryKey;
 
@@ -96,14 +100,14 @@ namespace GW2SDK.Tests.TestInfrastructure
                 await db.ListLeftPushAsync(key, entry.Id.ToByteArray());
             }
 
-            await StoreResponse(db, entry, expires);
+            await StoreResponse(db, entry, ttl);
             await db.ListTrimAsync(key, 0, 99);
         }
 
         private static async Task StoreResponse(
             IDatabase db,
             ResponseCacheEntry entry,
-            DateTime expires
+            TimeSpan ttl
         )
         {
             RedisKey key = entry.Id.ToByteArray();
@@ -132,7 +136,7 @@ namespace GW2SDK.Tests.TestInfrastructure
 
             await db.HashSetAsync(key, "message-body", entry.Content);
 
-            await db.KeyExpireAsync(key, expires);
+            await db.KeyExpireAsync(key, ttl);
         }
     }
 }
