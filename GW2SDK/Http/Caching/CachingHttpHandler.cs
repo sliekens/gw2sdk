@@ -148,7 +148,12 @@ namespace GW2SDK.Http.Caching
                 return false;
             }
 
-            if (request.Headers.CacheControl?.NoStore == true || response.Headers.CacheControl?.NoStore == true)
+            if (request.Headers.CacheControl?.NoStore == true)
+            {
+                return false;
+            }
+
+            if (response.Headers.CacheControl?.NoStore == true || response.Headers.Vary.Count == 1 && response.Headers.Vary.Contains("*"))
             {
                 return false;
             }
