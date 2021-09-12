@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Net.Http;
+using System.Text.Json;
+using System.Threading;
 using System.Threading.Tasks;
 using GW2SDK.Http.Caching;
 using StackExchange.Redis;
@@ -21,15 +23,18 @@ namespace GW2SDK.Tests.TestInfrastructure
         {
             var db = redis.GetDatabase();
 
-            var cachedResponseKeys = await db.ListRangeAsync(primaryKey);
+            var cachedResponseKeys = await db.ListRangeAsync(primaryKey)
+                .ConfigureAwait(false);
 
             foreach (var cachedResponseKey in cachedResponseKeys)
             {
-                var hash = await db.HashGetAllAsync((byte[])cachedResponseKey);
+                var hash = await db.HashGetAllAsync((byte[])cachedResponseKey)
+                    .ConfigureAwait(false);
                 if (hash.Length == 0)
                 {
                     // Assume the key expired
-                    await db.ListRemoveAsync(primaryKey, cachedResponseKey);
+                    await db.ListRemoveAsync(primaryKey, cachedResponseKey)
+                        .ConfigureAwait(false);
                     continue;
                 }
 
@@ -63,7 +68,7 @@ namespace GW2SDK.Tests.TestInfrastructure
                     }
                     else if (kvp.Name == "freshness-lifetime")
                     {
-                        retVal.FreshnessLifetime = TimeSpan.ParseExact(
+                        retVal.TimeToLive = TimeSpan.ParseExact(
                             kvp.Value.ToString(),
                             "c",
                             CultureInfo.InvariantCulture
@@ -73,13 +78,13 @@ namespace GW2SDK.Tests.TestInfrastructure
                     {
                         var keyName = kvp.Name.ToString();
                         var fieldName = keyName.Substring(keyName.IndexOf(':') + 1);
-                        retVal.ResponseHeaders.TryAddWithoutValidation(fieldName, ((string)kvp.Value).Split(','));
+                        retVal.ResponseHeaders.TryAddWithoutValidation(fieldName, JsonSerializer.Deserialize<string[]>((string)kvp.Value));
                     }
                     else if (kvp.Name.StartsWith("content-header-field:"))
                     {
                         var keyName = kvp.Name.ToString();
                         var fieldName = keyName.Substring(keyName.IndexOf(':') + 1);
-                        retVal.ContentHeaders.TryAddWithoutValidation(fieldName, ((string)kvp.Value).Split(','));
+                        retVal.ContentHeaders.TryAddWithoutValidation(fieldName, JsonSerializer.Deserialize<string[]>((string)kvp.Value));
                     }
                     else if (kvp.Name.StartsWith("vary:"))
                     {
@@ -97,11 +102,15 @@ namespace GW2SDK.Tests.TestInfrastructure
             }
         }
 
-        public async Task StoreEntryAsync(string primaryKey, ResponseCacheEntry entry)
+        public async Task StoreEntryAsync(
+            string primaryKey,
+            ResponseCacheEntry entry,
+            CancellationToken cancellationToken
+        )
         {
             var db = redis.GetDatabase();
 
-            var ttl = entry.FreshnessLifetime - entry.CurrentAge();
+            var ttl = entry.TimeToLive - entry.CurrentAge();
 
             // Add a bit of margin for processing responses with a small freshness
             ttl += TimeSpan.FromMinutes(5);
@@ -112,28 +121,33 @@ namespace GW2SDK.Tests.TestInfrastructure
             if (entry.Id == default)
             {
                 entry.Id = Guid.NewGuid();
-                var length = await db.ListLeftPushAsync(key, entry.Id.ToByteArray());
+                var length = await db.ListLeftPushAsync(key, entry.Id.ToByteArray())
+                    .ConfigureAwait(false);
                 if (length > 100)
                 {
                     await db.ListTrimAsync(
-                        key,
-                        0,
-                        99
-                    );
+                            key,
+                            0,
+                            99
+                        )
+                        .ConfigureAwait(false);
                 }
             }
 
             await StoreResponse(
-                db,
-                entry,
-                ttl
-            );
+                    db,
+                    entry,
+                    ttl,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
         }
 
         private static async Task StoreResponse(
             IDatabase db,
             ResponseCacheEntry entry,
-            TimeSpan ttl
+            TimeSpan ttl,
+            CancellationToken cancellationToken
         )
         {
             RedisKey key = entry.Id.ToByteArray();
@@ -142,27 +156,29 @@ namespace GW2SDK.Tests.TestInfrastructure
                 new("status-code", entry.StatusCode),
                 new("request-time", entry.RequestTime.ToString("O", CultureInfo.InvariantCulture)),
                 new("response-time", entry.ResponseTime.ToString("O", CultureInfo.InvariantCulture)),
-                new("freshness-lifetime", entry.FreshnessLifetime.ToString("c", CultureInfo.InvariantCulture)),
+                new("freshness-lifetime", entry.TimeToLive.ToString("c", CultureInfo.InvariantCulture)),
                 new("message-body", entry.Content)
             };
 
-            foreach (var kvp in entry.ResponseHeaders)
+            foreach (var field in entry.ResponseHeaders)
             {
-                entries.Add(new HashEntry($"response-header-field:{kvp.Key}", string.Join(",", kvp.Value)));
+                entries.Add(new HashEntry($"response-header-field:{field.Key}", JsonSerializer.Serialize(field.Value)));
             }
 
-            foreach (var kvp in entry.ContentHeaders)
+            foreach (var field in entry.ContentHeaders)
             {
-                entries.Add(new HashEntry($"content-header-field:{kvp.Key}", string.Join(",", kvp.Value)));
+                entries.Add(new HashEntry($"content-header-field:{field.Key}", JsonSerializer.Serialize(field.Value)));
             }
 
-            foreach (var kvp in entry.SecondaryKey)
+            foreach (var field in entry.SecondaryKey)
             {
-                entries.Add(new HashEntry($"vary:{kvp.Key}", kvp.Value));
+                entries.Add(new HashEntry($"vary:{field.Key}", field.Value));
             }
 
-            await db.HashSetAsync(key, entries.ToArray());
-            await db.KeyExpireAsync(key, ttl);
+            await db.HashSetAsync(key, entries.ToArray())
+                .ConfigureAwait(false);
+            await db.KeyExpireAsync(key, ttl)
+                .ConfigureAwait(false);
         }
     }
 }

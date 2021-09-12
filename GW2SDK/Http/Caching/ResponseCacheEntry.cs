@@ -32,7 +32,7 @@ namespace GW2SDK.Http.Caching
 
         public DateTimeOffset ResponseTime { get; set; }
 
-        public TimeSpan FreshnessLifetime { get; set; }
+        public TimeSpan TimeToLive { get; set; }
 
         public byte[] Content { get; set; } = Array.Empty<byte>();
 
@@ -111,13 +111,13 @@ namespace GW2SDK.Http.Caching
             return true;
         }
 
-        public bool Fresh() => FreshnessLifetime > CurrentAge();
+        public bool Fresh() => TimeToLive > CurrentAge();
 
-        public TimeSpan Freshness() => Fresh() ? TimeSpan.Zero : FreshnessLifetime - CurrentAge();
+        public TimeSpan Freshness() => Fresh() ? TimeSpan.Zero : TimeToLive - CurrentAge();
 
-        public bool Stale() => FreshnessLifetime <= CurrentAge();
+        public bool Stale() => TimeToLive <= CurrentAge();
 
-        public TimeSpan Staleness() => Stale() ? TimeSpan.Zero : CurrentAge() - FreshnessLifetime;
+        public TimeSpan Staleness() => Stale() ? TimeSpan.Zero : CurrentAge() - TimeToLive;
 
         public HttpResponseMessage CreateResponse(HttpRequestMessage request)
         {
@@ -151,17 +151,6 @@ namespace GW2SDK.Http.Caching
                 RequestMessage = request
             };
 
-            if (Stale())
-            {
-                response.Headers.Warning.Add(
-                    new WarningHeaderValue(
-                        110,
-                        "-",
-                        "Response is Stale"
-                    )
-                );
-            }
-
             return response;
         }
 
@@ -182,7 +171,7 @@ namespace GW2SDK.Http.Caching
                     return false;
                 }
             }
-            else
+            else if (request.Method == HttpMethod.Get || request.Method == HttpMethod.Head)
             {
                 if (request.Headers.IfModifiedSince.HasValue)
                 {

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
@@ -54,7 +55,7 @@ namespace GW2SDK.Http.Caching
 
             if (selectedResponse is null)
             {
-                return await SendAndStoreAsync(
+                return await ForwardAsync(
                         primaryKey,
                         request,
                         cancellationToken
@@ -68,7 +69,7 @@ namespace GW2SDK.Http.Caching
                 return selectedResponse.CreateResponse(request);
             }
 
-            var response = await ValidateAsync(
+            var response = await ForwardAsync(
                     primaryKey,
                     request,
                     selectedResponse,
@@ -80,17 +81,7 @@ namespace GW2SDK.Http.Caching
             {
                 if (reusePolicy == ResponseCacheDecision.AllowStale)
                 {
-                    // Serving Stale Responses
-                    // https://datatracker.ietf.org/doc/html/rfc7234#section-4.2.4
-                    var staleResponse = selectedResponse.CreateResponse(request);
-                    staleResponse.Headers.Warning.Add(
-                        new WarningHeaderValue(
-                            110,
-                            "-",
-                            "Response is Stale"
-                        )
-                    );
-                    return staleResponse;
+                    return selectedResponse.CreateResponse(request);
                 }
 
                 response.RequestMessage = request;
@@ -100,7 +91,7 @@ namespace GW2SDK.Http.Caching
             return selectedResponse.CreateResponse(request);
         }
 
-        private async Task<HttpResponseMessage> SendAndStoreAsync(
+        private async Task<HttpResponseMessage> ForwardAsync(
             string primaryKey,
             HttpRequestMessage request,
             CancellationToken cancellationToken
@@ -114,7 +105,7 @@ namespace GW2SDK.Http.Caching
 
             if (CanStore(response))
             {
-                await Insert(
+                await StoreAsync(
                         primaryKey,
                         request,
                         response,
@@ -128,7 +119,7 @@ namespace GW2SDK.Http.Caching
             return response;
         }
 
-        private async Task<HttpResponseMessage> ValidateAsync(
+        private async Task<HttpResponseMessage> ForwardAsync(
             string primaryKey,
             HttpRequestMessage request,
             ResponseCacheEntry selectedResponse,
@@ -138,6 +129,11 @@ namespace GW2SDK.Http.Caching
             // Validation
             // https://datatracker.ietf.org/doc/html/rfc7234#section-4.3
             var forwardRequest = CreateForwardRequest(request);
+            if (selectedResponse.ResponseHeaders.ETag is not null)
+            {
+                forwardRequest.Headers.IfNoneMatch.Add(selectedResponse.ResponseHeaders.ETag);
+            }
+
             foreach (var entityTag in request.Headers.IfNoneMatch)
             {
                 if (entityTag.Equals(EntityTagHeaderValue.Any))
@@ -149,11 +145,6 @@ namespace GW2SDK.Http.Caching
                 {
                     forwardRequest.Headers.IfNoneMatch.Add(entityTag);
                 }
-            }
-
-            if (selectedResponse.ResponseHeaders.ETag is not null)
-            {
-                forwardRequest.Headers.IfNoneMatch.Add(selectedResponse.ResponseHeaders.ETag);
             }
 
             if (selectedResponse.ContentHeaders.LastModified.HasValue)
@@ -168,39 +159,103 @@ namespace GW2SDK.Http.Caching
 
             if (response.StatusCode == HttpStatusCode.NotModified)
             {
-                // TODO: what the heck, how do validators work?
-                await foreach (var storedResponse in store.GetEntriesAsync(primaryKey)
+                // Check for a strong ETag or a strong Last-Modified
+                // According to spec we should compare every cache entry for strong date?
+                // Let's not do that... only compare the selected response
+
+                var entityTag = response.Headers.ETag;
+                var weakEntityTag = entityTag is not null && entityTag.IsWeak;
+                var strongEntityTag = entityTag is not null && !entityTag.IsWeak;
+                var lastModified = response.Content.Headers.LastModified;
+                var strongLastModified = lastModified.HasValue
+                    && selectedResponse.ResponseHeaders.Date.HasValue
+                    && selectedResponse.ContentHeaders.LastModified.HasValue
+                    && (selectedResponse.ResponseHeaders.Date.Value - lastModified.Value).TotalSeconds >= 1d;
+                var weakLastModified = lastModified.HasValue && !strongLastModified;
+
+                // This is gonna be slow AF
+                // Iterate all cached responses *again* to check which ones can be updated
+                // - If the new response contains a strong validator, update all stored responses that match
+                // - Else if the new response contains a weak validator, update only the newest stored response that matches
+                // - Else if the new response has no validator, and the only stored response doesn't either, update that response
+
+                ResponseCacheEntry? responseToUpdate = null;
+                await foreach (var cacheEntry in store.GetEntriesAsync(primaryKey)
                     .WithCancellation(cancellationToken))
                 {
-                    if (!storedResponse.MatchContent(request))
+                    if (!cacheEntry.MatchContent(request))
                     {
                         continue;
                     }
 
-                    if (response.Content.Headers.LastModified.HasValue
-                        && storedResponse.ResponseHeaders.Date.HasValue
-                        && response.Content.Headers.LastModified.Value.AddSeconds(60)
-                        <= storedResponse.ResponseHeaders.Date.Value)
+                    if (strongEntityTag || strongLastModified)
                     {
+                        if (strongEntityTag && Equals(entityTag, cacheEntry.ResponseHeaders.ETag)
+                            || strongLastModified && lastModified == cacheEntry.ContentHeaders.LastModified)
+                        {
+                            await ValidateAsync(
+                                    primaryKey,
+                                    cacheEntry,
+                                    request,
+                                    response,
+                                    requestTime,
+                                    responseTime,
+                                    cancellationToken
+                                )
+                                .ConfigureAwait(false);
+                        }
+                    }
+                    else if (weakEntityTag || weakLastModified)
+                    {
+                        if (weakEntityTag && Equals(entityTag, cacheEntry.ResponseHeaders.ETag)
+                            || weakLastModified && lastModified == cacheEntry.ContentHeaders.LastModified)
+                        {
+                            if (responseToUpdate is null
+                                || cacheEntry.ResponseHeaders.Date > responseToUpdate.ResponseHeaders.Date)
+                            {
+                                responseToUpdate = cacheEntry;
+                            }
+                        }
+                    }
+                    else if (responseToUpdate is null)
+                    {
+                        if (selectedResponse.ResponseHeaders.ETag is null
+                            && !selectedResponse.ContentHeaders.LastModified.HasValue)
+                        {
+                            responseToUpdate = selectedResponse;
+                        }
                     }
                 }
 
-                // TODO: update stored response
-                throw new NotImplementedException();
+                if (responseToUpdate is not null)
+                {
+                    await ValidateAsync(
+                            primaryKey,
+                            responseToUpdate,
+                            request,
+                            response,
+                            requestTime,
+                            responseTime,
+                            cancellationToken
+                        )
+                        .ConfigureAwait(false);
+                }
             }
-
-            if (CanStore(response))
+            else
             {
-                await Replace(
-                        primaryKey,
-                        selectedResponse,
-                        request,
-                        response,
-                        requestTime,
-                        responseTime,
-                        cancellationToken
-                    )
-                    .ConfigureAwait(false);
+                if (CanStore(response))
+                {
+                    await StoreAsync(
+                            primaryKey,
+                            selectedResponse,
+                            request,
+                            response,
+                            requestTime,
+                            responseTime,
+                            cancellationToken
+                        )
+                        .ConfigureAwait(false);
+                }
             }
 
             return response;
@@ -239,6 +294,7 @@ namespace GW2SDK.Http.Caching
         {
             // Storing Responses in Caches
             // https://datatracker.ietf.org/doc/html/rfc7234#section-3
+            var cacheControl = response.Headers.CacheControl;
             if (checkedRequest)
             {
                 if (response.Content.Headers.Expires.HasValue)
@@ -246,12 +302,22 @@ namespace GW2SDK.Http.Caching
                     return true;
                 }
 
-                if (response.Headers.CacheControl?.MaxAge.HasValue == true)
+                if (cacheControl?.Public == true)
                 {
                     return true;
                 }
 
-                if (response.Headers.CacheControl?.SharedMaxAge.HasValue == true
+                if (cacheControl?.Private == true)
+                {
+                    return true;
+                }
+
+                if (cacheControl?.MaxAge.HasValue == true)
+                {
+                    return true;
+                }
+
+                if (cacheControl?.SharedMaxAge.HasValue == true
                     && CachingBehavior == CachingBehavior.Public)
                 {
                     return true;
@@ -261,11 +327,6 @@ namespace GW2SDK.Http.Caching
                     501)
                 {
                     // These statuses can be cached by default, using a heuristic expiration
-                    return true;
-                }
-
-                if (response.Headers.CacheControl?.Public == true)
-                {
                     return true;
                 }
             }
@@ -288,7 +349,7 @@ namespace GW2SDK.Http.Caching
                 return false;
             }
 
-            if (response.Headers.CacheControl?.NoStore == true
+            if (cacheControl?.NoStore == true
                 || response.Headers.Vary.Count == 1 && response.Headers.Vary.Contains("*"))
             {
                 return false;
@@ -300,17 +361,17 @@ namespace GW2SDK.Http.Caching
                 {
                     // Storing Responses to Authenticated Requests
                     // https://datatracker.ietf.org/doc/html/rfc7234#section-3.2
-                    if (response.Headers.CacheControl?.MustRevalidate == true)
+                    if (cacheControl?.MustRevalidate == true)
                     {
                         return CanStore(response, true);
                     }
 
-                    if (response.Headers.CacheControl?.Public == true)
+                    if (cacheControl?.Public == true)
                     {
                         return CanStore(response, true);
                     }
 
-                    if (response.Headers.CacheControl?.SharedMaxAge.HasValue == true)
+                    if (cacheControl?.SharedMaxAge.HasValue == true)
                     {
                         return CanStore(response, true);
                     }
@@ -386,7 +447,7 @@ namespace GW2SDK.Http.Caching
             return ResponseCacheDecision.Fresh;
         }
 
-        private TimeSpan CalculateFreshness(HttpResponseMessage response)
+        private TimeSpan TimeToLive(HttpResponseMessage response)
         {
             if (response.Headers.CacheControl is not null)
             {
@@ -412,12 +473,12 @@ namespace GW2SDK.Http.Caching
             {
                 var elapsed = DateTimeOffset.UtcNow - response.Content.Headers.LastModified.Value;
                 return TimeSpan.FromTicks((long)(elapsed.Ticks * 0.1));
-
             }
+
             return TimeSpan.Zero;
         }
 
-        private async Task Insert(
+        private async Task StoreAsync(
             string primaryKey,
             HttpRequestMessage request,
             HttpResponseMessage response,
@@ -426,17 +487,70 @@ namespace GW2SDK.Http.Caching
             CancellationToken cancellationToken
         )
         {
-            var cacheEntry = new ResponseCacheEntry
-            {
-                StatusCode = (int)response.StatusCode,
-                RequestTime = requestTime,
-                ResponseTime = responseTime,
-                FreshnessLifetime = CalculateFreshness(response),
-                ResponseHeaders = response.Headers,
-                ContentHeaders = response.Content.Headers
-            };
+            await StoreAsync(
+                primaryKey,
+                new ResponseCacheEntry(),
+                request,
+                response,
+                requestTime,
+                responseTime,
+                cancellationToken
+            ).ConfigureAwait(false);
+        }
+
+        private async Task StoreAsync(
+            string primaryKey,
+            ResponseCacheEntry cacheEntry,
+            HttpRequestMessage request,
+            HttpResponseMessage response,
+            DateTimeOffset requestTime,
+            DateTimeOffset responseTime,
+            CancellationToken cancellationToken
+        )
+        {
+            cacheEntry.StatusCode = (int)response.StatusCode;
+            cacheEntry.RequestTime = requestTime;
+            cacheEntry.ResponseTime = responseTime;
+            cacheEntry.TimeToLive = TimeToLive(response);
 
             cacheEntry.SetSecondaryKey(request, response);
+
+            var noCacheHeaders = new List<string>
+            {
+                "Connection"
+            };
+
+            if (response.Headers.CacheControl?.NoCacheHeaders is not null)
+            {
+                noCacheHeaders.AddRange(response.Headers.CacheControl.NoCacheHeaders);
+            }
+
+            if (CachingBehavior == CachingBehavior.Public && response.Headers.CacheControl?.PrivateHeaders is not null)
+            {
+                noCacheHeaders.AddRange(response.Headers.CacheControl.PrivateHeaders);
+            }
+
+            cacheEntry.ResponseHeaders.Clear();
+            foreach (var (fieldName, fieldValue) in response.Headers)
+            {
+                if (noCacheHeaders.Contains(fieldName))
+                {
+                    continue;
+                }
+
+                cacheEntry.ResponseHeaders.TryAddWithoutValidation(fieldName, fieldValue);
+            }
+
+            cacheEntry.ContentHeaders.Clear();
+            foreach (var (fieldName, fieldValue) in response.Content.Headers)
+            {
+                if (noCacheHeaders.Contains(fieldName))
+                {
+                    continue;
+                }
+
+                cacheEntry.ContentHeaders.TryAddWithoutValidation(fieldName, fieldValue);
+            }
 
 #if NET
             cacheEntry.Content = await response.Content.ReadAsByteArrayAsync(cancellationToken)
@@ -445,13 +559,13 @@ namespace GW2SDK.Http.Caching
             cacheEntry.Content = await response.Content.ReadAsByteArrayAsync()
                 .ConfigureAwait(false);
 #endif
-            await store.StoreEntryAsync(primaryKey, cacheEntry)
+            await store.StoreEntryAsync(primaryKey, cacheEntry, cancellationToken)
                 .ConfigureAwait(false);
         }
 
-        private async Task Replace(
+        private async Task ValidateAsync(
             string primaryKey,
-            ResponseCacheEntry storedResponse,
+            ResponseCacheEntry cacheEntry,
             HttpRequestMessage request,
             HttpResponseMessage response,
             DateTimeOffset requestTime,
@@ -459,23 +573,51 @@ namespace GW2SDK.Http.Caching
             CancellationToken cancellationToken
         )
         {
-            storedResponse.StatusCode = (int)response.StatusCode;
-            storedResponse.RequestTime = requestTime;
-            storedResponse.ResponseTime = responseTime;
-            storedResponse.FreshnessLifetime = CalculateFreshness(response);
-            storedResponse.ResponseHeaders = response.Headers;
-            storedResponse.ContentHeaders = response.Content.Headers;
+            cacheEntry.RequestTime = requestTime;
+            cacheEntry.ResponseTime = responseTime;
+            cacheEntry.TimeToLive = TimeToLive(response);
 
-            storedResponse.SetSecondaryKey(request, response);
+            cacheEntry.SetSecondaryKey(request, response);
 
-#if NET
-            storedResponse.Content = await response.Content.ReadAsByteArrayAsync(cancellationToken)
-                .ConfigureAwait(false);
-#else
-            storedResponse.Content = await response.Content.ReadAsByteArrayAsync()
-                .ConfigureAwait(false);
-#endif
-            await store.StoreEntryAsync(primaryKey, storedResponse)
+            var noCacheHeaders = new List<string>
+            {
+                "Connection",
+                "Content-Length"
+            };
+
+            if (response.Headers.CacheControl?.NoCacheHeaders is not null)
+            {
+                noCacheHeaders.AddRange(response.Headers.CacheControl.NoCacheHeaders);
+            }
+
+            if (CachingBehavior == CachingBehavior.Public && response.Headers.CacheControl?.PrivateHeaders is not null)
+            {
+                noCacheHeaders.AddRange(response.Headers.CacheControl.PrivateHeaders);
+            }
+
+            foreach (var (fieldName, fieldValue) in response.Headers)
+            {
+                if (noCacheHeaders.Contains(fieldName))
+                {
+                    continue;
+                }
+
+                cacheEntry.ResponseHeaders.Remove(fieldName);
+                cacheEntry.ResponseHeaders.TryAddWithoutValidation(fieldName, fieldValue);
+            }
+            
+            foreach (var (fieldName, fieldValue) in response.Content.Headers)
+            {
+                if (noCacheHeaders.Contains(fieldName))
+                {
+                    continue;
+                }
+
+                cacheEntry.ContentHeaders.Remove(fieldName);
+                cacheEntry.ContentHeaders.TryAddWithoutValidation(fieldName, fieldValue);
+            }
+
+            await store.StoreEntryAsync(primaryKey, cacheEntry, cancellationToken)
                 .ConfigureAwait(false);
         }
     }

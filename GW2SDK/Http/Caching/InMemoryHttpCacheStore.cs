@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
 using JetBrains.Annotations;
 
@@ -24,7 +25,7 @@ namespace GW2SDK.Http.Caching
             await Task.CompletedTask.ConfigureAwait(false);
         }
 
-        public Task StoreEntryAsync(string primaryKey, ResponseCacheEntry entry)
+        public Task StoreEntryAsync(string primaryKey, ResponseCacheEntry entry, CancellationToken cancellationToken)
         {
             if (!responseCache.TryGetValue(primaryKey, out var entries))
             {
