@@ -101,7 +101,7 @@ namespace GW2SDK.Tests.TestInfrastructure
         {
             var db = redis.GetDatabase();
 
-            var ttl = entry.FreshnessLifetime - entry.CalculateAge();
+            var ttl = entry.FreshnessLifetime - entry.CurrentAge();
 
             // Add a bit of margin for processing responses with a small freshness
             ttl += TimeSpan.FromMinutes(5);

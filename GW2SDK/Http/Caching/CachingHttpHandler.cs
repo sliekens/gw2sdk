@@ -107,10 +107,10 @@ namespace GW2SDK.Http.Caching
         )
         {
             var forwardRequest = CreateForwardRequest(request);
-            var requestTime = DateTimeOffset.Now;
+            var requestTime = DateTimeOffset.UtcNow;
             var response = await base.SendAsync(forwardRequest, cancellationToken)
                 .ConfigureAwait(false);
-            var responseTime = DateTimeOffset.Now;
+            var responseTime = DateTimeOffset.UtcNow;
 
             if (CanStore(response))
             {
@@ -161,10 +161,10 @@ namespace GW2SDK.Http.Caching
                 forwardRequest.Headers.IfModifiedSince = selectedResponse.ContentHeaders.LastModified.Value;
             }
 
-            var requestTime = DateTimeOffset.Now;
+            var requestTime = DateTimeOffset.UtcNow;
             var response = await base.SendAsync(forwardRequest, cancellationToken)
                 .ConfigureAwait(false);
-            var responseTime = DateTimeOffset.Now;
+            var responseTime = DateTimeOffset.UtcNow;
 
             if (response.StatusCode == HttpStatusCode.NotModified)
             {
@@ -339,12 +339,18 @@ namespace GW2SDK.Http.Caching
             // Then check if the response is stale and if we can maybe still use it
             if (cachedResponse.Stale())
             {
-                if (request.Headers.CacheControl?.MaxStale == false)
+                // A requester must opt-in to stale responses with max-stale directives
+                if (request.Headers.CacheControl is null)
                 {
                     return ResponseCacheDecision.MustValidate;
                 }
 
-                if (request.Headers.CacheControl?.MaxStaleLimit.HasValue == true)
+                if (!request.Headers.CacheControl.MaxStale)
+                {
+                    return ResponseCacheDecision.MustValidate;
+                }
+
+                if (request.Headers.CacheControl.MaxStaleLimit.HasValue)
                 {
                     if (cachedResponse.Staleness() > request.Headers.CacheControl.MaxStaleLimit)
                     {
@@ -352,21 +358,25 @@ namespace GW2SDK.Http.Caching
                     }
                 }
 
-                if (responseHeaders.CacheControl?.MustRevalidate == true)
+                // Even if requester opted-in, the server can still require validation
+                if (responseHeaders.CacheControl is not null)
                 {
-                    return ResponseCacheDecision.MustValidate;
-                }
-
-                if (CachingBehavior == CachingBehavior.Public)
-                {
-                    if (responseHeaders.CacheControl?.SharedMaxAge.HasValue == true)
+                    if (responseHeaders.CacheControl.MustRevalidate)
                     {
                         return ResponseCacheDecision.MustValidate;
                     }
 
-                    if (responseHeaders.CacheControl?.ProxyRevalidate == true)
+                    if (CachingBehavior == CachingBehavior.Public)
                     {
-                        return ResponseCacheDecision.MustValidate;
+                        if (responseHeaders.CacheControl?.SharedMaxAge.HasValue == true)
+                        {
+                            return ResponseCacheDecision.MustValidate;
+                        }
+
+                        if (responseHeaders.CacheControl?.ProxyRevalidate == true)
+                        {
+                            return ResponseCacheDecision.MustValidate;
+                        }
                     }
                 }
 
@@ -396,8 +406,14 @@ namespace GW2SDK.Http.Caching
                 return response.Content.Headers.Expires.Value - response.Headers.Date.Value;
             }
 
-            // TODO: Calculating Heuristic Freshness
+            // Calculating Heuristic Freshness
             // https://datatracker.ietf.org/doc/html/rfc7234#section-4.2.2
+            if (response.Content.Headers.LastModified.HasValue)
+            {
+                var elapsed = DateTimeOffset.UtcNow - response.Content.Headers.LastModified.Value;
+                return TimeSpan.FromTicks((long)(elapsed.Ticks * 0.1));
+
+            }
             return TimeSpan.Zero;
         }
 

@@ -43,7 +43,11 @@ namespace GW2SDK.Tests.TestInfrastructure
             services.AddTransient<UnauthorizedMessageHandler>();
             services.AddTransient<BadMessageHandler>();
             services.AddTransient<RateLimitHandler>();
-            services.AddTransient<CachingHttpHandler>();
+            services.AddTransient(sp => new CachingHttpHandler(sp.GetService<IHttpCacheStore>())
+            {
+                CachingBehavior = CachingBehavior.Private
+            });
+
             services.AddTransient<FixVaryHandler>();
             services.AddHttpClient("GW2SDK",
                     http =>

@@ -55,12 +55,12 @@ namespace GW2SDK.Http.Caching
             }
         }
 
-        public TimeSpan CalculateAge()
+        public TimeSpan CurrentAge()
         {
             var apparentAge = CalculateApparentAge(ResponseHeaders.Date);
             var correctedAge = CalculateCorrectedAge(ResponseHeaders.Age);
             var correctedInitialAge = Max(apparentAge, correctedAge);
-            var residentTime = DateTimeOffset.Now - ResponseTime;
+            var residentTime = DateTimeOffset.UtcNow - ResponseTime;
             return correctedInitialAge + residentTime;
         }
 
@@ -111,13 +111,13 @@ namespace GW2SDK.Http.Caching
             return true;
         }
 
-        public bool Fresh() => FreshnessLifetime > CalculateAge();
+        public bool Fresh() => FreshnessLifetime > CurrentAge();
 
-        public TimeSpan Freshness() => FreshnessLifetime - CalculateAge();
+        public TimeSpan Freshness() => Fresh() ? TimeSpan.Zero : FreshnessLifetime - CurrentAge();
 
-        public bool Stale() => FreshnessLifetime <= CalculateAge();
+        public bool Stale() => FreshnessLifetime <= CurrentAge();
 
-        public TimeSpan Staleness() => CalculateAge() - FreshnessLifetime;
+        public TimeSpan Staleness() => Stale() ? TimeSpan.Zero : CurrentAge() - FreshnessLifetime;
 
         public HttpResponseMessage CreateResponse(HttpRequestMessage request)
         {
@@ -141,7 +141,7 @@ namespace GW2SDK.Http.Caching
                 }
 
                 // Cache MUST recalculate the Age
-                response.Headers.Age = CalculateAge();
+                response.Headers.Age = CurrentAge();
 
                 return response;
             }
