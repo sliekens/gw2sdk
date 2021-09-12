@@ -1,25 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
+using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
-using System.Threading.Tasks;
 using JetBrains.Annotations;
 
 namespace GW2SDK.Http.Caching
 {
-    internal class EmptyContent : HttpContent
-    {
-        protected override Task SerializeToStreamAsync(Stream stream, TransportContext? context) => Task.CompletedTask;
-
-        protected override bool TryComputeLength(out long length)
-        {
-            length = 0;
-            return true;
-        }
-    }
-
     [PublicAPI]
     public sealed class ResponseCacheEntry
     {
@@ -100,33 +88,6 @@ namespace GW2SDK.Http.Caching
 
         private static TimeSpan Max(TimeSpan left, TimeSpan right) => left > right ? left : right;
 
-        public HttpResponseMessage CreateResponse(HttpRequestMessage request)
-        {
-            // TODO: handle conditional requests
-            // Handling a Received Validation Request
-            // https://datatracker.ietf.org/doc/html/rfc7234#section-4.3.2
-            var response = new HttpResponseMessage((HttpStatusCode)StatusCode)
-            {
-                RequestMessage = request,
-                Content = new ByteArrayContent(Content)
-            };
-
-            foreach (var (name, value) in ResponseHeaders)
-            {
-                response.Headers.TryAddWithoutValidation(name, value);
-            }
-
-            foreach (var (name, value) in ContentHeaders)
-            {
-                response.Content.Headers.TryAddWithoutValidation(name, value);
-            }
-
-            // Cache MUST recalculate the Age
-            response.Headers.Age = CalculateAge();
-
-            return response;
-        }
-
         public bool MatchContent(HttpRequestMessage request)
         {
             foreach (var (field, value) in SecondaryKey)
@@ -144,6 +105,108 @@ namespace GW2SDK.Http.Caching
                 ))
                 {
                     return false;
+                }
+            }
+
+            return true;
+        }
+
+        public bool Fresh() => FreshnessLifetime > CalculateAge();
+
+        public TimeSpan Freshness() => FreshnessLifetime - CalculateAge();
+
+        public bool Stale() => FreshnessLifetime <= CalculateAge();
+
+        public TimeSpan Staleness() => CalculateAge() - FreshnessLifetime;
+
+        public HttpResponseMessage CreateResponse(HttpRequestMessage request)
+        {
+            HttpResponseMessage response;
+            if (PreconditionsSucceeded(request))
+            {
+                response = new HttpResponseMessage((HttpStatusCode)StatusCode)
+                {
+                    RequestMessage = request,
+                    Content = new ByteArrayContent(Content)
+                };
+
+                foreach (var (name, value) in ResponseHeaders)
+                {
+                    response.Headers.TryAddWithoutValidation(name, value);
+                }
+
+                foreach (var (name, value) in ContentHeaders)
+                {
+                    response.Content.Headers.TryAddWithoutValidation(name, value);
+                }
+
+                // Cache MUST recalculate the Age
+                response.Headers.Age = CalculateAge();
+
+                return response;
+            }
+
+            response = new HttpResponseMessage(HttpStatusCode.NotModified)
+            {
+                RequestMessage = request
+            };
+
+            if (Stale())
+            {
+                response.Headers.Warning.Add(
+                    new WarningHeaderValue(
+                        110,
+                        "-",
+                        "Response is Stale"
+                    )
+                );
+            }
+
+            return response;
+        }
+
+        private bool PreconditionsSucceeded(HttpRequestMessage request)
+        {
+            // Handling a Received Validation Request
+            // https://datatracker.ietf.org/doc/html/rfc7234#section-4.3.2
+            if (request.Headers.IfNoneMatch.Count != 0)
+            {
+                if (request.Headers.IfNoneMatch.Count == 1
+                    && request.Headers.IfNoneMatch.Contains(EntityTagHeaderValue.Any))
+                {
+                    return false;
+                }
+
+                if (request.Headers.IfNoneMatch.Any(etag => Equals(etag, ResponseHeaders.ETag)))
+                {
+                    return false;
+                }
+            }
+            else
+            {
+                if (request.Headers.IfModifiedSince.HasValue)
+                {
+                    if (ContentHeaders.LastModified.HasValue)
+                    {
+                        if (ContentHeaders.LastModified.Value <= request.Headers.IfModifiedSince.Value)
+                        {
+                            return false;
+                        }
+                    }
+                    else if (ResponseHeaders.Date.HasValue)
+                    {
+                        if (ResponseHeaders.Date.Value <= request.Headers.IfModifiedSince.Value)
+                        {
+                            return false;
+                        }
+                    }
+                    else
+                    {
+                        if (ResponseTime <= request.Headers.IfModifiedSince.Value)
+                        {
+                            return false;
+                        }
+                    }
                 }
             }
 

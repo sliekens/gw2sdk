@@ -337,8 +337,7 @@ namespace GW2SDK.Http.Caching
             }
 
             // Then check if the response is stale and if we can maybe still use it
-            var calculatedAge = cachedResponse.CalculateAge();
-            if (cachedResponse.FreshnessLifetime <= calculatedAge)
+            if (cachedResponse.Stale())
             {
                 if (request.Headers.CacheControl?.MaxStale == false)
                 {
@@ -347,8 +346,7 @@ namespace GW2SDK.Http.Caching
 
                 if (request.Headers.CacheControl?.MaxStaleLimit.HasValue == true)
                 {
-                    var staleness = calculatedAge - cachedResponse.FreshnessLifetime;
-                    if (staleness > request.Headers.CacheControl.MaxStaleLimit)
+                    if (cachedResponse.Staleness() > request.Headers.CacheControl.MaxStaleLimit)
                     {
                         return ResponseCacheDecision.MustValidate;
                     }
