@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Net.Http;
 using System.Threading.Tasks;
 using GW2SDK.Http.Caching;
 using StackExchange.Redis;
@@ -32,7 +33,12 @@ namespace GW2SDK.Tests.TestInfrastructure
                     continue;
                 }
 
-                var retVal = new ResponseCacheEntry();
+                var retVal = new ResponseCacheEntry
+                {
+                    Id = new Guid((byte[])cachedResponseKey)
+                };
+
+                using var response = new HttpResponseMessage();
                 foreach (var kvp in hash)
                 {
                     if (kvp.Name == "status-code")
@@ -41,30 +47,39 @@ namespace GW2SDK.Tests.TestInfrastructure
                     }
                     else if (kvp.Name == "request-time")
                     {
-                        retVal.RequestTime =
-                            DateTimeOffset.ParseExact(kvp.Value.ToString(), "O", CultureInfo.InvariantCulture);
+                        retVal.RequestTime = DateTimeOffset.ParseExact(
+                            kvp.Value.ToString(),
+                            "O",
+                            CultureInfo.InvariantCulture
+                        );
                     }
                     else if (kvp.Name == "response-time")
                     {
-                        retVal.ResponseTime =
-                            DateTimeOffset.ParseExact(kvp.Value.ToString(), "O", CultureInfo.InvariantCulture);
+                        retVal.ResponseTime = DateTimeOffset.ParseExact(
+                            kvp.Value.ToString(),
+                            "O",
+                            CultureInfo.InvariantCulture
+                        );
                     }
                     else if (kvp.Name == "freshness-lifetime")
                     {
-                        retVal.FreshnessLifetime =
-                            TimeSpan.ParseExact(kvp.Value.ToString(), "c", CultureInfo.InvariantCulture);
+                        retVal.FreshnessLifetime = TimeSpan.ParseExact(
+                            kvp.Value.ToString(),
+                            "c",
+                            CultureInfo.InvariantCulture
+                        );
                     }
                     else if (kvp.Name.StartsWith("response-header-field:"))
                     {
                         var keyName = kvp.Name.ToString();
                         var fieldName = keyName.Substring(keyName.IndexOf(':') + 1);
-                        retVal.ResponseHeaders[fieldName] = kvp.Value;
+                        retVal.ResponseHeaders.TryAddWithoutValidation(fieldName, ((string)kvp.Value).Split(','));
                     }
                     else if (kvp.Name.StartsWith("content-header-field:"))
                     {
                         var keyName = kvp.Name.ToString();
                         var fieldName = keyName.Substring(keyName.IndexOf(':') + 1);
-                        retVal.ContentHeaders[fieldName] = kvp.Value;
+                        retVal.ContentHeaders.TryAddWithoutValidation(fieldName, ((string)kvp.Value).Split(','));
                     }
                     else if (kvp.Name.StartsWith("vary:"))
                     {
@@ -100,11 +115,19 @@ namespace GW2SDK.Tests.TestInfrastructure
                 var length = await db.ListLeftPushAsync(key, entry.Id.ToByteArray());
                 if (length > 100)
                 {
-                    await db.ListTrimAsync(key, 0, 99);
+                    await db.ListTrimAsync(
+                        key,
+                        0,
+                        99
+                    );
                 }
             }
 
-            await StoreResponse(db, entry, ttl);
+            await StoreResponse(
+                db,
+                entry,
+                ttl
+            );
         }
 
         private static async Task StoreResponse(
@@ -120,17 +143,17 @@ namespace GW2SDK.Tests.TestInfrastructure
                 new("request-time", entry.RequestTime.ToString("O", CultureInfo.InvariantCulture)),
                 new("response-time", entry.ResponseTime.ToString("O", CultureInfo.InvariantCulture)),
                 new("freshness-lifetime", entry.FreshnessLifetime.ToString("c", CultureInfo.InvariantCulture)),
-                new("message-body", entry.Content),
+                new("message-body", entry.Content)
             };
 
             foreach (var kvp in entry.ResponseHeaders)
             {
-                entries.Add(new HashEntry($"response-header-field:{kvp.Key}", kvp.Value));
+                entries.Add(new HashEntry($"response-header-field:{kvp.Key}", string.Join(",", kvp.Value)));
             }
 
             foreach (var kvp in entry.ContentHeaders)
             {
-                entries.Add(new HashEntry($"content-header-field:{kvp.Key}", kvp.Value));
+                entries.Add(new HashEntry($"content-header-field:{kvp.Key}", string.Join(",", kvp.Value)));
             }
 
             foreach (var kvp in entry.SecondaryKey)

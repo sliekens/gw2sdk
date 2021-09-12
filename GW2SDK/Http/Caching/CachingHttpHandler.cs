@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Diagnostics;
-using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
@@ -38,65 +36,202 @@ namespace GW2SDK.Http.Caching
         {
             var primaryKey = $"{request.Method} {request.RequestUri}";
 
-            var cachePolicy = ResponseCacheDecision.Miss;
+            // First we need to check which cached responses can be used to satisfy the request
+            // Then we need to choose the newest one (most recent Date header)
             ResponseCacheEntry? selectedResponse = null;
             await foreach (var cacheEntry in store.GetEntriesAsync(primaryKey)
                 .WithCancellation(cancellationToken))
             {
-                // First we need to check which cached responses can be used to satisfy the request
-                // Then we need to choose the newest one (most recent Date header)
-                var decision = CanReuse(request, cacheEntry);
-                if (decision == ResponseCacheDecision.Miss)
+                if (cacheEntry.MatchContent(request))
                 {
-                    continue;
+                    if (selectedResponse is null
+                        || cacheEntry.ResponseHeaders.Date > selectedResponse.ResponseHeaders.Date)
+                    {
+                        selectedResponse = cacheEntry;
+                    }
+                }
+            }
+
+            if (selectedResponse is null)
+            {
+                return await SendAndStoreAsync(
+                        primaryKey,
+                        request,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
+            }
+
+            var reusePolicy = CanReuse(request, selectedResponse);
+            if (reusePolicy == ResponseCacheDecision.Fresh)
+            {
+                return selectedResponse.CreateResponse(request);
+            }
+
+            var response = await ValidateAsync(
+                    primaryKey,
+                    request,
+                    selectedResponse,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
+
+            if ((int)response.StatusCode >= 500)
+            {
+                if (reusePolicy == ResponseCacheDecision.AllowStale)
+                {
+                    // Serving Stale Responses
+                    // https://datatracker.ietf.org/doc/html/rfc7234#section-4.2.4
+                    var staleResponse = selectedResponse.CreateResponse(request);
+                    staleResponse.Headers.Warning.Add(
+                        new WarningHeaderValue(
+                            110,
+                            "-",
+                            "Response is Stale"
+                        )
+                    );
+                    return staleResponse;
                 }
 
-                if (selectedResponse is null || MoreRecent(cacheEntry, selectedResponse))
-                {
-                    selectedResponse = cacheEntry;
-                    cachePolicy = decision;
-                }
-
-                static bool MoreRecent(ResponseCacheEntry next, ResponseCacheEntry selected) =>
-                    next.GetResponseHeaders()
-                        .Date > selected.GetResponseHeaders()
-                        .Date;
+                response.RequestMessage = request;
+                return response;
             }
 
-            if (cachePolicy == ResponseCacheDecision.Fresh)
-            {
-                return selectedResponse!.CreateResponse(request);
-            }
+            return selectedResponse.CreateResponse(request);
+        }
 
-            if (cachePolicy == ResponseCacheDecision.Stale)
-            {
-                // Serving Stale Responses
-                // https://datatracker.ietf.org/doc/html/rfc7234#section-4.2.4
-                var staleResponse = selectedResponse!.CreateResponse(request);
-                staleResponse.Headers.Warning.Add(new WarningHeaderValue(110, "-", "Response is Stale"));
-                return staleResponse;
-            }
-
-            if (cachePolicy == ResponseCacheDecision.MustValidate)
-            {
-                // Validation
-                // https://datatracker.ietf.org/doc/html/rfc7234#section-4.3
-                Debug.Assert(selectedResponse is not null);
-                throw new NotImplementedException("// TODO");
-            }
-
+        private async Task<HttpResponseMessage> SendAndStoreAsync(
+            string primaryKey,
+            HttpRequestMessage request,
+            CancellationToken cancellationToken
+        )
+        {
+            var forwardRequest = CreateForwardRequest(request);
             var requestTime = DateTimeOffset.Now;
-            var response = await base.SendAsync(request, cancellationToken)
+            var response = await base.SendAsync(forwardRequest, cancellationToken)
                 .ConfigureAwait(false);
             var responseTime = DateTimeOffset.Now;
 
             if (CanStore(response))
             {
-                await Insert(primaryKey, request, response, requestTime, responseTime, cancellationToken)
+                await Insert(
+                        primaryKey,
+                        request,
+                        response,
+                        requestTime,
+                        responseTime,
+                        cancellationToken
+                    )
                     .ConfigureAwait(false);
             }
 
             return response;
+        }
+
+        private async Task<HttpResponseMessage> ValidateAsync(
+            string primaryKey,
+            HttpRequestMessage request,
+            ResponseCacheEntry selectedResponse,
+            CancellationToken cancellationToken
+        )
+        {
+            // Validation
+            // https://datatracker.ietf.org/doc/html/rfc7234#section-4.3
+            var forwardRequest = CreateForwardRequest(request);
+            foreach (var entityTag in request.Headers.IfNoneMatch)
+            {
+                if (entityTag.Equals(EntityTagHeaderValue.Any))
+                {
+                    continue;
+                }
+
+                if (!forwardRequest.Headers.IfNoneMatch.Contains(entityTag))
+                {
+                    forwardRequest.Headers.IfNoneMatch.Add(entityTag);
+                }
+            }
+
+            if (selectedResponse.ResponseHeaders.ETag is not null)
+            {
+                forwardRequest.Headers.IfNoneMatch.Add(selectedResponse.ResponseHeaders.ETag);
+            }
+
+            if (selectedResponse.ContentHeaders.LastModified.HasValue)
+            {
+                forwardRequest.Headers.IfModifiedSince = selectedResponse.ContentHeaders.LastModified.Value;
+            }
+
+            var requestTime = DateTimeOffset.Now;
+            var response = await base.SendAsync(forwardRequest, cancellationToken)
+                .ConfigureAwait(false);
+            var responseTime = DateTimeOffset.Now;
+
+            if (response.StatusCode == HttpStatusCode.NotModified)
+            {
+                // TODO: what the heck, how do validators work?
+                await foreach (var storedResponse in store.GetEntriesAsync(primaryKey)
+                    .WithCancellation(cancellationToken))
+                {
+                    if (!storedResponse.MatchContent(request))
+                    {
+                        continue;
+                    }
+
+                    if (response.Content.Headers.LastModified.HasValue
+                        && storedResponse.ResponseHeaders.Date.HasValue
+                        && response.Content.Headers.LastModified.Value.AddSeconds(60)
+                        <= storedResponse.ResponseHeaders.Date.Value)
+                    {
+                    }
+                }
+
+                // TODO: update stored response
+                throw new NotImplementedException();
+            }
+
+            if (CanStore(response))
+            {
+                await Replace(
+                        primaryKey,
+                        selectedResponse,
+                        request,
+                        response,
+                        requestTime,
+                        responseTime,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
+            }
+
+            return response;
+        }
+
+        private HttpRequestMessage CreateForwardRequest(HttpRequestMessage request)
+        {
+            var clone = new HttpRequestMessage(request.Method, request.RequestUri)
+            {
+                Version = request.Version,
+                Content = request.Content
+            };
+
+            foreach (var header in request.Headers)
+            {
+                clone.Headers.TryAddWithoutValidation(header.Key, header.Value);
+            }
+
+#if NET
+            System.Collections.Generic.IDictionary<string, object?> options = clone.Options;
+            foreach (var option in request.Options)
+            {
+                options[option.Key] = option.Value;
+            }
+#else
+            foreach (var prop in request.Properties)
+            {
+                clone.Properties[prop.Key] = prop.Value;
+            }
+#endif
+            return clone;
         }
 
         /// <summary>Gets whether the cache is allowed to cache the response.</summary>
@@ -116,8 +251,8 @@ namespace GW2SDK.Http.Caching
                     return true;
                 }
 
-                if (response.Headers.CacheControl?.SharedMaxAge.HasValue == true &&
-                    CachingBehavior == CachingBehavior.Public)
+                if (response.Headers.CacheControl?.SharedMaxAge.HasValue == true
+                    && CachingBehavior == CachingBehavior.Public)
                 {
                     return true;
                 }
@@ -135,8 +270,8 @@ namespace GW2SDK.Http.Caching
                 }
             }
 
-            var request = response.RequestMessage ??
-                throw new InvalidOperationException("Response must be associated with a request.");
+            var request = response.RequestMessage
+                ?? throw new InvalidOperationException("Response must be associated with a request.");
             if (request.Method != Get)
             {
                 return false;
@@ -153,7 +288,8 @@ namespace GW2SDK.Http.Caching
                 return false;
             }
 
-            if (response.Headers.CacheControl?.NoStore == true || response.Headers.Vary.Count == 1 && response.Headers.Vary.Contains("*"))
+            if (response.Headers.CacheControl?.NoStore == true
+                || response.Headers.Vary.Count == 1 && response.Headers.Vary.Contains("*"))
             {
                 return false;
             }
@@ -191,25 +327,11 @@ namespace GW2SDK.Http.Caching
             // Constructing Responses from Caches
             // https://datatracker.ietf.org/doc/html/rfc7234#section-4
 
-            // First ensure the response can be used for Vary-ed requests, to avoid sending back the wrong content even though the URL matches
-            foreach (var (field, value) in cachedResponse.SecondaryKey)
-            {
-                var fieldValue = "";
-                if (request.Headers.TryGetValues(field, out var found))
-                {
-                    fieldValue = string.Join(",", found);
-                }
-
-                if (!string.Equals(value, fieldValue, StringComparison.Ordinal))
-                {
-                    return ResponseCacheDecision.Miss;
-                }
-            }
-
-            // Then check all the 'no-cache' directives, which all mean check the origin before returning a cached response
-            var responseHeaders = cachedResponse.GetResponseHeaders();
-            if (request.Headers.CacheControl?.NoCache == true || request.Headers.Pragma.Contains(NoCache) ||
-                responseHeaders.CacheControl?.NoCache == true)
+            // Check all the 'no-cache' directives, which all mean check the origin before returning a cached response
+            var responseHeaders = cachedResponse.ResponseHeaders;
+            if (request.Headers.CacheControl?.NoCache == true
+                || request.Headers.Pragma.Contains(NoCache)
+                || responseHeaders.CacheControl?.NoCache == true)
             {
                 return ResponseCacheDecision.MustValidate;
             }
@@ -250,7 +372,7 @@ namespace GW2SDK.Http.Caching
                     }
                 }
 
-                return ResponseCacheDecision.Stale;
+                return ResponseCacheDecision.AllowStale;
             }
 
             return ResponseCacheDecision.Fresh;
@@ -281,7 +403,7 @@ namespace GW2SDK.Http.Caching
             return TimeSpan.Zero;
         }
 
-        public async Task Insert(
+        private async Task Insert(
             string primaryKey,
             HttpRequestMessage request,
             HttpResponseMessage response,
@@ -290,29 +412,18 @@ namespace GW2SDK.Http.Caching
             CancellationToken cancellationToken
         )
         {
-            var cacheEntry = new ResponseCacheEntry();
-            cancellationToken.ThrowIfCancellationRequested();
-
-            foreach (var varyBy in response.Headers.Vary)
+            var cacheEntry = new ResponseCacheEntry
             {
-                if (request.Headers.TryGetValues(varyBy, out var found))
-                {
-                    cacheEntry.SecondaryKey[varyBy] = string.Join(",", found);
-                }
-                else
-                {
-                    cacheEntry.SecondaryKey[varyBy] = "";
-                }
-            }
+                StatusCode = (int)response.StatusCode,
+                RequestTime = requestTime,
+                ResponseTime = responseTime,
+                FreshnessLifetime = CalculateFreshness(response),
+                ResponseHeaders = response.Headers,
+                ContentHeaders = response.Content.Headers
+            };
 
-            cacheEntry.StatusCode = (int)response.StatusCode;
-            cacheEntry.RequestTime = requestTime;
-            cacheEntry.ResponseTime = responseTime;
-            cacheEntry.FreshnessLifetime = CalculateFreshness(response);
-            cacheEntry.ResponseHeaders =
-                response.Headers.ToDictionary(header => header.Key, header => string.Join(",", header.Value));
-            cacheEntry.ContentHeaders =
-                response.Content.Headers.ToDictionary(header => header.Key, header => string.Join(",", header.Value));
+            cacheEntry.SetSecondaryKey(request, response);
+
 #if NET
             cacheEntry.Content = await response.Content.ReadAsByteArrayAsync(cancellationToken)
                 .ConfigureAwait(false);
@@ -321,6 +432,36 @@ namespace GW2SDK.Http.Caching
                 .ConfigureAwait(false);
 #endif
             await store.StoreEntryAsync(primaryKey, cacheEntry)
+                .ConfigureAwait(false);
+        }
+
+        private async Task Replace(
+            string primaryKey,
+            ResponseCacheEntry storedResponse,
+            HttpRequestMessage request,
+            HttpResponseMessage response,
+            DateTimeOffset requestTime,
+            DateTimeOffset responseTime,
+            CancellationToken cancellationToken
+        )
+        {
+            storedResponse.StatusCode = (int)response.StatusCode;
+            storedResponse.RequestTime = requestTime;
+            storedResponse.ResponseTime = responseTime;
+            storedResponse.FreshnessLifetime = CalculateFreshness(response);
+            storedResponse.ResponseHeaders = response.Headers;
+            storedResponse.ContentHeaders = response.Content.Headers;
+
+            storedResponse.SetSecondaryKey(request, response);
+
+#if NET
+            storedResponse.Content = await response.Content.ReadAsByteArrayAsync(cancellationToken)
+                .ConfigureAwait(false);
+#else
+            storedResponse.Content = await response.Content.ReadAsByteArrayAsync()
+                .ConfigureAwait(false);
+#endif
+            await store.StoreEntryAsync(primaryKey, storedResponse)
                 .ConfigureAwait(false);
         }
     }

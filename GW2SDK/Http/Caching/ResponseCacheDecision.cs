@@ -17,6 +17,6 @@ namespace GW2SDK.Http.Caching
         MustValidate,
 
         /// <summary>Indicates that a stale response can be reused for a request without validating.</summary>
-        Stale
+        AllowStale
     }
 }

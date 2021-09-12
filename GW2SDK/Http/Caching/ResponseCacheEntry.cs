@@ -1,23 +1,38 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
+using System.IO;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Threading.Tasks;
 using JetBrains.Annotations;
 
 namespace GW2SDK.Http.Caching
 {
+    internal class EmptyContent : HttpContent
+    {
+        protected override Task SerializeToStreamAsync(Stream stream, TransportContext? context) => Task.CompletedTask;
+
+        protected override bool TryComputeLength(out long length)
+        {
+            length = 0;
+            return true;
+        }
+    }
+
     [PublicAPI]
     public sealed class ResponseCacheEntry
     {
-        private HttpContentHeaders? contentHeaders;
-
-        public Dictionary<string, string> ContentHeaders = new();
-
-        private HttpResponseHeaders? responseHeaders;
-
-        public Dictionary<string, string> ResponseHeaders = new();
+        public ResponseCacheEntry()
+        {
+            // Headers objects have internal constructors, so create a throwaway response just to pluck the headers
+            using var _ = new HttpResponseMessage();
+#if !NET
+            _.Content = new EmptyContent();
+#endif
+            ResponseHeaders = _.Headers;
+            ContentHeaders = _.Content.Headers;
+        }
 
         public Guid Id { get; set; }
 
@@ -33,55 +48,29 @@ namespace GW2SDK.Http.Caching
 
         public byte[] Content { get; set; } = Array.Empty<byte>();
 
-        [MemberNotNull(nameof(responseHeaders))]
-        private void ParseResponseHeaders()
+        public HttpResponseHeaders ResponseHeaders { get; set; }
+
+        public HttpContentHeaders ContentHeaders { get; set; }
+
+        public void SetSecondaryKey(HttpRequestMessage request, HttpResponseMessage response)
         {
-            if (responseHeaders is null)
+            foreach (var varyBy in response.Headers.Vary)
             {
-                using var cachedResponse = new HttpResponseMessage();
-                foreach (var (fieldName, fieldValue) in ResponseHeaders)
+                if (request.Headers.TryGetValues(varyBy, out var found))
                 {
-                    cachedResponse.Headers.Add(fieldName, fieldValue);
+                    SecondaryKey[varyBy] = string.Join(",", found);
                 }
-
-                responseHeaders = cachedResponse.Headers;
-            }
-        }
-
-        [MemberNotNull(nameof(contentHeaders))]
-        private void ParseContentHeaders()
-        {
-            if (contentHeaders is null)
-            {
-                using var cachedResponse = new HttpResponseMessage();
-                foreach (var (fieldName, fieldValue) in ContentHeaders)
+                else
                 {
-                    cachedResponse.Content.Headers.Add(fieldName, fieldValue);
+                    SecondaryKey[varyBy] = "";
                 }
-
-                contentHeaders = cachedResponse.Content.Headers;
             }
-        }
-        
-
-        public HttpResponseHeaders GetResponseHeaders()
-        {
-            ParseResponseHeaders();
-            return responseHeaders;
-        }
-
-        public HttpContentHeaders GetContentHeaders()
-        {
-            ParseContentHeaders();
-            return contentHeaders;
         }
 
         public TimeSpan CalculateAge()
         {
-            var apparentAge = CalculateApparentAge(GetResponseHeaders()
-                .Date);
-            var correctedAge = CalculateCorrectedAge(GetResponseHeaders()
-                .Age);
+            var apparentAge = CalculateApparentAge(ResponseHeaders.Date);
+            var correctedAge = CalculateCorrectedAge(ResponseHeaders.Age);
             var correctedInitialAge = Max(apparentAge, correctedAge);
             var residentTime = DateTimeOffset.Now - ResponseTime;
             return correctedInitialAge + residentTime;
@@ -113,6 +102,9 @@ namespace GW2SDK.Http.Caching
 
         public HttpResponseMessage CreateResponse(HttpRequestMessage request)
         {
+            // TODO: handle conditional requests
+            // Handling a Received Validation Request
+            // https://datatracker.ietf.org/doc/html/rfc7234#section-4.3.2
             var response = new HttpResponseMessage((HttpStatusCode)StatusCode)
             {
                 RequestMessage = request,
@@ -133,6 +125,29 @@ namespace GW2SDK.Http.Caching
             response.Headers.Age = CalculateAge();
 
             return response;
+        }
+
+        public bool MatchContent(HttpRequestMessage request)
+        {
+            foreach (var (field, value) in SecondaryKey)
+            {
+                var fieldValue = "";
+                if (request.Headers.TryGetValues(field, out var found))
+                {
+                    fieldValue = string.Join(",", found);
+                }
+
+                if (!string.Equals(
+                    value,
+                    fieldValue,
+                    StringComparison.Ordinal
+                ))
+                {
+                    return false;
+                }
+            }
+
+            return true;
         }
     }
 }

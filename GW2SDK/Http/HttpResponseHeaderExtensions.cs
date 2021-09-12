@@ -67,7 +67,7 @@ namespace GW2SDK.Http
             if (instance.TryGetValues(ResponseHeaderName.Link, out var links))
             {
                 // Assume that there is exactly one value for this header
-                var header = LinkHeader.Parse(links.Single());
+                var header = LinkHeader.Parse(string.Join(",", links));
                 foreach (var link in header.Links)
                 {
                     var href = new HyperlinkReference(link.Href);
