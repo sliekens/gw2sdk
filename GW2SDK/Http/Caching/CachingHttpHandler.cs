@@ -1,8 +1,11 @@
 ﻿using System;
+using System.Buffers;
 using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Security.Cryptography;
+using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using JetBrains.Annotations;
@@ -16,7 +19,7 @@ namespace GW2SDK.Http.Caching
         private static readonly NameValueHeaderValue NoCache = NameValueHeaderValue.Parse("no-cache");
 
         private readonly IHttpCacheStore store;
-
+        
         public CachingHttpHandler(IHttpCacheStore? store = null)
         {
             this.store = store ?? new InMemoryHttpCacheStore();
@@ -294,43 +297,6 @@ namespace GW2SDK.Http.Caching
         {
             // Storing Responses in Caches
             // https://datatracker.ietf.org/doc/html/rfc7234#section-3
-            var cacheControl = response.Headers.CacheControl;
-            if (checkedRequest)
-            {
-                if (response.Content.Headers.Expires.HasValue)
-                {
-                    return true;
-                }
-
-                if (cacheControl?.Public == true)
-                {
-                    return true;
-                }
-
-                if (cacheControl?.Private == true)
-                {
-                    return true;
-                }
-
-                if (cacheControl?.MaxAge.HasValue == true)
-                {
-                    return true;
-                }
-
-                if (cacheControl?.SharedMaxAge.HasValue == true
-                    && CachingBehavior == CachingBehavior.Public)
-                {
-                    return true;
-                }
-
-                if ((int)response.StatusCode is 200 or 203 or 204 or 206 or 300 or 301 or 404 or 405 or 410 or 414 or
-                    501)
-                {
-                    // These statuses can be cached by default, using a heuristic expiration
-                    return true;
-                }
-            }
-
             var request = response.RequestMessage
                 ?? throw new InvalidOperationException("Response must be associated with a request.");
             if (request.Method != Get)
@@ -349,38 +315,81 @@ namespace GW2SDK.Http.Caching
                 return false;
             }
 
+            var cacheControl = response.Headers.CacheControl;
             if (cacheControl?.NoStore == true
                 || response.Headers.Vary.Count == 1 && response.Headers.Vary.Contains("*"))
             {
                 return false;
             }
 
-            if (request.Headers.Authorization is not null)
+            if (request.Headers.Authorization is not null && !CanStoreAuthenticated(response))
             {
-                if (CachingBehavior == CachingBehavior.Public)
+                return false;
+            }
+            
+            if (response.Content.Headers.Expires.HasValue)
+            {
+                return true;
+            }
+
+            if (cacheControl?.Public == true)
+            {
+                return true;
+            }
+
+            if (cacheControl?.Private == true)
+            {
+                return true;
+            }
+
+            if (cacheControl?.MaxAge.HasValue == true)
+            {
+                return true;
+            }
+
+            if (cacheControl?.SharedMaxAge.HasValue == true
+                && CachingBehavior == CachingBehavior.Public)
+            {
+                return true;
+            }
+
+            if ((int)response.StatusCode is 200 or 203 or 204 or 206 or 300 or 301 or 404 or 405 or 410 or 414 or
+                501)
+            {
+                // These statuses can be cached by default, using a heuristic expiration
+                return true;
+            }
+
+            return false;
+        }
+
+        private bool CanStoreAuthenticated(HttpResponseMessage response)
+        {
+            if (CachingBehavior == CachingBehavior.Private)
+            {
+                return true;
+            }
+
+            var cacheControl = response.Headers.CacheControl;
+            if (cacheControl is not null)
+            {
+                if (cacheControl.MustRevalidate)
                 {
-                    // Storing Responses to Authenticated Requests
-                    // https://datatracker.ietf.org/doc/html/rfc7234#section-3.2
-                    if (cacheControl?.MustRevalidate == true)
-                    {
-                        return CanStore(response, true);
-                    }
+                    return true;
+                }
 
-                    if (cacheControl?.Public == true)
-                    {
-                        return CanStore(response, true);
-                    }
+                if (cacheControl.Public)
+                {
+                    return true;
+                }
 
-                    if (cacheControl?.SharedMaxAge.HasValue == true)
-                    {
-                        return CanStore(response, true);
-                    }
-
-                    return false;
+                if (cacheControl.SharedMaxAge.HasValue)
+                {
+                    return true;
                 }
             }
 
-            return CanStore(response, true);
+            return false;
         }
 
         private ResponseCacheDecision CanReuse(HttpRequestMessage request, ResponseCacheEntry cachedResponse)
@@ -514,6 +523,14 @@ namespace GW2SDK.Http.Caching
             cacheEntry.TimeToLive = TimeToLive(response);
 
             cacheEntry.SetSecondaryKey(request, response);
+
+            if (CachingBehavior == CachingBehavior.Private && request.Headers.Authorization?.Parameter is not null)
+            {
+                using var sha1 = new SHA1Managed();
+                var raw = Encoding.UTF8.GetBytes(request.Headers.Authorization.Parameter);
+                var digest = sha1.ComputeHash(raw);
+                cacheEntry.ClaimsPrincipalDigest = digest;
+            }
 
             var noCacheHeaders = new List<string>
             {

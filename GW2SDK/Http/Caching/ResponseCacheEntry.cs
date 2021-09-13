@@ -4,6 +4,8 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Security.Cryptography;
+using System.Text;
 using JetBrains.Annotations;
 
 namespace GW2SDK.Http.Caching
@@ -23,6 +25,9 @@ namespace GW2SDK.Http.Caching
         }
 
         public Guid Id { get; set; }
+
+        /// <summary>A key derived from the Authorization header, to avoid caching problems with claims based authorization.</summary>
+        public byte[] ClaimsPrincipalDigest { get; set; } = Array.Empty<byte>();
 
         public Dictionary<string, string> SecondaryKey { get; set; } = new();
 
@@ -90,6 +95,23 @@ namespace GW2SDK.Http.Caching
 
         public bool MatchContent(HttpRequestMessage request)
         {
+            if (ClaimsPrincipalDigest.Length != 0)
+            {
+                if (request.Headers.Authorization?.Parameter is null)
+                {
+                    return false;
+                }
+
+                using var sha1 = new SHA1Managed();
+                var raw = Encoding.UTF8.GetBytes(request.Headers.Authorization.Parameter);
+                var digest = sha1.ComputeHash(raw);
+                if (!digest.AsSpan()
+                    .SequenceEqual(ClaimsPrincipalDigest.AsSpan()))
+                {
+                    return false;
+                }
+            }
+
             foreach (var (field, value) in SecondaryKey)
             {
                 var fieldValue = "";

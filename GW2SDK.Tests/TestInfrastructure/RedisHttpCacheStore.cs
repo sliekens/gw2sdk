@@ -92,6 +92,10 @@ namespace GW2SDK.Tests.TestInfrastructure
                         var fieldName = keyName.Substring(keyName.IndexOf(':') + 1);
                         retVal.SecondaryKey[fieldName] = kvp.Value;
                     }
+                    else if (kvp.Name == "claims-principal")
+                    {
+                        retVal.ClaimsPrincipalDigest = kvp.Value;
+                    }
                     else if (kvp.Name == "message-body")
                     {
                         retVal.Content = kvp.Value;
@@ -173,6 +177,11 @@ namespace GW2SDK.Tests.TestInfrastructure
             foreach (var field in entry.SecondaryKey)
             {
                 entries.Add(new HashEntry($"vary:{field.Key}", field.Value));
+            }
+
+            if (entry.ClaimsPrincipalDigest.Length != 0)
+            {
+                entries.Add(new HashEntry("claims-principal", entry.ClaimsPrincipalDigest));
             }
 
             await db.HashSetAsync(key, entries.ToArray())
