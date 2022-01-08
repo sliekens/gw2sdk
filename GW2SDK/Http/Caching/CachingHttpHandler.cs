@@ -109,14 +109,16 @@ namespace GW2SDK.Http.Caching
             if (CanStore(response))
             {
                 await StoreAsync(
-                        primaryKey,
-                        request,
-                        response,
-                        requestTime,
-                        responseTime,
-                        cancellationToken
-                    )
-                    .ConfigureAwait(false);
+                    new ResponseCacheEntry
+                    {
+                        Key = primaryKey
+                    },
+                    request,
+                    response,
+                    requestTime,
+                    responseTime,
+                    cancellationToken
+                ).ConfigureAwait(false);
             }
 
             return response;
@@ -249,7 +251,6 @@ namespace GW2SDK.Http.Caching
                 if (CanStore(response))
                 {
                     await StoreAsync(
-                            primaryKey,
                             selectedResponse,
                             request,
                             response,
@@ -488,27 +489,6 @@ namespace GW2SDK.Http.Caching
         }
 
         private async Task StoreAsync(
-            string primaryKey,
-            HttpRequestMessage request,
-            HttpResponseMessage response,
-            DateTimeOffset requestTime,
-            DateTimeOffset responseTime,
-            CancellationToken cancellationToken
-        )
-        {
-            await StoreAsync(
-                primaryKey,
-                new ResponseCacheEntry(),
-                request,
-                response,
-                requestTime,
-                responseTime,
-                cancellationToken
-            ).ConfigureAwait(false);
-        }
-
-        private async Task StoreAsync(
-            string primaryKey,
             ResponseCacheEntry cacheEntry,
             HttpRequestMessage request,
             HttpResponseMessage response,
@@ -576,7 +556,7 @@ namespace GW2SDK.Http.Caching
             cacheEntry.Content = await response.Content.ReadAsByteArrayAsync()
                 .ConfigureAwait(false);
 #endif
-            await store.StoreEntryAsync(primaryKey, cacheEntry, cancellationToken)
+            await store.StoreEntryAsync(cacheEntry, cancellationToken)
                 .ConfigureAwait(false);
         }
 
@@ -634,7 +614,7 @@ namespace GW2SDK.Http.Caching
                 cacheEntry.ContentHeaders.TryAddWithoutValidation(fieldName, fieldValue);
             }
 
-            await store.StoreEntryAsync(primaryKey, cacheEntry, cancellationToken)
+            await store.StoreEntryAsync(cacheEntry, cancellationToken)
                 .ConfigureAwait(false);
         }
     }

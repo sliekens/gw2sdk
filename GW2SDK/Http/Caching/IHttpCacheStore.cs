@@ -13,12 +13,10 @@ namespace GW2SDK.Http.Caching
         IAsyncEnumerable<ResponseCacheEntry> GetEntriesAsync(string primaryKey);
 
         /// <summary>Inserts or updates a cached response.</summary>
-        /// <param name="primaryKey">The cache key in the form: "{Method} {Url}".</param>
         /// <param name="entry">The response data to store.</param>
         /// <param name="cancellationToken">Seems rather obvious.</param>
         /// <returns></returns>
         Task StoreEntryAsync(
-            string primaryKey,
             ResponseCacheEntry entry,
             CancellationToken cancellationToken
         );

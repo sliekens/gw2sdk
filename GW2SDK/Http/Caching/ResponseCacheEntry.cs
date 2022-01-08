@@ -24,6 +24,11 @@ namespace GW2SDK.Http.Caching
             ContentHeaders = _.Content.Headers;
         }
 
+        /// <summary>The cached response's primary key, typically the method and the URL. Used with the <see cref="SecondaryKey" />
+        /// to check if the current response can be reused for a request.</summary>
+        public string Key { get; set; } = "";
+
+        /// <summary>A surrogate key for uniquely identifying this cached response.</summary>
         public Guid Id { get; set; }
 
         /// <summary>A key derived from the Authorization header, to avoid caching problems with claims based authorization.</summary>
@@ -33,10 +38,13 @@ namespace GW2SDK.Http.Caching
 
         public int StatusCode { get; set; }
 
+        /// <summary>The current machine time right before forwarding the request.</summary>
         public DateTimeOffset RequestTime { get; set; }
 
+        /// <summary>The current machine time after receiving the response to a forwarded request.</summary>
         public DateTimeOffset ResponseTime { get; set; }
 
+        /// <summary>The freshness lifetime of the current response.</summary>
         public TimeSpan TimeToLive { get; set; }
 
         public byte[] Content { get; set; } = Array.Empty<byte>();

@@ -25,11 +25,11 @@ namespace GW2SDK.Http.Caching
             await Task.CompletedTask.ConfigureAwait(false);
         }
 
-        public Task StoreEntryAsync(string primaryKey, ResponseCacheEntry entry, CancellationToken cancellationToken)
+        public Task StoreEntryAsync(ResponseCacheEntry entry, CancellationToken cancellationToken)
         {
-            if (!responseCache.TryGetValue(primaryKey, out var entries))
+            if (!responseCache.TryGetValue(entry.Key, out var entries))
             {
-                responseCache[primaryKey] = entries = new ConcurrentDictionary<Guid, ResponseCacheEntry>();
+                responseCache[entry.Key] = entries = new ConcurrentDictionary<Guid, ResponseCacheEntry>();
             }
 
             if (entry.Id == default)

@@ -40,6 +40,7 @@ namespace GW2SDK.Tests.TestInfrastructure
 
                 var retVal = new ResponseCacheEntry
                 {
+                    Key = primaryKey,
                     Id = new Guid((byte[])cachedResponseKey)
                 };
 
@@ -107,7 +108,6 @@ namespace GW2SDK.Tests.TestInfrastructure
         }
 
         public async Task StoreEntryAsync(
-            string primaryKey,
             ResponseCacheEntry entry,
             CancellationToken cancellationToken
         )
@@ -119,18 +119,16 @@ namespace GW2SDK.Tests.TestInfrastructure
             // Add a bit of margin for processing responses with a small freshness
             ttl += TimeSpan.FromMinutes(5);
 
-            RedisKey key = primaryKey;
-
             // TODO: make transactional
             if (entry.Id == default)
             {
                 entry.Id = Guid.NewGuid();
-                var length = await db.ListLeftPushAsync(key, entry.Id.ToByteArray())
+                var length = await db.ListLeftPushAsync(entry.Key, entry.Id.ToByteArray())
                     .ConfigureAwait(false);
                 if (length > 100)
                 {
                     await db.ListTrimAsync(
-                            key,
+                            entry.Key,
                             0,
                             99
                         )
