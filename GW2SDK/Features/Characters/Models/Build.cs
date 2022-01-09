@@ -15,9 +15,11 @@ namespace GW2SDK.Characters
         // Always length 3
         public Specialization[] Specializations { get; init; } = Array.Empty<Specialization>();
 
-        public SkillBar Skills { get; init; } = new ();
+        public SkillBar Skills { get; init; } = new();
 
         public SkillBar AquaticSkills { get; init; } = new();
+
+        public PetSkillBar? Pets { get; init; }
 
         // Always length 2 or missing
         public string?[]? Legends { get; init; }

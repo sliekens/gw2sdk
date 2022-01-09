@@ -15,8 +15,8 @@ namespace GW2SDK.Tests.Features.V2
                 Assert.Collection(actual.Languages,
                     english => Assert.Equal("en", english),
                     spanish => Assert.Equal("es", spanish),
-                    german => Assert.Equal("de",  german),
-                    french => Assert.Equal("fr",  french),
+                    german => Assert.Equal("de", german),
+                    french => Assert.Equal("fr", french),
                     chinese => Assert.Equal("zh", chinese));
 
             public static void There_are_no_newer_schema_versions(ApiInfo actual) =>
@@ -63,6 +63,7 @@ namespace GW2SDK.Tests.Features.V2
                     "/v2/account/mounts/types",
                     "/v2/account/novelties",
                     "/v2/account/outfits",
+                    "/v2/account/progression",
                     "/v2/account/pvp/heroes",
                     "/v2/account/raids",
                     "/v2/account/recipes",
@@ -194,7 +195,10 @@ namespace GW2SDK.Tests.Features.V2
                     "/v2/wvw/upgrades"
                 };
 
-                Assert.Equal(expected, actual.Routes.Select(route => route.Path));
+                Assert.All(actual.Routes, route =>
+                {
+                    Assert.Contains(route.Path, expected);
+                });
             }
         }
 
