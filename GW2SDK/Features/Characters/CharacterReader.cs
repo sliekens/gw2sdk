@@ -332,9 +332,8 @@ namespace GW2SDK.Characters
                 Upgrades = upgrades.Select(value => value.GetArray(item => item.GetInt32())),
                 UpgradeSlotIndices = upgradeSlotIndices.Select(value => value.GetArray(item => item.GetInt32())),
                 Infusions = infusions.Select(value => value.GetArray(item => item.GetInt32())),
-                Dyes =
-                    dyes.Select(value =>
-                        value.GetArray(item => item.ValueKind == JsonValueKind.Null ? null : (int?) item.GetInt32())),
+                Dyes = dyes.Select(value =>
+                    value.GetArray(item => item.ValueKind == JsonValueKind.Null ? null : (int?)item.GetInt32())),
                 Binding = binding.GetValue(missingMemberBehavior),
                 BoundTo = boundTo.GetValueOrEmpty(),
                 Stats = stats.Select(value => ReadSelectedStat(value, missingMemberBehavior))
@@ -426,7 +425,7 @@ namespace GW2SDK.Characters
                 Location = location.GetValue(missingMemberBehavior),
                 Tabs = tabs.Select(value => value.GetArray(item => item.GetInt32())),
                 Dyes = dyes.Select(value =>
-                    value.GetArray(item => item.ValueKind == JsonValueKind.Null ? null : (int?) item.GetInt32()))
+                    value.GetArray(item => item.ValueKind == JsonValueKind.Null ? null : (int?)item.GetInt32()))
             };
         }
 
@@ -648,7 +647,7 @@ namespace GW2SDK.Characters
                 AmuletId = amulet.GetValue(),
                 RuneId = rune.GetValue(),
                 SigilIds = sigils.Select(value =>
-                    value.GetArray(item => item.ValueKind == JsonValueKind.Null ? null : (int?) item.GetInt32()))
+                    value.GetArray(item => item.ValueKind == JsonValueKind.Null ? null : (int?)item.GetInt32()))
             };
         }
 
@@ -694,6 +693,7 @@ namespace GW2SDK.Characters
             var specializations = new RequiredMember<Specialization[]>("specializations");
             var skills = new RequiredMember<SkillBar>("skills");
             var aquaticSkills = new RequiredMember<SkillBar>("aquatic_skills");
+            var pets = new OptionalMember<PetSkillBar>("pets");
             var legends = new OptionalMember<string?[]>("legends");
             var aquaticLegends = new OptionalMember<string?[]>("aquatic_legends");
 
@@ -719,6 +719,10 @@ namespace GW2SDK.Characters
                 {
                     aquaticSkills = aquaticSkills.From(member.Value);
                 }
+                else if (member.NameEquals(pets.Name))
+                {
+                    pets = pets.From(member.Value);
+                }
                 else if (member.NameEquals(legends.Name))
                 {
                     legends = legends.From(member.Value);
@@ -742,6 +746,7 @@ namespace GW2SDK.Characters
                         value.GetArray(item => ReadSpecialization(item, missingMemberBehavior))),
                 Skills = skills.Select(value => ReadSkillBar(value, missingMemberBehavior)),
                 AquaticSkills = aquaticSkills.Select(value => ReadSkillBar(value, missingMemberBehavior)),
+                Pets = pets.Select(value => ReadPets(value, missingMemberBehavior)),
                 Legends = legends.Select(value => ReadLegends(value)),
                 AquaticLegends = aquaticLegends.Select(value => ReadLegends(value))
             };
@@ -777,7 +782,7 @@ namespace GW2SDK.Characters
             {
                 Heal = heal.GetValue(),
                 Utilities = utilities.Select(value =>
-                    value.GetArray(item => item.ValueKind == JsonValueKind.Null ? null : (int?) item.GetInt32())),
+                    value.GetArray(item => item.ValueKind == JsonValueKind.Null ? null : (int?)item.GetInt32())),
                 Elite = elite.GetValue()
             };
         }
@@ -807,7 +812,37 @@ namespace GW2SDK.Characters
             {
                 Id = id.GetValue(),
                 Traits = traits.Select(value =>
-                    value.GetArray(item => item.ValueKind == JsonValueKind.Null ? null : (int?) item.GetInt32()))
+                    value.GetArray(item => item.ValueKind == JsonValueKind.Null ? null : (int?)item.GetInt32()))
+            };
+        }
+
+        private PetSkillBar ReadPets(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+        {
+            var terrestrial = new RequiredMember<int?[]>("terrestrial");
+            var aquatic = new RequiredMember<int?[]>("aquatic");
+
+            foreach (var member in json.EnumerateObject())
+            {
+                if (member.NameEquals(terrestrial.Name))
+                {
+                    terrestrial = terrestrial.From(member.Value);
+                }
+                else if (member.NameEquals(aquatic.Name))
+                {
+                    aquatic = aquatic.From(member.Value);
+                }
+                else if (missingMemberBehavior == MissingMemberBehavior.Error)
+                {
+                    throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
+                }
+            }
+
+            return new PetSkillBar
+            {
+                Terrestrial = terrestrial.Select(value =>
+                    value.GetArray(item => item.ValueKind == JsonValueKind.Null ? null : (int?)item.GetInt32())),
+                Aquatic = aquatic.Select(value =>
+                    value.GetArray(item => item.ValueKind == JsonValueKind.Null ? null : (int?)item.GetInt32()))
             };
         }
 
