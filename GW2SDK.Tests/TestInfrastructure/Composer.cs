@@ -6,6 +6,7 @@ using GW2SDK.Accounts.Achievements;
 using GW2SDK.Accounts.Banks;
 using GW2SDK.Accounts.DailyCrafting;
 using GW2SDK.Accounts.Recipes;
+using GW2SDK.Accounts.Wallet;
 using GW2SDK.Accounts.WorldBosses;
 using GW2SDK.Achievements;
 using GW2SDK.Achievements.Categories;
@@ -18,6 +19,7 @@ using GW2SDK.Colors;
 using GW2SDK.Commerce;
 using GW2SDK.Continents;
 using GW2SDK.Currencies;
+using GW2SDK.Features.Accounts.Wallet;
 using GW2SDK.Items;
 using GW2SDK.ItemStats;
 using GW2SDK.Json;
@@ -271,6 +273,11 @@ namespace GW2SDK.Tests.TestInfrastructure
             if (serviceType == typeof(QuagganService))
             {
                 return new QuagganService(Resolve<HttpClient>(), new QuagganReader(), MissingMemberBehavior.Error);
+            }
+
+            if (serviceType == typeof(WalletService))
+            {
+                return new WalletService(Resolve<HttpClient>(), new WalletReader(), MissingMemberBehavior.Error);
             }
 
             return null;
