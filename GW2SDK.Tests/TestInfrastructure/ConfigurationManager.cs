@@ -8,7 +8,7 @@ namespace GW2SDK.Tests.TestInfrastructure
         public ConfigurationManager()
         {
             Configuration = new ConfigurationBuilder().AddJsonFile("appsettings.json")
-                .AddUserSecrets<ConfigurationManager>()
+                .AddUserSecrets<ConfigurationManager>(true)
                 .AddEnvironmentVariables()
                 .Build();
         }
