@@ -28,10 +28,14 @@ jobs:
         source-url: https://nuget.pkg.github.com/stevenliekens/index.json
       env:
         NUGET_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
-    - name: Setup .NET Core SDK 6.0 for regression testing
+    - name: Setup .NET 5.0 SDK for regression testing
       uses: actions/setup-dotnet@v1
       with:
-        dotnet-version: '6.0.x'
+        dotnet-version: '5.0.x'
+    - name: Setup .NET Core 3.1 SDK for regression testing
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: '3.1.x'
     - name: Install dependencies
       run: dotnet restore --locked-mode
     - name: Test
