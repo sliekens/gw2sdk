@@ -6,17 +6,11 @@ using JetBrains.Annotations;
 namespace GW2SDK.Http
 {
     [PublicAPI]
-    public sealed record HttpRequestMessageTemplate
+    public sealed record HttpRequestMessageTemplate(HttpMethod Method, string Path)
     {
-        public HttpRequestMessageTemplate(HttpMethod method, string path)
-        {
-            Method = method;
-            Path = path;
-        }
+        public HttpMethod Method { get; set; } = Method;
 
-        public HttpMethod Method { get; set; }
-
-        public string Path { get; set; }
+        public string Path { get; set; } = Path;
 
         public string? AcceptEncoding { get; set; }
 

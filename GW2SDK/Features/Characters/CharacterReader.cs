@@ -33,7 +33,7 @@ namespace GW2SDK.Characters
             var equipment = new OptionalMember<EquipmentItem[]>("equipment");
             var equipmentTabs = new OptionalMember<EquipmentTab[]>("equipment_tabs");
             var recipes = new OptionalMember<int[]>("recipes");
-            var training = new OptionalMember<TrainingObjective[]>("training");
+            var training = new OptionalMember<TrainingTrack[]>("training");
             var bags = new OptionalMember<Bag?[]>("bags");
 
             foreach (var member in json.EnumerateObject())
@@ -534,7 +534,7 @@ namespace GW2SDK.Characters
             };
         }
 
-        private TrainingObjective ReadTrainingObjective(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+        private TrainingTrack ReadTrainingObjective(JsonElement json, MissingMemberBehavior missingMemberBehavior)
         {
             var id = new RequiredMember<int>("id");
             var spent = new RequiredMember<int>("spent");
@@ -560,7 +560,7 @@ namespace GW2SDK.Characters
                 }
             }
 
-            return new TrainingObjective
+            return new TrainingTrack
             {
                 Id = id.GetValue(),
                 Spent = spent.GetValue(),
