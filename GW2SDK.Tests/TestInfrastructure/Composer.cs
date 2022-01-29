@@ -19,7 +19,6 @@ using GW2SDK.Colors;
 using GW2SDK.Commerce;
 using GW2SDK.Continents;
 using GW2SDK.Currencies;
-using GW2SDK.Features.Accounts.Wallet;
 using GW2SDK.Items;
 using GW2SDK.ItemStats;
 using GW2SDK.Json;

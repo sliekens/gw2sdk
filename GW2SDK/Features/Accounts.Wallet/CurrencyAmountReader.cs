@@ -1,10 +1,9 @@
-﻿using GW2SDK.Accounts.Wallet;
-using GW2SDK.Json;
+﻿using GW2SDK.Json;
 using JetBrains.Annotations;
 using System;
 using System.Text.Json;
 
-namespace GW2SDK.Features.Accounts.Wallet
+namespace GW2SDK.Accounts.Wallet
 {
     [PublicAPI]
     public sealed class CurrencyAmountReader : IJsonReader<CurrencyAmount>
