@@ -8,6 +8,7 @@ namespace GW2SDK.Characters
     [DataTransferObject(RootObject = false)]
     public sealed record Build
     {
+        /// <summary>The player-chosen name of this build.</summary>
         public string Name { get; init; } = "";
 
         public ProfessionName Profession { get; init; }
