@@ -1,6 +1,6 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
-using GW2SDK.Features.Accounts.Wallet;
+using GW2SDK.Accounts.Wallet;
 using GW2SDK.Tests.TestInfrastructure;
 using Xunit;
 

@@ -1,8 +1,7 @@
-﻿using GW2SDK.Accounts.Wallet;
-using GW2SDK.Json;
+﻿using GW2SDK.Json;
 using JetBrains.Annotations;
 
-namespace GW2SDK.Features.Accounts.Wallet
+namespace GW2SDK.Accounts.Wallet
 {
     [PublicAPI]
     public sealed class WalletReader : IWalletReader

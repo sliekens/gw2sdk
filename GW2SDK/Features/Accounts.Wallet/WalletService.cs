@@ -1,5 +1,4 @@
-﻿using GW2SDK.Accounts.Wallet;
-using GW2SDK.Accounts.Wallet.Http;
+﻿using GW2SDK.Accounts.Wallet.Http;
 using GW2SDK.Annotations;
 using GW2SDK.Http;
 using GW2SDK.Json;
@@ -10,7 +9,7 @@ using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace GW2SDK.Features.Accounts.Wallet
+namespace GW2SDK.Accounts.Wallet
 {
     [PublicAPI]
     public sealed class WalletService
