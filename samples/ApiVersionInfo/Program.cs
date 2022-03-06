@@ -73,14 +73,14 @@ namespace ApiVersionInfo
                 if (route.Active)
                 {
                     routes.AddRow(route.Path.EscapeMarkup(),
-                        route.RequiresAuthorization ? "Requires token" : "Anonymous",
-                        route.Multilingual ? string.Join(", ", metadata.Value.Languages) : "");
+                        route.RequiresAuthorization ? "Token" : "⸻",
+                        route.Multilingual ? string.Join(", ", metadata.Value.Languages) : "⸻");
                 }
                 else if (showDisabled)
                 {
                     routes.AddRow($"[dim]{route.Path.EscapeMarkup()}[/]",
-                        route.RequiresAuthorization ? "Requires token" : "Anonymous",
-                        route.Multilingual ? string.Join(", ", metadata.Value.Languages) : "");
+                        route.RequiresAuthorization ? "Token" : "⸻",
+                        route.Multilingual ? string.Join(", ", metadata.Value.Languages) : "⸻");
                 }
             }
 
@@ -95,9 +95,9 @@ namespace ApiVersionInfo
             }
 
             AnsiConsole.WriteLine("The following paths are exposed by this API:");
-            AnsiConsole.Render(routes);
-            AnsiConsole.Render(new Rule("Notable changes").LeftAligned());
-            AnsiConsole.Render(changes);
+            AnsiConsole.Write(routes);
+            AnsiConsole.Write(new Rule("Notable changes").LeftAligned());
+            AnsiConsole.Write(changes);
         }
     }
 }
