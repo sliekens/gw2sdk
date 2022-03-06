@@ -81,7 +81,7 @@ namespace MostVersatileMaterials
                     new Markup(choice.Name.EscapeMarkup()),
                     new Markup(choice.Description.EscapeMarkup()));
 
-                AnsiConsole.Render(choiceTable);
+                AnsiConsole.Write(choiceTable);
 
                 var outputs = await Progress()
                     .StartAsync(async ctx =>
@@ -100,7 +100,7 @@ namespace MostVersatileMaterials
                     recipesTable.AddRow(recipe.Name.EscapeMarkup(), recipe.Description.EscapeMarkup());
                 }
 
-                AnsiConsole.Render(recipesTable);
+                AnsiConsole.Write(recipesTable);
             } while (AnsiConsole.Confirm("Do you want to choose again?"));
         }
 

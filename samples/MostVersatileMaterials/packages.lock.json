@@ -4,28 +4,33 @@
     "net6.0": {
       "Spectre.Console": {
         "type": "Direct",
-        "requested": "[0.41.0, )",
-        "resolved": "0.41.0",
-        "contentHash": "lHNIjQ2INytX8YkMQYzBVGhQAtVeJe5neClsuF8L9q8rbv0cRTkizrlgTtWpGYZq01fy1KKHATxId7uxejiK3Q==",
-        "dependencies": {
-          "Wcwidth": "0.2.0"
-        }
+        "requested": "[0.43.0, )",
+        "resolved": "0.43.0",
+        "contentHash": "TyfzVxx3jHr1FeeI9Z6Jn6QTnP7KduV14dn9GTYc0v/t2h4L6WJ0Kc2DOnOJUlGBQ/qXK4P+HITIR/JTHcKYLg=="
       },
       "Spectre.Console.ImageSharp": {
         "type": "Direct",
-        "requested": "[0.41.0, )",
-        "resolved": "0.41.0",
-        "contentHash": "ydqImiAEdYtSQRHITj47ApGiMW/jy9j2wNWBoqzkcSXlLxLYJNFWg78CeD8D2fTr2zxWfesc0Er5AIMiShC6KQ==",
+        "requested": "[0.43.0, )",
+        "resolved": "0.43.0",
+        "contentHash": "Y+UYKSx7VV9i2MCrMjAuQNRxV0oqtELEBcLOzwUlgPpMrPTyXz79mNC89SLUjwCnRcVghlIALxXEow0eLv6AkA==",
         "dependencies": {
           "SixLabors.ImageSharp": "1.0.2",
-          "Spectre.Console": "0.41.0"
+          "Spectre.Console": "0.43.0"
         }
       },
       "System.Linq.Async": {
         "type": "Direct",
-        "requested": "[5.0.0, )",
-        "resolved": "5.0.0",
-        "contentHash": "cPtIuuH8TIjVHSi2ewwReWGW1PfChPE0LxPIDlfwVcLuTM9GANFTXiMB7k3aC4sk3f0cQU25LNKzx+jZMxijqw=="
+        "requested": "[6.0.1, )",
+        "resolved": "6.0.1",
+        "contentHash": "0YhHcaroWpQ9UCot3Pizah7ryAzQhNvobLMSxeDIGmnXfkQn8u5owvpOH0K6EVB+z9L7u6Cc4W17Br/+jyttEQ==",
+        "dependencies": {
+          "Microsoft.Bcl.AsyncInterfaces": "6.0.0"
+        }
+      },
+      "Microsoft.Bcl.AsyncInterfaces": {
+        "type": "Transitive",
+        "resolved": "6.0.0",
+        "contentHash": "UcSjPsst+DfAdJGVDsu346FX0ci0ah+lw3WRtn18NUwEqRt70HaOQ7lI72vy3+1LxtqI3T5GWwV39rQSrCzAeg=="
       },
       "SixLabors.ImageSharp": {
         "type": "Transitive",
@@ -36,11 +41,6 @@
         "type": "Transitive",
         "resolved": "5.0.2",
         "contentHash": "I47dVIGiV6SfAyppphxqupertT/5oZkYLDCX6vC3HpOI4ZLjyoKAreUoem2ie6G0RbRuFrlqz/PcTQjfb2DOfQ=="
-      },
-      "Wcwidth": {
-        "type": "Transitive",
-        "resolved": "0.2.0",
-        "contentHash": "H7no2W0vuLJTvSPanlrijtG3UdJNVoeWBOp2a5dJFVa2tqSQuP5GfbJw1xAtPG9agRW310nFTUUsyPz5tuVIxw=="
       },
       "gw2sdk": {
         "type": "Project",
