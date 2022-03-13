@@ -67,6 +67,7 @@ namespace GW2SDK.Mounts
                 "skyscale" => MountName.Skyscale,
                 "springer" => MountName.Springer,
                 "warclaw" => MountName.Warclaw,
+                "turtle" => MountName.Turtle,
                 _ when missingMemberBehavior is MissingMemberBehavior.Error => UnexpectedMemberError(),
                 _ => (MountName) text.GetDeterministicHashCode()
             };

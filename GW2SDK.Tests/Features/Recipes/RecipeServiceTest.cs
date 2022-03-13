@@ -161,7 +161,7 @@ namespace GW2SDK.Tests.Features.Recipes
             Assert.Equal(actual.Context.ResultTotal, actual.Values.Count);
             Assert.Equal(actual.Context.ResultTotal, actual.Context.ResultCount);
             Assert.All(actual.Values,
-                recipe => Assert.Contains(recipe.Ingredients, ingredient => ingredient.ItemId == visionCrystal));
+                recipe => Assert.Contains(recipe.Ingredients, ingredient => ingredient.Id == visionCrystal));
         }
 
         [Fact(Skip =

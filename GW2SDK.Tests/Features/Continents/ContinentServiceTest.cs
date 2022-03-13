@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using GW2SDK.Continents;
 using GW2SDK.Tests.TestInfrastructure;
@@ -60,7 +59,11 @@ namespace GW2SDK.Tests.Features.Continents
             await using var services = new Composer();
             var sut = services.Resolve<ContinentService>();
 
-            var ids = new HashSet<int> { 1, 2 };
+            var ids = new HashSet<int>
+            {
+                1,
+                2
+            };
 
             var actual = await sut.GetContinentsByIds(ids);
 
@@ -90,6 +93,22 @@ namespace GW2SDK.Tests.Features.Continents
             var actual = await sut.GetFloors(continentId);
 
             Assert.Equal(actual.Context.ResultTotal, actual.Values.Count);
+
+            foreach (var floor in actual.Values)
+            foreach (var (regionId, region) in floor.Regions)
+            foreach (var (mapId, map) in region.Maps)
+            foreach (var skillChallenge in map.SkillChallenges)
+            {
+                // BUG(?): Cantha (id 37) does not have skill challenge ids
+                if (regionId == 37)
+                {
+                    Assert.Empty(skillChallenge.Id);
+                }
+                else
+                {
+                    Assert.NotEmpty(skillChallenge.Id);
+                }
+            }
         }
 
         [Fact]
@@ -126,7 +145,11 @@ namespace GW2SDK.Tests.Features.Continents
             var sut = services.Resolve<ContinentService>();
 
             const int continentId = 1;
-            var ids = new HashSet<int> { 1, 2 };
+            var ids = new HashSet<int>
+            {
+                1,
+                2
+            };
 
             var actual = await sut.GetFloorsByIds(continentId, ids);
 

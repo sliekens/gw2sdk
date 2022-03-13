@@ -1,7 +1,6 @@
 ﻿using System.Text.Json;
 using GW2SDK.Items;
 using GW2SDK.Json;
-using GW2SDK.Tests.TestInfrastructure;
 using Xunit;
 
 namespace GW2SDK.Tests.Features.Items
@@ -20,7 +19,7 @@ namespace GW2SDK.Tests.Features.Items
         {
             var sut = new ItemReader();
 
-            AssertEx.ForEach(fixture.Items,
+            Assert.All(fixture.Items,
                 json =>
                 {
                     using var document = JsonDocument.Parse(json);

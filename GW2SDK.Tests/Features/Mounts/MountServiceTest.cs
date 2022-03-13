@@ -17,8 +17,6 @@ namespace GW2SDK.Tests.Features.Mounts
 
             var actual = await sut.GetMounts();
 
-            Assert.Equal(Enum.GetNames(typeof(MountName)).Length, actual.Values.Count);
-
             foreach (var mount in actual.Values)
             {
                 Assert.True(Enum.IsDefined(typeof(MountName), mount.Id), "Enum.IsDefined(mount.Id)");
@@ -34,7 +32,6 @@ namespace GW2SDK.Tests.Features.Mounts
 
             var actual = await sut.GetMountNames();
 
-            Assert.Equal(Enum.GetNames(typeof(MountName)).Length, actual.Values.Count);
             Assert.All(actual.Values, name => Assert.True(Enum.IsDefined(typeof(MountName), name), "Enum.IsDefined(name)"));
         }
 
