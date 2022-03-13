@@ -215,7 +215,9 @@ namespace GW2SDK.Continents
         private SkillChallenge ReadSkillChallenge(JsonElement json, MissingMemberBehavior missingMemberBehavior)
         {
             var coordinates = new RequiredMember<double[]>("coord");
-            var id = new RequiredMember<string>("id");
+
+            // The 'id' is missing from hero points in End of Dragon maps
+            var id = new OptionalMember<string>("id");
             foreach (var member in json.EnumerateObject())
             {
                 if (member.NameEquals(coordinates.Name))
@@ -234,7 +236,7 @@ namespace GW2SDK.Continents
 
             return new SkillChallenge
             {
-                Id = id.GetValue(),
+                Id = id.GetValueOrEmpty(),
                 Coordinates = coordinates.Select(value => value.GetArray(item => item.GetDouble()))
             };
         }
