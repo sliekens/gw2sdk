@@ -22,6 +22,7 @@ namespace GW2SDK.Recipes
         IJsonReader<EarringRecipe>,
         IJsonReader<FeastRecipe>,
         IJsonReader<FocusRecipe>,
+        IJsonReader<FoodRecipe>,
         IJsonReader<GlovesRecipe>,
         IJsonReader<GreatswordRecipe>,
         IJsonReader<GuildConsumableRecipe>,
@@ -1250,6 +1251,86 @@ namespace GW2SDK.Recipes
             }
 
             return new FocusRecipe
+            {
+                Id = id.GetValue(),
+                OutputItemId = outputItemId.GetValue(),
+                OutputItemCount = outputItemCount.GetValue(),
+                MinRating = minRating.GetValue(),
+                TimeToCraft = timeToCraft.Select(value => TimeSpan.FromMilliseconds(value.GetDouble())),
+                Disciplines = disciplines.GetValue(missingMemberBehavior),
+                Flags = flags.GetValue(missingMemberBehavior),
+                Ingredients = ingredients.Select(value => value.GetArray(item => ReadIngredient(item, missingMemberBehavior))),
+                ChatLink = chatLink.GetValue()
+            };
+        }
+
+        FoodRecipe IJsonReader<FoodRecipe>.Read(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+        {
+            var outputItemId = new RequiredMember<int>("output_item_id");
+            var outputItemCount = new RequiredMember<int>("output_item_count");
+            var minRating = new RequiredMember<int>("min_rating");
+            var timeToCraft = new RequiredMember<TimeSpan>("time_to_craft_ms");
+            var disciplines = new RequiredMember<CraftingDisciplineName[]>("disciplines");
+            var flags = new RequiredMember<RecipeFlag[]>("flags");
+            var ingredients = new RequiredMember<Ingredient[]>("ingredients");
+            var id = new RequiredMember<int>("id");
+            var chatLink = new RequiredMember<string>("chat_link");
+            foreach (var member in json.EnumerateObject())
+            {
+                if (member.NameEquals("type"))
+                {
+                    if (!member.Value.ValueEquals("Food"))
+                    {
+                        throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    }
+                }
+                else if (member.NameEquals(outputItemId.Name))
+                {
+                    outputItemId = outputItemId.From(member.Value);
+                }
+                else if (member.NameEquals(outputItemCount.Name))
+                {
+                    outputItemCount = outputItemCount.From(member.Value);
+                }
+                else if (member.NameEquals(minRating.Name))
+                {
+                    minRating = minRating.From(member.Value);
+                }
+                else if (member.NameEquals(minRating.Name))
+                {
+                    minRating = minRating.From(member.Value);
+                }
+                else if (member.NameEquals(timeToCraft.Name))
+                {
+                    timeToCraft = timeToCraft.From(member.Value);
+                }
+                else if (member.NameEquals(disciplines.Name))
+                {
+                    disciplines = disciplines.From(member.Value);
+                }
+                else if (member.NameEquals(flags.Name))
+                {
+                    flags = flags.From(member.Value);
+                }
+                else if (member.NameEquals(ingredients.Name))
+                {
+                    ingredients = ingredients.From(member.Value);
+                }
+                else if (member.NameEquals(id.Name))
+                {
+                    id = id.From(member.Value);
+                }
+                else if (member.NameEquals(chatLink.Name))
+                {
+                    chatLink = chatLink.From(member.Value);
+                }
+                else if (missingMemberBehavior == MissingMemberBehavior.Error)
+                {
+                    throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
+                }
+            }
+
+            return new FoodRecipe
             {
                 Id = id.GetValue(),
                 OutputItemId = outputItemId.GetValue(),
@@ -2788,6 +2869,8 @@ namespace GW2SDK.Recipes
                     return ((IJsonReader<FeastRecipe>)this).Read(json, missingMemberBehavior);
                 case "Focus":
                     return ((IJsonReader<FocusRecipe>)this).Read(json, missingMemberBehavior);
+                case "Food":
+                    return ((IJsonReader<FoodRecipe>)this).Read(json, missingMemberBehavior);
                 case "Gloves":
                     return ((IJsonReader<GlovesRecipe>)this).Read(json, missingMemberBehavior);
                 case "Greatsword":
@@ -2944,13 +3027,18 @@ namespace GW2SDK.Recipes
 
         private Ingredient ReadIngredient(JsonElement json, MissingMemberBehavior missingMemberBehavior)
         {
-            var itemId = new RequiredMember<int>("item_id");
+            var type = new RequiredMember<IngredientKind>("type");
+            var id = new RequiredMember<int>("id");
             var count = new RequiredMember<int>("count");
             foreach (var member in json.EnumerateObject())
             {
-                if (member.NameEquals(itemId.Name))
+                if (member.NameEquals(type.Name))
                 {
-                    itemId = itemId.From(member.Value);
+                    type = type.From(member.Value);
+                }
+                else if (member.NameEquals(id.Name))
+                {
+                    id = id.From(member.Value);
                 }
                 else if (member.NameEquals(count.Name))
                 {
@@ -2964,7 +3052,8 @@ namespace GW2SDK.Recipes
 
             return new Ingredient
             {
-                ItemId = itemId.GetValue(),
+                Kind = type.GetValue(missingMemberBehavior),
+                Id = id.GetValue(),
                 Count = count.GetValue()
             };
         }

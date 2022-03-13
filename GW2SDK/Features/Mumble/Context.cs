@@ -76,6 +76,8 @@ namespace GW2SDK.Mumble
                 6 => MountName.RollerBeetle,
                 7 => MountName.Warclaw,
                 8 => MountName.Skyscale,
+                9 => MountName.Skiff,
+                10 => MountName.Turtle,
                 _ => throw new NotSupportedException("The current mount is not supported.")
             };
     }

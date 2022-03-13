@@ -7,18 +7,22 @@ namespace GW2SDK
     {
         Griffon = 1,
 
-        Jackal,
+        Jackal = 11,
 
-        Raptor,
+        Raptor = 21,
 
-        RollerBeetle,
+        RollerBeetle = 31,
 
-        Skimmer,
+        Skiff = 41,
 
-        Skyscale,
+        Skimmer = 51,
 
-        Springer,
+        Skyscale = 61,
 
-        Warclaw
+        Springer = 71,
+
+        Turtle = 81,
+
+        Warclaw = 91
     }
 }

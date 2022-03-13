@@ -23,6 +23,7 @@ namespace GW2SDK.Skins
         IJsonReader<WeaponSkin>,
         IJsonReader<AxeSkin>,
         IJsonReader<DaggerSkin>,
+        IJsonReader<FishingToolSkin>,
         IJsonReader<FocusSkin>,
         IJsonReader<GreatswordSkin>,
         IJsonReader<HammerSkin>,
@@ -759,11 +760,13 @@ namespace GW2SDK.Skins
             switch (json.GetProperty("details").GetProperty("type").GetString())
             {
                 case "Foraging":
-                    return ((IJsonReader<ForagingToolSkin>) this).Read(json, missingMemberBehavior);
+                    return ((IJsonReader<ForagingToolSkin>)this).Read(json, missingMemberBehavior);
                 case "Logging":
-                    return ((IJsonReader<LoggingToolSkin>) this).Read(json, missingMemberBehavior);
+                    return ((IJsonReader<LoggingToolSkin>)this).Read(json, missingMemberBehavior);
                 case "Mining":
-                    return ((IJsonReader<MiningToolSkin>) this).Read(json, missingMemberBehavior);
+                    return ((IJsonReader<MiningToolSkin>)this).Read(json, missingMemberBehavior);
+                case "Foo": // TODO: use real type
+                    return ((IJsonReader<FishingToolSkin>)this).Read(json, missingMemberBehavior);
             }
 
             var name = new RequiredMember<string>("name");
@@ -834,6 +837,87 @@ namespace GW2SDK.Skins
             }
 
             return new GatheringToolSkin
+            {
+                Id = id.GetValue(),
+                Name = name.GetValue(),
+                Description = description.GetValueOrEmpty(),
+                Rarity = rarity.GetValue(missingMemberBehavior),
+                Flags = flags.GetValue(missingMemberBehavior),
+                Restrictions = restrictions.GetValue(missingMemberBehavior),
+                Icon = icon.GetValueOrNull()
+            };
+        }
+
+        FishingToolSkin IJsonReader<FishingToolSkin>.Read(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+        {
+            var name = new RequiredMember<string>("name");
+            var description = new OptionalMember<string>("description");
+            var rarity = new RequiredMember<Rarity>("rarity");
+            var flags = new RequiredMember<SkinFlag[]>("flags");
+            var restrictions = new RequiredMember<SkinRestriction[]>("restrictions");
+            var id = new RequiredMember<int>("id");
+            var icon = new OptionalMember<string>("icon");
+            foreach (var member in json.EnumerateObject())
+            {
+                if (member.NameEquals("type"))
+                {
+                    if (!member.Value.ValueEquals("Gathering"))
+                    {
+                        throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    }
+                }
+                else if (member.NameEquals(name.Name))
+                {
+                    name = name.From(member.Value);
+                }
+                else if (member.NameEquals(description.Name))
+                {
+                    description = description.From(member.Value);
+                }
+                else if (member.NameEquals(rarity.Name))
+                {
+                    rarity = rarity.From(member.Value);
+                }
+                else if (member.NameEquals(flags.Name))
+                {
+                    flags = flags.From(member.Value);
+                }
+                else if (member.NameEquals(restrictions.Name))
+                {
+                    restrictions = restrictions.From(member.Value);
+                }
+                else if (member.NameEquals(id.Name))
+                {
+                    id = id.From(member.Value);
+                }
+                else if (member.NameEquals(icon.Name))
+                {
+                    icon = icon.From(member.Value);
+                }
+                else if (member.NameEquals("details"))
+                {
+                    foreach (var detail in member.Value.EnumerateObject())
+                    {
+                        if (detail.NameEquals("type"))
+                        {
+                            if (!detail.Value.ValueEquals("Foo")) // TODO: use real type
+                            {
+                                throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
+                            }
+                        }
+                        else if (missingMemberBehavior == MissingMemberBehavior.Error)
+                        {
+                            throw new InvalidOperationException(Strings.UnexpectedMember(detail.Name));
+                        }
+                    }
+                }
+                else if (missingMemberBehavior == MissingMemberBehavior.Error)
+                {
+                    throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
+                }
+            }
+
+            return new FishingToolSkin
             {
                 Id = id.GetValue(),
                 Name = name.GetValue(),

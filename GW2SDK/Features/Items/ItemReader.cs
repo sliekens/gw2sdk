@@ -58,6 +58,7 @@ namespace GW2SDK.Items
         IJsonReader<ForagingTool>,
         IJsonReader<LoggingTool>,
         IJsonReader<MiningTool>,
+        IJsonReader<FishingTool>,
         IJsonReader<Gizmo>,
         IJsonReader<ContainerKey>,
         IJsonReader<DefaultGizmo>,
@@ -100,7 +101,9 @@ namespace GW2SDK.Items
         IJsonReader<Toy>,
         IJsonReader<ToyTwoHanded>,
         IJsonReader<Trident>,
-        IJsonReader<Warhorn>
+        IJsonReader<Warhorn>,
+        IJsonReader<PowerCore>,
+        IJsonReader<JadeBotUpgrade>
     {
         public Item Read(JsonElement json, MissingMemberBehavior missingMemberBehavior)
         {
@@ -136,6 +139,12 @@ namespace GW2SDK.Items
                     return ((IJsonReader<UpgradeComponent>) this).Read(json, missingMemberBehavior);
                 case "Weapon":
                     return ((IJsonReader<Weapon>) this).Read(json, missingMemberBehavior);
+                // TODO: use real type 
+                case "Qux":
+                    return ((IJsonReader<PowerCore>)this).Read(json, missingMemberBehavior);
+                // TODO: use real type 
+                case "Quux":
+                    return ((IJsonReader<JadeBotUpgrade>)this).Read(json, missingMemberBehavior);
             }
 
             var name = new RequiredMember<string>("name");
@@ -6139,6 +6148,8 @@ namespace GW2SDK.Items
                     return ((IJsonReader<LoggingTool>)this).Read(json, missingMemberBehavior);
                 case "Mining":
                     return ((IJsonReader<MiningTool>)this).Read(json, missingMemberBehavior);
+                case "Foo": // TODO: use real type
+                    return ((IJsonReader<FishingTool>)this).Read(json, missingMemberBehavior);
             }
 
             var name = new RequiredMember<string>("name");
@@ -6154,7 +6165,14 @@ namespace GW2SDK.Items
             var icon = new OptionalMember<string>("icon");
             foreach (var member in json.EnumerateObject())
             {
-                if (member.NameEquals(name.Name))
+                if (member.NameEquals("type"))
+                {
+                    if (!member.Value.ValueEquals("Gathering"))
+                    {
+                        throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    }
+                }
+                else if (member.NameEquals(name.Name))
                 {
                     name = name.From(member.Value);
                 }
@@ -6537,6 +6555,111 @@ namespace GW2SDK.Items
             }
 
             return new MiningTool
+            {
+                Id = id.GetValue(),
+                Name = name.GetValue(),
+                Description = description.GetValueOrEmpty(),
+                Level = level.GetValue(),
+                Rarity = rarity.GetValue(missingMemberBehavior),
+                VendorValue = vendorValue.GetValue(),
+                GameTypes = gameTypes.GetValue(missingMemberBehavior),
+                Flags = flags.GetValue(missingMemberBehavior),
+                Restrictions = restrictions.GetValue(missingMemberBehavior),
+                ChatLink = chatLink.GetValue(),
+                Icon = icon.GetValueOrNull()
+            };
+        }
+
+        FishingTool IJsonReader<FishingTool>.Read(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+        {
+            var name = new RequiredMember<string>("name");
+            var description = new OptionalMember<string>("description");
+            var level = new RequiredMember<int>("level");
+            var rarity = new RequiredMember<Rarity>("rarity");
+            var vendorValue = new RequiredMember<Coin>("vendor_value");
+            var gameTypes = new RequiredMember<GameType[]>("game_types");
+            var flags = new RequiredMember<ItemFlag[]>("flags");
+            var restrictions = new RequiredMember<ItemRestriction[]>("restrictions");
+            var id = new RequiredMember<int>("id");
+            var chatLink = new RequiredMember<string>("chat_link");
+            var icon = new OptionalMember<string>("icon");
+            foreach (var member in json.EnumerateObject())
+            {
+                if (member.NameEquals("type"))
+                {
+                    if (!member.Value.ValueEquals("Gathering"))
+                    {
+                        throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    }
+                }
+                else if (member.NameEquals(name.Name))
+                {
+                    name = name.From(member.Value);
+                }
+                else if (member.NameEquals(description.Name))
+                {
+                    description = description.From(member.Value);
+                }
+                else if (member.NameEquals(level.Name))
+                {
+                    level = level.From(member.Value);
+                }
+                else if (member.NameEquals(rarity.Name))
+                {
+                    rarity = rarity.From(member.Value);
+                }
+                else if (member.NameEquals(vendorValue.Name))
+                {
+                    vendorValue = vendorValue.From(member.Value);
+                }
+                else if (member.NameEquals(gameTypes.Name))
+                {
+                    gameTypes = gameTypes.From(member.Value);
+                }
+                else if (member.NameEquals(flags.Name))
+                {
+                    flags = flags.From(member.Value);
+                }
+                else if (member.NameEquals(restrictions.Name))
+                {
+                    restrictions = restrictions.From(member.Value);
+                }
+                else if (member.NameEquals(id.Name))
+                {
+                    id = id.From(member.Value);
+                }
+                else if (member.NameEquals(chatLink.Name))
+                {
+                    chatLink = chatLink.From(member.Value);
+                }
+                else if (member.NameEquals(icon.Name))
+                {
+                    icon = icon.From(member.Value);
+                }
+                else if (member.NameEquals("details"))
+                {
+                    foreach (var detail in member.Value.EnumerateObject())
+                    {
+                        if (detail.NameEquals("type"))
+                        {
+                            if (!detail.Value.ValueEquals("Foo")) // BUG???
+                            {
+                                throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
+                            }
+                        }
+                        else if (missingMemberBehavior == MissingMemberBehavior.Error)
+                        {
+                            throw new InvalidOperationException(Strings.UnexpectedMember(detail.Name));
+                        }
+                    }
+                }
+                else if (missingMemberBehavior == MissingMemberBehavior.Error)
+                {
+                    throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
+                }
+            }
+
+            return new FishingTool
             {
                 Id = id.GetValue(),
                 Name = name.GetValue(),
@@ -13063,6 +13186,182 @@ namespace GW2SDK.Items
                 Prefix = infixUpgrade.Select(value => ReadInfixUpgrade(value, missingMemberBehavior)),
                 SuffixItemId = suffixItemId.GetValue(),
                 SecondarySuffixItemId = secondarySuffixItemId.GetValue()
+            };
+        }
+
+        PowerCore IJsonReader<PowerCore>.Read(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+        {
+            var name = new RequiredMember<string>("name");
+            var description = new OptionalMember<string>("description");
+            var level = new RequiredMember<int>("level");
+            var rarity = new RequiredMember<Rarity>("rarity");
+            var vendorValue = new RequiredMember<Coin>("vendor_value");
+            var gameTypes = new RequiredMember<GameType[]>("game_types");
+            var flags = new RequiredMember<ItemFlag[]>("flags");
+            var restrictions = new RequiredMember<ItemRestriction[]>("restrictions");
+            var id = new RequiredMember<int>("id");
+            var chatLink = new RequiredMember<string>("chat_link");
+            var icon = new OptionalMember<string>("icon");
+            foreach (var member in json.EnumerateObject())
+            {
+                if (member.NameEquals("type"))
+                {
+                    if (!member.Value.ValueEquals("Qux")) // TODO: use real type
+                    {
+                        throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    }
+                }
+                else if (member.NameEquals(name.Name))
+                {
+                    name = name.From(member.Value);
+                }
+                else if (member.NameEquals(description.Name))
+                {
+                    description = description.From(member.Value);
+                }
+                else if (member.NameEquals(level.Name))
+                {
+                    level = level.From(member.Value);
+                }
+                else if (member.NameEquals(rarity.Name))
+                {
+                    rarity = rarity.From(member.Value);
+                }
+                else if (member.NameEquals(vendorValue.Name))
+                {
+                    vendorValue = vendorValue.From(member.Value);
+                }
+                else if (member.NameEquals(gameTypes.Name))
+                {
+                    gameTypes = gameTypes.From(member.Value);
+                }
+                else if (member.NameEquals(flags.Name))
+                {
+                    flags = flags.From(member.Value);
+                }
+                else if (member.NameEquals(restrictions.Name))
+                {
+                    restrictions = restrictions.From(member.Value);
+                }
+                else if (member.NameEquals(id.Name))
+                {
+                    id = id.From(member.Value);
+                }
+                else if (member.NameEquals(chatLink.Name))
+                {
+                    chatLink = chatLink.From(member.Value);
+                }
+                else if (member.NameEquals(icon.Name))
+                {
+                    icon = icon.From(member.Value);
+                }
+                else if (missingMemberBehavior == MissingMemberBehavior.Error)
+                {
+                    throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
+                }
+            }
+
+            return new PowerCore
+            {
+                Id = id.GetValue(),
+                Name = name.GetValue(),
+                Description = description.GetValueOrEmpty(),
+                Level = level.GetValue(),
+                Rarity = rarity.GetValue(missingMemberBehavior),
+                VendorValue = vendorValue.GetValue(),
+                GameTypes = gameTypes.GetValue(missingMemberBehavior),
+                Flags = flags.GetValue(missingMemberBehavior),
+                Restrictions = restrictions.GetValue(missingMemberBehavior),
+                ChatLink = chatLink.GetValue(),
+                Icon = icon.GetValueOrNull()
+            };
+        }
+
+        JadeBotUpgrade IJsonReader<JadeBotUpgrade>.Read(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+        {
+            var name = new RequiredMember<string>("name");
+            var description = new OptionalMember<string>("description");
+            var level = new RequiredMember<int>("level");
+            var rarity = new RequiredMember<Rarity>("rarity");
+            var vendorValue = new RequiredMember<Coin>("vendor_value");
+            var gameTypes = new RequiredMember<GameType[]>("game_types");
+            var flags = new RequiredMember<ItemFlag[]>("flags");
+            var restrictions = new RequiredMember<ItemRestriction[]>("restrictions");
+            var id = new RequiredMember<int>("id");
+            var chatLink = new RequiredMember<string>("chat_link");
+            var icon = new OptionalMember<string>("icon");
+            foreach (var member in json.EnumerateObject())
+            {
+                if (member.NameEquals("type"))
+                {
+                    if (!member.Value.ValueEquals("Quux")) // TODO: use real type
+                    {
+                        throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    }
+                }
+                else if (member.NameEquals(name.Name))
+                {
+                    name = name.From(member.Value);
+                }
+                else if (member.NameEquals(description.Name))
+                {
+                    description = description.From(member.Value);
+                }
+                else if (member.NameEquals(level.Name))
+                {
+                    level = level.From(member.Value);
+                }
+                else if (member.NameEquals(rarity.Name))
+                {
+                    rarity = rarity.From(member.Value);
+                }
+                else if (member.NameEquals(vendorValue.Name))
+                {
+                    vendorValue = vendorValue.From(member.Value);
+                }
+                else if (member.NameEquals(gameTypes.Name))
+                {
+                    gameTypes = gameTypes.From(member.Value);
+                }
+                else if (member.NameEquals(flags.Name))
+                {
+                    flags = flags.From(member.Value);
+                }
+                else if (member.NameEquals(restrictions.Name))
+                {
+                    restrictions = restrictions.From(member.Value);
+                }
+                else if (member.NameEquals(id.Name))
+                {
+                    id = id.From(member.Value);
+                }
+                else if (member.NameEquals(chatLink.Name))
+                {
+                    chatLink = chatLink.From(member.Value);
+                }
+                else if (member.NameEquals(icon.Name))
+                {
+                    icon = icon.From(member.Value);
+                }
+                else if (missingMemberBehavior == MissingMemberBehavior.Error)
+                {
+                    throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
+                }
+            }
+
+            return new JadeBotUpgrade
+            {
+                Id = id.GetValue(),
+                Name = name.GetValue(),
+                Description = description.GetValueOrEmpty(),
+                Level = level.GetValue(),
+                Rarity = rarity.GetValue(missingMemberBehavior),
+                VendorValue = vendorValue.GetValue(),
+                GameTypes = gameTypes.GetValue(missingMemberBehavior),
+                Flags = flags.GetValue(missingMemberBehavior),
+                Restrictions = restrictions.GetValue(missingMemberBehavior),
+                ChatLink = chatLink.GetValue(),
+                Icon = icon.GetValueOrNull()
             };
         }
 

@@ -16,6 +16,8 @@ namespace GW2SDK
 
         HeartOfThorns,
 
-        PathOfFire
+        PathOfFire,
+
+        EndOfDragons
     }
 }

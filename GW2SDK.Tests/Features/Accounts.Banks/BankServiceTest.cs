@@ -28,18 +28,6 @@ namespace GW2SDK.Tests.Features.Accounts.Banks
 
             public static void BankSlot_count_is_positive(BankSlot actual) =>
                 Assert.InRange(actual.Count, 1, int.MaxValue);
-
-            public static void BankSlot_remembers_character_bindings(BankSlot actual)
-            {
-                if (string.IsNullOrEmpty(actual.BoundTo))
-                {
-                    Assert.NotEqual(ItemBinding.Character, actual.Binding);
-                }
-                else
-                {
-                    Assert.Equal(ItemBinding.Character, actual.Binding);
-                }
-            }
         }
 
         [Fact]
@@ -61,7 +49,6 @@ namespace GW2SDK.Tests.Features.Accounts.Banks
                     if (slot is null) return;
                     AccountBankSlotFact.BankSlot_id_is_positive(slot);
                     AccountBankSlotFact.BankSlot_count_is_positive(slot);
-                    AccountBankSlotFact.BankSlot_remembers_character_bindings(slot);
                 });
         }
 

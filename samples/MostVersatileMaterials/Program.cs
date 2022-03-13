@@ -44,7 +44,7 @@ namespace MostVersatileMaterials
                     var craftable = await GetRecipes(recipesService, recipesProgress);
 
                     var groupedByIngredient = craftable.SelectMany(recipe =>
-                            recipe.Ingredients.Select(ingredient => (Ingredient: ingredient.ItemId, Recipe: recipe)))
+                            recipe.Ingredients.Select(ingredient => (Ingredient: ingredient.Id, Recipe: recipe)))
                         .ToLookup(grouping => grouping.Ingredient, grouping => grouping.Recipe);
 
                     var ingredientIndex = groupedByIngredient.Select(grouping => grouping.Key)

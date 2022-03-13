@@ -1,4 +1,5 @@
-﻿using GW2SDK.Annotations;
+﻿using System.ComponentModel;
+using GW2SDK.Annotations;
 using JetBrains.Annotations;
 
 namespace GW2SDK.Recipes
@@ -7,8 +8,21 @@ namespace GW2SDK.Recipes
     [DataTransferObject(RootObject = false)]
     public sealed record Ingredient
     {
-        public int ItemId { get; init; }
+        public IngredientKind Kind { get; init; }
+
+        public int Id { get; init; }
 
         public int Count { get; init; }
+    }
+
+    [PublicAPI]
+    [DefaultValue(Item)]
+    public enum IngredientKind
+    {
+        Item,
+
+        Currency,
+
+        GuildUpgrade
     }
 }
