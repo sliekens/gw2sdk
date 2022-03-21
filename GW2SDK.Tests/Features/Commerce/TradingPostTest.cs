@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using GW2SDK.Commerce;
 using GW2SDK.Tests.TestInfrastructure;
@@ -73,12 +74,26 @@ namespace GW2SDK.Tests.Features.Commerce
                 35984
             };
 
-            var actual = await sut.GetItemPricesByIds(ids);
+            var actual = await sut.GetItemPricesByIds(ids)
+                .ToListAsync();
 
-            Assert.Collection(actual.Values,
+            Assert.Collection(actual.Values(),
                 first => Assert.Equal(24, first.Id),
                 second => Assert.Equal(19699, second.Id),
                 third => Assert.Equal(35984, third.Id));
+        }
+
+        [Fact(Skip =
+            "This test is best used interactively, otherwise it will hit rate limits in this as well as other tests.")]
+        public async Task It_can_get_all_item_prices()
+        {
+            await using var services = new Composer();
+            var sut = services.Resolve<TradingPost>();
+
+            await foreach (var actual in sut.GetItemPrices())
+            {
+                Assert.InRange(actual.Value.Id, 1, int.MaxValue);
+            }
         }
 
         [Fact]
@@ -118,12 +133,26 @@ namespace GW2SDK.Tests.Features.Commerce
                 35984
             };
 
-            var actual = await sut.GetOrderBooksByIds(ids);
+            var actual = await sut.GetOrderBooksByIds(ids)
+                .ToListAsync();
 
-            Assert.Collection(actual.Values,
+            Assert.Collection(actual.Values(),
                 first => Assert.Equal(24, first.Id),
                 second => Assert.Equal(19699, second.Id),
                 third => Assert.Equal(35984, third.Id));
+        }
+
+        [Fact(Skip =
+            "This test is best used interactively, otherwise it will hit rate limits in this as well as other tests.")]
+        public async Task It_can_get_all_order_books()
+        {
+            await using var services = new Composer();
+            var sut = services.Resolve<TradingPost>();
+
+            await foreach (var actual in sut.GetOrderBooks())
+            {
+                Assert.InRange(actual.Value.Id, 1, int.MaxValue);
+            }
         }
     }
 }
