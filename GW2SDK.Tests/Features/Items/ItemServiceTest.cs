@@ -52,10 +52,10 @@ namespace GW2SDK.Tests.Features.Items
             var actual = await sut.GetItemsByIds(ids)
                 .ToListAsync();
             
-            Assert.Collection(actual,
-                first => Assert.Contains(first.Value.Id, ids),
-                second => Assert.Contains(second.Value.Id, ids),
-                third => Assert.Contains(third.Value.Id, ids));
+            Assert.Collection(actual.Values(),
+                first => Assert.Contains(first.Id, ids),
+                second => Assert.Contains(second.Id, ids),
+                third => Assert.Contains(third.Id, ids));
         }
 
         [Fact]

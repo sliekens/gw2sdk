@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using GW2SDK.Accounts.Achievements;
 using GW2SDK.Tests.TestInfrastructure;
@@ -53,11 +52,19 @@ namespace GW2SDK.Tests.Features.Accounts.Achievements
             var sut = services.Resolve<AccountAchievementService>();
             var accessToken = services.Resolve<ApiKeyFull>();
 
-            var ids = new HashSet<int> { 1, 2, 3 };
+            var ids = new HashSet<int>
+            {
+                1,
+                2,
+                3
+            };
 
             var actual = await sut.GetAccountAchievementsByIds(ids, accessToken.Key);
 
-            Assert.Collection(actual.Values, first => Assert.Equal(1, first.Id), second => Assert.Equal(2, second.Id), third => Assert.Equal(3, third.Id));
+            Assert.Collection(actual.Values,
+                first => Assert.Equal(1, first.Id),
+                second => Assert.Equal(2, second.Id),
+                third => Assert.Equal(3, third.Id));
         }
 
         [Fact]
