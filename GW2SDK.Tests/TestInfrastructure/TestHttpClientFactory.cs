@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using GW2SDK.Http;
@@ -36,6 +35,7 @@ namespace GW2SDK.Tests.TestInfrastructure
 
             AddPolicies(services);
 
+            services.AddTransient<RequestLengthHandler>();
             services.AddTransient<UnauthorizedMessageHandler>();
             services.AddTransient<BadMessageHandler>();
             services.AddTransient<RateLimitHandler>();
