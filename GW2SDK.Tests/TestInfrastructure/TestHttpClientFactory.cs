@@ -5,6 +5,7 @@ using GW2SDK.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Polly;
 using Polly.Timeout;
+using static System.Net.HttpStatusCode;
 
 namespace GW2SDK.Tests.TestInfrastructure
 {
@@ -80,6 +81,13 @@ namespace GW2SDK.Tests.TestInfrastructure
                 .WaitAndRetryForeverAsync(retryAttempt => TimeSpan.FromSeconds(Math.Min(8, Math.Pow(2, retryAttempt))) +
                     TimeSpan.FromMilliseconds(jitterer.Next(0, 1000)));
 
+            // Additionally we seem to be getting various transient failures
+            var retryRequestError = Policy<HttpResponseMessage>.Handle<HttpRequestException>(reason =>
+                    reason.StatusCode is ServiceUnavailable or GatewayTimeout or BadGateway)
+                .WaitAndRetryForeverAsync(retryAttempt =>
+                    TimeSpan.FromSeconds(Math.Min(8, Math.Pow(2, retryAttempt))) +
+                    TimeSpan.FromMilliseconds(jitterer.Next(0, 1000)));
+
             // Give up when there is no usable response within a reasonable time
             //
             // Let's look at a very pessimistic scenario that still completes successfully to determine what is reasonable
@@ -104,7 +112,7 @@ namespace GW2SDK.Tests.TestInfrastructure
             var timeout =
                 Policy.TimeoutAsync<HttpResponseMessage>(TimeSpan.FromSeconds(60), TimeoutStrategy.Optimistic);
 
-            policies.Add("api.guildwars2.com", Policy.WrapAsync(timeout, rateLimit, innerTimeout));
+            policies.Add("api.guildwars2.com", Policy.WrapAsync(timeout, rateLimit, retryRequestError, innerTimeout));
         }
     }
 }
