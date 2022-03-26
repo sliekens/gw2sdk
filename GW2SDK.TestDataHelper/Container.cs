@@ -85,6 +85,8 @@ namespace GW2SDK.TestDataHelper
                     AutomaticDecompression = DecompressionMethods.GZip
                 })
                 .AddPolicyHandlerFromRegistry("api.guildwars2.com")
+                .AddHttpMessageHandler<RequestLengthHandler>()
+                .AddHttpMessageHandler<GatewayErrorHandler>()
                 .AddHttpMessageHandler<UnauthorizedMessageHandler>()
                 .AddHttpMessageHandler<BadMessageHandler>()
                 .AddHttpMessageHandler<RateLimitHandler>()
