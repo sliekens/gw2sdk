@@ -37,7 +37,7 @@ namespace GW2SDK.TestDataHelper
                     TimeSpan.FromMilliseconds(jitterer.Next(0, 1000)));
 
             // Additionally we seem to be getting various transient failures
-            var retryRequestError = Policy<HttpResponseMessage>.Handle<HttpRequestException>(reason =>
+            var retryRequestError = Policy<HttpResponseMessage>.Handle<GatewayException>(reason =>
                     reason.StatusCode is ServiceUnavailable or GatewayTimeout or BadGateway)
                 .WaitAndRetryForeverAsync(retryAttempt =>
                     TimeSpan.FromSeconds(Math.Min(8, Math.Pow(2, retryAttempt))) +
@@ -70,6 +70,7 @@ namespace GW2SDK.TestDataHelper
             policies.Add("api.guildwars2.com", Policy.WrapAsync(timeout, rateLimit, retryRequestError, innerTimeout));
 
             services.AddTransient<RequestLengthHandler>();
+            services.AddTransient<GatewayErrorHandler>();
             services.AddTransient<UnauthorizedMessageHandler>();
             services.AddTransient<BadMessageHandler>();
             services.AddTransient<RateLimitHandler>();

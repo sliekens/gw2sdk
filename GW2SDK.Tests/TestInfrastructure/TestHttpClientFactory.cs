@@ -37,6 +37,7 @@ namespace GW2SDK.Tests.TestInfrastructure
             AddPolicies(services);
 
             services.AddTransient<RequestLengthHandler>();
+            services.AddTransient<GatewayErrorHandler>();
             services.AddTransient<UnauthorizedMessageHandler>();
             services.AddTransient<BadMessageHandler>();
             services.AddTransient<RateLimitHandler>();
@@ -82,7 +83,7 @@ namespace GW2SDK.Tests.TestInfrastructure
                     TimeSpan.FromMilliseconds(jitterer.Next(0, 1000)));
 
             // Additionally we seem to be getting various transient failures
-            var retryRequestError = Policy<HttpResponseMessage>.Handle<HttpRequestException>(reason =>
+            var retryRequestError = Policy<HttpResponseMessage>.Handle<GatewayException>(reason =>
                     reason.StatusCode is ServiceUnavailable or GatewayTimeout or BadGateway)
                 .WaitAndRetryForeverAsync(retryAttempt =>
                     TimeSpan.FromSeconds(Math.Min(8, Math.Pow(2, retryAttempt))) +
