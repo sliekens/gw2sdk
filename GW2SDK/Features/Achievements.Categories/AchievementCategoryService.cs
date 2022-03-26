@@ -13,7 +13,7 @@ namespace GW2SDK.Achievements.Categories
     [PublicAPI]
     public sealed class AchievementCategoryService
     {
-        private readonly IAchievementCategoryReader achievementCategoryReader;
+        private readonly IJsonReader<AchievementCategory> achievementCategoryReader;
 
         private readonly HttpClient http;
 
@@ -21,7 +21,7 @@ namespace GW2SDK.Achievements.Categories
 
         public AchievementCategoryService(
             HttpClient http,
-            IAchievementCategoryReader achievementCategoryReader,
+            IJsonReader<AchievementCategory> achievementCategoryReader,
             MissingMemberBehavior missingMemberBehavior
         )
         {
@@ -47,7 +47,7 @@ namespace GW2SDK.Achievements.Categories
         {
             var request = new AchievementCategoriesIndexRequest();
             return await http.GetResourcesSet(request,
-                    json => achievementCategoryReader.Id.ReadArray(json, missingMemberBehavior),
+                    json => Int32JsonReader.Instance.ReadArray(json, missingMemberBehavior),
                     cancellationToken)
                 .ConfigureAwait(false);
         }
@@ -59,8 +59,9 @@ namespace GW2SDK.Achievements.Categories
         )
         {
             var request = new AchievementCategoryByIdRequest(achievementCategoryId, language);
-            return await http
-                .GetResource(request, json => achievementCategoryReader.Read(json, missingMemberBehavior), cancellationToken)
+            return await http.GetResource(request,
+                    json => achievementCategoryReader.Read(json, missingMemberBehavior),
+                    cancellationToken)
                 .ConfigureAwait(false);
         }
 

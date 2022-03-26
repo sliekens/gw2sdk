@@ -1,4 +1,5 @@
-﻿using System;
+﻿using System.Collections.Generic;
+using System.Linq;
 using GW2SDK.Annotations;
 using JetBrains.Annotations;
 
@@ -18,6 +19,15 @@ namespace GW2SDK.Achievements.Categories
 
         public string Icon { get; init; } = "";
 
-        public int[] Achievements { get; init; } = Array.Empty<int>();
+        public IEnumerable<AchievementRef> Achievements { get; init; } = Enumerable.Empty<AchievementRef>();
+
+        public IEnumerable<AchievementRef> Tomorrow { get; init; } = Enumerable.Empty<AchievementRef>();
+    }
+
+    [PublicAPI]
+    [DataTransferObject(RootObject = false)]
+    public sealed record AchievementRef
+    {
+        public int Id { get; init; }
     }
 }

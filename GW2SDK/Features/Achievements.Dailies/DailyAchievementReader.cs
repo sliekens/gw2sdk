@@ -58,7 +58,7 @@ namespace GW2SDK.Achievements.Dailies
         {
             var id = new RequiredMember<int>("id");
             var level = new RequiredMember<DailyAchievementLevelRequirement>("level");
-            var requiredAccess = new OptionalMember<DailyAchievementProductRequirement>("required_access");
+            var requiredAccess = new OptionalMember<ProductName[]>("required_access");
 
             foreach (var member in json.EnumerateObject())
             {
@@ -84,35 +84,7 @@ namespace GW2SDK.Achievements.Dailies
             {
                 Id = id.GetValue(),
                 Level = level.Select(value => ReadLevelRequirement(value, missingMemberBehavior)),
-                RequiredAccess = requiredAccess.Select(value => ReadProductRequirement(value, missingMemberBehavior))
-            };
-        }
-
-        private DailyAchievementProductRequirement ReadProductRequirement(JsonElement json, MissingMemberBehavior missingMemberBehavior)
-        {
-            var product = new RequiredMember<ProductName>("product");
-            var condition = new RequiredMember<AccessCondition>("condition");
-
-            foreach (var member in json.EnumerateObject())
-            {
-                if (member.NameEquals(product.Name))
-                {
-                    product = product.From(member.Value);
-                }
-                else if (member.NameEquals(condition.Name))
-                {
-                    condition = condition.From(member.Value);
-                }
-                else if (missingMemberBehavior == MissingMemberBehavior.Error)
-                {
-                    throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
-                }
-            }
-
-            return new DailyAchievementProductRequirement
-            {
-                Product = product.GetValue(missingMemberBehavior),
-                Condition = condition.GetValue(missingMemberBehavior)
+                RequiredAccess = requiredAccess.GetValue(missingMemberBehavior) ?? Array.Empty<ProductName>()
             };
         }
 

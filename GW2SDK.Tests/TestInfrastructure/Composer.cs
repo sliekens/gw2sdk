@@ -111,7 +111,7 @@ namespace GW2SDK.Tests.TestInfrastructure
             if (serviceType == typeof(AchievementCategoryService))
             {
                 return new AchievementCategoryService(Resolve<HttpClient>(),
-                    new AchievementCategoryReader(),
+                    new AchievementCategoryReader(new AchievementRefReader()),
                     MissingMemberBehavior.Error);
             }
 

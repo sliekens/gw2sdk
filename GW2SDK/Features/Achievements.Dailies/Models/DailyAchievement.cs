@@ -1,4 +1,5 @@
-﻿using GW2SDK.Annotations;
+﻿using System;
+using GW2SDK.Annotations;
 using JetBrains.Annotations;
 
 namespace GW2SDK.Achievements.Dailies
@@ -11,6 +12,6 @@ namespace GW2SDK.Achievements.Dailies
 
         public DailyAchievementLevelRequirement Level { get; init; } = new();
 
-        public DailyAchievementProductRequirement? RequiredAccess { get; init; }
+        public ProductName[] RequiredAccess { get; init; } = Array.Empty<ProductName>();
     }
 }
