@@ -61,6 +61,7 @@ namespace GW2SDK.TestDataHelper
 
             policies.Add("api.guildwars2.com", Policy.WrapAsync(timeout, rateLimit, innerTimeout));
 
+            services.AddTransient<RequestLengthHandler>();
             services.AddTransient<UnauthorizedMessageHandler>();
             services.AddTransient<BadMessageHandler>();
             services.AddTransient<RateLimitHandler>();
