@@ -56,6 +56,8 @@ namespace GW2SDK.Tests.TestInfrastructure
 #endif
                 })
                 .AddPolicyHandlerFromRegistry("api.guildwars2.com")
+                .AddHttpMessageHandler<RequestLengthHandler>()
+                .AddHttpMessageHandler<GatewayErrorHandler>()
                 .AddHttpMessageHandler<UnauthorizedMessageHandler>()
                 .AddHttpMessageHandler<BadMessageHandler>()
                 .AddHttpMessageHandler<RateLimitHandler>();
