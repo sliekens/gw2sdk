@@ -14,7 +14,7 @@ namespace GW2SDK.Accounts.Achievements
             var current = new RequiredMember<int>("current");
             var max = new RequiredMember<int>("max");
             var done = new RequiredMember<bool>("done");
-            var bits = new OptionalMember<int[]>("bits");
+            var bits = new OptionalMember<int>("bits");
             var repeated = new NullableMember<int>("repeated");
             var unlocked = new NullableMember<bool>("unlocked");
 
@@ -60,7 +60,7 @@ namespace GW2SDK.Accounts.Achievements
                 Current = current.GetValue(),
                 Max = max.GetValue(),
                 Done = done.GetValue(),
-                Bits = bits.Select(value => value.GetArray(item => item.GetInt32())),
+                Bits = bits.SelectMany(value => value.GetInt32()),
                 Repeated = repeated.GetValue(),
                 Unlocked = unlocked.GetValue()
             };

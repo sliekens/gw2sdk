@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using JetBrains.Annotations;
 
 namespace GW2SDK.Items
@@ -8,7 +9,7 @@ namespace GW2SDK.Items
     {
         public int DefaultSkin { get; init; }
 
-        public InfusionSlot[] InfusionSlots { get; init; } = Array.Empty<InfusionSlot>();
+        public IReadOnlyCollection<InfusionSlot> InfusionSlots { get; init; } = Array.Empty<InfusionSlot>();
 
         public double AttributeAdjustment { get; init; }
 
@@ -16,10 +17,10 @@ namespace GW2SDK.Items
         
         public int? SuffixItemId { get; init; }
 
-        public int[]? StatChoices { get; init; }
+        public IReadOnlyCollection<int>? StatChoices { get; init; }
         
-        public ItemUpgrade[]? UpgradesInto { get; init; }
+        public IReadOnlyCollection<ItemUpgrade>? UpgradesInto { get; init; }
 
-        public ItemUpgrade[]? UpgradesFrom{ get; init; }
+        public IReadOnlyCollection<ItemUpgrade>? UpgradesFrom { get; init; }
     }
 }

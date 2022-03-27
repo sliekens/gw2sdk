@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using JetBrains.Annotations;
 
 namespace GW2SDK.Tokens
@@ -10,6 +11,6 @@ namespace GW2SDK.Tokens
 
         public DateTimeOffset IssuedAt { get; init; }
 
-        public Uri[]? Urls { get; init; }
+        public IReadOnlyCollection<Uri>? Urls { get; init; }
     }
 }

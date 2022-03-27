@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Drawing;
 using System.Text.Json;
 using JetBrains.Annotations;
 using GW2SDK.Json;
@@ -12,8 +13,8 @@ namespace GW2SDK.Continents
         {
             var objective = new RequiredMember<string>("objective");
             var level = new RequiredMember<int>("level");
-            var coordinates = new RequiredMember<double[]>("coord");
-            var boundaries = new RequiredMember<double[][]>("bounds");
+            var coordinates = new RequiredMember<PointF>("coord");
+            var boundaries = new RequiredMember<PointF>("bounds");
             var id = new RequiredMember<int>("id");
             var chatLink = new RequiredMember<string>("chat_link");
             foreach (var member in json.EnumerateObject())
@@ -53,10 +54,19 @@ namespace GW2SDK.Continents
                 Id = id.GetValue(),
                 Objective = objective.GetValue(),
                 Level = level.GetValue(),
-                Coordinates = coordinates.Select(value => value.GetArray(item => item.GetDouble())),
-                Boundaries = boundaries.Select(value => value.GetArray(point => point.GetArray(item => item.GetDouble()))),
+                Coordinates = coordinates.Select(value => ReadPointF(value, missingMemberBehavior)),
+                Boundaries = boundaries.SelectMany(value => ReadPointF(value, missingMemberBehavior)),
                 ChatLink = chatLink.GetValue()
             };
+        }
+
+        private PointF ReadPointF(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+        {
+            var x = json[0]
+                .GetSingle();
+            var y = json[1]
+                .GetSingle();
+            return new PointF(x, y);
         }
     }
 }

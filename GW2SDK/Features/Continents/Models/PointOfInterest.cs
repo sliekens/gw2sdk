@@ -1,4 +1,4 @@
-﻿using System;
+﻿using System.Drawing;
 using GW2SDK.Annotations;
 using JetBrains.Annotations;
 
@@ -16,7 +16,7 @@ namespace GW2SDK.Continents
 
         public int Floor { get; init; }
 
-        public double[] Coordinates { get; init; } = Array.Empty<double>();
+        public PointF Coordinates { get; init; }
 
         public string ChatLink { get; init; } = "";
     }

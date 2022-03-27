@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using GW2SDK.Annotations;
 using JetBrains.Annotations;
 
@@ -23,15 +24,15 @@ namespace GW2SDK.Achievements
 
         public string LockedText { get; init; } = "";
 
-        public AchievementFlag[] Flags { get; init; } = Array.Empty<AchievementFlag>();
+        public IReadOnlyCollection<AchievementFlag> Flags { get; init; } = Array.Empty<AchievementFlag>();
 
-        public AchievementTier[] Tiers { get; init; } = Array.Empty<AchievementTier>();
+        public IReadOnlyCollection<AchievementTier> Tiers { get; init; } = Array.Empty<AchievementTier>();
 
-        public AchievementReward[]? Rewards { get; init; }
+        public IReadOnlyCollection<AchievementReward>? Rewards { get; init; }
 
-        public AchievementBit[]? Bits { get; init; }
+        public IReadOnlyCollection<AchievementBit>? Bits { get; init; }
 
-        public int[]? Prerequisites { get; init; }
+        public IReadOnlyCollection<int>? Prerequisites { get; init; }
 
         /// <remarks>Can be -1 for repeatable achievements that don't award points.</remarks>
         public int? PointCap { get; init; }

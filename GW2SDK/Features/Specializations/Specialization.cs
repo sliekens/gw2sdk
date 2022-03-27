@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using GW2SDK.Annotations;
 using JetBrains.Annotations;
 
@@ -16,9 +17,9 @@ namespace GW2SDK.Specializations
 
         public bool Elite { get; init; }
 
-        public int[] MinorTraits { get; init; } = Array.Empty<int>();
+        public IReadOnlyCollection<int> MinorTraits { get; init; } = Array.Empty<int>();
 
-        public int[] MajorTraits { get; init; } = Array.Empty<int>();
+        public IReadOnlyCollection<int> MajorTraits { get; init; } = Array.Empty<int>();
 
         public int? WeaponTrait { get; init; }
 

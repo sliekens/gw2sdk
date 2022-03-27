@@ -1,4 +1,5 @@
-﻿using GW2SDK.Annotations;
+﻿using System.Collections.Generic;
+using GW2SDK.Annotations;
 using JetBrains.Annotations;
 
 namespace GW2SDK.Titles
@@ -11,7 +12,7 @@ namespace GW2SDK.Titles
 
         public string Name { get; init; } = "";
 
-        public int[]? Achievements { get; init; }
+        public IReadOnlyCollection<int>? Achievements { get; init; }
 
         public int? AchievementPointsRequired { get; init; }
     }

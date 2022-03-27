@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using GW2SDK.Annotations;
 using JetBrains.Annotations;
 
@@ -14,8 +15,8 @@ namespace GW2SDK.Mounts
 
         public int DefaultSkin { get; init; }
 
-        public int[] Skins { get; init; } = Array.Empty<int>();
+        public IReadOnlyCollection<int> Skins { get; init; } = Array.Empty<int>();
 
-        public SkillReference[] Skills { get; init; } = Array.Empty<SkillReference>();
+        public IReadOnlyCollection<SkillReference> Skills { get; init; } = Array.Empty<SkillReference>();
     }
 }

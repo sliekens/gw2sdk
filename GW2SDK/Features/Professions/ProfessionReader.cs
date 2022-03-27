@@ -17,11 +17,11 @@ namespace GW2SDK.Professions
             var code = new RequiredMember<int>("code");
             var icon = new RequiredMember<string>("icon");
             var iconBig = new RequiredMember<string>("icon_big");
-            var specializations = new RequiredMember<int[]>("specializations");
+            var specializations = new RequiredMember<int>("specializations");
             var weapons = new RequiredMember<IDictionary<string, WeaponProficiency>>("weapons");
-            var flags = new RequiredMember<ProfessionFlag[]>("flags");
-            var skills = new RequiredMember<SkillReference[]>("skills");
-            var training = new RequiredMember<Training[]>("training");
+            var flags = new RequiredMember<ProfessionFlag>("flags");
+            var skills = new RequiredMember<SkillReference>("skills");
+            var training = new RequiredMember<Training>("training");
             var skillsByPalette = new RequiredMember<Dictionary<int, int>>("skills_by_palette");
             foreach (var member in json.EnumerateObject())
             {
@@ -82,11 +82,11 @@ namespace GW2SDK.Professions
                 Code = code.GetValue(),
                 Icon = icon.GetValue(),
                 IconBig = iconBig.GetValue(),
-                Specializations = specializations.Select(value => value.GetArray(item => item.GetInt32())),
+                Specializations = specializations.SelectMany(value => value.GetInt32()),
                 Weapons = weapons.Select(value => value.GetMap(item => ReadWeapon(item, missingMemberBehavior))),
-                Flags = flags.GetValue(missingMemberBehavior),
-                Skills = skills.Select(value => value.GetArray(item => ReadSkillReference(item, missingMemberBehavior))),
-                Training = training.Select(value => value.GetArray(item => ReadTraining(item, missingMemberBehavior))),
+                Flags = flags.GetValues(missingMemberBehavior),
+                Skills = skills.SelectMany(value => ReadSkillReference(value, missingMemberBehavior)),
+                Training = training.SelectMany(value => ReadTraining(value, missingMemberBehavior)),
                 SkillsByPalette = skillsByPalette.Select(value => ReadMap(value))
             };
         }
@@ -129,7 +129,7 @@ namespace GW2SDK.Professions
             var id = new RequiredMember<int>("id");
             var category = new RequiredMember<TrainingCategory>("category");
             var name = new RequiredMember<string>("name");
-            var track = new RequiredMember<TrainingObjective[]>("track");
+            var track = new RequiredMember<TrainingObjective>("track");
 
             foreach (var member in json.EnumerateObject())
             {
@@ -159,8 +159,7 @@ namespace GW2SDK.Professions
                 Id = id.GetValue(),
                 Category = category.GetValue(missingMemberBehavior),
                 Name = name.GetValue(),
-                Track = track.Select(value =>
-                    value.GetArray(item => ReadTrainingObjective(item, missingMemberBehavior)))
+                Track = track.SelectMany(value => ReadTrainingObjective(value, missingMemberBehavior))
             };
         }
 
@@ -467,8 +466,8 @@ namespace GW2SDK.Professions
         private WeaponProficiency ReadWeapon(JsonElement json, MissingMemberBehavior missingMemberBehavior)
         {
             var specialization = new NullableMember<int>("specialization");
-            var flags = new RequiredMember<WeaponFlag[]>("flags");
-            var skills = new RequiredMember<WeaponSkill[]>("skills");
+            var flags = new RequiredMember<WeaponFlag>("flags");
+            var skills = new RequiredMember<WeaponSkill>("skills");
 
             foreach (var member in json.EnumerateObject())
             {
@@ -493,8 +492,8 @@ namespace GW2SDK.Professions
             return new WeaponProficiency
             {
                 RequiredSpecialization = specialization.GetValue(),
-                Flags = flags.GetValue(missingMemberBehavior),
-                Skills = skills.Select(value => value.GetArray(item => ReadWeaponSkill(item, missingMemberBehavior)))
+                Flags = flags.GetValues(missingMemberBehavior),
+                Skills = skills.SelectMany(value => ReadWeaponSkill(value, missingMemberBehavior))
             };
         }
 

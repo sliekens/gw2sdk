@@ -69,8 +69,8 @@ namespace GW2SDK.Skins
             var name = new RequiredMember<string>("name");
             var description = new OptionalMember<string>("description");
             var rarity = new RequiredMember<Rarity>("rarity");
-            var flags = new RequiredMember<SkinFlag[]>("flags");
-            var restrictions = new RequiredMember<SkinRestriction[]>("restrictions");
+            var flags = new RequiredMember<SkinFlag>("flags");
+            var restrictions = new RequiredMember<SkinRestriction>("restrictions");
             var id = new RequiredMember<int>("id");
             var icon = new OptionalMember<string>("icon");
             var weightClass = new RequiredMember<WeightClass>("weight_class");
@@ -149,8 +149,8 @@ namespace GW2SDK.Skins
                 Name = name.GetValue(),
                 Description = description.GetValueOrEmpty(),
                 Rarity = rarity.GetValue(missingMemberBehavior),
-                Flags = flags.GetValue(missingMemberBehavior),
-                Restrictions = restrictions.GetValue(missingMemberBehavior),
+                Flags = flags.GetValues(missingMemberBehavior),
+                Restrictions = restrictions.GetValues(missingMemberBehavior),
                 Icon = icon.GetValueOrNull(),
                 WeightClass = weightClass.GetValue(missingMemberBehavior),
                 DyeSlots = dyeSlots.Select(value => ReadDyeSlots(value, missingMemberBehavior))
@@ -162,8 +162,8 @@ namespace GW2SDK.Skins
             var name = new RequiredMember<string>("name");
             var description = new OptionalMember<string>("description");
             var rarity = new RequiredMember<Rarity>("rarity");
-            var flags = new RequiredMember<SkinFlag[]>("flags");
-            var restrictions = new RequiredMember<SkinRestriction[]>("restrictions");
+            var flags = new RequiredMember<SkinFlag>("flags");
+            var restrictions = new RequiredMember<SkinRestriction>("restrictions");
             var id = new RequiredMember<int>("id");
             var icon = new OptionalMember<string>("icon");
             var damageType = new RequiredMember<DamageType>("damage_type");
@@ -237,8 +237,8 @@ namespace GW2SDK.Skins
                 Name = name.GetValue(),
                 Description = description.GetValueOrEmpty(),
                 Rarity = rarity.GetValue(missingMemberBehavior),
-                Flags = flags.GetValue(missingMemberBehavior),
-                Restrictions = restrictions.GetValue(missingMemberBehavior),
+                Flags = flags.GetValues(missingMemberBehavior),
+                Restrictions = restrictions.GetValues(missingMemberBehavior),
                 Icon = icon.GetValueOrNull(),
                 DamageType = damageType.GetValue(missingMemberBehavior)
             };
@@ -249,8 +249,8 @@ namespace GW2SDK.Skins
             var name = new RequiredMember<string>("name");
             var description = new OptionalMember<string>("description");
             var rarity = new RequiredMember<Rarity>("rarity");
-            var flags = new RequiredMember<SkinFlag[]>("flags");
-            var restrictions = new RequiredMember<SkinRestriction[]>("restrictions");
+            var flags = new RequiredMember<SkinFlag>("flags");
+            var restrictions = new RequiredMember<SkinRestriction>("restrictions");
             var id = new RequiredMember<int>("id");
             var icon = new OptionalMember<string>("icon");
             foreach (var member in json.EnumerateObject())
@@ -302,8 +302,8 @@ namespace GW2SDK.Skins
                 Name = name.GetValue(),
                 Description = description.GetValueOrEmpty(),
                 Rarity = rarity.GetValue(missingMemberBehavior),
-                Flags = flags.GetValue(missingMemberBehavior),
-                Restrictions = restrictions.GetValue(missingMemberBehavior),
+                Flags = flags.GetValues(missingMemberBehavior),
+                Restrictions = restrictions.GetValues(missingMemberBehavior),
                 Icon = icon.GetValueOrNull()
             };
         }
@@ -313,8 +313,8 @@ namespace GW2SDK.Skins
             var name = new RequiredMember<string>("name");
             var description = new OptionalMember<string>("description");
             var rarity = new RequiredMember<Rarity>("rarity");
-            var flags = new RequiredMember<SkinFlag[]>("flags");
-            var restrictions = new RequiredMember<SkinRestriction[]>("restrictions");
+            var flags = new RequiredMember<SkinFlag>("flags");
+            var restrictions = new RequiredMember<SkinRestriction>("restrictions");
             var id = new RequiredMember<int>("id");
             var icon = new OptionalMember<string>("icon");
             var weightClass = new RequiredMember<WeightClass>("weight_class");
@@ -393,8 +393,8 @@ namespace GW2SDK.Skins
                 Name = name.GetValue(),
                 Description = description.GetValueOrEmpty(),
                 Rarity = rarity.GetValue(missingMemberBehavior),
-                Flags = flags.GetValue(missingMemberBehavior),
-                Restrictions = restrictions.GetValue(missingMemberBehavior),
+                Flags = flags.GetValues(missingMemberBehavior),
+                Restrictions = restrictions.GetValues(missingMemberBehavior),
                 Icon = icon.GetValueOrNull(),
                 WeightClass = weightClass.GetValue(missingMemberBehavior),
                 DyeSlots = dyeSlots.Select(value => ReadDyeSlots(value, missingMemberBehavior))
@@ -406,8 +406,8 @@ namespace GW2SDK.Skins
             var name = new RequiredMember<string>("name");
             var description = new OptionalMember<string>("description");
             var rarity = new RequiredMember<Rarity>("rarity");
-            var flags = new RequiredMember<SkinFlag[]>("flags");
-            var restrictions = new RequiredMember<SkinRestriction[]>("restrictions");
+            var flags = new RequiredMember<SkinFlag>("flags");
+            var restrictions = new RequiredMember<SkinRestriction>("restrictions");
             var id = new RequiredMember<int>("id");
             var icon = new OptionalMember<string>("icon");
             var weightClass = new RequiredMember<WeightClass>("weight_class");
@@ -486,8 +486,8 @@ namespace GW2SDK.Skins
                 Name = name.GetValue(),
                 Description = description.GetValueOrEmpty(),
                 Rarity = rarity.GetValue(missingMemberBehavior),
-                Flags = flags.GetValue(missingMemberBehavior),
-                Restrictions = restrictions.GetValue(missingMemberBehavior),
+                Flags = flags.GetValues(missingMemberBehavior),
+                Restrictions = restrictions.GetValues(missingMemberBehavior),
                 Icon = icon.GetValueOrNull(),
                 WeightClass = weightClass.GetValue(missingMemberBehavior),
                 DyeSlots = dyeSlots.Select(value => ReadDyeSlots(value, missingMemberBehavior))
@@ -499,8 +499,8 @@ namespace GW2SDK.Skins
             var name = new RequiredMember<string>("name");
             var description = new OptionalMember<string>("description");
             var rarity = new RequiredMember<Rarity>("rarity");
-            var flags = new RequiredMember<SkinFlag[]>("flags");
-            var restrictions = new RequiredMember<SkinRestriction[]>("restrictions");
+            var flags = new RequiredMember<SkinFlag>("flags");
+            var restrictions = new RequiredMember<SkinRestriction>("restrictions");
             var id = new RequiredMember<int>("id");
             var icon = new OptionalMember<string>("icon");
             var damageType = new RequiredMember<DamageType>("damage_type");
@@ -574,8 +574,8 @@ namespace GW2SDK.Skins
                 Name = name.GetValue(),
                 Description = description.GetValueOrEmpty(),
                 Rarity = rarity.GetValue(missingMemberBehavior),
-                Flags = flags.GetValue(missingMemberBehavior),
-                Restrictions = restrictions.GetValue(missingMemberBehavior),
+                Flags = flags.GetValues(missingMemberBehavior),
+                Restrictions = restrictions.GetValues(missingMemberBehavior),
                 Icon = icon.GetValueOrNull(),
                 DamageType = damageType.GetValue(missingMemberBehavior)
             };
@@ -586,8 +586,8 @@ namespace GW2SDK.Skins
             var name = new RequiredMember<string>("name");
             var description = new OptionalMember<string>("description");
             var rarity = new RequiredMember<Rarity>("rarity");
-            var flags = new RequiredMember<SkinFlag[]>("flags");
-            var restrictions = new RequiredMember<SkinRestriction[]>("restrictions");
+            var flags = new RequiredMember<SkinFlag>("flags");
+            var restrictions = new RequiredMember<SkinRestriction>("restrictions");
             var id = new RequiredMember<int>("id");
             var icon = new OptionalMember<string>("icon");
             var damageType = new RequiredMember<DamageType>("damage_type");
@@ -661,8 +661,8 @@ namespace GW2SDK.Skins
                 Name = name.GetValue(),
                 Description = description.GetValueOrEmpty(),
                 Rarity = rarity.GetValue(missingMemberBehavior),
-                Flags = flags.GetValue(missingMemberBehavior),
-                Restrictions = restrictions.GetValue(missingMemberBehavior),
+                Flags = flags.GetValues(missingMemberBehavior),
+                Restrictions = restrictions.GetValues(missingMemberBehavior),
                 Icon = icon.GetValueOrNull(),
                 DamageType = damageType.GetValue(missingMemberBehavior)
             };
@@ -676,8 +676,8 @@ namespace GW2SDK.Skins
             var name = new RequiredMember<string>("name");
             var description = new OptionalMember<string>("description");
             var rarity = new RequiredMember<Rarity>("rarity");
-            var flags = new RequiredMember<SkinFlag[]>("flags");
-            var restrictions = new RequiredMember<SkinRestriction[]>("restrictions");
+            var flags = new RequiredMember<SkinFlag>("flags");
+            var restrictions = new RequiredMember<SkinRestriction>("restrictions");
             var id = new RequiredMember<int>("id");
             var icon = new OptionalMember<string>("icon");
             foreach (var member in json.EnumerateObject())
@@ -746,8 +746,8 @@ namespace GW2SDK.Skins
                 Name = name.GetValue(),
                 Description = description.GetValueOrEmpty(),
                 Rarity = rarity.GetValue(missingMemberBehavior),
-                Flags = flags.GetValue(missingMemberBehavior),
-                Restrictions = restrictions.GetValue(missingMemberBehavior),
+                Flags = flags.GetValues(missingMemberBehavior),
+                Restrictions = restrictions.GetValues(missingMemberBehavior),
                 Icon = icon.GetValueOrNull()
             };
         }
@@ -772,8 +772,8 @@ namespace GW2SDK.Skins
             var name = new RequiredMember<string>("name");
             var description = new OptionalMember<string>("description");
             var rarity = new RequiredMember<Rarity>("rarity");
-            var flags = new RequiredMember<SkinFlag[]>("flags");
-            var restrictions = new RequiredMember<SkinRestriction[]>("restrictions");
+            var flags = new RequiredMember<SkinFlag>("flags");
+            var restrictions = new RequiredMember<SkinRestriction>("restrictions");
             var id = new RequiredMember<int>("id");
             var icon = new OptionalMember<string>("icon");
             foreach (var member in json.EnumerateObject())
@@ -842,8 +842,8 @@ namespace GW2SDK.Skins
                 Name = name.GetValue(),
                 Description = description.GetValueOrEmpty(),
                 Rarity = rarity.GetValue(missingMemberBehavior),
-                Flags = flags.GetValue(missingMemberBehavior),
-                Restrictions = restrictions.GetValue(missingMemberBehavior),
+                Flags = flags.GetValues(missingMemberBehavior),
+                Restrictions = restrictions.GetValues(missingMemberBehavior),
                 Icon = icon.GetValueOrNull()
             };
         }
@@ -853,8 +853,8 @@ namespace GW2SDK.Skins
             var name = new RequiredMember<string>("name");
             var description = new OptionalMember<string>("description");
             var rarity = new RequiredMember<Rarity>("rarity");
-            var flags = new RequiredMember<SkinFlag[]>("flags");
-            var restrictions = new RequiredMember<SkinRestriction[]>("restrictions");
+            var flags = new RequiredMember<SkinFlag>("flags");
+            var restrictions = new RequiredMember<SkinRestriction>("restrictions");
             var id = new RequiredMember<int>("id");
             var icon = new OptionalMember<string>("icon");
             foreach (var member in json.EnumerateObject())
@@ -923,8 +923,8 @@ namespace GW2SDK.Skins
                 Name = name.GetValue(),
                 Description = description.GetValueOrEmpty(),
                 Rarity = rarity.GetValue(missingMemberBehavior),
-                Flags = flags.GetValue(missingMemberBehavior),
-                Restrictions = restrictions.GetValue(missingMemberBehavior),
+                Flags = flags.GetValues(missingMemberBehavior),
+                Restrictions = restrictions.GetValues(missingMemberBehavior),
                 Icon = icon.GetValueOrNull()
             };
         }
@@ -934,8 +934,8 @@ namespace GW2SDK.Skins
             var name = new RequiredMember<string>("name");
             var description = new OptionalMember<string>("description");
             var rarity = new RequiredMember<Rarity>("rarity");
-            var flags = new RequiredMember<SkinFlag[]>("flags");
-            var restrictions = new RequiredMember<SkinRestriction[]>("restrictions");
+            var flags = new RequiredMember<SkinFlag>("flags");
+            var restrictions = new RequiredMember<SkinRestriction>("restrictions");
             var id = new RequiredMember<int>("id");
             var icon = new OptionalMember<string>("icon");
             var weightClass = new RequiredMember<WeightClass>("weight_class");
@@ -1014,8 +1014,8 @@ namespace GW2SDK.Skins
                 Name = name.GetValue(),
                 Description = description.GetValueOrEmpty(),
                 Rarity = rarity.GetValue(missingMemberBehavior),
-                Flags = flags.GetValue(missingMemberBehavior),
-                Restrictions = restrictions.GetValue(missingMemberBehavior),
+                Flags = flags.GetValues(missingMemberBehavior),
+                Restrictions = restrictions.GetValues(missingMemberBehavior),
                 Icon = icon.GetValueOrNull(),
                 WeightClass = weightClass.GetValue(missingMemberBehavior),
                 DyeSlots = dyeSlots.Select(value => ReadDyeSlots(value, missingMemberBehavior))
@@ -1027,8 +1027,8 @@ namespace GW2SDK.Skins
             var name = new RequiredMember<string>("name");
             var description = new OptionalMember<string>("description");
             var rarity = new RequiredMember<Rarity>("rarity");
-            var flags = new RequiredMember<SkinFlag[]>("flags");
-            var restrictions = new RequiredMember<SkinRestriction[]>("restrictions");
+            var flags = new RequiredMember<SkinFlag>("flags");
+            var restrictions = new RequiredMember<SkinRestriction>("restrictions");
             var id = new RequiredMember<int>("id");
             var icon = new OptionalMember<string>("icon");
             var damageType = new RequiredMember<DamageType>("damage_type");
@@ -1102,8 +1102,8 @@ namespace GW2SDK.Skins
                 Name = name.GetValue(),
                 Description = description.GetValueOrEmpty(),
                 Rarity = rarity.GetValue(missingMemberBehavior),
-                Flags = flags.GetValue(missingMemberBehavior),
-                Restrictions = restrictions.GetValue(missingMemberBehavior),
+                Flags = flags.GetValues(missingMemberBehavior),
+                Restrictions = restrictions.GetValues(missingMemberBehavior),
                 Icon = icon.GetValueOrNull(),
                 DamageType = damageType.GetValue(missingMemberBehavior)
             };
@@ -1114,8 +1114,8 @@ namespace GW2SDK.Skins
             var name = new RequiredMember<string>("name");
             var description = new OptionalMember<string>("description");
             var rarity = new RequiredMember<Rarity>("rarity");
-            var flags = new RequiredMember<SkinFlag[]>("flags");
-            var restrictions = new RequiredMember<SkinRestriction[]>("restrictions");
+            var flags = new RequiredMember<SkinFlag>("flags");
+            var restrictions = new RequiredMember<SkinRestriction>("restrictions");
             var id = new RequiredMember<int>("id");
             var icon = new OptionalMember<string>("icon");
             var damageType = new RequiredMember<DamageType>("damage_type");
@@ -1189,8 +1189,8 @@ namespace GW2SDK.Skins
                 Name = name.GetValue(),
                 Description = description.GetValueOrEmpty(),
                 Rarity = rarity.GetValue(missingMemberBehavior),
-                Flags = flags.GetValue(missingMemberBehavior),
-                Restrictions = restrictions.GetValue(missingMemberBehavior),
+                Flags = flags.GetValues(missingMemberBehavior),
+                Restrictions = restrictions.GetValues(missingMemberBehavior),
                 Icon = icon.GetValueOrNull(),
                 DamageType = damageType.GetValue(missingMemberBehavior)
             };
@@ -1201,8 +1201,8 @@ namespace GW2SDK.Skins
             var name = new RequiredMember<string>("name");
             var description = new OptionalMember<string>("description");
             var rarity = new RequiredMember<Rarity>("rarity");
-            var flags = new RequiredMember<SkinFlag[]>("flags");
-            var restrictions = new RequiredMember<SkinRestriction[]>("restrictions");
+            var flags = new RequiredMember<SkinFlag>("flags");
+            var restrictions = new RequiredMember<SkinRestriction>("restrictions");
             var id = new RequiredMember<int>("id");
             var icon = new OptionalMember<string>("icon");
             var damageType = new RequiredMember<DamageType>("damage_type");
@@ -1276,8 +1276,8 @@ namespace GW2SDK.Skins
                 Name = name.GetValue(),
                 Description = description.GetValueOrEmpty(),
                 Rarity = rarity.GetValue(missingMemberBehavior),
-                Flags = flags.GetValue(missingMemberBehavior),
-                Restrictions = restrictions.GetValue(missingMemberBehavior),
+                Flags = flags.GetValues(missingMemberBehavior),
+                Restrictions = restrictions.GetValues(missingMemberBehavior),
                 Icon = icon.GetValueOrNull(),
                 DamageType = damageType.GetValue(missingMemberBehavior)
             };
@@ -1288,8 +1288,8 @@ namespace GW2SDK.Skins
             var name = new RequiredMember<string>("name");
             var description = new OptionalMember<string>("description");
             var rarity = new RequiredMember<Rarity>("rarity");
-            var flags = new RequiredMember<SkinFlag[]>("flags");
-            var restrictions = new RequiredMember<SkinRestriction[]>("restrictions");
+            var flags = new RequiredMember<SkinFlag>("flags");
+            var restrictions = new RequiredMember<SkinRestriction>("restrictions");
             var id = new RequiredMember<int>("id");
             var icon = new OptionalMember<string>("icon");
             var weightClass = new RequiredMember<WeightClass>("weight_class");
@@ -1368,8 +1368,8 @@ namespace GW2SDK.Skins
                 Name = name.GetValue(),
                 Description = description.GetValueOrEmpty(),
                 Rarity = rarity.GetValue(missingMemberBehavior),
-                Flags = flags.GetValue(missingMemberBehavior),
-                Restrictions = restrictions.GetValue(missingMemberBehavior),
+                Flags = flags.GetValues(missingMemberBehavior),
+                Restrictions = restrictions.GetValues(missingMemberBehavior),
                 Icon = icon.GetValueOrNull(),
                 WeightClass = weightClass.GetValue(missingMemberBehavior),
                 DyeSlots = dyeSlots.Select(value => ReadDyeSlots(value, missingMemberBehavior))
@@ -1381,8 +1381,8 @@ namespace GW2SDK.Skins
             var name = new RequiredMember<string>("name");
             var description = new OptionalMember<string>("description");
             var rarity = new RequiredMember<Rarity>("rarity");
-            var flags = new RequiredMember<SkinFlag[]>("flags");
-            var restrictions = new RequiredMember<SkinRestriction[]>("restrictions");
+            var flags = new RequiredMember<SkinFlag>("flags");
+            var restrictions = new RequiredMember<SkinRestriction>("restrictions");
             var id = new RequiredMember<int>("id");
             var icon = new OptionalMember<string>("icon");
             var weightClass = new RequiredMember<WeightClass>("weight_class");
@@ -1461,8 +1461,8 @@ namespace GW2SDK.Skins
                 Name = name.GetValue(),
                 Description = description.GetValueOrEmpty(),
                 Rarity = rarity.GetValue(missingMemberBehavior),
-                Flags = flags.GetValue(missingMemberBehavior),
-                Restrictions = restrictions.GetValue(missingMemberBehavior),
+                Flags = flags.GetValues(missingMemberBehavior),
+                Restrictions = restrictions.GetValues(missingMemberBehavior),
                 Icon = icon.GetValueOrNull(),
                 WeightClass = weightClass.GetValue(missingMemberBehavior),
                 DyeSlots = dyeSlots.Select(value => ReadDyeSlots(value, missingMemberBehavior))
@@ -1474,8 +1474,8 @@ namespace GW2SDK.Skins
             var name = new RequiredMember<string>("name");
             var description = new OptionalMember<string>("description");
             var rarity = new RequiredMember<Rarity>("rarity");
-            var flags = new RequiredMember<SkinFlag[]>("flags");
-            var restrictions = new RequiredMember<SkinRestriction[]>("restrictions");
+            var flags = new RequiredMember<SkinFlag>("flags");
+            var restrictions = new RequiredMember<SkinRestriction>("restrictions");
             var id = new RequiredMember<int>("id");
             var icon = new OptionalMember<string>("icon");
             var damageType = new RequiredMember<DamageType>("damage_type");
@@ -1549,8 +1549,8 @@ namespace GW2SDK.Skins
                 Name = name.GetValue(),
                 Description = description.GetValueOrEmpty(),
                 Rarity = rarity.GetValue(missingMemberBehavior),
-                Flags = flags.GetValue(missingMemberBehavior),
-                Restrictions = restrictions.GetValue(missingMemberBehavior),
+                Flags = flags.GetValues(missingMemberBehavior),
+                Restrictions = restrictions.GetValues(missingMemberBehavior),
                 Icon = icon.GetValueOrNull(),
                 DamageType = damageType.GetValue(missingMemberBehavior)
             };
@@ -1561,8 +1561,8 @@ namespace GW2SDK.Skins
             var name = new RequiredMember<string>("name");
             var description = new OptionalMember<string>("description");
             var rarity = new RequiredMember<Rarity>("rarity");
-            var flags = new RequiredMember<SkinFlag[]>("flags");
-            var restrictions = new RequiredMember<SkinRestriction[]>("restrictions");
+            var flags = new RequiredMember<SkinFlag>("flags");
+            var restrictions = new RequiredMember<SkinRestriction>("restrictions");
             var id = new RequiredMember<int>("id");
             var icon = new OptionalMember<string>("icon");
             var weightClass = new RequiredMember<WeightClass>("weight_class");
@@ -1641,8 +1641,8 @@ namespace GW2SDK.Skins
                 Name = name.GetValue(),
                 Description = description.GetValueOrEmpty(),
                 Rarity = rarity.GetValue(missingMemberBehavior),
-                Flags = flags.GetValue(missingMemberBehavior),
-                Restrictions = restrictions.GetValue(missingMemberBehavior),
+                Flags = flags.GetValues(missingMemberBehavior),
+                Restrictions = restrictions.GetValues(missingMemberBehavior),
                 Icon = icon.GetValueOrNull(),
                 WeightClass = weightClass.GetValue(missingMemberBehavior),
                 DyeSlots = dyeSlots.Select(value => ReadDyeSlots(value, missingMemberBehavior))
@@ -1654,8 +1654,8 @@ namespace GW2SDK.Skins
             var name = new RequiredMember<string>("name");
             var description = new OptionalMember<string>("description");
             var rarity = new RequiredMember<Rarity>("rarity");
-            var flags = new RequiredMember<SkinFlag[]>("flags");
-            var restrictions = new RequiredMember<SkinRestriction[]>("restrictions");
+            var flags = new RequiredMember<SkinFlag>("flags");
+            var restrictions = new RequiredMember<SkinRestriction>("restrictions");
             var id = new RequiredMember<int>("id");
             var icon = new OptionalMember<string>("icon");
             foreach (var member in json.EnumerateObject())
@@ -1724,8 +1724,8 @@ namespace GW2SDK.Skins
                 Name = name.GetValue(),
                 Description = description.GetValueOrEmpty(),
                 Rarity = rarity.GetValue(missingMemberBehavior),
-                Flags = flags.GetValue(missingMemberBehavior),
-                Restrictions = restrictions.GetValue(missingMemberBehavior),
+                Flags = flags.GetValues(missingMemberBehavior),
+                Restrictions = restrictions.GetValues(missingMemberBehavior),
                 Icon = icon.GetValueOrNull()
             };
         }
@@ -1735,8 +1735,8 @@ namespace GW2SDK.Skins
             var name = new RequiredMember<string>("name");
             var description = new OptionalMember<string>("description");
             var rarity = new RequiredMember<Rarity>("rarity");
-            var flags = new RequiredMember<SkinFlag[]>("flags");
-            var restrictions = new RequiredMember<SkinRestriction[]>("restrictions");
+            var flags = new RequiredMember<SkinFlag>("flags");
+            var restrictions = new RequiredMember<SkinRestriction>("restrictions");
             var id = new RequiredMember<int>("id");
             var icon = new OptionalMember<string>("icon");
             var damageType = new RequiredMember<DamageType>("damage_type");
@@ -1810,8 +1810,8 @@ namespace GW2SDK.Skins
                 Name = name.GetValue(),
                 Description = description.GetValueOrEmpty(),
                 Rarity = rarity.GetValue(missingMemberBehavior),
-                Flags = flags.GetValue(missingMemberBehavior),
-                Restrictions = restrictions.GetValue(missingMemberBehavior),
+                Flags = flags.GetValues(missingMemberBehavior),
+                Restrictions = restrictions.GetValues(missingMemberBehavior),
                 Icon = icon.GetValueOrNull(),
                 DamageType = damageType.GetValue(missingMemberBehavior)
             };
@@ -1822,8 +1822,8 @@ namespace GW2SDK.Skins
             var name = new RequiredMember<string>("name");
             var description = new OptionalMember<string>("description");
             var rarity = new RequiredMember<Rarity>("rarity");
-            var flags = new RequiredMember<SkinFlag[]>("flags");
-            var restrictions = new RequiredMember<SkinRestriction[]>("restrictions");
+            var flags = new RequiredMember<SkinFlag>("flags");
+            var restrictions = new RequiredMember<SkinRestriction>("restrictions");
             var id = new RequiredMember<int>("id");
             var icon = new OptionalMember<string>("icon");
             var damageType = new RequiredMember<DamageType>("damage_type");
@@ -1897,8 +1897,8 @@ namespace GW2SDK.Skins
                 Name = name.GetValue(),
                 Description = description.GetValueOrEmpty(),
                 Rarity = rarity.GetValue(missingMemberBehavior),
-                Flags = flags.GetValue(missingMemberBehavior),
-                Restrictions = restrictions.GetValue(missingMemberBehavior),
+                Flags = flags.GetValues(missingMemberBehavior),
+                Restrictions = restrictions.GetValues(missingMemberBehavior),
                 Icon = icon.GetValueOrNull(),
                 DamageType = damageType.GetValue(missingMemberBehavior)
             };
@@ -1909,8 +1909,8 @@ namespace GW2SDK.Skins
             var name = new RequiredMember<string>("name");
             var description = new OptionalMember<string>("description");
             var rarity = new RequiredMember<Rarity>("rarity");
-            var flags = new RequiredMember<SkinFlag[]>("flags");
-            var restrictions = new RequiredMember<SkinRestriction[]>("restrictions");
+            var flags = new RequiredMember<SkinFlag>("flags");
+            var restrictions = new RequiredMember<SkinRestriction>("restrictions");
             var id = new RequiredMember<int>("id");
             var icon = new OptionalMember<string>("icon");
             foreach (var member in json.EnumerateObject())
@@ -1979,8 +1979,8 @@ namespace GW2SDK.Skins
                 Name = name.GetValue(),
                 Description = description.GetValueOrEmpty(),
                 Rarity = rarity.GetValue(missingMemberBehavior),
-                Flags = flags.GetValue(missingMemberBehavior),
-                Restrictions = restrictions.GetValue(missingMemberBehavior),
+                Flags = flags.GetValues(missingMemberBehavior),
+                Restrictions = restrictions.GetValues(missingMemberBehavior),
                 Icon = icon.GetValueOrNull()
             };
         }
@@ -1990,8 +1990,8 @@ namespace GW2SDK.Skins
             var name = new RequiredMember<string>("name");
             var description = new OptionalMember<string>("description");
             var rarity = new RequiredMember<Rarity>("rarity");
-            var flags = new RequiredMember<SkinFlag[]>("flags");
-            var restrictions = new RequiredMember<SkinRestriction[]>("restrictions");
+            var flags = new RequiredMember<SkinFlag>("flags");
+            var restrictions = new RequiredMember<SkinRestriction>("restrictions");
             var id = new RequiredMember<int>("id");
             var icon = new OptionalMember<string>("icon");
             var damageType = new RequiredMember<DamageType>("damage_type");
@@ -2065,8 +2065,8 @@ namespace GW2SDK.Skins
                 Name = name.GetValue(),
                 Description = description.GetValueOrEmpty(),
                 Rarity = rarity.GetValue(missingMemberBehavior),
-                Flags = flags.GetValue(missingMemberBehavior),
-                Restrictions = restrictions.GetValue(missingMemberBehavior),
+                Flags = flags.GetValues(missingMemberBehavior),
+                Restrictions = restrictions.GetValues(missingMemberBehavior),
                 Icon = icon.GetValueOrNull(),
                 DamageType = damageType.GetValue(missingMemberBehavior)
             };
@@ -2077,8 +2077,8 @@ namespace GW2SDK.Skins
             var name = new RequiredMember<string>("name");
             var description = new OptionalMember<string>("description");
             var rarity = new RequiredMember<Rarity>("rarity");
-            var flags = new RequiredMember<SkinFlag[]>("flags");
-            var restrictions = new RequiredMember<SkinRestriction[]>("restrictions");
+            var flags = new RequiredMember<SkinFlag>("flags");
+            var restrictions = new RequiredMember<SkinRestriction>("restrictions");
             var id = new RequiredMember<int>("id");
             var icon = new OptionalMember<string>("icon");
             var damageType = new RequiredMember<DamageType>("damage_type");
@@ -2152,8 +2152,8 @@ namespace GW2SDK.Skins
                 Name = name.GetValue(),
                 Description = description.GetValueOrEmpty(),
                 Rarity = rarity.GetValue(missingMemberBehavior),
-                Flags = flags.GetValue(missingMemberBehavior),
-                Restrictions = restrictions.GetValue(missingMemberBehavior),
+                Flags = flags.GetValues(missingMemberBehavior),
+                Restrictions = restrictions.GetValues(missingMemberBehavior),
                 Icon = icon.GetValueOrNull(),
                 DamageType = damageType.GetValue(missingMemberBehavior)
             };
@@ -2164,8 +2164,8 @@ namespace GW2SDK.Skins
             var name = new RequiredMember<string>("name");
             var description = new OptionalMember<string>("description");
             var rarity = new RequiredMember<Rarity>("rarity");
-            var flags = new RequiredMember<SkinFlag[]>("flags");
-            var restrictions = new RequiredMember<SkinRestriction[]>("restrictions");
+            var flags = new RequiredMember<SkinFlag>("flags");
+            var restrictions = new RequiredMember<SkinRestriction>("restrictions");
             var id = new RequiredMember<int>("id");
             var icon = new OptionalMember<string>("icon");
             var damageType = new RequiredMember<DamageType>("damage_type");
@@ -2239,8 +2239,8 @@ namespace GW2SDK.Skins
                 Name = name.GetValue(),
                 Description = description.GetValueOrEmpty(),
                 Rarity = rarity.GetValue(missingMemberBehavior),
-                Flags = flags.GetValue(missingMemberBehavior),
-                Restrictions = restrictions.GetValue(missingMemberBehavior),
+                Flags = flags.GetValues(missingMemberBehavior),
+                Restrictions = restrictions.GetValues(missingMemberBehavior),
                 Icon = icon.GetValueOrNull(),
                 DamageType = damageType.GetValue(missingMemberBehavior)
             };
@@ -2251,8 +2251,8 @@ namespace GW2SDK.Skins
             var name = new RequiredMember<string>("name");
             var description = new OptionalMember<string>("description");
             var rarity = new RequiredMember<Rarity>("rarity");
-            var flags = new RequiredMember<SkinFlag[]>("flags");
-            var restrictions = new RequiredMember<SkinRestriction[]>("restrictions");
+            var flags = new RequiredMember<SkinFlag>("flags");
+            var restrictions = new RequiredMember<SkinRestriction>("restrictions");
             var id = new RequiredMember<int>("id");
             var icon = new OptionalMember<string>("icon");
             var damageType = new RequiredMember<DamageType>("damage_type");
@@ -2326,8 +2326,8 @@ namespace GW2SDK.Skins
                 Name = name.GetValue(),
                 Description = description.GetValueOrEmpty(),
                 Rarity = rarity.GetValue(missingMemberBehavior),
-                Flags = flags.GetValue(missingMemberBehavior),
-                Restrictions = restrictions.GetValue(missingMemberBehavior),
+                Flags = flags.GetValues(missingMemberBehavior),
+                Restrictions = restrictions.GetValues(missingMemberBehavior),
                 Icon = icon.GetValueOrNull(),
                 DamageType = damageType.GetValue(missingMemberBehavior)
             };
@@ -2338,8 +2338,8 @@ namespace GW2SDK.Skins
             var name = new RequiredMember<string>("name");
             var description = new OptionalMember<string>("description");
             var rarity = new RequiredMember<Rarity>("rarity");
-            var flags = new RequiredMember<SkinFlag[]>("flags");
-            var restrictions = new RequiredMember<SkinRestriction[]>("restrictions");
+            var flags = new RequiredMember<SkinFlag>("flags");
+            var restrictions = new RequiredMember<SkinRestriction>("restrictions");
             var id = new RequiredMember<int>("id");
             var icon = new OptionalMember<string>("icon");
             var damageType = new RequiredMember<DamageType>("damage_type");
@@ -2413,8 +2413,8 @@ namespace GW2SDK.Skins
                 Name = name.GetValue(),
                 Description = description.GetValueOrEmpty(),
                 Rarity = rarity.GetValue(missingMemberBehavior),
-                Flags = flags.GetValue(missingMemberBehavior),
-                Restrictions = restrictions.GetValue(missingMemberBehavior),
+                Flags = flags.GetValues(missingMemberBehavior),
+                Restrictions = restrictions.GetValues(missingMemberBehavior),
                 Icon = icon.GetValueOrNull(),
                 DamageType = damageType.GetValue(missingMemberBehavior)
             };
@@ -2425,8 +2425,8 @@ namespace GW2SDK.Skins
             var name = new RequiredMember<string>("name");
             var description = new OptionalMember<string>("description");
             var rarity = new RequiredMember<Rarity>("rarity");
-            var flags = new RequiredMember<SkinFlag[]>("flags");
-            var restrictions = new RequiredMember<SkinRestriction[]>("restrictions");
+            var flags = new RequiredMember<SkinFlag>("flags");
+            var restrictions = new RequiredMember<SkinRestriction>("restrictions");
             var id = new RequiredMember<int>("id");
             var icon = new OptionalMember<string>("icon");
             var weightClass = new RequiredMember<WeightClass>("weight_class");
@@ -2505,8 +2505,8 @@ namespace GW2SDK.Skins
                 Name = name.GetValue(),
                 Description = description.GetValueOrEmpty(),
                 Rarity = rarity.GetValue(missingMemberBehavior),
-                Flags = flags.GetValue(missingMemberBehavior),
-                Restrictions = restrictions.GetValue(missingMemberBehavior),
+                Flags = flags.GetValues(missingMemberBehavior),
+                Restrictions = restrictions.GetValues(missingMemberBehavior),
                 Icon = icon.GetValueOrNull(),
                 WeightClass = weightClass.GetValue(missingMemberBehavior),
                 DyeSlots = dyeSlots.Select(value => ReadDyeSlots(value, missingMemberBehavior))
@@ -2530,8 +2530,8 @@ namespace GW2SDK.Skins
             var name = new RequiredMember<string>("name");
             var description = new OptionalMember<string>("description");
             var rarity = new RequiredMember<Rarity>("rarity");
-            var flags = new RequiredMember<SkinFlag[]>("flags");
-            var restrictions = new RequiredMember<SkinRestriction[]>("restrictions");
+            var flags = new RequiredMember<SkinFlag>("flags");
+            var restrictions = new RequiredMember<SkinRestriction>("restrictions");
             var id = new RequiredMember<int>("id");
             var icon = new OptionalMember<string>("icon");
             foreach (var member in json.EnumerateObject())
@@ -2583,8 +2583,8 @@ namespace GW2SDK.Skins
                 Name = name.GetValue(),
                 Description = description.GetValueOrEmpty(),
                 Rarity = rarity.GetValue(missingMemberBehavior),
-                Flags = flags.GetValue(missingMemberBehavior),
-                Restrictions = restrictions.GetValue(missingMemberBehavior),
+                Flags = flags.GetValues(missingMemberBehavior),
+                Restrictions = restrictions.GetValues(missingMemberBehavior),
                 Icon = icon.GetValueOrNull()
             };
         }
@@ -2594,8 +2594,8 @@ namespace GW2SDK.Skins
             var name = new RequiredMember<string>("name");
             var description = new OptionalMember<string>("description");
             var rarity = new RequiredMember<Rarity>("rarity");
-            var flags = new RequiredMember<SkinFlag[]>("flags");
-            var restrictions = new RequiredMember<SkinRestriction[]>("restrictions");
+            var flags = new RequiredMember<SkinFlag>("flags");
+            var restrictions = new RequiredMember<SkinRestriction>("restrictions");
             var id = new RequiredMember<int>("id");
             var icon = new OptionalMember<string>("icon");
             var damageType = new RequiredMember<DamageType>("damage_type");
@@ -2669,8 +2669,8 @@ namespace GW2SDK.Skins
                 Name = name.GetValue(),
                 Description = description.GetValueOrEmpty(),
                 Rarity = rarity.GetValue(missingMemberBehavior),
-                Flags = flags.GetValue(missingMemberBehavior),
-                Restrictions = restrictions.GetValue(missingMemberBehavior),
+                Flags = flags.GetValues(missingMemberBehavior),
+                Restrictions = restrictions.GetValues(missingMemberBehavior),
                 Icon = icon.GetValueOrNull(),
                 DamageType = damageType.GetValue(missingMemberBehavior)
             };
@@ -2681,8 +2681,8 @@ namespace GW2SDK.Skins
             var name = new RequiredMember<string>("name");
             var description = new OptionalMember<string>("description");
             var rarity = new RequiredMember<Rarity>("rarity");
-            var flags = new RequiredMember<SkinFlag[]>("flags");
-            var restrictions = new RequiredMember<SkinRestriction[]>("restrictions");
+            var flags = new RequiredMember<SkinFlag>("flags");
+            var restrictions = new RequiredMember<SkinRestriction>("restrictions");
             var id = new RequiredMember<int>("id");
             var icon = new OptionalMember<string>("icon");
             var damageType = new RequiredMember<DamageType>("damage_type");
@@ -2756,8 +2756,8 @@ namespace GW2SDK.Skins
                 Name = name.GetValue(),
                 Description = description.GetValueOrEmpty(),
                 Rarity = rarity.GetValue(missingMemberBehavior),
-                Flags = flags.GetValue(missingMemberBehavior),
-                Restrictions = restrictions.GetValue(missingMemberBehavior),
+                Flags = flags.GetValues(missingMemberBehavior),
+                Restrictions = restrictions.GetValues(missingMemberBehavior),
                 Icon = icon.GetValueOrNull(),
                 DamageType = damageType.GetValue(missingMemberBehavior)
             };
@@ -2768,8 +2768,8 @@ namespace GW2SDK.Skins
             var name = new RequiredMember<string>("name");
             var description = new OptionalMember<string>("description");
             var rarity = new RequiredMember<Rarity>("rarity");
-            var flags = new RequiredMember<SkinFlag[]>("flags");
-            var restrictions = new RequiredMember<SkinRestriction[]>("restrictions");
+            var flags = new RequiredMember<SkinFlag>("flags");
+            var restrictions = new RequiredMember<SkinRestriction>("restrictions");
             var id = new RequiredMember<int>("id");
             var icon = new OptionalMember<string>("icon");
             var damageType = new RequiredMember<DamageType>("damage_type");
@@ -2843,8 +2843,8 @@ namespace GW2SDK.Skins
                 Name = name.GetValue(),
                 Description = description.GetValueOrEmpty(),
                 Rarity = rarity.GetValue(missingMemberBehavior),
-                Flags = flags.GetValue(missingMemberBehavior),
-                Restrictions = restrictions.GetValue(missingMemberBehavior),
+                Flags = flags.GetValues(missingMemberBehavior),
+                Restrictions = restrictions.GetValues(missingMemberBehavior),
                 Icon = icon.GetValueOrNull(),
                 DamageType = damageType.GetValue(missingMemberBehavior)
             };
@@ -2855,8 +2855,8 @@ namespace GW2SDK.Skins
             var name = new RequiredMember<string>("name");
             var description = new OptionalMember<string>("description");
             var rarity = new RequiredMember<Rarity>("rarity");
-            var flags = new RequiredMember<SkinFlag[]>("flags");
-            var restrictions = new RequiredMember<SkinRestriction[]>("restrictions");
+            var flags = new RequiredMember<SkinFlag>("flags");
+            var restrictions = new RequiredMember<SkinRestriction>("restrictions");
             var id = new RequiredMember<int>("id");
             var icon = new OptionalMember<string>("icon");
             var damageType = new RequiredMember<DamageType>("damage_type");
@@ -2930,8 +2930,8 @@ namespace GW2SDK.Skins
                 Name = name.GetValue(),
                 Description = description.GetValueOrEmpty(),
                 Rarity = rarity.GetValue(missingMemberBehavior),
-                Flags = flags.GetValue(missingMemberBehavior),
-                Restrictions = restrictions.GetValue(missingMemberBehavior),
+                Flags = flags.GetValues(missingMemberBehavior),
+                Restrictions = restrictions.GetValues(missingMemberBehavior),
                 Icon = icon.GetValueOrNull(),
                 DamageType = damageType.GetValue(missingMemberBehavior)
             };
@@ -2942,8 +2942,8 @@ namespace GW2SDK.Skins
             var name = new RequiredMember<string>("name");
             var description = new OptionalMember<string>("description");
             var rarity = new RequiredMember<Rarity>("rarity");
-            var flags = new RequiredMember<SkinFlag[]>("flags");
-            var restrictions = new RequiredMember<SkinRestriction[]>("restrictions");
+            var flags = new RequiredMember<SkinFlag>("flags");
+            var restrictions = new RequiredMember<SkinRestriction>("restrictions");
             var id = new RequiredMember<int>("id");
             var icon = new OptionalMember<string>("icon");
             var damageType = new RequiredMember<DamageType>("damage_type");
@@ -3017,8 +3017,8 @@ namespace GW2SDK.Skins
                 Name = name.GetValue(),
                 Description = description.GetValueOrEmpty(),
                 Rarity = rarity.GetValue(missingMemberBehavior),
-                Flags = flags.GetValue(missingMemberBehavior),
-                Restrictions = restrictions.GetValue(missingMemberBehavior),
+                Flags = flags.GetValues(missingMemberBehavior),
+                Restrictions = restrictions.GetValues(missingMemberBehavior),
                 Icon = icon.GetValueOrNull(),
                 DamageType = damageType.GetValue(missingMemberBehavior)
             };
@@ -3029,8 +3029,8 @@ namespace GW2SDK.Skins
             var name = new RequiredMember<string>("name");
             var description = new OptionalMember<string>("description");
             var rarity = new RequiredMember<Rarity>("rarity");
-            var flags = new RequiredMember<SkinFlag[]>("flags");
-            var restrictions = new RequiredMember<SkinRestriction[]>("restrictions");
+            var flags = new RequiredMember<SkinFlag>("flags");
+            var restrictions = new RequiredMember<SkinRestriction>("restrictions");
             var id = new RequiredMember<int>("id");
             var icon = new OptionalMember<string>("icon");
             var damageType = new RequiredMember<DamageType>("damage_type");
@@ -3104,8 +3104,8 @@ namespace GW2SDK.Skins
                 Name = name.GetValue(),
                 Description = description.GetValueOrEmpty(),
                 Rarity = rarity.GetValue(missingMemberBehavior),
-                Flags = flags.GetValue(missingMemberBehavior),
-                Restrictions = restrictions.GetValue(missingMemberBehavior),
+                Flags = flags.GetValues(missingMemberBehavior),
+                Restrictions = restrictions.GetValues(missingMemberBehavior),
                 Icon = icon.GetValueOrNull(),
                 DamageType = damageType.GetValue(missingMemberBehavior)
             };
@@ -3119,8 +3119,8 @@ namespace GW2SDK.Skins
             var name = new RequiredMember<string>("name");
             var description = new OptionalMember<string>("description");
             var rarity = new RequiredMember<Rarity>("rarity");
-            var flags = new RequiredMember<SkinFlag[]>("flags");
-            var restrictions = new RequiredMember<SkinRestriction[]>("restrictions");
+            var flags = new RequiredMember<SkinFlag>("flags");
+            var restrictions = new RequiredMember<SkinRestriction>("restrictions");
             var id = new RequiredMember<int>("id");
             var icon = new OptionalMember<string>("icon");
             var damageType = new RequiredMember<DamageType>("damage_type");
@@ -3194,8 +3194,8 @@ namespace GW2SDK.Skins
                 Name = name.GetValue(),
                 Description = description.GetValueOrEmpty(),
                 Rarity = rarity.GetValue(missingMemberBehavior),
-                Flags = flags.GetValue(missingMemberBehavior),
-                Restrictions = restrictions.GetValue(missingMemberBehavior),
+                Flags = flags.GetValues(missingMemberBehavior),
+                Restrictions = restrictions.GetValues(missingMemberBehavior),
                 Icon = icon.GetValueOrNull(),
                 DamageType = damageType.GetValue(missingMemberBehavior)
             };
@@ -3206,8 +3206,8 @@ namespace GW2SDK.Skins
             var name = new RequiredMember<string>("name");
             var description = new OptionalMember<string>("description");
             var rarity = new RequiredMember<Rarity>("rarity");
-            var flags = new RequiredMember<SkinFlag[]>("flags");
-            var restrictions = new RequiredMember<SkinRestriction[]>("restrictions");
+            var flags = new RequiredMember<SkinFlag>("flags");
+            var restrictions = new RequiredMember<SkinRestriction>("restrictions");
             var id = new RequiredMember<int>("id");
             var icon = new OptionalMember<string>("icon");
             var damageType = new RequiredMember<DamageType>("damage_type");
@@ -3281,8 +3281,8 @@ namespace GW2SDK.Skins
                 Name = name.GetValue(),
                 Description = description.GetValueOrEmpty(),
                 Rarity = rarity.GetValue(missingMemberBehavior),
-                Flags = flags.GetValue(missingMemberBehavior),
-                Restrictions = restrictions.GetValue(missingMemberBehavior),
+                Flags = flags.GetValues(missingMemberBehavior),
+                Restrictions = restrictions.GetValues(missingMemberBehavior),
                 Icon = icon.GetValueOrNull(),
                 DamageType = damageType.GetValue(missingMemberBehavior)
             };
@@ -3293,8 +3293,8 @@ namespace GW2SDK.Skins
             var name = new RequiredMember<string>("name");
             var description = new OptionalMember<string>("description");
             var rarity = new RequiredMember<Rarity>("rarity");
-            var flags = new RequiredMember<SkinFlag[]>("flags");
-            var restrictions = new RequiredMember<SkinRestriction[]>("restrictions");
+            var flags = new RequiredMember<SkinFlag>("flags");
+            var restrictions = new RequiredMember<SkinRestriction>("restrictions");
             var id = new RequiredMember<int>("id");
             var icon = new OptionalMember<string>("icon");
             var damageType = new RequiredMember<DamageType>("damage_type");
@@ -3368,8 +3368,8 @@ namespace GW2SDK.Skins
                 Name = name.GetValue(),
                 Description = description.GetValueOrEmpty(),
                 Rarity = rarity.GetValue(missingMemberBehavior),
-                Flags = flags.GetValue(missingMemberBehavior),
-                Restrictions = restrictions.GetValue(missingMemberBehavior),
+                Flags = flags.GetValues(missingMemberBehavior),
+                Restrictions = restrictions.GetValues(missingMemberBehavior),
                 Icon = icon.GetValueOrNull(),
                 DamageType = damageType.GetValue(missingMemberBehavior)
             };
@@ -3430,8 +3430,8 @@ namespace GW2SDK.Skins
             var name = new RequiredMember<string>("name");
             var description = new OptionalMember<string>("description");
             var rarity = new RequiredMember<Rarity>("rarity");
-            var flags = new RequiredMember<SkinFlag[]>("flags");
-            var restrictions = new RequiredMember<SkinRestriction[]>("restrictions");
+            var flags = new RequiredMember<SkinFlag>("flags");
+            var restrictions = new RequiredMember<SkinRestriction>("restrictions");
             var id = new RequiredMember<int>("id");
             var icon = new OptionalMember<string>("icon");
             var damageType = new RequiredMember<DamageType>("damage_type");
@@ -3505,8 +3505,8 @@ namespace GW2SDK.Skins
                 Name = name.GetValue(),
                 Description = description.GetValueOrEmpty(),
                 Rarity = rarity.GetValue(missingMemberBehavior),
-                Flags = flags.GetValue(missingMemberBehavior),
-                Restrictions = restrictions.GetValue(missingMemberBehavior),
+                Flags = flags.GetValues(missingMemberBehavior),
+                Restrictions = restrictions.GetValues(missingMemberBehavior),
                 Icon = icon.GetValueOrNull(),
                 DamageType = damageType.GetValue(missingMemberBehavior)
             };
@@ -3514,17 +3514,17 @@ namespace GW2SDK.Skins
 
         private DyeSlotInfo ReadDyeSlots(JsonElement json, MissingMemberBehavior missingMemberBehavior)
         {
-            var @default = new RequiredMember<DyeSlot?[]>("default");
-            var asuraFemale = new OptionalMember<DyeSlot?[]>("AsuraFemale");
-            var asuraMale = new OptionalMember<DyeSlot?[]>("AsuraMale");
-            var charrFemale = new OptionalMember<DyeSlot?[]>("CharrFemale");
-            var charrMale = new OptionalMember<DyeSlot?[]>("CharrMale");
-            var humanFemale = new OptionalMember<DyeSlot?[]>("HumanFemale");
-            var humanMale = new OptionalMember<DyeSlot?[]>("HumanMale");
-            var nornFemale = new OptionalMember<DyeSlot?[]>("NornFemale");
-            var nornMale = new OptionalMember<DyeSlot?[]>("NornMale");
-            var sylvariFemale = new OptionalMember<DyeSlot?[]>("SylvariFemale");
-            var sylvariMale = new OptionalMember<DyeSlot?[]>("SylvariMale");
+            var @default = new RequiredMember<DyeSlot?>("default");
+            var asuraFemale = new OptionalMember<DyeSlot?>("AsuraFemale");
+            var asuraMale = new OptionalMember<DyeSlot?>("AsuraMale");
+            var charrFemale = new OptionalMember<DyeSlot?>("CharrFemale");
+            var charrMale = new OptionalMember<DyeSlot?>("CharrMale");
+            var humanFemale = new OptionalMember<DyeSlot?>("HumanFemale");
+            var humanMale = new OptionalMember<DyeSlot?>("HumanMale");
+            var nornFemale = new OptionalMember<DyeSlot?>("NornFemale");
+            var nornMale = new OptionalMember<DyeSlot?>("NornMale");
+            var sylvariFemale = new OptionalMember<DyeSlot?>("SylvariFemale");
+            var sylvariMale = new OptionalMember<DyeSlot?>("SylvariMale");
             foreach (var member in json.EnumerateObject())
             {
                 if (member.NameEquals(@default.Name))
@@ -3591,36 +3591,17 @@ namespace GW2SDK.Skins
             // Perhaps there is a better way to model it with a Null Object pattern?
             return new DyeSlotInfo
             {
-                Default = @default.Select(value => value.GetArray(item => item.ValueKind == JsonValueKind.Null ? null : ReadDyeSlot(item, missingMemberBehavior))),
-                AsuraFemale =
-                    asuraFemale.Select(value =>
-                        value.GetArray(item => item.ValueKind == JsonValueKind.Null ? null : ReadDyeSlot(item, missingMemberBehavior))),
-                AsuraMale =
-                    asuraMale.Select(value =>
-                        value.GetArray(item => item.ValueKind == JsonValueKind.Null ? null : ReadDyeSlot(item, missingMemberBehavior))),
-                CharrFemale =
-                    charrFemale.Select(value =>
-                        value.GetArray(item => item.ValueKind == JsonValueKind.Null ? null : ReadDyeSlot(item, missingMemberBehavior))),
-                CharrMale =
-                    charrMale.Select(value =>
-                        value.GetArray(item => item.ValueKind == JsonValueKind.Null ? null : ReadDyeSlot(item, missingMemberBehavior))),
-                HumanFemale =
-                    humanFemale.Select(value =>
-                        value.GetArray(item => item.ValueKind == JsonValueKind.Null ? null : ReadDyeSlot(item, missingMemberBehavior))),
-                HumanMale =
-                    humanMale.Select(value =>
-                        value.GetArray(item => item.ValueKind == JsonValueKind.Null ? null : ReadDyeSlot(item, missingMemberBehavior))),
-                NornFemale =
-                    nornFemale.Select(value =>
-                        value.GetArray(item => item.ValueKind == JsonValueKind.Null ? null : ReadDyeSlot(item, missingMemberBehavior))),
-                NornMale =
-                    nornMale.Select(value =>
-                        value.GetArray(item => item.ValueKind == JsonValueKind.Null ? null : ReadDyeSlot(item, missingMemberBehavior))),
-                SylvariFemale =
-                    sylvariFemale.Select(value =>
-                        value.GetArray(item => item.ValueKind == JsonValueKind.Null ? null : ReadDyeSlot(item, missingMemberBehavior))),
-                SylvariMale = sylvariMale.Select(value =>
-                    value.GetArray(item => item.ValueKind == JsonValueKind.Null ? null : ReadDyeSlot(item, missingMemberBehavior)))
+                Default = @default.SelectMany(value => value.ValueKind == JsonValueKind.Null ? null : ReadDyeSlot(value, missingMemberBehavior)),
+                AsuraFemale = asuraFemale.SelectMany(value => value.ValueKind == JsonValueKind.Null ? null : ReadDyeSlot(value, missingMemberBehavior)),
+                AsuraMale = asuraMale.SelectMany(value => value.ValueKind == JsonValueKind.Null ? null : ReadDyeSlot(value, missingMemberBehavior)),
+                CharrFemale = charrFemale.SelectMany(value => value.ValueKind == JsonValueKind.Null ? null : ReadDyeSlot(value, missingMemberBehavior)),
+                CharrMale = charrMale.SelectMany(value => value.ValueKind == JsonValueKind.Null ? null : ReadDyeSlot(value, missingMemberBehavior)),
+                HumanFemale = humanFemale.SelectMany(value => value.ValueKind == JsonValueKind.Null ? null : ReadDyeSlot(value, missingMemberBehavior)),
+                HumanMale = humanMale.SelectMany(value => value.ValueKind == JsonValueKind.Null ? null : ReadDyeSlot(value, missingMemberBehavior)),
+                NornFemale = nornFemale.SelectMany(value => value.ValueKind == JsonValueKind.Null ? null : ReadDyeSlot(value, missingMemberBehavior)),
+                NornMale = nornMale.SelectMany(value => value.ValueKind == JsonValueKind.Null ? null : ReadDyeSlot(value, missingMemberBehavior)),
+                SylvariFemale = sylvariFemale.SelectMany(value => value.ValueKind == JsonValueKind.Null ? null : ReadDyeSlot(value, missingMemberBehavior)),
+                SylvariMale = sylvariMale.SelectMany(value => value.ValueKind == JsonValueKind.Null ? null : ReadDyeSlot(value, missingMemberBehavior))
             };
         }
 

@@ -1,4 +1,5 @@
-﻿using GW2SDK.Annotations;
+﻿using System.Collections.Generic;
+using GW2SDK.Annotations;
 using JetBrains.Annotations;
 
 namespace GW2SDK.Traits
@@ -19,11 +20,11 @@ namespace GW2SDK.Traits
 
         public TraitSlot Slot { get; init; }
 
-        public TraitFact[]? Facts { get; init; }
+        public IReadOnlyCollection<TraitFact>? Facts { get; init; }
 
-        public CompoundTraitFact[]? TraitedFacts { get; init; }
+        public IReadOnlyCollection<CompoundTraitFact>? TraitedFacts { get; init; }
 
-        public TraitSkill[]? Skills { get; init; }
+        public IReadOnlyCollection<TraitSkill>? Skills { get; init; }
 
         public int SpezializationId { get; init; }
 

@@ -16,7 +16,7 @@ namespace GW2SDK.Masteries
             var order = new RequiredMember<int>("order");
             var background = new RequiredMember<string>("background");
             var region = new RequiredMember<MasteryRegionName>("region");
-            var levels = new RequiredMember<MasteryLevel[]>("levels");
+            var levels = new RequiredMember<MasteryLevel>("levels");
 
             foreach (var member in json.EnumerateObject())
             {
@@ -62,7 +62,7 @@ namespace GW2SDK.Masteries
                 Order = order.GetValue(),
                 Background = background.GetValue(),
                 Region = region.GetValue(missingMemberBehavior),
-                Levels = levels.Select(value => value.GetArray(item => ReadLevel(item, missingMemberBehavior)))
+                Levels = levels.SelectMany(value => ReadLevel(value, missingMemberBehavior))
             };
         }
 

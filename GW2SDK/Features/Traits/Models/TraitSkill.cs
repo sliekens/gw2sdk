@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using GW2SDK.Annotations;
 using JetBrains.Annotations;
 
@@ -12,9 +13,9 @@ namespace GW2SDK.Traits
 
         public string Name { get; init; } = "";
 
-        public TraitFact[] Facts { get; init; } = Array.Empty<TraitFact>();
+        public IReadOnlyCollection<TraitFact> Facts { get; init; } = Array.Empty<TraitFact>();
 
-        public CompoundTraitFact[]? TraitedFacts { get; init; }
+        public IReadOnlyCollection<CompoundTraitFact>? TraitedFacts { get; init; }
 
         public string Description { get; init; } = "";
 
@@ -22,6 +23,6 @@ namespace GW2SDK.Traits
 
         public string ChatLink { get; init; } = "";
 
-        public SkillCategoryName[]? Categories { get; init; }
+        public IReadOnlyCollection<SkillCategoryName>? Categories { get; init; }
     }
 }

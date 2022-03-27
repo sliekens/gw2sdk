@@ -26,11 +26,11 @@ namespace GW2SDK.Achievements
             var description = new RequiredMember<string>("description");
             var requirement = new RequiredMember<string>("requirement");
             var lockedText = new RequiredMember<string>("locked_text");
-            var flags = new RequiredMember<AchievementFlag[]>("flags");
-            var tiers = new RequiredMember<AchievementTier[]>("tiers");
-            var prerequisites = new OptionalMember<int[]>("prerequisites");
-            var rewards = new OptionalMember<AchievementReward[]>("rewards");
-            var bits = new OptionalMember<AchievementBit[]>("bits");
+            var flags = new RequiredMember<AchievementFlag>("flags");
+            var tiers = new RequiredMember<AchievementTier>("tiers");
+            var prerequisites = new OptionalMember<int>("prerequisites");
+            var rewards = new OptionalMember<AchievementReward>("rewards");
+            var bits = new OptionalMember<AchievementBit>("bits");
             var pointCap = new NullableMember<int>("point_cap");
 
             foreach (var member in json.EnumerateObject())
@@ -104,11 +104,11 @@ namespace GW2SDK.Achievements
                 Description = description.GetValue(),
                 Requirement = requirement.GetValue(),
                 LockedText = lockedText.GetValue(),
-                Flags = flags.GetValue(missingMemberBehavior),
-                Tiers = tiers.Select(value => value.GetArray(item => ReadAchievementTier(item, missingMemberBehavior))),
-                Prerequisites = prerequisites.Select(value => value.GetArray(item => item.GetInt32())),
-                Rewards = rewards.Select(value => value.GetArray(item => ReadAchievementReward(item, missingMemberBehavior))),
-                Bits = bits.Select(value => value.GetArray(item => ReadAchievementBit(item, missingMemberBehavior))),
+                Flags = flags.GetValues(missingMemberBehavior),
+                Tiers = tiers.SelectMany(value => ReadAchievementTier(value, missingMemberBehavior)),
+                Prerequisites = prerequisites.SelectMany(value => value.GetInt32()),
+                Rewards = rewards.SelectMany(value => ReadAchievementReward(value, missingMemberBehavior)),
+                Bits = bits.SelectMany(value => ReadAchievementBit(value, missingMemberBehavior)),
                 PointCap = pointCap.GetValue()
             };
         }
@@ -124,11 +124,11 @@ namespace GW2SDK.Achievements
             var description = new RequiredMember<string>("description");
             var requirement = new RequiredMember<string>("requirement");
             var lockedText = new RequiredMember<string>("locked_text");
-            var flags = new RequiredMember<AchievementFlag[]>("flags");
-            var tiers = new RequiredMember<AchievementTier[]>("tiers");
-            var prerequisites = new OptionalMember<int[]>("prerequisites");
-            var rewards = new OptionalMember<AchievementReward[]>("rewards");
-            var bits = new OptionalMember<AchievementBit[]>("bits");
+            var flags = new RequiredMember<AchievementFlag>("flags");
+            var tiers = new RequiredMember<AchievementTier>("tiers");
+            var prerequisites = new OptionalMember<int>("prerequisites");
+            var rewards = new OptionalMember<AchievementReward>("rewards");
+            var bits = new OptionalMember<AchievementBit>("bits");
             var pointCap = new NullableMember<int>("point_cap");
 
             foreach (var member in json.EnumerateObject())
@@ -202,11 +202,11 @@ namespace GW2SDK.Achievements
                 Description = description.GetValue(),
                 Requirement = requirement.GetValue(),
                 LockedText = lockedText.GetValue(),
-                Flags = flags.GetValue(missingMemberBehavior),
-                Tiers = tiers.Select(value => value.GetArray(item => ReadAchievementTier(item, missingMemberBehavior))),
-                Prerequisites = prerequisites.Select(value => value.GetArray(item => item.GetInt32())),
-                Rewards = rewards.Select(value => value.GetArray(item => ReadAchievementReward(item, missingMemberBehavior))),
-                Bits = bits.Select(value => value.GetArray(item => ReadAchievementBit(item, missingMemberBehavior))),
+                Flags = flags.GetValues(missingMemberBehavior),
+                Tiers = tiers.SelectMany(value => ReadAchievementTier(value, missingMemberBehavior)),
+                Prerequisites = prerequisites.SelectMany(value => value.GetInt32()),
+                Rewards = rewards.SelectMany(value => ReadAchievementReward(value, missingMemberBehavior)),
+                Bits = bits.SelectMany(value => ReadAchievementBit(value, missingMemberBehavior)),
                 PointCap = pointCap.GetValue()
             };
         }
@@ -222,11 +222,11 @@ namespace GW2SDK.Achievements
             var description = new RequiredMember<string>("description");
             var requirement = new RequiredMember<string>("requirement");
             var lockedText = new RequiredMember<string>("locked_text");
-            var flags = new RequiredMember<AchievementFlag[]>("flags");
-            var tiers = new RequiredMember<AchievementTier[]>("tiers");
-            var prerequisites = new OptionalMember<int[]>("prerequisites");
-            var rewards = new OptionalMember<AchievementReward[]>("rewards");
-            var bits = new OptionalMember<AchievementBit[]>("bits");
+            var flags = new RequiredMember<AchievementFlag>("flags");
+            var tiers = new RequiredMember<AchievementTier>("tiers");
+            var prerequisites = new OptionalMember<int>("prerequisites");
+            var rewards = new OptionalMember<AchievementReward>("rewards");
+            var bits = new OptionalMember<AchievementBit>("bits");
             var pointCap = new NullableMember<int>("point_cap");
 
             foreach (var member in json.EnumerateObject())
@@ -300,11 +300,11 @@ namespace GW2SDK.Achievements
                 Description = description.GetValue(),
                 Requirement = requirement.GetValue(),
                 LockedText = lockedText.GetValue(),
-                Flags = flags.GetValue(missingMemberBehavior),
-                Tiers = tiers.Select(value => value.GetArray(item => ReadAchievementTier(item, missingMemberBehavior))),
-                Prerequisites = prerequisites.Select(value => value.GetArray(item => item.GetInt32())),
-                Rewards = rewards.Select(value => value.GetArray(item => ReadAchievementReward(item, missingMemberBehavior))),
-                Bits = bits.Select(value => value.GetArray(item => ReadAchievementBit(item, missingMemberBehavior))),
+                Flags = flags.GetValues(missingMemberBehavior),
+                Tiers = tiers.SelectMany(value => ReadAchievementTier(value, missingMemberBehavior)),
+                Prerequisites = prerequisites.SelectMany(value => value.GetInt32()),
+                Rewards = rewards.SelectMany(value => ReadAchievementReward(value, missingMemberBehavior)),
+                Bits = bits.SelectMany(value => ReadAchievementBit(value, missingMemberBehavior)),
                 PointCap = pointCap.GetValue()
             };
         }

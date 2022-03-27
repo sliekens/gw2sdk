@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using GW2SDK.Annotations;
 using JetBrains.Annotations;
 
@@ -14,7 +15,7 @@ namespace GW2SDK.Items
 
         public int Defense { get; init; }
 
-        public InfusionSlot[] InfusionSlots { get; init; } = Array.Empty<InfusionSlot>();
+        public IReadOnlyCollection<InfusionSlot> InfusionSlots { get; init; } = Array.Empty<InfusionSlot>();
 
         public double AttributeAdjustment { get; init; }
 
@@ -22,6 +23,6 @@ namespace GW2SDK.Items
         
         public int? SuffixItemId { get; init; }
 
-        public int[]? StatChoices { get; init; }
+        public IReadOnlyCollection<int>? StatChoices { get; init; }
     }
 }

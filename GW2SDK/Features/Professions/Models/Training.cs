@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using GW2SDK.Annotations;
 using JetBrains.Annotations;
 
@@ -14,6 +15,6 @@ namespace GW2SDK.Professions
 
         public TrainingCategory Category { get; init; }
 
-        public TrainingObjective[] Track { get; set; } = Array.Empty<TrainingObjective>();
+        public IReadOnlyCollection<TrainingObjective> Track { get; set; } = Array.Empty<TrainingObjective>();
     }
 }

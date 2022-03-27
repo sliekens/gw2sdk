@@ -19,7 +19,7 @@ namespace GW2SDK.Tests.Features.Backstories
 
             public static void Description_is_not_empty(BackstoryQuestion actual) => Assert.NotEmpty(actual.Description);
 
-            public static void Has_3_to_8_answers(BackstoryQuestion actual) => Assert.InRange(actual.Answers.Length, 3, 8);
+            public static void Has_3_to_8_answers(BackstoryQuestion actual) => Assert.InRange(actual.Answers.Count, 3, 8);
         }
 
 

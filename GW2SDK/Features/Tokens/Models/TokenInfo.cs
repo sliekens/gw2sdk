@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using GW2SDK.Annotations;
 using JetBrains.Annotations;
 
@@ -13,6 +14,6 @@ namespace GW2SDK.Tokens
 
         public string Name { get; init; } = "";
 
-        public Permission[] Permissions { get; init; } = Array.Empty<Permission>();
+        public IReadOnlyCollection<Permission> Permissions { get; init; } = Array.Empty<Permission>();
     }
 }

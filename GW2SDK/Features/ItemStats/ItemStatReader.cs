@@ -12,7 +12,7 @@ namespace GW2SDK.ItemStats
         {
             var id = new RequiredMember<int>("id");
             var name = new RequiredMember<string>("name");
-            var attributes = new RequiredMember<ItemStatAttribute[]>("attributes");
+            var attributes = new RequiredMember<ItemStatAttribute>("attributes");
 
             foreach (var member in json.EnumerateObject())
             {
@@ -38,8 +38,7 @@ namespace GW2SDK.ItemStats
             {
                 Id = id.GetValue(),
                 Name = name.GetValue(),
-                Attributes = attributes.Select(value =>
-                    value.GetArray(item => ReadAttribute(item, missingMemberBehavior)))
+                Attributes = attributes.SelectMany(value => ReadAttribute(value, missingMemberBehavior))
             };
         }
 

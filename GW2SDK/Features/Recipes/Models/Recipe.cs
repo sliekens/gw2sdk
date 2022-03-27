@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using GW2SDK.Annotations;
 using JetBrains.Annotations;
 
@@ -19,11 +20,11 @@ namespace GW2SDK.Recipes
 
         public TimeSpan TimeToCraft { get; init; }
 
-        public CraftingDisciplineName[] Disciplines { get; init; } = Array.Empty<CraftingDisciplineName>();
+        public IReadOnlyCollection<CraftingDisciplineName> Disciplines { get; init; } = Array.Empty<CraftingDisciplineName>();
 
-        public RecipeFlag[] Flags { get; init; } = Array.Empty<RecipeFlag>();
+        public IReadOnlyCollection<RecipeFlag> Flags { get; init; } = Array.Empty<RecipeFlag>();
 
-        public Ingredient[] Ingredients { get; init; } = Array.Empty<Ingredient>();
+        public IReadOnlyCollection<Ingredient> Ingredients { get; init; } = Array.Empty<Ingredient>();
 
         public string ChatLink { get; init; } = "";
     }

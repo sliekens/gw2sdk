@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using GW2SDK.Annotations;
 using JetBrains.Annotations;
 
@@ -19,24 +20,24 @@ namespace GW2SDK.Continents
 
         public int DefaultFloor { get; init; }
 
-        public double[]? LabelCoordinates { get; init; }
+        public PointF? LabelCoordinates { get; init; }
 
-        public double[][] MapRectangle { get; init; } = Array.Empty<double[]>();
+        public MapRectangle MapRectangle { get; init; } = new();
 
-        public double[][] ContinentRectangle { get; init; } = Array.Empty<double[]>();
+        public ContinentRectangle ContinentRectangle { get; init; } = new();
 
         public Dictionary<int, PointOfInterest> PointsOfInterest { get; init; } = new(0);
 
         public Dictionary<int, MapTask> Tasks { get; init; } = new(0);
 
-        public SkillChallenge[] SkillChallenges { get; init; } = Array.Empty<SkillChallenge>();
+        public IReadOnlyCollection<SkillChallenge> SkillChallenges { get; init; } = Array.Empty<SkillChallenge>();
 
         public Dictionary<int, MapSector> Sectors { get; init; } = new(0);
 
-        public Adventure[] Adventures { get; init; } = Array.Empty<Adventure>();
+        public IReadOnlyCollection<Adventure> Adventures { get; init; } = Array.Empty<Adventure>();
 
-        public MasteryPoint[] MasteryPoints { get; init; } = Array.Empty<MasteryPoint>();
+        public IReadOnlyCollection<MasteryPoint> MasteryPoints { get; init; } = Array.Empty<MasteryPoint>();
 
-        public GodShrine[]? GodShrines { get; init; }
+        public IReadOnlyCollection<GodShrine>? GodShrines { get; init; }
     }
 }

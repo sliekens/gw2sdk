@@ -1,4 +1,5 @@
-﻿using JetBrains.Annotations;
+﻿using System.Collections.Generic;
+using JetBrains.Annotations;
 
 namespace GW2SDK.Skills
 {
@@ -11,6 +12,6 @@ namespace GW2SDK.Skills
 
         public int? Cost { get; init; }
 
-        public int[]? TransformSkills { get; init; }
+        public IReadOnlyCollection<int>? TransformSkills { get; init; }
     }
 }

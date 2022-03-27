@@ -16,9 +16,9 @@ namespace GW2SDK.Traits
             var name = new RequiredMember<string>("name");
             var description = new OptionalMember<string>("description");
             var slot = new RequiredMember<TraitSlot>("slot");
-            var facts = new OptionalMember<TraitFact[]>("facts");
-            var traitedFacts = new OptionalMember<CompoundTraitFact[]>("traited_facts");
-            var skills = new OptionalMember<TraitSkill[]>("skills");
+            var facts = new OptionalMember<TraitFact>("facts");
+            var traitedFacts = new OptionalMember<CompoundTraitFact>("traited_facts");
+            var skills = new OptionalMember<TraitSkill>("skills");
             var specialization = new RequiredMember<int>("specialization");
             var icon = new RequiredMember<string>("icon");
 
@@ -84,9 +84,9 @@ namespace GW2SDK.Traits
                 Slot = slot.GetValue(missingMemberBehavior),
                 Icon = icon.GetValue(),
                 SpezializationId = specialization.GetValue(),
-                Facts = facts.Select(value => value.GetArray(item => ReadTraitFact(item, missingMemberBehavior, out _, out _))),
-                TraitedFacts = traitedFacts.Select(value => value.GetArray(item => ReadCompoundTraitFact(item, missingMemberBehavior))),
-                Skills = skills.Select(value => value.GetArray(item => ReadTraitSkill(item, missingMemberBehavior)))
+                Facts = facts.SelectMany(value => ReadTraitFact(value, missingMemberBehavior, out _, out _)),
+                TraitedFacts = traitedFacts.SelectMany(value => ReadCompoundTraitFact(value, missingMemberBehavior)),
+                Skills = skills.SelectMany(value => ReadTraitSkill(value, missingMemberBehavior))
             };
         }
 
@@ -1184,13 +1184,13 @@ namespace GW2SDK.Traits
         private TraitSkill ReadTraitSkill(JsonElement json, MissingMemberBehavior missingMemberBehavior)
         {
             var name = new RequiredMember<string>("name");
-            var facts = new RequiredMember<TraitFact[]>("facts");
-            var traitedFacts = new OptionalMember<CompoundTraitFact[]>("traited_facts");
+            var facts = new RequiredMember<TraitFact>("facts");
+            var traitedFacts = new OptionalMember<CompoundTraitFact>("traited_facts");
             var description = new RequiredMember<string>("description");
             var icon = new RequiredMember<string>("icon");
             var id = new RequiredMember<int>("id");
             var chatLink = new RequiredMember<string>("chat_link");
-            var categories = new OptionalMember<SkillCategoryName[]>("categories");
+            var categories = new OptionalMember<SkillCategoryName>("categories");
             foreach (var member in json.EnumerateObject())
             {
                 if (member.NameEquals(name.Name))
@@ -1242,13 +1242,13 @@ namespace GW2SDK.Traits
             return new TraitSkill
             {
                 Name = name.GetValue(),
-                Facts = facts.Select(value => value.GetArray(item => ReadTraitFact(item, missingMemberBehavior, out _, out _))),
-                TraitedFacts = traitedFacts.Select(value => value.GetArray(item => ReadCompoundTraitFact(item, missingMemberBehavior))),
+                Facts = facts.SelectMany(item => ReadTraitFact(item, missingMemberBehavior, out _, out _)),
+                TraitedFacts = traitedFacts.SelectMany(value => ReadCompoundTraitFact(value, missingMemberBehavior)),
                 Description = description.GetValue(),
                 Icon = icon.GetValue(),
                 Id = id.GetValue(),
                 ChatLink = chatLink.GetValue(),
-                Categories = categories.GetValue(missingMemberBehavior)
+                Categories = categories.GetValues(missingMemberBehavior)
             };
         }
 

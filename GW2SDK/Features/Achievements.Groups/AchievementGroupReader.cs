@@ -16,7 +16,7 @@ namespace GW2SDK.Achievements.Groups
             var name = new RequiredMember<string>("name");
             var description = new RequiredMember<string>("description");
             var order = new RequiredMember<int>("order");
-            var categories = new RequiredMember<int[]>("categories");
+            var categories = new RequiredMember<int>("categories");
             foreach (var member in json.EnumerateObject())
             {
                 if (member.NameEquals(id.Name))
@@ -51,7 +51,7 @@ namespace GW2SDK.Achievements.Groups
                 Name = name.GetValue(),
                 Description = description.GetValue(),
                 Order = order.GetValue(),
-                Categories = categories.Select(value => value.GetArray(item => item.GetInt32()))
+                Categories = categories.SelectMany(value => value.GetInt32())
             };
         }
     }

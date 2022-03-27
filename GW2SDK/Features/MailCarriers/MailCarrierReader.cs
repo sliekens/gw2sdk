@@ -11,11 +11,11 @@ namespace GW2SDK.MailCarriers
         public MailCarrier Read(JsonElement json, MissingMemberBehavior missingMemberBehavior)
         {
             var id = new RequiredMember<int>("id");
-            var unlockItems = new RequiredMember<int[]>("unlock_items");
+            var unlockItems = new RequiredMember<int>("unlock_items");
             var order = new RequiredMember<int>("order");
             var icon = new RequiredMember<string>("icon");
             var name = new RequiredMember<string>("name");
-            var flags = new RequiredMember<MailCarrierFlag[]>("flags");
+            var flags = new RequiredMember<MailCarrierFlag>("flags");
 
             foreach (var member in json.EnumerateObject())
             {
@@ -52,11 +52,11 @@ namespace GW2SDK.MailCarriers
             return new MailCarrier
             {
                 Id = id.GetValue(),
-                UnlockItems = unlockItems.Select(value => value.GetArray(item => item.GetInt32())),
+                UnlockItems = unlockItems.SelectMany(value => value.GetInt32()),
                 Order = order.GetValue(),
                 Icon = icon.GetValue(),
                 Name = name.GetValue(),
-                Flags = flags.GetValue(missingMemberBehavior)
+                Flags = flags.GetValues(missingMemberBehavior)
             };
         }
 

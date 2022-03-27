@@ -17,8 +17,8 @@ namespace GW2SDK.Backstories
             var description = new RequiredMember<string>("description");
             var journal = new RequiredMember<string>("journal");
             var question = new RequiredMember<int>("question");
-            var professions = new OptionalMember<ProfessionName[]>("professions");
-            var races = new OptionalMember<Race[]>("races");
+            var professions = new OptionalMember<ProfessionName>("professions");
+            var races = new OptionalMember<Race>("races");
             foreach (var member in json.EnumerateObject())
             {
                 if (member.NameEquals(id.Name))
@@ -62,8 +62,8 @@ namespace GW2SDK.Backstories
                 Description = description.GetValue(),
                 Journal = journal.GetValue(),
                 Question = question.GetValue(),
-                Professions = professions.GetValue(missingMemberBehavior),
-                Races = races.GetValue(missingMemberBehavior)
+                Professions = professions.GetValues(missingMemberBehavior),
+                Races = races.GetValues(missingMemberBehavior)
             };
         }
 
@@ -77,10 +77,10 @@ namespace GW2SDK.Backstories
             var id = new RequiredMember<int>("id");
             var title = new RequiredMember<string>("title");
             var description = new RequiredMember<string>("description");
-            var answers = new RequiredMember<string[]>("answers");
+            var answers = new RequiredMember<string>("answers");
             var order = new RequiredMember<int>("order");
-            var professions = new OptionalMember<ProfessionName[]>("professions");
-            var races = new OptionalMember<Race[]>("races");
+            var professions = new OptionalMember<ProfessionName>("professions");
+            var races = new OptionalMember<Race>("races");
             foreach (var member in json.EnumerateObject())
             {
                 if (member.NameEquals(id.Name))
@@ -122,10 +122,10 @@ namespace GW2SDK.Backstories
                 Id = id.GetValue(),
                 Title = title.GetValue(),
                 Description = description.GetValue(),
-                Answers = answers.Select(value => value.GetArray(item => item.GetStringRequired())),
+                Answers = answers.SelectMany(value => value.GetStringRequired()),
                 Order = order.GetValue(),
-                Professions = professions.GetValue(missingMemberBehavior),
-                Races = races.GetValue(missingMemberBehavior)
+                Professions = professions.GetValues(missingMemberBehavior),
+                Races = races.GetValues(missingMemberBehavior)
             };
         }
 

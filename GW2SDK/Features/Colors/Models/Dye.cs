@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Drawing;
 using GW2SDK.Annotations;
 using JetBrains.Annotations;
 
@@ -6,13 +8,13 @@ namespace GW2SDK.Colors
 {
     [PublicAPI]
     [DataTransferObject]
-    public sealed record Color
+    public sealed record Dye
     {
         public int Id { get; init; }
 
         public string Name { get; init; } = "";
 
-        public int[] BaseRgb { get; init; } = Array.Empty<int>();
+        public Color BaseRgb { get; init; }
 
         public ColorInfo Cloth { get; init; } = new();
 
@@ -24,6 +26,6 @@ namespace GW2SDK.Colors
 
         public int? Item { get; init; }
 
-        public ColorCategoryName[] Categories { get; init; } = Array.Empty<ColorCategoryName>();
+        public IReadOnlyCollection<ColorCategoryName> Categories { get; init; } = Array.Empty<ColorCategoryName>();
     }
 }

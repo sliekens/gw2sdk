@@ -1,5 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Drawing;
 using GW2SDK.Annotations;
 using JetBrains.Annotations;
 
@@ -11,9 +11,9 @@ namespace GW2SDK.Continents
     {
         public int Id { get; init; }
 
-        public double[] TextureDimensions { get; init; } = Array.Empty<double>();
+        public SizeF TextureDimensions { get; init; }
 
-        public double[][]? ClampedView { get; init; }
+        public ContinentRectangle? ClampedView { get; init; }
 
         public Dictionary<int, Region> Regions { get; init; } = new(0);
     }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using GW2SDK.Annotations;
 using JetBrains.Annotations;
 
@@ -15,9 +16,9 @@ namespace GW2SDK.Skins
 
         public string Description { get; init; } = "";
 
-        public SkinFlag[] Flags { get; init; } = Array.Empty<SkinFlag>();
+        public IReadOnlyCollection<SkinFlag> Flags { get; init; } = Array.Empty<SkinFlag>();
 
-        public SkinRestriction[] Restrictions { get; init; } = Array.Empty<SkinRestriction>();
+        public IReadOnlyCollection<SkinRestriction> Restrictions { get; init; } = Array.Empty<SkinRestriction>();
 
         public Rarity Rarity { get; init; }
 

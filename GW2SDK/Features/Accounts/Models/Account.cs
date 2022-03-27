@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using GW2SDK.Annotations;
 using JetBrains.Annotations;
 
@@ -18,14 +20,14 @@ namespace GW2SDK.Accounts
 
         public int World { get; init; }
 
-        public string[] Guilds { get; init; } = Array.Empty<string>();
+        public IReadOnlyCollection<string> Guilds { get; init; } = Array.Empty<string>();
 
         [Scope(Permission.Guilds)]
-        public string[]? GuildLeader { get; init; }
+        public IReadOnlyCollection<string>? GuildLeader { get; init; }
 
         public DateTimeOffset Created { get; init; }
 
-        public ProductName[] Access { get; init; } = Array.Empty<ProductName>();
+        public IReadOnlyCollection<ProductName> Access { get; init; } = Array.Empty<ProductName>();
 
         public bool Commander { get; init; }
 

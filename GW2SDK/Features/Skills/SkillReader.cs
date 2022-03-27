@@ -21,20 +21,20 @@ namespace GW2SDK.Skills
         BundleSkill IJsonReader<BundleSkill>.Read(JsonElement json, MissingMemberBehavior missingMemberBehavior)
         {
             var name = new RequiredMember<string>("name");
-            var facts = new OptionalMember<SkillFact[]>("facts");
-            var traitedFacts = new OptionalMember<TraitedSkillFact[]>("traited_facts");
+            var facts = new OptionalMember<SkillFact>("facts");
+            var traitedFacts = new OptionalMember<TraitedSkillFact>("traited_facts");
             var description = new RequiredMember<string>("description");
             var icon = new OptionalMember<string>("icon");
             var weaponType = new NullableMember<WeaponType>("weapon_type");
-            var professions = new OptionalMember<ProfessionName[]>("professions");
+            var professions = new OptionalMember<ProfessionName>("professions");
             var slot = new NullableMember<SkillSlot>("slot");
             var flipSkill = new NullableMember<int>("flip_skill");
             var nextChain = new NullableMember<int>("next_chain");
             var prevChain = new NullableMember<int>("prev_chain");
-            var flags = new RequiredMember<SkillFlag[]>("flags");
+            var flags = new RequiredMember<SkillFlag>("flags");
             var id = new RequiredMember<int>("id");
             var chatLink = new RequiredMember<string>("chat_link");
-            var categories = new OptionalMember<SkillCategoryName[]>("categories");
+            var categories = new OptionalMember<SkillCategoryName>("categories");
 
             foreach (var member in json.EnumerateObject())
             {
@@ -115,23 +115,19 @@ namespace GW2SDK.Skills
             {
                 Id = id.GetValue(),
                 Name = name.GetValue(),
-                Facts =
-                    facts.Select(value =>
-                        value.GetArray(item => ReadSkillFact(item, missingMemberBehavior, out _, out _))),
-                TraitedFacts =
-                    traitedFacts.Select(value =>
-                        value.GetArray(item => ReadTraitedSkillFact(item, missingMemberBehavior))),
+                Facts = facts.SelectMany(value => ReadSkillFact(value, missingMemberBehavior, out _, out _)),
+                TraitedFacts = traitedFacts.SelectMany(value => ReadTraitedSkillFact(value, missingMemberBehavior)),
                 Description = description.GetValue(),
                 Icon = icon.GetValueOrNull(),
                 WeaponType = weaponType.GetValue(missingMemberBehavior),
-                Professions = professions.GetValue(missingMemberBehavior),
+                Professions = professions.GetValues(missingMemberBehavior),
                 Slot = slot.GetValue(missingMemberBehavior),
                 FlipSkill = flipSkill.GetValue(),
                 NextChain = nextChain.GetValue(),
                 PreviousChain = prevChain.GetValue(),
-                SkillFlag = flags.GetValue(missingMemberBehavior),
+                SkillFlag = flags.GetValues(missingMemberBehavior),
                 ChatLink = chatLink.GetValue(),
-                Categories = categories.GetValue(missingMemberBehavior)
+                Categories = categories.GetValues(missingMemberBehavior)
             };
         }
 
@@ -139,23 +135,23 @@ namespace GW2SDK.Skills
         {
             var id = new RequiredMember<int>("id");
             var name = new RequiredMember<string>("name");
-            var facts = new OptionalMember<SkillFact[]>("facts");
-            var traitedFacts = new OptionalMember<TraitedSkillFact[]>("traited_facts");
+            var facts = new OptionalMember<SkillFact>("facts");
+            var traitedFacts = new OptionalMember<TraitedSkillFact>("traited_facts");
             var description = new RequiredMember<string>("description");
             var icon = new OptionalMember<string>("icon");
             var weaponType = new NullableMember<WeaponType>("weapon_type");
-            var professions = new OptionalMember<ProfessionName[]>("professions");
+            var professions = new OptionalMember<ProfessionName>("professions");
             var slot = new NullableMember<SkillSlot>("slot");
             var flipSkill = new NullableMember<int>("flip_skill");
             var nextChain = new NullableMember<int>("next_chain");
             var prevChain = new NullableMember<int>("prev_chain");
-            var transformSkills = new OptionalMember<int[]>("transform_skills");
-            var flags = new RequiredMember<SkillFlag[]>("flags");
+            var transformSkills = new OptionalMember<int>("transform_skills");
+            var flags = new RequiredMember<SkillFlag>("flags");
             var specialization = new NullableMember<int>("specialization");
             var chatLink = new RequiredMember<string>("chat_link");
-            var categories = new OptionalMember<SkillCategoryName[]>("categories");
-            var subskills = new OptionalMember<SkillReference[]>("subskills");
-            var bundleSkills = new OptionalMember<int[]>("bundle_skills");
+            var categories = new OptionalMember<SkillCategoryName>("categories");
+            var subskills = new OptionalMember<SkillReference>("subskills");
+            var bundleSkills = new OptionalMember<int>("bundle_skills");
             var attunement = new NullableMember<Attunement>("attunement");
             var cost = new NullableMember<int>("cost");
             var toolbeltSkill = new NullableMember<int>("toolbelt_skill");
@@ -267,28 +263,23 @@ namespace GW2SDK.Skills
             {
                 Id = id.GetValue(),
                 Name = name.GetValue(),
-                Facts =
-                    facts.Select(value =>
-                        value.GetArray(item => ReadSkillFact(item, missingMemberBehavior, out _, out _))),
-                TraitedFacts =
-                    traitedFacts.Select(value =>
-                        value.GetArray(item => ReadTraitedSkillFact(item, missingMemberBehavior))),
+                Facts = facts.SelectMany(value => ReadSkillFact(value, missingMemberBehavior, out _, out _)),
+                TraitedFacts = traitedFacts.SelectMany(value => ReadTraitedSkillFact(value, missingMemberBehavior)),
                 Description = description.GetValue(),
                 Icon = icon.GetValueOrNull(),
                 WeaponType = weaponType.GetValue(missingMemberBehavior),
-                Professions = professions.GetValue(missingMemberBehavior),
+                Professions = professions.GetValues(missingMemberBehavior),
                 Slot = slot.GetValue(missingMemberBehavior),
                 FlipSkill = flipSkill.GetValue(),
                 NextChain = nextChain.GetValue(),
                 PreviousChain = prevChain.GetValue(),
-                TransformSkills = transformSkills.Select(value => value.GetArray(item => item.GetInt32())),
-                SkillFlag = flags.GetValue(missingMemberBehavior),
+                TransformSkills = transformSkills.SelectMany(value => value.GetInt32()),
+                SkillFlag = flags.GetValues(missingMemberBehavior),
                 Specialization = specialization.GetValue(),
                 ChatLink = chatLink.GetValue(),
-                Categories = categories.GetValue(missingMemberBehavior),
-                Subskills =
-                    subskills.Select(value => value.GetArray(item => ReadSubskill(item, missingMemberBehavior))),
-                BundleSkills = bundleSkills.Select(value => value.GetArray(item => item.GetInt32())),
+                Categories = categories.GetValues(missingMemberBehavior),
+                Subskills = subskills.SelectMany(value => ReadSubskill(value, missingMemberBehavior)),
+                BundleSkills = bundleSkills.SelectMany(value => value.GetInt32()),
                 Attunement = attunement.GetValue(missingMemberBehavior),
                 Cost = cost.GetValue(),
                 ToolbeltSkill = toolbeltSkill.GetValue()
@@ -299,22 +290,22 @@ namespace GW2SDK.Skills
         {
             var id = new RequiredMember<int>("id");
             var name = new RequiredMember<string>("name");
-            var facts = new OptionalMember<SkillFact[]>("facts");
-            var traitedFacts = new OptionalMember<TraitedSkillFact[]>("traited_facts");
+            var facts = new OptionalMember<SkillFact>("facts");
+            var traitedFacts = new OptionalMember<TraitedSkillFact>("traited_facts");
             var description = new RequiredMember<string>("description");
             var icon = new OptionalMember<string>("icon");
             var weaponType = new NullableMember<WeaponType>("weapon_type");
-            var professions = new OptionalMember<ProfessionName[]>("professions");
+            var professions = new OptionalMember<ProfessionName>("professions");
             var slot = new NullableMember<SkillSlot>("slot");
             var flipSkill = new NullableMember<int>("flip_skill");
             var nextChain = new NullableMember<int>("next_chain");
             var prevChain = new NullableMember<int>("prev_chain");
-            var flags = new RequiredMember<SkillFlag[]>("flags");
+            var flags = new RequiredMember<SkillFlag>("flags");
             var specialization = new NullableMember<int>("specialization");
             var chatLink = new RequiredMember<string>("chat_link");
-            var categories = new OptionalMember<SkillCategoryName[]>("categories");
-            var subskills = new OptionalMember<SkillReference[]>("subskills");
-            var bundleSkills = new OptionalMember<int[]>("bundle_skills");
+            var categories = new OptionalMember<SkillCategoryName>("categories");
+            var subskills = new OptionalMember<SkillReference>("subskills");
+            var bundleSkills = new OptionalMember<int>("bundle_skills");
             var attunement = new OptionalMember<Attunement>("attunement");
             var cost = new NullableMember<int>("cost");
             var toolbeltSkill = new NullableMember<int>("toolbelt_skill");
@@ -422,27 +413,22 @@ namespace GW2SDK.Skills
             {
                 Id = id.GetValue(),
                 Name = name.GetValue(),
-                Facts =
-                    facts.Select(value =>
-                        value.GetArray(item => ReadSkillFact(item, missingMemberBehavior, out _, out _))),
-                TraitedFacts =
-                    traitedFacts.Select(value =>
-                        value.GetArray(item => ReadTraitedSkillFact(item, missingMemberBehavior))),
+                Facts = facts.SelectMany(value => ReadSkillFact(value, missingMemberBehavior, out _, out _)),
+                TraitedFacts = traitedFacts.SelectMany(value => ReadTraitedSkillFact(value, missingMemberBehavior)),
                 Description = description.GetValue(),
                 Icon = icon.GetValueOrNull(),
                 WeaponType = weaponType.GetValue(missingMemberBehavior),
-                Professions = professions.GetValue(missingMemberBehavior),
+                Professions = professions.GetValues(missingMemberBehavior),
                 Slot = slot.GetValue(missingMemberBehavior),
                 FlipSkill = flipSkill.GetValue(),
                 NextChain = nextChain.GetValue(),
                 PreviousChain = prevChain.GetValue(),
-                SkillFlag = flags.GetValue(missingMemberBehavior),
+                SkillFlag = flags.GetValues(missingMemberBehavior),
                 Specialization = specialization.GetValue(),
                 ChatLink = chatLink.GetValue(),
-                Categories = categories.GetValue(missingMemberBehavior),
-                Subskills =
-                    subskills.Select(value => value.GetArray(item => ReadSubskill(item, missingMemberBehavior))),
-                BundleSkills = bundleSkills.Select(value => value.GetArray(item => item.GetInt32())),
+                Categories = categories.GetValues(missingMemberBehavior),
+                Subskills = subskills.SelectMany(value => ReadSubskill(value, missingMemberBehavior)),
+                BundleSkills = bundleSkills.SelectMany(value => value.GetInt32()),
                 Attunement = attunement.GetValue(missingMemberBehavior),
                 Cost = cost.GetValue(),
                 ToolbeltSkill = toolbeltSkill.GetValue()
@@ -453,19 +439,19 @@ namespace GW2SDK.Skills
         {
             var id = new RequiredMember<int>("id");
             var name = new RequiredMember<string>("name");
-            var facts = new OptionalMember<SkillFact[]>("facts");
-            var traitedFacts = new OptionalMember<TraitedSkillFact[]>("traited_facts");
+            var facts = new OptionalMember<SkillFact>("facts");
+            var traitedFacts = new OptionalMember<TraitedSkillFact>("traited_facts");
             var description = new RequiredMember<string>("description");
             var icon = new OptionalMember<string>("icon");
             var weaponType = new NullableMember<WeaponType>("weapon_type");
-            var professions = new OptionalMember<ProfessionName[]>("professions");
+            var professions = new OptionalMember<ProfessionName>("professions");
             var slot = new NullableMember<SkillSlot>("slot");
             var flipSkill = new NullableMember<int>("flip_skill");
             var nextChain = new NullableMember<int>("next_chain");
             var prevChain = new NullableMember<int>("prev_chain");
-            var flags = new RequiredMember<SkillFlag[]>("flags");
+            var flags = new RequiredMember<SkillFlag>("flags");
             var chatLink = new RequiredMember<string>("chat_link");
-            var categories = new OptionalMember<SkillCategoryName[]>("categories");
+            var categories = new OptionalMember<SkillCategoryName>("categories");
 
             foreach (var member in json.EnumerateObject())
             {
@@ -546,23 +532,19 @@ namespace GW2SDK.Skills
             {
                 Id = id.GetValue(),
                 Name = name.GetValue(),
-                Facts =
-                    facts.Select(value =>
-                        value.GetArray(item => ReadSkillFact(item, missingMemberBehavior, out _, out _))),
-                TraitedFacts =
-                    traitedFacts.Select(value =>
-                        value.GetArray(item => ReadTraitedSkillFact(item, missingMemberBehavior))),
+                Facts = facts.SelectMany(value => ReadSkillFact(value, missingMemberBehavior, out _, out _)),
+                TraitedFacts = traitedFacts.SelectMany(value => ReadTraitedSkillFact(value, missingMemberBehavior)),
                 Description = description.GetValue(),
                 Icon = icon.GetValueOrNull(),
                 WeaponType = weaponType.GetValue(missingMemberBehavior),
-                Professions = professions.GetValue(missingMemberBehavior),
+                Professions = professions.GetValues(missingMemberBehavior),
                 Slot = slot.GetValue(missingMemberBehavior),
                 FlipSkill = flipSkill.GetValue(),
                 NextChain = nextChain.GetValue(),
                 PreviousChain = prevChain.GetValue(),
-                SkillFlag = flags.GetValue(missingMemberBehavior),
+                SkillFlag = flags.GetValues(missingMemberBehavior),
                 ChatLink = chatLink.GetValue(),
-                Categories = categories.GetValue(missingMemberBehavior)
+                Categories = categories.GetValues(missingMemberBehavior)
             };
         }
 
@@ -570,19 +552,19 @@ namespace GW2SDK.Skills
         {
             var id = new RequiredMember<int>("id");
             var name = new RequiredMember<string>("name");
-            var facts = new OptionalMember<SkillFact[]>("facts");
-            var traitedFacts = new OptionalMember<TraitedSkillFact[]>("traited_facts");
+            var facts = new OptionalMember<SkillFact>("facts");
+            var traitedFacts = new OptionalMember<TraitedSkillFact>("traited_facts");
             var description = new RequiredMember<string>("description");
             var icon = new OptionalMember<string>("icon");
             var weaponType = new NullableMember<WeaponType>("weapon_type");
-            var professions = new OptionalMember<ProfessionName[]>("professions");
+            var professions = new OptionalMember<ProfessionName>("professions");
             var slot = new NullableMember<SkillSlot>("slot");
             var flipSkill = new NullableMember<int>("flip_skill");
             var nextChain = new NullableMember<int>("next_chain");
             var prevChain = new NullableMember<int>("prev_chain");
-            var flags = new RequiredMember<SkillFlag[]>("flags");
+            var flags = new RequiredMember<SkillFlag>("flags");
             var chatLink = new RequiredMember<string>("chat_link");
-            var categories = new OptionalMember<SkillCategoryName[]>("categories");
+            var categories = new OptionalMember<SkillCategoryName>("categories");
 
             foreach (var member in json.EnumerateObject())
             {
@@ -663,23 +645,19 @@ namespace GW2SDK.Skills
             {
                 Id = id.GetValue(),
                 Name = name.GetValue(),
-                Facts =
-                    facts.Select(value =>
-                        value.GetArray(item => ReadSkillFact(item, missingMemberBehavior, out _, out _))),
-                TraitedFacts =
-                    traitedFacts.Select(value =>
-                        value.GetArray(item => ReadTraitedSkillFact(item, missingMemberBehavior))),
+                Facts = facts.SelectMany(value => ReadSkillFact(value, missingMemberBehavior, out _, out _)),
+                TraitedFacts = traitedFacts.SelectMany(value => ReadTraitedSkillFact(value, missingMemberBehavior)),
                 Description = description.GetValue(),
                 Icon = icon.GetValueOrNull(),
                 WeaponType = weaponType.GetValue(missingMemberBehavior),
-                Professions = professions.GetValue(missingMemberBehavior),
+                Professions = professions.GetValues(missingMemberBehavior),
                 Slot = slot.GetValue(missingMemberBehavior),
                 FlipSkill = flipSkill.GetValue(),
                 NextChain = nextChain.GetValue(),
                 PreviousChain = prevChain.GetValue(),
-                SkillFlag = flags.GetValue(missingMemberBehavior),
+                SkillFlag = flags.GetValues(missingMemberBehavior),
                 ChatLink = chatLink.GetValue(),
-                Categories = categories.GetValue(missingMemberBehavior)
+                Categories = categories.GetValues(missingMemberBehavior)
             };
         }
 
@@ -687,21 +665,21 @@ namespace GW2SDK.Skills
         {
             var id = new RequiredMember<int>("id");
             var name = new RequiredMember<string>("name");
-            var facts = new OptionalMember<SkillFact[]>("facts");
-            var traitedFacts = new OptionalMember<TraitedSkillFact[]>("traited_facts");
+            var facts = new OptionalMember<SkillFact>("facts");
+            var traitedFacts = new OptionalMember<TraitedSkillFact>("traited_facts");
             var description = new RequiredMember<string>("description");
             var icon = new OptionalMember<string>("icon");
             var weaponType = new NullableMember<WeaponType>("weapon_type");
-            var professions = new OptionalMember<ProfessionName[]>("professions");
+            var professions = new OptionalMember<ProfessionName>("professions");
             var slot = new NullableMember<SkillSlot>("slot");
             var flipSkill = new NullableMember<int>("flip_skill");
             var nextChain = new NullableMember<int>("next_chain");
             var prevChain = new NullableMember<int>("prev_chain");
-            var transformSkills = new OptionalMember<int[]>("transform_skills");
-            var flags = new RequiredMember<SkillFlag[]>("flags");
+            var transformSkills = new OptionalMember<int>("transform_skills");
+            var flags = new RequiredMember<SkillFlag>("flags");
             var specialization = new NullableMember<int>("specialization");
             var chatLink = new RequiredMember<string>("chat_link");
-            var categories = new OptionalMember<SkillCategoryName[]>("categories");
+            var categories = new OptionalMember<SkillCategoryName>("categories");
             var attunement = new NullableMember<Attunement>("attunement");
             var cost = new NullableMember<int>("cost");
 
@@ -800,25 +778,21 @@ namespace GW2SDK.Skills
             {
                 Id = id.GetValue(),
                 Name = name.GetValue(),
-                Facts =
-                    facts.Select(value =>
-                        value.GetArray(item => ReadSkillFact(item, missingMemberBehavior, out _, out _))),
-                TraitedFacts =
-                    traitedFacts.Select(value =>
-                        value.GetArray(item => ReadTraitedSkillFact(item, missingMemberBehavior))),
+                Facts = facts.SelectMany(value => ReadSkillFact(value, missingMemberBehavior, out _, out _)),
+                TraitedFacts = traitedFacts.SelectMany(value => ReadTraitedSkillFact(value, missingMemberBehavior)),
                 Description = description.GetValue(),
                 Icon = icon.GetValueOrNull(),
                 WeaponType = weaponType.GetValue(missingMemberBehavior),
-                Professions = professions.GetValue(missingMemberBehavior),
+                Professions = professions.GetValues(missingMemberBehavior),
                 Slot = slot.GetValue(missingMemberBehavior),
                 FlipSkill = flipSkill.GetValue(),
                 NextChain = nextChain.GetValue(),
                 PreviousChain = prevChain.GetValue(),
-                TransformSkills = transformSkills.Select(value => value.GetArray(item => item.GetInt32())),
-                SkillFlag = flags.GetValue(missingMemberBehavior),
+                TransformSkills = transformSkills.SelectMany(value => value.GetInt32()),
+                SkillFlag = flags.GetValues(missingMemberBehavior),
                 Specialization = specialization.GetValue(),
                 ChatLink = chatLink.GetValue(),
-                Categories = categories.GetValue(missingMemberBehavior),
+                Categories = categories.GetValues(missingMemberBehavior),
                 Attunement = attunement.GetValue(missingMemberBehavior),
                 Cost = cost.GetValue()
             };
@@ -828,19 +802,19 @@ namespace GW2SDK.Skills
         {
             var id = new RequiredMember<int>("id");
             var name = new RequiredMember<string>("name");
-            var facts = new OptionalMember<SkillFact[]>("facts");
-            var traitedFacts = new OptionalMember<TraitedSkillFact[]>("traited_facts");
+            var facts = new OptionalMember<SkillFact>("facts");
+            var traitedFacts = new OptionalMember<TraitedSkillFact>("traited_facts");
             var description = new RequiredMember<string>("description");
             var icon = new OptionalMember<string>("icon");
             var weaponType = new NullableMember<WeaponType>("weapon_type");
-            var professions = new OptionalMember<ProfessionName[]>("professions");
+            var professions = new OptionalMember<ProfessionName>("professions");
             var slot = new NullableMember<SkillSlot>("slot");
             var flipSkill = new NullableMember<int>("flip_skill");
             var nextChain = new NullableMember<int>("next_chain");
             var prevChain = new NullableMember<int>("prev_chain");
-            var flags = new RequiredMember<SkillFlag[]>("flags");
+            var flags = new RequiredMember<SkillFlag>("flags");
             var chatLink = new RequiredMember<string>("chat_link");
-            var categories = new OptionalMember<SkillCategoryName[]>("categories");
+            var categories = new OptionalMember<SkillCategoryName>("categories");
 
             foreach (var member in json.EnumerateObject())
             {
@@ -921,23 +895,19 @@ namespace GW2SDK.Skills
             {
                 Id = id.GetValue(),
                 Name = name.GetValue(),
-                Facts =
-                    facts.Select(value =>
-                        value.GetArray(item => ReadSkillFact(item, missingMemberBehavior, out _, out _))),
-                TraitedFacts =
-                    traitedFacts.Select(value =>
-                        value.GetArray(item => ReadTraitedSkillFact(item, missingMemberBehavior))),
+                Facts = facts.SelectMany(value => ReadSkillFact(value, missingMemberBehavior, out _, out _)),
+                TraitedFacts = traitedFacts.SelectMany(value => ReadTraitedSkillFact(value, missingMemberBehavior)),
                 Description = description.GetValue(),
                 Icon = icon.GetValueOrNull(),
                 WeaponType = weaponType.GetValue(missingMemberBehavior),
-                Professions = professions.GetValue(missingMemberBehavior),
+                Professions = professions.GetValues(missingMemberBehavior),
                 Slot = slot.GetValue(missingMemberBehavior),
                 FlipSkill = flipSkill.GetValue(),
                 NextChain = nextChain.GetValue(),
                 PreviousChain = prevChain.GetValue(),
-                SkillFlag = flags.GetValue(missingMemberBehavior),
+                SkillFlag = flags.GetValues(missingMemberBehavior),
                 ChatLink = chatLink.GetValue(),
-                Categories = categories.GetValue(missingMemberBehavior)
+                Categories = categories.GetValues(missingMemberBehavior)
             };
         }
 
@@ -945,19 +915,19 @@ namespace GW2SDK.Skills
         {
             var id = new RequiredMember<int>("id");
             var name = new RequiredMember<string>("name");
-            var facts = new OptionalMember<SkillFact[]>("facts");
-            var traitedFacts = new OptionalMember<TraitedSkillFact[]>("traited_facts");
+            var facts = new OptionalMember<SkillFact>("facts");
+            var traitedFacts = new OptionalMember<TraitedSkillFact>("traited_facts");
             var description = new RequiredMember<string>("description");
             var icon = new OptionalMember<string>("icon");
             var weaponType = new NullableMember<WeaponType>("weapon_type");
-            var professions = new OptionalMember<ProfessionName[]>("professions");
+            var professions = new OptionalMember<ProfessionName>("professions");
             var slot = new NullableMember<SkillSlot>("slot");
             var flipSkill = new NullableMember<int>("flip_skill");
             var nextChain = new NullableMember<int>("next_chain");
             var prevChain = new NullableMember<int>("prev_chain");
-            var flags = new RequiredMember<SkillFlag[]>("flags");
+            var flags = new RequiredMember<SkillFlag>("flags");
             var chatLink = new RequiredMember<string>("chat_link");
-            var categories = new OptionalMember<SkillCategoryName[]>("categories");
+            var categories = new OptionalMember<SkillCategoryName>("categories");
 
             foreach (var member in json.EnumerateObject())
             {
@@ -1038,23 +1008,19 @@ namespace GW2SDK.Skills
             {
                 Id = id.GetValue(),
                 Name = name.GetValue(),
-                Facts =
-                    facts.Select(value =>
-                        value.GetArray(item => ReadSkillFact(item, missingMemberBehavior, out _, out _))),
-                TraitedFacts =
-                    traitedFacts.Select(value =>
-                        value.GetArray(item => ReadTraitedSkillFact(item, missingMemberBehavior))),
+                Facts = facts.SelectMany(value => ReadSkillFact(value, missingMemberBehavior, out _, out _)),
+                TraitedFacts = traitedFacts.SelectMany(value => ReadTraitedSkillFact(value, missingMemberBehavior)),
                 Description = description.GetValue(),
                 Icon = icon.GetValueOrNull(),
                 WeaponType = weaponType.GetValue(missingMemberBehavior),
-                Professions = professions.GetValue(missingMemberBehavior),
+                Professions = professions.GetValues(missingMemberBehavior),
                 Slot = slot.GetValue(missingMemberBehavior),
                 FlipSkill = flipSkill.GetValue(),
                 NextChain = nextChain.GetValue(),
                 PreviousChain = prevChain.GetValue(),
-                SkillFlag = flags.GetValue(missingMemberBehavior),
+                SkillFlag = flags.GetValues(missingMemberBehavior),
                 ChatLink = chatLink.GetValue(),
-                Categories = categories.GetValue(missingMemberBehavior)
+                Categories = categories.GetValues(missingMemberBehavior)
             };
         }
 
@@ -1062,22 +1028,22 @@ namespace GW2SDK.Skills
         {
             var id = new RequiredMember<int>("id");
             var name = new RequiredMember<string>("name");
-            var facts = new OptionalMember<SkillFact[]>("facts");
-            var traitedFacts = new OptionalMember<TraitedSkillFact[]>("traited_facts");
+            var facts = new OptionalMember<SkillFact>("facts");
+            var traitedFacts = new OptionalMember<TraitedSkillFact>("traited_facts");
             var description = new RequiredMember<string>("description");
             var icon = new OptionalMember<string>("icon");
             var weaponType = new NullableMember<WeaponType>("weapon_type");
-            var professions = new OptionalMember<ProfessionName[]>("professions");
+            var professions = new OptionalMember<ProfessionName>("professions");
             var slot = new NullableMember<SkillSlot>("slot");
             var flipSkill = new NullableMember<int>("flip_skill");
             var nextChain = new NullableMember<int>("next_chain");
             var prevChain = new NullableMember<int>("prev_chain");
-            var flags = new RequiredMember<SkillFlag[]>("flags");
+            var flags = new RequiredMember<SkillFlag>("flags");
             var specialization = new NullableMember<int>("specialization");
             var chatLink = new RequiredMember<string>("chat_link");
-            var categories = new OptionalMember<SkillCategoryName[]>("categories");
-            var subskills = new OptionalMember<SkillReference[]>("subskills");
-            var bundleSkills = new OptionalMember<int[]>("bundle_skills");
+            var categories = new OptionalMember<SkillCategoryName>("categories");
+            var subskills = new OptionalMember<SkillReference>("subskills");
+            var bundleSkills = new OptionalMember<int>("bundle_skills");
             var attunement = new NullableMember<Attunement>("attunement");
             var toolbeltSkill = new NullableMember<int>("toolbelt_skill");
             var cost = new NullableMember<int>("cost");
@@ -1185,27 +1151,22 @@ namespace GW2SDK.Skills
             {
                 Id = id.GetValue(),
                 Name = name.GetValue(),
-                Facts =
-                    facts.Select(value =>
-                        value.GetArray(item => ReadSkillFact(item, missingMemberBehavior, out _, out _))),
-                TraitedFacts =
-                    traitedFacts.Select(value =>
-                        value.GetArray(item => ReadTraitedSkillFact(item, missingMemberBehavior))),
+                Facts = facts.SelectMany(value => ReadSkillFact(value, missingMemberBehavior, out _, out _)),
+                TraitedFacts = traitedFacts.SelectMany(value => ReadTraitedSkillFact(value, missingMemberBehavior)),
                 Description = description.GetValue(),
                 Icon = icon.GetValueOrNull(),
                 WeaponType = weaponType.GetValue(missingMemberBehavior),
-                Professions = professions.GetValue(missingMemberBehavior),
+                Professions = professions.GetValues(missingMemberBehavior),
                 Slot = slot.GetValue(missingMemberBehavior),
                 FlipSkill = flipSkill.GetValue(),
                 NextChain = nextChain.GetValue(),
                 PreviousChain = prevChain.GetValue(),
-                SkillFlag = flags.GetValue(missingMemberBehavior),
+                SkillFlag = flags.GetValues(missingMemberBehavior),
                 Specialization = specialization.GetValue(),
                 ChatLink = chatLink.GetValue(),
-                Categories = categories.GetValue(missingMemberBehavior),
-                Subskills =
-                    subskills.Select(value => value.GetArray(item => ReadSubskill(item, missingMemberBehavior))),
-                BundleSkills = bundleSkills.Select(value => value.GetArray(item => item.GetInt32())),
+                Categories = categories.GetValues(missingMemberBehavior),
+                Subskills = subskills.SelectMany(value => ReadSubskill(value, missingMemberBehavior)),
+                BundleSkills = bundleSkills.SelectMany(value => value.GetInt32()),
                 Attunement = attunement.GetValue(missingMemberBehavior),
                 ToolbeltSkill = toolbeltSkill.GetValue(),
                 Cost = cost.GetValue()
@@ -1216,22 +1177,22 @@ namespace GW2SDK.Skills
         {
             var id = new RequiredMember<int>("id");
             var name = new RequiredMember<string>("name");
-            var facts = new OptionalMember<SkillFact[]>("facts");
-            var traitedFacts = new OptionalMember<TraitedSkillFact[]>("traited_facts");
+            var facts = new OptionalMember<SkillFact>("facts");
+            var traitedFacts = new OptionalMember<TraitedSkillFact>("traited_facts");
             var description = new RequiredMember<string>("description");
             var icon = new OptionalMember<string>("icon");
             var weaponType = new NullableMember<WeaponType>("weapon_type");
-            var professions = new OptionalMember<ProfessionName[]>("professions");
+            var professions = new OptionalMember<ProfessionName>("professions");
             var slot = new NullableMember<SkillSlot>("slot");
             var flipSkill = new NullableMember<int>("flip_skill");
             var nextChain = new NullableMember<int>("next_chain");
             var prevChain = new NullableMember<int>("prev_chain");
-            var flags = new RequiredMember<SkillFlag[]>("flags");
+            var flags = new RequiredMember<SkillFlag>("flags");
             var chatLink = new RequiredMember<string>("chat_link");
             var attunement = new NullableMember<Attunement>("attunement");
             var dualAttunement = new NullableMember<Attunement>("dual_attunement");
             var specialization = new NullableMember<int>("specialization");
-            var categories = new OptionalMember<SkillCategoryName[]>("categories");
+            var categories = new OptionalMember<SkillCategoryName>("categories");
             var cost = new NullableMember<int>("cost");
             var offhand = new NullableMember<Offhand>("dual_wield");
             var initiative = new NullableMember<int>("initiative");
@@ -1339,16 +1300,12 @@ namespace GW2SDK.Skills
             {
                 Id = id.GetValue(),
                 Name = name.GetValue(),
-                Facts =
-                    facts.Select(value =>
-                        value.GetArray(item => ReadSkillFact(item, missingMemberBehavior, out _, out _))),
-                TraitedFacts =
-                    traitedFacts.Select(value =>
-                        value.GetArray(item => ReadTraitedSkillFact(item, missingMemberBehavior))),
+                Facts = facts.SelectMany(value => ReadSkillFact(value, missingMemberBehavior, out _, out _)),
+                TraitedFacts = traitedFacts.SelectMany(value => ReadTraitedSkillFact(value, missingMemberBehavior)),
                 Description = description.GetValue(),
                 Icon = icon.GetValueOrNull(),
                 WeaponType = weaponType.GetValue(missingMemberBehavior),
-                Professions = professions.GetValue(missingMemberBehavior),
+                Professions = professions.GetValues(missingMemberBehavior),
                 Specialization = specialization.GetValue(),
                 Attunement = attunement.GetValue(missingMemberBehavior),
                 DualAttunement = dualAttunement.GetValue(missingMemberBehavior),
@@ -1356,9 +1313,9 @@ namespace GW2SDK.Skills
                 FlipSkill = flipSkill.GetValue(),
                 NextChain = nextChain.GetValue(),
                 PreviousChain = prevChain.GetValue(),
-                SkillFlag = flags.GetValue(missingMemberBehavior),
+                SkillFlag = flags.GetValues(missingMemberBehavior),
                 ChatLink = chatLink.GetValue(),
-                Categories = categories.GetValue(missingMemberBehavior),
+                Categories = categories.GetValues(missingMemberBehavior),
                 Cost = cost.GetValue(),
                 Offhand = offhand.GetValue(missingMemberBehavior),
                 Initiative = initiative.GetValue()
@@ -1397,19 +1354,19 @@ namespace GW2SDK.Skills
 
             var id = new RequiredMember<int>("id");
             var name = new RequiredMember<string>("name");
-            var facts = new OptionalMember<SkillFact[]>("facts");
-            var traitedFacts = new OptionalMember<TraitedSkillFact[]>("traited_facts");
+            var facts = new OptionalMember<SkillFact>("facts");
+            var traitedFacts = new OptionalMember<TraitedSkillFact>("traited_facts");
             var description = new RequiredMember<string>("description");
             var icon = new OptionalMember<string>("icon");
             var weaponType = new NullableMember<WeaponType>("weapon_type");
-            var professions = new OptionalMember<ProfessionName[]>("professions");
+            var professions = new OptionalMember<ProfessionName>("professions");
             var slot = new NullableMember<SkillSlot>("slot");
             var flipSkill = new NullableMember<int>("flip_skill");
             var nextChain = new NullableMember<int>("next_chain");
             var prevChain = new NullableMember<int>("prev_chain");
-            var flags = new RequiredMember<SkillFlag[]>("flags");
+            var flags = new RequiredMember<SkillFlag>("flags");
             var chatLink = new RequiredMember<string>("chat_link");
-            var categories = new OptionalMember<SkillCategoryName[]>("categories");
+            var categories = new OptionalMember<SkillCategoryName>("categories");
 
             foreach (var member in json.EnumerateObject())
             {
@@ -1490,23 +1447,19 @@ namespace GW2SDK.Skills
             {
                 Id = id.GetValue(),
                 Name = name.GetValue(),
-                Facts =
-                    facts.Select(value =>
-                        value.GetArray(item => ReadSkillFact(item, missingMemberBehavior, out _, out _))),
-                TraitedFacts =
-                    traitedFacts.Select(value =>
-                        value.GetArray(item => ReadTraitedSkillFact(item, missingMemberBehavior))),
+                Facts = facts.SelectMany(value => ReadSkillFact(value, missingMemberBehavior, out _, out _)),
+                TraitedFacts = traitedFacts.SelectMany(value => ReadTraitedSkillFact(value, missingMemberBehavior)),
                 Description = description.GetValue(),
                 Icon = icon.GetValueOrNull(),
                 WeaponType = weaponType.GetValue(missingMemberBehavior),
-                Professions = professions.GetValue(missingMemberBehavior),
+                Professions = professions.GetValues(missingMemberBehavior),
                 Slot = slot.GetValue(missingMemberBehavior),
                 FlipSkill = flipSkill.GetValue(),
                 NextChain = nextChain.GetValue(),
                 PreviousChain = prevChain.GetValue(),
-                SkillFlag = flags.GetValue(missingMemberBehavior),
+                SkillFlag = flags.GetValues(missingMemberBehavior),
                 ChatLink = chatLink.GetValue(),
-                Categories = categories.GetValue(missingMemberBehavior)
+                Categories = categories.GetValues(missingMemberBehavior)
             };
         }
 

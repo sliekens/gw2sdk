@@ -25,6 +25,12 @@ namespace GW2SDK
 
         Permanent,
 
-        Weekly
+        Weekly,
+
+        SpecialEvent,
+
+        PvE,
+
+        WvW
     }
 }

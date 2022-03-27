@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using GW2SDK.Annotations;
 using JetBrains.Annotations;
 
@@ -13,9 +14,9 @@ namespace GW2SDK.Skills
 
         public string Name { get; init; } = "";
 
-        public SkillFact[]? Facts { get; init; }
+        public IReadOnlyCollection<SkillFact>? Facts { get; init; }
 
-        public TraitedSkillFact[]? TraitedFacts { get; init; }
+        public IReadOnlyCollection<TraitedSkillFact>? TraitedFacts { get; init; }
 
         public string Description { get; init; } = "";
 
@@ -23,15 +24,15 @@ namespace GW2SDK.Skills
 
         public WeaponType? WeaponType { get; init; }
 
-        public ProfessionName[]? Professions { get; init; }
+        public IReadOnlyCollection<ProfessionName>? Professions { get; init; }
 
         public SkillSlot? Slot { get; init; }
 
         public string ChatLink { get; init; } = "";
 
-        public SkillFlag[] SkillFlag { get; init; } = Array.Empty<SkillFlag>();
+        public IReadOnlyCollection<SkillFlag> SkillFlag { get; init; } = Array.Empty<SkillFlag>();
 
-        public SkillCategoryName[]? Categories { get; init; }
+        public IReadOnlyCollection<SkillCategoryName>? Categories { get; init; }
 
         public int? FlipSkill { get; init; }
 

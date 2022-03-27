@@ -22,7 +22,7 @@ namespace GW2SDK.Characters
         public Gender Gender { get; init; }
 
         /// <summary>Additional facts about the current character that did not fit anywhere else.</summary>
-        public CharacterFlag[] Flags { get; init; } = Array.Empty<CharacterFlag>();
+        public IReadOnlyCollection<CharacterFlag> Flags { get; init; } = Array.Empty<CharacterFlag>();
 
         /// <summary>The profession name of the current character.</summary>
         public ProfessionName Profession { get; init; }
@@ -45,17 +45,17 @@ namespace GW2SDK.Characters
         /// <summary>The number of times the current character was fully defeated.</summary>
         public int Deaths { get; init; }
 
-        public IEnumerable<CraftingDiscipline> CraftingDisciplines { get; init; } = Array.Empty<CraftingDiscipline>();
+        public IReadOnlyCollection<CraftingDiscipline> CraftingDisciplines { get; init; } = Array.Empty<CraftingDiscipline>();
 
         /// <summary>The selected title ID of the current character.</summary>
         public int? TitleId { get; init; }
 
         /// <summary>The IDs of the answers to backstory questions that were selected during creation of the current character.</summary>
-        public string[] Backstory { get; init; } = Array.Empty<string>();
+        public IReadOnlyCollection<string> Backstory { get; init; } = Array.Empty<string>();
 
         /// <summary>The trained WvW abilities and their rank.</summary>
         [Scope(Permission.Progression)]
-        public IEnumerable<WvwAbility>? WvwAbilities { get; init; }
+        public IReadOnlyCollection<WvwAbility>? WvwAbilities { get; init; }
 
         /// <summary>The number of build tabs available to the current character.</summary>
         [Scope(Permission.Builds)]
@@ -68,7 +68,7 @@ namespace GW2SDK.Characters
 
         /// <summary>All the build tabs of the current character.</summary>
         [Scope(Permission.Builds)]
-        public IEnumerable<BuildTab>? BuildTabs { get; init; }
+        public IReadOnlyCollection<BuildTab>? BuildTabs { get; init; }
 
         /// <summary>The number of equipment tabs available to the current character.</summary>
         [Scope(ScopeRequirement.Any, Permission.Builds, Permission.Inventories)]
@@ -81,24 +81,24 @@ namespace GW2SDK.Characters
 
         /// <summary>All the equipment in the current character's armory.</summary>
         [Scope(ScopeRequirement.Any, Permission.Builds, Permission.Inventories)]
-        public IEnumerable<EquipmentItem>? Equipment { get; init; }
+        public IReadOnlyCollection<EquipmentItem>? Equipment { get; init; }
 
         /// <summary>All the equipment tabs of the current character.</summary>
         [Scope(ScopeRequirement.Any, Permission.Builds, Permission.Inventories)]
-        public IEnumerable<EquipmentTab>? EquipmentTabs { get; init; }
+        public IReadOnlyCollection<EquipmentTab>? EquipmentTabs { get; init; }
 
         /// <summary>The IDs of the recipes that the current character has unlocked.</summary>
         /// <summary>This includes unlocked recipes that are unavailable to the character's active crafting disciplines.</summary>
         [Scope(Permission.Inventories)]
-        public IEnumerable<int>? Recipes { get; init; }
+        public IReadOnlyCollection<int>? Recipes { get; init; }
 
         /// <summary>The current character's hero point progression.</summary>
         [Scope(Permission.Builds)]
-        public IEnumerable<TrainingTrack>? Training { get; init; }
+        public IReadOnlyCollection<TrainingTrack>? Training { get; init; }
 
         /// <summary>The current character's bags, sorted by in-game order. Enumerated values can contain <c>null</c> when some bag
         /// expansion slots are empty.</summary>
         [Scope(Permission.Inventories)]
-        public IEnumerable<Bag?>? Bags { get; init; }
+        public IReadOnlyCollection<Bag?>? Bags { get; init; }
     }
 }

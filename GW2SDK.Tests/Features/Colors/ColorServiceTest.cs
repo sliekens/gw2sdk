@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using GW2SDK.Colors;
 using GW2SDK.Tests.TestInfrastructure;
@@ -11,10 +10,10 @@ namespace GW2SDK.Tests.Features.Colors
     {
         private static class ColorFact
         {
-            public static void Base_rgb_contains_red_green_blue(Color actual) => Assert.Collection(actual.BaseRgb,
-                red => Assert.InRange(red,     1, 255),
-                green => Assert.InRange(green, 1, 255),
-                blue => Assert.InRange(blue,   1, 255));
+            public static void Base_rgb_contains_red_green_blue(Dye actual)
+            {
+                Assert.False(actual.BaseRgb.IsEmpty);
+            }
         }
 
         [Fact]
@@ -63,11 +62,19 @@ namespace GW2SDK.Tests.Features.Colors
             await using var services = new Composer();
             var sut = services.Resolve<ColorService>();
 
-            var ids = new HashSet<int> { 1, 2, 3 };
+            var ids = new HashSet<int>
+            {
+                1,
+                2,
+                3
+            };
 
             var actual = await sut.GetColorsByIds(ids);
 
-            Assert.Collection(actual.Values, first => Assert.Equal(1, first.Id), second => Assert.Equal(2, second.Id), third => Assert.Equal(3, third.Id));
+            Assert.Collection(actual.Values,
+                first => Assert.Equal(1, first.Id),
+                second => Assert.Equal(2, second.Id),
+                third => Assert.Equal(3, third.Id));
         }
 
         [Fact]

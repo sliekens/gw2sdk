@@ -13,7 +13,7 @@ namespace GW2SDK.Characters
             var name = new RequiredMember<string>("name");
             var race = new RequiredMember<Race>("race");
             var gender = new RequiredMember<Gender>("gender");
-            var flags = new RequiredMember<CharacterFlag[]>("flags");
+            var flags = new RequiredMember<CharacterFlag>("flags");
             var profession = new RequiredMember<ProfessionName>("profession");
             var level = new RequiredMember<int>("level");
             var guild = new OptionalMember<string>("guild");
@@ -21,20 +21,20 @@ namespace GW2SDK.Characters
             var lastModified = new RequiredMember<DateTimeOffset>("last_modified");
             var created = new RequiredMember<DateTimeOffset>("created");
             var deaths = new RequiredMember<int>("deaths");
-            var crafting = new RequiredMember<CraftingDiscipline[]>("crafting");
+            var crafting = new RequiredMember<CraftingDiscipline>("crafting");
             var title = new NullableMember<int>("title");
-            var backstory = new RequiredMember<string[]>("backstory");
-            var wvwAbilities = new OptionalMember<WvwAbility[]>("wvw_abilities");
+            var backstory = new RequiredMember<string>("backstory");
+            var wvwAbilities = new OptionalMember<WvwAbility>("wvw_abilities");
             var buildTabsUnlocked = new NullableMember<int>("build_tabs_unlocked");
             var activeBuildTab = new NullableMember<int>("active_build_tab");
-            var buildTabs = new OptionalMember<BuildTab[]>("build_tabs");
+            var buildTabs = new OptionalMember<BuildTab>("build_tabs");
             var equipmentTabsUnlocked = new NullableMember<int>("equipment_tabs_unlocked");
             var activeEquipmentTab = new NullableMember<int>("active_equipment_tab");
-            var equipment = new OptionalMember<EquipmentItem[]>("equipment");
-            var equipmentTabs = new OptionalMember<EquipmentTab[]>("equipment_tabs");
-            var recipes = new OptionalMember<int[]>("recipes");
-            var training = new OptionalMember<TrainingTrack[]>("training");
-            var bags = new OptionalMember<Bag?[]>("bags");
+            var equipment = new OptionalMember<EquipmentItem>("equipment");
+            var equipmentTabs = new OptionalMember<EquipmentTab>("equipment_tabs");
+            var recipes = new OptionalMember<int>("recipes");
+            var training = new OptionalMember<TrainingTrack>("training");
+            var bags = new OptionalMember<Bag?>("bags");
 
             foreach (var member in json.EnumerateObject())
             {
@@ -149,7 +149,7 @@ namespace GW2SDK.Characters
                 Name = name.GetValue(),
                 Race = race.GetValue(missingMemberBehavior),
                 Gender = gender.GetValue(missingMemberBehavior),
-                Flags = flags.GetValue(missingMemberBehavior),
+                Flags = flags.GetValues(missingMemberBehavior),
                 Level = level.GetValue(),
                 GuildId = guild.GetValueOrEmpty(),
                 Profession = profession.GetValue(missingMemberBehavior),
@@ -158,28 +158,20 @@ namespace GW2SDK.Characters
                 Created = created.GetValue(),
                 Deaths = deaths.GetValue(),
                 CraftingDisciplines =
-                    crafting.Select(value =>
-                        value.GetArray(item => ReadCraftingDiscipline(item, missingMemberBehavior))),
+                    crafting.SelectMany(value => ReadCraftingDiscipline(value, missingMemberBehavior)),
                 TitleId = title.GetValue(),
-                Backstory = backstory.Select(value => value.GetArray(item => item.GetStringRequired())),
-                WvwAbilities =
-                    wvwAbilities.Select(value => value.GetArray(item => ReadWvwAbility(item, missingMemberBehavior))),
+                Backstory = backstory.SelectMany(value => value.GetStringRequired()),
+                WvwAbilities = wvwAbilities.SelectMany(value => ReadWvwAbility(value, missingMemberBehavior)),
                 BuildTabsUnlocked = buildTabsUnlocked.GetValue(),
                 ActiveBuildTab = activeBuildTab.GetValue(),
-                BuildTabs =
-                    buildTabs.Select(value => value.GetArray(item => ReadBuildTab(item, missingMemberBehavior))),
+                BuildTabs = buildTabs.SelectMany(value => ReadBuildTab(value, missingMemberBehavior)),
                 EquipmentTabsUnlocked = equipmentTabsUnlocked.GetValue(),
                 ActiveEquipmentTab = activeEquipmentTab.GetValue(),
-                Equipment =
-                    equipment.Select(value => value.GetArray(item => ReadEquipmentItem(item, missingMemberBehavior))),
-                EquipmentTabs =
-                    equipmentTabs.Select(value =>
-                        value.GetArray(item => ReadEquipmentTab(item, missingMemberBehavior))),
-                Recipes = recipes.Select(value => value.GetArray(item => item.GetInt32())),
-                Training =
-                    training.Select(value =>
-                        value.GetArray(item => ReadTrainingObjective(item, missingMemberBehavior))),
-                Bags = bags.Select(value => value.GetArray(item => ReadBag(item, missingMemberBehavior)))
+                Equipment = equipment.SelectMany(value => ReadEquipmentItem(value, missingMemberBehavior)),
+                EquipmentTabs = equipmentTabs.SelectMany(value => ReadEquipmentTab(value, missingMemberBehavior)),
+                Recipes = recipes.SelectMany(value => value.GetInt32()),
+                Training = training.SelectMany(value => ReadTrainingObjective(value, missingMemberBehavior)),
+                Bags = bags.SelectMany(value => ReadBag(value, missingMemberBehavior))
             };
         }
 
@@ -192,7 +184,7 @@ namespace GW2SDK.Characters
             MissingMemberBehavior missingMemberBehavior
         )
         {
-            var recipes = new RequiredMember<int[]>("recipes");
+            var recipes = new RequiredMember<int>("recipes");
 
             foreach (var member in json.EnumerateObject())
             {
@@ -208,7 +200,7 @@ namespace GW2SDK.Characters
 
             return new UnlockedRecipesView
             {
-                Recipes = recipes.Select(value => value.GetArray(item => item.GetInt32()))
+                Recipes = recipes.SelectMany(value => value.GetInt32())
             };
         }
 
@@ -222,7 +214,7 @@ namespace GW2SDK.Characters
 
             var id = new RequiredMember<int>("id");
             var size = new RequiredMember<int>("size");
-            var inventory = new RequiredMember<InventorySlot?[]>("inventory");
+            var inventory = new RequiredMember<InventorySlot?>("inventory");
             foreach (var member in json.EnumerateObject())
             {
                 if (member.NameEquals(id.Name))
@@ -247,8 +239,7 @@ namespace GW2SDK.Characters
             {
                 Id = id.GetValue(),
                 Size = size.GetValue(),
-                Inventory = inventory.Select(value =>
-                    value.GetArray(item => ReadInventorySlot(item, missingMemberBehavior)))
+                Inventory = inventory.SelectMany(value => ReadInventorySlot(value, missingMemberBehavior))
             };
         }
 
@@ -264,10 +255,10 @@ namespace GW2SDK.Characters
             var count = new RequiredMember<int>("count");
             var charges = new NullableMember<int>("charges");
             var skin = new NullableMember<int>("skin");
-            var upgrades = new OptionalMember<int[]>("upgrades");
-            var upgradeSlotIndices = new OptionalMember<int[]>("upgrade_slot_indices");
-            var infusions = new OptionalMember<int[]>("infusions");
-            var dyes = new OptionalMember<int?[]>("dyes");
+            var upgrades = new OptionalMember<int>("upgrades");
+            var upgradeSlotIndices = new OptionalMember<int>("upgrade_slot_indices");
+            var infusions = new OptionalMember<int>("infusions");
+            var dyes = new OptionalMember<int?>("dyes");
             var binding = new OptionalMember<ItemBinding>("binding");
             var boundTo = new OptionalMember<string>("bound_to");
             var stats = new OptionalMember<SelectedStat>("stats");
@@ -329,11 +320,10 @@ namespace GW2SDK.Characters
                 Id = id.GetValue(),
                 Count = count.GetValue(),
                 Charges = charges.GetValue(),
-                Upgrades = upgrades.Select(value => value.GetArray(item => item.GetInt32())),
-                UpgradeSlotIndices = upgradeSlotIndices.Select(value => value.GetArray(item => item.GetInt32())),
-                Infusions = infusions.Select(value => value.GetArray(item => item.GetInt32())),
-                Dyes = dyes.Select(value =>
-                    value.GetArray(item => item.ValueKind == JsonValueKind.Null ? null : (int?)item.GetInt32())),
+                Upgrades = upgrades.SelectMany(value => value.GetInt32()),
+                UpgradeSlotIndices = upgradeSlotIndices.SelectMany(value => value.GetInt32()),
+                Infusions = infusions.SelectMany(value => value.GetInt32()),
+                Dyes = dyes.SelectMany(value => value.ValueKind == JsonValueKind.Null ? null : value.GetInt32()),
                 Binding = binding.GetValue(missingMemberBehavior),
                 BoundTo = boundTo.GetValueOrEmpty(),
                 Stats = stats.Select(value => ReadSelectedStat(value, missingMemberBehavior))
@@ -345,15 +335,15 @@ namespace GW2SDK.Characters
             var id = new RequiredMember<int>("id");
             var count = new NullableMember<int>("count");
             var slot = new NullableMember<EquipmentSlot>("slot");
-            var upgrades = new OptionalMember<int[]>("upgrades");
-            var infusions = new OptionalMember<int[]>("infusions");
+            var upgrades = new OptionalMember<int>("upgrades");
+            var infusions = new OptionalMember<int>("infusions");
             var skin = new NullableMember<int>("skin");
             var stats = new OptionalMember<SelectedStat>("stats");
             var binding = new OptionalMember<ItemBinding>("binding");
             var boundTo = new OptionalMember<string>("bound_to");
             var location = new RequiredMember<EquipmentLocation>("location");
-            var tabs = new OptionalMember<int[]>("tabs");
-            var dyes = new OptionalMember<int?[]>("dyes");
+            var tabs = new OptionalMember<int>("tabs");
+            var dyes = new OptionalMember<int?>("dyes");
 
             foreach (var member in json.EnumerateObject())
             {
@@ -416,16 +406,15 @@ namespace GW2SDK.Characters
                 Id = id.GetValue(),
                 Count = count.GetValue(),
                 Slot = slot.GetValue(missingMemberBehavior),
-                Upgrades = upgrades.Select(value => value.GetArray(item => item.GetInt32())),
-                Infusions = infusions.Select(value => value.GetArray(item => item.GetInt32())),
+                Upgrades = upgrades.SelectMany(value => value.GetInt32()),
+                Infusions = infusions.SelectMany(value => value.GetInt32()),
                 SkinId = skin.GetValue(),
                 Stats = stats.Select(value => ReadSelectedStat(value, missingMemberBehavior)),
                 Binding = binding.GetValue(missingMemberBehavior),
                 BoundTo = boundTo.GetValueOrEmpty(),
                 Location = location.GetValue(missingMemberBehavior),
-                Tabs = tabs.Select(value => value.GetArray(item => item.GetInt32())),
-                Dyes = dyes.Select(value =>
-                    value.GetArray(item => item.ValueKind == JsonValueKind.Null ? null : (int?)item.GetInt32()))
+                Tabs = tabs.SelectMany(value => value.GetInt32()),
+                Dyes = dyes.SelectMany(value => value.ValueKind == JsonValueKind.Null ? null : value.GetInt32())
             };
         }
 
@@ -572,7 +561,7 @@ namespace GW2SDK.Characters
         {
             var tab = new RequiredMember<int>("tab");
             var name = new RequiredMember<string>("name");
-            var equipment = new RequiredMember<EquipmentItem[]>("equipment");
+            var equipment = new RequiredMember<EquipmentItem>("equipment");
             var pvpEquipment = new RequiredMember<PvpEquipment>("equipment_pvp");
 
             foreach (var member in json.EnumerateObject())
@@ -610,8 +599,7 @@ namespace GW2SDK.Characters
             {
                 Tab = tab.GetValue(),
                 Name = name.GetValue(),
-                Equipment = equipment.Select(value =>
-                    value.GetArray(item => ReadEquipmentItem(item, missingMemberBehavior))),
+                Equipment = equipment.SelectMany(value => ReadEquipmentItem(value, missingMemberBehavior)),
                 PvpEquipment = pvpEquipment.Select(value => ReadPvpEquipment(value, missingMemberBehavior))
             };
         }
@@ -620,7 +608,7 @@ namespace GW2SDK.Characters
         {
             var amulet = new NullableMember<int>("amulet");
             var rune = new NullableMember<int>("rune");
-            var sigils = new RequiredMember<int?[]>("sigils");
+            var sigils = new RequiredMember<int?>("sigils");
 
             foreach (var member in json.EnumerateObject())
             {
@@ -646,8 +634,7 @@ namespace GW2SDK.Characters
             {
                 AmuletId = amulet.GetValue(),
                 RuneId = rune.GetValue(),
-                SigilIds = sigils.Select(value =>
-                    value.GetArray(item => item.ValueKind == JsonValueKind.Null ? null : (int?)item.GetInt32()))
+                SigilIds = sigils.SelectMany(value => value.ValueKind == JsonValueKind.Null ? null : value.GetInt32())
             };
         }
 
@@ -690,12 +677,12 @@ namespace GW2SDK.Characters
         {
             var name = new RequiredMember<string>("name");
             var profession = new RequiredMember<ProfessionName>("profession");
-            var specializations = new RequiredMember<Specialization[]>("specializations");
+            var specializations = new RequiredMember<Specialization>("specializations");
             var skills = new RequiredMember<SkillBar>("skills");
             var aquaticSkills = new RequiredMember<SkillBar>("aquatic_skills");
             var pets = new OptionalMember<PetSkillBar>("pets");
-            var legends = new OptionalMember<string?[]>("legends");
-            var aquaticLegends = new OptionalMember<string?[]>("aquatic_legends");
+            var legends = new OptionalMember<string?>("legends");
+            var aquaticLegends = new OptionalMember<string?>("aquatic_legends");
 
             foreach (var member in json.EnumerateObject())
             {
@@ -741,21 +728,19 @@ namespace GW2SDK.Characters
             {
                 Name = name.GetValue(),
                 Profession = profession.GetValue(missingMemberBehavior),
-                Specializations =
-                    specializations.Select(value =>
-                        value.GetArray(item => ReadSpecialization(item, missingMemberBehavior))),
+                Specializations = specializations.SelectMany(value => ReadSpecialization(value, missingMemberBehavior)),
                 Skills = skills.Select(value => ReadSkillBar(value, missingMemberBehavior)),
                 AquaticSkills = aquaticSkills.Select(value => ReadSkillBar(value, missingMemberBehavior)),
                 Pets = pets.Select(value => ReadPets(value, missingMemberBehavior)),
-                Legends = legends.Select(value => ReadLegends(value)),
-                AquaticLegends = aquaticLegends.Select(value => ReadLegends(value))
+                Legends = legends.SelectMany(value => value.GetString()),
+                AquaticLegends = aquaticLegends.SelectMany(value => value.GetString())
             };
         }
 
         private SkillBar ReadSkillBar(JsonElement json, MissingMemberBehavior missingMemberBehavior)
         {
             var heal = new NullableMember<int>("heal");
-            var utilities = new RequiredMember<int?[]>("utilities");
+            var utilities = new RequiredMember<int?>("utilities");
             var elite = new NullableMember<int>("elite");
 
             foreach (var member in json.EnumerateObject())
@@ -781,8 +766,7 @@ namespace GW2SDK.Characters
             return new SkillBar
             {
                 Heal = heal.GetValue(),
-                Utilities = utilities.Select(value =>
-                    value.GetArray(item => item.ValueKind == JsonValueKind.Null ? null : (int?)item.GetInt32())),
+                Utilities = utilities.SelectMany(value => value.ValueKind == JsonValueKind.Null ? null : value.GetInt32()),
                 Elite = elite.GetValue()
             };
         }
@@ -790,7 +774,7 @@ namespace GW2SDK.Characters
         private Specialization ReadSpecialization(JsonElement json, MissingMemberBehavior missingMemberBehavior)
         {
             var id = new NullableMember<int>("id");
-            var traits = new RequiredMember<int?[]>("traits");
+            var traits = new RequiredMember<int?>("traits");
 
             foreach (var member in json.EnumerateObject())
             {
@@ -811,15 +795,14 @@ namespace GW2SDK.Characters
             return new Specialization
             {
                 Id = id.GetValue(),
-                Traits = traits.Select(value =>
-                    value.GetArray(item => item.ValueKind == JsonValueKind.Null ? null : (int?)item.GetInt32()))
+                Traits = traits.SelectMany(value => value.ValueKind == JsonValueKind.Null ? null : value.GetInt32())
             };
         }
 
         private PetSkillBar ReadPets(JsonElement json, MissingMemberBehavior missingMemberBehavior)
         {
-            var terrestrial = new RequiredMember<int?[]>("terrestrial");
-            var aquatic = new RequiredMember<int?[]>("aquatic");
+            var terrestrial = new RequiredMember<int?>("terrestrial");
+            var aquatic = new RequiredMember<int?>("aquatic");
 
             foreach (var member in json.EnumerateObject())
             {
@@ -839,26 +822,8 @@ namespace GW2SDK.Characters
 
             return new PetSkillBar
             {
-                Terrestrial = terrestrial.Select(value =>
-                    value.GetArray(item => item.ValueKind == JsonValueKind.Null ? null : (int?)item.GetInt32())),
-                Aquatic = aquatic.Select(value =>
-                    value.GetArray(item => item.ValueKind == JsonValueKind.Null ? null : (int?)item.GetInt32()))
-            };
-        }
-
-        private string?[] ReadLegends(JsonElement json)
-        {
-            if (json.GetArrayLength() != 2)
-            {
-                throw new InvalidOperationException("There should be two legends.");
-            }
-
-            return new[]
-            {
-                json[0]
-                    .GetString(),
-                json[1]
-                    .GetString()
+                Terrestrial = terrestrial.SelectMany(value => value.ValueKind == JsonValueKind.Null ? null : value.GetInt32()),
+                Aquatic = aquatic.SelectMany(value => value.ValueKind == JsonValueKind.Null ? null : value.GetInt32())
             };
         }
 

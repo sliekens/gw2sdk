@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using GW2SDK.Annotations;
 using JetBrains.Annotations;
 
@@ -14,6 +15,6 @@ namespace GW2SDK.Continents
 
         public string Description { get; init; } = "";
 
-        public double[] Coordinates { get; init; } = Array.Empty<double>();
+        public IReadOnlyCollection<double> Coordinates { get; init; } = Array.Empty<double>();
     }
 }

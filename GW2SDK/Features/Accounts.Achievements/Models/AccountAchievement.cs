@@ -1,4 +1,5 @@
-﻿using GW2SDK.Annotations;
+﻿using System.Collections.Generic;
+using GW2SDK.Annotations;
 using JetBrains.Annotations;
 
 namespace GW2SDK.Accounts.Achievements
@@ -9,7 +10,7 @@ namespace GW2SDK.Accounts.Achievements
     {
         public int Id { get; init; }
 
-        public int[]? Bits { get; init; }
+        public IReadOnlyCollection<int>? Bits { get; init; }
 
         /// <summary>The current number of things completed.
         /// <example>The number of things already killed for a Slayer achievement.</example>

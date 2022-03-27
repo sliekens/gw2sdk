@@ -67,9 +67,9 @@ namespace GW2SDK.Recipes
             var outputItemCount = new RequiredMember<int>("output_item_count");
             var minRating = new RequiredMember<int>("min_rating");
             var timeToCraft = new RequiredMember<TimeSpan>("time_to_craft_ms");
-            var disciplines = new RequiredMember<CraftingDisciplineName[]>("disciplines");
-            var flags = new RequiredMember<RecipeFlag[]>("flags");
-            var ingredients = new RequiredMember<Ingredient[]>("ingredients");
+            var disciplines = new RequiredMember<CraftingDisciplineName>("disciplines");
+            var flags = new RequiredMember<RecipeFlag>("flags");
+            var ingredients = new RequiredMember<Ingredient>("ingredients");
             var id = new RequiredMember<int>("id");
             var chatLink = new RequiredMember<string>("chat_link");
             foreach (var member in json.EnumerateObject())
@@ -134,9 +134,9 @@ namespace GW2SDK.Recipes
                 OutputItemCount = outputItemCount.GetValue(),
                 MinRating = minRating.GetValue(),
                 TimeToCraft = timeToCraft.Select(value => TimeSpan.FromMilliseconds(value.GetDouble())),
-                Disciplines = disciplines.GetValue(missingMemberBehavior),
-                Flags = flags.GetValue(missingMemberBehavior),
-                Ingredients = ingredients.Select(value => value.GetArray(item => ReadIngredient(item, missingMemberBehavior))),
+                Disciplines = disciplines.GetValues(missingMemberBehavior),
+                Flags = flags.GetValues(missingMemberBehavior),
+                Ingredients = ingredients.SelectMany(value => ReadIngredient(value, missingMemberBehavior)),
                 ChatLink = chatLink.GetValue()
             };
         }
@@ -147,9 +147,9 @@ namespace GW2SDK.Recipes
             var outputItemCount = new RequiredMember<int>("output_item_count");
             var minRating = new RequiredMember<int>("min_rating");
             var timeToCraft = new RequiredMember<TimeSpan>("time_to_craft_ms");
-            var disciplines = new RequiredMember<CraftingDisciplineName[]>("disciplines");
-            var flags = new RequiredMember<RecipeFlag[]>("flags");
-            var ingredients = new RequiredMember<Ingredient[]>("ingredients");
+            var disciplines = new RequiredMember<CraftingDisciplineName>("disciplines");
+            var flags = new RequiredMember<RecipeFlag>("flags");
+            var ingredients = new RequiredMember<Ingredient>("ingredients");
             var id = new RequiredMember<int>("id");
             var chatLink = new RequiredMember<string>("chat_link");
             foreach (var member in json.EnumerateObject())
@@ -214,9 +214,9 @@ namespace GW2SDK.Recipes
                 OutputItemCount = outputItemCount.GetValue(),
                 MinRating = minRating.GetValue(),
                 TimeToCraft = timeToCraft.Select(value => TimeSpan.FromMilliseconds(value.GetDouble())),
-                Disciplines = disciplines.GetValue(missingMemberBehavior),
-                Flags = flags.GetValue(missingMemberBehavior),
-                Ingredients = ingredients.Select(value => value.GetArray(item => ReadIngredient(item, missingMemberBehavior))),
+                Disciplines = disciplines.GetValues(missingMemberBehavior),
+                Flags = flags.GetValues(missingMemberBehavior),
+                Ingredients = ingredients.SelectMany(value => ReadIngredient(value, missingMemberBehavior)),
                 ChatLink = chatLink.GetValue()
             };
         }
@@ -227,9 +227,9 @@ namespace GW2SDK.Recipes
             var outputItemCount = new RequiredMember<int>("output_item_count");
             var minRating = new RequiredMember<int>("min_rating");
             var timeToCraft = new RequiredMember<TimeSpan>("time_to_craft_ms");
-            var disciplines = new RequiredMember<CraftingDisciplineName[]>("disciplines");
-            var flags = new RequiredMember<RecipeFlag[]>("flags");
-            var ingredients = new RequiredMember<Ingredient[]>("ingredients");
+            var disciplines = new RequiredMember<CraftingDisciplineName>("disciplines");
+            var flags = new RequiredMember<RecipeFlag>("flags");
+            var ingredients = new RequiredMember<Ingredient>("ingredients");
             var id = new RequiredMember<int>("id");
             var chatLink = new RequiredMember<string>("chat_link");
             foreach (var member in json.EnumerateObject())
@@ -294,9 +294,9 @@ namespace GW2SDK.Recipes
                 OutputItemCount = outputItemCount.GetValue(),
                 MinRating = minRating.GetValue(),
                 TimeToCraft = timeToCraft.Select(value => TimeSpan.FromMilliseconds(value.GetDouble())),
-                Disciplines = disciplines.GetValue(missingMemberBehavior),
-                Flags = flags.GetValue(missingMemberBehavior),
-                Ingredients = ingredients.Select(value => value.GetArray(item => ReadIngredient(item, missingMemberBehavior))),
+                Disciplines = disciplines.GetValues(missingMemberBehavior),
+                Flags = flags.GetValues(missingMemberBehavior),
+                Ingredients = ingredients.SelectMany(value => ReadIngredient(value, missingMemberBehavior)),
                 ChatLink = chatLink.GetValue()
             };
         }
@@ -307,9 +307,9 @@ namespace GW2SDK.Recipes
             var outputItemCount = new RequiredMember<int>("output_item_count");
             var minRating = new RequiredMember<int>("min_rating");
             var timeToCraft = new RequiredMember<TimeSpan>("time_to_craft_ms");
-            var disciplines = new RequiredMember<CraftingDisciplineName[]>("disciplines");
-            var flags = new RequiredMember<RecipeFlag[]>("flags");
-            var ingredients = new RequiredMember<Ingredient[]>("ingredients");
+            var disciplines = new RequiredMember<CraftingDisciplineName>("disciplines");
+            var flags = new RequiredMember<RecipeFlag>("flags");
+            var ingredients = new RequiredMember<Ingredient>("ingredients");
             var id = new RequiredMember<int>("id");
             var chatLink = new RequiredMember<string>("chat_link");
             foreach (var member in json.EnumerateObject())
@@ -374,9 +374,9 @@ namespace GW2SDK.Recipes
                 OutputItemCount = outputItemCount.GetValue(),
                 MinRating = minRating.GetValue(),
                 TimeToCraft = timeToCraft.Select(value => TimeSpan.FromMilliseconds(value.GetDouble())),
-                Disciplines = disciplines.GetValue(missingMemberBehavior),
-                Flags = flags.GetValue(missingMemberBehavior),
-                Ingredients = ingredients.Select(value => value.GetArray(item => ReadIngredient(item, missingMemberBehavior))),
+                Disciplines = disciplines.GetValues(missingMemberBehavior),
+                Flags = flags.GetValues(missingMemberBehavior),
+                Ingredients = ingredients.SelectMany(value => ReadIngredient(value, missingMemberBehavior)),
                 ChatLink = chatLink.GetValue()
             };
         }
@@ -387,9 +387,9 @@ namespace GW2SDK.Recipes
             var outputItemCount = new RequiredMember<int>("output_item_count");
             var minRating = new RequiredMember<int>("min_rating");
             var timeToCraft = new RequiredMember<TimeSpan>("time_to_craft_ms");
-            var disciplines = new RequiredMember<CraftingDisciplineName[]>("disciplines");
-            var flags = new RequiredMember<RecipeFlag[]>("flags");
-            var ingredients = new RequiredMember<Ingredient[]>("ingredients");
+            var disciplines = new RequiredMember<CraftingDisciplineName>("disciplines");
+            var flags = new RequiredMember<RecipeFlag>("flags");
+            var ingredients = new RequiredMember<Ingredient>("ingredients");
             var id = new RequiredMember<int>("id");
             var chatLink = new RequiredMember<string>("chat_link");
             foreach (var member in json.EnumerateObject())
@@ -454,9 +454,9 @@ namespace GW2SDK.Recipes
                 OutputItemCount = outputItemCount.GetValue(),
                 MinRating = minRating.GetValue(),
                 TimeToCraft = timeToCraft.Select(value => TimeSpan.FromMilliseconds(value.GetDouble())),
-                Disciplines = disciplines.GetValue(missingMemberBehavior),
-                Flags = flags.GetValue(missingMemberBehavior),
-                Ingredients = ingredients.Select(value => value.GetArray(item => ReadIngredient(item, missingMemberBehavior))),
+                Disciplines = disciplines.GetValues(missingMemberBehavior),
+                Flags = flags.GetValues(missingMemberBehavior),
+                Ingredients = ingredients.SelectMany(value => ReadIngredient(value, missingMemberBehavior)),
                 ChatLink = chatLink.GetValue()
             };
         }
@@ -467,9 +467,9 @@ namespace GW2SDK.Recipes
             var outputItemCount = new RequiredMember<int>("output_item_count");
             var minRating = new RequiredMember<int>("min_rating");
             var timeToCraft = new RequiredMember<TimeSpan>("time_to_craft_ms");
-            var disciplines = new RequiredMember<CraftingDisciplineName[]>("disciplines");
-            var flags = new RequiredMember<RecipeFlag[]>("flags");
-            var ingredients = new RequiredMember<Ingredient[]>("ingredients");
+            var disciplines = new RequiredMember<CraftingDisciplineName>("disciplines");
+            var flags = new RequiredMember<RecipeFlag>("flags");
+            var ingredients = new RequiredMember<Ingredient>("ingredients");
             var id = new RequiredMember<int>("id");
             var chatLink = new RequiredMember<string>("chat_link");
             foreach (var member in json.EnumerateObject())
@@ -534,9 +534,9 @@ namespace GW2SDK.Recipes
                 OutputItemCount = outputItemCount.GetValue(),
                 MinRating = minRating.GetValue(),
                 TimeToCraft = timeToCraft.Select(value => TimeSpan.FromMilliseconds(value.GetDouble())),
-                Disciplines = disciplines.GetValue(missingMemberBehavior),
-                Flags = flags.GetValue(missingMemberBehavior),
-                Ingredients = ingredients.Select(value => value.GetArray(item => ReadIngredient(item, missingMemberBehavior))),
+                Disciplines = disciplines.GetValues(missingMemberBehavior),
+                Flags = flags.GetValues(missingMemberBehavior),
+                Ingredients = ingredients.SelectMany(value => ReadIngredient(value, missingMemberBehavior)),
                 ChatLink = chatLink.GetValue()
             };
         }
@@ -547,9 +547,9 @@ namespace GW2SDK.Recipes
             var outputItemCount = new RequiredMember<int>("output_item_count");
             var minRating = new RequiredMember<int>("min_rating");
             var timeToCraft = new RequiredMember<TimeSpan>("time_to_craft_ms");
-            var disciplines = new RequiredMember<CraftingDisciplineName[]>("disciplines");
-            var flags = new RequiredMember<RecipeFlag[]>("flags");
-            var ingredients = new RequiredMember<Ingredient[]>("ingredients");
+            var disciplines = new RequiredMember<CraftingDisciplineName>("disciplines");
+            var flags = new RequiredMember<RecipeFlag>("flags");
+            var ingredients = new RequiredMember<Ingredient>("ingredients");
             var id = new RequiredMember<int>("id");
             var chatLink = new RequiredMember<string>("chat_link");
             foreach (var member in json.EnumerateObject())
@@ -614,9 +614,9 @@ namespace GW2SDK.Recipes
                 OutputItemCount = outputItemCount.GetValue(),
                 MinRating = minRating.GetValue(),
                 TimeToCraft = timeToCraft.Select(value => TimeSpan.FromMilliseconds(value.GetDouble())),
-                Disciplines = disciplines.GetValue(missingMemberBehavior),
-                Flags = flags.GetValue(missingMemberBehavior),
-                Ingredients = ingredients.Select(value => value.GetArray(item => ReadIngredient(item, missingMemberBehavior))),
+                Disciplines = disciplines.GetValues(missingMemberBehavior),
+                Flags = flags.GetValues(missingMemberBehavior),
+                Ingredients = ingredients.SelectMany(value => ReadIngredient(value, missingMemberBehavior)),
                 ChatLink = chatLink.GetValue()
             };
         }
@@ -627,9 +627,9 @@ namespace GW2SDK.Recipes
             var outputItemCount = new RequiredMember<int>("output_item_count");
             var minRating = new RequiredMember<int>("min_rating");
             var timeToCraft = new RequiredMember<TimeSpan>("time_to_craft_ms");
-            var disciplines = new RequiredMember<CraftingDisciplineName[]>("disciplines");
-            var flags = new RequiredMember<RecipeFlag[]>("flags");
-            var ingredients = new RequiredMember<Ingredient[]>("ingredients");
+            var disciplines = new RequiredMember<CraftingDisciplineName>("disciplines");
+            var flags = new RequiredMember<RecipeFlag>("flags");
+            var ingredients = new RequiredMember<Ingredient>("ingredients");
             var id = new RequiredMember<int>("id");
             var chatLink = new RequiredMember<string>("chat_link");
             foreach (var member in json.EnumerateObject())
@@ -694,9 +694,9 @@ namespace GW2SDK.Recipes
                 OutputItemCount = outputItemCount.GetValue(),
                 MinRating = minRating.GetValue(),
                 TimeToCraft = timeToCraft.Select(value => TimeSpan.FromMilliseconds(value.GetDouble())),
-                Disciplines = disciplines.GetValue(missingMemberBehavior),
-                Flags = flags.GetValue(missingMemberBehavior),
-                Ingredients = ingredients.Select(value => value.GetArray(item => ReadIngredient(item, missingMemberBehavior))),
+                Disciplines = disciplines.GetValues(missingMemberBehavior),
+                Flags = flags.GetValues(missingMemberBehavior),
+                Ingredients = ingredients.SelectMany(value => ReadIngredient(value, missingMemberBehavior)),
                 ChatLink = chatLink.GetValue()
             };
         }
@@ -710,9 +710,9 @@ namespace GW2SDK.Recipes
             var outputItemCount = new RequiredMember<int>("output_item_count");
             var minRating = new RequiredMember<int>("min_rating");
             var timeToCraft = new RequiredMember<TimeSpan>("time_to_craft_ms");
-            var disciplines = new RequiredMember<CraftingDisciplineName[]>("disciplines");
-            var flags = new RequiredMember<RecipeFlag[]>("flags");
-            var ingredients = new RequiredMember<Ingredient[]>("ingredients");
+            var disciplines = new RequiredMember<CraftingDisciplineName>("disciplines");
+            var flags = new RequiredMember<RecipeFlag>("flags");
+            var ingredients = new RequiredMember<Ingredient>("ingredients");
             var id = new RequiredMember<int>("id");
             var chatLink = new RequiredMember<string>("chat_link");
             foreach (var member in json.EnumerateObject())
@@ -777,9 +777,9 @@ namespace GW2SDK.Recipes
                 OutputItemCount = outputItemCount.GetValue(),
                 MinRating = minRating.GetValue(),
                 TimeToCraft = timeToCraft.Select(value => TimeSpan.FromMilliseconds(value.GetDouble())),
-                Disciplines = disciplines.GetValue(missingMemberBehavior),
-                Flags = flags.GetValue(missingMemberBehavior),
-                Ingredients = ingredients.Select(value => value.GetArray(item => ReadIngredient(item, missingMemberBehavior))),
+                Disciplines = disciplines.GetValues(missingMemberBehavior),
+                Flags = flags.GetValues(missingMemberBehavior),
+                Ingredients = ingredients.SelectMany(value => ReadIngredient(value, missingMemberBehavior)),
                 ChatLink = chatLink.GetValue()
             };
         }
@@ -790,9 +790,9 @@ namespace GW2SDK.Recipes
             var outputItemCount = new RequiredMember<int>("output_item_count");
             var minRating = new RequiredMember<int>("min_rating");
             var timeToCraft = new RequiredMember<TimeSpan>("time_to_craft_ms");
-            var disciplines = new RequiredMember<CraftingDisciplineName[]>("disciplines");
-            var flags = new RequiredMember<RecipeFlag[]>("flags");
-            var ingredients = new RequiredMember<Ingredient[]>("ingredients");
+            var disciplines = new RequiredMember<CraftingDisciplineName>("disciplines");
+            var flags = new RequiredMember<RecipeFlag>("flags");
+            var ingredients = new RequiredMember<Ingredient>("ingredients");
             var id = new RequiredMember<int>("id");
             var chatLink = new RequiredMember<string>("chat_link");
             foreach (var member in json.EnumerateObject())
@@ -857,9 +857,9 @@ namespace GW2SDK.Recipes
                 OutputItemCount = outputItemCount.GetValue(),
                 MinRating = minRating.GetValue(),
                 TimeToCraft = timeToCraft.Select(value => TimeSpan.FromMilliseconds(value.GetDouble())),
-                Disciplines = disciplines.GetValue(missingMemberBehavior),
-                Flags = flags.GetValue(missingMemberBehavior),
-                Ingredients = ingredients.Select(value => value.GetArray(item => ReadIngredient(item, missingMemberBehavior))),
+                Disciplines = disciplines.GetValues(missingMemberBehavior),
+                Flags = flags.GetValues(missingMemberBehavior),
+                Ingredients = ingredients.SelectMany(value => ReadIngredient(value, missingMemberBehavior)),
                 ChatLink = chatLink.GetValue()
             };
         }
@@ -870,9 +870,9 @@ namespace GW2SDK.Recipes
             var outputItemCount = new RequiredMember<int>("output_item_count");
             var minRating = new RequiredMember<int>("min_rating");
             var timeToCraft = new RequiredMember<TimeSpan>("time_to_craft_ms");
-            var disciplines = new RequiredMember<CraftingDisciplineName[]>("disciplines");
-            var flags = new RequiredMember<RecipeFlag[]>("flags");
-            var ingredients = new RequiredMember<Ingredient[]>("ingredients");
+            var disciplines = new RequiredMember<CraftingDisciplineName>("disciplines");
+            var flags = new RequiredMember<RecipeFlag>("flags");
+            var ingredients = new RequiredMember<Ingredient>("ingredients");
             var id = new RequiredMember<int>("id");
             var chatLink = new RequiredMember<string>("chat_link");
             foreach (var member in json.EnumerateObject())
@@ -937,9 +937,9 @@ namespace GW2SDK.Recipes
                 OutputItemCount = outputItemCount.GetValue(),
                 MinRating = minRating.GetValue(),
                 TimeToCraft = timeToCraft.Select(value => TimeSpan.FromMilliseconds(value.GetDouble())),
-                Disciplines = disciplines.GetValue(missingMemberBehavior),
-                Flags = flags.GetValue(missingMemberBehavior),
-                Ingredients = ingredients.Select(value => value.GetArray(item => ReadIngredient(item, missingMemberBehavior))),
+                Disciplines = disciplines.GetValues(missingMemberBehavior),
+                Flags = flags.GetValues(missingMemberBehavior),
+                Ingredients = ingredients.SelectMany(value => ReadIngredient(value, missingMemberBehavior)),
                 ChatLink = chatLink.GetValue()
             };
         }
@@ -950,9 +950,9 @@ namespace GW2SDK.Recipes
             var outputItemCount = new RequiredMember<int>("output_item_count");
             var minRating = new RequiredMember<int>("min_rating");
             var timeToCraft = new RequiredMember<TimeSpan>("time_to_craft_ms");
-            var disciplines = new RequiredMember<CraftingDisciplineName[]>("disciplines");
-            var flags = new RequiredMember<RecipeFlag[]>("flags");
-            var ingredients = new RequiredMember<Ingredient[]>("ingredients");
+            var disciplines = new RequiredMember<CraftingDisciplineName>("disciplines");
+            var flags = new RequiredMember<RecipeFlag>("flags");
+            var ingredients = new RequiredMember<Ingredient>("ingredients");
             var id = new RequiredMember<int>("id");
             var chatLink = new RequiredMember<string>("chat_link");
             foreach (var member in json.EnumerateObject())
@@ -1017,9 +1017,9 @@ namespace GW2SDK.Recipes
                 OutputItemCount = outputItemCount.GetValue(),
                 MinRating = minRating.GetValue(),
                 TimeToCraft = timeToCraft.Select(value => TimeSpan.FromMilliseconds(value.GetDouble())),
-                Disciplines = disciplines.GetValue(missingMemberBehavior),
-                Flags = flags.GetValue(missingMemberBehavior),
-                Ingredients = ingredients.Select(value => value.GetArray(item => ReadIngredient(item, missingMemberBehavior))),
+                Disciplines = disciplines.GetValues(missingMemberBehavior),
+                Flags = flags.GetValues(missingMemberBehavior),
+                Ingredients = ingredients.SelectMany(value => ReadIngredient(value, missingMemberBehavior)),
                 ChatLink = chatLink.GetValue()
             };
         }
@@ -1030,9 +1030,9 @@ namespace GW2SDK.Recipes
             var outputItemCount = new RequiredMember<int>("output_item_count");
             var minRating = new RequiredMember<int>("min_rating");
             var timeToCraft = new RequiredMember<TimeSpan>("time_to_craft_ms");
-            var disciplines = new RequiredMember<CraftingDisciplineName[]>("disciplines");
-            var flags = new RequiredMember<RecipeFlag[]>("flags");
-            var ingredients = new RequiredMember<Ingredient[]>("ingredients");
+            var disciplines = new RequiredMember<CraftingDisciplineName>("disciplines");
+            var flags = new RequiredMember<RecipeFlag>("flags");
+            var ingredients = new RequiredMember<Ingredient>("ingredients");
             var id = new RequiredMember<int>("id");
             var chatLink = new RequiredMember<string>("chat_link");
             foreach (var member in json.EnumerateObject())
@@ -1097,9 +1097,9 @@ namespace GW2SDK.Recipes
                 OutputItemCount = outputItemCount.GetValue(),
                 MinRating = minRating.GetValue(),
                 TimeToCraft = timeToCraft.Select(value => TimeSpan.FromMilliseconds(value.GetDouble())),
-                Disciplines = disciplines.GetValue(missingMemberBehavior),
-                Flags = flags.GetValue(missingMemberBehavior),
-                Ingredients = ingredients.Select(value => value.GetArray(item => ReadIngredient(item, missingMemberBehavior))),
+                Disciplines = disciplines.GetValues(missingMemberBehavior),
+                Flags = flags.GetValues(missingMemberBehavior),
+                Ingredients = ingredients.SelectMany(value => ReadIngredient(value, missingMemberBehavior)),
                 ChatLink = chatLink.GetValue()
             };
         }
@@ -1110,9 +1110,9 @@ namespace GW2SDK.Recipes
             var outputItemCount = new RequiredMember<int>("output_item_count");
             var minRating = new RequiredMember<int>("min_rating");
             var timeToCraft = new RequiredMember<TimeSpan>("time_to_craft_ms");
-            var disciplines = new RequiredMember<CraftingDisciplineName[]>("disciplines");
-            var flags = new RequiredMember<RecipeFlag[]>("flags");
-            var ingredients = new RequiredMember<Ingredient[]>("ingredients");
+            var disciplines = new RequiredMember<CraftingDisciplineName>("disciplines");
+            var flags = new RequiredMember<RecipeFlag>("flags");
+            var ingredients = new RequiredMember<Ingredient>("ingredients");
             var id = new RequiredMember<int>("id");
             var chatLink = new RequiredMember<string>("chat_link");
             foreach (var member in json.EnumerateObject())
@@ -1177,9 +1177,9 @@ namespace GW2SDK.Recipes
                 OutputItemCount = outputItemCount.GetValue(),
                 MinRating = minRating.GetValue(),
                 TimeToCraft = timeToCraft.Select(value => TimeSpan.FromMilliseconds(value.GetDouble())),
-                Disciplines = disciplines.GetValue(missingMemberBehavior),
-                Flags = flags.GetValue(missingMemberBehavior),
-                Ingredients = ingredients.Select(value => value.GetArray(item => ReadIngredient(item, missingMemberBehavior))),
+                Disciplines = disciplines.GetValues(missingMemberBehavior),
+                Flags = flags.GetValues(missingMemberBehavior),
+                Ingredients = ingredients.SelectMany(value => ReadIngredient(value, missingMemberBehavior)),
                 ChatLink = chatLink.GetValue()
             };
         }
@@ -1190,9 +1190,9 @@ namespace GW2SDK.Recipes
             var outputItemCount = new RequiredMember<int>("output_item_count");
             var minRating = new RequiredMember<int>("min_rating");
             var timeToCraft = new RequiredMember<TimeSpan>("time_to_craft_ms");
-            var disciplines = new RequiredMember<CraftingDisciplineName[]>("disciplines");
-            var flags = new RequiredMember<RecipeFlag[]>("flags");
-            var ingredients = new RequiredMember<Ingredient[]>("ingredients");
+            var disciplines = new RequiredMember<CraftingDisciplineName>("disciplines");
+            var flags = new RequiredMember<RecipeFlag>("flags");
+            var ingredients = new RequiredMember<Ingredient>("ingredients");
             var id = new RequiredMember<int>("id");
             var chatLink = new RequiredMember<string>("chat_link");
             foreach (var member in json.EnumerateObject())
@@ -1257,9 +1257,9 @@ namespace GW2SDK.Recipes
                 OutputItemCount = outputItemCount.GetValue(),
                 MinRating = minRating.GetValue(),
                 TimeToCraft = timeToCraft.Select(value => TimeSpan.FromMilliseconds(value.GetDouble())),
-                Disciplines = disciplines.GetValue(missingMemberBehavior),
-                Flags = flags.GetValue(missingMemberBehavior),
-                Ingredients = ingredients.Select(value => value.GetArray(item => ReadIngredient(item, missingMemberBehavior))),
+                Disciplines = disciplines.GetValues(missingMemberBehavior),
+                Flags = flags.GetValues(missingMemberBehavior),
+                Ingredients = ingredients.SelectMany(value => ReadIngredient(value, missingMemberBehavior)),
                 ChatLink = chatLink.GetValue()
             };
         }
@@ -1270,9 +1270,9 @@ namespace GW2SDK.Recipes
             var outputItemCount = new RequiredMember<int>("output_item_count");
             var minRating = new RequiredMember<int>("min_rating");
             var timeToCraft = new RequiredMember<TimeSpan>("time_to_craft_ms");
-            var disciplines = new RequiredMember<CraftingDisciplineName[]>("disciplines");
-            var flags = new RequiredMember<RecipeFlag[]>("flags");
-            var ingredients = new RequiredMember<Ingredient[]>("ingredients");
+            var disciplines = new RequiredMember<CraftingDisciplineName>("disciplines");
+            var flags = new RequiredMember<RecipeFlag>("flags");
+            var ingredients = new RequiredMember<Ingredient>("ingredients");
             var id = new RequiredMember<int>("id");
             var chatLink = new RequiredMember<string>("chat_link");
             foreach (var member in json.EnumerateObject())
@@ -1337,9 +1337,9 @@ namespace GW2SDK.Recipes
                 OutputItemCount = outputItemCount.GetValue(),
                 MinRating = minRating.GetValue(),
                 TimeToCraft = timeToCraft.Select(value => TimeSpan.FromMilliseconds(value.GetDouble())),
-                Disciplines = disciplines.GetValue(missingMemberBehavior),
-                Flags = flags.GetValue(missingMemberBehavior),
-                Ingredients = ingredients.Select(value => value.GetArray(item => ReadIngredient(item, missingMemberBehavior))),
+                Disciplines = disciplines.GetValues(missingMemberBehavior),
+                Flags = flags.GetValues(missingMemberBehavior),
+                Ingredients = ingredients.SelectMany(value => ReadIngredient(value, missingMemberBehavior)),
                 ChatLink = chatLink.GetValue()
             };
         }
@@ -1350,9 +1350,9 @@ namespace GW2SDK.Recipes
             var outputItemCount = new RequiredMember<int>("output_item_count");
             var minRating = new RequiredMember<int>("min_rating");
             var timeToCraft = new RequiredMember<TimeSpan>("time_to_craft_ms");
-            var disciplines = new RequiredMember<CraftingDisciplineName[]>("disciplines");
-            var flags = new RequiredMember<RecipeFlag[]>("flags");
-            var ingredients = new RequiredMember<Ingredient[]>("ingredients");
+            var disciplines = new RequiredMember<CraftingDisciplineName>("disciplines");
+            var flags = new RequiredMember<RecipeFlag>("flags");
+            var ingredients = new RequiredMember<Ingredient>("ingredients");
             var id = new RequiredMember<int>("id");
             var chatLink = new RequiredMember<string>("chat_link");
             foreach (var member in json.EnumerateObject())
@@ -1417,9 +1417,9 @@ namespace GW2SDK.Recipes
                 OutputItemCount = outputItemCount.GetValue(),
                 MinRating = minRating.GetValue(),
                 TimeToCraft = timeToCraft.Select(value => TimeSpan.FromMilliseconds(value.GetDouble())),
-                Disciplines = disciplines.GetValue(missingMemberBehavior),
-                Flags = flags.GetValue(missingMemberBehavior),
-                Ingredients = ingredients.Select(value => value.GetArray(item => ReadIngredient(item, missingMemberBehavior))),
+                Disciplines = disciplines.GetValues(missingMemberBehavior),
+                Flags = flags.GetValues(missingMemberBehavior),
+                Ingredients = ingredients.SelectMany(value => ReadIngredient(value, missingMemberBehavior)),
                 ChatLink = chatLink.GetValue()
             };
         }
@@ -1433,9 +1433,9 @@ namespace GW2SDK.Recipes
             var outputItemCount = new RequiredMember<int>("output_item_count");
             var minRating = new RequiredMember<int>("min_rating");
             var timeToCraft = new RequiredMember<TimeSpan>("time_to_craft_ms");
-            var disciplines = new RequiredMember<CraftingDisciplineName[]>("disciplines");
-            var flags = new RequiredMember<RecipeFlag[]>("flags");
-            var ingredients = new RequiredMember<Ingredient[]>("ingredients");
+            var disciplines = new RequiredMember<CraftingDisciplineName>("disciplines");
+            var flags = new RequiredMember<RecipeFlag>("flags");
+            var ingredients = new RequiredMember<Ingredient>("ingredients");
             var id = new RequiredMember<int>("id");
             var chatLink = new RequiredMember<string>("chat_link");
             foreach (var member in json.EnumerateObject())
@@ -1500,9 +1500,9 @@ namespace GW2SDK.Recipes
                 OutputItemCount = outputItemCount.GetValue(),
                 MinRating = minRating.GetValue(),
                 TimeToCraft = timeToCraft.Select(value => TimeSpan.FromMilliseconds(value.GetDouble())),
-                Disciplines = disciplines.GetValue(missingMemberBehavior),
-                Flags = flags.GetValue(missingMemberBehavior),
-                Ingredients = ingredients.Select(value => value.GetArray(item => ReadIngredient(item, missingMemberBehavior))),
+                Disciplines = disciplines.GetValues(missingMemberBehavior),
+                Flags = flags.GetValues(missingMemberBehavior),
+                Ingredients = ingredients.SelectMany(value => ReadIngredient(value, missingMemberBehavior)),
                 ChatLink = chatLink.GetValue()
             };
         }
@@ -1516,10 +1516,10 @@ namespace GW2SDK.Recipes
             var outputItemCount = new RequiredMember<int>("output_item_count");
             var minRating = new RequiredMember<int>("min_rating");
             var timeToCraft = new RequiredMember<TimeSpan>("time_to_craft_ms");
-            var disciplines = new RequiredMember<CraftingDisciplineName[]>("disciplines");
-            var flags = new RequiredMember<RecipeFlag[]>("flags");
-            var ingredients = new RequiredMember<Ingredient[]>("ingredients");
-            var guildIngredients = new OptionalMember<GuildIngredient[]>("guild_ingredients");
+            var disciplines = new RequiredMember<CraftingDisciplineName>("disciplines");
+            var flags = new RequiredMember<RecipeFlag>("flags");
+            var ingredients = new RequiredMember<Ingredient>("ingredients");
+            var guildIngredients = new OptionalMember<GuildIngredient>("guild_ingredients");
             var outputUpgradeId = new RequiredMember<int>("output_upgrade_id");
             var id = new RequiredMember<int>("id");
             var chatLink = new RequiredMember<string>("chat_link");
@@ -1593,10 +1593,10 @@ namespace GW2SDK.Recipes
                 OutputItemCount = outputItemCount.GetValue(),
                 MinRating = minRating.GetValue(),
                 TimeToCraft = timeToCraft.Select(value => TimeSpan.FromMilliseconds(value.GetDouble())),
-                Disciplines = disciplines.GetValue(missingMemberBehavior),
-                Flags = flags.GetValue(missingMemberBehavior),
-                Ingredients = ingredients.Select(value => value.GetArray(item => ReadIngredient(item, missingMemberBehavior))),
-                GuildIngredients = guildIngredients.Select(value => value.GetArray(item => ReadGuildIngredient(item, missingMemberBehavior))),
+                Disciplines = disciplines.GetValues(missingMemberBehavior),
+                Flags = flags.GetValues(missingMemberBehavior),
+                Ingredients = ingredients.SelectMany(value => ReadIngredient(value, missingMemberBehavior)),
+                GuildIngredients = guildIngredients.SelectMany(value => ReadGuildIngredient(value, missingMemberBehavior)),
                 OutputUpgradeId = outputUpgradeId.GetValue(),
                 ChatLink = chatLink.GetValue()
             };
@@ -1611,9 +1611,9 @@ namespace GW2SDK.Recipes
             var outputItemCount = new RequiredMember<int>("output_item_count");
             var minRating = new RequiredMember<int>("min_rating");
             var timeToCraft = new RequiredMember<TimeSpan>("time_to_craft_ms");
-            var disciplines = new RequiredMember<CraftingDisciplineName[]>("disciplines");
-            var flags = new RequiredMember<RecipeFlag[]>("flags");
-            var ingredients = new RequiredMember<Ingredient[]>("ingredients");
+            var disciplines = new RequiredMember<CraftingDisciplineName>("disciplines");
+            var flags = new RequiredMember<RecipeFlag>("flags");
+            var ingredients = new RequiredMember<Ingredient>("ingredients");
             var outputUpgradeId = new NullableMember<int>("output_upgrade_id");
             var id = new RequiredMember<int>("id");
             var chatLink = new RequiredMember<string>("chat_link");
@@ -1683,9 +1683,9 @@ namespace GW2SDK.Recipes
                 OutputItemCount = outputItemCount.GetValue(),
                 MinRating = minRating.GetValue(),
                 TimeToCraft = timeToCraft.Select(value => TimeSpan.FromMilliseconds(value.GetDouble())),
-                Disciplines = disciplines.GetValue(missingMemberBehavior),
-                Flags = flags.GetValue(missingMemberBehavior),
-                Ingredients = ingredients.Select(value => value.GetArray(item => ReadIngredient(item, missingMemberBehavior))),
+                Disciplines = disciplines.GetValues(missingMemberBehavior),
+                Flags = flags.GetValues(missingMemberBehavior),
+                Ingredients = ingredients.SelectMany(value => ReadIngredient(value, missingMemberBehavior)),
                 OutputUpgradeId = outputUpgradeId.GetValue(),
                 ChatLink = chatLink.GetValue()
             };
@@ -1700,10 +1700,10 @@ namespace GW2SDK.Recipes
             var outputItemCount = new RequiredMember<int>("output_item_count");
             var minRating = new RequiredMember<int>("min_rating");
             var timeToCraft = new RequiredMember<TimeSpan>("time_to_craft_ms");
-            var disciplines = new RequiredMember<CraftingDisciplineName[]>("disciplines");
-            var flags = new RequiredMember<RecipeFlag[]>("flags");
-            var ingredients = new RequiredMember<Ingredient[]>("ingredients");
-            var guildIngredients = new OptionalMember<GuildIngredient[]>("guild_ingredients");
+            var disciplines = new RequiredMember<CraftingDisciplineName>("disciplines");
+            var flags = new RequiredMember<RecipeFlag>("flags");
+            var ingredients = new RequiredMember<Ingredient>("ingredients");
+            var guildIngredients = new OptionalMember<GuildIngredient>("guild_ingredients");
             var outputUpgradeId = new RequiredMember<int>("output_upgrade_id");
             var id = new RequiredMember<int>("id");
             var chatLink = new RequiredMember<string>("chat_link");
@@ -1777,10 +1777,10 @@ namespace GW2SDK.Recipes
                 OutputItemCount = outputItemCount.GetValue(),
                 MinRating = minRating.GetValue(),
                 TimeToCraft = timeToCraft.Select(value => TimeSpan.FromMilliseconds(value.GetDouble())),
-                Disciplines = disciplines.GetValue(missingMemberBehavior),
-                Flags = flags.GetValue(missingMemberBehavior),
-                Ingredients = ingredients.Select(value => value.GetArray(item => ReadIngredient(item, missingMemberBehavior))),
-                GuildIngredients = guildIngredients.Select(value => value.GetArray(item => ReadGuildIngredient(item, missingMemberBehavior))),
+                Disciplines = disciplines.GetValues(missingMemberBehavior),
+                Flags = flags.GetValues(missingMemberBehavior),
+                Ingredients = ingredients.SelectMany(value => ReadIngredient(value, missingMemberBehavior)),
+                GuildIngredients = guildIngredients.SelectMany(value => ReadGuildIngredient(value, missingMemberBehavior)),
                 OutputUpgradeId = outputUpgradeId.GetValue(),
                 ChatLink = chatLink.GetValue()
             };
@@ -1792,9 +1792,9 @@ namespace GW2SDK.Recipes
             var outputItemCount = new RequiredMember<int>("output_item_count");
             var minRating = new RequiredMember<int>("min_rating");
             var timeToCraft = new RequiredMember<TimeSpan>("time_to_craft_ms");
-            var disciplines = new RequiredMember<CraftingDisciplineName[]>("disciplines");
-            var flags = new RequiredMember<RecipeFlag[]>("flags");
-            var ingredients = new RequiredMember<Ingredient[]>("ingredients");
+            var disciplines = new RequiredMember<CraftingDisciplineName>("disciplines");
+            var flags = new RequiredMember<RecipeFlag>("flags");
+            var ingredients = new RequiredMember<Ingredient>("ingredients");
             var id = new RequiredMember<int>("id");
             var chatLink = new RequiredMember<string>("chat_link");
             foreach (var member in json.EnumerateObject())
@@ -1859,9 +1859,9 @@ namespace GW2SDK.Recipes
                 OutputItemCount = outputItemCount.GetValue(),
                 MinRating = minRating.GetValue(),
                 TimeToCraft = timeToCraft.Select(value => TimeSpan.FromMilliseconds(value.GetDouble())),
-                Disciplines = disciplines.GetValue(missingMemberBehavior),
-                Flags = flags.GetValue(missingMemberBehavior),
-                Ingredients = ingredients.Select(value => value.GetArray(item => ReadIngredient(item, missingMemberBehavior))),
+                Disciplines = disciplines.GetValues(missingMemberBehavior),
+                Flags = flags.GetValues(missingMemberBehavior),
+                Ingredients = ingredients.SelectMany(value => ReadIngredient(value, missingMemberBehavior)),
                 ChatLink = chatLink.GetValue()
             };
         }
@@ -1872,9 +1872,9 @@ namespace GW2SDK.Recipes
             var outputItemCount = new RequiredMember<int>("output_item_count");
             var minRating = new RequiredMember<int>("min_rating");
             var timeToCraft = new RequiredMember<TimeSpan>("time_to_craft_ms");
-            var disciplines = new RequiredMember<CraftingDisciplineName[]>("disciplines");
-            var flags = new RequiredMember<RecipeFlag[]>("flags");
-            var ingredients = new RequiredMember<Ingredient[]>("ingredients");
+            var disciplines = new RequiredMember<CraftingDisciplineName>("disciplines");
+            var flags = new RequiredMember<RecipeFlag>("flags");
+            var ingredients = new RequiredMember<Ingredient>("ingredients");
             var id = new RequiredMember<int>("id");
             var chatLink = new RequiredMember<string>("chat_link");
             foreach (var member in json.EnumerateObject())
@@ -1939,9 +1939,9 @@ namespace GW2SDK.Recipes
                 OutputItemCount = outputItemCount.GetValue(),
                 MinRating = minRating.GetValue(),
                 TimeToCraft = timeToCraft.Select(value => TimeSpan.FromMilliseconds(value.GetDouble())),
-                Disciplines = disciplines.GetValue(missingMemberBehavior),
-                Flags = flags.GetValue(missingMemberBehavior),
-                Ingredients = ingredients.Select(value => value.GetArray(item => ReadIngredient(item, missingMemberBehavior))),
+                Disciplines = disciplines.GetValues(missingMemberBehavior),
+                Flags = flags.GetValues(missingMemberBehavior),
+                Ingredients = ingredients.SelectMany(value => ReadIngredient(value, missingMemberBehavior)),
                 ChatLink = chatLink.GetValue()
             };
         }
@@ -1952,9 +1952,9 @@ namespace GW2SDK.Recipes
             var outputItemCount = new RequiredMember<int>("output_item_count");
             var minRating = new RequiredMember<int>("min_rating");
             var timeToCraft = new RequiredMember<TimeSpan>("time_to_craft_ms");
-            var disciplines = new RequiredMember<CraftingDisciplineName[]>("disciplines");
-            var flags = new RequiredMember<RecipeFlag[]>("flags");
-            var ingredients = new RequiredMember<Ingredient[]>("ingredients");
+            var disciplines = new RequiredMember<CraftingDisciplineName>("disciplines");
+            var flags = new RequiredMember<RecipeFlag>("flags");
+            var ingredients = new RequiredMember<Ingredient>("ingredients");
             var id = new RequiredMember<int>("id");
             var chatLink = new RequiredMember<string>("chat_link");
             foreach (var member in json.EnumerateObject())
@@ -2019,9 +2019,9 @@ namespace GW2SDK.Recipes
                 OutputItemCount = outputItemCount.GetValue(),
                 MinRating = minRating.GetValue(),
                 TimeToCraft = timeToCraft.Select(value => TimeSpan.FromMilliseconds(value.GetDouble())),
-                Disciplines = disciplines.GetValue(missingMemberBehavior),
-                Flags = flags.GetValue(missingMemberBehavior),
-                Ingredients = ingredients.Select(value => value.GetArray(item => ReadIngredient(item, missingMemberBehavior))),
+                Disciplines = disciplines.GetValues(missingMemberBehavior),
+                Flags = flags.GetValues(missingMemberBehavior),
+                Ingredients = ingredients.SelectMany(value => ReadIngredient(value, missingMemberBehavior)),
                 ChatLink = chatLink.GetValue()
             };
         }
@@ -2035,9 +2035,9 @@ namespace GW2SDK.Recipes
             var outputItemCount = new RequiredMember<int>("output_item_count");
             var minRating = new RequiredMember<int>("min_rating");
             var timeToCraft = new RequiredMember<TimeSpan>("time_to_craft_ms");
-            var disciplines = new RequiredMember<CraftingDisciplineName[]>("disciplines");
-            var flags = new RequiredMember<RecipeFlag[]>("flags");
-            var ingredients = new RequiredMember<Ingredient[]>("ingredients");
+            var disciplines = new RequiredMember<CraftingDisciplineName>("disciplines");
+            var flags = new RequiredMember<RecipeFlag>("flags");
+            var ingredients = new RequiredMember<Ingredient>("ingredients");
             var id = new RequiredMember<int>("id");
             var chatLink = new RequiredMember<string>("chat_link");
             foreach (var member in json.EnumerateObject())
@@ -2102,9 +2102,9 @@ namespace GW2SDK.Recipes
                 OutputItemCount = outputItemCount.GetValue(),
                 MinRating = minRating.GetValue(),
                 TimeToCraft = timeToCraft.Select(value => TimeSpan.FromMilliseconds(value.GetDouble())),
-                Disciplines = disciplines.GetValue(missingMemberBehavior),
-                Flags = flags.GetValue(missingMemberBehavior),
-                Ingredients = ingredients.Select(value => value.GetArray(item => ReadIngredient(item, missingMemberBehavior))),
+                Disciplines = disciplines.GetValues(missingMemberBehavior),
+                Flags = flags.GetValues(missingMemberBehavior),
+                Ingredients = ingredients.SelectMany(value => ReadIngredient(value, missingMemberBehavior)),
                 ChatLink = chatLink.GetValue()
             };
         }
@@ -2118,9 +2118,9 @@ namespace GW2SDK.Recipes
             var outputItemCount = new RequiredMember<int>("output_item_count");
             var minRating = new RequiredMember<int>("min_rating");
             var timeToCraft = new RequiredMember<TimeSpan>("time_to_craft_ms");
-            var disciplines = new RequiredMember<CraftingDisciplineName[]>("disciplines");
-            var flags = new RequiredMember<RecipeFlag[]>("flags");
-            var ingredients = new RequiredMember<Ingredient[]>("ingredients");
+            var disciplines = new RequiredMember<CraftingDisciplineName>("disciplines");
+            var flags = new RequiredMember<RecipeFlag>("flags");
+            var ingredients = new RequiredMember<Ingredient>("ingredients");
             var id = new RequiredMember<int>("id");
             var chatLink = new RequiredMember<string>("chat_link");
             foreach (var member in json.EnumerateObject())
@@ -2185,9 +2185,9 @@ namespace GW2SDK.Recipes
                 OutputItemCount = outputItemCount.GetValue(),
                 MinRating = minRating.GetValue(),
                 TimeToCraft = timeToCraft.Select(value => TimeSpan.FromMilliseconds(value.GetDouble())),
-                Disciplines = disciplines.GetValue(missingMemberBehavior),
-                Flags = flags.GetValue(missingMemberBehavior),
-                Ingredients = ingredients.Select(value => value.GetArray(item => ReadIngredient(item, missingMemberBehavior))),
+                Disciplines = disciplines.GetValues(missingMemberBehavior),
+                Flags = flags.GetValues(missingMemberBehavior),
+                Ingredients = ingredients.SelectMany(value => ReadIngredient(value, missingMemberBehavior)),
                 ChatLink = chatLink.GetValue()
             };
         }
@@ -2198,9 +2198,9 @@ namespace GW2SDK.Recipes
             var outputItemCount = new RequiredMember<int>("output_item_count");
             var minRating = new RequiredMember<int>("min_rating");
             var timeToCraft = new RequiredMember<TimeSpan>("time_to_craft_ms");
-            var disciplines = new RequiredMember<CraftingDisciplineName[]>("disciplines");
-            var flags = new RequiredMember<RecipeFlag[]>("flags");
-            var ingredients = new RequiredMember<Ingredient[]>("ingredients");
+            var disciplines = new RequiredMember<CraftingDisciplineName>("disciplines");
+            var flags = new RequiredMember<RecipeFlag>("flags");
+            var ingredients = new RequiredMember<Ingredient>("ingredients");
             var id = new RequiredMember<int>("id");
             var chatLink = new RequiredMember<string>("chat_link");
             foreach (var member in json.EnumerateObject())
@@ -2265,9 +2265,9 @@ namespace GW2SDK.Recipes
                 OutputItemCount = outputItemCount.GetValue(),
                 MinRating = minRating.GetValue(),
                 TimeToCraft = timeToCraft.Select(value => TimeSpan.FromMilliseconds(value.GetDouble())),
-                Disciplines = disciplines.GetValue(missingMemberBehavior),
-                Flags = flags.GetValue(missingMemberBehavior),
-                Ingredients = ingredients.Select(value => value.GetArray(item => ReadIngredient(item, missingMemberBehavior))),
+                Disciplines = disciplines.GetValues(missingMemberBehavior),
+                Flags = flags.GetValues(missingMemberBehavior),
+                Ingredients = ingredients.SelectMany(value => ReadIngredient(value, missingMemberBehavior)),
                 ChatLink = chatLink.GetValue()
             };
         }
@@ -2281,9 +2281,9 @@ namespace GW2SDK.Recipes
             var outputItemCount = new RequiredMember<int>("output_item_count");
             var minRating = new RequiredMember<int>("min_rating");
             var timeToCraft = new RequiredMember<TimeSpan>("time_to_craft_ms");
-            var disciplines = new RequiredMember<CraftingDisciplineName[]>("disciplines");
-            var flags = new RequiredMember<RecipeFlag[]>("flags");
-            var ingredients = new RequiredMember<Ingredient[]>("ingredients");
+            var disciplines = new RequiredMember<CraftingDisciplineName>("disciplines");
+            var flags = new RequiredMember<RecipeFlag>("flags");
+            var ingredients = new RequiredMember<Ingredient>("ingredients");
             var id = new RequiredMember<int>("id");
             var chatLink = new RequiredMember<string>("chat_link");
             foreach (var member in json.EnumerateObject())
@@ -2348,9 +2348,9 @@ namespace GW2SDK.Recipes
                 OutputItemCount = outputItemCount.GetValue(),
                 MinRating = minRating.GetValue(),
                 TimeToCraft = timeToCraft.Select(value => TimeSpan.FromMilliseconds(value.GetDouble())),
-                Disciplines = disciplines.GetValue(missingMemberBehavior),
-                Flags = flags.GetValue(missingMemberBehavior),
-                Ingredients = ingredients.Select(value => value.GetArray(item => ReadIngredient(item, missingMemberBehavior))),
+                Disciplines = disciplines.GetValues(missingMemberBehavior),
+                Flags = flags.GetValues(missingMemberBehavior),
+                Ingredients = ingredients.SelectMany(value => ReadIngredient(value, missingMemberBehavior)),
                 ChatLink = chatLink.GetValue()
             };
         }
@@ -2361,9 +2361,9 @@ namespace GW2SDK.Recipes
             var outputItemCount = new RequiredMember<int>("output_item_count");
             var minRating = new RequiredMember<int>("min_rating");
             var timeToCraft = new RequiredMember<TimeSpan>("time_to_craft_ms");
-            var disciplines = new RequiredMember<CraftingDisciplineName[]>("disciplines");
-            var flags = new RequiredMember<RecipeFlag[]>("flags");
-            var ingredients = new RequiredMember<Ingredient[]>("ingredients");
+            var disciplines = new RequiredMember<CraftingDisciplineName>("disciplines");
+            var flags = new RequiredMember<RecipeFlag>("flags");
+            var ingredients = new RequiredMember<Ingredient>("ingredients");
             var id = new RequiredMember<int>("id");
             var chatLink = new RequiredMember<string>("chat_link");
             foreach (var member in json.EnumerateObject())
@@ -2428,9 +2428,9 @@ namespace GW2SDK.Recipes
                 OutputItemCount = outputItemCount.GetValue(),
                 MinRating = minRating.GetValue(),
                 TimeToCraft = timeToCraft.Select(value => TimeSpan.FromMilliseconds(value.GetDouble())),
-                Disciplines = disciplines.GetValue(missingMemberBehavior),
-                Flags = flags.GetValue(missingMemberBehavior),
-                Ingredients = ingredients.Select(value => value.GetArray(item => ReadIngredient(item, missingMemberBehavior))),
+                Disciplines = disciplines.GetValues(missingMemberBehavior),
+                Flags = flags.GetValues(missingMemberBehavior),
+                Ingredients = ingredients.SelectMany(value => ReadIngredient(value, missingMemberBehavior)),
                 ChatLink = chatLink.GetValue()
             };
         }
@@ -2441,9 +2441,9 @@ namespace GW2SDK.Recipes
             var outputItemCount = new RequiredMember<int>("output_item_count");
             var minRating = new RequiredMember<int>("min_rating");
             var timeToCraft = new RequiredMember<TimeSpan>("time_to_craft_ms");
-            var disciplines = new RequiredMember<CraftingDisciplineName[]>("disciplines");
-            var flags = new RequiredMember<RecipeFlag[]>("flags");
-            var ingredients = new RequiredMember<Ingredient[]>("ingredients");
+            var disciplines = new RequiredMember<CraftingDisciplineName>("disciplines");
+            var flags = new RequiredMember<RecipeFlag>("flags");
+            var ingredients = new RequiredMember<Ingredient>("ingredients");
             var id = new RequiredMember<int>("id");
             var chatLink = new RequiredMember<string>("chat_link");
             foreach (var member in json.EnumerateObject())
@@ -2508,9 +2508,9 @@ namespace GW2SDK.Recipes
                 OutputItemCount = outputItemCount.GetValue(),
                 MinRating = minRating.GetValue(),
                 TimeToCraft = timeToCraft.Select(value => TimeSpan.FromMilliseconds(value.GetDouble())),
-                Disciplines = disciplines.GetValue(missingMemberBehavior),
-                Flags = flags.GetValue(missingMemberBehavior),
-                Ingredients = ingredients.Select(value => value.GetArray(item => ReadIngredient(item, missingMemberBehavior))),
+                Disciplines = disciplines.GetValues(missingMemberBehavior),
+                Flags = flags.GetValues(missingMemberBehavior),
+                Ingredients = ingredients.SelectMany(value => ReadIngredient(value, missingMemberBehavior)),
                 ChatLink = chatLink.GetValue()
             };
         }
@@ -2521,9 +2521,9 @@ namespace GW2SDK.Recipes
             var outputItemCount = new RequiredMember<int>("output_item_count");
             var minRating = new RequiredMember<int>("min_rating");
             var timeToCraft = new RequiredMember<TimeSpan>("time_to_craft_ms");
-            var disciplines = new RequiredMember<CraftingDisciplineName[]>("disciplines");
-            var flags = new RequiredMember<RecipeFlag[]>("flags");
-            var ingredients = new RequiredMember<Ingredient[]>("ingredients");
+            var disciplines = new RequiredMember<CraftingDisciplineName>("disciplines");
+            var flags = new RequiredMember<RecipeFlag>("flags");
+            var ingredients = new RequiredMember<Ingredient>("ingredients");
             var id = new RequiredMember<int>("id");
             var chatLink = new RequiredMember<string>("chat_link");
             foreach (var member in json.EnumerateObject())
@@ -2588,9 +2588,9 @@ namespace GW2SDK.Recipes
                 OutputItemCount = outputItemCount.GetValue(),
                 MinRating = minRating.GetValue(),
                 TimeToCraft = timeToCraft.Select(value => TimeSpan.FromMilliseconds(value.GetDouble())),
-                Disciplines = disciplines.GetValue(missingMemberBehavior),
-                Flags = flags.GetValue(missingMemberBehavior),
-                Ingredients = ingredients.Select(value => value.GetArray(item => ReadIngredient(item, missingMemberBehavior))),
+                Disciplines = disciplines.GetValues(missingMemberBehavior),
+                Flags = flags.GetValues(missingMemberBehavior),
+                Ingredients = ingredients.SelectMany(value => ReadIngredient(value, missingMemberBehavior)),
                 ChatLink = chatLink.GetValue()
             };
         }
@@ -2601,9 +2601,9 @@ namespace GW2SDK.Recipes
             var outputItemCount = new RequiredMember<int>("output_item_count");
             var minRating = new RequiredMember<int>("min_rating");
             var timeToCraft = new RequiredMember<TimeSpan>("time_to_craft_ms");
-            var disciplines = new RequiredMember<CraftingDisciplineName[]>("disciplines");
-            var flags = new RequiredMember<RecipeFlag[]>("flags");
-            var ingredients = new RequiredMember<Ingredient[]>("ingredients");
+            var disciplines = new RequiredMember<CraftingDisciplineName>("disciplines");
+            var flags = new RequiredMember<RecipeFlag>("flags");
+            var ingredients = new RequiredMember<Ingredient>("ingredients");
             var id = new RequiredMember<int>("id");
             var chatLink = new RequiredMember<string>("chat_link");
             foreach (var member in json.EnumerateObject())
@@ -2668,9 +2668,9 @@ namespace GW2SDK.Recipes
                 OutputItemCount = outputItemCount.GetValue(),
                 MinRating = minRating.GetValue(),
                 TimeToCraft = timeToCraft.Select(value => TimeSpan.FromMilliseconds(value.GetDouble())),
-                Disciplines = disciplines.GetValue(missingMemberBehavior),
-                Flags = flags.GetValue(missingMemberBehavior),
-                Ingredients = ingredients.Select(value => value.GetArray(item => ReadIngredient(item, missingMemberBehavior))),
+                Disciplines = disciplines.GetValues(missingMemberBehavior),
+                Flags = flags.GetValues(missingMemberBehavior),
+                Ingredients = ingredients.SelectMany(value => ReadIngredient(value, missingMemberBehavior)),
                 ChatLink = chatLink.GetValue()
             };
         }
@@ -2681,9 +2681,9 @@ namespace GW2SDK.Recipes
             var outputItemCount = new RequiredMember<int>("output_item_count");
             var minRating = new RequiredMember<int>("min_rating");
             var timeToCraft = new RequiredMember<TimeSpan>("time_to_craft_ms");
-            var disciplines = new RequiredMember<CraftingDisciplineName[]>("disciplines");
-            var flags = new RequiredMember<RecipeFlag[]>("flags");
-            var ingredients = new RequiredMember<Ingredient[]>("ingredients");
+            var disciplines = new RequiredMember<CraftingDisciplineName>("disciplines");
+            var flags = new RequiredMember<RecipeFlag>("flags");
+            var ingredients = new RequiredMember<Ingredient>("ingredients");
             var id = new RequiredMember<int>("id");
             var chatLink = new RequiredMember<string>("chat_link");
             foreach (var member in json.EnumerateObject())
@@ -2748,9 +2748,9 @@ namespace GW2SDK.Recipes
                 OutputItemCount = outputItemCount.GetValue(),
                 MinRating = minRating.GetValue(),
                 TimeToCraft = timeToCraft.Select(value => TimeSpan.FromMilliseconds(value.GetDouble())),
-                Disciplines = disciplines.GetValue(missingMemberBehavior),
-                Flags = flags.GetValue(missingMemberBehavior),
-                Ingredients = ingredients.Select(value => value.GetArray(item => ReadIngredient(item, missingMemberBehavior))),
+                Disciplines = disciplines.GetValues(missingMemberBehavior),
+                Flags = flags.GetValues(missingMemberBehavior),
+                Ingredients = ingredients.SelectMany(value => ReadIngredient(value, missingMemberBehavior)),
                 ChatLink = chatLink.GetValue()
             };
         }
@@ -2761,9 +2761,9 @@ namespace GW2SDK.Recipes
             var outputItemCount = new RequiredMember<int>("output_item_count");
             var minRating = new RequiredMember<int>("min_rating");
             var timeToCraft = new RequiredMember<TimeSpan>("time_to_craft_ms");
-            var disciplines = new RequiredMember<CraftingDisciplineName[]>("disciplines");
-            var flags = new RequiredMember<RecipeFlag[]>("flags");
-            var ingredients = new RequiredMember<Ingredient[]>("ingredients");
+            var disciplines = new RequiredMember<CraftingDisciplineName>("disciplines");
+            var flags = new RequiredMember<RecipeFlag>("flags");
+            var ingredients = new RequiredMember<Ingredient>("ingredients");
             var id = new RequiredMember<int>("id");
             var chatLink = new RequiredMember<string>("chat_link");
             foreach (var member in json.EnumerateObject())
@@ -2828,9 +2828,9 @@ namespace GW2SDK.Recipes
                 OutputItemCount = outputItemCount.GetValue(),
                 MinRating = minRating.GetValue(),
                 TimeToCraft = timeToCraft.Select(value => TimeSpan.FromMilliseconds(value.GetDouble())),
-                Disciplines = disciplines.GetValue(missingMemberBehavior),
-                Flags = flags.GetValue(missingMemberBehavior),
-                Ingredients = ingredients.Select(value => value.GetArray(item => ReadIngredient(item, missingMemberBehavior))),
+                Disciplines = disciplines.GetValues(missingMemberBehavior),
+                Flags = flags.GetValues(missingMemberBehavior),
+                Ingredients = ingredients.SelectMany(value => ReadIngredient(value, missingMemberBehavior)),
                 ChatLink = chatLink.GetValue()
             };
         }
@@ -2951,9 +2951,9 @@ namespace GW2SDK.Recipes
             var outputItemCount = new RequiredMember<int>("output_item_count");
             var minRating = new RequiredMember<int>("min_rating");
             var timeToCraft = new RequiredMember<TimeSpan>("time_to_craft_ms");
-            var disciplines = new RequiredMember<CraftingDisciplineName[]>("disciplines");
-            var flags = new RequiredMember<RecipeFlag[]>("flags");
-            var ingredients = new RequiredMember<Ingredient[]>("ingredients");
+            var disciplines = new RequiredMember<CraftingDisciplineName>("disciplines");
+            var flags = new RequiredMember<RecipeFlag>("flags");
+            var ingredients = new RequiredMember<Ingredient>("ingredients");
             var id = new RequiredMember<int>("id");
             var chatLink = new RequiredMember<string>("chat_link");
             foreach (var member in json.EnumerateObject())
@@ -3018,9 +3018,9 @@ namespace GW2SDK.Recipes
                 OutputItemCount = outputItemCount.GetValue(),
                 MinRating = minRating.GetValue(),
                 TimeToCraft = timeToCraft.Select(value => TimeSpan.FromMilliseconds(value.GetDouble())),
-                Disciplines = disciplines.GetValue(missingMemberBehavior),
-                Flags = flags.GetValue(missingMemberBehavior),
-                Ingredients = ingredients.Select(value => value.GetArray(item => ReadIngredient(item, missingMemberBehavior))),
+                Disciplines = disciplines.GetValues(missingMemberBehavior),
+                Flags = flags.GetValues(missingMemberBehavior),
+                Ingredients = ingredients.SelectMany(value => ReadIngredient(value, missingMemberBehavior)),
                 ChatLink = chatLink.GetValue()
             };
         }
@@ -3094,9 +3094,9 @@ namespace GW2SDK.Recipes
             var outputItemCount = new RequiredMember<int>("output_item_count");
             var minRating = new RequiredMember<int>("min_rating");
             var timeToCraft = new RequiredMember<TimeSpan>("time_to_craft_ms");
-            var disciplines = new RequiredMember<CraftingDisciplineName[]>("disciplines");
-            var flags = new RequiredMember<RecipeFlag[]>("flags");
-            var ingredients = new RequiredMember<Ingredient[]>("ingredients");
+            var disciplines = new RequiredMember<CraftingDisciplineName>("disciplines");
+            var flags = new RequiredMember<RecipeFlag>("flags");
+            var ingredients = new RequiredMember<Ingredient>("ingredients");
             var id = new RequiredMember<int>("id");
             var chatLink = new RequiredMember<string>("chat_link");
             foreach (var member in json.EnumerateObject())
@@ -3161,9 +3161,9 @@ namespace GW2SDK.Recipes
                 OutputItemCount = outputItemCount.GetValue(),
                 MinRating = minRating.GetValue(),
                 TimeToCraft = timeToCraft.Select(value => TimeSpan.FromMilliseconds(value.GetDouble())),
-                Disciplines = disciplines.GetValue(missingMemberBehavior),
-                Flags = flags.GetValue(missingMemberBehavior),
-                Ingredients = ingredients.Select(value => value.GetArray(item => ReadIngredient(item, missingMemberBehavior))),
+                Disciplines = disciplines.GetValues(missingMemberBehavior),
+                Flags = flags.GetValues(missingMemberBehavior),
+                Ingredients = ingredients.SelectMany(value => ReadIngredient(value, missingMemberBehavior)),
                 ChatLink = chatLink.GetValue()
             };
         }
@@ -3177,9 +3177,9 @@ namespace GW2SDK.Recipes
             var outputItemCount = new RequiredMember<int>("output_item_count");
             var minRating = new RequiredMember<int>("min_rating");
             var timeToCraft = new RequiredMember<TimeSpan>("time_to_craft_ms");
-            var disciplines = new RequiredMember<CraftingDisciplineName[]>("disciplines");
-            var flags = new RequiredMember<RecipeFlag[]>("flags");
-            var ingredients = new RequiredMember<Ingredient[]>("ingredients");
+            var disciplines = new RequiredMember<CraftingDisciplineName>("disciplines");
+            var flags = new RequiredMember<RecipeFlag>("flags");
+            var ingredients = new RequiredMember<Ingredient>("ingredients");
             var id = new RequiredMember<int>("id");
             var chatLink = new RequiredMember<string>("chat_link");
             foreach (var member in json.EnumerateObject())
@@ -3244,9 +3244,9 @@ namespace GW2SDK.Recipes
                 OutputItemCount = outputItemCount.GetValue(),
                 MinRating = minRating.GetValue(),
                 TimeToCraft = timeToCraft.Select(value => TimeSpan.FromMilliseconds(value.GetDouble())),
-                Disciplines = disciplines.GetValue(missingMemberBehavior),
-                Flags = flags.GetValue(missingMemberBehavior),
-                Ingredients = ingredients.Select(value => value.GetArray(item => ReadIngredient(item, missingMemberBehavior))),
+                Disciplines = disciplines.GetValues(missingMemberBehavior),
+                Flags = flags.GetValues(missingMemberBehavior),
+                Ingredients = ingredients.SelectMany(value => ReadIngredient(value, missingMemberBehavior)),
                 ChatLink = chatLink.GetValue()
             };
         }
@@ -3260,9 +3260,9 @@ namespace GW2SDK.Recipes
             var outputItemCount = new RequiredMember<int>("output_item_count");
             var minRating = new RequiredMember<int>("min_rating");
             var timeToCraft = new RequiredMember<TimeSpan>("time_to_craft_ms");
-            var disciplines = new RequiredMember<CraftingDisciplineName[]>("disciplines");
-            var flags = new RequiredMember<RecipeFlag[]>("flags");
-            var ingredients = new RequiredMember<Ingredient[]>("ingredients");
+            var disciplines = new RequiredMember<CraftingDisciplineName>("disciplines");
+            var flags = new RequiredMember<RecipeFlag>("flags");
+            var ingredients = new RequiredMember<Ingredient>("ingredients");
             var id = new RequiredMember<int>("id");
             var chatLink = new RequiredMember<string>("chat_link");
             foreach (var member in json.EnumerateObject())
@@ -3327,9 +3327,9 @@ namespace GW2SDK.Recipes
                 OutputItemCount = outputItemCount.GetValue(),
                 MinRating = minRating.GetValue(),
                 TimeToCraft = timeToCraft.Select(value => TimeSpan.FromMilliseconds(value.GetDouble())),
-                Disciplines = disciplines.GetValue(missingMemberBehavior),
-                Flags = flags.GetValue(missingMemberBehavior),
-                Ingredients = ingredients.Select(value => value.GetArray(item => ReadIngredient(item, missingMemberBehavior))),
+                Disciplines = disciplines.GetValues(missingMemberBehavior),
+                Flags = flags.GetValues(missingMemberBehavior),
+                Ingredients = ingredients.SelectMany(value => ReadIngredient(value, missingMemberBehavior)),
                 ChatLink = chatLink.GetValue()
             };
         }
@@ -3340,9 +3340,9 @@ namespace GW2SDK.Recipes
             var outputItemCount = new RequiredMember<int>("output_item_count");
             var minRating = new RequiredMember<int>("min_rating");
             var timeToCraft = new RequiredMember<TimeSpan>("time_to_craft_ms");
-            var disciplines = new RequiredMember<CraftingDisciplineName[]>("disciplines");
-            var flags = new RequiredMember<RecipeFlag[]>("flags");
-            var ingredients = new RequiredMember<Ingredient[]>("ingredients");
+            var disciplines = new RequiredMember<CraftingDisciplineName>("disciplines");
+            var flags = new RequiredMember<RecipeFlag>("flags");
+            var ingredients = new RequiredMember<Ingredient>("ingredients");
             var id = new RequiredMember<int>("id");
             var chatLink = new RequiredMember<string>("chat_link");
             foreach (var member in json.EnumerateObject())
@@ -3407,9 +3407,9 @@ namespace GW2SDK.Recipes
                 OutputItemCount = outputItemCount.GetValue(),
                 MinRating = minRating.GetValue(),
                 TimeToCraft = timeToCraft.Select(value => TimeSpan.FromMilliseconds(value.GetDouble())),
-                Disciplines = disciplines.GetValue(missingMemberBehavior),
-                Flags = flags.GetValue(missingMemberBehavior),
-                Ingredients = ingredients.Select(value => value.GetArray(item => ReadIngredient(item, missingMemberBehavior))),
+                Disciplines = disciplines.GetValues(missingMemberBehavior),
+                Flags = flags.GetValues(missingMemberBehavior),
+                Ingredients = ingredients.SelectMany(value => ReadIngredient(value, missingMemberBehavior)),
                 ChatLink = chatLink.GetValue()
             };
         }
@@ -3420,9 +3420,9 @@ namespace GW2SDK.Recipes
             var outputItemCount = new RequiredMember<int>("output_item_count");
             var minRating = new RequiredMember<int>("min_rating");
             var timeToCraft = new RequiredMember<TimeSpan>("time_to_craft_ms");
-            var disciplines = new RequiredMember<CraftingDisciplineName[]>("disciplines");
-            var flags = new RequiredMember<RecipeFlag[]>("flags");
-            var ingredients = new RequiredMember<Ingredient[]>("ingredients");
+            var disciplines = new RequiredMember<CraftingDisciplineName>("disciplines");
+            var flags = new RequiredMember<RecipeFlag>("flags");
+            var ingredients = new RequiredMember<Ingredient>("ingredients");
             var id = new RequiredMember<int>("id");
             var chatLink = new RequiredMember<string>("chat_link");
             foreach (var member in json.EnumerateObject())
@@ -3487,9 +3487,9 @@ namespace GW2SDK.Recipes
                 OutputItemCount = outputItemCount.GetValue(),
                 MinRating = minRating.GetValue(),
                 TimeToCraft = timeToCraft.Select(value => TimeSpan.FromMilliseconds(value.GetDouble())),
-                Disciplines = disciplines.GetValue(missingMemberBehavior),
-                Flags = flags.GetValue(missingMemberBehavior),
-                Ingredients = ingredients.Select(value => value.GetArray(item => ReadIngredient(item, missingMemberBehavior))),
+                Disciplines = disciplines.GetValues(missingMemberBehavior),
+                Flags = flags.GetValues(missingMemberBehavior),
+                Ingredients = ingredients.SelectMany(value => ReadIngredient(value, missingMemberBehavior)),
                 ChatLink = chatLink.GetValue()
             };
         }
@@ -3500,9 +3500,9 @@ namespace GW2SDK.Recipes
             var outputItemCount = new RequiredMember<int>("output_item_count");
             var minRating = new RequiredMember<int>("min_rating");
             var timeToCraft = new RequiredMember<TimeSpan>("time_to_craft_ms");
-            var disciplines = new RequiredMember<CraftingDisciplineName[]>("disciplines");
-            var flags = new RequiredMember<RecipeFlag[]>("flags");
-            var ingredients = new RequiredMember<Ingredient[]>("ingredients");
+            var disciplines = new RequiredMember<CraftingDisciplineName>("disciplines");
+            var flags = new RequiredMember<RecipeFlag>("flags");
+            var ingredients = new RequiredMember<Ingredient>("ingredients");
             var id = new RequiredMember<int>("id");
             var chatLink = new RequiredMember<string>("chat_link");
             foreach (var member in json.EnumerateObject())
@@ -3567,9 +3567,9 @@ namespace GW2SDK.Recipes
                 OutputItemCount = outputItemCount.GetValue(),
                 MinRating = minRating.GetValue(),
                 TimeToCraft = timeToCraft.Select(value => TimeSpan.FromMilliseconds(value.GetDouble())),
-                Disciplines = disciplines.GetValue(missingMemberBehavior),
-                Flags = flags.GetValue(missingMemberBehavior),
-                Ingredients = ingredients.Select(value => value.GetArray(item => ReadIngredient(item, missingMemberBehavior))),
+                Disciplines = disciplines.GetValues(missingMemberBehavior),
+                Flags = flags.GetValues(missingMemberBehavior),
+                Ingredients = ingredients.SelectMany(value => ReadIngredient(value, missingMemberBehavior)),
                 ChatLink = chatLink.GetValue()
             };
         }
@@ -3580,9 +3580,9 @@ namespace GW2SDK.Recipes
             var outputItemCount = new RequiredMember<int>("output_item_count");
             var minRating = new RequiredMember<int>("min_rating");
             var timeToCraft = new RequiredMember<TimeSpan>("time_to_craft_ms");
-            var disciplines = new RequiredMember<CraftingDisciplineName[]>("disciplines");
-            var flags = new RequiredMember<RecipeFlag[]>("flags");
-            var ingredients = new RequiredMember<Ingredient[]>("ingredients");
+            var disciplines = new RequiredMember<CraftingDisciplineName>("disciplines");
+            var flags = new RequiredMember<RecipeFlag>("flags");
+            var ingredients = new RequiredMember<Ingredient>("ingredients");
             var id = new RequiredMember<int>("id");
             var chatLink = new RequiredMember<string>("chat_link");
             foreach (var member in json.EnumerateObject())
@@ -3647,9 +3647,9 @@ namespace GW2SDK.Recipes
                 OutputItemCount = outputItemCount.GetValue(),
                 MinRating = minRating.GetValue(),
                 TimeToCraft = timeToCraft.Select(value => TimeSpan.FromMilliseconds(value.GetDouble())),
-                Disciplines = disciplines.GetValue(missingMemberBehavior),
-                Flags = flags.GetValue(missingMemberBehavior),
-                Ingredients = ingredients.Select(value => value.GetArray(item => ReadIngredient(item, missingMemberBehavior))),
+                Disciplines = disciplines.GetValues(missingMemberBehavior),
+                Flags = flags.GetValues(missingMemberBehavior),
+                Ingredients = ingredients.SelectMany(value => ReadIngredient(value, missingMemberBehavior)),
                 ChatLink = chatLink.GetValue()
             };
         }
@@ -3660,9 +3660,9 @@ namespace GW2SDK.Recipes
             var outputItemCount = new RequiredMember<int>("output_item_count");
             var minRating = new RequiredMember<int>("min_rating");
             var timeToCraft = new RequiredMember<TimeSpan>("time_to_craft_ms");
-            var disciplines = new RequiredMember<CraftingDisciplineName[]>("disciplines");
-            var flags = new RequiredMember<RecipeFlag[]>("flags");
-            var ingredients = new RequiredMember<Ingredient[]>("ingredients");
+            var disciplines = new RequiredMember<CraftingDisciplineName>("disciplines");
+            var flags = new RequiredMember<RecipeFlag>("flags");
+            var ingredients = new RequiredMember<Ingredient>("ingredients");
             var id = new RequiredMember<int>("id");
             var chatLink = new RequiredMember<string>("chat_link");
             foreach (var member in json.EnumerateObject())
@@ -3727,9 +3727,9 @@ namespace GW2SDK.Recipes
                 OutputItemCount = outputItemCount.GetValue(),
                 MinRating = minRating.GetValue(),
                 TimeToCraft = timeToCraft.Select(value => TimeSpan.FromMilliseconds(value.GetDouble())),
-                Disciplines = disciplines.GetValue(missingMemberBehavior),
-                Flags = flags.GetValue(missingMemberBehavior),
-                Ingredients = ingredients.Select(value => value.GetArray(item => ReadIngredient(item, missingMemberBehavior))),
+                Disciplines = disciplines.GetValues(missingMemberBehavior),
+                Flags = flags.GetValues(missingMemberBehavior),
+                Ingredients = ingredients.SelectMany(value => ReadIngredient(value, missingMemberBehavior)),
                 ChatLink = chatLink.GetValue()
             };
         }
@@ -3740,9 +3740,9 @@ namespace GW2SDK.Recipes
             var outputItemCount = new RequiredMember<int>("output_item_count");
             var minRating = new RequiredMember<int>("min_rating");
             var timeToCraft = new RequiredMember<TimeSpan>("time_to_craft_ms");
-            var disciplines = new RequiredMember<CraftingDisciplineName[]>("disciplines");
-            var flags = new RequiredMember<RecipeFlag[]>("flags");
-            var ingredients = new RequiredMember<Ingredient[]>("ingredients");
+            var disciplines = new RequiredMember<CraftingDisciplineName>("disciplines");
+            var flags = new RequiredMember<RecipeFlag>("flags");
+            var ingredients = new RequiredMember<Ingredient>("ingredients");
             var id = new RequiredMember<int>("id");
             var chatLink = new RequiredMember<string>("chat_link");
             foreach (var member in json.EnumerateObject())
@@ -3807,9 +3807,9 @@ namespace GW2SDK.Recipes
                 OutputItemCount = outputItemCount.GetValue(),
                 MinRating = minRating.GetValue(),
                 TimeToCraft = timeToCraft.Select(value => TimeSpan.FromMilliseconds(value.GetDouble())),
-                Disciplines = disciplines.GetValue(missingMemberBehavior),
-                Flags = flags.GetValue(missingMemberBehavior),
-                Ingredients = ingredients.Select(value => value.GetArray(item => ReadIngredient(item, missingMemberBehavior))),
+                Disciplines = disciplines.GetValues(missingMemberBehavior),
+                Flags = flags.GetValues(missingMemberBehavior),
+                Ingredients = ingredients.SelectMany(value => ReadIngredient(value, missingMemberBehavior)),
                 ChatLink = chatLink.GetValue()
             };
         }
@@ -3820,9 +3820,9 @@ namespace GW2SDK.Recipes
             var outputItemCount = new RequiredMember<int>("output_item_count");
             var minRating = new RequiredMember<int>("min_rating");
             var timeToCraft = new RequiredMember<TimeSpan>("time_to_craft_ms");
-            var disciplines = new RequiredMember<CraftingDisciplineName[]>("disciplines");
-            var flags = new RequiredMember<RecipeFlag[]>("flags");
-            var ingredients = new RequiredMember<Ingredient[]>("ingredients");
+            var disciplines = new RequiredMember<CraftingDisciplineName>("disciplines");
+            var flags = new RequiredMember<RecipeFlag>("flags");
+            var ingredients = new RequiredMember<Ingredient>("ingredients");
             var id = new RequiredMember<int>("id");
             var chatLink = new RequiredMember<string>("chat_link");
             foreach (var member in json.EnumerateObject())
@@ -3887,9 +3887,9 @@ namespace GW2SDK.Recipes
                 OutputItemCount = outputItemCount.GetValue(),
                 MinRating = minRating.GetValue(),
                 TimeToCraft = timeToCraft.Select(value => TimeSpan.FromMilliseconds(value.GetDouble())),
-                Disciplines = disciplines.GetValue(missingMemberBehavior),
-                Flags = flags.GetValue(missingMemberBehavior),
-                Ingredients = ingredients.Select(value => value.GetArray(item => ReadIngredient(item, missingMemberBehavior))),
+                Disciplines = disciplines.GetValues(missingMemberBehavior),
+                Flags = flags.GetValues(missingMemberBehavior),
+                Ingredients = ingredients.SelectMany(value => ReadIngredient(value, missingMemberBehavior)),
                 ChatLink = chatLink.GetValue()
             };
         }
@@ -3900,9 +3900,9 @@ namespace GW2SDK.Recipes
             var outputItemCount = new RequiredMember<int>("output_item_count");
             var minRating = new RequiredMember<int>("min_rating");
             var timeToCraft = new RequiredMember<TimeSpan>("time_to_craft_ms");
-            var disciplines = new RequiredMember<CraftingDisciplineName[]>("disciplines");
-            var flags = new RequiredMember<RecipeFlag[]>("flags");
-            var ingredients = new RequiredMember<Ingredient[]>("ingredients");
+            var disciplines = new RequiredMember<CraftingDisciplineName>("disciplines");
+            var flags = new RequiredMember<RecipeFlag>("flags");
+            var ingredients = new RequiredMember<Ingredient>("ingredients");
             var id = new RequiredMember<int>("id");
             var chatLink = new RequiredMember<string>("chat_link");
             foreach (var member in json.EnumerateObject())
@@ -3967,9 +3967,9 @@ namespace GW2SDK.Recipes
                 OutputItemCount = outputItemCount.GetValue(),
                 MinRating = minRating.GetValue(),
                 TimeToCraft = timeToCraft.Select(value => TimeSpan.FromMilliseconds(value.GetDouble())),
-                Disciplines = disciplines.GetValue(missingMemberBehavior),
-                Flags = flags.GetValue(missingMemberBehavior),
-                Ingredients = ingredients.Select(value => value.GetArray(item => ReadIngredient(item, missingMemberBehavior))),
+                Disciplines = disciplines.GetValues(missingMemberBehavior),
+                Flags = flags.GetValues(missingMemberBehavior),
+                Ingredients = ingredients.SelectMany(value => ReadIngredient(value, missingMemberBehavior)),
                 ChatLink = chatLink.GetValue()
             };
         }
@@ -3980,9 +3980,9 @@ namespace GW2SDK.Recipes
             var outputItemCount = new RequiredMember<int>("output_item_count");
             var minRating = new RequiredMember<int>("min_rating");
             var timeToCraft = new RequiredMember<TimeSpan>("time_to_craft_ms");
-            var disciplines = new RequiredMember<CraftingDisciplineName[]>("disciplines");
-            var flags = new RequiredMember<RecipeFlag[]>("flags");
-            var ingredients = new RequiredMember<Ingredient[]>("ingredients");
+            var disciplines = new RequiredMember<CraftingDisciplineName>("disciplines");
+            var flags = new RequiredMember<RecipeFlag>("flags");
+            var ingredients = new RequiredMember<Ingredient>("ingredients");
             var id = new RequiredMember<int>("id");
             var chatLink = new RequiredMember<string>("chat_link");
             foreach (var member in json.EnumerateObject())
@@ -4047,9 +4047,9 @@ namespace GW2SDK.Recipes
                 OutputItemCount = outputItemCount.GetValue(),
                 MinRating = minRating.GetValue(),
                 TimeToCraft = timeToCraft.Select(value => TimeSpan.FromMilliseconds(value.GetDouble())),
-                Disciplines = disciplines.GetValue(missingMemberBehavior),
-                Flags = flags.GetValue(missingMemberBehavior),
-                Ingredients = ingredients.Select(value => value.GetArray(item => ReadIngredient(item, missingMemberBehavior))),
+                Disciplines = disciplines.GetValues(missingMemberBehavior),
+                Flags = flags.GetValues(missingMemberBehavior),
+                Ingredients = ingredients.SelectMany(value => ReadIngredient(value, missingMemberBehavior)),
                 ChatLink = chatLink.GetValue()
             };
         }
@@ -4063,9 +4063,9 @@ namespace GW2SDK.Recipes
             var outputItemCount = new RequiredMember<int>("output_item_count");
             var minRating = new RequiredMember<int>("min_rating");
             var timeToCraft = new RequiredMember<TimeSpan>("time_to_craft_ms");
-            var disciplines = new RequiredMember<CraftingDisciplineName[]>("disciplines");
-            var flags = new RequiredMember<RecipeFlag[]>("flags");
-            var ingredients = new RequiredMember<Ingredient[]>("ingredients");
+            var disciplines = new RequiredMember<CraftingDisciplineName>("disciplines");
+            var flags = new RequiredMember<RecipeFlag>("flags");
+            var ingredients = new RequiredMember<Ingredient>("ingredients");
             var id = new RequiredMember<int>("id");
             var chatLink = new RequiredMember<string>("chat_link");
             foreach (var member in json.EnumerateObject())
@@ -4130,9 +4130,9 @@ namespace GW2SDK.Recipes
                 OutputItemCount = outputItemCount.GetValue(),
                 MinRating = minRating.GetValue(),
                 TimeToCraft = timeToCraft.Select(value => TimeSpan.FromMilliseconds(value.GetDouble())),
-                Disciplines = disciplines.GetValue(missingMemberBehavior),
-                Flags = flags.GetValue(missingMemberBehavior),
-                Ingredients = ingredients.Select(value => value.GetArray(item => ReadIngredient(item, missingMemberBehavior))),
+                Disciplines = disciplines.GetValues(missingMemberBehavior),
+                Flags = flags.GetValues(missingMemberBehavior),
+                Ingredients = ingredients.SelectMany(value => ReadIngredient(value, missingMemberBehavior)),
                 ChatLink = chatLink.GetValue()
             };
         }
@@ -4143,9 +4143,9 @@ namespace GW2SDK.Recipes
             var outputItemCount = new RequiredMember<int>("output_item_count");
             var minRating = new RequiredMember<int>("min_rating");
             var timeToCraft = new RequiredMember<TimeSpan>("time_to_craft_ms");
-            var disciplines = new RequiredMember<CraftingDisciplineName[]>("disciplines");
-            var flags = new RequiredMember<RecipeFlag[]>("flags");
-            var ingredients = new RequiredMember<Ingredient[]>("ingredients");
+            var disciplines = new RequiredMember<CraftingDisciplineName>("disciplines");
+            var flags = new RequiredMember<RecipeFlag>("flags");
+            var ingredients = new RequiredMember<Ingredient>("ingredients");
             var id = new RequiredMember<int>("id");
             var chatLink = new RequiredMember<string>("chat_link");
             foreach (var member in json.EnumerateObject())
@@ -4210,9 +4210,9 @@ namespace GW2SDK.Recipes
                 OutputItemCount = outputItemCount.GetValue(),
                 MinRating = minRating.GetValue(),
                 TimeToCraft = timeToCraft.Select(value => TimeSpan.FromMilliseconds(value.GetDouble())),
-                Disciplines = disciplines.GetValue(missingMemberBehavior),
-                Flags = flags.GetValue(missingMemberBehavior),
-                Ingredients = ingredients.Select(value => value.GetArray(item => ReadIngredient(item, missingMemberBehavior))),
+                Disciplines = disciplines.GetValues(missingMemberBehavior),
+                Flags = flags.GetValues(missingMemberBehavior),
+                Ingredients = ingredients.SelectMany(value => ReadIngredient(value, missingMemberBehavior)),
                 ChatLink = chatLink.GetValue()
             };
         }
@@ -4223,9 +4223,9 @@ namespace GW2SDK.Recipes
             var outputItemCount = new RequiredMember<int>("output_item_count");
             var minRating = new RequiredMember<int>("min_rating");
             var timeToCraft = new RequiredMember<TimeSpan>("time_to_craft_ms");
-            var disciplines = new RequiredMember<CraftingDisciplineName[]>("disciplines");
-            var flags = new RequiredMember<RecipeFlag[]>("flags");
-            var ingredients = new RequiredMember<Ingredient[]>("ingredients");
+            var disciplines = new RequiredMember<CraftingDisciplineName>("disciplines");
+            var flags = new RequiredMember<RecipeFlag>("flags");
+            var ingredients = new RequiredMember<Ingredient>("ingredients");
             var id = new RequiredMember<int>("id");
             var chatLink = new RequiredMember<string>("chat_link");
             foreach (var member in json.EnumerateObject())
@@ -4290,9 +4290,9 @@ namespace GW2SDK.Recipes
                 OutputItemCount = outputItemCount.GetValue(),
                 MinRating = minRating.GetValue(),
                 TimeToCraft = timeToCraft.Select(value => TimeSpan.FromMilliseconds(value.GetDouble())),
-                Disciplines = disciplines.GetValue(missingMemberBehavior),
-                Flags = flags.GetValue(missingMemberBehavior),
-                Ingredients = ingredients.Select(value => value.GetArray(item => ReadIngredient(item, missingMemberBehavior))),
+                Disciplines = disciplines.GetValues(missingMemberBehavior),
+                Flags = flags.GetValues(missingMemberBehavior),
+                Ingredients = ingredients.SelectMany(value => ReadIngredient(value, missingMemberBehavior)),
                 ChatLink = chatLink.GetValue()
             };
         }
@@ -4303,9 +4303,9 @@ namespace GW2SDK.Recipes
             var outputItemCount = new RequiredMember<int>("output_item_count");
             var minRating = new RequiredMember<int>("min_rating");
             var timeToCraft = new RequiredMember<TimeSpan>("time_to_craft_ms");
-            var disciplines = new RequiredMember<CraftingDisciplineName[]>("disciplines");
-            var flags = new RequiredMember<RecipeFlag[]>("flags");
-            var ingredients = new RequiredMember<Ingredient[]>("ingredients");
+            var disciplines = new RequiredMember<CraftingDisciplineName>("disciplines");
+            var flags = new RequiredMember<RecipeFlag>("flags");
+            var ingredients = new RequiredMember<Ingredient>("ingredients");
             var id = new RequiredMember<int>("id");
             var chatLink = new RequiredMember<string>("chat_link");
             foreach (var member in json.EnumerateObject())
@@ -4370,9 +4370,9 @@ namespace GW2SDK.Recipes
                 OutputItemCount = outputItemCount.GetValue(),
                 MinRating = minRating.GetValue(),
                 TimeToCraft = timeToCraft.Select(value => TimeSpan.FromMilliseconds(value.GetDouble())),
-                Disciplines = disciplines.GetValue(missingMemberBehavior),
-                Flags = flags.GetValue(missingMemberBehavior),
-                Ingredients = ingredients.Select(value => value.GetArray(item => ReadIngredient(item, missingMemberBehavior))),
+                Disciplines = disciplines.GetValues(missingMemberBehavior),
+                Flags = flags.GetValues(missingMemberBehavior),
+                Ingredients = ingredients.SelectMany(value => ReadIngredient(value, missingMemberBehavior)),
                 ChatLink = chatLink.GetValue()
             };
         }
@@ -4383,9 +4383,9 @@ namespace GW2SDK.Recipes
             var outputItemCount = new RequiredMember<int>("output_item_count");
             var minRating = new RequiredMember<int>("min_rating");
             var timeToCraft = new RequiredMember<TimeSpan>("time_to_craft_ms");
-            var disciplines = new RequiredMember<CraftingDisciplineName[]>("disciplines");
-            var flags = new RequiredMember<RecipeFlag[]>("flags");
-            var ingredients = new RequiredMember<Ingredient[]>("ingredients");
+            var disciplines = new RequiredMember<CraftingDisciplineName>("disciplines");
+            var flags = new RequiredMember<RecipeFlag>("flags");
+            var ingredients = new RequiredMember<Ingredient>("ingredients");
             var id = new RequiredMember<int>("id");
             var chatLink = new RequiredMember<string>("chat_link");
             foreach (var member in json.EnumerateObject())
@@ -4450,9 +4450,9 @@ namespace GW2SDK.Recipes
                 OutputItemCount = outputItemCount.GetValue(),
                 MinRating = minRating.GetValue(),
                 TimeToCraft = timeToCraft.Select(value => TimeSpan.FromMilliseconds(value.GetDouble())),
-                Disciplines = disciplines.GetValue(missingMemberBehavior),
-                Flags = flags.GetValue(missingMemberBehavior),
-                Ingredients = ingredients.Select(value => value.GetArray(item => ReadIngredient(item, missingMemberBehavior))),
+                Disciplines = disciplines.GetValues(missingMemberBehavior),
+                Flags = flags.GetValues(missingMemberBehavior),
+                Ingredients = ingredients.SelectMany(value => ReadIngredient(value, missingMemberBehavior)),
                 ChatLink = chatLink.GetValue()
             };
         }
@@ -4466,9 +4466,9 @@ namespace GW2SDK.Recipes
             var outputItemCount = new RequiredMember<int>("output_item_count");
             var minRating = new RequiredMember<int>("min_rating");
             var timeToCraft = new RequiredMember<TimeSpan>("time_to_craft_ms");
-            var disciplines = new RequiredMember<CraftingDisciplineName[]>("disciplines");
-            var flags = new RequiredMember<RecipeFlag[]>("flags");
-            var ingredients = new RequiredMember<Ingredient[]>("ingredients");
+            var disciplines = new RequiredMember<CraftingDisciplineName>("disciplines");
+            var flags = new RequiredMember<RecipeFlag>("flags");
+            var ingredients = new RequiredMember<Ingredient>("ingredients");
             var id = new RequiredMember<int>("id");
             var chatLink = new RequiredMember<string>("chat_link");
             foreach (var member in json.EnumerateObject())
@@ -4533,9 +4533,9 @@ namespace GW2SDK.Recipes
                 OutputItemCount = outputItemCount.GetValue(),
                 MinRating = minRating.GetValue(),
                 TimeToCraft = timeToCraft.Select(value => TimeSpan.FromMilliseconds(value.GetDouble())),
-                Disciplines = disciplines.GetValue(missingMemberBehavior),
-                Flags = flags.GetValue(missingMemberBehavior),
-                Ingredients = ingredients.Select(value => value.GetArray(item => ReadIngredient(item, missingMemberBehavior))),
+                Disciplines = disciplines.GetValues(missingMemberBehavior),
+                Flags = flags.GetValues(missingMemberBehavior),
+                Ingredients = ingredients.SelectMany(value => ReadIngredient(value, missingMemberBehavior)),
                 ChatLink = chatLink.GetValue()
             };
         }
@@ -4546,9 +4546,9 @@ namespace GW2SDK.Recipes
             var outputItemCount = new RequiredMember<int>("output_item_count");
             var minRating = new RequiredMember<int>("min_rating");
             var timeToCraft = new RequiredMember<TimeSpan>("time_to_craft_ms");
-            var disciplines = new RequiredMember<CraftingDisciplineName[]>("disciplines");
-            var flags = new RequiredMember<RecipeFlag[]>("flags");
-            var ingredients = new RequiredMember<Ingredient[]>("ingredients");
+            var disciplines = new RequiredMember<CraftingDisciplineName>("disciplines");
+            var flags = new RequiredMember<RecipeFlag>("flags");
+            var ingredients = new RequiredMember<Ingredient>("ingredients");
             var id = new RequiredMember<int>("id");
             var chatLink = new RequiredMember<string>("chat_link");
             foreach (var member in json.EnumerateObject())
@@ -4613,9 +4613,9 @@ namespace GW2SDK.Recipes
                 OutputItemCount = outputItemCount.GetValue(),
                 MinRating = minRating.GetValue(),
                 TimeToCraft = timeToCraft.Select(value => TimeSpan.FromMilliseconds(value.GetDouble())),
-                Disciplines = disciplines.GetValue(missingMemberBehavior),
-                Flags = flags.GetValue(missingMemberBehavior),
-                Ingredients = ingredients.Select(value => value.GetArray(item => ReadIngredient(item, missingMemberBehavior))),
+                Disciplines = disciplines.GetValues(missingMemberBehavior),
+                Flags = flags.GetValues(missingMemberBehavior),
+                Ingredients = ingredients.SelectMany(value => ReadIngredient(value, missingMemberBehavior)),
                 ChatLink = chatLink.GetValue()
             };
         }

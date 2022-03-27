@@ -12,7 +12,7 @@ namespace GW2SDK.Titles
         {
             var id = new RequiredMember<int>("id");
             var name = new RequiredMember<string>("name");
-            var achievements = new OptionalMember<int[]>("achievements");
+            var achievements = new OptionalMember<int>("achievements");
             var achievementPointsRequired = new NullableMember<int>("ap_required");
 
             foreach (var member in json.EnumerateObject())
@@ -49,14 +49,9 @@ namespace GW2SDK.Titles
             {
                 Id = id.GetValue(),
                 Name = name.GetValue(),
-                Achievements = achievements.Select(value => ReadAchievements(value)),
+                Achievements = achievements.SelectMany(value => value.GetInt32()),
                 AchievementPointsRequired = achievementPointsRequired.GetValue()
             };
-        }
-
-        private int[] ReadAchievements(JsonElement value)
-        {
-            return value.GetArray(item => item.GetInt32());
         }
 
         public IJsonReader<int> Id { get; } = new Int32JsonReader();

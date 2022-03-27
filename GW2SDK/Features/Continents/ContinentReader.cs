@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Drawing;
 using System.Text.Json;
 using JetBrains.Annotations;
 using GW2SDK.Json;
@@ -15,10 +16,10 @@ namespace GW2SDK.Continents
         public Continent Read(JsonElement json, MissingMemberBehavior missingMemberBehavior)
         {
             var name = new RequiredMember<string>("name");
-            var continentDimensions = new RequiredMember<int[]>("continent_dims");
+            var continentDimensions = new RequiredMember<Size>("continent_dims");
             var minZoom = new RequiredMember<int>("min_zoom");
             var maxZoom = new RequiredMember<int>("max_zoom");
-            var floors = new RequiredMember<int[]>("floors");
+            var floors = new RequiredMember<int>("floors");
             var id = new RequiredMember<int>("id");
             foreach (var member in json.EnumerateObject())
             {
@@ -56,11 +57,20 @@ namespace GW2SDK.Continents
             {
                 Id = id.GetValue(),
                 Name = name.GetValue(),
-                ContinentDimensions = continentDimensions.Select(value => value.GetArray(item => item.GetInt32())),
+                ContinentDimensions = continentDimensions.Select(value => ReadSize(value, missingMemberBehavior)),
                 MinZoom = minZoom.GetValue(),
                 MaxZoom = maxZoom.GetValue(),
-                Floors = floors.Select(value => value.GetArray(item => item.GetInt32()))
+                Floors = floors.SelectMany(value => value.GetInt32())
             };
+        }
+
+        private Size ReadSize(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+        {
+            var width = json[0]
+                .GetInt32();
+            var height = json[1]
+                .GetInt32();
+            return new Size(width, height);
         }
     }
 }

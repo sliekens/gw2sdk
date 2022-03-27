@@ -12,7 +12,7 @@ namespace GW2SDK.Accounts.Banks
         {
             var id = new RequiredMember<int>("id");
             var name = new RequiredMember<string>("name");
-            var items = new RequiredMember<int[]>("items");
+            var items = new RequiredMember<int>("items");
             var order = new RequiredMember<int>("order");
 
             foreach (var member in json.EnumerateObject())
@@ -43,7 +43,7 @@ namespace GW2SDK.Accounts.Banks
             {
                 Id = id.GetValue(),
                 Name = name.GetValue(),
-                Items = items.Select(value => value.GetArray(item => item.GetInt32())),
+                Items = items.SelectMany(value => value.GetInt32()),
                 Order = order.GetValue()
             };
         }

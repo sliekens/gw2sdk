@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using GW2SDK.Annotations;
 using JetBrains.Annotations;
 
@@ -10,7 +11,7 @@ namespace GW2SDK.Items
     {
         public int ItemstatsId { get; init; }
 
-        public UpgradeAttribute[] Attributes { get; init; } = Array.Empty<UpgradeAttribute>();
+        public IReadOnlyCollection<UpgradeAttribute> Attributes { get; init; } = Array.Empty<UpgradeAttribute>();
 
         public Buff? Buff { get; init; }
     }
