@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using GW2SDK.Annotations;
 using JetBrains.Annotations;
 
@@ -8,8 +9,8 @@ namespace GW2SDK.Characters
     [DataTransferObject(RootObject = false)]
     public sealed record PetSkillBar
     {
-        public int?[] Terrestrial { get; init; } = Array.Empty<int?>();
+        public IReadOnlyCollection<int?> Terrestrial { get; init; } = Array.Empty<int?>();
 
-        public int?[] Aquatic { get; init; } = Array.Empty<int?>();
+        public IReadOnlyCollection<int?> Aquatic { get; init; } = Array.Empty<int?>();
     }
 }

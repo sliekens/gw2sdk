@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using GW2SDK.Annotations;
 using JetBrains.Annotations;
 
@@ -18,10 +19,10 @@ namespace GW2SDK.Characters
         public EquipmentSlot? Slot { get; init; }
 
         /// <summary>The item IDs of runes or sigils in this item.</summary>
-        public int[]? Upgrades { get; init; }
+        public IReadOnlyCollection<int>? Upgrades { get; init; }
 
         /// <summary>The item IDs of infusions in this item.</summary>
-        public int[]? Infusions { get; init; }
+        public IReadOnlyCollection<int>? Infusions { get; init; }
 
         /// <summary>The skin ID.</summary>
         public int? SkinId { get; init; }
@@ -39,10 +40,10 @@ namespace GW2SDK.Characters
         public EquipmentLocation Location { get; init; }
 
         /// <summary>The equipment tab numbers where this item is (re)used.</summary>
-        public int[]? Tabs { get; init; } = Array.Empty<int>();
+        public IReadOnlyCollection<int>? Tabs { get; init; } = Array.Empty<int>();
 
         // Always length 4
         /// <summary>The IDs of colors applied to the current item.</summary>
-        public int?[]? Dyes { get; init; }
+        public IReadOnlyCollection<int?>? Dyes { get; init; }
     }
 }

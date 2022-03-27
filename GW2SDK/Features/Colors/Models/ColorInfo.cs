@@ -1,4 +1,4 @@
-﻿using System;
+﻿using System.Drawing;
 using GW2SDK.Annotations;
 using JetBrains.Annotations;
 
@@ -18,6 +18,6 @@ namespace GW2SDK.Colors
 
         public double Lightness { get; init; }
 
-        public int[] Rgb { get; init; } = Array.Empty<int>();
+        public Color Rgb { get; init; }
     }
 }

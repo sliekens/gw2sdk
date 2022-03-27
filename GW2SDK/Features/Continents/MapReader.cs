@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Text.Json;
 using JetBrains.Annotations;
 using GW2SDK.Json;
@@ -23,17 +24,17 @@ namespace GW2SDK.Continents
             var minLevel = new RequiredMember<int>("min_level");
             var maxLevel = new RequiredMember<int>("max_level");
             var defaultFloor = new RequiredMember<int>("default_floor");
-            var labelCoordinates = new OptionalMember<double[]>("label_coord");
-            var mapRectangle = new RequiredMember<double[][]>("map_rect");
-            var continentRectangle = new RequiredMember<double[][]>("continent_rect");
+            var labelCoordinates = new OptionalMember<PointF>("label_coord");
+            var mapRectangle = new RequiredMember<MapRectangle>("map_rect");
+            var continentRectangle = new RequiredMember<ContinentRectangle>("continent_rect");
             var pointsOfInterest = new RequiredMember<Dictionary<int, PointOfInterest>>("points_of_interest");
-            var godShrines = new OptionalMember<GodShrine[]>("god_shrines");
+            var godShrines = new OptionalMember<GodShrine>("god_shrines");
             var tasks = new RequiredMember<Dictionary<int, MapTask>>("tasks");
-            var skillChallenges = new RequiredMember<SkillChallenge[]>("skill_challenges");
+            var skillChallenges = new RequiredMember<SkillChallenge>("skill_challenges");
             var sectors = new RequiredMember<Dictionary<int, MapSector>>("sectors");
-            var adventures = new RequiredMember<Adventure[]>("adventures");
+            var adventures = new RequiredMember<Adventure>("adventures");
             var id = new RequiredMember<int>("id");
-            var masteryPoints = new RequiredMember<MasteryPoint[]>("mastery_points");
+            var masteryPoints = new RequiredMember<MasteryPoint>("mastery_points");
             foreach (var member in json.EnumerateObject())
             {
                 if (member.NameEquals(name.Name))
@@ -109,22 +110,69 @@ namespace GW2SDK.Continents
                 MinLevel = minLevel.GetValue(),
                 MaxLevel = maxLevel.GetValue(),
                 DefaultFloor = defaultFloor.GetValue(),
-                LabelCoordinates = labelCoordinates.Select(value => value.GetArray(item => item.GetDouble())),
-                MapRectangle = mapRectangle.Select(rectangle => rectangle.GetArray(point => point.GetArray(coord => coord.GetDouble()))),
-                ContinentRectangle = continentRectangle.Select(rectangle => rectangle.GetArray(point => point.GetArray(coord => coord.GetDouble()))),
+                LabelCoordinates = labelCoordinates.Select(value => ReadPointF(value, missingMemberBehavior)),
+                MapRectangle = mapRectangle.Select(value => ReadMapRectangle(value, missingMemberBehavior)),
+                ContinentRectangle = continentRectangle.Select(value => ReadContinentRectangle(value, missingMemberBehavior)),
                 PointsOfInterest = pointsOfInterest.Select(value => ReadPointsOfInterest(value, missingMemberBehavior)),
-                GodShrines = godShrines.Select(value => value.GetArray(item => ReadGodShrine(item, missingMemberBehavior))),
+                GodShrines = godShrines.SelectMany(value => ReadGodShrine(value, missingMemberBehavior)),
                 Tasks = tasks.Select(value => ReadTasks(value, missingMemberBehavior)),
-                SkillChallenges = skillChallenges.Select(value => value.GetArray(item => ReadSkillChallenge(item, missingMemberBehavior))),
+                SkillChallenges = skillChallenges.SelectMany(value => ReadSkillChallenge(value, missingMemberBehavior)),
                 Sectors = sectors.Select(value => ReadSectors(value, missingMemberBehavior)),
-                Adventures = adventures.Select(value => value.GetArray(item => ReadAdventure(item, missingMemberBehavior))),
-                MasteryPoints = masteryPoints.Select(value => value.GetArray(item => ReadMasteryPoint(item, missingMemberBehavior)))
+                Adventures = adventures.SelectMany(value => ReadAdventure(value, missingMemberBehavior)),
+                MasteryPoints = masteryPoints.SelectMany(item => ReadMasteryPoint(item, missingMemberBehavior))
+            };
+        }
+
+        private PointF ReadPointF(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+        {
+            var x = json[0]
+                .GetSingle();
+            var y = json[1]
+                .GetSingle();
+            return new PointF(x, y);
+        }
+
+        private MapRectangle ReadMapRectangle(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+        {
+            var bottomLeft = json[0];
+            var x = bottomLeft[0]
+                .GetSingle();
+            var y = bottomLeft[1]
+                .GetSingle();
+            var size = json[1];
+            var width = size[0]
+                .GetSingle();
+            var height = size[1]
+                .GetSingle();
+            return new MapRectangle
+            {
+                BottomLeft = new PointF(x, y),
+                Size = new SizeF(width, height)
+            };
+        }
+
+        private ContinentRectangle ReadContinentRectangle(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+        {
+            var topLeft = json[0];
+            var x = topLeft[0]
+                .GetSingle();
+            var y = topLeft[1]
+                .GetSingle();
+            var size = json[1];
+            var width = size[0]
+                .GetSingle();
+            var height = size[1]
+                .GetSingle();
+            return new ContinentRectangle
+            {
+                TopLeft = new PointF(x, y),
+                Size = new SizeF(width, height)
             };
         }
 
         private MasteryPoint ReadMasteryPoint(JsonElement json, MissingMemberBehavior missingMemberBehavior)
         {
-            var coordinates = new RequiredMember<double[]>("coord");
+            var coordinates = new RequiredMember<double>("coord");
             var id = new RequiredMember<int>("id");
             var region = new RequiredMember<MasteryRegionName>("region");
             foreach (var member in json.EnumerateObject())
@@ -150,14 +198,14 @@ namespace GW2SDK.Continents
             return new MasteryPoint
             {
                 Id = id.GetValue(),
-                Coordinates = coordinates.Select(value => value.GetArray(item => item.GetDouble())),
+                Coordinates = coordinates.SelectMany(value => value.GetDouble()),
                 Region = region.GetValue(missingMemberBehavior)
             };
         }
 
         private Adventure ReadAdventure(JsonElement json, MissingMemberBehavior missingMemberBehavior)
         {
-            var coordinates = new RequiredMember<double[]>("coord");
+            var coordinates = new RequiredMember<double>("coord");
             var id = new RequiredMember<string>("id");
             var name = new RequiredMember<string>("name");
             var description = new RequiredMember<string>("description");
@@ -188,7 +236,7 @@ namespace GW2SDK.Continents
             return new Adventure
             {
                 Id = id.GetValue(),
-                Coordinates = coordinates.Select(value => value.GetArray(item => item.GetDouble())),
+                Coordinates = coordinates.SelectMany(value => value.GetDouble()),
                 Name = name.GetValue(),
                 Description = description.GetValue()
             };
@@ -214,7 +262,7 @@ namespace GW2SDK.Continents
 
         private SkillChallenge ReadSkillChallenge(JsonElement json, MissingMemberBehavior missingMemberBehavior)
         {
-            var coordinates = new RequiredMember<double[]>("coord");
+            var coordinates = new RequiredMember<double>("coord");
 
             // The 'id' is missing from hero points in End of Dragon maps
             var id = new OptionalMember<string>("id");
@@ -237,7 +285,7 @@ namespace GW2SDK.Continents
             return new SkillChallenge
             {
                 Id = id.GetValueOrEmpty(),
-                Coordinates = coordinates.Select(value => value.GetArray(item => item.GetDouble()))
+                Coordinates = coordinates.SelectMany(value => value.GetDouble())
             };
         }
 
@@ -265,7 +313,7 @@ namespace GW2SDK.Continents
             var name = new RequiredMember<string>("name");
             var nameContested = new RequiredMember<string>("name_contested");
             var pointOfInterestId = new RequiredMember<int>("poi_id");
-            var coordinates = new RequiredMember<double[]>("coord");
+            var coordinates = new RequiredMember<double>("coord");
             var icon = new RequiredMember<string>("icon");
             var iconContested = new RequiredMember<string>("icon_contested");
             foreach (var member in json.EnumerateObject())
@@ -310,7 +358,7 @@ namespace GW2SDK.Continents
                 Name = name.GetValue(),
                 NameContested = nameContested.GetValue(),
                 PointOfInterestId = pointOfInterestId.GetValue(),
-                Coordinates = coordinates.Select(value => value.GetArray(item => item.GetDouble())),
+                Coordinates = coordinates.SelectMany(value => value.GetDouble()),
                 Icon = icon.GetValue(),
                 IconContested = iconContested.GetValue()
             };

@@ -13,7 +13,7 @@ namespace GW2SDK.Colors
     [PublicAPI]
     public sealed class ColorService
     {
-        private readonly IColorReader colorReader;
+        private readonly IDyeReader dyeReader;
 
         private readonly HttpClient http;
 
@@ -21,44 +21,44 @@ namespace GW2SDK.Colors
 
         public ColorService(
             HttpClient http,
-            IColorReader colorReader,
+            IDyeReader dyeReader,
             MissingMemberBehavior missingMemberBehavior
         )
         {
             this.http = http ?? throw new ArgumentNullException(nameof(http));
-            this.colorReader = colorReader ?? throw new ArgumentNullException(nameof(colorReader));
+            this.dyeReader = dyeReader ?? throw new ArgumentNullException(nameof(dyeReader));
             this.missingMemberBehavior = missingMemberBehavior;
         }
 
-        public async Task<IReplicaSet<Color>> GetColors(
+        public async Task<IReplicaSet<Dye>> GetColors(
             Language? language = default,
             CancellationToken cancellationToken = default
         )
         {
             var request = new ColorsRequest(language);
-            return await http.GetResourcesSet(request, json => colorReader.ReadArray(json, missingMemberBehavior), cancellationToken)
+            return await http.GetResourcesSet(request, json => dyeReader.ReadArray(json, missingMemberBehavior), cancellationToken)
                 .ConfigureAwait(false);
         }
 
         public async Task<IReplicaSet<int>> GetColorsIndex(CancellationToken cancellationToken = default)
         {
             var request = new ColorsIndexRequest();
-            return await http.GetResourcesSet(request, json => colorReader.Id.ReadArray(json, missingMemberBehavior), cancellationToken)
+            return await http.GetResourcesSet(request, json => dyeReader.Id.ReadArray(json, missingMemberBehavior), cancellationToken)
                 .ConfigureAwait(false);
         }
 
-        public async Task<IReplica<Color>> GetColorById(
+        public async Task<IReplica<Dye>> GetColorById(
             int colorId,
             Language? language = default,
             CancellationToken cancellationToken = default
         )
         {
             var request = new ColorByIdRequest(colorId, language);
-            return await http.GetResource(request, json => colorReader.Read(json, missingMemberBehavior), cancellationToken)
+            return await http.GetResource(request, json => dyeReader.Read(json, missingMemberBehavior), cancellationToken)
                 .ConfigureAwait(false);
         }
 
-        public async Task<IReplicaSet<Color>> GetColorsByIds(
+        public async Task<IReplicaSet<Dye>> GetColorsByIds(
 #if NET
             IReadOnlySet<int> colorIds,
 #else
@@ -69,11 +69,11 @@ namespace GW2SDK.Colors
         )
         {
             var request = new ColorsByIdsRequest(colorIds, language);
-            return await http.GetResourcesSet(request, json => colorReader.ReadArray(json, missingMemberBehavior), cancellationToken)
+            return await http.GetResourcesSet(request, json => dyeReader.ReadArray(json, missingMemberBehavior), cancellationToken)
                 .ConfigureAwait(false);
         }
 
-        public async Task<IReplicaPage<Color>> GetColorsByPage(
+        public async Task<IReplicaPage<Dye>> GetColorsByPage(
             int pageIndex,
             int? pageSize = default,
             Language? language = default,
@@ -81,7 +81,7 @@ namespace GW2SDK.Colors
         )
         {
             var request = new ColorsByPageRequest(pageIndex, pageSize, language);
-            return await http.GetResourcesPage(request, json => colorReader.ReadArray(json, missingMemberBehavior), cancellationToken)
+            return await http.GetResourcesPage(request, json => dyeReader.ReadArray(json, missingMemberBehavior), cancellationToken)
                 .ConfigureAwait(false);
         }
     }

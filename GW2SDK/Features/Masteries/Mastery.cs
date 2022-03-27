@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using GW2SDK.Annotations;
 using JetBrains.Annotations;
 
@@ -21,6 +22,6 @@ namespace GW2SDK.Masteries
 
         public MasteryRegionName Region { get; init; }
 
-        public MasteryLevel[] Levels { get; init; } = Array.Empty<MasteryLevel>();
+        public IReadOnlyCollection<MasteryLevel> Levels { get; init; } = Array.Empty<MasteryLevel>();
     }
 }

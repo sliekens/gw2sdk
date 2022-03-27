@@ -152,9 +152,9 @@ namespace GW2SDK.Items
             var level = new RequiredMember<int>("level");
             var rarity = new RequiredMember<Rarity>("rarity");
             var vendorValue = new RequiredMember<Coin>("vendor_value");
-            var gameTypes = new RequiredMember<GameType[]>("game_types");
-            var flags = new RequiredMember<ItemFlag[]>("flags");
-            var restrictions = new RequiredMember<ItemRestriction[]>("restrictions");
+            var gameTypes = new RequiredMember<GameType>("game_types");
+            var flags = new RequiredMember<ItemFlag>("flags");
+            var restrictions = new RequiredMember<ItemRestriction>("restrictions");
             var id = new RequiredMember<int>("id");
             var chatLink = new RequiredMember<string>("chat_link");
             var icon = new OptionalMember<string>("icon");
@@ -225,9 +225,9 @@ namespace GW2SDK.Items
                 Level = level.GetValue(),
                 Rarity = rarity.GetValue(missingMemberBehavior),
                 VendorValue = vendorValue.GetValue(),
-                GameTypes = gameTypes.GetValue(missingMemberBehavior),
-                Flags = flags.GetValue(missingMemberBehavior),
-                Restrictions = restrictions.GetValue(missingMemberBehavior),
+                GameTypes = gameTypes.GetValues(missingMemberBehavior),
+                Flags = flags.GetValues(missingMemberBehavior),
+                Restrictions = restrictions.GetValues(missingMemberBehavior),
                 ChatLink = chatLink.GetValue(),
                 Icon = icon.GetValueOrNull()
             };
@@ -259,7 +259,7 @@ namespace GW2SDK.Items
 
         private InfusionSlot ReadInfusionSlot(JsonElement json, MissingMemberBehavior missingMemberBehavior)
         {
-            var flags = new RequiredMember<InfusionSlotFlag[]>("flags");
+            var flags = new RequiredMember<InfusionSlotFlag>("flags");
             var itemId = new NullableMember<int>("item_id");
             foreach (var member in json.EnumerateObject())
             {
@@ -277,13 +277,17 @@ namespace GW2SDK.Items
                 }
             }
 
-            return new InfusionSlot { Flags = flags.GetValue(missingMemberBehavior), ItemId = itemId.GetValue() };
+            return new InfusionSlot
+            {
+                Flags = flags.GetValues(missingMemberBehavior), 
+                ItemId = itemId.GetValue()
+            };
         }
 
         private InfixUpgrade ReadInfixUpgrade(JsonElement json, MissingMemberBehavior missingMemberBehavior)
         {
             var id = new RequiredMember<int>("id");
-            var attributes = new RequiredMember<UpgradeAttribute[]>("attributes");
+            var attributes = new RequiredMember<UpgradeAttribute>("attributes");
             var buff = new OptionalMember<Buff>("buff");
             foreach (var member in json.EnumerateObject())
             {
@@ -308,7 +312,7 @@ namespace GW2SDK.Items
             return new InfixUpgrade
             {
                 ItemstatsId = id.GetValue(),
-                Attributes = attributes.Select(value => ReadUpgradeAttributes(value, missingMemberBehavior)),
+                Attributes = attributes.SelectMany(value => ReadUpgradeAttribute(value, missingMemberBehavior)),
                 Buff = buff.Select(value => ReadBuff(value, missingMemberBehavior))
             };
         }
@@ -339,9 +343,6 @@ namespace GW2SDK.Items
                 Description = description.GetValueOrEmpty()
             };
         }
-
-        private UpgradeAttribute[] ReadUpgradeAttributes(JsonElement json, MissingMemberBehavior missingMemberBehavior) =>
-            json.GetArray(item => ReadUpgradeAttribute(item, missingMemberBehavior));
 
         private UpgradeAttribute ReadUpgradeAttribute(JsonElement json, MissingMemberBehavior missingMemberBehavior)
         {
@@ -392,19 +393,19 @@ namespace GW2SDK.Items
             var rarity = new RequiredMember<Rarity>("rarity");
             var vendorValue = new RequiredMember<Coin>("vendor_value");
             var defaultSkin = new RequiredMember<int>("default_skin");
-            var gameTypes = new RequiredMember<GameType[]>("game_types");
-            var flags = new RequiredMember<ItemFlag[]>("flags");
-            var restrictions = new RequiredMember<ItemRestriction[]>("restrictions");
+            var gameTypes = new RequiredMember<GameType>("game_types");
+            var flags = new RequiredMember<ItemFlag>("flags");
+            var restrictions = new RequiredMember<ItemRestriction>("restrictions");
             var id = new RequiredMember<int>("id");
             var chatLink = new RequiredMember<string>("chat_link");
             var icon = new OptionalMember<string>("icon");
             var weightClass = new RequiredMember<WeightClass>("weight_class");
             var defense = new RequiredMember<int>("defense");
-            var infusionSlots = new RequiredMember<InfusionSlot[]>("infusion_slots");
+            var infusionSlots = new RequiredMember<InfusionSlot>("infusion_slots");
             var attributeAdjustment = new RequiredMember<double>("attribute_adjustment");
             var infixUpgrade = new OptionalMember<InfixUpgrade>("infix_upgrade");
             var suffixItemId = new NullableMember<int>("suffix_item_id");
-            var statChoices = new OptionalMember<int[]>("stat_choices");
+            var statChoices = new OptionalMember<int>("stat_choices");
             foreach (var member in json.EnumerateObject())
             {
                 if (member.NameEquals("type"))
@@ -522,16 +523,16 @@ namespace GW2SDK.Items
                 Rarity = rarity.GetValue(missingMemberBehavior),
                 VendorValue = vendorValue.GetValue(),
                 DefaultSkin = defaultSkin.GetValue(),
-                GameTypes = gameTypes.GetValue(missingMemberBehavior),
-                Flags = flags.GetValue(missingMemberBehavior),
-                Restrictions = restrictions.GetValue(missingMemberBehavior),
+                GameTypes = gameTypes.GetValues(missingMemberBehavior),
+                Flags = flags.GetValues(missingMemberBehavior),
+                Restrictions = restrictions.GetValues(missingMemberBehavior),
                 ChatLink = chatLink.GetValue(),
                 Icon = icon.GetValueOrNull(),
                 WeightClass = weightClass.GetValue(missingMemberBehavior),
                 Defense = defense.GetValue(),
-                InfusionSlots = infusionSlots.Select(value => value.GetArray(item => ReadInfusionSlot(item, missingMemberBehavior))),
+                InfusionSlots = infusionSlots.SelectMany(value => ReadInfusionSlot(value, missingMemberBehavior)),
                 AttributeAdjustment = attributeAdjustment.GetValue(),
-                StatChoices = statChoices.Select(value => value.GetArray(item => item.GetInt32())),
+                StatChoices = statChoices.SelectMany(value => value.GetInt32()),
                 Prefix = infixUpgrade.Select(value => ReadInfixUpgrade(value, missingMemberBehavior)),
                 SuffixItemId = suffixItemId.GetValue()
             };
@@ -545,19 +546,19 @@ namespace GW2SDK.Items
             var rarity = new RequiredMember<Rarity>("rarity");
             var vendorValue = new RequiredMember<Coin>("vendor_value");
             var defaultSkin = new RequiredMember<int>("default_skin");
-            var gameTypes = new RequiredMember<GameType[]>("game_types");
-            var flags = new RequiredMember<ItemFlag[]>("flags");
-            var restrictions = new RequiredMember<ItemRestriction[]>("restrictions");
+            var gameTypes = new RequiredMember<GameType>("game_types");
+            var flags = new RequiredMember<ItemFlag>("flags");
+            var restrictions = new RequiredMember<ItemRestriction>("restrictions");
             var id = new RequiredMember<int>("id");
             var chatLink = new RequiredMember<string>("chat_link");
             var icon = new OptionalMember<string>("icon");
             var weightClass = new RequiredMember<WeightClass>("weight_class");
             var defense = new RequiredMember<int>("defense");
-            var infusionSlots = new RequiredMember<InfusionSlot[]>("infusion_slots");
+            var infusionSlots = new RequiredMember<InfusionSlot>("infusion_slots");
             var attributeAdjustment = new RequiredMember<double>("attribute_adjustment");
             var infixUpgrade = new OptionalMember<InfixUpgrade>("infix_upgrade");
             var suffixItemId = new NullableMember<int>("suffix_item_id");
-            var statChoices = new OptionalMember<int[]>("stat_choices");
+            var statChoices = new OptionalMember<int>("stat_choices");
             foreach (var member in json.EnumerateObject())
             {
                 if (member.NameEquals("type"))
@@ -675,16 +676,16 @@ namespace GW2SDK.Items
                 Rarity = rarity.GetValue(missingMemberBehavior),
                 VendorValue = vendorValue.GetValue(),
                 DefaultSkin = defaultSkin.GetValue(),
-                GameTypes = gameTypes.GetValue(missingMemberBehavior),
-                Flags = flags.GetValue(missingMemberBehavior),
-                Restrictions = restrictions.GetValue(missingMemberBehavior),
+                GameTypes = gameTypes.GetValues(missingMemberBehavior),
+                Flags = flags.GetValues(missingMemberBehavior),
+                Restrictions = restrictions.GetValues(missingMemberBehavior),
                 ChatLink = chatLink.GetValue(),
                 Icon = icon.GetValueOrNull(),
                 WeightClass = weightClass.GetValue(missingMemberBehavior),
                 Defense = defense.GetValue(),
-                InfusionSlots = infusionSlots.Select(value => value.GetArray(item => ReadInfusionSlot(item, missingMemberBehavior))),
+                InfusionSlots = infusionSlots.SelectMany(value => ReadInfusionSlot(value, missingMemberBehavior)),
                 AttributeAdjustment = attributeAdjustment.GetValue(),
-                StatChoices = statChoices.Select(value => value.GetArray(item => item.GetInt32())),
+                StatChoices = statChoices.SelectMany(value => value.GetInt32()),
                 Prefix = infixUpgrade.Select(value => ReadInfixUpgrade(value, missingMemberBehavior)),
                 SuffixItemId = suffixItemId.GetValue()
             };
@@ -699,19 +700,19 @@ namespace GW2SDK.Items
             var rarity = new RequiredMember<Rarity>("rarity");
             var vendorValue = new RequiredMember<Coin>("vendor_value");
             var defaultSkin = new RequiredMember<int>("default_skin");
-            var gameTypes = new RequiredMember<GameType[]>("game_types");
-            var flags = new RequiredMember<ItemFlag[]>("flags");
-            var restrictions = new RequiredMember<ItemRestriction[]>("restrictions");
+            var gameTypes = new RequiredMember<GameType>("game_types");
+            var flags = new RequiredMember<ItemFlag>("flags");
+            var restrictions = new RequiredMember<ItemRestriction>("restrictions");
             var id = new RequiredMember<int>("id");
             var chatLink = new RequiredMember<string>("chat_link");
             var icon = new OptionalMember<string>("icon");
             var weightClass = new RequiredMember<WeightClass>("weight_class");
             var defense = new RequiredMember<int>("defense");
-            var infusionSlots = new RequiredMember<InfusionSlot[]>("infusion_slots");
+            var infusionSlots = new RequiredMember<InfusionSlot>("infusion_slots");
             var attributeAdjustment = new RequiredMember<double>("attribute_adjustment");
             var infixUpgrade = new OptionalMember<InfixUpgrade>("infix_upgrade");
             var suffixItemId = new NullableMember<int>("suffix_item_id");
-            var statChoices = new OptionalMember<int[]>("stat_choices");
+            var statChoices = new OptionalMember<int>("stat_choices");
             foreach (var member in json.EnumerateObject())
             {
                 if (member.NameEquals("type"))
@@ -829,16 +830,16 @@ namespace GW2SDK.Items
                 Rarity = rarity.GetValue(missingMemberBehavior),
                 VendorValue = vendorValue.GetValue(),
                 DefaultSkin = defaultSkin.GetValue(),
-                GameTypes = gameTypes.GetValue(missingMemberBehavior),
-                Flags = flags.GetValue(missingMemberBehavior),
-                Restrictions = restrictions.GetValue(missingMemberBehavior),
+                GameTypes = gameTypes.GetValues(missingMemberBehavior),
+                Flags = flags.GetValues(missingMemberBehavior),
+                Restrictions = restrictions.GetValues(missingMemberBehavior),
                 ChatLink = chatLink.GetValue(),
                 Icon = icon.GetValueOrNull(),
                 WeightClass = weightClass.GetValue(missingMemberBehavior),
                 Defense = defense.GetValue(),
-                InfusionSlots = infusionSlots.Select(value => value.GetArray(item => ReadInfusionSlot(item, missingMemberBehavior))),
+                InfusionSlots = infusionSlots.SelectMany(value => ReadInfusionSlot(value, missingMemberBehavior)),
                 AttributeAdjustment = attributeAdjustment.GetValue(),
-                StatChoices = statChoices.Select(value => value.GetArray(item => item.GetInt32())),
+                StatChoices = statChoices.SelectMany(value => value.GetInt32()),
                 Prefix = infixUpgrade.Select(value => ReadInfixUpgrade(value, missingMemberBehavior)),
                 SuffixItemId = suffixItemId.GetValue()
             };
@@ -852,19 +853,19 @@ namespace GW2SDK.Items
             var rarity = new RequiredMember<Rarity>("rarity");
             var vendorValue = new RequiredMember<Coin>("vendor_value");
             var defaultSkin = new RequiredMember<int>("default_skin");
-            var gameTypes = new RequiredMember<GameType[]>("game_types");
-            var flags = new RequiredMember<ItemFlag[]>("flags");
-            var restrictions = new RequiredMember<ItemRestriction[]>("restrictions");
+            var gameTypes = new RequiredMember<GameType>("game_types");
+            var flags = new RequiredMember<ItemFlag>("flags");
+            var restrictions = new RequiredMember<ItemRestriction>("restrictions");
             var id = new RequiredMember<int>("id");
             var chatLink = new RequiredMember<string>("chat_link");
             var icon = new OptionalMember<string>("icon");
             var weightClass = new RequiredMember<WeightClass>("weight_class");
             var defense = new RequiredMember<int>("defense");
-            var infusionSlots = new RequiredMember<InfusionSlot[]>("infusion_slots");
+            var infusionSlots = new RequiredMember<InfusionSlot>("infusion_slots");
             var attributeAdjustment = new RequiredMember<double>("attribute_adjustment");
             var infixUpgrade = new OptionalMember<InfixUpgrade>("infix_upgrade");
             var suffixItemId = new NullableMember<int>("suffix_item_id");
-            var statChoices = new OptionalMember<int[]>("stat_choices");
+            var statChoices = new OptionalMember<int>("stat_choices");
             foreach (var member in json.EnumerateObject())
             {
                 if (member.NameEquals("type"))
@@ -982,16 +983,16 @@ namespace GW2SDK.Items
                 Rarity = rarity.GetValue(missingMemberBehavior),
                 VendorValue = vendorValue.GetValue(),
                 DefaultSkin = defaultSkin.GetValue(),
-                GameTypes = gameTypes.GetValue(missingMemberBehavior),
-                Flags = flags.GetValue(missingMemberBehavior),
-                Restrictions = restrictions.GetValue(missingMemberBehavior),
+                GameTypes = gameTypes.GetValues(missingMemberBehavior),
+                Flags = flags.GetValues(missingMemberBehavior),
+                Restrictions = restrictions.GetValues(missingMemberBehavior),
                 ChatLink = chatLink.GetValue(),
                 Icon = icon.GetValueOrNull(),
                 WeightClass = weightClass.GetValue(missingMemberBehavior),
                 Defense = defense.GetValue(),
-                InfusionSlots = infusionSlots.Select(value => value.GetArray(item => ReadInfusionSlot(item, missingMemberBehavior))),
+                InfusionSlots = infusionSlots.SelectMany(value => ReadInfusionSlot(value, missingMemberBehavior)),
                 AttributeAdjustment = attributeAdjustment.GetValue(),
-                StatChoices = statChoices.Select(value => value.GetArray(item => item.GetInt32())),
+                StatChoices = statChoices.SelectMany(value => value.GetInt32()),
                 Prefix = infixUpgrade.Select(value => ReadInfixUpgrade(value, missingMemberBehavior)),
                 SuffixItemId = suffixItemId.GetValue()
             };
@@ -1005,19 +1006,19 @@ namespace GW2SDK.Items
             var rarity = new RequiredMember<Rarity>("rarity");
             var vendorValue = new RequiredMember<Coin>("vendor_value");
             var defaultSkin = new RequiredMember<int>("default_skin");
-            var gameTypes = new RequiredMember<GameType[]>("game_types");
-            var flags = new RequiredMember<ItemFlag[]>("flags");
-            var restrictions = new RequiredMember<ItemRestriction[]>("restrictions");
+            var gameTypes = new RequiredMember<GameType>("game_types");
+            var flags = new RequiredMember<ItemFlag>("flags");
+            var restrictions = new RequiredMember<ItemRestriction>("restrictions");
             var id = new RequiredMember<int>("id");
             var chatLink = new RequiredMember<string>("chat_link");
             var icon = new OptionalMember<string>("icon");
             var weightClass = new RequiredMember<WeightClass>("weight_class");
             var defense = new RequiredMember<int>("defense");
-            var infusionSlots = new RequiredMember<InfusionSlot[]>("infusion_slots");
+            var infusionSlots = new RequiredMember<InfusionSlot>("infusion_slots");
             var attributeAdjustment = new RequiredMember<double>("attribute_adjustment");
             var infixUpgrade = new OptionalMember<InfixUpgrade>("infix_upgrade");
             var suffixItemId = new NullableMember<int>("suffix_item_id");
-            var statChoices = new OptionalMember<int[]>("stat_choices");
+            var statChoices = new OptionalMember<int>("stat_choices");
             foreach (var member in json.EnumerateObject())
             {
                 if (member.NameEquals("type"))
@@ -1135,16 +1136,16 @@ namespace GW2SDK.Items
                 Rarity = rarity.GetValue(missingMemberBehavior),
                 VendorValue = vendorValue.GetValue(),
                 DefaultSkin = defaultSkin.GetValue(),
-                GameTypes = gameTypes.GetValue(missingMemberBehavior),
-                Flags = flags.GetValue(missingMemberBehavior),
-                Restrictions = restrictions.GetValue(missingMemberBehavior),
+                GameTypes = gameTypes.GetValues(missingMemberBehavior),
+                Flags = flags.GetValues(missingMemberBehavior),
+                Restrictions = restrictions.GetValues(missingMemberBehavior),
                 ChatLink = chatLink.GetValue(),
                 Icon = icon.GetValueOrNull(),
                 WeightClass = weightClass.GetValue(missingMemberBehavior),
                 Defense = defense.GetValue(),
-                InfusionSlots = infusionSlots.Select(value => value.GetArray(item => ReadInfusionSlot(item, missingMemberBehavior))),
+                InfusionSlots = infusionSlots.SelectMany(value => ReadInfusionSlot(value, missingMemberBehavior)),
                 AttributeAdjustment = attributeAdjustment.GetValue(),
-                StatChoices = statChoices.Select(value => value.GetArray(item => item.GetInt32())),
+                StatChoices = statChoices.SelectMany(value => value.GetInt32()),
                 Prefix = infixUpgrade.Select(value => ReadInfixUpgrade(value, missingMemberBehavior)),
                 SuffixItemId = suffixItemId.GetValue()
             };
@@ -1158,19 +1159,19 @@ namespace GW2SDK.Items
             var rarity = new RequiredMember<Rarity>("rarity");
             var vendorValue = new RequiredMember<Coin>("vendor_value");
             var defaultSkin = new RequiredMember<int>("default_skin");
-            var gameTypes = new RequiredMember<GameType[]>("game_types");
-            var flags = new RequiredMember<ItemFlag[]>("flags");
-            var restrictions = new RequiredMember<ItemRestriction[]>("restrictions");
+            var gameTypes = new RequiredMember<GameType>("game_types");
+            var flags = new RequiredMember<ItemFlag>("flags");
+            var restrictions = new RequiredMember<ItemRestriction>("restrictions");
             var id = new RequiredMember<int>("id");
             var chatLink = new RequiredMember<string>("chat_link");
             var icon = new OptionalMember<string>("icon");
             var weightClass = new RequiredMember<WeightClass>("weight_class");
             var defense = new RequiredMember<int>("defense");
-            var infusionSlots = new RequiredMember<InfusionSlot[]>("infusion_slots");
+            var infusionSlots = new RequiredMember<InfusionSlot>("infusion_slots");
             var attributeAdjustment = new RequiredMember<double>("attribute_adjustment");
             var infixUpgrade = new OptionalMember<InfixUpgrade>("infix_upgrade");
             var suffixItemId = new NullableMember<int>("suffix_item_id");
-            var statChoices = new OptionalMember<int[]>("stat_choices");
+            var statChoices = new OptionalMember<int>("stat_choices");
             foreach (var member in json.EnumerateObject())
             {
                 if (member.NameEquals("type"))
@@ -1288,16 +1289,16 @@ namespace GW2SDK.Items
                 Rarity = rarity.GetValue(missingMemberBehavior),
                 VendorValue = vendorValue.GetValue(),
                 DefaultSkin = defaultSkin.GetValue(),
-                GameTypes = gameTypes.GetValue(missingMemberBehavior),
-                Flags = flags.GetValue(missingMemberBehavior),
-                Restrictions = restrictions.GetValue(missingMemberBehavior),
+                GameTypes = gameTypes.GetValues(missingMemberBehavior),
+                Flags = flags.GetValues(missingMemberBehavior),
+                Restrictions = restrictions.GetValues(missingMemberBehavior),
                 ChatLink = chatLink.GetValue(),
                 Icon = icon.GetValueOrNull(),
                 WeightClass = weightClass.GetValue(missingMemberBehavior),
                 Defense = defense.GetValue(),
-                InfusionSlots = infusionSlots.Select(value => value.GetArray(item => ReadInfusionSlot(item, missingMemberBehavior))),
+                InfusionSlots = infusionSlots.SelectMany(value => ReadInfusionSlot(value, missingMemberBehavior)),
                 AttributeAdjustment = attributeAdjustment.GetValue(),
-                StatChoices = statChoices.Select(value => value.GetArray(item => item.GetInt32())),
+                StatChoices = statChoices.SelectMany(value => value.GetInt32()),
                 Prefix = infixUpgrade.Select(value => ReadInfixUpgrade(value, missingMemberBehavior)),
                 SuffixItemId = suffixItemId.GetValue()
             };
@@ -1311,19 +1312,19 @@ namespace GW2SDK.Items
             var rarity = new RequiredMember<Rarity>("rarity");
             var vendorValue = new RequiredMember<Coin>("vendor_value");
             var defaultSkin = new RequiredMember<int>("default_skin");
-            var gameTypes = new RequiredMember<GameType[]>("game_types");
-            var flags = new RequiredMember<ItemFlag[]>("flags");
-            var restrictions = new RequiredMember<ItemRestriction[]>("restrictions");
+            var gameTypes = new RequiredMember<GameType>("game_types");
+            var flags = new RequiredMember<ItemFlag>("flags");
+            var restrictions = new RequiredMember<ItemRestriction>("restrictions");
             var id = new RequiredMember<int>("id");
             var chatLink = new RequiredMember<string>("chat_link");
             var icon = new OptionalMember<string>("icon");
             var weightClass = new RequiredMember<WeightClass>("weight_class");
             var defense = new RequiredMember<int>("defense");
-            var infusionSlots = new RequiredMember<InfusionSlot[]>("infusion_slots");
+            var infusionSlots = new RequiredMember<InfusionSlot>("infusion_slots");
             var attributeAdjustment = new RequiredMember<double>("attribute_adjustment");
             var infixUpgrade = new OptionalMember<InfixUpgrade>("infix_upgrade");
             var suffixItemId = new NullableMember<int>("suffix_item_id");
-            var statChoices = new OptionalMember<int[]>("stat_choices");
+            var statChoices = new OptionalMember<int>("stat_choices");
             foreach (var member in json.EnumerateObject())
             {
                 if (member.NameEquals("type"))
@@ -1441,16 +1442,16 @@ namespace GW2SDK.Items
                 Rarity = rarity.GetValue(missingMemberBehavior),
                 VendorValue = vendorValue.GetValue(),
                 DefaultSkin = defaultSkin.GetValue(),
-                GameTypes = gameTypes.GetValue(missingMemberBehavior),
-                Flags = flags.GetValue(missingMemberBehavior),
-                Restrictions = restrictions.GetValue(missingMemberBehavior),
+                GameTypes = gameTypes.GetValues(missingMemberBehavior),
+                Flags = flags.GetValues(missingMemberBehavior),
+                Restrictions = restrictions.GetValues(missingMemberBehavior),
                 ChatLink = chatLink.GetValue(),
                 Icon = icon.GetValueOrNull(),
                 WeightClass = weightClass.GetValue(missingMemberBehavior),
                 Defense = defense.GetValue(),
-                InfusionSlots = infusionSlots.Select(value => value.GetArray(item => ReadInfusionSlot(item, missingMemberBehavior))),
+                InfusionSlots = infusionSlots.SelectMany(value => ReadInfusionSlot(value, missingMemberBehavior)),
                 AttributeAdjustment = attributeAdjustment.GetValue(),
-                StatChoices = statChoices.Select(value => value.GetArray(item => item.GetInt32())),
+                StatChoices = statChoices.SelectMany(value => value.GetInt32()),
                 Prefix = infixUpgrade.Select(value => ReadInfixUpgrade(value, missingMemberBehavior)),
                 SuffixItemId = suffixItemId.GetValue()
             };
@@ -1464,19 +1465,19 @@ namespace GW2SDK.Items
             var rarity = new RequiredMember<Rarity>("rarity");
             var vendorValue = new RequiredMember<Coin>("vendor_value");
             var defaultSkin = new RequiredMember<int>("default_skin");
-            var gameTypes = new RequiredMember<GameType[]>("game_types");
-            var flags = new RequiredMember<ItemFlag[]>("flags");
-            var restrictions = new RequiredMember<ItemRestriction[]>("restrictions");
+            var gameTypes = new RequiredMember<GameType>("game_types");
+            var flags = new RequiredMember<ItemFlag>("flags");
+            var restrictions = new RequiredMember<ItemRestriction>("restrictions");
             var id = new RequiredMember<int>("id");
             var chatLink = new RequiredMember<string>("chat_link");
             var icon = new OptionalMember<string>("icon");
             var weightClass = new RequiredMember<WeightClass>("weight_class");
             var defense = new RequiredMember<int>("defense");
-            var infusionSlots = new RequiredMember<InfusionSlot[]>("infusion_slots");
+            var infusionSlots = new RequiredMember<InfusionSlot>("infusion_slots");
             var attributeAdjustment = new RequiredMember<double>("attribute_adjustment");
             var infixUpgrade = new OptionalMember<InfixUpgrade>("infix_upgrade");
             var suffixItemId = new NullableMember<int>("suffix_item_id");
-            var statChoices = new OptionalMember<int[]>("stat_choices");
+            var statChoices = new OptionalMember<int>("stat_choices");
             foreach (var member in json.EnumerateObject())
             {
                 if (member.NameEquals("type"))
@@ -1594,16 +1595,16 @@ namespace GW2SDK.Items
                 Rarity = rarity.GetValue(missingMemberBehavior),
                 VendorValue = vendorValue.GetValue(),
                 DefaultSkin = defaultSkin.GetValue(),
-                GameTypes = gameTypes.GetValue(missingMemberBehavior),
-                Flags = flags.GetValue(missingMemberBehavior),
-                Restrictions = restrictions.GetValue(missingMemberBehavior),
+                GameTypes = gameTypes.GetValues(missingMemberBehavior),
+                Flags = flags.GetValues(missingMemberBehavior),
+                Restrictions = restrictions.GetValues(missingMemberBehavior),
                 ChatLink = chatLink.GetValue(),
                 Icon = icon.GetValueOrNull(),
                 WeightClass = weightClass.GetValue(missingMemberBehavior),
                 Defense = defense.GetValue(),
-                InfusionSlots = infusionSlots.Select(value => value.GetArray(item => ReadInfusionSlot(item, missingMemberBehavior))),
+                InfusionSlots = infusionSlots.SelectMany(value => ReadInfusionSlot(value, missingMemberBehavior)),
                 AttributeAdjustment = attributeAdjustment.GetValue(),
-                StatChoices = statChoices.Select(value => value.GetArray(item => item.GetInt32())),
+                StatChoices = statChoices.SelectMany(value => value.GetInt32()),
                 Prefix = infixUpgrade.Select(value => ReadInfixUpgrade(value, missingMemberBehavior)),
                 SuffixItemId = suffixItemId.GetValue()
             };
@@ -1617,19 +1618,19 @@ namespace GW2SDK.Items
             var rarity = new RequiredMember<Rarity>("rarity");
             var vendorValue = new RequiredMember<Coin>("vendor_value");
             var defaultSkin = new RequiredMember<int>("default_skin");
-            var gameTypes = new RequiredMember<GameType[]>("game_types");
-            var flags = new RequiredMember<ItemFlag[]>("flags");
-            var restrictions = new RequiredMember<ItemRestriction[]>("restrictions");
+            var gameTypes = new RequiredMember<GameType>("game_types");
+            var flags = new RequiredMember<ItemFlag>("flags");
+            var restrictions = new RequiredMember<ItemRestriction>("restrictions");
             var id = new RequiredMember<int>("id");
             var chatLink = new RequiredMember<string>("chat_link");
             var icon = new OptionalMember<string>("icon");
-            var infusionSlots = new RequiredMember<InfusionSlot[]>("infusion_slots");
+            var infusionSlots = new RequiredMember<InfusionSlot>("infusion_slots");
             var attributeAdjustment = new RequiredMember<double>("attribute_adjustment");
             var infixUpgrade = new OptionalMember<InfixUpgrade>("infix_upgrade");
             var suffixItemId = new NullableMember<int>("suffix_item_id");
-            var statChoices = new OptionalMember<int[]>("stat_choices");
-            var upgradesInto = new OptionalMember<ItemUpgrade[]>("upgrades_into");
-            var upgradesFrom = new OptionalMember<ItemUpgrade[]>("upgrades_from");
+            var statChoices = new OptionalMember<int>("stat_choices");
+            var upgradesInto = new OptionalMember<ItemUpgrade>("upgrades_into");
+            var upgradesFrom = new OptionalMember<ItemUpgrade>("upgrades_from");
             foreach (var member in json.EnumerateObject())
             {
                 if (member.NameEquals("type"))
@@ -1740,18 +1741,18 @@ namespace GW2SDK.Items
                 Rarity = rarity.GetValue(missingMemberBehavior),
                 VendorValue = vendorValue.GetValue(),
                 DefaultSkin = defaultSkin.GetValue(),
-                GameTypes = gameTypes.GetValue(missingMemberBehavior),
-                Flags = flags.GetValue(missingMemberBehavior),
-                Restrictions = restrictions.GetValue(missingMemberBehavior),
+                GameTypes = gameTypes.GetValues(missingMemberBehavior),
+                Flags = flags.GetValues(missingMemberBehavior),
+                Restrictions = restrictions.GetValues(missingMemberBehavior),
                 ChatLink = chatLink.GetValue(),
                 Icon = icon.GetValueOrNull(),
-                InfusionSlots = infusionSlots.Select(value => value.GetArray(item => ReadInfusionSlot(item, missingMemberBehavior))),
+                InfusionSlots = infusionSlots.SelectMany(value => ReadInfusionSlot(value, missingMemberBehavior)),
                 AttributeAdjustment = attributeAdjustment.GetValue(),
                 Prefix = infixUpgrade.Select(value => ReadInfixUpgrade(value, missingMemberBehavior)),
                 SuffixItemId = suffixItemId.GetValue(),
-                StatChoices = statChoices.Select(value => value.GetArray(item => item.GetInt32())),
-                UpgradesInto = upgradesInto.Select(value => value.GetArray(item => ReadItemUpgrade(item, missingMemberBehavior))),
-                UpgradesFrom = upgradesFrom.Select(value => value.GetArray(item => ReadItemUpgrade(item, missingMemberBehavior)))
+                StatChoices = statChoices.SelectMany(value => value.GetInt32()),
+                UpgradesInto = upgradesInto.SelectMany(value => ReadItemUpgrade(value, missingMemberBehavior)),
+                UpgradesFrom = upgradesFrom.SelectMany(value => ReadItemUpgrade(value, missingMemberBehavior))
             };
         }
 
@@ -1762,9 +1763,9 @@ namespace GW2SDK.Items
             var level = new RequiredMember<int>("level");
             var rarity = new RequiredMember<Rarity>("rarity");
             var vendorValue = new RequiredMember<Coin>("vendor_value");
-            var gameTypes = new RequiredMember<GameType[]>("game_types");
-            var flags = new RequiredMember<ItemFlag[]>("flags");
-            var restrictions = new RequiredMember<ItemRestriction[]>("restrictions");
+            var gameTypes = new RequiredMember<GameType>("game_types");
+            var flags = new RequiredMember<ItemFlag>("flags");
+            var restrictions = new RequiredMember<ItemRestriction>("restrictions");
             var id = new RequiredMember<int>("id");
             var chatLink = new RequiredMember<string>("chat_link");
             var icon = new OptionalMember<string>("icon");
@@ -1855,9 +1856,9 @@ namespace GW2SDK.Items
                 Level = level.GetValue(),
                 Rarity = rarity.GetValue(missingMemberBehavior),
                 VendorValue = vendorValue.GetValue(),
-                GameTypes = gameTypes.GetValue(missingMemberBehavior),
-                Flags = flags.GetValue(missingMemberBehavior),
-                Restrictions = restrictions.GetValue(missingMemberBehavior),
+                GameTypes = gameTypes.GetValues(missingMemberBehavior),
+                Flags = flags.GetValues(missingMemberBehavior),
+                Restrictions = restrictions.GetValues(missingMemberBehavior),
                 ChatLink = chatLink.GetValue(),
                 Icon = icon.GetValueOrNull(),
                 NoSellOrSort = noSellOrSort.GetValue(),
@@ -1906,9 +1907,9 @@ namespace GW2SDK.Items
             var level = new RequiredMember<int>("level");
             var rarity = new RequiredMember<Rarity>("rarity");
             var vendorValue = new RequiredMember<Coin>("vendor_value");
-            var gameTypes = new RequiredMember<GameType[]>("game_types");
-            var flags = new RequiredMember<ItemFlag[]>("flags");
-            var restrictions = new RequiredMember<ItemRestriction[]>("restrictions");
+            var gameTypes = new RequiredMember<GameType>("game_types");
+            var flags = new RequiredMember<ItemFlag>("flags");
+            var restrictions = new RequiredMember<ItemRestriction>("restrictions");
             var id = new RequiredMember<int>("id");
             var chatLink = new RequiredMember<string>("chat_link");
             var icon = new OptionalMember<string>("icon");
@@ -1996,9 +1997,9 @@ namespace GW2SDK.Items
                 Level = level.GetValue(),
                 Rarity = rarity.GetValue(missingMemberBehavior),
                 VendorValue = vendorValue.GetValue(),
-                GameTypes = gameTypes.GetValue(missingMemberBehavior),
-                Flags = flags.GetValue(missingMemberBehavior),
-                Restrictions = restrictions.GetValue(missingMemberBehavior),
+                GameTypes = gameTypes.GetValues(missingMemberBehavior),
+                Flags = flags.GetValues(missingMemberBehavior),
+                Restrictions = restrictions.GetValues(missingMemberBehavior),
                 ChatLink = chatLink.GetValue(),
                 Icon = icon.GetValueOrNull()
             };
@@ -2014,9 +2015,9 @@ namespace GW2SDK.Items
             var level = new RequiredMember<int>("level");
             var rarity = new RequiredMember<Rarity>("rarity");
             var vendorValue = new RequiredMember<Coin>("vendor_value");
-            var gameTypes = new RequiredMember<GameType[]>("game_types");
-            var flags = new RequiredMember<ItemFlag[]>("flags");
-            var restrictions = new RequiredMember<ItemRestriction[]>("restrictions");
+            var gameTypes = new RequiredMember<GameType>("game_types");
+            var flags = new RequiredMember<ItemFlag>("flags");
+            var restrictions = new RequiredMember<ItemRestriction>("restrictions");
             var id = new RequiredMember<int>("id");
             var chatLink = new RequiredMember<string>("chat_link");
             var icon = new OptionalMember<string>("icon");
@@ -2104,9 +2105,9 @@ namespace GW2SDK.Items
                 Level = level.GetValue(),
                 Rarity = rarity.GetValue(missingMemberBehavior),
                 VendorValue = vendorValue.GetValue(),
-                GameTypes = gameTypes.GetValue(missingMemberBehavior),
-                Flags = flags.GetValue(missingMemberBehavior),
-                Restrictions = restrictions.GetValue(missingMemberBehavior),
+                GameTypes = gameTypes.GetValues(missingMemberBehavior),
+                Flags = flags.GetValues(missingMemberBehavior),
+                Restrictions = restrictions.GetValues(missingMemberBehavior),
                 ChatLink = chatLink.GetValue(),
                 Icon = icon.GetValueOrNull()
             };
@@ -2119,9 +2120,9 @@ namespace GW2SDK.Items
             var level = new RequiredMember<int>("level");
             var rarity = new RequiredMember<Rarity>("rarity");
             var vendorValue = new RequiredMember<Coin>("vendor_value");
-            var gameTypes = new RequiredMember<GameType[]>("game_types");
-            var flags = new RequiredMember<ItemFlag[]>("flags");
-            var restrictions = new RequiredMember<ItemRestriction[]>("restrictions");
+            var gameTypes = new RequiredMember<GameType>("game_types");
+            var flags = new RequiredMember<ItemFlag>("flags");
+            var restrictions = new RequiredMember<ItemRestriction>("restrictions");
             var id = new RequiredMember<int>("id");
             var chatLink = new RequiredMember<string>("chat_link");
             var icon = new OptionalMember<string>("icon");
@@ -2209,9 +2210,9 @@ namespace GW2SDK.Items
                 Level = level.GetValue(),
                 Rarity = rarity.GetValue(missingMemberBehavior),
                 VendorValue = vendorValue.GetValue(),
-                GameTypes = gameTypes.GetValue(missingMemberBehavior),
-                Flags = flags.GetValue(missingMemberBehavior),
-                Restrictions = restrictions.GetValue(missingMemberBehavior),
+                GameTypes = gameTypes.GetValues(missingMemberBehavior),
+                Flags = flags.GetValues(missingMemberBehavior),
+                Restrictions = restrictions.GetValues(missingMemberBehavior),
                 ChatLink = chatLink.GetValue(),
                 Icon = icon.GetValueOrNull()
             };
@@ -2224,9 +2225,9 @@ namespace GW2SDK.Items
             var level = new RequiredMember<int>("level");
             var rarity = new RequiredMember<Rarity>("rarity");
             var vendorValue = new RequiredMember<Coin>("vendor_value");
-            var gameTypes = new RequiredMember<GameType[]>("game_types");
-            var flags = new RequiredMember<ItemFlag[]>("flags");
-            var restrictions = new RequiredMember<ItemRestriction[]>("restrictions");
+            var gameTypes = new RequiredMember<GameType>("game_types");
+            var flags = new RequiredMember<ItemFlag>("flags");
+            var restrictions = new RequiredMember<ItemRestriction>("restrictions");
             var id = new RequiredMember<int>("id");
             var chatLink = new RequiredMember<string>("chat_link");
             var icon = new OptionalMember<string>("icon");
@@ -2314,9 +2315,9 @@ namespace GW2SDK.Items
                 Level = level.GetValue(),
                 Rarity = rarity.GetValue(missingMemberBehavior),
                 VendorValue = vendorValue.GetValue(),
-                GameTypes = gameTypes.GetValue(missingMemberBehavior),
-                Flags = flags.GetValue(missingMemberBehavior),
-                Restrictions = restrictions.GetValue(missingMemberBehavior),
+                GameTypes = gameTypes.GetValues(missingMemberBehavior),
+                Flags = flags.GetValues(missingMemberBehavior),
+                Restrictions = restrictions.GetValues(missingMemberBehavior),
                 ChatLink = chatLink.GetValue(),
                 Icon = icon.GetValueOrNull()
             };
@@ -2329,9 +2330,9 @@ namespace GW2SDK.Items
             var level = new RequiredMember<int>("level");
             var rarity = new RequiredMember<Rarity>("rarity");
             var vendorValue = new RequiredMember<Coin>("vendor_value");
-            var gameTypes = new RequiredMember<GameType[]>("game_types");
-            var flags = new RequiredMember<ItemFlag[]>("flags");
-            var restrictions = new RequiredMember<ItemRestriction[]>("restrictions");
+            var gameTypes = new RequiredMember<GameType>("game_types");
+            var flags = new RequiredMember<ItemFlag>("flags");
+            var restrictions = new RequiredMember<ItemRestriction>("restrictions");
             var id = new RequiredMember<int>("id");
             var chatLink = new RequiredMember<string>("chat_link");
             var icon = new OptionalMember<string>("icon");
@@ -2419,9 +2420,9 @@ namespace GW2SDK.Items
                 Level = level.GetValue(),
                 Rarity = rarity.GetValue(missingMemberBehavior),
                 VendorValue = vendorValue.GetValue(),
-                GameTypes = gameTypes.GetValue(missingMemberBehavior),
-                Flags = flags.GetValue(missingMemberBehavior),
-                Restrictions = restrictions.GetValue(missingMemberBehavior),
+                GameTypes = gameTypes.GetValues(missingMemberBehavior),
+                Flags = flags.GetValues(missingMemberBehavior),
+                Restrictions = restrictions.GetValues(missingMemberBehavior),
                 ChatLink = chatLink.GetValue(),
                 Icon = icon.GetValueOrNull()
             };
@@ -2434,9 +2435,9 @@ namespace GW2SDK.Items
             var level = new RequiredMember<int>("level");
             var rarity = new RequiredMember<Rarity>("rarity");
             var vendorValue = new RequiredMember<Coin>("vendor_value");
-            var gameTypes = new RequiredMember<GameType[]>("game_types");
-            var flags = new RequiredMember<ItemFlag[]>("flags");
-            var restrictions = new RequiredMember<ItemRestriction[]>("restrictions");
+            var gameTypes = new RequiredMember<GameType>("game_types");
+            var flags = new RequiredMember<ItemFlag>("flags");
+            var restrictions = new RequiredMember<ItemRestriction>("restrictions");
             var id = new RequiredMember<int>("id");
             var chatLink = new RequiredMember<string>("chat_link");
             var icon = new OptionalMember<string>("icon");
@@ -2549,9 +2550,9 @@ namespace GW2SDK.Items
                 Level = level.GetValue(),
                 Rarity = rarity.GetValue(missingMemberBehavior),
                 VendorValue = vendorValue.GetValue(),
-                GameTypes = gameTypes.GetValue(missingMemberBehavior),
-                Flags = flags.GetValue(missingMemberBehavior),
-                Restrictions = restrictions.GetValue(missingMemberBehavior),
+                GameTypes = gameTypes.GetValues(missingMemberBehavior),
+                Flags = flags.GetValues(missingMemberBehavior),
+                Restrictions = restrictions.GetValues(missingMemberBehavior),
                 ChatLink = chatLink.GetValue(),
                 Icon = icon.GetValueOrNull(),
                 Duration = duration.Select(value => TimeSpan.FromMilliseconds(value.GetDouble())),
@@ -2572,9 +2573,9 @@ namespace GW2SDK.Items
             var level = new RequiredMember<int>("level");
             var rarity = new RequiredMember<Rarity>("rarity");
             var vendorValue = new RequiredMember<Coin>("vendor_value");
-            var gameTypes = new RequiredMember<GameType[]>("game_types");
-            var flags = new RequiredMember<ItemFlag[]>("flags");
-            var restrictions = new RequiredMember<ItemRestriction[]>("restrictions");
+            var gameTypes = new RequiredMember<GameType>("game_types");
+            var flags = new RequiredMember<ItemFlag>("flags");
+            var restrictions = new RequiredMember<ItemRestriction>("restrictions");
             var id = new RequiredMember<int>("id");
             var chatLink = new RequiredMember<string>("chat_link");
             var icon = new OptionalMember<string>("icon");
@@ -2692,9 +2693,9 @@ namespace GW2SDK.Items
                 Level = level.GetValue(),
                 Rarity = rarity.GetValue(missingMemberBehavior),
                 VendorValue = vendorValue.GetValue(),
-                GameTypes = gameTypes.GetValue(missingMemberBehavior),
-                Flags = flags.GetValue(missingMemberBehavior),
-                Restrictions = restrictions.GetValue(missingMemberBehavior),
+                GameTypes = gameTypes.GetValues(missingMemberBehavior),
+                Flags = flags.GetValues(missingMemberBehavior),
+                Restrictions = restrictions.GetValues(missingMemberBehavior),
                 ChatLink = chatLink.GetValue(),
                 Icon = icon.GetValueOrNull(),
                 Duration = duration.Select(value => TimeSpan.FromMilliseconds(value.GetDouble())),
@@ -2716,9 +2717,9 @@ namespace GW2SDK.Items
             var level = new RequiredMember<int>("level");
             var rarity = new RequiredMember<Rarity>("rarity");
             var vendorValue = new RequiredMember<Coin>("vendor_value");
-            var gameTypes = new RequiredMember<GameType[]>("game_types");
-            var flags = new RequiredMember<ItemFlag[]>("flags");
-            var restrictions = new RequiredMember<ItemRestriction[]>("restrictions");
+            var gameTypes = new RequiredMember<GameType>("game_types");
+            var flags = new RequiredMember<ItemFlag>("flags");
+            var restrictions = new RequiredMember<ItemRestriction>("restrictions");
             var id = new RequiredMember<int>("id");
             var chatLink = new RequiredMember<string>("chat_link");
             var icon = new OptionalMember<string>("icon");
@@ -2806,9 +2807,9 @@ namespace GW2SDK.Items
                 Level = level.GetValue(),
                 Rarity = rarity.GetValue(missingMemberBehavior),
                 VendorValue = vendorValue.GetValue(),
-                GameTypes = gameTypes.GetValue(missingMemberBehavior),
-                Flags = flags.GetValue(missingMemberBehavior),
-                Restrictions = restrictions.GetValue(missingMemberBehavior),
+                GameTypes = gameTypes.GetValues(missingMemberBehavior),
+                Flags = flags.GetValues(missingMemberBehavior),
+                Restrictions = restrictions.GetValues(missingMemberBehavior),
                 ChatLink = chatLink.GetValue(),
                 Icon = icon.GetValueOrNull()
             };
@@ -2824,9 +2825,9 @@ namespace GW2SDK.Items
             var level = new RequiredMember<int>("level");
             var rarity = new RequiredMember<Rarity>("rarity");
             var vendorValue = new RequiredMember<Coin>("vendor_value");
-            var gameTypes = new RequiredMember<GameType[]>("game_types");
-            var flags = new RequiredMember<ItemFlag[]>("flags");
-            var restrictions = new RequiredMember<ItemRestriction[]>("restrictions");
+            var gameTypes = new RequiredMember<GameType>("game_types");
+            var flags = new RequiredMember<ItemFlag>("flags");
+            var restrictions = new RequiredMember<ItemRestriction>("restrictions");
             var id = new RequiredMember<int>("id");
             var chatLink = new RequiredMember<string>("chat_link");
             var icon = new OptionalMember<string>("icon");
@@ -2944,9 +2945,9 @@ namespace GW2SDK.Items
                 Level = level.GetValue(),
                 Rarity = rarity.GetValue(missingMemberBehavior),
                 VendorValue = vendorValue.GetValue(),
-                GameTypes = gameTypes.GetValue(missingMemberBehavior),
-                Flags = flags.GetValue(missingMemberBehavior),
-                Restrictions = restrictions.GetValue(missingMemberBehavior),
+                GameTypes = gameTypes.GetValues(missingMemberBehavior),
+                Flags = flags.GetValues(missingMemberBehavior),
+                Restrictions = restrictions.GetValues(missingMemberBehavior),
                 ChatLink = chatLink.GetValue(),
                 Icon = icon.GetValueOrNull(),
                 Duration = duration.Select(value => TimeSpan.FromMilliseconds(value.GetDouble())),
@@ -2968,9 +2969,9 @@ namespace GW2SDK.Items
             var level = new RequiredMember<int>("level");
             var rarity = new RequiredMember<Rarity>("rarity");
             var vendorValue = new RequiredMember<Coin>("vendor_value");
-            var gameTypes = new RequiredMember<GameType[]>("game_types");
-            var flags = new RequiredMember<ItemFlag[]>("flags");
-            var restrictions = new RequiredMember<ItemRestriction[]>("restrictions");
+            var gameTypes = new RequiredMember<GameType>("game_types");
+            var flags = new RequiredMember<ItemFlag>("flags");
+            var restrictions = new RequiredMember<ItemRestriction>("restrictions");
             var id = new RequiredMember<int>("id");
             var chatLink = new RequiredMember<string>("chat_link");
             var icon = new OptionalMember<string>("icon");
@@ -3058,9 +3059,9 @@ namespace GW2SDK.Items
                 Level = level.GetValue(),
                 Rarity = rarity.GetValue(missingMemberBehavior),
                 VendorValue = vendorValue.GetValue(),
-                GameTypes = gameTypes.GetValue(missingMemberBehavior),
-                Flags = flags.GetValue(missingMemberBehavior),
-                Restrictions = restrictions.GetValue(missingMemberBehavior),
+                GameTypes = gameTypes.GetValues(missingMemberBehavior),
+                Flags = flags.GetValues(missingMemberBehavior),
+                Restrictions = restrictions.GetValues(missingMemberBehavior),
                 ChatLink = chatLink.GetValue(),
                 Icon = icon.GetValueOrNull()
             };
@@ -3073,9 +3074,9 @@ namespace GW2SDK.Items
             var level = new RequiredMember<int>("level");
             var rarity = new RequiredMember<Rarity>("rarity");
             var vendorValue = new RequiredMember<Coin>("vendor_value");
-            var gameTypes = new RequiredMember<GameType[]>("game_types");
-            var flags = new RequiredMember<ItemFlag[]>("flags");
-            var restrictions = new RequiredMember<ItemRestriction[]>("restrictions");
+            var gameTypes = new RequiredMember<GameType>("game_types");
+            var flags = new RequiredMember<ItemFlag>("flags");
+            var restrictions = new RequiredMember<ItemRestriction>("restrictions");
             var id = new RequiredMember<int>("id");
             var chatLink = new RequiredMember<string>("chat_link");
             var icon = new OptionalMember<string>("icon");
@@ -3163,9 +3164,9 @@ namespace GW2SDK.Items
                 Level = level.GetValue(),
                 Rarity = rarity.GetValue(missingMemberBehavior),
                 VendorValue = vendorValue.GetValue(),
-                GameTypes = gameTypes.GetValue(missingMemberBehavior),
-                Flags = flags.GetValue(missingMemberBehavior),
-                Restrictions = restrictions.GetValue(missingMemberBehavior),
+                GameTypes = gameTypes.GetValues(missingMemberBehavior),
+                Flags = flags.GetValues(missingMemberBehavior),
+                Restrictions = restrictions.GetValues(missingMemberBehavior),
                 ChatLink = chatLink.GetValue(),
                 Icon = icon.GetValueOrNull()
             };
@@ -3181,9 +3182,9 @@ namespace GW2SDK.Items
             var level = new RequiredMember<int>("level");
             var rarity = new RequiredMember<Rarity>("rarity");
             var vendorValue = new RequiredMember<Coin>("vendor_value");
-            var gameTypes = new RequiredMember<GameType[]>("game_types");
-            var flags = new RequiredMember<ItemFlag[]>("flags");
-            var restrictions = new RequiredMember<ItemRestriction[]>("restrictions");
+            var gameTypes = new RequiredMember<GameType>("game_types");
+            var flags = new RequiredMember<ItemFlag>("flags");
+            var restrictions = new RequiredMember<ItemRestriction>("restrictions");
             var id = new RequiredMember<int>("id");
             var chatLink = new RequiredMember<string>("chat_link");
             var icon = new OptionalMember<string>("icon");
@@ -3271,9 +3272,9 @@ namespace GW2SDK.Items
                 Level = level.GetValue(),
                 Rarity = rarity.GetValue(missingMemberBehavior),
                 VendorValue = vendorValue.GetValue(),
-                GameTypes = gameTypes.GetValue(missingMemberBehavior),
-                Flags = flags.GetValue(missingMemberBehavior),
-                Restrictions = restrictions.GetValue(missingMemberBehavior),
+                GameTypes = gameTypes.GetValues(missingMemberBehavior),
+                Flags = flags.GetValues(missingMemberBehavior),
+                Restrictions = restrictions.GetValues(missingMemberBehavior),
                 ChatLink = chatLink.GetValue(),
                 Icon = icon.GetValueOrNull()
             };
@@ -3286,13 +3287,13 @@ namespace GW2SDK.Items
             var level = new RequiredMember<int>("level");
             var rarity = new RequiredMember<Rarity>("rarity");
             var vendorValue = new RequiredMember<Coin>("vendor_value");
-            var gameTypes = new RequiredMember<GameType[]>("game_types");
-            var flags = new RequiredMember<ItemFlag[]>("flags");
-            var restrictions = new RequiredMember<ItemRestriction[]>("restrictions");
+            var gameTypes = new RequiredMember<GameType>("game_types");
+            var flags = new RequiredMember<ItemFlag>("flags");
+            var restrictions = new RequiredMember<ItemRestriction>("restrictions");
             var id = new RequiredMember<int>("id");
             var chatLink = new RequiredMember<string>("chat_link");
             var icon = new OptionalMember<string>("icon");
-            var skins = new RequiredMember<int[]>("skins");
+            var skins = new RequiredMember<int>("skins");
             foreach (var member in json.EnumerateObject())
             {
                 if (member.NameEquals("type"))
@@ -3381,12 +3382,12 @@ namespace GW2SDK.Items
                 Level = level.GetValue(),
                 Rarity = rarity.GetValue(missingMemberBehavior),
                 VendorValue = vendorValue.GetValue(),
-                GameTypes = gameTypes.GetValue(missingMemberBehavior),
-                Flags = flags.GetValue(missingMemberBehavior),
-                Restrictions = restrictions.GetValue(missingMemberBehavior),
+                GameTypes = gameTypes.GetValues(missingMemberBehavior),
+                Flags = flags.GetValues(missingMemberBehavior),
+                Restrictions = restrictions.GetValues(missingMemberBehavior),
                 ChatLink = chatLink.GetValue(),
                 Icon = icon.GetValueOrNull(),
-                Skins = skins.Select(value => value.GetArray(item => item.GetInt32()))
+                Skins = skins.SelectMany(value => value.GetInt32())
             };
         }
 
@@ -3431,9 +3432,9 @@ namespace GW2SDK.Items
             var level = new RequiredMember<int>("level");
             var rarity = new RequiredMember<Rarity>("rarity");
             var vendorValue = new RequiredMember<Coin>("vendor_value");
-            var gameTypes = new RequiredMember<GameType[]>("game_types");
-            var flags = new RequiredMember<ItemFlag[]>("flags");
-            var restrictions = new RequiredMember<ItemRestriction[]>("restrictions");
+            var gameTypes = new RequiredMember<GameType>("game_types");
+            var flags = new RequiredMember<ItemFlag>("flags");
+            var restrictions = new RequiredMember<ItemRestriction>("restrictions");
             var id = new RequiredMember<int>("id");
             var chatLink = new RequiredMember<string>("chat_link");
             var icon = new OptionalMember<string>("icon");
@@ -3528,9 +3529,9 @@ namespace GW2SDK.Items
                 Level = level.GetValue(),
                 Rarity = rarity.GetValue(missingMemberBehavior),
                 VendorValue = vendorValue.GetValue(),
-                GameTypes = gameTypes.GetValue(missingMemberBehavior),
-                Flags = flags.GetValue(missingMemberBehavior),
-                Restrictions = restrictions.GetValue(missingMemberBehavior),
+                GameTypes = gameTypes.GetValues(missingMemberBehavior),
+                Flags = flags.GetValues(missingMemberBehavior),
+                Restrictions = restrictions.GetValues(missingMemberBehavior),
                 ChatLink = chatLink.GetValue(),
                 Icon = icon.GetValueOrNull()
             };
@@ -3543,9 +3544,9 @@ namespace GW2SDK.Items
             var level = new RequiredMember<int>("level");
             var rarity = new RequiredMember<Rarity>("rarity");
             var vendorValue = new RequiredMember<Coin>("vendor_value");
-            var gameTypes = new RequiredMember<GameType[]>("game_types");
-            var flags = new RequiredMember<ItemFlag[]>("flags");
-            var restrictions = new RequiredMember<ItemRestriction[]>("restrictions");
+            var gameTypes = new RequiredMember<GameType>("game_types");
+            var flags = new RequiredMember<ItemFlag>("flags");
+            var restrictions = new RequiredMember<ItemRestriction>("restrictions");
             var id = new RequiredMember<int>("id");
             var chatLink = new RequiredMember<string>("chat_link");
             var icon = new OptionalMember<string>("icon");
@@ -3640,9 +3641,9 @@ namespace GW2SDK.Items
                 Level = level.GetValue(),
                 Rarity = rarity.GetValue(missingMemberBehavior),
                 VendorValue = vendorValue.GetValue(),
-                GameTypes = gameTypes.GetValue(missingMemberBehavior),
-                Flags = flags.GetValue(missingMemberBehavior),
-                Restrictions = restrictions.GetValue(missingMemberBehavior),
+                GameTypes = gameTypes.GetValues(missingMemberBehavior),
+                Flags = flags.GetValues(missingMemberBehavior),
+                Restrictions = restrictions.GetValues(missingMemberBehavior),
                 ChatLink = chatLink.GetValue(),
                 Icon = icon.GetValueOrNull()
             };
@@ -3655,9 +3656,9 @@ namespace GW2SDK.Items
             var level = new RequiredMember<int>("level");
             var rarity = new RequiredMember<Rarity>("rarity");
             var vendorValue = new RequiredMember<Coin>("vendor_value");
-            var gameTypes = new RequiredMember<GameType[]>("game_types");
-            var flags = new RequiredMember<ItemFlag[]>("flags");
-            var restrictions = new RequiredMember<ItemRestriction[]>("restrictions");
+            var gameTypes = new RequiredMember<GameType>("game_types");
+            var flags = new RequiredMember<ItemFlag>("flags");
+            var restrictions = new RequiredMember<ItemRestriction>("restrictions");
             var id = new RequiredMember<int>("id");
             var chatLink = new RequiredMember<string>("chat_link");
             var icon = new OptionalMember<string>("icon");
@@ -3752,9 +3753,9 @@ namespace GW2SDK.Items
                 Level = level.GetValue(),
                 Rarity = rarity.GetValue(missingMemberBehavior),
                 VendorValue = vendorValue.GetValue(),
-                GameTypes = gameTypes.GetValue(missingMemberBehavior),
-                Flags = flags.GetValue(missingMemberBehavior),
-                Restrictions = restrictions.GetValue(missingMemberBehavior),
+                GameTypes = gameTypes.GetValues(missingMemberBehavior),
+                Flags = flags.GetValues(missingMemberBehavior),
+                Restrictions = restrictions.GetValues(missingMemberBehavior),
                 ChatLink = chatLink.GetValue(),
                 Icon = icon.GetValueOrNull()
             };
@@ -3770,9 +3771,9 @@ namespace GW2SDK.Items
             var level = new RequiredMember<int>("level");
             var rarity = new RequiredMember<Rarity>("rarity");
             var vendorValue = new RequiredMember<Coin>("vendor_value");
-            var gameTypes = new RequiredMember<GameType[]>("game_types");
-            var flags = new RequiredMember<ItemFlag[]>("flags");
-            var restrictions = new RequiredMember<ItemRestriction[]>("restrictions");
+            var gameTypes = new RequiredMember<GameType>("game_types");
+            var flags = new RequiredMember<ItemFlag>("flags");
+            var restrictions = new RequiredMember<ItemRestriction>("restrictions");
             var id = new RequiredMember<int>("id");
             var chatLink = new RequiredMember<string>("chat_link");
             var icon = new OptionalMember<string>("icon");
@@ -3867,9 +3868,9 @@ namespace GW2SDK.Items
                 Level = level.GetValue(),
                 Rarity = rarity.GetValue(missingMemberBehavior),
                 VendorValue = vendorValue.GetValue(),
-                GameTypes = gameTypes.GetValue(missingMemberBehavior),
-                Flags = flags.GetValue(missingMemberBehavior),
-                Restrictions = restrictions.GetValue(missingMemberBehavior),
+                GameTypes = gameTypes.GetValues(missingMemberBehavior),
+                Flags = flags.GetValues(missingMemberBehavior),
+                Restrictions = restrictions.GetValues(missingMemberBehavior),
                 ChatLink = chatLink.GetValue(),
                 Icon = icon.GetValueOrNull()
             };
@@ -3885,9 +3886,9 @@ namespace GW2SDK.Items
             var level = new RequiredMember<int>("level");
             var rarity = new RequiredMember<Rarity>("rarity");
             var vendorValue = new RequiredMember<Coin>("vendor_value");
-            var gameTypes = new RequiredMember<GameType[]>("game_types");
-            var flags = new RequiredMember<ItemFlag[]>("flags");
-            var restrictions = new RequiredMember<ItemRestriction[]>("restrictions");
+            var gameTypes = new RequiredMember<GameType>("game_types");
+            var flags = new RequiredMember<ItemFlag>("flags");
+            var restrictions = new RequiredMember<ItemRestriction>("restrictions");
             var id = new RequiredMember<int>("id");
             var chatLink = new RequiredMember<string>("chat_link");
             var icon = new OptionalMember<string>("icon");
@@ -3982,9 +3983,9 @@ namespace GW2SDK.Items
                 Level = level.GetValue(),
                 Rarity = rarity.GetValue(missingMemberBehavior),
                 VendorValue = vendorValue.GetValue(),
-                GameTypes = gameTypes.GetValue(missingMemberBehavior),
-                Flags = flags.GetValue(missingMemberBehavior),
-                Restrictions = restrictions.GetValue(missingMemberBehavior),
+                GameTypes = gameTypes.GetValues(missingMemberBehavior),
+                Flags = flags.GetValues(missingMemberBehavior),
+                Restrictions = restrictions.GetValues(missingMemberBehavior),
                 ChatLink = chatLink.GetValue(),
                 Icon = icon.GetValueOrNull()
             };
@@ -4000,9 +4001,9 @@ namespace GW2SDK.Items
             var level = new RequiredMember<int>("level");
             var rarity = new RequiredMember<Rarity>("rarity");
             var vendorValue = new RequiredMember<Coin>("vendor_value");
-            var gameTypes = new RequiredMember<GameType[]>("game_types");
-            var flags = new RequiredMember<ItemFlag[]>("flags");
-            var restrictions = new RequiredMember<ItemRestriction[]>("restrictions");
+            var gameTypes = new RequiredMember<GameType>("game_types");
+            var flags = new RequiredMember<ItemFlag>("flags");
+            var restrictions = new RequiredMember<ItemRestriction>("restrictions");
             var id = new RequiredMember<int>("id");
             var chatLink = new RequiredMember<string>("chat_link");
             var icon = new OptionalMember<string>("icon");
@@ -4097,9 +4098,9 @@ namespace GW2SDK.Items
                 Level = level.GetValue(),
                 Rarity = rarity.GetValue(missingMemberBehavior),
                 VendorValue = vendorValue.GetValue(),
-                GameTypes = gameTypes.GetValue(missingMemberBehavior),
-                Flags = flags.GetValue(missingMemberBehavior),
-                Restrictions = restrictions.GetValue(missingMemberBehavior),
+                GameTypes = gameTypes.GetValues(missingMemberBehavior),
+                Flags = flags.GetValues(missingMemberBehavior),
+                Restrictions = restrictions.GetValues(missingMemberBehavior),
                 ChatLink = chatLink.GetValue(),
                 Icon = icon.GetValueOrNull()
             };
@@ -4115,9 +4116,9 @@ namespace GW2SDK.Items
             var level = new RequiredMember<int>("level");
             var rarity = new RequiredMember<Rarity>("rarity");
             var vendorValue = new RequiredMember<Coin>("vendor_value");
-            var gameTypes = new RequiredMember<GameType[]>("game_types");
-            var flags = new RequiredMember<ItemFlag[]>("flags");
-            var restrictions = new RequiredMember<ItemRestriction[]>("restrictions");
+            var gameTypes = new RequiredMember<GameType>("game_types");
+            var flags = new RequiredMember<ItemFlag>("flags");
+            var restrictions = new RequiredMember<ItemRestriction>("restrictions");
             var id = new RequiredMember<int>("id");
             var chatLink = new RequiredMember<string>("chat_link");
             var icon = new OptionalMember<string>("icon");
@@ -4212,9 +4213,9 @@ namespace GW2SDK.Items
                 Level = level.GetValue(),
                 Rarity = rarity.GetValue(missingMemberBehavior),
                 VendorValue = vendorValue.GetValue(),
-                GameTypes = gameTypes.GetValue(missingMemberBehavior),
-                Flags = flags.GetValue(missingMemberBehavior),
-                Restrictions = restrictions.GetValue(missingMemberBehavior),
+                GameTypes = gameTypes.GetValues(missingMemberBehavior),
+                Flags = flags.GetValues(missingMemberBehavior),
+                Restrictions = restrictions.GetValues(missingMemberBehavior),
                 ChatLink = chatLink.GetValue(),
                 Icon = icon.GetValueOrNull()
             };
@@ -4227,9 +4228,9 @@ namespace GW2SDK.Items
             var level = new RequiredMember<int>("level");
             var rarity = new RequiredMember<Rarity>("rarity");
             var vendorValue = new RequiredMember<Coin>("vendor_value");
-            var gameTypes = new RequiredMember<GameType[]>("game_types");
-            var flags = new RequiredMember<ItemFlag[]>("flags");
-            var restrictions = new RequiredMember<ItemRestriction[]>("restrictions");
+            var gameTypes = new RequiredMember<GameType>("game_types");
+            var flags = new RequiredMember<ItemFlag>("flags");
+            var restrictions = new RequiredMember<ItemRestriction>("restrictions");
             var id = new RequiredMember<int>("id");
             var chatLink = new RequiredMember<string>("chat_link");
             var icon = new OptionalMember<string>("icon");
@@ -4324,9 +4325,9 @@ namespace GW2SDK.Items
                 Level = level.GetValue(),
                 Rarity = rarity.GetValue(missingMemberBehavior),
                 VendorValue = vendorValue.GetValue(),
-                GameTypes = gameTypes.GetValue(missingMemberBehavior),
-                Flags = flags.GetValue(missingMemberBehavior),
-                Restrictions = restrictions.GetValue(missingMemberBehavior),
+                GameTypes = gameTypes.GetValues(missingMemberBehavior),
+                Flags = flags.GetValues(missingMemberBehavior),
+                Restrictions = restrictions.GetValues(missingMemberBehavior),
                 ChatLink = chatLink.GetValue(),
                 Icon = icon.GetValueOrNull()
             };
@@ -4342,14 +4343,14 @@ namespace GW2SDK.Items
             var level = new RequiredMember<int>("level");
             var rarity = new RequiredMember<Rarity>("rarity");
             var vendorValue = new RequiredMember<Coin>("vendor_value");
-            var gameTypes = new RequiredMember<GameType[]>("game_types");
-            var flags = new RequiredMember<ItemFlag[]>("flags");
-            var restrictions = new RequiredMember<ItemRestriction[]>("restrictions");
+            var gameTypes = new RequiredMember<GameType>("game_types");
+            var flags = new RequiredMember<ItemFlag>("flags");
+            var restrictions = new RequiredMember<ItemRestriction>("restrictions");
             var id = new RequiredMember<int>("id");
             var chatLink = new RequiredMember<string>("chat_link");
             var icon = new OptionalMember<string>("icon");
             var recipeId = new RequiredMember<int>("recipe_id");
-            var extraRecipeIds = new OptionalMember<int[]>("extra_recipe_ids");
+            var extraRecipeIds = new OptionalMember<int>("extra_recipe_ids");
             foreach (var member in json.EnumerateObject())
             {
                 if (member.NameEquals("type"))
@@ -4449,13 +4450,13 @@ namespace GW2SDK.Items
                 Level = level.GetValue(),
                 Rarity = rarity.GetValue(missingMemberBehavior),
                 VendorValue = vendorValue.GetValue(),
-                GameTypes = gameTypes.GetValue(missingMemberBehavior),
-                Flags = flags.GetValue(missingMemberBehavior),
-                Restrictions = restrictions.GetValue(missingMemberBehavior),
+                GameTypes = gameTypes.GetValues(missingMemberBehavior),
+                Flags = flags.GetValues(missingMemberBehavior),
+                Restrictions = restrictions.GetValues(missingMemberBehavior),
                 ChatLink = chatLink.GetValue(),
                 Icon = icon.GetValueOrNull(),
                 RecipeId = recipeId.GetValue(),
-                ExtraRecipeIds = extraRecipeIds.Select(value => value.GetArray(item => item.GetInt32()))
+                ExtraRecipeIds = extraRecipeIds.SelectMany(value => value.GetInt32())
             };
         }
 
@@ -4466,9 +4467,9 @@ namespace GW2SDK.Items
             var level = new RequiredMember<int>("level");
             var rarity = new RequiredMember<Rarity>("rarity");
             var vendorValue = new RequiredMember<Coin>("vendor_value");
-            var gameTypes = new RequiredMember<GameType[]>("game_types");
-            var flags = new RequiredMember<ItemFlag[]>("flags");
-            var restrictions = new RequiredMember<ItemRestriction[]>("restrictions");
+            var gameTypes = new RequiredMember<GameType>("game_types");
+            var flags = new RequiredMember<ItemFlag>("flags");
+            var restrictions = new RequiredMember<ItemRestriction>("restrictions");
             var id = new RequiredMember<int>("id");
             var chatLink = new RequiredMember<string>("chat_link");
             var icon = new OptionalMember<string>("icon");
@@ -4568,9 +4569,9 @@ namespace GW2SDK.Items
                 Level = level.GetValue(),
                 Rarity = rarity.GetValue(missingMemberBehavior),
                 VendorValue = vendorValue.GetValue(),
-                GameTypes = gameTypes.GetValue(missingMemberBehavior),
-                Flags = flags.GetValue(missingMemberBehavior),
-                Restrictions = restrictions.GetValue(missingMemberBehavior),
+                GameTypes = gameTypes.GetValues(missingMemberBehavior),
+                Flags = flags.GetValues(missingMemberBehavior),
+                Restrictions = restrictions.GetValues(missingMemberBehavior),
                 ChatLink = chatLink.GetValue(),
                 Icon = icon.GetValueOrNull(),
                 ColorId = colorId.GetValue()
@@ -4587,9 +4588,9 @@ namespace GW2SDK.Items
             var level = new RequiredMember<int>("level");
             var rarity = new RequiredMember<Rarity>("rarity");
             var vendorValue = new RequiredMember<Coin>("vendor_value");
-            var gameTypes = new RequiredMember<GameType[]>("game_types");
-            var flags = new RequiredMember<ItemFlag[]>("flags");
-            var restrictions = new RequiredMember<ItemRestriction[]>("restrictions");
+            var gameTypes = new RequiredMember<GameType>("game_types");
+            var flags = new RequiredMember<ItemFlag>("flags");
+            var restrictions = new RequiredMember<ItemRestriction>("restrictions");
             var id = new RequiredMember<int>("id");
             var chatLink = new RequiredMember<string>("chat_link");
             var icon = new OptionalMember<string>("icon");
@@ -4684,9 +4685,9 @@ namespace GW2SDK.Items
                 Level = level.GetValue(),
                 Rarity = rarity.GetValue(missingMemberBehavior),
                 VendorValue = vendorValue.GetValue(),
-                GameTypes = gameTypes.GetValue(missingMemberBehavior),
-                Flags = flags.GetValue(missingMemberBehavior),
-                Restrictions = restrictions.GetValue(missingMemberBehavior),
+                GameTypes = gameTypes.GetValues(missingMemberBehavior),
+                Flags = flags.GetValues(missingMemberBehavior),
+                Restrictions = restrictions.GetValues(missingMemberBehavior),
                 ChatLink = chatLink.GetValue(),
                 Icon = icon.GetValueOrNull()
             };
@@ -4702,9 +4703,9 @@ namespace GW2SDK.Items
             var level = new RequiredMember<int>("level");
             var rarity = new RequiredMember<Rarity>("rarity");
             var vendorValue = new RequiredMember<Coin>("vendor_value");
-            var gameTypes = new RequiredMember<GameType[]>("game_types");
-            var flags = new RequiredMember<ItemFlag[]>("flags");
-            var restrictions = new RequiredMember<ItemRestriction[]>("restrictions");
+            var gameTypes = new RequiredMember<GameType>("game_types");
+            var flags = new RequiredMember<ItemFlag>("flags");
+            var restrictions = new RequiredMember<ItemRestriction>("restrictions");
             var id = new RequiredMember<int>("id");
             var chatLink = new RequiredMember<string>("chat_link");
             var icon = new OptionalMember<string>("icon");
@@ -4799,9 +4800,9 @@ namespace GW2SDK.Items
                 Level = level.GetValue(),
                 Rarity = rarity.GetValue(missingMemberBehavior),
                 VendorValue = vendorValue.GetValue(),
-                GameTypes = gameTypes.GetValue(missingMemberBehavior),
-                Flags = flags.GetValue(missingMemberBehavior),
-                Restrictions = restrictions.GetValue(missingMemberBehavior),
+                GameTypes = gameTypes.GetValues(missingMemberBehavior),
+                Flags = flags.GetValues(missingMemberBehavior),
+                Restrictions = restrictions.GetValues(missingMemberBehavior),
                 ChatLink = chatLink.GetValue(),
                 Icon = icon.GetValueOrNull()
             };
@@ -4814,9 +4815,9 @@ namespace GW2SDK.Items
             var level = new RequiredMember<int>("level");
             var rarity = new RequiredMember<Rarity>("rarity");
             var vendorValue = new RequiredMember<Coin>("vendor_value");
-            var gameTypes = new RequiredMember<GameType[]>("game_types");
-            var flags = new RequiredMember<ItemFlag[]>("flags");
-            var restrictions = new RequiredMember<ItemRestriction[]>("restrictions");
+            var gameTypes = new RequiredMember<GameType>("game_types");
+            var flags = new RequiredMember<ItemFlag>("flags");
+            var restrictions = new RequiredMember<ItemRestriction>("restrictions");
             var id = new RequiredMember<int>("id");
             var chatLink = new RequiredMember<string>("chat_link");
             var icon = new OptionalMember<string>("icon");
@@ -4911,9 +4912,9 @@ namespace GW2SDK.Items
                 Level = level.GetValue(),
                 Rarity = rarity.GetValue(missingMemberBehavior),
                 VendorValue = vendorValue.GetValue(),
-                GameTypes = gameTypes.GetValue(missingMemberBehavior),
-                Flags = flags.GetValue(missingMemberBehavior),
-                Restrictions = restrictions.GetValue(missingMemberBehavior),
+                GameTypes = gameTypes.GetValues(missingMemberBehavior),
+                Flags = flags.GetValues(missingMemberBehavior),
+                Restrictions = restrictions.GetValues(missingMemberBehavior),
                 ChatLink = chatLink.GetValue(),
                 Icon = icon.GetValueOrNull()
             };
@@ -4926,9 +4927,9 @@ namespace GW2SDK.Items
             var level = new RequiredMember<int>("level");
             var rarity = new RequiredMember<Rarity>("rarity");
             var vendorValue = new RequiredMember<Coin>("vendor_value");
-            var gameTypes = new RequiredMember<GameType[]>("game_types");
-            var flags = new RequiredMember<ItemFlag[]>("flags");
-            var restrictions = new RequiredMember<ItemRestriction[]>("restrictions");
+            var gameTypes = new RequiredMember<GameType>("game_types");
+            var flags = new RequiredMember<ItemFlag>("flags");
+            var restrictions = new RequiredMember<ItemRestriction>("restrictions");
             var id = new RequiredMember<int>("id");
             var chatLink = new RequiredMember<string>("chat_link");
             var icon = new OptionalMember<string>("icon");
@@ -5023,9 +5024,9 @@ namespace GW2SDK.Items
                 Level = level.GetValue(),
                 Rarity = rarity.GetValue(missingMemberBehavior),
                 VendorValue = vendorValue.GetValue(),
-                GameTypes = gameTypes.GetValue(missingMemberBehavior),
-                Flags = flags.GetValue(missingMemberBehavior),
-                Restrictions = restrictions.GetValue(missingMemberBehavior),
+                GameTypes = gameTypes.GetValues(missingMemberBehavior),
+                Flags = flags.GetValues(missingMemberBehavior),
+                Restrictions = restrictions.GetValues(missingMemberBehavior),
                 ChatLink = chatLink.GetValue(),
                 Icon = icon.GetValueOrNull()
             };
@@ -5038,9 +5039,9 @@ namespace GW2SDK.Items
             var level = new RequiredMember<int>("level");
             var rarity = new RequiredMember<Rarity>("rarity");
             var vendorValue = new RequiredMember<Coin>("vendor_value");
-            var gameTypes = new RequiredMember<GameType[]>("game_types");
-            var flags = new RequiredMember<ItemFlag[]>("flags");
-            var restrictions = new RequiredMember<ItemRestriction[]>("restrictions");
+            var gameTypes = new RequiredMember<GameType>("game_types");
+            var flags = new RequiredMember<ItemFlag>("flags");
+            var restrictions = new RequiredMember<ItemRestriction>("restrictions");
             var id = new RequiredMember<int>("id");
             var chatLink = new RequiredMember<string>("chat_link");
             var icon = new OptionalMember<string>("icon");
@@ -5135,9 +5136,9 @@ namespace GW2SDK.Items
                 Level = level.GetValue(),
                 Rarity = rarity.GetValue(missingMemberBehavior),
                 VendorValue = vendorValue.GetValue(),
-                GameTypes = gameTypes.GetValue(missingMemberBehavior),
-                Flags = flags.GetValue(missingMemberBehavior),
-                Restrictions = restrictions.GetValue(missingMemberBehavior),
+                GameTypes = gameTypes.GetValues(missingMemberBehavior),
+                Flags = flags.GetValues(missingMemberBehavior),
+                Restrictions = restrictions.GetValues(missingMemberBehavior),
                 ChatLink = chatLink.GetValue(),
                 Icon = icon.GetValueOrNull()
             };
@@ -5153,9 +5154,9 @@ namespace GW2SDK.Items
             var level = new RequiredMember<int>("level");
             var rarity = new RequiredMember<Rarity>("rarity");
             var vendorValue = new RequiredMember<Coin>("vendor_value");
-            var gameTypes = new RequiredMember<GameType[]>("game_types");
-            var flags = new RequiredMember<ItemFlag[]>("flags");
-            var restrictions = new RequiredMember<ItemRestriction[]>("restrictions");
+            var gameTypes = new RequiredMember<GameType>("game_types");
+            var flags = new RequiredMember<ItemFlag>("flags");
+            var restrictions = new RequiredMember<ItemRestriction>("restrictions");
             var id = new RequiredMember<int>("id");
             var chatLink = new RequiredMember<string>("chat_link");
             var icon = new OptionalMember<string>("icon");
@@ -5250,9 +5251,9 @@ namespace GW2SDK.Items
                 Level = level.GetValue(),
                 Rarity = rarity.GetValue(missingMemberBehavior),
                 VendorValue = vendorValue.GetValue(),
-                GameTypes = gameTypes.GetValue(missingMemberBehavior),
-                Flags = flags.GetValue(missingMemberBehavior),
-                Restrictions = restrictions.GetValue(missingMemberBehavior),
+                GameTypes = gameTypes.GetValues(missingMemberBehavior),
+                Flags = flags.GetValues(missingMemberBehavior),
+                Restrictions = restrictions.GetValues(missingMemberBehavior),
                 ChatLink = chatLink.GetValue(),
                 Icon = icon.GetValueOrNull()
             };
@@ -5265,9 +5266,9 @@ namespace GW2SDK.Items
             var level = new RequiredMember<int>("level");
             var rarity = new RequiredMember<Rarity>("rarity");
             var vendorValue = new RequiredMember<Coin>("vendor_value");
-            var gameTypes = new RequiredMember<GameType[]>("game_types");
-            var flags = new RequiredMember<ItemFlag[]>("flags");
-            var restrictions = new RequiredMember<ItemRestriction[]>("restrictions");
+            var gameTypes = new RequiredMember<GameType>("game_types");
+            var flags = new RequiredMember<ItemFlag>("flags");
+            var restrictions = new RequiredMember<ItemRestriction>("restrictions");
             var id = new RequiredMember<int>("id");
             var chatLink = new RequiredMember<string>("chat_link");
             var icon = new OptionalMember<string>("icon");
@@ -5355,9 +5356,9 @@ namespace GW2SDK.Items
                 Level = level.GetValue(),
                 Rarity = rarity.GetValue(missingMemberBehavior),
                 VendorValue = vendorValue.GetValue(),
-                GameTypes = gameTypes.GetValue(missingMemberBehavior),
-                Flags = flags.GetValue(missingMemberBehavior),
-                Restrictions = restrictions.GetValue(missingMemberBehavior),
+                GameTypes = gameTypes.GetValues(missingMemberBehavior),
+                Flags = flags.GetValues(missingMemberBehavior),
+                Restrictions = restrictions.GetValues(missingMemberBehavior),
                 ChatLink = chatLink.GetValue(),
                 Icon = icon.GetValueOrNull()
             };
@@ -5370,9 +5371,9 @@ namespace GW2SDK.Items
             var level = new RequiredMember<int>("level");
             var rarity = new RequiredMember<Rarity>("rarity");
             var vendorValue = new RequiredMember<Coin>("vendor_value");
-            var gameTypes = new RequiredMember<GameType[]>("game_types");
-            var flags = new RequiredMember<ItemFlag[]>("flags");
-            var restrictions = new RequiredMember<ItemRestriction[]>("restrictions");
+            var gameTypes = new RequiredMember<GameType>("game_types");
+            var flags = new RequiredMember<ItemFlag>("flags");
+            var restrictions = new RequiredMember<ItemRestriction>("restrictions");
             var id = new RequiredMember<int>("id");
             var chatLink = new RequiredMember<string>("chat_link");
             var icon = new OptionalMember<string>("icon");
@@ -5485,9 +5486,9 @@ namespace GW2SDK.Items
                 Level = level.GetValue(),
                 Rarity = rarity.GetValue(missingMemberBehavior),
                 VendorValue = vendorValue.GetValue(),
-                GameTypes = gameTypes.GetValue(missingMemberBehavior),
-                Flags = flags.GetValue(missingMemberBehavior),
-                Restrictions = restrictions.GetValue(missingMemberBehavior),
+                GameTypes = gameTypes.GetValues(missingMemberBehavior),
+                Flags = flags.GetValues(missingMemberBehavior),
+                Restrictions = restrictions.GetValues(missingMemberBehavior),
                 ChatLink = chatLink.GetValue(),
                 Icon = icon.GetValueOrNull(),
                 Duration = duration.Select(value => TimeSpan.FromMilliseconds(value.GetDouble())),
@@ -5517,9 +5518,9 @@ namespace GW2SDK.Items
             var level = new RequiredMember<int>("level");
             var rarity = new RequiredMember<Rarity>("rarity");
             var vendorValue = new RequiredMember<Coin>("vendor_value");
-            var gameTypes = new RequiredMember<GameType[]>("game_types");
-            var flags = new RequiredMember<ItemFlag[]>("flags");
-            var restrictions = new RequiredMember<ItemRestriction[]>("restrictions");
+            var gameTypes = new RequiredMember<GameType>("game_types");
+            var flags = new RequiredMember<ItemFlag>("flags");
+            var restrictions = new RequiredMember<ItemRestriction>("restrictions");
             var id = new RequiredMember<int>("id");
             var chatLink = new RequiredMember<string>("chat_link");
             var icon = new OptionalMember<string>("icon");
@@ -5607,9 +5608,9 @@ namespace GW2SDK.Items
                 Level = level.GetValue(),
                 Rarity = rarity.GetValue(missingMemberBehavior),
                 VendorValue = vendorValue.GetValue(),
-                GameTypes = gameTypes.GetValue(missingMemberBehavior),
-                Flags = flags.GetValue(missingMemberBehavior),
-                Restrictions = restrictions.GetValue(missingMemberBehavior),
+                GameTypes = gameTypes.GetValues(missingMemberBehavior),
+                Flags = flags.GetValues(missingMemberBehavior),
+                Restrictions = restrictions.GetValues(missingMemberBehavior),
                 ChatLink = chatLink.GetValue(),
                 Icon = icon.GetValueOrNull()
             };
@@ -5625,9 +5626,9 @@ namespace GW2SDK.Items
             var level = new RequiredMember<int>("level");
             var rarity = new RequiredMember<Rarity>("rarity");
             var vendorValue = new RequiredMember<Coin>("vendor_value");
-            var gameTypes = new RequiredMember<GameType[]>("game_types");
-            var flags = new RequiredMember<ItemFlag[]>("flags");
-            var restrictions = new RequiredMember<ItemRestriction[]>("restrictions");
+            var gameTypes = new RequiredMember<GameType>("game_types");
+            var flags = new RequiredMember<ItemFlag>("flags");
+            var restrictions = new RequiredMember<ItemRestriction>("restrictions");
             var id = new RequiredMember<int>("id");
             var chatLink = new RequiredMember<string>("chat_link");
             var icon = new OptionalMember<string>("icon");
@@ -5715,9 +5716,9 @@ namespace GW2SDK.Items
                 Level = level.GetValue(),
                 Rarity = rarity.GetValue(missingMemberBehavior),
                 VendorValue = vendorValue.GetValue(),
-                GameTypes = gameTypes.GetValue(missingMemberBehavior),
-                Flags = flags.GetValue(missingMemberBehavior),
-                Restrictions = restrictions.GetValue(missingMemberBehavior),
+                GameTypes = gameTypes.GetValues(missingMemberBehavior),
+                Flags = flags.GetValues(missingMemberBehavior),
+                Restrictions = restrictions.GetValues(missingMemberBehavior),
                 ChatLink = chatLink.GetValue(),
                 Icon = icon.GetValueOrNull()
             };
@@ -5730,9 +5731,9 @@ namespace GW2SDK.Items
             var level = new RequiredMember<int>("level");
             var rarity = new RequiredMember<Rarity>("rarity");
             var vendorValue = new RequiredMember<Coin>("vendor_value");
-            var gameTypes = new RequiredMember<GameType[]>("game_types");
-            var flags = new RequiredMember<ItemFlag[]>("flags");
-            var restrictions = new RequiredMember<ItemRestriction[]>("restrictions");
+            var gameTypes = new RequiredMember<GameType>("game_types");
+            var flags = new RequiredMember<ItemFlag>("flags");
+            var restrictions = new RequiredMember<ItemRestriction>("restrictions");
             var id = new RequiredMember<int>("id");
             var chatLink = new RequiredMember<string>("chat_link");
             var icon = new OptionalMember<string>("icon");
@@ -5820,9 +5821,9 @@ namespace GW2SDK.Items
                 Level = level.GetValue(),
                 Rarity = rarity.GetValue(missingMemberBehavior),
                 VendorValue = vendorValue.GetValue(),
-                GameTypes = gameTypes.GetValue(missingMemberBehavior),
-                Flags = flags.GetValue(missingMemberBehavior),
-                Restrictions = restrictions.GetValue(missingMemberBehavior),
+                GameTypes = gameTypes.GetValues(missingMemberBehavior),
+                Flags = flags.GetValues(missingMemberBehavior),
+                Restrictions = restrictions.GetValues(missingMemberBehavior),
                 ChatLink = chatLink.GetValue(),
                 Icon = icon.GetValueOrNull()
             };
@@ -5838,9 +5839,9 @@ namespace GW2SDK.Items
             var level = new RequiredMember<int>("level");
             var rarity = new RequiredMember<Rarity>("rarity");
             var vendorValue = new RequiredMember<Coin>("vendor_value");
-            var gameTypes = new RequiredMember<GameType[]>("game_types");
-            var flags = new RequiredMember<ItemFlag[]>("flags");
-            var restrictions = new RequiredMember<ItemRestriction[]>("restrictions");
+            var gameTypes = new RequiredMember<GameType>("game_types");
+            var flags = new RequiredMember<ItemFlag>("flags");
+            var restrictions = new RequiredMember<ItemRestriction>("restrictions");
             var id = new RequiredMember<int>("id");
             var chatLink = new RequiredMember<string>("chat_link");
             var icon = new OptionalMember<string>("icon");
@@ -5928,9 +5929,9 @@ namespace GW2SDK.Items
                 Level = level.GetValue(),
                 Rarity = rarity.GetValue(missingMemberBehavior),
                 VendorValue = vendorValue.GetValue(),
-                GameTypes = gameTypes.GetValue(missingMemberBehavior),
-                Flags = flags.GetValue(missingMemberBehavior),
-                Restrictions = restrictions.GetValue(missingMemberBehavior),
+                GameTypes = gameTypes.GetValues(missingMemberBehavior),
+                Flags = flags.GetValues(missingMemberBehavior),
+                Restrictions = restrictions.GetValues(missingMemberBehavior),
                 ChatLink = chatLink.GetValue(),
                 Icon = icon.GetValueOrNull()
             };
@@ -5943,9 +5944,9 @@ namespace GW2SDK.Items
             var level = new RequiredMember<int>("level");
             var rarity = new RequiredMember<Rarity>("rarity");
             var vendorValue = new RequiredMember<Coin>("vendor_value");
-            var gameTypes = new RequiredMember<GameType[]>("game_types");
-            var flags = new RequiredMember<ItemFlag[]>("flags");
-            var restrictions = new RequiredMember<ItemRestriction[]>("restrictions");
+            var gameTypes = new RequiredMember<GameType>("game_types");
+            var flags = new RequiredMember<ItemFlag>("flags");
+            var restrictions = new RequiredMember<ItemRestriction>("restrictions");
             var id = new RequiredMember<int>("id");
             var chatLink = new RequiredMember<string>("chat_link");
             var icon = new OptionalMember<string>("icon");
@@ -6033,9 +6034,9 @@ namespace GW2SDK.Items
                 Level = level.GetValue(),
                 Rarity = rarity.GetValue(missingMemberBehavior),
                 VendorValue = vendorValue.GetValue(),
-                GameTypes = gameTypes.GetValue(missingMemberBehavior),
-                Flags = flags.GetValue(missingMemberBehavior),
-                Restrictions = restrictions.GetValue(missingMemberBehavior),
+                GameTypes = gameTypes.GetValues(missingMemberBehavior),
+                Flags = flags.GetValues(missingMemberBehavior),
+                Restrictions = restrictions.GetValues(missingMemberBehavior),
                 ChatLink = chatLink.GetValue(),
                 Icon = icon.GetValueOrNull()
             };
@@ -6051,13 +6052,13 @@ namespace GW2SDK.Items
             var level = new RequiredMember<int>("level");
             var rarity = new RequiredMember<Rarity>("rarity");
             var vendorValue = new RequiredMember<Coin>("vendor_value");
-            var gameTypes = new RequiredMember<GameType[]>("game_types");
-            var flags = new RequiredMember<ItemFlag[]>("flags");
-            var restrictions = new RequiredMember<ItemRestriction[]>("restrictions");
+            var gameTypes = new RequiredMember<GameType>("game_types");
+            var flags = new RequiredMember<ItemFlag>("flags");
+            var restrictions = new RequiredMember<ItemRestriction>("restrictions");
             var id = new RequiredMember<int>("id");
             var chatLink = new RequiredMember<string>("chat_link");
             var icon = new OptionalMember<string>("icon");
-            var upgradesInto = new OptionalMember<ItemUpgrade[]>("upgrades_into");
+            var upgradesInto = new OptionalMember<ItemUpgrade>("upgrades_into");
             foreach (var member in json.EnumerateObject())
             {
                 if (member.NameEquals("type"))
@@ -6129,12 +6130,12 @@ namespace GW2SDK.Items
                 Level = level.GetValue(),
                 Rarity = rarity.GetValue(missingMemberBehavior),
                 VendorValue = vendorValue.GetValue(),
-                GameTypes = gameTypes.GetValue(missingMemberBehavior),
-                Flags = flags.GetValue(missingMemberBehavior),
-                Restrictions = restrictions.GetValue(missingMemberBehavior),
+                GameTypes = gameTypes.GetValues(missingMemberBehavior),
+                Flags = flags.GetValues(missingMemberBehavior),
+                Restrictions = restrictions.GetValues(missingMemberBehavior),
                 ChatLink = chatLink.GetValue(),
                 Icon = icon.GetValueOrNull(),
-                UpgradesInto = upgradesInto.Select(value => value.GetArray(item => ReadItemUpgrade(item, missingMemberBehavior)))
+                UpgradesInto = upgradesInto.SelectMany(value => ReadItemUpgrade(value, missingMemberBehavior))
             };
         }
 
@@ -6157,9 +6158,9 @@ namespace GW2SDK.Items
             var level = new RequiredMember<int>("level");
             var rarity = new RequiredMember<Rarity>("rarity");
             var vendorValue = new RequiredMember<Coin>("vendor_value");
-            var gameTypes = new RequiredMember<GameType[]>("game_types");
-            var flags = new RequiredMember<ItemFlag[]>("flags");
-            var restrictions = new RequiredMember<ItemRestriction[]>("restrictions");
+            var gameTypes = new RequiredMember<GameType>("game_types");
+            var flags = new RequiredMember<ItemFlag>("flags");
+            var restrictions = new RequiredMember<ItemRestriction>("restrictions");
             var id = new RequiredMember<int>("id");
             var chatLink = new RequiredMember<string>("chat_link");
             var icon = new OptionalMember<string>("icon");
@@ -6247,9 +6248,9 @@ namespace GW2SDK.Items
                 Level = level.GetValue(),
                 Rarity = rarity.GetValue(missingMemberBehavior),
                 VendorValue = vendorValue.GetValue(),
-                GameTypes = gameTypes.GetValue(missingMemberBehavior),
-                Flags = flags.GetValue(missingMemberBehavior),
-                Restrictions = restrictions.GetValue(missingMemberBehavior),
+                GameTypes = gameTypes.GetValues(missingMemberBehavior),
+                Flags = flags.GetValues(missingMemberBehavior),
+                Restrictions = restrictions.GetValues(missingMemberBehavior),
                 ChatLink = chatLink.GetValue(),
                 Icon = icon.GetValueOrNull()
             };
@@ -6262,9 +6263,9 @@ namespace GW2SDK.Items
             var level = new RequiredMember<int>("level");
             var rarity = new RequiredMember<Rarity>("rarity");
             var vendorValue = new RequiredMember<Coin>("vendor_value");
-            var gameTypes = new RequiredMember<GameType[]>("game_types");
-            var flags = new RequiredMember<ItemFlag[]>("flags");
-            var restrictions = new RequiredMember<ItemRestriction[]>("restrictions");
+            var gameTypes = new RequiredMember<GameType>("game_types");
+            var flags = new RequiredMember<ItemFlag>("flags");
+            var restrictions = new RequiredMember<ItemRestriction>("restrictions");
             var id = new RequiredMember<int>("id");
             var chatLink = new RequiredMember<string>("chat_link");
             var icon = new OptionalMember<string>("icon");
@@ -6352,9 +6353,9 @@ namespace GW2SDK.Items
                 Level = level.GetValue(),
                 Rarity = rarity.GetValue(missingMemberBehavior),
                 VendorValue = vendorValue.GetValue(),
-                GameTypes = gameTypes.GetValue(missingMemberBehavior),
-                Flags = flags.GetValue(missingMemberBehavior),
-                Restrictions = restrictions.GetValue(missingMemberBehavior),
+                GameTypes = gameTypes.GetValues(missingMemberBehavior),
+                Flags = flags.GetValues(missingMemberBehavior),
+                Restrictions = restrictions.GetValues(missingMemberBehavior),
                 ChatLink = chatLink.GetValue(),
                 Icon = icon.GetValueOrNull()
             };
@@ -6367,9 +6368,9 @@ namespace GW2SDK.Items
             var level = new RequiredMember<int>("level");
             var rarity = new RequiredMember<Rarity>("rarity");
             var vendorValue = new RequiredMember<Coin>("vendor_value");
-            var gameTypes = new RequiredMember<GameType[]>("game_types");
-            var flags = new RequiredMember<ItemFlag[]>("flags");
-            var restrictions = new RequiredMember<ItemRestriction[]>("restrictions");
+            var gameTypes = new RequiredMember<GameType>("game_types");
+            var flags = new RequiredMember<ItemFlag>("flags");
+            var restrictions = new RequiredMember<ItemRestriction>("restrictions");
             var id = new RequiredMember<int>("id");
             var chatLink = new RequiredMember<string>("chat_link");
             var icon = new OptionalMember<string>("icon");
@@ -6457,9 +6458,9 @@ namespace GW2SDK.Items
                 Level = level.GetValue(),
                 Rarity = rarity.GetValue(missingMemberBehavior),
                 VendorValue = vendorValue.GetValue(),
-                GameTypes = gameTypes.GetValue(missingMemberBehavior),
-                Flags = flags.GetValue(missingMemberBehavior),
-                Restrictions = restrictions.GetValue(missingMemberBehavior),
+                GameTypes = gameTypes.GetValues(missingMemberBehavior),
+                Flags = flags.GetValues(missingMemberBehavior),
+                Restrictions = restrictions.GetValues(missingMemberBehavior),
                 ChatLink = chatLink.GetValue(),
                 Icon = icon.GetValueOrNull()
             };
@@ -6472,9 +6473,9 @@ namespace GW2SDK.Items
             var level = new RequiredMember<int>("level");
             var rarity = new RequiredMember<Rarity>("rarity");
             var vendorValue = new RequiredMember<Coin>("vendor_value");
-            var gameTypes = new RequiredMember<GameType[]>("game_types");
-            var flags = new RequiredMember<ItemFlag[]>("flags");
-            var restrictions = new RequiredMember<ItemRestriction[]>("restrictions");
+            var gameTypes = new RequiredMember<GameType>("game_types");
+            var flags = new RequiredMember<ItemFlag>("flags");
+            var restrictions = new RequiredMember<ItemRestriction>("restrictions");
             var id = new RequiredMember<int>("id");
             var chatLink = new RequiredMember<string>("chat_link");
             var icon = new OptionalMember<string>("icon");
@@ -6562,9 +6563,9 @@ namespace GW2SDK.Items
                 Level = level.GetValue(),
                 Rarity = rarity.GetValue(missingMemberBehavior),
                 VendorValue = vendorValue.GetValue(),
-                GameTypes = gameTypes.GetValue(missingMemberBehavior),
-                Flags = flags.GetValue(missingMemberBehavior),
-                Restrictions = restrictions.GetValue(missingMemberBehavior),
+                GameTypes = gameTypes.GetValues(missingMemberBehavior),
+                Flags = flags.GetValues(missingMemberBehavior),
+                Restrictions = restrictions.GetValues(missingMemberBehavior),
                 ChatLink = chatLink.GetValue(),
                 Icon = icon.GetValueOrNull()
             };
@@ -6577,9 +6578,9 @@ namespace GW2SDK.Items
             var level = new RequiredMember<int>("level");
             var rarity = new RequiredMember<Rarity>("rarity");
             var vendorValue = new RequiredMember<Coin>("vendor_value");
-            var gameTypes = new RequiredMember<GameType[]>("game_types");
-            var flags = new RequiredMember<ItemFlag[]>("flags");
-            var restrictions = new RequiredMember<ItemRestriction[]>("restrictions");
+            var gameTypes = new RequiredMember<GameType>("game_types");
+            var flags = new RequiredMember<ItemFlag>("flags");
+            var restrictions = new RequiredMember<ItemRestriction>("restrictions");
             var id = new RequiredMember<int>("id");
             var chatLink = new RequiredMember<string>("chat_link");
             var icon = new OptionalMember<string>("icon");
@@ -6667,9 +6668,9 @@ namespace GW2SDK.Items
                 Level = level.GetValue(),
                 Rarity = rarity.GetValue(missingMemberBehavior),
                 VendorValue = vendorValue.GetValue(),
-                GameTypes = gameTypes.GetValue(missingMemberBehavior),
-                Flags = flags.GetValue(missingMemberBehavior),
-                Restrictions = restrictions.GetValue(missingMemberBehavior),
+                GameTypes = gameTypes.GetValues(missingMemberBehavior),
+                Flags = flags.GetValues(missingMemberBehavior),
+                Restrictions = restrictions.GetValues(missingMemberBehavior),
                 ChatLink = chatLink.GetValue(),
                 Icon = icon.GetValueOrNull()
             };
@@ -6694,9 +6695,9 @@ namespace GW2SDK.Items
             var level = new RequiredMember<int>("level");
             var rarity = new RequiredMember<Rarity>("rarity");
             var vendorValue = new RequiredMember<Coin>("vendor_value");
-            var gameTypes = new RequiredMember<GameType[]>("game_types");
-            var flags = new RequiredMember<ItemFlag[]>("flags");
-            var restrictions = new RequiredMember<ItemRestriction[]>("restrictions");
+            var gameTypes = new RequiredMember<GameType>("game_types");
+            var flags = new RequiredMember<ItemFlag>("flags");
+            var restrictions = new RequiredMember<ItemRestriction>("restrictions");
             var id = new RequiredMember<int>("id");
             var chatLink = new RequiredMember<string>("chat_link");
             var icon = new OptionalMember<string>("icon");
@@ -6784,9 +6785,9 @@ namespace GW2SDK.Items
                 Level = level.GetValue(),
                 Rarity = rarity.GetValue(missingMemberBehavior),
                 VendorValue = vendorValue.GetValue(),
-                GameTypes = gameTypes.GetValue(missingMemberBehavior),
-                Flags = flags.GetValue(missingMemberBehavior),
-                Restrictions = restrictions.GetValue(missingMemberBehavior),
+                GameTypes = gameTypes.GetValues(missingMemberBehavior),
+                Flags = flags.GetValues(missingMemberBehavior),
+                Restrictions = restrictions.GetValues(missingMemberBehavior),
                 ChatLink = chatLink.GetValue(),
                 Icon = icon.GetValueOrNull()
             };
@@ -6799,9 +6800,9 @@ namespace GW2SDK.Items
             var level = new RequiredMember<int>("level");
             var rarity = new RequiredMember<Rarity>("rarity");
             var vendorValue = new RequiredMember<Coin>("vendor_value");
-            var gameTypes = new RequiredMember<GameType[]>("game_types");
-            var flags = new RequiredMember<ItemFlag[]>("flags");
-            var restrictions = new RequiredMember<ItemRestriction[]>("restrictions");
+            var gameTypes = new RequiredMember<GameType>("game_types");
+            var flags = new RequiredMember<ItemFlag>("flags");
+            var restrictions = new RequiredMember<ItemRestriction>("restrictions");
             var id = new RequiredMember<int>("id");
             var chatLink = new RequiredMember<string>("chat_link");
             var icon = new OptionalMember<string>("icon");
@@ -6889,9 +6890,9 @@ namespace GW2SDK.Items
                 Level = level.GetValue(),
                 Rarity = rarity.GetValue(missingMemberBehavior),
                 VendorValue = vendorValue.GetValue(),
-                GameTypes = gameTypes.GetValue(missingMemberBehavior),
-                Flags = flags.GetValue(missingMemberBehavior),
-                Restrictions = restrictions.GetValue(missingMemberBehavior),
+                GameTypes = gameTypes.GetValues(missingMemberBehavior),
+                Flags = flags.GetValues(missingMemberBehavior),
+                Restrictions = restrictions.GetValues(missingMemberBehavior),
                 ChatLink = chatLink.GetValue(),
                 Icon = icon.GetValueOrNull()
             };
@@ -6904,13 +6905,13 @@ namespace GW2SDK.Items
             var level = new RequiredMember<int>("level");
             var rarity = new RequiredMember<Rarity>("rarity");
             var vendorValue = new RequiredMember<Coin>("vendor_value");
-            var gameTypes = new RequiredMember<GameType[]>("game_types");
-            var flags = new RequiredMember<ItemFlag[]>("flags");
-            var restrictions = new RequiredMember<ItemRestriction[]>("restrictions");
+            var gameTypes = new RequiredMember<GameType>("game_types");
+            var flags = new RequiredMember<ItemFlag>("flags");
+            var restrictions = new RequiredMember<ItemRestriction>("restrictions");
             var id = new RequiredMember<int>("id");
             var chatLink = new RequiredMember<string>("chat_link");
             var icon = new OptionalMember<string>("icon");
-            var vendorIds = new OptionalMember<int[]>("vendor_ids");
+            var vendorIds = new OptionalMember<int>("vendor_ids");
             var guildUpgradeId = new NullableMember<int>("guild_upgrade_id");
             foreach (var member in json.EnumerateObject())
             {
@@ -7004,12 +7005,12 @@ namespace GW2SDK.Items
                 Level = level.GetValue(),
                 Rarity = rarity.GetValue(missingMemberBehavior),
                 VendorValue = vendorValue.GetValue(),
-                GameTypes = gameTypes.GetValue(missingMemberBehavior),
-                Flags = flags.GetValue(missingMemberBehavior),
-                Restrictions = restrictions.GetValue(missingMemberBehavior),
+                GameTypes = gameTypes.GetValues(missingMemberBehavior),
+                Flags = flags.GetValues(missingMemberBehavior),
+                Restrictions = restrictions.GetValues(missingMemberBehavior),
                 ChatLink = chatLink.GetValue(),
                 Icon = icon.GetValueOrNull(),
-                VendorIds = vendorIds.Select(value => value.GetArray(item => item.GetInt32())),
+                VendorIds = vendorIds.SelectMany(value => value.GetInt32()),
                 GuildUpgradeId = guildUpgradeId.GetValue()
             };
         }
@@ -7024,9 +7025,9 @@ namespace GW2SDK.Items
             var level = new RequiredMember<int>("level");
             var rarity = new RequiredMember<Rarity>("rarity");
             var vendorValue = new RequiredMember<Coin>("vendor_value");
-            var gameTypes = new RequiredMember<GameType[]>("game_types");
-            var flags = new RequiredMember<ItemFlag[]>("flags");
-            var restrictions = new RequiredMember<ItemRestriction[]>("restrictions");
+            var gameTypes = new RequiredMember<GameType>("game_types");
+            var flags = new RequiredMember<ItemFlag>("flags");
+            var restrictions = new RequiredMember<ItemRestriction>("restrictions");
             var id = new RequiredMember<int>("id");
             var chatLink = new RequiredMember<string>("chat_link");
             var icon = new OptionalMember<string>("icon");
@@ -7114,9 +7115,9 @@ namespace GW2SDK.Items
                 Level = level.GetValue(),
                 Rarity = rarity.GetValue(missingMemberBehavior),
                 VendorValue = vendorValue.GetValue(),
-                GameTypes = gameTypes.GetValue(missingMemberBehavior),
-                Flags = flags.GetValue(missingMemberBehavior),
-                Restrictions = restrictions.GetValue(missingMemberBehavior),
+                GameTypes = gameTypes.GetValues(missingMemberBehavior),
+                Flags = flags.GetValues(missingMemberBehavior),
+                Restrictions = restrictions.GetValues(missingMemberBehavior),
                 ChatLink = chatLink.GetValue(),
                 Icon = icon.GetValueOrNull()
             };
@@ -7132,9 +7133,9 @@ namespace GW2SDK.Items
             var level = new RequiredMember<int>("level");
             var rarity = new RequiredMember<Rarity>("rarity");
             var vendorValue = new RequiredMember<Coin>("vendor_value");
-            var gameTypes = new RequiredMember<GameType[]>("game_types");
-            var flags = new RequiredMember<ItemFlag[]>("flags");
-            var restrictions = new RequiredMember<ItemRestriction[]>("restrictions");
+            var gameTypes = new RequiredMember<GameType>("game_types");
+            var flags = new RequiredMember<ItemFlag>("flags");
+            var restrictions = new RequiredMember<ItemRestriction>("restrictions");
             var id = new RequiredMember<int>("id");
             var chatLink = new RequiredMember<string>("chat_link");
             var icon = new OptionalMember<string>("icon");
@@ -7222,9 +7223,9 @@ namespace GW2SDK.Items
                 Level = level.GetValue(),
                 Rarity = rarity.GetValue(missingMemberBehavior),
                 VendorValue = vendorValue.GetValue(),
-                GameTypes = gameTypes.GetValue(missingMemberBehavior),
-                Flags = flags.GetValue(missingMemberBehavior),
-                Restrictions = restrictions.GetValue(missingMemberBehavior),
+                GameTypes = gameTypes.GetValues(missingMemberBehavior),
+                Flags = flags.GetValues(missingMemberBehavior),
+                Restrictions = restrictions.GetValues(missingMemberBehavior),
                 ChatLink = chatLink.GetValue(),
                 Icon = icon.GetValueOrNull()
             };
@@ -7237,9 +7238,9 @@ namespace GW2SDK.Items
             var level = new RequiredMember<int>("level");
             var rarity = new RequiredMember<Rarity>("rarity");
             var vendorValue = new RequiredMember<Coin>("vendor_value");
-            var gameTypes = new RequiredMember<GameType[]>("game_types");
-            var flags = new RequiredMember<ItemFlag[]>("flags");
-            var restrictions = new RequiredMember<ItemRestriction[]>("restrictions");
+            var gameTypes = new RequiredMember<GameType>("game_types");
+            var flags = new RequiredMember<ItemFlag>("flags");
+            var restrictions = new RequiredMember<ItemRestriction>("restrictions");
             var id = new RequiredMember<int>("id");
             var chatLink = new RequiredMember<string>("chat_link");
             var icon = new OptionalMember<string>("icon");
@@ -7310,9 +7311,9 @@ namespace GW2SDK.Items
                 Level = level.GetValue(),
                 Rarity = rarity.GetValue(missingMemberBehavior),
                 VendorValue = vendorValue.GetValue(),
-                GameTypes = gameTypes.GetValue(missingMemberBehavior),
-                Flags = flags.GetValue(missingMemberBehavior),
-                Restrictions = restrictions.GetValue(missingMemberBehavior),
+                GameTypes = gameTypes.GetValues(missingMemberBehavior),
+                Flags = flags.GetValues(missingMemberBehavior),
+                Restrictions = restrictions.GetValues(missingMemberBehavior),
                 ChatLink = chatLink.GetValue(),
                 Icon = icon.GetValueOrNull()
             };
@@ -7325,9 +7326,9 @@ namespace GW2SDK.Items
             var level = new RequiredMember<int>("level");
             var rarity = new RequiredMember<Rarity>("rarity");
             var vendorValue = new RequiredMember<Coin>("vendor_value");
-            var gameTypes = new RequiredMember<GameType[]>("game_types");
-            var flags = new RequiredMember<ItemFlag[]>("flags");
-            var restrictions = new RequiredMember<ItemRestriction[]>("restrictions");
+            var gameTypes = new RequiredMember<GameType>("game_types");
+            var flags = new RequiredMember<ItemFlag>("flags");
+            var restrictions = new RequiredMember<ItemRestriction>("restrictions");
             var id = new RequiredMember<int>("id");
             var chatLink = new RequiredMember<string>("chat_link");
             var icon = new OptionalMember<string>("icon");
@@ -7413,9 +7414,9 @@ namespace GW2SDK.Items
                 Level = level.GetValue(),
                 Rarity = rarity.GetValue(missingMemberBehavior),
                 VendorValue = vendorValue.GetValue(),
-                GameTypes = gameTypes.GetValue(missingMemberBehavior),
-                Flags = flags.GetValue(missingMemberBehavior),
-                Restrictions = restrictions.GetValue(missingMemberBehavior),
+                GameTypes = gameTypes.GetValues(missingMemberBehavior),
+                Flags = flags.GetValues(missingMemberBehavior),
+                Restrictions = restrictions.GetValues(missingMemberBehavior),
                 ChatLink = chatLink.GetValue(),
                 Icon = icon.GetValueOrNull(),
                 MinipetId = minipetId.GetValue()
@@ -7435,9 +7436,9 @@ namespace GW2SDK.Items
             var level = new RequiredMember<int>("level");
             var rarity = new RequiredMember<Rarity>("rarity");
             var vendorValue = new RequiredMember<Coin>("vendor_value");
-            var gameTypes = new RequiredMember<GameType[]>("game_types");
-            var flags = new RequiredMember<ItemFlag[]>("flags");
-            var restrictions = new RequiredMember<ItemRestriction[]>("restrictions");
+            var gameTypes = new RequiredMember<GameType>("game_types");
+            var flags = new RequiredMember<ItemFlag>("flags");
+            var restrictions = new RequiredMember<ItemRestriction>("restrictions");
             var id = new RequiredMember<int>("id");
             var chatLink = new RequiredMember<string>("chat_link");
             var icon = new OptionalMember<string>("icon");
@@ -7518,9 +7519,9 @@ namespace GW2SDK.Items
                 Level = level.GetValue(),
                 Rarity = rarity.GetValue(missingMemberBehavior),
                 VendorValue = vendorValue.GetValue(),
-                GameTypes = gameTypes.GetValue(missingMemberBehavior),
-                Flags = flags.GetValue(missingMemberBehavior),
-                Restrictions = restrictions.GetValue(missingMemberBehavior),
+                GameTypes = gameTypes.GetValues(missingMemberBehavior),
+                Flags = flags.GetValues(missingMemberBehavior),
+                Restrictions = restrictions.GetValues(missingMemberBehavior),
                 ChatLink = chatLink.GetValue(),
                 Icon = icon.GetValueOrNull()
             };
@@ -7533,9 +7534,9 @@ namespace GW2SDK.Items
             var level = new RequiredMember<int>("level");
             var rarity = new RequiredMember<Rarity>("rarity");
             var vendorValue = new RequiredMember<Coin>("vendor_value");
-            var gameTypes = new RequiredMember<GameType[]>("game_types");
-            var flags = new RequiredMember<ItemFlag[]>("flags");
-            var restrictions = new RequiredMember<ItemRestriction[]>("restrictions");
+            var gameTypes = new RequiredMember<GameType>("game_types");
+            var flags = new RequiredMember<ItemFlag>("flags");
+            var restrictions = new RequiredMember<ItemRestriction>("restrictions");
             var id = new RequiredMember<int>("id");
             var chatLink = new RequiredMember<string>("chat_link");
             var icon = new OptionalMember<string>("icon");
@@ -7628,9 +7629,9 @@ namespace GW2SDK.Items
                 Level = level.GetValue(),
                 Rarity = rarity.GetValue(missingMemberBehavior),
                 VendorValue = vendorValue.GetValue(),
-                GameTypes = gameTypes.GetValue(missingMemberBehavior),
-                Flags = flags.GetValue(missingMemberBehavior),
-                Restrictions = restrictions.GetValue(missingMemberBehavior),
+                GameTypes = gameTypes.GetValues(missingMemberBehavior),
+                Flags = flags.GetValues(missingMemberBehavior),
+                Restrictions = restrictions.GetValues(missingMemberBehavior),
                 ChatLink = chatLink.GetValue(),
                 Icon = icon.GetValueOrNull(),
                 Charges = charges.GetValue()
@@ -7654,19 +7655,19 @@ namespace GW2SDK.Items
             var level = new RequiredMember<int>("level");
             var rarity = new RequiredMember<Rarity>("rarity");
             var vendorValue = new RequiredMember<Coin>("vendor_value");
-            var gameTypes = new RequiredMember<GameType[]>("game_types");
-            var flags = new RequiredMember<ItemFlag[]>("flags");
-            var restrictions = new RequiredMember<ItemRestriction[]>("restrictions");
+            var gameTypes = new RequiredMember<GameType>("game_types");
+            var flags = new RequiredMember<ItemFlag>("flags");
+            var restrictions = new RequiredMember<ItemRestriction>("restrictions");
             var id = new RequiredMember<int>("id");
             var chatLink = new RequiredMember<string>("chat_link");
             var icon = new OptionalMember<string>("icon");
-            var infusionSlots = new RequiredMember<InfusionSlot[]>("infusion_slots");
+            var infusionSlots = new RequiredMember<InfusionSlot>("infusion_slots");
             var attributeAdjustment = new RequiredMember<double>("attribute_adjustment");
             var infixUpgrade = new OptionalMember<InfixUpgrade>("infix_upgrade");
             var suffixItemId = new NullableMember<int>("suffix_item_id");
-            var statChoices = new OptionalMember<int[]>("stat_choices");
-            var upgradesInto = new OptionalMember<ItemUpgrade[]>("upgrades_into");
-            var upgradesFrom = new OptionalMember<ItemUpgrade[]>("upgrades_from");
+            var statChoices = new OptionalMember<int>("stat_choices");
+            var upgradesInto = new OptionalMember<ItemUpgrade>("upgrades_into");
+            var upgradesFrom = new OptionalMember<ItemUpgrade>("upgrades_from");
             foreach (var member in json.EnumerateObject())
             {
                 if (member.NameEquals("type"))
@@ -7779,18 +7780,18 @@ namespace GW2SDK.Items
                 Level = level.GetValue(),
                 Rarity = rarity.GetValue(missingMemberBehavior),
                 VendorValue = vendorValue.GetValue(),
-                GameTypes = gameTypes.GetValue(missingMemberBehavior),
-                Flags = flags.GetValue(missingMemberBehavior),
-                Restrictions = restrictions.GetValue(missingMemberBehavior),
+                GameTypes = gameTypes.GetValues(missingMemberBehavior),
+                Flags = flags.GetValues(missingMemberBehavior),
+                Restrictions = restrictions.GetValues(missingMemberBehavior),
                 ChatLink = chatLink.GetValue(),
                 Icon = icon.GetValueOrNull(),
-                InfusionSlots = infusionSlots.Select(value => value.GetArray(item => ReadInfusionSlot(item, missingMemberBehavior))),
+                InfusionSlots = infusionSlots.SelectMany(value => ReadInfusionSlot(value, missingMemberBehavior)),
                 AttributeAdjustment = attributeAdjustment.GetValue(),
-                StatChoices = statChoices.Select(value => value.GetArray(item => item.GetInt32())),
+                StatChoices = statChoices.SelectMany(value => value.GetInt32()),
                 Prefix = infixUpgrade.Select(value => ReadInfixUpgrade(value, missingMemberBehavior)),
                 SuffixItemId = suffixItemId.GetValue(),
-                UpgradesInto = upgradesInto.Select(value => value.GetArray(item => ReadItemUpgrade(item, missingMemberBehavior))),
-                UpgradesFrom = upgradesFrom.Select(value => value.GetArray(item => ReadItemUpgrade(item, missingMemberBehavior)))
+                UpgradesInto = upgradesInto.SelectMany(value => ReadItemUpgrade(value, missingMemberBehavior)),
+                UpgradesFrom = upgradesFrom.SelectMany(value => ReadItemUpgrade(value, missingMemberBehavior))
             };
         }
 
@@ -7801,19 +7802,19 @@ namespace GW2SDK.Items
             var level = new RequiredMember<int>("level");
             var rarity = new RequiredMember<Rarity>("rarity");
             var vendorValue = new RequiredMember<Coin>("vendor_value");
-            var gameTypes = new RequiredMember<GameType[]>("game_types");
-            var flags = new RequiredMember<ItemFlag[]>("flags");
-            var restrictions = new RequiredMember<ItemRestriction[]>("restrictions");
+            var gameTypes = new RequiredMember<GameType>("game_types");
+            var flags = new RequiredMember<ItemFlag>("flags");
+            var restrictions = new RequiredMember<ItemRestriction>("restrictions");
             var id = new RequiredMember<int>("id");
             var chatLink = new RequiredMember<string>("chat_link");
             var icon = new OptionalMember<string>("icon");
-            var infusionSlots = new RequiredMember<InfusionSlot[]>("infusion_slots");
+            var infusionSlots = new RequiredMember<InfusionSlot>("infusion_slots");
             var attributeAdjustment = new RequiredMember<double>("attribute_adjustment");
             var infixUpgrade = new OptionalMember<InfixUpgrade>("infix_upgrade");
             var suffixItemId = new NullableMember<int>("suffix_item_id");
-            var statChoices = new OptionalMember<int[]>("stat_choices");
-            var upgradesInto = new OptionalMember<ItemUpgrade[]>("upgrades_into");
-            var upgradesFrom = new OptionalMember<ItemUpgrade[]>("upgrades_from");
+            var statChoices = new OptionalMember<int>("stat_choices");
+            var upgradesInto = new OptionalMember<ItemUpgrade>("upgrades_into");
+            var upgradesFrom = new OptionalMember<ItemUpgrade>("upgrades_from");
             foreach (var member in json.EnumerateObject())
             {
                 if (member.NameEquals("type"))
@@ -7926,18 +7927,18 @@ namespace GW2SDK.Items
                 Level = level.GetValue(),
                 Rarity = rarity.GetValue(missingMemberBehavior),
                 VendorValue = vendorValue.GetValue(),
-                GameTypes = gameTypes.GetValue(missingMemberBehavior),
-                Flags = flags.GetValue(missingMemberBehavior),
-                Restrictions = restrictions.GetValue(missingMemberBehavior),
+                GameTypes = gameTypes.GetValues(missingMemberBehavior),
+                Flags = flags.GetValues(missingMemberBehavior),
+                Restrictions = restrictions.GetValues(missingMemberBehavior),
                 ChatLink = chatLink.GetValue(),
                 Icon = icon.GetValueOrNull(),
-                InfusionSlots = infusionSlots.Select(value => value.GetArray(item => ReadInfusionSlot(item, missingMemberBehavior))),
+                InfusionSlots = infusionSlots.SelectMany(value => ReadInfusionSlot(value, missingMemberBehavior)),
                 AttributeAdjustment = attributeAdjustment.GetValue(),
-                StatChoices = statChoices.Select(value => value.GetArray(item => item.GetInt32())),
+                StatChoices = statChoices.SelectMany(value => value.GetInt32()),
                 Prefix = infixUpgrade.Select(value => ReadInfixUpgrade(value, missingMemberBehavior)),
                 SuffixItemId = suffixItemId.GetValue(),
-                UpgradesInto = upgradesInto.Select(value => value.GetArray(item => ReadItemUpgrade(item, missingMemberBehavior))),
-                UpgradesFrom = upgradesFrom.Select(value => value.GetArray(item => ReadItemUpgrade(item, missingMemberBehavior)))
+                UpgradesInto = upgradesInto.SelectMany(value => ReadItemUpgrade(value, missingMemberBehavior)),
+                UpgradesFrom = upgradesFrom.SelectMany(value => ReadItemUpgrade(value, missingMemberBehavior))
             };
         }
 
@@ -7948,19 +7949,19 @@ namespace GW2SDK.Items
             var level = new RequiredMember<int>("level");
             var rarity = new RequiredMember<Rarity>("rarity");
             var vendorValue = new RequiredMember<Coin>("vendor_value");
-            var gameTypes = new RequiredMember<GameType[]>("game_types");
-            var flags = new RequiredMember<ItemFlag[]>("flags");
-            var restrictions = new RequiredMember<ItemRestriction[]>("restrictions");
+            var gameTypes = new RequiredMember<GameType>("game_types");
+            var flags = new RequiredMember<ItemFlag>("flags");
+            var restrictions = new RequiredMember<ItemRestriction>("restrictions");
             var id = new RequiredMember<int>("id");
             var chatLink = new RequiredMember<string>("chat_link");
             var icon = new OptionalMember<string>("icon");
-            var infusionSlots = new RequiredMember<InfusionSlot[]>("infusion_slots");
+            var infusionSlots = new RequiredMember<InfusionSlot>("infusion_slots");
             var attributeAdjustment = new RequiredMember<double>("attribute_adjustment");
             var infixUpgrade = new OptionalMember<InfixUpgrade>("infix_upgrade");
             var suffixItemId = new NullableMember<int>("suffix_item_id");
-            var statChoices = new OptionalMember<int[]>("stat_choices");
-            var upgradesInto = new OptionalMember<ItemUpgrade[]>("upgrades_into");
-            var upgradesFrom = new OptionalMember<ItemUpgrade[]>("upgrades_from");
+            var statChoices = new OptionalMember<int>("stat_choices");
+            var upgradesInto = new OptionalMember<ItemUpgrade>("upgrades_into");
+            var upgradesFrom = new OptionalMember<ItemUpgrade>("upgrades_from");
             foreach (var member in json.EnumerateObject())
             {
                 if (member.NameEquals("type"))
@@ -8073,18 +8074,18 @@ namespace GW2SDK.Items
                 Level = level.GetValue(),
                 Rarity = rarity.GetValue(missingMemberBehavior),
                 VendorValue = vendorValue.GetValue(),
-                GameTypes = gameTypes.GetValue(missingMemberBehavior),
-                Flags = flags.GetValue(missingMemberBehavior),
-                Restrictions = restrictions.GetValue(missingMemberBehavior),
+                GameTypes = gameTypes.GetValues(missingMemberBehavior),
+                Flags = flags.GetValues(missingMemberBehavior),
+                Restrictions = restrictions.GetValues(missingMemberBehavior),
                 ChatLink = chatLink.GetValue(),
                 Icon = icon.GetValueOrNull(),
-                InfusionSlots = infusionSlots.Select(value => value.GetArray(item => ReadInfusionSlot(item, missingMemberBehavior))),
+                InfusionSlots = infusionSlots.SelectMany(value => ReadInfusionSlot(value, missingMemberBehavior)),
                 AttributeAdjustment = attributeAdjustment.GetValue(),
-                StatChoices = statChoices.Select(value => value.GetArray(item => item.GetInt32())),
+                StatChoices = statChoices.SelectMany(value => value.GetInt32()),
                 Prefix = infixUpgrade.Select(value => ReadInfixUpgrade(value, missingMemberBehavior)),
                 SuffixItemId = suffixItemId.GetValue(),
-                UpgradesInto = upgradesInto.Select(value => value.GetArray(item => ReadItemUpgrade(item, missingMemberBehavior))),
-                UpgradesFrom = upgradesFrom.Select(value => value.GetArray(item => ReadItemUpgrade(item, missingMemberBehavior)))
+                UpgradesInto = upgradesInto.SelectMany(value => ReadItemUpgrade(value, missingMemberBehavior)),
+                UpgradesFrom = upgradesFrom.SelectMany(value => ReadItemUpgrade(value, missingMemberBehavior))
             };
         }
 
@@ -8095,19 +8096,19 @@ namespace GW2SDK.Items
             var level = new RequiredMember<int>("level");
             var rarity = new RequiredMember<Rarity>("rarity");
             var vendorValue = new RequiredMember<Coin>("vendor_value");
-            var gameTypes = new RequiredMember<GameType[]>("game_types");
-            var flags = new RequiredMember<ItemFlag[]>("flags");
-            var restrictions = new RequiredMember<ItemRestriction[]>("restrictions");
+            var gameTypes = new RequiredMember<GameType>("game_types");
+            var flags = new RequiredMember<ItemFlag>("flags");
+            var restrictions = new RequiredMember<ItemRestriction>("restrictions");
             var id = new RequiredMember<int>("id");
             var chatLink = new RequiredMember<string>("chat_link");
             var icon = new OptionalMember<string>("icon");
-            var infusionSlots = new RequiredMember<InfusionSlot[]>("infusion_slots");
+            var infusionSlots = new RequiredMember<InfusionSlot>("infusion_slots");
             var attributeAdjustment = new RequiredMember<double>("attribute_adjustment");
             var infixUpgrade = new OptionalMember<InfixUpgrade>("infix_upgrade");
             var suffixItemId = new NullableMember<int>("suffix_item_id");
-            var statChoices = new OptionalMember<int[]>("stat_choices");
-            var upgradesInto = new OptionalMember<ItemUpgrade[]>("upgrades_into");
-            var upgradesFrom = new OptionalMember<ItemUpgrade[]>("upgrades_from");
+            var statChoices = new OptionalMember<int>("stat_choices");
+            var upgradesInto = new OptionalMember<ItemUpgrade>("upgrades_into");
+            var upgradesFrom = new OptionalMember<ItemUpgrade>("upgrades_from");
             foreach (var member in json.EnumerateObject())
             {
                 if (member.NameEquals("type"))
@@ -8220,18 +8221,18 @@ namespace GW2SDK.Items
                 Level = level.GetValue(),
                 Rarity = rarity.GetValue(missingMemberBehavior),
                 VendorValue = vendorValue.GetValue(),
-                GameTypes = gameTypes.GetValue(missingMemberBehavior),
-                Flags = flags.GetValue(missingMemberBehavior),
-                Restrictions = restrictions.GetValue(missingMemberBehavior),
+                GameTypes = gameTypes.GetValues(missingMemberBehavior),
+                Flags = flags.GetValues(missingMemberBehavior),
+                Restrictions = restrictions.GetValues(missingMemberBehavior),
                 ChatLink = chatLink.GetValue(),
                 Icon = icon.GetValueOrNull(),
-                InfusionSlots = infusionSlots.Select(value => value.GetArray(item => ReadInfusionSlot(item, missingMemberBehavior))),
+                InfusionSlots = infusionSlots.SelectMany(value => ReadInfusionSlot(value, missingMemberBehavior)),
                 AttributeAdjustment = attributeAdjustment.GetValue(),
-                StatChoices = statChoices.Select(value => value.GetArray(item => item.GetInt32())),
+                StatChoices = statChoices.SelectMany(value => value.GetInt32()),
                 Prefix = infixUpgrade.Select(value => ReadInfixUpgrade(value, missingMemberBehavior)),
                 SuffixItemId = suffixItemId.GetValue(),
-                UpgradesInto = upgradesInto.Select(value => value.GetArray(item => ReadItemUpgrade(item, missingMemberBehavior))),
-                UpgradesFrom = upgradesFrom.Select(value => value.GetArray(item => ReadItemUpgrade(item, missingMemberBehavior)))
+                UpgradesInto = upgradesInto.SelectMany(value => ReadItemUpgrade(value, missingMemberBehavior)),
+                UpgradesFrom = upgradesFrom.SelectMany(value => ReadItemUpgrade(value, missingMemberBehavior))
             };
         }
 
@@ -8242,9 +8243,9 @@ namespace GW2SDK.Items
             var level = new RequiredMember<int>("level");
             var rarity = new RequiredMember<Rarity>("rarity");
             var vendorValue = new RequiredMember<Coin>("vendor_value");
-            var gameTypes = new RequiredMember<GameType[]>("game_types");
-            var flags = new RequiredMember<ItemFlag[]>("flags");
-            var restrictions = new RequiredMember<ItemRestriction[]>("restrictions");
+            var gameTypes = new RequiredMember<GameType>("game_types");
+            var flags = new RequiredMember<ItemFlag>("flags");
+            var restrictions = new RequiredMember<ItemRestriction>("restrictions");
             var id = new RequiredMember<int>("id");
             var chatLink = new RequiredMember<string>("chat_link");
             var icon = new OptionalMember<string>("icon");
@@ -8315,9 +8316,9 @@ namespace GW2SDK.Items
                 Level = level.GetValue(),
                 Rarity = rarity.GetValue(missingMemberBehavior),
                 VendorValue = vendorValue.GetValue(),
-                GameTypes = gameTypes.GetValue(missingMemberBehavior),
-                Flags = flags.GetValue(missingMemberBehavior),
-                Restrictions = restrictions.GetValue(missingMemberBehavior),
+                GameTypes = gameTypes.GetValues(missingMemberBehavior),
+                Flags = flags.GetValues(missingMemberBehavior),
+                Restrictions = restrictions.GetValues(missingMemberBehavior),
                 ChatLink = chatLink.GetValue(),
                 Icon = icon.GetValueOrNull()
             };
@@ -8345,14 +8346,14 @@ namespace GW2SDK.Items
             var level = new RequiredMember<int>("level");
             var rarity = new RequiredMember<Rarity>("rarity");
             var vendorValue = new RequiredMember<Coin>("vendor_value");
-            var gameTypes = new RequiredMember<GameType[]>("game_types");
-            var flags = new RequiredMember<ItemFlag[]>("flags");
-            var restrictions = new RequiredMember<ItemRestriction[]>("restrictions");
+            var gameTypes = new RequiredMember<GameType>("game_types");
+            var flags = new RequiredMember<ItemFlag>("flags");
+            var restrictions = new RequiredMember<ItemRestriction>("restrictions");
             var id = new RequiredMember<int>("id");
             var chatLink = new RequiredMember<string>("chat_link");
             var icon = new OptionalMember<string>("icon");
-            var upgradeComponentFlags = new RequiredMember<UpgradeComponentFlag[]>("flags");
-            var infusionUpgradeFlags = new RequiredMember<InfusionSlotFlag[]>("infusion_upgrade_flags");
+            var upgradeComponentFlags = new RequiredMember<UpgradeComponentFlag>("flags");
+            var infusionUpgradeFlags = new RequiredMember<InfusionSlotFlag>("infusion_upgrade_flags");
             var attributeAdjustment = new RequiredMember<double>("attribute_adjustment");
             var infixUpgrade = new RequiredMember<InfixUpgrade>("infix_upgrade");
             var suffix = new RequiredMember<string>("suffix");
@@ -8460,13 +8461,13 @@ namespace GW2SDK.Items
                 Level = level.GetValue(),
                 Rarity = rarity.GetValue(missingMemberBehavior),
                 VendorValue = vendorValue.GetValue(),
-                GameTypes = gameTypes.GetValue(missingMemberBehavior),
-                Flags = flags.GetValue(missingMemberBehavior),
-                Restrictions = restrictions.GetValue(missingMemberBehavior),
+                GameTypes = gameTypes.GetValues(missingMemberBehavior),
+                Flags = flags.GetValues(missingMemberBehavior),
+                Restrictions = restrictions.GetValues(missingMemberBehavior),
                 ChatLink = chatLink.GetValue(),
                 Icon = icon.GetValueOrNull(),
-                UpgradeComponentFlags = upgradeComponentFlags.GetValue(missingMemberBehavior),
-                InfusionUpgradeFlags = infusionUpgradeFlags.GetValue(missingMemberBehavior),
+                UpgradeComponentFlags = upgradeComponentFlags.GetValues(missingMemberBehavior),
+                InfusionUpgradeFlags = infusionUpgradeFlags.GetValues(missingMemberBehavior),
                 AttributeAdjustment = attributeAdjustment.GetValue(),
                 Suffix = infixUpgrade.Select(value => ReadInfixUpgrade(value, missingMemberBehavior)),
                 SuffixName = suffix.GetValue()
@@ -8483,18 +8484,18 @@ namespace GW2SDK.Items
             var level = new RequiredMember<int>("level");
             var rarity = new RequiredMember<Rarity>("rarity");
             var vendorValue = new RequiredMember<Coin>("vendor_value");
-            var gameTypes = new RequiredMember<GameType[]>("game_types");
-            var flags = new RequiredMember<ItemFlag[]>("flags");
-            var restrictions = new RequiredMember<ItemRestriction[]>("restrictions");
+            var gameTypes = new RequiredMember<GameType>("game_types");
+            var flags = new RequiredMember<ItemFlag>("flags");
+            var restrictions = new RequiredMember<ItemRestriction>("restrictions");
             var id = new RequiredMember<int>("id");
             var chatLink = new RequiredMember<string>("chat_link");
             var icon = new OptionalMember<string>("icon");
-            var upgradeComponentFlags = new RequiredMember<UpgradeComponentFlag[]>("flags");
-            var infusionUpgradeFlags = new RequiredMember<InfusionSlotFlag[]>("infusion_upgrade_flags");
+            var upgradeComponentFlags = new RequiredMember<UpgradeComponentFlag>("flags");
+            var infusionUpgradeFlags = new RequiredMember<InfusionSlotFlag>("infusion_upgrade_flags");
             var attributeAdjustment = new RequiredMember<double>("attribute_adjustment");
             var infixUpgrade = new RequiredMember<InfixUpgrade>("infix_upgrade");
             var suffix = new RequiredMember<string>("suffix");
-            var bonuses = new OptionalMember<string[]>("bonuses");
+            var bonuses = new OptionalMember<string>("bonuses");
             foreach (var member in json.EnumerateObject())
             {
                 if (member.NameEquals("type"))
@@ -8603,17 +8604,17 @@ namespace GW2SDK.Items
                 Level = level.GetValue(),
                 Rarity = rarity.GetValue(missingMemberBehavior),
                 VendorValue = vendorValue.GetValue(),
-                GameTypes = gameTypes.GetValue(missingMemberBehavior),
-                Flags = flags.GetValue(missingMemberBehavior),
-                Restrictions = restrictions.GetValue(missingMemberBehavior),
+                GameTypes = gameTypes.GetValues(missingMemberBehavior),
+                Flags = flags.GetValues(missingMemberBehavior),
+                Restrictions = restrictions.GetValues(missingMemberBehavior),
                 ChatLink = chatLink.GetValue(),
                 Icon = icon.GetValueOrNull(),
-                UpgradeComponentFlags = upgradeComponentFlags.GetValue(missingMemberBehavior),
-                InfusionUpgradeFlags = infusionUpgradeFlags.GetValue(missingMemberBehavior),
+                UpgradeComponentFlags = upgradeComponentFlags.GetValues(missingMemberBehavior),
+                InfusionUpgradeFlags = infusionUpgradeFlags.GetValues(missingMemberBehavior),
                 AttributeAdjustment = attributeAdjustment.GetValue(),
                 Suffix = infixUpgrade.Select(value => ReadInfixUpgrade(value, missingMemberBehavior)),
                 SuffixName = suffix.GetValue(),
-                Bonuses = bonuses.Select(value => value.GetArray(item => item.GetStringRequired()))
+                Bonuses = bonuses.SelectMany(value => value.GetStringRequired())
             };
         }
 
@@ -8624,14 +8625,14 @@ namespace GW2SDK.Items
             var level = new RequiredMember<int>("level");
             var rarity = new RequiredMember<Rarity>("rarity");
             var vendorValue = new RequiredMember<Coin>("vendor_value");
-            var gameTypes = new RequiredMember<GameType[]>("game_types");
-            var flags = new RequiredMember<ItemFlag[]>("flags");
-            var restrictions = new RequiredMember<ItemRestriction[]>("restrictions");
+            var gameTypes = new RequiredMember<GameType>("game_types");
+            var flags = new RequiredMember<ItemFlag>("flags");
+            var restrictions = new RequiredMember<ItemRestriction>("restrictions");
             var id = new RequiredMember<int>("id");
             var chatLink = new RequiredMember<string>("chat_link");
             var icon = new OptionalMember<string>("icon");
-            var upgradeComponentFlags = new RequiredMember<UpgradeComponentFlag[]>("flags");
-            var infusionUpgradeFlags = new RequiredMember<InfusionSlotFlag[]>("infusion_upgrade_flags");
+            var upgradeComponentFlags = new RequiredMember<UpgradeComponentFlag>("flags");
+            var infusionUpgradeFlags = new RequiredMember<InfusionSlotFlag>("infusion_upgrade_flags");
             var attributeAdjustment = new RequiredMember<double>("attribute_adjustment");
             var infixUpgrade = new RequiredMember<InfixUpgrade>("infix_upgrade");
             var suffix = new RequiredMember<string>("suffix");
@@ -8740,13 +8741,13 @@ namespace GW2SDK.Items
                 Level = level.GetValue(),
                 Rarity = rarity.GetValue(missingMemberBehavior),
                 VendorValue = vendorValue.GetValue(),
-                GameTypes = gameTypes.GetValue(missingMemberBehavior),
-                Flags = flags.GetValue(missingMemberBehavior),
-                Restrictions = restrictions.GetValue(missingMemberBehavior),
+                GameTypes = gameTypes.GetValues(missingMemberBehavior),
+                Flags = flags.GetValues(missingMemberBehavior),
+                Restrictions = restrictions.GetValues(missingMemberBehavior),
                 ChatLink = chatLink.GetValue(),
                 Icon = icon.GetValueOrNull(),
-                UpgradeComponentFlags = upgradeComponentFlags.GetValue(missingMemberBehavior),
-                InfusionUpgradeFlags = infusionUpgradeFlags.GetValue(missingMemberBehavior),
+                UpgradeComponentFlags = upgradeComponentFlags.GetValues(missingMemberBehavior),
+                InfusionUpgradeFlags = infusionUpgradeFlags.GetValues(missingMemberBehavior),
                 AttributeAdjustment = attributeAdjustment.GetValue(),
                 Suffix = infixUpgrade.Select(value => ReadInfixUpgrade(value, missingMemberBehavior)),
                 SuffixName = suffix.GetValue()
@@ -8760,18 +8761,18 @@ namespace GW2SDK.Items
             var level = new RequiredMember<int>("level");
             var rarity = new RequiredMember<Rarity>("rarity");
             var vendorValue = new RequiredMember<Coin>("vendor_value");
-            var gameTypes = new RequiredMember<GameType[]>("game_types");
-            var flags = new RequiredMember<ItemFlag[]>("flags");
-            var restrictions = new RequiredMember<ItemRestriction[]>("restrictions");
+            var gameTypes = new RequiredMember<GameType>("game_types");
+            var flags = new RequiredMember<ItemFlag>("flags");
+            var restrictions = new RequiredMember<ItemRestriction>("restrictions");
             var id = new RequiredMember<int>("id");
             var chatLink = new RequiredMember<string>("chat_link");
             var icon = new OptionalMember<string>("icon");
-            var upgradeComponentFlags = new RequiredMember<UpgradeComponentFlag[]>("flags");
-            var infusionUpgradeFlags = new RequiredMember<InfusionSlotFlag[]>("infusion_upgrade_flags");
+            var upgradeComponentFlags = new RequiredMember<UpgradeComponentFlag>("flags");
+            var infusionUpgradeFlags = new RequiredMember<InfusionSlotFlag>("infusion_upgrade_flags");
             var attributeAdjustment = new RequiredMember<double>("attribute_adjustment");
             var infixUpgrade = new RequiredMember<InfixUpgrade>("infix_upgrade");
             var suffix = new RequiredMember<string>("suffix");
-            var bonuses = new OptionalMember<string[]>("bonuses");
+            var bonuses = new OptionalMember<string>("bonuses");
             foreach (var member in json.EnumerateObject())
             {
                 if (member.NameEquals("type"))
@@ -8881,19 +8882,19 @@ namespace GW2SDK.Items
                 Level = level.GetValue(),
                 Rarity = rarity.GetValue(missingMemberBehavior),
                 VendorValue = vendorValue.GetValue(),
-                GameTypes = gameTypes.GetValue(missingMemberBehavior),
-                Flags = flags.GetValue(missingMemberBehavior),
-                Restrictions = restrictions.GetValue(missingMemberBehavior),
+                GameTypes = gameTypes.GetValues(missingMemberBehavior),
+                Flags = flags.GetValues(missingMemberBehavior),
+                Restrictions = restrictions.GetValues(missingMemberBehavior),
                 ChatLink = chatLink.GetValue(),
                 Icon = icon.GetValueOrNull(),
                 UpgradeComponentFlags =
-                    upgradeComponentFlags.GetValue(missingMemberBehavior),
+                    upgradeComponentFlags.GetValues(missingMemberBehavior),
                 InfusionUpgradeFlags =
-                    infusionUpgradeFlags.GetValue(missingMemberBehavior),
+                    infusionUpgradeFlags.GetValues(missingMemberBehavior),
                 AttributeAdjustment = attributeAdjustment.GetValue(),
                 Suffix = infixUpgrade.Select(value => ReadInfixUpgrade(value, missingMemberBehavior)),
                 SuffixName = suffix.GetValue(),
-                Bonuses = bonuses.Select(value => value.GetArray(item => item.GetStringRequired()))
+                Bonuses = bonuses.SelectMany(value => value.GetStringRequired())
             };
         }
 
@@ -8904,14 +8905,14 @@ namespace GW2SDK.Items
             var level = new RequiredMember<int>("level");
             var rarity = new RequiredMember<Rarity>("rarity");
             var vendorValue = new RequiredMember<Coin>("vendor_value");
-            var gameTypes = new RequiredMember<GameType[]>("game_types");
-            var flags = new RequiredMember<ItemFlag[]>("flags");
-            var restrictions = new RequiredMember<ItemRestriction[]>("restrictions");
+            var gameTypes = new RequiredMember<GameType>("game_types");
+            var flags = new RequiredMember<ItemFlag>("flags");
+            var restrictions = new RequiredMember<ItemRestriction>("restrictions");
             var id = new RequiredMember<int>("id");
             var chatLink = new RequiredMember<string>("chat_link");
             var icon = new OptionalMember<string>("icon");
-            var upgradeComponentFlags = new RequiredMember<UpgradeComponentFlag[]>("flags");
-            var infusionUpgradeFlags = new RequiredMember<InfusionSlotFlag[]>("infusion_upgrade_flags");
+            var upgradeComponentFlags = new RequiredMember<UpgradeComponentFlag>("flags");
+            var infusionUpgradeFlags = new RequiredMember<InfusionSlotFlag>("infusion_upgrade_flags");
             var attributeAdjustment = new RequiredMember<double>("attribute_adjustment");
             var infixUpgrade = new RequiredMember<InfixUpgrade>("infix_upgrade");
             var suffix = new RequiredMember<string>("suffix");
@@ -9020,15 +9021,15 @@ namespace GW2SDK.Items
                 Level = level.GetValue(),
                 Rarity = rarity.GetValue(missingMemberBehavior),
                 VendorValue = vendorValue.GetValue(),
-                GameTypes = gameTypes.GetValue(missingMemberBehavior),
-                Flags = flags.GetValue(missingMemberBehavior),
-                Restrictions = restrictions.GetValue(missingMemberBehavior),
+                GameTypes = gameTypes.GetValues(missingMemberBehavior),
+                Flags = flags.GetValues(missingMemberBehavior),
+                Restrictions = restrictions.GetValues(missingMemberBehavior),
                 ChatLink = chatLink.GetValue(),
                 Icon = icon.GetValueOrNull(),
                 UpgradeComponentFlags =
-                    upgradeComponentFlags.GetValue(missingMemberBehavior),
+                    upgradeComponentFlags.GetValues(missingMemberBehavior),
                 InfusionUpgradeFlags =
-                    infusionUpgradeFlags.GetValue(missingMemberBehavior),
+                    infusionUpgradeFlags.GetValues(missingMemberBehavior),
                 AttributeAdjustment = attributeAdjustment.GetValue(),
                 Suffix = infixUpgrade.Select(value => ReadInfixUpgrade(value, missingMemberBehavior)),
                 SuffixName = suffix.GetValue()
@@ -9093,9 +9094,9 @@ namespace GW2SDK.Items
             var rarity = new RequiredMember<Rarity>("rarity");
             var vendorValue = new RequiredMember<Coin>("vendor_value");
             var defaultSkin = new RequiredMember<int>("default_skin");
-            var gameTypes = new RequiredMember<GameType[]>("game_types");
-            var flags = new RequiredMember<ItemFlag[]>("flags");
-            var restrictions = new RequiredMember<ItemRestriction[]>("restrictions");
+            var gameTypes = new RequiredMember<GameType>("game_types");
+            var flags = new RequiredMember<ItemFlag>("flags");
+            var restrictions = new RequiredMember<ItemRestriction>("restrictions");
             var id = new RequiredMember<int>("id");
             var chatLink = new RequiredMember<string>("chat_link");
             var icon = new OptionalMember<string>("icon");
@@ -9103,9 +9104,9 @@ namespace GW2SDK.Items
             var minPower = new RequiredMember<int>("min_power");
             var maxPower = new RequiredMember<int>("max_power");
             var defense = new RequiredMember<int>("defense");
-            var infusionSlots = new RequiredMember<InfusionSlot[]>("infusion_slots");
+            var infusionSlots = new RequiredMember<InfusionSlot>("infusion_slots");
             var attributeAdjustment = new RequiredMember<double>("attribute_adjustment");
-            var statChoices = new OptionalMember<int[]>("stat_choices");
+            var statChoices = new OptionalMember<int>("stat_choices");
             var infixUpgrade = new OptionalMember<InfixUpgrade>("infix_upgrade");
             var suffixItemId = new NullableMember<int>("suffix_item_id");
             var secondarySuffixItemId = new NullableMember<int>("secondary_suffix_item_id");
@@ -9238,18 +9239,18 @@ namespace GW2SDK.Items
                 Rarity = rarity.GetValue(missingMemberBehavior),
                 VendorValue = vendorValue.GetValue(),
                 DefaultSkin = defaultSkin.GetValue(),
-                GameTypes = gameTypes.GetValue(missingMemberBehavior),
-                Flags = flags.GetValue(missingMemberBehavior),
-                Restrictions = restrictions.GetValue(missingMemberBehavior),
+                GameTypes = gameTypes.GetValues(missingMemberBehavior),
+                Flags = flags.GetValues(missingMemberBehavior),
+                Restrictions = restrictions.GetValues(missingMemberBehavior),
                 ChatLink = chatLink.GetValue(),
                 Icon = icon.GetValueOrNull(),
                 DamageType = damageType.GetValue(missingMemberBehavior),
                 MinPower = minPower.GetValue(),
                 MaxPower = maxPower.GetValue(),
                 Defense = defense.GetValue(),
-                InfusionSlots = infusionSlots.Select(value => value.GetArray(item => ReadInfusionSlot(item, missingMemberBehavior))),
+                InfusionSlots = infusionSlots.SelectMany(value => ReadInfusionSlot(value, missingMemberBehavior)),
                 AttributeAdjustment = attributeAdjustment.GetValue(),
-                StatChoices = statChoices.Select(value => value.GetArray(item => item.GetInt32())),
+                StatChoices = statChoices.SelectMany(value => value.GetInt32()),
                 Prefix = infixUpgrade.Select(value => ReadInfixUpgrade(value, missingMemberBehavior)),
                 SuffixItemId = suffixItemId.GetValue(),
                 SecondarySuffixItemId = secondarySuffixItemId.GetValue()
@@ -9264,9 +9265,9 @@ namespace GW2SDK.Items
             var rarity = new RequiredMember<Rarity>("rarity");
             var vendorValue = new RequiredMember<Coin>("vendor_value");
             var defaultSkin = new RequiredMember<int>("default_skin");
-            var gameTypes = new RequiredMember<GameType[]>("game_types");
-            var flags = new RequiredMember<ItemFlag[]>("flags");
-            var restrictions = new RequiredMember<ItemRestriction[]>("restrictions");
+            var gameTypes = new RequiredMember<GameType>("game_types");
+            var flags = new RequiredMember<ItemFlag>("flags");
+            var restrictions = new RequiredMember<ItemRestriction>("restrictions");
             var id = new RequiredMember<int>("id");
             var chatLink = new RequiredMember<string>("chat_link");
             var icon = new OptionalMember<string>("icon");
@@ -9274,9 +9275,9 @@ namespace GW2SDK.Items
             var minPower = new RequiredMember<int>("min_power");
             var maxPower = new RequiredMember<int>("max_power");
             var defense = new RequiredMember<int>("defense");
-            var infusionSlots = new RequiredMember<InfusionSlot[]>("infusion_slots");
+            var infusionSlots = new RequiredMember<InfusionSlot>("infusion_slots");
             var attributeAdjustment = new RequiredMember<double>("attribute_adjustment");
-            var statChoices = new OptionalMember<int[]>("stat_choices");
+            var statChoices = new OptionalMember<int>("stat_choices");
             var infixUpgrade = new OptionalMember<InfixUpgrade>("infix_upgrade");
             var suffixItemId = new NullableMember<int>("suffix_item_id");
             var secondarySuffixItemId = new NullableMember<int>("secondary_suffix_item_id");
@@ -9409,18 +9410,18 @@ namespace GW2SDK.Items
                 Rarity = rarity.GetValue(missingMemberBehavior),
                 VendorValue = vendorValue.GetValue(),
                 DefaultSkin = defaultSkin.GetValue(),
-                GameTypes = gameTypes.GetValue(missingMemberBehavior),
-                Flags = flags.GetValue(missingMemberBehavior),
-                Restrictions = restrictions.GetValue(missingMemberBehavior),
+                GameTypes = gameTypes.GetValues(missingMemberBehavior),
+                Flags = flags.GetValues(missingMemberBehavior),
+                Restrictions = restrictions.GetValues(missingMemberBehavior),
                 ChatLink = chatLink.GetValue(),
                 Icon = icon.GetValueOrNull(),
                 DamageType = damageType.GetValue(missingMemberBehavior),
                 MinPower = minPower.GetValue(),
                 MaxPower = maxPower.GetValue(),
                 Defense = defense.GetValue(),
-                InfusionSlots = infusionSlots.Select(value => value.GetArray(item => ReadInfusionSlot(item, missingMemberBehavior))),
+                InfusionSlots = infusionSlots.SelectMany(value => ReadInfusionSlot(value, missingMemberBehavior)),
                 AttributeAdjustment = attributeAdjustment.GetValue(),
-                StatChoices = statChoices.Select(value => value.GetArray(item => item.GetInt32())),
+                StatChoices = statChoices.SelectMany(value => value.GetInt32()),
                 Prefix = infixUpgrade.Select(value => ReadInfixUpgrade(value, missingMemberBehavior)),
                 SuffixItemId = suffixItemId.GetValue(),
                 SecondarySuffixItemId = secondarySuffixItemId.GetValue()
@@ -9435,9 +9436,9 @@ namespace GW2SDK.Items
             var rarity = new RequiredMember<Rarity>("rarity");
             var vendorValue = new RequiredMember<Coin>("vendor_value");
             var defaultSkin = new RequiredMember<int>("default_skin");
-            var gameTypes = new RequiredMember<GameType[]>("game_types");
-            var flags = new RequiredMember<ItemFlag[]>("flags");
-            var restrictions = new RequiredMember<ItemRestriction[]>("restrictions");
+            var gameTypes = new RequiredMember<GameType>("game_types");
+            var flags = new RequiredMember<ItemFlag>("flags");
+            var restrictions = new RequiredMember<ItemRestriction>("restrictions");
             var id = new RequiredMember<int>("id");
             var chatLink = new RequiredMember<string>("chat_link");
             var icon = new OptionalMember<string>("icon");
@@ -9445,9 +9446,9 @@ namespace GW2SDK.Items
             var minPower = new RequiredMember<int>("min_power");
             var maxPower = new RequiredMember<int>("max_power");
             var defense = new RequiredMember<int>("defense");
-            var infusionSlots = new RequiredMember<InfusionSlot[]>("infusion_slots");
+            var infusionSlots = new RequiredMember<InfusionSlot>("infusion_slots");
             var attributeAdjustment = new RequiredMember<double>("attribute_adjustment");
-            var statChoices = new OptionalMember<int[]>("stat_choices");
+            var statChoices = new OptionalMember<int>("stat_choices");
             var infixUpgrade = new OptionalMember<InfixUpgrade>("infix_upgrade");
             var suffixItemId = new NullableMember<int>("suffix_item_id");
             var secondarySuffixItemId = new NullableMember<int>("secondary_suffix_item_id");
@@ -9580,18 +9581,18 @@ namespace GW2SDK.Items
                 Rarity = rarity.GetValue(missingMemberBehavior),
                 VendorValue = vendorValue.GetValue(),
                 DefaultSkin = defaultSkin.GetValue(),
-                GameTypes = gameTypes.GetValue(missingMemberBehavior),
-                Flags = flags.GetValue(missingMemberBehavior),
-                Restrictions = restrictions.GetValue(missingMemberBehavior),
+                GameTypes = gameTypes.GetValues(missingMemberBehavior),
+                Flags = flags.GetValues(missingMemberBehavior),
+                Restrictions = restrictions.GetValues(missingMemberBehavior),
                 ChatLink = chatLink.GetValue(),
                 Icon = icon.GetValueOrNull(),
                 DamageType = damageType.GetValue(missingMemberBehavior),
                 MinPower = minPower.GetValue(),
                 MaxPower = maxPower.GetValue(),
                 Defense = defense.GetValue(),
-                InfusionSlots = infusionSlots.Select(value => value.GetArray(item => ReadInfusionSlot(item, missingMemberBehavior))),
+                InfusionSlots = infusionSlots.SelectMany(value => ReadInfusionSlot(value, missingMemberBehavior)),
                 AttributeAdjustment = attributeAdjustment.GetValue(),
-                StatChoices = statChoices.Select(value => value.GetArray(item => item.GetInt32())),
+                StatChoices = statChoices.SelectMany(value => value.GetInt32()),
                 Prefix = infixUpgrade.Select(value => ReadInfixUpgrade(value, missingMemberBehavior)),
                 SuffixItemId = suffixItemId.GetValue(),
                 SecondarySuffixItemId = secondarySuffixItemId.GetValue()
@@ -9606,9 +9607,9 @@ namespace GW2SDK.Items
             var rarity = new RequiredMember<Rarity>("rarity");
             var vendorValue = new RequiredMember<Coin>("vendor_value");
             var defaultSkin = new RequiredMember<int>("default_skin");
-            var gameTypes = new RequiredMember<GameType[]>("game_types");
-            var flags = new RequiredMember<ItemFlag[]>("flags");
-            var restrictions = new RequiredMember<ItemRestriction[]>("restrictions");
+            var gameTypes = new RequiredMember<GameType>("game_types");
+            var flags = new RequiredMember<ItemFlag>("flags");
+            var restrictions = new RequiredMember<ItemRestriction>("restrictions");
             var id = new RequiredMember<int>("id");
             var chatLink = new RequiredMember<string>("chat_link");
             var icon = new OptionalMember<string>("icon");
@@ -9616,9 +9617,9 @@ namespace GW2SDK.Items
             var minPower = new RequiredMember<int>("min_power");
             var maxPower = new RequiredMember<int>("max_power");
             var defense = new RequiredMember<int>("defense");
-            var infusionSlots = new RequiredMember<InfusionSlot[]>("infusion_slots");
+            var infusionSlots = new RequiredMember<InfusionSlot>("infusion_slots");
             var attributeAdjustment = new RequiredMember<double>("attribute_adjustment");
-            var statChoices = new OptionalMember<int[]>("stat_choices");
+            var statChoices = new OptionalMember<int>("stat_choices");
             var infixUpgrade = new OptionalMember<InfixUpgrade>("infix_upgrade");
             var suffixItemId = new NullableMember<int>("suffix_item_id");
             var secondarySuffixItemId = new NullableMember<int>("secondary_suffix_item_id");
@@ -9751,18 +9752,18 @@ namespace GW2SDK.Items
                 Rarity = rarity.GetValue(missingMemberBehavior),
                 VendorValue = vendorValue.GetValue(),
                 DefaultSkin = defaultSkin.GetValue(),
-                GameTypes = gameTypes.GetValue(missingMemberBehavior),
-                Flags = flags.GetValue(missingMemberBehavior),
-                Restrictions = restrictions.GetValue(missingMemberBehavior),
+                GameTypes = gameTypes.GetValues(missingMemberBehavior),
+                Flags = flags.GetValues(missingMemberBehavior),
+                Restrictions = restrictions.GetValues(missingMemberBehavior),
                 ChatLink = chatLink.GetValue(),
                 Icon = icon.GetValueOrNull(),
                 DamageType = damageType.GetValue(missingMemberBehavior),
                 MinPower = minPower.GetValue(),
                 MaxPower = maxPower.GetValue(),
                 Defense = defense.GetValue(),
-                InfusionSlots = infusionSlots.Select(value => value.GetArray(item => ReadInfusionSlot(item, missingMemberBehavior))),
+                InfusionSlots = infusionSlots.SelectMany(value => ReadInfusionSlot(value, missingMemberBehavior)),
                 AttributeAdjustment = attributeAdjustment.GetValue(),
-                StatChoices = statChoices.Select(value => value.GetArray(item => item.GetInt32())),
+                StatChoices = statChoices.SelectMany(value => value.GetInt32()),
                 Prefix = infixUpgrade.Select(value => ReadInfixUpgrade(value, missingMemberBehavior)),
                 SuffixItemId = suffixItemId.GetValue(),
                 SecondarySuffixItemId = secondarySuffixItemId.GetValue()
@@ -9777,9 +9778,9 @@ namespace GW2SDK.Items
             var rarity = new RequiredMember<Rarity>("rarity");
             var vendorValue = new RequiredMember<Coin>("vendor_value");
             var defaultSkin = new RequiredMember<int>("default_skin");
-            var gameTypes = new RequiredMember<GameType[]>("game_types");
-            var flags = new RequiredMember<ItemFlag[]>("flags");
-            var restrictions = new RequiredMember<ItemRestriction[]>("restrictions");
+            var gameTypes = new RequiredMember<GameType>("game_types");
+            var flags = new RequiredMember<ItemFlag>("flags");
+            var restrictions = new RequiredMember<ItemRestriction>("restrictions");
             var id = new RequiredMember<int>("id");
             var chatLink = new RequiredMember<string>("chat_link");
             var icon = new OptionalMember<string>("icon");
@@ -9787,9 +9788,9 @@ namespace GW2SDK.Items
             var minPower = new RequiredMember<int>("min_power");
             var maxPower = new RequiredMember<int>("max_power");
             var defense = new RequiredMember<int>("defense");
-            var infusionSlots = new RequiredMember<InfusionSlot[]>("infusion_slots");
+            var infusionSlots = new RequiredMember<InfusionSlot>("infusion_slots");
             var attributeAdjustment = new RequiredMember<double>("attribute_adjustment");
-            var statChoices = new OptionalMember<int[]>("stat_choices");
+            var statChoices = new OptionalMember<int>("stat_choices");
             var infixUpgrade = new OptionalMember<InfixUpgrade>("infix_upgrade");
             var suffixItemId = new NullableMember<int>("suffix_item_id");
             var secondarySuffixItemId = new NullableMember<int>("secondary_suffix_item_id");
@@ -9922,18 +9923,18 @@ namespace GW2SDK.Items
                 Rarity = rarity.GetValue(missingMemberBehavior),
                 VendorValue = vendorValue.GetValue(),
                 DefaultSkin = defaultSkin.GetValue(),
-                GameTypes = gameTypes.GetValue(missingMemberBehavior),
-                Flags = flags.GetValue(missingMemberBehavior),
-                Restrictions = restrictions.GetValue(missingMemberBehavior),
+                GameTypes = gameTypes.GetValues(missingMemberBehavior),
+                Flags = flags.GetValues(missingMemberBehavior),
+                Restrictions = restrictions.GetValues(missingMemberBehavior),
                 ChatLink = chatLink.GetValue(),
                 Icon = icon.GetValueOrNull(),
                 DamageType = damageType.GetValue(missingMemberBehavior),
                 MinPower = minPower.GetValue(),
                 MaxPower = maxPower.GetValue(),
                 Defense = defense.GetValue(),
-                InfusionSlots = infusionSlots.Select(value => value.GetArray(item => ReadInfusionSlot(item, missingMemberBehavior))),
+                InfusionSlots = infusionSlots.SelectMany(value => ReadInfusionSlot(value, missingMemberBehavior)),
                 AttributeAdjustment = attributeAdjustment.GetValue(),
-                StatChoices = statChoices.Select(value => value.GetArray(item => item.GetInt32())),
+                StatChoices = statChoices.SelectMany(value => value.GetInt32()),
                 Prefix = infixUpgrade.Select(value => ReadInfixUpgrade(value, missingMemberBehavior)),
                 SuffixItemId = suffixItemId.GetValue(),
                 SecondarySuffixItemId = secondarySuffixItemId.GetValue()
@@ -9948,9 +9949,9 @@ namespace GW2SDK.Items
             var rarity = new RequiredMember<Rarity>("rarity");
             var vendorValue = new RequiredMember<Coin>("vendor_value");
             var defaultSkin = new RequiredMember<int>("default_skin");
-            var gameTypes = new RequiredMember<GameType[]>("game_types");
-            var flags = new RequiredMember<ItemFlag[]>("flags");
-            var restrictions = new RequiredMember<ItemRestriction[]>("restrictions");
+            var gameTypes = new RequiredMember<GameType>("game_types");
+            var flags = new RequiredMember<ItemFlag>("flags");
+            var restrictions = new RequiredMember<ItemRestriction>("restrictions");
             var id = new RequiredMember<int>("id");
             var chatLink = new RequiredMember<string>("chat_link");
             var icon = new OptionalMember<string>("icon");
@@ -9958,9 +9959,9 @@ namespace GW2SDK.Items
             var minPower = new RequiredMember<int>("min_power");
             var maxPower = new RequiredMember<int>("max_power");
             var defense = new RequiredMember<int>("defense");
-            var infusionSlots = new RequiredMember<InfusionSlot[]>("infusion_slots");
+            var infusionSlots = new RequiredMember<InfusionSlot>("infusion_slots");
             var attributeAdjustment = new RequiredMember<double>("attribute_adjustment");
-            var statChoices = new OptionalMember<int[]>("stat_choices");
+            var statChoices = new OptionalMember<int>("stat_choices");
             var infixUpgrade = new OptionalMember<InfixUpgrade>("infix_upgrade");
             var suffixItemId = new NullableMember<int>("suffix_item_id");
             var secondarySuffixItemId = new NullableMember<int>("secondary_suffix_item_id");
@@ -10093,18 +10094,18 @@ namespace GW2SDK.Items
                 Rarity = rarity.GetValue(missingMemberBehavior),
                 VendorValue = vendorValue.GetValue(),
                 DefaultSkin = defaultSkin.GetValue(),
-                GameTypes = gameTypes.GetValue(missingMemberBehavior),
-                Flags = flags.GetValue(missingMemberBehavior),
-                Restrictions = restrictions.GetValue(missingMemberBehavior),
+                GameTypes = gameTypes.GetValues(missingMemberBehavior),
+                Flags = flags.GetValues(missingMemberBehavior),
+                Restrictions = restrictions.GetValues(missingMemberBehavior),
                 ChatLink = chatLink.GetValue(),
                 Icon = icon.GetValueOrNull(),
                 DamageType = damageType.GetValue(missingMemberBehavior),
                 MinPower = minPower.GetValue(),
                 MaxPower = maxPower.GetValue(),
                 Defense = defense.GetValue(),
-                InfusionSlots = infusionSlots.Select(value => value.GetArray(item => ReadInfusionSlot(item, missingMemberBehavior))),
+                InfusionSlots = infusionSlots.SelectMany(value => ReadInfusionSlot(value, missingMemberBehavior)),
                 AttributeAdjustment = attributeAdjustment.GetValue(),
-                StatChoices = statChoices.Select(value => value.GetArray(item => item.GetInt32())),
+                StatChoices = statChoices.SelectMany(value => value.GetInt32()),
                 Prefix = infixUpgrade.Select(value => ReadInfixUpgrade(value, missingMemberBehavior)),
                 SuffixItemId = suffixItemId.GetValue(),
                 SecondarySuffixItemId = secondarySuffixItemId.GetValue()
@@ -10119,9 +10120,9 @@ namespace GW2SDK.Items
             var rarity = new RequiredMember<Rarity>("rarity");
             var vendorValue = new RequiredMember<Coin>("vendor_value");
             var defaultSkin = new RequiredMember<int>("default_skin");
-            var gameTypes = new RequiredMember<GameType[]>("game_types");
-            var flags = new RequiredMember<ItemFlag[]>("flags");
-            var restrictions = new RequiredMember<ItemRestriction[]>("restrictions");
+            var gameTypes = new RequiredMember<GameType>("game_types");
+            var flags = new RequiredMember<ItemFlag>("flags");
+            var restrictions = new RequiredMember<ItemRestriction>("restrictions");
             var id = new RequiredMember<int>("id");
             var chatLink = new RequiredMember<string>("chat_link");
             var icon = new OptionalMember<string>("icon");
@@ -10129,9 +10130,9 @@ namespace GW2SDK.Items
             var minPower = new RequiredMember<int>("min_power");
             var maxPower = new RequiredMember<int>("max_power");
             var defense = new RequiredMember<int>("defense");
-            var infusionSlots = new RequiredMember<InfusionSlot[]>("infusion_slots");
+            var infusionSlots = new RequiredMember<InfusionSlot>("infusion_slots");
             var attributeAdjustment = new RequiredMember<double>("attribute_adjustment");
-            var statChoices = new OptionalMember<int[]>("stat_choices");
+            var statChoices = new OptionalMember<int>("stat_choices");
             var infixUpgrade = new OptionalMember<InfixUpgrade>("infix_upgrade");
             var suffixItemId = new NullableMember<int>("suffix_item_id");
             var secondarySuffixItemId = new NullableMember<int>("secondary_suffix_item_id");
@@ -10264,18 +10265,18 @@ namespace GW2SDK.Items
                 Rarity = rarity.GetValue(missingMemberBehavior),
                 VendorValue = vendorValue.GetValue(),
                 DefaultSkin = defaultSkin.GetValue(),
-                GameTypes = gameTypes.GetValue(missingMemberBehavior),
-                Flags = flags.GetValue(missingMemberBehavior),
-                Restrictions = restrictions.GetValue(missingMemberBehavior),
+                GameTypes = gameTypes.GetValues(missingMemberBehavior),
+                Flags = flags.GetValues(missingMemberBehavior),
+                Restrictions = restrictions.GetValues(missingMemberBehavior),
                 ChatLink = chatLink.GetValue(),
                 Icon = icon.GetValueOrNull(),
                 DamageType = damageType.GetValue(missingMemberBehavior),
                 MinPower = minPower.GetValue(),
                 MaxPower = maxPower.GetValue(),
                 Defense = defense.GetValue(),
-                InfusionSlots = infusionSlots.Select(value => value.GetArray(item => ReadInfusionSlot(item, missingMemberBehavior))),
+                InfusionSlots = infusionSlots.SelectMany(value => ReadInfusionSlot(value, missingMemberBehavior)),
                 AttributeAdjustment = attributeAdjustment.GetValue(),
-                StatChoices = statChoices.Select(value => value.GetArray(item => item.GetInt32())),
+                StatChoices = statChoices.SelectMany(value => value.GetInt32()),
                 Prefix = infixUpgrade.Select(value => ReadInfixUpgrade(value, missingMemberBehavior)),
                 SuffixItemId = suffixItemId.GetValue(),
                 SecondarySuffixItemId = secondarySuffixItemId.GetValue()
@@ -10290,9 +10291,9 @@ namespace GW2SDK.Items
             var rarity = new RequiredMember<Rarity>("rarity");
             var vendorValue = new RequiredMember<Coin>("vendor_value");
             var defaultSkin = new RequiredMember<int>("default_skin");
-            var gameTypes = new RequiredMember<GameType[]>("game_types");
-            var flags = new RequiredMember<ItemFlag[]>("flags");
-            var restrictions = new RequiredMember<ItemRestriction[]>("restrictions");
+            var gameTypes = new RequiredMember<GameType>("game_types");
+            var flags = new RequiredMember<ItemFlag>("flags");
+            var restrictions = new RequiredMember<ItemRestriction>("restrictions");
             var id = new RequiredMember<int>("id");
             var chatLink = new RequiredMember<string>("chat_link");
             var icon = new OptionalMember<string>("icon");
@@ -10300,9 +10301,9 @@ namespace GW2SDK.Items
             var minPower = new RequiredMember<int>("min_power");
             var maxPower = new RequiredMember<int>("max_power");
             var defense = new RequiredMember<int>("defense");
-            var infusionSlots = new RequiredMember<InfusionSlot[]>("infusion_slots");
+            var infusionSlots = new RequiredMember<InfusionSlot>("infusion_slots");
             var attributeAdjustment = new RequiredMember<double>("attribute_adjustment");
-            var statChoices = new OptionalMember<int[]>("stat_choices");
+            var statChoices = new OptionalMember<int>("stat_choices");
             var infixUpgrade = new OptionalMember<InfixUpgrade>("infix_upgrade");
             var suffixItemId = new NullableMember<int>("suffix_item_id");
             var secondarySuffixItemId = new NullableMember<int>("secondary_suffix_item_id");
@@ -10435,18 +10436,18 @@ namespace GW2SDK.Items
                 Rarity = rarity.GetValue(missingMemberBehavior),
                 VendorValue = vendorValue.GetValue(),
                 DefaultSkin = defaultSkin.GetValue(),
-                GameTypes = gameTypes.GetValue(missingMemberBehavior),
-                Flags = flags.GetValue(missingMemberBehavior),
-                Restrictions = restrictions.GetValue(missingMemberBehavior),
+                GameTypes = gameTypes.GetValues(missingMemberBehavior),
+                Flags = flags.GetValues(missingMemberBehavior),
+                Restrictions = restrictions.GetValues(missingMemberBehavior),
                 ChatLink = chatLink.GetValue(),
                 Icon = icon.GetValueOrNull(),
                 DamageType = damageType.GetValue(missingMemberBehavior),
                 MinPower = minPower.GetValue(),
                 MaxPower = maxPower.GetValue(),
                 Defense = defense.GetValue(),
-                InfusionSlots = infusionSlots.Select(value => value.GetArray(item => ReadInfusionSlot(item, missingMemberBehavior))),
+                InfusionSlots = infusionSlots.SelectMany(value => ReadInfusionSlot(value, missingMemberBehavior)),
                 AttributeAdjustment = attributeAdjustment.GetValue(),
-                StatChoices = statChoices.Select(value => value.GetArray(item => item.GetInt32())),
+                StatChoices = statChoices.SelectMany(value => value.GetInt32()),
                 Prefix = infixUpgrade.Select(value => ReadInfixUpgrade(value, missingMemberBehavior)),
                 SuffixItemId = suffixItemId.GetValue(),
                 SecondarySuffixItemId = secondarySuffixItemId.GetValue()
@@ -10461,9 +10462,9 @@ namespace GW2SDK.Items
             var rarity = new RequiredMember<Rarity>("rarity");
             var vendorValue = new RequiredMember<Coin>("vendor_value");
             var defaultSkin = new RequiredMember<int>("default_skin");
-            var gameTypes = new RequiredMember<GameType[]>("game_types");
-            var flags = new RequiredMember<ItemFlag[]>("flags");
-            var restrictions = new RequiredMember<ItemRestriction[]>("restrictions");
+            var gameTypes = new RequiredMember<GameType>("game_types");
+            var flags = new RequiredMember<ItemFlag>("flags");
+            var restrictions = new RequiredMember<ItemRestriction>("restrictions");
             var id = new RequiredMember<int>("id");
             var chatLink = new RequiredMember<string>("chat_link");
             var icon = new OptionalMember<string>("icon");
@@ -10471,9 +10472,9 @@ namespace GW2SDK.Items
             var minPower = new RequiredMember<int>("min_power");
             var maxPower = new RequiredMember<int>("max_power");
             var defense = new RequiredMember<int>("defense");
-            var infusionSlots = new RequiredMember<InfusionSlot[]>("infusion_slots");
+            var infusionSlots = new RequiredMember<InfusionSlot>("infusion_slots");
             var attributeAdjustment = new RequiredMember<double>("attribute_adjustment");
-            var statChoices = new OptionalMember<int[]>("stat_choices");
+            var statChoices = new OptionalMember<int>("stat_choices");
             var infixUpgrade = new OptionalMember<InfixUpgrade>("infix_upgrade");
             var suffixItemId = new NullableMember<int>("suffix_item_id");
             var secondarySuffixItemId = new NullableMember<int>("secondary_suffix_item_id");
@@ -10606,18 +10607,18 @@ namespace GW2SDK.Items
                 Rarity = rarity.GetValue(missingMemberBehavior),
                 VendorValue = vendorValue.GetValue(),
                 DefaultSkin = defaultSkin.GetValue(),
-                GameTypes = gameTypes.GetValue(missingMemberBehavior),
-                Flags = flags.GetValue(missingMemberBehavior),
-                Restrictions = restrictions.GetValue(missingMemberBehavior),
+                GameTypes = gameTypes.GetValues(missingMemberBehavior),
+                Flags = flags.GetValues(missingMemberBehavior),
+                Restrictions = restrictions.GetValues(missingMemberBehavior),
                 ChatLink = chatLink.GetValue(),
                 Icon = icon.GetValueOrNull(),
                 DamageType = damageType.GetValue(missingMemberBehavior),
                 MinPower = minPower.GetValue(),
                 MaxPower = maxPower.GetValue(),
                 Defense = defense.GetValue(),
-                InfusionSlots = infusionSlots.Select(value => value.GetArray(item => ReadInfusionSlot(item, missingMemberBehavior))),
+                InfusionSlots = infusionSlots.SelectMany(value => ReadInfusionSlot(value, missingMemberBehavior)),
                 AttributeAdjustment = attributeAdjustment.GetValue(),
-                StatChoices = statChoices.Select(value => value.GetArray(item => item.GetInt32())),
+                StatChoices = statChoices.SelectMany(value => value.GetInt32()),
                 Prefix = infixUpgrade.Select(value => ReadInfixUpgrade(value, missingMemberBehavior)),
                 SuffixItemId = suffixItemId.GetValue(),
                 SecondarySuffixItemId = secondarySuffixItemId.GetValue()
@@ -10632,9 +10633,9 @@ namespace GW2SDK.Items
             var rarity = new RequiredMember<Rarity>("rarity");
             var vendorValue = new RequiredMember<Coin>("vendor_value");
             var defaultSkin = new RequiredMember<int>("default_skin");
-            var gameTypes = new RequiredMember<GameType[]>("game_types");
-            var flags = new RequiredMember<ItemFlag[]>("flags");
-            var restrictions = new RequiredMember<ItemRestriction[]>("restrictions");
+            var gameTypes = new RequiredMember<GameType>("game_types");
+            var flags = new RequiredMember<ItemFlag>("flags");
+            var restrictions = new RequiredMember<ItemRestriction>("restrictions");
             var id = new RequiredMember<int>("id");
             var chatLink = new RequiredMember<string>("chat_link");
             var icon = new OptionalMember<string>("icon");
@@ -10642,9 +10643,9 @@ namespace GW2SDK.Items
             var minPower = new RequiredMember<int>("min_power");
             var maxPower = new RequiredMember<int>("max_power");
             var defense = new RequiredMember<int>("defense");
-            var infusionSlots = new RequiredMember<InfusionSlot[]>("infusion_slots");
+            var infusionSlots = new RequiredMember<InfusionSlot>("infusion_slots");
             var attributeAdjustment = new RequiredMember<double>("attribute_adjustment");
-            var statChoices = new OptionalMember<int[]>("stat_choices");
+            var statChoices = new OptionalMember<int>("stat_choices");
             var infixUpgrade = new OptionalMember<InfixUpgrade>("infix_upgrade");
             var suffixItemId = new NullableMember<int>("suffix_item_id");
             var secondarySuffixItemId = new NullableMember<int>("secondary_suffix_item_id");
@@ -10777,18 +10778,18 @@ namespace GW2SDK.Items
                 Rarity = rarity.GetValue(missingMemberBehavior),
                 VendorValue = vendorValue.GetValue(),
                 DefaultSkin = defaultSkin.GetValue(),
-                GameTypes = gameTypes.GetValue(missingMemberBehavior),
-                Flags = flags.GetValue(missingMemberBehavior),
-                Restrictions = restrictions.GetValue(missingMemberBehavior),
+                GameTypes = gameTypes.GetValues(missingMemberBehavior),
+                Flags = flags.GetValues(missingMemberBehavior),
+                Restrictions = restrictions.GetValues(missingMemberBehavior),
                 ChatLink = chatLink.GetValue(),
                 Icon = icon.GetValueOrNull(),
                 DamageType = damageType.GetValue(missingMemberBehavior),
                 MinPower = minPower.GetValue(),
                 MaxPower = maxPower.GetValue(),
                 Defense = defense.GetValue(),
-                InfusionSlots = infusionSlots.Select(value => value.GetArray(item => ReadInfusionSlot(item, missingMemberBehavior))),
+                InfusionSlots = infusionSlots.SelectMany(value => ReadInfusionSlot(value, missingMemberBehavior)),
                 AttributeAdjustment = attributeAdjustment.GetValue(),
-                StatChoices = statChoices.Select(value => value.GetArray(item => item.GetInt32())),
+                StatChoices = statChoices.SelectMany(value => value.GetInt32()),
                 Prefix = infixUpgrade.Select(value => ReadInfixUpgrade(value, missingMemberBehavior)),
                 SuffixItemId = suffixItemId.GetValue(),
                 SecondarySuffixItemId = secondarySuffixItemId.GetValue()
@@ -10803,9 +10804,9 @@ namespace GW2SDK.Items
             var rarity = new RequiredMember<Rarity>("rarity");
             var vendorValue = new RequiredMember<Coin>("vendor_value");
             var defaultSkin = new RequiredMember<int>("default_skin");
-            var gameTypes = new RequiredMember<GameType[]>("game_types");
-            var flags = new RequiredMember<ItemFlag[]>("flags");
-            var restrictions = new RequiredMember<ItemRestriction[]>("restrictions");
+            var gameTypes = new RequiredMember<GameType>("game_types");
+            var flags = new RequiredMember<ItemFlag>("flags");
+            var restrictions = new RequiredMember<ItemRestriction>("restrictions");
             var id = new RequiredMember<int>("id");
             var chatLink = new RequiredMember<string>("chat_link");
             var icon = new OptionalMember<string>("icon");
@@ -10813,9 +10814,9 @@ namespace GW2SDK.Items
             var minPower = new RequiredMember<int>("min_power");
             var maxPower = new RequiredMember<int>("max_power");
             var defense = new RequiredMember<int>("defense");
-            var infusionSlots = new RequiredMember<InfusionSlot[]>("infusion_slots");
+            var infusionSlots = new RequiredMember<InfusionSlot>("infusion_slots");
             var attributeAdjustment = new RequiredMember<double>("attribute_adjustment");
-            var statChoices = new OptionalMember<int[]>("stat_choices");
+            var statChoices = new OptionalMember<int>("stat_choices");
             var infixUpgrade = new OptionalMember<InfixUpgrade>("infix_upgrade");
             var suffixItemId = new NullableMember<int>("suffix_item_id");
             var secondarySuffixItemId = new NullableMember<int>("secondary_suffix_item_id");
@@ -10948,18 +10949,18 @@ namespace GW2SDK.Items
                 Rarity = rarity.GetValue(missingMemberBehavior),
                 VendorValue = vendorValue.GetValue(),
                 DefaultSkin = defaultSkin.GetValue(),
-                GameTypes = gameTypes.GetValue(missingMemberBehavior),
-                Flags = flags.GetValue(missingMemberBehavior),
-                Restrictions = restrictions.GetValue(missingMemberBehavior),
+                GameTypes = gameTypes.GetValues(missingMemberBehavior),
+                Flags = flags.GetValues(missingMemberBehavior),
+                Restrictions = restrictions.GetValues(missingMemberBehavior),
                 ChatLink = chatLink.GetValue(),
                 Icon = icon.GetValueOrNull(),
                 DamageType = damageType.GetValue(missingMemberBehavior),
                 MinPower = minPower.GetValue(),
                 MaxPower = maxPower.GetValue(),
                 Defense = defense.GetValue(),
-                InfusionSlots = infusionSlots.Select(value => value.GetArray(item => ReadInfusionSlot(item, missingMemberBehavior))),
+                InfusionSlots = infusionSlots.SelectMany(value => ReadInfusionSlot(value, missingMemberBehavior)),
                 AttributeAdjustment = attributeAdjustment.GetValue(),
-                StatChoices = statChoices.Select(value => value.GetArray(item => item.GetInt32())),
+                StatChoices = statChoices.SelectMany(value => value.GetInt32()),
                 Prefix = infixUpgrade.Select(value => ReadInfixUpgrade(value, missingMemberBehavior)),
                 SuffixItemId = suffixItemId.GetValue(),
                 SecondarySuffixItemId = secondarySuffixItemId.GetValue()
@@ -10974,9 +10975,9 @@ namespace GW2SDK.Items
             var rarity = new RequiredMember<Rarity>("rarity");
             var vendorValue = new RequiredMember<Coin>("vendor_value");
             var defaultSkin = new RequiredMember<int>("default_skin");
-            var gameTypes = new RequiredMember<GameType[]>("game_types");
-            var flags = new RequiredMember<ItemFlag[]>("flags");
-            var restrictions = new RequiredMember<ItemRestriction[]>("restrictions");
+            var gameTypes = new RequiredMember<GameType>("game_types");
+            var flags = new RequiredMember<ItemFlag>("flags");
+            var restrictions = new RequiredMember<ItemRestriction>("restrictions");
             var id = new RequiredMember<int>("id");
             var chatLink = new RequiredMember<string>("chat_link");
             var icon = new OptionalMember<string>("icon");
@@ -10984,9 +10985,9 @@ namespace GW2SDK.Items
             var minPower = new RequiredMember<int>("min_power");
             var maxPower = new RequiredMember<int>("max_power");
             var defense = new RequiredMember<int>("defense");
-            var infusionSlots = new RequiredMember<InfusionSlot[]>("infusion_slots");
+            var infusionSlots = new RequiredMember<InfusionSlot>("infusion_slots");
             var attributeAdjustment = new RequiredMember<double>("attribute_adjustment");
-            var statChoices = new OptionalMember<int[]>("stat_choices");
+            var statChoices = new OptionalMember<int>("stat_choices");
             var infixUpgrade = new OptionalMember<InfixUpgrade>("infix_upgrade");
             var suffixItemId = new NullableMember<int>("suffix_item_id");
             var secondarySuffixItemId = new NullableMember<int>("secondary_suffix_item_id");
@@ -11119,18 +11120,18 @@ namespace GW2SDK.Items
                 Rarity = rarity.GetValue(missingMemberBehavior),
                 VendorValue = vendorValue.GetValue(),
                 DefaultSkin = defaultSkin.GetValue(),
-                GameTypes = gameTypes.GetValue(missingMemberBehavior),
-                Flags = flags.GetValue(missingMemberBehavior),
-                Restrictions = restrictions.GetValue(missingMemberBehavior),
+                GameTypes = gameTypes.GetValues(missingMemberBehavior),
+                Flags = flags.GetValues(missingMemberBehavior),
+                Restrictions = restrictions.GetValues(missingMemberBehavior),
                 ChatLink = chatLink.GetValue(),
                 Icon = icon.GetValueOrNull(),
                 DamageType = damageType.GetValue(missingMemberBehavior),
                 MinPower = minPower.GetValue(),
                 MaxPower = maxPower.GetValue(),
                 Defense = defense.GetValue(),
-                InfusionSlots = infusionSlots.Select(value => value.GetArray(item => ReadInfusionSlot(item, missingMemberBehavior))),
+                InfusionSlots = infusionSlots.SelectMany(value => ReadInfusionSlot(value, missingMemberBehavior)),
                 AttributeAdjustment = attributeAdjustment.GetValue(),
-                StatChoices = statChoices.Select(value => value.GetArray(item => item.GetInt32())),
+                StatChoices = statChoices.SelectMany(value => value.GetInt32()),
                 Prefix = infixUpgrade.Select(value => ReadInfixUpgrade(value, missingMemberBehavior)),
                 SuffixItemId = suffixItemId.GetValue(),
                 SecondarySuffixItemId = secondarySuffixItemId.GetValue()
@@ -11145,9 +11146,9 @@ namespace GW2SDK.Items
             var rarity = new RequiredMember<Rarity>("rarity");
             var vendorValue = new RequiredMember<Coin>("vendor_value");
             var defaultSkin = new RequiredMember<int>("default_skin");
-            var gameTypes = new RequiredMember<GameType[]>("game_types");
-            var flags = new RequiredMember<ItemFlag[]>("flags");
-            var restrictions = new RequiredMember<ItemRestriction[]>("restrictions");
+            var gameTypes = new RequiredMember<GameType>("game_types");
+            var flags = new RequiredMember<ItemFlag>("flags");
+            var restrictions = new RequiredMember<ItemRestriction>("restrictions");
             var id = new RequiredMember<int>("id");
             var chatLink = new RequiredMember<string>("chat_link");
             var icon = new OptionalMember<string>("icon");
@@ -11155,9 +11156,9 @@ namespace GW2SDK.Items
             var minPower = new RequiredMember<int>("min_power");
             var maxPower = new RequiredMember<int>("max_power");
             var defense = new RequiredMember<int>("defense");
-            var infusionSlots = new RequiredMember<InfusionSlot[]>("infusion_slots");
+            var infusionSlots = new RequiredMember<InfusionSlot>("infusion_slots");
             var attributeAdjustment = new RequiredMember<double>("attribute_adjustment");
-            var statChoices = new OptionalMember<int[]>("stat_choices");
+            var statChoices = new OptionalMember<int>("stat_choices");
             var infixUpgrade = new OptionalMember<InfixUpgrade>("infix_upgrade");
             var suffixItemId = new NullableMember<int>("suffix_item_id");
             var secondarySuffixItemId = new NullableMember<int>("secondary_suffix_item_id");
@@ -11290,18 +11291,18 @@ namespace GW2SDK.Items
                 Rarity = rarity.GetValue(missingMemberBehavior),
                 VendorValue = vendorValue.GetValue(),
                 DefaultSkin = defaultSkin.GetValue(),
-                GameTypes = gameTypes.GetValue(missingMemberBehavior),
-                Flags = flags.GetValue(missingMemberBehavior),
-                Restrictions = restrictions.GetValue(missingMemberBehavior),
+                GameTypes = gameTypes.GetValues(missingMemberBehavior),
+                Flags = flags.GetValues(missingMemberBehavior),
+                Restrictions = restrictions.GetValues(missingMemberBehavior),
                 ChatLink = chatLink.GetValue(),
                 Icon = icon.GetValueOrNull(),
                 DamageType = damageType.GetValue(missingMemberBehavior),
                 MinPower = minPower.GetValue(),
                 MaxPower = maxPower.GetValue(),
                 Defense = defense.GetValue(),
-                InfusionSlots = infusionSlots.Select(value => value.GetArray(item => ReadInfusionSlot(item, missingMemberBehavior))),
+                InfusionSlots = infusionSlots.SelectMany(value => ReadInfusionSlot(value, missingMemberBehavior)),
                 AttributeAdjustment = attributeAdjustment.GetValue(),
-                StatChoices = statChoices.Select(value => value.GetArray(item => item.GetInt32())),
+                StatChoices = statChoices.SelectMany(value => value.GetInt32()),
                 Prefix = infixUpgrade.Select(value => ReadInfixUpgrade(value, missingMemberBehavior)),
                 SuffixItemId = suffixItemId.GetValue(),
                 SecondarySuffixItemId = secondarySuffixItemId.GetValue()
@@ -11316,9 +11317,9 @@ namespace GW2SDK.Items
             var rarity = new RequiredMember<Rarity>("rarity");
             var vendorValue = new RequiredMember<Coin>("vendor_value");
             var defaultSkin = new RequiredMember<int>("default_skin");
-            var gameTypes = new RequiredMember<GameType[]>("game_types");
-            var flags = new RequiredMember<ItemFlag[]>("flags");
-            var restrictions = new RequiredMember<ItemRestriction[]>("restrictions");
+            var gameTypes = new RequiredMember<GameType>("game_types");
+            var flags = new RequiredMember<ItemFlag>("flags");
+            var restrictions = new RequiredMember<ItemRestriction>("restrictions");
             var id = new RequiredMember<int>("id");
             var chatLink = new RequiredMember<string>("chat_link");
             var icon = new OptionalMember<string>("icon");
@@ -11326,9 +11327,9 @@ namespace GW2SDK.Items
             var minPower = new RequiredMember<int>("min_power");
             var maxPower = new RequiredMember<int>("max_power");
             var defense = new RequiredMember<int>("defense");
-            var infusionSlots = new RequiredMember<InfusionSlot[]>("infusion_slots");
+            var infusionSlots = new RequiredMember<InfusionSlot>("infusion_slots");
             var attributeAdjustment = new RequiredMember<double>("attribute_adjustment");
-            var statChoices = new OptionalMember<int[]>("stat_choices");
+            var statChoices = new OptionalMember<int>("stat_choices");
             var infixUpgrade = new OptionalMember<InfixUpgrade>("infix_upgrade");
             var suffixItemId = new NullableMember<int>("suffix_item_id");
             var secondarySuffixItemId = new NullableMember<int>("secondary_suffix_item_id");
@@ -11461,18 +11462,18 @@ namespace GW2SDK.Items
                 Rarity = rarity.GetValue(missingMemberBehavior),
                 VendorValue = vendorValue.GetValue(),
                 DefaultSkin = defaultSkin.GetValue(),
-                GameTypes = gameTypes.GetValue(missingMemberBehavior),
-                Flags = flags.GetValue(missingMemberBehavior),
-                Restrictions = restrictions.GetValue(missingMemberBehavior),
+                GameTypes = gameTypes.GetValues(missingMemberBehavior),
+                Flags = flags.GetValues(missingMemberBehavior),
+                Restrictions = restrictions.GetValues(missingMemberBehavior),
                 ChatLink = chatLink.GetValue(),
                 Icon = icon.GetValueOrNull(),
                 DamageType = damageType.GetValue(missingMemberBehavior),
                 MinPower = minPower.GetValue(),
                 MaxPower = maxPower.GetValue(),
                 Defense = defense.GetValue(),
-                InfusionSlots = infusionSlots.Select(value => value.GetArray(item => ReadInfusionSlot(item, missingMemberBehavior))),
+                InfusionSlots = infusionSlots.SelectMany(value => ReadInfusionSlot(value, missingMemberBehavior)),
                 AttributeAdjustment = attributeAdjustment.GetValue(),
-                StatChoices = statChoices.Select(value => value.GetArray(item => item.GetInt32())),
+                StatChoices = statChoices.SelectMany(value => value.GetInt32()),
                 Prefix = infixUpgrade.Select(value => ReadInfixUpgrade(value, missingMemberBehavior)),
                 SuffixItemId = suffixItemId.GetValue(),
                 SecondarySuffixItemId = secondarySuffixItemId.GetValue()
@@ -11487,9 +11488,9 @@ namespace GW2SDK.Items
             var rarity = new RequiredMember<Rarity>("rarity");
             var vendorValue = new RequiredMember<Coin>("vendor_value");
             var defaultSkin = new RequiredMember<int>("default_skin");
-            var gameTypes = new RequiredMember<GameType[]>("game_types");
-            var flags = new RequiredMember<ItemFlag[]>("flags");
-            var restrictions = new RequiredMember<ItemRestriction[]>("restrictions");
+            var gameTypes = new RequiredMember<GameType>("game_types");
+            var flags = new RequiredMember<ItemFlag>("flags");
+            var restrictions = new RequiredMember<ItemRestriction>("restrictions");
             var id = new RequiredMember<int>("id");
             var chatLink = new RequiredMember<string>("chat_link");
             var icon = new OptionalMember<string>("icon");
@@ -11497,9 +11498,9 @@ namespace GW2SDK.Items
             var minPower = new RequiredMember<int>("min_power");
             var maxPower = new RequiredMember<int>("max_power");
             var defense = new RequiredMember<int>("defense");
-            var infusionSlots = new RequiredMember<InfusionSlot[]>("infusion_slots");
+            var infusionSlots = new RequiredMember<InfusionSlot>("infusion_slots");
             var attributeAdjustment = new RequiredMember<double>("attribute_adjustment");
-            var statChoices = new OptionalMember<int[]>("stat_choices");
+            var statChoices = new OptionalMember<int>("stat_choices");
             var infixUpgrade = new OptionalMember<InfixUpgrade>("infix_upgrade");
             var suffixItemId = new NullableMember<int>("suffix_item_id");
             var secondarySuffixItemId = new NullableMember<int>("secondary_suffix_item_id");
@@ -11632,18 +11633,18 @@ namespace GW2SDK.Items
                 Rarity = rarity.GetValue(missingMemberBehavior),
                 VendorValue = vendorValue.GetValue(),
                 DefaultSkin = defaultSkin.GetValue(),
-                GameTypes = gameTypes.GetValue(missingMemberBehavior),
-                Flags = flags.GetValue(missingMemberBehavior),
-                Restrictions = restrictions.GetValue(missingMemberBehavior),
+                GameTypes = gameTypes.GetValues(missingMemberBehavior),
+                Flags = flags.GetValues(missingMemberBehavior),
+                Restrictions = restrictions.GetValues(missingMemberBehavior),
                 ChatLink = chatLink.GetValue(),
                 Icon = icon.GetValueOrNull(),
                 DamageType = damageType.GetValue(missingMemberBehavior),
                 MinPower = minPower.GetValue(),
                 MaxPower = maxPower.GetValue(),
                 Defense = defense.GetValue(),
-                InfusionSlots = infusionSlots.Select(value => value.GetArray(item => ReadInfusionSlot(item, missingMemberBehavior))),
+                InfusionSlots = infusionSlots.SelectMany(value => ReadInfusionSlot(value, missingMemberBehavior)),
                 AttributeAdjustment = attributeAdjustment.GetValue(),
-                StatChoices = statChoices.Select(value => value.GetArray(item => item.GetInt32())),
+                StatChoices = statChoices.SelectMany(value => value.GetInt32()),
                 Prefix = infixUpgrade.Select(value => ReadInfixUpgrade(value, missingMemberBehavior)),
                 SuffixItemId = suffixItemId.GetValue(),
                 SecondarySuffixItemId = secondarySuffixItemId.GetValue()
@@ -11658,9 +11659,9 @@ namespace GW2SDK.Items
             var rarity = new RequiredMember<Rarity>("rarity");
             var vendorValue = new RequiredMember<Coin>("vendor_value");
             var defaultSkin = new RequiredMember<int>("default_skin");
-            var gameTypes = new RequiredMember<GameType[]>("game_types");
-            var flags = new RequiredMember<ItemFlag[]>("flags");
-            var restrictions = new RequiredMember<ItemRestriction[]>("restrictions");
+            var gameTypes = new RequiredMember<GameType>("game_types");
+            var flags = new RequiredMember<ItemFlag>("flags");
+            var restrictions = new RequiredMember<ItemRestriction>("restrictions");
             var id = new RequiredMember<int>("id");
             var chatLink = new RequiredMember<string>("chat_link");
             var icon = new OptionalMember<string>("icon");
@@ -11668,9 +11669,9 @@ namespace GW2SDK.Items
             var minPower = new RequiredMember<int>("min_power");
             var maxPower = new RequiredMember<int>("max_power");
             var defense = new RequiredMember<int>("defense");
-            var infusionSlots = new RequiredMember<InfusionSlot[]>("infusion_slots");
+            var infusionSlots = new RequiredMember<InfusionSlot>("infusion_slots");
             var attributeAdjustment = new RequiredMember<double>("attribute_adjustment");
-            var statChoices = new OptionalMember<int[]>("stat_choices");
+            var statChoices = new OptionalMember<int>("stat_choices");
             var infixUpgrade = new OptionalMember<InfixUpgrade>("infix_upgrade");
             var suffixItemId = new NullableMember<int>("suffix_item_id");
             var secondarySuffixItemId = new NullableMember<int>("secondary_suffix_item_id");
@@ -11803,18 +11804,18 @@ namespace GW2SDK.Items
                 Rarity = rarity.GetValue(missingMemberBehavior),
                 VendorValue = vendorValue.GetValue(),
                 DefaultSkin = defaultSkin.GetValue(),
-                GameTypes = gameTypes.GetValue(missingMemberBehavior),
-                Flags = flags.GetValue(missingMemberBehavior),
-                Restrictions = restrictions.GetValue(missingMemberBehavior),
+                GameTypes = gameTypes.GetValues(missingMemberBehavior),
+                Flags = flags.GetValues(missingMemberBehavior),
+                Restrictions = restrictions.GetValues(missingMemberBehavior),
                 ChatLink = chatLink.GetValue(),
                 Icon = icon.GetValueOrNull(),
                 DamageType = damageType.GetValue(missingMemberBehavior),
                 MinPower = minPower.GetValue(),
                 MaxPower = maxPower.GetValue(),
                 Defense = defense.GetValue(),
-                InfusionSlots = infusionSlots.Select(value => value.GetArray(item => ReadInfusionSlot(item, missingMemberBehavior))),
+                InfusionSlots = infusionSlots.SelectMany(value => ReadInfusionSlot(value, missingMemberBehavior)),
                 AttributeAdjustment = attributeAdjustment.GetValue(),
-                StatChoices = statChoices.Select(value => value.GetArray(item => item.GetInt32())),
+                StatChoices = statChoices.SelectMany(value => value.GetInt32()),
                 Prefix = infixUpgrade.Select(value => ReadInfixUpgrade(value, missingMemberBehavior)),
                 SuffixItemId = suffixItemId.GetValue(),
                 SecondarySuffixItemId = secondarySuffixItemId.GetValue()
@@ -11829,9 +11830,9 @@ namespace GW2SDK.Items
             var rarity = new RequiredMember<Rarity>("rarity");
             var vendorValue = new RequiredMember<Coin>("vendor_value");
             var defaultSkin = new RequiredMember<int>("default_skin");
-            var gameTypes = new RequiredMember<GameType[]>("game_types");
-            var flags = new RequiredMember<ItemFlag[]>("flags");
-            var restrictions = new RequiredMember<ItemRestriction[]>("restrictions");
+            var gameTypes = new RequiredMember<GameType>("game_types");
+            var flags = new RequiredMember<ItemFlag>("flags");
+            var restrictions = new RequiredMember<ItemRestriction>("restrictions");
             var id = new RequiredMember<int>("id");
             var chatLink = new RequiredMember<string>("chat_link");
             var icon = new OptionalMember<string>("icon");
@@ -11839,9 +11840,9 @@ namespace GW2SDK.Items
             var minPower = new RequiredMember<int>("min_power");
             var maxPower = new RequiredMember<int>("max_power");
             var defense = new RequiredMember<int>("defense");
-            var infusionSlots = new RequiredMember<InfusionSlot[]>("infusion_slots");
+            var infusionSlots = new RequiredMember<InfusionSlot>("infusion_slots");
             var attributeAdjustment = new RequiredMember<double>("attribute_adjustment");
-            var statChoices = new OptionalMember<int[]>("stat_choices");
+            var statChoices = new OptionalMember<int>("stat_choices");
             var infixUpgrade = new OptionalMember<InfixUpgrade>("infix_upgrade");
             var suffixItemId = new NullableMember<int>("suffix_item_id");
             var secondarySuffixItemId = new NullableMember<int>("secondary_suffix_item_id");
@@ -11974,18 +11975,18 @@ namespace GW2SDK.Items
                 Rarity = rarity.GetValue(missingMemberBehavior),
                 VendorValue = vendorValue.GetValue(),
                 DefaultSkin = defaultSkin.GetValue(),
-                GameTypes = gameTypes.GetValue(missingMemberBehavior),
-                Flags = flags.GetValue(missingMemberBehavior),
-                Restrictions = restrictions.GetValue(missingMemberBehavior),
+                GameTypes = gameTypes.GetValues(missingMemberBehavior),
+                Flags = flags.GetValues(missingMemberBehavior),
+                Restrictions = restrictions.GetValues(missingMemberBehavior),
                 ChatLink = chatLink.GetValue(),
                 Icon = icon.GetValueOrNull(),
                 DamageType = damageType.GetValue(missingMemberBehavior),
                 MinPower = minPower.GetValue(),
                 MaxPower = maxPower.GetValue(),
                 Defense = defense.GetValue(),
-                InfusionSlots = infusionSlots.Select(value => value.GetArray(item => ReadInfusionSlot(item, missingMemberBehavior))),
+                InfusionSlots = infusionSlots.SelectMany(value => ReadInfusionSlot(value, missingMemberBehavior)),
                 AttributeAdjustment = attributeAdjustment.GetValue(),
-                StatChoices = statChoices.Select(value => value.GetArray(item => item.GetInt32())),
+                StatChoices = statChoices.SelectMany(value => value.GetInt32()),
                 Prefix = infixUpgrade.Select(value => ReadInfixUpgrade(value, missingMemberBehavior)),
                 SuffixItemId = suffixItemId.GetValue(),
                 SecondarySuffixItemId = secondarySuffixItemId.GetValue()
@@ -12000,9 +12001,9 @@ namespace GW2SDK.Items
             var rarity = new RequiredMember<Rarity>("rarity");
             var vendorValue = new RequiredMember<Coin>("vendor_value");
             var defaultSkin = new RequiredMember<int>("default_skin");
-            var gameTypes = new RequiredMember<GameType[]>("game_types");
-            var flags = new RequiredMember<ItemFlag[]>("flags");
-            var restrictions = new RequiredMember<ItemRestriction[]>("restrictions");
+            var gameTypes = new RequiredMember<GameType>("game_types");
+            var flags = new RequiredMember<ItemFlag>("flags");
+            var restrictions = new RequiredMember<ItemRestriction>("restrictions");
             var id = new RequiredMember<int>("id");
             var chatLink = new RequiredMember<string>("chat_link");
             var icon = new OptionalMember<string>("icon");
@@ -12010,9 +12011,9 @@ namespace GW2SDK.Items
             var minPower = new RequiredMember<int>("min_power");
             var maxPower = new RequiredMember<int>("max_power");
             var defense = new RequiredMember<int>("defense");
-            var infusionSlots = new RequiredMember<InfusionSlot[]>("infusion_slots");
+            var infusionSlots = new RequiredMember<InfusionSlot>("infusion_slots");
             var attributeAdjustment = new RequiredMember<double>("attribute_adjustment");
-            var statChoices = new OptionalMember<int[]>("stat_choices");
+            var statChoices = new OptionalMember<int>("stat_choices");
             var infixUpgrade = new OptionalMember<InfixUpgrade>("infix_upgrade");
             var suffixItemId = new NullableMember<int>("suffix_item_id");
             var secondarySuffixItemId = new NullableMember<int>("secondary_suffix_item_id");
@@ -12145,18 +12146,18 @@ namespace GW2SDK.Items
                 Rarity = rarity.GetValue(missingMemberBehavior),
                 VendorValue = vendorValue.GetValue(),
                 DefaultSkin = defaultSkin.GetValue(),
-                GameTypes = gameTypes.GetValue(missingMemberBehavior),
-                Flags = flags.GetValue(missingMemberBehavior),
-                Restrictions = restrictions.GetValue(missingMemberBehavior),
+                GameTypes = gameTypes.GetValues(missingMemberBehavior),
+                Flags = flags.GetValues(missingMemberBehavior),
+                Restrictions = restrictions.GetValues(missingMemberBehavior),
                 ChatLink = chatLink.GetValue(),
                 Icon = icon.GetValueOrNull(),
                 DamageType = damageType.GetValue(missingMemberBehavior),
                 MinPower = minPower.GetValue(),
                 MaxPower = maxPower.GetValue(),
                 Defense = defense.GetValue(),
-                InfusionSlots = infusionSlots.Select(value => value.GetArray(item => ReadInfusionSlot(item, missingMemberBehavior))),
+                InfusionSlots = infusionSlots.SelectMany(value => ReadInfusionSlot(value, missingMemberBehavior)),
                 AttributeAdjustment = attributeAdjustment.GetValue(),
-                StatChoices = statChoices.Select(value => value.GetArray(item => item.GetInt32())),
+                StatChoices = statChoices.SelectMany(value => value.GetInt32()),
                 Prefix = infixUpgrade.Select(value => ReadInfixUpgrade(value, missingMemberBehavior)),
                 SuffixItemId = suffixItemId.GetValue(),
                 SecondarySuffixItemId = secondarySuffixItemId.GetValue()
@@ -12171,9 +12172,9 @@ namespace GW2SDK.Items
             var rarity = new RequiredMember<Rarity>("rarity");
             var vendorValue = new RequiredMember<Coin>("vendor_value");
             var defaultSkin = new RequiredMember<int>("default_skin");
-            var gameTypes = new RequiredMember<GameType[]>("game_types");
-            var flags = new RequiredMember<ItemFlag[]>("flags");
-            var restrictions = new RequiredMember<ItemRestriction[]>("restrictions");
+            var gameTypes = new RequiredMember<GameType>("game_types");
+            var flags = new RequiredMember<ItemFlag>("flags");
+            var restrictions = new RequiredMember<ItemRestriction>("restrictions");
             var id = new RequiredMember<int>("id");
             var chatLink = new RequiredMember<string>("chat_link");
             var icon = new OptionalMember<string>("icon");
@@ -12181,9 +12182,9 @@ namespace GW2SDK.Items
             var minPower = new RequiredMember<int>("min_power");
             var maxPower = new RequiredMember<int>("max_power");
             var defense = new RequiredMember<int>("defense");
-            var infusionSlots = new RequiredMember<InfusionSlot[]>("infusion_slots");
+            var infusionSlots = new RequiredMember<InfusionSlot>("infusion_slots");
             var attributeAdjustment = new RequiredMember<double>("attribute_adjustment");
-            var statChoices = new OptionalMember<int[]>("stat_choices");
+            var statChoices = new OptionalMember<int>("stat_choices");
             var infixUpgrade = new OptionalMember<InfixUpgrade>("infix_upgrade");
             var suffixItemId = new NullableMember<int>("suffix_item_id");
             var secondarySuffixItemId = new NullableMember<int>("secondary_suffix_item_id");
@@ -12316,18 +12317,18 @@ namespace GW2SDK.Items
                 Rarity = rarity.GetValue(missingMemberBehavior),
                 VendorValue = vendorValue.GetValue(),
                 DefaultSkin = defaultSkin.GetValue(),
-                GameTypes = gameTypes.GetValue(missingMemberBehavior),
-                Flags = flags.GetValue(missingMemberBehavior),
-                Restrictions = restrictions.GetValue(missingMemberBehavior),
+                GameTypes = gameTypes.GetValues(missingMemberBehavior),
+                Flags = flags.GetValues(missingMemberBehavior),
+                Restrictions = restrictions.GetValues(missingMemberBehavior),
                 ChatLink = chatLink.GetValue(),
                 Icon = icon.GetValueOrNull(),
                 DamageType = damageType.GetValue(missingMemberBehavior),
                 MinPower = minPower.GetValue(),
                 MaxPower = maxPower.GetValue(),
                 Defense = defense.GetValue(),
-                InfusionSlots = infusionSlots.Select(value => value.GetArray(item => ReadInfusionSlot(item, missingMemberBehavior))),
+                InfusionSlots = infusionSlots.SelectMany(value => ReadInfusionSlot(value, missingMemberBehavior)),
                 AttributeAdjustment = attributeAdjustment.GetValue(),
-                StatChoices = statChoices.Select(value => value.GetArray(item => item.GetInt32())),
+                StatChoices = statChoices.SelectMany(value => value.GetInt32()),
                 Prefix = infixUpgrade.Select(value => ReadInfixUpgrade(value, missingMemberBehavior)),
                 SuffixItemId = suffixItemId.GetValue(),
                 SecondarySuffixItemId = secondarySuffixItemId.GetValue()
@@ -12342,9 +12343,9 @@ namespace GW2SDK.Items
             var rarity = new RequiredMember<Rarity>("rarity");
             var vendorValue = new RequiredMember<Coin>("vendor_value");
             var defaultSkin = new RequiredMember<int>("default_skin");
-            var gameTypes = new RequiredMember<GameType[]>("game_types");
-            var flags = new RequiredMember<ItemFlag[]>("flags");
-            var restrictions = new RequiredMember<ItemRestriction[]>("restrictions");
+            var gameTypes = new RequiredMember<GameType>("game_types");
+            var flags = new RequiredMember<ItemFlag>("flags");
+            var restrictions = new RequiredMember<ItemRestriction>("restrictions");
             var id = new RequiredMember<int>("id");
             var chatLink = new RequiredMember<string>("chat_link");
             var icon = new OptionalMember<string>("icon");
@@ -12352,9 +12353,9 @@ namespace GW2SDK.Items
             var minPower = new RequiredMember<int>("min_power");
             var maxPower = new RequiredMember<int>("max_power");
             var defense = new RequiredMember<int>("defense");
-            var infusionSlots = new RequiredMember<InfusionSlot[]>("infusion_slots");
+            var infusionSlots = new RequiredMember<InfusionSlot>("infusion_slots");
             var attributeAdjustment = new RequiredMember<double>("attribute_adjustment");
-            var statChoices = new OptionalMember<int[]>("stat_choices");
+            var statChoices = new OptionalMember<int>("stat_choices");
             var infixUpgrade = new OptionalMember<InfixUpgrade>("infix_upgrade");
             var suffixItemId = new NullableMember<int>("suffix_item_id");
             var secondarySuffixItemId = new NullableMember<int>("secondary_suffix_item_id");
@@ -12487,18 +12488,18 @@ namespace GW2SDK.Items
                 Rarity = rarity.GetValue(missingMemberBehavior),
                 VendorValue = vendorValue.GetValue(),
                 DefaultSkin = defaultSkin.GetValue(),
-                GameTypes = gameTypes.GetValue(missingMemberBehavior),
-                Flags = flags.GetValue(missingMemberBehavior),
-                Restrictions = restrictions.GetValue(missingMemberBehavior),
+                GameTypes = gameTypes.GetValues(missingMemberBehavior),
+                Flags = flags.GetValues(missingMemberBehavior),
+                Restrictions = restrictions.GetValues(missingMemberBehavior),
                 ChatLink = chatLink.GetValue(),
                 Icon = icon.GetValueOrNull(),
                 DamageType = damageType.GetValue(missingMemberBehavior),
                 MinPower = minPower.GetValue(),
                 MaxPower = maxPower.GetValue(),
                 Defense = defense.GetValue(),
-                InfusionSlots = infusionSlots.Select(value => value.GetArray(item => ReadInfusionSlot(item, missingMemberBehavior))),
+                InfusionSlots = infusionSlots.SelectMany(value => ReadInfusionSlot(value, missingMemberBehavior)),
                 AttributeAdjustment = attributeAdjustment.GetValue(),
-                StatChoices = statChoices.Select(value => value.GetArray(item => item.GetInt32())),
+                StatChoices = statChoices.SelectMany(value => value.GetInt32()),
                 Prefix = infixUpgrade.Select(value => ReadInfixUpgrade(value, missingMemberBehavior)),
                 SuffixItemId = suffixItemId.GetValue(),
                 SecondarySuffixItemId = secondarySuffixItemId.GetValue()
@@ -12513,9 +12514,9 @@ namespace GW2SDK.Items
             var rarity = new RequiredMember<Rarity>("rarity");
             var vendorValue = new RequiredMember<Coin>("vendor_value");
             var defaultSkin = new RequiredMember<int>("default_skin");
-            var gameTypes = new RequiredMember<GameType[]>("game_types");
-            var flags = new RequiredMember<ItemFlag[]>("flags");
-            var restrictions = new RequiredMember<ItemRestriction[]>("restrictions");
+            var gameTypes = new RequiredMember<GameType>("game_types");
+            var flags = new RequiredMember<ItemFlag>("flags");
+            var restrictions = new RequiredMember<ItemRestriction>("restrictions");
             var id = new RequiredMember<int>("id");
             var chatLink = new RequiredMember<string>("chat_link");
             var icon = new OptionalMember<string>("icon");
@@ -12523,9 +12524,9 @@ namespace GW2SDK.Items
             var minPower = new RequiredMember<int>("min_power");
             var maxPower = new RequiredMember<int>("max_power");
             var defense = new RequiredMember<int>("defense");
-            var infusionSlots = new RequiredMember<InfusionSlot[]>("infusion_slots");
+            var infusionSlots = new RequiredMember<InfusionSlot>("infusion_slots");
             var attributeAdjustment = new RequiredMember<double>("attribute_adjustment");
-            var statChoices = new OptionalMember<int[]>("stat_choices");
+            var statChoices = new OptionalMember<int>("stat_choices");
             var infixUpgrade = new OptionalMember<InfixUpgrade>("infix_upgrade");
             var suffixItemId = new NullableMember<int>("suffix_item_id");
             var secondarySuffixItemId = new NullableMember<int>("secondary_suffix_item_id");
@@ -12658,18 +12659,18 @@ namespace GW2SDK.Items
                 Rarity = rarity.GetValue(missingMemberBehavior),
                 VendorValue = vendorValue.GetValue(),
                 DefaultSkin = defaultSkin.GetValue(),
-                GameTypes = gameTypes.GetValue(missingMemberBehavior),
-                Flags = flags.GetValue(missingMemberBehavior),
-                Restrictions = restrictions.GetValue(missingMemberBehavior),
+                GameTypes = gameTypes.GetValues(missingMemberBehavior),
+                Flags = flags.GetValues(missingMemberBehavior),
+                Restrictions = restrictions.GetValues(missingMemberBehavior),
                 ChatLink = chatLink.GetValue(),
                 Icon = icon.GetValueOrNull(),
                 DamageType = damageType.GetValue(missingMemberBehavior),
                 MinPower = minPower.GetValue(),
                 MaxPower = maxPower.GetValue(),
                 Defense = defense.GetValue(),
-                InfusionSlots = infusionSlots.Select(value => value.GetArray(item => ReadInfusionSlot(item, missingMemberBehavior))),
+                InfusionSlots = infusionSlots.SelectMany(value => ReadInfusionSlot(value, missingMemberBehavior)),
                 AttributeAdjustment = attributeAdjustment.GetValue(),
-                StatChoices = statChoices.Select(value => value.GetArray(item => item.GetInt32())),
+                StatChoices = statChoices.SelectMany(value => value.GetInt32()),
                 Prefix = infixUpgrade.Select(value => ReadInfixUpgrade(value, missingMemberBehavior)),
                 SuffixItemId = suffixItemId.GetValue(),
                 SecondarySuffixItemId = secondarySuffixItemId.GetValue()
@@ -12684,9 +12685,9 @@ namespace GW2SDK.Items
             var rarity = new RequiredMember<Rarity>("rarity");
             var vendorValue = new RequiredMember<Coin>("vendor_value");
             var defaultSkin = new RequiredMember<int>("default_skin");
-            var gameTypes = new RequiredMember<GameType[]>("game_types");
-            var flags = new RequiredMember<ItemFlag[]>("flags");
-            var restrictions = new RequiredMember<ItemRestriction[]>("restrictions");
+            var gameTypes = new RequiredMember<GameType>("game_types");
+            var flags = new RequiredMember<ItemFlag>("flags");
+            var restrictions = new RequiredMember<ItemRestriction>("restrictions");
             var id = new RequiredMember<int>("id");
             var chatLink = new RequiredMember<string>("chat_link");
             var icon = new OptionalMember<string>("icon");
@@ -12694,9 +12695,9 @@ namespace GW2SDK.Items
             var minPower = new RequiredMember<int>("min_power");
             var maxPower = new RequiredMember<int>("max_power");
             var defense = new RequiredMember<int>("defense");
-            var infusionSlots = new RequiredMember<InfusionSlot[]>("infusion_slots");
+            var infusionSlots = new RequiredMember<InfusionSlot>("infusion_slots");
             var attributeAdjustment = new RequiredMember<double>("attribute_adjustment");
-            var statChoices = new OptionalMember<int[]>("stat_choices");
+            var statChoices = new OptionalMember<int>("stat_choices");
             var infixUpgrade = new OptionalMember<InfixUpgrade>("infix_upgrade");
             var suffixItemId = new NullableMember<int>("suffix_item_id");
             var secondarySuffixItemId = new NullableMember<int>("secondary_suffix_item_id");
@@ -12829,18 +12830,18 @@ namespace GW2SDK.Items
                 Rarity = rarity.GetValue(missingMemberBehavior),
                 VendorValue = vendorValue.GetValue(),
                 DefaultSkin = defaultSkin.GetValue(),
-                GameTypes = gameTypes.GetValue(missingMemberBehavior),
-                Flags = flags.GetValue(missingMemberBehavior),
-                Restrictions = restrictions.GetValue(missingMemberBehavior),
+                GameTypes = gameTypes.GetValues(missingMemberBehavior),
+                Flags = flags.GetValues(missingMemberBehavior),
+                Restrictions = restrictions.GetValues(missingMemberBehavior),
                 ChatLink = chatLink.GetValue(),
                 Icon = icon.GetValueOrNull(),
                 DamageType = damageType.GetValue(missingMemberBehavior),
                 MinPower = minPower.GetValue(),
                 MaxPower = maxPower.GetValue(),
                 Defense = defense.GetValue(),
-                InfusionSlots = infusionSlots.Select(value => value.GetArray(item => ReadInfusionSlot(item, missingMemberBehavior))),
+                InfusionSlots = infusionSlots.SelectMany(value => ReadInfusionSlot(value, missingMemberBehavior)),
                 AttributeAdjustment = attributeAdjustment.GetValue(),
-                StatChoices = statChoices.Select(value => value.GetArray(item => item.GetInt32())),
+                StatChoices = statChoices.SelectMany(value => value.GetInt32()),
                 Prefix = infixUpgrade.Select(value => ReadInfixUpgrade(value, missingMemberBehavior)),
                 SuffixItemId = suffixItemId.GetValue(),
                 SecondarySuffixItemId = secondarySuffixItemId.GetValue()
@@ -12855,9 +12856,9 @@ namespace GW2SDK.Items
             var rarity = new RequiredMember<Rarity>("rarity");
             var vendorValue = new RequiredMember<Coin>("vendor_value");
             var defaultSkin = new RequiredMember<int>("default_skin");
-            var gameTypes = new RequiredMember<GameType[]>("game_types");
-            var flags = new RequiredMember<ItemFlag[]>("flags");
-            var restrictions = new RequiredMember<ItemRestriction[]>("restrictions");
+            var gameTypes = new RequiredMember<GameType>("game_types");
+            var flags = new RequiredMember<ItemFlag>("flags");
+            var restrictions = new RequiredMember<ItemRestriction>("restrictions");
             var id = new RequiredMember<int>("id");
             var chatLink = new RequiredMember<string>("chat_link");
             var icon = new OptionalMember<string>("icon");
@@ -12865,9 +12866,9 @@ namespace GW2SDK.Items
             var minPower = new RequiredMember<int>("min_power");
             var maxPower = new RequiredMember<int>("max_power");
             var defense = new RequiredMember<int>("defense");
-            var infusionSlots = new RequiredMember<InfusionSlot[]>("infusion_slots");
+            var infusionSlots = new RequiredMember<InfusionSlot>("infusion_slots");
             var attributeAdjustment = new RequiredMember<double>("attribute_adjustment");
-            var statChoices = new OptionalMember<int[]>("stat_choices");
+            var statChoices = new OptionalMember<int>("stat_choices");
             var infixUpgrade = new OptionalMember<InfixUpgrade>("infix_upgrade");
             var suffixItemId = new NullableMember<int>("suffix_item_id");
             var secondarySuffixItemId = new NullableMember<int>("secondary_suffix_item_id");
@@ -13000,18 +13001,18 @@ namespace GW2SDK.Items
                 Rarity = rarity.GetValue(missingMemberBehavior),
                 VendorValue = vendorValue.GetValue(),
                 DefaultSkin = defaultSkin.GetValue(),
-                GameTypes = gameTypes.GetValue(missingMemberBehavior),
-                Flags = flags.GetValue(missingMemberBehavior),
-                Restrictions = restrictions.GetValue(missingMemberBehavior),
+                GameTypes = gameTypes.GetValues(missingMemberBehavior),
+                Flags = flags.GetValues(missingMemberBehavior),
+                Restrictions = restrictions.GetValues(missingMemberBehavior),
                 ChatLink = chatLink.GetValue(),
                 Icon = icon.GetValueOrNull(),
                 DamageType = damageType.GetValue(missingMemberBehavior),
                 MinPower = minPower.GetValue(),
                 MaxPower = maxPower.GetValue(),
                 Defense = defense.GetValue(),
-                InfusionSlots = infusionSlots.Select(value => value.GetArray(item => ReadInfusionSlot(item, missingMemberBehavior))),
+                InfusionSlots = infusionSlots.SelectMany(value => ReadInfusionSlot(value, missingMemberBehavior)),
                 AttributeAdjustment = attributeAdjustment.GetValue(),
-                StatChoices = statChoices.Select(value => value.GetArray(item => item.GetInt32())),
+                StatChoices = statChoices.SelectMany(value => value.GetInt32()),
                 Prefix = infixUpgrade.Select(value => ReadInfixUpgrade(value, missingMemberBehavior)),
                 SuffixItemId = suffixItemId.GetValue(),
                 SecondarySuffixItemId = secondarySuffixItemId.GetValue()
@@ -13026,9 +13027,9 @@ namespace GW2SDK.Items
             var rarity = new RequiredMember<Rarity>("rarity");
             var vendorValue = new RequiredMember<Coin>("vendor_value");
             var defaultSkin = new RequiredMember<int>("default_skin");
-            var gameTypes = new RequiredMember<GameType[]>("game_types");
-            var flags = new RequiredMember<ItemFlag[]>("flags");
-            var restrictions = new RequiredMember<ItemRestriction[]>("restrictions");
+            var gameTypes = new RequiredMember<GameType>("game_types");
+            var flags = new RequiredMember<ItemFlag>("flags");
+            var restrictions = new RequiredMember<ItemRestriction>("restrictions");
             var id = new RequiredMember<int>("id");
             var chatLink = new RequiredMember<string>("chat_link");
             var icon = new OptionalMember<string>("icon");
@@ -13036,9 +13037,9 @@ namespace GW2SDK.Items
             var minPower = new RequiredMember<int>("min_power");
             var maxPower = new RequiredMember<int>("max_power");
             var defense = new RequiredMember<int>("defense");
-            var infusionSlots = new RequiredMember<InfusionSlot[]>("infusion_slots");
+            var infusionSlots = new RequiredMember<InfusionSlot>("infusion_slots");
             var attributeAdjustment = new RequiredMember<double>("attribute_adjustment");
-            var statChoices = new OptionalMember<int[]>("stat_choices");
+            var statChoices = new OptionalMember<int>("stat_choices");
             var infixUpgrade = new OptionalMember<InfixUpgrade>("infix_upgrade");
             var suffixItemId = new NullableMember<int>("suffix_item_id");
             var secondarySuffixItemId = new NullableMember<int>("secondary_suffix_item_id");
@@ -13171,18 +13172,18 @@ namespace GW2SDK.Items
                 Rarity = rarity.GetValue(missingMemberBehavior),
                 VendorValue = vendorValue.GetValue(),
                 DefaultSkin = defaultSkin.GetValue(),
-                GameTypes = gameTypes.GetValue(missingMemberBehavior),
-                Flags = flags.GetValue(missingMemberBehavior),
-                Restrictions = restrictions.GetValue(missingMemberBehavior),
+                GameTypes = gameTypes.GetValues(missingMemberBehavior),
+                Flags = flags.GetValues(missingMemberBehavior),
+                Restrictions = restrictions.GetValues(missingMemberBehavior),
                 ChatLink = chatLink.GetValue(),
                 Icon = icon.GetValueOrNull(),
                 DamageType = damageType.GetValue(missingMemberBehavior),
                 MinPower = minPower.GetValue(),
                 MaxPower = maxPower.GetValue(),
                 Defense = defense.GetValue(),
-                InfusionSlots = infusionSlots.Select(value => value.GetArray(item => ReadInfusionSlot(item, missingMemberBehavior))),
+                InfusionSlots = infusionSlots.SelectMany(value => ReadInfusionSlot(value, missingMemberBehavior)),
                 AttributeAdjustment = attributeAdjustment.GetValue(),
-                StatChoices = statChoices.Select(value => value.GetArray(item => item.GetInt32())),
+                StatChoices = statChoices.SelectMany(value => value.GetInt32()),
                 Prefix = infixUpgrade.Select(value => ReadInfixUpgrade(value, missingMemberBehavior)),
                 SuffixItemId = suffixItemId.GetValue(),
                 SecondarySuffixItemId = secondarySuffixItemId.GetValue()
@@ -13196,9 +13197,9 @@ namespace GW2SDK.Items
             var level = new RequiredMember<int>("level");
             var rarity = new RequiredMember<Rarity>("rarity");
             var vendorValue = new RequiredMember<Coin>("vendor_value");
-            var gameTypes = new RequiredMember<GameType[]>("game_types");
-            var flags = new RequiredMember<ItemFlag[]>("flags");
-            var restrictions = new RequiredMember<ItemRestriction[]>("restrictions");
+            var gameTypes = new RequiredMember<GameType>("game_types");
+            var flags = new RequiredMember<ItemFlag>("flags");
+            var restrictions = new RequiredMember<ItemRestriction>("restrictions");
             var id = new RequiredMember<int>("id");
             var chatLink = new RequiredMember<string>("chat_link");
             var icon = new OptionalMember<string>("icon");
@@ -13269,9 +13270,9 @@ namespace GW2SDK.Items
                 Level = level.GetValue(),
                 Rarity = rarity.GetValue(missingMemberBehavior),
                 VendorValue = vendorValue.GetValue(),
-                GameTypes = gameTypes.GetValue(missingMemberBehavior),
-                Flags = flags.GetValue(missingMemberBehavior),
-                Restrictions = restrictions.GetValue(missingMemberBehavior),
+                GameTypes = gameTypes.GetValues(missingMemberBehavior),
+                Flags = flags.GetValues(missingMemberBehavior),
+                Restrictions = restrictions.GetValues(missingMemberBehavior),
                 ChatLink = chatLink.GetValue(),
                 Icon = icon.GetValueOrNull()
             };
@@ -13284,9 +13285,9 @@ namespace GW2SDK.Items
             var level = new RequiredMember<int>("level");
             var rarity = new RequiredMember<Rarity>("rarity");
             var vendorValue = new RequiredMember<Coin>("vendor_value");
-            var gameTypes = new RequiredMember<GameType[]>("game_types");
-            var flags = new RequiredMember<ItemFlag[]>("flags");
-            var restrictions = new RequiredMember<ItemRestriction[]>("restrictions");
+            var gameTypes = new RequiredMember<GameType>("game_types");
+            var flags = new RequiredMember<ItemFlag>("flags");
+            var restrictions = new RequiredMember<ItemRestriction>("restrictions");
             var id = new RequiredMember<int>("id");
             var chatLink = new RequiredMember<string>("chat_link");
             var icon = new OptionalMember<string>("icon");
@@ -13357,9 +13358,9 @@ namespace GW2SDK.Items
                 Level = level.GetValue(),
                 Rarity = rarity.GetValue(missingMemberBehavior),
                 VendorValue = vendorValue.GetValue(),
-                GameTypes = gameTypes.GetValue(missingMemberBehavior),
-                Flags = flags.GetValue(missingMemberBehavior),
-                Restrictions = restrictions.GetValue(missingMemberBehavior),
+                GameTypes = gameTypes.GetValues(missingMemberBehavior),
+                Flags = flags.GetValues(missingMemberBehavior),
+                Restrictions = restrictions.GetValues(missingMemberBehavior),
                 ChatLink = chatLink.GetValue(),
                 Icon = icon.GetValueOrNull()
             };

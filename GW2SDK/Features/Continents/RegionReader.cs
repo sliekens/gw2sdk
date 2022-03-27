@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Text.Json;
 using JetBrains.Annotations;
 using GW2SDK.Json;
@@ -16,8 +17,8 @@ namespace GW2SDK.Continents
         public Region Read(JsonElement json, MissingMemberBehavior missingMemberBehavior)
         {
             var name = new RequiredMember<string>("name");
-            var labelCoordinates = new RequiredMember<double[]>("label_coord");
-            var continentRectangle = new RequiredMember<double[][]>("continent_rect");
+            var labelCoordinates = new RequiredMember<PointF>("label_coord");
+            var continentRectangle = new RequiredMember<ContinentRectangle>("continent_rect");
             var maps = new RequiredMember<Dictionary<int, Map>>("maps");
             var id = new RequiredMember<int>("id");
             foreach (var member in json.EnumerateObject())
@@ -52,9 +53,37 @@ namespace GW2SDK.Continents
             {
                 Id = id.GetValue(),
                 Name = name.GetValue(),
-                LabelCoordinates = labelCoordinates.Select(value => value.GetArray(item => item.GetDouble())),
-                ContinentRectangle = continentRectangle.Select(rectangle => rectangle.GetArray(point => point.GetArray(coord => coord.GetDouble()))),
+                LabelCoordinates = labelCoordinates.Select(value => ReadPointF(value, missingMemberBehavior)),
+                ContinentRectangle = continentRectangle.Select(value => ReadContinentRectangle(value, missingMemberBehavior)),
                 Maps = maps.Select(value => ReadMaps(value, missingMemberBehavior))
+            };
+        }
+
+        private PointF ReadPointF(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+        {
+            var x = json[0]
+                .GetSingle();
+            var y = json[1]
+                .GetSingle();
+            return new PointF(x, y);
+        }
+
+        private ContinentRectangle ReadContinentRectangle(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+        {
+            var topLeft = json[0];
+            var x = topLeft[0]
+                .GetSingle();
+            var y = topLeft[1]
+                .GetSingle();
+            var size = json[1];
+            var width = size[0]
+                .GetSingle();
+            var height = size[1]
+                .GetSingle();
+            return new ContinentRectangle
+            {
+                TopLeft = new PointF(x, y),
+                Size = new SizeF(width, height)
             };
         }
 

@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Text.Json;
 
 namespace GW2SDK.Json
@@ -29,7 +31,7 @@ namespace GW2SDK.Json
 
         internal ReadOnlySpan<char> Name { get; }
 
-        internal T? Select(Func<JsonElement, T?> selector)
+        internal T? Select(Func<JsonElement, T?> resultSelector)
         {
             if (member.IsMissing)
             {
@@ -38,7 +40,28 @@ namespace GW2SDK.Json
 
             try
             {
-                return selector(member.Value);
+                return resultSelector(member.Value);
+            }
+            catch (Exception reason)
+            {
+                throw new InvalidOperationException($"Value for '{Name.ToString()}' is incompatible.", reason);
+            }
+        }
+
+        internal IReadOnlyCollection<T>? SelectMany(Func<JsonElement, T> resultSelector)
+        {
+            if (member.IsMissing)
+            {
+                return null;
+            }
+
+            try
+            {
+                // ReSharper disable once ConvertClosureToMethodGroup
+                return member.Value.EnumerateArray()
+                    .Select(item => resultSelector(item))
+                    .ToList()
+                    .AsReadOnly();
             }
             catch (Exception reason)
             {

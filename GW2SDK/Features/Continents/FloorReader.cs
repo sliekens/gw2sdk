@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Text.Json;
 using JetBrains.Annotations;
 using GW2SDK.Json;
@@ -15,8 +16,8 @@ namespace GW2SDK.Continents
 
         public Floor Read(JsonElement json, MissingMemberBehavior missingMemberBehavior)
         {
-            var textureDimensions = new RequiredMember<double[]>("texture_dims");
-            var clampedView = new OptionalMember<double[][]>("clamped_view");
+            var textureDimensions = new RequiredMember<SizeF>("texture_dims");
+            var clampedView = new OptionalMember<ContinentRectangle>("clamped_view");
             var regions = new RequiredMember<Dictionary<int, Region>>("regions");
             var id = new RequiredMember<int>("id");
             foreach (var member in json.EnumerateObject())
@@ -46,9 +47,37 @@ namespace GW2SDK.Continents
             return new Floor
             {
                 Id = id.GetValue(),
-                TextureDimensions = textureDimensions.Select(value => value.GetArray(item => item.GetDouble())),
-                ClampedView = clampedView.Select(rectangle => rectangle.GetArray(point => point.GetArray(coord => coord.GetDouble()))),
+                TextureDimensions = textureDimensions.Select(value => ReadSizeF(value, missingMemberBehavior)),
+                ClampedView = clampedView.Select(value => ReadContinentRectangle(value, missingMemberBehavior)),
                 Regions = regions.Select(value => ReadRegions(value, missingMemberBehavior))
+            };
+        }
+
+        private SizeF ReadSizeF(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+        {
+            var width = json[0]
+                .GetSingle();
+            var height = json[1]
+                .GetSingle();
+            return new SizeF(width, height);
+        }
+
+        private ContinentRectangle ReadContinentRectangle(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+        {
+            var topLeft = json[0];
+            var x = topLeft[0]
+                .GetSingle();
+            var y = topLeft[1]
+                .GetSingle();
+            var size = json[1];
+            var width = size[0]
+                .GetSingle();
+            var height = size[1]
+                .GetSingle();
+            return new ContinentRectangle
+            {
+                TopLeft = new PointF(x, y),
+                Size = new SizeF(width, height)
             };
         }
 

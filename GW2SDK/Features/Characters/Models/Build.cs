@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using GW2SDK.Annotations;
 using JetBrains.Annotations;
 
@@ -14,7 +15,7 @@ namespace GW2SDK.Characters
         public ProfessionName Profession { get; init; }
 
         // Always length 3
-        public Specialization[] Specializations { get; init; } = Array.Empty<Specialization>();
+        public IReadOnlyCollection<Specialization> Specializations { get; init; } = Array.Empty<Specialization>();
 
         public SkillBar Skills { get; init; } = new();
 
@@ -23,9 +24,9 @@ namespace GW2SDK.Characters
         public PetSkillBar? Pets { get; init; }
 
         // Always length 2 or missing
-        public string?[]? Legends { get; init; }
+        public IReadOnlyCollection<string?>? Legends { get; init; }
 
         // Always length 2 or missing
-        public string?[]? AquaticLegends { get; init; }
+        public IReadOnlyCollection<string?>? AquaticLegends { get; init; }
     }
 }

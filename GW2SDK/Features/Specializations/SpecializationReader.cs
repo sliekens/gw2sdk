@@ -14,8 +14,8 @@ namespace GW2SDK.Specializations
             var name = new RequiredMember<string>("name");
             var profession = new RequiredMember<ProfessionName>("profession");
             var elite = new RequiredMember<bool>("elite");
-            var minorTraits = new RequiredMember<int[]>("minor_traits");
-            var majorTraits = new RequiredMember<int[]>("major_traits");
+            var minorTraits = new RequiredMember<int>("minor_traits");
+            var majorTraits = new RequiredMember<int>("major_traits");
             var weaponTrait = new NullableMember<int>("weapon_trait");
             var icon = new RequiredMember<string>("icon");
             var background = new RequiredMember<string>("background");
@@ -80,8 +80,8 @@ namespace GW2SDK.Specializations
                 Name = name.GetValue(),
                 Profession = profession.GetValue(missingMemberBehavior),
                 Elite = elite.GetValue(),
-                MinorTraits = minorTraits.Select(value => value.GetArray(item => item.GetInt32())),
-                MajorTraits = majorTraits.Select(value => value.GetArray(item => item.GetInt32())),
+                MinorTraits = minorTraits.SelectMany(value => value.GetInt32()),
+                MajorTraits = majorTraits.SelectMany(value => value.GetInt32()),
                 WeaponTrait = weaponTrait.GetValue(),
                 Icon = icon.GetValue(),
                 Background = background.GetValue(),

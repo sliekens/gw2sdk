@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using GW2SDK.Annotations;
 using JetBrains.Annotations;
 
@@ -15,6 +16,6 @@ namespace GW2SDK.Characters
         public int? RuneId { get; init; }
 
         /// <summary>The IDs of all equipped sigils.</summary>
-        public int?[] SigilIds { get; init; } = Array.Empty<int?>();
+        public IReadOnlyCollection<int?> SigilIds { get; init; } = Array.Empty<int?>();
     }
 }

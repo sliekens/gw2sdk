@@ -34,10 +34,10 @@ namespace GW2SDK.Accounts.Banks
             var count = new RequiredMember<int>("count");
             var charges = new NullableMember<int>("charges");
             var skin = new NullableMember<int>("skin");
-            var upgrades = new OptionalMember<int[]>("upgrades");
-            var upgradeSlotIndices = new OptionalMember<int[]>("upgrade_slot_indices");
-            var infusions = new OptionalMember<int[]>("infusions");
-            var dyes = new OptionalMember<int[]>("dyes");
+            var upgrades = new OptionalMember<int>("upgrades");
+            var upgradeSlotIndices = new OptionalMember<int>("upgrade_slot_indices");
+            var infusions = new OptionalMember<int>("infusions");
+            var dyes = new OptionalMember<int>("dyes");
             var binding = new OptionalMember<ItemBinding>("binding");
             var boundTo = new OptionalMember<string>("bound_to");
             var stats = new OptionalMember<SelectedStat>("stats");
@@ -99,10 +99,10 @@ namespace GW2SDK.Accounts.Banks
                 Count = count.GetValue(),
                 Charges = charges.GetValue(),
                 Skin = skin.GetValue(),
-                Upgrades = upgrades.Select(value => value.GetArray(item => item.GetInt32())),
-                UpgradeSlotIndices = upgradeSlotIndices.Select(value => value.GetArray(item => item.GetInt32())),
-                Infusions = infusions.Select(value => value.GetArray(item => item.GetInt32())),
-                Dyes = dyes.Select(value => value.GetArray(item => item.GetInt32())),
+                Upgrades = upgrades.SelectMany(value => value.GetInt32()),
+                UpgradeSlotIndices = upgradeSlotIndices.SelectMany(value => value.GetInt32()),
+                Infusions = infusions.SelectMany(value => value.GetInt32()),
+                Dyes = dyes.SelectMany(value => value.GetInt32()),
                 Binding = binding.GetValue(),
                 BoundTo = boundTo.GetValueOrEmpty(),
                 Stats = stats.Select(value => ReadSelectedStat(value, missingMemberBehavior))

@@ -10,9 +10,9 @@ namespace GW2SDK.V2
     {
         public ApiInfo Read(JsonElement json, MissingMemberBehavior missingMemberBehavior)
         {
-            var languages = new RequiredMember<string[]>("langs");
-            var routes = new RequiredMember<ApiRoute[]>("routes");
-            var schemaVersions = new RequiredMember<ApiVersion[]>("schema_versions");
+            var languages = new RequiredMember<string>("langs");
+            var routes = new RequiredMember<ApiRoute>("routes");
+            var schemaVersions = new RequiredMember<ApiVersion>("schema_versions");
 
             foreach (var member in json.EnumerateObject())
             {
@@ -36,20 +36,10 @@ namespace GW2SDK.V2
 
             return new ApiInfo
             {
-                Languages = languages.Select(value => ReadLanguages(value)),
-                Routes = routes.Select(value => ReadRoutes(value, missingMemberBehavior)), 
-                SchemaVersions = schemaVersions.Select(value => ReadApiVersions(value, missingMemberBehavior))
+                Languages = languages.SelectMany(value => value.GetStringRequired()),
+                Routes = routes.SelectMany(value => ReadApiRoute(value, missingMemberBehavior)), 
+                SchemaVersions = schemaVersions.SelectMany(value => ReadApiVersion(value, missingMemberBehavior))
             };
-        }
-
-        private string[] ReadLanguages(JsonElement value)
-        {
-            return value.GetArray(item => item.GetStringRequired());
-        }
-
-        private ApiRoute[] ReadRoutes(JsonElement value, MissingMemberBehavior missingMemberBehavior)
-        {
-            return value.GetArray(item => ReadApiRoute(item, missingMemberBehavior));
         }
 
         private ApiRoute ReadApiRoute(JsonElement json, MissingMemberBehavior missingMemberBehavior)
@@ -84,11 +74,6 @@ namespace GW2SDK.V2
             }
 
             return new ApiRoute { Path = path.GetValue(), Multilingual = lang.GetValue(), RequiresAuthorization = auth.GetValue(), Active = active.GetValue() };
-        }
-
-        private ApiVersion[] ReadApiVersions(JsonElement value, MissingMemberBehavior missingMemberBehavior)
-        {
-            return value.GetArray(item => ReadApiVersion(item, missingMemberBehavior));
         }
 
         private ApiVersion ReadApiVersion(JsonElement jsonElement, MissingMemberBehavior missingMemberBehavior)

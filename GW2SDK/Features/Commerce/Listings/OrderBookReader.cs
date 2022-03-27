@@ -11,8 +11,8 @@ namespace GW2SDK.Commerce.Listings
         public OrderBook Read(JsonElement json, MissingMemberBehavior missingMemberBehavior)
         {
             var id = new RequiredMember<int>("id");
-            var demand = new RequiredMember<OrderBookLine[]>("buys");
-            var supply = new RequiredMember<OrderBookLine[]>("sells");
+            var demand = new RequiredMember<OrderBookLine>("buys");
+            var supply = new RequiredMember<OrderBookLine>("sells");
 
             foreach (var member in json.EnumerateObject())
             {
@@ -37,10 +37,8 @@ namespace GW2SDK.Commerce.Listings
             return new OrderBook
             {
                 Id = id.GetValue(),
-                Demand = demand.Select(value =>
-                    value.GetArray(item => ReadItemListingLine(item, missingMemberBehavior))),
-                Supply = supply.Select(value =>
-                    value.GetArray(item => ReadItemListingLine(item, missingMemberBehavior)))
+                Demand = demand.SelectMany(value => ReadItemListingLine(value, missingMemberBehavior)),
+                Supply = supply.SelectMany(value => ReadItemListingLine(value, missingMemberBehavior))
             };
         }
 

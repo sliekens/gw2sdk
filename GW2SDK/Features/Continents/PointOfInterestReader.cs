@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Drawing;
 using System.Text.Json;
 using JetBrains.Annotations;
 using GW2SDK.Json;
@@ -16,7 +17,7 @@ namespace GW2SDK.Continents
         {
             var name = new OptionalMember<string>("name");
             var floor = new RequiredMember<int>("floor");
-            var coordinates = new RequiredMember<double[]>("coord");
+            var coordinates = new RequiredMember<PointF>("coord");
             var id = new RequiredMember<int>("id");
             var chatLink = new RequiredMember<string>("chat_link");
             foreach (var member in json.EnumerateObject())
@@ -59,9 +60,18 @@ namespace GW2SDK.Continents
                 Id = id.GetValue(),
                 Name = name.GetValueOrEmpty(),
                 Floor = floor.GetValue(),
-                Coordinates = coordinates.Select(value => value.GetArray(item => item.GetDouble())),
+                Coordinates = coordinates.Select(value => ReadPointF(value, missingMemberBehavior)),
                 ChatLink = chatLink.GetValue()
             };
+        }
+
+        private PointF ReadPointF(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+        {
+            var x = json[0]
+                .GetSingle();
+            var y = json[1]
+                .GetSingle();
+            return new PointF(x, y);
         }
 
         public PointOfInterest Read(JsonElement json, MissingMemberBehavior missingMemberBehavior)
@@ -80,7 +90,7 @@ namespace GW2SDK.Continents
 
             var name = new OptionalMember<string>("name");
             var floor = new RequiredMember<int>("floor");
-            var coordinates = new RequiredMember<double[]>("coord");
+            var coordinates = new RequiredMember<PointF>("coord");
             var id = new RequiredMember<int>("id");
             var chatLink = new RequiredMember<string>("chat_link");
             foreach (var member in json.EnumerateObject())
@@ -123,7 +133,7 @@ namespace GW2SDK.Continents
                 Id = id.GetValue(),
                 Name = name.GetValueOrEmpty(),
                 Floor = floor.GetValue(),
-                Coordinates = coordinates.Select(value => value.GetArray(item => item.GetDouble())),
+                Coordinates = coordinates.Select(value => ReadPointF(value, missingMemberBehavior)),
                 ChatLink = chatLink.GetValue()
             };
         }
@@ -135,7 +145,7 @@ namespace GW2SDK.Continents
         {
             var name = new OptionalMember<string>("name");
             var floor = new RequiredMember<int>("floor");
-            var coordinates = new RequiredMember<double[]>("coord");
+            var coordinates = new RequiredMember<PointF>("coord");
             var id = new RequiredMember<int>("id");
             var chatLink = new RequiredMember<string>("chat_link");
             var icon = new RequiredMember<string>("icon");
@@ -183,7 +193,7 @@ namespace GW2SDK.Continents
                 Id = id.GetValue(),
                 Name = name.GetValueOrEmpty(),
                 Floor = floor.GetValue(),
-                Coordinates = coordinates.Select(value => value.GetArray(item => item.GetDouble())),
+                Coordinates = coordinates.Select(value => ReadPointF(value, missingMemberBehavior)),
                 ChatLink = chatLink.GetValue(),
                 Icon = icon.GetValue()
             };
@@ -193,7 +203,7 @@ namespace GW2SDK.Continents
         {
             var name = new OptionalMember<string>("name");
             var floor = new RequiredMember<int>("floor");
-            var coordinates = new RequiredMember<double[]>("coord");
+            var coordinates = new RequiredMember<PointF>("coord");
             var id = new RequiredMember<int>("id");
             var chatLink = new RequiredMember<string>("chat_link");
             foreach (var member in json.EnumerateObject())
@@ -236,7 +246,7 @@ namespace GW2SDK.Continents
                 Id = id.GetValue(),
                 Name = name.GetValueOrEmpty(),
                 Floor = floor.GetValue(),
-                Coordinates = coordinates.Select(value => value.GetArray(item => item.GetDouble())),
+                Coordinates = coordinates.Select(value => ReadPointF(value, missingMemberBehavior)),
                 ChatLink = chatLink.GetValue()
             };
         }
@@ -245,7 +255,7 @@ namespace GW2SDK.Continents
         {
             var name = new OptionalMember<string>("name");
             var floor = new RequiredMember<int>("floor");
-            var coordinates = new RequiredMember<double[]>("coord");
+            var coordinates = new RequiredMember<PointF>("coord");
             var id = new RequiredMember<int>("id");
             var chatLink = new RequiredMember<string>("chat_link");
             foreach (var member in json.EnumerateObject())
@@ -288,7 +298,7 @@ namespace GW2SDK.Continents
                 Id = id.GetValue(),
                 Name = name.GetValueOrEmpty(),
                 Floor = floor.GetValue(),
-                Coordinates = coordinates.Select(value => value.GetArray(item => item.GetDouble())),
+                Coordinates = coordinates.Select(value => ReadPointF(value, missingMemberBehavior)),
                 ChatLink = chatLink.GetValue()
             };
         }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using GW2SDK.Annotations;
 using JetBrains.Annotations;
 
@@ -14,7 +15,7 @@ namespace GW2SDK.Mounts
 
         public string Icon { get; init; } = "";
 
-        public DyeSlot[] DyeSlots { get; init; } = Array.Empty<DyeSlot>();
+        public IReadOnlyCollection<DyeSlot> DyeSlots { get; init; } = Array.Empty<DyeSlot>();
 
         public MountName Mount { get; init; }
     }

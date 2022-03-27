@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Drawing;
 using System.Text.Json;
 using GW2SDK.Json;
 using JetBrains.Annotations;
@@ -6,19 +7,19 @@ using JetBrains.Annotations;
 namespace GW2SDK.Colors
 {
     [PublicAPI]
-    public sealed class ColorReader : IColorReader
+    public sealed class DyeReader : IDyeReader
     {
-        public Color Read(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+        public Dye Read(JsonElement json, MissingMemberBehavior missingMemberBehavior)
         {
             var id = new RequiredMember<int>("id");
             var name = new RequiredMember<string>("name");
-            var baseRgb = new RequiredMember<int[]>("base_rgb");
+            var baseRgb = new RequiredMember<Color>("base_rgb");
             var cloth = new RequiredMember<ColorInfo>("cloth");
             var leather = new RequiredMember<ColorInfo>("leather");
             var metal = new RequiredMember<ColorInfo>("metal");
             var fur = new OptionalMember<ColorInfo>("fur");
             var itemId = new NullableMember<int>("item");
-            var categories = new RequiredMember<ColorCategoryName[]>("categories");
+            var categories = new RequiredMember<ColorCategoryName>("categories");
 
             foreach (var member in json.EnumerateObject())
             {
@@ -64,21 +65,32 @@ namespace GW2SDK.Colors
                 }
             }
 
-            return new Color
+            return new Dye
             {
                 Id = id.GetValue(),
                 Name = name.GetValue(),
-                BaseRgb = baseRgb.Select(value => value.GetArray(item => item.GetInt32())),
+                BaseRgb = baseRgb.Select(value => ReadRgb(value, missingMemberBehavior)),
                 Cloth = cloth.Select(value => ReadColorInfo(value, missingMemberBehavior)),
                 Leather = leather.Select(value => ReadColorInfo(value, missingMemberBehavior)),
                 Metal = metal.Select(value => ReadColorInfo(value, missingMemberBehavior)),
                 Fur = fur.Select(value => ReadColorInfo(value, missingMemberBehavior)),
                 Item = itemId.GetValue(),
-                Categories = categories.GetValue(missingMemberBehavior)
+                Categories = categories.GetValues(missingMemberBehavior)
             };
         }
 
         public IJsonReader<int> Id { get; } = new Int32JsonReader();
+
+        private Color ReadRgb(JsonElement value, MissingMemberBehavior missingMemberBehavior)
+        {
+            var red = value[0]
+                .GetInt32();
+            var green = value[1]
+                .GetInt32();
+            var blue = value[2]
+                .GetInt32();
+            return Color.FromArgb(red, green, blue);
+        }
 
         private ColorInfo ReadColorInfo(JsonElement json, MissingMemberBehavior missingMemberBehavior)
         {
@@ -87,7 +99,7 @@ namespace GW2SDK.Colors
             var hue = new RequiredMember<int>("hue");
             var saturation = new RequiredMember<double>("saturation");
             var lightness = new RequiredMember<double>("lightness");
-            var rgb = new RequiredMember<int[]>("rgb");
+            var rgb = new RequiredMember<Color>("rgb");
 
             foreach (var member in json.EnumerateObject())
             {
@@ -128,7 +140,7 @@ namespace GW2SDK.Colors
                 Hue = hue.GetValue(),
                 Saturation = saturation.GetValue(),
                 Lightness = lightness.GetValue(),
-                Rgb = rgb.Select(value => value.GetArray(item => item.GetInt32()))
+                Rgb = rgb.Select(value => ReadRgb(value, missingMemberBehavior))
             };
         }
     }

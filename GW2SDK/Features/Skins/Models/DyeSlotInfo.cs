@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using GW2SDK.Annotations;
 using JetBrains.Annotations;
 
@@ -8,26 +9,26 @@ namespace GW2SDK.Skins
     [DataTransferObject(RootObject = false)]
     public sealed record DyeSlotInfo
     {
-        public DyeSlot?[] Default { get; init; } = Array.Empty<DyeSlot?>();
+        public IReadOnlyCollection<DyeSlot?> Default { get; init; } = Array.Empty<DyeSlot?>();
 
-        public DyeSlot?[]? AsuraFemale { get; init; }
+        public IReadOnlyCollection<DyeSlot?>? AsuraFemale { get; init; }
 
-        public DyeSlot?[]? AsuraMale { get; init; }
+        public IReadOnlyCollection<DyeSlot?>? AsuraMale { get; init; }
 
-        public DyeSlot?[]? CharrFemale { get; init; }
+        public IReadOnlyCollection<DyeSlot?>? CharrFemale { get; init; }
 
-        public DyeSlot?[]? CharrMale { get; init; }
+        public IReadOnlyCollection<DyeSlot?>? CharrMale { get; init; }
 
-        public DyeSlot?[]? HumanFemale { get; init; }
+        public IReadOnlyCollection<DyeSlot?>? HumanFemale { get; init; }
 
-        public DyeSlot?[]? HumanMale { get; init; }
+        public IReadOnlyCollection<DyeSlot?>? HumanMale { get; init; }
 
-        public DyeSlot?[]? NornFemale { get; init; }
+        public IReadOnlyCollection<DyeSlot?>? NornFemale { get; init; }
 
-        public DyeSlot?[]? NornMale { get; init; }
+        public IReadOnlyCollection<DyeSlot?>? NornMale { get; init; }
 
-        public DyeSlot?[]? SylvariFemale { get; init; }
+        public IReadOnlyCollection<DyeSlot?>? SylvariFemale { get; init; }
 
-        public DyeSlot?[]? SylvariMale { get; init; }
+        public IReadOnlyCollection<DyeSlot?>? SylvariMale { get; init; }
     }
 }

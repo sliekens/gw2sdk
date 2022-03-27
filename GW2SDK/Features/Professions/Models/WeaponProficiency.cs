@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using GW2SDK.Annotations;
 using JetBrains.Annotations;
 
@@ -10,8 +11,8 @@ namespace GW2SDK.Professions
     {
         public int? RequiredSpecialization { get; init; }
 
-        public WeaponFlag[] Flags { get; init; } = Array.Empty<WeaponFlag>();
+        public IReadOnlyCollection<WeaponFlag> Flags { get; init; } = Array.Empty<WeaponFlag>();
 
-        public WeaponSkill[] Skills { get; init; } = Array.Empty<WeaponSkill>();
+        public IReadOnlyCollection<WeaponSkill> Skills { get; init; } = Array.Empty<WeaponSkill>();
     }
 }

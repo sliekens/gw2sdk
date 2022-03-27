@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using GW2SDK.Annotations;
 using JetBrains.Annotations;
 
@@ -22,13 +23,13 @@ namespace GW2SDK.Items
         public Coin VendorValue { get; init; }
         
         /// <remarks>Can be empty.</remarks>
-        public GameType[] GameTypes { get; init; } = Array.Empty<GameType>();
+        public IReadOnlyCollection<GameType> GameTypes { get; init; } = Array.Empty<GameType>();
         
         /// <remarks>Can be empty.</remarks>
-        public ItemFlag[] Flags { get; init; } = Array.Empty<ItemFlag>();
+        public IReadOnlyCollection<ItemFlag> Flags { get; init; } = Array.Empty<ItemFlag>();
         
         /// <remarks>Can be empty.</remarks>
-        public ItemRestriction[] Restrictions { get; init; } = Array.Empty<ItemRestriction>();
+        public IReadOnlyCollection<ItemRestriction> Restrictions { get; init; } = Array.Empty<ItemRestriction>();
 
         public string ChatLink { get; init; } = "";
 

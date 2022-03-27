@@ -22,7 +22,7 @@ namespace GW2SDK.Tokens
 
             var name = new RequiredMember<string>("name");
             var id = new RequiredMember<string>("id");
-            var permissions = new RequiredMember<Permission[]>("permissions");
+            var permissions = new RequiredMember<Permission>("permissions");
             foreach (var member in json.EnumerateObject())
             {
                 if (member.NameEquals("type"))
@@ -54,7 +54,7 @@ namespace GW2SDK.Tokens
             {
                 Id = id.GetValue(),
                 Name = name.GetValue(),
-                Permissions = permissions.GetValue(missingMemberBehavior)
+                Permissions = permissions.GetValues(missingMemberBehavior)
             };
         }
 
@@ -62,7 +62,7 @@ namespace GW2SDK.Tokens
         {
             var name = new RequiredMember<string>("name");
             var id = new RequiredMember<string>("id");
-            var permissions = new RequiredMember<Permission[]>("permissions");
+            var permissions = new RequiredMember<Permission>("permissions");
             foreach (var member in json.EnumerateObject())
             {
                 if (member.NameEquals("type"))
@@ -94,7 +94,7 @@ namespace GW2SDK.Tokens
             {
                 Id = id.GetValue(),
                 Name = name.GetValue(),
-                Permissions = permissions.GetValue(missingMemberBehavior)
+                Permissions = permissions.GetValues(missingMemberBehavior)
             };
         }
 
@@ -102,10 +102,10 @@ namespace GW2SDK.Tokens
         {
             var name = new RequiredMember<string>("name");
             var id = new RequiredMember<string>("id");
-            var permissions = new RequiredMember<Permission[]>("permissions");
+            var permissions = new RequiredMember<Permission>("permissions");
             var expiresAt = new RequiredMember<DateTimeOffset>("expires_at");
             var issuedAt = new RequiredMember<DateTimeOffset>("issued_at");
-            var urls = new OptionalMember<Uri[]>("urls");
+            var urls = new OptionalMember<Uri>("urls");
             foreach (var member in json.EnumerateObject())
             {
                 if (member.NameEquals("type"))
@@ -149,11 +149,10 @@ namespace GW2SDK.Tokens
             {
                 Id = id.GetValue(),
                 Name = name.GetValue(),
-                Permissions = permissions.GetValue(missingMemberBehavior),
+                Permissions = permissions.GetValues(missingMemberBehavior),
                 ExpiresAt = expiresAt.GetValue(),
                 IssuedAt = issuedAt.GetValue(),
-                Urls = urls.Select(value => value.GetArray(
-                    item => new Uri(item.GetStringRequired(), UriKind.Relative)))
+                Urls = urls.SelectMany(item => new Uri(item.GetStringRequired(), UriKind.Relative))
             };
         }
     }

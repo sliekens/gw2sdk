@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Drawing;
 using GW2SDK.Annotations;
 using JetBrains.Annotations;
 
@@ -14,9 +16,9 @@ namespace GW2SDK.Continents
 
         public int Level { get; init; }
 
-        public double[] Coordinates { get; init; } = Array.Empty<double>();
+        public PointF Coordinates { get; init; }
 
-        public double[][] Boundaries { get; init; } = Array.Empty<double[]>();
+        public IReadOnlyCollection<PointF> Boundaries { get; init; } = Array.Empty<PointF>();
 
         public string ChatLink { get; init; } = "";
     }

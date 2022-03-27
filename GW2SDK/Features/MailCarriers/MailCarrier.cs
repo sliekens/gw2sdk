@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using GW2SDK.Annotations;
 using JetBrains.Annotations;
 
@@ -10,7 +11,7 @@ namespace GW2SDK.MailCarriers
     {
         public int Id { get; init; }
 
-        public int[] UnlockItems { get; init; } = Array.Empty<int>();
+        public IReadOnlyCollection<int> UnlockItems { get; init; } = Array.Empty<int>();
 
         public int Order { get; init; }
 
@@ -18,6 +19,6 @@ namespace GW2SDK.MailCarriers
 
         public string Name { get; init; } = "";
 
-        public MailCarrierFlag[] Flags { get; init; } = Array.Empty<MailCarrierFlag>();
+        public IReadOnlyCollection<MailCarrierFlag> Flags { get; init; } = Array.Empty<MailCarrierFlag>();
     }
 }

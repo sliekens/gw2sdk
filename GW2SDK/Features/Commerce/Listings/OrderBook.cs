@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using GW2SDK.Annotations;
 using JetBrains.Annotations;
 
@@ -10,8 +11,8 @@ namespace GW2SDK.Commerce.Listings
     {
         public int Id { get; init; }
 
-        public OrderBookLine[] Demand { get; init; } = Array.Empty<OrderBookLine>();
+        public IReadOnlyCollection<OrderBookLine> Demand { get; init; } = Array.Empty<OrderBookLine>();
 
-        public OrderBookLine[] Supply { get; init; } = Array.Empty<OrderBookLine>();
+        public IReadOnlyCollection<OrderBookLine> Supply { get; init; } = Array.Empty<OrderBookLine>();
     }
 }

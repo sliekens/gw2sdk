@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using GW2SDK.Annotations;
 using JetBrains.Annotations;
 
@@ -16,6 +17,6 @@ namespace GW2SDK.Achievements.Groups
 
         public int Order { get; init; }
 
-        public int[] Categories { get; init; } = Array.Empty<int>();
+        public IReadOnlyCollection<int> Categories { get; init; } = Array.Empty<int>();
     }
 }

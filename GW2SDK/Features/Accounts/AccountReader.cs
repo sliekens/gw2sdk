@@ -15,10 +15,10 @@ namespace GW2SDK.Accounts
             var age = new RequiredMember<TimeSpan>("age");
             var lastModified = new RequiredMember<DateTimeOffset>("last_modified");
             var world = new RequiredMember<int>("world");
-            var guilds = new RequiredMember<string[]>("guilds");
-            var guildLeader = new OptionalMember<string[]>("guild_leader");
+            var guilds = new RequiredMember<string>("guilds");
+            var guildLeader = new OptionalMember<string>("guild_leader");
             var created = new RequiredMember<DateTimeOffset>("created");
-            var access = new RequiredMember<ProductName[]>("access");
+            var access = new RequiredMember<ProductName>("access");
             var commander = new RequiredMember<bool>("commander");
             var fractalLevel = new NullableMember<int>("fractal_level");
             var dailyAp = new NullableMember<int>("daily_ap");
@@ -100,10 +100,10 @@ namespace GW2SDK.Accounts
                 Age = age.Select(value => TimeSpan.FromSeconds(value.GetDouble())),
                 LastModified = lastModified.GetValue(),
                 World = world.GetValue(),
-                Guilds = guilds.Select(value => value.GetArray(item => item.GetStringRequired())),
-                GuildLeader = guildLeader.Select(value => value.GetArray(item => item.GetStringRequired())),
+                Guilds = guilds.SelectMany(value => value.GetStringRequired()),
+                GuildLeader = guildLeader.SelectMany(value => value.GetStringRequired()),
                 Created = created.GetValue(),
-                Access = access.GetValue(missingMemberBehavior),
+                Access = access.GetValues(missingMemberBehavior),
                 Commander = commander.GetValue(),
                 FractalLevel = fractalLevel.GetValue(),
                 DailyAp = dailyAp.GetValue(),

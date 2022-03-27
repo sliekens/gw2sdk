@@ -1,4 +1,5 @@
-﻿using GW2SDK.Annotations;
+﻿using System.Collections.Generic;
+using GW2SDK.Annotations;
 using JetBrains.Annotations;
 
 namespace GW2SDK.Characters
@@ -15,15 +16,15 @@ namespace GW2SDK.Characters
 
         public int? Skin { get; init; }
 
-        public int[]? Upgrades { get; init; }
+        public IReadOnlyCollection<int>? Upgrades { get; init; }
 
         /// <summary>Indicates which upgrade slots are in use. (0-based)</summary>
-        public int[]? UpgradeSlotIndices { get; init; }
+        public IReadOnlyCollection<int>? UpgradeSlotIndices { get; init; }
 
-        public int[]? Infusions { get; init; }
+        public IReadOnlyCollection<int>? Infusions { get; init; }
 
         // Always length 4
-        public int?[]? Dyes { get; init; }
+        public IReadOnlyCollection<int?>? Dyes { get; init; }
 
         public ItemBinding Binding { get; init; }
 

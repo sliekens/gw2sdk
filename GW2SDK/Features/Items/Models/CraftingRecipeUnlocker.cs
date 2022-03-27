@@ -1,4 +1,5 @@
-﻿using JetBrains.Annotations;
+﻿using System.Collections.Generic;
+using JetBrains.Annotations;
 
 namespace GW2SDK.Items
 {
@@ -7,6 +8,6 @@ namespace GW2SDK.Items
     {
         public int RecipeId { get; init; }
 
-        public int[]? ExtraRecipeIds { get; init; }
+        public IReadOnlyCollection<int>? ExtraRecipeIds { get; init; }
     }
 }

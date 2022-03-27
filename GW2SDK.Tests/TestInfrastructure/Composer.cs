@@ -111,7 +111,7 @@ namespace GW2SDK.Tests.TestInfrastructure
             if (serviceType == typeof(AchievementCategoryService))
             {
                 return new AchievementCategoryService(Resolve<HttpClient>(),
-                    new AchievementCategoryReader(new AchievementRefReader()),
+                    new AchievementCategoryReader(),
                     MissingMemberBehavior.Error);
             }
 
@@ -153,7 +153,7 @@ namespace GW2SDK.Tests.TestInfrastructure
 
             if (serviceType == typeof(ColorService))
             {
-                return new ColorService(Resolve<HttpClient>(), new ColorReader(), MissingMemberBehavior.Error);
+                return new ColorService(Resolve<HttpClient>(), new DyeReader(), MissingMemberBehavior.Error);
             }
 
             if (serviceType == typeof(TradingPost))

@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System;
+using System.Collections.Generic;
 using GW2SDK.Annotations;
 using JetBrains.Annotations;
 
@@ -19,9 +19,9 @@ namespace GW2SDK.Achievements.Categories
 
         public string Icon { get; init; } = "";
 
-        public IEnumerable<AchievementRef> Achievements { get; init; } = Enumerable.Empty<AchievementRef>();
+        public IReadOnlyCollection<AchievementRef> Achievements { get; init; } = Array.Empty<AchievementRef>();
 
-        public IEnumerable<AchievementRef> Tomorrow { get; init; } = Enumerable.Empty<AchievementRef>();
+        public IReadOnlyCollection<AchievementRef>? Tomorrow { get; init; }
     }
 
     [PublicAPI]
@@ -29,5 +29,11 @@ namespace GW2SDK.Achievements.Categories
     public sealed record AchievementRef
     {
         public int Id { get; init; }
+
+        public ProductRequirement? RequiredAccess { get; init; }
+
+        public IReadOnlyCollection<AchievementFlag>? Flags { get; init; }
+
+        public LevelRequirement? Level { get; init; }
     }
 }

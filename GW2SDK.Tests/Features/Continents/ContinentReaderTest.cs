@@ -17,21 +17,8 @@ namespace GW2SDK.Tests.Features.Continents
 
         private static class FloorFact
         {
-            public static void Texture_dimensions_contains_width_and_height(Floor actual) => Assert.Equal(2, actual.TextureDimensions.Length);
-
-            public static void Label_coordinates_of_a_region_contains_a_point(Floor actual) => Assert.All(actual.Regions.Values,
-                region =>
-                {
-                    Assert.Equal(2, region.LabelCoordinates.Length);
-                });
-
-            public static void Continent_rectangle_of_a_region_contains_2_points(Floor actual) => Assert.All(actual.Regions.Values,
-                region =>
-                {
-                    Assert.Equal(2, region.ContinentRectangle.Length);
-                    Assert.Equal(2, region.ContinentRectangle[0].Length);
-                    Assert.Equal(2, region.ContinentRectangle[1].Length);
-                });
+            public static void Texture_dimensions_contains_width_and_height(Floor actual) =>
+                Assert.False(actual.TextureDimensions.IsEmpty);
         }
 
         [Fact]
@@ -47,8 +34,6 @@ namespace GW2SDK.Tests.Features.Continents
                     var actual = sut.Floor.Read(document.RootElement, MissingMemberBehavior.Error);
 
                     FloorFact.Texture_dimensions_contains_width_and_height(actual);
-                    FloorFact.Label_coordinates_of_a_region_contains_a_point(actual);
-                    FloorFact.Continent_rectangle_of_a_region_contains_2_points(actual);
                 });
         }
     }

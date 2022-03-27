@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using GW2SDK.Annotations;
 using JetBrains.Annotations;
 
@@ -12,6 +13,6 @@ namespace GW2SDK.ItemStats
 
         public string Name { get; init; } = "";
 
-        public ItemStatAttribute[] Attributes { get; init; } = Array.Empty<ItemStatAttribute>();
+        public IReadOnlyCollection<ItemStatAttribute> Attributes { get; init; } = Array.Empty<ItemStatAttribute>();
     }
 }

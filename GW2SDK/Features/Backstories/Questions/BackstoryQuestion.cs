@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using GW2SDK.Annotations;
 using JetBrains.Annotations;
 
@@ -14,12 +15,12 @@ namespace GW2SDK.Backstories.Questions
 
         public string Description { get; init; } = "";
 
-        public string[] Answers { get; init; } = Array.Empty<string>();
+        public IReadOnlyCollection<string> Answers { get; init; } = Array.Empty<string>();
 
         public int Order { get; init; }
 
-        public Race[]? Races { get; init; }
+        public IReadOnlyCollection<Race>? Races { get; init; }
 
-        public ProfessionName[]? Professions { get; init; }
+        public IReadOnlyCollection<ProfessionName>? Professions { get; init; }
     }
 }

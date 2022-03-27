@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Text.Json;
-using JetBrains.Annotations;
 using GW2SDK.Json;
+using JetBrains.Annotations;
 
 namespace GW2SDK.Achievements.Dailies
 {
@@ -10,11 +10,11 @@ namespace GW2SDK.Achievements.Dailies
     {
         public DailyAchievementGroup Read(JsonElement json, MissingMemberBehavior missingMemberBehavior)
         {
-            var pve = new RequiredMember<DailyAchievement[]>("pve");
-            var pvp = new RequiredMember<DailyAchievement[]>("pvp");
-            var wvw = new RequiredMember<DailyAchievement[]>("wvw");
-            var fractals = new RequiredMember<DailyAchievement[]>("fractals");
-            var special = new RequiredMember<DailyAchievement[]>("special");
+            var pve = new RequiredMember<DailyAchievement>("pve");
+            var pvp = new RequiredMember<DailyAchievement>("pvp");
+            var wvw = new RequiredMember<DailyAchievement>("wvw");
+            var fractals = new RequiredMember<DailyAchievement>("fractals");
+            var special = new RequiredMember<DailyAchievement>("special");
 
             foreach (var member in json.EnumerateObject())
             {
@@ -46,19 +46,19 @@ namespace GW2SDK.Achievements.Dailies
 
             return new DailyAchievementGroup
             {
-                Pve = pve.Select(value => value.GetArray(item => ReadDailyAchievement(item, missingMemberBehavior))),
-                Pvp = pvp.Select(value => value.GetArray(item => ReadDailyAchievement(item, missingMemberBehavior))),
-                Wvw = wvw.Select(value => value.GetArray(item => ReadDailyAchievement(item, missingMemberBehavior))),
-                Fractals = fractals.Select(value => value.GetArray(item => ReadDailyAchievement(item, missingMemberBehavior))),
-                Special = special.Select(value => value.GetArray(item => ReadDailyAchievement(item, missingMemberBehavior)))
+                Pve = pve.SelectMany(value => ReadDailyAchievement(value, missingMemberBehavior)),
+                Pvp = pvp.SelectMany(value => ReadDailyAchievement(value, missingMemberBehavior)),
+                Wvw = wvw.SelectMany(value => ReadDailyAchievement(value, missingMemberBehavior)),
+                Fractals = fractals.SelectMany(value => ReadDailyAchievement(value, missingMemberBehavior)),
+                Special = special.SelectMany(value => ReadDailyAchievement(value, missingMemberBehavior))
             };
         }
 
         private DailyAchievement ReadDailyAchievement(JsonElement json, MissingMemberBehavior missingMemberBehavior)
         {
             var id = new RequiredMember<int>("id");
-            var level = new RequiredMember<DailyAchievementLevelRequirement>("level");
-            var requiredAccess = new OptionalMember<ProductName[]>("required_access");
+            var level = new RequiredMember<LevelRequirement>("level");
+            var requiredAccess = new OptionalMember<ProductRequirement>("required_access");
 
             foreach (var member in json.EnumerateObject())
             {
@@ -84,11 +84,11 @@ namespace GW2SDK.Achievements.Dailies
             {
                 Id = id.GetValue(),
                 Level = level.Select(value => ReadLevelRequirement(value, missingMemberBehavior)),
-                RequiredAccess = requiredAccess.GetValue(missingMemberBehavior) ?? Array.Empty<ProductName>()
+                RequiredAccess = requiredAccess.Select(value => ReadProductRequirement(value, missingMemberBehavior))
             };
         }
 
-        private DailyAchievementLevelRequirement ReadLevelRequirement(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+        private LevelRequirement ReadLevelRequirement(JsonElement json, MissingMemberBehavior missingMemberBehavior)
         {
             var min = new RequiredMember<int>("min");
             var max = new RequiredMember<int>("max");
@@ -109,10 +109,38 @@ namespace GW2SDK.Achievements.Dailies
                 }
             }
 
-            return new DailyAchievementLevelRequirement
+            return new LevelRequirement
             {
                 Min = min.GetValue(),
                 Max = max.GetValue()
+            };
+        }
+
+        private ProductRequirement ReadProductRequirement(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+        {
+            var product = new RequiredMember<ProductName>("product");
+            var condition = new RequiredMember<AccessCondition>("condition");
+
+            foreach (var member in json.EnumerateObject())
+            {
+                if (member.NameEquals(product.Name))
+                {
+                    product = product.From(member.Value);
+                }
+                else if (member.NameEquals(condition.Name))
+                {
+                    condition = condition.From(member.Value);
+                }
+                else if (missingMemberBehavior == MissingMemberBehavior.Error)
+                {
+                    throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
+                }
+            }
+
+            return new ProductRequirement
+            {
+                Product = product.GetValue(missingMemberBehavior),
+                Condition = condition.GetValue(missingMemberBehavior)
             };
         }
     }

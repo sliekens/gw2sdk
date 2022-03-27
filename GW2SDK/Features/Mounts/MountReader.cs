@@ -13,8 +13,8 @@ namespace GW2SDK.Mounts
             var id = new RequiredMember<MountName>("id");
             var name = new RequiredMember<string>("name");
             var defaultSkin = new RequiredMember<int>("default_skin");
-            var skins = new RequiredMember<int[]>("skins");
-            var skills = new RequiredMember<SkillReference[]>("skills");
+            var skins = new RequiredMember<int>("skins");
+            var skills = new RequiredMember<SkillReference>("skills");
 
             foreach (var member in json.EnumerateObject())
             {
@@ -49,8 +49,8 @@ namespace GW2SDK.Mounts
                 Id = id.Select(value => MountId.Read(value, missingMemberBehavior)),
                 Name = name.GetValue(),
                 DefaultSkin = defaultSkin.GetValue(),
-                Skins = skins.Select(value => value.GetArray(item => item.GetInt32())),
-                Skills = skills.Select(value => value.GetArray(item => ReadSkill(item, missingMemberBehavior)))
+                Skins = skins.SelectMany(value => value.GetInt32()),
+                Skills = skills.SelectMany(value => ReadSkill(value, missingMemberBehavior))
             };
         }
 
@@ -83,7 +83,7 @@ namespace GW2SDK.Mounts
             var id = new RequiredMember<int>("id");
             var name = new RequiredMember<string>("name");
             var icon = new RequiredMember<string>("icon");
-            var dyeSlots = new RequiredMember<DyeSlot[]>("dye_slots");
+            var dyeSlots = new RequiredMember<DyeSlot>("dye_slots");
             var mount = new RequiredMember<MountName>("mount");
 
             foreach (var member in json.EnumerateObject())
@@ -119,7 +119,7 @@ namespace GW2SDK.Mounts
                 Id = id.GetValue(),
                 Name = name.GetValue(),
                 Icon = icon.GetValue(),
-                DyeSlots = dyeSlots.Select(value => value.GetArray(item => ReadDyeSlot(item, missingMemberBehavior))),
+                DyeSlots = dyeSlots.SelectMany(value => ReadDyeSlot(value, missingMemberBehavior)),
                 Mount = mount.Select(value => MountId.Read(value, missingMemberBehavior))
             };
         }
