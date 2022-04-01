@@ -17,18 +17,7 @@ namespace GW2SDK.Tests.Features.Currencies
 
             public static void Description_is_not_empty(Currency actual) => Assert.NotEmpty(actual.Description);
 
-            public static void Order_is_positive(Currency actual)
-            {
-                // BUG(?): Canach Coin (id 67) doesn't have a sort order
-                if (actual.Id == 67)
-                {
-                    Assert.Equal(0, actual.Order);
-                }
-                else
-                {
-                    Assert.InRange(actual.Order, 1, 1000);
-                }
-            }
+            public static void Order_is_positive(Currency actual) => Assert.InRange(actual.Order, 1, 1000);
 
             public static void Icon_is_not_empty(Currency actual) => Assert.NotEmpty(actual.Icon);
         }
