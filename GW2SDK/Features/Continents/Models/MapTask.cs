@@ -7,7 +7,7 @@ using JetBrains.Annotations;
 namespace GW2SDK.Continents
 {
     [PublicAPI]
-    [DataTransferObject(RootObject = false)]
+    [DataTransferObject]
     public sealed record MapTask
     {
         public int Id { get; init; }

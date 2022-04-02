@@ -4,7 +4,7 @@ using JetBrains.Annotations;
 namespace GW2SDK.Commerce.Listings
 {
     [PublicAPI]
-    [DataTransferObject(RootObject = false)]
+    [DataTransferObject]
     public sealed record OrderBookLine
     {
         public int Listings { get; init; }

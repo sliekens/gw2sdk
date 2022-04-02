@@ -5,7 +5,7 @@ using JetBrains.Annotations;
 namespace GW2SDK.Colors
 {
     [PublicAPI]
-    [DataTransferObject(RootObject = false)]
+    [DataTransferObject]
     public sealed record ColorInfo
     {
         public int Brightness { get; init; }

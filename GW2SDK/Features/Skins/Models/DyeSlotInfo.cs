@@ -6,7 +6,7 @@ using JetBrains.Annotations;
 namespace GW2SDK.Skins
 {
     [PublicAPI]
-    [DataTransferObject(RootObject = false)]
+    [DataTransferObject]
     public sealed record DyeSlotInfo
     {
         public IReadOnlyCollection<DyeSlot?> Default { get; init; } = Array.Empty<DyeSlot?>();

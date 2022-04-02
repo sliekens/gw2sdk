@@ -6,7 +6,7 @@ using JetBrains.Annotations;
 namespace GW2SDK.Characters
 {
     [PublicAPI]
-    [DataTransferObject(RootObject = false)]
+    [DataTransferObject]
     public sealed record SkillBar
     {
         public int? Heal { get; init; }

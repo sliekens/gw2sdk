@@ -5,7 +5,7 @@ using JetBrains.Annotations;
 namespace GW2SDK.Characters
 {
     [PublicAPI]
-    [DataTransferObject(RootObject = false)]
+    [DataTransferObject]
     public sealed record InventorySlot
     {
         public int Id { get; init; }

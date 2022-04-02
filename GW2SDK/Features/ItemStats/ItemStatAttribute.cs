@@ -4,7 +4,7 @@ using JetBrains.Annotations;
 namespace GW2SDK.ItemStats
 {
     [PublicAPI]
-    [DataTransferObject(RootObject = false)]
+    [DataTransferObject]
     public sealed record ItemStatAttribute
     {
         public UpgradeAttributeName Attribute { get; init; }

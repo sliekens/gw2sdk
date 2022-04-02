@@ -4,7 +4,7 @@ using JetBrains.Annotations;
 namespace GW2SDK.Achievements.Dailies
 {
     [PublicAPI]
-    [DataTransferObject(RootObject = false)]
+    [DataTransferObject]
     public sealed record DailyAchievement
     {
         public int Id { get; init; }

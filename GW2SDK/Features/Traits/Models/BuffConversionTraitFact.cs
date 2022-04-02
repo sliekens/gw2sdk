@@ -4,7 +4,7 @@ using JetBrains.Annotations;
 namespace GW2SDK.Traits
 {
     [PublicAPI]
-    [DataTransferObject(RootObject = false)]
+    [DataTransferObject]
     public sealed record BuffConversionTraitFact : TraitFact
     {
         public int Percent { get; init; }

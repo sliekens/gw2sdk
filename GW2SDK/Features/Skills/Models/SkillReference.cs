@@ -4,7 +4,7 @@ using JetBrains.Annotations;
 namespace GW2SDK.Skills
 {
     [PublicAPI]
-    [DataTransferObject(RootObject = false)]
+    [DataTransferObject]
     public sealed record SkillReference
     {
         public int Id { get; init; }

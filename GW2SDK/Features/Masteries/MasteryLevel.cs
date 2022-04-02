@@ -4,7 +4,7 @@ using JetBrains.Annotations;
 namespace GW2SDK.Masteries
 {
     [PublicAPI]
-    [DataTransferObject(RootObject = false)]
+    [DataTransferObject]
     public sealed record MasteryLevel
     {
         public string Name { get; init; } = "";

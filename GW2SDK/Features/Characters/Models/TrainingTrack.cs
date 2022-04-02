@@ -5,7 +5,7 @@ using JetBrains.Annotations;
 namespace GW2SDK.Characters
 {
     [PublicAPI]
-    [DataTransferObject(RootObject = false)]
+    [DataTransferObject]
     public sealed record TrainingTrack
     {
         /// <summary>The ID of the current training track. Related data can be resolved from <see cref="Profession.Training" />.</summary>

@@ -6,7 +6,7 @@ using JetBrains.Annotations;
 namespace GW2SDK.Continents
 {
     [PublicAPI]
-    [DataTransferObject(RootObject = false)]
+    [DataTransferObject]
     public sealed record SkillChallenge
     {
         public string Id { get; init; } = "";

@@ -5,7 +5,7 @@ namespace GW2SDK.Professions
 {
     [PublicAPI]
     [Inheritable]
-    [DataTransferObject(RootObject = false)]
+    [DataTransferObject]
     public record TrainingObjective
     {
         public int Cost { get; init; }

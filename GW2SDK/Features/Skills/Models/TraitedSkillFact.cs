@@ -4,7 +4,7 @@ using JetBrains.Annotations;
 namespace GW2SDK.Skills
 {
     [PublicAPI]
-    [DataTransferObject(RootObject = false)]
+    [DataTransferObject]
     public sealed record TraitedSkillFact
     {
         /// <summary>The ID of the trait that activates this combination.</summary>

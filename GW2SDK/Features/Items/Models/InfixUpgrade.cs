@@ -6,7 +6,7 @@ using JetBrains.Annotations;
 namespace GW2SDK.Items
 {
     [PublicAPI]
-    [DataTransferObject(RootObject = false)]
+    [DataTransferObject]
     public sealed record InfixUpgrade
     {
         public int ItemstatsId { get; init; }

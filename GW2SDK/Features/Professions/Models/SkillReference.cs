@@ -7,7 +7,7 @@ namespace GW2SDK.Professions
     /// full skill object.</summary>
     [PublicAPI]
     [Inheritable]
-    [DataTransferObject(RootObject = false)]
+    [DataTransferObject]
     public record SkillReference
     {
         public int Id { get; init; }

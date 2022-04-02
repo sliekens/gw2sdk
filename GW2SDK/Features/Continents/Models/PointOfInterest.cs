@@ -6,7 +6,7 @@ namespace GW2SDK.Continents
 {
     [PublicAPI]
     [Inheritable]
-    [DataTransferObject(RootObject = false)]
+    [DataTransferObject]
     public record PointOfInterest
     {
         /// <summary>The name as displayed on the map, or an empty string if the PoI doesn't have a name.</summary>

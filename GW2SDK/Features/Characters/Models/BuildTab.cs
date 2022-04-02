@@ -4,7 +4,7 @@ using JetBrains.Annotations;
 namespace GW2SDK.Characters
 {
     [PublicAPI]
-    [DataTransferObject(RootObject = false)]
+    [DataTransferObject]
     public sealed record BuildTab
     {
         /// <summary>The number of the current tab.</summary>
