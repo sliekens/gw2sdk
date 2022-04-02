@@ -34,5 +34,32 @@ namespace GW2SDK.Json
 
             return values;
         }
+
+        internal static IEnumerable<TValue> GetArray<TValue>(this JsonElement json, Func<JsonElement, TValue> resultSelector)
+        {
+            // ReSharper disable once ForeachCanBeConvertedToQueryUsingAnotherGetEnumerator
+            foreach (var item in json.EnumerateArray())
+            {
+                yield return resultSelector(item);
+            }
+        }
+
+        internal static IEnumerable<int> GetInt32Array(this JsonElement json)
+        {
+            // ReSharper disable once ForeachCanBeConvertedToQueryUsingAnotherGetEnumerator
+            foreach (var item in json.EnumerateArray())
+            {
+                yield return item.GetInt32();
+            }
+        }
+
+        internal static IEnumerable<string> GetStringArray(this JsonElement json)
+        {
+            // ReSharper disable once ForeachCanBeConvertedToQueryUsingAnotherGetEnumerator
+            foreach (var item in json.EnumerateArray())
+            {
+                yield return GetStringRequired(item);
+            }
+        }
     }
 }

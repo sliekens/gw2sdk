@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using GW2SDK.Http;
 using GW2SDK.Json;
 using GW2SDK.Recipes.Http;
+using GW2SDK.Recipes.Json;
 using JetBrains.Annotations;
 
 namespace GW2SDK.Recipes
@@ -16,32 +17,28 @@ namespace GW2SDK.Recipes
     {
         private readonly HttpClient http;
 
-        private readonly MissingMemberBehavior missingMemberBehavior;
-
-        private readonly IRecipeReader recipeReader;
-
-        public RecipeService(
-            HttpClient http,
-            IRecipeReader recipeReader,
-            MissingMemberBehavior missingMemberBehavior
-        )
+        public RecipeService(HttpClient http)
         {
             this.http = http ?? throw new ArgumentNullException(nameof(http));
-            this.recipeReader = recipeReader ?? throw new ArgumentNullException(nameof(recipeReader));
-            this.missingMemberBehavior = missingMemberBehavior;
         }
 
         public async Task<IReplicaSet<int>> GetRecipesIndex(CancellationToken cancellationToken = default)
         {
             var request = new RecipesIndexRequest();
-            return await http.GetResourcesSet(request, json => recipeReader.Id.ReadArray(json, missingMemberBehavior), cancellationToken)
+            return await http.GetResourcesSet(request, json => json.RootElement.GetInt32Array(), cancellationToken)
                 .ConfigureAwait(false);
         }
 
-        public async Task<IReplica<Recipe>> GetRecipeById(int recipeId, CancellationToken cancellationToken = default)
+        public async Task<IReplica<Recipe>> GetRecipeById(
+            int recipeId,
+            MissingMemberBehavior missingMemberBehavior = default,
+            CancellationToken cancellationToken = default
+        )
         {
             var request = new RecipeByIdRequest(recipeId);
-            return await http.GetResource(request, json => recipeReader.Read(json, missingMemberBehavior), cancellationToken)
+            return await http.GetResource(request,
+                    json => RecipeReader.Read(json.RootElement, missingMemberBehavior),
+                    cancellationToken)
                 .ConfigureAwait(false);
         }
 
@@ -52,6 +49,7 @@ namespace GW2SDK.Recipes
             IReadOnlyCollection<int> recipeIds,
 #endif
             Language? language = default,
+            MissingMemberBehavior missingMemberBehavior = default,
             [EnumeratorCancellation] CancellationToken cancellationToken = default,
             IProgress<ICollectionContext>? progress = default
         )
@@ -59,15 +57,16 @@ namespace GW2SDK.Recipes
             var splitQuery = SplitQuery.Create<int, Recipe>(async (keys, ct) =>
                 {
                     var request = new RecipesByIdsRequest(keys);
-                    return await http
-                        .GetResourcesSet(request, json => recipeReader.ReadArray(json, missingMemberBehavior), ct)
+                    return await http.GetResourcesSet(request,
+                            json => json.RootElement.GetArray(item => RecipeReader.Read(item, missingMemberBehavior)),
+                            ct)
                         .ConfigureAwait(false);
                 },
                 progress);
 
             var producer = splitQuery.QueryAsync(recipeIds, cancellationToken: cancellationToken);
             await foreach (var item in producer.WithCancellation(cancellationToken)
-                .ConfigureAwait(false))
+                               .ConfigureAwait(false))
             {
                 yield return item;
             }
@@ -76,11 +75,14 @@ namespace GW2SDK.Recipes
         public async Task<IReplicaPage<Recipe>> GetRecipesByPage(
             int pageIndex,
             int? pageSize = default,
+            MissingMemberBehavior missingMemberBehavior = default,
             CancellationToken cancellationToken = default
         )
         {
             var request = new RecipesByPageRequest(pageIndex, pageSize);
-            return await http.GetResourcesPage(request, json => recipeReader.ReadArray(json, missingMemberBehavior), cancellationToken)
+            return await http.GetResourcesPage(request,
+                    json => json.RootElement.GetArray(item => RecipeReader.Read(item, missingMemberBehavior)),
+                    cancellationToken)
                 .ConfigureAwait(false);
         }
 
@@ -90,17 +92,20 @@ namespace GW2SDK.Recipes
         )
         {
             var request = new RecipesIndexByIngredientItemIdRequest(ingredientItemId);
-            return await http.GetResourcesSet(request, json => recipeReader.Id.ReadArray(json, missingMemberBehavior), cancellationToken)
+            return await http.GetResourcesSet(request, json => json.RootElement.GetInt32Array(), cancellationToken)
                 .ConfigureAwait(false);
         }
 
         public async Task<IReplicaSet<Recipe>> GetRecipesByIngredientItemId(
             int ingredientItemId,
+            MissingMemberBehavior missingMemberBehavior = default,
             CancellationToken cancellationToken = default
         )
         {
             var request = new RecipesByIngredientItemIdRequest(ingredientItemId);
-            return await http.GetResourcesSet(request, json => recipeReader.ReadArray(json, missingMemberBehavior), cancellationToken)
+            return await http.GetResourcesSet(request,
+                    json => json.RootElement.GetArray(item => RecipeReader.Read(item, missingMemberBehavior)),
+                    cancellationToken)
                 .ConfigureAwait(false);
         }
 
@@ -108,11 +113,14 @@ namespace GW2SDK.Recipes
             int ingredientItemId,
             int pageIndex,
             int? pageSize = default,
+            MissingMemberBehavior missingMemberBehavior = default,
             CancellationToken cancellationToken = default
         )
         {
             var request = new RecipesByIngredientItemIdByPageRequest(ingredientItemId, pageIndex, pageSize);
-            return await http.GetResourcesPage(request, json => recipeReader.ReadArray(json, missingMemberBehavior), cancellationToken)
+            return await http.GetResourcesPage(request,
+                    json => json.RootElement.GetArray(item => RecipeReader.Read(item, missingMemberBehavior)),
+                    cancellationToken)
                 .ConfigureAwait(false);
         }
 
@@ -122,17 +130,20 @@ namespace GW2SDK.Recipes
         )
         {
             var request = new RecipesIndexByOutputItemIdRequest(outputItemId);
-            return await http.GetResourcesSet(request, json => recipeReader.Id.ReadArray(json, missingMemberBehavior), cancellationToken)
+            return await http.GetResourcesSet(request, json => json.RootElement.GetInt32Array(), cancellationToken)
                 .ConfigureAwait(false);
         }
 
         public async Task<IReplicaSet<Recipe>> GetRecipesByOutputItemId(
             int outputItemId,
+            MissingMemberBehavior missingMemberBehavior = default,
             CancellationToken cancellationToken = default
         )
         {
             var request = new RecipesByOutputItemIdRequest(outputItemId);
-            return await http.GetResourcesSet(request, json => recipeReader.ReadArray(json, missingMemberBehavior), cancellationToken)
+            return await http.GetResourcesSet(request,
+                    json => json.RootElement.GetArray(item => RecipeReader.Read(item, missingMemberBehavior)),
+                    cancellationToken)
                 .ConfigureAwait(false);
         }
 
@@ -140,11 +151,14 @@ namespace GW2SDK.Recipes
             int outputItemId,
             int pageIndex,
             int? pageSize = default,
+            MissingMemberBehavior missingMemberBehavior = default,
             CancellationToken cancellationToken = default
         )
         {
             var request = new RecipesByOutputItemIdByPageRequest(outputItemId, pageIndex, pageSize);
-            return await http.GetResourcesPage(request, json => recipeReader.ReadArray(json, missingMemberBehavior), cancellationToken)
+            return await http.GetResourcesPage(request,
+                    json => json.RootElement.GetArray(item => RecipeReader.Read(item, missingMemberBehavior)),
+                    cancellationToken)
                 .ConfigureAwait(false);
         }
 
@@ -157,16 +171,20 @@ namespace GW2SDK.Recipes
         public async Task<IReplicaPage<Recipe>> GetRecipesByPage(
             HyperlinkReference href,
             Language? language = default,
+            MissingMemberBehavior missingMemberBehavior = default,
             CancellationToken cancellationToken = default
         )
         {
             var request = new PageRequest(href, language);
-            return await http.GetResourcesPage(request, json => recipeReader.ReadArray(json, missingMemberBehavior), cancellationToken)
+            return await http.GetResourcesPage(request,
+                    json => json.RootElement.GetArray(item => RecipeReader.Read(item, missingMemberBehavior)),
+                    cancellationToken)
                 .ConfigureAwait(false);
         }
 
         public async IAsyncEnumerable<IReplica<Recipe>> GetRecipes(
             Language? language = default,
+            MissingMemberBehavior missingMemberBehavior = default,
             [EnumeratorCancellation] CancellationToken cancellationToken = default,
             IProgress<ICollectionContext>? progress = default
         )
@@ -178,9 +196,9 @@ namespace GW2SDK.Recipes
                 yield break;
             }
 
-            var producer = GetRecipesByIds(index.Values, language, cancellationToken, progress);
+            var producer = GetRecipesByIds(index.Values, language, missingMemberBehavior, cancellationToken, progress);
             await foreach (var recipe in producer.WithCancellation(cancellationToken)
-                .ConfigureAwait(false))
+                               .ConfigureAwait(false))
             {
                 yield return recipe;
             }

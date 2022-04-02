@@ -1,6 +1,7 @@
 ﻿using System.Text.Json;
 using GW2SDK.Json;
 using GW2SDK.Skins;
+using GW2SDK.Skins.Json;
 using GW2SDK.Tests.TestInfrastructure;
 using Xunit;
 
@@ -23,14 +24,12 @@ namespace GW2SDK.Tests.Features.Skins
         [Fact]
         public void Skins_can_be_created_from_json()
         {
-            var sut = new SkinReader();
-
             AssertEx.ForEach(fixture.Skins,
                 json =>
                 {
                     using var document = JsonDocument.Parse(json);
 
-                    var actual = sut.Read(document.RootElement, MissingMemberBehavior.Error);
+                    var actual = SkinReader.Read(document.RootElement, MissingMemberBehavior.Error);
 
                     SkinFact.Id_is_positive(actual);
                 });

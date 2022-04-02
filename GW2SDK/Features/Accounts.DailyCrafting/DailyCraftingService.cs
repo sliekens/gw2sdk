@@ -14,22 +14,11 @@ namespace GW2SDK.Accounts.DailyCrafting
     [PublicAPI]
     public sealed class DailyCraftingService
     {
-        private readonly IDailyCraftingReader dailyCraftingReader;
-
         private readonly HttpClient http;
 
-        private readonly MissingMemberBehavior missingMemberBehavior;
-
-        public DailyCraftingService(
-            HttpClient http,
-            IDailyCraftingReader dailyCraftingReader,
-            MissingMemberBehavior missingMemberBehavior
-        )
+        public DailyCraftingService(HttpClient http)
         {
             this.http = http ?? throw new ArgumentNullException(nameof(http));
-            this.dailyCraftingReader =
-                dailyCraftingReader ?? throw new ArgumentNullException(nameof(dailyCraftingReader));
-            this.missingMemberBehavior = missingMemberBehavior;
         }
 
 #if NET
@@ -42,7 +31,7 @@ namespace GW2SDK.Accounts.DailyCrafting
         {
             var request = new DailyCraftingRequest();
             return await http.GetResourcesSetSimple(request,
-                    json => dailyCraftingReader.Id.ReadArray(json, missingMemberBehavior),
+                    json => json.RootElement.GetStringArray(),
                     cancellationToken)
                 .ConfigureAwait(false);
         }
@@ -62,7 +51,7 @@ namespace GW2SDK.Accounts.DailyCrafting
         {
             var request = new AccountDailyCraftingRequest(accessToken);
             return await http.GetResourcesSetSimple(request,
-                    json => dailyCraftingReader.Id.ReadArray(json, missingMemberBehavior),
+                    json => json.RootElement.GetStringArray(),
                     cancellationToken)
                 .ConfigureAwait(false);
         }

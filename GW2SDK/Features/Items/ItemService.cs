@@ -6,6 +6,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using GW2SDK.Http;
 using GW2SDK.Items.Http;
+using GW2SDK.Items.Json;
 using GW2SDK.Json;
 using JetBrains.Annotations;
 
@@ -16,36 +17,29 @@ namespace GW2SDK.Items
     {
         private readonly HttpClient http;
 
-        private readonly IItemReader itemReader;
-
-        private readonly MissingMemberBehavior missingMemberBehavior;
-
         public ItemService(
-            HttpClient http,
-            IItemReader itemReader,
-            MissingMemberBehavior missingMemberBehavior
+            HttpClient http
         )
         {
             this.http = http ?? throw new ArgumentNullException(nameof(http));
-            this.itemReader = itemReader ?? throw new ArgumentNullException(nameof(itemReader));
-            this.missingMemberBehavior = missingMemberBehavior;
         }
 
         public async Task<IReplicaSet<int>> GetItemsIndex(CancellationToken cancellationToken = default)
         {
             var request = new ItemsIndexRequest();
-            return await http.GetResourcesSet(request, json => itemReader.Id.ReadArray(json, missingMemberBehavior), cancellationToken)
+            return await http.GetResourcesSet(request, json => json.RootElement.GetInt32Array(), cancellationToken)
                 .ConfigureAwait(false);
         }
 
         public async Task<IReplica<Item>> GetItemById(
             int itemId,
             Language? language = default,
+            MissingMemberBehavior missingMemberBehavior = default,
             CancellationToken cancellationToken = default
         )
         {
             var request = new ItemByIdRequest(itemId, language);
-            return await http.GetResource(request, json => itemReader.Read(json, missingMemberBehavior), cancellationToken)
+            return await http.GetResource(request, json => ItemReader.Read(json.RootElement, missingMemberBehavior), cancellationToken)
                 .ConfigureAwait(false);
         }
 
@@ -56,6 +50,7 @@ namespace GW2SDK.Items
             IReadOnlyCollection<int> itemIds,
 #endif
             Language? language = default,
+            MissingMemberBehavior missingMemberBehavior = default,
             [EnumeratorCancellation] CancellationToken cancellationToken = default,
             IProgress<ICollectionContext>? progress = default
         )
@@ -63,7 +58,7 @@ namespace GW2SDK.Items
             var splitQuery = SplitQuery.Create<int, Item>(async (keys, ct) =>
             {
                 var request = new ItemsByIdsRequest(keys, language);
-                return await http.GetResourcesSet(request, json => itemReader.ReadArray(json, missingMemberBehavior), ct)
+                return await http.GetResourcesSet(request, json => json.RootElement.GetArray(item => ItemReader.Read(item, missingMemberBehavior)), ct)
                     .ConfigureAwait(false);
             }, progress);
 
@@ -80,11 +75,12 @@ namespace GW2SDK.Items
             int pageIndex,
             int? pageSize = default,
             Language? language = default,
+            MissingMemberBehavior missingMemberBehavior = default,
             CancellationToken cancellationToken = default
         )
         {
             var request = new ItemsByPageRequest(pageIndex, pageSize, language);
-            return await http.GetResourcesPage(request, json => itemReader.ReadArray(json, missingMemberBehavior), cancellationToken)
+            return await http.GetResourcesPage(request, json => json.RootElement.GetArray(item => ItemReader.Read(item, missingMemberBehavior)), cancellationToken)
                 .ConfigureAwait(false);
         }
 
@@ -97,16 +93,18 @@ namespace GW2SDK.Items
         public async Task<IReplicaPage<Item>> GetItemsByPage(
             HyperlinkReference href,
             Language? language = default,
+            MissingMemberBehavior missingMemberBehavior = default,
             CancellationToken cancellationToken = default
         )
         {
             var request = new PageRequest(href, language);
-            return await http.GetResourcesPage(request, json => itemReader.ReadArray(json, missingMemberBehavior), cancellationToken)
+            return await http.GetResourcesPage(request, json => json.RootElement.GetArray(item => ItemReader.Read(item, missingMemberBehavior)), cancellationToken)
                 .ConfigureAwait(false);
         }
 
         public async IAsyncEnumerable<IReplica<Item>> GetItems(
             Language? language = default,
+            MissingMemberBehavior missingMemberBehavior = default,
             [EnumeratorCancellation] CancellationToken cancellationToken = default,
             IProgress<ICollectionContext>? progress = default
         )
@@ -118,7 +116,7 @@ namespace GW2SDK.Items
                 yield break;
             }
 
-            var producer = GetItemsByIds(index.Values, language, cancellationToken, progress);
+            var producer = GetItemsByIds(index.Values, language, missingMemberBehavior, cancellationToken, progress);
             await foreach (var item in producer
                 .WithCancellation(cancellationToken)
                 .ConfigureAwait(false))

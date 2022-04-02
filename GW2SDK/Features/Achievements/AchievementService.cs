@@ -4,6 +4,7 @@ using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 using GW2SDK.Achievements.Http;
+using GW2SDK.Achievements.Json;
 using GW2SDK.Http;
 using GW2SDK.Json;
 using JetBrains.Annotations;
@@ -13,40 +14,31 @@ namespace GW2SDK.Achievements
     [PublicAPI]
     public sealed class AchievementService
     {
-        private readonly IAchievementReader achievementReader;
-
         private readonly HttpClient http;
 
-        private readonly MissingMemberBehavior missingMemberBehavior;
-
-        public AchievementService(
-            HttpClient http,
-            IAchievementReader achievementReader,
-            MissingMemberBehavior missingMemberBehavior
-        )
+        public AchievementService(HttpClient http)
         {
             this.http = http ?? throw new ArgumentNullException(nameof(http));
-            this.achievementReader = achievementReader ?? throw new ArgumentNullException(nameof(achievementReader));
-            this.missingMemberBehavior = missingMemberBehavior;
         }
 
         public async Task<IReplicaSet<int>> GetAchievementsIndex(CancellationToken cancellationToken = default)
         {
             var request = new AchievementsIndexRequest();
-            return await http.GetResourcesSet(request,
-                    json => achievementReader.Id.ReadArray(json, missingMemberBehavior),
-                    cancellationToken)
+            return await http.GetResourcesSet(request, json => json.RootElement.GetInt32Array(), cancellationToken)
                 .ConfigureAwait(false);
         }
 
         public async Task<IReplica<Achievement>> GetAchievementById(
             int achievementId,
             Language? language = default,
+            MissingMemberBehavior missingMemberBehavior = default,
             CancellationToken cancellationToken = default
         )
         {
             var request = new AchievementByIdRequest(achievementId, language);
-            return await http.GetResource(request, json => achievementReader.Read(json, missingMemberBehavior), cancellationToken)
+            return await http.GetResource(request,
+                    json => AchievementReader.Read(json.RootElement, missingMemberBehavior),
+                    cancellationToken)
                 .ConfigureAwait(false);
         }
 
@@ -57,12 +49,14 @@ namespace GW2SDK.Achievements
             IReadOnlyCollection<int> achievementIds,
 #endif
             Language? language = default,
+            MissingMemberBehavior missingMemberBehavior = default,
             CancellationToken cancellationToken = default
         )
         {
             var request = new AchievementsByIdsRequest(achievementIds, language);
-            return await http
-                .GetResourcesSet(request, json => achievementReader.ReadArray(json, missingMemberBehavior), cancellationToken)
+            return await http.GetResourcesSet(request,
+                    json => json.RootElement.GetArray(item => AchievementReader.Read(item, missingMemberBehavior)),
+                    cancellationToken)
                 .ConfigureAwait(false);
         }
 
@@ -70,12 +64,14 @@ namespace GW2SDK.Achievements
             int pageIndex,
             int? pageSize = default,
             Language? language = default,
+            MissingMemberBehavior missingMemberBehavior = default,
             CancellationToken cancellationToken = default
         )
         {
             var request = new AchievementsByPageRequest(pageIndex, pageSize, language);
-            return await http
-                .GetResourcesPage(request, json => achievementReader.ReadArray(json, missingMemberBehavior), cancellationToken)
+            return await http.GetResourcesPage(request,
+                    json => json.RootElement.GetArray(item => AchievementReader.Read(item, missingMemberBehavior)),
+                    cancellationToken)
                 .ConfigureAwait(false);
         }
     }

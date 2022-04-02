@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Threading.Tasks;
 using GW2SDK.Commerce;
+using GW2SDK.Json;
 using GW2SDK.Tests.TestInfrastructure;
 using Xunit;
 

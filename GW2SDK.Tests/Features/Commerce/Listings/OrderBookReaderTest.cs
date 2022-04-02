@@ -1,5 +1,6 @@
 ﻿using System.Text.Json;
 using GW2SDK.Commerce.Listings;
+using GW2SDK.Commerce.Listings.Json;
 using GW2SDK.Json;
 using GW2SDK.Tests.TestInfrastructure;
 using Xunit;
@@ -23,14 +24,12 @@ namespace GW2SDK.Tests.Features.Commerce.Listings
         [Fact]
         public void Order_book_can_be_created_from_json()
         {
-            var sut = new OrderBookReader();
-
             AssertEx.ForEach(fixture.ItemPrices,
                 json =>
                 {
                     using var document = JsonDocument.Parse(json);
 
-                    var actual = sut.Read(document.RootElement, MissingMemberBehavior.Error);
+                    var actual = OrderBookReader.Read(document.RootElement, MissingMemberBehavior.Error);
 
                     OrderBookFact.Id_is_positive(actual);
                 });

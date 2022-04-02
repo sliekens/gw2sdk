@@ -13,11 +13,11 @@ namespace GW2SDK.Tests.Features.Quaggans
         [SuppressMessage("ReSharper", "MemberCanBePrivate.Local")]
         private static class QuagganFact
         {
-            internal static void Id_is_not_empty(QuagganRef actual) => Assert.NotEmpty(actual.Id);
+            internal static void Id_is_not_empty(Quaggan actual) => Assert.NotEmpty(actual.Id);
 
-            internal static void Quaggan_has_picture(QuagganRef actual) => Assert.True(Uri.IsWellFormedUriString(actual.PictureHref, UriKind.Absolute));
+            internal static void Quaggan_has_picture(Quaggan actual) => Assert.True(Uri.IsWellFormedUriString(actual.PictureHref, UriKind.Absolute));
 
-            internal static void Validate(QuagganRef actual)
+            internal static void Validate(Quaggan actual)
             {
                 Id_is_not_empty(actual);
                 Quaggan_has_picture(actual);
