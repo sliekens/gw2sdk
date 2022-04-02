@@ -6,10 +6,13 @@ using System.Threading;
 using System.Threading.Tasks;
 using GW2SDK.Commerce.Exchange;
 using GW2SDK.Commerce.Exchange.Http;
+using GW2SDK.Commerce.Exchange.Json;
 using GW2SDK.Commerce.Listings;
 using GW2SDK.Commerce.Listings.Http;
+using GW2SDK.Commerce.Listings.Json;
 using GW2SDK.Commerce.Prices;
 using GW2SDK.Commerce.Prices.Http;
+using GW2SDK.Commerce.Prices.Json;
 using GW2SDK.Http;
 using GW2SDK.Json;
 using JetBrains.Annotations;
@@ -21,62 +24,29 @@ namespace GW2SDK.Commerce
     {
         private readonly HttpClient http;
 
-        private readonly MissingMemberBehavior missingMemberBehavior;
-
-        private readonly ITradingPostReader tradingPostReader;
-
-        public TradingPost(
-            HttpClient http,
-            ITradingPostReader tradingPostReader,
-            MissingMemberBehavior missingMemberBehavior
-        )
+        public TradingPost(HttpClient http)
         {
             this.http = http ?? throw new ArgumentNullException(nameof(http));
-            this.tradingPostReader = tradingPostReader ?? throw new ArgumentNullException(nameof(tradingPostReader));
-            this.missingMemberBehavior = missingMemberBehavior;
         }
 
-        public async Task<IReplica<GemsForGoldExchange>> ExchangeGemsForGold(
-            int gemsCount,
-            CancellationToken cancellationToken = default
-        )
-        {
-            var request = new ExchangeGemsForGoldRequest(gemsCount);
-            return await http.GetResource(request,
-                    json => tradingPostReader.GemsForGold.Read(json, missingMemberBehavior),
-                    cancellationToken)
-                .ConfigureAwait(false);
-        }
-
-        public async Task<IReplica<GoldForGemsExchange>> ExchangeGoldForGems(
-            Coin coinsCount,
-            CancellationToken cancellationToken = default
-        )
-        {
-            var request = new ExchangeGoldForGemsRequest(coinsCount);
-            return await http.GetResource(request,
-                    json => tradingPostReader.GoldForGems.Read(json, missingMemberBehavior),
-                    cancellationToken)
-                .ConfigureAwait(false);
-        }
+        #region Spot prices
 
         public async Task<IReplicaSet<int>> GetItemPricesIndex(CancellationToken cancellationToken = default)
         {
             var request = new ItemPricesIndexRequest();
-            return await http.GetResourcesSet(request,
-                    json => tradingPostReader.Id.ReadArray(json, missingMemberBehavior),
-                    cancellationToken)
+            return await http.GetResourcesSet(request, json => json.RootElement.GetInt32Array(), cancellationToken)
                 .ConfigureAwait(false);
         }
 
         public async Task<IReplica<ItemPrice>> GetItemPriceById(
             int itemId,
+            MissingMemberBehavior missingMemberBehavior = default,
             CancellationToken cancellationToken = default
         )
         {
             var request = new ItemPriceByIdRequest(itemId);
             return await http.GetResource(request,
-                    json => tradingPostReader.ItemPrice.Read(json, missingMemberBehavior),
+                    json => ItemPriceReader.Read(json.RootElement, missingMemberBehavior),
                     cancellationToken)
                 .ConfigureAwait(false);
         }
@@ -87,6 +57,7 @@ namespace GW2SDK.Commerce
 #else
             IReadOnlyCollection<int> itemIds,
 #endif
+            MissingMemberBehavior missingMemberBehavior = default,
             [EnumeratorCancellation] CancellationToken cancellationToken = default,
             IProgress<ICollectionContext>? progress = default
         )
@@ -95,7 +66,8 @@ namespace GW2SDK.Commerce
                 {
                     var request = new ItemPricesByIdsRequest(keys);
                     return await http.GetResourcesSet(request,
-                            json => tradingPostReader.ItemPrice.ReadArray(json, missingMemberBehavior),
+                            json =>
+                                json.RootElement.GetArray(item => ItemPriceReader.Read(item, missingMemberBehavior)),
                             ct)
                         .ConfigureAwait(false);
                 },
@@ -110,6 +82,7 @@ namespace GW2SDK.Commerce
         }
 
         public async IAsyncEnumerable<IReplica<ItemPrice>> GetItemPrices(
+            MissingMemberBehavior missingMemberBehavior = default,
             [EnumeratorCancellation] CancellationToken cancellationToken = default,
             IProgress<ICollectionContext>? progress = default
         )
@@ -121,7 +94,7 @@ namespace GW2SDK.Commerce
                 yield break;
             }
 
-            var producer = GetItemPricesByIds(index.Values, cancellationToken, progress);
+            var producer = GetItemPricesByIds(index.Values, missingMemberBehavior, cancellationToken, progress);
             await foreach (var itemPrice in producer.WithCancellation(cancellationToken)
                                .ConfigureAwait(false))
             {
@@ -129,23 +102,26 @@ namespace GW2SDK.Commerce
             }
         }
 
+        #endregion
+
+        #region Order books
+
         public async Task<IReplicaSet<int>> GetOrderBooksIndex(CancellationToken cancellationToken = default)
         {
             var request = new OrderBooksIndexRequest();
-            return await http.GetResourcesSet(request,
-                    json => tradingPostReader.Id.ReadArray(json, missingMemberBehavior),
-                    cancellationToken)
+            return await http.GetResourcesSet(request, json => json.RootElement.GetInt32Array(), cancellationToken)
                 .ConfigureAwait(false);
         }
 
         public async Task<IReplica<OrderBook>> GetOrderBookById(
             int itemId,
+            MissingMemberBehavior missingMemberBehavior = default,
             CancellationToken cancellationToken = default
         )
         {
             var request = new OrderBookByIdRequest(itemId);
             return await http.GetResource(request,
-                    json => tradingPostReader.OrderBook.Read(json, missingMemberBehavior),
+                    json => OrderBookReader.Read(json.RootElement, missingMemberBehavior),
                     cancellationToken)
                 .ConfigureAwait(false);
         }
@@ -156,6 +132,7 @@ namespace GW2SDK.Commerce
 #else
             IReadOnlyCollection<int> itemIds,
 #endif
+            MissingMemberBehavior missingMemberBehavior = default,
             [EnumeratorCancellation] CancellationToken cancellationToken = default,
             IProgress<ICollectionContext>? progress = default
         )
@@ -164,7 +141,8 @@ namespace GW2SDK.Commerce
                 {
                     var request = new OrderBooksByIdsRequest(keys);
                     return await http.GetResourcesSet(request,
-                            json => tradingPostReader.OrderBook.ReadArray(json, missingMemberBehavior),
+                            json =>
+                                json.RootElement.GetArray(item => OrderBookReader.Read(item, missingMemberBehavior)),
                             ct)
                         .ConfigureAwait(false);
                 },
@@ -179,6 +157,7 @@ namespace GW2SDK.Commerce
         }
 
         public async IAsyncEnumerable<IReplica<OrderBook>> GetOrderBooks(
+            MissingMemberBehavior missingMemberBehavior = default,
             [EnumeratorCancellation] CancellationToken cancellationToken = default,
             IProgress<ICollectionContext>? progress = default
         )
@@ -190,12 +169,44 @@ namespace GW2SDK.Commerce
                 yield break;
             }
 
-            var producer = GetOrderBooksByIds(index.Values, cancellationToken, progress);
+            var producer = GetOrderBooksByIds(index.Values, missingMemberBehavior, cancellationToken, progress);
             await foreach (var orderBook in producer.WithCancellation(cancellationToken)
                                .ConfigureAwait(false))
             {
                 yield return orderBook;
             }
         }
+
+        #endregion
+
+        #region Currency Exchange
+
+        public async Task<IReplica<GemsForGoldExchange>> ExchangeGemsForGold(
+            int gemsCount,
+            MissingMemberBehavior missingMemberBehavior = default,
+            CancellationToken cancellationToken = default
+        )
+        {
+            var request = new ExchangeGemsForGoldRequest(gemsCount);
+            return await http.GetResource(request,
+                    json => GemsForGoldReader.Read(json.RootElement, missingMemberBehavior),
+                    cancellationToken)
+                .ConfigureAwait(false);
+        }
+
+        public async Task<IReplica<GoldForGemsExchange>> ExchangeGoldForGems(
+            Coin coinsCount,
+            MissingMemberBehavior missingMemberBehavior = default,
+            CancellationToken cancellationToken = default
+        )
+        {
+            var request = new ExchangeGoldForGemsRequest(coinsCount);
+            return await http.GetResource(request,
+                    json => GoldForGemsReader.Read(json.RootElement, missingMemberBehavior),
+                    cancellationToken)
+                .ConfigureAwait(false);
+        }
+
+        #endregion
     }
 }

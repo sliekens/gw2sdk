@@ -1,6 +1,7 @@
 ﻿using System.Text.Json;
 using GW2SDK.Json;
 using GW2SDK.Recipes;
+using GW2SDK.Recipes.Json;
 using Xunit;
 
 namespace GW2SDK.Tests.Features.Recipes
@@ -17,13 +18,11 @@ namespace GW2SDK.Tests.Features.Recipes
         [Fact]
         public void Recipes_can_be_created_from_json()
         {
-            var sut = new RecipeReader();
-
             Assert.All(fixture.Recipes,
                 json =>
                 {
                     using var document = JsonDocument.Parse(json);
-                    var actual = sut.Read(document.RootElement, MissingMemberBehavior.Error);
+                    var actual = RecipeReader.Read(document.RootElement, MissingMemberBehavior.Error);
 
                     RecipeFacts.Validate(actual);
                 });

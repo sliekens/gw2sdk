@@ -21,7 +21,6 @@ using GW2SDK.Continents;
 using GW2SDK.Currencies;
 using GW2SDK.Items;
 using GW2SDK.ItemStats;
-using GW2SDK.Json;
 using GW2SDK.MailCarriers;
 using GW2SDK.Masteries;
 using GW2SDK.Mounts;
@@ -86,197 +85,177 @@ namespace GW2SDK.Tests.TestInfrastructure
 
             if (serviceType == typeof(AccountAchievementService))
             {
-                return new AccountAchievementService(Resolve<HttpClient>(),
-                    new AccountAchievementReader(),
-                    MissingMemberBehavior.Error);
+                return new AccountAchievementService(Resolve<HttpClient>());
             }
 
             if (serviceType == typeof(BankService))
             {
-                return new BankService(Resolve<HttpClient>(), new BankReader(), MissingMemberBehavior.Error);
+                return new BankService(Resolve<HttpClient>());
             }
 
             if (serviceType == typeof(AccountRecipesService))
             {
-                return new AccountRecipesService(Resolve<HttpClient>(),
-                    new AccountRecipeReader(),
-                    MissingMemberBehavior.Error);
+                return new AccountRecipesService(Resolve<HttpClient>());
             }
 
             if (serviceType == typeof(AccountService))
             {
-                return new AccountService(Resolve<HttpClient>(), new AccountReader(), MissingMemberBehavior.Error);
+                return new AccountService(Resolve<HttpClient>());
             }
 
             if (serviceType == typeof(AchievementCategoryService))
             {
-                return new AchievementCategoryService(Resolve<HttpClient>(),
-                    new AchievementCategoryReader(),
-                    MissingMemberBehavior.Error);
+                return new AchievementCategoryService(Resolve<HttpClient>());
             }
 
             if (serviceType == typeof(DailyAchievementService))
             {
-                return new DailyAchievementService(Resolve<HttpClient>(),
-                    new DailyAchievementReader(),
-                    MissingMemberBehavior.Error);
+                return new DailyAchievementService(Resolve<HttpClient>());
             }
 
             if (serviceType == typeof(AchievementGroupService))
             {
-                return new AchievementGroupService(Resolve<HttpClient>(),
-                    new AchievementGroupReader(),
-                    MissingMemberBehavior.Error);
+                return new AchievementGroupService(Resolve<HttpClient>());
             }
 
             if (serviceType == typeof(AchievementService))
             {
-                return new AchievementService(Resolve<HttpClient>(),
-                    new AchievementReader(),
-                    MissingMemberBehavior.Error);
+                return new AchievementService(Resolve<HttpClient>());
             }
 
             if (serviceType == typeof(BackstoryService))
             {
-                return new BackstoryService(Resolve<HttpClient>(), new BackstoryReader(), MissingMemberBehavior.Error);
+                return new BackstoryService(Resolve<HttpClient>());
             }
 
             if (serviceType == typeof(BuildService))
             {
-                return new BuildService(Resolve<HttpClient>(), new BuildReader(), MissingMemberBehavior.Error);
+                return new BuildService(Resolve<HttpClient>());
             }
 
             if (serviceType == typeof(CharacterService))
             {
-                return new CharacterService(Resolve<HttpClient>(), new CharacterReader(), MissingMemberBehavior.Error);
+                return new CharacterService(Resolve<HttpClient>());
             }
 
             if (serviceType == typeof(ColorService))
             {
-                return new ColorService(Resolve<HttpClient>(), new DyeReader(), MissingMemberBehavior.Error);
+                return new ColorService(Resolve<HttpClient>());
             }
 
             if (serviceType == typeof(TradingPost))
             {
-                return new TradingPost(Resolve<HttpClient>(), new TradingPostReader(), MissingMemberBehavior.Error);
+                return new TradingPost(Resolve<HttpClient>());
             }
 
             if (serviceType == typeof(ContinentService))
             {
-                return new ContinentService(Resolve<HttpClient>(), new ContinentReader(), MissingMemberBehavior.Error);
+                return new ContinentService(Resolve<HttpClient>());
             }
 
             if (serviceType == typeof(CurrencyService))
             {
-                return new CurrencyService(Resolve<HttpClient>(), new CurrencyReader(), MissingMemberBehavior.Error);
+                return new CurrencyService(Resolve<HttpClient>());
             }
 
             if (serviceType == typeof(ItemService))
             {
-                return new ItemService(Resolve<HttpClient>(), new ItemReader(), MissingMemberBehavior.Error);
+                return new ItemService(Resolve<HttpClient>());
             }
 
             if (serviceType == typeof(MailCarrierService))
             {
-                return new MailCarrierService(Resolve<HttpClient>(),
-                    new MailCarrierReader(),
-                    MissingMemberBehavior.Error);
+                return new MailCarrierService(Resolve<HttpClient>());
             }
 
             if (serviceType == typeof(RecipeService))
             {
-                return new RecipeService(Resolve<HttpClient>(), new RecipeReader(), MissingMemberBehavior.Error);
+                return new RecipeService(Resolve<HttpClient>());
             }
 
             if (serviceType == typeof(SkinService))
             {
-                return new SkinService(Resolve<HttpClient>(), new SkinReader(), MissingMemberBehavior.Error);
+                return new SkinService(Resolve<HttpClient>());
             }
 
             if (serviceType == typeof(TokenInfoService))
             {
-                return new TokenInfoService(Resolve<HttpClient>(), new TokenInfoReader(), MissingMemberBehavior.Error);
+                return new TokenInfoService(Resolve<HttpClient>());
             }
 
             if (serviceType == typeof(SubtokenService))
             {
-                return new SubtokenService(Resolve<HttpClient>(), new SubtokenReader(), MissingMemberBehavior.Error);
+                return new SubtokenService(Resolve<HttpClient>());
             }
 
             if (serviceType == typeof(TitleService))
             {
-                return new TitleService(Resolve<HttpClient>(), new TitleReader(), MissingMemberBehavior.Error);
+                return new TitleService(Resolve<HttpClient>());
             }
 
             if (serviceType == typeof(TraitService))
             {
-                return new TraitService(Resolve<HttpClient>(), new TraitReader(), MissingMemberBehavior.Error);
+                return new TraitService(Resolve<HttpClient>());
             }
 
             if (serviceType == typeof(ApiInfoService))
             {
-                return new ApiInfoService(Resolve<HttpClient>(), new ApiInfoReader(), MissingMemberBehavior.Error);
+                return new ApiInfoService(Resolve<HttpClient>());
             }
 
             if (serviceType == typeof(WorldService))
             {
-                return new WorldService(Resolve<HttpClient>(), new WorldReader(), MissingMemberBehavior.Error);
+                return new WorldService(Resolve<HttpClient>());
             }
 
             if (serviceType == typeof(ProfessionService))
             {
-                return new ProfessionService(Resolve<HttpClient>(),
-                    new ProfessionReader(),
-                    MissingMemberBehavior.Error);
+                return new ProfessionService(Resolve<HttpClient>());
             }
 
             if (serviceType == typeof(ItemStatService))
             {
-                return new ItemStatService(Resolve<HttpClient>(), new ItemStatReader(), MissingMemberBehavior.Error);
+                return new ItemStatService(Resolve<HttpClient>());
             }
 
             if (serviceType == typeof(DailyCraftingService))
             {
-                return new DailyCraftingService(Resolve<HttpClient>(),
-                    new DailyCraftingReader(),
-                    MissingMemberBehavior.Error);
+                return new DailyCraftingService(Resolve<HttpClient>());
             }
 
             if (serviceType == typeof(SkillService))
             {
-                return new SkillService(Resolve<HttpClient>(), new SkillReader(), MissingMemberBehavior.Error);
+                return new SkillService(Resolve<HttpClient>());
             }
 
             if (serviceType == typeof(WorldBossService))
             {
-                return new WorldBossService(Resolve<HttpClient>(), new WorldBossReader(), MissingMemberBehavior.Error);
+                return new WorldBossService(Resolve<HttpClient>());
             }
 
             if (serviceType == typeof(MasteryService))
             {
-                return new MasteryService(Resolve<HttpClient>(), new MasteryReader(), MissingMemberBehavior.Error);
+                return new MasteryService(Resolve<HttpClient>());
             }
 
             if (serviceType == typeof(SpecializationService))
             {
-                return new SpecializationService(Resolve<HttpClient>(),
-                    new SpecializationReader(),
-                    MissingMemberBehavior.Error);
+                return new SpecializationService(Resolve<HttpClient>());
             }
 
             if (serviceType == typeof(MountService))
             {
-                return new MountService(Resolve<HttpClient>(), new MountReader(), MissingMemberBehavior.Error);
+                return new MountService(Resolve<HttpClient>());
             }
 
             if (serviceType == typeof(QuagganService))
             {
-                return new QuagganService(Resolve<HttpClient>(), new QuagganReader(), MissingMemberBehavior.Error);
+                return new QuagganService(Resolve<HttpClient>());
             }
 
             if (serviceType == typeof(WalletService))
             {
-                return new WalletService(Resolve<HttpClient>(), new WalletReader(), MissingMemberBehavior.Error);
+                return new WalletService(Resolve<HttpClient>());
             }
 
             return null;

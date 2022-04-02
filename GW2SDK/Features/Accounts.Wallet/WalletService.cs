@@ -1,49 +1,45 @@
-﻿using GW2SDK.Accounts.Wallet.Http;
-using GW2SDK.Annotations;
-using GW2SDK.Http;
-using GW2SDK.Json;
-using JetBrains.Annotations;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
+using GW2SDK.Accounts.Wallet.Http;
+using GW2SDK.Accounts.Wallet.Json;
+using GW2SDK.Annotations;
+using GW2SDK.Http;
+using GW2SDK.Json;
+using JetBrains.Annotations;
 
 namespace GW2SDK.Accounts.Wallet
 {
     [PublicAPI]
     public sealed class WalletService
     {
-        private readonly IWalletReader walletReader;
-
         private readonly HttpClient http;
 
-        private readonly MissingMemberBehavior missingMemberBehavior;
-
-        public WalletService(
-            HttpClient http,
-            IWalletReader walletReader,
-            MissingMemberBehavior missingMemberBehavior
-        )
+        public WalletService(HttpClient http)
         {
             this.http = http ?? throw new ArgumentNullException(nameof(http));
-            this.walletReader = walletReader ?? throw new ArgumentNullException(nameof(walletReader));
-            this.missingMemberBehavior = missingMemberBehavior;
         }
 
         [Scope(Permission.Wallet)]
 #if NET
-        public async Task<IReplica<IReadOnlySet<CurrencyAmount>>> GetWallet(string? accessToken, CancellationToken cancellationToken = default)
+        public async Task<IReplica<IReadOnlySet<CurrencyAmount>>> GetWallet(
+            string? accessToken,
+            MissingMemberBehavior missingMemberBehavior = default,
+            CancellationToken cancellationToken = default
+        )
 #else
         public async Task<IReplica<IReadOnlyCollection<CurrencyAmount>>> GetWallet(
             string? accessToken,
+            MissingMemberBehavior missingMemberBehavior = default,
             CancellationToken cancellationToken = default
         )
 #endif
         {
             var request = new WalletRequest(accessToken);
             return await http.GetResourcesSetSimple(request,
-                    json => walletReader.CurrencyAmount.ReadArray(json, missingMemberBehavior),
+                    json => json.RootElement.GetArray(item => CurrencyAmountReader.Read(item, missingMemberBehavior)),
                     cancellationToken)
                 .ConfigureAwait(false);
         }

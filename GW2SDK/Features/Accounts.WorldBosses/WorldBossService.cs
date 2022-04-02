@@ -16,19 +16,9 @@ namespace GW2SDK.Accounts.WorldBosses
     {
         private readonly HttpClient http;
 
-        private readonly MissingMemberBehavior missingMemberBehavior;
-
-        private readonly IWorldBossReader worldBossReader;
-
-        public WorldBossService(
-            HttpClient http,
-            IWorldBossReader worldBossReader,
-            MissingMemberBehavior missingMemberBehavior
-        )
+        public WorldBossService(HttpClient http)
         {
             this.http = http ?? throw new ArgumentNullException(nameof(http));
-            this.worldBossReader = worldBossReader ?? throw new ArgumentNullException(nameof(worldBossReader));
-            this.missingMemberBehavior = missingMemberBehavior;
         }
 
 #if NET
@@ -41,7 +31,7 @@ namespace GW2SDK.Accounts.WorldBosses
         {
             var request = new WorldBossesRequest();
             return await http.GetResourcesSetSimple(request,
-                    json => worldBossReader.Id.ReadArray(json, missingMemberBehavior),
+                    json => json.RootElement.GetStringArray(),
                     cancellationToken)
                 .ConfigureAwait(false);
         }
@@ -61,7 +51,7 @@ namespace GW2SDK.Accounts.WorldBosses
         {
             var request = new AccountWorldBossesRequest(accessToken);
             return await http.GetResourcesSetSimple(request,
-                    json => worldBossReader.Id.ReadArray(json, missingMemberBehavior),
+                    json => json.RootElement.GetStringArray(),
                     cancellationToken)
                 .ConfigureAwait(false);
         }

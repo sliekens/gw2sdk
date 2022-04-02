@@ -4,6 +4,7 @@ using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 using GW2SDK.Accounts.Banks.Http;
+using GW2SDK.Accounts.Banks.Json;
 using GW2SDK.Annotations;
 using GW2SDK.Http;
 using GW2SDK.Json;
@@ -14,59 +15,58 @@ namespace GW2SDK.Accounts.Banks
     [PublicAPI]
     public sealed class BankService
     {
-        private readonly IBankReader bankReader;
-
         private readonly HttpClient http;
 
-        private readonly MissingMemberBehavior missingMemberBehavior;
-
-        public BankService(
-            HttpClient http,
-            IBankReader bankReader,
-            MissingMemberBehavior missingMemberBehavior
-        )
+        public BankService(HttpClient http)
         {
             this.http = http ?? throw new ArgumentNullException(nameof(http));
-            this.bankReader = bankReader ?? throw new ArgumentNullException(nameof(bankReader));
-            this.missingMemberBehavior = missingMemberBehavior;
         }
 
         [Scope(Permission.Inventories)]
         public async Task<IReplica<AccountBank>> GetBank(
             string? accessToken,
+            MissingMemberBehavior missingMemberBehavior = default,
             CancellationToken cancellationToken = default
         )
         {
             var request = new BankRequest(accessToken);
-            return await http.GetResource(request, json => bankReader.AccountBank.Read(json, missingMemberBehavior), cancellationToken)
+            return await http.GetResource(request,
+                    json => AccountBankReader.Read(json.RootElement, missingMemberBehavior),
+                    cancellationToken)
                 .ConfigureAwait(false);
         }
 
         public async Task<IReplicaSet<MaterialCategory>> GetMaterialCategories(
             Language? language = default,
+            MissingMemberBehavior missingMemberBehavior = default,
             CancellationToken cancellationToken = default
         )
         {
             var request = new MaterialCategoriesRequest(language);
-            return await http.GetResourcesSet(request, json => bankReader.MaterialCategory.ReadArray(json, missingMemberBehavior), cancellationToken)
+            return await http.GetResourcesSet(request,
+                    json => json.RootElement.GetArray(item => MaterialCategoryReader.Read(item, missingMemberBehavior)),
+                    cancellationToken)
                 .ConfigureAwait(false);
         }
 
         public async Task<IReplicaSet<int>> GetMaterialCategoriesIndex(CancellationToken cancellationToken = default)
         {
             var request = new MaterialCategoriesIndexRequest();
-            return await http.GetResourcesSet(request, json => bankReader.MaterialCategoryId.ReadArray(json, missingMemberBehavior), cancellationToken)
+            return await http.GetResourcesSet(request, json => json.RootElement.GetInt32Array(), cancellationToken)
                 .ConfigureAwait(false);
         }
 
         public async Task<IReplica<MaterialCategory>> GetMaterialCategoryById(
             int materialCategoryId,
             Language? language = default,
+            MissingMemberBehavior missingMemberBehavior = default,
             CancellationToken cancellationToken = default
         )
         {
             var request = new MaterialCategoryByIdRequest(materialCategoryId, language);
-            return await http.GetResource(request, json => bankReader.MaterialCategory.Read(json, missingMemberBehavior), cancellationToken)
+            return await http.GetResource(request,
+                    json => MaterialCategoryReader.Read(json.RootElement, missingMemberBehavior),
+                    cancellationToken)
                 .ConfigureAwait(false);
         }
 
@@ -77,12 +77,13 @@ namespace GW2SDK.Accounts.Banks
             IReadOnlyCollection<int> materialCategoryIds,
 #endif
             Language? language = default,
+            MissingMemberBehavior missingMemberBehavior = default,
             CancellationToken cancellationToken = default
         )
         {
             var request = new MaterialCategoriesByIdsRequest(materialCategoryIds, language);
             return await http.GetResourcesSet(request,
-                json => bankReader.MaterialCategory.ReadArray(json, missingMemberBehavior),
+                json => json.RootElement.GetArray(item => MaterialCategoryReader.Read(item, missingMemberBehavior)),
                 cancellationToken);
         }
     }

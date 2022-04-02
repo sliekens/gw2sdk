@@ -14,26 +14,17 @@ namespace GW2SDK.Accounts.Recipes
     [PublicAPI]
     public sealed class AccountRecipesService
     {
-        private readonly IAccountRecipeReader accountRecipeReader;
-
         private readonly HttpClient http;
 
-        private readonly MissingMemberBehavior missingMemberBehavior;
-
-        public AccountRecipesService(
-            HttpClient http,
-            IAccountRecipeReader accountRecipeReader,
-            MissingMemberBehavior missingMemberBehavior
-        )
+        public AccountRecipesService(HttpClient http)
         {
             this.http = http ?? throw new ArgumentNullException(nameof(http));
-            this.accountRecipeReader = accountRecipeReader ?? throw new ArgumentNullException(nameof(accountRecipeReader));
-            this.missingMemberBehavior = missingMemberBehavior;
         }
 
         [Scope(Permission.Unlocks)]
 #if NET
-        public async Task<IReplica<IReadOnlySet<int>>> GetUnlockedRecipes(string? accessToken, CancellationToken cancellationToken = default)
+        public async Task<IReplica<IReadOnlySet<int>>> GetUnlockedRecipes(string? accessToken, CancellationToken cancellationToken
+ = default)
 #else
         public async Task<IReplica<IReadOnlyCollection<int>>> GetUnlockedRecipes(
             string? accessToken,
@@ -43,7 +34,7 @@ namespace GW2SDK.Accounts.Recipes
         {
             var request = new UnlockedRecipesRequest(accessToken);
             return await http.GetResourcesSetSimple(request,
-                    json => accountRecipeReader.Id.ReadArray(json, missingMemberBehavior),
+                    json => json.RootElement.GetInt32Array(),
                     cancellationToken)
                 .ConfigureAwait(false);
         }

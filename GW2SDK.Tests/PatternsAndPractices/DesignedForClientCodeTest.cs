@@ -20,7 +20,7 @@ namespace GW2SDK.Tests.PatternsAndPractices
         {
             /*
              * The goal of this test is to ensure that all public types are intended to be used in client code.
-             * This avoids leaking private API (e.g. helper functions) into consumer code.
+             * This avoids leaking private static API (e.g. helper functions) into consumer code.
              *
              * Note that the goal is not to make every helper object internal, but to think carefully about their class design.
              * Especially regarding how easily they can be replaced or evolved between versions.

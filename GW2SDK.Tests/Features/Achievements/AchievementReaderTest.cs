@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using System.Text.Json;
 using GW2SDK.Achievements;
+using GW2SDK.Achievements.Json;
 using GW2SDK.Json;
 using GW2SDK.Tests.TestInfrastructure;
 using Xunit;
@@ -61,14 +62,12 @@ namespace GW2SDK.Tests.Features.Achievements
         [Fact]
         public void Achievements_can_be_created_from_json()
         {
-            var sut = new AchievementReader();
-
             AssertEx.ForEach(fixture.Achievements,
                 json =>
                 {
                     using var document = JsonDocument.Parse(json);
 
-                    var actual = sut.Read(document.RootElement, MissingMemberBehavior.Error);
+                    var actual = AchievementReader.Read(document.RootElement, MissingMemberBehavior.Error);
 
                     AchievementFact.Name_is_not_empty(actual);
                     AchievementFact.Description_is_not_null(actual);

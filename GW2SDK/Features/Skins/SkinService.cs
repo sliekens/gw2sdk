@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using GW2SDK.Http;
 using GW2SDK.Json;
 using GW2SDK.Skins.Http;
+using GW2SDK.Skins.Json;
 using JetBrains.Annotations;
 
 namespace GW2SDK.Skins
@@ -15,36 +16,29 @@ namespace GW2SDK.Skins
     {
         private readonly HttpClient http;
 
-        private readonly MissingMemberBehavior missingMemberBehavior;
-
-        private readonly ISkinReader skinReader;
-
-        public SkinService(
-            HttpClient http,
-            ISkinReader skinReader,
-            MissingMemberBehavior missingMemberBehavior
-        )
+        public SkinService(HttpClient http)
         {
             this.http = http ?? throw new ArgumentNullException(nameof(http));
-            this.skinReader = skinReader ?? throw new ArgumentNullException(nameof(skinReader));
-            this.missingMemberBehavior = missingMemberBehavior;
         }
 
         public async Task<IReplicaSet<int>> GetSkinsIndex(CancellationToken cancellationToken = default)
         {
             var request = new SkinsIndexRequest();
-            return await http.GetResourcesSet(request, json => skinReader.Id.ReadArray(json, missingMemberBehavior), cancellationToken)
+            return await http.GetResourcesSet(request, json => json.RootElement.GetInt32Array(), cancellationToken)
                 .ConfigureAwait(false);
         }
 
         public async Task<IReplica<Skin>> GetSkinById(
             int skinId,
             Language? language = default,
+            MissingMemberBehavior missingMemberBehavior = default,
             CancellationToken cancellationToken = default
         )
         {
             var request = new SkinByIdRequest(skinId, language);
-            return await http.GetResource(request, json => skinReader.Read(json, missingMemberBehavior), cancellationToken)
+            return await http.GetResource(request,
+                    json => SkinReader.Read(json.RootElement, missingMemberBehavior),
+                    cancellationToken)
                 .ConfigureAwait(false);
         }
 
@@ -55,11 +49,14 @@ namespace GW2SDK.Skins
             IReadOnlyCollection<int> skinIds,
 #endif
             Language? language = default,
+            MissingMemberBehavior missingMemberBehavior = default,
             CancellationToken cancellationToken = default
         )
         {
             var request = new SkinsByIdsRequest(skinIds, language);
-            return await http.GetResourcesSet(request, json => skinReader.ReadArray(json, missingMemberBehavior), cancellationToken)
+            return await http.GetResourcesSet(request,
+                    json => json.RootElement.GetArray(item => SkinReader.Read(item, missingMemberBehavior)),
+                    cancellationToken)
                 .ConfigureAwait(false);
         }
 
@@ -67,11 +64,14 @@ namespace GW2SDK.Skins
             int pageIndex,
             int? pageSize = default,
             Language? language = default,
+            MissingMemberBehavior missingMemberBehavior = default,
             CancellationToken cancellationToken = default
         )
         {
             var request = new SkinsByPageRequest(pageIndex, pageSize, language);
-            return await http.GetResourcesPage(request, json => skinReader.ReadArray(json, missingMemberBehavior), cancellationToken)
+            return await http.GetResourcesPage(request,
+                    json => json.RootElement.GetArray(item => SkinReader.Read(item, missingMemberBehavior)),
+                    cancellationToken)
                 .ConfigureAwait(false);
         }
     }

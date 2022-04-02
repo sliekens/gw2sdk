@@ -1,5 +1,6 @@
 ﻿using System.Text.Json;
 using GW2SDK.Commerce.Prices;
+using GW2SDK.Commerce.Prices.Json;
 using GW2SDK.Json;
 using GW2SDK.Tests.TestInfrastructure;
 using Xunit;
@@ -31,14 +32,12 @@ namespace GW2SDK.Tests.Features.Commerce.Prices
         [Fact]
         public void Item_prices_can_be_created_from_json()
         {
-            var sut = new ItemPriceReader();
-
             AssertEx.ForEach(fixture.ItemPrices,
                 json =>
                 {
                     using var document = JsonDocument.Parse(json);
 
-                    var actual = sut.Read(document.RootElement, MissingMemberBehavior.Error);
+                    var actual = ItemPriceReader.Read(document.RootElement, MissingMemberBehavior.Error);
 
                     ItemPriceFact.Id_is_positive(actual);
                     ItemPriceFact.Best_ask_is_greater_than_best_bid(actual);

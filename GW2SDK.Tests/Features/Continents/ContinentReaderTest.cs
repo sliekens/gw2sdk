@@ -1,5 +1,6 @@
 ﻿using System.Text.Json;
 using GW2SDK.Continents;
+using GW2SDK.Continents.Json;
 using GW2SDK.Json;
 using GW2SDK.Tests.TestInfrastructure;
 using Xunit;
@@ -24,14 +25,12 @@ namespace GW2SDK.Tests.Features.Continents
         [Fact]
         public void Floors_can_be_created_from_json()
         {
-            var sut = new ContinentReader();
-
             AssertEx.ForEach(fixture.Floors,
                 json =>
                 {
                     using var document = JsonDocument.Parse(json);
 
-                    var actual = sut.Floor.Read(document.RootElement, MissingMemberBehavior.Error);
+                    var actual = FloorReader.Read(document.RootElement, MissingMemberBehavior.Error);
 
                     FloorFact.Texture_dimensions_contains_width_and_height(actual);
                 });

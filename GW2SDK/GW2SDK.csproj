@@ -58,4 +58,8 @@
         </PackageReference>
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="Features\Mumble\Json\" />
+    </ItemGroup>
+
 </Project>

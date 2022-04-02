@@ -144,7 +144,7 @@ namespace GW2SDK
             }
         }
 
-        private async Task<T> Throttled<T>(
+        private static async Task<T> Throttled<T>(
             Func<Task<T>> taskFactory,
             SemaphoreSlim throttler,
             CancellationToken cancellationToken
@@ -163,7 +163,7 @@ namespace GW2SDK
             }
         }
 
-        private IEnumerable<HashSet<TKey>> SplitIndex(List<TKey> indices, int bufferSize)
+        private static IEnumerable<HashSet<TKey>> SplitIndex(List<TKey> indices, int bufferSize)
         {
             for (var offset = 0; offset < indices.Count; offset += bufferSize)
             {
