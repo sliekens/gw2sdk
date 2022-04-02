@@ -6,7 +6,7 @@ namespace GW2SDK.Traits
 {
     [PublicAPI]
     [Inheritable]
-    [DataTransferObject(RootObject = false)]
+    [DataTransferObject]
     public record BuffTraitFact : TraitFact
     {
         /// <summary>The duration of the effect applied by the trait, or null when the effect is removed by the trait.</summary>

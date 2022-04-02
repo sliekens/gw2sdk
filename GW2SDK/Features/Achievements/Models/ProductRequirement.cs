@@ -4,7 +4,7 @@ using JetBrains.Annotations;
 namespace GW2SDK.Achievements
 {
     [PublicAPI]
-    [DataTransferObject(RootObject = false)]
+    [DataTransferObject]
     public sealed record ProductRequirement
     {
         public ProductName Product { get; init; }

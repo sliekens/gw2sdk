@@ -4,7 +4,7 @@ using JetBrains.Annotations;
 namespace GW2SDK.Traits
 {
     [PublicAPI]
-    [DataTransferObject(RootObject = false)]
+    [DataTransferObject]
     public sealed record CompoundTraitFact
     {
         /// <summary>The ID of the trait that activates this combination.</summary>

@@ -6,7 +6,7 @@ using JetBrains.Annotations;
 namespace GW2SDK.Professions
 {
     [PublicAPI]
-    [DataTransferObject(RootObject = false)]
+    [DataTransferObject]
     public sealed record Training
     {
         public int Id { get; init; }

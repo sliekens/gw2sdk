@@ -25,7 +25,7 @@ namespace GW2SDK.Achievements.Categories
     }
 
     [PublicAPI]
-    [DataTransferObject(RootObject = false)]
+    [DataTransferObject]
     public sealed record AchievementRef
     {
         public int Id { get; init; }

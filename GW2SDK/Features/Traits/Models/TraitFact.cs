@@ -5,7 +5,7 @@ namespace GW2SDK.Traits
 {
     [PublicAPI]
     [Inheritable]
-    [DataTransferObject(RootObject = false)]
+    [DataTransferObject]
     public record TraitFact
     {
         public string Text { get; init; } = "";

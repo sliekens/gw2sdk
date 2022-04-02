@@ -5,7 +5,7 @@ namespace GW2SDK
 {
     /// <summary>A combination of item attributes.</summary>
     [PublicAPI]
-    [DataTransferObject(RootObject = false)]
+    [DataTransferObject]
     public sealed record SelectedModification
     {
         public int? AgonyResistance { get; init; }

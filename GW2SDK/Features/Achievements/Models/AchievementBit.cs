@@ -5,6 +5,6 @@ namespace GW2SDK.Achievements
 {
     [PublicAPI]
     [Inheritable]
-    [DataTransferObject(RootObject = false)]
+    [DataTransferObject]
     public record AchievementBit;
 }

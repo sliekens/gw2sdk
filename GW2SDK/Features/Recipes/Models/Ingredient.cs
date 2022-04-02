@@ -5,7 +5,7 @@ using JetBrains.Annotations;
 namespace GW2SDK.Recipes
 {
     [PublicAPI]
-    [DataTransferObject(RootObject = false)]
+    [DataTransferObject]
     public sealed record Ingredient
     {
         public IngredientKind Kind { get; init; }

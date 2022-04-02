@@ -5,7 +5,7 @@ namespace GW2SDK.Skills
 {
     [PublicAPI]
     [Inheritable]
-    [DataTransferObject(RootObject = false)]
+    [DataTransferObject]
     public record SkillFact
     {
         public string Text { get; init; } = "";

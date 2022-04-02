@@ -5,7 +5,7 @@ using JetBrains.Annotations;
 namespace GW2SDK.Traits
 {
     [PublicAPI]
-    [DataTransferObject(RootObject = false)]
+    [DataTransferObject]
     public sealed record TimeTraitFact : TraitFact
     {
         public TimeSpan Duration { get; init; }

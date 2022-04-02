@@ -4,7 +4,7 @@ using JetBrains.Annotations;
 namespace GW2SDK.V2
 {
     [PublicAPI]
-    [DataTransferObject(RootObject = false)]
+    [DataTransferObject]
     public sealed record ApiRoute
     {
         public string Path { get; init; } = "";
