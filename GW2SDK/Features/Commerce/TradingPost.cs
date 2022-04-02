@@ -4,6 +4,10 @@ using System.Net.Http;
 using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Threading.Tasks;
+using GW2SDK.Annotations;
+using GW2SDK.Commerce.Delivery;
+using GW2SDK.Commerce.Delivery.Http;
+using GW2SDK.Commerce.Delivery.Json;
 using GW2SDK.Commerce.Exchange;
 using GW2SDK.Commerce.Exchange.Http;
 using GW2SDK.Commerce.Exchange.Json;
@@ -29,7 +33,25 @@ namespace GW2SDK.Commerce
             this.http = http ?? throw new ArgumentNullException(nameof(http));
         }
 
-        #region Spot prices
+        #region /v2/commerce/delivery
+
+        [Scope(Permission.TradingPost)]
+        public async Task<IReplica<DeliveryBox>> GetDeliveryBox(
+            string? accessToken,
+            MissingMemberBehavior missingMemberBehavior = default,
+            CancellationToken cancellationToken = default
+        )
+        {
+            var request = new DeliveryRequest(accessToken);
+            return await http.GetResource(request,
+                    json => DeliveryBoxReader.Read(json.RootElement, missingMemberBehavior),
+                    cancellationToken)
+                .ConfigureAwait(false);
+        }
+
+        #endregion
+
+        #region /v2/commerce/prices
 
         public async Task<IReplicaSet<int>> GetItemPricesIndex(CancellationToken cancellationToken = default)
         {
@@ -104,7 +126,7 @@ namespace GW2SDK.Commerce
 
         #endregion
 
-        #region Order books
+        #region /v2/commerce/listings
 
         public async Task<IReplicaSet<int>> GetOrderBooksIndex(CancellationToken cancellationToken = default)
         {
@@ -179,7 +201,7 @@ namespace GW2SDK.Commerce
 
         #endregion
 
-        #region Currency Exchange
+        #region /v2/commerce/exchange
 
         public async Task<IReplica<GemsForGoldExchange>> ExchangeGemsForGold(
             int gemsCount,

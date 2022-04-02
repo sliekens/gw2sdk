@@ -59,6 +59,8 @@
     </ItemGroup>
 
     <ItemGroup>
+      <Folder Include="Features\Commerce\Delivery\Http\" />
+      <Folder Include="Features\Commerce\Delivery\Json\" />
       <Folder Include="Features\Mumble\Json\" />
     </ItemGroup>
 

@@ -155,5 +155,17 @@ namespace GW2SDK.Tests.Features.Commerce
                 Assert.InRange(actual.Value.Id, 1, int.MaxValue);
             }
         }
+
+        [Fact]
+        public async Task It_can_get_your_delivery_box()
+        {
+            await using var service = new Composer();
+            var accessToken = service.Resolve<ApiKeyFull>();
+            var sut = service.Resolve<TradingPost>();
+
+            var deliveryBox = await sut.GetDeliveryBox(accessToken.Key);
+
+            Assert.True(deliveryBox.HasValue);
+        }
     }
 }
