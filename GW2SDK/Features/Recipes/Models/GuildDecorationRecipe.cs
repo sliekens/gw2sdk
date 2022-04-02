@@ -7,7 +7,7 @@ namespace GW2SDK.Recipes
     public sealed record GuildDecorationRecipe : Recipe
     {
         public IReadOnlyCollection<GuildIngredient>? GuildIngredients { get; init; }
-        
+
         public int OutputUpgradeId { get; init; }
     }
 }

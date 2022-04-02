@@ -129,10 +129,17 @@ namespace GW2SDK.Accounts.Banks.Json
                 }
             }
 
-            return new SelectedStat { Id = id.GetValue(), Attributes = attributes.Select(value => ReadSelectedModification(value, missingMemberBehavior)) };
+            return new SelectedStat
+            {
+                Id = id.GetValue(),
+                Attributes = attributes.Select(value => ReadSelectedModification(value, missingMemberBehavior))
+            };
         }
 
-        private static SelectedModification ReadSelectedModification(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+        private static SelectedModification ReadSelectedModification(
+            JsonElement json,
+            MissingMemberBehavior missingMemberBehavior
+        )
         {
             var agonyResistance = new NullableMember<int>("AgonyResistance");
             var boonDuration = new NullableMember<int>("BoonDuration");

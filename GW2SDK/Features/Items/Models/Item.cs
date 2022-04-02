@@ -15,19 +15,19 @@ namespace GW2SDK.Items
         public string Name { get; init; } = "";
 
         public string Description { get; init; } = "";
-        
+
         public int Level { get; init; }
-        
+
         public Rarity Rarity { get; init; }
-        
+
         public Coin VendorValue { get; init; }
-        
+
         /// <remarks>Can be empty.</remarks>
         public IReadOnlyCollection<GameType> GameTypes { get; init; } = Array.Empty<GameType>();
-        
+
         /// <remarks>Can be empty.</remarks>
         public IReadOnlyCollection<ItemFlag> Flags { get; init; } = Array.Empty<ItemFlag>();
-        
+
         /// <remarks>Can be empty.</remarks>
         public IReadOnlyCollection<ItemRestriction> Restrictions { get; init; } = Array.Empty<ItemRestriction>();
 

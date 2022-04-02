@@ -13,7 +13,7 @@ namespace GW2SDK.Accounts.Wallet.Json
             var id = new RequiredMember<int>("id");
             var value = new RequiredMember<int>("value");
 
-            foreach(var member in json.EnumerateObject())
+            foreach (var member in json.EnumerateObject())
             {
                 if (member.NameEquals(id.Name))
                 {

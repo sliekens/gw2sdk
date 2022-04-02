@@ -39,9 +39,7 @@ namespace GW2SDK.Continents
         public async Task<IReplicaSet<int>> GetContinentsIndex(CancellationToken cancellationToken = default)
         {
             var request = new ContinentsIndexRequest();
-            return await http.GetResourcesSet(request,
-                    json => json.RootElement.GetInt32Array(),
-                    cancellationToken)
+            return await http.GetResourcesSet(request, json => json.RootElement.GetInt32Array(), cancellationToken)
                 .ConfigureAwait(false);
         }
 
@@ -116,9 +114,7 @@ namespace GW2SDK.Continents
         )
         {
             var request = new FloorsIndexRequest(continentId);
-            return await http.GetResourcesSet(request,
-                    json => json.RootElement.GetInt32Array(),
-                    cancellationToken)
+            return await http.GetResourcesSet(request, json => json.RootElement.GetInt32Array(), cancellationToken)
                 .ConfigureAwait(false);
         }
 

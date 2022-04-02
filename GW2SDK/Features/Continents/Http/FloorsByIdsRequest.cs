@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Globalization;
 using System.Net.Http;
 using GW2SDK.Http;
@@ -15,6 +14,7 @@ namespace GW2SDK.Continents.Http
         {
             AcceptEncoding = "gzip"
         };
+
         public FloorsByIdsRequest(
             int continentId,
             IReadOnlyCollection<int> floorIds,

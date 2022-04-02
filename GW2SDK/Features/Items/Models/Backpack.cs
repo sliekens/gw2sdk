@@ -14,11 +14,11 @@ namespace GW2SDK.Items
         public double AttributeAdjustment { get; init; }
 
         public InfixUpgrade? Prefix { get; init; }
-        
+
         public int? SuffixItemId { get; init; }
 
         public IReadOnlyCollection<int>? StatChoices { get; init; }
-        
+
         public IReadOnlyCollection<ItemUpgrade>? UpgradesInto { get; init; }
 
         public IReadOnlyCollection<ItemUpgrade>? UpgradesFrom { get; init; }

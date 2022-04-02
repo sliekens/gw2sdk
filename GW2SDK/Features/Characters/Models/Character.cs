@@ -45,7 +45,8 @@ namespace GW2SDK.Characters
         /// <summary>The number of times the current character was fully defeated.</summary>
         public int Deaths { get; init; }
 
-        public IReadOnlyCollection<CraftingDiscipline> CraftingDisciplines { get; init; } = Array.Empty<CraftingDiscipline>();
+        public IReadOnlyCollection<CraftingDiscipline> CraftingDisciplines { get; init; } =
+            Array.Empty<CraftingDiscipline>();
 
         /// <summary>The selected title ID of the current character.</summary>
         public int? TitleId { get; init; }

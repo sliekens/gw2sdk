@@ -20,7 +20,7 @@ namespace GW2SDK.Items
         public double AttributeAdjustment { get; init; }
 
         public InfixUpgrade? Prefix { get; init; }
-        
+
         public int? SuffixItemId { get; init; }
 
         public IReadOnlyCollection<int>? StatChoices { get; init; }

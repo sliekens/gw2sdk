@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Net.Http;
 using GW2SDK.Http;
 using JetBrains.Annotations;
@@ -10,11 +9,11 @@ namespace GW2SDK.Continents.Http
     [PublicAPI]
     public sealed class ContinentsByIdsRequest
     {
-        
         private static readonly HttpRequestMessageTemplate Template = new(Get, "/v2/continents")
         {
             AcceptEncoding = "gzip"
         };
+
         public ContinentsByIdsRequest(IReadOnlyCollection<int> continentIds, Language? language)
         {
             Check.Collection(continentIds, nameof(continentIds));

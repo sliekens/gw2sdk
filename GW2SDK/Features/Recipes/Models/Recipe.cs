@@ -20,7 +20,8 @@ namespace GW2SDK.Recipes
 
         public TimeSpan TimeToCraft { get; init; }
 
-        public IReadOnlyCollection<CraftingDisciplineName> Disciplines { get; init; } = Array.Empty<CraftingDisciplineName>();
+        public IReadOnlyCollection<CraftingDisciplineName> Disciplines { get; init; } =
+            Array.Empty<CraftingDisciplineName>();
 
         public IReadOnlyCollection<RecipeFlag> Flags { get; init; } = Array.Empty<RecipeFlag>();
 

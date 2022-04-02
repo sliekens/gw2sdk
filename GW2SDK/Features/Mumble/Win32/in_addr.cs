@@ -5,7 +5,8 @@ using JetBrains.Annotations;
 #pragma warning disable IDE1006 // Naming Styles
 namespace GW2SDK.Mumble.Win32
 {
-    [StructLayout(LayoutKind.Sequential), UsedImplicitly(ImplicitUseTargetFlags.Members)]
+    [StructLayout(LayoutKind.Sequential)]
+    [UsedImplicitly(ImplicitUseTargetFlags.Members)]
     internal readonly struct in_addr
     {
         internal readonly s_un s_un;

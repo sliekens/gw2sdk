@@ -15,7 +15,7 @@ namespace GW2SDK.Continents
 
         public PointF LabelCoordinates { get; init; }
 
-        public ContinentRectangle ContinentRectangle { get; init; } = new ();
+        public ContinentRectangle ContinentRectangle { get; init; } = new();
 
         public Dictionary<int, Map> Maps { get; init; } = new(0);
     }
