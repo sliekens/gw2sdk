@@ -10,7 +10,8 @@ namespace GW2SDK.Tokens.Json
     {
         public static TokenInfo Read(JsonElement json, MissingMemberBehavior missingMemberBehavior)
         {
-            switch (json.GetProperty("type").GetString())
+            switch (json.GetProperty("type")
+                        .GetString())
             {
                 case "APIKey":
                     return ReadApiKeyInfo(json, missingMemberBehavior);

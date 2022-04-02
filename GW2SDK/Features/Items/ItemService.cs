@@ -17,9 +17,7 @@ namespace GW2SDK.Items
     {
         private readonly HttpClient http;
 
-        public ItemService(
-            HttpClient http
-        )
+        public ItemService(HttpClient http)
         {
             this.http = http ?? throw new ArgumentNullException(nameof(http));
         }
@@ -39,7 +37,9 @@ namespace GW2SDK.Items
         )
         {
             var request = new ItemByIdRequest(itemId, language);
-            return await http.GetResource(request, json => ItemReader.Read(json.RootElement, missingMemberBehavior), cancellationToken)
+            return await http.GetResource(request,
+                    json => ItemReader.Read(json.RootElement, missingMemberBehavior),
+                    cancellationToken)
                 .ConfigureAwait(false);
         }
 
@@ -56,16 +56,18 @@ namespace GW2SDK.Items
         )
         {
             var splitQuery = SplitQuery.Create<int, Item>(async (keys, ct) =>
-            {
-                var request = new ItemsByIdsRequest(keys, language);
-                return await http.GetResourcesSet(request, json => json.RootElement.GetArray(item => ItemReader.Read(item, missingMemberBehavior)), ct)
-                    .ConfigureAwait(false);
-            }, progress);
+                {
+                    var request = new ItemsByIdsRequest(keys, language);
+                    return await http.GetResourcesSet(request,
+                            json => json.RootElement.GetArray(item => ItemReader.Read(item, missingMemberBehavior)),
+                            ct)
+                        .ConfigureAwait(false);
+                },
+                progress);
 
             var producer = splitQuery.QueryAsync(itemIds, cancellationToken: cancellationToken);
-            await foreach (var item in producer
-                .WithCancellation(cancellationToken)
-                .ConfigureAwait(false))
+            await foreach (var item in producer.WithCancellation(cancellationToken)
+                               .ConfigureAwait(false))
             {
                 yield return item;
             }
@@ -80,7 +82,9 @@ namespace GW2SDK.Items
         )
         {
             var request = new ItemsByPageRequest(pageIndex, pageSize, language);
-            return await http.GetResourcesPage(request, json => json.RootElement.GetArray(item => ItemReader.Read(item, missingMemberBehavior)), cancellationToken)
+            return await http.GetResourcesPage(request,
+                    json => json.RootElement.GetArray(item => ItemReader.Read(item, missingMemberBehavior)),
+                    cancellationToken)
                 .ConfigureAwait(false);
         }
 
@@ -98,7 +102,9 @@ namespace GW2SDK.Items
         )
         {
             var request = new PageRequest(href, language);
-            return await http.GetResourcesPage(request, json => json.RootElement.GetArray(item => ItemReader.Read(item, missingMemberBehavior)), cancellationToken)
+            return await http.GetResourcesPage(request,
+                    json => json.RootElement.GetArray(item => ItemReader.Read(item, missingMemberBehavior)),
+                    cancellationToken)
                 .ConfigureAwait(false);
         }
 
@@ -117,9 +123,8 @@ namespace GW2SDK.Items
             }
 
             var producer = GetItemsByIds(index.Values, language, missingMemberBehavior, cancellationToken, progress);
-            await foreach (var item in producer
-                .WithCancellation(cancellationToken)
-                .ConfigureAwait(false))
+            await foreach (var item in producer.WithCancellation(cancellationToken)
+                               .ConfigureAwait(false))
             {
                 yield return item;
             }

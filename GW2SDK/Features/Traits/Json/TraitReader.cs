@@ -90,7 +90,12 @@ namespace GW2SDK.Traits.Json
             };
         }
 
-        private static TraitFact ReadTraitFact(JsonElement json, MissingMemberBehavior missingMemberBehavior, out int? requiresTrait, out int? overrides)
+        private static TraitFact ReadTraitFact(
+            JsonElement json,
+            MissingMemberBehavior missingMemberBehavior,
+            out int? requiresTrait,
+            out int? overrides
+        )
         {
             requiresTrait = null;
             overrides = null;
@@ -183,7 +188,8 @@ namespace GW2SDK.Traits.Json
             JsonElement json,
             MissingMemberBehavior missingMemberBehavior,
             out int? requiresTrait,
-            out int? overrides)
+            out int? overrides
+        )
         {
             requiresTrait = null;
             overrides = null;
@@ -239,7 +245,12 @@ namespace GW2SDK.Traits.Json
             };
         }
 
-        private static BuffTraitFact ReadBuffTraitFact(JsonElement json, MissingMemberBehavior missingMemberBehavior, out int? requiresTrait, out int? overrides)
+        private static BuffTraitFact ReadBuffTraitFact(
+            JsonElement json,
+            MissingMemberBehavior missingMemberBehavior,
+            out int? requiresTrait,
+            out int? overrides
+        )
         {
             requiresTrait = null;
             overrides = null;
@@ -311,7 +322,8 @@ namespace GW2SDK.Traits.Json
             JsonElement json,
             MissingMemberBehavior missingMemberBehavior,
             out int? requiresTrait,
-            out int? overrides)
+            out int? overrides
+        )
         {
             requiresTrait = null;
             overrides = null;
@@ -377,7 +389,8 @@ namespace GW2SDK.Traits.Json
             JsonElement json,
             MissingMemberBehavior missingMemberBehavior,
             out int? requiresTrait,
-            out int? overrides)
+            out int? overrides
+        )
         {
             requiresTrait = null;
             overrides = null;
@@ -431,7 +444,8 @@ namespace GW2SDK.Traits.Json
             JsonElement json,
             MissingMemberBehavior missingMemberBehavior,
             out int? requiresTrait,
-            out int? overrides)
+            out int? overrides
+        )
         {
             requiresTrait = null;
             overrides = null;
@@ -487,7 +501,12 @@ namespace GW2SDK.Traits.Json
             };
         }
 
-        private static DamageTraitFact ReadDamageTraitFact(JsonElement json, MissingMemberBehavior missingMemberBehavior, out int? requiresTrait, out int? overrides)
+        private static DamageTraitFact ReadDamageTraitFact(
+            JsonElement json,
+            MissingMemberBehavior missingMemberBehavior,
+            out int? requiresTrait,
+            out int? overrides
+        )
         {
             requiresTrait = null;
             overrides = null;
@@ -547,7 +566,8 @@ namespace GW2SDK.Traits.Json
             JsonElement json,
             MissingMemberBehavior missingMemberBehavior,
             out int? requiresTrait,
-            out int? overrides)
+            out int? overrides
+        )
         {
             requiresTrait = null;
             overrides = null;
@@ -597,7 +617,12 @@ namespace GW2SDK.Traits.Json
             };
         }
 
-        private static NoDataTraitFact ReadNoDataTraitFact(JsonElement json, MissingMemberBehavior missingMemberBehavior, out int? requiresTrait, out int? overrides)
+        private static NoDataTraitFact ReadNoDataTraitFact(
+            JsonElement json,
+            MissingMemberBehavior missingMemberBehavior,
+            out int? requiresTrait,
+            out int? overrides
+        )
         {
             requiresTrait = null;
             overrides = null;
@@ -641,7 +666,12 @@ namespace GW2SDK.Traits.Json
             };
         }
 
-        private static NumberTraitFact ReadNumberTraitFact(JsonElement json, MissingMemberBehavior missingMemberBehavior, out int? requiresTrait, out int? overrides)
+        private static NumberTraitFact ReadNumberTraitFact(
+            JsonElement json,
+            MissingMemberBehavior missingMemberBehavior,
+            out int? requiresTrait,
+            out int? overrides
+        )
         {
             requiresTrait = null;
             overrides = null;
@@ -691,7 +721,12 @@ namespace GW2SDK.Traits.Json
             };
         }
 
-        private static PercentTraitFact ReadPercentTraitFact(JsonElement json, MissingMemberBehavior missingMemberBehavior, out int? requiresTrait, out int? overrides)
+        private static PercentTraitFact ReadPercentTraitFact(
+            JsonElement json,
+            MissingMemberBehavior missingMemberBehavior,
+            out int? requiresTrait,
+            out int? overrides
+        )
         {
             requiresTrait = null;
             overrides = null;
@@ -745,7 +780,8 @@ namespace GW2SDK.Traits.Json
             JsonElement json,
             MissingMemberBehavior missingMemberBehavior,
             out int? requiresTrait,
-            out int? overrides)
+            out int? overrides
+        )
         {
             requiresTrait = null;
             overrides = null;
@@ -858,7 +894,12 @@ namespace GW2SDK.Traits.Json
             };
         }
 
-        private static RadiusTraitFact ReadRadiusTraitFact(JsonElement json, MissingMemberBehavior missingMemberBehavior, out int? requiresTrait, out int? overrides)
+        private static RadiusTraitFact ReadRadiusTraitFact(
+            JsonElement json,
+            MissingMemberBehavior missingMemberBehavior,
+            out int? requiresTrait,
+            out int? overrides
+        )
         {
             requiresTrait = null;
             overrides = null;
@@ -908,7 +949,12 @@ namespace GW2SDK.Traits.Json
             };
         }
 
-        private static RangeTraitFact ReadRangeTraitFact(JsonElement json, MissingMemberBehavior missingMemberBehavior, out int? requiresTrait, out int? overrides)
+        private static RangeTraitFact ReadRangeTraitFact(
+            JsonElement json,
+            MissingMemberBehavior missingMemberBehavior,
+            out int? requiresTrait,
+            out int? overrides
+        )
         {
             requiresTrait = null;
             overrides = null;
@@ -962,7 +1008,8 @@ namespace GW2SDK.Traits.Json
             JsonElement json,
             MissingMemberBehavior missingMemberBehavior,
             out int? requiresTrait,
-            out int? overrides)
+            out int? overrides
+        )
         {
             requiresTrait = null;
             overrides = null;
@@ -1016,7 +1063,8 @@ namespace GW2SDK.Traits.Json
             JsonElement json,
             MissingMemberBehavior missingMemberBehavior,
             out int? requiresTrait,
-            out int? overrides)
+            out int? overrides
+        )
         {
             requiresTrait = null;
             overrides = null;
@@ -1066,7 +1114,12 @@ namespace GW2SDK.Traits.Json
             };
         }
 
-        private static TimeTraitFact ReadTimeTraitFact(JsonElement json, MissingMemberBehavior missingMemberBehavior, out int? requiresTrait, out int? overrides)
+        private static TimeTraitFact ReadTimeTraitFact(
+            JsonElement json,
+            MissingMemberBehavior missingMemberBehavior,
+            out int? requiresTrait,
+            out int? overrides
+        )
         {
             requiresTrait = null;
             overrides = null;
@@ -1120,7 +1173,8 @@ namespace GW2SDK.Traits.Json
             JsonElement json,
             MissingMemberBehavior missingMemberBehavior,
             out int? requiresTrait,
-            out int? overrides)
+            out int? overrides
+        )
         {
             requiresTrait = null;
             overrides = null;
@@ -1170,7 +1224,10 @@ namespace GW2SDK.Traits.Json
             };
         }
 
-        private static CompoundTraitFact ReadCompoundTraitFact(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+        private static CompoundTraitFact ReadCompoundTraitFact(
+            JsonElement json,
+            MissingMemberBehavior missingMemberBehavior
+        )
         {
             var fact = ReadTraitFact(json, missingMemberBehavior, out var requiresTrait, out var overrides);
             return new CompoundTraitFact

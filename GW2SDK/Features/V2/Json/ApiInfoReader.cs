@@ -37,7 +37,7 @@ namespace GW2SDK.V2.Json
             return new ApiInfo
             {
                 Languages = languages.SelectMany(value => value.GetStringRequired()),
-                Routes = routes.SelectMany(value => ReadApiRoute(value, missingMemberBehavior)), 
+                Routes = routes.SelectMany(value => ReadApiRoute(value, missingMemberBehavior)),
                 SchemaVersions = schemaVersions.SelectMany(value => ReadApiVersion(value, missingMemberBehavior))
             };
         }
@@ -73,7 +73,13 @@ namespace GW2SDK.V2.Json
                 }
             }
 
-            return new ApiRoute { Path = path.GetValue(), Multilingual = lang.GetValue(), RequiresAuthorization = auth.GetValue(), Active = active.GetValue() };
+            return new ApiRoute
+            {
+                Path = path.GetValue(),
+                Multilingual = lang.GetValue(),
+                RequiresAuthorization = auth.GetValue(),
+                Active = active.GetValue()
+            };
         }
 
         private static ApiVersion ReadApiVersion(JsonElement jsonElement, MissingMemberBehavior missingMemberBehavior)
@@ -98,7 +104,11 @@ namespace GW2SDK.V2.Json
                 }
             }
 
-            return new ApiVersion { Version = version.GetValue(), Description = description.GetValue() };
+            return new ApiVersion
+            {
+                Version = version.GetValue(),
+                Description = description.GetValue()
+            };
         }
     }
 }

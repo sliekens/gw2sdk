@@ -1,6 +1,6 @@
+using System.Net.Http;
 using GW2SDK.Http;
 using JetBrains.Annotations;
-using System.Net.Http;
 
 namespace GW2SDK.Accounts.Wallet.Http
 {

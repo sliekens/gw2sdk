@@ -104,7 +104,8 @@ namespace GW2SDK.Continents.Json
                 DefaultFloor = defaultFloor.GetValue(),
                 LabelCoordinates = labelCoordinates.Select(value => ReadPointF(value, missingMemberBehavior)),
                 MapRectangle = mapRectangle.Select(value => ReadMapRectangle(value, missingMemberBehavior)),
-                ContinentRectangle = continentRectangle.Select(value => ReadContinentRectangle(value, missingMemberBehavior)),
+                ContinentRectangle =
+                    continentRectangle.Select(value => ReadContinentRectangle(value, missingMemberBehavior)),
                 PointsOfInterest = pointsOfInterest.Select(value => ReadPointsOfInterest(value, missingMemberBehavior)),
                 GodShrines = godShrines.SelectMany(value => ReadGodShrine(value, missingMemberBehavior)),
                 Tasks = tasks.Select(value => ReadTasks(value, missingMemberBehavior)),
@@ -143,7 +144,10 @@ namespace GW2SDK.Continents.Json
             };
         }
 
-        private static ContinentRectangle ReadContinentRectangle(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+        private static ContinentRectangle ReadContinentRectangle(
+            JsonElement json,
+            MissingMemberBehavior missingMemberBehavior
+        )
         {
             var topLeft = json[0];
             var x = topLeft[0]
@@ -234,7 +238,10 @@ namespace GW2SDK.Continents.Json
             };
         }
 
-        private static Dictionary<int, MapSector> ReadSectors(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+        private static Dictionary<int, MapSector> ReadSectors(
+            JsonElement json,
+            MissingMemberBehavior missingMemberBehavior
+        )
         {
             var sectors = new Dictionary<int, MapSector>();
             foreach (var member in json.EnumerateObject())
@@ -264,7 +271,7 @@ namespace GW2SDK.Continents.Json
                 {
                     coordinates = coordinates.From(member.Value);
                 }
-                else  if (member.NameEquals(id.Name))
+                else if (member.NameEquals(id.Name))
                 {
                     id = id.From(member.Value);
                 }
@@ -356,7 +363,10 @@ namespace GW2SDK.Continents.Json
             };
         }
 
-        private static Dictionary<int, PointOfInterest> ReadPointsOfInterest(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+        private static Dictionary<int, PointOfInterest> ReadPointsOfInterest(
+            JsonElement json,
+            MissingMemberBehavior missingMemberBehavior
+        )
         {
             var pointsOfInterest = new Dictionary<int, PointOfInterest>();
             foreach (var member in json.EnumerateObject())

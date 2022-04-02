@@ -58,7 +58,10 @@ namespace GW2SDK.Continents.Json
             return new SizeF(width, height);
         }
 
-        private static ContinentRectangle ReadContinentRectangle(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+        private static ContinentRectangle ReadContinentRectangle(
+            JsonElement json,
+            MissingMemberBehavior missingMemberBehavior
+        )
         {
             var topLeft = json[0];
             var x = topLeft[0]
@@ -77,7 +80,10 @@ namespace GW2SDK.Continents.Json
             };
         }
 
-        private static Dictionary<int, Region> ReadRegions(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+        private static Dictionary<int, Region> ReadRegions(
+            JsonElement json,
+            MissingMemberBehavior missingMemberBehavior
+        )
         {
             var regions = new Dictionary<int, Region>();
             foreach (var member in json.EnumerateObject())

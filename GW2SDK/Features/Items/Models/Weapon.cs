@@ -24,7 +24,7 @@ namespace GW2SDK.Items
         public double AttributeAdjustment { get; init; }
 
         public InfixUpgrade? Prefix { get; init; }
-        
+
         public int? SuffixItemId { get; init; }
 
         public int? SecondarySuffixItemId { get; init; }

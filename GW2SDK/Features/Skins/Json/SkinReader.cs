@@ -10,7 +10,9 @@ namespace GW2SDK.Skins.Json
     {
         private static ArmorSkin ReadArmorSkin(JsonElement json, MissingMemberBehavior missingMemberBehavior)
         {
-            switch (json.GetProperty("details").GetProperty("type").GetString())
+            switch (json.GetProperty("details")
+                        .GetProperty("type")
+                        .GetString())
             {
                 case "Boots":
                     return ReadBootsSkin(json, missingMemberBehavior);
@@ -82,7 +84,8 @@ namespace GW2SDK.Skins.Json
                         {
                             if (missingMemberBehavior == MissingMemberBehavior.Error)
                             {
-                                throw new InvalidOperationException(Strings.UnexpectedDiscriminator(detail.Value.GetString()));
+                                throw new InvalidOperationException(
+                                    Strings.UnexpectedDiscriminator(detail.Value.GetString()));
                             }
                         }
                         else if (detail.NameEquals(weightClass.Name))
@@ -174,7 +177,8 @@ namespace GW2SDK.Skins.Json
                         {
                             if (!detail.Value.ValueEquals("Axe"))
                             {
-                                throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
+                                throw new InvalidOperationException(
+                                    Strings.InvalidDiscriminator(detail.Value.GetString()));
                             }
                         }
                         else if (detail.NameEquals(damageType.Name))
@@ -326,7 +330,8 @@ namespace GW2SDK.Skins.Json
                         {
                             if (!detail.Value.ValueEquals("Boots"))
                             {
-                                throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
+                                throw new InvalidOperationException(
+                                    Strings.InvalidDiscriminator(detail.Value.GetString()));
                             }
                         }
                         else if (detail.NameEquals(weightClass.Name))
@@ -419,7 +424,8 @@ namespace GW2SDK.Skins.Json
                         {
                             if (!detail.Value.ValueEquals("Coat"))
                             {
-                                throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
+                                throw new InvalidOperationException(
+                                    Strings.InvalidDiscriminator(detail.Value.GetString()));
                             }
                         }
                         else if (detail.NameEquals(weightClass.Name))
@@ -511,7 +517,8 @@ namespace GW2SDK.Skins.Json
                         {
                             if (!detail.Value.ValueEquals("Dagger"))
                             {
-                                throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
+                                throw new InvalidOperationException(
+                                    Strings.InvalidDiscriminator(detail.Value.GetString()));
                             }
                         }
                         else if (detail.NameEquals(damageType.Name))
@@ -598,7 +605,8 @@ namespace GW2SDK.Skins.Json
                         {
                             if (!detail.Value.ValueEquals("Focus"))
                             {
-                                throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
+                                throw new InvalidOperationException(
+                                    Strings.InvalidDiscriminator(detail.Value.GetString()));
                             }
                         }
                         else if (detail.NameEquals(damageType.Name))
@@ -687,7 +695,8 @@ namespace GW2SDK.Skins.Json
                         {
                             if (!detail.Value.ValueEquals("Foraging"))
                             {
-                                throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
+                                throw new InvalidOperationException(
+                                    Strings.InvalidDiscriminator(detail.Value.GetString()));
                             }
                         }
                         else if (missingMemberBehavior == MissingMemberBehavior.Error)
@@ -719,7 +728,9 @@ namespace GW2SDK.Skins.Json
             MissingMemberBehavior missingMemberBehavior
         )
         {
-            switch (json.GetProperty("details").GetProperty("type").GetString())
+            switch (json.GetProperty("details")
+                        .GetProperty("type")
+                        .GetString())
             {
                 case "Foraging":
                     return ReadForagingToolSkin(json, missingMemberBehavior);
@@ -783,7 +794,8 @@ namespace GW2SDK.Skins.Json
                         {
                             if (missingMemberBehavior == MissingMemberBehavior.Error)
                             {
-                                throw new InvalidOperationException(Strings.UnexpectedDiscriminator(detail.Value.GetString()));
+                                throw new InvalidOperationException(
+                                    Strings.UnexpectedDiscriminator(detail.Value.GetString()));
                             }
                         }
                         else if (missingMemberBehavior == MissingMemberBehavior.Error)
@@ -810,7 +822,10 @@ namespace GW2SDK.Skins.Json
             };
         }
 
-        private static FishingToolSkin ReadFishingToolSkin(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+        private static FishingToolSkin ReadFishingToolSkin(
+            JsonElement json,
+            MissingMemberBehavior missingMemberBehavior
+        )
         {
             var name = new RequiredMember<string>("name");
             var description = new OptionalMember<string>("description");
@@ -864,7 +879,8 @@ namespace GW2SDK.Skins.Json
                         {
                             if (!detail.Value.ValueEquals("Foo")) // TODO: use real type
                             {
-                                throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
+                                throw new InvalidOperationException(
+                                    Strings.InvalidDiscriminator(detail.Value.GetString()));
                             }
                         }
                         else if (missingMemberBehavior == MissingMemberBehavior.Error)
@@ -947,7 +963,8 @@ namespace GW2SDK.Skins.Json
                         {
                             if (!detail.Value.ValueEquals("Gloves"))
                             {
-                                throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
+                                throw new InvalidOperationException(
+                                    Strings.InvalidDiscriminator(detail.Value.GetString()));
                             }
                         }
                         else if (detail.NameEquals(weightClass.Name))
@@ -1039,7 +1056,8 @@ namespace GW2SDK.Skins.Json
                         {
                             if (!detail.Value.ValueEquals("Greatsword"))
                             {
-                                throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
+                                throw new InvalidOperationException(
+                                    Strings.InvalidDiscriminator(detail.Value.GetString()));
                             }
                         }
                         else if (detail.NameEquals(damageType.Name))
@@ -1126,7 +1144,8 @@ namespace GW2SDK.Skins.Json
                         {
                             if (!detail.Value.ValueEquals("Hammer"))
                             {
-                                throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
+                                throw new InvalidOperationException(
+                                    Strings.InvalidDiscriminator(detail.Value.GetString()));
                             }
                         }
                         else if (detail.NameEquals(damageType.Name))
@@ -1213,7 +1232,8 @@ namespace GW2SDK.Skins.Json
                         {
                             if (!detail.Value.ValueEquals("Speargun"))
                             {
-                                throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
+                                throw new InvalidOperationException(
+                                    Strings.InvalidDiscriminator(detail.Value.GetString()));
                             }
                         }
                         else if (detail.NameEquals(damageType.Name))
@@ -1245,7 +1265,10 @@ namespace GW2SDK.Skins.Json
             };
         }
 
-        private static HelmAquaticSkin ReadHelmAquaticSkin(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+        private static HelmAquaticSkin ReadHelmAquaticSkin(
+            JsonElement json,
+            MissingMemberBehavior missingMemberBehavior
+        )
         {
             var name = new RequiredMember<string>("name");
             var description = new OptionalMember<string>("description");
@@ -1301,7 +1324,8 @@ namespace GW2SDK.Skins.Json
                         {
                             if (!detail.Value.ValueEquals("HelmAquatic"))
                             {
-                                throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
+                                throw new InvalidOperationException(
+                                    Strings.InvalidDiscriminator(detail.Value.GetString()));
                             }
                         }
                         else if (detail.NameEquals(weightClass.Name))
@@ -1394,7 +1418,8 @@ namespace GW2SDK.Skins.Json
                         {
                             if (!detail.Value.ValueEquals("Helm"))
                             {
-                                throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
+                                throw new InvalidOperationException(
+                                    Strings.InvalidDiscriminator(detail.Value.GetString()));
                             }
                         }
                         else if (detail.NameEquals(weightClass.Name))
@@ -1431,7 +1456,10 @@ namespace GW2SDK.Skins.Json
             };
         }
 
-        private static LargeBundleSkin ReadLargeBundleSkin(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+        private static LargeBundleSkin ReadLargeBundleSkin(
+            JsonElement json,
+            MissingMemberBehavior missingMemberBehavior
+        )
         {
             var name = new RequiredMember<string>("name");
             var description = new OptionalMember<string>("description");
@@ -1486,7 +1514,8 @@ namespace GW2SDK.Skins.Json
                         {
                             if (!detail.Value.ValueEquals("LargeBundle"))
                             {
-                                throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
+                                throw new InvalidOperationException(
+                                    Strings.InvalidDiscriminator(detail.Value.GetString()));
                             }
                         }
                         else if (detail.NameEquals(damageType.Name))
@@ -1574,7 +1603,8 @@ namespace GW2SDK.Skins.Json
                         {
                             if (!detail.Value.ValueEquals("Leggings"))
                             {
-                                throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
+                                throw new InvalidOperationException(
+                                    Strings.InvalidDiscriminator(detail.Value.GetString()));
                             }
                         }
                         else if (detail.NameEquals(weightClass.Name))
@@ -1611,7 +1641,10 @@ namespace GW2SDK.Skins.Json
             };
         }
 
-        private static LoggingToolSkin ReadLoggingToolSkin(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+        private static LoggingToolSkin ReadLoggingToolSkin(
+            JsonElement json,
+            MissingMemberBehavior missingMemberBehavior
+        )
         {
             var name = new RequiredMember<string>("name");
             var description = new OptionalMember<string>("description");
@@ -1665,7 +1698,8 @@ namespace GW2SDK.Skins.Json
                         {
                             if (!detail.Value.ValueEquals("Logging"))
                             {
-                                throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
+                                throw new InvalidOperationException(
+                                    Strings.InvalidDiscriminator(detail.Value.GetString()));
                             }
                         }
                         else if (missingMemberBehavior == MissingMemberBehavior.Error)
@@ -1747,7 +1781,8 @@ namespace GW2SDK.Skins.Json
                         {
                             if (!detail.Value.ValueEquals("Longbow"))
                             {
-                                throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
+                                throw new InvalidOperationException(
+                                    Strings.InvalidDiscriminator(detail.Value.GetString()));
                             }
                         }
                         else if (detail.NameEquals(damageType.Name))
@@ -1834,7 +1869,8 @@ namespace GW2SDK.Skins.Json
                         {
                             if (!detail.Value.ValueEquals("Mace"))
                             {
-                                throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
+                                throw new InvalidOperationException(
+                                    Strings.InvalidDiscriminator(detail.Value.GetString()));
                             }
                         }
                         else if (detail.NameEquals(damageType.Name))
@@ -1920,7 +1956,8 @@ namespace GW2SDK.Skins.Json
                         {
                             if (!detail.Value.ValueEquals("Mining"))
                             {
-                                throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
+                                throw new InvalidOperationException(
+                                    Strings.InvalidDiscriminator(detail.Value.GetString()));
                             }
                         }
                         else if (missingMemberBehavior == MissingMemberBehavior.Error)
@@ -2002,7 +2039,8 @@ namespace GW2SDK.Skins.Json
                         {
                             if (!detail.Value.ValueEquals("Pistol"))
                             {
-                                throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
+                                throw new InvalidOperationException(
+                                    Strings.InvalidDiscriminator(detail.Value.GetString()));
                             }
                         }
                         else if (detail.NameEquals(damageType.Name))
@@ -2089,7 +2127,8 @@ namespace GW2SDK.Skins.Json
                         {
                             if (!detail.Value.ValueEquals("Rifle"))
                             {
-                                throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
+                                throw new InvalidOperationException(
+                                    Strings.InvalidDiscriminator(detail.Value.GetString()));
                             }
                         }
                         else if (detail.NameEquals(damageType.Name))
@@ -2176,7 +2215,8 @@ namespace GW2SDK.Skins.Json
                         {
                             if (!detail.Value.ValueEquals("Scepter"))
                             {
-                                throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
+                                throw new InvalidOperationException(
+                                    Strings.InvalidDiscriminator(detail.Value.GetString()));
                             }
                         }
                         else if (detail.NameEquals(damageType.Name))
@@ -2263,7 +2303,8 @@ namespace GW2SDK.Skins.Json
                         {
                             if (!detail.Value.ValueEquals("Shield"))
                             {
-                                throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
+                                throw new InvalidOperationException(
+                                    Strings.InvalidDiscriminator(detail.Value.GetString()));
                             }
                         }
                         else if (detail.NameEquals(damageType.Name))
@@ -2350,7 +2391,8 @@ namespace GW2SDK.Skins.Json
                         {
                             if (!detail.Value.ValueEquals("Shortbow"))
                             {
-                                throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
+                                throw new InvalidOperationException(
+                                    Strings.InvalidDiscriminator(detail.Value.GetString()));
                             }
                         }
                         else if (detail.NameEquals(damageType.Name))
@@ -2438,7 +2480,8 @@ namespace GW2SDK.Skins.Json
                         {
                             if (!detail.Value.ValueEquals("Shoulders"))
                             {
-                                throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
+                                throw new InvalidOperationException(
+                                    Strings.InvalidDiscriminator(detail.Value.GetString()));
                             }
                         }
                         else if (detail.NameEquals(weightClass.Name))
@@ -2477,7 +2520,8 @@ namespace GW2SDK.Skins.Json
 
         public static Skin Read(JsonElement json, MissingMemberBehavior missingMemberBehavior)
         {
-            switch (json.GetProperty("type").GetString())
+            switch (json.GetProperty("type")
+                        .GetString())
             {
                 case "Armor":
                     return ReadArmorSkin(json, missingMemberBehavior);
@@ -2551,7 +2595,10 @@ namespace GW2SDK.Skins.Json
             };
         }
 
-        private static SmallBundleSkin ReadSmallBundleSkin(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+        private static SmallBundleSkin ReadSmallBundleSkin(
+            JsonElement json,
+            MissingMemberBehavior missingMemberBehavior
+        )
         {
             var name = new RequiredMember<string>("name");
             var description = new OptionalMember<string>("description");
@@ -2606,7 +2653,8 @@ namespace GW2SDK.Skins.Json
                         {
                             if (!detail.Value.ValueEquals("SmallBundle"))
                             {
-                                throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
+                                throw new InvalidOperationException(
+                                    Strings.InvalidDiscriminator(detail.Value.GetString()));
                             }
                         }
                         else if (detail.NameEquals(damageType.Name))
@@ -2693,7 +2741,8 @@ namespace GW2SDK.Skins.Json
                         {
                             if (!detail.Value.ValueEquals("Spear"))
                             {
-                                throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
+                                throw new InvalidOperationException(
+                                    Strings.InvalidDiscriminator(detail.Value.GetString()));
                             }
                         }
                         else if (detail.NameEquals(damageType.Name))
@@ -2780,7 +2829,8 @@ namespace GW2SDK.Skins.Json
                         {
                             if (!detail.Value.ValueEquals("Staff"))
                             {
-                                throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
+                                throw new InvalidOperationException(
+                                    Strings.InvalidDiscriminator(detail.Value.GetString()));
                             }
                         }
                         else if (detail.NameEquals(damageType.Name))
@@ -2867,7 +2917,8 @@ namespace GW2SDK.Skins.Json
                         {
                             if (!detail.Value.ValueEquals("Sword"))
                             {
-                                throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
+                                throw new InvalidOperationException(
+                                    Strings.InvalidDiscriminator(detail.Value.GetString()));
                             }
                         }
                         else if (detail.NameEquals(damageType.Name))
@@ -2954,7 +3005,8 @@ namespace GW2SDK.Skins.Json
                         {
                             if (!detail.Value.ValueEquals("Torch"))
                             {
-                                throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
+                                throw new InvalidOperationException(
+                                    Strings.InvalidDiscriminator(detail.Value.GetString()));
                             }
                         }
                         else if (detail.NameEquals(damageType.Name))
@@ -3041,7 +3093,8 @@ namespace GW2SDK.Skins.Json
                         {
                             if (!detail.Value.ValueEquals("Toy"))
                             {
-                                throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
+                                throw new InvalidOperationException(
+                                    Strings.InvalidDiscriminator(detail.Value.GetString()));
                             }
                         }
                         else if (detail.NameEquals(damageType.Name))
@@ -3131,7 +3184,8 @@ namespace GW2SDK.Skins.Json
                         {
                             if (!detail.Value.ValueEquals("ToyTwoHanded"))
                             {
-                                throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
+                                throw new InvalidOperationException(
+                                    Strings.InvalidDiscriminator(detail.Value.GetString()));
                             }
                         }
                         else if (detail.NameEquals(damageType.Name))
@@ -3218,7 +3272,8 @@ namespace GW2SDK.Skins.Json
                         {
                             if (!detail.Value.ValueEquals("Trident"))
                             {
-                                throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
+                                throw new InvalidOperationException(
+                                    Strings.InvalidDiscriminator(detail.Value.GetString()));
                             }
                         }
                         else if (detail.NameEquals(damageType.Name))
@@ -3305,7 +3360,8 @@ namespace GW2SDK.Skins.Json
                         {
                             if (!detail.Value.ValueEquals("Warhorn"))
                             {
-                                throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
+                                throw new InvalidOperationException(
+                                    Strings.InvalidDiscriminator(detail.Value.GetString()));
                             }
                         }
                         else if (detail.NameEquals(damageType.Name))
@@ -3339,7 +3395,9 @@ namespace GW2SDK.Skins.Json
 
         private static WeaponSkin ReadWeaponSkin(JsonElement json, MissingMemberBehavior missingMemberBehavior)
         {
-            switch (json.GetProperty("details").GetProperty("type").GetString())
+            switch (json.GetProperty("details")
+                        .GetProperty("type")
+                        .GetString())
             {
                 case "Axe":
                     return ReadAxeSkin(json, missingMemberBehavior);
@@ -3442,7 +3500,8 @@ namespace GW2SDK.Skins.Json
                         {
                             if (missingMemberBehavior == MissingMemberBehavior.Error)
                             {
-                                throw new InvalidOperationException(Strings.UnexpectedDiscriminator(detail.Value.GetString()));
+                                throw new InvalidOperationException(
+                                    Strings.UnexpectedDiscriminator(detail.Value.GetString()));
                             }
                         }
                         else if (detail.NameEquals(damageType.Name))
@@ -3553,17 +3612,38 @@ namespace GW2SDK.Skins.Json
             // Perhaps there is a better way to model it with a Null Object pattern?
             return new DyeSlotInfo
             {
-                Default = @default.SelectMany(value => value.ValueKind == JsonValueKind.Null ? null : ReadDyeSlot(value, missingMemberBehavior)),
-                AsuraFemale = asuraFemale.SelectMany(value => value.ValueKind == JsonValueKind.Null ? null : ReadDyeSlot(value, missingMemberBehavior)),
-                AsuraMale = asuraMale.SelectMany(value => value.ValueKind == JsonValueKind.Null ? null : ReadDyeSlot(value, missingMemberBehavior)),
-                CharrFemale = charrFemale.SelectMany(value => value.ValueKind == JsonValueKind.Null ? null : ReadDyeSlot(value, missingMemberBehavior)),
-                CharrMale = charrMale.SelectMany(value => value.ValueKind == JsonValueKind.Null ? null : ReadDyeSlot(value, missingMemberBehavior)),
-                HumanFemale = humanFemale.SelectMany(value => value.ValueKind == JsonValueKind.Null ? null : ReadDyeSlot(value, missingMemberBehavior)),
-                HumanMale = humanMale.SelectMany(value => value.ValueKind == JsonValueKind.Null ? null : ReadDyeSlot(value, missingMemberBehavior)),
-                NornFemale = nornFemale.SelectMany(value => value.ValueKind == JsonValueKind.Null ? null : ReadDyeSlot(value, missingMemberBehavior)),
-                NornMale = nornMale.SelectMany(value => value.ValueKind == JsonValueKind.Null ? null : ReadDyeSlot(value, missingMemberBehavior)),
-                SylvariFemale = sylvariFemale.SelectMany(value => value.ValueKind == JsonValueKind.Null ? null : ReadDyeSlot(value, missingMemberBehavior)),
-                SylvariMale = sylvariMale.SelectMany(value => value.ValueKind == JsonValueKind.Null ? null : ReadDyeSlot(value, missingMemberBehavior))
+                Default =
+                    @default.SelectMany(value =>
+                        value.ValueKind == JsonValueKind.Null ? null : ReadDyeSlot(value, missingMemberBehavior)),
+                AsuraFemale =
+                    asuraFemale.SelectMany(value =>
+                        value.ValueKind == JsonValueKind.Null ? null : ReadDyeSlot(value, missingMemberBehavior)),
+                AsuraMale =
+                    asuraMale.SelectMany(value =>
+                        value.ValueKind == JsonValueKind.Null ? null : ReadDyeSlot(value, missingMemberBehavior)),
+                CharrFemale =
+                    charrFemale.SelectMany(value =>
+                        value.ValueKind == JsonValueKind.Null ? null : ReadDyeSlot(value, missingMemberBehavior)),
+                CharrMale =
+                    charrMale.SelectMany(value =>
+                        value.ValueKind == JsonValueKind.Null ? null : ReadDyeSlot(value, missingMemberBehavior)),
+                HumanFemale =
+                    humanFemale.SelectMany(value =>
+                        value.ValueKind == JsonValueKind.Null ? null : ReadDyeSlot(value, missingMemberBehavior)),
+                HumanMale =
+                    humanMale.SelectMany(value =>
+                        value.ValueKind == JsonValueKind.Null ? null : ReadDyeSlot(value, missingMemberBehavior)),
+                NornFemale =
+                    nornFemale.SelectMany(value =>
+                        value.ValueKind == JsonValueKind.Null ? null : ReadDyeSlot(value, missingMemberBehavior)),
+                NornMale =
+                    nornMale.SelectMany(value =>
+                        value.ValueKind == JsonValueKind.Null ? null : ReadDyeSlot(value, missingMemberBehavior)),
+                SylvariFemale =
+                    sylvariFemale.SelectMany(value =>
+                        value.ValueKind == JsonValueKind.Null ? null : ReadDyeSlot(value, missingMemberBehavior)),
+                SylvariMale = sylvariMale.SelectMany(value =>
+                    value.ValueKind == JsonValueKind.Null ? null : ReadDyeSlot(value, missingMemberBehavior))
             };
         }
 

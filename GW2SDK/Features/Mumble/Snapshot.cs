@@ -1,5 +1,4 @@
-﻿using System;
-using System.Diagnostics.CodeAnalysis;
+﻿using System.Diagnostics.CodeAnalysis;
 using System.Runtime.InteropServices;
 using System.Text.Json;
 using GW2SDK.Json;
@@ -16,7 +15,8 @@ namespace GW2SDK.Mumble
 
         public readonly uint UiTick;
 
-        /// <summary>Avatar position is the position of the player in the coordinate system of the map. While the game uses inches as unit, mumble uses meters.</summary>
+        /// <summary>Avatar position is the position of the player in the coordinate system of the map. While the game uses inches
+        /// as unit, mumble uses meters.</summary>
         [MarshalAs(UnmanagedType.ByValArray, SizeConst = 3)]
         public readonly float[] AvatarPosition;
 

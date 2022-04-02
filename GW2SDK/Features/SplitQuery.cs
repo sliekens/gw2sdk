@@ -16,6 +16,7 @@ namespace GW2SDK
     /// <param name="token">Provides cancellation support.</param>
     /// <returns>The set of records found.</returns>
     [PublicAPI]
+
     // ReSharper disable once TypeParameterCanBeVariant // it's a lie
     public delegate Task<IReplicaSet<TRecord>> InQuery<TKey, TRecord>(
 #if NET

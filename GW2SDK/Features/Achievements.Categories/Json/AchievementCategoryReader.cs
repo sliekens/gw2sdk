@@ -106,7 +106,10 @@ namespace GW2SDK.Achievements.Categories.Json
             };
         }
 
-        private static ProductRequirement ReadProductRequirement(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+        private static ProductRequirement ReadProductRequirement(
+            JsonElement json,
+            MissingMemberBehavior missingMemberBehavior
+        )
         {
             var product = new RequiredMember<ProductName>("product");
             var condition = new RequiredMember<AccessCondition>("condition");

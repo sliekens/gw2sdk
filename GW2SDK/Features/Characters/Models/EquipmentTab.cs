@@ -19,6 +19,6 @@ namespace GW2SDK.Characters
         public IEnumerable<EquipmentItem> Equipment { get; init; } = Array.Empty<EquipmentItem>();
 
         /// <summary>The selected PvP equipment on this tab.</summary>
-        public PvpEquipment PvpEquipment { get; init; } = new ();
+        public PvpEquipment PvpEquipment { get; init; } = new();
     }
 }

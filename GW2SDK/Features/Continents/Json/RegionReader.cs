@@ -50,7 +50,8 @@ namespace GW2SDK.Continents.Json
                 Id = id.GetValue(),
                 Name = name.GetValue(),
                 LabelCoordinates = labelCoordinates.Select(value => ReadPointF(value, missingMemberBehavior)),
-                ContinentRectangle = continentRectangle.Select(value => ReadContinentRectangle(value, missingMemberBehavior)),
+                ContinentRectangle =
+                    continentRectangle.Select(value => ReadContinentRectangle(value, missingMemberBehavior)),
                 Maps = maps.Select(value => ReadMaps(value, missingMemberBehavior))
             };
         }
@@ -64,7 +65,10 @@ namespace GW2SDK.Continents.Json
             return new PointF(x, y);
         }
 
-        private static ContinentRectangle ReadContinentRectangle(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+        private static ContinentRectangle ReadContinentRectangle(
+            JsonElement json,
+            MissingMemberBehavior missingMemberBehavior
+        )
         {
             var topLeft = json[0];
             var x = topLeft[0]

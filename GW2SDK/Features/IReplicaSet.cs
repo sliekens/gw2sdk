@@ -4,6 +4,7 @@ using JetBrains.Annotations;
 namespace GW2SDK
 {
     [PublicAPI]
+
     // ReSharper disable once TypeParameterCanBeVariant // it's a lie
     public interface IReplicaSet<T> : ITemporal
     {

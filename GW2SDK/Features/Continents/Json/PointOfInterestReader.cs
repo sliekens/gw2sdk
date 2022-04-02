@@ -11,7 +11,8 @@ namespace GW2SDK.Continents.Json
     {
         public static PointOfInterest Read(JsonElement json, MissingMemberBehavior missingMemberBehavior)
         {
-            switch (json.GetProperty("type").GetString())
+            switch (json.GetProperty("type")
+                        .GetString())
             {
                 case "landmark":
                     return ReadLandmark(json, missingMemberBehavior);

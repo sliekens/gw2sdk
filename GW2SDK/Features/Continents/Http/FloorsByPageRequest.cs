@@ -1,5 +1,4 @@
-﻿using System;
-using System.Globalization;
+﻿using System.Globalization;
 using System.Net.Http;
 using GW2SDK.Http;
 using JetBrains.Annotations;
@@ -14,6 +13,7 @@ namespace GW2SDK.Continents.Http
         {
             AcceptEncoding = "gzip"
         };
+
         public FloorsByPageRequest(
             int continentId,
             int pageIndex,

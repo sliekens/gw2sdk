@@ -651,7 +651,10 @@ namespace GW2SDK.Skills.Json
             };
         }
 
-        private static ProfessionSkill ReadProfessionSkill(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+        private static ProfessionSkill ReadProfessionSkill(
+            JsonElement json,
+            MissingMemberBehavior missingMemberBehavior
+        )
         {
             var id = new RequiredMember<int>("id");
             var name = new RequiredMember<string>("name");
@@ -1453,7 +1456,10 @@ namespace GW2SDK.Skills.Json
             };
         }
 
-        private static TraitedSkillFact ReadTraitedSkillFact(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+        private static TraitedSkillFact ReadTraitedSkillFact(
+            JsonElement json,
+            MissingMemberBehavior missingMemberBehavior
+        )
         {
             var fact = ReadSkillFact(json, missingMemberBehavior, out var requiresTrait, out var overrides);
             return new TraitedSkillFact
@@ -2686,7 +2692,8 @@ namespace GW2SDK.Skills.Json
 
             static bool IsDefaultInt32(JsonProperty jsonProperty)
             {
-                return jsonProperty.Value.ValueKind == JsonValueKind.Number && jsonProperty.Value.TryGetInt32(out var value) && value == 0;
+                return jsonProperty.Value.ValueKind == JsonValueKind.Number &&
+                    jsonProperty.Value.TryGetInt32(out var value) && value == 0;
             }
         }
 

@@ -148,7 +148,7 @@ namespace GW2SDK.Mumble
             var control = integrityBuffer.AsSpan(0, Length);
 
             BufferContent(buffer);
-            
+
             // This check is designed to detect dirty reads
             // Read the memory mapped file again and again, until we get the same result 5 times in a row
             // The number 5 seems magic but that's the minimum number of checks before I stopped getting invalid results
