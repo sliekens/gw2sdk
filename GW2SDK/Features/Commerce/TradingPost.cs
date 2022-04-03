@@ -17,7 +17,12 @@ using GW2SDK.Commerce.Listings.Json;
 using GW2SDK.Commerce.Prices;
 using GW2SDK.Commerce.Prices.Http;
 using GW2SDK.Commerce.Prices.Json;
+using GW2SDK.Commerce.Transactions;
+using GW2SDK.Commerce.Transactions.Http;
+using GW2SDK.Commerce.Transactions.Json;
 using GW2SDK.Http;
+using GW2SDK.Items.Http;
+using GW2SDK.Items.Json;
 using GW2SDK.Json;
 using JetBrains.Annotations;
 
@@ -225,6 +230,70 @@ namespace GW2SDK.Commerce
             var request = new ExchangeGoldForGemsRequest(coinsCount);
             return await http.GetResource(request,
                     json => GoldForGemsReader.Read(json.RootElement, missingMemberBehavior),
+                    cancellationToken)
+                .ConfigureAwait(false);
+        }
+
+        #endregion
+
+        #region /v2/commerce/transactions
+
+        public async Task<IReplicaPage<Order>> GetBuyOrders(
+            int pageIndex,
+            int? pageSize,
+            string? accessToken,
+            MissingMemberBehavior missingMemberBehavior = default,
+            CancellationToken cancellationToken = default
+        )
+        {
+            var request = new BuyOrdersRequest(pageIndex, pageSize, accessToken);
+            return await http.GetResourcesPage(request,
+                    json => json.RootElement.GetArray(item => OrderReader.Read(item, missingMemberBehavior)),
+                    cancellationToken)
+                .ConfigureAwait(false);
+        }
+
+        public async Task<IReplicaPage<Order>> GetSellOrders(
+            int pageIndex,
+            int? pageSize,
+            string? accessToken,
+            MissingMemberBehavior missingMemberBehavior = default,
+            CancellationToken cancellationToken = default
+        )
+        {
+            var request = new SellOrdersRequest(pageIndex, pageSize, accessToken);
+            return await http.GetResourcesPage(request,
+                    json => json.RootElement.GetArray(item => OrderReader.Read(item, missingMemberBehavior)),
+                    cancellationToken)
+                .ConfigureAwait(false);
+        }
+
+        public async Task<IReplicaPage<Transaction>> GetPurchases(
+            int pageIndex,
+            int? pageSize,
+            string? accessToken,
+            MissingMemberBehavior missingMemberBehavior = default,
+            CancellationToken cancellationToken = default
+        )
+        {
+            var request = new PurchasesRequest(pageIndex, pageSize, accessToken);
+            return await http.GetResourcesPage(request,
+                    json => json.RootElement.GetArray(item => TransactionReader.Read(item, missingMemberBehavior)),
+                    cancellationToken)
+                .ConfigureAwait(false);
+        }
+
+        public async Task<IReplicaPage<Transaction>> GetSales(
+            int pageIndex,
+            int? pageSize,
+            string? accessToken,
+            MissingMemberBehavior missingMemberBehavior = default,
+            CancellationToken cancellationToken = default
+        )
+        {
+            var request = new SalesRequest(pageIndex, pageSize, accessToken);
+            return await http.GetResourcesPage(request,
+                    json => json.RootElement.GetArray(item => TransactionReader.Read(item, missingMemberBehavior)),
                     cancellationToken)
                 .ConfigureAwait(false);
         }

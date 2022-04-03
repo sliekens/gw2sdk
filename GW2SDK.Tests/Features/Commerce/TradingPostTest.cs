@@ -2,7 +2,6 @@
 using System.Linq;
 using System.Threading.Tasks;
 using GW2SDK.Commerce;
-using GW2SDK.Json;
 using GW2SDK.Tests.TestInfrastructure;
 using Xunit;
 
@@ -166,6 +165,54 @@ namespace GW2SDK.Tests.Features.Commerce
             var deliveryBox = await sut.GetDeliveryBox(accessToken.Key);
 
             Assert.True(deliveryBox.HasValue);
+        }
+
+        [Fact]
+        public async Task It_can_get_your_current_bids()
+        {
+            await using var service = new Composer();
+            var accessToken = service.Resolve<ApiKeyFull>();
+            var sut = service.Resolve<TradingPost>();
+
+            var bids = await sut.GetBuyOrders(0, 200, accessToken.Key);
+
+            Assert.True(bids.HasValues);
+        }
+
+        [Fact]
+        public async Task It_can_get_your_current_asks()
+        {
+            await using var service = new Composer();
+            var accessToken = service.Resolve<ApiKeyFull>();
+            var sut = service.Resolve<TradingPost>();
+
+            var bids = await sut.GetSellOrders(0, 200, accessToken.Key);
+
+            Assert.True(bids.HasValues);
+        }
+
+        [Fact]
+        public async Task It_can_get_your_purchases()
+        {
+            await using var service = new Composer();
+            var accessToken = service.Resolve<ApiKeyFull>();
+            var sut = service.Resolve<TradingPost>();
+
+            var bids = await sut.GetPurchases(0, 200, accessToken.Key);
+
+            Assert.True(bids.HasValues);
+        }
+
+        [Fact]
+        public async Task It_can_get_your_sales()
+        {
+            await using var service = new Composer();
+            var accessToken = service.Resolve<ApiKeyFull>();
+            var sut = service.Resolve<TradingPost>();
+
+            var bids = await sut.GetSales(0, 200, accessToken.Key);
+
+            Assert.True(bids.HasValues);
         }
     }
 }

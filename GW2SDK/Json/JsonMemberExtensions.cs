@@ -20,6 +20,11 @@ namespace GW2SDK.Json
             return instance.Select(json => json.GetInt32());
         }
 
+        internal static long GetValue(this RequiredMember<long> instance)
+        {
+            return instance.Select(json => json.GetInt64());
+        }
+
         internal static double GetValue(this RequiredMember<double> instance)
         {
             return instance.Select(json => json.GetDouble());
