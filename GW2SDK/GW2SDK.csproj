@@ -23,15 +23,16 @@
 
     <Choose>
         <When Condition="'$(SYMBOL_PACKAGE)' == 'true'">
+            <!-- Create a standalone snupkg with PDB files -->
             <PropertyGroup>
                 <IncludeSymbols>true</IncludeSymbols>
                 <SymbolPackageFormat>snupkg</SymbolPackageFormat>
             </PropertyGroup>
         </When>
         <Otherwise>
+            <!-- Embed PDB files in the DLL, which is the only reliable solution because packages with standalone PDBs are not supported by SDK-style projects -->
             <PropertyGroup>
-                <!-- Include symbol files (*.pdb) in the built .nupkg -->
-                <AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
+                <DebugType>embedded</DebugType>
             </PropertyGroup>
         </Otherwise>
     </Choose>
