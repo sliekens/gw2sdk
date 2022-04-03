@@ -71,7 +71,7 @@ namespace GW2SDK.Tests.Features
             var tail = new Coin(1_00_00);
 
             Assert.Equal(0, head.CompareTo(new Coin(head.Amount)));
-            Assert.Equal(1, head.CompareTo(Coin.MinValue));
+            Assert.Equal(1, head.CompareTo(Coin.Zero));
             Assert.Equal(-1, head.CompareTo(body));
             
             Assert.Equal(0, body.CompareTo(new Coin(body.Amount)));
@@ -101,7 +101,7 @@ namespace GW2SDK.Tests.Features
 
             void DivideByZero()
             {
-                var _ = dividend / Coin.MinValue;
+                var _ = dividend / Coin.Zero;
             }
 
             Assert.Throws<DivideByZeroException>(DivideByZero);
