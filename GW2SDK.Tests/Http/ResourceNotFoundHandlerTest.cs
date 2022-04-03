@@ -1,4 +1,5 @@
-﻿using System.Net;
+﻿using System;
+using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using GW2SDK.Http;
@@ -7,18 +8,18 @@ using Xunit;
 
 namespace GW2SDK.Tests.Http;
 
-public class RateLimitHandlerTest
+public class ResourceNotFoundHandlerTest
 {
     [Theory]
     [InlineData(HttpStatusCode.OK)]
-    [InlineData(HttpStatusCode.BadRequest)]
+    [InlineData(HttpStatusCodeEx.TooManyRequests)]
     [InlineData(HttpStatusCode.ServiceUnavailable)]
-    public async Task Handler_returns_response_when_under_rate_limit(HttpStatusCode statusCode)
+    public async Task Handler_returns_response_when_arguments_are_valid(HttpStatusCode statusCode)
     {
         var request = new HttpRequestMessage(HttpMethod.Get, "https://api.guildwars2.com/v2.json");
         var stubHttpMessageHandler = new StubHttpMessageHandler(statusCode, @"{ ""success"": true }");
 
-        var sut = new RateLimitHandler(stubHttpMessageHandler);
+        var sut = new ResourceNotFoundHandler(stubHttpMessageHandler);
 
         var httpClient = new HttpClient(sut);
 
@@ -30,21 +31,21 @@ public class RateLimitHandlerTest
     }
 
     [Fact]
-    public async Task Handler_throws_when_over_rate_limit()
+    public async Task Handler_throws_when_arguments_are_invalid()
     {
-        const string message = "too many requests";
+        const string message = "all ids provided are invalid";
         var request = new HttpRequestMessage(HttpMethod.Get, "https://api.guildwars2.com/v2.json");
         var stubHttpMessageHandler =
-            new StubHttpMessageHandler(HttpStatusCodeEx.TooManyRequests, @$"{{ ""text"": ""{message}""}}");
+            new StubHttpMessageHandler(HttpStatusCode.NotFound, @$"{{ ""text"": ""{message}""}}");
 
-        var sut = new RateLimitHandler(stubHttpMessageHandler);
+        var sut = new ResourceNotFoundHandler(stubHttpMessageHandler);
 
         var httpClient = new HttpClient(sut);
 
         var actual = await Record.ExceptionAsync(async () =>
             await httpClient.SendAsync(request, HttpCompletionOption.ResponseHeadersRead));
 
-        var reason = Assert.IsType<TooManyRequestsException>(actual);
+        var reason = Assert.IsType<ResourceNotFoundException>(actual);
 
         Assert.Equal(message, reason.Message);
         Assert.Equal("https://api.guildwars2.com/v2.json", reason.Data["RequestUri"]);
