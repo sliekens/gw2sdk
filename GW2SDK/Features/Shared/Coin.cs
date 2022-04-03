@@ -11,7 +11,7 @@ namespace GW2SDK
         /// <summary>Gets the total value in copper coins.</summary>
         public readonly int Amount;
 
-        public static readonly Coin MinValue = 0;
+        public static readonly Coin Zero = 0;
 
         public Coin(
             int gold,
@@ -31,7 +31,7 @@ namespace GW2SDK
         /// <param name="amount">The total number of copper coins.</param>
         public Coin(int amount)
         {
-            if (amount < MinValue.Amount)
+            if (amount < Zero.Amount)
             {
                 throw new ArgumentOutOfRangeException(nameof(amount), "The amount of coins cannot be negative.");
             }
@@ -124,7 +124,7 @@ namespace GW2SDK
 
             if (str.Length == 0)
             {
-                str.Append("-");
+                str.Append("⸻");
             }
 
             return str.ToString();
