@@ -10,7 +10,7 @@ env:
   DOTNET_NOLOGO: true
   DOTNET_CLI_TELEMETRY_OPTOUT: true
   DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
-
+  SYMBOL_PACKAGE: false
 jobs:
   build-and-deploy:
     name: Build and deploy
