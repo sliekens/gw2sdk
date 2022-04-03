@@ -1,7 +1,7 @@
 ﻿using System;
 using JetBrains.Annotations;
 
-namespace GW2SDK
+namespace GW2SDK.Http
 {
     [PublicAPI]
     public sealed class RequestTooLongException : InvalidOperationException
