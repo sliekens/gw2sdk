@@ -6,12 +6,12 @@ namespace GW2SDK.Tests.Features
     public class CoinTest
     {
         [Fact]
-        public void Zero_coins_is_formatted_as_dash()
+        public void Zero_coins_is_formatted_as_long_dash()
         {
             Coin nil = default;
             var actual = nil.ToString();
 
-            Assert.Equal("-", actual);
+            Assert.Equal("⸻", actual);
         }
 
         [Fact]
