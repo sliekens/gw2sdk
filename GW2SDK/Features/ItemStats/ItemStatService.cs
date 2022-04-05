@@ -18,7 +18,7 @@ namespace GW2SDK.ItemStats
 
         public ItemStatService(HttpClient http)
         {
-            this.http = http ?? throw new ArgumentNullException(nameof(http));
+            this.http = http.WithDefaults() ?? throw new ArgumentNullException(nameof(http));
         }
 
         public async Task<IReplicaSet<ItemStat>> GetItemStats(

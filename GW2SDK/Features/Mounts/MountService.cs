@@ -18,7 +18,7 @@ namespace GW2SDK.Mounts
 
         public MountService(HttpClient http)
         {
-            this.http = http ?? throw new ArgumentNullException(nameof(http));
+            this.http = http.WithDefaults() ?? throw new ArgumentNullException(nameof(http));
         }
 
         #region /v2/mounts/types

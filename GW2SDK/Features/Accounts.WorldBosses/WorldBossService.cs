@@ -18,7 +18,7 @@ namespace GW2SDK.Accounts.WorldBosses
 
         public WorldBossService(HttpClient http)
         {
-            this.http = http ?? throw new ArgumentNullException(nameof(http));
+            this.http = http.WithDefaults() ?? throw new ArgumentNullException(nameof(http));
         }
 
 #if NET

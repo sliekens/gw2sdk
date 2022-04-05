@@ -18,7 +18,7 @@ namespace GW2SDK.Colors
 
         public ColorService(HttpClient http)
         {
-            this.http = http ?? throw new ArgumentNullException(nameof(http));
+            this.http = http.WithDefaults() ?? throw new ArgumentNullException(nameof(http));
         }
 
         public async Task<IReplicaSet<Dye>> GetColors(
