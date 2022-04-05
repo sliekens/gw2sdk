@@ -19,7 +19,7 @@ namespace GW2SDK.Accounts.Wallet
 
         public WalletService(HttpClient http)
         {
-            this.http = http ?? throw new ArgumentNullException(nameof(http));
+            this.http = http.WithDefaults() ?? throw new ArgumentNullException(nameof(http));
         }
 
         [Scope(Permission.Wallet)]

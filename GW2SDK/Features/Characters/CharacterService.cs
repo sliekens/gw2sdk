@@ -18,7 +18,7 @@ namespace GW2SDK.Characters
 
         public CharacterService(HttpClient http)
         {
-            this.http = http ?? throw new ArgumentNullException(nameof(http));
+            this.http = http.WithDefaults() ?? throw new ArgumentNullException(nameof(http));
         }
 
         [Scope(Permission.Account, Permission.Characters)]

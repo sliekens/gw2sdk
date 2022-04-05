@@ -21,8 +21,6 @@ using GW2SDK.Commerce.Transactions;
 using GW2SDK.Commerce.Transactions.Http;
 using GW2SDK.Commerce.Transactions.Json;
 using GW2SDK.Http;
-using GW2SDK.Items.Http;
-using GW2SDK.Items.Json;
 using GW2SDK.Json;
 using JetBrains.Annotations;
 
@@ -35,7 +33,7 @@ namespace GW2SDK.Commerce
 
         public TradingPost(HttpClient http)
         {
-            this.http = http ?? throw new ArgumentNullException(nameof(http));
+            this.http = http.WithDefaults() ?? throw new ArgumentNullException(nameof(http));
         }
 
         #region /v2/commerce/delivery

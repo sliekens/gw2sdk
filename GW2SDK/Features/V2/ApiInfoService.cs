@@ -17,7 +17,7 @@ namespace GW2SDK.V2
 
         public ApiInfoService(HttpClient http)
         {
-            this.http = http ?? throw new ArgumentNullException(nameof(http));
+            this.http = http.WithDefaults() ?? throw new ArgumentNullException(nameof(http));
         }
 
         public async Task<IReplica<ApiInfo>> GetApiInfo(

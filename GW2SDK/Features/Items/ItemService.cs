@@ -19,7 +19,7 @@ namespace GW2SDK.Items
 
         public ItemService(HttpClient http)
         {
-            this.http = http ?? throw new ArgumentNullException(nameof(http));
+            this.http = http.WithDefaults() ?? throw new ArgumentNullException(nameof(http));
         }
 
         public async Task<IReplicaSet<int>> GetItemsIndex(CancellationToken cancellationToken = default)

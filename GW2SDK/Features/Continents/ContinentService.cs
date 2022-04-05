@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
@@ -18,7 +19,7 @@ namespace GW2SDK.Continents
 
         public ContinentService(HttpClient http)
         {
-            this.http = http;
+            this.http = http.WithDefaults() ?? throw new ArgumentNullException(nameof(http));
         }
 
         #region /v2/continents

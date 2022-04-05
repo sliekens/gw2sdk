@@ -18,7 +18,7 @@ namespace GW2SDK.Skins
 
         public SkinService(HttpClient http)
         {
-            this.http = http ?? throw new ArgumentNullException(nameof(http));
+            this.http = http.WithDefaults() ?? throw new ArgumentNullException(nameof(http));
         }
 
         public async Task<IReplicaSet<int>> GetSkinsIndex(CancellationToken cancellationToken = default)

@@ -44,6 +44,14 @@ namespace GW2SDK.Http
             instance.DefaultRequestHeaders.AcceptLanguage.ParseAdd(language.Alpha2Code);
         }
 
+        internal static HttpClient? WithDefaults(this HttpClient? instance)
+        {
+            if (instance is null) return null;
+            if (instance.BaseAddress is null) UseGuildWars2(instance);
+            if (!instance.DefaultRequestHeaders.Contains("X-Schema-Version")) UseSchemaVersion(instance, SchemaVersion.Recommended);
+            return instance;
+        }
+
         public static async Task<JsonDocument> ReadAsJsonAsync(
             this HttpContent instance,
             CancellationToken cancellationToken
@@ -72,7 +80,6 @@ namespace GW2SDK.Http
                     .ConfigureAwait(false);
             }
         }
-
         internal static async Task<IReplica<T>> GetResource<T>(
             this HttpClient instance,
             HttpRequestMessage request,

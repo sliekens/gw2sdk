@@ -18,7 +18,7 @@ namespace GW2SDK.Achievements
 
         public AchievementService(HttpClient http)
         {
-            this.http = http ?? throw new ArgumentNullException(nameof(http));
+            this.http = http.WithDefaults() ?? throw new ArgumentNullException(nameof(http));
         }
 
         public async Task<IReplicaSet<int>> GetAchievementsIndex(CancellationToken cancellationToken = default)

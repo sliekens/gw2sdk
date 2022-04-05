@@ -19,7 +19,7 @@ namespace GW2SDK.Recipes
 
         public RecipeService(HttpClient http)
         {
-            this.http = http ?? throw new ArgumentNullException(nameof(http));
+            this.http = http.WithDefaults() ?? throw new ArgumentNullException(nameof(http));
         }
 
         public async Task<IReplicaSet<int>> GetRecipesIndex(CancellationToken cancellationToken = default)
