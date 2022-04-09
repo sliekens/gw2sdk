@@ -17,8 +17,6 @@ namespace GW2SDK.Tests.Features.Accounts.Wallet
 
             var actual = await sut.GetWallet(accessToken.Key);
 
-            Assert.True(actual.HasValue);
-
             var coins = actual.Value.Single(currency => currency.CurrencyId == 1);
             var coinsAmount = (Coin)coins.Amount;
             Assert.True(coinsAmount > 0);

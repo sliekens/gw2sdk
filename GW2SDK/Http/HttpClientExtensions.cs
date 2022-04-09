@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.IO.Compression;
 using System.Linq;
-using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text.Json;
@@ -91,11 +90,6 @@ namespace GW2SDK.Http
                 .SendAsync(request, HttpCompletionOption.ResponseHeadersRead, cancellationToken)
                 .ConfigureAwait(false);
             var date = response.Headers.Date.GetValueOrDefault(DateTimeOffset.UtcNow);
-            if (response.StatusCode == HttpStatusCode.NotModified)
-            {
-                return Replica<T>.NotModified(date);
-            }
-
             response.EnsureSuccessStatusCode();
 
             using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
@@ -104,7 +98,6 @@ namespace GW2SDK.Http
             var result = resultSelector(json);
 
             return new Replica<T>(date,
-                true,
                 result,
                 response.Content.Headers.Expires,
                 response.Content.Headers.LastModified);
@@ -138,7 +131,6 @@ namespace GW2SDK.Http
             return new Replica<IReadOnlyCollection<T>>(
 #endif
                 date,
-                true,
                 result,
                 response.Content.Headers.Expires,
                 response.Content.Headers.LastModified);
@@ -169,7 +161,6 @@ namespace GW2SDK.Http
             result.UnionWith(resultSelector(json));
 
             return new ReplicaSet<T>(date,
-                true,
                 result,
                 response.Headers.GetCollectionContext(),
                 response.Content.Headers.Expires,
@@ -201,7 +192,6 @@ namespace GW2SDK.Http
             result.UnionWith(resultSelector(json));
 
             return new ReplicaPage<T>(date,
-                true,
                 result,
                 response.Headers.GetPageContext(),
                 response.Content.Headers.Expires,

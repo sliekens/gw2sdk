@@ -67,7 +67,7 @@ namespace GW2SDK
             this.maxConcurrency = Math.Max(1, maxConcurrency);
         }
 
-        public async IAsyncEnumerable<IReplica<TRecord>> QueryAsync(
+        public async IAsyncEnumerable<TRecord> QueryAsync(
 #if NET
             IReadOnlySet<TKey> index,
 #else
@@ -97,13 +97,8 @@ namespace GW2SDK
             {
                 var result = await query(index, cancellationToken)
                     .ConfigureAwait(false);
-                if (!result.HasValues)
-                {
-                    yield break;
-                }
-
                 ReportProgress(resultTotal, result.Context.ResultCount);
-                foreach (var record in result.Explode())
+                foreach (var record in result)
                 {
                     cancellationToken.ThrowIfCancellationRequested();
                     yield return record;
@@ -129,14 +124,9 @@ namespace GW2SDK
                     inflight.Remove(done);
 
                     var result = await done.ConfigureAwait(false);
-                    if (!result.HasValues)
-                    {
-                        continue;
-                    }
-
                     resultCount += result.Context.ResultCount;
                     ReportProgress(resultTotal, resultCount);
-                    foreach (var record in result.Explode())
+                    foreach (var record in result)
                     {
                         cancellationToken.ThrowIfCancellationRequested();
                         yield return record;

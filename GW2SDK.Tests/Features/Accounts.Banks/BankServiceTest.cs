@@ -60,8 +60,8 @@ namespace GW2SDK.Tests.Features.Accounts.Banks
 
             var actual = await sut.GetMaterialCategories();
 
-            Assert.Equal(actual.Context.ResultTotal, actual.Values.Count);
-            Assert.All(actual.Values,
+            Assert.Equal(actual.Context.ResultTotal, actual.Count);
+            Assert.All(actual,
                 materialCategory =>
                 {
                     MaterialCategoryFact.Name_is_not_empty(materialCategory);
@@ -76,7 +76,7 @@ namespace GW2SDK.Tests.Features.Accounts.Banks
 
             var actual = await sut.GetMaterialCategoriesIndex();
 
-            Assert.Equal(actual.Context.ResultTotal, actual.Values.Count);
+            Assert.Equal(actual.Context.ResultTotal, actual.Count);
         }
 
         [Fact]
@@ -107,7 +107,7 @@ namespace GW2SDK.Tests.Features.Accounts.Banks
 
             var actual = await sut.GetMaterialCategoriesByIds(ids);
             
-            Assert.Collection(actual.Values,
+            Assert.Collection(actual,
                 first => Assert.Contains(first.Id, ids),
                 second => Assert.Contains(second.Id, ids),
                 third => Assert.Contains(third.Id, ids));

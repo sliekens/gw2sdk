@@ -46,7 +46,6 @@ namespace GW2SDK.Tests.Features.Achievements.Dailies
 
             var actual = await sut.GetDailyAchievements(day);
 
-            Assert.True(actual.HasValue);
             Assert.All(actual.Value.Pve, DailyAchievementFact.Id_is_positive);
             Assert.All(actual.Value.Pvp, DailyAchievementFact.Id_is_positive);
             Assert.All(actual.Value.Wvw, DailyAchievementFact.Id_is_positive);

@@ -16,7 +16,6 @@ namespace GW2SDK.Tests.Features.Accounts.Recipes
 
             var actual = await sut.GetUnlockedRecipes(accessToken.Key);
 
-            Assert.True(actual.HasValue);
             Assert.NotEmpty(actual.Value);
             Assert.All(actual.Value, id => Assert.NotEqual(0, id));
         }

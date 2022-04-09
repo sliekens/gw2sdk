@@ -4,170 +4,171 @@ using GW2SDK.Continents;
 using GW2SDK.Tests.TestInfrastructure;
 using Xunit;
 
-namespace GW2SDK.Tests.Features.Continents
+namespace GW2SDK.Tests.Features.Continents;
+
+public class ContinentServiceTest
 {
-    public class ContinentServiceTest
+    private static class ContinentFact
     {
-        private static class ContinentFact
-        {
-            public static void Id_is_1_or_2(Continent actual) => Assert.InRange(actual.Id, 1, 2);
-        }
+        public static void Id_is_1_or_2(Continent actual) => Assert.InRange(actual.Id, 1, 2);
+    }
 
-        [Fact]
-        public async Task It_can_get_all_continents()
-        {
-            await using var services = new Composer();
-            var sut = services.Resolve<ContinentService>();
+    [Fact]
+    public async Task It_can_get_all_continents()
+    {
+        await using var services = new Composer();
+        var sut = services.Resolve<ContinentService>();
 
-            var actual = await sut.GetContinents();
+        var actual = await sut.GetContinents();
 
-            Assert.Equal(actual.Context.ResultTotal, actual.Values.Count);
-            Assert.All(actual.Values,
-                continent =>
-                {
-                    ContinentFact.Id_is_1_or_2(continent);
-                });
-        }
-
-        [Fact]
-        public async Task It_can_get_all_continent_ids()
-        {
-            await using var services = new Composer();
-            var sut = services.Resolve<ContinentService>();
-
-            var actual = await sut.GetContinentsIndex();
-
-            Assert.Equal(actual.Context.ResultTotal, actual.Values.Count);
-        }
-
-        [Fact]
-        public async Task It_can_get_a_continent_by_id()
-        {
-            await using var services = new Composer();
-            var sut = services.Resolve<ContinentService>();
-
-            const int continentId = 1;
-
-            var actual = await sut.GetContinentById(continentId);
-
-            Assert.Equal(continentId, actual.Value.Id);
-        }
-
-        [Fact]
-        public async Task It_can_get_continents_by_id()
-        {
-            await using var services = new Composer();
-            var sut = services.Resolve<ContinentService>();
-
-            var ids = new HashSet<int>
+        Assert.Equal(actual.Context.ResultTotal, actual.Count);
+        Assert.All(actual,
+            continent =>
             {
-                1,
-                2
-            };
+                ContinentFact.Id_is_1_or_2(continent);
+            });
+    }
 
-            var actual = await sut.GetContinentsByIds(ids);
+    [Fact]
+    public async Task It_can_get_all_continent_ids()
+    {
+        await using var services = new Composer();
+        var sut = services.Resolve<ContinentService>();
 
-            Assert.Collection(actual.Values, first => Assert.Equal(1, first.Id), second => Assert.Equal(2, second.Id));
-        }
+        var actual = await sut.GetContinentsIndex();
 
-        [Fact]
-        public async Task It_can_get_continents_by_page()
+        Assert.Equal(actual.Context.ResultTotal, actual.Count);
+    }
+
+    [Fact]
+    public async Task It_can_get_a_continent_by_id()
+    {
+        await using var services = new Composer();
+        var sut = services.Resolve<ContinentService>();
+
+        const int continentId = 1;
+
+        var actual = await sut.GetContinentById(continentId);
+
+        Assert.Equal(continentId, actual.Value.Id);
+    }
+
+    [Fact]
+    public async Task It_can_get_continents_by_id()
+    {
+        await using var services = new Composer();
+        var sut = services.Resolve<ContinentService>();
+
+        var ids = new HashSet<int>
         {
-            await using var services = new Composer();
-            var sut = services.Resolve<ContinentService>();
+            1,
+            2
+        };
 
-            var actual = await sut.GetContinentsByPage(0, 2);
+        var actual = await sut.GetContinentsByIds(ids);
 
-            Assert.Equal(2, actual.Values.Count);
-            Assert.Equal(2, actual.Context.PageSize);
-        }
+        Assert.Collection(actual, first => Assert.Equal(1, first.Id), second => Assert.Equal(2, second.Id));
+    }
 
-        [Fact]
-        public async Task It_can_get_all_floors_by_continent_id()
-        {
-            await using var services = new Composer();
-            var sut = services.Resolve<ContinentService>();
+    [Fact]
+    public async Task It_can_get_continents_by_page()
+    {
+        await using var services = new Composer();
+        var sut = services.Resolve<ContinentService>();
 
-            const int continentId = 1;
+        var actual = await sut.GetContinentsByPage(0, 2);
 
-            var actual = await sut.GetFloors(continentId);
+        Assert.Equal(2, actual.Count);
+        Assert.Equal(2, actual.Context.PageSize);
+    }
 
-            Assert.Equal(actual.Context.ResultTotal, actual.Values.Count);
+    [Fact]
+    public async Task It_can_get_all_floors_by_continent_id()
+    {
+        await using var services = new Composer();
+        var sut = services.Resolve<ContinentService>();
 
-            foreach (var floor in actual.Values)
-            foreach (var (regionId, region) in floor.Regions)
-            foreach (var (mapId, map) in region.Maps)
-            foreach (var skillChallenge in map.SkillChallenges)
+        const int continentId = 1;
+
+        var actual = await sut.GetFloors(continentId);
+
+        Assert.Equal(actual.Context.ResultTotal, actual.Count);
+        Assert.All(actual,
+            floor =>
             {
-                // BUG(?): Cantha (id 37) does not have skill challenge ids
-                if (regionId == 37)
+                foreach (var (regionId, region) in floor.Regions)
+                foreach (var (mapId, map) in region.Maps)
+                foreach (var skillChallenge in map.SkillChallenges)
                 {
-                    Assert.Empty(skillChallenge.Id);
+                    // BUG(?): Cantha (id 37) does not have skill challenge ids
+                    if (regionId == 37)
+                    {
+                        Assert.Empty(skillChallenge.Id);
+                    }
+                    else
+                    {
+                        Assert.NotEmpty(skillChallenge.Id);
+                    }
                 }
-                else
-                {
-                    Assert.NotEmpty(skillChallenge.Id);
-                }
-            }
-        }
+            });
+    }
 
-        [Fact]
-        public async Task It_can_get_all_floor_ids_by_continent_id()
+    [Fact]
+    public async Task It_can_get_all_floor_ids_by_continent_id()
+    {
+        await using var services = new Composer();
+        var sut = services.Resolve<ContinentService>();
+
+        const int continentId = 1;
+
+        var actual = await sut.GetFloorsIndex(continentId);
+
+        Assert.Equal(actual.Context.ResultTotal, actual.Count);
+    }
+
+    [Fact]
+    public async Task It_can_get_a_floor_by_continent_id_and_floor_id()
+    {
+        await using var services = new Composer();
+        var sut = services.Resolve<ContinentService>();
+
+        const int continentId = 1;
+        const int floorId = 1;
+
+        var actual = await sut.GetFloorById(continentId, floorId);
+
+        Assert.Equal(floorId, actual.Value.Id);
+    }
+
+    [Fact]
+    public async Task It_can_get_floors_by_continent_id_and_floor_ids()
+    {
+        await using var services = new Composer();
+        var sut = services.Resolve<ContinentService>();
+
+        const int continentId = 1;
+        var ids = new HashSet<int>
         {
-            await using var services = new Composer();
-            var sut = services.Resolve<ContinentService>();
+            1,
+            2
+        };
 
-            const int continentId = 1;
+        var actual = await sut.GetFloorsByIds(continentId, ids);
 
-            var actual = await sut.GetFloorsIndex(continentId);
+        Assert.Collection(actual, first => Assert.Equal(1, first.Id), second => Assert.Equal(2, second.Id));
+    }
 
-            Assert.Equal(actual.Context.ResultTotal, actual.Values.Count);
-        }
+    [Fact]
+    public async Task It_can_get_floors_by_continent_id_and_page()
+    {
+        await using var services = new Composer();
+        var sut = services.Resolve<ContinentService>();
 
-        [Fact]
-        public async Task It_can_get_a_floor_by_continent_id_and_floor_id()
-        {
-            await using var services = new Composer();
-            var sut = services.Resolve<ContinentService>();
+        const int continentId = 1;
 
-            const int continentId = 1;
-            const int floorId = 1;
+        var actual = await sut.GetFloorsByPage(continentId, 0, 3);
 
-            var actual = await sut.GetFloorById(continentId, floorId);
-
-            Assert.Equal(floorId, actual.Value.Id);
-        }
-
-        [Fact]
-        public async Task It_can_get_floors_by_continent_id_and_floor_ids()
-        {
-            await using var services = new Composer();
-            var sut = services.Resolve<ContinentService>();
-
-            const int continentId = 1;
-            var ids = new HashSet<int>
-            {
-                1,
-                2
-            };
-
-            var actual = await sut.GetFloorsByIds(continentId, ids);
-
-            Assert.Collection(actual.Values, first => Assert.Equal(1, first.Id), second => Assert.Equal(2, second.Id));
-        }
-
-        [Fact]
-        public async Task It_can_get_floors_by_continent_id_and_page()
-        {
-            await using var services = new Composer();
-            var sut = services.Resolve<ContinentService>();
-
-            const int continentId = 1;
-
-            var actual = await sut.GetFloorsByPage(continentId, 0, 3);
-
-            Assert.Equal(3, actual.Values.Count);
-            Assert.Equal(3, actual.Context.PageSize);
-        }
+        Assert.Equal(3, actual.Count);
+        Assert.Equal(3, actual.Context.PageSize);
     }
 }

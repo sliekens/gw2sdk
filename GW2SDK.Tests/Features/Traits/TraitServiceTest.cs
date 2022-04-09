@@ -22,8 +22,8 @@ namespace GW2SDK.Tests.Features.Traits
 
             var actual = await sut.GetTraits();
 
-            Assert.Equal(actual.Context.ResultTotal, actual.Values.Count);
-            Assert.All(actual.Values,
+            Assert.Equal(actual.Context.ResultTotal, actual.Count);
+            Assert.All(actual,
                 trait =>
                 {
                     TraitFact.Id_is_positive(trait);
@@ -38,7 +38,7 @@ namespace GW2SDK.Tests.Features.Traits
 
             var actual = await sut.GetTraitsIndex();
 
-            Assert.Equal(actual.Context.ResultTotal, actual.Values.Count);
+            Assert.Equal(actual.Context.ResultTotal, actual.Count);
         }
 
         [Fact]
@@ -69,7 +69,7 @@ namespace GW2SDK.Tests.Features.Traits
 
             var actual = await sut.GetTraitsByIds(ids);
 
-            Assert.Collection(actual.Values, first => Assert.Equal(214, first.Id), second => Assert.Equal(221, second.Id), third => Assert.Equal(222, third.Id));
+            Assert.Collection(actual, first => Assert.Equal(214, first.Id), second => Assert.Equal(221, second.Id), third => Assert.Equal(222, third.Id));
         }
 
         [Fact]
@@ -80,7 +80,7 @@ namespace GW2SDK.Tests.Features.Traits
 
             var actual = await sut.GetTraitsByPage(0, 3);
 
-            Assert.Equal(3, actual.Values.Count);
+            Assert.Equal(3, actual.Count);
             Assert.Equal(3, actual.Context.PageSize);
         }
     }

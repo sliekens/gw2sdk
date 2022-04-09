@@ -6,20 +6,15 @@ namespace GW2SDK
     {
         public Replica(
             DateTimeOffset date,
-            bool hasValue,
-            T? value = default,
+            T value,
             DateTimeOffset? expires = null,
             DateTimeOffset? lastModified = null
         )
         {
             Date = date;
-            if (hasValue)
-            {
-                Value = value ?? throw new ArgumentNullException(nameof(value));
-                HasValue = true;
-                Expires = expires;
-                LastModified = lastModified;
-            }
+            Value = value;
+            Expires = expires;
+            LastModified = lastModified;
         }
 
         public DateTimeOffset Date { get; }
@@ -28,14 +23,6 @@ namespace GW2SDK
 
         public DateTimeOffset? LastModified { get; }
 
-        public bool HasValue { get; }
-
-#if NET
-        public T? Value { get; }
-#else
-        public T Value { get; } = default!;
-#endif
-
-        public static IReplica<T> NotModified(DateTimeOffset date) => new Replica<T>(date, false);
+        public T Value { get; }
     }
 }

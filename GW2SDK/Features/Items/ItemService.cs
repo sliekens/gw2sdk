@@ -43,7 +43,7 @@ namespace GW2SDK.Items
                 .ConfigureAwait(false);
         }
 
-        public async IAsyncEnumerable<IReplica<Item>> GetItemsByIds(
+        public async IAsyncEnumerable<Item> GetItemsByIds(
 #if NET
             IReadOnlySet<int> itemIds,
 #else
@@ -108,7 +108,7 @@ namespace GW2SDK.Items
                 .ConfigureAwait(false);
         }
 
-        public async IAsyncEnumerable<IReplica<Item>> GetItems(
+        public async IAsyncEnumerable<Item> GetItems(
             Language? language = default,
             MissingMemberBehavior missingMemberBehavior = default,
             [EnumeratorCancellation] CancellationToken cancellationToken = default,
@@ -117,11 +117,6 @@ namespace GW2SDK.Items
         {
             var index = await GetItemsIndex(cancellationToken)
                 .ConfigureAwait(false);
-            if (!index.HasValues)
-            {
-                yield break;
-            }
-
             var producer = GetItemsByIds(index.Values, language, missingMemberBehavior, cancellationToken, progress);
             await foreach (var item in producer.WithCancellation(cancellationToken)
                                .ConfigureAwait(false))

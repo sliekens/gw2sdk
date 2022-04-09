@@ -31,8 +31,8 @@ namespace GW2SDK.Tests.Features.Currencies
 
             var actual = await sut.GetCurrencies();
 
-            Assert.Equal(actual.Context.ResultTotal, actual.Values.Count);
-            Assert.All(actual.Values,
+            Assert.Equal(actual.Context.ResultTotal, actual.Count);
+            Assert.All(actual,
                 currency =>
                 {
                     CurrencyFact.Id_is_positive(currency);
@@ -51,7 +51,7 @@ namespace GW2SDK.Tests.Features.Currencies
 
             var actual = await sut.GetCurrenciesIndex();
 
-            Assert.Equal(actual.Context.ResultTotal, actual.Values.Count);
+            Assert.Equal(actual.Context.ResultTotal, actual.Count);
         }
 
         [Fact]
@@ -77,7 +77,7 @@ namespace GW2SDK.Tests.Features.Currencies
 
             var actual = await sut.GetCurrenciesByIds(ids);
 
-            Assert.Collection(actual.Values, first => Assert.Equal(1, first.Id), second => Assert.Equal(2, second.Id), third => Assert.Equal(3, third.Id));
+            Assert.Collection(actual, first => Assert.Equal(1, first.Id), second => Assert.Equal(2, second.Id), third => Assert.Equal(3, third.Id));
         }
 
         [Fact]
@@ -88,7 +88,7 @@ namespace GW2SDK.Tests.Features.Currencies
 
             var actual = await sut.GetCurrenciesByPage(0, 3);
 
-            Assert.Equal(3, actual.Values.Count);
+            Assert.Equal(3, actual.Count);
             Assert.Equal(3, actual.Context.PageSize);
         }
     }

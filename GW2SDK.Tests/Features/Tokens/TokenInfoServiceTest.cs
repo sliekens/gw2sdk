@@ -64,8 +64,6 @@ namespace GW2SDK.Tests.Features.Tokens
                 urls);
         #endregion
 
-            Assert.True(createdSubtoken.HasValue);
-
             // BUG: /v2/tokeninfo sometimes fails with "Invalid access token" for recently created subtokens
             // I guess this is a clock synchronization problem, because adding a delay works
             await Task.Delay(3000);

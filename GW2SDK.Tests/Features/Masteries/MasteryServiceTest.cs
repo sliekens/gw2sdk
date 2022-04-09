@@ -49,8 +49,8 @@ namespace GW2SDK.Tests.Features.Masteries
 
             var actual = await sut.GetMasteries();
 
-            Assert.Equal(actual.Context.ResultTotal, actual.Values.Count);
-            Assert.All(actual.Values,
+            Assert.Equal(actual.Context.ResultTotal, actual.Count);
+            Assert.All(actual,
                 mastery =>
                 {
                     MasteryFact.Id_is_positive(mastery);
@@ -80,7 +80,7 @@ namespace GW2SDK.Tests.Features.Masteries
 
             var actual = await sut.GetMasteriesIndex();
 
-            Assert.Equal(actual.Context.ResultTotal, actual.Values.Count);
+            Assert.Equal(actual.Context.ResultTotal, actual.Count);
         }
 
         [Fact]
@@ -111,7 +111,7 @@ namespace GW2SDK.Tests.Features.Masteries
 
             var actual = await sut.GetMasteriesByIds(ids);
 
-            Assert.Collection(actual.Values,
+            Assert.Collection(actual,
                 first => Assert.Equal(1, first.Id),
                 second => Assert.Equal(2, second.Id),
                 third => Assert.Equal(3, third.Id));
