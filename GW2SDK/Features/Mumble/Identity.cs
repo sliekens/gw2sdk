@@ -17,7 +17,7 @@ namespace GW2SDK.Mumble
 
         public int MapId { get; init; }
 
-        public int WorldId { get; init; }
+        public long WorldId { get; init; }
 
         public int TeamColorId { get; init; }
 

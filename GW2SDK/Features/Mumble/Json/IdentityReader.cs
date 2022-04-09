@@ -16,7 +16,7 @@ namespace GW2SDK.Mumble.Json
             var race = new RequiredMember<Race>("race");
             var mapId = new RequiredMember<int>("map_id");
             var map = new RequiredMember<int>("map");
-            var worldId = new RequiredMember<int>("world_id");
+            var worldId = new RequiredMember<long>("world_id");
             var teamColorId = new RequiredMember<int>("team_color_id");
             var commander = new RequiredMember<bool>("commander");
             var fieldOfView = new RequiredMember<double>("fov");
