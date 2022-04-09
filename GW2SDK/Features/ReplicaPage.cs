@@ -1,49 +1,46 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 
-namespace GW2SDK
+namespace GW2SDK;
+
+internal sealed class ReplicaPage<T> : IReplicaPage<T>
 {
-    internal sealed class ReplicaPage<T> : IReplicaPage<T>
+    public ReplicaPage(
+        DateTimeOffset date,
+#if NET
+        IReadOnlySet<T> values,
+#else
+        IReadOnlyCollection<T> values,
+#endif
+        IPageContext context,
+        DateTimeOffset? expires = null,
+        DateTimeOffset? lastModified = null
+    )
     {
-        public ReplicaPage(
-            DateTimeOffset date,
-            bool hasValues,
-#if NET
-            IReadOnlySet<T>? values = default,
-#else
-            IReadOnlyCollection<T>? values = default,
-#endif
-            IPageContext? context = null,
-            DateTimeOffset? expires = null,
-            DateTimeOffset? lastModified = null
-        )
-        {
-            Date = date;
-            if (hasValues)
-            {
-                Values = values ?? throw new ArgumentNullException(nameof(values));
-                Context = context ?? throw new ArgumentNullException(nameof(context));
-                HasValues = true;
-                Expires = expires;
-                LastModified = lastModified;
-            }
-        }
-#if NET
-        public IReadOnlySet<T>? Values { get; }
-
-        public IPageContext? Context { get; }
-#else
-        public IReadOnlyCollection<T> Values { get; } = default!;
-
-        public IPageContext Context { get; } = default!;
-#endif
-
-        public DateTimeOffset Date { get; }
-
-        public DateTimeOffset? Expires { get; }
-
-        public DateTimeOffset? LastModified { get; }
-
-        public bool HasValues { get; }
+        Date = date;
+        Values = values;
+        Context = context;
+        Expires = expires;
+        LastModified = lastModified;
     }
+#if NET
+    public IReadOnlySet<T> Values { get; }
+#else
+    public IReadOnlyCollection<T> Values { get; }
+#endif
+
+    public IPageContext Context { get; }
+
+    public DateTimeOffset Date { get; }
+
+    public DateTimeOffset? Expires { get; }
+
+    public DateTimeOffset? LastModified { get; }
+
+    public IEnumerator<T> GetEnumerator() => Values.GetEnumerator();
+
+    IEnumerator IEnumerable.GetEnumerator() => ((IEnumerable) Values).GetEnumerator();
+
+    public int Count => Values.Count;
 }

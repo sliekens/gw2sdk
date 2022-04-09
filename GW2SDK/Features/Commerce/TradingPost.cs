@@ -76,7 +76,7 @@ namespace GW2SDK.Commerce
                 .ConfigureAwait(false);
         }
 
-        public async IAsyncEnumerable<IReplica<ItemPrice>> GetItemPricesByIds(
+        public async IAsyncEnumerable<ItemPrice> GetItemPricesByIds(
 #if NET
             IReadOnlySet<int> itemIds,
 #else
@@ -106,7 +106,7 @@ namespace GW2SDK.Commerce
             }
         }
 
-        public async IAsyncEnumerable<IReplica<ItemPrice>> GetItemPrices(
+        public async IAsyncEnumerable<ItemPrice> GetItemPrices(
             MissingMemberBehavior missingMemberBehavior = default,
             [EnumeratorCancellation] CancellationToken cancellationToken = default,
             IProgress<ICollectionContext>? progress = default
@@ -114,11 +114,6 @@ namespace GW2SDK.Commerce
         {
             var index = await GetItemPricesIndex(cancellationToken)
                 .ConfigureAwait(false);
-            if (!index.HasValues)
-            {
-                yield break;
-            }
-
             var producer = GetItemPricesByIds(index.Values, missingMemberBehavior, cancellationToken, progress);
             await foreach (var itemPrice in producer.WithCancellation(cancellationToken)
                                .ConfigureAwait(false))
@@ -151,7 +146,7 @@ namespace GW2SDK.Commerce
                 .ConfigureAwait(false);
         }
 
-        public async IAsyncEnumerable<IReplica<OrderBook>> GetOrderBooksByIds(
+        public async IAsyncEnumerable<OrderBook> GetOrderBooksByIds(
 #if NET
             IReadOnlySet<int> itemIds,
 #else
@@ -181,7 +176,7 @@ namespace GW2SDK.Commerce
             }
         }
 
-        public async IAsyncEnumerable<IReplica<OrderBook>> GetOrderBooks(
+        public async IAsyncEnumerable<OrderBook> GetOrderBooks(
             MissingMemberBehavior missingMemberBehavior = default,
             [EnumeratorCancellation] CancellationToken cancellationToken = default,
             IProgress<ICollectionContext>? progress = default
@@ -189,11 +184,6 @@ namespace GW2SDK.Commerce
         {
             var index = await GetOrderBooksIndex(cancellationToken)
                 .ConfigureAwait(false);
-            if (!index.HasValues)
-            {
-                yield break;
-            }
-
             var producer = GetOrderBooksByIds(index.Values, missingMemberBehavior, cancellationToken, progress);
             await foreach (var orderBook in producer.WithCancellation(cancellationToken)
                                .ConfigureAwait(false))

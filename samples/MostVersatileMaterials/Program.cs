@@ -124,7 +124,6 @@ internal class Program
         {
             return await recipesService
                 .GetRecipes(progress: new Progress<ICollectionContext>(ctx => UpdateProgress(ctx, progress)))
-                .Select(result => result.Value)
                 .OrderByDescending(recipe => recipe.Id)
                 .ToListAsync();
         }
@@ -146,7 +145,7 @@ internal class Program
         await foreach (var item in itemsService.GetItemsByIds(itemIds,
                            progress: new Progress<ICollectionContext>(ctx => UpdateProgress(ctx, progress))))
         {
-            items.Add(item.Value);
+            items.Add(item);
         }
 
         progress.StopTask();

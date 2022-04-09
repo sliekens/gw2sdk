@@ -2,6 +2,8 @@
 using System.Linq;
 using System.Threading.Tasks;
 using GW2SDK.Commerce;
+using GW2SDK.Commerce.Listings;
+using GW2SDK.Commerce.Prices;
 using GW2SDK.Tests.TestInfrastructure;
 using Xunit;
 
@@ -45,7 +47,7 @@ public class TradingPostTest
 
         var actual = await sut.GetItemPricesIndex();
 
-        Assert.Equal(actual.Context.ResultTotal, actual.Values.Count);
+        Assert.Equal(actual.Context.ResultTotal, actual.Count);
     }
 
     [Fact]
@@ -58,7 +60,6 @@ public class TradingPostTest
 
         var actual = await sut.GetItemPriceById(itemId);
 
-        Assert.True(actual.HasValue);
         var value = actual.Value;
         Assert.Equal(itemId, value.Id);
         Assert.True(value.TotalSupply > 0);
@@ -84,7 +85,7 @@ public class TradingPostTest
         var actual = await sut.GetItemPricesByIds(ids)
             .ToListAsync();
 
-        Assert.Collection(actual.Values(),
+        Assert.Collection(actual,
             first => Assert.Equal(24, first.Id),
             second => Assert.Equal(19699, second.Id),
             third => Assert.Equal(35984, third.Id));
@@ -99,36 +100,32 @@ public class TradingPostTest
 
         await foreach (var actual in sut.GetItemPrices())
         {
-            Assert.True(actual.HasValue);
-
-            var value = actual.Value;
-
-            Assert.True(value.Id > 0);
-            if (value.TotalSupply == 0)
+            Assert.True(actual.Id > 0);
+            if (actual.TotalSupply == 0)
             {
-                Assert.True(value.BestAsk == Coin.Zero);
+                Assert.True(actual.BestAsk == Coin.Zero);
             }
             else
             {
-                Assert.True(value.BestAsk > Coin.Zero);
+                Assert.True(actual.BestAsk > Coin.Zero);
             }
 
-            if (value.TotalDemand == 0)
+            if (actual.TotalDemand == 0)
             {
-                Assert.True(value.BestBid == Coin.Zero);
+                Assert.True(actual.BestBid == Coin.Zero);
             }
             else
             {
-                Assert.True(value.BestBid > Coin.Zero);
+                Assert.True(actual.BestBid > Coin.Zero);
             }
 
-            if (value is { TotalDemand: 0 } or { TotalSupply: 0 })
+            if ((ItemPrice) actual is { TotalDemand: 0 } or { TotalSupply: 0 })
             {
-                Assert.Equal(Coin.Zero, value.BidAskSpread);
+                Assert.Equal(Coin.Zero, actual.BidAskSpread);
             }
             else
             {
-                Assert.Equal(value.BestAsk - value.BestBid, value.BidAskSpread);
+                Assert.Equal(actual.BestAsk - actual.BestBid, actual.BidAskSpread);
             }
         }
     }
@@ -141,7 +138,7 @@ public class TradingPostTest
 
         var actual = await sut.GetOrderBooksIndex();
 
-        Assert.Equal(actual.Context.ResultTotal, actual.Values.Count);
+        Assert.Equal(actual.Context.ResultTotal, actual.Count);
     }
 
     [Fact]
@@ -154,7 +151,6 @@ public class TradingPostTest
 
         var actual = await sut.GetOrderBookById(itemId);
 
-        Assert.True(actual.HasValue);
         var value = actual.Value;
         Assert.Equal(itemId, value.Id);
 
@@ -202,7 +198,7 @@ public class TradingPostTest
         var actual = await sut.GetOrderBooksByIds(ids)
             .ToListAsync();
 
-        Assert.Collection(actual.Values(),
+        Assert.Collection(actual,
             first => Assert.Equal(24, first.Id),
             second => Assert.Equal(19699, second.Id),
             third => Assert.Equal(35984, third.Id));
@@ -217,21 +213,17 @@ public class TradingPostTest
 
         await foreach (var actual in sut.GetOrderBooks())
         {
-            Assert.True(actual.HasValue);
-
-            var value = actual.Value;
-
-            Assert.True(value.Id > 0);
-            if (value.TotalSupply == 0)
+            Assert.True(actual.Id > 0);
+            if (actual.TotalSupply == 0)
             {
-                Assert.Null(value.BestAsk);
-                Assert.Empty(value.Supply);
+                Assert.Null(actual.BestAsk);
+                Assert.Empty(actual.Supply);
             }
             else
             {
-                Assert.True(value.BestAsk > Coin.Zero);
-                Assert.NotEmpty(value.Supply);
-                Assert.All(value.Supply,
+                Assert.True(actual.BestAsk > Coin.Zero);
+                Assert.NotEmpty(actual.Supply);
+                Assert.All(actual.Supply,
                     line =>
                     {
                         Assert.True(line.UnitPrice > Coin.Zero);
@@ -240,16 +232,16 @@ public class TradingPostTest
                     });
             }
 
-            if (value.TotalDemand == 0)
+            if (actual.TotalDemand == 0)
             {
-                Assert.Null(value.BestBid);
-                Assert.Empty(value.Demand);
+                Assert.Null(actual.BestBid);
+                Assert.Empty(actual.Demand);
             }
             else
             {
-                Assert.True(value.BestBid > Coin.Zero);
-                Assert.NotEmpty(value.Demand);
-                Assert.All(value.Demand,
+                Assert.True(actual.BestBid > Coin.Zero);
+                Assert.NotEmpty(actual.Demand);
+                Assert.All(actual.Demand,
                     line =>
                     {
                         Assert.True(line.UnitPrice > Coin.Zero);
@@ -258,13 +250,13 @@ public class TradingPostTest
                     });
             }
 
-            if (value is { TotalDemand: 0 } or { TotalSupply: 0 })
+            if ((OrderBook) actual is { TotalDemand: 0 } or { TotalSupply: 0 })
             {
-                Assert.Equal(Coin.Zero, value.BidAskSpread);
+                Assert.Equal(Coin.Zero, actual.BidAskSpread);
             }
             else
             {
-                Assert.Equal(value.BestAsk - value.BestBid, value.BidAskSpread);
+                Assert.Equal(actual.BestAsk - actual.BestBid, actual.BidAskSpread);
             }
         }
     }
@@ -278,7 +270,8 @@ public class TradingPostTest
 
         var deliveryBox = await sut.GetDeliveryBox(accessToken.Key);
 
-        Assert.True(deliveryBox.HasValue);
+        // Step through with debugger to see if the values reflect your in-game delivery box
+        Assert.NotNull(deliveryBox.Value);
     }
 
     [Fact]
@@ -290,7 +283,7 @@ public class TradingPostTest
 
         var bids = await sut.GetBuyOrders(0, 200, accessToken.Key);
 
-        Assert.True(bids.HasValues);
+        Assert.NotEmpty(bids);
     }
 
     [Fact]
@@ -302,7 +295,7 @@ public class TradingPostTest
 
         var bids = await sut.GetSellOrders(0, 200, accessToken.Key);
 
-        Assert.True(bids.HasValues);
+        Assert.NotEmpty(bids);
     }
 
     [Fact]
@@ -314,7 +307,7 @@ public class TradingPostTest
 
         var bids = await sut.GetPurchases(0, 200, accessToken.Key);
 
-        Assert.True(bids.HasValues);
+        Assert.NotEmpty(bids);
     }
 
     [Fact]
@@ -326,6 +319,6 @@ public class TradingPostTest
 
         var bids = await sut.GetSales(0, 200, accessToken.Key);
 
-        Assert.True(bids.HasValues);
+        Assert.NotEmpty(bids);
     }
 }

@@ -38,8 +38,8 @@ namespace GW2SDK.Tests.Features.Specializations
 
             var actual = await sut.GetSpecializations();
 
-            Assert.Equal(actual.Context.ResultTotal, actual.Values.Count);
-            Assert.All(actual.Values,
+            Assert.Equal(actual.Context.ResultTotal, actual.Count);
+            Assert.All(actual,
                 specialization =>
                 {
                     SpecializationFact.Id_is_positive(specialization);
@@ -61,7 +61,7 @@ namespace GW2SDK.Tests.Features.Specializations
 
             var actual = await sut.GetSpecializationsIndex();
 
-            Assert.Equal(actual.Context.ResultTotal, actual.Values.Count);
+            Assert.Equal(actual.Context.ResultTotal, actual.Count);
         }
 
         [Fact]
@@ -92,7 +92,7 @@ namespace GW2SDK.Tests.Features.Specializations
 
             var actual = await sut.GetSpecializationsByIds(ids);
 
-            Assert.Collection(actual.Values,
+            Assert.Collection(actual,
                 first => Assert.Equal(1, first.Id),
                 second => Assert.Equal(2, second.Id),
                 third => Assert.Equal(3, third.Id));

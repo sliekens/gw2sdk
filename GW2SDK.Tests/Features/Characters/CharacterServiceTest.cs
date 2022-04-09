@@ -19,8 +19,7 @@ namespace GW2SDK.Tests.Features.Characters
             var expected = services.Resolve<TestCharacterName>()
                 .Name;
 
-            Assert.True(actual.HasValues);
-            Assert.Contains(expected, actual.Values);
+            Assert.Contains(expected, actual);
         }
 
         [Fact]
@@ -31,9 +30,8 @@ namespace GW2SDK.Tests.Features.Characters
             var accessToken = services.Resolve<ApiKeyFull>();
 
             var actual = await sut.GetCharacters(accessToken.Key);
-
-            Assert.True(actual.HasValues);
-            Assert.Equal(actual.Context.ResultTotal, actual.Values.Count);
+            
+            Assert.Equal(actual.Context.ResultTotal, actual.Count);
         }
 
         [Fact]
@@ -46,7 +44,6 @@ namespace GW2SDK.Tests.Features.Characters
 
             var actual = await sut.GetCharacterByName(characterName.Name, accessToken.Key);
 
-            Assert.True(actual.HasValue);
             Assert.Equal(characterName.Name, actual.Value.Name);
         }
 
@@ -60,7 +57,6 @@ namespace GW2SDK.Tests.Features.Characters
 
             var actual = await sut.GetUnlockedRecipes(characterName.Name, accessToken.Key);
 
-            Assert.True(actual.HasValue);
             Assert.All(actual.Value.Recipes, id => Assert.NotEqual(0, id));
         }
     }

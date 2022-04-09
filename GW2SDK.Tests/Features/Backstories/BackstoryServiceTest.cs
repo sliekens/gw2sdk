@@ -45,9 +45,9 @@ namespace GW2SDK.Tests.Features.Backstories
 
             var actual = await sut.GetBackstoryQuestions();
 
-            Assert.Equal(actual.Context.ResultTotal, actual.Values.Count);
+            Assert.Equal(actual.Context.ResultTotal, actual.Count);
             
-            Assert.All(actual.Values,
+            Assert.All(actual,
                 question =>
                 {
                     BackstoryQuestionFact.Id_is_positive(question);
@@ -65,9 +65,9 @@ namespace GW2SDK.Tests.Features.Backstories
 
             var actual = await sut.GetBackstoryAnswers();
 
-            Assert.Equal(actual.Context.ResultTotal, actual.Values.Count);
+            Assert.Equal(actual.Context.ResultTotal, actual.Count);
 
-            Assert.All(actual.Values,
+            Assert.All(actual,
                 answer =>
                 {
                     BackstoryAnswerFact.Id_is_not_empty(answer);
@@ -86,7 +86,7 @@ namespace GW2SDK.Tests.Features.Backstories
 
             var actual = await sut.GetBackstoryQuestionsIndex();
 
-            Assert.Equal(actual.Context.ResultTotal, actual.Values.Count);
+            Assert.Equal(actual.Context.ResultTotal, actual.Count);
         }
 
         [Fact]
@@ -97,7 +97,7 @@ namespace GW2SDK.Tests.Features.Backstories
 
             var actual = await sut.GetBackstoryAnswersIndex();
 
-            Assert.Equal(actual.Context.ResultTotal, actual.Values.Count);
+            Assert.Equal(actual.Context.ResultTotal, actual.Count);
         }
 
         [Fact]
@@ -141,7 +141,7 @@ namespace GW2SDK.Tests.Features.Backstories
 
             var actual = await sut.GetBackstoryQuestionsByIds(ids);
 
-            Assert.Collection(actual.Values,
+            Assert.Collection(actual,
                 first => Assert.Contains(first.Id, ids),
                 second => Assert.Contains(second.Id, ids),
                 third => Assert.Contains(third.Id, ids));
@@ -162,7 +162,7 @@ namespace GW2SDK.Tests.Features.Backstories
 
             var actual = await sut.GetBackstoryAnswersByIds(ids);
             
-            Assert.Collection(actual.Values,
+            Assert.Collection(actual,
                 first => Assert.Contains(first.Id, ids),
                 second => Assert.Contains(second.Id, ids),
                 third => Assert.Contains(third.Id, ids));
@@ -176,7 +176,7 @@ namespace GW2SDK.Tests.Features.Backstories
 
             var actual = await sut.GetBackstoryQuestionsByPage(0, 3);
 
-            Assert.Equal(3, actual.Values.Count);
+            Assert.Equal(3, actual.Count);
             Assert.Equal(3, actual.Context.PageSize);
         }
 
@@ -188,7 +188,7 @@ namespace GW2SDK.Tests.Features.Backstories
 
             var actual = await sut.GetBackstoryAnswersByPage(0, 3);
 
-            Assert.Equal(3, actual.Values.Count);
+            Assert.Equal(3, actual.Count);
             Assert.Equal(3, actual.Context.PageSize);
         }
     }

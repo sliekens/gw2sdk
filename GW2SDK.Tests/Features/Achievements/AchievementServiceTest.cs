@@ -17,7 +17,7 @@ namespace GW2SDK.Tests.Features.Achievements
 
             var actual = await sut.GetAchievementsIndex();
 
-            Assert.Equal(actual.Context.ResultTotal, actual.Values.Count);
+            Assert.Equal(actual.Context.ResultTotal, actual.Count);
         }
 
         [Fact]
@@ -43,7 +43,7 @@ namespace GW2SDK.Tests.Features.Achievements
 
             var actual = await sut.GetAchievementsByIds(achievementIds);
 
-            Assert.Collection(actual.Values,
+            Assert.Collection(actual,
                 achievement => Assert.Equal(1, achievement.Id),
                 achievement => Assert.Equal(2, achievement.Id),
                 achievement => Assert.Equal(3, achievement.Id));
@@ -57,7 +57,7 @@ namespace GW2SDK.Tests.Features.Achievements
 
             var actual = await sut.GetAchievementsByPage(0, 3);
 
-            Assert.Equal(3, actual.Values.Count);
+            Assert.Equal(3, actual.Count);
             Assert.Equal(3, actual.Context.PageSize);
         }
     }

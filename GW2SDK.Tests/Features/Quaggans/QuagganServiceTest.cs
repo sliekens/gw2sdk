@@ -31,10 +31,9 @@ namespace GW2SDK.Tests.Features.Quaggans
             var sut = services.Resolve<QuagganService>();
 
             var actual = await sut.GetQuaggans();
-
-            Assert.True(actual.HasValues);
-            Assert.Equal(actual.Context.ResultTotal, actual.Values.Count);
-            Assert.All(actual.Values,
+            
+            Assert.Equal(actual.Context.ResultTotal, actual.Count);
+            Assert.All(actual,
                 quaggan =>
                 {
                     QuagganFact.Validate(quaggan);
@@ -49,8 +48,7 @@ namespace GW2SDK.Tests.Features.Quaggans
 
             var actual = await sut.GetQuaggansIndex();
 
-            Assert.True(actual.HasValues);
-            Assert.Equal(actual.Context.ResultTotal, actual.Values.Count);
+            Assert.Equal(actual.Context.ResultTotal, actual.Count);
         }
 
         [Fact]
@@ -63,7 +61,6 @@ namespace GW2SDK.Tests.Features.Quaggans
 
             var actual = await sut.GetQuagganById(quagganId);
 
-            Assert.True(actual.HasValue);
             QuagganFact.Validate(actual.Value);
             Assert.Equal(quagganId, actual.Value.Id);
         }
@@ -83,9 +80,8 @@ namespace GW2SDK.Tests.Features.Quaggans
 
             var actual = await sut.GetQuaggansByIds(ids);
             
-            Assert.True(actual.HasValues);
-            Assert.All(actual.Values, QuagganFact.Validate);
-            Assert.Collection(actual.Values,
+            Assert.All(actual, QuagganFact.Validate);
+            Assert.Collection(actual,
                 first => Assert.Contains(first.Id, ids),
                 second => Assert.Contains(second.Id, ids),
                 third => Assert.Contains(third.Id, ids));
@@ -99,9 +95,9 @@ namespace GW2SDK.Tests.Features.Quaggans
 
             var actual = await sut.GetQuaggansByPage(0, 3);
             
-            Assert.True(actual.HasValues);
-            Assert.All(actual.Values, QuagganFact.Validate);
-            Assert.Equal(3, actual.Values.Count);
+            Assert.Equal(3, actual.Count);
+            Assert.All(actual, QuagganFact.Validate);
+            Assert.Equal(3, actual.Count);
             Assert.Equal(3, actual.Context.PageSize);
         }
     }

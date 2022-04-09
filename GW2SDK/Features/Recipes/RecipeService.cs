@@ -42,7 +42,7 @@ namespace GW2SDK.Recipes
                 .ConfigureAwait(false);
         }
 
-        public async IAsyncEnumerable<IReplica<Recipe>> GetRecipesByIds(
+        public async IAsyncEnumerable<Recipe> GetRecipesByIds(
 #if NET
             IReadOnlySet<int> recipeIds,
 #else
@@ -182,7 +182,7 @@ namespace GW2SDK.Recipes
                 .ConfigureAwait(false);
         }
 
-        public async IAsyncEnumerable<IReplica<Recipe>> GetRecipes(
+        public async IAsyncEnumerable<Recipe> GetRecipes(
             Language? language = default,
             MissingMemberBehavior missingMemberBehavior = default,
             [EnumeratorCancellation] CancellationToken cancellationToken = default,
@@ -191,11 +191,6 @@ namespace GW2SDK.Recipes
         {
             var index = await GetRecipesIndex(cancellationToken)
                 .ConfigureAwait(false);
-            if (!index.HasValues)
-            {
-                yield break;
-            }
-
             var producer = GetRecipesByIds(index.Values, language, missingMemberBehavior, cancellationToken, progress);
             await foreach (var recipe in producer.WithCancellation(cancellationToken)
                                .ConfigureAwait(false))

@@ -22,8 +22,8 @@ namespace GW2SDK.Tests.Features.Achievements.Groups
 
             var actual = await sut.GetAchievementGroups();
 
-            Assert.Equal(actual.Context.ResultTotal, actual.Values.Count);
-            Assert.All(actual.Values,
+            Assert.Equal(actual.Context.ResultTotal, actual.Count);
+            Assert.All(actual,
                 achievementGroup =>
                 {
                     AchievementGroupFact.Order_is_not_negative(achievementGroup);
@@ -38,7 +38,7 @@ namespace GW2SDK.Tests.Features.Achievements.Groups
 
             var actual = await sut.GetAchievementGroupsIndex();
 
-            Assert.Equal(actual.Context.ResultTotal, actual.Values.Count);
+            Assert.Equal(actual.Context.ResultTotal, actual.Count);
         }
 
         [Fact]
@@ -64,7 +64,7 @@ namespace GW2SDK.Tests.Features.Achievements.Groups
 
             var actual = await sut.GetAchievementGroupsByIds(ids);
             
-            Assert.Collection(actual.Values,
+            Assert.Collection(actual,
                 first => Assert.Contains(first.Id, ids),
                 second => Assert.Contains(second.Id, ids),
                 third => Assert.Contains(third.Id, ids));
@@ -78,7 +78,7 @@ namespace GW2SDK.Tests.Features.Achievements.Groups
 
             var actual = await sut.GetAchievementGroupsByPage(0, 3);
 
-            Assert.Equal(3, actual.Values.Count);
+            Assert.Equal(3, actual.Count);
             Assert.Equal(3, actual.Context.PageSize);
         }
     }

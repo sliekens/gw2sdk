@@ -22,9 +22,9 @@ namespace GW2SDK.Tests.Features.Accounts.Achievements
 
             var actual = await sut.GetAccountAchievements(accessToken.Key);
 
-            Assert.Equal(actual.Context.ResultTotal, actual.Values.Count);
+            Assert.Equal(actual.Context.ResultTotal, actual.Count);
 
-            Assert.All(actual.Values,
+            Assert.All(actual,
                 achievement =>
                 {
                     AccountAchievementFact.Id_is_positive(achievement);
@@ -61,7 +61,7 @@ namespace GW2SDK.Tests.Features.Accounts.Achievements
 
             var actual = await sut.GetAccountAchievementsByIds(ids, accessToken.Key);
 
-            Assert.Collection(actual.Values,
+            Assert.Collection(actual,
                 first => Assert.Equal(1, first.Id),
                 second => Assert.Equal(2, second.Id),
                 third => Assert.Equal(3, third.Id));
@@ -76,7 +76,7 @@ namespace GW2SDK.Tests.Features.Accounts.Achievements
 
             var actual = await sut.GetAccountAchievementsByPage(0, 3, accessToken.Key);
 
-            Assert.Equal(3, actual.Values.Count);
+            Assert.Equal(3, actual.Count);
             Assert.Equal(3, actual.Context.PageSize);
         }
     }
