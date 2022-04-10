@@ -9,7 +9,6 @@ on:
   push:
     branches:
     - main
-    - feature/publish-devcontainer
     paths:
     - .devcontainer/**
     - .github/workflows/devcontainer.yml
