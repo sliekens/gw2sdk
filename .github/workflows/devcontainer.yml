@@ -4,9 +4,14 @@
 name: Build a dev container image
 on: 
   workflow_dispatch: # Manual trigger
+  schedule:
+    - cron: '30 17 * * 0'
   push:
     branches:
+    - main
     - feature/publish-devcontainer
+    paths:
+    - .devcontainer/**
 
 jobs:
   build-and-push:
@@ -14,13 +19,19 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       packages: write
+      contents: read
     steps:
-    - uses: actions/checkout@v3
-    
-#     - name: Use Node.js LTS
-#       uses: actions/setup-node@v3
-#       with:
-#         cache: 'npm'
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Log in to GitHub Docker Registry
+      uses: docker/login-action@v1
+      with:
+        registry: ghcr.io
+        username: ${{ github.actor }}
+        password: ${{ secrets.GITHUB_TOKEN }}
+        
     - run: npm install -g @vscode/dev-container-cli
     - run: devcontainer build --image-name ghcr.io/StevenLiekens/gw2sdk/devcontainer
-    
+    - run: docker push ghcr.io/StevenLiekens/gw2sdk/devcontainer:latest
+        
