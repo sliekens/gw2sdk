@@ -1,0 +1,22 @@
+# This workflow will do a clean installation of node dependencies, cache/restore them, build the source code and run tests across different versions of node
+# For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
+
+name: Build a dev container image
+on: {} # Manual trigger
+
+jobs:
+  build-and-push:
+    name: Build and push dev container image
+    runs-on: ubuntu-latest
+    permissions:
+      packages: write
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Use Node.js LTS
+      uses: actions/setup-node@v3
+      with:
+        cache: 'npm'
+    - run: npm install -g @vscode/dev-container-cli
+    - run: devcontainer build --image-name ghcr.io/StevenLiekens/gw2sdk/devcontainer
+    
