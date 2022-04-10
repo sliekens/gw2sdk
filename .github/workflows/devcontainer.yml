@@ -12,6 +12,7 @@ on:
     - feature/publish-devcontainer
     paths:
     - .devcontainer/**
+    - .github/workflows/devcontainer.yml
 
 jobs:
   build-and-push:
