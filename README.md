@@ -1,4 +1,4 @@
-# GW2SDK [![Open in Remote - Containers](https://img.shields.io/static/v1?label=Remote%20-%20Containers&message=Clone&color=purple&logo=visualstudiocode)](https://vscode.dev/redirect?url=vscode://ms-vscode-remote.remote-containers/cloneInVolume?url=https://github.com/microsoft/vscode-remote-try-java)[![Continuous Integration](https://github.com/StevenLiekens/gw2sdk/workflows/Continuous%20Integration/badge.svg)][actions][![codecov](https://codecov.io/gh/StevenLiekens/gw2sdk/branch/main/graph/badge.svg)][codecov][![Twitter Follow](https://img.shields.io/twitter/follow/LiekensSteven?style=social)][twitter]
+# GW2SDK [![Open in Remote - Containers](https://img.shields.io/static/v1?label=Remote%20-%20Containers&message=Clone&color=purple&logo=visualstudiocode)][devcontainer][![Continuous Integration](https://github.com/StevenLiekens/gw2sdk/workflows/Continuous%20Integration/badge.svg)][actions][![codecov](https://codecov.io/gh/StevenLiekens/gw2sdk/branch/main/graph/badge.svg)][codecov][![Twitter Follow](https://img.shields.io/twitter/follow/LiekensSteven?style=social)][twitter]
 
 A .NET code library for interacting with the Guild Wars 2 API and game client.
 
