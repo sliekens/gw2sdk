@@ -1,7 +1,6 @@
-# GW2SDK
-[![Continuous Integration](https://github.com/StevenLiekens/gw2sdk/workflows/Continuous%20Integration/badge.svg)][actions] [![codecov](https://codecov.io/gh/StevenLiekens/gw2sdk/branch/main/graph/badge.svg)][codecov] [![Twitter Follow](https://img.shields.io/twitter/follow/LiekensSteven?style=social)][twitter]
+# GW2SDK [![Open in Remote - Containers](https://img.shields.io/static/v1?label=Remote%20-%20Containers&message=Clone&color=purple&logo=visualstudiocode)](https://vscode.dev/redirect?url=vscode://ms-vscode-remote.remote-containers/cloneInVolume?url=https://github.com/microsoft/vscode-remote-try-java)[![Continuous Integration](https://github.com/StevenLiekens/gw2sdk/workflows/Continuous%20Integration/badge.svg)][actions][![codecov](https://codecov.io/gh/StevenLiekens/gw2sdk/branch/main/graph/badge.svg)][codecov][![Twitter Follow](https://img.shields.io/twitter/follow/LiekensSteven?style=social)][twitter]
 
-C# client SDK for interacting with the Guild Wars 2 API
+A .NET code library for interacting with the Guild Wars 2 API and game client.
 
 ## Quick navigation
 
@@ -20,7 +19,7 @@ First create a personal access token [here][tokens] with the _read:packages_ sco
 dotnet nuget add source https://nuget.pkg.github.com/stevenliekens/index.json --name sliekens --username <USERNAME> --password <TOKEN>
 ```
 
-You must replace:
+Replace:
 
 - USERNAME with the name of your user account on GitHub.
 - TOKEN with your personal access token.
@@ -43,3 +42,4 @@ dotnet nuget remove source sliekens
 [twitter]:https://twitter.com/LiekensSteven
 [tokens]:https://github.com/settings/tokens
 [packages]:https://github.com/StevenLiekens/gw2sdk/packages
+[devcontainer]:https://vscode.dev/redirect?url=vscode://ms-vscode-remote.remote-containers/cloneInVolume?url=https://github.com/StevenLiekens/gw2sdk
