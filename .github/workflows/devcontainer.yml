@@ -17,10 +17,10 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     
-    - name: Use Node.js LTS
-      uses: actions/setup-node@v3
-      with:
-        cache: 'npm'
+#     - name: Use Node.js LTS
+#       uses: actions/setup-node@v3
+#       with:
+#         cache: 'npm'
     - run: npm install -g @vscode/dev-container-cli
     - run: devcontainer build --image-name ghcr.io/StevenLiekens/gw2sdk/devcontainer
     
