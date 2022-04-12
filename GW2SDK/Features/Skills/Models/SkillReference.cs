@@ -1,16 +1,16 @@
 ﻿using GW2SDK.Annotations;
+
 using JetBrains.Annotations;
 
-namespace GW2SDK.Skills
+namespace GW2SDK.Skills;
+
+[PublicAPI]
+[DataTransferObject]
+public sealed record SkillReference
 {
-    [PublicAPI]
-    [DataTransferObject]
-    public sealed record SkillReference
-    {
-        public int Id { get; init; }
+    public int Id { get; init; }
 
-        public Attunement? Attunement { get; init; }
+    public Attunement? Attunement { get; init; }
 
-        public Transformation? Form { get; init; }
-    }
+    public Transformation? Form { get; init; }
 }

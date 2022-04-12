@@ -1,12 +1,12 @@
 ﻿using GW2SDK.Annotations;
+
 using JetBrains.Annotations;
 
-namespace GW2SDK.Traits
+namespace GW2SDK.Traits;
+
+[PublicAPI]
+[DataTransferObject]
+public sealed record RechargeTraitFact : TraitFact
 {
-    [PublicAPI]
-    [DataTransferObject]
-    public sealed record RechargeTraitFact : TraitFact
-    {
-        public double Value { get; init; }
-    }
+    public double Value { get; init; }
 }

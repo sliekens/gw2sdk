@@ -1,10 +1,9 @@
 ﻿using JetBrains.Annotations;
 
-namespace GW2SDK.Skills
+namespace GW2SDK.Skills;
+
+[PublicAPI]
+public sealed record UnblockableSkillFact : SkillFact
 {
-    [PublicAPI]
-    public sealed record UnblockableSkillFact : SkillFact
-    {
-        public bool Value { get; init; }
-    }
+    public bool Value { get; init; }
 }

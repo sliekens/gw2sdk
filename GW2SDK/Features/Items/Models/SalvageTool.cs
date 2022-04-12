@@ -1,10 +1,9 @@
 ﻿using JetBrains.Annotations;
 
-namespace GW2SDK.Items
+namespace GW2SDK.Items;
+
+[PublicAPI]
+public sealed record SalvageTool : Tool
 {
-    [PublicAPI]
-    public sealed record SalvageTool : Tool
-    {
-        public int Charges { get; init; }
-    }
+    public int Charges { get; init; }
 }

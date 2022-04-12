@@ -1,12 +1,12 @@
 ﻿using GW2SDK.Annotations;
+
 using JetBrains.Annotations;
 
-namespace GW2SDK.Traits
+namespace GW2SDK.Traits;
+
+[PublicAPI]
+[DataTransferObject]
+public sealed record ComboFieldTraitFact : TraitFact
 {
-    [PublicAPI]
-    [DataTransferObject]
-    public sealed record ComboFieldTraitFact : TraitFact
-    {
-        public ComboFieldName Field { get; init; }
-    }
+    public ComboFieldName Field { get; init; }
 }

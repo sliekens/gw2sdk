@@ -1,31 +1,33 @@
 ﻿using System.Net.Http;
+
 using GW2SDK.Http;
+
 using JetBrains.Annotations;
+
 using static System.Net.Http.HttpMethod;
 
-namespace GW2SDK.Commerce.Exchange.Http
+namespace GW2SDK.Commerce.Exchange.Http;
+
+[PublicAPI]
+public sealed class ExchangeGoldForGemsRequest
 {
-    [PublicAPI]
-    public sealed class ExchangeGoldForGemsRequest
+    private static readonly HttpRequestMessageTemplate Template = new(Get, "/v2/commerce/exchange/coins");
+
+    public ExchangeGoldForGemsRequest(int coinsCount)
     {
-        private static readonly HttpRequestMessageTemplate Template = new(Get, "/v2/commerce/exchange/coins");
+        CoinsCount = coinsCount;
+    }
 
-        public ExchangeGoldForGemsRequest(int coinsCount)
+    public int CoinsCount { get; }
+
+    public static implicit operator HttpRequestMessage(ExchangeGoldForGemsRequest r)
+    {
+        QueryBuilder search = new();
+        search.Add("quantity", r.CoinsCount);
+        var request = Template with
         {
-            CoinsCount = coinsCount;
-        }
-
-        public int CoinsCount { get; }
-
-        public static implicit operator HttpRequestMessage(ExchangeGoldForGemsRequest r)
-        {
-            var search = new QueryBuilder();
-            search.Add("quantity", r.CoinsCount);
-            var request = Template with
-            {
-                Arguments = search
-            };
-            return request.Compile();
-        }
+            Arguments = search
+        };
+        return request.Compile();
     }
 }

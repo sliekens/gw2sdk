@@ -1,560 +1,561 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text.Json;
+
 using GW2SDK.Json;
+
 using JetBrains.Annotations;
 
-namespace GW2SDK.Professions.Json
+namespace GW2SDK.Professions.Json;
+
+[PublicAPI]
+public static class ProfessionReader
 {
-    [PublicAPI]
-    public static class ProfessionReader
+    public static Profession Read(JsonElement json, MissingMemberBehavior missingMemberBehavior)
     {
-        public static Profession Read(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+        RequiredMember<ProfessionName> id = new("id");
+        RequiredMember<string> name = new("name");
+        RequiredMember<int> code = new("code");
+        RequiredMember<string> icon = new("icon");
+        RequiredMember<string> iconBig = new("icon_big");
+        RequiredMember<int> specializations = new("specializations");
+        RequiredMember<IDictionary<string, WeaponProficiency>> weapons = new("weapons");
+        RequiredMember<ProfessionFlag> flags = new("flags");
+        RequiredMember<SkillReference> skills = new("skills");
+        RequiredMember<Training> training = new("training");
+        RequiredMember<Dictionary<int, int>> skillsByPalette = new("skills_by_palette");
+        foreach (var member in json.EnumerateObject())
         {
-            var id = new RequiredMember<ProfessionName>("id");
-            var name = new RequiredMember<string>("name");
-            var code = new RequiredMember<int>("code");
-            var icon = new RequiredMember<string>("icon");
-            var iconBig = new RequiredMember<string>("icon_big");
-            var specializations = new RequiredMember<int>("specializations");
-            var weapons = new RequiredMember<IDictionary<string, WeaponProficiency>>("weapons");
-            var flags = new RequiredMember<ProfessionFlag>("flags");
-            var skills = new RequiredMember<SkillReference>("skills");
-            var training = new RequiredMember<Training>("training");
-            var skillsByPalette = new RequiredMember<Dictionary<int, int>>("skills_by_palette");
-            foreach (var member in json.EnumerateObject())
+            if (member.NameEquals(id.Name))
             {
-                if (member.NameEquals(id.Name))
-                {
-                    id = id.From(member.Value);
-                }
-                else if (member.NameEquals(name.Name))
-                {
-                    name = name.From(member.Value);
-                }
-                else if (member.NameEquals(code.Name))
-                {
-                    code = code.From(member.Value);
-                }
-                else if (member.NameEquals(icon.Name))
-                {
-                    icon = icon.From(member.Value);
-                }
-                else if (member.NameEquals(iconBig.Name))
-                {
-                    iconBig = iconBig.From(member.Value);
-                }
-                else if (member.NameEquals(specializations.Name))
-                {
-                    specializations = specializations.From(member.Value);
-                }
-                else if (member.NameEquals(weapons.Name))
-                {
-                    weapons = weapons.From(member.Value);
-                }
-                else if (member.NameEquals(flags.Name))
-                {
-                    flags = flags.From(member.Value);
-                }
-                else if (member.NameEquals(skills.Name))
-                {
-                    skills = skills.From(member.Value);
-                }
-                else if (member.NameEquals(training.Name))
-                {
-                    training = training.From(member.Value);
-                }
-                else if (member.NameEquals(skillsByPalette.Name))
-                {
-                    skillsByPalette = skillsByPalette.From(member.Value);
-                }
-                else if (missingMemberBehavior == MissingMemberBehavior.Error)
-                {
-                    throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
-                }
+                id = id.From(member.Value);
             }
-
-            return new Profession
+            else if (member.NameEquals(name.Name))
             {
-                Id = id.GetValue(missingMemberBehavior),
-                Name = name.GetValue(),
-                Code = code.GetValue(),
-                Icon = icon.GetValue(),
-                IconBig = iconBig.GetValue(),
-                Specializations = specializations.SelectMany(value => value.GetInt32()),
-                Weapons = weapons.Select(value => value.GetMap(item => ReadWeapon(item, missingMemberBehavior))),
-                Flags = flags.GetValues(missingMemberBehavior),
-                Skills = skills.SelectMany(value => ReadSkillReference(value, missingMemberBehavior)),
-                Training = training.SelectMany(value => ReadTraining(value, missingMemberBehavior)),
-                SkillsByPalette = skillsByPalette.Select(value => ReadMap(value))
-            };
+                name = name.From(member.Value);
+            }
+            else if (member.NameEquals(code.Name))
+            {
+                code = code.From(member.Value);
+            }
+            else if (member.NameEquals(icon.Name))
+            {
+                icon = icon.From(member.Value);
+            }
+            else if (member.NameEquals(iconBig.Name))
+            {
+                iconBig = iconBig.From(member.Value);
+            }
+            else if (member.NameEquals(specializations.Name))
+            {
+                specializations = specializations.From(member.Value);
+            }
+            else if (member.NameEquals(weapons.Name))
+            {
+                weapons = weapons.From(member.Value);
+            }
+            else if (member.NameEquals(flags.Name))
+            {
+                flags = flags.From(member.Value);
+            }
+            else if (member.NameEquals(skills.Name))
+            {
+                skills = skills.From(member.Value);
+            }
+            else if (member.NameEquals(training.Name))
+            {
+                training = training.From(member.Value);
+            }
+            else if (member.NameEquals(skillsByPalette.Name))
+            {
+                skillsByPalette = skillsByPalette.From(member.Value);
+            }
+            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            {
+                throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
+            }
         }
 
-        private static Dictionary<int, int> ReadMap(JsonElement json)
+        return new Profession
         {
-            // The json is an iterable of key-value pairs
-            // e.g.
-            // [
-            //   [ 1, 12343 ],
-            //   [ 2, 12417 ],
-            //   [ 3, 12371 ]
-            // ]
-            //
-            // In JavaScript you could just do new Map([[1,12343],[2,12417]])
-            // In C# there are no shortcuts but we can convert it to an IEnumerable<KeyValuePair>
-            //  then convert that to Dictionary
-            var map = new Dictionary<int, int>(json.GetArrayLength());
-            foreach (var member in json.EnumerateArray())
+            Id = id.GetValue(missingMemberBehavior),
+            Name = name.GetValue(),
+            Code = code.GetValue(),
+            Icon = icon.GetValue(),
+            IconBig = iconBig.GetValue(),
+            Specializations = specializations.SelectMany(value => value.GetInt32()),
+            Weapons = weapons.Select(value => value.GetMap(item => ReadWeapon(item, missingMemberBehavior))),
+            Flags = flags.GetValues(missingMemberBehavior),
+            Skills = skills.SelectMany(value => ReadSkillReference(value, missingMemberBehavior)),
+            Training = training.SelectMany(value => ReadTraining(value, missingMemberBehavior)),
+            SkillsByPalette = skillsByPalette.Select(value => ReadMap(value))
+        };
+    }
+
+    private static Dictionary<int, int> ReadMap(JsonElement json)
+    {
+        // The json is an iterable of key-value pairs
+        // e.g.
+        // [
+        //   [ 1, 12343 ],
+        //   [ 2, 12417 ],
+        //   [ 3, 12371 ]
+        // ]
+        //
+        // In JavaScript you could just do new Map([[1,12343],[2,12417]])
+        // In C# there are no shortcuts but we can convert it to an IEnumerable<KeyValuePair>
+        //  then convert that to Dictionary
+        Dictionary<int, int> map = new(json.GetArrayLength());
+        foreach (var member in json.EnumerateArray())
+        {
+            // Short-circuit invalid data
+            if (member.GetArrayLength() != 2)
             {
-                // Short-circuit invalid data
-                if (member.GetArrayLength() != 2)
-                {
-                    break;
-                }
-
-                var key = member[0]
-                    .GetInt32();
-                var value = member[1]
-                    .GetInt32();
-
-                map[key] = value;
+                break;
             }
 
-            return map;
+            var key = member[0]
+                .GetInt32();
+            var value = member[1]
+                .GetInt32();
+
+            map[key] = value;
         }
 
-        private static Training ReadTraining(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+        return map;
+    }
+
+    private static Training ReadTraining(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    {
+        RequiredMember<int> id = new("id");
+        RequiredMember<TrainingCategory> category = new("category");
+        RequiredMember<string> name = new("name");
+        RequiredMember<TrainingObjective> track = new("track");
+
+        foreach (var member in json.EnumerateObject())
         {
-            var id = new RequiredMember<int>("id");
-            var category = new RequiredMember<TrainingCategory>("category");
-            var name = new RequiredMember<string>("name");
-            var track = new RequiredMember<TrainingObjective>("track");
-
-            foreach (var member in json.EnumerateObject())
+            if (member.NameEquals(id.Name))
             {
-                if (member.NameEquals(id.Name))
-                {
-                    id = id.From(member.Value);
-                }
-                else if (member.NameEquals(category.Name))
-                {
-                    category = category.From(member.Value);
-                }
-                else if (member.NameEquals(name.Name))
-                {
-                    name = name.From(member.Value);
-                }
-                else if (member.NameEquals(track.Name))
-                {
-                    track = track.From(member.Value);
-                }
-                else if (missingMemberBehavior == MissingMemberBehavior.Error)
-                {
-                    throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
-                }
+                id = id.From(member.Value);
             }
-
-            return new Training
+            else if (member.NameEquals(category.Name))
             {
-                Id = id.GetValue(),
-                Category = category.GetValue(missingMemberBehavior),
-                Name = name.GetValue(),
-                Track = track.SelectMany(value => ReadTrainingObjective(value, missingMemberBehavior))
-            };
+                category = category.From(member.Value);
+            }
+            else if (member.NameEquals(name.Name))
+            {
+                name = name.From(member.Value);
+            }
+            else if (member.NameEquals(track.Name))
+            {
+                track = track.From(member.Value);
+            }
+            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            {
+                throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
+            }
         }
 
-        private static TrainingObjective ReadTrainingObjective(
-            JsonElement json,
-            MissingMemberBehavior missingMemberBehavior
-        )
+        return new Training
         {
-            switch (json.GetProperty("type")
-                        .GetString())
-            {
-                case "Skill":
-                    return ReadSkillObjective(json, missingMemberBehavior);
-                case "Trait":
-                    return ReadTraitObjective(json, missingMemberBehavior);
-            }
+            Id = id.GetValue(),
+            Category = category.GetValue(missingMemberBehavior),
+            Name = name.GetValue(),
+            Track = track.SelectMany(value => ReadTrainingObjective(value, missingMemberBehavior))
+        };
+    }
 
-            var cost = new RequiredMember<int>("cost");
-            foreach (var member in json.EnumerateObject())
-            {
-                if (member.NameEquals("type"))
-                {
-                    if (missingMemberBehavior == MissingMemberBehavior.Error)
-                    {
-                        throw new InvalidOperationException(Strings.UnexpectedDiscriminator(member.Value.GetString()));
-                    }
-                }
-                else if (member.NameEquals(cost.Name))
-                {
-                    cost = cost.From(member.Value);
-                }
-                else if (missingMemberBehavior == MissingMemberBehavior.Error)
-                {
-                    throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
-                }
-            }
-
-            return new TrainingObjective
-            {
-                Cost = cost.GetValue()
-            };
+    private static TrainingObjective ReadTrainingObjective(
+        JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
+    {
+        switch (json.GetProperty("type")
+                    .GetString())
+        {
+            case "Skill":
+                return ReadSkillObjective(json, missingMemberBehavior);
+            case "Trait":
+                return ReadTraitObjective(json, missingMemberBehavior);
         }
 
-        private static SkillObjective ReadSkillObjective(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+        RequiredMember<int> cost = new("cost");
+        foreach (var member in json.EnumerateObject())
         {
-            var cost = new RequiredMember<int>("cost");
-            var skillId = new RequiredMember<int>("skill_id");
-            foreach (var member in json.EnumerateObject())
+            if (member.NameEquals("type"))
             {
-                if (member.NameEquals("type"))
+                if (missingMemberBehavior == MissingMemberBehavior.Error)
                 {
-                    if (!member.Value.ValueEquals("Skill"))
-                    {
-                        throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
-                    }
-                }
-                else if (member.NameEquals(cost.Name))
-                {
-                    cost = cost.From(member.Value);
-                }
-                else if (member.NameEquals(skillId.Name))
-                {
-                    skillId = skillId.From(member.Value);
-                }
-                else if (missingMemberBehavior == MissingMemberBehavior.Error)
-                {
-                    throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
+                    throw new InvalidOperationException(Strings.UnexpectedDiscriminator(member.Value.GetString()));
                 }
             }
-
-            return new SkillObjective
+            else if (member.NameEquals(cost.Name))
             {
-                Cost = cost.GetValue(),
-                SkillId = skillId.GetValue()
-            };
+                cost = cost.From(member.Value);
+            }
+            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            {
+                throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
+            }
         }
 
-        private static TraitObjective ReadTraitObjective(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+        return new TrainingObjective
         {
-            var cost = new RequiredMember<int>("cost");
-            var traitId = new RequiredMember<int>("trait_id");
-            foreach (var member in json.EnumerateObject())
+            Cost = cost.GetValue()
+        };
+    }
+
+    private static SkillObjective ReadSkillObjective(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    {
+        RequiredMember<int> cost = new("cost");
+        RequiredMember<int> skillId = new("skill_id");
+        foreach (var member in json.EnumerateObject())
+        {
+            if (member.NameEquals("type"))
             {
-                if (member.NameEquals("type"))
+                if (!member.Value.ValueEquals("Skill"))
                 {
-                    if (!member.Value.ValueEquals("Trait"))
-                    {
-                        throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
-                    }
-                }
-                else if (member.NameEquals(cost.Name))
-                {
-                    cost = cost.From(member.Value);
-                }
-                else if (member.NameEquals(traitId.Name))
-                {
-                    traitId = traitId.From(member.Value);
-                }
-                else if (missingMemberBehavior == MissingMemberBehavior.Error)
-                {
-                    throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
+                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
                 }
             }
-
-            return new TraitObjective
+            else if (member.NameEquals(cost.Name))
             {
-                Cost = cost.GetValue(),
-                TraitId = traitId.GetValue()
-            };
+                cost = cost.From(member.Value);
+            }
+            else if (member.NameEquals(skillId.Name))
+            {
+                skillId = skillId.From(member.Value);
+            }
+            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            {
+                throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
+            }
         }
 
-        private static SkillReference ReadSkillReference(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+        return new SkillObjective
         {
-            switch (json.GetProperty("type")
-                        .GetString())
-            {
-                case "Profession":
-                    return ReadProfessionSkillReference(json, missingMemberBehavior);
-                case "Heal":
-                    return ReadHealingSkillReference(json, missingMemberBehavior);
-                case "Utility":
-                    return ReadUtilitySkillReference(json, missingMemberBehavior);
-                case "Elite":
-                    return ReadEliteSkillReference(json, missingMemberBehavior);
-            }
+            Cost = cost.GetValue(),
+            SkillId = skillId.GetValue()
+        };
+    }
 
-            var id = new RequiredMember<int>("id");
-            var slot = new RequiredMember<SkillSlot>("slot");
-
-            foreach (var member in json.EnumerateObject())
+    private static TraitObjective ReadTraitObjective(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    {
+        RequiredMember<int> cost = new("cost");
+        RequiredMember<int> traitId = new("trait_id");
+        foreach (var member in json.EnumerateObject())
+        {
+            if (member.NameEquals("type"))
             {
-                if (member.NameEquals("type"))
+                if (!member.Value.ValueEquals("Trait"))
                 {
-                    if (missingMemberBehavior == MissingMemberBehavior.Error)
-                    {
-                        throw new InvalidOperationException(Strings.UnexpectedDiscriminator(member.Value.GetString()));
-                    }
-                }
-                else if (member.NameEquals(id.Name))
-                {
-                    id = id.From(member.Value);
-                }
-                else if (member.NameEquals(slot.Name))
-                {
-                    slot = slot.From(member.Value);
-                }
-                else if (missingMemberBehavior == MissingMemberBehavior.Error)
-                {
-                    throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
+                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
                 }
             }
-
-            return new SkillReference
+            else if (member.NameEquals(cost.Name))
             {
-                Id = id.GetValue(),
-                Slot = slot.GetValue(missingMemberBehavior)
-            };
+                cost = cost.From(member.Value);
+            }
+            else if (member.NameEquals(traitId.Name))
+            {
+                traitId = traitId.From(member.Value);
+            }
+            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            {
+                throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
+            }
         }
 
-        private static HealingSkillReference ReadHealingSkillReference(
-            JsonElement json,
-            MissingMemberBehavior missingMemberBehavior
-        )
+        return new TraitObjective
         {
-            var id = new RequiredMember<int>("id");
-            var slot = new RequiredMember<SkillSlot>("slot");
+            Cost = cost.GetValue(),
+            TraitId = traitId.GetValue()
+        };
+    }
 
-            foreach (var member in json.EnumerateObject())
-            {
-                if (member.NameEquals("type"))
-                {
-                    if (!member.Value.ValueEquals("Heal"))
-                    {
-                        throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
-                    }
-                }
-                else if (member.NameEquals(id.Name))
-                {
-                    id = id.From(member.Value);
-                }
-                else if (member.NameEquals(slot.Name))
-                {
-                    slot = slot.From(member.Value);
-                }
-                else if (missingMemberBehavior == MissingMemberBehavior.Error)
-                {
-                    throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
-                }
-            }
-
-            return new HealingSkillReference
-            {
-                Id = id.GetValue(),
-                Slot = slot.GetValue(missingMemberBehavior)
-            };
+    private static SkillReference ReadSkillReference(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    {
+        switch (json.GetProperty("type")
+                    .GetString())
+        {
+            case "Profession":
+                return ReadProfessionSkillReference(json, missingMemberBehavior);
+            case "Heal":
+                return ReadHealingSkillReference(json, missingMemberBehavior);
+            case "Utility":
+                return ReadUtilitySkillReference(json, missingMemberBehavior);
+            case "Elite":
+                return ReadEliteSkillReference(json, missingMemberBehavior);
         }
 
-        private static UtilitySkillReference ReadUtilitySkillReference(
-            JsonElement json,
-            MissingMemberBehavior missingMemberBehavior
-        )
-        {
-            var id = new RequiredMember<int>("id");
-            var slot = new RequiredMember<SkillSlot>("slot");
+        RequiredMember<int> id = new("id");
+        RequiredMember<SkillSlot> slot = new("slot");
 
-            foreach (var member in json.EnumerateObject())
+        foreach (var member in json.EnumerateObject())
+        {
+            if (member.NameEquals("type"))
             {
-                if (member.NameEquals("type"))
+                if (missingMemberBehavior == MissingMemberBehavior.Error)
                 {
-                    if (!member.Value.ValueEquals("Utility"))
-                    {
-                        throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
-                    }
-                }
-                else if (member.NameEquals(id.Name))
-                {
-                    id = id.From(member.Value);
-                }
-                else if (member.NameEquals(slot.Name))
-                {
-                    slot = slot.From(member.Value);
-                }
-                else if (missingMemberBehavior == MissingMemberBehavior.Error)
-                {
-                    throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
+                    throw new InvalidOperationException(Strings.UnexpectedDiscriminator(member.Value.GetString()));
                 }
             }
-
-            return new UtilitySkillReference
+            else if (member.NameEquals(id.Name))
             {
-                Id = id.GetValue(),
-                Slot = slot.GetValue(missingMemberBehavior)
-            };
+                id = id.From(member.Value);
+            }
+            else if (member.NameEquals(slot.Name))
+            {
+                slot = slot.From(member.Value);
+            }
+            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            {
+                throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
+            }
         }
 
-        private static EliteSkillReference ReadEliteSkillReference(
-            JsonElement json,
-            MissingMemberBehavior missingMemberBehavior
-        )
+        return new SkillReference
         {
-            var id = new RequiredMember<int>("id");
-            var slot = new RequiredMember<SkillSlot>("slot");
+            Id = id.GetValue(),
+            Slot = slot.GetValue(missingMemberBehavior)
+        };
+    }
 
-            foreach (var member in json.EnumerateObject())
+    private static HealingSkillReference ReadHealingSkillReference(
+        JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
+    {
+        RequiredMember<int> id = new("id");
+        RequiredMember<SkillSlot> slot = new("slot");
+
+        foreach (var member in json.EnumerateObject())
+        {
+            if (member.NameEquals("type"))
             {
-                if (member.NameEquals("type"))
+                if (!member.Value.ValueEquals("Heal"))
                 {
-                    if (!member.Value.ValueEquals("Elite"))
-                    {
-                        throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
-                    }
-                }
-                else if (member.NameEquals(id.Name))
-                {
-                    id = id.From(member.Value);
-                }
-                else if (member.NameEquals(slot.Name))
-                {
-                    slot = slot.From(member.Value);
-                }
-                else if (missingMemberBehavior == MissingMemberBehavior.Error)
-                {
-                    throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
+                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
                 }
             }
-
-            return new EliteSkillReference
+            else if (member.NameEquals(id.Name))
             {
-                Id = id.GetValue(),
-                Slot = slot.GetValue(missingMemberBehavior)
-            };
+                id = id.From(member.Value);
+            }
+            else if (member.NameEquals(slot.Name))
+            {
+                slot = slot.From(member.Value);
+            }
+            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            {
+                throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
+            }
         }
 
-        private static ProfessionSkillReference ReadProfessionSkillReference(
-            JsonElement json,
-            MissingMemberBehavior missingMemberBehavior
-        )
+        return new HealingSkillReference
         {
-            var id = new RequiredMember<int>("id");
-            var slot = new RequiredMember<SkillSlot>("slot");
-            var source = new NullableMember<ProfessionName>("source");
-            var attunement = new NullableMember<Attunement>("attunement");
+            Id = id.GetValue(),
+            Slot = slot.GetValue(missingMemberBehavior)
+        };
+    }
 
-            foreach (var member in json.EnumerateObject())
+    private static UtilitySkillReference ReadUtilitySkillReference(
+        JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
+    {
+        RequiredMember<int> id = new("id");
+        RequiredMember<SkillSlot> slot = new("slot");
+
+        foreach (var member in json.EnumerateObject())
+        {
+            if (member.NameEquals("type"))
             {
-                if (member.NameEquals("type"))
+                if (!member.Value.ValueEquals("Utility"))
                 {
-                    if (!member.Value.ValueEquals("Profession"))
-                    {
-                        throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
-                    }
-                }
-                else if (member.NameEquals(id.Name))
-                {
-                    id = id.From(member.Value);
-                }
-                else if (member.NameEquals(slot.Name))
-                {
-                    slot = slot.From(member.Value);
-                }
-                else if (member.NameEquals(source.Name))
-                {
-                    source = source.From(member.Value);
-                }
-                else if (member.NameEquals(attunement.Name))
-                {
-                    attunement = attunement.From(member.Value);
-                }
-                else if (missingMemberBehavior == MissingMemberBehavior.Error)
-                {
-                    throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
+                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
                 }
             }
-
-            return new ProfessionSkillReference
+            else if (member.NameEquals(id.Name))
             {
-                Id = id.GetValue(),
-                Slot = slot.GetValue(missingMemberBehavior),
-                Source = source.GetValue(missingMemberBehavior),
-                Attunement = attunement.GetValue(missingMemberBehavior)
-            };
+                id = id.From(member.Value);
+            }
+            else if (member.NameEquals(slot.Name))
+            {
+                slot = slot.From(member.Value);
+            }
+            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            {
+                throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
+            }
         }
 
-        private static WeaponProficiency ReadWeapon(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+        return new UtilitySkillReference
         {
-            var specialization = new NullableMember<int>("specialization");
-            var flags = new RequiredMember<WeaponFlag>("flags");
-            var skills = new RequiredMember<WeaponSkill>("skills");
+            Id = id.GetValue(),
+            Slot = slot.GetValue(missingMemberBehavior)
+        };
+    }
 
-            foreach (var member in json.EnumerateObject())
+    private static EliteSkillReference ReadEliteSkillReference(
+        JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
+    {
+        RequiredMember<int> id = new("id");
+        RequiredMember<SkillSlot> slot = new("slot");
+
+        foreach (var member in json.EnumerateObject())
+        {
+            if (member.NameEquals("type"))
             {
-                if (member.NameEquals(specialization.Name))
+                if (!member.Value.ValueEquals("Elite"))
                 {
-                    specialization = specialization.From(member.Value);
-                }
-                else if (member.NameEquals(flags.Name))
-                {
-                    flags = flags.From(member.Value);
-                }
-                else if (member.NameEquals(skills.Name))
-                {
-                    skills = skills.From(member.Value);
-                }
-                else if (missingMemberBehavior == MissingMemberBehavior.Error)
-                {
-                    throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
+                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
                 }
             }
-
-            return new WeaponProficiency
+            else if (member.NameEquals(id.Name))
             {
-                RequiredSpecialization = specialization.GetValue(),
-                Flags = flags.GetValues(missingMemberBehavior),
-                Skills = skills.SelectMany(value => ReadWeaponSkill(value, missingMemberBehavior))
-            };
+                id = id.From(member.Value);
+            }
+            else if (member.NameEquals(slot.Name))
+            {
+                slot = slot.From(member.Value);
+            }
+            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            {
+                throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
+            }
         }
 
-        private static WeaponSkill ReadWeaponSkill(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+        return new EliteSkillReference
         {
-            var id = new RequiredMember<int>("id");
-            var slot = new RequiredMember<SkillSlot>("slot");
-            var offhand = new NullableMember<Offhand>("offhand");
-            var attunement = new NullableMember<Attunement>("attunement");
+            Id = id.GetValue(),
+            Slot = slot.GetValue(missingMemberBehavior)
+        };
+    }
 
-            foreach (var member in json.EnumerateObject())
+    private static ProfessionSkillReference ReadProfessionSkillReference(
+        JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
+    {
+        RequiredMember<int> id = new("id");
+        RequiredMember<SkillSlot> slot = new("slot");
+        NullableMember<ProfessionName> source = new("source");
+        NullableMember<Attunement> attunement = new("attunement");
+
+        foreach (var member in json.EnumerateObject())
+        {
+            if (member.NameEquals("type"))
             {
-                if (member.NameEquals(id.Name))
+                if (!member.Value.ValueEquals("Profession"))
                 {
-                    id = id.From(member.Value);
-                }
-                else if (member.NameEquals(slot.Name))
-                {
-                    slot = slot.From(member.Value);
-                }
-                else if (member.NameEquals(offhand.Name))
-                {
-                    offhand = offhand.From(member.Value);
-                }
-                else if (member.NameEquals(attunement.Name))
-                {
-                    attunement = attunement.From(member.Value);
-                }
-                else if (missingMemberBehavior == MissingMemberBehavior.Error)
-                {
-                    throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
+                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
                 }
             }
-
-            return new WeaponSkill
+            else if (member.NameEquals(id.Name))
             {
-                Id = id.GetValue(),
-                Slot = slot.GetValue(missingMemberBehavior),
-                Offhand = offhand.GetValue(missingMemberBehavior),
-                Attunement = attunement.GetValue(missingMemberBehavior)
-            };
+                id = id.From(member.Value);
+            }
+            else if (member.NameEquals(slot.Name))
+            {
+                slot = slot.From(member.Value);
+            }
+            else if (member.NameEquals(source.Name))
+            {
+                source = source.From(member.Value);
+            }
+            else if (member.NameEquals(attunement.Name))
+            {
+                attunement = attunement.From(member.Value);
+            }
+            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            {
+                throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
+            }
         }
+
+        return new ProfessionSkillReference
+        {
+            Id = id.GetValue(),
+            Slot = slot.GetValue(missingMemberBehavior),
+            Source = source.GetValue(missingMemberBehavior),
+            Attunement = attunement.GetValue(missingMemberBehavior)
+        };
+    }
+
+    private static WeaponProficiency ReadWeapon(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    {
+        NullableMember<int> specialization = new("specialization");
+        RequiredMember<WeaponFlag> flags = new("flags");
+        RequiredMember<WeaponSkill> skills = new("skills");
+
+        foreach (var member in json.EnumerateObject())
+        {
+            if (member.NameEquals(specialization.Name))
+            {
+                specialization = specialization.From(member.Value);
+            }
+            else if (member.NameEquals(flags.Name))
+            {
+                flags = flags.From(member.Value);
+            }
+            else if (member.NameEquals(skills.Name))
+            {
+                skills = skills.From(member.Value);
+            }
+            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            {
+                throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
+            }
+        }
+
+        return new WeaponProficiency
+        {
+            RequiredSpecialization = specialization.GetValue(),
+            Flags = flags.GetValues(missingMemberBehavior),
+            Skills = skills.SelectMany(value => ReadWeaponSkill(value, missingMemberBehavior))
+        };
+    }
+
+    private static WeaponSkill ReadWeaponSkill(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    {
+        RequiredMember<int> id = new("id");
+        RequiredMember<SkillSlot> slot = new("slot");
+        NullableMember<Offhand> offhand = new("offhand");
+        NullableMember<Attunement> attunement = new("attunement");
+
+        foreach (var member in json.EnumerateObject())
+        {
+            if (member.NameEquals(id.Name))
+            {
+                id = id.From(member.Value);
+            }
+            else if (member.NameEquals(slot.Name))
+            {
+                slot = slot.From(member.Value);
+            }
+            else if (member.NameEquals(offhand.Name))
+            {
+                offhand = offhand.From(member.Value);
+            }
+            else if (member.NameEquals(attunement.Name))
+            {
+                attunement = attunement.From(member.Value);
+            }
+            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            {
+                throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
+            }
+        }
+
+        return new WeaponSkill
+        {
+            Id = id.GetValue(),
+            Slot = slot.GetValue(missingMemberBehavior),
+            Offhand = offhand.GetValue(missingMemberBehavior),
+            Attunement = attunement.GetValue(missingMemberBehavior)
+        };
     }
 }

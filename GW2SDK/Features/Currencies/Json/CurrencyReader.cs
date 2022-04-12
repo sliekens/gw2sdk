@@ -1,57 +1,59 @@
 ﻿using System;
 using System.Text.Json;
+
+using GW2SDK.Currencies.Models;
 using GW2SDK.Json;
+
 using JetBrains.Annotations;
 
-namespace GW2SDK.Currencies.Json
+namespace GW2SDK.Currencies.Json;
+
+[PublicAPI]
+public static class CurrencyReader
 {
-    [PublicAPI]
-    public static class CurrencyReader
+    public static Currency Read(JsonElement json, MissingMemberBehavior missingMemberBehavior)
     {
-        public static Currency Read(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+        RequiredMember<int> id = new("id");
+        RequiredMember<string> name = new("name");
+        RequiredMember<string> description = new("description");
+        RequiredMember<int> order = new("order");
+        RequiredMember<string> icon = new("icon");
+
+        foreach (var member in json.EnumerateObject())
         {
-            var id = new RequiredMember<int>("id");
-            var name = new RequiredMember<string>("name");
-            var description = new RequiredMember<string>("description");
-            var order = new RequiredMember<int>("order");
-            var icon = new RequiredMember<string>("icon");
-
-            foreach (var member in json.EnumerateObject())
+            if (member.NameEquals(id.Name))
             {
-                if (member.NameEquals(id.Name))
-                {
-                    id = id.From(member.Value);
-                }
-                else if (member.NameEquals(name.Name))
-                {
-                    name = name.From(member.Value);
-                }
-                else if (member.NameEquals(description.Name))
-                {
-                    description = description.From(member.Value);
-                }
-                else if (member.NameEquals(order.Name))
-                {
-                    order = order.From(member.Value);
-                }
-                else if (member.NameEquals(icon.Name))
-                {
-                    icon = icon.From(member.Value);
-                }
-                else if (missingMemberBehavior == MissingMemberBehavior.Error)
-                {
-                    throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
-                }
+                id = id.From(member.Value);
             }
-
-            return new Currency
+            else if (member.NameEquals(name.Name))
             {
-                Id = id.GetValue(),
-                Name = name.GetValue(),
-                Description = description.GetValue(),
-                Order = order.GetValue(),
-                Icon = icon.GetValue()
-            };
+                name = name.From(member.Value);
+            }
+            else if (member.NameEquals(description.Name))
+            {
+                description = description.From(member.Value);
+            }
+            else if (member.NameEquals(order.Name))
+            {
+                order = order.From(member.Value);
+            }
+            else if (member.NameEquals(icon.Name))
+            {
+                icon = icon.From(member.Value);
+            }
+            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            {
+                throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
+            }
         }
+
+        return new Currency
+        {
+            Id = id.GetValue(),
+            Name = name.GetValue(),
+            Description = description.GetValue(),
+            Order = order.GetValue(),
+            Icon = icon.GetValue()
+        };
     }
 }

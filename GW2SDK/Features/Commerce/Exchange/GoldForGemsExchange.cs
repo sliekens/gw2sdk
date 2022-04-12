@@ -1,14 +1,14 @@
 ﻿using GW2SDK.Annotations;
+
 using JetBrains.Annotations;
 
-namespace GW2SDK.Commerce.Exchange
-{
-    [PublicAPI]
-    [DataTransferObject]
-    public sealed record GoldForGemsExchange
-    {
-        public int GemsToReceive { get; init; }
+namespace GW2SDK.Commerce.Exchange;
 
-        public Coin CoinsPerGem { get; init; }
-    }
+[PublicAPI]
+[DataTransferObject]
+public sealed record GoldForGemsExchange
+{
+    public int GemsToReceive { get; init; }
+
+    public Coin CoinsPerGem { get; init; }
 }

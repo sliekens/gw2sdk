@@ -1,10 +1,9 @@
 ﻿using JetBrains.Annotations;
 
-namespace GW2SDK.Items
+namespace GW2SDK.Items;
+
+[PublicAPI]
+public sealed record Minipet : Item
 {
-    [PublicAPI]
-    public sealed record Minipet : Item
-    {
-        public int MinipetId { get; init; }
-    }
+    public int MinipetId { get; init; }
 }

@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Threading.Tasks;
+
 using GW2SDK.Professions;
 using GW2SDK.Tests.TestInfrastructure;
+
 using Xunit;
 
 namespace GW2SDK.Tests.Features.Professions;
@@ -11,7 +13,7 @@ public class ProfessionServiceTest
     [Fact]
     public async Task It_can_get_all_professions()
     {
-        await using var services = new Composer();
+        await using Composer services = new();
         var sut = services.Resolve<ProfessionService>();
 
         var actual = await sut.GetProfessions();
@@ -33,7 +35,7 @@ public class ProfessionServiceTest
     [Fact]
     public async Task It_can_get_all_profession_names()
     {
-        await using var services = new Composer();
+        await using Composer services = new();
         var sut = services.Resolve<ProfessionService>();
 
         var actual = await sut.GetProfessionNames();
@@ -47,7 +49,7 @@ public class ProfessionServiceTest
     [Fact]
     public async Task It_can_get_a_profession_by_name()
     {
-        await using var services = new Composer();
+        await using Composer services = new();
         var sut = services.Resolve<ProfessionService>();
 
         const ProfessionName name = ProfessionName.Engineer;
@@ -60,10 +62,10 @@ public class ProfessionServiceTest
     [Fact]
     public async Task It_can_get_professions_by_name()
     {
-        await using var services = new Composer();
+        await using Composer services = new();
         var sut = services.Resolve<ProfessionService>();
 
-        var names = new[]
+        ProfessionName[] names =
         {
             ProfessionName.Mesmer,
             ProfessionName.Necromancer,
@@ -81,7 +83,7 @@ public class ProfessionServiceTest
     [Fact]
     public async Task It_can_get_professions_by_page()
     {
-        await using var services = new Composer();
+        await using Composer services = new();
         var sut = services.Resolve<ProfessionService>();
 
         var actual = await sut.GetProfessionsByPage(0, 3);

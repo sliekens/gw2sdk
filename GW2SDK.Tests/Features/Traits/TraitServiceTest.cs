@@ -1,87 +1,93 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+
 using GW2SDK.Tests.TestInfrastructure;
 using GW2SDK.Traits;
+
 using Xunit;
 
-namespace GW2SDK.Tests.Features.Traits
+namespace GW2SDK.Tests.Features.Traits;
+
+public class TraitServiceTest
 {
-    public class TraitServiceTest
+    private static class TraitFact
     {
-        private static class TraitFact
+        public static void Id_is_positive(Trait actual)
         {
-            public static void Id_is_positive(Trait actual) => Assert.InRange(actual.Id, 1, int.MaxValue);
+            Assert.InRange(actual.Id, 1, int.MaxValue);
         }
+    }
 
-        [Fact]
-        public async Task It_can_get_all_traits()
-        {
-            await using var services = new Composer();
-            var sut = services.Resolve<TraitService>();
+    [Fact]
+    public async Task It_can_get_all_traits()
+    {
+        await using Composer services = new();
+        var sut = services.Resolve<TraitService>();
 
-            var actual = await sut.GetTraits();
+        var actual = await sut.GetTraits();
 
-            Assert.Equal(actual.Context.ResultTotal, actual.Count);
-            Assert.All(actual,
-                trait =>
-                {
-                    TraitFact.Id_is_positive(trait);
-                });
-        }
-
-        [Fact]
-        public async Task It_can_get_all_trait_ids()
-        {
-            await using var services = new Composer();
-            var sut = services.Resolve<TraitService>();
-
-            var actual = await sut.GetTraitsIndex();
-
-            Assert.Equal(actual.Context.ResultTotal, actual.Count);
-        }
-
-        [Fact]
-        public async Task It_can_get_a_trait_by_id()
-        {
-            await using var services = new Composer();
-            var sut = services.Resolve<TraitService>();
-
-            const int traitId = 214;
-
-            var actual = await sut.GetTraitById(traitId);
-
-            Assert.Equal(traitId, actual.Value.Id);
-        }
-
-        [Fact]
-        public async Task It_can_get_traits_by_id()
-        {
-            await using var services = new Composer();
-            var sut = services.Resolve<TraitService>();
-
-            var ids = new HashSet<int>
+        Assert.Equal(actual.Context.ResultTotal, actual.Count);
+        Assert.All(actual,
+            trait =>
             {
-                214,
-                221,
-                222
-            };
+                TraitFact.Id_is_positive(trait);
+            });
+    }
 
-            var actual = await sut.GetTraitsByIds(ids);
+    [Fact]
+    public async Task It_can_get_all_trait_ids()
+    {
+        await using Composer services = new();
+        var sut = services.Resolve<TraitService>();
 
-            Assert.Collection(actual, first => Assert.Equal(214, first.Id), second => Assert.Equal(221, second.Id), third => Assert.Equal(222, third.Id));
-        }
+        var actual = await sut.GetTraitsIndex();
 
-        [Fact]
-        public async Task It_can_get_traits_by_page()
+        Assert.Equal(actual.Context.ResultTotal, actual.Count);
+    }
+
+    [Fact]
+    public async Task It_can_get_a_trait_by_id()
+    {
+        await using Composer services = new();
+        var sut = services.Resolve<TraitService>();
+
+        const int traitId = 214;
+
+        var actual = await sut.GetTraitById(traitId);
+
+        Assert.Equal(traitId, actual.Value.Id);
+    }
+
+    [Fact]
+    public async Task It_can_get_traits_by_id()
+    {
+        await using Composer services = new();
+        var sut = services.Resolve<TraitService>();
+
+        HashSet<int> ids = new()
         {
-            await using var services = new Composer();
-            var sut = services.Resolve<TraitService>();
+            214,
+            221,
+            222
+        };
 
-            var actual = await sut.GetTraitsByPage(0, 3);
+        var actual = await sut.GetTraitsByIds(ids);
 
-            Assert.Equal(3, actual.Count);
-            Assert.Equal(3, actual.Context.PageSize);
-        }
+        Assert.Collection(actual,
+            first => Assert.Equal(214, first.Id),
+            second => Assert.Equal(221, second.Id),
+            third => Assert.Equal(222, third.Id));
+    }
+
+    [Fact]
+    public async Task It_can_get_traits_by_page()
+    {
+        await using Composer services = new();
+        var sut = services.Resolve<TraitService>();
+
+        var actual = await sut.GetTraitsByPage(0, 3);
+
+        Assert.Equal(3, actual.Count);
+        Assert.Equal(3, actual.Context.PageSize);
     }
 }

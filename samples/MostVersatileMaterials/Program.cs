@@ -5,9 +5,11 @@ using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 using GW2SDK;
+using GW2SDK.Crafting;
+using GW2SDK.Crafting.Models;
 using GW2SDK.Http;
 using GW2SDK.Items;
-using GW2SDK.Recipes;
+
 using Spectre.Console;
 
 namespace MostVersatileMaterials;
@@ -28,7 +30,7 @@ internal class Program
         http.UseLanguage(Language.English);
         http.UseSchemaVersion(SchemaVersion.Recommended);
 
-        var recipesService = new RecipeService(http);
+        var recipesService = new CraftingStation(http);
         var itemsService = new ItemService(http);
 
         var (ingredients, recipes) = await Progress()
@@ -117,12 +119,12 @@ internal class Program
                 new RemainingTimeColumn(),
                 new SpinnerColumn());
 
-    private static async Task<List<Recipe>> GetRecipes(RecipeService recipesService, ProgressTask progress)
+    private static async Task<List<Recipe>> GetRecipes(CraftingStation craftingStation, ProgressTask progress)
     {
         progress.StartTask();
         try
         {
-            return await recipesService
+            return await craftingStation
                 .GetRecipes(progress: new Progress<ICollectionContext>(ctx => UpdateProgress(ctx, progress)))
                 .OrderByDescending(recipe => recipe.Id)
                 .ToListAsync();

@@ -4,8 +4,9 @@ using System.Linq;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
-using GW2SDK.Continents.Http;
+
 using GW2SDK.Http;
+using GW2SDK.Maps.Http;
 
 namespace GW2SDK.TestDataHelper
 {

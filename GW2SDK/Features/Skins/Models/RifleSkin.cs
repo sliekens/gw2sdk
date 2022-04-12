@@ -1,7 +1,6 @@
 ﻿using JetBrains.Annotations;
 
-namespace GW2SDK.Skins
-{
-    [PublicAPI]
-    public sealed record RifleSkin : WeaponSkin;
-}
+namespace GW2SDK.Skins;
+
+[PublicAPI]
+public sealed record RifleSkin : WeaponSkin;

@@ -1,12 +1,11 @@
 ﻿using JetBrains.Annotations;
 
-namespace GW2SDK.Skills
-{
-    [PublicAPI]
-    public sealed record AttributeAdjustSkillFact : SkillFact
-    {
-        public int? Value { get; init; }
+namespace GW2SDK.Skills;
 
-        public AttributeAdjustTarget Target { get; init; }
-    }
+[PublicAPI]
+public sealed record AttributeAdjustSkillFact : SkillFact
+{
+    public int? Value { get; init; }
+
+    public AttributeAdjustTarget Target { get; init; }
 }

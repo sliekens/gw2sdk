@@ -38,9 +38,15 @@ internal sealed class ReplicaPage<T> : IReplicaPage<T>
 
     public DateTimeOffset? LastModified { get; }
 
-    public IEnumerator<T> GetEnumerator() => Values.GetEnumerator();
+    public IEnumerator<T> GetEnumerator()
+    {
+        return Values.GetEnumerator();
+    }
 
-    IEnumerator IEnumerable.GetEnumerator() => ((IEnumerable) Values).GetEnumerator();
+    IEnumerator IEnumerable.GetEnumerator()
+    {
+        return ((IEnumerable)Values).GetEnumerator();
+    }
 
     public int Count => Values.Count;
 }

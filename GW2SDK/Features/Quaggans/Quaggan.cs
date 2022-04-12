@@ -1,12 +1,11 @@
 ﻿using JetBrains.Annotations;
 
-namespace GW2SDK.Quaggans
-{
-    [PublicAPI]
-    public sealed record Quaggan
-    {
-        public string Id { get; init; } = "";
+namespace GW2SDK.Quaggans;
 
-        public string PictureHref { get; init; } = "";
-    }
+[PublicAPI]
+public sealed record Quaggan
+{
+    public string Id { get; init; } = "";
+
+    public string PictureHref { get; init; } = "";
 }

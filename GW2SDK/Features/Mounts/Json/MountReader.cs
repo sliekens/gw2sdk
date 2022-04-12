@@ -1,85 +1,86 @@
 ﻿using System;
 using System.Text.Json;
+
 using GW2SDK.Json;
+
 using JetBrains.Annotations;
 
-namespace GW2SDK.Mounts.Json
+namespace GW2SDK.Mounts.Json;
+
+[PublicAPI]
+public static class MountReader
 {
-    [PublicAPI]
-    public static class MountReader
+    public static Mount Read(JsonElement json, MissingMemberBehavior missingMemberBehavior)
     {
-        public static Mount Read(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+        RequiredMember<MountName> id = new("id");
+        RequiredMember<string> name = new("name");
+        RequiredMember<int> defaultSkin = new("default_skin");
+        RequiredMember<int> skins = new("skins");
+        RequiredMember<SkillReference> skills = new("skills");
+
+        foreach (var member in json.EnumerateObject())
         {
-            var id = new RequiredMember<MountName>("id");
-            var name = new RequiredMember<string>("name");
-            var defaultSkin = new RequiredMember<int>("default_skin");
-            var skins = new RequiredMember<int>("skins");
-            var skills = new RequiredMember<SkillReference>("skills");
-
-            foreach (var member in json.EnumerateObject())
+            if (member.NameEquals(id.Name))
             {
-                if (member.NameEquals(id.Name))
-                {
-                    id = id.From(member.Value);
-                }
-                else if (member.NameEquals(name.Name))
-                {
-                    name = name.From(member.Value);
-                }
-                else if (member.NameEquals(defaultSkin.Name))
-                {
-                    defaultSkin = defaultSkin.From(member.Value);
-                }
-                else if (member.NameEquals(skins.Name))
-                {
-                    skins = skins.From(member.Value);
-                }
-                else if (member.NameEquals(skills.Name))
-                {
-                    skills = skills.From(member.Value);
-                }
-                else if (missingMemberBehavior == MissingMemberBehavior.Error)
-                {
-                    throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
-                }
+                id = id.From(member.Value);
             }
-
-            return new Mount
+            else if (member.NameEquals(name.Name))
             {
-                Id = id.Select(value => MountNameReader.Read(value, missingMemberBehavior)),
-                Name = name.GetValue(),
-                DefaultSkin = defaultSkin.GetValue(),
-                Skins = skins.SelectMany(value => value.GetInt32()),
-                Skills = skills.SelectMany(value => ReadSkill(value, missingMemberBehavior))
-            };
+                name = name.From(member.Value);
+            }
+            else if (member.NameEquals(defaultSkin.Name))
+            {
+                defaultSkin = defaultSkin.From(member.Value);
+            }
+            else if (member.NameEquals(skins.Name))
+            {
+                skins = skins.From(member.Value);
+            }
+            else if (member.NameEquals(skills.Name))
+            {
+                skills = skills.From(member.Value);
+            }
+            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            {
+                throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
+            }
         }
 
-        private static SkillReference ReadSkill(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+        return new Mount
         {
-            var id = new RequiredMember<int>("id");
-            var slot = new RequiredMember<SkillSlot>("slot");
+            Id = id.Select(value => MountNameReader.Read(value, missingMemberBehavior)),
+            Name = name.GetValue(),
+            DefaultSkin = defaultSkin.GetValue(),
+            Skins = skins.SelectMany(value => value.GetInt32()),
+            Skills = skills.SelectMany(value => ReadSkill(value, missingMemberBehavior))
+        };
+    }
 
-            foreach (var member in json.EnumerateObject())
+    private static SkillReference ReadSkill(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    {
+        RequiredMember<int> id = new("id");
+        RequiredMember<SkillSlot> slot = new("slot");
+
+        foreach (var member in json.EnumerateObject())
+        {
+            if (member.NameEquals(id.Name))
             {
-                if (member.NameEquals(id.Name))
-                {
-                    id = id.From(member.Value);
-                }
-                else if (member.NameEquals(slot.Name))
-                {
-                    slot = slot.From(member.Value);
-                }
-                else if (missingMemberBehavior == MissingMemberBehavior.Error)
-                {
-                    throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
-                }
+                id = id.From(member.Value);
             }
-
-            return new SkillReference
+            else if (member.NameEquals(slot.Name))
             {
-                Id = id.GetValue(),
-                Slot = slot.GetValue(missingMemberBehavior)
-            };
+                slot = slot.From(member.Value);
+            }
+            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            {
+                throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
+            }
         }
+
+        return new SkillReference
+        {
+            Id = id.GetValue(),
+            Slot = slot.GetValue(missingMemberBehavior)
+        };
     }
 }

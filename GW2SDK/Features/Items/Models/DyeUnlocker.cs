@@ -1,10 +1,9 @@
 ﻿using JetBrains.Annotations;
 
-namespace GW2SDK.Items
+namespace GW2SDK.Items;
+
+[PublicAPI]
+public sealed record DyeUnlocker : Unlocker
 {
-    [PublicAPI]
-    public sealed record DyeUnlocker : Unlocker
-    {
-        public int ColorId { get; init; }
-    }
+    public int ColorId { get; init; }
 }

@@ -2,9 +2,10 @@
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
-using GW2SDK.Continents;
 using GW2SDK.Http;
 using GW2SDK.Http.Handlers;
+using GW2SDK.Maps;
+
 using Microsoft.Extensions.DependencyInjection;
 using Polly;
 using Polly.Timeout;
@@ -92,7 +93,7 @@ public class Container : IDisposable, IAsyncDisposable
             .AddHttpMessageHandler<ResourceNotFoundHandler>()
             .AddHttpMessageHandler<UnauthorizedMessageHandler>()
             .AddHttpMessageHandler<GatewayErrorHandler>()
-            .AddTypedClient<ContinentService>()
+            .AddTypedClient<WorldMap>()
             .AddTypedClient<JsonAchievementService>()
             .AddTypedClient<JsonFloorService>()
             .AddTypedClient<JsonItemPriceService>()

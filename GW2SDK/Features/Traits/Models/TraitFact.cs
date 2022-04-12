@@ -1,15 +1,15 @@
 ﻿using GW2SDK.Annotations;
+
 using JetBrains.Annotations;
 
-namespace GW2SDK.Traits
-{
-    [PublicAPI]
-    [Inheritable]
-    [DataTransferObject]
-    public record TraitFact
-    {
-        public string Text { get; init; } = "";
+namespace GW2SDK.Traits;
 
-        public string Icon { get; init; } = "";
-    }
+[PublicAPI]
+[Inheritable]
+[DataTransferObject]
+public record TraitFact
+{
+    public string Text { get; init; } = "";
+
+    public string Icon { get; init; } = "";
 }

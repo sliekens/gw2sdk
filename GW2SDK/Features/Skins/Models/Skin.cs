@@ -1,27 +1,28 @@
 ﻿using System;
 using System.Collections.Generic;
+
 using GW2SDK.Annotations;
+
 using JetBrains.Annotations;
 
-namespace GW2SDK.Skins
+namespace GW2SDK.Skins;
+
+[PublicAPI]
+[Inheritable]
+[DataTransferObject]
+public record Skin
 {
-    [PublicAPI]
-    [Inheritable]
-    [DataTransferObject]
-    public record Skin
-    {
-        public int Id { get; init; }
+    public int Id { get; init; }
 
-        public string Name { get; init; } = "";
+    public string Name { get; init; } = "";
 
-        public string Description { get; init; } = "";
+    public string Description { get; init; } = "";
 
-        public IReadOnlyCollection<SkinFlag> Flags { get; init; } = Array.Empty<SkinFlag>();
+    public IReadOnlyCollection<SkinFlag> Flags { get; init; } = Array.Empty<SkinFlag>();
 
-        public IReadOnlyCollection<SkinRestriction> Restrictions { get; init; } = Array.Empty<SkinRestriction>();
+    public IReadOnlyCollection<SkinRestriction> Restrictions { get; init; } = Array.Empty<SkinRestriction>();
 
-        public Rarity Rarity { get; init; }
+    public Rarity Rarity { get; init; }
 
-        public string? Icon { get; init; }
-    }
+    public string? Icon { get; init; }
 }

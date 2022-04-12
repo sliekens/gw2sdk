@@ -1,114 +1,115 @@
 ﻿using System;
 using System.Text.Json;
+
 using GW2SDK.Json;
+
 using JetBrains.Annotations;
 
-namespace GW2SDK.V2.Json
+namespace GW2SDK.V2.Json;
+
+[PublicAPI]
+public static class ApiInfoReader
 {
-    [PublicAPI]
-    public static class ApiInfoReader
+    public static ApiInfo Read(JsonElement json, MissingMemberBehavior missingMemberBehavior)
     {
-        public static ApiInfo Read(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+        RequiredMember<string> languages = new("langs");
+        RequiredMember<ApiRoute> routes = new("routes");
+        RequiredMember<ApiVersion> schemaVersions = new("schema_versions");
+
+        foreach (var member in json.EnumerateObject())
         {
-            var languages = new RequiredMember<string>("langs");
-            var routes = new RequiredMember<ApiRoute>("routes");
-            var schemaVersions = new RequiredMember<ApiVersion>("schema_versions");
-
-            foreach (var member in json.EnumerateObject())
+            if (member.NameEquals(languages.Name))
             {
-                if (member.NameEquals(languages.Name))
-                {
-                    languages = languages.From(member.Value);
-                }
-                else if (member.NameEquals(routes.Name))
-                {
-                    routes = routes.From(member.Value);
-                }
-                else if (member.NameEquals(schemaVersions.Name))
-                {
-                    schemaVersions = schemaVersions.From(member.Value);
-                }
-                else if (missingMemberBehavior == MissingMemberBehavior.Error)
-                {
-                    throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
-                }
+                languages = languages.From(member.Value);
             }
-
-            return new ApiInfo
+            else if (member.NameEquals(routes.Name))
             {
-                Languages = languages.SelectMany(value => value.GetStringRequired()),
-                Routes = routes.SelectMany(value => ReadApiRoute(value, missingMemberBehavior)),
-                SchemaVersions = schemaVersions.SelectMany(value => ReadApiVersion(value, missingMemberBehavior))
-            };
+                routes = routes.From(member.Value);
+            }
+            else if (member.NameEquals(schemaVersions.Name))
+            {
+                schemaVersions = schemaVersions.From(member.Value);
+            }
+            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            {
+                throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
+            }
         }
 
-        private static ApiRoute ReadApiRoute(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+        return new ApiInfo
         {
-            var path = new RequiredMember<string>("path");
-            var lang = new RequiredMember<bool>("lang");
-            var auth = new RequiredMember<bool>("auth");
-            var active = new RequiredMember<bool>("active");
+            Languages = languages.SelectMany(value => value.GetStringRequired()),
+            Routes = routes.SelectMany(value => ReadApiRoute(value, missingMemberBehavior)),
+            SchemaVersions = schemaVersions.SelectMany(value => ReadApiVersion(value, missingMemberBehavior))
+        };
+    }
 
-            foreach (var member in json.EnumerateObject())
+    private static ApiRoute ReadApiRoute(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    {
+        RequiredMember<string> path = new("path");
+        RequiredMember<bool> lang = new("lang");
+        RequiredMember<bool> auth = new("auth");
+        RequiredMember<bool> active = new("active");
+
+        foreach (var member in json.EnumerateObject())
+        {
+            if (member.NameEquals(path.Name))
             {
-                if (member.NameEquals(path.Name))
-                {
-                    path = path.From(member.Value);
-                }
-                else if (member.NameEquals(lang.Name))
-                {
-                    lang = lang.From(member.Value);
-                }
-                else if (member.NameEquals(auth.Name))
-                {
-                    auth = auth.From(member.Value);
-                }
-                else if (member.NameEquals(active.Name))
-                {
-                    active = active.From(member.Value);
-                }
-                else if (missingMemberBehavior == MissingMemberBehavior.Error)
-                {
-                    throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
-                }
+                path = path.From(member.Value);
             }
-
-            return new ApiRoute
+            else if (member.NameEquals(lang.Name))
             {
-                Path = path.GetValue(),
-                Multilingual = lang.GetValue(),
-                RequiresAuthorization = auth.GetValue(),
-                Active = active.GetValue()
-            };
+                lang = lang.From(member.Value);
+            }
+            else if (member.NameEquals(auth.Name))
+            {
+                auth = auth.From(member.Value);
+            }
+            else if (member.NameEquals(active.Name))
+            {
+                active = active.From(member.Value);
+            }
+            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            {
+                throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
+            }
         }
 
-        private static ApiVersion ReadApiVersion(JsonElement jsonElement, MissingMemberBehavior missingMemberBehavior)
+        return new ApiRoute
         {
-            var version = new RequiredMember<string>("v");
+            Path = path.GetValue(),
+            Multilingual = lang.GetValue(),
+            RequiresAuthorization = auth.GetValue(),
+            Active = active.GetValue()
+        };
+    }
 
-            var description = new RequiredMember<string>("desc");
+    private static ApiVersion ReadApiVersion(JsonElement jsonElement, MissingMemberBehavior missingMemberBehavior)
+    {
+        RequiredMember<string> version = new("v");
 
-            foreach (var member in jsonElement.EnumerateObject())
+        RequiredMember<string> description = new("desc");
+
+        foreach (var member in jsonElement.EnumerateObject())
+        {
+            if (member.NameEquals(version.Name))
             {
-                if (member.NameEquals(version.Name))
-                {
-                    version = version.From(member.Value);
-                }
-                else if (member.NameEquals(description.Name))
-                {
-                    description = description.From(member.Value);
-                }
-                else if (missingMemberBehavior == MissingMemberBehavior.Error)
-                {
-                    throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
-                }
+                version = version.From(member.Value);
             }
-
-            return new ApiVersion
+            else if (member.NameEquals(description.Name))
             {
-                Version = version.GetValue(),
-                Description = description.GetValue()
-            };
+                description = description.From(member.Value);
+            }
+            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            {
+                throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
+            }
         }
+
+        return new ApiVersion
+        {
+            Version = version.GetValue(),
+            Description = description.GetValue()
+        };
     }
 }

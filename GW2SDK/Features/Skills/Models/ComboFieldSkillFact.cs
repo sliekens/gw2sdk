@@ -1,10 +1,9 @@
 ﻿using JetBrains.Annotations;
 
-namespace GW2SDK.Skills
+namespace GW2SDK.Skills;
+
+[PublicAPI]
+public sealed record ComboFieldSkillFact : SkillFact
 {
-    [PublicAPI]
-    public sealed record ComboFieldSkillFact : SkillFact
-    {
-        public ComboFieldName Field { get; init; }
-    }
+    public ComboFieldName Field { get; init; }
 }

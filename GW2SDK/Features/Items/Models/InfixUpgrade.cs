@@ -1,18 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
+
 using GW2SDK.Annotations;
+
 using JetBrains.Annotations;
 
-namespace GW2SDK.Items
+namespace GW2SDK.Items;
+
+[PublicAPI]
+[DataTransferObject]
+public sealed record InfixUpgrade
 {
-    [PublicAPI]
-    [DataTransferObject]
-    public sealed record InfixUpgrade
-    {
-        public int ItemstatsId { get; init; }
+    public int ItemstatsId { get; init; }
 
-        public IReadOnlyCollection<UpgradeAttribute> Attributes { get; init; } = Array.Empty<UpgradeAttribute>();
+    public IReadOnlyCollection<UpgradeAttribute> Attributes { get; init; } = Array.Empty<UpgradeAttribute>();
 
-        public Buff? Buff { get; init; }
-    }
+    public Buff? Buff { get; init; }
 }
