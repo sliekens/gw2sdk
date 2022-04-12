@@ -90,4 +90,17 @@ public class ColorServiceTest
         Assert.Equal(3, actual.Count);
         Assert.Equal(3, actual.Context.PageSize);
     }
+
+    [Fact]
+    public async Task It_can_get_the_unlocked_dyes()
+    {
+        await using Composer services = new();
+        var sut = services.Resolve<ColorService>();
+        var accessToken = services.Resolve<ApiKeyFull>();
+
+        var actual = await sut.GetUnlockedDyes(accessToken.Key);
+
+        Assert.NotEmpty(actual.Value);
+        Assert.All(actual.Value, id => Assert.NotEqual(0, id));
+    }
 }
