@@ -1,6 +1,11 @@
-﻿using System.Threading.Tasks;
+﻿using System.Net.Http;
+using System.Threading.Tasks;
 
 using GW2SDK.Builds;
+using GW2SDK.Builds.Http;
+using GW2SDK.Builds.Json;
+using GW2SDK.Http;
+using GW2SDK.Json;
 using GW2SDK.Tests.TestInfrastructure;
 
 using Xunit;
@@ -9,12 +14,18 @@ namespace GW2SDK.Tests.Features.Builds;
 
 public class BuildServiceTest
 {
-    private static class BuildFact
+    [Fact]
+    public async Task Build_is_stuck()
     {
-        public static void Id_is_positive(Build actual)
-        {
-            Assert.InRange(actual.Id, 1, int.MaxValue);
-        }
+        await using Composer services = new();
+        var http = services.Resolve<HttpClient>();
+        using var response = await http.SendAsync(new BuildRequest(), HttpCompletionOption.ResponseHeadersRead);
+        using var json = await response.Content.ReadAsJsonAsync(default);
+        response.EnsureSuccessStatusCode();
+
+        var actual = BuildReader.Read(json.RootElement, MissingMemberBehavior.Error);
+
+        Assert.Equal(115267, actual.Id);
     }
 
     [Fact]
@@ -25,6 +36,6 @@ public class BuildServiceTest
 
         var actual = await sut.GetBuild();
 
-        BuildFact.Id_is_positive(actual.Value);
+        Assert.True(actual.Value.Id >= 127440);
     }
 }
