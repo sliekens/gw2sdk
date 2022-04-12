@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+
 using GW2SDK.Mounts;
 using GW2SDK.Tests.TestInfrastructure;
+
 using Xunit;
 
 namespace GW2SDK.Tests.Features.Mounts;
@@ -12,7 +14,7 @@ public class MountServiceTest
     [Fact]
     public async Task It_can_get_all_mounts()
     {
-        await using var services = new Composer();
+        await using Composer services = new();
         var sut = services.Resolve<MountService>();
 
         var actual = await sut.GetMounts();
@@ -28,7 +30,7 @@ public class MountServiceTest
     [Fact]
     public async Task It_can_get_all_mount_names()
     {
-        await using var services = new Composer();
+        await using Composer services = new();
         var sut = services.Resolve<MountService>();
 
         var actual = await sut.GetMountNames();
@@ -39,7 +41,7 @@ public class MountServiceTest
     [Fact]
     public async Task It_can_get_a_mount_by_name()
     {
-        await using var services = new Composer();
+        await using Composer services = new();
         var sut = services.Resolve<MountService>();
 
         const MountName name = MountName.Skyscale;
@@ -52,10 +54,10 @@ public class MountServiceTest
     [Fact]
     public async Task It_can_get_mounts_by_name()
     {
-        await using var services = new Composer();
+        await using Composer services = new();
         var sut = services.Resolve<MountService>();
 
-        var names = new[]
+        MountName[] names =
         {
             MountName.Raptor,
             MountName.Jackal,
@@ -73,7 +75,7 @@ public class MountServiceTest
     [Fact]
     public async Task It_can_get_mounts_by_page()
     {
-        await using var services = new Composer();
+        await using Composer services = new();
         var sut = services.Resolve<MountService>();
 
         var actual = await sut.GetMountsByPage(0, 3);
@@ -85,7 +87,7 @@ public class MountServiceTest
     [Fact]
     public async Task It_can_get_all_mount_skins()
     {
-        await using var services = new Composer();
+        await using Composer services = new();
         var sut = services.Resolve<MountService>();
 
         var actual = await sut.GetMountSkins();
@@ -96,7 +98,7 @@ public class MountServiceTest
     [Fact]
     public async Task It_can_get_all_mount_skin_ids()
     {
-        await using var services = new Composer();
+        await using Composer services = new();
         var sut = services.Resolve<MountService>();
 
         var actual = await sut.GetMountSkinsIndex();
@@ -107,7 +109,7 @@ public class MountServiceTest
     [Fact]
     public async Task It_can_get_a_mount_skin_by_id()
     {
-        await using var services = new Composer();
+        await using Composer services = new();
         var sut = services.Resolve<MountService>();
 
         const int mountSkinId = 1;
@@ -120,10 +122,10 @@ public class MountServiceTest
     [Fact]
     public async Task It_can_get_mount_skins_by_id()
     {
-        await using var services = new Composer();
+        await using Composer services = new();
         var sut = services.Resolve<MountService>();
 
-        var ids = new HashSet<int>
+        HashSet<int> ids = new()
         {
             1,
             2,
@@ -141,7 +143,7 @@ public class MountServiceTest
     [Fact]
     public async Task It_can_get_mount_skins_by_page()
     {
-        await using var services = new Composer();
+        await using Composer services = new();
         var sut = services.Resolve<MountService>();
 
         var actual = await sut.GetMountSkinsByPage(0, 3);

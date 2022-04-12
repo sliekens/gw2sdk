@@ -1,7 +1,6 @@
 ﻿using JetBrains.Annotations;
 
-namespace GW2SDK.Items
-{
-    [PublicAPI]
-    public sealed record Pistol : Weapon;
-}
+namespace GW2SDK.Items;
+
+[PublicAPI]
+public sealed record Pistol : Weapon;

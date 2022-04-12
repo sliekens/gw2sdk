@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+
 using GW2SDK.Commerce;
-using GW2SDK.Commerce.Listings;
-using GW2SDK.Commerce.Prices;
 using GW2SDK.Tests.TestInfrastructure;
+
 using Xunit;
 
 namespace GW2SDK.Tests.Features.Commerce;
@@ -14,10 +14,10 @@ public class TradingPostTest
     [Fact]
     public async Task It_can_calculate_gold_for_gems()
     {
-        await using var services = new Composer();
+        await using Composer services = new();
         var sut = services.Resolve<TradingPost>();
 
-        var coins = new Coin(100, 0, 0);
+        Coin coins = new(100, 0, 0);
 
         var actual = await sut.ExchangeGoldForGems(coins);
 
@@ -28,7 +28,7 @@ public class TradingPostTest
     [Fact]
     public async Task It_can_calculate_gems_for_gold()
     {
-        await using var services = new Composer();
+        await using Composer services = new();
         var sut = services.Resolve<TradingPost>();
 
         const int gems = 800;
@@ -42,7 +42,7 @@ public class TradingPostTest
     [Fact]
     public async Task It_can_get_all_item_price_ids()
     {
-        await using var services = new Composer();
+        await using Composer services = new();
         var sut = services.Resolve<TradingPost>();
 
         var actual = await sut.GetItemPricesIndex();
@@ -53,7 +53,7 @@ public class TradingPostTest
     [Fact]
     public async Task It_can_get_an_item_price_by_id()
     {
-        await using var services = new Composer();
+        await using Composer services = new();
         var sut = services.Resolve<TradingPost>();
 
         const int itemId = 24;
@@ -72,10 +72,10 @@ public class TradingPostTest
     [Fact]
     public async Task It_can_get_item_prices_by_id()
     {
-        await using var services = new Composer();
+        await using Composer services = new();
         var sut = services.Resolve<TradingPost>();
 
-        var ids = new HashSet<int>
+        HashSet<int> ids = new()
         {
             24,
             19699,
@@ -95,7 +95,7 @@ public class TradingPostTest
         "This test is best used interactively, otherwise it will hit rate limits in this as well as other tests.")]
     public async Task It_can_get_all_item_prices()
     {
-        await using var services = new Composer();
+        await using Composer services = new();
         var sut = services.Resolve<TradingPost>();
 
         await foreach (var actual in sut.GetItemPrices())
@@ -119,7 +119,7 @@ public class TradingPostTest
                 Assert.True(actual.BestBid > Coin.Zero);
             }
 
-            if ((ItemPrice) actual is { TotalDemand: 0 } or { TotalSupply: 0 })
+            if (actual is { TotalDemand: 0 } or { TotalSupply: 0 })
             {
                 Assert.Equal(Coin.Zero, actual.BidAskSpread);
             }
@@ -133,7 +133,7 @@ public class TradingPostTest
     [Fact]
     public async Task It_can_get_all_order_book_ids()
     {
-        await using var services = new Composer();
+        await using Composer services = new();
         var sut = services.Resolve<TradingPost>();
 
         var actual = await sut.GetOrderBooksIndex();
@@ -144,7 +144,7 @@ public class TradingPostTest
     [Fact]
     public async Task It_can_get_an_order_book_by_id()
     {
-        await using var services = new Composer();
+        await using Composer services = new();
         var sut = services.Resolve<TradingPost>();
 
         const int itemId = 24;
@@ -185,10 +185,10 @@ public class TradingPostTest
     [Fact]
     public async Task It_can_get_order_books_by_id()
     {
-        await using var services = new Composer();
+        await using Composer services = new();
         var sut = services.Resolve<TradingPost>();
 
-        var ids = new HashSet<int>
+        HashSet<int> ids = new()
         {
             24,
             19699,
@@ -208,7 +208,7 @@ public class TradingPostTest
         "This test is best used interactively, otherwise it will hit rate limits in this as well as other tests.")]
     public async Task It_can_get_all_order_books()
     {
-        await using var services = new Composer();
+        await using Composer services = new();
         var sut = services.Resolve<TradingPost>();
 
         await foreach (var actual in sut.GetOrderBooks())
@@ -250,7 +250,7 @@ public class TradingPostTest
                     });
             }
 
-            if ((OrderBook) actual is { TotalDemand: 0 } or { TotalSupply: 0 })
+            if (actual is { TotalDemand: 0 } or { TotalSupply: 0 })
             {
                 Assert.Equal(Coin.Zero, actual.BidAskSpread);
             }
@@ -264,7 +264,7 @@ public class TradingPostTest
     [Fact]
     public async Task It_can_get_your_delivery_box()
     {
-        await using var service = new Composer();
+        await using Composer service = new();
         var accessToken = service.Resolve<ApiKeyFull>();
         var sut = service.Resolve<TradingPost>();
 
@@ -277,7 +277,7 @@ public class TradingPostTest
     [Fact]
     public async Task It_can_get_your_current_bids()
     {
-        await using var service = new Composer();
+        await using Composer service = new();
         var accessToken = service.Resolve<ApiKeyFull>();
         var sut = service.Resolve<TradingPost>();
 
@@ -289,7 +289,7 @@ public class TradingPostTest
     [Fact]
     public async Task It_can_get_your_current_asks()
     {
-        await using var service = new Composer();
+        await using Composer service = new();
         var accessToken = service.Resolve<ApiKeyFull>();
         var sut = service.Resolve<TradingPost>();
 
@@ -301,7 +301,7 @@ public class TradingPostTest
     [Fact]
     public async Task It_can_get_your_purchases()
     {
-        await using var service = new Composer();
+        await using Composer service = new();
         var accessToken = service.Resolve<ApiKeyFull>();
         var sut = service.Resolve<TradingPost>();
 
@@ -313,7 +313,7 @@ public class TradingPostTest
     [Fact]
     public async Task It_can_get_your_sales()
     {
-        await using var service = new Composer();
+        await using Composer service = new();
         var accessToken = service.Resolve<ApiKeyFull>();
         var sut = service.Resolve<TradingPost>();
 

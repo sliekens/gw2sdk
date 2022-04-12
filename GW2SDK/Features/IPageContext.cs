@@ -1,26 +1,25 @@
 ﻿using JetBrains.Annotations;
 
-namespace GW2SDK
+namespace GW2SDK;
+
+[PublicAPI]
+public interface IPageContext
 {
-    [PublicAPI]
-    public interface IPageContext
-    {
-        int PageTotal { get; }
+    int PageTotal { get; }
 
-        int PageSize { get; }
+    int PageSize { get; }
 
-        int ResultTotal { get; }
+    int ResultTotal { get; }
 
-        int ResultCount { get; }
+    int ResultCount { get; }
 
-        HyperlinkReference Previous { get; }
+    HyperlinkReference Previous { get; }
 
-        HyperlinkReference Next { get; }
+    HyperlinkReference Next { get; }
 
-        HyperlinkReference First { get; }
+    HyperlinkReference First { get; }
 
-        HyperlinkReference Self { get; }
+    HyperlinkReference Self { get; }
 
-        HyperlinkReference Last { get; }
-    }
+    HyperlinkReference Last { get; }
 }

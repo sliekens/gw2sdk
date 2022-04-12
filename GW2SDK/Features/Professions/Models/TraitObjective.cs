@@ -1,10 +1,9 @@
 ﻿using JetBrains.Annotations;
 
-namespace GW2SDK.Professions
+namespace GW2SDK.Professions;
+
+[PublicAPI]
+public sealed record TraitObjective : TrainingObjective
 {
-    [PublicAPI]
-    public sealed record TraitObjective : TrainingObjective
-    {
-        public int TraitId { get; init; }
-    }
+    public int TraitId { get; init; }
 }

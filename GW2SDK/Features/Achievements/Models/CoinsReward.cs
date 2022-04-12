@@ -1,10 +1,9 @@
 ﻿using JetBrains.Annotations;
 
-namespace GW2SDK.Achievements
+namespace GW2SDK.Achievements.Models;
+
+[PublicAPI]
+public sealed record CoinsReward : AchievementReward
 {
-    [PublicAPI]
-    public sealed record CoinsReward : AchievementReward
-    {
-        public Coin Coins { get; init; }
-    }
+    public Coin Coins { get; init; }
 }

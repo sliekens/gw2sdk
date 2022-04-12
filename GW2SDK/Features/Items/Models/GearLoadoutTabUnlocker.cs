@@ -1,7 +1,6 @@
 ﻿using JetBrains.Annotations;
 
-namespace GW2SDK.Items
-{
-    [PublicAPI]
-    public sealed record GearLoadoutTabUnlocker : Unlocker;
-}
+namespace GW2SDK.Items;
+
+[PublicAPI]
+public sealed record GearLoadoutTabUnlocker : Unlocker;

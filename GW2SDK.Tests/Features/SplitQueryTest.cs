@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+
 using Xunit;
 
 namespace GW2SDK.Tests.Features;
@@ -17,7 +18,7 @@ public class SplitQueryTest
     {
         // Check if cancellation works in both scenarios where the buffer size is smaller or larger than the index
         // because the implementation is slightly optimized for the case where buffering is not needed
-        var cancellationTokenSource = new CancellationTokenSource();
+        CancellationTokenSource cancellationTokenSource = new();
 
         var index = Enumerable.Range(1, resultTotal)
             .ToHashSet();
@@ -28,7 +29,7 @@ public class SplitQueryTest
             {
                 var found = records.Where(record => keys.Contains(record.Id))
                     .ToHashSet();
-                return Task.FromResult((IReplicaSet<StubRecord>) new StubReplica(found));
+                return Task.FromResult((IReplicaSet<StubRecord>)new StubReplica(found));
             },
             bufferSize);
 
@@ -63,7 +64,7 @@ public class SplitQueryTest
         {
             var found = records.Where(record => keys.Contains(record.Id))
                 .ToHashSet();
-            return Task.FromResult((IReplicaSet<StubRecord>) new StubReplica(found));
+            return Task.FromResult((IReplicaSet<StubRecord>)new StubReplica(found));
         });
 
         var actual = await sut.QueryAsync(index, bufferSize)
@@ -91,7 +92,7 @@ public class SplitQueryTest
         {
             var found = records.Where(record => keys.Contains(record.Id))
                 .ToHashSet();
-            return Task.FromResult((IReplicaSet<StubRecord>) new StubReplica(found));
+            return Task.FromResult((IReplicaSet<StubRecord>)new StubReplica(found));
         });
 
         var actual = await sut.QueryAsync(index)
@@ -113,7 +114,7 @@ internal sealed class StubReplica : IReplicaSet<StubRecord>
 {
     public StubReplica(
 #if NET
-            IReadOnlySet<StubRecord> values
+        IReadOnlySet<StubRecord> values
 #else
         IReadOnlyCollection<StubRecord> values
 #endif
@@ -130,16 +131,22 @@ internal sealed class StubReplica : IReplicaSet<StubRecord>
     public DateTimeOffset? LastModified { get; }
 
 #if NET
-        public IReadOnlySet<StubRecord> Values { get; }
+    public IReadOnlySet<StubRecord> Values { get; }
 #else
     public IReadOnlyCollection<StubRecord> Values { get; }
 #endif
 
     public ICollectionContext Context { get; }
 
-    public IEnumerator<StubRecord> GetEnumerator() => Values.GetEnumerator();
+    public IEnumerator<StubRecord> GetEnumerator()
+    {
+        return Values.GetEnumerator();
+    }
 
-    IEnumerator IEnumerable.GetEnumerator() => ((IEnumerable) Values).GetEnumerator();
+    IEnumerator IEnumerable.GetEnumerator()
+    {
+        return ((IEnumerable)Values).GetEnumerator();
+    }
 
     public int Count => Values.Count;
 }

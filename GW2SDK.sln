@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.28803.352
+# Visual Studio Version 17
+VisualStudioVersion = 17.1.32328.378
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GW2SDK", "GW2SDK\GW2SDK.csproj", "{94A2B678-DEB4-42F2-B5BA-935C1FB6DB19}"
 EndProject
@@ -16,6 +16,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "root", "root", "{63243B77-9BE8-41CE-B2F6-B306E3F150CB}"
 	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
 		.gitattributes = .gitattributes
 		coverletArgs.runsettings = coverletArgs.runsettings
 		Directory.Build.props = Directory.Build.props
@@ -34,7 +35,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApiVersionInfo", "samples\A
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MostVersatileMaterials", "samples\MostVersatileMaterials\MostVersatileMaterials.csproj", "{B374256A-3BF9-41AC-B68E-CA8FA39CA328}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mumble", "samples\Mumble\Mumble.csproj", "{506EA451-0D44-4B1F-BF58-ACB7BC312AEA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mumble", "samples\Mumble\Mumble.csproj", "{506EA451-0D44-4B1F-BF58-ACB7BC312AEA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

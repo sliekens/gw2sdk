@@ -1,84 +1,85 @@
 ﻿using System;
 using System.Text.Json;
+
 using GW2SDK.Json;
+
 using JetBrains.Annotations;
 
-namespace GW2SDK.Mounts.Json
+namespace GW2SDK.Mounts.Json;
+
+[PublicAPI]
+public static class MountSkinReader
 {
-    [PublicAPI]
-    public static class MountSkinReader
+    public static MountSkin Read(JsonElement json, MissingMemberBehavior missingMemberBehavior)
     {
-        public static MountSkin Read(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+        RequiredMember<int> id = new("id");
+        RequiredMember<string> name = new("name");
+        RequiredMember<string> icon = new("icon");
+        RequiredMember<DyeSlot> dyeSlots = new("dye_slots");
+        RequiredMember<MountName> mount = new("mount");
+
+        foreach (var member in json.EnumerateObject())
         {
-            var id = new RequiredMember<int>("id");
-            var name = new RequiredMember<string>("name");
-            var icon = new RequiredMember<string>("icon");
-            var dyeSlots = new RequiredMember<DyeSlot>("dye_slots");
-            var mount = new RequiredMember<MountName>("mount");
-
-            foreach (var member in json.EnumerateObject())
+            if (member.NameEquals(id.Name))
             {
-                if (member.NameEquals(id.Name))
-                {
-                    id = id.From(member.Value);
-                }
-                else if (member.NameEquals(name.Name))
-                {
-                    name = name.From(member.Value);
-                }
-                else if (member.NameEquals(icon.Name))
-                {
-                    icon = icon.From(member.Value);
-                }
-                else if (member.NameEquals(dyeSlots.Name))
-                {
-                    dyeSlots = dyeSlots.From(member.Value);
-                }
-                else if (member.NameEquals(mount.Name))
-                {
-                    mount = mount.From(member.Value);
-                }
-                else if (missingMemberBehavior == MissingMemberBehavior.Error)
-                {
-                    throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
-                }
+                id = id.From(member.Value);
             }
-
-            return new MountSkin
+            else if (member.NameEquals(name.Name))
             {
-                Id = id.GetValue(),
-                Name = name.GetValue(),
-                Icon = icon.GetValue(),
-                DyeSlots = dyeSlots.SelectMany(value => ReadDyeSlot(value, missingMemberBehavior)),
-                Mount = mount.Select(value => MountNameReader.Read(value, missingMemberBehavior))
-            };
+                name = name.From(member.Value);
+            }
+            else if (member.NameEquals(icon.Name))
+            {
+                icon = icon.From(member.Value);
+            }
+            else if (member.NameEquals(dyeSlots.Name))
+            {
+                dyeSlots = dyeSlots.From(member.Value);
+            }
+            else if (member.NameEquals(mount.Name))
+            {
+                mount = mount.From(member.Value);
+            }
+            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            {
+                throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
+            }
         }
 
-        private static DyeSlot ReadDyeSlot(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+        return new MountSkin
         {
-            var colorId = new RequiredMember<int>("color_id");
-            var material = new RequiredMember<Material>("material");
-            foreach (var member in json.EnumerateObject())
-            {
-                if (member.NameEquals(colorId.Name))
-                {
-                    colorId = colorId.From(member.Value);
-                }
-                else if (member.NameEquals(material.Name))
-                {
-                    material = material.From(member.Value);
-                }
-                else if (missingMemberBehavior == MissingMemberBehavior.Error)
-                {
-                    throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
-                }
-            }
+            Id = id.GetValue(),
+            Name = name.GetValue(),
+            Icon = icon.GetValue(),
+            DyeSlots = dyeSlots.SelectMany(value => ReadDyeSlot(value, missingMemberBehavior)),
+            Mount = mount.Select(value => MountNameReader.Read(value, missingMemberBehavior))
+        };
+    }
 
-            return new DyeSlot
+    private static DyeSlot ReadDyeSlot(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    {
+        RequiredMember<int> colorId = new("color_id");
+        RequiredMember<Material> material = new("material");
+        foreach (var member in json.EnumerateObject())
+        {
+            if (member.NameEquals(colorId.Name))
             {
-                ColorId = colorId.GetValue(),
-                Material = material.GetValue(missingMemberBehavior)
-            };
+                colorId = colorId.From(member.Value);
+            }
+            else if (member.NameEquals(material.Name))
+            {
+                material = material.From(member.Value);
+            }
+            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            {
+                throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
+            }
         }
+
+        return new DyeSlot
+        {
+            ColorId = colorId.GetValue(),
+            Material = material.GetValue(missingMemberBehavior)
+        };
     }
 }

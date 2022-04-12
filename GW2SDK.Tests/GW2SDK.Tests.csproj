@@ -59,7 +59,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Features\Accounts.WorldBosses\" />
+      <Folder Include="Features\WorldBosses\" />
     </ItemGroup>
 
 </Project>

@@ -1,10 +1,10 @@
 ﻿using GW2SDK.Annotations;
+
 using JetBrains.Annotations;
 
-namespace GW2SDK.Achievements
-{
-    [PublicAPI]
-    [Inheritable]
-    [DataTransferObject]
-    public record AchievementBit;
-}
+namespace GW2SDK.Achievements.Models;
+
+[PublicAPI]
+[Inheritable]
+[DataTransferObject]
+public record AchievementBit;

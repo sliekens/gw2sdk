@@ -1,10 +1,9 @@
 ﻿using JetBrains.Annotations;
 
-namespace GW2SDK.Skills
+namespace GW2SDK.Skills;
+
+[PublicAPI]
+public sealed record PercentSkillFact : SkillFact
 {
-    [PublicAPI]
-    public sealed record PercentSkillFact : SkillFact
-    {
-        public double Percent { get; init; }
-    }
+    public double Percent { get; init; }
 }

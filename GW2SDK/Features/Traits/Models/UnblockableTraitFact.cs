@@ -1,12 +1,12 @@
 ﻿using GW2SDK.Annotations;
+
 using JetBrains.Annotations;
 
-namespace GW2SDK.Traits
+namespace GW2SDK.Traits;
+
+[PublicAPI]
+[DataTransferObject]
+public sealed record UnblockableTraitFact : TraitFact
 {
-    [PublicAPI]
-    [DataTransferObject]
-    public sealed record UnblockableTraitFact : TraitFact
-    {
-        public bool Value { get; init; }
-    }
+    public bool Value { get; init; }
 }

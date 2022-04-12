@@ -1,12 +1,11 @@
 ﻿using JetBrains.Annotations;
 
-namespace GW2SDK.Achievements
-{
-    [PublicAPI]
-    public sealed record ItemReward : AchievementReward
-    {
-        public int Id { get; init; }
+namespace GW2SDK.Achievements.Models;
 
-        public int Count { get; init; }
-    }
+[PublicAPI]
+public sealed record ItemReward : AchievementReward
+{
+    public int Id { get; init; }
+
+    public int Count { get; init; }
 }

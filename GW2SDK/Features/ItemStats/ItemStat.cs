@@ -1,18 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
+
 using GW2SDK.Annotations;
+
 using JetBrains.Annotations;
 
-namespace GW2SDK.ItemStats
+namespace GW2SDK.ItemStats;
+
+[PublicAPI]
+[DataTransferObject]
+public sealed record ItemStat
 {
-    [PublicAPI]
-    [DataTransferObject]
-    public sealed record ItemStat
-    {
-        public int Id { get; init; }
+    public int Id { get; init; }
 
-        public string Name { get; init; } = "";
+    public string Name { get; init; } = "";
 
-        public IReadOnlyCollection<ItemStatAttribute> Attributes { get; init; } = Array.Empty<ItemStatAttribute>();
-    }
+    public IReadOnlyCollection<ItemStatAttribute> Attributes { get; init; } = Array.Empty<ItemStatAttribute>();
 }

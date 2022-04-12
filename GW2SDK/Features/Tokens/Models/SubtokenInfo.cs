@@ -1,16 +1,16 @@
 using System;
 using System.Collections.Generic;
+
 using JetBrains.Annotations;
 
-namespace GW2SDK.Tokens
+namespace GW2SDK.Tokens;
+
+[PublicAPI]
+public sealed record SubtokenInfo : TokenInfo
 {
-    [PublicAPI]
-    public sealed record SubtokenInfo : TokenInfo
-    {
-        public DateTimeOffset ExpiresAt { get; init; }
+    public DateTimeOffset ExpiresAt { get; init; }
 
-        public DateTimeOffset IssuedAt { get; init; }
+    public DateTimeOffset IssuedAt { get; init; }
 
-        public IReadOnlyCollection<Uri>? Urls { get; init; }
-    }
+    public IReadOnlyCollection<Uri>? Urls { get; init; }
 }

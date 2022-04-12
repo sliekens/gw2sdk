@@ -1,10 +1,9 @@
 ﻿using JetBrains.Annotations;
 
-namespace GW2SDK.Skills
+namespace GW2SDK.Skills;
+
+[PublicAPI]
+public sealed record NumberSkillFact : SkillFact
 {
-    [PublicAPI]
-    public sealed record NumberSkillFact : SkillFact
-    {
-        public int Value { get; init; }
-    }
+    public int Value { get; init; }
 }
