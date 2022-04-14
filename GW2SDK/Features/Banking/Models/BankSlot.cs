@@ -4,7 +4,7 @@ using GW2SDK.Annotations;
 
 using JetBrains.Annotations;
 
-namespace GW2SDK.Banking;
+namespace GW2SDK.Banking.Models;
 
 [PublicAPI]
 [DataTransferObject]

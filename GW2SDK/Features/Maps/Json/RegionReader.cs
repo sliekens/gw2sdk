@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Text.Json;
 
 using GW2SDK.Json;
+using GW2SDK.Maps.Models;
 
 using JetBrains.Annotations;
 
@@ -12,7 +13,7 @@ namespace GW2SDK.Maps.Json;
 [PublicAPI]
 public static class RegionReader
 {
-    public static Region Read(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    public static WorldRegion Read(JsonElement json, MissingMemberBehavior missingMemberBehavior)
     {
         RequiredMember<string> name = new("name");
         RequiredMember<PointF> labelCoordinates = new("label_coord");
@@ -47,7 +48,7 @@ public static class RegionReader
             }
         }
 
-        return new Region
+        return new WorldRegion
         {
             Id = id.GetValue(),
             Name = name.GetValue(),

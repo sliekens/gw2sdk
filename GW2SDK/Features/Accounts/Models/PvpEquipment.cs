@@ -5,7 +5,7 @@ using GW2SDK.Annotations;
 
 using JetBrains.Annotations;
 
-namespace GW2SDK.Accounts;
+namespace GW2SDK.Accounts.Models;
 
 [PublicAPI]
 [DataTransferObject]

@@ -8,6 +8,7 @@ using GW2SDK.Http;
 using GW2SDK.Json;
 using GW2SDK.Skins.Http;
 using GW2SDK.Skins.Json;
+using GW2SDK.Skins.Models;
 
 using JetBrains.Annotations;
 

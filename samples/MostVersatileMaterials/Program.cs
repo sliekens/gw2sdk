@@ -9,6 +9,7 @@ using GW2SDK.Crafting;
 using GW2SDK.Crafting.Models;
 using GW2SDK.Http;
 using GW2SDK.Items;
+using GW2SDK.Items.Models;
 
 using Spectre.Console;
 
@@ -31,7 +32,7 @@ internal class Program
         http.UseSchemaVersion(SchemaVersion.Recommended);
 
         var recipesService = new CraftingStation(http);
-        var itemsService = new ItemService(http);
+        var itemsService = new ItemQuery(http);
 
         var (ingredients, recipes) = await Progress()
             .StartAsync(async ctx =>
@@ -137,14 +138,14 @@ internal class Program
 
     private static async Task<List<Item>> GetItems(
         IReadOnlySet<int> itemIds,
-        ItemService itemsService,
+        ItemQuery itemQuery,
         ProgressTask progress
     )
     {
         var items = new List<Item>(itemIds.Count);
 
         progress.StartTask();
-        await foreach (var item in itemsService.GetItemsByIds(itemIds,
+        await foreach (var item in itemQuery.GetItemsByIds(itemIds,
                            progress: new Progress<ICollectionContext>(ctx => UpdateProgress(ctx, progress))))
         {
             items.Add(item);

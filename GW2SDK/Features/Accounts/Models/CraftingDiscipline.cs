@@ -1,6 +1,6 @@
 ﻿using JetBrains.Annotations;
 
-namespace GW2SDK.Accounts;
+namespace GW2SDK.Accounts.Models;
 
 [PublicAPI]
 public sealed record CraftingDiscipline

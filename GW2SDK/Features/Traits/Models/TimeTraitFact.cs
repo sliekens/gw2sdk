@@ -4,7 +4,7 @@ using GW2SDK.Annotations;
 
 using JetBrains.Annotations;
 
-namespace GW2SDK.Traits;
+namespace GW2SDK.Traits.Models;
 
 [PublicAPI]
 [DataTransferObject]

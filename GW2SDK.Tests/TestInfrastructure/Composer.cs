@@ -4,7 +4,6 @@ using System.Threading.Tasks;
 using GW2SDK.Accounts;
 using GW2SDK.Achievements;
 using GW2SDK.Banking;
-using GW2SDK.Builds;
 using GW2SDK.Colors;
 using GW2SDK.Commerce;
 using GW2SDK.Crafting;
@@ -14,6 +13,7 @@ using GW2SDK.ItemStats;
 using GW2SDK.MailCarriers;
 using GW2SDK.Maps;
 using GW2SDK.Masteries;
+using GW2SDK.Meta;
 using GW2SDK.Mounts;
 using GW2SDK.Professions;
 using GW2SDK.Quaggans;
@@ -23,7 +23,6 @@ using GW2SDK.Specializations;
 using GW2SDK.Stories;
 using GW2SDK.Tokens;
 using GW2SDK.Traits;
-using GW2SDK.V2;
 using GW2SDK.WorldBosses;
 
 namespace GW2SDK.Tests.TestInfrastructure
@@ -72,19 +71,19 @@ namespace GW2SDK.Tests.TestInfrastructure
                 return httpClientFactory.CreateClient("GW2SDK");
             }
 
-            if (serviceType == typeof(Banker))
+            if (serviceType == typeof(BankQuery))
             {
-                return new Banker(Resolve<HttpClient>());
+                return new BankQuery(Resolve<HttpClient>());
             }
 
-            if (serviceType == typeof(Account))
+            if (serviceType == typeof(AccountQuery))
             {
-                return new Account(Resolve<HttpClient>());
+                return new AccountQuery(Resolve<HttpClient>());
             }
 
-            if (serviceType == typeof(AchievementService))
+            if (serviceType == typeof(AchievementQuery))
             {
-                return new AchievementService(Resolve<HttpClient>());
+                return new AchievementQuery(Resolve<HttpClient>());
             }
 
             if (serviceType == typeof(StoryJournal))
@@ -92,14 +91,9 @@ namespace GW2SDK.Tests.TestInfrastructure
                 return new StoryJournal(Resolve<HttpClient>());
             }
 
-            if (serviceType == typeof(BuildService))
+            if (serviceType == typeof(DyeQuery))
             {
-                return new BuildService(Resolve<HttpClient>());
-            }
-
-            if (serviceType == typeof(ColorService))
-            {
-                return new ColorService(Resolve<HttpClient>());
+                return new DyeQuery(Resolve<HttpClient>());
             }
 
             if (serviceType == typeof(TradingPost))
@@ -107,9 +101,9 @@ namespace GW2SDK.Tests.TestInfrastructure
                 return new TradingPost(Resolve<HttpClient>());
             }
 
-            if (serviceType == typeof(WorldMap))
+            if (serviceType == typeof(MapQuery))
             {
-                return new WorldMap(Resolve<HttpClient>());
+                return new MapQuery(Resolve<HttpClient>());
             }
 
             if (serviceType == typeof(Wallet))
@@ -117,14 +111,14 @@ namespace GW2SDK.Tests.TestInfrastructure
                 return new Wallet(Resolve<HttpClient>());
             }
 
-            if (serviceType == typeof(ItemService))
+            if (serviceType == typeof(ItemQuery))
             {
-                return new ItemService(Resolve<HttpClient>());
+                return new ItemQuery(Resolve<HttpClient>());
             }
 
-            if (serviceType == typeof(MailCarrierService))
+            if (serviceType == typeof(MailCarrierQuery))
             {
-                return new MailCarrierService(Resolve<HttpClient>());
+                return new MailCarrierQuery(Resolve<HttpClient>());
             }
 
             if (serviceType == typeof(CraftingStation))
@@ -137,59 +131,59 @@ namespace GW2SDK.Tests.TestInfrastructure
                 return new Wardrobe(Resolve<HttpClient>());
             }
 
-            if (serviceType == typeof(TokenService))
+            if (serviceType == typeof(TokenProvider))
             {
-                return new TokenService(Resolve<HttpClient>());
+                return new TokenProvider(Resolve<HttpClient>());
             }
 
-            if (serviceType == typeof(TraitService))
+            if (serviceType == typeof(TraitQuery))
             {
-                return new TraitService(Resolve<HttpClient>());
+                return new TraitQuery(Resolve<HttpClient>());
             }
 
-            if (serviceType == typeof(ApiInfoService))
+            if (serviceType == typeof(MetaQuery))
             {
-                return new ApiInfoService(Resolve<HttpClient>());
+                return new MetaQuery(Resolve<HttpClient>());
             }
 
-            if (serviceType == typeof(ProfessionService))
+            if (serviceType == typeof(ProfessionQuery))
             {
-                return new ProfessionService(Resolve<HttpClient>());
+                return new ProfessionQuery(Resolve<HttpClient>());
             }
 
-            if (serviceType == typeof(ItemStatService))
+            if (serviceType == typeof(ItemStatQuery))
             {
-                return new ItemStatService(Resolve<HttpClient>());
+                return new ItemStatQuery(Resolve<HttpClient>());
             }
 
-            if (serviceType == typeof(SkillService))
+            if (serviceType == typeof(SkillQuery))
             {
-                return new SkillService(Resolve<HttpClient>());
+                return new SkillQuery(Resolve<HttpClient>());
             }
 
-            if (serviceType == typeof(WorldBossService))
+            if (serviceType == typeof(WorldBossQuery))
             {
-                return new WorldBossService(Resolve<HttpClient>());
+                return new WorldBossQuery(Resolve<HttpClient>());
             }
 
-            if (serviceType == typeof(MasteryService))
+            if (serviceType == typeof(MasteryQuery))
             {
-                return new MasteryService(Resolve<HttpClient>());
+                return new MasteryQuery(Resolve<HttpClient>());
             }
 
-            if (serviceType == typeof(SpecializationService))
+            if (serviceType == typeof(SpecializationQuery))
             {
-                return new SpecializationService(Resolve<HttpClient>());
+                return new SpecializationQuery(Resolve<HttpClient>());
             }
 
-            if (serviceType == typeof(MountService))
+            if (serviceType == typeof(MountQuery))
             {
-                return new MountService(Resolve<HttpClient>());
+                return new MountQuery(Resolve<HttpClient>());
             }
 
-            if (serviceType == typeof(QuagganService))
+            if (serviceType == typeof(QuagganQuery))
             {
-                return new QuagganService(Resolve<HttpClient>());
+                return new QuagganQuery(Resolve<HttpClient>());
             }
 
             if (serviceType == typeof(Wallet))

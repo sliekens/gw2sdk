@@ -3,7 +3,7 @@ using System.Linq;
 
 using JetBrains.Annotations;
 
-namespace GW2SDK.Banking;
+namespace GW2SDK.Banking.Models;
 
 [PublicAPI]
 public sealed record MaterialCategory

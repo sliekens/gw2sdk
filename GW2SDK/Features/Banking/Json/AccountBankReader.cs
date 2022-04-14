@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text.Json;
 
+using GW2SDK.Banking.Models;
 using GW2SDK.Json;
 
 using JetBrains.Annotations;

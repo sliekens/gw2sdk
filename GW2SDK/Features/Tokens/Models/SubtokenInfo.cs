@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 using JetBrains.Annotations;
 
-namespace GW2SDK.Tokens;
+namespace GW2SDK.Tokens.Models;
 
 [PublicAPI]
 public sealed record SubtokenInfo : TokenInfo

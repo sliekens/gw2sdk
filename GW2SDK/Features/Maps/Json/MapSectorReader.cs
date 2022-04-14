@@ -3,6 +3,7 @@ using System.Drawing;
 using System.Text.Json;
 
 using GW2SDK.Json;
+using GW2SDK.Maps.Models;
 
 using JetBrains.Annotations;
 

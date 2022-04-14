@@ -1,6 +1,7 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 
 using GW2SDK.Items;
+using GW2SDK.Items.Models;
 
 using Xunit;
 

@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Text.Json;
 
 using GW2SDK.Json;
+using GW2SDK.Maps.Models;
 
 using JetBrains.Annotations;
 
@@ -16,7 +17,7 @@ public static class FloorReader
     {
         RequiredMember<SizeF> textureDimensions = new("texture_dims");
         OptionalMember<ContinentRectangle> clampedView = new("clamped_view");
-        RequiredMember<Dictionary<int, Region>> regions = new("regions");
+        RequiredMember<Dictionary<int, WorldRegion>> regions = new("regions");
         RequiredMember<int> id = new("id");
         foreach (var member in json.EnumerateObject())
         {
@@ -82,9 +83,9 @@ public static class FloorReader
         };
     }
 
-    private static Dictionary<int, Region> ReadRegions(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    private static Dictionary<int, WorldRegion> ReadRegions(JsonElement json, MissingMemberBehavior missingMemberBehavior)
     {
-        Dictionary<int, Region> regions = new();
+        Dictionary<int, WorldRegion> regions = new();
         foreach (var member in json.EnumerateObject())
         {
             if (int.TryParse(member.Name, out var id))

@@ -2,6 +2,7 @@
 using System.Threading;
 using GW2SDK.Json;
 using GW2SDK.Mumble;
+using GW2SDK.Mumble.Models;
 
 namespace Mumble
 {
@@ -42,7 +43,7 @@ namespace Mumble
                 return;
             }
 
-            using var mumble = MumbleLink.Open();
+            using var mumble = GameLink.Open();
 
             using var subscription = mumble.Subscribe(this);
 
