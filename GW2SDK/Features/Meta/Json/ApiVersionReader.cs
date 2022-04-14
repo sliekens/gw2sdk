@@ -15,7 +15,7 @@ public static class ApiVersionReader
     {
         RequiredMember<string> languages = new("langs");
         RequiredMember<Route> routes = new("routes");
-        RequiredMember<Schema> schemaVersions = new("schema_versions");
+        OptionalMember<Schema> schemaVersions = new("schema_versions");
 
         foreach (var member in json.EnumerateObject())
         {
@@ -41,7 +41,7 @@ public static class ApiVersionReader
         {
             Languages = languages.SelectMany(value => value.GetStringRequired()),
             Routes = routes.SelectMany(value => ReadApiRoute(value, missingMemberBehavior)),
-            SchemaVersions = schemaVersions.SelectMany(value => ReadSchema(value, missingMemberBehavior))
+            SchemaVersions = schemaVersions.SelectMany(value => ReadSchema(value, missingMemberBehavior)) ?? Array.Empty<Schema>()
         };
     }
 
@@ -49,7 +49,7 @@ public static class ApiVersionReader
     {
         RequiredMember<string> path = new("path");
         RequiredMember<bool> lang = new("lang");
-        RequiredMember<bool> auth = new("auth");
+        OptionalMember<bool> auth = new("auth");
         RequiredMember<bool> active = new("active");
 
         foreach (var member in json.EnumerateObject())

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Globalization;
+using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 using GW2SDK;
@@ -49,7 +50,12 @@ namespace ApiVersionInfo
 
             var metadata = await AnsiConsole.Status()
                 .StartAsync("Retrieving API endpoints...",
-                    async ctx => await meta.GetApiVersion());
+                    async ctx =>
+                    {
+                        var v1 = await meta.GetApiVersion("v1");
+                        var v2 = await meta.GetApiVersion();
+                        return (v1: v1.Value, v2: v2.Value);
+                    });
 
             var showDisabled = AnsiConsole.Confirm("Show disabled routes?", false);
 
@@ -60,7 +66,23 @@ namespace ApiVersionInfo
                 .AddColumn("Authorization")
                 .AddColumn("Localization");
 
-            foreach (var route in metadata.Value.Routes)
+            foreach (var route in metadata.v1.Routes)
+            {
+                if (route.Active)
+                {
+                    routes.AddRow(route.Path.EscapeMarkup(),
+                        "⸻",
+                        route.Multilingual ? string.Join(", ", metadata.v2.Languages) : "⸻");
+                }
+                else if (showDisabled)
+                {
+                    routes.AddRow($"[dim]{route.Path.EscapeMarkup()}[/]",
+                        route.RequiresAuthorization ? "Token" : "⸻",
+                        route.Multilingual ? string.Join(", ", metadata.v2.Languages) : "⸻");
+                }
+            }
+
+            foreach (var route in metadata.v2.Routes)
             {
                 if (!showAuthorized && route.RequiresAuthorization)
                 {
@@ -71,20 +93,20 @@ namespace ApiVersionInfo
                 {
                     routes.AddRow(route.Path.EscapeMarkup(),
                         route.RequiresAuthorization ? "Token" : "⸻",
-                        route.Multilingual ? string.Join(", ", metadata.Value.Languages) : "⸻");
+                        route.Multilingual ? string.Join(", ", metadata.v2.Languages) : "⸻");
                 }
                 else if (showDisabled)
                 {
                     routes.AddRow($"[dim]{route.Path.EscapeMarkup()}[/]",
                         route.RequiresAuthorization ? "Token" : "⸻",
-                        route.Multilingual ? string.Join(", ", metadata.Value.Languages) : "⸻");
+                        route.Multilingual ? string.Join(", ", metadata.v2.Languages) : "⸻");
                 }
             }
 
             var changes = new Table().MinimalBorder()
                 .AddColumn("Change")
                 .AddColumn("Description");
-            foreach (var schema in metadata.Value.SchemaVersions)
+            foreach (var schema in metadata.v2.SchemaVersions)
             {
                 var formatted = DateTimeOffset.Parse(schema.Version)
                     .ToString("D");
