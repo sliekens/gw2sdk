@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Text.Json;
 
+using GW2SDK.Accounts.Models;
 using GW2SDK.Json;
 
 using JetBrains.Annotations;

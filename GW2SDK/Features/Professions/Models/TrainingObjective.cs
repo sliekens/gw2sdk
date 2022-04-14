@@ -2,7 +2,7 @@
 
 using JetBrains.Annotations;
 
-namespace GW2SDK.Professions;
+namespace GW2SDK.Professions.Models;
 
 [PublicAPI]
 [Inheritable]

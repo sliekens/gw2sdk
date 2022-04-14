@@ -3,7 +3,7 @@ using System.Collections.ObjectModel;
 
 using JetBrains.Annotations;
 
-namespace GW2SDK.Banking;
+namespace GW2SDK.Banking.Models;
 
 /// <summary>The current account's bank, sorted by in-game order. Enumerated values can contain <c>null</c> when some item
 /// slots are empty.</summary>

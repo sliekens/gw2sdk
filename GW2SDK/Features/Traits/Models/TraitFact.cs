@@ -2,7 +2,7 @@
 
 using JetBrains.Annotations;
 
-namespace GW2SDK.Traits;
+namespace GW2SDK.Traits.Models;
 
 [PublicAPI]
 [Inheritable]

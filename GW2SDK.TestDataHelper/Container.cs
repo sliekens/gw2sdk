@@ -93,7 +93,7 @@ public class Container : IDisposable, IAsyncDisposable
             .AddHttpMessageHandler<ResourceNotFoundHandler>()
             .AddHttpMessageHandler<UnauthorizedMessageHandler>()
             .AddHttpMessageHandler<GatewayErrorHandler>()
-            .AddTypedClient<WorldMap>()
+            .AddTypedClient<MapQuery>()
             .AddTypedClient<JsonAchievementService>()
             .AddTypedClient<JsonFloorService>()
             .AddTypedClient<JsonItemPriceService>()

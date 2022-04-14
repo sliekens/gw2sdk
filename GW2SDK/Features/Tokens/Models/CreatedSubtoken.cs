@@ -2,7 +2,7 @@
 
 using JetBrains.Annotations;
 
-namespace GW2SDK.Tokens;
+namespace GW2SDK.Tokens.Models;
 
 [PublicAPI]
 [DataTransferObject]

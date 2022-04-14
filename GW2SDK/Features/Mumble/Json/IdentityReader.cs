@@ -2,6 +2,7 @@
 using System.Text.Json;
 
 using GW2SDK.Json;
+using GW2SDK.Mumble.Models;
 
 using JetBrains.Annotations;
 

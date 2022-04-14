@@ -5,7 +5,7 @@ using GW2SDK.Annotations;
 
 using JetBrains.Annotations;
 
-namespace GW2SDK.Maps;
+namespace GW2SDK.Maps.Models;
 
 [PublicAPI]
 [DataTransferObject]
@@ -17,5 +17,5 @@ public sealed record Floor
 
     public ContinentRectangle? ClampedView { get; init; }
 
-    public Dictionary<int, Region> Regions { get; init; } = new(0);
+    public Dictionary<int, WorldRegion> Regions { get; init; } = new(0);
 }

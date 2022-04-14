@@ -1,13 +1,11 @@
 ﻿using System;
 using System.Globalization;
-using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using GW2SDK;
-using GW2SDK.Builds;
 using GW2SDK.Http;
-using GW2SDK.Json;
-using GW2SDK.V2;
+using GW2SDK.Meta;
+
 using Spectre.Console;
 
 namespace ApiVersionInfo
@@ -42,17 +40,16 @@ namespace ApiVersionInfo
 
             // From here on out, you can create GW2SDK services, pass the HttpClient and a JSON reader object.
             // The default JSON reader should work fine, but can be replaced with a custom implementation.
-            var buildService = new BuildService(http);
-            var infoService = new ApiInfoService(http);
+            var meta = new MetaQuery(http);
 
             var build = await AnsiConsole.Status()
-                .StartAsync("Retrieving the current game version...", async ctx => await buildService.GetBuild());
+                .StartAsync("Retrieving the current game version...", async ctx => await meta.GetBuild());
 
             AnsiConsole.MarkupLine($"Gw2: [white on dodgerblue2]{build.Value.Id}[/]");
 
             var metadata = await AnsiConsole.Status()
                 .StartAsync("Retrieving API endpoints...",
-                    async ctx => await infoService.GetApiInfo());
+                    async ctx => await meta.GetApiVersion());
 
             var showDisabled = AnsiConsole.Confirm("Show disabled routes?", false);
 

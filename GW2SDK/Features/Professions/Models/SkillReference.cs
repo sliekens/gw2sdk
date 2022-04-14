@@ -2,7 +2,7 @@
 
 using JetBrains.Annotations;
 
-namespace GW2SDK.Professions;
+namespace GW2SDK.Professions.Models;
 
 /// <summary>A skill reference with limited details such as the skill slot. The <see cref="Id" /> can be used to fetch the
 /// full skill object.</summary>

@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 
 using GW2SDK.Accounts;
+using GW2SDK.Accounts.Models;
 using GW2SDK.Tests.TestInfrastructure;
 
 using Xunit;
@@ -115,7 +116,7 @@ public class AccountTest
     public async Task It_can_get_basic_account_info_with_any_access_token()
     {
         await using Composer services = new();
-        var sut = services.Resolve<Account>();
+        var sut = services.Resolve<AccountQuery>();
         var accessToken = services.Resolve<ApiKeyBasic>();
 
         var actual = await sut.GetSummary(accessToken.Key);
@@ -135,7 +136,7 @@ public class AccountTest
     public async Task It_can_get_full_details_when_authorized_by_scopes()
     {
         await using Composer services = new();
-        var sut = services.Resolve<Account>();
+        var sut = services.Resolve<AccountQuery>();
         var accessToken = services.Resolve<ApiKeyFull>();
 
         var actual = await sut.GetSummary(accessToken.Key);
@@ -156,7 +157,7 @@ public class AccountTest
     public async Task It_can_get_all_character_names()
     {
         await using Composer services = new();
-        var sut = services.Resolve<Account>();
+        var sut = services.Resolve<AccountQuery>();
         var accessToken = services.Resolve<ApiKeyFull>();
 
         var actual = await sut.GetCharactersIndex(accessToken.Key);
@@ -171,7 +172,7 @@ public class AccountTest
     public async Task It_can_get_all_characters()
     {
         await using Composer services = new();
-        var sut = services.Resolve<Account>();
+        var sut = services.Resolve<AccountQuery>();
         var accessToken = services.Resolve<ApiKeyFull>();
 
         var actual = await sut.GetCharacters(accessToken.Key);
@@ -183,7 +184,7 @@ public class AccountTest
     public async Task It_can_get_a_character_by_name()
     {
         await using Composer services = new();
-        var sut = services.Resolve<Account>();
+        var sut = services.Resolve<AccountQuery>();
         var characterName = services.Resolve<TestCharacterName>();
         var accessToken = services.Resolve<ApiKeyFull>();
 

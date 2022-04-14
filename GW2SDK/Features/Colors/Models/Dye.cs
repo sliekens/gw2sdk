@@ -6,7 +6,7 @@ using GW2SDK.Annotations;
 
 using JetBrains.Annotations;
 
-namespace GW2SDK.Colors;
+namespace GW2SDK.Colors.Models;
 
 [PublicAPI]
 [DataTransferObject]

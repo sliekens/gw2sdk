@@ -3,6 +3,7 @@
 using GW2SDK.Json;
 using GW2SDK.Skins;
 using GW2SDK.Skins.Json;
+using GW2SDK.Skins.Models;
 using GW2SDK.Tests.TestInfrastructure;
 
 using Xunit;

@@ -5,7 +5,7 @@ using GW2SDK.Annotations;
 
 using JetBrains.Annotations;
 
-namespace GW2SDK.Tokens;
+namespace GW2SDK.Tokens.Models;
 
 [PublicAPI]
 [Inheritable]
