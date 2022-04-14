@@ -20,12 +20,19 @@ public class MetaQueryTest
     {
         public static void There_are_no_newer_translations(ApiVersion actual)
         {
-            Assert.Collection(actual.Languages,
-                english => Assert.Equal("en", english),
-                spanish => Assert.Equal("es", spanish),
-                german => Assert.Equal("de", german),
-                french => Assert.Equal("fr", french),
-                chinese => Assert.Equal("zh", chinese));
+            Assert.All(actual.Languages,
+                language =>
+                {
+                    Assert.Contains(language,
+                        new[]
+                        {
+                            "en",
+                            "es",
+                            "de",
+                            "fr",
+                            "zh"
+                        });
+                });
         }
 
         public static void There_are_no_newer_schema_versions(ApiVersion actual)
@@ -239,6 +246,17 @@ public class MetaQueryTest
         var actual = await sut.GetBuild();
 
         Assert.True(actual.Value.Id >= 127440);
+    }
+
+    [Fact]
+    public async Task It_can_get_the_v1_api_info()
+    {
+        await using Composer services = new();
+        var sut = services.Resolve<MetaQuery>();
+
+        var actual = await sut.GetApiVersion("v1");
+
+        ApiVersionFact.There_are_no_newer_translations(actual.Value);
     }
 
     [Fact]

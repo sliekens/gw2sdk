@@ -50,6 +50,11 @@ namespace GW2SDK.Json
             return instance.Select(json => json.GetBoolean());
         }
 
+        internal static bool GetValue(this OptionalMember<bool> instance)
+        {
+            return instance.Select(json => json.GetBoolean());
+        }
+
         internal static bool? GetValue(this NullableMember<bool> instance)
         {
             return instance.Select(json => json.GetBoolean());
