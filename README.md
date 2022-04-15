@@ -1,4 +1,4 @@
-# GW2SDK [![Continuous Integration](https://github.com/StevenLiekens/gw2sdk/workflows/Continuous%20Integration/badge.svg)][actions][![codecov](https://codecov.io/gh/StevenLiekens/gw2sdk/branch/main/graph/badge.svg)][codecov][![Twitter Follow](https://img.shields.io/twitter/follow/LiekensSteven?style=social)][twitter]
+# GW2SDK [![Continuous Integration](https://github.com/sliekens/gw2sdk/workflows/Continuous%20Integration/badge.svg)][actions][![codecov](https://codecov.io/gh/StevenLiekens/gw2sdk/branch/main/graph/badge.svg)][codecov][![Twitter Follow](https://img.shields.io/twitter/follow/LiekensSteven?style=social)][twitter]
 
 A .NET code library for interacting with the Guild Wars 2 API and game client.
 
@@ -16,7 +16,7 @@ You can install development packages from GitHub from [here][packages]. These pa
 First create a personal access token [here][tokens] with the _read:packages_ scope. Then run the following command.
 
 ``` sh
-dotnet nuget add source https://nuget.pkg.github.com/stevenliekens/index.json --name sliekens --username <USERNAME> --password <TOKEN>
+dotnet nuget add source https://nuget.pkg.github.com/sliekens/index.json --name sliekens --username <USERNAME> --password <TOKEN>
 ```
 
 Replace:
@@ -37,8 +37,8 @@ dotnet nuget remove source sliekens
 ```
 
 [//]:# (add links to the section below)
-[actions]:https://github.com/StevenLiekens/gw2sdk/actions?query=workflow%3A%22Continuous+Integration%22
+[actions]:https://github.com/sliekens/gw2sdk/actions?query=workflow%3A%22Continuous+Integration%22
 [codecov]:https://codecov.io/gh/StevenLiekens/gw2sdk
 [twitter]:https://twitter.com/LiekensSteven
 [tokens]:https://github.com/settings/tokens
-[packages]:https://github.com/StevenLiekens/gw2sdk/packages
+[packages]:https://github.com/sliekens/gw2sdk/packages
