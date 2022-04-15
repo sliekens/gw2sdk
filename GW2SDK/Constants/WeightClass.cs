@@ -1,16 +1,15 @@
 ﻿using JetBrains.Annotations;
 
-namespace GW2SDK
+namespace GW2SDK;
+
+[PublicAPI]
+public enum WeightClass
 {
-    [PublicAPI]
-    public enum WeightClass
-    {
-        Clothing = 1,
+    Clothing = 1,
 
-        Light,
+    Light,
 
-        Medium,
+    Medium,
 
-        Heavy
-    }
+    Heavy
 }

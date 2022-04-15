@@ -1,59 +1,58 @@
 ﻿using System;
 using Microsoft.Extensions.Configuration;
 
-namespace GW2SDK.Tests.TestInfrastructure
+namespace GW2SDK.Tests.TestInfrastructure;
+
+public class ConfigurationManager
 {
-    public class ConfigurationManager
+    public ConfigurationManager()
     {
-        public ConfigurationManager()
-        {
-            Configuration = new ConfigurationBuilder().AddJsonFile("appsettings.json")
-                .AddUserSecrets<ConfigurationManager>(true)
-                .AddEnvironmentVariables()
-                .Build();
-        }
-
-        private IConfigurationRoot Configuration { get; }
-
-        public string ApiKeyBasic =>
-            Configuration["ApiKeyBasic"] ?? throw new InvalidOperationException("Missing ApiKeyBasic.");
-
-        public string ApiKeyFull =>
-            Configuration["ApiKeyFull"] ?? throw new InvalidOperationException("Missing ApiKeyFull.");
-
-        public string CharacterName =>
-            Configuration["CharacterName"] ?? throw new InvalidOperationException("Missing CharacterName.");
-
-        public Uri BaseAddress => new(Configuration["Authority"], UriKind.Absolute);
+        Configuration = new ConfigurationBuilder().AddJsonFile("appsettings.json")
+            .AddUserSecrets<ConfigurationManager>(true)
+            .AddEnvironmentVariables()
+            .Build();
     }
 
-    public sealed class TestCharacterName
-    {
-        public TestCharacterName(string name)
-        {
-            Name = name;
-        }
+    private IConfigurationRoot Configuration { get; }
 
-        public string Name { get; }
+    public string ApiKeyBasic =>
+        Configuration["ApiKeyBasic"] ?? throw new InvalidOperationException("Missing ApiKeyBasic.");
+
+    public string ApiKeyFull =>
+        Configuration["ApiKeyFull"] ?? throw new InvalidOperationException("Missing ApiKeyFull.");
+
+    public string CharacterName =>
+        Configuration["CharacterName"] ?? throw new InvalidOperationException("Missing CharacterName.");
+
+    public Uri BaseAddress => new(Configuration["Authority"], UriKind.Absolute);
+}
+
+public sealed class TestCharacterName
+{
+    public TestCharacterName(string name)
+    {
+        Name = name;
     }
 
-    public sealed class ApiKeyBasic
-    {
-        public ApiKeyBasic(string key)
-        {
-            Key = key;
-        }
+    public string Name { get; }
+}
 
-        public string Key { get; }
+public sealed class ApiKeyBasic
+{
+    public ApiKeyBasic(string key)
+    {
+        Key = key;
     }
 
-    public sealed class ApiKeyFull
-    {
-        public ApiKeyFull(string key)
-        {
-            Key = key;
-        }
+    public string Key { get; }
+}
 
-        public string Key { get; }
+public sealed class ApiKeyFull
+{
+    public ApiKeyFull(string key)
+    {
+        Key = key;
     }
+
+    public string Key { get; }
 }

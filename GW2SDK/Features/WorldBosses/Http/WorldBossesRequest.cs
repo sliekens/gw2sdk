@@ -1,9 +1,6 @@
 ﻿using System.Net.Http;
-
 using GW2SDK.Http;
-
 using JetBrains.Annotations;
-
 using static System.Net.Http.HttpMethod;
 
 namespace GW2SDK.WorldBosses.Http;
@@ -16,8 +13,5 @@ public sealed class WorldBossesRequest
         AcceptEncoding = "gzip"
     };
 
-    public static implicit operator HttpRequestMessage(WorldBossesRequest _)
-    {
-        return Template.Compile();
-    }
+    public static implicit operator HttpRequestMessage(WorldBossesRequest _) => Template.Compile();
 }

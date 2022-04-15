@@ -1,18 +1,17 @@
 ﻿using JetBrains.Annotations;
 
-namespace GW2SDK
+namespace GW2SDK;
+
+[PublicAPI]
+public enum DamageType
 {
-    [PublicAPI]
-    public enum DamageType
-    {
-        Choking = 1,
+    Choking = 1,
 
-        Fire,
+    Fire,
 
-        Ice,
+    Ice,
 
-        Lightning,
+    Lightning,
 
-        Physical
-    }
+    Physical
 }

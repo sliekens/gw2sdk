@@ -2,11 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-
 using GW2SDK.Tests.TestInfrastructure;
 using GW2SDK.Tokens;
 using GW2SDK.Tokens.Models;
-
 using Xunit;
 
 namespace GW2SDK.Tests.Features.Tokens;

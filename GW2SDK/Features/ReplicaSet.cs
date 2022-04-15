@@ -39,15 +39,9 @@ internal sealed class ReplicaSet<T> : IReplicaSet<T>
 
     public ICollectionContext Context { get; }
 
-    public IEnumerator<T> GetEnumerator()
-    {
-        return Values.GetEnumerator();
-    }
+    public IEnumerator<T> GetEnumerator() => Values.GetEnumerator();
 
-    IEnumerator IEnumerable.GetEnumerator()
-    {
-        return ((IEnumerable)Values).GetEnumerator();
-    }
+    IEnumerator IEnumerable.GetEnumerator() => ((IEnumerable)Values).GetEnumerator();
 
     public int Count => Values.Count;
 }

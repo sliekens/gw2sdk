@@ -1,56 +1,55 @@
 ﻿using JetBrains.Annotations;
 
-namespace GW2SDK
+namespace GW2SDK;
+
+[PublicAPI]
+public enum UpgradeComponentFlag
 {
-    [PublicAPI]
-    public enum UpgradeComponentFlag
-    {
-        Axe = 1,
+    Axe = 1,
 
-        Dagger,
+    Dagger,
 
-        Focus,
+    Focus,
 
-        Greatsword,
+    Greatsword,
 
-        Hammer,
+    Hammer,
 
-        /// <summary>A.K.A. Spear</summary>
-        Harpoon,
+    /// <summary>A.K.A. Spear</summary>
+    Harpoon,
 
-        HeavyArmor,
+    HeavyArmor,
 
-        LightArmor,
+    LightArmor,
 
-        LongBow,
+    LongBow,
 
-        Mace,
+    Mace,
 
-        MediumArmor,
+    MediumArmor,
 
-        Pistol,
+    Pistol,
 
-        Rifle,
+    Rifle,
 
-        Scepter,
+    Scepter,
 
-        Shield,
+    Shield,
 
-        ShortBow,
+    ShortBow,
 
-        /// <summary>A.K.A. Harpoon gun</summary>
-        Speargun,
+    /// <summary>A.K.A. Harpoon gun</summary>
+    Speargun,
 
-        Staff,
+    Staff,
 
-        Sword,
+    Sword,
 
-        Torch,
+    Torch,
 
-        Trident,
+    Trident,
 
-        Trinket,
+    Trinket,
 
-        Warhorn
-    }
+    Warhorn
 }

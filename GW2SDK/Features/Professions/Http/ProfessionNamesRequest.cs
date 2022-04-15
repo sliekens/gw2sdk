@@ -1,9 +1,6 @@
 ﻿using System.Net.Http;
-
 using GW2SDK.Http;
-
 using JetBrains.Annotations;
-
 using static System.Net.Http.HttpMethod;
 
 namespace GW2SDK.Professions.Http;
@@ -16,8 +13,5 @@ public sealed class ProfessionNamesRequest
         AcceptEncoding = "gzip"
     };
 
-    public static implicit operator HttpRequestMessage(ProfessionNamesRequest _)
-    {
-        return Template.Compile();
-    }
+    public static implicit operator HttpRequestMessage(ProfessionNamesRequest _) => Template.Compile();
 }

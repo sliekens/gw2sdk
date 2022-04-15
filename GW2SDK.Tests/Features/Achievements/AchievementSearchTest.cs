@@ -1,13 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-
 using GW2SDK.Achievements;
 using GW2SDK.Achievements.Models;
 using GW2SDK.Tests.TestInfrastructure;
-
 using Xunit;
-
 using static GW2SDK.ProductName;
 
 namespace GW2SDK.Tests.Features.Achievements;
@@ -16,41 +13,26 @@ public class AchievementSearchTest
 {
     private static class AccountAchievementFact
     {
-        public static void Id_is_positive(AccountAchievement actual)
-        {
-            Assert.InRange(actual.Id, 1, int.MaxValue);
-        }
+        public static void Id_is_positive(AccountAchievement actual) => Assert.InRange(actual.Id, 1, int.MaxValue);
     }
 
     private static class AchievementCategoryFact
     {
-        public static void Id_is_positive(AchievementCategory actual)
-        {
-            Assert.InRange(actual.Id, 1, int.MaxValue);
-        }
+        public static void Id_is_positive(AchievementCategory actual) => Assert.InRange(actual.Id, 1, int.MaxValue);
 
-        public static void Order_is_not_negative(AchievementCategory actual)
-        {
+        public static void Order_is_not_negative(AchievementCategory actual) =>
             Assert.InRange(actual.Order, 0, int.MaxValue);
-        }
     }
 
     private static class DailyAchievementFact
     {
-        public static void Id_is_positive(DailyAchievement actual)
-        {
-            Assert.InRange(actual.Id, 1, int.MaxValue);
-        }
+        public static void Id_is_positive(DailyAchievement actual) => Assert.InRange(actual.Id, 1, int.MaxValue);
 
-        public static void Min_level_is_between_1_and_80(DailyAchievement actual)
-        {
+        public static void Min_level_is_between_1_and_80(DailyAchievement actual) =>
             Assert.InRange(actual.Level.Min, 1, 80);
-        }
 
-        public static void Max_level_is_between_1_and_80(DailyAchievement actual)
-        {
+        public static void Max_level_is_between_1_and_80(DailyAchievement actual) =>
             Assert.InRange(actual.Level.Max, 1, 80);
-        }
 
         public static void Can_have_a_product_requirement(DailyAchievement actual)
         {
@@ -105,23 +87,15 @@ public class AchievementSearchTest
 
     private static class AchievementGroupFact
     {
-        public static void Order_is_not_negative(AchievementGroup actual)
-        {
+        public static void Order_is_not_negative(AchievementGroup actual) =>
             Assert.InRange(actual.Order, 0, int.MaxValue);
-        }
     }
 
     private static class TitleFact
     {
-        public static void Id_is_positive(Title actual)
-        {
-            Assert.InRange(actual.Id, 1, int.MaxValue);
-        }
+        public static void Id_is_positive(Title actual) => Assert.InRange(actual.Id, 1, int.MaxValue);
 
-        public static void Name_is_not_empty(Title actual)
-        {
-            Assert.NotEmpty(actual.Name);
-        }
+        public static void Name_is_not_empty(Title actual) => Assert.NotEmpty(actual.Name);
 
         public static void Can_be_unlocked_by_achievements_or_achievement_points(Title actual)
         {

@@ -1,36 +1,35 @@
 ﻿using JetBrains.Annotations;
 
-namespace GW2SDK
+namespace GW2SDK;
+
+[PublicAPI]
+public enum AchievementFlag
 {
-    [PublicAPI]
-    public enum AchievementFlag
-    {
-        CategoryDisplay = 1,
+    CategoryDisplay = 1,
 
-        Daily,
+    Daily,
 
-        Hidden,
+    Hidden,
 
-        IgnoreNearlyComplete,
+    IgnoreNearlyComplete,
 
-        MoveToTop,
+    MoveToTop,
 
-        Pvp,
+    Pvp,
 
-        RepairOnLogin,
+    RepairOnLogin,
 
-        Repeatable,
+    Repeatable,
 
-        RequiresUnlock,
+    RequiresUnlock,
 
-        Permanent,
+    Permanent,
 
-        Weekly,
+    Weekly,
 
-        SpecialEvent,
+    SpecialEvent,
 
-        PvE,
+    PvE,
 
-        WvW
-    }
+    WvW
 }

@@ -1,28 +1,27 @@
 ﻿using JetBrains.Annotations;
 
-namespace GW2SDK
+namespace GW2SDK;
+
+[PublicAPI]
+public enum MountName
 {
-    [PublicAPI]
-    public enum MountName
-    {
-        Griffon = 1,
+    Griffon = 1,
 
-        Jackal = 11,
+    Jackal = 11,
 
-        Raptor = 21,
+    Raptor = 21,
 
-        RollerBeetle = 31,
+    RollerBeetle = 31,
 
-        Skiff = 41,
+    Skiff = 41,
 
-        Skimmer = 51,
+    Skimmer = 51,
 
-        Skyscale = 61,
+    Skyscale = 61,
 
-        Springer = 71,
+    Springer = 71,
 
-        Turtle = 81,
+    Turtle = 81,
 
-        Warclaw = 91
-    }
+    Warclaw = 91
 }

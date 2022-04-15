@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
-
 using GW2SDK.Http;
 using GW2SDK.Json;
 using GW2SDK.Meta;
@@ -9,7 +8,6 @@ using GW2SDK.Meta.Http;
 using GW2SDK.Meta.Json;
 using GW2SDK.Meta.Models;
 using GW2SDK.Tests.TestInfrastructure;
-
 using Xunit;
 
 namespace GW2SDK.Tests.Features.Meta;
@@ -18,8 +16,7 @@ public class MetaQueryTest
 {
     private static class ApiVersionFact
     {
-        public static void There_are_no_newer_translations(ApiVersion actual)
-        {
+        public static void There_are_no_newer_translations(ApiVersion actual) =>
             Assert.All(actual.Languages,
                 language =>
                 {
@@ -33,10 +30,8 @@ public class MetaQueryTest
                             "zh"
                         });
                 });
-        }
 
-        public static void There_are_no_newer_schema_versions(ApiVersion actual)
-        {
+        public static void There_are_no_newer_schema_versions(ApiVersion actual) =>
             Assert.Collection(actual.SchemaVersions,
                 v => Assert.Equal(SchemaVersion.V20190221, v.Version),
                 v => Assert.Equal(SchemaVersion.V20190322, v.Version),
@@ -49,7 +44,6 @@ public class MetaQueryTest
                 v => Assert.Equal(SchemaVersion.V20210715, v.Version),
                 v => Assert.Equal(SchemaVersion.V20220309, v.Version),
                 v => Assert.Equal(SchemaVersion.V20220323, v.Version));
-        }
 
         public static void There_are_no_surprise_endpoints(ApiVersion actual)
         {

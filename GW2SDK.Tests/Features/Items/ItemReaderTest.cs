@@ -1,8 +1,6 @@
 ﻿using System.Text.Json;
-
 using GW2SDK.Items.Json;
 using GW2SDK.Json;
-
 using Xunit;
 
 namespace GW2SDK.Tests.Features.Items;
@@ -17,8 +15,7 @@ public class ItemReaderTest : IClassFixture<ItemFixture>
     private readonly ItemFixture fixture;
 
     [Fact]
-    public void Items_can_be_created_from_json()
-    {
+    public void Items_can_be_created_from_json() =>
         Assert.All(fixture.Items,
             json =>
             {
@@ -26,5 +23,4 @@ public class ItemReaderTest : IClassFixture<ItemFixture>
                 var actual = ItemReader.Read(document.RootElement, MissingMemberBehavior.Error);
                 ItemFacts.Validate(actual);
             });
-    }
 }

@@ -10,7 +10,6 @@ using GW2SDK.Crafting.Models;
 using GW2SDK.Http;
 using GW2SDK.Items;
 using GW2SDK.Items.Models;
-
 using Spectre.Console;
 
 namespace MostVersatileMaterials;

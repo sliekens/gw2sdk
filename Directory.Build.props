@@ -1,17 +1,17 @@
 <Project>
-    <PropertyGroup>
-        <LangVersion>10.0</LangVersion>
-        <Nullable>Enable</Nullable>
-        <RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
-        <DisableImplicitNuGetFallbackFolder>true</DisableImplicitNuGetFallbackFolder>
-    </PropertyGroup>
+  <PropertyGroup>
+    <LangVersion>10.0</LangVersion>
+    <Nullable>Enable</Nullable>
+    <RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
+    <DisableImplicitNuGetFallbackFolder>true</DisableImplicitNuGetFallbackFolder>
+  </PropertyGroup>
 
-    <PropertyGroup Condition="'$(GITHUB_ACTIONS)' == 'true'">
-        <ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
-        <DeterministicSourcePaths>true</DeterministicSourcePaths>
-    </PropertyGroup>
+  <PropertyGroup Condition="'$(GITHUB_ACTIONS)' == 'true'">
+    <ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
+    <DeterministicSourcePaths>true</DeterministicSourcePaths>
+  </PropertyGroup>
 
-    <ItemGroup>
-        <SourceRoot Include="$(MSBuildThisFileDirectory)/"/>
-    </ItemGroup>
+  <ItemGroup>
+    <SourceRoot Include="$(MSBuildThisFileDirectory)/" />
+  </ItemGroup>
 </Project>

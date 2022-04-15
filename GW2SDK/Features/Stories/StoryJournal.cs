@@ -3,13 +3,11 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
-
 using GW2SDK.Http;
 using GW2SDK.Json;
 using GW2SDK.Stories.Http;
 using GW2SDK.Stories.Json;
 using GW2SDK.Stories.Models;
-
 using JetBrains.Annotations;
 
 namespace GW2SDK.Stories;

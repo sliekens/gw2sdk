@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-
 using Xunit;
 
 namespace GW2SDK.Tests.Features;
@@ -138,15 +137,9 @@ internal sealed class StubReplica : IReplicaSet<StubRecord>
 
     public ICollectionContext Context { get; }
 
-    public IEnumerator<StubRecord> GetEnumerator()
-    {
-        return Values.GetEnumerator();
-    }
+    public IEnumerator<StubRecord> GetEnumerator() => Values.GetEnumerator();
 
-    IEnumerator IEnumerable.GetEnumerator()
-    {
-        return ((IEnumerable)Values).GetEnumerator();
-    }
+    IEnumerator IEnumerable.GetEnumerator() => ((IEnumerable)Values).GetEnumerator();
 
     public int Count => Values.Count;
 }

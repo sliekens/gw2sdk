@@ -1,16 +1,15 @@
 ﻿using JetBrains.Annotations;
 
-namespace GW2SDK
+namespace GW2SDK;
+
+[PublicAPI]
+public enum Material
 {
-    [PublicAPI]
-    public enum Material
-    {
-        Cloth = 1,
+    Cloth = 1,
 
-        Leather,
+    Leather,
 
-        Metal,
+    Metal,
 
-        Fur
-    }
+    Fur
 }

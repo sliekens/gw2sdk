@@ -1,16 +1,15 @@
 ﻿using JetBrains.Annotations;
 
-namespace GW2SDK
+namespace GW2SDK;
+
+[PublicAPI]
+public enum WeaponFlag
 {
-    [PublicAPI]
-    public enum WeaponFlag
-    {
-        Mainhand = 1,
+    Mainhand = 1,
 
-        Offhand,
+    Offhand,
 
-        TwoHand,
+    TwoHand,
 
-        Aquatic
-    }
+    Aquatic
 }

@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-
 using JetBrains.Annotations;
 
 namespace GW2SDK.Crafting.Models;

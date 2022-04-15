@@ -1,23 +1,30 @@
 ﻿using System;
 using JetBrains.Annotations;
 
-namespace GW2SDK.Http
+namespace GW2SDK.Http;
+
+[PublicAPI]
+public sealed class LinkHeaderValue
 {
-    [PublicAPI]
-    public sealed class LinkHeaderValue
+    public LinkHeaderValue(string href, string rel)
     {
-        public LinkHeaderValue(string href, string rel)
+        if (string.IsNullOrWhiteSpace(href))
         {
-            if (string.IsNullOrWhiteSpace(href)) throw new ArgumentException("Value cannot be null or whitespace.", nameof(href));
-            if (string.IsNullOrWhiteSpace(rel)) throw new ArgumentException("Value cannot be null or whitespace.",  nameof(rel));
-            Href = href;
-            Rel = rel;
+            throw new ArgumentException("Value cannot be null or whitespace.", nameof(href));
         }
 
-        public string Href { get; }
+        if (string.IsNullOrWhiteSpace(rel))
+        {
+            throw new ArgumentException("Value cannot be null or whitespace.", nameof(rel));
+        }
 
-        public string Rel { get; }
-
-        public override string ToString() => $"<{Href}>; rel={Rel}";
+        Href = href;
+        Rel = rel;
     }
+
+    public string Href { get; }
+
+    public string Rel { get; }
+
+    public override string ToString() => $"<{Href}>; rel={Rel}";
 }

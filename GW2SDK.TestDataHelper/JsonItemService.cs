@@ -7,81 +7,79 @@ using System.Threading.Tasks;
 using GW2SDK.Http;
 using GW2SDK.Items.Http;
 
-namespace GW2SDK.TestDataHelper
-{
-    public class JsonItemService
-    {
-        private readonly HttpClient http;
+namespace GW2SDK.TestDataHelper;
 
-        public JsonItemService(HttpClient http)
+public class JsonItemService
+{
+    private readonly HttpClient http;
+
+    public JsonItemService(HttpClient http)
+    {
+        this.http = http;
+    }
+
+    public async Task<ISet<string>> GetAllJsonItems()
+    {
+        var ids = await GetItemsIndex()
+            .ConfigureAwait(false);
+
+        var batches = new Queue<IEnumerable<int>>(ids.Buffer(200));
+
+        var result = new List<string>();
+        var work = new List<Task<List<string>>>();
+
+        for (var i = 0; i < 12; i++)
         {
-            this.http = http;
+            if (!batches.TryDequeue(out var batch))
+            {
+                break;
+            }
+
+            work.Add(GetJsonItemsByIds(batch.ToList()));
         }
 
-        public async Task<ISet<string>> GetAllJsonItems()
+        while (work.Count > 0)
         {
-            var ids = await GetItemsIndex()
-                .ConfigureAwait(false);
+            var done = await Task.WhenAny(work);
+            result.AddRange(done.Result);
 
-            var batches = new Queue<IEnumerable<int>>(ids.Buffer(200));
+            work.Remove(done);
 
-            var result = new List<string>();
-            var work = new List<Task<List<string>>>();
-
-            for (var i = 0; i < 12; i++)
+            if (batches.TryDequeue(out var batch))
             {
-                if (!batches.TryDequeue(out var batch))
-                {
-                    break;
-                }
-
                 work.Add(GetJsonItemsByIds(batch.ToList()));
             }
-
-            while (work.Count > 0)
-            {
-                var done = await Task.WhenAny(work);
-                result.AddRange(done.Result);
-
-                work.Remove(done);
-
-                if (batches.TryDequeue(out var batch))
-                {
-                    work.Add(GetJsonItemsByIds(batch.ToList()));
-                }
-            }
-
-            return new SortedSet<string>(result, StringComparer.Ordinal);
         }
 
-        private async Task<List<int>> GetItemsIndex()
-        {
-            var request = new ItemsIndexRequest();
-            using var response = await http.SendAsync(request, HttpCompletionOption.ResponseHeadersRead)
-                .ConfigureAwait(false);
-            response.EnsureSuccessStatusCode();
-            using var json = await response.Content.ReadAsJsonAsync(CancellationToken.None)
-                .ConfigureAwait(false);
-            return json.RootElement.EnumerateArray()
-                .Select(item => item.GetInt32())
-                .ToList();
-        }
+        return new SortedSet<string>(result, StringComparer.Ordinal);
+    }
 
-        private async Task<List<string>> GetJsonItemsByIds(IReadOnlyCollection<int> itemIds)
-        {
-            var request = new ItemsByIdsRequest(itemIds, default);
-            using var response = await http.SendAsync(request, HttpCompletionOption.ResponseHeadersRead)
-                .ConfigureAwait(false);
-            response.EnsureSuccessStatusCode();
+    private async Task<List<int>> GetItemsIndex()
+    {
+        var request = new ItemsIndexRequest();
+        using var response = await http.SendAsync(request, HttpCompletionOption.ResponseHeadersRead)
+            .ConfigureAwait(false);
+        response.EnsureSuccessStatusCode();
+        using var json = await response.Content.ReadAsJsonAsync(CancellationToken.None)
+            .ConfigureAwait(false);
+        return json.RootElement.EnumerateArray()
+            .Select(item => item.GetInt32())
+            .ToList();
+    }
 
-            // API returns a JSON array but we want a List of JSON objects instead
-            using var json = await response.Content.ReadAsJsonAsync(CancellationToken.None)
-                .ConfigureAwait(false);
-            return json.Indent(false)
-                .RootElement.EnumerateArray()
-                .Select(item =>
-                    item.ToString() ?? throw new InvalidOperationException("Unexpected null in JSON array."))
-                .ToList();
-        }
+    private async Task<List<string>> GetJsonItemsByIds(IReadOnlyCollection<int> itemIds)
+    {
+        var request = new ItemsByIdsRequest(itemIds, default);
+        using var response = await http.SendAsync(request, HttpCompletionOption.ResponseHeadersRead)
+            .ConfigureAwait(false);
+        response.EnsureSuccessStatusCode();
+
+        // API returns a JSON array but we want a List of JSON objects instead
+        using var json = await response.Content.ReadAsJsonAsync(CancellationToken.None)
+            .ConfigureAwait(false);
+        return json.Indent(false)
+            .RootElement.EnumerateArray()
+            .Select(item => item.ToString() ?? throw new InvalidOperationException("Unexpected null in JSON array."))
+            .ToList();
     }
 }

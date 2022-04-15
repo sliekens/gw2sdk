@@ -4,7 +4,6 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Threading.Tasks;
-
 using JetBrains.Annotations;
 
 namespace GW2SDK;
@@ -36,15 +35,12 @@ public static class SplitQuery
         InQuery<TKey, TRecord> query,
         IProgress<ICollectionContext>? progress,
         int maxConcurrency = 20
-    )
-    {
-        return new SplitQuery<TKey, TRecord>(query, progress, maxConcurrency);
-    }
+    ) =>
+        new(query, progress, maxConcurrency);
 
-    public static SplitQuery<TKey, TRecord> Create<TKey, TRecord>(InQuery<TKey, TRecord> query, int maxConcurrency = 20)
-    {
-        return new SplitQuery<TKey, TRecord>(query, default, maxConcurrency);
-    }
+    public static SplitQuery<TKey, TRecord>
+        Create<TKey, TRecord>(InQuery<TKey, TRecord> query, int maxConcurrency = 20) =>
+        new(query, default, maxConcurrency);
 }
 
 /// <summary>Helps you retrieve all records in a given index by splitting it into smaller chunks before quering. This is
@@ -164,8 +160,6 @@ public sealed class SplitQuery<TKey, TRecord>
         }
     }
 
-    private void ReportProgress(int resultTotal, int resultCount)
-    {
+    private void ReportProgress(int resultTotal, int resultCount) =>
         progress?.Report(new CollectionContext(resultTotal, resultCount));
-    }
 }

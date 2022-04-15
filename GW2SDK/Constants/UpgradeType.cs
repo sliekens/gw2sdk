@@ -1,12 +1,11 @@
 ﻿using JetBrains.Annotations;
 
-namespace GW2SDK
-{
-    [PublicAPI]
-    public enum UpgradeType
-    {
-        Attunement = 1,
+namespace GW2SDK;
 
-        Infusion
-    }
+[PublicAPI]
+public enum UpgradeType
+{
+    Attunement = 1,
+
+    Infusion
 }

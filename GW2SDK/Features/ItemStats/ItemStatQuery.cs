@@ -3,13 +3,11 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
-
 using GW2SDK.Http;
 using GW2SDK.ItemStats.Http;
 using GW2SDK.ItemStats.Json;
 using GW2SDK.ItemStats.Models;
 using GW2SDK.Json;
-
 using JetBrains.Annotations;
 
 namespace GW2SDK.ItemStats;

@@ -1,16 +1,15 @@
 ﻿using JetBrains.Annotations;
 
-namespace GW2SDK
+namespace GW2SDK;
+
+[PublicAPI]
+public enum Attunement
 {
-    [PublicAPI]
-    public enum Attunement
-    {
-        Earth = 1,
+    Earth = 1,
 
-        Water,
+    Water,
 
-        Air,
+    Air,
 
-        Fire
-    }
+    Fire
 }

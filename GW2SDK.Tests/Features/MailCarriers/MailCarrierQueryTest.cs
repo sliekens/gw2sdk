@@ -1,11 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-
 using GW2SDK.MailCarriers;
 using GW2SDK.MailCarriers.Models;
 using GW2SDK.Tests.TestInfrastructure;
-
 using Xunit;
 
 namespace GW2SDK.Tests.Features.MailCarriers;
@@ -14,10 +12,7 @@ public class MailCarrierQueryTest
 {
     private static class MailCarrierFact
     {
-        public static void Id_is_positive(MailCarrier actual)
-        {
-            Assert.InRange(actual.Id, 1, int.MaxValue);
-        }
+        public static void Id_is_positive(MailCarrier actual) => Assert.InRange(actual.Id, 1, int.MaxValue);
 
         public static void Non_default_carriers_can_be_unlocked(MailCarrier actual)
         {
@@ -31,20 +26,11 @@ public class MailCarrierQueryTest
             }
         }
 
-        public static void Name_is_not_empty(MailCarrier actual)
-        {
-            Assert.NotEmpty(actual.Name);
-        }
+        public static void Name_is_not_empty(MailCarrier actual) => Assert.NotEmpty(actual.Name);
 
-        public static void Order_is_not_negative(MailCarrier actual)
-        {
-            Assert.InRange(actual.Order, 0, 1000);
-        }
+        public static void Order_is_not_negative(MailCarrier actual) => Assert.InRange(actual.Order, 0, 1000);
 
-        public static void Icon_is_not_empty(MailCarrier actual)
-        {
-            Assert.NotEmpty(actual.Icon);
-        }
+        public static void Icon_is_not_empty(MailCarrier actual) => Assert.NotEmpty(actual.Icon);
     }
 
     [Fact]

@@ -1,28 +1,27 @@
 ﻿using JetBrains.Annotations;
 
-namespace GW2SDK
+namespace GW2SDK;
+
+[PublicAPI]
+public enum UpgradeAttributeName
 {
-    [PublicAPI]
-    public enum UpgradeAttributeName
-    {
-        AgonyResistance = 1,
+    AgonyResistance = 1,
 
-        BoonDuration,
+    BoonDuration,
 
-        ConditionDamage,
+    ConditionDamage,
 
-        ConditionDuration,
+    ConditionDuration,
 
-        CritDamage,
+    CritDamage,
 
-        Healing,
+    Healing,
 
-        Power,
+    Power,
 
-        Precision,
+    Precision,
 
-        Toughness,
+    Toughness,
 
-        Vitality
-    }
+    Vitality
 }

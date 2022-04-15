@@ -1,10 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-
 using GW2SDK.Tests.TestInfrastructure;
 using GW2SDK.Traits;
 using GW2SDK.Traits.Models;
-
 using Xunit;
 
 namespace GW2SDK.Tests.Features.Traits;
@@ -13,10 +11,7 @@ public class TraitQueryTest
 {
     private static class TraitFact
     {
-        public static void Id_is_positive(Trait actual)
-        {
-            Assert.InRange(actual.Id, 1, int.MaxValue);
-        }
+        public static void Id_is_positive(Trait actual) => Assert.InRange(actual.Id, 1, int.MaxValue);
     }
 
     [Fact]

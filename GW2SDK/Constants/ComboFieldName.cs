@@ -1,26 +1,25 @@
 ﻿using JetBrains.Annotations;
 
-namespace GW2SDK
+namespace GW2SDK;
+
+[PublicAPI]
+public enum ComboFieldName
 {
-    [PublicAPI]
-    public enum ComboFieldName
-    {
-        Dark = 1,
+    Dark = 1,
 
-        Ethereal,
+    Ethereal,
 
-        Fire,
+    Fire,
 
-        Ice,
+    Ice,
 
-        Light,
+    Light,
 
-        Lightning,
+    Lightning,
 
-        Poison,
+    Poison,
 
-        Smoke,
+    Smoke,
 
-        Water
-    }
+    Water
 }

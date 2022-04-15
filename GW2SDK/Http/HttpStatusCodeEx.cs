@@ -1,11 +1,10 @@
 ﻿using System.Net;
 using JetBrains.Annotations;
 
-namespace GW2SDK.Http
+namespace GW2SDK.Http;
+
+[PublicAPI]
+public static class HttpStatusCodeEx
 {
-    [PublicAPI]
-    public static class HttpStatusCodeEx
-    {
-        public const HttpStatusCode TooManyRequests = (HttpStatusCode) 429;
-    }
+    public const HttpStatusCode TooManyRequests = (HttpStatusCode)429;
 }

@@ -1,8 +1,6 @@
 ﻿using System.Text.Json;
-
 using GW2SDK.Crafting.Json;
 using GW2SDK.Json;
-
 using Xunit;
 
 namespace GW2SDK.Tests.Features.Crafting;
@@ -17,8 +15,7 @@ public class RecipeReaderTest : IClassFixture<RecipeFixture>
     private readonly RecipeFixture fixture;
 
     [Fact]
-    public void Recipes_can_be_created_from_json()
-    {
+    public void Recipes_can_be_created_from_json() =>
         Assert.All(fixture.Recipes,
             json =>
             {
@@ -27,5 +24,4 @@ public class RecipeReaderTest : IClassFixture<RecipeFixture>
 
                 RecipeFacts.Validate(actual);
             });
-    }
 }

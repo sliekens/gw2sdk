@@ -1,14 +1,13 @@
 ﻿using System.ComponentModel;
 using JetBrains.Annotations;
 
-namespace GW2SDK
-{
-    [PublicAPI]
-    [DefaultValue(NoAccess)]
-    public enum AccessCondition
-    {
-        NoAccess,
+namespace GW2SDK;
 
-        HasAccess
-    }
+[PublicAPI]
+[DefaultValue(NoAccess)]
+public enum AccessCondition
+{
+    NoAccess,
+
+    HasAccess
 }

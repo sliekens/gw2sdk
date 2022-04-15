@@ -1,7 +1,5 @@
 using System.Net.Http;
-
 using GW2SDK.Http;
-
 using JetBrains.Annotations;
 
 namespace GW2SDK.Currencies.Http;

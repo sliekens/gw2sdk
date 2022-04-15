@@ -1,10 +1,8 @@
 ﻿using System.Text.Json;
-
 using GW2SDK.Commerce.Prices;
 using GW2SDK.Commerce.Prices.Json;
 using GW2SDK.Json;
 using GW2SDK.Tests.TestInfrastructure;
-
 using Xunit;
 
 namespace GW2SDK.Tests.Features.Commerce.Prices;
@@ -20,10 +18,7 @@ public class ItemPriceReaderTest : IClassFixture<ItemPriceFixture>
 
     private static class ItemPriceFact
     {
-        public static void Id_is_positive(ItemPrice actual)
-        {
-            Assert.InRange(actual.Id, 1, int.MaxValue);
-        }
+        public static void Id_is_positive(ItemPrice actual) => Assert.InRange(actual.Id, 1, int.MaxValue);
 
         public static void Best_ask_is_greater_than_best_bid(ItemPrice actual)
         {
@@ -35,8 +30,7 @@ public class ItemPriceReaderTest : IClassFixture<ItemPriceFixture>
     }
 
     [Fact]
-    public void Item_prices_can_be_created_from_json()
-    {
+    public void Item_prices_can_be_created_from_json() =>
         AssertEx.ForEach(fixture.ItemPrices,
             json =>
             {
@@ -47,5 +41,4 @@ public class ItemPriceReaderTest : IClassFixture<ItemPriceFixture>
                 ItemPriceFact.Id_is_positive(actual);
                 ItemPriceFact.Best_ask_is_greater_than_best_bid(actual);
             });
-    }
 }

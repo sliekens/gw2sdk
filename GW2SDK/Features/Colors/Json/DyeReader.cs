@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Drawing;
 using System.Text.Json;
-
 using GW2SDK.Colors.Models;
 using GW2SDK.Json;
-
 using JetBrains.Annotations;
 
 namespace GW2SDK.Colors.Json;

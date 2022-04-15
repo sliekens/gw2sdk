@@ -1,18 +1,17 @@
 ﻿using JetBrains.Annotations;
 
-namespace GW2SDK
+namespace GW2SDK;
+
+[PublicAPI]
+public enum WorldPopulation
 {
-    [PublicAPI]
-    public enum WorldPopulation
-    {
-        Low = 1,
+    Low = 1,
 
-        Medium,
+    Medium,
 
-        High,
+    High,
 
-        VeryHigh,
+    VeryHigh,
 
-        Full
-    }
+    Full
 }

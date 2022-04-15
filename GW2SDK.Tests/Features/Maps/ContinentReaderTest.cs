@@ -1,11 +1,8 @@
 ﻿using System.Text.Json;
-
 using GW2SDK.Json;
-using GW2SDK.Maps;
 using GW2SDK.Maps.Json;
 using GW2SDK.Maps.Models;
 using GW2SDK.Tests.TestInfrastructure;
-
 using Xunit;
 
 namespace GW2SDK.Tests.Features.Maps;
@@ -21,15 +18,12 @@ public class ContinentReaderTest : IClassFixture<ContinentFixture>
 
     private static class FloorFact
     {
-        public static void Texture_dimensions_contains_width_and_height(Floor actual)
-        {
+        public static void Texture_dimensions_contains_width_and_height(Floor actual) =>
             Assert.False(actual.TextureDimensions.IsEmpty);
-        }
     }
 
     [Fact]
-    public void Floors_can_be_created_from_json()
-    {
+    public void Floors_can_be_created_from_json() =>
         AssertEx.ForEach(fixture.Floors,
             json =>
             {
@@ -39,5 +33,4 @@ public class ContinentReaderTest : IClassFixture<ContinentFixture>
 
                 FloorFact.Texture_dimensions_contains_width_and_height(actual);
             });
-    }
 }

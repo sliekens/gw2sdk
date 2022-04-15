@@ -24,7 +24,7 @@ public sealed class GatewayErrorHandler : DelegatingHandler
     {
         var response = await base.SendAsync(request, cancellationToken)
             .ConfigureAwait(false);
-        if ((int) response.StatusCode >= 500)
+        if ((int)response.StatusCode >= 500)
         {
             throw new GatewayException(response.StatusCode, response.ReasonPhrase)
             {

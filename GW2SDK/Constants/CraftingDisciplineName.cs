@@ -1,26 +1,25 @@
 ﻿using JetBrains.Annotations;
 
-namespace GW2SDK
+namespace GW2SDK;
+
+[PublicAPI]
+public enum CraftingDisciplineName
 {
-    [PublicAPI]
-    public enum CraftingDisciplineName
-    {
-        Armorsmith = 1,
+    Armorsmith = 1,
 
-        Artificer,
+    Artificer,
 
-        Chef,
+    Chef,
 
-        Huntsman,
+    Huntsman,
 
-        Jeweler,
+    Jeweler,
 
-        Leatherworker,
+    Leatherworker,
 
-        Scribe,
+    Scribe,
 
-        Tailor,
+    Tailor,
 
-        Weaponsmith
-    }
+    Weaponsmith
 }

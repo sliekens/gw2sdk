@@ -1,14 +1,13 @@
 ﻿using JetBrains.Annotations;
 
-namespace GW2SDK
+namespace GW2SDK;
+
+[PublicAPI]
+public enum TrainingCategory
 {
-    [PublicAPI]
-    public enum TrainingCategory
-    {
-        Skills = 1,
+    Skills = 1,
 
-        Specializations,
+    Specializations,
 
-        EliteSpecializations
-    }
+    EliteSpecializations
 }

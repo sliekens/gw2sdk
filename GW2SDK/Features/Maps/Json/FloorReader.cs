@@ -2,10 +2,8 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Text.Json;
-
 using GW2SDK.Json;
 using GW2SDK.Maps.Models;
-
 using JetBrains.Annotations;
 
 namespace GW2SDK.Maps.Json;
@@ -83,7 +81,10 @@ public static class FloorReader
         };
     }
 
-    private static Dictionary<int, WorldRegion> ReadRegions(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    private static Dictionary<int, WorldRegion> ReadRegions(
+        JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         Dictionary<int, WorldRegion> regions = new();
         foreach (var member in json.EnumerateObject())

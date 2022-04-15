@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Text.Json;
-
 using GW2SDK.Json;
 using GW2SDK.Meta.Models;
-
 using JetBrains.Annotations;
 
 namespace GW2SDK.Meta.Json;
@@ -41,7 +39,8 @@ public static class ApiVersionReader
         {
             Languages = languages.SelectMany(value => value.GetStringRequired()),
             Routes = routes.SelectMany(value => ReadApiRoute(value, missingMemberBehavior)),
-            SchemaVersions = schemaVersions.SelectMany(value => ReadSchema(value, missingMemberBehavior)) ?? Array.Empty<Schema>()
+            SchemaVersions = schemaVersions.SelectMany(value => ReadSchema(value, missingMemberBehavior)) ??
+                Array.Empty<Schema>()
         };
     }
 

@@ -1,20 +1,19 @@
 ﻿using JetBrains.Annotations;
 
-namespace GW2SDK
+namespace GW2SDK;
+
+[PublicAPI]
+public enum GameType
 {
-    [PublicAPI]
-    public enum GameType
-    {
-        Activity = 1,
+    Activity = 1,
 
-        Dungeon,
+    Dungeon,
 
-        Pve,
+    Pve,
 
-        Pvp,
+    Pvp,
 
-        PvpLobby,
+    PvpLobby,
 
-        Wvw
-    }
+    Wvw
 }

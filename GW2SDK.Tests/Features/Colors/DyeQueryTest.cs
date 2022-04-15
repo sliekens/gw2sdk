@@ -1,10 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-
 using GW2SDK.Colors;
 using GW2SDK.Colors.Models;
 using GW2SDK.Tests.TestInfrastructure;
-
 using Xunit;
 
 namespace GW2SDK.Tests.Features.Colors;
@@ -13,10 +11,7 @@ public class DyeQueryTest
 {
     private static class ColorFact
     {
-        public static void Base_rgb_contains_red_green_blue(Dye actual)
-        {
-            Assert.False(actual.BaseRgb.IsEmpty);
-        }
+        public static void Base_rgb_contains_red_green_blue(Dye actual) => Assert.False(actual.BaseRgb.IsEmpty);
     }
 
     [Fact]

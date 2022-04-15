@@ -8,12 +8,13 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorPages();
 
 builder.Services.AddHttpClient("api.guildwars2.com",
-    http =>
-    {
-        http.UseGuildWars2();
-        http.UseLanguage(Language.English);
-        http.UseSchemaVersion(SchemaVersion.Recommended);
-    }).AddTypedClient<QuagganQuery>();
+        http =>
+        {
+            http.UseGuildWars2();
+            http.UseLanguage(Language.English);
+            http.UseSchemaVersion(SchemaVersion.Recommended);
+        })
+    .AddTypedClient<QuagganQuery>();
 
 var app = builder.Build();
 
@@ -21,6 +22,7 @@ var app = builder.Build();
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Error");
+
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }

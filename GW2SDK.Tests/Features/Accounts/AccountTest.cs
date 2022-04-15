@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Threading.Tasks;
-
 using GW2SDK.Accounts;
 using GW2SDK.Accounts.Models;
 using GW2SDK.Tests.TestInfrastructure;
-
 using Xunit;
 
 namespace GW2SDK.Tests.Features.Accounts;
@@ -13,103 +11,55 @@ public class AccountTest
 {
     private static class BasicAccountFact
     {
-        public static void Name_is_never_empty(AccountSummary actual)
-        {
-            Assert.NotEmpty(actual.Name);
-        }
+        public static void Name_is_never_empty(AccountSummary actual) => Assert.NotEmpty(actual.Name);
 
-        public static void Access_is_never_empty(AccountSummary actual)
-        {
-            Assert.NotEmpty(actual.Access);
-        }
+        public static void Access_is_never_empty(AccountSummary actual) => Assert.NotEmpty(actual.Access);
 
-        public static void GuildLeader_requires_guilds_scope(AccountSummary actual)
-        {
-            Assert.Null(actual.GuildLeader);
-        }
+        public static void GuildLeader_requires_guilds_scope(AccountSummary actual) => Assert.Null(actual.GuildLeader);
 
-        public static void Access_is_never_none(AccountSummary actual)
-        {
+        public static void Access_is_never_none(AccountSummary actual) =>
             Assert.DoesNotContain(ProductName.None, actual.Access);
-        }
 
-        public static void Age_is_never_zero(AccountSummary actual)
-        {
-            Assert.NotEqual(TimeSpan.Zero, actual.Age);
-        }
+        public static void Age_is_never_zero(AccountSummary actual) => Assert.NotEqual(TimeSpan.Zero, actual.Age);
 
-        public static void FractalLevel_requires_progression_scope(AccountSummary actual)
-        {
+        public static void FractalLevel_requires_progression_scope(AccountSummary actual) =>
             Assert.Null(actual.FractalLevel);
-        }
 
-        public static void DailyAp_requires_progression_scope(AccountSummary actual)
-        {
-            Assert.Null(actual.DailyAp);
-        }
+        public static void DailyAp_requires_progression_scope(AccountSummary actual) => Assert.Null(actual.DailyAp);
 
-        public static void MonthlyAp_requires_progression_scope(AccountSummary actual)
-        {
-            Assert.Null(actual.MonthlyAp);
-        }
+        public static void MonthlyAp_requires_progression_scope(AccountSummary actual) => Assert.Null(actual.MonthlyAp);
 
-        public static void WvwRank_requires_progression_scope(AccountSummary actual)
-        {
-            Assert.Null(actual.WvwRank);
-        }
+        public static void WvwRank_requires_progression_scope(AccountSummary actual) => Assert.Null(actual.WvwRank);
     }
 
     private static class FullAccountFact
     {
-        public static void Name_is_never_empty(AccountSummary actual)
-        {
-            Assert.NotEmpty(actual.Name);
-        }
+        public static void Name_is_never_empty(AccountSummary actual) => Assert.NotEmpty(actual.Name);
 
-        public static void Access_is_never_empty(AccountSummary actual)
-        {
-            Assert.NotEmpty(actual.Access);
-        }
+        public static void Access_is_never_empty(AccountSummary actual) => Assert.NotEmpty(actual.Access);
 
-        public static void Access_is_never_none(AccountSummary actual)
-        {
+        public static void Access_is_never_none(AccountSummary actual) =>
             Assert.DoesNotContain(ProductName.None, actual.Access);
-        }
 
-        public static void GuildLeader_is_included_by_guilds_scope(AccountSummary actual)
-        {
+        public static void GuildLeader_is_included_by_guilds_scope(AccountSummary actual) =>
             Assert.NotNull(actual.GuildLeader);
-        }
 
-        public static void Age_is_never_zero(AccountSummary actual)
-        {
-            Assert.NotEqual(TimeSpan.Zero, actual.Age);
-        }
+        public static void Age_is_never_zero(AccountSummary actual) => Assert.NotEqual(TimeSpan.Zero, actual.Age);
 
-        public static void Created_ShouldNotBeDefaultValue(AccountSummary actual)
-        {
+        public static void Created_ShouldNotBeDefaultValue(AccountSummary actual) =>
             Assert.NotEqual(default, actual.Created);
-        }
 
-        public static void FractalLevel_is_included_by_progression_scope(AccountSummary actual)
-        {
+        public static void FractalLevel_is_included_by_progression_scope(AccountSummary actual) =>
             Assert.NotNull(actual.FractalLevel);
-        }
 
-        public static void DailyAp_is_included_by_progression_scope(AccountSummary actual)
-        {
+        public static void DailyAp_is_included_by_progression_scope(AccountSummary actual) =>
             Assert.NotNull(actual.DailyAp);
-        }
 
-        public static void MonthlyAp_is_included_by_progression_scope(AccountSummary actual)
-        {
+        public static void MonthlyAp_is_included_by_progression_scope(AccountSummary actual) =>
             Assert.NotNull(actual.MonthlyAp);
-        }
 
-        public static void WvwRank_is_included_by_progression_scope(AccountSummary actual)
-        {
+        public static void WvwRank_is_included_by_progression_scope(AccountSummary actual) =>
             Assert.NotNull(actual.WvwRank);
-        }
     }
 
     [Fact]

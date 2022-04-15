@@ -4,7 +4,6 @@ using System.Net.Http;
 using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Threading.Tasks;
-
 using GW2SDK.Annotations;
 using GW2SDK.Commerce.Delivery;
 using GW2SDK.Commerce.Delivery.Http;
@@ -23,7 +22,6 @@ using GW2SDK.Commerce.Transactions.Http;
 using GW2SDK.Commerce.Transactions.Json;
 using GW2SDK.Http;
 using GW2SDK.Json;
-
 using JetBrains.Annotations;
 
 namespace GW2SDK.Commerce;

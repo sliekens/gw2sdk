@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 using GW2SDK.Http;
 using GW2SDK.Http.Handlers;
 using GW2SDK.Maps;
-
 using Microsoft.Extensions.DependencyInjection;
 using Polly;
 using Polly.Timeout;

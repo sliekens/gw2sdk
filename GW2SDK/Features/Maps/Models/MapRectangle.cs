@@ -1,5 +1,4 @@
 ﻿using System.Drawing;
-
 using JetBrains.Annotations;
 
 namespace GW2SDK.Maps.Models;

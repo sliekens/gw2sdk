@@ -1,16 +1,15 @@
 ﻿using JetBrains.Annotations;
 
-namespace GW2SDK
+namespace GW2SDK;
+
+[PublicAPI]
+public enum SkinFlag
 {
-    [PublicAPI]
-    public enum SkinFlag
-    {
-        HideIfLocked = 1,
+    HideIfLocked = 1,
 
-        NoCost,
+    NoCost,
 
-        OverrideRarity,
+    OverrideRarity,
 
-        ShowInWardrobe
-    }
+    ShowInWardrobe
 }

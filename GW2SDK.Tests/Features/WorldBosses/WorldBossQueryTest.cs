@@ -1,12 +1,10 @@
-﻿#if !NET
-using System.Linq;
-#endif
-using System.Threading.Tasks;
-
+﻿using System.Threading.Tasks;
 using GW2SDK.Tests.TestInfrastructure;
 using GW2SDK.WorldBosses;
-
 using Xunit;
+#if !NET
+using System.Linq;
+#endif
 
 namespace GW2SDK.Tests.Features.WorldBosses;
 

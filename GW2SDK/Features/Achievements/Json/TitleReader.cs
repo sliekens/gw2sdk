@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Text.Json;
-
 using GW2SDK.Achievements.Models;
 using GW2SDK.Json;
-
 using JetBrains.Annotations;
 
 namespace GW2SDK.Achievements.Json;

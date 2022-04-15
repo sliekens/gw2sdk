@@ -1,10 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-
 using GW2SDK.Specializations;
 using GW2SDK.Specializations.Models;
 using GW2SDK.Tests.TestInfrastructure;
-
 using Xunit;
 
 namespace GW2SDK.Tests.Features.Specializations;
@@ -13,45 +11,22 @@ public class SpecializationQueryTest
 {
     private static class SpecializationFact
     {
-        public static void Id_is_positive(Specialization actual)
-        {
-            Assert.InRange(actual.Id, 1, int.MaxValue);
-        }
+        public static void Id_is_positive(Specialization actual) => Assert.InRange(actual.Id, 1, int.MaxValue);
 
-        public static void Name_is_not_empty(Specialization actual)
-        {
-            Assert.NotEmpty(actual.Name);
-        }
+        public static void Name_is_not_empty(Specialization actual) => Assert.NotEmpty(actual.Name);
 
-        public static void It_has_minor_traits(Specialization actual)
-        {
-            Assert.NotEmpty(actual.MinorTraits);
-        }
+        public static void It_has_minor_traits(Specialization actual) => Assert.NotEmpty(actual.MinorTraits);
 
-        public static void It_has_major_traits(Specialization actual)
-        {
-            Assert.NotEmpty(actual.MajorTraits);
-        }
+        public static void It_has_major_traits(Specialization actual) => Assert.NotEmpty(actual.MajorTraits);
 
-        public static void Icon_is_not_empty(Specialization actual)
-        {
-            Assert.NotEmpty(actual.Icon);
-        }
+        public static void Icon_is_not_empty(Specialization actual) => Assert.NotEmpty(actual.Icon);
 
-        public static void Background_is_not_empty(Specialization actual)
-        {
-            Assert.NotEmpty(actual.Icon);
-        }
+        public static void Background_is_not_empty(Specialization actual) => Assert.NotEmpty(actual.Icon);
 
-        public static void Profession_icon_is_not_null(Specialization actual)
-        {
-            Assert.NotNull(actual.ProfessionIcon);
-        }
+        public static void Profession_icon_is_not_null(Specialization actual) => Assert.NotNull(actual.ProfessionIcon);
 
-        public static void Big_profession_icon_is_not_null(Specialization actual)
-        {
+        public static void Big_profession_icon_is_not_null(Specialization actual) =>
             Assert.NotNull(actual.ProfessionIconBig);
-        }
     }
 
     [Fact]

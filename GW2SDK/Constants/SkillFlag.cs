@@ -1,12 +1,11 @@
 ﻿using JetBrains.Annotations;
 
-namespace GW2SDK
-{
-    [PublicAPI]
-    public enum SkillFlag
-    {
-        GroundTargeted = 1,
+namespace GW2SDK;
 
-        NoUnderwater
-    }
+[PublicAPI]
+public enum SkillFlag
+{
+    GroundTargeted = 1,
+
+    NoUnderwater
 }

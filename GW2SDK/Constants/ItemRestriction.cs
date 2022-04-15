@@ -1,26 +1,25 @@
 ﻿using JetBrains.Annotations;
 
-namespace GW2SDK
+namespace GW2SDK;
+
+[PublicAPI]
+public enum ItemRestriction
 {
-    [PublicAPI]
-    public enum ItemRestriction
-    {
-        Asura = 1,
+    Asura = 1,
 
-        Charr,
+    Charr,
 
-        Female,
+    Female,
 
-        Human,
+    Human,
 
-        Mesmer,
+    Mesmer,
 
-        Necromancer,
+    Necromancer,
 
-        Norn,
+    Norn,
 
-        Ranger,
+    Ranger,
 
-        Sylvari
-    }
+    Sylvari
 }
