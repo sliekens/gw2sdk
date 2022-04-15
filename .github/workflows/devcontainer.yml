@@ -34,6 +34,6 @@ jobs:
     - run: npm install -g @vscode/dev-container-cli
     - run: chmod +x ./.devcontainer/use-dockerfile.sh && ./.devcontainer/use-dockerfile.sh
       shell: bash
-    - run: devcontainer build --image-name ghcr.io/stevenliekens/gw2sdk/devcontainer
-    - run: docker push ghcr.io/stevenliekens/gw2sdk/devcontainer:latest
+    - run: devcontainer build --image-name ghcr.io/sliekens/gw2sdk/devcontainer
+    - run: docker push ghcr.io/sliekens/gw2sdk/devcontainer:latest
         
