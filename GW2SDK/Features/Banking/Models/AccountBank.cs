@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
-
 using JetBrains.Annotations;
 
 namespace GW2SDK.Banking.Models;

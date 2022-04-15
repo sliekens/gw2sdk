@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Text;
-
 using JetBrains.Annotations;
 
 namespace GW2SDK;
@@ -40,35 +39,17 @@ public readonly struct Coin : IEquatable<Coin>, IComparable<Coin>, IComparable
         Amount = amount;
     }
 
-    public bool Equals(Coin other)
-    {
-        return Amount == other.Amount;
-    }
+    public bool Equals(Coin other) => Amount == other.Amount;
 
-    public override bool Equals(object? obj)
-    {
-        return obj is Coin other && Equals(other);
-    }
+    public override bool Equals(object? obj) => obj is Coin other && Equals(other);
 
-    public override int GetHashCode()
-    {
-        return Amount;
-    }
+    public override int GetHashCode() => Amount;
 
-    public static bool operator ==(Coin left, Coin right)
-    {
-        return left.Equals(right);
-    }
+    public static bool operator ==(Coin left, Coin right) => left.Equals(right);
 
-    public static bool operator !=(Coin left, Coin right)
-    {
-        return !left.Equals(right);
-    }
+    public static bool operator !=(Coin left, Coin right) => !left.Equals(right);
 
-    public int CompareTo(Coin other)
-    {
-        return Amount.CompareTo(other.Amount);
-    }
+    public int CompareTo(Coin other) => Amount.CompareTo(other.Amount);
 
     public int CompareTo(object? obj)
     {
@@ -82,84 +63,39 @@ public readonly struct Coin : IEquatable<Coin>, IComparable<Coin>, IComparable
             : throw new ArgumentException($"Object must be of type {nameof(Coin)}");
     }
 
-    public static bool operator <(Coin left, Coin right)
-    {
-        return left.CompareTo(right) < 0;
-    }
+    public static bool operator <(Coin left, Coin right) => left.CompareTo(right) < 0;
 
-    public static bool operator >(Coin left, Coin right)
-    {
-        return left.CompareTo(right) > 0;
-    }
+    public static bool operator >(Coin left, Coin right) => left.CompareTo(right) > 0;
 
-    public static bool operator <=(Coin left, Coin right)
-    {
-        return left.CompareTo(right) <= 0;
-    }
+    public static bool operator <=(Coin left, Coin right) => left.CompareTo(right) <= 0;
 
-    public static bool operator >=(Coin left, Coin right)
-    {
-        return left.CompareTo(right) >= 0;
-    }
+    public static bool operator >=(Coin left, Coin right) => left.CompareTo(right) >= 0;
 
-    public static Coin operator +(Coin coin)
-    {
-        return new Coin(coin.Amount);
-    }
+    public static Coin operator +(Coin coin) => new(coin.Amount);
 
-    public static Coin operator -(Coin coin)
-    {
-        return new Coin(-coin.Amount);
-    }
+    public static Coin operator -(Coin coin) => new(-coin.Amount);
 
-    public static Coin operator ++(Coin coin)
-    {
-        return new Coin(coin.Amount + 1);
-    }
+    public static Coin operator ++(Coin coin) => new(coin.Amount + 1);
 
-    public static Coin operator --(Coin coin)
-    {
-        return new Coin(coin.Amount - 1);
-    }
+    public static Coin operator --(Coin coin) => new(coin.Amount - 1);
 
-    public static Coin operator +(Coin left, Coin right)
-    {
-        return new Coin(left.Amount + right.Amount);
-    }
+    public static Coin operator +(Coin left, Coin right) => new(left.Amount + right.Amount);
 
-    public static Coin operator -(Coin left, Coin right)
-    {
-        return new Coin(left.Amount - right.Amount);
-    }
+    public static Coin operator -(Coin left, Coin right) => new(left.Amount - right.Amount);
 
-    public static Coin operator *(Coin left, Coin right)
-    {
-        return new Coin(left.Amount * right.Amount);
-    }
+    public static Coin operator *(Coin left, Coin right) => new(left.Amount * right.Amount);
 
-    public static Coin operator /(Coin left, Coin right)
-    {
-        return new Coin(left.Amount / right.Amount);
-    }
+    public static Coin operator /(Coin left, Coin right) => new(left.Amount / right.Amount);
 
-    public static Coin operator %(Coin left, Coin right)
-    {
-        return new Coin(left.Amount % right.Amount);
-    }
+    public static Coin operator %(Coin left, Coin right) => new(left.Amount % right.Amount);
 
-    public static implicit operator int(Coin coin)
-    {
-        return coin.Amount;
-    }
+    public static implicit operator int(Coin coin) => coin.Amount;
 
-    public static implicit operator Coin(int quantity)
-    {
-        return new Coin(quantity);
-    }
+    public static implicit operator Coin(int quantity) => new(quantity);
 
     public override string ToString()
     {
-        StringBuilder str = new(32);
+        var str = new StringBuilder(32);
         var copper = Amount;
         var gold = copper / 1_00_00;
         copper %= 1_00_00;

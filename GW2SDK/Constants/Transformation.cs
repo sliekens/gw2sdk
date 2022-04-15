@@ -1,10 +1,9 @@
 ﻿using JetBrains.Annotations;
 
-namespace GW2SDK
+namespace GW2SDK;
+
+[PublicAPI]
+public enum Transformation
 {
-    [PublicAPI]
-    public enum Transformation
-    {
-        CelestialAvatar = 1
-    }
+    CelestialAvatar = 1
 }

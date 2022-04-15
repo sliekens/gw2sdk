@@ -1,42 +1,41 @@
 ﻿using JetBrains.Annotations;
 
-namespace GW2SDK
+namespace GW2SDK;
+
+[PublicAPI]
+public enum ItemFlag
 {
-    [PublicAPI]
-    public enum ItemFlag
-    {
-        AccountBindOnUse = 1,
+    AccountBindOnUse = 1,
 
-        AccountBound,
+    AccountBound,
 
-        Attuned,
+    Attuned,
 
-        BulkConsume,
+    BulkConsume,
 
-        DeleteWarning,
+    DeleteWarning,
 
-        HideSuffix,
+    HideSuffix,
 
-        Infused,
+    Infused,
 
-        MonsterOnly,
+    MonsterOnly,
 
-        NoMysticForge,
+    NoMysticForge,
 
-        NoSalvage,
+    NoSalvage,
 
-        NoSell,
+    NoSell,
 
-        NoUnderwater,
+    NoUnderwater,
 
-        NotUpgradeable,
+    NotUpgradeable,
 
-        SoulBindOnUse,
+    SoulBindOnUse,
 
-        SoulbindOnAcquire,
+    SoulbindOnAcquire,
 
-        Tonic,
+    Tonic,
 
-        Unique
-    }
+    Unique
 }

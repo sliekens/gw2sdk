@@ -7,7 +7,7 @@
     "ms-azuretools.vscode-docker"
   ],
   "initializeCommand": "/bin/bash -v ${localWorkspaceFolder}/.devcontainer/initialize-host.sh",
-  "onCreateCommand": "/bin/bash -v ${containerWorkspaceFolder}/.devcontainer/on-create.sh",
+  "postCreateCommand": "/bin/bash -v ${containerWorkspaceFolder}/.devcontainer/post-create.sh",
   "mounts": [
     "type=bind,source=/var/run/docker.sock,target=/var/run/docker-host.sock",
     "type=volume,source=gw2sdk-extensions,target=/home/vscode/.vscode-server/extensions",

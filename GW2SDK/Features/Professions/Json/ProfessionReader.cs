@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text.Json;
-
 using GW2SDK.Json;
 using GW2SDK.Professions.Models;
-
 using JetBrains.Annotations;
 
 namespace GW2SDK.Professions.Json;

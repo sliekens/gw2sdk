@@ -3,33 +3,32 @@ using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
 using static System.AttributeTargets;
 
-namespace GW2SDK.Annotations
+namespace GW2SDK.Annotations;
+
+[AttributeUsage(Class | Method | Property, AllowMultiple = true)]
+[SuppressMessage("ReSharper", "MemberCanBePrivate.Global")]
+internal sealed class ScopeAttribute : Attribute
 {
-    [AttributeUsage(Class | Method | Property, AllowMultiple = true )]
-    [SuppressMessage("ReSharper", "MemberCanBePrivate.Global")]
-    internal sealed class ScopeAttribute : Attribute
+    public ScopeAttribute(params Permission[] permissions)
     {
-        public ScopeAttribute(params Permission[] permissions)
-        {
-            Permission = permissions;
-        }
-
-        public ScopeAttribute(ScopeRequirement requirement, params Permission[] permissions)
-        {
-            Requirement = requirement;
-            Permission = permissions;
-        }
-
-        internal Permission[] Permission { get; }
-
-        internal ScopeRequirement Requirement { get; }
+        Permission = permissions;
     }
 
-    [DefaultValue(All)]
-    internal enum ScopeRequirement
+    public ScopeAttribute(ScopeRequirement requirement, params Permission[] permissions)
     {
-        All,
-
-        Any
+        Requirement = requirement;
+        Permission = permissions;
     }
+
+    internal Permission[] Permission { get; }
+
+    internal ScopeRequirement Requirement { get; }
+}
+
+[DefaultValue(All)]
+internal enum ScopeRequirement
+{
+    All,
+
+    Any
 }

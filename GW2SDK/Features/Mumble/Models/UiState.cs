@@ -1,6 +1,5 @@
 ﻿using System;
 using System.ComponentModel;
-
 using JetBrains.Annotations;
 
 namespace GW2SDK.Mumble.Models;

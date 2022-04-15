@@ -1,43 +1,40 @@
 ﻿using System;
 
-namespace GW2SDK.Http
+namespace GW2SDK.Http;
+
+/// <summary>An utility like String.Split, but for Spans. This should avoid allocations.</summary>
+internal ref struct CharSpanSplitter
 {
-    /// <summary>
-    /// An utility like String.Split, but for Spans. This should avoid allocations.
-    /// </summary>
-    internal ref struct CharSpanSplitter
+    private ReadOnlySpan<char> value;
+
+    private readonly char separator;
+
+    public CharSpanSplitter(ReadOnlySpan<char> value, char separator)
     {
-        private ReadOnlySpan<char> value;
+        this.value = value;
+        this.separator = separator;
+        Current = ReadOnlySpan<char>.Empty;
+    }
 
-        private readonly char separator;
+    public ReadOnlySpan<char> Current { get; private set; }
 
-        public CharSpanSplitter(ReadOnlySpan<char> value, char separator)
+    public bool MoveNext()
+    {
+        if (value == ReadOnlySpan<char>.Empty)
         {
-            this.value = value;
-            this.separator = separator;
-            Current = ReadOnlySpan<char>.Empty;
+            return false;
         }
 
-        public ReadOnlySpan<char> Current { get; private set; }
-
-        public bool MoveNext()
+        var index = value.IndexOf(separator);
+        if (index == -1)
         {
-            if (value == ReadOnlySpan<char>.Empty)
-            {
-                return false;
-            }
-
-            var index = value.IndexOf(separator);
-            if (index == -1)
-            {
-                Current = value;
-                value = ReadOnlySpan<char>.Empty;
-                return true;
-            }
-
-            Current = value[..index];
-            value = value[(index + 1)..];
+            Current = value;
+            value = ReadOnlySpan<char>.Empty;
             return true;
         }
+
+        Current = value[..index];
+        value = value[(index + 1)..];
+        return true;
     }
 }

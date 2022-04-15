@@ -1,26 +1,25 @@
 ﻿using JetBrains.Annotations;
 
-namespace GW2SDK
+namespace GW2SDK;
+
+[PublicAPI]
+public enum ProfessionName
 {
-    [PublicAPI]
-    public enum ProfessionName
-    {
-        Guardian = 1,
+    Guardian = 1,
 
-        Warrior,
+    Warrior,
 
-        Engineer,
+    Engineer,
 
-        Ranger,
+    Ranger,
 
-        Thief,
+    Thief,
 
-        Elementalist,
+    Elementalist,
 
-        Mesmer,
+    Mesmer,
 
-        Necromancer,
+    Necromancer,
 
-        Revenant
-    }
+    Revenant
 }

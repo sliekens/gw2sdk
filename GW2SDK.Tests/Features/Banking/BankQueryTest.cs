@@ -1,11 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Threading.Tasks;
-
 using GW2SDK.Banking;
 using GW2SDK.Banking.Models;
 using GW2SDK.Tests.TestInfrastructure;
-
 using Xunit;
 
 namespace GW2SDK.Tests.Features.Banking;
@@ -15,36 +13,21 @@ public class BankQueryTest
     [SuppressMessage("ReSharper", "SuggestBaseTypeForParameter")] // Yes the Bank is enumerable but its type has meaning
     private static class AccountBankFact
     {
-        public static void Bank_is_not_empty(AccountBank actual)
-        {
-            Assert.NotEmpty(actual);
-        }
+        public static void Bank_is_not_empty(AccountBank actual) => Assert.NotEmpty(actual);
 
-        public static void Bank_tabs_have_30_slots(AccountBank actual)
-        {
-            Assert.Equal(0, actual.Count % 30);
-        }
+        public static void Bank_tabs_have_30_slots(AccountBank actual) => Assert.Equal(0, actual.Count % 30);
     }
 
     private static class MaterialCategoryFact
     {
-        public static void Name_is_not_empty(MaterialCategory actual)
-        {
-            Assert.NotEmpty(actual.Name);
-        }
+        public static void Name_is_not_empty(MaterialCategory actual) => Assert.NotEmpty(actual.Name);
     }
 
     private static class AccountBankSlotFact
     {
-        public static void BankSlot_id_is_positive(BankSlot actual)
-        {
-            Assert.InRange(actual.Id, 1, int.MaxValue);
-        }
+        public static void BankSlot_id_is_positive(BankSlot actual) => Assert.InRange(actual.Id, 1, int.MaxValue);
 
-        public static void BankSlot_count_is_positive(BankSlot actual)
-        {
-            Assert.InRange(actual.Count, 1, int.MaxValue);
-        }
+        public static void BankSlot_count_is_positive(BankSlot actual) => Assert.InRange(actual.Count, 1, int.MaxValue);
     }
 
     [Fact]

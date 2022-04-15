@@ -1,10 +1,9 @@
 ﻿using JetBrains.Annotations;
 
-namespace GW2SDK
+namespace GW2SDK;
+
+[PublicAPI]
+public enum CharacterFlag
 {
-    [PublicAPI]
-    public enum CharacterFlag
-    {
-        Beta = 1
-    }
+    Beta = 1
 }

@@ -4,13 +4,11 @@ using System.Net.Http;
 using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Threading.Tasks;
-
 using GW2SDK.Http;
 using GW2SDK.Items.Http;
 using GW2SDK.Items.Json;
 using GW2SDK.Items.Models;
 using GW2SDK.Json;
-
 using JetBrains.Annotations;
 
 namespace GW2SDK.Items;

@@ -2,83 +2,86 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace GW2SDK.Tests.TestInfrastructure
+namespace GW2SDK.Tests.TestInfrastructure;
+
+internal sealed class CompositeDisposable : IAsyncDisposable, IDisposable
 {
-    internal sealed class CompositeDisposable : IAsyncDisposable, IDisposable
+    private readonly List<IAsyncDisposable> asyncDisposables = new();
+
+    private readonly List<IDisposable> disposables = new();
+
+    private bool disposed;
+
+    public async ValueTask DisposeAsync()
     {
-        private bool disposed;
-
-        private readonly List<IDisposable> disposables = new();
-
-        private readonly List<IAsyncDisposable> asyncDisposables = new();
-
-        public void Add(IDisposable disposable)
+        if (disposed) return;
+        foreach (var asyncDisposable in asyncDisposables)
         {
-            if (disposed)
-            {
-                throw new ObjectDisposedException("CompositeDisposable cannot be reused once disposed. Create a new instance.");
-            }
-
-            disposables.Add(disposable);
+            await asyncDisposable.DisposeAsync()
+                .ConfigureAwait(false);
         }
 
-        public void Add(IAsyncDisposable disposable)
+        foreach (var disposable in disposables)
         {
-            if (disposed)
+            if (disposable is IAsyncDisposable asyncDisposable)
             {
-                throw new ObjectDisposedException("CompositeDisposable cannot be reused once disposed. Create a new instance.");
+                await asyncDisposable.DisposeAsync()
+                    .ConfigureAwait(false);
             }
-
-            asyncDisposables.Add(disposable);
+            else
+            {
+                disposable.Dispose();
+            }
         }
 
-        public void Dispose()
+        Dispose(false);
+    }
+
+    public void Dispose()
+    {
+        if (disposed) return;
+        Dispose(true);
+    }
+
+    public void Add(IDisposable disposable)
+    {
+        if (disposed)
         {
-            if (disposed) return;
-            Dispose(true);
+            throw new ObjectDisposedException(
+                "CompositeDisposable cannot be reused once disposed. Create a new instance.");
         }
 
-        public async ValueTask DisposeAsync()
-        {
-            if (disposed) return;
-            foreach (var asyncDisposable in asyncDisposables)
-            {
-                await asyncDisposable.DisposeAsync().ConfigureAwait(false);
-            }
+        disposables.Add(disposable);
+    }
 
+    public void Add(IAsyncDisposable disposable)
+    {
+        if (disposed)
+        {
+            throw new ObjectDisposedException(
+                "CompositeDisposable cannot be reused once disposed. Create a new instance.");
+        }
+
+        asyncDisposables.Add(disposable);
+    }
+
+    private void Dispose(bool disposing)
+    {
+        if (disposing)
+        {
             foreach (var disposable in disposables)
             {
-                if (disposable is IAsyncDisposable asyncDisposable)
-                {
-                    await asyncDisposable.DisposeAsync().ConfigureAwait(false);
-                }
-                else
-                {
-                    disposable.Dispose();
-                }
+                disposable.Dispose();
             }
 
-            Dispose(false);
-        }
-
-        private void Dispose(bool disposing)
-        {
-            if (disposing)
+            foreach (var asyncDisposable in asyncDisposables)
             {
-                foreach (var disposable in disposables)
-                {
-                    disposable.Dispose();
-                }
-
-                foreach (var asyncDisposable in asyncDisposables)
-                {
-                    (asyncDisposable as IDisposable)?.Dispose();
-                }
+                (asyncDisposable as IDisposable)?.Dispose();
             }
-
-            disposed = true;
-            disposables.Clear();
-            asyncDisposables.Clear();
         }
+
+        disposed = true;
+        disposables.Clear();
+        asyncDisposables.Clear();
     }
 }

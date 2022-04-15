@@ -1,10 +1,8 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using System.Runtime.InteropServices;
 using System.Text.Json;
-
 using GW2SDK.Json;
 using GW2SDK.Mumble.Json;
-
 using JetBrains.Annotations;
 
 namespace GW2SDK.Mumble.Models;

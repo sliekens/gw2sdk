@@ -1,20 +1,19 @@
 ﻿using System.ComponentModel;
 using JetBrains.Annotations;
 
-namespace GW2SDK
+namespace GW2SDK;
+
+[PublicAPI]
+[DefaultValue(Unknown)]
+public enum MasteryRegionName
 {
-    [PublicAPI]
-    [DefaultValue(Unknown)]
-    public enum MasteryRegionName
-    {
-        Unknown,
+    Unknown,
 
-        Tyria,
+    Tyria,
 
-        Maguuma,
+    Maguuma,
 
-        Desert,
+    Desert,
 
-        Tundra
-    }
+    Tundra
 }

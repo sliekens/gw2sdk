@@ -1,9 +1,8 @@
 ﻿using System;
 
-namespace GW2SDK.Annotations
+namespace GW2SDK.Annotations;
+
+[AttributeUsage(AttributeTargets.Class)]
+internal sealed class DataTransferObjectAttribute : Attribute
 {
-    [AttributeUsage(AttributeTargets.Class)]
-    internal sealed class DataTransferObjectAttribute : Attribute
-    {
-    }
 }

@@ -1,16 +1,15 @@
 ﻿using JetBrains.Annotations;
 
-namespace GW2SDK
+namespace GW2SDK;
+
+[PublicAPI]
+public enum Offhand
 {
-    [PublicAPI]
-    public enum Offhand
-    {
-        Nothing = 1,
+    Nothing = 1,
 
-        None,
+    None,
 
-        Dagger,
+    Dagger,
 
-        Pistol
-    }
+    Pistol
 }

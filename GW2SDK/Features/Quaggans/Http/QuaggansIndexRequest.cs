@@ -1,9 +1,6 @@
 ﻿using System.Net.Http;
-
 using GW2SDK.Http;
-
 using JetBrains.Annotations;
-
 using static System.Net.Http.HttpMethod;
 
 namespace GW2SDK.Quaggans.Http;
@@ -16,8 +13,5 @@ public sealed class QuaggansIndexRequest
         AcceptEncoding = "gzip"
     };
 
-    public static implicit operator HttpRequestMessage(QuaggansIndexRequest _)
-    {
-        return Template.Compile();
-    }
+    public static implicit operator HttpRequestMessage(QuaggansIndexRequest _) => Template.Compile();
 }

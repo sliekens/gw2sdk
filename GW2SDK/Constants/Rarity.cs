@@ -1,24 +1,23 @@
 ﻿using JetBrains.Annotations;
 
-namespace GW2SDK
+namespace GW2SDK;
+
+[PublicAPI]
+public enum Rarity
 {
-    [PublicAPI]
-    public enum Rarity
-    {
-        Junk = 1,
+    Junk = 1,
 
-        Basic,
+    Basic,
 
-        Fine,
+    Fine,
 
-        Masterwork,
+    Masterwork,
 
-        Rare,
+    Rare,
 
-        Exotic,
+    Exotic,
 
-        Ascended,
+    Ascended,
 
-        Legendary
-    }
+    Legendary
 }

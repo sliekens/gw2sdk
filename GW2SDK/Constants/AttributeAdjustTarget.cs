@@ -1,30 +1,29 @@
 ﻿using System.ComponentModel;
 using JetBrains.Annotations;
 
-namespace GW2SDK
+namespace GW2SDK;
+
+[PublicAPI]
+[DefaultValue(None)]
+public enum AttributeAdjustTarget
 {
-    [PublicAPI]
-    [DefaultValue(None)]
-    public enum AttributeAdjustTarget
-    {
-        None,
+    None,
 
-        BoonDuration,
+    BoonDuration,
 
-        CritDamage,
+    CritDamage,
 
-        ConditionDamage,
+    ConditionDamage,
 
-        ConditionDuration,
+    ConditionDuration,
 
-        Healing,
+    Healing,
 
-        Precision,
+    Precision,
 
-        Toughness,
+    Toughness,
 
-        Power,
+    Power,
 
-        Vitality
-    }
+    Vitality
 }

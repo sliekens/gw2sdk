@@ -1,40 +1,39 @@
 ﻿using JetBrains.Annotations;
 
-namespace GW2SDK
+namespace GW2SDK;
+
+[PublicAPI]
+public enum ColorCategoryName
 {
-    [PublicAPI]
-    public enum ColorCategoryName
-    {
-        Blue = 1,
+    Blue = 1,
 
-        Brown,
+    Brown,
 
-        Common,
+    Common,
 
-        Exclusive,
+    Exclusive,
 
-        Gray,
+    Gray,
 
-        Green,
+    Green,
 
-        Leather,
+    Leather,
 
-        Metal,
+    Metal,
 
-        Orange,
+    Orange,
 
-        Purple,
+    Purple,
 
-        Rare,
+    Rare,
 
-        Red,
+    Red,
 
-        Starter,
+    Starter,
 
-        Uncommon,
+    Uncommon,
 
-        Vibrant,
+    Vibrant,
 
-        Yellow
-    }
+    Yellow
 }

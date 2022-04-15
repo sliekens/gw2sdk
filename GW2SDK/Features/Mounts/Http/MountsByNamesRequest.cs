@@ -2,11 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
-
 using GW2SDK.Http;
-
 using JetBrains.Annotations;
-
 using static System.Net.Http.HttpMethod;
 
 namespace GW2SDK.Mounts.Http;
@@ -42,9 +39,8 @@ public sealed class MountsByNamesRequest
         return request.Compile();
     }
 
-    private static string FormatMountName(MountName mountName)
-    {
-        return mountName switch
+    private static string FormatMountName(MountName mountName) =>
+        mountName switch
         {
             MountName.Griffon => "griffon",
             MountName.Jackal => "jackal",
@@ -56,5 +52,4 @@ public sealed class MountsByNamesRequest
             MountName.Warclaw => "warclaw",
             _ => throw new NotSupportedException("Could not format mount name.")
         };
-    }
 }

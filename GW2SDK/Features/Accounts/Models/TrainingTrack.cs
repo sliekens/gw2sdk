@@ -1,6 +1,5 @@
 ﻿using GW2SDK.Annotations;
 using GW2SDK.Professions.Models;
-
 using JetBrains.Annotations;
 
 namespace GW2SDK.Accounts.Models;

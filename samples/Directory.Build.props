@@ -1,5 +1,5 @@
 <Project>
-    <PropertyGroup>
-        <IsPackable>false</IsPackable>
-    </PropertyGroup>
+  <PropertyGroup>
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
 </Project>

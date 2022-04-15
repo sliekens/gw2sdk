@@ -1,12 +1,11 @@
 ﻿using JetBrains.Annotations;
 
-namespace GW2SDK
-{
-    [PublicAPI]
-    public enum TraitSlot
-    {
-        Minor = 1,
+namespace GW2SDK;
 
-        Major
-    }
+[PublicAPI]
+public enum TraitSlot
+{
+    Minor = 1,
+
+    Major
 }

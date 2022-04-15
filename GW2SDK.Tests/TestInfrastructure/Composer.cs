@@ -25,176 +25,175 @@ using GW2SDK.Tokens;
 using GW2SDK.Traits;
 using GW2SDK.WorldBosses;
 
-namespace GW2SDK.Tests.TestInfrastructure
+namespace GW2SDK.Tests.TestInfrastructure;
+
+public class Composer : IServiceProvider, IAsyncDisposable
 {
-    public class Composer : IServiceProvider, IAsyncDisposable
+    private readonly ConfigurationManager configuration = new();
+
+    private readonly CompositeDisposable disposables = new();
+
+    private readonly IHttpClientFactory httpClientFactory;
+
+    public Composer()
     {
-        private readonly ConfigurationManager configuration = new();
-
-        private readonly CompositeDisposable disposables = new();
-
-        private readonly IHttpClientFactory httpClientFactory;
-
-        public Composer()
-        {
-            var gw2HttpClientFactory = new TestHttpClientFactory(configuration.BaseAddress);
-            disposables.Add(gw2HttpClientFactory);
-            httpClientFactory = gw2HttpClientFactory;
-        }
-
-        public async ValueTask DisposeAsync()
-        {
-            await disposables.DisposeAsync()
-                .ConfigureAwait(false);
-            GC.SuppressFinalize(this);
-        }
-
-        public object GetService(Type serviceType)
-        {
-            if (serviceType == typeof(TestCharacterName))
-            {
-                return new TestCharacterName(configuration.CharacterName);
-            }
-
-            if (serviceType == typeof(ApiKeyBasic))
-            {
-                return new ApiKeyBasic(configuration.ApiKeyBasic);
-            }
-
-            if (serviceType == typeof(ApiKeyFull))
-            {
-                return new ApiKeyFull(configuration.ApiKeyFull);
-            }
-
-            if (serviceType == typeof(HttpClient))
-            {
-                return httpClientFactory.CreateClient("GW2SDK");
-            }
-
-            if (serviceType == typeof(BankQuery))
-            {
-                return new BankQuery(Resolve<HttpClient>());
-            }
-
-            if (serviceType == typeof(AccountQuery))
-            {
-                return new AccountQuery(Resolve<HttpClient>());
-            }
-
-            if (serviceType == typeof(AchievementQuery))
-            {
-                return new AchievementQuery(Resolve<HttpClient>());
-            }
-
-            if (serviceType == typeof(StoryJournal))
-            {
-                return new StoryJournal(Resolve<HttpClient>());
-            }
-
-            if (serviceType == typeof(DyeQuery))
-            {
-                return new DyeQuery(Resolve<HttpClient>());
-            }
-
-            if (serviceType == typeof(TradingPost))
-            {
-                return new TradingPost(Resolve<HttpClient>());
-            }
-
-            if (serviceType == typeof(MapQuery))
-            {
-                return new MapQuery(Resolve<HttpClient>());
-            }
-
-            if (serviceType == typeof(Wallet))
-            {
-                return new Wallet(Resolve<HttpClient>());
-            }
-
-            if (serviceType == typeof(ItemQuery))
-            {
-                return new ItemQuery(Resolve<HttpClient>());
-            }
-
-            if (serviceType == typeof(MailCarrierQuery))
-            {
-                return new MailCarrierQuery(Resolve<HttpClient>());
-            }
-
-            if (serviceType == typeof(CraftingStation))
-            {
-                return new CraftingStation(Resolve<HttpClient>());
-            }
-
-            if (serviceType == typeof(Wardrobe))
-            {
-                return new Wardrobe(Resolve<HttpClient>());
-            }
-
-            if (serviceType == typeof(TokenProvider))
-            {
-                return new TokenProvider(Resolve<HttpClient>());
-            }
-
-            if (serviceType == typeof(TraitQuery))
-            {
-                return new TraitQuery(Resolve<HttpClient>());
-            }
-
-            if (serviceType == typeof(MetaQuery))
-            {
-                return new MetaQuery(Resolve<HttpClient>());
-            }
-
-            if (serviceType == typeof(ProfessionQuery))
-            {
-                return new ProfessionQuery(Resolve<HttpClient>());
-            }
-
-            if (serviceType == typeof(ItemStatQuery))
-            {
-                return new ItemStatQuery(Resolve<HttpClient>());
-            }
-
-            if (serviceType == typeof(SkillQuery))
-            {
-                return new SkillQuery(Resolve<HttpClient>());
-            }
-
-            if (serviceType == typeof(WorldBossQuery))
-            {
-                return new WorldBossQuery(Resolve<HttpClient>());
-            }
-
-            if (serviceType == typeof(MasteryQuery))
-            {
-                return new MasteryQuery(Resolve<HttpClient>());
-            }
-
-            if (serviceType == typeof(SpecializationQuery))
-            {
-                return new SpecializationQuery(Resolve<HttpClient>());
-            }
-
-            if (serviceType == typeof(MountQuery))
-            {
-                return new MountQuery(Resolve<HttpClient>());
-            }
-
-            if (serviceType == typeof(QuagganQuery))
-            {
-                return new QuagganQuery(Resolve<HttpClient>());
-            }
-
-            if (serviceType == typeof(Wallet))
-            {
-                return new Wallet(Resolve<HttpClient>());
-            }
-
-            return null;
-        }
-
-        public T Resolve<T>() =>
-            (T) GetService(typeof(T)) ?? throw new InvalidOperationException($"Unable to compose type '{typeof(T)}'");
+        var gw2HttpClientFactory = new TestHttpClientFactory(configuration.BaseAddress);
+        disposables.Add(gw2HttpClientFactory);
+        httpClientFactory = gw2HttpClientFactory;
     }
+
+    public async ValueTask DisposeAsync()
+    {
+        await disposables.DisposeAsync()
+            .ConfigureAwait(false);
+        GC.SuppressFinalize(this);
+    }
+
+    public object GetService(Type serviceType)
+    {
+        if (serviceType == typeof(TestCharacterName))
+        {
+            return new TestCharacterName(configuration.CharacterName);
+        }
+
+        if (serviceType == typeof(ApiKeyBasic))
+        {
+            return new ApiKeyBasic(configuration.ApiKeyBasic);
+        }
+
+        if (serviceType == typeof(ApiKeyFull))
+        {
+            return new ApiKeyFull(configuration.ApiKeyFull);
+        }
+
+        if (serviceType == typeof(HttpClient))
+        {
+            return httpClientFactory.CreateClient("GW2SDK");
+        }
+
+        if (serviceType == typeof(BankQuery))
+        {
+            return new BankQuery(Resolve<HttpClient>());
+        }
+
+        if (serviceType == typeof(AccountQuery))
+        {
+            return new AccountQuery(Resolve<HttpClient>());
+        }
+
+        if (serviceType == typeof(AchievementQuery))
+        {
+            return new AchievementQuery(Resolve<HttpClient>());
+        }
+
+        if (serviceType == typeof(StoryJournal))
+        {
+            return new StoryJournal(Resolve<HttpClient>());
+        }
+
+        if (serviceType == typeof(DyeQuery))
+        {
+            return new DyeQuery(Resolve<HttpClient>());
+        }
+
+        if (serviceType == typeof(TradingPost))
+        {
+            return new TradingPost(Resolve<HttpClient>());
+        }
+
+        if (serviceType == typeof(MapQuery))
+        {
+            return new MapQuery(Resolve<HttpClient>());
+        }
+
+        if (serviceType == typeof(Wallet))
+        {
+            return new Wallet(Resolve<HttpClient>());
+        }
+
+        if (serviceType == typeof(ItemQuery))
+        {
+            return new ItemQuery(Resolve<HttpClient>());
+        }
+
+        if (serviceType == typeof(MailCarrierQuery))
+        {
+            return new MailCarrierQuery(Resolve<HttpClient>());
+        }
+
+        if (serviceType == typeof(CraftingStation))
+        {
+            return new CraftingStation(Resolve<HttpClient>());
+        }
+
+        if (serviceType == typeof(Wardrobe))
+        {
+            return new Wardrobe(Resolve<HttpClient>());
+        }
+
+        if (serviceType == typeof(TokenProvider))
+        {
+            return new TokenProvider(Resolve<HttpClient>());
+        }
+
+        if (serviceType == typeof(TraitQuery))
+        {
+            return new TraitQuery(Resolve<HttpClient>());
+        }
+
+        if (serviceType == typeof(MetaQuery))
+        {
+            return new MetaQuery(Resolve<HttpClient>());
+        }
+
+        if (serviceType == typeof(ProfessionQuery))
+        {
+            return new ProfessionQuery(Resolve<HttpClient>());
+        }
+
+        if (serviceType == typeof(ItemStatQuery))
+        {
+            return new ItemStatQuery(Resolve<HttpClient>());
+        }
+
+        if (serviceType == typeof(SkillQuery))
+        {
+            return new SkillQuery(Resolve<HttpClient>());
+        }
+
+        if (serviceType == typeof(WorldBossQuery))
+        {
+            return new WorldBossQuery(Resolve<HttpClient>());
+        }
+
+        if (serviceType == typeof(MasteryQuery))
+        {
+            return new MasteryQuery(Resolve<HttpClient>());
+        }
+
+        if (serviceType == typeof(SpecializationQuery))
+        {
+            return new SpecializationQuery(Resolve<HttpClient>());
+        }
+
+        if (serviceType == typeof(MountQuery))
+        {
+            return new MountQuery(Resolve<HttpClient>());
+        }
+
+        if (serviceType == typeof(QuagganQuery))
+        {
+            return new QuagganQuery(Resolve<HttpClient>());
+        }
+
+        if (serviceType == typeof(Wallet))
+        {
+            return new Wallet(Resolve<HttpClient>());
+        }
+
+        return null;
+    }
+
+    public T Resolve<T>() =>
+        (T)GetService(typeof(T)) ?? throw new InvalidOperationException($"Unable to compose type '{typeof(T)}'");
 }

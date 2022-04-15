@@ -4,78 +4,72 @@ using GW2SDK.Json;
 using GW2SDK.Mumble;
 using GW2SDK.Mumble.Models;
 
-namespace Mumble
+namespace Mumble;
+
+internal class Program : IObserver<Snapshot>
 {
-    internal class Program : IObserver<Snapshot>
+    public void OnCompleted() => Console.WriteLine("Goodbye.");
+
+    public void OnError(Exception error) => Console.Error.WriteLine(error.ToString());
+
+    public void OnNext(Snapshot snapshot) => ThreadPool.QueueUserWorkItem(CallBack, snapshot);
+
+    private static void Main(string[] args)
     {
-        public void OnCompleted()
+        var cts = new CancellationTokenSource();
+
+        Console.CancelKeyPress += (_, _) =>
         {
-            Console.WriteLine("Goodbye.");
+            cts.Cancel();
+        };
+
+        new Program().RealMain(cts.Token);
+    }
+
+    private void RealMain(CancellationToken cancellationToken)
+    {
+        if (!OperatingSystem.IsWindows())
+        {
+            Console.WriteLine("This sample is only supported on Windows!");
+            return;
         }
 
-        public void OnError(Exception error)
+        using var mumble = GameLink.Open();
+
+        using var subscription = mumble.Subscribe(this);
+
+        WaitHandle.WaitAll(new[]
         {
-            Console.Error.WriteLine(error.ToString());
+            cancellationToken.WaitHandle
+        });
+    }
+
+    private static void CallBack(object state)
+    {
+        var snapshot = (Snapshot)state;
+        var pos = snapshot.AvatarPosition;
+
+        if (!snapshot.TryGetIdentity(out var identity, MissingMemberBehavior.Error))
+        {
+            return;
         }
 
-        public void OnNext(Snapshot snapshot)
+        if (!snapshot.TryGetContext(out var context))
         {
-            ThreadPool.QueueUserWorkItem(CallBack, snapshot);
+            return;
         }
 
-        private static void Main(string[] args)
-        {
-            var cts = new CancellationTokenSource();
-
-            Console.CancelKeyPress += (_, _) =>
-            {
-                cts.Cancel();
-            };
-
-            new Program().RealMain(cts.Token);
-        }
-
-        private void RealMain(CancellationToken cancellationToken)
-        {
-            if (!OperatingSystem.IsWindows())
-            {
-                Console.WriteLine("This sample is only supported on Windows!");
-                return;
-            }
-
-            using var mumble = GameLink.Open();
-
-            using var subscription = mumble.Subscribe(this);
-
-            WaitHandle.WaitAll(new[] { cancellationToken.WaitHandle });
-        }
-
-        private static void CallBack(object state)
-        {
-            var snapshot = (Snapshot) state;
-            var pos = snapshot.AvatarPosition;
-
-            if (!snapshot.TryGetIdentity(out var identity, MissingMemberBehavior.Error))
-            {
-                return;
-            }
-
-            if (!snapshot.TryGetContext(out var context))
-            {
-                return;
-            }
-
-            Console.WriteLine("Update {0}: {1}, the {2} {3} is {4} on {5} in Map: {6}, Position: {{ Right = {7}, Up = {8}, Front = {9} }}",
-                snapshot.UiTick,
-                identity.Name,
-                identity.Race,
-                identity.Profession,
-                context.UiState.HasFlag(UiState.IsInCombat) ? "fighting" : "traveling",
-                context.IsMounted ? context.GetMount() : "foot",
-                identity.MapId,
-                pos[0],
-                pos[1],
-                pos[2]);
-        }
+        Console.WriteLine(
+            "Update {0}: {1}, the {2} {3} is {4} on {5} in Map: {6}, Position: {{ Right = {7}, Up = {8}, Front = {9} }}",
+            snapshot.UiTick,
+            identity.Name,
+            identity.Race,
+            identity.Profession,
+            context.UiState.HasFlag(UiState.IsInCombat) ? "fighting" : "traveling",
+            context.IsMounted ? context.GetMount() : "foot",
+            identity.MapId,
+            pos[0],
+            pos[1],
+            pos[2]);
     }
 }

@@ -3,15 +3,12 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
-
 using GW2SDK.Annotations;
 using GW2SDK.Colors.Http;
 using GW2SDK.Colors.Json;
 using GW2SDK.Colors.Models;
-using GW2SDK.Crafting.Http;
 using GW2SDK.Http;
 using GW2SDK.Json;
-
 using JetBrains.Annotations;
 
 namespace GW2SDK.Colors;
@@ -25,6 +22,29 @@ public sealed class DyeQuery
     {
         this.http = http.WithDefaults() ?? throw new ArgumentNullException(nameof(http));
     }
+
+    #region /v2/account/dyes
+
+    /// <summary>Gets the IDs of the dyes unlocked by the current account.</summary>
+    [Scope(Permission.Unlocks)]
+#if NET
+    public async Task<IReplica<IReadOnlySet<int>>> GetUnlockedDyes(
+        string? accessToken,
+        CancellationToken cancellationToken = default
+    )
+#else
+    public async Task<IReplica<IReadOnlyCollection<int>>> GetUnlockedDyes(
+        string? accessToken,
+        CancellationToken cancellationToken = default
+    )
+#endif
+    {
+        UnlockedDyesRequest request = new(accessToken);
+        return await http.GetResourcesSetSimple(request, json => json.RootElement.GetInt32Array(), cancellationToken)
+            .ConfigureAwait(false);
+    }
+
+    #endregion
 
     #region /v2/colors
 
@@ -92,30 +112,6 @@ public sealed class DyeQuery
         return await http.GetResourcesPage(request,
                 json => json.RootElement.GetArray(item => DyeReader.Read(item, missingMemberBehavior)),
                 cancellationToken)
-            .ConfigureAwait(false);
-    }
-
-    #endregion
-
-    #region /v2/account/dyes
-
-
-    /// <summary>Gets the IDs of the dyes unlocked by the current account.</summary>
-    [Scope(Permission.Unlocks)]
-#if NET
-    public async Task<IReplica<IReadOnlySet<int>>> GetUnlockedDyes(
-        string? accessToken,
-        CancellationToken cancellationToken = default
-    )
-#else
-    public async Task<IReplica<IReadOnlyCollection<int>>> GetUnlockedDyes(
-        string? accessToken,
-        CancellationToken cancellationToken = default
-    )
-#endif
-    {
-        UnlockedDyesRequest request = new(accessToken);
-        return await http.GetResourcesSetSimple(request, json => json.RootElement.GetInt32Array(), cancellationToken)
             .ConfigureAwait(false);
     }
 

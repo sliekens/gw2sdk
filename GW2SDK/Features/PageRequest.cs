@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Net.Http;
-
 using GW2SDK.Http;
-
 using JetBrains.Annotations;
 
 namespace GW2SDK;

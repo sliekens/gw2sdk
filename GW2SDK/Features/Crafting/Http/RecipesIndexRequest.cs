@@ -1,9 +1,6 @@
 ﻿using System.Net.Http;
-
 using GW2SDK.Http;
-
 using JetBrains.Annotations;
-
 using static System.Net.Http.HttpMethod;
 
 namespace GW2SDK.Crafting.Http;
@@ -16,8 +13,5 @@ public sealed class RecipesIndexRequest
         AcceptEncoding = "gzip"
     };
 
-    public static implicit operator HttpRequestMessage(RecipesIndexRequest _)
-    {
-        return Template.Compile();
-    }
+    public static implicit operator HttpRequestMessage(RecipesIndexRequest _) => Template.Compile();
 }

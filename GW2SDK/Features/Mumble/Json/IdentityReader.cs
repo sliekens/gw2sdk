@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Text.Json;
-
 using GW2SDK.Json;
 using GW2SDK.Mumble.Models;
-
 using JetBrains.Annotations;
 
 namespace GW2SDK.Mumble.Json;

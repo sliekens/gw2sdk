@@ -1,16 +1,15 @@
 ﻿using JetBrains.Annotations;
 
-namespace GW2SDK
+namespace GW2SDK;
+
+[PublicAPI]
+public enum ComboFinisherName
 {
-    [PublicAPI]
-    public enum ComboFinisherName
-    {
-        Blast = 1,
+    Blast = 1,
 
-        Leap,
+    Leap,
 
-        Projectile,
+    Projectile,
 
-        Whirl
-    }
+    Whirl
 }

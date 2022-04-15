@@ -3,11 +3,9 @@ using System.IO;
 using System.IO.MemoryMappedFiles;
 using System.Threading;
 using System.Threading.Tasks;
-
 using GW2SDK.Json;
 using GW2SDK.Mumble;
 using GW2SDK.Mumble.Models;
-
 using Xunit;
 
 #pragma warning disable CA1416
@@ -29,15 +27,9 @@ public class GameLinkTestObserver : IObserver<Snapshot>
 
     public Snapshot Last { get; private set; }
 
-    public void OnCompleted()
-    {
-        tcs.SetResult(true);
-    }
+    public void OnCompleted() => tcs.SetResult(true);
 
-    public void OnError(Exception error)
-    {
-        tcs.SetException(error);
-    }
+    public void OnError(Exception error) => tcs.SetException(error);
 
     public void OnNext(Snapshot value)
     {

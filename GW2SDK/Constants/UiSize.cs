@@ -1,18 +1,17 @@
 ﻿using System.ComponentModel;
 using JetBrains.Annotations;
 
-namespace GW2SDK
+namespace GW2SDK;
+
+[PublicAPI]
+[DefaultValue(Small)]
+public enum UiSize
 {
-    [PublicAPI]
-    [DefaultValue(Small)]
-    public enum UiSize
-    {
-        Small,
+    Small,
 
-        Normal,
+    Normal,
 
-        Large,
+    Large,
 
-        Larger
-    }
+    Larger
 }

@@ -9,193 +9,194 @@ using System.Threading;
 using System.Threading.Tasks;
 using JetBrains.Annotations;
 
-namespace GW2SDK.Http
+namespace GW2SDK.Http;
+
+[PublicAPI]
+public static class HttpClientExtensions
 {
-    [PublicAPI]
-    public static class HttpClientExtensions
+    /// <summary>Sets the <see cref="HttpClient.BaseAddress" /> to <c>"https://api.guildwars2.com"</c>.</summary>
+    public static void UseGuildWars2(this HttpClient instance)
     {
-        /// <summary>Sets the <see cref="HttpClient.BaseAddress" /> to <c>"https://api.guildwars2.com"</c>.</summary>
-        public static void UseGuildWars2(this HttpClient instance)
+        if (instance is null) throw new ArgumentNullException(nameof(instance));
+        instance.BaseAddress = new Uri("https://api.guildwars2.com", UriKind.Absolute);
+    }
+
+    public static void UseAccessToken(this HttpClient instance, string accessToken)
+    {
+        if (instance is null) throw new ArgumentNullException(nameof(instance));
+        Check.String(accessToken, nameof(accessToken));
+
+        instance.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
+    }
+
+    public static void UseSchemaVersion(this HttpClient instance, SchemaVersion version)
+    {
+        if (instance is null) throw new ArgumentNullException(nameof(instance));
+        instance.DefaultRequestHeaders.Add("X-Schema-Version", version.Version);
+    }
+
+    public static void UseLanguage(this HttpClient instance, Language language)
+    {
+        if (instance is null) throw new ArgumentNullException(nameof(instance));
+        if (language is null) throw new ArgumentNullException(nameof(language));
+
+        instance.DefaultRequestHeaders.AcceptLanguage.ParseAdd(language.Alpha2Code);
+    }
+
+    internal static HttpClient? WithDefaults(this HttpClient? instance)
+    {
+        if (instance is null) return null;
+        if (instance.BaseAddress is null) UseGuildWars2(instance);
+        if (!instance.DefaultRequestHeaders.Contains("X-Schema-Version"))
         {
-            if (instance is null) throw new ArgumentNullException(nameof(instance));
-            instance.BaseAddress = new Uri("https://api.guildwars2.com", UriKind.Absolute);
+            UseSchemaVersion(instance, SchemaVersion.Recommended);
         }
 
-        public static void UseAccessToken(this HttpClient instance, string accessToken)
-        {
-            if (instance is null) throw new ArgumentNullException(nameof(instance));
-            Check.String(accessToken, nameof(accessToken));
+        return instance;
+    }
 
-            instance.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
-        }
-
-        public static void UseSchemaVersion(this HttpClient instance, SchemaVersion version)
-        {
-            if (instance is null) throw new ArgumentNullException(nameof(instance));
-            instance.DefaultRequestHeaders.Add("X-Schema-Version", version.Version);
-        }
-
-        public static void UseLanguage(this HttpClient instance, Language language)
-        {
-            if (instance is null) throw new ArgumentNullException(nameof(instance));
-            if (language is null) throw new ArgumentNullException(nameof(language));
-
-            instance.DefaultRequestHeaders.AcceptLanguage.ParseAdd(language.Alpha2Code);
-        }
-
-        internal static HttpClient? WithDefaults(this HttpClient? instance)
-        {
-            if (instance is null) return null;
-            if (instance.BaseAddress is null) UseGuildWars2(instance);
-            if (!instance.DefaultRequestHeaders.Contains("X-Schema-Version")) UseSchemaVersion(instance, SchemaVersion.Recommended);
-            return instance;
-        }
-
-        public static async Task<JsonDocument> ReadAsJsonAsync(
-            this HttpContent instance,
-            CancellationToken cancellationToken
-        )
-        {
-            if (instance == null) throw new ArgumentNullException(nameof(instance));
+    public static async Task<JsonDocument> ReadAsJsonAsync(
+        this HttpContent instance,
+        CancellationToken cancellationToken
+    )
+    {
+        if (instance == null) throw new ArgumentNullException(nameof(instance));
 #if NET
-            var content = await instance.ReadAsStreamAsync(cancellationToken)
-                .ConfigureAwait(false);
+        var content = await instance.ReadAsStreamAsync(cancellationToken)
+            .ConfigureAwait(false);
 #else
-            var content = await instance.ReadAsStreamAsync()
-                .ConfigureAwait(false);
+        var content = await instance.ReadAsStreamAsync()
+            .ConfigureAwait(false);
 #endif
-            if (instance.Headers.ContentEncoding.LastOrDefault() == "gzip")
-            {
-                content = new GZipStream(content, CompressionMode.Decompress, false);
-            }
-
-#if NET
-            await using (content)
-#else
-            using (content)
-#endif
-            {
-                return await JsonDocument.ParseAsync(content, cancellationToken: cancellationToken)
-                    .ConfigureAwait(false);
-            }
-        }
-        internal static async Task<IReplica<T>> GetResource<T>(
-            this HttpClient instance,
-            HttpRequestMessage request,
-            Func<JsonDocument, T> resultSelector,
-            CancellationToken cancellationToken
-        )
+        if (instance.Headers.ContentEncoding.LastOrDefault() == "gzip")
         {
-            using var response = await instance
-                .SendAsync(request, HttpCompletionOption.ResponseHeadersRead, cancellationToken)
-                .ConfigureAwait(false);
-            var date = response.Headers.Date.GetValueOrDefault(DateTimeOffset.UtcNow);
-            response.EnsureSuccessStatusCode();
-
-            using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
-                .ConfigureAwait(false);
-
-            var result = resultSelector(json);
-
-            return new Replica<T>(date,
-                result,
-                response.Content.Headers.Expires,
-                response.Content.Headers.LastModified);
+            content = new GZipStream(content, CompressionMode.Decompress, false);
         }
 
 #if NET
-        internal static async Task<IReplica<IReadOnlySet<T>>> GetResourcesSetSimple<T>(
+        await using (content)
 #else
-        internal static async Task<IReplica<IReadOnlyCollection<T>>> GetResourcesSetSimple<T>(
+        using (content)
 #endif
-            this HttpClient instance,
-            HttpRequestMessage request,
-            Func<JsonDocument, IEnumerable<T>> resultSelector,
-            CancellationToken cancellationToken
-        )
         {
-            using var response = await instance
-                .SendAsync(request, HttpCompletionOption.ResponseHeadersRead, cancellationToken)
+            return await JsonDocument.ParseAsync(content, cancellationToken: cancellationToken)
                 .ConfigureAwait(false);
-            var date = response.Headers.Date.GetValueOrDefault(DateTimeOffset.UtcNow);
-            response.EnsureSuccessStatusCode();
+        }
+    }
 
-            using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
-                .ConfigureAwait(false);
+    internal static async Task<IReplica<T>> GetResource<T>(
+        this HttpClient instance,
+        HttpRequestMessage request,
+        Func<JsonDocument, T> resultSelector,
+        CancellationToken cancellationToken
+    )
+    {
+        using var response = await instance
+            .SendAsync(request, HttpCompletionOption.ResponseHeadersRead, cancellationToken)
+            .ConfigureAwait(false);
+        var date = response.Headers.Date.GetValueOrDefault(DateTimeOffset.UtcNow);
+        response.EnsureSuccessStatusCode();
 
-            var result = new HashSet<T>(resultSelector(json));
+        using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
+            .ConfigureAwait(false);
+
+        var result = resultSelector(json);
+
+        return new Replica<T>(date, result, response.Content.Headers.Expires, response.Content.Headers.LastModified);
+    }
 
 #if NET
-            return new Replica<IReadOnlySet<T>>(
+    internal static async Task<IReplica<IReadOnlySet<T>>> GetResourcesSetSimple<T>(
 #else
-            return new Replica<IReadOnlyCollection<T>>(
+    internal static async Task<IReplica<IReadOnlyCollection<T>>> GetResourcesSetSimple<T>(
 #endif
-                date,
-                result,
-                response.Content.Headers.Expires,
-                response.Content.Headers.LastModified);
-        }
+        this HttpClient instance,
+        HttpRequestMessage request,
+        Func<JsonDocument, IEnumerable<T>> resultSelector,
+        CancellationToken cancellationToken
+    )
+    {
+        using var response = await instance
+            .SendAsync(request, HttpCompletionOption.ResponseHeadersRead, cancellationToken)
+            .ConfigureAwait(false);
+        var date = response.Headers.Date.GetValueOrDefault(DateTimeOffset.UtcNow);
+        response.EnsureSuccessStatusCode();
 
-        internal static async Task<IReplicaSet<T>> GetResourcesSet<T>(
-            this HttpClient instance,
-            HttpRequestMessage request,
-            Func<JsonDocument, IEnumerable<T>> resultSelector,
-            CancellationToken cancellationToken
-        )
-        {
-            using var response = await instance
-                .SendAsync(request, HttpCompletionOption.ResponseHeadersRead, cancellationToken)
-                .ConfigureAwait(false);
-            var date = response.Headers.Date.GetValueOrDefault(DateTimeOffset.UtcNow);
-            response.EnsureSuccessStatusCode();
+        using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
+            .ConfigureAwait(false);
 
-            using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
-                .ConfigureAwait(false);
+        var result = new HashSet<T>(resultSelector(json));
 
 #if NET
-            var result = new HashSet<T>(response.Headers.GetCollectionContext()
-                .ResultCount);
+        return new Replica<IReadOnlySet<T>>(
 #else
-            var result = new HashSet<T>();
+        return new Replica<IReadOnlyCollection<T>>(
 #endif
-            result.UnionWith(resultSelector(json));
+            date,
+            result,
+            response.Content.Headers.Expires,
+            response.Content.Headers.LastModified);
+    }
 
-            return new ReplicaSet<T>(date,
-                result,
-                response.Headers.GetCollectionContext(),
-                response.Content.Headers.Expires,
-                response.Content.Headers.LastModified);
-        }
+    internal static async Task<IReplicaSet<T>> GetResourcesSet<T>(
+        this HttpClient instance,
+        HttpRequestMessage request,
+        Func<JsonDocument, IEnumerable<T>> resultSelector,
+        CancellationToken cancellationToken
+    )
+    {
+        using var response = await instance
+            .SendAsync(request, HttpCompletionOption.ResponseHeadersRead, cancellationToken)
+            .ConfigureAwait(false);
+        var date = response.Headers.Date.GetValueOrDefault(DateTimeOffset.UtcNow);
+        response.EnsureSuccessStatusCode();
 
-        internal static async Task<IReplicaPage<T>> GetResourcesPage<T>(
-            this HttpClient instance,
-            HttpRequestMessage request,
-            Func<JsonDocument, IEnumerable<T>> resultSelector,
-            CancellationToken cancellationToken
-        )
-        {
-            using var response = await instance
-                .SendAsync(request, HttpCompletionOption.ResponseHeadersRead, cancellationToken)
-                .ConfigureAwait(false);
-            var date = response.Headers.Date.GetValueOrDefault(DateTimeOffset.UtcNow);
-            response.EnsureSuccessStatusCode();
-
-            using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
-                .ConfigureAwait(false);
+        using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
+            .ConfigureAwait(false);
 
 #if NET
-            var result = new HashSet<T>(response.Headers.GetPageContext()
-                .ResultCount);
+        var result = new HashSet<T>(response.Headers.GetCollectionContext()
+            .ResultCount);
 #else
-            var result = new HashSet<T>();
+        var result = new HashSet<T>();
 #endif
-            result.UnionWith(resultSelector(json));
+        result.UnionWith(resultSelector(json));
 
-            return new ReplicaPage<T>(date,
-                result,
-                response.Headers.GetPageContext(),
-                response.Content.Headers.Expires,
-                response.Content.Headers.LastModified);
-        }
+        return new ReplicaSet<T>(date,
+            result,
+            response.Headers.GetCollectionContext(),
+            response.Content.Headers.Expires,
+            response.Content.Headers.LastModified);
+    }
+
+    internal static async Task<IReplicaPage<T>> GetResourcesPage<T>(
+        this HttpClient instance,
+        HttpRequestMessage request,
+        Func<JsonDocument, IEnumerable<T>> resultSelector,
+        CancellationToken cancellationToken
+    )
+    {
+        using var response = await instance
+            .SendAsync(request, HttpCompletionOption.ResponseHeadersRead, cancellationToken)
+            .ConfigureAwait(false);
+        var date = response.Headers.Date.GetValueOrDefault(DateTimeOffset.UtcNow);
+        response.EnsureSuccessStatusCode();
+
+        using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
+            .ConfigureAwait(false);
+
+#if NET
+        var result = new HashSet<T>(response.Headers.GetPageContext()
+            .ResultCount);
+#else
+        var result = new HashSet<T>();
+#endif
+        result.UnionWith(resultSelector(json));
+
+        return new ReplicaPage<T>(date,
+            result,
+            response.Headers.GetPageContext(),
+            response.Content.Headers.Expires,
+            response.Content.Headers.LastModified);
     }
 }

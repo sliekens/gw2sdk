@@ -5,9 +5,7 @@ using System.IO.MemoryMappedFiles;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Timers;
-
 using GW2SDK.Mumble.Models;
-
 using JetBrains.Annotations;
 #if NET
 using System.Runtime.Versioning;
@@ -175,7 +173,7 @@ namespace GW2SDK.Mumble
             {
                 // Note the need to specify the length because we use pooled arrays
 #if NET
-                int buffered = content.Read(buffer.AsSpan(0, Length));
+                var buffered = content.Read(buffer.AsSpan(0, Length));
 
 #else
                 var buffered = content.Read(buffer, 0, Length);
@@ -195,10 +193,7 @@ namespace GW2SDK.Mumble
 
         private class Subscription : IDisposable
         {
-            public void Dispose()
-            {
-                Unsubscribed?.Invoke(this, EventArgs.Empty);
-            }
+            public void Dispose() => Unsubscribed?.Invoke(this, EventArgs.Empty);
 
             public event EventHandler? Unsubscribed;
         }

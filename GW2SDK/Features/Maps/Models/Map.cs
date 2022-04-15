@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
-
 using GW2SDK.Annotations;
-
 using JetBrains.Annotations;
 
 namespace GW2SDK.Maps.Models;

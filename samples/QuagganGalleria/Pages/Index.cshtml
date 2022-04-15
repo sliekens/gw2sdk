@@ -10,9 +10,9 @@
         @foreach (var vm in Model.Quaggans)
         {
             <div class="carousel-item @(vm.Active ? "active" : null)">
-                <img src="@vm.PictureHref" alt="@vm.Id" class="d-block w-100"/>
+                <img src="@vm.PictureHref" alt="@vm.Id" class="d-block w-100" />
                 <div class="carousel-caption">
-					<h2 class="d-none d-md-block">@vm.Id</h2>
+                    <h2 class="d-none d-md-block">@vm.Id</h2>
                 </div>
             </div>
         }

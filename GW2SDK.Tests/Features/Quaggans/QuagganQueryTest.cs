@@ -2,11 +2,9 @@
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Threading.Tasks;
-
 using GW2SDK.Quaggans;
 using GW2SDK.Quaggans.Models;
 using GW2SDK.Tests.TestInfrastructure;
-
 using Xunit;
 
 namespace GW2SDK.Tests.Features.Quaggans;
@@ -16,15 +14,10 @@ public class QuagganQueryTest
     [SuppressMessage("ReSharper", "MemberCanBePrivate.Local")]
     private static class QuagganFact
     {
-        internal static void Id_is_not_empty(Quaggan actual)
-        {
-            Assert.NotEmpty(actual.Id);
-        }
+        internal static void Id_is_not_empty(Quaggan actual) => Assert.NotEmpty(actual.Id);
 
-        internal static void Quaggan_has_picture(Quaggan actual)
-        {
+        internal static void Quaggan_has_picture(Quaggan actual) =>
             Assert.True(Uri.IsWellFormedUriString(actual.PictureHref, UriKind.Absolute));
-        }
 
         internal static void Validate(Quaggan actual)
         {

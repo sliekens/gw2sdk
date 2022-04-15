@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Text.RegularExpressions;
-
 using JetBrains.Annotations;
 
 namespace GW2SDK;
@@ -38,8 +37,5 @@ public sealed class Language
 
     public string Alpha2Code { get; }
 
-    public override string ToString()
-    {
-        return Alpha2Code;
-    }
+    public override string ToString() => Alpha2Code;
 }

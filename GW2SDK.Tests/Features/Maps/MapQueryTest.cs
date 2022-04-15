@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-
 using GW2SDK.Maps;
 using GW2SDK.Maps.Models;
 using GW2SDK.Tests.TestInfrastructure;
-
 using Xunit;
 
 namespace GW2SDK.Tests.Features.Maps;
@@ -14,28 +12,17 @@ public class MapQueryTest
 {
     private static class ContinentFact
     {
-        public static void Id_is_1_or_2(Continent actual)
-        {
-            Assert.InRange(actual.Id, 1, 2);
-        }
+        public static void Id_is_1_or_2(Continent actual) => Assert.InRange(actual.Id, 1, 2);
     }
 
     private static class WorldFact
     {
-        public static void Id_is_positive(World actual)
-        {
-            Assert.InRange(actual.Id, 1, int.MaxValue);
-        }
+        public static void Id_is_positive(World actual) => Assert.InRange(actual.Id, 1, int.MaxValue);
 
-        public static void Name_is_not_empty(World actual)
-        {
-            Assert.NotEmpty(actual.Name);
-        }
+        public static void Name_is_not_empty(World actual) => Assert.NotEmpty(actual.Name);
 
-        public static void World_population_type_is_supported(World actual)
-        {
+        public static void World_population_type_is_supported(World actual) =>
             Assert.True(Enum.IsDefined(typeof(WorldPopulation), actual.Population));
-        }
     }
 
     [Fact]

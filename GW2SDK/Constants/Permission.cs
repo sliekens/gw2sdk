@@ -1,28 +1,27 @@
 ﻿using JetBrains.Annotations;
 
-namespace GW2SDK
+namespace GW2SDK;
+
+[PublicAPI]
+public enum Permission
 {
-    [PublicAPI]
-    public enum Permission
-    {
-        Account = 1,
+    Account = 1,
 
-        Builds,
+    Builds,
 
-        Characters,
+    Characters,
 
-        Guilds,
+    Guilds,
 
-        Inventories,
+    Inventories,
 
-        Progression,
+    Progression,
 
-        PvP,
+    PvP,
 
-        Unlocks,
+    Unlocks,
 
-        Wallet,
+    Wallet,
 
-        TradingPost
-    }
+    TradingPost
 }

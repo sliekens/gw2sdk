@@ -1,18 +1,17 @@
 ﻿using JetBrains.Annotations;
 
-namespace GW2SDK
+namespace GW2SDK;
+
+[PublicAPI]
+public enum SkinRestriction
 {
-    [PublicAPI]
-    public enum SkinRestriction
-    {
-        Asura = 1,
+    Asura = 1,
 
-        Charr,
+    Charr,
 
-        Human,
+    Human,
 
-        Norn,
+    Norn,
 
-        Sylvari
-    }
+    Sylvari
 }

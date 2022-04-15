@@ -1,7 +1,5 @@
 ﻿using System;
-
 using JetBrains.Annotations;
-
 using static System.String;
 
 namespace GW2SDK;
@@ -48,13 +46,7 @@ public sealed class SchemaVersion
 
     public string Version { get; }
 
-    public override string ToString()
-    {
-        return Version;
-    }
+    public override string ToString() => Version;
 
-    public static implicit operator string(SchemaVersion instance)
-    {
-        return instance.Version;
-    }
+    public static implicit operator string(SchemaVersion instance) => instance.Version;
 }

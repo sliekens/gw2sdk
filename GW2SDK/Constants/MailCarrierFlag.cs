@@ -1,10 +1,9 @@
 ﻿using JetBrains.Annotations;
 
-namespace GW2SDK
+namespace GW2SDK;
+
+[PublicAPI]
+public enum MailCarrierFlag
 {
-    [PublicAPI]
-    public enum MailCarrierFlag
-    {
-        Default = 1
-    }
+    Default = 1
 }

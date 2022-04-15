@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Net;
 using System.Runtime.InteropServices;
-
 using GW2SDK.Mumble.Win32;
-
 using JetBrains.Annotations;
 
 namespace GW2SDK.Mumble.Models;
@@ -65,14 +63,10 @@ public struct Context
 
     public bool IsMounted => MountIndex != 0;
 
-    public IPEndPoint GetServerAddress()
-    {
-        return new IPEndPoint(ServerAddress.sin_addr.s_un.s_addr, ServerAddress.sin_port);
-    }
+    public IPEndPoint GetServerAddress() => new(ServerAddress.sin_addr.s_un.s_addr, ServerAddress.sin_port);
 
-    public MountName GetMount()
-    {
-        return MountIndex switch
+    public MountName GetMount() =>
+        MountIndex switch
         {
             1 => MountName.Jackal,
             2 => MountName.Griffon,
@@ -86,5 +80,4 @@ public struct Context
             10 => MountName.Turtle,
             _ => throw new NotSupportedException("The current mount is not supported.")
         };
-    }
 }

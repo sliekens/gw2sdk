@@ -1,52 +1,51 @@
 ﻿using JetBrains.Annotations;
 
-namespace GW2SDK
+namespace GW2SDK;
+
+[PublicAPI]
+public enum EquipmentSlot
 {
-    [PublicAPI]
-    public enum EquipmentSlot
-    {
-        Accessory1 = 1,
+    Accessory1 = 1,
 
-        Accessory2,
+    Accessory2,
 
-        Amulet,
+    Amulet,
 
-        Axe,
+    Axe,
 
-        Backpack,
+    Backpack,
 
-        Boots,
+    Boots,
 
-        Coat,
+    Coat,
 
-        Gloves,
+    Gloves,
 
-        Helm,
+    Helm,
 
-        HelmAquatic,
+    HelmAquatic,
 
-        Leggings,
+    Leggings,
 
-        Pick,
+    Pick,
 
-        Ring1,
+    Ring1,
 
-        Ring2,
+    Ring2,
 
-        Shoulders,
+    Shoulders,
 
-        Sickle,
+    Sickle,
 
-        WeaponA1,
+    WeaponA1,
 
-        WeaponA2,
+    WeaponA2,
 
-        WeaponAquaticA,
+    WeaponAquaticA,
 
-        WeaponAquaticB,
+    WeaponAquaticB,
 
-        WeaponB1,
+    WeaponB1,
 
-        WeaponB2
-    }
+    WeaponB2
 }

@@ -1,46 +1,67 @@
 {
-    "version": "2.0.0",
-    "tasks": [
-        {
-            "label": "build",
-            "command": "dotnet",
-            "type": "process",
-            "args": [
-                "build",
-                "${workspaceFolder}/GW2SDK.sln",
-                "/property:GenerateFullPaths=true",
-                "/consoleloggerparameters:NoSummary"
-            ],
-            "problemMatcher": "$msCompile",
-            "group": {
-                "kind": "build",
-                "isDefault": true
-            }
-        },
-        {
-            "label": "publish",
-            "command": "dotnet",
-            "type": "process",
-            "args": [
-                "publish",
-                "${workspaceFolder}/GW2SDK.sln",
-                "/property:GenerateFullPaths=true",
-                "/consoleloggerparameters:NoSummary"
-            ],
-            "problemMatcher": "$msCompile"
-        },
-        {
-            "label": "watch",
-            "command": "dotnet",
-            "type": "process",
-            "args": [
-                "watch",
-                "run",
-                "${workspaceFolder}/GW2SDK.sln",
-                "/property:GenerateFullPaths=true",
-                "/consoleloggerparameters:NoSummary"
-            ],
-            "problemMatcher": "$msCompile"
-        }
-    ]
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "build",
+      "command": "dotnet",
+      "type": "process",
+      "args": [
+        "build",
+        "${workspaceFolder}/GW2SDK.sln",
+        "/property:GenerateFullPaths=true",
+        "/consoleloggerparameters:NoSummary"
+      ],
+      "problemMatcher": "$msCompile",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      }
+    },
+    {
+      "label": "publish",
+      "command": "dotnet",
+      "type": "process",
+      "args": [
+        "publish",
+        "${workspaceFolder}/GW2SDK.sln",
+        "/property:GenerateFullPaths=true",
+        "/consoleloggerparameters:NoSummary"
+      ],
+      "problemMatcher": "$msCompile"
+    },
+    {
+      "label": "watch",
+      "command": "dotnet",
+      "type": "process",
+      "args": [
+        "watch",
+        "run",
+        "${workspaceFolder}/GW2SDK.sln",
+        "/property:GenerateFullPaths=true",
+        "/consoleloggerparameters:NoSummary"
+      ],
+      "problemMatcher": "$msCompile"
+    },
+    {
+      "label": "Code Cleanup (solution)",
+      "detail": "Runs code cleanup on all files.",
+      "type": "shell",
+      "command": "dotnet jb cleanupcode ${workspaceFolder}/GW2SDK.sln --verbosity=ERROR",
+      "problemMatcher": []
+    },
+    {
+      "label": "Code Cleanup (file)",
+      "detail": "Runs code cleanup on the currently opened file.",
+      "type": "shell",
+      "command": "dotnet jb cleanupcode ${workspaceFolder}/GW2SDK.sln --include=${relativeFile} --verbosity=ERROR",
+      "problemMatcher": []
+    },
+    {
+      "label": "Code Cleanup (directory)",
+      "detail": "Runs code cleanup on the currently opened file and other files in the same directory or its subdirectories.",
+      "type": "shell",
+      "command": "dotnet jb cleanupcode ${workspaceFolder}/GW2SDK.sln --include=${relativeFileDirname}/**/* --verbosity=ERROR",
+      "problemMatcher": []
+    }
+  ]
 }

@@ -1,50 +1,49 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using JetBrains.Annotations;
 
-namespace GW2SDK
+namespace GW2SDK;
+
+[PublicAPI]
+[SuppressMessage("ReSharper", "InconsistentNaming")] // Names are copied from API data
+public enum SkillSlot
 {
-    [PublicAPI]
-    [SuppressMessage("ReSharper", "InconsistentNaming")] // Names are copied from API data
-    public enum SkillSlot
-    {
-        Weapon_1 = 1,
+    Weapon_1 = 1,
 
-        Weapon_2,
+    Weapon_2,
 
-        Weapon_3,
+    Weapon_3,
 
-        Weapon_4,
+    Weapon_4,
 
-        Weapon_5,
+    Weapon_5,
 
-        Heal,
+    Heal,
 
-        Utility,
+    Utility,
 
-        Elite,
+    Elite,
 
-        Profession_1,
+    Profession_1,
 
-        Profession_2,
+    Profession_2,
 
-        Profession_3,
+    Profession_3,
 
-        Profession_4,
+    Profession_4,
 
-        Profession_5,
+    Profession_5,
 
-        Downed_1,
+    Downed_1,
 
-        Downed_2,
+    Downed_2,
 
-        Downed_3,
+    Downed_3,
 
-        Downed_4,
+    Downed_4,
 
-        Pet,
+    Pet,
 
-        Toolbelt,
+    Toolbelt,
 
-        Transform_1
-    }
+    Transform_1
 }
