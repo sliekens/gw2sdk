@@ -23,11 +23,11 @@ jobs:
       with:
         lfs: true
     - name: Configure GPR
-      run: dotnet nuget add source https://nuget.pkg.github.com/stevenliekens/index.json --name sliekens
+      run: dotnet nuget add source https://nuget.pkg.github.com/sliekens/index.json --name sliekens
     - name: Setup .NET Core SDK
       uses: actions/setup-dotnet@v1
       with:
-        source-url: https://nuget.pkg.github.com/stevenliekens/index.json
+        source-url: https://nuget.pkg.github.com/sliekens/index.json
         dotnet-version: |
           3.1.x
           5.0.x

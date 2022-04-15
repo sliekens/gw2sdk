@@ -14,7 +14,7 @@
         <PackageId>GW2SDK</PackageId>
         <Authors>Steven Liekens &amp; Contributors</Authors>
         <Company>None</Company>
-        <RepositoryUrl>https://github.com/StevenLiekens/gw2sdk.git</RepositoryUrl>
+        <RepositoryUrl>https://github.com/sliekens/gw2sdk.git</RepositoryUrl>
         <RepositoryType>git</RepositoryType>
         <ContinuousIntegrationBuild Condition="'$(GITHUB_ACTIONS)' == 'true'">true</ContinuousIntegrationBuild>
         <EmbedUntrackedSources>true</EmbedUntrackedSources>
