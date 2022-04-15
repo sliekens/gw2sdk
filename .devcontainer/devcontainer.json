@@ -1,6 +1,6 @@
 {
   "name": "GW2SDK",
-  "image": "ghcr.io/stevenliekens/gw2sdk/devcontainer:latest",
+  "image": "ghcr.io/sliekens/gw2sdk/devcontainer:latest",
   "settings": {},
   "extensions": [
     "ms-dotnettools.csharp",
