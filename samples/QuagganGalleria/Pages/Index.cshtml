@@ -1,0 +1,29 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Quaggans Galleria";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Quaggans</h1>
+    <div id="quaggans" class="carousel carousel-dark slide" data-bs-ride="carousel">
+        @foreach (var vm in Model.Quaggans)
+        {
+            <div class="carousel-item @(vm.Active ? "active" : null)">
+                <img src="@vm.PictureHref" alt="@vm.Id" class="d-block w-100"/>
+                <div class="carousel-caption">
+					<h2 class="d-none d-md-block">@vm.Id</h2>
+                </div>
+            </div>
+        }
+
+        <button class="carousel-control-prev" type="button" data-bs-target="#quaggans" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#quaggans" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+</div>
