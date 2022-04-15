@@ -7,9 +7,9 @@ public class QuagganViewModel
 {
     public bool Active { get; set; }
 
-    public string PictureHref { get; set; }
+    public string PictureHref { get; set; } = "";
 
-    public string Id { get; set; }
+    public string Id { get; set; } = "";
 }
 
 public class IndexModel : PageModel
@@ -26,7 +26,7 @@ public class IndexModel : PageModel
 
     public DateTimeOffset Refreshed { get; set; }
 
-    public IEnumerable<QuagganViewModel> Quaggans { get; set; }
+    public IEnumerable<QuagganViewModel> Quaggans { get; set; } = Enumerable.Empty<QuagganViewModel>();
 
     public async Task OnGet()
     {

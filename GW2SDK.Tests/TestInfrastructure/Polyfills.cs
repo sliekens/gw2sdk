@@ -4,7 +4,7 @@ internal static class Polyfills
 {
 #if NET48
     public static void Deconstruct<TKey, TValue>(
-        this KeyValuePair<TKey, TValue> kvp,
+        this System.Collections.Generic.KeyValuePair<TKey, TValue> kvp,
         out TKey key,
         out TValue value
     )
