@@ -41,7 +41,7 @@ dotnet nuget remove source sliekens
 [codecov-badge]:https://codecov.io/gh/sliekens/gw2sdk/branch/main/graph/badge.svg?token=2ZTDBRWWLR
 [twitter-badge]:https://img.shields.io/twitter/follow/LiekensSteven?style=social
 [actions]:https://github.com/sliekens/gw2sdk/actions?query=workflow%3A%22Continuous+Integration%22
-[codecov]:https://codecov.io/gh/sliekens/gw2sd
+[codecov]:https://codecov.io/gh/sliekens/gw2sdk
 [twitter]:https://twitter.com/LiekensSteven
 [tokens]:https://github.com/settings/tokens
 [packages]:https://github.com/sliekens/gw2sdk/packages
