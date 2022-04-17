@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 using GW2SDK.Http;
 using GW2SDK.Json;
 using GW2SDK.Mounts.Http;
-using GW2SDK.Mounts.Json;
 using GW2SDK.Mounts.Models;
 using JetBrains.Annotations;
 
@@ -24,60 +23,63 @@ public sealed class MountQuery
 
     #region /v2/mounts/types
 
-    public async Task<IReplicaSet<Mount>> GetMounts(
+    public Task<IReplicaSet<Mount>> GetMounts(
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        MountsRequest request = new(language);
-        return await http.GetResourcesSet(request,
-                json => json.RootElement.GetArray(item => MountReader.Read(item, missingMemberBehavior)),
-                cancellationToken)
-            .ConfigureAwait(false);
+        MountsRequest request = new()
+        {
+            Language = language,
+            MissingMemberBehavior = missingMemberBehavior
+        };
+        return request.SendAsync(http, cancellationToken);
     }
 
-    public async Task<IReplicaSet<MountName>> GetMountNames(
+    public Task<IReplicaSet<MountName>> GetMountNames(
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        MountNamesRequest request = new();
-        return await http.GetResourcesSet(request,
-                json => json.RootElement.GetArray(item => MountNameReader.Read(item, missingMemberBehavior)),
-                cancellationToken)
-            .ConfigureAwait(false);
+        MountNamesRequest request = new()
+        {
+            MissingMemberBehavior = missingMemberBehavior
+        };
+        return request.SendAsync(http, cancellationToken);
     }
 
-    public async Task<IReplica<Mount>> GetMountByName(
+    public Task<IReplica<Mount>> GetMountByName(
         MountName mountName,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        MountByNameRequest request = new(mountName, language);
-        return await http.GetResource(request,
-                json => MountReader.Read(json.RootElement, missingMemberBehavior),
-                cancellationToken)
-            .ConfigureAwait(false);
+        MountByNameRequest request = new(mountName)
+        {
+            Language = language,
+            MissingMemberBehavior = missingMemberBehavior
+        };
+        return request.SendAsync(http, cancellationToken);
     }
 
-    public async Task<IReplicaSet<Mount>> GetMountsByNames(
+    public Task<IReplicaSet<Mount>> GetMountsByNames(
         IReadOnlyCollection<MountName> mountNames,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        MountsByNamesRequest request = new(mountNames, language);
-        return await http.GetResourcesSet(request,
-                json => json.RootElement.GetArray(item => MountReader.Read(item, missingMemberBehavior)),
-                cancellationToken)
-            .ConfigureAwait(false);
+        MountsByNamesRequest request = new(mountNames)
+        {
+            Language = language,
+            MissingMemberBehavior = missingMemberBehavior
+        };
+        return request.SendAsync(http, cancellationToken);
     }
 
-    public async Task<IReplicaPage<Mount>> GetMountsByPage(
+    public Task<IReplicaPage<Mount>> GetMountsByPage(
         int pageIndex,
         int? pageSize = default,
         Language? language = default,
@@ -85,66 +87,70 @@ public sealed class MountQuery
         CancellationToken cancellationToken = default
     )
     {
-        MountsByPageRequest request = new(pageIndex, pageSize, language);
-        return await http.GetResourcesPage(request,
-                json => json.RootElement.GetArray(item => MountReader.Read(item, missingMemberBehavior)),
-                cancellationToken)
-            .ConfigureAwait(false);
+        MountsByPageRequest request = new(pageIndex)
+        {
+            PageSize = pageSize,
+            Language = language,
+            MissingMemberBehavior = missingMemberBehavior
+        };
+        return request.SendAsync(http, cancellationToken);
     }
 
     #endregion
 
     #region /v2/mounts/skins
 
-    public async Task<IReplicaSet<MountSkin>> GetMountSkins(
+    public Task<IReplicaSet<MountSkin>> GetMountSkins(
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        MountSkinsRequest request = new(language);
-        return await http.GetResourcesSet(request,
-                json => json.RootElement.GetArray(item => MountSkinReader.Read(item, missingMemberBehavior)),
-                cancellationToken)
-            .ConfigureAwait(false);
+        MountSkinsRequest request = new()
+        {
+            Language = language,
+            MissingMemberBehavior = missingMemberBehavior
+        };
+        return request.SendAsync(http, cancellationToken);
     }
 
-    public async Task<IReplicaSet<int>> GetMountSkinsIndex(CancellationToken cancellationToken = default)
+    public Task<IReplicaSet<int>> GetMountSkinsIndex(CancellationToken cancellationToken = default)
     {
         MountSkinsIndexRequest request = new();
-        return await http.GetResourcesSet(request, json => json.RootElement.GetInt32Array(), cancellationToken)
-            .ConfigureAwait(false);
+        return request.SendAsync(http, cancellationToken);
     }
 
-    public async Task<IReplica<MountSkin>> GetMountSkinById(
+    public Task<IReplica<MountSkin>> GetMountSkinById(
         int mountSkinId,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        MountSkinByIdRequest request = new(mountSkinId, language);
-        return await http.GetResource(request,
-                json => MountSkinReader.Read(json.RootElement, missingMemberBehavior),
-                cancellationToken)
-            .ConfigureAwait(false);
+        MountSkinByIdRequest request = new(mountSkinId)
+        {
+            Language = language,
+            MissingMemberBehavior = missingMemberBehavior
+        };
+        return request.SendAsync(http, cancellationToken);
     }
 
-    public async Task<IReplicaSet<MountSkin>> GetMountSkinsByIds(
+    public Task<IReplicaSet<MountSkin>> GetMountSkinsByIds(
         IReadOnlyCollection<int> mountSkinIds,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        MountSkinsByIdsRequest request = new(mountSkinIds, language);
-        return await http.GetResourcesSet(request,
-                json => json.RootElement.GetArray(item => MountSkinReader.Read(item, missingMemberBehavior)),
-                cancellationToken)
-            .ConfigureAwait(false);
+        MountSkinsByIdsRequest request = new(mountSkinIds)
+        {
+            Language = language,
+            MissingMemberBehavior = missingMemberBehavior
+        };
+        return request.SendAsync(http, cancellationToken);
     }
 
-    public async Task<IReplicaPage<MountSkin>> GetMountSkinsByPage(
+    public Task<IReplicaPage<MountSkin>> GetMountSkinsByPage(
         int pageIndex,
         int? pageSize = default,
         Language? language = default,
@@ -152,11 +158,13 @@ public sealed class MountQuery
         CancellationToken cancellationToken = default
     )
     {
-        MountSkinsByPageRequest request = new(pageIndex, pageSize, language);
-        return await http.GetResourcesPage(request,
-                json => json.RootElement.GetArray(item => MountSkinReader.Read(item, missingMemberBehavior)),
-                cancellationToken)
-            .ConfigureAwait(false);
+        MountSkinsByPageRequest request = new(pageIndex)
+        {
+            PageSize = pageSize,
+            Language = language,
+            MissingMemberBehavior = missingMemberBehavior
+        };
+        return request.SendAsync(http, cancellationToken);
     }
 
     #endregion

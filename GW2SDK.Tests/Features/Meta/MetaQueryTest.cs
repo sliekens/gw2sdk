@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Net.Http;
+using System.Threading;
 using System.Threading.Tasks;
 using GW2SDK.Http;
 using GW2SDK.Json;
@@ -222,12 +223,9 @@ public class MetaQueryTest
     {
         await using Composer services = new();
         var http = services.Resolve<HttpClient>();
-        using var response = await http.SendAsync(new BuildRequest(), HttpCompletionOption.ResponseHeadersRead);
-        using var json = await response.Content.ReadAsJsonAsync(default);
-        response.EnsureSuccessStatusCode();
-
-        var actual = BuildReader.Read(json.RootElement, MissingMemberBehavior.Error);
-
+        var request = new BuildRequest();
+        var response = await request.SendAsync(http, CancellationToken.None);
+        var actual = response.Value;
         Assert.Equal(115267, actual.Id);
     }
 

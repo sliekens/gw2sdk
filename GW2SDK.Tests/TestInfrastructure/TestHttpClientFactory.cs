@@ -69,13 +69,13 @@ public class TestHttpClientFactory : IHttpClientFactory, IAsyncDisposable
         // Basically, we might already be at the limit on a cold startup.
         // A circuit breaker wouldn't help in this case. (Only when you can guarantee that there are no other API users using the same IP address.)
         // The only thing that works well in all environments is automatic retries with exponential and jittered sleep durations.
-        var rateLimit = Policy<HttpResponseMessage>.Handle<TooManyRequestsException>()
+        var rateLimit = Policy<HttpResponseMessage>.HandleResult(response => response.StatusCode == HttpStatusCodeEx.TooManyRequests)
             .WaitAndRetryForeverAsync(retryAttempt => TimeSpan.FromSeconds(Math.Min(8, Math.Pow(2, retryAttempt))) +
                 TimeSpan.FromMilliseconds(jitterer.Next(0, 1000)));
 
         // Additionally we seem to be getting various transient failures
-        var retryRequestError = Policy<HttpResponseMessage>.Handle<GatewayException>(reason =>
-                reason.StatusCode is ServiceUnavailable or GatewayTimeout or BadGateway)
+        var retryRequestError = Policy<HttpResponseMessage>.HandleResult(response =>
+                response.StatusCode is ServiceUnavailable or GatewayTimeout or BadGateway)
             .WaitAndRetryForeverAsync(retryAttempt =>
                 TimeSpan.FromSeconds(Math.Min(8, Math.Pow(2, retryAttempt))) +
                 TimeSpan.FromMilliseconds(jitterer.Next(0, 1000)));

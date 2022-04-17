@@ -19,7 +19,6 @@ public class WorldBossQueryTest
         // For now I'll just maintain this by hand...
         // no clue how this can be solved without re-implementing the call to /v2/worldbosses in test code (which makes the test pointless)
         var referenceData = await sut.GetWorldBosses();
-        var worldBosses = referenceData.Value;
 
         Assert.Equal(new[]
             {
@@ -38,13 +37,13 @@ public class WorldBossQueryTest
                 "the_shatterer",
                 "triple_trouble_wurm"
             },
-            worldBosses);
+            referenceData);
 
         // Again this next method is not deterministic...
         var actual = await sut.GetWorldBossesOnCooldown(accessToken.Key);
 
         // The best we can do is verify that there are no unexpected bosses
         // i.e. all bosses must be present in the reference data
-        Assert.All(actual.Value, worldBossId => worldBosses.Contains(worldBossId));
+        Assert.All(actual.Value, worldBossId => referenceData.Contains(worldBossId));
     }
 }

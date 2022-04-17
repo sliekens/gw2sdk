@@ -4,7 +4,6 @@ using System.Linq;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
-using GW2SDK.Http;
 using GW2SDK.Items.Http;
 
 namespace GW2SDK.TestDataHelper;
@@ -54,28 +53,17 @@ public class JsonItemService
         return new SortedSet<string>(result, StringComparer.Ordinal);
     }
 
-    private async Task<List<int>> GetItemsIndex()
+    private async Task<IReadOnlyCollection<int>> GetItemsIndex()
     {
         var request = new ItemsIndexRequest();
-        using var response = await http.SendAsync(request, HttpCompletionOption.ResponseHeadersRead)
-            .ConfigureAwait(false);
-        response.EnsureSuccessStatusCode();
-        using var json = await response.Content.ReadAsJsonAsync(CancellationToken.None)
-            .ConfigureAwait(false);
-        return json.RootElement.EnumerateArray()
-            .Select(item => item.GetInt32())
-            .ToList();
+        var response = await request.SendAsync(http, CancellationToken.None);
+        return response.Values;
     }
 
     private async Task<List<string>> GetJsonItemsByIds(IReadOnlyCollection<int> itemIds)
     {
-        var request = new ItemsByIdsRequest(itemIds, default);
-        using var response = await http.SendAsync(request, HttpCompletionOption.ResponseHeadersRead)
-            .ConfigureAwait(false);
-        response.EnsureSuccessStatusCode();
-
-        // API returns a JSON array but we want a List of JSON objects instead
-        using var json = await response.Content.ReadAsJsonAsync(CancellationToken.None)
+        var request = new BulkRequest("/v2/items", itemIds);
+        var json = await request.SendAsync(http, CancellationToken.None)
             .ConfigureAwait(false);
         return json.Indent(false)
             .RootElement.EnumerateArray()

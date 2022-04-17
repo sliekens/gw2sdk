@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 using GW2SDK.Http;
 using GW2SDK.Json;
 using GW2SDK.Quaggans.Http;
-using GW2SDK.Quaggans.Json;
 using GW2SDK.Quaggans.Models;
 using JetBrains.Annotations;
 
@@ -22,62 +21,59 @@ public sealed class QuagganQuery
         this.http = http.WithDefaults() ?? throw new ArgumentNullException(nameof(http));
     }
 
-    public async Task<IReplicaSet<Quaggan>> GetQuaggans(
+    public Task<IReplicaSet<Quaggan>> GetQuaggans(
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        QuaggansRequest request = new();
-        return await http.GetResourcesSet(request,
-                json => json.RootElement.GetArray(item => QuagganReader.Read(item, missingMemberBehavior)),
-                cancellationToken)
-            .ConfigureAwait(false);
+        QuaggansRequest request = new()
+        {
+            MissingMemberBehavior = missingMemberBehavior
+        };
+        return request.SendAsync(http, cancellationToken);
     }
 
-    public async Task<IReplicaSet<string>> GetQuaggansIndex(CancellationToken cancellationToken = default)
+    public Task<IReplicaSet<string>> GetQuaggansIndex(CancellationToken cancellationToken = default)
     {
         QuaggansIndexRequest request = new();
-        return await http.GetResourcesSet(request, json => json.RootElement.GetStringArray(), cancellationToken)
-            .ConfigureAwait(false);
+        return request.SendAsync(http, cancellationToken);
     }
 
-    public async Task<IReplica<Quaggan>> GetQuagganById(
+    public Task<IReplica<Quaggan>> GetQuagganById(
         string quagganId,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        QuagganByIdRequest request = new(quagganId);
-        return await http.GetResource(request,
-                json => QuagganReader.Read(json.RootElement, missingMemberBehavior),
-                cancellationToken)
-            .ConfigureAwait(false);
+        QuagganByIdRequest request = new(quagganId)
+        {
+            MissingMemberBehavior = missingMemberBehavior
+        };
+        return request.SendAsync(http, cancellationToken);
     }
 
-    public async Task<IReplicaSet<Quaggan>> GetQuaggansByIds(
+    public Task<IReplicaSet<Quaggan>> GetQuaggansByIds(
         IReadOnlyCollection<string> quagganIds,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
         QuaggansByIdsRequest request = new(quagganIds);
-        return await http.GetResourcesSet(request,
-                json => json.RootElement.GetArray(item => QuagganReader.Read(item, missingMemberBehavior)),
-                cancellationToken)
-            .ConfigureAwait(false);
+        return request.SendAsync(http, cancellationToken);
     }
 
-    public async Task<IReplicaPage<Quaggan>> GetQuaggansByPage(
+    public Task<IReplicaPage<Quaggan>> GetQuaggansByPage(
         int pageIndex,
         int? pageSize = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        QuaggansByPageRequest request = new(pageIndex, pageSize);
-        return await http.GetResourcesPage(request,
-                json => json.RootElement.GetArray(item => QuagganReader.Read(item, missingMemberBehavior)),
-                cancellationToken)
-            .ConfigureAwait(false);
+        QuaggansByPageRequest request = new(pageIndex)
+        {
+            PageSize = pageSize,
+            MissingMemberBehavior = missingMemberBehavior
+        };
+        return request.SendAsync(http, cancellationToken);
     }
 }

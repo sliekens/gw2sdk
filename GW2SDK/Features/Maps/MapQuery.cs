@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 using GW2SDK.Http;
 using GW2SDK.Json;
 using GW2SDK.Maps.Http;
-using GW2SDK.Maps.Json;
 using GW2SDK.Maps.Models;
 using JetBrains.Annotations;
 
@@ -25,55 +24,57 @@ public sealed class MapQuery
 
     #region /v2/continents
 
-    public async Task<IReplicaSet<Continent>> GetContinents(
+    public Task<IReplicaSet<Continent>> GetContinents(
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        ContinentsRequest request = new(language);
-        return await http.GetResourcesSet(request,
-                json => json.RootElement.GetArray(item => ContinentReader.Read(item, missingMemberBehavior)),
-                cancellationToken)
-            .ConfigureAwait(false);
+        ContinentsRequest request = new()
+        {
+            Language = language,
+            MissingMemberBehavior = missingMemberBehavior
+        };
+        return request.SendAsync(http, cancellationToken);
     }
 
-    public async Task<IReplicaSet<int>> GetContinentsIndex(CancellationToken cancellationToken = default)
+    public Task<IReplicaSet<int>> GetContinentsIndex(CancellationToken cancellationToken = default)
     {
         ContinentsIndexRequest request = new();
-        return await http.GetResourcesSet(request, json => json.RootElement.GetInt32Array(), cancellationToken)
-            .ConfigureAwait(false);
+        return request.SendAsync(http, cancellationToken);
     }
 
-    public async Task<IReplica<Continent>> GetContinentById(
+    public Task<IReplica<Continent>> GetContinentById(
         int continentId,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        ContinentByIdRequest request = new(continentId, language);
-        return await http.GetResource(request,
-                json => ContinentReader.Read(json.RootElement, missingMemberBehavior),
-                cancellationToken)
-            .ConfigureAwait(false);
+        ContinentByIdRequest request = new(continentId)
+        {
+            Language = language,
+            MissingMemberBehavior = missingMemberBehavior
+        };
+        return request.SendAsync(http, cancellationToken);
     }
 
-    public async Task<IReplicaSet<Continent>> GetContinentsByIds(
+    public Task<IReplicaSet<Continent>> GetContinentsByIds(
         IReadOnlyCollection<int> continentIds,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        ContinentsByIdsRequest request = new(continentIds, language);
-        return await http.GetResourcesSet(request,
-                json => json.RootElement.GetArray(item => ContinentReader.Read(item, missingMemberBehavior)),
-                cancellationToken)
-            .ConfigureAwait(false);
+        ContinentsByIdsRequest request = new(continentIds)
+        {
+            Language = language,
+            MissingMemberBehavior = missingMemberBehavior
+        };
+        return request.SendAsync(http, cancellationToken);
     }
 
-    public async Task<IReplicaPage<Continent>> GetContinentsByPage(
+    public Task<IReplicaPage<Continent>> GetContinentsByPage(
         int pageIndex,
         int? pageSize = default,
         Language? language = default,
@@ -81,39 +82,41 @@ public sealed class MapQuery
         CancellationToken cancellationToken = default
     )
     {
-        ContinentsByPageRequest request = new(pageIndex, pageSize, language);
-        return await http.GetResourcesPage(request,
-                json => json.RootElement.GetArray(item => ContinentReader.Read(item, missingMemberBehavior)),
-                cancellationToken)
-            .ConfigureAwait(false);
+        ContinentsByPageRequest request = new(pageIndex)
+        {
+            PageSize = pageSize,
+            Language = language,
+            MissingMemberBehavior = missingMemberBehavior
+        };
+        return request.SendAsync(http, cancellationToken);
     }
 
     #endregion
 
     #region /v2/continents/:id/floors
 
-    public async Task<IReplicaSet<Floor>> GetFloors(
+    public Task<IReplicaSet<Floor>> GetFloors(
         int continentId,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        FloorsRequest request = new(continentId, language);
-        return await http.GetResourcesSet(request,
-                json => json.RootElement.GetArray(item => FloorReader.Read(item, missingMemberBehavior)),
-                cancellationToken)
-            .ConfigureAwait(false);
+        FloorsRequest request = new(continentId)
+        {
+            Language = language,
+            MissingMemberBehavior = missingMemberBehavior
+        };
+        return request.SendAsync(http, cancellationToken);
     }
 
-    public async Task<IReplicaSet<int>> GetFloorsIndex(int continentId, CancellationToken cancellationToken = default)
+    public Task<IReplicaSet<int>> GetFloorsIndex(int continentId, CancellationToken cancellationToken = default)
     {
         FloorsIndexRequest request = new(continentId);
-        return await http.GetResourcesSet(request, json => json.RootElement.GetInt32Array(), cancellationToken)
-            .ConfigureAwait(false);
+        return request.SendAsync(http, cancellationToken);
     }
 
-    public async Task<IReplica<Floor>> GetFloorById(
+    public Task<IReplica<Floor>> GetFloorById(
         int continentId,
         int floorId,
         Language? language = default,
@@ -121,14 +124,15 @@ public sealed class MapQuery
         CancellationToken cancellationToken = default
     )
     {
-        FloorByIdRequest request = new(continentId, floorId, language);
-        return await http.GetResource(request,
-                json => FloorReader.Read(json.RootElement, missingMemberBehavior),
-                cancellationToken)
-            .ConfigureAwait(false);
+        FloorByIdRequest request = new(continentId, floorId)
+        {
+            Language = language,
+            MissingMemberBehavior = missingMemberBehavior
+        };
+        return request.SendAsync(http, cancellationToken);
     }
 
-    public async Task<IReplicaSet<Floor>> GetFloorsByIds(
+    public Task<IReplicaSet<Floor>> GetFloorsByIds(
         int continentId,
         IReadOnlyCollection<int> floorIds,
         Language? language = default,
@@ -136,14 +140,15 @@ public sealed class MapQuery
         CancellationToken cancellationToken = default
     )
     {
-        FloorsByIdsRequest request = new(continentId, floorIds, language);
-        return await http.GetResourcesSet(request,
-                json => json.RootElement.GetArray(item => FloorReader.Read(item, missingMemberBehavior)),
-                cancellationToken)
-            .ConfigureAwait(false);
+        FloorsByIdsRequest request = new(continentId, floorIds)
+        {
+            Language = language,
+            MissingMemberBehavior = missingMemberBehavior
+        };
+        return request.SendAsync(http, cancellationToken);
     }
 
-    public async Task<IReplicaPage<Floor>> GetFloorsByPage(
+    public Task<IReplicaPage<Floor>> GetFloorsByPage(
         int continentId,
         int pageIndex,
         int? pageSize = default,
@@ -152,66 +157,71 @@ public sealed class MapQuery
         CancellationToken cancellationToken = default
     )
     {
-        FloorsByPageRequest request = new(continentId, pageIndex, pageSize, language);
-        return await http.GetResourcesPage(request,
-                json => json.RootElement.GetArray(item => FloorReader.Read(item, missingMemberBehavior)),
-                cancellationToken)
-            .ConfigureAwait(false);
+        FloorsByPageRequest request = new(continentId, pageIndex)
+        {
+            PageSize = pageSize,
+            Language = language,
+            MissingMemberBehavior = missingMemberBehavior
+        };
+        return request.SendAsync(http, cancellationToken);
     }
 
     #endregion
 
     #region /v2/worlds
 
-    public async Task<IReplicaSet<World>> GetWorlds(
+    public Task<IReplicaSet<World>> GetWorlds(
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        WorldsRequest request = new(language);
-        return await http.GetResourcesSet(request,
-                json => json.RootElement.GetArray(item => WorldReader.Read(item, missingMemberBehavior)),
-                cancellationToken)
-            .ConfigureAwait(false);
+        WorldsRequest request = new()
+        {
+            Language = language,
+            MissingMemberBehavior = missingMemberBehavior
+        };
+        return request.SendAsync(http, cancellationToken);
     }
 
-    public async Task<IReplicaSet<int>> GetWorldsIndex(CancellationToken cancellationToken = default)
+    public Task<IReplicaSet<int>> GetWorldsIndex(CancellationToken cancellationToken = default)
     {
         WorldsIndexRequest request = new();
-        return await http.GetResourcesSet(request, json => json.RootElement.GetInt32Array(), cancellationToken)
-            .ConfigureAwait(false);
+        ;
+        return request.SendAsync(http, cancellationToken);
     }
 
-    public async Task<IReplica<World>> GetWorldById(
+    public Task<IReplica<World>> GetWorldById(
         int worldId,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        WorldByIdRequest request = new(worldId, language);
-        return await http.GetResource(request,
-                json => WorldReader.Read(json.RootElement, missingMemberBehavior),
-                cancellationToken)
-            .ConfigureAwait(false);
+        WorldByIdRequest request = new(worldId)
+        {
+            Language = language,
+            MissingMemberBehavior = missingMemberBehavior
+        };
+        return request.SendAsync(http, cancellationToken);
     }
 
-    public async Task<IReplicaSet<World>> GetWorldsByIds(
+    public Task<IReplicaSet<World>> GetWorldsByIds(
         IReadOnlyCollection<int> worldIds,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        WorldsByIdsRequest request = new(worldIds, language);
-        return await http.GetResourcesSet(request,
-                json => json.RootElement.GetArray(item => WorldReader.Read(item, missingMemberBehavior)),
-                cancellationToken)
-            .ConfigureAwait(false);
+        WorldsByIdsRequest request = new(worldIds)
+        {
+            Language = language,
+            MissingMemberBehavior = missingMemberBehavior
+        };
+        return request.SendAsync(http, cancellationToken);
     }
 
-    public async Task<IReplicaPage<World>> GetWorldsByPage(
+    public Task<IReplicaPage<World>> GetWorldsByPage(
         int pageIndex,
         int? pageSize = default,
         Language? language = default,
@@ -219,11 +229,13 @@ public sealed class MapQuery
         CancellationToken cancellationToken = default
     )
     {
-        WorldsByPageRequest request = new(pageIndex, pageSize, language);
-        return await http.GetResourcesPage(request,
-                json => json.RootElement.GetArray(item => WorldReader.Read(item, missingMemberBehavior)),
-                cancellationToken)
-            .ConfigureAwait(false);
+        WorldsByPageRequest request = new(pageIndex)
+        {
+            PageSize = pageSize,
+            Language = language,
+            MissingMemberBehavior = missingMemberBehavior
+        };
+        return request.SendAsync(http, cancellationToken);
     }
 
     #endregion

@@ -21,44 +21,42 @@ internal static class JsonElementExtensions
         return value;
     }
 
-    internal static Dictionary<string, TValue> GetMap<TValue>(this JsonElement json, Func<JsonElement, TValue> convert)
+    /// <summary>Converts a JSON array to a set.</summary>
+    /// <typeparam name="TValue">The type of values in the set.</typeparam>
+    /// <param name="json">The array element.</param>
+    /// <param name="resultSelector">A function that converts each item in the array to its destination type.</param>
+    /// <returns></returns>
+    internal static HashSet<TValue> GetSet<TValue>(this JsonElement json, Func<JsonElement, TValue> resultSelector)
+    {
+#if NET
+        var values = new HashSet<TValue>(json.GetArrayLength());
+#else
+        var values = new HashSet<TValue>();
+#endif
+        values.UnionWith(GetArray(json, resultSelector));
+        return values;
+    }
+
+    internal static Dictionary<string, TValue> GetMap<TValue>(
+        this JsonElement json,
+        Func<JsonElement, TValue> resultSelector
+    )
     {
         var values = new Dictionary<string, TValue>();
         foreach (var member in json.EnumerateObject())
         {
-            values[member.Name] = convert(member.Value);
+            values[member.Name] = resultSelector(member.Value);
         }
 
         return values;
     }
 
-    internal static IEnumerable<TValue> GetArray<TValue>(
-        this JsonElement json,
-        Func<JsonElement, TValue> resultSelector
-    )
+    private static IEnumerable<TValue> GetArray<TValue>(JsonElement json, Func<JsonElement, TValue> resultSelector)
     {
         // ReSharper disable once ForeachCanBeConvertedToQueryUsingAnotherGetEnumerator
         foreach (var item in json.EnumerateArray())
         {
             yield return resultSelector(item);
-        }
-    }
-
-    internal static IEnumerable<int> GetInt32Array(this JsonElement json)
-    {
-        // ReSharper disable once ForeachCanBeConvertedToQueryUsingAnotherGetEnumerator
-        foreach (var item in json.EnumerateArray())
-        {
-            yield return item.GetInt32();
-        }
-    }
-
-    internal static IEnumerable<string> GetStringArray(this JsonElement json)
-    {
-        // ReSharper disable once ForeachCanBeConvertedToQueryUsingAnotherGetEnumerator
-        foreach (var item in json.EnumerateArray())
-        {
-            yield return GetStringRequired(item);
         }
     }
 }

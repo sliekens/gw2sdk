@@ -54,28 +54,17 @@ public class JsonRecipeService
         return new SortedSet<string>(result, StringComparer.Ordinal);
     }
 
-    private async Task<List<int>> GetRecipeIds()
+    private async Task<IReadOnlyCollection<int>> GetRecipeIds()
     {
         var request = new RecipesIndexRequest();
-        using var response = await http.SendAsync(request, HttpCompletionOption.ResponseHeadersRead)
-            .ConfigureAwait(false);
-        response.EnsureSuccessStatusCode();
-        using var json = await response.Content.ReadAsJsonAsync(CancellationToken.None)
-            .ConfigureAwait(false);
-        return json.RootElement.EnumerateArray()
-            .Select(item => item.GetInt32())
-            .ToList();
+        var response = await request.SendAsync(http, CancellationToken.None);
+        return response.Values;
     }
 
     private async Task<List<string>> GetJsonRecipesByIds(IReadOnlyCollection<int> recipeIds)
     {
-        var request = new RecipesByIdsRequest(recipeIds);
-        using var response = await http.SendAsync(request, HttpCompletionOption.ResponseHeadersRead)
-            .ConfigureAwait(false);
-        response.EnsureSuccessStatusCode();
-
-        // API returns a JSON array but we want a List of JSON objects instead
-        using var json = await response.Content.ReadAsJsonAsync(CancellationToken.None)
+        var request = new BulkRequest("/v2/recipes", recipeIds);
+        var json = await request.SendAsync(http, CancellationToken.None)
             .ConfigureAwait(false);
         return json.Indent(false)
             .RootElement.EnumerateArray()

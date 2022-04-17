@@ -1,39 +1,62 @@
 ﻿using System.Collections.Generic;
 using System.Net.Http;
+using System.Threading;
+using System.Threading.Tasks;
 using GW2SDK.Http;
+using GW2SDK.Items.Json;
+using GW2SDK.Items.Models;
+using GW2SDK.Json;
 using JetBrains.Annotations;
 using static System.Net.Http.HttpMethod;
 
 namespace GW2SDK.Items.Http;
 
 [PublicAPI]
-public sealed class ItemsByIdsRequest
+public sealed class ItemsByIdsRequest : IHttpRequest<IReplicaSet<Item>>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "/v2/items")
     {
         AcceptEncoding = "gzip"
     };
 
-    public ItemsByIdsRequest(IReadOnlyCollection<int> itemIds, Language? language)
+    public ItemsByIdsRequest(IReadOnlyCollection<int> itemIds)
     {
         Check.Collection(itemIds, nameof(itemIds));
         ItemIds = itemIds;
-        Language = language;
     }
 
     public IReadOnlyCollection<int> ItemIds { get; }
 
-    public Language? Language { get; }
+    public Language? Language { get; init; }
 
-    public static implicit operator HttpRequestMessage(ItemsByIdsRequest r)
+    public MissingMemberBehavior MissingMemberBehavior { get; init; }
+
+    public async Task<IReplicaSet<Item>> SendAsync(HttpClient httpClient, CancellationToken cancellationToken)
     {
         QueryBuilder search = new();
-        search.Add("ids", r.ItemIds);
+        search.Add("ids", ItemIds);
         var request = Template with
         {
-            AcceptLanguage = r.Language?.Alpha2Code,
+            AcceptLanguage = Language?.Alpha2Code,
             Arguments = search
         };
-        return request.Compile();
+
+        using var response = await httpClient.SendAsync(request.Compile(),
+                HttpCompletionOption.ResponseHeadersRead,
+                cancellationToken)
+            .ConfigureAwait(false);
+
+        await response.EnsureResult(cancellationToken)
+            .ConfigureAwait(false);
+
+        using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
+            .ConfigureAwait(false);
+
+        var value = json.RootElement.GetSet(entry => ItemReader.Read(entry, MissingMemberBehavior));
+        return new ReplicaSet<Item>(response.Headers.Date.GetValueOrDefault(),
+            value,
+            response.Headers.GetCollectionContext(),
+            response.Content.Headers.Expires,
+            response.Content.Headers.LastModified);
     }
 }

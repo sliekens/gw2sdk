@@ -22,55 +22,57 @@ public sealed class MailCarrierQuery
         this.http = http.WithDefaults() ?? throw new ArgumentNullException(nameof(http));
     }
 
-    public async Task<IReplicaSet<MailCarrier>> GetMailCarriers(
+    public Task<IReplicaSet<MailCarrier>> GetMailCarriers(
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        MailCarriersRequest request = new(language);
-        return await http.GetResourcesSet(request,
-                json => json.RootElement.GetArray(item => MailCarrierReader.Read(item, missingMemberBehavior)),
-                cancellationToken)
-            .ConfigureAwait(false);
+        MailCarriersRequest request = new()
+        {
+            Language = language,
+            MissingMemberBehavior = missingMemberBehavior
+        };
+        return request.SendAsync(http, cancellationToken);
     }
 
-    public async Task<IReplicaSet<int>> GetMailCarriersIndex(CancellationToken cancellationToken = default)
+    public Task<IReplicaSet<int>> GetMailCarriersIndex(CancellationToken cancellationToken = default)
     {
         MailCarriersIndexRequest request = new();
-        return await http.GetResourcesSet(request, json => json.RootElement.GetInt32Array(), cancellationToken)
-            .ConfigureAwait(false);
+        return request.SendAsync(http, cancellationToken);
     }
 
-    public async Task<IReplica<MailCarrier>> GetMailCarrierById(
+    public Task<IReplica<MailCarrier>> GetMailCarrierById(
         int mailCarrierId,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        MailCarrierByIdRequest request = new(mailCarrierId, language);
-        return await http.GetResource(request,
-                json => MailCarrierReader.Read(json.RootElement, missingMemberBehavior),
-                cancellationToken)
-            .ConfigureAwait(false);
+        MailCarrierByIdRequest request = new(mailCarrierId)
+        {
+            Language = language,
+            MissingMemberBehavior = missingMemberBehavior
+        };
+        return request.SendAsync(http, cancellationToken);
     }
 
-    public async Task<IReplicaSet<MailCarrier>> GetMailCarriersByIds(
+    public Task<IReplicaSet<MailCarrier>> GetMailCarriersByIds(
         IReadOnlyCollection<int> mailCarrierIds,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        MailCarriersByIdsRequest request = new(mailCarrierIds, language);
-        return await http.GetResourcesSet(request,
-                json => json.RootElement.GetArray(item => MailCarrierReader.Read(item, missingMemberBehavior)),
-                cancellationToken)
-            .ConfigureAwait(false);
+        MailCarriersByIdsRequest request = new(mailCarrierIds)
+        {
+            Language = language,
+            MissingMemberBehavior = missingMemberBehavior
+        };
+        return request.SendAsync(http, cancellationToken);
     }
 
-    public async Task<IReplicaPage<MailCarrier>> GetMailCarriersByPage(
+    public Task<IReplicaPage<MailCarrier>> GetMailCarriersByPage(
         int pageIndex,
         int? pageSize = default,
         Language? language = default,
@@ -78,10 +80,12 @@ public sealed class MailCarrierQuery
         CancellationToken cancellationToken = default
     )
     {
-        MailCarriersByPageRequest request = new(pageIndex, pageSize, language);
-        return await http.GetResourcesPage(request,
-                json => json.RootElement.GetArray(item => MailCarrierReader.Read(item, missingMemberBehavior)),
-                cancellationToken)
-            .ConfigureAwait(false);
+        MailCarriersByPageRequest request = new(pageIndex)
+        {
+            PageSize = pageSize,
+            Language = language,
+            MissingMemberBehavior = missingMemberBehavior
+        };
+        return request.SendAsync(http, cancellationToken);
     }
 }

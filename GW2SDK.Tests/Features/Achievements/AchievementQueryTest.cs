@@ -9,7 +9,7 @@ using static GW2SDK.ProductName;
 
 namespace GW2SDK.Tests.Features.Achievements;
 
-public class AchievementSearchTest
+public class AchievementQueryTest
 {
     private static class AccountAchievementFact
     {

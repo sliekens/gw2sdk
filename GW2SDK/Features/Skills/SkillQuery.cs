@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 using GW2SDK.Http;
 using GW2SDK.Json;
 using GW2SDK.Skills.Http;
-using GW2SDK.Skills.Json;
 using GW2SDK.Skills.Models;
 using JetBrains.Annotations;
 
@@ -22,55 +21,57 @@ public sealed class SkillQuery
         this.http = http.WithDefaults() ?? throw new ArgumentNullException(nameof(http));
     }
 
-    public async Task<IReplicaSet<Skill>> GetSkills(
+    public Task<IReplicaSet<Skill>> GetSkills(
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        SkillsRequest request = new(language);
-        return await http.GetResourcesSet(request,
-                json => json.RootElement.GetArray(item => SkillReader.Read(item, missingMemberBehavior)),
-                cancellationToken)
-            .ConfigureAwait(false);
+        SkillsRequest request = new()
+        {
+            Language = language,
+            MissingMemberBehavior = missingMemberBehavior
+        };
+        return request.SendAsync(http, cancellationToken);
     }
 
-    public async Task<IReplicaSet<int>> GetSkillsIndex(CancellationToken cancellationToken = default)
+    public Task<IReplicaSet<int>> GetSkillsIndex(CancellationToken cancellationToken = default)
     {
         SkillsIndexRequest request = new();
-        return await http.GetResourcesSet(request, json => json.RootElement.GetInt32Array(), cancellationToken)
-            .ConfigureAwait(false);
+        return request.SendAsync(http, cancellationToken);
     }
 
-    public async Task<IReplica<Skill>> GetSkillById(
+    public Task<IReplica<Skill>> GetSkillById(
         int skillId,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        SkillByIdRequest request = new(skillId, language);
-        return await http.GetResource(request,
-                json => SkillReader.Read(json.RootElement, missingMemberBehavior),
-                cancellationToken)
-            .ConfigureAwait(false);
+        SkillByIdRequest request = new(skillId)
+        {
+            Language = language,
+            MissingMemberBehavior = missingMemberBehavior
+        };
+        return request.SendAsync(http, cancellationToken);
     }
 
-    public async Task<IReplicaSet<Skill>> GetSkillsByIds(
+    public Task<IReplicaSet<Skill>> GetSkillsByIds(
         IReadOnlyCollection<int> skillIds,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        SkillsByIdsRequest request = new(skillIds, language);
-        return await http.GetResourcesSet(request,
-                json => json.RootElement.GetArray(item => SkillReader.Read(item, missingMemberBehavior)),
-                cancellationToken)
-            .ConfigureAwait(false);
+        SkillsByIdsRequest request = new(skillIds)
+        {
+            Language = language,
+            MissingMemberBehavior = missingMemberBehavior
+        };
+        return request.SendAsync(http, cancellationToken);
     }
 
-    public async Task<IReplicaPage<Skill>> GetSkillsByPage(
+    public Task<IReplicaPage<Skill>> GetSkillsByPage(
         int pageIndex,
         int? pageSize = default,
         Language? language = default,
@@ -78,10 +79,12 @@ public sealed class SkillQuery
         CancellationToken cancellationToken = default
     )
     {
-        SkillsByPageRequest request = new(pageIndex, pageSize, language);
-        return await http.GetResourcesPage(request,
-                json => json.RootElement.GetArray(item => SkillReader.Read(item, missingMemberBehavior)),
-                cancellationToken)
-            .ConfigureAwait(false);
+        SkillsByPageRequest request = new(pageIndex)
+        {
+            PageSize = pageSize,
+            Language = language,
+            MissingMemberBehavior = missingMemberBehavior
+        };
+        return request.SendAsync(http, cancellationToken);
     }
 }

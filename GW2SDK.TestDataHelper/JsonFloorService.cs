@@ -4,8 +4,6 @@ using System.Linq;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
-using GW2SDK.Http;
-using GW2SDK.Maps.Http;
 
 namespace GW2SDK.TestDataHelper;
 
@@ -20,13 +18,8 @@ public class JsonFloorService
 
     public async Task<List<string>> GetAllJsonFloors(int continentId)
     {
-        var request = new FloorsRequest(continentId, default);
-        using var response = await http.SendAsync(request, HttpCompletionOption.ResponseHeadersRead)
-            .ConfigureAwait(false);
-        response.EnsureSuccessStatusCode();
-
-        // API returns a JSON array but we want a List of JSON objects instead
-        using var json = await response.Content.ReadAsJsonAsync(CancellationToken.None)
+        var request = new BulkRequest($"/v2/continents/{continentId}/floors");
+        var json = await request.SendAsync(http, CancellationToken.None)
             .ConfigureAwait(false);
         return json.Indent(false)
             .RootElement.EnumerateArray()

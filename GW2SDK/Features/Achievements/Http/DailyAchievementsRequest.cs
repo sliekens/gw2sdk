@@ -1,37 +1,57 @@
 ﻿using System;
 using System.Net.Http;
+using System.Threading;
+using System.Threading.Tasks;
+using GW2SDK.Achievements.Json;
+using GW2SDK.Achievements.Models;
 using GW2SDK.Http;
+using GW2SDK.Json;
 using JetBrains.Annotations;
 using static System.Net.Http.HttpMethod;
 
 namespace GW2SDK.Achievements.Http;
 
 [PublicAPI]
-public sealed class DailyAchievementsRequest
+public sealed class DailyAchievementsRequest : IHttpRequest<IReplica<DailyAchievementGroup>>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "/v2/achievements/daily")
     {
         AcceptEncoding = "gzip"
     };
 
-    public DailyAchievementsRequest(Day day = Day.Today)
-    {
-        Day = day;
-    }
+    public Day Day { get; init; }
 
-    private Day Day { get; }
+    public MissingMemberBehavior MissingMemberBehavior { get; init; }
 
-    public static implicit operator HttpRequestMessage(DailyAchievementsRequest r)
+    public async Task<IReplica<DailyAchievementGroup>> SendAsync(
+        HttpClient httpClient,
+        CancellationToken cancellationToken
+    )
     {
         var request = Template with
         {
-            Path = r.Day switch
+            Path = Day switch
             {
-                Day.Today => "/v2/achievements/daily",
-                Day.Tomorrow => "/v2/achievements/daily/tomorrow",
+                Day.Today => Template.Path,
+                Day.Tomorrow => Template.Path + "/tomorrow",
                 _ => throw new ArgumentOutOfRangeException()
             }
         };
-        return request.Compile();
+        using var response = await httpClient.SendAsync(request.Compile(),
+                HttpCompletionOption.ResponseHeadersRead,
+                cancellationToken)
+            .ConfigureAwait(false);
+
+        await response.EnsureResult(cancellationToken)
+            .ConfigureAwait(false);
+
+        using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
+            .ConfigureAwait(false);
+
+        var value = DailyAchievementReader.Read(json.RootElement, MissingMemberBehavior);
+        return new Replica<DailyAchievementGroup>(response.Headers.Date.GetValueOrDefault(),
+            value,
+            response.Content.Headers.Expires,
+            response.Content.Headers.LastModified);
     }
 }

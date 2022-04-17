@@ -7,19 +7,14 @@ using System.Threading.Tasks;
 using GW2SDK.Annotations;
 using GW2SDK.Commerce.Delivery;
 using GW2SDK.Commerce.Delivery.Http;
-using GW2SDK.Commerce.Delivery.Json;
 using GW2SDK.Commerce.Exchange;
 using GW2SDK.Commerce.Exchange.Http;
-using GW2SDK.Commerce.Exchange.Json;
 using GW2SDK.Commerce.Listings;
 using GW2SDK.Commerce.Listings.Http;
-using GW2SDK.Commerce.Listings.Json;
 using GW2SDK.Commerce.Prices;
 using GW2SDK.Commerce.Prices.Http;
-using GW2SDK.Commerce.Prices.Json;
 using GW2SDK.Commerce.Transactions;
 using GW2SDK.Commerce.Transactions.Http;
-using GW2SDK.Commerce.Transactions.Json;
 using GW2SDK.Http;
 using GW2SDK.Json;
 using JetBrains.Annotations;
@@ -39,66 +34,61 @@ public sealed class TradingPost
     #region /v2/commerce/delivery
 
     [Scope(Permission.TradingPost)]
-    public async Task<IReplica<DeliveryBox>> GetDeliveryBox(
+    public Task<IReplica<DeliveryBox>> GetDeliveryBox(
         string? accessToken,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        DeliveryRequest request = new(accessToken);
-        return await http.GetResource(request,
-                json => DeliveryBoxReader.Read(json.RootElement, missingMemberBehavior),
-                cancellationToken)
-            .ConfigureAwait(false);
+        DeliveryRequest request = new()
+        {
+            AccessToken = accessToken,
+            MissingMemberBehavior = missingMemberBehavior
+        };
+        return request.SendAsync(http, cancellationToken);
     }
 
     #endregion
 
     #region /v2/commerce/prices
 
-    public async Task<IReplicaSet<int>> GetItemPricesIndex(CancellationToken cancellationToken = default)
+    public Task<IReplicaSet<int>> GetItemPricesIndex(CancellationToken cancellationToken = default)
     {
         ItemPricesIndexRequest request = new();
-        return await http.GetResourcesSet(request, json => json.RootElement.GetInt32Array(), cancellationToken)
-            .ConfigureAwait(false);
+        return request.SendAsync(http, cancellationToken);
     }
 
-    public async Task<IReplica<ItemPrice>> GetItemPriceById(
+    public Task<IReplica<ItemPrice>> GetItemPriceById(
         int itemId,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        ItemPriceByIdRequest request = new(itemId);
-        return await http.GetResource(request,
-                json => ItemPriceReader.Read(json.RootElement, missingMemberBehavior),
-                cancellationToken)
-            .ConfigureAwait(false);
+        ItemPriceByIdRequest request = new(itemId)
+        {
+            MissingMemberBehavior = missingMemberBehavior
+        };
+        return request.SendAsync(http, cancellationToken);
     }
 
-    public async IAsyncEnumerable<ItemPrice> GetItemPricesByIds(
+    public IAsyncEnumerable<ItemPrice> GetItemPricesByIds(
         IReadOnlyCollection<int> itemIds,
         MissingMemberBehavior missingMemberBehavior = default,
-        [EnumeratorCancellation] CancellationToken cancellationToken = default,
+        CancellationToken cancellationToken = default,
         IProgress<ICollectionContext>? progress = default
     )
     {
-        var splitQuery = SplitQuery.Create<int, ItemPrice>(async (keys, ct) =>
+        var producer = SplitQuery.Create<int, ItemPrice>((range, ct) =>
             {
-                ItemPricesByIdsRequest request = new(keys);
-                return await http.GetResourcesSet(request,
-                        json => json.RootElement.GetArray(item => ItemPriceReader.Read(item, missingMemberBehavior)),
-                        ct)
-                    .ConfigureAwait(false);
+                ItemPricesByIdsRequest request = new(range)
+                {
+                    MissingMemberBehavior = missingMemberBehavior
+                };
+                return request.SendAsync(http, ct);
             },
             progress);
 
-        var producer = splitQuery.QueryAsync(itemIds, cancellationToken: cancellationToken);
-        await foreach (var itemPrice in producer.WithCancellation(cancellationToken)
-                           .ConfigureAwait(false))
-        {
-            yield return itemPrice;
-        }
+        return producer.QueryAsync(itemIds, cancellationToken: cancellationToken);
     }
 
     public async IAsyncEnumerable<ItemPrice> GetItemPrices(
@@ -121,49 +111,43 @@ public sealed class TradingPost
 
     #region /v2/commerce/listings
 
-    public async Task<IReplicaSet<int>> GetOrderBooksIndex(CancellationToken cancellationToken = default)
+    public Task<IReplicaSet<int>> GetOrderBooksIndex(CancellationToken cancellationToken = default)
     {
         OrderBooksIndexRequest request = new();
-        return await http.GetResourcesSet(request, json => json.RootElement.GetInt32Array(), cancellationToken)
-            .ConfigureAwait(false);
+        return request.SendAsync(http, cancellationToken);
     }
 
-    public async Task<IReplica<OrderBook>> GetOrderBookById(
+    public Task<IReplica<OrderBook>> GetOrderBookById(
         int itemId,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        OrderBookByIdRequest request = new(itemId);
-        return await http.GetResource(request,
-                json => OrderBookReader.Read(json.RootElement, missingMemberBehavior),
-                cancellationToken)
-            .ConfigureAwait(false);
+        OrderBookByIdRequest request = new(itemId)
+        {
+            MissingMemberBehavior = missingMemberBehavior
+        };
+        return request.SendAsync(http, cancellationToken);
     }
 
-    public async IAsyncEnumerable<OrderBook> GetOrderBooksByIds(
+    public IAsyncEnumerable<OrderBook> GetOrderBooksByIds(
         IReadOnlyCollection<int> itemIds,
         MissingMemberBehavior missingMemberBehavior = default,
-        [EnumeratorCancellation] CancellationToken cancellationToken = default,
+        CancellationToken cancellationToken = default,
         IProgress<ICollectionContext>? progress = default
     )
     {
-        var splitQuery = SplitQuery.Create<int, OrderBook>(async (keys, ct) =>
+        var producer = SplitQuery.Create<int, OrderBook>((range, ct) =>
             {
-                OrderBooksByIdsRequest request = new(keys);
-                return await http.GetResourcesSet(request,
-                        json => json.RootElement.GetArray(item => OrderBookReader.Read(item, missingMemberBehavior)),
-                        ct)
-                    .ConfigureAwait(false);
+                OrderBooksByIdsRequest request = new(range)
+                {
+                    MissingMemberBehavior = missingMemberBehavior
+                };
+                return request.SendAsync(http, ct);
             },
             progress);
 
-        var producer = splitQuery.QueryAsync(itemIds, cancellationToken: cancellationToken);
-        await foreach (var orderBook in producer.WithCancellation(cancellationToken)
-                           .ConfigureAwait(false))
-        {
-            yield return orderBook;
-        }
+        return producer.QueryAsync(itemIds, cancellationToken: cancellationToken);
     }
 
     public async IAsyncEnumerable<OrderBook> GetOrderBooks(
@@ -186,37 +170,37 @@ public sealed class TradingPost
 
     #region /v2/commerce/exchange
 
-    public async Task<IReplica<GemsForGoldExchange>> ExchangeGemsForGold(
+    public Task<IReplica<GemsForGoldExchange>> ExchangeGemsForGold(
         int gemsCount,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        ExchangeGemsForGoldRequest request = new(gemsCount);
-        return await http.GetResource(request,
-                json => GemsForGoldReader.Read(json.RootElement, missingMemberBehavior),
-                cancellationToken)
-            .ConfigureAwait(false);
+        ExchangeGemsForGoldRequest request = new(gemsCount)
+        {
+            MissingMemberBehavior = missingMemberBehavior
+        };
+        return request.SendAsync(http, cancellationToken);
     }
 
-    public async Task<IReplica<GoldForGemsExchange>> ExchangeGoldForGems(
+    public Task<IReplica<GoldForGemsExchange>> ExchangeGoldForGems(
         Coin coinsCount,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        ExchangeGoldForGemsRequest request = new(coinsCount);
-        return await http.GetResource(request,
-                json => GoldForGemsReader.Read(json.RootElement, missingMemberBehavior),
-                cancellationToken)
-            .ConfigureAwait(false);
+        ExchangeGoldForGemsRequest request = new(coinsCount)
+        {
+            MissingMemberBehavior = missingMemberBehavior
+        };
+        return request.SendAsync(http, cancellationToken);
     }
 
     #endregion
 
     #region /v2/commerce/transactions
 
-    public async Task<IReplicaPage<Order>> GetBuyOrders(
+    public Task<IReplicaPage<Order>> GetBuyOrders(
         int pageIndex,
         int? pageSize,
         string? accessToken,
@@ -224,14 +208,16 @@ public sealed class TradingPost
         CancellationToken cancellationToken = default
     )
     {
-        BuyOrdersRequest request = new(pageIndex, pageSize, accessToken);
-        return await http.GetResourcesPage(request,
-                json => json.RootElement.GetArray(item => OrderReader.Read(item, missingMemberBehavior)),
-                cancellationToken)
-            .ConfigureAwait(false);
+        BuyOrdersRequest request = new(pageIndex)
+        {
+            PageSize = pageSize,
+            AccessToken = accessToken,
+            MissingMemberBehavior = missingMemberBehavior
+        };
+        return request.SendAsync(http, cancellationToken);
     }
 
-    public async Task<IReplicaPage<Order>> GetSellOrders(
+    public Task<IReplicaPage<Order>> GetSellOrders(
         int pageIndex,
         int? pageSize,
         string? accessToken,
@@ -239,14 +225,16 @@ public sealed class TradingPost
         CancellationToken cancellationToken = default
     )
     {
-        SellOrdersRequest request = new(pageIndex, pageSize, accessToken);
-        return await http.GetResourcesPage(request,
-                json => json.RootElement.GetArray(item => OrderReader.Read(item, missingMemberBehavior)),
-                cancellationToken)
-            .ConfigureAwait(false);
+        SellOrdersRequest request = new(pageIndex)
+        {
+            PageSize = pageSize,
+            AccessToken = accessToken,
+            MissingMemberBehavior = missingMemberBehavior
+        };
+        return request.SendAsync(http, cancellationToken);
     }
 
-    public async Task<IReplicaPage<Transaction>> GetPurchases(
+    public Task<IReplicaPage<Transaction>> GetPurchases(
         int pageIndex,
         int? pageSize,
         string? accessToken,
@@ -254,14 +242,16 @@ public sealed class TradingPost
         CancellationToken cancellationToken = default
     )
     {
-        PurchasesRequest request = new(pageIndex, pageSize, accessToken);
-        return await http.GetResourcesPage(request,
-                json => json.RootElement.GetArray(item => TransactionReader.Read(item, missingMemberBehavior)),
-                cancellationToken)
-            .ConfigureAwait(false);
+        PurchasesRequest request = new(pageIndex)
+        {
+            PageSize = pageSize,
+            AccessToken = accessToken,
+            MissingMemberBehavior = missingMemberBehavior
+        };
+        return request.SendAsync(http, cancellationToken);
     }
 
-    public async Task<IReplicaPage<Transaction>> GetSales(
+    public Task<IReplicaPage<Transaction>> GetSales(
         int pageIndex,
         int? pageSize,
         string? accessToken,
@@ -269,11 +259,13 @@ public sealed class TradingPost
         CancellationToken cancellationToken = default
     )
     {
-        SalesRequest request = new(pageIndex, pageSize, accessToken);
-        return await http.GetResourcesPage(request,
-                json => json.RootElement.GetArray(item => TransactionReader.Read(item, missingMemberBehavior)),
-                cancellationToken)
-            .ConfigureAwait(false);
+        SalesRequest request = new(pageIndex)
+        {
+            PageSize = pageSize,
+            AccessToken = accessToken,
+            MissingMemberBehavior = missingMemberBehavior
+        };
+        return request.SendAsync(http, cancellationToken);
     }
 
     #endregion

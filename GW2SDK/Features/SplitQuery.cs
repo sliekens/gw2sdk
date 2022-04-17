@@ -12,14 +12,14 @@ namespace GW2SDK;
 /// (key1, key2. keyN).</summary>
 /// <typeparam name="TKey">The type of the record's key.</typeparam>
 /// <typeparam name="TRecord">The type of the records returned.</typeparam>
-/// <param name="keys">The keys of the records to query.</param>
+/// <param name="range">The keys of the records to query.</param>
 /// <param name="token">Provides cancellation support.</param>
 /// <returns>The set of records found.</returns>
 [PublicAPI]
 
 // ReSharper disable once TypeParameterCanBeVariant // it's a lie
 public delegate Task<IReplicaSet<TRecord>> InQuery<TKey, TRecord>(
-    IReadOnlyCollection<TKey> keys,
+    IReadOnlyCollection<TKey> range,
     CancellationToken token = default
 );
 

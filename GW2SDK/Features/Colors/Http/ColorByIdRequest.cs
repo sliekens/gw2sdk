@@ -1,37 +1,59 @@
 ﻿using System.Net.Http;
+using System.Threading;
+using System.Threading.Tasks;
+using GW2SDK.Colors.Json;
+using GW2SDK.Colors.Models;
 using GW2SDK.Http;
+using GW2SDK.Json;
 using JetBrains.Annotations;
 using static System.Net.Http.HttpMethod;
 
 namespace GW2SDK.Colors.Http;
 
 [PublicAPI]
-public sealed class ColorByIdRequest
+public sealed class ColorByIdRequest : IHttpRequest<IReplica<Dye>>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "/v2/colors")
     {
         AcceptEncoding = "gzip"
     };
 
-    public ColorByIdRequest(int colorId, Language? language)
+    public ColorByIdRequest(int colorId)
     {
         ColorId = colorId;
-        Language = language;
     }
 
     public int ColorId { get; }
 
-    public Language? Language { get; }
+    public Language? Language { get; init; }
 
-    public static implicit operator HttpRequestMessage(ColorByIdRequest r)
+    public MissingMemberBehavior MissingMemberBehavior { get; init; }
+
+    public async Task<IReplica<Dye>> SendAsync(HttpClient httpClient, CancellationToken cancellationToken)
     {
         QueryBuilder search = new();
-        search.Add("id", r.ColorId);
+        search.Add("id", ColorId);
         var request = Template with
         {
-            AcceptLanguage = r.Language?.Alpha2Code,
-            Arguments = search
+            Arguments = search,
+            AcceptLanguage = Language?.Alpha2Code
         };
-        return request.Compile();
+
+        using var response = await httpClient.SendAsync(request.Compile(),
+                HttpCompletionOption.ResponseHeadersRead,
+                cancellationToken)
+            .ConfigureAwait(false);
+
+        await response.EnsureResult(cancellationToken)
+            .ConfigureAwait(false);
+
+        using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
+            .ConfigureAwait(false);
+
+        var value = DyeReader.Read(json.RootElement, MissingMemberBehavior);
+        return new Replica<Dye>(response.Headers.Date.GetValueOrDefault(),
+            value,
+            response.Content.Headers.Expires,
+            response.Content.Headers.LastModified);
     }
 }

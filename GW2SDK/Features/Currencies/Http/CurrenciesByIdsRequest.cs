@@ -1,39 +1,62 @@
 ﻿using System.Collections.Generic;
 using System.Net.Http;
+using System.Threading;
+using System.Threading.Tasks;
+using GW2SDK.Currencies.Json;
+using GW2SDK.Currencies.Models;
 using GW2SDK.Http;
+using GW2SDK.Json;
 using JetBrains.Annotations;
 using static System.Net.Http.HttpMethod;
 
 namespace GW2SDK.Currencies.Http;
 
 [PublicAPI]
-public sealed class CurrenciesByIdsRequest
+public sealed class CurrenciesByIdsRequest : IHttpRequest<IReplicaSet<Currency>>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "/v2/currencies")
     {
         AcceptEncoding = "gzip"
     };
 
-    public CurrenciesByIdsRequest(IReadOnlyCollection<int> currencyIds, Language? language)
+    public CurrenciesByIdsRequest(IReadOnlyCollection<int> currencyIds)
     {
         Check.Collection(currencyIds, nameof(currencyIds));
         CurrencyIds = currencyIds;
-        Language = language;
     }
 
     public IReadOnlyCollection<int> CurrencyIds { get; }
 
-    public Language? Language { get; }
+    public Language? Language { get; init; }
 
-    public static implicit operator HttpRequestMessage(CurrenciesByIdsRequest r)
+    public MissingMemberBehavior MissingMemberBehavior { get; init; }
+
+    public async Task<IReplicaSet<Currency>> SendAsync(HttpClient httpClient, CancellationToken cancellationToken)
     {
         QueryBuilder search = new();
-        search.Add("ids", r.CurrencyIds);
+        search.Add("ids", CurrencyIds);
         var request = Template with
         {
-            AcceptLanguage = r.Language?.Alpha2Code,
-            Arguments = search
+            Arguments = search,
+            AcceptLanguage = Language?.Alpha2Code
         };
-        return request.Compile();
+
+        using var response = await httpClient.SendAsync(request.Compile(),
+                HttpCompletionOption.ResponseHeadersRead,
+                cancellationToken)
+            .ConfigureAwait(false);
+
+        await response.EnsureResult(cancellationToken)
+            .ConfigureAwait(false);
+
+        using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
+            .ConfigureAwait(false);
+
+        var value = json.RootElement.GetSet(entry => CurrencyReader.Read(entry, MissingMemberBehavior));
+        return new ReplicaSet<Currency>(response.Headers.Date.GetValueOrDefault(),
+            value,
+            response.Headers.GetCollectionContext(),
+            response.Content.Headers.Expires,
+            response.Content.Headers.LastModified);
     }
 }

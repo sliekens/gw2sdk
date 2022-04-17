@@ -1,51 +1,64 @@
 ﻿using System.Globalization;
 using System.Net.Http;
+using System.Threading;
+using System.Threading.Tasks;
 using GW2SDK.Http;
+using GW2SDK.Json;
+using GW2SDK.Maps.Json;
+using GW2SDK.Maps.Models;
 using JetBrains.Annotations;
 using static System.Net.Http.HttpMethod;
 
 namespace GW2SDK.Maps.Http;
 
 [PublicAPI]
-public sealed class FloorByIdRequest
+public sealed class FloorByIdRequest : IHttpRequest<IReplica<Floor>>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "/v2/continents/:id/floors")
     {
         AcceptEncoding = "gzip"
     };
 
-    public FloorByIdRequest(
-        int continentId,
-        int floorId,
-        Language? language
-    )
+    public FloorByIdRequest(int continentId, int floorId)
     {
         ContinentId = continentId;
         FloorId = floorId;
-        Language = language;
     }
 
     public int ContinentId { get; }
 
     public int FloorId { get; }
 
-    public Language? Language { get; }
+    public Language? Language { get; init; }
 
-    public static implicit operator HttpRequestMessage(FloorByIdRequest r)
+    public MissingMemberBehavior MissingMemberBehavior { get; init; }
+
+    public async Task<IReplica<Floor>> SendAsync(HttpClient httpClient, CancellationToken cancellationToken)
     {
         QueryBuilder search = new();
-        search.Add("id", r.FloorId);
-        if (r.Language is not null)
-        {
-            search.Add("lang", r.Language.Alpha2Code);
-        }
-
+        search.Add("id", FloorId);
         var request = Template with
         {
-            Path = Template.Path.Replace(":id", r.ContinentId.ToString(CultureInfo.InvariantCulture)),
-            AcceptLanguage = r.Language?.Alpha2Code,
-            Arguments = search
+            Path = Template.Path.Replace(":id", ContinentId.ToString(CultureInfo.InvariantCulture)),
+            Arguments = search,
+            AcceptLanguage = Language?.Alpha2Code
         };
-        return request.Compile();
+
+        using var response = await httpClient.SendAsync(request.Compile(),
+                HttpCompletionOption.ResponseHeadersRead,
+                cancellationToken)
+            .ConfigureAwait(false);
+
+        await response.EnsureResult(cancellationToken)
+            .ConfigureAwait(false);
+
+        using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
+            .ConfigureAwait(false);
+
+        var value = FloorReader.Read(json.RootElement, MissingMemberBehavior);
+        return new Replica<Floor>(response.Headers.Date.GetValueOrDefault(),
+            value,
+            response.Content.Headers.Expires,
+            response.Content.Headers.LastModified);
     }
 }
