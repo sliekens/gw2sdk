@@ -27,17 +27,10 @@ public sealed class DyeQuery
 
     /// <summary>Gets the IDs of the dyes unlocked by the current account.</summary>
     [Scope(Permission.Unlocks)]
-#if NET
-    public async Task<IReplica<IReadOnlySet<int>>> GetUnlockedDyes(
-        string? accessToken,
-        CancellationToken cancellationToken = default
-    )
-#else
     public async Task<IReplica<IReadOnlyCollection<int>>> GetUnlockedDyes(
         string? accessToken,
         CancellationToken cancellationToken = default
     )
-#endif
     {
         UnlockedDyesRequest request = new(accessToken);
         return await http.GetResourcesSetSimple(request, json => json.RootElement.GetInt32Array(), cancellationToken)
@@ -83,11 +76,7 @@ public sealed class DyeQuery
     }
 
     public async Task<IReplicaSet<Dye>> GetColorsByIds(
-#if NET
-        IReadOnlySet<int> colorIds,
-#else
         IReadOnlyCollection<int> colorIds,
-#endif
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default

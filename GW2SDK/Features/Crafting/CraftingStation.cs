@@ -46,11 +46,7 @@ public sealed class CraftingStation
     }
 
     public async IAsyncEnumerable<Recipe> GetRecipesByIds(
-#if NET
-        IReadOnlySet<int> recipeIds,
-#else
         IReadOnlyCollection<int> recipeIds,
-#endif
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         [EnumeratorCancellation] CancellationToken cancellationToken = default,
@@ -185,17 +181,10 @@ public sealed class CraftingStation
     /// <summary>Gets the IDs of the recipes that were learned from recipe sheets. Unlocked recipes are automatically learned
     /// by characters once they reach the required crafting level.</summary>
     [Scope(Permission.Unlocks)]
-#if NET
-    public async Task<IReplica<IReadOnlySet<int>>> GetUnlockedRecipes(
-        string? accessToken,
-        CancellationToken cancellationToken = default
-    )
-#else
     public async Task<IReplica<IReadOnlyCollection<int>>> GetUnlockedRecipes(
         string? accessToken,
         CancellationToken cancellationToken = default
     )
-#endif
     {
         UnlockedRecipesRequest request = new(accessToken);
         return await http.GetResourcesSetSimple(request, json => json.RootElement.GetInt32Array(), cancellationToken)
@@ -205,21 +194,12 @@ public sealed class CraftingStation
     /// <summary>Gets the IDs of all the recipes that the current character has learned, excluding recipes from sheets for
     /// which the required crafting level is not reached.</summary>
     [Scope(Permission.Characters, Permission.Inventories)]
-#if NET
-    public async Task<IReplica<IReadOnlySet<int>>> GetLearnedRecipes(
-        string characterId,
-        string? accessToken,
-        MissingMemberBehavior missingMemberBehavior = default,
-        CancellationToken cancellationToken = default
-    )
-#else
     public async Task<IReplica<IReadOnlyCollection<int>>> GetLearnedRecipes(
         string characterId,
         string? accessToken,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
-#endif
     {
         UnlockedRecipesByCharacterRequest request = new(characterId, accessToken);
         return await http.GetResource(request,
@@ -228,13 +208,9 @@ public sealed class CraftingStation
             .ConfigureAwait(false);
     }
 
-#if NET
-    public async Task<IReplica<IReadOnlySet<string>>> GetDailyRecipes(CancellationToken cancellationToken = default)
-#else
     public async Task<IReplica<IReadOnlyCollection<string>>> GetDailyRecipes(
         CancellationToken cancellationToken = default
     )
-#endif
     {
         DailyCraftingRequest request = new();
         return await http.GetResourcesSetSimple(request, json => json.RootElement.GetStringArray(), cancellationToken)
@@ -242,17 +218,10 @@ public sealed class CraftingStation
     }
 
     [Scope(Permission.Progression)]
-#if NET
-    public async Task<IReplica<IReadOnlySet<string>>> GetDailyRecipesOnCooldown(
-        string? accessToken,
-        CancellationToken cancellationToken = default
-    )
-#else
     public async Task<IReplica<IReadOnlyCollection<string>>> GetDailyRecipesOnCooldown(
         string? accessToken,
         CancellationToken cancellationToken = default
     )
-#endif
     {
         AccountDailyCraftingRequest request = new(accessToken);
         return await http.GetResourcesSetSimple(request, json => json.RootElement.GetStringArray(), cancellationToken)

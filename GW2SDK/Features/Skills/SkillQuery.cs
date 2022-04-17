@@ -57,11 +57,7 @@ public sealed class SkillQuery
     }
 
     public async Task<IReplicaSet<Skill>> GetSkillsByIds(
-#if NET
-        IReadOnlySet<int> skillIds,
-#else
         IReadOnlyCollection<int> skillIds,
-#endif
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default

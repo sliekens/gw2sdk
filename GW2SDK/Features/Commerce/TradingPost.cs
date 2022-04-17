@@ -77,11 +77,7 @@ public sealed class TradingPost
     }
 
     public async IAsyncEnumerable<ItemPrice> GetItemPricesByIds(
-#if NET
-        IReadOnlySet<int> itemIds,
-#else
         IReadOnlyCollection<int> itemIds,
-#endif
         MissingMemberBehavior missingMemberBehavior = default,
         [EnumeratorCancellation] CancellationToken cancellationToken = default,
         IProgress<ICollectionContext>? progress = default
@@ -146,11 +142,7 @@ public sealed class TradingPost
     }
 
     public async IAsyncEnumerable<OrderBook> GetOrderBooksByIds(
-#if NET
-        IReadOnlySet<int> itemIds,
-#else
         IReadOnlyCollection<int> itemIds,
-#endif
         MissingMemberBehavior missingMemberBehavior = default,
         [EnumeratorCancellation] CancellationToken cancellationToken = default,
         IProgress<ICollectionContext>? progress = default

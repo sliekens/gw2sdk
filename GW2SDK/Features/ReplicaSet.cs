@@ -8,11 +8,7 @@ internal sealed class ReplicaSet<T> : IReplicaSet<T>
 {
     public ReplicaSet(
         DateTimeOffset date,
-#if NET
-        IReadOnlySet<T> values,
-#else
         IReadOnlyCollection<T> values,
-#endif
         ICollectionContext context,
         DateTimeOffset? expires = null,
         DateTimeOffset? lastModified = null
@@ -31,11 +27,7 @@ internal sealed class ReplicaSet<T> : IReplicaSet<T>
 
     public DateTimeOffset? LastModified { get; }
 
-#if NET
-    public IReadOnlySet<T> Values { get; }
-#else
     public IReadOnlyCollection<T> Values { get; }
-#endif
 
     public ICollectionContext Context { get; }
 

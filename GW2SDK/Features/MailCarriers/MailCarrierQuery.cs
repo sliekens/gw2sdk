@@ -57,11 +57,7 @@ public sealed class MailCarrierQuery
     }
 
     public async Task<IReplicaSet<MailCarrier>> GetMailCarriersByIds(
-#if NET
-        IReadOnlySet<int> mailCarrierIds,
-#else
         IReadOnlyCollection<int> mailCarrierIds,
-#endif
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default

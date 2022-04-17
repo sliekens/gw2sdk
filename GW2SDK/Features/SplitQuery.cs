@@ -19,11 +19,7 @@ namespace GW2SDK;
 
 // ReSharper disable once TypeParameterCanBeVariant // it's a lie
 public delegate Task<IReplicaSet<TRecord>> InQuery<TKey, TRecord>(
-#if NET
-    IReadOnlySet<TKey> keys,
-#else
     IReadOnlyCollection<TKey> keys,
-#endif
     CancellationToken token = default
 );
 
@@ -66,11 +62,7 @@ public sealed class SplitQuery<TKey, TRecord>
     }
 
     public async IAsyncEnumerable<TRecord> QueryAsync(
-#if NET
-        IReadOnlySet<TKey> index,
-#else
         IReadOnlyCollection<TKey> index,
-#endif
         int bufferSize = 200,
         [EnumeratorCancellation] CancellationToken cancellationToken = default
     )

@@ -2,7 +2,6 @@
 using System.Net.Http;
 using System.Threading.Tasks;
 using GW2SDK.Http;
-using GW2SDK.Http.Handlers;
 using Microsoft.Extensions.DependencyInjection;
 using Polly;
 using Polly.Timeout;
@@ -37,12 +36,6 @@ public class TestHttpClientFactory : IHttpClientFactory, IAsyncDisposable
 
         AddPolicies(services);
 
-        services.AddTransient<RequestLengthHandler>();
-        services.AddTransient<BadMessageHandler>();
-        services.AddTransient<RateLimitHandler>();
-        services.AddTransient<ResourceNotFoundHandler>();
-        services.AddTransient<UnauthorizedMessageHandler>();
-        services.AddTransient<GatewayErrorHandler>();
         services.AddHttpClient("GW2SDK",
                 http =>
                 {
@@ -56,13 +49,7 @@ public class TestHttpClientFactory : IHttpClientFactory, IAsyncDisposable
                 return new HttpClientHandler();
 #endif
             })
-            .AddPolicyHandlerFromRegistry("api.guildwars2.com")
-            .AddHttpMessageHandler<RequestLengthHandler>()
-            .AddHttpMessageHandler<BadMessageHandler>()
-            .AddHttpMessageHandler<RateLimitHandler>()
-            .AddHttpMessageHandler<ResourceNotFoundHandler>()
-            .AddHttpMessageHandler<UnauthorizedMessageHandler>()
-            .AddHttpMessageHandler<GatewayErrorHandler>();
+            .AddPolicyHandlerFromRegistry("api.guildwars2.com");
 
         return services.BuildServiceProvider();
     }

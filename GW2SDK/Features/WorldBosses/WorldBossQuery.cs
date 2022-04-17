@@ -21,13 +21,9 @@ public sealed class WorldBossQuery
         this.http = http.WithDefaults() ?? throw new ArgumentNullException(nameof(http));
     }
 
-#if NET
-    public async Task<IReplica<IReadOnlySet<string>>> GetWorldBosses(CancellationToken cancellationToken = default)
-#else
     public async Task<IReplica<IReadOnlyCollection<string>>> GetWorldBosses(
         CancellationToken cancellationToken = default
     )
-#endif
     {
         WorldBossesRequest request = new();
         return await http.GetResourcesSetSimple(request, json => json.RootElement.GetStringArray(), cancellationToken)
@@ -35,17 +31,10 @@ public sealed class WorldBossQuery
     }
 
     [Scope(Permission.Progression)]
-#if NET
-    public async Task<IReplica<IReadOnlySet<string>>> GetWorldBossesOnCooldown(
-        string? accessToken,
-        CancellationToken cancellationToken = default
-    )
-#else
     public async Task<IReplica<IReadOnlyCollection<string>>> GetWorldBossesOnCooldown(
         string? accessToken,
         CancellationToken cancellationToken = default
     )
-#endif
     {
         AccountWorldBossesRequest request = new(accessToken);
         return await http.GetResourcesSetSimple(request, json => json.RootElement.GetStringArray(), cancellationToken)

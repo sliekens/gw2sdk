@@ -72,11 +72,7 @@ public sealed class StoryJournal
     }
 
     public async Task<IReplicaSet<BackstoryQuestion>> GetBackstoryQuestionsByIds(
-#if NET
-        IReadOnlySet<int> questionIds,
-#else
         IReadOnlyCollection<int> questionIds,
-#endif
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
@@ -130,11 +126,7 @@ public sealed class StoryJournal
     }
 
     public async Task<IReplicaSet<BackstoryAnswer>> GetBackstoryAnswersByIds(
-#if NET
-        IReadOnlySet<string> answerIds,
-#else
         IReadOnlyCollection<string> answerIds,
-#endif
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
