@@ -8,9 +8,9 @@ public sealed record PageContext(
     int ResultCount,
     int PageTotal,
     int PageSize,
-    HyperlinkReference First,
-    HyperlinkReference Self,
-    HyperlinkReference Last,
-    HyperlinkReference Previous,
-    HyperlinkReference Next
+    Hyperlink First,
+    Hyperlink Self,
+    Hyperlink Last,
+    Hyperlink Previous,
+    Hyperlink Next
 ) : IPageContext;

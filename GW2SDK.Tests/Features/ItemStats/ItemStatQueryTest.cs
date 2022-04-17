@@ -75,9 +75,5 @@ public class ItemStatQueryTest
         Assert.Equal(3, actual.Count);
         Assert.Equal(3, actual.Context.PageSize);
         Assert.False(actual.Context.Next.IsEmpty);
-
-        var next = await sut.GetItemStatsByPage(actual.Context.Next);
-
-        Assert.Equal(actual.Context.Next, next.Context.Self);
     }
 }

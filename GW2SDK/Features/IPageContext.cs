@@ -13,13 +13,13 @@ public interface IPageContext
 
     int ResultCount { get; }
 
-    HyperlinkReference Previous { get; }
+    Hyperlink Previous { get; }
 
-    HyperlinkReference Next { get; }
+    Hyperlink Next { get; }
 
-    HyperlinkReference First { get; }
+    Hyperlink First { get; }
 
-    HyperlinkReference Self { get; }
+    Hyperlink Self { get; }
 
-    HyperlinkReference Last { get; }
+    Hyperlink Last { get; }
 }

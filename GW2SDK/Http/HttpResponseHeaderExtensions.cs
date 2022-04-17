@@ -35,11 +35,11 @@ public static class HttpResponseHeaderExtensions
             pageSize = default,
             resultTotal = default,
             resultCount = default;
-        HyperlinkReference previous = HyperlinkReference.None,
-            next = HyperlinkReference.None,
-            self = HyperlinkReference.None,
-            first = HyperlinkReference.None,
-            last = HyperlinkReference.None;
+        Hyperlink previous = Hyperlink.None,
+            next = Hyperlink.None,
+            self = Hyperlink.None,
+            first = Hyperlink.None,
+            last = Hyperlink.None;
         if (instance.TryGetValues(ResponseHeaderName.PageTotal, out var pageTotals))
         {
             // Assume that there is exactly one value for this header
@@ -70,7 +70,7 @@ public static class HttpResponseHeaderExtensions
             var header = LinkHeader.Parse(links.Single());
             foreach (var link in header.Links)
             {
-                var href = new HyperlinkReference(link.Href);
+                var href = new Hyperlink(link.Href);
                 switch (link.Rel)
                 {
                     case "previous":
