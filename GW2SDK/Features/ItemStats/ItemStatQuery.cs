@@ -88,24 +88,4 @@ public sealed class ItemStatQuery
                 cancellationToken)
             .ConfigureAwait(false);
     }
-
-    /// <summary>Retrieves a page, using a hyperlink obtained from a previous page result.</summary>
-    /// <param name="href">One of <see cref="IPageContext.First" />, <see cref="IPageContext.Previous" />,
-    /// <see cref="IPageContext.Self" />, <see cref="IPageContext.Next" /> or <see cref="IPageContext.Last" />.</param>
-    /// <param name="language"></param>
-    /// <param name="cancellationToken"></param>
-    /// <returns>The page specified by the hyperlink.</returns>
-    public async Task<IReplicaPage<ItemStat>> GetItemStatsByPage(
-        HyperlinkReference href,
-        Language? language = default,
-        MissingMemberBehavior missingMemberBehavior = default,
-        CancellationToken cancellationToken = default
-    )
-    {
-        PageRequest request = new(href, language);
-        return await http.GetResourcesPage(request,
-                json => json.RootElement.GetArray(item => ItemStatReader.Read(item, missingMemberBehavior)),
-                cancellationToken)
-            .ConfigureAwait(false);
-    }
 }
