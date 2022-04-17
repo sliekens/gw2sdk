@@ -47,7 +47,6 @@ public class TestHttpClientFactory : IHttpClientFactory, IAsyncDisposable
                 http =>
                 {
                     http.BaseAddress = baseAddress;
-                    http.UseSchemaVersion(SchemaVersion.Latest);
                 })
             .ConfigurePrimaryHttpMessageHandler(() =>
             {

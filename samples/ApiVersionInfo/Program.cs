@@ -29,10 +29,6 @@ internal class Program
         // Convenience method, sets the Accept-Language header
         http.UseLanguage(Language.English);
 
-        // Convenience method, sets the X-Schema-Version to the recommended version
-        // (where recommended means that it is the least likely to cause JSON conversion errors)
-        http.UseSchemaVersion(SchemaVersion.Recommended);
-
         // End of HttpClient config
         // This is just the minimal setup to get things going without exceptions under normal conditions.
         // In a real application, you would use Polly and IHttpClientFactory to add resiliency etc.

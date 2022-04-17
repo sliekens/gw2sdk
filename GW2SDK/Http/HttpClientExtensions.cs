@@ -29,12 +29,6 @@ public static class HttpClientExtensions
         instance.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
     }
 
-    public static void UseSchemaVersion(this HttpClient instance, SchemaVersion version)
-    {
-        if (instance is null) throw new ArgumentNullException(nameof(instance));
-        instance.DefaultRequestHeaders.Add("X-Schema-Version", version.Version);
-    }
-
     public static void UseLanguage(this HttpClient instance, Language language)
     {
         if (instance is null) throw new ArgumentNullException(nameof(instance));
@@ -47,11 +41,6 @@ public static class HttpClientExtensions
     {
         if (instance is null) return null;
         if (instance.BaseAddress is null) UseGuildWars2(instance);
-        if (!instance.DefaultRequestHeaders.Contains("X-Schema-Version"))
-        {
-            UseSchemaVersion(instance, SchemaVersion.Recommended);
-        }
-
         return instance;
     }
 
