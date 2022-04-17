@@ -22,7 +22,7 @@ public class QueryBuilderTest
 
         var actual = sut.Build();
 
-        Assert.Equal("key=value", actual);
+        Assert.Equal("?key=value", actual);
     }
 
     [Fact]
@@ -34,7 +34,7 @@ public class QueryBuilderTest
 
         var actual = sut.Build();
 
-        Assert.Equal("key=42", actual);
+        Assert.Equal("?key=42", actual);
     }
 
     [Fact]
@@ -48,7 +48,7 @@ public class QueryBuilderTest
 
         var actual = sut.Build();
 
-        Assert.Equal("key1=first&key2=second&key3=third", actual);
+        Assert.Equal("?key1=first&key2=second&key3=third", actual);
     }
 
     [Fact]
@@ -62,7 +62,7 @@ public class QueryBuilderTest
 
         var actual = sut.Build();
 
-        Assert.Equal("key1=1&key2=2&key3=3", actual);
+        Assert.Equal("?key1=1&key2=2&key3=3", actual);
     }
 
     [Fact]
@@ -76,7 +76,7 @@ public class QueryBuilderTest
 
         var actual = sut.Build();
 
-        Assert.Equal("key=first&key=second&key=third", actual);
+        Assert.Equal("?key=first&key=second&key=third", actual);
     }
 
     [Fact]
@@ -94,7 +94,7 @@ public class QueryBuilderTest
 
         var actual = sut.Build();
 
-        Assert.Equal("key=first,second,third", actual);
+        Assert.Equal("?key=first,second,third", actual);
     }
 
     [Fact]
@@ -112,6 +112,6 @@ public class QueryBuilderTest
 
         var actual = sut.Build();
 
-        Assert.Equal("key=1,2,3", actual);
+        Assert.Equal("?key=1,2,3", actual);
     }
 }
