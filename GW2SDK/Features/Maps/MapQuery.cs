@@ -60,11 +60,7 @@ public sealed class MapQuery
     }
 
     public async Task<IReplicaSet<Continent>> GetContinentsByIds(
-#if NET
-        IReadOnlySet<int> continentIds,
-#else
         IReadOnlyCollection<int> continentIds,
-#endif
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
@@ -134,11 +130,7 @@ public sealed class MapQuery
 
     public async Task<IReplicaSet<Floor>> GetFloorsByIds(
         int continentId,
-#if NET
-        IReadOnlySet<int> floorIds,
-#else
         IReadOnlyCollection<int> floorIds,
-#endif
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
@@ -206,11 +198,7 @@ public sealed class MapQuery
     }
 
     public async Task<IReplicaSet<World>> GetWorldsByIds(
-#if NET
-        IReadOnlySet<int> worldIds,
-#else
         IReadOnlyCollection<int> worldIds,
-#endif
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default

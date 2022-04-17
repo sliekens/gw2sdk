@@ -64,11 +64,7 @@ public sealed class AchievementQuery
     }
 
     public async Task<IReplicaSet<Achievement>> GetAchievementsByIds(
-#if NET
-        IReadOnlySet<int> achievementIds,
-#else
         IReadOnlyCollection<int> achievementIds,
-#endif
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
@@ -117,11 +113,7 @@ public sealed class AchievementQuery
 
     [Scope(Permission.Progression)]
     public async Task<IReplicaSet<AccountAchievement>> GetAccountAchievementsByIds(
-#if NET
-        IReadOnlySet<int> achievementIds,
-#else
         IReadOnlyCollection<int> achievementIds,
-#endif
         string? accessToken,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
@@ -203,11 +195,7 @@ public sealed class AchievementQuery
     }
 
     public async Task<IReplicaSet<AchievementCategory>> GetAchievementCategoriesByIds(
-#if NET
-        IReadOnlySet<int> achievementCategoryIds,
-#else
         IReadOnlyCollection<int> achievementCategoryIds,
-#endif
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
@@ -274,11 +262,7 @@ public sealed class AchievementQuery
     }
 
     public async Task<IReplicaSet<AchievementGroup>> GetAchievementGroupsByIds(
-#if NET
-        IReadOnlySet<string> achievementGroupIds,
-#else
         IReadOnlyCollection<string> achievementGroupIds,
-#endif
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
@@ -345,11 +329,7 @@ public sealed class AchievementQuery
     }
 
     public async Task<IReplicaSet<Title>> GetTitlesByIds(
-#if NET
-        IReadOnlySet<int> titleIds,
-#else
         IReadOnlyCollection<int> titleIds,
-#endif
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default

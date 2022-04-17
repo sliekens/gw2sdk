@@ -131,11 +131,7 @@ public sealed class MountQuery
     }
 
     public async Task<IReplicaSet<MountSkin>> GetMountSkinsByIds(
-#if NET
-        IReadOnlySet<int> mountSkinIds,
-#else
         IReadOnlyCollection<int> mountSkinIds,
-#endif
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default

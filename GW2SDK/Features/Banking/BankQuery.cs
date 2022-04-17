@@ -72,11 +72,7 @@ public sealed class BankQuery
     }
 
     public async Task<IReplicaSet<MaterialCategory>> GetMaterialCategoriesByIds(
-#if NET
-        IReadOnlySet<int> materialCategoryIds,
-#else
         IReadOnlyCollection<int> materialCategoryIds,
-#endif
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default

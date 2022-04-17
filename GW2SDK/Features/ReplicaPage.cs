@@ -8,11 +8,7 @@ internal sealed class ReplicaPage<T> : IReplicaPage<T>
 {
     public ReplicaPage(
         DateTimeOffset date,
-#if NET
-        IReadOnlySet<T> values,
-#else
         IReadOnlyCollection<T> values,
-#endif
         IPageContext context,
         DateTimeOffset? expires = null,
         DateTimeOffset? lastModified = null
@@ -24,11 +20,7 @@ internal sealed class ReplicaPage<T> : IReplicaPage<T>
         Expires = expires;
         LastModified = lastModified;
     }
-#if NET
-    public IReadOnlySet<T> Values { get; }
-#else
     public IReadOnlyCollection<T> Values { get; }
-#endif
 
     public IPageContext Context { get; }
 

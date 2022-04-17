@@ -55,11 +55,7 @@ public sealed class QuagganQuery
     }
 
     public async Task<IReplicaSet<Quaggan>> GetQuaggansByIds(
-#if NET
-        IReadOnlySet<string> quagganIds,
-#else
         IReadOnlyCollection<string> quagganIds,
-#endif
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )

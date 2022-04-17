@@ -26,19 +26,11 @@ public sealed class Wallet
     #region /v2/account/wallet
 
     [Scope(Permission.Wallet)]
-#if NET
-    public async Task<IReplica<IReadOnlySet<CurrencyAmount>>> GetWallet(
-        string? accessToken,
-        MissingMemberBehavior missingMemberBehavior = default,
-        CancellationToken cancellationToken = default
-    )
-#else
     public async Task<IReplica<IReadOnlyCollection<CurrencyAmount>>> GetWallet(
         string? accessToken,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
-#endif
     {
         WalletRequest request = new(accessToken);
         return await http.GetResourcesSetSimple(request,
@@ -86,11 +78,7 @@ public sealed class Wallet
     }
 
     public async Task<IReplicaSet<Currency>> GetCurrenciesByIds(
-#if NET
-        IReadOnlySet<int> currencyIds,
-#else
         IReadOnlyCollection<int> currencyIds,
-#endif
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default

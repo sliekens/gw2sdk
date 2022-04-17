@@ -57,11 +57,7 @@ public sealed class ItemStatQuery
     }
 
     public async Task<IReplicaSet<ItemStat>> GetItemStatsByIds(
-#if NET
-        IReadOnlySet<int> itemStatIds,
-#else
         IReadOnlyCollection<int> itemStatIds,
-#endif
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default

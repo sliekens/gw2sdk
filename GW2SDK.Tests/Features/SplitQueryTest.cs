@@ -112,11 +112,7 @@ internal sealed record StubRecord(int Id);
 internal sealed class StubReplica : IReplicaSet<StubRecord>
 {
     public StubReplica(
-#if NET
-        IReadOnlySet<StubRecord> values
-#else
         IReadOnlyCollection<StubRecord> values
-#endif
     )
     {
         Values = values;
@@ -129,11 +125,7 @@ internal sealed class StubReplica : IReplicaSet<StubRecord>
 
     public DateTimeOffset? LastModified { get; }
 
-#if NET
-    public IReadOnlySet<StubRecord> Values { get; }
-#else
     public IReadOnlyCollection<StubRecord> Values { get; }
-#endif
 
     public ICollectionContext Context { get; }
 

@@ -45,11 +45,7 @@ public sealed class ItemQuery
     }
 
     public async IAsyncEnumerable<Item> GetItemsByIds(
-#if NET
-        IReadOnlySet<int> itemIds,
-#else
         IReadOnlyCollection<int> itemIds,
-#endif
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         [EnumeratorCancellation] CancellationToken cancellationToken = default,

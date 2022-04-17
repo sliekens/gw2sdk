@@ -94,11 +94,7 @@ public static class HttpClientExtensions
         return new Replica<T>(date, result, response.Content.Headers.Expires, response.Content.Headers.LastModified);
     }
 
-#if NET
-    internal static async Task<IReplica<IReadOnlySet<T>>> GetResourcesSetSimple<T>(
-#else
     internal static async Task<IReplica<IReadOnlyCollection<T>>> GetResourcesSetSimple<T>(
-#endif
         this HttpClient instance,
         HttpRequestMessage request,
         Func<JsonDocument, IEnumerable<T>> resultSelector,
@@ -116,11 +112,7 @@ public static class HttpClientExtensions
 
         var result = new HashSet<T>(resultSelector(json));
 
-#if NET
-        return new Replica<IReadOnlySet<T>>(
-#else
         return new Replica<IReadOnlyCollection<T>>(
-#endif
             date,
             result,
             response.Content.Headers.Expires,

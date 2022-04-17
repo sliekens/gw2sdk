@@ -135,7 +135,7 @@ internal class Program
     }
 
     private static async Task<List<Item>> GetItems(
-        IReadOnlySet<int> itemIds,
+        IReadOnlyCollection<int> itemIds,
         ItemQuery itemQuery,
         ProgressTask progress
     )

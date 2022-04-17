@@ -57,11 +57,7 @@ public sealed class SpecializationQuery
     }
 
     public async Task<IReplicaSet<Specialization>> GetSpecializationsByIds(
-#if NET
-        IReadOnlySet<int> specializationIds,
-#else
         IReadOnlyCollection<int> specializationIds,
-#endif
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default

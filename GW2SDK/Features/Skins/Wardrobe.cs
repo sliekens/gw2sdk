@@ -44,11 +44,7 @@ public sealed class Wardrobe
     }
 
     public async Task<IReplicaSet<Skin>> GetSkinsByIds(
-#if NET
-        IReadOnlySet<int> skinIds,
-#else
         IReadOnlyCollection<int> skinIds,
-#endif
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default

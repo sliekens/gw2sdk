@@ -57,11 +57,7 @@ public sealed class MasteryQuery
     }
 
     public async Task<IReplicaSet<Mastery>> GetMasteriesByIds(
-#if NET
-        IReadOnlySet<int> masteryIds,
-#else
         IReadOnlyCollection<int> masteryIds,
-#endif
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
