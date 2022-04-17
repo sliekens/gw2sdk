@@ -78,8 +78,7 @@ public class Container : IDisposable, IAsyncDisposable
         services.AddHttpClient("GW2SDK",
                 http =>
                 {
-                    http.BaseAddress = new Uri("https://api.guildwars2.com", UriKind.Absolute);
-                    http.UseSchemaVersion(SchemaVersion.Latest);
+                    http.UseGuildWars2();
                 })
             .ConfigurePrimaryHttpMessageHandler(() => new SocketsHttpHandler
             {

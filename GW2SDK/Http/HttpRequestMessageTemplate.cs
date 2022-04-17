@@ -20,12 +20,19 @@ public sealed record HttpRequestMessageTemplate(HttpMethod Method, string Path)
 
     public QueryBuilder Arguments { get; set; } = new();
 
+    public SchemaVersion? SchemaVersion { get; set; } = SchemaVersion.Recommended;
+
     public HttpRequestMessage Compile()
     {
+        if (SchemaVersion is not null)
+        {
+            Arguments.Add("v", SchemaVersion.Version);
+        }
+
         var location = Path;
         if (Arguments.Count != 0)
         {
-            location += "?" + Arguments;
+            location += Arguments;
         }
 
         HttpRequestMessage message = new(Method, new Uri(location, UriKind.Relative));

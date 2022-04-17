@@ -28,11 +28,7 @@ public sealed class QueryBuilder
         var query = new StringBuilder();
         foreach (var (key, value) in arguments)
         {
-            if (query.Length != 0)
-            {
-                query.Append("&");
-            }
-
+            query.Append(query.Length == 0 ? "?" : "&");
             query.AppendJoin("=", key, value);
         }
 
@@ -52,7 +48,7 @@ public sealed class QueryBuilder
 internal static class QueryBuilderHelper
 {
     internal static void Deconstruct(
-        this KeyValuePair<string, string> instance,
+        this Argument instance,
         out string key,
         out string value
     )

@@ -1,4 +1,4 @@
-using GW2SDK;
+﻿using GW2SDK;
 using GW2SDK.Http;
 using GW2SDK.Quaggans;
 
@@ -12,7 +12,6 @@ builder.Services.AddHttpClient("api.guildwars2.com",
         {
             http.UseGuildWars2();
             http.UseLanguage(Language.English);
-            http.UseSchemaVersion(SchemaVersion.Recommended);
         })
     .AddTypedClient<QuagganQuery>();
 

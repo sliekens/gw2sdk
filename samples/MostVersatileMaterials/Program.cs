@@ -28,7 +28,6 @@ internal class Program
 
         http.UseGuildWars2();
         http.UseLanguage(Language.English);
-        http.UseSchemaVersion(SchemaVersion.Recommended);
 
         var recipesService = new CraftingStation(http);
         var itemsService = new ItemQuery(http);
