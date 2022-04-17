@@ -5,7 +5,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using GW2SDK.Annotations;
 using GW2SDK.Http;
-using GW2SDK.Json;
 using GW2SDK.WorldBosses.Http;
 using JetBrains.Annotations;
 
@@ -21,23 +20,22 @@ public sealed class WorldBossQuery
         this.http = http.WithDefaults() ?? throw new ArgumentNullException(nameof(http));
     }
 
-    public async Task<IReplica<IReadOnlyCollection<string>>> GetWorldBosses(
-        CancellationToken cancellationToken = default
-    )
+    public Task<IReplicaSet<string>> GetWorldBosses(CancellationToken cancellationToken = default)
     {
         WorldBossesRequest request = new();
-        return await http.GetResourcesSetSimple(request, json => json.RootElement.GetStringArray(), cancellationToken)
-            .ConfigureAwait(false);
+        return request.SendAsync(http, cancellationToken);
     }
 
     [Scope(Permission.Progression)]
-    public async Task<IReplica<IReadOnlyCollection<string>>> GetWorldBossesOnCooldown(
+    public Task<IReplica<IReadOnlyCollection<string>>> GetWorldBossesOnCooldown(
         string? accessToken,
         CancellationToken cancellationToken = default
     )
     {
-        AccountWorldBossesRequest request = new(accessToken);
-        return await http.GetResourcesSetSimple(request, json => json.RootElement.GetStringArray(), cancellationToken)
-            .ConfigureAwait(false);
+        AccountWorldBossesRequest request = new()
+        {
+            AccessToken = accessToken
+        };
+        return request.SendAsync(http, cancellationToken);
     }
 }

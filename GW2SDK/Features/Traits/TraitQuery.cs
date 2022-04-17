@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 using GW2SDK.Http;
 using GW2SDK.Json;
 using GW2SDK.Traits.Http;
-using GW2SDK.Traits.Json;
 using GW2SDK.Traits.Models;
 using JetBrains.Annotations;
 
@@ -22,55 +21,57 @@ public sealed class TraitQuery
         this.http = http.WithDefaults() ?? throw new ArgumentNullException(nameof(http));
     }
 
-    public async Task<IReplicaSet<Trait>> GetTraits(
+    public Task<IReplicaSet<Trait>> GetTraits(
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        TraitsRequest request = new(language);
-        return await http.GetResourcesSet(request,
-                json => json.RootElement.GetArray(item => TraitReader.Read(item, missingMemberBehavior)),
-                cancellationToken)
-            .ConfigureAwait(false);
+        TraitsRequest request = new()
+        {
+            Language = language,
+            MissingMemberBehavior = missingMemberBehavior
+        };
+        return request.SendAsync(http, cancellationToken);
     }
 
-    public async Task<IReplicaSet<int>> GetTraitsIndex(CancellationToken cancellationToken = default)
+    public Task<IReplicaSet<int>> GetTraitsIndex(CancellationToken cancellationToken = default)
     {
         TraitsIndexRequest request = new();
-        return await http.GetResourcesSet(request, json => json.RootElement.GetInt32Array(), cancellationToken)
-            .ConfigureAwait(false);
+        return request.SendAsync(http, cancellationToken);
     }
 
-    public async Task<IReplica<Trait>> GetTraitById(
+    public Task<IReplica<Trait>> GetTraitById(
         int traitId,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        TraitByIdRequest request = new(traitId, language);
-        return await http.GetResource(request,
-                json => TraitReader.Read(json.RootElement, missingMemberBehavior),
-                cancellationToken)
-            .ConfigureAwait(false);
+        TraitByIdRequest request = new(traitId)
+        {
+            Language = language,
+            MissingMemberBehavior = missingMemberBehavior
+        };
+        return request.SendAsync(http, cancellationToken);
     }
 
-    public async Task<IReplicaSet<Trait>> GetTraitsByIds(
+    public Task<IReplicaSet<Trait>> GetTraitsByIds(
         IReadOnlyCollection<int> traitIds,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        TraitsByIdsRequest request = new(traitIds, language);
-        return await http.GetResourcesSet(request,
-                json => json.RootElement.GetArray(item => TraitReader.Read(item, missingMemberBehavior)),
-                cancellationToken)
-            .ConfigureAwait(false);
+        TraitsByIdsRequest request = new(traitIds)
+        {
+            Language = language,
+            MissingMemberBehavior = missingMemberBehavior
+        };
+        return request.SendAsync(http, cancellationToken);
     }
 
-    public async Task<IReplicaPage<Trait>> GetTraitsByPage(
+    public Task<IReplicaPage<Trait>> GetTraitsByPage(
         int pageIndex,
         int? pageSize = default,
         Language? language = default,
@@ -78,10 +79,12 @@ public sealed class TraitQuery
         CancellationToken cancellationToken = default
     )
     {
-        TraitsByPageRequest request = new(pageIndex, pageSize, language);
-        return await http.GetResourcesPage(request,
-                json => json.RootElement.GetArray(item => TraitReader.Read(item, missingMemberBehavior)),
-                cancellationToken)
-            .ConfigureAwait(false);
+        TraitsByPageRequest request = new(pageIndex)
+        {
+            PageSize = pageSize,
+            Language = language,
+            MissingMemberBehavior = missingMemberBehavior
+        };
+        return request.SendAsync(http, cancellationToken);
     }
 }

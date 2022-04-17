@@ -5,7 +5,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using GW2SDK.Annotations;
 using GW2SDK.Colors.Http;
-using GW2SDK.Colors.Json;
 using GW2SDK.Colors.Models;
 using GW2SDK.Http;
 using GW2SDK.Json;
@@ -27,69 +26,73 @@ public sealed class DyeQuery
 
     /// <summary>Gets the IDs of the dyes unlocked by the current account.</summary>
     [Scope(Permission.Unlocks)]
-    public async Task<IReplica<IReadOnlyCollection<int>>> GetUnlockedDyes(
+    public Task<IReplica<IReadOnlyCollection<int>>> GetUnlockedDyes(
         string? accessToken,
         CancellationToken cancellationToken = default
     )
     {
-        UnlockedDyesRequest request = new(accessToken);
-        return await http.GetResourcesSetSimple(request, json => json.RootElement.GetInt32Array(), cancellationToken)
-            .ConfigureAwait(false);
+        UnlockedDyesRequest request = new()
+        {
+            AccessToken = accessToken
+        };
+        return request.SendAsync(http, cancellationToken);
     }
 
     #endregion
 
     #region /v2/colors
 
-    public async Task<IReplicaSet<Dye>> GetColors(
+    public Task<IReplicaSet<Dye>> GetColors(
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        ColorsRequest request = new(language);
-        return await http.GetResourcesSet(request,
-                json => json.RootElement.GetArray(item => DyeReader.Read(item, missingMemberBehavior)),
-                cancellationToken)
-            .ConfigureAwait(false);
+        ColorsRequest request = new()
+        {
+            Language = language,
+            MissingMemberBehavior = missingMemberBehavior
+        };
+        return request.SendAsync(http, cancellationToken);
     }
 
-    public async Task<IReplicaSet<int>> GetColorsIndex(CancellationToken cancellationToken = default)
+    public Task<IReplicaSet<int>> GetColorsIndex(CancellationToken cancellationToken = default)
     {
         ColorsIndexRequest request = new();
-        return await http.GetResourcesSet(request, json => json.RootElement.GetInt32Array(), cancellationToken)
-            .ConfigureAwait(false);
+        return request.SendAsync(http, cancellationToken);
     }
 
-    public async Task<IReplica<Dye>> GetColorById(
+    public Task<IReplica<Dye>> GetColorById(
         int colorId,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        ColorByIdRequest request = new(colorId, language);
-        return await http.GetResource(request,
-                json => DyeReader.Read(json.RootElement, missingMemberBehavior),
-                cancellationToken)
-            .ConfigureAwait(false);
+        ColorByIdRequest request = new(colorId)
+        {
+            Language = language,
+            MissingMemberBehavior = missingMemberBehavior
+        };
+        return request.SendAsync(http, cancellationToken);
     }
 
-    public async Task<IReplicaSet<Dye>> GetColorsByIds(
+    public Task<IReplicaSet<Dye>> GetColorsByIds(
         IReadOnlyCollection<int> colorIds,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        ColorsByIdsRequest request = new(colorIds, language);
-        return await http.GetResourcesSet(request,
-                json => json.RootElement.GetArray(item => DyeReader.Read(item, missingMemberBehavior)),
-                cancellationToken)
-            .ConfigureAwait(false);
+        ColorsByIdsRequest request = new(colorIds)
+        {
+            Language = language,
+            MissingMemberBehavior = missingMemberBehavior
+        };
+        return request.SendAsync(http, cancellationToken);
     }
 
-    public async Task<IReplicaPage<Dye>> GetColorsByPage(
+    public Task<IReplicaPage<Dye>> GetColorsByPage(
         int pageIndex,
         int? pageSize = default,
         Language? language = default,
@@ -97,11 +100,13 @@ public sealed class DyeQuery
         CancellationToken cancellationToken = default
     )
     {
-        ColorsByPageRequest request = new(pageIndex, pageSize, language);
-        return await http.GetResourcesPage(request,
-                json => json.RootElement.GetArray(item => DyeReader.Read(item, missingMemberBehavior)),
-                cancellationToken)
-            .ConfigureAwait(false);
+        ColorsByPageRequest request = new(pageIndex)
+        {
+            PageSize = pageSize,
+            Language = language,
+            MissingMemberBehavior = missingMemberBehavior
+        };
+        return request.SendAsync(http, cancellationToken);
     }
 
     #endregion

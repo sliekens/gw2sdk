@@ -1,55 +1,72 @@
 ﻿using System.Globalization;
 using System.Net.Http;
+using System.Threading;
+using System.Threading.Tasks;
 using GW2SDK.Http;
+using GW2SDK.Json;
+using GW2SDK.Maps.Json;
+using GW2SDK.Maps.Models;
 using JetBrains.Annotations;
 using static System.Net.Http.HttpMethod;
 
 namespace GW2SDK.Maps.Http;
 
 [PublicAPI]
-public sealed class FloorsByPageRequest
+public sealed class FloorsByPageRequest : IHttpRequest<IReplicaPage<Floor>>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "/v2/continents/:id/floors")
     {
         AcceptEncoding = "gzip"
     };
 
-    public FloorsByPageRequest(
-        int continentId,
-        int pageIndex,
-        int? pageSize,
-        Language? language
-    )
+    public FloorsByPageRequest(int continentId, int pageIndex)
     {
         ContinentId = continentId;
         PageIndex = pageIndex;
-        PageSize = pageSize;
-        Language = language;
     }
 
     public int ContinentId { get; }
 
     public int PageIndex { get; }
 
-    public int? PageSize { get; }
+    public int? PageSize { get; init; }
 
-    public Language? Language { get; }
+    public Language? Language { get; init; }
 
-    public static implicit operator HttpRequestMessage(FloorsByPageRequest r)
+    public MissingMemberBehavior MissingMemberBehavior { get; init; }
+
+    public async Task<IReplicaPage<Floor>> SendAsync(HttpClient httpClient, CancellationToken cancellationToken)
     {
         QueryBuilder search = new();
-        search.Add("page", r.PageIndex);
-        if (r.PageSize.HasValue)
+        search.Add("page", PageIndex);
+        if (PageSize.HasValue)
         {
-            search.Add("page_size", r.PageSize.Value);
+            search.Add("page_size", PageSize.Value);
         }
 
         var request = Template with
         {
-            Path = Template.Path.Replace(":id", r.ContinentId.ToString(CultureInfo.InvariantCulture)),
-            AcceptLanguage = r.Language?.Alpha2Code,
-            Arguments = search
+            Path = Template.Path.Replace(":id", ContinentId.ToString(CultureInfo.InvariantCulture)),
+            Arguments = search,
+            AcceptLanguage = Language?.Alpha2Code
         };
-        return request.Compile();
+
+        using var response = await httpClient.SendAsync(request.Compile(),
+                HttpCompletionOption.ResponseHeadersRead,
+                cancellationToken)
+            .ConfigureAwait(false);
+
+        await response.EnsureResult(cancellationToken)
+            .ConfigureAwait(false);
+
+        using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
+            .ConfigureAwait(false);
+
+        var value = json.RootElement.GetSet(entry => FloorReader.Read(entry, MissingMemberBehavior));
+        return new ReplicaPage<Floor>(response.Headers.Date.GetValueOrDefault(),
+            value,
+            response.Headers.GetPageContext(),
+            response.Content.Headers.Expires,
+            response.Content.Headers.LastModified);
     }
 }

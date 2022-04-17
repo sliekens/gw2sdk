@@ -6,7 +6,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using GW2SDK.Http;
 using GW2SDK.Items.Http;
-using GW2SDK.Items.Json;
 using GW2SDK.Items.Models;
 using GW2SDK.Json;
 using JetBrains.Annotations;
@@ -23,54 +22,49 @@ public sealed class ItemQuery
         this.http = http.WithDefaults() ?? throw new ArgumentNullException(nameof(http));
     }
 
-    public async Task<IReplicaSet<int>> GetItemsIndex(CancellationToken cancellationToken = default)
+    public Task<IReplicaSet<int>> GetItemsIndex(CancellationToken cancellationToken = default)
     {
-        ItemsIndexRequest request = new();
-        return await http.GetResourcesSet(request, json => json.RootElement.GetInt32Array(), cancellationToken)
-            .ConfigureAwait(false);
+        var request = new ItemsIndexRequest();
+        return request.SendAsync(http, cancellationToken);
     }
 
-    public async Task<IReplica<Item>> GetItemById(
+    public Task<IReplica<Item>> GetItemById(
         int itemId,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        ItemByIdRequest request = new(itemId, language);
-        return await http.GetResource(request,
-                json => ItemReader.Read(json.RootElement, missingMemberBehavior),
-                cancellationToken)
-            .ConfigureAwait(false);
+        ItemByIdRequest request = new(itemId)
+        {
+            Language = language,
+            MissingMemberBehavior = missingMemberBehavior
+        };
+        return request.SendAsync(http, cancellationToken);
     }
 
-    public async IAsyncEnumerable<Item> GetItemsByIds(
+    public IAsyncEnumerable<Item> GetItemsByIds(
         IReadOnlyCollection<int> itemIds,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
-        [EnumeratorCancellation] CancellationToken cancellationToken = default,
+        CancellationToken cancellationToken = default,
         IProgress<ICollectionContext>? progress = default
     )
     {
-        var splitQuery = SplitQuery.Create<int, Item>(async (keys, ct) =>
-            {
-                ItemsByIdsRequest request = new(keys, language);
-                return await http.GetResourcesSet(request,
-                        json => json.RootElement.GetArray(item => ItemReader.Read(item, missingMemberBehavior)),
-                        ct)
-                    .ConfigureAwait(false);
-            },
-            progress);
-
-        var producer = splitQuery.QueryAsync(itemIds, cancellationToken: cancellationToken);
-        await foreach (var item in producer.WithCancellation(cancellationToken)
-                           .ConfigureAwait(false))
+        var producer = SplitQuery.Create<int, Item>((range, ct) =>
         {
-            yield return item;
-        }
+            var request = new ItemsByIdsRequest(range)
+            {
+                Language = language,
+                MissingMemberBehavior = missingMemberBehavior
+            };
+
+            return request.SendAsync(http, ct);
+        }, progress);
+        return producer.QueryAsync(itemIds, cancellationToken: cancellationToken);
     }
 
-    public async Task<IReplicaPage<Item>> GetItemsByPage(
+    public Task<IReplicaPage<Item>> GetItemsByPage(
         int pageIndex,
         int? pageSize = default,
         Language? language = default,
@@ -78,11 +72,14 @@ public sealed class ItemQuery
         CancellationToken cancellationToken = default
     )
     {
-        ItemsByPageRequest request = new(pageIndex, pageSize, language);
-        return await http.GetResourcesPage(request,
-                json => json.RootElement.GetArray(item => ItemReader.Read(item, missingMemberBehavior)),
-                cancellationToken)
-            .ConfigureAwait(false);
+        ItemsByPageRequest request = new(pageIndex)
+        {
+            PageSize = pageSize,
+            Language = language,
+            MissingMemberBehavior = missingMemberBehavior
+        };
+
+        return request.SendAsync(http, cancellationToken);
     }
 
     public async IAsyncEnumerable<Item> GetItems(
@@ -94,7 +91,7 @@ public sealed class ItemQuery
     {
         var index = await GetItemsIndex(cancellationToken)
             .ConfigureAwait(false);
-        var producer = GetItemsByIds(index.Values, language, missingMemberBehavior, cancellationToken, progress);
+        var producer = GetItemsByIds(index, language, missingMemberBehavior, cancellationToken, progress);
         await foreach (var item in producer.WithCancellation(cancellationToken)
                            .ConfigureAwait(false))
         {

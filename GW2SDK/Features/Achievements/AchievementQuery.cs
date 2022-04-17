@@ -4,7 +4,6 @@ using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 using GW2SDK.Achievements.Http;
-using GW2SDK.Achievements.Json;
 using GW2SDK.Achievements.Models;
 using GW2SDK.Annotations;
 using GW2SDK.Http;
@@ -25,59 +24,61 @@ public sealed class AchievementQuery
 
     #region /v2/achievements/daily
 
-    public async Task<IReplica<DailyAchievementGroup>> GetDailyAchievements(
+    public Task<IReplica<DailyAchievementGroup>> GetDailyAchievements(
         Day day = Day.Today,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        DailyAchievementsRequest request = new(day);
-        return await http.GetResource(request,
-                json => DailyAchievementReader.Read(json.RootElement, missingMemberBehavior),
-                cancellationToken)
-            .ConfigureAwait(false);
+        DailyAchievementsRequest request = new()
+        {
+            Day = day,
+            MissingMemberBehavior = missingMemberBehavior
+        };
+        return request.SendAsync(http, cancellationToken);
     }
 
     #endregion
 
     #region /v2/achievements
 
-    public async Task<IReplicaSet<int>> GetAchievementsIndex(CancellationToken cancellationToken = default)
+    public Task<IReplicaSet<int>> GetAchievementsIndex(CancellationToken cancellationToken = default)
     {
         AchievementsIndexRequest request = new();
-        return await http.GetResourcesSet(request, json => json.RootElement.GetInt32Array(), cancellationToken)
-            .ConfigureAwait(false);
+        return request.SendAsync(http, cancellationToken);
     }
 
-    public async Task<IReplica<Achievement>> GetAchievementById(
+    public Task<IReplica<Achievement>> GetAchievementById(
         int achievementId,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        AchievementByIdRequest request = new(achievementId, language);
-        return await http.GetResource(request,
-                json => AchievementReader.Read(json.RootElement, missingMemberBehavior),
-                cancellationToken)
-            .ConfigureAwait(false);
+        AchievementByIdRequest request = new(achievementId)
+        {
+            Language = language,
+            MissingMemberBehavior = missingMemberBehavior
+        };
+        return request.SendAsync(http, cancellationToken);
     }
 
-    public async Task<IReplicaSet<Achievement>> GetAchievementsByIds(
+    public Task<IReplicaSet<Achievement>> GetAchievementsByIds(
         IReadOnlyCollection<int> achievementIds,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        AchievementsByIdsRequest request = new(achievementIds, language);
-        return await http.GetResourcesSet(request,
-                json => json.RootElement.GetArray(item => AchievementReader.Read(item, missingMemberBehavior)),
-                cancellationToken)
-            .ConfigureAwait(false);
+        AchievementsByIdsRequest request = new(achievementIds)
+        {
+            Language = language,
+            MissingMemberBehavior = missingMemberBehavior
+        };
+        return request.SendAsync(http, cancellationToken);
     }
 
-    public async Task<IReplicaPage<Achievement>> GetAchievementsByPage(
+    public Task<IReplicaPage<Achievement>> GetAchievementsByPage(
         int pageIndex,
         int? pageSize = default,
         Language? language = default,
@@ -85,11 +86,13 @@ public sealed class AchievementQuery
         CancellationToken cancellationToken = default
     )
     {
-        AchievementsByPageRequest request = new(pageIndex, pageSize, language);
-        return await http.GetResourcesPage(request,
-                json => json.RootElement.GetArray(item => AchievementReader.Read(item, missingMemberBehavior)),
-                cancellationToken)
-            .ConfigureAwait(false);
+        AchievementsByPageRequest request = new(pageIndex)
+        {
+            PageSize = pageSize,
+            Language = language,
+            MissingMemberBehavior = missingMemberBehavior
+        };
+        return request.SendAsync(http, cancellationToken);
     }
 
     #endregion
@@ -97,51 +100,54 @@ public sealed class AchievementQuery
     #region /v2/account/achievements
 
     [Scope(Permission.Progression)]
-    public async Task<IReplica<AccountAchievement>> GetAccountAchievementById(
+    public Task<IReplica<AccountAchievement>> GetAccountAchievementById(
         int achievementId,
         string? accessToken,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        AccountAchievementByIdRequest request = new(achievementId, accessToken);
-        return await http.GetResource(request,
-                json => AccountAchievementReader.Read(json.RootElement, missingMemberBehavior),
-                cancellationToken)
-            .ConfigureAwait(false);
+        AccountAchievementByIdRequest request = new(achievementId)
+        {
+            AccessToken = accessToken,
+            MissingMemberBehavior = missingMemberBehavior
+        };
+        return request.SendAsync(http, cancellationToken);
     }
 
     [Scope(Permission.Progression)]
-    public async Task<IReplicaSet<AccountAchievement>> GetAccountAchievementsByIds(
+    public Task<IReplicaSet<AccountAchievement>> GetAccountAchievementsByIds(
         IReadOnlyCollection<int> achievementIds,
         string? accessToken,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        AccountAchievementsByIdsRequest request = new(achievementIds, accessToken);
-        return await http.GetResourcesSet(request,
-                json => json.RootElement.GetArray(item => AccountAchievementReader.Read(item, missingMemberBehavior)),
-                cancellationToken)
-            .ConfigureAwait(false);
+        AccountAchievementsByIdsRequest request = new(achievementIds)
+        {
+            AccessToken = accessToken,
+            MissingMemberBehavior = missingMemberBehavior
+        };
+        return request.SendAsync(http, cancellationToken);
     }
 
     [Scope(Permission.Progression)]
-    public async Task<IReplicaSet<AccountAchievement>> GetAccountAchievements(
+    public Task<IReplicaSet<AccountAchievement>> GetAccountAchievements(
         string? accessToken,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        AccountAchievementsRequest request = new(accessToken);
-        return await http.GetResourcesSet(request,
-                json => json.RootElement.GetArray(item => AccountAchievementReader.Read(item, missingMemberBehavior)),
-                cancellationToken)
-            .ConfigureAwait(false);
+        AccountAchievementsRequest request = new()
+        {
+            AccessToken = accessToken,
+            MissingMemberBehavior = missingMemberBehavior
+        };
+        return request.SendAsync(http, cancellationToken);
     }
 
     [Scope(Permission.Progression)]
-    public async Task<IReplicaPage<AccountAchievement>> GetAccountAchievementsByPage(
+    public Task<IReplicaPage<AccountAchievement>> GetAccountAchievementsByPage(
         int pageIndex,
         int? pageSize,
         string? accessToken,
@@ -149,66 +155,70 @@ public sealed class AchievementQuery
         CancellationToken cancellationToken = default
     )
     {
-        AccountAchievementsByPageRequest request = new(pageIndex, pageSize, accessToken);
-        return await http.GetResourcesPage(request,
-                json => json.RootElement.GetArray(item => AccountAchievementReader.Read(item, missingMemberBehavior)),
-                cancellationToken)
-            .ConfigureAwait(false);
+        AccountAchievementsByPageRequest request = new(pageIndex)
+        {
+            PageSize = pageSize,
+            AccessToken = accessToken,
+            MissingMemberBehavior = missingMemberBehavior
+        };
+        return request.SendAsync(http, cancellationToken);
     }
 
     #endregion
 
     #region /v2/achievements/categories
 
-    public async Task<IReplicaSet<AchievementCategory>> GetAchievementCategories(
+    public Task<IReplicaSet<AchievementCategory>> GetAchievementCategories(
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        AchievementCategoriesRequest request = new(language);
-        return await http.GetResourcesSet(request,
-                json => json.RootElement.GetArray(item => AchievementCategoryReader.Read(item, missingMemberBehavior)),
-                cancellationToken)
-            .ConfigureAwait(false);
+        AchievementCategoriesRequest request = new()
+        {
+            Language = language,
+            MissingMemberBehavior = missingMemberBehavior
+        };
+        return request.SendAsync(http, cancellationToken);
     }
 
-    public async Task<IReplicaSet<int>> GetAchievementCategoriesIndex(CancellationToken cancellationToken = default)
+    public Task<IReplicaSet<int>> GetAchievementCategoriesIndex(CancellationToken cancellationToken = default)
     {
         AchievementCategoriesIndexRequest request = new();
-        return await http.GetResourcesSet(request, json => json.RootElement.GetInt32Array(), cancellationToken)
-            .ConfigureAwait(false);
+        return request.SendAsync(http, cancellationToken);
     }
 
-    public async Task<IReplica<AchievementCategory>> GetAchievementCategoryById(
+    public Task<IReplica<AchievementCategory>> GetAchievementCategoryById(
         int achievementCategoryId,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        AchievementCategoryByIdRequest request = new(achievementCategoryId, language);
-        return await http.GetResource(request,
-                json => AchievementCategoryReader.Read(json.RootElement, missingMemberBehavior),
-                cancellationToken)
-            .ConfigureAwait(false);
+        AchievementCategoryByIdRequest request = new(achievementCategoryId)
+        {
+            Language = language,
+            MissingMemberBehavior = missingMemberBehavior
+        };
+        return request.SendAsync(http, cancellationToken);
     }
 
-    public async Task<IReplicaSet<AchievementCategory>> GetAchievementCategoriesByIds(
+    public Task<IReplicaSet<AchievementCategory>> GetAchievementCategoriesByIds(
         IReadOnlyCollection<int> achievementCategoryIds,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        AchievementCategoriesByIdsRequest request = new(achievementCategoryIds, language);
-        return await http.GetResourcesSet(request,
-                json => json.RootElement.GetArray(item => AchievementCategoryReader.Read(item, missingMemberBehavior)),
-                cancellationToken)
-            .ConfigureAwait(false);
+        AchievementCategoriesByIdsRequest request = new(achievementCategoryIds)
+        {
+            Language = language,
+            MissingMemberBehavior = missingMemberBehavior
+        };
+        return request.SendAsync(http, cancellationToken);
     }
 
-    public async Task<IReplicaPage<AchievementCategory>> GetAchievementCategoriesByPage(
+    public Task<IReplicaPage<AchievementCategory>> GetAchievementCategoriesByPage(
         int pageIndex,
         int? pageSize = default,
         Language? language = default,
@@ -216,66 +226,70 @@ public sealed class AchievementQuery
         CancellationToken cancellationToken = default
     )
     {
-        AchievementCategoriesByPageRequest request = new(pageIndex, pageSize, language);
-        return await http.GetResourcesPage(request,
-                json => json.RootElement.GetArray(item => AchievementCategoryReader.Read(item, missingMemberBehavior)),
-                cancellationToken)
-            .ConfigureAwait(false);
+        AchievementCategoriesByPageRequest request = new(pageIndex)
+        {
+            PageSize = pageSize,
+            Language = language,
+            MissingMemberBehavior = missingMemberBehavior
+        };
+        return request.SendAsync(http, cancellationToken);
     }
 
     #endregion
 
     #region /v2/achievements/groups
 
-    public async Task<IReplicaSet<AchievementGroup>> GetAchievementGroups(
+    public Task<IReplicaSet<AchievementGroup>> GetAchievementGroups(
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        AchievementGroupsRequest request = new(language);
-        return await http.GetResourcesSet(request,
-                json => json.RootElement.GetArray(item => AchievementGroupReader.Read(item, missingMemberBehavior)),
-                cancellationToken)
-            .ConfigureAwait(false);
+        AchievementGroupsRequest request = new()
+        {
+            Language = language,
+            MissingMemberBehavior = missingMemberBehavior
+        };
+        return request.SendAsync(http, cancellationToken);
     }
 
-    public async Task<IReplicaSet<string>> GetAchievementGroupsIndex(CancellationToken cancellationToken = default)
+    public Task<IReplicaSet<string>> GetAchievementGroupsIndex(CancellationToken cancellationToken = default)
     {
         AchievementGroupsIndexRequest request = new();
-        return await http.GetResourcesSet(request, json => json.RootElement.GetStringArray(), cancellationToken)
-            .ConfigureAwait(false);
+        return request.SendAsync(http, cancellationToken);
     }
 
-    public async Task<IReplica<AchievementGroup>> GetAchievementGroupById(
+    public Task<IReplica<AchievementGroup>> GetAchievementGroupById(
         string achievementGroupId,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        AchievementGroupByIdRequest request = new(achievementGroupId, language);
-        return await http.GetResource(request,
-                json => AchievementGroupReader.Read(json.RootElement, missingMemberBehavior),
-                cancellationToken)
-            .ConfigureAwait(false);
+        AchievementGroupByIdRequest request = new(achievementGroupId)
+        {
+            Language = language,
+            MissingMemberBehavior = missingMemberBehavior
+        };
+        return request.SendAsync(http, cancellationToken);
     }
 
-    public async Task<IReplicaSet<AchievementGroup>> GetAchievementGroupsByIds(
+    public Task<IReplicaSet<AchievementGroup>> GetAchievementGroupsByIds(
         IReadOnlyCollection<string> achievementGroupIds,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        AchievementGroupsByIdsRequest request = new(achievementGroupIds, language);
-        return await http.GetResourcesSet(request,
-                json => json.RootElement.GetArray(item => AchievementGroupReader.Read(item, missingMemberBehavior)),
-                cancellationToken)
-            .ConfigureAwait(false);
+        AchievementGroupsByIdsRequest request = new(achievementGroupIds)
+        {
+            Language = language,
+            MissingMemberBehavior = missingMemberBehavior
+        };
+        return request.SendAsync(http, cancellationToken);
     }
 
-    public async Task<IReplicaPage<AchievementGroup>> GetAchievementGroupsByPage(
+    public Task<IReplicaPage<AchievementGroup>> GetAchievementGroupsByPage(
         int pageIndex,
         int? pageSize = default,
         Language? language = default,
@@ -283,66 +297,70 @@ public sealed class AchievementQuery
         CancellationToken cancellationToken = default
     )
     {
-        AchievementGroupsByPageRequest request = new(pageIndex, pageSize, language);
-        return await http.GetResourcesPage(request,
-                json => json.RootElement.GetArray(item => AchievementGroupReader.Read(item, missingMemberBehavior)),
-                cancellationToken)
-            .ConfigureAwait(false);
+        AchievementGroupsByPageRequest request = new(pageIndex)
+        {
+            PageSize = pageSize,
+            Language = language,
+            MissingMemberBehavior = missingMemberBehavior
+        };
+        return request.SendAsync(http, cancellationToken);
     }
 
     #endregion
 
     #region /v2/titles
 
-    public async Task<IReplicaSet<Title>> GetTitles(
+    public Task<IReplicaSet<Title>> GetTitles(
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        TitlesRequest request = new(language);
-        return await http.GetResourcesSet(request,
-                json => json.RootElement.GetArray(item => TitleReader.Read(item, missingMemberBehavior)),
-                cancellationToken)
-            .ConfigureAwait(false);
+        TitlesRequest request = new()
+        {
+            Language = language,
+            MissingMemberBehavior = missingMemberBehavior
+        };
+        return request.SendAsync(http, cancellationToken);
     }
 
-    public async Task<IReplicaSet<int>> GetTitlesIndex(CancellationToken cancellationToken = default)
+    public Task<IReplicaSet<int>> GetTitlesIndex(CancellationToken cancellationToken = default)
     {
         TitlesIndexRequest request = new();
-        return await http.GetResourcesSet(request, json => json.RootElement.GetInt32Array(), cancellationToken)
-            .ConfigureAwait(false);
+        return request.SendAsync(http, cancellationToken);
     }
 
-    public async Task<IReplica<Title>> GetTitleById(
+    public Task<IReplica<Title>> GetTitleById(
         int titleId,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        TitleByIdRequest request = new(titleId, language);
-        return await http.GetResource(request,
-                json => TitleReader.Read(json.RootElement, missingMemberBehavior),
-                cancellationToken)
-            .ConfigureAwait(false);
+        TitleByIdRequest request = new(titleId)
+        {
+            Language = language,
+            MissingMemberBehavior = missingMemberBehavior
+        };
+        return request.SendAsync(http, cancellationToken);
     }
 
-    public async Task<IReplicaSet<Title>> GetTitlesByIds(
+    public Task<IReplicaSet<Title>> GetTitlesByIds(
         IReadOnlyCollection<int> titleIds,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        TitlesByIdsRequest request = new(titleIds, language);
-        return await http.GetResourcesSet(request,
-                json => json.RootElement.GetArray(item => TitleReader.Read(item, missingMemberBehavior)),
-                cancellationToken)
-            .ConfigureAwait(false);
+        TitlesByIdsRequest request = new(titleIds)
+        {
+            Language = language,
+            MissingMemberBehavior = missingMemberBehavior
+        };
+        return request.SendAsync(http, cancellationToken);
     }
 
-    public async Task<IReplicaPage<Title>> GetTitlesByPage(
+    public Task<IReplicaPage<Title>> GetTitlesByPage(
         int pageIndex,
         int? pageSize = default,
         Language? language = default,
@@ -350,11 +368,13 @@ public sealed class AchievementQuery
         CancellationToken cancellationToken = default
     )
     {
-        TitlesByPageRequest request = new(pageIndex, pageSize, language);
-        return await http.GetResourcesPage(request,
-                json => json.RootElement.GetArray(item => TitleReader.Read(item, missingMemberBehavior)),
-                cancellationToken)
-            .ConfigureAwait(false);
+        TitlesByPageRequest request = new(pageIndex)
+        {
+            PageSize = pageSize,
+            Language = language,
+            MissingMemberBehavior = missingMemberBehavior
+        };
+        return request.SendAsync(http, cancellationToken);
     }
 
     #endregion

@@ -3,7 +3,6 @@ using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using GW2SDK.Http;
-using GW2SDK.Http.Handlers;
 using GW2SDK.Maps;
 using Microsoft.Extensions.DependencyInjection;
 using Polly;
@@ -33,7 +32,7 @@ public class Container : IDisposable, IAsyncDisposable
         // Basically, we might already be at the limit on a cold startup.
         // A circuit breaker wouldn't help in this case. (Only when you can guarantee that there are no other API users using the same IP address.)
         // The only thing that works well in all environments is automatic retries with exponential and jittered sleep durations.
-        var rateLimit = Policy<HttpResponseMessage>.Handle<TooManyRequestsException>()
+        var rateLimit = Policy<HttpResponseMessage>.HandleResult(response => response.StatusCode == HttpStatusCodeEx.TooManyRequests)
             .WaitAndRetryForeverAsync(retryAttempt => TimeSpan.FromSeconds(Math.Min(8, Math.Pow(2, retryAttempt))) +
                 TimeSpan.FromMilliseconds(jitterer.Next(0, 1000)));
 
@@ -69,12 +68,6 @@ public class Container : IDisposable, IAsyncDisposable
 
         policies.Add("api.guildwars2.com", Policy.WrapAsync(timeout, rateLimit, retryRequestError, innerTimeout));
 
-        services.AddTransient<RequestLengthHandler>();
-        services.AddTransient<BadMessageHandler>();
-        services.AddTransient<RateLimitHandler>();
-        services.AddTransient<ResourceNotFoundHandler>();
-        services.AddTransient<UnauthorizedMessageHandler>();
-        services.AddTransient<GatewayErrorHandler>();
         services.AddHttpClient("GW2SDK",
                 http =>
                 {
@@ -85,12 +78,6 @@ public class Container : IDisposable, IAsyncDisposable
                 AutomaticDecompression = DecompressionMethods.GZip
             })
             .AddPolicyHandlerFromRegistry("api.guildwars2.com")
-            .AddHttpMessageHandler<RequestLengthHandler>()
-            .AddHttpMessageHandler<BadMessageHandler>()
-            .AddHttpMessageHandler<RateLimitHandler>()
-            .AddHttpMessageHandler<ResourceNotFoundHandler>()
-            .AddHttpMessageHandler<UnauthorizedMessageHandler>()
-            .AddHttpMessageHandler<GatewayErrorHandler>()
             .AddTypedClient<MapQuery>()
             .AddTypedClient<JsonAchievementService>()
             .AddTypedClient<JsonFloorService>()

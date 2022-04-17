@@ -1,37 +1,59 @@
 ﻿using System.Net.Http;
+using System.Threading;
+using System.Threading.Tasks;
 using GW2SDK.Http;
+using GW2SDK.Json;
+using GW2SDK.Specializations.Json;
+using GW2SDK.Specializations.Models;
 using JetBrains.Annotations;
 using static System.Net.Http.HttpMethod;
 
 namespace GW2SDK.Specializations.Http;
 
 [PublicAPI]
-public sealed class SpecializationByIdRequest
+public sealed class SpecializationByIdRequest : IHttpRequest<IReplica<Specialization>>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "/v2/specializations")
     {
         AcceptEncoding = "gzip"
     };
 
-    public SpecializationByIdRequest(int specializationId, Language? language)
+    public SpecializationByIdRequest(int specializationId)
     {
         SpecializationId = specializationId;
-        Language = language;
     }
 
     public int SpecializationId { get; }
 
-    public Language? Language { get; }
+    public Language? Language { get; init; }
 
-    public static implicit operator HttpRequestMessage(SpecializationByIdRequest r)
+    public MissingMemberBehavior MissingMemberBehavior { get; init; }
+
+    public async Task<IReplica<Specialization>> SendAsync(HttpClient httpClient, CancellationToken cancellationToken)
     {
         QueryBuilder search = new();
-        search.Add("id", r.SpecializationId);
+        search.Add("id", SpecializationId);
         var request = Template with
         {
-            AcceptLanguage = r.Language?.Alpha2Code,
-            Arguments = search
+            Arguments = search,
+            AcceptLanguage = Language?.Alpha2Code
         };
-        return request.Compile();
+
+        using var response = await httpClient.SendAsync(request.Compile(),
+                HttpCompletionOption.ResponseHeadersRead,
+                cancellationToken)
+            .ConfigureAwait(false);
+
+        await response.EnsureResult(cancellationToken)
+            .ConfigureAwait(false);
+
+        using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
+            .ConfigureAwait(false);
+
+        var value = SpecializationReader.Read(json.RootElement, MissingMemberBehavior);
+        return new Replica<Specialization>(response.Headers.Date.GetValueOrDefault(),
+            value,
+            response.Content.Headers.Expires,
+            response.Content.Headers.LastModified);
     }
 }

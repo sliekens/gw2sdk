@@ -1,31 +1,51 @@
-﻿using System.Net.Http;
+﻿using System.Collections.Generic;
+using System.Net.Http;
+using System.Threading;
+using System.Threading.Tasks;
 using GW2SDK.Http;
+using GW2SDK.Json;
 using JetBrains.Annotations;
 using static System.Net.Http.HttpMethod;
 
 namespace GW2SDK.Crafting.Http;
 
 [PublicAPI]
-public sealed class AccountDailyCraftingRequest
+public sealed class AccountDailyCraftingRequest : IHttpRequest<IReplica<IReadOnlyCollection<string>>>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "/v2/account/dailycrafting")
     {
         AcceptEncoding = "gzip"
     };
 
-    public AccountDailyCraftingRequest(string? accessToken)
-    {
-        AccessToken = accessToken;
-    }
+    public string? AccessToken { get; init; }
 
-    public string? AccessToken { get; }
-
-    public static implicit operator HttpRequestMessage(AccountDailyCraftingRequest r)
+    public async Task<IReplica<IReadOnlyCollection<string>>> SendAsync(
+        HttpClient httpClient,
+        CancellationToken cancellationToken
+    )
     {
+        QueryBuilder search = new();
         var request = Template with
         {
-            BearerToken = r.AccessToken
+            Arguments = search,
+            BearerToken = AccessToken
         };
-        return request.Compile();
+
+        using var response = await httpClient.SendAsync(request.Compile(),
+                HttpCompletionOption.ResponseHeadersRead,
+                cancellationToken)
+            .ConfigureAwait(false);
+
+        await response.EnsureResult(cancellationToken)
+            .ConfigureAwait(false);
+
+        using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
+            .ConfigureAwait(false);
+
+        var value = json.RootElement.GetSet(entry => entry.GetStringRequired());
+        return new Replica<IReadOnlyCollection<string>>(response.Headers.Date.GetValueOrDefault(),
+            value,
+            response.Content.Headers.Expires,
+            response.Content.Headers.LastModified);
     }
 }

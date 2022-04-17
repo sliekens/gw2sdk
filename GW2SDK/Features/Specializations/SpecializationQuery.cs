@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 using GW2SDK.Http;
 using GW2SDK.Json;
 using GW2SDK.Specializations.Http;
-using GW2SDK.Specializations.Json;
 using GW2SDK.Specializations.Models;
 using JetBrains.Annotations;
 
@@ -22,51 +21,53 @@ public sealed class SpecializationQuery
         this.http = http.WithDefaults() ?? throw new ArgumentNullException(nameof(http));
     }
 
-    public async Task<IReplicaSet<Specialization>> GetSpecializations(
+    public Task<IReplicaSet<Specialization>> GetSpecializations(
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        SpecializationsRequest request = new(language);
-        return await http.GetResourcesSet(request,
-                json => json.RootElement.GetArray(item => SpecializationReader.Read(item, missingMemberBehavior)),
-                cancellationToken)
-            .ConfigureAwait(false);
+        SpecializationsRequest request = new()
+        {
+            Language = language,
+            MissingMemberBehavior = missingMemberBehavior
+        };
+        return request.SendAsync(http, cancellationToken);
     }
 
-    public async Task<IReplicaSet<int>> GetSpecializationsIndex(CancellationToken cancellationToken = default)
+    public Task<IReplicaSet<int>> GetSpecializationsIndex(CancellationToken cancellationToken = default)
     {
         SpecializationsIndexRequest request = new();
-        return await http.GetResourcesSet(request, json => json.RootElement.GetInt32Array(), cancellationToken)
-            .ConfigureAwait(false);
+        return request.SendAsync(http, cancellationToken);
     }
 
-    public async Task<IReplica<Specialization>> GetSpecializationById(
+    public Task<IReplica<Specialization>> GetSpecializationById(
         int specializationId,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        SpecializationByIdRequest request = new(specializationId, language);
-        return await http.GetResource(request,
-                json => SpecializationReader.Read(json.RootElement, missingMemberBehavior),
-                cancellationToken)
-            .ConfigureAwait(false);
+        SpecializationByIdRequest request = new(specializationId)
+        {
+            Language = language,
+            MissingMemberBehavior = missingMemberBehavior
+        };
+        return request.SendAsync(http, cancellationToken);
     }
 
-    public async Task<IReplicaSet<Specialization>> GetSpecializationsByIds(
+    public Task<IReplicaSet<Specialization>> GetSpecializationsByIds(
         IReadOnlyCollection<int> specializationIds,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        SpecializationsByIdsRequest request = new(specializationIds, language);
-        return await http.GetResourcesSet(request,
-                json => json.RootElement.GetArray(item => SpecializationReader.Read(item, missingMemberBehavior)),
-                cancellationToken)
-            .ConfigureAwait(false);
+        SpecializationsByIdsRequest request = new(specializationIds)
+        {
+            Language = language,
+            MissingMemberBehavior = missingMemberBehavior
+        };
+        return request.SendAsync(http, cancellationToken);
     }
 }

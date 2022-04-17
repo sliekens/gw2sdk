@@ -24,9 +24,9 @@ public class SplitQueryTest
         var records = index.Select(id => new StubRecord(id))
             .ToList();
 
-        var sut = SplitQuery.Create<int, StubRecord>((keys, ct) =>
+        var sut = SplitQuery.Create<int, StubRecord>((range, ct) =>
             {
-                var found = records.Where(record => keys.Contains(record.Id))
+                var found = records.Where(record => range.Contains(record.Id))
                     .ToHashSet();
                 return Task.FromResult((IReplicaSet<StubRecord>)new StubReplica(found));
             },
@@ -59,9 +59,9 @@ public class SplitQueryTest
             .ToList();
 
         const int bufferSize = 10;
-        var sut = SplitQuery.Create<int, StubRecord>((keys, ct) =>
+        var sut = SplitQuery.Create<int, StubRecord>((range, ct) =>
         {
-            var found = records.Where(record => keys.Contains(record.Id))
+            var found = records.Where(record => range.Contains(record.Id))
                 .ToHashSet();
             return Task.FromResult((IReplicaSet<StubRecord>)new StubReplica(found));
         });
@@ -87,9 +87,9 @@ public class SplitQueryTest
         var records = index.Select(id => new StubRecord(id))
             .ToList();
 
-        var sut = SplitQuery.Create<int, StubRecord>((keys, ct) =>
+        var sut = SplitQuery.Create<int, StubRecord>((range, ct) =>
         {
-            var found = records.Where(record => keys.Contains(record.Id))
+            var found = records.Where(record => range.Contains(record.Id))
                 .ToHashSet();
             return Task.FromResult((IReplicaSet<StubRecord>)new StubReplica(found));
         });

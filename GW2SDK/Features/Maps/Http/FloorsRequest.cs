@@ -1,39 +1,62 @@
 ﻿using System.Globalization;
 using System.Net.Http;
+using System.Threading;
+using System.Threading.Tasks;
 using GW2SDK.Http;
+using GW2SDK.Json;
+using GW2SDK.Maps.Json;
+using GW2SDK.Maps.Models;
 using JetBrains.Annotations;
 using static System.Net.Http.HttpMethod;
 
 namespace GW2SDK.Maps.Http;
 
 [PublicAPI]
-public sealed class FloorsRequest
+public sealed class FloorsRequest : IHttpRequest<IReplicaSet<Floor>>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "/v2/continents/:id/floors")
     {
         AcceptEncoding = "gzip"
     };
 
-    public FloorsRequest(int continentId, Language? language)
+    public FloorsRequest(int continentId)
     {
         ContinentId = continentId;
-        Language = language;
     }
 
     public int ContinentId { get; }
 
-    public Language? Language { get; }
+    public Language? Language { get; init; }
 
-    public static implicit operator HttpRequestMessage(FloorsRequest r)
+    public MissingMemberBehavior MissingMemberBehavior { get; init; }
+
+    public async Task<IReplicaSet<Floor>> SendAsync(HttpClient httpClient, CancellationToken cancellationToken)
     {
         QueryBuilder search = new();
         search.Add("ids", "all");
         var request = Template with
         {
-            Path = Template.Path.Replace(":id", r.ContinentId.ToString(CultureInfo.InvariantCulture)),
-            AcceptLanguage = r.Language?.Alpha2Code,
-            Arguments = search
+            Path = Template.Path.Replace(":id", ContinentId.ToString(CultureInfo.InvariantCulture)),
+            Arguments = search,
+            AcceptLanguage = Language?.Alpha2Code
         };
-        return request.Compile();
+
+        using var response = await httpClient.SendAsync(request.Compile(),
+                HttpCompletionOption.ResponseHeadersRead,
+                cancellationToken)
+            .ConfigureAwait(false);
+
+        await response.EnsureResult(cancellationToken)
+            .ConfigureAwait(false);
+
+        using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
+            .ConfigureAwait(false);
+
+        var value = json.RootElement.GetSet(entry => FloorReader.Read(entry, MissingMemberBehavior));
+        return new ReplicaSet<Floor>(response.Headers.Date.GetValueOrDefault(),
+            value,
+            response.Headers.GetCollectionContext(),
+            response.Content.Headers.Expires,
+            response.Content.Headers.LastModified);
     }
 }

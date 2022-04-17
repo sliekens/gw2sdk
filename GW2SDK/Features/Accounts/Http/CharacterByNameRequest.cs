@@ -1,37 +1,56 @@
 ﻿using System.Net.Http;
+using System.Threading;
+using System.Threading.Tasks;
+using GW2SDK.Accounts.Json;
+using GW2SDK.Accounts.Models;
 using GW2SDK.Http;
+using GW2SDK.Json;
 using JetBrains.Annotations;
 using static System.Net.Http.HttpMethod;
 
 namespace GW2SDK.Accounts.Http;
 
 [PublicAPI]
-public sealed class CharacterByNameRequest
+public sealed class CharacterByNameRequest : IHttpRequest<IReplica<Character>>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "/v2/characters")
     {
         AcceptEncoding = "gzip"
     };
 
-    public CharacterByNameRequest(string characterName, string? accessToken)
+    public CharacterByNameRequest(string characterName)
     {
         CharacterName = characterName;
-        AccessToken = accessToken;
     }
 
     public string CharacterName { get; }
 
-    public string? AccessToken { get; }
+    public string? AccessToken { get; init; }
 
-    public static implicit operator HttpRequestMessage(CharacterByNameRequest r)
+    public MissingMemberBehavior MissingMemberBehavior { get; set; }
+
+    public async Task<IReplica<Character>> SendAsync(HttpClient httpClient, CancellationToken cancellationToken)
     {
         QueryBuilder search = new();
-        search.Add("id", r.CharacterName);
+        search.Add("id", CharacterName);
         var request = Template with
         {
-            BearerToken = r.AccessToken,
+            BearerToken = AccessToken,
             Arguments = search
         };
-        return request.Compile();
+        using var response = await httpClient
+            .SendAsync(request.Compile(), HttpCompletionOption.ResponseHeadersRead, cancellationToken)
+            .ConfigureAwait(false);
+
+        await response.EnsureResult(cancellationToken)
+            .ConfigureAwait(false);
+
+        using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
+            .ConfigureAwait(false);
+
+        return new Replica<Character>(response.Headers.Date.GetValueOrDefault(),
+            CharacterReader.Read(json.RootElement, MissingMemberBehavior),
+            response.Content.Headers.Expires,
+            response.Content.Headers.LastModified);
     }
 }

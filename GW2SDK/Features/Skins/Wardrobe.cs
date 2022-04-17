@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 using GW2SDK.Http;
 using GW2SDK.Json;
 using GW2SDK.Skins.Http;
-using GW2SDK.Skins.Json;
 using GW2SDK.Skins.Models;
 using JetBrains.Annotations;
 
@@ -22,42 +21,43 @@ public sealed class Wardrobe
         this.http = http.WithDefaults() ?? throw new ArgumentNullException(nameof(http));
     }
 
-    public async Task<IReplicaSet<int>> GetSkinsIndex(CancellationToken cancellationToken = default)
+    public Task<IReplicaSet<int>> GetSkinsIndex(CancellationToken cancellationToken = default)
     {
         SkinsIndexRequest request = new();
-        return await http.GetResourcesSet(request, json => json.RootElement.GetInt32Array(), cancellationToken)
-            .ConfigureAwait(false);
+        return request.SendAsync(http, cancellationToken);
     }
 
-    public async Task<IReplica<Skin>> GetSkinById(
+    public Task<IReplica<Skin>> GetSkinById(
         int skinId,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        SkinByIdRequest request = new(skinId, language);
-        return await http.GetResource(request,
-                json => SkinReader.Read(json.RootElement, missingMemberBehavior),
-                cancellationToken)
-            .ConfigureAwait(false);
+        SkinByIdRequest request = new(skinId)
+        {
+            Language = language,
+            MissingMemberBehavior = missingMemberBehavior
+        };
+        return request.SendAsync(http, cancellationToken);
     }
 
-    public async Task<IReplicaSet<Skin>> GetSkinsByIds(
+    public Task<IReplicaSet<Skin>> GetSkinsByIds(
         IReadOnlyCollection<int> skinIds,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        SkinsByIdsRequest request = new(skinIds, language);
-        return await http.GetResourcesSet(request,
-                json => json.RootElement.GetArray(item => SkinReader.Read(item, missingMemberBehavior)),
-                cancellationToken)
-            .ConfigureAwait(false);
+        SkinsByIdsRequest request = new(skinIds)
+        {
+            Language = language,
+            MissingMemberBehavior = missingMemberBehavior
+        };
+        return request.SendAsync(http, cancellationToken);
     }
 
-    public async Task<IReplicaPage<Skin>> GetSkinsByPage(
+    public Task<IReplicaPage<Skin>> GetSkinsByPage(
         int pageIndex,
         int? pageSize = default,
         Language? language = default,
@@ -65,10 +65,12 @@ public sealed class Wardrobe
         CancellationToken cancellationToken = default
     )
     {
-        SkinsByPageRequest request = new(pageIndex, pageSize, language);
-        return await http.GetResourcesPage(request,
-                json => json.RootElement.GetArray(item => SkinReader.Read(item, missingMemberBehavior)),
-                cancellationToken)
-            .ConfigureAwait(false);
+        SkinsByPageRequest request = new(pageIndex)
+        {
+            PageSize = pageSize,
+            Language = language,
+            MissingMemberBehavior = missingMemberBehavior
+        };
+        return request.SendAsync(http, cancellationToken);
     }
 }

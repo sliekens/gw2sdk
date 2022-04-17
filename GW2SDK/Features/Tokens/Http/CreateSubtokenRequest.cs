@@ -2,66 +2,83 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
+using System.Threading;
+using System.Threading.Tasks;
 using GW2SDK.Http;
+using GW2SDK.Json;
+using GW2SDK.Tokens.Json;
+using GW2SDK.Tokens.Models;
 using JetBrains.Annotations;
 using static System.Net.Http.HttpMethod;
 
 namespace GW2SDK.Tokens.Http;
 
 [PublicAPI]
-public sealed class CreateSubtokenRequest
+public sealed class CreateSubtokenRequest : IHttpRequest<IReplica<CreatedSubtoken>>
 {
-    private static readonly HttpRequestMessageTemplate Template = new(Get, "/v2/createsubtoken");
+    private static readonly HttpRequestMessageTemplate Template = new(Get, "/v2/createsubtoken")
+    {
+        AcceptEncoding = "gzip"
+    };
 
-    public CreateSubtokenRequest(
-        string? accessToken,
-        IReadOnlyCollection<Permission>? permissions = null,
-        DateTimeOffset? absoluteExpirationDate = null,
-        IReadOnlyCollection<string>? urls = null
-    )
+    public CreateSubtokenRequest(string accessToken)
     {
         AccessToken = accessToken;
-        Permissions = permissions;
-        AbsoluteExpirationDate = absoluteExpirationDate;
-        Urls = urls;
     }
 
-    public DateTimeOffset? AbsoluteExpirationDate { get; }
+    public string AccessToken { get; }
 
-    public IReadOnlyCollection<Permission>? Permissions { get; }
+    public DateTimeOffset? AbsoluteExpirationDate { get; init; }
 
-    public IReadOnlyCollection<string>? Urls { get; }
+    public IReadOnlyCollection<Permission>? Permissions { get; init; }
 
-    public string? AccessToken { get; }
+    public IReadOnlyCollection<string>? Urls { get; init; }
 
-    public static implicit operator HttpRequestMessage(CreateSubtokenRequest r)
+    public MissingMemberBehavior MissingMemberBehavior { get; init; }
+
+    public async Task<IReplica<CreatedSubtoken>> SendAsync(HttpClient httpClient, CancellationToken cancellationToken)
     {
         QueryBuilder args = new();
-        if (r.Permissions is { Count: not 0 })
+        if (Permissions is {Count: not 0})
         {
             args.Add("permissions",
-                string.Join(",", r.Permissions)
+                string.Join(",", Permissions)
                     .ToLowerInvariant());
         }
 
-        if (r.AbsoluteExpirationDate.HasValue)
+        if (AbsoluteExpirationDate.HasValue)
         {
             args.Add("expire",
-                r.AbsoluteExpirationDate.Value.ToUniversalTime()
+                AbsoluteExpirationDate.Value.ToUniversalTime()
                     .ToString("s"));
         }
 
-        if (r.Urls is { Count: not 0 })
+        if (Urls is {Count: not 0})
         {
-            args.Add("urls", string.Join(",", r.Urls.Select(Uri.EscapeDataString)));
+            args.Add("urls", string.Join(",", Urls.Select(Uri.EscapeDataString)));
         }
 
         var request = Template with
         {
-            BearerToken = r.AccessToken,
-            Arguments = args
+            Arguments = args,
+            BearerToken = AccessToken
         };
 
-        return request.Compile();
+        using var response = await httpClient.SendAsync(request.Compile(),
+                HttpCompletionOption.ResponseHeadersRead,
+                cancellationToken)
+            .ConfigureAwait(false);
+
+        await response.EnsureResult(cancellationToken)
+            .ConfigureAwait(false);
+
+        using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
+            .ConfigureAwait(false);
+
+        var value = SubtokenReader.Read(json.RootElement, MissingMemberBehavior);
+        return new Replica<CreatedSubtoken>(response.Headers.Date.GetValueOrDefault(),
+            value,
+            response.Content.Headers.Expires,
+            response.Content.Headers.LastModified);
     }
 }

@@ -22,21 +22,21 @@ public sealed class TokenProvider
         this.http = http.WithDefaults() ?? throw new ArgumentNullException(nameof(http));
     }
 
-    public async Task<IReplica<TokenInfo>> GetTokenInfo(
-        string? accessToken,
+    public Task<IReplica<TokenInfo>> GetTokenInfo(
+        string accessToken,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        TokenInfoRequest request = new(accessToken);
-        return await http.GetResource(request,
-                json => TokenInfoReader.Read(json.RootElement, missingMemberBehavior),
-                cancellationToken)
-            .ConfigureAwait(false);
+        TokenInfoRequest request = new(accessToken)
+        {
+            MissingMemberBehavior = missingMemberBehavior
+        };
+        return request.SendAsync(http, cancellationToken);
     }
 
-    public async Task<IReplica<CreatedSubtoken>> CreateSubtoken(
-        string? accessToken,
+    public Task<IReplica<CreatedSubtoken>> CreateSubtoken(
+        string accessToken,
         IReadOnlyCollection<Permission>? permissions = null,
         DateTimeOffset? absoluteExpirationDate = null,
         IReadOnlyCollection<string>? urls = null,
@@ -44,10 +44,13 @@ public sealed class TokenProvider
         CancellationToken cancellationToken = default
     )
     {
-        CreateSubtokenRequest request = new(accessToken, permissions, absoluteExpirationDate, urls);
-        return await http.GetResource(request,
-                json => SubtokenReader.Read(json.RootElement, missingMemberBehavior),
-                cancellationToken)
-            .ConfigureAwait(false);
+        CreateSubtokenRequest request = new(accessToken)
+        {
+            Permissions = permissions,
+            AbsoluteExpirationDate = absoluteExpirationDate,
+            Urls = urls,
+            MissingMemberBehavior = missingMemberBehavior
+        };
+        return request.SendAsync(http, cancellationToken);
     }
 }

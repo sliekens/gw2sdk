@@ -5,7 +5,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using GW2SDK.Http;
 using GW2SDK.ItemStats.Http;
-using GW2SDK.ItemStats.Json;
 using GW2SDK.ItemStats.Models;
 using GW2SDK.Json;
 using JetBrains.Annotations;
@@ -22,55 +21,58 @@ public sealed class ItemStatQuery
         this.http = http.WithDefaults() ?? throw new ArgumentNullException(nameof(http));
     }
 
-    public async Task<IReplicaSet<ItemStat>> GetItemStats(
+    public Task<IReplicaSet<ItemStat>> GetItemStats(
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        ItemStatsRequest request = new(language);
-        return await http.GetResourcesSet(request,
-                json => json.RootElement.GetArray(item => ItemStatReader.Read(item, missingMemberBehavior)),
-                cancellationToken)
-            .ConfigureAwait(false);
+        ItemStatsRequest request = new()
+        {
+            Language = language,
+            MissingMemberBehavior = missingMemberBehavior
+        };
+        return request.SendAsync(http, cancellationToken);
     }
 
-    public async Task<IReplicaSet<int>> GetItemStatsIndex(CancellationToken cancellationToken = default)
+    public Task<IReplicaSet<int>> GetItemStatsIndex(CancellationToken cancellationToken = default)
     {
         ItemStatsIndexRequest request = new();
-        return await http.GetResourcesSet(request, json => json.RootElement.GetInt32Array(), cancellationToken)
-            .ConfigureAwait(false);
+        return request.SendAsync(http, cancellationToken);
     }
 
-    public async Task<IReplica<ItemStat>> GetItemStatById(
+    public Task<IReplica<ItemStat>> GetItemStatById(
         int itemStatId,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        ItemStatByIdRequest request = new(itemStatId, language);
-        return await http.GetResource(request,
-                json => ItemStatReader.Read(json.RootElement, missingMemberBehavior),
-                cancellationToken)
-            .ConfigureAwait(false);
+        ItemStatByIdRequest request = new(itemStatId)
+        {
+            Language = language,
+            MissingMemberBehavior = missingMemberBehavior
+        };
+        return request.SendAsync(http, cancellationToken);
     }
 
-    public async Task<IReplicaSet<ItemStat>> GetItemStatsByIds(
+    public Task<IReplicaSet<ItemStat>> GetItemStatsByIds(
         IReadOnlyCollection<int> itemStatIds,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        ItemStatsByIdsRequest request = new(itemStatIds, language);
-        return await http.GetResourcesSet(request,
-                json => json.RootElement.GetArray(item => ItemStatReader.Read(item, missingMemberBehavior)),
-                cancellationToken)
-            .ConfigureAwait(false);
+        ItemStatsByIdsRequest request = new(itemStatIds)
+        {
+            Language = language,
+            MissingMemberBehavior = missingMemberBehavior
+        };
+
+        return request.SendAsync(http, cancellationToken);
     }
 
-    public async Task<IReplicaPage<ItemStat>> GetItemStatsByPage(
+    public Task<IReplicaPage<ItemStat>> GetItemStatsByPage(
         int pageIndex,
         int? pageSize = default,
         Language? language = default,
@@ -78,10 +80,12 @@ public sealed class ItemStatQuery
         CancellationToken cancellationToken = default
     )
     {
-        ItemStatsByPageRequest request = new(pageIndex, pageSize, language);
-        return await http.GetResourcesPage(request,
-                json => json.RootElement.GetArray(item => ItemStatReader.Read(item, missingMemberBehavior)),
-                cancellationToken)
-            .ConfigureAwait(false);
+        ItemStatsByPageRequest request = new(pageIndex)
+        {
+            PageSize = pageSize,
+            Language = language,
+            MissingMemberBehavior = missingMemberBehavior
+        };
+        return request.SendAsync(http, cancellationToken);
     }
 }

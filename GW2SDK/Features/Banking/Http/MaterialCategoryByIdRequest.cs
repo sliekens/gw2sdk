@@ -1,37 +1,59 @@
 ﻿using System.Net.Http;
+using System.Threading;
+using System.Threading.Tasks;
+using GW2SDK.Banking.Json;
+using GW2SDK.Banking.Models;
 using GW2SDK.Http;
+using GW2SDK.Json;
 using JetBrains.Annotations;
 using static System.Net.Http.HttpMethod;
 
 namespace GW2SDK.Banking.Http;
 
 [PublicAPI]
-public sealed class MaterialCategoryByIdRequest
+public sealed class MaterialCategoryByIdRequest : IHttpRequest<IReplica<MaterialCategory>>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "/v2/materials")
     {
         AcceptEncoding = "gzip"
     };
 
-    public MaterialCategoryByIdRequest(int materialCategoryId, Language? language)
+    public MaterialCategoryByIdRequest(int materialCategoryId)
     {
         MaterialCategoryId = materialCategoryId;
-        Language = language;
     }
 
     public int MaterialCategoryId { get; }
 
-    public Language? Language { get; }
+    public Language? Language { get; init; }
 
-    public static implicit operator HttpRequestMessage(MaterialCategoryByIdRequest r)
+    public MissingMemberBehavior MissingMemberBehavior { get; init; }
+
+    public async Task<IReplica<MaterialCategory>> SendAsync(HttpClient httpClient, CancellationToken cancellationToken)
     {
         QueryBuilder search = new();
-        search.Add("id", r.MaterialCategoryId);
+        search.Add("id", MaterialCategoryId);
         var request = Template with
         {
-            AcceptLanguage = r.Language?.Alpha2Code,
-            Arguments = search
+            Arguments = search,
+            AcceptLanguage = Language?.Alpha2Code
         };
-        return request.Compile();
+
+        using var response = await httpClient.SendAsync(request.Compile(),
+                HttpCompletionOption.ResponseHeadersRead,
+                cancellationToken)
+            .ConfigureAwait(false);
+
+        await response.EnsureResult(cancellationToken)
+            .ConfigureAwait(false);
+
+        using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
+            .ConfigureAwait(false);
+
+        var value = MaterialCategoryReader.Read(json.RootElement, MissingMemberBehavior);
+        return new Replica<MaterialCategory>(response.Headers.Date.GetValueOrDefault(),
+            value,
+            response.Content.Headers.Expires,
+            response.Content.Headers.LastModified);
     }
 }
