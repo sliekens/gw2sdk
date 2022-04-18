@@ -66,13 +66,13 @@ internal class Program
             {
                 routes.AddRow(route.Path.EscapeMarkup(),
                     "⸻",
-                    route.Multilingual ? string.Join(", ", metadata.v2.Languages) : "⸻");
+                    route.Multilingual ? string.Join(", ", metadata.v1.Languages) : "⸻");
             }
             else if (showDisabled)
             {
                 routes.AddRow($"[dim]{route.Path.EscapeMarkup()}[/]",
                     route.RequiresAuthorization ? "Token" : "⸻",
-                    route.Multilingual ? string.Join(", ", metadata.v2.Languages) : "⸻");
+                    route.Multilingual ? string.Join(", ", metadata.v1.Languages) : "⸻");
             }
         }
 
