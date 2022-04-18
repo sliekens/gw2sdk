@@ -7,7 +7,7 @@ using Xunit;
 
 namespace GW2SDK.Tests.Features.Stories;
 
-public class StoryJournalTest
+public class StoryQueryTest
 {
     private static class BackstoryQuestionFact
     {
@@ -45,7 +45,7 @@ public class StoryJournalTest
     public async Task It_can_get_all_backstory_questions()
     {
         await using Composer services = new();
-        var sut = services.Resolve<StoryJournal>();
+        var sut = services.Resolve<StoryQuery>();
 
         var actual = await sut.GetBackstoryQuestions();
 
@@ -67,7 +67,7 @@ public class StoryJournalTest
     public async Task It_can_get_all_backstory_answers()
     {
         await using Composer services = new();
-        var sut = services.Resolve<StoryJournal>();
+        var sut = services.Resolve<StoryQuery>();
 
         var actual = await sut.GetBackstoryAnswers();
 
@@ -90,7 +90,7 @@ public class StoryJournalTest
     public async Task It_can_get_all_backstory_question_ids()
     {
         await using Composer services = new();
-        var sut = services.Resolve<StoryJournal>();
+        var sut = services.Resolve<StoryQuery>();
 
         var actual = await sut.GetBackstoryQuestionsIndex();
 
@@ -101,7 +101,7 @@ public class StoryJournalTest
     public async Task It_can_get_all_backstory_answer_ids()
     {
         await using Composer services = new();
-        var sut = services.Resolve<StoryJournal>();
+        var sut = services.Resolve<StoryQuery>();
 
         var actual = await sut.GetBackstoryAnswersIndex();
 
@@ -112,7 +112,7 @@ public class StoryJournalTest
     public async Task It_can_get_a_backstory_question_by_id()
     {
         await using Composer services = new();
-        var sut = services.Resolve<StoryJournal>();
+        var sut = services.Resolve<StoryQuery>();
 
         const int questionId = 7;
 
@@ -125,7 +125,7 @@ public class StoryJournalTest
     public async Task It_can_get_a_backstory_answer_by_id()
     {
         await using Composer services = new();
-        var sut = services.Resolve<StoryJournal>();
+        var sut = services.Resolve<StoryQuery>();
 
         const string answerId = "7-53";
 
@@ -138,7 +138,7 @@ public class StoryJournalTest
     public async Task It_can_get_backstory_questions_by_id()
     {
         await using Composer services = new();
-        var sut = services.Resolve<StoryJournal>();
+        var sut = services.Resolve<StoryQuery>();
 
         HashSet<int> ids = new()
         {
@@ -161,7 +161,7 @@ public class StoryJournalTest
     public async Task It_can_get_backstory_answers_by_id()
     {
         await using Composer services = new();
-        var sut = services.Resolve<StoryJournal>();
+        var sut = services.Resolve<StoryQuery>();
 
         HashSet<string> ids = new()
         {
@@ -184,7 +184,7 @@ public class StoryJournalTest
     public async Task It_can_get_backstory_questions_by_page()
     {
         await using Composer services = new();
-        var sut = services.Resolve<StoryJournal>();
+        var sut = services.Resolve<StoryQuery>();
 
         var actual = await sut.GetBackstoryQuestionsByPage(0, 3);
 
@@ -196,7 +196,7 @@ public class StoryJournalTest
     public async Task It_can_get_backstory_answers_by_page()
     {
         await using Composer services = new();
-        var sut = services.Resolve<StoryJournal>();
+        var sut = services.Resolve<StoryQuery>();
 
         var actual = await sut.GetBackstoryAnswersByPage(0, 3);
 

@@ -12,11 +12,11 @@ using JetBrains.Annotations;
 namespace GW2SDK.Skins;
 
 [PublicAPI]
-public sealed class Wardrobe
+public sealed class WardrobeQuery
 {
     private readonly HttpClient http;
 
-    public Wardrobe(HttpClient http)
+    public WardrobeQuery(HttpClient http)
     {
         this.http = http.WithDefaults() ?? throw new ArgumentNullException(nameof(http));
     }

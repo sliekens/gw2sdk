@@ -7,14 +7,19 @@ using System.Threading.Tasks;
 using GW2SDK.Annotations;
 using GW2SDK.Commerce.Delivery;
 using GW2SDK.Commerce.Delivery.Http;
+using GW2SDK.Commerce.Delivery.Models;
 using GW2SDK.Commerce.Exchange;
 using GW2SDK.Commerce.Exchange.Http;
+using GW2SDK.Commerce.Exchange.Models;
 using GW2SDK.Commerce.Listings;
 using GW2SDK.Commerce.Listings.Http;
+using GW2SDK.Commerce.Listings.Models;
 using GW2SDK.Commerce.Prices;
 using GW2SDK.Commerce.Prices.Http;
+using GW2SDK.Commerce.Prices.Models;
 using GW2SDK.Commerce.Transactions;
 using GW2SDK.Commerce.Transactions.Http;
+using GW2SDK.Commerce.Transactions.Models;
 using GW2SDK.Http;
 using GW2SDK.Json;
 using JetBrains.Annotations;
@@ -22,11 +27,11 @@ using JetBrains.Annotations;
 namespace GW2SDK.Commerce;
 
 [PublicAPI]
-public sealed class TradingPost
+public sealed class CommerceQuery
 {
     private readonly HttpClient http;
 
-    public TradingPost(HttpClient http)
+    public CommerceQuery(HttpClient http)
     {
         this.http = http.WithDefaults() ?? throw new ArgumentNullException(nameof(http));
     }

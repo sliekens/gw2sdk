@@ -13,11 +13,11 @@ using JetBrains.Annotations;
 namespace GW2SDK.Currencies;
 
 [PublicAPI]
-public sealed class Wallet
+public sealed class WalletQuery
 {
     private readonly HttpClient http;
 
-    public Wallet(HttpClient http)
+    public WalletQuery(HttpClient http)
     {
         this.http = http.WithDefaults() ?? throw new ArgumentNullException(nameof(http));
     }

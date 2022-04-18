@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Text.Json;
+using GW2SDK.Commerce.Transactions.Models;
 using GW2SDK.Json;
 using JetBrains.Annotations;
 

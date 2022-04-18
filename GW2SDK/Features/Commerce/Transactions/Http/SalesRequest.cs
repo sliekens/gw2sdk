@@ -2,6 +2,7 @@
 using System.Threading;
 using System.Threading.Tasks;
 using GW2SDK.Commerce.Transactions.Json;
+using GW2SDK.Commerce.Transactions.Models;
 using GW2SDK.Http;
 using GW2SDK.Json;
 using JetBrains.Annotations;

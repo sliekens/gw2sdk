@@ -85,9 +85,9 @@ public class Composer : IServiceProvider, IAsyncDisposable
             return new AchievementQuery(Resolve<HttpClient>());
         }
 
-        if (serviceType == typeof(StoryJournal))
+        if (serviceType == typeof(StoryQuery))
         {
-            return new StoryJournal(Resolve<HttpClient>());
+            return new StoryQuery(Resolve<HttpClient>());
         }
 
         if (serviceType == typeof(DyeQuery))
@@ -95,9 +95,9 @@ public class Composer : IServiceProvider, IAsyncDisposable
             return new DyeQuery(Resolve<HttpClient>());
         }
 
-        if (serviceType == typeof(TradingPost))
+        if (serviceType == typeof(CommerceQuery))
         {
-            return new TradingPost(Resolve<HttpClient>());
+            return new CommerceQuery(Resolve<HttpClient>());
         }
 
         if (serviceType == typeof(MapQuery))
@@ -105,9 +105,9 @@ public class Composer : IServiceProvider, IAsyncDisposable
             return new MapQuery(Resolve<HttpClient>());
         }
 
-        if (serviceType == typeof(Wallet))
+        if (serviceType == typeof(WalletQuery))
         {
-            return new Wallet(Resolve<HttpClient>());
+            return new WalletQuery(Resolve<HttpClient>());
         }
 
         if (serviceType == typeof(ItemQuery))
@@ -120,14 +120,14 @@ public class Composer : IServiceProvider, IAsyncDisposable
             return new MailCarrierQuery(Resolve<HttpClient>());
         }
 
-        if (serviceType == typeof(CraftingStation))
+        if (serviceType == typeof(CraftingQuery))
         {
-            return new CraftingStation(Resolve<HttpClient>());
+            return new CraftingQuery(Resolve<HttpClient>());
         }
 
-        if (serviceType == typeof(Wardrobe))
+        if (serviceType == typeof(WardrobeQuery))
         {
-            return new Wardrobe(Resolve<HttpClient>());
+            return new WardrobeQuery(Resolve<HttpClient>());
         }
 
         if (serviceType == typeof(TokenProvider))
@@ -185,9 +185,9 @@ public class Composer : IServiceProvider, IAsyncDisposable
             return new QuagganQuery(Resolve<HttpClient>());
         }
 
-        if (serviceType == typeof(Wallet))
+        if (serviceType == typeof(WalletQuery))
         {
-            return new Wallet(Resolve<HttpClient>());
+            return new WalletQuery(Resolve<HttpClient>());
         }
 
         return null;

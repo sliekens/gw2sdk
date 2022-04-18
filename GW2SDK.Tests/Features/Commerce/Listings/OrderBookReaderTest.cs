@@ -1,6 +1,7 @@
 ﻿using System.Text.Json;
 using GW2SDK.Commerce.Listings;
 using GW2SDK.Commerce.Listings.Json;
+using GW2SDK.Commerce.Listings.Models;
 using GW2SDK.Json;
 using GW2SDK.Tests.TestInfrastructure;
 using Xunit;
