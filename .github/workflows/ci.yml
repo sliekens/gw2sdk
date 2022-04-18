@@ -32,8 +32,6 @@ jobs:
           3.1.x
           5.0.x
           6.0.x
-      env:
-        NUGET_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
     - name: Install dependencies
       run: dotnet restore --locked-mode
     - name: Test
@@ -58,5 +56,5 @@ jobs:
         name: packages
         path: artifacts
     - name: Upload packages to GitHub Packages
-      run: dotnet nuget push artifacts/*.nupkg
+      run: dotnet nuget push artifacts/*.nupkg --api-key ${{secrets.GITHUB_TOKEN}}
       if:  ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
