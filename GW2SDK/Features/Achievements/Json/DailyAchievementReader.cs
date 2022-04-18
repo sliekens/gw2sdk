@@ -9,7 +9,10 @@ namespace GW2SDK.Achievements.Json;
 [PublicAPI]
 public static class DailyAchievementReader
 {
-    public static DailyAchievementGroup Read(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    public static DailyAchievementGroup Read(
+        JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         RequiredMember<DailyAchievement> pve = new("pve");
         RequiredMember<DailyAchievement> pvp = new("pvp");
@@ -50,12 +53,20 @@ public static class DailyAchievementReader
             Pve = pve.SelectMany(value => ReadDailyAchievement(value, missingMemberBehavior)),
             Pvp = pvp.SelectMany(value => ReadDailyAchievement(value, missingMemberBehavior)),
             Wvw = wvw.SelectMany(value => ReadDailyAchievement(value, missingMemberBehavior)),
-            Fractals = fractals.SelectMany(value => ReadDailyAchievement(value, missingMemberBehavior)),
-            Special = special.SelectMany(value => ReadDailyAchievement(value, missingMemberBehavior))
+            Fractals =
+                fractals.SelectMany(
+                    value => ReadDailyAchievement(value, missingMemberBehavior)
+                    ),
+            Special = special.SelectMany(
+                value => ReadDailyAchievement(value, missingMemberBehavior)
+                )
         };
     }
 
-    private static DailyAchievement ReadDailyAchievement(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    private static DailyAchievement ReadDailyAchievement(
+        JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         RequiredMember<int> id = new("id");
         RequiredMember<LevelRequirement> level = new("level");
@@ -85,11 +96,15 @@ public static class DailyAchievementReader
         {
             Id = id.GetValue(),
             Level = level.Select(value => ReadLevelRequirement(value, missingMemberBehavior)),
-            RequiredAccess = requiredAccess.Select(value => ReadProductRequirement(value, missingMemberBehavior))
+            RequiredAccess =
+                requiredAccess.Select(value => ReadProductRequirement(value, missingMemberBehavior))
         };
     }
 
-    private static LevelRequirement ReadLevelRequirement(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    private static LevelRequirement ReadLevelRequirement(
+        JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         RequiredMember<int> min = new("min");
         RequiredMember<int> max = new("max");

@@ -38,18 +38,23 @@ internal class Program
         var meta = new MetaQuery(http);
 
         var build = await AnsiConsole.Status()
-            .StartAsync("Retrieving the current game version...", async ctx => await meta.GetBuild());
+            .StartAsync(
+                "Retrieving the current game version...",
+                async ctx => await meta.GetBuild()
+                );
 
         AnsiConsole.MarkupLine($"Gw2: [white on dodgerblue2]{build.Value.Id}[/]");
 
         var metadata = await AnsiConsole.Status()
-            .StartAsync("Retrieving API endpoints...",
+            .StartAsync(
+                "Retrieving API endpoints...",
                 async ctx =>
                 {
                     var v1 = await meta.GetApiVersion("v1");
                     var v2 = await meta.GetApiVersion();
                     return (v1: v1.Value, v2: v2.Value);
-                });
+                }
+                );
 
         var showDisabled = AnsiConsole.Confirm("Show disabled routes?", false);
 
@@ -64,15 +69,19 @@ internal class Program
         {
             if (route.Active)
             {
-                routes.AddRow(route.Path.EscapeMarkup(),
+                routes.AddRow(
+                    route.Path.EscapeMarkup(),
                     "⸻",
-                    route.Multilingual ? string.Join(", ", metadata.v1.Languages) : "⸻");
+                    route.Multilingual ? string.Join(", ", metadata.v1.Languages) : "⸻"
+                    );
             }
             else if (showDisabled)
             {
-                routes.AddRow($"[dim]{route.Path.EscapeMarkup()}[/]",
+                routes.AddRow(
+                    $"[dim]{route.Path.EscapeMarkup()}[/]",
                     route.RequiresAuthorization ? "Token" : "⸻",
-                    route.Multilingual ? string.Join(", ", metadata.v1.Languages) : "⸻");
+                    route.Multilingual ? string.Join(", ", metadata.v1.Languages) : "⸻"
+                    );
             }
         }
 
@@ -85,25 +94,26 @@ internal class Program
 
             if (route.Active)
             {
-                routes.AddRow(route.Path.EscapeMarkup(),
+                routes.AddRow(
+                    route.Path.EscapeMarkup(),
                     route.RequiresAuthorization ? "Token" : "⸻",
-                    route.Multilingual ? string.Join(", ", metadata.v2.Languages) : "⸻");
+                    route.Multilingual ? string.Join(", ", metadata.v2.Languages) : "⸻"
+                    );
             }
             else if (showDisabled)
             {
-                routes.AddRow($"[dim]{route.Path.EscapeMarkup()}[/]",
+                routes.AddRow(
+                    $"[dim]{route.Path.EscapeMarkup()}[/]",
                     route.RequiresAuthorization ? "Token" : "⸻",
-                    route.Multilingual ? string.Join(", ", metadata.v2.Languages) : "⸻");
+                    route.Multilingual ? string.Join(", ", metadata.v2.Languages) : "⸻"
+                    );
             }
         }
 
-        var changes = new Table().MinimalBorder()
-            .AddColumn("Change")
-            .AddColumn("Description");
+        var changes = new Table().MinimalBorder().AddColumn("Change").AddColumn("Description");
         foreach (var schema in metadata.v2.SchemaVersions)
         {
-            var formatted = DateTimeOffset.Parse(schema.Version)
-                .ToString("D");
+            var formatted = DateTimeOffset.Parse(schema.Version).ToString("D");
             changes.AddRow(formatted.EscapeMarkup(), schema.Description.EscapeMarkup());
         }
 

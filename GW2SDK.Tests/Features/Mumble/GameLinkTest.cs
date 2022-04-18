@@ -76,8 +76,10 @@ public class GameLinkTest
         }
         catch (TaskCanceledException)
         {
-            Assert.True(actual.Last.UiTick > actual.First.UiTick,
-                "This test only works if you are in a map, not in a loading screen etc.");
+            Assert.True(
+                actual.Last.UiTick > actual.First.UiTick,
+                "This test only works if you are in a map, not in a loading screen etc."
+                );
         }
 
         Assert.True(actual.Last.UiTick > actual.First.UiTick, "GameLink should be self-updating");
@@ -121,11 +123,15 @@ public class MumbleLinkFact : FactAttribute
 
         try
         {
-            using var file = MemoryMappedFile.OpenExisting("MumbleLink", MemoryMappedFileRights.Read);
+            using var file = MemoryMappedFile.OpenExisting(
+                "MumbleLink",
+                MemoryMappedFileRights.Read
+                );
         }
         catch (FileNotFoundException)
         {
-            Skip = "The GameLink is not initialized. Start Mumble -and- Guild Wars 2 before running this test.";
+            Skip =
+                "The GameLink is not initialized. Start Mumble -and- Guild Wars 2 before running this test.";
         }
     }
 }

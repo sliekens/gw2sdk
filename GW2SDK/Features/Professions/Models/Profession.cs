@@ -22,11 +22,13 @@ public sealed record Profession
 
     public IReadOnlyCollection<int> Specializations { get; init; } = Array.Empty<int>();
 
-    public IDictionary<string, WeaponProficiency> Weapons { get; init; } = new Dictionary<string, WeaponProficiency>();
+    public IDictionary<string, WeaponProficiency> Weapons { get; init; } =
+        new Dictionary<string, WeaponProficiency>();
 
     public IReadOnlyCollection<ProfessionFlag> Flags { get; init; } = Array.Empty<ProfessionFlag>();
 
-    public IReadOnlyCollection<SkillReference> Skills { get; init; } = Array.Empty<SkillReference>();
+    public IReadOnlyCollection<SkillReference> Skills { get; init; } =
+        Array.Empty<SkillReference>();
 
     public IReadOnlyCollection<Training> Training { get; init; } = Array.Empty<Training>();
 

@@ -54,7 +54,8 @@ public static class ContinentReader
         {
             Id = id.GetValue(),
             Name = name.GetValue(),
-            ContinentDimensions = continentDimensions.Select(value => ReadSize(value, missingMemberBehavior)),
+            ContinentDimensions =
+                continentDimensions.Select(value => ReadSize(value, missingMemberBehavior)),
             MinZoom = minZoom.GetValue(),
             MaxZoom = maxZoom.GetValue(),
             Floors = floors.SelectMany(value => value.GetInt32())
@@ -63,10 +64,8 @@ public static class ContinentReader
 
     private static Size ReadSize(JsonElement json, MissingMemberBehavior missingMemberBehavior)
     {
-        var width = json[0]
-            .GetInt32();
-        var height = json[1]
-            .GetInt32();
+        var width = json[0].GetInt32();
+        var height = json[1].GetInt32();
         return new Size(width, height);
     }
 }

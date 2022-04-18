@@ -11,8 +11,7 @@ public static class ItemReader
 {
     public static Item Read(JsonElement json, MissingMemberBehavior missingMemberBehavior)
     {
-        switch (json.GetProperty("type")
-                    .GetString())
+        switch (json.GetProperty("type").GetString())
         {
             case "Armor":
                 return ReadArmor(json, missingMemberBehavior);
@@ -71,7 +70,9 @@ public static class ItemReader
             {
                 if (missingMemberBehavior == MissingMemberBehavior.Error)
                 {
-                    throw new InvalidOperationException(Strings.UnexpectedDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.UnexpectedDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -140,7 +141,10 @@ public static class ItemReader
         };
     }
 
-    private static ItemUpgrade ReadItemUpgrade(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    private static ItemUpgrade ReadItemUpgrade(
+        JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         RequiredMember<UpgradeType> upgrade = new("upgrade");
         RequiredMember<int> itemId = new("item_id");
@@ -167,7 +171,10 @@ public static class ItemReader
         };
     }
 
-    private static InfusionSlot ReadInfusionSlot(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    private static InfusionSlot ReadInfusionSlot(
+        JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         RequiredMember<InfusionSlotFlag> flags = new("flags");
         NullableMember<int> itemId = new("item_id");
@@ -194,7 +201,10 @@ public static class ItemReader
         };
     }
 
-    private static InfixUpgrade ReadInfixUpgrade(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    private static InfixUpgrade ReadInfixUpgrade(
+        JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         RequiredMember<int> id = new("id");
         RequiredMember<UpgradeAttribute> attributes = new("attributes");
@@ -222,7 +232,8 @@ public static class ItemReader
         return new InfixUpgrade
         {
             ItemstatsId = id.GetValue(),
-            Attributes = attributes.SelectMany(value => ReadUpgradeAttribute(value, missingMemberBehavior)),
+            Attributes =
+                attributes.SelectMany(value => ReadUpgradeAttribute(value, missingMemberBehavior)),
             Buff = buff.Select(value => ReadBuff(value, missingMemberBehavior))
         };
     }
@@ -254,7 +265,10 @@ public static class ItemReader
         };
     }
 
-    private static UpgradeAttribute ReadUpgradeAttribute(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    private static UpgradeAttribute ReadUpgradeAttribute(
+        JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         RequiredMember<UpgradeAttributeName> attribute = new("attribute");
         RequiredMember<int> modifier = new("modifier");
@@ -283,9 +297,7 @@ public static class ItemReader
 
     private static Armor ReadArmor(JsonElement json, MissingMemberBehavior missingMemberBehavior)
     {
-        switch (json.GetProperty("details")
-                    .GetProperty("type")
-                    .GetString())
+        switch (json.GetProperty("details").GetProperty("type").GetString())
         {
             case "Boots":
                 return ReadBoots(json, missingMemberBehavior);
@@ -328,7 +340,9 @@ public static class ItemReader
             {
                 if (!member.Value.ValueEquals("Armor"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -388,7 +402,8 @@ public static class ItemReader
                         if (missingMemberBehavior == MissingMemberBehavior.Error)
                         {
                             throw new InvalidOperationException(
-                                Strings.UnexpectedDiscriminator(detail.Value.GetString()));
+                                Strings.UnexpectedDiscriminator(detail.Value.GetString())
+                                );
                         }
                     }
                     else if (detail.NameEquals(weightClass.Name))
@@ -447,7 +462,8 @@ public static class ItemReader
             Icon = icon.GetValueOrNull(),
             WeightClass = weightClass.GetValue(missingMemberBehavior),
             Defense = defense.GetValue(),
-            InfusionSlots = infusionSlots.SelectMany(value => ReadInfusionSlot(value, missingMemberBehavior)),
+            InfusionSlots =
+                infusionSlots.SelectMany(value => ReadInfusionSlot(value, missingMemberBehavior)),
             AttributeAdjustment = attributeAdjustment.GetValue(),
             StatChoices = statChoices.SelectMany(value => value.GetInt32()),
             Prefix = infixUpgrade.Select(value => ReadInfixUpgrade(value, missingMemberBehavior)),
@@ -482,7 +498,9 @@ public static class ItemReader
             {
                 if (!member.Value.ValueEquals("Armor"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -541,7 +559,9 @@ public static class ItemReader
                     {
                         if (!detail.Value.ValueEquals("Boots"))
                         {
-                            throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
+                            throw new InvalidOperationException(
+                                Strings.InvalidDiscriminator(detail.Value.GetString())
+                                );
                         }
                     }
                     else if (detail.NameEquals(weightClass.Name))
@@ -600,7 +620,8 @@ public static class ItemReader
             Icon = icon.GetValueOrNull(),
             WeightClass = weightClass.GetValue(missingMemberBehavior),
             Defense = defense.GetValue(),
-            InfusionSlots = infusionSlots.SelectMany(value => ReadInfusionSlot(value, missingMemberBehavior)),
+            InfusionSlots =
+                infusionSlots.SelectMany(value => ReadInfusionSlot(value, missingMemberBehavior)),
             AttributeAdjustment = attributeAdjustment.GetValue(),
             StatChoices = statChoices.SelectMany(value => value.GetInt32()),
             Prefix = infixUpgrade.Select(value => ReadInfixUpgrade(value, missingMemberBehavior)),
@@ -635,7 +656,9 @@ public static class ItemReader
             {
                 if (!member.Value.ValueEquals("Armor"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -694,7 +717,9 @@ public static class ItemReader
                     {
                         if (!detail.Value.ValueEquals("Coat"))
                         {
-                            throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
+                            throw new InvalidOperationException(
+                                Strings.InvalidDiscriminator(detail.Value.GetString())
+                                );
                         }
                     }
                     else if (detail.NameEquals(weightClass.Name))
@@ -753,7 +778,8 @@ public static class ItemReader
             Icon = icon.GetValueOrNull(),
             WeightClass = weightClass.GetValue(missingMemberBehavior),
             Defense = defense.GetValue(),
-            InfusionSlots = infusionSlots.SelectMany(value => ReadInfusionSlot(value, missingMemberBehavior)),
+            InfusionSlots =
+                infusionSlots.SelectMany(value => ReadInfusionSlot(value, missingMemberBehavior)),
             AttributeAdjustment = attributeAdjustment.GetValue(),
             StatChoices = statChoices.SelectMany(value => value.GetInt32()),
             Prefix = infixUpgrade.Select(value => ReadInfixUpgrade(value, missingMemberBehavior)),
@@ -788,7 +814,9 @@ public static class ItemReader
             {
                 if (!member.Value.ValueEquals("Armor"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -847,7 +875,9 @@ public static class ItemReader
                     {
                         if (!detail.Value.ValueEquals("Gloves"))
                         {
-                            throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
+                            throw new InvalidOperationException(
+                                Strings.InvalidDiscriminator(detail.Value.GetString())
+                                );
                         }
                     }
                     else if (detail.NameEquals(weightClass.Name))
@@ -906,7 +936,8 @@ public static class ItemReader
             Icon = icon.GetValueOrNull(),
             WeightClass = weightClass.GetValue(missingMemberBehavior),
             Defense = defense.GetValue(),
-            InfusionSlots = infusionSlots.SelectMany(value => ReadInfusionSlot(value, missingMemberBehavior)),
+            InfusionSlots =
+                infusionSlots.SelectMany(value => ReadInfusionSlot(value, missingMemberBehavior)),
             AttributeAdjustment = attributeAdjustment.GetValue(),
             StatChoices = statChoices.SelectMany(value => value.GetInt32()),
             Prefix = infixUpgrade.Select(value => ReadInfixUpgrade(value, missingMemberBehavior)),
@@ -941,7 +972,9 @@ public static class ItemReader
             {
                 if (!member.Value.ValueEquals("Armor"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -1000,7 +1033,9 @@ public static class ItemReader
                     {
                         if (!detail.Value.ValueEquals("Helm"))
                         {
-                            throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
+                            throw new InvalidOperationException(
+                                Strings.InvalidDiscriminator(detail.Value.GetString())
+                                );
                         }
                     }
                     else if (detail.NameEquals(weightClass.Name))
@@ -1059,7 +1094,8 @@ public static class ItemReader
             Icon = icon.GetValueOrNull(),
             WeightClass = weightClass.GetValue(missingMemberBehavior),
             Defense = defense.GetValue(),
-            InfusionSlots = infusionSlots.SelectMany(value => ReadInfusionSlot(value, missingMemberBehavior)),
+            InfusionSlots =
+                infusionSlots.SelectMany(value => ReadInfusionSlot(value, missingMemberBehavior)),
             AttributeAdjustment = attributeAdjustment.GetValue(),
             StatChoices = statChoices.SelectMany(value => value.GetInt32()),
             Prefix = infixUpgrade.Select(value => ReadInfixUpgrade(value, missingMemberBehavior)),
@@ -1067,7 +1103,10 @@ public static class ItemReader
         };
     }
 
-    private static HelmAquatic ReadHelmAquatic(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    private static HelmAquatic ReadHelmAquatic(
+        JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         RequiredMember<string> name = new("name");
         OptionalMember<string> description = new("description");
@@ -1094,7 +1133,9 @@ public static class ItemReader
             {
                 if (!member.Value.ValueEquals("Armor"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -1153,7 +1194,9 @@ public static class ItemReader
                     {
                         if (!detail.Value.ValueEquals("HelmAquatic"))
                         {
-                            throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
+                            throw new InvalidOperationException(
+                                Strings.InvalidDiscriminator(detail.Value.GetString())
+                                );
                         }
                     }
                     else if (detail.NameEquals(weightClass.Name))
@@ -1212,7 +1255,8 @@ public static class ItemReader
             Icon = icon.GetValueOrNull(),
             WeightClass = weightClass.GetValue(missingMemberBehavior),
             Defense = defense.GetValue(),
-            InfusionSlots = infusionSlots.SelectMany(value => ReadInfusionSlot(value, missingMemberBehavior)),
+            InfusionSlots =
+                infusionSlots.SelectMany(value => ReadInfusionSlot(value, missingMemberBehavior)),
             AttributeAdjustment = attributeAdjustment.GetValue(),
             StatChoices = statChoices.SelectMany(value => value.GetInt32()),
             Prefix = infixUpgrade.Select(value => ReadInfixUpgrade(value, missingMemberBehavior)),
@@ -1220,7 +1264,10 @@ public static class ItemReader
         };
     }
 
-    private static Leggings ReadLeggings(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    private static Leggings ReadLeggings(
+        JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         RequiredMember<string> name = new("name");
         OptionalMember<string> description = new("description");
@@ -1247,7 +1294,9 @@ public static class ItemReader
             {
                 if (!member.Value.ValueEquals("Armor"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -1306,7 +1355,9 @@ public static class ItemReader
                     {
                         if (!detail.Value.ValueEquals("Leggings"))
                         {
-                            throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
+                            throw new InvalidOperationException(
+                                Strings.InvalidDiscriminator(detail.Value.GetString())
+                                );
                         }
                     }
                     else if (detail.NameEquals(weightClass.Name))
@@ -1365,7 +1416,8 @@ public static class ItemReader
             Icon = icon.GetValueOrNull(),
             WeightClass = weightClass.GetValue(missingMemberBehavior),
             Defense = defense.GetValue(),
-            InfusionSlots = infusionSlots.SelectMany(value => ReadInfusionSlot(value, missingMemberBehavior)),
+            InfusionSlots =
+                infusionSlots.SelectMany(value => ReadInfusionSlot(value, missingMemberBehavior)),
             AttributeAdjustment = attributeAdjustment.GetValue(),
             StatChoices = statChoices.SelectMany(value => value.GetInt32()),
             Prefix = infixUpgrade.Select(value => ReadInfixUpgrade(value, missingMemberBehavior)),
@@ -1373,7 +1425,10 @@ public static class ItemReader
         };
     }
 
-    private static Shoulders ReadShoulders(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    private static Shoulders ReadShoulders(
+        JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         RequiredMember<string> name = new("name");
         OptionalMember<string> description = new("description");
@@ -1400,7 +1455,9 @@ public static class ItemReader
             {
                 if (!member.Value.ValueEquals("Armor"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -1459,7 +1516,9 @@ public static class ItemReader
                     {
                         if (!detail.Value.ValueEquals("Shoulders"))
                         {
-                            throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
+                            throw new InvalidOperationException(
+                                Strings.InvalidDiscriminator(detail.Value.GetString())
+                                );
                         }
                     }
                     else if (detail.NameEquals(weightClass.Name))
@@ -1518,7 +1577,8 @@ public static class ItemReader
             Icon = icon.GetValueOrNull(),
             WeightClass = weightClass.GetValue(missingMemberBehavior),
             Defense = defense.GetValue(),
-            InfusionSlots = infusionSlots.SelectMany(value => ReadInfusionSlot(value, missingMemberBehavior)),
+            InfusionSlots =
+                infusionSlots.SelectMany(value => ReadInfusionSlot(value, missingMemberBehavior)),
             AttributeAdjustment = attributeAdjustment.GetValue(),
             StatChoices = statChoices.SelectMany(value => value.GetInt32()),
             Prefix = infixUpgrade.Select(value => ReadInfixUpgrade(value, missingMemberBehavior)),
@@ -1526,7 +1586,10 @@ public static class ItemReader
         };
     }
 
-    private static Backpack ReadBackpack(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    private static Backpack ReadBackpack(
+        JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         RequiredMember<string> name = new("name");
         OptionalMember<string> description = new("description");
@@ -1553,7 +1616,9 @@ public static class ItemReader
             {
                 if (!member.Value.ValueEquals("Back"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -1662,13 +1727,16 @@ public static class ItemReader
             Restrictions = restrictions.GetValues(missingMemberBehavior),
             ChatLink = chatLink.GetValue(),
             Icon = icon.GetValueOrNull(),
-            InfusionSlots = infusionSlots.SelectMany(value => ReadInfusionSlot(value, missingMemberBehavior)),
+            InfusionSlots =
+                infusionSlots.SelectMany(value => ReadInfusionSlot(value, missingMemberBehavior)),
             AttributeAdjustment = attributeAdjustment.GetValue(),
             Prefix = infixUpgrade.Select(value => ReadInfixUpgrade(value, missingMemberBehavior)),
             SuffixItemId = suffixItemId.GetValue(),
             StatChoices = statChoices.SelectMany(value => value.GetInt32()),
-            UpgradesInto = upgradesInto.SelectMany(value => ReadItemUpgrade(value, missingMemberBehavior)),
-            UpgradesFrom = upgradesFrom.SelectMany(value => ReadItemUpgrade(value, missingMemberBehavior))
+            UpgradesInto =
+                upgradesInto.SelectMany(value => ReadItemUpgrade(value, missingMemberBehavior)),
+            UpgradesFrom =
+                upgradesFrom.SelectMany(value => ReadItemUpgrade(value, missingMemberBehavior))
         };
     }
 
@@ -1693,7 +1761,9 @@ public static class ItemReader
             {
                 if (!member.Value.ValueEquals("Bag"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -1782,11 +1852,12 @@ public static class ItemReader
         };
     }
 
-    private static Consumable ReadConsumable(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    private static Consumable ReadConsumable(
+        JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
-        switch (json.GetProperty("details")
-                    .GetProperty("type")
-                    .GetString())
+        switch (json.GetProperty("details").GetProperty("type").GetString())
         {
             case "AppearanceChange":
                 return ReadAppearanceChanger(json, missingMemberBehavior);
@@ -1837,7 +1908,9 @@ public static class ItemReader
             {
                 if (!member.Value.ValueEquals("Consumable"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -1893,7 +1966,8 @@ public static class ItemReader
                         if (missingMemberBehavior == MissingMemberBehavior.Error)
                         {
                             throw new InvalidOperationException(
-                                Strings.UnexpectedDiscriminator(detail.Value.GetString()));
+                                Strings.UnexpectedDiscriminator(detail.Value.GetString())
+                                );
                         }
                     }
                     else if (missingMemberBehavior == MissingMemberBehavior.Error)
@@ -1946,7 +2020,9 @@ public static class ItemReader
             {
                 if (!member.Value.ValueEquals("Consumable"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -2001,7 +2077,9 @@ public static class ItemReader
                     {
                         if (!detail.Value.ValueEquals("AppearanceChange"))
                         {
-                            throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
+                            throw new InvalidOperationException(
+                                Strings.InvalidDiscriminator(detail.Value.GetString())
+                                );
                         }
                     }
                     else if (missingMemberBehavior == MissingMemberBehavior.Error)
@@ -2051,7 +2129,9 @@ public static class ItemReader
             {
                 if (!member.Value.ValueEquals("Consumable"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -2106,7 +2186,9 @@ public static class ItemReader
                     {
                         if (!detail.Value.ValueEquals("Booze"))
                         {
-                            throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
+                            throw new InvalidOperationException(
+                                Strings.InvalidDiscriminator(detail.Value.GetString())
+                                );
                         }
                     }
                     else if (missingMemberBehavior == MissingMemberBehavior.Error)
@@ -2137,7 +2219,10 @@ public static class ItemReader
         };
     }
 
-    private static ContractNpc ReadContractNpc(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    private static ContractNpc ReadContractNpc(
+        JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         RequiredMember<string> name = new("name");
         OptionalMember<string> description = new("description");
@@ -2156,7 +2241,9 @@ public static class ItemReader
             {
                 if (!member.Value.ValueEquals("Consumable"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -2211,7 +2298,9 @@ public static class ItemReader
                     {
                         if (!detail.Value.ValueEquals("ContractNpc"))
                         {
-                            throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
+                            throw new InvalidOperationException(
+                                Strings.InvalidDiscriminator(detail.Value.GetString())
+                                );
                         }
                     }
                     else if (missingMemberBehavior == MissingMemberBehavior.Error)
@@ -2242,7 +2331,10 @@ public static class ItemReader
         };
     }
 
-    private static Currency ReadCurrency(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    private static Currency ReadCurrency(
+        JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         RequiredMember<string> name = new("name");
         OptionalMember<string> description = new("description");
@@ -2261,7 +2353,9 @@ public static class ItemReader
             {
                 if (!member.Value.ValueEquals("Consumable"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -2316,7 +2410,9 @@ public static class ItemReader
                     {
                         if (!detail.Value.ValueEquals("Currency"))
                         {
-                            throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
+                            throw new InvalidOperationException(
+                                Strings.InvalidDiscriminator(detail.Value.GetString())
+                                );
                         }
                     }
                     else if (missingMemberBehavior == MissingMemberBehavior.Error)
@@ -2371,7 +2467,9 @@ public static class ItemReader
             {
                 if (!member.Value.ValueEquals("Consumable"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -2426,7 +2524,9 @@ public static class ItemReader
                     {
                         if (!detail.Value.ValueEquals("Food"))
                         {
-                            throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
+                            throw new InvalidOperationException(
+                                Strings.InvalidDiscriminator(detail.Value.GetString())
+                                );
                         }
                     }
                     else if (detail.NameEquals(duration.Name))
@@ -2510,7 +2610,9 @@ public static class ItemReader
             {
                 if (!member.Value.ValueEquals("Consumable"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -2565,7 +2667,9 @@ public static class ItemReader
                     {
                         if (!detail.Value.ValueEquals("Generic"))
                         {
-                            throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
+                            throw new InvalidOperationException(
+                                Strings.InvalidDiscriminator(detail.Value.GetString())
+                                );
                         }
                     }
                     else if (detail.NameEquals(duration.Name))
@@ -2648,7 +2752,9 @@ public static class ItemReader
             {
                 if (!member.Value.ValueEquals("Consumable"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -2703,7 +2809,9 @@ public static class ItemReader
                     {
                         if (!detail.Value.ValueEquals("Halloween"))
                         {
-                            throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
+                            throw new InvalidOperationException(
+                                Strings.InvalidDiscriminator(detail.Value.GetString())
+                                );
                         }
                     }
                     else if (missingMemberBehavior == MissingMemberBehavior.Error)
@@ -2762,7 +2870,9 @@ public static class ItemReader
             {
                 if (!member.Value.ValueEquals("Consumable"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -2817,7 +2927,9 @@ public static class ItemReader
                     {
                         if (!detail.Value.ValueEquals("Immediate"))
                         {
-                            throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
+                            throw new InvalidOperationException(
+                                Strings.InvalidDiscriminator(detail.Value.GetString())
+                                );
                         }
                     }
                     else if (detail.NameEquals(duration.Name))
@@ -2900,7 +3012,9 @@ public static class ItemReader
             {
                 if (!member.Value.ValueEquals("Consumable"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -2955,7 +3069,9 @@ public static class ItemReader
                     {
                         if (!detail.Value.ValueEquals("MountRandomUnlock"))
                         {
-                            throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
+                            throw new InvalidOperationException(
+                                Strings.InvalidDiscriminator(detail.Value.GetString())
+                                );
                         }
                     }
                     else if (missingMemberBehavior == MissingMemberBehavior.Error)
@@ -2986,7 +3102,10 @@ public static class ItemReader
         };
     }
 
-    private static RandomUnlocker ReadRandomUnlocker(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    private static RandomUnlocker ReadRandomUnlocker(
+        JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         RequiredMember<string> name = new("name");
         OptionalMember<string> description = new("description");
@@ -3005,7 +3124,9 @@ public static class ItemReader
             {
                 if (!member.Value.ValueEquals("Consumable"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -3060,7 +3181,9 @@ public static class ItemReader
                     {
                         if (!detail.Value.ValueEquals("RandomUnlock"))
                         {
-                            throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
+                            throw new InvalidOperationException(
+                                Strings.InvalidDiscriminator(detail.Value.GetString())
+                                );
                         }
                     }
                     else if (missingMemberBehavior == MissingMemberBehavior.Error)
@@ -3091,7 +3214,10 @@ public static class ItemReader
         };
     }
 
-    private static TeleportToFriend ReadTeleportToFriend(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    private static TeleportToFriend ReadTeleportToFriend(
+        JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         RequiredMember<string> name = new("name");
         OptionalMember<string> description = new("description");
@@ -3110,7 +3236,9 @@ public static class ItemReader
             {
                 if (!member.Value.ValueEquals("Consumable"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -3165,7 +3293,9 @@ public static class ItemReader
                     {
                         if (!detail.Value.ValueEquals("TeleportToFriend"))
                         {
-                            throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
+                            throw new InvalidOperationException(
+                                Strings.InvalidDiscriminator(detail.Value.GetString())
+                                );
                         }
                     }
                     else if (missingMemberBehavior == MissingMemberBehavior.Error)
@@ -3196,7 +3326,10 @@ public static class ItemReader
         };
     }
 
-    private static Transmutation ReadTransmutation(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    private static Transmutation ReadTransmutation(
+        JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         RequiredMember<string> name = new("name");
         OptionalMember<string> description = new("description");
@@ -3216,7 +3349,9 @@ public static class ItemReader
             {
                 if (!member.Value.ValueEquals("Consumable"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -3271,7 +3406,9 @@ public static class ItemReader
                     {
                         if (!detail.Value.ValueEquals("Transmutation"))
                         {
-                            throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
+                            throw new InvalidOperationException(
+                                Strings.InvalidDiscriminator(detail.Value.GetString())
+                                );
                         }
                     }
                     else if (detail.NameEquals(skins.Name))
@@ -3307,11 +3444,12 @@ public static class ItemReader
         };
     }
 
-    private static Unlocker ReadUnlocker(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    private static Unlocker ReadUnlocker(
+        JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
-        switch (json.GetProperty("details")
-                    .GetProperty("unlock_type")
-                    .GetString())
+        switch (json.GetProperty("details").GetProperty("unlock_type").GetString())
         {
             case "BagSlot":
                 return ReadBagSlotUnlocker(json, missingMemberBehavior);
@@ -3362,7 +3500,9 @@ public static class ItemReader
             {
                 if (!member.Value.ValueEquals("Consumable"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -3417,7 +3557,9 @@ public static class ItemReader
                     {
                         if (!detail.Value.ValueEquals("Unlock"))
                         {
-                            throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
+                            throw new InvalidOperationException(
+                                Strings.InvalidDiscriminator(detail.Value.GetString())
+                                );
                         }
                     }
                     else if (detail.NameEquals("unlock_type"))
@@ -3425,7 +3567,8 @@ public static class ItemReader
                         if (missingMemberBehavior == MissingMemberBehavior.Error)
                         {
                             throw new InvalidOperationException(
-                                Strings.UnexpectedDiscriminator(detail.Value.GetString()));
+                                Strings.UnexpectedDiscriminator(detail.Value.GetString())
+                                );
                         }
                     }
                     else if (missingMemberBehavior == MissingMemberBehavior.Error)
@@ -3456,7 +3599,10 @@ public static class ItemReader
         };
     }
 
-    private static BagSlotUnlocker ReadBagSlotUnlocker(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    private static BagSlotUnlocker ReadBagSlotUnlocker(
+        JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         RequiredMember<string> name = new("name");
         OptionalMember<string> description = new("description");
@@ -3475,7 +3621,9 @@ public static class ItemReader
             {
                 if (!member.Value.ValueEquals("Consumable"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -3530,14 +3678,18 @@ public static class ItemReader
                     {
                         if (!detail.Value.ValueEquals("Unlock"))
                         {
-                            throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
+                            throw new InvalidOperationException(
+                                Strings.InvalidDiscriminator(detail.Value.GetString())
+                                );
                         }
                     }
                     else if (detail.NameEquals("unlock_type"))
                     {
                         if (!detail.Value.ValueEquals("BagSlot"))
                         {
-                            throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
+                            throw new InvalidOperationException(
+                                Strings.InvalidDiscriminator(detail.Value.GetString())
+                                );
                         }
                     }
                     else if (missingMemberBehavior == MissingMemberBehavior.Error)
@@ -3568,7 +3720,10 @@ public static class ItemReader
         };
     }
 
-    private static BankTabUnlocker ReadBankTabUnlocker(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    private static BankTabUnlocker ReadBankTabUnlocker(
+        JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         RequiredMember<string> name = new("name");
         OptionalMember<string> description = new("description");
@@ -3587,7 +3742,9 @@ public static class ItemReader
             {
                 if (!member.Value.ValueEquals("Consumable"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -3642,14 +3799,18 @@ public static class ItemReader
                     {
                         if (!detail.Value.ValueEquals("Unlock"))
                         {
-                            throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
+                            throw new InvalidOperationException(
+                                Strings.InvalidDiscriminator(detail.Value.GetString())
+                                );
                         }
                     }
                     else if (detail.NameEquals("unlock_type"))
                     {
                         if (!detail.Value.ValueEquals("BankTab"))
                         {
-                            throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
+                            throw new InvalidOperationException(
+                                Strings.InvalidDiscriminator(detail.Value.GetString())
+                                );
                         }
                     }
                     else if (missingMemberBehavior == MissingMemberBehavior.Error)
@@ -3702,7 +3863,9 @@ public static class ItemReader
             {
                 if (!member.Value.ValueEquals("Consumable"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -3757,14 +3920,18 @@ public static class ItemReader
                     {
                         if (!detail.Value.ValueEquals("Unlock"))
                         {
-                            throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
+                            throw new InvalidOperationException(
+                                Strings.InvalidDiscriminator(detail.Value.GetString())
+                                );
                         }
                     }
                     else if (detail.NameEquals("unlock_type"))
                     {
                         if (!detail.Value.ValueEquals("BuildLibrarySlot"))
                         {
-                            throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
+                            throw new InvalidOperationException(
+                                Strings.InvalidDiscriminator(detail.Value.GetString())
+                                );
                         }
                     }
                     else if (missingMemberBehavior == MissingMemberBehavior.Error)
@@ -3817,7 +3984,9 @@ public static class ItemReader
             {
                 if (!member.Value.ValueEquals("Consumable"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -3872,14 +4041,18 @@ public static class ItemReader
                     {
                         if (!detail.Value.ValueEquals("Unlock"))
                         {
-                            throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
+                            throw new InvalidOperationException(
+                                Strings.InvalidDiscriminator(detail.Value.GetString())
+                                );
                         }
                     }
                     else if (detail.NameEquals("unlock_type"))
                     {
                         if (!detail.Value.ValueEquals("BuildLoadoutTab"))
                         {
-                            throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
+                            throw new InvalidOperationException(
+                                Strings.InvalidDiscriminator(detail.Value.GetString())
+                                );
                         }
                     }
                     else if (missingMemberBehavior == MissingMemberBehavior.Error)
@@ -3910,7 +4083,10 @@ public static class ItemReader
         };
     }
 
-    private static ChampionUnlocker ReadChampionUnlocker(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    private static ChampionUnlocker ReadChampionUnlocker(
+        JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         RequiredMember<string> name = new("name");
         OptionalMember<string> description = new("description");
@@ -3929,7 +4105,9 @@ public static class ItemReader
             {
                 if (!member.Value.ValueEquals("Consumable"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -3984,14 +4162,18 @@ public static class ItemReader
                     {
                         if (!detail.Value.ValueEquals("Unlock"))
                         {
-                            throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
+                            throw new InvalidOperationException(
+                                Strings.InvalidDiscriminator(detail.Value.GetString())
+                                );
                         }
                     }
                     else if (detail.NameEquals("unlock_type"))
                     {
                         if (!detail.Value.ValueEquals("Champion"))
                         {
-                            throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
+                            throw new InvalidOperationException(
+                                Strings.InvalidDiscriminator(detail.Value.GetString())
+                                );
                         }
                     }
                     else if (missingMemberBehavior == MissingMemberBehavior.Error)
@@ -4044,7 +4226,9 @@ public static class ItemReader
             {
                 if (!member.Value.ValueEquals("Consumable"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -4099,14 +4283,18 @@ public static class ItemReader
                     {
                         if (!detail.Value.ValueEquals("Unlock"))
                         {
-                            throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
+                            throw new InvalidOperationException(
+                                Strings.InvalidDiscriminator(detail.Value.GetString())
+                                );
                         }
                     }
                     else if (detail.NameEquals("unlock_type"))
                     {
                         if (!detail.Value.ValueEquals("CollectibleCapacity"))
                         {
-                            throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
+                            throw new InvalidOperationException(
+                                Strings.InvalidDiscriminator(detail.Value.GetString())
+                                );
                         }
                     }
                     else if (missingMemberBehavior == MissingMemberBehavior.Error)
@@ -4137,7 +4325,10 @@ public static class ItemReader
         };
     }
 
-    private static ContentUnlocker ReadContentUnlocker(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    private static ContentUnlocker ReadContentUnlocker(
+        JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         RequiredMember<string> name = new("name");
         OptionalMember<string> description = new("description");
@@ -4156,7 +4347,9 @@ public static class ItemReader
             {
                 if (!member.Value.ValueEquals("Consumable"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -4211,14 +4404,18 @@ public static class ItemReader
                     {
                         if (!detail.Value.ValueEquals("Unlock"))
                         {
-                            throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
+                            throw new InvalidOperationException(
+                                Strings.InvalidDiscriminator(detail.Value.GetString())
+                                );
                         }
                     }
                     else if (detail.NameEquals("unlock_type"))
                     {
                         if (!detail.Value.ValueEquals("Content"))
                         {
-                            throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
+                            throw new InvalidOperationException(
+                                Strings.InvalidDiscriminator(detail.Value.GetString())
+                                );
                         }
                     }
                     else if (missingMemberBehavior == MissingMemberBehavior.Error)
@@ -4273,7 +4470,9 @@ public static class ItemReader
             {
                 if (!member.Value.ValueEquals("Consumable"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -4328,14 +4527,18 @@ public static class ItemReader
                     {
                         if (!detail.Value.ValueEquals("Unlock"))
                         {
-                            throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
+                            throw new InvalidOperationException(
+                                Strings.InvalidDiscriminator(detail.Value.GetString())
+                                );
                         }
                     }
                     else if (detail.NameEquals("unlock_type"))
                     {
                         if (!detail.Value.ValueEquals("CraftingRecipe"))
                         {
-                            throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
+                            throw new InvalidOperationException(
+                                Strings.InvalidDiscriminator(detail.Value.GetString())
+                                );
                         }
                     }
                     else if (detail.NameEquals(recipeId.Name))
@@ -4376,7 +4579,10 @@ public static class ItemReader
         };
     }
 
-    private static DyeUnlocker ReadDyeUnlocker(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    private static DyeUnlocker ReadDyeUnlocker(
+        JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         RequiredMember<string> name = new("name");
         OptionalMember<string> description = new("description");
@@ -4396,7 +4602,9 @@ public static class ItemReader
             {
                 if (!member.Value.ValueEquals("Consumable"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -4451,14 +4659,18 @@ public static class ItemReader
                     {
                         if (!detail.Value.ValueEquals("Unlock"))
                         {
-                            throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
+                            throw new InvalidOperationException(
+                                Strings.InvalidDiscriminator(detail.Value.GetString())
+                                );
                         }
                     }
                     else if (detail.NameEquals("unlock_type"))
                     {
                         if (!detail.Value.ValueEquals("Dye"))
                         {
-                            throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
+                            throw new InvalidOperationException(
+                                Strings.InvalidDiscriminator(detail.Value.GetString())
+                                );
                         }
                     }
                     else if (detail.NameEquals(colorId.Name))
@@ -4516,7 +4728,9 @@ public static class ItemReader
             {
                 if (!member.Value.ValueEquals("Consumable"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -4571,14 +4785,18 @@ public static class ItemReader
                     {
                         if (!detail.Value.ValueEquals("Unlock"))
                         {
-                            throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
+                            throw new InvalidOperationException(
+                                Strings.InvalidDiscriminator(detail.Value.GetString())
+                                );
                         }
                     }
                     else if (detail.NameEquals("unlock_type"))
                     {
                         if (!detail.Value.ValueEquals("GearLoadoutTab"))
                         {
-                            throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
+                            throw new InvalidOperationException(
+                                Strings.InvalidDiscriminator(detail.Value.GetString())
+                                );
                         }
                     }
                     else if (missingMemberBehavior == MissingMemberBehavior.Error)
@@ -4631,7 +4849,9 @@ public static class ItemReader
             {
                 if (!member.Value.ValueEquals("Consumable"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -4686,14 +4906,18 @@ public static class ItemReader
                     {
                         if (!detail.Value.ValueEquals("Unlock"))
                         {
-                            throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
+                            throw new InvalidOperationException(
+                                Strings.InvalidDiscriminator(detail.Value.GetString())
+                                );
                         }
                     }
                     else if (detail.NameEquals("unlock_type"))
                     {
                         if (!detail.Value.ValueEquals("GliderSkin"))
                         {
-                            throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
+                            throw new InvalidOperationException(
+                                Strings.InvalidDiscriminator(detail.Value.GetString())
+                                );
                         }
                     }
                     else if (missingMemberBehavior == MissingMemberBehavior.Error)
@@ -4724,7 +4948,10 @@ public static class ItemReader
         };
     }
 
-    private static MinipetUnlocker ReadMinipetUnlocker(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    private static MinipetUnlocker ReadMinipetUnlocker(
+        JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         RequiredMember<string> name = new("name");
         OptionalMember<string> description = new("description");
@@ -4743,7 +4970,9 @@ public static class ItemReader
             {
                 if (!member.Value.ValueEquals("Consumable"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -4798,14 +5027,18 @@ public static class ItemReader
                     {
                         if (!detail.Value.ValueEquals("Unlock"))
                         {
-                            throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
+                            throw new InvalidOperationException(
+                                Strings.InvalidDiscriminator(detail.Value.GetString())
+                                );
                         }
                     }
                     else if (detail.NameEquals("unlock_type"))
                     {
                         if (!detail.Value.ValueEquals("Minipet"))
                         {
-                            throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
+                            throw new InvalidOperationException(
+                                Strings.InvalidDiscriminator(detail.Value.GetString())
+                                );
                         }
                     }
                     else if (missingMemberBehavior == MissingMemberBehavior.Error)
@@ -4836,7 +5069,10 @@ public static class ItemReader
         };
     }
 
-    private static MsUnlocker ReadMsUnlocker(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    private static MsUnlocker ReadMsUnlocker(
+        JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         RequiredMember<string> name = new("name");
         OptionalMember<string> description = new("description");
@@ -4855,7 +5091,9 @@ public static class ItemReader
             {
                 if (!member.Value.ValueEquals("Consumable"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -4910,14 +5148,18 @@ public static class ItemReader
                     {
                         if (!detail.Value.ValueEquals("Unlock"))
                         {
-                            throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
+                            throw new InvalidOperationException(
+                                Strings.InvalidDiscriminator(detail.Value.GetString())
+                                );
                         }
                     }
                     else if (detail.NameEquals("unlock_type"))
                     {
                         if (!detail.Value.ValueEquals("Ms"))
                         {
-                            throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
+                            throw new InvalidOperationException(
+                                Strings.InvalidDiscriminator(detail.Value.GetString())
+                                );
                         }
                     }
                     else if (missingMemberBehavior == MissingMemberBehavior.Error)
@@ -4948,7 +5190,10 @@ public static class ItemReader
         };
     }
 
-    private static OutfitUnlocker ReadOutfitUnlocker(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    private static OutfitUnlocker ReadOutfitUnlocker(
+        JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         RequiredMember<string> name = new("name");
         OptionalMember<string> description = new("description");
@@ -4967,7 +5212,9 @@ public static class ItemReader
             {
                 if (!member.Value.ValueEquals("Consumable"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -5022,14 +5269,18 @@ public static class ItemReader
                     {
                         if (!detail.Value.ValueEquals("Unlock"))
                         {
-                            throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
+                            throw new InvalidOperationException(
+                                Strings.InvalidDiscriminator(detail.Value.GetString())
+                                );
                         }
                     }
                     else if (detail.NameEquals("unlock_type"))
                     {
                         if (!detail.Value.ValueEquals("Outfit"))
                         {
-                            throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
+                            throw new InvalidOperationException(
+                                Strings.InvalidDiscriminator(detail.Value.GetString())
+                                );
                         }
                     }
                     else if (missingMemberBehavior == MissingMemberBehavior.Error)
@@ -5082,7 +5333,9 @@ public static class ItemReader
             {
                 if (!member.Value.ValueEquals("Consumable"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -5137,14 +5390,18 @@ public static class ItemReader
                     {
                         if (!detail.Value.ValueEquals("Unlock"))
                         {
-                            throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
+                            throw new InvalidOperationException(
+                                Strings.InvalidDiscriminator(detail.Value.GetString())
+                                );
                         }
                     }
                     else if (detail.NameEquals("unlock_type"))
                     {
                         if (!detail.Value.ValueEquals("SharedSlot"))
                         {
-                            throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
+                            throw new InvalidOperationException(
+                                Strings.InvalidDiscriminator(detail.Value.GetString())
+                                );
                         }
                     }
                     else if (missingMemberBehavior == MissingMemberBehavior.Error)
@@ -5175,7 +5432,10 @@ public static class ItemReader
         };
     }
 
-    private static UpgradeRemover ReadUpgradeRemover(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    private static UpgradeRemover ReadUpgradeRemover(
+        JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         RequiredMember<string> name = new("name");
         OptionalMember<string> description = new("description");
@@ -5194,7 +5454,9 @@ public static class ItemReader
             {
                 if (!member.Value.ValueEquals("Consumable"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -5249,7 +5511,9 @@ public static class ItemReader
                     {
                         if (!detail.Value.ValueEquals("UpgradeRemoval"))
                         {
-                            throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
+                            throw new InvalidOperationException(
+                                Strings.InvalidDiscriminator(detail.Value.GetString())
+                                );
                         }
                     }
                     else if (missingMemberBehavior == MissingMemberBehavior.Error)
@@ -5280,7 +5544,10 @@ public static class ItemReader
         };
     }
 
-    private static Utility ReadUtility(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    private static Utility ReadUtility(
+        JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         RequiredMember<string> name = new("name");
         OptionalMember<string> description = new("description");
@@ -5304,7 +5571,9 @@ public static class ItemReader
             {
                 if (!member.Value.ValueEquals("Consumable"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -5359,7 +5628,9 @@ public static class ItemReader
                     {
                         if (!detail.Value.ValueEquals("Utility"))
                         {
-                            throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
+                            throw new InvalidOperationException(
+                                Strings.InvalidDiscriminator(detail.Value.GetString())
+                                );
                         }
                     }
                     else if (detail.NameEquals(duration.Name))
@@ -5415,11 +5686,12 @@ public static class ItemReader
         };
     }
 
-    private static Container ReadContainer(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    private static Container ReadContainer(
+        JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
-        switch (json.GetProperty("details")
-                    .GetProperty("type")
-                    .GetString())
+        switch (json.GetProperty("details").GetProperty("type").GetString())
         {
             case "Default":
                 return ReadDefaultContainer(json, missingMemberBehavior);
@@ -5448,7 +5720,9 @@ public static class ItemReader
             {
                 if (!member.Value.ValueEquals("Container"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -5504,7 +5778,8 @@ public static class ItemReader
                         if (missingMemberBehavior == MissingMemberBehavior.Error)
                         {
                             throw new InvalidOperationException(
-                                Strings.UnexpectedDiscriminator(detail.Value.GetString()));
+                                Strings.UnexpectedDiscriminator(detail.Value.GetString())
+                                );
                         }
                     }
                     else if (missingMemberBehavior == MissingMemberBehavior.Error)
@@ -5535,7 +5810,10 @@ public static class ItemReader
         };
     }
 
-    private static DefaultContainer ReadDefaultContainer(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    private static DefaultContainer ReadDefaultContainer(
+        JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         RequiredMember<string> name = new("name");
         OptionalMember<string> description = new("description");
@@ -5554,7 +5832,9 @@ public static class ItemReader
             {
                 if (!member.Value.ValueEquals("Container"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -5609,7 +5889,9 @@ public static class ItemReader
                     {
                         if (!detail.Value.ValueEquals("Default"))
                         {
-                            throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
+                            throw new InvalidOperationException(
+                                Strings.InvalidDiscriminator(detail.Value.GetString())
+                                );
                         }
                     }
                     else if (missingMemberBehavior == MissingMemberBehavior.Error)
@@ -5640,7 +5922,10 @@ public static class ItemReader
         };
     }
 
-    private static GiftBox ReadGiftBox(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    private static GiftBox ReadGiftBox(
+        JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         RequiredMember<string> name = new("name");
         OptionalMember<string> description = new("description");
@@ -5659,7 +5944,9 @@ public static class ItemReader
             {
                 if (!member.Value.ValueEquals("Container"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -5714,7 +6001,9 @@ public static class ItemReader
                     {
                         if (!detail.Value.ValueEquals("GiftBox"))
                         {
-                            throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
+                            throw new InvalidOperationException(
+                                Strings.InvalidDiscriminator(detail.Value.GetString())
+                                );
                         }
                     }
                     else if (missingMemberBehavior == MissingMemberBehavior.Error)
@@ -5767,7 +6056,9 @@ public static class ItemReader
             {
                 if (!member.Value.ValueEquals("Container"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -5822,7 +6113,9 @@ public static class ItemReader
                     {
                         if (!detail.Value.ValueEquals("Immediate"))
                         {
-                            throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
+                            throw new InvalidOperationException(
+                                Strings.InvalidDiscriminator(detail.Value.GetString())
+                                );
                         }
                     }
                     else if (missingMemberBehavior == MissingMemberBehavior.Error)
@@ -5853,7 +6146,10 @@ public static class ItemReader
         };
     }
 
-    private static OpenUiContainer ReadOpenUiContainer(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    private static OpenUiContainer ReadOpenUiContainer(
+        JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         RequiredMember<string> name = new("name");
         OptionalMember<string> description = new("description");
@@ -5872,7 +6168,9 @@ public static class ItemReader
             {
                 if (!member.Value.ValueEquals("Container"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -5927,7 +6225,9 @@ public static class ItemReader
                     {
                         if (!detail.Value.ValueEquals("OpenUI"))
                         {
-                            throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
+                            throw new InvalidOperationException(
+                                Strings.InvalidDiscriminator(detail.Value.GetString())
+                                );
                         }
                     }
                     else if (missingMemberBehavior == MissingMemberBehavior.Error)
@@ -5958,7 +6258,10 @@ public static class ItemReader
         };
     }
 
-    private static CraftingMaterial ReadCraftingMaterial(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    private static CraftingMaterial ReadCraftingMaterial(
+        JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         RequiredMember<string> name = new("name");
         OptionalMember<string> description = new("description");
@@ -5978,7 +6281,9 @@ public static class ItemReader
             {
                 if (!member.Value.ValueEquals("CraftingMaterial"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -6048,15 +6353,17 @@ public static class ItemReader
             Restrictions = restrictions.GetValues(missingMemberBehavior),
             ChatLink = chatLink.GetValue(),
             Icon = icon.GetValueOrNull(),
-            UpgradesInto = upgradesInto.SelectMany(value => ReadItemUpgrade(value, missingMemberBehavior))
+            UpgradesInto =
+                upgradesInto.SelectMany(value => ReadItemUpgrade(value, missingMemberBehavior))
         };
     }
 
-    private static GatheringTool ReadGatheringTool(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    private static GatheringTool ReadGatheringTool(
+        JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
-        switch (json.GetProperty("details")
-                    .GetProperty("type")
-                    .GetString())
+        switch (json.GetProperty("details").GetProperty("type").GetString())
         {
             case "Foraging":
                 return ReadForagingTool(json, missingMemberBehavior);
@@ -6085,7 +6392,9 @@ public static class ItemReader
             {
                 if (!member.Value.ValueEquals("Gathering"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -6141,7 +6450,8 @@ public static class ItemReader
                         if (missingMemberBehavior == MissingMemberBehavior.Error)
                         {
                             throw new InvalidOperationException(
-                                Strings.UnexpectedDiscriminator(detail.Value.GetString()));
+                                Strings.UnexpectedDiscriminator(detail.Value.GetString())
+                                );
                         }
                     }
                     else if (missingMemberBehavior == MissingMemberBehavior.Error)
@@ -6172,7 +6482,10 @@ public static class ItemReader
         };
     }
 
-    private static ForagingTool ReadForagingTool(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    private static ForagingTool ReadForagingTool(
+        JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         RequiredMember<string> name = new("name");
         OptionalMember<string> description = new("description");
@@ -6191,7 +6504,9 @@ public static class ItemReader
             {
                 if (!member.Value.ValueEquals("Gathering"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -6246,7 +6561,9 @@ public static class ItemReader
                     {
                         if (!detail.Value.ValueEquals("Foraging"))
                         {
-                            throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
+                            throw new InvalidOperationException(
+                                Strings.InvalidDiscriminator(detail.Value.GetString())
+                                );
                         }
                     }
                     else if (missingMemberBehavior == MissingMemberBehavior.Error)
@@ -6277,7 +6594,10 @@ public static class ItemReader
         };
     }
 
-    private static LoggingTool ReadLoggingTool(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    private static LoggingTool ReadLoggingTool(
+        JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         RequiredMember<string> name = new("name");
         OptionalMember<string> description = new("description");
@@ -6296,7 +6616,9 @@ public static class ItemReader
             {
                 if (!member.Value.ValueEquals("Gathering"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -6351,7 +6673,9 @@ public static class ItemReader
                     {
                         if (!detail.Value.ValueEquals("Logging"))
                         {
-                            throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
+                            throw new InvalidOperationException(
+                                Strings.InvalidDiscriminator(detail.Value.GetString())
+                                );
                         }
                     }
                     else if (missingMemberBehavior == MissingMemberBehavior.Error)
@@ -6382,7 +6706,10 @@ public static class ItemReader
         };
     }
 
-    private static MiningTool ReadMiningTool(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    private static MiningTool ReadMiningTool(
+        JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         RequiredMember<string> name = new("name");
         OptionalMember<string> description = new("description");
@@ -6401,7 +6728,9 @@ public static class ItemReader
             {
                 if (!member.Value.ValueEquals("Gathering"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -6456,7 +6785,9 @@ public static class ItemReader
                     {
                         if (!detail.Value.ValueEquals("Mining"))
                         {
-                            throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
+                            throw new InvalidOperationException(
+                                Strings.InvalidDiscriminator(detail.Value.GetString())
+                                );
                         }
                     }
                     else if (missingMemberBehavior == MissingMemberBehavior.Error)
@@ -6487,7 +6818,10 @@ public static class ItemReader
         };
     }
 
-    private static FishingTool ReadFishingTool(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    private static FishingTool ReadFishingTool(
+        JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         RequiredMember<string> name = new("name");
         OptionalMember<string> description = new("description");
@@ -6506,7 +6840,9 @@ public static class ItemReader
             {
                 if (!member.Value.ValueEquals("Gathering"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -6561,7 +6897,9 @@ public static class ItemReader
                     {
                         if (!detail.Value.ValueEquals("Foo")) // BUG???
                         {
-                            throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
+                            throw new InvalidOperationException(
+                                Strings.InvalidDiscriminator(detail.Value.GetString())
+                                );
                         }
                     }
                     else if (missingMemberBehavior == MissingMemberBehavior.Error)
@@ -6594,9 +6932,7 @@ public static class ItemReader
 
     private static Gizmo ReadGizmo(JsonElement json, MissingMemberBehavior missingMemberBehavior)
     {
-        switch (json.GetProperty("details")
-                    .GetProperty("type")
-                    .GetString())
+        switch (json.GetProperty("details").GetProperty("type").GetString())
         {
             case "ContainerKey":
                 return ReadContainerKey(json, missingMemberBehavior);
@@ -6625,7 +6961,9 @@ public static class ItemReader
             {
                 if (!member.Value.ValueEquals("Gizmo"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -6681,7 +7019,8 @@ public static class ItemReader
                         if (missingMemberBehavior == MissingMemberBehavior.Error)
                         {
                             throw new InvalidOperationException(
-                                Strings.UnexpectedDiscriminator(detail.Value.GetString()));
+                                Strings.UnexpectedDiscriminator(detail.Value.GetString())
+                                );
                         }
                     }
                     else if (missingMemberBehavior == MissingMemberBehavior.Error)
@@ -6712,7 +7051,10 @@ public static class ItemReader
         };
     }
 
-    private static ContainerKey ReadContainerKey(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    private static ContainerKey ReadContainerKey(
+        JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         RequiredMember<string> name = new("name");
         OptionalMember<string> description = new("description");
@@ -6731,7 +7073,9 @@ public static class ItemReader
             {
                 if (!member.Value.ValueEquals("Gizmo"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -6786,7 +7130,9 @@ public static class ItemReader
                     {
                         if (!detail.Value.ValueEquals("ContainerKey"))
                         {
-                            throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
+                            throw new InvalidOperationException(
+                                Strings.InvalidDiscriminator(detail.Value.GetString())
+                                );
                         }
                     }
                     else if (missingMemberBehavior == MissingMemberBehavior.Error)
@@ -6817,7 +7163,10 @@ public static class ItemReader
         };
     }
 
-    private static DefaultGizmo ReadDefaultGizmo(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    private static DefaultGizmo ReadDefaultGizmo(
+        JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         RequiredMember<string> name = new("name");
         OptionalMember<string> description = new("description");
@@ -6838,7 +7187,9 @@ public static class ItemReader
             {
                 if (!member.Value.ValueEquals("Gizmo"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -6893,7 +7244,9 @@ public static class ItemReader
                     {
                         if (!detail.Value.ValueEquals("Default"))
                         {
-                            throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
+                            throw new InvalidOperationException(
+                                Strings.InvalidDiscriminator(detail.Value.GetString())
+                                );
                         }
                     }
                     else if (detail.NameEquals(vendorIds.Name))
@@ -6956,7 +7309,9 @@ public static class ItemReader
             {
                 if (!member.Value.ValueEquals("Gizmo"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -7011,7 +7366,9 @@ public static class ItemReader
                     {
                         if (!detail.Value.ValueEquals("RentableContractNpc"))
                         {
-                            throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
+                            throw new InvalidOperationException(
+                                Strings.InvalidDiscriminator(detail.Value.GetString())
+                                );
                         }
                     }
                     else if (missingMemberBehavior == MissingMemberBehavior.Error)
@@ -7064,7 +7421,9 @@ public static class ItemReader
             {
                 if (!member.Value.ValueEquals("Gizmo"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -7119,7 +7478,9 @@ public static class ItemReader
                     {
                         if (!detail.Value.ValueEquals("UnlimitedConsumable"))
                         {
-                            throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
+                            throw new InvalidOperationException(
+                                Strings.InvalidDiscriminator(detail.Value.GetString())
+                                );
                         }
                     }
                     else if (missingMemberBehavior == MissingMemberBehavior.Error)
@@ -7169,7 +7530,9 @@ public static class ItemReader
             {
                 if (!member.Value.ValueEquals("Key"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -7238,7 +7601,10 @@ public static class ItemReader
         };
     }
 
-    private static Minipet ReadMinipet(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    private static Minipet ReadMinipet(
+        JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         RequiredMember<string> name = new("name");
         OptionalMember<string> description = new("description");
@@ -7258,7 +7624,9 @@ public static class ItemReader
             {
                 if (!member.Value.ValueEquals("MiniPet"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -7344,9 +7712,7 @@ public static class ItemReader
 
     private static Tool ReadTool(JsonElement json, MissingMemberBehavior missingMemberBehavior)
     {
-        switch (json.GetProperty("details")
-                    .GetProperty("type")
-                    .GetString())
+        switch (json.GetProperty("details").GetProperty("type").GetString())
         {
             case "Salvage":
                 return ReadSalvageTool(json, missingMemberBehavior);
@@ -7418,7 +7784,8 @@ public static class ItemReader
                         if (missingMemberBehavior == MissingMemberBehavior.Error)
                         {
                             throw new InvalidOperationException(
-                                Strings.UnexpectedDiscriminator(detail.Value.GetString()));
+                                Strings.UnexpectedDiscriminator(detail.Value.GetString())
+                                );
                         }
                     }
                     else if (missingMemberBehavior == MissingMemberBehavior.Error)
@@ -7449,7 +7816,10 @@ public static class ItemReader
         };
     }
 
-    private static SalvageTool ReadSalvageTool(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    private static SalvageTool ReadSalvageTool(
+        JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         RequiredMember<string> name = new("name");
         OptionalMember<string> description = new("description");
@@ -7469,7 +7839,9 @@ public static class ItemReader
             {
                 if (!member.Value.ValueEquals("Tool"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -7524,7 +7896,9 @@ public static class ItemReader
                     {
                         if (!detail.Value.ValueEquals("Salvage"))
                         {
-                            throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
+                            throw new InvalidOperationException(
+                                Strings.InvalidDiscriminator(detail.Value.GetString())
+                                );
                         }
                     }
                     else if (detail.NameEquals(charges.Name))
@@ -7560,11 +7934,12 @@ public static class ItemReader
         };
     }
 
-    private static Trinket ReadTrinket(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    private static Trinket ReadTrinket(
+        JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
-        switch (json.GetProperty("details")
-                    .GetProperty("type")
-                    .GetString())
+        switch (json.GetProperty("details").GetProperty("type").GetString())
         {
             case "Accessory":
                 return ReadAccessory(json, missingMemberBehavior);
@@ -7598,7 +7973,9 @@ public static class ItemReader
             {
                 if (!member.Value.ValueEquals("Gizmo"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -7662,7 +8039,8 @@ public static class ItemReader
                         if (missingMemberBehavior == MissingMemberBehavior.Error)
                         {
                             throw new InvalidOperationException(
-                                Strings.UnexpectedDiscriminator(detail.Value.GetString()));
+                                Strings.UnexpectedDiscriminator(detail.Value.GetString())
+                                );
                         }
                     }
                     else if (detail.NameEquals(infusionSlots.Name))
@@ -7710,17 +8088,23 @@ public static class ItemReader
             Restrictions = restrictions.GetValues(missingMemberBehavior),
             ChatLink = chatLink.GetValue(),
             Icon = icon.GetValueOrNull(),
-            InfusionSlots = infusionSlots.SelectMany(value => ReadInfusionSlot(value, missingMemberBehavior)),
+            InfusionSlots =
+                infusionSlots.SelectMany(value => ReadInfusionSlot(value, missingMemberBehavior)),
             AttributeAdjustment = attributeAdjustment.GetValue(),
             StatChoices = statChoices.SelectMany(value => value.GetInt32()),
             Prefix = infixUpgrade.Select(value => ReadInfixUpgrade(value, missingMemberBehavior)),
             SuffixItemId = suffixItemId.GetValue(),
-            UpgradesInto = upgradesInto.SelectMany(value => ReadItemUpgrade(value, missingMemberBehavior)),
-            UpgradesFrom = upgradesFrom.SelectMany(value => ReadItemUpgrade(value, missingMemberBehavior))
+            UpgradesInto =
+                upgradesInto.SelectMany(value => ReadItemUpgrade(value, missingMemberBehavior)),
+            UpgradesFrom =
+                upgradesFrom.SelectMany(value => ReadItemUpgrade(value, missingMemberBehavior))
         };
     }
 
-    private static Accessory ReadAccessory(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    private static Accessory ReadAccessory(
+        JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         RequiredMember<string> name = new("name");
         OptionalMember<string> description = new("description");
@@ -7746,7 +8130,9 @@ public static class ItemReader
             {
                 if (!member.Value.ValueEquals("Trinket"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -7809,7 +8195,9 @@ public static class ItemReader
                     {
                         if (!detail.Value.ValueEquals("Accessory"))
                         {
-                            throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
+                            throw new InvalidOperationException(
+                                Strings.InvalidDiscriminator(detail.Value.GetString())
+                                );
                         }
                     }
                     else if (detail.NameEquals(infusionSlots.Name))
@@ -7857,13 +8245,16 @@ public static class ItemReader
             Restrictions = restrictions.GetValues(missingMemberBehavior),
             ChatLink = chatLink.GetValue(),
             Icon = icon.GetValueOrNull(),
-            InfusionSlots = infusionSlots.SelectMany(value => ReadInfusionSlot(value, missingMemberBehavior)),
+            InfusionSlots =
+                infusionSlots.SelectMany(value => ReadInfusionSlot(value, missingMemberBehavior)),
             AttributeAdjustment = attributeAdjustment.GetValue(),
             StatChoices = statChoices.SelectMany(value => value.GetInt32()),
             Prefix = infixUpgrade.Select(value => ReadInfixUpgrade(value, missingMemberBehavior)),
             SuffixItemId = suffixItemId.GetValue(),
-            UpgradesInto = upgradesInto.SelectMany(value => ReadItemUpgrade(value, missingMemberBehavior)),
-            UpgradesFrom = upgradesFrom.SelectMany(value => ReadItemUpgrade(value, missingMemberBehavior))
+            UpgradesInto =
+                upgradesInto.SelectMany(value => ReadItemUpgrade(value, missingMemberBehavior)),
+            UpgradesFrom =
+                upgradesFrom.SelectMany(value => ReadItemUpgrade(value, missingMemberBehavior))
         };
     }
 
@@ -7893,7 +8284,9 @@ public static class ItemReader
             {
                 if (!member.Value.ValueEquals("Trinket"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -7956,7 +8349,9 @@ public static class ItemReader
                     {
                         if (!detail.Value.ValueEquals("Amulet"))
                         {
-                            throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
+                            throw new InvalidOperationException(
+                                Strings.InvalidDiscriminator(detail.Value.GetString())
+                                );
                         }
                     }
                     else if (detail.NameEquals(infusionSlots.Name))
@@ -8004,13 +8399,16 @@ public static class ItemReader
             Restrictions = restrictions.GetValues(missingMemberBehavior),
             ChatLink = chatLink.GetValue(),
             Icon = icon.GetValueOrNull(),
-            InfusionSlots = infusionSlots.SelectMany(value => ReadInfusionSlot(value, missingMemberBehavior)),
+            InfusionSlots =
+                infusionSlots.SelectMany(value => ReadInfusionSlot(value, missingMemberBehavior)),
             AttributeAdjustment = attributeAdjustment.GetValue(),
             StatChoices = statChoices.SelectMany(value => value.GetInt32()),
             Prefix = infixUpgrade.Select(value => ReadInfixUpgrade(value, missingMemberBehavior)),
             SuffixItemId = suffixItemId.GetValue(),
-            UpgradesInto = upgradesInto.SelectMany(value => ReadItemUpgrade(value, missingMemberBehavior)),
-            UpgradesFrom = upgradesFrom.SelectMany(value => ReadItemUpgrade(value, missingMemberBehavior))
+            UpgradesInto =
+                upgradesInto.SelectMany(value => ReadItemUpgrade(value, missingMemberBehavior)),
+            UpgradesFrom =
+                upgradesFrom.SelectMany(value => ReadItemUpgrade(value, missingMemberBehavior))
         };
     }
 
@@ -8040,7 +8438,9 @@ public static class ItemReader
             {
                 if (!member.Value.ValueEquals("Trinket"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -8103,7 +8503,9 @@ public static class ItemReader
                     {
                         if (!detail.Value.ValueEquals("Ring"))
                         {
-                            throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
+                            throw new InvalidOperationException(
+                                Strings.InvalidDiscriminator(detail.Value.GetString())
+                                );
                         }
                     }
                     else if (detail.NameEquals(infusionSlots.Name))
@@ -8151,13 +8553,16 @@ public static class ItemReader
             Restrictions = restrictions.GetValues(missingMemberBehavior),
             ChatLink = chatLink.GetValue(),
             Icon = icon.GetValueOrNull(),
-            InfusionSlots = infusionSlots.SelectMany(value => ReadInfusionSlot(value, missingMemberBehavior)),
+            InfusionSlots =
+                infusionSlots.SelectMany(value => ReadInfusionSlot(value, missingMemberBehavior)),
             AttributeAdjustment = attributeAdjustment.GetValue(),
             StatChoices = statChoices.SelectMany(value => value.GetInt32()),
             Prefix = infixUpgrade.Select(value => ReadInfixUpgrade(value, missingMemberBehavior)),
             SuffixItemId = suffixItemId.GetValue(),
-            UpgradesInto = upgradesInto.SelectMany(value => ReadItemUpgrade(value, missingMemberBehavior)),
-            UpgradesFrom = upgradesFrom.SelectMany(value => ReadItemUpgrade(value, missingMemberBehavior))
+            UpgradesInto =
+                upgradesInto.SelectMany(value => ReadItemUpgrade(value, missingMemberBehavior)),
+            UpgradesFrom =
+                upgradesFrom.SelectMany(value => ReadItemUpgrade(value, missingMemberBehavior))
         };
     }
 
@@ -8180,7 +8585,9 @@ public static class ItemReader
             {
                 if (!member.Value.ValueEquals("Trophy"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -8249,11 +8656,12 @@ public static class ItemReader
         };
     }
 
-    private static UpgradeComponent ReadUpgradeComponent(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    private static UpgradeComponent ReadUpgradeComponent(
+        JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
-        switch (json.GetProperty("details")
-                    .GetProperty("type")
-                    .GetString())
+        switch (json.GetProperty("details").GetProperty("type").GetString())
         {
             case "Default":
                 return ReadDefaultUpgradeComponent(json, missingMemberBehavior);
@@ -8287,7 +8695,9 @@ public static class ItemReader
             {
                 if (!member.Value.ValueEquals("UpgradeComponent"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -8343,7 +8753,8 @@ public static class ItemReader
                         if (missingMemberBehavior == MissingMemberBehavior.Error)
                         {
                             throw new InvalidOperationException(
-                                Strings.UnexpectedDiscriminator(detail.Value.GetString()));
+                                Strings.UnexpectedDiscriminator(detail.Value.GetString())
+                                );
                         }
                     }
                     else if (detail.NameEquals(upgradeComponentFlags.Name))
@@ -8427,7 +8838,9 @@ public static class ItemReader
             {
                 if (!member.Value.ValueEquals("UpgradeComponent"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -8482,7 +8895,9 @@ public static class ItemReader
                     {
                         if (!detail.Value.ValueEquals("Default"))
                         {
-                            throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
+                            throw new InvalidOperationException(
+                                Strings.InvalidDiscriminator(detail.Value.GetString())
+                                );
                         }
                     }
                     else if (detail.NameEquals(upgradeComponentFlags.Name))
@@ -8567,7 +8982,9 @@ public static class ItemReader
             {
                 if (!member.Value.ValueEquals("UpgradeComponent"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -8622,7 +9039,9 @@ public static class ItemReader
                     {
                         if (!detail.Value.ValueEquals("Gem"))
                         {
-                            throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
+                            throw new InvalidOperationException(
+                                Strings.InvalidDiscriminator(detail.Value.GetString())
+                                );
                         }
                     }
                     else if (detail.NameEquals(upgradeComponentFlags.Name))
@@ -8703,7 +9122,9 @@ public static class ItemReader
             {
                 if (!member.Value.ValueEquals("UpgradeComponent"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -8758,7 +9179,9 @@ public static class ItemReader
                     {
                         if (!detail.Value.ValueEquals("Rune"))
                         {
-                            throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
+                            throw new InvalidOperationException(
+                                Strings.InvalidDiscriminator(detail.Value.GetString())
+                                );
                         }
                     }
                     else if (detail.NameEquals(upgradeComponentFlags.Name))
@@ -8843,7 +9266,9 @@ public static class ItemReader
             {
                 if (!member.Value.ValueEquals("UpgradeComponent"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -8898,7 +9323,9 @@ public static class ItemReader
                     {
                         if (!detail.Value.ValueEquals("Sigil"))
                         {
-                            throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
+                            throw new InvalidOperationException(
+                                Strings.InvalidDiscriminator(detail.Value.GetString())
+                                );
                         }
                     }
                     else if (detail.NameEquals(upgradeComponentFlags.Name))
@@ -8956,9 +9383,7 @@ public static class ItemReader
 
     private static Weapon ReadWeapon(JsonElement json, MissingMemberBehavior missingMemberBehavior)
     {
-        switch (json.GetProperty("details")
-                    .GetProperty("type")
-                    .GetString())
+        switch (json.GetProperty("details").GetProperty("type").GetString())
         {
             case "Axe":
                 return ReadAxe(json, missingMemberBehavior);
@@ -9036,7 +9461,9 @@ public static class ItemReader
             {
                 if (!member.Value.ValueEquals("Weapon"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -9096,7 +9523,8 @@ public static class ItemReader
                         if (missingMemberBehavior == MissingMemberBehavior.Error)
                         {
                             throw new InvalidOperationException(
-                                Strings.UnexpectedDiscriminator(detail.Value.GetString()));
+                                Strings.UnexpectedDiscriminator(detail.Value.GetString())
+                                );
                         }
                     }
                     else if (detail.NameEquals(damageType.Name))
@@ -9169,7 +9597,8 @@ public static class ItemReader
             MinPower = minPower.GetValue(),
             MaxPower = maxPower.GetValue(),
             Defense = defense.GetValue(),
-            InfusionSlots = infusionSlots.SelectMany(value => ReadInfusionSlot(value, missingMemberBehavior)),
+            InfusionSlots =
+                infusionSlots.SelectMany(value => ReadInfusionSlot(value, missingMemberBehavior)),
             AttributeAdjustment = attributeAdjustment.GetValue(),
             StatChoices = statChoices.SelectMany(value => value.GetInt32()),
             Prefix = infixUpgrade.Select(value => ReadInfixUpgrade(value, missingMemberBehavior)),
@@ -9208,7 +9637,9 @@ public static class ItemReader
             {
                 if (!member.Value.ValueEquals("Weapon"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -9267,7 +9698,9 @@ public static class ItemReader
                     {
                         if (!detail.Value.ValueEquals("Axe"))
                         {
-                            throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
+                            throw new InvalidOperationException(
+                                Strings.InvalidDiscriminator(detail.Value.GetString())
+                                );
                         }
                     }
                     else if (detail.NameEquals(damageType.Name))
@@ -9340,7 +9773,8 @@ public static class ItemReader
             MinPower = minPower.GetValue(),
             MaxPower = maxPower.GetValue(),
             Defense = defense.GetValue(),
-            InfusionSlots = infusionSlots.SelectMany(value => ReadInfusionSlot(value, missingMemberBehavior)),
+            InfusionSlots =
+                infusionSlots.SelectMany(value => ReadInfusionSlot(value, missingMemberBehavior)),
             AttributeAdjustment = attributeAdjustment.GetValue(),
             StatChoices = statChoices.SelectMany(value => value.GetInt32()),
             Prefix = infixUpgrade.Select(value => ReadInfixUpgrade(value, missingMemberBehavior)),
@@ -9379,7 +9813,9 @@ public static class ItemReader
             {
                 if (!member.Value.ValueEquals("Weapon"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -9438,7 +9874,9 @@ public static class ItemReader
                     {
                         if (!detail.Value.ValueEquals("Dagger"))
                         {
-                            throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
+                            throw new InvalidOperationException(
+                                Strings.InvalidDiscriminator(detail.Value.GetString())
+                                );
                         }
                     }
                     else if (detail.NameEquals(damageType.Name))
@@ -9511,7 +9949,8 @@ public static class ItemReader
             MinPower = minPower.GetValue(),
             MaxPower = maxPower.GetValue(),
             Defense = defense.GetValue(),
-            InfusionSlots = infusionSlots.SelectMany(value => ReadInfusionSlot(value, missingMemberBehavior)),
+            InfusionSlots =
+                infusionSlots.SelectMany(value => ReadInfusionSlot(value, missingMemberBehavior)),
             AttributeAdjustment = attributeAdjustment.GetValue(),
             StatChoices = statChoices.SelectMany(value => value.GetInt32()),
             Prefix = infixUpgrade.Select(value => ReadInfixUpgrade(value, missingMemberBehavior)),
@@ -9550,7 +9989,9 @@ public static class ItemReader
             {
                 if (!member.Value.ValueEquals("Weapon"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -9609,7 +10050,9 @@ public static class ItemReader
                     {
                         if (!detail.Value.ValueEquals("Focus"))
                         {
-                            throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
+                            throw new InvalidOperationException(
+                                Strings.InvalidDiscriminator(detail.Value.GetString())
+                                );
                         }
                     }
                     else if (detail.NameEquals(damageType.Name))
@@ -9682,7 +10125,8 @@ public static class ItemReader
             MinPower = minPower.GetValue(),
             MaxPower = maxPower.GetValue(),
             Defense = defense.GetValue(),
-            InfusionSlots = infusionSlots.SelectMany(value => ReadInfusionSlot(value, missingMemberBehavior)),
+            InfusionSlots =
+                infusionSlots.SelectMany(value => ReadInfusionSlot(value, missingMemberBehavior)),
             AttributeAdjustment = attributeAdjustment.GetValue(),
             StatChoices = statChoices.SelectMany(value => value.GetInt32()),
             Prefix = infixUpgrade.Select(value => ReadInfixUpgrade(value, missingMemberBehavior)),
@@ -9691,7 +10135,10 @@ public static class ItemReader
         };
     }
 
-    private static Greatsword ReadGreatsword(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    private static Greatsword ReadGreatsword(
+        JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         RequiredMember<string> name = new("name");
         OptionalMember<string> description = new("description");
@@ -9721,7 +10168,9 @@ public static class ItemReader
             {
                 if (!member.Value.ValueEquals("Weapon"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -9780,7 +10229,9 @@ public static class ItemReader
                     {
                         if (!detail.Value.ValueEquals("Greatsword"))
                         {
-                            throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
+                            throw new InvalidOperationException(
+                                Strings.InvalidDiscriminator(detail.Value.GetString())
+                                );
                         }
                     }
                     else if (detail.NameEquals(damageType.Name))
@@ -9853,7 +10304,8 @@ public static class ItemReader
             MinPower = minPower.GetValue(),
             MaxPower = maxPower.GetValue(),
             Defense = defense.GetValue(),
-            InfusionSlots = infusionSlots.SelectMany(value => ReadInfusionSlot(value, missingMemberBehavior)),
+            InfusionSlots =
+                infusionSlots.SelectMany(value => ReadInfusionSlot(value, missingMemberBehavior)),
             AttributeAdjustment = attributeAdjustment.GetValue(),
             StatChoices = statChoices.SelectMany(value => value.GetInt32()),
             Prefix = infixUpgrade.Select(value => ReadInfixUpgrade(value, missingMemberBehavior)),
@@ -9892,7 +10344,9 @@ public static class ItemReader
             {
                 if (!member.Value.ValueEquals("Weapon"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -9951,7 +10405,9 @@ public static class ItemReader
                     {
                         if (!detail.Value.ValueEquals("Hammer"))
                         {
-                            throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
+                            throw new InvalidOperationException(
+                                Strings.InvalidDiscriminator(detail.Value.GetString())
+                                );
                         }
                     }
                     else if (detail.NameEquals(damageType.Name))
@@ -10024,7 +10480,8 @@ public static class ItemReader
             MinPower = minPower.GetValue(),
             MaxPower = maxPower.GetValue(),
             Defense = defense.GetValue(),
-            InfusionSlots = infusionSlots.SelectMany(value => ReadInfusionSlot(value, missingMemberBehavior)),
+            InfusionSlots =
+                infusionSlots.SelectMany(value => ReadInfusionSlot(value, missingMemberBehavior)),
             AttributeAdjustment = attributeAdjustment.GetValue(),
             StatChoices = statChoices.SelectMany(value => value.GetInt32()),
             Prefix = infixUpgrade.Select(value => ReadInfixUpgrade(value, missingMemberBehavior)),
@@ -10063,7 +10520,9 @@ public static class ItemReader
             {
                 if (!member.Value.ValueEquals("Weapon"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -10122,7 +10581,9 @@ public static class ItemReader
                     {
                         if (!detail.Value.ValueEquals("Harpoon"))
                         {
-                            throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
+                            throw new InvalidOperationException(
+                                Strings.InvalidDiscriminator(detail.Value.GetString())
+                                );
                         }
                     }
                     else if (detail.NameEquals(damageType.Name))
@@ -10195,7 +10656,8 @@ public static class ItemReader
             MinPower = minPower.GetValue(),
             MaxPower = maxPower.GetValue(),
             Defense = defense.GetValue(),
-            InfusionSlots = infusionSlots.SelectMany(value => ReadInfusionSlot(value, missingMemberBehavior)),
+            InfusionSlots =
+                infusionSlots.SelectMany(value => ReadInfusionSlot(value, missingMemberBehavior)),
             AttributeAdjustment = attributeAdjustment.GetValue(),
             StatChoices = statChoices.SelectMany(value => value.GetInt32()),
             Prefix = infixUpgrade.Select(value => ReadInfixUpgrade(value, missingMemberBehavior)),
@@ -10204,7 +10666,10 @@ public static class ItemReader
         };
     }
 
-    private static LargeBundle ReadLargeBundle(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    private static LargeBundle ReadLargeBundle(
+        JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         RequiredMember<string> name = new("name");
         OptionalMember<string> description = new("description");
@@ -10234,7 +10699,9 @@ public static class ItemReader
             {
                 if (!member.Value.ValueEquals("Weapon"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -10293,7 +10760,9 @@ public static class ItemReader
                     {
                         if (!detail.Value.ValueEquals("LargeBundle"))
                         {
-                            throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
+                            throw new InvalidOperationException(
+                                Strings.InvalidDiscriminator(detail.Value.GetString())
+                                );
                         }
                     }
                     else if (detail.NameEquals(damageType.Name))
@@ -10366,7 +10835,8 @@ public static class ItemReader
             MinPower = minPower.GetValue(),
             MaxPower = maxPower.GetValue(),
             Defense = defense.GetValue(),
-            InfusionSlots = infusionSlots.SelectMany(value => ReadInfusionSlot(value, missingMemberBehavior)),
+            InfusionSlots =
+                infusionSlots.SelectMany(value => ReadInfusionSlot(value, missingMemberBehavior)),
             AttributeAdjustment = attributeAdjustment.GetValue(),
             StatChoices = statChoices.SelectMany(value => value.GetInt32()),
             Prefix = infixUpgrade.Select(value => ReadInfixUpgrade(value, missingMemberBehavior)),
@@ -10375,7 +10845,10 @@ public static class ItemReader
         };
     }
 
-    private static Longbow ReadLongbow(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    private static Longbow ReadLongbow(
+        JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         RequiredMember<string> name = new("name");
         OptionalMember<string> description = new("description");
@@ -10405,7 +10878,9 @@ public static class ItemReader
             {
                 if (!member.Value.ValueEquals("Weapon"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -10464,7 +10939,9 @@ public static class ItemReader
                     {
                         if (!detail.Value.ValueEquals("LongBow"))
                         {
-                            throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
+                            throw new InvalidOperationException(
+                                Strings.InvalidDiscriminator(detail.Value.GetString())
+                                );
                         }
                     }
                     else if (detail.NameEquals(damageType.Name))
@@ -10537,7 +11014,8 @@ public static class ItemReader
             MinPower = minPower.GetValue(),
             MaxPower = maxPower.GetValue(),
             Defense = defense.GetValue(),
-            InfusionSlots = infusionSlots.SelectMany(value => ReadInfusionSlot(value, missingMemberBehavior)),
+            InfusionSlots =
+                infusionSlots.SelectMany(value => ReadInfusionSlot(value, missingMemberBehavior)),
             AttributeAdjustment = attributeAdjustment.GetValue(),
             StatChoices = statChoices.SelectMany(value => value.GetInt32()),
             Prefix = infixUpgrade.Select(value => ReadInfixUpgrade(value, missingMemberBehavior)),
@@ -10576,7 +11054,9 @@ public static class ItemReader
             {
                 if (!member.Value.ValueEquals("Weapon"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -10635,7 +11115,9 @@ public static class ItemReader
                     {
                         if (!detail.Value.ValueEquals("Mace"))
                         {
-                            throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
+                            throw new InvalidOperationException(
+                                Strings.InvalidDiscriminator(detail.Value.GetString())
+                                );
                         }
                     }
                     else if (detail.NameEquals(damageType.Name))
@@ -10708,7 +11190,8 @@ public static class ItemReader
             MinPower = minPower.GetValue(),
             MaxPower = maxPower.GetValue(),
             Defense = defense.GetValue(),
-            InfusionSlots = infusionSlots.SelectMany(value => ReadInfusionSlot(value, missingMemberBehavior)),
+            InfusionSlots =
+                infusionSlots.SelectMany(value => ReadInfusionSlot(value, missingMemberBehavior)),
             AttributeAdjustment = attributeAdjustment.GetValue(),
             StatChoices = statChoices.SelectMany(value => value.GetInt32()),
             Prefix = infixUpgrade.Select(value => ReadInfixUpgrade(value, missingMemberBehavior)),
@@ -10747,7 +11230,9 @@ public static class ItemReader
             {
                 if (!member.Value.ValueEquals("Weapon"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -10806,7 +11291,9 @@ public static class ItemReader
                     {
                         if (!detail.Value.ValueEquals("Pistol"))
                         {
-                            throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
+                            throw new InvalidOperationException(
+                                Strings.InvalidDiscriminator(detail.Value.GetString())
+                                );
                         }
                     }
                     else if (detail.NameEquals(damageType.Name))
@@ -10879,7 +11366,8 @@ public static class ItemReader
             MinPower = minPower.GetValue(),
             MaxPower = maxPower.GetValue(),
             Defense = defense.GetValue(),
-            InfusionSlots = infusionSlots.SelectMany(value => ReadInfusionSlot(value, missingMemberBehavior)),
+            InfusionSlots =
+                infusionSlots.SelectMany(value => ReadInfusionSlot(value, missingMemberBehavior)),
             AttributeAdjustment = attributeAdjustment.GetValue(),
             StatChoices = statChoices.SelectMany(value => value.GetInt32()),
             Prefix = infixUpgrade.Select(value => ReadInfixUpgrade(value, missingMemberBehavior)),
@@ -10918,7 +11406,9 @@ public static class ItemReader
             {
                 if (!member.Value.ValueEquals("Weapon"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -10977,7 +11467,9 @@ public static class ItemReader
                     {
                         if (!detail.Value.ValueEquals("Rifle"))
                         {
-                            throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
+                            throw new InvalidOperationException(
+                                Strings.InvalidDiscriminator(detail.Value.GetString())
+                                );
                         }
                     }
                     else if (detail.NameEquals(damageType.Name))
@@ -11050,7 +11542,8 @@ public static class ItemReader
             MinPower = minPower.GetValue(),
             MaxPower = maxPower.GetValue(),
             Defense = defense.GetValue(),
-            InfusionSlots = infusionSlots.SelectMany(value => ReadInfusionSlot(value, missingMemberBehavior)),
+            InfusionSlots =
+                infusionSlots.SelectMany(value => ReadInfusionSlot(value, missingMemberBehavior)),
             AttributeAdjustment = attributeAdjustment.GetValue(),
             StatChoices = statChoices.SelectMany(value => value.GetInt32()),
             Prefix = infixUpgrade.Select(value => ReadInfixUpgrade(value, missingMemberBehavior)),
@@ -11059,7 +11552,10 @@ public static class ItemReader
         };
     }
 
-    private static Scepter ReadScepter(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    private static Scepter ReadScepter(
+        JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         RequiredMember<string> name = new("name");
         OptionalMember<string> description = new("description");
@@ -11089,7 +11585,9 @@ public static class ItemReader
             {
                 if (!member.Value.ValueEquals("Weapon"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -11148,7 +11646,9 @@ public static class ItemReader
                     {
                         if (!detail.Value.ValueEquals("Scepter"))
                         {
-                            throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
+                            throw new InvalidOperationException(
+                                Strings.InvalidDiscriminator(detail.Value.GetString())
+                                );
                         }
                     }
                     else if (detail.NameEquals(damageType.Name))
@@ -11221,7 +11721,8 @@ public static class ItemReader
             MinPower = minPower.GetValue(),
             MaxPower = maxPower.GetValue(),
             Defense = defense.GetValue(),
-            InfusionSlots = infusionSlots.SelectMany(value => ReadInfusionSlot(value, missingMemberBehavior)),
+            InfusionSlots =
+                infusionSlots.SelectMany(value => ReadInfusionSlot(value, missingMemberBehavior)),
             AttributeAdjustment = attributeAdjustment.GetValue(),
             StatChoices = statChoices.SelectMany(value => value.GetInt32()),
             Prefix = infixUpgrade.Select(value => ReadInfixUpgrade(value, missingMemberBehavior)),
@@ -11260,7 +11761,9 @@ public static class ItemReader
             {
                 if (!member.Value.ValueEquals("Weapon"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -11319,7 +11822,9 @@ public static class ItemReader
                     {
                         if (!detail.Value.ValueEquals("Shield"))
                         {
-                            throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
+                            throw new InvalidOperationException(
+                                Strings.InvalidDiscriminator(detail.Value.GetString())
+                                );
                         }
                     }
                     else if (detail.NameEquals(damageType.Name))
@@ -11392,7 +11897,8 @@ public static class ItemReader
             MinPower = minPower.GetValue(),
             MaxPower = maxPower.GetValue(),
             Defense = defense.GetValue(),
-            InfusionSlots = infusionSlots.SelectMany(value => ReadInfusionSlot(value, missingMemberBehavior)),
+            InfusionSlots =
+                infusionSlots.SelectMany(value => ReadInfusionSlot(value, missingMemberBehavior)),
             AttributeAdjustment = attributeAdjustment.GetValue(),
             StatChoices = statChoices.SelectMany(value => value.GetInt32()),
             Prefix = infixUpgrade.Select(value => ReadInfixUpgrade(value, missingMemberBehavior)),
@@ -11401,7 +11907,10 @@ public static class ItemReader
         };
     }
 
-    private static Shortbow ReadShortbow(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    private static Shortbow ReadShortbow(
+        JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         RequiredMember<string> name = new("name");
         OptionalMember<string> description = new("description");
@@ -11431,7 +11940,9 @@ public static class ItemReader
             {
                 if (!member.Value.ValueEquals("Weapon"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -11490,7 +12001,9 @@ public static class ItemReader
                     {
                         if (!detail.Value.ValueEquals("ShortBow"))
                         {
-                            throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
+                            throw new InvalidOperationException(
+                                Strings.InvalidDiscriminator(detail.Value.GetString())
+                                );
                         }
                     }
                     else if (detail.NameEquals(damageType.Name))
@@ -11563,7 +12076,8 @@ public static class ItemReader
             MinPower = minPower.GetValue(),
             MaxPower = maxPower.GetValue(),
             Defense = defense.GetValue(),
-            InfusionSlots = infusionSlots.SelectMany(value => ReadInfusionSlot(value, missingMemberBehavior)),
+            InfusionSlots =
+                infusionSlots.SelectMany(value => ReadInfusionSlot(value, missingMemberBehavior)),
             AttributeAdjustment = attributeAdjustment.GetValue(),
             StatChoices = statChoices.SelectMany(value => value.GetInt32()),
             Prefix = infixUpgrade.Select(value => ReadInfixUpgrade(value, missingMemberBehavior)),
@@ -11572,7 +12086,10 @@ public static class ItemReader
         };
     }
 
-    private static SmallBundle ReadSmallBundle(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    private static SmallBundle ReadSmallBundle(
+        JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         RequiredMember<string> name = new("name");
         OptionalMember<string> description = new("description");
@@ -11602,7 +12119,9 @@ public static class ItemReader
             {
                 if (!member.Value.ValueEquals("Weapon"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -11661,7 +12180,9 @@ public static class ItemReader
                     {
                         if (!detail.Value.ValueEquals("SmallBundle"))
                         {
-                            throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
+                            throw new InvalidOperationException(
+                                Strings.InvalidDiscriminator(detail.Value.GetString())
+                                );
                         }
                     }
                     else if (detail.NameEquals(damageType.Name))
@@ -11734,7 +12255,8 @@ public static class ItemReader
             MinPower = minPower.GetValue(),
             MaxPower = maxPower.GetValue(),
             Defense = defense.GetValue(),
-            InfusionSlots = infusionSlots.SelectMany(value => ReadInfusionSlot(value, missingMemberBehavior)),
+            InfusionSlots =
+                infusionSlots.SelectMany(value => ReadInfusionSlot(value, missingMemberBehavior)),
             AttributeAdjustment = attributeAdjustment.GetValue(),
             StatChoices = statChoices.SelectMany(value => value.GetInt32()),
             Prefix = infixUpgrade.Select(value => ReadInfixUpgrade(value, missingMemberBehavior)),
@@ -11743,7 +12265,10 @@ public static class ItemReader
         };
     }
 
-    private static HarpoonGun ReadHarpoonGun(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    private static HarpoonGun ReadHarpoonGun(
+        JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         RequiredMember<string> name = new("name");
         OptionalMember<string> description = new("description");
@@ -11773,7 +12298,9 @@ public static class ItemReader
             {
                 if (!member.Value.ValueEquals("Weapon"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -11832,7 +12359,9 @@ public static class ItemReader
                     {
                         if (!detail.Value.ValueEquals("Speargun"))
                         {
-                            throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
+                            throw new InvalidOperationException(
+                                Strings.InvalidDiscriminator(detail.Value.GetString())
+                                );
                         }
                     }
                     else if (detail.NameEquals(damageType.Name))
@@ -11905,7 +12434,8 @@ public static class ItemReader
             MinPower = minPower.GetValue(),
             MaxPower = maxPower.GetValue(),
             Defense = defense.GetValue(),
-            InfusionSlots = infusionSlots.SelectMany(value => ReadInfusionSlot(value, missingMemberBehavior)),
+            InfusionSlots =
+                infusionSlots.SelectMany(value => ReadInfusionSlot(value, missingMemberBehavior)),
             AttributeAdjustment = attributeAdjustment.GetValue(),
             StatChoices = statChoices.SelectMany(value => value.GetInt32()),
             Prefix = infixUpgrade.Select(value => ReadInfixUpgrade(value, missingMemberBehavior)),
@@ -11944,7 +12474,9 @@ public static class ItemReader
             {
                 if (!member.Value.ValueEquals("Weapon"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -12003,7 +12535,9 @@ public static class ItemReader
                     {
                         if (!detail.Value.ValueEquals("Staff"))
                         {
-                            throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
+                            throw new InvalidOperationException(
+                                Strings.InvalidDiscriminator(detail.Value.GetString())
+                                );
                         }
                     }
                     else if (detail.NameEquals(damageType.Name))
@@ -12076,7 +12610,8 @@ public static class ItemReader
             MinPower = minPower.GetValue(),
             MaxPower = maxPower.GetValue(),
             Defense = defense.GetValue(),
-            InfusionSlots = infusionSlots.SelectMany(value => ReadInfusionSlot(value, missingMemberBehavior)),
+            InfusionSlots =
+                infusionSlots.SelectMany(value => ReadInfusionSlot(value, missingMemberBehavior)),
             AttributeAdjustment = attributeAdjustment.GetValue(),
             StatChoices = statChoices.SelectMany(value => value.GetInt32()),
             Prefix = infixUpgrade.Select(value => ReadInfixUpgrade(value, missingMemberBehavior)),
@@ -12115,7 +12650,9 @@ public static class ItemReader
             {
                 if (!member.Value.ValueEquals("Weapon"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -12174,7 +12711,9 @@ public static class ItemReader
                     {
                         if (!detail.Value.ValueEquals("Sword"))
                         {
-                            throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
+                            throw new InvalidOperationException(
+                                Strings.InvalidDiscriminator(detail.Value.GetString())
+                                );
                         }
                     }
                     else if (detail.NameEquals(damageType.Name))
@@ -12247,7 +12786,8 @@ public static class ItemReader
             MinPower = minPower.GetValue(),
             MaxPower = maxPower.GetValue(),
             Defense = defense.GetValue(),
-            InfusionSlots = infusionSlots.SelectMany(value => ReadInfusionSlot(value, missingMemberBehavior)),
+            InfusionSlots =
+                infusionSlots.SelectMany(value => ReadInfusionSlot(value, missingMemberBehavior)),
             AttributeAdjustment = attributeAdjustment.GetValue(),
             StatChoices = statChoices.SelectMany(value => value.GetInt32()),
             Prefix = infixUpgrade.Select(value => ReadInfixUpgrade(value, missingMemberBehavior)),
@@ -12286,7 +12826,9 @@ public static class ItemReader
             {
                 if (!member.Value.ValueEquals("Weapon"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -12345,7 +12887,9 @@ public static class ItemReader
                     {
                         if (!detail.Value.ValueEquals("Torch"))
                         {
-                            throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
+                            throw new InvalidOperationException(
+                                Strings.InvalidDiscriminator(detail.Value.GetString())
+                                );
                         }
                     }
                     else if (detail.NameEquals(damageType.Name))
@@ -12418,7 +12962,8 @@ public static class ItemReader
             MinPower = minPower.GetValue(),
             MaxPower = maxPower.GetValue(),
             Defense = defense.GetValue(),
-            InfusionSlots = infusionSlots.SelectMany(value => ReadInfusionSlot(value, missingMemberBehavior)),
+            InfusionSlots =
+                infusionSlots.SelectMany(value => ReadInfusionSlot(value, missingMemberBehavior)),
             AttributeAdjustment = attributeAdjustment.GetValue(),
             StatChoices = statChoices.SelectMany(value => value.GetInt32()),
             Prefix = infixUpgrade.Select(value => ReadInfixUpgrade(value, missingMemberBehavior)),
@@ -12457,7 +13002,9 @@ public static class ItemReader
             {
                 if (!member.Value.ValueEquals("Weapon"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -12516,7 +13063,9 @@ public static class ItemReader
                     {
                         if (!detail.Value.ValueEquals("Toy"))
                         {
-                            throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
+                            throw new InvalidOperationException(
+                                Strings.InvalidDiscriminator(detail.Value.GetString())
+                                );
                         }
                     }
                     else if (detail.NameEquals(damageType.Name))
@@ -12589,7 +13138,8 @@ public static class ItemReader
             MinPower = minPower.GetValue(),
             MaxPower = maxPower.GetValue(),
             Defense = defense.GetValue(),
-            InfusionSlots = infusionSlots.SelectMany(value => ReadInfusionSlot(value, missingMemberBehavior)),
+            InfusionSlots =
+                infusionSlots.SelectMany(value => ReadInfusionSlot(value, missingMemberBehavior)),
             AttributeAdjustment = attributeAdjustment.GetValue(),
             StatChoices = statChoices.SelectMany(value => value.GetInt32()),
             Prefix = infixUpgrade.Select(value => ReadInfixUpgrade(value, missingMemberBehavior)),
@@ -12598,7 +13148,10 @@ public static class ItemReader
         };
     }
 
-    private static ToyTwoHanded ReadToyTwoHanded(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    private static ToyTwoHanded ReadToyTwoHanded(
+        JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         RequiredMember<string> name = new("name");
         OptionalMember<string> description = new("description");
@@ -12628,7 +13181,9 @@ public static class ItemReader
             {
                 if (!member.Value.ValueEquals("Weapon"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -12687,7 +13242,9 @@ public static class ItemReader
                     {
                         if (!detail.Value.ValueEquals("ToyTwoHanded"))
                         {
-                            throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
+                            throw new InvalidOperationException(
+                                Strings.InvalidDiscriminator(detail.Value.GetString())
+                                );
                         }
                     }
                     else if (detail.NameEquals(damageType.Name))
@@ -12760,7 +13317,8 @@ public static class ItemReader
             MinPower = minPower.GetValue(),
             MaxPower = maxPower.GetValue(),
             Defense = defense.GetValue(),
-            InfusionSlots = infusionSlots.SelectMany(value => ReadInfusionSlot(value, missingMemberBehavior)),
+            InfusionSlots =
+                infusionSlots.SelectMany(value => ReadInfusionSlot(value, missingMemberBehavior)),
             AttributeAdjustment = attributeAdjustment.GetValue(),
             StatChoices = statChoices.SelectMany(value => value.GetInt32()),
             Prefix = infixUpgrade.Select(value => ReadInfixUpgrade(value, missingMemberBehavior)),
@@ -12769,7 +13327,10 @@ public static class ItemReader
         };
     }
 
-    private static Trident ReadTrident(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    private static Trident ReadTrident(
+        JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         RequiredMember<string> name = new("name");
         OptionalMember<string> description = new("description");
@@ -12799,7 +13360,9 @@ public static class ItemReader
             {
                 if (!member.Value.ValueEquals("Weapon"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -12858,7 +13421,9 @@ public static class ItemReader
                     {
                         if (!detail.Value.ValueEquals("Trident"))
                         {
-                            throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
+                            throw new InvalidOperationException(
+                                Strings.InvalidDiscriminator(detail.Value.GetString())
+                                );
                         }
                     }
                     else if (detail.NameEquals(damageType.Name))
@@ -12931,7 +13496,8 @@ public static class ItemReader
             MinPower = minPower.GetValue(),
             MaxPower = maxPower.GetValue(),
             Defense = defense.GetValue(),
-            InfusionSlots = infusionSlots.SelectMany(value => ReadInfusionSlot(value, missingMemberBehavior)),
+            InfusionSlots =
+                infusionSlots.SelectMany(value => ReadInfusionSlot(value, missingMemberBehavior)),
             AttributeAdjustment = attributeAdjustment.GetValue(),
             StatChoices = statChoices.SelectMany(value => value.GetInt32()),
             Prefix = infixUpgrade.Select(value => ReadInfixUpgrade(value, missingMemberBehavior)),
@@ -12940,7 +13506,10 @@ public static class ItemReader
         };
     }
 
-    private static Warhorn ReadWarhorn(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    private static Warhorn ReadWarhorn(
+        JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         RequiredMember<string> name = new("name");
         OptionalMember<string> description = new("description");
@@ -12970,7 +13539,9 @@ public static class ItemReader
             {
                 if (!member.Value.ValueEquals("Weapon"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -13029,7 +13600,9 @@ public static class ItemReader
                     {
                         if (!detail.Value.ValueEquals("Warhorn"))
                         {
-                            throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
+                            throw new InvalidOperationException(
+                                Strings.InvalidDiscriminator(detail.Value.GetString())
+                                );
                         }
                     }
                     else if (detail.NameEquals(damageType.Name))
@@ -13102,7 +13675,8 @@ public static class ItemReader
             MinPower = minPower.GetValue(),
             MaxPower = maxPower.GetValue(),
             Defense = defense.GetValue(),
-            InfusionSlots = infusionSlots.SelectMany(value => ReadInfusionSlot(value, missingMemberBehavior)),
+            InfusionSlots =
+                infusionSlots.SelectMany(value => ReadInfusionSlot(value, missingMemberBehavior)),
             AttributeAdjustment = attributeAdjustment.GetValue(),
             StatChoices = statChoices.SelectMany(value => value.GetInt32()),
             Prefix = infixUpgrade.Select(value => ReadInfixUpgrade(value, missingMemberBehavior)),
@@ -13111,7 +13685,10 @@ public static class ItemReader
         };
     }
 
-    private static PowerCore ReadPowerCore(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    private static PowerCore ReadPowerCore(
+        JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         RequiredMember<string> name = new("name");
         OptionalMember<string> description = new("description");
@@ -13130,7 +13707,9 @@ public static class ItemReader
             {
                 if (!member.Value.ValueEquals("Qux")) // TODO: use real type
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -13199,7 +13778,10 @@ public static class ItemReader
         };
     }
 
-    private static JadeBotUpgrade ReadJadeBotUpgrade(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    private static JadeBotUpgrade ReadJadeBotUpgrade(
+        JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         RequiredMember<string> name = new("name");
         OptionalMember<string> description = new("description");
@@ -13218,7 +13800,9 @@ public static class ItemReader
             {
                 if (!member.Value.ValueEquals("Quux")) // TODO: use real type
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals(name.Name))

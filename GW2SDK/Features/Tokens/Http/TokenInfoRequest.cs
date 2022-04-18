@@ -27,7 +27,10 @@ public sealed class TokenInfoRequest : IHttpRequest<IReplica<TokenInfo>>
 
     public MissingMemberBehavior MissingMemberBehavior { get; init; }
 
-    public async Task<IReplica<TokenInfo>> SendAsync(HttpClient httpClient, CancellationToken cancellationToken)
+    public async Task<IReplica<TokenInfo>> SendAsync(
+        HttpClient httpClient,
+        CancellationToken cancellationToken
+    )
     {
         QueryBuilder search = new();
         var request = Template with
@@ -36,21 +39,24 @@ public sealed class TokenInfoRequest : IHttpRequest<IReplica<TokenInfo>>
             BearerToken = AccessToken
         };
 
-        using var response = await httpClient.SendAsync(request.Compile(),
+        using var response = await httpClient.SendAsync(
+                request.Compile(),
                 HttpCompletionOption.ResponseHeadersRead,
-                cancellationToken)
+                cancellationToken
+                )
             .ConfigureAwait(false);
 
-        await response.EnsureResult(cancellationToken)
-            .ConfigureAwait(false);
+        await response.EnsureResult(cancellationToken).ConfigureAwait(false);
 
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
         var value = TokenInfoReader.Read(json.RootElement, MissingMemberBehavior);
-        return new Replica<TokenInfo>(response.Headers.Date.GetValueOrDefault(),
+        return new Replica<TokenInfo>(
+            response.Headers.Date.GetValueOrDefault(),
             value,
             response.Content.Headers.Expires,
-            response.Content.Headers.LastModified);
+            response.Content.Headers.LastModified
+            );
     }
 }

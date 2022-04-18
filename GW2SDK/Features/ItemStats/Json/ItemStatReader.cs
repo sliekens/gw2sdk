@@ -43,7 +43,10 @@ public static class ItemStatReader
         };
     }
 
-    private static ItemStatAttribute ReadAttribute(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    private static ItemStatAttribute ReadAttribute(
+        JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         RequiredMember<UpgradeAttributeName> attribute = new("attribute");
         RequiredMember<double> multiplier = new("multiplier");

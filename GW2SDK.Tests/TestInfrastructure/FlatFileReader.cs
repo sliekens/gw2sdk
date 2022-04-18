@@ -15,8 +15,10 @@ public static class FlatFileReader
         }
 
         using Stream file = Path.GetExtension(path) == ".gz"
-            ? new GZipStream(File.Open(path, FileMode.Open, FileAccess.Read, FileShare.None),
-                CompressionMode.Decompress)
+            ? new GZipStream(
+                File.Open(path, FileMode.Open, FileAccess.Read, FileShare.None),
+                CompressionMode.Decompress
+                )
             : File.Open(path, FileMode.Open, FileAccess.Read, FileShare.None);
 
         using var stringReader = new StreamReader(file);

@@ -9,7 +9,10 @@ namespace GW2SDK.Stories.Json;
 [PublicAPI]
 public static class BackstoryQuestionReader
 {
-    public static BackstoryQuestion Read(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    public static BackstoryQuestion Read(
+        JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         RequiredMember<int> id = new("id");
         RequiredMember<string> title = new("title");

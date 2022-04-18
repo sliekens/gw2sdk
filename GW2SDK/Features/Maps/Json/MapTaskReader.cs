@@ -63,10 +63,8 @@ public static class MapTaskReader
 
     private static PointF ReadPointF(JsonElement json, MissingMemberBehavior missingMemberBehavior)
     {
-        var x = json[0]
-            .GetSingle();
-        var y = json[1]
-            .GetSingle();
+        var x = json[0].GetSingle();
+        var y = json[1].GetSingle();
         return new PointF(x, y);
     }
 }

@@ -20,7 +20,8 @@ internal static class Check
         }
     }
 
-    internal static void Constant<TEnum>(TEnum value, string parameterName) where TEnum : struct, Enum
+    internal static void Constant<TEnum>(TEnum value, string parameterName)
+        where TEnum : struct, Enum
     {
 #if NET
         if (!Enum.IsDefined(value))
@@ -35,8 +36,10 @@ internal static class Check
     internal static void Collection(IReadOnlyCollection<int> collection, string parameterName) =>
         EnsureCollectionNotNullOrEmpty(collection, parameterName);
 
-    internal static void Collection<TEnum>(IReadOnlyCollection<TEnum> collection, string parameterName)
-        where TEnum : struct, Enum
+    internal static void Collection<TEnum>(
+        IReadOnlyCollection<TEnum> collection,
+        string parameterName
+    ) where TEnum : struct, Enum
     {
         EnsureCollectionNotNullOrEmpty(collection, parameterName);
 
@@ -49,7 +52,10 @@ internal static class Check
             if (!Enum.IsDefined(typeof(TEnum), text))
 #endif
             {
-                throw new ArgumentException("The collection must contain only named constants.", parameterName);
+                throw new ArgumentException(
+                    "The collection must contain only named constants.",
+                    parameterName
+                    );
             }
         }
     }
@@ -63,12 +69,18 @@ internal static class Check
         {
             if (string.IsNullOrEmpty(text))
             {
-                throw new ArgumentException("The collection must not contain empty strings.", parameterName);
+                throw new ArgumentException(
+                    "The collection must not contain empty strings.",
+                    parameterName
+                    );
             }
         }
     }
 
-    private static void EnsureCollectionNotNullOrEmpty<T>(IReadOnlyCollection<T> collection, string parameterName)
+    private static void EnsureCollectionNotNullOrEmpty<T>(
+        IReadOnlyCollection<T> collection,
+        string parameterName
+    )
     {
         if (collection is null)
         {

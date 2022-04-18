@@ -22,8 +22,10 @@ internal class StubHttpMessageHandler : HttpMessageHandler
         HttpRequestMessage request,
         CancellationToken cancellationToken
     ) =>
-        Task.FromResult(new HttpResponseMessage(Code)
-        {
-            Content = new StringContent(Content, Encoding.UTF8, "application/json")
-        });
+        Task.FromResult(
+            new HttpResponseMessage(Code)
+            {
+                Content = new StringContent(Content, Encoding.UTF8, "application/json")
+            }
+            );
 }

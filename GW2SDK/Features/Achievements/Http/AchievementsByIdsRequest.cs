@@ -31,7 +31,10 @@ public sealed class AchievementsByIdsRequest : IHttpRequest<IReplicaSet<Achievem
 
     public MissingMemberBehavior MissingMemberBehavior { get; init; }
 
-    public async Task<IReplicaSet<Achievement>> SendAsync(HttpClient httpClient, CancellationToken cancellationToken)
+    public async Task<IReplicaSet<Achievement>> SendAsync(
+        HttpClient httpClient,
+        CancellationToken cancellationToken
+    )
     {
         QueryBuilder search = new();
         search.Add("ids", AchievementIds);
@@ -40,22 +43,26 @@ public sealed class AchievementsByIdsRequest : IHttpRequest<IReplicaSet<Achievem
             Arguments = search,
             AcceptLanguage = Language?.Alpha2Code
         };
-        using var response = await httpClient.SendAsync(request.Compile(),
+        using var response = await httpClient.SendAsync(
+                request.Compile(),
                 HttpCompletionOption.ResponseHeadersRead,
-                cancellationToken)
+                cancellationToken
+                )
             .ConfigureAwait(false);
 
-        await response.EnsureResult(cancellationToken)
-            .ConfigureAwait(false);
+        await response.EnsureResult(cancellationToken).ConfigureAwait(false);
 
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value = json.RootElement.GetSet(entry => AchievementReader.Read(entry, MissingMemberBehavior));
-        return new ReplicaSet<Achievement>(response.Headers.Date.GetValueOrDefault(),
+        var value =
+            json.RootElement.GetSet(entry => AchievementReader.Read(entry, MissingMemberBehavior));
+        return new ReplicaSet<Achievement>(
+            response.Headers.Date.GetValueOrDefault(),
             value,
             response.Headers.GetCollectionContext(),
             response.Content.Headers.Expires,
-            response.Content.Headers.LastModified);
+            response.Content.Headers.LastModified
+            );
     }
 }

@@ -13,5 +13,6 @@ public sealed record ItemStat
 
     public string Name { get; init; } = "";
 
-    public IReadOnlyCollection<ItemStatAttribute> Attributes { get; init; } = Array.Empty<ItemStatAttribute>();
+    public IReadOnlyCollection<ItemStatAttribute> Attributes { get; init; } =
+        Array.Empty<ItemStatAttribute>();
 }

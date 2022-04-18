@@ -32,7 +32,10 @@ public sealed class RecipesByIngredientItemIdByPageRequest : IHttpRequest<IRepli
 
     public MissingMemberBehavior MissingMemberBehavior { get; init; }
 
-    public async Task<IReplicaPage<Recipe>> SendAsync(HttpClient httpClient, CancellationToken cancellationToken)
+    public async Task<IReplicaPage<Recipe>> SendAsync(
+        HttpClient httpClient,
+        CancellationToken cancellationToken
+    )
     {
         QueryBuilder search = new();
         search.Add("input", IngredientItemId);
@@ -42,27 +45,28 @@ public sealed class RecipesByIngredientItemIdByPageRequest : IHttpRequest<IRepli
             search.Add("page_size", PageSize.Value);
         }
 
-        var request = Template with
-        {
-            Arguments = search
-        };
+        var request = Template with { Arguments = search };
 
-        using var response = await httpClient.SendAsync(request.Compile(),
+        using var response = await httpClient.SendAsync(
+                request.Compile(),
                 HttpCompletionOption.ResponseHeadersRead,
-                cancellationToken)
+                cancellationToken
+                )
             .ConfigureAwait(false);
 
-        await response.EnsureResult(cancellationToken)
-            .ConfigureAwait(false);
+        await response.EnsureResult(cancellationToken).ConfigureAwait(false);
 
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value = json.RootElement.GetSet(entry => RecipeReader.Read(entry, MissingMemberBehavior));
-        return new ReplicaPage<Recipe>(response.Headers.Date.GetValueOrDefault(),
+        var value =
+            json.RootElement.GetSet(entry => RecipeReader.Read(entry, MissingMemberBehavior));
+        return new ReplicaPage<Recipe>(
+            response.Headers.Date.GetValueOrDefault(),
             value,
             response.Headers.GetPageContext(),
             response.Content.Headers.Expires,
-            response.Content.Headers.LastModified);
+            response.Content.Headers.LastModified
+            );
     }
 }

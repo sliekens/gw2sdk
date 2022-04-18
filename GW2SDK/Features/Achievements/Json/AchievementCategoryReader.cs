@@ -9,7 +9,10 @@ namespace GW2SDK.Achievements.Json;
 [PublicAPI]
 public static class AchievementCategoryReader
 {
-    public static AchievementCategory Read(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    public static AchievementCategory Read(
+        JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         RequiredMember<int> id = new("id");
         RequiredMember<string> name = new("name");
@@ -62,12 +65,16 @@ public static class AchievementCategoryReader
             Description = description.GetValue(),
             Order = order.GetValue(),
             Icon = icon.GetValue(),
-            Achievements = achievements.SelectMany(item => ReadAchievementRef(item, missingMemberBehavior)),
+            Achievements =
+                achievements.SelectMany(item => ReadAchievementRef(item, missingMemberBehavior)),
             Tomorrow = tomorrow.SelectMany(item => ReadAchievementRef(item, missingMemberBehavior))
         };
     }
 
-    private static AchievementRef ReadAchievementRef(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    private static AchievementRef ReadAchievementRef(
+        JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         RequiredMember<int> id = new("id");
         OptionalMember<ProductRequirement> requiredAccess = new("required_access");
@@ -101,7 +108,10 @@ public static class AchievementCategoryReader
         return new AchievementRef
         {
             Id = id.GetValue(),
-            RequiredAccess = requiredAccess.Select(value => ReadProductRequirement(value, missingMemberBehavior)),
+            RequiredAccess =
+                requiredAccess.Select(
+                    value => ReadProductRequirement(value, missingMemberBehavior)
+                    ),
             Flags = flags.GetValues(missingMemberBehavior),
             Level = level.Select(value => ReadLevel(value, missingMemberBehavior))
         };
@@ -138,12 +148,13 @@ public static class AchievementCategoryReader
         };
     }
 
-    private static LevelRequirement ReadLevel(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    private static LevelRequirement ReadLevel(
+        JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
-        var min = json[0]
-            .GetInt32();
-        var max = json[1]
-            .GetInt32();
+        var min = json[0].GetInt32();
+        var max = json[1].GetInt32();
         return new LevelRequirement
         {
             Min = min,

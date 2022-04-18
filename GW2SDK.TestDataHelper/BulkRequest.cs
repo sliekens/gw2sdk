@@ -27,7 +27,10 @@ public class BulkRequest : IHttpRequest<JsonDocument>
         this.ids = ids;
     }
 
-    public async Task<JsonDocument> SendAsync(HttpClient httpClient, CancellationToken cancellationToken)
+    public async Task<JsonDocument> SendAsync(
+        HttpClient httpClient,
+        CancellationToken cancellationToken
+    )
     {
         QueryBuilder search = new();
         if (all)
@@ -45,15 +48,15 @@ public class BulkRequest : IHttpRequest<JsonDocument>
             AcceptEncoding = "gzip"
         };
 
-        using var response = await httpClient.SendAsync(request.Compile(),
+        using var response = await httpClient.SendAsync(
+                request.Compile(),
                 HttpCompletionOption.ResponseHeadersRead,
-                cancellationToken)
+                cancellationToken
+                )
             .ConfigureAwait(false);
 
-        await response.EnsureResult(cancellationToken)
-            .ConfigureAwait(false);
+        await response.EnsureResult(cancellationToken).ConfigureAwait(false);
 
-        return await response.Content.ReadAsJsonAsync(cancellationToken)
-            .ConfigureAwait(false);
+        return await response.Content.ReadAsJsonAsync(cancellationToken).ConfigureAwait(false);
     }
 }

@@ -23,8 +23,7 @@ public static class HttpResponseMessageExtensions
         var content = await instance.ReadAsStreamAsync(cancellationToken)
             .ConfigureAwait(false);
 #else
-        var content = await instance.ReadAsStreamAsync()
-            .ConfigureAwait(false);
+        var content = await instance.ReadAsStreamAsync().ConfigureAwait(false);
 #endif
         if (instance.Headers.ContentEncoding.LastOrDefault() == "gzip")
         {
@@ -49,16 +48,16 @@ public static class HttpResponseMessageExtensions
     /// <exception cref="ResourceNotFoundException">Not Found.</exception>
     /// <exception cref="ArgumentException">Bad Request.</exception>
     /// <exception cref="HttpRequestException">Any other unexpected error.</exception>
-    public static async Task EnsureResult(this HttpResponseMessage instance, CancellationToken cancellationToken)
+    public static async Task EnsureResult(
+        this HttpResponseMessage instance,
+        CancellationToken cancellationToken
+    )
     {
         if ((int)instance.StatusCode >= 500)
         {
             throw new GatewayException(instance.StatusCode, instance.ReasonPhrase)
             {
-                Data =
-                {
-                    ["RequestUri"] = instance.RequestMessage?.RequestUri?.ToString()
-                }
+                Data = { ["RequestUri"] = instance.RequestMessage?.RequestUri?.ToString() }
             };
         }
 
@@ -68,10 +67,7 @@ public static class HttpResponseMessageExtensions
             {
                 throw new ResourceNotFoundException(instance.ReasonPhrase)
                 {
-                    Data =
-                    {
-                        ["RequestUri"] = instance.RequestMessage?.RequestUri?.ToString()
-                    }
+                    Data = { ["RequestUri"] = instance.RequestMessage?.RequestUri?.ToString() }
                 };
             }
 
@@ -81,19 +77,13 @@ public static class HttpResponseMessageExtensions
             {
                 throw new ResourceNotFoundException(instance.ReasonPhrase)
                 {
-                    Data =
-                    {
-                        ["RequestUri"] = instance.RequestMessage?.RequestUri?.ToString()
-                    }
+                    Data = { ["RequestUri"] = instance.RequestMessage?.RequestUri?.ToString() }
                 };
             }
 
             throw new ResourceNotFoundException(text.GetString())
             {
-                Data =
-                {
-                    ["RequestUri"] = instance.RequestMessage?.RequestUri?.ToString()
-                }
+                Data = { ["RequestUri"] = instance.RequestMessage?.RequestUri?.ToString() }
             };
         }
 
@@ -103,10 +93,7 @@ public static class HttpResponseMessageExtensions
             {
                 throw new ArgumentException(instance.ReasonPhrase)
                 {
-                    Data =
-                    {
-                        ["RequestUri"] = instance.RequestMessage?.RequestUri?.ToString()
-                    }
+                    Data = { ["RequestUri"] = instance.RequestMessage?.RequestUri?.ToString() }
                 };
             }
 
@@ -116,10 +103,7 @@ public static class HttpResponseMessageExtensions
             {
                 throw new ArgumentException(instance.ReasonPhrase)
                 {
-                    Data =
-                    {
-                        ["RequestUri"] = instance.RequestMessage?.RequestUri?.ToString()
-                    }
+                    Data = { ["RequestUri"] = instance.RequestMessage?.RequestUri?.ToString() }
                 };
             }
 
@@ -130,19 +114,13 @@ public static class HttpResponseMessageExtensions
                 // That's not a user error and should be handled as 504 Gateway Timeout
                 throw new GatewayException(HttpStatusCode.GatewayTimeout, reason)
                 {
-                    Data =
-                    {
-                        ["RequestUri"] = instance.RequestMessage?.RequestUri?.ToString()
-                    }
+                    Data = { ["RequestUri"] = instance.RequestMessage?.RequestUri?.ToString() }
                 };
             }
 
             throw new ArgumentException(reason)
             {
-                Data =
-                {
-                    ["RequestUri"] = instance.RequestMessage?.RequestUri?.ToString()
-                }
+                Data = { ["RequestUri"] = instance.RequestMessage?.RequestUri?.ToString() }
             };
         }
 
@@ -152,10 +130,7 @@ public static class HttpResponseMessageExtensions
             {
                 throw new UnauthorizedOperationException(instance.ReasonPhrase)
                 {
-                    Data =
-                    {
-                        ["RequestUri"] = instance.RequestMessage?.RequestUri?.ToString()
-                    }
+                    Data = { ["RequestUri"] = instance.RequestMessage?.RequestUri?.ToString() }
                 };
             }
 
@@ -165,19 +140,13 @@ public static class HttpResponseMessageExtensions
             {
                 throw new UnauthorizedOperationException(instance.ReasonPhrase)
                 {
-                    Data =
-                    {
-                        ["RequestUri"] = instance.RequestMessage?.RequestUri?.ToString()
-                    }
+                    Data = { ["RequestUri"] = instance.RequestMessage?.RequestUri?.ToString() }
                 };
             }
 
             throw new UnauthorizedOperationException(text.GetString())
             {
-                Data =
-                {
-                    ["RequestUri"] = instance.RequestMessage?.RequestUri?.ToString()
-                }
+                Data = { ["RequestUri"] = instance.RequestMessage?.RequestUri?.ToString() }
             };
         }
 
@@ -187,10 +156,7 @@ public static class HttpResponseMessageExtensions
             {
                 throw new TooManyRequestsException(instance.ReasonPhrase)
                 {
-                    Data =
-                    {
-                        ["RequestUri"] = instance.RequestMessage?.RequestUri?.ToString()
-                    }
+                    Data = { ["RequestUri"] = instance.RequestMessage?.RequestUri?.ToString() }
                 };
             }
 
@@ -200,19 +166,13 @@ public static class HttpResponseMessageExtensions
             {
                 throw new TooManyRequestsException(instance.ReasonPhrase)
                 {
-                    Data =
-                    {
-                        ["RequestUri"] = instance.RequestMessage?.RequestUri?.ToString()
-                    }
+                    Data = { ["RequestUri"] = instance.RequestMessage?.RequestUri?.ToString() }
                 };
             }
 
             throw new TooManyRequestsException(text.GetString())
             {
-                Data =
-                {
-                    ["RequestUri"] = instance.RequestMessage?.RequestUri?.ToString()
-                }
+                Data = { ["RequestUri"] = instance.RequestMessage?.RequestUri?.ToString() }
             };
         }
 

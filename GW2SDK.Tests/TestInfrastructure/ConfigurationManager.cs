@@ -22,7 +22,8 @@ public class ConfigurationManager
         Configuration["ApiKeyFull"] ?? throw new InvalidOperationException("Missing ApiKeyFull.");
 
     public string CharacterName =>
-        Configuration["CharacterName"] ?? throw new InvalidOperationException("Missing CharacterName.");
+        Configuration["CharacterName"]
+        ?? throw new InvalidOperationException("Missing CharacterName.");
 
     public Uri BaseAddress => new(Configuration["Authority"], UriKind.Absolute);
 }

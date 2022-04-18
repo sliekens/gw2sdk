@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 using GW2SDK.Http;
 using GW2SDK.Json;
 using GW2SDK.Tokens.Http;
-using GW2SDK.Tokens.Json;
 using GW2SDK.Tokens.Models;
 using JetBrains.Annotations;
 

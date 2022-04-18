@@ -12,7 +12,8 @@ public record UpgradeComponent : Item
     public IReadOnlyCollection<UpgradeComponentFlag> UpgradeComponentFlags { get; init; } =
         Array.Empty<UpgradeComponentFlag>();
 
-    public IReadOnlyCollection<InfusionSlotFlag> InfusionUpgradeFlags { get; init; } = Array.Empty<InfusionSlotFlag>();
+    public IReadOnlyCollection<InfusionSlotFlag> InfusionUpgradeFlags { get; init; } =
+        Array.Empty<InfusionSlotFlag>();
 
     public double AttributeAdjustment { get; init; }
 

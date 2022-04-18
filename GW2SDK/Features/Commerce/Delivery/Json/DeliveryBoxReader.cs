@@ -36,7 +36,10 @@ public static class DeliveryBoxReader
         };
     }
 
-    private static DeliveredItem ReadDeliveredItem(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    private static DeliveredItem ReadDeliveredItem(
+        JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         RequiredMember<int> id = new("id");
         RequiredMember<int> count = new("count");

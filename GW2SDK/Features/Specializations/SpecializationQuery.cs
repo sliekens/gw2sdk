@@ -35,7 +35,9 @@ public sealed class SpecializationQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<IReplicaSet<int>> GetSpecializationsIndex(CancellationToken cancellationToken = default)
+    public Task<IReplicaSet<int>> GetSpecializationsIndex(
+        CancellationToken cancellationToken = default
+    )
     {
         SpecializationsIndexRequest request = new();
         return request.SendAsync(http, cancellationToken);

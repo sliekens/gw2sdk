@@ -14,10 +14,8 @@ namespace GW2SDK.Maps.Http;
 [PublicAPI]
 public sealed class FloorByIdRequest : IHttpRequest<IReplica<Floor>>
 {
-    private static readonly HttpRequestMessageTemplate Template = new(Get, "/v2/continents/:id/floors")
-    {
-        AcceptEncoding = "gzip"
-    };
+    private static readonly HttpRequestMessageTemplate Template =
+        new(Get, "/v2/continents/:id/floors") { AcceptEncoding = "gzip" };
 
     public FloorByIdRequest(int continentId, int floorId)
     {
@@ -33,32 +31,41 @@ public sealed class FloorByIdRequest : IHttpRequest<IReplica<Floor>>
 
     public MissingMemberBehavior MissingMemberBehavior { get; init; }
 
-    public async Task<IReplica<Floor>> SendAsync(HttpClient httpClient, CancellationToken cancellationToken)
+    public async Task<IReplica<Floor>> SendAsync(
+        HttpClient httpClient,
+        CancellationToken cancellationToken
+    )
     {
         QueryBuilder search = new();
         search.Add("id", FloorId);
         var request = Template with
         {
-            Path = Template.Path.Replace(":id", ContinentId.ToString(CultureInfo.InvariantCulture)),
+            Path = Template.Path.Replace(
+                ":id",
+                ContinentId.ToString(CultureInfo.InvariantCulture)
+                ),
             Arguments = search,
             AcceptLanguage = Language?.Alpha2Code
         };
 
-        using var response = await httpClient.SendAsync(request.Compile(),
+        using var response = await httpClient.SendAsync(
+                request.Compile(),
                 HttpCompletionOption.ResponseHeadersRead,
-                cancellationToken)
+                cancellationToken
+                )
             .ConfigureAwait(false);
 
-        await response.EnsureResult(cancellationToken)
-            .ConfigureAwait(false);
+        await response.EnsureResult(cancellationToken).ConfigureAwait(false);
 
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
         var value = FloorReader.Read(json.RootElement, MissingMemberBehavior);
-        return new Replica<Floor>(response.Headers.Date.GetValueOrDefault(),
+        return new Replica<Floor>(
+            response.Headers.Date.GetValueOrDefault(),
             value,
             response.Content.Headers.Expires,
-            response.Content.Headers.LastModified);
+            response.Content.Headers.LastModified
+            );
     }
 }

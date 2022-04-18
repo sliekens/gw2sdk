@@ -51,16 +51,19 @@ public sealed class ItemQuery
         IProgress<ICollectionContext>? progress = default
     )
     {
-        var producer = SplitQuery.Create<int, Item>((range, ct) =>
-        {
-            var request = new ItemsByIdsRequest(range)
+        var producer = SplitQuery.Create<int, Item>(
+            (range, ct) =>
             {
-                Language = language,
-                MissingMemberBehavior = missingMemberBehavior
-            };
+                var request = new ItemsByIdsRequest(range)
+                {
+                    Language = language,
+                    MissingMemberBehavior = missingMemberBehavior
+                };
 
-            return request.SendAsync(http, ct);
-        }, progress);
+                return request.SendAsync(http, ct);
+            },
+            progress
+            );
         return producer.QueryAsync(itemIds, cancellationToken: cancellationToken);
     }
 
@@ -89,9 +92,14 @@ public sealed class ItemQuery
         IProgress<ICollectionContext>? progress = default
     )
     {
-        var index = await GetItemsIndex(cancellationToken)
-            .ConfigureAwait(false);
-        var producer = GetItemsByIds(index, language, missingMemberBehavior, cancellationToken, progress);
+        var index = await GetItemsIndex(cancellationToken).ConfigureAwait(false);
+        var producer = GetItemsByIds(
+            index,
+            language,
+            missingMemberBehavior,
+            cancellationToken,
+            progress
+            );
         await foreach (var item in producer.WithCancellation(cancellationToken)
                            .ConfigureAwait(false))
         {

@@ -19,8 +19,7 @@ public class JsonItemService
 
     public async Task<ISet<string>> GetAllJsonItems()
     {
-        var ids = await GetItemsIndex()
-            .ConfigureAwait(false);
+        var ids = await GetItemsIndex().ConfigureAwait(false);
 
         var batches = new Queue<IEnumerable<int>>(ids.Buffer(200));
 
@@ -63,11 +62,13 @@ public class JsonItemService
     private async Task<List<string>> GetJsonItemsByIds(IReadOnlyCollection<int> itemIds)
     {
         var request = new BulkRequest("/v2/items", itemIds);
-        var json = await request.SendAsync(http, CancellationToken.None)
-            .ConfigureAwait(false);
+        var json = await request.SendAsync(http, CancellationToken.None).ConfigureAwait(false);
         return json.Indent(false)
             .RootElement.EnumerateArray()
-            .Select(item => item.ToString() ?? throw new InvalidOperationException("Unexpected null in JSON array."))
+            .Select(
+                item => item.ToString()
+                    ?? throw new InvalidOperationException("Unexpected null in JSON array.")
+                )
             .ToList();
     }
 }

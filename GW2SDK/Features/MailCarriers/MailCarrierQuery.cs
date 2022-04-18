@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 using GW2SDK.Http;
 using GW2SDK.Json;
 using GW2SDK.MailCarriers.Http;
-using GW2SDK.MailCarriers.Json;
 using GW2SDK.MailCarriers.Models;
 using JetBrains.Annotations;
 
@@ -36,7 +35,9 @@ public sealed class MailCarrierQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<IReplicaSet<int>> GetMailCarriersIndex(CancellationToken cancellationToken = default)
+    public Task<IReplicaSet<int>> GetMailCarriersIndex(
+        CancellationToken cancellationToken = default
+    )
     {
         MailCarriersIndexRequest request = new();
         return request.SendAsync(http, cancellationToken);

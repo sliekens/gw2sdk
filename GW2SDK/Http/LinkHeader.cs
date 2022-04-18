@@ -11,8 +11,7 @@ public sealed class LinkHeader
     public LinkHeader(IEnumerable<LinkHeaderValue> links)
     {
         // ReSharper disable once ConstantConditionalAccessQualifier
-        Links = links?.ToList()
-            .AsReadOnly() ?? throw new ArgumentNullException(nameof(links));
+        Links = links?.ToList().AsReadOnly() ?? throw new ArgumentNullException(nameof(links));
     }
 
     public IReadOnlyCollection<LinkHeaderValue> Links { get; }
@@ -36,8 +35,7 @@ public sealed class LinkHeader
 
     private static LinkHeaderValue ParseLinkValue(ReadOnlySpan<char> input)
     {
-        string href = "",
-            rel = "";
+        string href = "", rel = "";
         var splitter = new CharSpanSplitter(input, ';');
         if (!splitter.MoveNext()) return new LinkHeaderValue(href, rel);
         href = ParseUri(splitter.Current);
@@ -57,17 +55,14 @@ public sealed class LinkHeader
     {
         var startIndex = input.IndexOf('<') + 1;
         var length = input.IndexOf('>') - startIndex;
-        return input.Slice(startIndex, length)
-            .ToString();
+        return input.Slice(startIndex, length).ToString();
     }
 
     private static (string name, string value) ParseAttribute(ReadOnlySpan<char> input)
     {
         var splitIndex = input.IndexOf('=');
-        var name = input[..splitIndex]
-            .Trim();
-        var value = input[(splitIndex + 1)..]
-            .Trim();
+        var name = input[..splitIndex].Trim();
+        var value = input[(splitIndex + 1)..].Trim();
         return (name: name.ToString(), value.ToString());
     }
 

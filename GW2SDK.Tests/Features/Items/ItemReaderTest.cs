@@ -16,11 +16,13 @@ public class ItemReaderTest : IClassFixture<ItemFixture>
 
     [Fact]
     public void Items_can_be_created_from_json() =>
-        Assert.All(fixture.Items,
+        Assert.All(
+            fixture.Items,
             json =>
             {
                 using var document = JsonDocument.Parse(json);
                 var actual = ItemReader.Read(document.RootElement, MissingMemberBehavior.Error);
                 ItemFacts.Validate(actual);
-            });
+            }
+            );
 }

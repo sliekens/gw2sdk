@@ -50,19 +50,20 @@ public static class RegionReader
         {
             Id = id.GetValue(),
             Name = name.GetValue(),
-            LabelCoordinates = labelCoordinates.Select(value => ReadPointF(value, missingMemberBehavior)),
+            LabelCoordinates =
+                labelCoordinates.Select(value => ReadPointF(value, missingMemberBehavior)),
             ContinentRectangle =
-                continentRectangle.Select(value => ReadContinentRectangle(value, missingMemberBehavior)),
+                continentRectangle.Select(
+                    value => ReadContinentRectangle(value, missingMemberBehavior)
+                    ),
             Maps = maps.Select(value => ReadMaps(value, missingMemberBehavior))
         };
     }
 
     private static PointF ReadPointF(JsonElement json, MissingMemberBehavior missingMemberBehavior)
     {
-        var x = json[0]
-            .GetSingle();
-        var y = json[1]
-            .GetSingle();
+        var x = json[0].GetSingle();
+        var y = json[1].GetSingle();
         return new PointF(x, y);
     }
 
@@ -72,15 +73,11 @@ public static class RegionReader
     )
     {
         var topLeft = json[0];
-        var x = topLeft[0]
-            .GetSingle();
-        var y = topLeft[1]
-            .GetSingle();
+        var x = topLeft[0].GetSingle();
+        var y = topLeft[1].GetSingle();
         var size = json[1];
-        var width = size[0]
-            .GetSingle();
-        var height = size[1]
-            .GetSingle();
+        var width = size[0].GetSingle();
+        var height = size[1].GetSingle();
         return new ContinentRectangle
         {
             TopLeft = new PointF(x, y),
@@ -88,7 +85,10 @@ public static class RegionReader
         };
     }
 
-    private static Dictionary<int, Map> ReadMaps(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    private static Dictionary<int, Map> ReadMaps(
+        JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         Dictionary<int, Map> maps = new();
         foreach (var member in json.EnumerateObject())

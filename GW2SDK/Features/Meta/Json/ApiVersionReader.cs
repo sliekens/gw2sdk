@@ -39,8 +39,9 @@ public static class ApiVersionReader
         {
             Languages = languages.SelectMany(value => value.GetStringRequired()),
             Routes = routes.SelectMany(value => ReadApiRoute(value, missingMemberBehavior)),
-            SchemaVersions = schemaVersions.SelectMany(value => ReadSchema(value, missingMemberBehavior)) ??
-                Array.Empty<Schema>()
+            SchemaVersions =
+                schemaVersions.SelectMany(value => ReadSchema(value, missingMemberBehavior))
+                ?? Array.Empty<Schema>()
         };
     }
 
@@ -84,7 +85,10 @@ public static class ApiVersionReader
         };
     }
 
-    private static Schema ReadSchema(JsonElement jsonElement, MissingMemberBehavior missingMemberBehavior)
+    private static Schema ReadSchema(
+        JsonElement jsonElement,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         RequiredMember<string> version = new("v");
 

@@ -11,7 +11,8 @@ public class TraitQueryTest
 {
     private static class TraitFact
     {
-        public static void Id_is_positive(Trait actual) => Assert.InRange(actual.Id, 1, int.MaxValue);
+        public static void Id_is_positive(Trait actual) =>
+            Assert.InRange(actual.Id, 1, int.MaxValue);
     }
 
     [Fact]
@@ -23,11 +24,13 @@ public class TraitQueryTest
         var actual = await sut.GetTraits();
 
         Assert.Equal(actual.Context.ResultTotal, actual.Count);
-        Assert.All(actual,
+        Assert.All(
+            actual,
             trait =>
             {
                 TraitFact.Id_is_positive(trait);
-            });
+            }
+            );
     }
 
     [Fact]
@@ -69,10 +72,12 @@ public class TraitQueryTest
 
         var actual = await sut.GetTraitsByIds(ids);
 
-        Assert.Collection(actual,
+        Assert.Collection(
+            actual,
             first => Assert.Equal(214, first.Id),
             second => Assert.Equal(221, second.Id),
-            third => Assert.Equal(222, third.Id));
+            third => Assert.Equal(222, third.Id)
+            );
     }
 
     [Fact]

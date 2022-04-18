@@ -11,26 +11,34 @@ public class StoryJournalTest
 {
     private static class BackstoryQuestionFact
     {
-        public static void Id_is_positive(BackstoryQuestion actual) => Assert.InRange(actual.Id, 1, int.MaxValue);
+        public static void Id_is_positive(BackstoryQuestion actual) =>
+            Assert.InRange(actual.Id, 1, int.MaxValue);
 
-        public static void Title_is_not_null(BackstoryQuestion actual) => Assert.NotNull(actual.Title);
+        public static void Title_is_not_null(BackstoryQuestion actual) =>
+            Assert.NotNull(actual.Title);
 
-        public static void Description_is_not_empty(BackstoryQuestion actual) => Assert.NotEmpty(actual.Description);
+        public static void Description_is_not_empty(BackstoryQuestion actual) =>
+            Assert.NotEmpty(actual.Description);
 
-        public static void Has_3_to_8_answers(BackstoryQuestion actual) => Assert.InRange(actual.Answers.Count, 3, 8);
+        public static void Has_3_to_8_answers(BackstoryQuestion actual) =>
+            Assert.InRange(actual.Answers.Count, 3, 8);
     }
 
     private static class BackstoryAnswerFact
     {
         public static void Id_is_not_empty(BackstoryAnswer actual) => Assert.NotEmpty(actual.Id);
 
-        public static void Title_is_not_null(BackstoryAnswer actual) => Assert.NotNull(actual.Title);
+        public static void Title_is_not_null(BackstoryAnswer actual) =>
+            Assert.NotNull(actual.Title);
 
-        public static void Description_is_not_empty(BackstoryAnswer actual) => Assert.NotEmpty(actual.Description);
+        public static void Description_is_not_empty(BackstoryAnswer actual) =>
+            Assert.NotEmpty(actual.Description);
 
-        public static void Journal_is_not_empty(BackstoryAnswer actual) => Assert.NotEmpty(actual.Journal);
+        public static void Journal_is_not_empty(BackstoryAnswer actual) =>
+            Assert.NotEmpty(actual.Journal);
 
-        public static void Has_a_question(BackstoryAnswer actual) => Assert.InRange(actual.Question, 1, 999);
+        public static void Has_a_question(BackstoryAnswer actual) =>
+            Assert.InRange(actual.Question, 1, 999);
     }
 
     [Fact]
@@ -43,14 +51,16 @@ public class StoryJournalTest
 
         Assert.Equal(actual.Context.ResultTotal, actual.Count);
 
-        Assert.All(actual,
+        Assert.All(
+            actual,
             question =>
             {
                 BackstoryQuestionFact.Id_is_positive(question);
                 BackstoryQuestionFact.Title_is_not_null(question);
                 BackstoryQuestionFact.Description_is_not_empty(question);
                 BackstoryQuestionFact.Has_3_to_8_answers(question);
-            });
+            }
+            );
     }
 
     [Fact]
@@ -63,7 +73,8 @@ public class StoryJournalTest
 
         Assert.Equal(actual.Context.ResultTotal, actual.Count);
 
-        Assert.All(actual,
+        Assert.All(
+            actual,
             answer =>
             {
                 BackstoryAnswerFact.Id_is_not_empty(answer);
@@ -71,7 +82,8 @@ public class StoryJournalTest
                 BackstoryAnswerFact.Description_is_not_empty(answer);
                 BackstoryAnswerFact.Journal_is_not_empty(answer);
                 BackstoryAnswerFact.Has_a_question(answer);
-            });
+            }
+            );
     }
 
     [Fact]
@@ -137,10 +149,12 @@ public class StoryJournalTest
 
         var actual = await sut.GetBackstoryQuestionsByIds(ids);
 
-        Assert.Collection(actual,
+        Assert.Collection(
+            actual,
             first => Assert.Contains(first.Id, ids),
             second => Assert.Contains(second.Id, ids),
-            third => Assert.Contains(third.Id, ids));
+            third => Assert.Contains(third.Id, ids)
+            );
     }
 
     [Fact]
@@ -158,10 +172,12 @@ public class StoryJournalTest
 
         var actual = await sut.GetBackstoryAnswersByIds(ids);
 
-        Assert.Collection(actual,
+        Assert.Collection(
+            actual,
             first => Assert.Contains(first.Id, ids),
             second => Assert.Contains(second.Id, ids),
-            third => Assert.Contains(third.Id, ids));
+            third => Assert.Contains(third.Id, ids)
+            );
     }
 
     [Fact]

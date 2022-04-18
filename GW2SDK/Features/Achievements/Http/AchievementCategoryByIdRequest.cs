@@ -13,10 +13,8 @@ namespace GW2SDK.Achievements.Http;
 [PublicAPI]
 public sealed class AchievementCategoryByIdRequest : IHttpRequest<IReplica<AchievementCategory>>
 {
-    private static readonly HttpRequestMessageTemplate Template = new(Get, "/v2/achievements/categories")
-    {
-        AcceptEncoding = "gzip"
-    };
+    private static readonly HttpRequestMessageTemplate Template =
+        new(Get, "/v2/achievements/categories") { AcceptEncoding = "gzip" };
 
     public AchievementCategoryByIdRequest(int achievementCategoryId)
     {
@@ -42,21 +40,24 @@ public sealed class AchievementCategoryByIdRequest : IHttpRequest<IReplica<Achie
             AcceptLanguage = Language?.Alpha2Code
         };
 
-        using var response = await httpClient.SendAsync(request.Compile(),
+        using var response = await httpClient.SendAsync(
+                request.Compile(),
                 HttpCompletionOption.ResponseHeadersRead,
-                cancellationToken)
+                cancellationToken
+                )
             .ConfigureAwait(false);
 
-        await response.EnsureResult(cancellationToken)
-            .ConfigureAwait(false);
+        await response.EnsureResult(cancellationToken).ConfigureAwait(false);
 
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
         var value = AchievementCategoryReader.Read(json.RootElement, MissingMemberBehavior);
-        return new Replica<AchievementCategory>(response.Headers.Date.GetValueOrDefault(),
+        return new Replica<AchievementCategory>(
+            response.Headers.Date.GetValueOrDefault(),
             value,
             response.Content.Headers.Expires,
-            response.Content.Headers.LastModified);
+            response.Content.Headers.LastModified
+            );
     }
 }

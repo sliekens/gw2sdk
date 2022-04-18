@@ -26,36 +26,39 @@ public class DesignedForClientCodeTest : IClassFixture<AssemblyFixture>
          * Especially regarding how easily they can be replaced or evolved between versions.
          */
         var visible = fixture.Assembly.ExportedTypes.ToList();
-        Assert.All(visible,
+        Assert.All(
+            visible,
             type =>
             {
                 if (type.GetCustomAttributes()
-                    .Any(att => att.GetType()
-                        .Name == "PublicAPIAttribute"))
+                    .Any(att => att.GetType().Name == "PublicAPIAttribute"))
                 {
                     return;
                 }
 
                 throw new ApplicationException(
-                    $"Type '{type}' is visible to client code, make it internal or mark it as [PublicAPI].");
-            });
+                    $"Type '{type}' is visible to client code, make it internal or mark it as [PublicAPI]."
+                    );
+            }
+            );
     }
 
     [Fact]
     public void Every_type_designed_for_client_code_is_visible()
     {
-        var invisible = fixture.Assembly.DefinedTypes.Where(type => type.IsNotPublic)
-            .ToList();
-        Assert.All(invisible,
+        var invisible = fixture.Assembly.DefinedTypes.Where(type => type.IsNotPublic).ToList();
+        Assert.All(
+            invisible,
             type =>
             {
                 if (type.GetCustomAttributes()
-                    .Any(att => att.GetType()
-                        .Name == "PublicAPIAttribute"))
+                    .Any(att => att.GetType().Name == "PublicAPIAttribute"))
                 {
                     throw new ApplicationException(
-                        $"Type '{type}' is invisible to client code, make it public or remove [PublicAPI].");
+                        $"Type '{type}' is invisible to client code, make it public or remove [PublicAPI]."
+                        );
                 }
-            });
+            }
+            );
     }
 }

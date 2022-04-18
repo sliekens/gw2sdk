@@ -9,9 +9,7 @@ public class ItemPriceFixture
 {
     public ItemPriceFixture()
     {
-        ItemPrices = FlatFileReader.Read("Data/prices.json.gz")
-            .ToList()
-            .AsReadOnly();
+        ItemPrices = FlatFileReader.Read("Data/prices.json.gz").ToList().AsReadOnly();
     }
 
     public IReadOnlyCollection<string> ItemPrices { get; }

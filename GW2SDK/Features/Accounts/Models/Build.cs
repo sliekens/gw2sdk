@@ -15,7 +15,8 @@ public sealed record Build
     public ProfessionName Profession { get; init; }
 
     // Always length 3
-    public IReadOnlyCollection<Specialization> Specializations { get; init; } = Array.Empty<Specialization>();
+    public IReadOnlyCollection<Specialization> Specializations { get; init; } =
+        Array.Empty<Specialization>();
 
     public SkillBar Skills { get; init; } = new();
 

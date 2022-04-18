@@ -80,17 +80,20 @@ public class TradingPostTest
             35984
         };
 
-        var actual = await sut.GetItemPricesByIds(ids)
-            .ToListAsync();
+        var actual = await sut.GetItemPricesByIds(ids).ToListAsync();
 
-        Assert.Collection(actual,
+        Assert.Collection(
+            actual,
             first => Assert.Equal(24, first.Id),
             second => Assert.Equal(19699, second.Id),
-            third => Assert.Equal(35984, third.Id));
+            third => Assert.Equal(35984, third.Id)
+            );
     }
 
-    [Fact(Skip =
-        "This test is best used interactively, otherwise it will hit rate limits in this as well as other tests.")]
+    [Fact(
+        Skip =
+            "This test is best used interactively, otherwise it will hit rate limits in this as well as other tests."
+        )]
     public async Task It_can_get_all_item_prices()
     {
         await using Composer services = new();
@@ -162,22 +165,26 @@ public class TradingPostTest
         Assert.Equal(value.TotalSupply, value.Supply.Sum(ask => ask.Quantity));
 
         Assert.NotEmpty(value.Supply);
-        Assert.All(value.Supply,
+        Assert.All(
+            value.Supply,
             line =>
             {
                 Assert.True(line.UnitPrice > Coin.Zero);
                 Assert.True(line.Quantity > 0);
                 Assert.True(line.Listings > 0);
-            });
+            }
+            );
 
         Assert.NotEmpty(value.Demand);
-        Assert.All(value.Demand,
+        Assert.All(
+            value.Demand,
             line =>
             {
                 Assert.True(line.UnitPrice > Coin.Zero);
                 Assert.True(line.Quantity > 0);
                 Assert.True(line.Listings > 0);
-            });
+            }
+            );
     }
 
     [Fact]
@@ -193,17 +200,20 @@ public class TradingPostTest
             35984
         };
 
-        var actual = await sut.GetOrderBooksByIds(ids)
-            .ToListAsync();
+        var actual = await sut.GetOrderBooksByIds(ids).ToListAsync();
 
-        Assert.Collection(actual,
+        Assert.Collection(
+            actual,
             first => Assert.Equal(24, first.Id),
             second => Assert.Equal(19699, second.Id),
-            third => Assert.Equal(35984, third.Id));
+            third => Assert.Equal(35984, third.Id)
+            );
     }
 
-    [Fact(Skip =
-        "This test is best used interactively, otherwise it will hit rate limits in this as well as other tests.")]
+    [Fact(
+        Skip =
+            "This test is best used interactively, otherwise it will hit rate limits in this as well as other tests."
+        )]
     public async Task It_can_get_all_order_books()
     {
         await using Composer services = new();
@@ -221,13 +231,15 @@ public class TradingPostTest
             {
                 Assert.True(actual.BestAsk > Coin.Zero);
                 Assert.NotEmpty(actual.Supply);
-                Assert.All(actual.Supply,
+                Assert.All(
+                    actual.Supply,
                     line =>
                     {
                         Assert.True(line.UnitPrice > Coin.Zero);
                         Assert.True(line.Quantity > 0);
                         Assert.True(line.Listings > 0);
-                    });
+                    }
+                    );
             }
 
             if (actual.TotalDemand == 0)
@@ -239,13 +251,15 @@ public class TradingPostTest
             {
                 Assert.True(actual.BestBid > Coin.Zero);
                 Assert.NotEmpty(actual.Demand);
-                Assert.All(actual.Demand,
+                Assert.All(
+                    actual.Demand,
                     line =>
                     {
                         Assert.True(line.UnitPrice > Coin.Zero);
                         Assert.True(line.Quantity > 0);
                         Assert.True(line.Listings > 0);
-                    });
+                    }
+                    );
             }
 
             if (actual is { TotalDemand: 0 } or { TotalSupply: 0 })

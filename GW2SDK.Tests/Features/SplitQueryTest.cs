@@ -19,31 +19,32 @@ public class SplitQueryTest
         // because the implementation is slightly optimized for the case where buffering is not needed
         CancellationTokenSource cancellationTokenSource = new();
 
-        var index = Enumerable.Range(1, resultTotal)
-            .ToHashSet();
-        var records = index.Select(id => new StubRecord(id))
-            .ToList();
+        var index = Enumerable.Range(1, resultTotal).ToHashSet();
+        var records = index.Select(id => new StubRecord(id)).ToList();
 
-        var sut = SplitQuery.Create<int, StubRecord>((range, ct) =>
+        var sut = SplitQuery.Create<int, StubRecord>(
+            (range, ct) =>
             {
-                var found = records.Where(record => range.Contains(record.Id))
-                    .ToHashSet();
+                var found = records.Where(record => range.Contains(record.Id)).ToHashSet();
                 return Task.FromResult((IReplicaSet<StubRecord>)new StubReplica(found));
             },
-            bufferSize);
+            bufferSize
+            );
 
         var received = 0;
         var producer = sut.QueryAsync(index, cancellationToken: cancellationTokenSource.Token);
-        var reason = await Assert.ThrowsAsync<OperationCanceledException>(async () =>
-        {
-            await foreach (var _ in producer.WithCancellation(cancellationTokenSource.Token))
+        var reason = await Assert.ThrowsAsync<OperationCanceledException>(
+            async () =>
             {
-                if (++received == 107)
+                await foreach (var _ in producer.WithCancellation(cancellationTokenSource.Token))
                 {
-                    cancellationTokenSource.Cancel();
+                    if (++received == 107)
+                    {
+                        cancellationTokenSource.Cancel();
+                    }
                 }
             }
-        });
+            );
 
         Assert.True(cancellationTokenSource.Token.Equals(reason.CancellationToken));
         Assert.Equal(107, received);
@@ -53,57 +54,57 @@ public class SplitQueryTest
     public async Task It_can_split_queries_into_buffers()
     {
         // Simulate 1000 records
-        var index = Enumerable.Range(1, 1000)
-            .ToHashSet();
-        var records = index.Select(id => new StubRecord(id))
-            .ToList();
+        var index = Enumerable.Range(1, 1000).ToHashSet();
+        var records = index.Select(id => new StubRecord(id)).ToList();
 
         const int bufferSize = 10;
-        var sut = SplitQuery.Create<int, StubRecord>((range, ct) =>
-        {
-            var found = records.Where(record => range.Contains(record.Id))
-                .ToHashSet();
-            return Task.FromResult((IReplicaSet<StubRecord>)new StubReplica(found));
-        });
+        var sut = SplitQuery.Create<int, StubRecord>(
+            (range, ct) =>
+            {
+                var found = records.Where(record => range.Contains(record.Id)).ToHashSet();
+                return Task.FromResult((IReplicaSet<StubRecord>)new StubReplica(found));
+            }
+            );
 
-        var actual = await sut.QueryAsync(index, bufferSize)
-            .ToListAsync();
+        var actual = await sut.QueryAsync(index, bufferSize).ToListAsync();
 
         Assert.Equal(index.Count, actual.Count);
         Assert.All(index, id => actual.Any(record => record.Id == id));
-        Assert.All(actual,
+        Assert.All(
+            actual,
             record =>
             {
                 index.Contains(record.Id);
-            });
+            }
+            );
     }
 
     [Fact]
     public async Task It_can_skip_buffering_if_the_index_is_small_enough()
     {
         // Simulate 100 records
-        var index = Enumerable.Range(1, 1000)
-            .ToHashSet();
-        var records = index.Select(id => new StubRecord(id))
-            .ToList();
+        var index = Enumerable.Range(1, 1000).ToHashSet();
+        var records = index.Select(id => new StubRecord(id)).ToList();
 
-        var sut = SplitQuery.Create<int, StubRecord>((range, ct) =>
-        {
-            var found = records.Where(record => range.Contains(record.Id))
-                .ToHashSet();
-            return Task.FromResult((IReplicaSet<StubRecord>)new StubReplica(found));
-        });
+        var sut = SplitQuery.Create<int, StubRecord>(
+            (range, ct) =>
+            {
+                var found = records.Where(record => range.Contains(record.Id)).ToHashSet();
+                return Task.FromResult((IReplicaSet<StubRecord>)new StubReplica(found));
+            }
+            );
 
-        var actual = await sut.QueryAsync(index)
-            .ToListAsync();
+        var actual = await sut.QueryAsync(index).ToListAsync();
 
         Assert.Equal(index.Count, actual.Count);
         Assert.All(index, id => actual.Any(record => record.Id == id));
-        Assert.All(actual,
+        Assert.All(
+            actual,
             record =>
             {
                 index.Contains(record.Id);
-            });
+            }
+            );
     }
 }
 
@@ -111,9 +112,7 @@ internal sealed record StubRecord(int Id);
 
 internal sealed class StubReplica : IReplicaSet<StubRecord>
 {
-    public StubReplica(
-        IReadOnlyCollection<StubRecord> values
-    )
+    public StubReplica(IReadOnlyCollection<StubRecord> values)
     {
         Values = values;
         Context = new CollectionContext(values.Count, values.Count);

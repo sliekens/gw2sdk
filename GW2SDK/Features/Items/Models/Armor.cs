@@ -15,7 +15,8 @@ public record Armor : Item
 
     public int Defense { get; init; }
 
-    public IReadOnlyCollection<InfusionSlot> InfusionSlots { get; init; } = Array.Empty<InfusionSlot>();
+    public IReadOnlyCollection<InfusionSlot> InfusionSlots { get; init; } =
+        Array.Empty<InfusionSlot>();
 
     public double AttributeAdjustment { get; init; }
 

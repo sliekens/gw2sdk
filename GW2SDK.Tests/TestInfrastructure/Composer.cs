@@ -44,8 +44,7 @@ public class Composer : IServiceProvider, IAsyncDisposable
 
     public async ValueTask DisposeAsync()
     {
-        await disposables.DisposeAsync()
-            .ConfigureAwait(false);
+        await disposables.DisposeAsync().ConfigureAwait(false);
         GC.SuppressFinalize(this);
     }
 
@@ -195,5 +194,6 @@ public class Composer : IServiceProvider, IAsyncDisposable
     }
 
     public T Resolve<T>() =>
-        (T)GetService(typeof(T)) ?? throw new InvalidOperationException($"Unable to compose type '{typeof(T)}'");
+        (T)GetService(typeof(T))
+        ?? throw new InvalidOperationException($"Unable to compose type '{typeof(T)}'");
 }

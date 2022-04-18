@@ -2,11 +2,8 @@
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
-using GW2SDK.Http;
-using GW2SDK.Json;
 using GW2SDK.Meta;
 using GW2SDK.Meta.Http;
-using GW2SDK.Meta.Json;
 using GW2SDK.Meta.Models;
 using GW2SDK.Tests.TestInfrastructure;
 using Xunit;
@@ -18,10 +15,12 @@ public class MetaQueryTest
     private static class ApiVersionFact
     {
         public static void There_are_no_newer_translations(ApiVersion actual) =>
-            Assert.All(actual.Languages,
+            Assert.All(
+                actual.Languages,
                 language =>
                 {
-                    Assert.Contains(language,
+                    Assert.Contains(
+                        language,
                         new[]
                         {
                             "en",
@@ -29,11 +28,14 @@ public class MetaQueryTest
                             "de",
                             "fr",
                             "zh"
-                        });
-                });
+                        }
+                        );
+                }
+                );
 
         public static void There_are_no_newer_schema_versions(ApiVersion actual) =>
-            Assert.Collection(actual.SchemaVersions,
+            Assert.Collection(
+                actual.SchemaVersions,
                 v => Assert.Equal(SchemaVersion.V20190221, v.Version),
                 v => Assert.Equal(SchemaVersion.V20190322, v.Version),
                 v => Assert.Equal(SchemaVersion.V20190516, v.Version),
@@ -44,7 +46,8 @@ public class MetaQueryTest
                 v => Assert.Equal(SchemaVersion.V20210406, v.Version),
                 v => Assert.Equal(SchemaVersion.V20210715, v.Version),
                 v => Assert.Equal(SchemaVersion.V20220309, v.Version),
-                v => Assert.Equal(SchemaVersion.V20220323, v.Version));
+                v => Assert.Equal(SchemaVersion.V20220323, v.Version)
+                );
 
         public static void There_are_no_surprise_endpoints(ApiVersion actual)
         {
@@ -210,11 +213,13 @@ public class MetaQueryTest
                 "/v2/wvw/upgrades"
             };
 
-            Assert.All(actual.Routes,
+            Assert.All(
+                actual.Routes,
                 route =>
                 {
                     Assert.Contains(route.Path, expected);
-                });
+                }
+                );
         }
     }
 

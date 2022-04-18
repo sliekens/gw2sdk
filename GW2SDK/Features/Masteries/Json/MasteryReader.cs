@@ -67,7 +67,10 @@ public static class MasteryReader
         };
     }
 
-    private static MasteryLevel ReadLevel(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    private static MasteryLevel ReadLevel(
+        JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         RequiredMember<string> name = new("name");
         RequiredMember<string> description = new("description");

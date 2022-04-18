@@ -31,10 +31,7 @@ public sealed class DyeQuery
         CancellationToken cancellationToken = default
     )
     {
-        UnlockedDyesRequest request = new()
-        {
-            AccessToken = accessToken
-        };
+        UnlockedDyesRequest request = new() { AccessToken = accessToken };
         return request.SendAsync(http, cancellationToken);
     }
 

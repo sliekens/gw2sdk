@@ -51,7 +51,9 @@ public sealed class StoryJournal
 
     #region /v2/backstory/questions
 
-    public Task<IReplicaSet<int>> GetBackstoryQuestionsIndex(CancellationToken cancellationToken = default)
+    public Task<IReplicaSet<int>> GetBackstoryQuestionsIndex(
+        CancellationToken cancellationToken = default
+    )
     {
         BackstoryQuestionsIndexRequest request = new();
         return request.SendAsync(http, cancellationToken);
@@ -108,7 +110,9 @@ public sealed class StoryJournal
 
     #region /v2/backstory/answers
 
-    public Task<IReplicaSet<string>> GetBackstoryAnswersIndex(CancellationToken cancellationToken = default)
+    public Task<IReplicaSet<string>> GetBackstoryAnswersIndex(
+        CancellationToken cancellationToken = default
+    )
     {
         BackstoryAnswersIndexRequest request = new();
         return request.SendAsync(http, cancellationToken);

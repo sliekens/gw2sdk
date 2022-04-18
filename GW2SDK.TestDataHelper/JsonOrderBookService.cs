@@ -5,7 +5,6 @@ using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 using GW2SDK.Commerce.Listings.Http;
-using GW2SDK.Http;
 
 namespace GW2SDK.TestDataHelper;
 
@@ -20,8 +19,7 @@ public class JsonOrderBookService
 
     public async Task<ISet<string>> GetJsonOrderBooks()
     {
-        var ids = await GetOrderBookIds()
-            .ConfigureAwait(false);
+        var ids = await GetOrderBookIds().ConfigureAwait(false);
 
         var batches = new Queue<IEnumerable<int>>(ids.Buffer(200));
 
@@ -64,11 +62,13 @@ public class JsonOrderBookService
     private async Task<List<string>> GetJsonItemListingsById(IReadOnlyCollection<int> itemIds)
     {
         var request = new BulkRequest("/v2/commerce/listings", itemIds);
-        var json = await request.SendAsync(http, CancellationToken.None)
-            .ConfigureAwait(false);
+        var json = await request.SendAsync(http, CancellationToken.None).ConfigureAwait(false);
         return json.Indent(false)
             .RootElement.EnumerateArray()
-            .Select(item => item.ToString() ?? throw new InvalidOperationException("Unexpected null in JSON array."))
+            .Select(
+                item => item.ToString()
+                    ?? throw new InvalidOperationException("Unexpected null in JSON array.")
+                )
             .ToList();
     }
 }

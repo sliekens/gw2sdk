@@ -29,7 +29,10 @@ public sealed class SkillByIdRequest : IHttpRequest<IReplica<Skill>>
 
     public MissingMemberBehavior MissingMemberBehavior { get; init; }
 
-    public async Task<IReplica<Skill>> SendAsync(HttpClient httpClient, CancellationToken cancellationToken)
+    public async Task<IReplica<Skill>> SendAsync(
+        HttpClient httpClient,
+        CancellationToken cancellationToken
+    )
     {
         QueryBuilder search = new();
         search.Add("id", SkillId);
@@ -39,21 +42,24 @@ public sealed class SkillByIdRequest : IHttpRequest<IReplica<Skill>>
             AcceptLanguage = Language?.Alpha2Code
         };
 
-        using var response = await httpClient.SendAsync(request.Compile(),
+        using var response = await httpClient.SendAsync(
+                request.Compile(),
                 HttpCompletionOption.ResponseHeadersRead,
-                cancellationToken)
+                cancellationToken
+                )
             .ConfigureAwait(false);
 
-        await response.EnsureResult(cancellationToken)
-            .ConfigureAwait(false);
+        await response.EnsureResult(cancellationToken).ConfigureAwait(false);
 
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
         var value = SkillReader.Read(json.RootElement, MissingMemberBehavior);
-        return new Replica<Skill>(response.Headers.Date.GetValueOrDefault(),
+        return new Replica<Skill>(
+            response.Headers.Date.GetValueOrDefault(),
             value,
             response.Content.Headers.Expires,
-            response.Content.Headers.LastModified);
+            response.Content.Headers.LastModified
+            );
     }
 }

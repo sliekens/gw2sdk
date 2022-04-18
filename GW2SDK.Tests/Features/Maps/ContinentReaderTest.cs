@@ -24,7 +24,8 @@ public class ContinentReaderTest : IClassFixture<ContinentFixture>
 
     [Fact]
     public void Floors_can_be_created_from_json() =>
-        AssertEx.ForEach(fixture.Floors,
+        AssertEx.ForEach(
+            fixture.Floors,
             json =>
             {
                 using var document = JsonDocument.Parse(json);
@@ -32,5 +33,6 @@ public class ContinentReaderTest : IClassFixture<ContinentFixture>
                 var actual = FloorReader.Read(document.RootElement, MissingMemberBehavior.Error);
 
                 FloorFact.Texture_dimensions_contains_width_and_height(actual);
-            });
+            }
+            );
 }

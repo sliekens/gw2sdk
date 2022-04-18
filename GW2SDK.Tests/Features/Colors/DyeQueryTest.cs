@@ -11,7 +11,8 @@ public class DyeQueryTest
 {
     private static class ColorFact
     {
-        public static void Base_rgb_contains_red_green_blue(Dye actual) => Assert.False(actual.BaseRgb.IsEmpty);
+        public static void Base_rgb_contains_red_green_blue(Dye actual) =>
+            Assert.False(actual.BaseRgb.IsEmpty);
     }
 
     [Fact]
@@ -23,11 +24,13 @@ public class DyeQueryTest
         var actual = await sut.GetColors();
 
         Assert.Equal(actual.Context.ResultTotal, actual.Count);
-        Assert.All(actual,
+        Assert.All(
+            actual,
             color =>
             {
                 ColorFact.Base_rgb_contains_red_green_blue(color);
-            });
+            }
+            );
     }
 
     [Fact]
@@ -69,10 +72,12 @@ public class DyeQueryTest
 
         var actual = await sut.GetColorsByIds(ids);
 
-        Assert.Collection(actual,
+        Assert.Collection(
+            actual,
             first => Assert.Equal(1, first.Id),
             second => Assert.Equal(2, second.Id),
-            third => Assert.Equal(3, third.Id));
+            third => Assert.Equal(3, third.Id)
+            );
     }
 
     [Fact]

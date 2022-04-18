@@ -17,5 +17,6 @@ public sealed record Mount
 
     public IReadOnlyCollection<int> Skins { get; init; } = Array.Empty<int>();
 
-    public IReadOnlyCollection<SkillReference> Skills { get; init; } = Array.Empty<SkillReference>();
+    public IReadOnlyCollection<SkillReference> Skills { get; init; } =
+        Array.Empty<SkillReference>();
 }

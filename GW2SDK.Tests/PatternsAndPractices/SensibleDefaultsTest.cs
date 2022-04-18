@@ -27,9 +27,9 @@ public class SensibleDefaultsTest : IClassFixture<AssemblyFixture>
          * => Sunday
          *
          */
-        var enums = fixture.Assembly.ExportedTypes.Where(type => type.IsEnum)
-            .ToList();
-        Assert.All(enums,
+        var enums = fixture.Assembly.ExportedTypes.Where(type => type.IsEnum).ToList();
+        Assert.All(
+            enums,
             type =>
             {
                 if (HasDefaultMember(type))
@@ -38,22 +38,26 @@ public class SensibleDefaultsTest : IClassFixture<AssemblyFixture>
                     if (annotation is null)
                     {
                         throw new ApplicationException(
-                            $"Enum '{type}' has an implicit default value, change its value or mark it as [DefaultValue].");
+                            $"Enum '{type}' has an implicit default value, change its value or mark it as [DefaultValue]."
+                            );
                     }
 
                     if (annotation.Value is null || annotation.Value.GetType() != type)
                     {
                         throw new ApplicationException(
-                            $"Enum '{type}' has a [DefaultValue] with an invalid type, use the enum's type.");
+                            $"Enum '{type}' has a [DefaultValue] with an invalid type, use the enum's type."
+                            );
                     }
 
                     if (!Enum.IsDefined(type, annotation.Value))
                     {
                         throw new ApplicationException(
-                            $"Enum '{type}' has a [DefaultValue] that does not exist, adjust or remove the attribute.");
+                            $"Enum '{type}' has a [DefaultValue] that does not exist, adjust or remove the attribute."
+                            );
                     }
                 }
-            });
+            }
+            );
 
         static bool HasDefaultMember(Type enumType)
         {

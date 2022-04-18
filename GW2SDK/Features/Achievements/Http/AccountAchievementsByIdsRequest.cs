@@ -14,10 +14,8 @@ namespace GW2SDK.Achievements.Http;
 [PublicAPI]
 public sealed class AccountAchievementsByIdsRequest : IHttpRequest<IReplicaSet<AccountAchievement>>
 {
-    private static readonly HttpRequestMessageTemplate Template = new(Get, "/v2/account/achievements")
-    {
-        AcceptEncoding = "gzip"
-    };
+    private static readonly HttpRequestMessageTemplate Template =
+        new(Get, "/v2/account/achievements") { AcceptEncoding = "gzip" };
 
     public AccountAchievementsByIdsRequest(IReadOnlyCollection<int> achievementIds)
     {
@@ -43,22 +41,27 @@ public sealed class AccountAchievementsByIdsRequest : IHttpRequest<IReplicaSet<A
             Arguments = search,
             BearerToken = AccessToken
         };
-        using var response = await httpClient.SendAsync(request.Compile(),
+        using var response = await httpClient.SendAsync(
+                request.Compile(),
                 HttpCompletionOption.ResponseHeadersRead,
-                cancellationToken)
+                cancellationToken
+                )
             .ConfigureAwait(false);
 
-        await response.EnsureResult(cancellationToken)
-            .ConfigureAwait(false);
+        await response.EnsureResult(cancellationToken).ConfigureAwait(false);
 
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value = json.RootElement.GetSet(entry => AccountAchievementReader.Read(entry, MissingMemberBehavior));
-        return new ReplicaSet<AccountAchievement>(response.Headers.Date.GetValueOrDefault(),
+        var value = json.RootElement.GetSet(
+            entry => AccountAchievementReader.Read(entry, MissingMemberBehavior)
+            );
+        return new ReplicaSet<AccountAchievement>(
+            response.Headers.Date.GetValueOrDefault(),
             value,
             response.Headers.GetCollectionContext(),
             response.Content.Headers.Expires,
-            response.Content.Headers.LastModified);
+            response.Content.Headers.LastModified
+            );
     }
 }

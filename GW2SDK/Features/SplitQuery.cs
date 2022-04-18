@@ -34,8 +34,10 @@ public static class SplitQuery
     ) =>
         new(query, progress, maxConcurrency);
 
-    public static SplitQuery<TKey, TRecord>
-        Create<TKey, TRecord>(InQuery<TKey, TRecord> query, int maxConcurrency = 20) =>
+    public static SplitQuery<TKey, TRecord> Create<TKey, TRecord>(
+        InQuery<TKey, TRecord> query,
+        int maxConcurrency = 20
+    ) =>
         new(query, default, maxConcurrency);
 }
 
@@ -75,9 +77,11 @@ public sealed class SplitQuery<TKey, TRecord>
 
         if (bufferSize is < 1 or > 200)
         {
-            throw new ArgumentOutOfRangeException(nameof(bufferSize),
+            throw new ArgumentOutOfRangeException(
+                nameof(bufferSize),
                 bufferSize,
-                "The buffer size must be a number between 1 and 200");
+                "The buffer size must be a number between 1 and 200"
+                );
         }
 
         ReportProgress(resultTotal, 0);
@@ -85,8 +89,7 @@ public sealed class SplitQuery<TKey, TRecord>
         // PERF: no need to split if index is small enough
         if (index.Count <= bufferSize)
         {
-            var result = await query(index, cancellationToken)
-                .ConfigureAwait(false);
+            var result = await query(index, cancellationToken).ConfigureAwait(false);
             ReportProgress(resultTotal, result.Context.ResultCount);
             foreach (var record in result)
             {
@@ -101,14 +104,18 @@ public sealed class SplitQuery<TKey, TRecord>
             var resultCount = 0;
 
             var batches = SplitIndex(index.ToList(), bufferSize);
-            var inflight = batches.Select(next =>
-                    Throttled(() => query(next, cancellationToken), throttler, cancellationToken))
+            var inflight = batches.Select(
+                    next => Throttled(
+                        () => query(next, cancellationToken),
+                        throttler,
+                        cancellationToken
+                        )
+                    )
                 .ToList();
 
             while (inflight.Count != 0)
             {
-                var done = await Task.WhenAny(inflight)
-                    .ConfigureAwait(false);
+                var done = await Task.WhenAny(inflight).ConfigureAwait(false);
 
                 inflight.Remove(done);
 
@@ -132,10 +139,8 @@ public sealed class SplitQuery<TKey, TRecord>
     {
         try
         {
-            await throttler.WaitAsync(cancellationToken)
-                .ConfigureAwait(false);
-            return await taskFactory()
-                .ConfigureAwait(false);
+            await throttler.WaitAsync(cancellationToken).ConfigureAwait(false);
+            return await taskFactory().ConfigureAwait(false);
         }
         finally
         {

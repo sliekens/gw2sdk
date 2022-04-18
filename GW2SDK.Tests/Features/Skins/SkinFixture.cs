@@ -8,9 +8,7 @@ public class SkinFixture
 {
     public SkinFixture()
     {
-        Skins = FlatFileReader.Read("Data/skins.json.gz")
-            .ToList()
-            .AsReadOnly();
+        Skins = FlatFileReader.Read("Data/skins.json.gz").ToList().AsReadOnly();
     }
 
     public IReadOnlyCollection<string> Skins { get; }

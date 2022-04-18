@@ -13,10 +13,8 @@ namespace GW2SDK.Stories.Http;
 [PublicAPI]
 public sealed class BackstoryQuestionsRequest : IHttpRequest<IReplicaSet<BackstoryQuestion>>
 {
-    private static readonly HttpRequestMessageTemplate Template = new(Get, "/v2/backstory/questions")
-    {
-        AcceptEncoding = "gzip"
-    };
+    private static readonly HttpRequestMessageTemplate Template =
+        new(Get, "/v2/backstory/questions") { AcceptEncoding = "gzip" };
 
     public Language? Language { get; init; }
 
@@ -35,22 +33,27 @@ public sealed class BackstoryQuestionsRequest : IHttpRequest<IReplicaSet<Backsto
             AcceptLanguage = Language?.Alpha2Code
         };
 
-        using var response = await httpClient.SendAsync(request.Compile(),
+        using var response = await httpClient.SendAsync(
+                request.Compile(),
                 HttpCompletionOption.ResponseHeadersRead,
-                cancellationToken)
+                cancellationToken
+                )
             .ConfigureAwait(false);
 
-        await response.EnsureResult(cancellationToken)
-            .ConfigureAwait(false);
+        await response.EnsureResult(cancellationToken).ConfigureAwait(false);
 
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value = json.RootElement.GetSet(entry => BackstoryQuestionReader.Read(entry, MissingMemberBehavior));
-        return new ReplicaSet<BackstoryQuestion>(response.Headers.Date.GetValueOrDefault(),
+        var value = json.RootElement.GetSet(
+            entry => BackstoryQuestionReader.Read(entry, MissingMemberBehavior)
+            );
+        return new ReplicaSet<BackstoryQuestion>(
+            response.Headers.Date.GetValueOrDefault(),
             value,
             response.Headers.GetCollectionContext(),
             response.Content.Headers.Expires,
-            response.Content.Headers.LastModified);
+            response.Content.Headers.LastModified
+            );
     }
 }

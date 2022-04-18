@@ -16,12 +16,14 @@ public class RecipeReaderTest : IClassFixture<RecipeFixture>
 
     [Fact]
     public void Recipes_can_be_created_from_json() =>
-        Assert.All(fixture.Recipes,
+        Assert.All(
+            fixture.Recipes,
             json =>
             {
                 using var document = JsonDocument.Parse(json);
                 var actual = RecipeReader.Read(document.RootElement, MissingMemberBehavior.Error);
 
                 RecipeFacts.Validate(actual);
-            });
+            }
+            );
 }

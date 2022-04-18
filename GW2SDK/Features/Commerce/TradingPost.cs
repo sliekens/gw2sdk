@@ -78,7 +78,8 @@ public sealed class TradingPost
         IProgress<ICollectionContext>? progress = default
     )
     {
-        var producer = SplitQuery.Create<int, ItemPrice>((range, ct) =>
+        var producer = SplitQuery.Create<int, ItemPrice>(
+            (range, ct) =>
             {
                 ItemPricesByIdsRequest request = new(range)
                 {
@@ -86,7 +87,8 @@ public sealed class TradingPost
                 };
                 return request.SendAsync(http, ct);
             },
-            progress);
+            progress
+            );
 
         return producer.QueryAsync(itemIds, cancellationToken: cancellationToken);
     }
@@ -97,9 +99,13 @@ public sealed class TradingPost
         IProgress<ICollectionContext>? progress = default
     )
     {
-        var index = await GetItemPricesIndex(cancellationToken)
-            .ConfigureAwait(false);
-        var producer = GetItemPricesByIds(index.Values, missingMemberBehavior, cancellationToken, progress);
+        var index = await GetItemPricesIndex(cancellationToken).ConfigureAwait(false);
+        var producer = GetItemPricesByIds(
+            index.Values,
+            missingMemberBehavior,
+            cancellationToken,
+            progress
+            );
         await foreach (var itemPrice in producer.WithCancellation(cancellationToken)
                            .ConfigureAwait(false))
         {
@@ -137,7 +143,8 @@ public sealed class TradingPost
         IProgress<ICollectionContext>? progress = default
     )
     {
-        var producer = SplitQuery.Create<int, OrderBook>((range, ct) =>
+        var producer = SplitQuery.Create<int, OrderBook>(
+            (range, ct) =>
             {
                 OrderBooksByIdsRequest request = new(range)
                 {
@@ -145,7 +152,8 @@ public sealed class TradingPost
                 };
                 return request.SendAsync(http, ct);
             },
-            progress);
+            progress
+            );
 
         return producer.QueryAsync(itemIds, cancellationToken: cancellationToken);
     }
@@ -156,9 +164,13 @@ public sealed class TradingPost
         IProgress<ICollectionContext>? progress = default
     )
     {
-        var index = await GetOrderBooksIndex(cancellationToken)
-            .ConfigureAwait(false);
-        var producer = GetOrderBooksByIds(index.Values, missingMemberBehavior, cancellationToken, progress);
+        var index = await GetOrderBooksIndex(cancellationToken).ConfigureAwait(false);
+        var producer = GetOrderBooksByIds(
+            index.Values,
+            missingMemberBehavior,
+            cancellationToken,
+            progress
+            );
         await foreach (var orderBook in producer.WithCancellation(cancellationToken)
                            .ConfigureAwait(false))
         {

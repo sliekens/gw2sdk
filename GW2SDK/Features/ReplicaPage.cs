@@ -20,6 +20,7 @@ internal sealed class ReplicaPage<T> : IReplicaPage<T>
         Expires = expires;
         LastModified = lastModified;
     }
+
     public IReadOnlyCollection<T> Values { get; }
 
     public IPageContext Context { get; }

@@ -47,10 +47,7 @@ public sealed class AccountQuery
         CancellationToken cancellationToken = default
     )
     {
-        CharactersIndexRequest request = new()
-        {
-            AccessToken = accessToken
-        };
+        CharactersIndexRequest request = new() { AccessToken = accessToken };
         return request.SendAsync(http, cancellationToken);
     }
 

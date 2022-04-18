@@ -9,7 +9,10 @@ namespace GW2SDK.Banking.Json;
 [PublicAPI]
 public static class MaterialCategoryReader
 {
-    public static MaterialCategory Read(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    public static MaterialCategory Read(
+        JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         RequiredMember<int> id = new("id");
         RequiredMember<string> name = new("name");

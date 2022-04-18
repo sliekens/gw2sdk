@@ -44,7 +44,10 @@ internal readonly ref struct OptionalMember<T>
         }
         catch (Exception reason)
         {
-            throw new InvalidOperationException($"Value for '{Name.ToString()}' is incompatible.", reason);
+            throw new InvalidOperationException(
+                $"Value for '{Name.ToString()}' is incompatible.",
+                reason
+                );
         }
     }
 
@@ -65,7 +68,10 @@ internal readonly ref struct OptionalMember<T>
         }
         catch (Exception reason)
         {
-            throw new InvalidOperationException($"Value for '{Name.ToString()}' is incompatible.", reason);
+            throw new InvalidOperationException(
+                $"Value for '{Name.ToString()}' is incompatible.",
+                reason
+                );
         }
     }
 

@@ -16,18 +16,21 @@ public class ProfessionQueryTest
 
         var actual = await sut.GetProfessions();
 
-        Assert.Equal(Enum.GetNames(typeof(ProfessionName))
-                .Length,
-            actual.Count);
+        Assert.Equal(Enum.GetNames(typeof(ProfessionName)).Length, actual.Count);
 
-        Assert.All(actual,
+        Assert.All(
+            actual,
             profession =>
             {
-                Assert.True(Enum.IsDefined(typeof(ProfessionName), profession.Id), "Enum.IsDefined(profession.Id)");
+                Assert.True(
+                    Enum.IsDefined(typeof(ProfessionName), profession.Id),
+                    "Enum.IsDefined(profession.Id)"
+                    );
                 Assert.NotEmpty(profession.Name);
                 Assert.NotEmpty(profession.Icon);
                 Assert.NotEmpty(profession.IconBig);
-            });
+            }
+            );
     }
 
     [Fact]
@@ -38,10 +41,14 @@ public class ProfessionQueryTest
 
         var actual = await sut.GetProfessionNames();
 
-        Assert.Equal(Enum.GetNames(typeof(ProfessionName))
-                .Length,
-            actual.Count);
-        Assert.All(actual, name => Assert.True(Enum.IsDefined(typeof(ProfessionName), name), "Enum.IsDefined(name)"));
+        Assert.Equal(Enum.GetNames(typeof(ProfessionName)).Length, actual.Count);
+        Assert.All(
+            actual,
+            name => Assert.True(
+                Enum.IsDefined(typeof(ProfessionName), name),
+                "Enum.IsDefined(name)"
+                )
+            );
     }
 
     [Fact]
@@ -72,10 +79,12 @@ public class ProfessionQueryTest
 
         var actual = await sut.GetProfessionsByNames(names);
 
-        Assert.Collection(actual,
+        Assert.Collection(
+            actual,
             first => Assert.Equal(names[0], first.Id),
             second => Assert.Equal(names[1], second.Id),
-            third => Assert.Equal(names[2], third.Id));
+            third => Assert.Equal(names[2], third.Id)
+            );
     }
 
     [Fact]

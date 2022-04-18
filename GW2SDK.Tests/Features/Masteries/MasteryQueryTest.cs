@@ -11,30 +11,38 @@ public class MasteryQueryTest
 {
     private static class MasteryFact
     {
-        public static void Id_is_positive(Mastery actual) => Assert.InRange(actual.Id, 1, int.MaxValue);
+        public static void Id_is_positive(Mastery actual) =>
+            Assert.InRange(actual.Id, 1, int.MaxValue);
 
         public static void Name_is_not_empty(Mastery actual) => Assert.NotEmpty(actual.Name);
 
-        public static void Requirement_is_not_null(Mastery actual) => Assert.NotNull(actual.Requirement);
+        public static void Requirement_is_not_null(Mastery actual) =>
+            Assert.NotNull(actual.Requirement);
 
-        public static void Order_is_not_negative(Mastery actual) => Assert.InRange(actual.Order, 0, int.MaxValue);
+        public static void Order_is_not_negative(Mastery actual) =>
+            Assert.InRange(actual.Order, 0, int.MaxValue);
 
-        public static void Background_is_not_empty(Mastery actual) => Assert.NotEmpty(actual.Background);
+        public static void Background_is_not_empty(Mastery actual) =>
+            Assert.NotEmpty(actual.Background);
 
-        public static void Region_is_known(Mastery actual) => Assert.NotEqual(MasteryRegionName.Unknown, actual.Region);
+        public static void Region_is_known(Mastery actual) =>
+            Assert.NotEqual(MasteryRegionName.Unknown, actual.Region);
     }
 
     private static class MasteryLevelFact
     {
         public static void Name_is_not_empty(MasteryLevel actual) => Assert.NotEmpty(actual.Name);
 
-        public static void Description_is_not_empty(MasteryLevel actual) => Assert.NotEmpty(actual.Description);
+        public static void Description_is_not_empty(MasteryLevel actual) =>
+            Assert.NotEmpty(actual.Description);
 
-        public static void Instruction_is_not_empty(MasteryLevel actual) => Assert.NotEmpty(actual.Instruction);
+        public static void Instruction_is_not_empty(MasteryLevel actual) =>
+            Assert.NotEmpty(actual.Instruction);
 
         public static void Icon_is_not_empty(MasteryLevel actual) => Assert.NotEmpty(actual.Icon);
 
-        public static void Costs_points(MasteryLevel actual) => Assert.InRange(actual.PointCost, 1, int.MaxValue);
+        public static void Costs_points(MasteryLevel actual) =>
+            Assert.InRange(actual.PointCost, 1, int.MaxValue);
 
         public static void Costs_experience(MasteryLevel actual) =>
             Assert.InRange(actual.ExperienceCost, 1, int.MaxValue);
@@ -49,7 +57,8 @@ public class MasteryQueryTest
         var actual = await sut.GetMasteries();
 
         Assert.Equal(actual.Context.ResultTotal, actual.Count);
-        Assert.All(actual,
+        Assert.All(
+            actual,
             mastery =>
             {
                 MasteryFact.Id_is_positive(mastery);
@@ -58,7 +67,8 @@ public class MasteryQueryTest
                 MasteryFact.Order_is_not_negative(mastery);
                 MasteryFact.Background_is_not_empty(mastery);
                 MasteryFact.Region_is_known(mastery);
-                Assert.All(mastery.Levels,
+                Assert.All(
+                    mastery.Levels,
                     level =>
                     {
                         MasteryLevelFact.Name_is_not_empty(level);
@@ -67,8 +77,10 @@ public class MasteryQueryTest
                         MasteryLevelFact.Icon_is_not_empty(level);
                         MasteryLevelFact.Costs_points(level);
                         MasteryLevelFact.Costs_experience(level);
-                    });
-            });
+                    }
+                    );
+            }
+            );
     }
 
     [Fact]
@@ -110,9 +122,11 @@ public class MasteryQueryTest
 
         var actual = await sut.GetMasteriesByIds(ids);
 
-        Assert.Collection(actual,
+        Assert.Collection(
+            actual,
             first => Assert.Equal(1, first.Id),
             second => Assert.Equal(2, second.Id),
-            third => Assert.Equal(3, third.Id));
+            third => Assert.Equal(3, third.Id)
+            );
     }
 }

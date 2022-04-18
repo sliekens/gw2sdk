@@ -17,12 +17,17 @@ public class MountQueryTest
 
         var actual = await sut.GetMounts();
 
-        Assert.All(actual,
+        Assert.All(
+            actual,
             mount =>
             {
-                Assert.True(Enum.IsDefined(typeof(MountName), mount.Id), "Enum.IsDefined(mount.Id)");
+                Assert.True(
+                    Enum.IsDefined(typeof(MountName), mount.Id),
+                    "Enum.IsDefined(mount.Id)"
+                    );
                 Assert.NotEmpty(mount.Name);
-            });
+            }
+            );
     }
 
     [Fact]
@@ -33,7 +38,10 @@ public class MountQueryTest
 
         var actual = await sut.GetMountNames();
 
-        Assert.All(actual, name => Assert.True(Enum.IsDefined(typeof(MountName), name), "Enum.IsDefined(name)"));
+        Assert.All(
+            actual,
+            name => Assert.True(Enum.IsDefined(typeof(MountName), name), "Enum.IsDefined(name)")
+            );
     }
 
     [Fact]
@@ -64,10 +72,12 @@ public class MountQueryTest
 
         var actual = await sut.GetMountsByNames(names);
 
-        Assert.Collection(actual,
+        Assert.Collection(
+            actual,
             first => Assert.Equal(names[0], first.Id),
             second => Assert.Equal(names[1], second.Id),
-            third => Assert.Equal(names[2], third.Id));
+            third => Assert.Equal(names[2], third.Id)
+            );
     }
 
     [Fact]
@@ -132,10 +142,12 @@ public class MountQueryTest
 
         var actual = await sut.GetMountSkinsByIds(ids);
 
-        Assert.Collection(actual,
+        Assert.Collection(
+            actual,
             first => Assert.Equal(1, first.Id),
             second => Assert.Equal(2, second.Id),
-            third => Assert.Equal(3, third.Id));
+            third => Assert.Equal(3, third.Id)
+            );
     }
 
     [Fact]

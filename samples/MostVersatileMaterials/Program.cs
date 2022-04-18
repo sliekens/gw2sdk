@@ -33,73 +33,89 @@ internal class Program
         var itemsService = new ItemQuery(http);
 
         var (ingredients, recipes) = await Progress()
-            .StartAsync(async ctx =>
-            {
-                var recipesProgress = ctx.AddTask("Fetching recipes",
-                    new ProgressTaskSettings
-                    {
-                        AutoStart = false
-                    });
-                var ingredientsProgress = ctx.AddTask("Fetching ingredients",
-                    new ProgressTaskSettings
-                    {
-                        AutoStart = false
-                    });
+            .StartAsync(
+                async ctx =>
+                {
+                    var recipesProgress = ctx.AddTask(
+                        "Fetching recipes",
+                        new ProgressTaskSettings { AutoStart = false }
+                        );
+                    var ingredientsProgress = ctx.AddTask(
+                        "Fetching ingredients",
+                        new ProgressTaskSettings { AutoStart = false }
+                        );
 
-                var craftable = await GetRecipes(recipesService, recipesProgress);
+                    var craftable = await GetRecipes(recipesService, recipesProgress);
 
-                var groupedByIngredient = craftable.SelectMany(recipe => recipe.Ingredients
-                        .Where(ingredient => ingredient.Kind == IngredientKind.Item)
-                        .Select(ingredient => (Ingredient: ingredient.Id, Recipe: recipe)))
-                    .ToLookup(grouping => grouping.Ingredient, grouping => grouping.Recipe);
+                    var groupedByIngredient = craftable
+                        .SelectMany(
+                            recipe => recipe.Ingredients
+                                .Where(ingredient => ingredient.Kind == IngredientKind.Item)
+                                .Select(ingredient => (Ingredient: ingredient.Id, Recipe: recipe))
+                            )
+                        .ToLookup(grouping => grouping.Ingredient, grouping => grouping.Recipe);
 
-                var ingredientIndex = groupedByIngredient.Select(grouping => grouping.Key)
-                    .ToHashSet();
+                    var ingredientIndex = groupedByIngredient.Select(grouping => grouping.Key)
+                        .ToHashSet();
 
-                var ingredients = await GetItems(ingredientIndex, itemsService, ingredientsProgress);
+                    var ingredients = await GetItems(
+                        ingredientIndex,
+                        itemsService,
+                        ingredientsProgress
+                        );
 
-                var ingredientsDictionary = ingredients.ToDictionary(item => item.Id);
+                    var ingredientsDictionary = ingredients.ToDictionary(item => item.Id);
 
-                var mostCommon = groupedByIngredient.OrderByDescending(grouping => grouping.Count())
-                    .Select(grouping => ingredientsDictionary[grouping.Key])
-                    .ToList();
+                    var mostCommon = groupedByIngredient
+                        .OrderByDescending(grouping => grouping.Count())
+                        .Select(grouping => ingredientsDictionary[grouping.Key])
+                        .ToList();
 
-                return (Ingredients: mostCommon, Craftable: groupedByIngredient);
-            });
+                    return (Ingredients: mostCommon, Craftable: groupedByIngredient);
+                }
+                );
 
         do
         {
             AnsiConsole.Clear();
 
-            var choice = AnsiConsole.Prompt(new SelectionPrompt<Item>()
-                .Title("Pick an ingredient to see the available recipes")
-                .MoreChoicesText("Scroll down for less commonly used ingredients")
-                .AddChoices(ingredients)
-                .UseConverter(item => item.Name)
-                .PageSize(20));
+            var choice = AnsiConsole.Prompt(
+                new SelectionPrompt<Item>().Title("Pick an ingredient to see the available recipes")
+                    .MoreChoicesText("Scroll down for less commonly used ingredients")
+                    .AddChoices(ingredients)
+                    .UseConverter(item => item.Name)
+                    .PageSize(20)
+                );
 
             await using var ingredientIcon = await http.GetStreamAsync(choice.Icon!);
             var choiceTable = new Table().AddColumn("Icon")
                 .AddColumn("Ingredient")
                 .AddColumn("Description");
 
-            choiceTable.AddRow(new CanvasImage(ingredientIcon).MaxWidth(32),
+            choiceTable.AddRow(
+                new CanvasImage(ingredientIcon).MaxWidth(32),
                 new Markup(choice.Name.EscapeMarkup()),
-                new Markup(choice.Description.EscapeMarkup()));
+                new Markup(choice.Description.EscapeMarkup())
+                );
 
             AnsiConsole.Write(choiceTable);
 
             var outputs = await Progress()
-                .StartAsync(async ctx =>
-                {
-                    var itemIds = recipes[choice.Id]
-                        .Select(recipe => recipe.OutputItemId)
-                        .ToHashSet();
-                    return await GetItems(itemIds, itemsService, ctx.AddTask("Fetching output items"));
-                });
+                .StartAsync(
+                    async ctx =>
+                    {
+                        var itemIds = recipes[choice.Id]
+                            .Select(recipe => recipe.OutputItemId)
+                            .ToHashSet();
+                        return await GetItems(
+                            itemIds,
+                            itemsService,
+                            ctx.AddTask("Fetching output items")
+                            );
+                    }
+                    );
 
-            var recipesTable = new Table().AddColumn("Recipe")
-                .AddColumn("Description");
+            var recipesTable = new Table().AddColumn("Recipe").AddColumn("Description");
 
             foreach (var recipe in outputs)
             {
@@ -112,19 +128,26 @@ internal class Program
 
     private static Progress Progress() =>
         AnsiConsole.Progress()
-            .Columns(new TaskDescriptionColumn(),
+            .Columns(
+                new TaskDescriptionColumn(),
                 new ProgressBarColumn(),
                 new PercentageColumn(),
                 new RemainingTimeColumn(),
-                new SpinnerColumn());
+                new SpinnerColumn()
+                );
 
-    private static async Task<List<Recipe>> GetRecipes(CraftingStation craftingStation, ProgressTask progress)
+    private static async Task<List<Recipe>> GetRecipes(
+        CraftingStation craftingStation,
+        ProgressTask progress
+    )
     {
         progress.StartTask();
         try
         {
             return await craftingStation
-                .GetRecipes(progress: new Progress<ICollectionContext>(ctx => UpdateProgress(ctx, progress)))
+                .GetRecipes(
+                    progress: new Progress<ICollectionContext>(ctx => UpdateProgress(ctx, progress))
+                    )
                 .OrderByDescending(recipe => recipe.Id)
                 .ToListAsync();
         }
@@ -143,8 +166,12 @@ internal class Program
         var items = new List<Item>(itemIds.Count);
 
         progress.StartTask();
-        await foreach (var item in itemQuery.GetItemsByIds(itemIds,
-                           progress: new Progress<ICollectionContext>(ctx => UpdateProgress(ctx, progress))))
+        await foreach (var item in itemQuery.GetItemsByIds(
+                           itemIds,
+                           progress: new Progress<ICollectionContext>(
+                               ctx => UpdateProgress(ctx, progress)
+                               )
+                           ))
         {
             items.Add(item);
         }

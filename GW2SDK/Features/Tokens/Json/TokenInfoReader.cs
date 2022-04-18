@@ -11,8 +11,7 @@ public static class TokenInfoReader
 {
     public static TokenInfo Read(JsonElement json, MissingMemberBehavior missingMemberBehavior)
     {
-        switch (json.GetProperty("type")
-                    .GetString())
+        switch (json.GetProperty("type").GetString())
         {
             case "APIKey":
                 return ReadApiKeyInfo(json, missingMemberBehavior);
@@ -29,7 +28,9 @@ public static class TokenInfoReader
             {
                 if (missingMemberBehavior == MissingMemberBehavior.Error)
                 {
-                    throw new InvalidOperationException(Strings.UnexpectedDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.UnexpectedDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals(id.Name))
@@ -58,7 +59,10 @@ public static class TokenInfoReader
         };
     }
 
-    private static ApiKeyInfo ReadApiKeyInfo(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    private static ApiKeyInfo ReadApiKeyInfo(
+        JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         RequiredMember<string> name = new("name");
         RequiredMember<string> id = new("id");
@@ -69,7 +73,9 @@ public static class TokenInfoReader
             {
                 if (!member.Value.ValueEquals("APIKey"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals(id.Name))
@@ -98,7 +104,10 @@ public static class TokenInfoReader
         };
     }
 
-    private static SubtokenInfo ReadSubtokenInfo(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    private static SubtokenInfo ReadSubtokenInfo(
+        JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         RequiredMember<string> name = new("name");
         RequiredMember<string> id = new("id");
@@ -112,7 +121,9 @@ public static class TokenInfoReader
             {
                 if (!member.Value.ValueEquals("Subtoken"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals(id.Name))

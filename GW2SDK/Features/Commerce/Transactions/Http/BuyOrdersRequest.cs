@@ -12,10 +12,8 @@ namespace GW2SDK.Commerce.Transactions.Http;
 [PublicAPI]
 public sealed class BuyOrdersRequest : IHttpRequest<IReplicaPage<Order>>
 {
-    private static readonly HttpRequestMessageTemplate Template = new(Get, "/v2/commerce/transactions/current/buys")
-    {
-        AcceptEncoding = "gzip"
-    };
+    private static readonly HttpRequestMessageTemplate Template =
+        new(Get, "/v2/commerce/transactions/current/buys") { AcceptEncoding = "gzip" };
 
     public BuyOrdersRequest(int pageIndex)
     {
@@ -30,7 +28,10 @@ public sealed class BuyOrdersRequest : IHttpRequest<IReplicaPage<Order>>
 
     public MissingMemberBehavior MissingMemberBehavior { get; init; }
 
-    public async Task<IReplicaPage<Order>> SendAsync(HttpClient httpClient, CancellationToken cancellationToken)
+    public async Task<IReplicaPage<Order>> SendAsync(
+        HttpClient httpClient,
+        CancellationToken cancellationToken
+    )
     {
         QueryBuilder search = new();
         search.Add("page", PageIndex);
@@ -45,22 +46,26 @@ public sealed class BuyOrdersRequest : IHttpRequest<IReplicaPage<Order>>
             BearerToken = AccessToken
         };
 
-        using var response = await httpClient.SendAsync(request.Compile(),
+        using var response = await httpClient.SendAsync(
+                request.Compile(),
                 HttpCompletionOption.ResponseHeadersRead,
-                cancellationToken)
+                cancellationToken
+                )
             .ConfigureAwait(false);
 
-        await response.EnsureResult(cancellationToken)
-            .ConfigureAwait(false);
+        await response.EnsureResult(cancellationToken).ConfigureAwait(false);
 
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value = json.RootElement.GetSet(entry => OrderReader.Read(entry, MissingMemberBehavior));
-        return new ReplicaPage<Order>(response.Headers.Date.GetValueOrDefault(),
+        var value =
+            json.RootElement.GetSet(entry => OrderReader.Read(entry, MissingMemberBehavior));
+        return new ReplicaPage<Order>(
+            response.Headers.Date.GetValueOrDefault(),
             value,
             response.Headers.GetPageContext(),
             response.Content.Headers.Expires,
-            response.Content.Headers.LastModified);
+            response.Content.Headers.LastModified
+            );
     }
 }

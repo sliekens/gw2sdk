@@ -9,7 +9,8 @@ namespace GW2SDK.Items.Models;
 [Inheritable]
 public record Trinket : Item
 {
-    public IReadOnlyCollection<InfusionSlot> InfusionSlots { get; init; } = Array.Empty<InfusionSlot>();
+    public IReadOnlyCollection<InfusionSlot> InfusionSlots { get; init; } =
+        Array.Empty<InfusionSlot>();
 
     public double AttributeAdjustment { get; init; }
 

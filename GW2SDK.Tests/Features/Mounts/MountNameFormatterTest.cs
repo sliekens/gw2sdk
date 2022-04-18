@@ -11,11 +11,13 @@ public class MountNameFormatterTest
     {
         var mounts = (MountName[])Enum.GetValues(typeof(MountName));
 
-        Assert.All(mounts,
+        Assert.All(
+            mounts,
             mountName =>
             {
                 var actual = MountNameFormatter.FormatMountName(mountName);
                 Assert.NotEmpty(actual);
-            });
+            }
+            );
     }
 }

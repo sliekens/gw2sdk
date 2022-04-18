@@ -9,7 +9,10 @@ namespace GW2SDK.Tokens.Json;
 [PublicAPI]
 public static class SubtokenReader
 {
-    public static CreatedSubtoken Read(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    public static CreatedSubtoken Read(
+        JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         RequiredMember<string> subtoken = new("subtoken");
 
@@ -25,9 +28,6 @@ public static class SubtokenReader
             }
         }
 
-        return new CreatedSubtoken
-        {
-            Subtoken = subtoken.GetValue()
-        };
+        return new CreatedSubtoken { Subtoken = subtoken.GetValue() };
     }
 }

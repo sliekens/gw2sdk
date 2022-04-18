@@ -9,11 +9,12 @@ namespace GW2SDK.Skins.Json;
 [PublicAPI]
 public static class SkinReader
 {
-    private static ArmorSkin ReadArmorSkin(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    private static ArmorSkin ReadArmorSkin(
+        JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
-        switch (json.GetProperty("details")
-                    .GetProperty("type")
-                    .GetString())
+        switch (json.GetProperty("details").GetProperty("type").GetString())
         {
             case "Boots":
                 return ReadBootsSkin(json, missingMemberBehavior);
@@ -46,7 +47,9 @@ public static class SkinReader
             {
                 if (!member.Value.ValueEquals("Armor"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -86,7 +89,8 @@ public static class SkinReader
                         if (missingMemberBehavior == MissingMemberBehavior.Error)
                         {
                             throw new InvalidOperationException(
-                                Strings.UnexpectedDiscriminator(detail.Value.GetString()));
+                                Strings.UnexpectedDiscriminator(detail.Value.GetString())
+                                );
                         }
                     }
                     else if (detail.NameEquals(weightClass.Name))
@@ -123,7 +127,10 @@ public static class SkinReader
         };
     }
 
-    private static AxeSkin ReadAxeSkin(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    private static AxeSkin ReadAxeSkin(
+        JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         RequiredMember<string> name = new("name");
         OptionalMember<string> description = new("description");
@@ -139,7 +146,9 @@ public static class SkinReader
             {
                 if (!member.Value.ValueEquals("Weapon"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -178,7 +187,9 @@ public static class SkinReader
                     {
                         if (!detail.Value.ValueEquals("Axe"))
                         {
-                            throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
+                            throw new InvalidOperationException(
+                                Strings.InvalidDiscriminator(detail.Value.GetString())
+                                );
                         }
                     }
                     else if (detail.NameEquals(damageType.Name))
@@ -210,7 +221,10 @@ public static class SkinReader
         };
     }
 
-    private static BackpackSkin ReadBackpackSkin(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    private static BackpackSkin ReadBackpackSkin(
+        JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         RequiredMember<string> name = new("name");
         OptionalMember<string> description = new("description");
@@ -225,7 +239,9 @@ public static class SkinReader
             {
                 if (!member.Value.ValueEquals("Back"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -274,7 +290,10 @@ public static class SkinReader
         };
     }
 
-    private static BootsSkin ReadBootsSkin(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    private static BootsSkin ReadBootsSkin(
+        JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         RequiredMember<string> name = new("name");
         OptionalMember<string> description = new("description");
@@ -291,7 +310,9 @@ public static class SkinReader
             {
                 if (!member.Value.ValueEquals("Armor"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -330,7 +351,9 @@ public static class SkinReader
                     {
                         if (!detail.Value.ValueEquals("Boots"))
                         {
-                            throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
+                            throw new InvalidOperationException(
+                                Strings.InvalidDiscriminator(detail.Value.GetString())
+                                );
                         }
                     }
                     else if (detail.NameEquals(weightClass.Name))
@@ -367,7 +390,10 @@ public static class SkinReader
         };
     }
 
-    private static CoatSkin ReadCoatSkin(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    private static CoatSkin ReadCoatSkin(
+        JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         RequiredMember<string> name = new("name");
         OptionalMember<string> description = new("description");
@@ -384,7 +410,9 @@ public static class SkinReader
             {
                 if (!member.Value.ValueEquals("Armor"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -423,7 +451,9 @@ public static class SkinReader
                     {
                         if (!detail.Value.ValueEquals("Coat"))
                         {
-                            throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
+                            throw new InvalidOperationException(
+                                Strings.InvalidDiscriminator(detail.Value.GetString())
+                                );
                         }
                     }
                     else if (detail.NameEquals(weightClass.Name))
@@ -460,7 +490,10 @@ public static class SkinReader
         };
     }
 
-    private static DaggerSkin ReadDaggerSkin(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    private static DaggerSkin ReadDaggerSkin(
+        JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         RequiredMember<string> name = new("name");
         OptionalMember<string> description = new("description");
@@ -476,7 +509,9 @@ public static class SkinReader
             {
                 if (!member.Value.ValueEquals("Weapon"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -515,7 +550,9 @@ public static class SkinReader
                     {
                         if (!detail.Value.ValueEquals("Dagger"))
                         {
-                            throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
+                            throw new InvalidOperationException(
+                                Strings.InvalidDiscriminator(detail.Value.GetString())
+                                );
                         }
                     }
                     else if (detail.NameEquals(damageType.Name))
@@ -547,7 +584,10 @@ public static class SkinReader
         };
     }
 
-    private static FocusSkin ReadFocusSkin(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    private static FocusSkin ReadFocusSkin(
+        JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         RequiredMember<string> name = new("name");
         OptionalMember<string> description = new("description");
@@ -563,7 +603,9 @@ public static class SkinReader
             {
                 if (!member.Value.ValueEquals("Weapon"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -602,7 +644,9 @@ public static class SkinReader
                     {
                         if (!detail.Value.ValueEquals("Focus"))
                         {
-                            throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
+                            throw new InvalidOperationException(
+                                Strings.InvalidDiscriminator(detail.Value.GetString())
+                                );
                         }
                     }
                     else if (detail.NameEquals(damageType.Name))
@@ -634,7 +678,10 @@ public static class SkinReader
         };
     }
 
-    private static ForagingToolSkin ReadForagingToolSkin(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    private static ForagingToolSkin ReadForagingToolSkin(
+        JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         RequiredMember<string> name = new("name");
         OptionalMember<string> description = new("description");
@@ -649,7 +696,9 @@ public static class SkinReader
             {
                 if (!member.Value.ValueEquals("Gathering"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -688,7 +737,9 @@ public static class SkinReader
                     {
                         if (!detail.Value.ValueEquals("Foraging"))
                         {
-                            throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
+                            throw new InvalidOperationException(
+                                Strings.InvalidDiscriminator(detail.Value.GetString())
+                                );
                         }
                     }
                     else if (missingMemberBehavior == MissingMemberBehavior.Error)
@@ -720,9 +771,7 @@ public static class SkinReader
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        switch (json.GetProperty("details")
-                    .GetProperty("type")
-                    .GetString())
+        switch (json.GetProperty("details").GetProperty("type").GetString())
         {
             case "Foraging":
                 return ReadForagingToolSkin(json, missingMemberBehavior);
@@ -747,7 +796,9 @@ public static class SkinReader
             {
                 if (!member.Value.ValueEquals("Gathering"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -787,7 +838,8 @@ public static class SkinReader
                         if (missingMemberBehavior == MissingMemberBehavior.Error)
                         {
                             throw new InvalidOperationException(
-                                Strings.UnexpectedDiscriminator(detail.Value.GetString()));
+                                Strings.UnexpectedDiscriminator(detail.Value.GetString())
+                                );
                         }
                     }
                     else if (missingMemberBehavior == MissingMemberBehavior.Error)
@@ -814,7 +866,10 @@ public static class SkinReader
         };
     }
 
-    private static FishingToolSkin ReadFishingToolSkin(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    private static FishingToolSkin ReadFishingToolSkin(
+        JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         RequiredMember<string> name = new("name");
         OptionalMember<string> description = new("description");
@@ -829,7 +884,9 @@ public static class SkinReader
             {
                 if (!member.Value.ValueEquals("Gathering"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -868,7 +925,9 @@ public static class SkinReader
                     {
                         if (!detail.Value.ValueEquals("Foo")) // TODO: use real type
                         {
-                            throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
+                            throw new InvalidOperationException(
+                                Strings.InvalidDiscriminator(detail.Value.GetString())
+                                );
                         }
                     }
                     else if (missingMemberBehavior == MissingMemberBehavior.Error)
@@ -895,7 +954,10 @@ public static class SkinReader
         };
     }
 
-    private static GlovesSkin ReadGlovesSkin(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    private static GlovesSkin ReadGlovesSkin(
+        JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         RequiredMember<string> name = new("name");
         OptionalMember<string> description = new("description");
@@ -912,7 +974,9 @@ public static class SkinReader
             {
                 if (!member.Value.ValueEquals("Armor"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -951,7 +1015,9 @@ public static class SkinReader
                     {
                         if (!detail.Value.ValueEquals("Gloves"))
                         {
-                            throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
+                            throw new InvalidOperationException(
+                                Strings.InvalidDiscriminator(detail.Value.GetString())
+                                );
                         }
                     }
                     else if (detail.NameEquals(weightClass.Name))
@@ -988,7 +1054,10 @@ public static class SkinReader
         };
     }
 
-    private static GreatswordSkin ReadGreatswordSkin(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    private static GreatswordSkin ReadGreatswordSkin(
+        JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         RequiredMember<string> name = new("name");
         OptionalMember<string> description = new("description");
@@ -1004,7 +1073,9 @@ public static class SkinReader
             {
                 if (!member.Value.ValueEquals("Weapon"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -1043,7 +1114,9 @@ public static class SkinReader
                     {
                         if (!detail.Value.ValueEquals("Greatsword"))
                         {
-                            throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
+                            throw new InvalidOperationException(
+                                Strings.InvalidDiscriminator(detail.Value.GetString())
+                                );
                         }
                     }
                     else if (detail.NameEquals(damageType.Name))
@@ -1075,7 +1148,10 @@ public static class SkinReader
         };
     }
 
-    private static HammerSkin ReadHammerSkin(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    private static HammerSkin ReadHammerSkin(
+        JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         RequiredMember<string> name = new("name");
         OptionalMember<string> description = new("description");
@@ -1091,7 +1167,9 @@ public static class SkinReader
             {
                 if (!member.Value.ValueEquals("Weapon"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -1130,7 +1208,9 @@ public static class SkinReader
                     {
                         if (!detail.Value.ValueEquals("Hammer"))
                         {
-                            throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
+                            throw new InvalidOperationException(
+                                Strings.InvalidDiscriminator(detail.Value.GetString())
+                                );
                         }
                     }
                     else if (detail.NameEquals(damageType.Name))
@@ -1162,7 +1242,10 @@ public static class SkinReader
         };
     }
 
-    private static HarpoonGunSkin ReadHarpoonGunSkin(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    private static HarpoonGunSkin ReadHarpoonGunSkin(
+        JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         RequiredMember<string> name = new("name");
         OptionalMember<string> description = new("description");
@@ -1178,7 +1261,9 @@ public static class SkinReader
             {
                 if (!member.Value.ValueEquals("Weapon"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -1217,7 +1302,9 @@ public static class SkinReader
                     {
                         if (!detail.Value.ValueEquals("Speargun"))
                         {
-                            throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
+                            throw new InvalidOperationException(
+                                Strings.InvalidDiscriminator(detail.Value.GetString())
+                                );
                         }
                     }
                     else if (detail.NameEquals(damageType.Name))
@@ -1249,7 +1336,10 @@ public static class SkinReader
         };
     }
 
-    private static HelmAquaticSkin ReadHelmAquaticSkin(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    private static HelmAquaticSkin ReadHelmAquaticSkin(
+        JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         RequiredMember<string> name = new("name");
         OptionalMember<string> description = new("description");
@@ -1266,7 +1356,9 @@ public static class SkinReader
             {
                 if (!member.Value.ValueEquals("Armor"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -1305,7 +1397,9 @@ public static class SkinReader
                     {
                         if (!detail.Value.ValueEquals("HelmAquatic"))
                         {
-                            throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
+                            throw new InvalidOperationException(
+                                Strings.InvalidDiscriminator(detail.Value.GetString())
+                                );
                         }
                     }
                     else if (detail.NameEquals(weightClass.Name))
@@ -1342,7 +1436,10 @@ public static class SkinReader
         };
     }
 
-    private static HelmSkin ReadHelmSkin(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    private static HelmSkin ReadHelmSkin(
+        JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         RequiredMember<string> name = new("name");
         OptionalMember<string> description = new("description");
@@ -1359,7 +1456,9 @@ public static class SkinReader
             {
                 if (!member.Value.ValueEquals("Armor"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -1398,7 +1497,9 @@ public static class SkinReader
                     {
                         if (!detail.Value.ValueEquals("Helm"))
                         {
-                            throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
+                            throw new InvalidOperationException(
+                                Strings.InvalidDiscriminator(detail.Value.GetString())
+                                );
                         }
                     }
                     else if (detail.NameEquals(weightClass.Name))
@@ -1435,7 +1536,10 @@ public static class SkinReader
         };
     }
 
-    private static LargeBundleSkin ReadLargeBundleSkin(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    private static LargeBundleSkin ReadLargeBundleSkin(
+        JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         RequiredMember<string> name = new("name");
         OptionalMember<string> description = new("description");
@@ -1451,7 +1555,9 @@ public static class SkinReader
             {
                 if (!member.Value.ValueEquals("Weapon"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -1490,7 +1596,9 @@ public static class SkinReader
                     {
                         if (!detail.Value.ValueEquals("LargeBundle"))
                         {
-                            throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
+                            throw new InvalidOperationException(
+                                Strings.InvalidDiscriminator(detail.Value.GetString())
+                                );
                         }
                     }
                     else if (detail.NameEquals(damageType.Name))
@@ -1522,7 +1630,10 @@ public static class SkinReader
         };
     }
 
-    private static LeggingsSkin ReadLeggingsSkin(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    private static LeggingsSkin ReadLeggingsSkin(
+        JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         RequiredMember<string> name = new("name");
         OptionalMember<string> description = new("description");
@@ -1539,7 +1650,9 @@ public static class SkinReader
             {
                 if (!member.Value.ValueEquals("Armor"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -1578,7 +1691,9 @@ public static class SkinReader
                     {
                         if (!detail.Value.ValueEquals("Leggings"))
                         {
-                            throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
+                            throw new InvalidOperationException(
+                                Strings.InvalidDiscriminator(detail.Value.GetString())
+                                );
                         }
                     }
                     else if (detail.NameEquals(weightClass.Name))
@@ -1615,7 +1730,10 @@ public static class SkinReader
         };
     }
 
-    private static LoggingToolSkin ReadLoggingToolSkin(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    private static LoggingToolSkin ReadLoggingToolSkin(
+        JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         RequiredMember<string> name = new("name");
         OptionalMember<string> description = new("description");
@@ -1630,7 +1748,9 @@ public static class SkinReader
             {
                 if (!member.Value.ValueEquals("Gathering"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -1669,7 +1789,9 @@ public static class SkinReader
                     {
                         if (!detail.Value.ValueEquals("Logging"))
                         {
-                            throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
+                            throw new InvalidOperationException(
+                                Strings.InvalidDiscriminator(detail.Value.GetString())
+                                );
                         }
                     }
                     else if (missingMemberBehavior == MissingMemberBehavior.Error)
@@ -1696,7 +1818,10 @@ public static class SkinReader
         };
     }
 
-    private static LongbowSkin ReadLongbowSkin(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    private static LongbowSkin ReadLongbowSkin(
+        JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         RequiredMember<string> name = new("name");
         OptionalMember<string> description = new("description");
@@ -1712,7 +1837,9 @@ public static class SkinReader
             {
                 if (!member.Value.ValueEquals("Weapon"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -1751,7 +1878,9 @@ public static class SkinReader
                     {
                         if (!detail.Value.ValueEquals("Longbow"))
                         {
-                            throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
+                            throw new InvalidOperationException(
+                                Strings.InvalidDiscriminator(detail.Value.GetString())
+                                );
                         }
                     }
                     else if (detail.NameEquals(damageType.Name))
@@ -1783,7 +1912,10 @@ public static class SkinReader
         };
     }
 
-    private static MaceSkin ReadMaceSkin(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    private static MaceSkin ReadMaceSkin(
+        JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         RequiredMember<string> name = new("name");
         OptionalMember<string> description = new("description");
@@ -1799,7 +1931,9 @@ public static class SkinReader
             {
                 if (!member.Value.ValueEquals("Weapon"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -1838,7 +1972,9 @@ public static class SkinReader
                     {
                         if (!detail.Value.ValueEquals("Mace"))
                         {
-                            throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
+                            throw new InvalidOperationException(
+                                Strings.InvalidDiscriminator(detail.Value.GetString())
+                                );
                         }
                     }
                     else if (detail.NameEquals(damageType.Name))
@@ -1870,7 +2006,10 @@ public static class SkinReader
         };
     }
 
-    private static MiningToolSkin ReadMiningToolSkin(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    private static MiningToolSkin ReadMiningToolSkin(
+        JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         RequiredMember<string> name = new("name");
         OptionalMember<string> description = new("description");
@@ -1885,7 +2024,9 @@ public static class SkinReader
             {
                 if (!member.Value.ValueEquals("Gathering"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -1924,7 +2065,9 @@ public static class SkinReader
                     {
                         if (!detail.Value.ValueEquals("Mining"))
                         {
-                            throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
+                            throw new InvalidOperationException(
+                                Strings.InvalidDiscriminator(detail.Value.GetString())
+                                );
                         }
                     }
                     else if (missingMemberBehavior == MissingMemberBehavior.Error)
@@ -1951,7 +2094,10 @@ public static class SkinReader
         };
     }
 
-    private static PistolSkin ReadPistolSkin(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    private static PistolSkin ReadPistolSkin(
+        JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         RequiredMember<string> name = new("name");
         OptionalMember<string> description = new("description");
@@ -1967,7 +2113,9 @@ public static class SkinReader
             {
                 if (!member.Value.ValueEquals("Weapon"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -2006,7 +2154,9 @@ public static class SkinReader
                     {
                         if (!detail.Value.ValueEquals("Pistol"))
                         {
-                            throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
+                            throw new InvalidOperationException(
+                                Strings.InvalidDiscriminator(detail.Value.GetString())
+                                );
                         }
                     }
                     else if (detail.NameEquals(damageType.Name))
@@ -2038,7 +2188,10 @@ public static class SkinReader
         };
     }
 
-    private static RifleSkin ReadRifleSkin(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    private static RifleSkin ReadRifleSkin(
+        JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         RequiredMember<string> name = new("name");
         OptionalMember<string> description = new("description");
@@ -2054,7 +2207,9 @@ public static class SkinReader
             {
                 if (!member.Value.ValueEquals("Weapon"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -2093,7 +2248,9 @@ public static class SkinReader
                     {
                         if (!detail.Value.ValueEquals("Rifle"))
                         {
-                            throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
+                            throw new InvalidOperationException(
+                                Strings.InvalidDiscriminator(detail.Value.GetString())
+                                );
                         }
                     }
                     else if (detail.NameEquals(damageType.Name))
@@ -2125,7 +2282,10 @@ public static class SkinReader
         };
     }
 
-    private static ScepterSkin ReadScepterSkin(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    private static ScepterSkin ReadScepterSkin(
+        JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         RequiredMember<string> name = new("name");
         OptionalMember<string> description = new("description");
@@ -2141,7 +2301,9 @@ public static class SkinReader
             {
                 if (!member.Value.ValueEquals("Weapon"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -2180,7 +2342,9 @@ public static class SkinReader
                     {
                         if (!detail.Value.ValueEquals("Scepter"))
                         {
-                            throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
+                            throw new InvalidOperationException(
+                                Strings.InvalidDiscriminator(detail.Value.GetString())
+                                );
                         }
                     }
                     else if (detail.NameEquals(damageType.Name))
@@ -2212,7 +2376,10 @@ public static class SkinReader
         };
     }
 
-    private static ShieldSkin ReadShieldSkin(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    private static ShieldSkin ReadShieldSkin(
+        JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         RequiredMember<string> name = new("name");
         OptionalMember<string> description = new("description");
@@ -2228,7 +2395,9 @@ public static class SkinReader
             {
                 if (!member.Value.ValueEquals("Weapon"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -2267,7 +2436,9 @@ public static class SkinReader
                     {
                         if (!detail.Value.ValueEquals("Shield"))
                         {
-                            throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
+                            throw new InvalidOperationException(
+                                Strings.InvalidDiscriminator(detail.Value.GetString())
+                                );
                         }
                     }
                     else if (detail.NameEquals(damageType.Name))
@@ -2299,7 +2470,10 @@ public static class SkinReader
         };
     }
 
-    private static ShortbowSkin ReadShortbowSkin(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    private static ShortbowSkin ReadShortbowSkin(
+        JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         RequiredMember<string> name = new("name");
         OptionalMember<string> description = new("description");
@@ -2315,7 +2489,9 @@ public static class SkinReader
             {
                 if (!member.Value.ValueEquals("Weapon"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -2354,7 +2530,9 @@ public static class SkinReader
                     {
                         if (!detail.Value.ValueEquals("Shortbow"))
                         {
-                            throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
+                            throw new InvalidOperationException(
+                                Strings.InvalidDiscriminator(detail.Value.GetString())
+                                );
                         }
                     }
                     else if (detail.NameEquals(damageType.Name))
@@ -2386,7 +2564,10 @@ public static class SkinReader
         };
     }
 
-    private static ShouldersSkin ReadShouldersSkin(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    private static ShouldersSkin ReadShouldersSkin(
+        JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         RequiredMember<string> name = new("name");
         OptionalMember<string> description = new("description");
@@ -2403,7 +2584,9 @@ public static class SkinReader
             {
                 if (!member.Value.ValueEquals("Armor"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -2442,7 +2625,9 @@ public static class SkinReader
                     {
                         if (!detail.Value.ValueEquals("Shoulders"))
                         {
-                            throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
+                            throw new InvalidOperationException(
+                                Strings.InvalidDiscriminator(detail.Value.GetString())
+                                );
                         }
                     }
                     else if (detail.NameEquals(weightClass.Name))
@@ -2481,8 +2666,7 @@ public static class SkinReader
 
     public static Skin Read(JsonElement json, MissingMemberBehavior missingMemberBehavior)
     {
-        switch (json.GetProperty("type")
-                    .GetString())
+        switch (json.GetProperty("type").GetString())
         {
             case "Armor":
                 return ReadArmorSkin(json, missingMemberBehavior);
@@ -2507,7 +2691,9 @@ public static class SkinReader
             {
                 if (missingMemberBehavior == MissingMemberBehavior.Error)
                 {
-                    throw new InvalidOperationException(Strings.UnexpectedDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.UnexpectedDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -2556,7 +2742,10 @@ public static class SkinReader
         };
     }
 
-    private static SmallBundleSkin ReadSmallBundleSkin(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    private static SmallBundleSkin ReadSmallBundleSkin(
+        JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         RequiredMember<string> name = new("name");
         OptionalMember<string> description = new("description");
@@ -2572,7 +2761,9 @@ public static class SkinReader
             {
                 if (!member.Value.ValueEquals("Weapon"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -2611,7 +2802,9 @@ public static class SkinReader
                     {
                         if (!detail.Value.ValueEquals("SmallBundle"))
                         {
-                            throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
+                            throw new InvalidOperationException(
+                                Strings.InvalidDiscriminator(detail.Value.GetString())
+                                );
                         }
                     }
                     else if (detail.NameEquals(damageType.Name))
@@ -2643,7 +2836,10 @@ public static class SkinReader
         };
     }
 
-    private static SpearSkin ReadSpearSkin(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    private static SpearSkin ReadSpearSkin(
+        JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         RequiredMember<string> name = new("name");
         OptionalMember<string> description = new("description");
@@ -2659,7 +2855,9 @@ public static class SkinReader
             {
                 if (!member.Value.ValueEquals("Weapon"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -2698,7 +2896,9 @@ public static class SkinReader
                     {
                         if (!detail.Value.ValueEquals("Spear"))
                         {
-                            throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
+                            throw new InvalidOperationException(
+                                Strings.InvalidDiscriminator(detail.Value.GetString())
+                                );
                         }
                     }
                     else if (detail.NameEquals(damageType.Name))
@@ -2730,7 +2930,10 @@ public static class SkinReader
         };
     }
 
-    private static StaffSkin ReadStaffSkin(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    private static StaffSkin ReadStaffSkin(
+        JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         RequiredMember<string> name = new("name");
         OptionalMember<string> description = new("description");
@@ -2746,7 +2949,9 @@ public static class SkinReader
             {
                 if (!member.Value.ValueEquals("Weapon"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -2785,7 +2990,9 @@ public static class SkinReader
                     {
                         if (!detail.Value.ValueEquals("Staff"))
                         {
-                            throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
+                            throw new InvalidOperationException(
+                                Strings.InvalidDiscriminator(detail.Value.GetString())
+                                );
                         }
                     }
                     else if (detail.NameEquals(damageType.Name))
@@ -2817,7 +3024,10 @@ public static class SkinReader
         };
     }
 
-    private static SwordSkin ReadSwordSkin(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    private static SwordSkin ReadSwordSkin(
+        JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         RequiredMember<string> name = new("name");
         OptionalMember<string> description = new("description");
@@ -2833,7 +3043,9 @@ public static class SkinReader
             {
                 if (!member.Value.ValueEquals("Weapon"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -2872,7 +3084,9 @@ public static class SkinReader
                     {
                         if (!detail.Value.ValueEquals("Sword"))
                         {
-                            throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
+                            throw new InvalidOperationException(
+                                Strings.InvalidDiscriminator(detail.Value.GetString())
+                                );
                         }
                     }
                     else if (detail.NameEquals(damageType.Name))
@@ -2904,7 +3118,10 @@ public static class SkinReader
         };
     }
 
-    private static TorchSkin ReadTorchSkin(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    private static TorchSkin ReadTorchSkin(
+        JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         RequiredMember<string> name = new("name");
         OptionalMember<string> description = new("description");
@@ -2920,7 +3137,9 @@ public static class SkinReader
             {
                 if (!member.Value.ValueEquals("Weapon"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -2959,7 +3178,9 @@ public static class SkinReader
                     {
                         if (!detail.Value.ValueEquals("Torch"))
                         {
-                            throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
+                            throw new InvalidOperationException(
+                                Strings.InvalidDiscriminator(detail.Value.GetString())
+                                );
                         }
                     }
                     else if (detail.NameEquals(damageType.Name))
@@ -2991,7 +3212,10 @@ public static class SkinReader
         };
     }
 
-    private static ToySkin ReadToySkin(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    private static ToySkin ReadToySkin(
+        JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         RequiredMember<string> name = new("name");
         OptionalMember<string> description = new("description");
@@ -3007,7 +3231,9 @@ public static class SkinReader
             {
                 if (!member.Value.ValueEquals("Weapon"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -3046,7 +3272,9 @@ public static class SkinReader
                     {
                         if (!detail.Value.ValueEquals("Toy"))
                         {
-                            throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
+                            throw new InvalidOperationException(
+                                Strings.InvalidDiscriminator(detail.Value.GetString())
+                                );
                         }
                     }
                     else if (detail.NameEquals(damageType.Name))
@@ -3078,7 +3306,10 @@ public static class SkinReader
         };
     }
 
-    private static ToyTwoHandedSkin ReadToyTwoHandedSkin(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    private static ToyTwoHandedSkin ReadToyTwoHandedSkin(
+        JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         RequiredMember<string> name = new("name");
         OptionalMember<string> description = new("description");
@@ -3094,7 +3325,9 @@ public static class SkinReader
             {
                 if (!member.Value.ValueEquals("Weapon"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -3133,7 +3366,9 @@ public static class SkinReader
                     {
                         if (!detail.Value.ValueEquals("ToyTwoHanded"))
                         {
-                            throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
+                            throw new InvalidOperationException(
+                                Strings.InvalidDiscriminator(detail.Value.GetString())
+                                );
                         }
                     }
                     else if (detail.NameEquals(damageType.Name))
@@ -3165,7 +3400,10 @@ public static class SkinReader
         };
     }
 
-    private static TridentSkin ReadTridentSkin(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    private static TridentSkin ReadTridentSkin(
+        JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         RequiredMember<string> name = new("name");
         OptionalMember<string> description = new("description");
@@ -3181,7 +3419,9 @@ public static class SkinReader
             {
                 if (!member.Value.ValueEquals("Weapon"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -3220,7 +3460,9 @@ public static class SkinReader
                     {
                         if (!detail.Value.ValueEquals("Trident"))
                         {
-                            throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
+                            throw new InvalidOperationException(
+                                Strings.InvalidDiscriminator(detail.Value.GetString())
+                                );
                         }
                     }
                     else if (detail.NameEquals(damageType.Name))
@@ -3252,7 +3494,10 @@ public static class SkinReader
         };
     }
 
-    private static WarhornSkin ReadWarhornSkin(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    private static WarhornSkin ReadWarhornSkin(
+        JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         RequiredMember<string> name = new("name");
         OptionalMember<string> description = new("description");
@@ -3268,7 +3513,9 @@ public static class SkinReader
             {
                 if (!member.Value.ValueEquals("Weapon"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -3307,7 +3554,9 @@ public static class SkinReader
                     {
                         if (!detail.Value.ValueEquals("Warhorn"))
                         {
-                            throw new InvalidOperationException(Strings.InvalidDiscriminator(detail.Value.GetString()));
+                            throw new InvalidOperationException(
+                                Strings.InvalidDiscriminator(detail.Value.GetString())
+                                );
                         }
                     }
                     else if (detail.NameEquals(damageType.Name))
@@ -3339,11 +3588,12 @@ public static class SkinReader
         };
     }
 
-    private static WeaponSkin ReadWeaponSkin(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    private static WeaponSkin ReadWeaponSkin(
+        JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
-        switch (json.GetProperty("details")
-                    .GetProperty("type")
-                    .GetString())
+        switch (json.GetProperty("details").GetProperty("type").GetString())
         {
             case "Axe":
                 return ReadAxeSkin(json, missingMemberBehavior);
@@ -3407,7 +3657,9 @@ public static class SkinReader
             {
                 if (!member.Value.ValueEquals("Weapon"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -3447,7 +3699,8 @@ public static class SkinReader
                         if (missingMemberBehavior == MissingMemberBehavior.Error)
                         {
                             throw new InvalidOperationException(
-                                Strings.UnexpectedDiscriminator(detail.Value.GetString()));
+                                Strings.UnexpectedDiscriminator(detail.Value.GetString())
+                                );
                         }
                     }
                     else if (detail.NameEquals(damageType.Name))
@@ -3479,7 +3732,10 @@ public static class SkinReader
         };
     }
 
-    private static DyeSlotInfo ReadDyeSlots(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    private static DyeSlotInfo ReadDyeSlots(
+        JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         RequiredMember<DyeSlot?> @default = new("default");
         OptionalMember<DyeSlot?> asuraFemale = new("AsuraFemale");
@@ -3544,7 +3800,9 @@ public static class SkinReader
                     }
                     else if (missingMemberBehavior == MissingMemberBehavior.Error)
                     {
-                        throw new InvalidOperationException(Strings.UnexpectedMember(@override.Name));
+                        throw new InvalidOperationException(
+                            Strings.UnexpectedMember(@override.Name)
+                            );
                     }
                 }
             }
@@ -3559,41 +3817,77 @@ public static class SkinReader
         return new DyeSlotInfo
         {
             Default =
-                @default.SelectMany(value =>
-                    value.ValueKind == JsonValueKind.Null ? null : ReadDyeSlot(value, missingMemberBehavior)),
+                @default.SelectMany(
+                    value => value.ValueKind == JsonValueKind.Null
+                        ? null
+                        : ReadDyeSlot(value, missingMemberBehavior)
+                    ),
             AsuraFemale =
-                asuraFemale.SelectMany(value =>
-                    value.ValueKind == JsonValueKind.Null ? null : ReadDyeSlot(value, missingMemberBehavior)),
+                asuraFemale.SelectMany(
+                    value => value.ValueKind == JsonValueKind.Null
+                        ? null
+                        : ReadDyeSlot(value, missingMemberBehavior)
+                    ),
             AsuraMale =
-                asuraMale.SelectMany(value =>
-                    value.ValueKind == JsonValueKind.Null ? null : ReadDyeSlot(value, missingMemberBehavior)),
+                asuraMale.SelectMany(
+                    value => value.ValueKind == JsonValueKind.Null
+                        ? null
+                        : ReadDyeSlot(value, missingMemberBehavior)
+                    ),
             CharrFemale =
-                charrFemale.SelectMany(value =>
-                    value.ValueKind == JsonValueKind.Null ? null : ReadDyeSlot(value, missingMemberBehavior)),
+                charrFemale.SelectMany(
+                    value => value.ValueKind == JsonValueKind.Null
+                        ? null
+                        : ReadDyeSlot(value, missingMemberBehavior)
+                    ),
             CharrMale =
-                charrMale.SelectMany(value =>
-                    value.ValueKind == JsonValueKind.Null ? null : ReadDyeSlot(value, missingMemberBehavior)),
+                charrMale.SelectMany(
+                    value => value.ValueKind == JsonValueKind.Null
+                        ? null
+                        : ReadDyeSlot(value, missingMemberBehavior)
+                    ),
             HumanFemale =
-                humanFemale.SelectMany(value =>
-                    value.ValueKind == JsonValueKind.Null ? null : ReadDyeSlot(value, missingMemberBehavior)),
+                humanFemale.SelectMany(
+                    value => value.ValueKind == JsonValueKind.Null
+                        ? null
+                        : ReadDyeSlot(value, missingMemberBehavior)
+                    ),
             HumanMale =
-                humanMale.SelectMany(value =>
-                    value.ValueKind == JsonValueKind.Null ? null : ReadDyeSlot(value, missingMemberBehavior)),
+                humanMale.SelectMany(
+                    value => value.ValueKind == JsonValueKind.Null
+                        ? null
+                        : ReadDyeSlot(value, missingMemberBehavior)
+                    ),
             NornFemale =
-                nornFemale.SelectMany(value =>
-                    value.ValueKind == JsonValueKind.Null ? null : ReadDyeSlot(value, missingMemberBehavior)),
+                nornFemale.SelectMany(
+                    value => value.ValueKind == JsonValueKind.Null
+                        ? null
+                        : ReadDyeSlot(value, missingMemberBehavior)
+                    ),
             NornMale =
-                nornMale.SelectMany(value =>
-                    value.ValueKind == JsonValueKind.Null ? null : ReadDyeSlot(value, missingMemberBehavior)),
+                nornMale.SelectMany(
+                    value => value.ValueKind == JsonValueKind.Null
+                        ? null
+                        : ReadDyeSlot(value, missingMemberBehavior)
+                    ),
             SylvariFemale =
-                sylvariFemale.SelectMany(value =>
-                    value.ValueKind == JsonValueKind.Null ? null : ReadDyeSlot(value, missingMemberBehavior)),
-            SylvariMale = sylvariMale.SelectMany(value =>
-                value.ValueKind == JsonValueKind.Null ? null : ReadDyeSlot(value, missingMemberBehavior))
+                sylvariFemale.SelectMany(
+                    value => value.ValueKind == JsonValueKind.Null
+                        ? null
+                        : ReadDyeSlot(value, missingMemberBehavior)
+                    ),
+            SylvariMale = sylvariMale.SelectMany(
+                value => value.ValueKind == JsonValueKind.Null
+                    ? null
+                    : ReadDyeSlot(value, missingMemberBehavior)
+                )
         };
     }
 
-    private static DyeSlot ReadDyeSlot(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    private static DyeSlot ReadDyeSlot(
+        JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         RequiredMember<int> colorId = new("color_id");
         RequiredMember<Material> material = new("material");

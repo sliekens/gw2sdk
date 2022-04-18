@@ -4,7 +4,6 @@ using System.Linq;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
-using GW2SDK.Http;
 using GW2SDK.Skins.Http;
 
 namespace GW2SDK.TestDataHelper;
@@ -20,8 +19,7 @@ public class JsonSkinService
 
     public async Task<ISet<string>> GetAllJsonSkins()
     {
-        var ids = await GetSkinIds()
-            .ConfigureAwait(false);
+        var ids = await GetSkinIds().ConfigureAwait(false);
 
         var batches = new Queue<IEnumerable<int>>(ids.Buffer(200));
 
@@ -64,11 +62,13 @@ public class JsonSkinService
     private async Task<List<string>> GetJsonSkinsByIds(IReadOnlyCollection<int> skinIds)
     {
         var request = new BulkRequest("/v2/skins", skinIds);
-        var json = await request.SendAsync(http, CancellationToken.None)
-            .ConfigureAwait(false);
+        var json = await request.SendAsync(http, CancellationToken.None).ConfigureAwait(false);
         return json.Indent(false)
             .RootElement.EnumerateArray()
-            .Select(item => item.ToString() ?? throw new InvalidOperationException("Unexpected null in JSON array."))
+            .Select(
+                item => item.ToString()
+                    ?? throw new InvalidOperationException("Unexpected null in JSON array.")
+                )
             .ToList();
     }
 }

@@ -42,10 +42,7 @@ public sealed class MountQuery
         CancellationToken cancellationToken = default
     )
     {
-        MountNamesRequest request = new()
-        {
-            MissingMemberBehavior = missingMemberBehavior
-        };
+        MountNamesRequest request = new() { MissingMemberBehavior = missingMemberBehavior };
         return request.SendAsync(http, cancellationToken);
     }
 

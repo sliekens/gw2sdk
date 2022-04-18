@@ -57,7 +57,8 @@ public class Program
             }
         }
 
-        await using (var file = CreateTextCompressed(Path.Combine(outDir, "continents_1_floors.json.gz")))
+        await using (var file =
+                     CreateTextCompressed(Path.Combine(outDir, "continents_1_floors.json.gz")))
         {
             Console.WriteLine("Getting floors 1/2.");
             var service = services.Resolve<JsonFloorService>();
@@ -68,7 +69,8 @@ public class Program
             }
         }
 
-        await using (var file = CreateTextCompressed(Path.Combine(outDir, "continents_2_floors.json.gz")))
+        await using (var file =
+                     CreateTextCompressed(Path.Combine(outDir, "continents_2_floors.json.gz")))
         {
             Console.WriteLine("Getting floors 2/2.");
             var service = services.Resolve<JsonFloorService>();

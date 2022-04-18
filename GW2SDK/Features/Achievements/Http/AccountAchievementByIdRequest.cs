@@ -13,10 +13,8 @@ namespace GW2SDK.Achievements.Http;
 [PublicAPI]
 public sealed class AccountAchievementByIdRequest : IHttpRequest<IReplica<AccountAchievement>>
 {
-    private static readonly HttpRequestMessageTemplate Template = new(Get, "/v2/account/achievements")
-    {
-        AcceptEncoding = "gzip"
-    };
+    private static readonly HttpRequestMessageTemplate Template =
+        new(Get, "/v2/account/achievements") { AcceptEncoding = "gzip" };
 
     public AccountAchievementByIdRequest(int achievementId)
     {
@@ -42,21 +40,24 @@ public sealed class AccountAchievementByIdRequest : IHttpRequest<IReplica<Accoun
             BearerToken = AccessToken
         };
 
-        using var response = await httpClient.SendAsync(request.Compile(),
+        using var response = await httpClient.SendAsync(
+                request.Compile(),
                 HttpCompletionOption.ResponseHeadersRead,
-                cancellationToken)
+                cancellationToken
+                )
             .ConfigureAwait(false);
 
-        await response.EnsureResult(cancellationToken)
-            .ConfigureAwait(false);
+        await response.EnsureResult(cancellationToken).ConfigureAwait(false);
 
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
         var value = AccountAchievementReader.Read(json.RootElement, MissingMemberBehavior);
-        return new Replica<AccountAchievement>(response.Headers.Date.GetValueOrDefault(),
+        return new Replica<AccountAchievement>(
+            response.Headers.Date.GetValueOrDefault(),
             value,
             response.Content.Headers.Expires,
-            response.Content.Headers.LastModified);
+            response.Content.Headers.LastModified
+            );
     }
 }

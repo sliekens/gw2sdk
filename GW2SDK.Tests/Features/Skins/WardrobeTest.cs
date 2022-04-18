@@ -47,10 +47,12 @@ public class WardrobeTest
 
         var actual = await sut.GetSkinsByIds(ids);
 
-        Assert.Collection(actual,
+        Assert.Collection(
+            actual,
             skin => Assert.Equal(1, skin.Id),
             skin => Assert.Equal(2, skin.Id),
-            skin => Assert.Equal(3, skin.Id));
+            skin => Assert.Equal(3, skin.Id)
+            );
     }
 
     [Fact]

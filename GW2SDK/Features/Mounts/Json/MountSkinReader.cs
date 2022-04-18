@@ -55,7 +55,10 @@ public static class MountSkinReader
         };
     }
 
-    private static DyeSlot ReadDyeSlot(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    private static DyeSlot ReadDyeSlot(
+        JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         RequiredMember<int> colorId = new("color_id");
         RequiredMember<Material> material = new("material");

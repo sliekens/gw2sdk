@@ -18,18 +18,24 @@ public class OrderBookReaderTest : IClassFixture<OrderBookFixture>
 
     private static class OrderBookFact
     {
-        public static void Id_is_positive(OrderBook actual) => Assert.InRange(actual.Id, 1, int.MaxValue);
+        public static void Id_is_positive(OrderBook actual) =>
+            Assert.InRange(actual.Id, 1, int.MaxValue);
     }
 
     [Fact]
     public void Order_book_can_be_created_from_json() =>
-        AssertEx.ForEach(fixture.ItemPrices,
+        AssertEx.ForEach(
+            fixture.ItemPrices,
             json =>
             {
                 using var document = JsonDocument.Parse(json);
 
-                var actual = OrderBookReader.Read(document.RootElement, MissingMemberBehavior.Error);
+                var actual = OrderBookReader.Read(
+                    document.RootElement,
+                    MissingMemberBehavior.Error
+                    );
 
                 OrderBookFact.Id_is_positive(actual);
-            });
+            }
+            );
 }

@@ -29,7 +29,10 @@ public sealed class WorldByIdRequest : IHttpRequest<IReplica<World>>
 
     public MissingMemberBehavior MissingMemberBehavior { get; init; }
 
-    public async Task<IReplica<World>> SendAsync(HttpClient httpClient, CancellationToken cancellationToken)
+    public async Task<IReplica<World>> SendAsync(
+        HttpClient httpClient,
+        CancellationToken cancellationToken
+    )
     {
         QueryBuilder search = new();
         search.Add("id", WorldId);
@@ -39,21 +42,24 @@ public sealed class WorldByIdRequest : IHttpRequest<IReplica<World>>
             AcceptLanguage = Language?.Alpha2Code
         };
 
-        using var response = await httpClient.SendAsync(request.Compile(),
+        using var response = await httpClient.SendAsync(
+                request.Compile(),
                 HttpCompletionOption.ResponseHeadersRead,
-                cancellationToken)
+                cancellationToken
+                )
             .ConfigureAwait(false);
 
-        await response.EnsureResult(cancellationToken)
-            .ConfigureAwait(false);
+        await response.EnsureResult(cancellationToken).ConfigureAwait(false);
 
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
         var value = WorldReader.Read(json.RootElement, MissingMemberBehavior);
-        return new Replica<World>(response.Headers.Date.GetValueOrDefault(),
+        return new Replica<World>(
+            response.Headers.Date.GetValueOrDefault(),
             value,
             response.Content.Headers.Expires,
-            response.Content.Headers.LastModified);
+            response.Content.Headers.LastModified
+            );
     }
 }

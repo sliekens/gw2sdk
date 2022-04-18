@@ -46,13 +46,14 @@ public class CraftingStationTest
             3
         };
 
-        var actual = await sut.GetRecipesByIds(ids)
-            .ToListAsync();
+        var actual = await sut.GetRecipesByIds(ids).ToListAsync();
 
-        Assert.Collection(actual,
+        Assert.Collection(
+            actual,
             first => Assert.Contains(first.Id, ids),
             second => Assert.Contains(second.Id, ids),
-            third => Assert.Contains(third.Id, ids));
+            third => Assert.Contains(third.Id, ids)
+            );
     }
 
     [Fact]
@@ -160,11 +161,19 @@ public class CraftingStationTest
         Assert.NotInRange(actual.Count, 0, 200); // Greater than 200
         Assert.Equal(actual.Context.ResultTotal, actual.Count);
         Assert.Equal(actual.Context.ResultTotal, actual.Context.ResultCount);
-        Assert.All(actual, recipe => Assert.Contains(recipe.Ingredients, ingredient => ingredient.Id == visionCrystal));
+        Assert.All(
+            actual,
+            recipe => Assert.Contains(
+                recipe.Ingredients,
+                ingredient => ingredient.Id == visionCrystal
+                )
+            );
     }
 
-    [Fact(Skip =
-        "This test is best used interactively, otherwise it will hit rate limits in this as well as other tests.")]
+    [Fact(
+        Skip =
+            "This test is best used interactively, otherwise it will hit rate limits in this as well as other tests."
+        )]
     public async Task It_can_get_all_recipes()
     {
         await using Composer services = new();
@@ -216,7 +225,8 @@ public class CraftingStationTest
         var referenceData = await sut.GetDailyRecipes();
         var dailyRecipes = referenceData.Value;
 
-        Assert.Equal(new[]
+        Assert.Equal(
+            new[]
             {
                 "charged_quartz_crystal",
                 "glob_of_elder_spirit_residue",
@@ -224,7 +234,8 @@ public class CraftingStationTest
                 "spool_of_silk_weaving_thread",
                 "spool_of_thick_elonian_cord"
             },
-            dailyRecipes);
+            dailyRecipes
+            );
 
         // Again this next method is not deterministic...
         var actual = await sut.GetDailyRecipesOnCooldown(accessToken.Key);

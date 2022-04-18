@@ -44,22 +44,27 @@ public sealed class MaterialCategoriesByIdsRequest : IHttpRequest<IReplicaSet<Ma
             AcceptLanguage = Language?.Alpha2Code
         };
 
-        using var response = await httpClient.SendAsync(request.Compile(),
+        using var response = await httpClient.SendAsync(
+                request.Compile(),
                 HttpCompletionOption.ResponseHeadersRead,
-                cancellationToken)
+                cancellationToken
+                )
             .ConfigureAwait(false);
 
-        await response.EnsureResult(cancellationToken)
-            .ConfigureAwait(false);
+        await response.EnsureResult(cancellationToken).ConfigureAwait(false);
 
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value = json.RootElement.GetSet(entry => MaterialCategoryReader.Read(entry, MissingMemberBehavior));
-        return new ReplicaSet<MaterialCategory>(response.Headers.Date.GetValueOrDefault(),
+        var value = json.RootElement.GetSet(
+            entry => MaterialCategoryReader.Read(entry, MissingMemberBehavior)
+            );
+        return new ReplicaSet<MaterialCategory>(
+            response.Headers.Date.GetValueOrDefault(),
             value,
             response.Headers.GetCollectionContext(),
             response.Content.Headers.Expires,
-            response.Content.Headers.LastModified);
+            response.Content.Headers.LastModified
+            );
     }
 }

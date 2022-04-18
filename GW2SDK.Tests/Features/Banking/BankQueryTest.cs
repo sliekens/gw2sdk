@@ -10,24 +10,29 @@ namespace GW2SDK.Tests.Features.Banking;
 
 public class BankQueryTest
 {
-    [SuppressMessage("ReSharper", "SuggestBaseTypeForParameter")] // Yes the Bank is enumerable but its type has meaning
+    // Yes the Bank is enumerable but its type has meaning
+    [SuppressMessage("ReSharper", "SuggestBaseTypeForParameter")]
     private static class AccountBankFact
     {
         public static void Bank_is_not_empty(AccountBank actual) => Assert.NotEmpty(actual);
 
-        public static void Bank_tabs_have_30_slots(AccountBank actual) => Assert.Equal(0, actual.Count % 30);
+        public static void Bank_tabs_have_30_slots(AccountBank actual) =>
+            Assert.Equal(0, actual.Count % 30);
     }
 
     private static class MaterialCategoryFact
     {
-        public static void Name_is_not_empty(MaterialCategory actual) => Assert.NotEmpty(actual.Name);
+        public static void Name_is_not_empty(MaterialCategory actual) =>
+            Assert.NotEmpty(actual.Name);
     }
 
     private static class AccountBankSlotFact
     {
-        public static void BankSlot_id_is_positive(BankSlot actual) => Assert.InRange(actual.Id, 1, int.MaxValue);
+        public static void BankSlot_id_is_positive(BankSlot actual) =>
+            Assert.InRange(actual.Id, 1, int.MaxValue);
 
-        public static void BankSlot_count_is_positive(BankSlot actual) => Assert.InRange(actual.Count, 1, int.MaxValue);
+        public static void BankSlot_count_is_positive(BankSlot actual) =>
+            Assert.InRange(actual.Count, 1, int.MaxValue);
     }
 
     [Fact]
@@ -43,7 +48,8 @@ public class BankQueryTest
 
         AccountBankFact.Bank_tabs_have_30_slots(actual.Value);
 
-        Assert.All(actual.Value,
+        Assert.All(
+            actual.Value,
             slot =>
             {
                 if (slot is null)
@@ -53,7 +59,8 @@ public class BankQueryTest
 
                 AccountBankSlotFact.BankSlot_id_is_positive(slot);
                 AccountBankSlotFact.BankSlot_count_is_positive(slot);
-            });
+            }
+            );
     }
 
     [Fact]
@@ -65,11 +72,13 @@ public class BankQueryTest
         var actual = await sut.GetMaterialCategories();
 
         Assert.Equal(actual.Context.ResultTotal, actual.Count);
-        Assert.All(actual,
+        Assert.All(
+            actual,
             materialCategory =>
             {
                 MaterialCategoryFact.Name_is_not_empty(materialCategory);
-            });
+            }
+            );
     }
 
     [Fact]
@@ -111,9 +120,11 @@ public class BankQueryTest
 
         var actual = await sut.GetMaterialCategoriesByIds(ids);
 
-        Assert.Collection(actual,
+        Assert.Collection(
+            actual,
             first => Assert.Contains(first.Id, ids),
             second => Assert.Contains(second.Id, ids),
-            third => Assert.Contains(third.Id, ids));
+            third => Assert.Contains(third.Id, ids)
+            );
     }
 }
