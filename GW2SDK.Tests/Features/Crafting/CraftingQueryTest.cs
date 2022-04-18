@@ -7,13 +7,13 @@ using Xunit;
 
 namespace GW2SDK.Tests.Features.Crafting;
 
-public class CraftingStationTest
+public class CraftingQueryTest
 {
     [Fact]
     public async Task It_can_get_all_recipe_ids()
     {
         await using Composer services = new();
-        var sut = services.Resolve<CraftingStation>();
+        var sut = services.Resolve<CraftingQuery>();
 
         var actual = await sut.GetRecipesIndex();
 
@@ -24,7 +24,7 @@ public class CraftingStationTest
     public async Task It_can_get_a_recipe_by_id()
     {
         await using Composer services = new();
-        var sut = services.Resolve<CraftingStation>();
+        var sut = services.Resolve<CraftingQuery>();
 
         const int recipeId = 1;
 
@@ -37,7 +37,7 @@ public class CraftingStationTest
     public async Task It_can_get_recipes_by_id()
     {
         await using Composer services = new();
-        var sut = services.Resolve<CraftingStation>();
+        var sut = services.Resolve<CraftingQuery>();
 
         HashSet<int> ids = new()
         {
@@ -60,7 +60,7 @@ public class CraftingStationTest
     public async Task It_can_get_recipes_by_page()
     {
         await using Composer services = new();
-        var sut = services.Resolve<CraftingStation>();
+        var sut = services.Resolve<CraftingQuery>();
 
         var actual = await sut.GetRecipesByPage(0, 3);
 
@@ -72,7 +72,7 @@ public class CraftingStationTest
     public async Task Recipes_ids_with_iron_ore_ingredient_contains_recipe_id_for_iron_ingot()
     {
         await using Composer services = new();
-        var sut = services.Resolve<CraftingStation>();
+        var sut = services.Resolve<CraftingQuery>();
 
         const int ironOre = 19699;
         var actual = await sut.GetRecipesIndexByIngredientItemId(ironOre);
@@ -85,7 +85,7 @@ public class CraftingStationTest
     public async Task Recipes_with_iron_ore_ingredient_contains_recipe_for_iron_ingot()
     {
         await using Composer services = new();
-        var sut = services.Resolve<CraftingStation>();
+        var sut = services.Resolve<CraftingQuery>();
 
         const int ironOre = 19699;
         var actual = await sut.GetRecipesByIngredientItemId(ironOre);
@@ -98,7 +98,7 @@ public class CraftingStationTest
     public async Task Recipes_page_with_iron_ore_ingredient_contains_recipe_for_iron_ingot()
     {
         await using Composer services = new();
-        var sut = services.Resolve<CraftingStation>();
+        var sut = services.Resolve<CraftingQuery>();
 
         const int ironOre = 19699;
         var actual = await sut.GetRecipesByIngredientItemIdByPage(ironOre, 0, 20);
@@ -111,7 +111,7 @@ public class CraftingStationTest
     public async Task Recipes_ids_with_iron_ingot_output_contains_recipe_id_for_iron_ingot()
     {
         await using Composer services = new();
-        var sut = services.Resolve<CraftingStation>();
+        var sut = services.Resolve<CraftingQuery>();
 
         const int ironIngot = 19683;
         var actual = await sut.GetRecipesIndexByOutputItemId(ironIngot);
@@ -124,7 +124,7 @@ public class CraftingStationTest
     public async Task Recipes_with_iron_ingot_output_contains_recipe_for_iron_ingot()
     {
         await using Composer services = new();
-        var sut = services.Resolve<CraftingStation>();
+        var sut = services.Resolve<CraftingQuery>();
 
         const int ironIngot = 19683;
         var actual = await sut.GetRecipesByOutputItemId(ironIngot);
@@ -137,7 +137,7 @@ public class CraftingStationTest
     public async Task Recipes_page_with_iron_ingot_output_contains_recipe_for_iron_ingot()
     {
         await using Composer services = new();
-        var sut = services.Resolve<CraftingStation>();
+        var sut = services.Resolve<CraftingQuery>();
 
         const int ironIngot = 19683;
         var actual = await sut.GetRecipesByOutputItemIdByPage(ironIngot, 0, 20);
@@ -153,7 +153,7 @@ public class CraftingStationTest
         //   but that doesn't seem to apply for recipes search by input/output item
         // There are 800+ recipes that require a vision crystal
         await using Composer services = new();
-        var sut = services.Resolve<CraftingStation>();
+        var sut = services.Resolve<CraftingQuery>();
 
         const int visionCrystal = 46746;
         var actual = await sut.GetRecipesByIngredientItemId(visionCrystal);
@@ -177,7 +177,7 @@ public class CraftingStationTest
     public async Task It_can_get_all_recipes()
     {
         await using Composer services = new();
-        var sut = services.Resolve<CraftingStation>();
+        var sut = services.Resolve<CraftingQuery>();
 
         await foreach (var actual in sut.GetRecipes())
         {
@@ -189,7 +189,7 @@ public class CraftingStationTest
     public async Task It_can_get_the_unlocked_recipes()
     {
         await using Composer services = new();
-        var sut = services.Resolve<CraftingStation>();
+        var sut = services.Resolve<CraftingQuery>();
         var accessToken = services.Resolve<ApiKeyFull>();
 
         var actual = await sut.GetUnlockedRecipes(accessToken.Key);
@@ -202,7 +202,7 @@ public class CraftingStationTest
     public async Task It_can_get_the_learned_recipes()
     {
         await using Composer services = new();
-        var sut = services.Resolve<CraftingStation>();
+        var sut = services.Resolve<CraftingQuery>();
         var characterName = services.Resolve<TestCharacterName>();
         var accessToken = services.Resolve<ApiKeyFull>();
 
@@ -216,7 +216,7 @@ public class CraftingStationTest
     public async Task It_can_get_the_daily_recipes()
     {
         await using Composer services = new();
-        var sut = services.Resolve<CraftingStation>();
+        var sut = services.Resolve<CraftingQuery>();
         var accessToken = services.Resolve<ApiKeyFull>();
 
         // This is not resistant to recipes being added to the game, so not great :)

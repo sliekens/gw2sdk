@@ -1,7 +1,7 @@
 ﻿using GW2SDK.Annotations;
 using JetBrains.Annotations;
 
-namespace GW2SDK.Commerce.Delivery;
+namespace GW2SDK.Commerce.Delivery.Models;
 
 [PublicAPI]
 [DataTransferObject]

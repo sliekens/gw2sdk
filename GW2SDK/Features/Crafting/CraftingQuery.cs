@@ -15,11 +15,11 @@ namespace GW2SDK.Crafting;
 
 /// <summary>Provides recipe search and crafting-related services.</summary>
 [PublicAPI]
-public sealed class CraftingStation
+public sealed class CraftingQuery
 {
     private readonly HttpClient http;
 
-    public CraftingStation(HttpClient http)
+    public CraftingQuery(HttpClient http)
     {
         this.http = http.WithDefaults() ?? throw new ArgumentNullException(nameof(http));
     }

@@ -8,7 +8,7 @@ using Xunit;
 
 namespace GW2SDK.Tests.Features.Currencies;
 
-public class WalletTest
+public class WalletQueryTest
 {
     private static class CurrencyFact
     {
@@ -30,7 +30,7 @@ public class WalletTest
     public async Task It_can_get_your_wallet()
     {
         await using Composer services = new();
-        var sut = services.Resolve<Wallet>();
+        var sut = services.Resolve<WalletQuery>();
         var accessToken = services.Resolve<ApiKeyFull>();
 
         var actual = await sut.GetWallet(accessToken.Key);
@@ -44,7 +44,7 @@ public class WalletTest
     public async Task It_can_get_all_currencies()
     {
         await using Composer services = new();
-        var sut = services.Resolve<Wallet>();
+        var sut = services.Resolve<WalletQuery>();
 
         var actual = await sut.GetCurrencies();
 
@@ -66,7 +66,7 @@ public class WalletTest
     public async Task It_can_get_all_currency_ids()
     {
         await using Composer services = new();
-        var sut = services.Resolve<Wallet>();
+        var sut = services.Resolve<WalletQuery>();
 
         var actual = await sut.GetCurrenciesIndex();
 
@@ -77,7 +77,7 @@ public class WalletTest
     public async Task It_can_get_a_currency_by_id()
     {
         await using Composer services = new();
-        var sut = services.Resolve<Wallet>();
+        var sut = services.Resolve<WalletQuery>();
 
         const int currencyId = 1;
 
@@ -90,7 +90,7 @@ public class WalletTest
     public async Task It_can_get_currencies_by_id()
     {
         await using Composer services = new();
-        var sut = services.Resolve<Wallet>();
+        var sut = services.Resolve<WalletQuery>();
 
         HashSet<int> ids = new()
         {
@@ -113,7 +113,7 @@ public class WalletTest
     public async Task It_can_get_currencies_by_page()
     {
         await using Composer services = new();
-        var sut = services.Resolve<Wallet>();
+        var sut = services.Resolve<WalletQuery>();
 
         var actual = await sut.GetCurrenciesByPage(0, 3);
 

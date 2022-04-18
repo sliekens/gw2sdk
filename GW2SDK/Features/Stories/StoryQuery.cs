@@ -12,11 +12,11 @@ using JetBrains.Annotations;
 namespace GW2SDK.Stories;
 
 [PublicAPI]
-public sealed class StoryJournal
+public sealed class StoryQuery
 {
     private readonly HttpClient http;
 
-    public StoryJournal(HttpClient http)
+    public StoryQuery(HttpClient http)
     {
         this.http = http.WithDefaults() ?? throw new ArgumentNullException(nameof(http));
     }

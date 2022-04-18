@@ -29,8 +29,8 @@ internal class Program
         http.UseGuildWars2();
         http.UseLanguage(Language.English);
 
-        var recipesService = new CraftingStation(http);
-        var itemsService = new ItemQuery(http);
+        var craftingQuery = new CraftingQuery(http);
+        var itemQuery = new ItemQuery(http);
 
         var (ingredients, recipes) = await Progress()
             .StartAsync(
@@ -45,7 +45,7 @@ internal class Program
                         new ProgressTaskSettings { AutoStart = false }
                         );
 
-                    var craftable = await GetRecipes(recipesService, recipesProgress);
+                    var craftable = await GetRecipes(craftingQuery, recipesProgress);
 
                     var groupedByIngredient = craftable
                         .SelectMany(
@@ -60,7 +60,7 @@ internal class Program
 
                     var ingredients = await GetItems(
                         ingredientIndex,
-                        itemsService,
+                        itemQuery,
                         ingredientsProgress
                         );
 
@@ -109,7 +109,7 @@ internal class Program
                             .ToHashSet();
                         return await GetItems(
                             itemIds,
-                            itemsService,
+                            itemQuery,
                             ctx.AddTask("Fetching output items")
                             );
                     }
@@ -137,14 +137,14 @@ internal class Program
                 );
 
     private static async Task<List<Recipe>> GetRecipes(
-        CraftingStation craftingStation,
+        CraftingQuery craftingQuery,
         ProgressTask progress
     )
     {
         progress.StartTask();
         try
         {
-            return await craftingStation
+            return await craftingQuery
                 .GetRecipes(
                     progress: new Progress<ICollectionContext>(ctx => UpdateProgress(ctx, progress))
                     )

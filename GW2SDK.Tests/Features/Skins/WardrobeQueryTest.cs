@@ -6,13 +6,13 @@ using Xunit;
 
 namespace GW2SDK.Tests.Features.Skins;
 
-public class WardrobeTest
+public class WardrobeQueryTest
 {
     [Fact]
     public async Task It_can_get_all_skin_ids()
     {
         await using Composer services = new();
-        var sut = services.Resolve<Wardrobe>();
+        var sut = services.Resolve<WardrobeQuery>();
 
         var actual = await sut.GetSkinsIndex();
 
@@ -23,7 +23,7 @@ public class WardrobeTest
     public async Task It_can_get_a_skin_by_id()
     {
         await using Composer services = new();
-        var sut = services.Resolve<Wardrobe>();
+        var sut = services.Resolve<WardrobeQuery>();
 
         const int skinId = 1;
 
@@ -36,7 +36,7 @@ public class WardrobeTest
     public async Task It_can_get_skins_by_id()
     {
         await using Composer services = new();
-        var sut = services.Resolve<Wardrobe>();
+        var sut = services.Resolve<WardrobeQuery>();
 
         HashSet<int> ids = new()
         {
@@ -59,7 +59,7 @@ public class WardrobeTest
     public async Task It_can_get_skins_by_page()
     {
         await using Composer services = new();
-        var sut = services.Resolve<Wardrobe>();
+        var sut = services.Resolve<WardrobeQuery>();
 
         var actual = await sut.GetSkinsByPage(0, 3);
 
