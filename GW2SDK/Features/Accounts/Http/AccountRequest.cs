@@ -22,26 +22,30 @@ public sealed class AccountRequest : IHttpRequest<IReplica<AccountSummary>>
 
     public MissingMemberBehavior MissingMemberBehavior { get; init; }
 
-    public async Task<IReplica<AccountSummary>> SendAsync(HttpClient httpClient, CancellationToken cancellationToken)
+    public async Task<IReplica<AccountSummary>> SendAsync(
+        HttpClient httpClient,
+        CancellationToken cancellationToken
+    )
     {
-        var request = Template with
-        {
-            BearerToken = AccessToken
-        };
+        var request = Template with { BearerToken = AccessToken };
 
-        using var response = await httpClient
-            .SendAsync(request.Compile(), HttpCompletionOption.ResponseHeadersRead, cancellationToken)
+        using var response = await httpClient.SendAsync(
+                request.Compile(),
+                HttpCompletionOption.ResponseHeadersRead,
+                cancellationToken
+                )
             .ConfigureAwait(false);
 
-        await response.EnsureResult(cancellationToken)
-            .ConfigureAwait(false);
+        await response.EnsureResult(cancellationToken).ConfigureAwait(false);
 
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        return new Replica<AccountSummary>(response.Headers.Date.GetValueOrDefault(),
+        return new Replica<AccountSummary>(
+            response.Headers.Date.GetValueOrDefault(),
             AccountReader.Read(json.RootElement, MissingMemberBehavior),
             response.Content.Headers.Expires,
-            response.Content.Headers.LastModified);
+            response.Content.Headers.LastModified
+            );
     }
 }

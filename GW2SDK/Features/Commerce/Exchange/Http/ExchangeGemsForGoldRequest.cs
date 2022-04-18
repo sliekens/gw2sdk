@@ -12,10 +12,8 @@ namespace GW2SDK.Commerce.Exchange.Http;
 [PublicAPI]
 public sealed class ExchangeGemsForGoldRequest : IHttpRequest<IReplica<GemsForGoldExchange>>
 {
-    private static readonly HttpRequestMessageTemplate Template = new(Get, "/v2/commerce/exchange/gems")
-    {
-        AcceptEncoding = "gzip"
-    };
+    private static readonly HttpRequestMessageTemplate Template =
+        new(Get, "/v2/commerce/exchange/gems") { AcceptEncoding = "gzip" };
 
     public ExchangeGemsForGoldRequest(int gemsCount)
     {
@@ -33,26 +31,26 @@ public sealed class ExchangeGemsForGoldRequest : IHttpRequest<IReplica<GemsForGo
     {
         QueryBuilder search = new();
         search.Add("quantity", GemsCount);
-        var request = Template with
-        {
-            Arguments = search
-        };
+        var request = Template with { Arguments = search };
 
-        using var response = await httpClient.SendAsync(request.Compile(),
+        using var response = await httpClient.SendAsync(
+                request.Compile(),
                 HttpCompletionOption.ResponseHeadersRead,
-                cancellationToken)
+                cancellationToken
+                )
             .ConfigureAwait(false);
 
-        await response.EnsureResult(cancellationToken)
-            .ConfigureAwait(false);
+        await response.EnsureResult(cancellationToken).ConfigureAwait(false);
 
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
         var value = GemsForGoldReader.Read(json.RootElement, MissingMemberBehavior);
-        return new Replica<GemsForGoldExchange>(response.Headers.Date.GetValueOrDefault(),
+        return new Replica<GemsForGoldExchange>(
+            response.Headers.Date.GetValueOrDefault(),
             value,
             response.Content.Headers.Expires,
-            response.Content.Headers.LastModified);
+            response.Content.Headers.LastModified
+            );
     }
 }

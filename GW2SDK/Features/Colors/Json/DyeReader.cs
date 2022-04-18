@@ -82,16 +82,16 @@ public static class DyeReader
 
     private static Color ReadRgb(JsonElement value, MissingMemberBehavior missingMemberBehavior)
     {
-        var red = value[0]
-            .GetInt32();
-        var green = value[1]
-            .GetInt32();
-        var blue = value[2]
-            .GetInt32();
+        var red = value[0].GetInt32();
+        var green = value[1].GetInt32();
+        var blue = value[2].GetInt32();
         return Color.FromArgb(red, green, blue);
     }
 
-    private static ColorInfo ReadColorInfo(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    private static ColorInfo ReadColorInfo(
+        JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         RequiredMember<int> brightness = new("brightness");
         RequiredMember<double> contrast = new("contrast");

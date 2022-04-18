@@ -51,7 +51,9 @@ public sealed class BankQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<IReplicaSet<int>> GetMaterialCategoriesIndex(CancellationToken cancellationToken = default)
+    public Task<IReplicaSet<int>> GetMaterialCategoriesIndex(
+        CancellationToken cancellationToken = default
+    )
     {
         MaterialCategoriesIndexRequest request = new();
         return request.SendAsync(http, cancellationToken);

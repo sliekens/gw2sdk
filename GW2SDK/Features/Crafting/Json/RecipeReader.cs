@@ -11,8 +11,7 @@ public static class RecipeReader
 {
     public static Recipe Read(JsonElement json, MissingMemberBehavior missingMemberBehavior)
     {
-        switch (json.GetProperty("type")
-                    .GetString())
+        switch (json.GetProperty("type").GetString())
         {
             case "Amulet":
                 return ReadAmuletRecipe(json, missingMemberBehavior);
@@ -137,7 +136,9 @@ public static class RecipeReader
             {
                 if (missingMemberBehavior == MissingMemberBehavior.Error)
                 {
-                    throw new InvalidOperationException(Strings.UnexpectedDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.UnexpectedDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals(outputItemId.Name))
@@ -195,12 +196,16 @@ public static class RecipeReader
             TimeToCraft = timeToCraft.Select(value => TimeSpan.FromMilliseconds(value.GetDouble())),
             Disciplines = disciplines.GetValues(missingMemberBehavior),
             Flags = flags.GetValues(missingMemberBehavior),
-            Ingredients = ingredients.SelectMany(value => ReadIngredient(value, missingMemberBehavior)),
+            Ingredients =
+                ingredients.SelectMany(value => ReadIngredient(value, missingMemberBehavior)),
             ChatLink = chatLink.GetValue()
         };
     }
 
-    private static AmuletRecipe ReadAmuletRecipe(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    private static AmuletRecipe ReadAmuletRecipe(
+        JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         RequiredMember<int> outputItemId = new("output_item_id");
         RequiredMember<int> outputItemCount = new("output_item_count");
@@ -217,7 +222,9 @@ public static class RecipeReader
             {
                 if (!member.Value.ValueEquals("Amulet"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals(outputItemId.Name))
@@ -275,12 +282,16 @@ public static class RecipeReader
             TimeToCraft = timeToCraft.Select(value => TimeSpan.FromMilliseconds(value.GetDouble())),
             Disciplines = disciplines.GetValues(missingMemberBehavior),
             Flags = flags.GetValues(missingMemberBehavior),
-            Ingredients = ingredients.SelectMany(value => ReadIngredient(value, missingMemberBehavior)),
+            Ingredients =
+                ingredients.SelectMany(value => ReadIngredient(value, missingMemberBehavior)),
             ChatLink = chatLink.GetValue()
         };
     }
 
-    private static AxeRecipe ReadAxeRecipe(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    private static AxeRecipe ReadAxeRecipe(
+        JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         RequiredMember<int> outputItemId = new("output_item_id");
         RequiredMember<int> outputItemCount = new("output_item_count");
@@ -297,7 +308,9 @@ public static class RecipeReader
             {
                 if (!member.Value.ValueEquals("Axe"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals(outputItemId.Name))
@@ -355,12 +368,16 @@ public static class RecipeReader
             TimeToCraft = timeToCraft.Select(value => TimeSpan.FromMilliseconds(value.GetDouble())),
             Disciplines = disciplines.GetValues(missingMemberBehavior),
             Flags = flags.GetValues(missingMemberBehavior),
-            Ingredients = ingredients.SelectMany(value => ReadIngredient(value, missingMemberBehavior)),
+            Ingredients =
+                ingredients.SelectMany(value => ReadIngredient(value, missingMemberBehavior)),
             ChatLink = chatLink.GetValue()
         };
     }
 
-    private static BackpackRecipe ReadBackpackRecipe(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    private static BackpackRecipe ReadBackpackRecipe(
+        JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         RequiredMember<int> outputItemId = new("output_item_id");
         RequiredMember<int> outputItemCount = new("output_item_count");
@@ -377,7 +394,9 @@ public static class RecipeReader
             {
                 if (!member.Value.ValueEquals("Backpack"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals(outputItemId.Name))
@@ -435,12 +454,16 @@ public static class RecipeReader
             TimeToCraft = timeToCraft.Select(value => TimeSpan.FromMilliseconds(value.GetDouble())),
             Disciplines = disciplines.GetValues(missingMemberBehavior),
             Flags = flags.GetValues(missingMemberBehavior),
-            Ingredients = ingredients.SelectMany(value => ReadIngredient(value, missingMemberBehavior)),
+            Ingredients =
+                ingredients.SelectMany(value => ReadIngredient(value, missingMemberBehavior)),
             ChatLink = chatLink.GetValue()
         };
     }
 
-    private static BagRecipe ReadBagRecipe(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    private static BagRecipe ReadBagRecipe(
+        JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         RequiredMember<int> outputItemId = new("output_item_id");
         RequiredMember<int> outputItemCount = new("output_item_count");
@@ -457,7 +480,9 @@ public static class RecipeReader
             {
                 if (!member.Value.ValueEquals("Bag"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals(outputItemId.Name))
@@ -515,12 +540,16 @@ public static class RecipeReader
             TimeToCraft = timeToCraft.Select(value => TimeSpan.FromMilliseconds(value.GetDouble())),
             Disciplines = disciplines.GetValues(missingMemberBehavior),
             Flags = flags.GetValues(missingMemberBehavior),
-            Ingredients = ingredients.SelectMany(value => ReadIngredient(value, missingMemberBehavior)),
+            Ingredients =
+                ingredients.SelectMany(value => ReadIngredient(value, missingMemberBehavior)),
             ChatLink = chatLink.GetValue()
         };
     }
 
-    private static BootsRecipe ReadBootsRecipe(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    private static BootsRecipe ReadBootsRecipe(
+        JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         RequiredMember<int> outputItemId = new("output_item_id");
         RequiredMember<int> outputItemCount = new("output_item_count");
@@ -537,7 +566,9 @@ public static class RecipeReader
             {
                 if (!member.Value.ValueEquals("Boots"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals(outputItemId.Name))
@@ -595,12 +626,16 @@ public static class RecipeReader
             TimeToCraft = timeToCraft.Select(value => TimeSpan.FromMilliseconds(value.GetDouble())),
             Disciplines = disciplines.GetValues(missingMemberBehavior),
             Flags = flags.GetValues(missingMemberBehavior),
-            Ingredients = ingredients.SelectMany(value => ReadIngredient(value, missingMemberBehavior)),
+            Ingredients =
+                ingredients.SelectMany(value => ReadIngredient(value, missingMemberBehavior)),
             ChatLink = chatLink.GetValue()
         };
     }
 
-    private static BulkRecipe ReadBulkRecipe(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    private static BulkRecipe ReadBulkRecipe(
+        JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         RequiredMember<int> outputItemId = new("output_item_id");
         RequiredMember<int> outputItemCount = new("output_item_count");
@@ -617,7 +652,9 @@ public static class RecipeReader
             {
                 if (!member.Value.ValueEquals("Bulk"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals(outputItemId.Name))
@@ -675,12 +712,16 @@ public static class RecipeReader
             TimeToCraft = timeToCraft.Select(value => TimeSpan.FromMilliseconds(value.GetDouble())),
             Disciplines = disciplines.GetValues(missingMemberBehavior),
             Flags = flags.GetValues(missingMemberBehavior),
-            Ingredients = ingredients.SelectMany(value => ReadIngredient(value, missingMemberBehavior)),
+            Ingredients =
+                ingredients.SelectMany(value => ReadIngredient(value, missingMemberBehavior)),
             ChatLink = chatLink.GetValue()
         };
     }
 
-    private static CoatRecipe ReadCoatRecipe(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    private static CoatRecipe ReadCoatRecipe(
+        JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         RequiredMember<int> outputItemId = new("output_item_id");
         RequiredMember<int> outputItemCount = new("output_item_count");
@@ -697,7 +738,9 @@ public static class RecipeReader
             {
                 if (!member.Value.ValueEquals("Coat"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals(outputItemId.Name))
@@ -755,12 +798,16 @@ public static class RecipeReader
             TimeToCraft = timeToCraft.Select(value => TimeSpan.FromMilliseconds(value.GetDouble())),
             Disciplines = disciplines.GetValues(missingMemberBehavior),
             Flags = flags.GetValues(missingMemberBehavior),
-            Ingredients = ingredients.SelectMany(value => ReadIngredient(value, missingMemberBehavior)),
+            Ingredients =
+                ingredients.SelectMany(value => ReadIngredient(value, missingMemberBehavior)),
             ChatLink = chatLink.GetValue()
         };
     }
 
-    private static ComponentRecipe ReadComponentRecipe(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    private static ComponentRecipe ReadComponentRecipe(
+        JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         RequiredMember<int> outputItemId = new("output_item_id");
         RequiredMember<int> outputItemCount = new("output_item_count");
@@ -777,7 +824,9 @@ public static class RecipeReader
             {
                 if (!member.Value.ValueEquals("Component"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals(outputItemId.Name))
@@ -835,12 +884,16 @@ public static class RecipeReader
             TimeToCraft = timeToCraft.Select(value => TimeSpan.FromMilliseconds(value.GetDouble())),
             Disciplines = disciplines.GetValues(missingMemberBehavior),
             Flags = flags.GetValues(missingMemberBehavior),
-            Ingredients = ingredients.SelectMany(value => ReadIngredient(value, missingMemberBehavior)),
+            Ingredients =
+                ingredients.SelectMany(value => ReadIngredient(value, missingMemberBehavior)),
             ChatLink = chatLink.GetValue()
         };
     }
 
-    private static ConsumableRecipe ReadConsumableRecipe(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    private static ConsumableRecipe ReadConsumableRecipe(
+        JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         RequiredMember<int> outputItemId = new("output_item_id");
         RequiredMember<int> outputItemCount = new("output_item_count");
@@ -857,7 +910,9 @@ public static class RecipeReader
             {
                 if (!member.Value.ValueEquals("Consumable"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals(outputItemId.Name))
@@ -915,12 +970,16 @@ public static class RecipeReader
             TimeToCraft = timeToCraft.Select(value => TimeSpan.FromMilliseconds(value.GetDouble())),
             Disciplines = disciplines.GetValues(missingMemberBehavior),
             Flags = flags.GetValues(missingMemberBehavior),
-            Ingredients = ingredients.SelectMany(value => ReadIngredient(value, missingMemberBehavior)),
+            Ingredients =
+                ingredients.SelectMany(value => ReadIngredient(value, missingMemberBehavior)),
             ChatLink = chatLink.GetValue()
         };
     }
 
-    private static DaggerRecipe ReadDaggerRecipe(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    private static DaggerRecipe ReadDaggerRecipe(
+        JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         RequiredMember<int> outputItemId = new("output_item_id");
         RequiredMember<int> outputItemCount = new("output_item_count");
@@ -937,7 +996,9 @@ public static class RecipeReader
             {
                 if (!member.Value.ValueEquals("Dagger"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals(outputItemId.Name))
@@ -995,12 +1056,16 @@ public static class RecipeReader
             TimeToCraft = timeToCraft.Select(value => TimeSpan.FromMilliseconds(value.GetDouble())),
             Disciplines = disciplines.GetValues(missingMemberBehavior),
             Flags = flags.GetValues(missingMemberBehavior),
-            Ingredients = ingredients.SelectMany(value => ReadIngredient(value, missingMemberBehavior)),
+            Ingredients =
+                ingredients.SelectMany(value => ReadIngredient(value, missingMemberBehavior)),
             ChatLink = chatLink.GetValue()
         };
     }
 
-    private static DessertRecipe ReadDessertRecipe(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    private static DessertRecipe ReadDessertRecipe(
+        JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         RequiredMember<int> outputItemId = new("output_item_id");
         RequiredMember<int> outputItemCount = new("output_item_count");
@@ -1017,7 +1082,9 @@ public static class RecipeReader
             {
                 if (!member.Value.ValueEquals("Dessert"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals(outputItemId.Name))
@@ -1075,12 +1142,16 @@ public static class RecipeReader
             TimeToCraft = timeToCraft.Select(value => TimeSpan.FromMilliseconds(value.GetDouble())),
             Disciplines = disciplines.GetValues(missingMemberBehavior),
             Flags = flags.GetValues(missingMemberBehavior),
-            Ingredients = ingredients.SelectMany(value => ReadIngredient(value, missingMemberBehavior)),
+            Ingredients =
+                ingredients.SelectMany(value => ReadIngredient(value, missingMemberBehavior)),
             ChatLink = chatLink.GetValue()
         };
     }
 
-    private static DyeRecipe ReadDyeRecipe(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    private static DyeRecipe ReadDyeRecipe(
+        JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         RequiredMember<int> outputItemId = new("output_item_id");
         RequiredMember<int> outputItemCount = new("output_item_count");
@@ -1097,7 +1168,9 @@ public static class RecipeReader
             {
                 if (!member.Value.ValueEquals("Dye"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals(outputItemId.Name))
@@ -1155,12 +1228,16 @@ public static class RecipeReader
             TimeToCraft = timeToCraft.Select(value => TimeSpan.FromMilliseconds(value.GetDouble())),
             Disciplines = disciplines.GetValues(missingMemberBehavior),
             Flags = flags.GetValues(missingMemberBehavior),
-            Ingredients = ingredients.SelectMany(value => ReadIngredient(value, missingMemberBehavior)),
+            Ingredients =
+                ingredients.SelectMany(value => ReadIngredient(value, missingMemberBehavior)),
             ChatLink = chatLink.GetValue()
         };
     }
 
-    private static EarringRecipe ReadEarringRecipe(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    private static EarringRecipe ReadEarringRecipe(
+        JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         RequiredMember<int> outputItemId = new("output_item_id");
         RequiredMember<int> outputItemCount = new("output_item_count");
@@ -1177,7 +1254,9 @@ public static class RecipeReader
             {
                 if (!member.Value.ValueEquals("Earring"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals(outputItemId.Name))
@@ -1235,12 +1314,16 @@ public static class RecipeReader
             TimeToCraft = timeToCraft.Select(value => TimeSpan.FromMilliseconds(value.GetDouble())),
             Disciplines = disciplines.GetValues(missingMemberBehavior),
             Flags = flags.GetValues(missingMemberBehavior),
-            Ingredients = ingredients.SelectMany(value => ReadIngredient(value, missingMemberBehavior)),
+            Ingredients =
+                ingredients.SelectMany(value => ReadIngredient(value, missingMemberBehavior)),
             ChatLink = chatLink.GetValue()
         };
     }
 
-    private static FeastRecipe ReadFeastRecipe(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    private static FeastRecipe ReadFeastRecipe(
+        JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         RequiredMember<int> outputItemId = new("output_item_id");
         RequiredMember<int> outputItemCount = new("output_item_count");
@@ -1257,7 +1340,9 @@ public static class RecipeReader
             {
                 if (!member.Value.ValueEquals("Feast"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals(outputItemId.Name))
@@ -1315,12 +1400,16 @@ public static class RecipeReader
             TimeToCraft = timeToCraft.Select(value => TimeSpan.FromMilliseconds(value.GetDouble())),
             Disciplines = disciplines.GetValues(missingMemberBehavior),
             Flags = flags.GetValues(missingMemberBehavior),
-            Ingredients = ingredients.SelectMany(value => ReadIngredient(value, missingMemberBehavior)),
+            Ingredients =
+                ingredients.SelectMany(value => ReadIngredient(value, missingMemberBehavior)),
             ChatLink = chatLink.GetValue()
         };
     }
 
-    private static FocusRecipe ReadFocusRecipe(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    private static FocusRecipe ReadFocusRecipe(
+        JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         RequiredMember<int> outputItemId = new("output_item_id");
         RequiredMember<int> outputItemCount = new("output_item_count");
@@ -1337,7 +1426,9 @@ public static class RecipeReader
             {
                 if (!member.Value.ValueEquals("Focus"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals(outputItemId.Name))
@@ -1395,12 +1486,16 @@ public static class RecipeReader
             TimeToCraft = timeToCraft.Select(value => TimeSpan.FromMilliseconds(value.GetDouble())),
             Disciplines = disciplines.GetValues(missingMemberBehavior),
             Flags = flags.GetValues(missingMemberBehavior),
-            Ingredients = ingredients.SelectMany(value => ReadIngredient(value, missingMemberBehavior)),
+            Ingredients =
+                ingredients.SelectMany(value => ReadIngredient(value, missingMemberBehavior)),
             ChatLink = chatLink.GetValue()
         };
     }
 
-    private static FoodRecipe ReadFoodRecipe(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    private static FoodRecipe ReadFoodRecipe(
+        JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         RequiredMember<int> outputItemId = new("output_item_id");
         RequiredMember<int> outputItemCount = new("output_item_count");
@@ -1417,7 +1512,9 @@ public static class RecipeReader
             {
                 if (!member.Value.ValueEquals("Food"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals(outputItemId.Name))
@@ -1475,12 +1572,16 @@ public static class RecipeReader
             TimeToCraft = timeToCraft.Select(value => TimeSpan.FromMilliseconds(value.GetDouble())),
             Disciplines = disciplines.GetValues(missingMemberBehavior),
             Flags = flags.GetValues(missingMemberBehavior),
-            Ingredients = ingredients.SelectMany(value => ReadIngredient(value, missingMemberBehavior)),
+            Ingredients =
+                ingredients.SelectMany(value => ReadIngredient(value, missingMemberBehavior)),
             ChatLink = chatLink.GetValue()
         };
     }
 
-    private static GlovesRecipe ReadGlovesRecipe(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    private static GlovesRecipe ReadGlovesRecipe(
+        JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         RequiredMember<int> outputItemId = new("output_item_id");
         RequiredMember<int> outputItemCount = new("output_item_count");
@@ -1497,7 +1598,9 @@ public static class RecipeReader
             {
                 if (!member.Value.ValueEquals("Gloves"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals(outputItemId.Name))
@@ -1555,12 +1658,16 @@ public static class RecipeReader
             TimeToCraft = timeToCraft.Select(value => TimeSpan.FromMilliseconds(value.GetDouble())),
             Disciplines = disciplines.GetValues(missingMemberBehavior),
             Flags = flags.GetValues(missingMemberBehavior),
-            Ingredients = ingredients.SelectMany(value => ReadIngredient(value, missingMemberBehavior)),
+            Ingredients =
+                ingredients.SelectMany(value => ReadIngredient(value, missingMemberBehavior)),
             ChatLink = chatLink.GetValue()
         };
     }
 
-    private static GreatswordRecipe ReadGreatswordRecipe(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    private static GreatswordRecipe ReadGreatswordRecipe(
+        JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         RequiredMember<int> outputItemId = new("output_item_id");
         RequiredMember<int> outputItemCount = new("output_item_count");
@@ -1577,7 +1684,9 @@ public static class RecipeReader
             {
                 if (!member.Value.ValueEquals("Greatsword"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals(outputItemId.Name))
@@ -1635,7 +1744,8 @@ public static class RecipeReader
             TimeToCraft = timeToCraft.Select(value => TimeSpan.FromMilliseconds(value.GetDouble())),
             Disciplines = disciplines.GetValues(missingMemberBehavior),
             Flags = flags.GetValues(missingMemberBehavior),
-            Ingredients = ingredients.SelectMany(value => ReadIngredient(value, missingMemberBehavior)),
+            Ingredients =
+                ingredients.SelectMany(value => ReadIngredient(value, missingMemberBehavior)),
             ChatLink = chatLink.GetValue()
         };
     }
@@ -1662,7 +1772,9 @@ public static class RecipeReader
             {
                 if (!member.Value.ValueEquals("GuildConsumable"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals(outputItemId.Name))
@@ -1728,8 +1840,12 @@ public static class RecipeReader
             TimeToCraft = timeToCraft.Select(value => TimeSpan.FromMilliseconds(value.GetDouble())),
             Disciplines = disciplines.GetValues(missingMemberBehavior),
             Flags = flags.GetValues(missingMemberBehavior),
-            Ingredients = ingredients.SelectMany(value => ReadIngredient(value, missingMemberBehavior)),
-            GuildIngredients = guildIngredients.SelectMany(value => ReadGuildIngredient(value, missingMemberBehavior)),
+            Ingredients =
+                ingredients.SelectMany(value => ReadIngredient(value, missingMemberBehavior)),
+            GuildIngredients =
+                guildIngredients.SelectMany(
+                    value => ReadGuildIngredient(value, missingMemberBehavior)
+                    ),
             OutputUpgradeId = outputUpgradeId.GetValue(),
             ChatLink = chatLink.GetValue()
         };
@@ -1756,7 +1872,9 @@ public static class RecipeReader
             {
                 if (!member.Value.ValueEquals("GuildConsumableWvw"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals(outputItemId.Name))
@@ -1818,7 +1936,8 @@ public static class RecipeReader
             TimeToCraft = timeToCraft.Select(value => TimeSpan.FromMilliseconds(value.GetDouble())),
             Disciplines = disciplines.GetValues(missingMemberBehavior),
             Flags = flags.GetValues(missingMemberBehavior),
-            Ingredients = ingredients.SelectMany(value => ReadIngredient(value, missingMemberBehavior)),
+            Ingredients =
+                ingredients.SelectMany(value => ReadIngredient(value, missingMemberBehavior)),
             OutputUpgradeId = outputUpgradeId.GetValue(),
             ChatLink = chatLink.GetValue()
         };
@@ -1846,7 +1965,9 @@ public static class RecipeReader
             {
                 if (!member.Value.ValueEquals("GuildDecoration"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals(outputItemId.Name))
@@ -1912,14 +2033,21 @@ public static class RecipeReader
             TimeToCraft = timeToCraft.Select(value => TimeSpan.FromMilliseconds(value.GetDouble())),
             Disciplines = disciplines.GetValues(missingMemberBehavior),
             Flags = flags.GetValues(missingMemberBehavior),
-            Ingredients = ingredients.SelectMany(value => ReadIngredient(value, missingMemberBehavior)),
-            GuildIngredients = guildIngredients.SelectMany(value => ReadGuildIngredient(value, missingMemberBehavior)),
+            Ingredients =
+                ingredients.SelectMany(value => ReadIngredient(value, missingMemberBehavior)),
+            GuildIngredients =
+                guildIngredients.SelectMany(
+                    value => ReadGuildIngredient(value, missingMemberBehavior)
+                    ),
             OutputUpgradeId = outputUpgradeId.GetValue(),
             ChatLink = chatLink.GetValue()
         };
     }
 
-    private static HammerRecipe ReadHammerRecipe(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    private static HammerRecipe ReadHammerRecipe(
+        JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         RequiredMember<int> outputItemId = new("output_item_id");
         RequiredMember<int> outputItemCount = new("output_item_count");
@@ -1936,7 +2064,9 @@ public static class RecipeReader
             {
                 if (!member.Value.ValueEquals("Hammer"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals(outputItemId.Name))
@@ -1994,12 +2124,16 @@ public static class RecipeReader
             TimeToCraft = timeToCraft.Select(value => TimeSpan.FromMilliseconds(value.GetDouble())),
             Disciplines = disciplines.GetValues(missingMemberBehavior),
             Flags = flags.GetValues(missingMemberBehavior),
-            Ingredients = ingredients.SelectMany(value => ReadIngredient(value, missingMemberBehavior)),
+            Ingredients =
+                ingredients.SelectMany(value => ReadIngredient(value, missingMemberBehavior)),
             ChatLink = chatLink.GetValue()
         };
     }
 
-    private static SpearRecipe ReadSpearRecipe(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    private static SpearRecipe ReadSpearRecipe(
+        JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         RequiredMember<int> outputItemId = new("output_item_id");
         RequiredMember<int> outputItemCount = new("output_item_count");
@@ -2016,7 +2150,9 @@ public static class RecipeReader
             {
                 if (!member.Value.ValueEquals("Harpoon"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals(outputItemId.Name))
@@ -2074,12 +2210,16 @@ public static class RecipeReader
             TimeToCraft = timeToCraft.Select(value => TimeSpan.FromMilliseconds(value.GetDouble())),
             Disciplines = disciplines.GetValues(missingMemberBehavior),
             Flags = flags.GetValues(missingMemberBehavior),
-            Ingredients = ingredients.SelectMany(value => ReadIngredient(value, missingMemberBehavior)),
+            Ingredients =
+                ingredients.SelectMany(value => ReadIngredient(value, missingMemberBehavior)),
             ChatLink = chatLink.GetValue()
         };
     }
 
-    private static HelmRecipe ReadHelmRecipe(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    private static HelmRecipe ReadHelmRecipe(
+        JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         RequiredMember<int> outputItemId = new("output_item_id");
         RequiredMember<int> outputItemCount = new("output_item_count");
@@ -2096,7 +2236,9 @@ public static class RecipeReader
             {
                 if (!member.Value.ValueEquals("Helm"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals(outputItemId.Name))
@@ -2154,7 +2296,8 @@ public static class RecipeReader
             TimeToCraft = timeToCraft.Select(value => TimeSpan.FromMilliseconds(value.GetDouble())),
             Disciplines = disciplines.GetValues(missingMemberBehavior),
             Flags = flags.GetValues(missingMemberBehavior),
-            Ingredients = ingredients.SelectMany(value => ReadIngredient(value, missingMemberBehavior)),
+            Ingredients =
+                ingredients.SelectMany(value => ReadIngredient(value, missingMemberBehavior)),
             ChatLink = chatLink.GetValue()
         };
     }
@@ -2179,7 +2322,9 @@ public static class RecipeReader
             {
                 if (!member.Value.ValueEquals("IngredientCooking"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals(outputItemId.Name))
@@ -2237,7 +2382,8 @@ public static class RecipeReader
             TimeToCraft = timeToCraft.Select(value => TimeSpan.FromMilliseconds(value.GetDouble())),
             Disciplines = disciplines.GetValues(missingMemberBehavior),
             Flags = flags.GetValues(missingMemberBehavior),
-            Ingredients = ingredients.SelectMany(value => ReadIngredient(value, missingMemberBehavior)),
+            Ingredients =
+                ingredients.SelectMany(value => ReadIngredient(value, missingMemberBehavior)),
             ChatLink = chatLink.GetValue()
         };
     }
@@ -2262,7 +2408,9 @@ public static class RecipeReader
             {
                 if (!member.Value.ValueEquals("Inscription"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals(outputItemId.Name))
@@ -2320,12 +2468,16 @@ public static class RecipeReader
             TimeToCraft = timeToCraft.Select(value => TimeSpan.FromMilliseconds(value.GetDouble())),
             Disciplines = disciplines.GetValues(missingMemberBehavior),
             Flags = flags.GetValues(missingMemberBehavior),
-            Ingredients = ingredients.SelectMany(value => ReadIngredient(value, missingMemberBehavior)),
+            Ingredients =
+                ingredients.SelectMany(value => ReadIngredient(value, missingMemberBehavior)),
             ChatLink = chatLink.GetValue()
         };
     }
 
-    private static InsigniaRecipe ReadInsigniaRecipe(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    private static InsigniaRecipe ReadInsigniaRecipe(
+        JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         RequiredMember<int> outputItemId = new("output_item_id");
         RequiredMember<int> outputItemCount = new("output_item_count");
@@ -2342,7 +2494,9 @@ public static class RecipeReader
             {
                 if (!member.Value.ValueEquals("Insignia"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals(outputItemId.Name))
@@ -2400,7 +2554,8 @@ public static class RecipeReader
             TimeToCraft = timeToCraft.Select(value => TimeSpan.FromMilliseconds(value.GetDouble())),
             Disciplines = disciplines.GetValues(missingMemberBehavior),
             Flags = flags.GetValues(missingMemberBehavior),
-            Ingredients = ingredients.SelectMany(value => ReadIngredient(value, missingMemberBehavior)),
+            Ingredients =
+                ingredients.SelectMany(value => ReadIngredient(value, missingMemberBehavior)),
             ChatLink = chatLink.GetValue()
         };
     }
@@ -2425,7 +2580,9 @@ public static class RecipeReader
             {
                 if (!member.Value.ValueEquals("LegendaryComponent"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals(outputItemId.Name))
@@ -2483,12 +2640,16 @@ public static class RecipeReader
             TimeToCraft = timeToCraft.Select(value => TimeSpan.FromMilliseconds(value.GetDouble())),
             Disciplines = disciplines.GetValues(missingMemberBehavior),
             Flags = flags.GetValues(missingMemberBehavior),
-            Ingredients = ingredients.SelectMany(value => ReadIngredient(value, missingMemberBehavior)),
+            Ingredients =
+                ingredients.SelectMany(value => ReadIngredient(value, missingMemberBehavior)),
             ChatLink = chatLink.GetValue()
         };
     }
 
-    private static LeggingsRecipe ReadLeggingsRecipe(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    private static LeggingsRecipe ReadLeggingsRecipe(
+        JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         RequiredMember<int> outputItemId = new("output_item_id");
         RequiredMember<int> outputItemCount = new("output_item_count");
@@ -2505,7 +2666,9 @@ public static class RecipeReader
             {
                 if (!member.Value.ValueEquals("Leggings"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals(outputItemId.Name))
@@ -2563,12 +2726,16 @@ public static class RecipeReader
             TimeToCraft = timeToCraft.Select(value => TimeSpan.FromMilliseconds(value.GetDouble())),
             Disciplines = disciplines.GetValues(missingMemberBehavior),
             Flags = flags.GetValues(missingMemberBehavior),
-            Ingredients = ingredients.SelectMany(value => ReadIngredient(value, missingMemberBehavior)),
+            Ingredients =
+                ingredients.SelectMany(value => ReadIngredient(value, missingMemberBehavior)),
             ChatLink = chatLink.GetValue()
         };
     }
 
-    private static LongbowRecipe ReadLongbowRecipe(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    private static LongbowRecipe ReadLongbowRecipe(
+        JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         RequiredMember<int> outputItemId = new("output_item_id");
         RequiredMember<int> outputItemCount = new("output_item_count");
@@ -2585,7 +2752,9 @@ public static class RecipeReader
             {
                 if (!member.Value.ValueEquals("LongBow"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals(outputItemId.Name))
@@ -2643,12 +2812,16 @@ public static class RecipeReader
             TimeToCraft = timeToCraft.Select(value => TimeSpan.FromMilliseconds(value.GetDouble())),
             Disciplines = disciplines.GetValues(missingMemberBehavior),
             Flags = flags.GetValues(missingMemberBehavior),
-            Ingredients = ingredients.SelectMany(value => ReadIngredient(value, missingMemberBehavior)),
+            Ingredients =
+                ingredients.SelectMany(value => ReadIngredient(value, missingMemberBehavior)),
             ChatLink = chatLink.GetValue()
         };
     }
 
-    private static MaceRecipe ReadMaceRecipe(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    private static MaceRecipe ReadMaceRecipe(
+        JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         RequiredMember<int> outputItemId = new("output_item_id");
         RequiredMember<int> outputItemCount = new("output_item_count");
@@ -2665,7 +2838,9 @@ public static class RecipeReader
             {
                 if (!member.Value.ValueEquals("Mace"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals(outputItemId.Name))
@@ -2723,12 +2898,16 @@ public static class RecipeReader
             TimeToCraft = timeToCraft.Select(value => TimeSpan.FromMilliseconds(value.GetDouble())),
             Disciplines = disciplines.GetValues(missingMemberBehavior),
             Flags = flags.GetValues(missingMemberBehavior),
-            Ingredients = ingredients.SelectMany(value => ReadIngredient(value, missingMemberBehavior)),
+            Ingredients =
+                ingredients.SelectMany(value => ReadIngredient(value, missingMemberBehavior)),
             ChatLink = chatLink.GetValue()
         };
     }
 
-    private static MealRecipe ReadMealRecipe(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    private static MealRecipe ReadMealRecipe(
+        JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         RequiredMember<int> outputItemId = new("output_item_id");
         RequiredMember<int> outputItemCount = new("output_item_count");
@@ -2745,7 +2924,9 @@ public static class RecipeReader
             {
                 if (!member.Value.ValueEquals("Meal"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals(outputItemId.Name))
@@ -2803,12 +2984,16 @@ public static class RecipeReader
             TimeToCraft = timeToCraft.Select(value => TimeSpan.FromMilliseconds(value.GetDouble())),
             Disciplines = disciplines.GetValues(missingMemberBehavior),
             Flags = flags.GetValues(missingMemberBehavior),
-            Ingredients = ingredients.SelectMany(value => ReadIngredient(value, missingMemberBehavior)),
+            Ingredients =
+                ingredients.SelectMany(value => ReadIngredient(value, missingMemberBehavior)),
             ChatLink = chatLink.GetValue()
         };
     }
 
-    private static PistolRecipe ReadPistolRecipe(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    private static PistolRecipe ReadPistolRecipe(
+        JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         RequiredMember<int> outputItemId = new("output_item_id");
         RequiredMember<int> outputItemCount = new("output_item_count");
@@ -2825,7 +3010,9 @@ public static class RecipeReader
             {
                 if (!member.Value.ValueEquals("Pistol"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals(outputItemId.Name))
@@ -2883,12 +3070,16 @@ public static class RecipeReader
             TimeToCraft = timeToCraft.Select(value => TimeSpan.FromMilliseconds(value.GetDouble())),
             Disciplines = disciplines.GetValues(missingMemberBehavior),
             Flags = flags.GetValues(missingMemberBehavior),
-            Ingredients = ingredients.SelectMany(value => ReadIngredient(value, missingMemberBehavior)),
+            Ingredients =
+                ingredients.SelectMany(value => ReadIngredient(value, missingMemberBehavior)),
             ChatLink = chatLink.GetValue()
         };
     }
 
-    private static PotionRecipe ReadPotionRecipe(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    private static PotionRecipe ReadPotionRecipe(
+        JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         RequiredMember<int> outputItemId = new("output_item_id");
         RequiredMember<int> outputItemCount = new("output_item_count");
@@ -2905,7 +3096,9 @@ public static class RecipeReader
             {
                 if (!member.Value.ValueEquals("Potion"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals(outputItemId.Name))
@@ -2963,12 +3156,16 @@ public static class RecipeReader
             TimeToCraft = timeToCraft.Select(value => TimeSpan.FromMilliseconds(value.GetDouble())),
             Disciplines = disciplines.GetValues(missingMemberBehavior),
             Flags = flags.GetValues(missingMemberBehavior),
-            Ingredients = ingredients.SelectMany(value => ReadIngredient(value, missingMemberBehavior)),
+            Ingredients =
+                ingredients.SelectMany(value => ReadIngredient(value, missingMemberBehavior)),
             ChatLink = chatLink.GetValue()
         };
     }
 
-    private static Ingredient ReadIngredient(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    private static Ingredient ReadIngredient(
+        JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         RequiredMember<IngredientKind> type = new("type");
         RequiredMember<int> id = new("id");
@@ -3001,7 +3198,10 @@ public static class RecipeReader
         };
     }
 
-    private static GuildIngredient ReadGuildIngredient(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    private static GuildIngredient ReadGuildIngredient(
+        JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         RequiredMember<int> upgradeId = new("upgrade_id");
         RequiredMember<int> count = new("count");
@@ -3048,7 +3248,9 @@ public static class RecipeReader
             {
                 if (!member.Value.ValueEquals("RefinementEctoplasm"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals(outputItemId.Name))
@@ -3106,7 +3308,8 @@ public static class RecipeReader
             TimeToCraft = timeToCraft.Select(value => TimeSpan.FromMilliseconds(value.GetDouble())),
             Disciplines = disciplines.GetValues(missingMemberBehavior),
             Flags = flags.GetValues(missingMemberBehavior),
-            Ingredients = ingredients.SelectMany(value => ReadIngredient(value, missingMemberBehavior)),
+            Ingredients =
+                ingredients.SelectMany(value => ReadIngredient(value, missingMemberBehavior)),
             ChatLink = chatLink.GetValue()
         };
     }
@@ -3131,7 +3334,9 @@ public static class RecipeReader
             {
                 if (!member.Value.ValueEquals("RefinementObsidian"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals(outputItemId.Name))
@@ -3189,12 +3394,16 @@ public static class RecipeReader
             TimeToCraft = timeToCraft.Select(value => TimeSpan.FromMilliseconds(value.GetDouble())),
             Disciplines = disciplines.GetValues(missingMemberBehavior),
             Flags = flags.GetValues(missingMemberBehavior),
-            Ingredients = ingredients.SelectMany(value => ReadIngredient(value, missingMemberBehavior)),
+            Ingredients =
+                ingredients.SelectMany(value => ReadIngredient(value, missingMemberBehavior)),
             ChatLink = chatLink.GetValue()
         };
     }
 
-    private static RefinementRecipe ReadRefinementRecipe(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    private static RefinementRecipe ReadRefinementRecipe(
+        JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         RequiredMember<int> outputItemId = new("output_item_id");
         RequiredMember<int> outputItemCount = new("output_item_count");
@@ -3211,7 +3420,9 @@ public static class RecipeReader
             {
                 if (!member.Value.ValueEquals("Refinement"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals(outputItemId.Name))
@@ -3269,12 +3480,16 @@ public static class RecipeReader
             TimeToCraft = timeToCraft.Select(value => TimeSpan.FromMilliseconds(value.GetDouble())),
             Disciplines = disciplines.GetValues(missingMemberBehavior),
             Flags = flags.GetValues(missingMemberBehavior),
-            Ingredients = ingredients.SelectMany(value => ReadIngredient(value, missingMemberBehavior)),
+            Ingredients =
+                ingredients.SelectMany(value => ReadIngredient(value, missingMemberBehavior)),
             ChatLink = chatLink.GetValue()
         };
     }
 
-    private static RifleRecipe ReadRifleRecipe(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    private static RifleRecipe ReadRifleRecipe(
+        JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         RequiredMember<int> outputItemId = new("output_item_id");
         RequiredMember<int> outputItemCount = new("output_item_count");
@@ -3291,7 +3506,9 @@ public static class RecipeReader
             {
                 if (!member.Value.ValueEquals("Rifle"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals(outputItemId.Name))
@@ -3349,12 +3566,16 @@ public static class RecipeReader
             TimeToCraft = timeToCraft.Select(value => TimeSpan.FromMilliseconds(value.GetDouble())),
             Disciplines = disciplines.GetValues(missingMemberBehavior),
             Flags = flags.GetValues(missingMemberBehavior),
-            Ingredients = ingredients.SelectMany(value => ReadIngredient(value, missingMemberBehavior)),
+            Ingredients =
+                ingredients.SelectMany(value => ReadIngredient(value, missingMemberBehavior)),
             ChatLink = chatLink.GetValue()
         };
     }
 
-    private static RingRecipe ReadRingRecipe(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    private static RingRecipe ReadRingRecipe(
+        JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         RequiredMember<int> outputItemId = new("output_item_id");
         RequiredMember<int> outputItemCount = new("output_item_count");
@@ -3371,7 +3592,9 @@ public static class RecipeReader
             {
                 if (!member.Value.ValueEquals("Ring"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals(outputItemId.Name))
@@ -3429,12 +3652,16 @@ public static class RecipeReader
             TimeToCraft = timeToCraft.Select(value => TimeSpan.FromMilliseconds(value.GetDouble())),
             Disciplines = disciplines.GetValues(missingMemberBehavior),
             Flags = flags.GetValues(missingMemberBehavior),
-            Ingredients = ingredients.SelectMany(value => ReadIngredient(value, missingMemberBehavior)),
+            Ingredients =
+                ingredients.SelectMany(value => ReadIngredient(value, missingMemberBehavior)),
             ChatLink = chatLink.GetValue()
         };
     }
 
-    private static ScepterRecipe ReadScepterRecipe(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    private static ScepterRecipe ReadScepterRecipe(
+        JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         RequiredMember<int> outputItemId = new("output_item_id");
         RequiredMember<int> outputItemCount = new("output_item_count");
@@ -3451,7 +3678,9 @@ public static class RecipeReader
             {
                 if (!member.Value.ValueEquals("Scepter"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals(outputItemId.Name))
@@ -3509,12 +3738,16 @@ public static class RecipeReader
             TimeToCraft = timeToCraft.Select(value => TimeSpan.FromMilliseconds(value.GetDouble())),
             Disciplines = disciplines.GetValues(missingMemberBehavior),
             Flags = flags.GetValues(missingMemberBehavior),
-            Ingredients = ingredients.SelectMany(value => ReadIngredient(value, missingMemberBehavior)),
+            Ingredients =
+                ingredients.SelectMany(value => ReadIngredient(value, missingMemberBehavior)),
             ChatLink = chatLink.GetValue()
         };
     }
 
-    private static SeasoningRecipe ReadSeasoningRecipe(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    private static SeasoningRecipe ReadSeasoningRecipe(
+        JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         RequiredMember<int> outputItemId = new("output_item_id");
         RequiredMember<int> outputItemCount = new("output_item_count");
@@ -3531,7 +3764,9 @@ public static class RecipeReader
             {
                 if (!member.Value.ValueEquals("Seasoning"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals(outputItemId.Name))
@@ -3589,12 +3824,16 @@ public static class RecipeReader
             TimeToCraft = timeToCraft.Select(value => TimeSpan.FromMilliseconds(value.GetDouble())),
             Disciplines = disciplines.GetValues(missingMemberBehavior),
             Flags = flags.GetValues(missingMemberBehavior),
-            Ingredients = ingredients.SelectMany(value => ReadIngredient(value, missingMemberBehavior)),
+            Ingredients =
+                ingredients.SelectMany(value => ReadIngredient(value, missingMemberBehavior)),
             ChatLink = chatLink.GetValue()
         };
     }
 
-    private static ShieldRecipe ReadShieldRecipe(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    private static ShieldRecipe ReadShieldRecipe(
+        JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         RequiredMember<int> outputItemId = new("output_item_id");
         RequiredMember<int> outputItemCount = new("output_item_count");
@@ -3611,7 +3850,9 @@ public static class RecipeReader
             {
                 if (!member.Value.ValueEquals("Shield"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals(outputItemId.Name))
@@ -3669,12 +3910,16 @@ public static class RecipeReader
             TimeToCraft = timeToCraft.Select(value => TimeSpan.FromMilliseconds(value.GetDouble())),
             Disciplines = disciplines.GetValues(missingMemberBehavior),
             Flags = flags.GetValues(missingMemberBehavior),
-            Ingredients = ingredients.SelectMany(value => ReadIngredient(value, missingMemberBehavior)),
+            Ingredients =
+                ingredients.SelectMany(value => ReadIngredient(value, missingMemberBehavior)),
             ChatLink = chatLink.GetValue()
         };
     }
 
-    private static ShortbowRecipe ReadShortbowRecipe(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    private static ShortbowRecipe ReadShortbowRecipe(
+        JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         RequiredMember<int> outputItemId = new("output_item_id");
         RequiredMember<int> outputItemCount = new("output_item_count");
@@ -3691,7 +3936,9 @@ public static class RecipeReader
             {
                 if (!member.Value.ValueEquals("ShortBow"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals(outputItemId.Name))
@@ -3749,12 +3996,16 @@ public static class RecipeReader
             TimeToCraft = timeToCraft.Select(value => TimeSpan.FromMilliseconds(value.GetDouble())),
             Disciplines = disciplines.GetValues(missingMemberBehavior),
             Flags = flags.GetValues(missingMemberBehavior),
-            Ingredients = ingredients.SelectMany(value => ReadIngredient(value, missingMemberBehavior)),
+            Ingredients =
+                ingredients.SelectMany(value => ReadIngredient(value, missingMemberBehavior)),
             ChatLink = chatLink.GetValue()
         };
     }
 
-    private static ShouldersRecipe ReadShouldersRecipe(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    private static ShouldersRecipe ReadShouldersRecipe(
+        JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         RequiredMember<int> outputItemId = new("output_item_id");
         RequiredMember<int> outputItemCount = new("output_item_count");
@@ -3771,7 +4022,9 @@ public static class RecipeReader
             {
                 if (!member.Value.ValueEquals("Shoulders"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals(outputItemId.Name))
@@ -3829,12 +4082,16 @@ public static class RecipeReader
             TimeToCraft = timeToCraft.Select(value => TimeSpan.FromMilliseconds(value.GetDouble())),
             Disciplines = disciplines.GetValues(missingMemberBehavior),
             Flags = flags.GetValues(missingMemberBehavior),
-            Ingredients = ingredients.SelectMany(value => ReadIngredient(value, missingMemberBehavior)),
+            Ingredients =
+                ingredients.SelectMany(value => ReadIngredient(value, missingMemberBehavior)),
             ChatLink = chatLink.GetValue()
         };
     }
 
-    private static SnackRecipe ReadSnackRecipe(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    private static SnackRecipe ReadSnackRecipe(
+        JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         RequiredMember<int> outputItemId = new("output_item_id");
         RequiredMember<int> outputItemCount = new("output_item_count");
@@ -3851,7 +4108,9 @@ public static class RecipeReader
             {
                 if (!member.Value.ValueEquals("Snack"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals(outputItemId.Name))
@@ -3909,12 +4168,16 @@ public static class RecipeReader
             TimeToCraft = timeToCraft.Select(value => TimeSpan.FromMilliseconds(value.GetDouble())),
             Disciplines = disciplines.GetValues(missingMemberBehavior),
             Flags = flags.GetValues(missingMemberBehavior),
-            Ingredients = ingredients.SelectMany(value => ReadIngredient(value, missingMemberBehavior)),
+            Ingredients =
+                ingredients.SelectMany(value => ReadIngredient(value, missingMemberBehavior)),
             ChatLink = chatLink.GetValue()
         };
     }
 
-    private static SoupRecipe ReadSoupRecipe(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    private static SoupRecipe ReadSoupRecipe(
+        JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         RequiredMember<int> outputItemId = new("output_item_id");
         RequiredMember<int> outputItemCount = new("output_item_count");
@@ -3931,7 +4194,9 @@ public static class RecipeReader
             {
                 if (!member.Value.ValueEquals("Soup"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals(outputItemId.Name))
@@ -3989,12 +4254,16 @@ public static class RecipeReader
             TimeToCraft = timeToCraft.Select(value => TimeSpan.FromMilliseconds(value.GetDouble())),
             Disciplines = disciplines.GetValues(missingMemberBehavior),
             Flags = flags.GetValues(missingMemberBehavior),
-            Ingredients = ingredients.SelectMany(value => ReadIngredient(value, missingMemberBehavior)),
+            Ingredients =
+                ingredients.SelectMany(value => ReadIngredient(value, missingMemberBehavior)),
             ChatLink = chatLink.GetValue()
         };
     }
 
-    private static HarpoonGunRecipe ReadHarpoonGunRecipe(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    private static HarpoonGunRecipe ReadHarpoonGunRecipe(
+        JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         RequiredMember<int> outputItemId = new("output_item_id");
         RequiredMember<int> outputItemCount = new("output_item_count");
@@ -4011,7 +4280,9 @@ public static class RecipeReader
             {
                 if (!member.Value.ValueEquals("Speargun"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals(outputItemId.Name))
@@ -4069,12 +4340,16 @@ public static class RecipeReader
             TimeToCraft = timeToCraft.Select(value => TimeSpan.FromMilliseconds(value.GetDouble())),
             Disciplines = disciplines.GetValues(missingMemberBehavior),
             Flags = flags.GetValues(missingMemberBehavior),
-            Ingredients = ingredients.SelectMany(value => ReadIngredient(value, missingMemberBehavior)),
+            Ingredients =
+                ingredients.SelectMany(value => ReadIngredient(value, missingMemberBehavior)),
             ChatLink = chatLink.GetValue()
         };
     }
 
-    private static StaffRecipe ReadStaffRecipe(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    private static StaffRecipe ReadStaffRecipe(
+        JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         RequiredMember<int> outputItemId = new("output_item_id");
         RequiredMember<int> outputItemCount = new("output_item_count");
@@ -4091,7 +4366,9 @@ public static class RecipeReader
             {
                 if (!member.Value.ValueEquals("Staff"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals(outputItemId.Name))
@@ -4149,12 +4426,16 @@ public static class RecipeReader
             TimeToCraft = timeToCraft.Select(value => TimeSpan.FromMilliseconds(value.GetDouble())),
             Disciplines = disciplines.GetValues(missingMemberBehavior),
             Flags = flags.GetValues(missingMemberBehavior),
-            Ingredients = ingredients.SelectMany(value => ReadIngredient(value, missingMemberBehavior)),
+            Ingredients =
+                ingredients.SelectMany(value => ReadIngredient(value, missingMemberBehavior)),
             ChatLink = chatLink.GetValue()
         };
     }
 
-    private static SwordRecipe ReadSwordRecipe(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    private static SwordRecipe ReadSwordRecipe(
+        JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         RequiredMember<int> outputItemId = new("output_item_id");
         RequiredMember<int> outputItemCount = new("output_item_count");
@@ -4171,7 +4452,9 @@ public static class RecipeReader
             {
                 if (!member.Value.ValueEquals("Sword"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals(outputItemId.Name))
@@ -4229,12 +4512,16 @@ public static class RecipeReader
             TimeToCraft = timeToCraft.Select(value => TimeSpan.FromMilliseconds(value.GetDouble())),
             Disciplines = disciplines.GetValues(missingMemberBehavior),
             Flags = flags.GetValues(missingMemberBehavior),
-            Ingredients = ingredients.SelectMany(value => ReadIngredient(value, missingMemberBehavior)),
+            Ingredients =
+                ingredients.SelectMany(value => ReadIngredient(value, missingMemberBehavior)),
             ChatLink = chatLink.GetValue()
         };
     }
 
-    private static TorchRecipe ReadTorchRecipe(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    private static TorchRecipe ReadTorchRecipe(
+        JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         RequiredMember<int> outputItemId = new("output_item_id");
         RequiredMember<int> outputItemCount = new("output_item_count");
@@ -4251,7 +4538,9 @@ public static class RecipeReader
             {
                 if (!member.Value.ValueEquals("Torch"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals(outputItemId.Name))
@@ -4309,12 +4598,16 @@ public static class RecipeReader
             TimeToCraft = timeToCraft.Select(value => TimeSpan.FromMilliseconds(value.GetDouble())),
             Disciplines = disciplines.GetValues(missingMemberBehavior),
             Flags = flags.GetValues(missingMemberBehavior),
-            Ingredients = ingredients.SelectMany(value => ReadIngredient(value, missingMemberBehavior)),
+            Ingredients =
+                ingredients.SelectMany(value => ReadIngredient(value, missingMemberBehavior)),
             ChatLink = chatLink.GetValue()
         };
     }
 
-    private static TridentRecipe ReadTridentRecipe(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    private static TridentRecipe ReadTridentRecipe(
+        JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         RequiredMember<int> outputItemId = new("output_item_id");
         RequiredMember<int> outputItemCount = new("output_item_count");
@@ -4331,7 +4624,9 @@ public static class RecipeReader
             {
                 if (!member.Value.ValueEquals("Trident"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals(outputItemId.Name))
@@ -4389,7 +4684,8 @@ public static class RecipeReader
             TimeToCraft = timeToCraft.Select(value => TimeSpan.FromMilliseconds(value.GetDouble())),
             Disciplines = disciplines.GetValues(missingMemberBehavior),
             Flags = flags.GetValues(missingMemberBehavior),
-            Ingredients = ingredients.SelectMany(value => ReadIngredient(value, missingMemberBehavior)),
+            Ingredients =
+                ingredients.SelectMany(value => ReadIngredient(value, missingMemberBehavior)),
             ChatLink = chatLink.GetValue()
         };
     }
@@ -4414,7 +4710,9 @@ public static class RecipeReader
             {
                 if (!member.Value.ValueEquals("UpgradeComponent"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals(outputItemId.Name))
@@ -4472,12 +4770,16 @@ public static class RecipeReader
             TimeToCraft = timeToCraft.Select(value => TimeSpan.FromMilliseconds(value.GetDouble())),
             Disciplines = disciplines.GetValues(missingMemberBehavior),
             Flags = flags.GetValues(missingMemberBehavior),
-            Ingredients = ingredients.SelectMany(value => ReadIngredient(value, missingMemberBehavior)),
+            Ingredients =
+                ingredients.SelectMany(value => ReadIngredient(value, missingMemberBehavior)),
             ChatLink = chatLink.GetValue()
         };
     }
 
-    private static WarhornRecipe ReadWarhornRecipe(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    private static WarhornRecipe ReadWarhornRecipe(
+        JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         RequiredMember<int> outputItemId = new("output_item_id");
         RequiredMember<int> outputItemCount = new("output_item_count");
@@ -4494,7 +4796,9 @@ public static class RecipeReader
             {
                 if (!member.Value.ValueEquals("Warhorn"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals(outputItemId.Name))
@@ -4552,7 +4856,8 @@ public static class RecipeReader
             TimeToCraft = timeToCraft.Select(value => TimeSpan.FromMilliseconds(value.GetDouble())),
             Disciplines = disciplines.GetValues(missingMemberBehavior),
             Flags = flags.GetValues(missingMemberBehavior),
-            Ingredients = ingredients.SelectMany(value => ReadIngredient(value, missingMemberBehavior)),
+            Ingredients =
+                ingredients.SelectMany(value => ReadIngredient(value, missingMemberBehavior)),
             ChatLink = chatLink.GetValue()
         };
     }

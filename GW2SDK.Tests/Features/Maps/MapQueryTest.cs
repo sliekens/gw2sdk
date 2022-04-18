@@ -17,7 +17,8 @@ public class MapQueryTest
 
     private static class WorldFact
     {
-        public static void Id_is_positive(World actual) => Assert.InRange(actual.Id, 1, int.MaxValue);
+        public static void Id_is_positive(World actual) =>
+            Assert.InRange(actual.Id, 1, int.MaxValue);
 
         public static void Name_is_not_empty(World actual) => Assert.NotEmpty(actual.Name);
 
@@ -34,11 +35,13 @@ public class MapQueryTest
         var actual = await sut.GetContinents();
 
         Assert.Equal(actual.Context.ResultTotal, actual.Count);
-        Assert.All(actual,
+        Assert.All(
+            actual,
             continent =>
             {
                 ContinentFact.Id_is_1_or_2(continent);
-            });
+            }
+            );
     }
 
     [Fact]
@@ -79,7 +82,11 @@ public class MapQueryTest
 
         var actual = await sut.GetContinentsByIds(ids);
 
-        Assert.Collection(actual, first => Assert.Equal(1, first.Id), second => Assert.Equal(2, second.Id));
+        Assert.Collection(
+            actual,
+            first => Assert.Equal(1, first.Id),
+            second => Assert.Equal(2, second.Id)
+            );
     }
 
     [Fact]
@@ -105,7 +112,8 @@ public class MapQueryTest
         var actual = await sut.GetFloors(continentId);
 
         Assert.Equal(actual.Context.ResultTotal, actual.Count);
-        Assert.All(actual,
+        Assert.All(
+            actual,
             floor =>
             {
                 foreach (var (regionId, region) in floor.Regions)
@@ -122,7 +130,8 @@ public class MapQueryTest
                         Assert.NotEmpty(skillChallenge.Id);
                     }
                 }
-            });
+            }
+            );
     }
 
     [Fact]
@@ -167,7 +176,11 @@ public class MapQueryTest
 
         var actual = await sut.GetFloorsByIds(continentId, ids);
 
-        Assert.Collection(actual, first => Assert.Equal(1, first.Id), second => Assert.Equal(2, second.Id));
+        Assert.Collection(
+            actual,
+            first => Assert.Equal(1, first.Id),
+            second => Assert.Equal(2, second.Id)
+            );
     }
 
     [Fact]
@@ -193,13 +206,15 @@ public class MapQueryTest
         var actual = await sut.GetWorlds();
 
         Assert.Equal(actual.Context.ResultTotal, actual.Count);
-        Assert.All(actual,
+        Assert.All(
+            actual,
             world =>
             {
                 WorldFact.Id_is_positive(world);
                 WorldFact.Name_is_not_empty(world);
                 WorldFact.World_population_type_is_supported(world);
-            });
+            }
+            );
     }
 
     [Fact]
@@ -241,10 +256,12 @@ public class MapQueryTest
 
         var actual = await sut.GetWorldsByIds(ids);
 
-        Assert.Collection(actual,
+        Assert.Collection(
+            actual,
             world => Assert.Equal(1001, world.Id),
             world => Assert.Equal(1002, world.Id),
-            world => Assert.Equal(1003, world.Id));
+            world => Assert.Equal(1003, world.Id)
+            );
     }
 
     [Fact]

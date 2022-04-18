@@ -11,19 +11,24 @@ public class SpecializationQueryTest
 {
     private static class SpecializationFact
     {
-        public static void Id_is_positive(Specialization actual) => Assert.InRange(actual.Id, 1, int.MaxValue);
+        public static void Id_is_positive(Specialization actual) =>
+            Assert.InRange(actual.Id, 1, int.MaxValue);
 
         public static void Name_is_not_empty(Specialization actual) => Assert.NotEmpty(actual.Name);
 
-        public static void It_has_minor_traits(Specialization actual) => Assert.NotEmpty(actual.MinorTraits);
+        public static void It_has_minor_traits(Specialization actual) =>
+            Assert.NotEmpty(actual.MinorTraits);
 
-        public static void It_has_major_traits(Specialization actual) => Assert.NotEmpty(actual.MajorTraits);
+        public static void It_has_major_traits(Specialization actual) =>
+            Assert.NotEmpty(actual.MajorTraits);
 
         public static void Icon_is_not_empty(Specialization actual) => Assert.NotEmpty(actual.Icon);
 
-        public static void Background_is_not_empty(Specialization actual) => Assert.NotEmpty(actual.Icon);
+        public static void Background_is_not_empty(Specialization actual) =>
+            Assert.NotEmpty(actual.Icon);
 
-        public static void Profession_icon_is_not_null(Specialization actual) => Assert.NotNull(actual.ProfessionIcon);
+        public static void Profession_icon_is_not_null(Specialization actual) =>
+            Assert.NotNull(actual.ProfessionIcon);
 
         public static void Big_profession_icon_is_not_null(Specialization actual) =>
             Assert.NotNull(actual.ProfessionIconBig);
@@ -38,7 +43,8 @@ public class SpecializationQueryTest
         var actual = await sut.GetSpecializations();
 
         Assert.Equal(actual.Context.ResultTotal, actual.Count);
-        Assert.All(actual,
+        Assert.All(
+            actual,
             specialization =>
             {
                 SpecializationFact.Id_is_positive(specialization);
@@ -49,7 +55,8 @@ public class SpecializationQueryTest
                 SpecializationFact.Background_is_not_empty(specialization);
                 SpecializationFact.Big_profession_icon_is_not_null(specialization);
                 SpecializationFact.Profession_icon_is_not_null(specialization);
-            });
+            }
+            );
     }
 
     [Fact]
@@ -91,9 +98,11 @@ public class SpecializationQueryTest
 
         var actual = await sut.GetSpecializationsByIds(ids);
 
-        Assert.Collection(actual,
+        Assert.Collection(
+            actual,
             first => Assert.Equal(1, first.Id),
             second => Assert.Equal(2, second.Id),
-            third => Assert.Equal(3, third.Id));
+            third => Assert.Equal(3, third.Id)
+            );
     }
 }

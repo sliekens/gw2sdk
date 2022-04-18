@@ -29,7 +29,10 @@ public sealed class CharacterByNameRequest : IHttpRequest<IReplica<Character>>
 
     public MissingMemberBehavior MissingMemberBehavior { get; set; }
 
-    public async Task<IReplica<Character>> SendAsync(HttpClient httpClient, CancellationToken cancellationToken)
+    public async Task<IReplica<Character>> SendAsync(
+        HttpClient httpClient,
+        CancellationToken cancellationToken
+    )
     {
         QueryBuilder search = new();
         search.Add("id", CharacterName);
@@ -38,19 +41,23 @@ public sealed class CharacterByNameRequest : IHttpRequest<IReplica<Character>>
             BearerToken = AccessToken,
             Arguments = search
         };
-        using var response = await httpClient
-            .SendAsync(request.Compile(), HttpCompletionOption.ResponseHeadersRead, cancellationToken)
+        using var response = await httpClient.SendAsync(
+                request.Compile(),
+                HttpCompletionOption.ResponseHeadersRead,
+                cancellationToken
+                )
             .ConfigureAwait(false);
 
-        await response.EnsureResult(cancellationToken)
-            .ConfigureAwait(false);
+        await response.EnsureResult(cancellationToken).ConfigureAwait(false);
 
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        return new Replica<Character>(response.Headers.Date.GetValueOrDefault(),
+        return new Replica<Character>(
+            response.Headers.Date.GetValueOrDefault(),
             CharacterReader.Read(json.RootElement, MissingMemberBehavior),
             response.Content.Headers.Expires,
-            response.Content.Headers.LastModified);
+            response.Content.Headers.LastModified
+            );
     }
 }

@@ -23,7 +23,10 @@ public static class AccountBankReader
         return new AccountBank(slots);
     }
 
-    private static BankSlot? ReadBankSlot(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    private static BankSlot? ReadBankSlot(
+        JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         // Empty slots are represented as null -- but maybe we should use a Null Object pattern here
         if (json.ValueKind == JsonValueKind.Null)
@@ -110,7 +113,10 @@ public static class AccountBankReader
         };
     }
 
-    private static SelectedStat ReadSelectedStat(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    private static SelectedStat ReadSelectedStat(
+        JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         RequiredMember<int> id = new("id");
         RequiredMember<SelectedModification> attributes = new("attributes");
@@ -133,7 +139,8 @@ public static class AccountBankReader
         return new SelectedStat
         {
             Id = id.GetValue(),
-            Attributes = attributes.Select(value => ReadSelectedModification(value, missingMemberBehavior))
+            Attributes =
+                attributes.Select(value => ReadSelectedModification(value, missingMemberBehavior))
         };
     }
 

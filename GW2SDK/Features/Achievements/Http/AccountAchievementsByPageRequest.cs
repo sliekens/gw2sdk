@@ -11,12 +11,11 @@ using static System.Net.Http.HttpMethod;
 namespace GW2SDK.Achievements.Http;
 
 [PublicAPI]
-public sealed class AccountAchievementsByPageRequest : IHttpRequest<IReplicaPage<AccountAchievement>>
+public sealed class
+    AccountAchievementsByPageRequest : IHttpRequest<IReplicaPage<AccountAchievement>>
 {
-    private static readonly HttpRequestMessageTemplate Template = new(Get, "/v2/account/achievements")
-    {
-        AcceptEncoding = "gzip"
-    };
+    private static readonly HttpRequestMessageTemplate Template =
+        new(Get, "/v2/account/achievements") { AcceptEncoding = "gzip" };
 
     public AccountAchievementsByPageRequest(int pageIndex)
     {
@@ -49,22 +48,27 @@ public sealed class AccountAchievementsByPageRequest : IHttpRequest<IReplicaPage
             BearerToken = AccessToken
         };
 
-        using var response = await httpClient.SendAsync(request.Compile(),
+        using var response = await httpClient.SendAsync(
+                request.Compile(),
                 HttpCompletionOption.ResponseHeadersRead,
-                cancellationToken)
+                cancellationToken
+                )
             .ConfigureAwait(false);
 
-        await response.EnsureResult(cancellationToken)
-            .ConfigureAwait(false);
+        await response.EnsureResult(cancellationToken).ConfigureAwait(false);
 
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value = json.RootElement.GetSet(entry => AccountAchievementReader.Read(entry, MissingMemberBehavior));
-        return new ReplicaPage<AccountAchievement>(response.Headers.Date.GetValueOrDefault(),
+        var value = json.RootElement.GetSet(
+            entry => AccountAchievementReader.Read(entry, MissingMemberBehavior)
+            );
+        return new ReplicaPage<AccountAchievement>(
+            response.Headers.Date.GetValueOrDefault(),
             value,
             response.Headers.GetPageContext(),
             response.Content.Headers.Expires,
-            response.Content.Headers.LastModified);
+            response.Content.Headers.LastModified
+            );
     }
 }

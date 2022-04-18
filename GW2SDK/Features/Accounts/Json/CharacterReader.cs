@@ -158,19 +158,24 @@ public static class CharacterReader
             LastModified = lastModified.GetValue(),
             Created = created.GetValue(),
             Deaths = deaths.GetValue(),
-            CraftingDisciplines = crafting.SelectMany(value => ReadCraftingDiscipline(value, missingMemberBehavior)),
+            CraftingDisciplines =
+                crafting.SelectMany(value => ReadCraftingDiscipline(value, missingMemberBehavior)),
             TitleId = title.GetValue(),
             Backstory = backstory.SelectMany(value => value.GetStringRequired()),
-            WvwAbilities = wvwAbilities.SelectMany(value => ReadWvwAbility(value, missingMemberBehavior)),
+            WvwAbilities =
+                wvwAbilities.SelectMany(value => ReadWvwAbility(value, missingMemberBehavior)),
             BuildTabsUnlocked = buildTabsUnlocked.GetValue(),
             ActiveBuildTab = activeBuildTab.GetValue(),
             BuildTabs = buildTabs.SelectMany(value => ReadBuildTab(value, missingMemberBehavior)),
             EquipmentTabsUnlocked = equipmentTabsUnlocked.GetValue(),
             ActiveEquipmentTab = activeEquipmentTab.GetValue(),
-            Equipment = equipment.SelectMany(value => ReadEquipmentItem(value, missingMemberBehavior)),
-            EquipmentTabs = equipmentTabs.SelectMany(value => ReadEquipmentTab(value, missingMemberBehavior)),
+            Equipment =
+                equipment.SelectMany(value => ReadEquipmentItem(value, missingMemberBehavior)),
+            EquipmentTabs =
+                equipmentTabs.SelectMany(value => ReadEquipmentTab(value, missingMemberBehavior)),
             Recipes = recipes.SelectMany(value => value.GetInt32()),
-            Training = training.SelectMany(value => ReadTrainingObjective(value, missingMemberBehavior)),
+            Training =
+                training.SelectMany(value => ReadTrainingObjective(value, missingMemberBehavior)),
             Bags = bags.SelectMany(value => ReadBag(value, missingMemberBehavior))
         };
     }
@@ -210,11 +215,15 @@ public static class CharacterReader
         {
             Id = id.GetValue(),
             Size = size.GetValue(),
-            Inventory = inventory.SelectMany(value => ReadInventorySlot(value, missingMemberBehavior))
+            Inventory =
+                inventory.SelectMany(value => ReadInventorySlot(value, missingMemberBehavior))
         };
     }
 
-    private static InventorySlot? ReadInventorySlot(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    private static InventorySlot? ReadInventorySlot(
+        JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         // Empty slots are represented as null -- but maybe we should use a Null Object pattern here
         if (json.ValueKind == JsonValueKind.Null)
@@ -294,14 +303,20 @@ public static class CharacterReader
             Upgrades = upgrades.SelectMany(value => value.GetInt32()),
             UpgradeSlotIndices = upgradeSlotIndices.SelectMany(value => value.GetInt32()),
             Infusions = infusions.SelectMany(value => value.GetInt32()),
-            Dyes = dyes.SelectMany(value => value.ValueKind == JsonValueKind.Null ? null : value.GetInt32()),
+            Dyes =
+                dyes.SelectMany(
+                    value => value.ValueKind == JsonValueKind.Null ? null : value.GetInt32()
+                    ),
             Binding = binding.GetValue(missingMemberBehavior),
             BoundTo = boundTo.GetValueOrEmpty(),
             Stats = stats.Select(value => ReadSelectedStat(value, missingMemberBehavior))
         };
     }
 
-    private static EquipmentItem ReadEquipmentItem(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    private static EquipmentItem ReadEquipmentItem(
+        JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         RequiredMember<int> id = new("id");
         NullableMember<int> count = new("count");
@@ -385,11 +400,16 @@ public static class CharacterReader
             BoundTo = boundTo.GetValueOrEmpty(),
             Location = location.GetValue(missingMemberBehavior),
             Tabs = tabs.SelectMany(value => value.GetInt32()),
-            Dyes = dyes.SelectMany(value => value.ValueKind == JsonValueKind.Null ? null : value.GetInt32())
+            Dyes = dyes.SelectMany(
+                value => value.ValueKind == JsonValueKind.Null ? null : value.GetInt32()
+                )
         };
     }
 
-    private static SelectedStat ReadSelectedStat(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    private static SelectedStat ReadSelectedStat(
+        JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         RequiredMember<int> id = new("id");
         RequiredMember<SelectedModification> attributes = new("attributes");
@@ -412,7 +432,8 @@ public static class CharacterReader
         return new SelectedStat
         {
             Id = id.GetValue(),
-            Attributes = attributes.Select(value => ReadSelectedModification(value, missingMemberBehavior))
+            Attributes =
+                attributes.Select(value => ReadSelectedModification(value, missingMemberBehavior))
         };
     }
 
@@ -494,7 +515,10 @@ public static class CharacterReader
         };
     }
 
-    private static TrainingTrack ReadTrainingObjective(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    private static TrainingTrack ReadTrainingObjective(
+        JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         RequiredMember<int> id = new("id");
         RequiredMember<int> spent = new("spent");
@@ -528,7 +552,10 @@ public static class CharacterReader
         };
     }
 
-    private static EquipmentTab ReadEquipmentTab(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    private static EquipmentTab ReadEquipmentTab(
+        JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         RequiredMember<int> tab = new("tab");
         RequiredMember<string> name = new("name");
@@ -570,12 +597,17 @@ public static class CharacterReader
         {
             Tab = tab.GetValue(),
             Name = name.GetValue(),
-            Equipment = equipment.SelectMany(value => ReadEquipmentItem(value, missingMemberBehavior)),
-            PvpEquipment = pvpEquipment.Select(value => ReadPvpEquipment(value, missingMemberBehavior))
+            Equipment =
+                equipment.SelectMany(value => ReadEquipmentItem(value, missingMemberBehavior)),
+            PvpEquipment =
+                pvpEquipment.Select(value => ReadPvpEquipment(value, missingMemberBehavior))
         };
     }
 
-    private static PvpEquipment ReadPvpEquipment(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    private static PvpEquipment ReadPvpEquipment(
+        JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         NullableMember<int> amulet = new("amulet");
         NullableMember<int> rune = new("rune");
@@ -605,11 +637,16 @@ public static class CharacterReader
         {
             AmuletId = amulet.GetValue(),
             RuneId = rune.GetValue(),
-            SigilIds = sigils.SelectMany(value => value.ValueKind == JsonValueKind.Null ? null : value.GetInt32())
+            SigilIds = sigils.SelectMany(
+                value => value.ValueKind == JsonValueKind.Null ? null : value.GetInt32()
+                )
         };
     }
 
-    private static BuildTab ReadBuildTab(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    private static BuildTab ReadBuildTab(
+        JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         RequiredMember<int> tab = new("tab");
         RequiredMember<Build> build = new("build");
@@ -699,16 +736,23 @@ public static class CharacterReader
         {
             Name = name.GetValue(),
             Profession = profession.GetValue(missingMemberBehavior),
-            Specializations = specializations.SelectMany(value => ReadSpecialization(value, missingMemberBehavior)),
+            Specializations =
+                specializations.SelectMany(
+                    value => ReadSpecialization(value, missingMemberBehavior)
+                    ),
             Skills = skills.Select(value => ReadSkillBar(value, missingMemberBehavior)),
-            AquaticSkills = aquaticSkills.Select(value => ReadSkillBar(value, missingMemberBehavior)),
+            AquaticSkills =
+                aquaticSkills.Select(value => ReadSkillBar(value, missingMemberBehavior)),
             Pets = pets.Select(value => ReadPets(value, missingMemberBehavior)),
             Legends = legends.SelectMany(value => value.GetString()),
             AquaticLegends = aquaticLegends.SelectMany(value => value.GetString())
         };
     }
 
-    private static SkillBar ReadSkillBar(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    private static SkillBar ReadSkillBar(
+        JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         NullableMember<int> heal = new("heal");
         RequiredMember<int?> utilities = new("utilities");
@@ -737,12 +781,18 @@ public static class CharacterReader
         return new SkillBar
         {
             Heal = heal.GetValue(),
-            Utilities = utilities.SelectMany(value => value.ValueKind == JsonValueKind.Null ? null : value.GetInt32()),
+            Utilities =
+                utilities.SelectMany(
+                    value => value.ValueKind == JsonValueKind.Null ? null : value.GetInt32()
+                    ),
             Elite = elite.GetValue()
         };
     }
 
-    private static Specialization ReadSpecialization(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    private static Specialization ReadSpecialization(
+        JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         NullableMember<int> id = new("id");
         RequiredMember<int?> traits = new("traits");
@@ -766,11 +816,16 @@ public static class CharacterReader
         return new Specialization
         {
             Id = id.GetValue(),
-            Traits = traits.SelectMany(value => value.ValueKind == JsonValueKind.Null ? null : value.GetInt32())
+            Traits = traits.SelectMany(
+                value => value.ValueKind == JsonValueKind.Null ? null : value.GetInt32()
+                )
         };
     }
 
-    private static PetSkillBar ReadPets(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    private static PetSkillBar ReadPets(
+        JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         RequiredMember<int?> terrestrial = new("terrestrial");
         RequiredMember<int?> aquatic = new("aquatic");
@@ -794,12 +849,19 @@ public static class CharacterReader
         return new PetSkillBar
         {
             Terrestrial =
-                terrestrial.SelectMany(value => value.ValueKind == JsonValueKind.Null ? null : value.GetInt32()),
-            Aquatic = aquatic.SelectMany(value => value.ValueKind == JsonValueKind.Null ? null : value.GetInt32())
+                terrestrial.SelectMany(
+                    value => value.ValueKind == JsonValueKind.Null ? null : value.GetInt32()
+                    ),
+            Aquatic = aquatic.SelectMany(
+                value => value.ValueKind == JsonValueKind.Null ? null : value.GetInt32()
+                )
         };
     }
 
-    private static WvwAbility ReadWvwAbility(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    private static WvwAbility ReadWvwAbility(
+        JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         RequiredMember<int> id = new("id");
         RequiredMember<int> rank = new("rank");

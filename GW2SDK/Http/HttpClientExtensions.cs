@@ -20,7 +20,8 @@ public static class HttpClientExtensions
         if (instance is null) throw new ArgumentNullException(nameof(instance));
         Check.String(accessToken, nameof(accessToken));
 
-        instance.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
+        instance.DefaultRequestHeaders.Authorization =
+            new AuthenticationHeaderValue("Bearer", accessToken);
     }
 
     public static void UseLanguage(this HttpClient instance, Language language)

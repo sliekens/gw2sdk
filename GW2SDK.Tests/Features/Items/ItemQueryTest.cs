@@ -46,13 +46,14 @@ public class ItemQueryTest
             56
         };
 
-        var actual = await sut.GetItemsByIds(ids)
-            .ToListAsync();
+        var actual = await sut.GetItemsByIds(ids).ToListAsync();
 
-        Assert.Collection(actual,
+        Assert.Collection(
+            actual,
             first => Assert.Contains(first.Id, ids),
             second => Assert.Contains(second.Id, ids),
-            third => Assert.Contains(third.Id, ids));
+            third => Assert.Contains(third.Id, ids)
+            );
     }
 
     [Fact]
@@ -67,8 +68,10 @@ public class ItemQueryTest
         Assert.Equal(3, actual.Context.PageSize);
     }
 
-    [Fact(Skip =
-        "This test is best used interactively, otherwise it will hit rate limits in this as well as other tests.")]
+    [Fact(
+        Skip =
+            "This test is best used interactively, otherwise it will hit rate limits in this as well as other tests."
+        )]
     public async Task It_can_get_all_items()
     {
         await using Composer services = new();

@@ -17,14 +17,10 @@ public sealed record OrderBook
     public IReadOnlyCollection<OrderBookLine> Supply { get; init; } = Array.Empty<OrderBookLine>();
 
     /// <summary>The highest price someone is willing to buy the item for.</summary>
-    public Coin? BestBid =>
-        Demand.FirstOrDefault()
-            ?.UnitPrice;
+    public Coin? BestBid => Demand.FirstOrDefault()?.UnitPrice;
 
     /// <summary>The lowest price someone is willing to sell the item for.</summary>
-    public Coin? BestAsk =>
-        Supply.FirstOrDefault()
-            ?.UnitPrice;
+    public Coin? BestAsk => Supply.FirstOrDefault()?.UnitPrice;
 
     public Coin BidAskSpread =>
         this switch

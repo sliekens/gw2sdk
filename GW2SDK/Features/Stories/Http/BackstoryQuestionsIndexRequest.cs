@@ -11,29 +11,33 @@ namespace GW2SDK.Stories.Http;
 [PublicAPI]
 public sealed class BackstoryQuestionsIndexRequest : IHttpRequest<IReplicaSet<int>>
 {
-    private static readonly HttpRequestMessageTemplate Template = new(Get, "/v2/backstory/questions")
-    {
-        AcceptEncoding = "gzip"
-    };
+    private static readonly HttpRequestMessageTemplate Template =
+        new(Get, "/v2/backstory/questions") { AcceptEncoding = "gzip" };
 
-    public async Task<IReplicaSet<int>> SendAsync(HttpClient httpClient, CancellationToken cancellationToken)
+    public async Task<IReplicaSet<int>> SendAsync(
+        HttpClient httpClient,
+        CancellationToken cancellationToken
+    )
     {
-        using var response = await httpClient.SendAsync(Template.Compile(),
+        using var response = await httpClient.SendAsync(
+                Template.Compile(),
                 HttpCompletionOption.ResponseHeadersRead,
-                cancellationToken)
+                cancellationToken
+                )
             .ConfigureAwait(false);
 
-        await response.EnsureResult(cancellationToken)
-            .ConfigureAwait(false);
+        await response.EnsureResult(cancellationToken).ConfigureAwait(false);
 
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
         var value = json.RootElement.GetSet(entry => entry.GetInt32());
-        return new ReplicaSet<int>(response.Headers.Date.GetValueOrDefault(),
+        return new ReplicaSet<int>(
+            response.Headers.Date.GetValueOrDefault(),
             value,
             response.Headers.GetCollectionContext(),
             response.Content.Headers.Expires,
-            response.Content.Headers.LastModified);
+            response.Content.Headers.LastModified
+            );
     }
 }

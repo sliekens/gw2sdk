@@ -1,8 +1,8 @@
+root = true
 # To learn more about .editorconfig see https://aka.ms/editorconfigdocs
 ###############################
 # Core EditorConfig Options   #
 ###############################
-root = true
 # All files
 [*]
 indent_style = space
@@ -58,14 +58,14 @@ dotnet_style_prefer_conditional_expression_over_return = true:silent
 # Naming Conventions          #
 ###############################
 # Style Definitions
-dotnet_naming_style.pascal_case_style.capitalization             = pascal_case
+dotnet_naming_style.pascal_case_style.capitalization = pascal_case
 # Use PascalCase for constant fields  
 dotnet_naming_rule.constant_fields_should_be_pascal_case.severity = suggestion
-dotnet_naming_rule.constant_fields_should_be_pascal_case.symbols  = constant_fields
-dotnet_naming_rule.constant_fields_should_be_pascal_case.style    = pascal_case_style
-dotnet_naming_symbols.constant_fields.applicable_kinds            = field
-dotnet_naming_symbols.constant_fields.applicable_accessibilities  = *
-dotnet_naming_symbols.constant_fields.required_modifiers          = const
+dotnet_naming_rule.constant_fields_should_be_pascal_case.symbols = constant_fields
+dotnet_naming_rule.constant_fields_should_be_pascal_case.style = pascal_case_style
+dotnet_naming_symbols.constant_fields.applicable_kinds = field
+dotnet_naming_symbols.constant_fields.applicable_accessibilities = *
+dotnet_naming_symbols.constant_fields.required_modifiers = const
 ###############################
 # C# Coding Conventions       #
 ###############################
@@ -141,6 +141,7 @@ insert_final_newline = true
 [*]
 
 # Microsoft .NET properties
+csharp_preserve_single_line_blocks = true
 dotnet_naming_rule.private_constants_rule.import_to_resharper = as_predefined
 dotnet_naming_rule.private_constants_rule.severity = warning
 dotnet_naming_rule.private_constants_rule.style = upper_camel_case_style
@@ -187,24 +188,30 @@ resharper_csharp_blank_lines_around_single_line_invocable = 1
 resharper_csharp_int_align_fix_in_adjacent = false
 resharper_csharp_keep_blank_lines_in_code = 1
 resharper_csharp_keep_blank_lines_in_declarations = 1
+resharper_csharp_max_line_length = 100
 resharper_csharp_wrap_after_declaration_lpar = true
+resharper_csharp_wrap_after_invocation_lpar = true
 resharper_csharp_wrap_arguments_style = chop_if_long
-resharper_csharp_wrap_chained_method_calls = chop_always
+resharper_csharp_wrap_before_binary_opsign = true
+resharper_csharp_wrap_chained_method_calls = chop_if_long
 resharper_csharp_wrap_extends_list_style = chop_if_long
-resharper_csharp_wrap_multiple_declaration_style = chop_always
+resharper_csharp_wrap_multiple_declaration_style = chop_if_long
 resharper_csharp_wrap_parameters_style = chop_if_long
 resharper_indent_invocation_pars = outside
 resharper_int_align_comments = true
+resharper_keep_existing_arrangement = false
 resharper_keep_existing_declaration_parens_arrangement = false
 resharper_keep_existing_embedded_arrangement = false
 resharper_keep_existing_expr_member_arrangement = false
 resharper_keep_existing_initializer_arrangement = false
 resharper_keep_existing_invocation_parens_arrangement = false
 resharper_keep_existing_linebreaks = false
-resharper_max_array_initializer_elements_on_line = 1
-resharper_max_formal_parameters_on_line = 2
+resharper_max_array_initializer_elements_on_line = 2
+resharper_max_enum_members_on_line = 1
+resharper_max_formal_parameters_on_line = 10000
 resharper_max_initializer_elements_on_line = 1
 resharper_method_or_operator_body = expression_body
+resharper_nested_ternary_style = expanded
 resharper_place_accessorholder_attribute_on_same_line = false
 resharper_place_accessor_attribute_on_same_line = true
 resharper_place_constructor_initializer_on_same_line = false
@@ -212,12 +219,16 @@ resharper_place_field_attribute_on_same_line = false
 resharper_place_linq_into_on_new_line = false
 resharper_place_simple_accessor_on_single_line = false
 resharper_place_simple_anonymousmethod_on_single_line = false
-resharper_place_simple_initializer_on_single_line = false
+resharper_place_simple_initializer_on_single_line = true
 resharper_wrap_array_initializer_style = chop_if_long
 resharper_wrap_before_declaration_rpar = true
 resharper_wrap_before_first_type_parameter_constraint = true
+resharper_wrap_before_invocation_rpar = true
 resharper_wrap_before_linq_expression = true
+resharper_wrap_chained_binary_expressions = chop_if_long
+resharper_wrap_chained_binary_patterns = chop_if_long
 resharper_wrap_linq_expressions = chop_always
+resharper_wrap_multiple_declaration_style = chop_if_long
 resharper_xmldoc_indent_text = RemoveIndent
 resharper_xmldoc_keep_user_linebreaks = false
 resharper_xmldoc_linebreaks_inside_tags_for_elements_with_child_elements = false

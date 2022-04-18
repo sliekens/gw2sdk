@@ -85,8 +85,14 @@ public static class TraitReader
             Slot = slot.GetValue(missingMemberBehavior),
             Icon = icon.GetValue(),
             SpezializationId = specialization.GetValue(),
-            Facts = facts.SelectMany(value => ReadTraitFact(value, missingMemberBehavior, out _, out _)),
-            TraitedFacts = traitedFacts.SelectMany(value => ReadCompoundTraitFact(value, missingMemberBehavior)),
+            Facts =
+                facts.SelectMany(
+                    value => ReadTraitFact(value, missingMemberBehavior, out _, out _)
+                    ),
+            TraitedFacts =
+                traitedFacts.SelectMany(
+                    value => ReadCompoundTraitFact(value, missingMemberBehavior)
+                    ),
             Skills = skills.SelectMany(value => ReadTraitSkill(value, missingMemberBehavior))
         };
     }
@@ -104,45 +110,135 @@ public static class TraitReader
         // BUG: Life Force Cost is missing a type property but we can treat it as Percent
         if (!json.TryGetProperty("type", out var type) && json.TryGetProperty("percent", out _))
         {
-            return ReadPercentTraitFact(json, missingMemberBehavior, out requiresTrait, out overrides);
+            return ReadPercentTraitFact(
+                json,
+                missingMemberBehavior,
+                out requiresTrait,
+                out overrides
+                );
         }
 
         switch (type.GetString())
         {
             case "AttributeAdjust":
-                return ReadAttributeAdjustTraitFact(json, missingMemberBehavior, out requiresTrait, out overrides);
+                return ReadAttributeAdjustTraitFact(
+                    json,
+                    missingMemberBehavior,
+                    out requiresTrait,
+                    out overrides
+                    );
             case "Buff":
-                return ReadBuffTraitFact(json, missingMemberBehavior, out requiresTrait, out overrides);
+                return ReadBuffTraitFact(
+                    json,
+                    missingMemberBehavior,
+                    out requiresTrait,
+                    out overrides
+                    );
             case "BuffConversion":
-                return ReadBuffConversionTraitFact(json, missingMemberBehavior, out requiresTrait, out overrides);
+                return ReadBuffConversionTraitFact(
+                    json,
+                    missingMemberBehavior,
+                    out requiresTrait,
+                    out overrides
+                    );
             case "ComboField":
-                return ReadComboFieldTraitFact(json, missingMemberBehavior, out requiresTrait, out overrides);
+                return ReadComboFieldTraitFact(
+                    json,
+                    missingMemberBehavior,
+                    out requiresTrait,
+                    out overrides
+                    );
             case "ComboFinisher":
-                return ReadComboFinisherTraitFact(json, missingMemberBehavior, out requiresTrait, out overrides);
+                return ReadComboFinisherTraitFact(
+                    json,
+                    missingMemberBehavior,
+                    out requiresTrait,
+                    out overrides
+                    );
             case "Damage":
-                return ReadDamageTraitFact(json, missingMemberBehavior, out requiresTrait, out overrides);
+                return ReadDamageTraitFact(
+                    json,
+                    missingMemberBehavior,
+                    out requiresTrait,
+                    out overrides
+                    );
             case "Distance":
-                return ReadDistanceTraitFact(json, missingMemberBehavior, out requiresTrait, out overrides);
+                return ReadDistanceTraitFact(
+                    json,
+                    missingMemberBehavior,
+                    out requiresTrait,
+                    out overrides
+                    );
             case "NoData":
-                return ReadNoDataTraitFact(json, missingMemberBehavior, out requiresTrait, out overrides);
+                return ReadNoDataTraitFact(
+                    json,
+                    missingMemberBehavior,
+                    out requiresTrait,
+                    out overrides
+                    );
             case "Number":
-                return ReadNumberTraitFact(json, missingMemberBehavior, out requiresTrait, out overrides);
+                return ReadNumberTraitFact(
+                    json,
+                    missingMemberBehavior,
+                    out requiresTrait,
+                    out overrides
+                    );
             case "Percent":
-                return ReadPercentTraitFact(json, missingMemberBehavior, out requiresTrait, out overrides);
+                return ReadPercentTraitFact(
+                    json,
+                    missingMemberBehavior,
+                    out requiresTrait,
+                    out overrides
+                    );
             case "PrefixedBuff":
-                return ReadPrefixedBuffTraitFact(json, missingMemberBehavior, out requiresTrait, out overrides);
+                return ReadPrefixedBuffTraitFact(
+                    json,
+                    missingMemberBehavior,
+                    out requiresTrait,
+                    out overrides
+                    );
             case "Radius":
-                return ReadRadiusTraitFact(json, missingMemberBehavior, out requiresTrait, out overrides);
+                return ReadRadiusTraitFact(
+                    json,
+                    missingMemberBehavior,
+                    out requiresTrait,
+                    out overrides
+                    );
             case "Range":
-                return ReadRangeTraitFact(json, missingMemberBehavior, out requiresTrait, out overrides);
+                return ReadRangeTraitFact(
+                    json,
+                    missingMemberBehavior,
+                    out requiresTrait,
+                    out overrides
+                    );
             case "Recharge":
-                return ReadRechargeTraitFact(json, missingMemberBehavior, out requiresTrait, out overrides);
+                return ReadRechargeTraitFact(
+                    json,
+                    missingMemberBehavior,
+                    out requiresTrait,
+                    out overrides
+                    );
             case "StunBreak":
-                return ReadStunBreakTraitFact(json, missingMemberBehavior, out requiresTrait, out overrides);
+                return ReadStunBreakTraitFact(
+                    json,
+                    missingMemberBehavior,
+                    out requiresTrait,
+                    out overrides
+                    );
             case "Time":
-                return ReadTimeTraitFact(json, missingMemberBehavior, out requiresTrait, out overrides);
+                return ReadTimeTraitFact(
+                    json,
+                    missingMemberBehavior,
+                    out requiresTrait,
+                    out overrides
+                    );
             case "Unblockable":
-                return ReadUnblockableTraitFact(json, missingMemberBehavior, out requiresTrait, out overrides);
+                return ReadUnblockableTraitFact(
+                    json,
+                    missingMemberBehavior,
+                    out requiresTrait,
+                    out overrides
+                    );
         }
 
         OptionalMember<string> text = new("text");
@@ -153,7 +249,9 @@ public static class TraitReader
             {
                 if (missingMemberBehavior == MissingMemberBehavior.Error)
                 {
-                    throw new InvalidOperationException(Strings.UnexpectedDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.UnexpectedDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals("requires_trait"))
@@ -204,7 +302,9 @@ public static class TraitReader
             {
                 if (!member.Value.ValueEquals("AttributeAdjust"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals("requires_trait"))
@@ -267,7 +367,9 @@ public static class TraitReader
             {
                 if (!member.Value.ValueEquals("Buff"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals("requires_trait"))
@@ -339,7 +441,9 @@ public static class TraitReader
             {
                 if (!member.Value.ValueEquals("BuffConversion"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals("requires_trait"))
@@ -404,7 +508,9 @@ public static class TraitReader
             {
                 if (!member.Value.ValueEquals("ComboField"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals("requires_trait"))
@@ -460,7 +566,9 @@ public static class TraitReader
             {
                 if (!member.Value.ValueEquals("ComboFinisher"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals("requires_trait"))
@@ -521,7 +629,9 @@ public static class TraitReader
             {
                 if (!member.Value.ValueEquals("Damage"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals("requires_trait"))
@@ -581,7 +691,9 @@ public static class TraitReader
             {
                 if (!member.Value.ValueEquals("Distance"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals("requires_trait"))
@@ -635,7 +747,9 @@ public static class TraitReader
             {
                 if (!member.Value.ValueEquals("NoData"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals("requires_trait"))
@@ -685,7 +799,9 @@ public static class TraitReader
             {
                 if (!member.Value.ValueEquals("Number"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals("requires_trait"))
@@ -740,7 +856,9 @@ public static class TraitReader
             {
                 if (!member.Value.ValueEquals("Percent"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals("requires_trait"))
@@ -799,7 +917,9 @@ public static class TraitReader
             {
                 if (!member.Value.ValueEquals("PrefixedBuff"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals("requires_trait"))
@@ -856,7 +976,10 @@ public static class TraitReader
         };
     }
 
-    private static BuffPrefix ReadBuffPrefix(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    private static BuffPrefix ReadBuffPrefix(
+        JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         RequiredMember<string> text = new("text");
         RequiredMember<string> icon = new("icon");
@@ -913,7 +1036,9 @@ public static class TraitReader
             {
                 if (!member.Value.ValueEquals("Radius"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals("requires_trait"))
@@ -968,7 +1093,9 @@ public static class TraitReader
             {
                 if (!member.Value.ValueEquals("Range"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals("requires_trait"))
@@ -1023,7 +1150,9 @@ public static class TraitReader
             {
                 if (!member.Value.ValueEquals("Recharge"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals("requires_trait"))
@@ -1078,7 +1207,9 @@ public static class TraitReader
             {
                 if (!member.Value.ValueEquals("StunBreak"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals("requires_trait"))
@@ -1133,7 +1264,9 @@ public static class TraitReader
             {
                 if (!member.Value.ValueEquals("Time"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals("requires_trait"))
@@ -1188,7 +1321,9 @@ public static class TraitReader
             {
                 if (!member.Value.ValueEquals("Unblockable"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals("requires_trait"))
@@ -1230,7 +1365,12 @@ public static class TraitReader
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        var fact = ReadTraitFact(json, missingMemberBehavior, out var requiresTrait, out var overrides);
+        var fact = ReadTraitFact(
+            json,
+            missingMemberBehavior,
+            out var requiresTrait,
+            out var overrides
+            );
         return new CompoundTraitFact
         {
             Fact = fact,
@@ -1239,7 +1379,10 @@ public static class TraitReader
         };
     }
 
-    private static TraitSkill ReadTraitSkill(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    private static TraitSkill ReadTraitSkill(
+        JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         RequiredMember<string> name = new("name");
         RequiredMember<TraitFact> facts = new("facts");
@@ -1274,7 +1417,8 @@ public static class TraitReader
             else if (member.NameEquals("flags"))
             {
                 // This seems to be always empty, just ignore it until one day it isn't
-                if (missingMemberBehavior == MissingMemberBehavior.Error && member.Value.GetArrayLength() != 0)
+                if (missingMemberBehavior == MissingMemberBehavior.Error
+                    && member.Value.GetArrayLength() != 0)
                 {
                     throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
                 }
@@ -1300,8 +1444,13 @@ public static class TraitReader
         return new TraitSkill
         {
             Name = name.GetValue(),
-            Facts = facts.SelectMany(item => ReadTraitFact(item, missingMemberBehavior, out _, out _)),
-            TraitedFacts = traitedFacts.SelectMany(value => ReadCompoundTraitFact(value, missingMemberBehavior)),
+            Facts = facts.SelectMany(
+                item => ReadTraitFact(item, missingMemberBehavior, out _, out _)
+                ),
+            TraitedFacts =
+                traitedFacts.SelectMany(
+                    value => ReadCompoundTraitFact(value, missingMemberBehavior)
+                    ),
             Description = description.GetValue(),
             Icon = icon.GetValue(),
             Id = id.GetValue(),

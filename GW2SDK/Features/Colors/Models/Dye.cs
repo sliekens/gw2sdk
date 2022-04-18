@@ -26,5 +26,6 @@ public sealed record Dye
 
     public int? Item { get; init; }
 
-    public IReadOnlyCollection<ColorCategoryName> Categories { get; init; } = Array.Empty<ColorCategoryName>();
+    public IReadOnlyCollection<ColorCategoryName> Categories { get; init; } =
+        Array.Empty<ColorCategoryName>();
 }

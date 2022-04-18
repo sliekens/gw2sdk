@@ -17,16 +17,14 @@ internal sealed class CompositeDisposable : IAsyncDisposable, IDisposable
         if (disposed) return;
         foreach (var asyncDisposable in asyncDisposables)
         {
-            await asyncDisposable.DisposeAsync()
-                .ConfigureAwait(false);
+            await asyncDisposable.DisposeAsync().ConfigureAwait(false);
         }
 
         foreach (var disposable in disposables)
         {
             if (disposable is IAsyncDisposable asyncDisposable)
             {
-                await asyncDisposable.DisposeAsync()
-                    .ConfigureAwait(false);
+                await asyncDisposable.DisposeAsync().ConfigureAwait(false);
             }
             else
             {
@@ -48,7 +46,8 @@ internal sealed class CompositeDisposable : IAsyncDisposable, IDisposable
         if (disposed)
         {
             throw new ObjectDisposedException(
-                "CompositeDisposable cannot be reused once disposed. Create a new instance.");
+                "CompositeDisposable cannot be reused once disposed. Create a new instance."
+                );
         }
 
         disposables.Add(disposable);
@@ -59,7 +58,8 @@ internal sealed class CompositeDisposable : IAsyncDisposable, IDisposable
         if (disposed)
         {
             throw new ObjectDisposedException(
-                "CompositeDisposable cannot be reused once disposed. Create a new instance.");
+                "CompositeDisposable cannot be reused once disposed. Create a new instance."
+                );
         }
 
         asyncDisposables.Add(disposable);

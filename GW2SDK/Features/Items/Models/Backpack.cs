@@ -9,7 +9,8 @@ public sealed record Backpack : Item
 {
     public int DefaultSkin { get; init; }
 
-    public IReadOnlyCollection<InfusionSlot> InfusionSlots { get; init; } = Array.Empty<InfusionSlot>();
+    public IReadOnlyCollection<InfusionSlot> InfusionSlots { get; init; } =
+        Array.Empty<InfusionSlot>();
 
     public double AttributeAdjustment { get; init; }
 

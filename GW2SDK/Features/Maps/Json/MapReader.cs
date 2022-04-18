@@ -20,7 +20,8 @@ public static class MapReader
         OptionalMember<PointF> labelCoordinates = new("label_coord");
         RequiredMember<MapRectangle> mapRectangle = new("map_rect");
         RequiredMember<ContinentRectangle> continentRectangle = new("continent_rect");
-        RequiredMember<Dictionary<int, PointOfInterest>> pointsOfInterest = new("points_of_interest");
+        RequiredMember<Dictionary<int, PointOfInterest>> pointsOfInterest =
+            new("points_of_interest");
         OptionalMember<GodShrine> godShrines = new("god_shrines");
         RequiredMember<Dictionary<int, MapTask>> tasks = new("tasks");
         RequiredMember<SkillChallenge> skillChallenges = new("skill_challenges");
@@ -103,41 +104,51 @@ public static class MapReader
             MinLevel = minLevel.GetValue(),
             MaxLevel = maxLevel.GetValue(),
             DefaultFloor = defaultFloor.GetValue(),
-            LabelCoordinates = labelCoordinates.Select(value => ReadPointF(value, missingMemberBehavior)),
-            MapRectangle = mapRectangle.Select(value => ReadMapRectangle(value, missingMemberBehavior)),
+            LabelCoordinates =
+                labelCoordinates.Select(value => ReadPointF(value, missingMemberBehavior)),
+            MapRectangle =
+                mapRectangle.Select(value => ReadMapRectangle(value, missingMemberBehavior)),
             ContinentRectangle =
-                continentRectangle.Select(value => ReadContinentRectangle(value, missingMemberBehavior)),
-            PointsOfInterest = pointsOfInterest.Select(value => ReadPointsOfInterest(value, missingMemberBehavior)),
-            GodShrines = godShrines.SelectMany(value => ReadGodShrine(value, missingMemberBehavior)),
+                continentRectangle.Select(
+                    value => ReadContinentRectangle(value, missingMemberBehavior)
+                    ),
+            PointsOfInterest =
+                pointsOfInterest.Select(
+                    value => ReadPointsOfInterest(value, missingMemberBehavior)
+                    ),
+            GodShrines =
+                godShrines.SelectMany(value => ReadGodShrine(value, missingMemberBehavior)),
             Tasks = tasks.Select(value => ReadTasks(value, missingMemberBehavior)),
-            SkillChallenges = skillChallenges.SelectMany(value => ReadSkillChallenge(value, missingMemberBehavior)),
+            SkillChallenges =
+                skillChallenges.SelectMany(
+                    value => ReadSkillChallenge(value, missingMemberBehavior)
+                    ),
             Sectors = sectors.Select(value => ReadSectors(value, missingMemberBehavior)),
-            Adventures = adventures.SelectMany(value => ReadAdventure(value, missingMemberBehavior)),
-            MasteryPoints = masteryPoints.SelectMany(item => ReadMasteryPoint(item, missingMemberBehavior))
+            Adventures =
+                adventures.SelectMany(value => ReadAdventure(value, missingMemberBehavior)),
+            MasteryPoints =
+                masteryPoints.SelectMany(item => ReadMasteryPoint(item, missingMemberBehavior))
         };
     }
 
     private static PointF ReadPointF(JsonElement json, MissingMemberBehavior missingMemberBehavior)
     {
-        var x = json[0]
-            .GetSingle();
-        var y = json[1]
-            .GetSingle();
+        var x = json[0].GetSingle();
+        var y = json[1].GetSingle();
         return new PointF(x, y);
     }
 
-    private static MapRectangle ReadMapRectangle(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    private static MapRectangle ReadMapRectangle(
+        JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         var bottomLeft = json[0];
-        var x = bottomLeft[0]
-            .GetSingle();
-        var y = bottomLeft[1]
-            .GetSingle();
+        var x = bottomLeft[0].GetSingle();
+        var y = bottomLeft[1].GetSingle();
         var size = json[1];
-        var width = size[0]
-            .GetSingle();
-        var height = size[1]
-            .GetSingle();
+        var width = size[0].GetSingle();
+        var height = size[1].GetSingle();
         return new MapRectangle
         {
             BottomLeft = new PointF(x, y),
@@ -151,15 +162,11 @@ public static class MapReader
     )
     {
         var topLeft = json[0];
-        var x = topLeft[0]
-            .GetSingle();
-        var y = topLeft[1]
-            .GetSingle();
+        var x = topLeft[0].GetSingle();
+        var y = topLeft[1].GetSingle();
         var size = json[1];
-        var width = size[0]
-            .GetSingle();
-        var height = size[1]
-            .GetSingle();
+        var width = size[0].GetSingle();
+        var height = size[1].GetSingle();
         return new ContinentRectangle
         {
             TopLeft = new PointF(x, y),
@@ -167,7 +174,10 @@ public static class MapReader
         };
     }
 
-    private static MasteryPoint ReadMasteryPoint(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    private static MasteryPoint ReadMasteryPoint(
+        JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         RequiredMember<double> coordinates = new("coord");
         RequiredMember<int> id = new("id");
@@ -200,7 +210,10 @@ public static class MapReader
         };
     }
 
-    private static Adventure ReadAdventure(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    private static Adventure ReadAdventure(
+        JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         RequiredMember<double> coordinates = new("coord");
         RequiredMember<string> id = new("id");
@@ -239,7 +252,10 @@ public static class MapReader
         };
     }
 
-    private static Dictionary<int, MapSector> ReadSectors(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    private static Dictionary<int, MapSector> ReadSectors(
+        JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         Dictionary<int, MapSector> sectors = new();
         foreach (var member in json.EnumerateObject())
@@ -257,7 +273,10 @@ public static class MapReader
         return sectors;
     }
 
-    private static SkillChallenge ReadSkillChallenge(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    private static SkillChallenge ReadSkillChallenge(
+        JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         RequiredMember<double> coordinates = new("coord");
 
@@ -286,7 +305,10 @@ public static class MapReader
         };
     }
 
-    private static Dictionary<int, MapTask> ReadTasks(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    private static Dictionary<int, MapTask> ReadTasks(
+        JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         Dictionary<int, MapTask> tasks = new();
         foreach (var member in json.EnumerateObject())
@@ -304,7 +326,10 @@ public static class MapReader
         return tasks;
     }
 
-    private static GodShrine ReadGodShrine(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    private static GodShrine ReadGodShrine(
+        JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         RequiredMember<int> id = new("id");
         RequiredMember<string> name = new("name");
@@ -371,7 +396,10 @@ public static class MapReader
         {
             if (int.TryParse(member.Name, out var id))
             {
-                pointsOfInterest[id] = PointOfInterestReader.Read(member.Value, missingMemberBehavior);
+                pointsOfInterest[id] = PointOfInterestReader.Read(
+                    member.Value,
+                    missingMemberBehavior
+                    );
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {

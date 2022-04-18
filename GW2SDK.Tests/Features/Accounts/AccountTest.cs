@@ -11,32 +11,41 @@ public class AccountTest
 {
     private static class BasicAccountFact
     {
-        public static void Name_is_never_empty(AccountSummary actual) => Assert.NotEmpty(actual.Name);
+        public static void Name_is_never_empty(AccountSummary actual) =>
+            Assert.NotEmpty(actual.Name);
 
-        public static void Access_is_never_empty(AccountSummary actual) => Assert.NotEmpty(actual.Access);
+        public static void Access_is_never_empty(AccountSummary actual) =>
+            Assert.NotEmpty(actual.Access);
 
-        public static void GuildLeader_requires_guilds_scope(AccountSummary actual) => Assert.Null(actual.GuildLeader);
+        public static void GuildLeader_requires_guilds_scope(AccountSummary actual) =>
+            Assert.Null(actual.GuildLeader);
 
         public static void Access_is_never_none(AccountSummary actual) =>
             Assert.DoesNotContain(ProductName.None, actual.Access);
 
-        public static void Age_is_never_zero(AccountSummary actual) => Assert.NotEqual(TimeSpan.Zero, actual.Age);
+        public static void Age_is_never_zero(AccountSummary actual) =>
+            Assert.NotEqual(TimeSpan.Zero, actual.Age);
 
         public static void FractalLevel_requires_progression_scope(AccountSummary actual) =>
             Assert.Null(actual.FractalLevel);
 
-        public static void DailyAp_requires_progression_scope(AccountSummary actual) => Assert.Null(actual.DailyAp);
+        public static void DailyAp_requires_progression_scope(AccountSummary actual) =>
+            Assert.Null(actual.DailyAp);
 
-        public static void MonthlyAp_requires_progression_scope(AccountSummary actual) => Assert.Null(actual.MonthlyAp);
+        public static void MonthlyAp_requires_progression_scope(AccountSummary actual) =>
+            Assert.Null(actual.MonthlyAp);
 
-        public static void WvwRank_requires_progression_scope(AccountSummary actual) => Assert.Null(actual.WvwRank);
+        public static void WvwRank_requires_progression_scope(AccountSummary actual) =>
+            Assert.Null(actual.WvwRank);
     }
 
     private static class FullAccountFact
     {
-        public static void Name_is_never_empty(AccountSummary actual) => Assert.NotEmpty(actual.Name);
+        public static void Name_is_never_empty(AccountSummary actual) =>
+            Assert.NotEmpty(actual.Name);
 
-        public static void Access_is_never_empty(AccountSummary actual) => Assert.NotEmpty(actual.Access);
+        public static void Access_is_never_empty(AccountSummary actual) =>
+            Assert.NotEmpty(actual.Access);
 
         public static void Access_is_never_none(AccountSummary actual) =>
             Assert.DoesNotContain(ProductName.None, actual.Access);
@@ -44,7 +53,8 @@ public class AccountTest
         public static void GuildLeader_is_included_by_guilds_scope(AccountSummary actual) =>
             Assert.NotNull(actual.GuildLeader);
 
-        public static void Age_is_never_zero(AccountSummary actual) => Assert.NotEqual(TimeSpan.Zero, actual.Age);
+        public static void Age_is_never_zero(AccountSummary actual) =>
+            Assert.NotEqual(TimeSpan.Zero, actual.Age);
 
         public static void Created_ShouldNotBeDefaultValue(AccountSummary actual) =>
             Assert.NotEqual(default, actual.Created);
@@ -112,8 +122,7 @@ public class AccountTest
 
         var actual = await sut.GetCharactersIndex(accessToken.Key);
 
-        var expected = services.Resolve<TestCharacterName>()
-            .Name;
+        var expected = services.Resolve<TestCharacterName>().Name;
 
         Assert.Contains(expected, actual);
     }

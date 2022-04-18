@@ -19,11 +19,13 @@ public class JsonFloorService
     public async Task<List<string>> GetAllJsonFloors(int continentId)
     {
         var request = new BulkRequest($"/v2/continents/{continentId}/floors");
-        var json = await request.SendAsync(http, CancellationToken.None)
-            .ConfigureAwait(false);
+        var json = await request.SendAsync(http, CancellationToken.None).ConfigureAwait(false);
         return json.Indent(false)
             .RootElement.EnumerateArray()
-            .Select(item => item.ToString() ?? throw new InvalidOperationException("Unexpected null in JSON array."))
+            .Select(
+                item => item.ToString()
+                    ?? throw new InvalidOperationException("Unexpected null in JSON array.")
+                )
             .ToList();
     }
 }

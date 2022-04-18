@@ -73,7 +73,10 @@ public struct Snapshot
         return true;
     }
 
-    public bool TryGetIdentity([NotNullWhen(true)] out Identity? identity, MissingMemberBehavior missingMemberBehavior)
+    public bool TryGetIdentity(
+        [NotNullWhen(true)] out Identity? identity,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         identity = default;
         if (Name != "Guild Wars 2")

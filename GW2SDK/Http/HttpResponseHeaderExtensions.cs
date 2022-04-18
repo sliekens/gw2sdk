@@ -11,8 +11,7 @@ public static class HttpResponseHeaderExtensions
     public static ICollectionContext GetCollectionContext(this HttpResponseHeaders instance)
     {
         if (instance is null) throw new ArgumentNullException(nameof(instance));
-        int resultTotal = default,
-            resultCount = default;
+        int resultTotal = default, resultCount = default;
         if (instance.TryGetValues(ResponseHeaderName.ResultTotal, out var resultTotals))
         {
             // Assume that there is exactly one value for this header
@@ -31,10 +30,7 @@ public static class HttpResponseHeaderExtensions
     public static IPageContext GetPageContext(this HttpResponseHeaders instance)
     {
         if (instance is null) throw new ArgumentNullException(nameof(instance));
-        int pageTotal = default,
-            pageSize = default,
-            resultTotal = default,
-            resultCount = default;
+        int pageTotal = default, pageSize = default, resultTotal = default, resultCount = default;
         Hyperlink previous = Hyperlink.None,
             next = Hyperlink.None,
             self = Hyperlink.None,
@@ -97,7 +93,17 @@ public static class HttpResponseHeaderExtensions
             throw new Exception();
         }
 
-        return new PageContext(resultTotal, resultCount, pageTotal, pageSize, first, self, last, previous, next);
+        return new PageContext(
+            resultTotal,
+            resultCount,
+            pageTotal,
+            pageSize,
+            first,
+            self,
+            last,
+            previous,
+            next
+            );
     }
 
     private static class ResponseHeaderName

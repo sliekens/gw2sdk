@@ -110,7 +110,10 @@ public sealed class MapQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<IReplicaSet<int>> GetFloorsIndex(int continentId, CancellationToken cancellationToken = default)
+    public Task<IReplicaSet<int>> GetFloorsIndex(
+        int continentId,
+        CancellationToken cancellationToken = default
+    )
     {
         FloorsIndexRequest request = new(continentId);
         return request.SendAsync(http, cancellationToken);

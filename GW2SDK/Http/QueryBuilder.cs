@@ -19,9 +19,11 @@ public sealed class QueryBuilder
 
     public void Add(string key, string value) => arguments.Add(new Argument(key, value));
 
-    public void Add(string key, IEnumerable<string> values) => arguments.Add(new Argument(key, ToCsv(values)));
+    public void Add(string key, IEnumerable<string> values) =>
+        arguments.Add(new Argument(key, ToCsv(values)));
 
-    public void Add(string key, IEnumerable<int> values) => arguments.Add(new Argument(key, ToCsv(ToString(values))));
+    public void Add(string key, IEnumerable<int> values) =>
+        arguments.Add(new Argument(key, ToCsv(ToString(values))));
 
     public string Build()
     {
@@ -47,11 +49,7 @@ public sealed class QueryBuilder
 #if !NET
 internal static class QueryBuilderHelper
 {
-    internal static void Deconstruct(
-        this Argument instance,
-        out string key,
-        out string value
-    )
+    internal static void Deconstruct(this Argument instance, out string key, out string value)
     {
         key = instance.Key;
         value = instance.Value;

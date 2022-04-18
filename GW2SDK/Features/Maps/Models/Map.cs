@@ -30,13 +30,15 @@ public sealed record Map
 
     public Dictionary<int, MapTask> Tasks { get; init; } = new(0);
 
-    public IReadOnlyCollection<SkillChallenge> SkillChallenges { get; init; } = Array.Empty<SkillChallenge>();
+    public IReadOnlyCollection<SkillChallenge> SkillChallenges { get; init; } =
+        Array.Empty<SkillChallenge>();
 
     public Dictionary<int, MapSector> Sectors { get; init; } = new(0);
 
     public IReadOnlyCollection<Adventure> Adventures { get; init; } = Array.Empty<Adventure>();
 
-    public IReadOnlyCollection<MasteryPoint> MasteryPoints { get; init; } = Array.Empty<MasteryPoint>();
+    public IReadOnlyCollection<MasteryPoint> MasteryPoints { get; init; } =
+        Array.Empty<MasteryPoint>();
 
     public IReadOnlyCollection<GodShrine>? GodShrines { get; init; }
 }

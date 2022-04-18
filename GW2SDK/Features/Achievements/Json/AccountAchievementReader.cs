@@ -9,7 +9,10 @@ namespace GW2SDK.Achievements.Json;
 [PublicAPI]
 public static class AccountAchievementReader
 {
-    public static AccountAchievement Read(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    public static AccountAchievement Read(
+        JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         RequiredMember<int> id = new("id");
         RequiredMember<int> current = new("current");

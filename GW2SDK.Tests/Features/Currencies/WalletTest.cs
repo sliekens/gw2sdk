@@ -12,13 +12,16 @@ public class WalletTest
 {
     private static class CurrencyFact
     {
-        public static void Id_is_positive(Currency actual) => Assert.InRange(actual.Id, 1, int.MaxValue);
+        public static void Id_is_positive(Currency actual) =>
+            Assert.InRange(actual.Id, 1, int.MaxValue);
 
         public static void Name_is_not_empty(Currency actual) => Assert.NotEmpty(actual.Name);
 
-        public static void Description_is_not_empty(Currency actual) => Assert.NotEmpty(actual.Description);
+        public static void Description_is_not_empty(Currency actual) =>
+            Assert.NotEmpty(actual.Description);
 
-        public static void Order_is_positive(Currency actual) => Assert.InRange(actual.Order, 1, 1000);
+        public static void Order_is_positive(Currency actual) =>
+            Assert.InRange(actual.Order, 1, 1000);
 
         public static void Icon_is_not_empty(Currency actual) => Assert.NotEmpty(actual.Icon);
     }
@@ -46,7 +49,8 @@ public class WalletTest
         var actual = await sut.GetCurrencies();
 
         Assert.Equal(actual.Context.ResultTotal, actual.Count);
-        Assert.All(actual,
+        Assert.All(
+            actual,
             currency =>
             {
                 CurrencyFact.Id_is_positive(currency);
@@ -54,7 +58,8 @@ public class WalletTest
                 CurrencyFact.Description_is_not_empty(currency);
                 CurrencyFact.Order_is_positive(currency);
                 CurrencyFact.Icon_is_not_empty(currency);
-            });
+            }
+            );
     }
 
     [Fact]
@@ -96,10 +101,12 @@ public class WalletTest
 
         var actual = await sut.GetCurrenciesByIds(ids);
 
-        Assert.Collection(actual,
+        Assert.Collection(
+            actual,
             first => Assert.Equal(1, first.Id),
             second => Assert.Equal(2, second.Id),
-            third => Assert.Equal(3, third.Id));
+            third => Assert.Equal(3, third.Id)
+            );
     }
 
     [Fact]

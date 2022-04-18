@@ -36,24 +36,23 @@ public sealed class CreateSubtokenRequest : IHttpRequest<IReplica<CreatedSubtoke
 
     public MissingMemberBehavior MissingMemberBehavior { get; init; }
 
-    public async Task<IReplica<CreatedSubtoken>> SendAsync(HttpClient httpClient, CancellationToken cancellationToken)
+    public async Task<IReplica<CreatedSubtoken>> SendAsync(
+        HttpClient httpClient,
+        CancellationToken cancellationToken
+    )
     {
         QueryBuilder args = new();
-        if (Permissions is {Count: not 0})
+        if (Permissions is { Count: not 0 })
         {
-            args.Add("permissions",
-                string.Join(",", Permissions)
-                    .ToLowerInvariant());
+            args.Add("permissions", string.Join(",", Permissions).ToLowerInvariant());
         }
 
         if (AbsoluteExpirationDate.HasValue)
         {
-            args.Add("expire",
-                AbsoluteExpirationDate.Value.ToUniversalTime()
-                    .ToString("s"));
+            args.Add("expire", AbsoluteExpirationDate.Value.ToUniversalTime().ToString("s"));
         }
 
-        if (Urls is {Count: not 0})
+        if (Urls is { Count: not 0 })
         {
             args.Add("urls", string.Join(",", Urls.Select(Uri.EscapeDataString)));
         }
@@ -64,21 +63,24 @@ public sealed class CreateSubtokenRequest : IHttpRequest<IReplica<CreatedSubtoke
             BearerToken = AccessToken
         };
 
-        using var response = await httpClient.SendAsync(request.Compile(),
+        using var response = await httpClient.SendAsync(
+                request.Compile(),
                 HttpCompletionOption.ResponseHeadersRead,
-                cancellationToken)
+                cancellationToken
+                )
             .ConfigureAwait(false);
 
-        await response.EnsureResult(cancellationToken)
-            .ConfigureAwait(false);
+        await response.EnsureResult(cancellationToken).ConfigureAwait(false);
 
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
         var value = SubtokenReader.Read(json.RootElement, MissingMemberBehavior);
-        return new Replica<CreatedSubtoken>(response.Headers.Date.GetValueOrDefault(),
+        return new Replica<CreatedSubtoken>(
+            response.Headers.Date.GetValueOrDefault(),
             value,
             response.Content.Headers.Expires,
-            response.Content.Headers.LastModified);
+            response.Content.Headers.LastModified
+            );
     }
 }

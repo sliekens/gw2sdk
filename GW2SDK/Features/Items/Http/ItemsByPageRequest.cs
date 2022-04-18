@@ -18,9 +18,7 @@ public sealed class ItemsByPageRequest : IHttpRequest<IReplicaPage<Item>>
         AcceptEncoding = "gzip"
     };
 
-    public ItemsByPageRequest(
-        int pageIndex
-    )
+    public ItemsByPageRequest(int pageIndex)
     {
         PageIndex = pageIndex;
     }
@@ -33,7 +31,10 @@ public sealed class ItemsByPageRequest : IHttpRequest<IReplicaPage<Item>>
 
     public MissingMemberBehavior MissingMemberBehavior { get; init; }
 
-    public async Task<IReplicaPage<Item>> SendAsync(HttpClient httpClient, CancellationToken cancellationToken)
+    public async Task<IReplicaPage<Item>> SendAsync(
+        HttpClient httpClient,
+        CancellationToken cancellationToken
+    )
     {
         QueryBuilder search = new();
         search.Add("page", PageIndex);
@@ -48,22 +49,25 @@ public sealed class ItemsByPageRequest : IHttpRequest<IReplicaPage<Item>>
             Arguments = search
         };
 
-        using var response = await httpClient.SendAsync(request.Compile(),
+        using var response = await httpClient.SendAsync(
+                request.Compile(),
                 HttpCompletionOption.ResponseHeadersRead,
-                cancellationToken)
+                cancellationToken
+                )
             .ConfigureAwait(false);
 
-        await response.EnsureResult(cancellationToken)
-            .ConfigureAwait(false);
+        await response.EnsureResult(cancellationToken).ConfigureAwait(false);
 
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
         var value = json.RootElement.GetSet(entry => ItemReader.Read(entry, MissingMemberBehavior));
-        return new ReplicaPage<Item>(response.Headers.Date.GetValueOrDefault(),
+        return new ReplicaPage<Item>(
+            response.Headers.Date.GetValueOrDefault(),
             value,
             response.Headers.GetPageContext(),
             response.Content.Headers.Expires,
-            response.Content.Headers.LastModified);
+            response.Content.Headers.LastModified
+            );
     }
 }

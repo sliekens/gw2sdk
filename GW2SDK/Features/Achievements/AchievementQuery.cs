@@ -42,7 +42,9 @@ public sealed class AchievementQuery
 
     #region /v2/achievements
 
-    public Task<IReplicaSet<int>> GetAchievementsIndex(CancellationToken cancellationToken = default)
+    public Task<IReplicaSet<int>> GetAchievementsIndex(
+        CancellationToken cancellationToken = default
+    )
     {
         AchievementsIndexRequest request = new();
         return request.SendAsync(http, cancellationToken);
@@ -182,7 +184,9 @@ public sealed class AchievementQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<IReplicaSet<int>> GetAchievementCategoriesIndex(CancellationToken cancellationToken = default)
+    public Task<IReplicaSet<int>> GetAchievementCategoriesIndex(
+        CancellationToken cancellationToken = default
+    )
     {
         AchievementCategoriesIndexRequest request = new();
         return request.SendAsync(http, cancellationToken);
@@ -253,7 +257,9 @@ public sealed class AchievementQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<IReplicaSet<string>> GetAchievementGroupsIndex(CancellationToken cancellationToken = default)
+    public Task<IReplicaSet<string>> GetAchievementGroupsIndex(
+        CancellationToken cancellationToken = default
+    )
     {
         AchievementGroupsIndexRequest request = new();
         return request.SendAsync(http, cancellationToken);

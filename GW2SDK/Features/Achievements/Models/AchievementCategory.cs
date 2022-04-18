@@ -19,7 +19,8 @@ public sealed record AchievementCategory
 
     public string Icon { get; init; } = "";
 
-    public IReadOnlyCollection<AchievementRef> Achievements { get; init; } = Array.Empty<AchievementRef>();
+    public IReadOnlyCollection<AchievementRef> Achievements { get; init; } =
+        Array.Empty<AchievementRef>();
 
     public IReadOnlyCollection<AchievementRef>? Tomorrow { get; init; }
 }

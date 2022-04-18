@@ -38,10 +38,7 @@ internal class Program : IObserver<Snapshot>
 
         using var subscription = mumble.Subscribe(this);
 
-        WaitHandle.WaitAll(new[]
-        {
-            cancellationToken.WaitHandle
-        });
+        WaitHandle.WaitAll(new[] { cancellationToken.WaitHandle });
     }
 
     private static void CallBack(object state)
@@ -70,6 +67,7 @@ internal class Program : IObserver<Snapshot>
             identity.MapId,
             pos[0],
             pos[1],
-            pos[2]);
+            pos[2]
+            );
     }
 }

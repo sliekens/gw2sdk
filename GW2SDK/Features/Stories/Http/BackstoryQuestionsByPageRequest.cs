@@ -13,10 +13,8 @@ namespace GW2SDK.Stories.Http;
 [PublicAPI]
 public sealed class BackstoryQuestionsByPageRequest : IHttpRequest<IReplicaPage<BackstoryQuestion>>
 {
-    private static readonly HttpRequestMessageTemplate Template = new(Get, "/v2/backstory/questions")
-    {
-        AcceptEncoding = "gzip"
-    };
+    private static readonly HttpRequestMessageTemplate Template =
+        new(Get, "/v2/backstory/questions") { AcceptEncoding = "gzip" };
 
     public BackstoryQuestionsByPageRequest(int pageIndex)
     {
@@ -49,22 +47,27 @@ public sealed class BackstoryQuestionsByPageRequest : IHttpRequest<IReplicaPage<
             AcceptLanguage = Language?.Alpha2Code
         };
 
-        using var response = await httpClient.SendAsync(request.Compile(),
+        using var response = await httpClient.SendAsync(
+                request.Compile(),
                 HttpCompletionOption.ResponseHeadersRead,
-                cancellationToken)
+                cancellationToken
+                )
             .ConfigureAwait(false);
 
-        await response.EnsureResult(cancellationToken)
-            .ConfigureAwait(false);
+        await response.EnsureResult(cancellationToken).ConfigureAwait(false);
 
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value = json.RootElement.GetSet(entry => BackstoryQuestionReader.Read(entry, MissingMemberBehavior));
-        return new ReplicaPage<BackstoryQuestion>(response.Headers.Date.GetValueOrDefault(),
+        var value = json.RootElement.GetSet(
+            entry => BackstoryQuestionReader.Read(entry, MissingMemberBehavior)
+            );
+        return new ReplicaPage<BackstoryQuestion>(
+            response.Headers.Date.GetValueOrDefault(),
             value,
             response.Headers.GetPageContext(),
             response.Content.Headers.Expires,
-            response.Content.Headers.LastModified);
+            response.Content.Headers.LastModified
+            );
     }
 }

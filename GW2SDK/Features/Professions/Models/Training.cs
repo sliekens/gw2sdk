@@ -15,5 +15,6 @@ public sealed record Training
 
     public TrainingCategory Category { get; init; }
 
-    public IReadOnlyCollection<TrainingObjective> Track { get; set; } = Array.Empty<TrainingObjective>();
+    public IReadOnlyCollection<TrainingObjective> Track { get; set; } =
+        Array.Empty<TrainingObjective>();
 }

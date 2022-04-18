@@ -19,5 +19,6 @@ public sealed record MailCarrier
 
     public string Name { get; init; } = "";
 
-    public IReadOnlyCollection<MailCarrierFlag> Flags { get; init; } = Array.Empty<MailCarrierFlag>();
+    public IReadOnlyCollection<MailCarrierFlag> Flags { get; init; } =
+        Array.Empty<MailCarrierFlag>();
 }

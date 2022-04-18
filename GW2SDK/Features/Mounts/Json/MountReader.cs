@@ -55,7 +55,10 @@ public static class MountReader
         };
     }
 
-    private static SkillReference ReadSkill(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    private static SkillReference ReadSkill(
+        JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         RequiredMember<int> id = new("id");
         RequiredMember<SkillSlot> slot = new("slot");

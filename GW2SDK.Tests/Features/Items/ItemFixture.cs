@@ -9,9 +9,7 @@ public class ItemFixture
 {
     public ItemFixture()
     {
-        Items = FlatFileReader.Read("Data/items.json.gz")
-            .ToList()
-            .AsReadOnly();
+        Items = FlatFileReader.Read("Data/items.json.gz").ToList().AsReadOnly();
     }
 
     public IReadOnlyCollection<string> Items { get; }

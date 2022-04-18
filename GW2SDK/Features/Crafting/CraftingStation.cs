@@ -36,10 +36,7 @@ public sealed class CraftingStation
         CancellationToken cancellationToken = default
     )
     {
-        RecipeByIdRequest request = new(recipeId)
-        {
-            MissingMemberBehavior = missingMemberBehavior
-        };
+        RecipeByIdRequest request = new(recipeId) { MissingMemberBehavior = missingMemberBehavior };
         return request.SendAsync(http, cancellationToken);
     }
 
@@ -50,7 +47,8 @@ public sealed class CraftingStation
         IProgress<ICollectionContext>? progress = default
     )
     {
-        var producer = SplitQuery.Create<int, Recipe>((range, ct) =>
+        var producer = SplitQuery.Create<int, Recipe>(
+            (range, ct) =>
             {
                 RecipesByIdsRequest request = new(range)
                 {
@@ -58,7 +56,8 @@ public sealed class CraftingStation
                 };
                 return request.SendAsync(http, ct);
             },
-            progress);
+            progress
+            );
 
         return producer.QueryAsync(recipeIds, cancellationToken: cancellationToken);
     }
@@ -160,9 +159,13 @@ public sealed class CraftingStation
         IProgress<ICollectionContext>? progress = default
     )
     {
-        var index = await GetRecipesIndex(cancellationToken)
-            .ConfigureAwait(false);
-        var producer = GetRecipesByIds(index.Values, missingMemberBehavior, cancellationToken, progress);
+        var index = await GetRecipesIndex(cancellationToken).ConfigureAwait(false);
+        var producer = GetRecipesByIds(
+            index.Values,
+            missingMemberBehavior,
+            cancellationToken,
+            progress
+            );
         await foreach (var recipe in producer.WithCancellation(cancellationToken)
                            .ConfigureAwait(false))
         {
@@ -178,10 +181,7 @@ public sealed class CraftingStation
         CancellationToken cancellationToken = default
     )
     {
-        UnlockedRecipesRequest request = new()
-        {
-            AccessToken = accessToken
-        };
+        UnlockedRecipesRequest request = new() { AccessToken = accessToken };
         return request.SendAsync(http, cancellationToken);
     }
 
@@ -203,7 +203,9 @@ public sealed class CraftingStation
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<IReplica<IReadOnlyCollection<string>>> GetDailyRecipes(CancellationToken cancellationToken = default)
+    public Task<IReplica<IReadOnlyCollection<string>>> GetDailyRecipes(
+        CancellationToken cancellationToken = default
+    )
     {
         DailyCraftingRequest request = new();
         return request.SendAsync(http, cancellationToken);
@@ -215,10 +217,7 @@ public sealed class CraftingStation
         CancellationToken cancellationToken = default
     )
     {
-        AccountDailyCraftingRequest request = new()
-        {
-            AccessToken = accessToken
-        };
+        AccountDailyCraftingRequest request = new() { AccessToken = accessToken };
         return request.SendAsync(http, cancellationToken);
     }
 }

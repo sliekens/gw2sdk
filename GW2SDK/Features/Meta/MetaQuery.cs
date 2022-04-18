@@ -26,10 +26,7 @@ public sealed class MetaQuery
         CancellationToken cancellationToken = default
     )
     {
-        ApiVersionRequest request = new(version)
-        {
-            MissingMemberBehavior = missingMemberBehavior
-        };
+        ApiVersionRequest request = new(version) { MissingMemberBehavior = missingMemberBehavior };
         return request.SendAsync(http, cancellationToken);
     }
 

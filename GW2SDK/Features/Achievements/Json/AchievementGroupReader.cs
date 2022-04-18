@@ -9,7 +9,10 @@ namespace GW2SDK.Achievements.Json;
 [PublicAPI]
 public static class AchievementGroupReader
 {
-    public static AchievementGroup Read(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    public static AchievementGroup Read(
+        JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         RequiredMember<string> id = new("id");
         RequiredMember<string> name = new("name");

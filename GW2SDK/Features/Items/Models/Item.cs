@@ -29,7 +29,8 @@ public record Item
     public IReadOnlyCollection<ItemFlag> Flags { get; init; } = Array.Empty<ItemFlag>();
 
     /// <remarks>Can be empty.</remarks>
-    public IReadOnlyCollection<ItemRestriction> Restrictions { get; init; } = Array.Empty<ItemRestriction>();
+    public IReadOnlyCollection<ItemRestriction> Restrictions { get; init; } =
+        Array.Empty<ItemRestriction>();
 
     public string ChatLink { get; init; } = "";
 

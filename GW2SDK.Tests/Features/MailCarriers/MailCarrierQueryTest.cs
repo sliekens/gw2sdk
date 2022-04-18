@@ -12,7 +12,8 @@ public class MailCarrierQueryTest
 {
     private static class MailCarrierFact
     {
-        public static void Id_is_positive(MailCarrier actual) => Assert.InRange(actual.Id, 1, int.MaxValue);
+        public static void Id_is_positive(MailCarrier actual) =>
+            Assert.InRange(actual.Id, 1, int.MaxValue);
 
         public static void Non_default_carriers_can_be_unlocked(MailCarrier actual)
         {
@@ -28,7 +29,8 @@ public class MailCarrierQueryTest
 
         public static void Name_is_not_empty(MailCarrier actual) => Assert.NotEmpty(actual.Name);
 
-        public static void Order_is_not_negative(MailCarrier actual) => Assert.InRange(actual.Order, 0, 1000);
+        public static void Order_is_not_negative(MailCarrier actual) =>
+            Assert.InRange(actual.Order, 0, 1000);
 
         public static void Icon_is_not_empty(MailCarrier actual) => Assert.NotEmpty(actual.Icon);
     }
@@ -42,7 +44,8 @@ public class MailCarrierQueryTest
         var actual = await sut.GetMailCarriers();
 
         Assert.Equal(actual.Context.ResultTotal, actual.Count);
-        Assert.All(actual,
+        Assert.All(
+            actual,
             mailCarrier =>
             {
                 MailCarrierFact.Id_is_positive(mailCarrier);
@@ -50,7 +53,8 @@ public class MailCarrierQueryTest
                 MailCarrierFact.Order_is_not_negative(mailCarrier);
                 MailCarrierFact.Icon_is_not_empty(mailCarrier);
                 MailCarrierFact.Name_is_not_empty(mailCarrier);
-            });
+            }
+            );
     }
 
     [Fact]
@@ -92,10 +96,12 @@ public class MailCarrierQueryTest
 
         var actual = await sut.GetMailCarriersByIds(ids);
 
-        Assert.Collection(actual,
+        Assert.Collection(
+            actual,
             first => Assert.Equal(1, first.Id),
             second => Assert.Equal(2, second.Id),
-            third => Assert.Equal(3, third.Id));
+            third => Assert.Equal(3, third.Id)
+            );
     }
 
     [Fact]

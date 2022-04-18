@@ -10,10 +10,12 @@ namespace GW2SDK.Maps.Json;
 [PublicAPI]
 public static class PointOfInterestReader
 {
-    public static PointOfInterest Read(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    public static PointOfInterest Read(
+        JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
-        switch (json.GetProperty("type")
-                    .GetString())
+        switch (json.GetProperty("type").GetString())
         {
             case "landmark":
                 return ReadLandmark(json, missingMemberBehavior);
@@ -36,7 +38,9 @@ public static class PointOfInterestReader
             {
                 if (missingMemberBehavior == MissingMemberBehavior.Error)
                 {
-                    throw new InvalidOperationException(Strings.UnexpectedDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.UnexpectedDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -75,7 +79,10 @@ public static class PointOfInterestReader
         };
     }
 
-    private static Landmark ReadLandmark(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    private static Landmark ReadLandmark(
+        JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         OptionalMember<string> name = new("name");
         RequiredMember<int> floor = new("floor");
@@ -88,7 +95,9 @@ public static class PointOfInterestReader
             {
                 if (!member.Value.ValueEquals("landmark"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -129,10 +138,8 @@ public static class PointOfInterestReader
 
     private static PointF ReadPointF(JsonElement json, MissingMemberBehavior missingMemberBehavior)
     {
-        var x = json[0]
-            .GetSingle();
-        var y = json[1]
-            .GetSingle();
+        var x = json[0].GetSingle();
+        var y = json[1].GetSingle();
         return new PointF(x, y);
     }
 
@@ -153,7 +160,9 @@ public static class PointOfInterestReader
             {
                 if (!member.Value.ValueEquals("unlock"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -210,7 +219,9 @@ public static class PointOfInterestReader
             {
                 if (!member.Value.ValueEquals("vista"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -249,7 +260,10 @@ public static class PointOfInterestReader
         };
     }
 
-    private static Waypoint ReadWaypoint(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    private static Waypoint ReadWaypoint(
+        JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         OptionalMember<string> name = new("name");
         RequiredMember<int> floor = new("floor");
@@ -262,7 +276,9 @@ public static class PointOfInterestReader
             {
                 if (!member.Value.ValueEquals("waypoint"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals(name.Name))

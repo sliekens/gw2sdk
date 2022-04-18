@@ -7,8 +7,10 @@ namespace GW2SDK;
 [PublicAPI]
 public sealed class Language
 {
-    private static readonly Regex Alpha2Pattern = new(@"^[a-z]{2}$",
-        RegexOptions.IgnoreCase | RegexOptions.CultureInvariant | RegexOptions.Compiled);
+    private static readonly Regex Alpha2Pattern = new(
+        @"^[a-z]{2}$",
+        RegexOptions.IgnoreCase | RegexOptions.CultureInvariant | RegexOptions.Compiled
+        );
 
     public static readonly Language English = new("en");
 

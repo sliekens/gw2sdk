@@ -13,12 +13,14 @@ public class AchievementQueryTest
 {
     private static class AccountAchievementFact
     {
-        public static void Id_is_positive(AccountAchievement actual) => Assert.InRange(actual.Id, 1, int.MaxValue);
+        public static void Id_is_positive(AccountAchievement actual) =>
+            Assert.InRange(actual.Id, 1, int.MaxValue);
     }
 
     private static class AchievementCategoryFact
     {
-        public static void Id_is_positive(AchievementCategory actual) => Assert.InRange(actual.Id, 1, int.MaxValue);
+        public static void Id_is_positive(AchievementCategory actual) =>
+            Assert.InRange(actual.Id, 1, int.MaxValue);
 
         public static void Order_is_not_negative(AchievementCategory actual) =>
             Assert.InRange(actual.Order, 0, int.MaxValue);
@@ -26,7 +28,8 @@ public class AchievementQueryTest
 
     private static class DailyAchievementFact
     {
-        public static void Id_is_positive(DailyAchievement actual) => Assert.InRange(actual.Id, 1, int.MaxValue);
+        public static void Id_is_positive(DailyAchievement actual) =>
+            Assert.InRange(actual.Id, 1, int.MaxValue);
 
         public static void Min_level_is_between_1_and_80(DailyAchievement actual) =>
             Assert.InRange(actual.Level.Min, 1, 80);
@@ -38,17 +41,18 @@ public class AchievementQueryTest
         {
             if (actual.RequiredAccess is not null)
             {
-                Assert.Subset(new HashSet<ProductName>
+                Assert.Subset(
+                    new HashSet<ProductName>
                     {
                         HeartOfThorns,
                         PathOfFire
                     },
-                    new HashSet<ProductName>
-                    {
-                        actual.RequiredAccess.Product
-                    });
+                    new HashSet<ProductName> { actual.RequiredAccess.Product }
+                    );
 
-                Assert.True(Enum.IsDefined(typeof(AccessCondition), actual.RequiredAccess.Condition));
+                Assert.True(
+                    Enum.IsDefined(typeof(AccessCondition), actual.RequiredAccess.Condition)
+                    );
             }
         }
     }
@@ -93,7 +97,8 @@ public class AchievementQueryTest
 
     private static class TitleFact
     {
-        public static void Id_is_positive(Title actual) => Assert.InRange(actual.Id, 1, int.MaxValue);
+        public static void Id_is_positive(Title actual) =>
+            Assert.InRange(actual.Id, 1, int.MaxValue);
 
         public static void Name_is_not_empty(Title actual) => Assert.NotEmpty(actual.Name);
 
@@ -149,10 +154,12 @@ public class AchievementQueryTest
 
         var actual = await sut.GetAchievementsByIds(achievementIds);
 
-        Assert.Collection(actual,
+        Assert.Collection(
+            actual,
             achievement => Assert.Equal(1, achievement.Id),
             achievement => Assert.Equal(2, achievement.Id),
-            achievement => Assert.Equal(3, achievement.Id));
+            achievement => Assert.Equal(3, achievement.Id)
+            );
     }
 
     [Fact]
@@ -178,11 +185,13 @@ public class AchievementQueryTest
 
         Assert.Equal(actual.Context.ResultTotal, actual.Count);
 
-        Assert.All(actual,
+        Assert.All(
+            actual,
             achievement =>
             {
                 AccountAchievementFact.Id_is_positive(achievement);
-            });
+            }
+            );
     }
 
     [Fact]
@@ -215,10 +224,12 @@ public class AchievementQueryTest
 
         var actual = await sut.GetAccountAchievementsByIds(ids, accessToken.Key);
 
-        Assert.Collection(actual,
+        Assert.Collection(
+            actual,
             first => Assert.Equal(1, first.Id),
             second => Assert.Equal(2, second.Id),
-            third => Assert.Equal(3, third.Id));
+            third => Assert.Equal(3, third.Id)
+            );
     }
 
     [Fact]
@@ -243,12 +254,14 @@ public class AchievementQueryTest
         var actual = await sut.GetAchievementCategories();
 
         Assert.Equal(actual.Context.ResultTotal, actual.Count);
-        Assert.All(actual,
+        Assert.All(
+            actual,
             achievementCategory =>
             {
                 AchievementCategoryFact.Id_is_positive(achievementCategory);
                 AchievementCategoryFact.Order_is_not_negative(achievementCategory);
-            });
+            }
+            );
     }
 
     [Fact]
@@ -290,10 +303,12 @@ public class AchievementQueryTest
 
         var actual = await sut.GetAchievementCategoriesByIds(ids);
 
-        Assert.Collection(actual,
+        Assert.Collection(
+            actual,
             first => Assert.Equal(1, first.Id),
             second => Assert.Equal(2, second.Id),
-            third => Assert.Equal(3, third.Id));
+            third => Assert.Equal(3, third.Id)
+            );
     }
 
     [Fact]
@@ -317,11 +332,13 @@ public class AchievementQueryTest
         var actual = await sut.GetAchievementGroups();
 
         Assert.Equal(actual.Context.ResultTotal, actual.Count);
-        Assert.All(actual,
+        Assert.All(
+            actual,
             achievementGroup =>
             {
                 AchievementGroupFact.Order_is_not_negative(achievementGroup);
-            });
+            }
+            );
     }
 
     [Fact]
@@ -363,10 +380,12 @@ public class AchievementQueryTest
 
         var actual = await sut.GetAchievementGroupsByIds(ids);
 
-        Assert.Collection(actual,
+        Assert.Collection(
+            actual,
             first => Assert.Contains(first.Id, ids),
             second => Assert.Contains(second.Id, ids),
-            third => Assert.Contains(third.Id, ids));
+            third => Assert.Contains(third.Id, ids)
+            );
     }
 
     [Fact]
@@ -390,13 +409,15 @@ public class AchievementQueryTest
         var actual = await sut.GetTitles();
 
         Assert.Equal(actual.Context.ResultTotal, actual.Count);
-        Assert.All(actual,
+        Assert.All(
+            actual,
             title =>
             {
                 TitleFact.Id_is_positive(title);
                 TitleFact.Name_is_not_empty(title);
                 TitleFact.Can_be_unlocked_by_achievements_or_achievement_points(title);
-            });
+            }
+            );
     }
 
     [Fact]
@@ -438,10 +459,12 @@ public class AchievementQueryTest
 
         var actual = await sut.GetTitlesByIds(ids);
 
-        Assert.Collection(actual,
+        Assert.Collection(
+            actual,
             first => Assert.Equal(1, first.Id),
             second => Assert.Equal(2, second.Id),
-            third => Assert.Equal(3, third.Id));
+            third => Assert.Equal(3, third.Id)
+            );
     }
 
     [Fact]

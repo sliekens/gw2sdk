@@ -12,10 +12,8 @@ namespace GW2SDK.WorldBosses.Http;
 [PublicAPI]
 public sealed class AccountWorldBossesRequest : IHttpRequest<IReplica<IReadOnlyCollection<string>>>
 {
-    private static readonly HttpRequestMessageTemplate Template = new(Get, "/v2/account/worldbosses")
-    {
-        AcceptEncoding = "gzip"
-    };
+    private static readonly HttpRequestMessageTemplate Template =
+        new(Get, "/v2/account/worldbosses") { AcceptEncoding = "gzip" };
 
     public string? AccessToken { get; init; }
 
@@ -24,26 +22,26 @@ public sealed class AccountWorldBossesRequest : IHttpRequest<IReplica<IReadOnlyC
         CancellationToken cancellationToken
     )
     {
-        var request = Template with
-        {
-            BearerToken = AccessToken
-        };
+        var request = Template with { BearerToken = AccessToken };
 
-        using var response = await httpClient.SendAsync(request.Compile(),
+        using var response = await httpClient.SendAsync(
+                request.Compile(),
                 HttpCompletionOption.ResponseHeadersRead,
-                cancellationToken)
+                cancellationToken
+                )
             .ConfigureAwait(false);
 
-        await response.EnsureResult(cancellationToken)
-            .ConfigureAwait(false);
+        await response.EnsureResult(cancellationToken).ConfigureAwait(false);
 
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
         var value = json.RootElement.GetSet(entry => entry.GetStringRequired());
-        return new Replica<IReadOnlyCollection<string>>(response.Headers.Date.GetValueOrDefault(),
+        return new Replica<IReadOnlyCollection<string>>(
+            response.Headers.Date.GetValueOrDefault(),
             value,
             response.Content.Headers.Expires,
-            response.Content.Headers.LastModified);
+            response.Content.Headers.LastModified
+            );
     }
 }

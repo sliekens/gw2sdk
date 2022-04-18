@@ -11,8 +11,7 @@ public static class AchievementReader
 {
     public static Achievement Read(JsonElement json, MissingMemberBehavior missingMemberBehavior)
     {
-        switch (json.GetProperty("type")
-                    .GetString())
+        switch (json.GetProperty("type").GetString())
         {
             case "Default":
                 return ReadDefaultAchievement(json, missingMemberBehavior);
@@ -39,7 +38,9 @@ public static class AchievementReader
             {
                 if (missingMemberBehavior == MissingMemberBehavior.Error)
                 {
-                    throw new InvalidOperationException(Strings.UnexpectedDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.UnexpectedDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals(id.Name))
@@ -107,7 +108,9 @@ public static class AchievementReader
             Flags = flags.GetValues(missingMemberBehavior),
             Tiers = tiers.SelectMany(value => ReadAchievementTier(value, missingMemberBehavior)),
             Prerequisites = prerequisites.SelectMany(value => value.GetInt32()),
-            Rewards = rewards.SelectMany(value => ReadAchievementReward(value, missingMemberBehavior)),
+            Rewards = rewards.SelectMany(
+                value => ReadAchievementReward(value, missingMemberBehavior)
+                ),
             Bits = bits.SelectMany(value => ReadAchievementBit(value, missingMemberBehavior)),
             PointCap = pointCap.GetValue()
         };
@@ -137,7 +140,9 @@ public static class AchievementReader
             {
                 if (!member.Value.ValueEquals("Default"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals(id.Name))
@@ -205,7 +210,9 @@ public static class AchievementReader
             Flags = flags.GetValues(missingMemberBehavior),
             Tiers = tiers.SelectMany(value => ReadAchievementTier(value, missingMemberBehavior)),
             Prerequisites = prerequisites.SelectMany(value => value.GetInt32()),
-            Rewards = rewards.SelectMany(value => ReadAchievementReward(value, missingMemberBehavior)),
+            Rewards = rewards.SelectMany(
+                value => ReadAchievementReward(value, missingMemberBehavior)
+                ),
             Bits = bits.SelectMany(value => ReadAchievementBit(value, missingMemberBehavior)),
             PointCap = pointCap.GetValue()
         };
@@ -235,7 +242,9 @@ public static class AchievementReader
             {
                 if (!member.Value.ValueEquals("ItemSet"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals(id.Name))
@@ -303,13 +312,18 @@ public static class AchievementReader
             Flags = flags.GetValues(missingMemberBehavior),
             Tiers = tiers.SelectMany(value => ReadAchievementTier(value, missingMemberBehavior)),
             Prerequisites = prerequisites.SelectMany(value => value.GetInt32()),
-            Rewards = rewards.SelectMany(value => ReadAchievementReward(value, missingMemberBehavior)),
+            Rewards = rewards.SelectMany(
+                value => ReadAchievementReward(value, missingMemberBehavior)
+                ),
             Bits = bits.SelectMany(value => ReadAchievementBit(value, missingMemberBehavior)),
             PointCap = pointCap.GetValue()
         };
     }
 
-    private static AchievementBit ReadAchievementBit(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    private static AchievementBit ReadAchievementBit(
+        JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         // BUG: some achievement bits don't have a type property, see https://github.com/arenanet/api-cdi/issues/670
         // Hopefully this will get fixed and then TryGetProperty can be replaced by GetProperty
@@ -352,7 +366,9 @@ public static class AchievementReader
             {
                 if (!member.Value.ValueEquals("Skin"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals(id.Name))
@@ -365,10 +381,7 @@ public static class AchievementReader
             }
         }
 
-        return new AchievementSkinBit
-        {
-            Id = id.GetValue()
-        };
+        return new AchievementSkinBit { Id = id.GetValue() };
     }
 
     private static AchievementItemBit ReadAchievementItemBit(
@@ -383,7 +396,9 @@ public static class AchievementReader
             {
                 if (!member.Value.ValueEquals("Item"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals(id.Name))
@@ -396,10 +411,7 @@ public static class AchievementReader
             }
         }
 
-        return new AchievementItemBit
-        {
-            Id = id.GetValue()
-        };
+        return new AchievementItemBit { Id = id.GetValue() };
     }
 
     private static AchievementMinipetBit ReadAchievementMinipetBit(
@@ -414,7 +426,9 @@ public static class AchievementReader
             {
                 if (!member.Value.ValueEquals("Minipet"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals(id.Name))
@@ -427,10 +441,7 @@ public static class AchievementReader
             }
         }
 
-        return new AchievementMinipetBit
-        {
-            Id = id.GetValue()
-        };
+        return new AchievementMinipetBit { Id = id.GetValue() };
     }
 
     private static AchievementTextBit ReadAchievementTextBit(
@@ -445,7 +456,9 @@ public static class AchievementReader
             {
                 if (!member.Value.ValueEquals("Text"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals(text.Name))
@@ -458,10 +471,7 @@ public static class AchievementReader
             }
         }
 
-        return new AchievementTextBit
-        {
-            Text = text.GetValue()
-        };
+        return new AchievementTextBit { Text = text.GetValue() };
     }
 
     private static AchievementReward ReadAchievementReward(
@@ -469,8 +479,7 @@ public static class AchievementReader
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        switch (json.GetProperty("type")
-                    .GetString())
+        switch (json.GetProperty("type").GetString())
         {
             case "Coins":
                 return ReadCoinsReward(json, missingMemberBehavior);
@@ -494,7 +503,10 @@ public static class AchievementReader
         return new AchievementReward();
     }
 
-    private static TitleReward ReadTitleReward(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    private static TitleReward ReadTitleReward(
+        JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         RequiredMember<int> id = new("id");
         foreach (var member in json.EnumerateObject())
@@ -503,7 +515,9 @@ public static class AchievementReader
             {
                 if (!member.Value.ValueEquals("Title"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals(id.Name))
@@ -516,13 +530,13 @@ public static class AchievementReader
             }
         }
 
-        return new TitleReward
-        {
-            Id = id.GetValue()
-        };
+        return new TitleReward { Id = id.GetValue() };
     }
 
-    private static MasteryReward ReadMasteryReward(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    private static MasteryReward ReadMasteryReward(
+        JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         RequiredMember<int> id = new("id");
         RequiredMember<MasteryRegionName> region = new("region");
@@ -532,7 +546,9 @@ public static class AchievementReader
             {
                 if (!member.Value.ValueEquals("Mastery"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals(id.Name))
@@ -556,7 +572,10 @@ public static class AchievementReader
         };
     }
 
-    private static ItemReward ReadItemReward(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    private static ItemReward ReadItemReward(
+        JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         RequiredMember<int> id = new("id");
         RequiredMember<int> count = new("count");
@@ -566,7 +585,9 @@ public static class AchievementReader
             {
                 if (!member.Value.ValueEquals("Item"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals(id.Name))
@@ -590,7 +611,10 @@ public static class AchievementReader
         };
     }
 
-    private static CoinsReward ReadCoinsReward(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    private static CoinsReward ReadCoinsReward(
+        JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         RequiredMember<int> coins = new("count");
         foreach (var member in json.EnumerateObject())
@@ -599,7 +623,9 @@ public static class AchievementReader
             {
                 if (!member.Value.ValueEquals("Coins"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals(coins.Name))
@@ -612,13 +638,13 @@ public static class AchievementReader
             }
         }
 
-        return new CoinsReward
-        {
-            Coins = coins.GetValue()
-        };
+        return new CoinsReward { Coins = coins.GetValue() };
     }
 
-    private static AchievementTier ReadAchievementTier(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    private static AchievementTier ReadAchievementTier(
+        JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         RequiredMember<int> count = new("count");
         RequiredMember<int> points = new("points");

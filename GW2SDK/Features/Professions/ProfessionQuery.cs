@@ -40,10 +40,7 @@ public sealed class ProfessionQuery
         CancellationToken cancellationToken = default
     )
     {
-        ProfessionNamesRequest request = new()
-        {
-            MissingMemberBehavior = missingMemberBehavior
-        };
+        ProfessionNamesRequest request = new() { MissingMemberBehavior = missingMemberBehavior };
         return request.SendAsync(http, cancellationToken);
     }
 

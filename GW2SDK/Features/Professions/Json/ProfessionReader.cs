@@ -83,7 +83,10 @@ public static class ProfessionReader
             Icon = icon.GetValue(),
             IconBig = iconBig.GetValue(),
             Specializations = specializations.SelectMany(value => value.GetInt32()),
-            Weapons = weapons.Select(value => value.GetMap(item => ReadWeapon(item, missingMemberBehavior))),
+            Weapons =
+                weapons.Select(
+                    value => value.GetMap(item => ReadWeapon(item, missingMemberBehavior))
+                    ),
             Flags = flags.GetValues(missingMemberBehavior),
             Skills = skills.SelectMany(value => ReadSkillReference(value, missingMemberBehavior)),
             Training = training.SelectMany(value => ReadTraining(value, missingMemberBehavior)),
@@ -113,10 +116,8 @@ public static class ProfessionReader
                 break;
             }
 
-            var key = member[0]
-                .GetInt32();
-            var value = member[1]
-                .GetInt32();
+            var key = member[0].GetInt32();
+            var value = member[1].GetInt32();
 
             map[key] = value;
         }
@@ -124,7 +125,10 @@ public static class ProfessionReader
         return map;
     }
 
-    private static Training ReadTraining(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    private static Training ReadTraining(
+        JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         RequiredMember<int> id = new("id");
         RequiredMember<TrainingCategory> category = new("category");
@@ -169,8 +173,7 @@ public static class ProfessionReader
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        switch (json.GetProperty("type")
-                    .GetString())
+        switch (json.GetProperty("type").GetString())
         {
             case "Skill":
                 return ReadSkillObjective(json, missingMemberBehavior);
@@ -185,7 +188,9 @@ public static class ProfessionReader
             {
                 if (missingMemberBehavior == MissingMemberBehavior.Error)
                 {
-                    throw new InvalidOperationException(Strings.UnexpectedDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.UnexpectedDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals(cost.Name))
@@ -198,13 +203,13 @@ public static class ProfessionReader
             }
         }
 
-        return new TrainingObjective
-        {
-            Cost = cost.GetValue()
-        };
+        return new TrainingObjective { Cost = cost.GetValue() };
     }
 
-    private static SkillObjective ReadSkillObjective(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    private static SkillObjective ReadSkillObjective(
+        JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         RequiredMember<int> cost = new("cost");
         RequiredMember<int> skillId = new("skill_id");
@@ -214,7 +219,9 @@ public static class ProfessionReader
             {
                 if (!member.Value.ValueEquals("Skill"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals(cost.Name))
@@ -238,7 +245,10 @@ public static class ProfessionReader
         };
     }
 
-    private static TraitObjective ReadTraitObjective(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    private static TraitObjective ReadTraitObjective(
+        JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         RequiredMember<int> cost = new("cost");
         RequiredMember<int> traitId = new("trait_id");
@@ -248,7 +258,9 @@ public static class ProfessionReader
             {
                 if (!member.Value.ValueEquals("Trait"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals(cost.Name))
@@ -272,10 +284,12 @@ public static class ProfessionReader
         };
     }
 
-    private static SkillReference ReadSkillReference(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    private static SkillReference ReadSkillReference(
+        JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
-        switch (json.GetProperty("type")
-                    .GetString())
+        switch (json.GetProperty("type").GetString())
         {
             case "Profession":
                 return ReadProfessionSkillReference(json, missingMemberBehavior);
@@ -296,7 +310,9 @@ public static class ProfessionReader
             {
                 if (missingMemberBehavior == MissingMemberBehavior.Error)
                 {
-                    throw new InvalidOperationException(Strings.UnexpectedDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.UnexpectedDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals(id.Name))
@@ -334,7 +350,9 @@ public static class ProfessionReader
             {
                 if (!member.Value.ValueEquals("Heal"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals(id.Name))
@@ -372,7 +390,9 @@ public static class ProfessionReader
             {
                 if (!member.Value.ValueEquals("Utility"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals(id.Name))
@@ -410,7 +430,9 @@ public static class ProfessionReader
             {
                 if (!member.Value.ValueEquals("Elite"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals(id.Name))
@@ -450,7 +472,9 @@ public static class ProfessionReader
             {
                 if (!member.Value.ValueEquals("Profession"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals(id.Name))
@@ -484,7 +508,10 @@ public static class ProfessionReader
         };
     }
 
-    private static WeaponProficiency ReadWeapon(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    private static WeaponProficiency ReadWeapon(
+        JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         NullableMember<int> specialization = new("specialization");
         RequiredMember<WeaponFlag> flags = new("flags");
@@ -518,7 +545,10 @@ public static class ProfessionReader
         };
     }
 
-    private static WeaponSkill ReadWeaponSkill(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    private static WeaponSkill ReadWeaponSkill(
+        JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         RequiredMember<int> id = new("id");
         RequiredMember<SkillSlot> slot = new("slot");

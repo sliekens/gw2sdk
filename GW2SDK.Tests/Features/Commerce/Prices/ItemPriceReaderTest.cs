@@ -18,7 +18,8 @@ public class ItemPriceReaderTest : IClassFixture<ItemPriceFixture>
 
     private static class ItemPriceFact
     {
-        public static void Id_is_positive(ItemPrice actual) => Assert.InRange(actual.Id, 1, int.MaxValue);
+        public static void Id_is_positive(ItemPrice actual) =>
+            Assert.InRange(actual.Id, 1, int.MaxValue);
 
         public static void Best_ask_is_greater_than_best_bid(ItemPrice actual)
         {
@@ -31,14 +32,19 @@ public class ItemPriceReaderTest : IClassFixture<ItemPriceFixture>
 
     [Fact]
     public void Item_prices_can_be_created_from_json() =>
-        AssertEx.ForEach(fixture.ItemPrices,
+        AssertEx.ForEach(
+            fixture.ItemPrices,
             json =>
             {
                 using var document = JsonDocument.Parse(json);
 
-                var actual = ItemPriceReader.Read(document.RootElement, MissingMemberBehavior.Error);
+                var actual = ItemPriceReader.Read(
+                    document.RootElement,
+                    MissingMemberBehavior.Error
+                    );
 
                 ItemPriceFact.Id_is_positive(actual);
                 ItemPriceFact.Best_ask_is_greater_than_best_bid(actual);
-            });
+            }
+            );
 }

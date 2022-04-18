@@ -24,9 +24,11 @@ public record Achievement
 
     public string LockedText { get; init; } = "";
 
-    public IReadOnlyCollection<AchievementFlag> Flags { get; init; } = Array.Empty<AchievementFlag>();
+    public IReadOnlyCollection<AchievementFlag> Flags { get; init; } =
+        Array.Empty<AchievementFlag>();
 
-    public IReadOnlyCollection<AchievementTier> Tiers { get; init; } = Array.Empty<AchievementTier>();
+    public IReadOnlyCollection<AchievementTier> Tiers { get; init; } =
+        Array.Empty<AchievementTier>();
 
     public IReadOnlyCollection<AchievementReward>? Rewards { get; init; }
 

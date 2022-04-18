@@ -26,18 +26,21 @@ public class IndexModel : PageModel
 
     public DateTimeOffset Refreshed { get; set; }
 
-    public IEnumerable<QuagganViewModel> Quaggans { get; set; } = Enumerable.Empty<QuagganViewModel>();
+    public IEnumerable<QuagganViewModel> Quaggans { get; set; } =
+        Enumerable.Empty<QuagganViewModel>();
 
     public async Task OnGet()
     {
         logger.LogInformation("Retrieving the Quaggans.");
         var result = await quaggans.GetQuaggans();
         Refreshed = result.Date;
-        Quaggans = result.Values.Select((quaggan, index) => new QuagganViewModel
-        {
-            Active = index == 0,
-            Id = quaggan.Id,
-            PictureHref = quaggan.PictureHref
-        });
+        Quaggans = result.Values.Select(
+            (quaggan, index) => new QuagganViewModel
+            {
+                Active = index == 0,
+                Id = quaggan.Id,
+                PictureHref = quaggan.PictureHref
+            }
+            );
     }
 }

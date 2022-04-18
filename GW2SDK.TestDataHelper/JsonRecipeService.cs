@@ -5,7 +5,6 @@ using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 using GW2SDK.Crafting.Http;
-using GW2SDK.Http;
 
 namespace GW2SDK.TestDataHelper;
 
@@ -20,8 +19,7 @@ public class JsonRecipeService
 
     public async Task<ISet<string>> GetAllJsonRecipes()
     {
-        var ids = await GetRecipeIds()
-            .ConfigureAwait(false);
+        var ids = await GetRecipeIds().ConfigureAwait(false);
 
         var batches = new Queue<IEnumerable<int>>(ids.Buffer(200));
 
@@ -64,11 +62,13 @@ public class JsonRecipeService
     private async Task<List<string>> GetJsonRecipesByIds(IReadOnlyCollection<int> recipeIds)
     {
         var request = new BulkRequest("/v2/recipes", recipeIds);
-        var json = await request.SendAsync(http, CancellationToken.None)
-            .ConfigureAwait(false);
+        var json = await request.SendAsync(http, CancellationToken.None).ConfigureAwait(false);
         return json.Indent(false)
             .RootElement.EnumerateArray()
-            .Select(item => item.ToString() ?? throw new InvalidOperationException("Unexpected null in JSON array."))
+            .Select(
+                item => item.ToString()
+                    ?? throw new InvalidOperationException("Unexpected null in JSON array.")
+                )
             .ToList();
     }
 }

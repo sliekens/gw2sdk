@@ -18,28 +18,31 @@ public sealed class CharactersIndexRequest : IHttpRequest<IReplicaSet<string>>
 
     public string? AccessToken { get; init; }
 
-    public async Task<IReplicaSet<string>> SendAsync(HttpClient httpClient, CancellationToken cancellationToken)
+    public async Task<IReplicaSet<string>> SendAsync(
+        HttpClient httpClient,
+        CancellationToken cancellationToken
+    )
     {
-        var request = Template with
-        {
-            BearerToken = AccessToken
-        };
-        using var response = await httpClient.SendAsync(request.Compile(),
+        var request = Template with { BearerToken = AccessToken };
+        using var response = await httpClient.SendAsync(
+                request.Compile(),
                 HttpCompletionOption.ResponseHeadersRead,
-                cancellationToken)
+                cancellationToken
+                )
             .ConfigureAwait(false);
 
-        await response.EnsureResult(cancellationToken)
-            .ConfigureAwait(false);
+        await response.EnsureResult(cancellationToken).ConfigureAwait(false);
 
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
         var value = json.RootElement.GetSet(entry => entry.GetStringRequired());
-        return new ReplicaSet<string>(response.Headers.Date.GetValueOrDefault(),
+        return new ReplicaSet<string>(
+            response.Headers.Date.GetValueOrDefault(),
             value,
             response.Headers.GetCollectionContext(),
             response.Content.Headers.Expires,
-            response.Content.Headers.LastModified);
+            response.Content.Headers.LastModified
+            );
     }
 }

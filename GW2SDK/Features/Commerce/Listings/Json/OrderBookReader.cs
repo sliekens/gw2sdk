@@ -42,7 +42,10 @@ public static class OrderBookReader
         };
     }
 
-    private static OrderBookLine ReadItemListingLine(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    private static OrderBookLine ReadItemListingLine(
+        JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         RequiredMember<int> listings = new("listings");
         RequiredMember<int> unitPrice = new("unit_price");

@@ -18,12 +18,14 @@ public class SkinReaderTest : IClassFixture<SkinFixture>
 
     private static class SkinFact
     {
-        public static void Id_is_positive(Skin actual) => Assert.InRange(actual.Id, 1, int.MaxValue);
+        public static void Id_is_positive(Skin actual) =>
+            Assert.InRange(actual.Id, 1, int.MaxValue);
     }
 
     [Fact]
     public void Skins_can_be_created_from_json() =>
-        AssertEx.ForEach(fixture.Skins,
+        AssertEx.ForEach(
+            fixture.Skins,
             json =>
             {
                 using var document = JsonDocument.Parse(json);
@@ -31,5 +33,6 @@ public class SkinReaderTest : IClassFixture<SkinFixture>
                 var actual = SkinReader.Read(document.RootElement, MissingMemberBehavior.Error);
 
                 SkinFact.Id_is_positive(actual);
-            });
+            }
+            );
 }

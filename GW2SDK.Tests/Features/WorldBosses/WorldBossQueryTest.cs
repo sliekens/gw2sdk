@@ -1,8 +1,8 @@
-﻿using System.Threading.Tasks;
+﻿using System.Linq;
+using System.Threading.Tasks;
 using GW2SDK.Tests.TestInfrastructure;
 using GW2SDK.WorldBosses;
 using Xunit;
-using System.Linq;
 
 namespace GW2SDK.Tests.Features.WorldBosses;
 
@@ -20,7 +20,8 @@ public class WorldBossQueryTest
         // no clue how this can be solved without re-implementing the call to /v2/worldbosses in test code (which makes the test pointless)
         var referenceData = await sut.GetWorldBosses();
 
-        Assert.Equal(new[]
+        Assert.Equal(
+            new[]
             {
                 "admiral_taidha_covington",
                 "claw_of_jormag",
@@ -37,7 +38,8 @@ public class WorldBossQueryTest
                 "the_shatterer",
                 "triple_trouble_wurm"
             },
-            referenceData);
+            referenceData
+            );
 
         // Again this next method is not deterministic...
         var actual = await sut.GetWorldBossesOnCooldown(accessToken.Key);

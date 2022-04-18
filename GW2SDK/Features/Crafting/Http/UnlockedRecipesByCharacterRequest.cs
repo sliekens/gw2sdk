@@ -11,12 +11,11 @@ using static System.Net.Http.HttpMethod;
 namespace GW2SDK.Crafting.Http;
 
 [PublicAPI]
-public sealed class UnlockedRecipesByCharacterRequest : IHttpRequest<IReplica<IReadOnlyCollection<int>>>
+public sealed class
+    UnlockedRecipesByCharacterRequest : IHttpRequest<IReplica<IReadOnlyCollection<int>>>
 {
-    private static readonly HttpRequestMessageTemplate Template = new(Get, "/v2/characters/:id/recipes")
-    {
-        AcceptEncoding = "gzip"
-    };
+    private static readonly HttpRequestMessageTemplate Template =
+        new(Get, "/v2/characters/:id/recipes") { AcceptEncoding = "gzip" };
 
     public UnlockedRecipesByCharacterRequest(string characterName)
     {
@@ -42,21 +41,24 @@ public sealed class UnlockedRecipesByCharacterRequest : IHttpRequest<IReplica<IR
             BearerToken = AccessToken
         };
 
-        using var response = await httpClient.SendAsync(request.Compile(),
+        using var response = await httpClient.SendAsync(
+                request.Compile(),
                 HttpCompletionOption.ResponseHeadersRead,
-                cancellationToken)
+                cancellationToken
+                )
             .ConfigureAwait(false);
 
-        await response.EnsureResult(cancellationToken)
-            .ConfigureAwait(false);
+        await response.EnsureResult(cancellationToken).ConfigureAwait(false);
 
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
         var value = UnlockedRecipesReader.Read(json.RootElement, MissingMemberBehavior);
-        return new Replica<IReadOnlyCollection<int>>(response.Headers.Date.GetValueOrDefault(),
+        return new Replica<IReadOnlyCollection<int>>(
+            response.Headers.Date.GetValueOrDefault(),
             value,
             response.Content.Headers.Expires,
-            response.Content.Headers.LastModified);
+            response.Content.Headers.LastModified
+            );
     }
 }

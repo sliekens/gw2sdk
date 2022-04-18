@@ -44,18 +44,18 @@ public static class FloorReader
         return new Floor
         {
             Id = id.GetValue(),
-            TextureDimensions = textureDimensions.Select(value => ReadSizeF(value, missingMemberBehavior)),
-            ClampedView = clampedView.Select(value => ReadContinentRectangle(value, missingMemberBehavior)),
+            TextureDimensions =
+                textureDimensions.Select(value => ReadSizeF(value, missingMemberBehavior)),
+            ClampedView =
+                clampedView.Select(value => ReadContinentRectangle(value, missingMemberBehavior)),
             Regions = regions.Select(value => ReadRegions(value, missingMemberBehavior))
         };
     }
 
     private static SizeF ReadSizeF(JsonElement json, MissingMemberBehavior missingMemberBehavior)
     {
-        var width = json[0]
-            .GetSingle();
-        var height = json[1]
-            .GetSingle();
+        var width = json[0].GetSingle();
+        var height = json[1].GetSingle();
         return new SizeF(width, height);
     }
 
@@ -65,15 +65,11 @@ public static class FloorReader
     )
     {
         var topLeft = json[0];
-        var x = topLeft[0]
-            .GetSingle();
-        var y = topLeft[1]
-            .GetSingle();
+        var x = topLeft[0].GetSingle();
+        var y = topLeft[1].GetSingle();
         var size = json[1];
-        var width = size[0]
-            .GetSingle();
-        var height = size[1]
-            .GetSingle();
+        var width = size[0].GetSingle();
+        var height = size[1].GetSingle();
         return new ContinentRectangle
         {
             TopLeft = new PointF(x, y),

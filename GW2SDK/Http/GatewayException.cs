@@ -19,11 +19,7 @@ public sealed class GatewayException : Exception
         StatusCode = statusCode;
     }
 
-    public GatewayException(
-        HttpStatusCode statusCode,
-        string? message,
-        Exception? inner
-    )
+    public GatewayException(HttpStatusCode statusCode, string? message, Exception? inner)
         : base(message, inner)
     {
         StatusCode = statusCode;

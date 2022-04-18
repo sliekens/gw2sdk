@@ -18,7 +18,8 @@ public record Skin
 
     public IReadOnlyCollection<SkinFlag> Flags { get; init; } = Array.Empty<SkinFlag>();
 
-    public IReadOnlyCollection<SkinRestriction> Restrictions { get; init; } = Array.Empty<SkinRestriction>();
+    public IReadOnlyCollection<SkinRestriction> Restrictions { get; init; } =
+        Array.Empty<SkinRestriction>();
 
     public Rarity Rarity { get; init; }
 

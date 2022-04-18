@@ -35,11 +35,13 @@ public class QuagganQueryTest
         var actual = await sut.GetQuaggans();
 
         Assert.Equal(actual.Context.ResultTotal, actual.Count);
-        Assert.All(actual,
+        Assert.All(
+            actual,
             quaggan =>
             {
                 QuagganFact.Validate(quaggan);
-            });
+            }
+            );
     }
 
     [Fact]
@@ -83,10 +85,12 @@ public class QuagganQueryTest
         var actual = await sut.GetQuaggansByIds(ids);
 
         Assert.All(actual, QuagganFact.Validate);
-        Assert.Collection(actual,
+        Assert.Collection(
+            actual,
             first => Assert.Contains(first.Id, ids),
             second => Assert.Contains(second.Id, ids),
-            third => Assert.Contains(third.Id, ids));
+            third => Assert.Contains(third.Id, ids)
+            );
     }
 
     [Fact]

@@ -9,7 +9,10 @@ namespace GW2SDK.Skills.Json;
 [PublicAPI]
 public static class SkillReader
 {
-    private static BundleSkill ReadBundleSkill(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    private static BundleSkill ReadBundleSkill(
+        JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         RequiredMember<string> name = new("name");
         OptionalMember<SkillFact> facts = new("facts");
@@ -33,7 +36,9 @@ public static class SkillReader
             {
                 if (!member.Value.ValueEquals("Bundle"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -106,8 +111,14 @@ public static class SkillReader
         {
             Id = id.GetValue(),
             Name = name.GetValue(),
-            Facts = facts.SelectMany(value => ReadSkillFact(value, missingMemberBehavior, out _, out _)),
-            TraitedFacts = traitedFacts.SelectMany(value => ReadTraitedSkillFact(value, missingMemberBehavior)),
+            Facts =
+                facts.SelectMany(
+                    value => ReadSkillFact(value, missingMemberBehavior, out _, out _)
+                    ),
+            TraitedFacts =
+                traitedFacts.SelectMany(
+                    value => ReadTraitedSkillFact(value, missingMemberBehavior)
+                    ),
             Description = description.GetValue(),
             Icon = icon.GetValueOrNull(),
             WeaponType = weaponType.GetValue(missingMemberBehavior),
@@ -122,7 +133,10 @@ public static class SkillReader
         };
     }
 
-    private static EliteSkill ReadEliteSkill(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    private static EliteSkill ReadEliteSkill(
+        JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         RequiredMember<int> id = new("id");
         RequiredMember<string> name = new("name");
@@ -153,7 +167,9 @@ public static class SkillReader
             {
                 if (!member.Value.ValueEquals("Elite"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -254,8 +270,14 @@ public static class SkillReader
         {
             Id = id.GetValue(),
             Name = name.GetValue(),
-            Facts = facts.SelectMany(value => ReadSkillFact(value, missingMemberBehavior, out _, out _)),
-            TraitedFacts = traitedFacts.SelectMany(value => ReadTraitedSkillFact(value, missingMemberBehavior)),
+            Facts =
+                facts.SelectMany(
+                    value => ReadSkillFact(value, missingMemberBehavior, out _, out _)
+                    ),
+            TraitedFacts =
+                traitedFacts.SelectMany(
+                    value => ReadTraitedSkillFact(value, missingMemberBehavior)
+                    ),
             Description = description.GetValue(),
             Icon = icon.GetValueOrNull(),
             WeaponType = weaponType.GetValue(missingMemberBehavior),
@@ -277,7 +299,10 @@ public static class SkillReader
         };
     }
 
-    private static HealSkill ReadHealSkill(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    private static HealSkill ReadHealSkill(
+        JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         RequiredMember<int> id = new("id");
         RequiredMember<string> name = new("name");
@@ -307,7 +332,9 @@ public static class SkillReader
             {
                 if (!member.Value.ValueEquals("Heal"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -404,8 +431,14 @@ public static class SkillReader
         {
             Id = id.GetValue(),
             Name = name.GetValue(),
-            Facts = facts.SelectMany(value => ReadSkillFact(value, missingMemberBehavior, out _, out _)),
-            TraitedFacts = traitedFacts.SelectMany(value => ReadTraitedSkillFact(value, missingMemberBehavior)),
+            Facts =
+                facts.SelectMany(
+                    value => ReadSkillFact(value, missingMemberBehavior, out _, out _)
+                    ),
+            TraitedFacts =
+                traitedFacts.SelectMany(
+                    value => ReadTraitedSkillFact(value, missingMemberBehavior)
+                    ),
             Description = description.GetValue(),
             Icon = icon.GetValueOrNull(),
             WeaponType = weaponType.GetValue(missingMemberBehavior),
@@ -426,7 +459,10 @@ public static class SkillReader
         };
     }
 
-    private static MonsterSkill ReadMonsterSkill(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    private static MonsterSkill ReadMonsterSkill(
+        JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         RequiredMember<int> id = new("id");
         RequiredMember<string> name = new("name");
@@ -450,7 +486,9 @@ public static class SkillReader
             {
                 if (!member.Value.ValueEquals("Monster"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -523,8 +561,14 @@ public static class SkillReader
         {
             Id = id.GetValue(),
             Name = name.GetValue(),
-            Facts = facts.SelectMany(value => ReadSkillFact(value, missingMemberBehavior, out _, out _)),
-            TraitedFacts = traitedFacts.SelectMany(value => ReadTraitedSkillFact(value, missingMemberBehavior)),
+            Facts =
+                facts.SelectMany(
+                    value => ReadSkillFact(value, missingMemberBehavior, out _, out _)
+                    ),
+            TraitedFacts =
+                traitedFacts.SelectMany(
+                    value => ReadTraitedSkillFact(value, missingMemberBehavior)
+                    ),
             Description = description.GetValue(),
             Icon = icon.GetValueOrNull(),
             WeaponType = weaponType.GetValue(missingMemberBehavior),
@@ -539,7 +583,10 @@ public static class SkillReader
         };
     }
 
-    private static PetSkill ReadPetSkill(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    private static PetSkill ReadPetSkill(
+        JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         RequiredMember<int> id = new("id");
         RequiredMember<string> name = new("name");
@@ -563,7 +610,9 @@ public static class SkillReader
             {
                 if (!member.Value.ValueEquals("Pet"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -636,8 +685,14 @@ public static class SkillReader
         {
             Id = id.GetValue(),
             Name = name.GetValue(),
-            Facts = facts.SelectMany(value => ReadSkillFact(value, missingMemberBehavior, out _, out _)),
-            TraitedFacts = traitedFacts.SelectMany(value => ReadTraitedSkillFact(value, missingMemberBehavior)),
+            Facts =
+                facts.SelectMany(
+                    value => ReadSkillFact(value, missingMemberBehavior, out _, out _)
+                    ),
+            TraitedFacts =
+                traitedFacts.SelectMany(
+                    value => ReadTraitedSkillFact(value, missingMemberBehavior)
+                    ),
             Description = description.GetValue(),
             Icon = icon.GetValueOrNull(),
             WeaponType = weaponType.GetValue(missingMemberBehavior),
@@ -652,7 +707,10 @@ public static class SkillReader
         };
     }
 
-    private static ProfessionSkill ReadProfessionSkill(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    private static ProfessionSkill ReadProfessionSkill(
+        JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         RequiredMember<int> id = new("id");
         RequiredMember<string> name = new("name");
@@ -680,7 +738,9 @@ public static class SkillReader
             {
                 if (!member.Value.ValueEquals("Profession"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -769,8 +829,14 @@ public static class SkillReader
         {
             Id = id.GetValue(),
             Name = name.GetValue(),
-            Facts = facts.SelectMany(value => ReadSkillFact(value, missingMemberBehavior, out _, out _)),
-            TraitedFacts = traitedFacts.SelectMany(value => ReadTraitedSkillFact(value, missingMemberBehavior)),
+            Facts =
+                facts.SelectMany(
+                    value => ReadSkillFact(value, missingMemberBehavior, out _, out _)
+                    ),
+            TraitedFacts =
+                traitedFacts.SelectMany(
+                    value => ReadTraitedSkillFact(value, missingMemberBehavior)
+                    ),
             Description = description.GetValue(),
             Icon = icon.GetValueOrNull(),
             WeaponType = weaponType.GetValue(missingMemberBehavior),
@@ -789,7 +855,10 @@ public static class SkillReader
         };
     }
 
-    private static ToolbeltSkill ReadToolbeltSkill(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    private static ToolbeltSkill ReadToolbeltSkill(
+        JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         RequiredMember<int> id = new("id");
         RequiredMember<string> name = new("name");
@@ -813,7 +882,9 @@ public static class SkillReader
             {
                 if (!member.Value.ValueEquals("Toolbelt"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -886,8 +957,14 @@ public static class SkillReader
         {
             Id = id.GetValue(),
             Name = name.GetValue(),
-            Facts = facts.SelectMany(value => ReadSkillFact(value, missingMemberBehavior, out _, out _)),
-            TraitedFacts = traitedFacts.SelectMany(value => ReadTraitedSkillFact(value, missingMemberBehavior)),
+            Facts =
+                facts.SelectMany(
+                    value => ReadSkillFact(value, missingMemberBehavior, out _, out _)
+                    ),
+            TraitedFacts =
+                traitedFacts.SelectMany(
+                    value => ReadTraitedSkillFact(value, missingMemberBehavior)
+                    ),
             Description = description.GetValue(),
             Icon = icon.GetValueOrNull(),
             WeaponType = weaponType.GetValue(missingMemberBehavior),
@@ -902,7 +979,10 @@ public static class SkillReader
         };
     }
 
-    private static TransformSkill ReadTransformSkill(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    private static TransformSkill ReadTransformSkill(
+        JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         RequiredMember<int> id = new("id");
         RequiredMember<string> name = new("name");
@@ -926,7 +1006,9 @@ public static class SkillReader
             {
                 if (!member.Value.ValueEquals("Transform"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -999,8 +1081,14 @@ public static class SkillReader
         {
             Id = id.GetValue(),
             Name = name.GetValue(),
-            Facts = facts.SelectMany(value => ReadSkillFact(value, missingMemberBehavior, out _, out _)),
-            TraitedFacts = traitedFacts.SelectMany(value => ReadTraitedSkillFact(value, missingMemberBehavior)),
+            Facts =
+                facts.SelectMany(
+                    value => ReadSkillFact(value, missingMemberBehavior, out _, out _)
+                    ),
+            TraitedFacts =
+                traitedFacts.SelectMany(
+                    value => ReadTraitedSkillFact(value, missingMemberBehavior)
+                    ),
             Description = description.GetValue(),
             Icon = icon.GetValueOrNull(),
             WeaponType = weaponType.GetValue(missingMemberBehavior),
@@ -1015,7 +1103,10 @@ public static class SkillReader
         };
     }
 
-    private static UtilitySkill ReadUtilitySkill(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    private static UtilitySkill ReadUtilitySkill(
+        JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         RequiredMember<int> id = new("id");
         RequiredMember<string> name = new("name");
@@ -1045,7 +1136,9 @@ public static class SkillReader
             {
                 if (!member.Value.ValueEquals("Utility"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -1142,8 +1235,14 @@ public static class SkillReader
         {
             Id = id.GetValue(),
             Name = name.GetValue(),
-            Facts = facts.SelectMany(value => ReadSkillFact(value, missingMemberBehavior, out _, out _)),
-            TraitedFacts = traitedFacts.SelectMany(value => ReadTraitedSkillFact(value, missingMemberBehavior)),
+            Facts =
+                facts.SelectMany(
+                    value => ReadSkillFact(value, missingMemberBehavior, out _, out _)
+                    ),
+            TraitedFacts =
+                traitedFacts.SelectMany(
+                    value => ReadTraitedSkillFact(value, missingMemberBehavior)
+                    ),
             Description = description.GetValue(),
             Icon = icon.GetValueOrNull(),
             WeaponType = weaponType.GetValue(missingMemberBehavior),
@@ -1164,7 +1263,10 @@ public static class SkillReader
         };
     }
 
-    private static WeaponSkill ReadWeaponSkill(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    private static WeaponSkill ReadWeaponSkill(
+        JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         RequiredMember<int> id = new("id");
         RequiredMember<string> name = new("name");
@@ -1194,7 +1296,9 @@ public static class SkillReader
             {
                 if (!member.Value.ValueEquals("Weapon"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -1291,8 +1395,14 @@ public static class SkillReader
         {
             Id = id.GetValue(),
             Name = name.GetValue(),
-            Facts = facts.SelectMany(value => ReadSkillFact(value, missingMemberBehavior, out _, out _)),
-            TraitedFacts = traitedFacts.SelectMany(value => ReadTraitedSkillFact(value, missingMemberBehavior)),
+            Facts =
+                facts.SelectMany(
+                    value => ReadSkillFact(value, missingMemberBehavior, out _, out _)
+                    ),
+            TraitedFacts =
+                traitedFacts.SelectMany(
+                    value => ReadTraitedSkillFact(value, missingMemberBehavior)
+                    ),
             Description = description.GetValue(),
             Icon = icon.GetValueOrNull(),
             WeaponType = weaponType.GetValue(missingMemberBehavior),
@@ -1365,7 +1475,9 @@ public static class SkillReader
             {
                 if (missingMemberBehavior == MissingMemberBehavior.Error)
                 {
-                    throw new InvalidOperationException(Strings.UnexpectedDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.UnexpectedDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -1438,8 +1550,14 @@ public static class SkillReader
         {
             Id = id.GetValue(),
             Name = name.GetValue(),
-            Facts = facts.SelectMany(value => ReadSkillFact(value, missingMemberBehavior, out _, out _)),
-            TraitedFacts = traitedFacts.SelectMany(value => ReadTraitedSkillFact(value, missingMemberBehavior)),
+            Facts =
+                facts.SelectMany(
+                    value => ReadSkillFact(value, missingMemberBehavior, out _, out _)
+                    ),
+            TraitedFacts =
+                traitedFacts.SelectMany(
+                    value => ReadTraitedSkillFact(value, missingMemberBehavior)
+                    ),
             Description = description.GetValue(),
             Icon = icon.GetValueOrNull(),
             WeaponType = weaponType.GetValue(missingMemberBehavior),
@@ -1454,9 +1572,17 @@ public static class SkillReader
         };
     }
 
-    private static TraitedSkillFact ReadTraitedSkillFact(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    private static TraitedSkillFact ReadTraitedSkillFact(
+        JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
-        var fact = ReadSkillFact(json, missingMemberBehavior, out var requiresTrait, out var overrides);
+        var fact = ReadSkillFact(
+            json,
+            missingMemberBehavior,
+            out var requiresTrait,
+            out var overrides
+            );
         return new TraitedSkillFact
         {
             Fact = fact,
@@ -1478,47 +1604,142 @@ public static class SkillReader
         // BUG: Life Force Cost is missing a type property but we can treat it as Percent
         if (!json.TryGetProperty("type", out var type) && json.TryGetProperty("percent", out _))
         {
-            return ReadPercentSkillFact(json, missingMemberBehavior, out requiresTrait, out overrides);
+            return ReadPercentSkillFact(
+                json,
+                missingMemberBehavior,
+                out requiresTrait,
+                out overrides
+                );
         }
 
         switch (type.GetString())
         {
             case "AttributeAdjust":
-                return ReadAttributeAdjustSkillFact(json, missingMemberBehavior, out requiresTrait, out overrides);
+                return ReadAttributeAdjustSkillFact(
+                    json,
+                    missingMemberBehavior,
+                    out requiresTrait,
+                    out overrides
+                    );
             case "ComboField":
-                return ReadComboFieldSkillFact(json, missingMemberBehavior, out requiresTrait, out overrides);
+                return ReadComboFieldSkillFact(
+                    json,
+                    missingMemberBehavior,
+                    out requiresTrait,
+                    out overrides
+                    );
             case "ComboFinisher":
-                return ReadComboFinisherSkillFact(json, missingMemberBehavior, out requiresTrait, out overrides);
+                return ReadComboFinisherSkillFact(
+                    json,
+                    missingMemberBehavior,
+                    out requiresTrait,
+                    out overrides
+                    );
             case "Buff":
-                return ReadBuffSkillFact(json, missingMemberBehavior, out requiresTrait, out overrides);
+                return ReadBuffSkillFact(
+                    json,
+                    missingMemberBehavior,
+                    out requiresTrait,
+                    out overrides
+                    );
             case "Damage":
-                return ReadDamageSkillFact(json, missingMemberBehavior, out requiresTrait, out overrides);
+                return ReadDamageSkillFact(
+                    json,
+                    missingMemberBehavior,
+                    out requiresTrait,
+                    out overrides
+                    );
             case "Distance":
-                return ReadDistanceSkillFact(json, missingMemberBehavior, out requiresTrait, out overrides);
+                return ReadDistanceSkillFact(
+                    json,
+                    missingMemberBehavior,
+                    out requiresTrait,
+                    out overrides
+                    );
             case "Duration":
-                return ReadDurationSkillFact(json, missingMemberBehavior, out requiresTrait, out overrides);
+                return ReadDurationSkillFact(
+                    json,
+                    missingMemberBehavior,
+                    out requiresTrait,
+                    out overrides
+                    );
             case "HealingAdjust":
-                return ReadHealingAdjustSkillFact(json, missingMemberBehavior, out requiresTrait, out overrides);
+                return ReadHealingAdjustSkillFact(
+                    json,
+                    missingMemberBehavior,
+                    out requiresTrait,
+                    out overrides
+                    );
             case "NoData":
-                return ReadNoDataSkillFact(json, missingMemberBehavior, out requiresTrait, out overrides);
+                return ReadNoDataSkillFact(
+                    json,
+                    missingMemberBehavior,
+                    out requiresTrait,
+                    out overrides
+                    );
             case "Number":
-                return ReadNumberSkillFact(json, missingMemberBehavior, out requiresTrait, out overrides);
+                return ReadNumberSkillFact(
+                    json,
+                    missingMemberBehavior,
+                    out requiresTrait,
+                    out overrides
+                    );
             case "Percent":
-                return ReadPercentSkillFact(json, missingMemberBehavior, out requiresTrait, out overrides);
+                return ReadPercentSkillFact(
+                    json,
+                    missingMemberBehavior,
+                    out requiresTrait,
+                    out overrides
+                    );
             case "PrefixedBuff":
-                return ReadPrefixedBuffSkillFact(json, missingMemberBehavior, out requiresTrait, out overrides);
+                return ReadPrefixedBuffSkillFact(
+                    json,
+                    missingMemberBehavior,
+                    out requiresTrait,
+                    out overrides
+                    );
             case "Radius":
-                return ReadRadiusSkillFact(json, missingMemberBehavior, out requiresTrait, out overrides);
+                return ReadRadiusSkillFact(
+                    json,
+                    missingMemberBehavior,
+                    out requiresTrait,
+                    out overrides
+                    );
             case "Range":
-                return ReadRangeSkillFact(json, missingMemberBehavior, out requiresTrait, out overrides);
+                return ReadRangeSkillFact(
+                    json,
+                    missingMemberBehavior,
+                    out requiresTrait,
+                    out overrides
+                    );
             case "Recharge":
-                return ReadRechargeSkillFact(json, missingMemberBehavior, out requiresTrait, out overrides);
+                return ReadRechargeSkillFact(
+                    json,
+                    missingMemberBehavior,
+                    out requiresTrait,
+                    out overrides
+                    );
             case "StunBreak":
-                return ReadStunBreakSkillFact(json, missingMemberBehavior, out requiresTrait, out overrides);
+                return ReadStunBreakSkillFact(
+                    json,
+                    missingMemberBehavior,
+                    out requiresTrait,
+                    out overrides
+                    );
             case "Time":
-                return ReadTimeSkillFact(json, missingMemberBehavior, out requiresTrait, out overrides);
+                return ReadTimeSkillFact(
+                    json,
+                    missingMemberBehavior,
+                    out requiresTrait,
+                    out overrides
+                    );
             case "Unblockable":
-                return ReadUnblockableSkillFact(json, missingMemberBehavior, out requiresTrait, out overrides);
+                return ReadUnblockableSkillFact(
+                    json,
+                    missingMemberBehavior,
+                    out requiresTrait,
+                    out overrides
+                    );
         }
 
         RequiredMember<string> text = new("text");
@@ -1530,7 +1751,9 @@ public static class SkillReader
             {
                 if (missingMemberBehavior == MissingMemberBehavior.Error)
                 {
-                    throw new InvalidOperationException(Strings.UnexpectedDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.UnexpectedDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals("requires_trait"))
@@ -1582,7 +1805,9 @@ public static class SkillReader
             {
                 if (!member.Value.ValueEquals("Radius"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals("requires_trait"))
@@ -1639,7 +1864,9 @@ public static class SkillReader
             {
                 if (!member.Value.ValueEquals("Range"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals("requires_trait"))
@@ -1696,7 +1923,9 @@ public static class SkillReader
             {
                 if (!member.Value.ValueEquals("Recharge"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals("requires_trait"))
@@ -1753,7 +1982,9 @@ public static class SkillReader
             {
                 if (!member.Value.ValueEquals("StunBreak"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals("requires_trait"))
@@ -1810,7 +2041,9 @@ public static class SkillReader
             {
                 if (!member.Value.ValueEquals("Time"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals("requires_trait"))
@@ -1867,7 +2100,9 @@ public static class SkillReader
             {
                 if (!member.Value.ValueEquals("Unblockable"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals("requires_trait"))
@@ -1928,7 +2163,9 @@ public static class SkillReader
             {
                 if (!member.Value.ValueEquals("PrefixedBuff"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals("requires_trait"))
@@ -1985,7 +2222,10 @@ public static class SkillReader
         };
     }
 
-    private static BuffPrefix ReadBuffPrefix(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    private static BuffPrefix ReadBuffPrefix(
+        JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         RequiredMember<string> text = new("text");
         RequiredMember<string> icon = new("icon");
@@ -2044,7 +2284,9 @@ public static class SkillReader
             {
                 if (!member.Value.ValueEquals("Percent"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals("requires_trait"))
@@ -2102,7 +2344,9 @@ public static class SkillReader
             {
                 if (!member.Value.ValueEquals("Number"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals("requires_trait"))
@@ -2158,7 +2402,9 @@ public static class SkillReader
             {
                 if (!member.Value.ValueEquals("NoData"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals("requires_trait"))
@@ -2210,7 +2456,9 @@ public static class SkillReader
             {
                 if (!member.Value.ValueEquals("HealingAdjust"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals("requires_trait"))
@@ -2267,7 +2515,9 @@ public static class SkillReader
             {
                 if (!member.Value.ValueEquals("Duration"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals("requires_trait"))
@@ -2324,7 +2574,9 @@ public static class SkillReader
             {
                 if (!member.Value.ValueEquals("Distance"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals("requires_trait"))
@@ -2382,7 +2634,9 @@ public static class SkillReader
             {
                 if (!member.Value.ValueEquals("Damage"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals("requires_trait"))
@@ -2447,7 +2701,9 @@ public static class SkillReader
             {
                 if (!member.Value.ValueEquals("Buff"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals("requires_trait"))
@@ -2520,7 +2776,9 @@ public static class SkillReader
             {
                 if (!member.Value.ValueEquals("AttributeAdjust"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals("requires_trait"))
@@ -2582,7 +2840,9 @@ public static class SkillReader
             {
                 if (!member.Value.ValueEquals("ComboField"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals("requires_trait"))
@@ -2640,7 +2900,9 @@ public static class SkillReader
             {
                 if (!member.Value.ValueEquals("ComboFinisher"))
                 {
-                    throw new InvalidOperationException(Strings.InvalidDiscriminator(member.Value.GetString()));
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                        );
                 }
             }
             else if (member.NameEquals("chance") && IsDefaultInt32(member))
@@ -2687,12 +2949,16 @@ public static class SkillReader
 
         static bool IsDefaultInt32(JsonProperty jsonProperty)
         {
-            return jsonProperty.Value.ValueKind == JsonValueKind.Number &&
-                jsonProperty.Value.TryGetInt32(out var value) && value == 0;
+            return jsonProperty.Value.ValueKind == JsonValueKind.Number
+                && jsonProperty.Value.TryGetInt32(out var value)
+                && value == 0;
         }
     }
 
-    private static SkillReference ReadSubskill(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    private static SkillReference ReadSubskill(
+        JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         RequiredMember<int> id = new("id");
         NullableMember<Attunement> attunement = new("attunement");

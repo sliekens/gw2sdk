@@ -5,15 +5,9 @@ namespace GW2SDK.TestDataHelper;
 
 internal static class JsonDocumentEx
 {
-    private static readonly JsonWriterOptions WithoutIndented = new()
-    {
-        Indented = false
-    };
+    private static readonly JsonWriterOptions WithoutIndented = new() { Indented = false };
 
-    private static readonly JsonWriterOptions WithIndented = new()
-    {
-        Indented = true
-    };
+    private static readonly JsonWriterOptions WithIndented = new() { Indented = true };
 
     internal static JsonDocument Indent(this JsonDocument json, bool indent = true)
     {

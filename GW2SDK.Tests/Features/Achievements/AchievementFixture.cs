@@ -9,9 +9,7 @@ public class AchievementFixture
 {
     public AchievementFixture()
     {
-        Achievements = FlatFileReader.Read("Data/achievements.json.gz")
-            .ToList()
-            .AsReadOnly();
+        Achievements = FlatFileReader.Read("Data/achievements.json.gz").ToList().AsReadOnly();
     }
 
     public IReadOnlyCollection<string> Achievements { get; }

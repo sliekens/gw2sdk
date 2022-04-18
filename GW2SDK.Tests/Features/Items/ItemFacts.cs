@@ -12,7 +12,8 @@ internal static class ItemFacts
     internal static void Vendor_value_is_not_negative(Item actual) =>
         Assert.InRange(actual.VendorValue.Amount, 0, int.MaxValue);
 
-    internal static void Level_is_between_0_and_80(Item actual) => Assert.InRange(actual.Level, 0, 80);
+    internal static void Level_is_between_0_and_80(Item actual) =>
+        Assert.InRange(actual.Level, 0, 80);
 
     internal static void Weapon_min_power_is_not_negative(Weapon actual) =>
         Assert.InRange(actual.MinPower, 0, int.MaxValue);
@@ -35,7 +36,10 @@ internal static class ItemFacts
     {
         if (weapon.Prefix is InfixUpgrade)
         {
-            Assert.All(weapon.Prefix.Attributes, actual => Assert.InRange(actual.Modifier, 1, int.MaxValue));
+            Assert.All(
+                weapon.Prefix.Attributes,
+                actual => Assert.InRange(actual.Modifier, 1, int.MaxValue)
+                );
         }
     }
 
@@ -63,7 +67,10 @@ internal static class ItemFacts
     {
         if (backpack.Prefix is InfixUpgrade)
         {
-            Assert.All(backpack.Prefix.Attributes, actual => Assert.InRange(actual.Modifier, 1, int.MaxValue));
+            Assert.All(
+                backpack.Prefix.Attributes,
+                actual => Assert.InRange(actual.Modifier, 1, int.MaxValue)
+                );
         }
     }
 
@@ -87,7 +94,8 @@ internal static class ItemFacts
         }
     }
 
-    internal static void Armor_defense_is_not_negative(Armor actual) => Assert.InRange(actual.Defense, 0, 1000);
+    internal static void Armor_defense_is_not_negative(Armor actual) =>
+        Assert.InRange(actual.Defense, 0, 1000);
 
     internal static void Armor_infusion_slot_flags_is_not_empty(Armor actual)
     {
@@ -109,7 +117,10 @@ internal static class ItemFacts
     {
         if (armor.Prefix is InfixUpgrade)
         {
-            Assert.All(armor.Prefix.Attributes, actual => Assert.InRange(actual.Modifier, 1, int.MaxValue));
+            Assert.All(
+                armor.Prefix.Attributes,
+                actual => Assert.InRange(actual.Modifier, 1, int.MaxValue)
+                );
         }
     }
 
@@ -153,12 +164,14 @@ internal static class ItemFacts
         }
     }
 
-    internal static void Transmutation_skins_is_not_empty(Transmutation actual) => Assert.NotEmpty(actual.Skins);
+    internal static void Transmutation_skins_is_not_empty(Transmutation actual) =>
+        Assert.NotEmpty(actual.Skins);
 
     internal static void SalvageTool_has_charges(SalvageTool salvageTool) =>
         Assert.InRange(salvageTool.Charges, 1, 255);
 
-    internal static void MinipetId_is_positive(Minipet minipet) => Assert.InRange(minipet.MinipetId, 1, int.MaxValue);
+    internal static void MinipetId_is_positive(Minipet minipet) =>
+        Assert.InRange(minipet.MinipetId, 1, int.MaxValue);
 
     internal static void Validate(Item actual)
     {

@@ -84,13 +84,15 @@ public class QueryBuilderTest
     {
         var sut = new QueryBuilder();
 
-        sut.Add("key",
+        sut.Add(
+            "key",
             new[]
             {
                 "first",
                 "second",
                 "third"
-            });
+            }
+            );
 
         var actual = sut.Build();
 
@@ -102,13 +104,15 @@ public class QueryBuilderTest
     {
         var sut = new QueryBuilder();
 
-        sut.Add("key",
+        sut.Add(
+            "key",
             new[]
             {
                 1,
                 2,
                 3
-            });
+            }
+            );
 
         var actual = sut.Build();
 

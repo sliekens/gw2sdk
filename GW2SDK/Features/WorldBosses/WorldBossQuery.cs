@@ -32,10 +32,7 @@ public sealed class WorldBossQuery
         CancellationToken cancellationToken = default
     )
     {
-        AccountWorldBossesRequest request = new()
-        {
-            AccessToken = accessToken
-        };
+        AccountWorldBossesRequest request = new() { AccessToken = accessToken };
         return request.SendAsync(http, cancellationToken);
     }
 }

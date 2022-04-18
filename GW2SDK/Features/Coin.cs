@@ -13,11 +13,7 @@ public readonly struct Coin : IEquatable<Coin>, IComparable<Coin>, IComparable
 
     public static readonly Coin Zero = 0;
 
-    public Coin(
-        int gold,
-        int silver,
-        int copper
-    )
+    public Coin(int gold, int silver, int copper)
         : this((10_000 * gold) + (100 * silver) + copper)
     {
     }
@@ -33,7 +29,10 @@ public readonly struct Coin : IEquatable<Coin>, IComparable<Coin>, IComparable
     {
         if (amount < Zero.Amount)
         {
-            throw new ArgumentOutOfRangeException(nameof(amount), "The amount of coins cannot be negative.");
+            throw new ArgumentOutOfRangeException(
+                nameof(amount),
+                "The amount of coins cannot be negative."
+                );
         }
 
         Amount = amount;

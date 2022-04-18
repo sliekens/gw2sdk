@@ -7,12 +7,14 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddRazorPages();
 
-builder.Services.AddHttpClient("api.guildwars2.com",
+builder.Services.AddHttpClient(
+        "api.guildwars2.com",
         http =>
         {
             http.UseGuildWars2();
             http.UseLanguage(Language.English);
-        })
+        }
+        )
     .AddTypedClient<QuagganQuery>();
 
 var app = builder.Build();

@@ -25,9 +25,6 @@ public static class BuildReader
             }
         }
 
-        return new Build
-        {
-            Id = id.GetValue()
-        };
+        return new Build { Id = id.GetValue() };
     }
 }

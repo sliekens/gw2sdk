@@ -5,7 +5,6 @@ using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 using GW2SDK.Achievements.Http;
-using GW2SDK.Http;
 
 namespace GW2SDK.TestDataHelper;
 
@@ -20,8 +19,7 @@ public class JsonAchievementService
 
     public async Task<ISet<string>> GetAllJsonAchievements()
     {
-        var ids = await GetAchievementIds()
-            .ConfigureAwait(false);
+        var ids = await GetAchievementIds().ConfigureAwait(false);
 
         var batches = new Queue<IEnumerable<int>>(ids.Buffer(200));
 
@@ -61,14 +59,18 @@ public class JsonAchievementService
         return response.Values;
     }
 
-    private async Task<List<string>> GetJsonAchievementsByIds(IReadOnlyCollection<int> achievementIds)
+    private async Task<List<string>> GetJsonAchievementsByIds(
+        IReadOnlyCollection<int> achievementIds
+    )
     {
         var request = new BulkRequest("/v2/achievements", achievementIds);
-        var json = await request.SendAsync(http, CancellationToken.None)
-            .ConfigureAwait(false);
+        var json = await request.SendAsync(http, CancellationToken.None).ConfigureAwait(false);
         return json.Indent(false)
             .RootElement.EnumerateArray()
-            .Select(item => item.ToString() ?? throw new InvalidOperationException("Unexpected null in JSON array."))
+            .Select(
+                item => item.ToString()
+                    ?? throw new InvalidOperationException("Unexpected null in JSON array.")
+                )
             .ToList();
     }
 }

@@ -23,8 +23,10 @@ public class Container : IDisposable, IAsyncDisposable
         var policies = services.AddPolicyRegistry();
 
         // Any individual request should be able to complete in 30 seconds or less
-        var innerTimeout =
-            Policy.TimeoutAsync<HttpResponseMessage>(TimeSpan.FromSeconds(30), TimeoutStrategy.Optimistic);
+        var innerTimeout = Policy.TimeoutAsync<HttpResponseMessage>(
+            TimeSpan.FromSeconds(30),
+            TimeoutStrategy.Optimistic
+            );
 
         // Unfortunately the API limits the number of requests over time from the same IP address.
         // This is annoying because we can't do anything to stay within the limit.
@@ -32,16 +34,22 @@ public class Container : IDisposable, IAsyncDisposable
         // Basically, we might already be at the limit on a cold startup.
         // A circuit breaker wouldn't help in this case. (Only when you can guarantee that there are no other API users using the same IP address.)
         // The only thing that works well in all environments is automatic retries with exponential and jittered sleep durations.
-        var rateLimit = Policy<HttpResponseMessage>.HandleResult(response => response.StatusCode == HttpStatusCodeEx.TooManyRequests)
-            .WaitAndRetryForeverAsync(retryAttempt => TimeSpan.FromSeconds(Math.Min(8, Math.Pow(2, retryAttempt))) +
-                TimeSpan.FromMilliseconds(jitterer.Next(0, 1000)));
+        var rateLimit = Policy<HttpResponseMessage>
+            .HandleResult(response => response.StatusCode == HttpStatusCodeEx.TooManyRequests)
+            .WaitAndRetryForeverAsync(
+                retryAttempt => TimeSpan.FromSeconds(Math.Min(8, Math.Pow(2, retryAttempt)))
+                    + TimeSpan.FromMilliseconds(jitterer.Next(0, 1000))
+                );
 
         // Additionally we seem to be getting various transient failures
-        var retryRequestError = Policy<HttpResponseMessage>.Handle<GatewayException>(reason =>
-                reason.StatusCode is ServiceUnavailable or GatewayTimeout or BadGateway)
-            .WaitAndRetryForeverAsync(retryAttempt =>
-                TimeSpan.FromSeconds(Math.Min(8, Math.Pow(2, retryAttempt))) +
-                TimeSpan.FromMilliseconds(jitterer.Next(0, 1000)));
+        var retryRequestError = Policy<HttpResponseMessage>
+            .Handle<GatewayException>(
+                reason => reason.StatusCode is ServiceUnavailable or GatewayTimeout or BadGateway
+                )
+            .WaitAndRetryForeverAsync(
+                retryAttempt => TimeSpan.FromSeconds(Math.Min(8, Math.Pow(2, retryAttempt)))
+                    + TimeSpan.FromMilliseconds(jitterer.Next(0, 1000))
+                );
 
         // Give up when there is no usable response within a reasonable time
         //
@@ -64,19 +72,26 @@ public class Container : IDisposable, IAsyncDisposable
         // OK result    29,999ms          50,499ms
         //
         // This is already very pessimistic but let's round it up to a minute just to be sure we're not being unreasonable
-        var timeout = Policy.TimeoutAsync<HttpResponseMessage>(TimeSpan.FromSeconds(60), TimeoutStrategy.Optimistic);
+        var timeout = Policy.TimeoutAsync<HttpResponseMessage>(
+            TimeSpan.FromSeconds(60),
+            TimeoutStrategy.Optimistic
+            );
 
-        policies.Add("api.guildwars2.com", Policy.WrapAsync(timeout, rateLimit, retryRequestError, innerTimeout));
+        policies.Add(
+            "api.guildwars2.com",
+            Policy.WrapAsync(timeout, rateLimit, retryRequestError, innerTimeout)
+            );
 
-        services.AddHttpClient("GW2SDK",
+        services.AddHttpClient(
+                "GW2SDK",
                 http =>
                 {
                     http.UseGuildWars2();
-                })
-            .ConfigurePrimaryHttpMessageHandler(() => new SocketsHttpHandler
-            {
-                AutomaticDecompression = DecompressionMethods.GZip
-            })
+                }
+                )
+            .ConfigurePrimaryHttpMessageHandler(
+                () => new SocketsHttpHandler { AutomaticDecompression = DecompressionMethods.GZip }
+                )
             .AddPolicyHandlerFromRegistry("api.guildwars2.com")
             .AddTypedClient<MapQuery>()
             .AddTypedClient<JsonAchievementService>()

@@ -30,9 +30,7 @@ public class TokenProviderTest
         // If this key leaks to the outside world, it can't be (ab)used to login with GW2BLTC.com or similar sites
         Assert.Equal("GW2SDK-Full", apiKey.Name);
 
-        var expectedPermissions = Enum.GetValues(typeof(Permission))
-            .Cast<Permission>()
-            .ToHashSet();
+        var expectedPermissions = Enum.GetValues(typeof(Permission)).Cast<Permission>().ToHashSet();
 
         Assert.Equal(expectedPermissions, apiKey.Permissions.ToHashSet());
     }
@@ -46,9 +44,7 @@ public class TokenProviderTest
 
         #region Create a new subtoken
 
-        var subtokenPermissions = Enum.GetValues(typeof(Permission))
-            .Cast<Permission>()
-            .ToHashSet();
+        var subtokenPermissions = Enum.GetValues(typeof(Permission)).Cast<Permission>().ToHashSet();
 
         var expiresAt = DateTimeOffset.UtcNow.AddDays(1);
 
@@ -59,7 +55,12 @@ public class TokenProviderTest
             "/v2/characters/My Cool Character"
         };
 
-        var createdSubtoken = await sut.CreateSubtoken(accessToken.Key, subtokenPermissions, expiresAt, urls);
+        var createdSubtoken = await sut.CreateSubtoken(
+            accessToken.Key,
+            subtokenPermissions,
+            expiresAt,
+            urls
+            );
 
         #endregion
 
@@ -87,8 +88,9 @@ public class TokenProviderTest
         var expectedExpiry = DateTimeOffset.FromUnixTimeSeconds(expiresAt.ToUnixTimeSeconds());
         Assert.Equal(expectedExpiry, subtoken.ExpiresAt);
 
-        Assert.Equal(urls,
-            subtoken.Urls.Select(url => Uri.UnescapeDataString(url.ToString()))
-                .ToList());
+        Assert.Equal(
+            urls,
+            subtoken.Urls.Select(url => Uri.UnescapeDataString(url.ToString())).ToList()
+            );
     }
 }

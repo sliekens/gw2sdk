@@ -21,9 +21,9 @@ public class DesignedForInheritanceTest : IClassFixture<AssemblyFixture>
         /*
          * The goal of this test is to ensure that all unsealed types are designed for inheritance.
          */
-        var classes = fixture.Assembly.ExportedTypes.Where(type => type.IsClass)
-            .ToList();
-        Assert.All(classes,
+        var classes = fixture.Assembly.ExportedTypes.Where(type => type.IsClass).ToList();
+        Assert.All(
+            classes,
             type =>
             {
                 if (type.IsAbstract)
@@ -37,14 +37,15 @@ public class DesignedForInheritanceTest : IClassFixture<AssemblyFixture>
                 }
 
                 if (type.GetCustomAttributes()
-                    .Any(att => att.GetType()
-                        .Name == "InheritableAttribute"))
+                    .Any(att => att.GetType().Name == "InheritableAttribute"))
                 {
                     return;
                 }
 
                 throw new ApplicationException(
-                    $"Type '{type}' is public but not abstract, seal it or mark it as [Inheritable].");
-            });
+                    $"Type '{type}' is public but not abstract, seal it or mark it as [Inheritable]."
+                    );
+            }
+            );
     }
 }
