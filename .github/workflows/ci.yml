@@ -32,6 +32,8 @@ jobs:
           3.1.x
           5.0.x
           6.0.x
+      env:
+        NUGET_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
     - name: Install dependencies
       run: dotnet restore --locked-mode
     - name: Test
