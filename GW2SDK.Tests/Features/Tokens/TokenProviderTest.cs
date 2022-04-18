@@ -90,7 +90,7 @@ public class TokenProviderTest
 
         Assert.Equal(
             urls,
-            subtoken.Urls.Select(url => Uri.UnescapeDataString(url.ToString())).ToList()
+            subtoken.Urls?.Select(url => Uri.UnescapeDataString(url.ToString())).ToList()
             );
     }
 }

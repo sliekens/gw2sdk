@@ -87,15 +87,15 @@ public static class IdentityReader
         return new Identity
         {
             Name = name.GetValue(),
-            Profession = profession.Select(json => (ProfessionName)json.GetInt32()),
+            Profession = profession.Select(value => (ProfessionName)value.GetInt32()),
             SpecializationId = specializationId.GetValue(),
-            Race = race.Select(json => (Race)(json.GetInt32() + 1)),
+            Race = race.Select(value => (Race)(value.GetInt32() + 1)),
             MapId = mapId.GetValue(),
             WorldId = worldId.GetValue(),
             TeamColorId = teamColorId.GetValue(),
             Commander = commander.GetValue(),
             FieldOfView = fieldOfView.GetValue(),
-            UiSize = uiSize.Select(json => (UiSize)json.GetInt32())
+            UiSize = uiSize.Select(value => (UiSize)value.GetInt32())
         };
     }
 }

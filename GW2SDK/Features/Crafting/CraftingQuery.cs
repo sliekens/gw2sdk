@@ -43,8 +43,8 @@ public sealed class CraftingQuery
     public IAsyncEnumerable<Recipe> GetRecipesByIds(
         IReadOnlyCollection<int> recipeIds,
         MissingMemberBehavior missingMemberBehavior = default,
-        CancellationToken cancellationToken = default,
-        IProgress<ICollectionContext>? progress = default
+        IProgress<ICollectionContext>? progress = default,
+        CancellationToken cancellationToken = default
     )
     {
         var producer = SplitQuery.Create<int, Recipe>(
@@ -155,16 +155,16 @@ public sealed class CraftingQuery
 
     public async IAsyncEnumerable<Recipe> GetRecipes(
         MissingMemberBehavior missingMemberBehavior = default,
-        [EnumeratorCancellation] CancellationToken cancellationToken = default,
-        IProgress<ICollectionContext>? progress = default
+        IProgress<ICollectionContext>? progress = default,
+        [EnumeratorCancellation] CancellationToken cancellationToken = default
     )
     {
         var index = await GetRecipesIndex(cancellationToken).ConfigureAwait(false);
         var producer = GetRecipesByIds(
             index.Values,
             missingMemberBehavior,
-            cancellationToken,
-            progress
+            progress,
+            cancellationToken
             );
         await foreach (var recipe in producer.WithCancellation(cancellationToken)
                            .ConfigureAwait(false))

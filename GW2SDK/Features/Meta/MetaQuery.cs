@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
@@ -30,16 +31,18 @@ public sealed class MetaQuery
         return request.SendAsync(http, cancellationToken);
     }
 
+    [SuppressMessage("Style", "IDE0060:Remove unused parameter", Justification = "Public API")]
     public Task<IReplica<Build>> GetBuild(
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
         // The public API doesn't work right
-        //BuildRequest request = new();
+        //var request = new BuildRequest { MissingMemberBehavior = missingMemberBehavior };
 
         // Use this private API
-        AssetCdnBuildRequest request = new();
+        var request = new AssetCdnBuildRequest();
+
         return request.SendAsync(http, cancellationToken);
     }
 }

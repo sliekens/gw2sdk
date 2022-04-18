@@ -75,5 +75,5 @@ internal readonly ref struct RequiredMember<T>
         }
     }
 
-    internal RequiredMember<T> From(JsonElement member) => new(Name, new JsonMember(member));
+    internal RequiredMember<T> From(JsonElement propertyValue) => new(Name, new JsonMember(propertyValue));
 }

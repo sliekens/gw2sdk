@@ -39,7 +39,7 @@ public class AchievementReaderTest : IClassFixture<AchievementFixture>
 
         public static void Rewards_does_not_contain_null(Achievement actual)
         {
-            if (actual.Rewards is object)
+            if (actual.Rewards is not null)
             {
                 Assert.DoesNotContain(null, actual.Rewards);
             }
@@ -47,7 +47,7 @@ public class AchievementReaderTest : IClassFixture<AchievementFixture>
 
         public static void Bits_does_not_contain_null(Achievement actual)
         {
-            if (actual.Bits is object)
+            if (actual.Bits is not null)
             {
                 Assert.DoesNotContain(null, actual.Bits);
             }

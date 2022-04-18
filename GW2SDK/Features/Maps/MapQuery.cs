@@ -190,7 +190,6 @@ public sealed class MapQuery
     public Task<IReplicaSet<int>> GetWorldsIndex(CancellationToken cancellationToken = default)
     {
         WorldsIndexRequest request = new();
-        ;
         return request.SendAsync(http, cancellationToken);
     }
 
