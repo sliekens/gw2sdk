@@ -55,7 +55,8 @@ public sealed class QuagganQuery
         CancellationToken cancellationToken = default
     )
     {
-        QuaggansByIdsRequest request = new(quagganIds);
+        QuaggansByIdsRequest request =
+            new(quagganIds) { MissingMemberBehavior = missingMemberBehavior };
         return request.SendAsync(http, cancellationToken);
     }
 

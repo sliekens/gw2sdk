@@ -26,7 +26,7 @@ internal static class ItemFacts
 
     internal static void Weapon_infix_upgrade_id_is_positive(Weapon actual)
     {
-        if (actual.Prefix is InfixUpgrade)
+        if (actual.Prefix is not null)
         {
             Assert.InRange(actual.Prefix.ItemstatsId, 1, int.MaxValue);
         }
@@ -34,7 +34,7 @@ internal static class ItemFacts
 
     internal static void Weapon_infix_upgrade_modifiers_are_positive(Weapon weapon)
     {
-        if (weapon.Prefix is InfixUpgrade)
+        if (weapon.Prefix is not null)
         {
             Assert.All(
                 weapon.Prefix.Attributes,
@@ -57,7 +57,7 @@ internal static class ItemFacts
 
     internal static void Backpack_infix_upgrade_id_is_positive(Backpack actual)
     {
-        if (actual.Prefix is InfixUpgrade)
+        if (actual.Prefix is not null)
         {
             Assert.InRange(actual.Prefix.ItemstatsId, 1, int.MaxValue);
         }
@@ -65,7 +65,7 @@ internal static class ItemFacts
 
     internal static void Backpack_infix_upgrade_modifiers_are_positive(Backpack backpack)
     {
-        if (backpack.Prefix is InfixUpgrade)
+        if (backpack.Prefix is not null)
         {
             Assert.All(
                 backpack.Prefix.Attributes,
@@ -107,7 +107,7 @@ internal static class ItemFacts
 
     internal static void Armor_infix_upgrade_id_is_positive(Armor actual)
     {
-        if (actual.Prefix is InfixUpgrade)
+        if (actual.Prefix is not null)
         {
             Assert.InRange(actual.Prefix.ItemstatsId, 1, int.MaxValue);
         }
@@ -115,7 +115,7 @@ internal static class ItemFacts
 
     internal static void Armor_infix_upgrade_modifiers_are_positive(Armor armor)
     {
-        if (armor.Prefix is InfixUpgrade)
+        if (armor.Prefix is not null)
         {
             Assert.All(
                 armor.Prefix.Attributes,

@@ -5,19 +5,14 @@ using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Threading.Tasks;
 using GW2SDK.Annotations;
-using GW2SDK.Commerce.Delivery;
 using GW2SDK.Commerce.Delivery.Http;
 using GW2SDK.Commerce.Delivery.Models;
-using GW2SDK.Commerce.Exchange;
 using GW2SDK.Commerce.Exchange.Http;
 using GW2SDK.Commerce.Exchange.Models;
-using GW2SDK.Commerce.Listings;
 using GW2SDK.Commerce.Listings.Http;
 using GW2SDK.Commerce.Listings.Models;
-using GW2SDK.Commerce.Prices;
 using GW2SDK.Commerce.Prices.Http;
 using GW2SDK.Commerce.Prices.Models;
-using GW2SDK.Commerce.Transactions;
 using GW2SDK.Commerce.Transactions.Http;
 using GW2SDK.Commerce.Transactions.Models;
 using GW2SDK.Http;
@@ -79,8 +74,8 @@ public sealed class CommerceQuery
     public IAsyncEnumerable<ItemPrice> GetItemPricesByIds(
         IReadOnlyCollection<int> itemIds,
         MissingMemberBehavior missingMemberBehavior = default,
-        CancellationToken cancellationToken = default,
-        IProgress<ICollectionContext>? progress = default
+        IProgress<ICollectionContext>? progress = default,
+        CancellationToken cancellationToken = default
     )
     {
         var producer = SplitQuery.Create<int, ItemPrice>(
@@ -100,16 +95,16 @@ public sealed class CommerceQuery
 
     public async IAsyncEnumerable<ItemPrice> GetItemPrices(
         MissingMemberBehavior missingMemberBehavior = default,
-        [EnumeratorCancellation] CancellationToken cancellationToken = default,
-        IProgress<ICollectionContext>? progress = default
+        IProgress<ICollectionContext>? progress = default,
+        [EnumeratorCancellation] CancellationToken cancellationToken = default
     )
     {
         var index = await GetItemPricesIndex(cancellationToken).ConfigureAwait(false);
         var producer = GetItemPricesByIds(
             index.Values,
             missingMemberBehavior,
-            cancellationToken,
-            progress
+            progress,
+            cancellationToken
             );
         await foreach (var itemPrice in producer.WithCancellation(cancellationToken)
                            .ConfigureAwait(false))
@@ -144,8 +139,8 @@ public sealed class CommerceQuery
     public IAsyncEnumerable<OrderBook> GetOrderBooksByIds(
         IReadOnlyCollection<int> itemIds,
         MissingMemberBehavior missingMemberBehavior = default,
-        CancellationToken cancellationToken = default,
-        IProgress<ICollectionContext>? progress = default
+        IProgress<ICollectionContext>? progress = default,
+        CancellationToken cancellationToken = default
     )
     {
         var producer = SplitQuery.Create<int, OrderBook>(
@@ -165,16 +160,16 @@ public sealed class CommerceQuery
 
     public async IAsyncEnumerable<OrderBook> GetOrderBooks(
         MissingMemberBehavior missingMemberBehavior = default,
-        [EnumeratorCancellation] CancellationToken cancellationToken = default,
-        IProgress<ICollectionContext>? progress = default
+        IProgress<ICollectionContext>? progress = default,
+        [EnumeratorCancellation] CancellationToken cancellationToken = default
     )
     {
         var index = await GetOrderBooksIndex(cancellationToken).ConfigureAwait(false);
         var producer = GetOrderBooksByIds(
             index.Values,
             missingMemberBehavior,
-            cancellationToken,
-            progress
+            progress,
+            cancellationToken
             );
         await foreach (var orderBook in producer.WithCancellation(cancellationToken)
                            .ConfigureAwait(false))

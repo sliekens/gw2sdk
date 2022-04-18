@@ -23,7 +23,7 @@ public static class FlatFileReader
 
         using var stringReader = new StreamReader(file);
         string line;
-        while ((line = stringReader.ReadLine()) is string)
+        while ((line = stringReader.ReadLine()) is not null)
         {
             yield return line;
         }

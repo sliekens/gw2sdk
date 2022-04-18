@@ -45,9 +45,9 @@ internal class Program
                         new ProgressTaskSettings { AutoStart = false }
                         );
 
-                    var craftable = await GetRecipes(craftingQuery, recipesProgress);
+                    var craftingRecipes = await GetRecipes(craftingQuery, recipesProgress);
 
-                    var groupedByIngredient = craftable
+                    var groupedByIngredient = craftingRecipes
                         .SelectMany(
                             recipe => recipe.Ingredients
                                 .Where(ingredient => ingredient.Kind == IngredientKind.Item)
@@ -58,17 +58,17 @@ internal class Program
                     var ingredientIndex = groupedByIngredient.Select(grouping => grouping.Key)
                         .ToHashSet();
 
-                    var ingredients = await GetItems(
+                    var craftingIngredients = await GetItems(
                         ingredientIndex,
                         itemQuery,
                         ingredientsProgress
                         );
 
-                    var ingredientsDictionary = ingredients.ToDictionary(item => item.Id);
+                    var ingredientsById = craftingIngredients.ToDictionary(item => item.Id);
 
                     var mostCommon = groupedByIngredient
                         .OrderByDescending(grouping => grouping.Count())
-                        .Select(grouping => ingredientsDictionary[grouping.Key])
+                        .Select(grouping => ingredientsById[grouping.Key])
                         .ToList();
 
                     return (Ingredients: mostCommon, Craftable: groupedByIngredient);

@@ -242,6 +242,6 @@ public class CraftingQueryTest
 
         // The best we can do is verify that there are no unexpected recipes
         // i.e. all recipes must be present in the reference data
-        Assert.All(actual.Value, recipeId => dailyRecipes.Contains(recipeId));
+        Assert.All(actual.Value, recipeId => Assert.Contains(recipeId, dailyRecipes));
     }
 }

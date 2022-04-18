@@ -167,16 +167,16 @@ namespace GW2SDK.Mumble
             return Marshal.PtrToStructure<Snapshot>(bufferAddress);
         }
 
-        private void BufferContent(byte[] buffer)
+        private void BufferContent(byte[] destination)
         {
             try
             {
                 // Note the need to specify the length because we use pooled arrays
 #if NET
-                var buffered = content.Read(buffer.AsSpan(0, Length));
+                var buffered = content.Read(destination.AsSpan(0, Length));
 
 #else
-                var buffered = content.Read(buffer, 0, Length);
+                var buffered = content.Read(destination, 0, Length);
 #endif
                 if (buffered != Length)
                 {

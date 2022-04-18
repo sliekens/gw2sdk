@@ -111,7 +111,7 @@ public class GameLinkTest
     }
 }
 
-public class MumbleLinkFact : FactAttribute
+public sealed class MumbleLinkFact : FactAttribute
 {
     public MumbleLinkFact()
     {

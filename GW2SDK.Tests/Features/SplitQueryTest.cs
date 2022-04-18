@@ -69,12 +69,12 @@ public class SplitQueryTest
         var actual = await sut.QueryAsync(index, bufferSize).ToListAsync();
 
         Assert.Equal(index.Count, actual.Count);
-        Assert.All(index, id => actual.Any(record => record.Id == id));
+        Assert.All(index, id => Assert.Contains(actual, record => record.Id == id));
         Assert.All(
             actual,
             record =>
             {
-                index.Contains(record.Id);
+                Assert.Contains(record.Id, index);
             }
             );
     }
@@ -97,12 +97,12 @@ public class SplitQueryTest
         var actual = await sut.QueryAsync(index).ToListAsync();
 
         Assert.Equal(index.Count, actual.Count);
-        Assert.All(index, id => actual.Any(record => record.Id == id));
+        Assert.All(index, id => Assert.Contains(actual, record => record.Id == id));
         Assert.All(
             actual,
             record =>
             {
-                index.Contains(record.Id);
+                Assert.Contains(record.Id, index);
             }
             );
     }
@@ -120,9 +120,9 @@ internal sealed class StubReplica : IReplicaSet<StubRecord>
 
     public DateTimeOffset Date { get; } = DateTimeOffset.UtcNow;
 
-    public DateTimeOffset? Expires { get; }
+    public DateTimeOffset? Expires => default;
 
-    public DateTimeOffset? LastModified { get; }
+    public DateTimeOffset? LastModified => default;
 
     public IReadOnlyCollection<StubRecord> Values { get; }
 

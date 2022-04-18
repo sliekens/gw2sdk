@@ -47,8 +47,8 @@ public sealed class ItemQuery
         IReadOnlyCollection<int> itemIds,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
-        CancellationToken cancellationToken = default,
-        IProgress<ICollectionContext>? progress = default
+        IProgress<ICollectionContext>? progress = default,
+        CancellationToken cancellationToken = default
     )
     {
         var producer = SplitQuery.Create<int, Item>(
@@ -88,8 +88,8 @@ public sealed class ItemQuery
     public async IAsyncEnumerable<Item> GetItems(
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
-        [EnumeratorCancellation] CancellationToken cancellationToken = default,
-        IProgress<ICollectionContext>? progress = default
+        IProgress<ICollectionContext>? progress = default,
+        [EnumeratorCancellation] CancellationToken cancellationToken = default
     )
     {
         var index = await GetItemsIndex(cancellationToken).ConfigureAwait(false);
@@ -97,8 +97,8 @@ public sealed class ItemQuery
             index,
             language,
             missingMemberBehavior,
-            cancellationToken,
-            progress
+            progress,
+            cancellationToken
             );
         await foreach (var item in producer.WithCancellation(cancellationToken)
                            .ConfigureAwait(false))

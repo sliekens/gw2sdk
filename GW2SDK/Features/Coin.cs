@@ -127,7 +127,7 @@ public readonly struct Coin : IEquatable<Coin>, IComparable<Coin>, IComparable
 
         if (str.Length == 0)
         {
-            str.Append("⸻");
+            str.Append('⸻');
         }
 
         return str.ToString();
