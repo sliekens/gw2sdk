@@ -12,7 +12,7 @@ using JetBrains.Annotations;
 namespace GW2SDK.Home;
 
 [PublicAPI]
-public class HomeQuery
+public sealed class HomeQuery
 {
     private readonly HttpClient http;
 
