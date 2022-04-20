@@ -49,7 +49,7 @@ public class MasteryQueryTest
     }
 
     [Fact]
-    public async Task It_can_get_all_masteries()
+    public async Task Masteries_can_be_enumerated()
     {
         await using Composer services = new();
         var sut = services.Resolve<MasteryQuery>();
@@ -84,7 +84,7 @@ public class MasteryQueryTest
     }
 
     [Fact]
-    public async Task It_can_get_all_mastery_ids()
+    public async Task Masteries_index_is_not_empty()
     {
         await using Composer services = new();
         var sut = services.Resolve<MasteryQuery>();
@@ -95,7 +95,7 @@ public class MasteryQueryTest
     }
 
     [Fact]
-    public async Task It_can_get_a_mastery_by_id()
+    public async Task A_mastery_can_be_found_by_id()
     {
         await using Composer services = new();
         var sut = services.Resolve<MasteryQuery>();
@@ -108,7 +108,7 @@ public class MasteryQueryTest
     }
 
     [Fact]
-    public async Task It_can_get_masteries_by_id()
+    public async Task Masteries_can_be_filtered_by_id()
     {
         await using Composer services = new();
         var sut = services.Resolve<MasteryQuery>();

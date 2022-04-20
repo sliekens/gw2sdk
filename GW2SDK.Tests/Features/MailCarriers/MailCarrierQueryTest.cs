@@ -36,7 +36,7 @@ public class MailCarrierQueryTest
     }
 
     [Fact]
-    public async Task It_can_get_all_mail_carriers()
+    public async Task Mail_carriers_can_be_enumerated()
     {
         await using Composer services = new();
         var sut = services.Resolve<MailCarrierQuery>();
@@ -58,7 +58,7 @@ public class MailCarrierQueryTest
     }
 
     [Fact]
-    public async Task It_can_get_all_mail_carrier_ids()
+    public async Task Mail_carriers_index_is_not_empty()
     {
         await using Composer services = new();
         var sut = services.Resolve<MailCarrierQuery>();
@@ -69,7 +69,7 @@ public class MailCarrierQueryTest
     }
 
     [Fact]
-    public async Task It_can_get_a_mail_carrier_by_id()
+    public async Task A_mail_carrier_can_be_found_by_id()
     {
         await using Composer services = new();
         var sut = services.Resolve<MailCarrierQuery>();
@@ -82,7 +82,7 @@ public class MailCarrierQueryTest
     }
 
     [Fact]
-    public async Task It_can_get_mail_carriers_by_id()
+    public async Task Mail_carriers_can_be_filtered_by_id()
     {
         await using Composer services = new();
         var sut = services.Resolve<MailCarrierQuery>();
@@ -105,7 +105,7 @@ public class MailCarrierQueryTest
     }
 
     [Fact]
-    public async Task It_can_get_mail_carriers_by_page()
+    public async Task Mail_carriers_can_be_filtered_by_page()
     {
         await using Composer services = new();
         var sut = services.Resolve<MailCarrierQuery>();

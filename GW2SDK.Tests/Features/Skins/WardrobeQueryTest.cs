@@ -9,7 +9,7 @@ namespace GW2SDK.Tests.Features.Skins;
 public class WardrobeQueryTest
 {
     [Fact]
-    public async Task It_can_get_all_skin_ids()
+    public async Task Skins_index_is_not_empty()
     {
         await using Composer services = new();
         var sut = services.Resolve<WardrobeQuery>();
@@ -20,7 +20,7 @@ public class WardrobeQueryTest
     }
 
     [Fact]
-    public async Task It_can_get_a_skin_by_id()
+    public async Task A_skin_can_be_found_by_id()
     {
         await using Composer services = new();
         var sut = services.Resolve<WardrobeQuery>();
@@ -33,7 +33,7 @@ public class WardrobeQueryTest
     }
 
     [Fact]
-    public async Task It_can_get_skins_by_id()
+    public async Task Skins_can_be_filtered_by_id()
     {
         await using Composer services = new();
         var sut = services.Resolve<WardrobeQuery>();
@@ -56,7 +56,7 @@ public class WardrobeQueryTest
     }
 
     [Fact]
-    public async Task It_can_get_skins_by_page()
+    public async Task Skins_can_be_filtered_by_page()
     {
         await using Composer services = new();
         var sut = services.Resolve<WardrobeQuery>();

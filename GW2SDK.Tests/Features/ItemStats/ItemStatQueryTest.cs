@@ -9,7 +9,7 @@ namespace GW2SDK.Tests.Features.ItemStats;
 public class ItemStatQueryTest
 {
     [Fact]
-    public async Task It_can_get_all_item_stats()
+    public async Task Item_stats_can_be_enumerated()
     {
         await using Composer services = new();
         var sut = services.Resolve<ItemStatQuery>();
@@ -20,7 +20,7 @@ public class ItemStatQueryTest
     }
 
     [Fact]
-    public async Task It_can_get_all_item_stat_ids()
+    public async Task Item_stats_index_is_not_empty()
     {
         await using Composer services = new();
         var sut = services.Resolve<ItemStatQuery>();
@@ -31,7 +31,7 @@ public class ItemStatQueryTest
     }
 
     [Fact]
-    public async Task It_can_get_an_item_stat_by_id()
+    public async Task An_item_stat_can_be_found_by_id()
     {
         await using Composer services = new();
         var sut = services.Resolve<ItemStatQuery>();
@@ -44,7 +44,7 @@ public class ItemStatQueryTest
     }
 
     [Fact]
-    public async Task It_can_get_item_stats_by_ids()
+    public async Task Item_stats_can_be_filtered_by_ids()
     {
         await using Composer services = new();
         var sut = services.Resolve<ItemStatQuery>();
@@ -67,7 +67,7 @@ public class ItemStatQueryTest
     }
 
     [Fact]
-    public async Task It_can_get_item_stats_by_page()
+    public async Task Item_stats_can_be_filtered_by_page()
     {
         await using Composer services = new();
         var sut = services.Resolve<ItemStatQuery>();

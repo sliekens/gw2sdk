@@ -9,7 +9,7 @@ namespace GW2SDK.Tests.Features.Skills;
 public class SkillQueryTest
 {
     [Fact]
-    public async Task It_can_get_all_skills()
+    public async Task Skills_can_be_enumerated()
     {
         await using Composer services = new();
         var sut = services.Resolve<SkillQuery>();
@@ -20,7 +20,7 @@ public class SkillQueryTest
     }
 
     [Fact]
-    public async Task It_can_get_all_skill_ids()
+    public async Task Skills_index_is_not_empty()
     {
         await using Composer services = new();
         var sut = services.Resolve<SkillQuery>();
@@ -31,7 +31,7 @@ public class SkillQueryTest
     }
 
     [Fact]
-    public async Task It_can_get_a_skill_by_id()
+    public async Task A_skill_can_be_found_by_id()
     {
         await using Composer services = new();
         var sut = services.Resolve<SkillQuery>();
@@ -44,7 +44,7 @@ public class SkillQueryTest
     }
 
     [Fact]
-    public async Task It_can_get_skills_by_id()
+    public async Task Skills_can_be_filtered_by_id()
     {
         await using Composer services = new();
         var sut = services.Resolve<SkillQuery>();
@@ -67,7 +67,7 @@ public class SkillQueryTest
     }
 
     [Fact]
-    public async Task It_can_get_skills_by_page()
+    public async Task Skills_can_be_filtered_by_page()
     {
         await using Composer services = new();
         var sut = services.Resolve<SkillQuery>();

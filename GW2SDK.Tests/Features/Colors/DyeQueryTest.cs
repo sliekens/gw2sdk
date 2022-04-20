@@ -16,7 +16,7 @@ public class DyeQueryTest
     }
 
     [Fact]
-    public async Task It_can_get_all_colors()
+    public async Task Colors_can_be_enumerated()
     {
         await using Composer services = new();
         var sut = services.Resolve<DyeQuery>();
@@ -34,7 +34,7 @@ public class DyeQueryTest
     }
 
     [Fact]
-    public async Task It_can_get_all_color_ids()
+    public async Task Colors_index_is_not_empty()
     {
         await using Composer services = new();
         var sut = services.Resolve<DyeQuery>();
@@ -45,7 +45,7 @@ public class DyeQueryTest
     }
 
     [Fact]
-    public async Task It_can_get_a_color_by_id()
+    public async Task A_color_can_be_found_by_id()
     {
         await using Composer services = new();
         var sut = services.Resolve<DyeQuery>();
@@ -58,7 +58,7 @@ public class DyeQueryTest
     }
 
     [Fact]
-    public async Task It_can_get_colors_by_id()
+    public async Task Colors_can_be_filtered_by_id()
     {
         await using Composer services = new();
         var sut = services.Resolve<DyeQuery>();
@@ -81,7 +81,7 @@ public class DyeQueryTest
     }
 
     [Fact]
-    public async Task It_can_get_colors_by_page()
+    public async Task Colors_can_be_filtered_by_page()
     {
         await using Composer services = new();
         var sut = services.Resolve<DyeQuery>();
@@ -93,7 +93,7 @@ public class DyeQueryTest
     }
 
     [Fact]
-    public async Task It_can_get_the_unlocked_dyes()
+    public async Task Unlocked_dyes_can_be_found()
     {
         await using Composer services = new();
         var sut = services.Resolve<DyeQuery>();

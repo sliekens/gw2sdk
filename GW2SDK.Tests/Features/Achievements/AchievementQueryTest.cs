@@ -57,10 +57,36 @@ public class AchievementQueryTest
         }
     }
 
+    private static class AchievementGroupFact
+    {
+        public static void Order_is_not_negative(AchievementGroup actual) =>
+            Assert.InRange(actual.Order, 0, int.MaxValue);
+    }
+
+    private static class TitleFact
+    {
+        public static void Id_is_positive(Title actual) =>
+            Assert.InRange(actual.Id, 1, int.MaxValue);
+
+        public static void Name_is_not_empty(Title actual) => Assert.NotEmpty(actual.Name);
+
+        public static void Can_be_unlocked_by_achievements_or_achievement_points(Title actual)
+        {
+            if (actual.AchievementPointsRequired.HasValue)
+            {
+                Assert.InRange(actual.AchievementPointsRequired.Value, 1, 100000);
+            }
+            else
+            {
+                Assert.NotEmpty(actual.Achievements!);
+            }
+        }
+    }
+
     [Theory(Skip = "Daily achievements are not working right...")]
     [InlineData(Day.Today)]
     [InlineData(Day.Tomorrow)]
-    public async Task It_can_get_get_daily_achievements(Day day)
+    public async Task Daily_achievements_can_be_found_by_day(Day day)
     {
         await using Composer services = new();
         var sut = services.Resolve<AchievementQuery>();
@@ -89,34 +115,8 @@ public class AchievementQueryTest
         Assert.All(actual.Value.Special, DailyAchievementFact.Can_have_a_product_requirement);
     }
 
-    private static class AchievementGroupFact
-    {
-        public static void Order_is_not_negative(AchievementGroup actual) =>
-            Assert.InRange(actual.Order, 0, int.MaxValue);
-    }
-
-    private static class TitleFact
-    {
-        public static void Id_is_positive(Title actual) =>
-            Assert.InRange(actual.Id, 1, int.MaxValue);
-
-        public static void Name_is_not_empty(Title actual) => Assert.NotEmpty(actual.Name);
-
-        public static void Can_be_unlocked_by_achievements_or_achievement_points(Title actual)
-        {
-            if (actual.AchievementPointsRequired.HasValue)
-            {
-                Assert.InRange(actual.AchievementPointsRequired.Value, 1, 100000);
-            }
-            else
-            {
-                Assert.NotEmpty(actual.Achievements!);
-            }
-        }
-    }
-
     [Fact]
-    public async Task It_can_get_all_achievement_ids()
+    public async Task Achievements_index_is_not_empty()
     {
         await using Composer services = new();
         var sut = services.Resolve<AchievementQuery>();
@@ -127,7 +127,7 @@ public class AchievementQueryTest
     }
 
     [Fact]
-    public async Task It_can_get_an_achievement_by_id()
+    public async Task An_achievement_can_be_found_by_id()
     {
         await using Composer services = new();
         var sut = services.Resolve<AchievementQuery>();
@@ -140,7 +140,7 @@ public class AchievementQueryTest
     }
 
     [Fact]
-    public async Task It_can_get_achievements_by_id()
+    public async Task Achievements_can_be_found_by_id()
     {
         await using Composer services = new();
         var sut = services.Resolve<AchievementQuery>();
@@ -163,7 +163,7 @@ public class AchievementQueryTest
     }
 
     [Fact]
-    public async Task It_can_get_achievements_by_page()
+    public async Task Achievements_can_be_filtered_by_page()
     {
         await using Composer services = new();
         var sut = services.Resolve<AchievementQuery>();
@@ -175,7 +175,7 @@ public class AchievementQueryTest
     }
 
     [Fact]
-    public async Task It_can_get_all_account_achievements()
+    public async Task Account_achievements_can_be_enumerated()
     {
         await using Composer services = new();
         var sut = services.Resolve<AchievementQuery>();
@@ -195,7 +195,7 @@ public class AchievementQueryTest
     }
 
     [Fact]
-    public async Task It_can_get_an_account_achievement_by_id()
+    public async Task An_account_achievement_can_be_found_by_id()
     {
         await using Composer services = new();
         var sut = services.Resolve<AchievementQuery>();
@@ -209,7 +209,7 @@ public class AchievementQueryTest
     }
 
     [Fact]
-    public async Task It_can_get_account_achievements_by_id()
+    public async Task Account_achievements_can_be_found_by_id()
     {
         await using Composer services = new();
         var sut = services.Resolve<AchievementQuery>();
@@ -233,7 +233,7 @@ public class AchievementQueryTest
     }
 
     [Fact]
-    public async Task It_can_get_account_achievements_by_page()
+    public async Task Account_achievements_can_be_filtered_by_page()
     {
         await using Composer services = new();
         var sut = services.Resolve<AchievementQuery>();
@@ -246,7 +246,7 @@ public class AchievementQueryTest
     }
 
     [Fact]
-    public async Task It_can_get_all_achievement_categories()
+    public async Task Achievement_categories_can_be_enumerated()
     {
         await using Composer services = new();
         var sut = services.Resolve<AchievementQuery>();
@@ -265,7 +265,7 @@ public class AchievementQueryTest
     }
 
     [Fact]
-    public async Task It_can_get_all_achievement_category_ids()
+    public async Task Achievement_categories_index_is_not_empty()
     {
         await using Composer services = new();
         var sut = services.Resolve<AchievementQuery>();
@@ -276,7 +276,7 @@ public class AchievementQueryTest
     }
 
     [Fact]
-    public async Task It_can_get_an_achievement_category_by_id()
+    public async Task An_achievement_category_can_be_found_by_id()
     {
         await using Composer services = new();
         var sut = services.Resolve<AchievementQuery>();
@@ -289,7 +289,7 @@ public class AchievementQueryTest
     }
 
     [Fact]
-    public async Task It_can_get_achievement_categories_by_id()
+    public async Task Achievement_categories_can_be_found_by_id()
     {
         await using Composer services = new();
         var sut = services.Resolve<AchievementQuery>();
@@ -312,7 +312,7 @@ public class AchievementQueryTest
     }
 
     [Fact]
-    public async Task It_can_get_achievement_categories_by_page()
+    public async Task Achievement_categories_can_be_filtered_by_page()
     {
         await using Composer services = new();
         var sut = services.Resolve<AchievementQuery>();
@@ -324,7 +324,7 @@ public class AchievementQueryTest
     }
 
     [Fact]
-    public async Task It_can_get_all_achievement_groups()
+    public async Task Achievement_groups_can_be_enumerated()
     {
         await using Composer services = new();
         var sut = services.Resolve<AchievementQuery>();
@@ -342,7 +342,7 @@ public class AchievementQueryTest
     }
 
     [Fact]
-    public async Task It_can_get_all_achievement_group_ids()
+    public async Task Achievement_groups_index_is_not_empty()
     {
         await using Composer services = new();
         var sut = services.Resolve<AchievementQuery>();
@@ -353,7 +353,7 @@ public class AchievementQueryTest
     }
 
     [Fact]
-    public async Task It_can_get_an_achievement_group_by_id()
+    public async Task An_achievement_group_can_be_found_by_id()
     {
         await using Composer services = new();
         var sut = services.Resolve<AchievementQuery>();
@@ -366,7 +366,7 @@ public class AchievementQueryTest
     }
 
     [Fact]
-    public async Task It_can_get_achievement_groups_by_id()
+    public async Task Achievement_groups_can_be_found_by_id()
     {
         await using Composer services = new();
         var sut = services.Resolve<AchievementQuery>();
@@ -389,7 +389,7 @@ public class AchievementQueryTest
     }
 
     [Fact]
-    public async Task It_can_get_achievement_groups_by_page()
+    public async Task Achievement_groups_can_be_filtered_by_page()
     {
         await using Composer services = new();
         var sut = services.Resolve<AchievementQuery>();
@@ -401,7 +401,7 @@ public class AchievementQueryTest
     }
 
     [Fact]
-    public async Task It_can_get_all_titles()
+    public async Task Titles_can_be_enumerated()
     {
         await using Composer services = new();
         var sut = services.Resolve<AchievementQuery>();
@@ -421,7 +421,7 @@ public class AchievementQueryTest
     }
 
     [Fact]
-    public async Task It_can_get_all_title_ids()
+    public async Task Titles_index_is_not_empty()
     {
         await using Composer services = new();
         var sut = services.Resolve<AchievementQuery>();
@@ -432,7 +432,7 @@ public class AchievementQueryTest
     }
 
     [Fact]
-    public async Task It_can_get_a_title_by_id()
+    public async Task A_title_can_be_found_by_id()
     {
         await using Composer services = new();
         var sut = services.Resolve<AchievementQuery>();
@@ -445,7 +445,7 @@ public class AchievementQueryTest
     }
 
     [Fact]
-    public async Task It_can_get_titles_by_id()
+    public async Task Titles_can_be_filtered_by_id()
     {
         await using Composer services = new();
         var sut = services.Resolve<AchievementQuery>();
@@ -468,7 +468,7 @@ public class AchievementQueryTest
     }
 
     [Fact]
-    public async Task It_can_get_titles_by_page()
+    public async Task Titles_can_be_filtered_by_page()
     {
         await using Composer services = new();
         var sut = services.Resolve<AchievementQuery>();

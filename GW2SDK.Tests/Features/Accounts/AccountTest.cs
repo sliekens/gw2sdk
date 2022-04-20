@@ -114,7 +114,7 @@ public class AccountTest
     }
 
     [Fact]
-    public async Task It_can_get_all_character_names()
+    public async Task Character_names_can_be_enumerated()
     {
         await using Composer services = new();
         var sut = services.Resolve<AccountQuery>();
@@ -128,7 +128,7 @@ public class AccountTest
     }
 
     [Fact]
-    public async Task It_can_get_all_characters()
+    public async Task Characters_can_be_enumerated()
     {
         await using Composer services = new();
         var sut = services.Resolve<AccountQuery>();
@@ -140,7 +140,7 @@ public class AccountTest
     }
 
     [Fact]
-    public async Task It_can_get_a_character_by_name()
+    public async Task A_character_can_be_found_by_name()
     {
         await using Composer services = new();
         var sut = services.Resolve<AccountQuery>();
