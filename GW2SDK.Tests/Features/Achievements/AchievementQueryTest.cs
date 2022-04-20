@@ -140,7 +140,7 @@ public class AchievementQueryTest
     }
 
     [Fact]
-    public async Task Achievements_can_be_found_by_id()
+    public async Task Achievements_can_be_filtered_by_id()
     {
         await using Composer services = new();
         var sut = services.Resolve<AchievementQuery>();
@@ -209,7 +209,7 @@ public class AchievementQueryTest
     }
 
     [Fact]
-    public async Task Account_achievements_can_be_found_by_id()
+    public async Task Account_achievements_can_be_filtered_by_id()
     {
         await using Composer services = new();
         var sut = services.Resolve<AchievementQuery>();
@@ -289,7 +289,7 @@ public class AchievementQueryTest
     }
 
     [Fact]
-    public async Task Achievement_categories_can_be_found_by_id()
+    public async Task Achievement_categories_can_be_filtered_by_id()
     {
         await using Composer services = new();
         var sut = services.Resolve<AchievementQuery>();
@@ -366,7 +366,7 @@ public class AchievementQueryTest
     }
 
     [Fact]
-    public async Task Achievement_groups_can_be_found_by_id()
+    public async Task Achievement_groups_can_be_filtered_by_id()
     {
         await using Composer services = new();
         var sut = services.Resolve<AchievementQuery>();
