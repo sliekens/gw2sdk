@@ -1,42 +1,25 @@
-﻿using System.Collections.Generic;
-using System.Net.Http;
+﻿using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
-using GW2SDK.Home.Json;
-using GW2SDK.Home.Models;
 using GW2SDK.Http;
 using GW2SDK.Json;
 using JetBrains.Annotations;
 
-namespace GW2SDK.Home.Http;
+namespace GW2SDK.Home.Nodes.Http;
 
 [PublicAPI]
-public sealed class CatsByIdsRequest : IHttpRequest<IReplicaSet<Cat>>
+public sealed class NodesIndexRequest : IHttpRequest<IReplicaSet<string>>
 {
     private static readonly HttpRequestMessageTemplate Template =
-        new(HttpMethod.Get, "/v2/home/cats") { AcceptEncoding = "gzip" };
+        new(HttpMethod.Get, "/v2/home/nodes") { AcceptEncoding = "gzip" };
 
-    public CatsByIdsRequest(IReadOnlyCollection<int> catIds)
-    {
-        Check.Collection(catIds, nameof(catIds));
-        CatIds = catIds;
-    }
-
-    public IReadOnlyCollection<int> CatIds { get; }
-
-    public MissingMemberBehavior MissingMemberBehavior { get; init; }
-
-    public async Task<IReplicaSet<Cat>> SendAsync(
+    public async Task<IReplicaSet<string>> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
     )
     {
-        QueryBuilder search = new();
-        search.Add("ids", CatIds);
-        var request = Template with { Arguments = search };
-
         using var response = await httpClient.SendAsync(
-                request.Compile(),
+                Template.Compile(),
                 HttpCompletionOption.ResponseHeadersRead,
                 cancellationToken
                 )
@@ -47,8 +30,8 @@ public sealed class CatsByIdsRequest : IHttpRequest<IReplicaSet<Cat>>
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value = json.RootElement.GetSet(entry => CatReader.Read(entry, MissingMemberBehavior));
-        return new ReplicaSet<Cat>(
+        var value = json.RootElement.GetSet(entry => entry.GetStringRequired());
+        return new ReplicaSet<string>(
             response.Headers.Date.GetValueOrDefault(),
             value,
             response.Headers.GetCollectionContext(),

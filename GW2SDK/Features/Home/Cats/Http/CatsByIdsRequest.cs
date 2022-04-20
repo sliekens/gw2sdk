@@ -2,31 +2,38 @@
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
+using GW2SDK.Home.Cats.Json;
+using GW2SDK.Home.Cats.Models;
 using GW2SDK.Http;
 using GW2SDK.Json;
 using JetBrains.Annotations;
 
-namespace GW2SDK.Home.Http;
+namespace GW2SDK.Home.Cats.Http;
 
 [PublicAPI]
-public sealed class OwnedCatsIndexRequest : IHttpRequest<IReplica<IReadOnlyCollection<int>>>
+public sealed class CatsByIdsRequest : IHttpRequest<IReplicaSet<Cat>>
 {
     private static readonly HttpRequestMessageTemplate Template =
-        new(HttpMethod.Get, "/v2/account/home/cats") { AcceptEncoding = "gzip" };
+        new(HttpMethod.Get, "/v2/home/cats") { AcceptEncoding = "gzip" };
 
-    public OwnedCatsIndexRequest(string? accessToken)
+    public CatsByIdsRequest(IReadOnlyCollection<int> catIds)
     {
-        AccessToken = accessToken;
+        Check.Collection(catIds, nameof(catIds));
+        CatIds = catIds;
     }
 
-    public string? AccessToken { get; }
+    public IReadOnlyCollection<int> CatIds { get; }
 
-    public async Task<IReplica<IReadOnlyCollection<int>>> SendAsync(
+    public MissingMemberBehavior MissingMemberBehavior { get; init; }
+
+    public async Task<IReplicaSet<Cat>> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
     )
     {
-        var request = Template with { BearerToken = AccessToken };
+        QueryBuilder search = new();
+        search.Add("ids", CatIds);
+        var request = Template with { Arguments = search };
 
         using var response = await httpClient.SendAsync(
                 request.Compile(),
@@ -40,10 +47,11 @@ public sealed class OwnedCatsIndexRequest : IHttpRequest<IReplica<IReadOnlyColle
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value = json.RootElement.GetSet(entry => entry.GetInt32());
-        return new Replica<IReadOnlyCollection<int>>(
+        var value = json.RootElement.GetSet(entry => CatReader.Read(entry, MissingMemberBehavior));
+        return new ReplicaSet<Cat>(
             response.Headers.Date.GetValueOrDefault(),
             value,
+            response.Headers.GetCollectionContext(),
             response.Content.Headers.Expires,
             response.Content.Headers.LastModified
             );

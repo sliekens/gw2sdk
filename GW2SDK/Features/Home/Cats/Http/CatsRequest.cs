@@ -1,43 +1,29 @@
 ﻿using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
-using GW2SDK.Home.Json;
-using GW2SDK.Home.Models;
+using GW2SDK.Home.Cats.Json;
+using GW2SDK.Home.Cats.Models;
 using GW2SDK.Http;
 using GW2SDK.Json;
 using JetBrains.Annotations;
 
-namespace GW2SDK.Home.Http;
+namespace GW2SDK.Home.Cats.Http;
 
 [PublicAPI]
-public sealed class CatsByPageRequest : IHttpRequest<IReplicaPage<Cat>>
+public sealed class CatsRequest : IHttpRequest<IReplicaSet<Cat>>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(HttpMethod.Get, "/v2/home/cats") { AcceptEncoding = "gzip" };
 
-    public CatsByPageRequest(int pageIndex)
-    {
-        PageIndex = pageIndex;
-    }
-
-    public int PageIndex { get; }
-
-    public int? PageSize { get; init; }
-
     public MissingMemberBehavior MissingMemberBehavior { get; init; }
 
-    public async Task<IReplicaPage<Cat>> SendAsync(
+    public async Task<IReplicaSet<Cat>> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
     )
     {
         QueryBuilder search = new();
-        search.Add("page", PageIndex);
-        if (PageSize.HasValue)
-        {
-            search.Add("page_size", PageSize.Value);
-        }
-
+        search.Add("ids", "all");
         var request = Template with { Arguments = search };
 
         using var response = await httpClient.SendAsync(
@@ -53,10 +39,10 @@ public sealed class CatsByPageRequest : IHttpRequest<IReplicaPage<Cat>>
             .ConfigureAwait(false);
 
         var value = json.RootElement.GetSet(entry => CatReader.Read(entry, MissingMemberBehavior));
-        return new ReplicaPage<Cat>(
+        return new ReplicaSet<Cat>(
             response.Headers.Date.GetValueOrDefault(),
             value,
-            response.Headers.GetPageContext(),
+            response.Headers.GetCollectionContext(),
             response.Content.Headers.Expires,
             response.Content.Headers.LastModified
             );

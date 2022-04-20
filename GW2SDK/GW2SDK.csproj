@@ -78,4 +78,9 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Features\Home\Nodes\Http\" />
+    <Folder Include="Features\Home\Nodes\Models\" />
+  </ItemGroup>
+
 </Project>

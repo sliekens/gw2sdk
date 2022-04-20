@@ -1,18 +1,17 @@
 ﻿using System;
 using System.Text.Json;
-using GW2SDK.Home.Models;
+using GW2SDK.Home.Nodes.Models;
 using GW2SDK.Json;
 using JetBrains.Annotations;
 
-namespace GW2SDK.Home.Json;
+namespace GW2SDK.Home.Nodes.Json;
 
 [PublicAPI]
-public static class CatReader
+public static class NodeReader
 {
-    public static Cat Read(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    public static Node Read(JsonElement json, MissingMemberBehavior missingMemberBehavior)
     {
-        RequiredMember<int> id = new("id");
-        RequiredMember<string> hint = new("hint");
+        RequiredMember<string> id = new("id");
 
         foreach (var member in json.EnumerateObject())
         {
@@ -20,20 +19,12 @@ public static class CatReader
             {
                 id = id.From(member.Value);
             }
-            else if (member.NameEquals(hint.Name))
-            {
-                hint = hint.From(member.Value);
-            }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {
                 throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
             }
         }
 
-        return new Cat
-        {
-            Id = id.GetValue(),
-            Hint = hint.GetValue()
-        };
+        return new Node { Id = id.GetValue() };
     }
 }
