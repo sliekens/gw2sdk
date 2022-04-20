@@ -8,6 +8,7 @@ using GW2SDK.Colors;
 using GW2SDK.Commerce;
 using GW2SDK.Crafting;
 using GW2SDK.Currencies;
+using GW2SDK.Home;
 using GW2SDK.Items;
 using GW2SDK.ItemStats;
 using GW2SDK.MailCarriers;
@@ -188,6 +189,11 @@ public class Composer : IServiceProvider, IAsyncDisposable
         if (serviceType == typeof(WalletQuery))
         {
             return new WalletQuery(Resolve<HttpClient>());
+        }
+
+        if (serviceType == typeof(HomeQuery))
+        {
+            return new HomeQuery(Resolve<HttpClient>());
         }
 
         return null;
