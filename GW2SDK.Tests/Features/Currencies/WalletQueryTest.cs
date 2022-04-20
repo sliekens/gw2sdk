@@ -31,7 +31,7 @@ public class WalletQueryTest
     {
         await using Composer services = new();
         var sut = services.Resolve<WalletQuery>();
-        var accessToken = services.Resolve<ApiKeyFull>();
+        var accessToken = services.Resolve<ApiKey>();
         var actual = await sut.GetWallet(accessToken.Key);
         var coins = actual.Value.Single(currency => currency.CurrencyId == 1);
         Coin coinsAmount = coins.Amount;

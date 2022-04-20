@@ -40,7 +40,7 @@ public class BankQueryTest
     {
         await using Composer services = new();
         var sut = services.Resolve<BankQuery>();
-        var accessToken = services.Resolve<ApiKeyFull>();
+        var accessToken = services.Resolve<ApiKey>();
 
         var actual = await sut.GetBank(accessToken.Key);
 

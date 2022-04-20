@@ -179,7 +179,7 @@ public class AchievementQueryTest
     {
         await using Composer services = new();
         var sut = services.Resolve<AchievementQuery>();
-        var accessToken = services.Resolve<ApiKeyFull>();
+        var accessToken = services.Resolve<ApiKey>();
 
         var actual = await sut.GetAccountAchievements(accessToken.Key);
 
@@ -199,7 +199,7 @@ public class AchievementQueryTest
     {
         await using Composer services = new();
         var sut = services.Resolve<AchievementQuery>();
-        var accessToken = services.Resolve<ApiKeyFull>();
+        var accessToken = services.Resolve<ApiKey>();
 
         const int achievementId = 1;
 
@@ -213,7 +213,7 @@ public class AchievementQueryTest
     {
         await using Composer services = new();
         var sut = services.Resolve<AchievementQuery>();
-        var accessToken = services.Resolve<ApiKeyFull>();
+        var accessToken = services.Resolve<ApiKey>();
 
         HashSet<int> ids = new()
         {
@@ -237,7 +237,7 @@ public class AchievementQueryTest
     {
         await using Composer services = new();
         var sut = services.Resolve<AchievementQuery>();
-        var accessToken = services.Resolve<ApiKeyFull>();
+        var accessToken = services.Resolve<ApiKey>();
 
         var actual = await sut.GetAccountAchievementsByPage(0, 3, accessToken.Key);
 

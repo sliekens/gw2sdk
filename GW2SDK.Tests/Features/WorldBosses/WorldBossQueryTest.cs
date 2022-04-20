@@ -13,7 +13,7 @@ public class WorldBossQueryTest
     {
         await using Composer services = new();
         var sut = services.Resolve<WorldBossQuery>();
-        var accessToken = services.Resolve<ApiKeyFull>();
+        var accessToken = services.Resolve<ApiKey>();
 
         // This is not resistant to bosses being added to the game, so not great :)
         // For now I'll just maintain this by hand...

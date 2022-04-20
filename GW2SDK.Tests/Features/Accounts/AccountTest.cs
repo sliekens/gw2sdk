@@ -97,7 +97,7 @@ public class AccountTest
     {
         await using Composer services = new();
         var sut = services.Resolve<AccountQuery>();
-        var accessToken = services.Resolve<ApiKeyFull>();
+        var accessToken = services.Resolve<ApiKey>();
 
         var actual = await sut.GetSummary(accessToken.Key);
 
@@ -118,7 +118,7 @@ public class AccountTest
     {
         await using Composer services = new();
         var sut = services.Resolve<AccountQuery>();
-        var accessToken = services.Resolve<ApiKeyFull>();
+        var accessToken = services.Resolve<ApiKey>();
 
         var actual = await sut.GetCharactersIndex(accessToken.Key);
 
@@ -132,7 +132,7 @@ public class AccountTest
     {
         await using Composer services = new();
         var sut = services.Resolve<AccountQuery>();
-        var accessToken = services.Resolve<ApiKeyFull>();
+        var accessToken = services.Resolve<ApiKey>();
 
         var actual = await sut.GetCharacters(accessToken.Key);
 
@@ -145,7 +145,7 @@ public class AccountTest
         await using Composer services = new();
         var sut = services.Resolve<AccountQuery>();
         var characterName = services.Resolve<TestCharacterName>();
-        var accessToken = services.Resolve<ApiKeyFull>();
+        var accessToken = services.Resolve<ApiKey>();
 
         var actual = await sut.GetCharacterByName(characterName.Name, accessToken.Key);
 
