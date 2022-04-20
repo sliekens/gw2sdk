@@ -27,7 +27,7 @@ public class MapQueryTest
     }
 
     [Fact]
-    public async Task It_can_get_all_continents()
+    public async Task Continents_can_be_enumerated()
     {
         await using Composer services = new();
         var sut = services.Resolve<MapQuery>();
@@ -45,7 +45,7 @@ public class MapQueryTest
     }
 
     [Fact]
-    public async Task It_can_get_all_continent_ids()
+    public async Task Continents_index_is_not_empty()
     {
         await using Composer services = new();
         var sut = services.Resolve<MapQuery>();
@@ -56,7 +56,7 @@ public class MapQueryTest
     }
 
     [Fact]
-    public async Task It_can_get_a_continent_by_id()
+    public async Task A_continent_can_be_found_by_id()
     {
         await using Composer services = new();
         var sut = services.Resolve<MapQuery>();
@@ -69,7 +69,7 @@ public class MapQueryTest
     }
 
     [Fact]
-    public async Task It_can_get_continents_by_id()
+    public async Task Continents_can_be_filtered_by_id()
     {
         await using Composer services = new();
         var sut = services.Resolve<MapQuery>();
@@ -90,7 +90,7 @@ public class MapQueryTest
     }
 
     [Fact]
-    public async Task It_can_get_continents_by_page()
+    public async Task Continents_can_be_filtered_by_page()
     {
         await using Composer services = new();
         var sut = services.Resolve<MapQuery>();
@@ -102,7 +102,7 @@ public class MapQueryTest
     }
 
     [Fact]
-    public async Task It_can_get_all_floors_by_continent_id()
+    public async Task Floors_of_a_continent_can_be_enumerated()
     {
         await using Composer services = new();
         var sut = services.Resolve<MapQuery>();
@@ -135,7 +135,7 @@ public class MapQueryTest
     }
 
     [Fact]
-    public async Task It_can_get_all_floor_ids_by_continent_id()
+    public async Task Floors_index_of_a_continent_is_not_empty()
     {
         await using Composer services = new();
         var sut = services.Resolve<MapQuery>();
@@ -148,7 +148,7 @@ public class MapQueryTest
     }
 
     [Fact]
-    public async Task It_can_get_a_floor_by_continent_id_and_floor_id()
+    public async Task A_floor_of_a_continent_can_be_found_by_id()
     {
         await using Composer services = new();
         var sut = services.Resolve<MapQuery>();
@@ -162,7 +162,7 @@ public class MapQueryTest
     }
 
     [Fact]
-    public async Task It_can_get_floors_by_continent_id_and_floor_ids()
+    public async Task Floors_of_a_continent_can_be_filtered_by_id()
     {
         await using Composer services = new();
         var sut = services.Resolve<MapQuery>();
@@ -184,7 +184,7 @@ public class MapQueryTest
     }
 
     [Fact]
-    public async Task It_can_get_floors_by_continent_id_and_page()
+    public async Task Floors_of_a_continent_can_be_filtered_by_page()
     {
         await using Composer services = new();
         var sut = services.Resolve<MapQuery>();
@@ -198,7 +198,7 @@ public class MapQueryTest
     }
 
     [Fact]
-    public async Task It_can_get_all_worlds()
+    public async Task Worlds_can_be_enumerated()
     {
         await using Composer services = new();
         var sut = services.Resolve<MapQuery>();
@@ -218,7 +218,7 @@ public class MapQueryTest
     }
 
     [Fact]
-    public async Task It_can_get_all_world_ids()
+    public async Task Worlds_index_is_not_empty()
     {
         await using Composer services = new();
         var sut = services.Resolve<MapQuery>();
@@ -229,7 +229,7 @@ public class MapQueryTest
     }
 
     [Fact]
-    public async Task It_can_get_a_world_by_id()
+    public async Task A_world_can_be_found_by_id()
     {
         await using Composer services = new();
         var sut = services.Resolve<MapQuery>();
@@ -242,7 +242,7 @@ public class MapQueryTest
     }
 
     [Fact]
-    public async Task It_can_get_worlds_by_id()
+    public async Task Worlds_can_be_filtered_by_id()
     {
         await using Composer services = new();
         var sut = services.Resolve<MapQuery>();
@@ -265,7 +265,7 @@ public class MapQueryTest
     }
 
     [Fact]
-    public async Task It_can_get_worlds_by_page()
+    public async Task Worlds_can_be_filtered_by_page()
     {
         await using Composer services = new();
         var sut = services.Resolve<MapQuery>();

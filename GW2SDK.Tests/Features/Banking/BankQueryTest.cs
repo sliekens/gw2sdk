@@ -36,7 +36,7 @@ public class BankQueryTest
     }
 
     [Fact]
-    public async Task It_can_get_the_bank()
+    public async Task Bank_contents_can_be_found()
     {
         await using Composer services = new();
         var sut = services.Resolve<BankQuery>();
@@ -64,7 +64,7 @@ public class BankQueryTest
     }
 
     [Fact]
-    public async Task It_can_get_all_material_categories()
+    public async Task Material_categories_can_be_enumerated()
     {
         await using Composer services = new();
         var sut = services.Resolve<BankQuery>();
@@ -82,7 +82,7 @@ public class BankQueryTest
     }
 
     [Fact]
-    public async Task It_can_get_all_material_category_ids()
+    public async Task Material_categories_index_is_not_empty()
     {
         await using Composer services = new();
         var sut = services.Resolve<BankQuery>();
@@ -93,7 +93,7 @@ public class BankQueryTest
     }
 
     [Fact]
-    public async Task It_can_get_a_material_category_by_id()
+    public async Task A_material_category_can_be_found_by_id()
     {
         await using Composer services = new();
         var sut = services.Resolve<BankQuery>();
@@ -106,7 +106,7 @@ public class BankQueryTest
     }
 
     [Fact]
-    public async Task It_can_get_material_categories_by_id()
+    public async Task Material_categories_can_be_filtered_by_id()
     {
         await using Composer services = new();
         var sut = services.Resolve<BankQuery>();

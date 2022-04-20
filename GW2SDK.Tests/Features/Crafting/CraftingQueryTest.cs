@@ -10,7 +10,7 @@ namespace GW2SDK.Tests.Features.Crafting;
 public class CraftingQueryTest
 {
     [Fact]
-    public async Task It_can_get_all_recipe_ids()
+    public async Task Recipes_index_is_not_empty()
     {
         await using Composer services = new();
         var sut = services.Resolve<CraftingQuery>();
@@ -21,7 +21,7 @@ public class CraftingQueryTest
     }
 
     [Fact]
-    public async Task It_can_get_a_recipe_by_id()
+    public async Task A_recipe_can_be_found_by_id()
     {
         await using Composer services = new();
         var sut = services.Resolve<CraftingQuery>();
@@ -34,7 +34,7 @@ public class CraftingQueryTest
     }
 
     [Fact]
-    public async Task It_can_get_recipes_by_id()
+    public async Task Recipes_can_be_filtered_by_id()
     {
         await using Composer services = new();
         var sut = services.Resolve<CraftingQuery>();
@@ -57,7 +57,7 @@ public class CraftingQueryTest
     }
 
     [Fact]
-    public async Task It_can_get_recipes_by_page()
+    public async Task Recipes_can_be_filtered_by_page()
     {
         await using Composer services = new();
         var sut = services.Resolve<CraftingQuery>();
@@ -69,7 +69,7 @@ public class CraftingQueryTest
     }
 
     [Fact]
-    public async Task Recipes_ids_with_iron_ore_ingredient_contains_recipe_id_for_iron_ingot()
+    public async Task Recipes_index_can_be_filtered_by_ingredient_item_id()
     {
         await using Composer services = new();
         var sut = services.Resolve<CraftingQuery>();
@@ -82,7 +82,7 @@ public class CraftingQueryTest
     }
 
     [Fact]
-    public async Task Recipes_with_iron_ore_ingredient_contains_recipe_for_iron_ingot()
+    public async Task Recipes_can_be_filtered_by_ingredient_item_id()
     {
         await using Composer services = new();
         var sut = services.Resolve<CraftingQuery>();
@@ -95,7 +95,7 @@ public class CraftingQueryTest
     }
 
     [Fact]
-    public async Task Recipes_page_with_iron_ore_ingredient_contains_recipe_for_iron_ingot()
+    public async Task Recipes_can_be_filtered_by_ingredient_item_id_and_page()
     {
         await using Composer services = new();
         var sut = services.Resolve<CraftingQuery>();
@@ -108,7 +108,7 @@ public class CraftingQueryTest
     }
 
     [Fact]
-    public async Task Recipes_ids_with_iron_ingot_output_contains_recipe_id_for_iron_ingot()
+    public async Task Recipes_index_can_be_filtered_by_output_item_id()
     {
         await using Composer services = new();
         var sut = services.Resolve<CraftingQuery>();
@@ -121,7 +121,7 @@ public class CraftingQueryTest
     }
 
     [Fact]
-    public async Task Recipes_with_iron_ingot_output_contains_recipe_for_iron_ingot()
+    public async Task Recipes_can_be_filtered_by_output_item_id()
     {
         await using Composer services = new();
         var sut = services.Resolve<CraftingQuery>();
@@ -134,7 +134,7 @@ public class CraftingQueryTest
     }
 
     [Fact]
-    public async Task Recipes_page_with_iron_ingot_output_contains_recipe_for_iron_ingot()
+    public async Task Recipes_can_be_filtered_by_output_item_id_and_page()
     {
         await using Composer services = new();
         var sut = services.Resolve<CraftingQuery>();
@@ -147,7 +147,7 @@ public class CraftingQueryTest
     }
 
     [Fact]
-    public async Task It_can_get_all_recipes_for_vision_crystal()
+    public async Task Recipes_for_vision_crystal_can_be_enumerated()
     {
         // Normally the limit for ids=all is 200 items
         //   but that doesn't seem to apply for recipes search by input/output item
@@ -174,7 +174,7 @@ public class CraftingQueryTest
         Skip =
             "This test is best used interactively, otherwise it will hit rate limits in this as well as other tests."
         )]
-    public async Task It_can_get_all_recipes()
+    public async Task Recipes_can_be_enumerated()
     {
         await using Composer services = new();
         var sut = services.Resolve<CraftingQuery>();
@@ -186,7 +186,7 @@ public class CraftingQueryTest
     }
 
     [Fact]
-    public async Task It_can_get_the_unlocked_recipes()
+    public async Task Unlocked_recipes_can_be_found()
     {
         await using Composer services = new();
         var sut = services.Resolve<CraftingQuery>();
@@ -199,7 +199,7 @@ public class CraftingQueryTest
     }
 
     [Fact]
-    public async Task It_can_get_the_learned_recipes()
+    public async Task Learned_recipes_can_be_found()
     {
         await using Composer services = new();
         var sut = services.Resolve<CraftingQuery>();
@@ -213,7 +213,7 @@ public class CraftingQueryTest
     }
 
     [Fact]
-    public async Task It_can_get_the_daily_recipes()
+    public async Task Daily_recipes_on_cooldown_can_be_found()
     {
         await using Composer services = new();
         var sut = services.Resolve<CraftingQuery>();

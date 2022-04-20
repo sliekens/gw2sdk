@@ -42,7 +42,7 @@ public class StoryQueryTest
     }
 
     [Fact]
-    public async Task It_can_get_all_backstory_questions()
+    public async Task Backstory_questions_can_be_enumerated()
     {
         await using Composer services = new();
         var sut = services.Resolve<StoryQuery>();
@@ -64,7 +64,7 @@ public class StoryQueryTest
     }
 
     [Fact]
-    public async Task It_can_get_all_backstory_answers()
+    public async Task Backstory_answers_can_be_enumerated()
     {
         await using Composer services = new();
         var sut = services.Resolve<StoryQuery>();
@@ -87,7 +87,7 @@ public class StoryQueryTest
     }
 
     [Fact]
-    public async Task It_can_get_all_backstory_question_ids()
+    public async Task Backstory_questions_index_is_not_empty()
     {
         await using Composer services = new();
         var sut = services.Resolve<StoryQuery>();
@@ -98,7 +98,7 @@ public class StoryQueryTest
     }
 
     [Fact]
-    public async Task It_can_get_all_backstory_answer_ids()
+    public async Task Backstory_answers_index_is_not_empty()
     {
         await using Composer services = new();
         var sut = services.Resolve<StoryQuery>();
@@ -109,7 +109,7 @@ public class StoryQueryTest
     }
 
     [Fact]
-    public async Task It_can_get_a_backstory_question_by_id()
+    public async Task A_backstory_question_can_be_found_by_id()
     {
         await using Composer services = new();
         var sut = services.Resolve<StoryQuery>();
@@ -122,7 +122,7 @@ public class StoryQueryTest
     }
 
     [Fact]
-    public async Task It_can_get_a_backstory_answer_by_id()
+    public async Task A_backstory_answer_can_be_found_by_id()
     {
         await using Composer services = new();
         var sut = services.Resolve<StoryQuery>();
@@ -135,7 +135,7 @@ public class StoryQueryTest
     }
 
     [Fact]
-    public async Task It_can_get_backstory_questions_by_id()
+    public async Task Backstory_questions_can_be_filtered_by_id()
     {
         await using Composer services = new();
         var sut = services.Resolve<StoryQuery>();
@@ -158,7 +158,7 @@ public class StoryQueryTest
     }
 
     [Fact]
-    public async Task It_can_get_backstory_answers_by_id()
+    public async Task Backstory_answers_can_be_filtered_by_id()
     {
         await using Composer services = new();
         var sut = services.Resolve<StoryQuery>();
@@ -181,7 +181,7 @@ public class StoryQueryTest
     }
 
     [Fact]
-    public async Task It_can_get_backstory_questions_by_page()
+    public async Task Backstory_questions_can_be_filtered_by_page()
     {
         await using Composer services = new();
         var sut = services.Resolve<StoryQuery>();
@@ -193,7 +193,7 @@ public class StoryQueryTest
     }
 
     [Fact]
-    public async Task It_can_get_backstory_answers_by_page()
+    public async Task Backstory_answers_can_be_filtered_by_page()
     {
         await using Composer services = new();
         var sut = services.Resolve<StoryQuery>();

@@ -10,7 +10,7 @@ namespace GW2SDK.Tests.Features.Commerce;
 public class CommerceQueryTest
 {
     [Fact]
-    public async Task It_can_calculate_gold_for_gems()
+    public async Task Gold_for_gems_exchange_rate_is_available()
     {
         await using Composer services = new();
         var sut = services.Resolve<CommerceQuery>();
@@ -24,7 +24,7 @@ public class CommerceQueryTest
     }
 
     [Fact]
-    public async Task It_can_calculate_gems_for_gold()
+    public async Task Gems_for_gold_exchange_rate_is_available()
     {
         await using Composer services = new();
         var sut = services.Resolve<CommerceQuery>();
@@ -38,7 +38,7 @@ public class CommerceQueryTest
     }
 
     [Fact]
-    public async Task It_can_get_all_item_price_ids()
+    public async Task Item_prices_index_is_not_empty()
     {
         await using Composer services = new();
         var sut = services.Resolve<CommerceQuery>();
@@ -49,7 +49,7 @@ public class CommerceQueryTest
     }
 
     [Fact]
-    public async Task It_can_get_an_item_price_by_id()
+    public async Task An_item_price_can_be_found_by_id()
     {
         await using Composer services = new();
         var sut = services.Resolve<CommerceQuery>();
@@ -68,7 +68,7 @@ public class CommerceQueryTest
     }
 
     [Fact]
-    public async Task It_can_get_item_prices_by_id()
+    public async Task Item_prices_can_be_filtered_by_id()
     {
         await using Composer services = new();
         var sut = services.Resolve<CommerceQuery>();
@@ -94,7 +94,7 @@ public class CommerceQueryTest
         Skip =
             "This test is best used interactively, otherwise it will hit rate limits in this as well as other tests."
         )]
-    public async Task It_can_get_all_item_prices()
+    public async Task Item_prices_can_be_enumerated()
     {
         await using Composer services = new();
         var sut = services.Resolve<CommerceQuery>();
@@ -132,7 +132,7 @@ public class CommerceQueryTest
     }
 
     [Fact]
-    public async Task It_can_get_all_order_book_ids()
+    public async Task Order_books_index_is_not_empty()
     {
         await using Composer services = new();
         var sut = services.Resolve<CommerceQuery>();
@@ -143,7 +143,7 @@ public class CommerceQueryTest
     }
 
     [Fact]
-    public async Task It_can_get_an_order_book_by_id()
+    public async Task An_order_book_can_be_found_by_id()
     {
         await using Composer services = new();
         var sut = services.Resolve<CommerceQuery>();
@@ -188,7 +188,7 @@ public class CommerceQueryTest
     }
 
     [Fact]
-    public async Task It_can_get_order_books_by_id()
+    public async Task Order_books_can_be_filtered_by_id()
     {
         await using Composer services = new();
         var sut = services.Resolve<CommerceQuery>();
@@ -214,7 +214,7 @@ public class CommerceQueryTest
         Skip =
             "This test is best used interactively, otherwise it will hit rate limits in this as well as other tests."
         )]
-    public async Task It_can_get_all_order_books()
+    public async Task Order_books_can_be_enumerated()
     {
         await using Composer services = new();
         var sut = services.Resolve<CommerceQuery>();
@@ -274,7 +274,7 @@ public class CommerceQueryTest
     }
 
     [Fact]
-    public async Task It_can_get_your_delivery_box()
+    public async Task The_delivery_box_can_be_found()
     {
         await using Composer service = new();
         var accessToken = service.Resolve<ApiKeyFull>();
@@ -287,7 +287,7 @@ public class CommerceQueryTest
     }
 
     [Fact]
-    public async Task It_can_get_your_current_bids()
+    public async Task Current_bids_can_be_filtered_by_page()
     {
         await using Composer service = new();
         var accessToken = service.Resolve<ApiKeyFull>();
@@ -299,7 +299,7 @@ public class CommerceQueryTest
     }
 
     [Fact]
-    public async Task It_can_get_your_current_asks()
+    public async Task Current_asks_can_be_filtered_by_page()
     {
         await using Composer service = new();
         var accessToken = service.Resolve<ApiKeyFull>();
@@ -311,7 +311,7 @@ public class CommerceQueryTest
     }
 
     [Fact]
-    public async Task It_can_get_your_purchases()
+    public async Task Purchase_history_can_be_filtered_by_page()
     {
         await using Composer service = new();
         var accessToken = service.Resolve<ApiKeyFull>();
@@ -323,7 +323,7 @@ public class CommerceQueryTest
     }
 
     [Fact]
-    public async Task It_can_get_your_sales()
+    public async Task Sales_history_can_be_filtered_by_page()
     {
         await using Composer service = new();
         var accessToken = service.Resolve<ApiKeyFull>();

@@ -27,21 +27,19 @@ public class WalletQueryTest
     }
 
     [Fact]
-    public async Task It_can_get_your_wallet()
+    public async Task Wallet_can_be_found()
     {
         await using Composer services = new();
         var sut = services.Resolve<WalletQuery>();
         var accessToken = services.Resolve<ApiKeyFull>();
-
         var actual = await sut.GetWallet(accessToken.Key);
-
         var coins = actual.Value.Single(currency => currency.CurrencyId == 1);
         Coin coinsAmount = coins.Amount;
         Assert.True(coinsAmount > 0);
     }
 
     [Fact]
-    public async Task It_can_get_all_currencies()
+    public async Task Currencies_can_be_enumerated()
     {
         await using Composer services = new();
         var sut = services.Resolve<WalletQuery>();
@@ -63,7 +61,7 @@ public class WalletQueryTest
     }
 
     [Fact]
-    public async Task It_can_get_all_currency_ids()
+    public async Task Currencies_index_is_not_empty()
     {
         await using Composer services = new();
         var sut = services.Resolve<WalletQuery>();
@@ -74,7 +72,7 @@ public class WalletQueryTest
     }
 
     [Fact]
-    public async Task It_can_get_a_currency_by_id()
+    public async Task A_currency_can_be_found_by_id()
     {
         await using Composer services = new();
         var sut = services.Resolve<WalletQuery>();
@@ -87,7 +85,7 @@ public class WalletQueryTest
     }
 
     [Fact]
-    public async Task It_can_get_currencies_by_id()
+    public async Task Currencies_can_be_filtered_by_id()
     {
         await using Composer services = new();
         var sut = services.Resolve<WalletQuery>();
@@ -110,7 +108,7 @@ public class WalletQueryTest
     }
 
     [Fact]
-    public async Task It_can_get_currencies_by_page()
+    public async Task Currencies_can_be_filtered_by_page()
     {
         await using Composer services = new();
         var sut = services.Resolve<WalletQuery>();

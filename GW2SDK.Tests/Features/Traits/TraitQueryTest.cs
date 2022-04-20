@@ -16,7 +16,7 @@ public class TraitQueryTest
     }
 
     [Fact]
-    public async Task It_can_get_all_traits()
+    public async Task Traits_can_be_enumerated()
     {
         await using Composer services = new();
         var sut = services.Resolve<TraitQuery>();
@@ -34,7 +34,7 @@ public class TraitQueryTest
     }
 
     [Fact]
-    public async Task It_can_get_all_trait_ids()
+    public async Task Traits_index_is_not_empty()
     {
         await using Composer services = new();
         var sut = services.Resolve<TraitQuery>();
@@ -45,7 +45,7 @@ public class TraitQueryTest
     }
 
     [Fact]
-    public async Task It_can_get_a_trait_by_id()
+    public async Task A_trait_can_be_found_by_id()
     {
         await using Composer services = new();
         var sut = services.Resolve<TraitQuery>();
@@ -58,7 +58,7 @@ public class TraitQueryTest
     }
 
     [Fact]
-    public async Task It_can_get_traits_by_id()
+    public async Task Traits_can_be_filtered_by_id()
     {
         await using Composer services = new();
         var sut = services.Resolve<TraitQuery>();
@@ -81,7 +81,7 @@ public class TraitQueryTest
     }
 
     [Fact]
-    public async Task It_can_get_traits_by_page()
+    public async Task Traits_can_be_filtered_by_page()
     {
         await using Composer services = new();
         var sut = services.Resolve<TraitQuery>();

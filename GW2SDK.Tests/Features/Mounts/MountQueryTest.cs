@@ -10,7 +10,7 @@ namespace GW2SDK.Tests.Features.Mounts;
 public class MountQueryTest
 {
     [Fact]
-    public async Task It_can_get_all_mounts()
+    public async Task Mounts_can_be_enumerated()
     {
         await using Composer services = new();
         var sut = services.Resolve<MountQuery>();
@@ -31,7 +31,7 @@ public class MountQueryTest
     }
 
     [Fact]
-    public async Task It_can_get_all_mount_names()
+    public async Task Mount_names_can_be_enumerated()
     {
         await using Composer services = new();
         var sut = services.Resolve<MountQuery>();
@@ -45,7 +45,7 @@ public class MountQueryTest
     }
 
     [Fact]
-    public async Task It_can_get_a_mount_by_name()
+    public async Task A_mount_can_be_found_by_name()
     {
         await using Composer services = new();
         var sut = services.Resolve<MountQuery>();
@@ -58,7 +58,7 @@ public class MountQueryTest
     }
 
     [Fact]
-    public async Task It_can_get_mounts_by_name()
+    public async Task Mounts_can_be_filtered_by_name()
     {
         await using Composer services = new();
         var sut = services.Resolve<MountQuery>();
@@ -81,7 +81,7 @@ public class MountQueryTest
     }
 
     [Fact]
-    public async Task It_can_get_mounts_by_page()
+    public async Task Mounts_can_be_filtered_by_page()
     {
         await using Composer services = new();
         var sut = services.Resolve<MountQuery>();
@@ -93,7 +93,7 @@ public class MountQueryTest
     }
 
     [Fact]
-    public async Task It_can_get_all_mount_skins()
+    public async Task Mount_skins_can_be_enumerated()
     {
         await using Composer services = new();
         var sut = services.Resolve<MountQuery>();
@@ -104,7 +104,7 @@ public class MountQueryTest
     }
 
     [Fact]
-    public async Task It_can_get_all_mount_skin_ids()
+    public async Task Mount_skins_index_is_not_empty()
     {
         await using Composer services = new();
         var sut = services.Resolve<MountQuery>();
@@ -115,7 +115,7 @@ public class MountQueryTest
     }
 
     [Fact]
-    public async Task It_can_get_a_mount_skin_by_id()
+    public async Task A_mount_skin_can_be_found_by_id()
     {
         await using Composer services = new();
         var sut = services.Resolve<MountQuery>();
@@ -128,7 +128,7 @@ public class MountQueryTest
     }
 
     [Fact]
-    public async Task It_can_get_mount_skins_by_id()
+    public async Task Mount_skins_can_be_filtered_by_id()
     {
         await using Composer services = new();
         var sut = services.Resolve<MountQuery>();
@@ -151,7 +151,7 @@ public class MountQueryTest
     }
 
     [Fact]
-    public async Task It_can_get_mount_skins_by_page()
+    public async Task Mount_skins_can_be_filtered_by_page()
     {
         await using Composer services = new();
         var sut = services.Resolve<MountQuery>();

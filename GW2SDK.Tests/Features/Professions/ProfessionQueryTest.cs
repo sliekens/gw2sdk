@@ -9,7 +9,7 @@ namespace GW2SDK.Tests.Features.Professions;
 public class ProfessionQueryTest
 {
     [Fact]
-    public async Task It_can_get_all_professions()
+    public async Task Professions_can_be_enumerated()
     {
         await using Composer services = new();
         var sut = services.Resolve<ProfessionQuery>();
@@ -34,7 +34,7 @@ public class ProfessionQueryTest
     }
 
     [Fact]
-    public async Task It_can_get_all_profession_names()
+    public async Task Profession_names_can_be_enumerated()
     {
         await using Composer services = new();
         var sut = services.Resolve<ProfessionQuery>();
@@ -52,7 +52,7 @@ public class ProfessionQueryTest
     }
 
     [Fact]
-    public async Task It_can_get_a_profession_by_name()
+    public async Task A_profession_can_be_found_by_name()
     {
         await using Composer services = new();
         var sut = services.Resolve<ProfessionQuery>();
@@ -65,7 +65,7 @@ public class ProfessionQueryTest
     }
 
     [Fact]
-    public async Task It_can_get_professions_by_name()
+    public async Task Professions_can_be_filtered_by_name()
     {
         await using Composer services = new();
         var sut = services.Resolve<ProfessionQuery>();
@@ -88,7 +88,7 @@ public class ProfessionQueryTest
     }
 
     [Fact]
-    public async Task It_can_get_professions_by_page()
+    public async Task Professions_can_be_filtered_by_page()
     {
         await using Composer services = new();
         var sut = services.Resolve<ProfessionQuery>();

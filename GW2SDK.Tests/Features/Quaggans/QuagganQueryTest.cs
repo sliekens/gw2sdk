@@ -27,7 +27,7 @@ public class QuagganQueryTest
     }
 
     [Fact]
-    public async Task It_can_get_all_quaggans()
+    public async Task Quaggans_can_be_enumerated()
     {
         await using Composer services = new();
         var sut = services.Resolve<QuagganQuery>();
@@ -45,7 +45,7 @@ public class QuagganQueryTest
     }
 
     [Fact]
-    public async Task It_can_get_all_quaggan_ids()
+    public async Task Quaggans_index_is_not_empty()
     {
         await using Composer services = new();
         var sut = services.Resolve<QuagganQuery>();
@@ -56,7 +56,7 @@ public class QuagganQueryTest
     }
 
     [Fact]
-    public async Task It_can_get_a_quaggan_by_id()
+    public async Task A_quaggan_can_be_found_by_id()
     {
         await using Composer services = new();
         var sut = services.Resolve<QuagganQuery>();
@@ -70,7 +70,7 @@ public class QuagganQueryTest
     }
 
     [Fact]
-    public async Task It_can_get_quaggans_by_id()
+    public async Task Quaggans_can_be_filtered_by_id()
     {
         await using Composer services = new();
         var sut = services.Resolve<QuagganQuery>();
@@ -94,7 +94,7 @@ public class QuagganQueryTest
     }
 
     [Fact]
-    public async Task It_can_get_quaggans_by_page()
+    public async Task Quaggans_can_be_filtered_by_page()
     {
         await using Composer services = new();
         var sut = services.Resolve<QuagganQuery>();

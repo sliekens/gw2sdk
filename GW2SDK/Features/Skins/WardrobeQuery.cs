@@ -11,6 +11,8 @@ using JetBrains.Annotations;
 
 namespace GW2SDK.Skins;
 
+// TODO: add IAsyncEnumerable helper
+
 [PublicAPI]
 public sealed class WardrobeQuery
 {
