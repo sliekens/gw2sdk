@@ -18,8 +18,8 @@ public class ConfigurationManager
     public string ApiKeyBasic =>
         Configuration["ApiKeyBasic"] ?? throw new InvalidOperationException("Missing ApiKeyBasic.");
 
-    public string ApiKeyFull =>
-        Configuration["ApiKeyFull"] ?? throw new InvalidOperationException("Missing ApiKeyFull.");
+    public string ApiKey =>
+        Configuration["ApiKey"] ?? throw new InvalidOperationException("Missing ApiKey.");
 
     public string CharacterName =>
         Configuration["CharacterName"]
@@ -48,9 +48,9 @@ public sealed class ApiKeyBasic
     public string Key { get; }
 }
 
-public sealed class ApiKeyFull
+public sealed class ApiKey
 {
-    public ApiKeyFull(string key)
+    public ApiKey(string key)
     {
         Key = key;
     }

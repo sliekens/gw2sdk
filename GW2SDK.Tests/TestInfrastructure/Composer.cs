@@ -60,9 +60,9 @@ public class Composer : IServiceProvider, IAsyncDisposable
             return new ApiKeyBasic(configuration.ApiKeyBasic);
         }
 
-        if (serviceType == typeof(ApiKeyFull))
+        if (serviceType == typeof(ApiKey))
         {
-            return new ApiKeyFull(configuration.ApiKeyFull);
+            return new ApiKey(configuration.ApiKey);
         }
 
         if (serviceType == typeof(HttpClient))

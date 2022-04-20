@@ -277,7 +277,7 @@ public class CommerceQueryTest
     public async Task The_delivery_box_can_be_found()
     {
         await using Composer service = new();
-        var accessToken = service.Resolve<ApiKeyFull>();
+        var accessToken = service.Resolve<ApiKey>();
         var sut = service.Resolve<CommerceQuery>();
 
         var deliveryBox = await sut.GetDeliveryBox(accessToken.Key);
@@ -290,7 +290,7 @@ public class CommerceQueryTest
     public async Task Current_bids_can_be_filtered_by_page()
     {
         await using Composer service = new();
-        var accessToken = service.Resolve<ApiKeyFull>();
+        var accessToken = service.Resolve<ApiKey>();
         var sut = service.Resolve<CommerceQuery>();
 
         var bids = await sut.GetBuyOrders(0, 200, accessToken.Key);
@@ -302,7 +302,7 @@ public class CommerceQueryTest
     public async Task Current_asks_can_be_filtered_by_page()
     {
         await using Composer service = new();
-        var accessToken = service.Resolve<ApiKeyFull>();
+        var accessToken = service.Resolve<ApiKey>();
         var sut = service.Resolve<CommerceQuery>();
 
         var bids = await sut.GetSellOrders(0, 200, accessToken.Key);
@@ -314,7 +314,7 @@ public class CommerceQueryTest
     public async Task Purchase_history_can_be_filtered_by_page()
     {
         await using Composer service = new();
-        var accessToken = service.Resolve<ApiKeyFull>();
+        var accessToken = service.Resolve<ApiKey>();
         var sut = service.Resolve<CommerceQuery>();
 
         var bids = await sut.GetPurchases(0, 200, accessToken.Key);
@@ -326,7 +326,7 @@ public class CommerceQueryTest
     public async Task Sales_history_can_be_filtered_by_page()
     {
         await using Composer service = new();
-        var accessToken = service.Resolve<ApiKeyFull>();
+        var accessToken = service.Resolve<ApiKey>();
         var sut = service.Resolve<CommerceQuery>();
 
         var bids = await sut.GetSales(0, 200, accessToken.Key);

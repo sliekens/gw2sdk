@@ -190,7 +190,7 @@ public class CraftingQueryTest
     {
         await using Composer services = new();
         var sut = services.Resolve<CraftingQuery>();
-        var accessToken = services.Resolve<ApiKeyFull>();
+        var accessToken = services.Resolve<ApiKey>();
 
         var actual = await sut.GetUnlockedRecipes(accessToken.Key);
 
@@ -204,7 +204,7 @@ public class CraftingQueryTest
         await using Composer services = new();
         var sut = services.Resolve<CraftingQuery>();
         var characterName = services.Resolve<TestCharacterName>();
-        var accessToken = services.Resolve<ApiKeyFull>();
+        var accessToken = services.Resolve<ApiKey>();
 
         var actual = await sut.GetLearnedRecipes(characterName.Name, accessToken.Key);
 
@@ -217,7 +217,7 @@ public class CraftingQueryTest
     {
         await using Composer services = new();
         var sut = services.Resolve<CraftingQuery>();
-        var accessToken = services.Resolve<ApiKeyFull>();
+        var accessToken = services.Resolve<ApiKey>();
 
         // This is not resistant to recipes being added to the game, so not great :)
         // For now I'll just maintain this by hand...

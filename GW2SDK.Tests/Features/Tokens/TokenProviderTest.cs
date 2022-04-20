@@ -16,7 +16,7 @@ public class TokenProviderTest
     {
         await using Composer services = new();
         var sut = services.Resolve<TokenProvider>();
-        var accessToken = services.Resolve<ApiKeyFull>();
+        var accessToken = services.Resolve<ApiKey>();
 
         var actual = await sut.GetTokenInfo(accessToken.Key);
 
@@ -40,7 +40,7 @@ public class TokenProviderTest
     {
         await using Composer services = new();
         var sut = services.Resolve<TokenProvider>();
-        var accessToken = services.Resolve<ApiKeyFull>();
+        var accessToken = services.Resolve<ApiKey>();
 
         #region Create a new subtoken
 

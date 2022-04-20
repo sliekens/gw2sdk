@@ -97,7 +97,7 @@ public class DyeQueryTest
     {
         await using Composer services = new();
         var sut = services.Resolve<DyeQuery>();
-        var accessToken = services.Resolve<ApiKeyFull>();
+        var accessToken = services.Resolve<ApiKey>();
 
         var actual = await sut.GetUnlockedDyes(accessToken.Key);
 
