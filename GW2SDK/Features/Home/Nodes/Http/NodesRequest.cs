@@ -1,36 +1,29 @@
 ﻿using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
-using GW2SDK.Home.Json;
-using GW2SDK.Home.Models;
+using GW2SDK.Home.Nodes.Json;
+using GW2SDK.Home.Nodes.Models;
 using GW2SDK.Http;
 using GW2SDK.Json;
 using JetBrains.Annotations;
 
-namespace GW2SDK.Home.Http;
+namespace GW2SDK.Home.Nodes.Http;
 
 [PublicAPI]
-public sealed class CatByIdRequest : IHttpRequest<IReplica<Cat>>
+public sealed class NodesRequest : IHttpRequest<IReplicaSet<Node>>
 {
     private static readonly HttpRequestMessageTemplate Template =
-        new(HttpMethod.Get, "/v2/home/cats") { AcceptEncoding = "gzip" };
-
-    public CatByIdRequest(int catId)
-    {
-        CatId = catId;
-    }
-
-    public int CatId { get; }
+        new(HttpMethod.Get, "/v2/home/nodes") { AcceptEncoding = "gzip" };
 
     public MissingMemberBehavior MissingMemberBehavior { get; init; }
 
-    public async Task<IReplica<Cat>> SendAsync(
+    public async Task<IReplicaSet<Node>> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
     )
     {
         QueryBuilder search = new();
-        search.Add("id", CatId);
+        search.Add("ids", "all");
         var request = Template with { Arguments = search };
 
         using var response = await httpClient.SendAsync(
@@ -45,10 +38,11 @@ public sealed class CatByIdRequest : IHttpRequest<IReplica<Cat>>
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value = CatReader.Read(json.RootElement, MissingMemberBehavior);
-        return new Replica<Cat>(
+        var value = json.RootElement.GetSet(entry => NodeReader.Read(entry, MissingMemberBehavior));
+        return new ReplicaSet<Node>(
             response.Headers.Date.GetValueOrDefault(),
             value,
+            response.Headers.GetCollectionContext(),
             response.Content.Headers.Expires,
             response.Content.Headers.LastModified
             );

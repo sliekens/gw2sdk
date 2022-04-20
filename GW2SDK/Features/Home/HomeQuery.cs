@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
-using GW2SDK.Home.Http;
-using GW2SDK.Home.Models;
+using GW2SDK.Home.Cats.Http;
+using GW2SDK.Home.Cats.Models;
+using GW2SDK.Home.Nodes.Http;
+using GW2SDK.Home.Nodes.Models;
 using GW2SDK.Http;
 using GW2SDK.Json;
 using JetBrains.Annotations;
@@ -77,6 +79,30 @@ public sealed class HomeQuery
     )
     {
         OwnedCatsIndexRequest request = new(accessToken);
+        return request.SendAsync(http, cancellationToken);
+    }
+
+    public Task<IReplicaSet<Node>> GetNodes(
+        MissingMemberBehavior missingMemberBehavior = default,
+        CancellationToken cancellationToken = default
+    )
+    {
+        NodesRequest request = new() { MissingMemberBehavior = missingMemberBehavior };
+        return request.SendAsync(http, cancellationToken);
+    }
+
+    public Task<IReplicaSet<string>> GetNodesIndex(CancellationToken cancellationToken = default)
+    {
+        NodesIndexRequest request = new();
+        return request.SendAsync(http, cancellationToken);
+    }
+
+    public Task<IReplica<IReadOnlyCollection<string>>> GetOwnedNodesIndex(
+        string? accessToken,
+        CancellationToken cancellationToken = default
+    )
+    {
+        OwnedNodesRequest request = new(accessToken);
         return request.SendAsync(http, cancellationToken);
     }
 }
