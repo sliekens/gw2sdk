@@ -79,6 +79,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Features\Dungeons\Models\" />
+    <Folder Include="Features\Dungeons\Json\" />
+    <Folder Include="Features\Dungeons\Http\" />
     <Folder Include="Features\Home\Nodes\Http\" />
     <Folder Include="Features\Home\Nodes\Models\" />
   </ItemGroup>

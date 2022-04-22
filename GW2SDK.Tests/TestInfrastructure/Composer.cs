@@ -8,6 +8,7 @@ using GW2SDK.Colors;
 using GW2SDK.Commerce;
 using GW2SDK.Crafting;
 using GW2SDK.Currencies;
+using GW2SDK.Dungeons;
 using GW2SDK.Home;
 using GW2SDK.Items;
 using GW2SDK.ItemStats;
@@ -194,6 +195,11 @@ public class Composer : IServiceProvider, IAsyncDisposable
         if (serviceType == typeof(HomeQuery))
         {
             return new HomeQuery(Resolve<HttpClient>());
+        }
+
+        if (serviceType == typeof(DungeonQuery))
+        {
+            return new DungeonQuery(Resolve<HttpClient>());
         }
 
         return null;
