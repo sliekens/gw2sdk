@@ -24,8 +24,6 @@ public sealed class DungeonsByPageRequest : IHttpRequest<IReplicaPage<Dungeon>>
 
     public int? PageSize { get; init; }
 
-    public Language? Language { get; init; }
-
     public MissingMemberBehavior MissingMemberBehavior { get; init; }
 
     public async Task<IReplicaPage<Dungeon>> SendAsync(
@@ -40,11 +38,7 @@ public sealed class DungeonsByPageRequest : IHttpRequest<IReplicaPage<Dungeon>>
             search.Add("page_size", PageSize.Value);
         }
 
-        var request = Template with
-        {
-            Arguments = search,
-            AcceptLanguage = Language?.Alpha2Code
-        };
+        var request = Template with { Arguments = search };
 
         using var response = await httpClient.SendAsync(
                 request.Compile(),

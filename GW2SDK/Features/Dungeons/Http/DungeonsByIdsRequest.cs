@@ -24,8 +24,6 @@ public sealed class DungeonsByIdsRequest : IHttpRequest<IReplicaSet<Dungeon>>
 
     public IReadOnlyCollection<string> DungeonIds { get; }
 
-    public Language? Language { get; init; }
-
     public MissingMemberBehavior MissingMemberBehavior { get; init; }
 
     public async Task<IReplicaSet<Dungeon>> SendAsync(
@@ -35,11 +33,7 @@ public sealed class DungeonsByIdsRequest : IHttpRequest<IReplicaSet<Dungeon>>
     {
         QueryBuilder search = new();
         search.Add("ids", DungeonIds);
-        var request = Template with
-        {
-            Arguments = search,
-            AcceptLanguage = Language?.Alpha2Code
-        };
+        var request = Template with { Arguments = search };
 
         using var response = await httpClient.SendAsync(
                 request.Compile(),
