@@ -56,7 +56,7 @@ public sealed class DungeonQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<IReplicaPage<Dungeon>> GetItemsByPage(
+    public Task<IReplicaPage<Dungeon>> GetDungeonsByPage(
         int pageIndex,
         int? pageSize = default,
         Language? language = default,
