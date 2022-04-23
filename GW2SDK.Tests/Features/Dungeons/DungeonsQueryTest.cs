@@ -58,12 +58,12 @@ public class DungeonQueryTest
     }
 
     [Fact]
-    public async Task Items_can_be_filtered_by_page()
+    public async Task Dungeons_can_be_filtered_by_page()
     {
         await using Composer services = new();
         var sut = services.Resolve<DungeonQuery>();
 
-        var actual = await sut.GetItemsByPage(0, 3);
+        var actual = await sut.GetDungeonsByPage(0, 3);
 
         Assert.Equal(3, actual.Count);
         Assert.Equal(3, actual.Context.PageSize);
