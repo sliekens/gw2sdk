@@ -89,4 +89,13 @@ public sealed class MailCarrierQuery
         };
         return request.SendAsync(http, cancellationToken);
     }
+
+    public Task<IReplica<IReadOnlyCollection<int>>> GetOwnedMailCarriers(
+        string? accessToken,
+        CancellationToken cancellationToken = default
+    )
+    {
+        OwnedMailCarriersRequest request = new() { AccessToken = accessToken };
+        return request.SendAsync(http, cancellationToken);
+    }
 }

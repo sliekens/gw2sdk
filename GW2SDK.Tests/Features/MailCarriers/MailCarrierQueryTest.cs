@@ -115,4 +115,21 @@ public class MailCarrierQueryTest
         Assert.Equal(3, actual.Count);
         Assert.Equal(3, actual.Context.PageSize);
     }
+
+    [Fact]
+    public async Task Owned_mail_carriers_can_be_found()
+    {
+        await using Composer services = new();
+        var sut = services.Resolve<MailCarrierQuery>();
+        var accessToken = services.Resolve<ApiKey>();
+
+        var actual = await sut.GetOwnedMailCarriers(accessToken.Key);
+
+        Assert.NotEmpty(actual.Value);
+
+        var carriers = await sut.GetMailCarriersByIds(actual.Value);
+
+        Assert.Equal(actual.Value.Count, carriers.Count);
+        Assert.All(carriers, carrier => Assert.Contains(carrier.Id, actual.Value));
+    }
 }
