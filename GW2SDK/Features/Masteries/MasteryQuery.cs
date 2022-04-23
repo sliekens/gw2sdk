@@ -70,4 +70,17 @@ public sealed class MasteryQuery
         };
         return request.SendAsync(http, cancellationToken);
     }
+
+    public Task<IReplica<IReadOnlyCollection<MasteryProgress>>> GetMasteryProgress(
+        string? accessToken,
+        CancellationToken cancellationToken = default
+    )
+    {
+        MasteryProgressRequest request = new()
+        {
+            AccessToken = accessToken,
+            MissingMemberBehavior = MissingMemberBehavior.Error
+        };
+        return request.SendAsync(http, cancellationToken);
+    }
 }

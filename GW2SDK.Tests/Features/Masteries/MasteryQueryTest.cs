@@ -129,4 +129,24 @@ public class MasteryQueryTest
             third => Assert.Equal(3, third.Id)
             );
     }
+
+    [Fact]
+    public async Task Mastery_progress_can_be_found()
+    {
+        await using Composer services = new();
+        var sut = services.Resolve<MasteryQuery>();
+        var accessToken = services.Resolve<ApiKey>();
+
+        var actual = await sut.GetMasteryProgress(accessToken.Key);
+
+        Assert.NotEmpty(actual.Value);
+        Assert.All(
+            actual.Value,
+            progress =>
+            {
+                Assert.True(progress.Id > 0);
+                Assert.True(progress.Level > 0);
+            }
+            );
+    }
 }
