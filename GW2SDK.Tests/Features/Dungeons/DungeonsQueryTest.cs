@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using GW2SDK.Dungeons;
 using GW2SDK.Tests.TestInfrastructure;
@@ -92,6 +93,29 @@ public class DungeonQueryTest
                         Assert.True(Enum.IsDefined(typeof(DungeonKind), path.Kind));
                     }
                     );
+            }
+            );
+    }
+
+    [Fact]
+    public async Task Completed_dungeon_paths_can_be_found()
+    {
+        await using Composer services = new();
+        var sut = services.Resolve<DungeonQuery>();
+        var accessToken = services.Resolve<ApiKey>();
+
+        var actual = await sut.GetCompletedPaths(accessToken.Key);
+
+        Assert.NotNull(actual.Value);
+
+        var dungeons = await sut.GetDungeons();
+        var paths = dungeons.SelectMany(dungeon => dungeon.Paths.Select(path => path.Id)).ToList();
+
+        Assert.All(
+            actual.Value,
+            completed =>
+            {
+                Assert.Contains(completed, paths);
             }
             );
     }

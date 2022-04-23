@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
+using GW2SDK.Annotations;
 using GW2SDK.Dungeons.Http;
 using GW2SDK.Dungeons.Models;
 using GW2SDK.Http;
@@ -74,6 +75,19 @@ public sealed class DungeonQuery
     )
     {
         DungeonsRequest request = new() { MissingMemberBehavior = missingMemberBehavior };
+        return request.SendAsync(http, cancellationToken);
+    }
+
+    [Scope(Permission.Progression)]
+    public Task<IReplica<IReadOnlyCollection<string>>> GetCompletedPaths(
+        string? accessToken,
+        CancellationToken cancellationToken = default
+    )
+    {
+        CompletedPathsRequest request = new()
+        {
+            AccessToken = accessToken
+        };
         return request.SendAsync(http, cancellationToken);
     }
 }
