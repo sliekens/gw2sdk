@@ -34,7 +34,7 @@ internal class Program
         //"/v2/account/luck",
         "/v2/account/mailcarriers",
         //"/v2/account/mapchests",
-        //"/v2/account/masteries",
+        "/v2/account/masteries",
         //"/v2/account/mastery/points",
         //"/v2/account/materials",
         //"/v2/account/minis",
