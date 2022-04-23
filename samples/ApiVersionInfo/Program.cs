@@ -32,7 +32,7 @@ internal class Program
         //"/v2/account/inventory",
         //"/v2/account/legendaryarmory",
         //"/v2/account/luck",
-        //"/v2/account/mailcarriers",
+        "/v2/account/mailcarriers",
         //"/v2/account/mapchests",
         //"/v2/account/masteries",
         //"/v2/account/mastery/points",
