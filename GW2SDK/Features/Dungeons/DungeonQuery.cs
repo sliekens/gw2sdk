@@ -29,13 +29,11 @@ public sealed class DungeonQuery
 
     public Task<IReplica<Dungeon>> GetDungeonById(
         string dungeonId,
-        Language? language = default,
         CancellationToken cancellationToken = default
     )
     {
         DungeonByIdRequest request = new(dungeonId)
         {
-            Language = language,
             MissingMemberBehavior = MissingMemberBehavior.Error
         };
         return request.SendAsync(http, cancellationToken);
@@ -43,14 +41,12 @@ public sealed class DungeonQuery
 
     public Task<IReplicaSet<Dungeon>> GetDungeonsByIds(
         IReadOnlyCollection<string> dungeonIds,
-        Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
         DungeonsByIdsRequest request = new(dungeonIds)
         {
-            Language = language,
             MissingMemberBehavior = missingMemberBehavior
         };
         return request.SendAsync(http, cancellationToken);
@@ -59,7 +55,6 @@ public sealed class DungeonQuery
     public Task<IReplicaPage<Dungeon>> GetDungeonsByPage(
         int pageIndex,
         int? pageSize = default,
-        Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
@@ -67,7 +62,6 @@ public sealed class DungeonQuery
         DungeonsByPageRequest request = new(pageIndex)
         {
             PageSize = pageSize,
-            Language = language,
             MissingMemberBehavior = missingMemberBehavior
         };
 
@@ -75,17 +69,11 @@ public sealed class DungeonQuery
     }
 
     public Task<IReplicaSet<Dungeon>> GetDungeons(
-        Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        DungeonsRequest request = new()
-        {
-            Language = language,
-            MissingMemberBehavior = missingMemberBehavior
-        };
+        DungeonsRequest request = new() { MissingMemberBehavior = missingMemberBehavior };
         return request.SendAsync(http, cancellationToken);
     }
-
 }
