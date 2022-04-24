@@ -19,7 +19,7 @@ internal class Program
         "/v2/account",
         "/v2/account/achievements",
         "/v2/account/bank",
-        //"/v2/account/buildstorage",
+        "/v2/account/buildstorage",
         "/v2/account/dailycrafting",
         "/v2/account/dungeons",
         "/v2/account/dyes",
@@ -268,7 +268,7 @@ internal class Program
             changes.AddRow(formatted.EscapeMarkup(), schema.Description.EscapeMarkup());
         }
 
-        AnsiConsole.WriteLine("Blue routes are supported by GW2SDK. Dim routes are disabled.");
+        AnsiConsole.WriteLine("Highlighted routes are supported by GW2SDK. Dim routes are disabled.");
         AnsiConsole.Write(routes);
         AnsiConsole.Write(new Rule("Notable changes").LeftAligned());
         AnsiConsole.Write(changes);
