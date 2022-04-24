@@ -1,7 +1,6 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
 using GW2SDK.Tests.TestInfrastructure;
-using GW2SDK.WorldBosses;
 using Xunit;
 
 namespace GW2SDK.Tests.Features.WorldBosses;
@@ -42,7 +41,7 @@ public class WorldBossQueryTest
             );
 
         // Again this next method is not deterministic...
-        var actual = await sut.GetWorldBossesOnCooldown(accessToken.Key);
+        var actual = await sut.GetDefeatedWorldBosses(accessToken.Key);
 
         // The best we can do is verify that there are no unexpected bosses
         // i.e. all bosses must be present in the reference data

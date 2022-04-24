@@ -1,5 +1,5 @@
 ﻿using System;
-using GW2SDK.Mounts.Http;
+using GW2SDK.Mounts;
 using Xunit;
 
 namespace GW2SDK.Tests.Features.Mounts;

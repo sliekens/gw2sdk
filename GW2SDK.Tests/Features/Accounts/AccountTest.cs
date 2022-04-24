@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
 using GW2SDK.Accounts;
-using GW2SDK.Accounts.Models;
 using GW2SDK.Tests.TestInfrastructure;
 using Xunit;
 

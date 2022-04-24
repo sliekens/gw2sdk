@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using GW2SDK.Achievements;
-using GW2SDK.Achievements.Models;
+using GW2SDK.Accounts.Achievements;
+using GW2SDK.Achievements.Categories;
+using GW2SDK.Achievements.Dailies;
+using GW2SDK.Achievements.Groups;
+using GW2SDK.Achievements.Titles;
 using GW2SDK.Tests.TestInfrastructure;
 using Xunit;
 using static GW2SDK.ProductName;

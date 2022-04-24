@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using GW2SDK.Colors;
-using GW2SDK.Colors.Models;
 using GW2SDK.Tests.TestInfrastructure;
 using Xunit;
 
@@ -99,7 +98,7 @@ public class DyeQueryTest
         var sut = services.Resolve<DyeQuery>();
         var accessToken = services.Resolve<ApiKey>();
 
-        var actual = await sut.GetUnlockedDyes(accessToken.Key);
+        var actual = await sut.GetUnlockedDyesIndex(accessToken.Key);
 
         Assert.NotEmpty(actual.Value);
         Assert.All(actual.Value, id => Assert.NotEqual(0, id));

@@ -1,6 +1,5 @@
 ﻿using GW2SDK;
 using GW2SDK.Http;
-using GW2SDK.Quaggans;
 
 var builder = WebApplication.CreateBuilder(args);
 

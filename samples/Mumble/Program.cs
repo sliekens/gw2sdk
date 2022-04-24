@@ -2,9 +2,9 @@
 using System.Globalization;
 using System.Text;
 using System.Threading;
+using GW2SDK;
 using GW2SDK.Json;
 using GW2SDK.Mumble;
-using GW2SDK.Mumble.Models;
 
 namespace Mumble;
 

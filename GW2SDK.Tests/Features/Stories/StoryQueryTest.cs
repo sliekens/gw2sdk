@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using GW2SDK.Stories;
-using GW2SDK.Stories.Models;
 using GW2SDK.Tests.TestInfrastructure;
 using Xunit;
 

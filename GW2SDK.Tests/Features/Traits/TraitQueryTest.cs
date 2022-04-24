@@ -2,7 +2,6 @@
 using System.Threading.Tasks;
 using GW2SDK.Tests.TestInfrastructure;
 using GW2SDK.Traits;
-using GW2SDK.Traits.Models;
 using Xunit;
 
 namespace GW2SDK.Tests.Features.Traits;

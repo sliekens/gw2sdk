@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using GW2SDK.BuildStorage;
+using GW2SDK.Accounts.BuildStorage;
 using GW2SDK.Tests.TestInfrastructure;
 using Xunit;
 

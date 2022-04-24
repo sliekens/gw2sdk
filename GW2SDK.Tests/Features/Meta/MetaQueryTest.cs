@@ -3,8 +3,6 @@ using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 using GW2SDK.Meta;
-using GW2SDK.Meta.Http;
-using GW2SDK.Meta.Models;
 using GW2SDK.Tests.TestInfrastructure;
 using Xunit;
 

@@ -1,32 +1,7 @@
 ﻿using System;
 using System.Net.Http;
 using System.Threading.Tasks;
-using GW2SDK.Accounts;
-using GW2SDK.Achievements;
-using GW2SDK.Banking;
-using GW2SDK.BuildStorage;
-using GW2SDK.Colors;
-using GW2SDK.Commerce;
-using GW2SDK.Crafting;
-using GW2SDK.Currencies;
-using GW2SDK.Dungeons;
-using GW2SDK.Home;
-using GW2SDK.Items;
-using GW2SDK.ItemStats;
-using GW2SDK.MailCarriers;
-using GW2SDK.Maps;
-using GW2SDK.Masteries;
-using GW2SDK.Meta;
-using GW2SDK.Mounts;
-using GW2SDK.Professions;
-using GW2SDK.Quaggans;
-using GW2SDK.Skills;
-using GW2SDK.Skins;
-using GW2SDK.Specializations;
-using GW2SDK.Stories;
-using GW2SDK.Tokens;
-using GW2SDK.Traits;
-using GW2SDK.WorldBosses;
+using GW2SDK.Accounts.BuildStorage;
 
 namespace GW2SDK.Tests.TestInfrastructure;
 

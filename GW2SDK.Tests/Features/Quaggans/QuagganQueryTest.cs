@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Threading.Tasks;
 using GW2SDK.Quaggans;
-using GW2SDK.Quaggans.Models;
 using GW2SDK.Tests.TestInfrastructure;
 using Xunit;
 
