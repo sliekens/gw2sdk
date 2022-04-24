@@ -1,4 +1,5 @@
 ﻿using GW2SDK.Annotations;
+using GW2SDK.BuildStorage.Models;
 using JetBrains.Annotations;
 
 namespace GW2SDK.Accounts.Models;
