@@ -8,7 +8,10 @@ namespace GW2SDK.Tokens;
 [PublicAPI]
 public static class TokenInfoReader
 {
-    public static TokenInfo Read(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    public static TokenInfo GetTokenInfo(
+        this JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         switch (json.GetProperty("type").GetString())
         {

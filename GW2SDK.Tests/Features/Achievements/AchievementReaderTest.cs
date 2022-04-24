@@ -72,10 +72,7 @@ public class AchievementReaderTest : IClassFixture<AchievementFixture>
             {
                 using var document = JsonDocument.Parse(json);
 
-                var actual = AchievementReader.Read(
-                    document.RootElement,
-                    MissingMemberBehavior.Error
-                    );
+                var actual = document.RootElement.GetAchievement(MissingMemberBehavior.Error);
 
                 AchievementFact.Name_is_not_empty(actual);
                 AchievementFact.Description_is_not_null(actual);

@@ -8,7 +8,10 @@ namespace GW2SDK.Quaggans;
 [PublicAPI]
 public static class QuagganReader
 {
-    public static Quaggan Read(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    public static Quaggan GetQuaggan(
+        this JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         RequiredMember<string> id = new("id");
         RequiredMember<string> url = new("url");

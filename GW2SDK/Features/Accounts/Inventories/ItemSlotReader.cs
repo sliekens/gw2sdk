@@ -9,7 +9,10 @@ namespace GW2SDK.Accounts.Inventories;
 [PublicAPI]
 public static class ItemSlotReader
 {
-    public static ItemSlot? Read(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    public static ItemSlot? GetItemSlot(
+        this JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         // Empty slots are represented as null -- but maybe we should use a Null Object pattern here
         if (json.ValueKind == JsonValueKind.Null)
@@ -95,7 +98,7 @@ public static class ItemSlotReader
                     ),
             Binding = binding.GetValue(missingMemberBehavior),
             BoundTo = boundTo.GetValueOrEmpty(),
-            Stats = stats.Select(value => SelectedStatReader.Read(value, missingMemberBehavior))
+            Stats = stats.Select(value => value.GetSelectedStat(missingMemberBehavior))
         };
     }
 }

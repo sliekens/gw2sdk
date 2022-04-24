@@ -8,7 +8,10 @@ namespace GW2SDK.Commerce.Delivery;
 [PublicAPI]
 public static class DeliveryBoxReader
 {
-    public static DeliveryBox Read(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    public static DeliveryBox GetDeliveryBox(
+        this JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         RequiredMember<Coin> coins = new("coins");
         RequiredMember<DeliveredItem> items = new("items");

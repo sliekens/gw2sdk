@@ -53,7 +53,7 @@ public sealed class BackstoryQuestionsByIdsRequest : IHttpRequest<IReplicaSet<Ba
             .ConfigureAwait(false);
 
         var value = json.RootElement.GetSet(
-            entry => BackstoryQuestionReader.Read(entry, MissingMemberBehavior)
+            entry => entry.GetBackstoryQuestion(MissingMemberBehavior)
             );
         return new ReplicaSet<BackstoryQuestion>(
             response.Headers.Date.GetValueOrDefault(),

@@ -52,7 +52,7 @@ public sealed class MaterialCategoryByIdRequest : IHttpRequest<IReplica<Material
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value = MaterialCategoryReader.Read(json.RootElement, MissingMemberBehavior);
+        var value = json.RootElement.GetMaterialCategory(MissingMemberBehavior);
         return new Replica<MaterialCategory>(
             response.Headers.Date.GetValueOrDefault(),
             value,

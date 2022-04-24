@@ -46,7 +46,7 @@ public sealed class RecipeByIdRequest : IHttpRequest<IReplica<Recipe>>
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value = RecipeReader.Read(json.RootElement, MissingMemberBehavior);
+        var value = json.RootElement.GetRecipe(MissingMemberBehavior);
         return new Replica<Recipe>(
             response.Headers.Date.GetValueOrDefault(),
             value,

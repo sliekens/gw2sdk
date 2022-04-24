@@ -8,7 +8,10 @@ namespace GW2SDK.Mumble;
 [PublicAPI]
 public static class IdentityReader
 {
-    public static Identity Read(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    public static Identity GetIdentity(
+        this JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         RequiredMember<string> name = new("name");
         RequiredMember<ProfessionName> profession = new("profession");

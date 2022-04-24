@@ -52,7 +52,7 @@ public sealed class SkinByIdRequest : IHttpRequest<IReplica<Skin>>
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value = SkinReader.Read(json.RootElement, MissingMemberBehavior);
+        var value = json.RootElement.GetSkin(MissingMemberBehavior);
         return new Replica<Skin>(
             response.Headers.Date.GetValueOrDefault(),
             value,

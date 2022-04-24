@@ -8,7 +8,10 @@ namespace GW2SDK.Masteries;
 [PublicAPI]
 public static class MasteryReader
 {
-    public static Mastery Read(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    public static Mastery GetMastery(
+        this JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         RequiredMember<int> id = new("id");
         RequiredMember<string> name = new("name");

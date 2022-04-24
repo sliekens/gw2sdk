@@ -10,7 +10,10 @@ namespace GW2SDK.Maps;
 [PublicAPI]
 public static class RegionReader
 {
-    public static WorldRegion Read(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    public static WorldRegion GetWorldRegion(
+        this JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         RequiredMember<string> name = new("name");
         RequiredMember<PointF> labelCoordinates = new("label_coord");
@@ -94,7 +97,7 @@ public static class RegionReader
         {
             if (int.TryParse(member.Name, out var id))
             {
-                maps[id] = MapReader.Read(member.Value, missingMemberBehavior);
+                maps[id] = member.Value.GetMap(missingMemberBehavior);
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {

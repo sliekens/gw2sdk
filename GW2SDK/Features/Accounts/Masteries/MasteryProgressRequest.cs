@@ -38,7 +38,7 @@ public sealed class
             .ConfigureAwait(false);
 
         var value = json.RootElement.GetSet(
-            entry => MasteryProgressReader.Read(entry, MissingMemberBehavior)
+            entry => entry.GetMasteryProgress(MissingMemberBehavior)
             );
         return new Replica<IReadOnlyCollection<MasteryProgress>>(
             response.Headers.Date.GetValueOrDefault(),

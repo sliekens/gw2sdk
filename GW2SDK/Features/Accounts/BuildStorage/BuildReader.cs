@@ -8,7 +8,7 @@ namespace GW2SDK.Accounts.BuildStorage;
 [PublicAPI]
 public static class BuildReader
 {
-    public static Build Read(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    public static Build GetBuild(this JsonElement json, MissingMemberBehavior missingMemberBehavior)
     {
         RequiredMember<string> name = new("name");
         RequiredMember<ProfessionName> profession = new("profession");

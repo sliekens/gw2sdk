@@ -36,7 +36,7 @@ public sealed class ProfessionNamesRequest : IHttpRequest<IReplicaSet<Profession
             .ConfigureAwait(false);
 
         var value = json.RootElement.GetSet(
-            entry => ProfessionNameReader.Read(entry, MissingMemberBehavior)
+            entry => entry.GetProfessionName(MissingMemberBehavior)
             );
         return new ReplicaSet<ProfessionName>(
             response.Headers.Date.GetValueOrDefault(),

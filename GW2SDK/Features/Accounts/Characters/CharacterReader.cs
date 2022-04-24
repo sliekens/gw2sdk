@@ -11,7 +11,10 @@ namespace GW2SDK.Accounts.Characters;
 [PublicAPI]
 public static class CharacterReader
 {
-    public static Character Read(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    public static Character GetCharacter(
+        this JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         RequiredMember<string> name = new("name");
         RequiredMember<Race> race = new("race");
@@ -172,13 +175,13 @@ public static class CharacterReader
             EquipmentTabsUnlocked = equipmentTabsUnlocked.GetValue(),
             ActiveEquipmentTab = activeEquipmentTab.GetValue(),
             Equipment =
-                equipment.SelectMany(value => EquipmentItemReader.Read(value, missingMemberBehavior)),
+                equipment.SelectMany(value => value.GetEquipmentItem(missingMemberBehavior)),
             EquipmentTabs =
                 equipmentTabs.SelectMany(value => ReadEquipmentTab(value, missingMemberBehavior)),
             Recipes = recipes.SelectMany(value => value.GetInt32()),
             Training =
                 training.SelectMany(value => ReadTrainingObjective(value, missingMemberBehavior)),
-            Bags = bags.SelectMany(value => BagReader.Read(value, missingMemberBehavior))
+            Bags = bags.SelectMany(value => value.GetBag(missingMemberBehavior))
         };
     }
 
@@ -265,7 +268,7 @@ public static class CharacterReader
             Tab = tab.GetValue(),
             Name = name.GetValue(),
             Equipment =
-                equipment.SelectMany(value => EquipmentItemReader.Read(value, missingMemberBehavior)),
+                equipment.SelectMany(value => value.GetEquipmentItem(missingMemberBehavior)),
             PvpEquipment =
                 pvpEquipment.Select(value => ReadPvpEquipment(value, missingMemberBehavior))
         };
@@ -344,7 +347,7 @@ public static class CharacterReader
         return new BuildTab
         {
             Tab = tab.GetValue(),
-            Build = build.Select(value => BuildReader.Read(value, missingMemberBehavior))
+            Build = build.Select(value => value.GetBuild(missingMemberBehavior))
         };
     }
 

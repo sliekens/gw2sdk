@@ -9,7 +9,7 @@ namespace GW2SDK.Colors;
 [PublicAPI]
 public static class DyeReader
 {
-    public static Dye Read(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    public static Dye GetDye(this JsonElement json, MissingMemberBehavior missingMemberBehavior)
     {
         RequiredMember<int> id = new("id");
         RequiredMember<string> name = new("name");

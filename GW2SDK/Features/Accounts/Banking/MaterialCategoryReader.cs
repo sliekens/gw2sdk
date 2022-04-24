@@ -8,8 +8,8 @@ namespace GW2SDK.Accounts.Banking;
 [PublicAPI]
 public static class MaterialCategoryReader
 {
-    public static MaterialCategory Read(
-        JsonElement json,
+    public static MaterialCategory GetMaterialCategory(
+        this JsonElement json,
         MissingMemberBehavior missingMemberBehavior
     )
     {

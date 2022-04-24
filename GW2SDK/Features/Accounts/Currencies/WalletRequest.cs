@@ -42,9 +42,7 @@ public sealed class WalletRequest : IHttpRequest<IReplica<IReadOnlyCollection<Cu
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value = json.RootElement.GetSet(
-            item => CurrencyAmountReader.Read(item, MissingMemberBehavior)
-            );
+        var value = json.RootElement.GetSet(item => item.GetCurrencyAmount(MissingMemberBehavior));
         return new Replica<IReadOnlyCollection<CurrencyAmount>>(
             response.Headers.Date.GetValueOrDefault(),
             value,

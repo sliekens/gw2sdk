@@ -50,7 +50,7 @@ public sealed class AccountAchievementByIdRequest : IHttpRequest<IReplica<Accoun
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value = AccountAchievementReader.Read(json.RootElement, MissingMemberBehavior);
+        var value = json.RootElement.GetAccountAchievement(MissingMemberBehavior);
         return new Replica<AccountAchievement>(
             response.Headers.Date.GetValueOrDefault(),
             value,

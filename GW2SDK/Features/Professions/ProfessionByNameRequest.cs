@@ -53,7 +53,7 @@ public sealed class ProfessionByNameRequest : IHttpRequest<IReplica<Profession>>
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value = ProfessionReader.Read(json.RootElement, MissingMemberBehavior);
+        var value = json.RootElement.GetProfession(MissingMemberBehavior);
         return new Replica<Profession>(
             response.Headers.Date.GetValueOrDefault(),
             value,

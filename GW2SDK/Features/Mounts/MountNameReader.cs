@@ -8,7 +8,10 @@ namespace GW2SDK.Mounts;
 [PublicAPI]
 public static class MountNameReader
 {
-    public static MountName Read(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    public static MountName GetMountName(
+        this JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         var text = json.GetStringRequired();
         return text switch

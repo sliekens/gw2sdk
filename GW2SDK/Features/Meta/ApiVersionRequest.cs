@@ -49,7 +49,7 @@ public sealed class ApiVersionRequest : IHttpRequest<IReplica<ApiVersion>>
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value = ApiVersionReader.Read(json.RootElement, MissingMemberBehavior);
+        var value = json.RootElement.GetApiVersion(MissingMemberBehavior);
         return new Replica<ApiVersion>(
             response.Headers.Date.GetValueOrDefault(),
             value,

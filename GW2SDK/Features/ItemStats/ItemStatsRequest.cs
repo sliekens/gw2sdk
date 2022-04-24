@@ -45,8 +45,7 @@ public sealed class ItemStatsRequest : IHttpRequest<IReplicaSet<ItemStat>>
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value =
-            json.RootElement.GetSet(entry => ItemStatReader.Read(entry, MissingMemberBehavior));
+        var value = json.RootElement.GetSet(entry => entry.GetItemStat(MissingMemberBehavior));
         return new ReplicaSet<ItemStat>(
             response.Headers.Date.GetValueOrDefault(),
             value,

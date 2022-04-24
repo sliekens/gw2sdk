@@ -9,7 +9,7 @@ namespace GW2SDK.Accounts.Characters.Inventories;
 [PublicAPI]
 public static class BagReader
 {
-    public static Bag? Read(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    public static Bag? GetBag(this JsonElement json, MissingMemberBehavior missingMemberBehavior)
     {
         // Empty slots are represented as null -- but maybe we should use a Null Object pattern here
         if (json.ValueKind == JsonValueKind.Null)
@@ -44,7 +44,7 @@ public static class BagReader
         {
             Id = id.GetValue(),
             Size = size.GetValue(),
-            Inventory = inventory.Select(value => InventoryReader.Read(value, missingMemberBehavior))
+            Inventory = inventory.Select(value => value.GetInventory(missingMemberBehavior))
         };
     }
 }

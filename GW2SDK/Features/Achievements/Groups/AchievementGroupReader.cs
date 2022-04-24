@@ -8,8 +8,8 @@ namespace GW2SDK.Achievements.Groups;
 [PublicAPI]
 public static class AchievementGroupReader
 {
-    public static AchievementGroup Read(
-        JsonElement json,
+    public static AchievementGroup GetAchievementGroup(
+        this JsonElement json,
         MissingMemberBehavior missingMemberBehavior
     )
     {

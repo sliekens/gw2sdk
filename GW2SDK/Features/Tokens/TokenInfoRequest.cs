@@ -49,7 +49,7 @@ public sealed class TokenInfoRequest : IHttpRequest<IReplica<TokenInfo>>
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value = TokenInfoReader.Read(json.RootElement, MissingMemberBehavior);
+        var value = json.RootElement.GetTokenInfo(MissingMemberBehavior);
         return new Replica<TokenInfo>(
             response.Headers.Date.GetValueOrDefault(),
             value,

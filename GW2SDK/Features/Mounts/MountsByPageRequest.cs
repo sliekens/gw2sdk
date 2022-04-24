@@ -59,8 +59,7 @@ public sealed class MountsByPageRequest : IHttpRequest<IReplicaPage<Mount>>
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value =
-            json.RootElement.GetSet(entry => MountReader.Read(entry, MissingMemberBehavior));
+        var value = json.RootElement.GetSet(entry => entry.GetMount(MissingMemberBehavior));
         return new ReplicaPage<Mount>(
             response.Headers.Date.GetValueOrDefault(),
             value,

@@ -50,8 +50,9 @@ public sealed class DungeonsByPageRequest : IHttpRequest<IReplicaPage<Dungeon>>
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value =
-            json.RootElement.GetSet(entry => DungeonReader.Read(entry, MissingMemberBehavior));
+        var value = json.RootElement.GetSet(
+            entry => DungeonReader.GetDungeon(entry, MissingMemberBehavior)
+            );
         return new ReplicaPage<Dungeon>(
             response.Headers.Date.GetValueOrDefault(),
             value,

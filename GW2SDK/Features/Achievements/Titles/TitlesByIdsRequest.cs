@@ -53,8 +53,7 @@ public sealed class TitlesByIdsRequest : IHttpRequest<IReplicaSet<Title>>
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value =
-            json.RootElement.GetSet(entry => TitleReader.Read(entry, MissingMemberBehavior));
+        var value = json.RootElement.GetSet(entry => entry.GetTitle(MissingMemberBehavior));
         return new ReplicaSet<Title>(
             response.Headers.Date.GetValueOrDefault(),
             value,

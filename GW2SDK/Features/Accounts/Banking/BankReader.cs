@@ -10,12 +10,12 @@ namespace GW2SDK.Accounts.Banking;
 [PublicAPI]
 public static class BankReader
 {
-    public static Bank Read(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    public static Bank GetBank(this JsonElement json, MissingMemberBehavior missingMemberBehavior)
     {
         List<ItemSlot?> slots = new(json.GetArrayLength());
 
         slots.AddRange(
-            json.EnumerateArray().Select(entry => ItemSlotReader.Read(entry, missingMemberBehavior))
+            json.EnumerateArray().Select(entry => entry.GetItemSlot(missingMemberBehavior))
             );
 
         return new Bank(slots);

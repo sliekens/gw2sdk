@@ -47,7 +47,7 @@ public sealed class DailyAchievementsRequest : IHttpRequest<IReplica<DailyAchiev
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value = DailyAchievementReader.Read(json.RootElement, MissingMemberBehavior);
+        var value = json.RootElement.GetDailyAchievementGroup(MissingMemberBehavior);
         return new Replica<DailyAchievementGroup>(
             response.Headers.Date.GetValueOrDefault(),
             value,

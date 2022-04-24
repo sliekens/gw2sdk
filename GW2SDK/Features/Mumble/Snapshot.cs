@@ -86,7 +86,7 @@ public struct Snapshot
         try
         {
             using var json = JsonDocument.Parse(Identity);
-            identity = IdentityReader.Read(json.RootElement, missingMemberBehavior);
+            identity = json.RootElement.GetIdentity(missingMemberBehavior);
             return true;
         }
         catch (JsonException)

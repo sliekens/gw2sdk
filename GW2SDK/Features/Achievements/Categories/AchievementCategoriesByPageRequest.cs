@@ -59,7 +59,7 @@ public sealed class
             .ConfigureAwait(false);
 
         var value = json.RootElement.GetSet(
-            entry => AchievementCategoryReader.Read(entry, MissingMemberBehavior)
+            entry => entry.GetAchievementCategory(MissingMemberBehavior)
             );
         return new ReplicaPage<AchievementCategory>(
             response.Headers.Date.GetValueOrDefault(),

@@ -59,8 +59,7 @@ public sealed class WorldsByPageRequest : IHttpRequest<IReplicaPage<World>>
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value =
-            json.RootElement.GetSet(entry => WorldReader.Read(entry, MissingMemberBehavior));
+        var value = json.RootElement.GetSet(entry => entry.GetWorld(MissingMemberBehavior));
         return new ReplicaPage<World>(
             response.Headers.Date.GetValueOrDefault(),
             value,

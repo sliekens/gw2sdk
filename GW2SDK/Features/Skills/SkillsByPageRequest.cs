@@ -59,8 +59,7 @@ public sealed class SkillsByPageRequest : IHttpRequest<IReplicaPage<Skill>>
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value =
-            json.RootElement.GetSet(entry => SkillReader.Read(entry, MissingMemberBehavior));
+        var value = json.RootElement.GetSet(entry => entry.GetSkill(MissingMemberBehavior));
         return new ReplicaPage<Skill>(
             response.Headers.Date.GetValueOrDefault(),
             value,

@@ -47,7 +47,7 @@ public class TestHttpClientFactory : IHttpClientFactory, IAsyncDisposable
 #if NET
                     return new SocketsHttpHandler();
 #else
-                return new HttpClientHandler();
+                    return new HttpClientHandler();
 #endif
                 }
                 )

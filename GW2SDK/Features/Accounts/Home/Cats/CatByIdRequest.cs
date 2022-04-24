@@ -43,7 +43,7 @@ public sealed class CatByIdRequest : IHttpRequest<IReplica<Cat>>
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value = CatReader.Read(json.RootElement, MissingMemberBehavior);
+        var value = json.RootElement.GetCat(MissingMemberBehavior);
         return new Replica<Cat>(
             response.Headers.Date.GetValueOrDefault(),
             value,

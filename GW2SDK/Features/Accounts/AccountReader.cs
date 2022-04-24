@@ -8,7 +8,10 @@ namespace GW2SDK.Accounts;
 [PublicAPI]
 public static class AccountReader
 {
-    public static AccountSummary Read(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    public static AccountSummary GetAccountSummary(
+        this JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         RequiredMember<string> id = new("id");
         RequiredMember<string> name = new("name");

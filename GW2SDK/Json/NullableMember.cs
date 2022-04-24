@@ -75,5 +75,6 @@ internal readonly ref struct NullableMember<T> where T : struct
         }
     }
 
-    internal NullableMember<T> From(JsonElement propertyValue) => new(Name, new JsonMember(propertyValue));
+    internal NullableMember<T> From(JsonElement propertyValue) =>
+        new(Name, new JsonMember(propertyValue));
 }

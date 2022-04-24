@@ -9,7 +9,10 @@ namespace GW2SDK.Professions;
 [PublicAPI]
 public static class ProfessionReader
 {
-    public static Profession Read(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    public static Profession GetProfession(
+        this JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         RequiredMember<ProfessionName> id = new("id");
         RequiredMember<string> name = new("name");

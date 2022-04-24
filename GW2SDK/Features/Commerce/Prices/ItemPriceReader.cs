@@ -8,7 +8,10 @@ namespace GW2SDK.Commerce.Prices;
 [PublicAPI]
 public static class ItemPriceReader
 {
-    public static ItemPrice Read(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    public static ItemPrice GetItemPrice(
+        this JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         RequiredMember<int> id = new("id");
         RequiredMember<bool> whitelisted = new("whitelisted");

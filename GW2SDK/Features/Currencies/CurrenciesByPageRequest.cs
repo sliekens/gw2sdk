@@ -59,8 +59,7 @@ public sealed class CurrenciesByPageRequest : IHttpRequest<IReplicaPage<Currency
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value =
-            json.RootElement.GetSet(entry => CurrencyReader.Read(entry, MissingMemberBehavior));
+        var value = json.RootElement.GetSet(entry => entry.GetCurrency(MissingMemberBehavior));
         return new ReplicaPage<Currency>(
             response.Headers.Date.GetValueOrDefault(),
             value,

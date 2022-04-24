@@ -73,7 +73,7 @@ public sealed class CreateSubtokenRequest : IHttpRequest<IReplica<CreatedSubtoke
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value = SubtokenReader.Read(json.RootElement, MissingMemberBehavior);
+        var value = json.RootElement.GetCreatedSubtoken(MissingMemberBehavior);
         return new Replica<CreatedSubtoken>(
             response.Headers.Date.GetValueOrDefault(),
             value,

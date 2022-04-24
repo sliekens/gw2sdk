@@ -59,7 +59,7 @@ public sealed class SkinsByPageRequest : IHttpRequest<IReplicaPage<Skin>>
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value = json.RootElement.GetSet(entry => SkinReader.Read(entry, MissingMemberBehavior));
+        var value = json.RootElement.GetSet(entry => entry.GetSkin(MissingMemberBehavior));
         return new ReplicaPage<Skin>(
             response.Headers.Date.GetValueOrDefault(),
             value,

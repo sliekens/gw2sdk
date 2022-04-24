@@ -10,7 +10,7 @@ namespace GW2SDK.Maps;
 [PublicAPI]
 public static class FloorReader
 {
-    public static Floor Read(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    public static Floor GetFloor(this JsonElement json, MissingMemberBehavior missingMemberBehavior)
     {
         RequiredMember<SizeF> textureDimensions = new("texture_dims");
         OptionalMember<ContinentRectangle> clampedView = new("clamped_view");
@@ -86,7 +86,7 @@ public static class FloorReader
         {
             if (int.TryParse(member.Name, out var id))
             {
-                regions[id] = RegionReader.Read(member.Value, missingMemberBehavior);
+                regions[id] = member.Value.GetWorldRegion(missingMemberBehavior);
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {

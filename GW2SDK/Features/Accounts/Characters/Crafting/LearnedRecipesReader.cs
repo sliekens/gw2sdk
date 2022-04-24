@@ -9,7 +9,10 @@ namespace GW2SDK.Accounts.Characters.Crafting;
 [PublicAPI]
 public static class LearnedRecipesReader
 {
-    public static HashSet<int> Read(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    public static HashSet<int> GetLearnedRecipes(
+        this JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         RequiredMember<int> recipes = new("recipes");
 

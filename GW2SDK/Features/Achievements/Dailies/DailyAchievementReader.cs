@@ -8,8 +8,8 @@ namespace GW2SDK.Achievements.Dailies;
 [PublicAPI]
 public static class DailyAchievementReader
 {
-    public static DailyAchievementGroup Read(
-        JsonElement json,
+    public static DailyAchievementGroup GetDailyAchievementGroup(
+        this JsonElement json,
         MissingMemberBehavior missingMemberBehavior
     )
     {

@@ -55,7 +55,7 @@ public sealed class MaterialCategoriesByIdsRequest : IHttpRequest<IReplicaSet<Ma
             .ConfigureAwait(false);
 
         var value = json.RootElement.GetSet(
-            entry => MaterialCategoryReader.Read(entry, MissingMemberBehavior)
+            entry => entry.GetMaterialCategory(MissingMemberBehavior)
             );
         return new ReplicaSet<MaterialCategory>(
             response.Headers.Date.GetValueOrDefault(),

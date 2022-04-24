@@ -8,7 +8,7 @@ namespace GW2SDK.Commerce.Transactions;
 [PublicAPI]
 public static class OrderReader
 {
-    public static Order Read(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    public static Order GetOrder(this JsonElement json, MissingMemberBehavior missingMemberBehavior)
     {
         RequiredMember<long> id = new("id");
         RequiredMember<int> itemId = new("item_id");

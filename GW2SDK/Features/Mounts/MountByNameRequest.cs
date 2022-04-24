@@ -53,7 +53,7 @@ public sealed class MountByNameRequest : IHttpRequest<IReplica<Mount>>
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value = MountReader.Read(json.RootElement, MissingMemberBehavior);
+        var value = json.RootElement.GetMount(MissingMemberBehavior);
         return new Replica<Mount>(
             response.Headers.Date.GetValueOrDefault(),
             value,

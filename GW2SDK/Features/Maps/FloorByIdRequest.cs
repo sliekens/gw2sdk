@@ -58,7 +58,7 @@ public sealed class FloorByIdRequest : IHttpRequest<IReplica<Floor>>
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value = FloorReader.Read(json.RootElement, MissingMemberBehavior);
+        var value = json.RootElement.GetFloor(MissingMemberBehavior);
         return new Replica<Floor>(
             response.Headers.Date.GetValueOrDefault(),
             value,

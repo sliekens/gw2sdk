@@ -37,10 +37,7 @@ public class ItemPriceReaderTest : IClassFixture<ItemPriceFixture>
             {
                 using var document = JsonDocument.Parse(json);
 
-                var actual = ItemPriceReader.Read(
-                    document.RootElement,
-                    MissingMemberBehavior.Error
-                    );
+                var actual = document.RootElement.GetItemPrice(MissingMemberBehavior.Error);
 
                 ItemPriceFact.Id_is_positive(actual);
                 ItemPriceFact.Best_ask_is_greater_than_best_bid(actual);

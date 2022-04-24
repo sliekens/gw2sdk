@@ -52,7 +52,7 @@ public sealed class MasteryByIdRequest : IHttpRequest<IReplica<Mastery>>
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value = MasteryReader.Read(json.RootElement, MissingMemberBehavior);
+        var value = json.RootElement.GetMastery(MissingMemberBehavior);
         return new Replica<Mastery>(
             response.Headers.Date.GetValueOrDefault(),
             value,

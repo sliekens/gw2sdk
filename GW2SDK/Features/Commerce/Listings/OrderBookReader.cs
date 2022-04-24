@@ -8,7 +8,10 @@ namespace GW2SDK.Commerce.Listings;
 [PublicAPI]
 public static class OrderBookReader
 {
-    public static OrderBook Read(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    public static OrderBook GetOrderBook(
+        this JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         RequiredMember<int> id = new("id");
         RequiredMember<OrderBookLine> demand = new("buys");

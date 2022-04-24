@@ -53,7 +53,7 @@ public sealed class CharacterByNameRequest : IHttpRequest<IReplica<Character>>
 
         return new Replica<Character>(
             response.Headers.Date.GetValueOrDefault(),
-            CharacterReader.Read(json.RootElement, MissingMemberBehavior),
+            json.RootElement.GetCharacter(MissingMemberBehavior),
             response.Content.Headers.Expires,
             response.Content.Headers.LastModified
             );

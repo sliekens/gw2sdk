@@ -44,7 +44,7 @@ public sealed class ExchangeGemsForGoldRequest : IHttpRequest<IReplica<GemsForGo
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value = GemsForGoldReader.Read(json.RootElement, MissingMemberBehavior);
+        var value = json.RootElement.GetGemsForGoldExchange(MissingMemberBehavior);
         return new Replica<GemsForGoldExchange>(
             response.Headers.Date.GetValueOrDefault(),
             value,

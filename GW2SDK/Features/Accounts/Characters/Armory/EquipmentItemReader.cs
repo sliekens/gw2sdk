@@ -9,7 +9,10 @@ namespace GW2SDK.Accounts.Characters.Armory;
 [PublicAPI]
 public static class EquipmentItemReader
 {
-    public static EquipmentItem Read(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    public static EquipmentItem GetEquipmentItem(
+        this JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         RequiredMember<int> id = new("id");
         NullableMember<int> count = new("count");
@@ -88,7 +91,7 @@ public static class EquipmentItemReader
             Upgrades = upgrades.SelectMany(value => value.GetInt32()),
             Infusions = infusions.SelectMany(value => value.GetInt32()),
             SkinId = skin.GetValue(),
-            Stats = stats.Select(value => SelectedStatReader.Read(value, missingMemberBehavior)),
+            Stats = stats.Select(value => value.GetSelectedStat(missingMemberBehavior)),
             Binding = binding.GetValue(missingMemberBehavior),
             BoundTo = boundTo.GetValueOrEmpty(),
             Location = location.GetValue(missingMemberBehavior),

@@ -8,7 +8,10 @@ namespace GW2SDK.ItemStats;
 [PublicAPI]
 public static class ItemStatReader
 {
-    public static ItemStat Read(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    public static ItemStat GetItemStat(
+        this JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         RequiredMember<int> id = new("id");
         RequiredMember<string> name = new("name");

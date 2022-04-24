@@ -9,13 +9,15 @@ namespace GW2SDK.Accounts.Inventories;
 [PublicAPI]
 public static class InventoryReader
 {
-    public static Inventory Read(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    public static Inventory GetInventory(
+        this JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         List<ItemSlot?> slots = new(json.GetArrayLength());
 
         slots.AddRange(
-            json.EnumerateArray()
-                .Select(entry => ItemSlotReader.Read(entry, missingMemberBehavior))
+            json.EnumerateArray().Select(entry => entry.GetItemSlot(missingMemberBehavior))
             );
 
         return new Inventory(slots);

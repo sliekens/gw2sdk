@@ -58,7 +58,7 @@ public sealed class AchievementGroupsByPageRequest : IHttpRequest<IReplicaPage<A
             .ConfigureAwait(false);
 
         var value = json.RootElement.GetSet(
-            entry => AchievementGroupReader.Read(entry, MissingMemberBehavior)
+            entry => entry.GetAchievementGroup(MissingMemberBehavior)
             );
         return new ReplicaPage<AchievementGroup>(
             response.Headers.Date.GetValueOrDefault(),

@@ -54,7 +54,7 @@ public sealed class ItemByIdRequest : IHttpRequest<IReplica<Item>>
 
         return new Replica<Item>(
             response.Headers.Date.GetValueOrDefault(),
-            ItemReader.Read(json.RootElement, MissingMemberBehavior),
+            json.RootElement.GetItem(MissingMemberBehavior),
             response.Content.Headers.Expires,
             response.Content.Headers.LastModified
             );

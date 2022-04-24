@@ -54,7 +54,7 @@ public sealed class SkinsByIdsRequest : IHttpRequest<IReplicaSet<Skin>>
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value = json.RootElement.GetSet(entry => SkinReader.Read(entry, MissingMemberBehavior));
+        var value = json.RootElement.GetSet(entry => entry.GetSkin(MissingMemberBehavior));
         return new ReplicaSet<Skin>(
             response.Headers.Date.GetValueOrDefault(),
             value,

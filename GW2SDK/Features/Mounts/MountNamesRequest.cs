@@ -35,8 +35,7 @@ public sealed class MountNamesRequest : IHttpRequest<IReplicaSet<MountName>>
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value =
-            json.RootElement.GetSet(entry => MountNameReader.Read(entry, MissingMemberBehavior));
+        var value = json.RootElement.GetSet(entry => entry.GetMountName(MissingMemberBehavior));
         return new ReplicaSet<MountName>(
             response.Headers.Date.GetValueOrDefault(),
             value,

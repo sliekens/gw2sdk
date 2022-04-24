@@ -43,7 +43,7 @@ public sealed class AchievementGroupsRequest : IHttpRequest<IReplicaSet<Achievem
             .ConfigureAwait(false);
 
         var value = json.RootElement.GetSet(
-            entry => AchievementGroupReader.Read(entry, MissingMemberBehavior)
+            entry => entry.GetAchievementGroup(MissingMemberBehavior)
             );
         return new ReplicaSet<AchievementGroup>(
             response.Headers.Date.GetValueOrDefault(),

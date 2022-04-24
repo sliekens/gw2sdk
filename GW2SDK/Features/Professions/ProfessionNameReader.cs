@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Text.Json;
 using GW2SDK.Json;
 using JetBrains.Annotations;
@@ -8,7 +8,10 @@ namespace GW2SDK.Professions;
 [PublicAPI]
 public static class ProfessionNameReader
 {
-    public static ProfessionName Read(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    public static ProfessionName GetProfessionName(
+        this JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         var text = json.GetStringRequired();
         if (Enum.TryParse(text, out ProfessionName name))

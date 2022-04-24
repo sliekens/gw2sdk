@@ -9,7 +9,10 @@ namespace GW2SDK.Maps;
 [PublicAPI]
 public static class ContinentReader
 {
-    public static Continent Read(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    public static Continent GetContinent(
+        this JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         RequiredMember<string> name = new("name");
         RequiredMember<Size> continentDimensions = new("continent_dims");

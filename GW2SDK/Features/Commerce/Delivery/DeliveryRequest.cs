@@ -44,7 +44,7 @@ public sealed class DeliveryRequest : IHttpRequest<IReplica<DeliveryBox>>
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value = DeliveryBoxReader.Read(json.RootElement, MissingMemberBehavior);
+        var value = json.RootElement.GetDeliveryBox(MissingMemberBehavior);
         return new Replica<DeliveryBox>(
             response.Headers.Date.GetValueOrDefault(),
             value,

@@ -59,8 +59,7 @@ public sealed class TraitsByPageRequest : IHttpRequest<IReplicaPage<Trait>>
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value =
-            json.RootElement.GetSet(entry => TraitReader.Read(entry, MissingMemberBehavior));
+        var value = json.RootElement.GetSet(entry => entry.GetTrait(MissingMemberBehavior));
         return new ReplicaPage<Trait>(
             response.Headers.Date.GetValueOrDefault(),
             value,

@@ -10,18 +10,18 @@ namespace Mumble;
 
 internal class Program : IObserver<Snapshot>
 {
-    public void OnCompleted() => Console.WriteLine("Goodbye.");
-
-    public void OnError(Exception error) => Console.Error.WriteLine(error.ToString());
-
-    public void OnNext(Snapshot snapshot) => ThreadPool.QueueUserWorkItem(CallBack, snapshot);
-    
     static Program()
     {
         Console.OutputEncoding = Encoding.UTF8;
         CultureInfo.CurrentCulture = CultureInfo.GetCultureInfo("en");
         CultureInfo.CurrentUICulture = CultureInfo.GetCultureInfo("en");
     }
+
+    public void OnCompleted() => Console.WriteLine("Goodbye.");
+
+    public void OnError(Exception error) => Console.Error.WriteLine(error.ToString());
+
+    public void OnNext(Snapshot snapshot) => ThreadPool.QueueUserWorkItem(CallBack, snapshot);
 
     private static void Main(string[] args)
     {

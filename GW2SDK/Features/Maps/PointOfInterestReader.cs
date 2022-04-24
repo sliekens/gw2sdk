@@ -9,8 +9,8 @@ namespace GW2SDK.Maps;
 [PublicAPI]
 public static class PointOfInterestReader
 {
-    public static PointOfInterest Read(
-        JsonElement json,
+    public static PointOfInterest GetPointOfInterest(
+        this JsonElement json,
         MissingMemberBehavior missingMemberBehavior
     )
     {

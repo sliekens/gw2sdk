@@ -52,7 +52,7 @@ public sealed class MountSkinByIdRequest : IHttpRequest<IReplica<MountSkin>>
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value = MountSkinReader.Read(json.RootElement, MissingMemberBehavior);
+        var value = json.RootElement.GetMountSkin(MissingMemberBehavior);
         return new Replica<MountSkin>(
             response.Headers.Date.GetValueOrDefault(),
             value,

@@ -75,5 +75,6 @@ internal readonly ref struct OptionalMember<T>
         }
     }
 
-    internal OptionalMember<T> From(JsonElement propertyValue) => new(Name, new JsonMember(propertyValue));
+    internal OptionalMember<T> From(JsonElement propertyValue) =>
+        new(Name, new JsonMember(propertyValue));
 }

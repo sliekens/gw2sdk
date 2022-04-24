@@ -8,8 +8,8 @@ namespace GW2SDK.Commerce.Exchange;
 [PublicAPI]
 public static class GemsForGoldReader
 {
-    public static GemsForGoldExchange Read(
-        JsonElement json,
+    public static GemsForGoldExchange GetGemsForGoldExchange(
+        this JsonElement json,
         MissingMemberBehavior missingMemberBehavior
     )
     {

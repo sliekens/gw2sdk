@@ -53,8 +53,7 @@ public sealed class QuaggansByPageRequest : IHttpRequest<IReplicaPage<Quaggan>>
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value =
-            json.RootElement.GetSet(entry => QuagganReader.Read(entry, MissingMemberBehavior));
+        var value = json.RootElement.GetSet(entry => entry.GetQuaggan(MissingMemberBehavior));
         return new ReplicaPage<Quaggan>(
             response.Headers.Date.GetValueOrDefault(),
             value,

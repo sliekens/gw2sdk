@@ -8,7 +8,7 @@ namespace GW2SDK.Achievements.Titles;
 [PublicAPI]
 public static class TitleReader
 {
-    public static Title Read(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    public static Title GetTitle(this JsonElement json, MissingMemberBehavior missingMemberBehavior)
     {
         RequiredMember<int> id = new("id");
         RequiredMember<string> name = new("name");

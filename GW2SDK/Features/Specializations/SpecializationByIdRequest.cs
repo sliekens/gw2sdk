@@ -52,7 +52,7 @@ public sealed class SpecializationByIdRequest : IHttpRequest<IReplica<Specializa
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value = SpecializationReader.Read(json.RootElement, MissingMemberBehavior);
+        var value = json.RootElement.GetSpecialization(MissingMemberBehavior);
         return new Replica<Specialization>(
             response.Headers.Date.GetValueOrDefault(),
             value,

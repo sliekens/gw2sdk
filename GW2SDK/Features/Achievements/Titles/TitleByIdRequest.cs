@@ -48,7 +48,7 @@ public sealed class TitleByIdRequest : IHttpRequest<IReplica<Title>>
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value = TitleReader.Read(json.RootElement, MissingMemberBehavior);
+        var value = json.RootElement.GetTitle(MissingMemberBehavior);
         return new Replica<Title>(
             response.Headers.Date.GetValueOrDefault(),
             value,

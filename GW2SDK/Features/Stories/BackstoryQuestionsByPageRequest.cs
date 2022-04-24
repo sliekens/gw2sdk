@@ -58,7 +58,7 @@ public sealed class BackstoryQuestionsByPageRequest : IHttpRequest<IReplicaPage<
             .ConfigureAwait(false);
 
         var value = json.RootElement.GetSet(
-            entry => BackstoryQuestionReader.Read(entry, MissingMemberBehavior)
+            entry => entry.GetBackstoryQuestion(MissingMemberBehavior)
             );
         return new ReplicaPage<BackstoryQuestion>(
             response.Headers.Date.GetValueOrDefault(),

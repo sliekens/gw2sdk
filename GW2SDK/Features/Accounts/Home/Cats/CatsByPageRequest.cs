@@ -50,7 +50,7 @@ public sealed class CatsByPageRequest : IHttpRequest<IReplicaPage<Cat>>
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value = json.RootElement.GetSet(entry => CatReader.Read(entry, MissingMemberBehavior));
+        var value = json.RootElement.GetSet(entry => entry.GetCat(MissingMemberBehavior));
         return new ReplicaPage<Cat>(
             response.Headers.Date.GetValueOrDefault(),
             value,

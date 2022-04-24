@@ -45,7 +45,7 @@ public sealed class ColorsRequest : IHttpRequest<IReplicaSet<Dye>>
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value = json.RootElement.GetSet(entry => DyeReader.Read(entry, MissingMemberBehavior));
+        var value = json.RootElement.GetSet(entry => entry.GetDye(MissingMemberBehavior));
         return new ReplicaSet<Dye>(
             response.Headers.Date.GetValueOrDefault(),
             value,

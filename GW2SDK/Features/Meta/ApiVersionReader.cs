@@ -8,7 +8,10 @@ namespace GW2SDK.Meta;
 [PublicAPI]
 public static class ApiVersionReader
 {
-    public static ApiVersion Read(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    public static ApiVersion GetApiVersion(
+        this JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         RequiredMember<string> languages = new("langs");
         RequiredMember<Route> routes = new("routes");

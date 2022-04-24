@@ -50,7 +50,7 @@ public sealed class AchievementCategoryByIdRequest : IHttpRequest<IReplica<Achie
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value = AchievementCategoryReader.Read(json.RootElement, MissingMemberBehavior);
+        var value = json.RootElement.GetAchievementCategory(MissingMemberBehavior);
         return new Replica<AchievementCategory>(
             response.Headers.Date.GetValueOrDefault(),
             value,
