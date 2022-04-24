@@ -183,6 +183,11 @@ public class Composer : IServiceProvider, IAsyncDisposable
             return new BuildStorageQuery(Resolve<HttpClient>());
         }
 
+        if (serviceType == typeof(InventoryQuery))
+        {
+            return new InventoryQuery(Resolve<HttpClient>());
+        }
+
         return null;
     }
 
