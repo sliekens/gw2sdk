@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using GW2SDK.Accounts;
 using GW2SDK.Achievements;
 using GW2SDK.Banking;
+using GW2SDK.BuildStorage;
 using GW2SDK.Colors;
 using GW2SDK.Commerce;
 using GW2SDK.Crafting;
@@ -200,6 +201,11 @@ public class Composer : IServiceProvider, IAsyncDisposable
         if (serviceType == typeof(DungeonQuery))
         {
             return new DungeonQuery(Resolve<HttpClient>());
+        }
+
+        if (serviceType == typeof(BuildStorageQuery))
+        {
+            return new BuildStorageQuery(Resolve<HttpClient>());
         }
 
         return null;
