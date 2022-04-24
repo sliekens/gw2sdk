@@ -74,7 +74,7 @@ internal class Program
         //"/v2/characters/:id/equipmenttabs",
         //"/v2/characters/:id/equipmenttabs/active",
         //"/v2/characters/:id/heropoints",
-        //"/v2/characters/:id/inventory",
+        "/v2/characters/:id/inventory",
         //"/v2/characters/:id/quests",
         //"/v2/characters/:id/recipes",
         //"/v2/characters/:id/sab",

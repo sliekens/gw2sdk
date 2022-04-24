@@ -2,6 +2,7 @@
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
+using GW2SDK.Accounts.Characters.Inventories;
 using GW2SDK.Accounts.Inventories;
 using GW2SDK.Http;
 using GW2SDK.Json;
@@ -25,7 +26,22 @@ public sealed class InventoryQuery
         CancellationToken cancellationToken = default
     )
     {
-        var request = new SharedInventoryRequest
+        SharedInventoryRequest request = new()
+        {
+            AccessToken = accessToken,
+            MissingMemberBehavior = missingMemberBehavior
+        };
+        return request.SendAsync(http, cancellationToken);
+    }
+
+    public Task<IReplica<Baggage>> GetInventory(
+        string characterName,
+        string? accessToken,
+        MissingMemberBehavior missingMemberBehavior = default,
+        CancellationToken cancellationToken = default
+    )
+    {
+        InventoryRequest request = new(characterName)
         {
             AccessToken = accessToken,
             MissingMemberBehavior = missingMemberBehavior
