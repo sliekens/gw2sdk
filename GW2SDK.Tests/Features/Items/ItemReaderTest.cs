@@ -1,5 +1,5 @@
 ﻿using System.Text.Json;
-using GW2SDK.Items.Json;
+using GW2SDK.Items;
 using GW2SDK.Json;
 using Xunit;
 

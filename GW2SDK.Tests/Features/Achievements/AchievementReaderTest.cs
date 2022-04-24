@@ -1,7 +1,6 @@
 ﻿using System.Linq;
 using System.Text.Json;
-using GW2SDK.Achievements.Json;
-using GW2SDK.Achievements.Models;
+using GW2SDK.Achievements;
 using GW2SDK.Json;
 using GW2SDK.Tests.TestInfrastructure;
 using Xunit;

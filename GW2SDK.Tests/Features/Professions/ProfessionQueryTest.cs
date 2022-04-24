@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Threading.Tasks;
-using GW2SDK.Professions;
 using GW2SDK.Tests.TestInfrastructure;
 using Xunit;
 

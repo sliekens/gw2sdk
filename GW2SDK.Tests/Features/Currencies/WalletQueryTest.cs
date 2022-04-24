@@ -2,7 +2,6 @@
 using System.Linq;
 using System.Threading.Tasks;
 using GW2SDK.Currencies;
-using GW2SDK.Currencies.Models;
 using GW2SDK.Tests.TestInfrastructure;
 using Xunit;
 

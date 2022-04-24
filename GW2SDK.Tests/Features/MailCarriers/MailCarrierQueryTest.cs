@@ -2,7 +2,6 @@
 using System.Linq;
 using System.Threading.Tasks;
 using GW2SDK.MailCarriers;
-using GW2SDK.MailCarriers.Models;
 using GW2SDK.Tests.TestInfrastructure;
 using Xunit;
 

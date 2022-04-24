@@ -5,7 +5,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using GW2SDK.Json;
 using GW2SDK.Mumble;
-using GW2SDK.Mumble.Models;
 using Xunit;
 
 #pragma warning disable CA1416

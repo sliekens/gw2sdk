@@ -1,5 +1,5 @@
 ﻿using System.Diagnostics.CodeAnalysis;
-using GW2SDK.Items.Models;
+using GW2SDK.Items;
 using Xunit;
 
 namespace GW2SDK.Tests.Features.Items;

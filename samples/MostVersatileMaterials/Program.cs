@@ -7,10 +7,8 @@ using System.Text;
 using System.Threading.Tasks;
 using GW2SDK;
 using GW2SDK.Crafting;
-using GW2SDK.Crafting.Models;
 using GW2SDK.Http;
 using GW2SDK.Items;
-using GW2SDK.Items.Models;
 using Spectre.Console;
 
 namespace MostVersatileMaterials;

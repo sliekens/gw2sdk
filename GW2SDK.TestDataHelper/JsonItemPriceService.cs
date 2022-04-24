@@ -4,7 +4,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
-using GW2SDK.Commerce.Prices.Http;
+using GW2SDK.Commerce.Prices;
 
 namespace GW2SDK.TestDataHelper;
 

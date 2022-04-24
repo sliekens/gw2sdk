@@ -4,7 +4,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
-using GW2SDK.Achievements.Http;
+using GW2SDK.Achievements;
 
 namespace GW2SDK.TestDataHelper;
 

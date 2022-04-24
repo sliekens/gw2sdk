@@ -1,4 +1,4 @@
-﻿using GW2SDK.Quaggans;
+﻿using GW2SDK;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace QuagganGalleria.Pages;
