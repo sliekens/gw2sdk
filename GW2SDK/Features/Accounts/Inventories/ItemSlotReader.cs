@@ -4,12 +4,12 @@ using GW2SDK.ItemStats;
 using GW2SDK.Json;
 using JetBrains.Annotations;
 
-namespace GW2SDK.Accounts.Characters.Inventory;
+namespace GW2SDK.Accounts.Inventories;
 
 [PublicAPI]
-public static class InventorySlotReader
+public static class ItemSlotReader
 {
-    public static InventorySlot? Read(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    public static ItemSlot? Read(JsonElement json, MissingMemberBehavior missingMemberBehavior)
     {
         // Empty slots are represented as null -- but maybe we should use a Null Object pattern here
         if (json.ValueKind == JsonValueKind.Null)
@@ -81,7 +81,7 @@ public static class InventorySlotReader
             }
         }
 
-        return new InventorySlot
+        return new ItemSlot
         {
             Id = id.GetValue(),
             Count = count.GetValue(),

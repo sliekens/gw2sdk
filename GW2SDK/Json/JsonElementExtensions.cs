@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text.Json;
 
 namespace GW2SDK.Json;
@@ -37,7 +38,7 @@ internal static class JsonElementExtensions
 #else
         var values = new HashSet<TValue>();
 #endif
-        values.UnionWith(GetArray(json, resultSelector));
+        values.UnionWith(json.EnumerateArray().Select(resultSelector));
         return values;
     }
 
@@ -53,17 +54,5 @@ internal static class JsonElementExtensions
         }
 
         return values;
-    }
-
-    private static IEnumerable<TValue> GetArray<TValue>(
-        JsonElement json,
-        Func<JsonElement, TValue> resultSelector
-    )
-    {
-        // ReSharper disable once ForeachCanBeConvertedToQueryUsingAnotherGetEnumerator
-        foreach (var item in json.EnumerateArray())
-        {
-            yield return resultSelector(item);
-        }
     }
 }

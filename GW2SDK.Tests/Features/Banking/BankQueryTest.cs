@@ -2,6 +2,7 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Threading.Tasks;
 using GW2SDK.Accounts.Banking;
+using GW2SDK.Accounts.Inventories;
 using GW2SDK.Tests.TestInfrastructure;
 using Xunit;
 
@@ -11,11 +12,11 @@ public class BankQueryTest
 {
     // Yes the Bank is enumerable but its type has meaning
     [SuppressMessage("ReSharper", "SuggestBaseTypeForParameter")]
-    private static class AccountBankFact
+    private static class BankFact
     {
-        public static void Bank_is_not_empty(AccountBank actual) => Assert.NotEmpty(actual);
+        public static void Bank_is_not_empty(Bank actual) => Assert.NotEmpty(actual);
 
-        public static void Bank_tabs_have_30_slots(AccountBank actual) =>
+        public static void Bank_tabs_have_30_slots(Bank actual) =>
             Assert.Equal(0, actual.Count % 30);
     }
 
@@ -25,12 +26,12 @@ public class BankQueryTest
             Assert.NotEmpty(actual.Name);
     }
 
-    private static class AccountBankSlotFact
+    private static class ItemSlotFact
     {
-        public static void BankSlot_id_is_positive(BankSlot actual) =>
+        public static void ItemSlot_id_is_positive(ItemSlot actual) =>
             Assert.InRange(actual.Id, 1, int.MaxValue);
 
-        public static void BankSlot_count_is_positive(BankSlot actual) =>
+        public static void ItemSlot_count_is_positive(ItemSlot actual) =>
             Assert.InRange(actual.Count, 1, int.MaxValue);
     }
 
@@ -43,9 +44,9 @@ public class BankQueryTest
 
         var actual = await sut.GetBank(accessToken.Key);
 
-        AccountBankFact.Bank_is_not_empty(actual.Value);
+        BankFact.Bank_is_not_empty(actual.Value);
 
-        AccountBankFact.Bank_tabs_have_30_slots(actual.Value);
+        BankFact.Bank_tabs_have_30_slots(actual.Value);
 
         Assert.All(
             actual.Value,
@@ -56,8 +57,8 @@ public class BankQueryTest
                     return;
                 }
 
-                AccountBankSlotFact.BankSlot_id_is_positive(slot);
-                AccountBankSlotFact.BankSlot_count_is_positive(slot);
+                ItemSlotFact.ItemSlot_id_is_positive(slot);
+                ItemSlotFact.ItemSlot_count_is_positive(slot);
             }
             );
     }

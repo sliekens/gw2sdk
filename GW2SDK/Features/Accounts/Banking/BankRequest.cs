@@ -9,7 +9,7 @@ using static System.Net.Http.HttpMethod;
 namespace GW2SDK.Accounts.Banking;
 
 [PublicAPI]
-public sealed class BankRequest : IHttpRequest<IReplica<AccountBank>>
+public sealed class BankRequest : IHttpRequest<IReplica<Bank>>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "/v2/account/bank")
     {
@@ -20,7 +20,7 @@ public sealed class BankRequest : IHttpRequest<IReplica<AccountBank>>
 
     public MissingMemberBehavior MissingMemberBehavior { get; init; }
 
-    public async Task<IReplica<AccountBank>> SendAsync(
+    public async Task<IReplica<Bank>> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
     )
@@ -44,8 +44,8 @@ public sealed class BankRequest : IHttpRequest<IReplica<AccountBank>>
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value = AccountBankReader.Read(json.RootElement, MissingMemberBehavior);
-        return new Replica<AccountBank>(
+        var value = BankReader.Read(json.RootElement, MissingMemberBehavior);
+        return new Replica<Bank>(
             response.Headers.Date.GetValueOrDefault(),
             value,
             response.Content.Headers.Expires,
