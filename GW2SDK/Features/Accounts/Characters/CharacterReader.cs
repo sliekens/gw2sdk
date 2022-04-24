@@ -2,7 +2,7 @@
 using System.Text.Json;
 using GW2SDK.Accounts.BuildStorage;
 using GW2SDK.Accounts.Characters.Armory;
-using GW2SDK.Accounts.Characters.Inventory;
+using GW2SDK.Accounts.Characters.Inventories;
 using GW2SDK.Json;
 using JetBrains.Annotations;
 
@@ -178,47 +178,7 @@ public static class CharacterReader
             Recipes = recipes.SelectMany(value => value.GetInt32()),
             Training =
                 training.SelectMany(value => ReadTrainingObjective(value, missingMemberBehavior)),
-            Bags = bags.SelectMany(value => ReadBag(value, missingMemberBehavior))
-        };
-    }
-
-    private static Bag? ReadBag(JsonElement json, MissingMemberBehavior missingMemberBehavior)
-    {
-        // Empty slots are represented as null -- but maybe we should use a Null Object pattern here
-        if (json.ValueKind == JsonValueKind.Null)
-        {
-            return null;
-        }
-
-        RequiredMember<int> id = new("id");
-        RequiredMember<int> size = new("size");
-        RequiredMember<InventorySlot?> inventory = new("inventory");
-        foreach (var member in json.EnumerateObject())
-        {
-            if (member.NameEquals(id.Name))
-            {
-                id = id.From(member.Value);
-            }
-            else if (member.NameEquals(size.Name))
-            {
-                size = size.From(member.Value);
-            }
-            else if (member.NameEquals(inventory.Name))
-            {
-                inventory = inventory.From(member.Value);
-            }
-            else if (missingMemberBehavior == MissingMemberBehavior.Error)
-            {
-                throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
-            }
-        }
-
-        return new Bag
-        {
-            Id = id.GetValue(),
-            Size = size.GetValue(),
-            Inventory =
-                inventory.SelectMany(value => InventorySlotReader.Read(value, missingMemberBehavior))
+            Bags = bags.SelectMany(value => BagReader.Read(value, missingMemberBehavior))
         };
     }
 

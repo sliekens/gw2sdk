@@ -22,7 +22,7 @@ public sealed class BankQuery
     }
 
     [Scope(Permission.Inventories)]
-    public Task<IReplica<AccountBank>> GetBank(
+    public Task<IReplica<Bank>> GetBank(
         string? accessToken,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default

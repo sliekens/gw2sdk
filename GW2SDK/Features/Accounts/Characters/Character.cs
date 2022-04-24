@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using GW2SDK.Accounts.Characters.Armory;
-using GW2SDK.Accounts.Characters.Inventory;
+using GW2SDK.Accounts.Characters.Inventories;
 using GW2SDK.Annotations;
 using JetBrains.Annotations;
 

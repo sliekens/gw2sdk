@@ -3,11 +3,11 @@ using GW2SDK.Annotations;
 using GW2SDK.ItemStats;
 using JetBrains.Annotations;
 
-namespace GW2SDK.Accounts.Characters.Inventory;
+namespace GW2SDK.Accounts.Inventories;
 
 [PublicAPI]
 [DataTransferObject]
-public sealed record InventorySlot
+public sealed record ItemSlot
 {
     public int Id { get; init; }
 

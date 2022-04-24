@@ -1,9 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
+using GW2SDK.Accounts.Inventories;
 using GW2SDK.Annotations;
 using JetBrains.Annotations;
 
-namespace GW2SDK.Accounts.Characters.Inventory;
+namespace GW2SDK.Accounts.Characters.Inventories;
 
 [PublicAPI]
 [DataTransferObject]
@@ -17,5 +17,5 @@ public sealed record Bag
 
     /// <summary>The current bag's inventory, sorted by in-game order. Enumerated values can contain <c>null</c> when some item
     /// slots are empty.</summary>
-    public IEnumerable<InventorySlot?> Inventory { get; init; } = Array.Empty<InventorySlot>();
+    public Inventory Inventory { get; init; } = new(Array.Empty<ItemSlot>());
 }
