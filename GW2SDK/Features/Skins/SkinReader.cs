@@ -8,6 +8,84 @@ namespace GW2SDK.Skins;
 [PublicAPI]
 public static class SkinReader
 {
+    public static Skin GetSkin(this JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    {
+        switch (json.GetProperty("type").GetString())
+        {
+            case "Armor":
+                return ReadArmorSkin(json, missingMemberBehavior);
+            case "Back":
+                return ReadBackpackSkin(json, missingMemberBehavior);
+            case "Gathering":
+                return ReadGatheringToolSkin(json, missingMemberBehavior);
+            case "Weapon":
+                return ReadWeaponSkin(json, missingMemberBehavior);
+        }
+
+        RequiredMember<string> name = new("name");
+        OptionalMember<string> description = new("description");
+        RequiredMember<Rarity> rarity = new("rarity");
+        RequiredMember<SkinFlag> flags = new("flags");
+        RequiredMember<SkinRestriction> restrictions = new("restrictions");
+        RequiredMember<int> id = new("id");
+        OptionalMember<string> icon = new("icon");
+        foreach (var member in json.EnumerateObject())
+        {
+            if (member.NameEquals("type"))
+            {
+                if (missingMemberBehavior == MissingMemberBehavior.Error)
+                {
+                    throw new InvalidOperationException(
+                        Strings.UnexpectedDiscriminator(member.Value.GetString())
+                        );
+                }
+            }
+            else if (member.NameEquals(name.Name))
+            {
+                name = name.From(member.Value);
+            }
+            else if (member.NameEquals(description.Name))
+            {
+                description = description.From(member.Value);
+            }
+            else if (member.NameEquals(rarity.Name))
+            {
+                rarity = rarity.From(member.Value);
+            }
+            else if (member.NameEquals(flags.Name))
+            {
+                flags = flags.From(member.Value);
+            }
+            else if (member.NameEquals(restrictions.Name))
+            {
+                restrictions = restrictions.From(member.Value);
+            }
+            else if (member.NameEquals(id.Name))
+            {
+                id = id.From(member.Value);
+            }
+            else if (member.NameEquals(icon.Name))
+            {
+                icon = icon.From(member.Value);
+            }
+            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            {
+                throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
+            }
+        }
+
+        return new Skin
+        {
+            Id = id.GetValue(),
+            Name = name.GetValue(),
+            Description = description.GetValueOrEmpty(),
+            Rarity = rarity.GetValue(missingMemberBehavior),
+            Flags = flags.GetValues(missingMemberBehavior),
+            Restrictions = restrictions.GetValues(missingMemberBehavior),
+            Icon = icon.GetValueOrNull()
+        };
+    }
+
     private static ArmorSkin ReadArmorSkin(
         JsonElement json,
         MissingMemberBehavior missingMemberBehavior
@@ -2660,84 +2738,6 @@ public static class SkinReader
             Icon = icon.GetValueOrNull(),
             WeightClass = weightClass.GetValue(missingMemberBehavior),
             DyeSlots = dyeSlots.Select(value => ReadDyeSlots(value, missingMemberBehavior))
-        };
-    }
-
-    public static Skin Read(JsonElement json, MissingMemberBehavior missingMemberBehavior)
-    {
-        switch (json.GetProperty("type").GetString())
-        {
-            case "Armor":
-                return ReadArmorSkin(json, missingMemberBehavior);
-            case "Back":
-                return ReadBackpackSkin(json, missingMemberBehavior);
-            case "Gathering":
-                return ReadGatheringToolSkin(json, missingMemberBehavior);
-            case "Weapon":
-                return ReadWeaponSkin(json, missingMemberBehavior);
-        }
-
-        RequiredMember<string> name = new("name");
-        OptionalMember<string> description = new("description");
-        RequiredMember<Rarity> rarity = new("rarity");
-        RequiredMember<SkinFlag> flags = new("flags");
-        RequiredMember<SkinRestriction> restrictions = new("restrictions");
-        RequiredMember<int> id = new("id");
-        OptionalMember<string> icon = new("icon");
-        foreach (var member in json.EnumerateObject())
-        {
-            if (member.NameEquals("type"))
-            {
-                if (missingMemberBehavior == MissingMemberBehavior.Error)
-                {
-                    throw new InvalidOperationException(
-                        Strings.UnexpectedDiscriminator(member.Value.GetString())
-                        );
-                }
-            }
-            else if (member.NameEquals(name.Name))
-            {
-                name = name.From(member.Value);
-            }
-            else if (member.NameEquals(description.Name))
-            {
-                description = description.From(member.Value);
-            }
-            else if (member.NameEquals(rarity.Name))
-            {
-                rarity = rarity.From(member.Value);
-            }
-            else if (member.NameEquals(flags.Name))
-            {
-                flags = flags.From(member.Value);
-            }
-            else if (member.NameEquals(restrictions.Name))
-            {
-                restrictions = restrictions.From(member.Value);
-            }
-            else if (member.NameEquals(id.Name))
-            {
-                id = id.From(member.Value);
-            }
-            else if (member.NameEquals(icon.Name))
-            {
-                icon = icon.From(member.Value);
-            }
-            else if (missingMemberBehavior == MissingMemberBehavior.Error)
-            {
-                throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
-            }
-        }
-
-        return new Skin
-        {
-            Id = id.GetValue(),
-            Name = name.GetValue(),
-            Description = description.GetValueOrEmpty(),
-            Rarity = rarity.GetValue(missingMemberBehavior),
-            Flags = flags.GetValues(missingMemberBehavior),
-            Restrictions = restrictions.GetValues(missingMemberBehavior),
-            Icon = icon.GetValueOrNull()
         };
     }
 

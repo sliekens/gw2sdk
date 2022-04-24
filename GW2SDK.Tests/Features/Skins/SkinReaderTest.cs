@@ -29,7 +29,7 @@ public class SkinReaderTest : IClassFixture<SkinFixture>
             {
                 using var document = JsonDocument.Parse(json);
 
-                var actual = SkinReader.Read(document.RootElement, MissingMemberBehavior.Error);
+                var actual = document.RootElement.GetSkin(MissingMemberBehavior.Error);
 
                 SkinFact.Id_is_positive(actual);
             }

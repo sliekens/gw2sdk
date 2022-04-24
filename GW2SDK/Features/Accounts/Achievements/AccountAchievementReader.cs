@@ -8,8 +8,8 @@ namespace GW2SDK.Accounts.Achievements;
 [PublicAPI]
 public static class AccountAchievementReader
 {
-    public static AccountAchievement Read(
-        JsonElement json,
+    public static AccountAchievement GetAccountAchievement(
+        this JsonElement json,
         MissingMemberBehavior missingMemberBehavior
     )
     {

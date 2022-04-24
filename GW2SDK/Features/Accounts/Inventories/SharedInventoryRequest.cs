@@ -36,7 +36,7 @@ public sealed class SharedInventoryRequest : IHttpRequest<IReplica<Inventory>>
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value = InventoryReader.Read(json.RootElement, MissingMemberBehavior);
+        var value = json.RootElement.GetInventory(MissingMemberBehavior);
         return new Replica<Inventory>(
             response.Headers.Date.GetValueOrDefault(),
             value,

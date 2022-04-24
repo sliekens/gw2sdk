@@ -46,7 +46,7 @@ public sealed class OrderBookByIdRequest : IHttpRequest<IReplica<OrderBook>>
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value = OrderBookReader.Read(json.RootElement, MissingMemberBehavior);
+        var value = json.RootElement.GetOrderBook(MissingMemberBehavior);
         return new Replica<OrderBook>(
             response.Headers.Date.GetValueOrDefault(),
             value,

@@ -8,6 +8,155 @@ namespace GW2SDK.Skills;
 [PublicAPI]
 public static class SkillReader
 {
+    public static Skill GetSkill(this JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    {
+        // Unlike most models with a 'type' property, skills don't have always have it
+        if (json.TryGetProperty("type", out var type))
+        {
+            switch (type.GetString())
+            {
+                case "Bundle":
+                    return ReadBundleSkill(json, missingMemberBehavior);
+                case "Elite":
+                    return ReadEliteSkill(json, missingMemberBehavior);
+                case "Heal":
+                    return ReadHealSkill(json, missingMemberBehavior);
+                case "Monster":
+                    return ReadMonsterSkill(json, missingMemberBehavior);
+                case "Pet":
+                    return ReadPetSkill(json, missingMemberBehavior);
+                case "Profession":
+                    return ReadProfessionSkill(json, missingMemberBehavior);
+                case "Toolbelt":
+                    return ReadToolbeltSkill(json, missingMemberBehavior);
+                case "Transform":
+                    return ReadTransformSkill(json, missingMemberBehavior);
+                case "Utility":
+                    return ReadUtilitySkill(json, missingMemberBehavior);
+                case "Weapon":
+                    return ReadWeaponSkill(json, missingMemberBehavior);
+            }
+        }
+
+        RequiredMember<int> id = new("id");
+        RequiredMember<string> name = new("name");
+        OptionalMember<SkillFact> facts = new("facts");
+        OptionalMember<TraitedSkillFact> traitedFacts = new("traited_facts");
+        RequiredMember<string> description = new("description");
+        OptionalMember<string> icon = new("icon");
+        NullableMember<WeaponType> weaponType = new("weapon_type");
+        OptionalMember<ProfessionName> professions = new("professions");
+        NullableMember<SkillSlot> slot = new("slot");
+        NullableMember<int> flipSkill = new("flip_skill");
+        NullableMember<int> nextChain = new("next_chain");
+        NullableMember<int> prevChain = new("prev_chain");
+        RequiredMember<SkillFlag> flags = new("flags");
+        RequiredMember<string> chatLink = new("chat_link");
+        OptionalMember<SkillCategoryName> categories = new("categories");
+
+        foreach (var member in json.EnumerateObject())
+        {
+            if (member.NameEquals("type"))
+            {
+                if (missingMemberBehavior == MissingMemberBehavior.Error)
+                {
+                    throw new InvalidOperationException(
+                        Strings.UnexpectedDiscriminator(member.Value.GetString())
+                        );
+                }
+            }
+            else if (member.NameEquals(name.Name))
+            {
+                name = name.From(member.Value);
+            }
+            else if (member.NameEquals(facts.Name))
+            {
+                facts = facts.From(member.Value);
+            }
+            else if (member.NameEquals(traitedFacts.Name))
+            {
+                traitedFacts = traitedFacts.From(member.Value);
+            }
+            else if (member.NameEquals(description.Name))
+            {
+                description = description.From(member.Value);
+            }
+            else if (member.NameEquals(icon.Name))
+            {
+                icon = icon.From(member.Value);
+            }
+            else if (member.NameEquals(weaponType.Name))
+            {
+                weaponType = weaponType.From(member.Value);
+            }
+            else if (member.NameEquals(professions.Name))
+            {
+                professions = professions.From(member.Value);
+            }
+            else if (member.NameEquals(slot.Name))
+            {
+                slot = slot.From(member.Value);
+            }
+            else if (member.NameEquals(flipSkill.Name))
+            {
+                flipSkill = flipSkill.From(member.Value);
+            }
+            else if (member.NameEquals(nextChain.Name))
+            {
+                nextChain = nextChain.From(member.Value);
+            }
+            else if (member.NameEquals(prevChain.Name))
+            {
+                prevChain = prevChain.From(member.Value);
+            }
+            else if (member.NameEquals(flags.Name))
+            {
+                flags = flags.From(member.Value);
+            }
+            else if (member.NameEquals(id.Name))
+            {
+                id = id.From(member.Value);
+            }
+            else if (member.NameEquals(chatLink.Name))
+            {
+                chatLink = chatLink.From(member.Value);
+            }
+            else if (member.NameEquals(categories.Name))
+            {
+                categories = categories.From(member.Value);
+            }
+            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            {
+                throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
+            }
+        }
+
+        return new Skill
+        {
+            Id = id.GetValue(),
+            Name = name.GetValue(),
+            Facts =
+                facts.SelectMany(
+                    value => ReadSkillFact(value, missingMemberBehavior, out _, out _)
+                    ),
+            TraitedFacts =
+                traitedFacts.SelectMany(
+                    value => ReadTraitedSkillFact(value, missingMemberBehavior)
+                    ),
+            Description = description.GetValue(),
+            Icon = icon.GetValueOrNull(),
+            WeaponType = weaponType.GetValue(missingMemberBehavior),
+            Professions = professions.GetValues(missingMemberBehavior),
+            Slot = slot.GetValue(missingMemberBehavior),
+            FlipSkill = flipSkill.GetValue(),
+            NextChain = nextChain.GetValue(),
+            PreviousChain = prevChain.GetValue(),
+            SkillFlag = flags.GetValues(missingMemberBehavior),
+            ChatLink = chatLink.GetValue(),
+            Categories = categories.GetValues(missingMemberBehavior)
+        };
+    }
+
     private static BundleSkill ReadBundleSkill(
         JsonElement json,
         MissingMemberBehavior missingMemberBehavior
@@ -1419,155 +1568,6 @@ public static class SkillReader
             Cost = cost.GetValue(),
             Offhand = offhand.GetValue(missingMemberBehavior),
             Initiative = initiative.GetValue()
-        };
-    }
-
-    public static Skill Read(JsonElement json, MissingMemberBehavior missingMemberBehavior)
-    {
-        // Unlike most models with a 'type' property, skills don't have always have it
-        if (json.TryGetProperty("type", out var type))
-        {
-            switch (type.GetString())
-            {
-                case "Bundle":
-                    return ReadBundleSkill(json, missingMemberBehavior);
-                case "Elite":
-                    return ReadEliteSkill(json, missingMemberBehavior);
-                case "Heal":
-                    return ReadHealSkill(json, missingMemberBehavior);
-                case "Monster":
-                    return ReadMonsterSkill(json, missingMemberBehavior);
-                case "Pet":
-                    return ReadPetSkill(json, missingMemberBehavior);
-                case "Profession":
-                    return ReadProfessionSkill(json, missingMemberBehavior);
-                case "Toolbelt":
-                    return ReadToolbeltSkill(json, missingMemberBehavior);
-                case "Transform":
-                    return ReadTransformSkill(json, missingMemberBehavior);
-                case "Utility":
-                    return ReadUtilitySkill(json, missingMemberBehavior);
-                case "Weapon":
-                    return ReadWeaponSkill(json, missingMemberBehavior);
-            }
-        }
-
-        RequiredMember<int> id = new("id");
-        RequiredMember<string> name = new("name");
-        OptionalMember<SkillFact> facts = new("facts");
-        OptionalMember<TraitedSkillFact> traitedFacts = new("traited_facts");
-        RequiredMember<string> description = new("description");
-        OptionalMember<string> icon = new("icon");
-        NullableMember<WeaponType> weaponType = new("weapon_type");
-        OptionalMember<ProfessionName> professions = new("professions");
-        NullableMember<SkillSlot> slot = new("slot");
-        NullableMember<int> flipSkill = new("flip_skill");
-        NullableMember<int> nextChain = new("next_chain");
-        NullableMember<int> prevChain = new("prev_chain");
-        RequiredMember<SkillFlag> flags = new("flags");
-        RequiredMember<string> chatLink = new("chat_link");
-        OptionalMember<SkillCategoryName> categories = new("categories");
-
-        foreach (var member in json.EnumerateObject())
-        {
-            if (member.NameEquals("type"))
-            {
-                if (missingMemberBehavior == MissingMemberBehavior.Error)
-                {
-                    throw new InvalidOperationException(
-                        Strings.UnexpectedDiscriminator(member.Value.GetString())
-                        );
-                }
-            }
-            else if (member.NameEquals(name.Name))
-            {
-                name = name.From(member.Value);
-            }
-            else if (member.NameEquals(facts.Name))
-            {
-                facts = facts.From(member.Value);
-            }
-            else if (member.NameEquals(traitedFacts.Name))
-            {
-                traitedFacts = traitedFacts.From(member.Value);
-            }
-            else if (member.NameEquals(description.Name))
-            {
-                description = description.From(member.Value);
-            }
-            else if (member.NameEquals(icon.Name))
-            {
-                icon = icon.From(member.Value);
-            }
-            else if (member.NameEquals(weaponType.Name))
-            {
-                weaponType = weaponType.From(member.Value);
-            }
-            else if (member.NameEquals(professions.Name))
-            {
-                professions = professions.From(member.Value);
-            }
-            else if (member.NameEquals(slot.Name))
-            {
-                slot = slot.From(member.Value);
-            }
-            else if (member.NameEquals(flipSkill.Name))
-            {
-                flipSkill = flipSkill.From(member.Value);
-            }
-            else if (member.NameEquals(nextChain.Name))
-            {
-                nextChain = nextChain.From(member.Value);
-            }
-            else if (member.NameEquals(prevChain.Name))
-            {
-                prevChain = prevChain.From(member.Value);
-            }
-            else if (member.NameEquals(flags.Name))
-            {
-                flags = flags.From(member.Value);
-            }
-            else if (member.NameEquals(id.Name))
-            {
-                id = id.From(member.Value);
-            }
-            else if (member.NameEquals(chatLink.Name))
-            {
-                chatLink = chatLink.From(member.Value);
-            }
-            else if (member.NameEquals(categories.Name))
-            {
-                categories = categories.From(member.Value);
-            }
-            else if (missingMemberBehavior == MissingMemberBehavior.Error)
-            {
-                throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
-            }
-        }
-
-        return new Skill
-        {
-            Id = id.GetValue(),
-            Name = name.GetValue(),
-            Facts =
-                facts.SelectMany(
-                    value => ReadSkillFact(value, missingMemberBehavior, out _, out _)
-                    ),
-            TraitedFacts =
-                traitedFacts.SelectMany(
-                    value => ReadTraitedSkillFact(value, missingMemberBehavior)
-                    ),
-            Description = description.GetValue(),
-            Icon = icon.GetValueOrNull(),
-            WeaponType = weaponType.GetValue(missingMemberBehavior),
-            Professions = professions.GetValues(missingMemberBehavior),
-            Slot = slot.GetValue(missingMemberBehavior),
-            FlipSkill = flipSkill.GetValue(),
-            NextChain = nextChain.GetValue(),
-            PreviousChain = prevChain.GetValue(),
-            SkillFlag = flags.GetValues(missingMemberBehavior),
-            ChatLink = chatLink.GetValue(),
-            Categories = categories.GetValues(missingMemberBehavior)
         };
     }
 

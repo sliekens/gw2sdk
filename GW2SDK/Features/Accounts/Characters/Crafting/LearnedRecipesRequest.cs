@@ -10,8 +10,7 @@ using static System.Net.Http.HttpMethod;
 namespace GW2SDK.Accounts.Characters.Crafting;
 
 [PublicAPI]
-public sealed class
-    LearnedRecipesRequest : IHttpRequest<IReplica<IReadOnlyCollection<int>>>
+public sealed class LearnedRecipesRequest : IHttpRequest<IReplica<IReadOnlyCollection<int>>>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "/v2/characters/:id/recipes") { AcceptEncoding = "gzip" };
@@ -52,7 +51,7 @@ public sealed class
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value = LearnedRecipesReader.Read(json.RootElement, MissingMemberBehavior);
+        var value = json.RootElement.GetLearnedRecipes(MissingMemberBehavior);
         return new Replica<IReadOnlyCollection<int>>(
             response.Headers.Date.GetValueOrDefault(),
             value,

@@ -84,10 +84,7 @@ public sealed class DungeonQuery
         CancellationToken cancellationToken = default
     )
     {
-        CompletedPathsRequest request = new()
-        {
-            AccessToken = accessToken
-        };
+        CompletedPathsRequest request = new() { AccessToken = accessToken };
         return request.SendAsync(http, cancellationToken);
     }
 }

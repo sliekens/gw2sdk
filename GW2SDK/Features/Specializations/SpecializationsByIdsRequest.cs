@@ -55,7 +55,7 @@ public sealed class SpecializationsByIdsRequest : IHttpRequest<IReplicaSet<Speci
             .ConfigureAwait(false);
 
         var value = json.RootElement.GetSet(
-            entry => SpecializationReader.Read(entry, MissingMemberBehavior)
+            entry => entry.GetSpecialization(MissingMemberBehavior)
             );
         return new ReplicaSet<Specialization>(
             response.Headers.Date.GetValueOrDefault(),

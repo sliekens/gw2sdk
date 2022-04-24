@@ -9,7 +9,10 @@ namespace GW2SDK.Maps;
 [PublicAPI]
 public static class MapSectorReader
 {
-    public static MapSector Read(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    public static MapSector GetMapSector(
+        this JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         OptionalMember<string> name = new("name");
         RequiredMember<int> level = new("level");

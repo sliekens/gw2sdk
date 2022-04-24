@@ -59,8 +59,7 @@ public sealed class AchievementsByPageRequest : IHttpRequest<IReplicaPage<Achiev
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value =
-            json.RootElement.GetSet(entry => AchievementReader.Read(entry, MissingMemberBehavior));
+        var value = json.RootElement.GetSet(entry => entry.GetAchievement(MissingMemberBehavior));
         return new ReplicaPage<Achievement>(
             response.Headers.Date.GetValueOrDefault(),
             value,

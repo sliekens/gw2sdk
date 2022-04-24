@@ -8,7 +8,10 @@ namespace GW2SDK.Achievements;
 [PublicAPI]
 public static class AchievementReader
 {
-    public static Achievement Read(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    public static Achievement GetAchievement(
+        this JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         switch (json.GetProperty("type").GetString())
         {

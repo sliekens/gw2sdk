@@ -35,7 +35,7 @@ public sealed class BuildRequest : IHttpRequest<IReplica<Build>>
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value = BuildReader.Read(json.RootElement, MissingMemberBehavior);
+        var value = json.RootElement.GetBuild(MissingMemberBehavior);
         return new Replica<Build>(
             response.Headers.Date.GetValueOrDefault(),
             value,

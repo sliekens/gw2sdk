@@ -8,8 +8,8 @@ namespace GW2SDK.Stories;
 [PublicAPI]
 public static class BackstoryAnswerReader
 {
-    public static BackstoryAnswer Read(
-        JsonElement json,
+    public static BackstoryAnswer GetBackstoryAnswer(
+        this JsonElement json,
         MissingMemberBehavior missingMemberBehavior
     )
     {

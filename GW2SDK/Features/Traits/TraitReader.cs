@@ -8,7 +8,7 @@ namespace GW2SDK.Traits;
 [PublicAPI]
 public static class TraitReader
 {
-    public static Trait Read(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    public static Trait GetTrait(this JsonElement json, MissingMemberBehavior missingMemberBehavior)
     {
         RequiredMember<int> id = new("id");
         RequiredMember<int> tier = new("tier");

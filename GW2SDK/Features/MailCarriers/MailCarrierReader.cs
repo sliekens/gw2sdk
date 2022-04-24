@@ -8,7 +8,10 @@ namespace GW2SDK.MailCarriers;
 [PublicAPI]
 public static class MailCarrierReader
 {
-    public static MailCarrier Read(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    public static MailCarrier GetMailCarrier(
+        this JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         RequiredMember<int> id = new("id");
         RequiredMember<int> unlockItems = new("unlock_items");

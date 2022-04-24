@@ -8,7 +8,10 @@ namespace GW2SDK.Specializations;
 [PublicAPI]
 public static class SpecializationReader
 {
-    public static Specialization Read(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    public static Specialization GetSpecialization(
+        this JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         RequiredMember<int> id = new("id");
         RequiredMember<string> name = new("name");

@@ -58,9 +58,8 @@ public sealed class
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value = json.RootElement.GetSet(
-            entry => AccountAchievementReader.Read(entry, MissingMemberBehavior)
-            );
+        var value =
+            json.RootElement.GetSet(entry => entry.GetAccountAchievement(MissingMemberBehavior));
         return new ReplicaPage<AccountAchievement>(
             response.Headers.Date.GetValueOrDefault(),
             value,

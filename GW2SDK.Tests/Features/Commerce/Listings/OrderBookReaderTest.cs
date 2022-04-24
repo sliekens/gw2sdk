@@ -29,10 +29,7 @@ public class OrderBookReaderTest : IClassFixture<OrderBookFixture>
             {
                 using var document = JsonDocument.Parse(json);
 
-                var actual = OrderBookReader.Read(
-                    document.RootElement,
-                    MissingMemberBehavior.Error
-                    );
+                var actual = document.RootElement.GetOrderBook(MissingMemberBehavior.Error);
 
                 OrderBookFact.Id_is_positive(actual);
             }

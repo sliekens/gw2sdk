@@ -47,8 +47,7 @@ public sealed class RecipesByOutputItemIdRequest : IHttpRequest<IReplicaSet<Reci
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value =
-            json.RootElement.GetSet(entry => RecipeReader.Read(entry, MissingMemberBehavior));
+        var value = json.RootElement.GetSet(entry => entry.GetRecipe(MissingMemberBehavior));
         return new ReplicaSet<Recipe>(
             response.Headers.Date.GetValueOrDefault(),
             value,

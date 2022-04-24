@@ -52,7 +52,7 @@ public sealed class MailCarrierByIdRequest : IHttpRequest<IReplica<MailCarrier>>
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value = MailCarrierReader.Read(json.RootElement, MissingMemberBehavior);
+        var value = json.RootElement.GetMailCarrier(MissingMemberBehavior);
         return new Replica<MailCarrier>(
             response.Headers.Date.GetValueOrDefault(),
             value,

@@ -8,7 +8,10 @@ namespace GW2SDK.Accounts.Currencies;
 [PublicAPI]
 public static class CurrencyAmountReader
 {
-    public static CurrencyAmount Read(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    public static CurrencyAmount GetCurrencyAmount(
+        this JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         RequiredMember<int> id = new("id");
         RequiredMember<int> value = new("value");

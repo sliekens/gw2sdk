@@ -10,7 +10,7 @@ namespace GW2SDK.Maps;
 [PublicAPI]
 public static class MapReader
 {
-    public static Map Read(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    public static Map GetMap(this JsonElement json, MissingMemberBehavior missingMemberBehavior)
     {
         RequiredMember<string> name = new("name");
         RequiredMember<int> minLevel = new("min_level");
@@ -261,7 +261,7 @@ public static class MapReader
         {
             if (int.TryParse(member.Name, out var id))
             {
-                sectors[id] = MapSectorReader.Read(member.Value, missingMemberBehavior);
+                sectors[id] = member.Value.GetMapSector(missingMemberBehavior);
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {
@@ -314,7 +314,7 @@ public static class MapReader
         {
             if (int.TryParse(member.Name, out var id))
             {
-                tasks[id] = MapTaskReader.Read(member.Value, missingMemberBehavior);
+                tasks[id] = member.Value.GetMapTask(missingMemberBehavior);
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {
@@ -395,10 +395,7 @@ public static class MapReader
         {
             if (int.TryParse(member.Name, out var id))
             {
-                pointsOfInterest[id] = PointOfInterestReader.Read(
-                    member.Value,
-                    missingMemberBehavior
-                    );
+                pointsOfInterest[id] = member.Value.GetPointOfInterest(missingMemberBehavior);
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {

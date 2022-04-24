@@ -57,8 +57,7 @@ public sealed class SellOrdersRequest : IHttpRequest<IReplicaPage<Order>>
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value =
-            json.RootElement.GetSet(entry => OrderReader.Read(entry, MissingMemberBehavior));
+        var value = json.RootElement.GetSet(entry => entry.GetOrder(MissingMemberBehavior));
         return new ReplicaPage<Order>(
             response.Headers.Date.GetValueOrDefault(),
             value,

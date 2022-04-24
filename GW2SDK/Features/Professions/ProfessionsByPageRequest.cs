@@ -59,8 +59,7 @@ public sealed class ProfessionsByPageRequest : IHttpRequest<IReplicaPage<Profess
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value =
-            json.RootElement.GetSet(entry => ProfessionReader.Read(entry, MissingMemberBehavior));
+        var value = json.RootElement.GetSet(entry => entry.GetProfession(MissingMemberBehavior));
         return new ReplicaPage<Profession>(
             response.Headers.Date.GetValueOrDefault(),
             value,

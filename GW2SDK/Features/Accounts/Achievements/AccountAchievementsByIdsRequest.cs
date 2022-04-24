@@ -51,9 +51,8 @@ public sealed class AccountAchievementsByIdsRequest : IHttpRequest<IReplicaSet<A
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value = json.RootElement.GetSet(
-            entry => AccountAchievementReader.Read(entry, MissingMemberBehavior)
-            );
+        var value =
+            json.RootElement.GetSet(entry => entry.GetAccountAchievement(MissingMemberBehavior));
         return new ReplicaSet<AccountAchievement>(
             response.Headers.Date.GetValueOrDefault(),
             value,

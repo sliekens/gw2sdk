@@ -8,8 +8,8 @@ namespace GW2SDK.Accounts.Masteries;
 [PublicAPI]
 public static class MasteryProgressReader
 {
-    public static MasteryProgress Read(
-        JsonElement json,
+    public static MasteryProgress GetMasteryProgress(
+        this JsonElement json,
         MissingMemberBehavior missingMemberBehavior
     )
     {

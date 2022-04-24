@@ -22,6 +22,7 @@ internal class Program
         "/v2/account/dailycrafting",
         "/v2/account/dungeons",
         "/v2/account/dyes",
+
         //"/v2/account/emotes",
         //"/v2/account/finishers",
         //"/v2/account/gliders",
@@ -29,11 +30,14 @@ internal class Program
         "/v2/account/home/cats",
         "/v2/account/home/nodes",
         "/v2/account/inventory",
+
         //"/v2/account/legendaryarmory",
         //"/v2/account/luck",
         "/v2/account/mailcarriers",
+
         //"/v2/account/mapchests",
         "/v2/account/masteries",
+
         //"/v2/account/mastery/points",
         //"/v2/account/materials",
         //"/v2/account/minis",
@@ -46,6 +50,7 @@ internal class Program
         //"/v2/account/pvp/heroes",
         //"/v2/account/raids",
         "/v2/account/recipes",
+
         //"/v2/account/skins",
         //"/v2/account/titles",
         "/v2/account/wallet",
@@ -59,6 +64,7 @@ internal class Program
         "/v2/backstory/questions",
         "/v2/build",
         "/v2/characters",
+
         //"/v2/characters/:id/backstory",
         //"/v2/characters/:id/buildtabs",
         //"/v2/characters/:id/buildtabs/active",
@@ -86,6 +92,7 @@ internal class Program
         "/v2/currencies",
         "/v2/dailycrafting",
         "/v2/dungeons",
+
         //"/v2/emblem",
         //"/v2/emotes",
         //"/v2/files",
@@ -108,21 +115,26 @@ internal class Program
         "/v2/home/nodes",
         "/v2/items",
         "/v2/itemstats",
+
         //"/v2/legendaryarmory",
         //"/v2/legends",
         "/v2/mailcarriers",
+
         //"/v2/mapchests",
         //"/v2/maps",
         "/v2/masteries",
         "/v2/materials",
+
         //"/v2/minis",
         "/v2/mounts",
         "/v2/mounts/skins",
         "/v2/mounts/types",
+
         //"/v2/novelties",
         //"/v2/outfits",
         //"/v2/pets",
         "/v2/professions",
+
         //"/v2/pvp",
         //"/v2/pvp/amulets",
         //"/v2/pvp/games",
@@ -134,6 +146,7 @@ internal class Program
         //"/v2/pvp/standings",
         //"/v2/pvp/stats",
         "/v2/quaggans",
+
         //"/v2/quests",
         //"/v2/races",
         //"/v2/raids",
@@ -142,13 +155,15 @@ internal class Program
         "/v2/skills",
         "/v2/skins",
         "/v2/specializations",
+
         //"/v2/stories",
         //"/v2/stories/seasons",
         "/v2/titles",
         "/v2/tokeninfo",
         "/v2/traits",
         "/v2/worldbosses",
-        "/v2/worlds",
+        "/v2/worlds"
+
         //"/v2/wvw/abilities",
         //"/v2/wvw/matches",
         //"/v2/wvw/matches/overview",
@@ -267,7 +282,9 @@ internal class Program
             changes.AddRow(formatted.EscapeMarkup(), schema.Description.EscapeMarkup());
         }
 
-        AnsiConsole.WriteLine("Highlighted routes are supported by GW2SDK. Dim routes are disabled.");
+        AnsiConsole.WriteLine(
+            "Highlighted routes are supported by GW2SDK. Dim routes are disabled."
+            );
         AnsiConsole.Write(routes);
         AnsiConsole.Write(new Rule("Notable changes").LeftAligned());
         AnsiConsole.Write(changes);

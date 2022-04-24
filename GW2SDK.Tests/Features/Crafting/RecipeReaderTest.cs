@@ -21,7 +21,7 @@ public class RecipeReaderTest : IClassFixture<RecipeFixture>
             json =>
             {
                 using var document = JsonDocument.Parse(json);
-                var actual = RecipeReader.Read(document.RootElement, MissingMemberBehavior.Error);
+                var actual = document.RootElement.GetRecipe(MissingMemberBehavior.Error);
 
                 RecipeFacts.Validate(actual);
             }

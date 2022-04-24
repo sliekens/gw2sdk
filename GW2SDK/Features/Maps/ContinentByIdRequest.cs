@@ -52,7 +52,7 @@ public sealed class ContinentByIdRequest : IHttpRequest<IReplica<Continent>>
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value = ContinentReader.Read(json.RootElement, MissingMemberBehavior);
+        var value = json.RootElement.GetContinent(MissingMemberBehavior);
         return new Replica<Continent>(
             response.Headers.Date.GetValueOrDefault(),
             value,

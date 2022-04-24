@@ -51,7 +51,7 @@ public sealed class AchievementGroupByIdRequest : IHttpRequest<IReplica<Achievem
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value = AchievementGroupReader.Read(json.RootElement, MissingMemberBehavior);
+        var value = json.RootElement.GetAchievementGroup(MissingMemberBehavior);
         return new Replica<AchievementGroup>(
             response.Headers.Date.GetValueOrDefault(),
             value,

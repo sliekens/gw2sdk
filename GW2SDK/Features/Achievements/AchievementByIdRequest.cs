@@ -52,7 +52,7 @@ public sealed class AchievementByIdRequest : IHttpRequest<IReplica<Achievement>>
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value = AchievementReader.Read(json.RootElement, MissingMemberBehavior);
+        var value = json.RootElement.GetAchievement(MissingMemberBehavior);
         return new Replica<Achievement>(
             response.Headers.Date.GetValueOrDefault(),
             value,

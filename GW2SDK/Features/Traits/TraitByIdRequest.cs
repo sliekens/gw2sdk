@@ -52,7 +52,7 @@ public sealed class TraitByIdRequest : IHttpRequest<IReplica<Trait>>
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value = TraitReader.Read(json.RootElement, MissingMemberBehavior);
+        var value = json.RootElement.GetTrait(MissingMemberBehavior);
         return new Replica<Trait>(
             response.Headers.Date.GetValueOrDefault(),
             value,

@@ -45,8 +45,7 @@ public sealed class CharactersRequest : IHttpRequest<IReplicaSet<Character>>
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value =
-            json.RootElement.GetSet(entry => CharacterReader.Read(entry, MissingMemberBehavior));
+        var value = json.RootElement.GetSet(entry => entry.GetCharacter(MissingMemberBehavior));
         return new ReplicaSet<Character>(
             response.Headers.Date.GetValueOrDefault(),
             value,

@@ -20,8 +20,7 @@ public static class HttpResponseMessageExtensions
     {
         if (instance == null) throw new ArgumentNullException(nameof(instance));
 #if NET
-        var content = await instance.ReadAsStreamAsync(cancellationToken)
-            .ConfigureAwait(false);
+        var content = await instance.ReadAsStreamAsync(cancellationToken).ConfigureAwait(false);
 #else
         var content = await instance.ReadAsStreamAsync().ConfigureAwait(false);
 #endif

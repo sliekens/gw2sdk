@@ -8,7 +8,10 @@ namespace GW2SDK.Crafting;
 [PublicAPI]
 public static class RecipeReader
 {
-    public static Recipe Read(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    public static Recipe GetRecipe(
+        this JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         switch (json.GetProperty("type").GetString())
         {

@@ -8,7 +8,7 @@ namespace GW2SDK.Meta;
 [PublicAPI]
 public static class BuildReader
 {
-    public static Build Read(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    public static Build GetBuild(this JsonElement json, MissingMemberBehavior missingMemberBehavior)
     {
         RequiredMember<int> id = new("id");
 

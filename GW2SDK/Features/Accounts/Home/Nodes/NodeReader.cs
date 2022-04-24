@@ -8,7 +8,7 @@ namespace GW2SDK.Accounts.Home.Nodes;
 [PublicAPI]
 public static class NodeReader
 {
-    public static Node Read(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    public static Node GetNode(this JsonElement json, MissingMemberBehavior missingMemberBehavior)
     {
         RequiredMember<string> id = new("id");
 

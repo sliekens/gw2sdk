@@ -52,7 +52,7 @@ public sealed class WorldByIdRequest : IHttpRequest<IReplica<World>>
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value = WorldReader.Read(json.RootElement, MissingMemberBehavior);
+        var value = json.RootElement.GetWorld(MissingMemberBehavior);
         return new Replica<World>(
             response.Headers.Date.GetValueOrDefault(),
             value,

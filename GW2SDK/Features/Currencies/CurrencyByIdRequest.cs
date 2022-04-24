@@ -52,7 +52,7 @@ public sealed class CurrencyByIdRequest : IHttpRequest<IReplica<Currency>>
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value = CurrencyReader.Read(json.RootElement, MissingMemberBehavior);
+        var value = json.RootElement.GetCurrency(MissingMemberBehavior);
         return new Replica<Currency>(
             response.Headers.Date.GetValueOrDefault(),
             value,

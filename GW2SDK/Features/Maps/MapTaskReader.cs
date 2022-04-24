@@ -9,7 +9,10 @@ namespace GW2SDK.Maps;
 [PublicAPI]
 public static class MapTaskReader
 {
-    public static MapTask Read(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    public static MapTask GetMapTask(
+        this JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         RequiredMember<string> objective = new("objective");
         RequiredMember<int> level = new("level");

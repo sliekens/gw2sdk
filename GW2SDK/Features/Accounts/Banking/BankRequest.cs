@@ -44,7 +44,7 @@ public sealed class BankRequest : IHttpRequest<IReplica<Bank>>
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value = BankReader.Read(json.RootElement, MissingMemberBehavior);
+        var value = json.RootElement.GetBank(MissingMemberBehavior);
         return new Replica<Bank>(
             response.Headers.Date.GetValueOrDefault(),
             value,

@@ -8,7 +8,7 @@ namespace GW2SDK.Dungeons;
 [PublicAPI]
 public static class DungeonReader
 {
-    public static Dungeon Read(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    public static Dungeon GetDungeon(JsonElement json, MissingMemberBehavior missingMemberBehavior)
     {
         RequiredMember<string> id = new("id");
         RequiredMember<DungeonPath> paths = new("paths");

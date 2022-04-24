@@ -36,7 +36,7 @@ public sealed class NodesRequest : IHttpRequest<IReplicaSet<Node>>
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value = json.RootElement.GetSet(entry => NodeReader.Read(entry, MissingMemberBehavior));
+        var value = json.RootElement.GetSet(entry => entry.GetNode(MissingMemberBehavior));
         return new ReplicaSet<Node>(
             response.Headers.Date.GetValueOrDefault(),
             value,

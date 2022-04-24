@@ -57,8 +57,7 @@ public sealed class PurchasesRequest : IHttpRequest<IReplicaPage<Transaction>>
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value =
-            json.RootElement.GetSet(entry => TransactionReader.Read(entry, MissingMemberBehavior));
+        var value = json.RootElement.GetSet(entry => entry.GetTransaction(MissingMemberBehavior));
         return new ReplicaPage<Transaction>(
             response.Headers.Date.GetValueOrDefault(),
             value,

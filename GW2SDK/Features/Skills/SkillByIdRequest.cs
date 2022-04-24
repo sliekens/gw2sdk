@@ -52,7 +52,7 @@ public sealed class SkillByIdRequest : IHttpRequest<IReplica<Skill>>
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value = SkillReader.Read(json.RootElement, MissingMemberBehavior);
+        var value = json.RootElement.GetSkill(MissingMemberBehavior);
         return new Replica<Skill>(
             response.Headers.Date.GetValueOrDefault(),
             value,

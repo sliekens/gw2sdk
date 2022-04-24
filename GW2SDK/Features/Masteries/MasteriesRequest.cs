@@ -45,8 +45,7 @@ public sealed class MasteriesRequest : IHttpRequest<IReplicaSet<Mastery>>
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value =
-            json.RootElement.GetSet(entry => MasteryReader.Read(entry, MissingMemberBehavior));
+        var value = json.RootElement.GetSet(entry => entry.GetMastery(MissingMemberBehavior));
         return new ReplicaSet<Mastery>(
             response.Headers.Date.GetValueOrDefault(),
             value,

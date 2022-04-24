@@ -52,7 +52,7 @@ public sealed class ColorByIdRequest : IHttpRequest<IReplica<Dye>>
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value = DyeReader.Read(json.RootElement, MissingMemberBehavior);
+        var value = json.RootElement.GetDye(MissingMemberBehavior);
         return new Replica<Dye>(
             response.Headers.Date.GetValueOrDefault(),
             value,

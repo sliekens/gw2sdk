@@ -8,7 +8,7 @@ namespace GW2SDK.Maps;
 [PublicAPI]
 public static class WorldReader
 {
-    public static World Read(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    public static World GetWorld(this JsonElement json, MissingMemberBehavior missingMemberBehavior)
     {
         RequiredMember<int> id = new("id");
         RequiredMember<string> name = new("name");

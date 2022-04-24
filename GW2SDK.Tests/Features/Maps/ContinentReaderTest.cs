@@ -29,7 +29,7 @@ public class ContinentReaderTest : IClassFixture<ContinentFixture>
             {
                 using var document = JsonDocument.Parse(json);
 
-                var actual = FloorReader.Read(document.RootElement, MissingMemberBehavior.Error);
+                var actual = document.RootElement.GetFloor(MissingMemberBehavior.Error);
 
                 FloorFact.Texture_dimensions_contains_width_and_height(actual);
             }

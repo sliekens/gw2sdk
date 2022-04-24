@@ -8,7 +8,7 @@ namespace GW2SDK.Mounts;
 [PublicAPI]
 public static class MountReader
 {
-    public static Mount Read(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    public static Mount GetMount(this JsonElement json, MissingMemberBehavior missingMemberBehavior)
     {
         RequiredMember<MountName> id = new("id");
         RequiredMember<string> name = new("name");
@@ -46,7 +46,7 @@ public static class MountReader
 
         return new Mount
         {
-            Id = id.Select(value => MountNameReader.Read(value, missingMemberBehavior)),
+            Id = id.Select(value => value.GetMountName(missingMemberBehavior)),
             Name = name.GetValue(),
             DefaultSkin = defaultSkin.GetValue(),
             Skins = skins.SelectMany(value => value.GetInt32()),

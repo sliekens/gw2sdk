@@ -50,7 +50,7 @@ public sealed class BuildsByIdsRequest : IHttpRequest<IReplicaSet<Build>>
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value = json.RootElement.GetSet(entry => BuildReader.Read(entry, MissingMemberBehavior));
+        var value = json.RootElement.GetSet(entry => entry.GetBuild(MissingMemberBehavior));
         return new ReplicaSet<Build>(
             response.Headers.Date.GetValueOrDefault(),
             value,

@@ -45,8 +45,7 @@ public sealed class WorldsRequest : IHttpRequest<IReplicaSet<World>>
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value =
-            json.RootElement.GetSet(entry => WorldReader.Read(entry, MissingMemberBehavior));
+        var value = json.RootElement.GetSet(entry => entry.GetWorld(MissingMemberBehavior));
         return new ReplicaSet<World>(
             response.Headers.Date.GetValueOrDefault(),
             value,

@@ -8,7 +8,7 @@ namespace GW2SDK.Items;
 [PublicAPI]
 public static class ItemReader
 {
-    public static Item Read(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    public static Item GetItem(this JsonElement json, MissingMemberBehavior missingMemberBehavior)
     {
         switch (json.GetProperty("type").GetString())
         {

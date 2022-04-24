@@ -8,7 +8,10 @@ namespace GW2SDK.ItemStats;
 [PublicAPI]
 public static class SelectedStatReader
 {
-    public static SelectedStat Read(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    public static SelectedStat GetSelectedStat(
+        this JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         RequiredMember<int> id = new("id");
         RequiredMember<SelectedModification> attributes = new("attributes");

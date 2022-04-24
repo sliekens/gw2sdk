@@ -8,8 +8,8 @@ namespace GW2SDK.Achievements.Categories;
 [PublicAPI]
 public static class AchievementCategoryReader
 {
-    public static AchievementCategory Read(
-        JsonElement json,
+    public static AchievementCategory GetAchievementCategory(
+        this JsonElement json,
         MissingMemberBehavior missingMemberBehavior
     )
     {

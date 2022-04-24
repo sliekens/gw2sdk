@@ -52,7 +52,7 @@ public sealed class BackstoryAnswerByIdRequest : IHttpRequest<IReplica<Backstory
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value = BackstoryAnswerReader.Read(json.RootElement, MissingMemberBehavior);
+        var value = json.RootElement.GetBackstoryAnswer(MissingMemberBehavior);
         return new Replica<BackstoryAnswer>(
             response.Headers.Date.GetValueOrDefault(),
             value,

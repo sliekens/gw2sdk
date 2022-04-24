@@ -8,7 +8,7 @@ namespace GW2SDK.Accounts.Home.Cats;
 [PublicAPI]
 public static class CatReader
 {
-    public static Cat Read(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    public static Cat GetCat(this JsonElement json, MissingMemberBehavior missingMemberBehavior)
     {
         RequiredMember<int> id = new("id");
         RequiredMember<string> hint = new("hint");

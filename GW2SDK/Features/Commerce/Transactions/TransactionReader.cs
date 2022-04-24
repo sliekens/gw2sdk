@@ -8,7 +8,10 @@ namespace GW2SDK.Commerce.Transactions;
 [PublicAPI]
 public static class TransactionReader
 {
-    public static Transaction Read(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    public static Transaction GetTransaction(
+        this JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         RequiredMember<long> id = new("id");
         RequiredMember<int> itemId = new("item_id");

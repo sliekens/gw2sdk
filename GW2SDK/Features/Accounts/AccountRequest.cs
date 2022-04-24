@@ -41,7 +41,7 @@ public sealed class AccountRequest : IHttpRequest<IReplica<AccountSummary>>
 
         return new Replica<AccountSummary>(
             response.Headers.Date.GetValueOrDefault(),
-            AccountReader.Read(json.RootElement, MissingMemberBehavior),
+            json.RootElement.GetAccountSummary(MissingMemberBehavior),
             response.Content.Headers.Expires,
             response.Content.Headers.LastModified
             );
