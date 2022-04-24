@@ -28,7 +28,7 @@ internal class Program
         "/v2/account/home",
         "/v2/account/home/cats",
         "/v2/account/home/nodes",
-        //"/v2/account/inventory",
+        "/v2/account/inventory",
         //"/v2/account/legendaryarmory",
         //"/v2/account/luck",
         "/v2/account/mailcarriers",
