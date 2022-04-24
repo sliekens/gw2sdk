@@ -17,5 +17,5 @@ public sealed record Bag
 
     /// <summary>The current bag's inventory, sorted by in-game order. Enumerated values can contain <c>null</c> when some item
     /// slots are empty.</summary>
-    public Inventory Inventory { get; init; } = new(Array.Empty<ItemSlot>());
+    public Inventory Inventory { get; init; } = new(Array.Empty<ItemSlot?>());
 }
