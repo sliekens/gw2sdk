@@ -5,7 +5,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using GW2SDK.Accounts.WorldBosses;
 using GW2SDK.Annotations;
-using GW2SDK.Http;
 using GW2SDK.WorldBosses;
 using JetBrains.Annotations;
 
@@ -18,7 +17,8 @@ public sealed class WorldBossQuery
 
     public WorldBossQuery(HttpClient http)
     {
-        this.http = http.WithDefaults() ?? throw new ArgumentNullException(nameof(http));
+        this.http = http ?? throw new ArgumentNullException(nameof(http));
+        http.BaseAddress ??= BaseAddress.DefaultUri;
     }
 
     public Task<IReplicaSet<string>> GetWorldBosses(CancellationToken cancellationToken = default)

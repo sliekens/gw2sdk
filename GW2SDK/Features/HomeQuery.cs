@@ -5,7 +5,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using GW2SDK.Accounts.Home.Cats;
 using GW2SDK.Accounts.Home.Nodes;
-using GW2SDK.Http;
 using GW2SDK.Json;
 using JetBrains.Annotations;
 
@@ -18,7 +17,8 @@ public sealed class HomeQuery
 
     public HomeQuery(HttpClient http)
     {
-        this.http = http.WithDefaults() ?? throw new ArgumentNullException(nameof(http));
+        this.http = http ?? throw new ArgumentNullException(nameof(http));
+        http.BaseAddress ??= BaseAddress.DefaultUri;
     }
 
     public Task<IReplicaSet<Cat>> GetCats(

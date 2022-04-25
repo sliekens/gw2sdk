@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
-using GW2SDK.Http;
 using GW2SDK.Json;
 using JetBrains.Annotations;
 
@@ -16,7 +15,8 @@ public sealed record BuildStorageQuery
 
     public BuildStorageQuery(HttpClient http)
     {
-        this.http = http.WithDefaults() ?? throw new ArgumentNullException(nameof(http));
+        this.http = http ?? throw new ArgumentNullException(nameof(http));
+        http.BaseAddress ??= BaseAddress.DefaultUri;
     }
 
     public Task<IReplicaSet<Build>> GetBuildStorage(

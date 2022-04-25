@@ -4,7 +4,6 @@ using System.Net.Http;
 using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Threading.Tasks;
-using GW2SDK.Http;
 using GW2SDK.Items;
 using GW2SDK.Json;
 using JetBrains.Annotations;
@@ -18,7 +17,8 @@ public sealed class ItemQuery
 
     public ItemQuery(HttpClient http)
     {
-        this.http = http.WithDefaults() ?? throw new ArgumentNullException(nameof(http));
+        this.http = http ?? throw new ArgumentNullException(nameof(http));
+        http.BaseAddress ??= BaseAddress.DefaultUri;
     }
 
     public Task<IReplicaSet<int>> GetItemsIndex(CancellationToken cancellationToken = default)

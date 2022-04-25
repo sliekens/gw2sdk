@@ -4,7 +4,6 @@ using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 using GW2SDK.Accounts.MailCarriers;
-using GW2SDK.Http;
 using GW2SDK.Json;
 using GW2SDK.MailCarriers;
 using JetBrains.Annotations;
@@ -18,7 +17,8 @@ public sealed class MailCarrierQuery
 
     public MailCarrierQuery(HttpClient http)
     {
-        this.http = http.WithDefaults() ?? throw new ArgumentNullException(nameof(http));
+        this.http = http ?? throw new ArgumentNullException(nameof(http));
+        http.BaseAddress ??= BaseAddress.DefaultUri;
     }
 
     public Task<IReplicaSet<MailCarrier>> GetMailCarriers(

@@ -4,7 +4,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using GW2SDK.Accounts.Characters.Inventories;
 using GW2SDK.Accounts.Inventories;
-using GW2SDK.Http;
 using GW2SDK.Json;
 using JetBrains.Annotations;
 
@@ -17,7 +16,8 @@ public sealed class InventoryQuery
 
     public InventoryQuery(HttpClient http)
     {
-        this.http = http.WithDefaults() ?? throw new ArgumentNullException(nameof(http));
+        this.http = http ?? throw new ArgumentNullException(nameof(http));
+        http.BaseAddress ??= BaseAddress.DefaultUri;
     }
 
     public Task<IReplica<Inventory>> GetSharedInventory(

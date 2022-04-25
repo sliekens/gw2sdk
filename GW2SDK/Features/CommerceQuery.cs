@@ -10,7 +10,6 @@ using GW2SDK.Commerce.Exchange;
 using GW2SDK.Commerce.Listings;
 using GW2SDK.Commerce.Prices;
 using GW2SDK.Commerce.Transactions;
-using GW2SDK.Http;
 using GW2SDK.Json;
 using JetBrains.Annotations;
 
@@ -23,7 +22,8 @@ public sealed class CommerceQuery
 
     public CommerceQuery(HttpClient http)
     {
-        this.http = http.WithDefaults() ?? throw new ArgumentNullException(nameof(http));
+        this.http = http ?? throw new ArgumentNullException(nameof(http));
+        http.BaseAddress ??= BaseAddress.DefaultUri;
     }
 
     #region /v2/commerce/delivery
