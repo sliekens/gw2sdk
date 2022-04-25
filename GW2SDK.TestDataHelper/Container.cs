@@ -81,7 +81,13 @@ public class Container : IDisposable, IAsyncDisposable
             Policy.WrapAsync(timeout, rateLimit, retryRequestError, innerTimeout)
             );
 
-        services.AddHttpClient("com.guildwars2.api")
+        services.AddHttpClient(
+                "com.guildwars2.api",
+                client =>
+                {
+                    client.BaseAddress = BaseAddress.DefaultUri;
+                }
+                )
             .ConfigurePrimaryHttpMessageHandler(
                 () => new SocketsHttpHandler { AutomaticDecompression = DecompressionMethods.GZip }
                 )
