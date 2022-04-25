@@ -7,7 +7,7 @@ using Xunit;
 
 namespace GW2SDK.Tests.Features.MailCarriers;
 
-public class MailCarrierQueryTest
+public class MailCarriersQueryTest
 {
     private static class MailCarrierFact
     {
@@ -38,9 +38,9 @@ public class MailCarrierQueryTest
     public async Task Mail_carriers_can_be_enumerated()
     {
         await using Composer services = new();
-        var sut = services.Resolve<MailCarrierQuery>();
+        var sut = services.Resolve<Gw2Client>();
 
-        var actual = await sut.GetMailCarriers();
+        var actual = await sut.MailCarriers.GetMailCarriers();
 
         Assert.Equal(actual.Context.ResultTotal, actual.Count);
         Assert.All(
@@ -60,9 +60,9 @@ public class MailCarrierQueryTest
     public async Task Mail_carriers_index_is_not_empty()
     {
         await using Composer services = new();
-        var sut = services.Resolve<MailCarrierQuery>();
+        var sut = services.Resolve<Gw2Client>();
 
-        var actual = await sut.GetMailCarriersIndex();
+        var actual = await sut.MailCarriers.GetMailCarriersIndex();
 
         Assert.Equal(actual.Context.ResultTotal, actual.Count);
     }
@@ -71,11 +71,11 @@ public class MailCarrierQueryTest
     public async Task A_mail_carrier_can_be_found_by_id()
     {
         await using Composer services = new();
-        var sut = services.Resolve<MailCarrierQuery>();
+        var sut = services.Resolve<Gw2Client>();
 
         const int mailCarrierId = 1;
 
-        var actual = await sut.GetMailCarrierById(mailCarrierId);
+        var actual = await sut.MailCarriers.GetMailCarrierById(mailCarrierId);
 
         Assert.Equal(mailCarrierId, actual.Value.Id);
     }
@@ -84,7 +84,7 @@ public class MailCarrierQueryTest
     public async Task Mail_carriers_can_be_filtered_by_id()
     {
         await using Composer services = new();
-        var sut = services.Resolve<MailCarrierQuery>();
+        var sut = services.Resolve<Gw2Client>();
 
         HashSet<int> ids = new()
         {
@@ -93,7 +93,7 @@ public class MailCarrierQueryTest
             3
         };
 
-        var actual = await sut.GetMailCarriersByIds(ids);
+        var actual = await sut.MailCarriers.GetMailCarriersByIds(ids);
 
         Assert.Collection(
             actual,
@@ -107,9 +107,9 @@ public class MailCarrierQueryTest
     public async Task Mail_carriers_can_be_filtered_by_page()
     {
         await using Composer services = new();
-        var sut = services.Resolve<MailCarrierQuery>();
+        var sut = services.Resolve<Gw2Client>();
 
-        var actual = await sut.GetMailCarriersByPage(0, 3);
+        var actual = await sut.MailCarriers.GetMailCarriersByPage(0, 3);
 
         Assert.Equal(3, actual.Count);
         Assert.Equal(3, actual.Context.PageSize);
@@ -119,14 +119,14 @@ public class MailCarrierQueryTest
     public async Task Owned_mail_carriers_can_be_found()
     {
         await using Composer services = new();
-        var sut = services.Resolve<MailCarrierQuery>();
+        var sut = services.Resolve<Gw2Client>();
         var accessToken = services.Resolve<ApiKey>();
 
-        var actual = await sut.GetOwnedMailCarriers(accessToken.Key);
+        var actual = await sut.MailCarriers.GetOwnedMailCarriers(accessToken.Key);
 
         Assert.NotEmpty(actual.Value);
 
-        var carriers = await sut.GetMailCarriersByIds(actual.Value);
+        var carriers = await sut.MailCarriers.GetMailCarriersByIds(actual.Value);
 
         Assert.Equal(actual.Value.Count, carriers.Count);
         Assert.All(carriers, carrier => Assert.Contains(carrier.Id, actual.Value));

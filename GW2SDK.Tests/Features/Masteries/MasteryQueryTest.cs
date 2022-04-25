@@ -51,9 +51,9 @@ public class MasteryQueryTest
     public async Task Masteries_can_be_enumerated()
     {
         await using Composer services = new();
-        var sut = services.Resolve<MasteryQuery>();
+        var sut = services.Resolve<Gw2Client>();
 
-        var actual = await sut.GetMasteries();
+        var actual = await sut.Masteries.GetMasteries();
 
         Assert.Equal(actual.Context.ResultTotal, actual.Count);
         Assert.All(
@@ -86,9 +86,9 @@ public class MasteryQueryTest
     public async Task Masteries_index_is_not_empty()
     {
         await using Composer services = new();
-        var sut = services.Resolve<MasteryQuery>();
+        var sut = services.Resolve<Gw2Client>();
 
-        var actual = await sut.GetMasteriesIndex();
+        var actual = await sut.Masteries.GetMasteriesIndex();
 
         Assert.Equal(actual.Context.ResultTotal, actual.Count);
     }
@@ -97,11 +97,11 @@ public class MasteryQueryTest
     public async Task A_mastery_can_be_found_by_id()
     {
         await using Composer services = new();
-        var sut = services.Resolve<MasteryQuery>();
+        var sut = services.Resolve<Gw2Client>();
 
         const int masteryId = 1;
 
-        var actual = await sut.GetMasteryById(masteryId);
+        var actual = await sut.Masteries.GetMasteryById(masteryId);
 
         Assert.Equal(masteryId, actual.Value.Id);
     }
@@ -110,7 +110,7 @@ public class MasteryQueryTest
     public async Task Masteries_can_be_filtered_by_id()
     {
         await using Composer services = new();
-        var sut = services.Resolve<MasteryQuery>();
+        var sut = services.Resolve<Gw2Client>();
 
         HashSet<int> ids = new()
         {
@@ -119,7 +119,7 @@ public class MasteryQueryTest
             3
         };
 
-        var actual = await sut.GetMasteriesByIds(ids);
+        var actual = await sut.Masteries.GetMasteriesByIds(ids);
 
         Assert.Collection(
             actual,
@@ -133,10 +133,10 @@ public class MasteryQueryTest
     public async Task Mastery_progress_can_be_found()
     {
         await using Composer services = new();
-        var sut = services.Resolve<MasteryQuery>();
+        var sut = services.Resolve<Gw2Client>();
         var accessToken = services.Resolve<ApiKey>();
 
-        var actual = await sut.GetMasteryProgress(accessToken.Key);
+        var actual = await sut.Masteries.GetMasteryProgress(accessToken.Key);
 
         Assert.NotEmpty(actual.Value);
         Assert.All(

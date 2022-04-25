@@ -11,11 +11,11 @@ using JetBrains.Annotations;
 namespace GW2SDK;
 
 [PublicAPI]
-public sealed class AccountQuery
+public sealed class AccountsQuery
 {
     private readonly HttpClient http;
 
-    public AccountQuery(HttpClient http)
+    public AccountsQuery(HttpClient http)
     {
         this.http = http ?? throw new ArgumentNullException(nameof(http));
         http.BaseAddress ??= BaseAddress.DefaultUri;

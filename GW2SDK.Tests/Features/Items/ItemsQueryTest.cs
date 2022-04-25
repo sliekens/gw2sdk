@@ -6,15 +6,15 @@ using Xunit;
 
 namespace GW2SDK.Tests.Features.Items;
 
-public class ItemQueryTest
+public class ItemsQueryTest
 {
     [Fact]
     public async Task Items_index_is_not_empty()
     {
         await using Composer services = new();
-        var sut = services.Resolve<ItemQuery>();
+        var sut = services.Resolve<Gw2Client>();
 
-        var actual = await sut.GetItemsIndex();
+        var actual = await sut.Items.GetItemsIndex();
 
         Assert.Equal(actual.Context.ResultTotal, actual.Count);
     }
@@ -23,11 +23,11 @@ public class ItemQueryTest
     public async Task An_item_can_be_found_by_id()
     {
         await using Composer services = new();
-        var sut = services.Resolve<ItemQuery>();
+        var sut = services.Resolve<Gw2Client>();
 
         const int itemId = 24;
 
-        var actual = await sut.GetItemById(itemId);
+        var actual = await sut.Items.GetItemById(itemId);
 
         Assert.Equal(itemId, actual.Value.Id);
     }
@@ -36,7 +36,7 @@ public class ItemQueryTest
     public async Task Items_can_be_filtered_by_id()
     {
         await using Composer services = new();
-        var sut = services.Resolve<ItemQuery>();
+        var sut = services.Resolve<Gw2Client>();
 
         HashSet<int> ids = new()
         {
@@ -45,7 +45,7 @@ public class ItemQueryTest
             56
         };
 
-        var actual = await sut.GetItemsByIds(ids).ToListAsync();
+        var actual = await sut.Items.GetItemsByIds(ids).ToListAsync();
 
         Assert.Collection(
             actual,
@@ -59,9 +59,9 @@ public class ItemQueryTest
     public async Task Items_can_be_filtered_by_page()
     {
         await using Composer services = new();
-        var sut = services.Resolve<ItemQuery>();
+        var sut = services.Resolve<Gw2Client>();
 
-        var actual = await sut.GetItemsByPage(0, 3);
+        var actual = await sut.Items.GetItemsByPage(0, 3);
 
         Assert.Equal(3, actual.Count);
         Assert.Equal(3, actual.Context.PageSize);
@@ -74,9 +74,9 @@ public class ItemQueryTest
     public async Task Items_can_be_enumerated()
     {
         await using Composer services = new();
-        var sut = services.Resolve<ItemQuery>();
+        var sut = services.Resolve<Gw2Client>();
 
-        await foreach (var actual in sut.GetItems())
+        await foreach (var actual in sut.Items.GetItems())
         {
             ItemFacts.Validate(actual);
         }

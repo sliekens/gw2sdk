@@ -5,15 +5,15 @@ using Xunit;
 
 namespace GW2SDK.Tests.Features.ItemStats;
 
-public class ItemStatQueryTest
+public class ItemStatsQueryTest
 {
     [Fact]
     public async Task Item_stats_can_be_enumerated()
     {
         await using Composer services = new();
-        var sut = services.Resolve<ItemStatQuery>();
+        var sut = services.Resolve<Gw2Client>();
 
-        var actual = await sut.GetItemStats();
+        var actual = await sut.ItemStats.GetItemStats();
 
         Assert.Equal(actual.Context.ResultTotal, actual.Count);
     }
@@ -22,9 +22,9 @@ public class ItemStatQueryTest
     public async Task Item_stats_index_is_not_empty()
     {
         await using Composer services = new();
-        var sut = services.Resolve<ItemStatQuery>();
+        var sut = services.Resolve<Gw2Client>();
 
-        var actual = await sut.GetItemStatsIndex();
+        var actual = await sut.ItemStats.GetItemStatsIndex();
 
         Assert.Equal(actual.Context.ResultTotal, actual.Count);
     }
@@ -33,11 +33,11 @@ public class ItemStatQueryTest
     public async Task An_item_stat_can_be_found_by_id()
     {
         await using Composer services = new();
-        var sut = services.Resolve<ItemStatQuery>();
+        var sut = services.Resolve<Gw2Client>();
 
         const int itemStatId = 559;
 
-        var actual = await sut.GetItemStatById(itemStatId);
+        var actual = await sut.ItemStats.GetItemStatById(itemStatId);
 
         Assert.Equal(itemStatId, actual.Value.Id);
     }
@@ -46,7 +46,7 @@ public class ItemStatQueryTest
     public async Task Item_stats_can_be_filtered_by_ids()
     {
         await using Composer services = new();
-        var sut = services.Resolve<ItemStatQuery>();
+        var sut = services.Resolve<Gw2Client>();
 
         HashSet<int> ids = new()
         {
@@ -55,7 +55,7 @@ public class ItemStatQueryTest
             1566
         };
 
-        var actual = await sut.GetItemStatsByIds(ids);
+        var actual = await sut.ItemStats.GetItemStatsByIds(ids);
 
         Assert.Collection(
             actual,
@@ -69,9 +69,9 @@ public class ItemStatQueryTest
     public async Task Item_stats_can_be_filtered_by_page()
     {
         await using Composer services = new();
-        var sut = services.Resolve<ItemStatQuery>();
+        var sut = services.Resolve<Gw2Client>();
 
-        var actual = await sut.GetItemStatsByPage(0, 3);
+        var actual = await sut.ItemStats.GetItemStatsByPage(0, 3);
 
         Assert.Equal(3, actual.Count);
         Assert.Equal(3, actual.Context.PageSize);

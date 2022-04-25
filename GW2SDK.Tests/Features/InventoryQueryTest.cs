@@ -10,11 +10,11 @@ public class InventoryQueryTest
     public async Task Inventory_can_be_found_by_character_name()
     {
         await using Composer services = new();
-        var sut = services.Resolve<InventoryQuery>();
+        var sut = services.Resolve<Gw2Client>();
         var character = services.Resolve<TestCharacterName>();
         var accessToken = services.Resolve<ApiKey>();
 
-        var actual = await sut.GetInventory(character.Name, accessToken.Key);
+        var actual = await sut.Inventory.GetInventory(character.Name, accessToken.Key);
 
         Assert.NotNull(actual.Value);
         Assert.NotEmpty(actual.Value.Bags);
@@ -46,10 +46,10 @@ public class InventoryQueryTest
     public async Task Shared_inventory_can_be_found()
     {
         await using Composer services = new();
-        var sut = services.Resolve<InventoryQuery>();
+        var sut = services.Resolve<Gw2Client>();
         var accessToken = services.Resolve<ApiKey>();
 
-        var actual = await sut.GetSharedInventory(accessToken.Key);
+        var actual = await sut.Inventory.GetSharedInventory(accessToken.Key);
 
         Assert.NotEmpty(actual.Value);
         Assert.All(

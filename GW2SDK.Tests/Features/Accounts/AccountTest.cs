@@ -75,10 +75,10 @@ public class AccountTest
     public async Task It_can_get_basic_account_info_with_any_access_token()
     {
         await using Composer services = new();
-        var sut = services.Resolve<AccountQuery>();
+        var sut = services.Resolve<Gw2Client>();
         var accessToken = services.Resolve<ApiKeyBasic>();
 
-        var actual = await sut.GetSummary(accessToken.Key);
+        var actual = await sut.Accounts.GetSummary(accessToken.Key);
 
         BasicAccountFact.Name_is_never_empty(actual.Value);
         BasicAccountFact.Access_is_never_empty(actual.Value);
@@ -95,10 +95,10 @@ public class AccountTest
     public async Task It_can_get_full_details_when_authorized_by_scopes()
     {
         await using Composer services = new();
-        var sut = services.Resolve<AccountQuery>();
+        var sut = services.Resolve<Gw2Client>();
         var accessToken = services.Resolve<ApiKey>();
 
-        var actual = await sut.GetSummary(accessToken.Key);
+        var actual = await sut.Accounts.GetSummary(accessToken.Key);
 
         FullAccountFact.Name_is_never_empty(actual.Value);
         FullAccountFact.Access_is_never_empty(actual.Value);
@@ -116,10 +116,10 @@ public class AccountTest
     public async Task Character_names_can_be_enumerated()
     {
         await using Composer services = new();
-        var sut = services.Resolve<AccountQuery>();
+        var sut = services.Resolve<Gw2Client>();
         var accessToken = services.Resolve<ApiKey>();
 
-        var actual = await sut.GetCharactersIndex(accessToken.Key);
+        var actual = await sut.Accounts.GetCharactersIndex(accessToken.Key);
 
         var expected = services.Resolve<TestCharacterName>().Name;
 
@@ -130,10 +130,10 @@ public class AccountTest
     public async Task Characters_can_be_enumerated()
     {
         await using Composer services = new();
-        var sut = services.Resolve<AccountQuery>();
+        var sut = services.Resolve<Gw2Client>();
         var accessToken = services.Resolve<ApiKey>();
 
-        var actual = await sut.GetCharacters(accessToken.Key);
+        var actual = await sut.Accounts.GetCharacters(accessToken.Key);
 
         Assert.Equal(actual.Context.ResultTotal, actual.Count);
     }
@@ -142,11 +142,11 @@ public class AccountTest
     public async Task A_character_can_be_found_by_name()
     {
         await using Composer services = new();
-        var sut = services.Resolve<AccountQuery>();
+        var sut = services.Resolve<Gw2Client>();
         var characterName = services.Resolve<TestCharacterName>();
         var accessToken = services.Resolve<ApiKey>();
 
-        var actual = await sut.GetCharacterByName(characterName.Name, accessToken.Key);
+        var actual = await sut.Accounts.GetCharacterByName(characterName.Name, accessToken.Key);
 
         Assert.Equal(characterName.Name, actual.Value.Name);
     }

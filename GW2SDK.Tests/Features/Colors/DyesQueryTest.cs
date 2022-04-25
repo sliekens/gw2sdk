@@ -6,7 +6,7 @@ using Xunit;
 
 namespace GW2SDK.Tests.Features.Colors;
 
-public class DyeQueryTest
+public class DyesQueryTest
 {
     private static class ColorFact
     {
@@ -18,9 +18,9 @@ public class DyeQueryTest
     public async Task Colors_can_be_enumerated()
     {
         await using Composer services = new();
-        var sut = services.Resolve<DyeQuery>();
+        var sut = services.Resolve<Gw2Client>();
 
-        var actual = await sut.GetColors();
+        var actual = await sut.Dyes.GetColors();
 
         Assert.Equal(actual.Context.ResultTotal, actual.Count);
         Assert.All(
@@ -36,9 +36,9 @@ public class DyeQueryTest
     public async Task Colors_index_is_not_empty()
     {
         await using Composer services = new();
-        var sut = services.Resolve<DyeQuery>();
+        var sut = services.Resolve<Gw2Client>();
 
-        var actual = await sut.GetColorsIndex();
+        var actual = await sut.Dyes.GetColorsIndex();
 
         Assert.Equal(actual.Context.ResultTotal, actual.Count);
     }
@@ -47,11 +47,11 @@ public class DyeQueryTest
     public async Task A_color_can_be_found_by_id()
     {
         await using Composer services = new();
-        var sut = services.Resolve<DyeQuery>();
+        var sut = services.Resolve<Gw2Client>();
 
         const int colorId = 1;
 
-        var actual = await sut.GetColorById(colorId);
+        var actual = await sut.Dyes.GetColorById(colorId);
 
         Assert.Equal(colorId, actual.Value.Id);
     }
@@ -60,7 +60,7 @@ public class DyeQueryTest
     public async Task Colors_can_be_filtered_by_id()
     {
         await using Composer services = new();
-        var sut = services.Resolve<DyeQuery>();
+        var sut = services.Resolve<Gw2Client>();
 
         HashSet<int> ids = new()
         {
@@ -69,7 +69,7 @@ public class DyeQueryTest
             3
         };
 
-        var actual = await sut.GetColorsByIds(ids);
+        var actual = await sut.Dyes.GetColorsByIds(ids);
 
         Assert.Collection(
             actual,
@@ -83,9 +83,9 @@ public class DyeQueryTest
     public async Task Colors_can_be_filtered_by_page()
     {
         await using Composer services = new();
-        var sut = services.Resolve<DyeQuery>();
+        var sut = services.Resolve<Gw2Client>();
 
-        var actual = await sut.GetColorsByPage(0, 3);
+        var actual = await sut.Dyes.GetColorsByPage(0, 3);
 
         Assert.Equal(3, actual.Count);
         Assert.Equal(3, actual.Context.PageSize);
@@ -95,10 +95,10 @@ public class DyeQueryTest
     public async Task Unlocked_dyes_can_be_found()
     {
         await using Composer services = new();
-        var sut = services.Resolve<DyeQuery>();
+        var sut = services.Resolve<Gw2Client>();
         var accessToken = services.Resolve<ApiKey>();
 
-        var actual = await sut.GetUnlockedDyesIndex(accessToken.Key);
+        var actual = await sut.Dyes.GetUnlockedDyesIndex(accessToken.Key);
 
         Assert.NotEmpty(actual.Value);
         Assert.All(actual.Value, id => Assert.NotEqual(0, id));

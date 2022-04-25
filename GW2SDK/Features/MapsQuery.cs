@@ -11,11 +11,11 @@ namespace GW2SDK;
 
 // TODO: add direct lookups for regions, maps, ... https://github.com/arenanet/api-cdi/pull/2
 [PublicAPI]
-public sealed class MapQuery
+public sealed class MapsQuery
 {
     private readonly HttpClient http;
 
-    public MapQuery(HttpClient http)
+    public MapsQuery(HttpClient http)
     {
         this.http = http ?? throw new ArgumentNullException(nameof(http));
         http.BaseAddress ??= BaseAddress.DefaultUri;

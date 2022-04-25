@@ -29,9 +29,9 @@ public class WalletQueryTest
     public async Task Wallet_can_be_found()
     {
         await using Composer services = new();
-        var sut = services.Resolve<WalletQuery>();
+        var sut = services.Resolve<Gw2Client>();
         var accessToken = services.Resolve<ApiKey>();
-        var actual = await sut.GetWallet(accessToken.Key);
+        var actual = await sut.Wallet.GetWallet(accessToken.Key);
         var coins = actual.Value.Single(currency => currency.CurrencyId == 1);
         Coin coinsAmount = coins.Amount;
         Assert.True(coinsAmount > 0);
@@ -41,9 +41,9 @@ public class WalletQueryTest
     public async Task Currencies_can_be_enumerated()
     {
         await using Composer services = new();
-        var sut = services.Resolve<WalletQuery>();
+        var sut = services.Resolve<Gw2Client>();
 
-        var actual = await sut.GetCurrencies();
+        var actual = await sut.Wallet.GetCurrencies();
 
         Assert.Equal(actual.Context.ResultTotal, actual.Count);
         Assert.All(
@@ -63,9 +63,9 @@ public class WalletQueryTest
     public async Task Currencies_index_is_not_empty()
     {
         await using Composer services = new();
-        var sut = services.Resolve<WalletQuery>();
+        var sut = services.Resolve<Gw2Client>();
 
-        var actual = await sut.GetCurrenciesIndex();
+        var actual = await sut.Wallet.GetCurrenciesIndex();
 
         Assert.Equal(actual.Context.ResultTotal, actual.Count);
     }
@@ -74,11 +74,11 @@ public class WalletQueryTest
     public async Task A_currency_can_be_found_by_id()
     {
         await using Composer services = new();
-        var sut = services.Resolve<WalletQuery>();
+        var sut = services.Resolve<Gw2Client>();
 
         const int currencyId = 1;
 
-        var actual = await sut.GetCurrencyById(currencyId);
+        var actual = await sut.Wallet.GetCurrencyById(currencyId);
 
         Assert.Equal(currencyId, actual.Value.Id);
     }
@@ -87,7 +87,7 @@ public class WalletQueryTest
     public async Task Currencies_can_be_filtered_by_id()
     {
         await using Composer services = new();
-        var sut = services.Resolve<WalletQuery>();
+        var sut = services.Resolve<Gw2Client>();
 
         HashSet<int> ids = new()
         {
@@ -96,7 +96,7 @@ public class WalletQueryTest
             3
         };
 
-        var actual = await sut.GetCurrenciesByIds(ids);
+        var actual = await sut.Wallet.GetCurrenciesByIds(ids);
 
         Assert.Collection(
             actual,
@@ -110,9 +110,9 @@ public class WalletQueryTest
     public async Task Currencies_can_be_filtered_by_page()
     {
         await using Composer services = new();
-        var sut = services.Resolve<WalletQuery>();
+        var sut = services.Resolve<Gw2Client>();
 
-        var actual = await sut.GetCurrenciesByPage(0, 3);
+        var actual = await sut.Wallet.GetCurrenciesByPage(0, 3);
 
         Assert.Equal(3, actual.Count);
         Assert.Equal(3, actual.Context.PageSize);

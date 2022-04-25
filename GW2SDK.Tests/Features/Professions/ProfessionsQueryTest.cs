@@ -5,15 +5,15 @@ using Xunit;
 
 namespace GW2SDK.Tests.Features.Professions;
 
-public class ProfessionQueryTest
+public class ProfessionsQueryTest
 {
     [Fact]
     public async Task Professions_can_be_enumerated()
     {
         await using Composer services = new();
-        var sut = services.Resolve<ProfessionQuery>();
+        var sut = services.Resolve<Gw2Client>();
 
-        var actual = await sut.GetProfessions();
+        var actual = await sut.Professions.GetProfessions();
 
         Assert.Equal(Enum.GetNames(typeof(ProfessionName)).Length, actual.Count);
 
@@ -36,9 +36,9 @@ public class ProfessionQueryTest
     public async Task Profession_names_can_be_enumerated()
     {
         await using Composer services = new();
-        var sut = services.Resolve<ProfessionQuery>();
+        var sut = services.Resolve<Gw2Client>();
 
-        var actual = await sut.GetProfessionNames();
+        var actual = await sut.Professions.GetProfessionNames();
 
         Assert.Equal(Enum.GetNames(typeof(ProfessionName)).Length, actual.Count);
         Assert.All(
@@ -54,11 +54,11 @@ public class ProfessionQueryTest
     public async Task A_profession_can_be_found_by_name()
     {
         await using Composer services = new();
-        var sut = services.Resolve<ProfessionQuery>();
+        var sut = services.Resolve<Gw2Client>();
 
         const ProfessionName name = ProfessionName.Engineer;
 
-        var actual = await sut.GetProfessionByName(name);
+        var actual = await sut.Professions.GetProfessionByName(name);
 
         Assert.Equal(name, actual.Value.Id);
     }
@@ -67,7 +67,7 @@ public class ProfessionQueryTest
     public async Task Professions_can_be_filtered_by_name()
     {
         await using Composer services = new();
-        var sut = services.Resolve<ProfessionQuery>();
+        var sut = services.Resolve<Gw2Client>();
 
         ProfessionName[] names =
         {
@@ -76,7 +76,7 @@ public class ProfessionQueryTest
             ProfessionName.Revenant
         };
 
-        var actual = await sut.GetProfessionsByNames(names);
+        var actual = await sut.Professions.GetProfessionsByNames(names);
 
         Assert.Collection(
             actual,
@@ -90,9 +90,9 @@ public class ProfessionQueryTest
     public async Task Professions_can_be_filtered_by_page()
     {
         await using Composer services = new();
-        var sut = services.Resolve<ProfessionQuery>();
+        var sut = services.Resolve<Gw2Client>();
 
-        var actual = await sut.GetProfessionsByPage(0, 3);
+        var actual = await sut.Professions.GetProfessionsByPage(0, 3);
 
         Assert.Equal(3, actual.Count);
         Assert.Equal(3, actual.Context.PageSize);

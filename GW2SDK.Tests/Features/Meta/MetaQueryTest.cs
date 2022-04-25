@@ -236,9 +236,9 @@ public class MetaQueryTest
     public async Task It_can_get_the_current_build()
     {
         await using Composer services = new();
-        var sut = services.Resolve<MetaQuery>();
+        var sut = services.Resolve<Gw2Client>();
 
-        var actual = await sut.GetBuild();
+        var actual = await sut.Meta.GetBuild();
 
         Assert.True(actual.Value.Id >= 127440);
     }
@@ -247,9 +247,9 @@ public class MetaQueryTest
     public async Task It_can_get_the_v1_api_info()
     {
         await using Composer services = new();
-        var sut = services.Resolve<MetaQuery>();
+        var sut = services.Resolve<Gw2Client>();
 
-        var actual = await sut.GetApiVersion("v1");
+        var actual = await sut.Meta.GetApiVersion("v1");
 
         ApiVersionFact.There_are_no_newer_translations(actual.Value);
     }
@@ -258,9 +258,9 @@ public class MetaQueryTest
     public async Task It_can_get_the_v2_api_info()
     {
         await using Composer services = new();
-        var sut = services.Resolve<MetaQuery>();
+        var sut = services.Resolve<Gw2Client>();
 
-        var actual = await sut.GetApiVersion();
+        var actual = await sut.Meta.GetApiVersion();
 
         ApiVersionFact.There_are_no_newer_translations(actual.Value);
         ApiVersionFact.There_are_no_surprise_endpoints(actual.Value);

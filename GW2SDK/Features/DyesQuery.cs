@@ -3,30 +3,49 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
-using GW2SDK.ItemStats;
+using GW2SDK.Accounts.Dyes;
+using GW2SDK.Annotations;
+using GW2SDK.Colors;
 using GW2SDK.Json;
 using JetBrains.Annotations;
 
 namespace GW2SDK;
 
 [PublicAPI]
-public sealed class ItemStatQuery
+public sealed class DyesQuery
 {
     private readonly HttpClient http;
 
-    public ItemStatQuery(HttpClient http)
+    public DyesQuery(HttpClient http)
     {
         this.http = http ?? throw new ArgumentNullException(nameof(http));
         http.BaseAddress ??= BaseAddress.DefaultUri;
     }
 
-    public Task<IReplicaSet<ItemStat>> GetItemStats(
+    #region /v2/account/dyes
+
+    /// <summary>Gets the IDs of the dyes unlocked by the current account.</summary>
+    [Scope(Permission.Unlocks)]
+    public Task<IReplica<IReadOnlyCollection<int>>> GetUnlockedDyesIndex(
+        string? accessToken,
+        CancellationToken cancellationToken = default
+    )
+    {
+        UnlockedDyesRequest request = new() { AccessToken = accessToken };
+        return request.SendAsync(http, cancellationToken);
+    }
+
+    #endregion
+
+    #region /v2/colors
+
+    public Task<IReplicaSet<Dye>> GetColors(
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        ItemStatsRequest request = new()
+        ColorsRequest request = new()
         {
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
@@ -34,20 +53,20 @@ public sealed class ItemStatQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<IReplicaSet<int>> GetItemStatsIndex(CancellationToken cancellationToken = default)
+    public Task<IReplicaSet<int>> GetColorsIndex(CancellationToken cancellationToken = default)
     {
-        ItemStatsIndexRequest request = new();
+        ColorsIndexRequest request = new();
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<IReplica<ItemStat>> GetItemStatById(
-        int itemStatId,
+    public Task<IReplica<Dye>> GetColorById(
+        int colorId,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        ItemStatByIdRequest request = new(itemStatId)
+        ColorByIdRequest request = new(colorId)
         {
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
@@ -55,23 +74,22 @@ public sealed class ItemStatQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<IReplicaSet<ItemStat>> GetItemStatsByIds(
-        IReadOnlyCollection<int> itemStatIds,
+    public Task<IReplicaSet<Dye>> GetColorsByIds(
+        IReadOnlyCollection<int> colorIds,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        ItemStatsByIdsRequest request = new(itemStatIds)
+        ColorsByIdsRequest request = new(colorIds)
         {
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
         };
-
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<IReplicaPage<ItemStat>> GetItemStatsByPage(
+    public Task<IReplicaPage<Dye>> GetColorsByPage(
         int pageIndex,
         int? pageSize = default,
         Language? language = default,
@@ -79,7 +97,7 @@ public sealed class ItemStatQuery
         CancellationToken cancellationToken = default
     )
     {
-        ItemStatsByPageRequest request = new(pageIndex)
+        ColorsByPageRequest request = new(pageIndex)
         {
             PageSize = pageSize,
             Language = language,
@@ -87,4 +105,6 @@ public sealed class ItemStatQuery
         };
         return request.SendAsync(http, cancellationToken);
     }
+
+    #endregion
 }

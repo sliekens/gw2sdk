@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using GW2SDK.Accounts.BuildStorage;
 using GW2SDK.Tests.TestInfrastructure;
 using Xunit;
 
@@ -12,10 +11,10 @@ public class BuildStorageQueryTest
     public async Task Build_storage_index_is_not_empty()
     {
         await using Composer services = new();
-        var sut = services.Resolve<BuildStorageQuery>();
+        var sut = services.Resolve<Gw2Client>();
         var accessToken = services.Resolve<ApiKey>();
 
-        var actual = await sut.GetBuildStorageIndex(accessToken.Key);
+        var actual = await sut.BuildStorage.GetBuildStorageIndex(accessToken.Key);
 
         Assert.NotEmpty(actual);
         Assert.Equal(actual.Context.ResultTotal, actual.Count);
@@ -25,12 +24,12 @@ public class BuildStorageQueryTest
     public async Task A_build_storage_space_can_be_found_by_id()
     {
         await using Composer services = new();
-        var sut = services.Resolve<BuildStorageQuery>();
+        var sut = services.Resolve<Gw2Client>();
         var accessToken = services.Resolve<ApiKey>();
 
         const int id = 3;
 
-        var actual = await sut.GetBuildStorageSpaceById(accessToken.Key, id);
+        var actual = await sut.BuildStorage.GetBuildStorageSpaceById(accessToken.Key, id);
 
         Assert.NotNull(actual.Value);
         Assert.NotEmpty(actual.Value.Name);
@@ -40,7 +39,7 @@ public class BuildStorageQueryTest
     public async Task Build_storage_can_be_filtered_by_id()
     {
         await using Composer services = new();
-        var sut = services.Resolve<BuildStorageQuery>();
+        var sut = services.Resolve<Gw2Client>();
         var accessToken = services.Resolve<ApiKey>();
 
         HashSet<int> ids = new()
@@ -50,7 +49,7 @@ public class BuildStorageQueryTest
             4
         };
 
-        var actual = await sut.GetBuildStorageSpacesByIds(accessToken.Key, ids);
+        var actual = await sut.BuildStorage.GetBuildStorageSpacesByIds(accessToken.Key, ids);
 
         Assert.NotEmpty(actual);
         Assert.All(
@@ -66,10 +65,10 @@ public class BuildStorageQueryTest
     public async Task Build_storage_can_be_filtered_by_page()
     {
         await using Composer services = new();
-        var sut = services.Resolve<BuildStorageQuery>();
+        var sut = services.Resolve<Gw2Client>();
         var accessToken = services.Resolve<ApiKey>();
 
-        var actual = await sut.GetBuildStorageSpacesByPage(accessToken.Key, 0, 3);
+        var actual = await sut.BuildStorage.GetBuildStorageSpacesByPage(accessToken.Key, 0, 3);
 
         Assert.Equal(3, actual.Count);
         Assert.Equal(3, actual.Context.PageSize);
@@ -79,10 +78,10 @@ public class BuildStorageQueryTest
     public async Task Build_storage_can_be_enumerated()
     {
         await using Composer services = new();
-        var sut = services.Resolve<BuildStorageQuery>();
+        var sut = services.Resolve<Gw2Client>();
         var accessToken = services.Resolve<ApiKey>();
 
-        var actual = await sut.GetBuildStorage(accessToken.Key);
+        var actual = await sut.BuildStorage.GetBuildStorage(accessToken.Key);
 
         Assert.NotEmpty(actual.Values);
         Assert.All(

@@ -6,7 +6,7 @@ using Xunit;
 
 namespace GW2SDK.Tests.Features.Traits;
 
-public class TraitQueryTest
+public class TraitsQueryTest
 {
     private static class TraitFact
     {
@@ -18,9 +18,9 @@ public class TraitQueryTest
     public async Task Traits_can_be_enumerated()
     {
         await using Composer services = new();
-        var sut = services.Resolve<TraitQuery>();
+        var sut = services.Resolve<Gw2Client>();
 
-        var actual = await sut.GetTraits();
+        var actual = await sut.Traits.GetTraits();
 
         Assert.Equal(actual.Context.ResultTotal, actual.Count);
         Assert.All(
@@ -36,9 +36,9 @@ public class TraitQueryTest
     public async Task Traits_index_is_not_empty()
     {
         await using Composer services = new();
-        var sut = services.Resolve<TraitQuery>();
+        var sut = services.Resolve<Gw2Client>();
 
-        var actual = await sut.GetTraitsIndex();
+        var actual = await sut.Traits.GetTraitsIndex();
 
         Assert.Equal(actual.Context.ResultTotal, actual.Count);
     }
@@ -47,11 +47,11 @@ public class TraitQueryTest
     public async Task A_trait_can_be_found_by_id()
     {
         await using Composer services = new();
-        var sut = services.Resolve<TraitQuery>();
+        var sut = services.Resolve<Gw2Client>();
 
         const int traitId = 214;
 
-        var actual = await sut.GetTraitById(traitId);
+        var actual = await sut.Traits.GetTraitById(traitId);
 
         Assert.Equal(traitId, actual.Value.Id);
     }
@@ -60,7 +60,7 @@ public class TraitQueryTest
     public async Task Traits_can_be_filtered_by_id()
     {
         await using Composer services = new();
-        var sut = services.Resolve<TraitQuery>();
+        var sut = services.Resolve<Gw2Client>();
 
         HashSet<int> ids = new()
         {
@@ -69,7 +69,7 @@ public class TraitQueryTest
             222
         };
 
-        var actual = await sut.GetTraitsByIds(ids);
+        var actual = await sut.Traits.GetTraitsByIds(ids);
 
         Assert.Collection(
             actual,
@@ -83,9 +83,9 @@ public class TraitQueryTest
     public async Task Traits_can_be_filtered_by_page()
     {
         await using Composer services = new();
-        var sut = services.Resolve<TraitQuery>();
+        var sut = services.Resolve<Gw2Client>();
 
-        var actual = await sut.GetTraitsByPage(0, 3);
+        var actual = await sut.Traits.GetTraitsByPage(0, 3);
 
         Assert.Equal(3, actual.Count);
         Assert.Equal(3, actual.Context.PageSize);

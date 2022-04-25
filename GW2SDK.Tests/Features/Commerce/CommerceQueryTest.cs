@@ -12,11 +12,11 @@ public class CommerceQueryTest
     public async Task Gold_for_gems_exchange_rate_is_available()
     {
         await using Composer services = new();
-        var sut = services.Resolve<CommerceQuery>();
+        var sut = services.Resolve<Gw2Client>();
 
         Coin coins = new(100, 0, 0);
 
-        var actual = await sut.ExchangeGoldForGems(coins);
+        var actual = await sut.Commerce.ExchangeGoldForGems(coins);
 
         Assert.True(actual.Value.GemsToReceive > 0, "100 gold should be worth some gems.");
         Assert.True(actual.Value.CoinsPerGem > 0, "Gems can't be free.");
@@ -26,11 +26,11 @@ public class CommerceQueryTest
     public async Task Gems_for_gold_exchange_rate_is_available()
     {
         await using Composer services = new();
-        var sut = services.Resolve<CommerceQuery>();
+        var sut = services.Resolve<Gw2Client>();
 
         const int gems = 800;
 
-        var actual = await sut.ExchangeGemsForGold(gems);
+        var actual = await sut.Commerce.ExchangeGemsForGold(gems);
 
         Assert.True(actual.Value.CoinsToReceive > 10000, "800 gems should be worth some gold.");
         Assert.True(actual.Value.CoinsPerGem > 0, "Gems can't be free.");
@@ -40,9 +40,9 @@ public class CommerceQueryTest
     public async Task Item_prices_index_is_not_empty()
     {
         await using Composer services = new();
-        var sut = services.Resolve<CommerceQuery>();
+        var sut = services.Resolve<Gw2Client>();
 
-        var actual = await sut.GetItemPricesIndex();
+        var actual = await sut.Commerce.GetItemPricesIndex();
 
         Assert.Equal(actual.Context.ResultTotal, actual.Count);
     }
@@ -51,11 +51,11 @@ public class CommerceQueryTest
     public async Task An_item_price_can_be_found_by_id()
     {
         await using Composer services = new();
-        var sut = services.Resolve<CommerceQuery>();
+        var sut = services.Resolve<Gw2Client>();
 
         const int itemId = 24;
 
-        var actual = await sut.GetItemPriceById(itemId);
+        var actual = await sut.Commerce.GetItemPriceById(itemId);
 
         var value = actual.Value;
         Assert.Equal(itemId, value.Id);
@@ -70,7 +70,7 @@ public class CommerceQueryTest
     public async Task Item_prices_can_be_filtered_by_id()
     {
         await using Composer services = new();
-        var sut = services.Resolve<CommerceQuery>();
+        var sut = services.Resolve<Gw2Client>();
 
         HashSet<int> ids = new()
         {
@@ -79,7 +79,7 @@ public class CommerceQueryTest
             35984
         };
 
-        var actual = await sut.GetItemPricesByIds(ids).ToListAsync();
+        var actual = await sut.Commerce.GetItemPricesByIds(ids).ToListAsync();
 
         Assert.Collection(
             actual,
@@ -96,9 +96,9 @@ public class CommerceQueryTest
     public async Task Item_prices_can_be_enumerated()
     {
         await using Composer services = new();
-        var sut = services.Resolve<CommerceQuery>();
+        var sut = services.Resolve<Gw2Client>();
 
-        await foreach (var actual in sut.GetItemPrices())
+        await foreach (var actual in sut.Commerce.GetItemPrices())
         {
             Assert.True(actual.Id > 0);
             if (actual.TotalSupply == 0)
@@ -134,9 +134,9 @@ public class CommerceQueryTest
     public async Task Order_books_index_is_not_empty()
     {
         await using Composer services = new();
-        var sut = services.Resolve<CommerceQuery>();
+        var sut = services.Resolve<Gw2Client>();
 
-        var actual = await sut.GetOrderBooksIndex();
+        var actual = await sut.Commerce.GetOrderBooksIndex();
 
         Assert.Equal(actual.Context.ResultTotal, actual.Count);
     }
@@ -145,11 +145,11 @@ public class CommerceQueryTest
     public async Task An_order_book_can_be_found_by_id()
     {
         await using Composer services = new();
-        var sut = services.Resolve<CommerceQuery>();
+        var sut = services.Resolve<Gw2Client>();
 
         const int itemId = 24;
 
-        var actual = await sut.GetOrderBookById(itemId);
+        var actual = await sut.Commerce.GetOrderBookById(itemId);
 
         var value = actual.Value;
         Assert.Equal(itemId, value.Id);
@@ -190,7 +190,7 @@ public class CommerceQueryTest
     public async Task Order_books_can_be_filtered_by_id()
     {
         await using Composer services = new();
-        var sut = services.Resolve<CommerceQuery>();
+        var sut = services.Resolve<Gw2Client>();
 
         HashSet<int> ids = new()
         {
@@ -199,7 +199,7 @@ public class CommerceQueryTest
             35984
         };
 
-        var actual = await sut.GetOrderBooksByIds(ids).ToListAsync();
+        var actual = await sut.Commerce.GetOrderBooksByIds(ids).ToListAsync();
 
         Assert.Collection(
             actual,
@@ -216,9 +216,9 @@ public class CommerceQueryTest
     public async Task Order_books_can_be_enumerated()
     {
         await using Composer services = new();
-        var sut = services.Resolve<CommerceQuery>();
+        var sut = services.Resolve<Gw2Client>();
 
-        await foreach (var actual in sut.GetOrderBooks())
+        await foreach (var actual in sut.Commerce.GetOrderBooks())
         {
             Assert.True(actual.Id > 0);
             if (actual.TotalSupply == 0)
@@ -277,9 +277,9 @@ public class CommerceQueryTest
     {
         await using Composer service = new();
         var accessToken = service.Resolve<ApiKey>();
-        var sut = service.Resolve<CommerceQuery>();
+        var sut = service.Resolve<Gw2Client>();
 
-        var deliveryBox = await sut.GetDeliveryBox(accessToken.Key);
+        var deliveryBox = await sut.Commerce.GetDeliveryBox(accessToken.Key);
 
         // Step through with debugger to see if the values reflect your in-game delivery box
         Assert.NotNull(deliveryBox.Value);
@@ -290,9 +290,9 @@ public class CommerceQueryTest
     {
         await using Composer service = new();
         var accessToken = service.Resolve<ApiKey>();
-        var sut = service.Resolve<CommerceQuery>();
+        var sut = service.Resolve<Gw2Client>();
 
-        var bids = await sut.GetBuyOrders(0, 200, accessToken.Key);
+        var bids = await sut.Commerce.GetBuyOrders(0, 200, accessToken.Key);
 
         Assert.NotEmpty(bids);
     }
@@ -302,9 +302,9 @@ public class CommerceQueryTest
     {
         await using Composer service = new();
         var accessToken = service.Resolve<ApiKey>();
-        var sut = service.Resolve<CommerceQuery>();
+        var sut = service.Resolve<Gw2Client>();
 
-        var bids = await sut.GetSellOrders(0, 200, accessToken.Key);
+        var bids = await sut.Commerce.GetSellOrders(0, 200, accessToken.Key);
 
         Assert.NotEmpty(bids);
     }
@@ -314,9 +314,9 @@ public class CommerceQueryTest
     {
         await using Composer service = new();
         var accessToken = service.Resolve<ApiKey>();
-        var sut = service.Resolve<CommerceQuery>();
+        var sut = service.Resolve<Gw2Client>();
 
-        var bids = await sut.GetPurchases(0, 200, accessToken.Key);
+        var bids = await sut.Commerce.GetPurchases(0, 200, accessToken.Key);
 
         Assert.NotEmpty(bids);
     }
@@ -326,9 +326,9 @@ public class CommerceQueryTest
     {
         await using Composer service = new();
         var accessToken = service.Resolve<ApiKey>();
-        var sut = service.Resolve<CommerceQuery>();
+        var sut = service.Resolve<Gw2Client>();
 
-        var bids = await sut.GetSales(0, 200, accessToken.Key);
+        var bids = await sut.Commerce.GetSales(0, 200, accessToken.Key);
 
         Assert.NotEmpty(bids);
     }

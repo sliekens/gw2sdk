@@ -3,31 +3,30 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
-using GW2SDK.Accounts.MailCarriers;
 using GW2SDK.Json;
-using GW2SDK.MailCarriers;
+using GW2SDK.Skills;
 using JetBrains.Annotations;
 
 namespace GW2SDK;
 
 [PublicAPI]
-public sealed class MailCarrierQuery
+public sealed class SkillsQuery
 {
     private readonly HttpClient http;
 
-    public MailCarrierQuery(HttpClient http)
+    public SkillsQuery(HttpClient http)
     {
         this.http = http ?? throw new ArgumentNullException(nameof(http));
         http.BaseAddress ??= BaseAddress.DefaultUri;
     }
 
-    public Task<IReplicaSet<MailCarrier>> GetMailCarriers(
+    public Task<IReplicaSet<Skill>> GetSkills(
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        MailCarriersRequest request = new()
+        SkillsRequest request = new()
         {
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
@@ -35,22 +34,20 @@ public sealed class MailCarrierQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<IReplicaSet<int>> GetMailCarriersIndex(
-        CancellationToken cancellationToken = default
-    )
+    public Task<IReplicaSet<int>> GetSkillsIndex(CancellationToken cancellationToken = default)
     {
-        MailCarriersIndexRequest request = new();
+        SkillsIndexRequest request = new();
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<IReplica<MailCarrier>> GetMailCarrierById(
-        int mailCarrierId,
+    public Task<IReplica<Skill>> GetSkillById(
+        int skillId,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        MailCarrierByIdRequest request = new(mailCarrierId)
+        SkillByIdRequest request = new(skillId)
         {
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
@@ -58,14 +55,14 @@ public sealed class MailCarrierQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<IReplicaSet<MailCarrier>> GetMailCarriersByIds(
-        IReadOnlyCollection<int> mailCarrierIds,
+    public Task<IReplicaSet<Skill>> GetSkillsByIds(
+        IReadOnlyCollection<int> skillIds,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        MailCarriersByIdsRequest request = new(mailCarrierIds)
+        SkillsByIdsRequest request = new(skillIds)
         {
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
@@ -73,7 +70,7 @@ public sealed class MailCarrierQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<IReplicaPage<MailCarrier>> GetMailCarriersByPage(
+    public Task<IReplicaPage<Skill>> GetSkillsByPage(
         int pageIndex,
         int? pageSize = default,
         Language? language = default,
@@ -81,21 +78,12 @@ public sealed class MailCarrierQuery
         CancellationToken cancellationToken = default
     )
     {
-        MailCarriersByPageRequest request = new(pageIndex)
+        SkillsByPageRequest request = new(pageIndex)
         {
             PageSize = pageSize,
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
         };
-        return request.SendAsync(http, cancellationToken);
-    }
-
-    public Task<IReplica<IReadOnlyCollection<int>>> GetOwnedMailCarriers(
-        string? accessToken,
-        CancellationToken cancellationToken = default
-    )
-    {
-        OwnedMailCarriersRequest request = new() { AccessToken = accessToken };
         return request.SendAsync(http, cancellationToken);
     }
 }
