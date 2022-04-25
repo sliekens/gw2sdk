@@ -15,7 +15,7 @@ public class Composer : IServiceProvider, IAsyncDisposable
 
     public Composer()
     {
-        var gw2HttpClientFactory = new TestHttpClientFactory(configuration.BaseAddress);
+        var gw2HttpClientFactory = new TestHttpClientFactory(BaseAddress.DefaultUri);
         disposables.Add(gw2HttpClientFactory);
         httpClientFactory = gw2HttpClientFactory;
     }

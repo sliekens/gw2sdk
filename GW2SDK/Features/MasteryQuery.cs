@@ -4,7 +4,6 @@ using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 using GW2SDK.Accounts.Masteries;
-using GW2SDK.Http;
 using GW2SDK.Json;
 using GW2SDK.Masteries;
 using JetBrains.Annotations;
@@ -18,7 +17,8 @@ public sealed class MasteryQuery
 
     public MasteryQuery(HttpClient http)
     {
-        this.http = http.WithDefaults() ?? throw new ArgumentNullException(nameof(http));
+        this.http = http ?? throw new ArgumentNullException(nameof(http));
+        http.BaseAddress ??= BaseAddress.DefaultUri;
     }
 
     public Task<IReplicaSet<Mastery>> GetMasteries(

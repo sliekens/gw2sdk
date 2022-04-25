@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 using GW2SDK.Accounts.Dungeons;
 using GW2SDK.Annotations;
 using GW2SDK.Dungeons;
-using GW2SDK.Http;
 using GW2SDK.Json;
 using JetBrains.Annotations;
 
@@ -19,7 +18,8 @@ public sealed class DungeonQuery
 
     public DungeonQuery(HttpClient http)
     {
-        this.http = http.WithDefaults() ?? throw new ArgumentNullException(nameof(http));
+        this.http = http ?? throw new ArgumentNullException(nameof(http));
+        http.BaseAddress ??= BaseAddress.DefaultUri;
     }
 
     public Task<IReplicaSet<string>> GetDungeonsIndex(CancellationToken cancellationToken = default)

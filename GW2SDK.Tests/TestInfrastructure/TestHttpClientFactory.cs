@@ -51,7 +51,7 @@ public class TestHttpClientFactory : IHttpClientFactory, IAsyncDisposable
 #endif
                 }
                 )
-            .AddPolicyHandlerFromRegistry("api.guildwars2.com");
+            .AddPolicyHandlerFromRegistry("com.guildwars2.api");
 
         return services.BuildServiceProvider();
     }
@@ -118,7 +118,7 @@ public class TestHttpClientFactory : IHttpClientFactory, IAsyncDisposable
             );
 
         policies.Add(
-            "api.guildwars2.com",
+            "com.guildwars2.api",
             Policy.WrapAsync(timeout, rateLimit, retryRequestError, innerTimeout)
             );
     }

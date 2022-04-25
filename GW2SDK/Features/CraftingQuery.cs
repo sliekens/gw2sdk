@@ -8,7 +8,6 @@ using GW2SDK.Accounts.Characters.Crafting;
 using GW2SDK.Accounts.Crafting;
 using GW2SDK.Annotations;
 using GW2SDK.Crafting;
-using GW2SDK.Http;
 using GW2SDK.Json;
 using JetBrains.Annotations;
 
@@ -22,7 +21,8 @@ public sealed class CraftingQuery
 
     public CraftingQuery(HttpClient http)
     {
-        this.http = http.WithDefaults() ?? throw new ArgumentNullException(nameof(http));
+        this.http = http ?? throw new ArgumentNullException(nameof(http));
+        http.BaseAddress ??= BaseAddress.DefaultUri;
     }
 
     public Task<IReplicaSet<int>> GetRecipesIndex(CancellationToken cancellationToken = default)

@@ -24,8 +24,6 @@ public class ConfigurationManager
     public string CharacterName =>
         Configuration["CharacterName"]
         ?? throw new InvalidOperationException("Missing CharacterName.");
-
-    public Uri BaseAddress => new(Configuration["Authority"], UriKind.Absolute);
 }
 
 public sealed class TestCharacterName

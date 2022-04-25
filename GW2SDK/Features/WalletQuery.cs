@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 using GW2SDK.Accounts.Currencies;
 using GW2SDK.Annotations;
 using GW2SDK.Currencies;
-using GW2SDK.Http;
 using GW2SDK.Json;
 using JetBrains.Annotations;
 
@@ -19,7 +18,8 @@ public sealed class WalletQuery
 
     public WalletQuery(HttpClient http)
     {
-        this.http = http.WithDefaults() ?? throw new ArgumentNullException(nameof(http));
+        this.http = http ?? throw new ArgumentNullException(nameof(http));
+        http.BaseAddress ??= BaseAddress.DefaultUri;
     }
 
     #region /v2/account/wallet

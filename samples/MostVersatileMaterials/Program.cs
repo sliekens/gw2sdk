@@ -7,7 +7,6 @@ using System.Text;
 using System.Threading.Tasks;
 using GW2SDK;
 using GW2SDK.Crafting;
-using GW2SDK.Http;
 using GW2SDK.Items;
 using Spectre.Console;
 
@@ -24,10 +23,7 @@ internal class Program
 
     private static async Task Main(string[] args)
     {
-        using var http = new HttpClient(new SocketsHttpHandler(), true);
-
-        http.UseGuildWars2();
-        http.UseLanguage(Language.English);
+        using var http = new HttpClient();
 
         var craftingQuery = new CraftingQuery(http);
         var itemQuery = new ItemQuery(http);

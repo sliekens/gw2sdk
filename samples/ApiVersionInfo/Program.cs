@@ -151,6 +151,7 @@ internal class Program
         //"/v2/races",
         //"/v2/raids",
         "/v2/recipes",
+
         "/v2/recipes/search",
         "/v2/skills",
         "/v2/skins",
@@ -188,17 +189,9 @@ internal class Program
     {
         // First configure the HttpClient
         // There are many ways to do this, but this sample takes a minimalistic approach.
-        using var http = new HttpClient(new SocketsHttpHandler(), true);
-
-        // Convenience method, sets the BaseAddress
-        http.UseGuildWars2();
-
-        // Convenience method, sets the Accept-Language header
-        http.UseLanguage(Language.English);
-
-        // End of HttpClient config
         // This is just the minimal setup to get things going without exceptions under normal conditions.
         // In a real application, you would use Polly and IHttpClientFactory to add resiliency etc.
+        using var http = new HttpClient();
 
         // From here on out, you can create GW2SDK services, pass the HttpClient and a JSON reader object.
         // The default JSON reader should work fine, but can be replaced with a custom implementation.

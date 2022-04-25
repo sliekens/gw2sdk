@@ -77,21 +77,15 @@ public class Container : IDisposable, IAsyncDisposable
             );
 
         policies.Add(
-            "api.guildwars2.com",
+            "com.guildwars2.api",
             Policy.WrapAsync(timeout, rateLimit, retryRequestError, innerTimeout)
             );
 
-        services.AddHttpClient(
-                "GW2SDK",
-                http =>
-                {
-                    http.UseGuildWars2();
-                }
-                )
+        services.AddHttpClient("com.guildwars2.api")
             .ConfigurePrimaryHttpMessageHandler(
                 () => new SocketsHttpHandler { AutomaticDecompression = DecompressionMethods.GZip }
                 )
-            .AddPolicyHandlerFromRegistry("api.guildwars2.com")
+            .AddPolicyHandlerFromRegistry("com.guildwars2.api")
             .AddTypedClient<MapQuery>()
             .AddTypedClient<JsonAchievementService>()
             .AddTypedClient<JsonFloorService>()

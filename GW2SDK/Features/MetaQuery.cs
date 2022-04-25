@@ -3,7 +3,6 @@ using System.Diagnostics.CodeAnalysis;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
-using GW2SDK.Http;
 using GW2SDK.Json;
 using GW2SDK.Meta;
 using JetBrains.Annotations;
@@ -17,7 +16,8 @@ public sealed class MetaQuery
 
     public MetaQuery(HttpClient http)
     {
-        this.http = http.WithDefaults() ?? throw new ArgumentNullException(nameof(http));
+        this.http = http ?? throw new ArgumentNullException(nameof(http));
+        http.BaseAddress ??= BaseAddress.DefaultUri;
     }
 
     public Task<IReplica<ApiVersion>> GetApiVersion(

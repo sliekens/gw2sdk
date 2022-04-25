@@ -10,7 +10,6 @@ using GW2SDK.Achievements.Dailies;
 using GW2SDK.Achievements.Groups;
 using GW2SDK.Achievements.Titles;
 using GW2SDK.Annotations;
-using GW2SDK.Http;
 using GW2SDK.Json;
 using JetBrains.Annotations;
 
@@ -23,7 +22,8 @@ public sealed class AchievementQuery
 
     public AchievementQuery(HttpClient http)
     {
-        this.http = http.WithDefaults() ?? throw new ArgumentNullException(nameof(http));
+        this.http = http ?? throw new ArgumentNullException(nameof(http));
+        http.BaseAddress ??= BaseAddress.DefaultUri;
     }
 
     #region /v2/achievements/daily
