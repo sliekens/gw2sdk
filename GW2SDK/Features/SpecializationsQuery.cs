@@ -4,29 +4,29 @@ using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 using GW2SDK.Json;
-using GW2SDK.Skills;
+using GW2SDK.Specializations;
 using JetBrains.Annotations;
 
 namespace GW2SDK;
 
 [PublicAPI]
-public sealed class SkillQuery
+public sealed class SpecializationsQuery
 {
     private readonly HttpClient http;
 
-    public SkillQuery(HttpClient http)
+    public SpecializationsQuery(HttpClient http)
     {
         this.http = http ?? throw new ArgumentNullException(nameof(http));
         http.BaseAddress ??= BaseAddress.DefaultUri;
     }
 
-    public Task<IReplicaSet<Skill>> GetSkills(
+    public Task<IReplicaSet<Specialization>> GetSpecializations(
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        SkillsRequest request = new()
+        SpecializationsRequest request = new()
         {
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
@@ -34,20 +34,22 @@ public sealed class SkillQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<IReplicaSet<int>> GetSkillsIndex(CancellationToken cancellationToken = default)
+    public Task<IReplicaSet<int>> GetSpecializationsIndex(
+        CancellationToken cancellationToken = default
+    )
     {
-        SkillsIndexRequest request = new();
+        SpecializationsIndexRequest request = new();
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<IReplica<Skill>> GetSkillById(
-        int skillId,
+    public Task<IReplica<Specialization>> GetSpecializationById(
+        int specializationId,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        SkillByIdRequest request = new(skillId)
+        SpecializationByIdRequest request = new(specializationId)
         {
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
@@ -55,32 +57,15 @@ public sealed class SkillQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<IReplicaSet<Skill>> GetSkillsByIds(
-        IReadOnlyCollection<int> skillIds,
+    public Task<IReplicaSet<Specialization>> GetSpecializationsByIds(
+        IReadOnlyCollection<int> specializationIds,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        SkillsByIdsRequest request = new(skillIds)
+        SpecializationsByIdsRequest request = new(specializationIds)
         {
-            Language = language,
-            MissingMemberBehavior = missingMemberBehavior
-        };
-        return request.SendAsync(http, cancellationToken);
-    }
-
-    public Task<IReplicaPage<Skill>> GetSkillsByPage(
-        int pageIndex,
-        int? pageSize = default,
-        Language? language = default,
-        MissingMemberBehavior missingMemberBehavior = default,
-        CancellationToken cancellationToken = default
-    )
-    {
-        SkillsByPageRequest request = new(pageIndex)
-        {
-            PageSize = pageSize,
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
         };

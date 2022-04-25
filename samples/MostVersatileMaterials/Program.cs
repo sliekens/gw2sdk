@@ -24,9 +24,7 @@ internal class Program
     private static async Task Main(string[] args)
     {
         using var http = new HttpClient();
-
-        var craftingQuery = new CraftingQuery(http);
-        var itemQuery = new ItemQuery(http);
+        var gw2 = new Gw2Client(http);
 
         var (ingredients, recipes) = await Progress()
             .StartAsync(
@@ -41,7 +39,7 @@ internal class Program
                         new ProgressTaskSettings { AutoStart = false }
                         );
 
-                    var craftingRecipes = await GetRecipes(craftingQuery, recipesProgress);
+                    var craftingRecipes = await GetRecipes(gw2.Crafting, recipesProgress);
 
                     var groupedByIngredient = craftingRecipes
                         .SelectMany(
@@ -56,7 +54,7 @@ internal class Program
 
                     var craftingIngredients = await GetItems(
                         ingredientIndex,
-                        itemQuery,
+                        gw2.Items,
                         ingredientsProgress
                         );
 
@@ -105,7 +103,7 @@ internal class Program
                             .ToHashSet();
                         return await GetItems(
                             itemIds,
-                            itemQuery,
+                            gw2.Items,
                             ctx.AddTask("Fetching output items")
                             );
                     }
@@ -155,14 +153,14 @@ internal class Program
 
     private static async Task<List<Item>> GetItems(
         IReadOnlyCollection<int> itemIds,
-        ItemQuery itemQuery,
+        ItemsQuery itemsQuery,
         ProgressTask progress
     )
     {
         var items = new List<Item>(itemIds.Count);
 
         progress.StartTask();
-        await foreach (var item in itemQuery.GetItemsByIds(
+        await foreach (var item in itemsQuery.GetItemsByIds(
                            itemIds,
                            progress: new Progress<ICollectionContext>(
                                ctx => UpdateProgress(ctx, progress)

@@ -7,7 +7,7 @@ using Xunit;
 
 namespace GW2SDK.Tests.Features.Maps;
 
-public class MapQueryTest
+public class MapsQueryTest
 {
     private static class ContinentFact
     {
@@ -29,9 +29,9 @@ public class MapQueryTest
     public async Task Continents_can_be_enumerated()
     {
         await using Composer services = new();
-        var sut = services.Resolve<MapQuery>();
+        var sut = services.Resolve<Gw2Client>();
 
-        var actual = await sut.GetContinents();
+        var actual = await sut.Maps.GetContinents();
 
         Assert.Equal(actual.Context.ResultTotal, actual.Count);
         Assert.All(
@@ -47,9 +47,9 @@ public class MapQueryTest
     public async Task Continents_index_is_not_empty()
     {
         await using Composer services = new();
-        var sut = services.Resolve<MapQuery>();
+        var sut = services.Resolve<Gw2Client>();
 
-        var actual = await sut.GetContinentsIndex();
+        var actual = await sut.Maps.GetContinentsIndex();
 
         Assert.Equal(actual.Context.ResultTotal, actual.Count);
     }
@@ -58,11 +58,11 @@ public class MapQueryTest
     public async Task A_continent_can_be_found_by_id()
     {
         await using Composer services = new();
-        var sut = services.Resolve<MapQuery>();
+        var sut = services.Resolve<Gw2Client>();
 
         const int continentId = 1;
 
-        var actual = await sut.GetContinentById(continentId);
+        var actual = await sut.Maps.GetContinentById(continentId);
 
         Assert.Equal(continentId, actual.Value.Id);
     }
@@ -71,7 +71,7 @@ public class MapQueryTest
     public async Task Continents_can_be_filtered_by_id()
     {
         await using Composer services = new();
-        var sut = services.Resolve<MapQuery>();
+        var sut = services.Resolve<Gw2Client>();
 
         HashSet<int> ids = new()
         {
@@ -79,7 +79,7 @@ public class MapQueryTest
             2
         };
 
-        var actual = await sut.GetContinentsByIds(ids);
+        var actual = await sut.Maps.GetContinentsByIds(ids);
 
         Assert.Collection(
             actual,
@@ -92,9 +92,9 @@ public class MapQueryTest
     public async Task Continents_can_be_filtered_by_page()
     {
         await using Composer services = new();
-        var sut = services.Resolve<MapQuery>();
+        var sut = services.Resolve<Gw2Client>();
 
-        var actual = await sut.GetContinentsByPage(0, 2);
+        var actual = await sut.Maps.GetContinentsByPage(0, 2);
 
         Assert.Equal(2, actual.Count);
         Assert.Equal(2, actual.Context.PageSize);
@@ -104,11 +104,11 @@ public class MapQueryTest
     public async Task Floors_of_a_continent_can_be_enumerated()
     {
         await using Composer services = new();
-        var sut = services.Resolve<MapQuery>();
+        var sut = services.Resolve<Gw2Client>();
 
         const int continentId = 1;
 
-        var actual = await sut.GetFloors(continentId);
+        var actual = await sut.Maps.GetFloors(continentId);
 
         Assert.Equal(actual.Context.ResultTotal, actual.Count);
         Assert.All(
@@ -137,11 +137,11 @@ public class MapQueryTest
     public async Task Floors_index_of_a_continent_is_not_empty()
     {
         await using Composer services = new();
-        var sut = services.Resolve<MapQuery>();
+        var sut = services.Resolve<Gw2Client>();
 
         const int continentId = 1;
 
-        var actual = await sut.GetFloorsIndex(continentId);
+        var actual = await sut.Maps.GetFloorsIndex(continentId);
 
         Assert.Equal(actual.Context.ResultTotal, actual.Count);
     }
@@ -150,12 +150,12 @@ public class MapQueryTest
     public async Task A_floor_of_a_continent_can_be_found_by_id()
     {
         await using Composer services = new();
-        var sut = services.Resolve<MapQuery>();
+        var sut = services.Resolve<Gw2Client>();
 
         const int continentId = 1;
         const int floorId = 1;
 
-        var actual = await sut.GetFloorById(continentId, floorId);
+        var actual = await sut.Maps.GetFloorById(continentId, floorId);
 
         Assert.Equal(floorId, actual.Value.Id);
     }
@@ -164,7 +164,7 @@ public class MapQueryTest
     public async Task Floors_of_a_continent_can_be_filtered_by_id()
     {
         await using Composer services = new();
-        var sut = services.Resolve<MapQuery>();
+        var sut = services.Resolve<Gw2Client>();
 
         const int continentId = 1;
         HashSet<int> ids = new()
@@ -173,7 +173,7 @@ public class MapQueryTest
             2
         };
 
-        var actual = await sut.GetFloorsByIds(continentId, ids);
+        var actual = await sut.Maps.GetFloorsByIds(continentId, ids);
 
         Assert.Collection(
             actual,
@@ -186,11 +186,11 @@ public class MapQueryTest
     public async Task Floors_of_a_continent_can_be_filtered_by_page()
     {
         await using Composer services = new();
-        var sut = services.Resolve<MapQuery>();
+        var sut = services.Resolve<Gw2Client>();
 
         const int continentId = 1;
 
-        var actual = await sut.GetFloorsByPage(continentId, 0, 3);
+        var actual = await sut.Maps.GetFloorsByPage(continentId, 0, 3);
 
         Assert.Equal(3, actual.Count);
         Assert.Equal(3, actual.Context.PageSize);
@@ -200,9 +200,9 @@ public class MapQueryTest
     public async Task Worlds_can_be_enumerated()
     {
         await using Composer services = new();
-        var sut = services.Resolve<MapQuery>();
+        var sut = services.Resolve<Gw2Client>();
 
-        var actual = await sut.GetWorlds();
+        var actual = await sut.Maps.GetWorlds();
 
         Assert.Equal(actual.Context.ResultTotal, actual.Count);
         Assert.All(
@@ -220,9 +220,9 @@ public class MapQueryTest
     public async Task Worlds_index_is_not_empty()
     {
         await using Composer services = new();
-        var sut = services.Resolve<MapQuery>();
+        var sut = services.Resolve<Gw2Client>();
 
-        var actual = await sut.GetWorldsIndex();
+        var actual = await sut.Maps.GetWorldsIndex();
 
         Assert.Equal(actual.Context.ResultTotal, actual.Count);
     }
@@ -231,11 +231,11 @@ public class MapQueryTest
     public async Task A_world_can_be_found_by_id()
     {
         await using Composer services = new();
-        var sut = services.Resolve<MapQuery>();
+        var sut = services.Resolve<Gw2Client>();
 
         const int worldId = 1001;
 
-        var actual = await sut.GetWorldById(worldId);
+        var actual = await sut.Maps.GetWorldById(worldId);
 
         Assert.Equal(worldId, actual.Value.Id);
     }
@@ -244,7 +244,7 @@ public class MapQueryTest
     public async Task Worlds_can_be_filtered_by_id()
     {
         await using Composer services = new();
-        var sut = services.Resolve<MapQuery>();
+        var sut = services.Resolve<Gw2Client>();
 
         HashSet<int> ids = new()
         {
@@ -253,7 +253,7 @@ public class MapQueryTest
             1003
         };
 
-        var actual = await sut.GetWorldsByIds(ids);
+        var actual = await sut.Maps.GetWorldsByIds(ids);
 
         Assert.Collection(
             actual,
@@ -267,9 +267,9 @@ public class MapQueryTest
     public async Task Worlds_can_be_filtered_by_page()
     {
         await using Composer services = new();
-        var sut = services.Resolve<MapQuery>();
+        var sut = services.Resolve<Gw2Client>();
 
-        var actual = await sut.GetWorldsByPage(0, 3);
+        var actual = await sut.Maps.GetWorldsByPage(0, 3);
 
         Assert.Equal(3, actual.Count);
         Assert.Equal(3, actual.Context.PageSize);

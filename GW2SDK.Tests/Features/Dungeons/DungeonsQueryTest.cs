@@ -7,15 +7,15 @@ using Xunit;
 
 namespace GW2SDK.Tests.Features.Dungeons;
 
-public class DungeonQueryTest
+public class DungeonsQueryTest
 {
     [Fact]
     public async Task Dungeons_index_is_not_empty()
     {
         await using Composer services = new();
-        var sut = services.Resolve<DungeonQuery>();
+        var sut = services.Resolve<Gw2Client>();
 
-        var actual = await sut.GetDungeonsIndex();
+        var actual = await sut.Dungeons.GetDungeonsIndex();
 
         Assert.NotEmpty(actual);
         Assert.Equal(actual.Context.ResultTotal, actual.Count);
@@ -25,11 +25,11 @@ public class DungeonQueryTest
     public async Task A_dungeon_can_be_found_by_id()
     {
         await using Composer services = new();
-        var sut = services.Resolve<DungeonQuery>();
+        var sut = services.Resolve<Gw2Client>();
 
         var dungeonId = "citadel_of_flame";
 
-        var actual = await sut.GetDungeonById(dungeonId);
+        var actual = await sut.Dungeons.GetDungeonById(dungeonId);
 
         Assert.Equal(dungeonId, actual.Value.Id);
     }
@@ -38,7 +38,7 @@ public class DungeonQueryTest
     public async Task Dungeons_can_be_filtered_by_id()
     {
         await using Composer services = new();
-        var sut = services.Resolve<DungeonQuery>();
+        var sut = services.Resolve<Gw2Client>();
 
         HashSet<string> ids = new()
         {
@@ -47,7 +47,7 @@ public class DungeonQueryTest
             "citadel_of_flame"
         };
 
-        var actual = await sut.GetDungeonsByIds(ids);
+        var actual = await sut.Dungeons.GetDungeonsByIds(ids);
 
         Assert.Collection(
             actual,
@@ -61,9 +61,9 @@ public class DungeonQueryTest
     public async Task Dungeons_can_be_filtered_by_page()
     {
         await using Composer services = new();
-        var sut = services.Resolve<DungeonQuery>();
+        var sut = services.Resolve<Gw2Client>();
 
-        var actual = await sut.GetDungeonsByPage(0, 3);
+        var actual = await sut.Dungeons.GetDungeonsByPage(0, 3);
 
         Assert.Equal(3, actual.Count);
         Assert.Equal(3, actual.Context.PageSize);
@@ -73,9 +73,9 @@ public class DungeonQueryTest
     public async Task Dungeons_can_be_enumerated()
     {
         await using Composer services = new();
-        var sut = services.Resolve<DungeonQuery>();
+        var sut = services.Resolve<Gw2Client>();
 
-        var actual = await sut.GetDungeons();
+        var actual = await sut.Dungeons.GetDungeons();
 
         Assert.Equal(actual.Context.ResultTotal, actual.Count);
         Assert.All(
@@ -100,14 +100,14 @@ public class DungeonQueryTest
     public async Task Completed_dungeon_paths_can_be_found()
     {
         await using Composer services = new();
-        var sut = services.Resolve<DungeonQuery>();
+        var sut = services.Resolve<Gw2Client>();
         var accessToken = services.Resolve<ApiKey>();
 
-        var actual = await sut.GetCompletedPaths(accessToken.Key);
+        var actual = await sut.Dungeons.GetCompletedPaths(accessToken.Key);
 
         Assert.NotNull(actual.Value);
 
-        var dungeons = await sut.GetDungeons();
+        var dungeons = await sut.Dungeons.GetDungeons();
         var paths = dungeons.SelectMany(dungeon => dungeon.Paths.Select(path => path.Id)).ToList();
 
         Assert.All(

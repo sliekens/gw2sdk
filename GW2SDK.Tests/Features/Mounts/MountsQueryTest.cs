@@ -6,15 +6,15 @@ using Xunit;
 
 namespace GW2SDK.Tests.Features.Mounts;
 
-public class MountQueryTest
+public class MountsQueryTest
 {
     [Fact]
     public async Task Mounts_can_be_enumerated()
     {
         await using Composer services = new();
-        var sut = services.Resolve<MountQuery>();
+        var sut = services.Resolve<Gw2Client>();
 
-        var actual = await sut.GetMounts();
+        var actual = await sut.Mounts.GetMounts();
 
         Assert.All(
             actual,
@@ -33,9 +33,9 @@ public class MountQueryTest
     public async Task Mount_names_can_be_enumerated()
     {
         await using Composer services = new();
-        var sut = services.Resolve<MountQuery>();
+        var sut = services.Resolve<Gw2Client>();
 
-        var actual = await sut.GetMountNames();
+        var actual = await sut.Mounts.GetMountNames();
 
         Assert.All(
             actual,
@@ -47,11 +47,11 @@ public class MountQueryTest
     public async Task A_mount_can_be_found_by_name()
     {
         await using Composer services = new();
-        var sut = services.Resolve<MountQuery>();
+        var sut = services.Resolve<Gw2Client>();
 
         const MountName name = MountName.Skyscale;
 
-        var actual = await sut.GetMountByName(name);
+        var actual = await sut.Mounts.GetMountByName(name);
 
         Assert.Equal(name, actual.Value.Id);
     }
@@ -60,7 +60,7 @@ public class MountQueryTest
     public async Task Mounts_can_be_filtered_by_name()
     {
         await using Composer services = new();
-        var sut = services.Resolve<MountQuery>();
+        var sut = services.Resolve<Gw2Client>();
 
         MountName[] names =
         {
@@ -69,7 +69,7 @@ public class MountQueryTest
             MountName.Skimmer
         };
 
-        var actual = await sut.GetMountsByNames(names);
+        var actual = await sut.Mounts.GetMountsByNames(names);
 
         Assert.Collection(
             actual,
@@ -83,9 +83,9 @@ public class MountQueryTest
     public async Task Mounts_can_be_filtered_by_page()
     {
         await using Composer services = new();
-        var sut = services.Resolve<MountQuery>();
+        var sut = services.Resolve<Gw2Client>();
 
-        var actual = await sut.GetMountsByPage(0, 3);
+        var actual = await sut.Mounts.GetMountsByPage(0, 3);
 
         Assert.Equal(3, actual.Count);
         Assert.Equal(3, actual.Context.PageSize);
@@ -95,9 +95,9 @@ public class MountQueryTest
     public async Task Mount_skins_can_be_enumerated()
     {
         await using Composer services = new();
-        var sut = services.Resolve<MountQuery>();
+        var sut = services.Resolve<Gw2Client>();
 
-        var actual = await sut.GetMountSkins();
+        var actual = await sut.Mounts.GetMountSkins();
 
         Assert.Equal(actual.Context.ResultTotal, actual.Count);
     }
@@ -106,9 +106,9 @@ public class MountQueryTest
     public async Task Mount_skins_index_is_not_empty()
     {
         await using Composer services = new();
-        var sut = services.Resolve<MountQuery>();
+        var sut = services.Resolve<Gw2Client>();
 
-        var actual = await sut.GetMountSkinsIndex();
+        var actual = await sut.Mounts.GetMountSkinsIndex();
 
         Assert.Equal(actual.Context.ResultTotal, actual.Count);
     }
@@ -117,11 +117,11 @@ public class MountQueryTest
     public async Task A_mount_skin_can_be_found_by_id()
     {
         await using Composer services = new();
-        var sut = services.Resolve<MountQuery>();
+        var sut = services.Resolve<Gw2Client>();
 
         const int mountSkinId = 1;
 
-        var actual = await sut.GetMountSkinById(mountSkinId);
+        var actual = await sut.Mounts.GetMountSkinById(mountSkinId);
 
         Assert.Equal(mountSkinId, actual.Value.Id);
     }
@@ -130,7 +130,7 @@ public class MountQueryTest
     public async Task Mount_skins_can_be_filtered_by_id()
     {
         await using Composer services = new();
-        var sut = services.Resolve<MountQuery>();
+        var sut = services.Resolve<Gw2Client>();
 
         HashSet<int> ids = new()
         {
@@ -139,7 +139,7 @@ public class MountQueryTest
             3
         };
 
-        var actual = await sut.GetMountSkinsByIds(ids);
+        var actual = await sut.Mounts.GetMountSkinsByIds(ids);
 
         Assert.Collection(
             actual,
@@ -153,9 +153,9 @@ public class MountQueryTest
     public async Task Mount_skins_can_be_filtered_by_page()
     {
         await using Composer services = new();
-        var sut = services.Resolve<MountQuery>();
+        var sut = services.Resolve<Gw2Client>();
 
-        var actual = await sut.GetMountSkinsByPage(0, 3);
+        var actual = await sut.Mounts.GetMountSkinsByPage(0, 3);
 
         Assert.Equal(3, actual.Count);
         Assert.Equal(3, actual.Context.PageSize);

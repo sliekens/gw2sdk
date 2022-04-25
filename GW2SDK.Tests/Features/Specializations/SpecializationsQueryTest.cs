@@ -6,7 +6,7 @@ using Xunit;
 
 namespace GW2SDK.Tests.Features.Specializations;
 
-public class SpecializationQueryTest
+public class SpecializationsQueryTest
 {
     private static class SpecializationFact
     {
@@ -37,9 +37,9 @@ public class SpecializationQueryTest
     public async Task Specializations_can_be_enumerated()
     {
         await using Composer services = new();
-        var sut = services.Resolve<SpecializationQuery>();
+        var sut = services.Resolve<Gw2Client>();
 
-        var actual = await sut.GetSpecializations();
+        var actual = await sut.Specializations.GetSpecializations();
 
         Assert.Equal(actual.Context.ResultTotal, actual.Count);
         Assert.All(
@@ -62,9 +62,9 @@ public class SpecializationQueryTest
     public async Task Specializations_index_is_not_empty()
     {
         await using Composer services = new();
-        var sut = services.Resolve<SpecializationQuery>();
+        var sut = services.Resolve<Gw2Client>();
 
-        var actual = await sut.GetSpecializationsIndex();
+        var actual = await sut.Specializations.GetSpecializationsIndex();
 
         Assert.Equal(actual.Context.ResultTotal, actual.Count);
     }
@@ -73,11 +73,11 @@ public class SpecializationQueryTest
     public async Task A_specialization_can_be_found_by_id()
     {
         await using Composer services = new();
-        var sut = services.Resolve<SpecializationQuery>();
+        var sut = services.Resolve<Gw2Client>();
 
         const int specializationId = 1;
 
-        var actual = await sut.GetSpecializationById(specializationId);
+        var actual = await sut.Specializations.GetSpecializationById(specializationId);
 
         Assert.Equal(specializationId, actual.Value.Id);
     }
@@ -86,7 +86,7 @@ public class SpecializationQueryTest
     public async Task Specializations_can_be_filtered_by_id()
     {
         await using Composer services = new();
-        var sut = services.Resolve<SpecializationQuery>();
+        var sut = services.Resolve<Gw2Client>();
 
         HashSet<int> ids = new()
         {
@@ -95,7 +95,7 @@ public class SpecializationQueryTest
             3
         };
 
-        var actual = await sut.GetSpecializationsByIds(ids);
+        var actual = await sut.Specializations.GetSpecializationsByIds(ids);
 
         Assert.Collection(
             actual,

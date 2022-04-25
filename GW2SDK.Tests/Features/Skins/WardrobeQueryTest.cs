@@ -11,9 +11,9 @@ public class WardrobeQueryTest
     public async Task Skins_index_is_not_empty()
     {
         await using Composer services = new();
-        var sut = services.Resolve<WardrobeQuery>();
+        var sut = services.Resolve<Gw2Client>();
 
-        var actual = await sut.GetSkinsIndex();
+        var actual = await sut.Wardrobe.GetSkinsIndex();
 
         Assert.Equal(actual.Context.ResultTotal, actual.Count);
     }
@@ -22,11 +22,11 @@ public class WardrobeQueryTest
     public async Task A_skin_can_be_found_by_id()
     {
         await using Composer services = new();
-        var sut = services.Resolve<WardrobeQuery>();
+        var sut = services.Resolve<Gw2Client>();
 
         const int skinId = 1;
 
-        var actual = await sut.GetSkinById(skinId);
+        var actual = await sut.Wardrobe.GetSkinById(skinId);
 
         Assert.Equal(skinId, actual.Value.Id);
     }
@@ -35,7 +35,7 @@ public class WardrobeQueryTest
     public async Task Skins_can_be_filtered_by_id()
     {
         await using Composer services = new();
-        var sut = services.Resolve<WardrobeQuery>();
+        var sut = services.Resolve<Gw2Client>();
 
         HashSet<int> ids = new()
         {
@@ -44,7 +44,7 @@ public class WardrobeQueryTest
             3
         };
 
-        var actual = await sut.GetSkinsByIds(ids);
+        var actual = await sut.Wardrobe.GetSkinsByIds(ids);
 
         Assert.Collection(
             actual,
@@ -58,9 +58,9 @@ public class WardrobeQueryTest
     public async Task Skins_can_be_filtered_by_page()
     {
         await using Composer services = new();
-        var sut = services.Resolve<WardrobeQuery>();
+        var sut = services.Resolve<Gw2Client>();
 
-        var actual = await sut.GetSkinsByPage(0, 3);
+        var actual = await sut.Wardrobe.GetSkinsByPage(0, 3);
 
         Assert.Equal(3, actual.Count);
         Assert.Equal(3, actual.Context.PageSize);

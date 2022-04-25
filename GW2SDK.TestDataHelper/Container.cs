@@ -86,7 +86,7 @@ public class Container : IDisposable, IAsyncDisposable
                 () => new SocketsHttpHandler { AutomaticDecompression = DecompressionMethods.GZip }
                 )
             .AddPolicyHandlerFromRegistry("com.guildwars2.api")
-            .AddTypedClient<MapQuery>()
+            .AddTypedClient<MapsQuery>()
             .AddTypedClient<JsonAchievementService>()
             .AddTypedClient<JsonFloorService>()
             .AddTypedClient<JsonItemPriceService>()

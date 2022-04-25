@@ -14,10 +14,10 @@ public class TokenProviderTest
     public async Task It_can_get_the_token_info_for_an_api_key()
     {
         await using Composer services = new();
-        var sut = services.Resolve<TokenProvider>();
+        var sut = services.Resolve<Gw2Client>();
         var accessToken = services.Resolve<ApiKey>();
 
-        var actual = await sut.GetTokenInfo(accessToken.Key);
+        var actual = await sut.TokenProvider.GetTokenInfo(accessToken.Key);
 
         var apiKey = Assert.IsType<ApiKeyInfo>(actual.Value);
 
@@ -38,7 +38,7 @@ public class TokenProviderTest
     public async Task It_can_get_the_token_info_for_a_subtoken()
     {
         await using Composer services = new();
-        var sut = services.Resolve<TokenProvider>();
+        var sut = services.Resolve<Gw2Client>();
         var accessToken = services.Resolve<ApiKey>();
 
         #region Create a new subtoken
@@ -54,7 +54,7 @@ public class TokenProviderTest
             "/v2/characters/My Cool Character"
         };
 
-        var createdSubtoken = await sut.CreateSubtoken(
+        var createdSubtoken = await sut.TokenProvider.CreateSubtoken(
             accessToken.Key,
             subtokenPermissions,
             expiresAt,
@@ -67,7 +67,7 @@ public class TokenProviderTest
         // I guess this is a clock synchronization problem, because adding a delay works
         await Task.Delay(3000);
 
-        var actual = await sut.GetTokenInfo(createdSubtoken.Value.Subtoken);
+        var actual = await sut.TokenProvider.GetTokenInfo(createdSubtoken.Value.Subtoken);
 
         var subtoken = Assert.IsType<SubtokenInfo>(actual.Value);
 

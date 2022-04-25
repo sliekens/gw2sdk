@@ -4,71 +4,87 @@ using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 using GW2SDK.Json;
-using GW2SDK.Quaggans;
+using GW2SDK.Professions;
 using JetBrains.Annotations;
 
 namespace GW2SDK;
 
 [PublicAPI]
-public sealed class QuagganQuery
+public sealed class ProfessionsQuery
 {
     private readonly HttpClient http;
 
-    public QuagganQuery(HttpClient http)
+    public ProfessionsQuery(HttpClient http)
     {
         this.http = http ?? throw new ArgumentNullException(nameof(http));
         http.BaseAddress ??= BaseAddress.DefaultUri;
     }
 
-    public Task<IReplicaSet<Quaggan>> GetQuaggans(
+    public Task<IReplicaSet<Profession>> GetProfessions(
+        Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        QuaggansRequest request = new() { MissingMemberBehavior = missingMemberBehavior };
-        return request.SendAsync(http, cancellationToken);
-    }
-
-    public Task<IReplicaSet<string>> GetQuaggansIndex(CancellationToken cancellationToken = default)
-    {
-        QuaggansIndexRequest request = new();
-        return request.SendAsync(http, cancellationToken);
-    }
-
-    public Task<IReplica<Quaggan>> GetQuagganById(
-        string quagganId,
-        MissingMemberBehavior missingMemberBehavior = default,
-        CancellationToken cancellationToken = default
-    )
-    {
-        QuagganByIdRequest request = new(quagganId)
+        ProfessionsRequest request = new()
         {
+            Language = language,
             MissingMemberBehavior = missingMemberBehavior
         };
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<IReplicaSet<Quaggan>> GetQuaggansByIds(
-        IReadOnlyCollection<string> quagganIds,
+    public Task<IReplicaSet<ProfessionName>> GetProfessionNames(
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        QuaggansByIdsRequest request =
-            new(quagganIds) { MissingMemberBehavior = missingMemberBehavior };
+        ProfessionNamesRequest request = new() { MissingMemberBehavior = missingMemberBehavior };
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<IReplicaPage<Quaggan>> GetQuaggansByPage(
-        int pageIndex,
-        int? pageSize = default,
+    public Task<IReplica<Profession>> GetProfessionByName(
+        ProfessionName professionName,
+        Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        QuaggansByPageRequest request = new(pageIndex)
+        ProfessionByNameRequest request = new(professionName)
+        {
+            Language = language,
+            MissingMemberBehavior = missingMemberBehavior
+        };
+        return request.SendAsync(http, cancellationToken);
+    }
+
+    public Task<IReplicaSet<Profession>> GetProfessionsByNames(
+        IReadOnlyCollection<ProfessionName> professionNames,
+        Language? language = default,
+        MissingMemberBehavior missingMemberBehavior = default,
+        CancellationToken cancellationToken = default
+    )
+    {
+        ProfessionsByNamesRequest request = new(professionNames)
+        {
+            Language = language,
+            MissingMemberBehavior = missingMemberBehavior
+        };
+        return request.SendAsync(http, cancellationToken);
+    }
+
+    public Task<IReplicaPage<Profession>> GetProfessionsByPage(
+        int pageIndex,
+        int? pageSize = default,
+        Language? language = default,
+        MissingMemberBehavior missingMemberBehavior = default,
+        CancellationToken cancellationToken = default
+    )
+    {
+        ProfessionsByPageRequest request = new(pageIndex)
         {
             PageSize = pageSize,
+            Language = language,
             MissingMemberBehavior = missingMemberBehavior
         };
         return request.SendAsync(http, cancellationToken);

@@ -39,10 +39,10 @@ public class BankQueryTest
     public async Task Bank_contents_can_be_found()
     {
         await using Composer services = new();
-        var sut = services.Resolve<BankQuery>();
+        var sut = services.Resolve<Gw2Client>();
         var accessToken = services.Resolve<ApiKey>();
 
-        var actual = await sut.GetBank(accessToken.Key);
+        var actual = await sut.Bank.GetBank(accessToken.Key);
 
         BankFact.Bank_is_not_empty(actual.Value);
 
@@ -67,9 +67,9 @@ public class BankQueryTest
     public async Task Material_categories_can_be_enumerated()
     {
         await using Composer services = new();
-        var sut = services.Resolve<BankQuery>();
+        var sut = services.Resolve<Gw2Client>();
 
-        var actual = await sut.GetMaterialCategories();
+        var actual = await sut.Bank.GetMaterialCategories();
 
         Assert.Equal(actual.Context.ResultTotal, actual.Count);
         Assert.All(
@@ -85,9 +85,9 @@ public class BankQueryTest
     public async Task Material_categories_index_is_not_empty()
     {
         await using Composer services = new();
-        var sut = services.Resolve<BankQuery>();
+        var sut = services.Resolve<Gw2Client>();
 
-        var actual = await sut.GetMaterialCategoriesIndex();
+        var actual = await sut.Bank.GetMaterialCategoriesIndex();
 
         Assert.Equal(actual.Context.ResultTotal, actual.Count);
     }
@@ -96,11 +96,11 @@ public class BankQueryTest
     public async Task A_material_category_can_be_found_by_id()
     {
         await using Composer services = new();
-        var sut = services.Resolve<BankQuery>();
+        var sut = services.Resolve<Gw2Client>();
 
         const int materialCategoryId = 5;
 
-        var actual = await sut.GetMaterialCategoryById(materialCategoryId);
+        var actual = await sut.Bank.GetMaterialCategoryById(materialCategoryId);
 
         Assert.Equal(materialCategoryId, actual.Value.Id);
     }
@@ -109,7 +109,7 @@ public class BankQueryTest
     public async Task Material_categories_can_be_filtered_by_id()
     {
         await using Composer services = new();
-        var sut = services.Resolve<BankQuery>();
+        var sut = services.Resolve<Gw2Client>();
 
         HashSet<int> ids = new()
         {
@@ -118,7 +118,7 @@ public class BankQueryTest
             29
         };
 
-        var actual = await sut.GetMaterialCategoriesByIds(ids);
+        var actual = await sut.Bank.GetMaterialCategoriesByIds(ids);
 
         Assert.Collection(
             actual,

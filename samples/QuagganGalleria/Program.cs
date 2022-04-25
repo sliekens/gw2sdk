@@ -5,7 +5,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddRazorPages();
 
-builder.Services.AddHttpClient<QuagganQuery>();
+builder.Services.AddHttpClient<QuaggansQuery>();
 
 var app = builder.Build();
 

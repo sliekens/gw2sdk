@@ -29,9 +29,9 @@ public class QuagganQueryTest
     public async Task Quaggans_can_be_enumerated()
     {
         await using Composer services = new();
-        var sut = services.Resolve<QuagganQuery>();
+        var sut = services.Resolve<Gw2Client>();
 
-        var actual = await sut.GetQuaggans();
+        var actual = await sut.Quaggans.GetQuaggans();
 
         Assert.Equal(actual.Context.ResultTotal, actual.Count);
         Assert.All(
@@ -47,9 +47,9 @@ public class QuagganQueryTest
     public async Task Quaggans_index_is_not_empty()
     {
         await using Composer services = new();
-        var sut = services.Resolve<QuagganQuery>();
+        var sut = services.Resolve<Gw2Client>();
 
-        var actual = await sut.GetQuaggansIndex();
+        var actual = await sut.Quaggans.GetQuaggansIndex();
 
         Assert.Equal(actual.Context.ResultTotal, actual.Count);
     }
@@ -58,11 +58,11 @@ public class QuagganQueryTest
     public async Task A_quaggan_can_be_found_by_id()
     {
         await using Composer services = new();
-        var sut = services.Resolve<QuagganQuery>();
+        var sut = services.Resolve<Gw2Client>();
 
         const string quagganId = "present";
 
-        var actual = await sut.GetQuagganById(quagganId);
+        var actual = await sut.Quaggans.GetQuagganById(quagganId);
 
         QuagganFact.Validate(actual.Value);
         Assert.Equal(quagganId, actual.Value.Id);
@@ -72,7 +72,7 @@ public class QuagganQueryTest
     public async Task Quaggans_can_be_filtered_by_id()
     {
         await using Composer services = new();
-        var sut = services.Resolve<QuagganQuery>();
+        var sut = services.Resolve<Gw2Client>();
 
         HashSet<string> ids = new()
         {
@@ -81,7 +81,7 @@ public class QuagganQueryTest
             "attack"
         };
 
-        var actual = await sut.GetQuaggansByIds(ids);
+        var actual = await sut.Quaggans.GetQuaggansByIds(ids);
 
         Assert.All(actual, QuagganFact.Validate);
         Assert.Collection(
@@ -96,9 +96,9 @@ public class QuagganQueryTest
     public async Task Quaggans_can_be_filtered_by_page()
     {
         await using Composer services = new();
-        var sut = services.Resolve<QuagganQuery>();
+        var sut = services.Resolve<Gw2Client>();
 
-        var actual = await sut.GetQuaggansByPage(0, 3);
+        var actual = await sut.Quaggans.GetQuaggansByPage(0, 3);
 
         Assert.Equal(3, actual.Count);
         Assert.All(actual, QuagganFact.Validate);

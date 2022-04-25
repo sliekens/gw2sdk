@@ -12,11 +12,11 @@ using JetBrains.Annotations;
 namespace GW2SDK;
 
 [PublicAPI]
-public sealed class DungeonQuery
+public sealed class DungeonsQuery
 {
     private readonly HttpClient http;
 
-    public DungeonQuery(HttpClient http)
+    public DungeonsQuery(HttpClient http)
     {
         this.http = http ?? throw new ArgumentNullException(nameof(http));
         http.BaseAddress ??= BaseAddress.DefaultUri;

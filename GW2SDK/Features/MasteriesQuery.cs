@@ -11,11 +11,11 @@ using JetBrains.Annotations;
 namespace GW2SDK;
 
 [PublicAPI]
-public sealed class MasteryQuery
+public sealed class MasteriesQuery
 {
     private readonly HttpClient http;
 
-    public MasteryQuery(HttpClient http)
+    public MasteriesQuery(HttpClient http)
     {
         this.http = http ?? throw new ArgumentNullException(nameof(http));
         http.BaseAddress ??= BaseAddress.DefaultUri;

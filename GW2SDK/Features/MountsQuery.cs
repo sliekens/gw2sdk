@@ -10,11 +10,11 @@ using JetBrains.Annotations;
 namespace GW2SDK;
 
 [PublicAPI]
-public sealed class MountQuery
+public sealed class MountsQuery
 {
     private readonly HttpClient http;
 
-    public MountQuery(HttpClient http)
+    public MountsQuery(HttpClient http)
     {
         this.http = http ?? throw new ArgumentNullException(nameof(http));
         http.BaseAddress ??= BaseAddress.DefaultUri;
