@@ -1,7 +1,9 @@
 {
   "name": "GW2SDK",
   "image": "ghcr.io/sliekens/gw2sdk/devcontainer:latest",
-  "settings": {},
+  "settings": {
+    "omnisharp.useModernNet": true
+  },
   "extensions": [
     "ms-dotnettools.csharp",
     "ms-azuretools.vscode-docker"
