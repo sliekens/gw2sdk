@@ -5,8 +5,6 @@ namespace ApiVersionInfo;
 
 internal static class Routes
 {
-    public static bool IsSupported(Route route) => Supported.Contains(route.Path);
-
     /// <summary>Set of endpoints supported by GW2SDK.</summary>
     public static readonly IReadOnlySet<string> Supported = new HashSet<string>
     {
@@ -172,4 +170,6 @@ internal static class Routes
         //"/v2/wvw/ranks",
         //"/v2/wvw/upgrades"
     };
+
+    public static bool IsSupported(Route route) => Supported.Contains(route.Path);
 }
