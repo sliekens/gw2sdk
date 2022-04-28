@@ -12,6 +12,7 @@ on:
     paths:
     - .devcontainer/**
     - .github/workflows/devcontainer.yml
+    - publish-dcs.sh
 
 jobs:
   build-and-push:
