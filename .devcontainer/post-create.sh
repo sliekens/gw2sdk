@@ -10,3 +10,4 @@ dotnet dev-certs https
 # Ensure dotnet tools are available from terminal
 dotnet tool restore
 echo "alias jb='dotnet jb'" >> ~/.bashrc
+echo "alias vuepress='npx vuepress'" >> ~/.bashrc
