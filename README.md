@@ -4,6 +4,7 @@ A .NET code library for interacting with the Guild Wars 2 API and game client.
 
 ## Quick navigation
 
+- User manual: <https://sliekens.github.io/gw2sdk/>
 - Code coverage: [https://codecov.io/gh/sliekens/gw2sdk][codecov]
 - API reference: <https://wiki.guildwars2.com/wiki/API:Main>
 
