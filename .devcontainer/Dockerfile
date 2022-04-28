@@ -2,16 +2,23 @@
 # Microsoft publishes only images that contain just a single SDK version.
 # We'll start from a simple Debian image with just Curl installed, then add our dependencies 
 FROM buildpack-deps:bullseye-curl
+
+# Configure various dotnet-cli things the way Microsoft does it for their images
+# Additionally disable telemetry
 ENV DOCKER_BUILDKIT=1
 ENV DOTNET_ROOT="/usr/local/dotnet"
 ENV PATH="${PATH}:${DOTNET_ROOT}"
+ENV DOTNET_RUNNING_IN_CONTAINER=true
+ENV DOTNET_GENERATE_ASPNET_CERTIFICATE=false
+ENV DOTNET_USE_POLLING_FILE_WATCHER=true
+ENV DOTNET_NOLOGO=true
+ENV DOTNET_CLI_TELEMETRY_OPTOUT=true
 
+# Install needed packages and setup non-root user. Use a separate RUN statement to add your own dependencies.
 # [Option] Install zsh
 ARG INSTALL_ZSH="true"
 # [Option] Upgrade OS packages to their latest versions
 ARG UPGRADE_PACKAGES="true"
-
-# Install needed packages and setup non-root user. Use a separate RUN statement to add your own dependencies.
 ARG USERNAME=vscode
 ARG USER_UID=1000
 ARG USER_GID=$USER_UID
@@ -36,14 +43,6 @@ RUN export DEBIAN_FRONTEND=noninteractive\
   && apt-get install -y mono-complete\
   && apt-get clean -y\
   && rm -rf /var/lib/apt/lists/* /tmp/library-scripts;
-
-# Configure various dotnet-cli things the way Microsoft does it for their images
-# Additionally disable telemetry
-ENV DOTNET_RUNNING_IN_CONTAINER=true
-ENV DOTNET_GENERATE_ASPNET_CERTIFICATE=false
-ENV DOTNET_USE_POLLING_FILE_WATCHER=true
-ENV DOTNET_NOLOGO=true
-ENV DOTNET_CLI_TELEMETRY_OPTOUT=true
 
 # Create empty folders for named volumes and change their owner to the non-root user
 RUN mkdir -p /home/vscode/.vscode-server/extensions\
