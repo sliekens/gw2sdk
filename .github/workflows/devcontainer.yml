@@ -12,7 +12,6 @@ on:
     paths:
     - .devcontainer/**
     - .github/workflows/devcontainer.yml
-    - publish-docs.sh
 
 jobs:
   build-and-push:
