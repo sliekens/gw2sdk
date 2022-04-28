@@ -6,6 +6,7 @@ on:
     paths:
     - docs/**
     - .github/workflows/gh-pages.yml
+    - publish-docs.sh
 
   workflow_dispatch:
 
