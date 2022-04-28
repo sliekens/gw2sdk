@@ -2,6 +2,7 @@
 npm ci
 npm run build
 git stash push -u -- docs/.vuepress/dist
+git clean -xdf
 git fetch origin gh-pages
 git checkout gh-pages
 git rm -rf .
