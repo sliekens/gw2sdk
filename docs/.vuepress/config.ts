@@ -5,12 +5,22 @@ export default defineConfig({
   description: 'A .NET code library for interacting with the Guild Wars 2 API and game client.',
   base: '/gw2sdk/',
   themeConfig: {
+    repo: 'sliekens/gw2sdk',
+    docsDir: 'docs',
+    docsBranch: 'main',
+    editLinks: true,
     nav: [
-      { link: '/', text: 'Home' },
       { link: '/guide/', text: 'Guide' },
-      { link: 'https://github.com/sliekens/gw2sdk/', text: 'GitHub' }
     ],
-    sidebar: 'auto',
+    sidebar: [
+      '/guide/',
+      '/guide/install',
+      '/guide/usage',
+      '/guide/advanced-usage',
+      '/guide/http-client-factory',
+      '/guide/resiliency',
+      '/guide/summary'
+    ],
     lastUpdated: true
   }
 });
