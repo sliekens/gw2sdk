@@ -23,4 +23,3 @@ jobs:
           git config user.email "<>"
       - name: Publish docs to gh-pages
         run: npm run publish-docs
-        if:  ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
