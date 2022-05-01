@@ -7,6 +7,12 @@
       "commands": [
         "jb"
       ]
+    },
+    "microsoft.dotnet-httprepl": {
+      "version": "6.0.0",
+      "commands": [
+        "httprepl"
+      ]
     }
   }
 }
