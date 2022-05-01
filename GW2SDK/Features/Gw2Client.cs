@@ -19,6 +19,8 @@ public sealed class Gw2Client
 
     public AchievementsQuery Achievements => new(httpClient);
 
+    public ArmoryQuery Armory => new(httpClient);
+
     public BankQuery Bank => new(httpClient);
 
     public BuildStorageQuery BuildStorage => new(httpClient);

@@ -11,3 +11,4 @@ dotnet dev-certs https
 dotnet tool restore
 echo "alias jb='dotnet jb'" >> ~/.bashrc
 echo "alias vuepress='npx vuepress'" >> ~/.bashrc
+echo "alias httprepl='dotnet httprepl https://api.guildwars2.com'" >> ~/.bashrc
