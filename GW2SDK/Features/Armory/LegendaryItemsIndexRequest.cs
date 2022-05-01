@@ -3,9 +3,11 @@ using System.Threading;
 using System.Threading.Tasks;
 using GW2SDK.Http;
 using GW2SDK.Json;
+using JetBrains.Annotations;
 
 namespace GW2SDK.Armory;
 
+[PublicAPI]
 public sealed class LegendaryItemsIndexRequest : IHttpRequest<IReplicaSet<int>>
 {
     private static readonly HttpRequestMessageTemplate Template = new(HttpMethod.Get, "/v2/legendaryarmory")
