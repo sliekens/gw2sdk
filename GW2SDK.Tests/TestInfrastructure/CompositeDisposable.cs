@@ -47,7 +47,7 @@ internal sealed class CompositeDisposable : IAsyncDisposable, IDisposable
         {
             throw new ObjectDisposedException(
                 "CompositeDisposable cannot be reused once disposed. Create a new instance."
-                );
+            );
         }
 
         disposables.Add(disposable);
@@ -59,7 +59,7 @@ internal sealed class CompositeDisposable : IAsyncDisposable, IDisposable
         {
             throw new ObjectDisposedException(
                 "CompositeDisposable cannot be reused once disposed. Create a new instance."
-                );
+            );
         }
 
         asyncDisposables.Add(disposable);

@@ -25,7 +25,7 @@ public class HomeQueryTest
                 Assert.True(cat.Id > 0);
                 Assert.NotEmpty(cat.Hint);
             }
-            );
+        );
     }
 
     [Fact]
@@ -68,7 +68,7 @@ public class HomeQueryTest
             first => Assert.Equal(1, first.Id),
             second => Assert.Equal(2, second.Id),
             third => Assert.Equal(3, third.Id)
-            );
+        );
     }
 
     [Fact]
@@ -89,7 +89,7 @@ public class HomeQueryTest
                 Assert.True(cat.Id > 0);
                 Assert.NotEmpty(cat.Hint);
             }
-            );
+        );
     }
 
     [Fact]
@@ -122,7 +122,7 @@ public class HomeQueryTest
                 Assert.NotNull(node);
                 Assert.NotEmpty(node.Id);
             }
-            );
+        );
     }
 
     [Fact]

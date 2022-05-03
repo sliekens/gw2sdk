@@ -28,7 +28,7 @@ public class LinkHeaderTest
             next => LinkFact.IsLink(next, "self", "/v2/colors?page=118&page_size=5"),
             next => LinkFact.IsLink(next, "first", "/v2/colors?page=0&page_size=5"),
             next => LinkFact.IsLink(next, "last", "/v2/colors?page=119&page_size=5")
-            );
+        );
     }
 
     [Fact]

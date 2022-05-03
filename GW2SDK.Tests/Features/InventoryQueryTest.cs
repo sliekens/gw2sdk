@@ -36,10 +36,10 @@ public class InventoryQueryTest
                                 Assert.True(slot.Count > 0);
                             }
                         }
-                        );
+                    );
                 }
             }
-            );
+        );
     }
 
     [Fact]
@@ -62,6 +62,6 @@ public class InventoryQueryTest
                     Assert.True(slot.Count > 0);
                 }
             }
-            );
+        );
     }
 }

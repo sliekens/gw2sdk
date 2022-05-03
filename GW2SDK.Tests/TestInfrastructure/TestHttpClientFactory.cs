@@ -38,32 +38,31 @@ public class TestHttpClientFactory : IHttpClientFactory, IAsyncDisposable
                 {
                     http.BaseAddress = baseAddress;
                 }
-                )
+            )
             .AddPolicyHandler(
                 Policy.TimeoutAsync<HttpResponseMessage>(
                     TimeSpan.FromSeconds(100),
                     TimeoutStrategy.Optimistic
-                    )
                 )
+            )
             .AddPolicyHandler(
-                Policy<HttpResponseMessage>
-                    .HandleResult(
+                Policy<HttpResponseMessage>.HandleResult(
                         response => response.StatusCode is ServiceUnavailable
                             or GatewayTimeout
                             or BadGateway
                             or (HttpStatusCode)429 // TooManyRequests
-                        )
+                    )
                     .Or<TimeoutRejectedException>()
                     .WaitAndRetryForeverAsync(
                         retryAttempt => TimeSpan.FromSeconds(Math.Min(8, Math.Pow(2, retryAttempt)))
-                        )
-                )
+                    )
+            )
             .AddPolicyHandler(
                 Policy.TimeoutAsync<HttpResponseMessage>(
                     TimeSpan.FromSeconds(30),
                     TimeoutStrategy.Optimistic
-                    )
-                );
+                )
+            );
 
         return services.BuildServiceProvider();
     }

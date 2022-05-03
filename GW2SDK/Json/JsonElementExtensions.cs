@@ -17,7 +17,7 @@ internal static class JsonElementExtensions
         {
             throw new InvalidOperationException(
                 $"The requested operation requires an element of type 'String', but the target element has type '{json.ValueKind}'."
-                );
+            );
         }
 
         return value;

@@ -33,5 +33,5 @@ public class SkinReaderTest : IClassFixture<SkinFixture>
 
                 SkinFact.Id_is_positive(actual);
             }
-            );
+        );
 }

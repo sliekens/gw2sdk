@@ -45,7 +45,7 @@ public sealed class RecipesByPageRequest : IHttpRequest<IReplicaPage<Recipe>>
                 request.Compile(),
                 HttpCompletionOption.ResponseHeadersRead,
                 cancellationToken
-                )
+            )
             .ConfigureAwait(false);
 
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
@@ -60,6 +60,6 @@ public sealed class RecipesByPageRequest : IHttpRequest<IReplicaPage<Recipe>>
             response.Headers.GetPageContext(),
             response.Content.Headers.Expires,
             response.Content.Headers.LastModified
-            );
+        );
     }
 }

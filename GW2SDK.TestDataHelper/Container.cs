@@ -22,7 +22,7 @@ public class Container : IDisposable, IAsyncDisposable
                 {
                     client.BaseAddress = BaseAddress.DefaultUri;
                 }
-                )
+            )
             .AddTypedClient<MapsQuery>()
             .AddTypedClient<JsonAchievementService>()
             .AddTypedClient<JsonFloorService>()
@@ -33,31 +33,31 @@ public class Container : IDisposable, IAsyncDisposable
             .AddTypedClient<JsonSkinService>()
             .ConfigurePrimaryHttpMessageHandler(
                 () => new SocketsHttpHandler { AutomaticDecompression = DecompressionMethods.GZip }
-                )
+            )
             .AddPolicyHandler(
                 Policy.TimeoutAsync<HttpResponseMessage>(
                     TimeSpan.FromSeconds(100),
                     TimeoutStrategy.Optimistic
-                    )
                 )
+            )
             .AddPolicyHandler(
                 Policy<HttpResponseMessage>.HandleResult(
                         response => response.StatusCode is ServiceUnavailable
                             or GatewayTimeout
                             or BadGateway
                             or (HttpStatusCode)429 // TooManyRequests
-                        )
+                    )
                     .Or<TimeoutRejectedException>()
                     .WaitAndRetryForeverAsync(
                         retryAttempt => TimeSpan.FromSeconds(Math.Min(8, Math.Pow(2, retryAttempt)))
-                        )
-                )
+                    )
+            )
             .AddPolicyHandler(
                 Policy.TimeoutAsync<HttpResponseMessage>(
                     TimeSpan.FromSeconds(30),
                     TimeoutStrategy.Optimistic
-                    )
-                );
+                )
+            );
         ;
 
         serviceProvider = services.BuildServiceProvider();

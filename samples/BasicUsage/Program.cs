@@ -1,10 +1,9 @@
 ﻿using GW2SDK;
-using GW2SDK.Meta;
 
 // HttpClient has a fully customizable pipeline, but defaults are fine too
 using HttpClient httpClient = new();
 Gw2Client gw2Client = new(httpClient);
-IReplica<ApiVersion> apiVersion = await gw2Client.Meta.GetApiVersion("v2");
+var apiVersion = await gw2Client.Meta.GetApiVersion();
 
 Console.WriteLine("Output date: {0}", apiVersion.Date);
 Console.WriteLine("Output last modified: {0}", apiVersion.LastModified);

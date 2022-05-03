@@ -55,7 +55,7 @@ internal static class Check
                 throw new ArgumentException(
                     "The collection must contain only named constants.",
                     parameterName
-                    );
+                );
             }
         }
     }
@@ -72,7 +72,7 @@ internal static class Check
                 throw new ArgumentException(
                     "The collection must not contain empty strings.",
                     parameterName
-                    );
+                );
             }
         }
     }

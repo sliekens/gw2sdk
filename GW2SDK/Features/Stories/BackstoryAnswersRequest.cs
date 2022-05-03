@@ -37,7 +37,7 @@ public sealed class BackstoryAnswersRequest : IHttpRequest<IReplicaSet<Backstory
                 request.Compile(),
                 HttpCompletionOption.ResponseHeadersRead,
                 cancellationToken
-                )
+            )
             .ConfigureAwait(false);
 
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
@@ -47,13 +47,13 @@ public sealed class BackstoryAnswersRequest : IHttpRequest<IReplicaSet<Backstory
 
         var value = json.RootElement.GetSet(
             entry => entry.GetBackstoryAnswer(MissingMemberBehavior)
-            );
+        );
         return new ReplicaSet<BackstoryAnswer>(
             response.Headers.Date.GetValueOrDefault(),
             value,
             response.Headers.GetCollectionContext(),
             response.Content.Headers.Expires,
             response.Content.Headers.LastModified
-            );
+        );
     }
 }

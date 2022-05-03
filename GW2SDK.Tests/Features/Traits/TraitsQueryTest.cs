@@ -29,7 +29,7 @@ public class TraitsQueryTest
             {
                 TraitFact.Id_is_positive(trait);
             }
-            );
+        );
     }
 
     [Fact]
@@ -76,7 +76,7 @@ public class TraitsQueryTest
             first => Assert.Equal(214, first.Id),
             second => Assert.Equal(221, second.Id),
             third => Assert.Equal(222, third.Id)
-            );
+        );
     }
 
     [Fact]

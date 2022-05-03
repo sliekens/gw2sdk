@@ -37,7 +37,7 @@ public class WorldBossQueryTest
                 "triple_trouble_wurm"
             },
             referenceData
-            );
+        );
 
         // Again this next method is not deterministic...
         var actual = await sut.WorldBosses.GetDefeatedWorldBosses(accessToken.Key);

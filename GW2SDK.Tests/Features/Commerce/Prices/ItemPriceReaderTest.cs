@@ -42,5 +42,5 @@ public class ItemPriceReaderTest : IClassFixture<ItemPriceFixture>
                 ItemPriceFact.Id_is_positive(actual);
                 ItemPriceFact.Best_ask_is_greater_than_best_bid(actual);
             }
-            );
+        );
 }

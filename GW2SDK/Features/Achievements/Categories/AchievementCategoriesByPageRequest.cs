@@ -50,7 +50,7 @@ public sealed class
                 request.Compile(),
                 HttpCompletionOption.ResponseHeadersRead,
                 cancellationToken
-                )
+            )
             .ConfigureAwait(false);
 
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
@@ -60,13 +60,13 @@ public sealed class
 
         var value = json.RootElement.GetSet(
             entry => entry.GetAchievementCategory(MissingMemberBehavior)
-            );
+        );
         return new ReplicaPage<AchievementCategory>(
             response.Headers.Date.GetValueOrDefault(),
             value,
             response.Headers.GetPageContext(),
             response.Content.Headers.Expires,
             response.Content.Headers.LastModified
-            );
+        );
     }
 }

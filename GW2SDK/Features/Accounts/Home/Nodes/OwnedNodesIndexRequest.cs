@@ -32,7 +32,7 @@ public sealed class OwnedNodesIndexRequest : IHttpRequest<IReplica<IReadOnlyColl
                 request.Compile(),
                 HttpCompletionOption.ResponseHeadersRead,
                 cancellationToken
-                )
+            )
             .ConfigureAwait(false);
 
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
@@ -46,6 +46,6 @@ public sealed class OwnedNodesIndexRequest : IHttpRequest<IReplica<IReadOnlyColl
             value,
             response.Content.Headers.Expires,
             response.Content.Headers.LastModified
-            );
+        );
     }
 }

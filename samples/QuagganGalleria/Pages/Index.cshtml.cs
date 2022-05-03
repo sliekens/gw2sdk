@@ -41,6 +41,6 @@ public class IndexModel : PageModel
                 Id = quaggan.Id,
                 PictureHref = quaggan.PictureHref
             }
-            );
+        );
     }
 }

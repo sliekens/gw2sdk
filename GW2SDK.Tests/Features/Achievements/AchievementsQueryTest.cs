@@ -51,11 +51,11 @@ public class AchievementsQueryTest
                         PathOfFire
                     },
                     new HashSet<ProductName> { actual.RequiredAccess.Product }
-                    );
+                );
 
                 Assert.True(
                     Enum.IsDefined(typeof(AccessCondition), actual.RequiredAccess.Condition)
-                    );
+                );
             }
         }
     }
@@ -162,7 +162,7 @@ public class AchievementsQueryTest
             achievement => Assert.Equal(1, achievement.Id),
             achievement => Assert.Equal(2, achievement.Id),
             achievement => Assert.Equal(3, achievement.Id)
-            );
+        );
     }
 
     [Fact]
@@ -194,7 +194,7 @@ public class AchievementsQueryTest
             {
                 AccountAchievementFact.Id_is_positive(achievement);
             }
-            );
+        );
     }
 
     [Fact]
@@ -233,7 +233,7 @@ public class AchievementsQueryTest
             first => Assert.Equal(1, first.Id),
             second => Assert.Equal(2, second.Id),
             third => Assert.Equal(3, third.Id)
-            );
+        );
     }
 
     [Fact]
@@ -265,7 +265,7 @@ public class AchievementsQueryTest
                 AchievementCategoryFact.Id_is_positive(achievementCategory);
                 AchievementCategoryFact.Order_is_not_negative(achievementCategory);
             }
-            );
+        );
     }
 
     [Fact]
@@ -312,7 +312,7 @@ public class AchievementsQueryTest
             first => Assert.Equal(1, first.Id),
             second => Assert.Equal(2, second.Id),
             third => Assert.Equal(3, third.Id)
-            );
+        );
     }
 
     [Fact]
@@ -342,7 +342,7 @@ public class AchievementsQueryTest
             {
                 AchievementGroupFact.Order_is_not_negative(achievementGroup);
             }
-            );
+        );
     }
 
     [Fact]
@@ -389,7 +389,7 @@ public class AchievementsQueryTest
             first => Assert.Contains(first.Id, ids),
             second => Assert.Contains(second.Id, ids),
             third => Assert.Contains(third.Id, ids)
-            );
+        );
     }
 
     [Fact]
@@ -421,7 +421,7 @@ public class AchievementsQueryTest
                 TitleFact.Name_is_not_empty(title);
                 TitleFact.Can_be_unlocked_by_achievements_or_achievement_points(title);
             }
-            );
+        );
     }
 
     [Fact]
@@ -468,7 +468,7 @@ public class AchievementsQueryTest
             first => Assert.Equal(1, first.Id),
             second => Assert.Equal(2, second.Id),
             third => Assert.Equal(3, third.Id)
-            );
+        );
     }
 
     [Fact]

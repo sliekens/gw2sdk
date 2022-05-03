@@ -52,7 +52,7 @@ public class ItemsQueryTest
             first => Assert.Contains(first.Id, ids),
             second => Assert.Contains(second.Id, ids),
             third => Assert.Contains(third.Id, ids)
-            );
+        );
     }
 
     [Fact]
@@ -70,7 +70,7 @@ public class ItemsQueryTest
     [Fact(
         Skip =
             "This test is best used interactively, otherwise it will hit rate limits in this as well as other tests."
-        )]
+    )]
     public async Task Items_can_be_enumerated()
     {
         await using Composer services = new();

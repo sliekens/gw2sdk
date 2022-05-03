@@ -60,7 +60,7 @@ public class BankQueryTest
                 ItemSlotFact.ItemSlot_id_is_positive(slot);
                 ItemSlotFact.ItemSlot_count_is_positive(slot);
             }
-            );
+        );
     }
 
     [Fact]
@@ -78,7 +78,7 @@ public class BankQueryTest
             {
                 MaterialCategoryFact.Name_is_not_empty(materialCategory);
             }
-            );
+        );
     }
 
     [Fact]
@@ -125,6 +125,6 @@ public class BankQueryTest
             first => Assert.Contains(first.Id, ids),
             second => Assert.Contains(second.Id, ids),
             third => Assert.Contains(third.Id, ids)
-            );
+        );
     }
 }

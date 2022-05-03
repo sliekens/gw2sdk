@@ -44,7 +44,7 @@ public sealed class ItemStatByIdRequest : IHttpRequest<IReplica<ItemStat>>
                 request.Compile(),
                 HttpCompletionOption.ResponseHeadersRead,
                 cancellationToken
-                )
+            )
             .ConfigureAwait(false);
 
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
@@ -58,6 +58,6 @@ public sealed class ItemStatByIdRequest : IHttpRequest<IReplica<ItemStat>>
             value,
             response.Content.Headers.Expires,
             response.Content.Headers.LastModified
-            );
+        );
     }
 }

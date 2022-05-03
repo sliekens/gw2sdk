@@ -53,7 +53,7 @@ internal static class JsonMemberExtensions
             value => missingMemberBehavior == MissingMemberBehavior.Error
                 ? Parse<TEnum>(value.GetStringRequired())
                 : TryHardParse<TEnum>(value.GetStringRequired())
-            );
+        );
 
     internal static TEnum GetValue<TEnum>(
         this RequiredMember<TEnum> instance,
@@ -63,7 +63,7 @@ internal static class JsonMemberExtensions
             value => missingMemberBehavior == MissingMemberBehavior.Error
                 ? Parse<TEnum>(value.GetStringRequired())
                 : TryHardParse<TEnum>(value.GetStringRequired())
-            );
+        );
 
     internal static TEnum GetValue<TEnum>(
         this OptionalMember<TEnum> instance,
@@ -73,7 +73,7 @@ internal static class JsonMemberExtensions
             value => missingMemberBehavior == MissingMemberBehavior.Error
                 ? Parse<TEnum>(value.GetStringRequired())
                 : TryHardParse<TEnum>(value.GetStringRequired())
-            );
+        );
 
     internal static IReadOnlyCollection<TEnum> GetValues<TEnum>(
         this RequiredMember<TEnum> instance,
@@ -83,7 +83,7 @@ internal static class JsonMemberExtensions
             value => missingMemberBehavior == MissingMemberBehavior.Error
                 ? Parse<TEnum>(value.GetStringRequired())
                 : TryHardParse<TEnum>(value.GetStringRequired())
-            );
+        );
 
     internal static IReadOnlyCollection<TEnum>? GetValues<TEnum>(
         this OptionalMember<TEnum> instance,
@@ -93,7 +93,7 @@ internal static class JsonMemberExtensions
             value => missingMemberBehavior == MissingMemberBehavior.Error
                 ? Parse<TEnum>(value.GetStringRequired())
                 : TryHardParse<TEnum>(value.GetStringRequired())
-            );
+        );
 
     private static TEnum Parse<TEnum>(string name) where TEnum : struct, Enum
     {

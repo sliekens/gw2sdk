@@ -51,7 +51,7 @@ namespace JetBrains.Annotations
         | AttributeTargets.Class
         | AttributeTargets.Interface
         | AttributeTargets.GenericParameter
-        )]
+    )]
     internal sealed class CanBeNullAttribute : Attribute
     {
     }
@@ -74,7 +74,7 @@ namespace JetBrains.Annotations
         | AttributeTargets.Class
         | AttributeTargets.Interface
         | AttributeTargets.GenericParameter
-        )]
+    )]
     internal sealed class NotNullAttribute : Attribute
     {
     }
@@ -99,7 +99,7 @@ namespace JetBrains.Annotations
         | AttributeTargets.Property
         | AttributeTargets.Delegate
         | AttributeTargets.Field
-        )]
+    )]
     internal sealed class ItemNotNullAttribute : Attribute
     {
     }
@@ -124,7 +124,7 @@ namespace JetBrains.Annotations
         | AttributeTargets.Property
         | AttributeTargets.Delegate
         | AttributeTargets.Field
-        )]
+    )]
     internal sealed class ItemCanBeNullAttribute : Attribute
     {
     }
@@ -147,7 +147,7 @@ namespace JetBrains.Annotations
         | AttributeTargets.Method
         | AttributeTargets.Property
         | AttributeTargets.Delegate
-        )]
+    )]
     internal sealed class StringFormatMethodAttribute : Attribute
     {
         /// <param name="formatParameterName">Specifies which parameter of an annotated method should be treated as the format
@@ -190,7 +190,7 @@ namespace JetBrains.Annotations
     [AttributeUsage(
         AttributeTargets.Parameter | AttributeTargets.Property | AttributeTargets.Field,
         AllowMultiple = true
-        )]
+    )]
     internal sealed class ValueProviderAttribute : Attribute
     {
         public ValueProviderAttribute([NotNull] string name)
@@ -220,7 +220,7 @@ namespace JetBrains.Annotations
         | AttributeTargets.Method
         | AttributeTargets.Delegate,
         AllowMultiple = true
-        )]
+    )]
     internal sealed class ValueRangeAttribute : Attribute
     {
         public ValueRangeAttribute(long from, long to)
@@ -266,7 +266,7 @@ namespace JetBrains.Annotations
         | AttributeTargets.Property
         | AttributeTargets.Method
         | AttributeTargets.Delegate
-        )]
+    )]
     internal sealed class NonNegativeValueAttribute : Attribute
     {
     }
@@ -513,7 +513,7 @@ namespace JetBrains.Annotations
     /// <see cref="System.Type" />,  indicates that the corresponding type is used implicitly.</summary>
     [AttributeUsage(
         AttributeTargets.Class | AttributeTargets.GenericParameter | AttributeTargets.Parameter
-        )]
+    )]
     internal sealed class MeansImplicitUseAttribute : Attribute
     {
         public MeansImplicitUseAttribute()
@@ -675,7 +675,7 @@ namespace JetBrains.Annotations
         | AttributeTargets.Interface
         | AttributeTargets.Struct
         | AttributeTargets.GenericParameter
-        )]
+    )]
     internal sealed class ProvidesContextAttribute : Attribute
     {
     }
@@ -767,7 +767,7 @@ namespace JetBrains.Annotations
     [AttributeUsage(
         AttributeTargets.Assembly | AttributeTargets.Field | AttributeTargets.Property,
         AllowMultiple = true
-        )]
+    )]
     internal sealed class AspMvcAreaMasterLocationFormatAttribute : Attribute
     {
         public AspMvcAreaMasterLocationFormatAttribute([NotNull] string format)
@@ -782,7 +782,7 @@ namespace JetBrains.Annotations
     [AttributeUsage(
         AttributeTargets.Assembly | AttributeTargets.Field | AttributeTargets.Property,
         AllowMultiple = true
-        )]
+    )]
     internal sealed class AspMvcAreaPartialViewLocationFormatAttribute : Attribute
     {
         public AspMvcAreaPartialViewLocationFormatAttribute([NotNull] string format)
@@ -797,7 +797,7 @@ namespace JetBrains.Annotations
     [AttributeUsage(
         AttributeTargets.Assembly | AttributeTargets.Field | AttributeTargets.Property,
         AllowMultiple = true
-        )]
+    )]
     internal sealed class AspMvcAreaViewLocationFormatAttribute : Attribute
     {
         public AspMvcAreaViewLocationFormatAttribute([NotNull] string format)
@@ -812,7 +812,7 @@ namespace JetBrains.Annotations
     [AttributeUsage(
         AttributeTargets.Assembly | AttributeTargets.Field | AttributeTargets.Property,
         AllowMultiple = true
-        )]
+    )]
     internal sealed class AspMvcMasterLocationFormatAttribute : Attribute
     {
         public AspMvcMasterLocationFormatAttribute([NotNull] string format)
@@ -827,7 +827,7 @@ namespace JetBrains.Annotations
     [AttributeUsage(
         AttributeTargets.Assembly | AttributeTargets.Field | AttributeTargets.Property,
         AllowMultiple = true
-        )]
+    )]
     internal sealed class AspMvcPartialViewLocationFormatAttribute : Attribute
     {
         public AspMvcPartialViewLocationFormatAttribute([NotNull] string format)
@@ -842,7 +842,7 @@ namespace JetBrains.Annotations
     [AttributeUsage(
         AttributeTargets.Assembly | AttributeTargets.Field | AttributeTargets.Property,
         AllowMultiple = true
-        )]
+    )]
     internal sealed class AspMvcViewLocationFormatAttribute : Attribute
     {
         public AspMvcViewLocationFormatAttribute([NotNull] string format)
@@ -862,7 +862,7 @@ namespace JetBrains.Annotations
         | AttributeTargets.Method
         | AttributeTargets.Field
         | AttributeTargets.Property
-        )]
+    )]
     internal sealed class AspMvcActionAttribute : Attribute
     {
         public AspMvcActionAttribute()
@@ -882,7 +882,7 @@ namespace JetBrains.Annotations
     /// wrappers similar to <c>System.Web.Mvc.Html.ChildActionExtensions.RenderAction(HtmlHelper, String)</c>.</summary>
     [AttributeUsage(
         AttributeTargets.Parameter | AttributeTargets.Field | AttributeTargets.Property
-        )]
+    )]
     internal sealed class AspMvcAreaAttribute : Attribute
     {
         public AspMvcAreaAttribute()
@@ -906,7 +906,7 @@ namespace JetBrains.Annotations
         | AttributeTargets.Method
         | AttributeTargets.Field
         | AttributeTargets.Property
-        )]
+    )]
     internal sealed class AspMvcControllerAttribute : Attribute
     {
         public AspMvcControllerAttribute()
@@ -926,7 +926,7 @@ namespace JetBrains.Annotations
     /// wrappers similar to <c>System.Web.Mvc.Controller.View(String, String)</c>.</summary>
     [AttributeUsage(
         AttributeTargets.Parameter | AttributeTargets.Field | AttributeTargets.Property
-        )]
+    )]
     internal sealed class AspMvcMasterAttribute : Attribute
     {
     }
@@ -946,7 +946,7 @@ namespace JetBrains.Annotations
         | AttributeTargets.Method
         | AttributeTargets.Field
         | AttributeTargets.Property
-        )]
+    )]
     internal sealed class AspMvcPartialViewAttribute : Attribute
     {
     }
@@ -961,7 +961,7 @@ namespace JetBrains.Annotations
     /// wrappers similar to <c>System.Web.Mvc.Html.DisplayExtensions.DisplayForModel(HtmlHelper, String)</c>.</summary>
     [AttributeUsage(
         AttributeTargets.Parameter | AttributeTargets.Field | AttributeTargets.Property
-        )]
+    )]
     internal sealed class AspMvcDisplayTemplateAttribute : Attribute
     {
     }
@@ -970,7 +970,7 @@ namespace JetBrains.Annotations
     /// custom wrappers similar to <c>System.Web.Mvc.Html.EditorExtensions.EditorForModel(HtmlHelper, String)</c>.</summary>
     [AttributeUsage(
         AttributeTargets.Parameter | AttributeTargets.Field | AttributeTargets.Property
-        )]
+    )]
     internal sealed class AspMvcEditorTemplateAttribute : Attribute
     {
     }
@@ -979,7 +979,7 @@ namespace JetBrains.Annotations
     /// wrappers similar to <c>System.ComponentModel.DataAnnotations.UIHintAttribute(System.String)</c>.</summary>
     [AttributeUsage(
         AttributeTargets.Parameter | AttributeTargets.Field | AttributeTargets.Property
-        )]
+    )]
     internal sealed class AspMvcTemplateAttribute : Attribute
     {
     }
@@ -992,7 +992,7 @@ namespace JetBrains.Annotations
         | AttributeTargets.Method
         | AttributeTargets.Field
         | AttributeTargets.Property
-        )]
+    )]
     internal sealed class AspMvcViewAttribute : Attribute
     {
     }
@@ -1000,7 +1000,7 @@ namespace JetBrains.Annotations
     /// <summary>ASP.NET MVC attribute. If applied to a parameter, indicates that the parameter is an MVC view component name.</summary>
     [AttributeUsage(
         AttributeTargets.Parameter | AttributeTargets.Field | AttributeTargets.Property
-        )]
+    )]
     internal sealed class AspMvcViewComponentAttribute : Attribute
     {
     }
@@ -1012,7 +1012,7 @@ namespace JetBrains.Annotations
         | AttributeTargets.Method
         | AttributeTargets.Field
         | AttributeTargets.Property
-        )]
+    )]
     internal sealed class AspMvcViewComponentViewAttribute : Attribute
     {
     }
@@ -1035,7 +1035,7 @@ namespace JetBrains.Annotations
 
     [AttributeUsage(
         AttributeTargets.Parameter | AttributeTargets.Property | AttributeTargets.Field
-        )]
+    )]
     internal sealed class HtmlElementAttributesAttribute : Attribute
     {
         public HtmlElementAttributesAttribute()
@@ -1053,7 +1053,7 @@ namespace JetBrains.Annotations
 
     [AttributeUsage(
         AttributeTargets.Parameter | AttributeTargets.Field | AttributeTargets.Property
-        )]
+    )]
     internal sealed class HtmlAttributeValueAttribute : Attribute
     {
         public HtmlAttributeValueAttribute([NotNull] string name)
@@ -1098,7 +1098,7 @@ namespace JetBrains.Annotations
     /// </example>
     [AttributeUsage(
         AttributeTargets.Method | AttributeTargets.Constructor | AttributeTargets.Property
-        )]
+    )]
     internal sealed class CollectionAccessAttribute : Attribute
     {
         public CollectionAccessAttribute(CollectionAccessType collectionAccessType)
@@ -1205,7 +1205,7 @@ namespace JetBrains.Annotations
     /// <summary>Indicates that the marked parameter is a regular expression pattern.</summary>
     [AttributeUsage(
         AttributeTargets.Parameter | AttributeTargets.Field | AttributeTargets.Property
-        )]
+    )]
     internal sealed class RegexPatternAttribute : Attribute
     {
     }
@@ -1217,7 +1217,7 @@ namespace JetBrains.Annotations
         | AttributeTargets.Interface
         | AttributeTargets.Struct
         | AttributeTargets.Enum
-        )]
+    )]
     internal sealed class NoReorderAttribute : Attribute
     {
     }

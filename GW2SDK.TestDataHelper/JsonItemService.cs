@@ -68,7 +68,7 @@ public class JsonItemService
             .Select(
                 item => item.ToString()
                     ?? throw new InvalidOperationException("Unexpected null in JSON array.")
-                )
+            )
             .ToList();
     }
 }

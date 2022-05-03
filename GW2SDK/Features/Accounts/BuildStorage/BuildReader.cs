@@ -66,7 +66,7 @@ public static class BuildReader
             Specializations =
                 specializations.SelectMany(
                     value => ReadSpecialization(value, missingMemberBehavior)
-                    ),
+                ),
             Skills = skills.Select(value => ReadSkillBar(value, missingMemberBehavior)),
             AquaticSkills =
                 aquaticSkills.Select(value => ReadSkillBar(value, missingMemberBehavior)),
@@ -111,7 +111,7 @@ public static class BuildReader
             Utilities =
                 utilities.SelectMany(
                     value => value.ValueKind == JsonValueKind.Null ? null : value.GetInt32()
-                    ),
+                ),
             Elite = elite.GetValue()
         };
     }
@@ -145,7 +145,7 @@ public static class BuildReader
             Id = id.GetValue(),
             Traits = traits.SelectMany(
                 value => value.ValueKind == JsonValueKind.Null ? null : value.GetInt32()
-                )
+            )
         };
     }
 
@@ -178,10 +178,10 @@ public static class BuildReader
             Terrestrial =
                 terrestrial.SelectMany(
                     value => value.ValueKind == JsonValueKind.Null ? null : value.GetInt32()
-                    ),
+                ),
             Aquatic = aquatic.SelectMany(
                 value => value.ValueKind == JsonValueKind.Null ? null : value.GetInt32()
-                )
+            )
         };
     }
 }

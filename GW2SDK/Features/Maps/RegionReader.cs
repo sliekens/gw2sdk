@@ -57,7 +57,7 @@ public static class RegionReader
             ContinentRectangle =
                 continentRectangle.Select(
                     value => ReadContinentRectangle(value, missingMemberBehavior)
-                    ),
+                ),
             Maps = maps.Select(value => ReadMaps(value, missingMemberBehavior))
         };
     }

@@ -86,13 +86,13 @@ public class CommerceQueryTest
             first => Assert.Equal(24, first.Id),
             second => Assert.Equal(19699, second.Id),
             third => Assert.Equal(35984, third.Id)
-            );
+        );
     }
 
     [Fact(
         Skip =
             "This test is best used interactively, otherwise it will hit rate limits in this as well as other tests."
-        )]
+    )]
     public async Task Item_prices_can_be_enumerated()
     {
         await using Composer services = new();
@@ -172,7 +172,7 @@ public class CommerceQueryTest
                 Assert.True(line.Quantity > 0);
                 Assert.True(line.Listings > 0);
             }
-            );
+        );
 
         Assert.NotEmpty(value.Demand);
         Assert.All(
@@ -183,7 +183,7 @@ public class CommerceQueryTest
                 Assert.True(line.Quantity > 0);
                 Assert.True(line.Listings > 0);
             }
-            );
+        );
     }
 
     [Fact]
@@ -206,13 +206,13 @@ public class CommerceQueryTest
             first => Assert.Equal(24, first.Id),
             second => Assert.Equal(19699, second.Id),
             third => Assert.Equal(35984, third.Id)
-            );
+        );
     }
 
     [Fact(
         Skip =
             "This test is best used interactively, otherwise it will hit rate limits in this as well as other tests."
-        )]
+    )]
     public async Task Order_books_can_be_enumerated()
     {
         await using Composer services = new();
@@ -238,7 +238,7 @@ public class CommerceQueryTest
                         Assert.True(line.Quantity > 0);
                         Assert.True(line.Listings > 0);
                     }
-                    );
+                );
             }
 
             if (actual.TotalDemand == 0)
@@ -258,7 +258,7 @@ public class CommerceQueryTest
                         Assert.True(line.Quantity > 0);
                         Assert.True(line.Listings > 0);
                     }
-                    );
+                );
             }
 
             if (actual is { TotalDemand: 0 } or { TotalSupply: 0 })

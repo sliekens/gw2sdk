@@ -39,7 +39,7 @@ internal static class ItemFacts
             Assert.All(
                 weapon.Prefix.Attributes,
                 actual => Assert.InRange(actual.Modifier, 1, int.MaxValue)
-                );
+            );
         }
     }
 
@@ -70,7 +70,7 @@ internal static class ItemFacts
             Assert.All(
                 backpack.Prefix.Attributes,
                 actual => Assert.InRange(actual.Modifier, 1, int.MaxValue)
-                );
+            );
         }
     }
 
@@ -120,7 +120,7 @@ internal static class ItemFacts
             Assert.All(
                 armor.Prefix.Attributes,
                 actual => Assert.InRange(actual.Modifier, 1, int.MaxValue)
-                );
+            );
         }
     }
 

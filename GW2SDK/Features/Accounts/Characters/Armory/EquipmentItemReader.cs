@@ -98,7 +98,7 @@ public static class EquipmentItemReader
             Tabs = tabs.SelectMany(value => value.GetInt32()),
             Dyes = dyes.SelectMany(
                 value => value.ValueKind == JsonValueKind.Null ? null : value.GetInt32()
-                )
+            )
         };
     }
 }

@@ -23,9 +23,8 @@ public class ArmoryQueryTest
                 Assert.True(entry.Id > 0);
                 Assert.True(entry.MaxCount > 0);
             }
-            );
+        );
     }
-
 
     [Fact]
     public async Task Legendary_items_index_is_not_empty()
@@ -71,7 +70,7 @@ public class ArmoryQueryTest
             first => Assert.Equal(83162, first.Id),
             second => Assert.Equal(93105, second.Id),
             third => Assert.Equal(80111, third.Id)
-            );
+        );
     }
 
     [Fact]
@@ -85,5 +84,4 @@ public class ArmoryQueryTest
         Assert.Equal(3, actual.Count);
         Assert.Equal(3, actual.Context.PageSize);
     }
-
 }

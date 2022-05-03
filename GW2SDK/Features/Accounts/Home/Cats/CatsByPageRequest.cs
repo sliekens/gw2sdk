@@ -42,7 +42,7 @@ public sealed class CatsByPageRequest : IHttpRequest<IReplicaPage<Cat>>
                 request.Compile(),
                 HttpCompletionOption.ResponseHeadersRead,
                 cancellationToken
-                )
+            )
             .ConfigureAwait(false);
 
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
@@ -57,6 +57,6 @@ public sealed class CatsByPageRequest : IHttpRequest<IReplicaPage<Cat>>
             response.Headers.GetPageContext(),
             response.Content.Headers.Expires,
             response.Content.Headers.LastModified
-            );
+        );
     }
 }

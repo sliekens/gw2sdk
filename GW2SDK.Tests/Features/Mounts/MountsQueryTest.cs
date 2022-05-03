@@ -23,10 +23,10 @@ public class MountsQueryTest
                 Assert.True(
                     Enum.IsDefined(typeof(MountName), mount.Id),
                     "Enum.IsDefined(mount.Id)"
-                    );
+                );
                 Assert.NotEmpty(mount.Name);
             }
-            );
+        );
     }
 
     [Fact]
@@ -40,7 +40,7 @@ public class MountsQueryTest
         Assert.All(
             actual,
             name => Assert.True(Enum.IsDefined(typeof(MountName), name), "Enum.IsDefined(name)")
-            );
+        );
     }
 
     [Fact]
@@ -76,7 +76,7 @@ public class MountsQueryTest
             first => Assert.Equal(names[0], first.Id),
             second => Assert.Equal(names[1], second.Id),
             third => Assert.Equal(names[2], third.Id)
-            );
+        );
     }
 
     [Fact]
@@ -146,7 +146,7 @@ public class MountsQueryTest
             first => Assert.Equal(1, first.Id),
             second => Assert.Equal(2, second.Id),
             third => Assert.Equal(3, third.Id)
-            );
+        );
     }
 
     [Fact]

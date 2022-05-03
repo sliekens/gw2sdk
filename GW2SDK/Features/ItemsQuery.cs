@@ -62,7 +62,7 @@ public sealed class ItemsQuery
                 return request.SendAsync(http, ct);
             },
             progress
-            );
+        );
         return producer.QueryAsync(itemIds, cancellationToken: cancellationToken);
     }
 
@@ -98,9 +98,9 @@ public sealed class ItemsQuery
             missingMemberBehavior,
             progress,
             cancellationToken
-            );
+        );
         await foreach (var item in producer.WithCancellation(cancellationToken)
-                           .ConfigureAwait(false))
+            .ConfigureAwait(false))
         {
             yield return item;
         }

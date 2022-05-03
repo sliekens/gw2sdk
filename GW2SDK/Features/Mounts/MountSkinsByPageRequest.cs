@@ -51,7 +51,7 @@ public sealed class MountSkinsByPageRequest : IHttpRequest<IReplicaPage<MountSki
                 request.Compile(),
                 HttpCompletionOption.ResponseHeadersRead,
                 cancellationToken
-                )
+            )
             .ConfigureAwait(false);
 
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
@@ -66,6 +66,6 @@ public sealed class MountSkinsByPageRequest : IHttpRequest<IReplicaPage<MountSki
             response.Headers.GetPageContext(),
             response.Content.Headers.Expires,
             response.Content.Headers.LastModified
-            );
+        );
     }
 }

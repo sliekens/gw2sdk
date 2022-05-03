@@ -25,14 +25,13 @@ public sealed class ArmoryQuery
         CancellationToken cancellationToken = default
     )
     {
-        LegendaryItemsRequest request = new()
-        {
-            MissingMemberBehavior = missingMemberBehavior
-        };
+        LegendaryItemsRequest request = new() { MissingMemberBehavior = missingMemberBehavior };
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<IReplicaSet<int>> GetLegendaryItemsIndex(CancellationToken cancellationToken = default)
+    public Task<IReplicaSet<int>> GetLegendaryItemsIndex(
+        CancellationToken cancellationToken = default
+    )
     {
         LegendaryItemsIndexRequest request = new();
         return request.SendAsync(http, cancellationToken);
@@ -41,7 +40,8 @@ public sealed class ArmoryQuery
     public Task<IReplica<LegendaryItem>> GetLegendaryItemById(
         int legendaryItemId,
         MissingMemberBehavior missingMemberBehavior = default,
-        CancellationToken cancellationToken = default)
+        CancellationToken cancellationToken = default
+    )
     {
         LegendaryItemByIdRequest request = new(legendaryItemId)
         {
@@ -53,7 +53,8 @@ public sealed class ArmoryQuery
     public Task<IReplicaSet<LegendaryItem>> GetLegendaryItemsByIds(
         IReadOnlyCollection<int> legendaryItemIds,
         MissingMemberBehavior missingMemberBehavior = default,
-        CancellationToken cancellationToken = default)
+        CancellationToken cancellationToken = default
+    )
     {
         LegendaryItemsByIdsRequest request = new(legendaryItemIds)
         {
@@ -66,7 +67,8 @@ public sealed class ArmoryQuery
         int pageIndex,
         int? pageSize = default,
         MissingMemberBehavior missingMemberBehavior = default,
-        CancellationToken cancellationToken = default)
+        CancellationToken cancellationToken = default
+    )
     {
         LegendaryItemsByPageRequest request = new(pageIndex)
         {

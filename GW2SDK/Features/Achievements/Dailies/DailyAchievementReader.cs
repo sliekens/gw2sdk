@@ -55,10 +55,10 @@ public static class DailyAchievementReader
             Fractals =
                 fractals.SelectMany(
                     value => ReadDailyAchievement(value, missingMemberBehavior)
-                    ),
+                ),
             Special = special.SelectMany(
                 value => ReadDailyAchievement(value, missingMemberBehavior)
-                )
+            )
         };
     }
 

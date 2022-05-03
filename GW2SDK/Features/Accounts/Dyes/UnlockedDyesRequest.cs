@@ -30,7 +30,7 @@ public sealed class UnlockedDyesRequest : IHttpRequest<IReplica<IReadOnlyCollect
                 request.Compile(),
                 HttpCompletionOption.ResponseHeadersRead,
                 cancellationToken
-                )
+            )
             .ConfigureAwait(false);
 
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
@@ -44,6 +44,6 @@ public sealed class UnlockedDyesRequest : IHttpRequest<IReplica<IReadOnlyCollect
             value,
             response.Content.Headers.Expires,
             response.Content.Headers.LastModified
-            );
+        );
     }
 }

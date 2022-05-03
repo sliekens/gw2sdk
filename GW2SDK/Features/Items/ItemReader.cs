@@ -71,7 +71,7 @@ public static class ItemReader
                 {
                     throw new InvalidOperationException(
                         Strings.UnexpectedDiscriminator(member.Value.GetString())
-                        );
+                    );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -341,7 +341,7 @@ public static class ItemReader
                 {
                     throw new InvalidOperationException(
                         Strings.InvalidDiscriminator(member.Value.GetString())
-                        );
+                    );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -402,7 +402,7 @@ public static class ItemReader
                         {
                             throw new InvalidOperationException(
                                 Strings.UnexpectedDiscriminator(detail.Value.GetString())
-                                );
+                            );
                         }
                     }
                     else if (detail.NameEquals(weightClass.Name))
@@ -499,7 +499,7 @@ public static class ItemReader
                 {
                     throw new InvalidOperationException(
                         Strings.InvalidDiscriminator(member.Value.GetString())
-                        );
+                    );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -560,7 +560,7 @@ public static class ItemReader
                         {
                             throw new InvalidOperationException(
                                 Strings.InvalidDiscriminator(detail.Value.GetString())
-                                );
+                            );
                         }
                     }
                     else if (detail.NameEquals(weightClass.Name))
@@ -657,7 +657,7 @@ public static class ItemReader
                 {
                     throw new InvalidOperationException(
                         Strings.InvalidDiscriminator(member.Value.GetString())
-                        );
+                    );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -718,7 +718,7 @@ public static class ItemReader
                         {
                             throw new InvalidOperationException(
                                 Strings.InvalidDiscriminator(detail.Value.GetString())
-                                );
+                            );
                         }
                     }
                     else if (detail.NameEquals(weightClass.Name))
@@ -815,7 +815,7 @@ public static class ItemReader
                 {
                     throw new InvalidOperationException(
                         Strings.InvalidDiscriminator(member.Value.GetString())
-                        );
+                    );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -876,7 +876,7 @@ public static class ItemReader
                         {
                             throw new InvalidOperationException(
                                 Strings.InvalidDiscriminator(detail.Value.GetString())
-                                );
+                            );
                         }
                     }
                     else if (detail.NameEquals(weightClass.Name))
@@ -973,7 +973,7 @@ public static class ItemReader
                 {
                     throw new InvalidOperationException(
                         Strings.InvalidDiscriminator(member.Value.GetString())
-                        );
+                    );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -1034,7 +1034,7 @@ public static class ItemReader
                         {
                             throw new InvalidOperationException(
                                 Strings.InvalidDiscriminator(detail.Value.GetString())
-                                );
+                            );
                         }
                     }
                     else if (detail.NameEquals(weightClass.Name))
@@ -1134,7 +1134,7 @@ public static class ItemReader
                 {
                     throw new InvalidOperationException(
                         Strings.InvalidDiscriminator(member.Value.GetString())
-                        );
+                    );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -1195,7 +1195,7 @@ public static class ItemReader
                         {
                             throw new InvalidOperationException(
                                 Strings.InvalidDiscriminator(detail.Value.GetString())
-                                );
+                            );
                         }
                     }
                     else if (detail.NameEquals(weightClass.Name))
@@ -1295,7 +1295,7 @@ public static class ItemReader
                 {
                     throw new InvalidOperationException(
                         Strings.InvalidDiscriminator(member.Value.GetString())
-                        );
+                    );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -1356,7 +1356,7 @@ public static class ItemReader
                         {
                             throw new InvalidOperationException(
                                 Strings.InvalidDiscriminator(detail.Value.GetString())
-                                );
+                            );
                         }
                     }
                     else if (detail.NameEquals(weightClass.Name))
@@ -1456,7 +1456,7 @@ public static class ItemReader
                 {
                     throw new InvalidOperationException(
                         Strings.InvalidDiscriminator(member.Value.GetString())
-                        );
+                    );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -1517,7 +1517,7 @@ public static class ItemReader
                         {
                             throw new InvalidOperationException(
                                 Strings.InvalidDiscriminator(detail.Value.GetString())
-                                );
+                            );
                         }
                     }
                     else if (detail.NameEquals(weightClass.Name))
@@ -1617,7 +1617,7 @@ public static class ItemReader
                 {
                     throw new InvalidOperationException(
                         Strings.InvalidDiscriminator(member.Value.GetString())
-                        );
+                    );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -1762,7 +1762,7 @@ public static class ItemReader
                 {
                     throw new InvalidOperationException(
                         Strings.InvalidDiscriminator(member.Value.GetString())
-                        );
+                    );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -1909,7 +1909,7 @@ public static class ItemReader
                 {
                     throw new InvalidOperationException(
                         Strings.InvalidDiscriminator(member.Value.GetString())
-                        );
+                    );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -1966,7 +1966,7 @@ public static class ItemReader
                         {
                             throw new InvalidOperationException(
                                 Strings.UnexpectedDiscriminator(detail.Value.GetString())
-                                );
+                            );
                         }
                     }
                     else if (missingMemberBehavior == MissingMemberBehavior.Error)
@@ -2021,7 +2021,7 @@ public static class ItemReader
                 {
                     throw new InvalidOperationException(
                         Strings.InvalidDiscriminator(member.Value.GetString())
-                        );
+                    );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -2078,7 +2078,7 @@ public static class ItemReader
                         {
                             throw new InvalidOperationException(
                                 Strings.InvalidDiscriminator(detail.Value.GetString())
-                                );
+                            );
                         }
                     }
                     else if (missingMemberBehavior == MissingMemberBehavior.Error)
@@ -2130,7 +2130,7 @@ public static class ItemReader
                 {
                     throw new InvalidOperationException(
                         Strings.InvalidDiscriminator(member.Value.GetString())
-                        );
+                    );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -2187,7 +2187,7 @@ public static class ItemReader
                         {
                             throw new InvalidOperationException(
                                 Strings.InvalidDiscriminator(detail.Value.GetString())
-                                );
+                            );
                         }
                     }
                     else if (missingMemberBehavior == MissingMemberBehavior.Error)
@@ -2242,7 +2242,7 @@ public static class ItemReader
                 {
                     throw new InvalidOperationException(
                         Strings.InvalidDiscriminator(member.Value.GetString())
-                        );
+                    );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -2299,7 +2299,7 @@ public static class ItemReader
                         {
                             throw new InvalidOperationException(
                                 Strings.InvalidDiscriminator(detail.Value.GetString())
-                                );
+                            );
                         }
                     }
                     else if (missingMemberBehavior == MissingMemberBehavior.Error)
@@ -2354,7 +2354,7 @@ public static class ItemReader
                 {
                     throw new InvalidOperationException(
                         Strings.InvalidDiscriminator(member.Value.GetString())
-                        );
+                    );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -2411,7 +2411,7 @@ public static class ItemReader
                         {
                             throw new InvalidOperationException(
                                 Strings.InvalidDiscriminator(detail.Value.GetString())
-                                );
+                            );
                         }
                     }
                     else if (missingMemberBehavior == MissingMemberBehavior.Error)
@@ -2468,7 +2468,7 @@ public static class ItemReader
                 {
                     throw new InvalidOperationException(
                         Strings.InvalidDiscriminator(member.Value.GetString())
-                        );
+                    );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -2525,7 +2525,7 @@ public static class ItemReader
                         {
                             throw new InvalidOperationException(
                                 Strings.InvalidDiscriminator(detail.Value.GetString())
-                                );
+                            );
                         }
                     }
                     else if (detail.NameEquals(duration.Name))
@@ -2611,7 +2611,7 @@ public static class ItemReader
                 {
                     throw new InvalidOperationException(
                         Strings.InvalidDiscriminator(member.Value.GetString())
-                        );
+                    );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -2668,7 +2668,7 @@ public static class ItemReader
                         {
                             throw new InvalidOperationException(
                                 Strings.InvalidDiscriminator(detail.Value.GetString())
-                                );
+                            );
                         }
                     }
                     else if (detail.NameEquals(duration.Name))
@@ -2753,7 +2753,7 @@ public static class ItemReader
                 {
                     throw new InvalidOperationException(
                         Strings.InvalidDiscriminator(member.Value.GetString())
-                        );
+                    );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -2810,7 +2810,7 @@ public static class ItemReader
                         {
                             throw new InvalidOperationException(
                                 Strings.InvalidDiscriminator(detail.Value.GetString())
-                                );
+                            );
                         }
                     }
                     else if (missingMemberBehavior == MissingMemberBehavior.Error)
@@ -2871,7 +2871,7 @@ public static class ItemReader
                 {
                     throw new InvalidOperationException(
                         Strings.InvalidDiscriminator(member.Value.GetString())
-                        );
+                    );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -2928,7 +2928,7 @@ public static class ItemReader
                         {
                             throw new InvalidOperationException(
                                 Strings.InvalidDiscriminator(detail.Value.GetString())
-                                );
+                            );
                         }
                     }
                     else if (detail.NameEquals(duration.Name))
@@ -3013,7 +3013,7 @@ public static class ItemReader
                 {
                     throw new InvalidOperationException(
                         Strings.InvalidDiscriminator(member.Value.GetString())
-                        );
+                    );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -3070,7 +3070,7 @@ public static class ItemReader
                         {
                             throw new InvalidOperationException(
                                 Strings.InvalidDiscriminator(detail.Value.GetString())
-                                );
+                            );
                         }
                     }
                     else if (missingMemberBehavior == MissingMemberBehavior.Error)
@@ -3125,7 +3125,7 @@ public static class ItemReader
                 {
                     throw new InvalidOperationException(
                         Strings.InvalidDiscriminator(member.Value.GetString())
-                        );
+                    );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -3182,7 +3182,7 @@ public static class ItemReader
                         {
                             throw new InvalidOperationException(
                                 Strings.InvalidDiscriminator(detail.Value.GetString())
-                                );
+                            );
                         }
                     }
                     else if (missingMemberBehavior == MissingMemberBehavior.Error)
@@ -3237,7 +3237,7 @@ public static class ItemReader
                 {
                     throw new InvalidOperationException(
                         Strings.InvalidDiscriminator(member.Value.GetString())
-                        );
+                    );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -3294,7 +3294,7 @@ public static class ItemReader
                         {
                             throw new InvalidOperationException(
                                 Strings.InvalidDiscriminator(detail.Value.GetString())
-                                );
+                            );
                         }
                     }
                     else if (missingMemberBehavior == MissingMemberBehavior.Error)
@@ -3350,7 +3350,7 @@ public static class ItemReader
                 {
                     throw new InvalidOperationException(
                         Strings.InvalidDiscriminator(member.Value.GetString())
-                        );
+                    );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -3407,7 +3407,7 @@ public static class ItemReader
                         {
                             throw new InvalidOperationException(
                                 Strings.InvalidDiscriminator(detail.Value.GetString())
-                                );
+                            );
                         }
                     }
                     else if (detail.NameEquals(skins.Name))
@@ -3501,7 +3501,7 @@ public static class ItemReader
                 {
                     throw new InvalidOperationException(
                         Strings.InvalidDiscriminator(member.Value.GetString())
-                        );
+                    );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -3558,7 +3558,7 @@ public static class ItemReader
                         {
                             throw new InvalidOperationException(
                                 Strings.InvalidDiscriminator(detail.Value.GetString())
-                                );
+                            );
                         }
                     }
                     else if (detail.NameEquals("unlock_type"))
@@ -3567,7 +3567,7 @@ public static class ItemReader
                         {
                             throw new InvalidOperationException(
                                 Strings.UnexpectedDiscriminator(detail.Value.GetString())
-                                );
+                            );
                         }
                     }
                     else if (missingMemberBehavior == MissingMemberBehavior.Error)
@@ -3622,7 +3622,7 @@ public static class ItemReader
                 {
                     throw new InvalidOperationException(
                         Strings.InvalidDiscriminator(member.Value.GetString())
-                        );
+                    );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -3679,7 +3679,7 @@ public static class ItemReader
                         {
                             throw new InvalidOperationException(
                                 Strings.InvalidDiscriminator(detail.Value.GetString())
-                                );
+                            );
                         }
                     }
                     else if (detail.NameEquals("unlock_type"))
@@ -3688,7 +3688,7 @@ public static class ItemReader
                         {
                             throw new InvalidOperationException(
                                 Strings.InvalidDiscriminator(detail.Value.GetString())
-                                );
+                            );
                         }
                     }
                     else if (missingMemberBehavior == MissingMemberBehavior.Error)
@@ -3743,7 +3743,7 @@ public static class ItemReader
                 {
                     throw new InvalidOperationException(
                         Strings.InvalidDiscriminator(member.Value.GetString())
-                        );
+                    );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -3800,7 +3800,7 @@ public static class ItemReader
                         {
                             throw new InvalidOperationException(
                                 Strings.InvalidDiscriminator(detail.Value.GetString())
-                                );
+                            );
                         }
                     }
                     else if (detail.NameEquals("unlock_type"))
@@ -3809,7 +3809,7 @@ public static class ItemReader
                         {
                             throw new InvalidOperationException(
                                 Strings.InvalidDiscriminator(detail.Value.GetString())
-                                );
+                            );
                         }
                     }
                     else if (missingMemberBehavior == MissingMemberBehavior.Error)
@@ -3864,7 +3864,7 @@ public static class ItemReader
                 {
                     throw new InvalidOperationException(
                         Strings.InvalidDiscriminator(member.Value.GetString())
-                        );
+                    );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -3921,7 +3921,7 @@ public static class ItemReader
                         {
                             throw new InvalidOperationException(
                                 Strings.InvalidDiscriminator(detail.Value.GetString())
-                                );
+                            );
                         }
                     }
                     else if (detail.NameEquals("unlock_type"))
@@ -3930,7 +3930,7 @@ public static class ItemReader
                         {
                             throw new InvalidOperationException(
                                 Strings.InvalidDiscriminator(detail.Value.GetString())
-                                );
+                            );
                         }
                     }
                     else if (missingMemberBehavior == MissingMemberBehavior.Error)
@@ -3985,7 +3985,7 @@ public static class ItemReader
                 {
                     throw new InvalidOperationException(
                         Strings.InvalidDiscriminator(member.Value.GetString())
-                        );
+                    );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -4042,7 +4042,7 @@ public static class ItemReader
                         {
                             throw new InvalidOperationException(
                                 Strings.InvalidDiscriminator(detail.Value.GetString())
-                                );
+                            );
                         }
                     }
                     else if (detail.NameEquals("unlock_type"))
@@ -4051,7 +4051,7 @@ public static class ItemReader
                         {
                             throw new InvalidOperationException(
                                 Strings.InvalidDiscriminator(detail.Value.GetString())
-                                );
+                            );
                         }
                     }
                     else if (missingMemberBehavior == MissingMemberBehavior.Error)
@@ -4106,7 +4106,7 @@ public static class ItemReader
                 {
                     throw new InvalidOperationException(
                         Strings.InvalidDiscriminator(member.Value.GetString())
-                        );
+                    );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -4163,7 +4163,7 @@ public static class ItemReader
                         {
                             throw new InvalidOperationException(
                                 Strings.InvalidDiscriminator(detail.Value.GetString())
-                                );
+                            );
                         }
                     }
                     else if (detail.NameEquals("unlock_type"))
@@ -4172,7 +4172,7 @@ public static class ItemReader
                         {
                             throw new InvalidOperationException(
                                 Strings.InvalidDiscriminator(detail.Value.GetString())
-                                );
+                            );
                         }
                     }
                     else if (missingMemberBehavior == MissingMemberBehavior.Error)
@@ -4227,7 +4227,7 @@ public static class ItemReader
                 {
                     throw new InvalidOperationException(
                         Strings.InvalidDiscriminator(member.Value.GetString())
-                        );
+                    );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -4284,7 +4284,7 @@ public static class ItemReader
                         {
                             throw new InvalidOperationException(
                                 Strings.InvalidDiscriminator(detail.Value.GetString())
-                                );
+                            );
                         }
                     }
                     else if (detail.NameEquals("unlock_type"))
@@ -4293,7 +4293,7 @@ public static class ItemReader
                         {
                             throw new InvalidOperationException(
                                 Strings.InvalidDiscriminator(detail.Value.GetString())
-                                );
+                            );
                         }
                     }
                     else if (missingMemberBehavior == MissingMemberBehavior.Error)
@@ -4348,7 +4348,7 @@ public static class ItemReader
                 {
                     throw new InvalidOperationException(
                         Strings.InvalidDiscriminator(member.Value.GetString())
-                        );
+                    );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -4405,7 +4405,7 @@ public static class ItemReader
                         {
                             throw new InvalidOperationException(
                                 Strings.InvalidDiscriminator(detail.Value.GetString())
-                                );
+                            );
                         }
                     }
                     else if (detail.NameEquals("unlock_type"))
@@ -4414,7 +4414,7 @@ public static class ItemReader
                         {
                             throw new InvalidOperationException(
                                 Strings.InvalidDiscriminator(detail.Value.GetString())
-                                );
+                            );
                         }
                     }
                     else if (missingMemberBehavior == MissingMemberBehavior.Error)
@@ -4471,7 +4471,7 @@ public static class ItemReader
                 {
                     throw new InvalidOperationException(
                         Strings.InvalidDiscriminator(member.Value.GetString())
-                        );
+                    );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -4528,7 +4528,7 @@ public static class ItemReader
                         {
                             throw new InvalidOperationException(
                                 Strings.InvalidDiscriminator(detail.Value.GetString())
-                                );
+                            );
                         }
                     }
                     else if (detail.NameEquals("unlock_type"))
@@ -4537,7 +4537,7 @@ public static class ItemReader
                         {
                             throw new InvalidOperationException(
                                 Strings.InvalidDiscriminator(detail.Value.GetString())
-                                );
+                            );
                         }
                     }
                     else if (detail.NameEquals(recipeId.Name))
@@ -4603,7 +4603,7 @@ public static class ItemReader
                 {
                     throw new InvalidOperationException(
                         Strings.InvalidDiscriminator(member.Value.GetString())
-                        );
+                    );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -4660,7 +4660,7 @@ public static class ItemReader
                         {
                             throw new InvalidOperationException(
                                 Strings.InvalidDiscriminator(detail.Value.GetString())
-                                );
+                            );
                         }
                     }
                     else if (detail.NameEquals("unlock_type"))
@@ -4669,7 +4669,7 @@ public static class ItemReader
                         {
                             throw new InvalidOperationException(
                                 Strings.InvalidDiscriminator(detail.Value.GetString())
-                                );
+                            );
                         }
                     }
                     else if (detail.NameEquals(colorId.Name))
@@ -4729,7 +4729,7 @@ public static class ItemReader
                 {
                     throw new InvalidOperationException(
                         Strings.InvalidDiscriminator(member.Value.GetString())
-                        );
+                    );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -4786,7 +4786,7 @@ public static class ItemReader
                         {
                             throw new InvalidOperationException(
                                 Strings.InvalidDiscriminator(detail.Value.GetString())
-                                );
+                            );
                         }
                     }
                     else if (detail.NameEquals("unlock_type"))
@@ -4795,7 +4795,7 @@ public static class ItemReader
                         {
                             throw new InvalidOperationException(
                                 Strings.InvalidDiscriminator(detail.Value.GetString())
-                                );
+                            );
                         }
                     }
                     else if (missingMemberBehavior == MissingMemberBehavior.Error)
@@ -4850,7 +4850,7 @@ public static class ItemReader
                 {
                     throw new InvalidOperationException(
                         Strings.InvalidDiscriminator(member.Value.GetString())
-                        );
+                    );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -4907,7 +4907,7 @@ public static class ItemReader
                         {
                             throw new InvalidOperationException(
                                 Strings.InvalidDiscriminator(detail.Value.GetString())
-                                );
+                            );
                         }
                     }
                     else if (detail.NameEquals("unlock_type"))
@@ -4916,7 +4916,7 @@ public static class ItemReader
                         {
                             throw new InvalidOperationException(
                                 Strings.InvalidDiscriminator(detail.Value.GetString())
-                                );
+                            );
                         }
                     }
                     else if (missingMemberBehavior == MissingMemberBehavior.Error)
@@ -4971,7 +4971,7 @@ public static class ItemReader
                 {
                     throw new InvalidOperationException(
                         Strings.InvalidDiscriminator(member.Value.GetString())
-                        );
+                    );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -5028,7 +5028,7 @@ public static class ItemReader
                         {
                             throw new InvalidOperationException(
                                 Strings.InvalidDiscriminator(detail.Value.GetString())
-                                );
+                            );
                         }
                     }
                     else if (detail.NameEquals("unlock_type"))
@@ -5037,7 +5037,7 @@ public static class ItemReader
                         {
                             throw new InvalidOperationException(
                                 Strings.InvalidDiscriminator(detail.Value.GetString())
-                                );
+                            );
                         }
                     }
                     else if (missingMemberBehavior == MissingMemberBehavior.Error)
@@ -5092,7 +5092,7 @@ public static class ItemReader
                 {
                     throw new InvalidOperationException(
                         Strings.InvalidDiscriminator(member.Value.GetString())
-                        );
+                    );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -5149,7 +5149,7 @@ public static class ItemReader
                         {
                             throw new InvalidOperationException(
                                 Strings.InvalidDiscriminator(detail.Value.GetString())
-                                );
+                            );
                         }
                     }
                     else if (detail.NameEquals("unlock_type"))
@@ -5158,7 +5158,7 @@ public static class ItemReader
                         {
                             throw new InvalidOperationException(
                                 Strings.InvalidDiscriminator(detail.Value.GetString())
-                                );
+                            );
                         }
                     }
                     else if (missingMemberBehavior == MissingMemberBehavior.Error)
@@ -5213,7 +5213,7 @@ public static class ItemReader
                 {
                     throw new InvalidOperationException(
                         Strings.InvalidDiscriminator(member.Value.GetString())
-                        );
+                    );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -5270,7 +5270,7 @@ public static class ItemReader
                         {
                             throw new InvalidOperationException(
                                 Strings.InvalidDiscriminator(detail.Value.GetString())
-                                );
+                            );
                         }
                     }
                     else if (detail.NameEquals("unlock_type"))
@@ -5279,7 +5279,7 @@ public static class ItemReader
                         {
                             throw new InvalidOperationException(
                                 Strings.InvalidDiscriminator(detail.Value.GetString())
-                                );
+                            );
                         }
                     }
                     else if (missingMemberBehavior == MissingMemberBehavior.Error)
@@ -5334,7 +5334,7 @@ public static class ItemReader
                 {
                     throw new InvalidOperationException(
                         Strings.InvalidDiscriminator(member.Value.GetString())
-                        );
+                    );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -5391,7 +5391,7 @@ public static class ItemReader
                         {
                             throw new InvalidOperationException(
                                 Strings.InvalidDiscriminator(detail.Value.GetString())
-                                );
+                            );
                         }
                     }
                     else if (detail.NameEquals("unlock_type"))
@@ -5400,7 +5400,7 @@ public static class ItemReader
                         {
                             throw new InvalidOperationException(
                                 Strings.InvalidDiscriminator(detail.Value.GetString())
-                                );
+                            );
                         }
                     }
                     else if (missingMemberBehavior == MissingMemberBehavior.Error)
@@ -5455,7 +5455,7 @@ public static class ItemReader
                 {
                     throw new InvalidOperationException(
                         Strings.InvalidDiscriminator(member.Value.GetString())
-                        );
+                    );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -5512,7 +5512,7 @@ public static class ItemReader
                         {
                             throw new InvalidOperationException(
                                 Strings.InvalidDiscriminator(detail.Value.GetString())
-                                );
+                            );
                         }
                     }
                     else if (missingMemberBehavior == MissingMemberBehavior.Error)
@@ -5572,7 +5572,7 @@ public static class ItemReader
                 {
                     throw new InvalidOperationException(
                         Strings.InvalidDiscriminator(member.Value.GetString())
-                        );
+                    );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -5629,7 +5629,7 @@ public static class ItemReader
                         {
                             throw new InvalidOperationException(
                                 Strings.InvalidDiscriminator(detail.Value.GetString())
-                                );
+                            );
                         }
                     }
                     else if (detail.NameEquals(duration.Name))
@@ -5721,7 +5721,7 @@ public static class ItemReader
                 {
                     throw new InvalidOperationException(
                         Strings.InvalidDiscriminator(member.Value.GetString())
-                        );
+                    );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -5778,7 +5778,7 @@ public static class ItemReader
                         {
                             throw new InvalidOperationException(
                                 Strings.UnexpectedDiscriminator(detail.Value.GetString())
-                                );
+                            );
                         }
                     }
                     else if (missingMemberBehavior == MissingMemberBehavior.Error)
@@ -5833,7 +5833,7 @@ public static class ItemReader
                 {
                     throw new InvalidOperationException(
                         Strings.InvalidDiscriminator(member.Value.GetString())
-                        );
+                    );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -5890,7 +5890,7 @@ public static class ItemReader
                         {
                             throw new InvalidOperationException(
                                 Strings.InvalidDiscriminator(detail.Value.GetString())
-                                );
+                            );
                         }
                     }
                     else if (missingMemberBehavior == MissingMemberBehavior.Error)
@@ -5945,7 +5945,7 @@ public static class ItemReader
                 {
                     throw new InvalidOperationException(
                         Strings.InvalidDiscriminator(member.Value.GetString())
-                        );
+                    );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -6002,7 +6002,7 @@ public static class ItemReader
                         {
                             throw new InvalidOperationException(
                                 Strings.InvalidDiscriminator(detail.Value.GetString())
-                                );
+                            );
                         }
                     }
                     else if (missingMemberBehavior == MissingMemberBehavior.Error)
@@ -6057,7 +6057,7 @@ public static class ItemReader
                 {
                     throw new InvalidOperationException(
                         Strings.InvalidDiscriminator(member.Value.GetString())
-                        );
+                    );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -6114,7 +6114,7 @@ public static class ItemReader
                         {
                             throw new InvalidOperationException(
                                 Strings.InvalidDiscriminator(detail.Value.GetString())
-                                );
+                            );
                         }
                     }
                     else if (missingMemberBehavior == MissingMemberBehavior.Error)
@@ -6169,7 +6169,7 @@ public static class ItemReader
                 {
                     throw new InvalidOperationException(
                         Strings.InvalidDiscriminator(member.Value.GetString())
-                        );
+                    );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -6226,7 +6226,7 @@ public static class ItemReader
                         {
                             throw new InvalidOperationException(
                                 Strings.InvalidDiscriminator(detail.Value.GetString())
-                                );
+                            );
                         }
                     }
                     else if (missingMemberBehavior == MissingMemberBehavior.Error)
@@ -6282,7 +6282,7 @@ public static class ItemReader
                 {
                     throw new InvalidOperationException(
                         Strings.InvalidDiscriminator(member.Value.GetString())
-                        );
+                    );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -6393,7 +6393,7 @@ public static class ItemReader
                 {
                     throw new InvalidOperationException(
                         Strings.InvalidDiscriminator(member.Value.GetString())
-                        );
+                    );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -6450,7 +6450,7 @@ public static class ItemReader
                         {
                             throw new InvalidOperationException(
                                 Strings.UnexpectedDiscriminator(detail.Value.GetString())
-                                );
+                            );
                         }
                     }
                     else if (missingMemberBehavior == MissingMemberBehavior.Error)
@@ -6505,7 +6505,7 @@ public static class ItemReader
                 {
                     throw new InvalidOperationException(
                         Strings.InvalidDiscriminator(member.Value.GetString())
-                        );
+                    );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -6562,7 +6562,7 @@ public static class ItemReader
                         {
                             throw new InvalidOperationException(
                                 Strings.InvalidDiscriminator(detail.Value.GetString())
-                                );
+                            );
                         }
                     }
                     else if (missingMemberBehavior == MissingMemberBehavior.Error)
@@ -6617,7 +6617,7 @@ public static class ItemReader
                 {
                     throw new InvalidOperationException(
                         Strings.InvalidDiscriminator(member.Value.GetString())
-                        );
+                    );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -6674,7 +6674,7 @@ public static class ItemReader
                         {
                             throw new InvalidOperationException(
                                 Strings.InvalidDiscriminator(detail.Value.GetString())
-                                );
+                            );
                         }
                     }
                     else if (missingMemberBehavior == MissingMemberBehavior.Error)
@@ -6729,7 +6729,7 @@ public static class ItemReader
                 {
                     throw new InvalidOperationException(
                         Strings.InvalidDiscriminator(member.Value.GetString())
-                        );
+                    );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -6786,7 +6786,7 @@ public static class ItemReader
                         {
                             throw new InvalidOperationException(
                                 Strings.InvalidDiscriminator(detail.Value.GetString())
-                                );
+                            );
                         }
                     }
                     else if (missingMemberBehavior == MissingMemberBehavior.Error)
@@ -6841,7 +6841,7 @@ public static class ItemReader
                 {
                     throw new InvalidOperationException(
                         Strings.InvalidDiscriminator(member.Value.GetString())
-                        );
+                    );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -6898,7 +6898,7 @@ public static class ItemReader
                         {
                             throw new InvalidOperationException(
                                 Strings.InvalidDiscriminator(detail.Value.GetString())
-                                );
+                            );
                         }
                     }
                     else if (missingMemberBehavior == MissingMemberBehavior.Error)
@@ -6962,7 +6962,7 @@ public static class ItemReader
                 {
                     throw new InvalidOperationException(
                         Strings.InvalidDiscriminator(member.Value.GetString())
-                        );
+                    );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -7019,7 +7019,7 @@ public static class ItemReader
                         {
                             throw new InvalidOperationException(
                                 Strings.UnexpectedDiscriminator(detail.Value.GetString())
-                                );
+                            );
                         }
                     }
                     else if (missingMemberBehavior == MissingMemberBehavior.Error)
@@ -7074,7 +7074,7 @@ public static class ItemReader
                 {
                     throw new InvalidOperationException(
                         Strings.InvalidDiscriminator(member.Value.GetString())
-                        );
+                    );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -7131,7 +7131,7 @@ public static class ItemReader
                         {
                             throw new InvalidOperationException(
                                 Strings.InvalidDiscriminator(detail.Value.GetString())
-                                );
+                            );
                         }
                     }
                     else if (missingMemberBehavior == MissingMemberBehavior.Error)
@@ -7188,7 +7188,7 @@ public static class ItemReader
                 {
                     throw new InvalidOperationException(
                         Strings.InvalidDiscriminator(member.Value.GetString())
-                        );
+                    );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -7245,7 +7245,7 @@ public static class ItemReader
                         {
                             throw new InvalidOperationException(
                                 Strings.InvalidDiscriminator(detail.Value.GetString())
-                                );
+                            );
                         }
                     }
                     else if (detail.NameEquals(vendorIds.Name))
@@ -7310,7 +7310,7 @@ public static class ItemReader
                 {
                     throw new InvalidOperationException(
                         Strings.InvalidDiscriminator(member.Value.GetString())
-                        );
+                    );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -7367,7 +7367,7 @@ public static class ItemReader
                         {
                             throw new InvalidOperationException(
                                 Strings.InvalidDiscriminator(detail.Value.GetString())
-                                );
+                            );
                         }
                     }
                     else if (missingMemberBehavior == MissingMemberBehavior.Error)
@@ -7422,7 +7422,7 @@ public static class ItemReader
                 {
                     throw new InvalidOperationException(
                         Strings.InvalidDiscriminator(member.Value.GetString())
-                        );
+                    );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -7479,7 +7479,7 @@ public static class ItemReader
                         {
                             throw new InvalidOperationException(
                                 Strings.InvalidDiscriminator(detail.Value.GetString())
-                                );
+                            );
                         }
                     }
                     else if (missingMemberBehavior == MissingMemberBehavior.Error)
@@ -7531,7 +7531,7 @@ public static class ItemReader
                 {
                     throw new InvalidOperationException(
                         Strings.InvalidDiscriminator(member.Value.GetString())
-                        );
+                    );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -7625,7 +7625,7 @@ public static class ItemReader
                 {
                     throw new InvalidOperationException(
                         Strings.InvalidDiscriminator(member.Value.GetString())
-                        );
+                    );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -7784,7 +7784,7 @@ public static class ItemReader
                         {
                             throw new InvalidOperationException(
                                 Strings.UnexpectedDiscriminator(detail.Value.GetString())
-                                );
+                            );
                         }
                     }
                     else if (missingMemberBehavior == MissingMemberBehavior.Error)
@@ -7840,7 +7840,7 @@ public static class ItemReader
                 {
                     throw new InvalidOperationException(
                         Strings.InvalidDiscriminator(member.Value.GetString())
-                        );
+                    );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -7897,7 +7897,7 @@ public static class ItemReader
                         {
                             throw new InvalidOperationException(
                                 Strings.InvalidDiscriminator(detail.Value.GetString())
-                                );
+                            );
                         }
                     }
                     else if (detail.NameEquals(charges.Name))
@@ -7974,7 +7974,7 @@ public static class ItemReader
                 {
                     throw new InvalidOperationException(
                         Strings.InvalidDiscriminator(member.Value.GetString())
-                        );
+                    );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -8039,7 +8039,7 @@ public static class ItemReader
                         {
                             throw new InvalidOperationException(
                                 Strings.UnexpectedDiscriminator(detail.Value.GetString())
-                                );
+                            );
                         }
                     }
                     else if (detail.NameEquals(infusionSlots.Name))
@@ -8131,7 +8131,7 @@ public static class ItemReader
                 {
                     throw new InvalidOperationException(
                         Strings.InvalidDiscriminator(member.Value.GetString())
-                        );
+                    );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -8196,7 +8196,7 @@ public static class ItemReader
                         {
                             throw new InvalidOperationException(
                                 Strings.InvalidDiscriminator(detail.Value.GetString())
-                                );
+                            );
                         }
                     }
                     else if (detail.NameEquals(infusionSlots.Name))
@@ -8285,7 +8285,7 @@ public static class ItemReader
                 {
                     throw new InvalidOperationException(
                         Strings.InvalidDiscriminator(member.Value.GetString())
-                        );
+                    );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -8350,7 +8350,7 @@ public static class ItemReader
                         {
                             throw new InvalidOperationException(
                                 Strings.InvalidDiscriminator(detail.Value.GetString())
-                                );
+                            );
                         }
                     }
                     else if (detail.NameEquals(infusionSlots.Name))
@@ -8439,7 +8439,7 @@ public static class ItemReader
                 {
                     throw new InvalidOperationException(
                         Strings.InvalidDiscriminator(member.Value.GetString())
-                        );
+                    );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -8504,7 +8504,7 @@ public static class ItemReader
                         {
                             throw new InvalidOperationException(
                                 Strings.InvalidDiscriminator(detail.Value.GetString())
-                                );
+                            );
                         }
                     }
                     else if (detail.NameEquals(infusionSlots.Name))
@@ -8586,7 +8586,7 @@ public static class ItemReader
                 {
                     throw new InvalidOperationException(
                         Strings.InvalidDiscriminator(member.Value.GetString())
-                        );
+                    );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -8696,7 +8696,7 @@ public static class ItemReader
                 {
                     throw new InvalidOperationException(
                         Strings.InvalidDiscriminator(member.Value.GetString())
-                        );
+                    );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -8753,7 +8753,7 @@ public static class ItemReader
                         {
                             throw new InvalidOperationException(
                                 Strings.UnexpectedDiscriminator(detail.Value.GetString())
-                                );
+                            );
                         }
                     }
                     else if (detail.NameEquals(upgradeComponentFlags.Name))
@@ -8839,7 +8839,7 @@ public static class ItemReader
                 {
                     throw new InvalidOperationException(
                         Strings.InvalidDiscriminator(member.Value.GetString())
-                        );
+                    );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -8896,7 +8896,7 @@ public static class ItemReader
                         {
                             throw new InvalidOperationException(
                                 Strings.InvalidDiscriminator(detail.Value.GetString())
-                                );
+                            );
                         }
                     }
                     else if (detail.NameEquals(upgradeComponentFlags.Name))
@@ -8983,7 +8983,7 @@ public static class ItemReader
                 {
                     throw new InvalidOperationException(
                         Strings.InvalidDiscriminator(member.Value.GetString())
-                        );
+                    );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -9040,7 +9040,7 @@ public static class ItemReader
                         {
                             throw new InvalidOperationException(
                                 Strings.InvalidDiscriminator(detail.Value.GetString())
-                                );
+                            );
                         }
                     }
                     else if (detail.NameEquals(upgradeComponentFlags.Name))
@@ -9123,7 +9123,7 @@ public static class ItemReader
                 {
                     throw new InvalidOperationException(
                         Strings.InvalidDiscriminator(member.Value.GetString())
-                        );
+                    );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -9180,7 +9180,7 @@ public static class ItemReader
                         {
                             throw new InvalidOperationException(
                                 Strings.InvalidDiscriminator(detail.Value.GetString())
-                                );
+                            );
                         }
                     }
                     else if (detail.NameEquals(upgradeComponentFlags.Name))
@@ -9267,7 +9267,7 @@ public static class ItemReader
                 {
                     throw new InvalidOperationException(
                         Strings.InvalidDiscriminator(member.Value.GetString())
-                        );
+                    );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -9324,7 +9324,7 @@ public static class ItemReader
                         {
                             throw new InvalidOperationException(
                                 Strings.InvalidDiscriminator(detail.Value.GetString())
-                                );
+                            );
                         }
                     }
                     else if (detail.NameEquals(upgradeComponentFlags.Name))
@@ -9462,7 +9462,7 @@ public static class ItemReader
                 {
                     throw new InvalidOperationException(
                         Strings.InvalidDiscriminator(member.Value.GetString())
-                        );
+                    );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -9523,7 +9523,7 @@ public static class ItemReader
                         {
                             throw new InvalidOperationException(
                                 Strings.UnexpectedDiscriminator(detail.Value.GetString())
-                                );
+                            );
                         }
                     }
                     else if (detail.NameEquals(damageType.Name))
@@ -9638,7 +9638,7 @@ public static class ItemReader
                 {
                     throw new InvalidOperationException(
                         Strings.InvalidDiscriminator(member.Value.GetString())
-                        );
+                    );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -9699,7 +9699,7 @@ public static class ItemReader
                         {
                             throw new InvalidOperationException(
                                 Strings.InvalidDiscriminator(detail.Value.GetString())
-                                );
+                            );
                         }
                     }
                     else if (detail.NameEquals(damageType.Name))
@@ -9814,7 +9814,7 @@ public static class ItemReader
                 {
                     throw new InvalidOperationException(
                         Strings.InvalidDiscriminator(member.Value.GetString())
-                        );
+                    );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -9875,7 +9875,7 @@ public static class ItemReader
                         {
                             throw new InvalidOperationException(
                                 Strings.InvalidDiscriminator(detail.Value.GetString())
-                                );
+                            );
                         }
                     }
                     else if (detail.NameEquals(damageType.Name))
@@ -9990,7 +9990,7 @@ public static class ItemReader
                 {
                     throw new InvalidOperationException(
                         Strings.InvalidDiscriminator(member.Value.GetString())
-                        );
+                    );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -10051,7 +10051,7 @@ public static class ItemReader
                         {
                             throw new InvalidOperationException(
                                 Strings.InvalidDiscriminator(detail.Value.GetString())
-                                );
+                            );
                         }
                     }
                     else if (detail.NameEquals(damageType.Name))
@@ -10169,7 +10169,7 @@ public static class ItemReader
                 {
                     throw new InvalidOperationException(
                         Strings.InvalidDiscriminator(member.Value.GetString())
-                        );
+                    );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -10230,7 +10230,7 @@ public static class ItemReader
                         {
                             throw new InvalidOperationException(
                                 Strings.InvalidDiscriminator(detail.Value.GetString())
-                                );
+                            );
                         }
                     }
                     else if (detail.NameEquals(damageType.Name))
@@ -10345,7 +10345,7 @@ public static class ItemReader
                 {
                     throw new InvalidOperationException(
                         Strings.InvalidDiscriminator(member.Value.GetString())
-                        );
+                    );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -10406,7 +10406,7 @@ public static class ItemReader
                         {
                             throw new InvalidOperationException(
                                 Strings.InvalidDiscriminator(detail.Value.GetString())
-                                );
+                            );
                         }
                     }
                     else if (detail.NameEquals(damageType.Name))
@@ -10521,7 +10521,7 @@ public static class ItemReader
                 {
                     throw new InvalidOperationException(
                         Strings.InvalidDiscriminator(member.Value.GetString())
-                        );
+                    );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -10582,7 +10582,7 @@ public static class ItemReader
                         {
                             throw new InvalidOperationException(
                                 Strings.InvalidDiscriminator(detail.Value.GetString())
-                                );
+                            );
                         }
                     }
                     else if (detail.NameEquals(damageType.Name))
@@ -10700,7 +10700,7 @@ public static class ItemReader
                 {
                     throw new InvalidOperationException(
                         Strings.InvalidDiscriminator(member.Value.GetString())
-                        );
+                    );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -10761,7 +10761,7 @@ public static class ItemReader
                         {
                             throw new InvalidOperationException(
                                 Strings.InvalidDiscriminator(detail.Value.GetString())
-                                );
+                            );
                         }
                     }
                     else if (detail.NameEquals(damageType.Name))
@@ -10879,7 +10879,7 @@ public static class ItemReader
                 {
                     throw new InvalidOperationException(
                         Strings.InvalidDiscriminator(member.Value.GetString())
-                        );
+                    );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -10940,7 +10940,7 @@ public static class ItemReader
                         {
                             throw new InvalidOperationException(
                                 Strings.InvalidDiscriminator(detail.Value.GetString())
-                                );
+                            );
                         }
                     }
                     else if (detail.NameEquals(damageType.Name))
@@ -11055,7 +11055,7 @@ public static class ItemReader
                 {
                     throw new InvalidOperationException(
                         Strings.InvalidDiscriminator(member.Value.GetString())
-                        );
+                    );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -11116,7 +11116,7 @@ public static class ItemReader
                         {
                             throw new InvalidOperationException(
                                 Strings.InvalidDiscriminator(detail.Value.GetString())
-                                );
+                            );
                         }
                     }
                     else if (detail.NameEquals(damageType.Name))
@@ -11231,7 +11231,7 @@ public static class ItemReader
                 {
                     throw new InvalidOperationException(
                         Strings.InvalidDiscriminator(member.Value.GetString())
-                        );
+                    );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -11292,7 +11292,7 @@ public static class ItemReader
                         {
                             throw new InvalidOperationException(
                                 Strings.InvalidDiscriminator(detail.Value.GetString())
-                                );
+                            );
                         }
                     }
                     else if (detail.NameEquals(damageType.Name))
@@ -11407,7 +11407,7 @@ public static class ItemReader
                 {
                     throw new InvalidOperationException(
                         Strings.InvalidDiscriminator(member.Value.GetString())
-                        );
+                    );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -11468,7 +11468,7 @@ public static class ItemReader
                         {
                             throw new InvalidOperationException(
                                 Strings.InvalidDiscriminator(detail.Value.GetString())
-                                );
+                            );
                         }
                     }
                     else if (detail.NameEquals(damageType.Name))
@@ -11586,7 +11586,7 @@ public static class ItemReader
                 {
                     throw new InvalidOperationException(
                         Strings.InvalidDiscriminator(member.Value.GetString())
-                        );
+                    );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -11647,7 +11647,7 @@ public static class ItemReader
                         {
                             throw new InvalidOperationException(
                                 Strings.InvalidDiscriminator(detail.Value.GetString())
-                                );
+                            );
                         }
                     }
                     else if (detail.NameEquals(damageType.Name))
@@ -11762,7 +11762,7 @@ public static class ItemReader
                 {
                     throw new InvalidOperationException(
                         Strings.InvalidDiscriminator(member.Value.GetString())
-                        );
+                    );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -11823,7 +11823,7 @@ public static class ItemReader
                         {
                             throw new InvalidOperationException(
                                 Strings.InvalidDiscriminator(detail.Value.GetString())
-                                );
+                            );
                         }
                     }
                     else if (detail.NameEquals(damageType.Name))
@@ -11941,7 +11941,7 @@ public static class ItemReader
                 {
                     throw new InvalidOperationException(
                         Strings.InvalidDiscriminator(member.Value.GetString())
-                        );
+                    );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -12002,7 +12002,7 @@ public static class ItemReader
                         {
                             throw new InvalidOperationException(
                                 Strings.InvalidDiscriminator(detail.Value.GetString())
-                                );
+                            );
                         }
                     }
                     else if (detail.NameEquals(damageType.Name))
@@ -12120,7 +12120,7 @@ public static class ItemReader
                 {
                     throw new InvalidOperationException(
                         Strings.InvalidDiscriminator(member.Value.GetString())
-                        );
+                    );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -12181,7 +12181,7 @@ public static class ItemReader
                         {
                             throw new InvalidOperationException(
                                 Strings.InvalidDiscriminator(detail.Value.GetString())
-                                );
+                            );
                         }
                     }
                     else if (detail.NameEquals(damageType.Name))
@@ -12299,7 +12299,7 @@ public static class ItemReader
                 {
                     throw new InvalidOperationException(
                         Strings.InvalidDiscriminator(member.Value.GetString())
-                        );
+                    );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -12360,7 +12360,7 @@ public static class ItemReader
                         {
                             throw new InvalidOperationException(
                                 Strings.InvalidDiscriminator(detail.Value.GetString())
-                                );
+                            );
                         }
                     }
                     else if (detail.NameEquals(damageType.Name))
@@ -12475,7 +12475,7 @@ public static class ItemReader
                 {
                     throw new InvalidOperationException(
                         Strings.InvalidDiscriminator(member.Value.GetString())
-                        );
+                    );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -12536,7 +12536,7 @@ public static class ItemReader
                         {
                             throw new InvalidOperationException(
                                 Strings.InvalidDiscriminator(detail.Value.GetString())
-                                );
+                            );
                         }
                     }
                     else if (detail.NameEquals(damageType.Name))
@@ -12651,7 +12651,7 @@ public static class ItemReader
                 {
                     throw new InvalidOperationException(
                         Strings.InvalidDiscriminator(member.Value.GetString())
-                        );
+                    );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -12712,7 +12712,7 @@ public static class ItemReader
                         {
                             throw new InvalidOperationException(
                                 Strings.InvalidDiscriminator(detail.Value.GetString())
-                                );
+                            );
                         }
                     }
                     else if (detail.NameEquals(damageType.Name))
@@ -12827,7 +12827,7 @@ public static class ItemReader
                 {
                     throw new InvalidOperationException(
                         Strings.InvalidDiscriminator(member.Value.GetString())
-                        );
+                    );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -12888,7 +12888,7 @@ public static class ItemReader
                         {
                             throw new InvalidOperationException(
                                 Strings.InvalidDiscriminator(detail.Value.GetString())
-                                );
+                            );
                         }
                     }
                     else if (detail.NameEquals(damageType.Name))
@@ -13003,7 +13003,7 @@ public static class ItemReader
                 {
                     throw new InvalidOperationException(
                         Strings.InvalidDiscriminator(member.Value.GetString())
-                        );
+                    );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -13064,7 +13064,7 @@ public static class ItemReader
                         {
                             throw new InvalidOperationException(
                                 Strings.InvalidDiscriminator(detail.Value.GetString())
-                                );
+                            );
                         }
                     }
                     else if (detail.NameEquals(damageType.Name))
@@ -13182,7 +13182,7 @@ public static class ItemReader
                 {
                     throw new InvalidOperationException(
                         Strings.InvalidDiscriminator(member.Value.GetString())
-                        );
+                    );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -13243,7 +13243,7 @@ public static class ItemReader
                         {
                             throw new InvalidOperationException(
                                 Strings.InvalidDiscriminator(detail.Value.GetString())
-                                );
+                            );
                         }
                     }
                     else if (detail.NameEquals(damageType.Name))
@@ -13361,7 +13361,7 @@ public static class ItemReader
                 {
                     throw new InvalidOperationException(
                         Strings.InvalidDiscriminator(member.Value.GetString())
-                        );
+                    );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -13422,7 +13422,7 @@ public static class ItemReader
                         {
                             throw new InvalidOperationException(
                                 Strings.InvalidDiscriminator(detail.Value.GetString())
-                                );
+                            );
                         }
                     }
                     else if (detail.NameEquals(damageType.Name))
@@ -13540,7 +13540,7 @@ public static class ItemReader
                 {
                     throw new InvalidOperationException(
                         Strings.InvalidDiscriminator(member.Value.GetString())
-                        );
+                    );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -13601,7 +13601,7 @@ public static class ItemReader
                         {
                             throw new InvalidOperationException(
                                 Strings.InvalidDiscriminator(detail.Value.GetString())
-                                );
+                            );
                         }
                     }
                     else if (detail.NameEquals(damageType.Name))
@@ -13708,7 +13708,7 @@ public static class ItemReader
                 {
                     throw new InvalidOperationException(
                         Strings.InvalidDiscriminator(member.Value.GetString())
-                        );
+                    );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -13801,7 +13801,7 @@ public static class ItemReader
                 {
                     throw new InvalidOperationException(
                         Strings.InvalidDiscriminator(member.Value.GetString())
-                        );
+                    );
                 }
             }
             else if (member.NameEquals(name.Name))

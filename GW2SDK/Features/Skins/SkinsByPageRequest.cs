@@ -51,7 +51,7 @@ public sealed class SkinsByPageRequest : IHttpRequest<IReplicaPage<Skin>>
                 request.Compile(),
                 HttpCompletionOption.ResponseHeadersRead,
                 cancellationToken
-                )
+            )
             .ConfigureAwait(false);
 
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
@@ -66,6 +66,6 @@ public sealed class SkinsByPageRequest : IHttpRequest<IReplicaPage<Skin>>
             response.Headers.GetPageContext(),
             response.Content.Headers.Expires,
             response.Content.Headers.LastModified
-            );
+        );
     }
 }

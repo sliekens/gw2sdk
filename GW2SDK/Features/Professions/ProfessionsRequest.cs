@@ -37,7 +37,7 @@ public sealed class ProfessionsRequest : IHttpRequest<IReplicaSet<Profession>>
                 request.Compile(),
                 HttpCompletionOption.ResponseHeadersRead,
                 cancellationToken
-                )
+            )
             .ConfigureAwait(false);
 
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
@@ -52,6 +52,6 @@ public sealed class ProfessionsRequest : IHttpRequest<IReplicaSet<Profession>>
             response.Headers.GetCollectionContext(),
             response.Content.Headers.Expires,
             response.Content.Headers.LastModified
-            );
+        );
     }
 }

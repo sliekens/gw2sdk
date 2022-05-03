@@ -29,7 +29,7 @@ public sealed class
                 request.Compile(),
                 HttpCompletionOption.ResponseHeadersRead,
                 cancellationToken
-                )
+            )
             .ConfigureAwait(false);
 
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
@@ -39,12 +39,12 @@ public sealed class
 
         var value = json.RootElement.GetSet(
             entry => entry.GetMasteryProgress(MissingMemberBehavior)
-            );
+        );
         return new Replica<IReadOnlyCollection<MasteryProgress>>(
             response.Headers.Date.GetValueOrDefault(),
             value,
             response.Content.Headers.Expires,
             response.Content.Headers.LastModified
-            );
+        );
     }
 }

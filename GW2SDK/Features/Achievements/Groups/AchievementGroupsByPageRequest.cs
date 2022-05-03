@@ -49,7 +49,7 @@ public sealed class AchievementGroupsByPageRequest : IHttpRequest<IReplicaPage<A
                 request.Compile(),
                 HttpCompletionOption.ResponseHeadersRead,
                 cancellationToken
-                )
+            )
             .ConfigureAwait(false);
 
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
@@ -59,13 +59,13 @@ public sealed class AchievementGroupsByPageRequest : IHttpRequest<IReplicaPage<A
 
         var value = json.RootElement.GetSet(
             entry => entry.GetAchievementGroup(MissingMemberBehavior)
-            );
+        );
         return new ReplicaPage<AchievementGroup>(
             response.Headers.Date.GetValueOrDefault(),
             value,
             response.Headers.GetPageContext(),
             response.Content.Headers.Expires,
             response.Content.Headers.LastModified
-            );
+        );
     }
 }

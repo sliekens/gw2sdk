@@ -77,6 +77,6 @@ internal class Program : IObserver<Snapshot>
             pos[0],
             pos[1],
             pos[2]
-            );
+        );
     }
 }

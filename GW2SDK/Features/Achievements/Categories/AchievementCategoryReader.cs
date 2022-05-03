@@ -110,7 +110,7 @@ public static class AchievementCategoryReader
             RequiredAccess =
                 requiredAccess.Select(
                     value => ReadProductRequirement(value, missingMemberBehavior)
-                    ),
+                ),
             Flags = flags.GetValues(missingMemberBehavior),
             Level = level.Select(value => ReadLevel(value, missingMemberBehavior))
         };

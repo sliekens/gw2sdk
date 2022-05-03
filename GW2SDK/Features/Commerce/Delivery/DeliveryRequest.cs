@@ -36,7 +36,7 @@ public sealed class DeliveryRequest : IHttpRequest<IReplica<DeliveryBox>>
                 request.Compile(),
                 HttpCompletionOption.ResponseHeadersRead,
                 cancellationToken
-                )
+            )
             .ConfigureAwait(false);
 
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
@@ -50,6 +50,6 @@ public sealed class DeliveryRequest : IHttpRequest<IReplica<DeliveryBox>>
             value,
             response.Content.Headers.Expires,
             response.Content.Headers.LastModified
-            );
+        );
     }
 }

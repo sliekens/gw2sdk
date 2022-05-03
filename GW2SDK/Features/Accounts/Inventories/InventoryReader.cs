@@ -18,7 +18,7 @@ public static class InventoryReader
 
         slots.AddRange(
             json.EnumerateArray().Select(entry => entry.GetItemSlot(missingMemberBehavior))
-            );
+        );
 
         return new Inventory(slots);
     }

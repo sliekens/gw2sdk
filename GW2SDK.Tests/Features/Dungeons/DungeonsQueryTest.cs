@@ -54,7 +54,7 @@ public class DungeonsQueryTest
             first => Assert.Contains(first.Id, ids),
             second => Assert.Contains(second.Id, ids),
             third => Assert.Contains(third.Id, ids)
-            );
+        );
     }
 
     [Fact]
@@ -91,9 +91,9 @@ public class DungeonsQueryTest
                         Assert.NotEmpty(path.Id);
                         Assert.True(Enum.IsDefined(typeof(DungeonKind), path.Kind));
                     }
-                    );
+                );
             }
-            );
+        );
     }
 
     [Fact]
@@ -116,6 +116,6 @@ public class DungeonsQueryTest
             {
                 Assert.Contains(completed, paths);
             }
-            );
+        );
     }
 }

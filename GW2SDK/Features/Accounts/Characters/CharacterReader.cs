@@ -309,7 +309,7 @@ public static class CharacterReader
             RuneId = rune.GetValue(),
             SigilIds = sigils.SelectMany(
                 value => value.ValueKind == JsonValueKind.Null ? null : value.GetInt32()
-                )
+            )
         };
     }
 

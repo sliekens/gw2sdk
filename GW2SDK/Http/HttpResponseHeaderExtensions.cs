@@ -103,7 +103,7 @@ public static class HttpResponseHeaderExtensions
             last,
             previous,
             next
-            );
+        );
     }
 
     private static class ResponseHeaderName

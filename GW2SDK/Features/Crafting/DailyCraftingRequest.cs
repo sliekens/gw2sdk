@@ -26,7 +26,7 @@ public sealed class DailyCraftingRequest : IHttpRequest<IReplica<IReadOnlyCollec
                 Template.Compile(),
                 HttpCompletionOption.ResponseHeadersRead,
                 cancellationToken
-                )
+            )
             .ConfigureAwait(false);
 
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
@@ -40,6 +40,6 @@ public sealed class DailyCraftingRequest : IHttpRequest<IReplica<IReadOnlyCollec
             value,
             response.Content.Headers.Expires,
             response.Content.Headers.LastModified
-            );
+        );
     }
 }

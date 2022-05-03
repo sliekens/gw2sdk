@@ -58,7 +58,7 @@ public sealed class CraftingQuery
                 return request.SendAsync(http, ct);
             },
             progress
-            );
+        );
 
         return producer.QueryAsync(recipeIds, cancellationToken: cancellationToken);
     }
@@ -166,9 +166,9 @@ public sealed class CraftingQuery
             missingMemberBehavior,
             progress,
             cancellationToken
-            );
+        );
         await foreach (var recipe in producer.WithCancellation(cancellationToken)
-                           .ConfigureAwait(false))
+            .ConfigureAwait(false))
         {
             yield return recipe;
         }

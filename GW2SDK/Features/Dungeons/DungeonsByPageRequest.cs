@@ -42,7 +42,7 @@ public sealed class DungeonsByPageRequest : IHttpRequest<IReplicaPage<Dungeon>>
                 request.Compile(),
                 HttpCompletionOption.ResponseHeadersRead,
                 cancellationToken
-                )
+            )
             .ConfigureAwait(false);
 
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
@@ -52,13 +52,13 @@ public sealed class DungeonsByPageRequest : IHttpRequest<IReplicaPage<Dungeon>>
 
         var value = json.RootElement.GetSet(
             entry => DungeonReader.GetDungeon(entry, MissingMemberBehavior)
-            );
+        );
         return new ReplicaPage<Dungeon>(
             response.Headers.Date.GetValueOrDefault(),
             value,
             response.Headers.GetPageContext(),
             response.Content.Headers.Expires,
             response.Content.Headers.LastModified
-            );
+        );
     }
 }

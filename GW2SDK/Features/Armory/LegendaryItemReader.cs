@@ -8,7 +8,10 @@ namespace GW2SDK.Armory;
 [PublicAPI]
 public static class LegendaryItemReader
 {
-    public static LegendaryItem GetLegendaryItem(this JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    public static LegendaryItem GetLegendaryItem(
+        this JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         RequiredMember<int> id = new("id");
         RequiredMember<int> maxCount = new("max_count");
