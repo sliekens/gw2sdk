@@ -34,7 +34,7 @@ public sealed class AchievementCategoriesRequest : IHttpRequest<IReplicaSet<Achi
                 request.Compile(),
                 HttpCompletionOption.ResponseHeadersRead,
                 cancellationToken
-                )
+            )
             .ConfigureAwait(false);
 
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
@@ -44,13 +44,13 @@ public sealed class AchievementCategoriesRequest : IHttpRequest<IReplicaSet<Achi
 
         var value = json.RootElement.GetSet(
             entry => entry.GetAchievementCategory(MissingMemberBehavior)
-            );
+        );
         return new ReplicaSet<AchievementCategory>(
             response.Headers.Date.GetValueOrDefault(),
             value,
             response.Headers.GetCollectionContext(),
             response.Content.Headers.Expires,
             response.Content.Headers.LastModified
-            );
+        );
     }
 }

@@ -140,7 +140,7 @@ public static class RecipeReader
                 {
                     throw new InvalidOperationException(
                         Strings.UnexpectedDiscriminator(member.Value.GetString())
-                        );
+                    );
                 }
             }
             else if (member.NameEquals(outputItemId.Name))
@@ -226,7 +226,7 @@ public static class RecipeReader
                 {
                     throw new InvalidOperationException(
                         Strings.InvalidDiscriminator(member.Value.GetString())
-                        );
+                    );
                 }
             }
             else if (member.NameEquals(outputItemId.Name))
@@ -312,7 +312,7 @@ public static class RecipeReader
                 {
                     throw new InvalidOperationException(
                         Strings.InvalidDiscriminator(member.Value.GetString())
-                        );
+                    );
                 }
             }
             else if (member.NameEquals(outputItemId.Name))
@@ -398,7 +398,7 @@ public static class RecipeReader
                 {
                     throw new InvalidOperationException(
                         Strings.InvalidDiscriminator(member.Value.GetString())
-                        );
+                    );
                 }
             }
             else if (member.NameEquals(outputItemId.Name))
@@ -484,7 +484,7 @@ public static class RecipeReader
                 {
                     throw new InvalidOperationException(
                         Strings.InvalidDiscriminator(member.Value.GetString())
-                        );
+                    );
                 }
             }
             else if (member.NameEquals(outputItemId.Name))
@@ -570,7 +570,7 @@ public static class RecipeReader
                 {
                     throw new InvalidOperationException(
                         Strings.InvalidDiscriminator(member.Value.GetString())
-                        );
+                    );
                 }
             }
             else if (member.NameEquals(outputItemId.Name))
@@ -656,7 +656,7 @@ public static class RecipeReader
                 {
                     throw new InvalidOperationException(
                         Strings.InvalidDiscriminator(member.Value.GetString())
-                        );
+                    );
                 }
             }
             else if (member.NameEquals(outputItemId.Name))
@@ -742,7 +742,7 @@ public static class RecipeReader
                 {
                     throw new InvalidOperationException(
                         Strings.InvalidDiscriminator(member.Value.GetString())
-                        );
+                    );
                 }
             }
             else if (member.NameEquals(outputItemId.Name))
@@ -828,7 +828,7 @@ public static class RecipeReader
                 {
                     throw new InvalidOperationException(
                         Strings.InvalidDiscriminator(member.Value.GetString())
-                        );
+                    );
                 }
             }
             else if (member.NameEquals(outputItemId.Name))
@@ -914,7 +914,7 @@ public static class RecipeReader
                 {
                     throw new InvalidOperationException(
                         Strings.InvalidDiscriminator(member.Value.GetString())
-                        );
+                    );
                 }
             }
             else if (member.NameEquals(outputItemId.Name))
@@ -1000,7 +1000,7 @@ public static class RecipeReader
                 {
                     throw new InvalidOperationException(
                         Strings.InvalidDiscriminator(member.Value.GetString())
-                        );
+                    );
                 }
             }
             else if (member.NameEquals(outputItemId.Name))
@@ -1086,7 +1086,7 @@ public static class RecipeReader
                 {
                     throw new InvalidOperationException(
                         Strings.InvalidDiscriminator(member.Value.GetString())
-                        );
+                    );
                 }
             }
             else if (member.NameEquals(outputItemId.Name))
@@ -1172,7 +1172,7 @@ public static class RecipeReader
                 {
                     throw new InvalidOperationException(
                         Strings.InvalidDiscriminator(member.Value.GetString())
-                        );
+                    );
                 }
             }
             else if (member.NameEquals(outputItemId.Name))
@@ -1258,7 +1258,7 @@ public static class RecipeReader
                 {
                     throw new InvalidOperationException(
                         Strings.InvalidDiscriminator(member.Value.GetString())
-                        );
+                    );
                 }
             }
             else if (member.NameEquals(outputItemId.Name))
@@ -1344,7 +1344,7 @@ public static class RecipeReader
                 {
                     throw new InvalidOperationException(
                         Strings.InvalidDiscriminator(member.Value.GetString())
-                        );
+                    );
                 }
             }
             else if (member.NameEquals(outputItemId.Name))
@@ -1430,7 +1430,7 @@ public static class RecipeReader
                 {
                     throw new InvalidOperationException(
                         Strings.InvalidDiscriminator(member.Value.GetString())
-                        );
+                    );
                 }
             }
             else if (member.NameEquals(outputItemId.Name))
@@ -1516,7 +1516,7 @@ public static class RecipeReader
                 {
                     throw new InvalidOperationException(
                         Strings.InvalidDiscriminator(member.Value.GetString())
-                        );
+                    );
                 }
             }
             else if (member.NameEquals(outputItemId.Name))
@@ -1602,7 +1602,7 @@ public static class RecipeReader
                 {
                     throw new InvalidOperationException(
                         Strings.InvalidDiscriminator(member.Value.GetString())
-                        );
+                    );
                 }
             }
             else if (member.NameEquals(outputItemId.Name))
@@ -1688,7 +1688,7 @@ public static class RecipeReader
                 {
                     throw new InvalidOperationException(
                         Strings.InvalidDiscriminator(member.Value.GetString())
-                        );
+                    );
                 }
             }
             else if (member.NameEquals(outputItemId.Name))
@@ -1776,7 +1776,7 @@ public static class RecipeReader
                 {
                     throw new InvalidOperationException(
                         Strings.InvalidDiscriminator(member.Value.GetString())
-                        );
+                    );
                 }
             }
             else if (member.NameEquals(outputItemId.Name))
@@ -1847,7 +1847,7 @@ public static class RecipeReader
             GuildIngredients =
                 guildIngredients.SelectMany(
                     value => ReadGuildIngredient(value, missingMemberBehavior)
-                    ),
+                ),
             OutputUpgradeId = outputUpgradeId.GetValue(),
             ChatLink = chatLink.GetValue()
         };
@@ -1876,7 +1876,7 @@ public static class RecipeReader
                 {
                     throw new InvalidOperationException(
                         Strings.InvalidDiscriminator(member.Value.GetString())
-                        );
+                    );
                 }
             }
             else if (member.NameEquals(outputItemId.Name))
@@ -1969,7 +1969,7 @@ public static class RecipeReader
                 {
                     throw new InvalidOperationException(
                         Strings.InvalidDiscriminator(member.Value.GetString())
-                        );
+                    );
                 }
             }
             else if (member.NameEquals(outputItemId.Name))
@@ -2040,7 +2040,7 @@ public static class RecipeReader
             GuildIngredients =
                 guildIngredients.SelectMany(
                     value => ReadGuildIngredient(value, missingMemberBehavior)
-                    ),
+                ),
             OutputUpgradeId = outputUpgradeId.GetValue(),
             ChatLink = chatLink.GetValue()
         };
@@ -2068,7 +2068,7 @@ public static class RecipeReader
                 {
                     throw new InvalidOperationException(
                         Strings.InvalidDiscriminator(member.Value.GetString())
-                        );
+                    );
                 }
             }
             else if (member.NameEquals(outputItemId.Name))
@@ -2154,7 +2154,7 @@ public static class RecipeReader
                 {
                     throw new InvalidOperationException(
                         Strings.InvalidDiscriminator(member.Value.GetString())
-                        );
+                    );
                 }
             }
             else if (member.NameEquals(outputItemId.Name))
@@ -2240,7 +2240,7 @@ public static class RecipeReader
                 {
                     throw new InvalidOperationException(
                         Strings.InvalidDiscriminator(member.Value.GetString())
-                        );
+                    );
                 }
             }
             else if (member.NameEquals(outputItemId.Name))
@@ -2326,7 +2326,7 @@ public static class RecipeReader
                 {
                     throw new InvalidOperationException(
                         Strings.InvalidDiscriminator(member.Value.GetString())
-                        );
+                    );
                 }
             }
             else if (member.NameEquals(outputItemId.Name))
@@ -2412,7 +2412,7 @@ public static class RecipeReader
                 {
                     throw new InvalidOperationException(
                         Strings.InvalidDiscriminator(member.Value.GetString())
-                        );
+                    );
                 }
             }
             else if (member.NameEquals(outputItemId.Name))
@@ -2498,7 +2498,7 @@ public static class RecipeReader
                 {
                     throw new InvalidOperationException(
                         Strings.InvalidDiscriminator(member.Value.GetString())
-                        );
+                    );
                 }
             }
             else if (member.NameEquals(outputItemId.Name))
@@ -2584,7 +2584,7 @@ public static class RecipeReader
                 {
                     throw new InvalidOperationException(
                         Strings.InvalidDiscriminator(member.Value.GetString())
-                        );
+                    );
                 }
             }
             else if (member.NameEquals(outputItemId.Name))
@@ -2670,7 +2670,7 @@ public static class RecipeReader
                 {
                     throw new InvalidOperationException(
                         Strings.InvalidDiscriminator(member.Value.GetString())
-                        );
+                    );
                 }
             }
             else if (member.NameEquals(outputItemId.Name))
@@ -2756,7 +2756,7 @@ public static class RecipeReader
                 {
                     throw new InvalidOperationException(
                         Strings.InvalidDiscriminator(member.Value.GetString())
-                        );
+                    );
                 }
             }
             else if (member.NameEquals(outputItemId.Name))
@@ -2842,7 +2842,7 @@ public static class RecipeReader
                 {
                     throw new InvalidOperationException(
                         Strings.InvalidDiscriminator(member.Value.GetString())
-                        );
+                    );
                 }
             }
             else if (member.NameEquals(outputItemId.Name))
@@ -2928,7 +2928,7 @@ public static class RecipeReader
                 {
                     throw new InvalidOperationException(
                         Strings.InvalidDiscriminator(member.Value.GetString())
-                        );
+                    );
                 }
             }
             else if (member.NameEquals(outputItemId.Name))
@@ -3014,7 +3014,7 @@ public static class RecipeReader
                 {
                     throw new InvalidOperationException(
                         Strings.InvalidDiscriminator(member.Value.GetString())
-                        );
+                    );
                 }
             }
             else if (member.NameEquals(outputItemId.Name))
@@ -3100,7 +3100,7 @@ public static class RecipeReader
                 {
                     throw new InvalidOperationException(
                         Strings.InvalidDiscriminator(member.Value.GetString())
-                        );
+                    );
                 }
             }
             else if (member.NameEquals(outputItemId.Name))
@@ -3252,7 +3252,7 @@ public static class RecipeReader
                 {
                     throw new InvalidOperationException(
                         Strings.InvalidDiscriminator(member.Value.GetString())
-                        );
+                    );
                 }
             }
             else if (member.NameEquals(outputItemId.Name))
@@ -3338,7 +3338,7 @@ public static class RecipeReader
                 {
                     throw new InvalidOperationException(
                         Strings.InvalidDiscriminator(member.Value.GetString())
-                        );
+                    );
                 }
             }
             else if (member.NameEquals(outputItemId.Name))
@@ -3424,7 +3424,7 @@ public static class RecipeReader
                 {
                     throw new InvalidOperationException(
                         Strings.InvalidDiscriminator(member.Value.GetString())
-                        );
+                    );
                 }
             }
             else if (member.NameEquals(outputItemId.Name))
@@ -3510,7 +3510,7 @@ public static class RecipeReader
                 {
                     throw new InvalidOperationException(
                         Strings.InvalidDiscriminator(member.Value.GetString())
-                        );
+                    );
                 }
             }
             else if (member.NameEquals(outputItemId.Name))
@@ -3596,7 +3596,7 @@ public static class RecipeReader
                 {
                     throw new InvalidOperationException(
                         Strings.InvalidDiscriminator(member.Value.GetString())
-                        );
+                    );
                 }
             }
             else if (member.NameEquals(outputItemId.Name))
@@ -3682,7 +3682,7 @@ public static class RecipeReader
                 {
                     throw new InvalidOperationException(
                         Strings.InvalidDiscriminator(member.Value.GetString())
-                        );
+                    );
                 }
             }
             else if (member.NameEquals(outputItemId.Name))
@@ -3768,7 +3768,7 @@ public static class RecipeReader
                 {
                     throw new InvalidOperationException(
                         Strings.InvalidDiscriminator(member.Value.GetString())
-                        );
+                    );
                 }
             }
             else if (member.NameEquals(outputItemId.Name))
@@ -3854,7 +3854,7 @@ public static class RecipeReader
                 {
                     throw new InvalidOperationException(
                         Strings.InvalidDiscriminator(member.Value.GetString())
-                        );
+                    );
                 }
             }
             else if (member.NameEquals(outputItemId.Name))
@@ -3940,7 +3940,7 @@ public static class RecipeReader
                 {
                     throw new InvalidOperationException(
                         Strings.InvalidDiscriminator(member.Value.GetString())
-                        );
+                    );
                 }
             }
             else if (member.NameEquals(outputItemId.Name))
@@ -4026,7 +4026,7 @@ public static class RecipeReader
                 {
                     throw new InvalidOperationException(
                         Strings.InvalidDiscriminator(member.Value.GetString())
-                        );
+                    );
                 }
             }
             else if (member.NameEquals(outputItemId.Name))
@@ -4112,7 +4112,7 @@ public static class RecipeReader
                 {
                     throw new InvalidOperationException(
                         Strings.InvalidDiscriminator(member.Value.GetString())
-                        );
+                    );
                 }
             }
             else if (member.NameEquals(outputItemId.Name))
@@ -4198,7 +4198,7 @@ public static class RecipeReader
                 {
                     throw new InvalidOperationException(
                         Strings.InvalidDiscriminator(member.Value.GetString())
-                        );
+                    );
                 }
             }
             else if (member.NameEquals(outputItemId.Name))
@@ -4284,7 +4284,7 @@ public static class RecipeReader
                 {
                     throw new InvalidOperationException(
                         Strings.InvalidDiscriminator(member.Value.GetString())
-                        );
+                    );
                 }
             }
             else if (member.NameEquals(outputItemId.Name))
@@ -4370,7 +4370,7 @@ public static class RecipeReader
                 {
                     throw new InvalidOperationException(
                         Strings.InvalidDiscriminator(member.Value.GetString())
-                        );
+                    );
                 }
             }
             else if (member.NameEquals(outputItemId.Name))
@@ -4456,7 +4456,7 @@ public static class RecipeReader
                 {
                     throw new InvalidOperationException(
                         Strings.InvalidDiscriminator(member.Value.GetString())
-                        );
+                    );
                 }
             }
             else if (member.NameEquals(outputItemId.Name))
@@ -4542,7 +4542,7 @@ public static class RecipeReader
                 {
                     throw new InvalidOperationException(
                         Strings.InvalidDiscriminator(member.Value.GetString())
-                        );
+                    );
                 }
             }
             else if (member.NameEquals(outputItemId.Name))
@@ -4628,7 +4628,7 @@ public static class RecipeReader
                 {
                     throw new InvalidOperationException(
                         Strings.InvalidDiscriminator(member.Value.GetString())
-                        );
+                    );
                 }
             }
             else if (member.NameEquals(outputItemId.Name))
@@ -4714,7 +4714,7 @@ public static class RecipeReader
                 {
                     throw new InvalidOperationException(
                         Strings.InvalidDiscriminator(member.Value.GetString())
-                        );
+                    );
                 }
             }
             else if (member.NameEquals(outputItemId.Name))
@@ -4800,7 +4800,7 @@ public static class RecipeReader
                 {
                     throw new InvalidOperationException(
                         Strings.InvalidDiscriminator(member.Value.GetString())
-                        );
+                    );
                 }
             }
             else if (member.NameEquals(outputItemId.Name))

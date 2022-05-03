@@ -49,7 +49,7 @@ public sealed class RecipesByIngredientItemIdByPageRequest : IHttpRequest<IRepli
                 request.Compile(),
                 HttpCompletionOption.ResponseHeadersRead,
                 cancellationToken
-                )
+            )
             .ConfigureAwait(false);
 
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
@@ -64,6 +64,6 @@ public sealed class RecipesByIngredientItemIdByPageRequest : IHttpRequest<IRepli
             response.Headers.GetPageContext(),
             response.Content.Headers.Expires,
             response.Content.Headers.LastModified
-            );
+        );
     }
 }

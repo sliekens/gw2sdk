@@ -28,7 +28,7 @@ public sealed class SharedInventoryRequest : IHttpRequest<IReplica<Inventory>>
                 request.Compile(),
                 HttpCompletionOption.ResponseHeadersRead,
                 cancellationToken
-                )
+            )
             .ConfigureAwait(false);
 
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
@@ -42,6 +42,6 @@ public sealed class SharedInventoryRequest : IHttpRequest<IReplica<Inventory>>
             value,
             response.Content.Headers.Expires,
             response.Content.Headers.LastModified
-            );
+        );
     }
 }

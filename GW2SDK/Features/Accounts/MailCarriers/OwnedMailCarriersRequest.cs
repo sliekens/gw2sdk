@@ -26,7 +26,7 @@ public sealed class OwnedMailCarriersRequest : IHttpRequest<IReplica<IReadOnlyCo
                 request.Compile(),
                 HttpCompletionOption.ResponseHeadersRead,
                 cancellationToken
-                )
+            )
             .ConfigureAwait(false);
 
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
@@ -40,6 +40,6 @@ public sealed class OwnedMailCarriersRequest : IHttpRequest<IReplica<IReadOnlyCo
             value,
             response.Content.Headers.Expires,
             response.Content.Headers.LastModified
-            );
+        );
     }
 }

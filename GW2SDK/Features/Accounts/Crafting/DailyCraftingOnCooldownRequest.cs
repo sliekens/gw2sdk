@@ -34,7 +34,7 @@ public sealed class
                 request.Compile(),
                 HttpCompletionOption.ResponseHeadersRead,
                 cancellationToken
-                )
+            )
             .ConfigureAwait(false);
 
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
@@ -48,6 +48,6 @@ public sealed class
             value,
             response.Content.Headers.Expires,
             response.Content.Headers.LastModified
-            );
+        );
     }
 }

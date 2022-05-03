@@ -47,7 +47,7 @@ internal readonly ref struct NullableMember<T> where T : struct
             throw new InvalidOperationException(
                 $"Value for '{Name.ToString()}' is incompatible.",
                 reason
-                );
+            );
         }
     }
 
@@ -71,7 +71,7 @@ internal readonly ref struct NullableMember<T> where T : struct
             throw new InvalidOperationException(
                 $"Value for '{Name.ToString()}' is incompatible.",
                 reason
-                );
+            );
         }
     }
 

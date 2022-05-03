@@ -32,7 +32,7 @@ public static class TokenInfoReader
                 {
                     throw new InvalidOperationException(
                         Strings.UnexpectedDiscriminator(member.Value.GetString())
-                        );
+                    );
                 }
             }
             else if (member.NameEquals(id.Name))
@@ -77,7 +77,7 @@ public static class TokenInfoReader
                 {
                     throw new InvalidOperationException(
                         Strings.InvalidDiscriminator(member.Value.GetString())
-                        );
+                    );
                 }
             }
             else if (member.NameEquals(id.Name))
@@ -125,7 +125,7 @@ public static class TokenInfoReader
                 {
                     throw new InvalidOperationException(
                         Strings.InvalidDiscriminator(member.Value.GetString())
-                        );
+                    );
                 }
             }
             else if (member.NameEquals(id.Name))

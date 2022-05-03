@@ -95,7 +95,7 @@ public static class ItemSlotReader
             Dyes =
                 dyes.SelectMany(
                     value => value.ValueKind == JsonValueKind.Null ? null : value.GetInt32()
-                    ),
+                ),
             Binding = binding.GetValue(missingMemberBehavior),
             BoundTo = boundTo.GetValueOrEmpty(),
             Stats = stats.Select(value => value.GetSelectedStat(missingMemberBehavior))

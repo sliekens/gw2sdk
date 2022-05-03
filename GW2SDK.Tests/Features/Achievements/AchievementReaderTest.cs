@@ -85,7 +85,7 @@ public class AchievementReaderTest : IClassFixture<AchievementFixture>
                 AchievementFact.Bits_does_not_contain_null(actual);
                 AchievementFact.PointCap_is_negative_1_for_repeatable_achievements_without_points(
                     actual
-                    );
+                );
             }
-            );
+        );
 }

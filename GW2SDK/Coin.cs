@@ -32,7 +32,7 @@ public readonly struct Coin : IEquatable<Coin>, IComparable<Coin>, IComparable
             throw new ArgumentOutOfRangeException(
                 nameof(amount),
                 "The amount of coins cannot be negative."
-                );
+            );
         }
 
         Amount = amount;

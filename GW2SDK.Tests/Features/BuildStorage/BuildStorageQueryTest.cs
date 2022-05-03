@@ -58,7 +58,7 @@ public class BuildStorageQueryTest
             {
                 Assert.NotEmpty(space.Name);
             }
-            );
+        );
     }
 
     [Fact]
@@ -90,6 +90,6 @@ public class BuildStorageQueryTest
             {
                 Assert.NotEmpty(space.Name);
             }
-            );
+        );
     }
 }

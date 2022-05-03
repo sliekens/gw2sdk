@@ -23,7 +23,7 @@ public sealed class BackstoryQuestionsIndexRequest : IHttpRequest<IReplicaSet<in
                 Template.Compile(),
                 HttpCompletionOption.ResponseHeadersRead,
                 cancellationToken
-                )
+            )
             .ConfigureAwait(false);
 
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
@@ -38,6 +38,6 @@ public sealed class BackstoryQuestionsIndexRequest : IHttpRequest<IReplicaSet<in
             response.Headers.GetCollectionContext(),
             response.Content.Headers.Expires,
             response.Content.Headers.LastModified
-            );
+        );
     }
 }

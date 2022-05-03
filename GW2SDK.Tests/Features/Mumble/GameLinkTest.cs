@@ -78,7 +78,7 @@ public class GameLinkTest
             Assert.True(
                 actual.Last.UiTick > actual.First.UiTick,
                 "This test only works if you are in a map, not in a loading screen etc."
-                );
+            );
         }
 
         Assert.True(actual.Last.UiTick > actual.First.UiTick, "GameLink should be self-updating");
@@ -125,7 +125,7 @@ public sealed class MumbleLinkFact : FactAttribute
             using var file = MemoryMappedFile.OpenExisting(
                 "MumbleLink",
                 MemoryMappedFileRights.Read
-                );
+            );
         }
         catch (FileNotFoundException)
         {

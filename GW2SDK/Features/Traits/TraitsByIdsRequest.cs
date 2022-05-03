@@ -46,7 +46,7 @@ public sealed class TraitsByIdsRequest : IHttpRequest<IReplicaSet<Trait>>
                 request.Compile(),
                 HttpCompletionOption.ResponseHeadersRead,
                 cancellationToken
-                )
+            )
             .ConfigureAwait(false);
 
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
@@ -61,6 +61,6 @@ public sealed class TraitsByIdsRequest : IHttpRequest<IReplicaSet<Trait>>
             response.Headers.GetCollectionContext(),
             response.Content.Headers.Expires,
             response.Content.Headers.LastModified
-            );
+        );
     }
 }

@@ -44,7 +44,7 @@ public sealed class ItemByIdRequest : IHttpRequest<IReplica<Item>>
                 request.Compile(),
                 HttpCompletionOption.ResponseHeadersRead,
                 cancellationToken
-                )
+            )
             .ConfigureAwait(false);
 
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
@@ -57,6 +57,6 @@ public sealed class ItemByIdRequest : IHttpRequest<IReplica<Item>>
             json.RootElement.GetItem(MissingMemberBehavior),
             response.Content.Headers.Expires,
             response.Content.Headers.LastModified
-            );
+        );
     }
 }

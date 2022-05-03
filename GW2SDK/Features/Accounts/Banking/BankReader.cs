@@ -16,7 +16,7 @@ public static class BankReader
 
         slots.AddRange(
             json.EnumerateArray().Select(entry => entry.GetItemSlot(missingMemberBehavior))
-            );
+        );
 
         return new Bank(slots);
     }

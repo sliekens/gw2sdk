@@ -110,18 +110,18 @@ public static class MapReader
             ContinentRectangle =
                 continentRectangle.Select(
                     value => ReadContinentRectangle(value, missingMemberBehavior)
-                    ),
+                ),
             PointsOfInterest =
                 pointsOfInterest.Select(
                     value => ReadPointsOfInterest(value, missingMemberBehavior)
-                    ),
+                ),
             GodShrines =
                 godShrines.SelectMany(value => ReadGodShrine(value, missingMemberBehavior)),
             Tasks = tasks.Select(value => ReadTasks(value, missingMemberBehavior)),
             SkillChallenges =
                 skillChallenges.SelectMany(
                     value => ReadSkillChallenge(value, missingMemberBehavior)
-                    ),
+                ),
             Sectors = sectors.Select(value => ReadSectors(value, missingMemberBehavior)),
             Adventures =
                 adventures.SelectMany(value => ReadAdventure(value, missingMemberBehavior)),

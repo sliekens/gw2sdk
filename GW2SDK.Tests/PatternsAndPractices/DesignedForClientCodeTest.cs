@@ -38,9 +38,9 @@ public class DesignedForClientCodeTest : IClassFixture<AssemblyFixture>
 
                 throw new ApplicationException(
                     $"Type '{type}' is visible to client code, make it internal or mark it as [PublicAPI]."
-                    );
+                );
             }
-            );
+        );
     }
 
     [Fact]
@@ -56,9 +56,9 @@ public class DesignedForClientCodeTest : IClassFixture<AssemblyFixture>
                 {
                     throw new ApplicationException(
                         $"Type '{type}' is invisible to client code, make it public or remove [PublicAPI]."
-                        );
+                    );
                 }
             }
-            );
+        );
     }
 }

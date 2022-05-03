@@ -43,7 +43,7 @@ public sealed class CharacterByNameRequest : IHttpRequest<IReplica<Character>>
                 request.Compile(),
                 HttpCompletionOption.ResponseHeadersRead,
                 cancellationToken
-                )
+            )
             .ConfigureAwait(false);
 
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
@@ -56,6 +56,6 @@ public sealed class CharacterByNameRequest : IHttpRequest<IReplica<Character>>
             json.RootElement.GetCharacter(MissingMemberBehavior),
             response.Content.Headers.Expires,
             response.Content.Headers.LastModified
-            );
+        );
     }
 }

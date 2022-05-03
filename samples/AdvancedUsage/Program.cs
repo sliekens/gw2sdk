@@ -8,7 +8,7 @@ using HttpClient httpClient = new();
 async Task<ApiVersion> GetApiVersionExample1()
 {
     MetaQuery metaQuery = new(httpClient);
-    IReplica<ApiVersion> apiVersion = await metaQuery.GetApiVersion("v2");
+    var apiVersion = await metaQuery.GetApiVersion();
     return apiVersion.Value;
 }
 

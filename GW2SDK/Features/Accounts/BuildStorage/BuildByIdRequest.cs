@@ -41,7 +41,7 @@ public sealed class BuildByIdRequest : IHttpRequest<IReplica<Build>>
                 request.Compile(),
                 HttpCompletionOption.ResponseHeadersRead,
                 cancellationToken
-                )
+            )
             .ConfigureAwait(false);
 
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
@@ -55,6 +55,6 @@ public sealed class BuildByIdRequest : IHttpRequest<IReplica<Build>>
             value,
             response.Content.Headers.Expires,
             response.Content.Headers.LastModified
-            );
+        );
     }
 }

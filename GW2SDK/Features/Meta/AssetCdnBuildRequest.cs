@@ -29,6 +29,6 @@ public sealed class AssetCdnBuildRequest : IHttpRequest<IReplica<Build>>
         return new Replica<Build>(
             DateTimeOffset.UtcNow,
             new Build { Id = int.Parse(text, NumberStyles.None, NumberFormatInfo.InvariantInfo) }
-            );
+        );
     }
 }

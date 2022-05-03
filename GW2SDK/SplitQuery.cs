@@ -81,7 +81,7 @@ public sealed class SplitQuery<TKey, TRecord>
                 nameof(bufferSize),
                 bufferSize,
                 "The buffer size must be a number between 1 and 200"
-                );
+            );
         }
 
         ReportProgress(resultTotal, 0);
@@ -109,8 +109,8 @@ public sealed class SplitQuery<TKey, TRecord>
                         () => query(next, cancellationToken),
                         throttler,
                         cancellationToken
-                        )
                     )
+                )
                 .ToList();
 
             while (inflight.Count != 0)

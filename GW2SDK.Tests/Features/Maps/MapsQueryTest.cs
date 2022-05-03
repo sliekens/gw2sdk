@@ -40,7 +40,7 @@ public class MapsQueryTest
             {
                 ContinentFact.Id_is_1_or_2(continent);
             }
-            );
+        );
     }
 
     [Fact]
@@ -85,7 +85,7 @@ public class MapsQueryTest
             actual,
             first => Assert.Equal(1, first.Id),
             second => Assert.Equal(2, second.Id)
-            );
+        );
     }
 
     [Fact]
@@ -130,7 +130,7 @@ public class MapsQueryTest
                     }
                 }
             }
-            );
+        );
     }
 
     [Fact]
@@ -179,7 +179,7 @@ public class MapsQueryTest
             actual,
             first => Assert.Equal(1, first.Id),
             second => Assert.Equal(2, second.Id)
-            );
+        );
     }
 
     [Fact]
@@ -213,7 +213,7 @@ public class MapsQueryTest
                 WorldFact.Name_is_not_empty(world);
                 WorldFact.World_population_type_is_supported(world);
             }
-            );
+        );
     }
 
     [Fact]
@@ -260,7 +260,7 @@ public class MapsQueryTest
             world => Assert.Equal(1001, world.Id),
             world => Assert.Equal(1002, world.Id),
             world => Assert.Equal(1003, world.Id)
-            );
+        );
     }
 
     [Fact]

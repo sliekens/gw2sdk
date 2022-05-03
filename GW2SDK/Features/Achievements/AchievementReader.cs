@@ -42,7 +42,7 @@ public static class AchievementReader
                 {
                     throw new InvalidOperationException(
                         Strings.UnexpectedDiscriminator(member.Value.GetString())
-                        );
+                    );
                 }
             }
             else if (member.NameEquals(id.Name))
@@ -112,7 +112,7 @@ public static class AchievementReader
             Prerequisites = prerequisites.SelectMany(value => value.GetInt32()),
             Rewards = rewards.SelectMany(
                 value => ReadAchievementReward(value, missingMemberBehavior)
-                ),
+            ),
             Bits = bits.SelectMany(value => ReadAchievementBit(value, missingMemberBehavior)),
             PointCap = pointCap.GetValue()
         };
@@ -144,7 +144,7 @@ public static class AchievementReader
                 {
                     throw new InvalidOperationException(
                         Strings.InvalidDiscriminator(member.Value.GetString())
-                        );
+                    );
                 }
             }
             else if (member.NameEquals(id.Name))
@@ -214,7 +214,7 @@ public static class AchievementReader
             Prerequisites = prerequisites.SelectMany(value => value.GetInt32()),
             Rewards = rewards.SelectMany(
                 value => ReadAchievementReward(value, missingMemberBehavior)
-                ),
+            ),
             Bits = bits.SelectMany(value => ReadAchievementBit(value, missingMemberBehavior)),
             PointCap = pointCap.GetValue()
         };
@@ -246,7 +246,7 @@ public static class AchievementReader
                 {
                     throw new InvalidOperationException(
                         Strings.InvalidDiscriminator(member.Value.GetString())
-                        );
+                    );
                 }
             }
             else if (member.NameEquals(id.Name))
@@ -316,7 +316,7 @@ public static class AchievementReader
             Prerequisites = prerequisites.SelectMany(value => value.GetInt32()),
             Rewards = rewards.SelectMany(
                 value => ReadAchievementReward(value, missingMemberBehavior)
-                ),
+            ),
             Bits = bits.SelectMany(value => ReadAchievementBit(value, missingMemberBehavior)),
             PointCap = pointCap.GetValue()
         };
@@ -370,7 +370,7 @@ public static class AchievementReader
                 {
                     throw new InvalidOperationException(
                         Strings.InvalidDiscriminator(member.Value.GetString())
-                        );
+                    );
                 }
             }
             else if (member.NameEquals(id.Name))
@@ -400,7 +400,7 @@ public static class AchievementReader
                 {
                     throw new InvalidOperationException(
                         Strings.InvalidDiscriminator(member.Value.GetString())
-                        );
+                    );
                 }
             }
             else if (member.NameEquals(id.Name))
@@ -430,7 +430,7 @@ public static class AchievementReader
                 {
                     throw new InvalidOperationException(
                         Strings.InvalidDiscriminator(member.Value.GetString())
-                        );
+                    );
                 }
             }
             else if (member.NameEquals(id.Name))
@@ -460,7 +460,7 @@ public static class AchievementReader
                 {
                     throw new InvalidOperationException(
                         Strings.InvalidDiscriminator(member.Value.GetString())
-                        );
+                    );
                 }
             }
             else if (member.NameEquals(text.Name))
@@ -519,7 +519,7 @@ public static class AchievementReader
                 {
                     throw new InvalidOperationException(
                         Strings.InvalidDiscriminator(member.Value.GetString())
-                        );
+                    );
                 }
             }
             else if (member.NameEquals(id.Name))
@@ -550,7 +550,7 @@ public static class AchievementReader
                 {
                     throw new InvalidOperationException(
                         Strings.InvalidDiscriminator(member.Value.GetString())
-                        );
+                    );
                 }
             }
             else if (member.NameEquals(id.Name))
@@ -589,7 +589,7 @@ public static class AchievementReader
                 {
                     throw new InvalidOperationException(
                         Strings.InvalidDiscriminator(member.Value.GetString())
-                        );
+                    );
                 }
             }
             else if (member.NameEquals(id.Name))
@@ -627,7 +627,7 @@ public static class AchievementReader
                 {
                     throw new InvalidOperationException(
                         Strings.InvalidDiscriminator(member.Value.GetString())
-                        );
+                    );
                 }
             }
             else if (member.NameEquals(coins.Name))

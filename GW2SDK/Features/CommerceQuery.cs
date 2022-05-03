@@ -83,7 +83,7 @@ public sealed class CommerceQuery
                 return request.SendAsync(http, ct);
             },
             progress
-            );
+        );
 
         return producer.QueryAsync(itemIds, cancellationToken: cancellationToken);
     }
@@ -100,9 +100,9 @@ public sealed class CommerceQuery
             missingMemberBehavior,
             progress,
             cancellationToken
-            );
+        );
         await foreach (var itemPrice in producer.WithCancellation(cancellationToken)
-                           .ConfigureAwait(false))
+            .ConfigureAwait(false))
         {
             yield return itemPrice;
         }
@@ -148,7 +148,7 @@ public sealed class CommerceQuery
                 return request.SendAsync(http, ct);
             },
             progress
-            );
+        );
 
         return producer.QueryAsync(itemIds, cancellationToken: cancellationToken);
     }
@@ -165,9 +165,9 @@ public sealed class CommerceQuery
             missingMemberBehavior,
             progress,
             cancellationToken
-            );
+        );
         await foreach (var orderBook in producer.WithCancellation(cancellationToken)
-                           .ConfigureAwait(false))
+            .ConfigureAwait(false))
         {
             yield return orderBook;
         }

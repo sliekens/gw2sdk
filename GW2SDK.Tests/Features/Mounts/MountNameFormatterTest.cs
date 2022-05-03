@@ -18,6 +18,6 @@ public class MountNameFormatterTest
                 var actual = MountNameFormatter.FormatMountName(mountName);
                 Assert.NotEmpty(actual);
             }
-            );
+        );
     }
 }

@@ -39,7 +39,7 @@ public static class PointOfInterestReader
                 {
                     throw new InvalidOperationException(
                         Strings.UnexpectedDiscriminator(member.Value.GetString())
-                        );
+                    );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -96,7 +96,7 @@ public static class PointOfInterestReader
                 {
                     throw new InvalidOperationException(
                         Strings.InvalidDiscriminator(member.Value.GetString())
-                        );
+                    );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -161,7 +161,7 @@ public static class PointOfInterestReader
                 {
                     throw new InvalidOperationException(
                         Strings.InvalidDiscriminator(member.Value.GetString())
-                        );
+                    );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -220,7 +220,7 @@ public static class PointOfInterestReader
                 {
                     throw new InvalidOperationException(
                         Strings.InvalidDiscriminator(member.Value.GetString())
-                        );
+                    );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -277,7 +277,7 @@ public static class PointOfInterestReader
                 {
                     throw new InvalidOperationException(
                         Strings.InvalidDiscriminator(member.Value.GetString())
-                        );
+                    );
                 }
             }
             else if (member.NameEquals(name.Name))

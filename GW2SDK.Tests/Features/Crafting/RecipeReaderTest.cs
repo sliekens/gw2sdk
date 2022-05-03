@@ -25,5 +25,5 @@ public class RecipeReaderTest : IClassFixture<RecipeFixture>
 
                 RecipeFacts.Validate(actual);
             }
-            );
+        );
 }

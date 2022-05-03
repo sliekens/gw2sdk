@@ -33,7 +33,7 @@ internal class Program
             .StartAsync(
                 "Retrieving the current game version...",
                 async ctx => await meta.GetBuild()
-                );
+            );
 
         AnsiConsole.MarkupLine($"Gw2: [white on dodgerblue2]{build.Value.Id}[/]");
 
@@ -46,7 +46,7 @@ internal class Program
                     var v2 = await meta.GetApiVersion();
                     return (v1: v1.Value, v2: v2.Value);
                 }
-                );
+            );
 
         var showDisabled = AnsiConsole.Confirm("Show disabled routes?", false);
 
@@ -72,7 +72,7 @@ internal class Program
                     string.Format(pathTemplate, route.Path.EscapeMarkup()),
                     "⸻",
                     route.Multilingual ? string.Join(", ", metadata.v1.Languages) : "⸻"
-                    );
+                );
             }
         }
 
@@ -96,7 +96,7 @@ internal class Program
                     string.Format(pathTemplate, route.Path.EscapeMarkup()),
                     "⸻",
                     route.Multilingual ? string.Join(", ", metadata.v2.Languages) : "⸻"
-                    );
+                );
             }
         }
 
@@ -109,7 +109,7 @@ internal class Program
 
         AnsiConsole.WriteLine(
             "Highlighted routes are supported by GW2SDK. Dim routes are disabled."
-            );
+        );
         AnsiConsole.Write(routes);
         AnsiConsole.Write(new Rule("Notable changes").LeftAligned());
         AnsiConsole.Write(changes);

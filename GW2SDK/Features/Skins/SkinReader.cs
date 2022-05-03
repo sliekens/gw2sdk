@@ -37,7 +37,7 @@ public static class SkinReader
                 {
                     throw new InvalidOperationException(
                         Strings.UnexpectedDiscriminator(member.Value.GetString())
-                        );
+                    );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -126,7 +126,7 @@ public static class SkinReader
                 {
                     throw new InvalidOperationException(
                         Strings.InvalidDiscriminator(member.Value.GetString())
-                        );
+                    );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -167,7 +167,7 @@ public static class SkinReader
                         {
                             throw new InvalidOperationException(
                                 Strings.UnexpectedDiscriminator(detail.Value.GetString())
-                                );
+                            );
                         }
                     }
                     else if (detail.NameEquals(weightClass.Name))
@@ -225,7 +225,7 @@ public static class SkinReader
                 {
                     throw new InvalidOperationException(
                         Strings.InvalidDiscriminator(member.Value.GetString())
-                        );
+                    );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -266,7 +266,7 @@ public static class SkinReader
                         {
                             throw new InvalidOperationException(
                                 Strings.InvalidDiscriminator(detail.Value.GetString())
-                                );
+                            );
                         }
                     }
                     else if (detail.NameEquals(damageType.Name))
@@ -318,7 +318,7 @@ public static class SkinReader
                 {
                     throw new InvalidOperationException(
                         Strings.InvalidDiscriminator(member.Value.GetString())
-                        );
+                    );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -389,7 +389,7 @@ public static class SkinReader
                 {
                     throw new InvalidOperationException(
                         Strings.InvalidDiscriminator(member.Value.GetString())
-                        );
+                    );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -430,7 +430,7 @@ public static class SkinReader
                         {
                             throw new InvalidOperationException(
                                 Strings.InvalidDiscriminator(detail.Value.GetString())
-                                );
+                            );
                         }
                     }
                     else if (detail.NameEquals(weightClass.Name))
@@ -489,7 +489,7 @@ public static class SkinReader
                 {
                     throw new InvalidOperationException(
                         Strings.InvalidDiscriminator(member.Value.GetString())
-                        );
+                    );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -530,7 +530,7 @@ public static class SkinReader
                         {
                             throw new InvalidOperationException(
                                 Strings.InvalidDiscriminator(detail.Value.GetString())
-                                );
+                            );
                         }
                     }
                     else if (detail.NameEquals(weightClass.Name))
@@ -588,7 +588,7 @@ public static class SkinReader
                 {
                     throw new InvalidOperationException(
                         Strings.InvalidDiscriminator(member.Value.GetString())
-                        );
+                    );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -629,7 +629,7 @@ public static class SkinReader
                         {
                             throw new InvalidOperationException(
                                 Strings.InvalidDiscriminator(detail.Value.GetString())
-                                );
+                            );
                         }
                     }
                     else if (detail.NameEquals(damageType.Name))
@@ -682,7 +682,7 @@ public static class SkinReader
                 {
                     throw new InvalidOperationException(
                         Strings.InvalidDiscriminator(member.Value.GetString())
-                        );
+                    );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -723,7 +723,7 @@ public static class SkinReader
                         {
                             throw new InvalidOperationException(
                                 Strings.InvalidDiscriminator(detail.Value.GetString())
-                                );
+                            );
                         }
                     }
                     else if (detail.NameEquals(damageType.Name))
@@ -775,7 +775,7 @@ public static class SkinReader
                 {
                     throw new InvalidOperationException(
                         Strings.InvalidDiscriminator(member.Value.GetString())
-                        );
+                    );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -816,7 +816,7 @@ public static class SkinReader
                         {
                             throw new InvalidOperationException(
                                 Strings.InvalidDiscriminator(detail.Value.GetString())
-                                );
+                            );
                         }
                     }
                     else if (missingMemberBehavior == MissingMemberBehavior.Error)
@@ -875,7 +875,7 @@ public static class SkinReader
                 {
                     throw new InvalidOperationException(
                         Strings.InvalidDiscriminator(member.Value.GetString())
-                        );
+                    );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -916,7 +916,7 @@ public static class SkinReader
                         {
                             throw new InvalidOperationException(
                                 Strings.UnexpectedDiscriminator(detail.Value.GetString())
-                                );
+                            );
                         }
                     }
                     else if (missingMemberBehavior == MissingMemberBehavior.Error)
@@ -963,7 +963,7 @@ public static class SkinReader
                 {
                     throw new InvalidOperationException(
                         Strings.InvalidDiscriminator(member.Value.GetString())
-                        );
+                    );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -1004,7 +1004,7 @@ public static class SkinReader
                         {
                             throw new InvalidOperationException(
                                 Strings.InvalidDiscriminator(detail.Value.GetString())
-                                );
+                            );
                         }
                     }
                     else if (missingMemberBehavior == MissingMemberBehavior.Error)
@@ -1053,7 +1053,7 @@ public static class SkinReader
                 {
                     throw new InvalidOperationException(
                         Strings.InvalidDiscriminator(member.Value.GetString())
-                        );
+                    );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -1094,7 +1094,7 @@ public static class SkinReader
                         {
                             throw new InvalidOperationException(
                                 Strings.InvalidDiscriminator(detail.Value.GetString())
-                                );
+                            );
                         }
                     }
                     else if (detail.NameEquals(weightClass.Name))
@@ -1152,7 +1152,7 @@ public static class SkinReader
                 {
                     throw new InvalidOperationException(
                         Strings.InvalidDiscriminator(member.Value.GetString())
-                        );
+                    );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -1193,7 +1193,7 @@ public static class SkinReader
                         {
                             throw new InvalidOperationException(
                                 Strings.InvalidDiscriminator(detail.Value.GetString())
-                                );
+                            );
                         }
                     }
                     else if (detail.NameEquals(damageType.Name))
@@ -1246,7 +1246,7 @@ public static class SkinReader
                 {
                     throw new InvalidOperationException(
                         Strings.InvalidDiscriminator(member.Value.GetString())
-                        );
+                    );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -1287,7 +1287,7 @@ public static class SkinReader
                         {
                             throw new InvalidOperationException(
                                 Strings.InvalidDiscriminator(detail.Value.GetString())
-                                );
+                            );
                         }
                     }
                     else if (detail.NameEquals(damageType.Name))
@@ -1340,7 +1340,7 @@ public static class SkinReader
                 {
                     throw new InvalidOperationException(
                         Strings.InvalidDiscriminator(member.Value.GetString())
-                        );
+                    );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -1381,7 +1381,7 @@ public static class SkinReader
                         {
                             throw new InvalidOperationException(
                                 Strings.InvalidDiscriminator(detail.Value.GetString())
-                                );
+                            );
                         }
                     }
                     else if (detail.NameEquals(damageType.Name))
@@ -1435,7 +1435,7 @@ public static class SkinReader
                 {
                     throw new InvalidOperationException(
                         Strings.InvalidDiscriminator(member.Value.GetString())
-                        );
+                    );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -1476,7 +1476,7 @@ public static class SkinReader
                         {
                             throw new InvalidOperationException(
                                 Strings.InvalidDiscriminator(detail.Value.GetString())
-                                );
+                            );
                         }
                     }
                     else if (detail.NameEquals(weightClass.Name))
@@ -1535,7 +1535,7 @@ public static class SkinReader
                 {
                     throw new InvalidOperationException(
                         Strings.InvalidDiscriminator(member.Value.GetString())
-                        );
+                    );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -1576,7 +1576,7 @@ public static class SkinReader
                         {
                             throw new InvalidOperationException(
                                 Strings.InvalidDiscriminator(detail.Value.GetString())
-                                );
+                            );
                         }
                     }
                     else if (detail.NameEquals(weightClass.Name))
@@ -1634,7 +1634,7 @@ public static class SkinReader
                 {
                     throw new InvalidOperationException(
                         Strings.InvalidDiscriminator(member.Value.GetString())
-                        );
+                    );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -1675,7 +1675,7 @@ public static class SkinReader
                         {
                             throw new InvalidOperationException(
                                 Strings.InvalidDiscriminator(detail.Value.GetString())
-                                );
+                            );
                         }
                     }
                     else if (detail.NameEquals(damageType.Name))
@@ -1729,7 +1729,7 @@ public static class SkinReader
                 {
                     throw new InvalidOperationException(
                         Strings.InvalidDiscriminator(member.Value.GetString())
-                        );
+                    );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -1770,7 +1770,7 @@ public static class SkinReader
                         {
                             throw new InvalidOperationException(
                                 Strings.InvalidDiscriminator(detail.Value.GetString())
-                                );
+                            );
                         }
                     }
                     else if (detail.NameEquals(weightClass.Name))
@@ -1827,7 +1827,7 @@ public static class SkinReader
                 {
                     throw new InvalidOperationException(
                         Strings.InvalidDiscriminator(member.Value.GetString())
-                        );
+                    );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -1868,7 +1868,7 @@ public static class SkinReader
                         {
                             throw new InvalidOperationException(
                                 Strings.InvalidDiscriminator(detail.Value.GetString())
-                                );
+                            );
                         }
                     }
                     else if (missingMemberBehavior == MissingMemberBehavior.Error)
@@ -1916,7 +1916,7 @@ public static class SkinReader
                 {
                     throw new InvalidOperationException(
                         Strings.InvalidDiscriminator(member.Value.GetString())
-                        );
+                    );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -1957,7 +1957,7 @@ public static class SkinReader
                         {
                             throw new InvalidOperationException(
                                 Strings.InvalidDiscriminator(detail.Value.GetString())
-                                );
+                            );
                         }
                     }
                     else if (detail.NameEquals(damageType.Name))
@@ -2010,7 +2010,7 @@ public static class SkinReader
                 {
                     throw new InvalidOperationException(
                         Strings.InvalidDiscriminator(member.Value.GetString())
-                        );
+                    );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -2051,7 +2051,7 @@ public static class SkinReader
                         {
                             throw new InvalidOperationException(
                                 Strings.InvalidDiscriminator(detail.Value.GetString())
-                                );
+                            );
                         }
                     }
                     else if (detail.NameEquals(damageType.Name))
@@ -2103,7 +2103,7 @@ public static class SkinReader
                 {
                     throw new InvalidOperationException(
                         Strings.InvalidDiscriminator(member.Value.GetString())
-                        );
+                    );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -2144,7 +2144,7 @@ public static class SkinReader
                         {
                             throw new InvalidOperationException(
                                 Strings.InvalidDiscriminator(detail.Value.GetString())
-                                );
+                            );
                         }
                     }
                     else if (missingMemberBehavior == MissingMemberBehavior.Error)
@@ -2192,7 +2192,7 @@ public static class SkinReader
                 {
                     throw new InvalidOperationException(
                         Strings.InvalidDiscriminator(member.Value.GetString())
-                        );
+                    );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -2233,7 +2233,7 @@ public static class SkinReader
                         {
                             throw new InvalidOperationException(
                                 Strings.InvalidDiscriminator(detail.Value.GetString())
-                                );
+                            );
                         }
                     }
                     else if (detail.NameEquals(damageType.Name))
@@ -2286,7 +2286,7 @@ public static class SkinReader
                 {
                     throw new InvalidOperationException(
                         Strings.InvalidDiscriminator(member.Value.GetString())
-                        );
+                    );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -2327,7 +2327,7 @@ public static class SkinReader
                         {
                             throw new InvalidOperationException(
                                 Strings.InvalidDiscriminator(detail.Value.GetString())
-                                );
+                            );
                         }
                     }
                     else if (detail.NameEquals(damageType.Name))
@@ -2380,7 +2380,7 @@ public static class SkinReader
                 {
                     throw new InvalidOperationException(
                         Strings.InvalidDiscriminator(member.Value.GetString())
-                        );
+                    );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -2421,7 +2421,7 @@ public static class SkinReader
                         {
                             throw new InvalidOperationException(
                                 Strings.InvalidDiscriminator(detail.Value.GetString())
-                                );
+                            );
                         }
                     }
                     else if (detail.NameEquals(damageType.Name))
@@ -2474,7 +2474,7 @@ public static class SkinReader
                 {
                     throw new InvalidOperationException(
                         Strings.InvalidDiscriminator(member.Value.GetString())
-                        );
+                    );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -2515,7 +2515,7 @@ public static class SkinReader
                         {
                             throw new InvalidOperationException(
                                 Strings.InvalidDiscriminator(detail.Value.GetString())
-                                );
+                            );
                         }
                     }
                     else if (detail.NameEquals(damageType.Name))
@@ -2568,7 +2568,7 @@ public static class SkinReader
                 {
                     throw new InvalidOperationException(
                         Strings.InvalidDiscriminator(member.Value.GetString())
-                        );
+                    );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -2609,7 +2609,7 @@ public static class SkinReader
                         {
                             throw new InvalidOperationException(
                                 Strings.InvalidDiscriminator(detail.Value.GetString())
-                                );
+                            );
                         }
                     }
                     else if (detail.NameEquals(damageType.Name))
@@ -2663,7 +2663,7 @@ public static class SkinReader
                 {
                     throw new InvalidOperationException(
                         Strings.InvalidDiscriminator(member.Value.GetString())
-                        );
+                    );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -2704,7 +2704,7 @@ public static class SkinReader
                         {
                             throw new InvalidOperationException(
                                 Strings.InvalidDiscriminator(detail.Value.GetString())
-                                );
+                            );
                         }
                     }
                     else if (detail.NameEquals(weightClass.Name))
@@ -2762,7 +2762,7 @@ public static class SkinReader
                 {
                     throw new InvalidOperationException(
                         Strings.InvalidDiscriminator(member.Value.GetString())
-                        );
+                    );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -2803,7 +2803,7 @@ public static class SkinReader
                         {
                             throw new InvalidOperationException(
                                 Strings.InvalidDiscriminator(detail.Value.GetString())
-                                );
+                            );
                         }
                     }
                     else if (detail.NameEquals(damageType.Name))
@@ -2856,7 +2856,7 @@ public static class SkinReader
                 {
                     throw new InvalidOperationException(
                         Strings.InvalidDiscriminator(member.Value.GetString())
-                        );
+                    );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -2897,7 +2897,7 @@ public static class SkinReader
                         {
                             throw new InvalidOperationException(
                                 Strings.InvalidDiscriminator(detail.Value.GetString())
-                                );
+                            );
                         }
                     }
                     else if (detail.NameEquals(damageType.Name))
@@ -2950,7 +2950,7 @@ public static class SkinReader
                 {
                     throw new InvalidOperationException(
                         Strings.InvalidDiscriminator(member.Value.GetString())
-                        );
+                    );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -2991,7 +2991,7 @@ public static class SkinReader
                         {
                             throw new InvalidOperationException(
                                 Strings.InvalidDiscriminator(detail.Value.GetString())
-                                );
+                            );
                         }
                     }
                     else if (detail.NameEquals(damageType.Name))
@@ -3044,7 +3044,7 @@ public static class SkinReader
                 {
                     throw new InvalidOperationException(
                         Strings.InvalidDiscriminator(member.Value.GetString())
-                        );
+                    );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -3085,7 +3085,7 @@ public static class SkinReader
                         {
                             throw new InvalidOperationException(
                                 Strings.InvalidDiscriminator(detail.Value.GetString())
-                                );
+                            );
                         }
                     }
                     else if (detail.NameEquals(damageType.Name))
@@ -3138,7 +3138,7 @@ public static class SkinReader
                 {
                     throw new InvalidOperationException(
                         Strings.InvalidDiscriminator(member.Value.GetString())
-                        );
+                    );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -3179,7 +3179,7 @@ public static class SkinReader
                         {
                             throw new InvalidOperationException(
                                 Strings.InvalidDiscriminator(detail.Value.GetString())
-                                );
+                            );
                         }
                     }
                     else if (detail.NameEquals(damageType.Name))
@@ -3232,7 +3232,7 @@ public static class SkinReader
                 {
                     throw new InvalidOperationException(
                         Strings.InvalidDiscriminator(member.Value.GetString())
-                        );
+                    );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -3273,7 +3273,7 @@ public static class SkinReader
                         {
                             throw new InvalidOperationException(
                                 Strings.InvalidDiscriminator(detail.Value.GetString())
-                                );
+                            );
                         }
                     }
                     else if (detail.NameEquals(damageType.Name))
@@ -3326,7 +3326,7 @@ public static class SkinReader
                 {
                     throw new InvalidOperationException(
                         Strings.InvalidDiscriminator(member.Value.GetString())
-                        );
+                    );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -3367,7 +3367,7 @@ public static class SkinReader
                         {
                             throw new InvalidOperationException(
                                 Strings.InvalidDiscriminator(detail.Value.GetString())
-                                );
+                            );
                         }
                     }
                     else if (detail.NameEquals(damageType.Name))
@@ -3420,7 +3420,7 @@ public static class SkinReader
                 {
                     throw new InvalidOperationException(
                         Strings.InvalidDiscriminator(member.Value.GetString())
-                        );
+                    );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -3461,7 +3461,7 @@ public static class SkinReader
                         {
                             throw new InvalidOperationException(
                                 Strings.InvalidDiscriminator(detail.Value.GetString())
-                                );
+                            );
                         }
                     }
                     else if (detail.NameEquals(damageType.Name))
@@ -3514,7 +3514,7 @@ public static class SkinReader
                 {
                     throw new InvalidOperationException(
                         Strings.InvalidDiscriminator(member.Value.GetString())
-                        );
+                    );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -3555,7 +3555,7 @@ public static class SkinReader
                         {
                             throw new InvalidOperationException(
                                 Strings.InvalidDiscriminator(detail.Value.GetString())
-                                );
+                            );
                         }
                     }
                     else if (detail.NameEquals(damageType.Name))
@@ -3658,7 +3658,7 @@ public static class SkinReader
                 {
                     throw new InvalidOperationException(
                         Strings.InvalidDiscriminator(member.Value.GetString())
-                        );
+                    );
                 }
             }
             else if (member.NameEquals(name.Name))
@@ -3699,7 +3699,7 @@ public static class SkinReader
                         {
                             throw new InvalidOperationException(
                                 Strings.UnexpectedDiscriminator(detail.Value.GetString())
-                                );
+                            );
                         }
                     }
                     else if (detail.NameEquals(damageType.Name))
@@ -3801,7 +3801,7 @@ public static class SkinReader
                     {
                         throw new InvalidOperationException(
                             Strings.UnexpectedMember(@override.Name)
-                            );
+                        );
                     }
                 }
             }
@@ -3820,66 +3820,66 @@ public static class SkinReader
                     value => value.ValueKind == JsonValueKind.Null
                         ? null
                         : ReadDyeSlot(value, missingMemberBehavior)
-                    ),
+                ),
             AsuraFemale =
                 asuraFemale.SelectMany(
                     value => value.ValueKind == JsonValueKind.Null
                         ? null
                         : ReadDyeSlot(value, missingMemberBehavior)
-                    ),
+                ),
             AsuraMale =
                 asuraMale.SelectMany(
                     value => value.ValueKind == JsonValueKind.Null
                         ? null
                         : ReadDyeSlot(value, missingMemberBehavior)
-                    ),
+                ),
             CharrFemale =
                 charrFemale.SelectMany(
                     value => value.ValueKind == JsonValueKind.Null
                         ? null
                         : ReadDyeSlot(value, missingMemberBehavior)
-                    ),
+                ),
             CharrMale =
                 charrMale.SelectMany(
                     value => value.ValueKind == JsonValueKind.Null
                         ? null
                         : ReadDyeSlot(value, missingMemberBehavior)
-                    ),
+                ),
             HumanFemale =
                 humanFemale.SelectMany(
                     value => value.ValueKind == JsonValueKind.Null
                         ? null
                         : ReadDyeSlot(value, missingMemberBehavior)
-                    ),
+                ),
             HumanMale =
                 humanMale.SelectMany(
                     value => value.ValueKind == JsonValueKind.Null
                         ? null
                         : ReadDyeSlot(value, missingMemberBehavior)
-                    ),
+                ),
             NornFemale =
                 nornFemale.SelectMany(
                     value => value.ValueKind == JsonValueKind.Null
                         ? null
                         : ReadDyeSlot(value, missingMemberBehavior)
-                    ),
+                ),
             NornMale =
                 nornMale.SelectMany(
                     value => value.ValueKind == JsonValueKind.Null
                         ? null
                         : ReadDyeSlot(value, missingMemberBehavior)
-                    ),
+                ),
             SylvariFemale =
                 sylvariFemale.SelectMany(
                     value => value.ValueKind == JsonValueKind.Null
                         ? null
                         : ReadDyeSlot(value, missingMemberBehavior)
-                    ),
+                ),
             SylvariMale = sylvariMale.SelectMany(
                 value => value.ValueKind == JsonValueKind.Null
                     ? null
                     : ReadDyeSlot(value, missingMemberBehavior)
-                )
+            )
         };
     }
 

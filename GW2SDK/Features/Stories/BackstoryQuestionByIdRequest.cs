@@ -42,7 +42,7 @@ public sealed class BackstoryQuestionByIdRequest : IHttpRequest<IReplica<Backsto
                 request.Compile(),
                 HttpCompletionOption.ResponseHeadersRead,
                 cancellationToken
-                )
+            )
             .ConfigureAwait(false);
 
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
@@ -56,6 +56,6 @@ public sealed class BackstoryQuestionByIdRequest : IHttpRequest<IReplica<Backsto
             value,
             response.Content.Headers.Expires,
             response.Content.Headers.LastModified
-            );
+        );
     }
 }

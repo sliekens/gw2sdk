@@ -33,11 +33,11 @@ internal class Program
                     var recipesProgress = ctx.AddTask(
                         "Fetching recipes",
                         new ProgressTaskSettings { AutoStart = false }
-                        );
+                    );
                     var ingredientsProgress = ctx.AddTask(
                         "Fetching ingredients",
                         new ProgressTaskSettings { AutoStart = false }
-                        );
+                    );
 
                     var craftingRecipes = await GetRecipes(gw2.Crafting, recipesProgress);
 
@@ -46,7 +46,7 @@ internal class Program
                             recipe => recipe.Ingredients
                                 .Where(ingredient => ingredient.Kind == IngredientKind.Item)
                                 .Select(ingredient => (Ingredient: ingredient.Id, Recipe: recipe))
-                            )
+                        )
                         .ToLookup(grouping => grouping.Ingredient, grouping => grouping.Recipe);
 
                     var ingredientIndex = groupedByIngredient.Select(grouping => grouping.Key)
@@ -56,7 +56,7 @@ internal class Program
                         ingredientIndex,
                         gw2.Items,
                         ingredientsProgress
-                        );
+                    );
 
                     var ingredientsById = craftingIngredients.ToDictionary(item => item.Id);
 
@@ -67,7 +67,7 @@ internal class Program
 
                     return (Ingredients: mostCommon, Craftable: groupedByIngredient);
                 }
-                );
+            );
 
         do
         {
@@ -79,7 +79,7 @@ internal class Program
                     .AddChoices(ingredients)
                     .UseConverter(item => item.Name)
                     .PageSize(20)
-                );
+            );
 
             await using var ingredientIcon = await http.GetStreamAsync(choice.Icon!);
             var choiceTable = new Table().AddColumn("Icon")
@@ -90,7 +90,7 @@ internal class Program
                 new CanvasImage(ingredientIcon).MaxWidth(32),
                 new Markup(choice.Name.EscapeMarkup()),
                 new Markup(choice.Description.EscapeMarkup())
-                );
+            );
 
             AnsiConsole.Write(choiceTable);
 
@@ -105,9 +105,9 @@ internal class Program
                             itemIds,
                             gw2.Items,
                             ctx.AddTask("Fetching output items")
-                            );
+                        );
                     }
-                    );
+                );
 
             var recipesTable = new Table().AddColumn("Recipe").AddColumn("Description");
 
@@ -128,7 +128,7 @@ internal class Program
                 new PercentageColumn(),
                 new RemainingTimeColumn(),
                 new SpinnerColumn()
-                );
+            );
 
     private static async Task<List<Recipe>> GetRecipes(
         CraftingQuery craftingQuery,
@@ -141,7 +141,7 @@ internal class Program
             return await craftingQuery
                 .GetRecipes(
                     progress: new Progress<ICollectionContext>(ctx => UpdateProgress(ctx, progress))
-                    )
+                )
                 .OrderByDescending(recipe => recipe.Id)
                 .ToListAsync();
         }
@@ -161,11 +161,9 @@ internal class Program
 
         progress.StartTask();
         await foreach (var item in itemsQuery.GetItemsByIds(
-                           itemIds,
-                           progress: new Progress<ICollectionContext>(
-                               ctx => UpdateProgress(ctx, progress)
-                               )
-                           ))
+                itemIds,
+                progress: new Progress<ICollectionContext>(ctx => UpdateProgress(ctx, progress))
+            ))
         {
             items.Add(item);
         }

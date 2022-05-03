@@ -42,7 +42,7 @@ public sealed class AchievementCategoryByIdRequest : IHttpRequest<IReplica<Achie
                 request.Compile(),
                 HttpCompletionOption.ResponseHeadersRead,
                 cancellationToken
-                )
+            )
             .ConfigureAwait(false);
 
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
@@ -56,6 +56,6 @@ public sealed class AchievementCategoryByIdRequest : IHttpRequest<IReplica<Achie
             value,
             response.Content.Headers.Expires,
             response.Content.Headers.LastModified
-            );
+        );
     }
 }

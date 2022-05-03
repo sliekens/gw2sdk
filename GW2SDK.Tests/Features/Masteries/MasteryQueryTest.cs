@@ -77,9 +77,9 @@ public class MasteryQueryTest
                         MasteryLevelFact.Costs_points(level);
                         MasteryLevelFact.Costs_experience(level);
                     }
-                    );
+                );
             }
-            );
+        );
     }
 
     [Fact]
@@ -126,7 +126,7 @@ public class MasteryQueryTest
             first => Assert.Equal(1, first.Id),
             second => Assert.Equal(2, second.Id),
             third => Assert.Equal(3, third.Id)
-            );
+        );
     }
 
     [Fact]
@@ -146,6 +146,6 @@ public class MasteryQueryTest
                 Assert.True(progress.Id > 0);
                 Assert.True(progress.Level > 0);
             }
-            );
+        );
     }
 }

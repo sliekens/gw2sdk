@@ -33,5 +33,5 @@ public class OrderBookReaderTest : IClassFixture<OrderBookFixture>
 
                 OrderBookFact.Id_is_positive(actual);
             }
-            );
+        );
 }

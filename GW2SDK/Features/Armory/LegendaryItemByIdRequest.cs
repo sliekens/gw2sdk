@@ -32,16 +32,13 @@ public sealed class LegendaryItemByIdRequest : IHttpRequest<IReplica<LegendaryIt
     {
         QueryBuilder search = new();
         search.Add("id", LegendaryItemId);
-        var request = Template with
-        {
-            Arguments = search
-        };
+        var request = Template with { Arguments = search };
 
         using var response = await httpClient.SendAsync(
                 request.Compile(),
                 HttpCompletionOption.ResponseHeadersRead,
                 cancellationToken
-                )
+            )
             .ConfigureAwait(false);
 
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
@@ -55,6 +52,6 @@ public sealed class LegendaryItemByIdRequest : IHttpRequest<IReplica<LegendaryIt
             value,
             response.Content.Headers.Expires,
             response.Content.Headers.LastModified
-            );
+        );
     }
 }

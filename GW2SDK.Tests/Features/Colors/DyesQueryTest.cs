@@ -29,7 +29,7 @@ public class DyesQueryTest
             {
                 ColorFact.Base_rgb_contains_red_green_blue(color);
             }
-            );
+        );
     }
 
     [Fact]
@@ -76,7 +76,7 @@ public class DyesQueryTest
             first => Assert.Equal(1, first.Id),
             second => Assert.Equal(2, second.Id),
             third => Assert.Equal(3, third.Id)
-            );
+        );
     }
 
     [Fact]

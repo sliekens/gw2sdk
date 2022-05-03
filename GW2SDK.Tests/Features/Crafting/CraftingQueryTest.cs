@@ -52,7 +52,7 @@ public class CraftingQueryTest
             first => Assert.Contains(first.Id, ids),
             second => Assert.Contains(second.Id, ids),
             third => Assert.Contains(third.Id, ids)
-            );
+        );
     }
 
     [Fact]
@@ -165,14 +165,14 @@ public class CraftingQueryTest
             recipe => Assert.Contains(
                 recipe.Ingredients,
                 ingredient => ingredient.Id == visionCrystal
-                )
-            );
+            )
+        );
     }
 
     [Fact(
         Skip =
             "This test is best used interactively, otherwise it will hit rate limits in this as well as other tests."
-        )]
+    )]
     public async Task Recipes_can_be_enumerated()
     {
         await using Composer services = new();
@@ -234,7 +234,7 @@ public class CraftingQueryTest
                 "spool_of_thick_elonian_cord"
             },
             dailyRecipes
-            );
+        );
 
         // Again this next method is not deterministic...
         var actual = await sut.Crafting.GetDailyRecipesOnCooldown(accessToken.Key);

@@ -43,7 +43,7 @@ public sealed class FloorsByIdsRequest : IHttpRequest<IReplicaSet<Floor>>
             Path = Template.Path.Replace(
                 ":id",
                 ContinentId.ToString(CultureInfo.InvariantCulture)
-                ),
+            ),
             Arguments = search,
             AcceptLanguage = Language?.Alpha2Code
         };
@@ -52,7 +52,7 @@ public sealed class FloorsByIdsRequest : IHttpRequest<IReplicaSet<Floor>>
                 request.Compile(),
                 HttpCompletionOption.ResponseHeadersRead,
                 cancellationToken
-                )
+            )
             .ConfigureAwait(false);
 
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
@@ -67,6 +67,6 @@ public sealed class FloorsByIdsRequest : IHttpRequest<IReplicaSet<Floor>>
             response.Headers.GetCollectionContext(),
             response.Content.Headers.Expires,
             response.Content.Headers.LastModified
-            );
+        );
     }
 }

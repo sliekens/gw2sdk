@@ -24,12 +24,12 @@ public class ProfessionsQueryTest
                 Assert.True(
                     Enum.IsDefined(typeof(ProfessionName), profession.Id),
                     "Enum.IsDefined(profession.Id)"
-                    );
+                );
                 Assert.NotEmpty(profession.Name);
                 Assert.NotEmpty(profession.Icon);
                 Assert.NotEmpty(profession.IconBig);
             }
-            );
+        );
     }
 
     [Fact]
@@ -46,8 +46,8 @@ public class ProfessionsQueryTest
             name => Assert.True(
                 Enum.IsDefined(typeof(ProfessionName), name),
                 "Enum.IsDefined(name)"
-                )
-            );
+            )
+        );
     }
 
     [Fact]
@@ -83,7 +83,7 @@ public class ProfessionsQueryTest
             first => Assert.Equal(names[0], first.Id),
             second => Assert.Equal(names[1], second.Id),
             third => Assert.Equal(names[2], third.Id)
-            );
+        );
     }
 
     [Fact]

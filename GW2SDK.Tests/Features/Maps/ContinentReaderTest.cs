@@ -33,5 +33,5 @@ public class ContinentReaderTest : IClassFixture<ContinentFixture>
 
                 FloorFact.Texture_dimensions_contains_width_and_height(actual);
             }
-            );
+        );
 }

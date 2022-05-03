@@ -31,7 +31,7 @@ public sealed class AccountRequest : IHttpRequest<IReplica<AccountSummary>>
                 request.Compile(),
                 HttpCompletionOption.ResponseHeadersRead,
                 cancellationToken
-                )
+            )
             .ConfigureAwait(false);
 
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
@@ -44,6 +44,6 @@ public sealed class AccountRequest : IHttpRequest<IReplica<AccountSummary>>
             json.RootElement.GetAccountSummary(MissingMemberBehavior),
             response.Content.Headers.Expires,
             response.Content.Headers.LastModified
-            );
+        );
     }
 }

@@ -55,7 +55,7 @@ public class SpecializationsQueryTest
                 SpecializationFact.Big_profession_icon_is_not_null(specialization);
                 SpecializationFact.Profession_icon_is_not_null(specialization);
             }
-            );
+        );
     }
 
     [Fact]
@@ -102,6 +102,6 @@ public class SpecializationsQueryTest
             first => Assert.Equal(1, first.Id),
             second => Assert.Equal(2, second.Id),
             third => Assert.Equal(3, third.Id)
-            );
+        );
     }
 }

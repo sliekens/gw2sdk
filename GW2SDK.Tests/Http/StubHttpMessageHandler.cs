@@ -27,5 +27,5 @@ internal class StubHttpMessageHandler : HttpMessageHandler
             {
                 Content = new StringContent(Content, Encoding.UTF8, "application/json")
             }
-            );
+        );
 }

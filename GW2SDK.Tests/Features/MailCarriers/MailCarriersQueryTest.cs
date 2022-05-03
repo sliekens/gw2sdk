@@ -53,7 +53,7 @@ public class MailCarriersQueryTest
                 MailCarrierFact.Icon_is_not_empty(mailCarrier);
                 MailCarrierFact.Name_is_not_empty(mailCarrier);
             }
-            );
+        );
     }
 
     [Fact]
@@ -100,7 +100,7 @@ public class MailCarriersQueryTest
             first => Assert.Equal(1, first.Id),
             second => Assert.Equal(2, second.Id),
             third => Assert.Equal(3, third.Id)
-            );
+        );
     }
 
     [Fact]

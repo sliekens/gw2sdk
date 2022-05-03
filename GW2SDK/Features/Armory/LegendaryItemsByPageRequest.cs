@@ -39,16 +39,13 @@ public sealed class LegendaryItemsByPageRequest : IHttpRequest<IReplicaPage<Lege
             search.Add("page_size", PageSize.Value);
         }
 
-        var request = Template with
-        {
-            Arguments = search
-        };
+        var request = Template with { Arguments = search };
 
         using var response = await httpClient.SendAsync(
                 request.Compile(),
                 HttpCompletionOption.ResponseHeadersRead,
                 cancellationToken
-                )
+            )
             .ConfigureAwait(false);
 
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
@@ -63,6 +60,6 @@ public sealed class LegendaryItemsByPageRequest : IHttpRequest<IReplicaPage<Lege
             response.Headers.GetPageContext(),
             response.Content.Headers.Expires,
             response.Content.Headers.LastModified
-            );
+        );
     }
 }

@@ -59,7 +59,7 @@ public class TokenProviderTest
             subtokenPermissions,
             expiresAt,
             urls
-            );
+        );
 
         #endregion
 
@@ -90,6 +90,6 @@ public class TokenProviderTest
         Assert.Equal(
             urls,
             subtoken.Urls?.Select(url => Uri.UnescapeDataString(url.ToString())).ToList()
-            );
+        );
     }
 }

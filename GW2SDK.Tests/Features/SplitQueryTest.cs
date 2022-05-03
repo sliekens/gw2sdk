@@ -29,7 +29,7 @@ public class SplitQueryTest
                 return Task.FromResult((IReplicaSet<StubRecord>)new StubReplica(found));
             },
             bufferSize
-            );
+        );
 
         var received = 0;
         var producer = sut.QueryAsync(index, cancellationToken: cancellationTokenSource.Token);
@@ -44,7 +44,7 @@ public class SplitQueryTest
                     }
                 }
             }
-            );
+        );
 
         Assert.True(cancellationTokenSource.Token.Equals(reason.CancellationToken));
         Assert.Equal(107, received);
@@ -64,7 +64,7 @@ public class SplitQueryTest
                 var found = records.Where(record => range.Contains(record.Id)).ToHashSet();
                 return Task.FromResult((IReplicaSet<StubRecord>)new StubReplica(found));
             }
-            );
+        );
 
         var actual = await sut.QueryAsync(index, bufferSize).ToListAsync();
 
@@ -76,7 +76,7 @@ public class SplitQueryTest
             {
                 Assert.Contains(record.Id, index);
             }
-            );
+        );
     }
 
     [Fact]
@@ -92,7 +92,7 @@ public class SplitQueryTest
                 var found = records.Where(record => range.Contains(record.Id)).ToHashSet();
                 return Task.FromResult((IReplicaSet<StubRecord>)new StubReplica(found));
             }
-            );
+        );
 
         var actual = await sut.QueryAsync(index).ToListAsync();
 
@@ -104,7 +104,7 @@ public class SplitQueryTest
             {
                 Assert.Contains(record.Id, index);
             }
-            );
+        );
     }
 }
 

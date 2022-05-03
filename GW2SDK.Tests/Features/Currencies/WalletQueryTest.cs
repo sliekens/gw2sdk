@@ -56,7 +56,7 @@ public class WalletQueryTest
                 CurrencyFact.Order_is_positive(currency);
                 CurrencyFact.Icon_is_not_empty(currency);
             }
-            );
+        );
     }
 
     [Fact]
@@ -103,7 +103,7 @@ public class WalletQueryTest
             first => Assert.Equal(1, first.Id),
             second => Assert.Equal(2, second.Id),
             third => Assert.Equal(3, third.Id)
-            );
+        );
     }
 
     [Fact]

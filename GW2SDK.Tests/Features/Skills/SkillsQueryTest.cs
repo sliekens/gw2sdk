@@ -62,7 +62,7 @@ public class SkillsQueryTest
             first => Assert.Contains(first.Id, ids),
             second => Assert.Contains(second.Id, ids),
             third => Assert.Contains(third.Id, ids)
-            );
+        );
     }
 
     [Fact]

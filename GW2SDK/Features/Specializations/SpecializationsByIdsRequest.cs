@@ -46,7 +46,7 @@ public sealed class SpecializationsByIdsRequest : IHttpRequest<IReplicaSet<Speci
                 request.Compile(),
                 HttpCompletionOption.ResponseHeadersRead,
                 cancellationToken
-                )
+            )
             .ConfigureAwait(false);
 
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
@@ -56,13 +56,13 @@ public sealed class SpecializationsByIdsRequest : IHttpRequest<IReplicaSet<Speci
 
         var value = json.RootElement.GetSet(
             entry => entry.GetSpecialization(MissingMemberBehavior)
-            );
+        );
         return new ReplicaSet<Specialization>(
             response.Headers.Date.GetValueOrDefault(),
             value,
             response.Headers.GetCollectionContext(),
             response.Content.Headers.Expires,
             response.Content.Headers.LastModified
-            );
+        );
     }
 }

@@ -34,7 +34,7 @@ public sealed class BuildStorageRequest : IHttpRequest<IReplicaSet<Build>>
                 request.Compile(),
                 HttpCompletionOption.ResponseHeadersRead,
                 cancellationToken
-                )
+            )
             .ConfigureAwait(false);
 
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
@@ -49,6 +49,6 @@ public sealed class BuildStorageRequest : IHttpRequest<IReplicaSet<Build>>
             response.Headers.GetCollectionContext(),
             response.Content.Headers.Expires,
             response.Content.Headers.LastModified
-            );
+        );
     }
 }

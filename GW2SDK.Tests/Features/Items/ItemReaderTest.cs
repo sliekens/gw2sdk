@@ -24,5 +24,5 @@ public class ItemReaderTest : IClassFixture<ItemFixture>
                 var actual = document.RootElement.GetItem(MissingMemberBehavior.Error);
                 ItemFacts.Validate(actual);
             }
-            );
+        );
 }

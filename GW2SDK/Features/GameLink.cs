@@ -182,7 +182,7 @@ namespace GW2SDK
                 {
                     throw new InvalidOperationException(
                         $"Expected {Length} bytes but received {buffered}. This can happen when GetSnapshot is called concurrently because this class is not thread-safe. Synchronize access to GetSnapshot, or use multiple instances of GameLink to avoid this error."
-                        );
+                    );
                 }
             }
             finally

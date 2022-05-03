@@ -92,7 +92,7 @@ public class QueryBuilderTest
                 "second",
                 "third"
             }
-            );
+        );
 
         var actual = sut.Build();
 
@@ -112,7 +112,7 @@ public class QueryBuilderTest
                 2,
                 3
             }
-            );
+        );
 
         var actual = sut.Build();
 

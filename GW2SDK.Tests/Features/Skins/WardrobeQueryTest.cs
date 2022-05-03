@@ -51,7 +51,7 @@ public class WardrobeQueryTest
             skin => Assert.Equal(1, skin.Id),
             skin => Assert.Equal(2, skin.Id),
             skin => Assert.Equal(3, skin.Id)
-            );
+        );
     }
 
     [Fact]

@@ -59,7 +59,7 @@ public class StoryQueryTest
                 BackstoryQuestionFact.Description_is_not_empty(question);
                 BackstoryQuestionFact.Has_3_to_8_answers(question);
             }
-            );
+        );
     }
 
     [Fact]
@@ -82,7 +82,7 @@ public class StoryQueryTest
                 BackstoryAnswerFact.Journal_is_not_empty(answer);
                 BackstoryAnswerFact.Has_a_question(answer);
             }
-            );
+        );
     }
 
     [Fact]
@@ -153,7 +153,7 @@ public class StoryQueryTest
             first => Assert.Contains(first.Id, ids),
             second => Assert.Contains(second.Id, ids),
             third => Assert.Contains(third.Id, ids)
-            );
+        );
     }
 
     [Fact]
@@ -176,7 +176,7 @@ public class StoryQueryTest
             first => Assert.Contains(first.Id, ids),
             second => Assert.Contains(second.Id, ids),
             third => Assert.Contains(third.Id, ids)
-            );
+        );
     }
 
     [Fact]

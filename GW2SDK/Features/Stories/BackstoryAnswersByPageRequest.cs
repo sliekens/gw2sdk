@@ -51,7 +51,7 @@ public sealed class BackstoryAnswersByPageRequest : IHttpRequest<IReplicaPage<Ba
                 request.Compile(),
                 HttpCompletionOption.ResponseHeadersRead,
                 cancellationToken
-                )
+            )
             .ConfigureAwait(false);
 
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
@@ -61,13 +61,13 @@ public sealed class BackstoryAnswersByPageRequest : IHttpRequest<IReplicaPage<Ba
 
         var value = json.RootElement.GetSet(
             entry => entry.GetBackstoryAnswer(MissingMemberBehavior)
-            );
+        );
         return new ReplicaPage<BackstoryAnswer>(
             response.Headers.Date.GetValueOrDefault(),
             value,
             response.Headers.GetPageContext(),
             response.Content.Headers.Expires,
             response.Content.Headers.LastModified
-            );
+        );
     }
 }

@@ -88,7 +88,7 @@ public static class ProfessionReader
             Weapons =
                 weapons.Select(
                     value => value.GetMap(item => ReadWeapon(item, missingMemberBehavior))
-                    ),
+                ),
             Flags = flags.GetValues(missingMemberBehavior),
             Skills = skills.SelectMany(value => ReadSkillReference(value, missingMemberBehavior)),
             Training = training.SelectMany(value => ReadTraining(value, missingMemberBehavior)),
@@ -192,7 +192,7 @@ public static class ProfessionReader
                 {
                     throw new InvalidOperationException(
                         Strings.UnexpectedDiscriminator(member.Value.GetString())
-                        );
+                    );
                 }
             }
             else if (member.NameEquals(cost.Name))
@@ -223,7 +223,7 @@ public static class ProfessionReader
                 {
                     throw new InvalidOperationException(
                         Strings.InvalidDiscriminator(member.Value.GetString())
-                        );
+                    );
                 }
             }
             else if (member.NameEquals(cost.Name))
@@ -262,7 +262,7 @@ public static class ProfessionReader
                 {
                     throw new InvalidOperationException(
                         Strings.InvalidDiscriminator(member.Value.GetString())
-                        );
+                    );
                 }
             }
             else if (member.NameEquals(cost.Name))
@@ -314,7 +314,7 @@ public static class ProfessionReader
                 {
                     throw new InvalidOperationException(
                         Strings.UnexpectedDiscriminator(member.Value.GetString())
-                        );
+                    );
                 }
             }
             else if (member.NameEquals(id.Name))
@@ -354,7 +354,7 @@ public static class ProfessionReader
                 {
                     throw new InvalidOperationException(
                         Strings.InvalidDiscriminator(member.Value.GetString())
-                        );
+                    );
                 }
             }
             else if (member.NameEquals(id.Name))
@@ -394,7 +394,7 @@ public static class ProfessionReader
                 {
                     throw new InvalidOperationException(
                         Strings.InvalidDiscriminator(member.Value.GetString())
-                        );
+                    );
                 }
             }
             else if (member.NameEquals(id.Name))
@@ -434,7 +434,7 @@ public static class ProfessionReader
                 {
                     throw new InvalidOperationException(
                         Strings.InvalidDiscriminator(member.Value.GetString())
-                        );
+                    );
                 }
             }
             else if (member.NameEquals(id.Name))
@@ -476,7 +476,7 @@ public static class ProfessionReader
                 {
                     throw new InvalidOperationException(
                         Strings.InvalidDiscriminator(member.Value.GetString())
-                        );
+                    );
                 }
             }
             else if (member.NameEquals(id.Name))

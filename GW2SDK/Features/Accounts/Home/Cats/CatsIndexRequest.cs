@@ -23,7 +23,7 @@ public sealed class CatsIndexRequest : IHttpRequest<IReplicaSet<int>>
                 Template.Compile(),
                 HttpCompletionOption.ResponseHeadersRead,
                 cancellationToken
-                )
+            )
             .ConfigureAwait(false);
 
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
@@ -38,6 +38,6 @@ public sealed class CatsIndexRequest : IHttpRequest<IReplicaSet<int>>
             response.Headers.GetCollectionContext(),
             response.Content.Headers.Expires,
             response.Content.Headers.LastModified
-            );
+        );
     }
 }

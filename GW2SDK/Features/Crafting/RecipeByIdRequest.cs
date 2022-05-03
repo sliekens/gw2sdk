@@ -38,7 +38,7 @@ public sealed class RecipeByIdRequest : IHttpRequest<IReplica<Recipe>>
                 request.Compile(),
                 HttpCompletionOption.ResponseHeadersRead,
                 cancellationToken
-                )
+            )
             .ConfigureAwait(false);
 
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
@@ -52,6 +52,6 @@ public sealed class RecipeByIdRequest : IHttpRequest<IReplica<Recipe>>
             value,
             response.Content.Headers.Expires,
             response.Content.Headers.LastModified
-            );
+        );
     }
 }
