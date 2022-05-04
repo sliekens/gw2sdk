@@ -37,15 +37,15 @@ public static class TokenInfoReader
             }
             else if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(name.Name))
             {
-                name = name.From(member.Value);
+                name.Value = member.Value;
             }
             else if (member.NameEquals(permissions.Name))
             {
-                permissions = permissions.From(member.Value);
+                permissions.Value = member.Value;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {
@@ -82,15 +82,15 @@ public static class TokenInfoReader
             }
             else if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(name.Name))
             {
-                name = name.From(member.Value);
+                name.Value = member.Value;
             }
             else if (member.NameEquals(permissions.Name))
             {
-                permissions = permissions.From(member.Value);
+                permissions.Value = member.Value;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {
@@ -130,27 +130,27 @@ public static class TokenInfoReader
             }
             else if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(name.Name))
             {
-                name = name.From(member.Value);
+                name.Value = member.Value;
             }
             else if (member.NameEquals(permissions.Name))
             {
-                permissions = permissions.From(member.Value);
+                permissions.Value = member.Value;
             }
             else if (member.NameEquals(expiresAt.Name))
             {
-                expiresAt = expiresAt.From(member.Value);
+                expiresAt.Value = member.Value;
             }
             else if (member.NameEquals(issuedAt.Name))
             {
-                issuedAt = issuedAt.From(member.Value);
+                issuedAt.Value = member.Value;
             }
             else if (member.NameEquals(urls.Name))
             {
-                urls = urls.From(member.Value);
+                urls.Value = member.Value;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {

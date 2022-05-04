@@ -20,11 +20,11 @@ public static class DeliveryBoxReader
         {
             if (member.NameEquals(coins.Name))
             {
-                coins = coins.From(member.Value);
+                coins.Value = member.Value;
             }
             else if (member.NameEquals(items.Name))
             {
-                items = items.From(member.Value);
+                items.Value = member.Value;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {
@@ -51,11 +51,11 @@ public static class DeliveryBoxReader
         {
             if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(count.Name))
             {
-                count = count.From(member.Value);
+                count.Value = member.Value;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {

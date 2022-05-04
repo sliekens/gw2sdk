@@ -20,23 +20,23 @@ public static class OrderReader
         {
             if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(itemId.Name))
             {
-                itemId = itemId.From(member.Value);
+                itemId.Value = member.Value;
             }
             else if (member.NameEquals(price.Name))
             {
-                price = price.From(member.Value);
+                price.Value = member.Value;
             }
             else if (member.NameEquals(quantity.Name))
             {
-                quantity = quantity.From(member.Value);
+                quantity.Value = member.Value;
             }
             else if (member.NameEquals(created.Name))
             {
-                created = created.From(member.Value);
+                created.Value = member.Value;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {

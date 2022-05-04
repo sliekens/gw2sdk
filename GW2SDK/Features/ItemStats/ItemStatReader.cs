@@ -21,15 +21,15 @@ public static class ItemStatReader
         {
             if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(name.Name))
             {
-                name = name.From(member.Value);
+                name.Value = member.Value;
             }
             else if (member.NameEquals(attributes.Name))
             {
-                attributes = attributes.From(member.Value);
+                attributes.Value = member.Value;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {
@@ -58,15 +58,15 @@ public static class ItemStatReader
         {
             if (member.NameEquals(attribute.Name))
             {
-                attribute = attribute.From(member.Value);
+                attribute.Value = member.Value;
             }
             else if (member.NameEquals(multiplier.Name))
             {
-                multiplier = multiplier.From(member.Value);
+                multiplier.Value = member.Value;
             }
             else if (member.NameEquals(value.Name))
             {
-                value = value.From(member.Value);
+                value.Value = member.Value;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {

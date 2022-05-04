@@ -17,11 +17,11 @@ public static class CatReader
         {
             if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(hint.Name))
             {
-                hint = hint.From(member.Value);
+                hint.Value = member.Value;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {

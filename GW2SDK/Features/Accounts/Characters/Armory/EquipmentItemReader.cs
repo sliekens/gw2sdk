@@ -31,51 +31,51 @@ public static class EquipmentItemReader
         {
             if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(count.Name))
             {
-                count = count.From(member.Value);
+                count.Value = member.Value;
             }
             else if (member.NameEquals(slot.Name))
             {
-                slot = slot.From(member.Value);
+                slot.Value = member.Value;
             }
             else if (member.NameEquals(upgrades.Name))
             {
-                upgrades = upgrades.From(member.Value);
+                upgrades.Value = member.Value;
             }
             else if (member.NameEquals(infusions.Name))
             {
-                infusions = infusions.From(member.Value);
+                infusions.Value = member.Value;
             }
             else if (member.NameEquals(skin.Name))
             {
-                skin = skin.From(member.Value);
+                skin.Value = member.Value;
             }
             else if (member.NameEquals(stats.Name))
             {
-                stats = stats.From(member.Value);
+                stats.Value = member.Value;
             }
             else if (member.NameEquals(binding.Name))
             {
-                binding = binding.From(member.Value);
+                binding.Value = member.Value;
             }
             else if (member.NameEquals(boundTo.Name))
             {
-                boundTo = boundTo.From(member.Value);
+                boundTo.Value = member.Value;
             }
             else if (member.NameEquals(location.Name))
             {
-                location = location.From(member.Value);
+                location.Value = member.Value;
             }
             else if (member.NameEquals(tabs.Name))
             {
-                tabs = tabs.From(member.Value);
+                tabs.Value = member.Value;
             }
             else if (member.NameEquals(dyes.Name))
             {
-                dyes = dyes.From(member.Value);
+                dyes.Value = member.Value;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {

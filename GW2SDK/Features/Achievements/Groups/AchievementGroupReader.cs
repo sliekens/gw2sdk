@@ -22,23 +22,23 @@ public static class AchievementGroupReader
         {
             if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(name.Name))
             {
-                name = name.From(member.Value);
+                name.Value = member.Value;
             }
             else if (member.NameEquals(description.Name))
             {
-                description = description.From(member.Value);
+                description.Value = member.Value;
             }
             else if (member.NameEquals(order.Name))
             {
-                order = order.From(member.Value);
+                order.Value = member.Value;
             }
             else if (member.NameEquals(categories.Name))
             {
-                categories = categories.From(member.Value);
+                categories.Value = member.Value;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {

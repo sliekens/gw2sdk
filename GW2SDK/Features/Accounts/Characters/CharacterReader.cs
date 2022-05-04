@@ -46,103 +46,103 @@ public static class CharacterReader
         {
             if (member.NameEquals(name.Name))
             {
-                name = name.From(member.Value);
+                name.Value = member.Value;
             }
             else if (member.NameEquals(race.Name))
             {
-                race = race.From(member.Value);
+                race.Value = member.Value;
             }
             else if (member.NameEquals(gender.Name))
             {
-                gender = gender.From(member.Value);
+                gender.Value = member.Value;
             }
             else if (member.NameEquals(flags.Name))
             {
-                flags = flags.From(member.Value);
+                flags.Value = member.Value;
             }
             else if (member.NameEquals(profession.Name))
             {
-                profession = profession.From(member.Value);
+                profession.Value = member.Value;
             }
             else if (member.NameEquals(level.Name))
             {
-                level = level.From(member.Value);
+                level.Value = member.Value;
             }
             else if (member.NameEquals(guild.Name))
             {
-                guild = guild.From(member.Value);
+                guild.Value = member.Value;
             }
             else if (member.NameEquals(age.Name))
             {
-                age = age.From(member.Value);
+                age.Value = member.Value;
             }
             else if (member.NameEquals(lastModified.Name))
             {
-                lastModified = lastModified.From(member.Value);
+                lastModified.Value = member.Value;
             }
             else if (member.NameEquals(created.Name))
             {
-                created = created.From(member.Value);
+                created.Value = member.Value;
             }
             else if (member.NameEquals(deaths.Name))
             {
-                deaths = deaths.From(member.Value);
+                deaths.Value = member.Value;
             }
             else if (member.NameEquals(crafting.Name))
             {
-                crafting = crafting.From(member.Value);
+                crafting.Value = member.Value;
             }
             else if (member.NameEquals(title.Name))
             {
-                title = title.From(member.Value);
+                title.Value = member.Value;
             }
             else if (member.NameEquals(backstory.Name))
             {
-                backstory = backstory.From(member.Value);
+                backstory.Value = member.Value;
             }
             else if (member.NameEquals(wvwAbilities.Name))
             {
-                wvwAbilities = wvwAbilities.From(member.Value);
+                wvwAbilities.Value = member.Value;
             }
             else if (member.NameEquals(buildTabsUnlocked.Name))
             {
-                buildTabsUnlocked = buildTabsUnlocked.From(member.Value);
+                buildTabsUnlocked.Value = member.Value;
             }
             else if (member.NameEquals(activeBuildTab.Name))
             {
-                activeBuildTab = activeBuildTab.From(member.Value);
+                activeBuildTab.Value = member.Value;
             }
             else if (member.NameEquals(buildTabs.Name))
             {
-                buildTabs = buildTabs.From(member.Value);
+                buildTabs.Value = member.Value;
             }
             else if (member.NameEquals(equipmentTabsUnlocked.Name))
             {
-                equipmentTabsUnlocked = equipmentTabsUnlocked.From(member.Value);
+                equipmentTabsUnlocked.Value = member.Value;
             }
             else if (member.NameEquals(activeEquipmentTab.Name))
             {
-                activeEquipmentTab = activeEquipmentTab.From(member.Value);
+                activeEquipmentTab.Value = member.Value;
             }
             else if (member.NameEquals(equipment.Name))
             {
-                equipment = equipment.From(member.Value);
+                equipment.Value = member.Value;
             }
             else if (member.NameEquals(equipmentTabs.Name))
             {
-                equipmentTabs = equipmentTabs.From(member.Value);
+                equipmentTabs.Value = member.Value;
             }
             else if (member.NameEquals(recipes.Name))
             {
-                recipes = recipes.From(member.Value);
+                recipes.Value = member.Value;
             }
             else if (member.NameEquals(training.Name))
             {
-                training = training.From(member.Value);
+                training.Value = member.Value;
             }
             else if (member.NameEquals(bags.Name))
             {
-                bags = bags.From(member.Value);
+                bags.Value = member.Value;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {
@@ -198,15 +198,15 @@ public static class CharacterReader
         {
             if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(spent.Name))
             {
-                spent = spent.From(member.Value);
+                spent.Value = member.Value;
             }
             else if (member.NameEquals(done.Name))
             {
-                done = done.From(member.Value);
+                done.Value = member.Value;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {
@@ -236,11 +236,11 @@ public static class CharacterReader
         {
             if (member.NameEquals(tab.Name))
             {
-                tab = tab.From(member.Value);
+                tab.Value = member.Value;
             }
             else if (member.NameEquals(name.Name))
             {
-                name = name.From(member.Value);
+                name.Value = member.Value;
             }
             else if (member.NameEquals("is_active"))
             {
@@ -251,11 +251,11 @@ public static class CharacterReader
             }
             else if (member.NameEquals(equipment.Name))
             {
-                equipment = equipment.From(member.Value);
+                equipment.Value = member.Value;
             }
             else if (member.NameEquals(pvpEquipment.Name))
             {
-                pvpEquipment = pvpEquipment.From(member.Value);
+                pvpEquipment.Value = member.Value;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {
@@ -287,15 +287,15 @@ public static class CharacterReader
         {
             if (member.NameEquals(amulet.Name))
             {
-                amulet = amulet.From(member.Value);
+                amulet.Value = member.Value;
             }
             else if (member.NameEquals(rune.Name))
             {
-                rune = rune.From(member.Value);
+                rune.Value = member.Value;
             }
             else if (member.NameEquals(sigils.Name))
             {
-                sigils = sigils.From(member.Value);
+                sigils.Value = member.Value;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {
@@ -325,11 +325,11 @@ public static class CharacterReader
         {
             if (member.NameEquals(tab.Name))
             {
-                tab = tab.From(member.Value);
+                tab.Value = member.Value;
             }
             else if (member.NameEquals(build.Name))
             {
-                build = build.From(member.Value);
+                build.Value = member.Value;
             }
             else if (member.NameEquals("is_active"))
             {
@@ -363,11 +363,11 @@ public static class CharacterReader
         {
             if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(rank.Name))
             {
-                rank = rank.From(member.Value);
+                rank.Value = member.Value;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {
@@ -395,15 +395,15 @@ public static class CharacterReader
         {
             if (member.NameEquals(discipline.Name))
             {
-                discipline = discipline.From(member.Value);
+                discipline.Value = member.Value;
             }
             else if (member.NameEquals(rating.Name))
             {
-                rating = rating.From(member.Value);
+                rating.Value = member.Value;
             }
             else if (member.NameEquals(active.Name))
             {
-                active = active.From(member.Value);
+                active.Value = member.Value;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {

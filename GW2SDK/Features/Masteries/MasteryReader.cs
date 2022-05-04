@@ -25,31 +25,31 @@ public static class MasteryReader
         {
             if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(name.Name))
             {
-                name = name.From(member.Value);
+                name.Value = member.Value;
             }
             else if (member.NameEquals(requirement.Name))
             {
-                requirement = requirement.From(member.Value);
+                requirement.Value = member.Value;
             }
             else if (member.NameEquals(order.Name))
             {
-                order = order.From(member.Value);
+                order.Value = member.Value;
             }
             else if (member.NameEquals(background.Name))
             {
-                background = background.From(member.Value);
+                background.Value = member.Value;
             }
             else if (member.NameEquals(region.Name))
             {
-                region = region.From(member.Value);
+                region.Value = member.Value;
             }
             else if (member.NameEquals(levels.Name))
             {
-                levels = levels.From(member.Value);
+                levels.Value = member.Value;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {
@@ -85,27 +85,27 @@ public static class MasteryReader
         {
             if (member.NameEquals(name.Name))
             {
-                name = name.From(member.Value);
+                name.Value = member.Value;
             }
             else if (member.NameEquals(description.Name))
             {
-                description = description.From(member.Value);
+                description.Value = member.Value;
             }
             else if (member.NameEquals(instruction.Name))
             {
-                instruction = instruction.From(member.Value);
+                instruction.Value = member.Value;
             }
             else if (member.NameEquals(icon.Name))
             {
-                icon = icon.From(member.Value);
+                icon.Value = member.Value;
             }
             else if (member.NameEquals(pointCost.Name))
             {
-                pointCost = pointCost.From(member.Value);
+                pointCost.Value = member.Value;
             }
             else if (member.NameEquals(experienceCost.Name))
             {
-                experienceCost = experienceCost.From(member.Value);
+                experienceCost.Value = member.Value;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {

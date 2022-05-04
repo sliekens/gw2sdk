@@ -25,39 +25,39 @@ public static class DyeReader
         {
             if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(name.Name))
             {
-                name = name.From(member.Value);
+                name.Value = member.Value;
             }
             else if (member.NameEquals(baseRgb.Name))
             {
-                baseRgb = baseRgb.From(member.Value);
+                baseRgb.Value = member.Value;
             }
             else if (member.NameEquals(cloth.Name))
             {
-                cloth = cloth.From(member.Value);
+                cloth.Value = member.Value;
             }
             else if (member.NameEquals(leather.Name))
             {
-                leather = leather.From(member.Value);
+                leather.Value = member.Value;
             }
             else if (member.NameEquals(metal.Name))
             {
-                metal = metal.From(member.Value);
+                metal.Value = member.Value;
             }
             else if (member.NameEquals(fur.Name))
             {
-                fur = fur.From(member.Value);
+                fur.Value = member.Value;
             }
             else if (member.NameEquals(itemId.Name))
             {
-                itemId = itemId.From(member.Value);
+                itemId.Value = member.Value;
             }
             else if (member.NameEquals(categories.Name))
             {
-                categories = categories.From(member.Value);
+                categories.Value = member.Value;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {
@@ -69,7 +69,7 @@ public static class DyeReader
         {
             Id = id.GetValue(),
             Name = name.GetValue(),
-            BaseRgb = baseRgb.Select(value => ReadRgb(value, missingMemberBehavior)),
+            BaseRgb = baseRgb.Select(value => ReadRgb(value)),
             Cloth = cloth.Select(value => ReadColorInfo(value, missingMemberBehavior)),
             Leather = leather.Select(value => ReadColorInfo(value, missingMemberBehavior)),
             Metal = metal.Select(value => ReadColorInfo(value, missingMemberBehavior)),
@@ -79,7 +79,7 @@ public static class DyeReader
         };
     }
 
-    private static Color ReadRgb(JsonElement value, MissingMemberBehavior missingMemberBehavior)
+    private static Color ReadRgb(JsonElement value)
     {
         var red = value[0].GetInt32();
         var green = value[1].GetInt32();
@@ -103,27 +103,27 @@ public static class DyeReader
         {
             if (member.NameEquals(brightness.Name))
             {
-                brightness = brightness.From(member.Value);
+                brightness.Value = member.Value;
             }
             else if (member.NameEquals(contrast.Name))
             {
-                contrast = contrast.From(member.Value);
+                contrast.Value = member.Value;
             }
             else if (member.NameEquals(hue.Name))
             {
-                hue = hue.From(member.Value);
+                hue.Value = member.Value;
             }
             else if (member.NameEquals(saturation.Name))
             {
-                saturation = saturation.From(member.Value);
+                saturation.Value = member.Value;
             }
             else if (member.NameEquals(lightness.Name))
             {
-                lightness = lightness.From(member.Value);
+                lightness.Value = member.Value;
             }
             else if (member.NameEquals(rgb.Name))
             {
-                rgb = rgb.From(member.Value);
+                rgb.Value = member.Value;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {
@@ -138,7 +138,7 @@ public static class DyeReader
             Hue = hue.GetValue(),
             Saturation = saturation.GetValue(),
             Lightness = lightness.GetValue(),
-            Rgb = rgb.Select(value => ReadRgb(value, missingMemberBehavior))
+            Rgb = rgb.Select(value => ReadRgb(value))
         };
     }
 }

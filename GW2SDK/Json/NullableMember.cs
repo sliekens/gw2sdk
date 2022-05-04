@@ -2,45 +2,41 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.Json;
+using static System.Text.Json.JsonValueKind;
+using Array = System.Array;
 
 namespace GW2SDK.Json;
 
-internal readonly ref struct NullableMember<T> where T : struct
+internal ref struct NullableMember<T> where T : struct
 {
-    private readonly JsonMember member;
+    public JsonElement Value = default;
+
+    public bool IsMissing => Value.ValueKind is Null or Undefined;
 
 #if !NET // Because there is no implicit cast from String to ReadOnlySpan
     internal NullableMember(string name)
     {
         Name = name.AsSpan();
-        member = default;
     }
 #endif
 
     internal NullableMember(ReadOnlySpan<char> name)
     {
         Name = name;
-        member = default;
-    }
-
-    private NullableMember(ReadOnlySpan<char> name, JsonMember member)
-    {
-        Name = name;
-        this.member = member;
     }
 
     internal ReadOnlySpan<char> Name { get; }
 
     internal T? Select(Func<JsonElement, T?> resultSelector)
     {
-        if (member.IsMissing)
+        if (IsMissing)
         {
             return default;
         }
 
         try
         {
-            return resultSelector(member.Value);
+            return resultSelector(Value);
         }
         catch (Exception reason)
         {
@@ -53,7 +49,7 @@ internal readonly ref struct NullableMember<T> where T : struct
 
     internal IReadOnlyCollection<T?> SelectMany(Func<JsonElement, T?> resultSelector)
     {
-        if (member.IsMissing)
+        if (IsMissing)
         {
             return Array.Empty<T?>();
         }
@@ -61,7 +57,7 @@ internal readonly ref struct NullableMember<T> where T : struct
         try
         {
             // ReSharper disable once ConvertClosureToMethodGroup
-            return member.Value.EnumerateArray()
+            return Value.EnumerateArray()
                 .Select(item => resultSelector(item))
                 .ToList()
                 .AsReadOnly();
@@ -74,7 +70,4 @@ internal readonly ref struct NullableMember<T> where T : struct
             );
         }
     }
-
-    internal NullableMember<T> From(JsonElement propertyValue) =>
-        new(Name, new JsonMember(propertyValue));
 }

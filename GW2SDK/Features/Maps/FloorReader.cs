@@ -20,19 +20,19 @@ public static class FloorReader
         {
             if (member.NameEquals(textureDimensions.Name))
             {
-                textureDimensions = textureDimensions.From(member.Value);
+                textureDimensions.Value = member.Value;
             }
             else if (member.NameEquals(clampedView.Name))
             {
-                clampedView = clampedView.From(member.Value);
+                clampedView.Value = member.Value;
             }
             else if (member.NameEquals(regions.Name))
             {
-                regions = regions.From(member.Value);
+                regions.Value = member.Value;
             }
             else if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {

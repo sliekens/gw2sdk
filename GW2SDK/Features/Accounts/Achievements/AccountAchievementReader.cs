@@ -25,31 +25,31 @@ public static class AccountAchievementReader
         {
             if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(current.Name))
             {
-                current = current.From(member.Value);
+                current.Value = member.Value;
             }
             else if (member.NameEquals(max.Name))
             {
-                max = max.From(member.Value);
+                max.Value = member.Value;
             }
             else if (member.NameEquals(done.Name))
             {
-                done = done.From(member.Value);
+                done.Value = member.Value;
             }
             else if (member.NameEquals(bits.Name))
             {
-                bits = bits.From(member.Value);
+                bits.Value = member.Value;
             }
             else if (member.NameEquals(repeated.Name))
             {
-                repeated = repeated.From(member.Value);
+                repeated.Value = member.Value;
             }
             else if (member.NameEquals(unlocked.Name))
             {
-                unlocked = unlocked.From(member.Value);
+                unlocked.Value = member.Value;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {

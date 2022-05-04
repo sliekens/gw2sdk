@@ -42,31 +42,31 @@ public static class SkinReader
             }
             else if (member.NameEquals(name.Name))
             {
-                name = name.From(member.Value);
+                name.Value = member.Value;
             }
             else if (member.NameEquals(description.Name))
             {
-                description = description.From(member.Value);
+                description.Value = member.Value;
             }
             else if (member.NameEquals(rarity.Name))
             {
-                rarity = rarity.From(member.Value);
+                rarity.Value = member.Value;
             }
             else if (member.NameEquals(flags.Name))
             {
-                flags = flags.From(member.Value);
+                flags.Value = member.Value;
             }
             else if (member.NameEquals(restrictions.Name))
             {
-                restrictions = restrictions.From(member.Value);
+                restrictions.Value = member.Value;
             }
             else if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(icon.Name))
             {
-                icon = icon.From(member.Value);
+                icon.Value = member.Value;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {
@@ -131,31 +131,31 @@ public static class SkinReader
             }
             else if (member.NameEquals(name.Name))
             {
-                name = name.From(member.Value);
+                name.Value = member.Value;
             }
             else if (member.NameEquals(description.Name))
             {
-                description = description.From(member.Value);
+                description.Value = member.Value;
             }
             else if (member.NameEquals(rarity.Name))
             {
-                rarity = rarity.From(member.Value);
+                rarity.Value = member.Value;
             }
             else if (member.NameEquals(flags.Name))
             {
-                flags = flags.From(member.Value);
+                flags.Value = member.Value;
             }
             else if (member.NameEquals(restrictions.Name))
             {
-                restrictions = restrictions.From(member.Value);
+                restrictions.Value = member.Value;
             }
             else if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(icon.Name))
             {
-                icon = icon.From(member.Value);
+                icon.Value = member.Value;
             }
             else if (member.NameEquals("details"))
             {
@@ -172,11 +172,11 @@ public static class SkinReader
                     }
                     else if (detail.NameEquals(weightClass.Name))
                     {
-                        weightClass = weightClass.From(detail.Value);
+                        weightClass.Value = detail.Value;
                     }
                     else if (detail.NameEquals(dyeSlots.Name))
                     {
-                        dyeSlots = dyeSlots.From(detail.Value);
+                        dyeSlots.Value = detail.Value;
                     }
                     else if (missingMemberBehavior == MissingMemberBehavior.Error)
                     {
@@ -230,31 +230,31 @@ public static class SkinReader
             }
             else if (member.NameEquals(name.Name))
             {
-                name = name.From(member.Value);
+                name.Value = member.Value;
             }
             else if (member.NameEquals(description.Name))
             {
-                description = description.From(member.Value);
+                description.Value = member.Value;
             }
             else if (member.NameEquals(rarity.Name))
             {
-                rarity = rarity.From(member.Value);
+                rarity.Value = member.Value;
             }
             else if (member.NameEquals(flags.Name))
             {
-                flags = flags.From(member.Value);
+                flags.Value = member.Value;
             }
             else if (member.NameEquals(restrictions.Name))
             {
-                restrictions = restrictions.From(member.Value);
+                restrictions.Value = member.Value;
             }
             else if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(icon.Name))
             {
-                icon = icon.From(member.Value);
+                icon.Value = member.Value;
             }
             else if (member.NameEquals("details"))
             {
@@ -271,7 +271,7 @@ public static class SkinReader
                     }
                     else if (detail.NameEquals(damageType.Name))
                     {
-                        damageType = damageType.From(detail.Value);
+                        damageType.Value = detail.Value;
                     }
                     else if (missingMemberBehavior == MissingMemberBehavior.Error)
                     {
@@ -323,31 +323,31 @@ public static class SkinReader
             }
             else if (member.NameEquals(name.Name))
             {
-                name = name.From(member.Value);
+                name.Value = member.Value;
             }
             else if (member.NameEquals(description.Name))
             {
-                description = description.From(member.Value);
+                description.Value = member.Value;
             }
             else if (member.NameEquals(rarity.Name))
             {
-                rarity = rarity.From(member.Value);
+                rarity.Value = member.Value;
             }
             else if (member.NameEquals(flags.Name))
             {
-                flags = flags.From(member.Value);
+                flags.Value = member.Value;
             }
             else if (member.NameEquals(restrictions.Name))
             {
-                restrictions = restrictions.From(member.Value);
+                restrictions.Value = member.Value;
             }
             else if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(icon.Name))
             {
-                icon = icon.From(member.Value);
+                icon.Value = member.Value;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {
@@ -394,31 +394,31 @@ public static class SkinReader
             }
             else if (member.NameEquals(name.Name))
             {
-                name = name.From(member.Value);
+                name.Value = member.Value;
             }
             else if (member.NameEquals(description.Name))
             {
-                description = description.From(member.Value);
+                description.Value = member.Value;
             }
             else if (member.NameEquals(rarity.Name))
             {
-                rarity = rarity.From(member.Value);
+                rarity.Value = member.Value;
             }
             else if (member.NameEquals(flags.Name))
             {
-                flags = flags.From(member.Value);
+                flags.Value = member.Value;
             }
             else if (member.NameEquals(restrictions.Name))
             {
-                restrictions = restrictions.From(member.Value);
+                restrictions.Value = member.Value;
             }
             else if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(icon.Name))
             {
-                icon = icon.From(member.Value);
+                icon.Value = member.Value;
             }
             else if (member.NameEquals("details"))
             {
@@ -435,11 +435,11 @@ public static class SkinReader
                     }
                     else if (detail.NameEquals(weightClass.Name))
                     {
-                        weightClass = weightClass.From(detail.Value);
+                        weightClass.Value = detail.Value;
                     }
                     else if (detail.NameEquals(dyeSlots.Name))
                     {
-                        dyeSlots = dyeSlots.From(detail.Value);
+                        dyeSlots.Value = detail.Value;
                     }
                     else if (missingMemberBehavior == MissingMemberBehavior.Error)
                     {
@@ -494,31 +494,31 @@ public static class SkinReader
             }
             else if (member.NameEquals(name.Name))
             {
-                name = name.From(member.Value);
+                name.Value = member.Value;
             }
             else if (member.NameEquals(description.Name))
             {
-                description = description.From(member.Value);
+                description.Value = member.Value;
             }
             else if (member.NameEquals(rarity.Name))
             {
-                rarity = rarity.From(member.Value);
+                rarity.Value = member.Value;
             }
             else if (member.NameEquals(flags.Name))
             {
-                flags = flags.From(member.Value);
+                flags.Value = member.Value;
             }
             else if (member.NameEquals(restrictions.Name))
             {
-                restrictions = restrictions.From(member.Value);
+                restrictions.Value = member.Value;
             }
             else if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(icon.Name))
             {
-                icon = icon.From(member.Value);
+                icon.Value = member.Value;
             }
             else if (member.NameEquals("details"))
             {
@@ -535,11 +535,11 @@ public static class SkinReader
                     }
                     else if (detail.NameEquals(weightClass.Name))
                     {
-                        weightClass = weightClass.From(detail.Value);
+                        weightClass.Value = detail.Value;
                     }
                     else if (detail.NameEquals(dyeSlots.Name))
                     {
-                        dyeSlots = dyeSlots.From(detail.Value);
+                        dyeSlots.Value = detail.Value;
                     }
                     else if (missingMemberBehavior == MissingMemberBehavior.Error)
                     {
@@ -593,31 +593,31 @@ public static class SkinReader
             }
             else if (member.NameEquals(name.Name))
             {
-                name = name.From(member.Value);
+                name.Value = member.Value;
             }
             else if (member.NameEquals(description.Name))
             {
-                description = description.From(member.Value);
+                description.Value = member.Value;
             }
             else if (member.NameEquals(rarity.Name))
             {
-                rarity = rarity.From(member.Value);
+                rarity.Value = member.Value;
             }
             else if (member.NameEquals(flags.Name))
             {
-                flags = flags.From(member.Value);
+                flags.Value = member.Value;
             }
             else if (member.NameEquals(restrictions.Name))
             {
-                restrictions = restrictions.From(member.Value);
+                restrictions.Value = member.Value;
             }
             else if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(icon.Name))
             {
-                icon = icon.From(member.Value);
+                icon.Value = member.Value;
             }
             else if (member.NameEquals("details"))
             {
@@ -634,7 +634,7 @@ public static class SkinReader
                     }
                     else if (detail.NameEquals(damageType.Name))
                     {
-                        damageType = damageType.From(detail.Value);
+                        damageType.Value = detail.Value;
                     }
                     else if (missingMemberBehavior == MissingMemberBehavior.Error)
                     {
@@ -687,31 +687,31 @@ public static class SkinReader
             }
             else if (member.NameEquals(name.Name))
             {
-                name = name.From(member.Value);
+                name.Value = member.Value;
             }
             else if (member.NameEquals(description.Name))
             {
-                description = description.From(member.Value);
+                description.Value = member.Value;
             }
             else if (member.NameEquals(rarity.Name))
             {
-                rarity = rarity.From(member.Value);
+                rarity.Value = member.Value;
             }
             else if (member.NameEquals(flags.Name))
             {
-                flags = flags.From(member.Value);
+                flags.Value = member.Value;
             }
             else if (member.NameEquals(restrictions.Name))
             {
-                restrictions = restrictions.From(member.Value);
+                restrictions.Value = member.Value;
             }
             else if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(icon.Name))
             {
-                icon = icon.From(member.Value);
+                icon.Value = member.Value;
             }
             else if (member.NameEquals("details"))
             {
@@ -728,7 +728,7 @@ public static class SkinReader
                     }
                     else if (detail.NameEquals(damageType.Name))
                     {
-                        damageType = damageType.From(detail.Value);
+                        damageType.Value = detail.Value;
                     }
                     else if (missingMemberBehavior == MissingMemberBehavior.Error)
                     {
@@ -780,31 +780,31 @@ public static class SkinReader
             }
             else if (member.NameEquals(name.Name))
             {
-                name = name.From(member.Value);
+                name.Value = member.Value;
             }
             else if (member.NameEquals(description.Name))
             {
-                description = description.From(member.Value);
+                description.Value = member.Value;
             }
             else if (member.NameEquals(rarity.Name))
             {
-                rarity = rarity.From(member.Value);
+                rarity.Value = member.Value;
             }
             else if (member.NameEquals(flags.Name))
             {
-                flags = flags.From(member.Value);
+                flags.Value = member.Value;
             }
             else if (member.NameEquals(restrictions.Name))
             {
-                restrictions = restrictions.From(member.Value);
+                restrictions.Value = member.Value;
             }
             else if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(icon.Name))
             {
-                icon = icon.From(member.Value);
+                icon.Value = member.Value;
             }
             else if (member.NameEquals("details"))
             {
@@ -880,31 +880,31 @@ public static class SkinReader
             }
             else if (member.NameEquals(name.Name))
             {
-                name = name.From(member.Value);
+                name.Value = member.Value;
             }
             else if (member.NameEquals(description.Name))
             {
-                description = description.From(member.Value);
+                description.Value = member.Value;
             }
             else if (member.NameEquals(rarity.Name))
             {
-                rarity = rarity.From(member.Value);
+                rarity.Value = member.Value;
             }
             else if (member.NameEquals(flags.Name))
             {
-                flags = flags.From(member.Value);
+                flags.Value = member.Value;
             }
             else if (member.NameEquals(restrictions.Name))
             {
-                restrictions = restrictions.From(member.Value);
+                restrictions.Value = member.Value;
             }
             else if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(icon.Name))
             {
-                icon = icon.From(member.Value);
+                icon.Value = member.Value;
             }
             else if (member.NameEquals("details"))
             {
@@ -968,31 +968,31 @@ public static class SkinReader
             }
             else if (member.NameEquals(name.Name))
             {
-                name = name.From(member.Value);
+                name.Value = member.Value;
             }
             else if (member.NameEquals(description.Name))
             {
-                description = description.From(member.Value);
+                description.Value = member.Value;
             }
             else if (member.NameEquals(rarity.Name))
             {
-                rarity = rarity.From(member.Value);
+                rarity.Value = member.Value;
             }
             else if (member.NameEquals(flags.Name))
             {
-                flags = flags.From(member.Value);
+                flags.Value = member.Value;
             }
             else if (member.NameEquals(restrictions.Name))
             {
-                restrictions = restrictions.From(member.Value);
+                restrictions.Value = member.Value;
             }
             else if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(icon.Name))
             {
-                icon = icon.From(member.Value);
+                icon.Value = member.Value;
             }
             else if (member.NameEquals("details"))
             {
@@ -1058,31 +1058,31 @@ public static class SkinReader
             }
             else if (member.NameEquals(name.Name))
             {
-                name = name.From(member.Value);
+                name.Value = member.Value;
             }
             else if (member.NameEquals(description.Name))
             {
-                description = description.From(member.Value);
+                description.Value = member.Value;
             }
             else if (member.NameEquals(rarity.Name))
             {
-                rarity = rarity.From(member.Value);
+                rarity.Value = member.Value;
             }
             else if (member.NameEquals(flags.Name))
             {
-                flags = flags.From(member.Value);
+                flags.Value = member.Value;
             }
             else if (member.NameEquals(restrictions.Name))
             {
-                restrictions = restrictions.From(member.Value);
+                restrictions.Value = member.Value;
             }
             else if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(icon.Name))
             {
-                icon = icon.From(member.Value);
+                icon.Value = member.Value;
             }
             else if (member.NameEquals("details"))
             {
@@ -1099,11 +1099,11 @@ public static class SkinReader
                     }
                     else if (detail.NameEquals(weightClass.Name))
                     {
-                        weightClass = weightClass.From(detail.Value);
+                        weightClass.Value = detail.Value;
                     }
                     else if (detail.NameEquals(dyeSlots.Name))
                     {
-                        dyeSlots = dyeSlots.From(detail.Value);
+                        dyeSlots.Value = detail.Value;
                     }
                     else if (missingMemberBehavior == MissingMemberBehavior.Error)
                     {
@@ -1157,31 +1157,31 @@ public static class SkinReader
             }
             else if (member.NameEquals(name.Name))
             {
-                name = name.From(member.Value);
+                name.Value = member.Value;
             }
             else if (member.NameEquals(description.Name))
             {
-                description = description.From(member.Value);
+                description.Value = member.Value;
             }
             else if (member.NameEquals(rarity.Name))
             {
-                rarity = rarity.From(member.Value);
+                rarity.Value = member.Value;
             }
             else if (member.NameEquals(flags.Name))
             {
-                flags = flags.From(member.Value);
+                flags.Value = member.Value;
             }
             else if (member.NameEquals(restrictions.Name))
             {
-                restrictions = restrictions.From(member.Value);
+                restrictions.Value = member.Value;
             }
             else if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(icon.Name))
             {
-                icon = icon.From(member.Value);
+                icon.Value = member.Value;
             }
             else if (member.NameEquals("details"))
             {
@@ -1198,7 +1198,7 @@ public static class SkinReader
                     }
                     else if (detail.NameEquals(damageType.Name))
                     {
-                        damageType = damageType.From(detail.Value);
+                        damageType.Value = detail.Value;
                     }
                     else if (missingMemberBehavior == MissingMemberBehavior.Error)
                     {
@@ -1251,31 +1251,31 @@ public static class SkinReader
             }
             else if (member.NameEquals(name.Name))
             {
-                name = name.From(member.Value);
+                name.Value = member.Value;
             }
             else if (member.NameEquals(description.Name))
             {
-                description = description.From(member.Value);
+                description.Value = member.Value;
             }
             else if (member.NameEquals(rarity.Name))
             {
-                rarity = rarity.From(member.Value);
+                rarity.Value = member.Value;
             }
             else if (member.NameEquals(flags.Name))
             {
-                flags = flags.From(member.Value);
+                flags.Value = member.Value;
             }
             else if (member.NameEquals(restrictions.Name))
             {
-                restrictions = restrictions.From(member.Value);
+                restrictions.Value = member.Value;
             }
             else if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(icon.Name))
             {
-                icon = icon.From(member.Value);
+                icon.Value = member.Value;
             }
             else if (member.NameEquals("details"))
             {
@@ -1292,7 +1292,7 @@ public static class SkinReader
                     }
                     else if (detail.NameEquals(damageType.Name))
                     {
-                        damageType = damageType.From(detail.Value);
+                        damageType.Value = detail.Value;
                     }
                     else if (missingMemberBehavior == MissingMemberBehavior.Error)
                     {
@@ -1345,31 +1345,31 @@ public static class SkinReader
             }
             else if (member.NameEquals(name.Name))
             {
-                name = name.From(member.Value);
+                name.Value = member.Value;
             }
             else if (member.NameEquals(description.Name))
             {
-                description = description.From(member.Value);
+                description.Value = member.Value;
             }
             else if (member.NameEquals(rarity.Name))
             {
-                rarity = rarity.From(member.Value);
+                rarity.Value = member.Value;
             }
             else if (member.NameEquals(flags.Name))
             {
-                flags = flags.From(member.Value);
+                flags.Value = member.Value;
             }
             else if (member.NameEquals(restrictions.Name))
             {
-                restrictions = restrictions.From(member.Value);
+                restrictions.Value = member.Value;
             }
             else if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(icon.Name))
             {
-                icon = icon.From(member.Value);
+                icon.Value = member.Value;
             }
             else if (member.NameEquals("details"))
             {
@@ -1386,7 +1386,7 @@ public static class SkinReader
                     }
                     else if (detail.NameEquals(damageType.Name))
                     {
-                        damageType = damageType.From(detail.Value);
+                        damageType.Value = detail.Value;
                     }
                     else if (missingMemberBehavior == MissingMemberBehavior.Error)
                     {
@@ -1440,31 +1440,31 @@ public static class SkinReader
             }
             else if (member.NameEquals(name.Name))
             {
-                name = name.From(member.Value);
+                name.Value = member.Value;
             }
             else if (member.NameEquals(description.Name))
             {
-                description = description.From(member.Value);
+                description.Value = member.Value;
             }
             else if (member.NameEquals(rarity.Name))
             {
-                rarity = rarity.From(member.Value);
+                rarity.Value = member.Value;
             }
             else if (member.NameEquals(flags.Name))
             {
-                flags = flags.From(member.Value);
+                flags.Value = member.Value;
             }
             else if (member.NameEquals(restrictions.Name))
             {
-                restrictions = restrictions.From(member.Value);
+                restrictions.Value = member.Value;
             }
             else if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(icon.Name))
             {
-                icon = icon.From(member.Value);
+                icon.Value = member.Value;
             }
             else if (member.NameEquals("details"))
             {
@@ -1481,11 +1481,11 @@ public static class SkinReader
                     }
                     else if (detail.NameEquals(weightClass.Name))
                     {
-                        weightClass = weightClass.From(detail.Value);
+                        weightClass.Value = detail.Value;
                     }
                     else if (detail.NameEquals(dyeSlots.Name))
                     {
-                        dyeSlots = dyeSlots.From(detail.Value);
+                        dyeSlots.Value = detail.Value;
                     }
                     else if (missingMemberBehavior == MissingMemberBehavior.Error)
                     {
@@ -1540,31 +1540,31 @@ public static class SkinReader
             }
             else if (member.NameEquals(name.Name))
             {
-                name = name.From(member.Value);
+                name.Value = member.Value;
             }
             else if (member.NameEquals(description.Name))
             {
-                description = description.From(member.Value);
+                description.Value = member.Value;
             }
             else if (member.NameEquals(rarity.Name))
             {
-                rarity = rarity.From(member.Value);
+                rarity.Value = member.Value;
             }
             else if (member.NameEquals(flags.Name))
             {
-                flags = flags.From(member.Value);
+                flags.Value = member.Value;
             }
             else if (member.NameEquals(restrictions.Name))
             {
-                restrictions = restrictions.From(member.Value);
+                restrictions.Value = member.Value;
             }
             else if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(icon.Name))
             {
-                icon = icon.From(member.Value);
+                icon.Value = member.Value;
             }
             else if (member.NameEquals("details"))
             {
@@ -1581,11 +1581,11 @@ public static class SkinReader
                     }
                     else if (detail.NameEquals(weightClass.Name))
                     {
-                        weightClass = weightClass.From(detail.Value);
+                        weightClass.Value = detail.Value;
                     }
                     else if (detail.NameEquals(dyeSlots.Name))
                     {
-                        dyeSlots = dyeSlots.From(detail.Value);
+                        dyeSlots.Value = detail.Value;
                     }
                     else if (missingMemberBehavior == MissingMemberBehavior.Error)
                     {
@@ -1639,31 +1639,31 @@ public static class SkinReader
             }
             else if (member.NameEquals(name.Name))
             {
-                name = name.From(member.Value);
+                name.Value = member.Value;
             }
             else if (member.NameEquals(description.Name))
             {
-                description = description.From(member.Value);
+                description.Value = member.Value;
             }
             else if (member.NameEquals(rarity.Name))
             {
-                rarity = rarity.From(member.Value);
+                rarity.Value = member.Value;
             }
             else if (member.NameEquals(flags.Name))
             {
-                flags = flags.From(member.Value);
+                flags.Value = member.Value;
             }
             else if (member.NameEquals(restrictions.Name))
             {
-                restrictions = restrictions.From(member.Value);
+                restrictions.Value = member.Value;
             }
             else if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(icon.Name))
             {
-                icon = icon.From(member.Value);
+                icon.Value = member.Value;
             }
             else if (member.NameEquals("details"))
             {
@@ -1680,7 +1680,7 @@ public static class SkinReader
                     }
                     else if (detail.NameEquals(damageType.Name))
                     {
-                        damageType = damageType.From(detail.Value);
+                        damageType.Value = detail.Value;
                     }
                     else if (missingMemberBehavior == MissingMemberBehavior.Error)
                     {
@@ -1734,31 +1734,31 @@ public static class SkinReader
             }
             else if (member.NameEquals(name.Name))
             {
-                name = name.From(member.Value);
+                name.Value = member.Value;
             }
             else if (member.NameEquals(description.Name))
             {
-                description = description.From(member.Value);
+                description.Value = member.Value;
             }
             else if (member.NameEquals(rarity.Name))
             {
-                rarity = rarity.From(member.Value);
+                rarity.Value = member.Value;
             }
             else if (member.NameEquals(flags.Name))
             {
-                flags = flags.From(member.Value);
+                flags.Value = member.Value;
             }
             else if (member.NameEquals(restrictions.Name))
             {
-                restrictions = restrictions.From(member.Value);
+                restrictions.Value = member.Value;
             }
             else if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(icon.Name))
             {
-                icon = icon.From(member.Value);
+                icon.Value = member.Value;
             }
             else if (member.NameEquals("details"))
             {
@@ -1775,11 +1775,11 @@ public static class SkinReader
                     }
                     else if (detail.NameEquals(weightClass.Name))
                     {
-                        weightClass = weightClass.From(detail.Value);
+                        weightClass.Value = detail.Value;
                     }
                     else if (detail.NameEquals(dyeSlots.Name))
                     {
-                        dyeSlots = dyeSlots.From(detail.Value);
+                        dyeSlots.Value = detail.Value;
                     }
                     else if (missingMemberBehavior == MissingMemberBehavior.Error)
                     {
@@ -1832,31 +1832,31 @@ public static class SkinReader
             }
             else if (member.NameEquals(name.Name))
             {
-                name = name.From(member.Value);
+                name.Value = member.Value;
             }
             else if (member.NameEquals(description.Name))
             {
-                description = description.From(member.Value);
+                description.Value = member.Value;
             }
             else if (member.NameEquals(rarity.Name))
             {
-                rarity = rarity.From(member.Value);
+                rarity.Value = member.Value;
             }
             else if (member.NameEquals(flags.Name))
             {
-                flags = flags.From(member.Value);
+                flags.Value = member.Value;
             }
             else if (member.NameEquals(restrictions.Name))
             {
-                restrictions = restrictions.From(member.Value);
+                restrictions.Value = member.Value;
             }
             else if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(icon.Name))
             {
-                icon = icon.From(member.Value);
+                icon.Value = member.Value;
             }
             else if (member.NameEquals("details"))
             {
@@ -1921,31 +1921,31 @@ public static class SkinReader
             }
             else if (member.NameEquals(name.Name))
             {
-                name = name.From(member.Value);
+                name.Value = member.Value;
             }
             else if (member.NameEquals(description.Name))
             {
-                description = description.From(member.Value);
+                description.Value = member.Value;
             }
             else if (member.NameEquals(rarity.Name))
             {
-                rarity = rarity.From(member.Value);
+                rarity.Value = member.Value;
             }
             else if (member.NameEquals(flags.Name))
             {
-                flags = flags.From(member.Value);
+                flags.Value = member.Value;
             }
             else if (member.NameEquals(restrictions.Name))
             {
-                restrictions = restrictions.From(member.Value);
+                restrictions.Value = member.Value;
             }
             else if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(icon.Name))
             {
-                icon = icon.From(member.Value);
+                icon.Value = member.Value;
             }
             else if (member.NameEquals("details"))
             {
@@ -1962,7 +1962,7 @@ public static class SkinReader
                     }
                     else if (detail.NameEquals(damageType.Name))
                     {
-                        damageType = damageType.From(detail.Value);
+                        damageType.Value = detail.Value;
                     }
                     else if (missingMemberBehavior == MissingMemberBehavior.Error)
                     {
@@ -2015,31 +2015,31 @@ public static class SkinReader
             }
             else if (member.NameEquals(name.Name))
             {
-                name = name.From(member.Value);
+                name.Value = member.Value;
             }
             else if (member.NameEquals(description.Name))
             {
-                description = description.From(member.Value);
+                description.Value = member.Value;
             }
             else if (member.NameEquals(rarity.Name))
             {
-                rarity = rarity.From(member.Value);
+                rarity.Value = member.Value;
             }
             else if (member.NameEquals(flags.Name))
             {
-                flags = flags.From(member.Value);
+                flags.Value = member.Value;
             }
             else if (member.NameEquals(restrictions.Name))
             {
-                restrictions = restrictions.From(member.Value);
+                restrictions.Value = member.Value;
             }
             else if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(icon.Name))
             {
-                icon = icon.From(member.Value);
+                icon.Value = member.Value;
             }
             else if (member.NameEquals("details"))
             {
@@ -2056,7 +2056,7 @@ public static class SkinReader
                     }
                     else if (detail.NameEquals(damageType.Name))
                     {
-                        damageType = damageType.From(detail.Value);
+                        damageType.Value = detail.Value;
                     }
                     else if (missingMemberBehavior == MissingMemberBehavior.Error)
                     {
@@ -2108,31 +2108,31 @@ public static class SkinReader
             }
             else if (member.NameEquals(name.Name))
             {
-                name = name.From(member.Value);
+                name.Value = member.Value;
             }
             else if (member.NameEquals(description.Name))
             {
-                description = description.From(member.Value);
+                description.Value = member.Value;
             }
             else if (member.NameEquals(rarity.Name))
             {
-                rarity = rarity.From(member.Value);
+                rarity.Value = member.Value;
             }
             else if (member.NameEquals(flags.Name))
             {
-                flags = flags.From(member.Value);
+                flags.Value = member.Value;
             }
             else if (member.NameEquals(restrictions.Name))
             {
-                restrictions = restrictions.From(member.Value);
+                restrictions.Value = member.Value;
             }
             else if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(icon.Name))
             {
-                icon = icon.From(member.Value);
+                icon.Value = member.Value;
             }
             else if (member.NameEquals("details"))
             {
@@ -2197,31 +2197,31 @@ public static class SkinReader
             }
             else if (member.NameEquals(name.Name))
             {
-                name = name.From(member.Value);
+                name.Value = member.Value;
             }
             else if (member.NameEquals(description.Name))
             {
-                description = description.From(member.Value);
+                description.Value = member.Value;
             }
             else if (member.NameEquals(rarity.Name))
             {
-                rarity = rarity.From(member.Value);
+                rarity.Value = member.Value;
             }
             else if (member.NameEquals(flags.Name))
             {
-                flags = flags.From(member.Value);
+                flags.Value = member.Value;
             }
             else if (member.NameEquals(restrictions.Name))
             {
-                restrictions = restrictions.From(member.Value);
+                restrictions.Value = member.Value;
             }
             else if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(icon.Name))
             {
-                icon = icon.From(member.Value);
+                icon.Value = member.Value;
             }
             else if (member.NameEquals("details"))
             {
@@ -2238,7 +2238,7 @@ public static class SkinReader
                     }
                     else if (detail.NameEquals(damageType.Name))
                     {
-                        damageType = damageType.From(detail.Value);
+                        damageType.Value = detail.Value;
                     }
                     else if (missingMemberBehavior == MissingMemberBehavior.Error)
                     {
@@ -2291,31 +2291,31 @@ public static class SkinReader
             }
             else if (member.NameEquals(name.Name))
             {
-                name = name.From(member.Value);
+                name.Value = member.Value;
             }
             else if (member.NameEquals(description.Name))
             {
-                description = description.From(member.Value);
+                description.Value = member.Value;
             }
             else if (member.NameEquals(rarity.Name))
             {
-                rarity = rarity.From(member.Value);
+                rarity.Value = member.Value;
             }
             else if (member.NameEquals(flags.Name))
             {
-                flags = flags.From(member.Value);
+                flags.Value = member.Value;
             }
             else if (member.NameEquals(restrictions.Name))
             {
-                restrictions = restrictions.From(member.Value);
+                restrictions.Value = member.Value;
             }
             else if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(icon.Name))
             {
-                icon = icon.From(member.Value);
+                icon.Value = member.Value;
             }
             else if (member.NameEquals("details"))
             {
@@ -2332,7 +2332,7 @@ public static class SkinReader
                     }
                     else if (detail.NameEquals(damageType.Name))
                     {
-                        damageType = damageType.From(detail.Value);
+                        damageType.Value = detail.Value;
                     }
                     else if (missingMemberBehavior == MissingMemberBehavior.Error)
                     {
@@ -2385,31 +2385,31 @@ public static class SkinReader
             }
             else if (member.NameEquals(name.Name))
             {
-                name = name.From(member.Value);
+                name.Value = member.Value;
             }
             else if (member.NameEquals(description.Name))
             {
-                description = description.From(member.Value);
+                description.Value = member.Value;
             }
             else if (member.NameEquals(rarity.Name))
             {
-                rarity = rarity.From(member.Value);
+                rarity.Value = member.Value;
             }
             else if (member.NameEquals(flags.Name))
             {
-                flags = flags.From(member.Value);
+                flags.Value = member.Value;
             }
             else if (member.NameEquals(restrictions.Name))
             {
-                restrictions = restrictions.From(member.Value);
+                restrictions.Value = member.Value;
             }
             else if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(icon.Name))
             {
-                icon = icon.From(member.Value);
+                icon.Value = member.Value;
             }
             else if (member.NameEquals("details"))
             {
@@ -2426,7 +2426,7 @@ public static class SkinReader
                     }
                     else if (detail.NameEquals(damageType.Name))
                     {
-                        damageType = damageType.From(detail.Value);
+                        damageType.Value = detail.Value;
                     }
                     else if (missingMemberBehavior == MissingMemberBehavior.Error)
                     {
@@ -2479,31 +2479,31 @@ public static class SkinReader
             }
             else if (member.NameEquals(name.Name))
             {
-                name = name.From(member.Value);
+                name.Value = member.Value;
             }
             else if (member.NameEquals(description.Name))
             {
-                description = description.From(member.Value);
+                description.Value = member.Value;
             }
             else if (member.NameEquals(rarity.Name))
             {
-                rarity = rarity.From(member.Value);
+                rarity.Value = member.Value;
             }
             else if (member.NameEquals(flags.Name))
             {
-                flags = flags.From(member.Value);
+                flags.Value = member.Value;
             }
             else if (member.NameEquals(restrictions.Name))
             {
-                restrictions = restrictions.From(member.Value);
+                restrictions.Value = member.Value;
             }
             else if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(icon.Name))
             {
-                icon = icon.From(member.Value);
+                icon.Value = member.Value;
             }
             else if (member.NameEquals("details"))
             {
@@ -2520,7 +2520,7 @@ public static class SkinReader
                     }
                     else if (detail.NameEquals(damageType.Name))
                     {
-                        damageType = damageType.From(detail.Value);
+                        damageType.Value = detail.Value;
                     }
                     else if (missingMemberBehavior == MissingMemberBehavior.Error)
                     {
@@ -2573,31 +2573,31 @@ public static class SkinReader
             }
             else if (member.NameEquals(name.Name))
             {
-                name = name.From(member.Value);
+                name.Value = member.Value;
             }
             else if (member.NameEquals(description.Name))
             {
-                description = description.From(member.Value);
+                description.Value = member.Value;
             }
             else if (member.NameEquals(rarity.Name))
             {
-                rarity = rarity.From(member.Value);
+                rarity.Value = member.Value;
             }
             else if (member.NameEquals(flags.Name))
             {
-                flags = flags.From(member.Value);
+                flags.Value = member.Value;
             }
             else if (member.NameEquals(restrictions.Name))
             {
-                restrictions = restrictions.From(member.Value);
+                restrictions.Value = member.Value;
             }
             else if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(icon.Name))
             {
-                icon = icon.From(member.Value);
+                icon.Value = member.Value;
             }
             else if (member.NameEquals("details"))
             {
@@ -2614,7 +2614,7 @@ public static class SkinReader
                     }
                     else if (detail.NameEquals(damageType.Name))
                     {
-                        damageType = damageType.From(detail.Value);
+                        damageType.Value = detail.Value;
                     }
                     else if (missingMemberBehavior == MissingMemberBehavior.Error)
                     {
@@ -2668,31 +2668,31 @@ public static class SkinReader
             }
             else if (member.NameEquals(name.Name))
             {
-                name = name.From(member.Value);
+                name.Value = member.Value;
             }
             else if (member.NameEquals(description.Name))
             {
-                description = description.From(member.Value);
+                description.Value = member.Value;
             }
             else if (member.NameEquals(rarity.Name))
             {
-                rarity = rarity.From(member.Value);
+                rarity.Value = member.Value;
             }
             else if (member.NameEquals(flags.Name))
             {
-                flags = flags.From(member.Value);
+                flags.Value = member.Value;
             }
             else if (member.NameEquals(restrictions.Name))
             {
-                restrictions = restrictions.From(member.Value);
+                restrictions.Value = member.Value;
             }
             else if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(icon.Name))
             {
-                icon = icon.From(member.Value);
+                icon.Value = member.Value;
             }
             else if (member.NameEquals("details"))
             {
@@ -2709,11 +2709,11 @@ public static class SkinReader
                     }
                     else if (detail.NameEquals(weightClass.Name))
                     {
-                        weightClass = weightClass.From(detail.Value);
+                        weightClass.Value = detail.Value;
                     }
                     else if (detail.NameEquals(dyeSlots.Name))
                     {
-                        dyeSlots = dyeSlots.From(detail.Value);
+                        dyeSlots.Value = detail.Value;
                     }
                     else if (missingMemberBehavior == MissingMemberBehavior.Error)
                     {
@@ -2767,31 +2767,31 @@ public static class SkinReader
             }
             else if (member.NameEquals(name.Name))
             {
-                name = name.From(member.Value);
+                name.Value = member.Value;
             }
             else if (member.NameEquals(description.Name))
             {
-                description = description.From(member.Value);
+                description.Value = member.Value;
             }
             else if (member.NameEquals(rarity.Name))
             {
-                rarity = rarity.From(member.Value);
+                rarity.Value = member.Value;
             }
             else if (member.NameEquals(flags.Name))
             {
-                flags = flags.From(member.Value);
+                flags.Value = member.Value;
             }
             else if (member.NameEquals(restrictions.Name))
             {
-                restrictions = restrictions.From(member.Value);
+                restrictions.Value = member.Value;
             }
             else if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(icon.Name))
             {
-                icon = icon.From(member.Value);
+                icon.Value = member.Value;
             }
             else if (member.NameEquals("details"))
             {
@@ -2808,7 +2808,7 @@ public static class SkinReader
                     }
                     else if (detail.NameEquals(damageType.Name))
                     {
-                        damageType = damageType.From(detail.Value);
+                        damageType.Value = detail.Value;
                     }
                     else if (missingMemberBehavior == MissingMemberBehavior.Error)
                     {
@@ -2861,31 +2861,31 @@ public static class SkinReader
             }
             else if (member.NameEquals(name.Name))
             {
-                name = name.From(member.Value);
+                name.Value = member.Value;
             }
             else if (member.NameEquals(description.Name))
             {
-                description = description.From(member.Value);
+                description.Value = member.Value;
             }
             else if (member.NameEquals(rarity.Name))
             {
-                rarity = rarity.From(member.Value);
+                rarity.Value = member.Value;
             }
             else if (member.NameEquals(flags.Name))
             {
-                flags = flags.From(member.Value);
+                flags.Value = member.Value;
             }
             else if (member.NameEquals(restrictions.Name))
             {
-                restrictions = restrictions.From(member.Value);
+                restrictions.Value = member.Value;
             }
             else if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(icon.Name))
             {
-                icon = icon.From(member.Value);
+                icon.Value = member.Value;
             }
             else if (member.NameEquals("details"))
             {
@@ -2902,7 +2902,7 @@ public static class SkinReader
                     }
                     else if (detail.NameEquals(damageType.Name))
                     {
-                        damageType = damageType.From(detail.Value);
+                        damageType.Value = detail.Value;
                     }
                     else if (missingMemberBehavior == MissingMemberBehavior.Error)
                     {
@@ -2955,31 +2955,31 @@ public static class SkinReader
             }
             else if (member.NameEquals(name.Name))
             {
-                name = name.From(member.Value);
+                name.Value = member.Value;
             }
             else if (member.NameEquals(description.Name))
             {
-                description = description.From(member.Value);
+                description.Value = member.Value;
             }
             else if (member.NameEquals(rarity.Name))
             {
-                rarity = rarity.From(member.Value);
+                rarity.Value = member.Value;
             }
             else if (member.NameEquals(flags.Name))
             {
-                flags = flags.From(member.Value);
+                flags.Value = member.Value;
             }
             else if (member.NameEquals(restrictions.Name))
             {
-                restrictions = restrictions.From(member.Value);
+                restrictions.Value = member.Value;
             }
             else if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(icon.Name))
             {
-                icon = icon.From(member.Value);
+                icon.Value = member.Value;
             }
             else if (member.NameEquals("details"))
             {
@@ -2996,7 +2996,7 @@ public static class SkinReader
                     }
                     else if (detail.NameEquals(damageType.Name))
                     {
-                        damageType = damageType.From(detail.Value);
+                        damageType.Value = detail.Value;
                     }
                     else if (missingMemberBehavior == MissingMemberBehavior.Error)
                     {
@@ -3049,31 +3049,31 @@ public static class SkinReader
             }
             else if (member.NameEquals(name.Name))
             {
-                name = name.From(member.Value);
+                name.Value = member.Value;
             }
             else if (member.NameEquals(description.Name))
             {
-                description = description.From(member.Value);
+                description.Value = member.Value;
             }
             else if (member.NameEquals(rarity.Name))
             {
-                rarity = rarity.From(member.Value);
+                rarity.Value = member.Value;
             }
             else if (member.NameEquals(flags.Name))
             {
-                flags = flags.From(member.Value);
+                flags.Value = member.Value;
             }
             else if (member.NameEquals(restrictions.Name))
             {
-                restrictions = restrictions.From(member.Value);
+                restrictions.Value = member.Value;
             }
             else if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(icon.Name))
             {
-                icon = icon.From(member.Value);
+                icon.Value = member.Value;
             }
             else if (member.NameEquals("details"))
             {
@@ -3090,7 +3090,7 @@ public static class SkinReader
                     }
                     else if (detail.NameEquals(damageType.Name))
                     {
-                        damageType = damageType.From(detail.Value);
+                        damageType.Value = detail.Value;
                     }
                     else if (missingMemberBehavior == MissingMemberBehavior.Error)
                     {
@@ -3143,31 +3143,31 @@ public static class SkinReader
             }
             else if (member.NameEquals(name.Name))
             {
-                name = name.From(member.Value);
+                name.Value = member.Value;
             }
             else if (member.NameEquals(description.Name))
             {
-                description = description.From(member.Value);
+                description.Value = member.Value;
             }
             else if (member.NameEquals(rarity.Name))
             {
-                rarity = rarity.From(member.Value);
+                rarity.Value = member.Value;
             }
             else if (member.NameEquals(flags.Name))
             {
-                flags = flags.From(member.Value);
+                flags.Value = member.Value;
             }
             else if (member.NameEquals(restrictions.Name))
             {
-                restrictions = restrictions.From(member.Value);
+                restrictions.Value = member.Value;
             }
             else if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(icon.Name))
             {
-                icon = icon.From(member.Value);
+                icon.Value = member.Value;
             }
             else if (member.NameEquals("details"))
             {
@@ -3184,7 +3184,7 @@ public static class SkinReader
                     }
                     else if (detail.NameEquals(damageType.Name))
                     {
-                        damageType = damageType.From(detail.Value);
+                        damageType.Value = detail.Value;
                     }
                     else if (missingMemberBehavior == MissingMemberBehavior.Error)
                     {
@@ -3237,31 +3237,31 @@ public static class SkinReader
             }
             else if (member.NameEquals(name.Name))
             {
-                name = name.From(member.Value);
+                name.Value = member.Value;
             }
             else if (member.NameEquals(description.Name))
             {
-                description = description.From(member.Value);
+                description.Value = member.Value;
             }
             else if (member.NameEquals(rarity.Name))
             {
-                rarity = rarity.From(member.Value);
+                rarity.Value = member.Value;
             }
             else if (member.NameEquals(flags.Name))
             {
-                flags = flags.From(member.Value);
+                flags.Value = member.Value;
             }
             else if (member.NameEquals(restrictions.Name))
             {
-                restrictions = restrictions.From(member.Value);
+                restrictions.Value = member.Value;
             }
             else if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(icon.Name))
             {
-                icon = icon.From(member.Value);
+                icon.Value = member.Value;
             }
             else if (member.NameEquals("details"))
             {
@@ -3278,7 +3278,7 @@ public static class SkinReader
                     }
                     else if (detail.NameEquals(damageType.Name))
                     {
-                        damageType = damageType.From(detail.Value);
+                        damageType.Value = detail.Value;
                     }
                     else if (missingMemberBehavior == MissingMemberBehavior.Error)
                     {
@@ -3331,31 +3331,31 @@ public static class SkinReader
             }
             else if (member.NameEquals(name.Name))
             {
-                name = name.From(member.Value);
+                name.Value = member.Value;
             }
             else if (member.NameEquals(description.Name))
             {
-                description = description.From(member.Value);
+                description.Value = member.Value;
             }
             else if (member.NameEquals(rarity.Name))
             {
-                rarity = rarity.From(member.Value);
+                rarity.Value = member.Value;
             }
             else if (member.NameEquals(flags.Name))
             {
-                flags = flags.From(member.Value);
+                flags.Value = member.Value;
             }
             else if (member.NameEquals(restrictions.Name))
             {
-                restrictions = restrictions.From(member.Value);
+                restrictions.Value = member.Value;
             }
             else if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(icon.Name))
             {
-                icon = icon.From(member.Value);
+                icon.Value = member.Value;
             }
             else if (member.NameEquals("details"))
             {
@@ -3372,7 +3372,7 @@ public static class SkinReader
                     }
                     else if (detail.NameEquals(damageType.Name))
                     {
-                        damageType = damageType.From(detail.Value);
+                        damageType.Value = detail.Value;
                     }
                     else if (missingMemberBehavior == MissingMemberBehavior.Error)
                     {
@@ -3425,31 +3425,31 @@ public static class SkinReader
             }
             else if (member.NameEquals(name.Name))
             {
-                name = name.From(member.Value);
+                name.Value = member.Value;
             }
             else if (member.NameEquals(description.Name))
             {
-                description = description.From(member.Value);
+                description.Value = member.Value;
             }
             else if (member.NameEquals(rarity.Name))
             {
-                rarity = rarity.From(member.Value);
+                rarity.Value = member.Value;
             }
             else if (member.NameEquals(flags.Name))
             {
-                flags = flags.From(member.Value);
+                flags.Value = member.Value;
             }
             else if (member.NameEquals(restrictions.Name))
             {
-                restrictions = restrictions.From(member.Value);
+                restrictions.Value = member.Value;
             }
             else if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(icon.Name))
             {
-                icon = icon.From(member.Value);
+                icon.Value = member.Value;
             }
             else if (member.NameEquals("details"))
             {
@@ -3466,7 +3466,7 @@ public static class SkinReader
                     }
                     else if (detail.NameEquals(damageType.Name))
                     {
-                        damageType = damageType.From(detail.Value);
+                        damageType.Value = detail.Value;
                     }
                     else if (missingMemberBehavior == MissingMemberBehavior.Error)
                     {
@@ -3519,31 +3519,31 @@ public static class SkinReader
             }
             else if (member.NameEquals(name.Name))
             {
-                name = name.From(member.Value);
+                name.Value = member.Value;
             }
             else if (member.NameEquals(description.Name))
             {
-                description = description.From(member.Value);
+                description.Value = member.Value;
             }
             else if (member.NameEquals(rarity.Name))
             {
-                rarity = rarity.From(member.Value);
+                rarity.Value = member.Value;
             }
             else if (member.NameEquals(flags.Name))
             {
-                flags = flags.From(member.Value);
+                flags.Value = member.Value;
             }
             else if (member.NameEquals(restrictions.Name))
             {
-                restrictions = restrictions.From(member.Value);
+                restrictions.Value = member.Value;
             }
             else if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(icon.Name))
             {
-                icon = icon.From(member.Value);
+                icon.Value = member.Value;
             }
             else if (member.NameEquals("details"))
             {
@@ -3560,7 +3560,7 @@ public static class SkinReader
                     }
                     else if (detail.NameEquals(damageType.Name))
                     {
-                        damageType = damageType.From(detail.Value);
+                        damageType.Value = detail.Value;
                     }
                     else if (missingMemberBehavior == MissingMemberBehavior.Error)
                     {
@@ -3663,31 +3663,31 @@ public static class SkinReader
             }
             else if (member.NameEquals(name.Name))
             {
-                name = name.From(member.Value);
+                name.Value = member.Value;
             }
             else if (member.NameEquals(description.Name))
             {
-                description = description.From(member.Value);
+                description.Value = member.Value;
             }
             else if (member.NameEquals(rarity.Name))
             {
-                rarity = rarity.From(member.Value);
+                rarity.Value = member.Value;
             }
             else if (member.NameEquals(flags.Name))
             {
-                flags = flags.From(member.Value);
+                flags.Value = member.Value;
             }
             else if (member.NameEquals(restrictions.Name))
             {
-                restrictions = restrictions.From(member.Value);
+                restrictions.Value = member.Value;
             }
             else if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(icon.Name))
             {
-                icon = icon.From(member.Value);
+                icon.Value = member.Value;
             }
             else if (member.NameEquals("details"))
             {
@@ -3704,7 +3704,7 @@ public static class SkinReader
                     }
                     else if (detail.NameEquals(damageType.Name))
                     {
-                        damageType = damageType.From(detail.Value);
+                        damageType.Value = detail.Value;
                     }
                     else if (missingMemberBehavior == MissingMemberBehavior.Error)
                     {
@@ -3751,7 +3751,7 @@ public static class SkinReader
         {
             if (member.NameEquals(@default.Name))
             {
-                @default = @default.From(member.Value);
+                @default.Value = member.Value;
             }
             else if (member.NameEquals("overrides"))
             {
@@ -3759,43 +3759,43 @@ public static class SkinReader
                 {
                     if (@override.NameEquals(asuraFemale.Name))
                     {
-                        asuraFemale = asuraFemale.From(@override.Value);
+                        asuraFemale.Value = @override.Value;
                     }
                     else if (@override.NameEquals(asuraMale.Name))
                     {
-                        asuraMale = asuraMale.From(@override.Value);
+                        asuraMale.Value = @override.Value;
                     }
                     else if (@override.NameEquals(charrFemale.Name))
                     {
-                        charrFemale = charrFemale.From(@override.Value);
+                        charrFemale.Value = @override.Value;
                     }
                     else if (@override.NameEquals(charrMale.Name))
                     {
-                        charrMale = charrMale.From(@override.Value);
+                        charrMale.Value = @override.Value;
                     }
                     else if (@override.NameEquals(humanFemale.Name))
                     {
-                        humanFemale = humanFemale.From(@override.Value);
+                        humanFemale.Value = @override.Value;
                     }
                     else if (@override.NameEquals(humanMale.Name))
                     {
-                        humanMale = humanMale.From(@override.Value);
+                        humanMale.Value = @override.Value;
                     }
                     else if (@override.NameEquals(nornFemale.Name))
                     {
-                        nornFemale = nornFemale.From(@override.Value);
+                        nornFemale.Value = @override.Value;
                     }
                     else if (@override.NameEquals(nornMale.Name))
                     {
-                        nornMale = nornMale.From(@override.Value);
+                        nornMale.Value = @override.Value;
                     }
                     else if (@override.NameEquals(sylvariFemale.Name))
                     {
-                        sylvariFemale = sylvariFemale.From(@override.Value);
+                        sylvariFemale.Value = @override.Value;
                     }
                     else if (@override.NameEquals(sylvariMale.Name))
                     {
-                        sylvariMale = sylvariMale.From(@override.Value);
+                        sylvariMale.Value = @override.Value;
                     }
                     else if (missingMemberBehavior == MissingMemberBehavior.Error)
                     {
@@ -3894,11 +3894,11 @@ public static class SkinReader
         {
             if (member.NameEquals(colorId.Name))
             {
-                colorId = colorId.From(member.Value);
+                colorId.Value = member.Value;
             }
             else if (member.NameEquals(material.Name))
             {
-                material = material.From(member.Value);
+                material.Value = member.Value;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {

@@ -23,23 +23,23 @@ public static class DailyAchievementReader
         {
             if (member.NameEquals(pve.Name))
             {
-                pve = pve.From(member.Value);
+                pve.Value = member.Value;
             }
             else if (member.NameEquals(pvp.Name))
             {
-                pvp = pvp.From(member.Value);
+                pvp.Value = member.Value;
             }
             else if (member.NameEquals(wvw.Name))
             {
-                wvw = wvw.From(member.Value);
+                wvw.Value = member.Value;
             }
             else if (member.NameEquals(fractals.Name))
             {
-                fractals = fractals.From(member.Value);
+                fractals.Value = member.Value;
             }
             else if (member.NameEquals(special.Name))
             {
-                special = special.From(member.Value);
+                special.Value = member.Value;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {
@@ -75,15 +75,15 @@ public static class DailyAchievementReader
         {
             if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(level.Name))
             {
-                level = level.From(member.Value);
+                level.Value = member.Value;
             }
             else if (member.NameEquals(requiredAccess.Name))
             {
-                requiredAccess = requiredAccess.From(member.Value);
+                requiredAccess.Value = member.Value;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {
@@ -112,11 +112,11 @@ public static class DailyAchievementReader
         {
             if (member.NameEquals(min.Name))
             {
-                min = min.From(member.Value);
+                min.Value = member.Value;
             }
             else if (member.NameEquals(max.Name))
             {
-                max = max.From(member.Value);
+                max.Value = member.Value;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {
@@ -143,11 +143,11 @@ public static class DailyAchievementReader
         {
             if (member.NameEquals(product.Name))
             {
-                product = product.From(member.Value);
+                product.Value = member.Value;
             }
             else if (member.NameEquals(condition.Name))
             {
-                condition = condition.From(member.Value);
+                condition.Value = member.Value;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {

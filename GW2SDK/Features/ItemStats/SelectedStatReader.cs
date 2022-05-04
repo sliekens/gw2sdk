@@ -19,11 +19,11 @@ public static class SelectedStatReader
         {
             if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(attributes.Name))
             {
-                attributes = attributes.From(member.Value);
+                attributes.Value = member.Value;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {
@@ -58,43 +58,43 @@ public static class SelectedStatReader
         {
             if (member.NameEquals(agonyResistance.Name))
             {
-                agonyResistance = agonyResistance.From(member.Value);
+                agonyResistance.Value = member.Value;
             }
             else if (member.NameEquals(boonDuration.Name))
             {
-                boonDuration = boonDuration.From(member.Value);
+                boonDuration.Value = member.Value;
             }
             else if (member.NameEquals(conditionDamage.Name))
             {
-                conditionDamage = conditionDamage.From(member.Value);
+                conditionDamage.Value = member.Value;
             }
             else if (member.NameEquals(conditionDuration.Name))
             {
-                conditionDuration = conditionDuration.From(member.Value);
+                conditionDuration.Value = member.Value;
             }
             else if (member.NameEquals(critDamage.Name))
             {
-                critDamage = critDamage.From(member.Value);
+                critDamage.Value = member.Value;
             }
             else if (member.NameEquals(healing.Name))
             {
-                healing = healing.From(member.Value);
+                healing.Value = member.Value;
             }
             else if (member.NameEquals(power.Name))
             {
-                power = power.From(member.Value);
+                power.Value = member.Value;
             }
             else if (member.NameEquals(precision.Name))
             {
-                precision = precision.From(member.Value);
+                precision.Value = member.Value;
             }
             else if (member.NameEquals(toughness.Name))
             {
-                toughness = toughness.From(member.Value);
+                toughness.Value = member.Value;
             }
             else if (member.NameEquals(vitality.Name))
             {
-                vitality = vitality.From(member.Value);
+                vitality.Value = member.Value;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {

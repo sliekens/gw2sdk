@@ -47,51 +47,51 @@ public static class AchievementReader
             }
             else if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(icon.Name))
             {
-                icon = icon.From(member.Value);
+                icon.Value = member.Value;
             }
             else if (member.NameEquals(name.Name))
             {
-                name = name.From(member.Value);
+                name.Value = member.Value;
             }
             else if (member.NameEquals(description.Name))
             {
-                description = description.From(member.Value);
+                description.Value = member.Value;
             }
             else if (member.NameEquals(requirement.Name))
             {
-                requirement = requirement.From(member.Value);
+                requirement.Value = member.Value;
             }
             else if (member.NameEquals(lockedText.Name))
             {
-                lockedText = lockedText.From(member.Value);
+                lockedText.Value = member.Value;
             }
             else if (member.NameEquals(flags.Name))
             {
-                flags = flags.From(member.Value);
+                flags.Value = member.Value;
             }
             else if (member.NameEquals(tiers.Name))
             {
-                tiers = tiers.From(member.Value);
+                tiers.Value = member.Value;
             }
             else if (member.NameEquals(prerequisites.Name))
             {
-                prerequisites = prerequisites.From(member.Value);
+                prerequisites.Value = member.Value;
             }
             else if (member.NameEquals(rewards.Name))
             {
-                rewards = rewards.From(member.Value);
+                rewards.Value = member.Value;
             }
             else if (member.NameEquals(bits.Name))
             {
-                bits = bits.From(member.Value);
+                bits.Value = member.Value;
             }
             else if (member.NameEquals(pointCap.Name))
             {
-                pointCap = pointCap.From(member.Value);
+                pointCap.Value = member.Value;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {
@@ -149,51 +149,51 @@ public static class AchievementReader
             }
             else if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(icon.Name))
             {
-                icon = icon.From(member.Value);
+                icon.Value = member.Value;
             }
             else if (member.NameEquals(name.Name))
             {
-                name = name.From(member.Value);
+                name.Value = member.Value;
             }
             else if (member.NameEquals(description.Name))
             {
-                description = description.From(member.Value);
+                description.Value = member.Value;
             }
             else if (member.NameEquals(requirement.Name))
             {
-                requirement = requirement.From(member.Value);
+                requirement.Value = member.Value;
             }
             else if (member.NameEquals(lockedText.Name))
             {
-                lockedText = lockedText.From(member.Value);
+                lockedText.Value = member.Value;
             }
             else if (member.NameEquals(flags.Name))
             {
-                flags = flags.From(member.Value);
+                flags.Value = member.Value;
             }
             else if (member.NameEquals(tiers.Name))
             {
-                tiers = tiers.From(member.Value);
+                tiers.Value = member.Value;
             }
             else if (member.NameEquals(prerequisites.Name))
             {
-                prerequisites = prerequisites.From(member.Value);
+                prerequisites.Value = member.Value;
             }
             else if (member.NameEquals(rewards.Name))
             {
-                rewards = rewards.From(member.Value);
+                rewards.Value = member.Value;
             }
             else if (member.NameEquals(bits.Name))
             {
-                bits = bits.From(member.Value);
+                bits.Value = member.Value;
             }
             else if (member.NameEquals(pointCap.Name))
             {
-                pointCap = pointCap.From(member.Value);
+                pointCap.Value = member.Value;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {
@@ -251,51 +251,51 @@ public static class AchievementReader
             }
             else if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(icon.Name))
             {
-                icon = icon.From(member.Value);
+                icon.Value = member.Value;
             }
             else if (member.NameEquals(name.Name))
             {
-                name = name.From(member.Value);
+                name.Value = member.Value;
             }
             else if (member.NameEquals(description.Name))
             {
-                description = description.From(member.Value);
+                description.Value = member.Value;
             }
             else if (member.NameEquals(requirement.Name))
             {
-                requirement = requirement.From(member.Value);
+                requirement.Value = member.Value;
             }
             else if (member.NameEquals(lockedText.Name))
             {
-                lockedText = lockedText.From(member.Value);
+                lockedText.Value = member.Value;
             }
             else if (member.NameEquals(flags.Name))
             {
-                flags = flags.From(member.Value);
+                flags.Value = member.Value;
             }
             else if (member.NameEquals(tiers.Name))
             {
-                tiers = tiers.From(member.Value);
+                tiers.Value = member.Value;
             }
             else if (member.NameEquals(prerequisites.Name))
             {
-                prerequisites = prerequisites.From(member.Value);
+                prerequisites.Value = member.Value;
             }
             else if (member.NameEquals(rewards.Name))
             {
-                rewards = rewards.From(member.Value);
+                rewards.Value = member.Value;
             }
             else if (member.NameEquals(bits.Name))
             {
-                bits = bits.From(member.Value);
+                bits.Value = member.Value;
             }
             else if (member.NameEquals(pointCap.Name))
             {
-                pointCap = pointCap.From(member.Value);
+                pointCap.Value = member.Value;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {
@@ -375,7 +375,7 @@ public static class AchievementReader
             }
             else if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {
@@ -405,7 +405,7 @@ public static class AchievementReader
             }
             else if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {
@@ -435,7 +435,7 @@ public static class AchievementReader
             }
             else if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {
@@ -465,7 +465,7 @@ public static class AchievementReader
             }
             else if (member.NameEquals(text.Name))
             {
-                text = text.From(member.Value);
+                text.Value = member.Value;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {
@@ -524,7 +524,7 @@ public static class AchievementReader
             }
             else if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {
@@ -555,11 +555,11 @@ public static class AchievementReader
             }
             else if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(region.Name))
             {
-                region = region.From(member.Value);
+                region.Value = member.Value;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {
@@ -594,11 +594,11 @@ public static class AchievementReader
             }
             else if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(count.Name))
             {
-                count = count.From(member.Value);
+                count.Value = member.Value;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {
@@ -632,7 +632,7 @@ public static class AchievementReader
             }
             else if (member.NameEquals(coins.Name))
             {
-                coins = coins.From(member.Value);
+                coins.Value = member.Value;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {
@@ -654,11 +654,11 @@ public static class AchievementReader
         {
             if (member.NameEquals(count.Name))
             {
-                count = count.From(member.Value);
+                count.Value = member.Value;
             }
             else if (member.NameEquals(points.Name))
             {
-                points = points.From(member.Value);
+                points.Value = member.Value;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {

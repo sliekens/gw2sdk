@@ -19,11 +19,11 @@ public static class GoldForGemsReader
         {
             if (member.NameEquals(coinsPerGem.Name))
             {
-                coinsPerGem = coinsPerGem.From(member.Value);
+                coinsPerGem.Value = member.Value;
             }
             else if (member.NameEquals(quantity.Name))
             {
-                quantity = quantity.From(member.Value);
+                quantity.Value = member.Value;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {

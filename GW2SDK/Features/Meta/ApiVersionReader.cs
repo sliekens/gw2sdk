@@ -21,15 +21,15 @@ public static class ApiVersionReader
         {
             if (member.NameEquals(languages.Name))
             {
-                languages = languages.From(member.Value);
+                languages.Value = member.Value;
             }
             else if (member.NameEquals(routes.Name))
             {
-                routes = routes.From(member.Value);
+                routes.Value = member.Value;
             }
             else if (member.NameEquals(schemaVersions.Name))
             {
-                schemaVersions = schemaVersions.From(member.Value);
+                schemaVersions.Value = member.Value;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {
@@ -58,19 +58,19 @@ public static class ApiVersionReader
         {
             if (member.NameEquals(path.Name))
             {
-                path = path.From(member.Value);
+                path.Value = member.Value;
             }
             else if (member.NameEquals(lang.Name))
             {
-                lang = lang.From(member.Value);
+                lang.Value = member.Value;
             }
             else if (member.NameEquals(auth.Name))
             {
-                auth = auth.From(member.Value);
+                auth.Value = member.Value;
             }
             else if (member.NameEquals(active.Name))
             {
-                active = active.From(member.Value);
+                active.Value = member.Value;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {
@@ -100,11 +100,11 @@ public static class ApiVersionReader
         {
             if (member.NameEquals(version.Name))
             {
-                version = version.From(member.Value);
+                version.Value = member.Value;
             }
             else if (member.NameEquals(description.Name))
             {
-                description = description.From(member.Value);
+                description.Value = member.Value;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {

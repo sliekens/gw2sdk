@@ -32,63 +32,63 @@ public static class MapReader
         {
             if (member.NameEquals(name.Name))
             {
-                name = name.From(member.Value);
+                name.Value = member.Value;
             }
             else if (member.NameEquals(minLevel.Name))
             {
-                minLevel = minLevel.From(member.Value);
+                minLevel.Value = member.Value;
             }
             else if (member.NameEquals(maxLevel.Name))
             {
-                maxLevel = maxLevel.From(member.Value);
+                maxLevel.Value = member.Value;
             }
             else if (member.NameEquals(defaultFloor.Name))
             {
-                defaultFloor = defaultFloor.From(member.Value);
+                defaultFloor.Value = member.Value;
             }
             else if (member.NameEquals(labelCoordinates.Name))
             {
-                labelCoordinates = labelCoordinates.From(member.Value);
+                labelCoordinates.Value = member.Value;
             }
             else if (member.NameEquals(mapRectangle.Name))
             {
-                mapRectangle = mapRectangle.From(member.Value);
+                mapRectangle.Value = member.Value;
             }
             else if (member.NameEquals(continentRectangle.Name))
             {
-                continentRectangle = continentRectangle.From(member.Value);
+                continentRectangle.Value = member.Value;
             }
             else if (member.NameEquals(pointsOfInterest.Name))
             {
-                pointsOfInterest = pointsOfInterest.From(member.Value);
+                pointsOfInterest.Value = member.Value;
             }
             else if (member.NameEquals(godShrines.Name))
             {
-                godShrines = godShrines.From(member.Value);
+                godShrines.Value = member.Value;
             }
             else if (member.NameEquals(tasks.Name))
             {
-                tasks = tasks.From(member.Value);
+                tasks.Value = member.Value;
             }
             else if (member.NameEquals(skillChallenges.Name))
             {
-                skillChallenges = skillChallenges.From(member.Value);
+                skillChallenges.Value = member.Value;
             }
             else if (member.NameEquals(sectors.Name))
             {
-                sectors = sectors.From(member.Value);
+                sectors.Value = member.Value;
             }
             else if (member.NameEquals(adventures.Name))
             {
-                adventures = adventures.From(member.Value);
+                adventures.Value = member.Value;
             }
             else if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(masteryPoints.Name))
             {
-                masteryPoints = masteryPoints.From(member.Value);
+                masteryPoints.Value = member.Value;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {
@@ -185,15 +185,15 @@ public static class MapReader
         {
             if (member.NameEquals(coordinates.Name))
             {
-                coordinates = coordinates.From(member.Value);
+                coordinates.Value = member.Value;
             }
             else if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(region.Name))
             {
-                region = region.From(member.Value);
+                region.Value = member.Value;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {
@@ -222,19 +222,19 @@ public static class MapReader
         {
             if (member.NameEquals(coordinates.Name))
             {
-                coordinates = coordinates.From(member.Value);
+                coordinates.Value = member.Value;
             }
             else if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(name.Name))
             {
-                name = name.From(member.Value);
+                name.Value = member.Value;
             }
             else if (member.NameEquals(description.Name))
             {
-                description = description.From(member.Value);
+                description.Value = member.Value;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {
@@ -285,11 +285,11 @@ public static class MapReader
         {
             if (member.NameEquals(coordinates.Name))
             {
-                coordinates = coordinates.From(member.Value);
+                coordinates.Value = member.Value;
             }
             else if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {
@@ -341,31 +341,31 @@ public static class MapReader
         {
             if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(name.Name))
             {
-                name = name.From(member.Value);
+                name.Value = member.Value;
             }
             else if (member.NameEquals(nameContested.Name))
             {
-                nameContested = nameContested.From(member.Value);
+                nameContested.Value = member.Value;
             }
             else if (member.NameEquals(pointOfInterestId.Name))
             {
-                pointOfInterestId = pointOfInterestId.From(member.Value);
+                pointOfInterestId.Value = member.Value;
             }
             else if (member.NameEquals(coordinates.Name))
             {
-                coordinates = coordinates.From(member.Value);
+                coordinates.Value = member.Value;
             }
             else if (member.NameEquals(icon.Name))
             {
-                icon = icon.From(member.Value);
+                icon.Value = member.Value;
             }
             else if (member.NameEquals(iconContested.Name))
             {
-                iconContested = iconContested.From(member.Value);
+                iconContested.Value = member.Value;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {

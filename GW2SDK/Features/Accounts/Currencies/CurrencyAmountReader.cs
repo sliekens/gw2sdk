@@ -20,11 +20,11 @@ public static class CurrencyAmountReader
         {
             if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(value.Name))
             {
-                value = value.From(member.Value);
+                value.Value = member.Value;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {

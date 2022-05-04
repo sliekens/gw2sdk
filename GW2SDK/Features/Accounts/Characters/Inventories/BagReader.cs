@@ -24,15 +24,15 @@ public static class BagReader
         {
             if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(size.Name))
             {
-                size = size.From(member.Value);
+                size.Value = member.Value;
             }
             else if (member.NameEquals(inventory.Name))
             {
-                inventory = inventory.From(member.Value);
+                inventory.Value = member.Value;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {

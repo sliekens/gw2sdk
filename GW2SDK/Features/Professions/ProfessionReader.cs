@@ -29,47 +29,47 @@ public static class ProfessionReader
         {
             if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(name.Name))
             {
-                name = name.From(member.Value);
+                name.Value = member.Value;
             }
             else if (member.NameEquals(code.Name))
             {
-                code = code.From(member.Value);
+                code.Value = member.Value;
             }
             else if (member.NameEquals(icon.Name))
             {
-                icon = icon.From(member.Value);
+                icon.Value = member.Value;
             }
             else if (member.NameEquals(iconBig.Name))
             {
-                iconBig = iconBig.From(member.Value);
+                iconBig.Value = member.Value;
             }
             else if (member.NameEquals(specializations.Name))
             {
-                specializations = specializations.From(member.Value);
+                specializations.Value = member.Value;
             }
             else if (member.NameEquals(weapons.Name))
             {
-                weapons = weapons.From(member.Value);
+                weapons.Value = member.Value;
             }
             else if (member.NameEquals(flags.Name))
             {
-                flags = flags.From(member.Value);
+                flags.Value = member.Value;
             }
             else if (member.NameEquals(skills.Name))
             {
-                skills = skills.From(member.Value);
+                skills.Value = member.Value;
             }
             else if (member.NameEquals(training.Name))
             {
-                training = training.From(member.Value);
+                training.Value = member.Value;
             }
             else if (member.NameEquals(skillsByPalette.Name))
             {
-                skillsByPalette = skillsByPalette.From(member.Value);
+                skillsByPalette.Value = member.Value;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {
@@ -141,19 +141,19 @@ public static class ProfessionReader
         {
             if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(category.Name))
             {
-                category = category.From(member.Value);
+                category.Value = member.Value;
             }
             else if (member.NameEquals(name.Name))
             {
-                name = name.From(member.Value);
+                name.Value = member.Value;
             }
             else if (member.NameEquals(track.Name))
             {
-                track = track.From(member.Value);
+                track.Value = member.Value;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {
@@ -197,7 +197,7 @@ public static class ProfessionReader
             }
             else if (member.NameEquals(cost.Name))
             {
-                cost = cost.From(member.Value);
+                cost.Value = member.Value;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {
@@ -228,11 +228,11 @@ public static class ProfessionReader
             }
             else if (member.NameEquals(cost.Name))
             {
-                cost = cost.From(member.Value);
+                cost.Value = member.Value;
             }
             else if (member.NameEquals(skillId.Name))
             {
-                skillId = skillId.From(member.Value);
+                skillId.Value = member.Value;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {
@@ -267,11 +267,11 @@ public static class ProfessionReader
             }
             else if (member.NameEquals(cost.Name))
             {
-                cost = cost.From(member.Value);
+                cost.Value = member.Value;
             }
             else if (member.NameEquals(traitId.Name))
             {
-                traitId = traitId.From(member.Value);
+                traitId.Value = member.Value;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {
@@ -319,11 +319,11 @@ public static class ProfessionReader
             }
             else if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(slot.Name))
             {
-                slot = slot.From(member.Value);
+                slot.Value = member.Value;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {
@@ -359,11 +359,11 @@ public static class ProfessionReader
             }
             else if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(slot.Name))
             {
-                slot = slot.From(member.Value);
+                slot.Value = member.Value;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {
@@ -399,11 +399,11 @@ public static class ProfessionReader
             }
             else if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(slot.Name))
             {
-                slot = slot.From(member.Value);
+                slot.Value = member.Value;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {
@@ -439,11 +439,11 @@ public static class ProfessionReader
             }
             else if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(slot.Name))
             {
-                slot = slot.From(member.Value);
+                slot.Value = member.Value;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {
@@ -481,19 +481,19 @@ public static class ProfessionReader
             }
             else if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(slot.Name))
             {
-                slot = slot.From(member.Value);
+                slot.Value = member.Value;
             }
             else if (member.NameEquals(source.Name))
             {
-                source = source.From(member.Value);
+                source.Value = member.Value;
             }
             else if (member.NameEquals(attunement.Name))
             {
-                attunement = attunement.From(member.Value);
+                attunement.Value = member.Value;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {
@@ -523,15 +523,15 @@ public static class ProfessionReader
         {
             if (member.NameEquals(specialization.Name))
             {
-                specialization = specialization.From(member.Value);
+                specialization.Value = member.Value;
             }
             else if (member.NameEquals(flags.Name))
             {
-                flags = flags.From(member.Value);
+                flags.Value = member.Value;
             }
             else if (member.NameEquals(skills.Name))
             {
-                skills = skills.From(member.Value);
+                skills.Value = member.Value;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {
@@ -561,19 +561,19 @@ public static class ProfessionReader
         {
             if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(slot.Name))
             {
-                slot = slot.From(member.Value);
+                slot.Value = member.Value;
             }
             else if (member.NameEquals(offhand.Name))
             {
-                offhand = offhand.From(member.Value);
+                offhand.Value = member.Value;
             }
             else if (member.NameEquals(attunement.Name))
             {
-                attunement = attunement.From(member.Value);
+                attunement.Value = member.Value;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {

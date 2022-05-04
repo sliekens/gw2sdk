@@ -24,31 +24,31 @@ public static class BackstoryAnswerReader
         {
             if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(title.Name))
             {
-                title = title.From(member.Value);
+                title.Value = member.Value;
             }
             else if (member.NameEquals(description.Name))
             {
-                description = description.From(member.Value);
+                description.Value = member.Value;
             }
             else if (member.NameEquals(journal.Name))
             {
-                journal = journal.From(member.Value);
+                journal.Value = member.Value;
             }
             else if (member.NameEquals(question.Name))
             {
-                question = question.From(member.Value);
+                question.Value = member.Value;
             }
             else if (member.NameEquals(professions.Name))
             {
-                professions = professions.From(member.Value);
+                professions.Value = member.Value;
             }
             else if (member.NameEquals(races.Name))
             {
-                races = races.From(member.Value);
+                races.Value = member.Value;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {

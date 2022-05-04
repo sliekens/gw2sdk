@@ -20,11 +20,11 @@ public static class QuagganReader
         {
             if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(url.Name))
             {
-                url = url.From(member.Value);
+                url.Value = member.Value;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {
