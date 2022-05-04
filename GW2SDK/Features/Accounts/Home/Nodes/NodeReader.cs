@@ -16,7 +16,7 @@ public static class NodeReader
         {
             if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {

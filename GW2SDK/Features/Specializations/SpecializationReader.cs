@@ -29,47 +29,47 @@ public static class SpecializationReader
         {
             if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(name.Name))
             {
-                name = name.From(member.Value);
+                name.Value = member.Value;
             }
             else if (member.NameEquals(profession.Name))
             {
-                profession = profession.From(member.Value);
+                profession.Value = member.Value;
             }
             else if (member.NameEquals(elite.Name))
             {
-                elite = elite.From(member.Value);
+                elite.Value = member.Value;
             }
             else if (member.NameEquals(minorTraits.Name))
             {
-                minorTraits = minorTraits.From(member.Value);
+                minorTraits.Value = member.Value;
             }
             else if (member.NameEquals(majorTraits.Name))
             {
-                majorTraits = majorTraits.From(member.Value);
+                majorTraits.Value = member.Value;
             }
             else if (member.NameEquals(weaponTrait.Name))
             {
-                weaponTrait = weaponTrait.From(member.Value);
+                weaponTrait.Value = member.Value;
             }
             else if (member.NameEquals(icon.Name))
             {
-                icon = icon.From(member.Value);
+                icon.Value = member.Value;
             }
             else if (member.NameEquals(background.Name))
             {
-                background = background.From(member.Value);
+                background.Value = member.Value;
             }
             else if (member.NameEquals(professionIconBig.Name))
             {
-                professionIconBig = professionIconBig.From(member.Value);
+                professionIconBig.Value = member.Value;
             }
             else if (member.NameEquals(professionIcon.Name))
             {
-                professionIcon = professionIcon.From(member.Value);
+                professionIcon.Value = member.Value;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {

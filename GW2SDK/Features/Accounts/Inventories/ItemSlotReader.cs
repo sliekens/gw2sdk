@@ -36,47 +36,47 @@ public static class ItemSlotReader
         {
             if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(count.Name))
             {
-                count = count.From(member.Value);
+                count.Value = member.Value;
             }
             else if (member.NameEquals(charges.Name))
             {
-                charges = charges.From(member.Value);
+                charges.Value = member.Value;
             }
             else if (member.NameEquals(skin.Name))
             {
-                skin = skin.From(member.Value);
+                skin.Value = member.Value;
             }
             else if (member.NameEquals(upgrades.Name))
             {
-                upgrades = upgrades.From(member.Value);
+                upgrades.Value = member.Value;
             }
             else if (member.NameEquals(upgradeSlotIndices.Name))
             {
-                upgradeSlotIndices = upgradeSlotIndices.From(member.Value);
+                upgradeSlotIndices.Value = member.Value;
             }
             else if (member.NameEquals(infusions.Name))
             {
-                infusions = infusions.From(member.Value);
+                infusions.Value = member.Value;
             }
             else if (member.NameEquals(dyes.Name))
             {
-                dyes = dyes.From(member.Value);
+                dyes.Value = member.Value;
             }
             else if (member.NameEquals(binding.Name))
             {
-                binding = binding.From(member.Value);
+                binding.Value = member.Value;
             }
             else if (member.NameEquals(boundTo.Name))
             {
-                boundTo = boundTo.From(member.Value);
+                boundTo.Value = member.Value;
             }
             else if (member.NameEquals(stats.Name))
             {
-                stats = stats.From(member.Value);
+                stats.Value = member.Value;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {

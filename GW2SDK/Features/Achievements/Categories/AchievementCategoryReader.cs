@@ -25,31 +25,31 @@ public static class AchievementCategoryReader
         {
             if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(name.Name))
             {
-                name = name.From(member.Value);
+                name.Value = member.Value;
             }
             else if (member.NameEquals(description.Name))
             {
-                description = description.From(member.Value);
+                description.Value = member.Value;
             }
             else if (member.NameEquals(order.Name))
             {
-                order = order.From(member.Value);
+                order.Value = member.Value;
             }
             else if (member.NameEquals(icon.Name))
             {
-                icon = icon.From(member.Value);
+                icon.Value = member.Value;
             }
             else if (member.NameEquals(achievements.Name))
             {
-                achievements = achievements.From(member.Value);
+                achievements.Value = member.Value;
             }
             else if (member.NameEquals(tomorrow.Name))
             {
-                tomorrow = tomorrow.From(member.Value);
+                tomorrow.Value = member.Value;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {
@@ -84,19 +84,19 @@ public static class AchievementCategoryReader
         {
             if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(requiredAccess.Name))
             {
-                requiredAccess = requiredAccess.From(member.Value);
+                requiredAccess.Value = member.Value;
             }
             else if (member.NameEquals(flags.Name))
             {
-                flags = flags.From(member.Value);
+                flags.Value = member.Value;
             }
             else if (member.NameEquals(level.Name))
             {
-                level = level.From(member.Value);
+                level.Value = member.Value;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {
@@ -128,11 +128,11 @@ public static class AchievementCategoryReader
         {
             if (member.NameEquals(product.Name))
             {
-                product = product.From(member.Value);
+                product.Value = member.Value;
             }
             else if (member.NameEquals(condition.Name))
             {
-                condition = condition.From(member.Value);
+                condition.Value = member.Value;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {

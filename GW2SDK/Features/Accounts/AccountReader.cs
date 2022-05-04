@@ -32,63 +32,63 @@ public static class AccountReader
         {
             if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(name.Name))
             {
-                name = name.From(member.Value);
+                name.Value = member.Value;
             }
             else if (member.NameEquals(age.Name))
             {
-                age = age.From(member.Value);
+                age.Value = member.Value;
             }
             else if (member.NameEquals(lastModified.Name))
             {
-                lastModified = lastModified.From(member.Value);
+                lastModified.Value = member.Value;
             }
             else if (member.NameEquals(world.Name))
             {
-                world = world.From(member.Value);
+                world.Value = member.Value;
             }
             else if (member.NameEquals(guilds.Name))
             {
-                guilds = guilds.From(member.Value);
+                guilds.Value = member.Value;
             }
             else if (member.NameEquals(guildLeader.Name))
             {
-                guildLeader = guildLeader.From(member.Value);
+                guildLeader.Value = member.Value;
             }
             else if (member.NameEquals(created.Name))
             {
-                created = created.From(member.Value);
+                created.Value = member.Value;
             }
             else if (member.NameEquals(access.Name))
             {
-                access = access.From(member.Value);
+                access.Value = member.Value;
             }
             else if (member.NameEquals(commander.Name))
             {
-                commander = commander.From(member.Value);
+                commander.Value = member.Value;
             }
             else if (member.NameEquals(fractalLevel.Name))
             {
-                fractalLevel = fractalLevel.From(member.Value);
+                fractalLevel.Value = member.Value;
             }
             else if (member.NameEquals(dailyAp.Name))
             {
-                dailyAp = dailyAp.From(member.Value);
+                dailyAp.Value = member.Value;
             }
             else if (member.NameEquals(monthlyAp.Name))
             {
-                monthlyAp = monthlyAp.From(member.Value);
+                monthlyAp.Value = member.Value;
             }
             else if (member.NameEquals(wvwRank.Name))
             {
-                wvwRank = wvwRank.From(member.Value);
+                wvwRank.Value = member.Value;
             }
             else if (member.NameEquals(buildStorageSlots.Name))
             {
-                buildStorageSlots = buildStorageSlots.From(member.Value);
+                buildStorageSlots.Value = member.Value;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {

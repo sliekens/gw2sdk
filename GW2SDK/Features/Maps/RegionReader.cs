@@ -24,23 +24,23 @@ public static class RegionReader
         {
             if (member.NameEquals(name.Name))
             {
-                name = name.From(member.Value);
+                name.Value = member.Value;
             }
             else if (member.NameEquals(labelCoordinates.Name))
             {
-                labelCoordinates = labelCoordinates.From(member.Value);
+                labelCoordinates.Value = member.Value;
             }
             else if (member.NameEquals(continentRectangle.Name))
             {
-                continentRectangle = continentRectangle.From(member.Value);
+                continentRectangle.Value = member.Value;
             }
             else if (member.NameEquals(maps.Name))
             {
-                maps = maps.From(member.Value);
+                maps.Value = member.Value;
             }
             else if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {

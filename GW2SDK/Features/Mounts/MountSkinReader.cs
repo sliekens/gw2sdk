@@ -23,23 +23,23 @@ public static class MountSkinReader
         {
             if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(name.Name))
             {
-                name = name.From(member.Value);
+                name.Value = member.Value;
             }
             else if (member.NameEquals(icon.Name))
             {
-                icon = icon.From(member.Value);
+                icon.Value = member.Value;
             }
             else if (member.NameEquals(dyeSlots.Name))
             {
-                dyeSlots = dyeSlots.From(member.Value);
+                dyeSlots.Value = member.Value;
             }
             else if (member.NameEquals(mount.Name))
             {
-                mount = mount.From(member.Value);
+                mount.Value = member.Value;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {
@@ -68,11 +68,11 @@ public static class MountSkinReader
         {
             if (member.NameEquals(colorId.Name))
             {
-                colorId = colorId.From(member.Value);
+                colorId.Value = member.Value;
             }
             else if (member.NameEquals(material.Name))
             {
-                material = material.From(member.Value);
+                material.Value = member.Value;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {

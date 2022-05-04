@@ -17,11 +17,11 @@ public static class DungeonReader
         {
             if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(paths.Name))
             {
-                paths = paths.From(member.Value);
+                paths.Value = member.Value;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {
@@ -48,11 +48,11 @@ public static class DungeonReader
         {
             if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(kind.Name))
             {
-                kind = kind.From(member.Value);
+                kind.Value = member.Value;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {

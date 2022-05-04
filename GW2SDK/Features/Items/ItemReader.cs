@@ -76,47 +76,47 @@ public static class ItemReader
             }
             else if (member.NameEquals(name.Name))
             {
-                name = name.From(member.Value);
+                name.Value = member.Value;
             }
             else if (member.NameEquals(description.Name))
             {
-                description = description.From(member.Value);
+                description.Value = member.Value;
             }
             else if (member.NameEquals(level.Name))
             {
-                level = level.From(member.Value);
+                level.Value = member.Value;
             }
             else if (member.NameEquals(rarity.Name))
             {
-                rarity = rarity.From(member.Value);
+                rarity.Value = member.Value;
             }
             else if (member.NameEquals(vendorValue.Name))
             {
-                vendorValue = vendorValue.From(member.Value);
+                vendorValue.Value = member.Value;
             }
             else if (member.NameEquals(gameTypes.Name))
             {
-                gameTypes = gameTypes.From(member.Value);
+                gameTypes.Value = member.Value;
             }
             else if (member.NameEquals(flags.Name))
             {
-                flags = flags.From(member.Value);
+                flags.Value = member.Value;
             }
             else if (member.NameEquals(restrictions.Name))
             {
-                restrictions = restrictions.From(member.Value);
+                restrictions.Value = member.Value;
             }
             else if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(chatLink.Name))
             {
-                chatLink = chatLink.From(member.Value);
+                chatLink.Value = member.Value;
             }
             else if (member.NameEquals(icon.Name))
             {
-                icon = icon.From(member.Value);
+                icon.Value = member.Value;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {
@@ -151,11 +151,11 @@ public static class ItemReader
         {
             if (member.NameEquals(upgrade.Name))
             {
-                upgrade = upgrade.From(member.Value);
+                upgrade.Value = member.Value;
             }
             else if (member.NameEquals(itemId.Name))
             {
-                itemId = itemId.From(member.Value);
+                itemId.Value = member.Value;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {
@@ -181,11 +181,11 @@ public static class ItemReader
         {
             if (member.NameEquals(flags.Name))
             {
-                flags = flags.From(member.Value);
+                flags.Value = member.Value;
             }
             else if (member.NameEquals(itemId.Name))
             {
-                itemId = itemId.From(member.Value);
+                itemId.Value = member.Value;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {
@@ -212,15 +212,15 @@ public static class ItemReader
         {
             if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(attributes.Name))
             {
-                attributes = attributes.From(member.Value);
+                attributes.Value = member.Value;
             }
             else if (member.NameEquals(buff.Name))
             {
-                buff = buff.From(member.Value);
+                buff.Value = member.Value;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {
@@ -245,11 +245,11 @@ public static class ItemReader
         {
             if (member.NameEquals(skillId.Name))
             {
-                skillId = skillId.From(member.Value);
+                skillId.Value = member.Value;
             }
             else if (member.NameEquals(description.Name))
             {
-                description = description.From(member.Value);
+                description.Value = member.Value;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {
@@ -275,11 +275,11 @@ public static class ItemReader
         {
             if (member.NameEquals(attribute.Name))
             {
-                attribute = attribute.From(member.Value);
+                attribute.Value = member.Value;
             }
             else if (member.NameEquals(modifier.Name))
             {
-                modifier = modifier.From(member.Value);
+                modifier.Value = member.Value;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {
@@ -346,51 +346,51 @@ public static class ItemReader
             }
             else if (member.NameEquals(name.Name))
             {
-                name = name.From(member.Value);
+                name.Value = member.Value;
             }
             else if (member.NameEquals(description.Name))
             {
-                description = description.From(member.Value);
+                description.Value = member.Value;
             }
             else if (member.NameEquals(level.Name))
             {
-                level = level.From(member.Value);
+                level.Value = member.Value;
             }
             else if (member.NameEquals(rarity.Name))
             {
-                rarity = rarity.From(member.Value);
+                rarity.Value = member.Value;
             }
             else if (member.NameEquals(vendorValue.Name))
             {
-                vendorValue = vendorValue.From(member.Value);
+                vendorValue.Value = member.Value;
             }
             else if (member.NameEquals(defaultSkin.Name))
             {
-                defaultSkin = defaultSkin.From(member.Value);
+                defaultSkin.Value = member.Value;
             }
             else if (member.NameEquals(gameTypes.Name))
             {
-                gameTypes = gameTypes.From(member.Value);
+                gameTypes.Value = member.Value;
             }
             else if (member.NameEquals(flags.Name))
             {
-                flags = flags.From(member.Value);
+                flags.Value = member.Value;
             }
             else if (member.NameEquals(restrictions.Name))
             {
-                restrictions = restrictions.From(member.Value);
+                restrictions.Value = member.Value;
             }
             else if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(chatLink.Name))
             {
-                chatLink = chatLink.From(member.Value);
+                chatLink.Value = member.Value;
             }
             else if (member.NameEquals(icon.Name))
             {
-                icon = icon.From(member.Value);
+                icon.Value = member.Value;
             }
             else if (member.NameEquals("details"))
             {
@@ -407,31 +407,31 @@ public static class ItemReader
                     }
                     else if (detail.NameEquals(weightClass.Name))
                     {
-                        weightClass = weightClass.From(detail.Value);
+                        weightClass.Value = detail.Value;
                     }
                     else if (detail.NameEquals(defense.Name))
                     {
-                        defense = defense.From(detail.Value);
+                        defense.Value = detail.Value;
                     }
                     else if (detail.NameEquals(infusionSlots.Name))
                     {
-                        infusionSlots = infusionSlots.From(detail.Value);
+                        infusionSlots.Value = detail.Value;
                     }
                     else if (detail.NameEquals(attributeAdjustment.Name))
                     {
-                        attributeAdjustment = attributeAdjustment.From(detail.Value);
+                        attributeAdjustment.Value = detail.Value;
                     }
                     else if (detail.NameEquals(infixUpgrade.Name))
                     {
-                        infixUpgrade = infixUpgrade.From(detail.Value);
+                        infixUpgrade.Value = detail.Value;
                     }
                     else if (detail.NameEquals(suffixItemId.Name))
                     {
-                        suffixItemId = suffixItemId.From(detail.Value);
+                        suffixItemId.Value = detail.Value;
                     }
                     else if (detail.NameEquals(statChoices.Name))
                     {
-                        statChoices = statChoices.From(detail.Value);
+                        statChoices.Value = detail.Value;
                     }
                     else if (missingMemberBehavior == MissingMemberBehavior.Error)
                     {
@@ -504,51 +504,51 @@ public static class ItemReader
             }
             else if (member.NameEquals(name.Name))
             {
-                name = name.From(member.Value);
+                name.Value = member.Value;
             }
             else if (member.NameEquals(description.Name))
             {
-                description = description.From(member.Value);
+                description.Value = member.Value;
             }
             else if (member.NameEquals(level.Name))
             {
-                level = level.From(member.Value);
+                level.Value = member.Value;
             }
             else if (member.NameEquals(rarity.Name))
             {
-                rarity = rarity.From(member.Value);
+                rarity.Value = member.Value;
             }
             else if (member.NameEquals(vendorValue.Name))
             {
-                vendorValue = vendorValue.From(member.Value);
+                vendorValue.Value = member.Value;
             }
             else if (member.NameEquals(defaultSkin.Name))
             {
-                defaultSkin = defaultSkin.From(member.Value);
+                defaultSkin.Value = member.Value;
             }
             else if (member.NameEquals(gameTypes.Name))
             {
-                gameTypes = gameTypes.From(member.Value);
+                gameTypes.Value = member.Value;
             }
             else if (member.NameEquals(flags.Name))
             {
-                flags = flags.From(member.Value);
+                flags.Value = member.Value;
             }
             else if (member.NameEquals(restrictions.Name))
             {
-                restrictions = restrictions.From(member.Value);
+                restrictions.Value = member.Value;
             }
             else if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(chatLink.Name))
             {
-                chatLink = chatLink.From(member.Value);
+                chatLink.Value = member.Value;
             }
             else if (member.NameEquals(icon.Name))
             {
-                icon = icon.From(member.Value);
+                icon.Value = member.Value;
             }
             else if (member.NameEquals("details"))
             {
@@ -565,31 +565,31 @@ public static class ItemReader
                     }
                     else if (detail.NameEquals(weightClass.Name))
                     {
-                        weightClass = weightClass.From(detail.Value);
+                        weightClass.Value = detail.Value;
                     }
                     else if (detail.NameEquals(defense.Name))
                     {
-                        defense = defense.From(detail.Value);
+                        defense.Value = detail.Value;
                     }
                     else if (detail.NameEquals(infusionSlots.Name))
                     {
-                        infusionSlots = infusionSlots.From(detail.Value);
+                        infusionSlots.Value = detail.Value;
                     }
                     else if (detail.NameEquals(attributeAdjustment.Name))
                     {
-                        attributeAdjustment = attributeAdjustment.From(detail.Value);
+                        attributeAdjustment.Value = detail.Value;
                     }
                     else if (detail.NameEquals(infixUpgrade.Name))
                     {
-                        infixUpgrade = infixUpgrade.From(detail.Value);
+                        infixUpgrade.Value = detail.Value;
                     }
                     else if (detail.NameEquals(suffixItemId.Name))
                     {
-                        suffixItemId = suffixItemId.From(detail.Value);
+                        suffixItemId.Value = detail.Value;
                     }
                     else if (detail.NameEquals(statChoices.Name))
                     {
-                        statChoices = statChoices.From(detail.Value);
+                        statChoices.Value = detail.Value;
                     }
                     else if (missingMemberBehavior == MissingMemberBehavior.Error)
                     {
@@ -662,51 +662,51 @@ public static class ItemReader
             }
             else if (member.NameEquals(name.Name))
             {
-                name = name.From(member.Value);
+                name.Value = member.Value;
             }
             else if (member.NameEquals(description.Name))
             {
-                description = description.From(member.Value);
+                description.Value = member.Value;
             }
             else if (member.NameEquals(level.Name))
             {
-                level = level.From(member.Value);
+                level.Value = member.Value;
             }
             else if (member.NameEquals(rarity.Name))
             {
-                rarity = rarity.From(member.Value);
+                rarity.Value = member.Value;
             }
             else if (member.NameEquals(vendorValue.Name))
             {
-                vendorValue = vendorValue.From(member.Value);
+                vendorValue.Value = member.Value;
             }
             else if (member.NameEquals(defaultSkin.Name))
             {
-                defaultSkin = defaultSkin.From(member.Value);
+                defaultSkin.Value = member.Value;
             }
             else if (member.NameEquals(gameTypes.Name))
             {
-                gameTypes = gameTypes.From(member.Value);
+                gameTypes.Value = member.Value;
             }
             else if (member.NameEquals(flags.Name))
             {
-                flags = flags.From(member.Value);
+                flags.Value = member.Value;
             }
             else if (member.NameEquals(restrictions.Name))
             {
-                restrictions = restrictions.From(member.Value);
+                restrictions.Value = member.Value;
             }
             else if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(chatLink.Name))
             {
-                chatLink = chatLink.From(member.Value);
+                chatLink.Value = member.Value;
             }
             else if (member.NameEquals(icon.Name))
             {
-                icon = icon.From(member.Value);
+                icon.Value = member.Value;
             }
             else if (member.NameEquals("details"))
             {
@@ -723,31 +723,31 @@ public static class ItemReader
                     }
                     else if (detail.NameEquals(weightClass.Name))
                     {
-                        weightClass = weightClass.From(detail.Value);
+                        weightClass.Value = detail.Value;
                     }
                     else if (detail.NameEquals(defense.Name))
                     {
-                        defense = defense.From(detail.Value);
+                        defense.Value = detail.Value;
                     }
                     else if (detail.NameEquals(infusionSlots.Name))
                     {
-                        infusionSlots = infusionSlots.From(detail.Value);
+                        infusionSlots.Value = detail.Value;
                     }
                     else if (detail.NameEquals(attributeAdjustment.Name))
                     {
-                        attributeAdjustment = attributeAdjustment.From(detail.Value);
+                        attributeAdjustment.Value = detail.Value;
                     }
                     else if (detail.NameEquals(infixUpgrade.Name))
                     {
-                        infixUpgrade = infixUpgrade.From(detail.Value);
+                        infixUpgrade.Value = detail.Value;
                     }
                     else if (detail.NameEquals(suffixItemId.Name))
                     {
-                        suffixItemId = suffixItemId.From(detail.Value);
+                        suffixItemId.Value = detail.Value;
                     }
                     else if (detail.NameEquals(statChoices.Name))
                     {
-                        statChoices = statChoices.From(detail.Value);
+                        statChoices.Value = detail.Value;
                     }
                     else if (missingMemberBehavior == MissingMemberBehavior.Error)
                     {
@@ -820,51 +820,51 @@ public static class ItemReader
             }
             else if (member.NameEquals(name.Name))
             {
-                name = name.From(member.Value);
+                name.Value = member.Value;
             }
             else if (member.NameEquals(description.Name))
             {
-                description = description.From(member.Value);
+                description.Value = member.Value;
             }
             else if (member.NameEquals(level.Name))
             {
-                level = level.From(member.Value);
+                level.Value = member.Value;
             }
             else if (member.NameEquals(rarity.Name))
             {
-                rarity = rarity.From(member.Value);
+                rarity.Value = member.Value;
             }
             else if (member.NameEquals(vendorValue.Name))
             {
-                vendorValue = vendorValue.From(member.Value);
+                vendorValue.Value = member.Value;
             }
             else if (member.NameEquals(defaultSkin.Name))
             {
-                defaultSkin = defaultSkin.From(member.Value);
+                defaultSkin.Value = member.Value;
             }
             else if (member.NameEquals(gameTypes.Name))
             {
-                gameTypes = gameTypes.From(member.Value);
+                gameTypes.Value = member.Value;
             }
             else if (member.NameEquals(flags.Name))
             {
-                flags = flags.From(member.Value);
+                flags.Value = member.Value;
             }
             else if (member.NameEquals(restrictions.Name))
             {
-                restrictions = restrictions.From(member.Value);
+                restrictions.Value = member.Value;
             }
             else if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(chatLink.Name))
             {
-                chatLink = chatLink.From(member.Value);
+                chatLink.Value = member.Value;
             }
             else if (member.NameEquals(icon.Name))
             {
-                icon = icon.From(member.Value);
+                icon.Value = member.Value;
             }
             else if (member.NameEquals("details"))
             {
@@ -881,31 +881,31 @@ public static class ItemReader
                     }
                     else if (detail.NameEquals(weightClass.Name))
                     {
-                        weightClass = weightClass.From(detail.Value);
+                        weightClass.Value = detail.Value;
                     }
                     else if (detail.NameEquals(defense.Name))
                     {
-                        defense = defense.From(detail.Value);
+                        defense.Value = detail.Value;
                     }
                     else if (detail.NameEquals(infusionSlots.Name))
                     {
-                        infusionSlots = infusionSlots.From(detail.Value);
+                        infusionSlots.Value = detail.Value;
                     }
                     else if (detail.NameEquals(attributeAdjustment.Name))
                     {
-                        attributeAdjustment = attributeAdjustment.From(detail.Value);
+                        attributeAdjustment.Value = detail.Value;
                     }
                     else if (detail.NameEquals(infixUpgrade.Name))
                     {
-                        infixUpgrade = infixUpgrade.From(detail.Value);
+                        infixUpgrade.Value = detail.Value;
                     }
                     else if (detail.NameEquals(suffixItemId.Name))
                     {
-                        suffixItemId = suffixItemId.From(detail.Value);
+                        suffixItemId.Value = detail.Value;
                     }
                     else if (detail.NameEquals(statChoices.Name))
                     {
-                        statChoices = statChoices.From(detail.Value);
+                        statChoices.Value = detail.Value;
                     }
                     else if (missingMemberBehavior == MissingMemberBehavior.Error)
                     {
@@ -978,51 +978,51 @@ public static class ItemReader
             }
             else if (member.NameEquals(name.Name))
             {
-                name = name.From(member.Value);
+                name.Value = member.Value;
             }
             else if (member.NameEquals(description.Name))
             {
-                description = description.From(member.Value);
+                description.Value = member.Value;
             }
             else if (member.NameEquals(level.Name))
             {
-                level = level.From(member.Value);
+                level.Value = member.Value;
             }
             else if (member.NameEquals(rarity.Name))
             {
-                rarity = rarity.From(member.Value);
+                rarity.Value = member.Value;
             }
             else if (member.NameEquals(vendorValue.Name))
             {
-                vendorValue = vendorValue.From(member.Value);
+                vendorValue.Value = member.Value;
             }
             else if (member.NameEquals(defaultSkin.Name))
             {
-                defaultSkin = defaultSkin.From(member.Value);
+                defaultSkin.Value = member.Value;
             }
             else if (member.NameEquals(gameTypes.Name))
             {
-                gameTypes = gameTypes.From(member.Value);
+                gameTypes.Value = member.Value;
             }
             else if (member.NameEquals(flags.Name))
             {
-                flags = flags.From(member.Value);
+                flags.Value = member.Value;
             }
             else if (member.NameEquals(restrictions.Name))
             {
-                restrictions = restrictions.From(member.Value);
+                restrictions.Value = member.Value;
             }
             else if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(chatLink.Name))
             {
-                chatLink = chatLink.From(member.Value);
+                chatLink.Value = member.Value;
             }
             else if (member.NameEquals(icon.Name))
             {
-                icon = icon.From(member.Value);
+                icon.Value = member.Value;
             }
             else if (member.NameEquals("details"))
             {
@@ -1039,31 +1039,31 @@ public static class ItemReader
                     }
                     else if (detail.NameEquals(weightClass.Name))
                     {
-                        weightClass = weightClass.From(detail.Value);
+                        weightClass.Value = detail.Value;
                     }
                     else if (detail.NameEquals(defense.Name))
                     {
-                        defense = defense.From(detail.Value);
+                        defense.Value = detail.Value;
                     }
                     else if (detail.NameEquals(infusionSlots.Name))
                     {
-                        infusionSlots = infusionSlots.From(detail.Value);
+                        infusionSlots.Value = detail.Value;
                     }
                     else if (detail.NameEquals(attributeAdjustment.Name))
                     {
-                        attributeAdjustment = attributeAdjustment.From(detail.Value);
+                        attributeAdjustment.Value = detail.Value;
                     }
                     else if (detail.NameEquals(infixUpgrade.Name))
                     {
-                        infixUpgrade = infixUpgrade.From(detail.Value);
+                        infixUpgrade.Value = detail.Value;
                     }
                     else if (detail.NameEquals(suffixItemId.Name))
                     {
-                        suffixItemId = suffixItemId.From(detail.Value);
+                        suffixItemId.Value = detail.Value;
                     }
                     else if (detail.NameEquals(statChoices.Name))
                     {
-                        statChoices = statChoices.From(detail.Value);
+                        statChoices.Value = detail.Value;
                     }
                     else if (missingMemberBehavior == MissingMemberBehavior.Error)
                     {
@@ -1139,51 +1139,51 @@ public static class ItemReader
             }
             else if (member.NameEquals(name.Name))
             {
-                name = name.From(member.Value);
+                name.Value = member.Value;
             }
             else if (member.NameEquals(description.Name))
             {
-                description = description.From(member.Value);
+                description.Value = member.Value;
             }
             else if (member.NameEquals(level.Name))
             {
-                level = level.From(member.Value);
+                level.Value = member.Value;
             }
             else if (member.NameEquals(rarity.Name))
             {
-                rarity = rarity.From(member.Value);
+                rarity.Value = member.Value;
             }
             else if (member.NameEquals(vendorValue.Name))
             {
-                vendorValue = vendorValue.From(member.Value);
+                vendorValue.Value = member.Value;
             }
             else if (member.NameEquals(defaultSkin.Name))
             {
-                defaultSkin = defaultSkin.From(member.Value);
+                defaultSkin.Value = member.Value;
             }
             else if (member.NameEquals(gameTypes.Name))
             {
-                gameTypes = gameTypes.From(member.Value);
+                gameTypes.Value = member.Value;
             }
             else if (member.NameEquals(flags.Name))
             {
-                flags = flags.From(member.Value);
+                flags.Value = member.Value;
             }
             else if (member.NameEquals(restrictions.Name))
             {
-                restrictions = restrictions.From(member.Value);
+                restrictions.Value = member.Value;
             }
             else if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(chatLink.Name))
             {
-                chatLink = chatLink.From(member.Value);
+                chatLink.Value = member.Value;
             }
             else if (member.NameEquals(icon.Name))
             {
-                icon = icon.From(member.Value);
+                icon.Value = member.Value;
             }
             else if (member.NameEquals("details"))
             {
@@ -1200,31 +1200,31 @@ public static class ItemReader
                     }
                     else if (detail.NameEquals(weightClass.Name))
                     {
-                        weightClass = weightClass.From(detail.Value);
+                        weightClass.Value = detail.Value;
                     }
                     else if (detail.NameEquals(defense.Name))
                     {
-                        defense = defense.From(detail.Value);
+                        defense.Value = detail.Value;
                     }
                     else if (detail.NameEquals(infusionSlots.Name))
                     {
-                        infusionSlots = infusionSlots.From(detail.Value);
+                        infusionSlots.Value = detail.Value;
                     }
                     else if (detail.NameEquals(attributeAdjustment.Name))
                     {
-                        attributeAdjustment = attributeAdjustment.From(detail.Value);
+                        attributeAdjustment.Value = detail.Value;
                     }
                     else if (detail.NameEquals(infixUpgrade.Name))
                     {
-                        infixUpgrade = infixUpgrade.From(detail.Value);
+                        infixUpgrade.Value = detail.Value;
                     }
                     else if (detail.NameEquals(suffixItemId.Name))
                     {
-                        suffixItemId = suffixItemId.From(detail.Value);
+                        suffixItemId.Value = detail.Value;
                     }
                     else if (detail.NameEquals(statChoices.Name))
                     {
-                        statChoices = statChoices.From(detail.Value);
+                        statChoices.Value = detail.Value;
                     }
                     else if (missingMemberBehavior == MissingMemberBehavior.Error)
                     {
@@ -1300,51 +1300,51 @@ public static class ItemReader
             }
             else if (member.NameEquals(name.Name))
             {
-                name = name.From(member.Value);
+                name.Value = member.Value;
             }
             else if (member.NameEquals(description.Name))
             {
-                description = description.From(member.Value);
+                description.Value = member.Value;
             }
             else if (member.NameEquals(level.Name))
             {
-                level = level.From(member.Value);
+                level.Value = member.Value;
             }
             else if (member.NameEquals(rarity.Name))
             {
-                rarity = rarity.From(member.Value);
+                rarity.Value = member.Value;
             }
             else if (member.NameEquals(vendorValue.Name))
             {
-                vendorValue = vendorValue.From(member.Value);
+                vendorValue.Value = member.Value;
             }
             else if (member.NameEquals(defaultSkin.Name))
             {
-                defaultSkin = defaultSkin.From(member.Value);
+                defaultSkin.Value = member.Value;
             }
             else if (member.NameEquals(gameTypes.Name))
             {
-                gameTypes = gameTypes.From(member.Value);
+                gameTypes.Value = member.Value;
             }
             else if (member.NameEquals(flags.Name))
             {
-                flags = flags.From(member.Value);
+                flags.Value = member.Value;
             }
             else if (member.NameEquals(restrictions.Name))
             {
-                restrictions = restrictions.From(member.Value);
+                restrictions.Value = member.Value;
             }
             else if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(chatLink.Name))
             {
-                chatLink = chatLink.From(member.Value);
+                chatLink.Value = member.Value;
             }
             else if (member.NameEquals(icon.Name))
             {
-                icon = icon.From(member.Value);
+                icon.Value = member.Value;
             }
             else if (member.NameEquals("details"))
             {
@@ -1361,31 +1361,31 @@ public static class ItemReader
                     }
                     else if (detail.NameEquals(weightClass.Name))
                     {
-                        weightClass = weightClass.From(detail.Value);
+                        weightClass.Value = detail.Value;
                     }
                     else if (detail.NameEquals(defense.Name))
                     {
-                        defense = defense.From(detail.Value);
+                        defense.Value = detail.Value;
                     }
                     else if (detail.NameEquals(infusionSlots.Name))
                     {
-                        infusionSlots = infusionSlots.From(detail.Value);
+                        infusionSlots.Value = detail.Value;
                     }
                     else if (detail.NameEquals(attributeAdjustment.Name))
                     {
-                        attributeAdjustment = attributeAdjustment.From(detail.Value);
+                        attributeAdjustment.Value = detail.Value;
                     }
                     else if (detail.NameEquals(infixUpgrade.Name))
                     {
-                        infixUpgrade = infixUpgrade.From(detail.Value);
+                        infixUpgrade.Value = detail.Value;
                     }
                     else if (detail.NameEquals(suffixItemId.Name))
                     {
-                        suffixItemId = suffixItemId.From(detail.Value);
+                        suffixItemId.Value = detail.Value;
                     }
                     else if (detail.NameEquals(statChoices.Name))
                     {
-                        statChoices = statChoices.From(detail.Value);
+                        statChoices.Value = detail.Value;
                     }
                     else if (missingMemberBehavior == MissingMemberBehavior.Error)
                     {
@@ -1461,51 +1461,51 @@ public static class ItemReader
             }
             else if (member.NameEquals(name.Name))
             {
-                name = name.From(member.Value);
+                name.Value = member.Value;
             }
             else if (member.NameEquals(description.Name))
             {
-                description = description.From(member.Value);
+                description.Value = member.Value;
             }
             else if (member.NameEquals(level.Name))
             {
-                level = level.From(member.Value);
+                level.Value = member.Value;
             }
             else if (member.NameEquals(rarity.Name))
             {
-                rarity = rarity.From(member.Value);
+                rarity.Value = member.Value;
             }
             else if (member.NameEquals(vendorValue.Name))
             {
-                vendorValue = vendorValue.From(member.Value);
+                vendorValue.Value = member.Value;
             }
             else if (member.NameEquals(defaultSkin.Name))
             {
-                defaultSkin = defaultSkin.From(member.Value);
+                defaultSkin.Value = member.Value;
             }
             else if (member.NameEquals(gameTypes.Name))
             {
-                gameTypes = gameTypes.From(member.Value);
+                gameTypes.Value = member.Value;
             }
             else if (member.NameEquals(flags.Name))
             {
-                flags = flags.From(member.Value);
+                flags.Value = member.Value;
             }
             else if (member.NameEquals(restrictions.Name))
             {
-                restrictions = restrictions.From(member.Value);
+                restrictions.Value = member.Value;
             }
             else if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(chatLink.Name))
             {
-                chatLink = chatLink.From(member.Value);
+                chatLink.Value = member.Value;
             }
             else if (member.NameEquals(icon.Name))
             {
-                icon = icon.From(member.Value);
+                icon.Value = member.Value;
             }
             else if (member.NameEquals("details"))
             {
@@ -1522,31 +1522,31 @@ public static class ItemReader
                     }
                     else if (detail.NameEquals(weightClass.Name))
                     {
-                        weightClass = weightClass.From(detail.Value);
+                        weightClass.Value = detail.Value;
                     }
                     else if (detail.NameEquals(defense.Name))
                     {
-                        defense = defense.From(detail.Value);
+                        defense.Value = detail.Value;
                     }
                     else if (detail.NameEquals(infusionSlots.Name))
                     {
-                        infusionSlots = infusionSlots.From(detail.Value);
+                        infusionSlots.Value = detail.Value;
                     }
                     else if (detail.NameEquals(attributeAdjustment.Name))
                     {
-                        attributeAdjustment = attributeAdjustment.From(detail.Value);
+                        attributeAdjustment.Value = detail.Value;
                     }
                     else if (detail.NameEquals(infixUpgrade.Name))
                     {
-                        infixUpgrade = infixUpgrade.From(detail.Value);
+                        infixUpgrade.Value = detail.Value;
                     }
                     else if (detail.NameEquals(suffixItemId.Name))
                     {
-                        suffixItemId = suffixItemId.From(detail.Value);
+                        suffixItemId.Value = detail.Value;
                     }
                     else if (detail.NameEquals(statChoices.Name))
                     {
-                        statChoices = statChoices.From(detail.Value);
+                        statChoices.Value = detail.Value;
                     }
                     else if (missingMemberBehavior == MissingMemberBehavior.Error)
                     {
@@ -1622,59 +1622,59 @@ public static class ItemReader
             }
             else if (member.NameEquals(name.Name))
             {
-                name = name.From(member.Value);
+                name.Value = member.Value;
             }
             else if (member.NameEquals(description.Name))
             {
-                description = description.From(member.Value);
+                description.Value = member.Value;
             }
             else if (member.NameEquals(level.Name))
             {
-                level = level.From(member.Value);
+                level.Value = member.Value;
             }
             else if (member.NameEquals(rarity.Name))
             {
-                rarity = rarity.From(member.Value);
+                rarity.Value = member.Value;
             }
             else if (member.NameEquals(vendorValue.Name))
             {
-                vendorValue = vendorValue.From(member.Value);
+                vendorValue.Value = member.Value;
             }
             else if (member.NameEquals(defaultSkin.Name))
             {
-                defaultSkin = defaultSkin.From(member.Value);
+                defaultSkin.Value = member.Value;
             }
             else if (member.NameEquals(gameTypes.Name))
             {
-                gameTypes = gameTypes.From(member.Value);
+                gameTypes.Value = member.Value;
             }
             else if (member.NameEquals(flags.Name))
             {
-                flags = flags.From(member.Value);
+                flags.Value = member.Value;
             }
             else if (member.NameEquals(restrictions.Name))
             {
-                restrictions = restrictions.From(member.Value);
+                restrictions.Value = member.Value;
             }
             else if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(chatLink.Name))
             {
-                chatLink = chatLink.From(member.Value);
+                chatLink.Value = member.Value;
             }
             else if (member.NameEquals(icon.Name))
             {
-                icon = icon.From(member.Value);
+                icon.Value = member.Value;
             }
             else if (member.NameEquals(upgradesInto.Name))
             {
-                upgradesInto = upgradesInto.From(member.Value);
+                upgradesInto.Value = member.Value;
             }
             else if (member.NameEquals(upgradesFrom.Name))
             {
-                upgradesFrom = upgradesFrom.From(member.Value);
+                upgradesFrom.Value = member.Value;
             }
             else if (member.NameEquals("details"))
             {
@@ -1682,23 +1682,23 @@ public static class ItemReader
                 {
                     if (detail.NameEquals(infusionSlots.Name))
                     {
-                        infusionSlots = infusionSlots.From(detail.Value);
+                        infusionSlots.Value = detail.Value;
                     }
                     else if (detail.NameEquals(attributeAdjustment.Name))
                     {
-                        attributeAdjustment = attributeAdjustment.From(detail.Value);
+                        attributeAdjustment.Value = detail.Value;
                     }
                     else if (detail.NameEquals(infixUpgrade.Name))
                     {
-                        infixUpgrade = infixUpgrade.From(detail.Value);
+                        infixUpgrade.Value = detail.Value;
                     }
                     else if (detail.NameEquals(suffixItemId.Name))
                     {
-                        suffixItemId = suffixItemId.From(detail.Value);
+                        suffixItemId.Value = detail.Value;
                     }
                     else if (detail.NameEquals(statChoices.Name))
                     {
-                        statChoices = statChoices.From(detail.Value);
+                        statChoices.Value = detail.Value;
                     }
                     else if (missingMemberBehavior == MissingMemberBehavior.Error)
                     {
@@ -1767,47 +1767,47 @@ public static class ItemReader
             }
             else if (member.NameEquals(name.Name))
             {
-                name = name.From(member.Value);
+                name.Value = member.Value;
             }
             else if (member.NameEquals(description.Name))
             {
-                description = description.From(member.Value);
+                description.Value = member.Value;
             }
             else if (member.NameEquals(level.Name))
             {
-                level = level.From(member.Value);
+                level.Value = member.Value;
             }
             else if (member.NameEquals(rarity.Name))
             {
-                rarity = rarity.From(member.Value);
+                rarity.Value = member.Value;
             }
             else if (member.NameEquals(vendorValue.Name))
             {
-                vendorValue = vendorValue.From(member.Value);
+                vendorValue.Value = member.Value;
             }
             else if (member.NameEquals(gameTypes.Name))
             {
-                gameTypes = gameTypes.From(member.Value);
+                gameTypes.Value = member.Value;
             }
             else if (member.NameEquals(flags.Name))
             {
-                flags = flags.From(member.Value);
+                flags.Value = member.Value;
             }
             else if (member.NameEquals(restrictions.Name))
             {
-                restrictions = restrictions.From(member.Value);
+                restrictions.Value = member.Value;
             }
             else if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(chatLink.Name))
             {
-                chatLink = chatLink.From(member.Value);
+                chatLink.Value = member.Value;
             }
             else if (member.NameEquals(icon.Name))
             {
-                icon = icon.From(member.Value);
+                icon.Value = member.Value;
             }
             else if (member.NameEquals("details"))
             {
@@ -1815,11 +1815,11 @@ public static class ItemReader
                 {
                     if (detail.NameEquals(noSellOrSort.Name))
                     {
-                        noSellOrSort = noSellOrSort.From(detail.Value);
+                        noSellOrSort.Value = detail.Value;
                     }
                     else if (detail.NameEquals(size.Name))
                     {
-                        size = size.From(detail.Value);
+                        size.Value = detail.Value;
                     }
                     else if (missingMemberBehavior == MissingMemberBehavior.Error)
                     {
@@ -1914,47 +1914,47 @@ public static class ItemReader
             }
             else if (member.NameEquals(name.Name))
             {
-                name = name.From(member.Value);
+                name.Value = member.Value;
             }
             else if (member.NameEquals(description.Name))
             {
-                description = description.From(member.Value);
+                description.Value = member.Value;
             }
             else if (member.NameEquals(level.Name))
             {
-                level = level.From(member.Value);
+                level.Value = member.Value;
             }
             else if (member.NameEquals(rarity.Name))
             {
-                rarity = rarity.From(member.Value);
+                rarity.Value = member.Value;
             }
             else if (member.NameEquals(vendorValue.Name))
             {
-                vendorValue = vendorValue.From(member.Value);
+                vendorValue.Value = member.Value;
             }
             else if (member.NameEquals(gameTypes.Name))
             {
-                gameTypes = gameTypes.From(member.Value);
+                gameTypes.Value = member.Value;
             }
             else if (member.NameEquals(flags.Name))
             {
-                flags = flags.From(member.Value);
+                flags.Value = member.Value;
             }
             else if (member.NameEquals(restrictions.Name))
             {
-                restrictions = restrictions.From(member.Value);
+                restrictions.Value = member.Value;
             }
             else if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(chatLink.Name))
             {
-                chatLink = chatLink.From(member.Value);
+                chatLink.Value = member.Value;
             }
             else if (member.NameEquals(icon.Name))
             {
-                icon = icon.From(member.Value);
+                icon.Value = member.Value;
             }
             else if (member.NameEquals("details"))
             {
@@ -2026,47 +2026,47 @@ public static class ItemReader
             }
             else if (member.NameEquals(name.Name))
             {
-                name = name.From(member.Value);
+                name.Value = member.Value;
             }
             else if (member.NameEquals(description.Name))
             {
-                description = description.From(member.Value);
+                description.Value = member.Value;
             }
             else if (member.NameEquals(level.Name))
             {
-                level = level.From(member.Value);
+                level.Value = member.Value;
             }
             else if (member.NameEquals(rarity.Name))
             {
-                rarity = rarity.From(member.Value);
+                rarity.Value = member.Value;
             }
             else if (member.NameEquals(vendorValue.Name))
             {
-                vendorValue = vendorValue.From(member.Value);
+                vendorValue.Value = member.Value;
             }
             else if (member.NameEquals(gameTypes.Name))
             {
-                gameTypes = gameTypes.From(member.Value);
+                gameTypes.Value = member.Value;
             }
             else if (member.NameEquals(flags.Name))
             {
-                flags = flags.From(member.Value);
+                flags.Value = member.Value;
             }
             else if (member.NameEquals(restrictions.Name))
             {
-                restrictions = restrictions.From(member.Value);
+                restrictions.Value = member.Value;
             }
             else if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(chatLink.Name))
             {
-                chatLink = chatLink.From(member.Value);
+                chatLink.Value = member.Value;
             }
             else if (member.NameEquals(icon.Name))
             {
-                icon = icon.From(member.Value);
+                icon.Value = member.Value;
             }
             else if (member.NameEquals("details"))
             {
@@ -2135,47 +2135,47 @@ public static class ItemReader
             }
             else if (member.NameEquals(name.Name))
             {
-                name = name.From(member.Value);
+                name.Value = member.Value;
             }
             else if (member.NameEquals(description.Name))
             {
-                description = description.From(member.Value);
+                description.Value = member.Value;
             }
             else if (member.NameEquals(level.Name))
             {
-                level = level.From(member.Value);
+                level.Value = member.Value;
             }
             else if (member.NameEquals(rarity.Name))
             {
-                rarity = rarity.From(member.Value);
+                rarity.Value = member.Value;
             }
             else if (member.NameEquals(vendorValue.Name))
             {
-                vendorValue = vendorValue.From(member.Value);
+                vendorValue.Value = member.Value;
             }
             else if (member.NameEquals(gameTypes.Name))
             {
-                gameTypes = gameTypes.From(member.Value);
+                gameTypes.Value = member.Value;
             }
             else if (member.NameEquals(flags.Name))
             {
-                flags = flags.From(member.Value);
+                flags.Value = member.Value;
             }
             else if (member.NameEquals(restrictions.Name))
             {
-                restrictions = restrictions.From(member.Value);
+                restrictions.Value = member.Value;
             }
             else if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(chatLink.Name))
             {
-                chatLink = chatLink.From(member.Value);
+                chatLink.Value = member.Value;
             }
             else if (member.NameEquals(icon.Name))
             {
-                icon = icon.From(member.Value);
+                icon.Value = member.Value;
             }
             else if (member.NameEquals("details"))
             {
@@ -2247,47 +2247,47 @@ public static class ItemReader
             }
             else if (member.NameEquals(name.Name))
             {
-                name = name.From(member.Value);
+                name.Value = member.Value;
             }
             else if (member.NameEquals(description.Name))
             {
-                description = description.From(member.Value);
+                description.Value = member.Value;
             }
             else if (member.NameEquals(level.Name))
             {
-                level = level.From(member.Value);
+                level.Value = member.Value;
             }
             else if (member.NameEquals(rarity.Name))
             {
-                rarity = rarity.From(member.Value);
+                rarity.Value = member.Value;
             }
             else if (member.NameEquals(vendorValue.Name))
             {
-                vendorValue = vendorValue.From(member.Value);
+                vendorValue.Value = member.Value;
             }
             else if (member.NameEquals(gameTypes.Name))
             {
-                gameTypes = gameTypes.From(member.Value);
+                gameTypes.Value = member.Value;
             }
             else if (member.NameEquals(flags.Name))
             {
-                flags = flags.From(member.Value);
+                flags.Value = member.Value;
             }
             else if (member.NameEquals(restrictions.Name))
             {
-                restrictions = restrictions.From(member.Value);
+                restrictions.Value = member.Value;
             }
             else if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(chatLink.Name))
             {
-                chatLink = chatLink.From(member.Value);
+                chatLink.Value = member.Value;
             }
             else if (member.NameEquals(icon.Name))
             {
-                icon = icon.From(member.Value);
+                icon.Value = member.Value;
             }
             else if (member.NameEquals("details"))
             {
@@ -2359,47 +2359,47 @@ public static class ItemReader
             }
             else if (member.NameEquals(name.Name))
             {
-                name = name.From(member.Value);
+                name.Value = member.Value;
             }
             else if (member.NameEquals(description.Name))
             {
-                description = description.From(member.Value);
+                description.Value = member.Value;
             }
             else if (member.NameEquals(level.Name))
             {
-                level = level.From(member.Value);
+                level.Value = member.Value;
             }
             else if (member.NameEquals(rarity.Name))
             {
-                rarity = rarity.From(member.Value);
+                rarity.Value = member.Value;
             }
             else if (member.NameEquals(vendorValue.Name))
             {
-                vendorValue = vendorValue.From(member.Value);
+                vendorValue.Value = member.Value;
             }
             else if (member.NameEquals(gameTypes.Name))
             {
-                gameTypes = gameTypes.From(member.Value);
+                gameTypes.Value = member.Value;
             }
             else if (member.NameEquals(flags.Name))
             {
-                flags = flags.From(member.Value);
+                flags.Value = member.Value;
             }
             else if (member.NameEquals(restrictions.Name))
             {
-                restrictions = restrictions.From(member.Value);
+                restrictions.Value = member.Value;
             }
             else if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(chatLink.Name))
             {
-                chatLink = chatLink.From(member.Value);
+                chatLink.Value = member.Value;
             }
             else if (member.NameEquals(icon.Name))
             {
-                icon = icon.From(member.Value);
+                icon.Value = member.Value;
             }
             else if (member.NameEquals("details"))
             {
@@ -2473,47 +2473,47 @@ public static class ItemReader
             }
             else if (member.NameEquals(name.Name))
             {
-                name = name.From(member.Value);
+                name.Value = member.Value;
             }
             else if (member.NameEquals(description.Name))
             {
-                description = description.From(member.Value);
+                description.Value = member.Value;
             }
             else if (member.NameEquals(level.Name))
             {
-                level = level.From(member.Value);
+                level.Value = member.Value;
             }
             else if (member.NameEquals(rarity.Name))
             {
-                rarity = rarity.From(member.Value);
+                rarity.Value = member.Value;
             }
             else if (member.NameEquals(vendorValue.Name))
             {
-                vendorValue = vendorValue.From(member.Value);
+                vendorValue.Value = member.Value;
             }
             else if (member.NameEquals(gameTypes.Name))
             {
-                gameTypes = gameTypes.From(member.Value);
+                gameTypes.Value = member.Value;
             }
             else if (member.NameEquals(flags.Name))
             {
-                flags = flags.From(member.Value);
+                flags.Value = member.Value;
             }
             else if (member.NameEquals(restrictions.Name))
             {
-                restrictions = restrictions.From(member.Value);
+                restrictions.Value = member.Value;
             }
             else if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(chatLink.Name))
             {
-                chatLink = chatLink.From(member.Value);
+                chatLink.Value = member.Value;
             }
             else if (member.NameEquals(icon.Name))
             {
-                icon = icon.From(member.Value);
+                icon.Value = member.Value;
             }
             else if (member.NameEquals("details"))
             {
@@ -2530,23 +2530,23 @@ public static class ItemReader
                     }
                     else if (detail.NameEquals(duration.Name))
                     {
-                        duration = duration.From(detail.Value);
+                        duration.Value = detail.Value;
                     }
                     else if (detail.NameEquals(applyCount.Name))
                     {
-                        applyCount = applyCount.From(detail.Value);
+                        applyCount.Value = detail.Value;
                     }
                     else if (detail.NameEquals(effectName.Name))
                     {
-                        effectName = effectName.From(detail.Value);
+                        effectName.Value = detail.Value;
                     }
                     else if (detail.NameEquals(effectIcon.Name))
                     {
-                        effectIcon = effectIcon.From(detail.Value);
+                        effectIcon.Value = detail.Value;
                     }
                     else if (detail.NameEquals(effectDescription.Name))
                     {
-                        effectDescription = effectDescription.From(detail.Value);
+                        effectDescription.Value = detail.Value;
                     }
                     else if (missingMemberBehavior == MissingMemberBehavior.Error)
                     {
@@ -2616,47 +2616,47 @@ public static class ItemReader
             }
             else if (member.NameEquals(name.Name))
             {
-                name = name.From(member.Value);
+                name.Value = member.Value;
             }
             else if (member.NameEquals(description.Name))
             {
-                description = description.From(member.Value);
+                description.Value = member.Value;
             }
             else if (member.NameEquals(level.Name))
             {
-                level = level.From(member.Value);
+                level.Value = member.Value;
             }
             else if (member.NameEquals(rarity.Name))
             {
-                rarity = rarity.From(member.Value);
+                rarity.Value = member.Value;
             }
             else if (member.NameEquals(vendorValue.Name))
             {
-                vendorValue = vendorValue.From(member.Value);
+                vendorValue.Value = member.Value;
             }
             else if (member.NameEquals(gameTypes.Name))
             {
-                gameTypes = gameTypes.From(member.Value);
+                gameTypes.Value = member.Value;
             }
             else if (member.NameEquals(flags.Name))
             {
-                flags = flags.From(member.Value);
+                flags.Value = member.Value;
             }
             else if (member.NameEquals(restrictions.Name))
             {
-                restrictions = restrictions.From(member.Value);
+                restrictions.Value = member.Value;
             }
             else if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(chatLink.Name))
             {
-                chatLink = chatLink.From(member.Value);
+                chatLink.Value = member.Value;
             }
             else if (member.NameEquals(icon.Name))
             {
-                icon = icon.From(member.Value);
+                icon.Value = member.Value;
             }
             else if (member.NameEquals("details"))
             {
@@ -2673,27 +2673,27 @@ public static class ItemReader
                     }
                     else if (detail.NameEquals(duration.Name))
                     {
-                        duration = duration.From(detail.Value);
+                        duration.Value = detail.Value;
                     }
                     else if (detail.NameEquals(applyCount.Name))
                     {
-                        applyCount = applyCount.From(detail.Value);
+                        applyCount.Value = detail.Value;
                     }
                     else if (detail.NameEquals(effectName.Name))
                     {
-                        effectName = effectName.From(detail.Value);
+                        effectName.Value = detail.Value;
                     }
                     else if (detail.NameEquals(effectIcon.Name))
                     {
-                        effectIcon = effectIcon.From(detail.Value);
+                        effectIcon.Value = detail.Value;
                     }
                     else if (detail.NameEquals(effectDescription.Name))
                     {
-                        effectDescription = effectDescription.From(detail.Value);
+                        effectDescription.Value = detail.Value;
                     }
                     else if (detail.NameEquals(guildUpgradeId.Name))
                     {
-                        guildUpgradeId = guildUpgradeId.From(detail.Value);
+                        guildUpgradeId.Value = detail.Value;
                     }
                     else if (missingMemberBehavior == MissingMemberBehavior.Error)
                     {
@@ -2758,47 +2758,47 @@ public static class ItemReader
             }
             else if (member.NameEquals(name.Name))
             {
-                name = name.From(member.Value);
+                name.Value = member.Value;
             }
             else if (member.NameEquals(description.Name))
             {
-                description = description.From(member.Value);
+                description.Value = member.Value;
             }
             else if (member.NameEquals(level.Name))
             {
-                level = level.From(member.Value);
+                level.Value = member.Value;
             }
             else if (member.NameEquals(rarity.Name))
             {
-                rarity = rarity.From(member.Value);
+                rarity.Value = member.Value;
             }
             else if (member.NameEquals(vendorValue.Name))
             {
-                vendorValue = vendorValue.From(member.Value);
+                vendorValue.Value = member.Value;
             }
             else if (member.NameEquals(gameTypes.Name))
             {
-                gameTypes = gameTypes.From(member.Value);
+                gameTypes.Value = member.Value;
             }
             else if (member.NameEquals(flags.Name))
             {
-                flags = flags.From(member.Value);
+                flags.Value = member.Value;
             }
             else if (member.NameEquals(restrictions.Name))
             {
-                restrictions = restrictions.From(member.Value);
+                restrictions.Value = member.Value;
             }
             else if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(chatLink.Name))
             {
-                chatLink = chatLink.From(member.Value);
+                chatLink.Value = member.Value;
             }
             else if (member.NameEquals(icon.Name))
             {
-                icon = icon.From(member.Value);
+                icon.Value = member.Value;
             }
             else if (member.NameEquals("details"))
             {
@@ -2876,47 +2876,47 @@ public static class ItemReader
             }
             else if (member.NameEquals(name.Name))
             {
-                name = name.From(member.Value);
+                name.Value = member.Value;
             }
             else if (member.NameEquals(description.Name))
             {
-                description = description.From(member.Value);
+                description.Value = member.Value;
             }
             else if (member.NameEquals(level.Name))
             {
-                level = level.From(member.Value);
+                level.Value = member.Value;
             }
             else if (member.NameEquals(rarity.Name))
             {
-                rarity = rarity.From(member.Value);
+                rarity.Value = member.Value;
             }
             else if (member.NameEquals(vendorValue.Name))
             {
-                vendorValue = vendorValue.From(member.Value);
+                vendorValue.Value = member.Value;
             }
             else if (member.NameEquals(gameTypes.Name))
             {
-                gameTypes = gameTypes.From(member.Value);
+                gameTypes.Value = member.Value;
             }
             else if (member.NameEquals(flags.Name))
             {
-                flags = flags.From(member.Value);
+                flags.Value = member.Value;
             }
             else if (member.NameEquals(restrictions.Name))
             {
-                restrictions = restrictions.From(member.Value);
+                restrictions.Value = member.Value;
             }
             else if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(chatLink.Name))
             {
-                chatLink = chatLink.From(member.Value);
+                chatLink.Value = member.Value;
             }
             else if (member.NameEquals(icon.Name))
             {
-                icon = icon.From(member.Value);
+                icon.Value = member.Value;
             }
             else if (member.NameEquals("details"))
             {
@@ -2933,27 +2933,27 @@ public static class ItemReader
                     }
                     else if (detail.NameEquals(duration.Name))
                     {
-                        duration = duration.From(detail.Value);
+                        duration.Value = detail.Value;
                     }
                     else if (detail.NameEquals(applyCount.Name))
                     {
-                        applyCount = applyCount.From(detail.Value);
+                        applyCount.Value = detail.Value;
                     }
                     else if (detail.NameEquals(effectName.Name))
                     {
-                        effectName = effectName.From(detail.Value);
+                        effectName.Value = detail.Value;
                     }
                     else if (detail.NameEquals(effectIcon.Name))
                     {
-                        effectIcon = effectIcon.From(detail.Value);
+                        effectIcon.Value = detail.Value;
                     }
                     else if (detail.NameEquals(effectDescription.Name))
                     {
-                        effectDescription = effectDescription.From(detail.Value);
+                        effectDescription.Value = detail.Value;
                     }
                     else if (detail.NameEquals(guildUpgradeId.Name))
                     {
-                        guildUpgradeId = guildUpgradeId.From(detail.Value);
+                        guildUpgradeId.Value = detail.Value;
                     }
                     else if (missingMemberBehavior == MissingMemberBehavior.Error)
                     {
@@ -3018,47 +3018,47 @@ public static class ItemReader
             }
             else if (member.NameEquals(name.Name))
             {
-                name = name.From(member.Value);
+                name.Value = member.Value;
             }
             else if (member.NameEquals(description.Name))
             {
-                description = description.From(member.Value);
+                description.Value = member.Value;
             }
             else if (member.NameEquals(level.Name))
             {
-                level = level.From(member.Value);
+                level.Value = member.Value;
             }
             else if (member.NameEquals(rarity.Name))
             {
-                rarity = rarity.From(member.Value);
+                rarity.Value = member.Value;
             }
             else if (member.NameEquals(vendorValue.Name))
             {
-                vendorValue = vendorValue.From(member.Value);
+                vendorValue.Value = member.Value;
             }
             else if (member.NameEquals(gameTypes.Name))
             {
-                gameTypes = gameTypes.From(member.Value);
+                gameTypes.Value = member.Value;
             }
             else if (member.NameEquals(flags.Name))
             {
-                flags = flags.From(member.Value);
+                flags.Value = member.Value;
             }
             else if (member.NameEquals(restrictions.Name))
             {
-                restrictions = restrictions.From(member.Value);
+                restrictions.Value = member.Value;
             }
             else if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(chatLink.Name))
             {
-                chatLink = chatLink.From(member.Value);
+                chatLink.Value = member.Value;
             }
             else if (member.NameEquals(icon.Name))
             {
-                icon = icon.From(member.Value);
+                icon.Value = member.Value;
             }
             else if (member.NameEquals("details"))
             {
@@ -3130,47 +3130,47 @@ public static class ItemReader
             }
             else if (member.NameEquals(name.Name))
             {
-                name = name.From(member.Value);
+                name.Value = member.Value;
             }
             else if (member.NameEquals(description.Name))
             {
-                description = description.From(member.Value);
+                description.Value = member.Value;
             }
             else if (member.NameEquals(level.Name))
             {
-                level = level.From(member.Value);
+                level.Value = member.Value;
             }
             else if (member.NameEquals(rarity.Name))
             {
-                rarity = rarity.From(member.Value);
+                rarity.Value = member.Value;
             }
             else if (member.NameEquals(vendorValue.Name))
             {
-                vendorValue = vendorValue.From(member.Value);
+                vendorValue.Value = member.Value;
             }
             else if (member.NameEquals(gameTypes.Name))
             {
-                gameTypes = gameTypes.From(member.Value);
+                gameTypes.Value = member.Value;
             }
             else if (member.NameEquals(flags.Name))
             {
-                flags = flags.From(member.Value);
+                flags.Value = member.Value;
             }
             else if (member.NameEquals(restrictions.Name))
             {
-                restrictions = restrictions.From(member.Value);
+                restrictions.Value = member.Value;
             }
             else if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(chatLink.Name))
             {
-                chatLink = chatLink.From(member.Value);
+                chatLink.Value = member.Value;
             }
             else if (member.NameEquals(icon.Name))
             {
-                icon = icon.From(member.Value);
+                icon.Value = member.Value;
             }
             else if (member.NameEquals("details"))
             {
@@ -3242,47 +3242,47 @@ public static class ItemReader
             }
             else if (member.NameEquals(name.Name))
             {
-                name = name.From(member.Value);
+                name.Value = member.Value;
             }
             else if (member.NameEquals(description.Name))
             {
-                description = description.From(member.Value);
+                description.Value = member.Value;
             }
             else if (member.NameEquals(level.Name))
             {
-                level = level.From(member.Value);
+                level.Value = member.Value;
             }
             else if (member.NameEquals(rarity.Name))
             {
-                rarity = rarity.From(member.Value);
+                rarity.Value = member.Value;
             }
             else if (member.NameEquals(vendorValue.Name))
             {
-                vendorValue = vendorValue.From(member.Value);
+                vendorValue.Value = member.Value;
             }
             else if (member.NameEquals(gameTypes.Name))
             {
-                gameTypes = gameTypes.From(member.Value);
+                gameTypes.Value = member.Value;
             }
             else if (member.NameEquals(flags.Name))
             {
-                flags = flags.From(member.Value);
+                flags.Value = member.Value;
             }
             else if (member.NameEquals(restrictions.Name))
             {
-                restrictions = restrictions.From(member.Value);
+                restrictions.Value = member.Value;
             }
             else if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(chatLink.Name))
             {
-                chatLink = chatLink.From(member.Value);
+                chatLink.Value = member.Value;
             }
             else if (member.NameEquals(icon.Name))
             {
-                icon = icon.From(member.Value);
+                icon.Value = member.Value;
             }
             else if (member.NameEquals("details"))
             {
@@ -3355,47 +3355,47 @@ public static class ItemReader
             }
             else if (member.NameEquals(name.Name))
             {
-                name = name.From(member.Value);
+                name.Value = member.Value;
             }
             else if (member.NameEquals(description.Name))
             {
-                description = description.From(member.Value);
+                description.Value = member.Value;
             }
             else if (member.NameEquals(level.Name))
             {
-                level = level.From(member.Value);
+                level.Value = member.Value;
             }
             else if (member.NameEquals(rarity.Name))
             {
-                rarity = rarity.From(member.Value);
+                rarity.Value = member.Value;
             }
             else if (member.NameEquals(vendorValue.Name))
             {
-                vendorValue = vendorValue.From(member.Value);
+                vendorValue.Value = member.Value;
             }
             else if (member.NameEquals(gameTypes.Name))
             {
-                gameTypes = gameTypes.From(member.Value);
+                gameTypes.Value = member.Value;
             }
             else if (member.NameEquals(flags.Name))
             {
-                flags = flags.From(member.Value);
+                flags.Value = member.Value;
             }
             else if (member.NameEquals(restrictions.Name))
             {
-                restrictions = restrictions.From(member.Value);
+                restrictions.Value = member.Value;
             }
             else if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(chatLink.Name))
             {
-                chatLink = chatLink.From(member.Value);
+                chatLink.Value = member.Value;
             }
             else if (member.NameEquals(icon.Name))
             {
-                icon = icon.From(member.Value);
+                icon.Value = member.Value;
             }
             else if (member.NameEquals("details"))
             {
@@ -3412,7 +3412,7 @@ public static class ItemReader
                     }
                     else if (detail.NameEquals(skins.Name))
                     {
-                        skins = skins.From(detail.Value);
+                        skins.Value = detail.Value;
                     }
                     else if (missingMemberBehavior == MissingMemberBehavior.Error)
                     {
@@ -3506,47 +3506,47 @@ public static class ItemReader
             }
             else if (member.NameEquals(name.Name))
             {
-                name = name.From(member.Value);
+                name.Value = member.Value;
             }
             else if (member.NameEquals(description.Name))
             {
-                description = description.From(member.Value);
+                description.Value = member.Value;
             }
             else if (member.NameEquals(level.Name))
             {
-                level = level.From(member.Value);
+                level.Value = member.Value;
             }
             else if (member.NameEquals(rarity.Name))
             {
-                rarity = rarity.From(member.Value);
+                rarity.Value = member.Value;
             }
             else if (member.NameEquals(vendorValue.Name))
             {
-                vendorValue = vendorValue.From(member.Value);
+                vendorValue.Value = member.Value;
             }
             else if (member.NameEquals(gameTypes.Name))
             {
-                gameTypes = gameTypes.From(member.Value);
+                gameTypes.Value = member.Value;
             }
             else if (member.NameEquals(flags.Name))
             {
-                flags = flags.From(member.Value);
+                flags.Value = member.Value;
             }
             else if (member.NameEquals(restrictions.Name))
             {
-                restrictions = restrictions.From(member.Value);
+                restrictions.Value = member.Value;
             }
             else if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(chatLink.Name))
             {
-                chatLink = chatLink.From(member.Value);
+                chatLink.Value = member.Value;
             }
             else if (member.NameEquals(icon.Name))
             {
-                icon = icon.From(member.Value);
+                icon.Value = member.Value;
             }
             else if (member.NameEquals("details"))
             {
@@ -3627,47 +3627,47 @@ public static class ItemReader
             }
             else if (member.NameEquals(name.Name))
             {
-                name = name.From(member.Value);
+                name.Value = member.Value;
             }
             else if (member.NameEquals(description.Name))
             {
-                description = description.From(member.Value);
+                description.Value = member.Value;
             }
             else if (member.NameEquals(level.Name))
             {
-                level = level.From(member.Value);
+                level.Value = member.Value;
             }
             else if (member.NameEquals(rarity.Name))
             {
-                rarity = rarity.From(member.Value);
+                rarity.Value = member.Value;
             }
             else if (member.NameEquals(vendorValue.Name))
             {
-                vendorValue = vendorValue.From(member.Value);
+                vendorValue.Value = member.Value;
             }
             else if (member.NameEquals(gameTypes.Name))
             {
-                gameTypes = gameTypes.From(member.Value);
+                gameTypes.Value = member.Value;
             }
             else if (member.NameEquals(flags.Name))
             {
-                flags = flags.From(member.Value);
+                flags.Value = member.Value;
             }
             else if (member.NameEquals(restrictions.Name))
             {
-                restrictions = restrictions.From(member.Value);
+                restrictions.Value = member.Value;
             }
             else if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(chatLink.Name))
             {
-                chatLink = chatLink.From(member.Value);
+                chatLink.Value = member.Value;
             }
             else if (member.NameEquals(icon.Name))
             {
-                icon = icon.From(member.Value);
+                icon.Value = member.Value;
             }
             else if (member.NameEquals("details"))
             {
@@ -3748,47 +3748,47 @@ public static class ItemReader
             }
             else if (member.NameEquals(name.Name))
             {
-                name = name.From(member.Value);
+                name.Value = member.Value;
             }
             else if (member.NameEquals(description.Name))
             {
-                description = description.From(member.Value);
+                description.Value = member.Value;
             }
             else if (member.NameEquals(level.Name))
             {
-                level = level.From(member.Value);
+                level.Value = member.Value;
             }
             else if (member.NameEquals(rarity.Name))
             {
-                rarity = rarity.From(member.Value);
+                rarity.Value = member.Value;
             }
             else if (member.NameEquals(vendorValue.Name))
             {
-                vendorValue = vendorValue.From(member.Value);
+                vendorValue.Value = member.Value;
             }
             else if (member.NameEquals(gameTypes.Name))
             {
-                gameTypes = gameTypes.From(member.Value);
+                gameTypes.Value = member.Value;
             }
             else if (member.NameEquals(flags.Name))
             {
-                flags = flags.From(member.Value);
+                flags.Value = member.Value;
             }
             else if (member.NameEquals(restrictions.Name))
             {
-                restrictions = restrictions.From(member.Value);
+                restrictions.Value = member.Value;
             }
             else if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(chatLink.Name))
             {
-                chatLink = chatLink.From(member.Value);
+                chatLink.Value = member.Value;
             }
             else if (member.NameEquals(icon.Name))
             {
-                icon = icon.From(member.Value);
+                icon.Value = member.Value;
             }
             else if (member.NameEquals("details"))
             {
@@ -3869,47 +3869,47 @@ public static class ItemReader
             }
             else if (member.NameEquals(name.Name))
             {
-                name = name.From(member.Value);
+                name.Value = member.Value;
             }
             else if (member.NameEquals(description.Name))
             {
-                description = description.From(member.Value);
+                description.Value = member.Value;
             }
             else if (member.NameEquals(level.Name))
             {
-                level = level.From(member.Value);
+                level.Value = member.Value;
             }
             else if (member.NameEquals(rarity.Name))
             {
-                rarity = rarity.From(member.Value);
+                rarity.Value = member.Value;
             }
             else if (member.NameEquals(vendorValue.Name))
             {
-                vendorValue = vendorValue.From(member.Value);
+                vendorValue.Value = member.Value;
             }
             else if (member.NameEquals(gameTypes.Name))
             {
-                gameTypes = gameTypes.From(member.Value);
+                gameTypes.Value = member.Value;
             }
             else if (member.NameEquals(flags.Name))
             {
-                flags = flags.From(member.Value);
+                flags.Value = member.Value;
             }
             else if (member.NameEquals(restrictions.Name))
             {
-                restrictions = restrictions.From(member.Value);
+                restrictions.Value = member.Value;
             }
             else if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(chatLink.Name))
             {
-                chatLink = chatLink.From(member.Value);
+                chatLink.Value = member.Value;
             }
             else if (member.NameEquals(icon.Name))
             {
-                icon = icon.From(member.Value);
+                icon.Value = member.Value;
             }
             else if (member.NameEquals("details"))
             {
@@ -3990,47 +3990,47 @@ public static class ItemReader
             }
             else if (member.NameEquals(name.Name))
             {
-                name = name.From(member.Value);
+                name.Value = member.Value;
             }
             else if (member.NameEquals(description.Name))
             {
-                description = description.From(member.Value);
+                description.Value = member.Value;
             }
             else if (member.NameEquals(level.Name))
             {
-                level = level.From(member.Value);
+                level.Value = member.Value;
             }
             else if (member.NameEquals(rarity.Name))
             {
-                rarity = rarity.From(member.Value);
+                rarity.Value = member.Value;
             }
             else if (member.NameEquals(vendorValue.Name))
             {
-                vendorValue = vendorValue.From(member.Value);
+                vendorValue.Value = member.Value;
             }
             else if (member.NameEquals(gameTypes.Name))
             {
-                gameTypes = gameTypes.From(member.Value);
+                gameTypes.Value = member.Value;
             }
             else if (member.NameEquals(flags.Name))
             {
-                flags = flags.From(member.Value);
+                flags.Value = member.Value;
             }
             else if (member.NameEquals(restrictions.Name))
             {
-                restrictions = restrictions.From(member.Value);
+                restrictions.Value = member.Value;
             }
             else if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(chatLink.Name))
             {
-                chatLink = chatLink.From(member.Value);
+                chatLink.Value = member.Value;
             }
             else if (member.NameEquals(icon.Name))
             {
-                icon = icon.From(member.Value);
+                icon.Value = member.Value;
             }
             else if (member.NameEquals("details"))
             {
@@ -4111,47 +4111,47 @@ public static class ItemReader
             }
             else if (member.NameEquals(name.Name))
             {
-                name = name.From(member.Value);
+                name.Value = member.Value;
             }
             else if (member.NameEquals(description.Name))
             {
-                description = description.From(member.Value);
+                description.Value = member.Value;
             }
             else if (member.NameEquals(level.Name))
             {
-                level = level.From(member.Value);
+                level.Value = member.Value;
             }
             else if (member.NameEquals(rarity.Name))
             {
-                rarity = rarity.From(member.Value);
+                rarity.Value = member.Value;
             }
             else if (member.NameEquals(vendorValue.Name))
             {
-                vendorValue = vendorValue.From(member.Value);
+                vendorValue.Value = member.Value;
             }
             else if (member.NameEquals(gameTypes.Name))
             {
-                gameTypes = gameTypes.From(member.Value);
+                gameTypes.Value = member.Value;
             }
             else if (member.NameEquals(flags.Name))
             {
-                flags = flags.From(member.Value);
+                flags.Value = member.Value;
             }
             else if (member.NameEquals(restrictions.Name))
             {
-                restrictions = restrictions.From(member.Value);
+                restrictions.Value = member.Value;
             }
             else if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(chatLink.Name))
             {
-                chatLink = chatLink.From(member.Value);
+                chatLink.Value = member.Value;
             }
             else if (member.NameEquals(icon.Name))
             {
-                icon = icon.From(member.Value);
+                icon.Value = member.Value;
             }
             else if (member.NameEquals("details"))
             {
@@ -4232,47 +4232,47 @@ public static class ItemReader
             }
             else if (member.NameEquals(name.Name))
             {
-                name = name.From(member.Value);
+                name.Value = member.Value;
             }
             else if (member.NameEquals(description.Name))
             {
-                description = description.From(member.Value);
+                description.Value = member.Value;
             }
             else if (member.NameEquals(level.Name))
             {
-                level = level.From(member.Value);
+                level.Value = member.Value;
             }
             else if (member.NameEquals(rarity.Name))
             {
-                rarity = rarity.From(member.Value);
+                rarity.Value = member.Value;
             }
             else if (member.NameEquals(vendorValue.Name))
             {
-                vendorValue = vendorValue.From(member.Value);
+                vendorValue.Value = member.Value;
             }
             else if (member.NameEquals(gameTypes.Name))
             {
-                gameTypes = gameTypes.From(member.Value);
+                gameTypes.Value = member.Value;
             }
             else if (member.NameEquals(flags.Name))
             {
-                flags = flags.From(member.Value);
+                flags.Value = member.Value;
             }
             else if (member.NameEquals(restrictions.Name))
             {
-                restrictions = restrictions.From(member.Value);
+                restrictions.Value = member.Value;
             }
             else if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(chatLink.Name))
             {
-                chatLink = chatLink.From(member.Value);
+                chatLink.Value = member.Value;
             }
             else if (member.NameEquals(icon.Name))
             {
-                icon = icon.From(member.Value);
+                icon.Value = member.Value;
             }
             else if (member.NameEquals("details"))
             {
@@ -4353,47 +4353,47 @@ public static class ItemReader
             }
             else if (member.NameEquals(name.Name))
             {
-                name = name.From(member.Value);
+                name.Value = member.Value;
             }
             else if (member.NameEquals(description.Name))
             {
-                description = description.From(member.Value);
+                description.Value = member.Value;
             }
             else if (member.NameEquals(level.Name))
             {
-                level = level.From(member.Value);
+                level.Value = member.Value;
             }
             else if (member.NameEquals(rarity.Name))
             {
-                rarity = rarity.From(member.Value);
+                rarity.Value = member.Value;
             }
             else if (member.NameEquals(vendorValue.Name))
             {
-                vendorValue = vendorValue.From(member.Value);
+                vendorValue.Value = member.Value;
             }
             else if (member.NameEquals(gameTypes.Name))
             {
-                gameTypes = gameTypes.From(member.Value);
+                gameTypes.Value = member.Value;
             }
             else if (member.NameEquals(flags.Name))
             {
-                flags = flags.From(member.Value);
+                flags.Value = member.Value;
             }
             else if (member.NameEquals(restrictions.Name))
             {
-                restrictions = restrictions.From(member.Value);
+                restrictions.Value = member.Value;
             }
             else if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(chatLink.Name))
             {
-                chatLink = chatLink.From(member.Value);
+                chatLink.Value = member.Value;
             }
             else if (member.NameEquals(icon.Name))
             {
-                icon = icon.From(member.Value);
+                icon.Value = member.Value;
             }
             else if (member.NameEquals("details"))
             {
@@ -4476,47 +4476,47 @@ public static class ItemReader
             }
             else if (member.NameEquals(name.Name))
             {
-                name = name.From(member.Value);
+                name.Value = member.Value;
             }
             else if (member.NameEquals(description.Name))
             {
-                description = description.From(member.Value);
+                description.Value = member.Value;
             }
             else if (member.NameEquals(level.Name))
             {
-                level = level.From(member.Value);
+                level.Value = member.Value;
             }
             else if (member.NameEquals(rarity.Name))
             {
-                rarity = rarity.From(member.Value);
+                rarity.Value = member.Value;
             }
             else if (member.NameEquals(vendorValue.Name))
             {
-                vendorValue = vendorValue.From(member.Value);
+                vendorValue.Value = member.Value;
             }
             else if (member.NameEquals(gameTypes.Name))
             {
-                gameTypes = gameTypes.From(member.Value);
+                gameTypes.Value = member.Value;
             }
             else if (member.NameEquals(flags.Name))
             {
-                flags = flags.From(member.Value);
+                flags.Value = member.Value;
             }
             else if (member.NameEquals(restrictions.Name))
             {
-                restrictions = restrictions.From(member.Value);
+                restrictions.Value = member.Value;
             }
             else if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(chatLink.Name))
             {
-                chatLink = chatLink.From(member.Value);
+                chatLink.Value = member.Value;
             }
             else if (member.NameEquals(icon.Name))
             {
-                icon = icon.From(member.Value);
+                icon.Value = member.Value;
             }
             else if (member.NameEquals("details"))
             {
@@ -4542,11 +4542,11 @@ public static class ItemReader
                     }
                     else if (detail.NameEquals(recipeId.Name))
                     {
-                        recipeId = recipeId.From(detail.Value);
+                        recipeId.Value = detail.Value;
                     }
                     else if (detail.NameEquals(extraRecipeIds.Name))
                     {
-                        extraRecipeIds = extraRecipeIds.From(detail.Value);
+                        extraRecipeIds.Value = detail.Value;
                     }
                     else if (missingMemberBehavior == MissingMemberBehavior.Error)
                     {
@@ -4608,47 +4608,47 @@ public static class ItemReader
             }
             else if (member.NameEquals(name.Name))
             {
-                name = name.From(member.Value);
+                name.Value = member.Value;
             }
             else if (member.NameEquals(description.Name))
             {
-                description = description.From(member.Value);
+                description.Value = member.Value;
             }
             else if (member.NameEquals(level.Name))
             {
-                level = level.From(member.Value);
+                level.Value = member.Value;
             }
             else if (member.NameEquals(rarity.Name))
             {
-                rarity = rarity.From(member.Value);
+                rarity.Value = member.Value;
             }
             else if (member.NameEquals(vendorValue.Name))
             {
-                vendorValue = vendorValue.From(member.Value);
+                vendorValue.Value = member.Value;
             }
             else if (member.NameEquals(gameTypes.Name))
             {
-                gameTypes = gameTypes.From(member.Value);
+                gameTypes.Value = member.Value;
             }
             else if (member.NameEquals(flags.Name))
             {
-                flags = flags.From(member.Value);
+                flags.Value = member.Value;
             }
             else if (member.NameEquals(restrictions.Name))
             {
-                restrictions = restrictions.From(member.Value);
+                restrictions.Value = member.Value;
             }
             else if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(chatLink.Name))
             {
-                chatLink = chatLink.From(member.Value);
+                chatLink.Value = member.Value;
             }
             else if (member.NameEquals(icon.Name))
             {
-                icon = icon.From(member.Value);
+                icon.Value = member.Value;
             }
             else if (member.NameEquals("details"))
             {
@@ -4674,7 +4674,7 @@ public static class ItemReader
                     }
                     else if (detail.NameEquals(colorId.Name))
                     {
-                        colorId = colorId.From(detail.Value);
+                        colorId.Value = detail.Value;
                     }
                     else if (missingMemberBehavior == MissingMemberBehavior.Error)
                     {
@@ -4734,47 +4734,47 @@ public static class ItemReader
             }
             else if (member.NameEquals(name.Name))
             {
-                name = name.From(member.Value);
+                name.Value = member.Value;
             }
             else if (member.NameEquals(description.Name))
             {
-                description = description.From(member.Value);
+                description.Value = member.Value;
             }
             else if (member.NameEquals(level.Name))
             {
-                level = level.From(member.Value);
+                level.Value = member.Value;
             }
             else if (member.NameEquals(rarity.Name))
             {
-                rarity = rarity.From(member.Value);
+                rarity.Value = member.Value;
             }
             else if (member.NameEquals(vendorValue.Name))
             {
-                vendorValue = vendorValue.From(member.Value);
+                vendorValue.Value = member.Value;
             }
             else if (member.NameEquals(gameTypes.Name))
             {
-                gameTypes = gameTypes.From(member.Value);
+                gameTypes.Value = member.Value;
             }
             else if (member.NameEquals(flags.Name))
             {
-                flags = flags.From(member.Value);
+                flags.Value = member.Value;
             }
             else if (member.NameEquals(restrictions.Name))
             {
-                restrictions = restrictions.From(member.Value);
+                restrictions.Value = member.Value;
             }
             else if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(chatLink.Name))
             {
-                chatLink = chatLink.From(member.Value);
+                chatLink.Value = member.Value;
             }
             else if (member.NameEquals(icon.Name))
             {
-                icon = icon.From(member.Value);
+                icon.Value = member.Value;
             }
             else if (member.NameEquals("details"))
             {
@@ -4855,47 +4855,47 @@ public static class ItemReader
             }
             else if (member.NameEquals(name.Name))
             {
-                name = name.From(member.Value);
+                name.Value = member.Value;
             }
             else if (member.NameEquals(description.Name))
             {
-                description = description.From(member.Value);
+                description.Value = member.Value;
             }
             else if (member.NameEquals(level.Name))
             {
-                level = level.From(member.Value);
+                level.Value = member.Value;
             }
             else if (member.NameEquals(rarity.Name))
             {
-                rarity = rarity.From(member.Value);
+                rarity.Value = member.Value;
             }
             else if (member.NameEquals(vendorValue.Name))
             {
-                vendorValue = vendorValue.From(member.Value);
+                vendorValue.Value = member.Value;
             }
             else if (member.NameEquals(gameTypes.Name))
             {
-                gameTypes = gameTypes.From(member.Value);
+                gameTypes.Value = member.Value;
             }
             else if (member.NameEquals(flags.Name))
             {
-                flags = flags.From(member.Value);
+                flags.Value = member.Value;
             }
             else if (member.NameEquals(restrictions.Name))
             {
-                restrictions = restrictions.From(member.Value);
+                restrictions.Value = member.Value;
             }
             else if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(chatLink.Name))
             {
-                chatLink = chatLink.From(member.Value);
+                chatLink.Value = member.Value;
             }
             else if (member.NameEquals(icon.Name))
             {
-                icon = icon.From(member.Value);
+                icon.Value = member.Value;
             }
             else if (member.NameEquals("details"))
             {
@@ -4976,47 +4976,47 @@ public static class ItemReader
             }
             else if (member.NameEquals(name.Name))
             {
-                name = name.From(member.Value);
+                name.Value = member.Value;
             }
             else if (member.NameEquals(description.Name))
             {
-                description = description.From(member.Value);
+                description.Value = member.Value;
             }
             else if (member.NameEquals(level.Name))
             {
-                level = level.From(member.Value);
+                level.Value = member.Value;
             }
             else if (member.NameEquals(rarity.Name))
             {
-                rarity = rarity.From(member.Value);
+                rarity.Value = member.Value;
             }
             else if (member.NameEquals(vendorValue.Name))
             {
-                vendorValue = vendorValue.From(member.Value);
+                vendorValue.Value = member.Value;
             }
             else if (member.NameEquals(gameTypes.Name))
             {
-                gameTypes = gameTypes.From(member.Value);
+                gameTypes.Value = member.Value;
             }
             else if (member.NameEquals(flags.Name))
             {
-                flags = flags.From(member.Value);
+                flags.Value = member.Value;
             }
             else if (member.NameEquals(restrictions.Name))
             {
-                restrictions = restrictions.From(member.Value);
+                restrictions.Value = member.Value;
             }
             else if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(chatLink.Name))
             {
-                chatLink = chatLink.From(member.Value);
+                chatLink.Value = member.Value;
             }
             else if (member.NameEquals(icon.Name))
             {
-                icon = icon.From(member.Value);
+                icon.Value = member.Value;
             }
             else if (member.NameEquals("details"))
             {
@@ -5097,47 +5097,47 @@ public static class ItemReader
             }
             else if (member.NameEquals(name.Name))
             {
-                name = name.From(member.Value);
+                name.Value = member.Value;
             }
             else if (member.NameEquals(description.Name))
             {
-                description = description.From(member.Value);
+                description.Value = member.Value;
             }
             else if (member.NameEquals(level.Name))
             {
-                level = level.From(member.Value);
+                level.Value = member.Value;
             }
             else if (member.NameEquals(rarity.Name))
             {
-                rarity = rarity.From(member.Value);
+                rarity.Value = member.Value;
             }
             else if (member.NameEquals(vendorValue.Name))
             {
-                vendorValue = vendorValue.From(member.Value);
+                vendorValue.Value = member.Value;
             }
             else if (member.NameEquals(gameTypes.Name))
             {
-                gameTypes = gameTypes.From(member.Value);
+                gameTypes.Value = member.Value;
             }
             else if (member.NameEquals(flags.Name))
             {
-                flags = flags.From(member.Value);
+                flags.Value = member.Value;
             }
             else if (member.NameEquals(restrictions.Name))
             {
-                restrictions = restrictions.From(member.Value);
+                restrictions.Value = member.Value;
             }
             else if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(chatLink.Name))
             {
-                chatLink = chatLink.From(member.Value);
+                chatLink.Value = member.Value;
             }
             else if (member.NameEquals(icon.Name))
             {
-                icon = icon.From(member.Value);
+                icon.Value = member.Value;
             }
             else if (member.NameEquals("details"))
             {
@@ -5218,47 +5218,47 @@ public static class ItemReader
             }
             else if (member.NameEquals(name.Name))
             {
-                name = name.From(member.Value);
+                name.Value = member.Value;
             }
             else if (member.NameEquals(description.Name))
             {
-                description = description.From(member.Value);
+                description.Value = member.Value;
             }
             else if (member.NameEquals(level.Name))
             {
-                level = level.From(member.Value);
+                level.Value = member.Value;
             }
             else if (member.NameEquals(rarity.Name))
             {
-                rarity = rarity.From(member.Value);
+                rarity.Value = member.Value;
             }
             else if (member.NameEquals(vendorValue.Name))
             {
-                vendorValue = vendorValue.From(member.Value);
+                vendorValue.Value = member.Value;
             }
             else if (member.NameEquals(gameTypes.Name))
             {
-                gameTypes = gameTypes.From(member.Value);
+                gameTypes.Value = member.Value;
             }
             else if (member.NameEquals(flags.Name))
             {
-                flags = flags.From(member.Value);
+                flags.Value = member.Value;
             }
             else if (member.NameEquals(restrictions.Name))
             {
-                restrictions = restrictions.From(member.Value);
+                restrictions.Value = member.Value;
             }
             else if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(chatLink.Name))
             {
-                chatLink = chatLink.From(member.Value);
+                chatLink.Value = member.Value;
             }
             else if (member.NameEquals(icon.Name))
             {
-                icon = icon.From(member.Value);
+                icon.Value = member.Value;
             }
             else if (member.NameEquals("details"))
             {
@@ -5339,47 +5339,47 @@ public static class ItemReader
             }
             else if (member.NameEquals(name.Name))
             {
-                name = name.From(member.Value);
+                name.Value = member.Value;
             }
             else if (member.NameEquals(description.Name))
             {
-                description = description.From(member.Value);
+                description.Value = member.Value;
             }
             else if (member.NameEquals(level.Name))
             {
-                level = level.From(member.Value);
+                level.Value = member.Value;
             }
             else if (member.NameEquals(rarity.Name))
             {
-                rarity = rarity.From(member.Value);
+                rarity.Value = member.Value;
             }
             else if (member.NameEquals(vendorValue.Name))
             {
-                vendorValue = vendorValue.From(member.Value);
+                vendorValue.Value = member.Value;
             }
             else if (member.NameEquals(gameTypes.Name))
             {
-                gameTypes = gameTypes.From(member.Value);
+                gameTypes.Value = member.Value;
             }
             else if (member.NameEquals(flags.Name))
             {
-                flags = flags.From(member.Value);
+                flags.Value = member.Value;
             }
             else if (member.NameEquals(restrictions.Name))
             {
-                restrictions = restrictions.From(member.Value);
+                restrictions.Value = member.Value;
             }
             else if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(chatLink.Name))
             {
-                chatLink = chatLink.From(member.Value);
+                chatLink.Value = member.Value;
             }
             else if (member.NameEquals(icon.Name))
             {
-                icon = icon.From(member.Value);
+                icon.Value = member.Value;
             }
             else if (member.NameEquals("details"))
             {
@@ -5460,47 +5460,47 @@ public static class ItemReader
             }
             else if (member.NameEquals(name.Name))
             {
-                name = name.From(member.Value);
+                name.Value = member.Value;
             }
             else if (member.NameEquals(description.Name))
             {
-                description = description.From(member.Value);
+                description.Value = member.Value;
             }
             else if (member.NameEquals(level.Name))
             {
-                level = level.From(member.Value);
+                level.Value = member.Value;
             }
             else if (member.NameEquals(rarity.Name))
             {
-                rarity = rarity.From(member.Value);
+                rarity.Value = member.Value;
             }
             else if (member.NameEquals(vendorValue.Name))
             {
-                vendorValue = vendorValue.From(member.Value);
+                vendorValue.Value = member.Value;
             }
             else if (member.NameEquals(gameTypes.Name))
             {
-                gameTypes = gameTypes.From(member.Value);
+                gameTypes.Value = member.Value;
             }
             else if (member.NameEquals(flags.Name))
             {
-                flags = flags.From(member.Value);
+                flags.Value = member.Value;
             }
             else if (member.NameEquals(restrictions.Name))
             {
-                restrictions = restrictions.From(member.Value);
+                restrictions.Value = member.Value;
             }
             else if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(chatLink.Name))
             {
-                chatLink = chatLink.From(member.Value);
+                chatLink.Value = member.Value;
             }
             else if (member.NameEquals(icon.Name))
             {
-                icon = icon.From(member.Value);
+                icon.Value = member.Value;
             }
             else if (member.NameEquals("details"))
             {
@@ -5577,47 +5577,47 @@ public static class ItemReader
             }
             else if (member.NameEquals(name.Name))
             {
-                name = name.From(member.Value);
+                name.Value = member.Value;
             }
             else if (member.NameEquals(description.Name))
             {
-                description = description.From(member.Value);
+                description.Value = member.Value;
             }
             else if (member.NameEquals(level.Name))
             {
-                level = level.From(member.Value);
+                level.Value = member.Value;
             }
             else if (member.NameEquals(rarity.Name))
             {
-                rarity = rarity.From(member.Value);
+                rarity.Value = member.Value;
             }
             else if (member.NameEquals(vendorValue.Name))
             {
-                vendorValue = vendorValue.From(member.Value);
+                vendorValue.Value = member.Value;
             }
             else if (member.NameEquals(gameTypes.Name))
             {
-                gameTypes = gameTypes.From(member.Value);
+                gameTypes.Value = member.Value;
             }
             else if (member.NameEquals(flags.Name))
             {
-                flags = flags.From(member.Value);
+                flags.Value = member.Value;
             }
             else if (member.NameEquals(restrictions.Name))
             {
-                restrictions = restrictions.From(member.Value);
+                restrictions.Value = member.Value;
             }
             else if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(chatLink.Name))
             {
-                chatLink = chatLink.From(member.Value);
+                chatLink.Value = member.Value;
             }
             else if (member.NameEquals(icon.Name))
             {
-                icon = icon.From(member.Value);
+                icon.Value = member.Value;
             }
             else if (member.NameEquals("details"))
             {
@@ -5634,23 +5634,23 @@ public static class ItemReader
                     }
                     else if (detail.NameEquals(duration.Name))
                     {
-                        duration = duration.From(detail.Value);
+                        duration.Value = detail.Value;
                     }
                     else if (detail.NameEquals(applyCount.Name))
                     {
-                        applyCount = applyCount.From(detail.Value);
+                        applyCount.Value = detail.Value;
                     }
                     else if (detail.NameEquals(effectName.Name))
                     {
-                        effectName = effectName.From(detail.Value);
+                        effectName.Value = detail.Value;
                     }
                     else if (detail.NameEquals(effectIcon.Name))
                     {
-                        effectIcon = effectIcon.From(detail.Value);
+                        effectIcon.Value = detail.Value;
                     }
                     else if (detail.NameEquals(effectDescription.Name))
                     {
-                        effectDescription = effectDescription.From(detail.Value);
+                        effectDescription.Value = detail.Value;
                     }
                     else if (missingMemberBehavior == MissingMemberBehavior.Error)
                     {
@@ -5726,47 +5726,47 @@ public static class ItemReader
             }
             else if (member.NameEquals(name.Name))
             {
-                name = name.From(member.Value);
+                name.Value = member.Value;
             }
             else if (member.NameEquals(description.Name))
             {
-                description = description.From(member.Value);
+                description.Value = member.Value;
             }
             else if (member.NameEquals(level.Name))
             {
-                level = level.From(member.Value);
+                level.Value = member.Value;
             }
             else if (member.NameEquals(rarity.Name))
             {
-                rarity = rarity.From(member.Value);
+                rarity.Value = member.Value;
             }
             else if (member.NameEquals(vendorValue.Name))
             {
-                vendorValue = vendorValue.From(member.Value);
+                vendorValue.Value = member.Value;
             }
             else if (member.NameEquals(gameTypes.Name))
             {
-                gameTypes = gameTypes.From(member.Value);
+                gameTypes.Value = member.Value;
             }
             else if (member.NameEquals(flags.Name))
             {
-                flags = flags.From(member.Value);
+                flags.Value = member.Value;
             }
             else if (member.NameEquals(restrictions.Name))
             {
-                restrictions = restrictions.From(member.Value);
+                restrictions.Value = member.Value;
             }
             else if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(chatLink.Name))
             {
-                chatLink = chatLink.From(member.Value);
+                chatLink.Value = member.Value;
             }
             else if (member.NameEquals(icon.Name))
             {
-                icon = icon.From(member.Value);
+                icon.Value = member.Value;
             }
             else if (member.NameEquals("details"))
             {
@@ -5838,47 +5838,47 @@ public static class ItemReader
             }
             else if (member.NameEquals(name.Name))
             {
-                name = name.From(member.Value);
+                name.Value = member.Value;
             }
             else if (member.NameEquals(description.Name))
             {
-                description = description.From(member.Value);
+                description.Value = member.Value;
             }
             else if (member.NameEquals(level.Name))
             {
-                level = level.From(member.Value);
+                level.Value = member.Value;
             }
             else if (member.NameEquals(rarity.Name))
             {
-                rarity = rarity.From(member.Value);
+                rarity.Value = member.Value;
             }
             else if (member.NameEquals(vendorValue.Name))
             {
-                vendorValue = vendorValue.From(member.Value);
+                vendorValue.Value = member.Value;
             }
             else if (member.NameEquals(gameTypes.Name))
             {
-                gameTypes = gameTypes.From(member.Value);
+                gameTypes.Value = member.Value;
             }
             else if (member.NameEquals(flags.Name))
             {
-                flags = flags.From(member.Value);
+                flags.Value = member.Value;
             }
             else if (member.NameEquals(restrictions.Name))
             {
-                restrictions = restrictions.From(member.Value);
+                restrictions.Value = member.Value;
             }
             else if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(chatLink.Name))
             {
-                chatLink = chatLink.From(member.Value);
+                chatLink.Value = member.Value;
             }
             else if (member.NameEquals(icon.Name))
             {
-                icon = icon.From(member.Value);
+                icon.Value = member.Value;
             }
             else if (member.NameEquals("details"))
             {
@@ -5950,47 +5950,47 @@ public static class ItemReader
             }
             else if (member.NameEquals(name.Name))
             {
-                name = name.From(member.Value);
+                name.Value = member.Value;
             }
             else if (member.NameEquals(description.Name))
             {
-                description = description.From(member.Value);
+                description.Value = member.Value;
             }
             else if (member.NameEquals(level.Name))
             {
-                level = level.From(member.Value);
+                level.Value = member.Value;
             }
             else if (member.NameEquals(rarity.Name))
             {
-                rarity = rarity.From(member.Value);
+                rarity.Value = member.Value;
             }
             else if (member.NameEquals(vendorValue.Name))
             {
-                vendorValue = vendorValue.From(member.Value);
+                vendorValue.Value = member.Value;
             }
             else if (member.NameEquals(gameTypes.Name))
             {
-                gameTypes = gameTypes.From(member.Value);
+                gameTypes.Value = member.Value;
             }
             else if (member.NameEquals(flags.Name))
             {
-                flags = flags.From(member.Value);
+                flags.Value = member.Value;
             }
             else if (member.NameEquals(restrictions.Name))
             {
-                restrictions = restrictions.From(member.Value);
+                restrictions.Value = member.Value;
             }
             else if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(chatLink.Name))
             {
-                chatLink = chatLink.From(member.Value);
+                chatLink.Value = member.Value;
             }
             else if (member.NameEquals(icon.Name))
             {
-                icon = icon.From(member.Value);
+                icon.Value = member.Value;
             }
             else if (member.NameEquals("details"))
             {
@@ -6062,47 +6062,47 @@ public static class ItemReader
             }
             else if (member.NameEquals(name.Name))
             {
-                name = name.From(member.Value);
+                name.Value = member.Value;
             }
             else if (member.NameEquals(description.Name))
             {
-                description = description.From(member.Value);
+                description.Value = member.Value;
             }
             else if (member.NameEquals(level.Name))
             {
-                level = level.From(member.Value);
+                level.Value = member.Value;
             }
             else if (member.NameEquals(rarity.Name))
             {
-                rarity = rarity.From(member.Value);
+                rarity.Value = member.Value;
             }
             else if (member.NameEquals(vendorValue.Name))
             {
-                vendorValue = vendorValue.From(member.Value);
+                vendorValue.Value = member.Value;
             }
             else if (member.NameEquals(gameTypes.Name))
             {
-                gameTypes = gameTypes.From(member.Value);
+                gameTypes.Value = member.Value;
             }
             else if (member.NameEquals(flags.Name))
             {
-                flags = flags.From(member.Value);
+                flags.Value = member.Value;
             }
             else if (member.NameEquals(restrictions.Name))
             {
-                restrictions = restrictions.From(member.Value);
+                restrictions.Value = member.Value;
             }
             else if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(chatLink.Name))
             {
-                chatLink = chatLink.From(member.Value);
+                chatLink.Value = member.Value;
             }
             else if (member.NameEquals(icon.Name))
             {
-                icon = icon.From(member.Value);
+                icon.Value = member.Value;
             }
             else if (member.NameEquals("details"))
             {
@@ -6174,47 +6174,47 @@ public static class ItemReader
             }
             else if (member.NameEquals(name.Name))
             {
-                name = name.From(member.Value);
+                name.Value = member.Value;
             }
             else if (member.NameEquals(description.Name))
             {
-                description = description.From(member.Value);
+                description.Value = member.Value;
             }
             else if (member.NameEquals(level.Name))
             {
-                level = level.From(member.Value);
+                level.Value = member.Value;
             }
             else if (member.NameEquals(rarity.Name))
             {
-                rarity = rarity.From(member.Value);
+                rarity.Value = member.Value;
             }
             else if (member.NameEquals(vendorValue.Name))
             {
-                vendorValue = vendorValue.From(member.Value);
+                vendorValue.Value = member.Value;
             }
             else if (member.NameEquals(gameTypes.Name))
             {
-                gameTypes = gameTypes.From(member.Value);
+                gameTypes.Value = member.Value;
             }
             else if (member.NameEquals(flags.Name))
             {
-                flags = flags.From(member.Value);
+                flags.Value = member.Value;
             }
             else if (member.NameEquals(restrictions.Name))
             {
-                restrictions = restrictions.From(member.Value);
+                restrictions.Value = member.Value;
             }
             else if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(chatLink.Name))
             {
-                chatLink = chatLink.From(member.Value);
+                chatLink.Value = member.Value;
             }
             else if (member.NameEquals(icon.Name))
             {
-                icon = icon.From(member.Value);
+                icon.Value = member.Value;
             }
             else if (member.NameEquals("details"))
             {
@@ -6287,51 +6287,51 @@ public static class ItemReader
             }
             else if (member.NameEquals(name.Name))
             {
-                name = name.From(member.Value);
+                name.Value = member.Value;
             }
             else if (member.NameEquals(description.Name))
             {
-                description = description.From(member.Value);
+                description.Value = member.Value;
             }
             else if (member.NameEquals(level.Name))
             {
-                level = level.From(member.Value);
+                level.Value = member.Value;
             }
             else if (member.NameEquals(rarity.Name))
             {
-                rarity = rarity.From(member.Value);
+                rarity.Value = member.Value;
             }
             else if (member.NameEquals(vendorValue.Name))
             {
-                vendorValue = vendorValue.From(member.Value);
+                vendorValue.Value = member.Value;
             }
             else if (member.NameEquals(gameTypes.Name))
             {
-                gameTypes = gameTypes.From(member.Value);
+                gameTypes.Value = member.Value;
             }
             else if (member.NameEquals(flags.Name))
             {
-                flags = flags.From(member.Value);
+                flags.Value = member.Value;
             }
             else if (member.NameEquals(restrictions.Name))
             {
-                restrictions = restrictions.From(member.Value);
+                restrictions.Value = member.Value;
             }
             else if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(chatLink.Name))
             {
-                chatLink = chatLink.From(member.Value);
+                chatLink.Value = member.Value;
             }
             else if (member.NameEquals(icon.Name))
             {
-                icon = icon.From(member.Value);
+                icon.Value = member.Value;
             }
             else if (member.NameEquals(upgradesInto.Name))
             {
-                upgradesInto = upgradesInto.From(member.Value);
+                upgradesInto.Value = member.Value;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {
@@ -6398,47 +6398,47 @@ public static class ItemReader
             }
             else if (member.NameEquals(name.Name))
             {
-                name = name.From(member.Value);
+                name.Value = member.Value;
             }
             else if (member.NameEquals(description.Name))
             {
-                description = description.From(member.Value);
+                description.Value = member.Value;
             }
             else if (member.NameEquals(level.Name))
             {
-                level = level.From(member.Value);
+                level.Value = member.Value;
             }
             else if (member.NameEquals(rarity.Name))
             {
-                rarity = rarity.From(member.Value);
+                rarity.Value = member.Value;
             }
             else if (member.NameEquals(vendorValue.Name))
             {
-                vendorValue = vendorValue.From(member.Value);
+                vendorValue.Value = member.Value;
             }
             else if (member.NameEquals(gameTypes.Name))
             {
-                gameTypes = gameTypes.From(member.Value);
+                gameTypes.Value = member.Value;
             }
             else if (member.NameEquals(flags.Name))
             {
-                flags = flags.From(member.Value);
+                flags.Value = member.Value;
             }
             else if (member.NameEquals(restrictions.Name))
             {
-                restrictions = restrictions.From(member.Value);
+                restrictions.Value = member.Value;
             }
             else if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(chatLink.Name))
             {
-                chatLink = chatLink.From(member.Value);
+                chatLink.Value = member.Value;
             }
             else if (member.NameEquals(icon.Name))
             {
-                icon = icon.From(member.Value);
+                icon.Value = member.Value;
             }
             else if (member.NameEquals("details"))
             {
@@ -6510,47 +6510,47 @@ public static class ItemReader
             }
             else if (member.NameEquals(name.Name))
             {
-                name = name.From(member.Value);
+                name.Value = member.Value;
             }
             else if (member.NameEquals(description.Name))
             {
-                description = description.From(member.Value);
+                description.Value = member.Value;
             }
             else if (member.NameEquals(level.Name))
             {
-                level = level.From(member.Value);
+                level.Value = member.Value;
             }
             else if (member.NameEquals(rarity.Name))
             {
-                rarity = rarity.From(member.Value);
+                rarity.Value = member.Value;
             }
             else if (member.NameEquals(vendorValue.Name))
             {
-                vendorValue = vendorValue.From(member.Value);
+                vendorValue.Value = member.Value;
             }
             else if (member.NameEquals(gameTypes.Name))
             {
-                gameTypes = gameTypes.From(member.Value);
+                gameTypes.Value = member.Value;
             }
             else if (member.NameEquals(flags.Name))
             {
-                flags = flags.From(member.Value);
+                flags.Value = member.Value;
             }
             else if (member.NameEquals(restrictions.Name))
             {
-                restrictions = restrictions.From(member.Value);
+                restrictions.Value = member.Value;
             }
             else if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(chatLink.Name))
             {
-                chatLink = chatLink.From(member.Value);
+                chatLink.Value = member.Value;
             }
             else if (member.NameEquals(icon.Name))
             {
-                icon = icon.From(member.Value);
+                icon.Value = member.Value;
             }
             else if (member.NameEquals("details"))
             {
@@ -6622,47 +6622,47 @@ public static class ItemReader
             }
             else if (member.NameEquals(name.Name))
             {
-                name = name.From(member.Value);
+                name.Value = member.Value;
             }
             else if (member.NameEquals(description.Name))
             {
-                description = description.From(member.Value);
+                description.Value = member.Value;
             }
             else if (member.NameEquals(level.Name))
             {
-                level = level.From(member.Value);
+                level.Value = member.Value;
             }
             else if (member.NameEquals(rarity.Name))
             {
-                rarity = rarity.From(member.Value);
+                rarity.Value = member.Value;
             }
             else if (member.NameEquals(vendorValue.Name))
             {
-                vendorValue = vendorValue.From(member.Value);
+                vendorValue.Value = member.Value;
             }
             else if (member.NameEquals(gameTypes.Name))
             {
-                gameTypes = gameTypes.From(member.Value);
+                gameTypes.Value = member.Value;
             }
             else if (member.NameEquals(flags.Name))
             {
-                flags = flags.From(member.Value);
+                flags.Value = member.Value;
             }
             else if (member.NameEquals(restrictions.Name))
             {
-                restrictions = restrictions.From(member.Value);
+                restrictions.Value = member.Value;
             }
             else if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(chatLink.Name))
             {
-                chatLink = chatLink.From(member.Value);
+                chatLink.Value = member.Value;
             }
             else if (member.NameEquals(icon.Name))
             {
-                icon = icon.From(member.Value);
+                icon.Value = member.Value;
             }
             else if (member.NameEquals("details"))
             {
@@ -6734,47 +6734,47 @@ public static class ItemReader
             }
             else if (member.NameEquals(name.Name))
             {
-                name = name.From(member.Value);
+                name.Value = member.Value;
             }
             else if (member.NameEquals(description.Name))
             {
-                description = description.From(member.Value);
+                description.Value = member.Value;
             }
             else if (member.NameEquals(level.Name))
             {
-                level = level.From(member.Value);
+                level.Value = member.Value;
             }
             else if (member.NameEquals(rarity.Name))
             {
-                rarity = rarity.From(member.Value);
+                rarity.Value = member.Value;
             }
             else if (member.NameEquals(vendorValue.Name))
             {
-                vendorValue = vendorValue.From(member.Value);
+                vendorValue.Value = member.Value;
             }
             else if (member.NameEquals(gameTypes.Name))
             {
-                gameTypes = gameTypes.From(member.Value);
+                gameTypes.Value = member.Value;
             }
             else if (member.NameEquals(flags.Name))
             {
-                flags = flags.From(member.Value);
+                flags.Value = member.Value;
             }
             else if (member.NameEquals(restrictions.Name))
             {
-                restrictions = restrictions.From(member.Value);
+                restrictions.Value = member.Value;
             }
             else if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(chatLink.Name))
             {
-                chatLink = chatLink.From(member.Value);
+                chatLink.Value = member.Value;
             }
             else if (member.NameEquals(icon.Name))
             {
-                icon = icon.From(member.Value);
+                icon.Value = member.Value;
             }
             else if (member.NameEquals("details"))
             {
@@ -6846,47 +6846,47 @@ public static class ItemReader
             }
             else if (member.NameEquals(name.Name))
             {
-                name = name.From(member.Value);
+                name.Value = member.Value;
             }
             else if (member.NameEquals(description.Name))
             {
-                description = description.From(member.Value);
+                description.Value = member.Value;
             }
             else if (member.NameEquals(level.Name))
             {
-                level = level.From(member.Value);
+                level.Value = member.Value;
             }
             else if (member.NameEquals(rarity.Name))
             {
-                rarity = rarity.From(member.Value);
+                rarity.Value = member.Value;
             }
             else if (member.NameEquals(vendorValue.Name))
             {
-                vendorValue = vendorValue.From(member.Value);
+                vendorValue.Value = member.Value;
             }
             else if (member.NameEquals(gameTypes.Name))
             {
-                gameTypes = gameTypes.From(member.Value);
+                gameTypes.Value = member.Value;
             }
             else if (member.NameEquals(flags.Name))
             {
-                flags = flags.From(member.Value);
+                flags.Value = member.Value;
             }
             else if (member.NameEquals(restrictions.Name))
             {
-                restrictions = restrictions.From(member.Value);
+                restrictions.Value = member.Value;
             }
             else if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(chatLink.Name))
             {
-                chatLink = chatLink.From(member.Value);
+                chatLink.Value = member.Value;
             }
             else if (member.NameEquals(icon.Name))
             {
-                icon = icon.From(member.Value);
+                icon.Value = member.Value;
             }
             else if (member.NameEquals("details"))
             {
@@ -6967,47 +6967,47 @@ public static class ItemReader
             }
             else if (member.NameEquals(name.Name))
             {
-                name = name.From(member.Value);
+                name.Value = member.Value;
             }
             else if (member.NameEquals(description.Name))
             {
-                description = description.From(member.Value);
+                description.Value = member.Value;
             }
             else if (member.NameEquals(level.Name))
             {
-                level = level.From(member.Value);
+                level.Value = member.Value;
             }
             else if (member.NameEquals(rarity.Name))
             {
-                rarity = rarity.From(member.Value);
+                rarity.Value = member.Value;
             }
             else if (member.NameEquals(vendorValue.Name))
             {
-                vendorValue = vendorValue.From(member.Value);
+                vendorValue.Value = member.Value;
             }
             else if (member.NameEquals(gameTypes.Name))
             {
-                gameTypes = gameTypes.From(member.Value);
+                gameTypes.Value = member.Value;
             }
             else if (member.NameEquals(flags.Name))
             {
-                flags = flags.From(member.Value);
+                flags.Value = member.Value;
             }
             else if (member.NameEquals(restrictions.Name))
             {
-                restrictions = restrictions.From(member.Value);
+                restrictions.Value = member.Value;
             }
             else if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(chatLink.Name))
             {
-                chatLink = chatLink.From(member.Value);
+                chatLink.Value = member.Value;
             }
             else if (member.NameEquals(icon.Name))
             {
-                icon = icon.From(member.Value);
+                icon.Value = member.Value;
             }
             else if (member.NameEquals("details"))
             {
@@ -7079,47 +7079,47 @@ public static class ItemReader
             }
             else if (member.NameEquals(name.Name))
             {
-                name = name.From(member.Value);
+                name.Value = member.Value;
             }
             else if (member.NameEquals(description.Name))
             {
-                description = description.From(member.Value);
+                description.Value = member.Value;
             }
             else if (member.NameEquals(level.Name))
             {
-                level = level.From(member.Value);
+                level.Value = member.Value;
             }
             else if (member.NameEquals(rarity.Name))
             {
-                rarity = rarity.From(member.Value);
+                rarity.Value = member.Value;
             }
             else if (member.NameEquals(vendorValue.Name))
             {
-                vendorValue = vendorValue.From(member.Value);
+                vendorValue.Value = member.Value;
             }
             else if (member.NameEquals(gameTypes.Name))
             {
-                gameTypes = gameTypes.From(member.Value);
+                gameTypes.Value = member.Value;
             }
             else if (member.NameEquals(flags.Name))
             {
-                flags = flags.From(member.Value);
+                flags.Value = member.Value;
             }
             else if (member.NameEquals(restrictions.Name))
             {
-                restrictions = restrictions.From(member.Value);
+                restrictions.Value = member.Value;
             }
             else if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(chatLink.Name))
             {
-                chatLink = chatLink.From(member.Value);
+                chatLink.Value = member.Value;
             }
             else if (member.NameEquals(icon.Name))
             {
-                icon = icon.From(member.Value);
+                icon.Value = member.Value;
             }
             else if (member.NameEquals("details"))
             {
@@ -7193,47 +7193,47 @@ public static class ItemReader
             }
             else if (member.NameEquals(name.Name))
             {
-                name = name.From(member.Value);
+                name.Value = member.Value;
             }
             else if (member.NameEquals(description.Name))
             {
-                description = description.From(member.Value);
+                description.Value = member.Value;
             }
             else if (member.NameEquals(level.Name))
             {
-                level = level.From(member.Value);
+                level.Value = member.Value;
             }
             else if (member.NameEquals(rarity.Name))
             {
-                rarity = rarity.From(member.Value);
+                rarity.Value = member.Value;
             }
             else if (member.NameEquals(vendorValue.Name))
             {
-                vendorValue = vendorValue.From(member.Value);
+                vendorValue.Value = member.Value;
             }
             else if (member.NameEquals(gameTypes.Name))
             {
-                gameTypes = gameTypes.From(member.Value);
+                gameTypes.Value = member.Value;
             }
             else if (member.NameEquals(flags.Name))
             {
-                flags = flags.From(member.Value);
+                flags.Value = member.Value;
             }
             else if (member.NameEquals(restrictions.Name))
             {
-                restrictions = restrictions.From(member.Value);
+                restrictions.Value = member.Value;
             }
             else if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(chatLink.Name))
             {
-                chatLink = chatLink.From(member.Value);
+                chatLink.Value = member.Value;
             }
             else if (member.NameEquals(icon.Name))
             {
-                icon = icon.From(member.Value);
+                icon.Value = member.Value;
             }
             else if (member.NameEquals("details"))
             {
@@ -7250,11 +7250,11 @@ public static class ItemReader
                     }
                     else if (detail.NameEquals(vendorIds.Name))
                     {
-                        vendorIds = vendorIds.From(detail.Value);
+                        vendorIds.Value = detail.Value;
                     }
                     else if (detail.NameEquals(guildUpgradeId.Name))
                     {
-                        guildUpgradeId = guildUpgradeId.From(detail.Value);
+                        guildUpgradeId.Value = detail.Value;
                     }
                     else if (missingMemberBehavior == MissingMemberBehavior.Error)
                     {
@@ -7315,47 +7315,47 @@ public static class ItemReader
             }
             else if (member.NameEquals(name.Name))
             {
-                name = name.From(member.Value);
+                name.Value = member.Value;
             }
             else if (member.NameEquals(description.Name))
             {
-                description = description.From(member.Value);
+                description.Value = member.Value;
             }
             else if (member.NameEquals(level.Name))
             {
-                level = level.From(member.Value);
+                level.Value = member.Value;
             }
             else if (member.NameEquals(rarity.Name))
             {
-                rarity = rarity.From(member.Value);
+                rarity.Value = member.Value;
             }
             else if (member.NameEquals(vendorValue.Name))
             {
-                vendorValue = vendorValue.From(member.Value);
+                vendorValue.Value = member.Value;
             }
             else if (member.NameEquals(gameTypes.Name))
             {
-                gameTypes = gameTypes.From(member.Value);
+                gameTypes.Value = member.Value;
             }
             else if (member.NameEquals(flags.Name))
             {
-                flags = flags.From(member.Value);
+                flags.Value = member.Value;
             }
             else if (member.NameEquals(restrictions.Name))
             {
-                restrictions = restrictions.From(member.Value);
+                restrictions.Value = member.Value;
             }
             else if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(chatLink.Name))
             {
-                chatLink = chatLink.From(member.Value);
+                chatLink.Value = member.Value;
             }
             else if (member.NameEquals(icon.Name))
             {
-                icon = icon.From(member.Value);
+                icon.Value = member.Value;
             }
             else if (member.NameEquals("details"))
             {
@@ -7427,47 +7427,47 @@ public static class ItemReader
             }
             else if (member.NameEquals(name.Name))
             {
-                name = name.From(member.Value);
+                name.Value = member.Value;
             }
             else if (member.NameEquals(description.Name))
             {
-                description = description.From(member.Value);
+                description.Value = member.Value;
             }
             else if (member.NameEquals(level.Name))
             {
-                level = level.From(member.Value);
+                level.Value = member.Value;
             }
             else if (member.NameEquals(rarity.Name))
             {
-                rarity = rarity.From(member.Value);
+                rarity.Value = member.Value;
             }
             else if (member.NameEquals(vendorValue.Name))
             {
-                vendorValue = vendorValue.From(member.Value);
+                vendorValue.Value = member.Value;
             }
             else if (member.NameEquals(gameTypes.Name))
             {
-                gameTypes = gameTypes.From(member.Value);
+                gameTypes.Value = member.Value;
             }
             else if (member.NameEquals(flags.Name))
             {
-                flags = flags.From(member.Value);
+                flags.Value = member.Value;
             }
             else if (member.NameEquals(restrictions.Name))
             {
-                restrictions = restrictions.From(member.Value);
+                restrictions.Value = member.Value;
             }
             else if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(chatLink.Name))
             {
-                chatLink = chatLink.From(member.Value);
+                chatLink.Value = member.Value;
             }
             else if (member.NameEquals(icon.Name))
             {
-                icon = icon.From(member.Value);
+                icon.Value = member.Value;
             }
             else if (member.NameEquals("details"))
             {
@@ -7536,47 +7536,47 @@ public static class ItemReader
             }
             else if (member.NameEquals(name.Name))
             {
-                name = name.From(member.Value);
+                name.Value = member.Value;
             }
             else if (member.NameEquals(description.Name))
             {
-                description = description.From(member.Value);
+                description.Value = member.Value;
             }
             else if (member.NameEquals(level.Name))
             {
-                level = level.From(member.Value);
+                level.Value = member.Value;
             }
             else if (member.NameEquals(rarity.Name))
             {
-                rarity = rarity.From(member.Value);
+                rarity.Value = member.Value;
             }
             else if (member.NameEquals(vendorValue.Name))
             {
-                vendorValue = vendorValue.From(member.Value);
+                vendorValue.Value = member.Value;
             }
             else if (member.NameEquals(gameTypes.Name))
             {
-                gameTypes = gameTypes.From(member.Value);
+                gameTypes.Value = member.Value;
             }
             else if (member.NameEquals(flags.Name))
             {
-                flags = flags.From(member.Value);
+                flags.Value = member.Value;
             }
             else if (member.NameEquals(restrictions.Name))
             {
-                restrictions = restrictions.From(member.Value);
+                restrictions.Value = member.Value;
             }
             else if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(chatLink.Name))
             {
-                chatLink = chatLink.From(member.Value);
+                chatLink.Value = member.Value;
             }
             else if (member.NameEquals(icon.Name))
             {
-                icon = icon.From(member.Value);
+                icon.Value = member.Value;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {
@@ -7630,47 +7630,47 @@ public static class ItemReader
             }
             else if (member.NameEquals(name.Name))
             {
-                name = name.From(member.Value);
+                name.Value = member.Value;
             }
             else if (member.NameEquals(description.Name))
             {
-                description = description.From(member.Value);
+                description.Value = member.Value;
             }
             else if (member.NameEquals(level.Name))
             {
-                level = level.From(member.Value);
+                level.Value = member.Value;
             }
             else if (member.NameEquals(rarity.Name))
             {
-                rarity = rarity.From(member.Value);
+                rarity.Value = member.Value;
             }
             else if (member.NameEquals(vendorValue.Name))
             {
-                vendorValue = vendorValue.From(member.Value);
+                vendorValue.Value = member.Value;
             }
             else if (member.NameEquals(gameTypes.Name))
             {
-                gameTypes = gameTypes.From(member.Value);
+                gameTypes.Value = member.Value;
             }
             else if (member.NameEquals(flags.Name))
             {
-                flags = flags.From(member.Value);
+                flags.Value = member.Value;
             }
             else if (member.NameEquals(restrictions.Name))
             {
-                restrictions = restrictions.From(member.Value);
+                restrictions.Value = member.Value;
             }
             else if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(chatLink.Name))
             {
-                chatLink = chatLink.From(member.Value);
+                chatLink.Value = member.Value;
             }
             else if (member.NameEquals(icon.Name))
             {
-                icon = icon.From(member.Value);
+                icon.Value = member.Value;
             }
             else if (member.NameEquals("details"))
             {
@@ -7678,7 +7678,7 @@ public static class ItemReader
                 {
                     if (detail.NameEquals(minipetId.Name))
                     {
-                        minipetId = minipetId.From(detail.Value);
+                        minipetId.Value = detail.Value;
                     }
                     else if (missingMemberBehavior == MissingMemberBehavior.Error)
                     {
@@ -7732,47 +7732,47 @@ public static class ItemReader
         {
             if (member.NameEquals(name.Name))
             {
-                name = name.From(member.Value);
+                name.Value = member.Value;
             }
             else if (member.NameEquals(description.Name))
             {
-                description = description.From(member.Value);
+                description.Value = member.Value;
             }
             else if (member.NameEquals(level.Name))
             {
-                level = level.From(member.Value);
+                level.Value = member.Value;
             }
             else if (member.NameEquals(rarity.Name))
             {
-                rarity = rarity.From(member.Value);
+                rarity.Value = member.Value;
             }
             else if (member.NameEquals(vendorValue.Name))
             {
-                vendorValue = vendorValue.From(member.Value);
+                vendorValue.Value = member.Value;
             }
             else if (member.NameEquals(gameTypes.Name))
             {
-                gameTypes = gameTypes.From(member.Value);
+                gameTypes.Value = member.Value;
             }
             else if (member.NameEquals(flags.Name))
             {
-                flags = flags.From(member.Value);
+                flags.Value = member.Value;
             }
             else if (member.NameEquals(restrictions.Name))
             {
-                restrictions = restrictions.From(member.Value);
+                restrictions.Value = member.Value;
             }
             else if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(chatLink.Name))
             {
-                chatLink = chatLink.From(member.Value);
+                chatLink.Value = member.Value;
             }
             else if (member.NameEquals(icon.Name))
             {
-                icon = icon.From(member.Value);
+                icon.Value = member.Value;
             }
             else if (member.NameEquals("details"))
             {
@@ -7845,47 +7845,47 @@ public static class ItemReader
             }
             else if (member.NameEquals(name.Name))
             {
-                name = name.From(member.Value);
+                name.Value = member.Value;
             }
             else if (member.NameEquals(description.Name))
             {
-                description = description.From(member.Value);
+                description.Value = member.Value;
             }
             else if (member.NameEquals(level.Name))
             {
-                level = level.From(member.Value);
+                level.Value = member.Value;
             }
             else if (member.NameEquals(rarity.Name))
             {
-                rarity = rarity.From(member.Value);
+                rarity.Value = member.Value;
             }
             else if (member.NameEquals(vendorValue.Name))
             {
-                vendorValue = vendorValue.From(member.Value);
+                vendorValue.Value = member.Value;
             }
             else if (member.NameEquals(gameTypes.Name))
             {
-                gameTypes = gameTypes.From(member.Value);
+                gameTypes.Value = member.Value;
             }
             else if (member.NameEquals(flags.Name))
             {
-                flags = flags.From(member.Value);
+                flags.Value = member.Value;
             }
             else if (member.NameEquals(restrictions.Name))
             {
-                restrictions = restrictions.From(member.Value);
+                restrictions.Value = member.Value;
             }
             else if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(chatLink.Name))
             {
-                chatLink = chatLink.From(member.Value);
+                chatLink.Value = member.Value;
             }
             else if (member.NameEquals(icon.Name))
             {
-                icon = icon.From(member.Value);
+                icon.Value = member.Value;
             }
             else if (member.NameEquals("details"))
             {
@@ -7902,7 +7902,7 @@ public static class ItemReader
                     }
                     else if (detail.NameEquals(charges.Name))
                     {
-                        charges = charges.From(detail.Value);
+                        charges.Value = detail.Value;
                     }
                     else if (missingMemberBehavior == MissingMemberBehavior.Error)
                     {
@@ -7979,55 +7979,55 @@ public static class ItemReader
             }
             else if (member.NameEquals(name.Name))
             {
-                name = name.From(member.Value);
+                name.Value = member.Value;
             }
             else if (member.NameEquals(description.Name))
             {
-                description = description.From(member.Value);
+                description.Value = member.Value;
             }
             else if (member.NameEquals(level.Name))
             {
-                level = level.From(member.Value);
+                level.Value = member.Value;
             }
             else if (member.NameEquals(rarity.Name))
             {
-                rarity = rarity.From(member.Value);
+                rarity.Value = member.Value;
             }
             else if (member.NameEquals(vendorValue.Name))
             {
-                vendorValue = vendorValue.From(member.Value);
+                vendorValue.Value = member.Value;
             }
             else if (member.NameEquals(gameTypes.Name))
             {
-                gameTypes = gameTypes.From(member.Value);
+                gameTypes.Value = member.Value;
             }
             else if (member.NameEquals(flags.Name))
             {
-                flags = flags.From(member.Value);
+                flags.Value = member.Value;
             }
             else if (member.NameEquals(restrictions.Name))
             {
-                restrictions = restrictions.From(member.Value);
+                restrictions.Value = member.Value;
             }
             else if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(chatLink.Name))
             {
-                chatLink = chatLink.From(member.Value);
+                chatLink.Value = member.Value;
             }
             else if (member.NameEquals(icon.Name))
             {
-                icon = icon.From(member.Value);
+                icon.Value = member.Value;
             }
             else if (member.NameEquals(upgradesInto.Name))
             {
-                upgradesInto = upgradesInto.From(member.Value);
+                upgradesInto.Value = member.Value;
             }
             else if (member.NameEquals(upgradesFrom.Name))
             {
-                upgradesFrom = upgradesFrom.From(member.Value);
+                upgradesFrom.Value = member.Value;
             }
             else if (member.NameEquals("details"))
             {
@@ -8044,23 +8044,23 @@ public static class ItemReader
                     }
                     else if (detail.NameEquals(infusionSlots.Name))
                     {
-                        infusionSlots = infusionSlots.From(detail.Value);
+                        infusionSlots.Value = detail.Value;
                     }
                     else if (detail.NameEquals(attributeAdjustment.Name))
                     {
-                        attributeAdjustment = attributeAdjustment.From(detail.Value);
+                        attributeAdjustment.Value = detail.Value;
                     }
                     else if (detail.NameEquals(infixUpgrade.Name))
                     {
-                        infixUpgrade = infixUpgrade.From(detail.Value);
+                        infixUpgrade.Value = detail.Value;
                     }
                     else if (detail.NameEquals(suffixItemId.Name))
                     {
-                        suffixItemId = suffixItemId.From(detail.Value);
+                        suffixItemId.Value = detail.Value;
                     }
                     else if (detail.NameEquals(statChoices.Name))
                     {
-                        statChoices = statChoices.From(detail.Value);
+                        statChoices.Value = detail.Value;
                     }
                     else if (missingMemberBehavior == MissingMemberBehavior.Error)
                     {
@@ -8136,55 +8136,55 @@ public static class ItemReader
             }
             else if (member.NameEquals(name.Name))
             {
-                name = name.From(member.Value);
+                name.Value = member.Value;
             }
             else if (member.NameEquals(description.Name))
             {
-                description = description.From(member.Value);
+                description.Value = member.Value;
             }
             else if (member.NameEquals(level.Name))
             {
-                level = level.From(member.Value);
+                level.Value = member.Value;
             }
             else if (member.NameEquals(rarity.Name))
             {
-                rarity = rarity.From(member.Value);
+                rarity.Value = member.Value;
             }
             else if (member.NameEquals(vendorValue.Name))
             {
-                vendorValue = vendorValue.From(member.Value);
+                vendorValue.Value = member.Value;
             }
             else if (member.NameEquals(gameTypes.Name))
             {
-                gameTypes = gameTypes.From(member.Value);
+                gameTypes.Value = member.Value;
             }
             else if (member.NameEquals(flags.Name))
             {
-                flags = flags.From(member.Value);
+                flags.Value = member.Value;
             }
             else if (member.NameEquals(restrictions.Name))
             {
-                restrictions = restrictions.From(member.Value);
+                restrictions.Value = member.Value;
             }
             else if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(chatLink.Name))
             {
-                chatLink = chatLink.From(member.Value);
+                chatLink.Value = member.Value;
             }
             else if (member.NameEquals(icon.Name))
             {
-                icon = icon.From(member.Value);
+                icon.Value = member.Value;
             }
             else if (member.NameEquals(upgradesInto.Name))
             {
-                upgradesInto = upgradesInto.From(member.Value);
+                upgradesInto.Value = member.Value;
             }
             else if (member.NameEquals(upgradesFrom.Name))
             {
-                upgradesFrom = upgradesFrom.From(member.Value);
+                upgradesFrom.Value = member.Value;
             }
             else if (member.NameEquals("details"))
             {
@@ -8201,23 +8201,23 @@ public static class ItemReader
                     }
                     else if (detail.NameEquals(infusionSlots.Name))
                     {
-                        infusionSlots = infusionSlots.From(detail.Value);
+                        infusionSlots.Value = detail.Value;
                     }
                     else if (detail.NameEquals(attributeAdjustment.Name))
                     {
-                        attributeAdjustment = attributeAdjustment.From(detail.Value);
+                        attributeAdjustment.Value = detail.Value;
                     }
                     else if (detail.NameEquals(infixUpgrade.Name))
                     {
-                        infixUpgrade = infixUpgrade.From(detail.Value);
+                        infixUpgrade.Value = detail.Value;
                     }
                     else if (detail.NameEquals(suffixItemId.Name))
                     {
-                        suffixItemId = suffixItemId.From(detail.Value);
+                        suffixItemId.Value = detail.Value;
                     }
                     else if (detail.NameEquals(statChoices.Name))
                     {
-                        statChoices = statChoices.From(detail.Value);
+                        statChoices.Value = detail.Value;
                     }
                     else if (missingMemberBehavior == MissingMemberBehavior.Error)
                     {
@@ -8290,55 +8290,55 @@ public static class ItemReader
             }
             else if (member.NameEquals(name.Name))
             {
-                name = name.From(member.Value);
+                name.Value = member.Value;
             }
             else if (member.NameEquals(description.Name))
             {
-                description = description.From(member.Value);
+                description.Value = member.Value;
             }
             else if (member.NameEquals(level.Name))
             {
-                level = level.From(member.Value);
+                level.Value = member.Value;
             }
             else if (member.NameEquals(rarity.Name))
             {
-                rarity = rarity.From(member.Value);
+                rarity.Value = member.Value;
             }
             else if (member.NameEquals(vendorValue.Name))
             {
-                vendorValue = vendorValue.From(member.Value);
+                vendorValue.Value = member.Value;
             }
             else if (member.NameEquals(gameTypes.Name))
             {
-                gameTypes = gameTypes.From(member.Value);
+                gameTypes.Value = member.Value;
             }
             else if (member.NameEquals(flags.Name))
             {
-                flags = flags.From(member.Value);
+                flags.Value = member.Value;
             }
             else if (member.NameEquals(restrictions.Name))
             {
-                restrictions = restrictions.From(member.Value);
+                restrictions.Value = member.Value;
             }
             else if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(chatLink.Name))
             {
-                chatLink = chatLink.From(member.Value);
+                chatLink.Value = member.Value;
             }
             else if (member.NameEquals(icon.Name))
             {
-                icon = icon.From(member.Value);
+                icon.Value = member.Value;
             }
             else if (member.NameEquals(upgradesInto.Name))
             {
-                upgradesInto = upgradesInto.From(member.Value);
+                upgradesInto.Value = member.Value;
             }
             else if (member.NameEquals(upgradesFrom.Name))
             {
-                upgradesFrom = upgradesFrom.From(member.Value);
+                upgradesFrom.Value = member.Value;
             }
             else if (member.NameEquals("details"))
             {
@@ -8355,23 +8355,23 @@ public static class ItemReader
                     }
                     else if (detail.NameEquals(infusionSlots.Name))
                     {
-                        infusionSlots = infusionSlots.From(detail.Value);
+                        infusionSlots.Value = detail.Value;
                     }
                     else if (detail.NameEquals(attributeAdjustment.Name))
                     {
-                        attributeAdjustment = attributeAdjustment.From(detail.Value);
+                        attributeAdjustment.Value = detail.Value;
                     }
                     else if (detail.NameEquals(infixUpgrade.Name))
                     {
-                        infixUpgrade = infixUpgrade.From(detail.Value);
+                        infixUpgrade.Value = detail.Value;
                     }
                     else if (detail.NameEquals(suffixItemId.Name))
                     {
-                        suffixItemId = suffixItemId.From(detail.Value);
+                        suffixItemId.Value = detail.Value;
                     }
                     else if (detail.NameEquals(statChoices.Name))
                     {
-                        statChoices = statChoices.From(detail.Value);
+                        statChoices.Value = detail.Value;
                     }
                     else if (missingMemberBehavior == MissingMemberBehavior.Error)
                     {
@@ -8444,55 +8444,55 @@ public static class ItemReader
             }
             else if (member.NameEquals(name.Name))
             {
-                name = name.From(member.Value);
+                name.Value = member.Value;
             }
             else if (member.NameEquals(description.Name))
             {
-                description = description.From(member.Value);
+                description.Value = member.Value;
             }
             else if (member.NameEquals(level.Name))
             {
-                level = level.From(member.Value);
+                level.Value = member.Value;
             }
             else if (member.NameEquals(rarity.Name))
             {
-                rarity = rarity.From(member.Value);
+                rarity.Value = member.Value;
             }
             else if (member.NameEquals(vendorValue.Name))
             {
-                vendorValue = vendorValue.From(member.Value);
+                vendorValue.Value = member.Value;
             }
             else if (member.NameEquals(gameTypes.Name))
             {
-                gameTypes = gameTypes.From(member.Value);
+                gameTypes.Value = member.Value;
             }
             else if (member.NameEquals(flags.Name))
             {
-                flags = flags.From(member.Value);
+                flags.Value = member.Value;
             }
             else if (member.NameEquals(restrictions.Name))
             {
-                restrictions = restrictions.From(member.Value);
+                restrictions.Value = member.Value;
             }
             else if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(chatLink.Name))
             {
-                chatLink = chatLink.From(member.Value);
+                chatLink.Value = member.Value;
             }
             else if (member.NameEquals(icon.Name))
             {
-                icon = icon.From(member.Value);
+                icon.Value = member.Value;
             }
             else if (member.NameEquals(upgradesInto.Name))
             {
-                upgradesInto = upgradesInto.From(member.Value);
+                upgradesInto.Value = member.Value;
             }
             else if (member.NameEquals(upgradesFrom.Name))
             {
-                upgradesFrom = upgradesFrom.From(member.Value);
+                upgradesFrom.Value = member.Value;
             }
             else if (member.NameEquals("details"))
             {
@@ -8509,23 +8509,23 @@ public static class ItemReader
                     }
                     else if (detail.NameEquals(infusionSlots.Name))
                     {
-                        infusionSlots = infusionSlots.From(detail.Value);
+                        infusionSlots.Value = detail.Value;
                     }
                     else if (detail.NameEquals(attributeAdjustment.Name))
                     {
-                        attributeAdjustment = attributeAdjustment.From(detail.Value);
+                        attributeAdjustment.Value = detail.Value;
                     }
                     else if (detail.NameEquals(infixUpgrade.Name))
                     {
-                        infixUpgrade = infixUpgrade.From(detail.Value);
+                        infixUpgrade.Value = detail.Value;
                     }
                     else if (detail.NameEquals(suffixItemId.Name))
                     {
-                        suffixItemId = suffixItemId.From(detail.Value);
+                        suffixItemId.Value = detail.Value;
                     }
                     else if (detail.NameEquals(statChoices.Name))
                     {
-                        statChoices = statChoices.From(detail.Value);
+                        statChoices.Value = detail.Value;
                     }
                     else if (missingMemberBehavior == MissingMemberBehavior.Error)
                     {
@@ -8591,47 +8591,47 @@ public static class ItemReader
             }
             else if (member.NameEquals(name.Name))
             {
-                name = name.From(member.Value);
+                name.Value = member.Value;
             }
             else if (member.NameEquals(description.Name))
             {
-                description = description.From(member.Value);
+                description.Value = member.Value;
             }
             else if (member.NameEquals(level.Name))
             {
-                level = level.From(member.Value);
+                level.Value = member.Value;
             }
             else if (member.NameEquals(rarity.Name))
             {
-                rarity = rarity.From(member.Value);
+                rarity.Value = member.Value;
             }
             else if (member.NameEquals(vendorValue.Name))
             {
-                vendorValue = vendorValue.From(member.Value);
+                vendorValue.Value = member.Value;
             }
             else if (member.NameEquals(gameTypes.Name))
             {
-                gameTypes = gameTypes.From(member.Value);
+                gameTypes.Value = member.Value;
             }
             else if (member.NameEquals(flags.Name))
             {
-                flags = flags.From(member.Value);
+                flags.Value = member.Value;
             }
             else if (member.NameEquals(restrictions.Name))
             {
-                restrictions = restrictions.From(member.Value);
+                restrictions.Value = member.Value;
             }
             else if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(chatLink.Name))
             {
-                chatLink = chatLink.From(member.Value);
+                chatLink.Value = member.Value;
             }
             else if (member.NameEquals(icon.Name))
             {
-                icon = icon.From(member.Value);
+                icon.Value = member.Value;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {
@@ -8701,47 +8701,47 @@ public static class ItemReader
             }
             else if (member.NameEquals(name.Name))
             {
-                name = name.From(member.Value);
+                name.Value = member.Value;
             }
             else if (member.NameEquals(description.Name))
             {
-                description = description.From(member.Value);
+                description.Value = member.Value;
             }
             else if (member.NameEquals(level.Name))
             {
-                level = level.From(member.Value);
+                level.Value = member.Value;
             }
             else if (member.NameEquals(rarity.Name))
             {
-                rarity = rarity.From(member.Value);
+                rarity.Value = member.Value;
             }
             else if (member.NameEquals(vendorValue.Name))
             {
-                vendorValue = vendorValue.From(member.Value);
+                vendorValue.Value = member.Value;
             }
             else if (member.NameEquals(gameTypes.Name))
             {
-                gameTypes = gameTypes.From(member.Value);
+                gameTypes.Value = member.Value;
             }
             else if (member.NameEquals(flags.Name))
             {
-                flags = flags.From(member.Value);
+                flags.Value = member.Value;
             }
             else if (member.NameEquals(restrictions.Name))
             {
-                restrictions = restrictions.From(member.Value);
+                restrictions.Value = member.Value;
             }
             else if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(chatLink.Name))
             {
-                chatLink = chatLink.From(member.Value);
+                chatLink.Value = member.Value;
             }
             else if (member.NameEquals(icon.Name))
             {
-                icon = icon.From(member.Value);
+                icon.Value = member.Value;
             }
             else if (member.NameEquals("details"))
             {
@@ -8758,23 +8758,23 @@ public static class ItemReader
                     }
                     else if (detail.NameEquals(upgradeComponentFlags.Name))
                     {
-                        upgradeComponentFlags = upgradeComponentFlags.From(detail.Value);
+                        upgradeComponentFlags.Value = detail.Value;
                     }
                     else if (detail.NameEquals(infusionUpgradeFlags.Name))
                     {
-                        infusionUpgradeFlags = infusionUpgradeFlags.From(detail.Value);
+                        infusionUpgradeFlags.Value = detail.Value;
                     }
                     else if (detail.NameEquals(attributeAdjustment.Name))
                     {
-                        attributeAdjustment = attributeAdjustment.From(detail.Value);
+                        attributeAdjustment.Value = detail.Value;
                     }
                     else if (detail.NameEquals(infixUpgrade.Name))
                     {
-                        infixUpgrade = infixUpgrade.From(detail.Value);
+                        infixUpgrade.Value = detail.Value;
                     }
                     else if (detail.NameEquals(suffix.Name))
                     {
-                        suffix = suffix.From(detail.Value);
+                        suffix.Value = detail.Value;
                     }
                     else if (missingMemberBehavior == MissingMemberBehavior.Error)
                     {
@@ -8844,47 +8844,47 @@ public static class ItemReader
             }
             else if (member.NameEquals(name.Name))
             {
-                name = name.From(member.Value);
+                name.Value = member.Value;
             }
             else if (member.NameEquals(description.Name))
             {
-                description = description.From(member.Value);
+                description.Value = member.Value;
             }
             else if (member.NameEquals(level.Name))
             {
-                level = level.From(member.Value);
+                level.Value = member.Value;
             }
             else if (member.NameEquals(rarity.Name))
             {
-                rarity = rarity.From(member.Value);
+                rarity.Value = member.Value;
             }
             else if (member.NameEquals(vendorValue.Name))
             {
-                vendorValue = vendorValue.From(member.Value);
+                vendorValue.Value = member.Value;
             }
             else if (member.NameEquals(gameTypes.Name))
             {
-                gameTypes = gameTypes.From(member.Value);
+                gameTypes.Value = member.Value;
             }
             else if (member.NameEquals(flags.Name))
             {
-                flags = flags.From(member.Value);
+                flags.Value = member.Value;
             }
             else if (member.NameEquals(restrictions.Name))
             {
-                restrictions = restrictions.From(member.Value);
+                restrictions.Value = member.Value;
             }
             else if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(chatLink.Name))
             {
-                chatLink = chatLink.From(member.Value);
+                chatLink.Value = member.Value;
             }
             else if (member.NameEquals(icon.Name))
             {
-                icon = icon.From(member.Value);
+                icon.Value = member.Value;
             }
             else if (member.NameEquals("details"))
             {
@@ -8901,27 +8901,27 @@ public static class ItemReader
                     }
                     else if (detail.NameEquals(upgradeComponentFlags.Name))
                     {
-                        upgradeComponentFlags = upgradeComponentFlags.From(detail.Value);
+                        upgradeComponentFlags.Value = detail.Value;
                     }
                     else if (detail.NameEquals(infusionUpgradeFlags.Name))
                     {
-                        infusionUpgradeFlags = infusionUpgradeFlags.From(detail.Value);
+                        infusionUpgradeFlags.Value = detail.Value;
                     }
                     else if (detail.NameEquals(attributeAdjustment.Name))
                     {
-                        attributeAdjustment = attributeAdjustment.From(detail.Value);
+                        attributeAdjustment.Value = detail.Value;
                     }
                     else if (detail.NameEquals(infixUpgrade.Name))
                     {
-                        infixUpgrade = infixUpgrade.From(detail.Value);
+                        infixUpgrade.Value = detail.Value;
                     }
                     else if (detail.NameEquals(suffix.Name))
                     {
-                        suffix = suffix.From(detail.Value);
+                        suffix.Value = detail.Value;
                     }
                     else if (detail.NameEquals(bonuses.Name))
                     {
-                        bonuses = bonuses.From(detail.Value);
+                        bonuses.Value = detail.Value;
                     }
                     else if (missingMemberBehavior == MissingMemberBehavior.Error)
                     {
@@ -8988,47 +8988,47 @@ public static class ItemReader
             }
             else if (member.NameEquals(name.Name))
             {
-                name = name.From(member.Value);
+                name.Value = member.Value;
             }
             else if (member.NameEquals(description.Name))
             {
-                description = description.From(member.Value);
+                description.Value = member.Value;
             }
             else if (member.NameEquals(level.Name))
             {
-                level = level.From(member.Value);
+                level.Value = member.Value;
             }
             else if (member.NameEquals(rarity.Name))
             {
-                rarity = rarity.From(member.Value);
+                rarity.Value = member.Value;
             }
             else if (member.NameEquals(vendorValue.Name))
             {
-                vendorValue = vendorValue.From(member.Value);
+                vendorValue.Value = member.Value;
             }
             else if (member.NameEquals(gameTypes.Name))
             {
-                gameTypes = gameTypes.From(member.Value);
+                gameTypes.Value = member.Value;
             }
             else if (member.NameEquals(flags.Name))
             {
-                flags = flags.From(member.Value);
+                flags.Value = member.Value;
             }
             else if (member.NameEquals(restrictions.Name))
             {
-                restrictions = restrictions.From(member.Value);
+                restrictions.Value = member.Value;
             }
             else if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(chatLink.Name))
             {
-                chatLink = chatLink.From(member.Value);
+                chatLink.Value = member.Value;
             }
             else if (member.NameEquals(icon.Name))
             {
-                icon = icon.From(member.Value);
+                icon.Value = member.Value;
             }
             else if (member.NameEquals("details"))
             {
@@ -9045,23 +9045,23 @@ public static class ItemReader
                     }
                     else if (detail.NameEquals(upgradeComponentFlags.Name))
                     {
-                        upgradeComponentFlags = upgradeComponentFlags.From(detail.Value);
+                        upgradeComponentFlags.Value = detail.Value;
                     }
                     else if (detail.NameEquals(infusionUpgradeFlags.Name))
                     {
-                        infusionUpgradeFlags = infusionUpgradeFlags.From(detail.Value);
+                        infusionUpgradeFlags.Value = detail.Value;
                     }
                     else if (detail.NameEquals(attributeAdjustment.Name))
                     {
-                        attributeAdjustment = attributeAdjustment.From(detail.Value);
+                        attributeAdjustment.Value = detail.Value;
                     }
                     else if (detail.NameEquals(infixUpgrade.Name))
                     {
-                        infixUpgrade = infixUpgrade.From(detail.Value);
+                        infixUpgrade.Value = detail.Value;
                     }
                     else if (detail.NameEquals(suffix.Name))
                     {
-                        suffix = suffix.From(detail.Value);
+                        suffix.Value = detail.Value;
                     }
                     else if (missingMemberBehavior == MissingMemberBehavior.Error)
                     {
@@ -9128,47 +9128,47 @@ public static class ItemReader
             }
             else if (member.NameEquals(name.Name))
             {
-                name = name.From(member.Value);
+                name.Value = member.Value;
             }
             else if (member.NameEquals(description.Name))
             {
-                description = description.From(member.Value);
+                description.Value = member.Value;
             }
             else if (member.NameEquals(level.Name))
             {
-                level = level.From(member.Value);
+                level.Value = member.Value;
             }
             else if (member.NameEquals(rarity.Name))
             {
-                rarity = rarity.From(member.Value);
+                rarity.Value = member.Value;
             }
             else if (member.NameEquals(vendorValue.Name))
             {
-                vendorValue = vendorValue.From(member.Value);
+                vendorValue.Value = member.Value;
             }
             else if (member.NameEquals(gameTypes.Name))
             {
-                gameTypes = gameTypes.From(member.Value);
+                gameTypes.Value = member.Value;
             }
             else if (member.NameEquals(flags.Name))
             {
-                flags = flags.From(member.Value);
+                flags.Value = member.Value;
             }
             else if (member.NameEquals(restrictions.Name))
             {
-                restrictions = restrictions.From(member.Value);
+                restrictions.Value = member.Value;
             }
             else if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(chatLink.Name))
             {
-                chatLink = chatLink.From(member.Value);
+                chatLink.Value = member.Value;
             }
             else if (member.NameEquals(icon.Name))
             {
-                icon = icon.From(member.Value);
+                icon.Value = member.Value;
             }
             else if (member.NameEquals("details"))
             {
@@ -9185,27 +9185,27 @@ public static class ItemReader
                     }
                     else if (detail.NameEquals(upgradeComponentFlags.Name))
                     {
-                        upgradeComponentFlags = upgradeComponentFlags.From(detail.Value);
+                        upgradeComponentFlags.Value = detail.Value;
                     }
                     else if (detail.NameEquals(infusionUpgradeFlags.Name))
                     {
-                        infusionUpgradeFlags = infusionUpgradeFlags.From(detail.Value);
+                        infusionUpgradeFlags.Value = detail.Value;
                     }
                     else if (detail.NameEquals(attributeAdjustment.Name))
                     {
-                        attributeAdjustment = attributeAdjustment.From(detail.Value);
+                        attributeAdjustment.Value = detail.Value;
                     }
                     else if (detail.NameEquals(infixUpgrade.Name))
                     {
-                        infixUpgrade = infixUpgrade.From(detail.Value);
+                        infixUpgrade.Value = detail.Value;
                     }
                     else if (detail.NameEquals(suffix.Name))
                     {
-                        suffix = suffix.From(detail.Value);
+                        suffix.Value = detail.Value;
                     }
                     else if (detail.NameEquals(bonuses.Name))
                     {
-                        bonuses = bonuses.From(detail.Value);
+                        bonuses.Value = detail.Value;
                     }
                     else if (missingMemberBehavior == MissingMemberBehavior.Error)
                     {
@@ -9272,47 +9272,47 @@ public static class ItemReader
             }
             else if (member.NameEquals(name.Name))
             {
-                name = name.From(member.Value);
+                name.Value = member.Value;
             }
             else if (member.NameEquals(description.Name))
             {
-                description = description.From(member.Value);
+                description.Value = member.Value;
             }
             else if (member.NameEquals(level.Name))
             {
-                level = level.From(member.Value);
+                level.Value = member.Value;
             }
             else if (member.NameEquals(rarity.Name))
             {
-                rarity = rarity.From(member.Value);
+                rarity.Value = member.Value;
             }
             else if (member.NameEquals(vendorValue.Name))
             {
-                vendorValue = vendorValue.From(member.Value);
+                vendorValue.Value = member.Value;
             }
             else if (member.NameEquals(gameTypes.Name))
             {
-                gameTypes = gameTypes.From(member.Value);
+                gameTypes.Value = member.Value;
             }
             else if (member.NameEquals(flags.Name))
             {
-                flags = flags.From(member.Value);
+                flags.Value = member.Value;
             }
             else if (member.NameEquals(restrictions.Name))
             {
-                restrictions = restrictions.From(member.Value);
+                restrictions.Value = member.Value;
             }
             else if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(chatLink.Name))
             {
-                chatLink = chatLink.From(member.Value);
+                chatLink.Value = member.Value;
             }
             else if (member.NameEquals(icon.Name))
             {
-                icon = icon.From(member.Value);
+                icon.Value = member.Value;
             }
             else if (member.NameEquals("details"))
             {
@@ -9329,23 +9329,23 @@ public static class ItemReader
                     }
                     else if (detail.NameEquals(upgradeComponentFlags.Name))
                     {
-                        upgradeComponentFlags = upgradeComponentFlags.From(detail.Value);
+                        upgradeComponentFlags.Value = detail.Value;
                     }
                     else if (detail.NameEquals(infusionUpgradeFlags.Name))
                     {
-                        infusionUpgradeFlags = infusionUpgradeFlags.From(detail.Value);
+                        infusionUpgradeFlags.Value = detail.Value;
                     }
                     else if (detail.NameEquals(attributeAdjustment.Name))
                     {
-                        attributeAdjustment = attributeAdjustment.From(detail.Value);
+                        attributeAdjustment.Value = detail.Value;
                     }
                     else if (detail.NameEquals(infixUpgrade.Name))
                     {
-                        infixUpgrade = infixUpgrade.From(detail.Value);
+                        infixUpgrade.Value = detail.Value;
                     }
                     else if (detail.NameEquals(suffix.Name))
                     {
-                        suffix = suffix.From(detail.Value);
+                        suffix.Value = detail.Value;
                     }
                     else if (missingMemberBehavior == MissingMemberBehavior.Error)
                     {
@@ -9467,51 +9467,51 @@ public static class ItemReader
             }
             else if (member.NameEquals(name.Name))
             {
-                name = name.From(member.Value);
+                name.Value = member.Value;
             }
             else if (member.NameEquals(description.Name))
             {
-                description = description.From(member.Value);
+                description.Value = member.Value;
             }
             else if (member.NameEquals(level.Name))
             {
-                level = level.From(member.Value);
+                level.Value = member.Value;
             }
             else if (member.NameEquals(rarity.Name))
             {
-                rarity = rarity.From(member.Value);
+                rarity.Value = member.Value;
             }
             else if (member.NameEquals(vendorValue.Name))
             {
-                vendorValue = vendorValue.From(member.Value);
+                vendorValue.Value = member.Value;
             }
             else if (member.NameEquals(defaultSkin.Name))
             {
-                defaultSkin = defaultSkin.From(member.Value);
+                defaultSkin.Value = member.Value;
             }
             else if (member.NameEquals(gameTypes.Name))
             {
-                gameTypes = gameTypes.From(member.Value);
+                gameTypes.Value = member.Value;
             }
             else if (member.NameEquals(flags.Name))
             {
-                flags = flags.From(member.Value);
+                flags.Value = member.Value;
             }
             else if (member.NameEquals(restrictions.Name))
             {
-                restrictions = restrictions.From(member.Value);
+                restrictions.Value = member.Value;
             }
             else if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(chatLink.Name))
             {
-                chatLink = chatLink.From(member.Value);
+                chatLink.Value = member.Value;
             }
             else if (member.NameEquals(icon.Name))
             {
-                icon = icon.From(member.Value);
+                icon.Value = member.Value;
             }
             else if (member.NameEquals("details"))
             {
@@ -9528,43 +9528,43 @@ public static class ItemReader
                     }
                     else if (detail.NameEquals(damageType.Name))
                     {
-                        damageType = damageType.From(detail.Value);
+                        damageType.Value = detail.Value;
                     }
                     else if (detail.NameEquals(minPower.Name))
                     {
-                        minPower = minPower.From(detail.Value);
+                        minPower.Value = detail.Value;
                     }
                     else if (detail.NameEquals(maxPower.Name))
                     {
-                        maxPower = maxPower.From(detail.Value);
+                        maxPower.Value = detail.Value;
                     }
                     else if (detail.NameEquals(defense.Name))
                     {
-                        defense = defense.From(detail.Value);
+                        defense.Value = detail.Value;
                     }
                     else if (detail.NameEquals(infusionSlots.Name))
                     {
-                        infusionSlots = infusionSlots.From(detail.Value);
+                        infusionSlots.Value = detail.Value;
                     }
                     else if (detail.NameEquals(attributeAdjustment.Name))
                     {
-                        attributeAdjustment = attributeAdjustment.From(detail.Value);
+                        attributeAdjustment.Value = detail.Value;
                     }
                     else if (detail.NameEquals(statChoices.Name))
                     {
-                        statChoices = statChoices.From(detail.Value);
+                        statChoices.Value = detail.Value;
                     }
                     else if (detail.NameEquals(infixUpgrade.Name))
                     {
-                        infixUpgrade = infixUpgrade.From(detail.Value);
+                        infixUpgrade.Value = detail.Value;
                     }
                     else if (detail.NameEquals(suffixItemId.Name))
                     {
-                        suffixItemId = suffixItemId.From(detail.Value);
+                        suffixItemId.Value = detail.Value;
                     }
                     else if (detail.NameEquals(secondarySuffixItemId.Name))
                     {
-                        secondarySuffixItemId = secondarySuffixItemId.From(detail.Value);
+                        secondarySuffixItemId.Value = detail.Value;
                     }
                     else if (missingMemberBehavior == MissingMemberBehavior.Error)
                     {
@@ -9643,51 +9643,51 @@ public static class ItemReader
             }
             else if (member.NameEquals(name.Name))
             {
-                name = name.From(member.Value);
+                name.Value = member.Value;
             }
             else if (member.NameEquals(description.Name))
             {
-                description = description.From(member.Value);
+                description.Value = member.Value;
             }
             else if (member.NameEquals(level.Name))
             {
-                level = level.From(member.Value);
+                level.Value = member.Value;
             }
             else if (member.NameEquals(rarity.Name))
             {
-                rarity = rarity.From(member.Value);
+                rarity.Value = member.Value;
             }
             else if (member.NameEquals(vendorValue.Name))
             {
-                vendorValue = vendorValue.From(member.Value);
+                vendorValue.Value = member.Value;
             }
             else if (member.NameEquals(defaultSkin.Name))
             {
-                defaultSkin = defaultSkin.From(member.Value);
+                defaultSkin.Value = member.Value;
             }
             else if (member.NameEquals(gameTypes.Name))
             {
-                gameTypes = gameTypes.From(member.Value);
+                gameTypes.Value = member.Value;
             }
             else if (member.NameEquals(flags.Name))
             {
-                flags = flags.From(member.Value);
+                flags.Value = member.Value;
             }
             else if (member.NameEquals(restrictions.Name))
             {
-                restrictions = restrictions.From(member.Value);
+                restrictions.Value = member.Value;
             }
             else if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(chatLink.Name))
             {
-                chatLink = chatLink.From(member.Value);
+                chatLink.Value = member.Value;
             }
             else if (member.NameEquals(icon.Name))
             {
-                icon = icon.From(member.Value);
+                icon.Value = member.Value;
             }
             else if (member.NameEquals("details"))
             {
@@ -9704,43 +9704,43 @@ public static class ItemReader
                     }
                     else if (detail.NameEquals(damageType.Name))
                     {
-                        damageType = damageType.From(detail.Value);
+                        damageType.Value = detail.Value;
                     }
                     else if (detail.NameEquals(minPower.Name))
                     {
-                        minPower = minPower.From(detail.Value);
+                        minPower.Value = detail.Value;
                     }
                     else if (detail.NameEquals(maxPower.Name))
                     {
-                        maxPower = maxPower.From(detail.Value);
+                        maxPower.Value = detail.Value;
                     }
                     else if (detail.NameEquals(defense.Name))
                     {
-                        defense = defense.From(detail.Value);
+                        defense.Value = detail.Value;
                     }
                     else if (detail.NameEquals(infusionSlots.Name))
                     {
-                        infusionSlots = infusionSlots.From(detail.Value);
+                        infusionSlots.Value = detail.Value;
                     }
                     else if (detail.NameEquals(attributeAdjustment.Name))
                     {
-                        attributeAdjustment = attributeAdjustment.From(detail.Value);
+                        attributeAdjustment.Value = detail.Value;
                     }
                     else if (detail.NameEquals(statChoices.Name))
                     {
-                        statChoices = statChoices.From(detail.Value);
+                        statChoices.Value = detail.Value;
                     }
                     else if (detail.NameEquals(infixUpgrade.Name))
                     {
-                        infixUpgrade = infixUpgrade.From(detail.Value);
+                        infixUpgrade.Value = detail.Value;
                     }
                     else if (detail.NameEquals(suffixItemId.Name))
                     {
-                        suffixItemId = suffixItemId.From(detail.Value);
+                        suffixItemId.Value = detail.Value;
                     }
                     else if (detail.NameEquals(secondarySuffixItemId.Name))
                     {
-                        secondarySuffixItemId = secondarySuffixItemId.From(detail.Value);
+                        secondarySuffixItemId.Value = detail.Value;
                     }
                     else if (missingMemberBehavior == MissingMemberBehavior.Error)
                     {
@@ -9819,51 +9819,51 @@ public static class ItemReader
             }
             else if (member.NameEquals(name.Name))
             {
-                name = name.From(member.Value);
+                name.Value = member.Value;
             }
             else if (member.NameEquals(description.Name))
             {
-                description = description.From(member.Value);
+                description.Value = member.Value;
             }
             else if (member.NameEquals(level.Name))
             {
-                level = level.From(member.Value);
+                level.Value = member.Value;
             }
             else if (member.NameEquals(rarity.Name))
             {
-                rarity = rarity.From(member.Value);
+                rarity.Value = member.Value;
             }
             else if (member.NameEquals(vendorValue.Name))
             {
-                vendorValue = vendorValue.From(member.Value);
+                vendorValue.Value = member.Value;
             }
             else if (member.NameEquals(defaultSkin.Name))
             {
-                defaultSkin = defaultSkin.From(member.Value);
+                defaultSkin.Value = member.Value;
             }
             else if (member.NameEquals(gameTypes.Name))
             {
-                gameTypes = gameTypes.From(member.Value);
+                gameTypes.Value = member.Value;
             }
             else if (member.NameEquals(flags.Name))
             {
-                flags = flags.From(member.Value);
+                flags.Value = member.Value;
             }
             else if (member.NameEquals(restrictions.Name))
             {
-                restrictions = restrictions.From(member.Value);
+                restrictions.Value = member.Value;
             }
             else if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(chatLink.Name))
             {
-                chatLink = chatLink.From(member.Value);
+                chatLink.Value = member.Value;
             }
             else if (member.NameEquals(icon.Name))
             {
-                icon = icon.From(member.Value);
+                icon.Value = member.Value;
             }
             else if (member.NameEquals("details"))
             {
@@ -9880,43 +9880,43 @@ public static class ItemReader
                     }
                     else if (detail.NameEquals(damageType.Name))
                     {
-                        damageType = damageType.From(detail.Value);
+                        damageType.Value = detail.Value;
                     }
                     else if (detail.NameEquals(minPower.Name))
                     {
-                        minPower = minPower.From(detail.Value);
+                        minPower.Value = detail.Value;
                     }
                     else if (detail.NameEquals(maxPower.Name))
                     {
-                        maxPower = maxPower.From(detail.Value);
+                        maxPower.Value = detail.Value;
                     }
                     else if (detail.NameEquals(defense.Name))
                     {
-                        defense = defense.From(detail.Value);
+                        defense.Value = detail.Value;
                     }
                     else if (detail.NameEquals(infusionSlots.Name))
                     {
-                        infusionSlots = infusionSlots.From(detail.Value);
+                        infusionSlots.Value = detail.Value;
                     }
                     else if (detail.NameEquals(attributeAdjustment.Name))
                     {
-                        attributeAdjustment = attributeAdjustment.From(detail.Value);
+                        attributeAdjustment.Value = detail.Value;
                     }
                     else if (detail.NameEquals(statChoices.Name))
                     {
-                        statChoices = statChoices.From(detail.Value);
+                        statChoices.Value = detail.Value;
                     }
                     else if (detail.NameEquals(infixUpgrade.Name))
                     {
-                        infixUpgrade = infixUpgrade.From(detail.Value);
+                        infixUpgrade.Value = detail.Value;
                     }
                     else if (detail.NameEquals(suffixItemId.Name))
                     {
-                        suffixItemId = suffixItemId.From(detail.Value);
+                        suffixItemId.Value = detail.Value;
                     }
                     else if (detail.NameEquals(secondarySuffixItemId.Name))
                     {
-                        secondarySuffixItemId = secondarySuffixItemId.From(detail.Value);
+                        secondarySuffixItemId.Value = detail.Value;
                     }
                     else if (missingMemberBehavior == MissingMemberBehavior.Error)
                     {
@@ -9995,51 +9995,51 @@ public static class ItemReader
             }
             else if (member.NameEquals(name.Name))
             {
-                name = name.From(member.Value);
+                name.Value = member.Value;
             }
             else if (member.NameEquals(description.Name))
             {
-                description = description.From(member.Value);
+                description.Value = member.Value;
             }
             else if (member.NameEquals(level.Name))
             {
-                level = level.From(member.Value);
+                level.Value = member.Value;
             }
             else if (member.NameEquals(rarity.Name))
             {
-                rarity = rarity.From(member.Value);
+                rarity.Value = member.Value;
             }
             else if (member.NameEquals(vendorValue.Name))
             {
-                vendorValue = vendorValue.From(member.Value);
+                vendorValue.Value = member.Value;
             }
             else if (member.NameEquals(defaultSkin.Name))
             {
-                defaultSkin = defaultSkin.From(member.Value);
+                defaultSkin.Value = member.Value;
             }
             else if (member.NameEquals(gameTypes.Name))
             {
-                gameTypes = gameTypes.From(member.Value);
+                gameTypes.Value = member.Value;
             }
             else if (member.NameEquals(flags.Name))
             {
-                flags = flags.From(member.Value);
+                flags.Value = member.Value;
             }
             else if (member.NameEquals(restrictions.Name))
             {
-                restrictions = restrictions.From(member.Value);
+                restrictions.Value = member.Value;
             }
             else if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(chatLink.Name))
             {
-                chatLink = chatLink.From(member.Value);
+                chatLink.Value = member.Value;
             }
             else if (member.NameEquals(icon.Name))
             {
-                icon = icon.From(member.Value);
+                icon.Value = member.Value;
             }
             else if (member.NameEquals("details"))
             {
@@ -10056,43 +10056,43 @@ public static class ItemReader
                     }
                     else if (detail.NameEquals(damageType.Name))
                     {
-                        damageType = damageType.From(detail.Value);
+                        damageType.Value = detail.Value;
                     }
                     else if (detail.NameEquals(minPower.Name))
                     {
-                        minPower = minPower.From(detail.Value);
+                        minPower.Value = detail.Value;
                     }
                     else if (detail.NameEquals(maxPower.Name))
                     {
-                        maxPower = maxPower.From(detail.Value);
+                        maxPower.Value = detail.Value;
                     }
                     else if (detail.NameEquals(defense.Name))
                     {
-                        defense = defense.From(detail.Value);
+                        defense.Value = detail.Value;
                     }
                     else if (detail.NameEquals(infusionSlots.Name))
                     {
-                        infusionSlots = infusionSlots.From(detail.Value);
+                        infusionSlots.Value = detail.Value;
                     }
                     else if (detail.NameEquals(attributeAdjustment.Name))
                     {
-                        attributeAdjustment = attributeAdjustment.From(detail.Value);
+                        attributeAdjustment.Value = detail.Value;
                     }
                     else if (detail.NameEquals(statChoices.Name))
                     {
-                        statChoices = statChoices.From(detail.Value);
+                        statChoices.Value = detail.Value;
                     }
                     else if (detail.NameEquals(infixUpgrade.Name))
                     {
-                        infixUpgrade = infixUpgrade.From(detail.Value);
+                        infixUpgrade.Value = detail.Value;
                     }
                     else if (detail.NameEquals(suffixItemId.Name))
                     {
-                        suffixItemId = suffixItemId.From(detail.Value);
+                        suffixItemId.Value = detail.Value;
                     }
                     else if (detail.NameEquals(secondarySuffixItemId.Name))
                     {
-                        secondarySuffixItemId = secondarySuffixItemId.From(detail.Value);
+                        secondarySuffixItemId.Value = detail.Value;
                     }
                     else if (missingMemberBehavior == MissingMemberBehavior.Error)
                     {
@@ -10174,51 +10174,51 @@ public static class ItemReader
             }
             else if (member.NameEquals(name.Name))
             {
-                name = name.From(member.Value);
+                name.Value = member.Value;
             }
             else if (member.NameEquals(description.Name))
             {
-                description = description.From(member.Value);
+                description.Value = member.Value;
             }
             else if (member.NameEquals(level.Name))
             {
-                level = level.From(member.Value);
+                level.Value = member.Value;
             }
             else if (member.NameEquals(rarity.Name))
             {
-                rarity = rarity.From(member.Value);
+                rarity.Value = member.Value;
             }
             else if (member.NameEquals(vendorValue.Name))
             {
-                vendorValue = vendorValue.From(member.Value);
+                vendorValue.Value = member.Value;
             }
             else if (member.NameEquals(defaultSkin.Name))
             {
-                defaultSkin = defaultSkin.From(member.Value);
+                defaultSkin.Value = member.Value;
             }
             else if (member.NameEquals(gameTypes.Name))
             {
-                gameTypes = gameTypes.From(member.Value);
+                gameTypes.Value = member.Value;
             }
             else if (member.NameEquals(flags.Name))
             {
-                flags = flags.From(member.Value);
+                flags.Value = member.Value;
             }
             else if (member.NameEquals(restrictions.Name))
             {
-                restrictions = restrictions.From(member.Value);
+                restrictions.Value = member.Value;
             }
             else if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(chatLink.Name))
             {
-                chatLink = chatLink.From(member.Value);
+                chatLink.Value = member.Value;
             }
             else if (member.NameEquals(icon.Name))
             {
-                icon = icon.From(member.Value);
+                icon.Value = member.Value;
             }
             else if (member.NameEquals("details"))
             {
@@ -10235,43 +10235,43 @@ public static class ItemReader
                     }
                     else if (detail.NameEquals(damageType.Name))
                     {
-                        damageType = damageType.From(detail.Value);
+                        damageType.Value = detail.Value;
                     }
                     else if (detail.NameEquals(minPower.Name))
                     {
-                        minPower = minPower.From(detail.Value);
+                        minPower.Value = detail.Value;
                     }
                     else if (detail.NameEquals(maxPower.Name))
                     {
-                        maxPower = maxPower.From(detail.Value);
+                        maxPower.Value = detail.Value;
                     }
                     else if (detail.NameEquals(defense.Name))
                     {
-                        defense = defense.From(detail.Value);
+                        defense.Value = detail.Value;
                     }
                     else if (detail.NameEquals(infusionSlots.Name))
                     {
-                        infusionSlots = infusionSlots.From(detail.Value);
+                        infusionSlots.Value = detail.Value;
                     }
                     else if (detail.NameEquals(attributeAdjustment.Name))
                     {
-                        attributeAdjustment = attributeAdjustment.From(detail.Value);
+                        attributeAdjustment.Value = detail.Value;
                     }
                     else if (detail.NameEquals(statChoices.Name))
                     {
-                        statChoices = statChoices.From(detail.Value);
+                        statChoices.Value = detail.Value;
                     }
                     else if (detail.NameEquals(infixUpgrade.Name))
                     {
-                        infixUpgrade = infixUpgrade.From(detail.Value);
+                        infixUpgrade.Value = detail.Value;
                     }
                     else if (detail.NameEquals(suffixItemId.Name))
                     {
-                        suffixItemId = suffixItemId.From(detail.Value);
+                        suffixItemId.Value = detail.Value;
                     }
                     else if (detail.NameEquals(secondarySuffixItemId.Name))
                     {
-                        secondarySuffixItemId = secondarySuffixItemId.From(detail.Value);
+                        secondarySuffixItemId.Value = detail.Value;
                     }
                     else if (missingMemberBehavior == MissingMemberBehavior.Error)
                     {
@@ -10350,51 +10350,51 @@ public static class ItemReader
             }
             else if (member.NameEquals(name.Name))
             {
-                name = name.From(member.Value);
+                name.Value = member.Value;
             }
             else if (member.NameEquals(description.Name))
             {
-                description = description.From(member.Value);
+                description.Value = member.Value;
             }
             else if (member.NameEquals(level.Name))
             {
-                level = level.From(member.Value);
+                level.Value = member.Value;
             }
             else if (member.NameEquals(rarity.Name))
             {
-                rarity = rarity.From(member.Value);
+                rarity.Value = member.Value;
             }
             else if (member.NameEquals(vendorValue.Name))
             {
-                vendorValue = vendorValue.From(member.Value);
+                vendorValue.Value = member.Value;
             }
             else if (member.NameEquals(defaultSkin.Name))
             {
-                defaultSkin = defaultSkin.From(member.Value);
+                defaultSkin.Value = member.Value;
             }
             else if (member.NameEquals(gameTypes.Name))
             {
-                gameTypes = gameTypes.From(member.Value);
+                gameTypes.Value = member.Value;
             }
             else if (member.NameEquals(flags.Name))
             {
-                flags = flags.From(member.Value);
+                flags.Value = member.Value;
             }
             else if (member.NameEquals(restrictions.Name))
             {
-                restrictions = restrictions.From(member.Value);
+                restrictions.Value = member.Value;
             }
             else if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(chatLink.Name))
             {
-                chatLink = chatLink.From(member.Value);
+                chatLink.Value = member.Value;
             }
             else if (member.NameEquals(icon.Name))
             {
-                icon = icon.From(member.Value);
+                icon.Value = member.Value;
             }
             else if (member.NameEquals("details"))
             {
@@ -10411,43 +10411,43 @@ public static class ItemReader
                     }
                     else if (detail.NameEquals(damageType.Name))
                     {
-                        damageType = damageType.From(detail.Value);
+                        damageType.Value = detail.Value;
                     }
                     else if (detail.NameEquals(minPower.Name))
                     {
-                        minPower = minPower.From(detail.Value);
+                        minPower.Value = detail.Value;
                     }
                     else if (detail.NameEquals(maxPower.Name))
                     {
-                        maxPower = maxPower.From(detail.Value);
+                        maxPower.Value = detail.Value;
                     }
                     else if (detail.NameEquals(defense.Name))
                     {
-                        defense = defense.From(detail.Value);
+                        defense.Value = detail.Value;
                     }
                     else if (detail.NameEquals(infusionSlots.Name))
                     {
-                        infusionSlots = infusionSlots.From(detail.Value);
+                        infusionSlots.Value = detail.Value;
                     }
                     else if (detail.NameEquals(attributeAdjustment.Name))
                     {
-                        attributeAdjustment = attributeAdjustment.From(detail.Value);
+                        attributeAdjustment.Value = detail.Value;
                     }
                     else if (detail.NameEquals(statChoices.Name))
                     {
-                        statChoices = statChoices.From(detail.Value);
+                        statChoices.Value = detail.Value;
                     }
                     else if (detail.NameEquals(infixUpgrade.Name))
                     {
-                        infixUpgrade = infixUpgrade.From(detail.Value);
+                        infixUpgrade.Value = detail.Value;
                     }
                     else if (detail.NameEquals(suffixItemId.Name))
                     {
-                        suffixItemId = suffixItemId.From(detail.Value);
+                        suffixItemId.Value = detail.Value;
                     }
                     else if (detail.NameEquals(secondarySuffixItemId.Name))
                     {
-                        secondarySuffixItemId = secondarySuffixItemId.From(detail.Value);
+                        secondarySuffixItemId.Value = detail.Value;
                     }
                     else if (missingMemberBehavior == MissingMemberBehavior.Error)
                     {
@@ -10526,51 +10526,51 @@ public static class ItemReader
             }
             else if (member.NameEquals(name.Name))
             {
-                name = name.From(member.Value);
+                name.Value = member.Value;
             }
             else if (member.NameEquals(description.Name))
             {
-                description = description.From(member.Value);
+                description.Value = member.Value;
             }
             else if (member.NameEquals(level.Name))
             {
-                level = level.From(member.Value);
+                level.Value = member.Value;
             }
             else if (member.NameEquals(rarity.Name))
             {
-                rarity = rarity.From(member.Value);
+                rarity.Value = member.Value;
             }
             else if (member.NameEquals(vendorValue.Name))
             {
-                vendorValue = vendorValue.From(member.Value);
+                vendorValue.Value = member.Value;
             }
             else if (member.NameEquals(defaultSkin.Name))
             {
-                defaultSkin = defaultSkin.From(member.Value);
+                defaultSkin.Value = member.Value;
             }
             else if (member.NameEquals(gameTypes.Name))
             {
-                gameTypes = gameTypes.From(member.Value);
+                gameTypes.Value = member.Value;
             }
             else if (member.NameEquals(flags.Name))
             {
-                flags = flags.From(member.Value);
+                flags.Value = member.Value;
             }
             else if (member.NameEquals(restrictions.Name))
             {
-                restrictions = restrictions.From(member.Value);
+                restrictions.Value = member.Value;
             }
             else if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(chatLink.Name))
             {
-                chatLink = chatLink.From(member.Value);
+                chatLink.Value = member.Value;
             }
             else if (member.NameEquals(icon.Name))
             {
-                icon = icon.From(member.Value);
+                icon.Value = member.Value;
             }
             else if (member.NameEquals("details"))
             {
@@ -10587,43 +10587,43 @@ public static class ItemReader
                     }
                     else if (detail.NameEquals(damageType.Name))
                     {
-                        damageType = damageType.From(detail.Value);
+                        damageType.Value = detail.Value;
                     }
                     else if (detail.NameEquals(minPower.Name))
                     {
-                        minPower = minPower.From(detail.Value);
+                        minPower.Value = detail.Value;
                     }
                     else if (detail.NameEquals(maxPower.Name))
                     {
-                        maxPower = maxPower.From(detail.Value);
+                        maxPower.Value = detail.Value;
                     }
                     else if (detail.NameEquals(defense.Name))
                     {
-                        defense = defense.From(detail.Value);
+                        defense.Value = detail.Value;
                     }
                     else if (detail.NameEquals(infusionSlots.Name))
                     {
-                        infusionSlots = infusionSlots.From(detail.Value);
+                        infusionSlots.Value = detail.Value;
                     }
                     else if (detail.NameEquals(attributeAdjustment.Name))
                     {
-                        attributeAdjustment = attributeAdjustment.From(detail.Value);
+                        attributeAdjustment.Value = detail.Value;
                     }
                     else if (detail.NameEquals(statChoices.Name))
                     {
-                        statChoices = statChoices.From(detail.Value);
+                        statChoices.Value = detail.Value;
                     }
                     else if (detail.NameEquals(infixUpgrade.Name))
                     {
-                        infixUpgrade = infixUpgrade.From(detail.Value);
+                        infixUpgrade.Value = detail.Value;
                     }
                     else if (detail.NameEquals(suffixItemId.Name))
                     {
-                        suffixItemId = suffixItemId.From(detail.Value);
+                        suffixItemId.Value = detail.Value;
                     }
                     else if (detail.NameEquals(secondarySuffixItemId.Name))
                     {
-                        secondarySuffixItemId = secondarySuffixItemId.From(detail.Value);
+                        secondarySuffixItemId.Value = detail.Value;
                     }
                     else if (missingMemberBehavior == MissingMemberBehavior.Error)
                     {
@@ -10705,51 +10705,51 @@ public static class ItemReader
             }
             else if (member.NameEquals(name.Name))
             {
-                name = name.From(member.Value);
+                name.Value = member.Value;
             }
             else if (member.NameEquals(description.Name))
             {
-                description = description.From(member.Value);
+                description.Value = member.Value;
             }
             else if (member.NameEquals(level.Name))
             {
-                level = level.From(member.Value);
+                level.Value = member.Value;
             }
             else if (member.NameEquals(rarity.Name))
             {
-                rarity = rarity.From(member.Value);
+                rarity.Value = member.Value;
             }
             else if (member.NameEquals(vendorValue.Name))
             {
-                vendorValue = vendorValue.From(member.Value);
+                vendorValue.Value = member.Value;
             }
             else if (member.NameEquals(defaultSkin.Name))
             {
-                defaultSkin = defaultSkin.From(member.Value);
+                defaultSkin.Value = member.Value;
             }
             else if (member.NameEquals(gameTypes.Name))
             {
-                gameTypes = gameTypes.From(member.Value);
+                gameTypes.Value = member.Value;
             }
             else if (member.NameEquals(flags.Name))
             {
-                flags = flags.From(member.Value);
+                flags.Value = member.Value;
             }
             else if (member.NameEquals(restrictions.Name))
             {
-                restrictions = restrictions.From(member.Value);
+                restrictions.Value = member.Value;
             }
             else if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(chatLink.Name))
             {
-                chatLink = chatLink.From(member.Value);
+                chatLink.Value = member.Value;
             }
             else if (member.NameEquals(icon.Name))
             {
-                icon = icon.From(member.Value);
+                icon.Value = member.Value;
             }
             else if (member.NameEquals("details"))
             {
@@ -10766,43 +10766,43 @@ public static class ItemReader
                     }
                     else if (detail.NameEquals(damageType.Name))
                     {
-                        damageType = damageType.From(detail.Value);
+                        damageType.Value = detail.Value;
                     }
                     else if (detail.NameEquals(minPower.Name))
                     {
-                        minPower = minPower.From(detail.Value);
+                        minPower.Value = detail.Value;
                     }
                     else if (detail.NameEquals(maxPower.Name))
                     {
-                        maxPower = maxPower.From(detail.Value);
+                        maxPower.Value = detail.Value;
                     }
                     else if (detail.NameEquals(defense.Name))
                     {
-                        defense = defense.From(detail.Value);
+                        defense.Value = detail.Value;
                     }
                     else if (detail.NameEquals(infusionSlots.Name))
                     {
-                        infusionSlots = infusionSlots.From(detail.Value);
+                        infusionSlots.Value = detail.Value;
                     }
                     else if (detail.NameEquals(attributeAdjustment.Name))
                     {
-                        attributeAdjustment = attributeAdjustment.From(detail.Value);
+                        attributeAdjustment.Value = detail.Value;
                     }
                     else if (detail.NameEquals(statChoices.Name))
                     {
-                        statChoices = statChoices.From(detail.Value);
+                        statChoices.Value = detail.Value;
                     }
                     else if (detail.NameEquals(infixUpgrade.Name))
                     {
-                        infixUpgrade = infixUpgrade.From(detail.Value);
+                        infixUpgrade.Value = detail.Value;
                     }
                     else if (detail.NameEquals(suffixItemId.Name))
                     {
-                        suffixItemId = suffixItemId.From(detail.Value);
+                        suffixItemId.Value = detail.Value;
                     }
                     else if (detail.NameEquals(secondarySuffixItemId.Name))
                     {
-                        secondarySuffixItemId = secondarySuffixItemId.From(detail.Value);
+                        secondarySuffixItemId.Value = detail.Value;
                     }
                     else if (missingMemberBehavior == MissingMemberBehavior.Error)
                     {
@@ -10884,51 +10884,51 @@ public static class ItemReader
             }
             else if (member.NameEquals(name.Name))
             {
-                name = name.From(member.Value);
+                name.Value = member.Value;
             }
             else if (member.NameEquals(description.Name))
             {
-                description = description.From(member.Value);
+                description.Value = member.Value;
             }
             else if (member.NameEquals(level.Name))
             {
-                level = level.From(member.Value);
+                level.Value = member.Value;
             }
             else if (member.NameEquals(rarity.Name))
             {
-                rarity = rarity.From(member.Value);
+                rarity.Value = member.Value;
             }
             else if (member.NameEquals(vendorValue.Name))
             {
-                vendorValue = vendorValue.From(member.Value);
+                vendorValue.Value = member.Value;
             }
             else if (member.NameEquals(defaultSkin.Name))
             {
-                defaultSkin = defaultSkin.From(member.Value);
+                defaultSkin.Value = member.Value;
             }
             else if (member.NameEquals(gameTypes.Name))
             {
-                gameTypes = gameTypes.From(member.Value);
+                gameTypes.Value = member.Value;
             }
             else if (member.NameEquals(flags.Name))
             {
-                flags = flags.From(member.Value);
+                flags.Value = member.Value;
             }
             else if (member.NameEquals(restrictions.Name))
             {
-                restrictions = restrictions.From(member.Value);
+                restrictions.Value = member.Value;
             }
             else if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(chatLink.Name))
             {
-                chatLink = chatLink.From(member.Value);
+                chatLink.Value = member.Value;
             }
             else if (member.NameEquals(icon.Name))
             {
-                icon = icon.From(member.Value);
+                icon.Value = member.Value;
             }
             else if (member.NameEquals("details"))
             {
@@ -10945,43 +10945,43 @@ public static class ItemReader
                     }
                     else if (detail.NameEquals(damageType.Name))
                     {
-                        damageType = damageType.From(detail.Value);
+                        damageType.Value = detail.Value;
                     }
                     else if (detail.NameEquals(minPower.Name))
                     {
-                        minPower = minPower.From(detail.Value);
+                        minPower.Value = detail.Value;
                     }
                     else if (detail.NameEquals(maxPower.Name))
                     {
-                        maxPower = maxPower.From(detail.Value);
+                        maxPower.Value = detail.Value;
                     }
                     else if (detail.NameEquals(defense.Name))
                     {
-                        defense = defense.From(detail.Value);
+                        defense.Value = detail.Value;
                     }
                     else if (detail.NameEquals(infusionSlots.Name))
                     {
-                        infusionSlots = infusionSlots.From(detail.Value);
+                        infusionSlots.Value = detail.Value;
                     }
                     else if (detail.NameEquals(attributeAdjustment.Name))
                     {
-                        attributeAdjustment = attributeAdjustment.From(detail.Value);
+                        attributeAdjustment.Value = detail.Value;
                     }
                     else if (detail.NameEquals(statChoices.Name))
                     {
-                        statChoices = statChoices.From(detail.Value);
+                        statChoices.Value = detail.Value;
                     }
                     else if (detail.NameEquals(infixUpgrade.Name))
                     {
-                        infixUpgrade = infixUpgrade.From(detail.Value);
+                        infixUpgrade.Value = detail.Value;
                     }
                     else if (detail.NameEquals(suffixItemId.Name))
                     {
-                        suffixItemId = suffixItemId.From(detail.Value);
+                        suffixItemId.Value = detail.Value;
                     }
                     else if (detail.NameEquals(secondarySuffixItemId.Name))
                     {
-                        secondarySuffixItemId = secondarySuffixItemId.From(detail.Value);
+                        secondarySuffixItemId.Value = detail.Value;
                     }
                     else if (missingMemberBehavior == MissingMemberBehavior.Error)
                     {
@@ -11060,51 +11060,51 @@ public static class ItemReader
             }
             else if (member.NameEquals(name.Name))
             {
-                name = name.From(member.Value);
+                name.Value = member.Value;
             }
             else if (member.NameEquals(description.Name))
             {
-                description = description.From(member.Value);
+                description.Value = member.Value;
             }
             else if (member.NameEquals(level.Name))
             {
-                level = level.From(member.Value);
+                level.Value = member.Value;
             }
             else if (member.NameEquals(rarity.Name))
             {
-                rarity = rarity.From(member.Value);
+                rarity.Value = member.Value;
             }
             else if (member.NameEquals(vendorValue.Name))
             {
-                vendorValue = vendorValue.From(member.Value);
+                vendorValue.Value = member.Value;
             }
             else if (member.NameEquals(defaultSkin.Name))
             {
-                defaultSkin = defaultSkin.From(member.Value);
+                defaultSkin.Value = member.Value;
             }
             else if (member.NameEquals(gameTypes.Name))
             {
-                gameTypes = gameTypes.From(member.Value);
+                gameTypes.Value = member.Value;
             }
             else if (member.NameEquals(flags.Name))
             {
-                flags = flags.From(member.Value);
+                flags.Value = member.Value;
             }
             else if (member.NameEquals(restrictions.Name))
             {
-                restrictions = restrictions.From(member.Value);
+                restrictions.Value = member.Value;
             }
             else if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(chatLink.Name))
             {
-                chatLink = chatLink.From(member.Value);
+                chatLink.Value = member.Value;
             }
             else if (member.NameEquals(icon.Name))
             {
-                icon = icon.From(member.Value);
+                icon.Value = member.Value;
             }
             else if (member.NameEquals("details"))
             {
@@ -11121,43 +11121,43 @@ public static class ItemReader
                     }
                     else if (detail.NameEquals(damageType.Name))
                     {
-                        damageType = damageType.From(detail.Value);
+                        damageType.Value = detail.Value;
                     }
                     else if (detail.NameEquals(minPower.Name))
                     {
-                        minPower = minPower.From(detail.Value);
+                        minPower.Value = detail.Value;
                     }
                     else if (detail.NameEquals(maxPower.Name))
                     {
-                        maxPower = maxPower.From(detail.Value);
+                        maxPower.Value = detail.Value;
                     }
                     else if (detail.NameEquals(defense.Name))
                     {
-                        defense = defense.From(detail.Value);
+                        defense.Value = detail.Value;
                     }
                     else if (detail.NameEquals(infusionSlots.Name))
                     {
-                        infusionSlots = infusionSlots.From(detail.Value);
+                        infusionSlots.Value = detail.Value;
                     }
                     else if (detail.NameEquals(attributeAdjustment.Name))
                     {
-                        attributeAdjustment = attributeAdjustment.From(detail.Value);
+                        attributeAdjustment.Value = detail.Value;
                     }
                     else if (detail.NameEquals(statChoices.Name))
                     {
-                        statChoices = statChoices.From(detail.Value);
+                        statChoices.Value = detail.Value;
                     }
                     else if (detail.NameEquals(infixUpgrade.Name))
                     {
-                        infixUpgrade = infixUpgrade.From(detail.Value);
+                        infixUpgrade.Value = detail.Value;
                     }
                     else if (detail.NameEquals(suffixItemId.Name))
                     {
-                        suffixItemId = suffixItemId.From(detail.Value);
+                        suffixItemId.Value = detail.Value;
                     }
                     else if (detail.NameEquals(secondarySuffixItemId.Name))
                     {
-                        secondarySuffixItemId = secondarySuffixItemId.From(detail.Value);
+                        secondarySuffixItemId.Value = detail.Value;
                     }
                     else if (missingMemberBehavior == MissingMemberBehavior.Error)
                     {
@@ -11236,51 +11236,51 @@ public static class ItemReader
             }
             else if (member.NameEquals(name.Name))
             {
-                name = name.From(member.Value);
+                name.Value = member.Value;
             }
             else if (member.NameEquals(description.Name))
             {
-                description = description.From(member.Value);
+                description.Value = member.Value;
             }
             else if (member.NameEquals(level.Name))
             {
-                level = level.From(member.Value);
+                level.Value = member.Value;
             }
             else if (member.NameEquals(rarity.Name))
             {
-                rarity = rarity.From(member.Value);
+                rarity.Value = member.Value;
             }
             else if (member.NameEquals(vendorValue.Name))
             {
-                vendorValue = vendorValue.From(member.Value);
+                vendorValue.Value = member.Value;
             }
             else if (member.NameEquals(defaultSkin.Name))
             {
-                defaultSkin = defaultSkin.From(member.Value);
+                defaultSkin.Value = member.Value;
             }
             else if (member.NameEquals(gameTypes.Name))
             {
-                gameTypes = gameTypes.From(member.Value);
+                gameTypes.Value = member.Value;
             }
             else if (member.NameEquals(flags.Name))
             {
-                flags = flags.From(member.Value);
+                flags.Value = member.Value;
             }
             else if (member.NameEquals(restrictions.Name))
             {
-                restrictions = restrictions.From(member.Value);
+                restrictions.Value = member.Value;
             }
             else if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(chatLink.Name))
             {
-                chatLink = chatLink.From(member.Value);
+                chatLink.Value = member.Value;
             }
             else if (member.NameEquals(icon.Name))
             {
-                icon = icon.From(member.Value);
+                icon.Value = member.Value;
             }
             else if (member.NameEquals("details"))
             {
@@ -11297,43 +11297,43 @@ public static class ItemReader
                     }
                     else if (detail.NameEquals(damageType.Name))
                     {
-                        damageType = damageType.From(detail.Value);
+                        damageType.Value = detail.Value;
                     }
                     else if (detail.NameEquals(minPower.Name))
                     {
-                        minPower = minPower.From(detail.Value);
+                        minPower.Value = detail.Value;
                     }
                     else if (detail.NameEquals(maxPower.Name))
                     {
-                        maxPower = maxPower.From(detail.Value);
+                        maxPower.Value = detail.Value;
                     }
                     else if (detail.NameEquals(defense.Name))
                     {
-                        defense = defense.From(detail.Value);
+                        defense.Value = detail.Value;
                     }
                     else if (detail.NameEquals(infusionSlots.Name))
                     {
-                        infusionSlots = infusionSlots.From(detail.Value);
+                        infusionSlots.Value = detail.Value;
                     }
                     else if (detail.NameEquals(attributeAdjustment.Name))
                     {
-                        attributeAdjustment = attributeAdjustment.From(detail.Value);
+                        attributeAdjustment.Value = detail.Value;
                     }
                     else if (detail.NameEquals(statChoices.Name))
                     {
-                        statChoices = statChoices.From(detail.Value);
+                        statChoices.Value = detail.Value;
                     }
                     else if (detail.NameEquals(infixUpgrade.Name))
                     {
-                        infixUpgrade = infixUpgrade.From(detail.Value);
+                        infixUpgrade.Value = detail.Value;
                     }
                     else if (detail.NameEquals(suffixItemId.Name))
                     {
-                        suffixItemId = suffixItemId.From(detail.Value);
+                        suffixItemId.Value = detail.Value;
                     }
                     else if (detail.NameEquals(secondarySuffixItemId.Name))
                     {
-                        secondarySuffixItemId = secondarySuffixItemId.From(detail.Value);
+                        secondarySuffixItemId.Value = detail.Value;
                     }
                     else if (missingMemberBehavior == MissingMemberBehavior.Error)
                     {
@@ -11412,51 +11412,51 @@ public static class ItemReader
             }
             else if (member.NameEquals(name.Name))
             {
-                name = name.From(member.Value);
+                name.Value = member.Value;
             }
             else if (member.NameEquals(description.Name))
             {
-                description = description.From(member.Value);
+                description.Value = member.Value;
             }
             else if (member.NameEquals(level.Name))
             {
-                level = level.From(member.Value);
+                level.Value = member.Value;
             }
             else if (member.NameEquals(rarity.Name))
             {
-                rarity = rarity.From(member.Value);
+                rarity.Value = member.Value;
             }
             else if (member.NameEquals(vendorValue.Name))
             {
-                vendorValue = vendorValue.From(member.Value);
+                vendorValue.Value = member.Value;
             }
             else if (member.NameEquals(defaultSkin.Name))
             {
-                defaultSkin = defaultSkin.From(member.Value);
+                defaultSkin.Value = member.Value;
             }
             else if (member.NameEquals(gameTypes.Name))
             {
-                gameTypes = gameTypes.From(member.Value);
+                gameTypes.Value = member.Value;
             }
             else if (member.NameEquals(flags.Name))
             {
-                flags = flags.From(member.Value);
+                flags.Value = member.Value;
             }
             else if (member.NameEquals(restrictions.Name))
             {
-                restrictions = restrictions.From(member.Value);
+                restrictions.Value = member.Value;
             }
             else if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(chatLink.Name))
             {
-                chatLink = chatLink.From(member.Value);
+                chatLink.Value = member.Value;
             }
             else if (member.NameEquals(icon.Name))
             {
-                icon = icon.From(member.Value);
+                icon.Value = member.Value;
             }
             else if (member.NameEquals("details"))
             {
@@ -11473,43 +11473,43 @@ public static class ItemReader
                     }
                     else if (detail.NameEquals(damageType.Name))
                     {
-                        damageType = damageType.From(detail.Value);
+                        damageType.Value = detail.Value;
                     }
                     else if (detail.NameEquals(minPower.Name))
                     {
-                        minPower = minPower.From(detail.Value);
+                        minPower.Value = detail.Value;
                     }
                     else if (detail.NameEquals(maxPower.Name))
                     {
-                        maxPower = maxPower.From(detail.Value);
+                        maxPower.Value = detail.Value;
                     }
                     else if (detail.NameEquals(defense.Name))
                     {
-                        defense = defense.From(detail.Value);
+                        defense.Value = detail.Value;
                     }
                     else if (detail.NameEquals(infusionSlots.Name))
                     {
-                        infusionSlots = infusionSlots.From(detail.Value);
+                        infusionSlots.Value = detail.Value;
                     }
                     else if (detail.NameEquals(attributeAdjustment.Name))
                     {
-                        attributeAdjustment = attributeAdjustment.From(detail.Value);
+                        attributeAdjustment.Value = detail.Value;
                     }
                     else if (detail.NameEquals(statChoices.Name))
                     {
-                        statChoices = statChoices.From(detail.Value);
+                        statChoices.Value = detail.Value;
                     }
                     else if (detail.NameEquals(infixUpgrade.Name))
                     {
-                        infixUpgrade = infixUpgrade.From(detail.Value);
+                        infixUpgrade.Value = detail.Value;
                     }
                     else if (detail.NameEquals(suffixItemId.Name))
                     {
-                        suffixItemId = suffixItemId.From(detail.Value);
+                        suffixItemId.Value = detail.Value;
                     }
                     else if (detail.NameEquals(secondarySuffixItemId.Name))
                     {
-                        secondarySuffixItemId = secondarySuffixItemId.From(detail.Value);
+                        secondarySuffixItemId.Value = detail.Value;
                     }
                     else if (missingMemberBehavior == MissingMemberBehavior.Error)
                     {
@@ -11591,51 +11591,51 @@ public static class ItemReader
             }
             else if (member.NameEquals(name.Name))
             {
-                name = name.From(member.Value);
+                name.Value = member.Value;
             }
             else if (member.NameEquals(description.Name))
             {
-                description = description.From(member.Value);
+                description.Value = member.Value;
             }
             else if (member.NameEquals(level.Name))
             {
-                level = level.From(member.Value);
+                level.Value = member.Value;
             }
             else if (member.NameEquals(rarity.Name))
             {
-                rarity = rarity.From(member.Value);
+                rarity.Value = member.Value;
             }
             else if (member.NameEquals(vendorValue.Name))
             {
-                vendorValue = vendorValue.From(member.Value);
+                vendorValue.Value = member.Value;
             }
             else if (member.NameEquals(defaultSkin.Name))
             {
-                defaultSkin = defaultSkin.From(member.Value);
+                defaultSkin.Value = member.Value;
             }
             else if (member.NameEquals(gameTypes.Name))
             {
-                gameTypes = gameTypes.From(member.Value);
+                gameTypes.Value = member.Value;
             }
             else if (member.NameEquals(flags.Name))
             {
-                flags = flags.From(member.Value);
+                flags.Value = member.Value;
             }
             else if (member.NameEquals(restrictions.Name))
             {
-                restrictions = restrictions.From(member.Value);
+                restrictions.Value = member.Value;
             }
             else if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(chatLink.Name))
             {
-                chatLink = chatLink.From(member.Value);
+                chatLink.Value = member.Value;
             }
             else if (member.NameEquals(icon.Name))
             {
-                icon = icon.From(member.Value);
+                icon.Value = member.Value;
             }
             else if (member.NameEquals("details"))
             {
@@ -11652,43 +11652,43 @@ public static class ItemReader
                     }
                     else if (detail.NameEquals(damageType.Name))
                     {
-                        damageType = damageType.From(detail.Value);
+                        damageType.Value = detail.Value;
                     }
                     else if (detail.NameEquals(minPower.Name))
                     {
-                        minPower = minPower.From(detail.Value);
+                        minPower.Value = detail.Value;
                     }
                     else if (detail.NameEquals(maxPower.Name))
                     {
-                        maxPower = maxPower.From(detail.Value);
+                        maxPower.Value = detail.Value;
                     }
                     else if (detail.NameEquals(defense.Name))
                     {
-                        defense = defense.From(detail.Value);
+                        defense.Value = detail.Value;
                     }
                     else if (detail.NameEquals(infusionSlots.Name))
                     {
-                        infusionSlots = infusionSlots.From(detail.Value);
+                        infusionSlots.Value = detail.Value;
                     }
                     else if (detail.NameEquals(attributeAdjustment.Name))
                     {
-                        attributeAdjustment = attributeAdjustment.From(detail.Value);
+                        attributeAdjustment.Value = detail.Value;
                     }
                     else if (detail.NameEquals(statChoices.Name))
                     {
-                        statChoices = statChoices.From(detail.Value);
+                        statChoices.Value = detail.Value;
                     }
                     else if (detail.NameEquals(infixUpgrade.Name))
                     {
-                        infixUpgrade = infixUpgrade.From(detail.Value);
+                        infixUpgrade.Value = detail.Value;
                     }
                     else if (detail.NameEquals(suffixItemId.Name))
                     {
-                        suffixItemId = suffixItemId.From(detail.Value);
+                        suffixItemId.Value = detail.Value;
                     }
                     else if (detail.NameEquals(secondarySuffixItemId.Name))
                     {
-                        secondarySuffixItemId = secondarySuffixItemId.From(detail.Value);
+                        secondarySuffixItemId.Value = detail.Value;
                     }
                     else if (missingMemberBehavior == MissingMemberBehavior.Error)
                     {
@@ -11767,51 +11767,51 @@ public static class ItemReader
             }
             else if (member.NameEquals(name.Name))
             {
-                name = name.From(member.Value);
+                name.Value = member.Value;
             }
             else if (member.NameEquals(description.Name))
             {
-                description = description.From(member.Value);
+                description.Value = member.Value;
             }
             else if (member.NameEquals(level.Name))
             {
-                level = level.From(member.Value);
+                level.Value = member.Value;
             }
             else if (member.NameEquals(rarity.Name))
             {
-                rarity = rarity.From(member.Value);
+                rarity.Value = member.Value;
             }
             else if (member.NameEquals(vendorValue.Name))
             {
-                vendorValue = vendorValue.From(member.Value);
+                vendorValue.Value = member.Value;
             }
             else if (member.NameEquals(defaultSkin.Name))
             {
-                defaultSkin = defaultSkin.From(member.Value);
+                defaultSkin.Value = member.Value;
             }
             else if (member.NameEquals(gameTypes.Name))
             {
-                gameTypes = gameTypes.From(member.Value);
+                gameTypes.Value = member.Value;
             }
             else if (member.NameEquals(flags.Name))
             {
-                flags = flags.From(member.Value);
+                flags.Value = member.Value;
             }
             else if (member.NameEquals(restrictions.Name))
             {
-                restrictions = restrictions.From(member.Value);
+                restrictions.Value = member.Value;
             }
             else if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(chatLink.Name))
             {
-                chatLink = chatLink.From(member.Value);
+                chatLink.Value = member.Value;
             }
             else if (member.NameEquals(icon.Name))
             {
-                icon = icon.From(member.Value);
+                icon.Value = member.Value;
             }
             else if (member.NameEquals("details"))
             {
@@ -11828,43 +11828,43 @@ public static class ItemReader
                     }
                     else if (detail.NameEquals(damageType.Name))
                     {
-                        damageType = damageType.From(detail.Value);
+                        damageType.Value = detail.Value;
                     }
                     else if (detail.NameEquals(minPower.Name))
                     {
-                        minPower = minPower.From(detail.Value);
+                        minPower.Value = detail.Value;
                     }
                     else if (detail.NameEquals(maxPower.Name))
                     {
-                        maxPower = maxPower.From(detail.Value);
+                        maxPower.Value = detail.Value;
                     }
                     else if (detail.NameEquals(defense.Name))
                     {
-                        defense = defense.From(detail.Value);
+                        defense.Value = detail.Value;
                     }
                     else if (detail.NameEquals(infusionSlots.Name))
                     {
-                        infusionSlots = infusionSlots.From(detail.Value);
+                        infusionSlots.Value = detail.Value;
                     }
                     else if (detail.NameEquals(attributeAdjustment.Name))
                     {
-                        attributeAdjustment = attributeAdjustment.From(detail.Value);
+                        attributeAdjustment.Value = detail.Value;
                     }
                     else if (detail.NameEquals(statChoices.Name))
                     {
-                        statChoices = statChoices.From(detail.Value);
+                        statChoices.Value = detail.Value;
                     }
                     else if (detail.NameEquals(infixUpgrade.Name))
                     {
-                        infixUpgrade = infixUpgrade.From(detail.Value);
+                        infixUpgrade.Value = detail.Value;
                     }
                     else if (detail.NameEquals(suffixItemId.Name))
                     {
-                        suffixItemId = suffixItemId.From(detail.Value);
+                        suffixItemId.Value = detail.Value;
                     }
                     else if (detail.NameEquals(secondarySuffixItemId.Name))
                     {
-                        secondarySuffixItemId = secondarySuffixItemId.From(detail.Value);
+                        secondarySuffixItemId.Value = detail.Value;
                     }
                     else if (missingMemberBehavior == MissingMemberBehavior.Error)
                     {
@@ -11946,51 +11946,51 @@ public static class ItemReader
             }
             else if (member.NameEquals(name.Name))
             {
-                name = name.From(member.Value);
+                name.Value = member.Value;
             }
             else if (member.NameEquals(description.Name))
             {
-                description = description.From(member.Value);
+                description.Value = member.Value;
             }
             else if (member.NameEquals(level.Name))
             {
-                level = level.From(member.Value);
+                level.Value = member.Value;
             }
             else if (member.NameEquals(rarity.Name))
             {
-                rarity = rarity.From(member.Value);
+                rarity.Value = member.Value;
             }
             else if (member.NameEquals(vendorValue.Name))
             {
-                vendorValue = vendorValue.From(member.Value);
+                vendorValue.Value = member.Value;
             }
             else if (member.NameEquals(defaultSkin.Name))
             {
-                defaultSkin = defaultSkin.From(member.Value);
+                defaultSkin.Value = member.Value;
             }
             else if (member.NameEquals(gameTypes.Name))
             {
-                gameTypes = gameTypes.From(member.Value);
+                gameTypes.Value = member.Value;
             }
             else if (member.NameEquals(flags.Name))
             {
-                flags = flags.From(member.Value);
+                flags.Value = member.Value;
             }
             else if (member.NameEquals(restrictions.Name))
             {
-                restrictions = restrictions.From(member.Value);
+                restrictions.Value = member.Value;
             }
             else if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(chatLink.Name))
             {
-                chatLink = chatLink.From(member.Value);
+                chatLink.Value = member.Value;
             }
             else if (member.NameEquals(icon.Name))
             {
-                icon = icon.From(member.Value);
+                icon.Value = member.Value;
             }
             else if (member.NameEquals("details"))
             {
@@ -12007,43 +12007,43 @@ public static class ItemReader
                     }
                     else if (detail.NameEquals(damageType.Name))
                     {
-                        damageType = damageType.From(detail.Value);
+                        damageType.Value = detail.Value;
                     }
                     else if (detail.NameEquals(minPower.Name))
                     {
-                        minPower = minPower.From(detail.Value);
+                        minPower.Value = detail.Value;
                     }
                     else if (detail.NameEquals(maxPower.Name))
                     {
-                        maxPower = maxPower.From(detail.Value);
+                        maxPower.Value = detail.Value;
                     }
                     else if (detail.NameEquals(defense.Name))
                     {
-                        defense = defense.From(detail.Value);
+                        defense.Value = detail.Value;
                     }
                     else if (detail.NameEquals(infusionSlots.Name))
                     {
-                        infusionSlots = infusionSlots.From(detail.Value);
+                        infusionSlots.Value = detail.Value;
                     }
                     else if (detail.NameEquals(attributeAdjustment.Name))
                     {
-                        attributeAdjustment = attributeAdjustment.From(detail.Value);
+                        attributeAdjustment.Value = detail.Value;
                     }
                     else if (detail.NameEquals(statChoices.Name))
                     {
-                        statChoices = statChoices.From(detail.Value);
+                        statChoices.Value = detail.Value;
                     }
                     else if (detail.NameEquals(infixUpgrade.Name))
                     {
-                        infixUpgrade = infixUpgrade.From(detail.Value);
+                        infixUpgrade.Value = detail.Value;
                     }
                     else if (detail.NameEquals(suffixItemId.Name))
                     {
-                        suffixItemId = suffixItemId.From(detail.Value);
+                        suffixItemId.Value = detail.Value;
                     }
                     else if (detail.NameEquals(secondarySuffixItemId.Name))
                     {
-                        secondarySuffixItemId = secondarySuffixItemId.From(detail.Value);
+                        secondarySuffixItemId.Value = detail.Value;
                     }
                     else if (missingMemberBehavior == MissingMemberBehavior.Error)
                     {
@@ -12125,51 +12125,51 @@ public static class ItemReader
             }
             else if (member.NameEquals(name.Name))
             {
-                name = name.From(member.Value);
+                name.Value = member.Value;
             }
             else if (member.NameEquals(description.Name))
             {
-                description = description.From(member.Value);
+                description.Value = member.Value;
             }
             else if (member.NameEquals(level.Name))
             {
-                level = level.From(member.Value);
+                level.Value = member.Value;
             }
             else if (member.NameEquals(rarity.Name))
             {
-                rarity = rarity.From(member.Value);
+                rarity.Value = member.Value;
             }
             else if (member.NameEquals(vendorValue.Name))
             {
-                vendorValue = vendorValue.From(member.Value);
+                vendorValue.Value = member.Value;
             }
             else if (member.NameEquals(defaultSkin.Name))
             {
-                defaultSkin = defaultSkin.From(member.Value);
+                defaultSkin.Value = member.Value;
             }
             else if (member.NameEquals(gameTypes.Name))
             {
-                gameTypes = gameTypes.From(member.Value);
+                gameTypes.Value = member.Value;
             }
             else if (member.NameEquals(flags.Name))
             {
-                flags = flags.From(member.Value);
+                flags.Value = member.Value;
             }
             else if (member.NameEquals(restrictions.Name))
             {
-                restrictions = restrictions.From(member.Value);
+                restrictions.Value = member.Value;
             }
             else if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(chatLink.Name))
             {
-                chatLink = chatLink.From(member.Value);
+                chatLink.Value = member.Value;
             }
             else if (member.NameEquals(icon.Name))
             {
-                icon = icon.From(member.Value);
+                icon.Value = member.Value;
             }
             else if (member.NameEquals("details"))
             {
@@ -12186,43 +12186,43 @@ public static class ItemReader
                     }
                     else if (detail.NameEquals(damageType.Name))
                     {
-                        damageType = damageType.From(detail.Value);
+                        damageType.Value = detail.Value;
                     }
                     else if (detail.NameEquals(minPower.Name))
                     {
-                        minPower = minPower.From(detail.Value);
+                        minPower.Value = detail.Value;
                     }
                     else if (detail.NameEquals(maxPower.Name))
                     {
-                        maxPower = maxPower.From(detail.Value);
+                        maxPower.Value = detail.Value;
                     }
                     else if (detail.NameEquals(defense.Name))
                     {
-                        defense = defense.From(detail.Value);
+                        defense.Value = detail.Value;
                     }
                     else if (detail.NameEquals(infusionSlots.Name))
                     {
-                        infusionSlots = infusionSlots.From(detail.Value);
+                        infusionSlots.Value = detail.Value;
                     }
                     else if (detail.NameEquals(attributeAdjustment.Name))
                     {
-                        attributeAdjustment = attributeAdjustment.From(detail.Value);
+                        attributeAdjustment.Value = detail.Value;
                     }
                     else if (detail.NameEquals(statChoices.Name))
                     {
-                        statChoices = statChoices.From(detail.Value);
+                        statChoices.Value = detail.Value;
                     }
                     else if (detail.NameEquals(infixUpgrade.Name))
                     {
-                        infixUpgrade = infixUpgrade.From(detail.Value);
+                        infixUpgrade.Value = detail.Value;
                     }
                     else if (detail.NameEquals(suffixItemId.Name))
                     {
-                        suffixItemId = suffixItemId.From(detail.Value);
+                        suffixItemId.Value = detail.Value;
                     }
                     else if (detail.NameEquals(secondarySuffixItemId.Name))
                     {
-                        secondarySuffixItemId = secondarySuffixItemId.From(detail.Value);
+                        secondarySuffixItemId.Value = detail.Value;
                     }
                     else if (missingMemberBehavior == MissingMemberBehavior.Error)
                     {
@@ -12304,51 +12304,51 @@ public static class ItemReader
             }
             else if (member.NameEquals(name.Name))
             {
-                name = name.From(member.Value);
+                name.Value = member.Value;
             }
             else if (member.NameEquals(description.Name))
             {
-                description = description.From(member.Value);
+                description.Value = member.Value;
             }
             else if (member.NameEquals(level.Name))
             {
-                level = level.From(member.Value);
+                level.Value = member.Value;
             }
             else if (member.NameEquals(rarity.Name))
             {
-                rarity = rarity.From(member.Value);
+                rarity.Value = member.Value;
             }
             else if (member.NameEquals(vendorValue.Name))
             {
-                vendorValue = vendorValue.From(member.Value);
+                vendorValue.Value = member.Value;
             }
             else if (member.NameEquals(defaultSkin.Name))
             {
-                defaultSkin = defaultSkin.From(member.Value);
+                defaultSkin.Value = member.Value;
             }
             else if (member.NameEquals(gameTypes.Name))
             {
-                gameTypes = gameTypes.From(member.Value);
+                gameTypes.Value = member.Value;
             }
             else if (member.NameEquals(flags.Name))
             {
-                flags = flags.From(member.Value);
+                flags.Value = member.Value;
             }
             else if (member.NameEquals(restrictions.Name))
             {
-                restrictions = restrictions.From(member.Value);
+                restrictions.Value = member.Value;
             }
             else if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(chatLink.Name))
             {
-                chatLink = chatLink.From(member.Value);
+                chatLink.Value = member.Value;
             }
             else if (member.NameEquals(icon.Name))
             {
-                icon = icon.From(member.Value);
+                icon.Value = member.Value;
             }
             else if (member.NameEquals("details"))
             {
@@ -12365,43 +12365,43 @@ public static class ItemReader
                     }
                     else if (detail.NameEquals(damageType.Name))
                     {
-                        damageType = damageType.From(detail.Value);
+                        damageType.Value = detail.Value;
                     }
                     else if (detail.NameEquals(minPower.Name))
                     {
-                        minPower = minPower.From(detail.Value);
+                        minPower.Value = detail.Value;
                     }
                     else if (detail.NameEquals(maxPower.Name))
                     {
-                        maxPower = maxPower.From(detail.Value);
+                        maxPower.Value = detail.Value;
                     }
                     else if (detail.NameEquals(defense.Name))
                     {
-                        defense = defense.From(detail.Value);
+                        defense.Value = detail.Value;
                     }
                     else if (detail.NameEquals(infusionSlots.Name))
                     {
-                        infusionSlots = infusionSlots.From(detail.Value);
+                        infusionSlots.Value = detail.Value;
                     }
                     else if (detail.NameEquals(attributeAdjustment.Name))
                     {
-                        attributeAdjustment = attributeAdjustment.From(detail.Value);
+                        attributeAdjustment.Value = detail.Value;
                     }
                     else if (detail.NameEquals(statChoices.Name))
                     {
-                        statChoices = statChoices.From(detail.Value);
+                        statChoices.Value = detail.Value;
                     }
                     else if (detail.NameEquals(infixUpgrade.Name))
                     {
-                        infixUpgrade = infixUpgrade.From(detail.Value);
+                        infixUpgrade.Value = detail.Value;
                     }
                     else if (detail.NameEquals(suffixItemId.Name))
                     {
-                        suffixItemId = suffixItemId.From(detail.Value);
+                        suffixItemId.Value = detail.Value;
                     }
                     else if (detail.NameEquals(secondarySuffixItemId.Name))
                     {
-                        secondarySuffixItemId = secondarySuffixItemId.From(detail.Value);
+                        secondarySuffixItemId.Value = detail.Value;
                     }
                     else if (missingMemberBehavior == MissingMemberBehavior.Error)
                     {
@@ -12480,51 +12480,51 @@ public static class ItemReader
             }
             else if (member.NameEquals(name.Name))
             {
-                name = name.From(member.Value);
+                name.Value = member.Value;
             }
             else if (member.NameEquals(description.Name))
             {
-                description = description.From(member.Value);
+                description.Value = member.Value;
             }
             else if (member.NameEquals(level.Name))
             {
-                level = level.From(member.Value);
+                level.Value = member.Value;
             }
             else if (member.NameEquals(rarity.Name))
             {
-                rarity = rarity.From(member.Value);
+                rarity.Value = member.Value;
             }
             else if (member.NameEquals(vendorValue.Name))
             {
-                vendorValue = vendorValue.From(member.Value);
+                vendorValue.Value = member.Value;
             }
             else if (member.NameEquals(defaultSkin.Name))
             {
-                defaultSkin = defaultSkin.From(member.Value);
+                defaultSkin.Value = member.Value;
             }
             else if (member.NameEquals(gameTypes.Name))
             {
-                gameTypes = gameTypes.From(member.Value);
+                gameTypes.Value = member.Value;
             }
             else if (member.NameEquals(flags.Name))
             {
-                flags = flags.From(member.Value);
+                flags.Value = member.Value;
             }
             else if (member.NameEquals(restrictions.Name))
             {
-                restrictions = restrictions.From(member.Value);
+                restrictions.Value = member.Value;
             }
             else if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(chatLink.Name))
             {
-                chatLink = chatLink.From(member.Value);
+                chatLink.Value = member.Value;
             }
             else if (member.NameEquals(icon.Name))
             {
-                icon = icon.From(member.Value);
+                icon.Value = member.Value;
             }
             else if (member.NameEquals("details"))
             {
@@ -12541,43 +12541,43 @@ public static class ItemReader
                     }
                     else if (detail.NameEquals(damageType.Name))
                     {
-                        damageType = damageType.From(detail.Value);
+                        damageType.Value = detail.Value;
                     }
                     else if (detail.NameEquals(minPower.Name))
                     {
-                        minPower = minPower.From(detail.Value);
+                        minPower.Value = detail.Value;
                     }
                     else if (detail.NameEquals(maxPower.Name))
                     {
-                        maxPower = maxPower.From(detail.Value);
+                        maxPower.Value = detail.Value;
                     }
                     else if (detail.NameEquals(defense.Name))
                     {
-                        defense = defense.From(detail.Value);
+                        defense.Value = detail.Value;
                     }
                     else if (detail.NameEquals(infusionSlots.Name))
                     {
-                        infusionSlots = infusionSlots.From(detail.Value);
+                        infusionSlots.Value = detail.Value;
                     }
                     else if (detail.NameEquals(attributeAdjustment.Name))
                     {
-                        attributeAdjustment = attributeAdjustment.From(detail.Value);
+                        attributeAdjustment.Value = detail.Value;
                     }
                     else if (detail.NameEquals(statChoices.Name))
                     {
-                        statChoices = statChoices.From(detail.Value);
+                        statChoices.Value = detail.Value;
                     }
                     else if (detail.NameEquals(infixUpgrade.Name))
                     {
-                        infixUpgrade = infixUpgrade.From(detail.Value);
+                        infixUpgrade.Value = detail.Value;
                     }
                     else if (detail.NameEquals(suffixItemId.Name))
                     {
-                        suffixItemId = suffixItemId.From(detail.Value);
+                        suffixItemId.Value = detail.Value;
                     }
                     else if (detail.NameEquals(secondarySuffixItemId.Name))
                     {
-                        secondarySuffixItemId = secondarySuffixItemId.From(detail.Value);
+                        secondarySuffixItemId.Value = detail.Value;
                     }
                     else if (missingMemberBehavior == MissingMemberBehavior.Error)
                     {
@@ -12656,51 +12656,51 @@ public static class ItemReader
             }
             else if (member.NameEquals(name.Name))
             {
-                name = name.From(member.Value);
+                name.Value = member.Value;
             }
             else if (member.NameEquals(description.Name))
             {
-                description = description.From(member.Value);
+                description.Value = member.Value;
             }
             else if (member.NameEquals(level.Name))
             {
-                level = level.From(member.Value);
+                level.Value = member.Value;
             }
             else if (member.NameEquals(rarity.Name))
             {
-                rarity = rarity.From(member.Value);
+                rarity.Value = member.Value;
             }
             else if (member.NameEquals(vendorValue.Name))
             {
-                vendorValue = vendorValue.From(member.Value);
+                vendorValue.Value = member.Value;
             }
             else if (member.NameEquals(defaultSkin.Name))
             {
-                defaultSkin = defaultSkin.From(member.Value);
+                defaultSkin.Value = member.Value;
             }
             else if (member.NameEquals(gameTypes.Name))
             {
-                gameTypes = gameTypes.From(member.Value);
+                gameTypes.Value = member.Value;
             }
             else if (member.NameEquals(flags.Name))
             {
-                flags = flags.From(member.Value);
+                flags.Value = member.Value;
             }
             else if (member.NameEquals(restrictions.Name))
             {
-                restrictions = restrictions.From(member.Value);
+                restrictions.Value = member.Value;
             }
             else if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(chatLink.Name))
             {
-                chatLink = chatLink.From(member.Value);
+                chatLink.Value = member.Value;
             }
             else if (member.NameEquals(icon.Name))
             {
-                icon = icon.From(member.Value);
+                icon.Value = member.Value;
             }
             else if (member.NameEquals("details"))
             {
@@ -12717,43 +12717,43 @@ public static class ItemReader
                     }
                     else if (detail.NameEquals(damageType.Name))
                     {
-                        damageType = damageType.From(detail.Value);
+                        damageType.Value = detail.Value;
                     }
                     else if (detail.NameEquals(minPower.Name))
                     {
-                        minPower = minPower.From(detail.Value);
+                        minPower.Value = detail.Value;
                     }
                     else if (detail.NameEquals(maxPower.Name))
                     {
-                        maxPower = maxPower.From(detail.Value);
+                        maxPower.Value = detail.Value;
                     }
                     else if (detail.NameEquals(defense.Name))
                     {
-                        defense = defense.From(detail.Value);
+                        defense.Value = detail.Value;
                     }
                     else if (detail.NameEquals(infusionSlots.Name))
                     {
-                        infusionSlots = infusionSlots.From(detail.Value);
+                        infusionSlots.Value = detail.Value;
                     }
                     else if (detail.NameEquals(attributeAdjustment.Name))
                     {
-                        attributeAdjustment = attributeAdjustment.From(detail.Value);
+                        attributeAdjustment.Value = detail.Value;
                     }
                     else if (detail.NameEquals(statChoices.Name))
                     {
-                        statChoices = statChoices.From(detail.Value);
+                        statChoices.Value = detail.Value;
                     }
                     else if (detail.NameEquals(infixUpgrade.Name))
                     {
-                        infixUpgrade = infixUpgrade.From(detail.Value);
+                        infixUpgrade.Value = detail.Value;
                     }
                     else if (detail.NameEquals(suffixItemId.Name))
                     {
-                        suffixItemId = suffixItemId.From(detail.Value);
+                        suffixItemId.Value = detail.Value;
                     }
                     else if (detail.NameEquals(secondarySuffixItemId.Name))
                     {
-                        secondarySuffixItemId = secondarySuffixItemId.From(detail.Value);
+                        secondarySuffixItemId.Value = detail.Value;
                     }
                     else if (missingMemberBehavior == MissingMemberBehavior.Error)
                     {
@@ -12832,51 +12832,51 @@ public static class ItemReader
             }
             else if (member.NameEquals(name.Name))
             {
-                name = name.From(member.Value);
+                name.Value = member.Value;
             }
             else if (member.NameEquals(description.Name))
             {
-                description = description.From(member.Value);
+                description.Value = member.Value;
             }
             else if (member.NameEquals(level.Name))
             {
-                level = level.From(member.Value);
+                level.Value = member.Value;
             }
             else if (member.NameEquals(rarity.Name))
             {
-                rarity = rarity.From(member.Value);
+                rarity.Value = member.Value;
             }
             else if (member.NameEquals(vendorValue.Name))
             {
-                vendorValue = vendorValue.From(member.Value);
+                vendorValue.Value = member.Value;
             }
             else if (member.NameEquals(defaultSkin.Name))
             {
-                defaultSkin = defaultSkin.From(member.Value);
+                defaultSkin.Value = member.Value;
             }
             else if (member.NameEquals(gameTypes.Name))
             {
-                gameTypes = gameTypes.From(member.Value);
+                gameTypes.Value = member.Value;
             }
             else if (member.NameEquals(flags.Name))
             {
-                flags = flags.From(member.Value);
+                flags.Value = member.Value;
             }
             else if (member.NameEquals(restrictions.Name))
             {
-                restrictions = restrictions.From(member.Value);
+                restrictions.Value = member.Value;
             }
             else if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(chatLink.Name))
             {
-                chatLink = chatLink.From(member.Value);
+                chatLink.Value = member.Value;
             }
             else if (member.NameEquals(icon.Name))
             {
-                icon = icon.From(member.Value);
+                icon.Value = member.Value;
             }
             else if (member.NameEquals("details"))
             {
@@ -12893,43 +12893,43 @@ public static class ItemReader
                     }
                     else if (detail.NameEquals(damageType.Name))
                     {
-                        damageType = damageType.From(detail.Value);
+                        damageType.Value = detail.Value;
                     }
                     else if (detail.NameEquals(minPower.Name))
                     {
-                        minPower = minPower.From(detail.Value);
+                        minPower.Value = detail.Value;
                     }
                     else if (detail.NameEquals(maxPower.Name))
                     {
-                        maxPower = maxPower.From(detail.Value);
+                        maxPower.Value = detail.Value;
                     }
                     else if (detail.NameEquals(defense.Name))
                     {
-                        defense = defense.From(detail.Value);
+                        defense.Value = detail.Value;
                     }
                     else if (detail.NameEquals(infusionSlots.Name))
                     {
-                        infusionSlots = infusionSlots.From(detail.Value);
+                        infusionSlots.Value = detail.Value;
                     }
                     else if (detail.NameEquals(attributeAdjustment.Name))
                     {
-                        attributeAdjustment = attributeAdjustment.From(detail.Value);
+                        attributeAdjustment.Value = detail.Value;
                     }
                     else if (detail.NameEquals(statChoices.Name))
                     {
-                        statChoices = statChoices.From(detail.Value);
+                        statChoices.Value = detail.Value;
                     }
                     else if (detail.NameEquals(infixUpgrade.Name))
                     {
-                        infixUpgrade = infixUpgrade.From(detail.Value);
+                        infixUpgrade.Value = detail.Value;
                     }
                     else if (detail.NameEquals(suffixItemId.Name))
                     {
-                        suffixItemId = suffixItemId.From(detail.Value);
+                        suffixItemId.Value = detail.Value;
                     }
                     else if (detail.NameEquals(secondarySuffixItemId.Name))
                     {
-                        secondarySuffixItemId = secondarySuffixItemId.From(detail.Value);
+                        secondarySuffixItemId.Value = detail.Value;
                     }
                     else if (missingMemberBehavior == MissingMemberBehavior.Error)
                     {
@@ -13008,51 +13008,51 @@ public static class ItemReader
             }
             else if (member.NameEquals(name.Name))
             {
-                name = name.From(member.Value);
+                name.Value = member.Value;
             }
             else if (member.NameEquals(description.Name))
             {
-                description = description.From(member.Value);
+                description.Value = member.Value;
             }
             else if (member.NameEquals(level.Name))
             {
-                level = level.From(member.Value);
+                level.Value = member.Value;
             }
             else if (member.NameEquals(rarity.Name))
             {
-                rarity = rarity.From(member.Value);
+                rarity.Value = member.Value;
             }
             else if (member.NameEquals(vendorValue.Name))
             {
-                vendorValue = vendorValue.From(member.Value);
+                vendorValue.Value = member.Value;
             }
             else if (member.NameEquals(defaultSkin.Name))
             {
-                defaultSkin = defaultSkin.From(member.Value);
+                defaultSkin.Value = member.Value;
             }
             else if (member.NameEquals(gameTypes.Name))
             {
-                gameTypes = gameTypes.From(member.Value);
+                gameTypes.Value = member.Value;
             }
             else if (member.NameEquals(flags.Name))
             {
-                flags = flags.From(member.Value);
+                flags.Value = member.Value;
             }
             else if (member.NameEquals(restrictions.Name))
             {
-                restrictions = restrictions.From(member.Value);
+                restrictions.Value = member.Value;
             }
             else if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(chatLink.Name))
             {
-                chatLink = chatLink.From(member.Value);
+                chatLink.Value = member.Value;
             }
             else if (member.NameEquals(icon.Name))
             {
-                icon = icon.From(member.Value);
+                icon.Value = member.Value;
             }
             else if (member.NameEquals("details"))
             {
@@ -13069,43 +13069,43 @@ public static class ItemReader
                     }
                     else if (detail.NameEquals(damageType.Name))
                     {
-                        damageType = damageType.From(detail.Value);
+                        damageType.Value = detail.Value;
                     }
                     else if (detail.NameEquals(minPower.Name))
                     {
-                        minPower = minPower.From(detail.Value);
+                        minPower.Value = detail.Value;
                     }
                     else if (detail.NameEquals(maxPower.Name))
                     {
-                        maxPower = maxPower.From(detail.Value);
+                        maxPower.Value = detail.Value;
                     }
                     else if (detail.NameEquals(defense.Name))
                     {
-                        defense = defense.From(detail.Value);
+                        defense.Value = detail.Value;
                     }
                     else if (detail.NameEquals(infusionSlots.Name))
                     {
-                        infusionSlots = infusionSlots.From(detail.Value);
+                        infusionSlots.Value = detail.Value;
                     }
                     else if (detail.NameEquals(attributeAdjustment.Name))
                     {
-                        attributeAdjustment = attributeAdjustment.From(detail.Value);
+                        attributeAdjustment.Value = detail.Value;
                     }
                     else if (detail.NameEquals(statChoices.Name))
                     {
-                        statChoices = statChoices.From(detail.Value);
+                        statChoices.Value = detail.Value;
                     }
                     else if (detail.NameEquals(infixUpgrade.Name))
                     {
-                        infixUpgrade = infixUpgrade.From(detail.Value);
+                        infixUpgrade.Value = detail.Value;
                     }
                     else if (detail.NameEquals(suffixItemId.Name))
                     {
-                        suffixItemId = suffixItemId.From(detail.Value);
+                        suffixItemId.Value = detail.Value;
                     }
                     else if (detail.NameEquals(secondarySuffixItemId.Name))
                     {
-                        secondarySuffixItemId = secondarySuffixItemId.From(detail.Value);
+                        secondarySuffixItemId.Value = detail.Value;
                     }
                     else if (missingMemberBehavior == MissingMemberBehavior.Error)
                     {
@@ -13187,51 +13187,51 @@ public static class ItemReader
             }
             else if (member.NameEquals(name.Name))
             {
-                name = name.From(member.Value);
+                name.Value = member.Value;
             }
             else if (member.NameEquals(description.Name))
             {
-                description = description.From(member.Value);
+                description.Value = member.Value;
             }
             else if (member.NameEquals(level.Name))
             {
-                level = level.From(member.Value);
+                level.Value = member.Value;
             }
             else if (member.NameEquals(rarity.Name))
             {
-                rarity = rarity.From(member.Value);
+                rarity.Value = member.Value;
             }
             else if (member.NameEquals(vendorValue.Name))
             {
-                vendorValue = vendorValue.From(member.Value);
+                vendorValue.Value = member.Value;
             }
             else if (member.NameEquals(defaultSkin.Name))
             {
-                defaultSkin = defaultSkin.From(member.Value);
+                defaultSkin.Value = member.Value;
             }
             else if (member.NameEquals(gameTypes.Name))
             {
-                gameTypes = gameTypes.From(member.Value);
+                gameTypes.Value = member.Value;
             }
             else if (member.NameEquals(flags.Name))
             {
-                flags = flags.From(member.Value);
+                flags.Value = member.Value;
             }
             else if (member.NameEquals(restrictions.Name))
             {
-                restrictions = restrictions.From(member.Value);
+                restrictions.Value = member.Value;
             }
             else if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(chatLink.Name))
             {
-                chatLink = chatLink.From(member.Value);
+                chatLink.Value = member.Value;
             }
             else if (member.NameEquals(icon.Name))
             {
-                icon = icon.From(member.Value);
+                icon.Value = member.Value;
             }
             else if (member.NameEquals("details"))
             {
@@ -13248,43 +13248,43 @@ public static class ItemReader
                     }
                     else if (detail.NameEquals(damageType.Name))
                     {
-                        damageType = damageType.From(detail.Value);
+                        damageType.Value = detail.Value;
                     }
                     else if (detail.NameEquals(minPower.Name))
                     {
-                        minPower = minPower.From(detail.Value);
+                        minPower.Value = detail.Value;
                     }
                     else if (detail.NameEquals(maxPower.Name))
                     {
-                        maxPower = maxPower.From(detail.Value);
+                        maxPower.Value = detail.Value;
                     }
                     else if (detail.NameEquals(defense.Name))
                     {
-                        defense = defense.From(detail.Value);
+                        defense.Value = detail.Value;
                     }
                     else if (detail.NameEquals(infusionSlots.Name))
                     {
-                        infusionSlots = infusionSlots.From(detail.Value);
+                        infusionSlots.Value = detail.Value;
                     }
                     else if (detail.NameEquals(attributeAdjustment.Name))
                     {
-                        attributeAdjustment = attributeAdjustment.From(detail.Value);
+                        attributeAdjustment.Value = detail.Value;
                     }
                     else if (detail.NameEquals(statChoices.Name))
                     {
-                        statChoices = statChoices.From(detail.Value);
+                        statChoices.Value = detail.Value;
                     }
                     else if (detail.NameEquals(infixUpgrade.Name))
                     {
-                        infixUpgrade = infixUpgrade.From(detail.Value);
+                        infixUpgrade.Value = detail.Value;
                     }
                     else if (detail.NameEquals(suffixItemId.Name))
                     {
-                        suffixItemId = suffixItemId.From(detail.Value);
+                        suffixItemId.Value = detail.Value;
                     }
                     else if (detail.NameEquals(secondarySuffixItemId.Name))
                     {
-                        secondarySuffixItemId = secondarySuffixItemId.From(detail.Value);
+                        secondarySuffixItemId.Value = detail.Value;
                     }
                     else if (missingMemberBehavior == MissingMemberBehavior.Error)
                     {
@@ -13366,51 +13366,51 @@ public static class ItemReader
             }
             else if (member.NameEquals(name.Name))
             {
-                name = name.From(member.Value);
+                name.Value = member.Value;
             }
             else if (member.NameEquals(description.Name))
             {
-                description = description.From(member.Value);
+                description.Value = member.Value;
             }
             else if (member.NameEquals(level.Name))
             {
-                level = level.From(member.Value);
+                level.Value = member.Value;
             }
             else if (member.NameEquals(rarity.Name))
             {
-                rarity = rarity.From(member.Value);
+                rarity.Value = member.Value;
             }
             else if (member.NameEquals(vendorValue.Name))
             {
-                vendorValue = vendorValue.From(member.Value);
+                vendorValue.Value = member.Value;
             }
             else if (member.NameEquals(defaultSkin.Name))
             {
-                defaultSkin = defaultSkin.From(member.Value);
+                defaultSkin.Value = member.Value;
             }
             else if (member.NameEquals(gameTypes.Name))
             {
-                gameTypes = gameTypes.From(member.Value);
+                gameTypes.Value = member.Value;
             }
             else if (member.NameEquals(flags.Name))
             {
-                flags = flags.From(member.Value);
+                flags.Value = member.Value;
             }
             else if (member.NameEquals(restrictions.Name))
             {
-                restrictions = restrictions.From(member.Value);
+                restrictions.Value = member.Value;
             }
             else if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(chatLink.Name))
             {
-                chatLink = chatLink.From(member.Value);
+                chatLink.Value = member.Value;
             }
             else if (member.NameEquals(icon.Name))
             {
-                icon = icon.From(member.Value);
+                icon.Value = member.Value;
             }
             else if (member.NameEquals("details"))
             {
@@ -13427,43 +13427,43 @@ public static class ItemReader
                     }
                     else if (detail.NameEquals(damageType.Name))
                     {
-                        damageType = damageType.From(detail.Value);
+                        damageType.Value = detail.Value;
                     }
                     else if (detail.NameEquals(minPower.Name))
                     {
-                        minPower = minPower.From(detail.Value);
+                        minPower.Value = detail.Value;
                     }
                     else if (detail.NameEquals(maxPower.Name))
                     {
-                        maxPower = maxPower.From(detail.Value);
+                        maxPower.Value = detail.Value;
                     }
                     else if (detail.NameEquals(defense.Name))
                     {
-                        defense = defense.From(detail.Value);
+                        defense.Value = detail.Value;
                     }
                     else if (detail.NameEquals(infusionSlots.Name))
                     {
-                        infusionSlots = infusionSlots.From(detail.Value);
+                        infusionSlots.Value = detail.Value;
                     }
                     else if (detail.NameEquals(attributeAdjustment.Name))
                     {
-                        attributeAdjustment = attributeAdjustment.From(detail.Value);
+                        attributeAdjustment.Value = detail.Value;
                     }
                     else if (detail.NameEquals(statChoices.Name))
                     {
-                        statChoices = statChoices.From(detail.Value);
+                        statChoices.Value = detail.Value;
                     }
                     else if (detail.NameEquals(infixUpgrade.Name))
                     {
-                        infixUpgrade = infixUpgrade.From(detail.Value);
+                        infixUpgrade.Value = detail.Value;
                     }
                     else if (detail.NameEquals(suffixItemId.Name))
                     {
-                        suffixItemId = suffixItemId.From(detail.Value);
+                        suffixItemId.Value = detail.Value;
                     }
                     else if (detail.NameEquals(secondarySuffixItemId.Name))
                     {
-                        secondarySuffixItemId = secondarySuffixItemId.From(detail.Value);
+                        secondarySuffixItemId.Value = detail.Value;
                     }
                     else if (missingMemberBehavior == MissingMemberBehavior.Error)
                     {
@@ -13545,51 +13545,51 @@ public static class ItemReader
             }
             else if (member.NameEquals(name.Name))
             {
-                name = name.From(member.Value);
+                name.Value = member.Value;
             }
             else if (member.NameEquals(description.Name))
             {
-                description = description.From(member.Value);
+                description.Value = member.Value;
             }
             else if (member.NameEquals(level.Name))
             {
-                level = level.From(member.Value);
+                level.Value = member.Value;
             }
             else if (member.NameEquals(rarity.Name))
             {
-                rarity = rarity.From(member.Value);
+                rarity.Value = member.Value;
             }
             else if (member.NameEquals(vendorValue.Name))
             {
-                vendorValue = vendorValue.From(member.Value);
+                vendorValue.Value = member.Value;
             }
             else if (member.NameEquals(defaultSkin.Name))
             {
-                defaultSkin = defaultSkin.From(member.Value);
+                defaultSkin.Value = member.Value;
             }
             else if (member.NameEquals(gameTypes.Name))
             {
-                gameTypes = gameTypes.From(member.Value);
+                gameTypes.Value = member.Value;
             }
             else if (member.NameEquals(flags.Name))
             {
-                flags = flags.From(member.Value);
+                flags.Value = member.Value;
             }
             else if (member.NameEquals(restrictions.Name))
             {
-                restrictions = restrictions.From(member.Value);
+                restrictions.Value = member.Value;
             }
             else if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(chatLink.Name))
             {
-                chatLink = chatLink.From(member.Value);
+                chatLink.Value = member.Value;
             }
             else if (member.NameEquals(icon.Name))
             {
-                icon = icon.From(member.Value);
+                icon.Value = member.Value;
             }
             else if (member.NameEquals("details"))
             {
@@ -13606,43 +13606,43 @@ public static class ItemReader
                     }
                     else if (detail.NameEquals(damageType.Name))
                     {
-                        damageType = damageType.From(detail.Value);
+                        damageType.Value = detail.Value;
                     }
                     else if (detail.NameEquals(minPower.Name))
                     {
-                        minPower = minPower.From(detail.Value);
+                        minPower.Value = detail.Value;
                     }
                     else if (detail.NameEquals(maxPower.Name))
                     {
-                        maxPower = maxPower.From(detail.Value);
+                        maxPower.Value = detail.Value;
                     }
                     else if (detail.NameEquals(defense.Name))
                     {
-                        defense = defense.From(detail.Value);
+                        defense.Value = detail.Value;
                     }
                     else if (detail.NameEquals(infusionSlots.Name))
                     {
-                        infusionSlots = infusionSlots.From(detail.Value);
+                        infusionSlots.Value = detail.Value;
                     }
                     else if (detail.NameEquals(attributeAdjustment.Name))
                     {
-                        attributeAdjustment = attributeAdjustment.From(detail.Value);
+                        attributeAdjustment.Value = detail.Value;
                     }
                     else if (detail.NameEquals(statChoices.Name))
                     {
-                        statChoices = statChoices.From(detail.Value);
+                        statChoices.Value = detail.Value;
                     }
                     else if (detail.NameEquals(infixUpgrade.Name))
                     {
-                        infixUpgrade = infixUpgrade.From(detail.Value);
+                        infixUpgrade.Value = detail.Value;
                     }
                     else if (detail.NameEquals(suffixItemId.Name))
                     {
-                        suffixItemId = suffixItemId.From(detail.Value);
+                        suffixItemId.Value = detail.Value;
                     }
                     else if (detail.NameEquals(secondarySuffixItemId.Name))
                     {
-                        secondarySuffixItemId = secondarySuffixItemId.From(detail.Value);
+                        secondarySuffixItemId.Value = detail.Value;
                     }
                     else if (missingMemberBehavior == MissingMemberBehavior.Error)
                     {
@@ -13713,47 +13713,47 @@ public static class ItemReader
             }
             else if (member.NameEquals(name.Name))
             {
-                name = name.From(member.Value);
+                name.Value = member.Value;
             }
             else if (member.NameEquals(description.Name))
             {
-                description = description.From(member.Value);
+                description.Value = member.Value;
             }
             else if (member.NameEquals(level.Name))
             {
-                level = level.From(member.Value);
+                level.Value = member.Value;
             }
             else if (member.NameEquals(rarity.Name))
             {
-                rarity = rarity.From(member.Value);
+                rarity.Value = member.Value;
             }
             else if (member.NameEquals(vendorValue.Name))
             {
-                vendorValue = vendorValue.From(member.Value);
+                vendorValue.Value = member.Value;
             }
             else if (member.NameEquals(gameTypes.Name))
             {
-                gameTypes = gameTypes.From(member.Value);
+                gameTypes.Value = member.Value;
             }
             else if (member.NameEquals(flags.Name))
             {
-                flags = flags.From(member.Value);
+                flags.Value = member.Value;
             }
             else if (member.NameEquals(restrictions.Name))
             {
-                restrictions = restrictions.From(member.Value);
+                restrictions.Value = member.Value;
             }
             else if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(chatLink.Name))
             {
-                chatLink = chatLink.From(member.Value);
+                chatLink.Value = member.Value;
             }
             else if (member.NameEquals(icon.Name))
             {
-                icon = icon.From(member.Value);
+                icon.Value = member.Value;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {
@@ -13806,47 +13806,47 @@ public static class ItemReader
             }
             else if (member.NameEquals(name.Name))
             {
-                name = name.From(member.Value);
+                name.Value = member.Value;
             }
             else if (member.NameEquals(description.Name))
             {
-                description = description.From(member.Value);
+                description.Value = member.Value;
             }
             else if (member.NameEquals(level.Name))
             {
-                level = level.From(member.Value);
+                level.Value = member.Value;
             }
             else if (member.NameEquals(rarity.Name))
             {
-                rarity = rarity.From(member.Value);
+                rarity.Value = member.Value;
             }
             else if (member.NameEquals(vendorValue.Name))
             {
-                vendorValue = vendorValue.From(member.Value);
+                vendorValue.Value = member.Value;
             }
             else if (member.NameEquals(gameTypes.Name))
             {
-                gameTypes = gameTypes.From(member.Value);
+                gameTypes.Value = member.Value;
             }
             else if (member.NameEquals(flags.Name))
             {
-                flags = flags.From(member.Value);
+                flags.Value = member.Value;
             }
             else if (member.NameEquals(restrictions.Name))
             {
-                restrictions = restrictions.From(member.Value);
+                restrictions.Value = member.Value;
             }
             else if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(chatLink.Name))
             {
-                chatLink = chatLink.From(member.Value);
+                chatLink.Value = member.Value;
             }
             else if (member.NameEquals(icon.Name))
             {
-                icon = icon.From(member.Value);
+                icon.Value = member.Value;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {

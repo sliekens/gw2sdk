@@ -24,27 +24,27 @@ public static class MapSectorReader
         {
             if (member.NameEquals(name.Name))
             {
-                name = name.From(member.Value);
+                name.Value = member.Value;
             }
             else if (member.NameEquals(level.Name))
             {
-                level = level.From(member.Value);
+                level.Value = member.Value;
             }
             else if (member.NameEquals(coordinates.Name))
             {
-                coordinates = coordinates.From(member.Value);
+                coordinates.Value = member.Value;
             }
             else if (member.NameEquals(boundaries.Name))
             {
-                boundaries = boundaries.From(member.Value);
+                boundaries.Value = member.Value;
             }
             else if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(chatLink.Name))
             {
-                chatLink = chatLink.From(member.Value);
+                chatLink.Value = member.Value;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {

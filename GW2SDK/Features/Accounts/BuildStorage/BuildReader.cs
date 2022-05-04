@@ -23,35 +23,35 @@ public static class BuildReader
         {
             if (member.NameEquals(name.Name))
             {
-                name = name.From(member.Value);
+                name.Value = member.Value;
             }
             else if (member.NameEquals(profession.Name))
             {
-                profession = profession.From(member.Value);
+                profession.Value = member.Value;
             }
             else if (member.NameEquals(specializations.Name))
             {
-                specializations = specializations.From(member.Value);
+                specializations.Value = member.Value;
             }
             else if (member.NameEquals(skills.Name))
             {
-                skills = skills.From(member.Value);
+                skills.Value = member.Value;
             }
             else if (member.NameEquals(aquaticSkills.Name))
             {
-                aquaticSkills = aquaticSkills.From(member.Value);
+                aquaticSkills.Value = member.Value;
             }
             else if (member.NameEquals(pets.Name))
             {
-                pets = pets.From(member.Value);
+                pets.Value = member.Value;
             }
             else if (member.NameEquals(legends.Name))
             {
-                legends = legends.From(member.Value);
+                legends.Value = member.Value;
             }
             else if (member.NameEquals(aquaticLegends.Name))
             {
-                aquaticLegends = aquaticLegends.From(member.Value);
+                aquaticLegends.Value = member.Value;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {
@@ -89,15 +89,15 @@ public static class BuildReader
         {
             if (member.NameEquals(heal.Name))
             {
-                heal = heal.From(member.Value);
+                heal.Value = member.Value;
             }
             else if (member.NameEquals(utilities.Name))
             {
-                utilities = utilities.From(member.Value);
+                utilities.Value = member.Value;
             }
             else if (member.NameEquals(elite.Name))
             {
-                elite = elite.From(member.Value);
+                elite.Value = member.Value;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {
@@ -128,11 +128,11 @@ public static class BuildReader
         {
             if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(traits.Name))
             {
-                traits = traits.From(member.Value);
+                traits.Value = member.Value;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {
@@ -161,11 +161,11 @@ public static class BuildReader
         {
             if (member.NameEquals(terrestrial.Name))
             {
-                terrestrial = terrestrial.From(member.Value);
+                terrestrial.Value = member.Value;
             }
             else if (member.NameEquals(aquatic.Name))
             {
-                aquatic = aquatic.From(member.Value);
+                aquatic.Value = member.Value;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {

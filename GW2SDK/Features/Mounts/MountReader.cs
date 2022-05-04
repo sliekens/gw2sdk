@@ -20,23 +20,23 @@ public static class MountReader
         {
             if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(name.Name))
             {
-                name = name.From(member.Value);
+                name.Value = member.Value;
             }
             else if (member.NameEquals(defaultSkin.Name))
             {
-                defaultSkin = defaultSkin.From(member.Value);
+                defaultSkin.Value = member.Value;
             }
             else if (member.NameEquals(skins.Name))
             {
-                skins = skins.From(member.Value);
+                skins.Value = member.Value;
             }
             else if (member.NameEquals(skills.Name))
             {
-                skills = skills.From(member.Value);
+                skills.Value = member.Value;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {
@@ -66,11 +66,11 @@ public static class MountReader
         {
             if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(slot.Name))
             {
-                slot = slot.From(member.Value);
+                slot.Value = member.Value;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {

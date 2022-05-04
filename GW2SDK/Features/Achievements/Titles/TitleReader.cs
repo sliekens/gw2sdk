@@ -19,19 +19,19 @@ public static class TitleReader
         {
             if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(name.Name))
             {
-                name = name.From(member.Value);
+                name.Value = member.Value;
             }
             else if (member.NameEquals(achievements.Name))
             {
-                achievements = achievements.From(member.Value);
+                achievements.Value = member.Value;
             }
             else if (member.NameEquals(achievementPointsRequired.Name))
             {
-                achievementPointsRequired = achievementPointsRequired.From(member.Value);
+                achievementPointsRequired.Value = member.Value;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {

@@ -145,43 +145,43 @@ public static class RecipeReader
             }
             else if (member.NameEquals(outputItemId.Name))
             {
-                outputItemId = outputItemId.From(member.Value);
+                outputItemId.Value = member.Value;
             }
             else if (member.NameEquals(outputItemCount.Name))
             {
-                outputItemCount = outputItemCount.From(member.Value);
+                outputItemCount.Value = member.Value;
             }
             else if (member.NameEquals(minRating.Name))
             {
-                minRating = minRating.From(member.Value);
+                minRating.Value = member.Value;
             }
             else if (member.NameEquals(minRating.Name))
             {
-                minRating = minRating.From(member.Value);
+                minRating.Value = member.Value;
             }
             else if (member.NameEquals(timeToCraft.Name))
             {
-                timeToCraft = timeToCraft.From(member.Value);
+                timeToCraft.Value = member.Value;
             }
             else if (member.NameEquals(disciplines.Name))
             {
-                disciplines = disciplines.From(member.Value);
+                disciplines.Value = member.Value;
             }
             else if (member.NameEquals(flags.Name))
             {
-                flags = flags.From(member.Value);
+                flags.Value = member.Value;
             }
             else if (member.NameEquals(ingredients.Name))
             {
-                ingredients = ingredients.From(member.Value);
+                ingredients.Value = member.Value;
             }
             else if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(chatLink.Name))
             {
-                chatLink = chatLink.From(member.Value);
+                chatLink.Value = member.Value;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {
@@ -231,43 +231,43 @@ public static class RecipeReader
             }
             else if (member.NameEquals(outputItemId.Name))
             {
-                outputItemId = outputItemId.From(member.Value);
+                outputItemId.Value = member.Value;
             }
             else if (member.NameEquals(outputItemCount.Name))
             {
-                outputItemCount = outputItemCount.From(member.Value);
+                outputItemCount.Value = member.Value;
             }
             else if (member.NameEquals(minRating.Name))
             {
-                minRating = minRating.From(member.Value);
+                minRating.Value = member.Value;
             }
             else if (member.NameEquals(minRating.Name))
             {
-                minRating = minRating.From(member.Value);
+                minRating.Value = member.Value;
             }
             else if (member.NameEquals(timeToCraft.Name))
             {
-                timeToCraft = timeToCraft.From(member.Value);
+                timeToCraft.Value = member.Value;
             }
             else if (member.NameEquals(disciplines.Name))
             {
-                disciplines = disciplines.From(member.Value);
+                disciplines.Value = member.Value;
             }
             else if (member.NameEquals(flags.Name))
             {
-                flags = flags.From(member.Value);
+                flags.Value = member.Value;
             }
             else if (member.NameEquals(ingredients.Name))
             {
-                ingredients = ingredients.From(member.Value);
+                ingredients.Value = member.Value;
             }
             else if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(chatLink.Name))
             {
-                chatLink = chatLink.From(member.Value);
+                chatLink.Value = member.Value;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {
@@ -317,43 +317,43 @@ public static class RecipeReader
             }
             else if (member.NameEquals(outputItemId.Name))
             {
-                outputItemId = outputItemId.From(member.Value);
+                outputItemId.Value = member.Value;
             }
             else if (member.NameEquals(outputItemCount.Name))
             {
-                outputItemCount = outputItemCount.From(member.Value);
+                outputItemCount.Value = member.Value;
             }
             else if (member.NameEquals(minRating.Name))
             {
-                minRating = minRating.From(member.Value);
+                minRating.Value = member.Value;
             }
             else if (member.NameEquals(minRating.Name))
             {
-                minRating = minRating.From(member.Value);
+                minRating.Value = member.Value;
             }
             else if (member.NameEquals(timeToCraft.Name))
             {
-                timeToCraft = timeToCraft.From(member.Value);
+                timeToCraft.Value = member.Value;
             }
             else if (member.NameEquals(disciplines.Name))
             {
-                disciplines = disciplines.From(member.Value);
+                disciplines.Value = member.Value;
             }
             else if (member.NameEquals(flags.Name))
             {
-                flags = flags.From(member.Value);
+                flags.Value = member.Value;
             }
             else if (member.NameEquals(ingredients.Name))
             {
-                ingredients = ingredients.From(member.Value);
+                ingredients.Value = member.Value;
             }
             else if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(chatLink.Name))
             {
-                chatLink = chatLink.From(member.Value);
+                chatLink.Value = member.Value;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {
@@ -403,43 +403,43 @@ public static class RecipeReader
             }
             else if (member.NameEquals(outputItemId.Name))
             {
-                outputItemId = outputItemId.From(member.Value);
+                outputItemId.Value = member.Value;
             }
             else if (member.NameEquals(outputItemCount.Name))
             {
-                outputItemCount = outputItemCount.From(member.Value);
+                outputItemCount.Value = member.Value;
             }
             else if (member.NameEquals(minRating.Name))
             {
-                minRating = minRating.From(member.Value);
+                minRating.Value = member.Value;
             }
             else if (member.NameEquals(minRating.Name))
             {
-                minRating = minRating.From(member.Value);
+                minRating.Value = member.Value;
             }
             else if (member.NameEquals(timeToCraft.Name))
             {
-                timeToCraft = timeToCraft.From(member.Value);
+                timeToCraft.Value = member.Value;
             }
             else if (member.NameEquals(disciplines.Name))
             {
-                disciplines = disciplines.From(member.Value);
+                disciplines.Value = member.Value;
             }
             else if (member.NameEquals(flags.Name))
             {
-                flags = flags.From(member.Value);
+                flags.Value = member.Value;
             }
             else if (member.NameEquals(ingredients.Name))
             {
-                ingredients = ingredients.From(member.Value);
+                ingredients.Value = member.Value;
             }
             else if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(chatLink.Name))
             {
-                chatLink = chatLink.From(member.Value);
+                chatLink.Value = member.Value;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {
@@ -489,43 +489,43 @@ public static class RecipeReader
             }
             else if (member.NameEquals(outputItemId.Name))
             {
-                outputItemId = outputItemId.From(member.Value);
+                outputItemId.Value = member.Value;
             }
             else if (member.NameEquals(outputItemCount.Name))
             {
-                outputItemCount = outputItemCount.From(member.Value);
+                outputItemCount.Value = member.Value;
             }
             else if (member.NameEquals(minRating.Name))
             {
-                minRating = minRating.From(member.Value);
+                minRating.Value = member.Value;
             }
             else if (member.NameEquals(minRating.Name))
             {
-                minRating = minRating.From(member.Value);
+                minRating.Value = member.Value;
             }
             else if (member.NameEquals(timeToCraft.Name))
             {
-                timeToCraft = timeToCraft.From(member.Value);
+                timeToCraft.Value = member.Value;
             }
             else if (member.NameEquals(disciplines.Name))
             {
-                disciplines = disciplines.From(member.Value);
+                disciplines.Value = member.Value;
             }
             else if (member.NameEquals(flags.Name))
             {
-                flags = flags.From(member.Value);
+                flags.Value = member.Value;
             }
             else if (member.NameEquals(ingredients.Name))
             {
-                ingredients = ingredients.From(member.Value);
+                ingredients.Value = member.Value;
             }
             else if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(chatLink.Name))
             {
-                chatLink = chatLink.From(member.Value);
+                chatLink.Value = member.Value;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {
@@ -575,43 +575,43 @@ public static class RecipeReader
             }
             else if (member.NameEquals(outputItemId.Name))
             {
-                outputItemId = outputItemId.From(member.Value);
+                outputItemId.Value = member.Value;
             }
             else if (member.NameEquals(outputItemCount.Name))
             {
-                outputItemCount = outputItemCount.From(member.Value);
+                outputItemCount.Value = member.Value;
             }
             else if (member.NameEquals(minRating.Name))
             {
-                minRating = minRating.From(member.Value);
+                minRating.Value = member.Value;
             }
             else if (member.NameEquals(minRating.Name))
             {
-                minRating = minRating.From(member.Value);
+                minRating.Value = member.Value;
             }
             else if (member.NameEquals(timeToCraft.Name))
             {
-                timeToCraft = timeToCraft.From(member.Value);
+                timeToCraft.Value = member.Value;
             }
             else if (member.NameEquals(disciplines.Name))
             {
-                disciplines = disciplines.From(member.Value);
+                disciplines.Value = member.Value;
             }
             else if (member.NameEquals(flags.Name))
             {
-                flags = flags.From(member.Value);
+                flags.Value = member.Value;
             }
             else if (member.NameEquals(ingredients.Name))
             {
-                ingredients = ingredients.From(member.Value);
+                ingredients.Value = member.Value;
             }
             else if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(chatLink.Name))
             {
-                chatLink = chatLink.From(member.Value);
+                chatLink.Value = member.Value;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {
@@ -661,43 +661,43 @@ public static class RecipeReader
             }
             else if (member.NameEquals(outputItemId.Name))
             {
-                outputItemId = outputItemId.From(member.Value);
+                outputItemId.Value = member.Value;
             }
             else if (member.NameEquals(outputItemCount.Name))
             {
-                outputItemCount = outputItemCount.From(member.Value);
+                outputItemCount.Value = member.Value;
             }
             else if (member.NameEquals(minRating.Name))
             {
-                minRating = minRating.From(member.Value);
+                minRating.Value = member.Value;
             }
             else if (member.NameEquals(minRating.Name))
             {
-                minRating = minRating.From(member.Value);
+                minRating.Value = member.Value;
             }
             else if (member.NameEquals(timeToCraft.Name))
             {
-                timeToCraft = timeToCraft.From(member.Value);
+                timeToCraft.Value = member.Value;
             }
             else if (member.NameEquals(disciplines.Name))
             {
-                disciplines = disciplines.From(member.Value);
+                disciplines.Value = member.Value;
             }
             else if (member.NameEquals(flags.Name))
             {
-                flags = flags.From(member.Value);
+                flags.Value = member.Value;
             }
             else if (member.NameEquals(ingredients.Name))
             {
-                ingredients = ingredients.From(member.Value);
+                ingredients.Value = member.Value;
             }
             else if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(chatLink.Name))
             {
-                chatLink = chatLink.From(member.Value);
+                chatLink.Value = member.Value;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {
@@ -747,43 +747,43 @@ public static class RecipeReader
             }
             else if (member.NameEquals(outputItemId.Name))
             {
-                outputItemId = outputItemId.From(member.Value);
+                outputItemId.Value = member.Value;
             }
             else if (member.NameEquals(outputItemCount.Name))
             {
-                outputItemCount = outputItemCount.From(member.Value);
+                outputItemCount.Value = member.Value;
             }
             else if (member.NameEquals(minRating.Name))
             {
-                minRating = minRating.From(member.Value);
+                minRating.Value = member.Value;
             }
             else if (member.NameEquals(minRating.Name))
             {
-                minRating = minRating.From(member.Value);
+                minRating.Value = member.Value;
             }
             else if (member.NameEquals(timeToCraft.Name))
             {
-                timeToCraft = timeToCraft.From(member.Value);
+                timeToCraft.Value = member.Value;
             }
             else if (member.NameEquals(disciplines.Name))
             {
-                disciplines = disciplines.From(member.Value);
+                disciplines.Value = member.Value;
             }
             else if (member.NameEquals(flags.Name))
             {
-                flags = flags.From(member.Value);
+                flags.Value = member.Value;
             }
             else if (member.NameEquals(ingredients.Name))
             {
-                ingredients = ingredients.From(member.Value);
+                ingredients.Value = member.Value;
             }
             else if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(chatLink.Name))
             {
-                chatLink = chatLink.From(member.Value);
+                chatLink.Value = member.Value;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {
@@ -833,43 +833,43 @@ public static class RecipeReader
             }
             else if (member.NameEquals(outputItemId.Name))
             {
-                outputItemId = outputItemId.From(member.Value);
+                outputItemId.Value = member.Value;
             }
             else if (member.NameEquals(outputItemCount.Name))
             {
-                outputItemCount = outputItemCount.From(member.Value);
+                outputItemCount.Value = member.Value;
             }
             else if (member.NameEquals(minRating.Name))
             {
-                minRating = minRating.From(member.Value);
+                minRating.Value = member.Value;
             }
             else if (member.NameEquals(minRating.Name))
             {
-                minRating = minRating.From(member.Value);
+                minRating.Value = member.Value;
             }
             else if (member.NameEquals(timeToCraft.Name))
             {
-                timeToCraft = timeToCraft.From(member.Value);
+                timeToCraft.Value = member.Value;
             }
             else if (member.NameEquals(disciplines.Name))
             {
-                disciplines = disciplines.From(member.Value);
+                disciplines.Value = member.Value;
             }
             else if (member.NameEquals(flags.Name))
             {
-                flags = flags.From(member.Value);
+                flags.Value = member.Value;
             }
             else if (member.NameEquals(ingredients.Name))
             {
-                ingredients = ingredients.From(member.Value);
+                ingredients.Value = member.Value;
             }
             else if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(chatLink.Name))
             {
-                chatLink = chatLink.From(member.Value);
+                chatLink.Value = member.Value;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {
@@ -919,43 +919,43 @@ public static class RecipeReader
             }
             else if (member.NameEquals(outputItemId.Name))
             {
-                outputItemId = outputItemId.From(member.Value);
+                outputItemId.Value = member.Value;
             }
             else if (member.NameEquals(outputItemCount.Name))
             {
-                outputItemCount = outputItemCount.From(member.Value);
+                outputItemCount.Value = member.Value;
             }
             else if (member.NameEquals(minRating.Name))
             {
-                minRating = minRating.From(member.Value);
+                minRating.Value = member.Value;
             }
             else if (member.NameEquals(minRating.Name))
             {
-                minRating = minRating.From(member.Value);
+                minRating.Value = member.Value;
             }
             else if (member.NameEquals(timeToCraft.Name))
             {
-                timeToCraft = timeToCraft.From(member.Value);
+                timeToCraft.Value = member.Value;
             }
             else if (member.NameEquals(disciplines.Name))
             {
-                disciplines = disciplines.From(member.Value);
+                disciplines.Value = member.Value;
             }
             else if (member.NameEquals(flags.Name))
             {
-                flags = flags.From(member.Value);
+                flags.Value = member.Value;
             }
             else if (member.NameEquals(ingredients.Name))
             {
-                ingredients = ingredients.From(member.Value);
+                ingredients.Value = member.Value;
             }
             else if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(chatLink.Name))
             {
-                chatLink = chatLink.From(member.Value);
+                chatLink.Value = member.Value;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {
@@ -1005,43 +1005,43 @@ public static class RecipeReader
             }
             else if (member.NameEquals(outputItemId.Name))
             {
-                outputItemId = outputItemId.From(member.Value);
+                outputItemId.Value = member.Value;
             }
             else if (member.NameEquals(outputItemCount.Name))
             {
-                outputItemCount = outputItemCount.From(member.Value);
+                outputItemCount.Value = member.Value;
             }
             else if (member.NameEquals(minRating.Name))
             {
-                minRating = minRating.From(member.Value);
+                minRating.Value = member.Value;
             }
             else if (member.NameEquals(minRating.Name))
             {
-                minRating = minRating.From(member.Value);
+                minRating.Value = member.Value;
             }
             else if (member.NameEquals(timeToCraft.Name))
             {
-                timeToCraft = timeToCraft.From(member.Value);
+                timeToCraft.Value = member.Value;
             }
             else if (member.NameEquals(disciplines.Name))
             {
-                disciplines = disciplines.From(member.Value);
+                disciplines.Value = member.Value;
             }
             else if (member.NameEquals(flags.Name))
             {
-                flags = flags.From(member.Value);
+                flags.Value = member.Value;
             }
             else if (member.NameEquals(ingredients.Name))
             {
-                ingredients = ingredients.From(member.Value);
+                ingredients.Value = member.Value;
             }
             else if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(chatLink.Name))
             {
-                chatLink = chatLink.From(member.Value);
+                chatLink.Value = member.Value;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {
@@ -1091,43 +1091,43 @@ public static class RecipeReader
             }
             else if (member.NameEquals(outputItemId.Name))
             {
-                outputItemId = outputItemId.From(member.Value);
+                outputItemId.Value = member.Value;
             }
             else if (member.NameEquals(outputItemCount.Name))
             {
-                outputItemCount = outputItemCount.From(member.Value);
+                outputItemCount.Value = member.Value;
             }
             else if (member.NameEquals(minRating.Name))
             {
-                minRating = minRating.From(member.Value);
+                minRating.Value = member.Value;
             }
             else if (member.NameEquals(minRating.Name))
             {
-                minRating = minRating.From(member.Value);
+                minRating.Value = member.Value;
             }
             else if (member.NameEquals(timeToCraft.Name))
             {
-                timeToCraft = timeToCraft.From(member.Value);
+                timeToCraft.Value = member.Value;
             }
             else if (member.NameEquals(disciplines.Name))
             {
-                disciplines = disciplines.From(member.Value);
+                disciplines.Value = member.Value;
             }
             else if (member.NameEquals(flags.Name))
             {
-                flags = flags.From(member.Value);
+                flags.Value = member.Value;
             }
             else if (member.NameEquals(ingredients.Name))
             {
-                ingredients = ingredients.From(member.Value);
+                ingredients.Value = member.Value;
             }
             else if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(chatLink.Name))
             {
-                chatLink = chatLink.From(member.Value);
+                chatLink.Value = member.Value;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {
@@ -1177,43 +1177,43 @@ public static class RecipeReader
             }
             else if (member.NameEquals(outputItemId.Name))
             {
-                outputItemId = outputItemId.From(member.Value);
+                outputItemId.Value = member.Value;
             }
             else if (member.NameEquals(outputItemCount.Name))
             {
-                outputItemCount = outputItemCount.From(member.Value);
+                outputItemCount.Value = member.Value;
             }
             else if (member.NameEquals(minRating.Name))
             {
-                minRating = minRating.From(member.Value);
+                minRating.Value = member.Value;
             }
             else if (member.NameEquals(minRating.Name))
             {
-                minRating = minRating.From(member.Value);
+                minRating.Value = member.Value;
             }
             else if (member.NameEquals(timeToCraft.Name))
             {
-                timeToCraft = timeToCraft.From(member.Value);
+                timeToCraft.Value = member.Value;
             }
             else if (member.NameEquals(disciplines.Name))
             {
-                disciplines = disciplines.From(member.Value);
+                disciplines.Value = member.Value;
             }
             else if (member.NameEquals(flags.Name))
             {
-                flags = flags.From(member.Value);
+                flags.Value = member.Value;
             }
             else if (member.NameEquals(ingredients.Name))
             {
-                ingredients = ingredients.From(member.Value);
+                ingredients.Value = member.Value;
             }
             else if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(chatLink.Name))
             {
-                chatLink = chatLink.From(member.Value);
+                chatLink.Value = member.Value;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {
@@ -1263,43 +1263,43 @@ public static class RecipeReader
             }
             else if (member.NameEquals(outputItemId.Name))
             {
-                outputItemId = outputItemId.From(member.Value);
+                outputItemId.Value = member.Value;
             }
             else if (member.NameEquals(outputItemCount.Name))
             {
-                outputItemCount = outputItemCount.From(member.Value);
+                outputItemCount.Value = member.Value;
             }
             else if (member.NameEquals(minRating.Name))
             {
-                minRating = minRating.From(member.Value);
+                minRating.Value = member.Value;
             }
             else if (member.NameEquals(minRating.Name))
             {
-                minRating = minRating.From(member.Value);
+                minRating.Value = member.Value;
             }
             else if (member.NameEquals(timeToCraft.Name))
             {
-                timeToCraft = timeToCraft.From(member.Value);
+                timeToCraft.Value = member.Value;
             }
             else if (member.NameEquals(disciplines.Name))
             {
-                disciplines = disciplines.From(member.Value);
+                disciplines.Value = member.Value;
             }
             else if (member.NameEquals(flags.Name))
             {
-                flags = flags.From(member.Value);
+                flags.Value = member.Value;
             }
             else if (member.NameEquals(ingredients.Name))
             {
-                ingredients = ingredients.From(member.Value);
+                ingredients.Value = member.Value;
             }
             else if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(chatLink.Name))
             {
-                chatLink = chatLink.From(member.Value);
+                chatLink.Value = member.Value;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {
@@ -1349,43 +1349,43 @@ public static class RecipeReader
             }
             else if (member.NameEquals(outputItemId.Name))
             {
-                outputItemId = outputItemId.From(member.Value);
+                outputItemId.Value = member.Value;
             }
             else if (member.NameEquals(outputItemCount.Name))
             {
-                outputItemCount = outputItemCount.From(member.Value);
+                outputItemCount.Value = member.Value;
             }
             else if (member.NameEquals(minRating.Name))
             {
-                minRating = minRating.From(member.Value);
+                minRating.Value = member.Value;
             }
             else if (member.NameEquals(minRating.Name))
             {
-                minRating = minRating.From(member.Value);
+                minRating.Value = member.Value;
             }
             else if (member.NameEquals(timeToCraft.Name))
             {
-                timeToCraft = timeToCraft.From(member.Value);
+                timeToCraft.Value = member.Value;
             }
             else if (member.NameEquals(disciplines.Name))
             {
-                disciplines = disciplines.From(member.Value);
+                disciplines.Value = member.Value;
             }
             else if (member.NameEquals(flags.Name))
             {
-                flags = flags.From(member.Value);
+                flags.Value = member.Value;
             }
             else if (member.NameEquals(ingredients.Name))
             {
-                ingredients = ingredients.From(member.Value);
+                ingredients.Value = member.Value;
             }
             else if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(chatLink.Name))
             {
-                chatLink = chatLink.From(member.Value);
+                chatLink.Value = member.Value;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {
@@ -1435,43 +1435,43 @@ public static class RecipeReader
             }
             else if (member.NameEquals(outputItemId.Name))
             {
-                outputItemId = outputItemId.From(member.Value);
+                outputItemId.Value = member.Value;
             }
             else if (member.NameEquals(outputItemCount.Name))
             {
-                outputItemCount = outputItemCount.From(member.Value);
+                outputItemCount.Value = member.Value;
             }
             else if (member.NameEquals(minRating.Name))
             {
-                minRating = minRating.From(member.Value);
+                minRating.Value = member.Value;
             }
             else if (member.NameEquals(minRating.Name))
             {
-                minRating = minRating.From(member.Value);
+                minRating.Value = member.Value;
             }
             else if (member.NameEquals(timeToCraft.Name))
             {
-                timeToCraft = timeToCraft.From(member.Value);
+                timeToCraft.Value = member.Value;
             }
             else if (member.NameEquals(disciplines.Name))
             {
-                disciplines = disciplines.From(member.Value);
+                disciplines.Value = member.Value;
             }
             else if (member.NameEquals(flags.Name))
             {
-                flags = flags.From(member.Value);
+                flags.Value = member.Value;
             }
             else if (member.NameEquals(ingredients.Name))
             {
-                ingredients = ingredients.From(member.Value);
+                ingredients.Value = member.Value;
             }
             else if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(chatLink.Name))
             {
-                chatLink = chatLink.From(member.Value);
+                chatLink.Value = member.Value;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {
@@ -1521,43 +1521,43 @@ public static class RecipeReader
             }
             else if (member.NameEquals(outputItemId.Name))
             {
-                outputItemId = outputItemId.From(member.Value);
+                outputItemId.Value = member.Value;
             }
             else if (member.NameEquals(outputItemCount.Name))
             {
-                outputItemCount = outputItemCount.From(member.Value);
+                outputItemCount.Value = member.Value;
             }
             else if (member.NameEquals(minRating.Name))
             {
-                minRating = minRating.From(member.Value);
+                minRating.Value = member.Value;
             }
             else if (member.NameEquals(minRating.Name))
             {
-                minRating = minRating.From(member.Value);
+                minRating.Value = member.Value;
             }
             else if (member.NameEquals(timeToCraft.Name))
             {
-                timeToCraft = timeToCraft.From(member.Value);
+                timeToCraft.Value = member.Value;
             }
             else if (member.NameEquals(disciplines.Name))
             {
-                disciplines = disciplines.From(member.Value);
+                disciplines.Value = member.Value;
             }
             else if (member.NameEquals(flags.Name))
             {
-                flags = flags.From(member.Value);
+                flags.Value = member.Value;
             }
             else if (member.NameEquals(ingredients.Name))
             {
-                ingredients = ingredients.From(member.Value);
+                ingredients.Value = member.Value;
             }
             else if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(chatLink.Name))
             {
-                chatLink = chatLink.From(member.Value);
+                chatLink.Value = member.Value;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {
@@ -1607,43 +1607,43 @@ public static class RecipeReader
             }
             else if (member.NameEquals(outputItemId.Name))
             {
-                outputItemId = outputItemId.From(member.Value);
+                outputItemId.Value = member.Value;
             }
             else if (member.NameEquals(outputItemCount.Name))
             {
-                outputItemCount = outputItemCount.From(member.Value);
+                outputItemCount.Value = member.Value;
             }
             else if (member.NameEquals(minRating.Name))
             {
-                minRating = minRating.From(member.Value);
+                minRating.Value = member.Value;
             }
             else if (member.NameEquals(minRating.Name))
             {
-                minRating = minRating.From(member.Value);
+                minRating.Value = member.Value;
             }
             else if (member.NameEquals(timeToCraft.Name))
             {
-                timeToCraft = timeToCraft.From(member.Value);
+                timeToCraft.Value = member.Value;
             }
             else if (member.NameEquals(disciplines.Name))
             {
-                disciplines = disciplines.From(member.Value);
+                disciplines.Value = member.Value;
             }
             else if (member.NameEquals(flags.Name))
             {
-                flags = flags.From(member.Value);
+                flags.Value = member.Value;
             }
             else if (member.NameEquals(ingredients.Name))
             {
-                ingredients = ingredients.From(member.Value);
+                ingredients.Value = member.Value;
             }
             else if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(chatLink.Name))
             {
-                chatLink = chatLink.From(member.Value);
+                chatLink.Value = member.Value;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {
@@ -1693,43 +1693,43 @@ public static class RecipeReader
             }
             else if (member.NameEquals(outputItemId.Name))
             {
-                outputItemId = outputItemId.From(member.Value);
+                outputItemId.Value = member.Value;
             }
             else if (member.NameEquals(outputItemCount.Name))
             {
-                outputItemCount = outputItemCount.From(member.Value);
+                outputItemCount.Value = member.Value;
             }
             else if (member.NameEquals(minRating.Name))
             {
-                minRating = minRating.From(member.Value);
+                minRating.Value = member.Value;
             }
             else if (member.NameEquals(minRating.Name))
             {
-                minRating = minRating.From(member.Value);
+                minRating.Value = member.Value;
             }
             else if (member.NameEquals(timeToCraft.Name))
             {
-                timeToCraft = timeToCraft.From(member.Value);
+                timeToCraft.Value = member.Value;
             }
             else if (member.NameEquals(disciplines.Name))
             {
-                disciplines = disciplines.From(member.Value);
+                disciplines.Value = member.Value;
             }
             else if (member.NameEquals(flags.Name))
             {
-                flags = flags.From(member.Value);
+                flags.Value = member.Value;
             }
             else if (member.NameEquals(ingredients.Name))
             {
-                ingredients = ingredients.From(member.Value);
+                ingredients.Value = member.Value;
             }
             else if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(chatLink.Name))
             {
-                chatLink = chatLink.From(member.Value);
+                chatLink.Value = member.Value;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {
@@ -1781,51 +1781,51 @@ public static class RecipeReader
             }
             else if (member.NameEquals(outputItemId.Name))
             {
-                outputItemId = outputItemId.From(member.Value);
+                outputItemId.Value = member.Value;
             }
             else if (member.NameEquals(outputItemCount.Name))
             {
-                outputItemCount = outputItemCount.From(member.Value);
+                outputItemCount.Value = member.Value;
             }
             else if (member.NameEquals(minRating.Name))
             {
-                minRating = minRating.From(member.Value);
+                minRating.Value = member.Value;
             }
             else if (member.NameEquals(minRating.Name))
             {
-                minRating = minRating.From(member.Value);
+                minRating.Value = member.Value;
             }
             else if (member.NameEquals(timeToCraft.Name))
             {
-                timeToCraft = timeToCraft.From(member.Value);
+                timeToCraft.Value = member.Value;
             }
             else if (member.NameEquals(disciplines.Name))
             {
-                disciplines = disciplines.From(member.Value);
+                disciplines.Value = member.Value;
             }
             else if (member.NameEquals(flags.Name))
             {
-                flags = flags.From(member.Value);
+                flags.Value = member.Value;
             }
             else if (member.NameEquals(ingredients.Name))
             {
-                ingredients = ingredients.From(member.Value);
+                ingredients.Value = member.Value;
             }
             else if (member.NameEquals(guildIngredients.Name))
             {
-                guildIngredients = guildIngredients.From(member.Value);
+                guildIngredients.Value = member.Value;
             }
             else if (member.NameEquals(outputUpgradeId.Name))
             {
-                outputUpgradeId = outputUpgradeId.From(member.Value);
+                outputUpgradeId.Value = member.Value;
             }
             else if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(chatLink.Name))
             {
-                chatLink = chatLink.From(member.Value);
+                chatLink.Value = member.Value;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {
@@ -1881,47 +1881,47 @@ public static class RecipeReader
             }
             else if (member.NameEquals(outputItemId.Name))
             {
-                outputItemId = outputItemId.From(member.Value);
+                outputItemId.Value = member.Value;
             }
             else if (member.NameEquals(outputItemCount.Name))
             {
-                outputItemCount = outputItemCount.From(member.Value);
+                outputItemCount.Value = member.Value;
             }
             else if (member.NameEquals(minRating.Name))
             {
-                minRating = minRating.From(member.Value);
+                minRating.Value = member.Value;
             }
             else if (member.NameEquals(minRating.Name))
             {
-                minRating = minRating.From(member.Value);
+                minRating.Value = member.Value;
             }
             else if (member.NameEquals(timeToCraft.Name))
             {
-                timeToCraft = timeToCraft.From(member.Value);
+                timeToCraft.Value = member.Value;
             }
             else if (member.NameEquals(disciplines.Name))
             {
-                disciplines = disciplines.From(member.Value);
+                disciplines.Value = member.Value;
             }
             else if (member.NameEquals(flags.Name))
             {
-                flags = flags.From(member.Value);
+                flags.Value = member.Value;
             }
             else if (member.NameEquals(ingredients.Name))
             {
-                ingredients = ingredients.From(member.Value);
+                ingredients.Value = member.Value;
             }
             else if (member.NameEquals(outputUpgradeId.Name))
             {
-                outputUpgradeId = outputUpgradeId.From(member.Value);
+                outputUpgradeId.Value = member.Value;
             }
             else if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(chatLink.Name))
             {
-                chatLink = chatLink.From(member.Value);
+                chatLink.Value = member.Value;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {
@@ -1974,51 +1974,51 @@ public static class RecipeReader
             }
             else if (member.NameEquals(outputItemId.Name))
             {
-                outputItemId = outputItemId.From(member.Value);
+                outputItemId.Value = member.Value;
             }
             else if (member.NameEquals(outputItemCount.Name))
             {
-                outputItemCount = outputItemCount.From(member.Value);
+                outputItemCount.Value = member.Value;
             }
             else if (member.NameEquals(minRating.Name))
             {
-                minRating = minRating.From(member.Value);
+                minRating.Value = member.Value;
             }
             else if (member.NameEquals(minRating.Name))
             {
-                minRating = minRating.From(member.Value);
+                minRating.Value = member.Value;
             }
             else if (member.NameEquals(timeToCraft.Name))
             {
-                timeToCraft = timeToCraft.From(member.Value);
+                timeToCraft.Value = member.Value;
             }
             else if (member.NameEquals(disciplines.Name))
             {
-                disciplines = disciplines.From(member.Value);
+                disciplines.Value = member.Value;
             }
             else if (member.NameEquals(flags.Name))
             {
-                flags = flags.From(member.Value);
+                flags.Value = member.Value;
             }
             else if (member.NameEquals(ingredients.Name))
             {
-                ingredients = ingredients.From(member.Value);
+                ingredients.Value = member.Value;
             }
             else if (member.NameEquals(guildIngredients.Name))
             {
-                guildIngredients = guildIngredients.From(member.Value);
+                guildIngredients.Value = member.Value;
             }
             else if (member.NameEquals(outputUpgradeId.Name))
             {
-                outputUpgradeId = outputUpgradeId.From(member.Value);
+                outputUpgradeId.Value = member.Value;
             }
             else if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(chatLink.Name))
             {
-                chatLink = chatLink.From(member.Value);
+                chatLink.Value = member.Value;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {
@@ -2073,43 +2073,43 @@ public static class RecipeReader
             }
             else if (member.NameEquals(outputItemId.Name))
             {
-                outputItemId = outputItemId.From(member.Value);
+                outputItemId.Value = member.Value;
             }
             else if (member.NameEquals(outputItemCount.Name))
             {
-                outputItemCount = outputItemCount.From(member.Value);
+                outputItemCount.Value = member.Value;
             }
             else if (member.NameEquals(minRating.Name))
             {
-                minRating = minRating.From(member.Value);
+                minRating.Value = member.Value;
             }
             else if (member.NameEquals(minRating.Name))
             {
-                minRating = minRating.From(member.Value);
+                minRating.Value = member.Value;
             }
             else if (member.NameEquals(timeToCraft.Name))
             {
-                timeToCraft = timeToCraft.From(member.Value);
+                timeToCraft.Value = member.Value;
             }
             else if (member.NameEquals(disciplines.Name))
             {
-                disciplines = disciplines.From(member.Value);
+                disciplines.Value = member.Value;
             }
             else if (member.NameEquals(flags.Name))
             {
-                flags = flags.From(member.Value);
+                flags.Value = member.Value;
             }
             else if (member.NameEquals(ingredients.Name))
             {
-                ingredients = ingredients.From(member.Value);
+                ingredients.Value = member.Value;
             }
             else if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(chatLink.Name))
             {
-                chatLink = chatLink.From(member.Value);
+                chatLink.Value = member.Value;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {
@@ -2159,43 +2159,43 @@ public static class RecipeReader
             }
             else if (member.NameEquals(outputItemId.Name))
             {
-                outputItemId = outputItemId.From(member.Value);
+                outputItemId.Value = member.Value;
             }
             else if (member.NameEquals(outputItemCount.Name))
             {
-                outputItemCount = outputItemCount.From(member.Value);
+                outputItemCount.Value = member.Value;
             }
             else if (member.NameEquals(minRating.Name))
             {
-                minRating = minRating.From(member.Value);
+                minRating.Value = member.Value;
             }
             else if (member.NameEquals(minRating.Name))
             {
-                minRating = minRating.From(member.Value);
+                minRating.Value = member.Value;
             }
             else if (member.NameEquals(timeToCraft.Name))
             {
-                timeToCraft = timeToCraft.From(member.Value);
+                timeToCraft.Value = member.Value;
             }
             else if (member.NameEquals(disciplines.Name))
             {
-                disciplines = disciplines.From(member.Value);
+                disciplines.Value = member.Value;
             }
             else if (member.NameEquals(flags.Name))
             {
-                flags = flags.From(member.Value);
+                flags.Value = member.Value;
             }
             else if (member.NameEquals(ingredients.Name))
             {
-                ingredients = ingredients.From(member.Value);
+                ingredients.Value = member.Value;
             }
             else if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(chatLink.Name))
             {
-                chatLink = chatLink.From(member.Value);
+                chatLink.Value = member.Value;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {
@@ -2245,43 +2245,43 @@ public static class RecipeReader
             }
             else if (member.NameEquals(outputItemId.Name))
             {
-                outputItemId = outputItemId.From(member.Value);
+                outputItemId.Value = member.Value;
             }
             else if (member.NameEquals(outputItemCount.Name))
             {
-                outputItemCount = outputItemCount.From(member.Value);
+                outputItemCount.Value = member.Value;
             }
             else if (member.NameEquals(minRating.Name))
             {
-                minRating = minRating.From(member.Value);
+                minRating.Value = member.Value;
             }
             else if (member.NameEquals(minRating.Name))
             {
-                minRating = minRating.From(member.Value);
+                minRating.Value = member.Value;
             }
             else if (member.NameEquals(timeToCraft.Name))
             {
-                timeToCraft = timeToCraft.From(member.Value);
+                timeToCraft.Value = member.Value;
             }
             else if (member.NameEquals(disciplines.Name))
             {
-                disciplines = disciplines.From(member.Value);
+                disciplines.Value = member.Value;
             }
             else if (member.NameEquals(flags.Name))
             {
-                flags = flags.From(member.Value);
+                flags.Value = member.Value;
             }
             else if (member.NameEquals(ingredients.Name))
             {
-                ingredients = ingredients.From(member.Value);
+                ingredients.Value = member.Value;
             }
             else if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(chatLink.Name))
             {
-                chatLink = chatLink.From(member.Value);
+                chatLink.Value = member.Value;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {
@@ -2331,43 +2331,43 @@ public static class RecipeReader
             }
             else if (member.NameEquals(outputItemId.Name))
             {
-                outputItemId = outputItemId.From(member.Value);
+                outputItemId.Value = member.Value;
             }
             else if (member.NameEquals(outputItemCount.Name))
             {
-                outputItemCount = outputItemCount.From(member.Value);
+                outputItemCount.Value = member.Value;
             }
             else if (member.NameEquals(minRating.Name))
             {
-                minRating = minRating.From(member.Value);
+                minRating.Value = member.Value;
             }
             else if (member.NameEquals(minRating.Name))
             {
-                minRating = minRating.From(member.Value);
+                minRating.Value = member.Value;
             }
             else if (member.NameEquals(timeToCraft.Name))
             {
-                timeToCraft = timeToCraft.From(member.Value);
+                timeToCraft.Value = member.Value;
             }
             else if (member.NameEquals(disciplines.Name))
             {
-                disciplines = disciplines.From(member.Value);
+                disciplines.Value = member.Value;
             }
             else if (member.NameEquals(flags.Name))
             {
-                flags = flags.From(member.Value);
+                flags.Value = member.Value;
             }
             else if (member.NameEquals(ingredients.Name))
             {
-                ingredients = ingredients.From(member.Value);
+                ingredients.Value = member.Value;
             }
             else if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(chatLink.Name))
             {
-                chatLink = chatLink.From(member.Value);
+                chatLink.Value = member.Value;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {
@@ -2417,43 +2417,43 @@ public static class RecipeReader
             }
             else if (member.NameEquals(outputItemId.Name))
             {
-                outputItemId = outputItemId.From(member.Value);
+                outputItemId.Value = member.Value;
             }
             else if (member.NameEquals(outputItemCount.Name))
             {
-                outputItemCount = outputItemCount.From(member.Value);
+                outputItemCount.Value = member.Value;
             }
             else if (member.NameEquals(minRating.Name))
             {
-                minRating = minRating.From(member.Value);
+                minRating.Value = member.Value;
             }
             else if (member.NameEquals(minRating.Name))
             {
-                minRating = minRating.From(member.Value);
+                minRating.Value = member.Value;
             }
             else if (member.NameEquals(timeToCraft.Name))
             {
-                timeToCraft = timeToCraft.From(member.Value);
+                timeToCraft.Value = member.Value;
             }
             else if (member.NameEquals(disciplines.Name))
             {
-                disciplines = disciplines.From(member.Value);
+                disciplines.Value = member.Value;
             }
             else if (member.NameEquals(flags.Name))
             {
-                flags = flags.From(member.Value);
+                flags.Value = member.Value;
             }
             else if (member.NameEquals(ingredients.Name))
             {
-                ingredients = ingredients.From(member.Value);
+                ingredients.Value = member.Value;
             }
             else if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(chatLink.Name))
             {
-                chatLink = chatLink.From(member.Value);
+                chatLink.Value = member.Value;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {
@@ -2503,43 +2503,43 @@ public static class RecipeReader
             }
             else if (member.NameEquals(outputItemId.Name))
             {
-                outputItemId = outputItemId.From(member.Value);
+                outputItemId.Value = member.Value;
             }
             else if (member.NameEquals(outputItemCount.Name))
             {
-                outputItemCount = outputItemCount.From(member.Value);
+                outputItemCount.Value = member.Value;
             }
             else if (member.NameEquals(minRating.Name))
             {
-                minRating = minRating.From(member.Value);
+                minRating.Value = member.Value;
             }
             else if (member.NameEquals(minRating.Name))
             {
-                minRating = minRating.From(member.Value);
+                minRating.Value = member.Value;
             }
             else if (member.NameEquals(timeToCraft.Name))
             {
-                timeToCraft = timeToCraft.From(member.Value);
+                timeToCraft.Value = member.Value;
             }
             else if (member.NameEquals(disciplines.Name))
             {
-                disciplines = disciplines.From(member.Value);
+                disciplines.Value = member.Value;
             }
             else if (member.NameEquals(flags.Name))
             {
-                flags = flags.From(member.Value);
+                flags.Value = member.Value;
             }
             else if (member.NameEquals(ingredients.Name))
             {
-                ingredients = ingredients.From(member.Value);
+                ingredients.Value = member.Value;
             }
             else if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(chatLink.Name))
             {
-                chatLink = chatLink.From(member.Value);
+                chatLink.Value = member.Value;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {
@@ -2589,43 +2589,43 @@ public static class RecipeReader
             }
             else if (member.NameEquals(outputItemId.Name))
             {
-                outputItemId = outputItemId.From(member.Value);
+                outputItemId.Value = member.Value;
             }
             else if (member.NameEquals(outputItemCount.Name))
             {
-                outputItemCount = outputItemCount.From(member.Value);
+                outputItemCount.Value = member.Value;
             }
             else if (member.NameEquals(minRating.Name))
             {
-                minRating = minRating.From(member.Value);
+                minRating.Value = member.Value;
             }
             else if (member.NameEquals(minRating.Name))
             {
-                minRating = minRating.From(member.Value);
+                minRating.Value = member.Value;
             }
             else if (member.NameEquals(timeToCraft.Name))
             {
-                timeToCraft = timeToCraft.From(member.Value);
+                timeToCraft.Value = member.Value;
             }
             else if (member.NameEquals(disciplines.Name))
             {
-                disciplines = disciplines.From(member.Value);
+                disciplines.Value = member.Value;
             }
             else if (member.NameEquals(flags.Name))
             {
-                flags = flags.From(member.Value);
+                flags.Value = member.Value;
             }
             else if (member.NameEquals(ingredients.Name))
             {
-                ingredients = ingredients.From(member.Value);
+                ingredients.Value = member.Value;
             }
             else if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(chatLink.Name))
             {
-                chatLink = chatLink.From(member.Value);
+                chatLink.Value = member.Value;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {
@@ -2675,43 +2675,43 @@ public static class RecipeReader
             }
             else if (member.NameEquals(outputItemId.Name))
             {
-                outputItemId = outputItemId.From(member.Value);
+                outputItemId.Value = member.Value;
             }
             else if (member.NameEquals(outputItemCount.Name))
             {
-                outputItemCount = outputItemCount.From(member.Value);
+                outputItemCount.Value = member.Value;
             }
             else if (member.NameEquals(minRating.Name))
             {
-                minRating = minRating.From(member.Value);
+                minRating.Value = member.Value;
             }
             else if (member.NameEquals(minRating.Name))
             {
-                minRating = minRating.From(member.Value);
+                minRating.Value = member.Value;
             }
             else if (member.NameEquals(timeToCraft.Name))
             {
-                timeToCraft = timeToCraft.From(member.Value);
+                timeToCraft.Value = member.Value;
             }
             else if (member.NameEquals(disciplines.Name))
             {
-                disciplines = disciplines.From(member.Value);
+                disciplines.Value = member.Value;
             }
             else if (member.NameEquals(flags.Name))
             {
-                flags = flags.From(member.Value);
+                flags.Value = member.Value;
             }
             else if (member.NameEquals(ingredients.Name))
             {
-                ingredients = ingredients.From(member.Value);
+                ingredients.Value = member.Value;
             }
             else if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(chatLink.Name))
             {
-                chatLink = chatLink.From(member.Value);
+                chatLink.Value = member.Value;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {
@@ -2761,43 +2761,43 @@ public static class RecipeReader
             }
             else if (member.NameEquals(outputItemId.Name))
             {
-                outputItemId = outputItemId.From(member.Value);
+                outputItemId.Value = member.Value;
             }
             else if (member.NameEquals(outputItemCount.Name))
             {
-                outputItemCount = outputItemCount.From(member.Value);
+                outputItemCount.Value = member.Value;
             }
             else if (member.NameEquals(minRating.Name))
             {
-                minRating = minRating.From(member.Value);
+                minRating.Value = member.Value;
             }
             else if (member.NameEquals(minRating.Name))
             {
-                minRating = minRating.From(member.Value);
+                minRating.Value = member.Value;
             }
             else if (member.NameEquals(timeToCraft.Name))
             {
-                timeToCraft = timeToCraft.From(member.Value);
+                timeToCraft.Value = member.Value;
             }
             else if (member.NameEquals(disciplines.Name))
             {
-                disciplines = disciplines.From(member.Value);
+                disciplines.Value = member.Value;
             }
             else if (member.NameEquals(flags.Name))
             {
-                flags = flags.From(member.Value);
+                flags.Value = member.Value;
             }
             else if (member.NameEquals(ingredients.Name))
             {
-                ingredients = ingredients.From(member.Value);
+                ingredients.Value = member.Value;
             }
             else if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(chatLink.Name))
             {
-                chatLink = chatLink.From(member.Value);
+                chatLink.Value = member.Value;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {
@@ -2847,43 +2847,43 @@ public static class RecipeReader
             }
             else if (member.NameEquals(outputItemId.Name))
             {
-                outputItemId = outputItemId.From(member.Value);
+                outputItemId.Value = member.Value;
             }
             else if (member.NameEquals(outputItemCount.Name))
             {
-                outputItemCount = outputItemCount.From(member.Value);
+                outputItemCount.Value = member.Value;
             }
             else if (member.NameEquals(minRating.Name))
             {
-                minRating = minRating.From(member.Value);
+                minRating.Value = member.Value;
             }
             else if (member.NameEquals(minRating.Name))
             {
-                minRating = minRating.From(member.Value);
+                minRating.Value = member.Value;
             }
             else if (member.NameEquals(timeToCraft.Name))
             {
-                timeToCraft = timeToCraft.From(member.Value);
+                timeToCraft.Value = member.Value;
             }
             else if (member.NameEquals(disciplines.Name))
             {
-                disciplines = disciplines.From(member.Value);
+                disciplines.Value = member.Value;
             }
             else if (member.NameEquals(flags.Name))
             {
-                flags = flags.From(member.Value);
+                flags.Value = member.Value;
             }
             else if (member.NameEquals(ingredients.Name))
             {
-                ingredients = ingredients.From(member.Value);
+                ingredients.Value = member.Value;
             }
             else if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(chatLink.Name))
             {
-                chatLink = chatLink.From(member.Value);
+                chatLink.Value = member.Value;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {
@@ -2933,43 +2933,43 @@ public static class RecipeReader
             }
             else if (member.NameEquals(outputItemId.Name))
             {
-                outputItemId = outputItemId.From(member.Value);
+                outputItemId.Value = member.Value;
             }
             else if (member.NameEquals(outputItemCount.Name))
             {
-                outputItemCount = outputItemCount.From(member.Value);
+                outputItemCount.Value = member.Value;
             }
             else if (member.NameEquals(minRating.Name))
             {
-                minRating = minRating.From(member.Value);
+                minRating.Value = member.Value;
             }
             else if (member.NameEquals(minRating.Name))
             {
-                minRating = minRating.From(member.Value);
+                minRating.Value = member.Value;
             }
             else if (member.NameEquals(timeToCraft.Name))
             {
-                timeToCraft = timeToCraft.From(member.Value);
+                timeToCraft.Value = member.Value;
             }
             else if (member.NameEquals(disciplines.Name))
             {
-                disciplines = disciplines.From(member.Value);
+                disciplines.Value = member.Value;
             }
             else if (member.NameEquals(flags.Name))
             {
-                flags = flags.From(member.Value);
+                flags.Value = member.Value;
             }
             else if (member.NameEquals(ingredients.Name))
             {
-                ingredients = ingredients.From(member.Value);
+                ingredients.Value = member.Value;
             }
             else if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(chatLink.Name))
             {
-                chatLink = chatLink.From(member.Value);
+                chatLink.Value = member.Value;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {
@@ -3019,43 +3019,43 @@ public static class RecipeReader
             }
             else if (member.NameEquals(outputItemId.Name))
             {
-                outputItemId = outputItemId.From(member.Value);
+                outputItemId.Value = member.Value;
             }
             else if (member.NameEquals(outputItemCount.Name))
             {
-                outputItemCount = outputItemCount.From(member.Value);
+                outputItemCount.Value = member.Value;
             }
             else if (member.NameEquals(minRating.Name))
             {
-                minRating = minRating.From(member.Value);
+                minRating.Value = member.Value;
             }
             else if (member.NameEquals(minRating.Name))
             {
-                minRating = minRating.From(member.Value);
+                minRating.Value = member.Value;
             }
             else if (member.NameEquals(timeToCraft.Name))
             {
-                timeToCraft = timeToCraft.From(member.Value);
+                timeToCraft.Value = member.Value;
             }
             else if (member.NameEquals(disciplines.Name))
             {
-                disciplines = disciplines.From(member.Value);
+                disciplines.Value = member.Value;
             }
             else if (member.NameEquals(flags.Name))
             {
-                flags = flags.From(member.Value);
+                flags.Value = member.Value;
             }
             else if (member.NameEquals(ingredients.Name))
             {
-                ingredients = ingredients.From(member.Value);
+                ingredients.Value = member.Value;
             }
             else if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(chatLink.Name))
             {
-                chatLink = chatLink.From(member.Value);
+                chatLink.Value = member.Value;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {
@@ -3105,43 +3105,43 @@ public static class RecipeReader
             }
             else if (member.NameEquals(outputItemId.Name))
             {
-                outputItemId = outputItemId.From(member.Value);
+                outputItemId.Value = member.Value;
             }
             else if (member.NameEquals(outputItemCount.Name))
             {
-                outputItemCount = outputItemCount.From(member.Value);
+                outputItemCount.Value = member.Value;
             }
             else if (member.NameEquals(minRating.Name))
             {
-                minRating = minRating.From(member.Value);
+                minRating.Value = member.Value;
             }
             else if (member.NameEquals(minRating.Name))
             {
-                minRating = minRating.From(member.Value);
+                minRating.Value = member.Value;
             }
             else if (member.NameEquals(timeToCraft.Name))
             {
-                timeToCraft = timeToCraft.From(member.Value);
+                timeToCraft.Value = member.Value;
             }
             else if (member.NameEquals(disciplines.Name))
             {
-                disciplines = disciplines.From(member.Value);
+                disciplines.Value = member.Value;
             }
             else if (member.NameEquals(flags.Name))
             {
-                flags = flags.From(member.Value);
+                flags.Value = member.Value;
             }
             else if (member.NameEquals(ingredients.Name))
             {
-                ingredients = ingredients.From(member.Value);
+                ingredients.Value = member.Value;
             }
             else if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(chatLink.Name))
             {
-                chatLink = chatLink.From(member.Value);
+                chatLink.Value = member.Value;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {
@@ -3176,15 +3176,15 @@ public static class RecipeReader
         {
             if (member.NameEquals(type.Name))
             {
-                type = type.From(member.Value);
+                type.Value = member.Value;
             }
             else if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(count.Name))
             {
-                count = count.From(member.Value);
+                count.Value = member.Value;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {
@@ -3211,11 +3211,11 @@ public static class RecipeReader
         {
             if (member.NameEquals(upgradeId.Name))
             {
-                upgradeId = upgradeId.From(member.Value);
+                upgradeId.Value = member.Value;
             }
             else if (member.NameEquals(count.Name))
             {
-                count = count.From(member.Value);
+                count.Value = member.Value;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {
@@ -3257,43 +3257,43 @@ public static class RecipeReader
             }
             else if (member.NameEquals(outputItemId.Name))
             {
-                outputItemId = outputItemId.From(member.Value);
+                outputItemId.Value = member.Value;
             }
             else if (member.NameEquals(outputItemCount.Name))
             {
-                outputItemCount = outputItemCount.From(member.Value);
+                outputItemCount.Value = member.Value;
             }
             else if (member.NameEquals(minRating.Name))
             {
-                minRating = minRating.From(member.Value);
+                minRating.Value = member.Value;
             }
             else if (member.NameEquals(minRating.Name))
             {
-                minRating = minRating.From(member.Value);
+                minRating.Value = member.Value;
             }
             else if (member.NameEquals(timeToCraft.Name))
             {
-                timeToCraft = timeToCraft.From(member.Value);
+                timeToCraft.Value = member.Value;
             }
             else if (member.NameEquals(disciplines.Name))
             {
-                disciplines = disciplines.From(member.Value);
+                disciplines.Value = member.Value;
             }
             else if (member.NameEquals(flags.Name))
             {
-                flags = flags.From(member.Value);
+                flags.Value = member.Value;
             }
             else if (member.NameEquals(ingredients.Name))
             {
-                ingredients = ingredients.From(member.Value);
+                ingredients.Value = member.Value;
             }
             else if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(chatLink.Name))
             {
-                chatLink = chatLink.From(member.Value);
+                chatLink.Value = member.Value;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {
@@ -3343,43 +3343,43 @@ public static class RecipeReader
             }
             else if (member.NameEquals(outputItemId.Name))
             {
-                outputItemId = outputItemId.From(member.Value);
+                outputItemId.Value = member.Value;
             }
             else if (member.NameEquals(outputItemCount.Name))
             {
-                outputItemCount = outputItemCount.From(member.Value);
+                outputItemCount.Value = member.Value;
             }
             else if (member.NameEquals(minRating.Name))
             {
-                minRating = minRating.From(member.Value);
+                minRating.Value = member.Value;
             }
             else if (member.NameEquals(minRating.Name))
             {
-                minRating = minRating.From(member.Value);
+                minRating.Value = member.Value;
             }
             else if (member.NameEquals(timeToCraft.Name))
             {
-                timeToCraft = timeToCraft.From(member.Value);
+                timeToCraft.Value = member.Value;
             }
             else if (member.NameEquals(disciplines.Name))
             {
-                disciplines = disciplines.From(member.Value);
+                disciplines.Value = member.Value;
             }
             else if (member.NameEquals(flags.Name))
             {
-                flags = flags.From(member.Value);
+                flags.Value = member.Value;
             }
             else if (member.NameEquals(ingredients.Name))
             {
-                ingredients = ingredients.From(member.Value);
+                ingredients.Value = member.Value;
             }
             else if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(chatLink.Name))
             {
-                chatLink = chatLink.From(member.Value);
+                chatLink.Value = member.Value;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {
@@ -3429,43 +3429,43 @@ public static class RecipeReader
             }
             else if (member.NameEquals(outputItemId.Name))
             {
-                outputItemId = outputItemId.From(member.Value);
+                outputItemId.Value = member.Value;
             }
             else if (member.NameEquals(outputItemCount.Name))
             {
-                outputItemCount = outputItemCount.From(member.Value);
+                outputItemCount.Value = member.Value;
             }
             else if (member.NameEquals(minRating.Name))
             {
-                minRating = minRating.From(member.Value);
+                minRating.Value = member.Value;
             }
             else if (member.NameEquals(minRating.Name))
             {
-                minRating = minRating.From(member.Value);
+                minRating.Value = member.Value;
             }
             else if (member.NameEquals(timeToCraft.Name))
             {
-                timeToCraft = timeToCraft.From(member.Value);
+                timeToCraft.Value = member.Value;
             }
             else if (member.NameEquals(disciplines.Name))
             {
-                disciplines = disciplines.From(member.Value);
+                disciplines.Value = member.Value;
             }
             else if (member.NameEquals(flags.Name))
             {
-                flags = flags.From(member.Value);
+                flags.Value = member.Value;
             }
             else if (member.NameEquals(ingredients.Name))
             {
-                ingredients = ingredients.From(member.Value);
+                ingredients.Value = member.Value;
             }
             else if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(chatLink.Name))
             {
-                chatLink = chatLink.From(member.Value);
+                chatLink.Value = member.Value;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {
@@ -3515,43 +3515,43 @@ public static class RecipeReader
             }
             else if (member.NameEquals(outputItemId.Name))
             {
-                outputItemId = outputItemId.From(member.Value);
+                outputItemId.Value = member.Value;
             }
             else if (member.NameEquals(outputItemCount.Name))
             {
-                outputItemCount = outputItemCount.From(member.Value);
+                outputItemCount.Value = member.Value;
             }
             else if (member.NameEquals(minRating.Name))
             {
-                minRating = minRating.From(member.Value);
+                minRating.Value = member.Value;
             }
             else if (member.NameEquals(minRating.Name))
             {
-                minRating = minRating.From(member.Value);
+                minRating.Value = member.Value;
             }
             else if (member.NameEquals(timeToCraft.Name))
             {
-                timeToCraft = timeToCraft.From(member.Value);
+                timeToCraft.Value = member.Value;
             }
             else if (member.NameEquals(disciplines.Name))
             {
-                disciplines = disciplines.From(member.Value);
+                disciplines.Value = member.Value;
             }
             else if (member.NameEquals(flags.Name))
             {
-                flags = flags.From(member.Value);
+                flags.Value = member.Value;
             }
             else if (member.NameEquals(ingredients.Name))
             {
-                ingredients = ingredients.From(member.Value);
+                ingredients.Value = member.Value;
             }
             else if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(chatLink.Name))
             {
-                chatLink = chatLink.From(member.Value);
+                chatLink.Value = member.Value;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {
@@ -3601,43 +3601,43 @@ public static class RecipeReader
             }
             else if (member.NameEquals(outputItemId.Name))
             {
-                outputItemId = outputItemId.From(member.Value);
+                outputItemId.Value = member.Value;
             }
             else if (member.NameEquals(outputItemCount.Name))
             {
-                outputItemCount = outputItemCount.From(member.Value);
+                outputItemCount.Value = member.Value;
             }
             else if (member.NameEquals(minRating.Name))
             {
-                minRating = minRating.From(member.Value);
+                minRating.Value = member.Value;
             }
             else if (member.NameEquals(minRating.Name))
             {
-                minRating = minRating.From(member.Value);
+                minRating.Value = member.Value;
             }
             else if (member.NameEquals(timeToCraft.Name))
             {
-                timeToCraft = timeToCraft.From(member.Value);
+                timeToCraft.Value = member.Value;
             }
             else if (member.NameEquals(disciplines.Name))
             {
-                disciplines = disciplines.From(member.Value);
+                disciplines.Value = member.Value;
             }
             else if (member.NameEquals(flags.Name))
             {
-                flags = flags.From(member.Value);
+                flags.Value = member.Value;
             }
             else if (member.NameEquals(ingredients.Name))
             {
-                ingredients = ingredients.From(member.Value);
+                ingredients.Value = member.Value;
             }
             else if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(chatLink.Name))
             {
-                chatLink = chatLink.From(member.Value);
+                chatLink.Value = member.Value;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {
@@ -3687,43 +3687,43 @@ public static class RecipeReader
             }
             else if (member.NameEquals(outputItemId.Name))
             {
-                outputItemId = outputItemId.From(member.Value);
+                outputItemId.Value = member.Value;
             }
             else if (member.NameEquals(outputItemCount.Name))
             {
-                outputItemCount = outputItemCount.From(member.Value);
+                outputItemCount.Value = member.Value;
             }
             else if (member.NameEquals(minRating.Name))
             {
-                minRating = minRating.From(member.Value);
+                minRating.Value = member.Value;
             }
             else if (member.NameEquals(minRating.Name))
             {
-                minRating = minRating.From(member.Value);
+                minRating.Value = member.Value;
             }
             else if (member.NameEquals(timeToCraft.Name))
             {
-                timeToCraft = timeToCraft.From(member.Value);
+                timeToCraft.Value = member.Value;
             }
             else if (member.NameEquals(disciplines.Name))
             {
-                disciplines = disciplines.From(member.Value);
+                disciplines.Value = member.Value;
             }
             else if (member.NameEquals(flags.Name))
             {
-                flags = flags.From(member.Value);
+                flags.Value = member.Value;
             }
             else if (member.NameEquals(ingredients.Name))
             {
-                ingredients = ingredients.From(member.Value);
+                ingredients.Value = member.Value;
             }
             else if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(chatLink.Name))
             {
-                chatLink = chatLink.From(member.Value);
+                chatLink.Value = member.Value;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {
@@ -3773,43 +3773,43 @@ public static class RecipeReader
             }
             else if (member.NameEquals(outputItemId.Name))
             {
-                outputItemId = outputItemId.From(member.Value);
+                outputItemId.Value = member.Value;
             }
             else if (member.NameEquals(outputItemCount.Name))
             {
-                outputItemCount = outputItemCount.From(member.Value);
+                outputItemCount.Value = member.Value;
             }
             else if (member.NameEquals(minRating.Name))
             {
-                minRating = minRating.From(member.Value);
+                minRating.Value = member.Value;
             }
             else if (member.NameEquals(minRating.Name))
             {
-                minRating = minRating.From(member.Value);
+                minRating.Value = member.Value;
             }
             else if (member.NameEquals(timeToCraft.Name))
             {
-                timeToCraft = timeToCraft.From(member.Value);
+                timeToCraft.Value = member.Value;
             }
             else if (member.NameEquals(disciplines.Name))
             {
-                disciplines = disciplines.From(member.Value);
+                disciplines.Value = member.Value;
             }
             else if (member.NameEquals(flags.Name))
             {
-                flags = flags.From(member.Value);
+                flags.Value = member.Value;
             }
             else if (member.NameEquals(ingredients.Name))
             {
-                ingredients = ingredients.From(member.Value);
+                ingredients.Value = member.Value;
             }
             else if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(chatLink.Name))
             {
-                chatLink = chatLink.From(member.Value);
+                chatLink.Value = member.Value;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {
@@ -3859,43 +3859,43 @@ public static class RecipeReader
             }
             else if (member.NameEquals(outputItemId.Name))
             {
-                outputItemId = outputItemId.From(member.Value);
+                outputItemId.Value = member.Value;
             }
             else if (member.NameEquals(outputItemCount.Name))
             {
-                outputItemCount = outputItemCount.From(member.Value);
+                outputItemCount.Value = member.Value;
             }
             else if (member.NameEquals(minRating.Name))
             {
-                minRating = minRating.From(member.Value);
+                minRating.Value = member.Value;
             }
             else if (member.NameEquals(minRating.Name))
             {
-                minRating = minRating.From(member.Value);
+                minRating.Value = member.Value;
             }
             else if (member.NameEquals(timeToCraft.Name))
             {
-                timeToCraft = timeToCraft.From(member.Value);
+                timeToCraft.Value = member.Value;
             }
             else if (member.NameEquals(disciplines.Name))
             {
-                disciplines = disciplines.From(member.Value);
+                disciplines.Value = member.Value;
             }
             else if (member.NameEquals(flags.Name))
             {
-                flags = flags.From(member.Value);
+                flags.Value = member.Value;
             }
             else if (member.NameEquals(ingredients.Name))
             {
-                ingredients = ingredients.From(member.Value);
+                ingredients.Value = member.Value;
             }
             else if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(chatLink.Name))
             {
-                chatLink = chatLink.From(member.Value);
+                chatLink.Value = member.Value;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {
@@ -3945,43 +3945,43 @@ public static class RecipeReader
             }
             else if (member.NameEquals(outputItemId.Name))
             {
-                outputItemId = outputItemId.From(member.Value);
+                outputItemId.Value = member.Value;
             }
             else if (member.NameEquals(outputItemCount.Name))
             {
-                outputItemCount = outputItemCount.From(member.Value);
+                outputItemCount.Value = member.Value;
             }
             else if (member.NameEquals(minRating.Name))
             {
-                minRating = minRating.From(member.Value);
+                minRating.Value = member.Value;
             }
             else if (member.NameEquals(minRating.Name))
             {
-                minRating = minRating.From(member.Value);
+                minRating.Value = member.Value;
             }
             else if (member.NameEquals(timeToCraft.Name))
             {
-                timeToCraft = timeToCraft.From(member.Value);
+                timeToCraft.Value = member.Value;
             }
             else if (member.NameEquals(disciplines.Name))
             {
-                disciplines = disciplines.From(member.Value);
+                disciplines.Value = member.Value;
             }
             else if (member.NameEquals(flags.Name))
             {
-                flags = flags.From(member.Value);
+                flags.Value = member.Value;
             }
             else if (member.NameEquals(ingredients.Name))
             {
-                ingredients = ingredients.From(member.Value);
+                ingredients.Value = member.Value;
             }
             else if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(chatLink.Name))
             {
-                chatLink = chatLink.From(member.Value);
+                chatLink.Value = member.Value;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {
@@ -4031,43 +4031,43 @@ public static class RecipeReader
             }
             else if (member.NameEquals(outputItemId.Name))
             {
-                outputItemId = outputItemId.From(member.Value);
+                outputItemId.Value = member.Value;
             }
             else if (member.NameEquals(outputItemCount.Name))
             {
-                outputItemCount = outputItemCount.From(member.Value);
+                outputItemCount.Value = member.Value;
             }
             else if (member.NameEquals(minRating.Name))
             {
-                minRating = minRating.From(member.Value);
+                minRating.Value = member.Value;
             }
             else if (member.NameEquals(minRating.Name))
             {
-                minRating = minRating.From(member.Value);
+                minRating.Value = member.Value;
             }
             else if (member.NameEquals(timeToCraft.Name))
             {
-                timeToCraft = timeToCraft.From(member.Value);
+                timeToCraft.Value = member.Value;
             }
             else if (member.NameEquals(disciplines.Name))
             {
-                disciplines = disciplines.From(member.Value);
+                disciplines.Value = member.Value;
             }
             else if (member.NameEquals(flags.Name))
             {
-                flags = flags.From(member.Value);
+                flags.Value = member.Value;
             }
             else if (member.NameEquals(ingredients.Name))
             {
-                ingredients = ingredients.From(member.Value);
+                ingredients.Value = member.Value;
             }
             else if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(chatLink.Name))
             {
-                chatLink = chatLink.From(member.Value);
+                chatLink.Value = member.Value;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {
@@ -4117,43 +4117,43 @@ public static class RecipeReader
             }
             else if (member.NameEquals(outputItemId.Name))
             {
-                outputItemId = outputItemId.From(member.Value);
+                outputItemId.Value = member.Value;
             }
             else if (member.NameEquals(outputItemCount.Name))
             {
-                outputItemCount = outputItemCount.From(member.Value);
+                outputItemCount.Value = member.Value;
             }
             else if (member.NameEquals(minRating.Name))
             {
-                minRating = minRating.From(member.Value);
+                minRating.Value = member.Value;
             }
             else if (member.NameEquals(minRating.Name))
             {
-                minRating = minRating.From(member.Value);
+                minRating.Value = member.Value;
             }
             else if (member.NameEquals(timeToCraft.Name))
             {
-                timeToCraft = timeToCraft.From(member.Value);
+                timeToCraft.Value = member.Value;
             }
             else if (member.NameEquals(disciplines.Name))
             {
-                disciplines = disciplines.From(member.Value);
+                disciplines.Value = member.Value;
             }
             else if (member.NameEquals(flags.Name))
             {
-                flags = flags.From(member.Value);
+                flags.Value = member.Value;
             }
             else if (member.NameEquals(ingredients.Name))
             {
-                ingredients = ingredients.From(member.Value);
+                ingredients.Value = member.Value;
             }
             else if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(chatLink.Name))
             {
-                chatLink = chatLink.From(member.Value);
+                chatLink.Value = member.Value;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {
@@ -4203,43 +4203,43 @@ public static class RecipeReader
             }
             else if (member.NameEquals(outputItemId.Name))
             {
-                outputItemId = outputItemId.From(member.Value);
+                outputItemId.Value = member.Value;
             }
             else if (member.NameEquals(outputItemCount.Name))
             {
-                outputItemCount = outputItemCount.From(member.Value);
+                outputItemCount.Value = member.Value;
             }
             else if (member.NameEquals(minRating.Name))
             {
-                minRating = minRating.From(member.Value);
+                minRating.Value = member.Value;
             }
             else if (member.NameEquals(minRating.Name))
             {
-                minRating = minRating.From(member.Value);
+                minRating.Value = member.Value;
             }
             else if (member.NameEquals(timeToCraft.Name))
             {
-                timeToCraft = timeToCraft.From(member.Value);
+                timeToCraft.Value = member.Value;
             }
             else if (member.NameEquals(disciplines.Name))
             {
-                disciplines = disciplines.From(member.Value);
+                disciplines.Value = member.Value;
             }
             else if (member.NameEquals(flags.Name))
             {
-                flags = flags.From(member.Value);
+                flags.Value = member.Value;
             }
             else if (member.NameEquals(ingredients.Name))
             {
-                ingredients = ingredients.From(member.Value);
+                ingredients.Value = member.Value;
             }
             else if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(chatLink.Name))
             {
-                chatLink = chatLink.From(member.Value);
+                chatLink.Value = member.Value;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {
@@ -4289,43 +4289,43 @@ public static class RecipeReader
             }
             else if (member.NameEquals(outputItemId.Name))
             {
-                outputItemId = outputItemId.From(member.Value);
+                outputItemId.Value = member.Value;
             }
             else if (member.NameEquals(outputItemCount.Name))
             {
-                outputItemCount = outputItemCount.From(member.Value);
+                outputItemCount.Value = member.Value;
             }
             else if (member.NameEquals(minRating.Name))
             {
-                minRating = minRating.From(member.Value);
+                minRating.Value = member.Value;
             }
             else if (member.NameEquals(minRating.Name))
             {
-                minRating = minRating.From(member.Value);
+                minRating.Value = member.Value;
             }
             else if (member.NameEquals(timeToCraft.Name))
             {
-                timeToCraft = timeToCraft.From(member.Value);
+                timeToCraft.Value = member.Value;
             }
             else if (member.NameEquals(disciplines.Name))
             {
-                disciplines = disciplines.From(member.Value);
+                disciplines.Value = member.Value;
             }
             else if (member.NameEquals(flags.Name))
             {
-                flags = flags.From(member.Value);
+                flags.Value = member.Value;
             }
             else if (member.NameEquals(ingredients.Name))
             {
-                ingredients = ingredients.From(member.Value);
+                ingredients.Value = member.Value;
             }
             else if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(chatLink.Name))
             {
-                chatLink = chatLink.From(member.Value);
+                chatLink.Value = member.Value;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {
@@ -4375,43 +4375,43 @@ public static class RecipeReader
             }
             else if (member.NameEquals(outputItemId.Name))
             {
-                outputItemId = outputItemId.From(member.Value);
+                outputItemId.Value = member.Value;
             }
             else if (member.NameEquals(outputItemCount.Name))
             {
-                outputItemCount = outputItemCount.From(member.Value);
+                outputItemCount.Value = member.Value;
             }
             else if (member.NameEquals(minRating.Name))
             {
-                minRating = minRating.From(member.Value);
+                minRating.Value = member.Value;
             }
             else if (member.NameEquals(minRating.Name))
             {
-                minRating = minRating.From(member.Value);
+                minRating.Value = member.Value;
             }
             else if (member.NameEquals(timeToCraft.Name))
             {
-                timeToCraft = timeToCraft.From(member.Value);
+                timeToCraft.Value = member.Value;
             }
             else if (member.NameEquals(disciplines.Name))
             {
-                disciplines = disciplines.From(member.Value);
+                disciplines.Value = member.Value;
             }
             else if (member.NameEquals(flags.Name))
             {
-                flags = flags.From(member.Value);
+                flags.Value = member.Value;
             }
             else if (member.NameEquals(ingredients.Name))
             {
-                ingredients = ingredients.From(member.Value);
+                ingredients.Value = member.Value;
             }
             else if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(chatLink.Name))
             {
-                chatLink = chatLink.From(member.Value);
+                chatLink.Value = member.Value;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {
@@ -4461,43 +4461,43 @@ public static class RecipeReader
             }
             else if (member.NameEquals(outputItemId.Name))
             {
-                outputItemId = outputItemId.From(member.Value);
+                outputItemId.Value = member.Value;
             }
             else if (member.NameEquals(outputItemCount.Name))
             {
-                outputItemCount = outputItemCount.From(member.Value);
+                outputItemCount.Value = member.Value;
             }
             else if (member.NameEquals(minRating.Name))
             {
-                minRating = minRating.From(member.Value);
+                minRating.Value = member.Value;
             }
             else if (member.NameEquals(minRating.Name))
             {
-                minRating = minRating.From(member.Value);
+                minRating.Value = member.Value;
             }
             else if (member.NameEquals(timeToCraft.Name))
             {
-                timeToCraft = timeToCraft.From(member.Value);
+                timeToCraft.Value = member.Value;
             }
             else if (member.NameEquals(disciplines.Name))
             {
-                disciplines = disciplines.From(member.Value);
+                disciplines.Value = member.Value;
             }
             else if (member.NameEquals(flags.Name))
             {
-                flags = flags.From(member.Value);
+                flags.Value = member.Value;
             }
             else if (member.NameEquals(ingredients.Name))
             {
-                ingredients = ingredients.From(member.Value);
+                ingredients.Value = member.Value;
             }
             else if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(chatLink.Name))
             {
-                chatLink = chatLink.From(member.Value);
+                chatLink.Value = member.Value;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {
@@ -4547,43 +4547,43 @@ public static class RecipeReader
             }
             else if (member.NameEquals(outputItemId.Name))
             {
-                outputItemId = outputItemId.From(member.Value);
+                outputItemId.Value = member.Value;
             }
             else if (member.NameEquals(outputItemCount.Name))
             {
-                outputItemCount = outputItemCount.From(member.Value);
+                outputItemCount.Value = member.Value;
             }
             else if (member.NameEquals(minRating.Name))
             {
-                minRating = minRating.From(member.Value);
+                minRating.Value = member.Value;
             }
             else if (member.NameEquals(minRating.Name))
             {
-                minRating = minRating.From(member.Value);
+                minRating.Value = member.Value;
             }
             else if (member.NameEquals(timeToCraft.Name))
             {
-                timeToCraft = timeToCraft.From(member.Value);
+                timeToCraft.Value = member.Value;
             }
             else if (member.NameEquals(disciplines.Name))
             {
-                disciplines = disciplines.From(member.Value);
+                disciplines.Value = member.Value;
             }
             else if (member.NameEquals(flags.Name))
             {
-                flags = flags.From(member.Value);
+                flags.Value = member.Value;
             }
             else if (member.NameEquals(ingredients.Name))
             {
-                ingredients = ingredients.From(member.Value);
+                ingredients.Value = member.Value;
             }
             else if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(chatLink.Name))
             {
-                chatLink = chatLink.From(member.Value);
+                chatLink.Value = member.Value;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {
@@ -4633,43 +4633,43 @@ public static class RecipeReader
             }
             else if (member.NameEquals(outputItemId.Name))
             {
-                outputItemId = outputItemId.From(member.Value);
+                outputItemId.Value = member.Value;
             }
             else if (member.NameEquals(outputItemCount.Name))
             {
-                outputItemCount = outputItemCount.From(member.Value);
+                outputItemCount.Value = member.Value;
             }
             else if (member.NameEquals(minRating.Name))
             {
-                minRating = minRating.From(member.Value);
+                minRating.Value = member.Value;
             }
             else if (member.NameEquals(minRating.Name))
             {
-                minRating = minRating.From(member.Value);
+                minRating.Value = member.Value;
             }
             else if (member.NameEquals(timeToCraft.Name))
             {
-                timeToCraft = timeToCraft.From(member.Value);
+                timeToCraft.Value = member.Value;
             }
             else if (member.NameEquals(disciplines.Name))
             {
-                disciplines = disciplines.From(member.Value);
+                disciplines.Value = member.Value;
             }
             else if (member.NameEquals(flags.Name))
             {
-                flags = flags.From(member.Value);
+                flags.Value = member.Value;
             }
             else if (member.NameEquals(ingredients.Name))
             {
-                ingredients = ingredients.From(member.Value);
+                ingredients.Value = member.Value;
             }
             else if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(chatLink.Name))
             {
-                chatLink = chatLink.From(member.Value);
+                chatLink.Value = member.Value;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {
@@ -4719,43 +4719,43 @@ public static class RecipeReader
             }
             else if (member.NameEquals(outputItemId.Name))
             {
-                outputItemId = outputItemId.From(member.Value);
+                outputItemId.Value = member.Value;
             }
             else if (member.NameEquals(outputItemCount.Name))
             {
-                outputItemCount = outputItemCount.From(member.Value);
+                outputItemCount.Value = member.Value;
             }
             else if (member.NameEquals(minRating.Name))
             {
-                minRating = minRating.From(member.Value);
+                minRating.Value = member.Value;
             }
             else if (member.NameEquals(minRating.Name))
             {
-                minRating = minRating.From(member.Value);
+                minRating.Value = member.Value;
             }
             else if (member.NameEquals(timeToCraft.Name))
             {
-                timeToCraft = timeToCraft.From(member.Value);
+                timeToCraft.Value = member.Value;
             }
             else if (member.NameEquals(disciplines.Name))
             {
-                disciplines = disciplines.From(member.Value);
+                disciplines.Value = member.Value;
             }
             else if (member.NameEquals(flags.Name))
             {
-                flags = flags.From(member.Value);
+                flags.Value = member.Value;
             }
             else if (member.NameEquals(ingredients.Name))
             {
-                ingredients = ingredients.From(member.Value);
+                ingredients.Value = member.Value;
             }
             else if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(chatLink.Name))
             {
-                chatLink = chatLink.From(member.Value);
+                chatLink.Value = member.Value;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {
@@ -4805,43 +4805,43 @@ public static class RecipeReader
             }
             else if (member.NameEquals(outputItemId.Name))
             {
-                outputItemId = outputItemId.From(member.Value);
+                outputItemId.Value = member.Value;
             }
             else if (member.NameEquals(outputItemCount.Name))
             {
-                outputItemCount = outputItemCount.From(member.Value);
+                outputItemCount.Value = member.Value;
             }
             else if (member.NameEquals(minRating.Name))
             {
-                minRating = minRating.From(member.Value);
+                minRating.Value = member.Value;
             }
             else if (member.NameEquals(minRating.Name))
             {
-                minRating = minRating.From(member.Value);
+                minRating.Value = member.Value;
             }
             else if (member.NameEquals(timeToCraft.Name))
             {
-                timeToCraft = timeToCraft.From(member.Value);
+                timeToCraft.Value = member.Value;
             }
             else if (member.NameEquals(disciplines.Name))
             {
-                disciplines = disciplines.From(member.Value);
+                disciplines.Value = member.Value;
             }
             else if (member.NameEquals(flags.Name))
             {
-                flags = flags.From(member.Value);
+                flags.Value = member.Value;
             }
             else if (member.NameEquals(ingredients.Name))
             {
-                ingredients = ingredients.From(member.Value);
+                ingredients.Value = member.Value;
             }
             else if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(chatLink.Name))
             {
-                chatLink = chatLink.From(member.Value);
+                chatLink.Value = member.Value;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {

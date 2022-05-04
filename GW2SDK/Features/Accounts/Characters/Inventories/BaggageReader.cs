@@ -19,7 +19,7 @@ public static class BaggageReader
         {
             if (member.NameEquals(bags.Name))
             {
-                bags = bags.From(member.Value);
+                bags.Value = member.Value;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {

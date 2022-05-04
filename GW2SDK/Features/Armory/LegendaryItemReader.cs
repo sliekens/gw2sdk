@@ -20,11 +20,11 @@ public static class LegendaryItemReader
         {
             if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(maxCount.Name))
             {
-                maxCount = maxCount.From(member.Value);
+                maxCount.Value = member.Value;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {

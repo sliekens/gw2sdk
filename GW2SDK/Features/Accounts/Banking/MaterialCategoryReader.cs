@@ -22,19 +22,19 @@ public static class MaterialCategoryReader
         {
             if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(name.Name))
             {
-                name = name.From(member.Value);
+                name.Value = member.Value;
             }
             else if (member.NameEquals(items.Name))
             {
-                items = items.From(member.Value);
+                items.Value = member.Value;
             }
             else if (member.NameEquals(order.Name))
             {
-                order = order.From(member.Value);
+                order.Value = member.Value;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {

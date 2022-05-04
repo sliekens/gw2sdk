@@ -29,47 +29,47 @@ public static class IdentityReader
         {
             if (member.NameEquals(name.Name))
             {
-                name = name.From(member.Value);
+                name.Value = member.Value;
             }
             else if (member.NameEquals(profession.Name))
             {
-                profession = profession.From(member.Value);
+                profession.Value = member.Value;
             }
             else if (member.NameEquals(specializationId.Name))
             {
-                specializationId = specializationId.From(member.Value);
+                specializationId.Value = member.Value;
             }
             else if (member.NameEquals(race.Name))
             {
-                race = race.From(member.Value);
+                race.Value = member.Value;
             }
             else if (member.NameEquals(mapId.Name))
             {
-                mapId = mapId.From(member.Value);
+                mapId.Value = member.Value;
             }
             else if (member.NameEquals(worldId.Name))
             {
-                worldId = worldId.From(member.Value);
+                worldId.Value = member.Value;
             }
             else if (member.NameEquals(teamColorId.Name))
             {
-                teamColorId = teamColorId.From(member.Value);
+                teamColorId.Value = member.Value;
             }
             else if (member.NameEquals(commander.Name))
             {
-                commander = commander.From(member.Value);
+                commander.Value = member.Value;
             }
             else if (member.NameEquals(fieldOfView.Name))
             {
-                fieldOfView = fieldOfView.From(member.Value);
+                fieldOfView.Value = member.Value;
             }
             else if (member.NameEquals(uiSize.Name))
             {
-                uiSize = uiSize.From(member.Value);
+                uiSize.Value = member.Value;
             }
             else if (member.NameEquals(map.Name))
             {
-                map = map.From(member.Value);
+                map.Value = member.Value;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {

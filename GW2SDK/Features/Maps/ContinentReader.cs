@@ -24,27 +24,27 @@ public static class ContinentReader
         {
             if (member.NameEquals(name.Name))
             {
-                name = name.From(member.Value);
+                name.Value = member.Value;
             }
             else if (member.NameEquals(continentDimensions.Name))
             {
-                continentDimensions = continentDimensions.From(member.Value);
+                continentDimensions.Value = member.Value;
             }
             else if (member.NameEquals(minZoom.Name))
             {
-                minZoom = minZoom.From(member.Value);
+                minZoom.Value = member.Value;
             }
             else if (member.NameEquals(maxZoom.Name))
             {
-                maxZoom = maxZoom.From(member.Value);
+                maxZoom.Value = member.Value;
             }
             else if (member.NameEquals(floors.Name))
             {
-                floors = floors.From(member.Value);
+                floors.Value = member.Value;
             }
             else if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {

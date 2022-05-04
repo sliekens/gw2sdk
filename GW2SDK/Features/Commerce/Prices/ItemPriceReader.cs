@@ -24,11 +24,11 @@ public static class ItemPriceReader
         {
             if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(whitelisted.Name))
             {
-                whitelisted = whitelisted.From(member.Value);
+                whitelisted.Value = member.Value;
             }
             else if (member.NameEquals("buys"))
             {
@@ -36,11 +36,11 @@ public static class ItemPriceReader
                 {
                     if (buy.NameEquals(demand.Name))
                     {
-                        demand = demand.From(buy.Value);
+                        demand.Value = buy.Value;
                     }
                     else if (buy.NameEquals(bestBid.Name))
                     {
-                        bestBid = bestBid.From(buy.Value);
+                        bestBid.Value = buy.Value;
                     }
                     else if (missingMemberBehavior == MissingMemberBehavior.Error)
                     {
@@ -54,11 +54,11 @@ public static class ItemPriceReader
                 {
                     if (sell.NameEquals(supply.Name))
                     {
-                        supply = supply.From(sell.Value);
+                        supply.Value = sell.Value;
                     }
                     else if (sell.NameEquals(bestAsk.Name))
                     {
-                        bestAsk = bestAsk.From(sell.Value);
+                        bestAsk.Value = sell.Value;
                     }
                     else if (missingMemberBehavior == MissingMemberBehavior.Error)
                     {

@@ -20,7 +20,7 @@ public static class LearnedRecipesReader
         {
             if (member.NameEquals(recipes.Name))
             {
-                recipes = recipes.From(member.Value);
+                recipes.Value = member.Value;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {

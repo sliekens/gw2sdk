@@ -26,47 +26,47 @@ public static class TraitReader
         {
             if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(tier.Name))
             {
-                tier = tier.From(member.Value);
+                tier.Value = member.Value;
             }
             else if (member.NameEquals(order.Name))
             {
-                order = order.From(member.Value);
+                order.Value = member.Value;
             }
             else if (member.NameEquals(name.Name))
             {
-                name = name.From(member.Value);
+                name.Value = member.Value;
             }
             else if (member.NameEquals(description.Name))
             {
-                description = description.From(member.Value);
+                description.Value = member.Value;
             }
             else if (member.NameEquals(slot.Name))
             {
-                slot = slot.From(member.Value);
+                slot.Value = member.Value;
             }
             else if (member.NameEquals(facts.Name))
             {
-                facts = facts.From(member.Value);
+                facts.Value = member.Value;
             }
             else if (member.NameEquals(traitedFacts.Name))
             {
-                traitedFacts = traitedFacts.From(member.Value);
+                traitedFacts.Value = member.Value;
             }
             else if (member.NameEquals(skills.Name))
             {
-                skills = skills.From(member.Value);
+                skills.Value = member.Value;
             }
             else if (member.NameEquals(specialization.Name))
             {
-                specialization = specialization.From(member.Value);
+                specialization.Value = member.Value;
             }
             else if (member.NameEquals(icon.Name))
             {
-                icon = icon.From(member.Value);
+                icon.Value = member.Value;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {
@@ -263,11 +263,11 @@ public static class TraitReader
             }
             else if (member.NameEquals(text.Name))
             {
-                text = text.From(member.Value);
+                text.Value = member.Value;
             }
             else if (member.NameEquals(icon.Name))
             {
-                icon = icon.From(member.Value);
+                icon.Value = member.Value;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {
@@ -316,19 +316,19 @@ public static class TraitReader
             }
             else if (member.NameEquals(text.Name))
             {
-                text = text.From(member.Value);
+                text.Value = member.Value;
             }
             else if (member.NameEquals(icon.Name))
             {
-                icon = icon.From(member.Value);
+                icon.Value = member.Value;
             }
             else if (member.NameEquals(value.Name))
             {
-                value = value.From(member.Value);
+                value.Value = member.Value;
             }
             else if (member.NameEquals(target.Name))
             {
-                target = target.From(member.Value);
+                target.Value = member.Value;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {
@@ -381,27 +381,27 @@ public static class TraitReader
             }
             else if (member.NameEquals(text.Name))
             {
-                text = text.From(member.Value);
+                text.Value = member.Value;
             }
             else if (member.NameEquals(icon.Name))
             {
-                icon = icon.From(member.Value);
+                icon.Value = member.Value;
             }
             else if (member.NameEquals(duration.Name))
             {
-                duration = duration.From(member.Value);
+                duration.Value = member.Value;
             }
             else if (member.NameEquals(status.Name))
             {
-                status = status.From(member.Value);
+                status.Value = member.Value;
             }
             else if (member.NameEquals(description.Name))
             {
-                description = description.From(member.Value);
+                description.Value = member.Value;
             }
             else if (member.NameEquals(applyCount.Name))
             {
-                applyCount = applyCount.From(member.Value);
+                applyCount.Value = member.Value;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {
@@ -455,23 +455,23 @@ public static class TraitReader
             }
             else if (member.NameEquals(text.Name))
             {
-                text = text.From(member.Value);
+                text.Value = member.Value;
             }
             else if (member.NameEquals(icon.Name))
             {
-                icon = icon.From(member.Value);
+                icon.Value = member.Value;
             }
             else if (member.NameEquals(percent.Name))
             {
-                percent = percent.From(member.Value);
+                percent.Value = member.Value;
             }
             else if (member.NameEquals(source.Name))
             {
-                source = source.From(member.Value);
+                source.Value = member.Value;
             }
             else if (member.NameEquals(target.Name))
             {
-                target = target.From(member.Value);
+                target.Value = member.Value;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {
@@ -522,15 +522,15 @@ public static class TraitReader
             }
             else if (member.NameEquals(text.Name))
             {
-                text = text.From(member.Value);
+                text.Value = member.Value;
             }
             else if (member.NameEquals(icon.Name))
             {
-                icon = icon.From(member.Value);
+                icon.Value = member.Value;
             }
             else if (member.NameEquals(fieldType.Name))
             {
-                fieldType = fieldType.From(member.Value);
+                fieldType.Value = member.Value;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {
@@ -580,19 +580,19 @@ public static class TraitReader
             }
             else if (member.NameEquals(text.Name))
             {
-                text = text.From(member.Value);
+                text.Value = member.Value;
             }
             else if (member.NameEquals(icon.Name))
             {
-                icon = icon.From(member.Value);
+                icon.Value = member.Value;
             }
             else if (member.NameEquals(percent.Name))
             {
-                percent = percent.From(member.Value);
+                percent.Value = member.Value;
             }
             else if (member.NameEquals(finisherType.Name))
             {
-                finisherType = finisherType.From(member.Value);
+                finisherType.Value = member.Value;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {
@@ -643,19 +643,19 @@ public static class TraitReader
             }
             else if (member.NameEquals(text.Name))
             {
-                text = text.From(member.Value);
+                text.Value = member.Value;
             }
             else if (member.NameEquals(icon.Name))
             {
-                icon = icon.From(member.Value);
+                icon.Value = member.Value;
             }
             else if (member.NameEquals(hitCount.Name))
             {
-                hitCount = hitCount.From(member.Value);
+                hitCount.Value = member.Value;
             }
             else if (member.NameEquals(damageMultiplier.Name))
             {
-                damageMultiplier = damageMultiplier.From(member.Value);
+                damageMultiplier.Value = member.Value;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {
@@ -705,15 +705,15 @@ public static class TraitReader
             }
             else if (member.NameEquals(text.Name))
             {
-                text = text.From(member.Value);
+                text.Value = member.Value;
             }
             else if (member.NameEquals(icon.Name))
             {
-                icon = icon.From(member.Value);
+                icon.Value = member.Value;
             }
             else if (member.NameEquals(distance.Name))
             {
-                distance = distance.From(member.Value);
+                distance.Value = member.Value;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {
@@ -761,11 +761,11 @@ public static class TraitReader
             }
             else if (member.NameEquals(text.Name))
             {
-                text = text.From(member.Value);
+                text.Value = member.Value;
             }
             else if (member.NameEquals(icon.Name))
             {
-                icon = icon.From(member.Value);
+                icon.Value = member.Value;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {
@@ -813,15 +813,15 @@ public static class TraitReader
             }
             else if (member.NameEquals(text.Name))
             {
-                text = text.From(member.Value);
+                text.Value = member.Value;
             }
             else if (member.NameEquals(icon.Name))
             {
-                icon = icon.From(member.Value);
+                icon.Value = member.Value;
             }
             else if (member.NameEquals(value.Name))
             {
-                value = value.From(member.Value);
+                value.Value = member.Value;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {
@@ -870,15 +870,15 @@ public static class TraitReader
             }
             else if (member.NameEquals(text.Name))
             {
-                text = text.From(member.Value);
+                text.Value = member.Value;
             }
             else if (member.NameEquals(icon.Name))
             {
-                icon = icon.From(member.Value);
+                icon.Value = member.Value;
             }
             else if (member.NameEquals(percent.Name))
             {
-                percent = percent.From(member.Value);
+                percent.Value = member.Value;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {
@@ -931,31 +931,31 @@ public static class TraitReader
             }
             else if (member.NameEquals(text.Name))
             {
-                text = text.From(member.Value);
+                text.Value = member.Value;
             }
             else if (member.NameEquals(icon.Name))
             {
-                icon = icon.From(member.Value);
+                icon.Value = member.Value;
             }
             else if (member.NameEquals(duration.Name))
             {
-                duration = duration.From(member.Value);
+                duration.Value = member.Value;
             }
             else if (member.NameEquals(status.Name))
             {
-                status = status.From(member.Value);
+                status.Value = member.Value;
             }
             else if (member.NameEquals(description.Name))
             {
-                description = description.From(member.Value);
+                description.Value = member.Value;
             }
             else if (member.NameEquals(applyCount.Name))
             {
-                applyCount = applyCount.From(member.Value);
+                applyCount.Value = member.Value;
             }
             else if (member.NameEquals(prefix.Name))
             {
-                prefix = prefix.From(member.Value);
+                prefix.Value = member.Value;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {
@@ -988,19 +988,19 @@ public static class TraitReader
         {
             if (member.NameEquals(text.Name))
             {
-                text = text.From(member.Value);
+                text.Value = member.Value;
             }
             else if (member.NameEquals(icon.Name))
             {
-                icon = icon.From(member.Value);
+                icon.Value = member.Value;
             }
             else if (member.NameEquals(status.Name))
             {
-                status = status.From(member.Value);
+                status.Value = member.Value;
             }
             else if (member.NameEquals(description.Name))
             {
-                description = description.From(member.Value);
+                description.Value = member.Value;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {
@@ -1050,15 +1050,15 @@ public static class TraitReader
             }
             else if (member.NameEquals(text.Name))
             {
-                text = text.From(member.Value);
+                text.Value = member.Value;
             }
             else if (member.NameEquals(icon.Name))
             {
-                icon = icon.From(member.Value);
+                icon.Value = member.Value;
             }
             else if (member.NameEquals(distance.Name))
             {
-                distance = distance.From(member.Value);
+                distance.Value = member.Value;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {
@@ -1107,15 +1107,15 @@ public static class TraitReader
             }
             else if (member.NameEquals(text.Name))
             {
-                text = text.From(member.Value);
+                text.Value = member.Value;
             }
             else if (member.NameEquals(icon.Name))
             {
-                icon = icon.From(member.Value);
+                icon.Value = member.Value;
             }
             else if (member.NameEquals(value.Name))
             {
-                value = value.From(member.Value);
+                value.Value = member.Value;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {
@@ -1164,15 +1164,15 @@ public static class TraitReader
             }
             else if (member.NameEquals(text.Name))
             {
-                text = text.From(member.Value);
+                text.Value = member.Value;
             }
             else if (member.NameEquals(icon.Name))
             {
-                icon = icon.From(member.Value);
+                icon.Value = member.Value;
             }
             else if (member.NameEquals(value.Name))
             {
-                value = value.From(member.Value);
+                value.Value = member.Value;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {
@@ -1221,15 +1221,15 @@ public static class TraitReader
             }
             else if (member.NameEquals(text.Name))
             {
-                text = text.From(member.Value);
+                text.Value = member.Value;
             }
             else if (member.NameEquals(icon.Name))
             {
-                icon = icon.From(member.Value);
+                icon.Value = member.Value;
             }
             else if (member.NameEquals(value.Name))
             {
-                value = value.From(member.Value);
+                value.Value = member.Value;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {
@@ -1278,15 +1278,15 @@ public static class TraitReader
             }
             else if (member.NameEquals(text.Name))
             {
-                text = text.From(member.Value);
+                text.Value = member.Value;
             }
             else if (member.NameEquals(icon.Name))
             {
-                icon = icon.From(member.Value);
+                icon.Value = member.Value;
             }
             else if (member.NameEquals(duration.Name))
             {
-                duration = duration.From(member.Value);
+                duration.Value = member.Value;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {
@@ -1335,15 +1335,15 @@ public static class TraitReader
             }
             else if (member.NameEquals(text.Name))
             {
-                text = text.From(member.Value);
+                text.Value = member.Value;
             }
             else if (member.NameEquals(icon.Name))
             {
-                icon = icon.From(member.Value);
+                icon.Value = member.Value;
             }
             else if (member.NameEquals(value.Name))
             {
-                value = value.From(member.Value);
+                value.Value = member.Value;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {
@@ -1395,23 +1395,23 @@ public static class TraitReader
         {
             if (member.NameEquals(name.Name))
             {
-                name = name.From(member.Value);
+                name.Value = member.Value;
             }
             else if (member.NameEquals(facts.Name))
             {
-                facts = facts.From(member.Value);
+                facts.Value = member.Value;
             }
             else if (member.NameEquals(traitedFacts.Name))
             {
-                traitedFacts = traitedFacts.From(member.Value);
+                traitedFacts.Value = member.Value;
             }
             else if (member.NameEquals(description.Name))
             {
-                description = description.From(member.Value);
+                description.Value = member.Value;
             }
             else if (member.NameEquals(icon.Name))
             {
-                icon = icon.From(member.Value);
+                icon.Value = member.Value;
             }
             else if (member.NameEquals("flags"))
             {
@@ -1424,15 +1424,15 @@ public static class TraitReader
             }
             else if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(chatLink.Name))
             {
-                chatLink = chatLink.From(member.Value);
+                chatLink.Value = member.Value;
             }
             else if (member.NameEquals(categories.Name))
             {
-                categories = categories.From(member.Value);
+                categories.Value = member.Value;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {

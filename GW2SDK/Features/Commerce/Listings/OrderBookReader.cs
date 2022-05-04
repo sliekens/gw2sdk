@@ -21,15 +21,15 @@ public static class OrderBookReader
         {
             if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(demand.Name))
             {
-                demand = demand.From(member.Value);
+                demand.Value = member.Value;
             }
             else if (member.NameEquals(supply.Name))
             {
-                supply = supply.From(member.Value);
+                supply.Value = member.Value;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {
@@ -58,15 +58,15 @@ public static class OrderBookReader
         {
             if (member.NameEquals(listings.Name))
             {
-                listings = listings.From(member.Value);
+                listings.Value = member.Value;
             }
             else if (member.NameEquals(unitPrice.Name))
             {
-                unitPrice = unitPrice.From(member.Value);
+                unitPrice.Value = member.Value;
             }
             else if (member.NameEquals(quantity.Name))
             {
-                quantity = quantity.From(member.Value);
+                quantity.Value = member.Value;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {

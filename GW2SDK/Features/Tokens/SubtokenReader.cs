@@ -19,7 +19,7 @@ public static class SubtokenReader
         {
             if (member.NameEquals(subtoken.Name))
             {
-                subtoken = subtoken.From(member.Value);
+                subtoken.Value = member.Value;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {

@@ -67,63 +67,63 @@ public static class SkillReader
             }
             else if (member.NameEquals(name.Name))
             {
-                name = name.From(member.Value);
+                name.Value = member.Value;
             }
             else if (member.NameEquals(facts.Name))
             {
-                facts = facts.From(member.Value);
+                facts.Value = member.Value;
             }
             else if (member.NameEquals(traitedFacts.Name))
             {
-                traitedFacts = traitedFacts.From(member.Value);
+                traitedFacts.Value = member.Value;
             }
             else if (member.NameEquals(description.Name))
             {
-                description = description.From(member.Value);
+                description.Value = member.Value;
             }
             else if (member.NameEquals(icon.Name))
             {
-                icon = icon.From(member.Value);
+                icon.Value = member.Value;
             }
             else if (member.NameEquals(weaponType.Name))
             {
-                weaponType = weaponType.From(member.Value);
+                weaponType.Value = member.Value;
             }
             else if (member.NameEquals(professions.Name))
             {
-                professions = professions.From(member.Value);
+                professions.Value = member.Value;
             }
             else if (member.NameEquals(slot.Name))
             {
-                slot = slot.From(member.Value);
+                slot.Value = member.Value;
             }
             else if (member.NameEquals(flipSkill.Name))
             {
-                flipSkill = flipSkill.From(member.Value);
+                flipSkill.Value = member.Value;
             }
             else if (member.NameEquals(nextChain.Name))
             {
-                nextChain = nextChain.From(member.Value);
+                nextChain.Value = member.Value;
             }
             else if (member.NameEquals(prevChain.Name))
             {
-                prevChain = prevChain.From(member.Value);
+                prevChain.Value = member.Value;
             }
             else if (member.NameEquals(flags.Name))
             {
-                flags = flags.From(member.Value);
+                flags.Value = member.Value;
             }
             else if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(chatLink.Name))
             {
-                chatLink = chatLink.From(member.Value);
+                chatLink.Value = member.Value;
             }
             else if (member.NameEquals(categories.Name))
             {
-                categories = categories.From(member.Value);
+                categories.Value = member.Value;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {
@@ -191,63 +191,63 @@ public static class SkillReader
             }
             else if (member.NameEquals(name.Name))
             {
-                name = name.From(member.Value);
+                name.Value = member.Value;
             }
             else if (member.NameEquals(facts.Name))
             {
-                facts = facts.From(member.Value);
+                facts.Value = member.Value;
             }
             else if (member.NameEquals(traitedFacts.Name))
             {
-                traitedFacts = traitedFacts.From(member.Value);
+                traitedFacts.Value = member.Value;
             }
             else if (member.NameEquals(description.Name))
             {
-                description = description.From(member.Value);
+                description.Value = member.Value;
             }
             else if (member.NameEquals(icon.Name))
             {
-                icon = icon.From(member.Value);
+                icon.Value = member.Value;
             }
             else if (member.NameEquals(weaponType.Name))
             {
-                weaponType = weaponType.From(member.Value);
+                weaponType.Value = member.Value;
             }
             else if (member.NameEquals(professions.Name))
             {
-                professions = professions.From(member.Value);
+                professions.Value = member.Value;
             }
             else if (member.NameEquals(slot.Name))
             {
-                slot = slot.From(member.Value);
+                slot.Value = member.Value;
             }
             else if (member.NameEquals(flipSkill.Name))
             {
-                flipSkill = flipSkill.From(member.Value);
+                flipSkill.Value = member.Value;
             }
             else if (member.NameEquals(nextChain.Name))
             {
-                nextChain = nextChain.From(member.Value);
+                nextChain.Value = member.Value;
             }
             else if (member.NameEquals(prevChain.Name))
             {
-                prevChain = prevChain.From(member.Value);
+                prevChain.Value = member.Value;
             }
             else if (member.NameEquals(flags.Name))
             {
-                flags = flags.From(member.Value);
+                flags.Value = member.Value;
             }
             else if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(chatLink.Name))
             {
-                chatLink = chatLink.From(member.Value);
+                chatLink.Value = member.Value;
             }
             else if (member.NameEquals(categories.Name))
             {
-                categories = categories.From(member.Value);
+                categories.Value = member.Value;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {
@@ -322,91 +322,91 @@ public static class SkillReader
             }
             else if (member.NameEquals(name.Name))
             {
-                name = name.From(member.Value);
+                name.Value = member.Value;
             }
             else if (member.NameEquals(facts.Name))
             {
-                facts = facts.From(member.Value);
+                facts.Value = member.Value;
             }
             else if (member.NameEquals(traitedFacts.Name))
             {
-                traitedFacts = traitedFacts.From(member.Value);
+                traitedFacts.Value = member.Value;
             }
             else if (member.NameEquals(description.Name))
             {
-                description = description.From(member.Value);
+                description.Value = member.Value;
             }
             else if (member.NameEquals(icon.Name))
             {
-                icon = icon.From(member.Value);
+                icon.Value = member.Value;
             }
             else if (member.NameEquals(weaponType.Name))
             {
-                weaponType = weaponType.From(member.Value);
+                weaponType.Value = member.Value;
             }
             else if (member.NameEquals(professions.Name))
             {
-                professions = professions.From(member.Value);
+                professions.Value = member.Value;
             }
             else if (member.NameEquals(slot.Name))
             {
-                slot = slot.From(member.Value);
+                slot.Value = member.Value;
             }
             else if (member.NameEquals(flipSkill.Name))
             {
-                flipSkill = flipSkill.From(member.Value);
+                flipSkill.Value = member.Value;
             }
             else if (member.NameEquals(nextChain.Name))
             {
-                nextChain = nextChain.From(member.Value);
+                nextChain.Value = member.Value;
             }
             else if (member.NameEquals(prevChain.Name))
             {
-                prevChain = prevChain.From(member.Value);
+                prevChain.Value = member.Value;
             }
             else if (member.NameEquals(transformSkills.Name))
             {
-                transformSkills = transformSkills.From(member.Value);
+                transformSkills.Value = member.Value;
             }
             else if (member.NameEquals(flags.Name))
             {
-                flags = flags.From(member.Value);
+                flags.Value = member.Value;
             }
             else if (member.NameEquals(specialization.Name))
             {
-                specialization = specialization.From(member.Value);
+                specialization.Value = member.Value;
             }
             else if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(chatLink.Name))
             {
-                chatLink = chatLink.From(member.Value);
+                chatLink.Value = member.Value;
             }
             else if (member.NameEquals(categories.Name))
             {
-                categories = categories.From(member.Value);
+                categories.Value = member.Value;
             }
             else if (member.NameEquals(subskills.Name))
             {
-                subskills = subskills.From(member.Value);
+                subskills.Value = member.Value;
             }
             else if (member.NameEquals(bundleSkills.Name))
             {
-                bundleSkills = bundleSkills.From(member.Value);
+                bundleSkills.Value = member.Value;
             }
             else if (member.NameEquals(attunement.Name))
             {
-                attunement = attunement.From(member.Value);
+                attunement.Value = member.Value;
             }
             else if (member.NameEquals(cost.Name))
             {
-                cost = cost.From(member.Value);
+                cost.Value = member.Value;
             }
             else if (member.NameEquals(toolbeltSkill.Name))
             {
-                toolbeltSkill = toolbeltSkill.From(member.Value);
+                toolbeltSkill.Value = member.Value;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {
@@ -487,87 +487,87 @@ public static class SkillReader
             }
             else if (member.NameEquals(name.Name))
             {
-                name = name.From(member.Value);
+                name.Value = member.Value;
             }
             else if (member.NameEquals(facts.Name))
             {
-                facts = facts.From(member.Value);
+                facts.Value = member.Value;
             }
             else if (member.NameEquals(traitedFacts.Name))
             {
-                traitedFacts = traitedFacts.From(member.Value);
+                traitedFacts.Value = member.Value;
             }
             else if (member.NameEquals(description.Name))
             {
-                description = description.From(member.Value);
+                description.Value = member.Value;
             }
             else if (member.NameEquals(icon.Name))
             {
-                icon = icon.From(member.Value);
+                icon.Value = member.Value;
             }
             else if (member.NameEquals(weaponType.Name))
             {
-                weaponType = weaponType.From(member.Value);
+                weaponType.Value = member.Value;
             }
             else if (member.NameEquals(professions.Name))
             {
-                professions = professions.From(member.Value);
+                professions.Value = member.Value;
             }
             else if (member.NameEquals(slot.Name))
             {
-                slot = slot.From(member.Value);
+                slot.Value = member.Value;
             }
             else if (member.NameEquals(flipSkill.Name))
             {
-                flipSkill = flipSkill.From(member.Value);
+                flipSkill.Value = member.Value;
             }
             else if (member.NameEquals(nextChain.Name))
             {
-                nextChain = nextChain.From(member.Value);
+                nextChain.Value = member.Value;
             }
             else if (member.NameEquals(prevChain.Name))
             {
-                prevChain = prevChain.From(member.Value);
+                prevChain.Value = member.Value;
             }
             else if (member.NameEquals(flags.Name))
             {
-                flags = flags.From(member.Value);
+                flags.Value = member.Value;
             }
             else if (member.NameEquals(specialization.Name))
             {
-                specialization = specialization.From(member.Value);
+                specialization.Value = member.Value;
             }
             else if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(chatLink.Name))
             {
-                chatLink = chatLink.From(member.Value);
+                chatLink.Value = member.Value;
             }
             else if (member.NameEquals(categories.Name))
             {
-                categories = categories.From(member.Value);
+                categories.Value = member.Value;
             }
             else if (member.NameEquals(subskills.Name))
             {
-                subskills = subskills.From(member.Value);
+                subskills.Value = member.Value;
             }
             else if (member.NameEquals(bundleSkills.Name))
             {
-                bundleSkills = bundleSkills.From(member.Value);
+                bundleSkills.Value = member.Value;
             }
             else if (member.NameEquals(attunement.Name))
             {
-                attunement = attunement.From(member.Value);
+                attunement.Value = member.Value;
             }
             else if (member.NameEquals(cost.Name))
             {
-                cost = cost.From(member.Value);
+                cost.Value = member.Value;
             }
             else if (member.NameEquals(toolbeltSkill.Name))
             {
-                toolbeltSkill = toolbeltSkill.From(member.Value);
+                toolbeltSkill.Value = member.Value;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {
@@ -641,63 +641,63 @@ public static class SkillReader
             }
             else if (member.NameEquals(name.Name))
             {
-                name = name.From(member.Value);
+                name.Value = member.Value;
             }
             else if (member.NameEquals(facts.Name))
             {
-                facts = facts.From(member.Value);
+                facts.Value = member.Value;
             }
             else if (member.NameEquals(traitedFacts.Name))
             {
-                traitedFacts = traitedFacts.From(member.Value);
+                traitedFacts.Value = member.Value;
             }
             else if (member.NameEquals(description.Name))
             {
-                description = description.From(member.Value);
+                description.Value = member.Value;
             }
             else if (member.NameEquals(icon.Name))
             {
-                icon = icon.From(member.Value);
+                icon.Value = member.Value;
             }
             else if (member.NameEquals(weaponType.Name))
             {
-                weaponType = weaponType.From(member.Value);
+                weaponType.Value = member.Value;
             }
             else if (member.NameEquals(professions.Name))
             {
-                professions = professions.From(member.Value);
+                professions.Value = member.Value;
             }
             else if (member.NameEquals(slot.Name))
             {
-                slot = slot.From(member.Value);
+                slot.Value = member.Value;
             }
             else if (member.NameEquals(flipSkill.Name))
             {
-                flipSkill = flipSkill.From(member.Value);
+                flipSkill.Value = member.Value;
             }
             else if (member.NameEquals(nextChain.Name))
             {
-                nextChain = nextChain.From(member.Value);
+                nextChain.Value = member.Value;
             }
             else if (member.NameEquals(prevChain.Name))
             {
-                prevChain = prevChain.From(member.Value);
+                prevChain.Value = member.Value;
             }
             else if (member.NameEquals(flags.Name))
             {
-                flags = flags.From(member.Value);
+                flags.Value = member.Value;
             }
             else if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(chatLink.Name))
             {
-                chatLink = chatLink.From(member.Value);
+                chatLink.Value = member.Value;
             }
             else if (member.NameEquals(categories.Name))
             {
-                categories = categories.From(member.Value);
+                categories.Value = member.Value;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {
@@ -765,63 +765,63 @@ public static class SkillReader
             }
             else if (member.NameEquals(name.Name))
             {
-                name = name.From(member.Value);
+                name.Value = member.Value;
             }
             else if (member.NameEquals(facts.Name))
             {
-                facts = facts.From(member.Value);
+                facts.Value = member.Value;
             }
             else if (member.NameEquals(traitedFacts.Name))
             {
-                traitedFacts = traitedFacts.From(member.Value);
+                traitedFacts.Value = member.Value;
             }
             else if (member.NameEquals(description.Name))
             {
-                description = description.From(member.Value);
+                description.Value = member.Value;
             }
             else if (member.NameEquals(icon.Name))
             {
-                icon = icon.From(member.Value);
+                icon.Value = member.Value;
             }
             else if (member.NameEquals(weaponType.Name))
             {
-                weaponType = weaponType.From(member.Value);
+                weaponType.Value = member.Value;
             }
             else if (member.NameEquals(professions.Name))
             {
-                professions = professions.From(member.Value);
+                professions.Value = member.Value;
             }
             else if (member.NameEquals(slot.Name))
             {
-                slot = slot.From(member.Value);
+                slot.Value = member.Value;
             }
             else if (member.NameEquals(flipSkill.Name))
             {
-                flipSkill = flipSkill.From(member.Value);
+                flipSkill.Value = member.Value;
             }
             else if (member.NameEquals(nextChain.Name))
             {
-                nextChain = nextChain.From(member.Value);
+                nextChain.Value = member.Value;
             }
             else if (member.NameEquals(prevChain.Name))
             {
-                prevChain = prevChain.From(member.Value);
+                prevChain.Value = member.Value;
             }
             else if (member.NameEquals(flags.Name))
             {
-                flags = flags.From(member.Value);
+                flags.Value = member.Value;
             }
             else if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(chatLink.Name))
             {
-                chatLink = chatLink.From(member.Value);
+                chatLink.Value = member.Value;
             }
             else if (member.NameEquals(categories.Name))
             {
-                categories = categories.From(member.Value);
+                categories.Value = member.Value;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {
@@ -893,79 +893,79 @@ public static class SkillReader
             }
             else if (member.NameEquals(name.Name))
             {
-                name = name.From(member.Value);
+                name.Value = member.Value;
             }
             else if (member.NameEquals(facts.Name))
             {
-                facts = facts.From(member.Value);
+                facts.Value = member.Value;
             }
             else if (member.NameEquals(traitedFacts.Name))
             {
-                traitedFacts = traitedFacts.From(member.Value);
+                traitedFacts.Value = member.Value;
             }
             else if (member.NameEquals(description.Name))
             {
-                description = description.From(member.Value);
+                description.Value = member.Value;
             }
             else if (member.NameEquals(icon.Name))
             {
-                icon = icon.From(member.Value);
+                icon.Value = member.Value;
             }
             else if (member.NameEquals(weaponType.Name))
             {
-                weaponType = weaponType.From(member.Value);
+                weaponType.Value = member.Value;
             }
             else if (member.NameEquals(professions.Name))
             {
-                professions = professions.From(member.Value);
+                professions.Value = member.Value;
             }
             else if (member.NameEquals(slot.Name))
             {
-                slot = slot.From(member.Value);
+                slot.Value = member.Value;
             }
             else if (member.NameEquals(flipSkill.Name))
             {
-                flipSkill = flipSkill.From(member.Value);
+                flipSkill.Value = member.Value;
             }
             else if (member.NameEquals(nextChain.Name))
             {
-                nextChain = nextChain.From(member.Value);
+                nextChain.Value = member.Value;
             }
             else if (member.NameEquals(prevChain.Name))
             {
-                prevChain = prevChain.From(member.Value);
+                prevChain.Value = member.Value;
             }
             else if (member.NameEquals(transformSkills.Name))
             {
-                transformSkills = transformSkills.From(member.Value);
+                transformSkills.Value = member.Value;
             }
             else if (member.NameEquals(flags.Name))
             {
-                flags = flags.From(member.Value);
+                flags.Value = member.Value;
             }
             else if (member.NameEquals(specialization.Name))
             {
-                specialization = specialization.From(member.Value);
+                specialization.Value = member.Value;
             }
             else if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(chatLink.Name))
             {
-                chatLink = chatLink.From(member.Value);
+                chatLink.Value = member.Value;
             }
             else if (member.NameEquals(categories.Name))
             {
-                categories = categories.From(member.Value);
+                categories.Value = member.Value;
             }
             else if (member.NameEquals(attunement.Name))
             {
-                attunement = attunement.From(member.Value);
+                attunement.Value = member.Value;
             }
             else if (member.NameEquals(cost.Name))
             {
-                cost = cost.From(member.Value);
+                cost.Value = member.Value;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {
@@ -1037,63 +1037,63 @@ public static class SkillReader
             }
             else if (member.NameEquals(name.Name))
             {
-                name = name.From(member.Value);
+                name.Value = member.Value;
             }
             else if (member.NameEquals(facts.Name))
             {
-                facts = facts.From(member.Value);
+                facts.Value = member.Value;
             }
             else if (member.NameEquals(traitedFacts.Name))
             {
-                traitedFacts = traitedFacts.From(member.Value);
+                traitedFacts.Value = member.Value;
             }
             else if (member.NameEquals(description.Name))
             {
-                description = description.From(member.Value);
+                description.Value = member.Value;
             }
             else if (member.NameEquals(icon.Name))
             {
-                icon = icon.From(member.Value);
+                icon.Value = member.Value;
             }
             else if (member.NameEquals(weaponType.Name))
             {
-                weaponType = weaponType.From(member.Value);
+                weaponType.Value = member.Value;
             }
             else if (member.NameEquals(professions.Name))
             {
-                professions = professions.From(member.Value);
+                professions.Value = member.Value;
             }
             else if (member.NameEquals(slot.Name))
             {
-                slot = slot.From(member.Value);
+                slot.Value = member.Value;
             }
             else if (member.NameEquals(flipSkill.Name))
             {
-                flipSkill = flipSkill.From(member.Value);
+                flipSkill.Value = member.Value;
             }
             else if (member.NameEquals(nextChain.Name))
             {
-                nextChain = nextChain.From(member.Value);
+                nextChain.Value = member.Value;
             }
             else if (member.NameEquals(prevChain.Name))
             {
-                prevChain = prevChain.From(member.Value);
+                prevChain.Value = member.Value;
             }
             else if (member.NameEquals(flags.Name))
             {
-                flags = flags.From(member.Value);
+                flags.Value = member.Value;
             }
             else if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(chatLink.Name))
             {
-                chatLink = chatLink.From(member.Value);
+                chatLink.Value = member.Value;
             }
             else if (member.NameEquals(categories.Name))
             {
-                categories = categories.From(member.Value);
+                categories.Value = member.Value;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {
@@ -1161,63 +1161,63 @@ public static class SkillReader
             }
             else if (member.NameEquals(name.Name))
             {
-                name = name.From(member.Value);
+                name.Value = member.Value;
             }
             else if (member.NameEquals(facts.Name))
             {
-                facts = facts.From(member.Value);
+                facts.Value = member.Value;
             }
             else if (member.NameEquals(traitedFacts.Name))
             {
-                traitedFacts = traitedFacts.From(member.Value);
+                traitedFacts.Value = member.Value;
             }
             else if (member.NameEquals(description.Name))
             {
-                description = description.From(member.Value);
+                description.Value = member.Value;
             }
             else if (member.NameEquals(icon.Name))
             {
-                icon = icon.From(member.Value);
+                icon.Value = member.Value;
             }
             else if (member.NameEquals(weaponType.Name))
             {
-                weaponType = weaponType.From(member.Value);
+                weaponType.Value = member.Value;
             }
             else if (member.NameEquals(professions.Name))
             {
-                professions = professions.From(member.Value);
+                professions.Value = member.Value;
             }
             else if (member.NameEquals(slot.Name))
             {
-                slot = slot.From(member.Value);
+                slot.Value = member.Value;
             }
             else if (member.NameEquals(flipSkill.Name))
             {
-                flipSkill = flipSkill.From(member.Value);
+                flipSkill.Value = member.Value;
             }
             else if (member.NameEquals(nextChain.Name))
             {
-                nextChain = nextChain.From(member.Value);
+                nextChain.Value = member.Value;
             }
             else if (member.NameEquals(prevChain.Name))
             {
-                prevChain = prevChain.From(member.Value);
+                prevChain.Value = member.Value;
             }
             else if (member.NameEquals(flags.Name))
             {
-                flags = flags.From(member.Value);
+                flags.Value = member.Value;
             }
             else if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(chatLink.Name))
             {
-                chatLink = chatLink.From(member.Value);
+                chatLink.Value = member.Value;
             }
             else if (member.NameEquals(categories.Name))
             {
-                categories = categories.From(member.Value);
+                categories.Value = member.Value;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {
@@ -1291,87 +1291,87 @@ public static class SkillReader
             }
             else if (member.NameEquals(name.Name))
             {
-                name = name.From(member.Value);
+                name.Value = member.Value;
             }
             else if (member.NameEquals(facts.Name))
             {
-                facts = facts.From(member.Value);
+                facts.Value = member.Value;
             }
             else if (member.NameEquals(traitedFacts.Name))
             {
-                traitedFacts = traitedFacts.From(member.Value);
+                traitedFacts.Value = member.Value;
             }
             else if (member.NameEquals(description.Name))
             {
-                description = description.From(member.Value);
+                description.Value = member.Value;
             }
             else if (member.NameEquals(icon.Name))
             {
-                icon = icon.From(member.Value);
+                icon.Value = member.Value;
             }
             else if (member.NameEquals(weaponType.Name))
             {
-                weaponType = weaponType.From(member.Value);
+                weaponType.Value = member.Value;
             }
             else if (member.NameEquals(professions.Name))
             {
-                professions = professions.From(member.Value);
+                professions.Value = member.Value;
             }
             else if (member.NameEquals(slot.Name))
             {
-                slot = slot.From(member.Value);
+                slot.Value = member.Value;
             }
             else if (member.NameEquals(flipSkill.Name))
             {
-                flipSkill = flipSkill.From(member.Value);
+                flipSkill.Value = member.Value;
             }
             else if (member.NameEquals(nextChain.Name))
             {
-                nextChain = nextChain.From(member.Value);
+                nextChain.Value = member.Value;
             }
             else if (member.NameEquals(prevChain.Name))
             {
-                prevChain = prevChain.From(member.Value);
+                prevChain.Value = member.Value;
             }
             else if (member.NameEquals(flags.Name))
             {
-                flags = flags.From(member.Value);
+                flags.Value = member.Value;
             }
             else if (member.NameEquals(specialization.Name))
             {
-                specialization = specialization.From(member.Value);
+                specialization.Value = member.Value;
             }
             else if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(chatLink.Name))
             {
-                chatLink = chatLink.From(member.Value);
+                chatLink.Value = member.Value;
             }
             else if (member.NameEquals(categories.Name))
             {
-                categories = categories.From(member.Value);
+                categories.Value = member.Value;
             }
             else if (member.NameEquals(subskills.Name))
             {
-                subskills = subskills.From(member.Value);
+                subskills.Value = member.Value;
             }
             else if (member.NameEquals(bundleSkills.Name))
             {
-                bundleSkills = bundleSkills.From(member.Value);
+                bundleSkills.Value = member.Value;
             }
             else if (member.NameEquals(attunement.Name))
             {
-                attunement = attunement.From(member.Value);
+                attunement.Value = member.Value;
             }
             else if (member.NameEquals(toolbeltSkill.Name))
             {
-                toolbeltSkill = toolbeltSkill.From(member.Value);
+                toolbeltSkill.Value = member.Value;
             }
             else if (member.NameEquals(cost.Name))
             {
-                cost = cost.From(member.Value);
+                cost.Value = member.Value;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {
@@ -1451,87 +1451,87 @@ public static class SkillReader
             }
             else if (member.NameEquals(name.Name))
             {
-                name = name.From(member.Value);
+                name.Value = member.Value;
             }
             else if (member.NameEquals(facts.Name))
             {
-                facts = facts.From(member.Value);
+                facts.Value = member.Value;
             }
             else if (member.NameEquals(traitedFacts.Name))
             {
-                traitedFacts = traitedFacts.From(member.Value);
+                traitedFacts.Value = member.Value;
             }
             else if (member.NameEquals(description.Name))
             {
-                description = description.From(member.Value);
+                description.Value = member.Value;
             }
             else if (member.NameEquals(icon.Name))
             {
-                icon = icon.From(member.Value);
+                icon.Value = member.Value;
             }
             else if (member.NameEquals(weaponType.Name))
             {
-                weaponType = weaponType.From(member.Value);
+                weaponType.Value = member.Value;
             }
             else if (member.NameEquals(professions.Name))
             {
-                professions = professions.From(member.Value);
+                professions.Value = member.Value;
             }
             else if (member.NameEquals(slot.Name))
             {
-                slot = slot.From(member.Value);
+                slot.Value = member.Value;
             }
             else if (member.NameEquals(flipSkill.Name))
             {
-                flipSkill = flipSkill.From(member.Value);
+                flipSkill.Value = member.Value;
             }
             else if (member.NameEquals(nextChain.Name))
             {
-                nextChain = nextChain.From(member.Value);
+                nextChain.Value = member.Value;
             }
             else if (member.NameEquals(prevChain.Name))
             {
-                prevChain = prevChain.From(member.Value);
+                prevChain.Value = member.Value;
             }
             else if (member.NameEquals(flags.Name))
             {
-                flags = flags.From(member.Value);
+                flags.Value = member.Value;
             }
             else if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(chatLink.Name))
             {
-                chatLink = chatLink.From(member.Value);
+                chatLink.Value = member.Value;
             }
             else if (member.NameEquals(categories.Name))
             {
-                categories = categories.From(member.Value);
+                categories.Value = member.Value;
             }
             else if (member.NameEquals(attunement.Name))
             {
-                attunement = attunement.From(member.Value);
+                attunement.Value = member.Value;
             }
             else if (member.NameEquals(dualAttunement.Name))
             {
-                dualAttunement = dualAttunement.From(member.Value);
+                dualAttunement.Value = member.Value;
             }
             else if (member.NameEquals(specialization.Name))
             {
-                specialization = specialization.From(member.Value);
+                specialization.Value = member.Value;
             }
             else if (member.NameEquals(cost.Name))
             {
-                cost = cost.From(member.Value);
+                cost.Value = member.Value;
             }
             else if (member.NameEquals(offhand.Name))
             {
-                offhand = offhand.From(member.Value);
+                offhand.Value = member.Value;
             }
             else if (member.NameEquals(initiative.Name))
             {
-                initiative = initiative.From(member.Value);
+                initiative.Value = member.Value;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {
@@ -1765,11 +1765,11 @@ public static class SkillReader
             }
             else if (member.NameEquals(text.Name))
             {
-                text = text.From(member.Value);
+                text.Value = member.Value;
             }
             else if (member.NameEquals(icon.Name))
             {
-                icon = icon.From(member.Value);
+                icon.Value = member.Value;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {
@@ -1819,15 +1819,15 @@ public static class SkillReader
             }
             else if (member.NameEquals(text.Name))
             {
-                text = text.From(member.Value);
+                text.Value = member.Value;
             }
             else if (member.NameEquals(icon.Name))
             {
-                icon = icon.From(member.Value);
+                icon.Value = member.Value;
             }
             else if (member.NameEquals(distance.Name))
             {
-                distance = distance.From(member.Value);
+                distance.Value = member.Value;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {
@@ -1878,15 +1878,15 @@ public static class SkillReader
             }
             else if (member.NameEquals(text.Name))
             {
-                text = text.From(member.Value);
+                text.Value = member.Value;
             }
             else if (member.NameEquals(icon.Name))
             {
-                icon = icon.From(member.Value);
+                icon.Value = member.Value;
             }
             else if (member.NameEquals(value.Name))
             {
-                value = value.From(member.Value);
+                value.Value = member.Value;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {
@@ -1937,15 +1937,15 @@ public static class SkillReader
             }
             else if (member.NameEquals(text.Name))
             {
-                text = text.From(member.Value);
+                text.Value = member.Value;
             }
             else if (member.NameEquals(icon.Name))
             {
-                icon = icon.From(member.Value);
+                icon.Value = member.Value;
             }
             else if (member.NameEquals(value.Name))
             {
-                value = value.From(member.Value);
+                value.Value = member.Value;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {
@@ -1996,15 +1996,15 @@ public static class SkillReader
             }
             else if (member.NameEquals(text.Name))
             {
-                text = text.From(member.Value);
+                text.Value = member.Value;
             }
             else if (member.NameEquals(icon.Name))
             {
-                icon = icon.From(member.Value);
+                icon.Value = member.Value;
             }
             else if (member.NameEquals(value.Name))
             {
-                value = value.From(member.Value);
+                value.Value = member.Value;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {
@@ -2055,15 +2055,15 @@ public static class SkillReader
             }
             else if (member.NameEquals(text.Name))
             {
-                text = text.From(member.Value);
+                text.Value = member.Value;
             }
             else if (member.NameEquals(icon.Name))
             {
-                icon = icon.From(member.Value);
+                icon.Value = member.Value;
             }
             else if (member.NameEquals(duration.Name))
             {
-                duration = duration.From(member.Value);
+                duration.Value = member.Value;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {
@@ -2114,15 +2114,15 @@ public static class SkillReader
             }
             else if (member.NameEquals(text.Name))
             {
-                text = text.From(member.Value);
+                text.Value = member.Value;
             }
             else if (member.NameEquals(icon.Name))
             {
-                icon = icon.From(member.Value);
+                icon.Value = member.Value;
             }
             else if (member.NameEquals(value.Name))
             {
-                value = value.From(member.Value);
+                value.Value = member.Value;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {
@@ -2177,31 +2177,31 @@ public static class SkillReader
             }
             else if (member.NameEquals(text.Name))
             {
-                text = text.From(member.Value);
+                text.Value = member.Value;
             }
             else if (member.NameEquals(icon.Name))
             {
-                icon = icon.From(member.Value);
+                icon.Value = member.Value;
             }
             else if (member.NameEquals(duration.Name))
             {
-                duration = duration.From(member.Value);
+                duration.Value = member.Value;
             }
             else if (member.NameEquals(status.Name))
             {
-                status = status.From(member.Value);
+                status.Value = member.Value;
             }
             else if (member.NameEquals(description.Name))
             {
-                description = description.From(member.Value);
+                description.Value = member.Value;
             }
             else if (member.NameEquals(applyCount.Name))
             {
-                applyCount = applyCount.From(member.Value);
+                applyCount.Value = member.Value;
             }
             else if (member.NameEquals(prefix.Name))
             {
-                prefix = prefix.From(member.Value);
+                prefix.Value = member.Value;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {
@@ -2234,19 +2234,19 @@ public static class SkillReader
         {
             if (member.NameEquals(text.Name))
             {
-                text = text.From(member.Value);
+                text.Value = member.Value;
             }
             else if (member.NameEquals(icon.Name))
             {
-                icon = icon.From(member.Value);
+                icon.Value = member.Value;
             }
             else if (member.NameEquals(status.Name))
             {
-                status = status.From(member.Value);
+                status.Value = member.Value;
             }
             else if (member.NameEquals(description.Name))
             {
-                description = description.From(member.Value);
+                description.Value = member.Value;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {
@@ -2298,16 +2298,16 @@ public static class SkillReader
             }
             else if (member.NameEquals(text.Name))
             {
-                text = text.From(member.Value);
+                text.Value = member.Value;
             }
             else if (member.NameEquals(icon.Name))
             {
-                icon = icon.From(member.Value);
+                icon.Value = member.Value;
             }
             else if (member.NameEquals(percent.Name) || member.NameEquals("value"))
             {
                 // Some use the name 'percent', some use 'value'... weird
-                percent = percent.From(member.Value);
+                percent.Value = member.Value;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {
@@ -2358,15 +2358,15 @@ public static class SkillReader
             }
             else if (member.NameEquals(text.Name))
             {
-                text = text.From(member.Value);
+                text.Value = member.Value;
             }
             else if (member.NameEquals(icon.Name))
             {
-                icon = icon.From(member.Value);
+                icon.Value = member.Value;
             }
             else if (member.NameEquals(value.Name))
             {
-                value = value.From(member.Value);
+                value.Value = member.Value;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {
@@ -2416,11 +2416,11 @@ public static class SkillReader
             }
             else if (member.NameEquals(text.Name))
             {
-                text = text.From(member.Value);
+                text.Value = member.Value;
             }
             else if (member.NameEquals(icon.Name))
             {
-                icon = icon.From(member.Value);
+                icon.Value = member.Value;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {
@@ -2470,15 +2470,15 @@ public static class SkillReader
             }
             else if (member.NameEquals(text.Name))
             {
-                text = text.From(member.Value);
+                text.Value = member.Value;
             }
             else if (member.NameEquals(icon.Name))
             {
-                icon = icon.From(member.Value);
+                icon.Value = member.Value;
             }
             else if (member.NameEquals(hitCount.Name))
             {
-                hitCount = hitCount.From(member.Value);
+                hitCount.Value = member.Value;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {
@@ -2529,15 +2529,15 @@ public static class SkillReader
             }
             else if (member.NameEquals(text.Name))
             {
-                text = text.From(member.Value);
+                text.Value = member.Value;
             }
             else if (member.NameEquals(icon.Name))
             {
-                icon = icon.From(member.Value);
+                icon.Value = member.Value;
             }
             else if (member.NameEquals(duration.Name))
             {
-                duration = duration.From(member.Value);
+                duration.Value = member.Value;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {
@@ -2588,15 +2588,15 @@ public static class SkillReader
             }
             else if (member.NameEquals(text.Name))
             {
-                text = text.From(member.Value);
+                text.Value = member.Value;
             }
             else if (member.NameEquals(icon.Name))
             {
-                icon = icon.From(member.Value);
+                icon.Value = member.Value;
             }
             else if (member.NameEquals(distance.Name))
             {
-                distance = distance.From(member.Value);
+                distance.Value = member.Value;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {
@@ -2648,19 +2648,19 @@ public static class SkillReader
             }
             else if (member.NameEquals(text.Name))
             {
-                text = text.From(member.Value);
+                text.Value = member.Value;
             }
             else if (member.NameEquals(icon.Name))
             {
-                icon = icon.From(member.Value);
+                icon.Value = member.Value;
             }
             else if (member.NameEquals(hitCount.Name))
             {
-                hitCount = hitCount.From(member.Value);
+                hitCount.Value = member.Value;
             }
             else if (member.NameEquals(damageMultiplier.Name))
             {
-                damageMultiplier = damageMultiplier.From(member.Value);
+                damageMultiplier.Value = member.Value;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {
@@ -2715,27 +2715,27 @@ public static class SkillReader
             }
             else if (member.NameEquals(text.Name))
             {
-                text = text.From(member.Value);
+                text.Value = member.Value;
             }
             else if (member.NameEquals(icon.Name))
             {
-                icon = icon.From(member.Value);
+                icon.Value = member.Value;
             }
             else if (member.NameEquals(duration.Name))
             {
-                duration = duration.From(member.Value);
+                duration.Value = member.Value;
             }
             else if (member.NameEquals(status.Name))
             {
-                status = status.From(member.Value);
+                status.Value = member.Value;
             }
             else if (member.NameEquals(description.Name))
             {
-                description = description.From(member.Value);
+                description.Value = member.Value;
             }
             else if (member.NameEquals(applyCount.Name))
             {
-                applyCount = applyCount.From(member.Value);
+                applyCount.Value = member.Value;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {
@@ -2790,19 +2790,19 @@ public static class SkillReader
             }
             else if (member.NameEquals(text.Name))
             {
-                text = text.From(member.Value);
+                text.Value = member.Value;
             }
             else if (member.NameEquals(icon.Name))
             {
-                icon = icon.From(member.Value);
+                icon.Value = member.Value;
             }
             else if (member.NameEquals(value.Name))
             {
-                value = value.From(member.Value);
+                value.Value = member.Value;
             }
             else if (member.NameEquals(target.Name))
             {
-                target = target.From(member.Value);
+                target.Value = member.Value;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {
@@ -2854,15 +2854,15 @@ public static class SkillReader
             }
             else if (member.NameEquals(text.Name))
             {
-                text = text.From(member.Value);
+                text.Value = member.Value;
             }
             else if (member.NameEquals(icon.Name))
             {
-                icon = icon.From(member.Value);
+                icon.Value = member.Value;
             }
             else if (member.NameEquals(fieldType.Name))
             {
-                fieldType = fieldType.From(member.Value);
+                fieldType.Value = member.Value;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {
@@ -2918,19 +2918,19 @@ public static class SkillReader
             }
             else if (member.NameEquals(text.Name))
             {
-                text = text.From(member.Value);
+                text.Value = member.Value;
             }
             else if (member.NameEquals(icon.Name))
             {
-                icon = icon.From(member.Value);
+                icon.Value = member.Value;
             }
             else if (member.NameEquals(percent.Name))
             {
-                percent = percent.From(member.Value);
+                percent.Value = member.Value;
             }
             else if (member.NameEquals(finisherType.Name))
             {
-                finisherType = finisherType.From(member.Value);
+                finisherType.Value = member.Value;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {
@@ -2967,15 +2967,15 @@ public static class SkillReader
         {
             if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(attunement.Name))
             {
-                attunement = attunement.From(member.Value);
+                attunement.Value = member.Value;
             }
             else if (member.NameEquals(form.Name))
             {
-                form = form.From(member.Value);
+                form.Value = member.Value;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {

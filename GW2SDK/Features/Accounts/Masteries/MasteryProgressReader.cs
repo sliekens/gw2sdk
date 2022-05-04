@@ -20,11 +20,11 @@ public static class MasteryProgressReader
         {
             if (member.NameEquals(id.Name))
             {
-                id = id.From(member.Value);
+                id.Value = member.Value;
             }
             else if (member.NameEquals(level.Name))
             {
-                level = level.From(member.Value);
+                level.Value = member.Value;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {
