@@ -32,8 +32,7 @@ public sealed class QuaggansByIdsRequest : IHttpRequest<IReplicaSet<Quaggan>>
         CancellationToken cancellationToken
     )
     {
-        QueryBuilder search = new();
-        search.Add("ids", QuagganIds);
+        QueryBuilder search = new() { { "ids", QuagganIds } };
         var request = Template with { Arguments = search };
 
         using var response = await httpClient.SendAsync(

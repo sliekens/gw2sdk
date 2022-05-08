@@ -34,8 +34,7 @@ public sealed class ItemsByIdsRequest : IHttpRequest<IReplicaSet<Item>>
         CancellationToken cancellationToken
     )
     {
-        QueryBuilder search = new();
-        search.Add("ids", ItemIds);
+        QueryBuilder search = new() { { "ids", ItemIds } };
         var request = Template with
         {
             AcceptLanguage = Language?.Alpha2Code,

@@ -32,8 +32,7 @@ public sealed class CharacterByNameRequest : IHttpRequest<IReplica<Character>>
         CancellationToken cancellationToken
     )
     {
-        QueryBuilder search = new();
-        search.Add("id", CharacterName);
+        QueryBuilder search = new() { { "id", CharacterName } };
         var request = Template with
         {
             BearerToken = AccessToken,

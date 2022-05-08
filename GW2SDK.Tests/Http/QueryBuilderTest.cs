@@ -27,13 +27,24 @@ public class QueryBuilderTest
         Assert.ThrowsAny<InvalidOperationException>(() => sut.Add("key", "value"));
     }
 
+    [Fact]
+    public void A_cloned_builder_is_mutable()
+    {
+        var immutable = new QueryBuilder();
+
+        immutable.Freeze();
+
+        var sut = immutable.Clone();
+
+        sut.Add("key", "value");
+
+        Assert.Equal("?key=value", sut.Build());
+    }
 
     [Fact]
     public void Value_type_can_be_string()
     {
-        var sut = new QueryBuilder();
-
-        sut.Add("key", "value");
+        var sut = new QueryBuilder { { "key", "value" } };
 
         var actual = sut.Build();
 
@@ -43,9 +54,7 @@ public class QueryBuilderTest
     [Fact]
     public void Value_type_can_be_int()
     {
-        var sut = new QueryBuilder();
-
-        sut.Add("key", 42);
+        var sut = new QueryBuilder { { "key", 42 } };
 
         var actual = sut.Build();
 
@@ -55,11 +64,12 @@ public class QueryBuilderTest
     [Fact]
     public void Multiple_arguments_are_delimited_by_ampersand()
     {
-        var sut = new QueryBuilder();
-
-        sut.Add("key1", "first");
-        sut.Add("key2", "second");
-        sut.Add("key3", "third");
+        var sut = new QueryBuilder
+        {
+            { "key1", "first" },
+            { "key2", "second" },
+            { "key3", "third" }
+        };
 
         var actual = sut.Build();
 
@@ -70,11 +80,12 @@ public class QueryBuilderTest
     [Fact]
     public void Keys_can_have_multiple_occurrences()
     {
-        var sut = new QueryBuilder();
-
-        sut.Add("key", "first");
-        sut.Add("key", "second");
-        sut.Add("key", "third");
+        var sut = new QueryBuilder
+        {
+            { "key", "first" },
+            { "key", "second" },
+            { "key", "third" }
+        };
 
         var actual = sut.Build();
 
@@ -84,17 +95,17 @@ public class QueryBuilderTest
     [Fact]
     public void String_collections_are_converted_to_csv()
     {
-        var sut = new QueryBuilder();
-
-        sut.Add(
-            "key",
-            new[]
+        var sut = new QueryBuilder
+        {
             {
-                "first",
-                "second",
-                "third"
+                "key", new[]
+                {
+                    "first",
+                    "second",
+                    "third"
+                }
             }
-        );
+        };
 
         var actual = sut.Build();
 
@@ -104,17 +115,17 @@ public class QueryBuilderTest
     [Fact]
     public void Int_collections_are_converted_to_csv()
     {
-        var sut = new QueryBuilder();
-
-        sut.Add(
-            "key",
-            new[]
+        var sut = new QueryBuilder
+        {
             {
-                1,
-                2,
-                3
+                "key", new[]
+                {
+                    1,
+                    2,
+                    3
+                }
             }
-        );
+        };
 
         var actual = sut.Build();
 

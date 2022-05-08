@@ -34,8 +34,7 @@ public sealed class ColorsByIdsRequest : IHttpRequest<IReplicaSet<Dye>>
         CancellationToken cancellationToken
     )
     {
-        QueryBuilder search = new();
-        search.Add("ids", ColorIds);
+        QueryBuilder search = new() { { "ids", ColorIds } };
         var request = Template with
         {
             Arguments = search,

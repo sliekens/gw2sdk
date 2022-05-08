@@ -34,8 +34,7 @@ public sealed class SpecializationsByIdsRequest : IHttpRequest<IReplicaSet<Speci
         CancellationToken cancellationToken
     )
     {
-        QueryBuilder search = new();
-        search.Add("ids", SpecializationIds);
+        QueryBuilder search = new() { { "ids", SpecializationIds } };
         var request = Template with
         {
             Arguments = search,

@@ -32,8 +32,7 @@ public sealed class TitleByIdRequest : IHttpRequest<IReplica<Title>>
         CancellationToken cancellationToken
     )
     {
-        QueryBuilder search = new();
-        search.Add("id", TitleId);
+        QueryBuilder search = new() { { "id", TitleId } };
         var request = Template with { Arguments = search };
 
         using var response = await httpClient.SendAsync(

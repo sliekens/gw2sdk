@@ -30,8 +30,7 @@ public sealed class LegendaryItemByIdRequest : IHttpRequest<IReplica<LegendaryIt
         CancellationToken cancellationToken
     )
     {
-        QueryBuilder search = new();
-        search.Add("id", LegendaryItemId);
+        QueryBuilder search = new() { { "id", LegendaryItemId } };
         var request = Template with { Arguments = search };
 
         using var response = await httpClient.SendAsync(

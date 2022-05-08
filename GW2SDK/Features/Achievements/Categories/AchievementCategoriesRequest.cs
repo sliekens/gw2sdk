@@ -12,7 +12,11 @@ namespace GW2SDK.Achievements.Categories;
 public sealed class AchievementCategoriesRequest : IHttpRequest<IReplicaSet<AchievementCategory>>
 {
     private static readonly HttpRequestMessageTemplate Template =
-        new(Get, "/v2/achievements/categories") { AcceptEncoding = "gzip" };
+        new(Get, "/v2/achievements/categories")
+        {
+            AcceptEncoding = "gzip",
+            Arguments = new QueryBuilder { { "ids", "all" } }
+        };
 
     public Language? Language { get; init; }
 
@@ -23,13 +27,7 @@ public sealed class AchievementCategoriesRequest : IHttpRequest<IReplicaSet<Achi
         CancellationToken cancellationToken
     )
     {
-        QueryBuilder search = new();
-        search.Add("ids", "all");
-        var request = Template with
-        {
-            Arguments = search,
-            AcceptLanguage = Language?.Alpha2Code
-        };
+        var request = Template with { AcceptLanguage = Language?.Alpha2Code };
         using var response = await httpClient.SendAsync(
                 request.Compile(),
                 HttpCompletionOption.ResponseHeadersRead,

@@ -33,8 +33,7 @@ public sealed class ProfessionByNameRequest : IHttpRequest<IReplica<Profession>>
         CancellationToken cancellationToken
     )
     {
-        QueryBuilder search = new();
-        search.Add("id", ProfessionName.ToString());
+        QueryBuilder search = new() { { "id", ProfessionName.ToString() } };
         var request = Template with
         {
             Arguments = search,

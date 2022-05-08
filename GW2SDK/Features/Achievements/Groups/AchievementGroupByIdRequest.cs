@@ -31,8 +31,7 @@ public sealed class AchievementGroupByIdRequest : IHttpRequest<IReplica<Achievem
         CancellationToken cancellationToken
     )
     {
-        QueryBuilder search = new();
-        search.Add("id", AchievementGroupId);
+        QueryBuilder search = new() { { "id", AchievementGroupId } };
         var request = Template with
         {
             Arguments = search,

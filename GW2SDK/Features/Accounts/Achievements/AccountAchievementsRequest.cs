@@ -12,7 +12,11 @@ namespace GW2SDK.Accounts.Achievements;
 public sealed class AccountAchievementsRequest : IHttpRequest<IReplicaSet<AccountAchievement>>
 {
     private static readonly HttpRequestMessageTemplate Template =
-        new(Get, "/v2/account/achievements") { AcceptEncoding = "gzip" };
+        new(Get, "/v2/account/achievements")
+        {
+            AcceptEncoding = "gzip",
+            Arguments = new QueryBuilder { { "ids", "all" } }
+        };
 
     public string? AccessToken { get; init; }
 
@@ -23,13 +27,7 @@ public sealed class AccountAchievementsRequest : IHttpRequest<IReplicaSet<Accoun
         CancellationToken cancellationToken
     )
     {
-        QueryBuilder search = new();
-        search.Add("ids", "all");
-        var request = Template with
-        {
-            Arguments = search,
-            BearerToken = AccessToken
-        };
+        var request = Template with { BearerToken = AccessToken };
         using var response = await httpClient.SendAsync(
                 request.Compile(),
                 HttpCompletionOption.ResponseHeadersRead,

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,7 +11,7 @@ namespace GW2SDK.Http;
 
 /// <summary>Used to build a query string, e.g. <c>"id=123&amp;lang=fr"</c>. Not meant to be used directly.</summary>
 [PublicAPI]
-public sealed class QueryBuilder
+public sealed class QueryBuilder : IEnumerable
 {
     public static readonly QueryBuilder Empty = new() { frozen = true };
 
@@ -29,6 +30,8 @@ public sealed class QueryBuilder
     }
 
     public int Count => arguments.Count;
+
+    public IEnumerator GetEnumerator() => ((IEnumerable)arguments).GetEnumerator();
 
     public QueryBuilder Clone() => new(arguments);
 

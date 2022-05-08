@@ -11,7 +11,11 @@ namespace GW2SDK.Accounts.BuildStorage;
 public sealed class BuildStorageRequest : IHttpRequest<IReplicaSet<Build>>
 {
     private static readonly HttpRequestMessageTemplate Template =
-        new(HttpMethod.Get, "/v2/account/buildstorage") { AcceptEncoding = "gzip" };
+        new(HttpMethod.Get, "/v2/account/buildstorage")
+        {
+            AcceptEncoding = "gzip",
+            Arguments = new QueryBuilder { { "ids", "all" } }
+        };
 
     public string? AccessToken { get; init; }
 
@@ -22,13 +26,7 @@ public sealed class BuildStorageRequest : IHttpRequest<IReplicaSet<Build>>
         CancellationToken cancellationToken
     )
     {
-        QueryBuilder search = new();
-        search.Add("ids", "all");
-        var request = Template with
-        {
-            Arguments = search,
-            BearerToken = AccessToken
-        };
+        var request = Template with { BearerToken = AccessToken };
 
         using var response = await httpClient.SendAsync(
                 request.Compile(),

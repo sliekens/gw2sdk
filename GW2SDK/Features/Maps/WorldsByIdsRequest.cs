@@ -34,8 +34,7 @@ public sealed class WorldsByIdsRequest : IHttpRequest<IReplicaSet<World>>
         CancellationToken cancellationToken
     )
     {
-        QueryBuilder search = new();
-        search.Add("ids", WorldIds);
+        QueryBuilder search = new() { { "ids", WorldIds } };
         var request = Template with
         {
             Arguments = search,

@@ -34,8 +34,7 @@ public sealed class SkinsByIdsRequest : IHttpRequest<IReplicaSet<Skin>>
         CancellationToken cancellationToken
     )
     {
-        QueryBuilder search = new();
-        search.Add("ids", SkinIds);
+        QueryBuilder search = new() { { "ids", SkinIds } };
         var request = Template with
         {
             Arguments = search,

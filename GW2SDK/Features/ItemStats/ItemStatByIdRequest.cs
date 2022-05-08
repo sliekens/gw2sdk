@@ -32,8 +32,7 @@ public sealed class ItemStatByIdRequest : IHttpRequest<IReplica<ItemStat>>
         CancellationToken cancellationToken
     )
     {
-        QueryBuilder search = new();
-        search.Add("id", ItemStatId);
+        QueryBuilder search = new() { { "id", ItemStatId } };
         var request = Template with
         {
             Arguments = search,

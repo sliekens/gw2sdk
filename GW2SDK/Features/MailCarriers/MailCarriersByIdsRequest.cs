@@ -34,8 +34,7 @@ public sealed class MailCarriersByIdsRequest : IHttpRequest<IReplicaSet<MailCarr
         CancellationToken cancellationToken
     )
     {
-        QueryBuilder search = new();
-        search.Add("ids", MailCarrierIds);
+        QueryBuilder search = new() { { "ids", MailCarrierIds } };
         var request = Template with
         {
             Arguments = search,

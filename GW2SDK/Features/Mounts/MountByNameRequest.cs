@@ -33,8 +33,7 @@ public sealed class MountByNameRequest : IHttpRequest<IReplica<Mount>>
         CancellationToken cancellationToken
     )
     {
-        QueryBuilder search = new();
-        search.Add("id", MountNameFormatter.FormatMountName(MountName));
+        QueryBuilder search = new() { { "id", MountNameFormatter.FormatMountName(MountName) } };
         var request = Template with
         {
             Arguments = search,

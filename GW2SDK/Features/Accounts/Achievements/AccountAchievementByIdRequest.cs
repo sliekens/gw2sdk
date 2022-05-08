@@ -30,8 +30,7 @@ public sealed class AccountAchievementByIdRequest : IHttpRequest<IReplica<Accoun
         CancellationToken cancellationToken
     )
     {
-        QueryBuilder search = new();
-        search.Add("id", AchievementId);
+        QueryBuilder search = new() { { "id", AchievementId } };
         var request = Template with
         {
             Arguments = search,

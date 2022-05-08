@@ -34,8 +34,7 @@ public sealed class MaterialCategoriesByIdsRequest : IHttpRequest<IReplicaSet<Ma
         CancellationToken cancellationToken
     )
     {
-        QueryBuilder search = new();
-        search.Add("ids", MaterialCategoriesIds);
+        QueryBuilder search = new() { { "ids", MaterialCategoriesIds } };
         var request = Template with
         {
             Arguments = search,

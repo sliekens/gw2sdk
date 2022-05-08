@@ -34,8 +34,7 @@ public sealed class TraitsByIdsRequest : IHttpRequest<IReplicaSet<Trait>>
         CancellationToken cancellationToken
     )
     {
-        QueryBuilder search = new();
-        search.Add("ids", TraitIds);
+        QueryBuilder search = new() { { "ids", TraitIds } };
         var request = Template with
         {
             Arguments = search,

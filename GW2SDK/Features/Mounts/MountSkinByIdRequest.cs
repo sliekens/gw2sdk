@@ -32,8 +32,7 @@ public sealed class MountSkinByIdRequest : IHttpRequest<IReplica<MountSkin>>
         CancellationToken cancellationToken
     )
     {
-        QueryBuilder search = new();
-        search.Add("id", MountSkinId);
+        QueryBuilder search = new() { { "id", MountSkinId } };
         var request = Template with
         {
             Arguments = search,

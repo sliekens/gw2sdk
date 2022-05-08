@@ -35,9 +35,11 @@ public sealed class RecipesByOutputItemIdByPageRequest : IHttpRequest<IReplicaPa
         CancellationToken cancellationToken
     )
     {
-        QueryBuilder search = new();
-        search.Add("output", OutputItemId);
-        search.Add("page", PageIndex);
+        QueryBuilder search = new()
+        {
+            { "output", OutputItemId },
+            { "page", PageIndex }
+        };
         if (PageSize.HasValue)
         {
             search.Add("page_size", PageSize.Value);

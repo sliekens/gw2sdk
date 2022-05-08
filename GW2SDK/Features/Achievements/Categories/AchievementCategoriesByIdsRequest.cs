@@ -33,8 +33,7 @@ public sealed class
         CancellationToken cancellationToken
     )
     {
-        QueryBuilder search = new();
-        search.Add("ids", AchievementCategoryIds);
+        QueryBuilder search = new() { { "ids", AchievementCategoryIds } };
         var request = Template with
         {
             Arguments = search,

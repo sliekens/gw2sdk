@@ -35,9 +35,11 @@ public sealed class RecipesByIngredientItemIdByPageRequest : IHttpRequest<IRepli
         CancellationToken cancellationToken
     )
     {
-        QueryBuilder search = new();
-        search.Add("input", IngredientItemId);
-        search.Add("page", PageIndex);
+        QueryBuilder search = new()
+        {
+            { "input", IngredientItemId },
+            { "page", PageIndex }
+        };
         if (PageSize.HasValue)
         {
             search.Add("page_size", PageSize.Value);

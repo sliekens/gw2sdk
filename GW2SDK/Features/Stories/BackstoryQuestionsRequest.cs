@@ -12,7 +12,11 @@ namespace GW2SDK.Stories;
 public sealed class BackstoryQuestionsRequest : IHttpRequest<IReplicaSet<BackstoryQuestion>>
 {
     private static readonly HttpRequestMessageTemplate Template =
-        new(Get, "/v2/backstory/questions") { AcceptEncoding = "gzip" };
+        new(Get, "/v2/backstory/questions")
+        {
+            AcceptEncoding = "gzip",
+            Arguments = new QueryBuilder { { "ids", "all" } }
+        };
 
     public Language? Language { get; init; }
 
@@ -23,13 +27,7 @@ public sealed class BackstoryQuestionsRequest : IHttpRequest<IReplicaSet<Backsto
         CancellationToken cancellationToken
     )
     {
-        QueryBuilder search = new();
-        search.Add("ids", "all");
-        var request = Template with
-        {
-            Arguments = search,
-            AcceptLanguage = Language?.Alpha2Code
-        };
+        var request = Template with { AcceptLanguage = Language?.Alpha2Code };
 
         using var response = await httpClient.SendAsync(
                 request.Compile(),

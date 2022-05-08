@@ -32,8 +32,7 @@ public sealed class CurrencyByIdRequest : IHttpRequest<IReplica<Currency>>
         CancellationToken cancellationToken
     )
     {
-        QueryBuilder search = new();
-        search.Add("id", CurrencyId);
+        QueryBuilder search = new() { { "id", CurrencyId } };
         var request = Template with
         {
             Arguments = search,

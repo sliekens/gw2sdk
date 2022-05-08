@@ -13,7 +13,8 @@ public sealed class QuaggansRequest : IHttpRequest<IReplicaSet<Quaggan>>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "/v2/quaggans")
     {
-        AcceptEncoding = "gzip"
+        AcceptEncoding = "gzip",
+        Arguments = new QueryBuilder { { "ids", "all" } }
     };
 
     public MissingMemberBehavior MissingMemberBehavior { get; init; }
@@ -23,12 +24,8 @@ public sealed class QuaggansRequest : IHttpRequest<IReplicaSet<Quaggan>>
         CancellationToken cancellationToken
     )
     {
-        QueryBuilder search = new();
-        search.Add("ids", "all");
-        var request = Template with { Arguments = search };
-
         using var response = await httpClient.SendAsync(
-                request.Compile(),
+                Template.Compile(),
                 HttpCompletionOption.ResponseHeadersRead,
                 cancellationToken
             )

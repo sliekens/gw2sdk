@@ -34,8 +34,7 @@ public sealed class BackstoryAnswersByIdsRequest : IHttpRequest<IReplicaSet<Back
         CancellationToken cancellationToken
     )
     {
-        QueryBuilder search = new();
-        search.Add("ids", AnswerIds);
+        QueryBuilder search = new() { { "ids", AnswerIds } };
         var request = Template with
         {
             Arguments = search,

@@ -32,8 +32,7 @@ public sealed class MasteryByIdRequest : IHttpRequest<IReplica<Mastery>>
         CancellationToken cancellationToken
     )
     {
-        QueryBuilder search = new();
-        search.Add("id", MasteryId);
+        QueryBuilder search = new() { { "id", MasteryId } };
         var request = Template with
         {
             Arguments = search,

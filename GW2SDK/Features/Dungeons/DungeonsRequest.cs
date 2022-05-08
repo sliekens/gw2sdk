@@ -11,7 +11,11 @@ namespace GW2SDK.Dungeons;
 public sealed class DungeonsRequest : IHttpRequest<IReplicaSet<Dungeon>>
 {
     private static readonly HttpRequestMessageTemplate Template =
-        new(HttpMethod.Get, "/v2/dungeons") { AcceptEncoding = "gzip" };
+        new(HttpMethod.Get, "/v2/dungeons")
+        {
+            AcceptEncoding = "gzip",
+            Arguments = new QueryBuilder { { "ids", "all" } }
+        };
 
     public MissingMemberBehavior MissingMemberBehavior { get; init; }
 
@@ -20,12 +24,8 @@ public sealed class DungeonsRequest : IHttpRequest<IReplicaSet<Dungeon>>
         CancellationToken cancellationToken
     )
     {
-        QueryBuilder search = new();
-        search.Add("ids", "all");
-        var request = Template with { Arguments = search };
-
         using var response = await httpClient.SendAsync(
-                request.Compile(),
+                Template.Compile(),
                 HttpCompletionOption.ResponseHeadersRead,
                 cancellationToken
             )

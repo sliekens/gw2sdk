@@ -10,27 +10,23 @@ public sealed record HttpRequestMessageTemplate(HttpMethod Method, string Path)
 {
     private QueryBuilder queryBuilder = QueryBuilder.Empty;
 
-    public HttpMethod Method { get; set; } = Method;
+    public string? AcceptEncoding { get; init; }
 
-    public string Path { get; set; } = Path;
+    public string? AcceptLanguage { get; init; }
 
-    public string? AcceptEncoding { get; set; }
-
-    public string? AcceptLanguage { get; set; }
-
-    public string? BearerToken { get; set; }
+    public string? BearerToken { get; init; }
 
     public QueryBuilder Arguments
     {
         get => queryBuilder;
-        set
+        init
         {
             queryBuilder = value;
             queryBuilder.Freeze();
         }
     }
 
-    public SchemaVersion? SchemaVersion { get; set; } = SchemaVersion.Recommended;
+    public SchemaVersion? SchemaVersion { get; init; } = SchemaVersion.Recommended;
 
     public HttpRequestMessage Compile()
     {

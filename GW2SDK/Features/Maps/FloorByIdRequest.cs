@@ -34,8 +34,7 @@ public sealed class FloorByIdRequest : IHttpRequest<IReplica<Floor>>
         CancellationToken cancellationToken
     )
     {
-        QueryBuilder search = new();
-        search.Add("id", FloorId);
+        QueryBuilder search = new() { { "id", FloorId } };
         var request = Template with
         {
             Path = Template.Path.Replace(

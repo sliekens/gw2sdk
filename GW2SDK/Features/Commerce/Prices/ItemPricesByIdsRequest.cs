@@ -32,8 +32,7 @@ public sealed class ItemPricesByIdsRequest : IHttpRequest<IReplicaSet<ItemPrice>
         CancellationToken cancellationToken
     )
     {
-        QueryBuilder search = new();
-        search.Add("ids", ItemIds);
+        QueryBuilder search = new() { { "ids", ItemIds } };
         var request = Template with { Arguments = search };
 
         using var response = await httpClient.SendAsync(

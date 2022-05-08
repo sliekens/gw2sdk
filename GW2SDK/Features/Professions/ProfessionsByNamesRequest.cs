@@ -35,8 +35,7 @@ public sealed class ProfessionsByNamesRequest : IHttpRequest<IReplicaSet<Profess
         CancellationToken cancellationToken
     )
     {
-        QueryBuilder search = new();
-        search.Add("ids", ProfessionNames.Select(name => name.ToString()));
+        QueryBuilder search = new() { { "ids", ProfessionNames.Select(name => name.ToString()) } };
         var request = Template with
         {
             Arguments = search,

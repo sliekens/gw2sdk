@@ -34,8 +34,7 @@ public sealed class CurrenciesByPageRequest : IHttpRequest<IReplicaPage<Currency
         CancellationToken cancellationToken
     )
     {
-        QueryBuilder search = new();
-        search.Add("page", PageIndex);
+        QueryBuilder search = new() { { "page", PageIndex } };
         if (PageSize.HasValue)
         {
             search.Add("page_size", PageSize.Value);

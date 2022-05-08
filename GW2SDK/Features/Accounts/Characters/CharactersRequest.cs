@@ -13,7 +13,8 @@ public sealed class CharactersRequest : IHttpRequest<IReplicaSet<Character>>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "/v2/characters")
     {
-        AcceptEncoding = "gzip"
+        AcceptEncoding = "gzip",
+        Arguments = new QueryBuilder { { "ids", "all" } }
     };
 
     public string? AccessToken { get; init; }
@@ -25,13 +26,7 @@ public sealed class CharactersRequest : IHttpRequest<IReplicaSet<Character>>
         CancellationToken cancellationToken
     )
     {
-        QueryBuilder search = new();
-        search.Add("ids", "all");
-        var request = Template with
-        {
-            BearerToken = AccessToken,
-            Arguments = search
-        };
+        var request = Template with { BearerToken = AccessToken };
 
         using var response = await httpClient.SendAsync(
                 request.Compile(),

@@ -1,4 +1,4 @@
-using System.Net.Http;
+﻿using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 using GW2SDK.Http;
@@ -11,7 +11,11 @@ namespace GW2SDK.Armory;
 public sealed class LegendaryItemsRequest : IHttpRequest<IReplicaSet<LegendaryItem>>
 {
     private static readonly HttpRequestMessageTemplate Template =
-        new(HttpMethod.Get, "/v2/legendaryarmory") { AcceptEncoding = "gzip" };
+        new(HttpMethod.Get, "/v2/legendaryarmory")
+        {
+            AcceptEncoding = "gzip",
+            Arguments = new QueryBuilder { { "ids", "all" } }
+        };
 
     public MissingMemberBehavior MissingMemberBehavior { get; init; }
 
@@ -20,12 +24,8 @@ public sealed class LegendaryItemsRequest : IHttpRequest<IReplicaSet<LegendaryIt
         CancellationToken cancellationToken
     )
     {
-        QueryBuilder search = new();
-        search.Add("ids", "all");
-        var request = Template with { Arguments = search };
-
         using var response = await httpClient.SendAsync(
-                request.Compile(),
+                Template.Compile(),
                 HttpCompletionOption.ResponseHeadersRead,
                 cancellationToken
             )

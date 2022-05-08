@@ -32,8 +32,7 @@ public sealed class MailCarrierByIdRequest : IHttpRequest<IReplica<MailCarrier>>
         CancellationToken cancellationToken
     )
     {
-        QueryBuilder search = new();
-        search.Add("id", MailCarrierId);
+        QueryBuilder search = new() { { "id", MailCarrierId } };
         var request = Template with
         {
             Arguments = search,

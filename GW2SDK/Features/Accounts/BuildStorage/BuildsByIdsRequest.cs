@@ -30,8 +30,7 @@ public sealed class BuildsByIdsRequest : IHttpRequest<IReplicaSet<Build>>
         CancellationToken cancellationToken
     )
     {
-        QueryBuilder search = new();
-        search.Add("ids", BuildStorageIds);
+        QueryBuilder search = new() { { "ids", BuildStorageIds } };
         var request = Template with
         {
             Arguments = search,

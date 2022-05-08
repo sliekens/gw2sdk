@@ -30,8 +30,7 @@ public sealed class BackstoryQuestionByIdRequest : IHttpRequest<IReplica<Backsto
         CancellationToken cancellationToken
     )
     {
-        QueryBuilder search = new();
-        search.Add("id", QuestionId);
+        QueryBuilder search = new() { { "id", QuestionId } };
         var request = Template with
         {
             Arguments = search,

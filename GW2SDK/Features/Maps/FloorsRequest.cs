@@ -13,7 +13,11 @@ namespace GW2SDK.Maps;
 public sealed class FloorsRequest : IHttpRequest<IReplicaSet<Floor>>
 {
     private static readonly HttpRequestMessageTemplate Template =
-        new(Get, "/v2/continents/:id/floors") { AcceptEncoding = "gzip" };
+        new(Get, "/v2/continents/:id/floors")
+        {
+            AcceptEncoding = "gzip",
+            Arguments = new QueryBuilder { { "ids", "all" } }
+        };
 
     public FloorsRequest(int continentId)
     {
@@ -31,15 +35,12 @@ public sealed class FloorsRequest : IHttpRequest<IReplicaSet<Floor>>
         CancellationToken cancellationToken
     )
     {
-        QueryBuilder search = new();
-        search.Add("ids", "all");
         var request = Template with
         {
             Path = Template.Path.Replace(
                 ":id",
                 ContinentId.ToString(CultureInfo.InvariantCulture)
             ),
-            Arguments = search,
             AcceptLanguage = Language?.Alpha2Code
         };
 

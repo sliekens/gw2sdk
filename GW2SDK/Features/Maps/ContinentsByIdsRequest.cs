@@ -34,8 +34,7 @@ public sealed class ContinentsByIdsRequest : IHttpRequest<IReplicaSet<Continent>
         CancellationToken cancellationToken
     )
     {
-        QueryBuilder search = new();
-        search.Add("ids", ContinentIds);
+        QueryBuilder search = new() { { "ids", ContinentIds } };
         var request = Template with
         {
             Arguments = search,

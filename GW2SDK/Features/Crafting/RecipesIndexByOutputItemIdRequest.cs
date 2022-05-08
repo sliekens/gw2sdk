@@ -28,8 +28,7 @@ public sealed class RecipesIndexByOutputItemIdRequest : IHttpRequest<IReplicaSet
         CancellationToken cancellationToken
     )
     {
-        QueryBuilder search = new();
-        search.Add("output", OutputItemId);
+        QueryBuilder search = new() { { "output", OutputItemId } };
         var request = Template with { Arguments = search };
 
         using var response = await httpClient.SendAsync(
