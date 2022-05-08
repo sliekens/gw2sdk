@@ -26,18 +26,16 @@ public sealed class DailyAchievementsRequest : IHttpRequest<IReplica<DailyAchiev
         CancellationToken cancellationToken
     )
     {
-        var request = Template with
-        {
-            Path = Day switch
-            {
-                Day.Today => Template.Path,
-                Day.Tomorrow => Template.Path + "/tomorrow",
-                _ => throw new ArgumentOutOfRangeException()
-            }
-        };
         using var response = await httpClient.SendAsync(
-                request.Compile(),
-                HttpCompletionOption.ResponseHeadersRead,
+                Template with
+                {
+                    Path = Day switch
+                    {
+                        Day.Today => Template.Path,
+                        Day.Tomorrow => Template.Path + "/tomorrow",
+                        _ => throw new ArgumentOutOfRangeException()
+                    }
+                },
                 cancellationToken
             )
             .ConfigureAwait(false);

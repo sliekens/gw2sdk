@@ -32,16 +32,12 @@ public sealed class CurrencyByIdRequest : IHttpRequest<IReplica<Currency>>
         CancellationToken cancellationToken
     )
     {
-        QueryBuilder search = new() { { "id", CurrencyId } };
-        var request = Template with
-        {
-            Arguments = search,
-            AcceptLanguage = Language?.Alpha2Code
-        };
-
         using var response = await httpClient.SendAsync(
-                request.Compile(),
-                HttpCompletionOption.ResponseHeadersRead,
+                Template with
+                {
+                    Arguments = new QueryBuilder { { "id", CurrencyId } },
+                    AcceptLanguage = Language?.Alpha2Code
+                },
                 cancellationToken
             )
             .ConfigureAwait(false);

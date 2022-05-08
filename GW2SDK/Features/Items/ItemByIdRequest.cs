@@ -32,16 +32,12 @@ public sealed class ItemByIdRequest : IHttpRequest<IReplica<Item>>
         CancellationToken cancellationToken
     )
     {
-        QueryBuilder search = new() { { "id", ItemId } };
-        var request = Template with
-        {
-            AcceptLanguage = Language?.Alpha2Code,
-            Arguments = search
-        };
-
         using var response = await httpClient.SendAsync(
-                request.Compile(),
-                HttpCompletionOption.ResponseHeadersRead,
+                Template with
+                {
+                    AcceptLanguage = Language?.Alpha2Code,
+                    Arguments = new QueryBuilder { { "id", ItemId } }
+                },
                 cancellationToken
             )
             .ConfigureAwait(false);

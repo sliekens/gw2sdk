@@ -32,12 +32,8 @@ public sealed class OrderBooksByIdsRequest : IHttpRequest<IReplicaSet<OrderBook>
         CancellationToken cancellationToken
     )
     {
-        QueryBuilder search = new() { { "ids", ItemIds } };
-        var request = Template with { Arguments = search };
-
         using var response = await httpClient.SendAsync(
-                request.Compile(),
-                HttpCompletionOption.ResponseHeadersRead,
+                Template with { Arguments = new QueryBuilder { { "ids", ItemIds } } },
                 cancellationToken
             )
             .ConfigureAwait(false);

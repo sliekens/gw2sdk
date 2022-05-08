@@ -31,16 +31,12 @@ public sealed class AchievementGroupByIdRequest : IHttpRequest<IReplica<Achievem
         CancellationToken cancellationToken
     )
     {
-        QueryBuilder search = new() { { "id", AchievementGroupId } };
-        var request = Template with
-        {
-            Arguments = search,
-            AcceptLanguage = Language?.Alpha2Code
-        };
-
         using var response = await httpClient.SendAsync(
-                request.Compile(),
-                HttpCompletionOption.ResponseHeadersRead,
+                Template with
+                {
+                    Arguments = new QueryBuilder { { "id", AchievementGroupId } },
+                    AcceptLanguage = Language?.Alpha2Code
+                },
                 cancellationToken
             )
             .ConfigureAwait(false);

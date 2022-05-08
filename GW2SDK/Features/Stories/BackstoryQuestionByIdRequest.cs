@@ -30,16 +30,12 @@ public sealed class BackstoryQuestionByIdRequest : IHttpRequest<IReplica<Backsto
         CancellationToken cancellationToken
     )
     {
-        QueryBuilder search = new() { { "id", QuestionId } };
-        var request = Template with
-        {
-            Arguments = search,
-            AcceptLanguage = Language?.Alpha2Code
-        };
-
         using var response = await httpClient.SendAsync(
-                request.Compile(),
-                HttpCompletionOption.ResponseHeadersRead,
+                Template with
+                {
+                    Arguments = new QueryBuilder { { "id", QuestionId } },
+                    AcceptLanguage = Language?.Alpha2Code
+                },
                 cancellationToken
             )
             .ConfigureAwait(false);

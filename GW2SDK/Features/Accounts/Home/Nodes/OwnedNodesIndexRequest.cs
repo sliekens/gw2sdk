@@ -26,11 +26,8 @@ public sealed class OwnedNodesIndexRequest : IHttpRequest<IReplica<IReadOnlyColl
         CancellationToken cancellationToken
     )
     {
-        var request = Template with { BearerToken = AccessToken };
-
         using var response = await httpClient.SendAsync(
-                request.Compile(),
-                HttpCompletionOption.ResponseHeadersRead,
+                Template with { BearerToken = AccessToken },
                 cancellationToken
             )
             .ConfigureAwait(false);

@@ -45,11 +45,8 @@ public sealed class RecipesByIngredientItemIdByPageRequest : IHttpRequest<IRepli
             search.Add("page_size", PageSize.Value);
         }
 
-        var request = Template with { Arguments = search };
-
         using var response = await httpClient.SendAsync(
-                request.Compile(),
-                HttpCompletionOption.ResponseHeadersRead,
+                Template with { Arguments = search },
                 cancellationToken
             )
             .ConfigureAwait(false);

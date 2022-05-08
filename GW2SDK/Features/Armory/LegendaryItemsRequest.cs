@@ -24,12 +24,8 @@ public sealed class LegendaryItemsRequest : IHttpRequest<IReplicaSet<LegendaryIt
         CancellationToken cancellationToken
     )
     {
-        using var response = await httpClient.SendAsync(
-                Template.Compile(),
-                HttpCompletionOption.ResponseHeadersRead,
-                cancellationToken
-            )
-            .ConfigureAwait(false);
+        using var response =
+            await httpClient.SendAsync(Template, cancellationToken).ConfigureAwait(false);
 
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
 

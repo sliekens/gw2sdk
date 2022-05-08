@@ -34,16 +34,12 @@ public sealed class SkinsByIdsRequest : IHttpRequest<IReplicaSet<Skin>>
         CancellationToken cancellationToken
     )
     {
-        QueryBuilder search = new() { { "ids", SkinIds } };
-        var request = Template with
-        {
-            Arguments = search,
-            AcceptLanguage = Language?.Alpha2Code
-        };
-
         using var response = await httpClient.SendAsync(
-                request.Compile(),
-                HttpCompletionOption.ResponseHeadersRead,
+                Template with
+                {
+                    Arguments = new QueryBuilder { { "ids", SkinIds } },
+                    AcceptLanguage = Language?.Alpha2Code
+                },
                 cancellationToken
             )
             .ConfigureAwait(false);

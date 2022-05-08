@@ -30,16 +30,15 @@ public sealed class RecipesByIngredientItemIdRequest : IHttpRequest<IReplicaSet<
         CancellationToken cancellationToken
     )
     {
-        QueryBuilder search = new()
-        {
-            { "input", IngredientItemId },
-            { "ids", "all" }
-        };
-        var request = Template with { Arguments = search };
-
         using var response = await httpClient.SendAsync(
-                request.Compile(),
-                HttpCompletionOption.ResponseHeadersRead,
+                Template with
+                {
+                    Arguments = new QueryBuilder
+                    {
+                        { "input", IngredientItemId },
+                        { "ids", "all" }
+                    }
+                },
                 cancellationToken
             )
             .ConfigureAwait(false);

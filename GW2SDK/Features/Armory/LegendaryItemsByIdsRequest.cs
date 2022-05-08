@@ -32,12 +32,8 @@ public sealed class LegendaryItemsByIdsRequest : IHttpRequest<IReplicaSet<Legend
         CancellationToken cancellationToken
     )
     {
-        QueryBuilder search = new() { { "ids", LegendaryItemIds } };
-        var request = Template with { Arguments = search };
-
         using var response = await httpClient.SendAsync(
-                request.Compile(),
-                HttpCompletionOption.ResponseHeadersRead,
+                Template with { Arguments = new QueryBuilder { { "ids", LegendaryItemIds } } },
                 cancellationToken
             )
             .ConfigureAwait(false);

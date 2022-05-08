@@ -30,16 +30,12 @@ public sealed class AccountAchievementByIdRequest : IHttpRequest<IReplica<Accoun
         CancellationToken cancellationToken
     )
     {
-        QueryBuilder search = new() { { "id", AchievementId } };
-        var request = Template with
-        {
-            Arguments = search,
-            BearerToken = AccessToken
-        };
-
         using var response = await httpClient.SendAsync(
-                request.Compile(),
-                HttpCompletionOption.ResponseHeadersRead,
+                Template with
+                {
+                    Arguments = new QueryBuilder { { "id", AchievementId } },
+                    BearerToken = AccessToken
+                },
                 cancellationToken
             )
             .ConfigureAwait(false);

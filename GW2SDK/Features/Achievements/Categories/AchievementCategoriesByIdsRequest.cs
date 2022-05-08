@@ -33,15 +33,12 @@ public sealed class
         CancellationToken cancellationToken
     )
     {
-        QueryBuilder search = new() { { "ids", AchievementCategoryIds } };
-        var request = Template with
-        {
-            Arguments = search,
-            AcceptLanguage = Language?.Alpha2Code
-        };
         using var response = await httpClient.SendAsync(
-                request.Compile(),
-                HttpCompletionOption.ResponseHeadersRead,
+                Template with
+                {
+                    Arguments = new QueryBuilder { { "ids", AchievementCategoryIds } },
+                    AcceptLanguage = Language?.Alpha2Code
+                },
                 cancellationToken
             )
             .ConfigureAwait(false);

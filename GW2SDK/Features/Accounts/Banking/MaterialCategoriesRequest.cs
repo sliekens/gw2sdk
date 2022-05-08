@@ -26,10 +26,8 @@ public sealed class MaterialCategoriesRequest : IHttpRequest<IReplicaSet<Materia
         CancellationToken cancellationToken
     )
     {
-        var request = Template with { AcceptLanguage = Language?.Alpha2Code };
         using var response = await httpClient.SendAsync(
-                request.Compile(),
-                HttpCompletionOption.ResponseHeadersRead,
+                Template with { AcceptLanguage = Language?.Alpha2Code },
                 cancellationToken
             )
             .ConfigureAwait(false);

@@ -28,12 +28,8 @@ public sealed class ExchangeGemsForGoldRequest : IHttpRequest<IReplica<GemsForGo
         CancellationToken cancellationToken
     )
     {
-        QueryBuilder search = new() { { "quantity", GemsCount } };
-        var request = Template with { Arguments = search };
-
         using var response = await httpClient.SendAsync(
-                request.Compile(),
-                HttpCompletionOption.ResponseHeadersRead,
+                Template with { Arguments = new QueryBuilder { { "quantity", GemsCount } } },
                 cancellationToken
             )
             .ConfigureAwait(false);

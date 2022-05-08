@@ -30,12 +30,8 @@ public sealed class ItemPriceByIdRequest : IHttpRequest<IReplica<ItemPrice>>
         CancellationToken cancellationToken
     )
     {
-        QueryBuilder search = new() { { "id", ItemId } };
-        var request = Template with { Arguments = search };
-
         using var response = await httpClient.SendAsync(
-                request.Compile(),
-                HttpCompletionOption.ResponseHeadersRead,
+                Template with { Arguments = new QueryBuilder { { "id", ItemId } } },
                 cancellationToken
             )
             .ConfigureAwait(false);

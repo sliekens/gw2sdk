@@ -29,15 +29,12 @@ public sealed class InventoryRequest : IHttpRequest<IReplica<Baggage>>
         CancellationToken cancellationToken
     )
     {
-        var request = Template with
-        {
-            Path = Template.Path.Replace(":id", CharacterName),
-            BearerToken = AccessToken
-        };
-
         using var response = await httpClient.SendAsync(
-                request.Compile(),
-                HttpCompletionOption.ResponseHeadersRead,
+                Template with
+                {
+                    Path = Template.Path.Replace(":id", CharacterName),
+                    BearerToken = AccessToken
+                },
                 cancellationToken
             )
             .ConfigureAwait(false);

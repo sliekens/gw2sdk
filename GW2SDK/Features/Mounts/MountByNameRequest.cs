@@ -33,16 +33,13 @@ public sealed class MountByNameRequest : IHttpRequest<IReplica<Mount>>
         CancellationToken cancellationToken
     )
     {
-        QueryBuilder search = new() { { "id", MountNameFormatter.FormatMountName(MountName) } };
-        var request = Template with
-        {
-            Arguments = search,
-            AcceptLanguage = Language?.Alpha2Code
-        };
-
         using var response = await httpClient.SendAsync(
-                request.Compile(),
-                HttpCompletionOption.ResponseHeadersRead,
+                Template with
+                {
+                    Arguments =
+                    new QueryBuilder { { "id", MountNameFormatter.FormatMountName(MountName) } },
+                    AcceptLanguage = Language?.Alpha2Code
+                },
                 cancellationToken
             )
             .ConfigureAwait(false);

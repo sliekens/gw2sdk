@@ -27,10 +27,8 @@ public sealed class AccountAchievementsRequest : IHttpRequest<IReplicaSet<Accoun
         CancellationToken cancellationToken
     )
     {
-        var request = Template with { BearerToken = AccessToken };
         using var response = await httpClient.SendAsync(
-                request.Compile(),
-                HttpCompletionOption.ResponseHeadersRead,
+                Template with { BearerToken = AccessToken },
                 cancellationToken
             )
             .ConfigureAwait(false);

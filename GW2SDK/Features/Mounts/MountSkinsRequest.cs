@@ -25,16 +25,12 @@ public sealed class MountSkinsRequest : IHttpRequest<IReplicaSet<MountSkin>>
         CancellationToken cancellationToken
     )
     {
-        QueryBuilder search = new() { { "ids", "all" } };
-        var request = Template with
-        {
-            Arguments = search,
-            AcceptLanguage = Language?.Alpha2Code
-        };
-
         using var response = await httpClient.SendAsync(
-                request.Compile(),
-                HttpCompletionOption.ResponseHeadersRead,
+                Template with
+                {
+                    Arguments = new QueryBuilder { { "ids", "all" } },
+                    AcceptLanguage = Language?.Alpha2Code
+                },
                 cancellationToken
             )
             .ConfigureAwait(false);

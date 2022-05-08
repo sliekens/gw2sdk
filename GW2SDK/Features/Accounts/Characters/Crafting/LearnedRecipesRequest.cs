@@ -31,17 +31,12 @@ public sealed class LearnedRecipesRequest : IHttpRequest<IReplica<IReadOnlyColle
         CancellationToken cancellationToken
     )
     {
-        QueryBuilder search = new();
-        var request = Template with
-        {
-            Path = Template.Path.Replace(":id", CharacterName),
-            Arguments = search,
-            BearerToken = AccessToken
-        };
-
         using var response = await httpClient.SendAsync(
-                request.Compile(),
-                HttpCompletionOption.ResponseHeadersRead,
+                Template with
+                {
+                    Path = Template.Path.Replace(":id", CharacterName),
+                    BearerToken = AccessToken
+                },
                 cancellationToken
             )
             .ConfigureAwait(false);

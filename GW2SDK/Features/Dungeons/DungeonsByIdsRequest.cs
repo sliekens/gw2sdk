@@ -29,12 +29,8 @@ public sealed class DungeonsByIdsRequest : IHttpRequest<IReplicaSet<Dungeon>>
         CancellationToken cancellationToken
     )
     {
-        QueryBuilder search = new() { { "ids", DungeonIds } };
-        var request = Template with { Arguments = search };
-
         using var response = await httpClient.SendAsync(
-                request.Compile(),
-                HttpCompletionOption.ResponseHeadersRead,
+                Template with { Arguments = new QueryBuilder { { "ids", DungeonIds } } },
                 cancellationToken
             )
             .ConfigureAwait(false);

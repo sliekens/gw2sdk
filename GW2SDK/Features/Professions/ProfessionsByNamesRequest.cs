@@ -35,16 +35,13 @@ public sealed class ProfessionsByNamesRequest : IHttpRequest<IReplicaSet<Profess
         CancellationToken cancellationToken
     )
     {
-        QueryBuilder search = new() { { "ids", ProfessionNames.Select(name => name.ToString()) } };
-        var request = Template with
-        {
-            Arguments = search,
-            AcceptLanguage = Language?.Alpha2Code
-        };
-
         using var response = await httpClient.SendAsync(
-                request.Compile(),
-                HttpCompletionOption.ResponseHeadersRead,
+                Template with
+                {
+                    Arguments =
+                    new QueryBuilder { { "ids", ProfessionNames.Select(name => name.ToString()) } },
+                    AcceptLanguage = Language?.Alpha2Code
+                },
                 cancellationToken
             )
             .ConfigureAwait(false);

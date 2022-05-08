@@ -24,16 +24,8 @@ public sealed class UnlockedRecipesRequest : IHttpRequest<IReplica<IReadOnlyColl
         CancellationToken cancellationToken
     )
     {
-        QueryBuilder search = new();
-        var request = Template with
-        {
-            Arguments = search,
-            BearerToken = AccessToken
-        };
-
         using var response = await httpClient.SendAsync(
-                request.Compile(),
-                HttpCompletionOption.ResponseHeadersRead,
+                Template with { BearerToken = AccessToken },
                 cancellationToken
             )
             .ConfigureAwait(false);

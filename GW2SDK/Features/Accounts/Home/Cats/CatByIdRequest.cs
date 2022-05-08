@@ -27,12 +27,8 @@ public sealed class CatByIdRequest : IHttpRequest<IReplica<Cat>>
         CancellationToken cancellationToken
     )
     {
-        QueryBuilder search = new() { { "id", CatId } };
-        var request = Template with { Arguments = search };
-
         using var response = await httpClient.SendAsync(
-                request.Compile(),
-                HttpCompletionOption.ResponseHeadersRead,
+                Template with { Arguments = new QueryBuilder { { "id", CatId } } },
                 cancellationToken
             )
             .ConfigureAwait(false);

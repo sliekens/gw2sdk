@@ -1,4 +1,4 @@
-using System.Net.Http;
+﻿using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 using GW2SDK.Http;
@@ -18,12 +18,8 @@ public sealed class LegendaryItemsIndexRequest : IHttpRequest<IReplicaSet<int>>
         CancellationToken cancellationToken
     )
     {
-        using var response = await httpClient.SendAsync(
-                Template.Compile(),
-                HttpCompletionOption.ResponseHeadersRead,
-                cancellationToken
-            )
-            .ConfigureAwait(false);
+        using var response =
+            await httpClient.SendAsync(Template, cancellationToken).ConfigureAwait(false);
 
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
 

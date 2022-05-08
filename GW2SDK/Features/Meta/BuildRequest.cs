@@ -20,15 +20,8 @@ public sealed class BuildRequest : IHttpRequest<IReplica<Build>>
         CancellationToken cancellationToken
     )
     {
-        QueryBuilder search = new();
-        var request = Template with { Arguments = search };
-
-        using var response = await httpClient.SendAsync(
-                request.Compile(),
-                HttpCompletionOption.ResponseHeadersRead,
-                cancellationToken
-            )
-            .ConfigureAwait(false);
+        using var response =
+            await httpClient.SendAsync(Template, cancellationToken).ConfigureAwait(false);
 
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
 

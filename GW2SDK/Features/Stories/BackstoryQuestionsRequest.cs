@@ -27,11 +27,8 @@ public sealed class BackstoryQuestionsRequest : IHttpRequest<IReplicaSet<Backsto
         CancellationToken cancellationToken
     )
     {
-        var request = Template with { AcceptLanguage = Language?.Alpha2Code };
-
         using var response = await httpClient.SendAsync(
-                request.Compile(),
-                HttpCompletionOption.ResponseHeadersRead,
+                Template with { AcceptLanguage = Language?.Alpha2Code },
                 cancellationToken
             )
             .ConfigureAwait(false);

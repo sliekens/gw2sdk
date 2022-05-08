@@ -37,15 +37,12 @@ public sealed class BuildsByPageRequest : IHttpRequest<IReplicaPage<Build>>
             search.Add("page_size", PageSize.Value);
         }
 
-        var request = Template with
-        {
-            Arguments = search,
-            BearerToken = AccessToken
-        };
-
         using var response = await httpClient.SendAsync(
-                request.Compile(),
-                HttpCompletionOption.ResponseHeadersRead,
+                Template with
+                {
+                    Arguments = search,
+                    BearerToken = AccessToken
+                },
                 cancellationToken
             )
             .ConfigureAwait(false);

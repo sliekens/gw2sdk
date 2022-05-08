@@ -27,17 +27,14 @@ public sealed class FloorsIndexRequest : IHttpRequest<IReplicaSet<int>>
         CancellationToken cancellationToken
     )
     {
-        var request = Template with
-        {
-            Path = Template.Path.Replace(
-                ":id",
-                ContinentId.ToString(CultureInfo.InvariantCulture)
-            )
-        };
-
         using var response = await httpClient.SendAsync(
-                request.Compile(),
-                HttpCompletionOption.ResponseHeadersRead,
+                Template with
+                {
+                    Path = Template.Path.Replace(
+                        ":id",
+                        ContinentId.ToString(CultureInfo.InvariantCulture)
+                    )
+                },
                 cancellationToken
             )
             .ConfigureAwait(false);

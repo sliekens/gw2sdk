@@ -29,16 +29,12 @@ public sealed class BuildByIdRequest : IHttpRequest<IReplica<Build>>
         CancellationToken cancellationToken
     )
     {
-        QueryBuilder search = new() { { "id", BuildStorageId } };
-        var request = Template with
-        {
-            Arguments = search,
-            BearerToken = AccessToken
-        };
-
         using var response = await httpClient.SendAsync(
-                request.Compile(),
-                HttpCompletionOption.ResponseHeadersRead,
+                Template with
+                {
+                    Arguments = new QueryBuilder { { "id", BuildStorageId } },
+                    BearerToken = AccessToken
+                },
                 cancellationToken
             )
             .ConfigureAwait(false);

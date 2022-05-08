@@ -55,15 +55,12 @@ public sealed class CreateSubtokenRequest : IHttpRequest<IReplica<CreatedSubtoke
             args.Add("urls", string.Join(",", Urls.Select(Uri.EscapeDataString)));
         }
 
-        var request = Template with
-        {
-            Arguments = args,
-            BearerToken = AccessToken
-        };
-
         using var response = await httpClient.SendAsync(
-                request.Compile(),
-                HttpCompletionOption.ResponseHeadersRead,
+                Template with
+                {
+                    Arguments = args,
+                    BearerToken = AccessToken
+                },
                 cancellationToken
             )
             .ConfigureAwait(false);

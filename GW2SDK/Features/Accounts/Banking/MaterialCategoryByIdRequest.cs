@@ -32,16 +32,12 @@ public sealed class MaterialCategoryByIdRequest : IHttpRequest<IReplica<Material
         CancellationToken cancellationToken
     )
     {
-        QueryBuilder search = new() { { "id", MaterialCategoryId } };
-        var request = Template with
-        {
-            Arguments = search,
-            AcceptLanguage = Language?.Alpha2Code
-        };
-
         using var response = await httpClient.SendAsync(
-                request.Compile(),
-                HttpCompletionOption.ResponseHeadersRead,
+                Template with
+                {
+                    Arguments = new QueryBuilder { { "id", MaterialCategoryId } },
+                    AcceptLanguage = Language?.Alpha2Code
+                },
                 cancellationToken
             )
             .ConfigureAwait(false);

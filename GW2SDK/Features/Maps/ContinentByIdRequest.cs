@@ -32,16 +32,12 @@ public sealed class ContinentByIdRequest : IHttpRequest<IReplica<Continent>>
         CancellationToken cancellationToken
     )
     {
-        QueryBuilder search = new() { { "id", ContinentId } };
-        var request = Template with
-        {
-            Arguments = search,
-            AcceptLanguage = Language?.Alpha2Code
-        };
-
         using var response = await httpClient.SendAsync(
-                request.Compile(),
-                HttpCompletionOption.ResponseHeadersRead,
+                Template with
+                {
+                    Arguments = new QueryBuilder { { "id", ContinentId } },
+                    AcceptLanguage = Language?.Alpha2Code
+                },
                 cancellationToken
             )
             .ConfigureAwait(false);

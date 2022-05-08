@@ -40,15 +40,12 @@ public sealed class ItemsByPageRequest : IHttpRequest<IReplicaPage<Item>>
             search.Add("page_size", PageSize.Value);
         }
 
-        var request = Template with
-        {
-            AcceptLanguage = Language?.Alpha2Code,
-            Arguments = search
-        };
-
         using var response = await httpClient.SendAsync(
-                request.Compile(),
-                HttpCompletionOption.ResponseHeadersRead,
+                Template with
+                {
+                    AcceptLanguage = Language?.Alpha2Code,
+                    Arguments = search
+                },
                 cancellationToken
             )
             .ConfigureAwait(false);

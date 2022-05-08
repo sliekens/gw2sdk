@@ -32,15 +32,12 @@ public sealed class CharacterByNameRequest : IHttpRequest<IReplica<Character>>
         CancellationToken cancellationToken
     )
     {
-        QueryBuilder search = new() { { "id", CharacterName } };
-        var request = Template with
-        {
-            BearerToken = AccessToken,
-            Arguments = search
-        };
         using var response = await httpClient.SendAsync(
-                request.Compile(),
-                HttpCompletionOption.ResponseHeadersRead,
+                Template with
+                {
+                    BearerToken = AccessToken,
+                    Arguments = new QueryBuilder { { "id", CharacterName } }
+                },
                 cancellationToken
             )
             .ConfigureAwait(false);

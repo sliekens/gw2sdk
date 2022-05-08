@@ -30,16 +30,8 @@ public sealed class ApiVersionRequest : IHttpRequest<IReplica<ApiVersion>>
         CancellationToken cancellationToken
     )
     {
-        QueryBuilder search = new();
-        var request = Template with
-        {
-            Path = Template.Path.Replace(":version", Version),
-            Arguments = search
-        };
-
         using var response = await httpClient.SendAsync(
-                request.Compile(),
-                HttpCompletionOption.ResponseHeadersRead,
+                Template with { Path = Template.Path.Replace(":version", Version) },
                 cancellationToken
             )
             .ConfigureAwait(false);

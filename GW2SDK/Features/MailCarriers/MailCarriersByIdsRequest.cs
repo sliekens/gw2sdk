@@ -34,16 +34,12 @@ public sealed class MailCarriersByIdsRequest : IHttpRequest<IReplicaSet<MailCarr
         CancellationToken cancellationToken
     )
     {
-        QueryBuilder search = new() { { "ids", MailCarrierIds } };
-        var request = Template with
-        {
-            Arguments = search,
-            AcceptLanguage = Language?.Alpha2Code
-        };
-
         using var response = await httpClient.SendAsync(
-                request.Compile(),
-                HttpCompletionOption.ResponseHeadersRead,
+                Template with
+                {
+                    Arguments = new QueryBuilder { { "ids", MailCarrierIds } },
+                    AcceptLanguage = Language?.Alpha2Code
+                },
                 cancellationToken
             )
             .ConfigureAwait(false);

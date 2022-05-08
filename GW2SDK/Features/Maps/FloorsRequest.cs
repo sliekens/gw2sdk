@@ -35,18 +35,15 @@ public sealed class FloorsRequest : IHttpRequest<IReplicaSet<Floor>>
         CancellationToken cancellationToken
     )
     {
-        var request = Template with
-        {
-            Path = Template.Path.Replace(
-                ":id",
-                ContinentId.ToString(CultureInfo.InvariantCulture)
-            ),
-            AcceptLanguage = Language?.Alpha2Code
-        };
-
         using var response = await httpClient.SendAsync(
-                request.Compile(),
-                HttpCompletionOption.ResponseHeadersRead,
+                Template with
+                {
+                    Path = Template.Path.Replace(
+                        ":id",
+                        ContinentId.ToString(CultureInfo.InvariantCulture)
+                    ),
+                    AcceptLanguage = Language?.Alpha2Code
+                },
                 cancellationToken
             )
             .ConfigureAwait(false);

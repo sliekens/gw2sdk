@@ -32,16 +32,12 @@ public sealed class SkillByIdRequest : IHttpRequest<IReplica<Skill>>
         CancellationToken cancellationToken
     )
     {
-        QueryBuilder search = new() { { "id", SkillId } };
-        var request = Template with
-        {
-            Arguments = search,
-            AcceptLanguage = Language?.Alpha2Code
-        };
-
         using var response = await httpClient.SendAsync(
-                request.Compile(),
-                HttpCompletionOption.ResponseHeadersRead,
+                Template with
+                {
+                    Arguments = new QueryBuilder { { "id", SkillId } },
+                    AcceptLanguage = Language?.Alpha2Code
+                },
                 cancellationToken
             )
             .ConfigureAwait(false);

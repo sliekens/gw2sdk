@@ -33,15 +33,13 @@ public sealed class BackstoryAnswerByIdRequest : IHttpRequest<IReplica<Backstory
     )
     {
         QueryBuilder search = new() { { "id", AnswerId } };
-        var request = Template with
-        {
-            Arguments = search,
-            AcceptLanguage = Language?.Alpha2Code
-        };
 
         using var response = await httpClient.SendAsync(
-                request.Compile(),
-                HttpCompletionOption.ResponseHeadersRead,
+                Template with
+                {
+                    Arguments = search,
+                    AcceptLanguage = Language?.Alpha2Code
+                },
                 cancellationToken
             )
             .ConfigureAwait(false);
