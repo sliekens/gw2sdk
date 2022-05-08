@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using JetBrains.Annotations;
@@ -11,19 +12,51 @@ namespace GW2SDK.Http;
 [PublicAPI]
 public sealed class QueryBuilder
 {
-    private readonly List<Argument> arguments = new();
+    public static readonly QueryBuilder Empty = new() { frozen = true };
+
+    private readonly List<Argument> arguments;
+
+    private bool frozen;
+
+    public QueryBuilder()
+    {
+        arguments = new List<Argument>();
+    }
+
+    public QueryBuilder(IEnumerable<Argument> arguments)
+    {
+        this.arguments = arguments.ToList();
+    }
 
     public int Count => arguments.Count;
 
-    public void Add(string key, int value) => arguments.Add(new Argument(key, ToString(value)));
+    public QueryBuilder Clone() => new(arguments);
 
-    public void Add(string key, string value) => arguments.Add(new Argument(key, value));
+    public void Add(string key, int value)
+    {
+        EnsureMutable();
+        arguments.Add(new Argument(key, ToString(value)));
+    }
 
-    public void Add(string key, IEnumerable<string> values) =>
+    public void Add(string key, string value)
+    {
+        EnsureMutable();
+        arguments.Add(new Argument(key, value));
+    }
+
+    public void Add(string key, IEnumerable<string> values)
+    {
+        EnsureMutable();
         arguments.Add(new Argument(key, ToCsv(values)));
+    }
 
-    public void Add(string key, IEnumerable<int> values) =>
+    public void Add(string key, IEnumerable<int> values)
+    {
+        EnsureMutable();
         arguments.Add(new Argument(key, ToCsv(ToString(values))));
+    }
+
+    public void Freeze() => frozen = true;
 
     public string Build()
     {
@@ -35,6 +68,16 @@ public sealed class QueryBuilder
         }
 
         return query.ToString();
+    }
+
+    private void EnsureMutable()
+    {
+        if (frozen)
+        {
+            throw new InvalidOperationException(
+                "Invalid attempt to mutate a frozen query builder."
+            );
+        }
     }
 
     private static string ToString(int value) => value.ToString(InvariantInfo);

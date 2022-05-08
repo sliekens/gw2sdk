@@ -8,6 +8,8 @@ namespace GW2SDK.Http;
 [PublicAPI]
 public sealed record HttpRequestMessageTemplate(HttpMethod Method, string Path)
 {
+    private QueryBuilder queryBuilder = QueryBuilder.Empty;
+
     public HttpMethod Method { get; set; } = Method;
 
     public string Path { get; set; } = Path;
@@ -18,21 +20,30 @@ public sealed record HttpRequestMessageTemplate(HttpMethod Method, string Path)
 
     public string? BearerToken { get; set; }
 
-    public QueryBuilder Arguments { get; set; } = new();
+    public QueryBuilder Arguments
+    {
+        get => queryBuilder;
+        set
+        {
+            queryBuilder = value;
+            queryBuilder.Freeze();
+        }
+    }
 
     public SchemaVersion? SchemaVersion { get; set; } = SchemaVersion.Recommended;
 
     public HttpRequestMessage Compile()
     {
+        var arguments = Arguments.Clone();
         if (SchemaVersion is not null)
         {
-            Arguments.Add("v", SchemaVersion.Version);
+            arguments.Add("v", SchemaVersion.Version);
         }
 
         var location = Path;
-        if (Arguments.Count != 0)
+        if (arguments.Count != 0)
         {
-            location += Arguments;
+            location += arguments;
         }
 
         HttpRequestMessage message = new(Method, new Uri(location, UriKind.Relative));

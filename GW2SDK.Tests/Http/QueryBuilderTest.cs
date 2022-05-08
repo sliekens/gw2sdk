@@ -1,4 +1,5 @@
-﻿using GW2SDK.Http;
+﻿using System;
+using GW2SDK.Http;
 using Xunit;
 
 namespace GW2SDK.Tests.Http;
@@ -9,12 +10,26 @@ public class QueryBuilderTest
     public void The_default_state_is_an_empty_query()
     {
         var sut = new QueryBuilder();
-        var result = sut.Build();
-        Assert.Equal("", result);
+
+        var actual = sut.Build();
+
+        Assert.Equal(0, sut.Count);
+        Assert.Equal("", actual);
     }
 
     [Fact]
-    public void It_can_create_query_strings_with_one_string_argument()
+    public void A_frozen_builder_is_immutable()
+    {
+        var sut = new QueryBuilder();
+
+        sut.Freeze();
+
+        Assert.ThrowsAny<InvalidOperationException>(() => sut.Add("key", "value"));
+    }
+
+
+    [Fact]
+    public void Value_type_can_be_string()
     {
         var sut = new QueryBuilder();
 
@@ -26,7 +41,7 @@ public class QueryBuilderTest
     }
 
     [Fact]
-    public void It_can_create_query_strings_with_one_int_argument()
+    public void Value_type_can_be_int()
     {
         var sut = new QueryBuilder();
 
@@ -38,7 +53,7 @@ public class QueryBuilderTest
     }
 
     [Fact]
-    public void It_can_create_query_strings_with_many_string_arguments()
+    public void Multiple_arguments_are_delimited_by_ampersand()
     {
         var sut = new QueryBuilder();
 
@@ -48,25 +63,12 @@ public class QueryBuilderTest
 
         var actual = sut.Build();
 
+        Assert.Equal(3, sut.Count);
         Assert.Equal("?key1=first&key2=second&key3=third", actual);
     }
 
     [Fact]
-    public void It_can_create_query_strings_with_many_int_arguments()
-    {
-        var sut = new QueryBuilder();
-
-        sut.Add("key1", 1);
-        sut.Add("key2", 2);
-        sut.Add("key3", 3);
-
-        var actual = sut.Build();
-
-        Assert.Equal("?key1=1&key2=2&key3=3", actual);
-    }
-
-    [Fact]
-    public void It_can_create_query_strings_with_repeated_arguments()
+    public void Keys_can_have_multiple_occurrences()
     {
         var sut = new QueryBuilder();
 
@@ -80,7 +82,7 @@ public class QueryBuilderTest
     }
 
     [Fact]
-    public void It_can_create_query_strings_with_csv_string_arguments()
+    public void String_collections_are_converted_to_csv()
     {
         var sut = new QueryBuilder();
 
@@ -100,7 +102,7 @@ public class QueryBuilderTest
     }
 
     [Fact]
-    public void It_can_create_query_strings_with_csv_int_arguments()
+    public void Int_collections_are_converted_to_csv()
     {
         var sut = new QueryBuilder();
 
