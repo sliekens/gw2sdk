@@ -33,7 +33,7 @@ public sealed class DailyAchievementsRequest : IHttpRequest<IReplica<DailyAchiev
                     {
                         Day.Today => Template.Path,
                         Day.Tomorrow => Template.Path + "/tomorrow",
-                        _ => throw new ArgumentOutOfRangeException()
+                        _ => throw new InvalidOperationException("Invalid day.")
                     }
                 },
                 cancellationToken
