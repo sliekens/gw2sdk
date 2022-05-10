@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using GW2SDK.Tests.TestInfrastructure;
 using Xunit;
@@ -83,5 +83,17 @@ public class ArmoryQueryTest
 
         Assert.Equal(3, actual.Count);
         Assert.Equal(3, actual.Context.PageSize);
+    }
+
+    [Fact]
+    public async Task Bound_legendary_items_can_be_found()
+    {
+        await using Composer services = new();
+        var sut = services.Resolve<Gw2Client>();
+        var accessToken = services.Resolve<ApiKey>();
+
+        var actual = await sut.Armory.GetBoundLegendaryItems(accessToken.Key);
+
+        Assert.NotEmpty(actual);
     }
 }

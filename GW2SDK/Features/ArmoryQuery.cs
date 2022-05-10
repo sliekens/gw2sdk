@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading;
@@ -19,6 +19,23 @@ public sealed class ArmoryQuery
         this.http = http ?? throw new ArgumentNullException(nameof(http));
         http.BaseAddress ??= BaseAddress.DefaultUri;
     }
+
+    #region /v2/account/legendaryarmory
+
+    public Task<IReplicaSet<BoundLegendaryItem>> GetBoundLegendaryItems(
+        string? accessToken,
+        MissingMemberBehavior missingMemberBehavior = default,
+        CancellationToken cancellationToken = default
+    )
+    {
+        BoundLegendaryItemsRequest request =
+            new(accessToken) { MissingMemberBehavior = missingMemberBehavior };
+        return request.SendAsync(http, cancellationToken);
+    }
+
+    #endregion
+
+    #region /v2/legendaryarmory
 
     public Task<IReplicaSet<LegendaryItem>> GetLegendaryItems(
         MissingMemberBehavior missingMemberBehavior = default,
@@ -77,4 +94,6 @@ public sealed class ArmoryQuery
         };
         return request.SendAsync(http, cancellationToken);
     }
+
+    #endregion
 }
