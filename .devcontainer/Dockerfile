@@ -32,7 +32,6 @@ RUN export DEBIAN_FRONTEND=noninteractive\
   && bash /tmp/library-scripts/dotnet-debian.sh "3.1" "true" "automatic" "false"\
   && bash /tmp/library-scripts/node-debian.sh\
   && bash /tmp/library-scripts/git-from-src-debian.sh "os-provided"\
-  && bash /tmp/library-scripts/git-lfs-debian.sh\
   && bash /tmp/library-scripts/github-debian.sh\
   && bash /tmp/library-scripts/powershell-debian.sh\
   # https://www.mono-project.com/download/stable/#download-lin-debian
