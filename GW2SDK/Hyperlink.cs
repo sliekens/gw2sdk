@@ -6,9 +6,9 @@ namespace GW2SDK;
 /// related resources or the URI of the original resource itself.</summary>
 /// <remarks>Not meant to be used directly.</remarks>
 [PublicAPI]
-public sealed record Hyperlink(string Url)
+public readonly record struct Hyperlink(string Url)
 {
-    public static Hyperlink None = new("");
+    public static readonly Hyperlink None = new("");
 
-    public bool IsEmpty => ReferenceEquals(this, None) || string.IsNullOrEmpty(Url);
+    public bool IsEmpty => string.IsNullOrEmpty(Url);
 }

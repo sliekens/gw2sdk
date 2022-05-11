@@ -89,11 +89,6 @@ public static class HttpResponseHeaderExtensions
             }
         }
 
-        if (first is null || last is null || self is null)
-        {
-            throw new Exception();
-        }
-
         return new PageContext(
             resultTotal,
             resultCount,
