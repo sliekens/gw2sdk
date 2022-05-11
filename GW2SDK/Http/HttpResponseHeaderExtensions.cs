@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Net.Http.Headers;
 using JetBrains.Annotations;
+using static GW2SDK.Http.Gw2ResponseHeaderName;
 
 namespace GW2SDK.Http;
 
@@ -12,13 +13,13 @@ public static class HttpResponseHeaderExtensions
     {
         if (instance is null) throw new ArgumentNullException(nameof(instance));
         int resultTotal = default, resultCount = default;
-        if (instance.TryGetValues(ResponseHeaderName.ResultTotal, out var resultTotals))
+        if (instance.TryGetValues(ResultTotal, out var resultTotals))
         {
             // Assume that there is exactly one value for this header
             resultTotal = int.Parse(resultTotals.Single());
         }
 
-        if (instance.TryGetValues(ResponseHeaderName.ResultCount, out var resultCounts))
+        if (instance.TryGetValues(ResultCount, out var resultCounts))
         {
             // Assume that there is exactly one value for this header
             resultCount = int.Parse(resultCounts.Single());
@@ -36,31 +37,31 @@ public static class HttpResponseHeaderExtensions
             self = Hyperlink.None,
             first = Hyperlink.None,
             last = Hyperlink.None;
-        if (instance.TryGetValues(ResponseHeaderName.PageTotal, out var pageTotals))
+        if (instance.TryGetValues(PageTotal, out var pageTotals))
         {
             // Assume that there is exactly one value for this header
             pageTotal = int.Parse(pageTotals.Single());
         }
 
-        if (instance.TryGetValues(ResponseHeaderName.PageSize, out var pageSizes))
+        if (instance.TryGetValues(PageSize, out var pageSizes))
         {
             // Assume that there is exactly one value for this header
             pageSize = int.Parse(pageSizes.Single());
         }
 
-        if (instance.TryGetValues(ResponseHeaderName.ResultTotal, out var resultTotals))
+        if (instance.TryGetValues(ResultTotal, out var resultTotals))
         {
             // Assume that there is exactly one value for this header
             resultTotal = int.Parse(resultTotals.Single());
         }
 
-        if (instance.TryGetValues(ResponseHeaderName.ResultCount, out var resultCounts))
+        if (instance.TryGetValues(ResultCount, out var resultCounts))
         {
             // Assume that there is exactly one value for this header
             resultCount = int.Parse(resultCounts.Single());
         }
 
-        if (instance.TryGetValues(ResponseHeaderName.Link, out var links))
+        if (instance.TryGetValues(Link, out var links))
         {
             // Assume that there is exactly one value for this header
             var header = LinkHeader.Parse(links.Single());
@@ -104,18 +105,5 @@ public static class HttpResponseHeaderExtensions
             previous,
             next
         );
-    }
-
-    private static class ResponseHeaderName
-    {
-        internal const string Link = "Link";
-
-        internal const string PageTotal = "X-Page-Total";
-
-        internal const string PageSize = "X-Page-Size";
-
-        internal const string ResultTotal = "X-Result-Total";
-
-        internal const string ResultCount = "X-Result-Count";
     }
 }
