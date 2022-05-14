@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
+using GW2SDK.Accounts.Mounts;
 using GW2SDK.Json;
 using GW2SDK.Mounts;
 using JetBrains.Annotations;
@@ -20,7 +21,33 @@ public sealed class MountsQuery
         http.BaseAddress ??= BaseAddress.DefaultUri;
     }
 
-    #region /v2/mounts/types
+    #region /v2/account/mounts
+
+    public Task<IReplica<IReadOnlyCollection<MountName>>> GetOwnedMounts(
+        string? accessToken,
+        MissingMemberBehavior missingMemberBehavior = default,
+        CancellationToken cancellationToken = default
+    )
+    {
+        OwnedMountsRequest request = new(accessToken)
+        {
+            MissingMemberBehavior = missingMemberBehavior
+        };
+        return request.SendAsync(http, cancellationToken);
+    }
+
+    public Task<IReplica<IReadOnlyCollection<int>>> GetOwnedMountSkins(
+        string? accessToken,
+        CancellationToken cancellationToken = default
+    )
+    {
+        OwnedMountSkinsRequest request = new(accessToken);
+        return request.SendAsync(http, cancellationToken);
+    }
+
+    #endregion
+
+    #region /v2/mounts
 
     public Task<IReplicaSet<Mount>> GetMounts(
         Language? language = default,
@@ -91,10 +118,6 @@ public sealed class MountsQuery
         };
         return request.SendAsync(http, cancellationToken);
     }
-
-    #endregion
-
-    #region /v2/mounts/skins
 
     public Task<IReplicaSet<MountSkin>> GetMountSkins(
         Language? language = default,

@@ -160,4 +160,28 @@ public class MountsQueryTest
         Assert.Equal(3, actual.Count);
         Assert.Equal(3, actual.Context.PageSize);
     }
+
+    [Fact]
+    public async Task Owned_mounts_can_be_found()
+    {
+        await using Composer services = new();
+        var sut = services.Resolve<Gw2Client>();
+        var accessToken = services.Resolve<ApiKey>();
+
+        var actual = await sut.Mounts.GetOwnedMounts(accessToken.Key);
+
+        Assert.NotEmpty(actual.Value);
+    }
+
+    [Fact]
+    public async Task Owned_mount_skins_can_be_found()
+    {
+        await using Composer services = new();
+        var sut = services.Resolve<Gw2Client>();
+        var accessToken = services.Resolve<ApiKey>();
+
+        var actual = await sut.Mounts.GetOwnedMountSkins(accessToken.Key);
+
+        Assert.NotEmpty(actual.Value);
+    }
 }
