@@ -23,8 +23,7 @@ internal static class Routes
         "/v2/account/home/cats",
         "/v2/account/home/nodes",
         "/v2/account/inventory",
-
-        //"/v2/account/legendaryarmory",
+        "/v2/account/legendaryarmory",
         //"/v2/account/luck",
         "/v2/account/mailcarriers",
 
@@ -109,8 +108,7 @@ internal static class Routes
         "/v2/home/nodes",
         "/v2/items",
         "/v2/itemstats",
-
-        //"/v2/legendaryarmory",
+        "/v2/legendaryarmory",
         //"/v2/legends",
         "/v2/mailcarriers",
 
