@@ -14,9 +14,9 @@
       },
       "Microsoft.Extensions.Http.Polly": {
         "type": "Direct",
-        "requested": "[6.0.1, )",
-        "resolved": "6.0.1",
-        "contentHash": "7tjj8R5G20NQZR9fOJhEGIMUvqtuM5C506fJ0LmkNn4VW0aPTLGbcQ3QgjCeZh4qr1jbyGCdRnbijiqCxY80ng==",
+        "requested": "[6.0.5, )",
+        "resolved": "6.0.5",
+        "contentHash": "wlhxSXzOB7BhSLLGGqU5TRjQfMYO1fECnlHY8z0Km703HGYH9YAhN4OhbvqbtQwtdCJFFT7QxNrbT9bu+pzLQA==",
         "dependencies": {
           "Microsoft.Extensions.Http": "6.0.0",
           "Polly": "7.2.2",
@@ -25,9 +25,9 @@
       },
       "Polly": {
         "type": "Direct",
-        "requested": "[7.2.2, )",
-        "resolved": "7.2.2",
-        "contentHash": "E6CeKyS513j7taKAq4q2MESDBvzuzWnR1rQ2Y2zqJvpiVtKMm699Aubb20MUPBDmb0Ov8PmcLHTCVFdCjoy2kA=="
+        "requested": "[7.2.3, )",
+        "resolved": "7.2.3",
+        "contentHash": "DeCY0OFbNdNxsjntr1gTXHJ5pKUwYzp04Er2LLeN3g6pWhffsGuKVfMBLe1lw7x76HrPkLxKEFxBlpRxS2nDEQ=="
       },
       "System.CommandLine.DragonFruit": {
         "type": "Direct",
@@ -42,9 +42,9 @@
       },
       "System.Interactive": {
         "type": "Direct",
-        "requested": "[5.1.0, )",
-        "resolved": "5.1.0",
-        "contentHash": "V/ClZj5zzS0H8MaKv0qqpIMDz2x/+V0kqTeczW0ATqfVJrg3TeNgO+Z+tw93rbMc8MF+zrS6fU1UTYTEqzK8xg=="
+        "requested": "[6.0.1, )",
+        "resolved": "6.0.1",
+        "contentHash": "q2E+Rkj35aGIPdZFKoBfI46LU1hGLHrhg9diif3psaRFeiMwSYom0VI0XHIQFYtGHzq2g1+3awHvK+7YntfNIQ=="
       },
       "Microsoft.CSharp": {
         "type": "Transitive",
@@ -152,15 +152,27 @@
         "resolved": "6.0.0",
         "contentHash": "/iUeP3tq1S0XdNNoMz5C9twLSrM/TH+qElHkXWaPvuNOt+99G75NrV0OS2EqHx5wMN7popYjpc8oTjC1y16DLg=="
       },
+      "System.Text.Encodings.Web": {
+        "type": "Transitive",
+        "resolved": "6.0.0",
+        "contentHash": "Vg8eB5Tawm1IFqj4TVK1czJX89rhFxJo9ELqc/Eiq0eXy13RK00eubyU6TJE6y+GQXjyV5gSfiewDUZjQgSE0w==",
+        "dependencies": {
+          "System.Runtime.CompilerServices.Unsafe": "6.0.0"
+        }
+      },
       "System.Text.Json": {
         "type": "Transitive",
-        "resolved": "5.0.2",
-        "contentHash": "I47dVIGiV6SfAyppphxqupertT/5oZkYLDCX6vC3HpOI4ZLjyoKAreUoem2ie6G0RbRuFrlqz/PcTQjfb2DOfQ=="
+        "resolved": "6.0.4",
+        "contentHash": "krM+rxZPl5MQqGmHbj/gLis58IqGrLQGm7CIvNJ72Wj1MCdXNu1uMco5wRr7PmPOL/ITF/uEkB/3S1nSGFNvHg==",
+        "dependencies": {
+          "System.Runtime.CompilerServices.Unsafe": "6.0.0",
+          "System.Text.Encodings.Web": "6.0.0"
+        }
       },
       "gw2sdk": {
         "type": "Project",
         "dependencies": {
-          "System.Text.Json": "5.0.2"
+          "System.Text.Json": "6.0.4"
         }
       }
     }

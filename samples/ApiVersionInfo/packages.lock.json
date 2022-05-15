@@ -4,19 +4,36 @@
     "net6.0": {
       "Spectre.Console": {
         "type": "Direct",
-        "requested": "[0.43.0, )",
-        "resolved": "0.43.0",
-        "contentHash": "TyfzVxx3jHr1FeeI9Z6Jn6QTnP7KduV14dn9GTYc0v/t2h4L6WJ0Kc2DOnOJUlGBQ/qXK4P+HITIR/JTHcKYLg=="
+        "requested": "[0.44.0, )",
+        "resolved": "0.44.0",
+        "contentHash": "QMpKtn5QV1j2nklqDwuRE/XwbDn5jxww+Mt5J6Jn3EeQIzaLcuLyUhCLh/mS8giN6uXbqOV1ep5HlUGxrV1ujQ=="
+      },
+      "System.Runtime.CompilerServices.Unsafe": {
+        "type": "Transitive",
+        "resolved": "6.0.0",
+        "contentHash": "/iUeP3tq1S0XdNNoMz5C9twLSrM/TH+qElHkXWaPvuNOt+99G75NrV0OS2EqHx5wMN7popYjpc8oTjC1y16DLg=="
+      },
+      "System.Text.Encodings.Web": {
+        "type": "Transitive",
+        "resolved": "6.0.0",
+        "contentHash": "Vg8eB5Tawm1IFqj4TVK1czJX89rhFxJo9ELqc/Eiq0eXy13RK00eubyU6TJE6y+GQXjyV5gSfiewDUZjQgSE0w==",
+        "dependencies": {
+          "System.Runtime.CompilerServices.Unsafe": "6.0.0"
+        }
       },
       "System.Text.Json": {
         "type": "Transitive",
-        "resolved": "5.0.2",
-        "contentHash": "I47dVIGiV6SfAyppphxqupertT/5oZkYLDCX6vC3HpOI4ZLjyoKAreUoem2ie6G0RbRuFrlqz/PcTQjfb2DOfQ=="
+        "resolved": "6.0.4",
+        "contentHash": "krM+rxZPl5MQqGmHbj/gLis58IqGrLQGm7CIvNJ72Wj1MCdXNu1uMco5wRr7PmPOL/ITF/uEkB/3S1nSGFNvHg==",
+        "dependencies": {
+          "System.Runtime.CompilerServices.Unsafe": "6.0.0",
+          "System.Text.Encodings.Web": "6.0.0"
+        }
       },
       "gw2sdk": {
         "type": "Project",
         "dependencies": {
-          "System.Text.Json": "5.0.2"
+          "System.Text.Json": "6.0.4"
         }
       }
     }
