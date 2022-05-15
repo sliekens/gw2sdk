@@ -49,13 +49,14 @@ public sealed class CraftingQuery
     )
     {
         var producer = SplitQuery.Create<int, Recipe>(
-            (range, ct) =>
+            async (range, ct) =>
             {
                 RecipesByIdsRequest request = new(range)
                 {
                     MissingMemberBehavior = missingMemberBehavior
                 };
-                return request.SendAsync(http, ct);
+                var response = await request.SendAsync(http, ct).ConfigureAwait(false);
+                return response.Values;
             },
             progress
         );

@@ -18,7 +18,7 @@ namespace GW2SDK;
 [PublicAPI]
 
 // ReSharper disable once TypeParameterCanBeVariant // it's a lie
-public delegate Task<IReplicaSet<TRecord>> InQuery<TKey, TRecord>(
+public delegate Task<IReadOnlyCollection<TRecord>> InQuery<TKey, TRecord>(
     IReadOnlyCollection<TKey> range,
     CancellationToken token = default
 );
@@ -90,7 +90,7 @@ public sealed class SplitQuery<TKey, TRecord>
         if (index.Count <= bufferSize)
         {
             var result = await query(index, cancellationToken).ConfigureAwait(false);
-            ReportProgress(resultTotal, result.Context.ResultCount);
+            ReportProgress(resultTotal, result.Count);
             foreach (var record in result)
             {
                 cancellationToken.ThrowIfCancellationRequested();
@@ -120,7 +120,7 @@ public sealed class SplitQuery<TKey, TRecord>
                 inflight.Remove(done);
 
                 var result = await done.ConfigureAwait(false);
-                resultCount += result.Context.ResultCount;
+                resultCount += result.Count;
                 ReportProgress(resultTotal, resultCount);
                 foreach (var record in result)
                 {

@@ -51,15 +51,15 @@ public sealed class ItemsQuery
     )
     {
         var producer = SplitQuery.Create<int, Item>(
-            (range, ct) =>
+            async (range, ct) =>
             {
                 var request = new ItemsByIdsRequest(range)
                 {
                     Language = language,
                     MissingMemberBehavior = missingMemberBehavior
                 };
-
-                return request.SendAsync(http, ct);
+                var response = await request.SendAsync(http, ct).ConfigureAwait(false);
+                return response.Values;
             },
             progress
         );

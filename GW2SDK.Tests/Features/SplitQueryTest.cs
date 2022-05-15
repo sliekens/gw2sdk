@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
@@ -26,7 +25,7 @@ public class SplitQueryTest
             (range, ct) =>
             {
                 var found = records.Where(record => range.Contains(record.Id)).ToHashSet();
-                return Task.FromResult((IReplicaSet<StubRecord>)new StubReplica(found));
+                return Task.FromResult((IReadOnlyCollection<StubRecord>)found);
             },
             bufferSize
         );
@@ -62,7 +61,7 @@ public class SplitQueryTest
             (range, ct) =>
             {
                 var found = records.Where(record => range.Contains(record.Id)).ToHashSet();
-                return Task.FromResult((IReplicaSet<StubRecord>)new StubReplica(found));
+                return Task.FromResult((IReadOnlyCollection<StubRecord>)found);
             }
         );
 
@@ -90,7 +89,7 @@ public class SplitQueryTest
             (range, ct) =>
             {
                 var found = records.Where(record => range.Contains(record.Id)).ToHashSet();
-                return Task.FromResult((IReplicaSet<StubRecord>)new StubReplica(found));
+                return Task.FromResult((IReadOnlyCollection<StubRecord>)found);
             }
         );
 
@@ -109,28 +108,3 @@ public class SplitQueryTest
 }
 
 internal sealed record StubRecord(int Id);
-
-internal sealed class StubReplica : IReplicaSet<StubRecord>
-{
-    public StubReplica(IReadOnlyCollection<StubRecord> values)
-    {
-        Values = values;
-        Context = new CollectionContext(values.Count, values.Count);
-    }
-
-    public DateTimeOffset Date { get; } = DateTimeOffset.UtcNow;
-
-    public DateTimeOffset? Expires => default;
-
-    public DateTimeOffset? LastModified => default;
-
-    public IReadOnlyCollection<StubRecord> Values { get; }
-
-    public ICollectionContext Context { get; }
-
-    public IEnumerator<StubRecord> GetEnumerator() => Values.GetEnumerator();
-
-    IEnumerator IEnumerable.GetEnumerator() => ((IEnumerable)Values).GetEnumerator();
-
-    public int Count => Values.Count;
-}

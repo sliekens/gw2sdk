@@ -74,13 +74,14 @@ public sealed class CommerceQuery
     )
     {
         var producer = SplitQuery.Create<int, ItemPrice>(
-            (range, ct) =>
+            async (range, ct) =>
             {
                 ItemPricesByIdsRequest request = new(range)
                 {
                     MissingMemberBehavior = missingMemberBehavior
                 };
-                return request.SendAsync(http, ct);
+                var response = await request.SendAsync(http, ct).ConfigureAwait(false);
+                return response.Values;
             },
             progress
         );
@@ -139,13 +140,14 @@ public sealed class CommerceQuery
     )
     {
         var producer = SplitQuery.Create<int, OrderBook>(
-            (range, ct) =>
+            async (range, ct) =>
             {
                 OrderBooksByIdsRequest request = new(range)
                 {
                     MissingMemberBehavior = missingMemberBehavior
                 };
-                return request.SendAsync(http, ct);
+                var response = await request.SendAsync(http, ct).ConfigureAwait(false);
+                return response.Values;
             },
             progress
         );
