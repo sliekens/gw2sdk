@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
+using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
 using GW2SDK.Commerce.Listings;
@@ -18,11 +19,11 @@ public class JsonOrderBookService
         this.http = http;
     }
 
-    public async Task<ISet<string>> GetJsonOrderBooks()
+    public async Task<ISet<string>> GetJsonOrderBooks(IProgress<ICollectionContext> progress)
     {
         var ids = await GetOrderBookIds().ConfigureAwait(false);
         var items = new SortedSet<string>();
-        await foreach (var item in GetJsonItemListingsById(ids))
+        await foreach (var item in GetJsonItemListingsById(ids, progress))
         {
             items.Add(item);
         }

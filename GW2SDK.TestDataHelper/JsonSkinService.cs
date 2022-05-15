@@ -17,11 +17,11 @@ public class JsonSkinService
         this.http = http;
     }
 
-    public async Task<ISet<string>> GetAllJsonSkins()
+    public async Task<ISet<string>> GetAllJsonSkins(IProgress<ICollectionContext> progress)
     {
         var ids = await GetSkinIds().ConfigureAwait(false);
         var items = new SortedSet<string>();
-        await foreach (var item in GetJsonSkinsByIds(ids))
+        await foreach (var item in GetJsonSkinsByIds(ids, progress))
         {
             items.Add(item);
         }

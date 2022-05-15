@@ -17,11 +17,11 @@ public class JsonItemService
         this.http = http;
     }
 
-    public async Task<ISet<string>> GetAllJsonItems()
+    public async Task<ISet<string>> GetAllJsonItems(IProgress<ICollectionContext> progress)
     {
         var ids = await GetItemsIndex().ConfigureAwait(false);
         var items = new SortedSet<string>();
-        await foreach (var item in GetJsonItemsByIds(ids))
+        await foreach (var item in GetJsonItemsByIds(ids, progress))
         {
             items.Add(item);
         }

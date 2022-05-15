@@ -17,11 +17,11 @@ public class JsonItemPriceService
         this.http = http;
     }
 
-    public async Task<ISet<string>> GetJsonItemPrices()
+    public async Task<ISet<string>> GetJsonItemPrices(IProgress<ICollectionContext> progress)
     {
         var ids = await GetItemPriceIds().ConfigureAwait(false);
         var items = new SortedSet<string>();
-        await foreach (var item in GetJsonItemPricesById(ids))
+        await foreach (var item in GetJsonItemPricesById(ids, progress))
         {
             items.Add(item);
         }

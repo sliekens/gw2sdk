@@ -17,11 +17,11 @@ public class JsonRecipeService
         this.http = http;
     }
 
-    public async Task<ISet<string>> GetAllJsonRecipes()
+    public async Task<ISet<string>> GetAllJsonRecipes(IProgress<ICollectionContext> progress)
     {
         var ids = await GetRecipeIds().ConfigureAwait(false);
         var items = new SortedSet<string>();
-        await foreach (var item in GetJsonRecipesByIds(ids))
+        await foreach (var item in GetJsonRecipesByIds(ids, progress))
         {
             items.Add(item);
         }

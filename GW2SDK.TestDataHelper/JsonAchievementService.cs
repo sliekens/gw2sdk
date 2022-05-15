@@ -17,11 +17,11 @@ public class JsonAchievementService
         this.http = http;
     }
 
-    public async Task<ISet<string>> GetAllJsonAchievements()
+    public async Task<ISet<string>> GetAllJsonAchievements(IProgress<ICollectionContext> progress)
     {
         var ids = await GetAchievementIds().ConfigureAwait(false);
         var items = new SortedSet<string>();
-        await foreach (var item in GetJsonAchievementsByIds(ids))
+        await foreach (var item in GetJsonAchievementsByIds(ids, progress))
         {
             items.Add(item);
         }
