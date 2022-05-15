@@ -20,36 +20,13 @@ public class JsonItemService
     public async Task<ISet<string>> GetAllJsonItems()
     {
         var ids = await GetItemsIndex().ConfigureAwait(false);
-
-        var batches = new Queue<IEnumerable<int>>(ids.Buffer(200));
-
-        var result = new List<string>();
-        var work = new List<Task<List<string>>>();
-
-        for (var i = 0; i < 12; i++)
+        var items = new SortedSet<string>();
+        await foreach (var item in GetJsonItemsByIds(ids))
         {
-            if (!batches.TryDequeue(out var batch))
-            {
-                break;
-            }
-
-            work.Add(GetJsonItemsByIds(batch.ToList()));
+            items.Add(item);
         }
 
-        while (work.Count > 0)
-        {
-            var done = await Task.WhenAny(work);
-            result.AddRange(done.Result);
-
-            work.Remove(done);
-
-            if (batches.TryDequeue(out var batch))
-            {
-                work.Add(GetJsonItemsByIds(batch.ToList()));
-            }
-        }
-
-        return new SortedSet<string>(result, StringComparer.Ordinal);
+        return items;
     }
 
     private async Task<IReadOnlyCollection<int>> GetItemsIndex()
@@ -59,16 +36,27 @@ public class JsonItemService
         return response.Values;
     }
 
-    private async Task<List<string>> GetJsonItemsByIds(IReadOnlyCollection<int> itemIds)
+    public IAsyncEnumerable<string> GetJsonItemsByIds(
+        IReadOnlyCollection<int> itemIds,
+        IProgress<ICollectionContext>? progress = default,
+        CancellationToken cancellationToken = default
+    )
     {
-        var request = new BulkRequest("/v2/items", itemIds);
-        var json = await request.SendAsync(http, CancellationToken.None).ConfigureAwait(false);
-        return json.Indent(false)
-            .RootElement.EnumerateArray()
-            .Select(
-                item => item.ToString()
-                    ?? throw new InvalidOperationException("Unexpected null in JSON array.")
-            )
-            .ToList();
+        var producer = SplitQuery.Create<int, string>(
+            async (range, ct) =>
+            {
+                var request = new BulkRequest("/v2/items") { Ids = range };
+                var json = await request.SendAsync(http, ct);
+                return json.Indent(false)
+                    .RootElement.EnumerateArray()
+                    .Select(
+                        item => item.ToString()
+                            ?? throw new InvalidOperationException("Unexpected null in JSON array.")
+                    )
+                    .ToList();
+            },
+            progress
+        );
+        return producer.QueryAsync(itemIds, cancellationToken: cancellationToken);
     }
 }

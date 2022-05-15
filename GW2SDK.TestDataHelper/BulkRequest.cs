@@ -9,23 +9,14 @@ namespace GW2SDK.TestDataHelper;
 
 public class BulkRequest : IHttpRequest<JsonDocument>
 {
-    private readonly bool all;
-
-    private readonly IReadOnlyCollection<int>? ids;
-
     private readonly string requestUri;
 
     public BulkRequest(string requestUri)
     {
         this.requestUri = requestUri;
-        all = true;
     }
 
-    public BulkRequest(string requestUri, IReadOnlyCollection<int> ids)
-    {
-        this.requestUri = requestUri;
-        this.ids = ids;
-    }
+    public IReadOnlyCollection<int>? Ids { get; init; }
 
     public async Task<JsonDocument> SendAsync(
         HttpClient httpClient,
@@ -33,13 +24,13 @@ public class BulkRequest : IHttpRequest<JsonDocument>
     )
     {
         QueryBuilder search = new();
-        if (all)
+        if (Ids is not { Count: > 0} )
         {
             search.Add("ids", "all");
         }
         else
         {
-            search.Add("ids", ids!);
+            search.Add("ids", Ids);
         }
 
         var request = new HttpRequestMessageTemplate(HttpMethod.Get, requestUri)

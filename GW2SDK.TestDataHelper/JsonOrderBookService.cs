@@ -5,6 +5,7 @@ using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 using GW2SDK.Commerce.Listings;
+using GW2SDK.Commerce.Prices;
 
 namespace GW2SDK.TestDataHelper;
 
@@ -20,36 +21,13 @@ public class JsonOrderBookService
     public async Task<ISet<string>> GetJsonOrderBooks()
     {
         var ids = await GetOrderBookIds().ConfigureAwait(false);
-
-        var batches = new Queue<IEnumerable<int>>(ids.Buffer(200));
-
-        var result = new List<string>();
-        var work = new List<Task<List<string>>>();
-
-        for (var i = 0; i < 12; i++)
+        var items = new SortedSet<string>();
+        await foreach (var item in GetJsonItemListingsById(ids))
         {
-            if (!batches.TryDequeue(out var batch))
-            {
-                break;
-            }
-
-            work.Add(GetJsonItemListingsById(batch.ToList()));
+            items.Add(item);
         }
 
-        while (work.Count > 0)
-        {
-            var done = await Task.WhenAny(work);
-            result.AddRange(done.Result);
-
-            work.Remove(done);
-
-            if (batches.TryDequeue(out var batch))
-            {
-                work.Add(GetJsonItemListingsById(batch.ToList()));
-            }
-        }
-
-        return new SortedSet<string>(result, StringComparer.Ordinal);
+        return items;
     }
 
     private async Task<IReadOnlyCollection<int>> GetOrderBookIds()
@@ -59,16 +37,27 @@ public class JsonOrderBookService
         return response.Values;
     }
 
-    private async Task<List<string>> GetJsonItemListingsById(IReadOnlyCollection<int> itemIds)
+    public IAsyncEnumerable<string> GetJsonItemListingsById(
+        IReadOnlyCollection<int> itemIds,
+        IProgress<ICollectionContext>? progress = default,
+        CancellationToken cancellationToken = default
+    )
     {
-        var request = new BulkRequest("/v2/commerce/listings", itemIds);
-        var json = await request.SendAsync(http, CancellationToken.None).ConfigureAwait(false);
-        return json.Indent(false)
-            .RootElement.EnumerateArray()
-            .Select(
-                item => item.ToString()
-                    ?? throw new InvalidOperationException("Unexpected null in JSON array.")
-            )
-            .ToList();
+        var producer = SplitQuery.Create<int, string>(
+            async (range, ct) =>
+            {
+                var request = new BulkRequest("/v2/commerce/listings") { Ids = range };
+                var json = await request.SendAsync(http, ct);
+                return json.Indent(false)
+                    .RootElement.EnumerateArray()
+                    .Select(
+                        item => item.ToString()
+                            ?? throw new InvalidOperationException("Unexpected null in JSON array.")
+                    )
+                    .ToList();
+            },
+            progress
+        );
+        return producer.QueryAsync(itemIds, cancellationToken: cancellationToken);
     }
 }
