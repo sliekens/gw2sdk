@@ -17,7 +17,7 @@ public sealed record Character
     public string Name { get; init; } = "";
 
     /// <summary>The race selected during creation of the current character.</summary>
-    public Race Race { get; init; }
+    public RaceName Race { get; init; }
 
     /// <summary>Whether the character is male or female.</summary>
     /// <remarks>This can be changed later with a Black Lion contract.</remarks>

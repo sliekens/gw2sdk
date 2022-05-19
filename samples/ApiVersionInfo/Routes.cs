@@ -140,7 +140,7 @@ internal static class Routes
         "/v2/quaggans",
 
         //"/v2/quests",
-        //"/v2/races",
+        "/v2/races",
         //"/v2/raids",
         "/v2/recipes",
         "/v2/recipes/search",

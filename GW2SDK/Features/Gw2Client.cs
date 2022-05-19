@@ -55,6 +55,8 @@ public sealed class Gw2Client
 
     public QuaggansQuery Quaggans => new(httpClient);
 
+    public RacesQuery Races => new(httpClient);
+
     public SkillsQuery Skills => new(httpClient);
 
     public SpecializationsQuery Specializations => new(httpClient);

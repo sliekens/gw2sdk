@@ -2,6 +2,7 @@
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
+using GW2SDK.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Polly;
 using Polly.Timeout;
@@ -53,6 +54,13 @@ public class TestHttpClientFactory : IHttpClientFactory, IAsyncDisposable
                             or (HttpStatusCode)429 // TooManyRequests
                     )
                     .Or<TimeoutRejectedException>()
+                    .Or<UnauthorizedOperationException>(
+
+                        // Sometimes the API fails to validate the access key
+                        // This is a server error, real token problems result in a different error
+                        // eg. "Invalid access token"
+                        reason => reason.Message == "endpoint requires authentication"
+                    )
                     .WaitAndRetryForeverAsync(
                         retryAttempt => TimeSpan.FromSeconds(Math.Min(8, Math.Pow(2, retryAttempt)))
                     )

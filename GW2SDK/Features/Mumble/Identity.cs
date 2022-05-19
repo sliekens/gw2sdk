@@ -13,7 +13,7 @@ public sealed record Identity
 
     public int SpecializationId { get; init; }
 
-    public Race Race { get; init; }
+    public RaceName Race { get; init; }
 
     public int MapId { get; init; }
 

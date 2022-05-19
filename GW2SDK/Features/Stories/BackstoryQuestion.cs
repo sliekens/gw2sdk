@@ -19,7 +19,7 @@ public sealed record BackstoryQuestion
 
     public int Order { get; init; }
 
-    public IReadOnlyCollection<Race>? Races { get; init; }
+    public IReadOnlyCollection<RaceName>? Races { get; init; }
 
     public IReadOnlyCollection<ProfessionName>? Professions { get; init; }
 }

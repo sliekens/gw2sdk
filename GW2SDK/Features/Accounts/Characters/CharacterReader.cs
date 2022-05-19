@@ -17,7 +17,7 @@ public static class CharacterReader
     )
     {
         RequiredMember<string> name = new("name");
-        RequiredMember<Race> race = new("race");
+        RequiredMember<RaceName> race = new("race");
         RequiredMember<Gender> gender = new("gender");
         RequiredMember<CharacterFlag> flags = new("flags");
         RequiredMember<ProfessionName> profession = new("profession");

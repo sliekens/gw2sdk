@@ -19,7 +19,7 @@ public static class BackstoryAnswerReader
         RequiredMember<string> journal = new("journal");
         RequiredMember<int> question = new("question");
         OptionalMember<ProfessionName> professions = new("professions");
-        OptionalMember<Race> races = new("races");
+        OptionalMember<RaceName> races = new("races");
         foreach (var member in json.EnumerateObject())
         {
             if (member.NameEquals(id.Name))

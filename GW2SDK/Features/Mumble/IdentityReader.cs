@@ -16,7 +16,7 @@ public static class IdentityReader
         RequiredMember<string> name = new("name");
         RequiredMember<ProfessionName> profession = new("profession");
         RequiredMember<int> specializationId = new("spec");
-        RequiredMember<Race> race = new("race");
+        RequiredMember<RaceName> race = new("race");
         RequiredMember<int> mapId = new("map_id");
         RequiredMember<int> map = new("map");
         RequiredMember<long> worldId = new("world_id");
@@ -91,7 +91,7 @@ public static class IdentityReader
             Name = name.GetValue(),
             Profession = profession.Select(value => (ProfessionName)value.GetInt32()),
             SpecializationId = specializationId.GetValue(),
-            Race = race.Select(value => (Race)(value.GetInt32() + 1)),
+            Race = race.Select(value => (RaceName)(value.GetInt32() + 1)),
             MapId = mapId.GetValue(),
             WorldId = worldId.GetValue(),
             TeamColorId = teamColorId.GetValue(),

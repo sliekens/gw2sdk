@@ -3,7 +3,7 @@
 namespace GW2SDK;
 
 [PublicAPI]
-public enum Race
+public enum RaceName
 {
     Asura = 1,
 
