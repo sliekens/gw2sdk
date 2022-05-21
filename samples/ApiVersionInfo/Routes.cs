@@ -109,7 +109,7 @@ internal static class Routes
         "/v2/items",
         "/v2/itemstats",
         "/v2/legendaryarmory",
-        //"/v2/legends",
+        "/v2/legends",
         "/v2/mailcarriers",
 
         //"/v2/mapchests",

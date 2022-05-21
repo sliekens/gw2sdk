@@ -41,6 +41,8 @@ public sealed class Gw2Client
 
     public ItemStatsQuery ItemStats => new(httpClient);
 
+    public LegendsQuery Legends => new(httpClient);
+
     public MailCarriersQuery MailCarriers => new(httpClient);
 
     public MapsQuery Maps => new(httpClient);
