@@ -94,7 +94,7 @@ internal class Program
             {
                 routes.AddRow(
                     string.Format(pathTemplate, route.Path.EscapeMarkup()),
-                    "⸻",
+                    route.RequiresAuthorization ? "Access token" : "⸻",
                     route.Multilingual ? string.Join(", ", metadata.v2.Languages) : "⸻"
                 );
             }
