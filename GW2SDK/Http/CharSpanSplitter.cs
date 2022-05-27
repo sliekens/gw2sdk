@@ -33,8 +33,8 @@ internal ref struct CharSpanSplitter
             return true;
         }
 
-        Current = value[..index];
-        value = value[(index + 1)..];
+        Current = value.Slice(0, index);
+        value = value.Slice(index + 1);
         return true;
     }
 }

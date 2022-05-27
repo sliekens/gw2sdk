@@ -16,8 +16,13 @@ public sealed class AssetCdnBuildRequest : IHttpRequest<IReplica<Build>>
         CancellationToken cancellationToken
     )
     {
+        const string resource = "http://assetcdn.101.ArenaNetworks.com/latest64/101";
         var latest64 = await httpClient
-            .GetStringAsync("http://assetcdn.101.ArenaNetworks.com/latest64/101")
+#if NET
+            .GetStringAsync(resource, cancellationToken)
+#else
+            .GetStringAsync(resource)
+#endif
             .ConfigureAwait(false);
 
         if (latest64 is null)
@@ -25,7 +30,7 @@ public sealed class AssetCdnBuildRequest : IHttpRequest<IReplica<Build>>
             throw new InvalidOperationException("Missing value.");
         }
 
-        var text = latest64[..latest64.IndexOf(' ')];
+        var text = latest64.Substring(0, latest64.IndexOf(' '));
         return new Replica<Build>(
             DateTimeOffset.UtcNow,
             new Build { Id = int.Parse(text, NumberStyles.None, NumberFormatInfo.InvariantInfo) }
