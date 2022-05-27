@@ -8,7 +8,6 @@
     "ms-dotnettools.csharp",
     "ms-azuretools.vscode-docker"
   ],
-  "initializeCommand": "/bin/bash -v ${localWorkspaceFolder}/.devcontainer/initialize-host.sh",
   "postCreateCommand": "/bin/bash -v ${containerWorkspaceFolder}/.devcontainer/post-create.sh",
   "mounts": [
     "type=bind,source=/var/run/docker.sock,target=/var/run/docker-host.sock",
