@@ -85,8 +85,7 @@ internal static class Routes
         "/v2/currencies",
         "/v2/dailycrafting",
         "/v2/dungeons",
-
-        //"/v2/emblem",
+        "/v2/emblem",
         //"/v2/emotes",
         //"/v2/files",
         //"/v2/finishers",

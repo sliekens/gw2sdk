@@ -61,9 +61,9 @@ internal class Program
         {
             var pathTemplate = route.Active switch
             {
-                false => "[dim]{0}[/]",
-                true when Routes.IsSupported(route) => "[bold blue]{0}[/]",
-                _ => "{0}"
+                false => ":no_entry: [dim bol]{0}[/]",
+                true when Routes.IsSupported(route) => ":rocket: [bold blue]{0}[/]",
+                _ => ":construction: {0}"
             };
 
             if (route.Active || showDisabled)
@@ -85,9 +85,9 @@ internal class Program
 
             var pathTemplate = route.Active switch
             {
-                false => "[dim]{0}[/]",
-                true when Routes.IsSupported(route) => "[bold blue]{0}[/]",
-                _ => "{0}"
+                false => ":no_entry: [dim]{0}[/]",
+                true when Routes.IsSupported(route) => ":rocket: [bold blue]{0}[/]",
+                _ => ":construction: {0}"
             };
 
             if (route.Active || showDisabled)

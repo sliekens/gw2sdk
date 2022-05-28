@@ -33,6 +33,8 @@ public sealed class Gw2Client
 
     public DyesQuery Dyes => new(httpClient);
 
+    public EmblemsQuery Emblems => new(httpClient);
+
     public HomeQuery Home => new(httpClient);
 
     public InventoryQuery Inventory => new(httpClient);
