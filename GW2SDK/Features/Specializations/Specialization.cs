@@ -27,7 +27,7 @@ public sealed record Specialization
 
     public string Background { get; init; } = "";
 
-    public string ProfessionIconBig { get; set; } = "";
+    public string ProfessionIconBig { get; init; } = "";
 
-    public string ProfessionIcon { get; set; } = "";
+    public string ProfessionIcon { get; init; } = "";
 }

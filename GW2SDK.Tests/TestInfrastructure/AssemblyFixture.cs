@@ -1,4 +1,7 @@
-﻿using System.Reflection;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
 
 namespace GW2SDK.Tests.TestInfrastructure;
 
@@ -11,4 +14,10 @@ public class AssemblyFixture
     }
 
     public Assembly Assembly { get; }
+
+    public IEnumerable<Type> DataTransferObjects =>
+        Assembly.DefinedTypes.Where(type => WithAttribute(type, "DataTransferObjectAttribute"));
+
+    private static bool WithAttribute(MemberInfo type, string attributeName) =>
+        type.GetCustomAttributes().Any(attribute => attribute.GetType().Name == attributeName);
 }
