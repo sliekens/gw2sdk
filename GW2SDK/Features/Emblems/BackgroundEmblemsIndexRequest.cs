@@ -3,9 +3,11 @@ using System.Threading;
 using System.Threading.Tasks;
 using GW2SDK.Http;
 using GW2SDK.Json;
+using JetBrains.Annotations;
 
 namespace GW2SDK.Emblems;
 
+[PublicAPI]
 public sealed class BackgroundEmblemsIndexRequest : IHttpRequest<IReplicaSet<int>>
 {
     private static readonly HttpRequestMessageTemplate Template =
