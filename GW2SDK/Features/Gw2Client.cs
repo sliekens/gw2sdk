@@ -35,6 +35,8 @@ public sealed class Gw2Client
 
     public EmblemsQuery Emblems => new(httpClient);
 
+    public EmotesQuery Emotes => new(httpClient);
+
     public HomeQuery Home => new(httpClient);
 
     public InventoryQuery Inventory => new(httpClient);
