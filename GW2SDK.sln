@@ -20,6 +20,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "root", "root", "{63243B77-9
 		.gitattributes = .gitattributes
 		coverletArgs.runsettings = coverletArgs.runsettings
 		Directory.Build.props = Directory.Build.props
+		.config\dotnet-tools.json = .config\dotnet-tools.json
 		global.json = global.json
 		GW2SDK.sln.DotSettings = GW2SDK.sln.DotSettings
 		nuget.config = nuget.config
@@ -37,15 +38,15 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MostVersatileMaterials", "s
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mumble", "samples\Mumble\Mumble.csproj", "{506EA451-0D44-4B1F-BF58-ACB7BC312AEA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuagganGalleria", "samples\QuagganGalleria\QuagganGalleria.csproj", "{F777EA49-9155-471D-ABA1-16A11B97268C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuagganGalleria", "samples\QuagganGalleria\QuagganGalleria.csproj", "{F777EA49-9155-471D-ABA1-16A11B97268C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BasicUsage", "samples\BasicUsage\BasicUsage.csproj", "{A3DDC8D6-5C42-42E5-AF42-B5F9ADD8542E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BasicUsage", "samples\BasicUsage\BasicUsage.csproj", "{A3DDC8D6-5C42-42E5-AF42-B5F9ADD8542E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdvancedUsage", "samples\AdvancedUsage\AdvancedUsage.csproj", "{91165AC9-D42E-40D6-86C3-AE5C2A489721}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AdvancedUsage", "samples\AdvancedUsage\AdvancedUsage.csproj", "{91165AC9-D42E-40D6-86C3-AE5C2A489721}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HttpClientFactoryUsage", "samples\HttpClientFactoryUsage\HttpClientFactoryUsage.csproj", "{F63A66C7-5520-4265-9F28-64DCCD1A6AA8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HttpClientFactoryUsage", "samples\HttpClientFactoryUsage\HttpClientFactoryUsage.csproj", "{F63A66C7-5520-4265-9F28-64DCCD1A6AA8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PollyUsage", "samples\PollyUsage\PollyUsage.csproj", "{0BA80C1D-40A9-4B20-9558-82C0AA58BC1F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PollyUsage", "samples\PollyUsage\PollyUsage.csproj", "{0BA80C1D-40A9-4B20-9558-82C0AA58BC1F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

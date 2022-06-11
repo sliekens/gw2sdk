@@ -25,7 +25,7 @@ public sealed class CharacterByNameRequest : IHttpRequest<IReplica<Character>>
 
     public string? AccessToken { get; init; }
 
-    public MissingMemberBehavior MissingMemberBehavior { get; set; }
+    public MissingMemberBehavior MissingMemberBehavior { get; init; }
 
     public async Task<IReplica<Character>> SendAsync(
         HttpClient httpClient,
