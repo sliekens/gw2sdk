@@ -16,7 +16,7 @@ internal static class Routes
         "/v2/account/dungeons",
         "/v2/account/dyes",
         "/v2/account/emotes",
-        //"/v2/account/finishers",
+        "/v2/account/finishers",
         //"/v2/account/gliders",
         "/v2/account/home",
         "/v2/account/home/cats",
