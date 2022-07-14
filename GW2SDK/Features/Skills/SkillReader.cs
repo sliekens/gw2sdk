@@ -2333,7 +2333,7 @@ public static class SkillReader
         requiresTrait = null;
         overrides = null;
 
-        RequiredMember<string> text = new("text");
+        OptionalMember<string> text = new("text");
         RequiredMember<string> icon = new("icon");
         RequiredMember<int> value = new("value");
 
@@ -2376,7 +2376,7 @@ public static class SkillReader
 
         return new NumberSkillFact
         {
-            Text = text.GetValue(),
+            Text = text.GetValueOrEmpty(),
             Icon = icon.GetValue(),
             Value = value.GetValue()
         };
