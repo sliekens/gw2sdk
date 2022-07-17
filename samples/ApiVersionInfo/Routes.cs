@@ -86,7 +86,7 @@ internal static class Routes
         "/v2/dungeons",
         "/v2/emblem",
         "/v2/emotes",
-        //"/v2/files",
+        "/v2/files",
         "/v2/finishers",
         //"/v2/gliders",
         //"/v2/guild/:id",
