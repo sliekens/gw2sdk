@@ -61,7 +61,7 @@ internal class Program
         {
             var pathTemplate = route.Active switch
             {
-                false => ":no_entry: [dim bol]{0}[/]",
+                false => ":no_entry: [dim bold]{0}[/]",
                 true when Routes.IsSupported(route) => ":rocket: [bold blue]{0}[/]",
                 _ => ":construction: {0}"
             };
