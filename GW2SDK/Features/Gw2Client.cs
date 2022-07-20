@@ -41,6 +41,8 @@ public sealed class Gw2Client
 
     public FinishersQuery Finishers => new(httpClient);
 
+    public GlidersQuery Gliders => new(httpClient);
+
     public HomeQuery Home => new(httpClient);
 
     public InventoryQuery Inventory => new(httpClient);
