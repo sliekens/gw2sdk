@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Net;
 using System.Runtime.InteropServices;
-using GW2SDK.Mumble.Win32;
+using GW2SDK.Win32;
 using JetBrains.Annotations;
 
 namespace GW2SDK.Mumble;

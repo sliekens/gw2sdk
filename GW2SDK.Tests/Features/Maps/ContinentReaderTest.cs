@@ -1,5 +1,4 @@
 ﻿using System.Text.Json;
-using GW2SDK.Json;
 using GW2SDK.Maps;
 using GW2SDK.Tests.TestInfrastructure;
 using Xunit;

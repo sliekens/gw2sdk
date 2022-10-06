@@ -3,7 +3,7 @@ using System.Globalization;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
-using GW2SDK;
+using GW2SDK.Meta;
 using Spectre.Console;
 
 namespace ApiVersionInfo;

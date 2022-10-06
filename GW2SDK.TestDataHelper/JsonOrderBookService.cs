@@ -2,11 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
-using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
 using GW2SDK.Commerce.Listings;
-using GW2SDK.Commerce.Prices;
 
 namespace GW2SDK.TestDataHelper;
 

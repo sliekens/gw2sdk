@@ -2,7 +2,6 @@
 using System.Threading;
 using System.Threading.Tasks;
 using GW2SDK.Http;
-using GW2SDK.Json;
 using JetBrains.Annotations;
 
 namespace GW2SDK.Emotes;

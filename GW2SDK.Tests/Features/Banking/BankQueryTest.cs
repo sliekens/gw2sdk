@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Threading.Tasks;
-using GW2SDK.Accounts.Banking;
-using GW2SDK.Accounts.Inventories;
+using GW2SDK.Banking;
+using GW2SDK.Inventories;
 using GW2SDK.Tests.TestInfrastructure;
 using Xunit;
 

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using GW2SDK.Accounts.Achievements;
+using GW2SDK.Achievements;
 using GW2SDK.Achievements.Categories;
 using GW2SDK.Achievements.Dailies;
 using GW2SDK.Achievements.Groups;

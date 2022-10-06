@@ -3,7 +3,6 @@ using System.IO;
 using System.IO.MemoryMappedFiles;
 using System.Threading;
 using System.Threading.Tasks;
-using GW2SDK.Json;
 using GW2SDK.Mumble;
 using Xunit;
 

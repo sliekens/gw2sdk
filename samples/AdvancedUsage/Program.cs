@@ -1,5 +1,4 @@
-﻿using GW2SDK;
-using GW2SDK.Meta;
+﻿using GW2SDK.Meta;
 
 using HttpClient httpClient = new();
 
