@@ -34,6 +34,9 @@ public sealed class SchemaVersion
     /// <summary>The schema version that GW2SDK is optimized for.</summary>
     public static readonly SchemaVersion Recommended = V20220323;
 
+    /// <summary>The schema version that GW2SDK should use (configurable, default is Recommended).</summary>
+    public static SchemaVersion Default = Recommended;
+
     private SchemaVersion(string version)
     {
         if (IsNullOrWhiteSpace(version))

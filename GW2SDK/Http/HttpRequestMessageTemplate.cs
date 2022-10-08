@@ -26,7 +26,7 @@ public sealed record HttpRequestMessageTemplate(HttpMethod Method, string Path)
         }
     }
 
-    public SchemaVersion? SchemaVersion { get; init; } = SchemaVersion.Recommended;
+    public SchemaVersion? SchemaVersion { get; init; } = SchemaVersion.Default;
 
     public HttpRequestMessage Compile()
     {
