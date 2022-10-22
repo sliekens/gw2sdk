@@ -51,6 +51,7 @@ public static class SkillReader
         NullableMember<int> nextChain = new("next_chain");
         NullableMember<int> prevChain = new("prev_chain");
         RequiredMember<SkillFlag> flags = new("flags");
+        NullableMember<int> specialization = new("specialization");
         RequiredMember<string> chatLink = new("chat_link");
         OptionalMember<SkillCategoryName> categories = new("categories");
 
@@ -113,6 +114,10 @@ public static class SkillReader
             {
                 flags.Value = member.Value;
             }
+            else if (member.NameEquals(specialization.Name))
+            {
+                specialization.Value = member.Value;
+            }
             else if (member.NameEquals(id.Name))
             {
                 id.Value = member.Value;
@@ -152,6 +157,7 @@ public static class SkillReader
             NextChain = nextChain.GetValue(),
             PreviousChain = prevChain.GetValue(),
             SkillFlag = flags.GetValues(missingMemberBehavior),
+            Specialization = specialization.GetValue(),
             ChatLink = chatLink.GetValue(),
             Categories = categories.GetValues(missingMemberBehavior)
         };
@@ -174,6 +180,7 @@ public static class SkillReader
         NullableMember<int> nextChain = new("next_chain");
         NullableMember<int> prevChain = new("prev_chain");
         RequiredMember<SkillFlag> flags = new("flags");
+        NullableMember<int> specialization = new("specialization");
         RequiredMember<int> id = new("id");
         RequiredMember<string> chatLink = new("chat_link");
         OptionalMember<SkillCategoryName> categories = new("categories");
@@ -237,6 +244,10 @@ public static class SkillReader
             {
                 flags.Value = member.Value;
             }
+            else if (member.NameEquals(specialization.Name))
+            {
+                specialization.Value = member.Value;
+            }
             else if (member.NameEquals(id.Name))
             {
                 id.Value = member.Value;
@@ -276,6 +287,7 @@ public static class SkillReader
             NextChain = nextChain.GetValue(),
             PreviousChain = prevChain.GetValue(),
             SkillFlag = flags.GetValues(missingMemberBehavior),
+            Specialization = specialization.GetValue(),
             ChatLink = chatLink.GetValue(),
             Categories = categories.GetValues(missingMemberBehavior)
         };
@@ -625,6 +637,7 @@ public static class SkillReader
         NullableMember<int> nextChain = new("next_chain");
         NullableMember<int> prevChain = new("prev_chain");
         RequiredMember<SkillFlag> flags = new("flags");
+        NullableMember<int> specialization = new("specialization");
         RequiredMember<string> chatLink = new("chat_link");
         OptionalMember<SkillCategoryName> categories = new("categories");
 
@@ -687,6 +700,10 @@ public static class SkillReader
             {
                 flags.Value = member.Value;
             }
+            else if (member.NameEquals(specialization.Name))
+            {
+                specialization.Value = member.Value;
+            }
             else if (member.NameEquals(id.Name))
             {
                 id.Value = member.Value;
@@ -726,6 +743,7 @@ public static class SkillReader
             NextChain = nextChain.GetValue(),
             PreviousChain = prevChain.GetValue(),
             SkillFlag = flags.GetValues(missingMemberBehavior),
+            Specialization = specialization.GetValue(),
             ChatLink = chatLink.GetValue(),
             Categories = categories.GetValues(missingMemberBehavior)
         };
@@ -749,6 +767,7 @@ public static class SkillReader
         NullableMember<int> nextChain = new("next_chain");
         NullableMember<int> prevChain = new("prev_chain");
         RequiredMember<SkillFlag> flags = new("flags");
+        NullableMember<int> specialization = new("specialization");
         RequiredMember<string> chatLink = new("chat_link");
         OptionalMember<SkillCategoryName> categories = new("categories");
 
@@ -811,6 +830,10 @@ public static class SkillReader
             {
                 flags.Value = member.Value;
             }
+            else if (member.NameEquals(specialization.Name))
+            {
+                specialization.Value = member.Value;
+            }
             else if (member.NameEquals(id.Name))
             {
                 id.Value = member.Value;
@@ -850,6 +873,7 @@ public static class SkillReader
             NextChain = nextChain.GetValue(),
             PreviousChain = prevChain.GetValue(),
             SkillFlag = flags.GetValues(missingMemberBehavior),
+            Specialization = specialization.GetValue(),
             ChatLink = chatLink.GetValue(),
             Categories = categories.GetValues(missingMemberBehavior)
         };
@@ -1021,6 +1045,7 @@ public static class SkillReader
         NullableMember<int> nextChain = new("next_chain");
         NullableMember<int> prevChain = new("prev_chain");
         RequiredMember<SkillFlag> flags = new("flags");
+        NullableMember<int> specialization = new("specialization");
         RequiredMember<string> chatLink = new("chat_link");
         OptionalMember<SkillCategoryName> categories = new("categories");
 
@@ -1083,6 +1108,10 @@ public static class SkillReader
             {
                 flags.Value = member.Value;
             }
+            else if (member.NameEquals(specialization.Name))
+            {
+                specialization.Value = member.Value;
+            }
             else if (member.NameEquals(id.Name))
             {
                 id.Value = member.Value;
@@ -1122,6 +1151,7 @@ public static class SkillReader
             NextChain = nextChain.GetValue(),
             PreviousChain = prevChain.GetValue(),
             SkillFlag = flags.GetValues(missingMemberBehavior),
+            Specialization = specialization.GetValue(),
             ChatLink = chatLink.GetValue(),
             Categories = categories.GetValues(missingMemberBehavior)
         };
@@ -1145,6 +1175,7 @@ public static class SkillReader
         NullableMember<int> nextChain = new("next_chain");
         NullableMember<int> prevChain = new("prev_chain");
         RequiredMember<SkillFlag> flags = new("flags");
+        NullableMember<int> specialization = new("specialization");
         RequiredMember<string> chatLink = new("chat_link");
         OptionalMember<SkillCategoryName> categories = new("categories");
 
@@ -1207,6 +1238,10 @@ public static class SkillReader
             {
                 flags.Value = member.Value;
             }
+            else if (member.NameEquals(specialization.Name))
+            {
+                specialization.Value = member.Value;
+            }
             else if (member.NameEquals(id.Name))
             {
                 id.Value = member.Value;
@@ -1246,6 +1281,7 @@ public static class SkillReader
             NextChain = nextChain.GetValue(),
             PreviousChain = prevChain.GetValue(),
             SkillFlag = flags.GetValues(missingMemberBehavior),
+            Specialization = specialization.GetValue(),
             ChatLink = chatLink.GetValue(),
             Categories = categories.GetValues(missingMemberBehavior)
         };
@@ -1429,10 +1465,10 @@ public static class SkillReader
         NullableMember<int> nextChain = new("next_chain");
         NullableMember<int> prevChain = new("prev_chain");
         RequiredMember<SkillFlag> flags = new("flags");
+        NullableMember<int> specialization = new("specialization");
         RequiredMember<string> chatLink = new("chat_link");
         NullableMember<Attunement> attunement = new("attunement");
         NullableMember<Attunement> dualAttunement = new("dual_attunement");
-        NullableMember<int> specialization = new("specialization");
         OptionalMember<SkillCategoryName> categories = new("categories");
         NullableMember<int> cost = new("cost");
         NullableMember<Offhand> offhand = new("dual_wield");
@@ -1497,6 +1533,10 @@ public static class SkillReader
             {
                 flags.Value = member.Value;
             }
+            else if (member.NameEquals(specialization.Name))
+            {
+                specialization.Value = member.Value;
+            }
             else if (member.NameEquals(id.Name))
             {
                 id.Value = member.Value;
@@ -1555,7 +1595,6 @@ public static class SkillReader
             Icon = icon.GetValueOrNull(),
             WeaponType = weaponType.GetValue(missingMemberBehavior),
             Professions = professions.GetValues(missingMemberBehavior),
-            Specialization = specialization.GetValue(),
             Attunement = attunement.GetValue(missingMemberBehavior),
             DualAttunement = dualAttunement.GetValue(missingMemberBehavior),
             Slot = slot.GetValue(missingMemberBehavior),
@@ -1563,6 +1602,7 @@ public static class SkillReader
             NextChain = nextChain.GetValue(),
             PreviousChain = prevChain.GetValue(),
             SkillFlag = flags.GetValues(missingMemberBehavior),
+            Specialization = specialization.GetValue(),
             ChatLink = chatLink.GetValue(),
             Categories = categories.GetValues(missingMemberBehavior),
             Cost = cost.GetValue(),

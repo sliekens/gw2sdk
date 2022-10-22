@@ -39,4 +39,6 @@ public record Skill
     public int? NextChain { get; init; }
 
     public int? PreviousChain { get; init; }
+
+    public int? Specialization { get; init; }
 }

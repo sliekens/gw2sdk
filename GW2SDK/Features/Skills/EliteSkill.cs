@@ -6,8 +6,6 @@ namespace GW2SDK.Skills;
 [PublicAPI]
 public sealed record EliteSkill : Skill
 {
-    public int? Specialization { get; init; }
-
     public int? ToolbeltSkill { get; init; }
 
     public Attunement? Attunement { get; init; }
