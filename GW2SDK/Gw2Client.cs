@@ -15,6 +15,7 @@ using GW2SDK.Emotes;
 using GW2SDK.Files;
 using GW2SDK.Finishers;
 using GW2SDK.Gliders;
+using GW2SDK.Guilds;
 using GW2SDK.Home;
 using GW2SDK.Inventories;
 using GW2SDK.Items;
@@ -76,6 +77,8 @@ public sealed class Gw2Client
     public FinishersQuery Finishers => new(httpClient);
 
     public GlidersQuery Gliders => new(httpClient);
+
+    public GuildsQuery Guilds => new(httpClient);
 
     public HomeQuery Home => new(httpClient);
 
