@@ -12,12 +12,12 @@ public sealed class GuildPermissionByIdRequest : IHttpRequest<IReplica<GuildPerm
     private static readonly HttpRequestMessageTemplate Template =
         new(HttpMethod.Get, "/v2/guild/permissions") { AcceptEncoding = "gzip" };
 
-    public GuildPermissionByIdRequest(string guildPermissionId)
+    public GuildPermissionByIdRequest(GuildPermission guildPermissionId)
     {
         GuildPermissionId = guildPermissionId;
     }
 
-    public string GuildPermissionId { get; }
+    public GuildPermission GuildPermissionId { get; }
 
     public Language? Language { get; init; }
 
@@ -31,7 +31,7 @@ public sealed class GuildPermissionByIdRequest : IHttpRequest<IReplica<GuildPerm
         using var response = await httpClient.SendAsync(
                 Template with
                 {
-                    Arguments = new QueryBuilder { { "id", GuildPermissionId } },
+                    Arguments = new QueryBuilder { { "id", GuildPermissionId.ToString() } },
                     AcceptLanguage = Language?.Alpha2Code
                 },
                 cancellationToken

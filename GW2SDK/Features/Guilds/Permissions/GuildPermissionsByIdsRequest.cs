@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
@@ -14,13 +15,13 @@ public sealed class GuildPermissionsByIdsRequest : IHttpRequest<IReplicaSet<Guil
     private static readonly HttpRequestMessageTemplate Template =
         new(HttpMethod.Get, "/v2/guild/permissions") { AcceptEncoding = "gzip" };
 
-    public GuildPermissionsByIdsRequest(IReadOnlyCollection<string> guildPermissionIds)
+    public GuildPermissionsByIdsRequest(IReadOnlyCollection<GuildPermission> guildPermissionIds)
     {
         Check.Collection(guildPermissionIds, nameof(guildPermissionIds));
         GuildPermissionIds = guildPermissionIds;
     }
 
-    public IReadOnlyCollection<string> GuildPermissionIds { get; }
+    public IReadOnlyCollection<GuildPermission> GuildPermissionIds { get; }
 
     public Language? Language { get; init; }
 
@@ -34,7 +35,8 @@ public sealed class GuildPermissionsByIdsRequest : IHttpRequest<IReplicaSet<Guil
         using var response = await httpClient.SendAsync(
                 Template with
                 {
-                    Arguments = new QueryBuilder { { "ids", GuildPermissionIds } },
+                    Arguments =
+                    new QueryBuilder { { "ids", GuildPermissionIds.Select(id => id.ToString()) } },
                     AcceptLanguage = Language?.Alpha2Code
                 },
                 cancellationToken

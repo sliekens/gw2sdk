@@ -30,20 +30,21 @@ public sealed class GuildsQuery
         GuildPermissionsRequest request = new()
         {
             Language = language,
-            MissingMemberBehavior = missingMemberBehavior,
+            MissingMemberBehavior = missingMemberBehavior
         };
         return request.SendAsync(http, cancellationToken);
     }
 
-
-    public Task<IReplicaSet<string>> GetGuildPermissionsIndex(CancellationToken cancellationToken = default)
+    public Task<IReplicaSet<string>> GetGuildPermissionsIndex(
+        CancellationToken cancellationToken = default
+    )
     {
         GuildPermissionsIndexRequest request = new();
         return request.SendAsync(http, cancellationToken);
     }
 
     public Task<IReplica<GuildPermissionSummary>> GetGuildPermissionById(
-        string guildPermissionId,
+        GuildPermission guildPermissionId,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
@@ -58,7 +59,7 @@ public sealed class GuildsQuery
     }
 
     public Task<IReplicaSet<GuildPermissionSummary>> GetGuildPermissionsByIds(
-        IReadOnlyCollection<string> guildPermissionIds,
+        IReadOnlyCollection<GuildPermission> guildPermissionIds,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default

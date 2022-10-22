@@ -13,11 +13,11 @@ public class GuildPermissionsByFilter
         await using Composer services = new();
         var sut = services.Resolve<Gw2Client>();
 
-        HashSet<string> ids = new()
+        HashSet<GuildPermission> ids = new()
         {
-            "StartingRole",
-            "DepositCoinsTrove",
-            "WithdrawCoinsTrove"
+            GuildPermission.StartingRole,
+            GuildPermission.DepositCoinsTrove,
+            GuildPermission.WithdrawCoinsTrove
         };
 
         var actual = await sut.Guilds.GetGuildPermissionsByIds(ids);

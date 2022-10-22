@@ -12,7 +12,7 @@ public class GuildPermissionById
         await using Composer services = new();
         var sut = services.Resolve<Gw2Client>();
 
-        const string guildPermissionId = "StartingRole";
+        const GuildPermission guildPermissionId = GuildPermission.StartingRole;
 
         var actual = await sut.Guilds.GetGuildPermissionById(guildPermissionId);
 

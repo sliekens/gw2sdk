@@ -13,7 +13,7 @@ public static class GuildPermissionReader
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember<string> id = new("id");
+        RequiredMember<GuildPermission> id = new("id");
         RequiredMember<string> name = new("name");
         RequiredMember<string> description = new("description");
 
@@ -39,7 +39,7 @@ public static class GuildPermissionReader
 
         return new GuildPermissionSummary
         {
-            Id = id.GetValue(),
+            Id = id.GetValue(missingMemberBehavior),
             Name = name.GetValue(),
             Description = description.GetValue()
         };

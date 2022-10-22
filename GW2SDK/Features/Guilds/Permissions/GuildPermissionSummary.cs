@@ -7,7 +7,7 @@ namespace GW2SDK.Guilds.Permissions;
 [DataTransferObject]
 public sealed record GuildPermissionSummary
 {
-    public string Id { get; init; } = "";
+    public GuildPermission Id { get; init; }
 
     public string Name { get; init; } = "";
 
