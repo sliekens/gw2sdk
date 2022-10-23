@@ -26,23 +26,10 @@ public sealed record HttpRequestMessageTemplate(HttpMethod Method, string Path)
         }
     }
 
-    public SchemaVersion? SchemaVersion { get; init; } = SchemaVersion.Default;
-
     public HttpRequestMessage Compile()
     {
-        var arguments = Arguments.Clone();
-        if (SchemaVersion is not null)
-        {
-            arguments.Add("v", SchemaVersion.Version);
-        }
-
-        var location = Path;
-        if (arguments.Count != 0)
-        {
-            location += arguments;
-        }
-
-        HttpRequestMessage message = new(Method, new Uri(location, UriKind.Relative));
+        Uri location = new(Path + Arguments, UriKind.Relative);
+        HttpRequestMessage message = new(Method, location);
         if (!string.IsNullOrWhiteSpace(BearerToken))
         {
             message.Headers.Authorization = new AuthenticationHeaderValue("Bearer", BearerToken);

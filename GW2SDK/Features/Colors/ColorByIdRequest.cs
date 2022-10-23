@@ -34,7 +34,11 @@ public sealed class ColorByIdRequest : IHttpRequest<IReplica<Dye>>
         using var response = await httpClient.SendAsync(
                 Template with
                 {
-                    Arguments = new QueryBuilder { { "id", ColorId } },
+                    Arguments = new QueryBuilder
+                    {
+                        { "id", ColorId },
+                        { "v", SchemaVersion.Recommended }
+                    },
                     AcceptLanguage = Language?.Alpha2Code
                 },
                 cancellationToken

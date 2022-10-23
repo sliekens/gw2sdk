@@ -13,7 +13,8 @@ public sealed class MountNamesRequest : IHttpRequest<IReplicaSet<MountName>>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "/v2/mounts/types")
     {
-        AcceptEncoding = "gzip"
+        AcceptEncoding = "gzip",
+        Arguments = new QueryBuilder { { "v", SchemaVersion.Recommended } }
     };
 
     public MissingMemberBehavior MissingMemberBehavior { get; init; }

@@ -32,7 +32,11 @@ public sealed class AccountAchievementByIdRequest : IHttpRequest<IReplica<Accoun
         using var response = await httpClient.SendAsync(
                 Template with
                 {
-                    Arguments = new QueryBuilder { { "id", AchievementId } },
+                    Arguments = new QueryBuilder
+                    {
+                        { "id", AchievementId },
+                        { "v", SchemaVersion.Recommended }
+                    },
                     BearerToken = AccessToken
                 },
                 cancellationToken

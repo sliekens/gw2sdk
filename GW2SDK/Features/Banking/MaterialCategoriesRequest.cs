@@ -14,7 +14,11 @@ public sealed class MaterialCategoriesRequest : IHttpRequest<IReplicaSet<Materia
     private static readonly HttpRequestMessageTemplate Template = new(Get, "/v2/materials")
     {
         AcceptEncoding = "gzip",
-        Arguments = new QueryBuilder { { "ids", "all" } }
+        Arguments = new QueryBuilder
+        {
+            { "ids", "all" },
+            { "v", SchemaVersion.Recommended }
+        }
     };
 
     public Language? Language { get; init; }

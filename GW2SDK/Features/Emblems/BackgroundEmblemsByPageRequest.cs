@@ -35,6 +35,7 @@ public sealed class BackgroundEmblemsByPageRequest : IHttpRequest<IReplicaPage<E
             search.Add("page_size", PageSize.Value);
         }
 
+        search.Add("v", SchemaVersion.Recommended);
         using var response = await httpClient.SendAsync(
                 Template with { Arguments = search },
                 cancellationToken

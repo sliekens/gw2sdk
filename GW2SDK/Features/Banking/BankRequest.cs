@@ -12,7 +12,8 @@ public sealed class BankRequest : IHttpRequest<IReplica<Bank>>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "/v2/account/bank")
     {
-        AcceptEncoding = "gzip"
+        AcceptEncoding = "gzip",
+        Arguments = new QueryBuilder { { "v", SchemaVersion.Recommended } }
     };
 
     public string? AccessToken { get; init; }

@@ -37,7 +37,7 @@ public sealed class ItemStatsByIdsRequest : IHttpRequest<IReplicaSet<ItemStat>>
         using var response = await httpClient.SendAsync(
                 Template with
                 {
-                    Arguments = new QueryBuilder { { "ids", ItemStatIds } },
+                    Arguments = new QueryBuilder { { "ids", ItemStatIds }, { "v", SchemaVersion.Recommended } },
                     AcceptLanguage = Language?.Alpha2Code
                 },
                 cancellationToken

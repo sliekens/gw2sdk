@@ -33,7 +33,8 @@ public sealed class OrderBooksByIdsRequest : IHttpRequest<IReplicaSet<OrderBook>
     )
     {
         using var response = await httpClient.SendAsync(
-                Template with { Arguments = new QueryBuilder { { "ids", ItemIds } } },
+                Template with { Arguments = new QueryBuilder { { "ids", ItemIds },
+                    { "v", SchemaVersion.Recommended } } },
                 cancellationToken
             )
             .ConfigureAwait(false);

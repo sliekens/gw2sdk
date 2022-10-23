@@ -11,7 +11,6 @@ public class Program
 {
     public static async Task Main(string outDir)
     {
-        SchemaVersion.Default = SchemaVersion.Latest;
         Directory.CreateDirectory(outDir);
         await using var services = new Container();
 

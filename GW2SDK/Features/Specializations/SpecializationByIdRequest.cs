@@ -34,7 +34,7 @@ public sealed class SpecializationByIdRequest : IHttpRequest<IReplica<Specializa
         using var response = await httpClient.SendAsync(
                 Template with
                 {
-                    Arguments = new QueryBuilder { { "id", SpecializationId } },
+                    Arguments = new QueryBuilder { { "id", SpecializationId }, { "v", SchemaVersion.Recommended } },
                     AcceptLanguage = Language?.Alpha2Code
                 },
                 cancellationToken

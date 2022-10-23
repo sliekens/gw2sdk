@@ -14,7 +14,11 @@ public sealed class BuildStorageRequest : IHttpRequest<IReplicaSet<Build>>
         new(HttpMethod.Get, "/v2/account/buildstorage")
         {
             AcceptEncoding = "gzip",
-            Arguments = new QueryBuilder { { "ids", "all" } }
+            Arguments = new QueryBuilder
+            {
+                { "ids", "all" },
+                { "v", SchemaVersion.Recommended }
+            }
         };
 
     public string? AccessToken { get; init; }

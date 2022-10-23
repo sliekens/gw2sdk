@@ -36,7 +36,7 @@ public sealed class MasteriesByIdsRequest : IHttpRequest<IReplicaSet<Mastery>>
         using var response = await httpClient.SendAsync(
                 Template with
                 {
-                    Arguments = new QueryBuilder { { "ids", MasteryIds } },
+                    Arguments = new QueryBuilder { { "ids", MasteryIds }, { "v", SchemaVersion.Recommended } },
                     AcceptLanguage = Language?.Alpha2Code
                 },
                 cancellationToken

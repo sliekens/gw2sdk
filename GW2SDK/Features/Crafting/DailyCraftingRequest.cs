@@ -14,7 +14,8 @@ public sealed class DailyCraftingRequest : IHttpRequest<IReplica<IReadOnlyCollec
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "/v2/dailycrafting")
     {
-        AcceptEncoding = "gzip"
+        AcceptEncoding = "gzip",
+        Arguments = new QueryBuilder { { "v", SchemaVersion.Recommended } }
     };
 
     public async Task<IReplica<IReadOnlyCollection<string>>> SendAsync(

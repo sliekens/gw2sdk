@@ -36,7 +36,11 @@ public sealed class
         using var response = await httpClient.SendAsync(
                 Template with
                 {
-                    Arguments = new QueryBuilder { { "ids", AchievementCategoryIds } },
+                    Arguments = new QueryBuilder
+                    {
+                        { "ids", AchievementCategoryIds },
+                        { "v", SchemaVersion.Recommended }
+                    },
                     AcceptLanguage = Language?.Alpha2Code
                 },
                 cancellationToken

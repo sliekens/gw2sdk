@@ -14,7 +14,11 @@ public sealed class BoundLegendaryItemsRequest : IHttpRequest<IReplicaSet<BoundL
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "/v2/account/legendaryarmory")
         {
-            Arguments = new QueryBuilder { { "ids", "all" } }
+            Arguments = new QueryBuilder
+            {
+                { "ids", "all" },
+                { "v", SchemaVersion.Recommended }
+            }
         };
 
     public BoundLegendaryItemsRequest(string? accessToken)

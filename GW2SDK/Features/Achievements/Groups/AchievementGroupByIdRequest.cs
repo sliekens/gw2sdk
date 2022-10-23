@@ -33,7 +33,11 @@ public sealed class AchievementGroupByIdRequest : IHttpRequest<IReplica<Achievem
         using var response = await httpClient.SendAsync(
                 Template with
                 {
-                    Arguments = new QueryBuilder { { "id", AchievementGroupId } },
+                    Arguments = new QueryBuilder
+                    {
+                        { "id", AchievementGroupId },
+                        { "v", SchemaVersion.Recommended }
+                    },
                     AcceptLanguage = Language?.Alpha2Code
                 },
                 cancellationToken

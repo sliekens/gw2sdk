@@ -14,7 +14,7 @@ public sealed class GlidersRequest : IHttpRequest<IReplicaSet<Glider>>
         new(HttpMethod.Get, "/v2/gliders")
         {
             AcceptEncoding = "gzip",
-            Arguments = new QueryBuilder { { "ids", "all" } }
+            Arguments = new QueryBuilder { { "ids", "all" }, { "v", SchemaVersion.Recommended } }
         };
 
     public Language? Language { get; init; }

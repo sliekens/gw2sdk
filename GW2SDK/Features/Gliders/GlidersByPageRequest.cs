@@ -37,6 +37,7 @@ public sealed class GlidersByPageRequest : IHttpRequest<IReplicaPage<Glider>>
             search.Add("page_size", PageSize.Value);
         }
 
+        search.Add("v", SchemaVersion.Recommended);
         using var response = await httpClient.SendAsync(
                 Template with
                 {

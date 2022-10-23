@@ -37,7 +37,11 @@ public sealed class TitlesByIdsRequest : IHttpRequest<IReplicaSet<Title>>
         using var response = await httpClient.SendAsync(
                 Template with
                 {
-                    Arguments = new QueryBuilder { { "ids", TitleIds } },
+                    Arguments = new QueryBuilder
+                    {
+                        { "ids", TitleIds },
+                        { "v", SchemaVersion.Recommended }
+                    },
                     AcceptLanguage = Language?.Alpha2Code
                 },
                 cancellationToken

@@ -3,7 +3,6 @@ using System.Globalization;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
-using GW2SDK;
 using GW2SDK.Meta;
 using Spectre.Console;
 
@@ -16,7 +15,6 @@ internal class Program
         Console.OutputEncoding = Encoding.UTF8;
         CultureInfo.CurrentCulture = CultureInfo.GetCultureInfo("en");
         CultureInfo.CurrentUICulture = CultureInfo.GetCultureInfo("en");
-        SchemaVersion.Default = SchemaVersion.Latest;
     }
 
     private static async Task Main(string[] args)

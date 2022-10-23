@@ -13,7 +13,8 @@ public sealed class ProfessionNamesRequest : IHttpRequest<IReplicaSet<Profession
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "/v2/professions")
     {
-        AcceptEncoding = "gzip"
+        AcceptEncoding = "gzip",
+        Arguments = new QueryBuilder { { "v", SchemaVersion.Recommended } }
     };
 
     public MissingMemberBehavior MissingMemberBehavior { get; init; }

@@ -38,7 +38,11 @@ public sealed class ItemsByIdsRequest : IHttpRequest<IReplicaSet<Item>>
                 Template with
                 {
                     AcceptLanguage = Language?.Alpha2Code,
-                    Arguments = new QueryBuilder { { "ids", ItemIds } }
+                    Arguments = new QueryBuilder
+                    {
+                        { "ids", ItemIds },
+                        { "v", SchemaVersion.Recommended }
+                    }
                 },
                 cancellationToken
             )

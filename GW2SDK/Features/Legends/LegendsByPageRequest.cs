@@ -1,4 +1,4 @@
-using System.Net.Http;
+﻿using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 using GW2SDK.Http;
@@ -35,6 +35,7 @@ public sealed class LegendsByPageRequest : IHttpRequest<IReplicaPage<Legend>>
             search.Add("page_size", PageSize.Value);
         }
 
+        search.Add("v", SchemaVersion.Recommended);
         using var response = await httpClient.SendAsync(
                 Template with { Arguments = search },
                 cancellationToken

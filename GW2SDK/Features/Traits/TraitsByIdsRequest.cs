@@ -37,7 +37,7 @@ public sealed class TraitsByIdsRequest : IHttpRequest<IReplicaSet<Trait>>
         using var response = await httpClient.SendAsync(
                 Template with
                 {
-                    Arguments = new QueryBuilder { { "ids", TraitIds } },
+                    Arguments = new QueryBuilder { { "ids", TraitIds }, { "v", SchemaVersion.Recommended } },
                     AcceptLanguage = Language?.Alpha2Code
                 },
                 cancellationToken

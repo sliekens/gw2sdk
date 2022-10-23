@@ -15,7 +15,11 @@ public sealed class AchievementGroupsRequest : IHttpRequest<IReplicaSet<Achievem
         new(Get, "/v2/achievements/groups")
         {
             AcceptEncoding = "gzip",
-            Arguments = new QueryBuilder { { "ids", "all" } }
+            Arguments = new QueryBuilder
+            {
+                { "ids", "all" },
+                { "v", SchemaVersion.Recommended }
+            }
         };
 
     public Language? Language { get; init; }

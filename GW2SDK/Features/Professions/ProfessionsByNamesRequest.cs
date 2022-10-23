@@ -39,7 +39,7 @@ public sealed class ProfessionsByNamesRequest : IHttpRequest<IReplicaSet<Profess
                 Template with
                 {
                     Arguments =
-                    new QueryBuilder { { "ids", ProfessionNames.Select(name => name.ToString()) } },
+                    new QueryBuilder { { "ids", ProfessionNames.Select(name => name.ToString()) }, { "v", SchemaVersion.Recommended } },
                     AcceptLanguage = Language?.Alpha2Code
                 },
                 cancellationToken

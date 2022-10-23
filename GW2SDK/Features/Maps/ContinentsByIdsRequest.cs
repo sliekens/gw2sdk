@@ -37,7 +37,7 @@ public sealed class ContinentsByIdsRequest : IHttpRequest<IReplicaSet<Continent>
         using var response = await httpClient.SendAsync(
                 Template with
                 {
-                    Arguments = new QueryBuilder { { "ids", ContinentIds } },
+                    Arguments = new QueryBuilder { { "ids", ContinentIds }, { "v", SchemaVersion.Recommended } },
                     AcceptLanguage = Language?.Alpha2Code
                 },
                 cancellationToken

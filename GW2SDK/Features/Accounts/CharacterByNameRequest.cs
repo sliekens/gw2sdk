@@ -35,7 +35,11 @@ public sealed class CharacterByNameRequest : IHttpRequest<IReplica<Character>>
                 Template with
                 {
                     BearerToken = AccessToken,
-                    Arguments = new QueryBuilder { { "id", CharacterName } }
+                    Arguments = new QueryBuilder
+                    {
+                        { "id", CharacterName },
+                        { "v", SchemaVersion.Recommended }
+                    }
                 },
                 cancellationToken
             )

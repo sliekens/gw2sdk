@@ -33,6 +33,8 @@ public class TestHttpClientFactory : IHttpClientFactory, IAsyncDisposable
     {
         var services = new ServiceCollection();
 
+        services.AddTransient<SchemaVersionHandler>();
+
         services.AddHttpClient(
                 "GW2SDK",
                 http =>
@@ -40,6 +42,7 @@ public class TestHttpClientFactory : IHttpClientFactory, IAsyncDisposable
                     http.BaseAddress = baseAddress;
                 }
             )
+            .AddHttpMessageHandler<SchemaVersionHandler>()
             .AddPolicyHandler(
                 Policy.TimeoutAsync<HttpResponseMessage>(
                     TimeSpan.FromSeconds(100),

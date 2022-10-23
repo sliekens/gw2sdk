@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
@@ -13,7 +13,8 @@ public sealed class OwnedMountsRequest : IHttpRequest<IReplica<IReadOnlyCollecti
 {
     private static readonly HttpRequestMessageTemplate Template = new(HttpMethod.Get, "/v2/account/mounts/types")
     {
-        AcceptEncoding = "gzip"
+        AcceptEncoding = "gzip",
+        Arguments = new QueryBuilder { { "v", SchemaVersion.Recommended } }
     };
     public OwnedMountsRequest(string? accessToken)
     {

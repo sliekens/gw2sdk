@@ -29,7 +29,7 @@ public sealed class RecipesIndexByOutputItemIdRequest : IHttpRequest<IReplicaSet
     )
     {
         using var response = await httpClient.SendAsync(
-                Template with { Arguments = new QueryBuilder { { "output", OutputItemId } } },
+                Template with { Arguments = new QueryBuilder { { "output", OutputItemId }, { "v", SchemaVersion.Recommended } } },
                 cancellationToken
             )
             .ConfigureAwait(false);

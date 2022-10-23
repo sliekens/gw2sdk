@@ -40,6 +40,7 @@ public sealed class WorldsByPageRequest : IHttpRequest<IReplicaPage<World>>
             search.Add("page_size", PageSize.Value);
         }
 
+        search.Add("v", SchemaVersion.Recommended);
         using var response = await httpClient.SendAsync(
                 Template with
                 {

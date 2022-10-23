@@ -12,7 +12,8 @@ public sealed class DeliveryRequest : IHttpRequest<IReplica<DeliveryBox>>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "/v2/commerce/delivery")
     {
-        AcceptEncoding = "gzip"
+        AcceptEncoding = "gzip",
+        Arguments = new QueryBuilder { { "v", SchemaVersion.Recommended } }
     };
 
     public string? AccessToken { get; init; }

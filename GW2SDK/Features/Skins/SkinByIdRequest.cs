@@ -34,7 +34,7 @@ public sealed class SkinByIdRequest : IHttpRequest<IReplica<Skin>>
         using var response = await httpClient.SendAsync(
                 Template with
                 {
-                    Arguments = new QueryBuilder { { "id", SkinId } },
+                    Arguments = new QueryBuilder { { "id", SkinId }, { "v", SchemaVersion.Recommended } },
                     AcceptLanguage = Language?.Alpha2Code
                 },
                 cancellationToken

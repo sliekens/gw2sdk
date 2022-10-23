@@ -33,7 +33,7 @@ public sealed class RacesByPageRequest : IHttpRequest<IReplicaPage<Race>>
         CancellationToken cancellationToken
     )
     {
-        QueryBuilder search = new() { { "page", PageIndex } };
+        QueryBuilder search = new() { { "page", PageIndex }, { "v", SchemaVersion.Recommended } };
         if (PageSize.HasValue)
         {
             search.Add("page_size", PageSize.Value);

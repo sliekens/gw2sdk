@@ -14,7 +14,7 @@ public sealed class SpecializationsRequest : IHttpRequest<IReplicaSet<Specializa
     private static readonly HttpRequestMessageTemplate Template = new(Get, "/v2/specializations")
     {
         AcceptEncoding = "gzip",
-        Arguments = new QueryBuilder { { "ids", "all" } }
+        Arguments = new QueryBuilder { { "ids", "all" }, { "v", SchemaVersion.Recommended } }
     };
 
     public Language? Language { get; init; }

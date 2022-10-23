@@ -11,7 +11,9 @@ namespace GW2SDK.Emotes;
 public sealed class EmotesIndexRequest : IHttpRequest<IReplicaSet<string>>
 {
     private static readonly HttpRequestMessageTemplate Template =
-        new(HttpMethod.Get, "/v2/emotes") { AcceptEncoding = "gzip" };
+        new(HttpMethod.Get, "/v2/emotes") { AcceptEncoding = "gzip",
+            Arguments = new QueryBuilder { { "v", SchemaVersion.Recommended } }
+        };
 
     public async Task<IReplicaSet<string>> SendAsync(
         HttpClient httpClient,

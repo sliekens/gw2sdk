@@ -30,7 +30,8 @@ public sealed class ItemPriceByIdRequest : IHttpRequest<IReplica<ItemPrice>>
     )
     {
         using var response = await httpClient.SendAsync(
-                Template with { Arguments = new QueryBuilder { { "id", ItemId } } },
+                Template with { Arguments = new QueryBuilder { { "id", ItemId },
+                    { "v", SchemaVersion.Recommended } } },
                 cancellationToken
             )
             .ConfigureAwait(false);

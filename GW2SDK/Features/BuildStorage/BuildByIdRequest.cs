@@ -31,7 +31,11 @@ public sealed class BuildByIdRequest : IHttpRequest<IReplica<Build>>
         using var response = await httpClient.SendAsync(
                 Template with
                 {
-                    Arguments = new QueryBuilder { { "id", BuildStorageId } },
+                    Arguments = new QueryBuilder
+                    {
+                        { "id", BuildStorageId },
+                        { "v", SchemaVersion.Recommended }
+                    },
                     BearerToken = AccessToken
                 },
                 cancellationToken

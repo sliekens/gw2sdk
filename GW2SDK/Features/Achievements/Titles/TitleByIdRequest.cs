@@ -32,7 +32,14 @@ public sealed class TitleByIdRequest : IHttpRequest<IReplica<Title>>
     )
     {
         using var response = await httpClient.SendAsync(
-                Template with { Arguments = new QueryBuilder { { "id", TitleId } } },
+                Template with
+                {
+                    Arguments = new QueryBuilder
+                    {
+                        { "id", TitleId },
+                        { "v", SchemaVersion.Recommended }
+                    }
+                },
                 cancellationToken
             )
             .ConfigureAwait(false);

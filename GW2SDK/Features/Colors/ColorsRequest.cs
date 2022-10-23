@@ -14,7 +14,11 @@ public sealed class ColorsRequest : IHttpRequest<IReplicaSet<Dye>>
     private static readonly HttpRequestMessageTemplate Template = new(Get, "/v2/colors")
     {
         AcceptEncoding = "gzip",
-        Arguments = new QueryBuilder { { "ids", "all" } }
+        Arguments = new QueryBuilder
+        {
+            { "ids", "all" },
+            { "v", SchemaVersion.Recommended }
+        }
     };
 
     public Language? Language { get; init; }

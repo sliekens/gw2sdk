@@ -14,7 +14,11 @@ public sealed class CharactersRequest : IHttpRequest<IReplicaSet<Character>>
     private static readonly HttpRequestMessageTemplate Template = new(Get, "/v2/characters")
     {
         AcceptEncoding = "gzip",
-        Arguments = new QueryBuilder { { "ids", "all" } }
+        Arguments = new QueryBuilder
+        {
+            { "ids", "all" },
+            { "v", SchemaVersion.Recommended }
+        }
     };
 
     public string? AccessToken { get; init; }

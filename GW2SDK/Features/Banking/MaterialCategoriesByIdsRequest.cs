@@ -37,7 +37,11 @@ public sealed class MaterialCategoriesByIdsRequest : IHttpRequest<IReplicaSet<Ma
         using var response = await httpClient.SendAsync(
                 Template with
                 {
-                    Arguments = new QueryBuilder { { "ids", MaterialCategoriesIds } },
+                    Arguments = new QueryBuilder
+                    {
+                        { "ids", MaterialCategoriesIds },
+                        { "v", SchemaVersion.Recommended }
+                    },
                     AcceptLanguage = Language?.Alpha2Code
                 },
                 cancellationToken

@@ -34,7 +34,7 @@ public sealed class FinishersByIdsRequest : IHttpRequest<IReplicaSet<Finisher>>
         using var response = await httpClient.SendAsync(
                 Template with
                 {
-                    Arguments = new QueryBuilder { { "ids", FinisherIds } },
+                    Arguments = new QueryBuilder { { "ids", FinisherIds }, { "v", SchemaVersion.Recommended } },
                     AcceptLanguage = Language?.Alpha2Code
                 },
                 cancellationToken

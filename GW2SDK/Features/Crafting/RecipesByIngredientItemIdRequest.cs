@@ -36,7 +36,7 @@ public sealed class RecipesByIngredientItemIdRequest : IHttpRequest<IReplicaSet<
                     Arguments = new QueryBuilder
                     {
                         { "input", IngredientItemId },
-                        { "ids", "all" }
+                        { "ids", "all" }, { "v", SchemaVersion.Recommended }
                     }
                 },
                 cancellationToken

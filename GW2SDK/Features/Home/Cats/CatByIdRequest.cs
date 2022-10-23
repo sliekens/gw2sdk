@@ -27,7 +27,7 @@ public sealed class CatByIdRequest : IHttpRequest<IReplica<Cat>>
     )
     {
         using var response = await httpClient.SendAsync(
-                Template with { Arguments = new QueryBuilder { { "id", CatId } } },
+                Template with { Arguments = new QueryBuilder { { "id", CatId }, { "v", SchemaVersion.Recommended } } },
                 cancellationToken
             )
             .ConfigureAwait(false);

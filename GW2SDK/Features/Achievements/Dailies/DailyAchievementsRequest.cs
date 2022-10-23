@@ -13,7 +13,8 @@ public sealed class DailyAchievementsRequest : IHttpRequest<IReplica<DailyAchiev
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "/v2/achievements/daily")
     {
-        AcceptEncoding = "gzip"
+        AcceptEncoding = "gzip",
+        Arguments = new QueryBuilder { { "v", SchemaVersion.Recommended } }
     };
 
     public Day Day { get; init; }

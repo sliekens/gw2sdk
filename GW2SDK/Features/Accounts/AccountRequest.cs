@@ -12,7 +12,8 @@ public sealed class AccountRequest : IHttpRequest<IReplica<AccountSummary>>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "/v2/account")
     {
-        AcceptEncoding = "gzip"
+        AcceptEncoding = "gzip",
+        Arguments = new QueryBuilder { { "v", SchemaVersion.Recommended } }
     };
 
     public string? AccessToken { get; init; }

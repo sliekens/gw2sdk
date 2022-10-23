@@ -13,7 +13,8 @@ public sealed class MaterialCategoriesIndexRequest : IHttpRequest<IReplicaSet<in
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "/v2/materials")
     {
-        AcceptEncoding = "gzip"
+        AcceptEncoding = "gzip",
+        Arguments = new QueryBuilder { { "v", SchemaVersion.Recommended } }
     };
 
     public async Task<IReplicaSet<int>> SendAsync(

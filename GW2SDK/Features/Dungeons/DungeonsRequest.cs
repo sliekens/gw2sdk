@@ -14,7 +14,11 @@ public sealed class DungeonsRequest : IHttpRequest<IReplicaSet<Dungeon>>
         new(HttpMethod.Get, "/v2/dungeons")
         {
             AcceptEncoding = "gzip",
-            Arguments = new QueryBuilder { { "ids", "all" } }
+            Arguments = new QueryBuilder
+            {
+                { "ids", "all" },
+                { "v", SchemaVersion.Recommended }
+            }
         };
 
     public MissingMemberBehavior MissingMemberBehavior { get; init; }

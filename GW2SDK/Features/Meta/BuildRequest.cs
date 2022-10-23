@@ -10,7 +10,10 @@ namespace GW2SDK.Meta;
 [PublicAPI]
 public sealed class BuildRequest : IHttpRequest<IReplica<Build>>
 {
-    private static readonly HttpRequestMessageTemplate Template = new(Get, "/v2/build");
+    private static readonly HttpRequestMessageTemplate Template = new(Get, "/v2/build")
+    {
+        Arguments = new QueryBuilder { { "v", SchemaVersion.Recommended } }
+    };
 
     public MissingMemberBehavior MissingMemberBehavior { get; init; }
 

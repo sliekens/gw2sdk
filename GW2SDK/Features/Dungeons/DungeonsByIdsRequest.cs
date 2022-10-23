@@ -30,7 +30,7 @@ public sealed class DungeonsByIdsRequest : IHttpRequest<IReplicaSet<Dungeon>>
     )
     {
         using var response = await httpClient.SendAsync(
-                Template with { Arguments = new QueryBuilder { { "ids", DungeonIds } } },
+                Template with { Arguments = new QueryBuilder { { "ids", DungeonIds }, { "v", SchemaVersion.Recommended } } },
                 cancellationToken
             )
             .ConfigureAwait(false);

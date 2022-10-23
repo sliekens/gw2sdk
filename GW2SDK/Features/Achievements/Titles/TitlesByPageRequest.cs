@@ -40,6 +40,7 @@ public sealed class TitlesByPageRequest : IHttpRequest<IReplicaPage<Title>>
             search.Add("page_size", PageSize.Value);
         }
 
+        search.Add("v", SchemaVersion.Recommended);
         using var response = await httpClient.SendAsync(
                 Template with
                 {

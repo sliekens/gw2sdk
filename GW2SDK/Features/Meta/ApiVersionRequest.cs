@@ -12,7 +12,8 @@ public sealed class ApiVersionRequest : IHttpRequest<IReplica<ApiVersion>>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "/:version.json")
     {
-        AcceptEncoding = "gzip"
+        AcceptEncoding = "gzip",
+        Arguments = new QueryBuilder { { "v", SchemaVersion.Recommended } }
     };
 
     public ApiVersionRequest(string version)

@@ -40,6 +40,7 @@ public sealed class SkinsByPageRequest : IHttpRequest<IReplicaPage<Skin>>
             search.Add("page_size", PageSize.Value);
         }
 
+        search.Add("v", SchemaVersion.Recommended);
         using var response = await httpClient.SendAsync(
                 Template with
                 {

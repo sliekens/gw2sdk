@@ -27,7 +27,14 @@ public sealed class ForegroundEmblemByIdRequest : IHttpRequest<IReplica<Emblem>>
     )
     {
         using var response = await httpClient.SendAsync(
-                Template with { Arguments = new QueryBuilder { { "id", ForegroundEmblemId } } },
+                Template with
+                {
+                    Arguments = new QueryBuilder
+                    {
+                        { "id", ForegroundEmblemId },
+                        { "v", SchemaVersion.Recommended }
+                    }
+                },
                 cancellationToken
             )
             .ConfigureAwait(false);

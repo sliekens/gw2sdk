@@ -28,7 +28,14 @@ public sealed class ExchangeGemsForGoldRequest : IHttpRequest<IReplica<GemsForGo
     )
     {
         using var response = await httpClient.SendAsync(
-                Template with { Arguments = new QueryBuilder { { "quantity", GemsCount } } },
+                Template with
+                {
+                    Arguments = new QueryBuilder
+                    {
+                        { "quantity", GemsCount },
+                        { "v", SchemaVersion.Recommended }
+                    }
+                },
                 cancellationToken
             )
             .ConfigureAwait(false);

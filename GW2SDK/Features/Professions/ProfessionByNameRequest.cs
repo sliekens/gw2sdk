@@ -35,7 +35,7 @@ public sealed class ProfessionByNameRequest : IHttpRequest<IReplica<Profession>>
         using var response = await httpClient.SendAsync(
                 Template with
                 {
-                    Arguments = new QueryBuilder { { "id", ProfessionName.ToString() } },
+                    Arguments = new QueryBuilder { { "id", ProfessionName.ToString() }, { "v", SchemaVersion.Recommended } },
                     AcceptLanguage = Language?.Alpha2Code
                 },
                 cancellationToken

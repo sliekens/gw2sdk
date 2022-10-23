@@ -37,7 +37,7 @@ public sealed class SkillsByIdsRequest : IHttpRequest<IReplicaSet<Skill>>
         using var response = await httpClient.SendAsync(
                 Template with
                 {
-                    Arguments = new QueryBuilder { { "ids", SkillIds } },
+                    Arguments = new QueryBuilder { { "ids", SkillIds }, { "v", SchemaVersion.Recommended } },
                     AcceptLanguage = Language?.Alpha2Code
                 },
                 cancellationToken

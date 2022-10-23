@@ -63,6 +63,11 @@ public sealed class QueryBuilder : IEnumerable
 
     public string Build()
     {
+        if (arguments.Count == 0)
+        {
+            return "";
+        }
+
         var query = new StringBuilder();
         foreach (var (key, value) in arguments)
         {

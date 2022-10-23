@@ -33,7 +33,14 @@ public sealed class LegendaryItemsByIdsRequest : IHttpRequest<IReplicaSet<Legend
     )
     {
         using var response = await httpClient.SendAsync(
-                Template with { Arguments = new QueryBuilder { { "ids", LegendaryItemIds } } },
+                Template with
+                {
+                    Arguments = new QueryBuilder
+                    {
+                        { "ids", LegendaryItemIds },
+                        { "v", SchemaVersion.Recommended }
+                    }
+                },
                 cancellationToken
             )
             .ConfigureAwait(false);

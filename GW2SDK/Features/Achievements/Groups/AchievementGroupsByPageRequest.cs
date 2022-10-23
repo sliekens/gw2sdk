@@ -38,6 +38,7 @@ public sealed class AchievementGroupsByPageRequest : IHttpRequest<IReplicaPage<A
             search.Add("page_size", PageSize.Value);
         }
 
+        search.Add("v", SchemaVersion.Recommended);
         using var response = await httpClient.SendAsync(
                 Template with
                 {

@@ -11,7 +11,9 @@ namespace GW2SDK.Legends;
 public sealed class LegendsIndexRequest : IHttpRequest<IReplicaSet<string>>
 {
     private static readonly HttpRequestMessageTemplate Template =
-        new(HttpMethod.Get, "/v2/legends") { AcceptEncoding = "gzip" };
+        new(HttpMethod.Get, "/v2/legends") { AcceptEncoding = "gzip",
+            Arguments = new QueryBuilder { { "v", SchemaVersion.Recommended } }
+        };
 
     public async Task<IReplicaSet<string>> SendAsync(
         HttpClient httpClient,

@@ -27,7 +27,7 @@ public sealed class DungeonByIdRequest : IHttpRequest<IReplica<Dungeon>>
     )
     {
         using var response = await httpClient.SendAsync(
-                Template with { Arguments = new QueryBuilder { { "id", DungeonId } } },
+                Template with { Arguments = new QueryBuilder { { "id", DungeonId }, { "v", SchemaVersion.Recommended } } },
                 cancellationToken
             )
             .ConfigureAwait(false);

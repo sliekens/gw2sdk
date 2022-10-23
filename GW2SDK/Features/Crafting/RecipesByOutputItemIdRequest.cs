@@ -13,8 +13,7 @@ public sealed class RecipesByOutputItemIdRequest : IHttpRequest<IReplicaSet<Reci
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "/v2/recipes/search")
     {
-        AcceptEncoding = "gzip",
-        Arguments = new QueryBuilder { { "ids", "all" } }
+        AcceptEncoding = "gzip"
     };
 
     public RecipesByOutputItemIdRequest(int outputItemId)
@@ -31,8 +30,12 @@ public sealed class RecipesByOutputItemIdRequest : IHttpRequest<IReplicaSet<Reci
         CancellationToken cancellationToken
     )
     {
-        var search = Template.Arguments.Clone();
-        search.Add("output", OutputItemId);
+        QueryBuilder search = new()
+        {
+            { "ids", "all" },
+            { "output", OutputItemId },
+            { "v", SchemaVersion.Recommended }
+        };
         using var response = await httpClient.SendAsync(
                 Template with { Arguments = search },
                 cancellationToken

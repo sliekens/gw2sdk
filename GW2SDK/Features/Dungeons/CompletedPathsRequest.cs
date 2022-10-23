@@ -12,7 +12,11 @@ namespace GW2SDK.Dungeons;
 public sealed class CompletedPathsRequest : IHttpRequest<IReplica<IReadOnlyCollection<string>>>
 {
     private static readonly HttpRequestMessageTemplate Template =
-        new(HttpMethod.Get, "/v2/account/dungeons") { AcceptEncoding = "gzip" };
+        new(HttpMethod.Get, "/v2/account/dungeons")
+        {
+            AcceptEncoding = "gzip",
+            Arguments = new QueryBuilder { { "v", SchemaVersion.Recommended } }
+        };
 
     public string? AccessToken { get; init; }
 

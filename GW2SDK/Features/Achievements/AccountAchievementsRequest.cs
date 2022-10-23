@@ -15,7 +15,11 @@ public sealed class AccountAchievementsRequest : IHttpRequest<IReplicaSet<Accoun
         new(Get, "/v2/account/achievements")
         {
             AcceptEncoding = "gzip",
-            Arguments = new QueryBuilder { { "ids", "all" } }
+            Arguments = new QueryBuilder
+            {
+                { "ids", "all" },
+                { "v", SchemaVersion.Recommended }
+            }
         };
 
     public string? AccessToken { get; init; }

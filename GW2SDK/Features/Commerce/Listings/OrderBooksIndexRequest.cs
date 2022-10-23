@@ -13,7 +13,8 @@ public sealed class OrderBooksIndexRequest : IHttpRequest<IReplicaSet<int>>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "/v2/commerce/listings")
     {
-        AcceptEncoding = "gzip"
+        AcceptEncoding = "gzip",
+        Arguments = new QueryBuilder { { "v", SchemaVersion.Recommended } }
     };
 
     public async Task<IReplicaSet<int>> SendAsync(

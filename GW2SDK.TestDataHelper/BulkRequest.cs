@@ -33,6 +33,8 @@ public class BulkRequest : IHttpRequest<JsonDocument>
             search.Add("ids", Ids);
         }
 
+        search.Add("v", SchemaVersion.Latest);
+
         var request = new HttpRequestMessageTemplate(HttpMethod.Get, requestUri)
         {
             Arguments = search,

@@ -12,7 +12,9 @@ namespace GW2SDK.MailCarriers;
 public sealed class OwnedMailCarriersRequest : IHttpRequest<IReplica<IReadOnlyCollection<int>>>
 {
     private static readonly HttpRequestMessageTemplate Template =
-        new(HttpMethod.Get, "/v2/account/mailcarriers") { AcceptEncoding = "gzip" };
+        new(HttpMethod.Get, "/v2/account/mailcarriers") { AcceptEncoding = "gzip",
+            Arguments = new QueryBuilder { { "v", SchemaVersion.Recommended } }
+        };
 
     public string? AccessToken { get; init; }
 

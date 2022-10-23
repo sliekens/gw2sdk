@@ -14,7 +14,11 @@ public sealed class LegendaryItemsRequest : IHttpRequest<IReplicaSet<LegendaryIt
         new(HttpMethod.Get, "/v2/legendaryarmory")
         {
             AcceptEncoding = "gzip",
-            Arguments = new QueryBuilder { { "ids", "all" } }
+            Arguments = new QueryBuilder
+            {
+                { "ids", "all" },
+                { "v", SchemaVersion.Recommended }
+            }
         };
 
     public MissingMemberBehavior MissingMemberBehavior { get; init; }

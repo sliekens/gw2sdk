@@ -11,7 +11,11 @@ namespace GW2SDK.Emblems;
 public sealed class BackgroundEmblemsIndexRequest : IHttpRequest<IReplicaSet<int>>
 {
     private static readonly HttpRequestMessageTemplate Template =
-        new(HttpMethod.Get, "/v2/emblem/backgrounds") { AcceptEncoding = "gzip" };
+        new(HttpMethod.Get, "/v2/emblem/backgrounds")
+        {
+            AcceptEncoding = "gzip",
+            Arguments = new QueryBuilder { { "v", SchemaVersion.Recommended } }
+        };
 
     public async Task<IReplicaSet<int>> SendAsync(
         HttpClient httpClient,

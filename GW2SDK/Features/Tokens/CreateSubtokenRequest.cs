@@ -54,6 +54,7 @@ public sealed class CreateSubtokenRequest : IHttpRequest<IReplica<CreatedSubtoke
             args.Add("urls", string.Join(",", Urls.Select(Uri.EscapeDataString)));
         }
 
+        args.Add("v", SchemaVersion.Recommended);
         using var response = await httpClient.SendAsync(
                 Template with
                 {

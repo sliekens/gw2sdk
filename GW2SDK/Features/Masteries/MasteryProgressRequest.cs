@@ -13,7 +13,9 @@ public sealed class
     MasteryProgressRequest : IHttpRequest<IReplica<IReadOnlyCollection<MasteryProgress>>>
 {
     private static readonly HttpRequestMessageTemplate Template =
-        new(HttpMethod.Get, "/v2/account/masteries") { AcceptEncoding = "gzip" };
+        new(HttpMethod.Get, "/v2/account/masteries") { AcceptEncoding = "gzip",
+            Arguments = new QueryBuilder { { "v", SchemaVersion.Recommended } }
+        };
 
     public string? AccessToken { get; init; }
 

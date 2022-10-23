@@ -10,7 +10,11 @@ namespace GW2SDK.Inventories;
 public sealed class InventoryRequest : IHttpRequest<IReplica<Baggage>>
 {
     private static readonly HttpRequestMessageTemplate Template =
-        new(HttpMethod.Get, "/v2/characters/:id/inventory") { AcceptEncoding = "gzip" };
+        new(HttpMethod.Get, "/v2/characters/:id/inventory")
+        {
+            AcceptEncoding = "gzip",
+            Arguments = new QueryBuilder { { "v", SchemaVersion.Recommended } }
+        };
 
     public InventoryRequest(string characterName)
     {

@@ -12,7 +12,9 @@ namespace GW2SDK.Home.Cats;
 public sealed class CatsIndexRequest : IHttpRequest<IReplicaSet<int>>
 {
     private static readonly HttpRequestMessageTemplate Template =
-        new(Get, "/v2/home/cats") { AcceptEncoding = "gzip" };
+        new(Get, "/v2/home/cats") { AcceptEncoding = "gzip",
+            Arguments = new QueryBuilder { { "v", SchemaVersion.Recommended } }
+        };
 
     public async Task<IReplicaSet<int>> SendAsync(
         HttpClient httpClient,

@@ -14,7 +14,8 @@ public sealed class UnlockedRecipesRequest : IHttpRequest<IReplica<IReadOnlyColl
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "/v2/account/recipes")
     {
-        AcceptEncoding = "gzip"
+        AcceptEncoding = "gzip",
+        Arguments = new QueryBuilder { { "v", SchemaVersion.Recommended } }
     };
 
     public string? AccessToken { get; init; }

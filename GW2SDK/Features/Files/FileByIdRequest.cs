@@ -27,7 +27,7 @@ public sealed class FileByIdRequest : IHttpRequest<IReplica<File>>
     )
     {
         using var response = await httpClient.SendAsync(
-                Template with { Arguments = new QueryBuilder { { "id", FileId } } },
+                Template with { Arguments = new QueryBuilder { { "id", FileId }, { "v", SchemaVersion.Recommended } } },
                 cancellationToken
             )
             .ConfigureAwait(false);

@@ -29,7 +29,7 @@ public sealed class RecipesIndexByIngredientItemIdRequest : IHttpRequest<IReplic
     )
     {
         using var response = await httpClient.SendAsync(
-                Template with { Arguments = new QueryBuilder { { "input", IngredientItemId } } },
+                Template with { Arguments = new QueryBuilder { { "input", IngredientItemId }, { "v", SchemaVersion.Recommended } } },
                 cancellationToken
             )
             .ConfigureAwait(false);

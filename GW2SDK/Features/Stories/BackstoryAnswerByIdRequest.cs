@@ -31,7 +31,7 @@ public sealed class BackstoryAnswerByIdRequest : IHttpRequest<IReplica<Backstory
         CancellationToken cancellationToken
     )
     {
-        QueryBuilder search = new() { { "id", AnswerId } };
+        QueryBuilder search = new() { { "id", AnswerId }, { "v", SchemaVersion.Recommended } };
 
         using var response = await httpClient.SendAsync(
                 Template with

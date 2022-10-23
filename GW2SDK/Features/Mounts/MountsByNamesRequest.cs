@@ -44,7 +44,7 @@ public sealed class MountsByNamesRequest : IHttpRequest<IReplicaSet<Mount>>
                         {
                             "ids",
                             MountNames.Select(name => MountNameFormatter.FormatMountName(name))
-                        }
+                        }, { "v", SchemaVersion.Recommended }
                     },
                     AcceptLanguage = Language?.Alpha2Code
                 },

@@ -30,7 +30,7 @@ public sealed class ForegroundEmblemsByIdsRequest : IHttpRequest<IReplicaSet<Emb
     )
     {
         using var response = await httpClient.SendAsync(
-                Template with { Arguments = new QueryBuilder { { "ids", ForegroundEmblemIds } } },
+                Template with { Arguments = new QueryBuilder { { "ids", ForegroundEmblemIds }, { "v", SchemaVersion.Recommended } } },
                 cancellationToken
             )
             .ConfigureAwait(false);

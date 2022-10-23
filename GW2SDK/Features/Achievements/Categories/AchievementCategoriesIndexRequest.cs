@@ -12,7 +12,11 @@ namespace GW2SDK.Achievements.Categories;
 public sealed class AchievementCategoriesIndexRequest : IHttpRequest<IReplicaSet<int>>
 {
     private static readonly HttpRequestMessageTemplate Template =
-        new(Get, "/v2/achievements/categories") { AcceptEncoding = "gzip" };
+        new(Get, "/v2/achievements/categories")
+        {
+            AcceptEncoding = "gzip",
+            Arguments = new QueryBuilder { { "v", SchemaVersion.Recommended } }
+        };
 
     public async Task<IReplicaSet<int>> SendAsync(
         HttpClient httpClient,

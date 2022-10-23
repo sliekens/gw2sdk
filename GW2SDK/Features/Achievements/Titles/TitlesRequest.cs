@@ -14,7 +14,11 @@ public sealed class TitlesRequest : IHttpRequest<IReplicaSet<Title>>
     private static readonly HttpRequestMessageTemplate Template = new(Get, "/v2/titles")
     {
         AcceptEncoding = "gzip",
-        Arguments = new QueryBuilder { { "ids", "all" } }
+        Arguments = new QueryBuilder
+        {
+            { "ids", "all" },
+            { "v", SchemaVersion.Recommended }
+        }
     };
 
     public Language? Language { get; init; }
