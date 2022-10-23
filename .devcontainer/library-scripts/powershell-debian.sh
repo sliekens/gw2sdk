@@ -14,7 +14,7 @@ set -e
 POWERSHELL_VERSION=${1:-"latest"}
 MICROSOFT_GPG_KEYS_URI="https://packages.microsoft.com/keys/microsoft.asc"
 POWERSHELL_ARCHIVE_ARCHITECTURES="amd64"
-POWERSHELL_ARCHIVE_VERSION_CODENAMES="stretch buster bionic focal"
+POWERSHELL_ARCHIVE_VERSION_CODENAMES="stretch buster bionic focal bullseye jammy"
 GPG_KEY_SERVERS="keyserver hkp://keyserver.ubuntu.com:80
 keyserver hkps://keys.openpgp.org
 keyserver hkp://keyserver.pgp.com"
@@ -122,7 +122,7 @@ install_using_apt() {
 
 install_using_github() {
     # Fall back on direct download if no apt package exists in microsoft pool
-    check_packages curl ca-certificates gnupg2 dirmngr libc6 libgcc1 libgssapi-krb5-2 liblttng-ust0 libstdc++6 libunwind8 libuuid1 zlib1g libicu[0-9][0-9]
+    check_packages curl ca-certificates gnupg2 dirmngr libc6 libgcc1 libgssapi-krb5-2 libstdc++6 libunwind8 libuuid1 zlib1g libicu[0-9][0-9]
     if ! type git > /dev/null 2>&1; then
         apt_get_update_if_needed
         apt-get install -y --no-install-recommends git
