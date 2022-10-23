@@ -86,7 +86,7 @@ public class AchievementsQueryTest
         }
     }
 
-    [Theory(Skip = "Daily achievements are not working right...")]
+    [Theory]
     [InlineData(Day.Today)]
     [InlineData(Day.Tomorrow)]
     public async Task Daily_achievements_can_be_found_by_day(Day day)
