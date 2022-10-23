@@ -33,7 +33,14 @@ public sealed class QuaggansByIdsRequest : IHttpRequest<IReplicaSet<Quaggan>>
     )
     {
         using var response = await httpClient.SendAsync(
-                Template with { Arguments = new QueryBuilder { { "ids", QuagganIds }, { "v", SchemaVersion.Recommended } } },
+                Template with
+                {
+                    Arguments = new QueryBuilder
+                    {
+                        { "ids", QuagganIds },
+                        { "v", SchemaVersion.Recommended }
+                    }
+                },
                 cancellationToken
             )
             .ConfigureAwait(false);

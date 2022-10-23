@@ -8,8 +8,7 @@ namespace GW2SDK.Races;
 [PublicAPI]
 public static class RaceReader
 {
-    public static Race
-        GetRace(this JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    public static Race GetRace(this JsonElement json, MissingMemberBehavior missingMemberBehavior)
     {
         RequiredMember<RaceName> id = new("id");
         RequiredMember<string> name = new("name");

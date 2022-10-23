@@ -14,7 +14,11 @@ public sealed class GuildPermissionsRequest : IHttpRequest<IReplicaSet<GuildPerm
         new(HttpMethod.Get, "/v2/guild/permissions")
         {
             AcceptEncoding = "gzip",
-            Arguments = new QueryBuilder { { "ids", "all" }, { "v", SchemaVersion.Recommended } }
+            Arguments = new QueryBuilder
+            {
+                { "ids", "all" },
+                { "v", SchemaVersion.Recommended }
+            }
         };
 
     public Language? Language { get; init; }

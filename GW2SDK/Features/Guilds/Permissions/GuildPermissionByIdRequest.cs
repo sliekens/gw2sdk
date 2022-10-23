@@ -31,7 +31,11 @@ public sealed class GuildPermissionByIdRequest : IHttpRequest<IReplica<GuildPerm
         using var response = await httpClient.SendAsync(
                 Template with
                 {
-                    Arguments = new QueryBuilder { { "id", GuildPermissionId.ToString() }, { "v", SchemaVersion.Recommended } },
+                    Arguments = new QueryBuilder
+                    {
+                        { "id", GuildPermissionId.ToString() },
+                        { "v", SchemaVersion.Recommended }
+                    },
                     AcceptLanguage = Language?.Alpha2Code
                 },
                 cancellationToken

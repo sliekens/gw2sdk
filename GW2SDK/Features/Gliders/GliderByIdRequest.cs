@@ -31,7 +31,11 @@ public sealed class GliderByIdRequest : IHttpRequest<IReplica<Glider>>
         using var response = await httpClient.SendAsync(
                 Template with
                 {
-                    Arguments = new QueryBuilder { { "id", GliderId }, { "v", SchemaVersion.Recommended } },
+                    Arguments = new QueryBuilder
+                    {
+                        { "id", GliderId },
+                        { "v", SchemaVersion.Recommended }
+                    },
                     AcceptLanguage = Language?.Alpha2Code
                 },
                 cancellationToken

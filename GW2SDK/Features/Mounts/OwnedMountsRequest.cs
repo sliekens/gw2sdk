@@ -11,11 +11,13 @@ namespace GW2SDK.Mounts;
 [PublicAPI]
 public sealed class OwnedMountsRequest : IHttpRequest<IReplica<IReadOnlyCollection<MountName>>>
 {
-    private static readonly HttpRequestMessageTemplate Template = new(HttpMethod.Get, "/v2/account/mounts/types")
-    {
-        AcceptEncoding = "gzip",
-        Arguments = new QueryBuilder { { "v", SchemaVersion.Recommended } }
-    };
+    private static readonly HttpRequestMessageTemplate Template =
+        new(HttpMethod.Get, "/v2/account/mounts/types")
+        {
+            AcceptEncoding = "gzip",
+            Arguments = new QueryBuilder { { "v", SchemaVersion.Recommended } }
+        };
+
     public OwnedMountsRequest(string? accessToken)
     {
         AccessToken = accessToken;
@@ -25,7 +27,10 @@ public sealed class OwnedMountsRequest : IHttpRequest<IReplica<IReadOnlyCollecti
 
     public MissingMemberBehavior MissingMemberBehavior { get; init; }
 
-    public async Task<IReplica<IReadOnlyCollection<MountName>>> SendAsync(HttpClient httpClient, CancellationToken cancellationToken)
+    public async Task<IReplica<IReadOnlyCollection<MountName>>> SendAsync(
+        HttpClient httpClient,
+        CancellationToken cancellationToken
+    )
     {
         using var response = await httpClient.SendAsync(
                 Template with { BearerToken = AccessToken },

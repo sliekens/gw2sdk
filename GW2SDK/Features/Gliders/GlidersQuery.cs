@@ -17,6 +17,7 @@ public sealed class GlidersQuery
         this.http = http ?? throw new ArgumentNullException(nameof(http));
         http.BaseAddress ??= BaseAddress.DefaultUri;
     }
+
     public Task<IReplicaSet<Glider>> GetGliders(
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,

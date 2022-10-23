@@ -30,7 +30,14 @@ public sealed class RecipeByIdRequest : IHttpRequest<IReplica<Recipe>>
     )
     {
         using var response = await httpClient.SendAsync(
-                Template with { Arguments = new QueryBuilder { { "id", RecipeId }, { "v", SchemaVersion.Recommended } } },
+                Template with
+                {
+                    Arguments = new QueryBuilder
+                    {
+                        { "id", RecipeId },
+                        { "v", SchemaVersion.Recommended }
+                    }
+                },
                 cancellationToken
             )
             .ConfigureAwait(false);

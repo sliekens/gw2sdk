@@ -30,7 +30,14 @@ public sealed class CatsByIdsRequest : IHttpRequest<IReplicaSet<Cat>>
     )
     {
         using var response = await httpClient.SendAsync(
-                Template with { Arguments = new QueryBuilder { { "ids", CatIds }, { "v", SchemaVersion.Recommended } } },
+                Template with
+                {
+                    Arguments = new QueryBuilder
+                    {
+                        { "ids", CatIds },
+                        { "v", SchemaVersion.Recommended }
+                    }
+                },
                 cancellationToken
             )
             .ConfigureAwait(false);

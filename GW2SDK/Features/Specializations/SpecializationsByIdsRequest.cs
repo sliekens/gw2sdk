@@ -37,7 +37,11 @@ public sealed class SpecializationsByIdsRequest : IHttpRequest<IReplicaSet<Speci
         using var response = await httpClient.SendAsync(
                 Template with
                 {
-                    Arguments = new QueryBuilder { { "ids", SpecializationIds }, { "v", SchemaVersion.Recommended } },
+                    Arguments = new QueryBuilder
+                    {
+                        { "ids", SpecializationIds },
+                        { "v", SchemaVersion.Recommended }
+                    },
                     AcceptLanguage = Language?.Alpha2Code
                 },
                 cancellationToken

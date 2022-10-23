@@ -32,7 +32,14 @@ public sealed class FilesByIdsRequest : IHttpRequest<IReplicaSet<File>>
     )
     {
         using var response = await httpClient.SendAsync(
-                Template with { Arguments = new QueryBuilder { { "ids", FileIds }, { "v", SchemaVersion.Recommended } } },
+                Template with
+                {
+                    Arguments = new QueryBuilder
+                    {
+                        { "ids", FileIds },
+                        { "v", SchemaVersion.Recommended }
+                    }
+                },
                 cancellationToken
             )
             .ConfigureAwait(false);

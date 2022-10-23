@@ -13,7 +13,11 @@ public sealed class FilesRequest : IHttpRequest<IReplicaSet<File>>
     private static readonly HttpRequestMessageTemplate Template = new(HttpMethod.Get, "/v2/files")
     {
         AcceptEncoding = "gzip",
-        Arguments = new QueryBuilder { { "ids", "all" }, { "v", SchemaVersion.Recommended } }
+        Arguments = new QueryBuilder
+        {
+            { "ids", "all" },
+            { "v", SchemaVersion.Recommended }
+        }
     };
 
     public MissingMemberBehavior MissingMemberBehavior { get; init; }

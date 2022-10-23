@@ -35,7 +35,11 @@ public sealed class BackstoryQuestionsByIdsRequest : IHttpRequest<IReplicaSet<Ba
         using var response = await httpClient.SendAsync(
                 Template with
                 {
-                    Arguments = new QueryBuilder { { "ids", QuestionIds }, { "v", SchemaVersion.Recommended } },
+                    Arguments = new QueryBuilder
+                    {
+                        { "ids", QuestionIds },
+                        { "v", SchemaVersion.Recommended }
+                    },
                     AcceptLanguage = Language?.Alpha2Code
                 },
                 cancellationToken

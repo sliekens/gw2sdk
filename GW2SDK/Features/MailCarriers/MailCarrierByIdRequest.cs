@@ -34,7 +34,11 @@ public sealed class MailCarrierByIdRequest : IHttpRequest<IReplica<MailCarrier>>
         using var response = await httpClient.SendAsync(
                 Template with
                 {
-                    Arguments = new QueryBuilder { { "id", MailCarrierId }, { "v", SchemaVersion.Recommended } },
+                    Arguments = new QueryBuilder
+                    {
+                        { "id", MailCarrierId },
+                        { "v", SchemaVersion.Recommended }
+                    },
                     AcceptLanguage = Language?.Alpha2Code
                 },
                 cancellationToken

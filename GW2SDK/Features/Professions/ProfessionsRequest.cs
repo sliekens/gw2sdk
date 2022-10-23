@@ -14,7 +14,11 @@ public sealed class ProfessionsRequest : IHttpRequest<IReplicaSet<Profession>>
     private static readonly HttpRequestMessageTemplate Template = new(Get, "/v2/professions")
     {
         AcceptEncoding = "gzip",
-        Arguments = new QueryBuilder { { "ids", "all" }, { "v", SchemaVersion.Recommended } }
+        Arguments = new QueryBuilder
+        {
+            { "ids", "all" },
+            { "v", SchemaVersion.Recommended }
+        }
     };
 
     public Language? Language { get; init; }

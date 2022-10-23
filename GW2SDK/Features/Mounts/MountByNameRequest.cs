@@ -36,7 +36,11 @@ public sealed class MountByNameRequest : IHttpRequest<IReplica<Mount>>
                 Template with
                 {
                     Arguments =
-                    new QueryBuilder { { "id", MountNameFormatter.FormatMountName(MountName) }, { "v", SchemaVersion.Recommended } },
+                    new QueryBuilder
+                    {
+                        { "id", MountNameFormatter.FormatMountName(MountName) },
+                        { "v", SchemaVersion.Recommended }
+                    },
                     AcceptLanguage = Language?.Alpha2Code
                 },
                 cancellationToken

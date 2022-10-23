@@ -28,8 +28,14 @@ public sealed class ExchangeGoldForGemsRequest : IHttpRequest<IReplica<GoldForGe
     )
     {
         using var response = await httpClient.SendAsync(
-                Template with { Arguments = new QueryBuilder { { "quantity", CoinsCount },
-                    { "v", SchemaVersion.Recommended } } },
+                Template with
+                {
+                    Arguments = new QueryBuilder
+                    {
+                        { "quantity", CoinsCount },
+                        { "v", SchemaVersion.Recommended }
+                    }
+                },
                 cancellationToken
             )
             .ConfigureAwait(false);

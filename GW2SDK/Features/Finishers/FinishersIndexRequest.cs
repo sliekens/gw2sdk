@@ -11,7 +11,9 @@ namespace GW2SDK.Finishers;
 public sealed class FinishersIndexRequest : IHttpRequest<IReplicaSet<int>>
 {
     private static readonly HttpRequestMessageTemplate Template =
-        new(HttpMethod.Get, "/v2/finishers") { AcceptEncoding = "gzip",
+        new(HttpMethod.Get, "/v2/finishers")
+        {
+            AcceptEncoding = "gzip",
             Arguments = new QueryBuilder { { "v", SchemaVersion.Recommended } }
         };
 

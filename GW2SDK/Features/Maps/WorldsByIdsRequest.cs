@@ -37,7 +37,11 @@ public sealed class WorldsByIdsRequest : IHttpRequest<IReplicaSet<World>>
         using var response = await httpClient.SendAsync(
                 Template with
                 {
-                    Arguments = new QueryBuilder { { "ids", WorldIds }, { "v", SchemaVersion.Recommended } },
+                    Arguments = new QueryBuilder
+                    {
+                        { "ids", WorldIds },
+                        { "v", SchemaVersion.Recommended }
+                    },
                     AcceptLanguage = Language?.Alpha2Code
                 },
                 cancellationToken

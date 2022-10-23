@@ -16,7 +16,11 @@ public sealed class FloorsRequest : IHttpRequest<IReplicaSet<Floor>>
         new(Get, "/v2/continents/:id/floors")
         {
             AcceptEncoding = "gzip",
-            Arguments = new QueryBuilder { { "ids", "all" }, { "v", SchemaVersion.Recommended } }
+            Arguments = new QueryBuilder
+            {
+                { "ids", "all" },
+                { "v", SchemaVersion.Recommended }
+            }
         };
 
     public FloorsRequest(int continentId)

@@ -15,7 +15,11 @@ public sealed class BackstoryQuestionsRequest : IHttpRequest<IReplicaSet<Backsto
         new(Get, "/v2/backstory/questions")
         {
             AcceptEncoding = "gzip",
-            Arguments = new QueryBuilder { { "ids", "all" }, { "v", SchemaVersion.Recommended } }
+            Arguments = new QueryBuilder
+            {
+                { "ids", "all" },
+                { "v", SchemaVersion.Recommended }
+            }
         };
 
     public Language? Language { get; init; }

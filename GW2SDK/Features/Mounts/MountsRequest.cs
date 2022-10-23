@@ -14,7 +14,11 @@ public sealed class MountsRequest : IHttpRequest<IReplicaSet<Mount>>
     private static readonly HttpRequestMessageTemplate Template = new(Get, "/v2/mounts/types")
     {
         AcceptEncoding = "gzip",
-        Arguments = new QueryBuilder { { "ids", "all" }, { "v", SchemaVersion.Recommended } }
+        Arguments = new QueryBuilder
+        {
+            { "ids", "all" },
+            { "v", SchemaVersion.Recommended }
+        }
     };
 
     public Language? Language { get; init; }

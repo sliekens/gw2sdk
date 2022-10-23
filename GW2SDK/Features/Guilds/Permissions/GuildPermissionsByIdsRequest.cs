@@ -36,7 +36,11 @@ public sealed class GuildPermissionsByIdsRequest : IHttpRequest<IReplicaSet<Guil
                 Template with
                 {
                     Arguments =
-                    new QueryBuilder { { "ids", GuildPermissionIds.Select(id => id.ToString()) }, { "v", SchemaVersion.Recommended } },
+                    new QueryBuilder
+                    {
+                        { "ids", GuildPermissionIds.Select(id => id.ToString()) },
+                        { "v", SchemaVersion.Recommended }
+                    },
                     AcceptLanguage = Language?.Alpha2Code
                 },
                 cancellationToken

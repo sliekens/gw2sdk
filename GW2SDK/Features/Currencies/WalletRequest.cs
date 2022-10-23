@@ -12,7 +12,9 @@ namespace GW2SDK.Currencies;
 public sealed class WalletRequest : IHttpRequest<IReplica<IReadOnlyCollection<CurrencyAmount>>>
 {
     private static readonly HttpRequestMessageTemplate Template =
-        new(HttpMethod.Get, "/v2/account/wallet") { AcceptEncoding = "gzip",
+        new(HttpMethod.Get, "/v2/account/wallet")
+        {
+            AcceptEncoding = "gzip",
             Arguments = new QueryBuilder { { "v", SchemaVersion.Recommended } }
         };
 

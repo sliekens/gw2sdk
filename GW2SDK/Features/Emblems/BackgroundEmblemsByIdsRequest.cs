@@ -30,7 +30,14 @@ public sealed class BackgroundEmblemsByIdsRequest : IHttpRequest<IReplicaSet<Emb
     )
     {
         using var response = await httpClient.SendAsync(
-                Template with { Arguments = new QueryBuilder { { "ids", BackgroundEmblemIds }, { "v", SchemaVersion.Recommended } } },
+                Template with
+                {
+                    Arguments = new QueryBuilder
+                    {
+                        { "ids", BackgroundEmblemIds },
+                        { "v", SchemaVersion.Recommended }
+                    }
+                },
                 cancellationToken
             )
             .ConfigureAwait(false);

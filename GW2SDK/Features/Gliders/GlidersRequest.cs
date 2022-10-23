@@ -10,12 +10,15 @@ namespace GW2SDK.Gliders;
 [PublicAPI]
 public sealed class GlidersRequest : IHttpRequest<IReplicaSet<Glider>>
 {
-    private static readonly HttpRequestMessageTemplate Template =
-        new(HttpMethod.Get, "/v2/gliders")
+    private static readonly HttpRequestMessageTemplate Template = new(HttpMethod.Get, "/v2/gliders")
+    {
+        AcceptEncoding = "gzip",
+        Arguments = new QueryBuilder
         {
-            AcceptEncoding = "gzip",
-            Arguments = new QueryBuilder { { "ids", "all" }, { "v", SchemaVersion.Recommended } }
-        };
+            { "ids", "all" },
+            { "v", SchemaVersion.Recommended }
+        }
+    };
 
     public Language? Language { get; init; }
 

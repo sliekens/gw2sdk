@@ -17,6 +17,7 @@ public sealed class RacesQuery
         this.http = http ?? throw new ArgumentNullException(nameof(http));
         http.BaseAddress ??= BaseAddress.DefaultUri;
     }
+
     public Task<IReplicaSet<Race>> GetRaces(
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,

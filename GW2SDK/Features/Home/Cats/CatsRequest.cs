@@ -14,7 +14,11 @@ public sealed class CatsRequest : IHttpRequest<IReplicaSet<Cat>>
         new(HttpMethod.Get, "/v2/home/cats")
         {
             AcceptEncoding = "gzip",
-            Arguments = new QueryBuilder { { "ids", "all" }, { "v", SchemaVersion.Recommended } }
+            Arguments = new QueryBuilder
+            {
+                { "ids", "all" },
+                { "v", SchemaVersion.Recommended }
+            }
         };
 
     public MissingMemberBehavior MissingMemberBehavior { get; init; }

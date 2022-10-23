@@ -8,7 +8,10 @@ namespace GW2SDK.Finishers;
 [PublicAPI]
 public static class FinisherReader
 {
-    public static Finisher GetFinisher(this JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    public static Finisher GetFinisher(
+        this JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         RequiredMember<int> id = new("id");
         RequiredMember<string> unlockDetails = new("unlock_details");

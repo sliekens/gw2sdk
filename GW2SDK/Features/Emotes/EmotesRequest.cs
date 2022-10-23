@@ -13,7 +13,11 @@ public sealed class EmotesRequest : IHttpRequest<IReplicaSet<Emote>>
     private static readonly HttpRequestMessageTemplate Template = new(HttpMethod.Get, "/v2/emotes")
     {
         AcceptEncoding = "gzip",
-        Arguments = new QueryBuilder { { "ids", "all" }, { "v", SchemaVersion.Recommended } }
+        Arguments = new QueryBuilder
+        {
+            { "ids", "all" },
+            { "v", SchemaVersion.Recommended }
+        }
     };
 
     public MissingMemberBehavior MissingMemberBehavior { get; init; }

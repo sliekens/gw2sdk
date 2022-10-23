@@ -11,11 +11,13 @@ namespace GW2SDK.Mounts;
 [PublicAPI]
 public sealed class OwnedMountSkinsRequest : IHttpRequest<IReplica<IReadOnlyCollection<int>>>
 {
-    private static readonly HttpRequestMessageTemplate Template = new(HttpMethod.Get, "/v2/account/mounts/skins")
-    {
-        AcceptEncoding = "gzip",
-        Arguments = new QueryBuilder { { "v", SchemaVersion.Recommended } }
-    };
+    private static readonly HttpRequestMessageTemplate Template =
+        new(HttpMethod.Get, "/v2/account/mounts/skins")
+        {
+            AcceptEncoding = "gzip",
+            Arguments = new QueryBuilder { { "v", SchemaVersion.Recommended } }
+        };
+
     public OwnedMountSkinsRequest(string? accessToken)
     {
         AccessToken = accessToken;
@@ -23,7 +25,10 @@ public sealed class OwnedMountSkinsRequest : IHttpRequest<IReplica<IReadOnlyColl
 
     public string? AccessToken { get; }
 
-    public async Task<IReplica<IReadOnlyCollection<int>>> SendAsync(HttpClient httpClient, CancellationToken cancellationToken)
+    public async Task<IReplica<IReadOnlyCollection<int>>> SendAsync(
+        HttpClient httpClient,
+        CancellationToken cancellationToken
+    )
     {
         using var response = await httpClient.SendAsync(
                 Template with { BearerToken = AccessToken },

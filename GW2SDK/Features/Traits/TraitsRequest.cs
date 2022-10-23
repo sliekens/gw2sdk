@@ -14,7 +14,11 @@ public sealed class TraitsRequest : IHttpRequest<IReplicaSet<Trait>>
     private static readonly HttpRequestMessageTemplate Template = new(Get, "/v2/traits")
     {
         AcceptEncoding = "gzip",
-        Arguments = new QueryBuilder { { "ids", "all" }, { "v", SchemaVersion.Recommended } }
+        Arguments = new QueryBuilder
+        {
+            { "ids", "all" },
+            { "v", SchemaVersion.Recommended }
+        }
     };
 
     public Language? Language { get; init; }

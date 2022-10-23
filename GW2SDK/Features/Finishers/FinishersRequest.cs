@@ -14,7 +14,11 @@ public sealed class FinishersRequest : IHttpRequest<IReplicaSet<Finisher>>
         new(HttpMethod.Get, "/v2/finishers")
         {
             AcceptEncoding = "gzip",
-            Arguments = new QueryBuilder { { "ids", "all" }, { "v", SchemaVersion.Recommended } }
+            Arguments = new QueryBuilder
+            {
+                { "ids", "all" },
+                { "v", SchemaVersion.Recommended }
+            }
         };
 
     public Language? Language { get; init; }

@@ -37,7 +37,11 @@ public sealed class MountSkinsByIdsRequest : IHttpRequest<IReplicaSet<MountSkin>
         using var response = await httpClient.SendAsync(
                 Template with
                 {
-                    Arguments = new QueryBuilder { { "ids", MountSkinIds }, { "v", SchemaVersion.Recommended } },
+                    Arguments = new QueryBuilder
+                    {
+                        { "ids", MountSkinIds },
+                        { "v", SchemaVersion.Recommended }
+                    },
                     AcceptLanguage = Language?.Alpha2Code
                 },
                 cancellationToken

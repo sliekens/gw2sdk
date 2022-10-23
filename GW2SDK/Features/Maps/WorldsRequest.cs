@@ -14,7 +14,11 @@ public sealed class WorldsRequest : IHttpRequest<IReplicaSet<World>>
     private static readonly HttpRequestMessageTemplate Template = new(Get, "/v2/worlds")
     {
         AcceptEncoding = "gzip",
-        Arguments = new QueryBuilder { { "ids", "all" }, { "v", SchemaVersion.Recommended } }
+        Arguments = new QueryBuilder
+        {
+            { "ids", "all" },
+            { "v", SchemaVersion.Recommended }
+        }
     };
 
     public Language? Language { get; init; }

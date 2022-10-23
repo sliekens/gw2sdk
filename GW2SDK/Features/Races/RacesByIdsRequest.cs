@@ -37,7 +37,11 @@ public sealed class RacesByIdsRequest : IHttpRequest<IReplicaSet<Race>>
         using var response = await httpClient.SendAsync(
                 Template with
                 {
-                    Arguments = new QueryBuilder { { "ids", RaceIds.Select(id => id.ToString()) }, { "v", SchemaVersion.Recommended } },
+                    Arguments = new QueryBuilder
+                    {
+                        { "ids", RaceIds.Select(id => id.ToString()) },
+                        { "v", SchemaVersion.Recommended }
+                    },
                     AcceptLanguage = Language?.Alpha2Code
                 },
                 cancellationToken

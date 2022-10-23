@@ -14,7 +14,11 @@ public sealed class NodesRequest : IHttpRequest<IReplicaSet<Node>>
         new(HttpMethod.Get, "/v2/home/nodes")
         {
             AcceptEncoding = "gzip",
-            Arguments = new QueryBuilder { { "ids", "all" }, { "v", SchemaVersion.Recommended } }
+            Arguments = new QueryBuilder
+            {
+                { "ids", "all" },
+                { "v", SchemaVersion.Recommended }
+            }
         };
 
     public MissingMemberBehavior MissingMemberBehavior { get; init; }

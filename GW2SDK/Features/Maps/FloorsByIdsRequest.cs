@@ -43,7 +43,11 @@ public sealed class FloorsByIdsRequest : IHttpRequest<IReplicaSet<Floor>>
                         ":id",
                         ContinentId.ToString(CultureInfo.InvariantCulture)
                     ),
-                    Arguments = new QueryBuilder { { "ids", FloorIds }, { "v", SchemaVersion.Recommended } },
+                    Arguments = new QueryBuilder
+                    {
+                        { "ids", FloorIds },
+                        { "v", SchemaVersion.Recommended }
+                    },
                     AcceptLanguage = Language?.Alpha2Code
                 },
                 cancellationToken

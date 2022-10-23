@@ -14,7 +14,11 @@ public sealed class CurrenciesRequest : IHttpRequest<IReplicaSet<Currency>>
     private static readonly HttpRequestMessageTemplate Template = new(Get, "/v2/currencies")
     {
         AcceptEncoding = "gzip",
-        Arguments = new QueryBuilder { { "ids", "all" }, { "v", SchemaVersion.Recommended } }
+        Arguments = new QueryBuilder
+        {
+            { "ids", "all" },
+            { "v", SchemaVersion.Recommended }
+        }
     };
 
     public Language? Language { get; init; }
