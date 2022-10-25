@@ -850,14 +850,14 @@ public static class SkinReader
     {
         switch (json.GetProperty("details").GetProperty("type").GetString())
         {
+            case "Fishing":
+                return ReadFishingToolSkin(json, missingMemberBehavior);
             case "Foraging":
                 return ReadForagingToolSkin(json, missingMemberBehavior);
             case "Logging":
                 return ReadLoggingToolSkin(json, missingMemberBehavior);
             case "Mining":
                 return ReadMiningToolSkin(json, missingMemberBehavior);
-            case "Foo": // TODO: use real type
-                return ReadFishingToolSkin(json, missingMemberBehavior);
         }
 
         RequiredMember<string> name = new("name");
@@ -912,10 +912,19 @@ public static class SkinReader
                 {
                     if (detail.NameEquals("type"))
                     {
+                        // Almost certainly a mistake in the API/game so let's not introduce a skin type for bair/lure
+                        // https://api.guildwars2.com/v2/skins/10440
+                        // [&CsgoAAA=]
+                        var discriminatorValue = detail.Value.GetString();
+                        if (discriminatorValue is "Bait" or "Lure")
+                        {
+                            break;
+                        }
+
                         if (missingMemberBehavior == MissingMemberBehavior.Error)
                         {
                             throw new InvalidOperationException(
-                                Strings.UnexpectedDiscriminator(detail.Value.GetString())
+                                Strings.UnexpectedDiscriminator(discriminatorValue)
                             );
                         }
                     }
@@ -1000,7 +1009,7 @@ public static class SkinReader
                 {
                     if (detail.NameEquals("type"))
                     {
-                        if (!detail.Value.ValueEquals("Foo")) // TODO: use real type
+                        if (!detail.Value.ValueEquals("Fishing"))
                         {
                             throw new InvalidOperationException(
                                 Strings.InvalidDiscriminator(detail.Value.GetString())

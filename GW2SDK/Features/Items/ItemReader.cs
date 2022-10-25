@@ -28,10 +28,14 @@ public static class ItemReader
                 return ReadGatheringTool(json, missingMemberBehavior);
             case "Gizmo":
                 return ReadGizmo(json, missingMemberBehavior);
+            case "JadeTechModule":
+                return ReadJadeTechModule(json, missingMemberBehavior);
             case "Key":
                 return ReadKey(json, missingMemberBehavior);
             case "MiniPet":
                 return ReadMinipet(json, missingMemberBehavior);
+            case "PowerCore":
+                return ReadPowerCore(json, missingMemberBehavior);
             case "Tool":
                 return ReadTool(json, missingMemberBehavior);
             case "Trinket":
@@ -42,14 +46,6 @@ public static class ItemReader
                 return ReadUpgradeComponent(json, missingMemberBehavior);
             case "Weapon":
                 return ReadWeapon(json, missingMemberBehavior);
-
-            // TODO: use real type 
-            case "Qux":
-                return ReadPowerCore(json, missingMemberBehavior);
-
-            // TODO: use real type 
-            case "Quux":
-                return ReadJadeBotUpgrade(json, missingMemberBehavior);
         }
 
         RequiredMember<string> name = new("name");
@@ -6487,14 +6483,16 @@ public static class ItemReader
     {
         switch (json.GetProperty("details").GetProperty("type").GetString())
         {
+            case "Bait":
+                return ReadBait(json, missingMemberBehavior);
             case "Foraging":
                 return ReadForagingTool(json, missingMemberBehavior);
             case "Logging":
                 return ReadLoggingTool(json, missingMemberBehavior);
+            case "Lure":
+                return ReadLure(json, missingMemberBehavior);
             case "Mining":
                 return ReadMiningTool(json, missingMemberBehavior);
-            case "Foo": // TODO: use real type
-                return ReadFishingTool(json, missingMemberBehavior);
         }
 
         RequiredMember<string> name = new("name");
@@ -6589,6 +6587,115 @@ public static class ItemReader
         }
 
         return new GatheringTool
+        {
+            Id = id.GetValue(),
+            Name = name.GetValue(),
+            Description = description.GetValueOrEmpty(),
+            Level = level.GetValue(),
+            Rarity = rarity.GetValue(missingMemberBehavior),
+            VendorValue = vendorValue.GetValue(),
+            GameTypes = gameTypes.GetValues(missingMemberBehavior),
+            Flags = flags.GetValues(missingMemberBehavior),
+            Restrictions = restrictions.GetValues(missingMemberBehavior),
+            ChatLink = chatLink.GetValue(),
+            Icon = icon.GetValueOrNull()
+        };
+    }
+
+    private static Bait ReadBait(JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    {
+        RequiredMember<string> name = new("name");
+        OptionalMember<string> description = new("description");
+        RequiredMember<int> level = new("level");
+        RequiredMember<Rarity> rarity = new("rarity");
+        RequiredMember<Coin> vendorValue = new("vendor_value");
+        RequiredMember<GameType> gameTypes = new("game_types");
+        RequiredMember<ItemFlag> flags = new("flags");
+        RequiredMember<ItemRestriction> restrictions = new("restrictions");
+        RequiredMember<int> id = new("id");
+        RequiredMember<string> chatLink = new("chat_link");
+        OptionalMember<string> icon = new("icon");
+        foreach (var member in json.EnumerateObject())
+        {
+            if (member.NameEquals("type"))
+            {
+                if (!member.Value.ValueEquals("Gathering"))
+                {
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                    );
+                }
+            }
+            else if (member.NameEquals(name.Name))
+            {
+                name.Value = member.Value;
+            }
+            else if (member.NameEquals(description.Name))
+            {
+                description.Value = member.Value;
+            }
+            else if (member.NameEquals(level.Name))
+            {
+                level.Value = member.Value;
+            }
+            else if (member.NameEquals(rarity.Name))
+            {
+                rarity.Value = member.Value;
+            }
+            else if (member.NameEquals(vendorValue.Name))
+            {
+                vendorValue.Value = member.Value;
+            }
+            else if (member.NameEquals(gameTypes.Name))
+            {
+                gameTypes.Value = member.Value;
+            }
+            else if (member.NameEquals(flags.Name))
+            {
+                flags.Value = member.Value;
+            }
+            else if (member.NameEquals(restrictions.Name))
+            {
+                restrictions.Value = member.Value;
+            }
+            else if (member.NameEquals(id.Name))
+            {
+                id.Value = member.Value;
+            }
+            else if (member.NameEquals(chatLink.Name))
+            {
+                chatLink.Value = member.Value;
+            }
+            else if (member.NameEquals(icon.Name))
+            {
+                icon.Value = member.Value;
+            }
+            else if (member.NameEquals("details"))
+            {
+                foreach (var detail in member.Value.EnumerateObject())
+                {
+                    if (detail.NameEquals("type"))
+                    {
+                        if (!detail.Value.ValueEquals("Bait"))
+                        {
+                            throw new InvalidOperationException(
+                                Strings.InvalidDiscriminator(detail.Value.GetString())
+                            );
+                        }
+                    }
+                    else if (missingMemberBehavior == MissingMemberBehavior.Error)
+                    {
+                        throw new InvalidOperationException(Strings.UnexpectedMember(detail.Name));
+                    }
+                }
+            }
+            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            {
+                throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
+            }
+        }
+
+        return new Bait
         {
             Id = id.GetValue(),
             Name = name.GetValue(),
@@ -6940,10 +7047,7 @@ public static class ItemReader
         };
     }
 
-    private static FishingTool ReadFishingTool(
-        JsonElement json,
-        MissingMemberBehavior missingMemberBehavior
-    )
+    private static Lure ReadLure(JsonElement json, MissingMemberBehavior missingMemberBehavior)
     {
         RequiredMember<string> name = new("name");
         OptionalMember<string> description = new("description");
@@ -7017,7 +7121,7 @@ public static class ItemReader
                 {
                     if (detail.NameEquals("type"))
                     {
-                        if (!detail.Value.ValueEquals("Foo")) // BUG???
+                        if (!detail.Value.ValueEquals("Lure"))
                         {
                             throw new InvalidOperationException(
                                 Strings.InvalidDiscriminator(detail.Value.GetString())
@@ -7036,7 +7140,7 @@ public static class ItemReader
             }
         }
 
-        return new FishingTool
+        return new Lure
         {
             Id = id.GetValue(),
             Name = name.GetValue(),
@@ -13827,7 +13931,7 @@ public static class ItemReader
         {
             if (member.NameEquals("type"))
             {
-                if (!member.Value.ValueEquals("Qux")) // TODO: use real type
+                if (!member.Value.ValueEquals("PowerCore"))
                 {
                     throw new InvalidOperationException(
                         Strings.InvalidDiscriminator(member.Value.GetString())
@@ -13900,7 +14004,7 @@ public static class ItemReader
         };
     }
 
-    private static JadeBotUpgrade ReadJadeBotUpgrade(
+    private static JadeBotUpgrade ReadJadeTechModule(
         JsonElement json,
         MissingMemberBehavior missingMemberBehavior
     )
@@ -13920,7 +14024,7 @@ public static class ItemReader
         {
             if (member.NameEquals("type"))
             {
-                if (!member.Value.ValueEquals("Quux")) // TODO: use real type
+                if (!member.Value.ValueEquals("JadeTechModule"))
                 {
                     throw new InvalidOperationException(
                         Strings.InvalidDiscriminator(member.Value.GetString())
