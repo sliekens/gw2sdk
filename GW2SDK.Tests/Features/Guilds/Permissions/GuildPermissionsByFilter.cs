@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using GW2SDK.Tests.TestInfrastructure;
 using Xunit;
 
-namespace GW2SDK.Tests.Features.Guilds;
+namespace GW2SDK.Tests.Features.Guilds.Permissions;
 
 public class GuildPermissionsByFilter
 {

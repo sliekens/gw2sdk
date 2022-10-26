@@ -2,7 +2,7 @@
 using GW2SDK.Guilds.Permissions;
 using Xunit;
 
-namespace GW2SDK.Tests.Features.Guilds;
+namespace GW2SDK.Tests.Features.Guilds.Permissions;
 
 internal static class Invariants
 {
