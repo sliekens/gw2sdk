@@ -100,7 +100,7 @@ internal static class Routes
         //"/v2/guild/:id/upgrades",
         "/v2/guild/permissions",
         //"/v2/guild/search",
-        //"/v2/guild/upgrades",
+        "/v2/guild/upgrades",
         "/v2/home",
         "/v2/home/cats",
         "/v2/home/nodes",
