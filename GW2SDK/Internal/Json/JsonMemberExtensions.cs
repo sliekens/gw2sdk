@@ -41,86 +41,33 @@ internal static class JsonMemberExtensions
     internal static DateTimeOffset GetValue(this RequiredMember<DateTimeOffset> instance) =>
         instance.Select(json => json.GetDateTimeOffset());
 
-    internal static TEnum GetValue<TEnum>(this OptionalMember<TEnum> instance)
-        where TEnum : struct, Enum =>
-        instance.Select(value => Parse<TEnum>(value.GetStringRequired()));
-
     internal static TEnum? GetValue<TEnum>(
         this NullableMember<TEnum> instance,
         MissingMemberBehavior missingMemberBehavior
     ) where TEnum : struct, Enum =>
-        instance.Select(
-            value => missingMemberBehavior == MissingMemberBehavior.Error
-                ? Parse<TEnum>(value.GetStringRequired())
-                : TryHardParse<TEnum>(value.GetStringRequired())
-        );
+        instance.Select(value => value.GetEnum<TEnum>(missingMemberBehavior));
 
     internal static TEnum GetValue<TEnum>(
         this RequiredMember<TEnum> instance,
         MissingMemberBehavior missingMemberBehavior
     ) where TEnum : struct, Enum =>
-        instance.Select(
-            value => missingMemberBehavior == MissingMemberBehavior.Error
-                ? Parse<TEnum>(value.GetStringRequired())
-                : TryHardParse<TEnum>(value.GetStringRequired())
-        );
+        instance.Select(value => value.GetEnum<TEnum>(missingMemberBehavior));
 
     internal static TEnum GetValue<TEnum>(
         this OptionalMember<TEnum> instance,
         MissingMemberBehavior missingMemberBehavior
     ) where TEnum : struct, Enum =>
-        instance.Select(
-            value => missingMemberBehavior == MissingMemberBehavior.Error
-                ? Parse<TEnum>(value.GetStringRequired())
-                : TryHardParse<TEnum>(value.GetStringRequired())
-        );
+        instance.Select(value => value.GetEnum<TEnum>(missingMemberBehavior));
 
     internal static IReadOnlyCollection<TEnum> GetValues<TEnum>(
         this RequiredMember<TEnum> instance,
         MissingMemberBehavior missingMemberBehavior
     ) where TEnum : struct, Enum =>
-        instance.SelectMany(
-            value => missingMemberBehavior == MissingMemberBehavior.Error
-                ? Parse<TEnum>(value.GetStringRequired())
-                : TryHardParse<TEnum>(value.GetStringRequired())
-        );
+        instance.SelectMany(value => value.GetEnum<TEnum>(missingMemberBehavior));
 
     internal static IReadOnlyCollection<TEnum>? GetValues<TEnum>(
         this OptionalMember<TEnum> instance,
         MissingMemberBehavior missingMemberBehavior
     ) where TEnum : struct, Enum =>
-        instance.SelectMany(
-            value => missingMemberBehavior == MissingMemberBehavior.Error
-                ? Parse<TEnum>(value.GetStringRequired())
-                : TryHardParse<TEnum>(value.GetStringRequired())
-        );
-
-    private static TEnum Parse<TEnum>(string name) where TEnum : struct, Enum
-    {
-        if (!Enum.TryParse(name, true, out TEnum value))
-        {
-            throw new InvalidOperationException(Strings.UnexpectedMember(name));
-        }
-
-        return value;
-    }
-
-    /// <summary>A variation on Enum.TryParse() that tries harder.</summary>
-    /// <typeparam name="TEnum">The type of Enum to parse.</typeparam>
-    /// <param name="name">The name of a member of the Enum.</param>
-    /// <returns>The Enum value of the member with the specified name.</returns>
-    private static TEnum TryHardParse<TEnum>(string name) where TEnum : struct, Enum
-    {
-        if (Enum.TryParse(name, true, out TEnum result))
-        {
-            return result;
-        }
-
-        // When parsing fails, treat the value as a constant where the name is unknown
-        // i.e. unique strings receive a unique value
-        //      and duplicate strings receive the same value
-        // (Using hash code is not perfect because of collissions, but it's good enough.)
-        // The actual value should be treated as an opaque value
-        return (TEnum)Enum.ToObject(typeof(TEnum), name.GetDeterministicHashCode());
-    }
+        instance.SelectMany(value => value.GetEnum<TEnum>(missingMemberBehavior));
 }
