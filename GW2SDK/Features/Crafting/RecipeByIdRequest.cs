@@ -10,7 +10,7 @@ namespace GW2SDK.Crafting;
 [PublicAPI]
 public sealed class RecipeByIdRequest : IHttpRequest<IReplica<Recipe>>
 {
-    private static readonly HttpRequestMessageTemplate Template = new(Get, "/v2/recipes")
+    private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/recipes")
     {
         AcceptEncoding = "gzip"
     };

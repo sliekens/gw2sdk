@@ -11,7 +11,7 @@ namespace GW2SDK.Banking;
 [PublicAPI]
 public sealed class MaterialCategoriesIndexRequest : IHttpRequest<IReplicaSet<int>>
 {
-    private static readonly HttpRequestMessageTemplate Template = new(Get, "/v2/materials")
+    private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/materials")
     {
         AcceptEncoding = "gzip",
         Arguments = new QueryBuilder { { "v", SchemaVersion.Recommended } }

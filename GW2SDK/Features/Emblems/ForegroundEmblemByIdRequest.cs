@@ -10,7 +10,7 @@ namespace GW2SDK.Emblems;
 public sealed class ForegroundEmblemByIdRequest : IHttpRequest<IReplica<Emblem>>
 {
     private static readonly HttpRequestMessageTemplate Template =
-        new(HttpMethod.Get, "/v2/emblem/foregrounds") { AcceptEncoding = "gzip" };
+        new(HttpMethod.Get, "v2/emblem/foregrounds") { AcceptEncoding = "gzip" };
 
     public ForegroundEmblemByIdRequest(int foregroundEmblemId)
     {

@@ -13,7 +13,7 @@ namespace GW2SDK.Guilds.Permissions;
 public sealed class GuildPermissionsByIdsRequest : IHttpRequest<IReplicaSet<GuildPermissionSummary>>
 {
     private static readonly HttpRequestMessageTemplate Template =
-        new(HttpMethod.Get, "/v2/guild/permissions") { AcceptEncoding = "gzip" };
+        new(HttpMethod.Get, "v2/guild/permissions") { AcceptEncoding = "gzip" };
 
     public GuildPermissionsByIdsRequest(IReadOnlyCollection<GuildPermission> guildPermissionIds)
     {

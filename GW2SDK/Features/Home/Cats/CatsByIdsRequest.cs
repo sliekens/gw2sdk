@@ -12,7 +12,7 @@ namespace GW2SDK.Home.Cats;
 public sealed class CatsByIdsRequest : IHttpRequest<IReplicaSet<Cat>>
 {
     private static readonly HttpRequestMessageTemplate Template =
-        new(HttpMethod.Get, "/v2/home/cats") { AcceptEncoding = "gzip" };
+        new(HttpMethod.Get, "v2/home/cats") { AcceptEncoding = "gzip" };
 
     public CatsByIdsRequest(IReadOnlyCollection<int> catIds)
     {

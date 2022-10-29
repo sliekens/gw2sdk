@@ -14,7 +14,7 @@ namespace GW2SDK.Maps;
 public sealed class FloorsByIdsRequest : IHttpRequest<IReplicaSet<Floor>>
 {
     private static readonly HttpRequestMessageTemplate Template =
-        new(Get, "/v2/continents/:id/floors") { AcceptEncoding = "gzip" };
+        new(Get, "v2/continents/:id/floors") { AcceptEncoding = "gzip" };
 
     public FloorsByIdsRequest(int continentId, IReadOnlyCollection<int> floorIds)
     {

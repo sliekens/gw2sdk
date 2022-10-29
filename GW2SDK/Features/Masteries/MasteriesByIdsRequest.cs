@@ -12,7 +12,7 @@ namespace GW2SDK.Masteries;
 [PublicAPI]
 public sealed class MasteriesByIdsRequest : IHttpRequest<IReplicaSet<Mastery>>
 {
-    private static readonly HttpRequestMessageTemplate Template = new(Get, "/v2/masteries")
+    private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/masteries")
     {
         AcceptEncoding = "gzip"
     };

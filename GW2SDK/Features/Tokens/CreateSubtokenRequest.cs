@@ -13,7 +13,7 @@ namespace GW2SDK.Tokens;
 [PublicAPI]
 public sealed class CreateSubtokenRequest : IHttpRequest<IReplica<CreatedSubtoken>>
 {
-    private static readonly HttpRequestMessageTemplate Template = new(Get, "/v2/createsubtoken")
+    private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/createsubtoken")
     {
         AcceptEncoding = "gzip"
     };

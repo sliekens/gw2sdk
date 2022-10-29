@@ -12,7 +12,7 @@ namespace GW2SDK.BuildStorage;
 public sealed class BuildsByIdsRequest : IHttpRequest<IReplicaSet<Build>>
 {
     private static readonly HttpRequestMessageTemplate Template =
-        new(HttpMethod.Get, "/v2/account/buildstorage") { AcceptEncoding = "gzip" };
+        new(HttpMethod.Get, "v2/account/buildstorage") { AcceptEncoding = "gzip" };
 
     public BuildsByIdsRequest(IReadOnlyCollection<int> buildStorageIds)
     {

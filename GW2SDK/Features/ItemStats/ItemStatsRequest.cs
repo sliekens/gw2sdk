@@ -11,7 +11,7 @@ namespace GW2SDK.ItemStats;
 [PublicAPI]
 public sealed class ItemStatsRequest : IHttpRequest<IReplicaSet<ItemStat>>
 {
-    private static readonly HttpRequestMessageTemplate Template = new(Get, "/v2/itemstats")
+    private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/itemstats")
     {
         AcceptEncoding = "gzip",
         Arguments = new QueryBuilder

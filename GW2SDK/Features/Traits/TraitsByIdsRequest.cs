@@ -12,7 +12,7 @@ namespace GW2SDK.Traits;
 [PublicAPI]
 public sealed class TraitsByIdsRequest : IHttpRequest<IReplicaSet<Trait>>
 {
-    private static readonly HttpRequestMessageTemplate Template = new(Get, "/v2/traits")
+    private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/traits")
     {
         AcceptEncoding = "gzip"
     };

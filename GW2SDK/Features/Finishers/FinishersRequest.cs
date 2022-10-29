@@ -11,7 +11,7 @@ namespace GW2SDK.Finishers;
 public sealed class FinishersRequest : IHttpRequest<IReplicaSet<Finisher>>
 {
     private static readonly HttpRequestMessageTemplate Template =
-        new(HttpMethod.Get, "/v2/finishers")
+        new(HttpMethod.Get, "v2/finishers")
         {
             AcceptEncoding = "gzip",
             Arguments = new QueryBuilder

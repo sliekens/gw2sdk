@@ -11,7 +11,7 @@ namespace GW2SDK.Skills;
 [PublicAPI]
 public sealed class SkillsIndexRequest : IHttpRequest<IReplicaSet<int>>
 {
-    private static readonly HttpRequestMessageTemplate Template = new(Get, "/v2/skills")
+    private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/skills")
     {
         AcceptEncoding = "gzip",
         Arguments = new QueryBuilder { { "v", SchemaVersion.Recommended } }

@@ -12,7 +12,7 @@ namespace GW2SDK.Crafting;
 [PublicAPI]
 public sealed class UnlockedRecipesRequest : IHttpRequest<IReplica<IReadOnlyCollection<int>>>
 {
-    private static readonly HttpRequestMessageTemplate Template = new(Get, "/v2/account/recipes")
+    private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/account/recipes")
     {
         AcceptEncoding = "gzip",
         Arguments = new QueryBuilder { { "v", SchemaVersion.Recommended } }

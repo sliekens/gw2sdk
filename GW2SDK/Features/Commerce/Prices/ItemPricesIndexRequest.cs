@@ -11,7 +11,7 @@ namespace GW2SDK.Commerce.Prices;
 [PublicAPI]
 public sealed class ItemPricesIndexRequest : IHttpRequest<IReplicaSet<int>>
 {
-    private static readonly HttpRequestMessageTemplate Template = new(Get, "/v2/commerce/prices")
+    private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/commerce/prices")
     {
         AcceptEncoding = "gzip",
         Arguments = new QueryBuilder { { "v", SchemaVersion.Recommended } }

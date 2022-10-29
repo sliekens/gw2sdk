@@ -10,7 +10,7 @@ namespace GW2SDK.Files;
 [PublicAPI]
 public sealed class FilesIndexRequest : IHttpRequest<IReplicaSet<string>>
 {
-    private static readonly HttpRequestMessageTemplate Template = new(HttpMethod.Get, "/v2/files")
+    private static readonly HttpRequestMessageTemplate Template = new(HttpMethod.Get, "v2/files")
     {
         AcceptEncoding = "gzip",
         Arguments = new QueryBuilder { { "v", SchemaVersion.Recommended } }

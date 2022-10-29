@@ -10,7 +10,7 @@ namespace GW2SDK.MailCarriers;
 [PublicAPI]
 public sealed class MailCarrierByIdRequest : IHttpRequest<IReplica<MailCarrier>>
 {
-    private static readonly HttpRequestMessageTemplate Template = new(Get, "/v2/mailcarriers")
+    private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/mailcarriers")
     {
         AcceptEncoding = "gzip"
     };

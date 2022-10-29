@@ -18,7 +18,7 @@ public sealed class EmotesQuery
         http.BaseAddress ??= BaseAddress.DefaultUri;
     }
 
-    #region /v2/emotes
+    #region v2/emotes
 
     public Task<IReplicaSet<Emote>> GetEmotes(
         MissingMemberBehavior missingMemberBehavior = default,

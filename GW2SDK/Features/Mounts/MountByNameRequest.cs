@@ -10,7 +10,7 @@ namespace GW2SDK.Mounts;
 [PublicAPI]
 public sealed class MountByNameRequest : IHttpRequest<IReplica<Mount>>
 {
-    private static readonly HttpRequestMessageTemplate Template = new(Get, "/v2/mounts/types")
+    private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/mounts/types")
     {
         AcceptEncoding = "gzip"
     };

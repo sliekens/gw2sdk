@@ -11,7 +11,7 @@ namespace GW2SDK.Items;
 [PublicAPI]
 public sealed class ItemsByPageRequest : IHttpRequest<IReplicaPage<Item>>
 {
-    private static readonly HttpRequestMessageTemplate Template = new(Get, "/v2/items")
+    private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/items")
     {
         AcceptEncoding = "gzip"
     };

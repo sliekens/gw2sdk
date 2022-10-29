@@ -11,7 +11,7 @@ namespace GW2SDK.Commerce.Exchange;
 public sealed class ExchangeGoldForGemsRequest : IHttpRequest<IReplica<GoldForGemsExchange>>
 {
     private static readonly HttpRequestMessageTemplate Template =
-        new(Get, "/v2/commerce/exchange/coins") { AcceptEncoding = "gzip" };
+        new(Get, "v2/commerce/exchange/coins") { AcceptEncoding = "gzip" };
 
     public ExchangeGoldForGemsRequest(int coinsCount)
     {

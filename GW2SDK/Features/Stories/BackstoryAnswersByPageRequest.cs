@@ -11,7 +11,7 @@ namespace GW2SDK.Stories;
 [PublicAPI]
 public sealed class BackstoryAnswersByPageRequest : IHttpRequest<IReplicaPage<BackstoryAnswer>>
 {
-    private static readonly HttpRequestMessageTemplate Template = new(Get, "/v2/backstory/answers")
+    private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/backstory/answers")
     {
         AcceptEncoding = "gzip"
     };

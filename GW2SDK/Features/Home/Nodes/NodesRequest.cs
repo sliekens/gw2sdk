@@ -11,7 +11,7 @@ namespace GW2SDK.Home.Nodes;
 public sealed class NodesRequest : IHttpRequest<IReplicaSet<Node>>
 {
     private static readonly HttpRequestMessageTemplate Template =
-        new(HttpMethod.Get, "/v2/home/nodes")
+        new(HttpMethod.Get, "v2/home/nodes")
         {
             AcceptEncoding = "gzip",
             Arguments = new QueryBuilder

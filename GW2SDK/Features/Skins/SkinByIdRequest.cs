@@ -10,7 +10,7 @@ namespace GW2SDK.Skins;
 [PublicAPI]
 public sealed class SkinByIdRequest : IHttpRequest<IReplica<Skin>>
 {
-    private static readonly HttpRequestMessageTemplate Template = new(Get, "/v2/skins")
+    private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/skins")
     {
         AcceptEncoding = "gzip"
     };

@@ -12,7 +12,7 @@ namespace GW2SDK.Crafting;
 public sealed class LearnedRecipesRequest : IHttpRequest<IReplica<IReadOnlyCollection<int>>>
 {
     private static readonly HttpRequestMessageTemplate Template =
-        new(Get, "/v2/characters/:id/recipes")
+        new(Get, "v2/characters/:id/recipes")
         {
             AcceptEncoding = "gzip",
             Arguments = new QueryBuilder { { "v", SchemaVersion.Recommended } }

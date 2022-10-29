@@ -12,7 +12,7 @@ namespace GW2SDK.Mounts;
 public sealed class OwnedMountSkinsRequest : IHttpRequest<IReplica<IReadOnlyCollection<int>>>
 {
     private static readonly HttpRequestMessageTemplate Template =
-        new(HttpMethod.Get, "/v2/account/mounts/skins")
+        new(HttpMethod.Get, "v2/account/mounts/skins")
         {
             AcceptEncoding = "gzip",
             Arguments = new QueryBuilder { { "v", SchemaVersion.Recommended } }

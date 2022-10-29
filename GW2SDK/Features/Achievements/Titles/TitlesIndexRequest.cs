@@ -11,7 +11,7 @@ namespace GW2SDK.Achievements.Titles;
 [PublicAPI]
 public sealed class TitlesIndexRequest : IHttpRequest<IReplicaSet<int>>
 {
-    private static readonly HttpRequestMessageTemplate Template = new(Get, "/v2/titles")
+    private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/titles")
     {
         AcceptEncoding = "gzip",
         Arguments = new QueryBuilder { { "v", SchemaVersion.Recommended } }

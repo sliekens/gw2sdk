@@ -12,7 +12,7 @@ public sealed class
     GuildUpgradesByPageRequest : IHttpRequest<IReplicaPage<GuildUpgrade>>
 {
     private static readonly HttpRequestMessageTemplate Template =
-        new(HttpMethod.Get, "/v2/guild/upgrades") { AcceptEncoding = "gzip" };
+        new(HttpMethod.Get, "v2/guild/upgrades") { AcceptEncoding = "gzip" };
 
     public GuildUpgradesByPageRequest(int pageIndex)
     {

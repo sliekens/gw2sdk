@@ -12,7 +12,7 @@ namespace GW2SDK.ItemStats;
 [PublicAPI]
 public sealed class ItemStatsByIdsRequest : IHttpRequest<IReplicaSet<ItemStat>>
 {
-    private static readonly HttpRequestMessageTemplate Template = new(Get, "/v2/itemstats")
+    private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/itemstats")
     {
         AcceptEncoding = "gzip"
     };

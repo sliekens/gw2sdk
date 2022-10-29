@@ -10,7 +10,7 @@ namespace GW2SDK.Skills;
 [PublicAPI]
 public sealed class SkillByIdRequest : IHttpRequest<IReplica<Skill>>
 {
-    private static readonly HttpRequestMessageTemplate Template = new(Get, "/v2/skills")
+    private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/skills")
     {
         AcceptEncoding = "gzip"
     };

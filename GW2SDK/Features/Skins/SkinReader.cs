@@ -913,7 +913,7 @@ public static class SkinReader
                     if (detail.NameEquals("type"))
                     {
                         // Almost certainly a mistake in the API/game so let's not introduce a skin type for bair/lure
-                        // https://api.guildwars2.com/v2/skins/10440
+                        // https://api.guildwars2.comv2/skins/10440
                         // [&CsgoAAA=]
                         var discriminatorValue = detail.Value.GetString();
                         if (discriminatorValue is "Bait" or "Lure")

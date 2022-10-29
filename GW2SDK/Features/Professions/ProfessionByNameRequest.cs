@@ -10,7 +10,7 @@ namespace GW2SDK.Professions;
 [PublicAPI]
 public sealed class ProfessionByNameRequest : IHttpRequest<IReplica<Profession>>
 {
-    private static readonly HttpRequestMessageTemplate Template = new(Get, "/v2/professions")
+    private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/professions")
     {
         AcceptEncoding = "gzip"
     };

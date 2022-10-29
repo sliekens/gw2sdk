@@ -19,7 +19,7 @@ public sealed class WalletQuery
         http.BaseAddress ??= BaseAddress.DefaultUri;
     }
 
-    #region /v2/account/wallet
+    #region v2/account/wallet
 
     [Scope(Permission.Wallet)]
     public Task<IReplica<IReadOnlyCollection<CurrencyAmount>>> GetWallet(
@@ -38,7 +38,7 @@ public sealed class WalletQuery
 
     #endregion
 
-    #region /v2/currencies
+    #region v2/currencies
 
     public Task<IReplicaSet<Currency>> GetCurrencies(
         Language? language = default,

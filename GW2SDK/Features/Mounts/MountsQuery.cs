@@ -18,7 +18,7 @@ public sealed class MountsQuery
         http.BaseAddress ??= BaseAddress.DefaultUri;
     }
 
-    #region /v2/account/mounts
+    #region v2/account/mounts
 
     public Task<IReplica<IReadOnlyCollection<MountName>>> GetOwnedMounts(
         string? accessToken,
@@ -44,7 +44,7 @@ public sealed class MountsQuery
 
     #endregion
 
-    #region /v2/mounts
+    #region v2/mounts
 
     public Task<IReplicaSet<Mount>> GetMounts(
         Language? language = default,

@@ -19,7 +19,7 @@ public sealed class DyesQuery
         http.BaseAddress ??= BaseAddress.DefaultUri;
     }
 
-    #region /v2/account/dyes
+    #region v2/account/dyes
 
     /// <summary>Gets the IDs of the dyes unlocked by the current account.</summary>
     [Scope(Permission.Unlocks)]
@@ -34,7 +34,7 @@ public sealed class DyesQuery
 
     #endregion
 
-    #region /v2/colors
+    #region v2/colors
 
     public Task<IReplicaSet<Dye>> GetColors(
         Language? language = default,

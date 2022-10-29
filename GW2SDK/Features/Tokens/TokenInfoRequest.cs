@@ -10,7 +10,7 @@ namespace GW2SDK.Tokens;
 [PublicAPI]
 public sealed class TokenInfoRequest : IHttpRequest<IReplica<TokenInfo>>
 {
-    private static readonly HttpRequestMessageTemplate Template = new(Get, "/v2/tokeninfo")
+    private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/tokeninfo")
     {
         AcceptEncoding = "gzip",
         Arguments = new QueryBuilder { { "v", SchemaVersion.Recommended } }

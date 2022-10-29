@@ -11,7 +11,7 @@ namespace GW2SDK.Files;
 [PublicAPI]
 public sealed class FilesByIdsRequest : IHttpRequest<IReplicaSet<File>>
 {
-    private static readonly HttpRequestMessageTemplate Template = new(HttpMethod.Get, "/v2/files")
+    private static readonly HttpRequestMessageTemplate Template = new(HttpMethod.Get, "v2/files")
     {
         AcceptEncoding = "gzip"
     };

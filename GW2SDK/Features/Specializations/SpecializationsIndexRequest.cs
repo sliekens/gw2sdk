@@ -11,7 +11,7 @@ namespace GW2SDK.Specializations;
 [PublicAPI]
 public sealed class SpecializationsIndexRequest : IHttpRequest<IReplicaSet<int>>
 {
-    private static readonly HttpRequestMessageTemplate Template = new(Get, "/v2/specializations")
+    private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/specializations")
     {
         AcceptEncoding = "gzip",
         Arguments = new QueryBuilder { { "v", SchemaVersion.Recommended } }

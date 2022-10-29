@@ -11,7 +11,7 @@ namespace GW2SDK.Home.Cats;
 public sealed class CatsRequest : IHttpRequest<IReplicaSet<Cat>>
 {
     private static readonly HttpRequestMessageTemplate Template =
-        new(HttpMethod.Get, "/v2/home/cats")
+        new(HttpMethod.Get, "v2/home/cats")
         {
             AcceptEncoding = "gzip",
             Arguments = new QueryBuilder

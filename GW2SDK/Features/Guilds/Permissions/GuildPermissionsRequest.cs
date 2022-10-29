@@ -11,7 +11,7 @@ namespace GW2SDK.Guilds.Permissions;
 public sealed class GuildPermissionsRequest : IHttpRequest<IReplicaSet<GuildPermissionSummary>>
 {
     private static readonly HttpRequestMessageTemplate Template =
-        new(HttpMethod.Get, "/v2/guild/permissions")
+        new(HttpMethod.Get, "v2/guild/permissions")
         {
             AcceptEncoding = "gzip",
             Arguments = new QueryBuilder

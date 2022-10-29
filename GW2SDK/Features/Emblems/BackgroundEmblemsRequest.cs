@@ -11,7 +11,7 @@ namespace GW2SDK.Emblems;
 public sealed class BackgroundEmblemsRequest : IHttpRequest<IReplicaSet<Emblem>>
 {
     private static readonly HttpRequestMessageTemplate Template =
-        new(HttpMethod.Get, "/v2/emblem/backgrounds") { AcceptEncoding = "gzip" };
+        new(HttpMethod.Get, "v2/emblem/backgrounds") { AcceptEncoding = "gzip" };
 
     public MissingMemberBehavior MissingMemberBehavior { get; init; }
 

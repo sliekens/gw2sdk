@@ -10,7 +10,7 @@ namespace GW2SDK.Accounts;
 [PublicAPI]
 public sealed class CharacterByNameRequest : IHttpRequest<IReplica<Character>>
 {
-    private static readonly HttpRequestMessageTemplate Template = new(Get, "/v2/characters")
+    private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/characters")
     {
         AcceptEncoding = "gzip"
     };

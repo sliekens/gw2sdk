@@ -10,7 +10,7 @@ namespace GW2SDK.Emotes;
 public sealed class EmoteByIdRequest : IHttpRequest<IReplica<Emote>>
 {
     private static readonly HttpRequestMessageTemplate Template =
-        new(HttpMethod.Get, "/v2/emotes") { AcceptEncoding = "gzip" };
+        new(HttpMethod.Get, "v2/emotes") { AcceptEncoding = "gzip" };
 
     public EmoteByIdRequest(string emoteId)
     {

@@ -23,7 +23,7 @@ public sealed class AchievementsQuery
         http.BaseAddress ??= BaseAddress.DefaultUri;
     }
 
-    #region /v2/achievements/daily
+    #region v2/achievements/daily
 
     public Task<IReplica<DailyAchievementGroup>> GetDailyAchievements(
         Day day = Day.Today,
@@ -41,7 +41,7 @@ public sealed class AchievementsQuery
 
     #endregion
 
-    #region /v2/achievements
+    #region v2/achievements
 
     public Task<IReplicaSet<int>> GetAchievementsIndex(
         CancellationToken cancellationToken = default
@@ -100,7 +100,7 @@ public sealed class AchievementsQuery
 
     #endregion
 
-    #region /v2/account/achievements
+    #region v2/account/achievements
 
     [Scope(Permission.Progression)]
     public Task<IReplica<AccountAchievement>> GetAccountAchievementById(
@@ -169,7 +169,7 @@ public sealed class AchievementsQuery
 
     #endregion
 
-    #region /v2/achievements/categories
+    #region v2/achievements/categories
 
     public Task<IReplicaSet<AchievementCategory>> GetAchievementCategories(
         Language? language = default,
@@ -242,7 +242,7 @@ public sealed class AchievementsQuery
 
     #endregion
 
-    #region /v2/achievements/groups
+    #region v2/achievements/groups
 
     public Task<IReplicaSet<AchievementGroup>> GetAchievementGroups(
         Language? language = default,
@@ -315,7 +315,7 @@ public sealed class AchievementsQuery
 
     #endregion
 
-    #region /v2/titles
+    #region v2/titles
 
     public Task<IReplicaSet<Title>> GetTitles(
         Language? language = default,

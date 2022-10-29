@@ -12,7 +12,7 @@ namespace GW2SDK.Commerce.Listings;
 [PublicAPI]
 public sealed class OrderBooksByIdsRequest : IHttpRequest<IReplicaSet<OrderBook>>
 {
-    private static readonly HttpRequestMessageTemplate Template = new(Get, "/v2/commerce/listings")
+    private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/commerce/listings")
     {
         AcceptEncoding = "gzip"
     };

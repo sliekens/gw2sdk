@@ -12,7 +12,7 @@ namespace GW2SDK.Currencies;
 [PublicAPI]
 public sealed class CurrenciesByIdsRequest : IHttpRequest<IReplicaSet<Currency>>
 {
-    private static readonly HttpRequestMessageTemplate Template = new(Get, "/v2/currencies")
+    private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/currencies")
     {
         AcceptEncoding = "gzip"
     };

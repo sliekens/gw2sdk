@@ -13,7 +13,7 @@ namespace GW2SDK.Stories;
 public sealed class BackstoryQuestionsByIdsRequest : IHttpRequest<IReplicaSet<BackstoryQuestion>>
 {
     private static readonly HttpRequestMessageTemplate Template =
-        new(Get, "/v2/backstory/questions") { AcceptEncoding = "gzip" };
+        new(Get, "v2/backstory/questions") { AcceptEncoding = "gzip" };
 
     public BackstoryQuestionsByIdsRequest(IReadOnlyCollection<int> questionIds)
     {

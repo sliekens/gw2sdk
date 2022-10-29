@@ -14,7 +14,7 @@ public sealed class
     DailyCraftingOnCooldownRequest : IHttpRequest<IReplica<IReadOnlyCollection<string>>>
 {
     private static readonly HttpRequestMessageTemplate Template =
-        new(Get, "/v2/account/dailycrafting")
+        new(Get, "v2/account/dailycrafting")
         {
             AcceptEncoding = "gzip",
             Arguments = new QueryBuilder { { "v", SchemaVersion.Recommended } }

@@ -13,7 +13,7 @@ namespace GW2SDK.Achievements.Groups;
 public sealed class AchievementGroupsByIdsRequest : IHttpRequest<IReplicaSet<AchievementGroup>>
 {
     private static readonly HttpRequestMessageTemplate Template =
-        new(Get, "/v2/achievements/groups") { AcceptEncoding = "gzip" };
+        new(Get, "v2/achievements/groups") { AcceptEncoding = "gzip" };
 
     public AchievementGroupsByIdsRequest(IReadOnlyCollection<string> achievementGroupIds)
     {

@@ -12,7 +12,7 @@ public sealed class
     GuildPermissionsByPageRequest : IHttpRequest<IReplicaPage<GuildPermissionSummary>>
 {
     private static readonly HttpRequestMessageTemplate Template =
-        new(HttpMethod.Get, "/v2/guild/permissions") { AcceptEncoding = "gzip" };
+        new(HttpMethod.Get, "v2/guild/permissions") { AcceptEncoding = "gzip" };
 
     public GuildPermissionsByPageRequest(int pageIndex)
     {

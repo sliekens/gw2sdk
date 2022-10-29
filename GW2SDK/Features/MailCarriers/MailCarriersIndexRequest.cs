@@ -11,7 +11,7 @@ namespace GW2SDK.MailCarriers;
 [PublicAPI]
 public sealed class MailCarriersIndexRequest : IHttpRequest<IReplicaSet<int>>
 {
-    private static readonly HttpRequestMessageTemplate Template = new(Get, "/v2/mailcarriers")
+    private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/mailcarriers")
     {
         AcceptEncoding = "gzip",
         Arguments = new QueryBuilder { { "v", SchemaVersion.Recommended } }

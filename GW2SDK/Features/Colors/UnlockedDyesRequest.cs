@@ -12,7 +12,7 @@ namespace GW2SDK.Colors;
 [PublicAPI]
 public sealed class UnlockedDyesRequest : IHttpRequest<IReplica<IReadOnlyCollection<int>>>
 {
-    private static readonly HttpRequestMessageTemplate Template = new(Get, "/v2/account/dyes")
+    private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/account/dyes")
     {
         AcceptEncoding = "gzip",
         Arguments = new QueryBuilder { { "v", SchemaVersion.Recommended } }

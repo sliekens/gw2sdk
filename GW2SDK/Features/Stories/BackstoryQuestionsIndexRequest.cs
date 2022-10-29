@@ -12,7 +12,7 @@ namespace GW2SDK.Stories;
 public sealed class BackstoryQuestionsIndexRequest : IHttpRequest<IReplicaSet<int>>
 {
     private static readonly HttpRequestMessageTemplate Template =
-        new(Get, "/v2/backstory/questions")
+        new(Get, "v2/backstory/questions")
         {
             AcceptEncoding = "gzip",
             Arguments = new QueryBuilder { { "v", SchemaVersion.Recommended } }

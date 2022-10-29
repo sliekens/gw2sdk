@@ -10,7 +10,7 @@ namespace GW2SDK.Maps;
 [PublicAPI]
 public sealed class ContinentByIdRequest : IHttpRequest<IReplica<Continent>>
 {
-    private static readonly HttpRequestMessageTemplate Template = new(Get, "/v2/continents")
+    private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/continents")
     {
         AcceptEncoding = "gzip"
     };

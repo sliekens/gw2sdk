@@ -11,7 +11,7 @@ namespace GW2SDK.WorldBosses;
 [PublicAPI]
 public sealed class WorldBossesRequest : IHttpRequest<IReplicaSet<string>>
 {
-    private static readonly HttpRequestMessageTemplate Template = new(Get, "/v2/worldbosses")
+    private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/worldbosses")
     {
         AcceptEncoding = "gzip",
         Arguments = new QueryBuilder { { "v", SchemaVersion.Recommended } }

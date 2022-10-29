@@ -12,7 +12,7 @@ namespace GW2SDK.Achievements.Groups;
 public sealed class AchievementGroupsRequest : IHttpRequest<IReplicaSet<AchievementGroup>>
 {
     private static readonly HttpRequestMessageTemplate Template =
-        new(Get, "/v2/achievements/groups")
+        new(Get, "v2/achievements/groups")
         {
             AcceptEncoding = "gzip",
             Arguments = new QueryBuilder

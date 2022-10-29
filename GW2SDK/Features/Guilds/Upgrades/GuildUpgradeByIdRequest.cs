@@ -10,7 +10,7 @@ namespace GW2SDK.Guilds.Upgrades;
 public sealed class GuildUpgradeByIdRequest : IHttpRequest<IReplica<GuildUpgrade>>
 {
     private static readonly HttpRequestMessageTemplate Template =
-        new(HttpMethod.Get, "/v2/guild/upgrades") { AcceptEncoding = "gzip" };
+        new(HttpMethod.Get, "v2/guild/upgrades") { AcceptEncoding = "gzip" };
 
     public GuildUpgradeByIdRequest(int guildUpgradeId)
     {

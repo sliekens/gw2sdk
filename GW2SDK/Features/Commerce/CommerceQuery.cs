@@ -25,7 +25,7 @@ public sealed class CommerceQuery
         http.BaseAddress ??= BaseAddress.DefaultUri;
     }
 
-    #region /v2/commerce/delivery
+    #region v2/commerce/delivery
 
     [Scope(Permission.TradingPost)]
     public Task<IReplica<DeliveryBox>> GetDeliveryBox(
@@ -44,7 +44,7 @@ public sealed class CommerceQuery
 
     #endregion
 
-    #region /v2/commerce/prices
+    #region v2/commerce/prices
 
     public Task<IReplicaSet<int>> GetItemPricesIndex(CancellationToken cancellationToken = default)
     {
@@ -110,7 +110,7 @@ public sealed class CommerceQuery
 
     #endregion
 
-    #region /v2/commerce/listings
+    #region v2/commerce/listings
 
     public Task<IReplicaSet<int>> GetOrderBooksIndex(CancellationToken cancellationToken = default)
     {
@@ -176,7 +176,7 @@ public sealed class CommerceQuery
 
     #endregion
 
-    #region /v2/commerce/exchange
+    #region v2/commerce/exchange
 
     public Task<IReplica<GemsForGoldExchange>> ExchangeGemsForGold(
         int gemsCount,
@@ -206,7 +206,7 @@ public sealed class CommerceQuery
 
     #endregion
 
-    #region /v2/commerce/transactions
+    #region v2/commerce/transactions
 
     public Task<IReplicaPage<Order>> GetBuyOrders(
         int pageIndex,

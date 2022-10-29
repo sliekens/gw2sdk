@@ -11,7 +11,7 @@ namespace GW2SDK.BuildStorage;
 public sealed class BuildStorageRequest : IHttpRequest<IReplicaSet<Build>>
 {
     private static readonly HttpRequestMessageTemplate Template =
-        new(HttpMethod.Get, "/v2/account/buildstorage")
+        new(HttpMethod.Get, "v2/account/buildstorage")
         {
             AcceptEncoding = "gzip",
             Arguments = new QueryBuilder

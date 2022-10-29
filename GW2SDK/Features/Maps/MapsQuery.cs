@@ -19,7 +19,7 @@ public sealed class MapsQuery
         http.BaseAddress ??= BaseAddress.DefaultUri;
     }
 
-    #region /v2/continents
+    #region v2/continents
 
     public Task<IReplicaSet<Continent>> GetContinents(
         Language? language = default,
@@ -90,7 +90,7 @@ public sealed class MapsQuery
 
     #endregion
 
-    #region /v2/continents/:id/floors
+    #region v2/continents/:id/floors
 
     public Task<IReplicaSet<Floor>> GetFloors(
         int continentId,
@@ -168,7 +168,7 @@ public sealed class MapsQuery
 
     #endregion
 
-    #region /v2/worlds
+    #region v2/worlds
 
     public Task<IReplicaSet<World>> GetWorlds(
         Language? language = default,

@@ -18,7 +18,7 @@ public sealed class AccountsQuery
         http.BaseAddress ??= BaseAddress.DefaultUri;
     }
 
-    #region /v2/account
+    #region v2/account
 
     public Task<IReplica<AccountSummary>> GetSummary(
         string? accessToken,
@@ -36,7 +36,7 @@ public sealed class AccountsQuery
 
     #endregion
 
-    #region /v2/characters
+    #region v2/characters
 
     [Scope(Permission.Account, Permission.Characters)]
     public Task<IReplicaSet<string>> GetCharactersIndex(

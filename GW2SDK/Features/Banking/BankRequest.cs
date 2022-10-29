@@ -10,7 +10,7 @@ namespace GW2SDK.Banking;
 [PublicAPI]
 public sealed class BankRequest : IHttpRequest<IReplica<Bank>>
 {
-    private static readonly HttpRequestMessageTemplate Template = new(Get, "/v2/account/bank")
+    private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/account/bank")
     {
         AcceptEncoding = "gzip",
         Arguments = new QueryBuilder { { "v", SchemaVersion.Recommended } }

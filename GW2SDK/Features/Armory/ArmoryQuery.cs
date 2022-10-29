@@ -18,7 +18,7 @@ public sealed class ArmoryQuery
         http.BaseAddress ??= BaseAddress.DefaultUri;
     }
 
-    #region /v2/account/legendaryarmory
+    #region v2/account/legendaryarmory
 
     public Task<IReplicaSet<BoundLegendaryItem>> GetBoundLegendaryItems(
         string? accessToken,
@@ -33,7 +33,7 @@ public sealed class ArmoryQuery
 
     #endregion
 
-    #region /v2/legendaryarmory
+    #region v2/legendaryarmory
 
     public Task<IReplicaSet<LegendaryItem>> GetLegendaryItems(
         MissingMemberBehavior missingMemberBehavior = default,

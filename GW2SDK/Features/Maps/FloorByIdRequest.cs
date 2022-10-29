@@ -12,7 +12,7 @@ namespace GW2SDK.Maps;
 public sealed class FloorByIdRequest : IHttpRequest<IReplica<Floor>>
 {
     private static readonly HttpRequestMessageTemplate Template =
-        new(Get, "/v2/continents/:id/floors") { AcceptEncoding = "gzip" };
+        new(Get, "v2/continents/:id/floors") { AcceptEncoding = "gzip" };
 
     public FloorByIdRequest(int continentId, int floorId)
     {

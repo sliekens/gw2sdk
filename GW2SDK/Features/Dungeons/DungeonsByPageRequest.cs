@@ -11,7 +11,7 @@ namespace GW2SDK.Dungeons;
 public sealed class DungeonsByPageRequest : IHttpRequest<IReplicaPage<Dungeon>>
 {
     private static readonly HttpRequestMessageTemplate Template =
-        new(HttpMethod.Get, "/v2/dungeons") { AcceptEncoding = "gzip" };
+        new(HttpMethod.Get, "v2/dungeons") { AcceptEncoding = "gzip" };
 
     public DungeonsByPageRequest(int pageIndex)
     {

@@ -10,7 +10,7 @@ namespace GW2SDK.Items;
 [PublicAPI]
 public sealed class ItemByIdRequest : IHttpRequest<IReplica<Item>>
 {
-    private static readonly HttpRequestMessageTemplate Template = new(Get, "/v2/items")
+    private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/items")
     {
         AcceptEncoding = "gzip"
     };

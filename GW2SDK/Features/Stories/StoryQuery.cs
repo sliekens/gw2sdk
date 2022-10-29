@@ -46,7 +46,7 @@ public sealed class StoryQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    #region /v2/backstory/questions
+    #region v2/backstory/questions
 
     public Task<IReplicaSet<int>> GetBackstoryQuestionsIndex(
         CancellationToken cancellationToken = default
@@ -105,7 +105,7 @@ public sealed class StoryQuery
 
     #endregion
 
-    #region /v2/backstory/answers
+    #region v2/backstory/answers
 
     public Task<IReplicaSet<string>> GetBackstoryAnswersIndex(
         CancellationToken cancellationToken = default

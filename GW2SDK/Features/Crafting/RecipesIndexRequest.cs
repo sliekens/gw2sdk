@@ -11,7 +11,7 @@ namespace GW2SDK.Crafting;
 [PublicAPI]
 public sealed class RecipesIndexRequest : IHttpRequest<IReplicaSet<int>>
 {
-    private static readonly HttpRequestMessageTemplate Template = new(Get, "/v2/recipes")
+    private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/recipes")
     {
         AcceptEncoding = "gzip",
         Arguments = new QueryBuilder { { "v", SchemaVersion.Recommended } }

@@ -12,7 +12,7 @@ namespace GW2SDK.Banking;
 [PublicAPI]
 public sealed class MaterialCategoriesByIdsRequest : IHttpRequest<IReplicaSet<MaterialCategory>>
 {
-    private static readonly HttpRequestMessageTemplate Template = new(Get, "/v2/materials")
+    private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/materials")
     {
         AcceptEncoding = "gzip"
     };

@@ -10,7 +10,7 @@ namespace GW2SDK.Inventories;
 public sealed class SharedInventoryRequest : IHttpRequest<IReplica<Inventory>>
 {
     private static readonly HttpRequestMessageTemplate Template =
-        new(HttpMethod.Get, "/v2/account/inventory")
+        new(HttpMethod.Get, "v2/account/inventory")
         {
             AcceptEncoding = "gzip",
             Arguments = new QueryBuilder { { "v", SchemaVersion.Recommended } }

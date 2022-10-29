@@ -11,7 +11,7 @@ namespace GW2SDK.Achievements.Dailies;
 [PublicAPI]
 public sealed class DailyAchievementsRequest : IHttpRequest<IReplica<DailyAchievementGroup>>
 {
-    private static readonly HttpRequestMessageTemplate Template = new(Get, "/v2/achievements/daily")
+    private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/achievements/daily")
     {
         AcceptEncoding = "gzip",
         Arguments = new QueryBuilder { { "v", SchemaVersion.Recommended } }

@@ -10,7 +10,7 @@ namespace GW2SDK.Accounts;
 [PublicAPI]
 public sealed class AccountRequest : IHttpRequest<IReplica<AccountSummary>>
 {
-    private static readonly HttpRequestMessageTemplate Template = new(Get, "/v2/account")
+    private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/account")
     {
         AcceptEncoding = "gzip",
         Arguments = new QueryBuilder { { "v", SchemaVersion.Recommended } }

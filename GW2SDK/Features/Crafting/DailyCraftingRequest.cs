@@ -12,7 +12,7 @@ namespace GW2SDK.Crafting;
 [PublicAPI]
 public sealed class DailyCraftingRequest : IHttpRequest<IReplica<IReadOnlyCollection<string>>>
 {
-    private static readonly HttpRequestMessageTemplate Template = new(Get, "/v2/dailycrafting")
+    private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/dailycrafting")
     {
         AcceptEncoding = "gzip",
         Arguments = new QueryBuilder { { "v", SchemaVersion.Recommended } }

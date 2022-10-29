@@ -10,7 +10,7 @@ namespace GW2SDK.Commerce.Delivery;
 [PublicAPI]
 public sealed class DeliveryRequest : IHttpRequest<IReplica<DeliveryBox>>
 {
-    private static readonly HttpRequestMessageTemplate Template = new(Get, "/v2/commerce/delivery")
+    private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/commerce/delivery")
     {
         AcceptEncoding = "gzip",
         Arguments = new QueryBuilder { { "v", SchemaVersion.Recommended } }

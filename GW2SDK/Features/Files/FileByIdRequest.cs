@@ -10,7 +10,7 @@ namespace GW2SDK.Files;
 public sealed class FileByIdRequest : IHttpRequest<IReplica<File>>
 {
     private static readonly HttpRequestMessageTemplate Template =
-        new(HttpMethod.Get, "/v2/files") { AcceptEncoding = "gzip" };
+        new(HttpMethod.Get, "v2/files") { AcceptEncoding = "gzip" };
 
     public FileByIdRequest(string fileId)
     {

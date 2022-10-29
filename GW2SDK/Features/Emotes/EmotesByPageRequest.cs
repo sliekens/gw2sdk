@@ -11,7 +11,7 @@ namespace GW2SDK.Emotes;
 public sealed class EmotesByPageRequest : IHttpRequest<IReplicaPage<Emote>>
 {
     private static readonly HttpRequestMessageTemplate Template =
-        new(HttpMethod.Get, "/v2/emotes") { AcceptEncoding = "gzip" };
+        new(HttpMethod.Get, "v2/emotes") { AcceptEncoding = "gzip" };
 
     public EmotesByPageRequest(int pageIndex)
     {

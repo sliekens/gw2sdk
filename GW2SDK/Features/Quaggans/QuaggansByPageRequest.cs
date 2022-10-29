@@ -11,7 +11,7 @@ namespace GW2SDK.Quaggans;
 [PublicAPI]
 public sealed class QuaggansByPageRequest : IHttpRequest<IReplicaPage<Quaggan>>
 {
-    private static readonly HttpRequestMessageTemplate Template = new(Get, "/v2/quaggans")
+    private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/quaggans")
     {
         AcceptEncoding = "gzip"
     };

@@ -12,7 +12,7 @@ namespace GW2SDK.Armory;
 [PublicAPI]
 public sealed class LegendaryItemsByIdsRequest : IHttpRequest<IReplicaSet<LegendaryItem>>
 {
-    private static readonly HttpRequestMessageTemplate Template = new(Get, "/v2/legendaryarmory")
+    private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/legendaryarmory")
     {
         AcceptEncoding = "gzip"
     };

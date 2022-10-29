@@ -12,7 +12,7 @@ namespace GW2SDK.Maps;
 [PublicAPI]
 public sealed class WorldsByIdsRequest : IHttpRequest<IReplicaSet<World>>
 {
-    private static readonly HttpRequestMessageTemplate Template = new(Get, "/v2/worlds")
+    private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/worlds")
     {
         AcceptEncoding = "gzip"
     };

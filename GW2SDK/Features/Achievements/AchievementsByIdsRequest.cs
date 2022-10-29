@@ -12,7 +12,7 @@ namespace GW2SDK.Achievements;
 [PublicAPI]
 public sealed class AchievementsByIdsRequest : IHttpRequest<IReplicaSet<Achievement>>
 {
-    private static readonly HttpRequestMessageTemplate Template = new(Get, "/v2/achievements")
+    private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/achievements")
     {
         AcceptEncoding = "gzip"
     };

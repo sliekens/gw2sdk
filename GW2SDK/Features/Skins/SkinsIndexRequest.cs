@@ -11,7 +11,7 @@ namespace GW2SDK.Skins;
 [PublicAPI]
 public sealed class SkinsIndexRequest : IHttpRequest<IReplicaSet<int>>
 {
-    private static readonly HttpRequestMessageTemplate Template = new(Get, "/v2/skins")
+    private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/skins")
     {
         AcceptEncoding = "gzip",
         Arguments = new QueryBuilder { { "v", SchemaVersion.Recommended } }

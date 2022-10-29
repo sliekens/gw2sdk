@@ -11,7 +11,7 @@ namespace GW2SDK.Commerce.Listings;
 [PublicAPI]
 public sealed class OrderBooksIndexRequest : IHttpRequest<IReplicaSet<int>>
 {
-    private static readonly HttpRequestMessageTemplate Template = new(Get, "/v2/commerce/listings")
+    private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/commerce/listings")
     {
         AcceptEncoding = "gzip",
         Arguments = new QueryBuilder { { "v", SchemaVersion.Recommended } }

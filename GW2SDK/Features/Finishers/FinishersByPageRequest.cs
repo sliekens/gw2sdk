@@ -11,7 +11,7 @@ namespace GW2SDK.Finishers;
 public sealed class FinishersByPageRequest : IHttpRequest<IReplicaPage<Finisher>>
 {
     private static readonly HttpRequestMessageTemplate Template =
-        new(HttpMethod.Get, "/v2/finishers") { AcceptEncoding = "gzip" };
+        new(HttpMethod.Get, "v2/finishers") { AcceptEncoding = "gzip" };
 
     public FinishersByPageRequest(int pageIndex)
     {

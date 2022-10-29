@@ -11,7 +11,7 @@ namespace GW2SDK.Maps;
 [PublicAPI]
 public sealed class ContinentsIndexRequest : IHttpRequest<IReplicaSet<int>>
 {
-    private static readonly HttpRequestMessageTemplate Template = new(Get, "/v2/continents")
+    private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/continents")
     {
         AcceptEncoding = "gzip",
         Arguments = new QueryBuilder { { "v", SchemaVersion.Recommended } }

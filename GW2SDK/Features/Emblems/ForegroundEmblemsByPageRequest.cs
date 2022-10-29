@@ -11,7 +11,7 @@ namespace GW2SDK.Emblems;
 public sealed class ForegroundEmblemsByPageRequest : IHttpRequest<IReplicaPage<Emblem>>
 {
     private static readonly HttpRequestMessageTemplate Template =
-        new(HttpMethod.Get, "/v2/emblem/foregrounds") { AcceptEncoding = "gzip" };
+        new(HttpMethod.Get, "v2/emblem/foregrounds") { AcceptEncoding = "gzip" };
 
     public ForegroundEmblemsByPageRequest(int pageIndex)
     {

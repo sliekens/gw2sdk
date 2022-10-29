@@ -10,7 +10,7 @@ namespace GW2SDK.Races;
 [PublicAPI]
 public sealed class RacesByPageRequest : IHttpRequest<IReplicaPage<Race>>
 {
-    private static readonly HttpRequestMessageTemplate Template = new(HttpMethod.Get, "/v2/races")
+    private static readonly HttpRequestMessageTemplate Template = new(HttpMethod.Get, "v2/races")
     {
         AcceptEncoding = "gzip"
     };

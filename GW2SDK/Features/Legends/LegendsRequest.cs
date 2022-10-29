@@ -10,7 +10,7 @@ namespace GW2SDK.Legends;
 [PublicAPI]
 public sealed class LegendsRequest : IHttpRequest<IReplicaSet<Legend>>
 {
-    private static readonly HttpRequestMessageTemplate Template = new(HttpMethod.Get, "/v2/legends")
+    private static readonly HttpRequestMessageTemplate Template = new(HttpMethod.Get, "v2/legends")
     {
         AcceptEncoding = "gzip",
         Arguments = new QueryBuilder

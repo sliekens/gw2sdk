@@ -12,7 +12,7 @@ namespace GW2SDK.Home.Cats;
 public sealed class OwnedCatsIndexRequest : IHttpRequest<IReplica<IReadOnlyCollection<int>>>
 {
     private static readonly HttpRequestMessageTemplate Template =
-        new(HttpMethod.Get, "/v2/account/home/cats")
+        new(HttpMethod.Get, "v2/account/home/cats")
         {
             AcceptEncoding = "gzip",
             Arguments = new QueryBuilder { { "v", SchemaVersion.Recommended } }

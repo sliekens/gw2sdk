@@ -11,7 +11,7 @@ namespace GW2SDK.Mounts;
 [PublicAPI]
 public sealed class MountsByPageRequest : IHttpRequest<IReplicaPage<Mount>>
 {
-    private static readonly HttpRequestMessageTemplate Template = new(Get, "/v2/mounts/types")
+    private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/mounts/types")
     {
         AcceptEncoding = "gzip"
     };

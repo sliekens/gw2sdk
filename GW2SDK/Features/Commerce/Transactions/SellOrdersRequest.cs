@@ -12,7 +12,7 @@ namespace GW2SDK.Commerce.Transactions;
 public sealed class SellOrdersRequest : IHttpRequest<IReplicaPage<Order>>
 {
     private static readonly HttpRequestMessageTemplate Template =
-        new(Get, "/v2/commerce/transactions/current/sells") { AcceptEncoding = "gzip" };
+        new(Get, "v2/commerce/transactions/current/sells") { AcceptEncoding = "gzip" };
 
     public SellOrdersRequest(int pageIndex)
     {

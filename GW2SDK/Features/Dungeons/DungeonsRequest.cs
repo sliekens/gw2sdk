@@ -11,7 +11,7 @@ namespace GW2SDK.Dungeons;
 public sealed class DungeonsRequest : IHttpRequest<IReplicaSet<Dungeon>>
 {
     private static readonly HttpRequestMessageTemplate Template =
-        new(HttpMethod.Get, "/v2/dungeons")
+        new(HttpMethod.Get, "v2/dungeons")
         {
             AcceptEncoding = "gzip",
             Arguments = new QueryBuilder

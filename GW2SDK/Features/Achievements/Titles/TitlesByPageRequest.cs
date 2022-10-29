@@ -11,7 +11,7 @@ namespace GW2SDK.Achievements.Titles;
 [PublicAPI]
 public sealed class TitlesByPageRequest : IHttpRequest<IReplicaPage<Title>>
 {
-    private static readonly HttpRequestMessageTemplate Template = new(Get, "/v2/titles")
+    private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/titles")
     {
         AcceptEncoding = "gzip"
     };

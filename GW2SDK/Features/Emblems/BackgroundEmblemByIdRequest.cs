@@ -10,7 +10,7 @@ namespace GW2SDK.Emblems;
 public sealed class BackgroundEmblemByIdRequest : IHttpRequest<IReplica<Emblem>>
 {
     private static readonly HttpRequestMessageTemplate Template =
-        new(HttpMethod.Get, "/v2/emblem/backgrounds") { AcceptEncoding = "gzip" };
+        new(HttpMethod.Get, "v2/emblem/backgrounds") { AcceptEncoding = "gzip" };
 
     public BackgroundEmblemByIdRequest(int backgroundEmblemId)
     {

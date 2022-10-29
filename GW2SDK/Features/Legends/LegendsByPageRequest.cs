@@ -11,7 +11,7 @@ namespace GW2SDK.Legends;
 public sealed class LegendsByPageRequest : IHttpRequest<IReplicaPage<Legend>>
 {
     private static readonly HttpRequestMessageTemplate Template =
-        new(HttpMethod.Get, "/v2/legends") { AcceptEncoding = "gzip" };
+        new(HttpMethod.Get, "v2/legends") { AcceptEncoding = "gzip" };
 
     public LegendsByPageRequest(int pageIndex)
     {

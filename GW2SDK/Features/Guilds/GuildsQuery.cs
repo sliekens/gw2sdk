@@ -20,7 +20,7 @@ public sealed class GuildsQuery
         http.BaseAddress ??= BaseAddress.DefaultUri;
     }
 
-    #region /v2/guild/permissions
+    #region v2/guild/permissions
 
     public Task<IReplicaSet<GuildPermissionSummary>> GetGuildPermissions(
         Language? language = default,
@@ -93,7 +93,7 @@ public sealed class GuildsQuery
 
     #endregion
 
-    #region /v2/guild/upgrades
+    #region v2/guild/upgrades
 
     public Task<IReplicaSet<GuildUpgrade>> GetGuildUpgrades(
         Language? language = default,

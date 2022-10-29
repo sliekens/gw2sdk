@@ -11,7 +11,7 @@ namespace GW2SDK.Skills;
 [PublicAPI]
 public sealed class SkillsByPageRequest : IHttpRequest<IReplicaPage<Skill>>
 {
-    private static readonly HttpRequestMessageTemplate Template = new(Get, "/v2/skills")
+    private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/skills")
     {
         AcceptEncoding = "gzip"
     };

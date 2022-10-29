@@ -11,7 +11,7 @@ namespace GW2SDK.Home.Cats;
 public sealed class CatsByPageRequest : IHttpRequest<IReplicaPage<Cat>>
 {
     private static readonly HttpRequestMessageTemplate Template =
-        new(HttpMethod.Get, "/v2/home/cats") { AcceptEncoding = "gzip" };
+        new(HttpMethod.Get, "v2/home/cats") { AcceptEncoding = "gzip" };
 
     public CatsByPageRequest(int pageIndex)
     {

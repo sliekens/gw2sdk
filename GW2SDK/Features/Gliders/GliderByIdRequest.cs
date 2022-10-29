@@ -10,7 +10,7 @@ namespace GW2SDK.Gliders;
 public sealed class GliderByIdRequest : IHttpRequest<IReplica<Glider>>
 {
     private static readonly HttpRequestMessageTemplate Template =
-        new(HttpMethod.Get, "/v2/gliders") { AcceptEncoding = "gzip" };
+        new(HttpMethod.Get, "v2/gliders") { AcceptEncoding = "gzip" };
 
     public GliderByIdRequest(int gliderId)
     {

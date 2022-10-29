@@ -11,7 +11,7 @@ namespace GW2SDK.BuildStorage;
 public sealed class BuildsByPageRequest : IHttpRequest<IReplicaPage<Build>>
 {
     private static readonly HttpRequestMessageTemplate Template =
-        new(HttpMethod.Get, "/v2/account/buildstorage") { AcceptEncoding = "gzip" };
+        new(HttpMethod.Get, "v2/account/buildstorage") { AcceptEncoding = "gzip" };
 
     public BuildsByPageRequest(int pageIndex)
     {

@@ -12,7 +12,7 @@ namespace GW2SDK.Emblems;
 public sealed class ForegroundEmblemsByIdsRequest : IHttpRequest<IReplicaSet<Emblem>>
 {
     private static readonly HttpRequestMessageTemplate Template =
-        new(HttpMethod.Get, "/v2/emblem/foregrounds") { AcceptEncoding = "gzip" };
+        new(HttpMethod.Get, "v2/emblem/foregrounds") { AcceptEncoding = "gzip" };
 
     public ForegroundEmblemsByIdsRequest(IReadOnlyCollection<int> foregroundEmblemIds)
     {

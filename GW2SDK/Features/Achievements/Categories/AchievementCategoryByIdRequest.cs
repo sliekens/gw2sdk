@@ -11,7 +11,7 @@ namespace GW2SDK.Achievements.Categories;
 public sealed class AchievementCategoryByIdRequest : IHttpRequest<IReplica<AchievementCategory>>
 {
     private static readonly HttpRequestMessageTemplate Template =
-        new(Get, "/v2/achievements/categories") { AcceptEncoding = "gzip" };
+        new(Get, "v2/achievements/categories") { AcceptEncoding = "gzip" };
 
     public AchievementCategoryByIdRequest(int achievementCategoryId)
     {

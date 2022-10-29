@@ -10,7 +10,7 @@ namespace GW2SDK.Legends;
 public sealed class LegendByIdRequest : IHttpRequest<IReplica<Legend>>
 {
     private static readonly HttpRequestMessageTemplate Template =
-        new(HttpMethod.Get, "/v2/legends") { AcceptEncoding = "gzip" };
+        new(HttpMethod.Get, "v2/legends") { AcceptEncoding = "gzip" };
 
     public LegendByIdRequest(string legendId)
     {

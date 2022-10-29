@@ -18,7 +18,7 @@ public sealed class EmblemsQuery
         http.BaseAddress ??= BaseAddress.DefaultUri;
     }
 
-    #region /v2/emblem/foregrounds
+    #region v2/emblem/foregrounds
 
     public Task<IReplicaSet<Emblem>> GetForegroundEmblems(
         MissingMemberBehavior missingMemberBehavior = default,
@@ -76,7 +76,7 @@ public sealed class EmblemsQuery
 
     #endregion
 
-    #region /v2/emblem/backgrounds
+    #region v2/emblem/backgrounds
 
     public Task<IReplicaSet<Emblem>> GetBackgroundEmblems(
         MissingMemberBehavior missingMemberBehavior = default,

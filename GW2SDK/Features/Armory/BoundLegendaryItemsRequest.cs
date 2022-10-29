@@ -12,7 +12,7 @@ namespace GW2SDK.Armory;
 public sealed class BoundLegendaryItemsRequest : IHttpRequest<IReplicaSet<BoundLegendaryItem>>
 {
     private static readonly HttpRequestMessageTemplate Template =
-        new(Get, "/v2/account/legendaryarmory")
+        new(Get, "v2/account/legendaryarmory")
         {
             Arguments = new QueryBuilder
             {

@@ -11,7 +11,7 @@ namespace GW2SDK.Accounts;
 [PublicAPI]
 public sealed class CharactersRequest : IHttpRequest<IReplicaSet<Character>>
 {
-    private static readonly HttpRequestMessageTemplate Template = new(Get, "/v2/characters")
+    private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/characters")
     {
         AcceptEncoding = "gzip",
         Arguments = new QueryBuilder

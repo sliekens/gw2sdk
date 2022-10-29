@@ -11,7 +11,7 @@ namespace GW2SDK.Gliders;
 public sealed class GlidersByPageRequest : IHttpRequest<IReplicaPage<Glider>>
 {
     private static readonly HttpRequestMessageTemplate Template =
-        new(HttpMethod.Get, "/v2/gliders") { AcceptEncoding = "gzip" };
+        new(HttpMethod.Get, "v2/gliders") { AcceptEncoding = "gzip" };
 
     public GlidersByPageRequest(int pageIndex)
     {

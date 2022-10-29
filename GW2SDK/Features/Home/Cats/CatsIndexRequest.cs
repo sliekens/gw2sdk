@@ -11,7 +11,7 @@ namespace GW2SDK.Home.Cats;
 [PublicAPI]
 public sealed class CatsIndexRequest : IHttpRequest<IReplicaSet<int>>
 {
-    private static readonly HttpRequestMessageTemplate Template = new(Get, "/v2/home/cats")
+    private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/home/cats")
     {
         AcceptEncoding = "gzip",
         Arguments = new QueryBuilder { { "v", SchemaVersion.Recommended } }

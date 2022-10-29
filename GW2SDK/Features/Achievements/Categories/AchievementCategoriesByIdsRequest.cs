@@ -14,7 +14,7 @@ public sealed class
     AchievementCategoriesByIdsRequest : IHttpRequest<IReplicaSet<AchievementCategory>>
 {
     private static readonly HttpRequestMessageTemplate Template =
-        new(Get, "/v2/achievements/categories") { AcceptEncoding = "gzip" };
+        new(Get, "v2/achievements/categories") { AcceptEncoding = "gzip" };
 
     public AchievementCategoriesByIdsRequest(IReadOnlyCollection<int> achievementCategoryIds)
     {

@@ -13,7 +13,7 @@ public sealed class
     AccountAchievementsByPageRequest : IHttpRequest<IReplicaPage<AccountAchievement>>
 {
     private static readonly HttpRequestMessageTemplate Template =
-        new(Get, "/v2/account/achievements") { AcceptEncoding = "gzip" };
+        new(Get, "v2/account/achievements") { AcceptEncoding = "gzip" };
 
     public AccountAchievementsByPageRequest(int pageIndex)
     {

@@ -10,7 +10,7 @@ namespace GW2SDK.Dungeons;
 public sealed class DungeonByIdRequest : IHttpRequest<IReplica<Dungeon>>
 {
     private static readonly HttpRequestMessageTemplate Template =
-        new(HttpMethod.Get, "/v2/dungeons") { AcceptEncoding = "gzip" };
+        new(HttpMethod.Get, "v2/dungeons") { AcceptEncoding = "gzip" };
 
     public DungeonByIdRequest(string dungeonId)
     {

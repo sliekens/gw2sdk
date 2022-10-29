@@ -10,7 +10,7 @@ namespace GW2SDK.Colors;
 [PublicAPI]
 public sealed class ColorByIdRequest : IHttpRequest<IReplica<Dye>>
 {
-    private static readonly HttpRequestMessageTemplate Template = new(Get, "/v2/colors")
+    private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/colors")
     {
         AcceptEncoding = "gzip"
     };
