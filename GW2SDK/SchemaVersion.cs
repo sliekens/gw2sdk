@@ -7,8 +7,6 @@ namespace GW2SDK;
 [PublicAPI]
 public sealed class SchemaVersion
 {
-    public static readonly SchemaVersion Latest = new("latest");
-
     public static readonly SchemaVersion V20190221 = new("2019-02-21T00:00:00.000Z");
 
     public static readonly SchemaVersion V20190322 = new("2019-03-22T00:00:00.000Z");

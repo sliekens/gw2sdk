@@ -24,7 +24,7 @@ public class BulkRequest : IHttpRequest<JsonDocument>
     )
     {
         QueryBuilder search = new();
-        if (Ids is not { Count: > 0} )
+        if (Ids is not { Count: > 0 })
         {
             search.Add("ids", "all");
         }
@@ -33,7 +33,7 @@ public class BulkRequest : IHttpRequest<JsonDocument>
             search.Add("ids", Ids);
         }
 
-        search.Add("v", SchemaVersion.Latest);
+        search.Add("v", "3");
 
         var request = new HttpRequestMessageTemplate(HttpMethod.Get, requestUri)
         {

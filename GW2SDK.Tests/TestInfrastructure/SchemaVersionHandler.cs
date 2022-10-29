@@ -14,7 +14,10 @@ internal class SchemaVersionHandler : DelegatingHandler
     {
         if (request.RequestUri?.Host == BaseAddress.DefaultUri.Host)
         {
-            var version = request.RequestUri.Query.IndexOf("v=", StringComparison.Ordinal);
+            var version = request.RequestUri.Query.IndexOf(
+                "v=" + SchemaVersion.Recommended,
+                StringComparison.Ordinal
+            );
             if (version == -1)
             {
                 throw new InvalidOperationException(
@@ -31,7 +34,7 @@ internal class SchemaVersionHandler : DelegatingHandler
             // A simple string replace will have to suffice
             var requestUriWithLatestVersion = request.RequestUri.AbsoluteUri.Replace(
                 SchemaVersion.Recommended,
-                SchemaVersion.Latest
+                "3"
             );
 
             request.RequestUri = new Uri(requestUriWithLatestVersion, UriKind.Absolute);
