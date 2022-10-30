@@ -15,6 +15,7 @@ internal static class Routes
         "/v2/account/dailycrafting",
         "/v2/account/dungeons",
         "/v2/account/dyes",
+
         //"/v2/account/emotes",
         //"/v2/account/finishers",
         "/v2/account/gliders",
@@ -23,6 +24,7 @@ internal static class Routes
         "/v2/account/home/nodes",
         "/v2/account/inventory",
         "/v2/account/legendaryarmory",
+
         //"/v2/account/luck",
         "/v2/account/mailcarriers",
 
@@ -35,6 +37,7 @@ internal static class Routes
         "/v2/account/mounts",
         "/v2/account/mounts/skins",
         "/v2/account/mounts/types",
+
         //"/v2/account/novelties",
         //"/v2/account/outfits",
         //"/v2/account/progression",
@@ -89,6 +92,7 @@ internal static class Routes
         "/v2/files",
         "/v2/finishers",
         "/v2/gliders",
+
         //"/v2/guild/:id",
         //"/v2/guild/:id/log",
         //"/v2/guild/:id/members",
@@ -99,7 +103,7 @@ internal static class Routes
         //"/v2/guild/:id/treasury",
         //"/v2/guild/:id/upgrades",
         "/v2/guild/permissions",
-        //"/v2/guild/search",
+        "/v2/guild/search",
         "/v2/guild/upgrades",
         "/v2/home",
         "/v2/home/cats",
@@ -139,6 +143,7 @@ internal static class Routes
 
         //"/v2/quests",
         "/v2/races",
+
         //"/v2/raids",
         "/v2/recipes",
         "/v2/recipes/search",

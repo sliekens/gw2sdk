@@ -4,6 +4,7 @@ using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 using GW2SDK.Guilds.Permissions;
+using GW2SDK.Guilds.Search;
 using GW2SDK.Guilds.Upgrades;
 using JetBrains.Annotations;
 
@@ -19,6 +20,19 @@ public sealed class GuildsQuery
         this.http = http ?? throw new ArgumentNullException(nameof(http));
         http.BaseAddress ??= BaseAddress.DefaultUri;
     }
+
+    #region v2/guild/search
+
+    public Task<IReplica<IReadOnlyCollection<string>>> GetGuildsByName(
+        string name,
+        CancellationToken cancellationToken = default
+    )
+    {
+        GuildsByNameRequest request = new(name);
+        return request.SendAsync(http, cancellationToken);
+    }
+
+    #endregion
 
     #region v2/guild/permissions
 
