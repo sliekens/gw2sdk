@@ -69,35 +69,6 @@ public class Program
                             }
                         }
 
-                        var floors1 = ctx.AddTask("Downloading floors.").MaxValue(2);
-                        await using (var file = CreateTextCompressed(
-                                Path.Combine(outDir, "continents_1_floors.json.gz")
-                            ))
-                        {
-                            var service = services.Resolve<JsonFloorService>();
-                            var documents = await service.GetAllJsonFloors(1);
-                            foreach (var document in documents)
-                            {
-                                await file.WriteLineAsync(document);
-                            }
-
-                            floors1.Increment(1);
-                        }
-
-                        await using (var file = CreateTextCompressed(
-                                Path.Combine(outDir, "continents_2_floors.json.gz")
-                            ))
-                        {
-                            var service = services.Resolve<JsonFloorService>();
-                            var documents = await service.GetAllJsonFloors(2);
-                            foreach (var document in documents)
-                            {
-                                await file.WriteLineAsync(document);
-                            }
-
-                            floors1.Increment(1);
-                        }
-
                         var prices = ctx.AddTask("Downloading prices.");
                         await using (var file =
                             CreateTextCompressed(Path.Combine(outDir, "prices.json.gz")))

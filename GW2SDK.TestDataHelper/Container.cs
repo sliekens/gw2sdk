@@ -2,7 +2,6 @@
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
-using GW2SDK.Maps;
 using Microsoft.Extensions.DependencyInjection;
 using Polly;
 using Polly.Timeout;
@@ -24,9 +23,7 @@ public class Container : IDisposable, IAsyncDisposable
                     client.BaseAddress = BaseAddress.DefaultUri;
                 }
             )
-            .AddTypedClient<MapsQuery>()
             .AddTypedClient<JsonAchievementService>()
-            .AddTypedClient<JsonFloorService>()
             .AddTypedClient<JsonItemPriceService>()
             .AddTypedClient<JsonOrderBookService>()
             .AddTypedClient<JsonItemService>()

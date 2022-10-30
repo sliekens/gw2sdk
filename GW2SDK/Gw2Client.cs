@@ -12,6 +12,7 @@ using GW2SDK.Currencies;
 using GW2SDK.Dungeons;
 using GW2SDK.Emblems;
 using GW2SDK.Emotes;
+using GW2SDK.Exploration;
 using GW2SDK.Files;
 using GW2SDK.Finishers;
 using GW2SDK.Gliders;
@@ -22,7 +23,6 @@ using GW2SDK.Items;
 using GW2SDK.ItemStats;
 using GW2SDK.Legends;
 using GW2SDK.MailCarriers;
-using GW2SDK.Maps;
 using GW2SDK.Masteries;
 using GW2SDK.Meta;
 using GW2SDK.Mounts;
@@ -36,6 +36,7 @@ using GW2SDK.Stories;
 using GW2SDK.Tokens;
 using GW2SDK.Traits;
 using GW2SDK.WorldBosses;
+using GW2SDK.Worlds;
 using JetBrains.Annotations;
 
 namespace GW2SDK;
@@ -117,6 +118,8 @@ public sealed class Gw2Client
     public WalletQuery Wallet => new(httpClient);
 
     public WardrobeQuery Wardrobe => new(httpClient);
+
+    public WorldsQuery Worlds => new(httpClient);
 
     public WorldBossesQuery WorldBosses => new(httpClient);
 
