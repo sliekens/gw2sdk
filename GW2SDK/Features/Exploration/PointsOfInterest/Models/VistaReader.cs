@@ -4,15 +4,12 @@ using System.Text.Json;
 using GW2SDK.Json;
 using JetBrains.Annotations;
 
-namespace GW2SDK.Exploration.Maps;
+namespace GW2SDK.Exploration.PointsOfInterest;
 
 [PublicAPI]
-public static class LandmarkReader
+public static class VistaReader
 {
-    public static Landmark GetLandmark(
-        this JsonElement json,
-        MissingMemberBehavior missingMemberBehavior
-    )
+    public static Vista GetVista(this JsonElement json, MissingMemberBehavior missingMemberBehavior)
     {
         OptionalMember<string> name = new("name");
         RequiredMember<int> floor = new("floor");
@@ -23,7 +20,7 @@ public static class LandmarkReader
         {
             if (member.NameEquals("type"))
             {
-                if (!member.Value.ValueEquals("landmark"))
+                if (!member.Value.ValueEquals("vista"))
                 {
                     throw new InvalidOperationException(
                         Strings.InvalidDiscriminator(member.Value.GetString())
@@ -56,7 +53,7 @@ public static class LandmarkReader
             }
         }
 
-        return new Landmark
+        return new Vista
         {
             Id = id.GetValue(),
             Name = name.GetValueOrEmpty(),

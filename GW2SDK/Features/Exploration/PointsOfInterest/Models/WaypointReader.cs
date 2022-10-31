@@ -4,39 +4,43 @@ using System.Text.Json;
 using GW2SDK.Json;
 using JetBrains.Annotations;
 
-namespace GW2SDK.Exploration.Maps;
+namespace GW2SDK.Exploration.PointsOfInterest;
 
 [PublicAPI]
-public static class MapTaskReader
+public static class WaypointReader
 {
-    public static MapTask GetMapTask(
+    public static Waypoint GetWaypoint(
         this JsonElement json,
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember<string> objective = new("objective");
-        RequiredMember<int> level = new("level");
+        OptionalMember<string> name = new("name");
+        RequiredMember<int> floor = new("floor");
         RequiredMember<PointF> coordinates = new("coord");
-        RequiredMember<PointF> boundaries = new("bounds");
         RequiredMember<int> id = new("id");
         RequiredMember<string> chatLink = new("chat_link");
         foreach (var member in json.EnumerateObject())
         {
-            if (member.NameEquals(objective.Name))
+            if (member.NameEquals("type"))
             {
-                objective.Value = member.Value;
+                if (!member.Value.ValueEquals("waypoint"))
+                {
+                    throw new InvalidOperationException(
+                        Strings.InvalidDiscriminator(member.Value.GetString())
+                    );
+                }
             }
-            else if (member.NameEquals(level.Name))
+            else if (member.NameEquals(name.Name))
             {
-                level.Value = member.Value;
+                name.Value = member.Value;
+            }
+            else if (member.NameEquals(floor.Name))
+            {
+                floor.Value = member.Value;
             }
             else if (member.NameEquals(coordinates.Name))
             {
                 coordinates.Value = member.Value;
-            }
-            else if (member.NameEquals(boundaries.Name))
-            {
-                boundaries.Value = member.Value;
             }
             else if (member.NameEquals(id.Name))
             {
@@ -52,13 +56,12 @@ public static class MapTaskReader
             }
         }
 
-        return new MapTask
+        return new Waypoint
         {
             Id = id.GetValue(),
-            Objective = objective.GetValue(),
-            Level = level.GetValue(),
+            Name = name.GetValueOrEmpty(),
+            Floor = floor.GetValue(),
             Coordinates = coordinates.Select(value => value.GetCoordinate(missingMemberBehavior)),
-            Boundaries = boundaries.SelectMany(value => value.GetCoordinate(missingMemberBehavior)),
             ChatLink = chatLink.GetValue()
         };
     }

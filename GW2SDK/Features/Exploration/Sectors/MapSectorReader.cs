@@ -4,7 +4,7 @@ using System.Text.Json;
 using GW2SDK.Json;
 using JetBrains.Annotations;
 
-namespace GW2SDK.Exploration.Maps;
+namespace GW2SDK.Exploration.Sectors;
 
 [PublicAPI]
 public static class MapSectorReader

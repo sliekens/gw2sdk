@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using GW2SDK.Exploration.Continents;
 using GW2SDK.Exploration.Floors;
 using GW2SDK.Exploration.Maps;
+using GW2SDK.Exploration.PointsOfInterest;
 using GW2SDK.Exploration.Regions;
 using JetBrains.Annotations;
 
@@ -337,6 +338,102 @@ public sealed class MapsQuery
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
         };
+        return request.SendAsync(http, cancellationToken);
+    }
+
+    #endregion
+
+    #region v2/continents/:id/floors/:floor/regions/:region/maps/:map/pois
+
+    public Task<IReplicaSet<PointOfInterest>> GetPointsOfInterest(
+        int continentId,
+        int floorId,
+        int regionId,
+        int mapId,
+        Language? language = default,
+        MissingMemberBehavior missingMemberBehavior = default,
+        CancellationToken cancellationToken = default
+    )
+    {
+        PointsOfInterestRequest request = new(continentId, floorId, regionId, mapId)
+        {
+            Language = language,
+            MissingMemberBehavior = missingMemberBehavior
+        };
+        return request.SendAsync(http, cancellationToken);
+    }
+
+    public Task<IReplicaSet<int>> GetPointsOfInterestIndex(
+        int continentId,
+        int floorId,
+        int regionId,
+        int mapId,
+        CancellationToken cancellationToken = default
+    )
+    {
+        PointsOfInterestIndexRequest request = new(continentId, floorId, regionId, mapId);
+        return request.SendAsync(http, cancellationToken);
+    }
+
+    public Task<IReplica<PointOfInterest>> GetPointOfInterestById(
+        int continentId,
+        int floorId,
+        int regionId,
+        int mapId,
+        int pointOfInterestId,
+        Language? language = default,
+        MissingMemberBehavior missingMemberBehavior = default,
+        CancellationToken cancellationToken = default
+    )
+    {
+        PointOfInterestByIdRequest request =
+            new(continentId, floorId, regionId, mapId, pointOfInterestId)
+            {
+                Language = language,
+                MissingMemberBehavior = missingMemberBehavior
+            };
+        return request.SendAsync(http, cancellationToken);
+    }
+
+    public Task<IReplicaSet<PointOfInterest>> GetPointsOfInterestByIds(
+        int continentId,
+        int floorId,
+        int regionId,
+        int mapId,
+        IReadOnlyCollection<int> pointOfInterestIds,
+        Language? language = default,
+        MissingMemberBehavior missingMemberBehavior = default,
+        CancellationToken cancellationToken = default
+    )
+    {
+        PointsOfInterestByIdsRequest request =
+            new(continentId, floorId, regionId, mapId, pointOfInterestIds)
+            {
+                Language = language,
+                MissingMemberBehavior = missingMemberBehavior
+            };
+        return request.SendAsync(http, cancellationToken);
+    }
+
+    public Task<IReplicaPage<PointOfInterest>> GetPointsOfInterestByPage(
+        int continentId,
+        int floorId,
+        int regionId,
+        int mapId,
+        int pageIndex,
+        int? pageSize = default,
+        Language? language = default,
+        MissingMemberBehavior missingMemberBehavior = default,
+        CancellationToken cancellationToken = default
+    )
+    {
+        PointsOfInterestByPageRequest request =
+            new(continentId, floorId, regionId, mapId, pageIndex)
+            {
+                PageSize = pageSize,
+                Language = language,
+                MissingMemberBehavior = missingMemberBehavior
+            };
         return request.SendAsync(http, cancellationToken);
     }
 

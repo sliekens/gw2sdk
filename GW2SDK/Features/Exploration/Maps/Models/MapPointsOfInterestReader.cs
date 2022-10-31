@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text.Json;
+using GW2SDK.Exploration.PointsOfInterest;
 using JetBrains.Annotations;
 
 namespace GW2SDK.Exploration.Maps;

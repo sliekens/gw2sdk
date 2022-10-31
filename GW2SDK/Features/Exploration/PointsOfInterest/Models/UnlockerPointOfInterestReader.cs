@@ -4,41 +4,30 @@ using System.Text.Json;
 using GW2SDK.Json;
 using JetBrains.Annotations;
 
-namespace GW2SDK.Exploration.Maps;
+namespace GW2SDK.Exploration.PointsOfInterest;
 
 [PublicAPI]
-public static class PointOfInterestReader
+public static class UnlockerPointOfInterestReader
 {
-    public static PointOfInterest GetPointOfInterest(
+    public static UnlockerPointOfInterest GetUnlockerPointOfInterest(
         this JsonElement json,
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        switch (json.GetProperty("type").GetString())
-        {
-            case "landmark":
-                return json.GetLandmark(missingMemberBehavior);
-            case "waypoint":
-                return json.GetWaypoint(missingMemberBehavior);
-            case "vista":
-                return json.GetVista(missingMemberBehavior);
-            case "unlock":
-                return json.GetUnlockerPointOfInterest(missingMemberBehavior);
-        }
-
         OptionalMember<string> name = new("name");
         RequiredMember<int> floor = new("floor");
         RequiredMember<PointF> coordinates = new("coord");
         RequiredMember<int> id = new("id");
         RequiredMember<string> chatLink = new("chat_link");
+        RequiredMember<string> icon = new("icon");
         foreach (var member in json.EnumerateObject())
         {
             if (member.NameEquals("type"))
             {
-                if (missingMemberBehavior == MissingMemberBehavior.Error)
+                if (!member.Value.ValueEquals("unlock"))
                 {
                     throw new InvalidOperationException(
-                        Strings.UnexpectedDiscriminator(member.Value.GetString())
+                        Strings.InvalidDiscriminator(member.Value.GetString())
                     );
                 }
             }
@@ -62,19 +51,24 @@ public static class PointOfInterestReader
             {
                 chatLink.Value = member.Value;
             }
+            else if (member.NameEquals(icon.Name))
+            {
+                icon.Value = member.Value;
+            }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {
                 throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
             }
         }
 
-        return new PointOfInterest
+        return new UnlockerPointOfInterest
         {
             Id = id.GetValue(),
             Name = name.GetValueOrEmpty(),
             Floor = floor.GetValue(),
             Coordinates = coordinates.Select(value => value.GetCoordinate(missingMemberBehavior)),
-            ChatLink = chatLink.GetValue()
+            ChatLink = chatLink.GetValue(),
+            Icon = icon.GetValue()
         };
     }
 }

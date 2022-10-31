@@ -2,6 +2,13 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Text.Json;
+using GW2SDK.Exploration.Adventures;
+using GW2SDK.Exploration.GodShrines;
+using GW2SDK.Exploration.MasteryPoints;
+using GW2SDK.Exploration.PointsOfInterest;
+using GW2SDK.Exploration.Sectors;
+using GW2SDK.Exploration.SkillChallenge;
+using GW2SDK.Exploration.Tasks;
 using GW2SDK.Json;
 using JetBrains.Annotations;
 
@@ -23,7 +30,7 @@ public static class MapReader
             new("points_of_interest");
         OptionalMember<GodShrine> godShrines = new("god_shrines");
         RequiredMember<Dictionary<int, MapTask>> tasks = new("tasks");
-        RequiredMember<SkillChallenge> skillChallenges = new("skill_challenges");
+        RequiredMember<SkillChallenge.SkillChallenge> skillChallenges = new("skill_challenges");
         RequiredMember<Dictionary<int, MapSector>> sectors = new("sectors");
         RequiredMember<Adventure> adventures = new("adventures");
         RequiredMember<int> id = new("id");

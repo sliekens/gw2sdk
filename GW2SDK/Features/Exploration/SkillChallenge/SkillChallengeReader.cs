@@ -3,20 +3,20 @@ using System.Text.Json;
 using GW2SDK.Json;
 using JetBrains.Annotations;
 
-namespace GW2SDK.Exploration.Maps;
+namespace GW2SDK.Exploration.SkillChallenge;
 
 [PublicAPI]
-public static class AdventureReader
+public static class SkillChallengeReader
 {
-    public static Adventure GetAdventure(
+    public static SkillChallenge GetSkillChallenge(
         this JsonElement json,
         MissingMemberBehavior missingMemberBehavior
     )
     {
         RequiredMember<double> coordinates = new("coord");
-        RequiredMember<string> id = new("id");
-        RequiredMember<string> name = new("name");
-        RequiredMember<string> description = new("description");
+
+        // The 'id' is missing from hero points in End of Dragon maps
+        OptionalMember<string> id = new("id");
         foreach (var member in json.EnumerateObject())
         {
             if (member.NameEquals(coordinates.Name))
@@ -27,26 +27,16 @@ public static class AdventureReader
             {
                 id.Value = member.Value;
             }
-            else if (member.NameEquals(name.Name))
-            {
-                name.Value = member.Value;
-            }
-            else if (member.NameEquals(description.Name))
-            {
-                description.Value = member.Value;
-            }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {
                 throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
             }
         }
 
-        return new Adventure
+        return new SkillChallenge
         {
-            Id = id.GetValue(),
-            Coordinates = coordinates.SelectMany(value => value.GetDouble()),
-            Name = name.GetValue(),
-            Description = description.GetValue()
+            Id = id.GetValueOrEmpty(),
+            Coordinates = coordinates.SelectMany(value => value.GetDouble())
         };
     }
 }

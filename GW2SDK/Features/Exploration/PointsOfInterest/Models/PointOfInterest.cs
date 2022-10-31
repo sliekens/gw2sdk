@@ -2,7 +2,7 @@
 using GW2SDK.Annotations;
 using JetBrains.Annotations;
 
-namespace GW2SDK.Exploration.Maps;
+namespace GW2SDK.Exploration.PointsOfInterest;
 
 [PublicAPI]
 [Inheritable]

@@ -4,12 +4,12 @@ using System.Text.Json;
 using GW2SDK.Json;
 using JetBrains.Annotations;
 
-namespace GW2SDK.Exploration.Maps;
+namespace GW2SDK.Exploration.PointsOfInterest;
 
 [PublicAPI]
-public static class WaypointReader
+public static class LandmarkReader
 {
-    public static Waypoint GetWaypoint(
+    public static Landmark GetLandmark(
         this JsonElement json,
         MissingMemberBehavior missingMemberBehavior
     )
@@ -23,7 +23,7 @@ public static class WaypointReader
         {
             if (member.NameEquals("type"))
             {
-                if (!member.Value.ValueEquals("waypoint"))
+                if (!member.Value.ValueEquals("landmark"))
                 {
                     throw new InvalidOperationException(
                         Strings.InvalidDiscriminator(member.Value.GetString())
@@ -56,7 +56,7 @@ public static class WaypointReader
             }
         }
 
-        return new Waypoint
+        return new Landmark
         {
             Id = id.GetValue(),
             Name = name.GetValueOrEmpty(),

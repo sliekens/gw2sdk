@@ -3,7 +3,7 @@ using System.Text.Json;
 using GW2SDK.Json;
 using JetBrains.Annotations;
 
-namespace GW2SDK.Exploration.Maps;
+namespace GW2SDK.Exploration.GodShrines;
 
 [PublicAPI]
 public static class GodShrineReader

@@ -4,40 +4,39 @@ using System.Text.Json;
 using GW2SDK.Json;
 using JetBrains.Annotations;
 
-namespace GW2SDK.Exploration.Maps;
+namespace GW2SDK.Exploration.Tasks;
 
 [PublicAPI]
-public static class VistaReader
+public static class MapTaskReader
 {
-    public static Vista GetVista(this JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    public static MapTask GetMapTask(
+        this JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
-        OptionalMember<string> name = new("name");
-        RequiredMember<int> floor = new("floor");
+        RequiredMember<string> objective = new("objective");
+        RequiredMember<int> level = new("level");
         RequiredMember<PointF> coordinates = new("coord");
+        RequiredMember<PointF> boundaries = new("bounds");
         RequiredMember<int> id = new("id");
         RequiredMember<string> chatLink = new("chat_link");
         foreach (var member in json.EnumerateObject())
         {
-            if (member.NameEquals("type"))
+            if (member.NameEquals(objective.Name))
             {
-                if (!member.Value.ValueEquals("vista"))
-                {
-                    throw new InvalidOperationException(
-                        Strings.InvalidDiscriminator(member.Value.GetString())
-                    );
-                }
+                objective.Value = member.Value;
             }
-            else if (member.NameEquals(name.Name))
+            else if (member.NameEquals(level.Name))
             {
-                name.Value = member.Value;
-            }
-            else if (member.NameEquals(floor.Name))
-            {
-                floor.Value = member.Value;
+                level.Value = member.Value;
             }
             else if (member.NameEquals(coordinates.Name))
             {
                 coordinates.Value = member.Value;
+            }
+            else if (member.NameEquals(boundaries.Name))
+            {
+                boundaries.Value = member.Value;
             }
             else if (member.NameEquals(id.Name))
             {
@@ -53,12 +52,13 @@ public static class VistaReader
             }
         }
 
-        return new Vista
+        return new MapTask
         {
             Id = id.GetValue(),
-            Name = name.GetValueOrEmpty(),
-            Floor = floor.GetValue(),
+            Objective = objective.GetValue(),
+            Level = level.GetValue(),
             Coordinates = coordinates.Select(value => value.GetCoordinate(missingMemberBehavior)),
+            Boundaries = boundaries.SelectMany(value => value.GetCoordinate(missingMemberBehavior)),
             ChatLink = chatLink.GetValue()
         };
     }
