@@ -1,5 +1,5 @@
-﻿using Xunit;
-using Region = GW2SDK.Exploration.Regions.Region;
+﻿using GW2SDK.Exploration.Regions;
+using Xunit;
 
 namespace GW2SDK.Tests.Features.Exploration.Regions;
 
