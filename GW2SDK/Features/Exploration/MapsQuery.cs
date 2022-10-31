@@ -5,6 +5,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using GW2SDK.Exploration.Continents;
 using GW2SDK.Exploration.Floors;
+using GW2SDK.Exploration.Maps;
 using GW2SDK.Exploration.Regions;
 using JetBrains.Annotations;
 
@@ -243,6 +244,94 @@ public sealed class MapsQuery
     )
     {
         RegionsByPageRequest request = new(continentId, floorId, pageIndex)
+        {
+            PageSize = pageSize,
+            Language = language,
+            MissingMemberBehavior = missingMemberBehavior
+        };
+        return request.SendAsync(http, cancellationToken);
+    }
+
+    #endregion
+
+    #region v2/continents/:id/floors/:floor/regions/:region/maps
+
+    public Task<IReplicaSet<Map>> GetMaps(
+        int continentId,
+        int floorId,
+        int regionId,
+        Language? language = default,
+        MissingMemberBehavior missingMemberBehavior = default,
+        CancellationToken cancellationToken = default
+    )
+    {
+        MapsRequest request = new(continentId, floorId, regionId)
+        {
+            Language = language,
+            MissingMemberBehavior = missingMemberBehavior
+        };
+        return request.SendAsync(http, cancellationToken);
+    }
+
+    public Task<IReplicaSet<int>> GetMapsIndex(
+        int continentId,
+        int floorId,
+        int regionId,
+        CancellationToken cancellationToken = default
+    )
+    {
+        MapsIndexRequest request = new(continentId, floorId, regionId);
+        return request.SendAsync(http, cancellationToken);
+    }
+
+    public Task<IReplica<Map>> GetMapById(
+        int continentId,
+        int floorId,
+        int regionId,
+        int mapId,
+        Language? language = default,
+        MissingMemberBehavior missingMemberBehavior = default,
+        CancellationToken cancellationToken = default
+    )
+    {
+        MapByIdRequest request = new(continentId, floorId, regionId, mapId)
+        {
+            Language = language,
+            MissingMemberBehavior = missingMemberBehavior
+        };
+        return request.SendAsync(http, cancellationToken);
+    }
+
+    public Task<IReplicaSet<Map>> GetMapsByIds(
+        int continentId,
+        int floorId,
+        int regionId,
+        IReadOnlyCollection<int> mapIds,
+        Language? language = default,
+        MissingMemberBehavior missingMemberBehavior = default,
+        CancellationToken cancellationToken = default
+    )
+    {
+        MapsByIdsRequest request = new(continentId, floorId, regionId, mapIds)
+        {
+            Language = language,
+            MissingMemberBehavior = missingMemberBehavior
+        };
+        return request.SendAsync(http, cancellationToken);
+    }
+
+    public Task<IReplicaPage<Map>> GetMapsByPage(
+        int continentId,
+        int floorId,
+        int regionId,
+        int pageIndex,
+        int? pageSize = default,
+        Language? language = default,
+        MissingMemberBehavior missingMemberBehavior = default,
+        CancellationToken cancellationToken = default
+    )
+    {
+        MapsByPageRequest request = new(continentId, floorId, regionId, pageIndex)
         {
             PageSize = pageSize,
             Language = language,
