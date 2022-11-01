@@ -8,7 +8,7 @@ using GW2SDK.Exploration.MasteryPoints;
 using GW2SDK.Exploration.PointsOfInterest;
 using GW2SDK.Exploration.Sectors;
 using GW2SDK.Exploration.SkillChallenge;
-using GW2SDK.Exploration.Tasks;
+using GW2SDK.Exploration.Hearts;
 using GW2SDK.Json;
 using JetBrains.Annotations;
 
@@ -29,7 +29,7 @@ public static class MapReader
         RequiredMember<Dictionary<int, PointOfInterest>> pointsOfInterest =
             new("points_of_interest");
         OptionalMember<GodShrine> godShrines = new("god_shrines");
-        RequiredMember<Dictionary<int, MapTask>> tasks = new("tasks");
+        RequiredMember<Dictionary<int, Heart>> tasks = new("tasks");
         RequiredMember<SkillChallenge.SkillChallenge> skillChallenges = new("skill_challenges");
         RequiredMember<Dictionary<int, MapSector>> sectors = new("sectors");
         RequiredMember<Adventure> adventures = new("adventures");
@@ -120,7 +120,7 @@ public static class MapReader
                     value => value.GetMapPointsOfInterest(missingMemberBehavior)
                 ),
             GodShrines = godShrines.SelectMany(value => value.GetGodShrine(missingMemberBehavior)),
-            Tasks = tasks.Select(value => value.GetMapTasks(missingMemberBehavior)),
+            Hearts = tasks.Select(value => value.GetMapHearts(missingMemberBehavior)),
             SkillChallenges =
                 skillChallenges.SelectMany(value => value.GetSkillChallenge(missingMemberBehavior)),
             Sectors = sectors.Select(value => value.GetMapSectors(missingMemberBehavior)),

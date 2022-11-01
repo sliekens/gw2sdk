@@ -1,25 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text.Json;
-using GW2SDK.Exploration.Tasks;
+using GW2SDK.Exploration.Hearts;
 using JetBrains.Annotations;
 
 namespace GW2SDK.Exploration.Maps;
 
 [PublicAPI]
-public static class MapTasksReader
+public static class MapHeartsReader
 {
-    public static Dictionary<int, MapTask> GetMapTasks(
+    public static Dictionary<int, Heart> GetMapHearts(
         this JsonElement json,
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        Dictionary<int, MapTask> tasks = new();
+        Dictionary<int, Heart> tasks = new();
         foreach (var member in json.EnumerateObject())
         {
             if (int.TryParse(member.Name, out var id))
             {
-                tasks[id] = member.Value.GetMapTask(missingMemberBehavior);
+                tasks[id] = member.Value.GetHeart(missingMemberBehavior);
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {

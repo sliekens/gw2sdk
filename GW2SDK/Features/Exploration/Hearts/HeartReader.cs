@@ -4,15 +4,12 @@ using System.Text.Json;
 using GW2SDK.Json;
 using JetBrains.Annotations;
 
-namespace GW2SDK.Exploration.Tasks;
+namespace GW2SDK.Exploration.Hearts;
 
 [PublicAPI]
-public static class MapTaskReader
+public static class HeartReader
 {
-    public static MapTask GetMapTask(
-        this JsonElement json,
-        MissingMemberBehavior missingMemberBehavior
-    )
+    public static Heart GetHeart(this JsonElement json, MissingMemberBehavior missingMemberBehavior)
     {
         RequiredMember<string> objective = new("objective");
         RequiredMember<int> level = new("level");
@@ -52,7 +49,7 @@ public static class MapTaskReader
             }
         }
 
-        return new MapTask
+        return new Heart
         {
             Id = id.GetValue(),
             Objective = objective.GetValue(),

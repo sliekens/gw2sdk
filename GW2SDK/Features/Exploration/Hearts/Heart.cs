@@ -4,11 +4,11 @@ using System.Drawing;
 using GW2SDK.Annotations;
 using JetBrains.Annotations;
 
-namespace GW2SDK.Exploration.Tasks;
+namespace GW2SDK.Exploration.Hearts;
 
 [PublicAPI]
 [DataTransferObject]
-public sealed record MapTask
+public sealed record Heart
 {
     public int Id { get; init; }
 

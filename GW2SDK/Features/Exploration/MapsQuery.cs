@@ -5,6 +5,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using GW2SDK.Exploration.Continents;
 using GW2SDK.Exploration.Floors;
+using GW2SDK.Exploration.Hearts;
 using GW2SDK.Exploration.Maps;
 using GW2SDK.Exploration.PointsOfInterest;
 using GW2SDK.Exploration.Regions;
@@ -438,4 +439,102 @@ public sealed class MapsQuery
     }
 
     #endregion
+
+    #region v2/continents/:id/floors/:floor/regions/:region/maps/:map/tasks
+
+    public Task<IReplicaSet<Heart>> GetHearts(
+        int continentId,
+        int floorId,
+        int regionId,
+        int mapId,
+        Language? language = default,
+        MissingMemberBehavior missingMemberBehavior = default,
+        CancellationToken cancellationToken = default
+    )
+    {
+        HeartsRequest request = new(continentId, floorId, regionId, mapId)
+        {
+            Language = language,
+            MissingMemberBehavior = missingMemberBehavior
+        };
+        return request.SendAsync(http, cancellationToken);
+    }
+
+    public Task<IReplicaSet<int>> GetHeartsIndex(
+        int continentId,
+        int floorId,
+        int regionId,
+        int mapId,
+        CancellationToken cancellationToken = default
+    )
+    {
+        HeartsIndexRequest request = new(continentId, floorId, regionId, mapId);
+        return request.SendAsync(http, cancellationToken);
+    }
+
+    public Task<IReplica<Heart>> GetHeartById(
+        int continentId,
+        int floorId,
+        int regionId,
+        int mapId,
+        int HeartId,
+        Language? language = default,
+        MissingMemberBehavior missingMemberBehavior = default,
+        CancellationToken cancellationToken = default
+    )
+    {
+        HeartByIdRequest request =
+            new(continentId, floorId, regionId, mapId, HeartId)
+            {
+                Language = language,
+                MissingMemberBehavior = missingMemberBehavior
+            };
+        return request.SendAsync(http, cancellationToken);
+    }
+
+    public Task<IReplicaSet<Heart>> GetHeartsByIds(
+        int continentId,
+        int floorId,
+        int regionId,
+        int mapId,
+        IReadOnlyCollection<int> HeartIds,
+        Language? language = default,
+        MissingMemberBehavior missingMemberBehavior = default,
+        CancellationToken cancellationToken = default
+    )
+    {
+        HeartsByIdsRequest request =
+            new(continentId, floorId, regionId, mapId, HeartIds)
+            {
+                Language = language,
+                MissingMemberBehavior = missingMemberBehavior
+            };
+        return request.SendAsync(http, cancellationToken);
+    }
+
+    public Task<IReplicaPage<Heart>> GetHeartsByPage(
+        int continentId,
+        int floorId,
+        int regionId,
+        int mapId,
+        int pageIndex,
+        int? pageSize = default,
+        Language? language = default,
+        MissingMemberBehavior missingMemberBehavior = default,
+        CancellationToken cancellationToken = default
+    )
+    {
+        HeartsByPageRequest request =
+            new(continentId, floorId, regionId, mapId, pageIndex)
+            {
+                PageSize = pageSize,
+                Language = language,
+                MissingMemberBehavior = missingMemberBehavior
+            };
+        return request.SendAsync(http, cancellationToken);
+    }
+
+    #endregion
+
+
 }
