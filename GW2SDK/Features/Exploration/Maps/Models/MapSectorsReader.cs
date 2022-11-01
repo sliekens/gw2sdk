@@ -9,17 +9,17 @@ namespace GW2SDK.Exploration.Maps;
 [PublicAPI]
 public static class MapSectorsReader
 {
-    public static Dictionary<int, MapSector> GetMapSectors(
+    public static Dictionary<int, Sector> GetMapSectors(
         this JsonElement json,
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        Dictionary<int, MapSector> sectors = new();
+        Dictionary<int, Sector> sectors = new();
         foreach (var member in json.EnumerateObject())
         {
             if (int.TryParse(member.Name, out var id))
             {
-                sectors[id] = member.Value.GetMapSector(missingMemberBehavior);
+                sectors[id] = member.Value.GetSector(missingMemberBehavior);
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {

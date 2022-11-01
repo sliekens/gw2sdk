@@ -39,7 +39,7 @@ public sealed record Map
     public IReadOnlyCollection<SkillChallenge.SkillChallenge> SkillChallenges { get; init; } =
         Array.Empty<SkillChallenge.SkillChallenge>();
 
-    public Dictionary<int, MapSector> Sectors { get; init; } = new(0);
+    public Dictionary<int, Sector> Sectors { get; init; } = new(0);
 
     public IReadOnlyCollection<Adventure> Adventures { get; init; } = Array.Empty<Adventure>();
 

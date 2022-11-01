@@ -31,7 +31,7 @@ public static class MapReader
         OptionalMember<GodShrine> godShrines = new("god_shrines");
         RequiredMember<Dictionary<int, Heart>> tasks = new("tasks");
         RequiredMember<SkillChallenge.SkillChallenge> skillChallenges = new("skill_challenges");
-        RequiredMember<Dictionary<int, MapSector>> sectors = new("sectors");
+        RequiredMember<Dictionary<int, Sector>> sectors = new("sectors");
         RequiredMember<Adventure> adventures = new("adventures");
         RequiredMember<int> id = new("id");
         RequiredMember<MasteryPoint> masteryPoints = new("mastery_points");

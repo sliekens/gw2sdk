@@ -9,6 +9,7 @@ using GW2SDK.Exploration.Hearts;
 using GW2SDK.Exploration.Maps;
 using GW2SDK.Exploration.PointsOfInterest;
 using GW2SDK.Exploration.Regions;
+using GW2SDK.Exploration.Sectors;
 using JetBrains.Annotations;
 
 namespace GW2SDK.Exploration;
@@ -497,14 +498,14 @@ public sealed class MapsQuery
         int floorId,
         int regionId,
         int mapId,
-        IReadOnlyCollection<int> HeartIds,
+        IReadOnlyCollection<int> heartIds,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
         HeartsByIdsRequest request =
-            new(continentId, floorId, regionId, mapId, HeartIds)
+            new(continentId, floorId, regionId, mapId, heartIds)
             {
                 Language = language,
                 MissingMemberBehavior = missingMemberBehavior
@@ -536,5 +537,99 @@ public sealed class MapsQuery
 
     #endregion
 
+    #region v2/continents/:id/floors/:floor/regions/:region/maps/:map/sectors
 
+    public Task<IReplicaSet<Sector>> GetSectors(
+        int continentId,
+        int floorId,
+        int regionId,
+        int mapId,
+        Language? language = default,
+        MissingMemberBehavior missingMemberBehavior = default,
+        CancellationToken cancellationToken = default
+    )
+    {
+        SectorsRequest request = new(continentId, floorId, regionId, mapId)
+        {
+            Language = language,
+            MissingMemberBehavior = missingMemberBehavior
+        };
+        return request.SendAsync(http, cancellationToken);
+    }
+
+    public Task<IReplicaSet<int>> GetSectorsIndex(
+        int continentId,
+        int floorId,
+        int regionId,
+        int mapId,
+        CancellationToken cancellationToken = default
+    )
+    {
+        SectorsIndexRequest request = new(continentId, floorId, regionId, mapId);
+        return request.SendAsync(http, cancellationToken);
+    }
+
+    public Task<IReplica<Sector>> GetSectorById(
+        int continentId,
+        int floorId,
+        int regionId,
+        int mapId,
+        int SectorId,
+        Language? language = default,
+        MissingMemberBehavior missingMemberBehavior = default,
+        CancellationToken cancellationToken = default
+    )
+    {
+        SectorByIdRequest request =
+            new(continentId, floorId, regionId, mapId, SectorId)
+            {
+                Language = language,
+                MissingMemberBehavior = missingMemberBehavior
+            };
+        return request.SendAsync(http, cancellationToken);
+    }
+
+    public Task<IReplicaSet<Sector>> GetSectorsByIds(
+        int continentId,
+        int floorId,
+        int regionId,
+        int mapId,
+        IReadOnlyCollection<int> sectorIds,
+        Language? language = default,
+        MissingMemberBehavior missingMemberBehavior = default,
+        CancellationToken cancellationToken = default
+    )
+    {
+        SectorsByIdsRequest request =
+            new(continentId, floorId, regionId, mapId, sectorIds)
+            {
+                Language = language,
+                MissingMemberBehavior = missingMemberBehavior
+            };
+        return request.SendAsync(http, cancellationToken);
+    }
+
+    public Task<IReplicaPage<Sector>> GetSectorsByPage(
+        int continentId,
+        int floorId,
+        int regionId,
+        int mapId,
+        int pageIndex,
+        int? pageSize = default,
+        Language? language = default,
+        MissingMemberBehavior missingMemberBehavior = default,
+        CancellationToken cancellationToken = default
+    )
+    {
+        SectorsByPageRequest request =
+            new(continentId, floorId, regionId, mapId, pageIndex)
+            {
+                PageSize = pageSize,
+                Language = language,
+                MissingMemberBehavior = missingMemberBehavior
+            };
+        return request.SendAsync(http, cancellationToken);
+    }
+
+    #endregion
 }

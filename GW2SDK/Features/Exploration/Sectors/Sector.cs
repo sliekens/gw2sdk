@@ -8,7 +8,7 @@ namespace GW2SDK.Exploration.Sectors;
 
 [PublicAPI]
 [DataTransferObject]
-public sealed record MapSector
+public sealed record Sector
 {
     public int Id { get; init; }
 

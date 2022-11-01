@@ -7,9 +7,9 @@ using JetBrains.Annotations;
 namespace GW2SDK.Exploration.Sectors;
 
 [PublicAPI]
-public static class MapSectorReader
+public static class SectorReader
 {
-    public static MapSector GetMapSector(
+    public static Sector GetSector(
         this JsonElement json,
         MissingMemberBehavior missingMemberBehavior
     )
@@ -52,7 +52,7 @@ public static class MapSectorReader
             }
         }
 
-        return new MapSector
+        return new Sector
         {
             Id = id.GetValue(),
             Name = name.GetValueOrEmpty(),
