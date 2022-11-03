@@ -1,25 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text.Json;
-using GW2SDK.Exploration.PointsOfInterest;
-using JetBrains.Annotations;
+using GW2SDK.Exploration.Charts;
 
-namespace GW2SDK.Exploration.Maps;
+namespace GW2SDK.Exploration.Regions;
 
-[PublicAPI]
-public static class MapPointsOfInterestReader
+internal static class RegionChartsReader
 {
-    public static Dictionary<int, PointOfInterest> GetMapPointsOfInterest(
+    public static Dictionary<int, Chart> GetRegionCharts(
         this JsonElement json,
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        Dictionary<int, PointOfInterest> pointsOfInterest = new();
+        Dictionary<int, Chart> maps = new();
         foreach (var member in json.EnumerateObject())
         {
             if (int.TryParse(member.Name, out var id))
             {
-                pointsOfInterest[id] = member.Value.GetPointOfInterest(missingMemberBehavior);
+                maps[id] = member.Value.GetChart(missingMemberBehavior);
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {
@@ -27,6 +25,6 @@ public static class MapPointsOfInterestReader
             }
         }
 
-        return pointsOfInterest;
+        return maps;
     }
 }

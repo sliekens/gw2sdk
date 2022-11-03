@@ -3,27 +3,26 @@ using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 using GW2SDK.Http;
-using GW2SDK.Json;
 using JetBrains.Annotations;
 using static System.Net.Http.HttpMethod;
 
-namespace GW2SDK.Exploration.Maps;
+namespace GW2SDK.Exploration.Charts;
 
 [PublicAPI]
-public sealed class MapsIndexRequest : IHttpRequest<IReplicaSet<int>>
+public sealed class ChartByIdRequest : IHttpRequest<IReplica<Chart>>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/continents/:id/floors/:floor/regions/:region/maps")
         {
-            AcceptEncoding = "gzip",
-            Arguments = new QueryBuilder { { "v", SchemaVersion.Recommended } }
+            AcceptEncoding = "gzip"
         };
 
-    public MapsIndexRequest(int continentId, int floorId, int regionId)
+    public ChartByIdRequest(int continentId, int floorId, int regionId, int mapId)
     {
         ContinentId = continentId;
         FloorId = floorId;
         RegionId = regionId;
+        MapId = mapId;
     }
 
     public int ContinentId { get; }
@@ -32,7 +31,13 @@ public sealed class MapsIndexRequest : IHttpRequest<IReplicaSet<int>>
 
     public int RegionId { get; }
 
-    public async Task<IReplicaSet<int>> SendAsync(
+    public int MapId { get; }
+
+    public Language? Language { get; init; }
+
+    public MissingMemberBehavior MissingMemberBehavior { get; init; }
+
+    public async Task<IReplica<Chart>> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
     )
@@ -43,7 +48,13 @@ public sealed class MapsIndexRequest : IHttpRequest<IReplicaSet<int>>
                     Path = Template.Path
                         .Replace(":id", ContinentId.ToString(CultureInfo.InvariantCulture))
                         .Replace(":floor", FloorId.ToString(CultureInfo.InvariantCulture))
-                        .Replace(":region", RegionId.ToString(CultureInfo.InvariantCulture))
+                        .Replace(":region", RegionId.ToString(CultureInfo.InvariantCulture)),
+                    Arguments = new QueryBuilder
+                    {
+                        { "id", MapId },
+                        { "v", SchemaVersion.Recommended }
+                    },
+                    AcceptLanguage = Language?.Alpha2Code
                 },
                 cancellationToken
             )
@@ -54,11 +65,10 @@ public sealed class MapsIndexRequest : IHttpRequest<IReplicaSet<int>>
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value = json.RootElement.GetSet(entry => entry.GetInt32());
-        return new ReplicaSet<int>(
+        var value = json.RootElement.GetChart(MissingMemberBehavior);
+        return new Replica<Chart>(
             response.Headers.Date.GetValueOrDefault(),
             value,
-            response.Headers.GetCollectionContext(),
             response.Content.Headers.Expires,
             response.Content.Headers.LastModified
         );

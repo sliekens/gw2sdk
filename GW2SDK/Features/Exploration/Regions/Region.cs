@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Drawing;
 using GW2SDK.Annotations;
-using GW2SDK.Exploration.Maps;
+using GW2SDK.Exploration.Charts;
 using JetBrains.Annotations;
 
 namespace GW2SDK.Exploration.Regions;
@@ -18,5 +18,5 @@ public sealed record Region
 
     public Area ContinentRectangle { get; init; } = new();
 
-    public Dictionary<int, Map> Maps { get; init; } = new(0);
+    public Dictionary<int, Chart> Maps { get; init; } = new(0);
 }

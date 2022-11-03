@@ -10,11 +10,11 @@ using GW2SDK.Exploration.PointsOfInterest;
 using GW2SDK.Exploration.Sectors;
 using JetBrains.Annotations;
 
-namespace GW2SDK.Exploration.Maps;
+namespace GW2SDK.Exploration.Charts;
 
 [PublicAPI]
 [DataTransferObject]
-public sealed record Map
+public sealed record Chart
 {
     public int Id { get; init; }
 
@@ -28,7 +28,7 @@ public sealed record Map
 
     public PointF? LabelCoordinates { get; init; }
 
-    public MapArea MapRectangle { get; init; } = new();
+    public MapArea ChartRectangle { get; init; } = new();
 
     public Area ContinentRectangle { get; init; } = new();
 

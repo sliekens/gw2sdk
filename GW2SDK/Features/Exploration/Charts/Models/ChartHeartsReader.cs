@@ -1,23 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text.Json;
-using GW2SDK.Exploration.Maps;
+using GW2SDK.Exploration.Hearts;
+using JetBrains.Annotations;
 
-namespace GW2SDK.Exploration.Regions;
+namespace GW2SDK.Exploration.Charts;
 
-internal static class RegionMapsReader
+[PublicAPI]
+public static class ChartHeartsReader
 {
-    public static Dictionary<int, Map> GetRegionMaps(
+    public static Dictionary<int, Heart> GetChartHearts(
         this JsonElement json,
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        Dictionary<int, Map> maps = new();
+        Dictionary<int, Heart> tasks = new();
         foreach (var member in json.EnumerateObject())
         {
             if (int.TryParse(member.Name, out var id))
             {
-                maps[id] = member.Value.GetMap(missingMemberBehavior);
+                tasks[id] = member.Value.GetHeart(missingMemberBehavior);
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {
@@ -25,6 +27,6 @@ internal static class RegionMapsReader
             }
         }
 
-        return maps;
+        return tasks;
     }
 }

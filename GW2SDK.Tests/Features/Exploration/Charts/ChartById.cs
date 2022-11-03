@@ -2,9 +2,9 @@
 using GW2SDK.Tests.TestInfrastructure;
 using Xunit;
 
-namespace GW2SDK.Tests.Features.Exploration.Maps;
+namespace GW2SDK.Tests.Features.Exploration.Charts;
 
-public class MapById
+public class ChartById
 {
     [Theory]
     [InlineData(1, 0, 1, 26)]
@@ -15,7 +15,7 @@ public class MapById
         await using Composer services = new();
         var sut = services.Resolve<Gw2Client>();
 
-        var actual = await sut.Maps.GetMapById(continentId, floorId, regionId, mapId);
+        var actual = await sut.Maps.GetChartById(continentId, floorId, regionId, mapId);
 
         // TODO: complete validation
         Assert.Equal(mapId, actual.Value.Id);

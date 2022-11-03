@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Text.Json;
-using GW2SDK.Exploration.Maps;
+using GW2SDK.Exploration.Charts;
 using GW2SDK.Json;
 using JetBrains.Annotations;
 
@@ -19,7 +19,7 @@ public static class RegionReader
         RequiredMember<string> name = new("name");
         RequiredMember<PointF> labelCoordinates = new("label_coord");
         RequiredMember<Area> continentRectangle = new("continent_rect");
-        RequiredMember<Dictionary<int, Map>> maps = new("maps");
+        RequiredMember<Dictionary<int, Chart>> maps = new("maps");
         RequiredMember<int> id = new("id");
         foreach (var member in json.EnumerateObject())
         {
@@ -57,7 +57,7 @@ public static class RegionReader
                 labelCoordinates.Select(value => value.GetCoordinate(missingMemberBehavior)),
             ContinentRectangle =
                 continentRectangle.Select(value => value.GetArea(missingMemberBehavior)),
-            Maps = maps.Select(value => value.GetRegionMaps(missingMemberBehavior))
+            Maps = maps.Select(value => value.GetRegionCharts(missingMemberBehavior))
         };
     }
 }

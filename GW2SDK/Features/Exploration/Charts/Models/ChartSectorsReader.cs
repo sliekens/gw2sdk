@@ -4,12 +4,12 @@ using System.Text.Json;
 using GW2SDK.Exploration.Sectors;
 using JetBrains.Annotations;
 
-namespace GW2SDK.Exploration.Maps;
+namespace GW2SDK.Exploration.Charts;
 
 [PublicAPI]
-public static class MapSectorsReader
+public static class ChartSectorsReader
 {
-    public static Dictionary<int, Sector> GetMapSectors(
+    public static Dictionary<int, Sector> GetChartSectors(
         this JsonElement json,
         MissingMemberBehavior missingMemberBehavior
     )

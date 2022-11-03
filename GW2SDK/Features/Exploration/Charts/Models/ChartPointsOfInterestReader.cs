@@ -1,25 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text.Json;
-using GW2SDK.Exploration.Hearts;
+using GW2SDK.Exploration.PointsOfInterest;
 using JetBrains.Annotations;
 
-namespace GW2SDK.Exploration.Maps;
+namespace GW2SDK.Exploration.Charts;
 
 [PublicAPI]
-public static class MapHeartsReader
+public static class ChartPointsOfInterestReader
 {
-    public static Dictionary<int, Heart> GetMapHearts(
+    public static Dictionary<int, PointOfInterest> GetChartPointsOfInterest(
         this JsonElement json,
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        Dictionary<int, Heart> tasks = new();
+        Dictionary<int, PointOfInterest> pointsOfInterest = new();
         foreach (var member in json.EnumerateObject())
         {
             if (int.TryParse(member.Name, out var id))
             {
-                tasks[id] = member.Value.GetHeart(missingMemberBehavior);
+                pointsOfInterest[id] = member.Value.GetPointOfInterest(missingMemberBehavior);
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {
@@ -27,6 +27,6 @@ public static class MapHeartsReader
             }
         }
 
-        return tasks;
+        return pointsOfInterest;
     }
 }

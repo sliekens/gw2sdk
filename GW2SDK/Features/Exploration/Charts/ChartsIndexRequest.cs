@@ -7,23 +7,19 @@ using GW2SDK.Json;
 using JetBrains.Annotations;
 using static System.Net.Http.HttpMethod;
 
-namespace GW2SDK.Exploration.Maps;
+namespace GW2SDK.Exploration.Charts;
 
 [PublicAPI]
-public sealed class MapsRequest : IHttpRequest<IReplicaSet<Map>>
+public sealed class ChartsIndexRequest : IHttpRequest<IReplicaSet<int>>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/continents/:id/floors/:floor/regions/:region/maps")
         {
             AcceptEncoding = "gzip",
-            Arguments = new QueryBuilder
-            {
-                { "ids", "all" },
-                { "v", SchemaVersion.Recommended }
-            }
+            Arguments = new QueryBuilder { { "v", SchemaVersion.Recommended } }
         };
 
-    public MapsRequest(int continentId, int floorId, int regionId)
+    public ChartsIndexRequest(int continentId, int floorId, int regionId)
     {
         ContinentId = continentId;
         FloorId = floorId;
@@ -36,11 +32,7 @@ public sealed class MapsRequest : IHttpRequest<IReplicaSet<Map>>
 
     public int RegionId { get; }
 
-    public Language? Language { get; init; }
-
-    public MissingMemberBehavior MissingMemberBehavior { get; init; }
-
-    public async Task<IReplicaSet<Map>> SendAsync(
+    public async Task<IReplicaSet<int>> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
     )
@@ -51,8 +43,7 @@ public sealed class MapsRequest : IHttpRequest<IReplicaSet<Map>>
                     Path = Template.Path
                         .Replace(":id", ContinentId.ToString(CultureInfo.InvariantCulture))
                         .Replace(":floor", FloorId.ToString(CultureInfo.InvariantCulture))
-                        .Replace(":region", RegionId.ToString(CultureInfo.InvariantCulture)),
-                    AcceptLanguage = Language?.Alpha2Code
+                        .Replace(":region", RegionId.ToString(CultureInfo.InvariantCulture))
                 },
                 cancellationToken
             )
@@ -63,8 +54,8 @@ public sealed class MapsRequest : IHttpRequest<IReplicaSet<Map>>
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value = json.RootElement.GetSet(entry => entry.GetMap(MissingMemberBehavior));
-        return new ReplicaSet<Map>(
+        var value = json.RootElement.GetSet(entry => entry.GetInt32());
+        return new ReplicaSet<int>(
             response.Headers.Date.GetValueOrDefault(),
             value,
             response.Headers.GetCollectionContext(),

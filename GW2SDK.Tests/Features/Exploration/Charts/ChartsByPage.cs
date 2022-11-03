@@ -2,24 +2,24 @@
 using GW2SDK.Tests.TestInfrastructure;
 using Xunit;
 
-namespace GW2SDK.Tests.Features.Exploration.Maps;
+namespace GW2SDK.Tests.Features.Exploration.Charts;
 
-public class Maps
+public class ChartsByPage
 {
-    [Theory]
-    [InlineData(1, 0, 1)]
-    [InlineData(1, 0, 2)]
-    [InlineData(1, 0, 3)]
-    public async Task Can_be_enumerated(int continentId, int floorId, int regionId)
+    [Fact]
+    public async Task Can_be_filtered_by_page()
     {
         await using Composer services = new();
         var sut = services.Resolve<Gw2Client>();
 
-        var actual = await sut.Maps.GetMaps(continentId, floorId, regionId);
+        const int continentId = 1;
+        const int floorId = 0;
+        const int regionId = 1;
 
-        Assert.NotEmpty(actual);
-        Assert.Equal(actual.Count, actual.Context.ResultCount);
-        Assert.Equal(actual.Count, actual.Context.ResultTotal);
+        var actual = await sut.Maps.GetChartsByPage(continentId, floorId, regionId, 0, 3);
+
+        Assert.Equal(3, actual.Count);
+        Assert.Equal(3, actual.Context.PageSize);
         Assert.All(
             actual,
             entry =>

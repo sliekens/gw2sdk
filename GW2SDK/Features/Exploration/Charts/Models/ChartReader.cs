@@ -4,20 +4,20 @@ using System.Drawing;
 using System.Text.Json;
 using GW2SDK.Exploration.Adventures;
 using GW2SDK.Exploration.GodShrines;
+using GW2SDK.Exploration.Hearts;
 using GW2SDK.Exploration.MasteryPoints;
 using GW2SDK.Exploration.PointsOfInterest;
 using GW2SDK.Exploration.Sectors;
 using GW2SDK.Exploration.SkillChallenge;
-using GW2SDK.Exploration.Hearts;
 using GW2SDK.Json;
 using JetBrains.Annotations;
 
-namespace GW2SDK.Exploration.Maps;
+namespace GW2SDK.Exploration.Charts;
 
 [PublicAPI]
-public static class MapReader
+public static class ChartReader
 {
-    public static Map GetMap(this JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    public static Chart GetChart(this JsonElement json, MissingMemberBehavior missingMemberBehavior)
     {
         RequiredMember<string> name = new("name");
         RequiredMember<int> minLevel = new("min_level");
@@ -103,7 +103,7 @@ public static class MapReader
             }
         }
 
-        return new Map
+        return new Chart
         {
             Id = id.GetValue(),
             Name = name.GetValue(),
@@ -112,18 +112,18 @@ public static class MapReader
             DefaultFloor = defaultFloor.GetValue(),
             LabelCoordinates =
                 labelCoordinates.Select(value => value.GetCoordinate(missingMemberBehavior)),
-            MapRectangle = mapRectangle.Select(value => value.GetMapArea(missingMemberBehavior)),
+            ChartRectangle = mapRectangle.Select(value => value.GetMapArea(missingMemberBehavior)),
             ContinentRectangle =
                 continentRectangle.Select(value => value.GetArea(missingMemberBehavior)),
             PointsOfInterest =
                 pointsOfInterest.Select(
-                    value => value.GetMapPointsOfInterest(missingMemberBehavior)
+                    value => value.GetChartPointsOfInterest(missingMemberBehavior)
                 ),
             GodShrines = godShrines.SelectMany(value => value.GetGodShrine(missingMemberBehavior)),
-            Hearts = tasks.Select(value => value.GetMapHearts(missingMemberBehavior)),
+            Hearts = tasks.Select(value => value.GetChartHearts(missingMemberBehavior)),
             SkillChallenges =
                 skillChallenges.SelectMany(value => value.GetSkillChallenge(missingMemberBehavior)),
-            Sectors = sectors.Select(value => value.GetMapSectors(missingMemberBehavior)),
+            Sectors = sectors.Select(value => value.GetChartSectors(missingMemberBehavior)),
             Adventures = adventures.SelectMany(value => value.GetAdventure(missingMemberBehavior)),
             MasteryPoints =
                 masteryPoints.SelectMany(item => item.GetMasteryPoint(missingMemberBehavior))

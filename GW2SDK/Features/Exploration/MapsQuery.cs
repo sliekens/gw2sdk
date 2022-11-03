@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
+using GW2SDK.Exploration.Charts;
 using GW2SDK.Exploration.Continents;
 using GW2SDK.Exploration.Floors;
 using GW2SDK.Exploration.Hearts;
-using GW2SDK.Exploration.Maps;
 using GW2SDK.Exploration.PointsOfInterest;
 using GW2SDK.Exploration.Regions;
 using GW2SDK.Exploration.Sectors;
@@ -259,7 +259,7 @@ public sealed class MapsQuery
 
     #region v2/continents/:id/floors/:floor/regions/:region/maps
 
-    public Task<IReplicaSet<Map>> GetMaps(
+    public Task<IReplicaSet<Chart>> GetCharts(
         int continentId,
         int floorId,
         int regionId,
@@ -268,7 +268,7 @@ public sealed class MapsQuery
         CancellationToken cancellationToken = default
     )
     {
-        MapsRequest request = new(continentId, floorId, regionId)
+        ChartsRequest request = new(continentId, floorId, regionId)
         {
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
@@ -276,18 +276,18 @@ public sealed class MapsQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<IReplicaSet<int>> GetMapsIndex(
+    public Task<IReplicaSet<int>> GetChartsIndex(
         int continentId,
         int floorId,
         int regionId,
         CancellationToken cancellationToken = default
     )
     {
-        MapsIndexRequest request = new(continentId, floorId, regionId);
+        ChartsIndexRequest request = new(continentId, floorId, regionId);
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<IReplica<Map>> GetMapById(
+    public Task<IReplica<Chart>> GetChartById(
         int continentId,
         int floorId,
         int regionId,
@@ -297,7 +297,7 @@ public sealed class MapsQuery
         CancellationToken cancellationToken = default
     )
     {
-        MapByIdRequest request = new(continentId, floorId, regionId, mapId)
+        ChartByIdRequest request = new(continentId, floorId, regionId, mapId)
         {
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
@@ -305,7 +305,7 @@ public sealed class MapsQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<IReplicaSet<Map>> GetMapsByIds(
+    public Task<IReplicaSet<Chart>> GetChartsByIds(
         int continentId,
         int floorId,
         int regionId,
@@ -315,7 +315,7 @@ public sealed class MapsQuery
         CancellationToken cancellationToken = default
     )
     {
-        MapsByIdsRequest request = new(continentId, floorId, regionId, mapIds)
+        ChartsByIdsRequest request = new(continentId, floorId, regionId, mapIds)
         {
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
@@ -323,7 +323,7 @@ public sealed class MapsQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<IReplicaPage<Map>> GetMapsByPage(
+    public Task<IReplicaPage<Chart>> GetChartsByPage(
         int continentId,
         int floorId,
         int regionId,
@@ -334,7 +334,7 @@ public sealed class MapsQuery
         CancellationToken cancellationToken = default
     )
     {
-        MapsByPageRequest request = new(continentId, floorId, regionId, pageIndex)
+        ChartsByPageRequest request = new(continentId, floorId, regionId, pageIndex)
         {
             PageSize = pageSize,
             Language = language,

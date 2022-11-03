@@ -1,32 +1,25 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using GW2SDK.Tests.TestInfrastructure;
 using Xunit;
 
-namespace GW2SDK.Tests.Features.Exploration.Maps;
+namespace GW2SDK.Tests.Features.Exploration.Charts;
 
-public class MapsByFilter
+public class Charts
 {
-    [Fact]
-    public async Task Can_be_filtered_by_id()
+    [Theory]
+    [InlineData(1, 0, 1)]
+    [InlineData(1, 0, 2)]
+    [InlineData(1, 0, 3)]
+    public async Task Can_be_enumerated(int continentId, int floorId, int regionId)
     {
         await using Composer services = new();
         var sut = services.Resolve<Gw2Client>();
 
-        const int continentId = 1;
-        const int floorId = 0;
-        const int regionId = 1;
-        HashSet<int> ids = new()
-        {
-            26,
-            27,
-            28
-        };
+        var actual = await sut.Maps.GetCharts(continentId, floorId, regionId);
 
-        var actual = await sut.Maps.GetMapsByIds(continentId, floorId, regionId, ids);
-
-        Assert.Equal(ids.Count, actual.Count);
-        Assert.Equal(ids.Count, actual.Context.ResultCount);
+        Assert.NotEmpty(actual);
+        Assert.Equal(actual.Count, actual.Context.ResultCount);
+        Assert.Equal(actual.Count, actual.Context.ResultTotal);
         Assert.All(
             actual,
             entry =>

@@ -3,13 +3,14 @@ using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 using GW2SDK.Http;
+using GW2SDK.Json;
 using JetBrains.Annotations;
 using static System.Net.Http.HttpMethod;
 
-namespace GW2SDK.Exploration.Maps;
+namespace GW2SDK.Exploration.Charts;
 
 [PublicAPI]
-public sealed class MapByIdRequest : IHttpRequest<IReplica<Map>>
+public sealed class ChartsByPageRequest : IHttpRequest<IReplicaPage<Chart>>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/continents/:id/floors/:floor/regions/:region/maps")
@@ -17,12 +18,12 @@ public sealed class MapByIdRequest : IHttpRequest<IReplica<Map>>
             AcceptEncoding = "gzip"
         };
 
-    public MapByIdRequest(int continentId, int floorId, int regionId, int mapId)
+    public ChartsByPageRequest(int continentId, int floorId, int regionId, int pageIndex)
     {
         ContinentId = continentId;
         FloorId = floorId;
         RegionId = regionId;
-        MapId = mapId;
+        PageIndex = pageIndex;
     }
 
     public int ContinentId { get; }
@@ -31,17 +32,26 @@ public sealed class MapByIdRequest : IHttpRequest<IReplica<Map>>
 
     public int RegionId { get; }
 
-    public int MapId { get; }
+    public int PageIndex { get; }
+
+    public int? PageSize { get; init; }
 
     public Language? Language { get; init; }
 
     public MissingMemberBehavior MissingMemberBehavior { get; init; }
 
-    public async Task<IReplica<Map>> SendAsync(
+    public async Task<IReplicaPage<Chart>> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
     )
     {
+        QueryBuilder search = new() { { "page", PageIndex } };
+        if (PageSize.HasValue)
+        {
+            search.Add("page_size", PageSize.Value);
+        }
+
+        search.Add("v", SchemaVersion.Recommended);
         using var response = await httpClient.SendAsync(
                 Template with
                 {
@@ -49,11 +59,7 @@ public sealed class MapByIdRequest : IHttpRequest<IReplica<Map>>
                         .Replace(":id", ContinentId.ToString(CultureInfo.InvariantCulture))
                         .Replace(":floor", FloorId.ToString(CultureInfo.InvariantCulture))
                         .Replace(":region", RegionId.ToString(CultureInfo.InvariantCulture)),
-                    Arguments = new QueryBuilder
-                    {
-                        { "id", MapId },
-                        { "v", SchemaVersion.Recommended }
-                    },
+                    Arguments = search,
                     AcceptLanguage = Language?.Alpha2Code
                 },
                 cancellationToken
@@ -65,10 +71,11 @@ public sealed class MapByIdRequest : IHttpRequest<IReplica<Map>>
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value = json.RootElement.GetMap(MissingMemberBehavior);
-        return new Replica<Map>(
+        var value = json.RootElement.GetSet(entry => entry.GetChart(MissingMemberBehavior));
+        return new ReplicaPage<Chart>(
             response.Headers.Date.GetValueOrDefault(),
             value,
+            response.Headers.GetPageContext(),
             response.Content.Headers.Expires,
             response.Content.Headers.LastModified
         );

@@ -2,9 +2,9 @@
 using GW2SDK.Tests.TestInfrastructure;
 using Xunit;
 
-namespace GW2SDK.Tests.Features.Exploration.Maps;
+namespace GW2SDK.Tests.Features.Exploration.Charts;
 
-public class MapsIndex
+public class ChartsIndex
 {
     [Theory]
     [InlineData(1, 0, 1)]
@@ -15,7 +15,7 @@ public class MapsIndex
         await using Composer services = new();
         var sut = services.Resolve<Gw2Client>();
 
-        var actual = await sut.Maps.GetMapsIndex(continentId, floorId, regionId);
+        var actual = await sut.Maps.GetChartsIndex(continentId, floorId, regionId);
 
         Assert.NotEmpty(actual.Values);
         Assert.Equal(actual.Count, actual.Context.ResultCount);
