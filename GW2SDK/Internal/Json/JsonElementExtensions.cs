@@ -61,8 +61,8 @@ internal static class JsonElementExtensions
         MissingMemberBehavior missingMemberBehavior
     ) where TEnum : struct, Enum =>
         missingMemberBehavior == MissingMemberBehavior.Error
-            ? TryHardParse<TEnum>(json.GetStringRequired())
-            : Parse<TEnum>(json.GetStringRequired());
+            ? Parse<TEnum>(json.GetStringRequired())
+            : TryHardParse<TEnum>(json.GetStringRequired());
 
     /// <summary>A variation on Enum.TryParse() that tries harder.</summary>
     /// <typeparam name="TEnum">The type of Enum to parse.</typeparam>
