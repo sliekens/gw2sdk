@@ -7,6 +7,7 @@ using GW2SDK.Exploration.Charts;
 using GW2SDK.Exploration.Continents;
 using GW2SDK.Exploration.Floors;
 using GW2SDK.Exploration.Hearts;
+using GW2SDK.Exploration.Maps;
 using GW2SDK.Exploration.PointsOfInterest;
 using GW2SDK.Exploration.Regions;
 using GW2SDK.Exploration.Sectors;
@@ -632,4 +633,76 @@ public sealed class MapsQuery
     }
 
     #endregion
+
+    #region v2/maps
+
+    public Task<IReplicaSet<Map>> GetMaps(
+        Language? language = default,
+        MissingMemberBehavior missingMemberBehavior = default,
+        CancellationToken cancellationToken = default
+    )
+    {
+        MapsRequest request = new()
+        {
+            Language = language,
+            MissingMemberBehavior = missingMemberBehavior
+        };
+        return request.SendAsync(http, cancellationToken);
+    }
+
+    public Task<IReplicaSet<int>> GetMapsIndex(CancellationToken cancellationToken = default)
+    {
+        MapsIndexRequest request = new();
+        return request.SendAsync(http, cancellationToken);
+    }
+
+    public Task<IReplica<Map>> GetMapById(
+        int mapId,
+        Language? language = default,
+        MissingMemberBehavior missingMemberBehavior = default,
+        CancellationToken cancellationToken = default
+    )
+    {
+        MapByIdRequest request = new(mapId)
+        {
+            Language = language,
+            MissingMemberBehavior = missingMemberBehavior
+        };
+        return request.SendAsync(http, cancellationToken);
+    }
+
+    public Task<IReplicaSet<Map>> GetMapsByIds(
+        IReadOnlyCollection<int> mapIds,
+        Language? language = default,
+        MissingMemberBehavior missingMemberBehavior = default,
+        CancellationToken cancellationToken = default
+    )
+    {
+        MapsByIdsRequest request = new(mapIds)
+        {
+            Language = language,
+            MissingMemberBehavior = missingMemberBehavior
+        };
+        return request.SendAsync(http, cancellationToken);
+    }
+
+    public Task<IReplicaPage<Map>> GetMapsByPage(
+        int pageIndex,
+        int? pageSize = default,
+        Language? language = default,
+        MissingMemberBehavior missingMemberBehavior = default,
+        CancellationToken cancellationToken = default
+    )
+    {
+        MapsByPageRequest request = new(pageIndex)
+        {
+            PageSize = pageSize,
+            Language = language,
+            MissingMemberBehavior = missingMemberBehavior
+        };
+        return request.SendAsync(http, cancellationToken);
+    }
+
+    #endregion
+
 }
