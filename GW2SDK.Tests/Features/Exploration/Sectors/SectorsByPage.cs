@@ -17,14 +17,7 @@ public class SectorsByPage
         const int regionId = 1;
         const int mapId = 26;
 
-        var actual = await sut.Maps.GetSectorsByPage(
-            continentId,
-            floorId,
-            regionId,
-            mapId,
-            0,
-            3
-        );
+        var actual = await sut.Maps.GetSectorsByPage(continentId, floorId, regionId, mapId, 0, 3);
 
         Assert.Equal(3, actual.Count);
         Assert.Equal(3, actual.Context.PageSize);
