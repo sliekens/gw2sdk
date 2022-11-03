@@ -115,7 +115,7 @@ internal static class Routes
         "/v2/mailcarriers",
 
         //"/v2/mapchests",
-        //"/v2/maps",
+        "/v2/maps",
         "/v2/masteries",
         "/v2/materials",
 
