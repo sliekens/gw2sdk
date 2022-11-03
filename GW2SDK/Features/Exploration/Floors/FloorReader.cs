@@ -14,7 +14,7 @@ public static class FloorReader
     public static Floor GetFloor(this JsonElement json, MissingMemberBehavior missingMemberBehavior)
     {
         RequiredMember<SizeF> textureDimensions = new("texture_dims");
-        OptionalMember<MapView> clampedView = new("clamped_view");
+        OptionalMember<Area> clampedView = new("clamped_view");
         RequiredMember<Dictionary<int, Region>> regions = new("regions");
         RequiredMember<int> id = new("id");
         foreach (var member in json.EnumerateObject())
@@ -46,7 +46,7 @@ public static class FloorReader
             Id = id.GetValue(),
             TextureDimensions =
                 textureDimensions.Select(value => value.GetDimensions(missingMemberBehavior)),
-            ClampedView = clampedView.Select(value => value.GetMapView(missingMemberBehavior)),
+            ClampedView = clampedView.Select(value => value.GetArea(missingMemberBehavior)),
             Regions = regions.Select(value => value.GetFloorRegions(missingMemberBehavior))
         };
     }

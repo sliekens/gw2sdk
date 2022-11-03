@@ -28,9 +28,9 @@ public sealed record Map
 
     public PointF? LabelCoordinates { get; init; }
 
-    public MapView2 MapRectangle { get; init; } = new();
+    public MapArea MapRectangle { get; init; } = new();
 
-    public MapView ContinentRectangle { get; init; } = new();
+    public Area ContinentRectangle { get; init; } = new();
 
     public Dictionary<int, PointOfInterest> PointsOfInterest { get; init; } = new(0);
 

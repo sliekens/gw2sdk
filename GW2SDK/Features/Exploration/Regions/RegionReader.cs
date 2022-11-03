@@ -18,7 +18,7 @@ public static class RegionReader
     {
         RequiredMember<string> name = new("name");
         RequiredMember<PointF> labelCoordinates = new("label_coord");
-        RequiredMember<MapView> continentRectangle = new("continent_rect");
+        RequiredMember<Area> continentRectangle = new("continent_rect");
         RequiredMember<Dictionary<int, Map>> maps = new("maps");
         RequiredMember<int> id = new("id");
         foreach (var member in json.EnumerateObject())
@@ -56,7 +56,7 @@ public static class RegionReader
             LabelCoordinates =
                 labelCoordinates.Select(value => value.GetCoordinate(missingMemberBehavior)),
             ContinentRectangle =
-                continentRectangle.Select(value => value.GetMapView(missingMemberBehavior)),
+                continentRectangle.Select(value => value.GetArea(missingMemberBehavior)),
             Maps = maps.Select(value => value.GetRegionMaps(missingMemberBehavior))
         };
     }

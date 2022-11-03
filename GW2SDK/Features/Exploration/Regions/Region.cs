@@ -16,7 +16,7 @@ public sealed record Region
 
     public PointF LabelCoordinates { get; init; }
 
-    public MapView ContinentRectangle { get; init; } = new();
+    public Area ContinentRectangle { get; init; } = new();
 
     public Dictionary<int, Map> Maps { get; init; } = new(0);
 }

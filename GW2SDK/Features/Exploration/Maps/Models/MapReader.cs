@@ -24,8 +24,8 @@ public static class MapReader
         RequiredMember<int> maxLevel = new("max_level");
         RequiredMember<int> defaultFloor = new("default_floor");
         OptionalMember<PointF> labelCoordinates = new("label_coord");
-        RequiredMember<MapView2> mapRectangle = new("map_rect");
-        RequiredMember<MapView> continentRectangle = new("continent_rect");
+        RequiredMember<MapArea> mapRectangle = new("map_rect");
+        RequiredMember<Area> continentRectangle = new("continent_rect");
         RequiredMember<Dictionary<int, PointOfInterest>> pointsOfInterest =
             new("points_of_interest");
         OptionalMember<GodShrine> godShrines = new("god_shrines");
@@ -112,9 +112,9 @@ public static class MapReader
             DefaultFloor = defaultFloor.GetValue(),
             LabelCoordinates =
                 labelCoordinates.Select(value => value.GetCoordinate(missingMemberBehavior)),
-            MapRectangle = mapRectangle.Select(value => value.GetMapView2(missingMemberBehavior)),
+            MapRectangle = mapRectangle.Select(value => value.GetMapArea(missingMemberBehavior)),
             ContinentRectangle =
-                continentRectangle.Select(value => value.GetMapView(missingMemberBehavior)),
+                continentRectangle.Select(value => value.GetArea(missingMemberBehavior)),
             PointsOfInterest =
                 pointsOfInterest.Select(
                     value => value.GetMapPointsOfInterest(missingMemberBehavior)

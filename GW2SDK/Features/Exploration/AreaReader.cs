@@ -5,9 +5,9 @@ using JetBrains.Annotations;
 namespace GW2SDK.Exploration;
 
 [PublicAPI]
-public static class MapViewReader
+public static class AreaReader
 {
-    public static MapView GetMapView(
+    public static Area GetArea(
         this JsonElement json,
         MissingMemberBehavior missingMemberBehavior
     )
@@ -19,7 +19,7 @@ public static class MapViewReader
         var southEast = json[1];
         var southEastX = southEast[0].GetSingle();
         var southEastY = southEast[1].GetSingle();
-        return new MapView
+        return new Area
         {
             NorthWest = new PointF(northWestX, northWestY),
             SouthEast = new PointF(southEastX, southEastY)
