@@ -26,6 +26,7 @@ using GW2SDK.MailCarriers;
 using GW2SDK.MapChests;
 using GW2SDK.Masteries;
 using GW2SDK.Meta;
+using GW2SDK.Minipets;
 using GW2SDK.Mounts;
 using GW2SDK.Professions;
 using GW2SDK.Quaggans;
@@ -101,6 +102,8 @@ public sealed class Gw2Client
     public MasteriesQuery Masteries => new(httpClient);
 
     public MetaQuery Meta => new(httpClient);
+
+    public MinipetsQuery Minipets => new(httpClient);
 
     public MountsQuery Mounts => new(httpClient);
 
