@@ -23,6 +23,7 @@ using GW2SDK.Items;
 using GW2SDK.ItemStats;
 using GW2SDK.Legends;
 using GW2SDK.MailCarriers;
+using GW2SDK.MapChests;
 using GW2SDK.Masteries;
 using GW2SDK.Meta;
 using GW2SDK.Mounts;
@@ -92,6 +93,8 @@ public sealed class Gw2Client
     public LegendsQuery Legends => new(httpClient);
 
     public MailCarriersQuery MailCarriers => new(httpClient);
+
+    public MapChestsQuery MapChests => new(httpClient);
 
     public MapsQuery Maps => new(httpClient);
 
