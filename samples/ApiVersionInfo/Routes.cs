@@ -33,7 +33,7 @@ internal static class Routes
 
         //"/v2/account/mastery/points",
         //"/v2/account/materials",
-        "/v2/account/minis",
+        //"/v2/account/minis",
         "/v2/account/mounts",
         "/v2/account/mounts/skins",
         "/v2/account/mounts/types",
@@ -117,8 +117,7 @@ internal static class Routes
         "/v2/maps",
         "/v2/masteries",
         "/v2/materials",
-
-        //"/v2/minis",
+        "/v2/minis",
         "/v2/mounts",
         "/v2/mounts/skins",
         "/v2/mounts/types",
