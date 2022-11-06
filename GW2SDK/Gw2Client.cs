@@ -30,6 +30,7 @@ using GW2SDK.Minipets;
 using GW2SDK.Mounts;
 using GW2SDK.Novelties;
 using GW2SDK.Outfits;
+using GW2SDK.Pets;
 using GW2SDK.Professions;
 using GW2SDK.Quaggans;
 using GW2SDK.Races;
@@ -112,6 +113,8 @@ public sealed class Gw2Client
     public NoveltiesQuery Novelties => new(httpClient);
 
     public OutfitsQuery Outfits => new(httpClient);
+
+    public PetsQuery Pets => new(httpClient);
 
     public ProfessionsQuery Professions => new(httpClient);
 
