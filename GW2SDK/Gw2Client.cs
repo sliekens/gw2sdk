@@ -33,6 +33,7 @@ using GW2SDK.Outfits;
 using GW2SDK.Pets;
 using GW2SDK.Professions;
 using GW2SDK.Quaggans;
+using GW2SDK.Quests;
 using GW2SDK.Races;
 using GW2SDK.Skills;
 using GW2SDK.Skins;
@@ -120,6 +121,8 @@ public sealed class Gw2Client
 
     public QuaggansQuery Quaggans => new(httpClient);
 
+    public QuestsQuery Quests => new(httpClient);
+
     public RacesQuery Races => new(httpClient);
 
     public SkillsQuery Skills => new(httpClient);
@@ -134,9 +137,9 @@ public sealed class Gw2Client
 
     public WardrobeQuery Wardrobe => new(httpClient);
 
-    public WorldsQuery Worlds => new(httpClient);
-
     public WorldBossesQuery WorldBosses => new(httpClient);
+
+    public WorldsQuery Worlds => new(httpClient);
 
     public TokenProvider TokenProvider => new(httpClient);
 }
