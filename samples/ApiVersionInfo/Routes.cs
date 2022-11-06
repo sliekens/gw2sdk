@@ -121,8 +121,7 @@ internal static class Routes
         "/v2/mounts",
         "/v2/mounts/skins",
         "/v2/mounts/types",
-
-        //"/v2/novelties",
+        "/v2/novelties",
         //"/v2/outfits",
         //"/v2/pets",
         "/v2/professions",
