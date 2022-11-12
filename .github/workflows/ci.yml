@@ -17,6 +17,7 @@ jobs:
     env:
       build-configuration: Release
     runs-on: ubuntu-latest
+    container: ghcr.io/sliekens/gw2sdk/devcontainer:latest
     steps:
     - name: Checkout
       uses: actions/checkout@v2
@@ -28,9 +29,6 @@ jobs:
       uses: actions/setup-dotnet@v2
       with:
         source-url: https://nuget.pkg.github.com/sliekens/index.json
-        dotnet-version: |
-          3.1.x
-          7.0.x
       env:
         NUGET_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
     - name: Install dependencies
