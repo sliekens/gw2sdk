@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Buffers;
 using System.Collections.Generic;
 using System.IO.MemoryMappedFiles;
@@ -118,14 +118,17 @@ namespace GW2SDK
             ArrayPool<byte>.Shared.Return(buffer);
         }
 
+#if NET
+        [SupportedOSPlatformGuard("windows")]
+#endif
         public static bool IsSupported()
         {
 #if NET
             return OperatingSystem.IsWindows();
+#elif NETFRAMEWORK
+            return Environment.OSVersion.Platform == PlatformID.Win32NT;
 #elif NETSTANDARD
             return RuntimeInformation.IsOSPlatform(OSPlatform.Windows);
-#elif NET461
-            return Environment.OSVersion.Platform == PlatformID.Win32NT;
 #endif
         }
 
@@ -134,6 +137,11 @@ namespace GW2SDK
 #endif
         public static GameLink Open(TimeSpan refreshRate = default, string? name = "MumbleLink")
         {
+            if (!IsSupported())
+            {
+                throw new PlatformNotSupportedException("Link is only supported on Windows.");
+            }
+
             name ??= "MumbleLink";
             const long size = Length;
             var file = MemoryMappedFile.CreateOrOpen(name, size, MemoryMappedFileAccess.ReadWrite);

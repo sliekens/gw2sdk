@@ -36,7 +36,7 @@ internal class Program : IObserver<Snapshot>
 
     private void RealMain(CancellationToken cancellationToken)
     {
-        if (!OperatingSystem.IsWindows())
+        if (!GameLink.IsSupported())
         {
             Console.WriteLine("This sample is only supported on Windows!");
             return;
