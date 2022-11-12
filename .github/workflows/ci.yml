@@ -25,12 +25,6 @@ jobs:
         submodules: true
     - name: Configure GPR
       run: dotnet nuget add source https://nuget.pkg.github.com/sliekens/index.json --name sliekens
-    - name: Setup .NET Core SDK
-      uses: actions/setup-dotnet@v3
-      with:
-        source-url: https://nuget.pkg.github.com/sliekens/index.json
-      env:
-        NUGET_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
     - name: Install dependencies
       run: dotnet restore --locked-mode
     - name: Test
