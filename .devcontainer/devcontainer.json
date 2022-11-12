@@ -8,7 +8,8 @@
     "ms-dotnettools.csharp",
     "ms-azuretools.vscode-docker"
   ],
-  "postCreateCommand": "/bin/bash -v ${containerWorkspaceFolder}/.devcontainer/post-create.sh",
+  "initializeCommand": [ ".devcontainer/initialize-host" ],
+  "postCreateCommand": [ ".devcontainer/post-create" ],
   "mounts": [
     "type=bind,source=/var/run/docker.sock,target=/var/run/docker-host.sock",
     "type=volume,source=gw2sdk-extensions,target=/home/vscode/.vscode-server/extensions",
