@@ -10,9 +10,9 @@ namespace GW2SDK.Tokens;
 [DataTransferObject]
 public record TokenInfo
 {
-    public string Id { get; init; } = "";
+    public required string Id { get; init; }
 
-    public string Name { get; init; } = "";
+    public required string Name { get; init; }
 
-    public IReadOnlyCollection<Permission> Permissions { get; init; } = Array.Empty<Permission>();
+    public required IReadOnlyCollection<Permission> Permissions { get; init; }
 }

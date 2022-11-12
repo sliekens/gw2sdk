@@ -8,7 +8,7 @@ namespace GW2SDK.Skills;
 [DataTransferObject]
 public record SkillFact
 {
-    public string Text { get; init; } = "";
+    public required string Text { get; init; }
 
-    public string Icon { get; init; } = "";
+    public required string Icon { get; init; }
 }

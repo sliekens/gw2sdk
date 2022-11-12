@@ -9,9 +9,9 @@ namespace GW2SDK.Races;
 [DataTransferObject]
 public sealed record Race
 {
-    public IReadOnlyCollection<int> Skills = Array.Empty<int>();
+    public required IReadOnlyCollection<int> Skills { get; init; }
 
-    public RaceName Id { get; init; }
+    public required RaceName Id { get; init; }
 
-    public string Name { get; init; } = "";
+    public required string Name { get; init; }
 }

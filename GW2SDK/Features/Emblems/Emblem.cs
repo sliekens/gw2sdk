@@ -9,7 +9,7 @@ namespace GW2SDK.Emblems;
 [DataTransferObject]
 public sealed record Emblem
 {
-    public int Id { get; init; }
+    public required int Id { get; init; }
 
-    public IReadOnlyCollection<string> Layers { get; init; } = Array.Empty<string>();
+    public required IReadOnlyCollection<string> Layers { get; init; }
 }

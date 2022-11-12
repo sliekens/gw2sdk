@@ -7,5 +7,5 @@ namespace GW2SDK.Meta;
 [DataTransferObject]
 public sealed record Build
 {
-    public int Id { get; init; }
+    public required int Id { get; init; }
 }

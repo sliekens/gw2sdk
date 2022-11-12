@@ -7,5 +7,5 @@ namespace GW2SDK.Skins;
 [Inheritable]
 public record WeaponSkin : Skin
 {
-    public DamageType DamageType { get; init; }
+    public required DamageType DamageType { get; init; }
 }

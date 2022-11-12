@@ -10,29 +10,28 @@ namespace GW2SDK.Items;
 [DataTransferObject]
 public record Item
 {
-    public int Id { get; init; }
+    public required int Id { get; init; }
 
-    public string Name { get; init; } = "";
+    public required string Name { get; init; }
 
-    public string Description { get; init; } = "";
+    public required string Description { get; init; }
 
-    public int Level { get; init; }
+    public required int Level { get; init; }
 
-    public Rarity Rarity { get; init; }
+    public required Rarity Rarity { get; init; }
 
-    public Coin VendorValue { get; init; }
-
-    /// <remarks>Can be empty.</remarks>
-    public IReadOnlyCollection<GameType> GameTypes { get; init; } = Array.Empty<GameType>();
+    public required Coin VendorValue { get; init; }
 
     /// <remarks>Can be empty.</remarks>
-    public IReadOnlyCollection<ItemFlag> Flags { get; init; } = Array.Empty<ItemFlag>();
+    public required IReadOnlyCollection<GameType> GameTypes { get; init; }
 
     /// <remarks>Can be empty.</remarks>
-    public IReadOnlyCollection<ItemRestriction> Restrictions { get; init; } =
-        Array.Empty<ItemRestriction>();
+    public required IReadOnlyCollection<ItemFlag> Flags { get; init; }
 
-    public string ChatLink { get; init; } = "";
+    /// <remarks>Can be empty.</remarks>
+    public required IReadOnlyCollection<ItemRestriction> Restrictions { get; init; }
 
-    public string? Icon { get; init; }
+    public required string ChatLink { get; init; }
+
+    public required string? Icon { get; init; }
 }

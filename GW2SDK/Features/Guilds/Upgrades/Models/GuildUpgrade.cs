@@ -10,21 +10,21 @@ namespace GW2SDK.Guilds.Upgrades;
 [DataTransferObject]
 public record GuildUpgrade
 {
-    public int Id { get; init; }
+    public required int Id { get; init; }
 
-    public string Name { get; init; } = "";
+    public required string Name { get; init; }
 
-    public string Description { get; init; } = "";
+    public required string Description { get; init; }
 
-    public TimeSpan BuildTime { get; init; }
+    public required TimeSpan BuildTime { get; init; }
 
-    public string Icon { get; init; } = "";
+    public required string Icon { get; init; }
 
-    public int RequiredLevel { get; init; }
+    public required int RequiredLevel { get; init; }
 
-    public int Experience { get; init; }
+    public required int Experience { get; init; }
 
-    public IReadOnlyCollection<int> Prerequisites { get; init; } = Array.Empty<int>();
+    public required IReadOnlyCollection<int> Prerequisites { get; init; }
 
-    public IReadOnlyCollection<GuildUpgradeCost> Costs { get; init; } = Array.Empty<GuildUpgradeCost>();
+    public required IReadOnlyCollection<GuildUpgradeCost> Costs { get; init; }
 }

@@ -9,19 +9,19 @@ namespace GW2SDK.Traits;
 [DataTransferObject]
 public sealed record TraitSkill
 {
-    public int Id { get; init; }
+    public required int Id { get; init; }
 
-    public string Name { get; init; } = "";
+    public required string Name { get; init; }
 
-    public IReadOnlyCollection<TraitFact> Facts { get; init; } = Array.Empty<TraitFact>();
+    public required IReadOnlyCollection<TraitFact> Facts { get; init; }
 
-    public IReadOnlyCollection<CompoundTraitFact>? TraitedFacts { get; init; }
+    public required IReadOnlyCollection<CompoundTraitFact>? TraitedFacts { get; init; }
 
-    public string Description { get; init; } = "";
+    public required string Description { get; init; }
 
-    public string Icon { get; init; } = "";
+    public required string Icon { get; init; }
 
-    public string ChatLink { get; init; } = "";
+    public required string ChatLink { get; init; }
 
-    public IReadOnlyCollection<SkillCategoryName>? Categories { get; init; }
+    public required IReadOnlyCollection<SkillCategoryName>? Categories { get; init; }
 }

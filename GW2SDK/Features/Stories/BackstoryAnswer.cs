@@ -8,17 +8,17 @@ namespace GW2SDK.Stories;
 [DataTransferObject]
 public sealed record BackstoryAnswer
 {
-    public string Id { get; init; } = "";
+    public required string Id { get; init; }
 
-    public string Title { get; init; } = "";
+    public required string Title { get; init; }
 
-    public string Description { get; init; } = "";
+    public required string Description { get; init; }
 
-    public string Journal { get; init; } = "";
+    public required string Journal { get; init; }
 
-    public int Question { get; init; }
+    public required int Question { get; init; }
 
-    public IReadOnlyCollection<RaceName>? Races { get; init; }
+    public required IReadOnlyCollection<RaceName>? Races { get; init; }
 
-    public IReadOnlyCollection<ProfessionName>? Professions { get; init; }
+    public required IReadOnlyCollection<ProfessionName>? Professions { get; init; }
 }

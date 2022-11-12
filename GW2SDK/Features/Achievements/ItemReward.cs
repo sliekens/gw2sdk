@@ -5,7 +5,7 @@ namespace GW2SDK.Achievements;
 [PublicAPI]
 public sealed record ItemReward : AchievementReward
 {
-    public int Id { get; init; }
+    public required int Id { get; init; }
 
-    public int Count { get; init; }
+    public required int Count { get; init; }
 }

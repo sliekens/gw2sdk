@@ -7,7 +7,7 @@ namespace GW2SDK.Achievements;
 [DataTransferObject]
 public sealed record AchievementTier
 {
-    public int Count { get; init; }
+    public required int Count { get; init; }
 
-    public int Points { get; init; }
+    public required int Points { get; init; }
 }

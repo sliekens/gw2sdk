@@ -8,16 +8,16 @@ namespace GW2SDK.Commerce.Prices;
 public sealed record ItemPrice
 {
     /// <summary>The item ID.</summary>
-    public int Id { get; init; }
+    public required int Id { get; init; }
 
     /// <summary>Indicates whether a free to play account can trade this item on the trading post.</summary>
-    public bool Whitelisted { get; init; }
+    public required bool Whitelisted { get; init; }
 
     /// <summary>The highest price someone is willing to buy the item for.</summary>
-    public Coin BestBid { get; init; }
+    public required Coin BestBid { get; init; }
 
     /// <summary>The lowest price someone is willing to sell the item for.</summary>
-    public Coin BestAsk { get; init; }
+    public required Coin BestAsk { get; init; }
 
     public Coin BidAskSpread =>
         this switch
@@ -28,8 +28,8 @@ public sealed record ItemPrice
         };
 
     /// <summary>The total number of items demanded (regardless of price level).</summary>
-    public int TotalDemand { get; init; }
+    public required int TotalDemand { get; init; }
 
     /// <summary>The total number of items supplied (regardless of price level).</summary>
-    public int TotalSupply { get; init; }
+    public required int TotalSupply { get; init; }
 }

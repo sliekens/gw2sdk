@@ -7,5 +7,5 @@ namespace GW2SDK.Items;
 [PublicAPI]
 public sealed record Transmutation : Consumable
 {
-    public IReadOnlyCollection<int> Skins { get; init; } = Array.Empty<int>();
+    public required IReadOnlyCollection<int> Skins { get; init; }
 }

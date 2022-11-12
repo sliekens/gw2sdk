@@ -8,23 +8,23 @@ namespace GW2SDK.ItemStats;
 [DataTransferObject]
 public sealed record SelectedModification
 {
-    public int? AgonyResistance { get; init; }
+    public required int? AgonyResistance { get; init; }
 
-    public int? BoonDuration { get; init; }
+    public required int? BoonDuration { get; init; }
 
-    public int? ConditionDamage { get; init; }
+    public required int? ConditionDamage { get; init; }
 
-    public int? ConditionDuration { get; init; }
+    public required int? ConditionDuration { get; init; }
 
-    public int? CritDamage { get; init; }
+    public required int? CritDamage { get; init; }
 
-    public int? Healing { get; init; }
+    public required int? Healing { get; init; }
 
-    public int? Power { get; init; }
+    public required int? Power { get; init; }
 
-    public int? Precision { get; init; }
+    public required int? Precision { get; init; }
 
-    public int? Toughness { get; init; }
+    public required int? Toughness { get; init; }
 
-    public int? Vitality { get; init; }
+    public required int? Vitality { get; init; }
 }

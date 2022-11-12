@@ -7,5 +7,5 @@ namespace GW2SDK.Traits;
 [DataTransferObject]
 public sealed record PrefixedBuffTraitFact : BuffTraitFact
 {
-    public BuffPrefix Prefix { get; init; } = new();
+    public required BuffPrefix Prefix { get; init; }
 }

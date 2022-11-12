@@ -9,16 +9,15 @@ namespace GW2SDK.MailCarriers;
 [DataTransferObject]
 public sealed record MailCarrier
 {
-    public int Id { get; init; }
+    public required int Id { get; init; }
 
-    public IReadOnlyCollection<int> UnlockItems { get; init; } = Array.Empty<int>();
+    public required IReadOnlyCollection<int> UnlockItems { get; init; }
 
-    public int Order { get; init; }
+    public required int Order { get; init; }
 
-    public string Icon { get; init; } = "";
+    public required string Icon { get; init; }
 
-    public string Name { get; init; } = "";
+    public required string Name { get; init; }
 
-    public IReadOnlyCollection<MailCarrierFlag> Flags { get; init; } =
-        Array.Empty<MailCarrierFlag>();
+    public required IReadOnlyCollection<MailCarrierFlag> Flags { get; init; }
 }

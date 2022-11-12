@@ -7,9 +7,9 @@ namespace GW2SDK.Skills;
 [DataTransferObject]
 public sealed record SkillReference
 {
-    public int Id { get; init; }
+    public required int Id { get; init; }
 
-    public Attunement? Attunement { get; init; }
+    public required Attunement? Attunement { get; init; }
 
-    public Transformation? Form { get; init; }
+    public required Transformation? Form { get; init; }
 }

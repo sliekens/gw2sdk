@@ -9,15 +9,15 @@ namespace GW2SDK.Legends;
 [DataTransferObject]
 public sealed record Legend
 {
-    public string Id { get; init; } = "";
+    public required string Id { get; init; }
 
-    public int Code { get; init; }
+    public required int Code { get; init; }
 
-    public int Swap { get; init; }
+    public required int Swap { get; init; }
 
-    public int Heal { get; init; }
+    public required int Heal { get; init; }
 
-    public int Elite { get; init; }
+    public required int Elite { get; init; }
 
-    public IReadOnlyCollection<int> Utilities { get; init; } = Array.Empty<int>();
+    public required IReadOnlyCollection<int> Utilities { get; init; }
 }

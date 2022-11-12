@@ -7,7 +7,7 @@ namespace GW2SDK.Files;
 [DataTransferObject]
 public sealed record File
 {
-    public string Id { get; init; } = "";
+    public required string Id { get; init; }
 
-    public string Icon { get; init; } = "";
+    public required string Icon { get; init; }
 }

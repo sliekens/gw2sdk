@@ -7,7 +7,7 @@ namespace GW2SDK.Mounts;
 [DataTransferObject]
 public sealed record SkillReference
 {
-    public int Id { get; init; }
+    public required int Id { get; init; }
 
-    public SkillSlot Slot { get; init; }
+    public required SkillSlot Slot { get; init; }
 }

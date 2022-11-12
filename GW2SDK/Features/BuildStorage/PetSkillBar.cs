@@ -9,7 +9,7 @@ namespace GW2SDK.BuildStorage;
 [DataTransferObject]
 public sealed record PetSkillBar
 {
-    public IReadOnlyCollection<int?> Terrestrial { get; init; } = Array.Empty<int?>();
+    public required IReadOnlyCollection<int?> Terrestrial { get; init; }
 
-    public IReadOnlyCollection<int?> Aquatic { get; init; } = Array.Empty<int?>();
+    public required IReadOnlyCollection<int?> Aquatic { get; init; }
 }

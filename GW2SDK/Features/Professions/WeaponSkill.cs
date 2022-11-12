@@ -7,11 +7,11 @@ namespace GW2SDK.Professions;
 [DataTransferObject]
 public sealed record WeaponSkill
 {
-    public int Id { get; init; }
+    public required int Id { get; init; }
 
-    public SkillSlot Slot { get; init; }
+    public required SkillSlot Slot { get; init; }
 
-    public Offhand? Offhand { get; init; }
+    public required Offhand? Offhand { get; init; }
 
-    public Attunement? Attunement { get; init; }
+    public required Attunement? Attunement { get; init; }
 }

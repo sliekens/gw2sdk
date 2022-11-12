@@ -9,7 +9,7 @@ namespace GW2SDK.Commerce.Delivery;
 [DataTransferObject]
 public sealed record DeliveryBox
 {
-    public Coin Coins { get; init; }
+    public required Coin Coins { get; init; }
 
-    public IReadOnlyCollection<DeliveredItem> Items { get; init; } = Array.Empty<DeliveredItem>();
+    public required IReadOnlyCollection<DeliveredItem> Items { get; init; }
 }

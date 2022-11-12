@@ -5,7 +5,7 @@ namespace GW2SDK.Quaggans;
 [PublicAPI]
 public sealed record Quaggan
 {
-    public string Id { get; init; } = "";
+    public required string Id { get; init; }
 
-    public string PictureHref { get; init; } = "";
+    public required string PictureHref { get; init; }
 }

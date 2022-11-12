@@ -10,32 +10,30 @@ namespace GW2SDK.Achievements;
 [DataTransferObject]
 public record Achievement
 {
-    public int Id { get; init; }
+    public required int Id { get; init; }
 
-    public string Name { get; init; } = "";
+    public required string Name { get; init; }
 
     /// <summary>The icon URI.</summary>
     /// <remarks>Can be empty.</remarks>
-    public string Icon { get; init; } = "";
+    public required string Icon { get; init; }
 
-    public string Description { get; init; } = "";
+    public required string Description { get; init; }
 
-    public string Requirement { get; init; } = "";
+    public required string Requirement { get; init; }
 
-    public string LockedText { get; init; } = "";
+    public required string LockedText { get; init; }
 
-    public IReadOnlyCollection<AchievementFlag> Flags { get; init; } =
-        Array.Empty<AchievementFlag>();
+    public required IReadOnlyCollection<AchievementFlag> Flags { get; init; }
 
-    public IReadOnlyCollection<AchievementTier> Tiers { get; init; } =
-        Array.Empty<AchievementTier>();
+    public required IReadOnlyCollection<AchievementTier> Tiers { get; init; }
 
-    public IReadOnlyCollection<AchievementReward>? Rewards { get; init; }
+    public required IReadOnlyCollection<AchievementReward>? Rewards { get; init; }
 
-    public IReadOnlyCollection<AchievementBit>? Bits { get; init; }
+    public required IReadOnlyCollection<AchievementBit>? Bits { get; init; }
 
-    public IReadOnlyCollection<int>? Prerequisites { get; init; }
+    public required IReadOnlyCollection<int>? Prerequisites { get; init; }
 
     /// <remarks>Can be -1 for repeatable achievements that don't award points.</remarks>
-    public int? PointCap { get; init; }
+    public required int? PointCap { get; init; }
 }

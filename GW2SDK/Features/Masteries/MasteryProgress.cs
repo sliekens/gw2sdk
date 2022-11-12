@@ -7,7 +7,7 @@ namespace GW2SDK.Masteries;
 [DataTransferObject]
 public sealed record MasteryProgress
 {
-    public int Id { get; init; }
+    public required int Id { get; init; }
 
-    public int Level { get; init; }
+    public required int Level { get; init; }
 }

@@ -8,5 +8,5 @@ namespace GW2SDK.Professions;
 [DataTransferObject]
 public record TrainingObjective
 {
-    public int Cost { get; init; }
+    public required int Cost { get; init; }
 }

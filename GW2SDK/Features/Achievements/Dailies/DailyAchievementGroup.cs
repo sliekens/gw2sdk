@@ -9,18 +9,13 @@ namespace GW2SDK.Achievements.Dailies;
 [DataTransferObject]
 public sealed record DailyAchievementGroup
 {
-    public IReadOnlyCollection<DailyAchievement> Pve { get; init; } =
-        Array.Empty<DailyAchievement>();
+    public required IReadOnlyCollection<DailyAchievement> Pve { get; init; }
 
-    public IReadOnlyCollection<DailyAchievement> Pvp { get; init; } =
-        Array.Empty<DailyAchievement>();
+    public required IReadOnlyCollection<DailyAchievement> Pvp { get; init; }
 
-    public IReadOnlyCollection<DailyAchievement> Wvw { get; init; } =
-        Array.Empty<DailyAchievement>();
+    public required IReadOnlyCollection<DailyAchievement> Wvw { get; init; }
 
-    public IReadOnlyCollection<DailyAchievement> Fractals { get; init; } =
-        Array.Empty<DailyAchievement>();
+    public required IReadOnlyCollection<DailyAchievement> Fractals { get; init; }
 
-    public IReadOnlyCollection<DailyAchievement> Special { get; init; } =
-        Array.Empty<DailyAchievement>();
+    public required IReadOnlyCollection<DailyAchievement> Special { get; init; }
 }

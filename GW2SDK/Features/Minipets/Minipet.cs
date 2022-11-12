@@ -7,15 +7,15 @@ namespace GW2SDK.Minipets;
 [DataTransferObject]
 public sealed record Minipet
 {
-    public int Id { get; init; }
+    public required int Id { get; init; }
 
-    public string Name { get; init; } = "";
+    public required string Name { get; init; }
 
-    public string Unlock { get; init; } = "";
+    public required string Unlock { get; init; }
 
-    public string Icon { get; init; } = "";
+    public required string Icon { get; init; }
 
-    public int Order { get; init; }
+    public required int Order { get; init; }
 
-    public int ItemId { get; init; }
+    public required int ItemId { get; init; }
 }

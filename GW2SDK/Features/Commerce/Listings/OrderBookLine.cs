@@ -7,9 +7,9 @@ namespace GW2SDK.Commerce.Listings;
 [DataTransferObject]
 public sealed record OrderBookLine
 {
-    public int Listings { get; init; }
+    public required int Listings { get; init; }
 
-    public int Quantity { get; init; }
+    public required int Quantity { get; init; }
 
-    public Coin UnitPrice { get; init; }
+    public required Coin UnitPrice { get; init; }
 }

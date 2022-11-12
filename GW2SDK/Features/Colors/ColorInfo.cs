@@ -8,15 +8,15 @@ namespace GW2SDK.Colors;
 [DataTransferObject]
 public sealed record ColorInfo
 {
-    public int Brightness { get; init; }
+    public required int Brightness { get; init; }
 
-    public double Contrast { get; init; }
+    public required double Contrast { get; init; }
 
-    public int Hue { get; init; }
+    public required int Hue { get; init; }
 
-    public double Saturation { get; init; }
+    public required double Saturation { get; init; }
 
-    public double Lightness { get; init; }
+    public required double Lightness { get; init; }
 
-    public Color Rgb { get; init; }
+    public required Color Rgb { get; init; }
 }

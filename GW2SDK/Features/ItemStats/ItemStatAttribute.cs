@@ -7,9 +7,9 @@ namespace GW2SDK.ItemStats;
 [DataTransferObject]
 public sealed record ItemStatAttribute
 {
-    public UpgradeAttributeName Attribute { get; init; }
+    public required UpgradeAttributeName Attribute { get; init; }
 
-    public double Multiplier { get; init; }
+    public required double Multiplier { get; init; }
 
-    public int Value { get; init; }
+    public required int Value { get; init; }
 }

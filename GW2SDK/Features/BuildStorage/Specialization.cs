@@ -9,8 +9,8 @@ namespace GW2SDK.BuildStorage;
 [DataTransferObject]
 public sealed record Specialization
 {
-    public int? Id { get; init; }
+    public required int? Id { get; init; }
 
     // Always length 3
-    public IReadOnlyCollection<int?> Traits { get; init; } = Array.Empty<int?>();
+    public required IReadOnlyCollection<int?> Traits { get; init; }
 }

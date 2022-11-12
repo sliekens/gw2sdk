@@ -9,31 +9,30 @@ namespace GW2SDK.Achievements.Categories;
 [DataTransferObject]
 public sealed record AchievementCategory
 {
-    public int Id { get; init; }
+    public required int Id { get; init; }
 
-    public string Name { get; init; } = "";
+    public required string Name { get; init; }
 
-    public string Description { get; init; } = "";
+    public required string Description { get; init; }
 
-    public int Order { get; init; }
+    public required int Order { get; init; }
 
-    public string Icon { get; init; } = "";
+    public required string Icon { get; init; }
 
-    public IReadOnlyCollection<AchievementRef> Achievements { get; init; } =
-        Array.Empty<AchievementRef>();
+    public required IReadOnlyCollection<AchievementRef> Achievements { get; init; }
 
-    public IReadOnlyCollection<AchievementRef>? Tomorrow { get; init; }
+    public required IReadOnlyCollection<AchievementRef>? Tomorrow { get; init; }
 }
 
 [PublicAPI]
 [DataTransferObject]
 public sealed record AchievementRef
 {
-    public int Id { get; init; }
+    public required int Id { get; init; }
 
-    public ProductRequirement? RequiredAccess { get; init; }
+    public required ProductRequirement? RequiredAccess { get; init; }
 
-    public IReadOnlyCollection<AchievementFlag>? Flags { get; init; }
+    public required IReadOnlyCollection<AchievementFlag>? Flags { get; init; }
 
-    public LevelRequirement? Level { get; init; }
+    public required LevelRequirement? Level { get; init; }
 }

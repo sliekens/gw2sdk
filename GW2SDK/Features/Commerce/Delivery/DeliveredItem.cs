@@ -7,7 +7,7 @@ namespace GW2SDK.Commerce.Delivery;
 [DataTransferObject]
 public sealed record DeliveredItem
 {
-    public int Id { get; init; }
+    public required int Id { get; init; }
 
-    public int Count { get; init; }
+    public required int Count { get; init; }
 }

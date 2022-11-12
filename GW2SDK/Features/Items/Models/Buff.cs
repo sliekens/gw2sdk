@@ -7,7 +7,7 @@ namespace GW2SDK.Items;
 [DataTransferObject]
 public sealed record Buff
 {
-    public int SkillId { get; init; }
+    public required int SkillId { get; init; }
 
-    public string Description { get; init; } = "";
+    public required string Description { get; init; }
 }

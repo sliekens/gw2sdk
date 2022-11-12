@@ -10,35 +10,35 @@ namespace GW2SDK.Skills;
 [DataTransferObject]
 public record Skill
 {
-    public int Id { get; init; }
+    public required int Id { get; init; }
 
-    public string Name { get; init; } = "";
+    public required string Name { get; init; }
 
-    public IReadOnlyCollection<SkillFact>? Facts { get; init; }
+    public required IReadOnlyCollection<SkillFact>? Facts { get; init; }
 
-    public IReadOnlyCollection<TraitedSkillFact>? TraitedFacts { get; init; }
+    public required IReadOnlyCollection<TraitedSkillFact>? TraitedFacts { get; init; }
 
-    public string Description { get; init; } = "";
+    public required string Description { get; init; }
 
-    public string? Icon { get; init; } = "";
+    public required string? Icon { get; init; }
 
-    public WeaponType? WeaponType { get; init; }
+    public required WeaponType? WeaponType { get; init; }
 
-    public IReadOnlyCollection<ProfessionName>? Professions { get; init; }
+    public required IReadOnlyCollection<ProfessionName>? Professions { get; init; }
 
-    public SkillSlot? Slot { get; init; }
+    public required SkillSlot? Slot { get; init; }
 
-    public string ChatLink { get; init; } = "";
+    public required string ChatLink { get; init; }
 
-    public IReadOnlyCollection<SkillFlag> SkillFlag { get; init; } = Array.Empty<SkillFlag>();
+    public required IReadOnlyCollection<SkillFlag> SkillFlag { get; init; }
 
-    public IReadOnlyCollection<SkillCategoryName>? Categories { get; init; }
+    public required IReadOnlyCollection<SkillCategoryName>? Categories { get; init; }
 
-    public int? FlipSkill { get; init; }
+    public required int? FlipSkill { get; init; }
 
-    public int? NextChain { get; init; }
+    public required int? NextChain { get; init; }
 
-    public int? PreviousChain { get; init; }
+    public required int? PreviousChain { get; init; }
 
-    public int? Specialization { get; init; }
+    public required int? Specialization { get; init; }
 }

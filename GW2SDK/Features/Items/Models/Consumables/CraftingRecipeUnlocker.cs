@@ -6,7 +6,7 @@ namespace GW2SDK.Items;
 [PublicAPI]
 public sealed record CraftingRecipeUnlocker : Unlocker
 {
-    public int RecipeId { get; init; }
+    public required int RecipeId { get; init; }
 
-    public IReadOnlyCollection<int>? ExtraRecipeIds { get; init; }
+    public required IReadOnlyCollection<int>? ExtraRecipeIds { get; init; }
 }

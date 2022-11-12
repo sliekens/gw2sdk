@@ -7,7 +7,7 @@ namespace GW2SDK.Commerce.Exchange;
 [DataTransferObject]
 public sealed record GemsForGoldExchange
 {
-    public Coin CoinsToReceive { get; init; }
+    public required Coin CoinsToReceive { get; init; }
 
-    public Coin CoinsPerGem { get; init; }
+    public required Coin CoinsPerGem { get; init; }
 }

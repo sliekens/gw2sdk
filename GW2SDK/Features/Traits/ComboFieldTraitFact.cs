@@ -7,5 +7,5 @@ namespace GW2SDK.Traits;
 [DataTransferObject]
 public sealed record ComboFieldTraitFact : TraitFact
 {
-    public ComboFieldName Field { get; init; }
+    public required ComboFieldName Field { get; init; }
 }

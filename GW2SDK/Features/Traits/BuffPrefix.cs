@@ -7,11 +7,11 @@ namespace GW2SDK.Traits;
 [DataTransferObject]
 public sealed record BuffPrefix
 {
-    public string Text { get; init; } = "";
+    public required string Text { get; init; }
 
-    public string Icon { get; init; } = "";
+    public required string Icon { get; init; }
 
-    public string Status { get; init; } = "";
+    public required string Status { get; init; }
 
-    public string Description { get; init; } = "";
+    public required string Description { get; init; }
 }

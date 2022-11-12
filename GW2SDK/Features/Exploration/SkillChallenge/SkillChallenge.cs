@@ -9,7 +9,7 @@ namespace GW2SDK.Exploration.SkillChallenge;
 [DataTransferObject]
 public sealed record SkillChallenge
 {
-    public string Id { get; init; } = "";
+    public required string Id { get; init; }
 
-    public IReadOnlyCollection<double> Coordinates { get; init; } = Array.Empty<double>();
+    public required IReadOnlyCollection<double> Coordinates { get; init; }
 }

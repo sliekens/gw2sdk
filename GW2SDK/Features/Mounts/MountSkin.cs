@@ -9,13 +9,13 @@ namespace GW2SDK.Mounts;
 [DataTransferObject]
 public sealed record MountSkin
 {
-    public int Id { get; init; }
+    public required int Id { get; init; }
 
-    public string Name { get; init; } = "";
+    public required string Name { get; init; }
 
-    public string Icon { get; init; } = "";
+    public required string Icon { get; init; }
 
-    public IReadOnlyCollection<DyeSlot> DyeSlots { get; init; } = Array.Empty<DyeSlot>();
+    public required IReadOnlyCollection<DyeSlot> DyeSlots { get; init; }
 
-    public MountName Mount { get; init; }
+    public required MountName Mount { get; init; }
 }

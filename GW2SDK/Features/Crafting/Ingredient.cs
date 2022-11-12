@@ -8,11 +8,11 @@ namespace GW2SDK.Crafting;
 [DataTransferObject]
 public sealed record Ingredient
 {
-    public IngredientKind Kind { get; init; }
+    public required IngredientKind Kind { get; init; }
 
-    public int Id { get; init; }
+    public required int Id { get; init; }
 
-    public int Count { get; init; }
+    public required int Count { get; init; }
 }
 
 [PublicAPI]

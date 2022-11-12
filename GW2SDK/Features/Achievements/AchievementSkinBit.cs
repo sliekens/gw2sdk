@@ -5,5 +5,5 @@ namespace GW2SDK.Achievements;
 [PublicAPI]
 public sealed record AchievementSkinBit : AchievementBit
 {
-    public int Id { get; init; }
+    public required int Id { get; init; }
 }

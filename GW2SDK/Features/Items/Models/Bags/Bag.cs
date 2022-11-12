@@ -5,7 +5,7 @@ namespace GW2SDK.Items;
 [PublicAPI]
 public sealed record Bag : Item
 {
-    public bool NoSellOrSort { get; init; }
+    public required bool NoSellOrSort { get; init; }
 
-    public int Size { get; init; }
+    public required int Size { get; init; }
 }

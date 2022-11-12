@@ -8,5 +8,5 @@ namespace GW2SDK.Traits;
 [DataTransferObject]
 public sealed record TimeTraitFact : TraitFact
 {
-    public TimeSpan Duration { get; init; }
+    public required TimeSpan Duration { get; init; }
 }

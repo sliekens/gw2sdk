@@ -7,11 +7,11 @@ namespace GW2SDK.Meta;
 [DataTransferObject]
 public sealed record Route
 {
-    public string Path { get; init; } = "";
+    public required string Path { get; init; }
 
-    public bool Multilingual { get; init; }
+    public required bool Multilingual { get; init; }
 
-    public bool RequiresAuthorization { get; init; }
+    public required bool RequiresAuthorization { get; init; }
 
-    public bool Active { get; init; }
+    public required bool Active { get; init; }
 }

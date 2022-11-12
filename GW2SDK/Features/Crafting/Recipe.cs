@@ -10,22 +10,21 @@ namespace GW2SDK.Crafting;
 [DataTransferObject]
 public record Recipe
 {
-    public int Id { get; init; }
+    public required int Id { get; init; }
 
-    public int OutputItemId { get; init; }
+    public required int OutputItemId { get; init; }
 
-    public int OutputItemCount { get; init; }
+    public required int OutputItemCount { get; init; }
 
-    public int MinRating { get; init; }
+    public required int MinRating { get; init; }
 
-    public TimeSpan TimeToCraft { get; init; }
+    public required TimeSpan TimeToCraft { get; init; }
 
-    public IReadOnlyCollection<CraftingDisciplineName> Disciplines { get; init; } =
-        Array.Empty<CraftingDisciplineName>();
+    public required IReadOnlyCollection<CraftingDisciplineName> Disciplines { get; init; }
 
-    public IReadOnlyCollection<RecipeFlag> Flags { get; init; } = Array.Empty<RecipeFlag>();
+    public required IReadOnlyCollection<RecipeFlag> Flags { get; init; }
 
-    public IReadOnlyCollection<Ingredient> Ingredients { get; init; } = Array.Empty<Ingredient>();
+    public required IReadOnlyCollection<Ingredient> Ingredients { get; init; }
 
-    public string ChatLink { get; init; } = "";
+    public required string ChatLink { get; init; }
 }

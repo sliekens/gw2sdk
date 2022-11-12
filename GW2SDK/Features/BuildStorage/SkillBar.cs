@@ -9,10 +9,10 @@ namespace GW2SDK.BuildStorage;
 [DataTransferObject]
 public sealed record SkillBar
 {
-    public int? Heal { get; init; }
+    public required int? Heal { get; init; }
 
     // Always length 3
-    public IReadOnlyCollection<int?> Utilities { get; init; } = Array.Empty<int?>();
+    public required IReadOnlyCollection<int?> Utilities { get; init; }
 
-    public int? Elite { get; init; }
+    public required int? Elite { get; init; }
 }

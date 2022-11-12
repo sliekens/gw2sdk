@@ -7,7 +7,7 @@ namespace GW2SDK.Meta;
 [DataTransferObject]
 public sealed record Schema
 {
-    public string Version { get; init; } = "latest";
+    public required string Version { get; init; }
 
-    public string Description { get; init; } = "";
+    public required string Description { get; init; }
 }

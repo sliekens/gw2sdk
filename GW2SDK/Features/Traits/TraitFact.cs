@@ -8,7 +8,7 @@ namespace GW2SDK.Traits;
 [DataTransferObject]
 public record TraitFact
 {
-    public string Text { get; init; } = "";
+    public required string Text { get; init; }
 
-    public string Icon { get; init; } = "";
+    public required string Icon { get; init; }
 }

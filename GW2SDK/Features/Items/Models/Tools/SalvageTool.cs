@@ -5,5 +5,5 @@ namespace GW2SDK.Items;
 [PublicAPI]
 public sealed record SalvageTool : Tool
 {
-    public int Charges { get; init; }
+    public required int Charges { get; init; }
 }

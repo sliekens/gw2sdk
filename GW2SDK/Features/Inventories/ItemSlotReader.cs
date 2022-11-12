@@ -89,6 +89,7 @@ public static class ItemSlotReader
             Id = id.GetValue(),
             Count = count.GetValue(),
             Charges = charges.GetValue(),
+            Skin = skin.GetValue(),
             Upgrades = upgrades.SelectMany(value => value.GetInt32()),
             UpgradeSlotIndices = upgradeSlotIndices.SelectMany(value => value.GetInt32()),
             Infusions = infusions.SelectMany(value => value.GetInt32()),

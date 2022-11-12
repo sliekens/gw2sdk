@@ -9,25 +9,25 @@ namespace GW2SDK.Skins;
 [DataTransferObject]
 public sealed record DyeSlotInfo
 {
-    public IReadOnlyCollection<DyeSlot?> Default { get; init; } = Array.Empty<DyeSlot?>();
+    public required IReadOnlyCollection<DyeSlot?> Default { get; init; }
 
-    public IReadOnlyCollection<DyeSlot?>? AsuraFemale { get; init; }
+    public required IReadOnlyCollection<DyeSlot?>? AsuraFemale { get; init; }
 
-    public IReadOnlyCollection<DyeSlot?>? AsuraMale { get; init; }
+    public required IReadOnlyCollection<DyeSlot?>? AsuraMale { get; init; }
 
-    public IReadOnlyCollection<DyeSlot?>? CharrFemale { get; init; }
+    public required IReadOnlyCollection<DyeSlot?>? CharrFemale { get; init; }
 
-    public IReadOnlyCollection<DyeSlot?>? CharrMale { get; init; }
+    public required IReadOnlyCollection<DyeSlot?>? CharrMale { get; init; }
 
-    public IReadOnlyCollection<DyeSlot?>? HumanFemale { get; init; }
+    public required IReadOnlyCollection<DyeSlot?>? HumanFemale { get; init; }
 
-    public IReadOnlyCollection<DyeSlot?>? HumanMale { get; init; }
+    public required IReadOnlyCollection<DyeSlot?>? HumanMale { get; init; }
 
-    public IReadOnlyCollection<DyeSlot?>? NornFemale { get; init; }
+    public required IReadOnlyCollection<DyeSlot?>? NornFemale { get; init; }
 
-    public IReadOnlyCollection<DyeSlot?>? NornMale { get; init; }
+    public required IReadOnlyCollection<DyeSlot?>? NornMale { get; init; }
 
-    public IReadOnlyCollection<DyeSlot?>? SylvariFemale { get; init; }
+    public required IReadOnlyCollection<DyeSlot?>? SylvariFemale { get; init; }
 
-    public IReadOnlyCollection<DyeSlot?>? SylvariMale { get; init; }
+    public required IReadOnlyCollection<DyeSlot?>? SylvariMale { get; init; }
 }

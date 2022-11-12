@@ -7,7 +7,7 @@ namespace GW2SDK.Exploration;
 [PublicAPI]
 public sealed record MapArea
 {
-    public PointF SouthWest { get; init; }
+    public required PointF SouthWest { get; init; }
 
-    public PointF NorthEast { get; init; }
+    public required PointF NorthEast { get; init; }
 }

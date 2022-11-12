@@ -9,12 +9,11 @@ namespace GW2SDK.Professions;
 [DataTransferObject]
 public sealed record Training
 {
-    public int Id { get; init; }
+    public required int Id { get; init; }
 
-    public string Name { get; init; } = "";
+    public required string Name { get; init; }
 
-    public TrainingCategory Category { get; init; }
+    public required TrainingCategory Category { get; init; }
 
-    public IReadOnlyCollection<TrainingObjective> Track { get; init; } =
-        Array.Empty<TrainingObjective>();
+    public required IReadOnlyCollection<TrainingObjective> Track { get; init; }
 }

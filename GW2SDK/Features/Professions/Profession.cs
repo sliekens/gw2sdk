@@ -9,28 +9,26 @@ namespace GW2SDK.Professions;
 [DataTransferObject]
 public sealed record Profession
 {
-    public ProfessionName Id { get; init; }
+    public required ProfessionName Id { get; init; }
 
     /// <summary>The localized profession name.</summary>
-    public string Name { get; init; } = "";
+    public required string Name { get; init; }
 
-    public int Code { get; init; }
+    public required int Code { get; init; }
 
-    public string Icon { get; init; } = "";
+    public required string Icon { get; init; }
 
-    public string IconBig { get; init; } = "";
+    public required string IconBig { get; init; }
 
-    public IReadOnlyCollection<int> Specializations { get; init; } = Array.Empty<int>();
+    public required IReadOnlyCollection<int> Specializations { get; init; }
 
-    public IDictionary<string, WeaponProficiency> Weapons { get; init; } =
-        new Dictionary<string, WeaponProficiency>();
+    public required IDictionary<string, WeaponProficiency> Weapons { get; init; }
 
-    public IReadOnlyCollection<ProfessionFlag> Flags { get; init; } = Array.Empty<ProfessionFlag>();
+    public required IReadOnlyCollection<ProfessionFlag> Flags { get; init; }
 
-    public IReadOnlyCollection<SkillReference> Skills { get; init; } =
-        Array.Empty<SkillReference>();
+    public required IReadOnlyCollection<SkillReference> Skills { get; init; }
 
-    public IReadOnlyCollection<Training> Training { get; init; } = Array.Empty<Training>();
+    public required IReadOnlyCollection<Training> Training { get; init; }
 
-    public IDictionary<int, int> SkillsByPalette { get; init; } = new Dictionary<int, int>();
+    public required IDictionary<int, int> SkillsByPalette { get; init; }
 }

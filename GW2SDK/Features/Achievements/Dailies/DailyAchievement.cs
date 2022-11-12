@@ -7,9 +7,9 @@ namespace GW2SDK.Achievements.Dailies;
 [DataTransferObject]
 public sealed record DailyAchievement
 {
-    public int Id { get; init; }
+    public required int Id { get; init; }
 
-    public LevelRequirement Level { get; init; } = new();
+    public required LevelRequirement Level { get; init; }
 
-    public ProductRequirement? RequiredAccess { get; init; }
+    public required ProductRequirement? RequiredAccess { get; init; }
 }

@@ -6,5 +6,5 @@ namespace GW2SDK.Items;
 [PublicAPI]
 public sealed record DefaultUpgradeComponent : UpgradeComponent
 {
-    public IReadOnlyCollection<string>? Bonuses { get; init; }
+    public required IReadOnlyCollection<string>? Bonuses { get; init; }
 }

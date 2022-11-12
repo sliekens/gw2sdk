@@ -9,9 +9,9 @@ namespace GW2SDK.Meta;
 [DataTransferObject]
 public sealed record ApiVersion
 {
-    public IReadOnlyCollection<string> Languages { get; init; } = Array.Empty<string>();
+    public required IReadOnlyCollection<string> Languages { get; init; }
 
-    public IReadOnlyCollection<Route> Routes { get; init; } = Array.Empty<Route>();
+    public required IReadOnlyCollection<Route> Routes { get; init; }
 
-    public IReadOnlyCollection<Schema> SchemaVersions { get; init; } = Array.Empty<Schema>();
+    public required IReadOnlyCollection<Schema> SchemaVersions { get; init; }
 }

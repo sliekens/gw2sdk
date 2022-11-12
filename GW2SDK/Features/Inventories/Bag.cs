@@ -9,12 +9,12 @@ namespace GW2SDK.Inventories;
 public sealed record Bag
 {
     /// <summary>The current bag's item ID.</summary>
-    public int Id { get; init; }
+    public required int Id { get; init; }
 
     /// <summary>The current bag's capacity.</summary>
-    public int Size { get; init; }
+    public required int Size { get; init; }
 
     /// <summary>The current bag's inventory, sorted by in-game order. Enumerated values can contain <c>null</c> when some item
     /// slots are empty.</summary>
-    public Inventory Inventory { get; init; } = new(Array.Empty<ItemSlot?>());
+    public required Inventory Inventory { get; init; }
 }

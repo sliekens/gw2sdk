@@ -9,20 +9,19 @@ namespace GW2SDK.Items;
 [Inheritable]
 public record Armor : Item
 {
-    public int DefaultSkin { get; init; }
+    public required int DefaultSkin { get; init; }
 
-    public WeightClass WeightClass { get; init; }
+    public required WeightClass WeightClass { get; init; }
 
-    public int Defense { get; init; }
+    public required int Defense { get; init; }
 
-    public IReadOnlyCollection<InfusionSlot> InfusionSlots { get; init; } =
-        Array.Empty<InfusionSlot>();
+    public required IReadOnlyCollection<InfusionSlot> InfusionSlots { get; init; }
 
-    public double AttributeAdjustment { get; init; }
+    public required double AttributeAdjustment { get; init; }
 
-    public InfixUpgrade? Prefix { get; init; }
+    public required InfixUpgrade? Prefix { get; init; }
 
-    public int? SuffixItemId { get; init; }
+    public required int? SuffixItemId { get; init; }
 
-    public IReadOnlyCollection<int>? StatChoices { get; init; }
+    public required IReadOnlyCollection<int>? StatChoices { get; init; }
 }

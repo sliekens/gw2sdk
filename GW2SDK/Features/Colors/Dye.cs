@@ -10,22 +10,21 @@ namespace GW2SDK.Colors;
 [DataTransferObject]
 public sealed record Dye
 {
-    public int Id { get; init; }
+    public required int Id { get; init; }
 
-    public string Name { get; init; } = "";
+    public required string Name { get; init; }
 
-    public Color BaseRgb { get; init; }
+    public required Color BaseRgb { get; init; }
 
-    public ColorInfo Cloth { get; init; } = new();
+    public required ColorInfo Cloth { get; init; }
 
-    public ColorInfo Leather { get; init; } = new();
+    public required ColorInfo Leather { get; init; }
 
-    public ColorInfo Metal { get; init; } = new();
+    public required ColorInfo Metal { get; init; }
 
-    public ColorInfo? Fur { get; init; }
+    public required ColorInfo? Fur { get; init; }
 
-    public int? Item { get; init; }
+    public required int? Item { get; init; }
 
-    public IReadOnlyCollection<ColorCategoryName> Categories { get; init; } =
-        Array.Empty<ColorCategoryName>();
+    public required IReadOnlyCollection<ColorCategoryName> Categories { get; init; }
 }

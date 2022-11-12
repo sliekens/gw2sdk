@@ -9,9 +9,9 @@ namespace GW2SDK.Emotes;
 [DataTransferObject]
 public sealed record Emote
 {
-    public string Id { get; init; } = "";
+    public required string Id { get; init; }
 
-    public IReadOnlyCollection<string> Commands { get; init; } = Array.Empty<string>();
+    public required IReadOnlyCollection<string> Commands { get; init; }
 
-    public IReadOnlyCollection<int> UnlockItems { get; init; } = Array.Empty<int>();
+    public required IReadOnlyCollection<int> UnlockItems { get; init; }
 }

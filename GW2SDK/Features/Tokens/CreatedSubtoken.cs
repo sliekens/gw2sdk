@@ -7,5 +7,5 @@ namespace GW2SDK.Tokens;
 [DataTransferObject]
 public sealed record CreatedSubtoken
 {
-    public string Subtoken { get; init; } = "";
+    public required string Subtoken { get; init; }
 }

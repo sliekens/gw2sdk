@@ -7,11 +7,11 @@ namespace GW2SDK.Guilds.Upgrades;
 [DataTransferObject]
 public sealed record GuildUpgradeCost
 {
-    public GuildUpgradeCostKind Kind { get; init; }
+    public required GuildUpgradeCostKind Kind { get; init; }
 
-    public string Name { get; init; } = "";
+    public required string Name { get; init; }
 
-    public int Count { get; init; }
+    public required int Count { get; init; }
 
-    public int? ItemId { get; init; }
+    public required int? ItemId { get; init; }
 }

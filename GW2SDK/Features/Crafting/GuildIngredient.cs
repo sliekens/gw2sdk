@@ -7,7 +7,7 @@ namespace GW2SDK.Crafting;
 [DataTransferObject]
 public sealed record GuildIngredient
 {
-    public int UpgradeId { get; init; }
+    public required int UpgradeId { get; init; }
 
-    public int Count { get; init; }
+    public required int Count { get; init; }
 }

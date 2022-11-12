@@ -9,10 +9,9 @@ namespace GW2SDK.Items;
 [DataTransferObject]
 public sealed record InfixUpgrade
 {
-    public int ItemstatsId { get; init; }
+    public required int ItemstatsId { get; init; }
 
-    public IReadOnlyCollection<UpgradeAttribute> Attributes { get; init; } =
-        Array.Empty<UpgradeAttribute>();
+    public required IReadOnlyCollection<UpgradeAttribute> Attributes { get; init; }
 
-    public Buff? Buff { get; init; }
+    public required Buff? Buff { get; init; }
 }

@@ -7,7 +7,7 @@ namespace GW2SDK.Dungeons;
 [DataTransferObject]
 public sealed record DungeonPath
 {
-    public string Id { get; init; } = "";
+    public required string Id { get; init; }
 
-    public DungeonKind Kind { get; init; }
+    public required DungeonKind Kind { get; init; }
 }

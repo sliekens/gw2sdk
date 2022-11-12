@@ -9,9 +9,9 @@ namespace GW2SDK.Exploration.MasteryPoints;
 [DataTransferObject]
 public sealed record MasteryPoint
 {
-    public int Id { get; init; }
+    public required int Id { get; init; }
 
-    public MasteryRegionName Region { get; init; }
+    public required MasteryRegionName Region { get; init; }
 
-    public IReadOnlyCollection<double> Coordinates { get; init; } = Array.Empty<double>();
+    public required IReadOnlyCollection<double> Coordinates { get; init; }
 }

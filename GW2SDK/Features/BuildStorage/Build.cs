@@ -10,23 +10,22 @@ namespace GW2SDK.BuildStorage;
 public sealed record Build
 {
     /// <summary>The player-chosen name of this build.</summary>
-    public string Name { get; init; } = "";
+    public required string Name { get; init; }
 
-    public ProfessionName Profession { get; init; }
+    public required ProfessionName Profession { get; init; }
 
     // Always length 3
-    public IReadOnlyCollection<Specialization> Specializations { get; init; } =
-        Array.Empty<Specialization>();
+    public required IReadOnlyCollection<Specialization> Specializations { get; init; }
 
-    public SkillBar Skills { get; init; } = new();
+    public required SkillBar Skills { get; init; }
 
-    public SkillBar AquaticSkills { get; init; } = new();
+    public required SkillBar AquaticSkills { get; init; }
 
-    public PetSkillBar? Pets { get; init; }
-
-    // Always length 2 or missing
-    public IReadOnlyCollection<string?>? Legends { get; init; }
+    public required PetSkillBar? Pets { get; init; }
 
     // Always length 2 or missing
-    public IReadOnlyCollection<string?>? AquaticLegends { get; init; }
+    public required IReadOnlyCollection<string?>? Legends { get; init; }
+
+    // Always length 2 or missing
+    public required IReadOnlyCollection<string?>? AquaticLegends { get; init; }
 }

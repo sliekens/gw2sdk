@@ -8,11 +8,11 @@ namespace GW2SDK.Traits;
 public sealed record CompoundTraitFact
 {
     /// <summary>The ID of the trait that activates this combination.</summary>
-    public int RequiresTrait { get; init; }
+    public required int RequiresTrait { get; init; }
 
     /// <summary>The index of the fact that is replaced by this <see cref="Fact" />, or <c>null</c> if it is to be appended to
     /// the existing facts.</summary>
-    public int? Overrides { get; init; }
+    public required int? Overrides { get; init; }
 
-    public TraitFact Fact { get; init; } = new();
+    public required TraitFact Fact { get; init; }
 }

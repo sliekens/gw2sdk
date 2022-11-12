@@ -7,9 +7,9 @@ namespace GW2SDK.Worlds;
 [DataTransferObject]
 public sealed record World
 {
-    public int Id { get; init; }
+    public required int Id { get; init; }
 
-    public string Name { get; init; } = "";
+    public required string Name { get; init; }
 
-    public WorldPopulation Population { get; init; }
+    public required WorldPopulation Population { get; init; }
 }

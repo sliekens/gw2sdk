@@ -9,13 +9,13 @@ namespace GW2SDK.Quests;
 [DataTransferObject]
 public sealed record Quest
 {
-    public int Id { get; init; }
+    public required int Id { get; init; }
 
-    public string Name { get; init; } = "";
+    public required string Name { get; init; }
 
-    public int Level { get; init; }
+    public required int Level { get; init; }
 
-    public int Story { get; init; }
+    public required int Story { get; init; }
 
-    public IReadOnlyCollection<Goal> Goals { get; init; } = Array.Empty<Goal>();
+    public required IReadOnlyCollection<Goal> Goals { get; init; }
 }

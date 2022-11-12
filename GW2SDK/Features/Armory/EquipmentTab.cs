@@ -10,14 +10,14 @@ namespace GW2SDK.Armory;
 public sealed record EquipmentTab
 {
     /// <summary>The number of the current tab.</summary>
-    public int Tab { get; init; }
+    public required int Tab { get; init; }
 
     /// <summary>The player-chosen name of this equipment tab.</summary>
-    public string Name { get; init; } = "";
+    public required string Name { get; init; }
 
     /// <summary>The selected equipment on this tab.</summary>
-    public IEnumerable<EquipmentItem> Equipment { get; init; } = Array.Empty<EquipmentItem>();
+    public required IEnumerable<EquipmentItem> Equipment { get; init; }
 
     /// <summary>The selected PvP equipment on this tab.</summary>
-    public PvpEquipment PvpEquipment { get; init; } = new();
+    public required PvpEquipment PvpEquipment { get; init; }
 }

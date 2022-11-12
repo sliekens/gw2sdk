@@ -8,8 +8,8 @@ namespace GW2SDK.Accounts;
 public sealed record WvwAbility
 {
     /// <summary>The ID of the current ability.</summary>
-    public int Id { get; init; }
+    public required int Id { get; init; }
 
     /// <summary>The current rank of the ability.</summary>
-    public int Rank { get; init; }
+    public required int Rank { get; init; }
 }

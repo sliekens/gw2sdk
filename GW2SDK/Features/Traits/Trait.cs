@@ -8,25 +8,25 @@ namespace GW2SDK.Traits;
 [DataTransferObject]
 public sealed record Trait
 {
-    public int Id { get; init; }
+    public required int Id { get; init; }
 
-    public int Tier { get; init; }
+    public required int Tier { get; init; }
 
-    public int Order { get; init; }
+    public required int Order { get; init; }
 
-    public string Name { get; init; } = "";
+    public required string Name { get; init; }
 
-    public string Description { get; init; } = "";
+    public required string Description { get; init; }
 
-    public TraitSlot Slot { get; init; }
+    public required TraitSlot Slot { get; init; }
 
-    public IReadOnlyCollection<TraitFact>? Facts { get; init; }
+    public required IReadOnlyCollection<TraitFact>? Facts { get; init; }
 
-    public IReadOnlyCollection<CompoundTraitFact>? TraitedFacts { get; init; }
+    public required IReadOnlyCollection<CompoundTraitFact>? TraitedFacts { get; init; }
 
-    public IReadOnlyCollection<TraitSkill>? Skills { get; init; }
+    public required IReadOnlyCollection<TraitSkill>? Skills { get; init; }
 
-    public int SpezializationId { get; init; }
+    public required int SpezializationId { get; init; }
 
-    public string Icon { get; init; } = "";
+    public required string Icon { get; init; }
 }

@@ -7,7 +7,7 @@ namespace GW2SDK.Home.Cats;
 [DataTransferObject]
 public sealed record Cat
 {
-    public int Id { get; init; }
+    public required int Id { get; init; }
 
-    public string Hint { get; init; } = "";
+    public required string Hint { get; init; }
 }

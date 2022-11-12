@@ -9,7 +9,7 @@ namespace GW2SDK.Dungeons;
 [DataTransferObject]
 public sealed record Dungeon
 {
-    public string Id { get; init; } = "";
+    public required string Id { get; init; }
 
-    public IReadOnlyCollection<DungeonPath> Paths { get; init; } = Array.Empty<DungeonPath>();
+    public required IReadOnlyCollection<DungeonPath> Paths { get; init; }
 }

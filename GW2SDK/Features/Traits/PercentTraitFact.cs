@@ -7,5 +7,5 @@ namespace GW2SDK.Traits;
 [DataTransferObject]
 public sealed record PercentTraitFact : TraitFact
 {
-    public double Percent { get; init; }
+    public required double Percent { get; init; }
 }

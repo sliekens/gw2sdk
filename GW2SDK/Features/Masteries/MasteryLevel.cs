@@ -7,15 +7,15 @@ namespace GW2SDK.Masteries;
 [DataTransferObject]
 public sealed record MasteryLevel
 {
-    public string Name { get; init; } = "";
+    public required string Name { get; init; }
 
-    public string Description { get; init; } = "";
+    public required string Description { get; init; }
 
-    public string Instruction { get; init; } = "";
+    public required string Instruction { get; init; }
 
-    public string Icon { get; init; } = "";
+    public required string Icon { get; init; }
 
-    public int PointCost { get; init; }
+    public required int PointCost { get; init; }
 
-    public int ExperienceCost { get; init; }
+    public required int ExperienceCost { get; init; }
 }

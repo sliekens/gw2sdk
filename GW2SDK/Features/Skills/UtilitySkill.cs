@@ -6,13 +6,13 @@ namespace GW2SDK.Skills;
 [PublicAPI]
 public sealed record UtilitySkill : Skill
 {
-    public int? ToolbeltSkill { get; init; }
+    public required int? ToolbeltSkill { get; init; }
 
-    public Attunement? Attunement { get; init; }
+    public required Attunement? Attunement { get; init; }
 
-    public int? Cost { get; init; }
+    public required int? Cost { get; init; }
 
-    public IReadOnlyCollection<int>? BundleSkills { get; init; }
+    public required IReadOnlyCollection<int>? BundleSkills { get; init; }
 
-    public IReadOnlyCollection<SkillReference>? Subskills { get; init; }
+    public required IReadOnlyCollection<SkillReference>? Subskills { get; init; }
 }

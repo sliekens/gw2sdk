@@ -7,9 +7,9 @@ namespace GW2SDK.Traits;
 [DataTransferObject]
 public sealed record BuffConversionTraitFact : TraitFact
 {
-    public int Percent { get; init; }
+    public required int Percent { get; init; }
 
-    public AttributeAdjustTarget Source { get; init; }
+    public required AttributeAdjustTarget Source { get; init; }
 
-    public AttributeAdjustTarget Target { get; init; }
+    public required AttributeAdjustTarget Target { get; init; }
 }

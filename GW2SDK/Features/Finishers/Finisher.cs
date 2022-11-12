@@ -9,17 +9,17 @@ namespace GW2SDK.Finishers;
 [DataTransferObject]
 public sealed record Finisher
 {
-    public int Id { get; init; }
+    public required int Id { get; init; }
 
     /// <remarks>Can be empty.</remarks>
-    public string UnlockDetails { get; init; } = "";
+    public required string UnlockDetails { get; init; }
 
     /// <remarks>Can be empty.</remarks>
-    public IReadOnlyCollection<int> UnlockItems { get; init; } = Array.Empty<int>();
+    public required IReadOnlyCollection<int> UnlockItems { get; init; }
 
-    public int Order { get; init; }
+    public required int Order { get; init; }
 
-    public string Icon { get; init; } = "";
+    public required string Icon { get; init; }
 
-    public string Name { get; init; } = "";
+    public required string Name { get; init; }
 }

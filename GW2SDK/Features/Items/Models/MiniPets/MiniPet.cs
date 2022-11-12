@@ -5,5 +5,5 @@ namespace GW2SDK.Items;
 [PublicAPI]
 public sealed record Minipet : Item
 {
-    public int MinipetId { get; init; }
+    public required int MinipetId { get; init; }
 }

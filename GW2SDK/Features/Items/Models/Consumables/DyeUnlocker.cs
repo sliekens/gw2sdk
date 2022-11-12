@@ -5,5 +5,5 @@ namespace GW2SDK.Items;
 [PublicAPI]
 public sealed record DyeUnlocker : Unlocker
 {
-    public int ColorId { get; init; }
+    public required int ColorId { get; init; }
 }

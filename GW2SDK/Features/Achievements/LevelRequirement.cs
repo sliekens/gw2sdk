@@ -7,7 +7,7 @@ namespace GW2SDK.Achievements;
 [DataTransferObject]
 public sealed record LevelRequirement
 {
-    public int Min { get; init; } = 1;
+    public required int Min { get; init; }
 
-    public int Max { get; init; } = 80;
+    public required int Max { get; init; }
 }

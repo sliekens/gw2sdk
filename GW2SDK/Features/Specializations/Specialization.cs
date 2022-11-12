@@ -9,25 +9,25 @@ namespace GW2SDK.Specializations;
 [DataTransferObject]
 public sealed record Specialization
 {
-    public int Id { get; init; }
+    public required int Id { get; init; }
 
-    public string Name { get; init; } = "";
+    public required string Name { get; init; }
 
-    public ProfessionName Profession { get; init; }
+    public required ProfessionName Profession { get; init; }
 
-    public bool Elite { get; init; }
+    public required bool Elite { get; init; }
 
-    public IReadOnlyCollection<int> MinorTraits { get; init; } = Array.Empty<int>();
+    public required IReadOnlyCollection<int> MinorTraits { get; init; }
 
-    public IReadOnlyCollection<int> MajorTraits { get; init; } = Array.Empty<int>();
+    public required IReadOnlyCollection<int> MajorTraits { get; init; }
 
-    public int? WeaponTrait { get; init; }
+    public required int? WeaponTrait { get; init; }
 
-    public string Icon { get; init; } = "";
+    public required string Icon { get; init; }
 
-    public string Background { get; init; } = "";
+    public required string Background { get; init; }
 
-    public string ProfessionIconBig { get; init; } = "";
+    public required string ProfessionIconBig { get; init; }
 
-    public string ProfessionIcon { get; init; } = "";
+    public required string ProfessionIcon { get; init; }
 }

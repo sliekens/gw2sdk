@@ -9,15 +9,13 @@ namespace GW2SDK.Items;
 [Inheritable]
 public record UpgradeComponent : Item
 {
-    public IReadOnlyCollection<UpgradeComponentFlag> UpgradeComponentFlags { get; init; } =
-        Array.Empty<UpgradeComponentFlag>();
+    public required IReadOnlyCollection<UpgradeComponentFlag> UpgradeComponentFlags { get; init; }
 
-    public IReadOnlyCollection<InfusionSlotFlag> InfusionUpgradeFlags { get; init; } =
-        Array.Empty<InfusionSlotFlag>();
+    public required IReadOnlyCollection<InfusionSlotFlag> InfusionUpgradeFlags { get; init; }
 
-    public double AttributeAdjustment { get; init; }
+    public required double AttributeAdjustment { get; init; }
 
-    public InfixUpgrade Suffix { get; init; } = new();
+    public required InfixUpgrade Suffix { get; init; }
 
-    public string SuffixName { get; init; } = "";
+    public required string SuffixName { get; init; }
 }

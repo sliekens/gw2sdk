@@ -10,15 +10,15 @@ namespace GW2SDK.Exploration.Sectors;
 [DataTransferObject]
 public sealed record Sector
 {
-    public int Id { get; init; }
+    public required int Id { get; init; }
 
-    public string Name { get; init; } = "";
+    public required string Name { get; init; }
 
-    public int Level { get; init; }
+    public required int Level { get; init; }
 
-    public PointF Coordinates { get; init; }
+    public required PointF Coordinates { get; init; }
 
-    public IReadOnlyCollection<PointF> Boundaries { get; init; } = Array.Empty<PointF>();
+    public required IReadOnlyCollection<PointF> Boundaries { get; init; }
 
-    public string ChatLink { get; init; } = "";
+    public required string ChatLink { get; init; }
 }

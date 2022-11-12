@@ -7,7 +7,7 @@ namespace GW2SDK.Items;
 [DataTransferObject]
 public sealed record ItemUpgrade
 {
-    public UpgradeType Upgrade { get; init; }
+    public required UpgradeType Upgrade { get; init; }
 
-    public int ItemId { get; init; }
+    public required int ItemId { get; init; }
 }

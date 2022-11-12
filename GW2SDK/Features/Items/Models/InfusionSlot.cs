@@ -9,8 +9,7 @@ namespace GW2SDK.Items;
 [DataTransferObject]
 public sealed record InfusionSlot
 {
-    public IReadOnlyCollection<InfusionSlotFlag> Flags { get; init; } =
-        Array.Empty<InfusionSlotFlag>();
+    public required IReadOnlyCollection<InfusionSlotFlag> Flags { get; init; }
 
-    public int? ItemId { get; init; }
+    public required int? ItemId { get; init; }
 }

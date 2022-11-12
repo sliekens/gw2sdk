@@ -7,5 +7,5 @@ namespace GW2SDK.Traits;
 [DataTransferObject]
 public sealed record RechargeTraitFact : TraitFact
 {
-    public double Value { get; init; }
+    public required double Value { get; init; }
 }

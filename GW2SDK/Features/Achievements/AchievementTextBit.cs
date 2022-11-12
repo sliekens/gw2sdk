@@ -5,5 +5,5 @@ namespace GW2SDK.Achievements;
 [PublicAPI]
 public sealed record AchievementTextBit : AchievementBit
 {
-    public string Text { get; init; } = "";
+    public required string Text { get; init; }
 }

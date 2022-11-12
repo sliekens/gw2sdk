@@ -10,13 +10,13 @@ namespace GW2SDK.Exploration.Regions;
 [DataTransferObject]
 public sealed record Region
 {
-    public int Id { get; init; }
+    public required int Id { get; init; }
 
-    public string Name { get; init; } = "";
+    public required string Name { get; init; }
 
-    public PointF LabelCoordinates { get; init; }
+    public required PointF LabelCoordinates { get; init; }
 
-    public Area ContinentRectangle { get; init; } = new();
+    public required Area ContinentRectangle { get; init; }
 
-    public Dictionary<int, Chart> Maps { get; init; } = new(0);
+    public required Dictionary<int, Chart> Maps { get; init; }
 }

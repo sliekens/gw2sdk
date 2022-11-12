@@ -9,11 +9,11 @@ namespace GW2SDK.Outfits;
 [DataTransferObject]
 public sealed record Outfit
 {
-    public int Id { get; init; }
+    public required int Id { get; init; }
 
-    public string Name { get; init; } = "";
+    public required string Name { get; init; }
 
-    public string Icon { get; init; } = "";
+    public required string Icon { get; init; }
 
-    public IReadOnlyCollection<int> UnlockItems { get; init; } = Array.Empty<int>();
+    public required IReadOnlyCollection<int> UnlockItems { get; init; }
 }

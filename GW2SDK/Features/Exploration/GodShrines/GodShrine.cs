@@ -9,17 +9,17 @@ namespace GW2SDK.Exploration.GodShrines;
 [DataTransferObject]
 public sealed record GodShrine
 {
-    public int Id { get; init; }
+    public required int Id { get; init; }
 
-    public int PointOfInterestId { get; init; }
+    public required int PointOfInterestId { get; init; }
 
-    public string Name { get; init; } = "";
+    public required string Name { get; init; }
 
-    public string NameContested { get; init; } = "";
+    public required string NameContested { get; init; }
 
-    public string Icon { get; init; } = "";
+    public required string Icon { get; init; }
 
-    public string IconContested { get; init; } = "";
+    public required string IconContested { get; init; }
 
-    public IReadOnlyCollection<double> Coordinates { get; init; } = Array.Empty<double>();
+    public required IReadOnlyCollection<double> Coordinates { get; init; }
 }

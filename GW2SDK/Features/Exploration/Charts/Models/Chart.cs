@@ -16,35 +16,33 @@ namespace GW2SDK.Exploration.Charts;
 [DataTransferObject]
 public sealed record Chart
 {
-    public int Id { get; init; }
+    public required int Id { get; init; }
 
-    public string Name { get; init; } = "";
+    public required string Name { get; init; }
 
-    public int MinLevel { get; init; }
+    public required int MinLevel { get; init; }
 
-    public int MaxLevel { get; init; }
+    public required int MaxLevel { get; init; }
 
-    public int DefaultFloor { get; init; }
+    public required int DefaultFloor { get; init; }
 
-    public PointF? LabelCoordinates { get; init; }
+    public required PointF? LabelCoordinates { get; init; }
 
-    public MapArea ChartRectangle { get; init; } = new();
+    public required MapArea ChartRectangle { get; init; }
 
-    public Area ContinentRectangle { get; init; } = new();
+    public required Area ContinentRectangle { get; init; }
 
-    public Dictionary<int, PointOfInterest> PointsOfInterest { get; init; } = new(0);
+    public required Dictionary<int, PointOfInterest> PointsOfInterest { get; init; }
 
-    public Dictionary<int, Heart> Hearts { get; init; } = new(0);
+    public required Dictionary<int, Heart> Hearts { get; init; }
 
-    public IReadOnlyCollection<SkillChallenge.SkillChallenge> SkillChallenges { get; init; } =
-        Array.Empty<SkillChallenge.SkillChallenge>();
+    public required IReadOnlyCollection<SkillChallenge.SkillChallenge> SkillChallenges { get; init; }
 
-    public Dictionary<int, Sector> Sectors { get; init; } = new(0);
+    public required Dictionary<int, Sector> Sectors { get; init; }
 
-    public IReadOnlyCollection<Adventure> Adventures { get; init; } = Array.Empty<Adventure>();
+    public required IReadOnlyCollection<Adventure> Adventures { get; init; }
 
-    public IReadOnlyCollection<MasteryPoint> MasteryPoints { get; init; } =
-        Array.Empty<MasteryPoint>();
+    public required IReadOnlyCollection<MasteryPoint> MasteryPoints { get; init; }
 
-    public IReadOnlyCollection<GodShrine>? GodShrines { get; init; }
+    public required IReadOnlyCollection<GodShrine>? GodShrines { get; init; }
 }

@@ -6,7 +6,7 @@ namespace GW2SDK.Items;
 [PublicAPI]
 public sealed record DefaultGizmo : Gizmo
 {
-    public IReadOnlyCollection<int>? VendorIds { get; init; }
+    public required IReadOnlyCollection<int>? VendorIds { get; init; }
 
-    public int? GuildUpgradeId { get; init; }
+    public required int? GuildUpgradeId { get; init; }
 }

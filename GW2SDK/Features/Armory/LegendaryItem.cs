@@ -6,8 +6,8 @@ namespace GW2SDK.Armory;
 public sealed record LegendaryItem
 {
     /// <summary>The item id.</summary>
-    public int Id { get; init; }
+    public required int Id { get; init; }
 
     /// <summary>The number of items that can be account bound.</summary>
-    public int MaxCount { get; init; }
+    public required int MaxCount { get; init; }
 }

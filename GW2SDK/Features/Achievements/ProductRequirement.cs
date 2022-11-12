@@ -7,7 +7,7 @@ namespace GW2SDK.Achievements;
 [DataTransferObject]
 public sealed record ProductRequirement
 {
-    public ProductName Product { get; init; }
+    public required ProductName Product { get; init; }
 
-    public AccessCondition Condition { get; init; }
+    public required AccessCondition Condition { get; init; }
 }

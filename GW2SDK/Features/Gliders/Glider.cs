@@ -9,20 +9,20 @@ namespace GW2SDK.Gliders;
 [DataTransferObject]
 public sealed record Glider
 {
-    public int Id { get; init; }
+    public required int Id { get; init; }
 
     /// <remarks>Can be empty.</remarks>
-    public IReadOnlyCollection<int> UnlockItems { get; init; } = Array.Empty<int>();
+    public required IReadOnlyCollection<int> UnlockItems { get; init; }
 
-    public int Order { get; init; }
+    public required int Order { get; init; }
 
-    public string Icon { get; init; } = "";
+    public required string Icon { get; init; }
 
-    public string Name { get; init; } = "";
-
-    /// <remarks>Can be empty.</remarks>
-    public string Description { get; init; } = "";
+    public required string Name { get; init; }
 
     /// <remarks>Can be empty.</remarks>
-    public IReadOnlyCollection<int> DefaultDyes { get; init; } = Array.Empty<int>();
+    public required string Description { get; init; }
+
+    /// <remarks>Can be empty.</remarks>
+    public required IReadOnlyCollection<int> DefaultDyes { get; init; }
 }

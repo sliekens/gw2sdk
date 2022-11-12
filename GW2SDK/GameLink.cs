@@ -21,7 +21,7 @@ namespace GW2SDK
 
         private readonly byte[] buffer;
 
-        private readonly IntPtr bufferAddress;
+        private readonly nint bufferAddress;
 
         private readonly MemoryMappedViewStream content;
 

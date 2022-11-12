@@ -7,7 +7,7 @@ namespace GW2SDK.Traits;
 [DataTransferObject]
 public sealed record AttributeAdjustTraitFact : TraitFact
 {
-    public int Value { get; init; }
+    public required int Value { get; init; }
 
-    public AttributeAdjustTarget Target { get; init; }
+    public required AttributeAdjustTarget Target { get; init; }
 }

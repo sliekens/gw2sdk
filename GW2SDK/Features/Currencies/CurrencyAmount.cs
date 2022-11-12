@@ -7,7 +7,7 @@ namespace GW2SDK.Currencies;
 [DataTransferObject]
 public sealed record CurrencyAmount
 {
-    public int CurrencyId { get; init; }
+    public required int CurrencyId { get; init; }
 
-    public int Amount { get; init; }
+    public required int Amount { get; init; }
 }

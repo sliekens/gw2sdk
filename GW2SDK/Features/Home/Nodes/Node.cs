@@ -7,5 +7,5 @@ namespace GW2SDK.Home.Nodes;
 [DataTransferObject]
 public sealed record Node
 {
-    public string Id { get; init; } = "";
+    public required string Id { get; init; }
 }

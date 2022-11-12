@@ -6,5 +6,5 @@ namespace GW2SDK.Items;
 [PublicAPI]
 public sealed record CraftingMaterial : Item
 {
-    public IReadOnlyCollection<ItemUpgrade>? UpgradesInto { get; init; }
+    public required IReadOnlyCollection<ItemUpgrade>? UpgradesInto { get; init; }
 }

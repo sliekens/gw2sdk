@@ -6,9 +6,9 @@ namespace GW2SDK.Skills;
 [PublicAPI]
 public sealed record ProfessionSkill : Skill
 {
-    public Attunement? Attunement { get; init; }
+    public required Attunement? Attunement { get; init; }
 
-    public int? Cost { get; init; }
+    public required int? Cost { get; init; }
 
-    public IReadOnlyCollection<int>? TransformSkills { get; init; }
+    public required IReadOnlyCollection<int>? TransformSkills { get; init; }
 }

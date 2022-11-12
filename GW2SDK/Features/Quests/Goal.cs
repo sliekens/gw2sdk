@@ -7,7 +7,7 @@ namespace GW2SDK.Quests;
 [DataTransferObject]
 public sealed record Goal
 {
-    public string Active { get; init; } = "";
+    public required string Active { get; init; }
 
-    public string Complete { get; init; } = "";
+    public required string Complete { get; init; }
 }

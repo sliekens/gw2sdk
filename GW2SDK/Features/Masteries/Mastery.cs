@@ -9,18 +9,18 @@ namespace GW2SDK.Masteries;
 [DataTransferObject]
 public sealed record Mastery
 {
-    public int Id { get; init; }
+    public required int Id { get; init; }
 
-    public string Name { get; init; } = "";
+    public required string Name { get; init; }
 
     /// <remarks>Can be empty.</remarks>
-    public string Requirement { get; init; } = "";
+    public required string Requirement { get; init; }
 
-    public int Order { get; init; }
+    public required int Order { get; init; }
 
-    public string Background { get; init; } = "";
+    public required string Background { get; init; }
 
-    public MasteryRegionName Region { get; init; }
+    public required MasteryRegionName Region { get; init; }
 
-    public IReadOnlyCollection<MasteryLevel> Levels { get; init; } = Array.Empty<MasteryLevel>();
+    public required IReadOnlyCollection<MasteryLevel> Levels { get; init; }
 }

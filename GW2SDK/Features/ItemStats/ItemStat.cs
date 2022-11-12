@@ -9,10 +9,9 @@ namespace GW2SDK.ItemStats;
 [DataTransferObject]
 public sealed record ItemStat
 {
-    public int Id { get; init; }
+    public required int Id { get; init; }
 
-    public string Name { get; init; } = "";
+    public required string Name { get; init; }
 
-    public IReadOnlyCollection<ItemStatAttribute> Attributes { get; init; } =
-        Array.Empty<ItemStatAttribute>();
+    public required IReadOnlyCollection<ItemStatAttribute> Attributes { get; init; }
 }

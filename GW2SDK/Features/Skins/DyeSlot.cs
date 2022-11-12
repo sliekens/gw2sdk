@@ -7,7 +7,7 @@ namespace GW2SDK.Skins;
 [DataTransferObject]
 public sealed record DyeSlot
 {
-    public int ColorId { get; init; }
+    public required int ColorId { get; init; }
 
-    public Material Material { get; init; }
+    public required Material Material { get; init; }
 }

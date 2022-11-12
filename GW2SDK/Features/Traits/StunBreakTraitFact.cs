@@ -7,5 +7,5 @@ namespace GW2SDK.Traits;
 [DataTransferObject]
 public sealed record StunBreakTraitFact : TraitFact
 {
-    public bool Value { get; init; }
+    public required bool Value { get; init; }
 }

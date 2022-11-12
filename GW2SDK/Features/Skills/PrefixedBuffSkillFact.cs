@@ -5,5 +5,5 @@ namespace GW2SDK.Skills;
 [PublicAPI]
 public sealed record PrefixedBuffSkillFact : BuffSkillFact
 {
-    public BuffPrefix Prefix { get; init; } = new();
+    public required BuffPrefix Prefix { get; init; }
 }

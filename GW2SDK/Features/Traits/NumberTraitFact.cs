@@ -5,5 +5,5 @@ namespace GW2SDK.Traits;
 [PublicAPI]
 public sealed record NumberTraitFact : TraitFact
 {
-    public int Value { get; init; }
+    public required int Value { get; init; }
 }

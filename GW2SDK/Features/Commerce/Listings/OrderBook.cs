@@ -10,11 +10,11 @@ namespace GW2SDK.Commerce.Listings;
 [DataTransferObject]
 public sealed record OrderBook
 {
-    public int Id { get; init; }
+    public required int Id { get; init; }
 
-    public IReadOnlyCollection<OrderBookLine> Demand { get; init; } = Array.Empty<OrderBookLine>();
+    public required IReadOnlyCollection<OrderBookLine> Demand { get; init; }
 
-    public IReadOnlyCollection<OrderBookLine> Supply { get; init; } = Array.Empty<OrderBookLine>();
+    public required IReadOnlyCollection<OrderBookLine> Supply { get; init; }
 
     /// <summary>The highest price someone is willing to buy the item for.</summary>
     public Coin? BestBid => Demand.FirstOrDefault()?.UnitPrice;

@@ -9,39 +9,39 @@ namespace GW2SDK.Accounts;
 [DataTransferObject]
 public sealed record AccountSummary
 {
-    public string Id { get; init; } = "";
+    public required string Id { get; init; }
 
-    public string Name { get; init; } = "";
+    public required string Name { get; init; }
 
-    public TimeSpan Age { get; init; }
+    public required TimeSpan Age { get; init; }
 
-    public DateTimeOffset LastModified { get; init; }
+    public required DateTimeOffset LastModified { get; init; }
 
-    public int World { get; init; }
+    public required int World { get; init; }
 
-    public IReadOnlyCollection<string> Guilds { get; init; } = Array.Empty<string>();
+    public required IReadOnlyCollection<string> Guilds { get; init; }
 
     [Scope(Permission.Guilds)]
-    public IReadOnlyCollection<string>? GuildLeader { get; init; }
+    public required IReadOnlyCollection<string>? GuildLeader { get; init; }
 
-    public DateTimeOffset Created { get; init; }
+    public required DateTimeOffset Created { get; init; }
 
-    public IReadOnlyCollection<ProductName> Access { get; init; } = Array.Empty<ProductName>();
+    public required IReadOnlyCollection<ProductName> Access { get; init; }
 
-    public bool Commander { get; init; }
-
-    [Scope(Permission.Progression)]
-    public int? FractalLevel { get; init; }
+    public required bool Commander { get; init; }
 
     [Scope(Permission.Progression)]
-    public int? DailyAp { get; init; }
+    public required int? FractalLevel { get; init; }
 
     [Scope(Permission.Progression)]
-    public int? MonthlyAp { get; init; }
+    public required int? DailyAp { get; init; }
 
     [Scope(Permission.Progression)]
-    public int? WvwRank { get; init; }
+    public required int? MonthlyAp { get; init; }
+
+    [Scope(Permission.Progression)]
+    public required int? WvwRank { get; init; }
 
     [Scope(Permission.Builds)]
-    public int? BuildStorageSlots { get; init; }
+    public required int? BuildStorageSlots { get; init; }
 }

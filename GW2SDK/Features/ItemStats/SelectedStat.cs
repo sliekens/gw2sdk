@@ -9,7 +9,7 @@ namespace GW2SDK.ItemStats;
 [DataTransferObject]
 public sealed record SelectedStat
 {
-    public int Id { get; init; }
+    public required int Id { get; init; }
 
-    public SelectedModification Attributes { get; init; } = new();
+    public required SelectedModification Attributes { get; init; }
 }

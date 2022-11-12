@@ -5,7 +5,7 @@ namespace GW2SDK.Traits;
 [PublicAPI]
 public sealed record ComboFinisherTraitFact : TraitFact
 {
-    public int Percent { get; init; }
+    public required int Percent { get; init; }
 
-    public ComboFinisherName FinisherName { get; init; }
+    public required ComboFinisherName FinisherName { get; init; }
 }

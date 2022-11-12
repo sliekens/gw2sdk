@@ -7,5 +7,5 @@ namespace GW2SDK.Traits;
 [DataTransferObject]
 public sealed record RadiusTraitFact : TraitFact
 {
-    public int Distance { get; init; }
+    public required int Distance { get; init; }
 }

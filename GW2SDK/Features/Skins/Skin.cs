@@ -10,18 +10,17 @@ namespace GW2SDK.Skins;
 [DataTransferObject]
 public record Skin
 {
-    public int Id { get; init; }
+    public required int Id { get; init; }
 
-    public string Name { get; init; } = "";
+    public required string Name { get; init; }
 
-    public string Description { get; init; } = "";
+    public required string Description { get; init; }
 
-    public IReadOnlyCollection<SkinFlag> Flags { get; init; } = Array.Empty<SkinFlag>();
+    public required IReadOnlyCollection<SkinFlag> Flags { get; init; }
 
-    public IReadOnlyCollection<SkinRestriction> Restrictions { get; init; } =
-        Array.Empty<SkinRestriction>();
+    public required IReadOnlyCollection<SkinRestriction> Restrictions { get; init; }
 
-    public Rarity Rarity { get; init; }
+    public required Rarity Rarity { get; init; }
 
-    public string? Icon { get; init; }
+    public required string? Icon { get; init; }
 }

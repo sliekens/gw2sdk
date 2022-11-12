@@ -9,5 +9,5 @@ namespace GW2SDK.Inventories;
 [DataTransferObject]
 public sealed record Baggage
 {
-    public IReadOnlyCollection<Bag?> Bags { get; init; } = Array.Empty<Bag?>();
+    public required IReadOnlyCollection<Bag?> Bags { get; init; }
 }

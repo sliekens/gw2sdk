@@ -9,9 +9,9 @@ namespace GW2SDK.Professions;
 [DataTransferObject]
 public sealed record WeaponProficiency
 {
-    public int? RequiredSpecialization { get; init; }
+    public required int? RequiredSpecialization { get; init; }
 
-    public IReadOnlyCollection<WeaponFlag> Flags { get; init; } = Array.Empty<WeaponFlag>();
+    public required IReadOnlyCollection<WeaponFlag> Flags { get; init; }
 
-    public IReadOnlyCollection<WeaponSkill> Skills { get; init; } = Array.Empty<WeaponSkill>();
+    public required IReadOnlyCollection<WeaponSkill> Skills { get; init; }
 }

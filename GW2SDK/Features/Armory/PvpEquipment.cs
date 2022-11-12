@@ -10,11 +10,11 @@ namespace GW2SDK.Armory;
 public sealed record PvpEquipment
 {
     /// <summary>The ID of the selected amulet.</summary>
-    public int? AmuletId { get; init; }
+    public required int? AmuletId { get; init; }
 
     /// <summary>The ID of the selected rune.</summary>
-    public int? RuneId { get; init; }
+    public required int? RuneId { get; init; }
 
     /// <summary>The IDs of all equipped sigils.</summary>
-    public IReadOnlyCollection<int?> SigilIds { get; init; } = Array.Empty<int?>();
+    public required IReadOnlyCollection<int?> SigilIds { get; init; }
 }

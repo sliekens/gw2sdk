@@ -7,5 +7,5 @@ namespace GW2SDK.Pets;
 [DataTransferObject]
 public sealed record PetSkill
 {
-    public int Id { get; init; }
+    public required int Id { get; init; }
 }

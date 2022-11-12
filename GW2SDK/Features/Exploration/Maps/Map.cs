@@ -9,29 +9,29 @@ namespace GW2SDK.Exploration.Maps;
 [DataTransferObject]
 public sealed record Map
 {
-    public int Id { get; init; }
+    public required int Id { get; init; }
 
-    public string Name { get; init; } = "";
+    public required string Name { get; init; }
 
-    public int MinLevel { get; init; }
+    public required int MinLevel { get; init; }
 
-    public int MaxLevel { get; init; }
+    public required int MaxLevel { get; init; }
 
-    public int DefaultFloor { get; init; }
+    public required int DefaultFloor { get; init; }
 
-    public MapKind Kind { get; init; }
+    public required MapKind Kind { get; init; }
 
-    public IReadOnlyCollection<int> Floors { get; init; } = Array.Empty<int>();
+    public required IReadOnlyCollection<int> Floors { get; init; }
 
-    public int? RegionId { get; init; }
+    public required int? RegionId { get; init; }
 
-    public string RegionName { get; init; } = "";
+    public required string RegionName { get; init; }
 
-    public int? ContinentId { get; init; }
+    public required int? ContinentId { get; init; }
 
-    public string ContinentName { get; init; } = "";
+    public required string ContinentName { get; init; }
 
-    public MapArea MapRectangle { get; init; } = new();
+    public required MapArea MapRectangle { get; init; }
 
-    public Area ContinentRectangle { get; init; } = new();
+    public required Area ContinentRectangle { get; init; }
 }

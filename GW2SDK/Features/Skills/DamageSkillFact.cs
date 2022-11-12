@@ -5,7 +5,7 @@ namespace GW2SDK.Skills;
 [PublicAPI]
 public sealed record DamageSkillFact : SkillFact
 {
-    public int HitCount { get; init; }
+    public required int HitCount { get; init; }
 
-    public double DamageMultiplier { get; init; }
+    public required double DamageMultiplier { get; init; }
 }

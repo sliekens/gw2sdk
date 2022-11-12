@@ -8,11 +8,11 @@ namespace GW2SDK.Achievements.Titles;
 [DataTransferObject]
 public sealed record Title
 {
-    public int Id { get; init; }
+    public required int Id { get; init; }
 
-    public string Name { get; init; } = "";
+    public required string Name { get; init; }
 
-    public IReadOnlyCollection<int>? Achievements { get; init; }
+    public required IReadOnlyCollection<int>? Achievements { get; init; }
 
-    public int? AchievementPointsRequired { get; init; }
+    public required int? AchievementPointsRequired { get; init; }
 }

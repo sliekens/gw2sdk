@@ -5,5 +5,5 @@ namespace GW2SDK.Professions;
 [PublicAPI]
 public sealed record TraitObjective : TrainingObjective
 {
-    public int TraitId { get; init; }
+    public required int TraitId { get; init; }
 }

@@ -10,13 +10,13 @@ namespace GW2SDK.Exploration.PointsOfInterest;
 public record PointOfInterest
 {
     /// <summary>The name as displayed on the map, or an empty string if the PoI doesn't have a name.</summary>
-    public string Name { get; init; } = "";
+    public required string Name { get; init; }
 
-    public int Id { get; init; }
+    public required int Id { get; init; }
 
-    public int Floor { get; init; }
+    public required int Floor { get; init; }
 
-    public PointF Coordinates { get; init; }
+    public required PointF Coordinates { get; init; }
 
-    public string ChatLink { get; init; } = "";
+    public required string ChatLink { get; init; }
 }
