@@ -30,7 +30,7 @@ jobs:
         source-url: https://nuget.pkg.github.com/sliekens/index.json
         dotnet-version: |
           3.1.x
-          6.0.x
+          7.0.x
       env:
         NUGET_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
     - name: Install dependencies

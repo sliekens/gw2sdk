@@ -27,7 +27,7 @@ RUN export DEBIAN_FRONTEND=noninteractive\
   && apt-get update\
   && bash /tmp/library-scripts/common-debian.sh "${INSTALL_ZSH}" "${USERNAME}" "${USER_UID}" "${USER_GID}" "${UPGRADE_PACKAGES}" "true" "true"\
   && bash /tmp/library-scripts/docker-debian.sh\
-  && bash /tmp/library-scripts/dotnet-debian.sh "6.0" "false" "automatic" "true"\
+  && bash /tmp/library-scripts/dotnet-debian.sh "7.0" "false" "automatic" "true"\
   && bash /tmp/library-scripts/dotnet-debian.sh "3.1" "true" "automatic" "false"\
   && bash /tmp/library-scripts/node-debian.sh\
   && bash /tmp/library-scripts/git-from-src-debian.sh "os-provided"\
