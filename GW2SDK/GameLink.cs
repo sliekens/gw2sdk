@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Buffers;
 using System.Collections.Generic;
 using System.IO.MemoryMappedFiles;
@@ -79,7 +79,7 @@ namespace GW2SDK
             return subscription;
         }
 
-        private void Publish(object sender, ElapsedEventArgs e)
+        private void Publish(object? sender, ElapsedEventArgs e)
         {
             try
             {
