@@ -1,4 +1,5 @@
 ﻿using JetBrains.Annotations;
+// ReSharper disable InconsistentNaming
 
 namespace GW2SDK;
 

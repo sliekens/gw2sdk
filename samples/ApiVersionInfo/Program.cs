@@ -17,7 +17,7 @@ internal class Program
         CultureInfo.CurrentUICulture = CultureInfo.GetCultureInfo("en");
     }
 
-    private static async Task Main(string[] args)
+    private static async Task Main()
     {
         // First configure the HttpClient
         // There are many ways to do this, but this sample takes a minimalistic approach.
@@ -32,7 +32,7 @@ internal class Program
         var build = await AnsiConsole.Status()
             .StartAsync(
                 "Retrieving the current game version...",
-                async ctx => await meta.GetBuild()
+                async _ => await meta.GetBuild()
             );
 
         AnsiConsole.MarkupLine($"Gw2: [white on dodgerblue2]{build.Value.Id}[/]");
@@ -40,7 +40,7 @@ internal class Program
         var metadata = await AnsiConsole.Status()
             .StartAsync(
                 "Retrieving API endpoints...",
-                async ctx =>
+                async _ =>
                 {
                     var v1 = await meta.GetApiVersion("v1");
                     var v2 = await meta.GetApiVersion();

@@ -106,6 +106,7 @@ public class GameLinkTest
 
         var snapshot = sut.GetSnapshot();
         Assert.True(snapshot.TryGetIdentity(out var actual, MissingMemberBehavior.Error));
+        Assert.NotNull(actual);
     }
 }
 

@@ -39,6 +39,7 @@ public class CoinTest
     {
         static void NegativeCoins()
         {
+            // ReSharper disable once UnusedVariable
             Coin coin = new(-1);
         }
 

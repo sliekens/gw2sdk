@@ -21,7 +21,7 @@ internal class Program
         CultureInfo.CurrentUICulture = CultureInfo.GetCultureInfo("en");
     }
 
-    private static async Task Main(string[] args)
+    private static async Task Main()
     {
         using var http = new HttpClient();
         var gw2 = new Gw2Client(http);

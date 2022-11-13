@@ -22,7 +22,7 @@ public class SplitQueryTest
         var records = index.Select(id => new StubRecord(id)).ToList();
 
         var sut = SplitQuery.Create<int, StubRecord>(
-            (range, ct) =>
+            (range, _) =>
             {
                 var found = records.Where(record => range.Contains(record.Id)).ToHashSet();
                 return Task.FromResult((IReadOnlyCollection<StubRecord>)found);
@@ -58,7 +58,7 @@ public class SplitQueryTest
 
         const int bufferSize = 10;
         var sut = SplitQuery.Create<int, StubRecord>(
-            (range, ct) =>
+            (range, _) =>
             {
                 var found = records.Where(record => range.Contains(record.Id)).ToHashSet();
                 return Task.FromResult((IReadOnlyCollection<StubRecord>)found);
@@ -86,7 +86,7 @@ public class SplitQueryTest
         var records = index.Select(id => new StubRecord(id)).ToList();
 
         var sut = SplitQuery.Create<int, StubRecord>(
-            (range, ct) =>
+            (range, _) =>
             {
                 var found = records.Where(record => range.Contains(record.Id)).ToHashSet();
                 return Task.FromResult((IReadOnlyCollection<StubRecord>)found);

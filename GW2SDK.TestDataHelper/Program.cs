@@ -99,8 +99,6 @@ public class Program
         {
             AnsiConsole.WriteException(crash);
         }
-
-        ;
     }
 
     private static Progress<ICollectionContext> Update(ProgressTask progressTask) =>

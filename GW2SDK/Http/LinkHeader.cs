@@ -10,7 +10,6 @@ public sealed class LinkHeader
 {
     public LinkHeader(IEnumerable<LinkHeaderValue> links)
     {
-        // ReSharper disable once ConstantConditionalAccessQualifier
         Links = links?.ToList().AsReadOnly() ?? throw new ArgumentNullException(nameof(links));
     }
 

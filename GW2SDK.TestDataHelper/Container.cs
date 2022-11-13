@@ -56,7 +56,6 @@ public class Container : IDisposable, IAsyncDisposable
                     TimeoutStrategy.Optimistic
                 )
             );
-        ;
 
         serviceProvider = services.BuildServiceProvider();
     }

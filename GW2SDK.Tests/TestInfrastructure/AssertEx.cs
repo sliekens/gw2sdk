@@ -9,7 +9,7 @@ namespace GW2SDK.Tests.TestInfrastructure;
 public static class AssertEx
 {
     /// <summary>Verifies that all items in the collection pass when executed against action. Unlike
-    /// <see cref="Assert.All{T}" />, ForEach will stop execution on first assertion error.</summary>
+    /// <see cref="Assert.All{T}(IEnumerable{T}, Action{T})" />, ForEach will stop execution on first assertion error.</summary>
     /// <typeparam name="T">The type of the object to be verified</typeparam>
     /// <param name="collection">The collection</param>
     /// <param name="action">The action to test each item against</param>

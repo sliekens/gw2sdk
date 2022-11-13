@@ -22,7 +22,7 @@ internal class Program : IObserver<Snapshot>
 
     public void OnNext(Snapshot snapshot) => ThreadPool.QueueUserWorkItem(CallBack, snapshot);
 
-    private static void Main(string[] args)
+    private static void Main()
     {
         var cts = new CancellationTokenSource();
 

@@ -479,14 +479,14 @@ public sealed class MapsQuery
         int floorId,
         int regionId,
         int mapId,
-        int HeartId,
+        int heartId,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
         HeartByIdRequest request =
-            new(continentId, floorId, regionId, mapId, HeartId)
+            new(continentId, floorId, regionId, mapId, heartId)
             {
                 Language = language,
                 MissingMemberBehavior = missingMemberBehavior
@@ -575,14 +575,14 @@ public sealed class MapsQuery
         int floorId,
         int regionId,
         int mapId,
-        int SectorId,
+        int sectorId,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
         SectorByIdRequest request =
-            new(continentId, floorId, regionId, mapId, SectorId)
+            new(continentId, floorId, regionId, mapId, sectorId)
             {
                 Language = language,
                 MissingMemberBehavior = missingMemberBehavior

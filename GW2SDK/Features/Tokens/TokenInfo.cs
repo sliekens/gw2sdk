@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using GW2SDK.Annotations;
 using JetBrains.Annotations;

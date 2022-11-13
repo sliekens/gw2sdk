@@ -1,6 +1,5 @@
 ﻿using System.Linq;
 using System.Reflection;
-using System.Runtime.CompilerServices;
 using GW2SDK.Tests.TestInfrastructure;
 using Xunit;
 

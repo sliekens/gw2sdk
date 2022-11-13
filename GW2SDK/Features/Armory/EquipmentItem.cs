@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using GW2SDK.Annotations;
 using GW2SDK.ItemStats;
 using JetBrains.Annotations;
