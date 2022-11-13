@@ -176,6 +176,6 @@ internal class Program
     private static void UpdateProgress(ICollectionContext ctx, ProgressTask progressTask)
     {
         progressTask.MaxValue(ctx.ResultTotal);
-        progressTask.Increment(ctx.ResultCount);
+        progressTask.Increment(200);
     }
 }
