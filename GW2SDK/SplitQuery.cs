@@ -4,6 +4,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Threading.Tasks;
+using GW2SDK.Tasks;
 using JetBrains.Annotations;
 
 namespace GW2SDK;
@@ -104,7 +105,7 @@ public sealed class SplitQuery<TKey, TRecord>
             var resultCount = 0;
 
             var batches = SplitIndex(index.ToList(), bufferSize);
-            var inflight = batches.Select(
+            var queries = batches.Select(
                     next => Throttled(
                         () => query(next, cancellationToken),
                         throttler,
@@ -113,13 +114,9 @@ public sealed class SplitQuery<TKey, TRecord>
                 )
                 .ToList();
 
-            while (inflight.Count != 0)
+            await foreach (var result in queries.OrderByCompletion()
+                .WithCancellation(cancellationToken))
             {
-                var done = await Task.WhenAny(inflight).ConfigureAwait(false);
-
-                inflight.Remove(done);
-
-                var result = await done.ConfigureAwait(false);
                 resultCount += result.Count;
                 ReportProgress(resultTotal, resultCount);
                 foreach (var record in result)
