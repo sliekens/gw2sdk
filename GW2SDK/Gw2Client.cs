@@ -35,6 +35,7 @@ using GW2SDK.Professions;
 using GW2SDK.Quaggans;
 using GW2SDK.Quests;
 using GW2SDK.Races;
+using GW2SDK.Raids;
 using GW2SDK.Skills;
 using GW2SDK.Skins;
 using GW2SDK.Specializations;
@@ -128,6 +129,8 @@ public sealed class Gw2Client
     public SkillsQuery Skills => new(httpClient);
 
     public SpecializationsQuery Specializations => new(httpClient);
+
+    public RaidsQuery Raids => new(httpClient);
 
     public StoryQuery Story => new(httpClient);
 
