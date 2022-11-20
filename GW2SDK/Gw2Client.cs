@@ -132,7 +132,7 @@ public sealed class Gw2Client
 
     public RaidsQuery Raids => new(httpClient);
 
-    public StoryQuery Story => new(httpClient);
+    public StoriesQuery Stories => new(httpClient);
 
     public TraitsQuery Traits => new(httpClient);
 

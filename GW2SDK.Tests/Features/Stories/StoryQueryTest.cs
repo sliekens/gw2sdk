@@ -46,7 +46,7 @@ public class StoryQueryTest
         await using Composer services = new();
         var sut = services.Resolve<Gw2Client>();
 
-        var actual = await sut.Story.GetBackstoryQuestions();
+        var actual = await sut.Stories.GetBackstoryQuestions();
 
         Assert.Equal(actual.Context.ResultTotal, actual.Count);
 
@@ -68,7 +68,7 @@ public class StoryQueryTest
         await using Composer services = new();
         var sut = services.Resolve<Gw2Client>();
 
-        var actual = await sut.Story.GetBackstoryAnswers();
+        var actual = await sut.Stories.GetBackstoryAnswers();
 
         Assert.Equal(actual.Context.ResultTotal, actual.Count);
 
@@ -91,7 +91,7 @@ public class StoryQueryTest
         await using Composer services = new();
         var sut = services.Resolve<Gw2Client>();
 
-        var actual = await sut.Story.GetBackstoryQuestionsIndex();
+        var actual = await sut.Stories.GetBackstoryQuestionsIndex();
 
         Assert.Equal(actual.Context.ResultTotal, actual.Count);
     }
@@ -102,7 +102,7 @@ public class StoryQueryTest
         await using Composer services = new();
         var sut = services.Resolve<Gw2Client>();
 
-        var actual = await sut.Story.GetBackstoryAnswersIndex();
+        var actual = await sut.Stories.GetBackstoryAnswersIndex();
 
         Assert.Equal(actual.Context.ResultTotal, actual.Count);
     }
@@ -115,7 +115,7 @@ public class StoryQueryTest
 
         const int questionId = 7;
 
-        var actual = await sut.Story.GetBackstoryQuestionById(questionId);
+        var actual = await sut.Stories.GetBackstoryQuestionById(questionId);
 
         Assert.Equal(questionId, actual.Value.Id);
     }
@@ -128,7 +128,7 @@ public class StoryQueryTest
 
         const string answerId = "7-53";
 
-        var actual = await sut.Story.GetBackstoryAnswerById(answerId);
+        var actual = await sut.Stories.GetBackstoryAnswerById(answerId);
 
         Assert.Equal(answerId, actual.Value.Id);
     }
@@ -146,7 +146,7 @@ public class StoryQueryTest
             11
         };
 
-        var actual = await sut.Story.GetBackstoryQuestionsByIds(ids);
+        var actual = await sut.Stories.GetBackstoryQuestionsByIds(ids);
 
         Assert.Collection(
             actual,
@@ -169,7 +169,7 @@ public class StoryQueryTest
             "7-55"
         };
 
-        var actual = await sut.Story.GetBackstoryAnswersByIds(ids);
+        var actual = await sut.Stories.GetBackstoryAnswersByIds(ids);
 
         Assert.Collection(
             actual,
@@ -185,7 +185,7 @@ public class StoryQueryTest
         await using Composer services = new();
         var sut = services.Resolve<Gw2Client>();
 
-        var actual = await sut.Story.GetBackstoryQuestionsByPage(0, 3);
+        var actual = await sut.Stories.GetBackstoryQuestionsByPage(0, 3);
 
         Assert.Equal(3, actual.Count);
         Assert.Equal(3, actual.Context.PageSize);
@@ -197,7 +197,7 @@ public class StoryQueryTest
         await using Composer services = new();
         var sut = services.Resolve<Gw2Client>();
 
-        var actual = await sut.Story.GetBackstoryAnswersByPage(0, 3);
+        var actual = await sut.Stories.GetBackstoryAnswersByPage(0, 3);
 
         Assert.Equal(3, actual.Count);
         Assert.Equal(3, actual.Context.PageSize);

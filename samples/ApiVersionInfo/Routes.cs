@@ -145,8 +145,7 @@ internal static class Routes
         "/v2/skills",
         "/v2/skins",
         "/v2/specializations",
-
-        //"/v2/stories",
+        "/v2/stories",
         //"/v2/stories/seasons",
         "/v2/titles",
         "/v2/tokeninfo",

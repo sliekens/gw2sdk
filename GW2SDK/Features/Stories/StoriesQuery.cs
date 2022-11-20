@@ -8,15 +8,17 @@ using JetBrains.Annotations;
 namespace GW2SDK.Stories;
 
 [PublicAPI]
-public sealed class StoryQuery
+public sealed class StoriesQuery
 {
     private readonly HttpClient http;
 
-    public StoryQuery(HttpClient http)
+    public StoriesQuery(HttpClient http)
     {
         this.http = http ?? throw new ArgumentNullException(nameof(http));
         http.BaseAddress ??= BaseAddress.DefaultUri;
     }
+
+    #region v2/backstory/questions
 
     public Task<IReplicaSet<BackstoryQuestion>> GetBackstoryQuestions(
         Language? language = default,
@@ -31,22 +33,6 @@ public sealed class StoryQuery
         };
         return request.SendAsync(http, cancellationToken);
     }
-
-    public Task<IReplicaSet<BackstoryAnswer>> GetBackstoryAnswers(
-        Language? language = default,
-        MissingMemberBehavior missingMemberBehavior = default,
-        CancellationToken cancellationToken = default
-    )
-    {
-        BackstoryAnswersRequest request = new()
-        {
-            Language = language,
-            MissingMemberBehavior = missingMemberBehavior
-        };
-        return request.SendAsync(http, cancellationToken);
-    }
-
-    #region v2/backstory/questions
 
     public Task<IReplicaSet<int>> GetBackstoryQuestionsIndex(
         CancellationToken cancellationToken = default
@@ -107,6 +93,20 @@ public sealed class StoryQuery
 
     #region v2/backstory/answers
 
+    public Task<IReplicaSet<BackstoryAnswer>> GetBackstoryAnswers(
+        Language? language = default,
+        MissingMemberBehavior missingMemberBehavior = default,
+        CancellationToken cancellationToken = default
+    )
+    {
+        BackstoryAnswersRequest request = new()
+        {
+            Language = language,
+            MissingMemberBehavior = missingMemberBehavior
+        };
+        return request.SendAsync(http, cancellationToken);
+    }
+
     public Task<IReplicaSet<string>> GetBackstoryAnswersIndex(
         CancellationToken cancellationToken = default
     )
@@ -163,4 +163,78 @@ public sealed class StoryQuery
     }
 
     #endregion
+
+    #region v2/stories
+
+    public Task<IReplicaSet<Story>> GetStories(
+        Language? language = default,
+        MissingMemberBehavior missingMemberBehavior = default,
+        CancellationToken cancellationToken = default
+    )
+    {
+        StoriesRequest request = new()
+        {
+            Language = language,
+            MissingMemberBehavior = missingMemberBehavior
+        };
+        return request.SendAsync(http, cancellationToken);
+    }
+
+    public Task<IReplicaSet<int>> GetStoriesIndex(
+        CancellationToken cancellationToken = default
+    )
+    {
+        StoriesIndexRequest request = new();
+        return request.SendAsync(http, cancellationToken);
+    }
+
+    public Task<IReplica<Story>> GetStoryById(
+        int questionId,
+        Language? language = default,
+        MissingMemberBehavior missingMemberBehavior = default,
+        CancellationToken cancellationToken = default
+    )
+    {
+        StoryByIdRequest request = new(questionId)
+        {
+            Language = language,
+            MissingMemberBehavior = missingMemberBehavior
+        };
+        return request.SendAsync(http, cancellationToken);
+    }
+
+    public Task<IReplicaSet<Story>> GetStoriesByIds(
+        IReadOnlyCollection<int> storyIds,
+        Language? language = default,
+        MissingMemberBehavior missingMemberBehavior = default,
+        CancellationToken cancellationToken = default
+    )
+    {
+        StoriesByIdsRequest request = new(storyIds)
+        {
+            Language = language,
+            MissingMemberBehavior = missingMemberBehavior
+        };
+        return request.SendAsync(http, cancellationToken);
+    }
+
+    public Task<IReplicaPage<Story>> GetStoriesByPage(
+        int pageIndex,
+        int? pageSize = default,
+        Language? language = default,
+        MissingMemberBehavior missingMemberBehavior = default,
+        CancellationToken cancellationToken = default
+    )
+    {
+        StoriesByPageRequest request = new(pageIndex)
+        {
+            PageSize = pageSize,
+            Language = language,
+            MissingMemberBehavior = missingMemberBehavior
+        };
+        return request.SendAsync(http, cancellationToken);
+    }
+
+    #endregion
+
 }
