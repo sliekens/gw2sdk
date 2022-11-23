@@ -189,13 +189,13 @@ public sealed class StoriesQuery
     }
 
     public Task<IReplica<Story>> GetStoryById(
-        int questionId,
+        int storyId,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        StoryByIdRequest request = new(questionId)
+        StoryByIdRequest request = new(storyId)
         {
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
