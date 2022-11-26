@@ -99,18 +99,18 @@ public static class AccountReader
         return new AccountSummary
         {
             Id = id.GetValue(),
-            Name = name.GetValue(),
+            DisplayName = name.GetValue(),
             Age = age.Select(value => TimeSpan.FromSeconds(value.GetDouble())),
             LastModified = lastModified.GetValue(),
-            World = world.GetValue(),
-            Guilds = guilds.SelectMany(value => value.GetStringRequired()),
-            GuildLeader = guildLeader.SelectMany(value => value.GetStringRequired()),
+            WorldId = world.GetValue(),
+            GuildIds = guilds.SelectMany(value => value.GetStringRequired()),
+            LeaderOfGuildIds = guildLeader.SelectMany(value => value.GetStringRequired()),
             Created = created.GetValue(),
             Access = access.GetValues(missingMemberBehavior),
             Commander = commander.GetValue(),
             FractalLevel = fractalLevel.GetValue(),
-            DailyAp = dailyAp.GetValue(),
-            MonthlyAp = monthlyAp.GetValue(),
+            DailyAchievementPoints = dailyAp.GetValue(),
+            MonthlyAchievementPoints = monthlyAp.GetValue(),
             WvwRank = wvwRank.GetValue(),
             BuildStorageSlots = buildStorageSlots.GetValue()
         };
