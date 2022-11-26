@@ -127,7 +127,7 @@ internal static class Routes
         "/v2/professions",
 
         //"/v2/pvp",
-        //"/v2/pvp/amulets",
+        "/v2/pvp/amulets",
         //"/v2/pvp/games",
         //"/v2/pvp/heroes",
         //"/v2/pvp/ranks",
