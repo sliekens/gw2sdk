@@ -4,6 +4,7 @@ using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 using GW2SDK.Pvp.Amulets;
+using GW2SDK.Pvp.Heroes;
 using JetBrains.Annotations;
 
 namespace GW2SDK.Pvp;
@@ -18,6 +19,8 @@ public sealed class PvpQuery
         this.http = http ?? throw new ArgumentNullException(nameof(http));
         http.BaseAddress ??= BaseAddress.DefaultUri;
     }
+
+    #region v2/pvp/amulets
 
     public Task<IReplicaSet<Amulet>> GetAmulets(
         Language? language = default,
@@ -85,4 +88,78 @@ public sealed class PvpQuery
         };
         return request.SendAsync(http, cancellationToken);
     }
+
+    #endregion
+
+    #region v2/pvp/heroes
+
+    public Task<IReplicaSet<Hero>> GetHeroes(
+        Language? language = default,
+        MissingMemberBehavior missingMemberBehavior = default,
+        CancellationToken cancellationToken = default
+    )
+    {
+        HeroRequest request = new()
+        {
+            Language = language,
+            MissingMemberBehavior = missingMemberBehavior
+        };
+        return request.SendAsync(http, cancellationToken);
+    }
+
+    public Task<IReplicaSet<string>> GetHeroesIndex(CancellationToken cancellationToken = default)
+    {
+        HeroIndexRequest request = new();
+        return request.SendAsync(http, cancellationToken);
+    }
+
+    public Task<IReplica<Hero>> GetHeroById(
+        string heroId,
+        Language? language = default,
+        MissingMemberBehavior missingMemberBehavior = default,
+        CancellationToken cancellationToken = default
+    )
+    {
+        HeroByIdRequest request = new(heroId)
+        {
+            Language = language,
+            MissingMemberBehavior = missingMemberBehavior
+        };
+        return request.SendAsync(http, cancellationToken);
+    }
+
+    public Task<IReplicaSet<Hero>> GetHeroesByIds(
+        IReadOnlyCollection<string> heroIds,
+        Language? language = default,
+        MissingMemberBehavior missingMemberBehavior = default,
+        CancellationToken cancellationToken = default
+    )
+    {
+        HeroesByIdsRequest request = new(heroIds)
+        {
+            Language = language,
+            MissingMemberBehavior = missingMemberBehavior
+        };
+        return request.SendAsync(http, cancellationToken);
+    }
+
+    public Task<IReplicaPage<Hero>> GetHeroesByPage(
+        int pageIndex,
+        int? pageSize = default,
+        Language? language = default,
+        MissingMemberBehavior missingMemberBehavior = default,
+        CancellationToken cancellationToken = default
+    )
+    {
+        HeroesByPageRequest request = new(pageIndex)
+        {
+            PageSize = pageSize,
+            Language = language,
+            MissingMemberBehavior = missingMemberBehavior
+        };
+        return request.SendAsync(http, cancellationToken);
+    }
+
+    #endregion
+
 }
