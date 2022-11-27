@@ -17,7 +17,13 @@ public sealed class SectorsByPageRequest : IHttpRequest<IReplicaPage<Sector>>
         "v2/continents/:id/floors/:floor/regions/:region/maps/:map/sectors"
     ) { AcceptEncoding = "gzip" };
 
-    public SectorsByPageRequest(int continentId, int floorId, int regionId, int mapId, int pageIndex)
+    public SectorsByPageRequest(
+        int continentId,
+        int floorId,
+        int regionId,
+        int mapId,
+        int pageIndex
+    )
     {
         ContinentId = continentId;
         FloorId = floorId;

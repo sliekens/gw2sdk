@@ -10,15 +10,16 @@ namespace GW2SDK.MapChests;
 [PublicAPI]
 public sealed class MapChestsRequest : IHttpRequest<IReplicaSet<MapChest>>
 {
-    private static readonly HttpRequestMessageTemplate Template = new(HttpMethod.Get, "v2/mapchests")
-    {
-        AcceptEncoding = "gzip",
-        Arguments = new QueryBuilder
+    private static readonly HttpRequestMessageTemplate Template =
+        new(HttpMethod.Get, "v2/mapchests")
         {
-            { "ids", "all" },
-            { "v", SchemaVersion.Recommended }
-        }
-    };
+            AcceptEncoding = "gzip",
+            Arguments = new QueryBuilder
+            {
+                { "ids", "all" },
+                { "v", SchemaVersion.Recommended }
+            }
+        };
 
     public MissingMemberBehavior MissingMemberBehavior { get; init; }
 
@@ -35,9 +36,7 @@ public sealed class MapChestsRequest : IHttpRequest<IReplicaSet<MapChest>>
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value = json.RootElement.GetSet(
-            entry => MapChestReader.GetMapChest(entry, MissingMemberBehavior)
-        );
+        var value = json.RootElement.GetSet(entry => entry.GetMapChest(MissingMemberBehavior));
         return new ReplicaSet<MapChest>(
             response.Headers.Date.GetValueOrDefault(),
             value,

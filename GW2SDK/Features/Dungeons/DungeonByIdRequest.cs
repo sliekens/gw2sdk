@@ -44,7 +44,7 @@ public sealed class DungeonByIdRequest : IHttpRequest<IReplica<Dungeon>>
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value = DungeonReader.GetDungeon(json.RootElement, MissingMemberBehavior);
+        var value = json.RootElement.GetDungeon(MissingMemberBehavior);
         return new Replica<Dungeon>(
             response.Headers.Date.GetValueOrDefault(),
             value,

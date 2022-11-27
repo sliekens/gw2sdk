@@ -485,12 +485,11 @@ public sealed class MapsQuery
         CancellationToken cancellationToken = default
     )
     {
-        HeartByIdRequest request =
-            new(continentId, floorId, regionId, mapId, heartId)
-            {
-                Language = language,
-                MissingMemberBehavior = missingMemberBehavior
-            };
+        HeartByIdRequest request = new(continentId, floorId, regionId, mapId, heartId)
+        {
+            Language = language,
+            MissingMemberBehavior = missingMemberBehavior
+        };
         return request.SendAsync(http, cancellationToken);
     }
 
@@ -505,12 +504,11 @@ public sealed class MapsQuery
         CancellationToken cancellationToken = default
     )
     {
-        HeartsByIdsRequest request =
-            new(continentId, floorId, regionId, mapId, heartIds)
-            {
-                Language = language,
-                MissingMemberBehavior = missingMemberBehavior
-            };
+        HeartsByIdsRequest request = new(continentId, floorId, regionId, mapId, heartIds)
+        {
+            Language = language,
+            MissingMemberBehavior = missingMemberBehavior
+        };
         return request.SendAsync(http, cancellationToken);
     }
 
@@ -526,13 +524,12 @@ public sealed class MapsQuery
         CancellationToken cancellationToken = default
     )
     {
-        HeartsByPageRequest request =
-            new(continentId, floorId, regionId, mapId, pageIndex)
-            {
-                PageSize = pageSize,
-                Language = language,
-                MissingMemberBehavior = missingMemberBehavior
-            };
+        HeartsByPageRequest request = new(continentId, floorId, regionId, mapId, pageIndex)
+        {
+            PageSize = pageSize,
+            Language = language,
+            MissingMemberBehavior = missingMemberBehavior
+        };
         return request.SendAsync(http, cancellationToken);
     }
 
@@ -581,12 +578,11 @@ public sealed class MapsQuery
         CancellationToken cancellationToken = default
     )
     {
-        SectorByIdRequest request =
-            new(continentId, floorId, regionId, mapId, sectorId)
-            {
-                Language = language,
-                MissingMemberBehavior = missingMemberBehavior
-            };
+        SectorByIdRequest request = new(continentId, floorId, regionId, mapId, sectorId)
+        {
+            Language = language,
+            MissingMemberBehavior = missingMemberBehavior
+        };
         return request.SendAsync(http, cancellationToken);
     }
 
@@ -601,12 +597,11 @@ public sealed class MapsQuery
         CancellationToken cancellationToken = default
     )
     {
-        SectorsByIdsRequest request =
-            new(continentId, floorId, regionId, mapId, sectorIds)
-            {
-                Language = language,
-                MissingMemberBehavior = missingMemberBehavior
-            };
+        SectorsByIdsRequest request = new(continentId, floorId, regionId, mapId, sectorIds)
+        {
+            Language = language,
+            MissingMemberBehavior = missingMemberBehavior
+        };
         return request.SendAsync(http, cancellationToken);
     }
 
@@ -622,13 +617,12 @@ public sealed class MapsQuery
         CancellationToken cancellationToken = default
     )
     {
-        SectorsByPageRequest request =
-            new(continentId, floorId, regionId, mapId, pageIndex)
-            {
-                PageSize = pageSize,
-                Language = language,
-                MissingMemberBehavior = missingMemberBehavior
-            };
+        SectorsByPageRequest request = new(continentId, floorId, regionId, mapId, pageIndex)
+        {
+            PageSize = pageSize,
+            Language = language,
+            MissingMemberBehavior = missingMemberBehavior
+        };
         return request.SendAsync(http, cancellationToken);
     }
 
@@ -704,5 +698,4 @@ public sealed class MapsQuery
     }
 
     #endregion
-
 }

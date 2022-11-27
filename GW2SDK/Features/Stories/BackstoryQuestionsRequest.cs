@@ -11,16 +11,15 @@ namespace GW2SDK.Stories;
 [PublicAPI]
 public sealed class BackstoryQuestionsRequest : IHttpRequest<IReplicaSet<BackstoryQuestion>>
 {
-    private static readonly HttpRequestMessageTemplate Template =
-        new(Get, "v2/backstory/questions")
+    private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/backstory/questions")
+    {
+        AcceptEncoding = "gzip",
+        Arguments = new QueryBuilder
         {
-            AcceptEncoding = "gzip",
-            Arguments = new QueryBuilder
-            {
-                { "ids", "all" },
-                { "v", SchemaVersion.Recommended }
-            }
-        };
+            { "ids", "all" },
+            { "v", SchemaVersion.Recommended }
+        }
+    };
 
     public Language? Language { get; init; }
 

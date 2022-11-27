@@ -11,12 +11,11 @@ namespace GW2SDK.Stories;
 [PublicAPI]
 public sealed class BackstoryQuestionsIndexRequest : IHttpRequest<IReplicaSet<int>>
 {
-    private static readonly HttpRequestMessageTemplate Template =
-        new(Get, "v2/backstory/questions")
-        {
-            AcceptEncoding = "gzip",
-            Arguments = new QueryBuilder { { "v", SchemaVersion.Recommended } }
-        };
+    private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/backstory/questions")
+    {
+        AcceptEncoding = "gzip",
+        Arguments = new QueryBuilder { { "v", SchemaVersion.Recommended } }
+    };
 
     public async Task<IReplicaSet<int>> SendAsync(
         HttpClient httpClient,

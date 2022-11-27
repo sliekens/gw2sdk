@@ -44,7 +44,7 @@ public sealed class LegendByIdRequest : IHttpRequest<IReplica<Legend>>
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value = LegendReader.GetLegend(json.RootElement, MissingMemberBehavior);
+        var value = json.RootElement.GetLegend(MissingMemberBehavior);
         return new Replica<Legend>(
             response.Headers.Date.GetValueOrDefault(),
             value,

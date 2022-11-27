@@ -12,12 +12,11 @@ namespace GW2SDK.WorldBosses;
 [PublicAPI]
 public sealed class DefeatedWorldBossesRequest : IHttpRequest<IReplica<IReadOnlyCollection<string>>>
 {
-    private static readonly HttpRequestMessageTemplate Template =
-        new(Get, "v2/account/worldbosses")
-        {
-            AcceptEncoding = "gzip",
-            Arguments = new QueryBuilder { { "v", SchemaVersion.Recommended } }
-        };
+    private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/account/worldbosses")
+    {
+        AcceptEncoding = "gzip",
+        Arguments = new QueryBuilder { { "v", SchemaVersion.Recommended } }
+    };
 
     public string? AccessToken { get; init; }
 

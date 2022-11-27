@@ -44,7 +44,7 @@ public sealed class MapChestByIdRequest : IHttpRequest<IReplica<MapChest>>
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value = MapChestReader.GetMapChest(json.RootElement, MissingMemberBehavior);
+        var value = json.RootElement.GetMapChest(MissingMemberBehavior);
         return new Replica<MapChest>(
             response.Headers.Date.GetValueOrDefault(),
             value,

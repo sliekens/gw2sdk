@@ -35,7 +35,11 @@ public sealed record Chart
 
     public required Dictionary<int, Heart> Hearts { get; init; }
 
-    public required IReadOnlyCollection<SkillChallenge.SkillChallenge> SkillChallenges { get; init; }
+    public required IReadOnlyCollection<SkillChallenge.SkillChallenge> SkillChallenges
+    {
+        get;
+        init;
+    }
 
     public required Dictionary<int, Sector> Sectors { get; init; }
 

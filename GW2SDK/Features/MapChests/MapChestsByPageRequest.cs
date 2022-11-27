@@ -47,9 +47,7 @@ public sealed class MapChestsByPageRequest : IHttpRequest<IReplicaPage<MapChest>
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value = json.RootElement.GetSet(
-            entry => MapChestReader.GetMapChest(entry, MissingMemberBehavior)
-        );
+        var value = json.RootElement.GetSet(entry => entry.GetMapChest(MissingMemberBehavior));
         return new ReplicaPage<MapChest>(
             response.Headers.Date.GetValueOrDefault(),
             value,

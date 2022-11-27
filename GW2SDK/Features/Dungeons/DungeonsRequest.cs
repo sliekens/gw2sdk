@@ -10,16 +10,15 @@ namespace GW2SDK.Dungeons;
 [PublicAPI]
 public sealed class DungeonsRequest : IHttpRequest<IReplicaSet<Dungeon>>
 {
-    private static readonly HttpRequestMessageTemplate Template =
-        new(HttpMethod.Get, "v2/dungeons")
+    private static readonly HttpRequestMessageTemplate Template = new(HttpMethod.Get, "v2/dungeons")
+    {
+        AcceptEncoding = "gzip",
+        Arguments = new QueryBuilder
         {
-            AcceptEncoding = "gzip",
-            Arguments = new QueryBuilder
-            {
-                { "ids", "all" },
-                { "v", SchemaVersion.Recommended }
-            }
-        };
+            { "ids", "all" },
+            { "v", SchemaVersion.Recommended }
+        }
+    };
 
     public MissingMemberBehavior MissingMemberBehavior { get; init; }
 
@@ -36,9 +35,7 @@ public sealed class DungeonsRequest : IHttpRequest<IReplicaSet<Dungeon>>
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value = json.RootElement.GetSet(
-            entry => DungeonReader.GetDungeon(entry, MissingMemberBehavior)
-        );
+        var value = json.RootElement.GetSet(entry => entry.GetDungeon(MissingMemberBehavior));
         return new ReplicaSet<Dungeon>(
             response.Headers.Date.GetValueOrDefault(),
             value,

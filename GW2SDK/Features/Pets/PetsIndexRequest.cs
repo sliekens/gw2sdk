@@ -10,12 +10,11 @@ namespace GW2SDK.Pets;
 [PublicAPI]
 public sealed class PetsIndexRequest : IHttpRequest<IReplicaSet<int>>
 {
-    private static readonly HttpRequestMessageTemplate Template =
-        new(HttpMethod.Get, "v2/pets")
-        {
-            AcceptEncoding = "gzip",
-            Arguments = new QueryBuilder { { "v", SchemaVersion.Recommended } }
-        };
+    private static readonly HttpRequestMessageTemplate Template = new(HttpMethod.Get, "v2/pets")
+    {
+        AcceptEncoding = "gzip",
+        Arguments = new QueryBuilder { { "v", SchemaVersion.Recommended } }
+    };
 
     public async Task<IReplicaSet<int>> SendAsync(
         HttpClient httpClient,

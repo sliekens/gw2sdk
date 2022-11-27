@@ -10,16 +10,15 @@ namespace GW2SDK.Quests;
 [PublicAPI]
 public sealed class QuestsRequest : IHttpRequest<IReplicaSet<Quest>>
 {
-    private static readonly HttpRequestMessageTemplate Template =
-        new(HttpMethod.Get, "v2/quests")
+    private static readonly HttpRequestMessageTemplate Template = new(HttpMethod.Get, "v2/quests")
+    {
+        AcceptEncoding = "gzip",
+        Arguments = new QueryBuilder
         {
-            AcceptEncoding = "gzip",
-            Arguments = new QueryBuilder
-            {
-                { "ids", "all" },
-                { "v", SchemaVersion.Recommended }
-            }
-        };
+            { "ids", "all" },
+            { "v", SchemaVersion.Recommended }
+        }
+    };
 
     public Language? Language { get; init; }
 

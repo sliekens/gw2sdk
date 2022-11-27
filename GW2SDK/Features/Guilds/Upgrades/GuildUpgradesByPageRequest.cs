@@ -8,8 +8,7 @@ using JetBrains.Annotations;
 namespace GW2SDK.Guilds.Upgrades;
 
 [PublicAPI]
-public sealed class
-    GuildUpgradesByPageRequest : IHttpRequest<IReplicaPage<GuildUpgrade>>
+public sealed class GuildUpgradesByPageRequest : IHttpRequest<IReplicaPage<GuildUpgrade>>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(HttpMethod.Get, "v2/guild/upgrades") { AcceptEncoding = "gzip" };
@@ -54,8 +53,7 @@ public sealed class
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value =
-            json.RootElement.GetSet(entry => entry.GetGuildUpgrade(MissingMemberBehavior));
+        var value = json.RootElement.GetSet(entry => entry.GetGuildUpgrade(MissingMemberBehavior));
         return new ReplicaPage<GuildUpgrade>(
             response.Headers.Date.GetValueOrDefault(),
             value,

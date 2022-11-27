@@ -10,16 +10,15 @@ namespace GW2SDK.Pets;
 [PublicAPI]
 public sealed class PetsRequest : IHttpRequest<IReplicaSet<Pet>>
 {
-    private static readonly HttpRequestMessageTemplate Template =
-        new(HttpMethod.Get, "v2/pets")
+    private static readonly HttpRequestMessageTemplate Template = new(HttpMethod.Get, "v2/pets")
+    {
+        AcceptEncoding = "gzip",
+        Arguments = new QueryBuilder
         {
-            AcceptEncoding = "gzip",
-            Arguments = new QueryBuilder
-            {
-                { "ids", "all" },
-                { "v", SchemaVersion.Recommended }
-            }
-        };
+            { "ids", "all" },
+            { "v", SchemaVersion.Recommended }
+        }
+    };
 
     public Language? Language { get; init; }
 

@@ -10,12 +10,11 @@ namespace GW2SDK.Outfits;
 [PublicAPI]
 public sealed class OutfitsIndexRequest : IHttpRequest<IReplicaSet<int>>
 {
-    private static readonly HttpRequestMessageTemplate Template =
-        new(HttpMethod.Get, "v2/outfits")
-        {
-            AcceptEncoding = "gzip",
-            Arguments = new QueryBuilder { { "v", SchemaVersion.Recommended } }
-        };
+    private static readonly HttpRequestMessageTemplate Template = new(HttpMethod.Get, "v2/outfits")
+    {
+        AcceptEncoding = "gzip",
+        Arguments = new QueryBuilder { { "v", SchemaVersion.Recommended } }
+    };
 
     public async Task<IReplicaSet<int>> SendAsync(
         HttpClient httpClient,

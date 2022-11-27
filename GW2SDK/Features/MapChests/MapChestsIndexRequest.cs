@@ -10,11 +10,12 @@ namespace GW2SDK.MapChests;
 [PublicAPI]
 public sealed class MapChestsIndexRequest : IHttpRequest<IReplicaSet<string>>
 {
-    private static readonly HttpRequestMessageTemplate Template = new(HttpMethod.Get, "v2/mapchests")
-    {
-        AcceptEncoding = "gzip",
-        Arguments = new QueryBuilder { { "v", SchemaVersion.Recommended } }
-    };
+    private static readonly HttpRequestMessageTemplate Template =
+        new(HttpMethod.Get, "v2/mapchests")
+        {
+            AcceptEncoding = "gzip",
+            Arguments = new QueryBuilder { { "v", SchemaVersion.Recommended } }
+        };
 
     public async Task<IReplicaSet<string>> SendAsync(
         HttpClient httpClient,

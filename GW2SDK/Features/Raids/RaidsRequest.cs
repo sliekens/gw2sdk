@@ -10,16 +10,15 @@ namespace GW2SDK.Raids;
 [PublicAPI]
 public sealed class RaidsRequest : IHttpRequest<IReplicaSet<Raid>>
 {
-    private static readonly HttpRequestMessageTemplate Template =
-        new(HttpMethod.Get, "v2/raids")
+    private static readonly HttpRequestMessageTemplate Template = new(HttpMethod.Get, "v2/raids")
+    {
+        AcceptEncoding = "gzip",
+        Arguments = new QueryBuilder
         {
-            AcceptEncoding = "gzip",
-            Arguments = new QueryBuilder
-            {
-                { "ids", "all" },
-                { "v", SchemaVersion.Recommended }
-            }
-        };
+            { "ids", "all" },
+            { "v", SchemaVersion.Recommended }
+        }
+    };
 
     public MissingMemberBehavior MissingMemberBehavior { get; init; }
 
@@ -36,9 +35,7 @@ public sealed class RaidsRequest : IHttpRequest<IReplicaSet<Raid>>
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value = json.RootElement.GetSet(
-            entry => entry.GetRaid(MissingMemberBehavior)
-        );
+        var value = json.RootElement.GetSet(entry => entry.GetRaid(MissingMemberBehavior));
         return new ReplicaSet<Raid>(
             response.Headers.Date.GetValueOrDefault(),
             value,

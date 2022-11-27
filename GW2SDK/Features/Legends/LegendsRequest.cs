@@ -35,9 +35,7 @@ public sealed class LegendsRequest : IHttpRequest<IReplicaSet<Legend>>
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value = json.RootElement.GetSet(
-            entry => LegendReader.GetLegend(entry, MissingMemberBehavior)
-        );
+        var value = json.RootElement.GetSet(entry => entry.GetLegend(MissingMemberBehavior));
         return new ReplicaSet<Legend>(
             response.Headers.Date.GetValueOrDefault(),
             value,

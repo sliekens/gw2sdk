@@ -10,16 +10,15 @@ namespace GW2SDK.Stories;
 [PublicAPI]
 public sealed class StoriesRequest : IHttpRequest<IReplicaSet<Story>>
 {
-    private static readonly HttpRequestMessageTemplate Template =
-        new(HttpMethod.Get, "v2/stories")
+    private static readonly HttpRequestMessageTemplate Template = new(HttpMethod.Get, "v2/stories")
+    {
+        AcceptEncoding = "gzip",
+        Arguments = new QueryBuilder
         {
-            AcceptEncoding = "gzip",
-            Arguments = new QueryBuilder
-            {
-                { "ids", "all" },
-                { "v", SchemaVersion.Recommended }
-            }
-        };
+            { "ids", "all" },
+            { "v", SchemaVersion.Recommended }
+        }
+    };
 
     public Language? Language { get; init; }
 

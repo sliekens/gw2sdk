@@ -54,8 +54,9 @@ public sealed class
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value =
-            json.RootElement.GetSet(entry => entry.GetGuildPermissionSummary(MissingMemberBehavior));
+        var value = json.RootElement.GetSet(
+            entry => entry.GetGuildPermissionSummary(MissingMemberBehavior)
+        );
         return new ReplicaPage<GuildPermissionSummary>(
             response.Headers.Date.GetValueOrDefault(),
             value,

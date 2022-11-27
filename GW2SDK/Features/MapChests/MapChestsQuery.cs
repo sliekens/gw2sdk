@@ -18,7 +18,9 @@ public sealed class MapChestsQuery
         http.BaseAddress ??= BaseAddress.DefaultUri;
     }
 
-    public Task<IReplicaSet<string>> GetMapChestsIndex(CancellationToken cancellationToken = default)
+    public Task<IReplicaSet<string>> GetMapChestsIndex(
+        CancellationToken cancellationToken = default
+    )
     {
         MapChestsIndexRequest request = new();
         return request.SendAsync(http, cancellationToken);

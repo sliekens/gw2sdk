@@ -10,12 +10,11 @@ namespace GW2SDK.Raids;
 [PublicAPI]
 public sealed class RaidsIndexRequest : IHttpRequest<IReplicaSet<string>>
 {
-    private static readonly HttpRequestMessageTemplate Template =
-        new(HttpMethod.Get, "v2/raids")
-        {
-            AcceptEncoding = "gzip",
-            Arguments = new QueryBuilder { { "v", SchemaVersion.Recommended } }
-        };
+    private static readonly HttpRequestMessageTemplate Template = new(HttpMethod.Get, "v2/raids")
+    {
+        AcceptEncoding = "gzip",
+        Arguments = new QueryBuilder { { "v", SchemaVersion.Recommended } }
+    };
 
     public async Task<IReplicaSet<string>> SendAsync(
         HttpClient httpClient,

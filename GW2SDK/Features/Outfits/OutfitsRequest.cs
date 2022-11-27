@@ -10,16 +10,15 @@ namespace GW2SDK.Outfits;
 [PublicAPI]
 public sealed class OutfitsRequest : IHttpRequest<IReplicaSet<Outfit>>
 {
-    private static readonly HttpRequestMessageTemplate Template =
-        new(HttpMethod.Get, "v2/outfits")
+    private static readonly HttpRequestMessageTemplate Template = new(HttpMethod.Get, "v2/outfits")
+    {
+        AcceptEncoding = "gzip",
+        Arguments = new QueryBuilder
         {
-            AcceptEncoding = "gzip",
-            Arguments = new QueryBuilder
-            {
-                { "ids", "all" },
-                { "v", SchemaVersion.Recommended }
-            }
-        };
+            { "ids", "all" },
+            { "v", SchemaVersion.Recommended }
+        }
+    };
 
     public Language? Language { get; init; }
 
