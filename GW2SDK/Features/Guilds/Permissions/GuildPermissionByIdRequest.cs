@@ -47,7 +47,7 @@ public sealed class GuildPermissionByIdRequest : IHttpRequest<IReplica<GuildPerm
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value = json.RootElement.GetGuildPermission(MissingMemberBehavior);
+        var value = json.RootElement.GetGuildPermissionSummary(MissingMemberBehavior);
         return new Replica<GuildPermissionSummary>(
             response.Headers.Date.GetValueOrDefault(),
             value,

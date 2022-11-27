@@ -55,7 +55,7 @@ public sealed class
             .ConfigureAwait(false);
 
         var value =
-            json.RootElement.GetSet(entry => entry.GetGuildPermission(MissingMemberBehavior));
+            json.RootElement.GetSet(entry => entry.GetGuildPermissionSummary(MissingMemberBehavior));
         return new ReplicaPage<GuildPermissionSummary>(
             response.Headers.Date.GetValueOrDefault(),
             value,

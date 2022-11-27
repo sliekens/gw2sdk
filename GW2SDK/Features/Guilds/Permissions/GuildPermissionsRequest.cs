@@ -42,7 +42,7 @@ public sealed class GuildPermissionsRequest : IHttpRequest<IReplicaSet<GuildPerm
             .ConfigureAwait(false);
 
         var value =
-            json.RootElement.GetSet(entry => entry.GetGuildPermission(MissingMemberBehavior));
+            json.RootElement.GetSet(entry => entry.GetGuildPermissionSummary(MissingMemberBehavior));
         return new ReplicaSet<GuildPermissionSummary>(
             response.Headers.Date.GetValueOrDefault(),
             value,

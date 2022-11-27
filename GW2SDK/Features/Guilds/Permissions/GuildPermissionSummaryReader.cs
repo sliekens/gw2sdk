@@ -6,9 +6,9 @@ using JetBrains.Annotations;
 namespace GW2SDK.Guilds.Permissions;
 
 [PublicAPI]
-public static class GuildPermissionReader
+public static class GuildPermissionSummaryReader
 {
-    public static GuildPermissionSummary GetGuildPermission(
+    public static GuildPermissionSummary GetGuildPermissionSummary(
         this JsonElement json,
         MissingMemberBehavior missingMemberBehavior
     )
