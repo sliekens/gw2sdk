@@ -5,7 +5,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using JetBrains.Annotations;
 
-namespace GW2SDK.Finishers;
+namespace GuildWars2.Finishers;
 
 [PublicAPI]
 public sealed class FinishersQuery

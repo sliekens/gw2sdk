@@ -1,8 +1,8 @@
-﻿using GW2SDK.Annotations;
-using GW2SDK.Professions;
+﻿using GuildWars2.Annotations;
+using GuildWars2.Professions;
 using JetBrains.Annotations;
 
-namespace GW2SDK.Accounts;
+namespace GuildWars2.Accounts;
 
 [PublicAPI]
 [DataTransferObject]

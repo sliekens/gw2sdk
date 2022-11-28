@@ -5,14 +5,14 @@ using System.IO.MemoryMappedFiles;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Timers;
-using GW2SDK.Mumble;
+using GuildWars2.Mumble;
 using JetBrains.Annotations;
 #if NET
 using System.Runtime.Versioning;
 
 #endif
 
-namespace GW2SDK
+namespace GuildWars2
 {
     [PublicAPI]
     public sealed class GameLink : IDisposable, IObservable<Snapshot>

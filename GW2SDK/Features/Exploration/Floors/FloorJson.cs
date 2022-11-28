@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Text.Json;
-using GW2SDK.Json;
+using GuildWars2.Json;
 using JetBrains.Annotations;
-using Region = GW2SDK.Exploration.Regions.Region;
+using Region = GuildWars2.Exploration.Regions.Region;
 
-namespace GW2SDK.Exploration.Floors;
+namespace GuildWars2.Exploration.Floors;
 
 [PublicAPI]
 public static class FloorJson

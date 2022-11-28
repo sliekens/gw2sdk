@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text.Json;
 using JetBrains.Annotations;
 
-namespace GW2SDK.Pvp.Amulets;
+namespace GuildWars2.Pvp.Amulets;
 
 [PublicAPI]
 public static class AttributesJson

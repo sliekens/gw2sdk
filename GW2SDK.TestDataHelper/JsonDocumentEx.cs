@@ -1,7 +1,7 @@
 ﻿using System.IO;
 using System.Text.Json;
 
-namespace GW2SDK.TestDataHelper;
+namespace GuildWars2.TestDataHelper;
 
 internal static class JsonDocumentEx
 {

@@ -8,7 +8,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using JetBrains.Annotations;
 
-namespace GW2SDK.Http;
+namespace GuildWars2.Http;
 
 [PublicAPI]
 public static class HttpResponseMessageExtensions

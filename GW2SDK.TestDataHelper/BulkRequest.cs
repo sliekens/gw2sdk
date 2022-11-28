@@ -3,9 +3,9 @@ using System.Net.Http;
 using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
-using GW2SDK.Http;
+using GuildWars2.Http;
 
-namespace GW2SDK.TestDataHelper;
+namespace GuildWars2.TestDataHelper;
 
 public class BulkRequest : IHttpRequest<JsonDocument>
 {

@@ -5,7 +5,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace GW2SDK.Tests.Features;
+namespace GuildWars2.Tests.Features;
 
 public class SplitQueryTest
 {

@@ -5,9 +5,9 @@ using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
-using GW2SDK;
-using GW2SDK.Crafting;
-using GW2SDK.Items;
+using GuildWars2;
+using GuildWars2.Crafting;
+using GuildWars2.Items;
 using Spectre.Console;
 
 namespace MostVersatileMaterials;

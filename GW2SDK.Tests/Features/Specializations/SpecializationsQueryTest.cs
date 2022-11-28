@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using GW2SDK.Specializations;
-using GW2SDK.Tests.TestInfrastructure;
+using GuildWars2.Specializations;
+using GuildWars2.Tests.TestInfrastructure;
 using Xunit;
 
-namespace GW2SDK.Tests.Features.Specializations;
+namespace GuildWars2.Tests.Features.Specializations;
 
 public class SpecializationsQueryTest
 {

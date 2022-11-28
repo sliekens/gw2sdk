@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using GW2SDK.Stories;
-using GW2SDK.Tests.TestInfrastructure;
+using GuildWars2.Stories;
+using GuildWars2.Tests.TestInfrastructure;
 using Xunit;
 
-namespace GW2SDK.Tests.Features.Stories;
+namespace GuildWars2.Tests.Features.Stories;
 
 public class StoryQueryTest
 {

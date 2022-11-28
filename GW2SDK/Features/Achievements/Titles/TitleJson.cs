@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Text.Json;
-using GW2SDK.Json;
+using GuildWars2.Json;
 using JetBrains.Annotations;
 
-namespace GW2SDK.Achievements.Titles;
+namespace GuildWars2.Achievements.Titles;
 
 [PublicAPI]
 public static class TitleJson

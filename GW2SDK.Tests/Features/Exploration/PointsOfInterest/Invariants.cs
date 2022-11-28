@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using GW2SDK.Exploration.PointsOfInterest;
+using GuildWars2.Exploration.PointsOfInterest;
 using Xunit;
 
-namespace GW2SDK.Tests.Features.Exploration.PointsOfInterest;
+namespace GuildWars2.Tests.Features.Exploration.PointsOfInterest;
 
 public static class Invariants
 {

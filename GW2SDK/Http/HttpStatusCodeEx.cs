@@ -1,7 +1,7 @@
 ﻿using System.Net;
 using JetBrains.Annotations;
 
-namespace GW2SDK.Http;
+namespace GuildWars2.Http;
 
 [PublicAPI]
 public static class HttpStatusCodeEx

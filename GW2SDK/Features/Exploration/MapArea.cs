@@ -1,7 +1,7 @@
 ﻿using System.Drawing;
 using JetBrains.Annotations;
 
-namespace GW2SDK.Exploration;
+namespace GuildWars2.Exploration;
 
 /// <summary>The dimensions of a map, given as the coordinates of the lower-left (SW) and upper-right (NE) corners.</summary>
 [PublicAPI]

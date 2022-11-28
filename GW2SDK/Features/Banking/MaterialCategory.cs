@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using JetBrains.Annotations;
 
-namespace GW2SDK.Banking;
+namespace GuildWars2.Banking;
 
 [PublicAPI]
 public sealed record MaterialCategory

@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Text.Json;
-using GW2SDK.Armory;
-using GW2SDK.Inventories;
-using GW2SDK.Json;
+using GuildWars2.Armory;
+using GuildWars2.Inventories;
+using GuildWars2.Json;
 using JetBrains.Annotations;
 
-namespace GW2SDK.Accounts;
+namespace GuildWars2.Accounts;
 
 [PublicAPI]
 public static class CharacterJson

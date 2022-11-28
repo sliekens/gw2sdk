@@ -2,11 +2,11 @@
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
-using GW2SDK.Http;
-using GW2SDK.Json;
+using GuildWars2.Http;
+using GuildWars2.Json;
 using JetBrains.Annotations;
 
-namespace GW2SDK.Quests;
+namespace GuildWars2.Quests;
 
 [PublicAPI]
 public sealed class QuestsByIdsRequest : IHttpRequest<IReplicaSet<Quest>>
@@ -50,7 +50,7 @@ public sealed class QuestsByIdsRequest : IHttpRequest<IReplicaSet<Quest>>
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value = json.RootElement.GetSet(entry => entry.GetQuest(MissingMemberBehavior));
+        var value = json.RootElement.GetSet(entry => QuestJson.GetQuest(entry, MissingMemberBehavior));
         return new ReplicaSet<Quest>(
             response.Headers.Date.GetValueOrDefault(),
             value,

@@ -1,7 +1,7 @@
 ﻿using System;
 using JetBrains.Annotations;
 
-namespace GW2SDK.Mounts;
+namespace GuildWars2.Mounts;
 
 [PublicAPI]
 public static class MountNameFormatter

@@ -1,12 +1,12 @@
 ﻿using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
-using GW2SDK.Http;
-using GW2SDK.Json;
+using GuildWars2.Http;
+using GuildWars2.Json;
 using JetBrains.Annotations;
 using static System.Net.Http.HttpMethod;
 
-namespace GW2SDK.Exploration.Continents;
+namespace GuildWars2.Exploration.Continents;
 
 [PublicAPI]
 public sealed class ContinentsRequest : IHttpRequest<IReplicaSet<Continent>>
@@ -41,7 +41,7 @@ public sealed class ContinentsRequest : IHttpRequest<IReplicaSet<Continent>>
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value = json.RootElement.GetSet(entry => entry.GetContinent(MissingMemberBehavior));
+        var value = json.RootElement.GetSet(entry => ContinentJson.GetContinent(entry, MissingMemberBehavior));
         return new ReplicaSet<Continent>(
             response.Headers.Date.GetValueOrDefault(),
             value,

@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Text.Json;
-using GW2SDK.Json;
+using GuildWars2.Json;
 using JetBrains.Annotations;
 
-namespace GW2SDK.Home.Nodes;
+namespace GuildWars2.Home.Nodes;
 
 [PublicAPI]
 public static class NodeJson

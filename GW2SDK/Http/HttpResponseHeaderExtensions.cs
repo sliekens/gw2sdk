@@ -2,9 +2,9 @@
 using System.Linq;
 using System.Net.Http.Headers;
 using JetBrains.Annotations;
-using static GW2SDK.Http.Gw2ResponseHeaderName;
+using static GuildWars2.Http.Gw2ResponseHeaderName;
 
-namespace GW2SDK.Http;
+namespace GuildWars2.Http;
 
 [PublicAPI]
 public static class HttpResponseHeaderExtensions

@@ -1,10 +1,10 @@
 ﻿using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
-using GW2SDK.Http;
+using GuildWars2.Http;
 using JetBrains.Annotations;
 
-namespace GW2SDK.Pvp.Heroes;
+namespace GuildWars2.Pvp.Heroes;
 
 [PublicAPI]
 public sealed class HeroByIdRequest : IHttpRequest<IReplica<Hero>>

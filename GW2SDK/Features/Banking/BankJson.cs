@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Text.Json;
-using GW2SDK.Inventories;
+using GuildWars2.Inventories;
 using JetBrains.Annotations;
 
-namespace GW2SDK.Banking;
+namespace GuildWars2.Banking;
 
 [PublicAPI]
 public static class BankJson

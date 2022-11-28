@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 
-namespace GW2SDK.Tests.TestInfrastructure;
+namespace GuildWars2.Tests.TestInfrastructure;
 
 // ReSharper disable once ClassNeverInstantiated.Global
 public class AssemblyFixture

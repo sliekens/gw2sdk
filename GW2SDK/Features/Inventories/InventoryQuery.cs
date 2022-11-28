@@ -4,7 +4,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using JetBrains.Annotations;
 
-namespace GW2SDK.Inventories;
+namespace GuildWars2.Inventories;
 
 [PublicAPI]
 public sealed class InventoryQuery

@@ -2,11 +2,11 @@
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
-using GW2SDK.Http;
-using GW2SDK.Json;
+using GuildWars2.Http;
+using GuildWars2.Json;
 using JetBrains.Annotations;
 
-namespace GW2SDK.Stories;
+namespace GuildWars2.Stories;
 
 [PublicAPI]
 public sealed class SeasonsByIdsRequest : IHttpRequest<IReplicaSet<Season>>
@@ -50,7 +50,7 @@ public sealed class SeasonsByIdsRequest : IHttpRequest<IReplicaSet<Season>>
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value = json.RootElement.GetSet(entry => entry.GetSeason(MissingMemberBehavior));
+        var value = json.RootElement.GetSet(entry => SeasonJson.GetSeason(entry, MissingMemberBehavior));
         return new ReplicaSet<Season>(
             response.Headers.Date.GetValueOrDefault(),
             value,

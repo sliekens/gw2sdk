@@ -4,9 +4,9 @@ using System.Linq;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
-using GW2SDK.Crafting;
+using GuildWars2.Crafting;
 
-namespace GW2SDK.TestDataHelper;
+namespace GuildWars2.TestDataHelper;
 
 public class JsonRecipeService
 {

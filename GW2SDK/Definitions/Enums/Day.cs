@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel;
 using JetBrains.Annotations;
 
-namespace GW2SDK;
+namespace GuildWars2;
 
 [PublicAPI]
 [DefaultValue(Today)]

@@ -2,11 +2,11 @@
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
-using GW2SDK.Http;
-using GW2SDK.Json;
+using GuildWars2.Http;
+using GuildWars2.Json;
 using JetBrains.Annotations;
 
-namespace GW2SDK.MapChests;
+namespace GuildWars2.MapChests;
 
 [PublicAPI]
 public sealed class MapChestsByIdsRequest : IHttpRequest<IReplicaSet<MapChest>>
@@ -47,7 +47,7 @@ public sealed class MapChestsByIdsRequest : IHttpRequest<IReplicaSet<MapChest>>
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value = json.RootElement.GetSet(entry => entry.GetMapChest(MissingMemberBehavior));
+        var value = json.RootElement.GetSet(entry => MapChestJson.GetMapChest(entry, MissingMemberBehavior));
         return new ReplicaSet<MapChest>(
             response.Headers.Date.GetValueOrDefault(),
             value,

@@ -1,7 +1,7 @@
-﻿using GW2SDK.Annotations;
+﻿using GuildWars2.Annotations;
 using JetBrains.Annotations;
 
-namespace GW2SDK.Pets;
+namespace GuildWars2.Pets;
 
 [PublicAPI]
 [DataTransferObject]

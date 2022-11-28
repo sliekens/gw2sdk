@@ -1,7 +1,7 @@
-﻿using GW2SDK.Finishers;
+﻿using GuildWars2.Finishers;
 using Xunit;
 
-namespace GW2SDK.Tests.Features.Finishers;
+namespace GuildWars2.Tests.Features.Finishers;
 
 internal static class Invariants
 {

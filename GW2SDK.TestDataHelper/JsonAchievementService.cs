@@ -4,9 +4,9 @@ using System.Linq;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
-using GW2SDK.Achievements;
+using GuildWars2.Achievements;
 
-namespace GW2SDK.TestDataHelper;
+namespace GuildWars2.TestDataHelper;
 
 public class JsonAchievementService
 {

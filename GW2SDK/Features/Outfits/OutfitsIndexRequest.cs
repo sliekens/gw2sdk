@@ -1,11 +1,11 @@
 ﻿using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
-using GW2SDK.Http;
-using GW2SDK.Json;
+using GuildWars2.Http;
+using GuildWars2.Json;
 using JetBrains.Annotations;
 
-namespace GW2SDK.Outfits;
+namespace GuildWars2.Outfits;
 
 [PublicAPI]
 public sealed class OutfitsIndexRequest : IHttpRequest<IReplicaSet<int>>

@@ -1,7 +1,7 @@
-﻿using GW2SDK.Outfits;
+﻿using GuildWars2.Outfits;
 using Xunit;
 
-namespace GW2SDK.Tests.Features.Outfits;
+namespace GuildWars2.Tests.Features.Outfits;
 
 internal static class Invariants
 {

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using JetBrains.Annotations;
 
-namespace GW2SDK;
+namespace GuildWars2;
 
 [PublicAPI]
 

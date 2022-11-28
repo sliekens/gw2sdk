@@ -1,11 +1,11 @@
 ﻿using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
-using GW2SDK.Http;
-using GW2SDK.Json;
+using GuildWars2.Http;
+using GuildWars2.Json;
 using JetBrains.Annotations;
 
-namespace GW2SDK.Novelties;
+namespace GuildWars2.Novelties;
 
 [PublicAPI]
 public sealed class NoveltiesByPageRequest : IHttpRequest<IReplicaPage<Novelty>>
@@ -53,7 +53,7 @@ public sealed class NoveltiesByPageRequest : IHttpRequest<IReplicaPage<Novelty>>
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value = json.RootElement.GetSet(entry => entry.GetNovelty(MissingMemberBehavior));
+        var value = json.RootElement.GetSet(entry => NoveltyJson.GetNovelty(entry, MissingMemberBehavior));
         return new ReplicaPage<Novelty>(
             response.Headers.Date.GetValueOrDefault(),
             value,

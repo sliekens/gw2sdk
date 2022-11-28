@@ -1,8 +1,8 @@
 ﻿using System.Text.Json;
-using GW2SDK.Crafting;
+using GuildWars2.Crafting;
 using Xunit;
 
-namespace GW2SDK.Tests.Features.Crafting;
+namespace GuildWars2.Tests.Features.Crafting;
 
 public class RecipeReaderTest : IClassFixture<RecipeFixture>
 {

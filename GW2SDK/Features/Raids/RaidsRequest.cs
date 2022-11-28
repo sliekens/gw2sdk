@@ -1,11 +1,11 @@
 ﻿using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
-using GW2SDK.Http;
-using GW2SDK.Json;
+using GuildWars2.Http;
+using GuildWars2.Json;
 using JetBrains.Annotations;
 
-namespace GW2SDK.Raids;
+namespace GuildWars2.Raids;
 
 [PublicAPI]
 public sealed class RaidsRequest : IHttpRequest<IReplicaSet<Raid>>
@@ -35,7 +35,7 @@ public sealed class RaidsRequest : IHttpRequest<IReplicaSet<Raid>>
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value = json.RootElement.GetSet(entry => entry.GetRaid(MissingMemberBehavior));
+        var value = json.RootElement.GetSet(entry => RaidJson.GetRaid(entry, MissingMemberBehavior));
         return new ReplicaSet<Raid>(
             response.Headers.Date.GetValueOrDefault(),
             value,

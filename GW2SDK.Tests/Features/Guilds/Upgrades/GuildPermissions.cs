@@ -1,9 +1,9 @@
 ﻿using System.Threading.Tasks;
-using GW2SDK.Guilds.Upgrades;
-using GW2SDK.Tests.TestInfrastructure;
+using GuildWars2.Guilds.Upgrades;
+using GuildWars2.Tests.TestInfrastructure;
 using Xunit;
 
-namespace GW2SDK.Tests.Features.Guilds.Upgrades;
+namespace GuildWars2.Tests.Features.Guilds.Upgrades;
 
 public class GuildUpgrades
 {

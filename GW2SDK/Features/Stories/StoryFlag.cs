@@ -1,6 +1,6 @@
 ﻿using JetBrains.Annotations;
 
-namespace GW2SDK.Stories;
+namespace GuildWars2.Stories;
 
 [PublicAPI]
 public enum StoryFlag

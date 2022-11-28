@@ -5,7 +5,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using JetBrains.Annotations;
 
-namespace GW2SDK.Minipets;
+namespace GuildWars2.Minipets;
 
 [PublicAPI]
 public sealed class MinipetsQuery

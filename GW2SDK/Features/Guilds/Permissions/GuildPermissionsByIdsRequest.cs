@@ -3,11 +3,11 @@ using System.Linq;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
-using GW2SDK.Http;
-using GW2SDK.Json;
+using GuildWars2.Http;
+using GuildWars2.Json;
 using JetBrains.Annotations;
 
-namespace GW2SDK.Guilds.Permissions;
+namespace GuildWars2.Guilds.Permissions;
 
 [PublicAPI]
 public sealed class GuildPermissionsByIdsRequest : IHttpRequest<IReplicaSet<GuildPermissionSummary>>
@@ -53,7 +53,7 @@ public sealed class GuildPermissionsByIdsRequest : IHttpRequest<IReplicaSet<Guil
             .ConfigureAwait(false);
 
         var value = json.RootElement.GetSet(
-            entry => entry.GetGuildPermissionSummary(MissingMemberBehavior)
+            entry => GuildPermissionSummaryJson.GetGuildPermissionSummary(entry, MissingMemberBehavior)
         );
         return new ReplicaSet<GuildPermissionSummary>(
             response.Headers.Date.GetValueOrDefault(),

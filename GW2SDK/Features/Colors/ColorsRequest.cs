@@ -1,12 +1,12 @@
 ﻿using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
-using GW2SDK.Http;
-using GW2SDK.Json;
+using GuildWars2.Http;
+using GuildWars2.Json;
 using JetBrains.Annotations;
 using static System.Net.Http.HttpMethod;
 
-namespace GW2SDK.Colors;
+namespace GuildWars2.Colors;
 
 [PublicAPI]
 public sealed class ColorsRequest : IHttpRequest<IReplicaSet<Dye>>
@@ -41,7 +41,7 @@ public sealed class ColorsRequest : IHttpRequest<IReplicaSet<Dye>>
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value = json.RootElement.GetSet(entry => entry.GetDye(MissingMemberBehavior));
+        var value = json.RootElement.GetSet(entry => DyeJson.GetDye(entry, MissingMemberBehavior));
         return new ReplicaSet<Dye>(
             response.Headers.Date.GetValueOrDefault(),
             value,

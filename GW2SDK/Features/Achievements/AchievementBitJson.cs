@@ -2,7 +2,7 @@
 using System.Text.Json;
 using JetBrains.Annotations;
 
-namespace GW2SDK.Achievements;
+namespace GuildWars2.Achievements;
 
 [PublicAPI]
 public static class AchievementBitJson

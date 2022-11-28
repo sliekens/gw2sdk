@@ -2,12 +2,12 @@
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
-using GW2SDK.Http;
-using GW2SDK.Json;
+using GuildWars2.Http;
+using GuildWars2.Json;
 using JetBrains.Annotations;
 using static System.Net.Http.HttpMethod;
 
-namespace GW2SDK.Exploration.Floors;
+namespace GuildWars2.Exploration.Floors;
 
 [PublicAPI]
 public sealed class FloorsByPageRequest : IHttpRequest<IReplicaPage<Floor>>
@@ -62,7 +62,7 @@ public sealed class FloorsByPageRequest : IHttpRequest<IReplicaPage<Floor>>
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value = json.RootElement.GetSet(entry => entry.GetFloor(MissingMemberBehavior));
+        var value = json.RootElement.GetSet(entry => FloorJson.GetFloor(entry, MissingMemberBehavior));
         return new ReplicaPage<Floor>(
             response.Headers.Date.GetValueOrDefault(),
             value,

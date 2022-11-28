@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Text.Json;
-using GW2SDK.ItemStats;
-using GW2SDK.Json;
+using GuildWars2.ItemStats;
+using GuildWars2.Json;
 using JetBrains.Annotations;
 
-namespace GW2SDK.Armory;
+namespace GuildWars2.Armory;
 
 [PublicAPI]
 public static class EquipmentItemJson

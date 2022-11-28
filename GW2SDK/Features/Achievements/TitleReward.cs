@@ -1,6 +1,6 @@
 ﻿using JetBrains.Annotations;
 
-namespace GW2SDK.Achievements;
+namespace GuildWars2.Achievements;
 
 [PublicAPI]
 public sealed record TitleReward : AchievementReward

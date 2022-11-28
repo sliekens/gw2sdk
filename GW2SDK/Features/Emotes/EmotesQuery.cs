@@ -5,7 +5,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using JetBrains.Annotations;
 
-namespace GW2SDK.Emotes;
+namespace GuildWars2.Emotes;
 
 [PublicAPI]
 public sealed class EmotesQuery

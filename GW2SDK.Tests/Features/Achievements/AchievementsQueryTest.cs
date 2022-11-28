@@ -1,16 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using GW2SDK.Achievements;
-using GW2SDK.Achievements.Categories;
-using GW2SDK.Achievements.Dailies;
-using GW2SDK.Achievements.Groups;
-using GW2SDK.Achievements.Titles;
-using GW2SDK.Tests.TestInfrastructure;
+using GuildWars2.Achievements;
+using GuildWars2.Achievements.Categories;
+using GuildWars2.Achievements.Dailies;
+using GuildWars2.Achievements.Groups;
+using GuildWars2.Achievements.Titles;
+using GuildWars2.Tests.TestInfrastructure;
 using Xunit;
-using static GW2SDK.ProductName;
+using static GuildWars2.ProductName;
 
-namespace GW2SDK.Tests.Features.Achievements;
+namespace GuildWars2.Tests.Features.Achievements;
 
 public class AchievementsQueryTest
 {

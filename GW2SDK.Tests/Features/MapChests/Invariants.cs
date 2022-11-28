@@ -1,7 +1,7 @@
-﻿using GW2SDK.MapChests;
+﻿using GuildWars2.MapChests;
 using Xunit;
 
-namespace GW2SDK.Tests.Features.MapChests;
+namespace GuildWars2.Tests.Features.MapChests;
 
 public static class Invariants
 {

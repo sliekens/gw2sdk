@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace GW2SDK.Json;
+namespace GuildWars2.Json;
 
 internal static class JsonMemberExtensions
 {

@@ -1,12 +1,12 @@
 ﻿using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
-using GW2SDK.Http;
-using GW2SDK.Json;
+using GuildWars2.Http;
+using GuildWars2.Json;
 using JetBrains.Annotations;
 using static System.Net.Http.HttpMethod;
 
-namespace GW2SDK.Achievements;
+namespace GuildWars2.Achievements;
 
 [PublicAPI]
 public sealed class AchievementsByPageRequest : IHttpRequest<IReplicaPage<Achievement>>
@@ -56,7 +56,7 @@ public sealed class AchievementsByPageRequest : IHttpRequest<IReplicaPage<Achiev
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value = json.RootElement.GetSet(entry => entry.GetAchievement(MissingMemberBehavior));
+        var value = json.RootElement.GetSet(entry => AchievementJson.GetAchievement(entry, MissingMemberBehavior));
         return new ReplicaPage<Achievement>(
             response.Headers.Date.GetValueOrDefault(),
             value,

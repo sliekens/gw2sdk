@@ -1,8 +1,8 @@
 ﻿using System;
-using GW2SDK.Http;
+using GuildWars2.Http;
 using Xunit;
 
-namespace GW2SDK.Tests.Http;
+namespace GuildWars2.Tests.Http;
 
 public class QueryBuilderTest
 {

@@ -3,7 +3,7 @@ using JetBrains.Annotations;
 
 // ReSharper disable InconsistentNaming // because this is based on operating system APIs
 #pragma warning disable IDE1006 // Naming Styles
-namespace GW2SDK.Win32;
+namespace GuildWars2.Win32;
 
 [StructLayout(LayoutKind.Sequential)]
 [UsedImplicitly(ImplicitUseTargetFlags.Members)]

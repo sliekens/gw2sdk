@@ -1,12 +1,12 @@
 ﻿using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
-using GW2SDK.Http;
-using GW2SDK.Json;
+using GuildWars2.Http;
+using GuildWars2.Json;
 using JetBrains.Annotations;
 using static System.Net.Http.HttpMethod;
 
-namespace GW2SDK.Skills;
+namespace GuildWars2.Skills;
 
 [PublicAPI]
 public sealed class SkillsByPageRequest : IHttpRequest<IReplicaPage<Skill>>
@@ -56,7 +56,7 @@ public sealed class SkillsByPageRequest : IHttpRequest<IReplicaPage<Skill>>
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value = json.RootElement.GetSet(entry => entry.GetSkill(MissingMemberBehavior));
+        var value = json.RootElement.GetSet(entry => SkillJson.GetSkill(entry, MissingMemberBehavior));
         return new ReplicaPage<Skill>(
             response.Headers.Date.GetValueOrDefault(),
             value,

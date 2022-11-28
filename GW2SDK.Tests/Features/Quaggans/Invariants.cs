@@ -1,8 +1,8 @@
 ﻿using System;
-using GW2SDK.Quaggans;
+using GuildWars2.Quaggans;
 using Xunit;
 
-namespace GW2SDK.Tests.Features.Quaggans;
+namespace GuildWars2.Tests.Features.Quaggans;
 
 internal static class Invariants
 {

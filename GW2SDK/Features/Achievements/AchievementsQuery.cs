@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
-using GW2SDK.Achievements.Categories;
-using GW2SDK.Achievements.Dailies;
-using GW2SDK.Achievements.Groups;
-using GW2SDK.Achievements.Titles;
-using GW2SDK.Annotations;
+using GuildWars2.Achievements.Categories;
+using GuildWars2.Achievements.Dailies;
+using GuildWars2.Achievements.Groups;
+using GuildWars2.Achievements.Titles;
+using GuildWars2.Annotations;
 using JetBrains.Annotations;
 
-namespace GW2SDK.Achievements;
+namespace GuildWars2.Achievements;
 
 [PublicAPI]
 public sealed class AchievementsQuery

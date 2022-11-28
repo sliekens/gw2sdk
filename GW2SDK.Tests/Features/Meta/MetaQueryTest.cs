@@ -2,11 +2,11 @@
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
-using GW2SDK.Meta;
-using GW2SDK.Tests.TestInfrastructure;
+using GuildWars2.Meta;
+using GuildWars2.Tests.TestInfrastructure;
 using Xunit;
 
-namespace GW2SDK.Tests.Features.Meta;
+namespace GuildWars2.Tests.Features.Meta;
 
 public class MetaQueryTest
 {

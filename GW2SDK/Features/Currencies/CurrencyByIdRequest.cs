@@ -1,11 +1,11 @@
 ﻿using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
-using GW2SDK.Http;
+using GuildWars2.Http;
 using JetBrains.Annotations;
 using static System.Net.Http.HttpMethod;
 
-namespace GW2SDK.Currencies;
+namespace GuildWars2.Currencies;
 
 [PublicAPI]
 public sealed class CurrencyByIdRequest : IHttpRequest<IReplica<Currency>>

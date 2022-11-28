@@ -1,11 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using GW2SDK.MailCarriers;
-using GW2SDK.Tests.TestInfrastructure;
+using GuildWars2.MailCarriers;
+using GuildWars2.Tests.TestInfrastructure;
 using Xunit;
 
-namespace GW2SDK.Tests.Features.MailCarriers;
+namespace GuildWars2.Tests.Features.MailCarriers;
 
 public class MailCarriersQueryTest
 {

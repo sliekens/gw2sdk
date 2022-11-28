@@ -1,7 +1,7 @@
-﻿using GW2SDK.Emotes;
+﻿using GuildWars2.Emotes;
 using Xunit;
 
-namespace GW2SDK.Tests.Features.Emotes;
+namespace GuildWars2.Tests.Features.Emotes;
 
 internal static class Invariants
 {

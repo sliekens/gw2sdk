@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Drawing;
-using GW2SDK.Annotations;
+using GuildWars2.Annotations;
 using JetBrains.Annotations;
-using Region = GW2SDK.Exploration.Regions.Region;
+using Region = GuildWars2.Exploration.Regions.Region;
 
-namespace GW2SDK.Exploration.Floors;
+namespace GuildWars2.Exploration.Floors;
 
 [PublicAPI]
 [DataTransferObject]

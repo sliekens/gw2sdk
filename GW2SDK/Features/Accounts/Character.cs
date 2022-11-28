@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using GW2SDK.Annotations;
-using GW2SDK.Armory;
-using GW2SDK.Inventories;
+using GuildWars2.Annotations;
+using GuildWars2.Armory;
+using GuildWars2.Inventories;
 using JetBrains.Annotations;
 
-namespace GW2SDK.Accounts;
+namespace GuildWars2.Accounts;
 
 [PublicAPI]
 [DataTransferObject]

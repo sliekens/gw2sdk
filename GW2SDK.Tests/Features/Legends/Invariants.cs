@@ -1,7 +1,7 @@
-﻿using GW2SDK.Legends;
+﻿using GuildWars2.Legends;
 using Xunit;
 
-namespace GW2SDK.Tests.Features.Legends;
+namespace GuildWars2.Tests.Features.Legends;
 
 public static class Invariants
 {

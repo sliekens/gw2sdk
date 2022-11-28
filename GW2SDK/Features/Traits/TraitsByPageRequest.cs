@@ -1,12 +1,12 @@
 ﻿using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
-using GW2SDK.Http;
-using GW2SDK.Json;
+using GuildWars2.Http;
+using GuildWars2.Json;
 using JetBrains.Annotations;
 using static System.Net.Http.HttpMethod;
 
-namespace GW2SDK.Traits;
+namespace GuildWars2.Traits;
 
 [PublicAPI]
 public sealed class TraitsByPageRequest : IHttpRequest<IReplicaPage<Trait>>
@@ -56,7 +56,7 @@ public sealed class TraitsByPageRequest : IHttpRequest<IReplicaPage<Trait>>
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value = json.RootElement.GetSet(entry => entry.GetTrait(MissingMemberBehavior));
+        var value = json.RootElement.GetSet(entry => TraitJson.GetTrait(entry, MissingMemberBehavior));
         return new ReplicaPage<Trait>(
             response.Headers.Date.GetValueOrDefault(),
             value,

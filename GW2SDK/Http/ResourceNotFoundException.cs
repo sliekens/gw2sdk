@@ -1,7 +1,7 @@
 ﻿using System;
 using JetBrains.Annotations;
 
-namespace GW2SDK.Http;
+namespace GuildWars2.Http;
 
 /// <summary>Thrown when a server returns a Not Found result (404).</summary>
 [PublicAPI]

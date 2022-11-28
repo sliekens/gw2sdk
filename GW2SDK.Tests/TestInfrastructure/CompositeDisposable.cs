@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace GW2SDK.Tests.TestInfrastructure;
+namespace GuildWars2.Tests.TestInfrastructure;
 
 internal sealed class CompositeDisposable : IAsyncDisposable, IDisposable
 {

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace GW2SDK;
+namespace GuildWars2;
 
 internal sealed class Replica<T> : IReplica<T>
 {

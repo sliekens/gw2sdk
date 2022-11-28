@@ -1,12 +1,12 @@
 ﻿using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
-using GW2SDK.Http;
-using GW2SDK.Json;
+using GuildWars2.Http;
+using GuildWars2.Json;
 using JetBrains.Annotations;
 using static System.Net.Http.HttpMethod;
 
-namespace GW2SDK.Stories;
+namespace GuildWars2.Stories;
 
 [PublicAPI]
 public sealed class BackstoryAnswersRequest : IHttpRequest<IReplicaSet<BackstoryAnswer>>
@@ -42,7 +42,7 @@ public sealed class BackstoryAnswersRequest : IHttpRequest<IReplicaSet<Backstory
             .ConfigureAwait(false);
 
         var value = json.RootElement.GetSet(
-            entry => entry.GetBackstoryAnswer(MissingMemberBehavior)
+            entry => BackstoryAnswerJson.GetBackstoryAnswer(entry, MissingMemberBehavior)
         );
         return new ReplicaSet<BackstoryAnswer>(
             response.Headers.Date.GetValueOrDefault(),

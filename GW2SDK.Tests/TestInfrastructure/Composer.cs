@@ -2,7 +2,7 @@
 using System.Net.Http;
 using System.Threading.Tasks;
 
-namespace GW2SDK.Tests.TestInfrastructure;
+namespace GuildWars2.Tests.TestInfrastructure;
 
 public class Composer : IServiceProvider, IAsyncDisposable
 {

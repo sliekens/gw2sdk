@@ -1,4 +1,4 @@
-﻿namespace GW2SDK;
+﻿namespace GuildWars2;
 
 /// <summary>Utility for formatting commonly used strings, e.g. Exception messages.</summary>
 internal static class Strings

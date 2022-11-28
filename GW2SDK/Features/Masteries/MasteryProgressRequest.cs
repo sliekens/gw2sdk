@@ -2,11 +2,11 @@
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
-using GW2SDK.Http;
-using GW2SDK.Json;
+using GuildWars2.Http;
+using GuildWars2.Json;
 using JetBrains.Annotations;
 
-namespace GW2SDK.Masteries;
+namespace GuildWars2.Masteries;
 
 [PublicAPI]
 public sealed class
@@ -38,7 +38,7 @@ public sealed class
             .ConfigureAwait(false);
 
         var value = json.RootElement.GetSet(
-            entry => entry.GetMasteryProgress(MissingMemberBehavior)
+            entry => MasteryProgressJson.GetMasteryProgress(entry, MissingMemberBehavior)
         );
         return new Replica<IReadOnlyCollection<MasteryProgress>>(
             response.Headers.Date.GetValueOrDefault(),

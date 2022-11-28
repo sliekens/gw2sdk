@@ -5,7 +5,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using JetBrains.Annotations;
 
-namespace GW2SDK.Raids;
+namespace GuildWars2.Raids;
 
 [PublicAPI]
 public sealed class RaidsQuery

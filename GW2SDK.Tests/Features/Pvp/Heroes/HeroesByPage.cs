@@ -1,8 +1,8 @@
 ﻿using System.Threading.Tasks;
-using GW2SDK.Tests.TestInfrastructure;
+using GuildWars2.Tests.TestInfrastructure;
 using Xunit;
 
-namespace GW2SDK.Tests.Features.Pvp.Heroes;
+namespace GuildWars2.Tests.Features.Pvp.Heroes;
 
 public class HeroesByPage
 {

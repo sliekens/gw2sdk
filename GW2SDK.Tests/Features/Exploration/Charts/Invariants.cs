@@ -1,7 +1,7 @@
-﻿using GW2SDK.Exploration.Charts;
+﻿using GuildWars2.Exploration.Charts;
 using Xunit;
 
-namespace GW2SDK.Tests.Features.Exploration.Charts;
+namespace GuildWars2.Tests.Features.Exploration.Charts;
 
 public static class Invariants
 {

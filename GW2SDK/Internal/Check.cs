@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace GW2SDK;
+namespace GuildWars2;
 
 /// <summary>Contains commonly used precondition checks.</summary>
 internal static class Check

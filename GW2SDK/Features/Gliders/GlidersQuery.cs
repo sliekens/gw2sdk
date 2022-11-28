@@ -5,7 +5,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using JetBrains.Annotations;
 
-namespace GW2SDK.Gliders;
+namespace GuildWars2.Gliders;
 
 [PublicAPI]
 public sealed class GlidersQuery

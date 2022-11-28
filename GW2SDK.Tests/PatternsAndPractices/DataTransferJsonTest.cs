@@ -2,11 +2,11 @@
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text.Json;
-using GW2SDK.Tests.TestInfrastructure;
+using GuildWars2.Tests.TestInfrastructure;
 using Xunit;
 using static System.Reflection.BindingFlags;
 
-namespace GW2SDK.Tests.PatternsAndPractices;
+namespace GuildWars2.Tests.PatternsAndPractices;
 
 public class DataTransferJsonTest : IClassFixture<AssemblyFixture>
 {

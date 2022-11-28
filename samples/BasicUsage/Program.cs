@@ -1,4 +1,4 @@
-﻿using GW2SDK;
+﻿using GuildWars2;
 
 // HttpClient has a fully customizable pipeline, but defaults are fine too
 using HttpClient httpClient = new();

@@ -1,10 +1,10 @@
 ﻿using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
-using GW2SDK.Http;
+using GuildWars2.Http;
 using JetBrains.Annotations;
 
-namespace GW2SDK.Races;
+namespace GuildWars2.Races;
 
 [PublicAPI]
 public sealed class RaceByIdRequest : IHttpRequest<IReplica<Race>>

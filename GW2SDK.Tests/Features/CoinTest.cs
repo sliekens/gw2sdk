@@ -1,7 +1,7 @@
 ﻿using System;
 using Xunit;
 
-namespace GW2SDK.Tests.Features;
+namespace GuildWars2.Tests.Features;
 
 public class CoinTest
 {

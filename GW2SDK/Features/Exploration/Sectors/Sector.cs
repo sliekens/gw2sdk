@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Drawing;
-using GW2SDK.Annotations;
+using GuildWars2.Annotations;
 using JetBrains.Annotations;
 
-namespace GW2SDK.Exploration.Sectors;
+namespace GuildWars2.Exploration.Sectors;
 
 [PublicAPI]
 [DataTransferObject]

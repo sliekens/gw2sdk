@@ -1,6 +1,6 @@
 ﻿using JetBrains.Annotations;
 
-namespace GW2SDK.Quaggans;
+namespace GuildWars2.Quaggans;
 
 [PublicAPI]
 public sealed record Quaggan

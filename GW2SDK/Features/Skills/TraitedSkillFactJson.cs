@@ -1,7 +1,7 @@
 using System.Text.Json;
 using JetBrains.Annotations;
 
-namespace GW2SDK.Skills;
+namespace GuildWars2.Skills;
 
 [PublicAPI]
 public static class TraitedSkillFactJson

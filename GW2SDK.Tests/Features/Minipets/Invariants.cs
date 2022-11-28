@@ -1,7 +1,7 @@
-﻿using GW2SDK.Minipets;
+﻿using GuildWars2.Minipets;
 using Xunit;
 
-namespace GW2SDK.Tests.Features.Minipets;
+namespace GuildWars2.Tests.Features.Minipets;
 
 internal static class Invariants
 {

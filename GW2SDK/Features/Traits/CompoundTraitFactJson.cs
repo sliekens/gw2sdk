@@ -1,7 +1,7 @@
 ﻿using System.Text.Json;
 using JetBrains.Annotations;
 
-namespace GW2SDK.Traits;
+namespace GuildWars2.Traits;
 
 [PublicAPI]
 public static class CompoundTraitFactJson

@@ -1,7 +1,7 @@
-﻿using GW2SDK.Pvp.Heroes;
+﻿using GuildWars2.Pvp.Heroes;
 using Xunit;
 
-namespace GW2SDK.Tests.Features.Pvp.Heroes;
+namespace GuildWars2.Tests.Features.Pvp.Heroes;
 
 internal static class Invariants
 {

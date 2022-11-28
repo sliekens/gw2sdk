@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Drawing;
-using GW2SDK.Annotations;
+using GuildWars2.Annotations;
 using JetBrains.Annotations;
 
-namespace GW2SDK.Exploration.Hearts;
+namespace GuildWars2.Exploration.Hearts;
 
 [PublicAPI]
 [DataTransferObject]

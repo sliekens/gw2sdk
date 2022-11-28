@@ -2,17 +2,17 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Text.Json;
-using GW2SDK.Exploration.Adventures;
-using GW2SDK.Exploration.GodShrines;
-using GW2SDK.Exploration.Hearts;
-using GW2SDK.Exploration.MasteryPoints;
-using GW2SDK.Exploration.PointsOfInterest;
-using GW2SDK.Exploration.Sectors;
-using GW2SDK.Exploration.SkillChallenge;
-using GW2SDK.Json;
+using GuildWars2.Exploration.Adventures;
+using GuildWars2.Exploration.GodShrines;
+using GuildWars2.Exploration.Hearts;
+using GuildWars2.Exploration.MasteryPoints;
+using GuildWars2.Exploration.PointsOfInterest;
+using GuildWars2.Exploration.Sectors;
+using GuildWars2.Exploration.SkillChallenge;
+using GuildWars2.Json;
 using JetBrains.Annotations;
 
-namespace GW2SDK.Exploration.Charts;
+namespace GuildWars2.Exploration.Charts;
 
 [PublicAPI]
 public static class ChartJson

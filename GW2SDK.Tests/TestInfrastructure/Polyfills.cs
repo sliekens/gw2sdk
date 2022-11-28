@@ -1,4 +1,4 @@
-﻿namespace GW2SDK.Tests.TestInfrastructure;
+﻿namespace GuildWars2.Tests.TestInfrastructure;
 
 internal static class Polyfills
 {

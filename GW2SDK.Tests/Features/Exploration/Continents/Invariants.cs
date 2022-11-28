@@ -1,8 +1,8 @@
 ﻿using System.Drawing;
-using GW2SDK.Exploration.Continents;
+using GuildWars2.Exploration.Continents;
 using Xunit;
 
-namespace GW2SDK.Tests.Features.Exploration.Continents;
+namespace GuildWars2.Tests.Features.Exploration.Continents;
 
 public static class Invariants
 {

@@ -1,8 +1,8 @@
 ﻿using System.Drawing;
-using GW2SDK.Exploration.Floors;
+using GuildWars2.Exploration.Floors;
 using Xunit;
 
-namespace GW2SDK.Tests.Features.Exploration.Floors;
+namespace GuildWars2.Tests.Features.Exploration.Floors;
 
 public static class Invariants
 {

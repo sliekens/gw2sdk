@@ -5,7 +5,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using JetBrains.Annotations;
 
-namespace GW2SDK.Legends;
+namespace GuildWars2.Legends;
 
 [PublicAPI]
 public sealed class LegendsQuery

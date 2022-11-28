@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Text.Json;
-using GW2SDK.Json;
+using GuildWars2.Json;
 using JetBrains.Annotations;
 
-namespace GW2SDK.Commerce.Listings;
+namespace GuildWars2.Commerce.Listings;
 
 [PublicAPI]
 public static class OrderBookJson

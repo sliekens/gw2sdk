@@ -5,7 +5,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using JetBrains.Annotations;
 
-namespace GW2SDK.Outfits;
+namespace GuildWars2.Outfits;
 
 [PublicAPI]
 public sealed class OutfitsQuery

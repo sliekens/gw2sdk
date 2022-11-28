@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using GW2SDK.Tests.TestInfrastructure;
+using GuildWars2.Tests.TestInfrastructure;
 
-namespace GW2SDK.Tests.Features.Items;
+namespace GuildWars2.Tests.Features.Items;
 
 // ReSharper disable once ClassNeverInstantiated.Global
 public class ItemFixture

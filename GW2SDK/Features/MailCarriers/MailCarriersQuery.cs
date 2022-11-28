@@ -5,7 +5,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using JetBrains.Annotations;
 
-namespace GW2SDK.MailCarriers;
+namespace GuildWars2.MailCarriers;
 
 [PublicAPI]
 public sealed class MailCarriersQuery

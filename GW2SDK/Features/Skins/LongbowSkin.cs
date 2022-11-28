@@ -1,6 +1,6 @@
 ﻿using JetBrains.Annotations;
 
-namespace GW2SDK.Skins;
+namespace GuildWars2.Skins;
 
 [PublicAPI]
 public sealed record LongbowSkin : WeaponSkin;

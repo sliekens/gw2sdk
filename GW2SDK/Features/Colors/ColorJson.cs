@@ -2,7 +2,7 @@
 using System.Text.Json;
 using JetBrains.Annotations;
 
-namespace GW2SDK.Colors;
+namespace GuildWars2.Colors;
 
 [PublicAPI]
 public static class ColorJson

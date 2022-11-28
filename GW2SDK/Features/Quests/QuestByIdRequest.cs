@@ -1,10 +1,10 @@
 ﻿using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
-using GW2SDK.Http;
+using GuildWars2.Http;
 using JetBrains.Annotations;
 
-namespace GW2SDK.Quests;
+namespace GuildWars2.Quests;
 
 [PublicAPI]
 public sealed class QuestByIdRequest : IHttpRequest<IReplica<Quest>>

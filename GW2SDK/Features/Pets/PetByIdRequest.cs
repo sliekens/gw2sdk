@@ -1,10 +1,10 @@
 ﻿using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
-using GW2SDK.Http;
+using GuildWars2.Http;
 using JetBrains.Annotations;
 
-namespace GW2SDK.Pets;
+namespace GuildWars2.Pets;
 
 [PublicAPI]
 public sealed class PetByIdRequest : IHttpRequest<IReplica<Pet>>

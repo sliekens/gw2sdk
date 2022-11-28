@@ -1,12 +1,12 @@
 ﻿using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
-using GW2SDK.Http;
-using GW2SDK.Json;
+using GuildWars2.Http;
+using GuildWars2.Json;
 using JetBrains.Annotations;
 using static System.Net.Http.HttpMethod;
 
-namespace GW2SDK.Currencies;
+namespace GuildWars2.Currencies;
 
 [PublicAPI]
 public sealed class CurrenciesRequest : IHttpRequest<IReplicaSet<Currency>>
@@ -41,7 +41,7 @@ public sealed class CurrenciesRequest : IHttpRequest<IReplicaSet<Currency>>
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value = json.RootElement.GetSet(entry => entry.GetCurrency(MissingMemberBehavior));
+        var value = json.RootElement.GetSet(entry => CurrencyJson.GetCurrency(entry, MissingMemberBehavior));
         return new ReplicaSet<Currency>(
             response.Headers.Date.GetValueOrDefault(),
             value,

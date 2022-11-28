@@ -2,12 +2,12 @@
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
-using GW2SDK.Http;
-using GW2SDK.Json;
+using GuildWars2.Http;
+using GuildWars2.Json;
 using JetBrains.Annotations;
 using static System.Net.Http.HttpMethod;
 
-namespace GW2SDK.Exploration.Charts;
+namespace GuildWars2.Exploration.Charts;
 
 [PublicAPI]
 public sealed class ChartsIndexRequest : IHttpRequest<IReplicaSet<int>>

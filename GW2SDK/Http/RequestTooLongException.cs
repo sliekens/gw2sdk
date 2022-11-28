@@ -1,7 +1,7 @@
 ﻿using System;
 using JetBrains.Annotations;
 
-namespace GW2SDK.Http;
+namespace GuildWars2.Http;
 
 [PublicAPI]
 public sealed class RequestTooLongException : InvalidOperationException

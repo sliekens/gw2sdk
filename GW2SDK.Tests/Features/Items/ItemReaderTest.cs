@@ -1,8 +1,8 @@
 ﻿using System.Text.Json;
-using GW2SDK.Items;
+using GuildWars2.Items;
 using Xunit;
 
-namespace GW2SDK.Tests.Features.Items;
+namespace GuildWars2.Tests.Features.Items;
 
 public class ItemReaderTest : IClassFixture<ItemFixture>
 {

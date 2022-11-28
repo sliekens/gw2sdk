@@ -1,7 +1,7 @@
-﻿using GW2SDK.Guilds.Upgrades;
+﻿using GuildWars2.Guilds.Upgrades;
 using Xunit;
 
-namespace GW2SDK.Tests.Features.Guilds.Upgrades;
+namespace GuildWars2.Tests.Features.Guilds.Upgrades;
 
 internal static class Invariants
 {

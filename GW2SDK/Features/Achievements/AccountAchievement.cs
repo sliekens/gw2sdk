@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
-using GW2SDK.Annotations;
+using GuildWars2.Annotations;
 using JetBrains.Annotations;
 
-namespace GW2SDK.Achievements;
+namespace GuildWars2.Achievements;
 
 [PublicAPI]
 [DataTransferObject]

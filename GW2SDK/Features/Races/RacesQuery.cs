@@ -5,7 +5,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using JetBrains.Annotations;
 
-namespace GW2SDK.Races;
+namespace GuildWars2.Races;
 
 [PublicAPI]
 public sealed class RacesQuery

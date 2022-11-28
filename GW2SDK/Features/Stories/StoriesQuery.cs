@@ -5,7 +5,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using JetBrains.Annotations;
 
-namespace GW2SDK.Stories;
+namespace GuildWars2.Stories;
 
 [PublicAPI]
 public sealed class StoriesQuery

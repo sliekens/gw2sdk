@@ -1,4 +1,4 @@
-﻿using GW2SDK.Meta;
+﻿using GuildWars2.Meta;
 
 using HttpClient httpClient = new();
 

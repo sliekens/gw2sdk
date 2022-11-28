@@ -1,8 +1,8 @@
 ﻿using System;
-using GW2SDK.Mounts;
+using GuildWars2.Mounts;
 using Xunit;
 
-namespace GW2SDK.Tests.Features.Mounts;
+namespace GuildWars2.Tests.Features.Mounts;
 
 public class MountNameFormatterTest
 {

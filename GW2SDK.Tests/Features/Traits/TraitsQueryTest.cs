@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using GW2SDK.Tests.TestInfrastructure;
-using GW2SDK.Traits;
+using GuildWars2.Tests.TestInfrastructure;
+using GuildWars2.Traits;
 using Xunit;
 
-namespace GW2SDK.Tests.Features.Traits;
+namespace GuildWars2.Tests.Features.Traits;
 
 public class TraitsQueryTest
 {

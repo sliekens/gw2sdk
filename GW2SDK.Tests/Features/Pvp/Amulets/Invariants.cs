@@ -1,7 +1,7 @@
-﻿using GW2SDK.Pvp.Amulets;
+﻿using GuildWars2.Pvp.Amulets;
 using Xunit;
 
-namespace GW2SDK.Tests.Features.Pvp.Amulets;
+namespace GuildWars2.Tests.Features.Pvp.Amulets;
 
 internal static class Invariants
 {

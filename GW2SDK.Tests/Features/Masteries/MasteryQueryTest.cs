@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using GW2SDK.Masteries;
-using GW2SDK.Tests.TestInfrastructure;
+using GuildWars2.Masteries;
+using GuildWars2.Tests.TestInfrastructure;
 using Xunit;
 
-namespace GW2SDK.Tests.Features.Masteries;
+namespace GuildWars2.Tests.Features.Masteries;
 
 public class MasteryQueryTest
 {

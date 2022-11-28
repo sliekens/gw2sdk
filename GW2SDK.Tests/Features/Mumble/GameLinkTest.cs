@@ -3,11 +3,11 @@ using System.IO;
 using System.IO.MemoryMappedFiles;
 using System.Threading;
 using System.Threading.Tasks;
-using GW2SDK.Mumble;
+using GuildWars2.Mumble;
 using Xunit;
 
 #pragma warning disable CA1416
-namespace GW2SDK.Tests.Features.Mumble;
+namespace GuildWars2.Tests.Features.Mumble;
 
 public class GameLinkTestObserver : IObserver<Snapshot>
 {

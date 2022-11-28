@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using GW2SDK.Meta;
+using GuildWars2.Meta;
 
 namespace ApiVersionInfo;
 

@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using GW2SDK.Tests.TestInfrastructure;
+using GuildWars2.Tests.TestInfrastructure;
 
-namespace GW2SDK.Tests.Features.Crafting;
+namespace GuildWars2.Tests.Features.Crafting;
 
 // ReSharper disable once ClassNeverInstantiated.Global
 public class RecipeFixture

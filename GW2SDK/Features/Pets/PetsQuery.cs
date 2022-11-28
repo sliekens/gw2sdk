@@ -5,7 +5,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using JetBrains.Annotations;
 
-namespace GW2SDK.Pets;
+namespace GuildWars2.Pets;
 
 [PublicAPI]
 public sealed class PetsQuery

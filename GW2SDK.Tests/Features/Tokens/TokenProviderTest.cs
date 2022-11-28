@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using GW2SDK.Tests.TestInfrastructure;
-using GW2SDK.Tokens;
+using GuildWars2.Tests.TestInfrastructure;
+using GuildWars2.Tokens;
 using Xunit;
 
-namespace GW2SDK.Tests.Features.Tokens;
+namespace GuildWars2.Tests.Features.Tokens;
 
 public class TokenProviderTest
 {

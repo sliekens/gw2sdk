@@ -5,7 +5,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using JetBrains.Annotations;
 
-namespace GW2SDK.Quests;
+namespace GuildWars2.Quests;
 
 [PublicAPI]
 public sealed class QuestsQuery

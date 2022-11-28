@@ -5,7 +5,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using JetBrains.Annotations;
 
-namespace GW2SDK.Skills;
+namespace GuildWars2.Skills;
 
 [PublicAPI]
 public sealed class SkillsQuery

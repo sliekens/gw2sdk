@@ -1,11 +1,11 @@
 ﻿using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
-using GW2SDK.Http;
-using GW2SDK.Json;
+using GuildWars2.Http;
+using GuildWars2.Json;
 using JetBrains.Annotations;
 
-namespace GW2SDK.Finishers;
+namespace GuildWars2.Finishers;
 
 [PublicAPI]
 public sealed class FinishersRequest : IHttpRequest<IReplicaSet<Finisher>>
@@ -41,7 +41,7 @@ public sealed class FinishersRequest : IHttpRequest<IReplicaSet<Finisher>>
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value = json.RootElement.GetSet(entry => entry.GetFinisher(MissingMemberBehavior));
+        var value = json.RootElement.GetSet(entry => FinisherJson.GetFinisher(entry, MissingMemberBehavior));
         return new ReplicaSet<Finisher>(
             response.Headers.Date.GetValueOrDefault(),
             value,

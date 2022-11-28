@@ -1,6 +1,6 @@
 ﻿using JetBrains.Annotations;
 
-namespace GW2SDK.Raids;
+namespace GuildWars2.Raids;
 
 [PublicAPI]
 public enum RaidWingEventKind

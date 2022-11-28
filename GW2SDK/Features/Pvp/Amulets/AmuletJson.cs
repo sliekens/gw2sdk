@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text.Json;
-using GW2SDK.Json;
+using GuildWars2.Json;
 using JetBrains.Annotations;
 
-namespace GW2SDK.Pvp.Amulets;
+namespace GuildWars2.Pvp.Amulets;
 
 [PublicAPI]
 public static class AmuletJson

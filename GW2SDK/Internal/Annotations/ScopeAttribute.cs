@@ -3,7 +3,7 @@ using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
 using static System.AttributeTargets;
 
-namespace GW2SDK.Annotations;
+namespace GuildWars2.Annotations;
 
 [AttributeUsage(Class | Method | Property, AllowMultiple = true)]
 [SuppressMessage("ReSharper", "MemberCanBePrivate.Global")]

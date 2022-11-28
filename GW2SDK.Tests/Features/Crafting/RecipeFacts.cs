@@ -1,8 +1,8 @@
 ﻿using System.Diagnostics.CodeAnalysis;
-using GW2SDK.Crafting;
+using GuildWars2.Crafting;
 using Xunit;
 
-namespace GW2SDK.Tests.Features.Crafting;
+namespace GuildWars2.Tests.Features.Crafting;
 
 [SuppressMessage("ReSharper", "MemberCanBePrivate.Global")]
 internal static class RecipeFacts

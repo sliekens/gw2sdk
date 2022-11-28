@@ -3,7 +3,7 @@ using System.Linq;
 using System.Text.Json;
 using JetBrains.Annotations;
 
-namespace GW2SDK.Inventories;
+namespace GuildWars2.Inventories;
 
 [PublicAPI]
 public static class InventoryJson

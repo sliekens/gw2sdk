@@ -2,13 +2,13 @@
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
-using GW2SDK.Http;
+using GuildWars2.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Polly;
 using Polly.Timeout;
 using static System.Net.HttpStatusCode;
 
-namespace GW2SDK.Tests.TestInfrastructure;
+namespace GuildWars2.Tests.TestInfrastructure;
 
 public class TestHttpClientFactory : IHttpClientFactory, IAsyncDisposable
 {

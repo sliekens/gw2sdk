@@ -5,7 +5,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using JetBrains.Annotations;
 
-namespace GW2SDK.Novelties;
+namespace GuildWars2.Novelties;
 
 [PublicAPI]
 public sealed class NoveltiesQuery

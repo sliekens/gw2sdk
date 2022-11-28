@@ -1,7 +1,7 @@
-﻿using GW2SDK.Gliders;
+﻿using GuildWars2.Gliders;
 using Xunit;
 
-namespace GW2SDK.Tests.Features.Gliders;
+namespace GuildWars2.Tests.Features.Gliders;
 
 internal static class Invariants
 {

@@ -1,12 +1,12 @@
 ﻿using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
-using GW2SDK.Http;
-using GW2SDK.Json;
+using GuildWars2.Http;
+using GuildWars2.Json;
 using JetBrains.Annotations;
 using static System.Net.Http.HttpMethod;
 
-namespace GW2SDK.Professions;
+namespace GuildWars2.Professions;
 
 [PublicAPI]
 public sealed class ProfessionNamesRequest : IHttpRequest<IReplicaSet<ProfessionName>>
@@ -33,7 +33,7 @@ public sealed class ProfessionNamesRequest : IHttpRequest<IReplicaSet<Profession
             .ConfigureAwait(false);
 
         var value = json.RootElement.GetSet(
-            entry => entry.GetProfessionName(MissingMemberBehavior)
+            entry => ProfessionNameJson.GetProfessionName(entry, MissingMemberBehavior)
         );
         return new ReplicaSet<ProfessionName>(
             response.Headers.Date.GetValueOrDefault(),

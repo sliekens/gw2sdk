@@ -1,8 +1,8 @@
 ﻿using System;
-using GW2SDK.Accounts;
+using GuildWars2.Accounts;
 using Xunit;
 
-namespace GW2SDK.Tests.Features.Accounts;
+namespace GuildWars2.Tests.Features.Accounts;
 
 public static class Invariants
 {

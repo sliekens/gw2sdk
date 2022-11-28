@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using GW2SDK.Tests.Features.Exploration.Regions;
-using GW2SDK.Tests.TestInfrastructure;
+using GuildWars2.Tests.Features.Exploration.Regions;
+using GuildWars2.Tests.TestInfrastructure;
 using Xunit;
 
-namespace GW2SDK.Tests.Features.Exploration.Floors;
+namespace GuildWars2.Tests.Features.Exploration.Floors;
 
 public class FloorsByFilter
 {

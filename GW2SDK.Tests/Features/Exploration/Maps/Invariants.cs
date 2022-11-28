@@ -1,7 +1,7 @@
-﻿using GW2SDK.Exploration.Maps;
+﻿using GuildWars2.Exploration.Maps;
 using Xunit;
 
-namespace GW2SDK.Tests.Features.Exploration.Maps;
+namespace GuildWars2.Tests.Features.Exploration.Maps;
 
 public static class Invariants
 {

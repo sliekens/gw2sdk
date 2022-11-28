@@ -2,11 +2,11 @@
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
-using GW2SDK.Http;
-using GW2SDK.Json;
+using GuildWars2.Http;
+using GuildWars2.Json;
 using JetBrains.Annotations;
 
-namespace GW2SDK.Outfits;
+namespace GuildWars2.Outfits;
 
 [PublicAPI]
 public sealed class OutfitsByIdsRequest : IHttpRequest<IReplicaSet<Outfit>>
@@ -50,7 +50,7 @@ public sealed class OutfitsByIdsRequest : IHttpRequest<IReplicaSet<Outfit>>
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value = json.RootElement.GetSet(entry => entry.GetOutfit(MissingMemberBehavior));
+        var value = json.RootElement.GetSet(entry => OutfitJson.GetOutfit(entry, MissingMemberBehavior));
         return new ReplicaSet<Outfit>(
             response.Headers.Date.GetValueOrDefault(),
             value,

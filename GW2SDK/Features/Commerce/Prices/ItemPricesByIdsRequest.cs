@@ -2,12 +2,12 @@
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
-using GW2SDK.Http;
-using GW2SDK.Json;
+using GuildWars2.Http;
+using GuildWars2.Json;
 using JetBrains.Annotations;
 using static System.Net.Http.HttpMethod;
 
-namespace GW2SDK.Commerce.Prices;
+namespace GuildWars2.Commerce.Prices;
 
 [PublicAPI]
 public sealed class ItemPricesByIdsRequest : IHttpRequest<IReplicaSet<ItemPrice>>
@@ -50,7 +50,7 @@ public sealed class ItemPricesByIdsRequest : IHttpRequest<IReplicaSet<ItemPrice>
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value = json.RootElement.GetSet(entry => entry.GetItemPrice(MissingMemberBehavior));
+        var value = json.RootElement.GetSet(entry => ItemPriceJson.GetItemPrice(entry, MissingMemberBehavior));
         return new ReplicaSet<ItemPrice>(
             response.Headers.Date.GetValueOrDefault(),
             value,

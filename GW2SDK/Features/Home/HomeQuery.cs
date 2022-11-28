@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
-using GW2SDK.Home.Cats;
-using GW2SDK.Home.Nodes;
+using GuildWars2.Home.Cats;
+using GuildWars2.Home.Nodes;
 using JetBrains.Annotations;
 
-namespace GW2SDK.Home;
+namespace GuildWars2.Home;
 
 [PublicAPI]
 public sealed class HomeQuery

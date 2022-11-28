@@ -1,11 +1,11 @@
 ﻿using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
-using GW2SDK.Http;
-using GW2SDK.Json;
+using GuildWars2.Http;
+using GuildWars2.Json;
 using JetBrains.Annotations;
 
-namespace GW2SDK.Home.Nodes;
+namespace GuildWars2.Home.Nodes;
 
 [PublicAPI]
 public sealed class NodesRequest : IHttpRequest<IReplicaSet<Node>>
@@ -36,7 +36,7 @@ public sealed class NodesRequest : IHttpRequest<IReplicaSet<Node>>
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value = json.RootElement.GetSet(entry => entry.GetNode(MissingMemberBehavior));
+        var value = json.RootElement.GetSet(entry => NodeJson.GetNode(entry, MissingMemberBehavior));
         return new ReplicaSet<Node>(
             response.Headers.Date.GetValueOrDefault(),
             value,

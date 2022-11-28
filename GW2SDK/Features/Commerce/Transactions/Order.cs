@@ -1,8 +1,8 @@
 ﻿using System;
-using GW2SDK.Annotations;
+using GuildWars2.Annotations;
 using JetBrains.Annotations;
 
-namespace GW2SDK.Commerce.Transactions;
+namespace GuildWars2.Commerce.Transactions;
 
 [PublicAPI]
 [DataTransferObject]

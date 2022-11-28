@@ -1,7 +1,7 @@
-﻿using GW2SDK.Annotations;
+﻿using GuildWars2.Annotations;
 using JetBrains.Annotations;
 
-namespace GW2SDK.ItemStats;
+namespace GuildWars2.ItemStats;
 
 /// <summary>A reference to a named set of item attributes, used for customizable items such as legendary weapons. The Id
 /// can be used to retrieve more information.</summary>

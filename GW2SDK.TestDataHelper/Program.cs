@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Spectre.Console;
 
-namespace GW2SDK.TestDataHelper;
+namespace GuildWars2.TestDataHelper;
 
 public class Program
 {

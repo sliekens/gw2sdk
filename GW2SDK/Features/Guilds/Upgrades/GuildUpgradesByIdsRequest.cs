@@ -3,11 +3,11 @@ using System.Linq;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
-using GW2SDK.Http;
-using GW2SDK.Json;
+using GuildWars2.Http;
+using GuildWars2.Json;
 using JetBrains.Annotations;
 
-namespace GW2SDK.Guilds.Upgrades;
+namespace GuildWars2.Guilds.Upgrades;
 
 [PublicAPI]
 public sealed class GuildUpgradesByIdsRequest : IHttpRequest<IReplicaSet<GuildUpgrade>>
@@ -52,7 +52,7 @@ public sealed class GuildUpgradesByIdsRequest : IHttpRequest<IReplicaSet<GuildUp
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value = json.RootElement.GetSet(entry => entry.GetGuildUpgrade(MissingMemberBehavior));
+        var value = json.RootElement.GetSet(entry => GuildUpgradeJson.GetGuildUpgrade(entry, MissingMemberBehavior));
         return new ReplicaSet<GuildUpgrade>(
             response.Headers.Date.GetValueOrDefault(),
             value,

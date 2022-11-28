@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Text.Json;
 using JetBrains.Annotations;
 
-namespace GW2SDK.Professions;
+namespace GuildWars2.Professions;
 
 [PublicAPI]
 public static class SkillsByPaletteJson

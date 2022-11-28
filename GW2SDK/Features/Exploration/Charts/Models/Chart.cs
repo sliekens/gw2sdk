@@ -1,15 +1,15 @@
 ﻿using System.Collections.Generic;
 using System.Drawing;
-using GW2SDK.Annotations;
-using GW2SDK.Exploration.Adventures;
-using GW2SDK.Exploration.GodShrines;
-using GW2SDK.Exploration.Hearts;
-using GW2SDK.Exploration.MasteryPoints;
-using GW2SDK.Exploration.PointsOfInterest;
-using GW2SDK.Exploration.Sectors;
+using GuildWars2.Annotations;
+using GuildWars2.Exploration.Adventures;
+using GuildWars2.Exploration.GodShrines;
+using GuildWars2.Exploration.Hearts;
+using GuildWars2.Exploration.MasteryPoints;
+using GuildWars2.Exploration.PointsOfInterest;
+using GuildWars2.Exploration.Sectors;
 using JetBrains.Annotations;
 
-namespace GW2SDK.Exploration.Charts;
+namespace GuildWars2.Exploration.Charts;
 
 [PublicAPI]
 [DataTransferObject]

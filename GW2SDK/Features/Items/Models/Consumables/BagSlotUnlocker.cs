@@ -1,6 +1,6 @@
 ﻿using JetBrains.Annotations;
 
-namespace GW2SDK.Items;
+namespace GuildWars2.Items;
 
 [PublicAPI]
 public sealed record BagSlotUnlocker : Unlocker;

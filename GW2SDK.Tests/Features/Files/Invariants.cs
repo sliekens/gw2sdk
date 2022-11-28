@@ -1,7 +1,7 @@
-﻿using GW2SDK.Files;
+﻿using GuildWars2.Files;
 using Xunit;
 
-namespace GW2SDK.Tests.Features.Files;
+namespace GuildWars2.Tests.Features.Files;
 
 internal static class Invariants
 {

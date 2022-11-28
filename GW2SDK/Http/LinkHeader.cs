@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using JetBrains.Annotations;
 
-namespace GW2SDK.Http;
+namespace GuildWars2.Http;
 
 [PublicAPI]
 public sealed class LinkHeader

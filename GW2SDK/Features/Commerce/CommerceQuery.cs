@@ -4,15 +4,15 @@ using System.Net.Http;
 using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Threading.Tasks;
-using GW2SDK.Annotations;
-using GW2SDK.Commerce.Delivery;
-using GW2SDK.Commerce.Exchange;
-using GW2SDK.Commerce.Listings;
-using GW2SDK.Commerce.Prices;
-using GW2SDK.Commerce.Transactions;
+using GuildWars2.Annotations;
+using GuildWars2.Commerce.Delivery;
+using GuildWars2.Commerce.Exchange;
+using GuildWars2.Commerce.Listings;
+using GuildWars2.Commerce.Prices;
+using GuildWars2.Commerce.Transactions;
 using JetBrains.Annotations;
 
-namespace GW2SDK.Commerce;
+namespace GuildWars2.Commerce;
 
 [PublicAPI]
 public sealed class CommerceQuery

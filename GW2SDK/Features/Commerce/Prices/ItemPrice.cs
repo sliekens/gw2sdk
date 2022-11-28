@@ -1,7 +1,7 @@
-﻿using GW2SDK.Annotations;
+﻿using GuildWars2.Annotations;
 using JetBrains.Annotations;
 
-namespace GW2SDK.Commerce.Prices;
+namespace GuildWars2.Commerce.Prices;
 
 [PublicAPI]
 [DataTransferObject]

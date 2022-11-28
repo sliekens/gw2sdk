@@ -1,12 +1,12 @@
 ﻿using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
-using GW2SDK.Http;
-using GW2SDK.Json;
+using GuildWars2.Http;
+using GuildWars2.Json;
 using JetBrains.Annotations;
 using static System.Net.Http.HttpMethod;
 
-namespace GW2SDK.Crafting;
+namespace GuildWars2.Crafting;
 
 [PublicAPI]
 public sealed class RecipesByPageRequest : IHttpRequest<IReplicaPage<Recipe>>
@@ -50,7 +50,7 @@ public sealed class RecipesByPageRequest : IHttpRequest<IReplicaPage<Recipe>>
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value = json.RootElement.GetSet(entry => entry.GetRecipe(MissingMemberBehavior));
+        var value = json.RootElement.GetSet(entry => RecipeJson.GetRecipe(entry, MissingMemberBehavior));
         return new ReplicaPage<Recipe>(
             response.Headers.Date.GetValueOrDefault(),
             value,

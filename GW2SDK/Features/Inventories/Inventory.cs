@@ -2,7 +2,7 @@
 using System.Collections.ObjectModel;
 using JetBrains.Annotations;
 
-namespace GW2SDK.Inventories;
+namespace GuildWars2.Inventories;
 
 /// <summary>An inventory, sorted by in-game order. Enumerated values can contain <c>null</c> when some item slots are
 /// empty.</summary>

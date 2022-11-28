@@ -1,11 +1,11 @@
 ﻿using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
-using GW2SDK.Http;
-using GW2SDK.Json;
+using GuildWars2.Http;
+using GuildWars2.Json;
 using JetBrains.Annotations;
 
-namespace GW2SDK.Races;
+namespace GuildWars2.Races;
 
 [PublicAPI]
 public sealed class RacesByPageRequest : IHttpRequest<IReplicaPage<Race>>
@@ -58,7 +58,7 @@ public sealed class RacesByPageRequest : IHttpRequest<IReplicaPage<Race>>
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value = json.RootElement.GetSet(entry => entry.GetRace(MissingMemberBehavior));
+        var value = json.RootElement.GetSet(entry => RaceJson.GetRace(entry, MissingMemberBehavior));
         return new ReplicaPage<Race>(
             response.Headers.Date.GetValueOrDefault(),
             value,

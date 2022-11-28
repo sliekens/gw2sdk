@@ -2,7 +2,7 @@
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace GW2SDK.Http;
+namespace GuildWars2.Http;
 
 internal static class Gw2ClientExtensions
 {

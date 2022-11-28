@@ -1,11 +1,11 @@
 ﻿using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
-using GW2SDK.Http;
+using GuildWars2.Http;
 using JetBrains.Annotations;
 using static System.Net.Http.HttpMethod;
 
-namespace GW2SDK.Tokens;
+namespace GuildWars2.Tokens;
 
 [PublicAPI]
 public sealed class TokenInfoRequest : IHttpRequest<IReplica<TokenInfo>>

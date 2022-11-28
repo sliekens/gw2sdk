@@ -1,8 +1,8 @@
 ﻿using System.Threading.Tasks;
-using GW2SDK.Tests.TestInfrastructure;
+using GuildWars2.Tests.TestInfrastructure;
 using Xunit;
 
-namespace GW2SDK.Tests.Features.Raids;
+namespace GuildWars2.Tests.Features.Raids;
 
 public class Raids
 {

@@ -5,7 +5,7 @@ using System.Text.Json;
 using static System.Text.Json.JsonValueKind;
 using Array = System.Array;
 
-namespace GW2SDK.Json;
+namespace GuildWars2.Json;
 
 internal ref struct NullableMember<T> where T : struct
 {

@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using GW2SDK.Exploration.Hearts;
+using GuildWars2.Exploration.Hearts;
 using Xunit;
 
-namespace GW2SDK.Tests.Features.Exploration.Hearts;
+namespace GuildWars2.Tests.Features.Exploration.Hearts;
 
 public static class Invariants
 {

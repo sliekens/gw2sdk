@@ -1,6 +1,6 @@
 ﻿using JetBrains.Annotations;
 
-namespace GW2SDK.Professions;
+namespace GuildWars2.Professions;
 
 [PublicAPI]
 public sealed record HealingSkillReference : SkillReference;

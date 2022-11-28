@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.IO.Compression;
 
-namespace GW2SDK.Tests.TestInfrastructure;
+namespace GuildWars2.Tests.TestInfrastructure;
 
 public static class FlatFileReader
 {

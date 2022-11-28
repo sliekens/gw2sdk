@@ -1,12 +1,12 @@
 ﻿using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
-using GW2SDK.Http;
-using GW2SDK.Json;
+using GuildWars2.Http;
+using GuildWars2.Json;
 using JetBrains.Annotations;
 using static System.Net.Http.HttpMethod;
 
-namespace GW2SDK.Achievements;
+namespace GuildWars2.Achievements;
 
 [PublicAPI]
 public sealed class
@@ -56,7 +56,7 @@ public sealed class
             .ConfigureAwait(false);
 
         var value =
-            json.RootElement.GetSet(entry => entry.GetAccountAchievement(MissingMemberBehavior));
+            json.RootElement.GetSet(entry => AccountAchievementJson.GetAccountAchievement(entry, MissingMemberBehavior));
         return new ReplicaPage<AccountAchievement>(
             response.Headers.Date.GetValueOrDefault(),
             value,

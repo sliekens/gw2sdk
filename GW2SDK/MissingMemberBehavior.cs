@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel;
 using JetBrains.Annotations;
 
-namespace GW2SDK;
+namespace GuildWars2;
 
 /// <summary>Describes the desired program behavior when a JSON document does not match the CLR type.</summary>
 [PublicAPI]

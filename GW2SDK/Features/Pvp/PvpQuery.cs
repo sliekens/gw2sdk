@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
-using GW2SDK.Pvp.Amulets;
-using GW2SDK.Pvp.Heroes;
+using GuildWars2.Pvp.Amulets;
+using GuildWars2.Pvp.Heroes;
 using JetBrains.Annotations;
 
-namespace GW2SDK.Pvp;
+namespace GuildWars2.Pvp;
 
 [PublicAPI]
 public sealed class PvpQuery

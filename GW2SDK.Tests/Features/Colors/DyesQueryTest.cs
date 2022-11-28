@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using GW2SDK.Colors;
-using GW2SDK.Tests.TestInfrastructure;
+using GuildWars2.Colors;
+using GuildWars2.Tests.TestInfrastructure;
 using Xunit;
 
-namespace GW2SDK.Tests.Features.Colors;
+namespace GuildWars2.Tests.Features.Colors;
 
 public class DyesQueryTest
 {

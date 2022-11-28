@@ -2,7 +2,7 @@
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace GW2SDK.Tasks;
+namespace GuildWars2.Tasks;
 
 internal static class InterleavedTask
 {

@@ -2,10 +2,10 @@
 using System.ComponentModel;
 using System.Linq;
 using System.Reflection;
-using GW2SDK.Tests.TestInfrastructure;
+using GuildWars2.Tests.TestInfrastructure;
 using Xunit;
 
-namespace GW2SDK.Tests.PatternsAndPractices;
+namespace GuildWars2.Tests.PatternsAndPractices;
 
 public class SensibleDefaultsTest : IClassFixture<AssemblyFixture>
 {

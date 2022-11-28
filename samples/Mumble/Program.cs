@@ -2,8 +2,8 @@
 using System.Globalization;
 using System.Text;
 using System.Threading;
-using GW2SDK;
-using GW2SDK.Mumble;
+using GuildWars2;
+using GuildWars2.Mumble;
 
 namespace Mumble;
 

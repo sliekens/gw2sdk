@@ -5,7 +5,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using JetBrains.Annotations;
 
-namespace GW2SDK.Armory;
+namespace GuildWars2.Armory;
 
 [PublicAPI]
 public sealed class ArmoryQuery

@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using GW2SDK.Tests.TestInfrastructure;
+using GuildWars2.Tests.TestInfrastructure;
 using Xunit;
 
-namespace GW2SDK.Tests.Features.Exploration.PointsOfInterest;
+namespace GuildWars2.Tests.Features.Exploration.PointsOfInterest;
 
 public class PointsOfInterestByFilter
 {

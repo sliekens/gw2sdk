@@ -1,6 +1,6 @@
 ﻿using JetBrains.Annotations;
 
-namespace GW2SDK;
+namespace GuildWars2;
 
 [PublicAPI]
 public sealed record CollectionContext(int ResultTotal, int ResultCount) : ICollectionContext;

@@ -1,12 +1,12 @@
 ﻿using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
-using GW2SDK.Http;
-using GW2SDK.Json;
+using GuildWars2.Http;
+using GuildWars2.Json;
 using JetBrains.Annotations;
 using static System.Net.Http.HttpMethod;
 
-namespace GW2SDK.Armory;
+namespace GuildWars2.Armory;
 
 [PublicAPI]
 public sealed class BoundLegendaryItemsRequest : IHttpRequest<IReplicaSet<BoundLegendaryItem>>
@@ -47,7 +47,7 @@ public sealed class BoundLegendaryItemsRequest : IHttpRequest<IReplicaSet<BoundL
             .ConfigureAwait(false);
 
         var value =
-            json.RootElement.GetSet(entry => entry.GetBoundLegendaryItem(MissingMemberBehavior));
+            json.RootElement.GetSet(entry => BoundLegendaryItemJson.GetBoundLegendaryItem(entry, MissingMemberBehavior));
 
         return new ReplicaSet<BoundLegendaryItem>(
             response.Headers.Date.GetValueOrDefault(),

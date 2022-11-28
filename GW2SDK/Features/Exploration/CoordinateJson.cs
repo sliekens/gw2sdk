@@ -2,7 +2,7 @@
 using System.Text.Json;
 using JetBrains.Annotations;
 
-namespace GW2SDK.Exploration;
+namespace GuildWars2.Exploration;
 
 [PublicAPI]
 public static class CoordinateJson

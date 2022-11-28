@@ -1,12 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Threading.Tasks;
-using GW2SDK.Banking;
-using GW2SDK.Inventories;
-using GW2SDK.Tests.TestInfrastructure;
+using GuildWars2.Banking;
+using GuildWars2.Inventories;
+using GuildWars2.Tests.TestInfrastructure;
 using Xunit;
 
-namespace GW2SDK.Tests.Features.Banking;
+namespace GuildWars2.Tests.Features.Banking;
 
 public class BankQueryTest
 {

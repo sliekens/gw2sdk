@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel;
 using JetBrains.Annotations;
 
-namespace GW2SDK.Crafting;
+namespace GuildWars2.Crafting;
 
 [PublicAPI]
 [DefaultValue(Item)]

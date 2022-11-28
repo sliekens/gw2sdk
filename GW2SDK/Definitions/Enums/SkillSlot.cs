@@ -1,7 +1,7 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using JetBrains.Annotations;
 
-namespace GW2SDK;
+namespace GuildWars2;
 
 [PublicAPI]
 [SuppressMessage("ReSharper", "InconsistentNaming")] // Names are copied from API data

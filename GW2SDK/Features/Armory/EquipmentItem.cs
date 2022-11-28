@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
-using GW2SDK.Annotations;
-using GW2SDK.ItemStats;
+using GuildWars2.Annotations;
+using GuildWars2.ItemStats;
 using JetBrains.Annotations;
 
-namespace GW2SDK.Armory;
+namespace GuildWars2.Armory;
 
 [PublicAPI]
 [DataTransferObject]

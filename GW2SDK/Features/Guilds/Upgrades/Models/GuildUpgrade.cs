@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using GW2SDK.Annotations;
+using GuildWars2.Annotations;
 using JetBrains.Annotations;
 
-namespace GW2SDK.Guilds.Upgrades;
+namespace GuildWars2.Guilds.Upgrades;
 
 [PublicAPI]
 [Inheritable]

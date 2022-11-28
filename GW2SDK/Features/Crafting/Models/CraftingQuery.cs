@@ -4,10 +4,10 @@ using System.Net.Http;
 using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Threading.Tasks;
-using GW2SDK.Annotations;
+using GuildWars2.Annotations;
 using JetBrains.Annotations;
 
-namespace GW2SDK.Crafting;
+namespace GuildWars2.Crafting;
 
 /// <summary>Provides recipe search and crafting-related services.</summary>
 [PublicAPI]

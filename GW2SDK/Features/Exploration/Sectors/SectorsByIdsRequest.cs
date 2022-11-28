@@ -3,12 +3,12 @@ using System.Globalization;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
-using GW2SDK.Http;
-using GW2SDK.Json;
+using GuildWars2.Http;
+using GuildWars2.Json;
 using JetBrains.Annotations;
 using static System.Net.Http.HttpMethod;
 
-namespace GW2SDK.Exploration.Sectors;
+namespace GuildWars2.Exploration.Sectors;
 
 [PublicAPI]
 public sealed class SectorsByIdsRequest : IHttpRequest<IReplicaSet<Sector>>
@@ -77,7 +77,7 @@ public sealed class SectorsByIdsRequest : IHttpRequest<IReplicaSet<Sector>>
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value = json.RootElement.GetSet(entry => entry.GetSector(MissingMemberBehavior));
+        var value = json.RootElement.GetSet(entry => SectorJson.GetSector(entry, MissingMemberBehavior));
         return new ReplicaSet<Sector>(
             response.Headers.Date.GetValueOrDefault(),
             value,

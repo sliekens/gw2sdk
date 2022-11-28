@@ -2,7 +2,7 @@
 using System.Text;
 using JetBrains.Annotations;
 
-namespace GW2SDK;
+namespace GuildWars2;
 
 /// <summary>Represents an amount of coins and provides methods to compare and convert coins to other formats.</summary>
 [PublicAPI]

@@ -7,7 +7,7 @@ using JetBrains.Annotations;
 using static System.Globalization.NumberFormatInfo;
 using Argument = System.Collections.Generic.KeyValuePair<string, string>;
 
-namespace GW2SDK.Http;
+namespace GuildWars2.Http;
 
 /// <summary>Used to build a query string, e.g. <c>"id=123&amp;lang=fr"</c>. Not meant to be used directly.</summary>
 [PublicAPI]

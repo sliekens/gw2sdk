@@ -2,7 +2,7 @@
 using System.Net;
 using JetBrains.Annotations;
 
-namespace GW2SDK.Http;
+namespace GuildWars2.Http;
 
 /// <summary>Thrown when a server returns a failure result (5xx).</summary>
 [PublicAPI]

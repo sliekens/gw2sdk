@@ -1,7 +1,8 @@
 ﻿using JetBrains.Annotations;
+
 // ReSharper disable InconsistentNaming
 
-namespace GW2SDK;
+namespace GuildWars2;
 
 [PublicAPI]
 public enum GuildPermission

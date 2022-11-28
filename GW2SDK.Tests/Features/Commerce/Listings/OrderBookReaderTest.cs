@@ -1,9 +1,9 @@
 ﻿using System.Text.Json;
-using GW2SDK.Commerce.Listings;
-using GW2SDK.Tests.TestInfrastructure;
+using GuildWars2.Commerce.Listings;
+using GuildWars2.Tests.TestInfrastructure;
 using Xunit;
 
-namespace GW2SDK.Tests.Features.Commerce.Listings;
+namespace GuildWars2.Tests.Features.Commerce.Listings;
 
 public class OrderBookReaderTest : IClassFixture<OrderBookFixture>
 {

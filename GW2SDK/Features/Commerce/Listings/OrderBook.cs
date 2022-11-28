@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using GW2SDK.Annotations;
+using GuildWars2.Annotations;
 using JetBrains.Annotations;
 
-namespace GW2SDK.Commerce.Listings;
+namespace GuildWars2.Commerce.Listings;
 
 [PublicAPI]
 [DataTransferObject]

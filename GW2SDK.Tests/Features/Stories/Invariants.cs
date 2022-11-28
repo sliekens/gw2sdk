@@ -1,7 +1,7 @@
-﻿using GW2SDK.Stories;
+﻿using GuildWars2.Stories;
 using Xunit;
 
-namespace GW2SDK.Tests.Features.Stories;
+namespace GuildWars2.Tests.Features.Stories;
 
 internal static class Invariants
 {

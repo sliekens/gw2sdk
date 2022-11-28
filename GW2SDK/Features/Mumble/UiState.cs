@@ -2,7 +2,7 @@
 using System.ComponentModel;
 using JetBrains.Annotations;
 
-namespace GW2SDK.Mumble;
+namespace GuildWars2.Mumble;
 
 [PublicAPI]
 [Flags]

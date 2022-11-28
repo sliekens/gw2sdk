@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using GW2SDK.Exploration.Sectors;
+using GuildWars2.Exploration.Sectors;
 using Xunit;
 
-namespace GW2SDK.Tests.Features.Exploration.Sectors;
+namespace GuildWars2.Tests.Features.Exploration.Sectors;
 
 public static class Invariants
 {

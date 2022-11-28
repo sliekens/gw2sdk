@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Text.Json;
-using GW2SDK.Json;
+using GuildWars2.Json;
 using JetBrains.Annotations;
 
-namespace GW2SDK.Professions;
+namespace GuildWars2.Professions;
 
 [PublicAPI]
 public static class ProfessionNameJson

@@ -5,7 +5,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using JetBrains.Annotations;
 
-namespace GW2SDK.Mounts;
+namespace GuildWars2.Mounts;
 
 [PublicAPI]
 public sealed class MountsQuery

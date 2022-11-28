@@ -3,12 +3,12 @@ using System.Globalization;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
-using GW2SDK.Http;
-using GW2SDK.Json;
+using GuildWars2.Http;
+using GuildWars2.Json;
 using JetBrains.Annotations;
 using static System.Net.Http.HttpMethod;
 
-namespace GW2SDK.Exploration.PointsOfInterest;
+namespace GuildWars2.Exploration.PointsOfInterest;
 
 [PublicAPI]
 public sealed class PointsOfInterestByIdsRequest : IHttpRequest<IReplicaSet<PointOfInterest>>
@@ -78,7 +78,7 @@ public sealed class PointsOfInterestByIdsRequest : IHttpRequest<IReplicaSet<Poin
             .ConfigureAwait(false);
 
         var value =
-            json.RootElement.GetSet(entry => entry.GetPointOfInterest(MissingMemberBehavior));
+            json.RootElement.GetSet(entry => PointOfInterestJson.GetPointOfInterest(entry, MissingMemberBehavior));
         return new ReplicaSet<PointOfInterest>(
             response.Headers.Date.GetValueOrDefault(),
             value,

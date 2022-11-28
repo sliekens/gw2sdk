@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Text.Json;
-using GW2SDK.Json;
+using GuildWars2.Json;
 using JetBrains.Annotations;
 
-namespace GW2SDK.Specializations;
+namespace GuildWars2.Specializations;
 
 [PublicAPI]
 public static class SpecializationJson

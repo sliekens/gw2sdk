@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text.Json;
 using static System.Text.Json.JsonValueKind;
 
-namespace GW2SDK.Json;
+namespace GuildWars2.Json;
 
 internal ref struct RequiredMember<T>
 {

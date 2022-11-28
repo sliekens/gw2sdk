@@ -5,7 +5,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using JetBrains.Annotations;
 
-namespace GW2SDK.ItemStats;
+namespace GuildWars2.ItemStats;
 
 [PublicAPI]
 public sealed class ItemStatsQuery

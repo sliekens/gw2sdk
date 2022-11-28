@@ -1,11 +1,11 @@
 ﻿using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
-using GW2SDK.Http;
-using GW2SDK.Json;
+using GuildWars2.Http;
+using GuildWars2.Json;
 using JetBrains.Annotations;
 
-namespace GW2SDK.Legends;
+namespace GuildWars2.Legends;
 
 [PublicAPI]
 public sealed class LegendsRequest : IHttpRequest<IReplicaSet<Legend>>
@@ -35,7 +35,7 @@ public sealed class LegendsRequest : IHttpRequest<IReplicaSet<Legend>>
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value = json.RootElement.GetSet(entry => entry.GetLegend(MissingMemberBehavior));
+        var value = json.RootElement.GetSet(entry => LegendJson.GetLegend(entry, MissingMemberBehavior));
         return new ReplicaSet<Legend>(
             response.Headers.Date.GetValueOrDefault(),
             value,

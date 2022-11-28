@@ -7,7 +7,7 @@ using Polly;
 using Polly.Timeout;
 using static System.Net.HttpStatusCode;
 
-namespace GW2SDK.TestDataHelper;
+namespace GuildWars2.TestDataHelper;
 
 public class Container : IDisposable, IAsyncDisposable
 {

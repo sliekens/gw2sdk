@@ -1,7 +1,7 @@
-﻿using GW2SDK.Annotations;
+﻿using GuildWars2.Annotations;
 using JetBrains.Annotations;
 
-namespace GW2SDK.Achievements.Dailies;
+namespace GuildWars2.Achievements.Dailies;
 
 [PublicAPI]
 [DataTransferObject]

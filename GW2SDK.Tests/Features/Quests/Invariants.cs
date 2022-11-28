@@ -1,7 +1,7 @@
-﻿using GW2SDK.Quests;
+﻿using GuildWars2.Quests;
 using Xunit;
 
-namespace GW2SDK.Tests.Features.Quests;
+namespace GuildWars2.Tests.Features.Quests;
 
 internal static class Invariants
 {

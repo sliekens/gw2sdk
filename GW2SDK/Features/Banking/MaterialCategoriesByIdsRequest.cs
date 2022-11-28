@@ -2,12 +2,12 @@
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
-using GW2SDK.Http;
-using GW2SDK.Json;
+using GuildWars2.Http;
+using GuildWars2.Json;
 using JetBrains.Annotations;
 using static System.Net.Http.HttpMethod;
 
-namespace GW2SDK.Banking;
+namespace GuildWars2.Banking;
 
 [PublicAPI]
 public sealed class MaterialCategoriesByIdsRequest : IHttpRequest<IReplicaSet<MaterialCategory>>
@@ -54,7 +54,7 @@ public sealed class MaterialCategoriesByIdsRequest : IHttpRequest<IReplicaSet<Ma
             .ConfigureAwait(false);
 
         var value = json.RootElement.GetSet(
-            entry => entry.GetMaterialCategory(MissingMemberBehavior)
+            entry => MaterialCategoryJson.GetMaterialCategory(entry, MissingMemberBehavior)
         );
         return new ReplicaSet<MaterialCategory>(
             response.Headers.Date.GetValueOrDefault(),

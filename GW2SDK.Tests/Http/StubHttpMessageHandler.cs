@@ -4,7 +4,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace GW2SDK.Tests.Http;
+namespace GuildWars2.Tests.Http;
 
 internal class StubHttpMessageHandler : HttpMessageHandler
 {

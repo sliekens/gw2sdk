@@ -1,12 +1,12 @@
 ﻿using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
-using GW2SDK.Http;
-using GW2SDK.Json;
+using GuildWars2.Http;
+using GuildWars2.Json;
 using JetBrains.Annotations;
 using static System.Net.Http.HttpMethod;
 
-namespace GW2SDK.Skins;
+namespace GuildWars2.Skins;
 
 [PublicAPI]
 public sealed class SkinsByPageRequest : IHttpRequest<IReplicaPage<Skin>>
@@ -56,7 +56,7 @@ public sealed class SkinsByPageRequest : IHttpRequest<IReplicaPage<Skin>>
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value = json.RootElement.GetSet(entry => entry.GetSkin(MissingMemberBehavior));
+        var value = json.RootElement.GetSet(entry => SkinJson.GetSkin(entry, MissingMemberBehavior));
         return new ReplicaPage<Skin>(
             response.Headers.Date.GetValueOrDefault(),
             value,

@@ -1,4 +1,4 @@
-﻿using GW2SDK;
+﻿using GuildWars2;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 

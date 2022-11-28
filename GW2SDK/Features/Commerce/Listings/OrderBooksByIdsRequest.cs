@@ -2,12 +2,12 @@
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
-using GW2SDK.Http;
-using GW2SDK.Json;
+using GuildWars2.Http;
+using GuildWars2.Json;
 using JetBrains.Annotations;
 using static System.Net.Http.HttpMethod;
 
-namespace GW2SDK.Commerce.Listings;
+namespace GuildWars2.Commerce.Listings;
 
 [PublicAPI]
 public sealed class OrderBooksByIdsRequest : IHttpRequest<IReplicaSet<OrderBook>>
@@ -50,7 +50,7 @@ public sealed class OrderBooksByIdsRequest : IHttpRequest<IReplicaSet<OrderBook>
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value = json.RootElement.GetSet(entry => entry.GetOrderBook(MissingMemberBehavior));
+        var value = json.RootElement.GetSet(entry => OrderBookJson.GetOrderBook(entry, MissingMemberBehavior));
         return new ReplicaSet<OrderBook>(
             response.Headers.Date.GetValueOrDefault(),
             value,

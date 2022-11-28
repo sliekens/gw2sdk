@@ -4,6 +4,7 @@
 
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;net6.0;net462</TargetFrameworks>
+    <RootNamespace>GuildWars2</RootNamespace>
     <AssemblyTitle>GW2 Client SDK</AssemblyTitle>
     <Product>GW2SDK</Product>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>

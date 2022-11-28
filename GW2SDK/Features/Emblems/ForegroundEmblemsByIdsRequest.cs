@@ -2,11 +2,11 @@
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
-using GW2SDK.Http;
-using GW2SDK.Json;
+using GuildWars2.Http;
+using GuildWars2.Json;
 using JetBrains.Annotations;
 
-namespace GW2SDK.Emblems;
+namespace GuildWars2.Emblems;
 
 [PublicAPI]
 public sealed class ForegroundEmblemsByIdsRequest : IHttpRequest<IReplicaSet<Emblem>>
@@ -47,7 +47,7 @@ public sealed class ForegroundEmblemsByIdsRequest : IHttpRequest<IReplicaSet<Emb
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value = json.RootElement.GetSet(entry => entry.GetEmblem(MissingMemberBehavior));
+        var value = json.RootElement.GetSet(entry => EmblemJson.GetEmblem(entry, MissingMemberBehavior));
         return new ReplicaSet<Emblem>(
             response.Headers.Date.GetValueOrDefault(),
             value,

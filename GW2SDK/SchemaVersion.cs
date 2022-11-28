@@ -2,7 +2,7 @@
 using JetBrains.Annotations;
 using static System.String;
 
-namespace GW2SDK;
+namespace GuildWars2;
 
 [PublicAPI]
 public sealed class SchemaVersion

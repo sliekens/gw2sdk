@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-namespace GW2SDK;
+namespace GuildWars2;
 
 internal sealed class ReplicaSet<T> : IReplicaSet<T>
 {

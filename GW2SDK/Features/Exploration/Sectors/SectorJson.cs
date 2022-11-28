@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Drawing;
 using System.Text.Json;
-using GW2SDK.Json;
+using GuildWars2.Json;
 using JetBrains.Annotations;
 
-namespace GW2SDK.Exploration.Sectors;
+namespace GuildWars2.Exploration.Sectors;
 
 [PublicAPI]
 public static class SectorJson

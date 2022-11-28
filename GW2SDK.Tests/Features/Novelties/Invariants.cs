@@ -1,8 +1,8 @@
 ﻿using System;
-using GW2SDK.Novelties;
+using GuildWars2.Novelties;
 using Xunit;
 
-namespace GW2SDK.Tests.Features.Novelties;
+namespace GuildWars2.Tests.Features.Novelties;
 
 internal static class Invariants
 {

@@ -2,11 +2,11 @@
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
-using GW2SDK.Http;
-using GW2SDK.Json;
+using GuildWars2.Http;
+using GuildWars2.Json;
 using JetBrains.Annotations;
 
-namespace GW2SDK.BuildStorage;
+namespace GuildWars2.BuildStorage;
 
 [PublicAPI]
 public sealed class BuildsByIdsRequest : IHttpRequest<IReplicaSet<Build>>
@@ -49,7 +49,7 @@ public sealed class BuildsByIdsRequest : IHttpRequest<IReplicaSet<Build>>
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value = json.RootElement.GetSet(entry => entry.GetBuild(MissingMemberBehavior));
+        var value = json.RootElement.GetSet(entry => BuildJson.GetBuild(entry, MissingMemberBehavior));
         return new ReplicaSet<Build>(
             response.Headers.Date.GetValueOrDefault(),
             value,

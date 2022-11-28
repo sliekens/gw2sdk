@@ -3,7 +3,7 @@ using System.Runtime.InteropServices;
 using System.Text.Json;
 using JetBrains.Annotations;
 
-namespace GW2SDK.Mumble;
+namespace GuildWars2.Mumble;
 
 [PublicAPI]
 [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]

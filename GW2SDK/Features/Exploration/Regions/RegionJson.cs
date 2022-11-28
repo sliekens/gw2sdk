@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Text.Json;
-using GW2SDK.Exploration.Charts;
-using GW2SDK.Json;
+using GuildWars2.Exploration.Charts;
+using GuildWars2.Json;
 using JetBrains.Annotations;
 
-namespace GW2SDK.Exploration.Regions;
+namespace GuildWars2.Exploration.Regions;
 
 [PublicAPI]
 public static class RegionJson

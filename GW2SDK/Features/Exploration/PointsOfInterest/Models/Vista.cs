@@ -1,6 +1,6 @@
 ﻿using JetBrains.Annotations;
 
-namespace GW2SDK.Exploration.PointsOfInterest;
+namespace GuildWars2.Exploration.PointsOfInterest;
 
 [PublicAPI]
 public sealed record Vista : PointOfInterest;

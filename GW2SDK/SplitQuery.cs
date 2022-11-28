@@ -4,10 +4,10 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Threading.Tasks;
-using GW2SDK.Tasks;
+using GuildWars2.Tasks;
 using JetBrains.Annotations;
 
-namespace GW2SDK;
+namespace GuildWars2;
 
 /// <summary>A method that takes a set of keys and looks up the corresponding records, comparable to SELECT * WHERE id IN
 /// (key1, key2. keyN).</summary>

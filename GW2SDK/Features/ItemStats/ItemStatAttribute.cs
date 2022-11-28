@@ -1,7 +1,7 @@
-﻿using GW2SDK.Annotations;
+﻿using GuildWars2.Annotations;
 using JetBrains.Annotations;
 
-namespace GW2SDK.ItemStats;
+namespace GuildWars2.ItemStats;
 
 [PublicAPI]
 [DataTransferObject]

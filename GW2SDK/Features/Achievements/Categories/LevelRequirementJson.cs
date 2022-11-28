@@ -1,7 +1,7 @@
 ﻿using System.Text.Json;
 using JetBrains.Annotations;
 
-namespace GW2SDK.Achievements.Categories;
+namespace GuildWars2.Achievements.Categories;
 
 [PublicAPI]
 public static class LevelRequirementJson

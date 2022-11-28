@@ -1,9 +1,9 @@
 ﻿using System.Text.Json;
-using GW2SDK.Skins;
-using GW2SDK.Tests.TestInfrastructure;
+using GuildWars2.Skins;
+using GuildWars2.Tests.TestInfrastructure;
 using Xunit;
 
-namespace GW2SDK.Tests.Features.Skins;
+namespace GuildWars2.Tests.Features.Skins;
 
 public class SkinReaderTest : IClassFixture<SkinFixture>
 {

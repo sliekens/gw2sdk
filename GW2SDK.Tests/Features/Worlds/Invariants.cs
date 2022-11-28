@@ -1,8 +1,8 @@
 ﻿using System;
-using GW2SDK.Worlds;
+using GuildWars2.Worlds;
 using Xunit;
 
-namespace GW2SDK.Tests.Features.Worlds;
+namespace GuildWars2.Tests.Features.Worlds;
 
 public static class Invariants
 {

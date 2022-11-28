@@ -3,17 +3,17 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
-using GW2SDK.Exploration.Charts;
-using GW2SDK.Exploration.Continents;
-using GW2SDK.Exploration.Floors;
-using GW2SDK.Exploration.Hearts;
-using GW2SDK.Exploration.Maps;
-using GW2SDK.Exploration.PointsOfInterest;
-using GW2SDK.Exploration.Regions;
-using GW2SDK.Exploration.Sectors;
+using GuildWars2.Exploration.Charts;
+using GuildWars2.Exploration.Continents;
+using GuildWars2.Exploration.Floors;
+using GuildWars2.Exploration.Hearts;
+using GuildWars2.Exploration.Maps;
+using GuildWars2.Exploration.PointsOfInterest;
+using GuildWars2.Exploration.Regions;
+using GuildWars2.Exploration.Sectors;
 using JetBrains.Annotations;
 
-namespace GW2SDK.Exploration;
+namespace GuildWars2.Exploration;
 
 [PublicAPI]
 public sealed class MapsQuery

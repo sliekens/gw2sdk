@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Text.Json;
-using GW2SDK.Json;
+using GuildWars2.Json;
 using JetBrains.Annotations;
 
-namespace GW2SDK.Exploration.SkillChallenge;
+namespace GuildWars2.Exploration.SkillChallenge;
 
 [PublicAPI]
 public static class SkillChallengeJson

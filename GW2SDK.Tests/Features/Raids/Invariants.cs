@@ -1,7 +1,7 @@
-﻿using GW2SDK.Raids;
+﻿using GuildWars2.Raids;
 using Xunit;
 
-namespace GW2SDK.Tests.Features.Raids;
+namespace GuildWars2.Tests.Features.Raids;
 
 internal static class Invariants
 {

@@ -1,12 +1,12 @@
 ﻿using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
-using GW2SDK.Http;
-using GW2SDK.Json;
+using GuildWars2.Http;
+using GuildWars2.Json;
 using JetBrains.Annotations;
 using static System.Net.Http.HttpMethod;
 
-namespace GW2SDK.Banking;
+namespace GuildWars2.Banking;
 
 [PublicAPI]
 public sealed class MaterialCategoriesIndexRequest : IHttpRequest<IReplicaSet<int>>

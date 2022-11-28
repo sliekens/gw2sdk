@@ -3,11 +3,11 @@ using System.Linq;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
-using GW2SDK.Http;
-using GW2SDK.Json;
+using GuildWars2.Http;
+using GuildWars2.Json;
 using JetBrains.Annotations;
 
-namespace GW2SDK.Races;
+namespace GuildWars2.Races;
 
 [PublicAPI]
 public sealed class RacesByIdsRequest : IHttpRequest<IReplicaSet<Race>>
@@ -53,7 +53,7 @@ public sealed class RacesByIdsRequest : IHttpRequest<IReplicaSet<Race>>
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value = json.RootElement.GetSet(entry => entry.GetRace(MissingMemberBehavior));
+        var value = json.RootElement.GetSet(entry => RaceJson.GetRace(entry, MissingMemberBehavior));
         return new ReplicaSet<Race>(
             response.Headers.Date.GetValueOrDefault(),
             value,

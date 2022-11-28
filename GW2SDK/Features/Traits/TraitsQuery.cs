@@ -5,7 +5,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using JetBrains.Annotations;
 
-namespace GW2SDK.Traits;
+namespace GuildWars2.Traits;
 
 [PublicAPI]
 public sealed class TraitsQuery

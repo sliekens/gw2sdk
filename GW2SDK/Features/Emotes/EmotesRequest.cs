@@ -1,11 +1,11 @@
 ﻿using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
-using GW2SDK.Http;
-using GW2SDK.Json;
+using GuildWars2.Http;
+using GuildWars2.Json;
 using JetBrains.Annotations;
 
-namespace GW2SDK.Emotes;
+namespace GuildWars2.Emotes;
 
 [PublicAPI]
 public sealed class EmotesRequest : IHttpRequest<IReplicaSet<Emote>>
@@ -35,7 +35,7 @@ public sealed class EmotesRequest : IHttpRequest<IReplicaSet<Emote>>
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value = json.RootElement.GetSet(entry => entry.GetEmote(MissingMemberBehavior));
+        var value = json.RootElement.GetSet(entry => EmoteJson.GetEmote(entry, MissingMemberBehavior));
         return new ReplicaSet<Emote>(
             response.Headers.Date.GetValueOrDefault(),
             value,

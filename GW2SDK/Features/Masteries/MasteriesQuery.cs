@@ -5,7 +5,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using JetBrains.Annotations;
 
-namespace GW2SDK.Masteries;
+namespace GuildWars2.Masteries;
 
 [PublicAPI]
 public sealed class MasteriesQuery

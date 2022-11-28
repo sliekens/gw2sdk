@@ -1,6 +1,6 @@
 using JetBrains.Annotations;
 
-namespace GW2SDK.Tokens;
+namespace GuildWars2.Tokens;
 
 [PublicAPI]
 public sealed record ApiKeyInfo : TokenInfo;

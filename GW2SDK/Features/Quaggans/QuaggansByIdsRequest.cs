@@ -2,12 +2,12 @@
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
-using GW2SDK.Http;
-using GW2SDK.Json;
+using GuildWars2.Http;
+using GuildWars2.Json;
 using JetBrains.Annotations;
 using static System.Net.Http.HttpMethod;
 
-namespace GW2SDK.Quaggans;
+namespace GuildWars2.Quaggans;
 
 [PublicAPI]
 public sealed class QuaggansByIdsRequest : IHttpRequest<IReplicaSet<Quaggan>>
@@ -50,7 +50,7 @@ public sealed class QuaggansByIdsRequest : IHttpRequest<IReplicaSet<Quaggan>>
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value = json.RootElement.GetSet(entry => entry.GetQuaggan(MissingMemberBehavior));
+        var value = json.RootElement.GetSet(entry => QuagganJson.GetQuaggan(entry, MissingMemberBehavior));
         return new ReplicaSet<Quaggan>(
             response.Headers.Date.GetValueOrDefault(),
             value,

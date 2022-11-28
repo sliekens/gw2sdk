@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
-using GW2SDK.Annotations;
+using GuildWars2.Annotations;
 using JetBrains.Annotations;
 
-namespace GW2SDK.Exploration.SkillChallenge;
+namespace GuildWars2.Exploration.SkillChallenge;
 
 [PublicAPI]
 [DataTransferObject]

@@ -1,8 +1,8 @@
-﻿using GW2SDK.Annotations;
-using GW2SDK.BuildStorage;
+﻿using GuildWars2.Annotations;
+using GuildWars2.BuildStorage;
 using JetBrains.Annotations;
 
-namespace GW2SDK.Accounts;
+namespace GuildWars2.Accounts;
 
 [PublicAPI]
 [DataTransferObject]

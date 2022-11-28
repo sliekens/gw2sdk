@@ -1,11 +1,11 @@
 ﻿using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
-using GW2SDK.Http;
-using GW2SDK.Json;
+using GuildWars2.Http;
+using GuildWars2.Json;
 using JetBrains.Annotations;
 
-namespace GW2SDK.Files;
+namespace GuildWars2.Files;
 
 [PublicAPI]
 public sealed class FilesRequest : IHttpRequest<IReplicaSet<File>>
@@ -35,7 +35,7 @@ public sealed class FilesRequest : IHttpRequest<IReplicaSet<File>>
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value = json.RootElement.GetSet(entry => entry.GetFile(MissingMemberBehavior));
+        var value = json.RootElement.GetSet(entry => FileJson.GetFile(entry, MissingMemberBehavior));
         return new ReplicaSet<File>(
             response.Headers.Date.GetValueOrDefault(),
             value,

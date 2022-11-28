@@ -3,7 +3,7 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using JetBrains.Annotations;
 
-namespace GW2SDK.Http;
+namespace GuildWars2.Http;
 
 [PublicAPI]
 public sealed record HttpRequestMessageTemplate(HttpMethod Method, string Path)

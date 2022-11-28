@@ -4,7 +4,7 @@ using System.Linq;
 using Xunit;
 using Xunit.Sdk;
 
-namespace GW2SDK.Tests.TestInfrastructure;
+namespace GuildWars2.Tests.TestInfrastructure;
 
 public static class AssertEx
 {

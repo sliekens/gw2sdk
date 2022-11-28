@@ -2,12 +2,12 @@
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
-using GW2SDK.Http;
-using GW2SDK.Json;
+using GuildWars2.Http;
+using GuildWars2.Json;
 using JetBrains.Annotations;
 using static System.Net.Http.HttpMethod;
 
-namespace GW2SDK.Exploration.Regions;
+namespace GuildWars2.Exploration.Regions;
 
 [PublicAPI]
 public sealed class RegionsByPageRequest : IHttpRequest<IReplicaPage<Region>>
@@ -64,7 +64,7 @@ public sealed class RegionsByPageRequest : IHttpRequest<IReplicaPage<Region>>
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value = json.RootElement.GetSet(entry => entry.GetRegion(MissingMemberBehavior));
+        var value = json.RootElement.GetSet(entry => RegionJson.GetRegion(entry, MissingMemberBehavior));
         return new ReplicaPage<Region>(
             response.Headers.Date.GetValueOrDefault(),
             value,

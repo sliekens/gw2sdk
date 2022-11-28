@@ -1,7 +1,7 @@
-﻿using GW2SDK.Annotations;
+﻿using GuildWars2.Annotations;
 using JetBrains.Annotations;
 
-namespace GW2SDK.Professions;
+namespace GuildWars2.Professions;
 
 /// <summary>A skill reference with limited details such as the skill slot. The <see cref="Id" /> can be used to fetch the
 /// full skill object.</summary>

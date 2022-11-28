@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using JetBrains.Annotations;
 
-namespace GW2SDK.Crafting;
+namespace GuildWars2.Crafting;
 
 [PublicAPI]
 public sealed record GuildDecorationRecipe : Recipe

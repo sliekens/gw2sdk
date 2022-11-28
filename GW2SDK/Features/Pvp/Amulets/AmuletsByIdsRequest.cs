@@ -2,11 +2,11 @@
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
-using GW2SDK.Http;
-using GW2SDK.Json;
+using GuildWars2.Http;
+using GuildWars2.Json;
 using JetBrains.Annotations;
 
-namespace GW2SDK.Pvp.Amulets;
+namespace GuildWars2.Pvp.Amulets;
 
 [PublicAPI]
 public sealed class AmuletsByIdsRequest : IHttpRequest<IReplicaSet<Amulet>>
@@ -50,7 +50,7 @@ public sealed class AmuletsByIdsRequest : IHttpRequest<IReplicaSet<Amulet>>
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value = json.RootElement.GetSet(entry => entry.GetAmulet(MissingMemberBehavior));
+        var value = json.RootElement.GetSet(entry => AmuletJson.GetAmulet(entry, MissingMemberBehavior));
         return new ReplicaSet<Amulet>(
             response.Headers.Date.GetValueOrDefault(),
             value,

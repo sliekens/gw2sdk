@@ -1,9 +1,9 @@
 ﻿using System.Text.Json;
-using GW2SDK.Commerce.Prices;
-using GW2SDK.Tests.TestInfrastructure;
+using GuildWars2.Commerce.Prices;
+using GuildWars2.Tests.TestInfrastructure;
 using Xunit;
 
-namespace GW2SDK.Tests.Features.Commerce.Prices;
+namespace GuildWars2.Tests.Features.Commerce.Prices;
 
 public class ItemPriceReaderTest : IClassFixture<ItemPriceFixture>
 {

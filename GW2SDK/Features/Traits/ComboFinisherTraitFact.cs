@@ -1,6 +1,6 @@
 ﻿using JetBrains.Annotations;
 
-namespace GW2SDK.Traits;
+namespace GuildWars2.Traits;
 
 [PublicAPI]
 public sealed record ComboFinisherTraitFact : TraitFact

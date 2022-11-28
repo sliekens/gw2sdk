@@ -2,11 +2,11 @@
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
-using GW2SDK.Http;
-using GW2SDK.Json;
+using GuildWars2.Http;
+using GuildWars2.Json;
 using JetBrains.Annotations;
 
-namespace GW2SDK.Mounts;
+namespace GuildWars2.Mounts;
 
 [PublicAPI]
 public sealed class OwnedMountsRequest : IHttpRequest<IReplica<IReadOnlyCollection<MountName>>>
@@ -43,7 +43,7 @@ public sealed class OwnedMountsRequest : IHttpRequest<IReplica<IReadOnlyCollecti
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value = json.RootElement.GetSet(entry => entry.GetMountName(MissingMemberBehavior));
+        var value = json.RootElement.GetSet(entry => MountNameJson.GetMountName(entry, MissingMemberBehavior));
         return new Replica<IReadOnlyCollection<MountName>>(
             response.Headers.Date.GetValueOrDefault(),
             value,

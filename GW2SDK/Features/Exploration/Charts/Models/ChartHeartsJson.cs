@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text.Json;
-using GW2SDK.Exploration.Hearts;
+using GuildWars2.Exploration.Hearts;
 using JetBrains.Annotations;
 
-namespace GW2SDK.Exploration.Charts;
+namespace GuildWars2.Exploration.Charts;
 
 [PublicAPI]
 public static class ChartHeartsJson

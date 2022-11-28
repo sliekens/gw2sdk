@@ -5,7 +5,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using JetBrains.Annotations;
 
-namespace GW2SDK.Specializations;
+namespace GuildWars2.Specializations;
 
 [PublicAPI]
 public sealed class SpecializationsQuery

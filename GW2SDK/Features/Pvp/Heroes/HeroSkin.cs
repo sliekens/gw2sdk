@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
-using GW2SDK.Annotations;
+using GuildWars2.Annotations;
 using JetBrains.Annotations;
 
-namespace GW2SDK.Pvp.Heroes;
+namespace GuildWars2.Pvp.Heroes;
 
 [PublicAPI]
 [DataTransferObject]

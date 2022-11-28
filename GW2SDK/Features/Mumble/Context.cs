@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Net;
 using System.Runtime.InteropServices;
-using GW2SDK.Win32;
+using GuildWars2.Win32;
 using JetBrains.Annotations;
 
-namespace GW2SDK.Mumble;
+namespace GuildWars2.Mumble;
 
 [PublicAPI]
 [StructLayout(LayoutKind.Explicit, CharSet = CharSet.Unicode)]

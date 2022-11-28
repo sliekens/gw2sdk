@@ -1,9 +1,9 @@
 using System;
 using System.Text.Json;
-using GW2SDK.Json;
+using GuildWars2.Json;
 using JetBrains.Annotations;
 
-namespace GW2SDK.Tokens;
+namespace GuildWars2.Tokens;
 
 [PublicAPI]
 public static class SubtokenInfoJson

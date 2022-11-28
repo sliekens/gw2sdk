@@ -1,8 +1,8 @@
 ﻿using System;
-using GW2SDK.Guilds.Permissions;
+using GuildWars2.Guilds.Permissions;
 using Xunit;
 
-namespace GW2SDK.Tests.Features.Guilds.Permissions;
+namespace GuildWars2.Tests.Features.Guilds.Permissions;
 
 internal static class Invariants
 {

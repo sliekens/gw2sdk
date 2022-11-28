@@ -5,7 +5,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using JetBrains.Annotations;
 
-namespace GW2SDK.Quaggans;
+namespace GuildWars2.Quaggans;
 
 [PublicAPI]
 public sealed class QuaggansQuery
