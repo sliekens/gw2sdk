@@ -5,6 +5,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using GuildWars2.Pvp.Amulets;
 using GuildWars2.Pvp.Heroes;
+using GuildWars2.Pvp.Ranks;
 using JetBrains.Annotations;
 
 namespace GuildWars2.Pvp;
@@ -161,4 +162,76 @@ public sealed class PvpQuery
     }
 
     #endregion
+
+    #region v2/pvp/ranks
+
+    public Task<IReplicaSet<Rank>> GetRanks(
+        Language? language = default,
+        MissingMemberBehavior missingMemberBehavior = default,
+        CancellationToken cancellationToken = default
+    )
+    {
+        RankRequest request = new()
+        {
+            Language = language,
+            MissingMemberBehavior = missingMemberBehavior
+        };
+        return request.SendAsync(http, cancellationToken);
+    }
+
+    public Task<IReplicaSet<int>> GetRanksIndex(CancellationToken cancellationToken = default)
+    {
+        RankIndexRequest request = new();
+        return request.SendAsync(http, cancellationToken);
+    }
+
+    public Task<IReplica<Rank>> GetRankById(
+        int rankId,
+        Language? language = default,
+        MissingMemberBehavior missingMemberBehavior = default,
+        CancellationToken cancellationToken = default
+    )
+    {
+        RankByIdRequest request = new(rankId)
+        {
+            Language = language,
+            MissingMemberBehavior = missingMemberBehavior
+        };
+        return request.SendAsync(http, cancellationToken);
+    }
+
+    public Task<IReplicaSet<Rank>> GetRanksByIds(
+        IReadOnlyCollection<int> rankIds,
+        Language? language = default,
+        MissingMemberBehavior missingMemberBehavior = default,
+        CancellationToken cancellationToken = default
+    )
+    {
+        RanksByIdsRequest request = new(rankIds)
+        {
+            Language = language,
+            MissingMemberBehavior = missingMemberBehavior
+        };
+        return request.SendAsync(http, cancellationToken);
+    }
+
+    public Task<IReplicaPage<Rank>> GetRanksByPage(
+        int pageIndex,
+        int? pageSize = default,
+        Language? language = default,
+        MissingMemberBehavior missingMemberBehavior = default,
+        CancellationToken cancellationToken = default
+    )
+    {
+        RanksByPageRequest request = new(pageIndex)
+        {
+            PageSize = pageSize,
+            Language = language,
+            MissingMemberBehavior = missingMemberBehavior
+        };
+        return request.SendAsync(http, cancellationToken);
+    }
+
+    #endregion
+
 }

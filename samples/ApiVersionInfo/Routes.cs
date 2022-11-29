@@ -130,7 +130,7 @@ internal static class Routes
         "/v2/pvp/amulets",
         //"/v2/pvp/games",
         "/v2/pvp/heroes",
-        //"/v2/pvp/ranks",
+        "/v2/pvp/ranks",
         //"/v2/pvp/seasons",
         //"/v2/pvp/seasons/:id/leaderboards",
         //"/v2/pvp/seasons/:id/leaderboards/:board/:region",
