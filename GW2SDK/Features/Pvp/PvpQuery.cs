@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using GuildWars2.Pvp.Amulets;
 using GuildWars2.Pvp.Heroes;
 using GuildWars2.Pvp.Ranks;
+using GuildWars2.Pvp.Seasons;
 using JetBrains.Annotations;
 
 namespace GuildWars2.Pvp;
@@ -234,4 +235,74 @@ public sealed class PvpQuery
 
     #endregion
 
+    #region v2/pvp/seasons
+
+    public Task<IReplicaSet<Season>> GetSeasons(
+        Language? language = default,
+        MissingMemberBehavior missingMemberBehavior = default,
+        CancellationToken cancellationToken = default
+    )
+    {
+        SeasonRequest request = new()
+        {
+            Language = language,
+            MissingMemberBehavior = missingMemberBehavior
+        };
+        return request.SendAsync(http, cancellationToken);
+    }
+
+    public Task<IReplicaSet<string>> GetSeasonsIndex(CancellationToken cancellationToken = default)
+    {
+        SeasonIndexRequest request = new();
+        return request.SendAsync(http, cancellationToken);
+    }
+
+    public Task<IReplica<Season>> GetSeasonById(
+        string seasonId,
+        Language? language = default,
+        MissingMemberBehavior missingMemberBehavior = default,
+        CancellationToken cancellationToken = default
+    )
+    {
+        SeasonByIdRequest request = new(seasonId)
+        {
+            Language = language,
+            MissingMemberBehavior = missingMemberBehavior
+        };
+        return request.SendAsync(http, cancellationToken);
+    }
+
+    public Task<IReplicaSet<Season>> GetSeasonsByIds(
+        IReadOnlyCollection<string> seasonIds,
+        Language? language = default,
+        MissingMemberBehavior missingMemberBehavior = default,
+        CancellationToken cancellationToken = default
+    )
+    {
+        SeasonsByIdsRequest request = new(seasonIds)
+        {
+            Language = language,
+            MissingMemberBehavior = missingMemberBehavior
+        };
+        return request.SendAsync(http, cancellationToken);
+    }
+
+    public Task<IReplicaPage<Season>> GetSeasonsByPage(
+        int pageIndex,
+        int? pageSize = default,
+        Language? language = default,
+        MissingMemberBehavior missingMemberBehavior = default,
+        CancellationToken cancellationToken = default
+    )
+    {
+        SeasonsByPageRequest request = new(pageIndex)
+        {
+            PageSize = pageSize,
+            Language = language,
+            MissingMemberBehavior = missingMemberBehavior
+        };
+        return request.SendAsync(http, cancellationToken);
+    }
+
+    #endregion
 }
