@@ -1,6 +1,6 @@
 # Basic usage
 
-The entry point for API access is `GW2SDK.Gw2Client`. From there you can use IntelliSense to discover resources.
+The entry point for API access is `GuildWars2.Gw2Client`. From there you can use IntelliSense to discover resources.
 
 The `Gw2Client` has a single dependency on `System.Net.Http.HttpClient` which you must provide from your application code.
 

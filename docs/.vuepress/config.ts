@@ -16,10 +16,8 @@ export default defineConfig({
       '/guide/',
       '/guide/install',
       '/guide/usage',
-      '/guide/advanced-usage',
       '/guide/http-client-factory',
-      '/guide/resiliency',
-      '/guide/summary'
+      '/guide/resiliency'
     ],
     lastUpdated: true
   }
