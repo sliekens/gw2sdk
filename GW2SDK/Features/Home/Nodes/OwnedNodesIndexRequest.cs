@@ -32,6 +32,7 @@ public sealed class OwnedNodesIndexRequest : IHttpRequest<IReplica<IReadOnlyColl
     {
         using var response = await httpClient.SendAsync(
                 Template with { BearerToken = AccessToken },
+                HttpCompletionOption.ResponseHeadersRead,
                 cancellationToken
             )
             .ConfigureAwait(false);

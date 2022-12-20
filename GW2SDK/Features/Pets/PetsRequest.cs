@@ -31,6 +31,7 @@ public sealed class PetsRequest : IHttpRequest<IReplicaSet<Pet>>
     {
         using var response = await httpClient.SendAsync(
                 Template with { AcceptLanguage = Language?.Alpha2Code },
+                HttpCompletionOption.ResponseHeadersRead,
                 cancellationToken
             )
             .ConfigureAwait(false);
@@ -40,7 +41,7 @@ public sealed class PetsRequest : IHttpRequest<IReplicaSet<Pet>>
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value = json.RootElement.GetSet(entry => PetJson.GetPet(entry, MissingMemberBehavior));
+        var value = json.RootElement.GetSet(entry => entry.GetPet(MissingMemberBehavior));
         return new ReplicaSet<Pet>(
             response.Headers.Date.GetValueOrDefault(),
             value,

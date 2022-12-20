@@ -45,6 +45,7 @@ public sealed class ChartsIndexRequest : IHttpRequest<IReplicaSet<int>>
                         .Replace(":floor", FloorId.ToString(CultureInfo.InvariantCulture))
                         .Replace(":region", RegionId.ToString(CultureInfo.InvariantCulture))
                 },
+                HttpCompletionOption.ResponseHeadersRead,
                 cancellationToken
             )
             .ConfigureAwait(false);

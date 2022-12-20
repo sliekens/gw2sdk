@@ -6,6 +6,8 @@ namespace GuildWars2.Pvp.Seasons;
 public enum DivisionFlag
 {
     CanLosePoints = 1,
+
     CanLoseTiers,
+
     Repeatable
 }

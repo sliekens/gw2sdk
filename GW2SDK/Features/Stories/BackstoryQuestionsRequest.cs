@@ -32,6 +32,7 @@ public sealed class BackstoryQuestionsRequest : IHttpRequest<IReplicaSet<Backsto
     {
         using var response = await httpClient.SendAsync(
                 Template with { AcceptLanguage = Language?.Alpha2Code },
+                HttpCompletionOption.ResponseHeadersRead,
                 cancellationToken
             )
             .ConfigureAwait(false);
@@ -42,7 +43,7 @@ public sealed class BackstoryQuestionsRequest : IHttpRequest<IReplicaSet<Backsto
             .ConfigureAwait(false);
 
         var value = json.RootElement.GetSet(
-            entry => BackstoryQuestionJson.GetBackstoryQuestion(entry, MissingMemberBehavior)
+            entry => entry.GetBackstoryQuestion(MissingMemberBehavior)
         );
         return new ReplicaSet<BackstoryQuestion>(
             response.Headers.Date.GetValueOrDefault(),

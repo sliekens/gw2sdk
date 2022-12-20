@@ -32,6 +32,7 @@ public sealed class ProfessionsRequest : IHttpRequest<IReplicaSet<Profession>>
     {
         using var response = await httpClient.SendAsync(
                 Template with { AcceptLanguage = Language?.Alpha2Code },
+                HttpCompletionOption.ResponseHeadersRead,
                 cancellationToken
             )
             .ConfigureAwait(false);
@@ -41,7 +42,7 @@ public sealed class ProfessionsRequest : IHttpRequest<IReplicaSet<Profession>>
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value = json.RootElement.GetSet(entry => ProfessionJson.GetProfession(entry, MissingMemberBehavior));
+        var value = json.RootElement.GetSet(entry => entry.GetProfession(MissingMemberBehavior));
         return new ReplicaSet<Profession>(
             response.Headers.Date.GetValueOrDefault(),
             value,

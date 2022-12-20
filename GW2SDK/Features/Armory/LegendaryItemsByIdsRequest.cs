@@ -41,6 +41,7 @@ public sealed class LegendaryItemsByIdsRequest : IHttpRequest<IReplicaSet<Legend
                         { "v", SchemaVersion.Recommended }
                     }
                 },
+                HttpCompletionOption.ResponseHeadersRead,
                 cancellationToken
             )
             .ConfigureAwait(false);
@@ -50,7 +51,7 @@ public sealed class LegendaryItemsByIdsRequest : IHttpRequest<IReplicaSet<Legend
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value = json.RootElement.GetSet(entry => LegendaryItemJson.GetLegendaryItem(entry, MissingMemberBehavior));
+        var value = json.RootElement.GetSet(entry => entry.GetLegendaryItem(MissingMemberBehavior));
         return new ReplicaSet<LegendaryItem>(
             response.Headers.Date.GetValueOrDefault(),
             value,

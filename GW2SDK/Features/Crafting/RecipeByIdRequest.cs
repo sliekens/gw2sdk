@@ -38,6 +38,7 @@ public sealed class RecipeByIdRequest : IHttpRequest<IReplica<Recipe>>
                         { "v", SchemaVersion.Recommended }
                     }
                 },
+                HttpCompletionOption.ResponseHeadersRead,
                 cancellationToken
             )
             .ConfigureAwait(false);

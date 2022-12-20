@@ -35,6 +35,7 @@ public sealed class GuildsByNameRequest : IHttpRequest<IReplica<IReadOnlyCollect
                         { "v", SchemaVersion.Recommended }
                     }
                 },
+                HttpCompletionOption.ResponseHeadersRead,
                 cancellationToken
             )
             .ConfigureAwait(false);

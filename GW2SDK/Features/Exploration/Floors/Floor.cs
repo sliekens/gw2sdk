@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Drawing;
 using GuildWars2.Annotations;
+using GuildWars2.Exploration.Regions;
 using JetBrains.Annotations;
-using Region = GuildWars2.Exploration.Regions.Region;
 
 namespace GuildWars2.Exploration.Floors;
 

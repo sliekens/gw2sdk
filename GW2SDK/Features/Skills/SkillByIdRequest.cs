@@ -41,6 +41,7 @@ public sealed class SkillByIdRequest : IHttpRequest<IReplica<Skill>>
                     },
                     AcceptLanguage = Language?.Alpha2Code
                 },
+                HttpCompletionOption.ResponseHeadersRead,
                 cancellationToken
             )
             .ConfigureAwait(false);

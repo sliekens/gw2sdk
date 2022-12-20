@@ -47,6 +47,7 @@ public sealed class MountsByPageRequest : IHttpRequest<IReplicaPage<Mount>>
                     Arguments = search,
                     AcceptLanguage = Language?.Alpha2Code
                 },
+                HttpCompletionOption.ResponseHeadersRead,
                 cancellationToken
             )
             .ConfigureAwait(false);
@@ -56,7 +57,7 @@ public sealed class MountsByPageRequest : IHttpRequest<IReplicaPage<Mount>>
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value = json.RootElement.GetSet(entry => MountJson.GetMount(entry, MissingMemberBehavior));
+        var value = json.RootElement.GetSet(entry => entry.GetMount(MissingMemberBehavior));
         return new ReplicaPage<Mount>(
             response.Headers.Date.GetValueOrDefault(),
             value,

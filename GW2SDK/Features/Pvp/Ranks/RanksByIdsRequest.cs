@@ -41,6 +41,7 @@ public sealed class RanksByIdsRequest : IHttpRequest<IReplicaSet<Rank>>
                     },
                     AcceptLanguage = Language?.Alpha2Code
                 },
+                HttpCompletionOption.ResponseHeadersRead,
                 cancellationToken
             )
             .ConfigureAwait(false);
@@ -50,7 +51,7 @@ public sealed class RanksByIdsRequest : IHttpRequest<IReplicaSet<Rank>>
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value = json.RootElement.GetSet(entry => RankJson.GetRank(entry, MissingMemberBehavior));
+        var value = json.RootElement.GetSet(entry => entry.GetRank(MissingMemberBehavior));
         return new ReplicaSet<Rank>(
             response.Headers.Date.GetValueOrDefault(),
             value,

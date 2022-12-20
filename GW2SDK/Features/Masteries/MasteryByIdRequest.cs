@@ -41,6 +41,7 @@ public sealed class MasteryByIdRequest : IHttpRequest<IReplica<Mastery>>
                     },
                     AcceptLanguage = Language?.Alpha2Code
                 },
+                HttpCompletionOption.ResponseHeadersRead,
                 cancellationToken
             )
             .ConfigureAwait(false);

@@ -21,8 +21,12 @@ public sealed class MinipetsIndexRequest : IHttpRequest<IReplicaSet<int>>
         CancellationToken cancellationToken
     )
     {
-        using var response =
-            await httpClient.SendAsync(Template, cancellationToken).ConfigureAwait(false);
+        using var response = await httpClient.SendAsync(
+                Template,
+                HttpCompletionOption.ResponseHeadersRead,
+                cancellationToken
+            )
+            .ConfigureAwait(false);
 
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
 

@@ -32,6 +32,7 @@ public sealed class MaterialCategoriesRequest : IHttpRequest<IReplicaSet<Materia
     {
         using var response = await httpClient.SendAsync(
                 Template with { AcceptLanguage = Language?.Alpha2Code },
+                HttpCompletionOption.ResponseHeadersRead,
                 cancellationToken
             )
             .ConfigureAwait(false);
@@ -42,7 +43,7 @@ public sealed class MaterialCategoriesRequest : IHttpRequest<IReplicaSet<Materia
             .ConfigureAwait(false);
 
         var value = json.RootElement.GetSet(
-            entry => MaterialCategoryJson.GetMaterialCategory(entry, MissingMemberBehavior)
+            entry => entry.GetMaterialCategory(MissingMemberBehavior)
         );
         return new ReplicaSet<MaterialCategory>(
             response.Headers.Date.GetValueOrDefault(),

@@ -41,6 +41,7 @@ public sealed class OrderBooksByIdsRequest : IHttpRequest<IReplicaSet<OrderBook>
                         { "v", SchemaVersion.Recommended }
                     }
                 },
+                HttpCompletionOption.ResponseHeadersRead,
                 cancellationToken
             )
             .ConfigureAwait(false);
@@ -50,7 +51,7 @@ public sealed class OrderBooksByIdsRequest : IHttpRequest<IReplicaSet<OrderBook>
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value = json.RootElement.GetSet(entry => OrderBookJson.GetOrderBook(entry, MissingMemberBehavior));
+        var value = json.RootElement.GetSet(entry => entry.GetOrderBook(MissingMemberBehavior));
         return new ReplicaSet<OrderBook>(
             response.Headers.Date.GetValueOrDefault(),
             value,

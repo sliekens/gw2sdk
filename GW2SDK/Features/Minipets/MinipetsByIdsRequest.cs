@@ -41,6 +41,7 @@ public sealed class MinipetsByIdsRequest : IHttpRequest<IReplicaSet<Minipet>>
                     },
                     AcceptLanguage = Language?.Alpha2Code
                 },
+                HttpCompletionOption.ResponseHeadersRead,
                 cancellationToken
             )
             .ConfigureAwait(false);
@@ -50,7 +51,7 @@ public sealed class MinipetsByIdsRequest : IHttpRequest<IReplicaSet<Minipet>>
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value = json.RootElement.GetSet(entry => MinipetJson.GetMinipet(entry, MissingMemberBehavior));
+        var value = json.RootElement.GetSet(entry => entry.GetMinipet(MissingMemberBehavior));
         return new ReplicaSet<Minipet>(
             response.Headers.Date.GetValueOrDefault(),
             value,

@@ -41,6 +41,7 @@ public sealed class RecipesByPageRequest : IHttpRequest<IReplicaPage<Recipe>>
         search.Add("v", SchemaVersion.Recommended);
         using var response = await httpClient.SendAsync(
                 Template with { Arguments = search },
+                HttpCompletionOption.ResponseHeadersRead,
                 cancellationToken
             )
             .ConfigureAwait(false);
@@ -50,7 +51,7 @@ public sealed class RecipesByPageRequest : IHttpRequest<IReplicaPage<Recipe>>
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value = json.RootElement.GetSet(entry => RecipeJson.GetRecipe(entry, MissingMemberBehavior));
+        var value = json.RootElement.GetSet(entry => entry.GetRecipe(MissingMemberBehavior));
         return new ReplicaPage<Recipe>(
             response.Headers.Date.GetValueOrDefault(),
             value,

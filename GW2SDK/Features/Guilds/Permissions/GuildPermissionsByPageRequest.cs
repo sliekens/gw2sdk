@@ -45,6 +45,7 @@ public sealed class
                     Arguments = search,
                     AcceptLanguage = Language?.Alpha2Code
                 },
+                HttpCompletionOption.ResponseHeadersRead,
                 cancellationToken
             )
             .ConfigureAwait(false);
@@ -55,7 +56,7 @@ public sealed class
             .ConfigureAwait(false);
 
         var value = json.RootElement.GetSet(
-            entry => GuildPermissionSummaryJson.GetGuildPermissionSummary(entry, MissingMemberBehavior)
+            entry => entry.GetGuildPermissionSummary(MissingMemberBehavior)
         );
         return new ReplicaPage<GuildPermissionSummary>(
             response.Headers.Date.GetValueOrDefault(),

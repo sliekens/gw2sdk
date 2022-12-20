@@ -32,6 +32,7 @@ public sealed class OwnedCatsIndexRequest : IHttpRequest<IReplica<IReadOnlyColle
     {
         using var response = await httpClient.SendAsync(
                 Template with { BearerToken = AccessToken },
+                HttpCompletionOption.ResponseHeadersRead,
                 cancellationToken
             )
             .ConfigureAwait(false);

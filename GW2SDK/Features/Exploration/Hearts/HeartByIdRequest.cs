@@ -59,6 +59,7 @@ public sealed class HeartByIdRequest : IHttpRequest<IReplica<Heart>>
                     },
                     AcceptLanguage = Language?.Alpha2Code
                 },
+                HttpCompletionOption.ResponseHeadersRead,
                 cancellationToken
             )
             .ConfigureAwait(false);

@@ -49,6 +49,7 @@ public sealed class RacesByPageRequest : IHttpRequest<IReplicaPage<Race>>
                     Arguments = search,
                     AcceptLanguage = Language?.Alpha2Code
                 },
+                HttpCompletionOption.ResponseHeadersRead,
                 cancellationToken
             )
             .ConfigureAwait(false);
@@ -58,7 +59,7 @@ public sealed class RacesByPageRequest : IHttpRequest<IReplicaPage<Race>>
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value = json.RootElement.GetSet(entry => RaceJson.GetRace(entry, MissingMemberBehavior));
+        var value = json.RootElement.GetSet(entry => entry.GetRace(MissingMemberBehavior));
         return new ReplicaPage<Race>(
             response.Headers.Date.GetValueOrDefault(),
             value,

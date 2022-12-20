@@ -41,6 +41,7 @@ public sealed class GlidersByIdsRequest : IHttpRequest<IReplicaSet<Glider>>
                     },
                     AcceptLanguage = Language?.Alpha2Code
                 },
+                HttpCompletionOption.ResponseHeadersRead,
                 cancellationToken
             )
             .ConfigureAwait(false);
@@ -50,7 +51,7 @@ public sealed class GlidersByIdsRequest : IHttpRequest<IReplicaSet<Glider>>
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value = json.RootElement.GetSet(entry => GliderJson.GetGlider(entry, MissingMemberBehavior));
+        var value = json.RootElement.GetSet(entry => entry.GetGlider(MissingMemberBehavior));
         return new ReplicaSet<Glider>(
             response.Headers.Date.GetValueOrDefault(),
             value,

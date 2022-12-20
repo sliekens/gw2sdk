@@ -38,6 +38,7 @@ public sealed class DungeonsByIdsRequest : IHttpRequest<IReplicaSet<Dungeon>>
                         { "v", SchemaVersion.Recommended }
                     }
                 },
+                HttpCompletionOption.ResponseHeadersRead,
                 cancellationToken
             )
             .ConfigureAwait(false);
@@ -47,7 +48,7 @@ public sealed class DungeonsByIdsRequest : IHttpRequest<IReplicaSet<Dungeon>>
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value = json.RootElement.GetSet(entry => DungeonJson.GetDungeon(entry, MissingMemberBehavior));
+        var value = json.RootElement.GetSet(entry => entry.GetDungeon(MissingMemberBehavior));
         return new ReplicaSet<Dungeon>(
             response.Headers.Date.GetValueOrDefault(),
             value,

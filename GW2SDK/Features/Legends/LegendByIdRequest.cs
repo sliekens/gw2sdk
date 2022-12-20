@@ -35,6 +35,7 @@ public sealed class LegendByIdRequest : IHttpRequest<IReplica<Legend>>
                         { "v", SchemaVersion.Recommended }
                     }
                 },
+                HttpCompletionOption.ResponseHeadersRead,
                 cancellationToken
             )
             .ConfigureAwait(false);

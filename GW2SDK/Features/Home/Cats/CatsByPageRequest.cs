@@ -38,6 +38,7 @@ public sealed class CatsByPageRequest : IHttpRequest<IReplicaPage<Cat>>
         search.Add("v", SchemaVersion.Recommended);
         using var response = await httpClient.SendAsync(
                 Template with { Arguments = search },
+                HttpCompletionOption.ResponseHeadersRead,
                 cancellationToken
             )
             .ConfigureAwait(false);
@@ -47,7 +48,7 @@ public sealed class CatsByPageRequest : IHttpRequest<IReplicaPage<Cat>>
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value = json.RootElement.GetSet(entry => CatJson.GetCat(entry, MissingMemberBehavior));
+        var value = json.RootElement.GetSet(entry => entry.GetCat(MissingMemberBehavior));
         return new ReplicaPage<Cat>(
             response.Headers.Date.GetValueOrDefault(),
             value,

@@ -38,6 +38,7 @@ public sealed class FilesByPageRequest : IHttpRequest<IReplicaPage<File>>
         search.Add("v", SchemaVersion.Recommended);
         using var response = await httpClient.SendAsync(
                 Template with { Arguments = search },
+                HttpCompletionOption.ResponseHeadersRead,
                 cancellationToken
             )
             .ConfigureAwait(false);
@@ -47,7 +48,7 @@ public sealed class FilesByPageRequest : IHttpRequest<IReplicaPage<File>>
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value = json.RootElement.GetSet(entry => FileJson.GetFile(entry, MissingMemberBehavior));
+        var value = json.RootElement.GetSet(entry => entry.GetFile(MissingMemberBehavior));
         return new ReplicaPage<File>(
             response.Headers.Date.GetValueOrDefault(),
             value,

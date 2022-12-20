@@ -42,6 +42,7 @@ public sealed class AchievementGroupsByIdsRequest : IHttpRequest<IReplicaSet<Ach
                     },
                     AcceptLanguage = Language?.Alpha2Code
                 },
+                HttpCompletionOption.ResponseHeadersRead,
                 cancellationToken
             )
             .ConfigureAwait(false);
@@ -52,7 +53,7 @@ public sealed class AchievementGroupsByIdsRequest : IHttpRequest<IReplicaSet<Ach
             .ConfigureAwait(false);
 
         var value = json.RootElement.GetSet(
-            entry => AchievementGroupJson.GetAchievementGroup(entry, MissingMemberBehavior)
+            entry => entry.GetAchievementGroup(MissingMemberBehavior)
         );
         return new ReplicaSet<AchievementGroup>(
             response.Headers.Date.GetValueOrDefault(),

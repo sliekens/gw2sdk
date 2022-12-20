@@ -41,6 +41,7 @@ public sealed class MailCarrierByIdRequest : IHttpRequest<IReplica<MailCarrier>>
                     },
                     AcceptLanguage = Language?.Alpha2Code
                 },
+                HttpCompletionOption.ResponseHeadersRead,
                 cancellationToken
             )
             .ConfigureAwait(false);

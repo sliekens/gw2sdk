@@ -27,6 +27,7 @@ public sealed class OwnedMailCarriersRequest : IHttpRequest<IReplica<IReadOnlyCo
     {
         using var response = await httpClient.SendAsync(
                 Template with { BearerToken = AccessToken },
+                HttpCompletionOption.ResponseHeadersRead,
                 cancellationToken
             )
             .ConfigureAwait(false);

@@ -35,6 +35,7 @@ public sealed class RaidByIdRequest : IHttpRequest<IReplica<Raid>>
                         { "v", SchemaVersion.Recommended }
                     }
                 },
+                HttpCompletionOption.ResponseHeadersRead,
                 cancellationToken
             )
             .ConfigureAwait(false);

@@ -58,6 +58,7 @@ public sealed class HeartsRequest : IHttpRequest<IReplicaSet<Heart>>
                         .Replace(":map", MapId.ToString(CultureInfo.InvariantCulture)),
                     AcceptLanguage = Language?.Alpha2Code
                 },
+                HttpCompletionOption.ResponseHeadersRead,
                 cancellationToken
             )
             .ConfigureAwait(false);
@@ -67,7 +68,7 @@ public sealed class HeartsRequest : IHttpRequest<IReplicaSet<Heart>>
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value = json.RootElement.GetSet(entry => HeartJson.GetHeart(entry, MissingMemberBehavior));
+        var value = json.RootElement.GetSet(entry => entry.GetHeart(MissingMemberBehavior));
         return new ReplicaSet<Heart>(
             response.Headers.Date.GetValueOrDefault(),
             value,

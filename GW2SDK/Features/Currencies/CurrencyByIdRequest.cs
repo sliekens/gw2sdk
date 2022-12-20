@@ -41,6 +41,7 @@ public sealed class CurrencyByIdRequest : IHttpRequest<IReplica<Currency>>
                     },
                     AcceptLanguage = Language?.Alpha2Code
                 },
+                HttpCompletionOption.ResponseHeadersRead,
                 cancellationToken
             )
             .ConfigureAwait(false);

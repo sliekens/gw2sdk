@@ -41,6 +41,7 @@ public sealed class ItemByIdRequest : IHttpRequest<IReplica<Item>>
                         { "v", SchemaVersion.Recommended }
                     }
                 },
+                HttpCompletionOption.ResponseHeadersRead,
                 cancellationToken
             )
             .ConfigureAwait(false);

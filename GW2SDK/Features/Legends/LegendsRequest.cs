@@ -27,15 +27,19 @@ public sealed class LegendsRequest : IHttpRequest<IReplicaSet<Legend>>
         CancellationToken cancellationToken
     )
     {
-        using var response =
-            await httpClient.SendAsync(Template, cancellationToken).ConfigureAwait(false);
+        using var response = await httpClient.SendAsync(
+                Template,
+                HttpCompletionOption.ResponseHeadersRead,
+                cancellationToken
+            )
+            .ConfigureAwait(false);
 
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
 
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value = json.RootElement.GetSet(entry => LegendJson.GetLegend(entry, MissingMemberBehavior));
+        var value = json.RootElement.GetSet(entry => entry.GetLegend(MissingMemberBehavior));
         return new ReplicaSet<Legend>(
             response.Headers.Date.GetValueOrDefault(),
             value,

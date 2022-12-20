@@ -33,6 +33,7 @@ public sealed class AccountAchievementsRequest : IHttpRequest<IReplicaSet<Accoun
     {
         using var response = await httpClient.SendAsync(
                 Template with { BearerToken = AccessToken },
+                HttpCompletionOption.ResponseHeadersRead,
                 cancellationToken
             )
             .ConfigureAwait(false);
@@ -43,7 +44,7 @@ public sealed class AccountAchievementsRequest : IHttpRequest<IReplicaSet<Accoun
             .ConfigureAwait(false);
 
         var value =
-            json.RootElement.GetSet(entry => AccountAchievementJson.GetAccountAchievement(entry, MissingMemberBehavior));
+            json.RootElement.GetSet(entry => entry.GetAccountAchievement(MissingMemberBehavior));
         return new ReplicaSet<AccountAchievement>(
             response.Headers.Date.GetValueOrDefault(),
             value,

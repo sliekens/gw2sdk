@@ -49,6 +49,7 @@ public sealed class RegionByIdRequest : IHttpRequest<IReplica<Region>>
                     },
                     AcceptLanguage = Language?.Alpha2Code
                 },
+                HttpCompletionOption.ResponseHeadersRead,
                 cancellationToken
             )
             .ConfigureAwait(false);

@@ -39,6 +39,7 @@ public sealed class FloorsIndexRequest : IHttpRequest<IReplicaSet<int>>
                         ContinentId.ToString(CultureInfo.InvariantCulture)
                     )
                 },
+                HttpCompletionOption.ResponseHeadersRead,
                 cancellationToken
             )
             .ConfigureAwait(false);

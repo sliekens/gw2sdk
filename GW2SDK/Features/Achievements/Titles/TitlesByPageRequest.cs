@@ -47,6 +47,7 @@ public sealed class TitlesByPageRequest : IHttpRequest<IReplicaPage<Title>>
                     Arguments = search,
                     AcceptLanguage = Language?.Alpha2Code
                 },
+                HttpCompletionOption.ResponseHeadersRead,
                 cancellationToken
             )
             .ConfigureAwait(false);
@@ -56,7 +57,7 @@ public sealed class TitlesByPageRequest : IHttpRequest<IReplicaPage<Title>>
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value = json.RootElement.GetSet(entry => TitleJson.GetTitle(entry, MissingMemberBehavior));
+        var value = json.RootElement.GetSet(entry => entry.GetTitle(MissingMemberBehavior));
         return new ReplicaPage<Title>(
             response.Headers.Date.GetValueOrDefault(),
             value,

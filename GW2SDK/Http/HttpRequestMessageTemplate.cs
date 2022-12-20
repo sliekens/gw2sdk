@@ -47,4 +47,8 @@ public sealed record HttpRequestMessageTemplate(HttpMethod Method, string Path)
 
         return message;
     }
+
+    public static implicit operator
+        HttpRequestMessage(HttpRequestMessageTemplate requestTemplate) =>
+        requestTemplate.Compile();
 }

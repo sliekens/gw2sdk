@@ -68,6 +68,7 @@ public sealed class SectorsByIdsRequest : IHttpRequest<IReplicaSet<Sector>>
                     },
                     AcceptLanguage = Language?.Alpha2Code
                 },
+                HttpCompletionOption.ResponseHeadersRead,
                 cancellationToken
             )
             .ConfigureAwait(false);
@@ -77,7 +78,7 @@ public sealed class SectorsByIdsRequest : IHttpRequest<IReplicaSet<Sector>>
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value = json.RootElement.GetSet(entry => SectorJson.GetSector(entry, MissingMemberBehavior));
+        var value = json.RootElement.GetSet(entry => entry.GetSector(MissingMemberBehavior));
         return new ReplicaSet<Sector>(
             response.Headers.Date.GetValueOrDefault(),
             value,

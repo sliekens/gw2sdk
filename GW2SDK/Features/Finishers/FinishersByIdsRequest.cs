@@ -41,6 +41,7 @@ public sealed class FinishersByIdsRequest : IHttpRequest<IReplicaSet<Finisher>>
                     },
                     AcceptLanguage = Language?.Alpha2Code
                 },
+                HttpCompletionOption.ResponseHeadersRead,
                 cancellationToken
             )
             .ConfigureAwait(false);
@@ -50,7 +51,7 @@ public sealed class FinishersByIdsRequest : IHttpRequest<IReplicaSet<Finisher>>
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value = json.RootElement.GetSet(entry => FinisherJson.GetFinisher(entry, MissingMemberBehavior));
+        var value = json.RootElement.GetSet(entry => entry.GetFinisher(MissingMemberBehavior));
         return new ReplicaSet<Finisher>(
             response.Headers.Date.GetValueOrDefault(),
             value,

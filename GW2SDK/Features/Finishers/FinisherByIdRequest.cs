@@ -38,6 +38,7 @@ public sealed class FinisherByIdRequest : IHttpRequest<IReplica<Finisher>>
                     },
                     AcceptLanguage = Language?.Alpha2Code
                 },
+                HttpCompletionOption.ResponseHeadersRead,
                 cancellationToken
             )
             .ConfigureAwait(false);

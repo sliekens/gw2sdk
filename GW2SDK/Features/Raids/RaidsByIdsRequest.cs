@@ -38,6 +38,7 @@ public sealed class RaidsByIdsRequest : IHttpRequest<IReplicaSet<Raid>>
                         { "v", SchemaVersion.Recommended }
                     }
                 },
+                HttpCompletionOption.ResponseHeadersRead,
                 cancellationToken
             )
             .ConfigureAwait(false);
@@ -47,7 +48,7 @@ public sealed class RaidsByIdsRequest : IHttpRequest<IReplicaSet<Raid>>
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value = json.RootElement.GetSet(entry => RaidJson.GetRaid(entry, MissingMemberBehavior));
+        var value = json.RootElement.GetSet(entry => entry.GetRaid(MissingMemberBehavior));
         return new ReplicaSet<Raid>(
             response.Headers.Date.GetValueOrDefault(),
             value,

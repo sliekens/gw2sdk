@@ -40,6 +40,7 @@ public sealed class RaceByIdRequest : IHttpRequest<IReplica<Race>>
                     },
                     AcceptLanguage = Language?.Alpha2Code
                 },
+                HttpCompletionOption.ResponseHeadersRead,
                 cancellationToken
             )
             .ConfigureAwait(false);

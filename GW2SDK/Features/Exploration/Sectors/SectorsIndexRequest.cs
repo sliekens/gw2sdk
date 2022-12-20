@@ -49,6 +49,7 @@ public sealed class SectorsIndexRequest : IHttpRequest<IReplicaSet<int>>
                         .Replace(":region", RegionId.ToString(CultureInfo.InvariantCulture))
                         .Replace(":map", MapId.ToString(CultureInfo.InvariantCulture))
                 },
+                HttpCompletionOption.ResponseHeadersRead,
                 cancellationToken
             )
             .ConfigureAwait(false);

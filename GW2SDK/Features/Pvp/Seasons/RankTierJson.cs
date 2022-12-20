@@ -27,9 +27,6 @@ public static class RankTierJson
             }
         }
 
-        return new RankTier
-        {
-            Rating = rating.GetValue()
-        };
+        return new RankTier { Rating = rating.GetValue() };
     }
 }

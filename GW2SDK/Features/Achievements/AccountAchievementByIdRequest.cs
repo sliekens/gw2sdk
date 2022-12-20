@@ -39,6 +39,7 @@ public sealed class AccountAchievementByIdRequest : IHttpRequest<IReplica<Accoun
                     },
                     BearerToken = AccessToken
                 },
+                HttpCompletionOption.ResponseHeadersRead,
                 cancellationToken
             )
             .ConfigureAwait(false);

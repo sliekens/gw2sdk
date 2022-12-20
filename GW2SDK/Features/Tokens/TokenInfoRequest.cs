@@ -32,6 +32,7 @@ public sealed class TokenInfoRequest : IHttpRequest<IReplica<TokenInfo>>
     {
         using var response = await httpClient.SendAsync(
                 Template with { BearerToken = AccessToken },
+                HttpCompletionOption.ResponseHeadersRead,
                 cancellationToken
             )
             .ConfigureAwait(false);

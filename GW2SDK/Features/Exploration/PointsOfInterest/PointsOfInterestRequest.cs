@@ -58,6 +58,7 @@ public sealed class PointsOfInterestRequest : IHttpRequest<IReplicaSet<PointOfIn
                         .Replace(":map", MapId.ToString(CultureInfo.InvariantCulture)),
                     AcceptLanguage = Language?.Alpha2Code
                 },
+                HttpCompletionOption.ResponseHeadersRead,
                 cancellationToken
             )
             .ConfigureAwait(false);
@@ -68,7 +69,7 @@ public sealed class PointsOfInterestRequest : IHttpRequest<IReplicaSet<PointOfIn
             .ConfigureAwait(false);
 
         var value =
-            json.RootElement.GetSet(entry => PointOfInterestJson.GetPointOfInterest(entry, MissingMemberBehavior));
+            json.RootElement.GetSet(entry => entry.GetPointOfInterest(MissingMemberBehavior));
         return new ReplicaSet<PointOfInterest>(
             response.Headers.Date.GetValueOrDefault(),
             value,

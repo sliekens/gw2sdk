@@ -43,6 +43,7 @@ public sealed class
                     },
                     AcceptLanguage = Language?.Alpha2Code
                 },
+                HttpCompletionOption.ResponseHeadersRead,
                 cancellationToken
             )
             .ConfigureAwait(false);
@@ -53,7 +54,7 @@ public sealed class
             .ConfigureAwait(false);
 
         var value = json.RootElement.GetSet(
-            entry => AchievementCategoryJson.GetAchievementCategory(entry, MissingMemberBehavior)
+            entry => entry.GetAchievementCategory(MissingMemberBehavior)
         );
         return new ReplicaSet<AchievementCategory>(
             response.Headers.Date.GetValueOrDefault(),

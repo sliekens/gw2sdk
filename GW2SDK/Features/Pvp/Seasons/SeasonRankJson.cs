@@ -8,7 +8,10 @@ namespace GuildWars2.Pvp.Seasons;
 [PublicAPI]
 public static class SeasonRankJson
 {
-    public static SeasonRank GetSeasonRank(this JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    public static SeasonRank GetSeasonRank(
+        this JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         RequiredMember<string> name = new("name");
         RequiredMember<string> description = new("description");

@@ -44,6 +44,7 @@ public sealed class PetsByPageRequest : IHttpRequest<IReplicaPage<Pet>>
                     Arguments = search,
                     AcceptLanguage = Language?.Alpha2Code
                 },
+                HttpCompletionOption.ResponseHeadersRead,
                 cancellationToken
             )
             .ConfigureAwait(false);
@@ -53,7 +54,7 @@ public sealed class PetsByPageRequest : IHttpRequest<IReplicaPage<Pet>>
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value = json.RootElement.GetSet(entry => PetJson.GetPet(entry, MissingMemberBehavior));
+        var value = json.RootElement.GetSet(entry => entry.GetPet(MissingMemberBehavior));
         return new ReplicaPage<Pet>(
             response.Headers.Date.GetValueOrDefault(),
             value,

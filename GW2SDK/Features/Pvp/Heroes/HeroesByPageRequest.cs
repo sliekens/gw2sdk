@@ -44,6 +44,7 @@ public sealed class HeroesByPageRequest : IHttpRequest<IReplicaPage<Hero>>
                     Arguments = search,
                     AcceptLanguage = Language?.Alpha2Code
                 },
+                HttpCompletionOption.ResponseHeadersRead,
                 cancellationToken
             )
             .ConfigureAwait(false);
@@ -53,7 +54,7 @@ public sealed class HeroesByPageRequest : IHttpRequest<IReplicaPage<Hero>>
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value = json.RootElement.GetSet(entry => HeroJson.GetHero(entry, MissingMemberBehavior));
+        var value = json.RootElement.GetSet(entry => entry.GetHero(MissingMemberBehavior));
         return new ReplicaPage<Hero>(
             response.Headers.Date.GetValueOrDefault(),
             value,

@@ -44,6 +44,7 @@ public sealed class RacesByIdsRequest : IHttpRequest<IReplicaSet<Race>>
                     },
                     AcceptLanguage = Language?.Alpha2Code
                 },
+                HttpCompletionOption.ResponseHeadersRead,
                 cancellationToken
             )
             .ConfigureAwait(false);
@@ -53,7 +54,7 @@ public sealed class RacesByIdsRequest : IHttpRequest<IReplicaSet<Race>>
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value = json.RootElement.GetSet(entry => RaceJson.GetRace(entry, MissingMemberBehavior));
+        var value = json.RootElement.GetSet(entry => entry.GetRace(MissingMemberBehavior));
         return new ReplicaSet<Race>(
             response.Headers.Date.GetValueOrDefault(),
             value,

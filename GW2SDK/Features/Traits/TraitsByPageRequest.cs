@@ -47,6 +47,7 @@ public sealed class TraitsByPageRequest : IHttpRequest<IReplicaPage<Trait>>
                     Arguments = search,
                     AcceptLanguage = Language?.Alpha2Code
                 },
+                HttpCompletionOption.ResponseHeadersRead,
                 cancellationToken
             )
             .ConfigureAwait(false);
@@ -56,7 +57,7 @@ public sealed class TraitsByPageRequest : IHttpRequest<IReplicaPage<Trait>>
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value = json.RootElement.GetSet(entry => TraitJson.GetTrait(entry, MissingMemberBehavior));
+        var value = json.RootElement.GetSet(entry => entry.GetTrait(MissingMemberBehavior));
         return new ReplicaPage<Trait>(
             response.Headers.Date.GetValueOrDefault(),
             value,

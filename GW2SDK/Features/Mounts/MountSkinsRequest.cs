@@ -35,6 +35,7 @@ public sealed class MountSkinsRequest : IHttpRequest<IReplicaSet<MountSkin>>
                     },
                     AcceptLanguage = Language?.Alpha2Code
                 },
+                HttpCompletionOption.ResponseHeadersRead,
                 cancellationToken
             )
             .ConfigureAwait(false);
@@ -44,7 +45,7 @@ public sealed class MountSkinsRequest : IHttpRequest<IReplicaSet<MountSkin>>
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value = json.RootElement.GetSet(entry => MountSkinJson.GetMountSkin(entry, MissingMemberBehavior));
+        var value = json.RootElement.GetSet(entry => entry.GetMountSkin(MissingMemberBehavior));
         return new ReplicaSet<MountSkin>(
             response.Headers.Date.GetValueOrDefault(),
             value,

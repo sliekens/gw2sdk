@@ -32,6 +32,7 @@ public sealed class CharactersRequest : IHttpRequest<IReplicaSet<Character>>
     {
         using var response = await httpClient.SendAsync(
                 Template with { BearerToken = AccessToken },
+                HttpCompletionOption.ResponseHeadersRead,
                 cancellationToken
             )
             .ConfigureAwait(false);
@@ -41,7 +42,7 @@ public sealed class CharactersRequest : IHttpRequest<IReplicaSet<Character>>
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value = json.RootElement.GetSet(entry => CharacterJson.GetCharacter(entry, MissingMemberBehavior));
+        var value = json.RootElement.GetSet(entry => entry.GetCharacter(MissingMemberBehavior));
         return new ReplicaSet<Character>(
             response.Headers.Date.GetValueOrDefault(),
             value,

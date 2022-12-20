@@ -44,6 +44,7 @@ public sealed class QuestsByPageRequest : IHttpRequest<IReplicaPage<Quest>>
                     Arguments = search,
                     AcceptLanguage = Language?.Alpha2Code
                 },
+                HttpCompletionOption.ResponseHeadersRead,
                 cancellationToken
             )
             .ConfigureAwait(false);
@@ -53,7 +54,7 @@ public sealed class QuestsByPageRequest : IHttpRequest<IReplicaPage<Quest>>
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value = json.RootElement.GetSet(entry => QuestJson.GetQuest(entry, MissingMemberBehavior));
+        var value = json.RootElement.GetSet(entry => entry.GetQuest(MissingMemberBehavior));
         return new ReplicaPage<Quest>(
             response.Headers.Date.GetValueOrDefault(),
             value,

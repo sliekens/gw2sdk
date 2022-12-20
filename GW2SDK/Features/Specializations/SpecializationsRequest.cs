@@ -32,6 +32,7 @@ public sealed class SpecializationsRequest : IHttpRequest<IReplicaSet<Specializa
     {
         using var response = await httpClient.SendAsync(
                 Template with { AcceptLanguage = Language?.Alpha2Code },
+                HttpCompletionOption.ResponseHeadersRead,
                 cancellationToken
             )
             .ConfigureAwait(false);
@@ -42,7 +43,7 @@ public sealed class SpecializationsRequest : IHttpRequest<IReplicaSet<Specializa
             .ConfigureAwait(false);
 
         var value = json.RootElement.GetSet(
-            entry => SpecializationJson.GetSpecialization(entry, MissingMemberBehavior)
+            entry => entry.GetSpecialization(MissingMemberBehavior)
         );
         return new ReplicaSet<Specialization>(
             response.Headers.Date.GetValueOrDefault(),

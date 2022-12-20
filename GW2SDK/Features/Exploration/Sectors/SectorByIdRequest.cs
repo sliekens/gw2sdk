@@ -59,6 +59,7 @@ public sealed class SectorByIdRequest : IHttpRequest<IReplica<Sector>>
                     },
                     AcceptLanguage = Language?.Alpha2Code
                 },
+                HttpCompletionOption.ResponseHeadersRead,
                 cancellationToken
             )
             .ConfigureAwait(false);

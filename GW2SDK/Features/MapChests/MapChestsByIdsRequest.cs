@@ -38,6 +38,7 @@ public sealed class MapChestsByIdsRequest : IHttpRequest<IReplicaSet<MapChest>>
                         { "v", SchemaVersion.Recommended }
                     }
                 },
+                HttpCompletionOption.ResponseHeadersRead,
                 cancellationToken
             )
             .ConfigureAwait(false);
@@ -47,7 +48,7 @@ public sealed class MapChestsByIdsRequest : IHttpRequest<IReplicaSet<MapChest>>
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value = json.RootElement.GetSet(entry => MapChestJson.GetMapChest(entry, MissingMemberBehavior));
+        var value = json.RootElement.GetSet(entry => entry.GetMapChest(MissingMemberBehavior));
         return new ReplicaSet<MapChest>(
             response.Headers.Date.GetValueOrDefault(),
             value,

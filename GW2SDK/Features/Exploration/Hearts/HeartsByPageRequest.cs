@@ -65,6 +65,7 @@ public sealed class HeartsByPageRequest : IHttpRequest<IReplicaPage<Heart>>
                     Arguments = search,
                     AcceptLanguage = Language?.Alpha2Code
                 },
+                HttpCompletionOption.ResponseHeadersRead,
                 cancellationToken
             )
             .ConfigureAwait(false);
@@ -74,7 +75,7 @@ public sealed class HeartsByPageRequest : IHttpRequest<IReplicaPage<Heart>>
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value = json.RootElement.GetSet(entry => HeartJson.GetHeart(entry, MissingMemberBehavior));
+        var value = json.RootElement.GetSet(entry => entry.GetHeart(MissingMemberBehavior));
         return new ReplicaPage<Heart>(
             response.Headers.Date.GetValueOrDefault(),
             value,

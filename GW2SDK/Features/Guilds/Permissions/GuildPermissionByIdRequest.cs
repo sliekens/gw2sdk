@@ -38,6 +38,7 @@ public sealed class GuildPermissionByIdRequest : IHttpRequest<IReplica<GuildPerm
                     },
                     AcceptLanguage = Language?.Alpha2Code
                 },
+                HttpCompletionOption.ResponseHeadersRead,
                 cancellationToken
             )
             .ConfigureAwait(false);

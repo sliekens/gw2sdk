@@ -41,6 +41,7 @@ public sealed class ItemPricesByIdsRequest : IHttpRequest<IReplicaSet<ItemPrice>
                         { "v", SchemaVersion.Recommended }
                     }
                 },
+                HttpCompletionOption.ResponseHeadersRead,
                 cancellationToken
             )
             .ConfigureAwait(false);
@@ -50,7 +51,7 @@ public sealed class ItemPricesByIdsRequest : IHttpRequest<IReplicaSet<ItemPrice>
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value = json.RootElement.GetSet(entry => ItemPriceJson.GetItemPrice(entry, MissingMemberBehavior));
+        var value = json.RootElement.GetSet(entry => entry.GetItemPrice(MissingMemberBehavior));
         return new ReplicaSet<ItemPrice>(
             response.Headers.Date.GetValueOrDefault(),
             value,

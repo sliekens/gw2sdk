@@ -35,6 +35,7 @@ public sealed class FileByIdRequest : IHttpRequest<IReplica<File>>
                         { "v", SchemaVersion.Recommended }
                     }
                 },
+                HttpCompletionOption.ResponseHeadersRead,
                 cancellationToken
             )
             .ConfigureAwait(false);

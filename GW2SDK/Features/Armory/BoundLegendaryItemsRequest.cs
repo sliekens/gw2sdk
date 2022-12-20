@@ -37,6 +37,7 @@ public sealed class BoundLegendaryItemsRequest : IHttpRequest<IReplicaSet<BoundL
     {
         using var response = await httpClient.SendAsync(
                 Template with { BearerToken = AccessToken },
+                HttpCompletionOption.ResponseHeadersRead,
                 cancellationToken
             )
             .ConfigureAwait(false);
@@ -47,7 +48,7 @@ public sealed class BoundLegendaryItemsRequest : IHttpRequest<IReplicaSet<BoundL
             .ConfigureAwait(false);
 
         var value =
-            json.RootElement.GetSet(entry => BoundLegendaryItemJson.GetBoundLegendaryItem(entry, MissingMemberBehavior));
+            json.RootElement.GetSet(entry => entry.GetBoundLegendaryItem(MissingMemberBehavior));
 
         return new ReplicaSet<BoundLegendaryItem>(
             response.Headers.Date.GetValueOrDefault(),

@@ -32,6 +32,7 @@ public sealed class GuildPermissionsRequest : IHttpRequest<IReplicaSet<GuildPerm
     {
         using var response = await httpClient.SendAsync(
                 Template with { AcceptLanguage = Language?.Alpha2Code },
+                HttpCompletionOption.ResponseHeadersRead,
                 cancellationToken
             )
             .ConfigureAwait(false);
@@ -42,7 +43,7 @@ public sealed class GuildPermissionsRequest : IHttpRequest<IReplicaSet<GuildPerm
             .ConfigureAwait(false);
 
         var value = json.RootElement.GetSet(
-            entry => GuildPermissionSummaryJson.GetGuildPermissionSummary(entry, MissingMemberBehavior)
+            entry => entry.GetGuildPermissionSummary(MissingMemberBehavior)
         );
         return new ReplicaSet<GuildPermissionSummary>(
             response.Headers.Date.GetValueOrDefault(),

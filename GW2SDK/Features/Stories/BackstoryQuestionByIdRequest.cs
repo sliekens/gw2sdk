@@ -39,6 +39,7 @@ public sealed class BackstoryQuestionByIdRequest : IHttpRequest<IReplica<Backsto
                     },
                     AcceptLanguage = Language?.Alpha2Code
                 },
+                HttpCompletionOption.ResponseHeadersRead,
                 cancellationToken
             )
             .ConfigureAwait(false);

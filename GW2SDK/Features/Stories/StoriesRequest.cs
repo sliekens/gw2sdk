@@ -31,6 +31,7 @@ public sealed class StoriesRequest : IHttpRequest<IReplicaSet<Story>>
     {
         using var response = await httpClient.SendAsync(
                 Template with { AcceptLanguage = Language?.Alpha2Code },
+                HttpCompletionOption.ResponseHeadersRead,
                 cancellationToken
             )
             .ConfigureAwait(false);
@@ -40,7 +41,7 @@ public sealed class StoriesRequest : IHttpRequest<IReplicaSet<Story>>
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value = json.RootElement.GetSet(entry => StoryJson.GetStory(entry, MissingMemberBehavior));
+        var value = json.RootElement.GetSet(entry => entry.GetStory(MissingMemberBehavior));
         return new ReplicaSet<Story>(
             response.Headers.Date.GetValueOrDefault(),
             value,

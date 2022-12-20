@@ -32,6 +32,7 @@ public sealed class MountsRequest : IHttpRequest<IReplicaSet<Mount>>
     {
         using var response = await httpClient.SendAsync(
                 Template with { AcceptLanguage = Language?.Alpha2Code },
+                HttpCompletionOption.ResponseHeadersRead,
                 cancellationToken
             )
             .ConfigureAwait(false);
@@ -41,7 +42,7 @@ public sealed class MountsRequest : IHttpRequest<IReplicaSet<Mount>>
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value = json.RootElement.GetSet(entry => MountJson.GetMount(entry, MissingMemberBehavior));
+        var value = json.RootElement.GetSet(entry => entry.GetMount(MissingMemberBehavior));
         return new ReplicaSet<Mount>(
             response.Headers.Date.GetValueOrDefault(),
             value,

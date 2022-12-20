@@ -41,6 +41,7 @@ public sealed class CharacterByNameRequest : IHttpRequest<IReplica<Character>>
                         { "v", SchemaVersion.Recommended }
                     }
                 },
+                HttpCompletionOption.ResponseHeadersRead,
                 cancellationToken
             )
             .ConfigureAwait(false);

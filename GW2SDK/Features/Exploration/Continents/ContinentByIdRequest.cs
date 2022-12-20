@@ -41,6 +41,7 @@ public sealed class ContinentByIdRequest : IHttpRequest<IReplica<Continent>>
                     },
                     AcceptLanguage = Language?.Alpha2Code
                 },
+                HttpCompletionOption.ResponseHeadersRead,
                 cancellationToken
             )
             .ConfigureAwait(false);

@@ -41,6 +41,7 @@ public sealed class RegionsIndexRequest : IHttpRequest<IReplicaSet<int>>
                         .Replace(":id", ContinentId.ToString(CultureInfo.InvariantCulture))
                         .Replace(":floor", FloorId.ToString(CultureInfo.InvariantCulture))
                 },
+                HttpCompletionOption.ResponseHeadersRead,
                 cancellationToken
             )
             .ConfigureAwait(false);

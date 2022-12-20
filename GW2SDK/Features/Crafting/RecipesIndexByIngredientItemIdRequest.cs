@@ -37,6 +37,7 @@ public sealed class RecipesIndexByIngredientItemIdRequest : IHttpRequest<IReplic
                         { "v", SchemaVersion.Recommended }
                     }
                 },
+                HttpCompletionOption.ResponseHeadersRead,
                 cancellationToken
             )
             .ConfigureAwait(false);

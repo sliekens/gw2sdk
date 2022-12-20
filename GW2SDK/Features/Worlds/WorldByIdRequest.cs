@@ -41,6 +41,7 @@ public sealed class WorldByIdRequest : IHttpRequest<IReplica<World>>
                     },
                     AcceptLanguage = Language?.Alpha2Code
                 },
+                HttpCompletionOption.ResponseHeadersRead,
                 cancellationToken
             )
             .ConfigureAwait(false);

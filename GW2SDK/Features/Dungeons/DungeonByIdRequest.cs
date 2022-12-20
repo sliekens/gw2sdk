@@ -35,6 +35,7 @@ public sealed class DungeonByIdRequest : IHttpRequest<IReplica<Dungeon>>
                         { "v", SchemaVersion.Recommended }
                     }
                 },
+                HttpCompletionOption.ResponseHeadersRead,
                 cancellationToken
             )
             .ConfigureAwait(false);

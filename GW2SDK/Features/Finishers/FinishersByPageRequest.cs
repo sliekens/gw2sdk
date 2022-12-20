@@ -44,6 +44,7 @@ public sealed class FinishersByPageRequest : IHttpRequest<IReplicaPage<Finisher>
                     Arguments = search,
                     AcceptLanguage = Language?.Alpha2Code
                 },
+                HttpCompletionOption.ResponseHeadersRead,
                 cancellationToken
             )
             .ConfigureAwait(false);
@@ -53,7 +54,7 @@ public sealed class FinishersByPageRequest : IHttpRequest<IReplicaPage<Finisher>
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value = json.RootElement.GetSet(entry => FinisherJson.GetFinisher(entry, MissingMemberBehavior));
+        var value = json.RootElement.GetSet(entry => entry.GetFinisher(MissingMemberBehavior));
         return new ReplicaPage<Finisher>(
             response.Headers.Date.GetValueOrDefault(),
             value,

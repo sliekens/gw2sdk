@@ -42,6 +42,7 @@ public sealed class ProfessionByNameRequest : IHttpRequest<IReplica<Profession>>
                     },
                     AcceptLanguage = Language?.Alpha2Code
                 },
+                HttpCompletionOption.ResponseHeadersRead,
                 cancellationToken
             )
             .ConfigureAwait(false);

@@ -38,6 +38,7 @@ public sealed class QuestByIdRequest : IHttpRequest<IReplica<Quest>>
                     },
                     AcceptLanguage = Language?.Alpha2Code
                 },
+                HttpCompletionOption.ResponseHeadersRead,
                 cancellationToken
             )
             .ConfigureAwait(false);

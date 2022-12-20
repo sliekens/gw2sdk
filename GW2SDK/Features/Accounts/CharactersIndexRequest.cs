@@ -26,6 +26,7 @@ public sealed class CharactersIndexRequest : IHttpRequest<IReplicaSet<string>>
     {
         using var response = await httpClient.SendAsync(
                 Template with { BearerToken = AccessToken },
+                HttpCompletionOption.ResponseHeadersRead,
                 cancellationToken
             )
             .ConfigureAwait(false);

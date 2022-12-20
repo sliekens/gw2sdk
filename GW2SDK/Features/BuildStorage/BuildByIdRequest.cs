@@ -38,6 +38,7 @@ public sealed class BuildByIdRequest : IHttpRequest<IReplica<Build>>
                     },
                     BearerToken = AccessToken
                 },
+                HttpCompletionOption.ResponseHeadersRead,
                 cancellationToken
             )
             .ConfigureAwait(false);

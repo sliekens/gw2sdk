@@ -41,6 +41,7 @@ public sealed class RecipesByIdsRequest : IHttpRequest<IReplicaSet<Recipe>>
                         { "v", SchemaVersion.Recommended }
                     }
                 },
+                HttpCompletionOption.ResponseHeadersRead,
                 cancellationToken
             )
             .ConfigureAwait(false);
@@ -50,7 +51,7 @@ public sealed class RecipesByIdsRequest : IHttpRequest<IReplicaSet<Recipe>>
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value = json.RootElement.GetSet(entry => RecipeJson.GetRecipe(entry, MissingMemberBehavior));
+        var value = json.RootElement.GetSet(entry => entry.GetRecipe(MissingMemberBehavior));
         return new ReplicaSet<Recipe>(
             response.Headers.Date.GetValueOrDefault(),
             value,

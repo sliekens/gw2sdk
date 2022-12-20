@@ -41,6 +41,7 @@ public sealed class AmuletsByIdsRequest : IHttpRequest<IReplicaSet<Amulet>>
                     },
                     AcceptLanguage = Language?.Alpha2Code
                 },
+                HttpCompletionOption.ResponseHeadersRead,
                 cancellationToken
             )
             .ConfigureAwait(false);
@@ -50,7 +51,7 @@ public sealed class AmuletsByIdsRequest : IHttpRequest<IReplicaSet<Amulet>>
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value = json.RootElement.GetSet(entry => AmuletJson.GetAmulet(entry, MissingMemberBehavior));
+        var value = json.RootElement.GetSet(entry => entry.GetAmulet(MissingMemberBehavior));
         return new ReplicaSet<Amulet>(
             response.Headers.Date.GetValueOrDefault(),
             value,

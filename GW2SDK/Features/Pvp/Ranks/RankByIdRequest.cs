@@ -38,6 +38,7 @@ public sealed class RankByIdRequest : IHttpRequest<IReplica<Rank>>
                     },
                     AcceptLanguage = Language?.Alpha2Code
                 },
+                HttpCompletionOption.ResponseHeadersRead,
                 cancellationToken
             )
             .ConfigureAwait(false);

@@ -41,6 +41,7 @@ public sealed class SpecializationByIdRequest : IHttpRequest<IReplica<Specializa
                     },
                     AcceptLanguage = Language?.Alpha2Code
                 },
+                HttpCompletionOption.ResponseHeadersRead,
                 cancellationToken
             )
             .ConfigureAwait(false);

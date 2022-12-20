@@ -28,15 +28,19 @@ public sealed class MapChestsRequest : IHttpRequest<IReplicaSet<MapChest>>
         CancellationToken cancellationToken
     )
     {
-        using var response =
-            await httpClient.SendAsync(Template, cancellationToken).ConfigureAwait(false);
+        using var response = await httpClient.SendAsync(
+                Template,
+                HttpCompletionOption.ResponseHeadersRead,
+                cancellationToken
+            )
+            .ConfigureAwait(false);
 
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
 
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value = json.RootElement.GetSet(entry => MapChestJson.GetMapChest(entry, MissingMemberBehavior));
+        var value = json.RootElement.GetSet(entry => entry.GetMapChest(MissingMemberBehavior));
         return new ReplicaSet<MapChest>(
             response.Headers.Date.GetValueOrDefault(),
             value,

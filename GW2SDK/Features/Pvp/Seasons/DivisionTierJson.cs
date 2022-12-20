@@ -8,13 +8,15 @@ namespace GuildWars2.Pvp.Seasons;
 [PublicAPI]
 public static class DivisionTierJson
 {
-    public static DivisionTier GetDivisionTier(this JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    public static DivisionTier GetDivisionTier(
+        this JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         RequiredMember<int> points = new("points");
 
         foreach (var member in json.EnumerateObject())
         {
-
             if (member.NameEquals(points.Name))
             {
                 points.Value = member.Value;

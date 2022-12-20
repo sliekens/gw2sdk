@@ -41,6 +41,7 @@ public sealed class AchievementByIdRequest : IHttpRequest<IReplica<Achievement>>
                     },
                     AcceptLanguage = Language?.Alpha2Code
                 },
+                HttpCompletionOption.ResponseHeadersRead,
                 cancellationToken
             )
             .ConfigureAwait(false);

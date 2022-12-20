@@ -38,6 +38,7 @@ public sealed class ItemPriceByIdRequest : IHttpRequest<IReplica<ItemPrice>>
                         { "v", SchemaVersion.Recommended }
                     }
                 },
+                HttpCompletionOption.ResponseHeadersRead,
                 cancellationToken
             )
             .ConfigureAwait(false);

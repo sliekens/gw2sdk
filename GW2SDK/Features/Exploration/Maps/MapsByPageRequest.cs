@@ -47,6 +47,7 @@ public sealed class MapsByPageRequest : IHttpRequest<IReplicaPage<Map>>
                     Arguments = search,
                     AcceptLanguage = Language?.Alpha2Code
                 },
+                HttpCompletionOption.ResponseHeadersRead,
                 cancellationToken
             )
             .ConfigureAwait(false);
@@ -56,7 +57,7 @@ public sealed class MapsByPageRequest : IHttpRequest<IReplicaPage<Map>>
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value = json.RootElement.GetSet(entry => MapJson.GetMap(entry, MissingMemberBehavior));
+        var value = json.RootElement.GetSet(entry => entry.GetMap(MissingMemberBehavior));
         return new ReplicaPage<Map>(
             response.Headers.Date.GetValueOrDefault(),
             value,

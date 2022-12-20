@@ -38,6 +38,7 @@ public sealed class QuagganByIdRequest : IHttpRequest<IReplica<Quaggan>>
                         { "v", SchemaVersion.Recommended }
                     }
                 },
+                HttpCompletionOption.ResponseHeadersRead,
                 cancellationToken
             )
             .ConfigureAwait(false);

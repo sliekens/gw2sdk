@@ -41,6 +41,7 @@ public sealed class TraitByIdRequest : IHttpRequest<IReplica<Trait>>
                     },
                     AcceptLanguage = Language?.Alpha2Code
                 },
+                HttpCompletionOption.ResponseHeadersRead,
                 cancellationToken
             )
             .ConfigureAwait(false);

@@ -44,6 +44,7 @@ public sealed class TraitsByIdsRequest : IHttpRequest<IReplicaSet<Trait>>
                     },
                     AcceptLanguage = Language?.Alpha2Code
                 },
+                HttpCompletionOption.ResponseHeadersRead,
                 cancellationToken
             )
             .ConfigureAwait(false);
@@ -53,7 +54,7 @@ public sealed class TraitsByIdsRequest : IHttpRequest<IReplicaSet<Trait>>
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value = json.RootElement.GetSet(entry => TraitJson.GetTrait(entry, MissingMemberBehavior));
+        var value = json.RootElement.GetSet(entry => entry.GetTrait(MissingMemberBehavior));
         return new ReplicaSet<Trait>(
             response.Headers.Date.GetValueOrDefault(),
             value,

@@ -44,6 +44,7 @@ public sealed class MaterialCategoriesByIdsRequest : IHttpRequest<IReplicaSet<Ma
                     },
                     AcceptLanguage = Language?.Alpha2Code
                 },
+                HttpCompletionOption.ResponseHeadersRead,
                 cancellationToken
             )
             .ConfigureAwait(false);
@@ -54,7 +55,7 @@ public sealed class MaterialCategoriesByIdsRequest : IHttpRequest<IReplicaSet<Ma
             .ConfigureAwait(false);
 
         var value = json.RootElement.GetSet(
-            entry => MaterialCategoryJson.GetMaterialCategory(entry, MissingMemberBehavior)
+            entry => entry.GetMaterialCategory(MissingMemberBehavior)
         );
         return new ReplicaSet<MaterialCategory>(
             response.Headers.Date.GetValueOrDefault(),

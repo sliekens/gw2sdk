@@ -65,6 +65,7 @@ public sealed class PointOfInterestByIdRequest : IHttpRequest<IReplica<PointOfIn
                     },
                     AcceptLanguage = Language?.Alpha2Code
                 },
+                HttpCompletionOption.ResponseHeadersRead,
                 cancellationToken
             )
             .ConfigureAwait(false);

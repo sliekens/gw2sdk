@@ -41,6 +41,7 @@ public sealed class NoveltiesByIdsRequest : IHttpRequest<IReplicaSet<Novelty>>
                     },
                     AcceptLanguage = Language?.Alpha2Code
                 },
+                HttpCompletionOption.ResponseHeadersRead,
                 cancellationToken
             )
             .ConfigureAwait(false);
@@ -50,7 +51,7 @@ public sealed class NoveltiesByIdsRequest : IHttpRequest<IReplicaSet<Novelty>>
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value = json.RootElement.GetSet(entry => NoveltyJson.GetNovelty(entry, MissingMemberBehavior));
+        var value = json.RootElement.GetSet(entry => entry.GetNovelty(MissingMemberBehavior));
         return new ReplicaSet<Novelty>(
             response.Headers.Date.GetValueOrDefault(),
             value,

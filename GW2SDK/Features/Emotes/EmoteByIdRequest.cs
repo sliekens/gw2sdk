@@ -35,6 +35,7 @@ public sealed class EmoteByIdRequest : IHttpRequest<IReplica<Emote>>
                         { "v", SchemaVersion.Recommended }
                     }
                 },
+                HttpCompletionOption.ResponseHeadersRead,
                 cancellationToken
             )
             .ConfigureAwait(false);

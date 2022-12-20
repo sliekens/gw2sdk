@@ -41,6 +41,7 @@ public sealed class SeasonsByIdsRequest : IHttpRequest<IReplicaSet<Season>>
                     },
                     AcceptLanguage = Language?.Alpha2Code
                 },
+                HttpCompletionOption.ResponseHeadersRead,
                 cancellationToken
             )
             .ConfigureAwait(false);
@@ -50,7 +51,7 @@ public sealed class SeasonsByIdsRequest : IHttpRequest<IReplicaSet<Season>>
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value = json.RootElement.GetSet(entry => SeasonJson.GetSeason(entry, MissingMemberBehavior));
+        var value = json.RootElement.GetSet(entry => entry.GetSeason(MissingMemberBehavior));
         return new ReplicaSet<Season>(
             response.Headers.Date.GetValueOrDefault(),
             value,

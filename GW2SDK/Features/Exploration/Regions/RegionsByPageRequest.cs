@@ -55,6 +55,7 @@ public sealed class RegionsByPageRequest : IHttpRequest<IReplicaPage<Region>>
                     Arguments = search,
                     AcceptLanguage = Language?.Alpha2Code
                 },
+                HttpCompletionOption.ResponseHeadersRead,
                 cancellationToken
             )
             .ConfigureAwait(false);
@@ -64,7 +65,7 @@ public sealed class RegionsByPageRequest : IHttpRequest<IReplicaPage<Region>>
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value = json.RootElement.GetSet(entry => RegionJson.GetRegion(entry, MissingMemberBehavior));
+        var value = json.RootElement.GetSet(entry => entry.GetRegion(MissingMemberBehavior));
         return new ReplicaPage<Region>(
             response.Headers.Date.GetValueOrDefault(),
             value,

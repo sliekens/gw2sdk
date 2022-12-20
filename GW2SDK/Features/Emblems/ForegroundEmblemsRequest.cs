@@ -29,6 +29,7 @@ public sealed class ForegroundEmblemsRequest : IHttpRequest<IReplicaSet<Emblem>>
                         { "v", SchemaVersion.Recommended }
                     }
                 },
+                HttpCompletionOption.ResponseHeadersRead,
                 cancellationToken
             )
             .ConfigureAwait(false);
@@ -38,7 +39,7 @@ public sealed class ForegroundEmblemsRequest : IHttpRequest<IReplicaSet<Emblem>>
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value = json.RootElement.GetSet(entry => EmblemJson.GetEmblem(entry, MissingMemberBehavior));
+        var value = json.RootElement.GetSet(entry => entry.GetEmblem(MissingMemberBehavior));
         return new ReplicaSet<Emblem>(
             response.Headers.Date.GetValueOrDefault(),
             value,

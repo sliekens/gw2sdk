@@ -38,6 +38,7 @@ public sealed class InventoryRequest : IHttpRequest<IReplica<Baggage>>
                     Path = Template.Path.Replace(":id", CharacterName),
                     BearerToken = AccessToken
                 },
+                HttpCompletionOption.ResponseHeadersRead,
                 cancellationToken
             )
             .ConfigureAwait(false);

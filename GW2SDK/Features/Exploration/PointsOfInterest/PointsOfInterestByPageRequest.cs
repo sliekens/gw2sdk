@@ -71,6 +71,7 @@ public sealed class PointsOfInterestByPageRequest : IHttpRequest<IReplicaPage<Po
                     Arguments = search,
                     AcceptLanguage = Language?.Alpha2Code
                 },
+                HttpCompletionOption.ResponseHeadersRead,
                 cancellationToken
             )
             .ConfigureAwait(false);
@@ -81,7 +82,7 @@ public sealed class PointsOfInterestByPageRequest : IHttpRequest<IReplicaPage<Po
             .ConfigureAwait(false);
 
         var value =
-            json.RootElement.GetSet(entry => PointOfInterestJson.GetPointOfInterest(entry, MissingMemberBehavior));
+            json.RootElement.GetSet(entry => entry.GetPointOfInterest(MissingMemberBehavior));
         return new ReplicaPage<PointOfInterest>(
             response.Headers.Date.GetValueOrDefault(),
             value,

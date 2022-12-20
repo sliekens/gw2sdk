@@ -44,6 +44,7 @@ public sealed class ColorsByIdsRequest : IHttpRequest<IReplicaSet<Dye>>
                     },
                     AcceptLanguage = Language?.Alpha2Code
                 },
+                HttpCompletionOption.ResponseHeadersRead,
                 cancellationToken
             )
             .ConfigureAwait(false);
@@ -53,7 +54,7 @@ public sealed class ColorsByIdsRequest : IHttpRequest<IReplicaSet<Dye>>
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value = json.RootElement.GetSet(entry => DyeJson.GetDye(entry, MissingMemberBehavior));
+        var value = json.RootElement.GetSet(entry => entry.GetDye(MissingMemberBehavior));
         return new ReplicaSet<Dye>(
             response.Headers.Date.GetValueOrDefault(),
             value,

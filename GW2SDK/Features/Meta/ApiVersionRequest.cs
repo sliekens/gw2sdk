@@ -32,6 +32,7 @@ public sealed class ApiVersionRequest : IHttpRequest<IReplica<ApiVersion>>
     {
         using var response = await httpClient.SendAsync(
                 Template with { Path = Template.Path.Replace(":version", Version) },
+                HttpCompletionOption.ResponseHeadersRead,
                 cancellationToken
             )
             .ConfigureAwait(false);

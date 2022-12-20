@@ -40,6 +40,7 @@ public sealed class AchievementGroupByIdRequest : IHttpRequest<IReplica<Achievem
                     },
                     AcceptLanguage = Language?.Alpha2Code
                 },
+                HttpCompletionOption.ResponseHeadersRead,
                 cancellationToken
             )
             .ConfigureAwait(false);

@@ -43,6 +43,7 @@ public sealed class MountByNameRequest : IHttpRequest<IReplica<Mount>>
                     },
                     AcceptLanguage = Language?.Alpha2Code
                 },
+                HttpCompletionOption.ResponseHeadersRead,
                 cancellationToken
             )
             .ConfigureAwait(false);

@@ -35,14 +35,14 @@ public class BulkRequest : IHttpRequest<JsonDocument>
 
         search.Add("v", "3");
 
-        var request = new HttpRequestMessageTemplate(HttpMethod.Get, requestUri)
+        var requestTemplate = new HttpRequestMessageTemplate(HttpMethod.Get, requestUri)
         {
             Arguments = search,
             AcceptEncoding = "gzip"
         };
 
         using var response = await httpClient.SendAsync(
-                request.Compile(),
+                requestTemplate,
                 HttpCompletionOption.ResponseHeadersRead,
                 cancellationToken
             )

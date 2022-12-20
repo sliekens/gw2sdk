@@ -41,6 +41,7 @@ public sealed class QuaggansByPageRequest : IHttpRequest<IReplicaPage<Quaggan>>
         search.Add("v", SchemaVersion.Recommended);
         using var response = await httpClient.SendAsync(
                 Template with { Arguments = search },
+                HttpCompletionOption.ResponseHeadersRead,
                 cancellationToken
             )
             .ConfigureAwait(false);
@@ -50,7 +51,7 @@ public sealed class QuaggansByPageRequest : IHttpRequest<IReplicaPage<Quaggan>>
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value = json.RootElement.GetSet(entry => QuagganJson.GetQuaggan(entry, MissingMemberBehavior));
+        var value = json.RootElement.GetSet(entry => entry.GetQuaggan(MissingMemberBehavior));
         return new ReplicaPage<Quaggan>(
             response.Headers.Date.GetValueOrDefault(),
             value,

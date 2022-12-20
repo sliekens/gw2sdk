@@ -35,6 +35,7 @@ public sealed class ForegroundEmblemByIdRequest : IHttpRequest<IReplica<Emblem>>
                         { "v", SchemaVersion.Recommended }
                     }
                 },
+                HttpCompletionOption.ResponseHeadersRead,
                 cancellationToken
             )
             .ConfigureAwait(false);

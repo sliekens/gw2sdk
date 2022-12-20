@@ -41,6 +41,7 @@ public sealed class SkinByIdRequest : IHttpRequest<IReplica<Skin>>
                     },
                     AcceptLanguage = Language?.Alpha2Code
                 },
+                HttpCompletionOption.ResponseHeadersRead,
                 cancellationToken
             )
             .ConfigureAwait(false);

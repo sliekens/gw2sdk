@@ -32,6 +32,7 @@ public sealed class ContinentsRequest : IHttpRequest<IReplicaSet<Continent>>
     {
         using var response = await httpClient.SendAsync(
                 Template with { AcceptLanguage = Language?.Alpha2Code },
+                HttpCompletionOption.ResponseHeadersRead,
                 cancellationToken
             )
             .ConfigureAwait(false);
@@ -41,7 +42,7 @@ public sealed class ContinentsRequest : IHttpRequest<IReplicaSet<Continent>>
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value = json.RootElement.GetSet(entry => ContinentJson.GetContinent(entry, MissingMemberBehavior));
+        var value = json.RootElement.GetSet(entry => entry.GetContinent(MissingMemberBehavior));
         return new ReplicaSet<Continent>(
             response.Headers.Date.GetValueOrDefault(),
             value,

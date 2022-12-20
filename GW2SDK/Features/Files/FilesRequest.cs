@@ -27,15 +27,19 @@ public sealed class FilesRequest : IHttpRequest<IReplicaSet<File>>
         CancellationToken cancellationToken
     )
     {
-        using var response =
-            await httpClient.SendAsync(Template, cancellationToken).ConfigureAwait(false);
+        using var response = await httpClient.SendAsync(
+                Template,
+                HttpCompletionOption.ResponseHeadersRead,
+                cancellationToken
+            )
+            .ConfigureAwait(false);
 
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
 
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value = json.RootElement.GetSet(entry => FileJson.GetFile(entry, MissingMemberBehavior));
+        var value = json.RootElement.GetSet(entry => entry.GetFile(MissingMemberBehavior));
         return new ReplicaSet<File>(
             response.Headers.Date.GetValueOrDefault(),
             value,

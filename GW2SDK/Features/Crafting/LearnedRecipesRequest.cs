@@ -40,6 +40,7 @@ public sealed class LearnedRecipesRequest : IHttpRequest<IReplica<IReadOnlyColle
                     Path = Template.Path.Replace(":id", CharacterName),
                     BearerToken = AccessToken
                 },
+                HttpCompletionOption.ResponseHeadersRead,
                 cancellationToken
             )
             .ConfigureAwait(false);

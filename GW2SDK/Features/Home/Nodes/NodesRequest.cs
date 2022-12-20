@@ -28,15 +28,19 @@ public sealed class NodesRequest : IHttpRequest<IReplicaSet<Node>>
         CancellationToken cancellationToken
     )
     {
-        using var response =
-            await httpClient.SendAsync(Template, cancellationToken).ConfigureAwait(false);
+        using var response = await httpClient.SendAsync(
+                Template,
+                HttpCompletionOption.ResponseHeadersRead,
+                cancellationToken
+            )
+            .ConfigureAwait(false);
 
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
 
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value = json.RootElement.GetSet(entry => NodeJson.GetNode(entry, MissingMemberBehavior));
+        var value = json.RootElement.GetSet(entry => entry.GetNode(MissingMemberBehavior));
         return new ReplicaSet<Node>(
             response.Headers.Date.GetValueOrDefault(),
             value,

@@ -38,6 +38,7 @@ public sealed class OrderBookByIdRequest : IHttpRequest<IReplica<OrderBook>>
                         { "v", SchemaVersion.Recommended }
                     }
                 },
+                HttpCompletionOption.ResponseHeadersRead,
                 cancellationToken
             )
             .ConfigureAwait(false);

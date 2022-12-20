@@ -38,6 +38,7 @@ public sealed class CatsByIdsRequest : IHttpRequest<IReplicaSet<Cat>>
                         { "v", SchemaVersion.Recommended }
                     }
                 },
+                HttpCompletionOption.ResponseHeadersRead,
                 cancellationToken
             )
             .ConfigureAwait(false);
@@ -47,7 +48,7 @@ public sealed class CatsByIdsRequest : IHttpRequest<IReplicaSet<Cat>>
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value = json.RootElement.GetSet(entry => CatJson.GetCat(entry, MissingMemberBehavior));
+        var value = json.RootElement.GetSet(entry => entry.GetCat(MissingMemberBehavior));
         return new ReplicaSet<Cat>(
             response.Headers.Date.GetValueOrDefault(),
             value,

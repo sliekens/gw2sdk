@@ -38,6 +38,7 @@ public sealed class PetByIdRequest : IHttpRequest<IReplica<Pet>>
                     },
                     AcceptLanguage = Language?.Alpha2Code
                 },
+                HttpCompletionOption.ResponseHeadersRead,
                 cancellationToken
             )
             .ConfigureAwait(false);

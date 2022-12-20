@@ -41,6 +41,7 @@ public sealed class ColorByIdRequest : IHttpRequest<IReplica<Dye>>
                     },
                     AcceptLanguage = Language?.Alpha2Code
                 },
+                HttpCompletionOption.ResponseHeadersRead,
                 cancellationToken
             )
             .ConfigureAwait(false);

@@ -38,6 +38,7 @@ public sealed class RaidsByPageRequest : IHttpRequest<IReplicaPage<Raid>>
         search.Add("v", SchemaVersion.Recommended);
         using var response = await httpClient.SendAsync(
                 Template with { Arguments = search },
+                HttpCompletionOption.ResponseHeadersRead,
                 cancellationToken
             )
             .ConfigureAwait(false);
@@ -47,7 +48,7 @@ public sealed class RaidsByPageRequest : IHttpRequest<IReplicaPage<Raid>>
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value = json.RootElement.GetSet(entry => RaidJson.GetRaid(entry, MissingMemberBehavior));
+        var value = json.RootElement.GetSet(entry => entry.GetRaid(MissingMemberBehavior));
         return new ReplicaPage<Raid>(
             response.Headers.Date.GetValueOrDefault(),
             value,

@@ -41,6 +41,7 @@ public sealed class MapByIdRequest : IHttpRequest<IReplica<Map>>
                     },
                     AcceptLanguage = Language?.Alpha2Code
                 },
+                HttpCompletionOption.ResponseHeadersRead,
                 cancellationToken
             )
             .ConfigureAwait(false);

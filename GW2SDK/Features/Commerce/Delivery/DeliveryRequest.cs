@@ -27,6 +27,7 @@ public sealed class DeliveryRequest : IHttpRequest<IReplica<DeliveryBox>>
     {
         using var response = await httpClient.SendAsync(
                 Template with { BearerToken = AccessToken },
+                HttpCompletionOption.ResponseHeadersRead,
                 cancellationToken
             )
             .ConfigureAwait(false);

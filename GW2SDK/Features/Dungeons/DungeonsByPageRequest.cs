@@ -38,6 +38,7 @@ public sealed class DungeonsByPageRequest : IHttpRequest<IReplicaPage<Dungeon>>
         search.Add("v", SchemaVersion.Recommended);
         using var response = await httpClient.SendAsync(
                 Template with { Arguments = search },
+                HttpCompletionOption.ResponseHeadersRead,
                 cancellationToken
             )
             .ConfigureAwait(false);
@@ -47,7 +48,7 @@ public sealed class DungeonsByPageRequest : IHttpRequest<IReplicaPage<Dungeon>>
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value = json.RootElement.GetSet(entry => DungeonJson.GetDungeon(entry, MissingMemberBehavior));
+        var value = json.RootElement.GetSet(entry => entry.GetDungeon(MissingMemberBehavior));
         return new ReplicaPage<Dungeon>(
             response.Headers.Date.GetValueOrDefault(),
             value,

@@ -38,6 +38,7 @@ public sealed class StoryByIdRequest : IHttpRequest<IReplica<Story>>
                     },
                     AcceptLanguage = Language?.Alpha2Code
                 },
+                HttpCompletionOption.ResponseHeadersRead,
                 cancellationToken
             )
             .ConfigureAwait(false);

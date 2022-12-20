@@ -8,7 +8,10 @@ namespace GuildWars2.Pvp.Seasons;
 [PublicAPI]
 public static class LeaderboardScoringJson
 {
-    public static LeaderboardScoring GetLeaderboardScoring(this JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    public static LeaderboardScoring GetLeaderboardScoring(
+        this JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         RequiredMember<string> id = new("id");
         RequiredMember<string> type = new("type");

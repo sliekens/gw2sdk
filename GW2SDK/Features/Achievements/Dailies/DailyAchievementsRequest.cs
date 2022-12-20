@@ -36,6 +36,7 @@ public sealed class DailyAchievementsRequest : IHttpRequest<IReplica<DailyAchiev
                         _ => throw new InvalidOperationException("Invalid day.")
                     }
                 },
+                HttpCompletionOption.ResponseHeadersRead,
                 cancellationToken
             )
             .ConfigureAwait(false);

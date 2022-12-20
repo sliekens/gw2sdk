@@ -44,6 +44,7 @@ public sealed class GlidersByPageRequest : IHttpRequest<IReplicaPage<Glider>>
                     Arguments = search,
                     AcceptLanguage = Language?.Alpha2Code
                 },
+                HttpCompletionOption.ResponseHeadersRead,
                 cancellationToken
             )
             .ConfigureAwait(false);
@@ -53,7 +54,7 @@ public sealed class GlidersByPageRequest : IHttpRequest<IReplicaPage<Glider>>
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value = json.RootElement.GetSet(entry => GliderJson.GetGlider(entry, MissingMemberBehavior));
+        var value = json.RootElement.GetSet(entry => entry.GetGlider(MissingMemberBehavior));
         return new ReplicaPage<Glider>(
             response.Headers.Date.GetValueOrDefault(),
             value,

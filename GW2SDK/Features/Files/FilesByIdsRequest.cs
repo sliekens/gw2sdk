@@ -40,6 +40,7 @@ public sealed class FilesByIdsRequest : IHttpRequest<IReplicaSet<File>>
                         { "v", SchemaVersion.Recommended }
                     }
                 },
+                HttpCompletionOption.ResponseHeadersRead,
                 cancellationToken
             )
             .ConfigureAwait(false);
@@ -49,7 +50,7 @@ public sealed class FilesByIdsRequest : IHttpRequest<IReplicaSet<File>>
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value = json.RootElement.GetSet(entry => FileJson.GetFile(entry, MissingMemberBehavior));
+        var value = json.RootElement.GetSet(entry => entry.GetFile(MissingMemberBehavior));
         return new ReplicaSet<File>(
             response.Headers.Date.GetValueOrDefault(),
             value,

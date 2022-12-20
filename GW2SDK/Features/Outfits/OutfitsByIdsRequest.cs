@@ -41,6 +41,7 @@ public sealed class OutfitsByIdsRequest : IHttpRequest<IReplicaSet<Outfit>>
                     },
                     AcceptLanguage = Language?.Alpha2Code
                 },
+                HttpCompletionOption.ResponseHeadersRead,
                 cancellationToken
             )
             .ConfigureAwait(false);
@@ -50,7 +51,7 @@ public sealed class OutfitsByIdsRequest : IHttpRequest<IReplicaSet<Outfit>>
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value = json.RootElement.GetSet(entry => OutfitJson.GetOutfit(entry, MissingMemberBehavior));
+        var value = json.RootElement.GetSet(entry => entry.GetOutfit(MissingMemberBehavior));
         return new ReplicaSet<Outfit>(
             response.Headers.Date.GetValueOrDefault(),
             value,

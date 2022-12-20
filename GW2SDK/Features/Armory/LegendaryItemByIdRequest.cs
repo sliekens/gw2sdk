@@ -38,6 +38,7 @@ public sealed class LegendaryItemByIdRequest : IHttpRequest<IReplica<LegendaryIt
                         { "v", SchemaVersion.Recommended }
                     }
                 },
+                HttpCompletionOption.ResponseHeadersRead,
                 cancellationToken
             )
             .ConfigureAwait(false);

@@ -32,6 +32,7 @@ public sealed class BuildStorageRequest : IHttpRequest<IReplicaSet<Build>>
     {
         using var response = await httpClient.SendAsync(
                 Template with { BearerToken = AccessToken },
+                HttpCompletionOption.ResponseHeadersRead,
                 cancellationToken
             )
             .ConfigureAwait(false);
@@ -41,7 +42,7 @@ public sealed class BuildStorageRequest : IHttpRequest<IReplicaSet<Build>>
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value = json.RootElement.GetSet(entry => BuildJson.GetBuild(entry, MissingMemberBehavior));
+        var value = json.RootElement.GetSet(entry => entry.GetBuild(MissingMemberBehavior));
         return new ReplicaSet<Build>(
             response.Headers.Date.GetValueOrDefault(),
             value,

@@ -46,6 +46,7 @@ public sealed class
                     Arguments = search,
                     BearerToken = AccessToken
                 },
+                HttpCompletionOption.ResponseHeadersRead,
                 cancellationToken
             )
             .ConfigureAwait(false);
@@ -56,7 +57,7 @@ public sealed class
             .ConfigureAwait(false);
 
         var value =
-            json.RootElement.GetSet(entry => AccountAchievementJson.GetAccountAchievement(entry, MissingMemberBehavior));
+            json.RootElement.GetSet(entry => entry.GetAccountAchievement(MissingMemberBehavior));
         return new ReplicaPage<AccountAchievement>(
             response.Headers.Date.GetValueOrDefault(),
             value,

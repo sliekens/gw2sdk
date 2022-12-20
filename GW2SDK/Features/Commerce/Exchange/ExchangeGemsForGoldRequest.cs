@@ -36,6 +36,7 @@ public sealed class ExchangeGemsForGoldRequest : IHttpRequest<IReplica<GemsForGo
                         { "v", SchemaVersion.Recommended }
                     }
                 },
+                HttpCompletionOption.ResponseHeadersRead,
                 cancellationToken
             )
             .ConfigureAwait(false);

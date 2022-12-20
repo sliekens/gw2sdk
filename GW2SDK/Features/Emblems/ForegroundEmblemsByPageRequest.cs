@@ -38,6 +38,7 @@ public sealed class ForegroundEmblemsByPageRequest : IHttpRequest<IReplicaPage<E
         search.Add("v", SchemaVersion.Recommended);
         using var response = await httpClient.SendAsync(
                 Template with { Arguments = search },
+                HttpCompletionOption.ResponseHeadersRead,
                 cancellationToken
             )
             .ConfigureAwait(false);
@@ -47,7 +48,7 @@ public sealed class ForegroundEmblemsByPageRequest : IHttpRequest<IReplicaPage<E
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value = json.RootElement.GetSet(entry => EmblemJson.GetEmblem(entry, MissingMemberBehavior));
+        var value = json.RootElement.GetSet(entry => entry.GetEmblem(MissingMemberBehavior));
         return new ReplicaPage<Emblem>(
             response.Headers.Date.GetValueOrDefault(),
             value,

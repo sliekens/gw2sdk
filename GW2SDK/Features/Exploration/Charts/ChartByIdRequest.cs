@@ -56,6 +56,7 @@ public sealed class ChartByIdRequest : IHttpRequest<IReplica<Chart>>
                     },
                     AcceptLanguage = Language?.Alpha2Code
                 },
+                HttpCompletionOption.ResponseHeadersRead,
                 cancellationToken
             )
             .ConfigureAwait(false);

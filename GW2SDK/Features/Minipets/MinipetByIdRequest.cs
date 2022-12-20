@@ -38,6 +38,7 @@ public sealed class MinipetByIdRequest : IHttpRequest<IReplica<Minipet>>
                     },
                     AcceptLanguage = Language?.Alpha2Code
                 },
+                HttpCompletionOption.ResponseHeadersRead,
                 cancellationToken
             )
             .ConfigureAwait(false);

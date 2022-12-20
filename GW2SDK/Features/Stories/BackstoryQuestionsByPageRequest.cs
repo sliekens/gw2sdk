@@ -45,6 +45,7 @@ public sealed class BackstoryQuestionsByPageRequest : IHttpRequest<IReplicaPage<
                     Arguments = search,
                     AcceptLanguage = Language?.Alpha2Code
                 },
+                HttpCompletionOption.ResponseHeadersRead,
                 cancellationToken
             )
             .ConfigureAwait(false);
@@ -55,7 +56,7 @@ public sealed class BackstoryQuestionsByPageRequest : IHttpRequest<IReplicaPage<
             .ConfigureAwait(false);
 
         var value = json.RootElement.GetSet(
-            entry => BackstoryQuestionJson.GetBackstoryQuestion(entry, MissingMemberBehavior)
+            entry => entry.GetBackstoryQuestion(MissingMemberBehavior)
         );
         return new ReplicaPage<BackstoryQuestion>(
             response.Headers.Date.GetValueOrDefault(),

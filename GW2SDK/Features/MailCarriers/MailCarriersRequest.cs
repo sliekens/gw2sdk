@@ -32,6 +32,7 @@ public sealed class MailCarriersRequest : IHttpRequest<IReplicaSet<MailCarrier>>
     {
         using var response = await httpClient.SendAsync(
                 Template with { AcceptLanguage = Language?.Alpha2Code },
+                HttpCompletionOption.ResponseHeadersRead,
                 cancellationToken
             )
             .ConfigureAwait(false);
@@ -41,7 +42,7 @@ public sealed class MailCarriersRequest : IHttpRequest<IReplicaSet<MailCarrier>>
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value = json.RootElement.GetSet(entry => MailCarrierJson.GetMailCarrier(entry, MissingMemberBehavior));
+        var value = json.RootElement.GetSet(entry => entry.GetMailCarrier(MissingMemberBehavior));
         return new ReplicaSet<MailCarrier>(
             response.Headers.Date.GetValueOrDefault(),
             value,

@@ -29,8 +29,12 @@ public sealed class
     )
     {
         var request = Template with { BearerToken = AccessToken };
-        using var response =
-            await httpClient.SendAsync(request, cancellationToken).ConfigureAwait(false);
+        using var response = await httpClient.SendAsync(
+                request,
+                HttpCompletionOption.ResponseHeadersRead,
+                cancellationToken
+            )
+            .ConfigureAwait(false);
 
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
 
@@ -38,7 +42,7 @@ public sealed class
             .ConfigureAwait(false);
 
         var value = json.RootElement.GetSet(
-            entry => MasteryProgressJson.GetMasteryProgress(entry, MissingMemberBehavior)
+            entry => entry.GetMasteryProgress(MissingMemberBehavior)
         );
         return new Replica<IReadOnlyCollection<MasteryProgress>>(
             response.Headers.Date.GetValueOrDefault(),

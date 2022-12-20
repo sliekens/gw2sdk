@@ -64,6 +64,7 @@ public sealed class ChartsByIdsRequest : IHttpRequest<IReplicaSet<Chart>>
                     },
                     AcceptLanguage = Language?.Alpha2Code
                 },
+                HttpCompletionOption.ResponseHeadersRead,
                 cancellationToken
             )
             .ConfigureAwait(false);
@@ -73,7 +74,7 @@ public sealed class ChartsByIdsRequest : IHttpRequest<IReplicaSet<Chart>>
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value = json.RootElement.GetSet(entry => ChartJson.GetChart(entry, MissingMemberBehavior));
+        var value = json.RootElement.GetSet(entry => entry.GetChart(MissingMemberBehavior));
         return new ReplicaSet<Chart>(
             response.Headers.Date.GetValueOrDefault(),
             value,

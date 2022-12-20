@@ -41,6 +41,7 @@ public sealed class MountSkinByIdRequest : IHttpRequest<IReplica<MountSkin>>
                     },
                     AcceptLanguage = Language?.Alpha2Code
                 },
+                HttpCompletionOption.ResponseHeadersRead,
                 cancellationToken
             )
             .ConfigureAwait(false);

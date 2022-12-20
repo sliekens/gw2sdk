@@ -61,6 +61,7 @@ public sealed class CreateSubtokenRequest : IHttpRequest<IReplica<CreatedSubtoke
                     Arguments = args,
                     BearerToken = AccessToken
                 },
+                HttpCompletionOption.ResponseHeadersRead,
                 cancellationToken
             )
             .ConfigureAwait(false);

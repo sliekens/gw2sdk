@@ -38,6 +38,7 @@ public sealed class SeasonByIdRequest : IHttpRequest<IReplica<Season>>
                     },
                     AcceptLanguage = Language?.Alpha2Code
                 },
+                HttpCompletionOption.ResponseHeadersRead,
                 cancellationToken
             )
             .ConfigureAwait(false);

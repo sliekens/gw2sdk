@@ -47,6 +47,7 @@ public sealed class FloorByIdRequest : IHttpRequest<IReplica<Floor>>
                     },
                     AcceptLanguage = Language?.Alpha2Code
                 },
+                HttpCompletionOption.ResponseHeadersRead,
                 cancellationToken
             )
             .ConfigureAwait(false);

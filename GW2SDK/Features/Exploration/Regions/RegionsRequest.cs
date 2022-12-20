@@ -50,6 +50,7 @@ public sealed class RegionsRequest : IHttpRequest<IReplicaSet<Region>>
                         .Replace(":floor", FloorId.ToString(CultureInfo.InvariantCulture)),
                     AcceptLanguage = Language?.Alpha2Code
                 },
+                HttpCompletionOption.ResponseHeadersRead,
                 cancellationToken
             )
             .ConfigureAwait(false);
@@ -59,7 +60,7 @@ public sealed class RegionsRequest : IHttpRequest<IReplicaSet<Region>>
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value = json.RootElement.GetSet(entry => RegionJson.GetRegion(entry, MissingMemberBehavior));
+        var value = json.RootElement.GetSet(entry => entry.GetRegion(MissingMemberBehavior));
         return new ReplicaSet<Region>(
             response.Headers.Date.GetValueOrDefault(),
             value,

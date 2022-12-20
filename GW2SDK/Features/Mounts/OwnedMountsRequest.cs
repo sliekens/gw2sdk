@@ -34,6 +34,7 @@ public sealed class OwnedMountsRequest : IHttpRequest<IReplica<IReadOnlyCollecti
     {
         using var response = await httpClient.SendAsync(
                 Template with { BearerToken = AccessToken },
+                HttpCompletionOption.ResponseHeadersRead,
                 cancellationToken
             )
             .ConfigureAwait(false);
@@ -43,7 +44,7 @@ public sealed class OwnedMountsRequest : IHttpRequest<IReplica<IReadOnlyCollecti
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value = json.RootElement.GetSet(entry => MountNameJson.GetMountName(entry, MissingMemberBehavior));
+        var value = json.RootElement.GetSet(entry => entry.GetMountName(MissingMemberBehavior));
         return new Replica<IReadOnlyCollection<MountName>>(
             response.Headers.Date.GetValueOrDefault(),
             value,

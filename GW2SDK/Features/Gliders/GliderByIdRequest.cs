@@ -38,6 +38,7 @@ public sealed class GliderByIdRequest : IHttpRequest<IReplica<Glider>>
                     },
                     AcceptLanguage = Language?.Alpha2Code
                 },
+                HttpCompletionOption.ResponseHeadersRead,
                 cancellationToken
             )
             .ConfigureAwait(false);

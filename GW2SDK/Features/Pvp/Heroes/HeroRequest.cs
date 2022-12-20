@@ -32,6 +32,7 @@ public sealed class HeroRequest : IHttpRequest<IReplicaSet<Hero>>
     {
         using var response = await httpClient.SendAsync(
                 Template with { AcceptLanguage = Language?.Alpha2Code },
+                HttpCompletionOption.ResponseHeadersRead,
                 cancellationToken
             )
             .ConfigureAwait(false);
@@ -41,7 +42,7 @@ public sealed class HeroRequest : IHttpRequest<IReplicaSet<Hero>>
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value = json.RootElement.GetSet(entry => HeroJson.GetHero(entry, MissingMemberBehavior));
+        var value = json.RootElement.GetSet(entry => entry.GetHero(MissingMemberBehavior));
         return new ReplicaSet<Hero>(
             response.Headers.Date.GetValueOrDefault(),
             value,

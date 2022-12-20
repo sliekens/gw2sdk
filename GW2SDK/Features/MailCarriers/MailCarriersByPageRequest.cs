@@ -47,6 +47,7 @@ public sealed class MailCarriersByPageRequest : IHttpRequest<IReplicaPage<MailCa
                     Arguments = search,
                     AcceptLanguage = Language?.Alpha2Code
                 },
+                HttpCompletionOption.ResponseHeadersRead,
                 cancellationToken
             )
             .ConfigureAwait(false);
@@ -56,7 +57,7 @@ public sealed class MailCarriersByPageRequest : IHttpRequest<IReplicaPage<MailCa
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value = json.RootElement.GetSet(entry => MailCarrierJson.GetMailCarrier(entry, MissingMemberBehavior));
+        var value = json.RootElement.GetSet(entry => entry.GetMailCarrier(MissingMemberBehavior));
         return new ReplicaPage<MailCarrier>(
             response.Headers.Date.GetValueOrDefault(),
             value,

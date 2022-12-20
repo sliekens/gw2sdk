@@ -41,6 +41,7 @@ public sealed class ItemStatByIdRequest : IHttpRequest<IReplica<ItemStat>>
                     },
                     AcceptLanguage = Language?.Alpha2Code
                 },
+                HttpCompletionOption.ResponseHeadersRead,
                 cancellationToken
             )
             .ConfigureAwait(false);

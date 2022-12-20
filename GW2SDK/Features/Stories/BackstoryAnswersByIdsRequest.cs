@@ -44,6 +44,7 @@ public sealed class BackstoryAnswersByIdsRequest : IHttpRequest<IReplicaSet<Back
                     },
                     AcceptLanguage = Language?.Alpha2Code
                 },
+                HttpCompletionOption.ResponseHeadersRead,
                 cancellationToken
             )
             .ConfigureAwait(false);
@@ -54,7 +55,7 @@ public sealed class BackstoryAnswersByIdsRequest : IHttpRequest<IReplicaSet<Back
             .ConfigureAwait(false);
 
         var value = json.RootElement.GetSet(
-            entry => BackstoryAnswerJson.GetBackstoryAnswer(entry, MissingMemberBehavior)
+            entry => entry.GetBackstoryAnswer(MissingMemberBehavior)
         );
         return new ReplicaSet<BackstoryAnswer>(
             response.Headers.Date.GetValueOrDefault(),

@@ -35,6 +35,7 @@ public sealed class MapChestByIdRequest : IHttpRequest<IReplica<MapChest>>
                         { "v", SchemaVersion.Recommended }
                     }
                 },
+                HttpCompletionOption.ResponseHeadersRead,
                 cancellationToken
             )
             .ConfigureAwait(false);

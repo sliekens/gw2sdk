@@ -8,7 +8,10 @@ namespace GuildWars2.Pvp.Seasons;
 [PublicAPI]
 public static class LeaderboardTierRangeJson
 {
-    public static LeaderboardTierRange GetLeaderboardTierRange(this JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    public static LeaderboardTierRange GetLeaderboardTierRange(
+        this JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         RequiredMember<double> min = new("min");
         RequiredMember<double> max = new("max");

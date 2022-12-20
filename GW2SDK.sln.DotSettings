@@ -162,24 +162,24 @@
 	<s:Boolean x:Key="/Default/Environment/SettingsMigration/IsMigratorApplied/=JetBrains_002EReSharper_002EPsi_002ECSharp_002ECodeStyle_002ECSharpUseContinuousIndentInsideBracesMigration/@EntryIndexedValue">True</s:Boolean>
 	<s:Boolean x:Key="/Default/Environment/SettingsMigration/IsMigratorApplied/=JetBrains_002EReSharper_002EPsi_002ECSharp_002ECodeStyle_002ESettingsUpgrade_002EAlwaysTreatStructAsNotReorderableMigration/@EntryIndexedValue">True</s:Boolean>
 	<s:Boolean x:Key="/Default/Environment/SettingsMigration/IsMigratorApplied/=JetBrains_002EReSharper_002EPsi_002ECSharp_002ECodeStyle_002ESettingsUpgrade_002EMigrateBlankLinesAroundFieldToBlankLinesAroundProperty/@EntryIndexedValue">True</s:Boolean>
-	<s:Boolean x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=4A715253E5858C4D82104495E9FBA4DF/@KeyIndexDefined">True</s:Boolean>
-	<s:String x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=4A715253E5858C4D82104495E9FBA4DF/Comment/@EntryValue">Specify HttpCompletionOption for SendAsync (the default results in buffering).</s:String>
-	<s:Boolean x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=4A715253E5858C4D82104495E9FBA4DF/CustomPatternPlaceholder/=http/@KeyIndexDefined">True</s:Boolean>
-	<s:String x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=4A715253E5858C4D82104495E9FBA4DF/CustomPatternPlaceholder/=http/Properties/=ExactType/@EntryIndexedValue">False</s:String>
-	<s:String x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=4A715253E5858C4D82104495E9FBA4DF/CustomPatternPlaceholder/=http/Properties/=ExpressionType/@EntryIndexedValue">System.Net.Http.HttpClient</s:String>
-	<s:String x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=4A715253E5858C4D82104495E9FBA4DF/CustomPatternPlaceholder/=http/Type/@EntryValue">ExpressionPlaceholder</s:String>
-	<s:Boolean x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=4A715253E5858C4D82104495E9FBA4DF/CustomPatternPlaceholder/=request/@KeyIndexDefined">True</s:Boolean>
-	<s:String x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=4A715253E5858C4D82104495E9FBA4DF/CustomPatternPlaceholder/=request/Properties/=Maximal/@EntryIndexedValue">1</s:String>
-	<s:String x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=4A715253E5858C4D82104495E9FBA4DF/CustomPatternPlaceholder/=request/Properties/=Minimal/@EntryIndexedValue">1</s:String>
-	<s:String x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=4A715253E5858C4D82104495E9FBA4DF/CustomPatternPlaceholder/=request/Type/@EntryValue">ArgumentPlaceholder</s:String>
-	<s:Boolean x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=4A715253E5858C4D82104495E9FBA4DF/FormatAfterReplace/@EntryValue">False</s:Boolean>
-	<s:Boolean x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=4A715253E5858C4D82104495E9FBA4DF/IsReplacePattern/@EntryValue">True</s:Boolean>
-	<s:String x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=4A715253E5858C4D82104495E9FBA4DF/LanguageName/@EntryValue">CSHARP</s:String>
-	<s:Boolean x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=4A715253E5858C4D82104495E9FBA4DF/MatchCatchClauseWithoutExceptionFilter/@EntryValue">False</s:Boolean>
-	<s:String x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=4A715253E5858C4D82104495E9FBA4DF/ReplaceComment/@EntryValue">Specify HttpCompletionOption</s:String>
-	<s:String x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=4A715253E5858C4D82104495E9FBA4DF/ReplacePattern/@EntryValue">$http$.SendAsync($request$, System.Net.Http.HttpCompletionOption.ResponseHeadersRead)</s:String>
-	<s:String x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=4A715253E5858C4D82104495E9FBA4DF/SearchPattern/@EntryValue">$http$.SendAsync($request$)</s:String>
-	<s:String x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=4A715253E5858C4D82104495E9FBA4DF/Severity/@EntryValue">WARNING</s:String>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	<s:Boolean x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=9B1929248E29B045B648F4795DDC70DA/@KeyIndexDefined">True</s:Boolean>
 	<s:String x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=9B1929248E29B045B648F4795DDC70DA/Comment/@EntryValue">Specify ConfigureAwait(false) in library code</s:String>
 	<s:Boolean x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=9B1929248E29B045B648F4795DDC70DA/CustomPatternPlaceholder/=task/@KeyIndexDefined">True</s:Boolean>
@@ -195,6 +195,32 @@
 	<s:String x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=9B1929248E29B045B648F4795DDC70DA/SearchPattern/@EntryValue">await $task$</s:String>
 	<s:String x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=9B1929248E29B045B648F4795DDC70DA/Severity/@EntryValue">HINT</s:String>
 	<s:Boolean x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=9B1929248E29B045B648F4795DDC70DA/ShortenReferences/@EntryValue">False</s:Boolean>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=B3DF38FD1C0342468171C5DECD27E9FB/@KeyIndexDefined">True</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=B3DF38FD1C0342468171C5DECD27E9FB/Comment/@EntryValue">Specify HttpCompletionOption for SendAsync (the default results in buffering).</s:String>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=B3DF38FD1C0342468171C5DECD27E9FB/CustomPatternPlaceholder/=cancellationToken/@KeyIndexDefined">True</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=B3DF38FD1C0342468171C5DECD27E9FB/CustomPatternPlaceholder/=cancellationToken/Properties/=ExactType/@EntryIndexedValue">True</s:String>
+	<s:String x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=B3DF38FD1C0342468171C5DECD27E9FB/CustomPatternPlaceholder/=cancellationToken/Properties/=ExpressionType/@EntryIndexedValue">System.Threading.CancellationToken</s:String>
+	<s:String x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=B3DF38FD1C0342468171C5DECD27E9FB/CustomPatternPlaceholder/=cancellationToken/Type/@EntryValue">ExpressionPlaceholder</s:String>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=B3DF38FD1C0342468171C5DECD27E9FB/CustomPatternPlaceholder/=http/@KeyIndexDefined">True</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=B3DF38FD1C0342468171C5DECD27E9FB/CustomPatternPlaceholder/=http/Properties/=ExactType/@EntryIndexedValue">True</s:String>
+	<s:String x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=B3DF38FD1C0342468171C5DECD27E9FB/CustomPatternPlaceholder/=http/Properties/=ExpressionType/@EntryIndexedValue">System.Net.Http.HttpClient</s:String>
+	<s:String x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=B3DF38FD1C0342468171C5DECD27E9FB/CustomPatternPlaceholder/=http/Type/@EntryValue">ExpressionPlaceholder</s:String>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=B3DF38FD1C0342468171C5DECD27E9FB/CustomPatternPlaceholder/=request/@KeyIndexDefined">True</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=B3DF38FD1C0342468171C5DECD27E9FB/CustomPatternPlaceholder/=request/Properties/=Maximal/@EntryIndexedValue">1</s:String>
+	<s:String x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=B3DF38FD1C0342468171C5DECD27E9FB/CustomPatternPlaceholder/=request/Properties/=Minimal/@EntryIndexedValue">1</s:String>
+	<s:String x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=B3DF38FD1C0342468171C5DECD27E9FB/CustomPatternPlaceholder/=request/Type/@EntryValue">ArgumentPlaceholder</s:String>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=B3DF38FD1C0342468171C5DECD27E9FB/FormatAfterReplace/@EntryValue">False</s:Boolean>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=B3DF38FD1C0342468171C5DECD27E9FB/IsReplacePattern/@EntryValue">True</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=B3DF38FD1C0342468171C5DECD27E9FB/LanguageName/@EntryValue">CSHARP</s:String>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=B3DF38FD1C0342468171C5DECD27E9FB/MatchCatchClauseWithoutExceptionFilter/@EntryValue">False</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=B3DF38FD1C0342468171C5DECD27E9FB/ReplaceComment/@EntryValue">Specify HttpCompletionOption</s:String>
+	<s:String x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=B3DF38FD1C0342468171C5DECD27E9FB/ReplacePattern/@EntryValue">$http$.SendAsync(&#xD;
+	$request$,&#xD;
+	System.Net.Http.HttpCompletionOption.ResponseHeadersRead,&#xD;
+	$cancellationToken$&#xD;
+)</s:String>
+	<s:String x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=B3DF38FD1C0342468171C5DECD27E9FB/SearchPattern/@EntryValue">$http$.SendAsync($request$, $cancellationToken$)</s:String>
+	<s:String x:Key="/Default/PatternsAndTemplates/StructuralSearch/Pattern/=B3DF38FD1C0342468171C5DECD27E9FB/Severity/@EntryValue">ERROR</s:String>
 	<s:Boolean x:Key="/Default/PatternsAndTemplates/StructuralSearch/RecentSearch/=202105051641249328/@KeyIndexDefined">True</s:Boolean>
 	<s:String x:Key="/Default/PatternsAndTemplates/StructuralSearch/RecentSearch/=202105051641249328/LanguageName/@EntryValue">CSHARP</s:String>
 	<s:Boolean x:Key="/Default/PatternsAndTemplates/StructuralSearch/RecentSearch/=202105051641249328/MatchCatchClauseWithoutExceptionFilter/@EntryValue">False</s:Boolean>

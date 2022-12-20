@@ -41,6 +41,7 @@ public sealed class LegendaryItemsByPageRequest : IHttpRequest<IReplicaPage<Lege
         search.Add("v", SchemaVersion.Recommended);
         using var response = await httpClient.SendAsync(
                 Template with { Arguments = search },
+                HttpCompletionOption.ResponseHeadersRead,
                 cancellationToken
             )
             .ConfigureAwait(false);
@@ -50,7 +51,7 @@ public sealed class LegendaryItemsByPageRequest : IHttpRequest<IReplicaPage<Lege
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value = json.RootElement.GetSet(entry => LegendaryItemJson.GetLegendaryItem(entry, MissingMemberBehavior));
+        var value = json.RootElement.GetSet(entry => entry.GetLegendaryItem(MissingMemberBehavior));
         return new ReplicaPage<LegendaryItem>(
             response.Headers.Date.GetValueOrDefault(),
             value,

@@ -39,6 +39,7 @@ public sealed class AchievementCategoryByIdRequest : IHttpRequest<IReplica<Achie
                     },
                     AcceptLanguage = Language?.Alpha2Code
                 },
+                HttpCompletionOption.ResponseHeadersRead,
                 cancellationToken
             )
             .ConfigureAwait(false);

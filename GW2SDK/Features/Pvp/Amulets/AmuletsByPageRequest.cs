@@ -44,6 +44,7 @@ public sealed class AmuletsByPageRequest : IHttpRequest<IReplicaPage<Amulet>>
                     Arguments = search,
                     AcceptLanguage = Language?.Alpha2Code
                 },
+                HttpCompletionOption.ResponseHeadersRead,
                 cancellationToken
             )
             .ConfigureAwait(false);
@@ -53,7 +54,7 @@ public sealed class AmuletsByPageRequest : IHttpRequest<IReplicaPage<Amulet>>
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value = json.RootElement.GetSet(entry => AmuletJson.GetAmulet(entry, MissingMemberBehavior));
+        var value = json.RootElement.GetSet(entry => entry.GetAmulet(MissingMemberBehavior));
         return new ReplicaPage<Amulet>(
             response.Headers.Date.GetValueOrDefault(),
             value,

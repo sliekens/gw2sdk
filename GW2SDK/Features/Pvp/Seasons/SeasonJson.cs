@@ -71,7 +71,8 @@ public static class SeasonJson
             Active = active.GetValue(),
             Divisions = divisions.SelectMany(value => value.GetDivision(missingMemberBehavior)),
             Ranks = ranks.SelectMany(value => value.GetSeasonRank(missingMemberBehavior)),
-            Leaderboards = leaderboards.Select(value => value.GetLeaderboardGroup(missingMemberBehavior))
+            Leaderboards =
+                leaderboards.Select(value => value.GetLeaderboardGroup(missingMemberBehavior))
         };
     }
 }

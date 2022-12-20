@@ -27,15 +27,19 @@ public sealed class EmotesRequest : IHttpRequest<IReplicaSet<Emote>>
         CancellationToken cancellationToken
     )
     {
-        using var response =
-            await httpClient.SendAsync(Template, cancellationToken).ConfigureAwait(false);
+        using var response = await httpClient.SendAsync(
+                Template,
+                HttpCompletionOption.ResponseHeadersRead,
+                cancellationToken
+            )
+            .ConfigureAwait(false);
 
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
 
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value = json.RootElement.GetSet(entry => EmoteJson.GetEmote(entry, MissingMemberBehavior));
+        var value = json.RootElement.GetSet(entry => entry.GetEmote(MissingMemberBehavior));
         return new ReplicaSet<Emote>(
             response.Headers.Date.GetValueOrDefault(),
             value,

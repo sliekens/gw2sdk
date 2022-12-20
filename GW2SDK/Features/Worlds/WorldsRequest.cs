@@ -32,6 +32,7 @@ public sealed class WorldsRequest : IHttpRequest<IReplicaSet<World>>
     {
         using var response = await httpClient.SendAsync(
                 Template with { AcceptLanguage = Language?.Alpha2Code },
+                HttpCompletionOption.ResponseHeadersRead,
                 cancellationToken
             )
             .ConfigureAwait(false);
@@ -41,7 +42,7 @@ public sealed class WorldsRequest : IHttpRequest<IReplicaSet<World>>
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value = json.RootElement.GetSet(entry => WorldJson.GetWorld(entry, MissingMemberBehavior));
+        var value = json.RootElement.GetSet(entry => entry.GetWorld(MissingMemberBehavior));
         return new ReplicaSet<World>(
             response.Headers.Date.GetValueOrDefault(),
             value,

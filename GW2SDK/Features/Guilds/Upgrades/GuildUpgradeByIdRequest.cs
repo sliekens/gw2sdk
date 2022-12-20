@@ -38,6 +38,7 @@ public sealed class GuildUpgradeByIdRequest : IHttpRequest<IReplica<GuildUpgrade
                     },
                     AcceptLanguage = Language?.Alpha2Code
                 },
+                HttpCompletionOption.ResponseHeadersRead,
                 cancellationToken
             )
             .ConfigureAwait(false);

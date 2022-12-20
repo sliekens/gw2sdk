@@ -32,6 +32,7 @@ public sealed class GuildUpgradesRequest : IHttpRequest<IReplicaSet<GuildUpgrade
     {
         using var response = await httpClient.SendAsync(
                 Template with { AcceptLanguage = Language?.Alpha2Code },
+                HttpCompletionOption.ResponseHeadersRead,
                 cancellationToken
             )
             .ConfigureAwait(false);
@@ -41,7 +42,7 @@ public sealed class GuildUpgradesRequest : IHttpRequest<IReplicaSet<GuildUpgrade
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value = json.RootElement.GetSet(entry => GuildUpgradeJson.GetGuildUpgrade(entry, MissingMemberBehavior));
+        var value = json.RootElement.GetSet(entry => entry.GetGuildUpgrade(MissingMemberBehavior));
         return new ReplicaSet<GuildUpgrade>(
             response.Headers.Date.GetValueOrDefault(),
             value,

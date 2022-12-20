@@ -38,6 +38,7 @@ public sealed class NoveltyByIdRequest : IHttpRequest<IReplica<Novelty>>
                     },
                     AcceptLanguage = Language?.Alpha2Code
                 },
+                HttpCompletionOption.ResponseHeadersRead,
                 cancellationToken
             )
             .ConfigureAwait(false);

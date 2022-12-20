@@ -40,6 +40,7 @@ public sealed class TitleByIdRequest : IHttpRequest<IReplica<Title>>
                         { "v", SchemaVersion.Recommended }
                     }
                 },
+                HttpCompletionOption.ResponseHeadersRead,
                 cancellationToken
             )
             .ConfigureAwait(false);

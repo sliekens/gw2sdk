@@ -50,6 +50,7 @@ public sealed class FloorsByIdsRequest : IHttpRequest<IReplicaSet<Floor>>
                     },
                     AcceptLanguage = Language?.Alpha2Code
                 },
+                HttpCompletionOption.ResponseHeadersRead,
                 cancellationToken
             )
             .ConfigureAwait(false);
@@ -59,7 +60,7 @@ public sealed class FloorsByIdsRequest : IHttpRequest<IReplicaSet<Floor>>
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value = json.RootElement.GetSet(entry => FloorJson.GetFloor(entry, MissingMemberBehavior));
+        var value = json.RootElement.GetSet(entry => entry.GetFloor(MissingMemberBehavior));
         return new ReplicaSet<Floor>(
             response.Headers.Date.GetValueOrDefault(),
             value,

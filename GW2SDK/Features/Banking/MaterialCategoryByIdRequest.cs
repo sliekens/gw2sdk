@@ -41,6 +41,7 @@ public sealed class MaterialCategoryByIdRequest : IHttpRequest<IReplica<Material
                     },
                     AcceptLanguage = Language?.Alpha2Code
                 },
+                HttpCompletionOption.ResponseHeadersRead,
                 cancellationToken
             )
             .ConfigureAwait(false);

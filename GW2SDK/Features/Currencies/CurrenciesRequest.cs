@@ -32,6 +32,7 @@ public sealed class CurrenciesRequest : IHttpRequest<IReplicaSet<Currency>>
     {
         using var response = await httpClient.SendAsync(
                 Template with { AcceptLanguage = Language?.Alpha2Code },
+                HttpCompletionOption.ResponseHeadersRead,
                 cancellationToken
             )
             .ConfigureAwait(false);
@@ -41,7 +42,7 @@ public sealed class CurrenciesRequest : IHttpRequest<IReplicaSet<Currency>>
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value = json.RootElement.GetSet(entry => CurrencyJson.GetCurrency(entry, MissingMemberBehavior));
+        var value = json.RootElement.GetSet(entry => entry.GetCurrency(MissingMemberBehavior));
         return new ReplicaSet<Currency>(
             response.Headers.Date.GetValueOrDefault(),
             value,

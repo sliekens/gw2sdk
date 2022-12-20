@@ -38,6 +38,7 @@ public sealed class EmotesByPageRequest : IHttpRequest<IReplicaPage<Emote>>
         search.Add("v", SchemaVersion.Recommended);
         using var response = await httpClient.SendAsync(
                 Template with { Arguments = search },
+                HttpCompletionOption.ResponseHeadersRead,
                 cancellationToken
             )
             .ConfigureAwait(false);
@@ -47,7 +48,7 @@ public sealed class EmotesByPageRequest : IHttpRequest<IReplicaPage<Emote>>
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value = json.RootElement.GetSet(entry => EmoteJson.GetEmote(entry, MissingMemberBehavior));
+        var value = json.RootElement.GetSet(entry => entry.GetEmote(MissingMemberBehavior));
         return new ReplicaPage<Emote>(
             response.Headers.Date.GetValueOrDefault(),
             value,

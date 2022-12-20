@@ -47,6 +47,7 @@ public sealed class AchievementsByPageRequest : IHttpRequest<IReplicaPage<Achiev
                     Arguments = search,
                     AcceptLanguage = Language?.Alpha2Code
                 },
+                HttpCompletionOption.ResponseHeadersRead,
                 cancellationToken
             )
             .ConfigureAwait(false);
@@ -56,7 +57,7 @@ public sealed class AchievementsByPageRequest : IHttpRequest<IReplicaPage<Achiev
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value = json.RootElement.GetSet(entry => AchievementJson.GetAchievement(entry, MissingMemberBehavior));
+        var value = json.RootElement.GetSet(entry => entry.GetAchievement(MissingMemberBehavior));
         return new ReplicaPage<Achievement>(
             response.Headers.Date.GetValueOrDefault(),
             value,
