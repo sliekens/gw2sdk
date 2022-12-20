@@ -12,6 +12,9 @@ updates:
   schedule:
     interval: daily
     time: "04:00"
-  open-pull-requests-limit: 10
   registries:
   - nuget-feed-nuget-pkg-github-com-stevenliekens-index-json
+  # Disable pull requests until they finally support lockfiles
+  # https://github.com/dependabot/dependabot-core/pull/6031
+  open-pull-requests-limit: 0
+
