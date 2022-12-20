@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Drawing;
 using GuildWars2.Annotations;
-using GuildWars2.Exploration.Regions;
 using JetBrains.Annotations;
+using GeoRegion = GuildWars2.Exploration.Regions.Region;
 
 namespace GuildWars2.Exploration.Floors;
 
@@ -18,5 +18,5 @@ public sealed record Floor
     /// is not available on the tile server.</summary>
     public required Area? ClampedView { get; init; }
 
-    public required Dictionary<int, Region> Regions { get; init; }
+    public required Dictionary<int, GeoRegion> Regions { get; init; }
 }
