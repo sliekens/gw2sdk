@@ -23,8 +23,8 @@
       },
       "System.Text.Json": {
         "type": "Transitive",
-        "resolved": "7.0.0",
-        "contentHash": "DaGSsVqKsn/ia6RG8frjwmJonfos0srquhw09TlT8KRw5I43E+4gs+/bZj4K0vShJ5H9imCuXupb4RmS+dBy3w==",
+        "resolved": "7.0.1",
+        "contentHash": "OtDEmCCiNl8JAduFKZ/r0Sw6XZNHwIicUYy/mXgMDGeOsZLshH37qi3oPRzFYiryVktiMoQLByMGPtRCEMYbeQ==",
         "dependencies": {
           "System.Text.Encodings.Web": "7.0.0"
         }
@@ -32,7 +32,7 @@
       "gw2sdk": {
         "type": "Project",
         "dependencies": {
-          "System.Text.Json": "[7.0.0, )"
+          "System.Text.Json": "[7.0.1, )"
         }
       }
     }
