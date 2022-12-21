@@ -2,7 +2,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using JetBrains.Annotations;
 using static System.Globalization.NumberFormatInfo;
 using Argument = System.Collections.Generic.KeyValuePair<string, string>;
@@ -68,14 +67,74 @@ public sealed class QueryBuilder : IEnumerable
             return "";
         }
 
-        var query = new StringBuilder();
+        var queryLength = 0;
         foreach (var (key, value) in arguments)
         {
-            query.Append(query.Length == 0 ? "?" : "&");
-            query.AppendJoin("=", key, value);
+            // Length of '?key=value' (or '&key=value')
+            queryLength += key.Length + value.Length + 2;
         }
 
-        return query.ToString();
+#if NET
+        return string.Create(
+            queryLength,
+            arguments,
+            (buffer, state) =>
+            {
+                var position = 0;
+                foreach (var (key, value) in state)
+                {
+                    if (position == 0)
+                    {
+                        buffer[position++] = '?';
+                    }
+                    else
+                    {
+                        buffer[position++] = '&';
+                    }
+
+                    foreach (var c in key)
+                    {
+                        buffer[position++] = c;
+                    }
+
+                    buffer[position++] = '=';
+
+                    foreach (var c in value)
+                    {
+                        buffer[position++] = c;
+                    }
+                }
+            }
+        );
+#else
+        Span<char> buffer = stackalloc char[queryLength];
+        var position = 0;
+        foreach (var (key, value) in arguments)
+        {
+            if (position == 0)
+            {
+                buffer[position++] = '?';
+            }
+            else
+            {
+                buffer[position++] = '&';
+            }
+
+            foreach (var c in key)
+            {
+                buffer[position++] = c;
+            }
+
+            buffer[position++] = '=';
+
+            foreach (var c in value)
+            {
+                buffer[position++] = c;
+            }
+        }
+
+        return buffer.ToString();
+#endif
     }
 
     private void EnsureMutable()
@@ -105,13 +164,5 @@ internal static class QueryBuilderHelper
         key = instance.Key;
         value = instance.Value;
     }
-
-    internal static void AppendJoin(
-        this StringBuilder instance,
-        string separator,
-        string first,
-        string second
-    ) =>
-        instance.Append(string.Join(separator, first, second));
 }
 #endif
