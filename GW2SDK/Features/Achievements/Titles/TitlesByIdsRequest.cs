@@ -54,13 +54,13 @@ public sealed class TitlesByIdsRequest : IHttpRequest<IReplicaSet<Title>>
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value = json.RootElement.GetSet(entry => entry.GetTitle(MissingMemberBehavior));
-        return new ReplicaSet<Title>(
-            response.Headers.Date.GetValueOrDefault(),
-            value,
-            response.Headers.GetCollectionContext(),
-            response.Content.Headers.Expires,
-            response.Content.Headers.LastModified
-        );
+        return new ReplicaSet<Title>
+        {
+            Values = json.RootElement.GetSet(entry => entry.GetTitle(MissingMemberBehavior)),
+            Context = response.Headers.GetCollectionContext(),
+            Date = response.Headers.Date.GetValueOrDefault(),
+            Expires = response.Content.Headers.Expires,
+            LastModified = response.Content.Headers.LastModified
+        };
     }
 }

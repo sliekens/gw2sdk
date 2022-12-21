@@ -48,12 +48,12 @@ public sealed class OutfitByIdRequest : IHttpRequest<IReplica<Outfit>>
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value = json.RootElement.GetOutfit(MissingMemberBehavior);
-        return new Replica<Outfit>(
-            response.Headers.Date.GetValueOrDefault(),
-            value,
-            response.Content.Headers.Expires,
-            response.Content.Headers.LastModified
-        );
+        return new Replica<Outfit>
+        {
+            Value = json.RootElement.GetOutfit(MissingMemberBehavior),
+            Date = response.Headers.Date.GetValueOrDefault(),
+            Expires = response.Content.Headers.Expires,
+            LastModified = response.Content.Headers.LastModified
+        };
     }
 }

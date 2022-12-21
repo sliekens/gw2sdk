@@ -52,14 +52,13 @@ public sealed class AccountAchievementsByIdsRequest : IHttpRequest<IReplicaSet<A
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value =
-            json.RootElement.GetSet(entry => entry.GetAccountAchievement(MissingMemberBehavior));
-        return new ReplicaSet<AccountAchievement>(
-            response.Headers.Date.GetValueOrDefault(),
-            value,
-            response.Headers.GetCollectionContext(),
-            response.Content.Headers.Expires,
-            response.Content.Headers.LastModified
-        );
+        return new ReplicaSet<AccountAchievement>
+        {
+            Values = json.RootElement.GetSet(entry => entry.GetAccountAchievement(MissingMemberBehavior)),
+            Context = response.Headers.GetCollectionContext(),
+            Date = response.Headers.Date.GetValueOrDefault(),
+            Expires = response.Content.Headers.Expires,
+            LastModified = response.Content.Headers.LastModified
+        };
     }
 }

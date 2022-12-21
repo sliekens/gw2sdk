@@ -48,13 +48,13 @@ public sealed class FilesByPageRequest : IHttpRequest<IReplicaPage<File>>
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value = json.RootElement.GetSet(entry => entry.GetFile(MissingMemberBehavior));
-        return new ReplicaPage<File>(
-            response.Headers.Date.GetValueOrDefault(),
-            value,
-            response.Headers.GetPageContext(),
-            response.Content.Headers.Expires,
-            response.Content.Headers.LastModified
-        );
+        return new ReplicaPage<File>
+        {
+            Values = json.RootElement.GetSet(entry => entry.GetFile(MissingMemberBehavior)),
+            Context = response.Headers.GetPageContext(),
+            Date = response.Headers.Date.GetValueOrDefault(),
+            Expires = response.Content.Headers.Expires,
+            LastModified = response.Content.Headers.LastModified
+        };
     }
 }

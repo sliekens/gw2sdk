@@ -48,12 +48,12 @@ public sealed class HeroByIdRequest : IHttpRequest<IReplica<Hero>>
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value = json.RootElement.GetHero(MissingMemberBehavior);
-        return new Replica<Hero>(
-            response.Headers.Date.GetValueOrDefault(),
-            value,
-            response.Content.Headers.Expires,
-            response.Content.Headers.LastModified
-        );
+        return new Replica<Hero>
+        {
+            Value = json.RootElement.GetHero(MissingMemberBehavior),
+            Date = response.Headers.Date.GetValueOrDefault(),
+            Expires = response.Content.Headers.Expires,
+            LastModified = response.Content.Headers.LastModified
+        };
     }
 }

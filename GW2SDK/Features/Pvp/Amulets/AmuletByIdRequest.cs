@@ -48,12 +48,12 @@ public sealed class AmuletByIdRequest : IHttpRequest<IReplica<Amulet>>
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value = json.RootElement.GetAmulet(MissingMemberBehavior);
-        return new Replica<Amulet>(
-            response.Headers.Date.GetValueOrDefault(),
-            value,
-            response.Content.Headers.Expires,
-            response.Content.Headers.LastModified
-        );
+        return new Replica<Amulet>
+        {
+            Value = json.RootElement.GetAmulet(MissingMemberBehavior),
+            Date = response.Headers.Date.GetValueOrDefault(),
+            Expires = response.Content.Headers.Expires,
+            LastModified = response.Content.Headers.LastModified
+        };
     }
 }

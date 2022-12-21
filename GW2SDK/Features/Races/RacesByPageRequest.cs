@@ -59,13 +59,13 @@ public sealed class RacesByPageRequest : IHttpRequest<IReplicaPage<Race>>
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value = json.RootElement.GetSet(entry => entry.GetRace(MissingMemberBehavior));
-        return new ReplicaPage<Race>(
-            response.Headers.Date.GetValueOrDefault(),
-            value,
-            response.Headers.GetPageContext(),
-            response.Content.Headers.Expires,
-            response.Content.Headers.LastModified
-        );
+        return new ReplicaPage<Race>
+        {
+            Values = json.RootElement.GetSet(entry => entry.GetRace(MissingMemberBehavior)),
+            Context = response.Headers.GetPageContext(),
+            Date = response.Headers.Date.GetValueOrDefault(),
+            Expires = response.Content.Headers.Expires,
+            LastModified = response.Content.Headers.LastModified
+        };
     }
 }

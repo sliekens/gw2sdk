@@ -52,12 +52,12 @@ public sealed class ProfessionByNameRequest : IHttpRequest<IReplica<Profession>>
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value = json.RootElement.GetProfession(MissingMemberBehavior);
-        return new Replica<Profession>(
-            response.Headers.Date.GetValueOrDefault(),
-            value,
-            response.Content.Headers.Expires,
-            response.Content.Headers.LastModified
-        );
+        return new Replica<Profession>
+        {
+            Value = json.RootElement.GetProfession(MissingMemberBehavior),
+            Date = response.Headers.Date.GetValueOrDefault(),
+            Expires = response.Content.Headers.Expires,
+            LastModified = response.Content.Headers.LastModified
+        };
     }
 }

@@ -81,14 +81,13 @@ public sealed class PointsOfInterestByPageRequest : IHttpRequest<IReplicaPage<Po
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value =
-            json.RootElement.GetSet(entry => entry.GetPointOfInterest(MissingMemberBehavior));
-        return new ReplicaPage<PointOfInterest>(
-            response.Headers.Date.GetValueOrDefault(),
-            value,
-            response.Headers.GetPageContext(),
-            response.Content.Headers.Expires,
-            response.Content.Headers.LastModified
-        );
+        return new ReplicaPage<PointOfInterest>
+        {
+            Values = json.RootElement.GetSet(entry => entry.GetPointOfInterest(MissingMemberBehavior)),
+            Context = response.Headers.GetPageContext(),
+            Date = response.Headers.Date.GetValueOrDefault(),
+            Expires = response.Content.Headers.Expires,
+            LastModified = response.Content.Headers.LastModified
+        };
     }
 }

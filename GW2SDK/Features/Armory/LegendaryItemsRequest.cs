@@ -40,13 +40,13 @@ public sealed class LegendaryItemsRequest : IHttpRequest<IReplicaSet<LegendaryIt
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value = json.RootElement.GetSet(entry => entry.GetLegendaryItem(MissingMemberBehavior));
-        return new ReplicaSet<LegendaryItem>(
-            response.Headers.Date.GetValueOrDefault(),
-            value,
-            response.Headers.GetCollectionContext(),
-            response.Content.Headers.Expires,
-            response.Content.Headers.LastModified
-        );
+        return new ReplicaSet<LegendaryItem>
+        {
+            Values = json.RootElement.GetSet(entry => entry.GetLegendaryItem(MissingMemberBehavior)),
+            Context = response.Headers.GetCollectionContext(),
+            Date = response.Headers.Date.GetValueOrDefault(),
+            Expires = response.Content.Headers.Expires,
+            LastModified = response.Content.Headers.LastModified
+        };
     }
 }

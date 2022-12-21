@@ -48,12 +48,12 @@ public sealed class QuagganByIdRequest : IHttpRequest<IReplica<Quaggan>>
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value = json.RootElement.GetQuaggan(MissingMemberBehavior);
-        return new Replica<Quaggan>(
-            response.Headers.Date.GetValueOrDefault(),
-            value,
-            response.Content.Headers.Expires,
-            response.Content.Headers.LastModified
-        );
+        return new Replica<Quaggan>
+        {
+            Value = json.RootElement.GetQuaggan(MissingMemberBehavior),
+            Date = response.Headers.Date.GetValueOrDefault(),
+            Expires = response.Content.Headers.Expires,
+            LastModified = response.Content.Headers.LastModified
+        };
     }
 }

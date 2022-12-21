@@ -42,13 +42,13 @@ public sealed class ColorsRequest : IHttpRequest<IReplicaSet<Dye>>
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value = json.RootElement.GetSet(entry => entry.GetDye(MissingMemberBehavior));
-        return new ReplicaSet<Dye>(
-            response.Headers.Date.GetValueOrDefault(),
-            value,
-            response.Headers.GetCollectionContext(),
-            response.Content.Headers.Expires,
-            response.Content.Headers.LastModified
-        );
+        return new ReplicaSet<Dye>
+        {
+            Values = json.RootElement.GetSet(entry => entry.GetDye(MissingMemberBehavior)),
+            Context = response.Headers.GetCollectionContext(),
+            Date = response.Headers.Date.GetValueOrDefault(),
+            Expires = response.Content.Headers.Expires,
+            LastModified = response.Content.Headers.LastModified
+        };
     }
 }

@@ -56,15 +56,16 @@ public sealed class
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value = json.RootElement.GetSet(
-            entry => entry.GetAchievementCategory(MissingMemberBehavior)
-        );
-        return new ReplicaPage<AchievementCategory>(
-            response.Headers.Date.GetValueOrDefault(),
-            value,
-            response.Headers.GetPageContext(),
-            response.Content.Headers.Expires,
-            response.Content.Headers.LastModified
-        );
+        return new ReplicaPage<AchievementCategory>
+        {
+            Values =
+                json.RootElement.GetSet(
+                    entry => entry.GetAchievementCategory(MissingMemberBehavior)
+                ),
+            Context = response.Headers.GetPageContext(),
+            Date = response.Headers.Date.GetValueOrDefault(),
+            Expires = response.Content.Headers.Expires,
+            LastModified = response.Content.Headers.LastModified
+        };
     }
 }

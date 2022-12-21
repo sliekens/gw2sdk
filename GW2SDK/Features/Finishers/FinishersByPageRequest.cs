@@ -54,13 +54,13 @@ public sealed class FinishersByPageRequest : IHttpRequest<IReplicaPage<Finisher>
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value = json.RootElement.GetSet(entry => entry.GetFinisher(MissingMemberBehavior));
-        return new ReplicaPage<Finisher>(
-            response.Headers.Date.GetValueOrDefault(),
-            value,
-            response.Headers.GetPageContext(),
-            response.Content.Headers.Expires,
-            response.Content.Headers.LastModified
-        );
+        return new ReplicaPage<Finisher>
+        {
+            Values = json.RootElement.GetSet(entry => entry.GetFinisher(MissingMemberBehavior)),
+            Context = response.Headers.GetPageContext(),
+            Date = response.Headers.Date.GetValueOrDefault(),
+            Expires = response.Content.Headers.Expires,
+            LastModified = response.Content.Headers.LastModified
+        };
     }
 }

@@ -45,12 +45,12 @@ public sealed class DungeonByIdRequest : IHttpRequest<IReplica<Dungeon>>
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value = json.RootElement.GetDungeon(MissingMemberBehavior);
-        return new Replica<Dungeon>(
-            response.Headers.Date.GetValueOrDefault(),
-            value,
-            response.Content.Headers.Expires,
-            response.Content.Headers.LastModified
-        );
+        return new Replica<Dungeon>
+        {
+            Value = json.RootElement.GetDungeon(MissingMemberBehavior),
+            Date = response.Headers.Date.GetValueOrDefault(),
+            Expires = response.Content.Headers.Expires,
+            LastModified = response.Content.Headers.LastModified
+        };
     }
 }

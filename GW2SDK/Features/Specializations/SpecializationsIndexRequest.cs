@@ -34,13 +34,13 @@ public sealed class SpecializationsIndexRequest : IHttpRequest<IReplicaSet<int>>
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value = json.RootElement.GetSet(entry => entry.GetInt32());
-        return new ReplicaSet<int>(
-            response.Headers.Date.GetValueOrDefault(),
-            value,
-            response.Headers.GetCollectionContext(),
-            response.Content.Headers.Expires,
-            response.Content.Headers.LastModified
-        );
+        return new ReplicaSet<int>
+        {
+            Values = json.RootElement.GetSet(entry => entry.GetInt32()),
+            Context = response.Headers.GetCollectionContext(),
+            Date = response.Headers.Date.GetValueOrDefault(),
+            Expires = response.Content.Headers.Expires,
+            LastModified = response.Content.Headers.LastModified
+        };
     }
 }

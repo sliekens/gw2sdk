@@ -48,12 +48,12 @@ public sealed class NoveltyByIdRequest : IHttpRequest<IReplica<Novelty>>
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value = json.RootElement.GetNovelty(MissingMemberBehavior);
-        return new Replica<Novelty>(
-            response.Headers.Date.GetValueOrDefault(),
-            value,
-            response.Content.Headers.Expires,
-            response.Content.Headers.LastModified
-        );
+        return new Replica<Novelty>
+        {
+            Value = json.RootElement.GetNovelty(MissingMemberBehavior),
+            Date = response.Headers.Date.GetValueOrDefault(),
+            Expires = response.Content.Headers.Expires,
+            LastModified = response.Content.Headers.LastModified
+        };
     }
 }

@@ -51,12 +51,12 @@ public sealed class TraitByIdRequest : IHttpRequest<IReplica<Trait>>
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value = json.RootElement.GetTrait(MissingMemberBehavior);
-        return new Replica<Trait>(
-            response.Headers.Date.GetValueOrDefault(),
-            value,
-            response.Content.Headers.Expires,
-            response.Content.Headers.LastModified
-        );
+        return new Replica<Trait>
+        {
+            Value = json.RootElement.GetTrait(MissingMemberBehavior),
+            Date = response.Headers.Date.GetValueOrDefault(),
+            Expires = response.Content.Headers.Expires,
+            LastModified = response.Content.Headers.LastModified
+        };
     }
 }

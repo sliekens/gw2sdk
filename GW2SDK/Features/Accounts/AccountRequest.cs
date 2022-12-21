@@ -37,11 +37,12 @@ public sealed class AccountRequest : IHttpRequest<IReplica<AccountSummary>>
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        return new Replica<AccountSummary>(
-            response.Headers.Date.GetValueOrDefault(),
-            json.RootElement.GetAccountSummary(MissingMemberBehavior),
-            response.Content.Headers.Expires,
-            response.Content.Headers.LastModified
-        );
+        return new Replica<AccountSummary>
+        {
+            Value = json.RootElement.GetAccountSummary(MissingMemberBehavior),
+            Date = response.Headers.Date.GetValueOrDefault(),
+            Expires = response.Content.Headers.Expires,
+            LastModified = response.Content.Headers.LastModified
+        };
     }
 }

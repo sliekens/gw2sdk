@@ -55,15 +55,16 @@ public sealed class BackstoryQuestionsByPageRequest : IHttpRequest<IReplicaPage<
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value = json.RootElement.GetSet(
-            entry => entry.GetBackstoryQuestion(MissingMemberBehavior)
-        );
-        return new ReplicaPage<BackstoryQuestion>(
-            response.Headers.Date.GetValueOrDefault(),
-            value,
-            response.Headers.GetPageContext(),
-            response.Content.Headers.Expires,
-            response.Content.Headers.LastModified
-        );
+        return new ReplicaPage<BackstoryQuestion>
+        {
+            Values =
+                json.RootElement.GetSet(
+                    entry => entry.GetBackstoryQuestion(MissingMemberBehavior)
+                ),
+            Context = response.Headers.GetPageContext(),
+            Date = response.Headers.Date.GetValueOrDefault(),
+            Expires = response.Content.Headers.Expires,
+            LastModified = response.Content.Headers.LastModified
+        };
     }
 }

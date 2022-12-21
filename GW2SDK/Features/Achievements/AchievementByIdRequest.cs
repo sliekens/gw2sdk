@@ -51,12 +51,12 @@ public sealed class AchievementByIdRequest : IHttpRequest<IReplica<Achievement>>
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value = json.RootElement.GetAchievement(MissingMemberBehavior);
-        return new Replica<Achievement>(
-            response.Headers.Date.GetValueOrDefault(),
-            value,
-            response.Content.Headers.Expires,
-            response.Content.Headers.LastModified
-        );
+        return new Replica<Achievement>
+        {
+            Value = json.RootElement.GetAchievement(MissingMemberBehavior),
+            Date = response.Headers.Date.GetValueOrDefault(),
+            Expires = response.Content.Headers.Expires,
+            LastModified = response.Content.Headers.LastModified
+        };
     }
 }

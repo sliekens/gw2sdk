@@ -57,13 +57,13 @@ public sealed class ItemStatsByPageRequest : IHttpRequest<IReplicaPage<ItemStat>
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value = json.RootElement.GetSet(entry => entry.GetItemStat(MissingMemberBehavior));
-        return new ReplicaPage<ItemStat>(
-            response.Headers.Date.GetValueOrDefault(),
-            value,
-            response.Headers.GetPageContext(),
-            response.Content.Headers.Expires,
-            response.Content.Headers.LastModified
-        );
+        return new ReplicaPage<ItemStat>
+        {
+            Values = json.RootElement.GetSet(entry => entry.GetItemStat(MissingMemberBehavior)),
+            Context = response.Headers.GetPageContext(),
+            Date = response.Headers.Date.GetValueOrDefault(),
+            Expires = response.Content.Headers.Expires,
+            LastModified = response.Content.Headers.LastModified
+        };
     }
 }

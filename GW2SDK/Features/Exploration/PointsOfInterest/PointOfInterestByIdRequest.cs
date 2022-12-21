@@ -75,12 +75,12 @@ public sealed class PointOfInterestByIdRequest : IHttpRequest<IReplica<PointOfIn
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value = json.RootElement.GetPointOfInterest(MissingMemberBehavior);
-        return new Replica<PointOfInterest>(
-            response.Headers.Date.GetValueOrDefault(),
-            value,
-            response.Content.Headers.Expires,
-            response.Content.Headers.LastModified
-        );
+        return new Replica<PointOfInterest>
+        {
+            Value = json.RootElement.GetPointOfInterest(MissingMemberBehavior),
+            Date = response.Headers.Date.GetValueOrDefault(),
+            Expires = response.Content.Headers.Expires,
+            LastModified = response.Content.Headers.LastModified
+        };
     }
 }

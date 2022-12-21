@@ -54,13 +54,13 @@ public sealed class MinipetsByPageRequest : IHttpRequest<IReplicaPage<Minipet>>
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value = json.RootElement.GetSet(entry => entry.GetMinipet(MissingMemberBehavior));
-        return new ReplicaPage<Minipet>(
-            response.Headers.Date.GetValueOrDefault(),
-            value,
-            response.Headers.GetPageContext(),
-            response.Content.Headers.Expires,
-            response.Content.Headers.LastModified
-        );
+        return new ReplicaPage<Minipet>
+        {
+            Values = json.RootElement.GetSet(entry => entry.GetMinipet(MissingMemberBehavior)),
+            Context = response.Headers.GetPageContext(),
+            Date = response.Headers.Date.GetValueOrDefault(),
+            Expires = response.Content.Headers.Expires,
+            LastModified = response.Content.Headers.LastModified
+        };
     }
 }

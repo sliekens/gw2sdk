@@ -57,13 +57,13 @@ public sealed class ProfessionsByPageRequest : IHttpRequest<IReplicaPage<Profess
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value = json.RootElement.GetSet(entry => entry.GetProfession(MissingMemberBehavior));
-        return new ReplicaPage<Profession>(
-            response.Headers.Date.GetValueOrDefault(),
-            value,
-            response.Headers.GetPageContext(),
-            response.Content.Headers.Expires,
-            response.Content.Headers.LastModified
-        );
+        return new ReplicaPage<Profession>
+        {
+            Values = json.RootElement.GetSet(entry => entry.GetProfession(MissingMemberBehavior)),
+            Context = response.Headers.GetPageContext(),
+            Date = response.Headers.Date.GetValueOrDefault(),
+            Expires = response.Content.Headers.Expires,
+            LastModified = response.Content.Headers.LastModified
+        };
     }
 }

@@ -42,13 +42,13 @@ public sealed class ItemStatsRequest : IHttpRequest<IReplicaSet<ItemStat>>
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value = json.RootElement.GetSet(entry => entry.GetItemStat(MissingMemberBehavior));
-        return new ReplicaSet<ItemStat>(
-            response.Headers.Date.GetValueOrDefault(),
-            value,
-            response.Headers.GetCollectionContext(),
-            response.Content.Headers.Expires,
-            response.Content.Headers.LastModified
-        );
+        return new ReplicaSet<ItemStat>
+        {
+            Values = json.RootElement.GetSet(entry => entry.GetItemStat(MissingMemberBehavior)),
+            Context = response.Headers.GetCollectionContext(),
+            Date = response.Headers.Date.GetValueOrDefault(),
+            Expires = response.Content.Headers.Expires,
+            LastModified = response.Content.Headers.LastModified
+        };
     }
 }

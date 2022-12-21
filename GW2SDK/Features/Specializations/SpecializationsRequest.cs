@@ -42,15 +42,15 @@ public sealed class SpecializationsRequest : IHttpRequest<IReplicaSet<Specializa
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value = json.RootElement.GetSet(
-            entry => entry.GetSpecialization(MissingMemberBehavior)
-        );
-        return new ReplicaSet<Specialization>(
-            response.Headers.Date.GetValueOrDefault(),
-            value,
-            response.Headers.GetCollectionContext(),
-            response.Content.Headers.Expires,
-            response.Content.Headers.LastModified
-        );
+        return new ReplicaSet<Specialization>
+        {
+            Values = json.RootElement.GetSet(
+                entry => entry.GetSpecialization(MissingMemberBehavior)
+            ),
+            Context = response.Headers.GetCollectionContext(),
+            Date = response.Headers.Date.GetValueOrDefault(),
+            Expires = response.Content.Headers.Expires,
+            LastModified = response.Content.Headers.LastModified
+        };
     }
 }

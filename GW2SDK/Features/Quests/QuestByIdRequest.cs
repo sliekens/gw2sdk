@@ -48,12 +48,12 @@ public sealed class QuestByIdRequest : IHttpRequest<IReplica<Quest>>
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value = json.RootElement.GetQuest(MissingMemberBehavior);
-        return new Replica<Quest>(
-            response.Headers.Date.GetValueOrDefault(),
-            value,
-            response.Content.Headers.Expires,
-            response.Content.Headers.LastModified
-        );
+        return new Replica<Quest>
+        {
+            Value = json.RootElement.GetQuest(MissingMemberBehavior),
+            Date = response.Headers.Date.GetValueOrDefault(),
+            Expires = response.Content.Headers.Expires,
+            LastModified = response.Content.Headers.LastModified
+        };
     }
 }

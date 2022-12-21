@@ -37,12 +37,12 @@ public sealed class DeliveryRequest : IHttpRequest<IReplica<DeliveryBox>>
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value = json.RootElement.GetDeliveryBox(MissingMemberBehavior);
-        return new Replica<DeliveryBox>(
-            response.Headers.Date.GetValueOrDefault(),
-            value,
-            response.Content.Headers.Expires,
-            response.Content.Headers.LastModified
-        );
+        return new Replica<DeliveryBox>
+        {
+            Value = json.RootElement.GetDeliveryBox(MissingMemberBehavior),
+            Date = response.Headers.Date.GetValueOrDefault(),
+            Expires = response.Content.Headers.Expires,
+            LastModified = response.Content.Headers.LastModified
+        };
     }
 }

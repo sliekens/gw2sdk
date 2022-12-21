@@ -51,12 +51,12 @@ public sealed class SpecializationByIdRequest : IHttpRequest<IReplica<Specializa
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value = json.RootElement.GetSpecialization(MissingMemberBehavior);
-        return new Replica<Specialization>(
-            response.Headers.Date.GetValueOrDefault(),
-            value,
-            response.Content.Headers.Expires,
-            response.Content.Headers.LastModified
-        );
+        return new Replica<Specialization>
+        {
+            Value = json.RootElement.GetSpecialization(MissingMemberBehavior),
+            Date = response.Headers.Date.GetValueOrDefault(),
+            Expires = response.Content.Headers.Expires,
+            LastModified = response.Content.Headers.LastModified
+        };
     }
 }

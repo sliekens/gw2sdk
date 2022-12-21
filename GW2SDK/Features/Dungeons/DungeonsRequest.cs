@@ -39,13 +39,13 @@ public sealed class DungeonsRequest : IHttpRequest<IReplicaSet<Dungeon>>
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value = json.RootElement.GetSet(entry => entry.GetDungeon(MissingMemberBehavior));
-        return new ReplicaSet<Dungeon>(
-            response.Headers.Date.GetValueOrDefault(),
-            value,
-            response.Headers.GetCollectionContext(),
-            response.Content.Headers.Expires,
-            response.Content.Headers.LastModified
-        );
+        return new ReplicaSet<Dungeon>
+        {
+            Values = json.RootElement.GetSet(entry => entry.GetDungeon(MissingMemberBehavior)),
+            Context = response.Headers.GetCollectionContext(),
+            Date = response.Headers.Date.GetValueOrDefault(),
+            Expires = response.Content.Headers.Expires,
+            LastModified = response.Content.Headers.LastModified
+        };
     }
 }

@@ -51,12 +51,12 @@ public sealed class ItemStatByIdRequest : IHttpRequest<IReplica<ItemStat>>
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value = json.RootElement.GetItemStat(MissingMemberBehavior);
-        return new Replica<ItemStat>(
-            response.Headers.Date.GetValueOrDefault(),
-            value,
-            response.Content.Headers.Expires,
-            response.Content.Headers.LastModified
-        );
+        return new Replica<ItemStat>
+        {
+            Value = json.RootElement.GetItemStat(MissingMemberBehavior),
+            Date = response.Headers.Date.GetValueOrDefault(),
+            Expires = response.Content.Headers.Expires,
+            LastModified = response.Content.Headers.LastModified
+        };
     }
 }

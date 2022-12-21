@@ -57,13 +57,14 @@ public sealed class AchievementsByPageRequest : IHttpRequest<IReplicaPage<Achiev
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value = json.RootElement.GetSet(entry => entry.GetAchievement(MissingMemberBehavior));
-        return new ReplicaPage<Achievement>(
-            response.Headers.Date.GetValueOrDefault(),
-            value,
-            response.Headers.GetPageContext(),
-            response.Content.Headers.Expires,
-            response.Content.Headers.LastModified
-        );
+        return new ReplicaPage<Achievement>
+        {
+            Values =
+                json.RootElement.GetSet(entry => entry.GetAchievement(MissingMemberBehavior)),
+            Context = response.Headers.GetPageContext(),
+            Date = response.Headers.Date.GetValueOrDefault(),
+            Expires = response.Content.Headers.Expires,
+            LastModified = response.Content.Headers.LastModified
+        };
     }
 }

@@ -48,12 +48,12 @@ public sealed class OrderBookByIdRequest : IHttpRequest<IReplica<OrderBook>>
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value = json.RootElement.GetOrderBook(MissingMemberBehavior);
-        return new Replica<OrderBook>(
-            response.Headers.Date.GetValueOrDefault(),
-            value,
-            response.Content.Headers.Expires,
-            response.Content.Headers.LastModified
-        );
+        return new Replica<OrderBook>
+        {
+            Value = json.RootElement.GetOrderBook(MissingMemberBehavior),
+            Date = response.Headers.Date.GetValueOrDefault(),
+            Expires = response.Content.Headers.Expires,
+            LastModified = response.Content.Headers.LastModified
+        };
     }
 }

@@ -51,12 +51,12 @@ public sealed class ContinentByIdRequest : IHttpRequest<IReplica<Continent>>
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value = json.RootElement.GetContinent(MissingMemberBehavior);
-        return new Replica<Continent>(
-            response.Headers.Date.GetValueOrDefault(),
-            value,
-            response.Content.Headers.Expires,
-            response.Content.Headers.LastModified
-        );
+        return new Replica<Continent>
+        {
+            Value = json.RootElement.GetContinent(MissingMemberBehavior),
+            Date = response.Headers.Date.GetValueOrDefault(),
+            Expires = response.Content.Headers.Expires,
+            LastModified = response.Content.Headers.LastModified
+        };
     }
 }

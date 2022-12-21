@@ -31,9 +31,16 @@ public sealed class AssetCdnBuildRequest : IHttpRequest<IReplica<Build>>
         }
 
         var text = latest64.Substring(0, latest64.IndexOf(' '));
-        return new Replica<Build>(
-            DateTimeOffset.UtcNow,
-            new Build { Id = int.Parse(text, NumberStyles.None, NumberFormatInfo.InvariantInfo) }
-        );
+        var value = new Build
+        {
+            Id = int.Parse(text, NumberStyles.None, NumberFormatInfo.InvariantInfo)
+        };
+        return new Replica<Build>
+        {
+            Value = value,
+            Date = DateTimeOffset.UtcNow,
+            Expires = null,
+            LastModified = null
+        };
     }
 }

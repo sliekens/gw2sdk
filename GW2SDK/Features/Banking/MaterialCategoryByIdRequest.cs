@@ -51,12 +51,12 @@ public sealed class MaterialCategoryByIdRequest : IHttpRequest<IReplica<Material
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value = json.RootElement.GetMaterialCategory(MissingMemberBehavior);
-        return new Replica<MaterialCategory>(
-            response.Headers.Date.GetValueOrDefault(),
-            value,
-            response.Content.Headers.Expires,
-            response.Content.Headers.LastModified
-        );
+        return new Replica<MaterialCategory>
+        {
+            Value = json.RootElement.GetMaterialCategory(MissingMemberBehavior),
+            Date = response.Headers.Date.GetValueOrDefault(),
+            Expires = response.Content.Headers.Expires,
+            LastModified = response.Content.Headers.LastModified
+        };
     }
 }

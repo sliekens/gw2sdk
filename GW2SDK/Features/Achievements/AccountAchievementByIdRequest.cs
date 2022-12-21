@@ -49,12 +49,12 @@ public sealed class AccountAchievementByIdRequest : IHttpRequest<IReplica<Accoun
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value = json.RootElement.GetAccountAchievement(MissingMemberBehavior);
-        return new Replica<AccountAchievement>(
-            response.Headers.Date.GetValueOrDefault(),
-            value,
-            response.Content.Headers.Expires,
-            response.Content.Headers.LastModified
-        );
+        return new Replica<AccountAchievement>
+        {
+            Value = json.RootElement.GetAccountAchievement(MissingMemberBehavior),
+            Date = response.Headers.Date.GetValueOrDefault(),
+            Expires = response.Content.Headers.Expires,
+            LastModified = response.Content.Headers.LastModified
+        };
     }
 }

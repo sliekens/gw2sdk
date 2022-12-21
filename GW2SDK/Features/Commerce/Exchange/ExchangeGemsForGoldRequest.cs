@@ -46,12 +46,12 @@ public sealed class ExchangeGemsForGoldRequest : IHttpRequest<IReplica<GemsForGo
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value = json.RootElement.GetGemsForGoldExchange(MissingMemberBehavior);
-        return new Replica<GemsForGoldExchange>(
-            response.Headers.Date.GetValueOrDefault(),
-            value,
-            response.Content.Headers.Expires,
-            response.Content.Headers.LastModified
-        );
+        return new Replica<GemsForGoldExchange>
+        {
+            Value = json.RootElement.GetGemsForGoldExchange(MissingMemberBehavior),
+            Date = response.Headers.Date.GetValueOrDefault(),
+            Expires = response.Content.Headers.Expires,
+            LastModified = response.Content.Headers.LastModified
+        };
     }
 }

@@ -6,30 +6,15 @@ namespace GuildWars2;
 
 internal sealed class ReplicaSet<T> : IReplicaSet<T>
 {
-    public ReplicaSet(
-        DateTimeOffset date,
-        IReadOnlyCollection<T> values,
-        ICollectionContext context,
-        DateTimeOffset? expires = null,
-        DateTimeOffset? lastModified = null
-    )
-    {
-        Date = date;
-        Values = values;
-        Context = context;
-        Expires = expires;
-        LastModified = lastModified;
-    }
+    public required IReadOnlyCollection<T> Values { get; init; }
 
-    public DateTimeOffset Date { get; }
+    public required ICollectionContext Context { get; init; }
 
-    public DateTimeOffset? Expires { get; }
+    public required DateTimeOffset Date { get; init; }
 
-    public DateTimeOffset? LastModified { get; }
+    public required DateTimeOffset? Expires { get; init; }
 
-    public IReadOnlyCollection<T> Values { get; }
-
-    public ICollectionContext Context { get; }
+    public required DateTimeOffset? LastModified { get; init; }
 
     public IEnumerator<T> GetEnumerator() => Values.GetEnumerator();
 

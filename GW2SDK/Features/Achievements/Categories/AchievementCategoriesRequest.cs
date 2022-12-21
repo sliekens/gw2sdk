@@ -43,15 +43,15 @@ public sealed class AchievementCategoriesRequest : IHttpRequest<IReplicaSet<Achi
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value = json.RootElement.GetSet(
-            entry => entry.GetAchievementCategory(MissingMemberBehavior)
-        );
-        return new ReplicaSet<AchievementCategory>(
-            response.Headers.Date.GetValueOrDefault(),
-            value,
-            response.Headers.GetCollectionContext(),
-            response.Content.Headers.Expires,
-            response.Content.Headers.LastModified
-        );
+        return new ReplicaSet<AchievementCategory>
+        {
+            Values = json.RootElement.GetSet(
+                entry => entry.GetAchievementCategory(MissingMemberBehavior)
+            ),
+            Context = response.Headers.GetCollectionContext(),
+            Date = response.Headers.Date.GetValueOrDefault(),
+            Expires = response.Content.Headers.Expires,
+            LastModified = response.Content.Headers.LastModified
+        };
     }
 }

@@ -48,13 +48,13 @@ public sealed class DungeonsByPageRequest : IHttpRequest<IReplicaPage<Dungeon>>
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value = json.RootElement.GetSet(entry => entry.GetDungeon(MissingMemberBehavior));
-        return new ReplicaPage<Dungeon>(
-            response.Headers.Date.GetValueOrDefault(),
-            value,
-            response.Headers.GetPageContext(),
-            response.Content.Headers.Expires,
-            response.Content.Headers.LastModified
-        );
+        return new ReplicaPage<Dungeon>
+        {
+            Values = json.RootElement.GetSet(entry => entry.GetDungeon(MissingMemberBehavior)),
+            Context = response.Headers.GetPageContext(),
+            Date = response.Headers.Date.GetValueOrDefault(),
+            Expires = response.Content.Headers.Expires,
+            LastModified = response.Content.Headers.LastModified
+        };
     }
 }

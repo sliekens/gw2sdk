@@ -51,11 +51,12 @@ public sealed class CharacterByNameRequest : IHttpRequest<IReplica<Character>>
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        return new Replica<Character>(
-            response.Headers.Date.GetValueOrDefault(),
-            json.RootElement.GetCharacter(MissingMemberBehavior),
-            response.Content.Headers.Expires,
-            response.Content.Headers.LastModified
-        );
+        return new Replica<Character>
+        {
+            Value = json.RootElement.GetCharacter(MissingMemberBehavior),
+            Date = response.Headers.Date.GetValueOrDefault(),
+            Expires = response.Content.Headers.Expires,
+            LastModified = response.Content.Headers.LastModified
+        };
     }
 }

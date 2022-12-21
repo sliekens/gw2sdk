@@ -57,13 +57,13 @@ public sealed class CurrenciesByPageRequest : IHttpRequest<IReplicaPage<Currency
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value = json.RootElement.GetSet(entry => entry.GetCurrency(MissingMemberBehavior));
-        return new ReplicaPage<Currency>(
-            response.Headers.Date.GetValueOrDefault(),
-            value,
-            response.Headers.GetPageContext(),
-            response.Content.Headers.Expires,
-            response.Content.Headers.LastModified
-        );
+        return new ReplicaPage<Currency>
+        {
+            Values = json.RootElement.GetSet(entry => entry.GetCurrency(MissingMemberBehavior)),
+            Context = response.Headers.GetPageContext(),
+            Date = response.Headers.Date.GetValueOrDefault(),
+            Expires = response.Content.Headers.Expires,
+            LastModified = response.Content.Headers.LastModified
+        };
     }
 }

@@ -4,24 +4,11 @@ namespace GuildWars2;
 
 internal sealed class Replica<T> : IReplica<T>
 {
-    public Replica(
-        DateTimeOffset date,
-        T value,
-        DateTimeOffset? expires = null,
-        DateTimeOffset? lastModified = null
-    )
-    {
-        Date = date;
-        Value = value;
-        Expires = expires;
-        LastModified = lastModified;
-    }
+    public required T Value { get; init; }
 
-    public DateTimeOffset Date { get; }
+    public required DateTimeOffset Date { get; init; }
 
-    public DateTimeOffset? Expires { get; }
+    public required DateTimeOffset? Expires { get; init; }
 
-    public DateTimeOffset? LastModified { get; }
-
-    public T Value { get; }
+    public required DateTimeOffset? LastModified { get; init; }
 }

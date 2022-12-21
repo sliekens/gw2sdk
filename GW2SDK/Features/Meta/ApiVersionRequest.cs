@@ -42,12 +42,12 @@ public sealed class ApiVersionRequest : IHttpRequest<IReplica<ApiVersion>>
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value = json.RootElement.GetApiVersion(MissingMemberBehavior);
-        return new Replica<ApiVersion>(
-            response.Headers.Date.GetValueOrDefault(),
-            value,
-            response.Content.Headers.Expires,
-            response.Content.Headers.LastModified
-        );
+        return new Replica<ApiVersion>
+        {
+            Value = json.RootElement.GetApiVersion(MissingMemberBehavior),
+            Date = response.Headers.Date.GetValueOrDefault(),
+            Expires = response.Content.Headers.Expires,
+            LastModified = response.Content.Headers.LastModified
+        };
     }
 }

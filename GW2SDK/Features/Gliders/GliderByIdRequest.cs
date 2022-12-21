@@ -48,12 +48,12 @@ public sealed class GliderByIdRequest : IHttpRequest<IReplica<Glider>>
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value = json.RootElement.GetGlider(MissingMemberBehavior);
-        return new Replica<Glider>(
-            response.Headers.Date.GetValueOrDefault(),
-            value,
-            response.Content.Headers.Expires,
-            response.Content.Headers.LastModified
-        );
+        return new Replica<Glider>
+        {
+            Value = json.RootElement.GetGlider(MissingMemberBehavior),
+            Date = response.Headers.Date.GetValueOrDefault(),
+            Expires = response.Content.Headers.Expires,
+            LastModified = response.Content.Headers.LastModified
+        };
     }
 }

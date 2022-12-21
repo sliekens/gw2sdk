@@ -45,12 +45,12 @@ public sealed class EmoteByIdRequest : IHttpRequest<IReplica<Emote>>
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value = json.RootElement.GetEmote(MissingMemberBehavior);
-        return new Replica<Emote>(
-            response.Headers.Date.GetValueOrDefault(),
-            value,
-            response.Content.Headers.Expires,
-            response.Content.Headers.LastModified
-        );
+        return new Replica<Emote>
+        {
+            Value = json.RootElement.GetEmote(MissingMemberBehavior),
+            Date = response.Headers.Date.GetValueOrDefault(),
+            Expires = response.Content.Headers.Expires,
+            LastModified = response.Content.Headers.LastModified
+        };
     }
 }

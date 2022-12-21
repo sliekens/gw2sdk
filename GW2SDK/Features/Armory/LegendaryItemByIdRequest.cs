@@ -48,12 +48,12 @@ public sealed class LegendaryItemByIdRequest : IHttpRequest<IReplica<LegendaryIt
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
 
-        var value = json.RootElement.GetLegendaryItem(MissingMemberBehavior);
-        return new Replica<LegendaryItem>(
-            response.Headers.Date.GetValueOrDefault(),
-            value,
-            response.Content.Headers.Expires,
-            response.Content.Headers.LastModified
-        );
+        return new Replica<LegendaryItem>
+        {
+            Value = json.RootElement.GetLegendaryItem(MissingMemberBehavior),
+            Date = response.Headers.Date.GetValueOrDefault(),
+            Expires = response.Content.Headers.Expires,
+            LastModified = response.Content.Headers.LastModified
+        };
     }
 }
