@@ -10,7 +10,7 @@ using static System.Net.Http.HttpMethod;
 namespace GuildWars2.Colors;
 
 [PublicAPI]
-public sealed class ColorsByIdsRequest : IHttpRequest<IReplicaSet<Dye>>
+public sealed class ColorsByIdsRequest : IHttpRequest<Replica<HashSet<Dye>>>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/colors")
     {
@@ -29,7 +29,7 @@ public sealed class ColorsByIdsRequest : IHttpRequest<IReplicaSet<Dye>>
 
     public MissingMemberBehavior MissingMemberBehavior { get; init; }
 
-    public async Task<IReplicaSet<Dye>> SendAsync(
+    public async Task<Replica<HashSet<Dye>>> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
     )
@@ -50,14 +50,13 @@ public sealed class ColorsByIdsRequest : IHttpRequest<IReplicaSet<Dye>>
             .ConfigureAwait(false);
 
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
-
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
-
-        return new ReplicaSet<Dye>
+        return new Replica<HashSet<Dye>>
         {
-            Values = json.RootElement.GetSet(entry => entry.GetDye(MissingMemberBehavior)),
-            Context = response.Headers.GetCollectionContext(),
+            Value = json.RootElement.GetSet(entry => entry.GetDye(MissingMemberBehavior)),
+            ResultContext = response.Headers.GetResultContext(),
+            PageContext = response.Headers.GetPageContext(),
             Date = response.Headers.Date.GetValueOrDefault(),
             Expires = response.Content.Headers.Expires,
             LastModified = response.Content.Headers.LastModified

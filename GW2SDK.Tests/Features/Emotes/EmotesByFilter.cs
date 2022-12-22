@@ -22,10 +22,10 @@ public class EmotesByFilter
 
         var actual = await sut.Emotes.GetEmotesByIds(ids);
 
-        Assert.Equal(ids.Count, actual.Count);
-        Assert.Equal(ids.Count, actual.Context.ResultCount);
+        Assert.Equal(ids.Count, actual.Value.Count);
+        Assert.Equal(ids.Count, actual.ResultContext.ResultCount);
         Assert.All(
-            actual,
+            actual.Value,
             entry =>
             {
                 entry.Id_is_not_empty();

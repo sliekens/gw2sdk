@@ -9,7 +9,7 @@ using JetBrains.Annotations;
 namespace GuildWars2.Raids;
 
 [PublicAPI]
-public sealed class RaidsByIdsRequest : IHttpRequest<IReplicaSet<Raid>>
+public sealed class RaidsByIdsRequest : IHttpRequest<Replica<HashSet<Raid>>>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(HttpMethod.Get, "v2/raids") { AcceptEncoding = "gzip" };
@@ -24,7 +24,7 @@ public sealed class RaidsByIdsRequest : IHttpRequest<IReplicaSet<Raid>>
 
     public MissingMemberBehavior MissingMemberBehavior { get; init; }
 
-    public async Task<IReplicaSet<Raid>> SendAsync(
+    public async Task<Replica<HashSet<Raid>>> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
     )
@@ -44,14 +44,13 @@ public sealed class RaidsByIdsRequest : IHttpRequest<IReplicaSet<Raid>>
             .ConfigureAwait(false);
 
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
-
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
-
-        return new ReplicaSet<Raid>
+        return new Replica<HashSet<Raid>>
         {
-            Values = json.RootElement.GetSet(entry => entry.GetRaid(MissingMemberBehavior)),
-            Context = response.Headers.GetCollectionContext(),
+            Value = json.RootElement.GetSet(entry => entry.GetRaid(MissingMemberBehavior)),
+            ResultContext = response.Headers.GetResultContext(),
+            PageContext = response.Headers.GetPageContext(),
             Date = response.Headers.Date.GetValueOrDefault(),
             Expires = response.Content.Headers.Expires,
             LastModified = response.Content.Headers.LastModified

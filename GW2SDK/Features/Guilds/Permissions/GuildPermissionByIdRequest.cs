@@ -7,7 +7,7 @@ using JetBrains.Annotations;
 namespace GuildWars2.Guilds.Permissions;
 
 [PublicAPI]
-public sealed class GuildPermissionByIdRequest : IHttpRequest<IReplica<GuildPermissionSummary>>
+public sealed class GuildPermissionByIdRequest : IHttpRequest<Replica<GuildPermissionSummary>>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(HttpMethod.Get, "v2/guild/permissions") { AcceptEncoding = "gzip" };
@@ -23,7 +23,7 @@ public sealed class GuildPermissionByIdRequest : IHttpRequest<IReplica<GuildPerm
 
     public MissingMemberBehavior MissingMemberBehavior { get; init; }
 
-    public async Task<IReplica<GuildPermissionSummary>> SendAsync(
+    public async Task<Replica<GuildPermissionSummary>> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
     )
@@ -44,13 +44,13 @@ public sealed class GuildPermissionByIdRequest : IHttpRequest<IReplica<GuildPerm
             .ConfigureAwait(false);
 
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
-
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
-
         return new Replica<GuildPermissionSummary>
         {
             Value = json.RootElement.GetGuildPermissionSummary(MissingMemberBehavior),
+            ResultContext = response.Headers.GetResultContext(),
+            PageContext = response.Headers.GetPageContext(),
             Date = response.Headers.Date.GetValueOrDefault(),
             Expires = response.Content.Headers.Expires,
             LastModified = response.Content.Headers.LastModified

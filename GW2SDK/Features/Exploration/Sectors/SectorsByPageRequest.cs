@@ -1,4 +1,5 @@
-﻿using System.Globalization;
+﻿using System.Collections.Generic;
+using System.Globalization;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
@@ -10,7 +11,7 @@ using static System.Net.Http.HttpMethod;
 namespace GuildWars2.Exploration.Sectors;
 
 [PublicAPI]
-public sealed class SectorsByPageRequest : IHttpRequest<IReplicaPage<Sector>>
+public sealed class SectorsByPageRequest : IHttpRequest<Replica<HashSet<Sector>>>
 {
     private static readonly HttpRequestMessageTemplate Template = new(
         Get,
@@ -48,7 +49,7 @@ public sealed class SectorsByPageRequest : IHttpRequest<IReplicaPage<Sector>>
 
     public MissingMemberBehavior MissingMemberBehavior { get; init; }
 
-    public async Task<IReplicaPage<Sector>> SendAsync(
+    public async Task<Replica<HashSet<Sector>>> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
     )
@@ -77,14 +78,13 @@ public sealed class SectorsByPageRequest : IHttpRequest<IReplicaPage<Sector>>
             .ConfigureAwait(false);
 
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
-
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
-
-        return new ReplicaPage<Sector>
+        return new Replica<HashSet<Sector>>
         {
-            Values = json.RootElement.GetSet(entry => entry.GetSector(MissingMemberBehavior)),
-            Context = response.Headers.GetPageContext(),
+            Value = json.RootElement.GetSet(entry => entry.GetSector(MissingMemberBehavior)),
+            ResultContext = response.Headers.GetResultContext(),
+            PageContext = response.Headers.GetPageContext(),
             Date = response.Headers.Date.GetValueOrDefault(),
             Expires = response.Content.Headers.Expires,
             LastModified = response.Content.Headers.LastModified

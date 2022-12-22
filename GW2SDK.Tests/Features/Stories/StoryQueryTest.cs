@@ -48,10 +48,10 @@ public class StoryQueryTest
 
         var actual = await sut.Stories.GetBackstoryQuestions();
 
-        Assert.Equal(actual.Context.ResultTotal, actual.Count);
+        Assert.Equal(actual.ResultContext.ResultTotal, actual.Value.Count);
 
         Assert.All(
-            actual,
+            actual.Value,
             question =>
             {
                 BackstoryQuestionFact.Id_is_positive(question);
@@ -70,10 +70,10 @@ public class StoryQueryTest
 
         var actual = await sut.Stories.GetBackstoryAnswers();
 
-        Assert.Equal(actual.Context.ResultTotal, actual.Count);
+        Assert.Equal(actual.ResultContext.ResultTotal, actual.Value.Count);
 
         Assert.All(
-            actual,
+            actual.Value,
             answer =>
             {
                 BackstoryAnswerFact.Id_is_not_empty(answer);
@@ -93,7 +93,7 @@ public class StoryQueryTest
 
         var actual = await sut.Stories.GetBackstoryQuestionsIndex();
 
-        Assert.Equal(actual.Context.ResultTotal, actual.Count);
+        Assert.Equal(actual.ResultContext.ResultTotal, actual.Value.Count);
     }
 
     [Fact]
@@ -104,7 +104,7 @@ public class StoryQueryTest
 
         var actual = await sut.Stories.GetBackstoryAnswersIndex();
 
-        Assert.Equal(actual.Context.ResultTotal, actual.Count);
+        Assert.Equal(actual.ResultContext.ResultTotal, actual.Value.Count);
     }
 
     [Fact]
@@ -149,7 +149,7 @@ public class StoryQueryTest
         var actual = await sut.Stories.GetBackstoryQuestionsByIds(ids);
 
         Assert.Collection(
-            actual,
+            actual.Value,
             first => Assert.Contains(first.Id, ids),
             second => Assert.Contains(second.Id, ids),
             third => Assert.Contains(third.Id, ids)
@@ -172,7 +172,7 @@ public class StoryQueryTest
         var actual = await sut.Stories.GetBackstoryAnswersByIds(ids);
 
         Assert.Collection(
-            actual,
+            actual.Value,
             first => Assert.Contains(first.Id, ids),
             second => Assert.Contains(second.Id, ids),
             third => Assert.Contains(third.Id, ids)
@@ -187,8 +187,8 @@ public class StoryQueryTest
 
         var actual = await sut.Stories.GetBackstoryQuestionsByPage(0, 3);
 
-        Assert.Equal(3, actual.Count);
-        Assert.Equal(3, actual.Context.PageSize);
+        Assert.Equal(3, actual.Value.Count);
+        Assert.Equal(3, actual.PageContext.PageSize);
     }
 
     [Fact]
@@ -199,7 +199,7 @@ public class StoryQueryTest
 
         var actual = await sut.Stories.GetBackstoryAnswersByPage(0, 3);
 
-        Assert.Equal(3, actual.Count);
-        Assert.Equal(3, actual.Context.PageSize);
+        Assert.Equal(3, actual.Value.Count);
+        Assert.Equal(3, actual.PageContext.PageSize);
     }
 }

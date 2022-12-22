@@ -1,4 +1,5 @@
-﻿using System.Net.Http;
+﻿using System.Collections.Generic;
+using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 using GuildWars2.Http;
@@ -9,7 +10,7 @@ using static System.Net.Http.HttpMethod;
 namespace GuildWars2.Currencies;
 
 [PublicAPI]
-public sealed class CurrenciesByPageRequest : IHttpRequest<IReplicaPage<Currency>>
+public sealed class CurrenciesByPageRequest : IHttpRequest<Replica<HashSet<Currency>>>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/currencies")
     {
@@ -29,7 +30,7 @@ public sealed class CurrenciesByPageRequest : IHttpRequest<IReplicaPage<Currency
 
     public MissingMemberBehavior MissingMemberBehavior { get; init; }
 
-    public async Task<IReplicaPage<Currency>> SendAsync(
+    public async Task<Replica<HashSet<Currency>>> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
     )
@@ -53,14 +54,13 @@ public sealed class CurrenciesByPageRequest : IHttpRequest<IReplicaPage<Currency
             .ConfigureAwait(false);
 
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
-
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
-
-        return new ReplicaPage<Currency>
+        return new Replica<HashSet<Currency>>
         {
-            Values = json.RootElement.GetSet(entry => entry.GetCurrency(MissingMemberBehavior)),
-            Context = response.Headers.GetPageContext(),
+            Value = json.RootElement.GetSet(entry => entry.GetCurrency(MissingMemberBehavior)),
+            ResultContext = response.Headers.GetResultContext(),
+            PageContext = response.Headers.GetPageContext(),
             Date = response.Headers.Date.GetValueOrDefault(),
             Expires = response.Content.Headers.Expires,
             LastModified = response.Content.Headers.LastModified

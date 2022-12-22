@@ -8,7 +8,7 @@ using static System.Net.Http.HttpMethod;
 namespace GuildWars2.Traits;
 
 [PublicAPI]
-public sealed class TraitByIdRequest : IHttpRequest<IReplica<Trait>>
+public sealed class TraitByIdRequest : IHttpRequest<Replica<Trait>>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/traits")
     {
@@ -26,7 +26,7 @@ public sealed class TraitByIdRequest : IHttpRequest<IReplica<Trait>>
 
     public MissingMemberBehavior MissingMemberBehavior { get; init; }
 
-    public async Task<IReplica<Trait>> SendAsync(
+    public async Task<Replica<Trait>> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
     )
@@ -47,13 +47,13 @@ public sealed class TraitByIdRequest : IHttpRequest<IReplica<Trait>>
             .ConfigureAwait(false);
 
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
-
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
-
         return new Replica<Trait>
         {
             Value = json.RootElement.GetTrait(MissingMemberBehavior),
+            ResultContext = response.Headers.GetResultContext(),
+            PageContext = response.Headers.GetPageContext(),
             Date = response.Headers.Date.GetValueOrDefault(),
             Expires = response.Content.Headers.Expires,
             LastModified = response.Content.Headers.LastModified

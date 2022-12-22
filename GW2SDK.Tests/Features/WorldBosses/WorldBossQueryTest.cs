@@ -36,7 +36,7 @@ public class WorldBossQueryTest
                 "the_shatterer",
                 "triple_trouble_wurm"
             },
-            referenceData
+            referenceData.Value
         );
 
         // Again this next method is not deterministic...
@@ -44,6 +44,6 @@ public class WorldBossQueryTest
 
         // The best we can do is verify that there are no unexpected bosses
         // i.e. all bosses must be present in the reference data
-        Assert.All(actual.Value, worldBossId => Assert.Contains(worldBossId, referenceData));
+        Assert.All(actual.Value, worldBossId => Assert.Contains(worldBossId, referenceData.Value));
     }
 }

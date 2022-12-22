@@ -9,7 +9,7 @@ using JetBrains.Annotations;
 namespace GuildWars2.Pvp.Seasons;
 
 [PublicAPI]
-public sealed class SeasonsByIdsRequest : IHttpRequest<IReplicaSet<Season>>
+public sealed class SeasonsByIdsRequest : IHttpRequest<Replica<HashSet<Season>>>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(HttpMethod.Get, "v2/pvp/seasons") { AcceptEncoding = "gzip" };
@@ -26,7 +26,7 @@ public sealed class SeasonsByIdsRequest : IHttpRequest<IReplicaSet<Season>>
 
     public MissingMemberBehavior MissingMemberBehavior { get; init; }
 
-    public async Task<IReplicaSet<Season>> SendAsync(
+    public async Task<Replica<HashSet<Season>>> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
     )
@@ -47,14 +47,13 @@ public sealed class SeasonsByIdsRequest : IHttpRequest<IReplicaSet<Season>>
             .ConfigureAwait(false);
 
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
-
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
-
-        return new ReplicaSet<Season>
+        return new Replica<HashSet<Season>>
         {
-            Values = json.RootElement.GetSet(entry => entry.GetSeason(MissingMemberBehavior)),
-            Context = response.Headers.GetCollectionContext(),
+            Value = json.RootElement.GetSet(entry => entry.GetSeason(MissingMemberBehavior)),
+            ResultContext = response.Headers.GetResultContext(),
+            PageContext = response.Headers.GetPageContext(),
             Date = response.Headers.Date.GetValueOrDefault(),
             Expires = response.Content.Headers.Expires,
             LastModified = response.Content.Headers.LastModified

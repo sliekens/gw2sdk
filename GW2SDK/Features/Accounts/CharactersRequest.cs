@@ -1,4 +1,5 @@
-﻿using System.Net.Http;
+﻿using System.Collections.Generic;
+using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 using GuildWars2.Http;
@@ -9,7 +10,7 @@ using static System.Net.Http.HttpMethod;
 namespace GuildWars2.Accounts;
 
 [PublicAPI]
-public sealed class CharactersRequest : IHttpRequest<IReplicaSet<Character>>
+public sealed class CharactersRequest : IHttpRequest<Replica<HashSet<Character>>>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/characters")
     {
@@ -25,7 +26,7 @@ public sealed class CharactersRequest : IHttpRequest<IReplicaSet<Character>>
 
     public MissingMemberBehavior MissingMemberBehavior { get; init; }
 
-    public async Task<IReplicaSet<Character>> SendAsync(
+    public async Task<Replica<HashSet<Character>>> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
     )
@@ -38,14 +39,13 @@ public sealed class CharactersRequest : IHttpRequest<IReplicaSet<Character>>
             .ConfigureAwait(false);
 
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
-
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
-
-        return new ReplicaSet<Character>
+        return new Replica<HashSet<Character>>
         {
-            Values = json.RootElement.GetSet(entry => entry.GetCharacter(MissingMemberBehavior)),
-            Context = response.Headers.GetCollectionContext(),
+            Value = json.RootElement.GetSet(entry => entry.GetCharacter(MissingMemberBehavior)),
+            ResultContext = response.Headers.GetResultContext(),
+            PageContext = response.Headers.GetPageContext(),
             Date = response.Headers.Date.GetValueOrDefault(),
             Expires = response.Content.Headers.Expires,
             LastModified = response.Content.Headers.LastModified

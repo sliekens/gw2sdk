@@ -1,4 +1,5 @@
-﻿using System.Net.Http;
+﻿using System.Collections.Generic;
+using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 using GuildWars2.Http;
@@ -9,7 +10,7 @@ using static System.Net.Http.HttpMethod;
 namespace GuildWars2.Quaggans;
 
 [PublicAPI]
-public sealed class QuaggansByPageRequest : IHttpRequest<IReplicaPage<Quaggan>>
+public sealed class QuaggansByPageRequest : IHttpRequest<Replica<HashSet<Quaggan>>>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/quaggans")
     {
@@ -27,7 +28,7 @@ public sealed class QuaggansByPageRequest : IHttpRequest<IReplicaPage<Quaggan>>
 
     public MissingMemberBehavior MissingMemberBehavior { get; init; }
 
-    public async Task<IReplicaPage<Quaggan>> SendAsync(
+    public async Task<Replica<HashSet<Quaggan>>> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
     )
@@ -47,14 +48,13 @@ public sealed class QuaggansByPageRequest : IHttpRequest<IReplicaPage<Quaggan>>
             .ConfigureAwait(false);
 
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
-
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
-
-        return new ReplicaPage<Quaggan>
+        return new Replica<HashSet<Quaggan>>
         {
-            Values = json.RootElement.GetSet(entry => entry.GetQuaggan(MissingMemberBehavior)),
-            Context = response.Headers.GetPageContext(),
+            Value = json.RootElement.GetSet(entry => entry.GetQuaggan(MissingMemberBehavior)),
+            ResultContext = response.Headers.GetResultContext(),
+            PageContext = response.Headers.GetPageContext(),
             Date = response.Headers.Date.GetValueOrDefault(),
             Expires = response.Content.Headers.Expires,
             LastModified = response.Content.Headers.LastModified

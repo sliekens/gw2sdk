@@ -18,7 +18,7 @@ public sealed class PetsQuery
         http.BaseAddress ??= BaseAddress.DefaultUri;
     }
 
-    public Task<IReplicaSet<Pet>> GetPets(
+    public Task<Replica<HashSet<Pet>>> GetPets(
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
@@ -32,13 +32,13 @@ public sealed class PetsQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<IReplicaSet<int>> GetPetsIndex(CancellationToken cancellationToken = default)
+    public Task<Replica<HashSet<int>>> GetPetsIndex(CancellationToken cancellationToken = default)
     {
         PetsIndexRequest request = new();
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<IReplica<Pet>> GetPetById(
+    public Task<Replica<Pet>> GetPetById(
         int petId,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -53,7 +53,7 @@ public sealed class PetsQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<IReplicaSet<Pet>> GetPetsByIds(
+    public Task<Replica<HashSet<Pet>>> GetPetsByIds(
         IReadOnlyCollection<int> petIds,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -68,7 +68,7 @@ public sealed class PetsQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<IReplicaPage<Pet>> GetPetsByPage(
+    public Task<Replica<HashSet<Pet>>> GetPetsByPage(
         int pageIndex,
         int? pageSize = default,
         Language? language = default,

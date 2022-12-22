@@ -9,7 +9,7 @@ using JetBrains.Annotations;
 namespace GuildWars2.Guilds.Search;
 
 [PublicAPI]
-public sealed class GuildsByNameRequest : IHttpRequest<IReplica<IReadOnlyCollection<string>>>
+public sealed class GuildsByNameRequest : IHttpRequest<Replica<HashSet<string>>>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(HttpMethod.Get, "v2/guild/search") { AcceptEncoding = "gzip" };
@@ -21,7 +21,7 @@ public sealed class GuildsByNameRequest : IHttpRequest<IReplica<IReadOnlyCollect
 
     public string Name { get; }
 
-    public async Task<IReplica<IReadOnlyCollection<string>>> SendAsync(
+    public async Task<Replica<HashSet<string>>> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
     )
@@ -41,13 +41,13 @@ public sealed class GuildsByNameRequest : IHttpRequest<IReplica<IReadOnlyCollect
             .ConfigureAwait(false);
 
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
-
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
-
-        return new Replica<IReadOnlyCollection<string>>
+        return new Replica<HashSet<string>>
         {
             Value = json.RootElement.GetSet(entry => entry.GetStringRequired()),
+            ResultContext = response.Headers.GetResultContext(),
+            PageContext = response.Headers.GetPageContext(),
             Date = response.Headers.Date.GetValueOrDefault(),
             Expires = response.Content.Headers.Expires,
             LastModified = response.Content.Headers.LastModified

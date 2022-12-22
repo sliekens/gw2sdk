@@ -13,4 +13,4 @@ public sealed record PageContext(
     Hyperlink Last,
     Hyperlink Previous,
     Hyperlink Next
-) : IPageContext;
+);

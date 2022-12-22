@@ -1,4 +1,5 @@
-﻿using System.Net.Http;
+﻿using System.Collections.Generic;
+using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 using GuildWars2.Http;
@@ -9,7 +10,7 @@ using static System.Net.Http.HttpMethod;
 namespace GuildWars2.Professions;
 
 [PublicAPI]
-public sealed class ProfessionsRequest : IHttpRequest<IReplicaSet<Profession>>
+public sealed class ProfessionsRequest : IHttpRequest<Replica<HashSet<Profession>>>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/professions")
     {
@@ -25,7 +26,7 @@ public sealed class ProfessionsRequest : IHttpRequest<IReplicaSet<Profession>>
 
     public MissingMemberBehavior MissingMemberBehavior { get; init; }
 
-    public async Task<IReplicaSet<Profession>> SendAsync(
+    public async Task<Replica<HashSet<Profession>>> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
     )
@@ -38,14 +39,14 @@ public sealed class ProfessionsRequest : IHttpRequest<IReplicaSet<Profession>>
             .ConfigureAwait(false);
 
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
-
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
-
-        return new ReplicaSet<Profession>
+        return new Replica<HashSet<Profession>>
         {
-            Values = json.RootElement.GetSet(entry => entry.GetProfession(MissingMemberBehavior)),
-            Context = response.Headers.GetCollectionContext(),
+            Value =
+                json.RootElement.GetSet(entry => entry.GetProfession(MissingMemberBehavior)),
+            ResultContext = response.Headers.GetResultContext(),
+            PageContext = response.Headers.GetPageContext(),
             Date = response.Headers.Date.GetValueOrDefault(),
             Expires = response.Content.Headers.Expires,
             LastModified = response.Content.Headers.LastModified

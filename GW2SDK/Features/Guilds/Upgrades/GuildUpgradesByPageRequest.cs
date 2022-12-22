@@ -1,4 +1,5 @@
-﻿using System.Net.Http;
+﻿using System.Collections.Generic;
+using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 using GuildWars2.Http;
@@ -8,7 +9,7 @@ using JetBrains.Annotations;
 namespace GuildWars2.Guilds.Upgrades;
 
 [PublicAPI]
-public sealed class GuildUpgradesByPageRequest : IHttpRequest<IReplicaPage<GuildUpgrade>>
+public sealed class GuildUpgradesByPageRequest : IHttpRequest<Replica<HashSet<GuildUpgrade>>>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(HttpMethod.Get, "v2/guild/upgrades") { AcceptEncoding = "gzip" };
@@ -26,7 +27,7 @@ public sealed class GuildUpgradesByPageRequest : IHttpRequest<IReplicaPage<Guild
 
     public MissingMemberBehavior MissingMemberBehavior { get; init; }
 
-    public async Task<IReplicaPage<GuildUpgrade>> SendAsync(
+    public async Task<Replica<HashSet<GuildUpgrade>>> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
     )
@@ -50,14 +51,14 @@ public sealed class GuildUpgradesByPageRequest : IHttpRequest<IReplicaPage<Guild
             .ConfigureAwait(false);
 
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
-
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
-
-        return new ReplicaPage<GuildUpgrade>
+        return new Replica<HashSet<GuildUpgrade>>
         {
-            Values = json.RootElement.GetSet(entry => entry.GetGuildUpgrade(MissingMemberBehavior)),
-            Context = response.Headers.GetPageContext(),
+            Value =
+                json.RootElement.GetSet(entry => entry.GetGuildUpgrade(MissingMemberBehavior)),
+            ResultContext = response.Headers.GetResultContext(),
+            PageContext = response.Headers.GetPageContext(),
             Date = response.Headers.Date.GetValueOrDefault(),
             Expires = response.Content.Headers.Expires,
             LastModified = response.Content.Headers.LastModified

@@ -18,7 +18,7 @@ public sealed class QuaggansQuery
         http.BaseAddress ??= BaseAddress.DefaultUri;
     }
 
-    public Task<IReplicaSet<Quaggan>> GetQuaggans(
+    public Task<Replica<HashSet<Quaggan>>> GetQuaggans(
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
@@ -27,13 +27,15 @@ public sealed class QuaggansQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<IReplicaSet<string>> GetQuaggansIndex(CancellationToken cancellationToken = default)
+    public Task<Replica<HashSet<string>>> GetQuaggansIndex(
+        CancellationToken cancellationToken = default
+    )
     {
         QuaggansIndexRequest request = new();
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<IReplica<Quaggan>> GetQuagganById(
+    public Task<Replica<Quaggan>> GetQuagganById(
         string quagganId,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
@@ -46,7 +48,7 @@ public sealed class QuaggansQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<IReplicaSet<Quaggan>> GetQuaggansByIds(
+    public Task<Replica<HashSet<Quaggan>>> GetQuaggansByIds(
         IReadOnlyCollection<string> quagganIds,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
@@ -57,7 +59,7 @@ public sealed class QuaggansQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<IReplicaPage<Quaggan>> GetQuaggansByPage(
+    public Task<Replica<HashSet<Quaggan>>> GetQuaggansByPage(
         int pageIndex,
         int? pageSize = default,
         MissingMemberBehavior missingMemberBehavior = default,

@@ -8,7 +8,7 @@ using static System.Net.Http.HttpMethod;
 namespace GuildWars2.Skills;
 
 [PublicAPI]
-public sealed class SkillByIdRequest : IHttpRequest<IReplica<Skill>>
+public sealed class SkillByIdRequest : IHttpRequest<Replica<Skill>>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/skills")
     {
@@ -26,7 +26,7 @@ public sealed class SkillByIdRequest : IHttpRequest<IReplica<Skill>>
 
     public MissingMemberBehavior MissingMemberBehavior { get; init; }
 
-    public async Task<IReplica<Skill>> SendAsync(
+    public async Task<Replica<Skill>> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
     )
@@ -47,13 +47,13 @@ public sealed class SkillByIdRequest : IHttpRequest<IReplica<Skill>>
             .ConfigureAwait(false);
 
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
-
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
-
         return new Replica<Skill>
         {
             Value = json.RootElement.GetSkill(MissingMemberBehavior),
+            ResultContext = response.Headers.GetResultContext(),
+            PageContext = response.Headers.GetPageContext(),
             Date = response.Headers.Date.GetValueOrDefault(),
             Expires = response.Content.Headers.Expires,
             LastModified = response.Content.Headers.LastModified

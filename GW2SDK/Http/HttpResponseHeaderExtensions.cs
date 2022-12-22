@@ -9,14 +9,18 @@ namespace GuildWars2.Http;
 [PublicAPI]
 public static class HttpResponseHeaderExtensions
 {
-    public static ICollectionContext GetCollectionContext(this HttpResponseHeaders instance)
+    public static ResultContext? GetResultContext(this HttpResponseHeaders instance)
     {
         if (instance is null) throw new ArgumentNullException(nameof(instance));
-        int resultTotal = default, resultCount = default;
+        int resultTotal, resultCount;
         if (instance.TryGetValues(ResultTotal, out var resultTotals))
         {
             // Assume that there is exactly one value for this header
             resultTotal = int.Parse(resultTotals.Single());
+        }
+        else
+        {
+            return null;
         }
 
         if (instance.TryGetValues(ResultCount, out var resultCounts))
@@ -24,14 +28,18 @@ public static class HttpResponseHeaderExtensions
             // Assume that there is exactly one value for this header
             resultCount = int.Parse(resultCounts.Single());
         }
+        else
+        {
+            return null;
+        }
 
-        return new CollectionContext(resultTotal, resultCount);
+        return new ResultContext(resultTotal, resultCount);
     }
 
-    public static IPageContext GetPageContext(this HttpResponseHeaders instance)
+    public static PageContext? GetPageContext(this HttpResponseHeaders instance)
     {
         if (instance is null) throw new ArgumentNullException(nameof(instance));
-        int pageTotal = default, pageSize = default, resultTotal = default, resultCount = default;
+        int pageTotal, pageSize, resultTotal, resultCount;
         Hyperlink previous = Hyperlink.None,
             next = Hyperlink.None,
             self = Hyperlink.None,
@@ -42,11 +50,19 @@ public static class HttpResponseHeaderExtensions
             // Assume that there is exactly one value for this header
             pageTotal = int.Parse(pageTotals.Single());
         }
+        else
+        {
+            return null;
+        }
 
         if (instance.TryGetValues(PageSize, out var pageSizes))
         {
             // Assume that there is exactly one value for this header
             pageSize = int.Parse(pageSizes.Single());
+        }
+        else
+        {
+            return null;
         }
 
         if (instance.TryGetValues(ResultTotal, out var resultTotals))
@@ -54,11 +70,19 @@ public static class HttpResponseHeaderExtensions
             // Assume that there is exactly one value for this header
             resultTotal = int.Parse(resultTotals.Single());
         }
+        else
+        {
+            return null;
+        }
 
         if (instance.TryGetValues(ResultCount, out var resultCounts))
         {
             // Assume that there is exactly one value for this header
             resultCount = int.Parse(resultCounts.Single());
+        }
+        else
+        {
+            return null;
         }
 
         if (instance.TryGetValues(Link, out var links))

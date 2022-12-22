@@ -17,10 +17,10 @@ public class FloorsByPage
 
         var actual = await sut.Maps.GetFloorsByPage(continentId, 0, 3);
 
-        Assert.Equal(3, actual.Count);
-        Assert.Equal(3, actual.Context.PageSize);
+        Assert.Equal(3, actual.Value.Count);
+        Assert.Equal(3, actual.PageContext.PageSize);
         Assert.All(
-            actual,
+            actual.Value,
             entry =>
             {
                 entry.Has_texture_dimensions();

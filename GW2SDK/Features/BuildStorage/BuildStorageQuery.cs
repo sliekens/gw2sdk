@@ -18,7 +18,7 @@ public sealed record BuildStorageQuery
         http.BaseAddress ??= BaseAddress.DefaultUri;
     }
 
-    public Task<IReplicaSet<Build>> GetBuildStorage(
+    public Task<Replica<HashSet<Build>>> GetBuildStorage(
         string? accessToken,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
@@ -32,7 +32,7 @@ public sealed record BuildStorageQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<IReplicaSet<int>> GetBuildStorageIndex(
+    public Task<Replica<HashSet<int>>> GetBuildStorageIndex(
         string? accessToken,
         CancellationToken cancellationToken = default
     )
@@ -41,7 +41,7 @@ public sealed record BuildStorageQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<IReplica<Build>> GetBuildStorageSpaceById(
+    public Task<Replica<Build>> GetBuildStorageSpaceById(
         string? accessToken,
         int buildStorageId,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -56,7 +56,7 @@ public sealed record BuildStorageQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<IReplicaSet<Build>> GetBuildStorageSpacesByIds(
+    public Task<Replica<HashSet<Build>>> GetBuildStorageSpacesByIds(
         string? accessToken,
         IReadOnlyCollection<int> buildStorageIds,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -71,7 +71,7 @@ public sealed record BuildStorageQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<IReplicaPage<Build>> GetBuildStorageSpacesByPage(
+    public Task<Replica<HashSet<Build>>> GetBuildStorageSpacesByPage(
         string? accessToken,
         int pageIndex,
         int? pageSize = default,

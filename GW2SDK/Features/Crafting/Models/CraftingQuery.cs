@@ -21,13 +21,15 @@ public sealed class CraftingQuery
         http.BaseAddress ??= BaseAddress.DefaultUri;
     }
 
-    public Task<IReplicaSet<int>> GetRecipesIndex(CancellationToken cancellationToken = default)
+    public Task<Replica<HashSet<int>>> GetRecipesIndex(
+        CancellationToken cancellationToken = default
+    )
     {
         RecipesIndexRequest request = new();
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<IReplica<Recipe>> GetRecipeById(
+    public Task<Replica<Recipe>> GetRecipeById(
         int recipeId,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
@@ -40,7 +42,7 @@ public sealed class CraftingQuery
     public IAsyncEnumerable<Recipe> GetRecipesByIds(
         IReadOnlyCollection<int> recipeIds,
         MissingMemberBehavior missingMemberBehavior = default,
-        IProgress<ICollectionContext>? progress = default,
+        IProgress<ResultContext>? progress = default,
         CancellationToken cancellationToken = default
     )
     {
@@ -52,7 +54,7 @@ public sealed class CraftingQuery
                     MissingMemberBehavior = missingMemberBehavior
                 };
                 var response = await request.SendAsync(http, ct).ConfigureAwait(false);
-                return response.Values;
+                return response.Value;
             },
             progress
         );
@@ -60,7 +62,7 @@ public sealed class CraftingQuery
         return producer.QueryAsync(recipeIds, cancellationToken: cancellationToken);
     }
 
-    public Task<IReplicaPage<Recipe>> GetRecipesByPage(
+    public Task<Replica<HashSet<Recipe>>> GetRecipesByPage(
         int pageIndex,
         int? pageSize = default,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -75,7 +77,7 @@ public sealed class CraftingQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<IReplicaSet<int>> GetRecipesIndexByIngredientItemId(
+    public Task<Replica<HashSet<int>>> GetRecipesIndexByIngredientItemId(
         int ingredientItemId,
         CancellationToken cancellationToken = default
     )
@@ -84,7 +86,7 @@ public sealed class CraftingQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<IReplicaSet<Recipe>> GetRecipesByIngredientItemId(
+    public Task<Replica<HashSet<Recipe>>> GetRecipesByIngredientItemId(
         int ingredientItemId,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
@@ -97,7 +99,7 @@ public sealed class CraftingQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<IReplicaPage<Recipe>> GetRecipesByIngredientItemIdByPage(
+    public Task<Replica<HashSet<Recipe>>> GetRecipesByIngredientItemIdByPage(
         int ingredientItemId,
         int pageIndex,
         int? pageSize = default,
@@ -113,7 +115,7 @@ public sealed class CraftingQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<IReplicaSet<int>> GetRecipesIndexByOutputItemId(
+    public Task<Replica<HashSet<int>>> GetRecipesIndexByOutputItemId(
         int outputItemId,
         CancellationToken cancellationToken = default
     )
@@ -122,7 +124,7 @@ public sealed class CraftingQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<IReplicaSet<Recipe>> GetRecipesByOutputItemId(
+    public Task<Replica<HashSet<Recipe>>> GetRecipesByOutputItemId(
         int outputItemId,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
@@ -135,7 +137,7 @@ public sealed class CraftingQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<IReplicaPage<Recipe>> GetRecipesByOutputItemIdByPage(
+    public Task<Replica<HashSet<Recipe>>> GetRecipesByOutputItemIdByPage(
         int outputItemId,
         int pageIndex,
         int? pageSize = default,
@@ -153,13 +155,13 @@ public sealed class CraftingQuery
 
     public async IAsyncEnumerable<Recipe> GetRecipes(
         MissingMemberBehavior missingMemberBehavior = default,
-        IProgress<ICollectionContext>? progress = default,
+        IProgress<ResultContext>? progress = default,
         [EnumeratorCancellation] CancellationToken cancellationToken = default
     )
     {
         var index = await GetRecipesIndex(cancellationToken).ConfigureAwait(false);
         var producer = GetRecipesByIds(
-            index.Values,
+            index.Value,
             missingMemberBehavior,
             progress,
             cancellationToken
@@ -174,7 +176,7 @@ public sealed class CraftingQuery
     /// <summary>Gets the IDs of the recipes that were learned from recipe sheets. Unlocked recipes are automatically learned
     /// by characters once they reach the required crafting level.</summary>
     [Scope(Permission.Unlocks)]
-    public Task<IReplica<IReadOnlyCollection<int>>> GetUnlockedRecipes(
+    public Task<Replica<HashSet<int>>> GetUnlockedRecipes(
         string? accessToken,
         CancellationToken cancellationToken = default
     )
@@ -186,7 +188,7 @@ public sealed class CraftingQuery
     /// <summary>Gets the IDs of all the recipes that the current character has learned, excluding recipes from sheets for
     /// which the required crafting level is not reached.</summary>
     [Scope(Permission.Characters, Permission.Inventories)]
-    public Task<IReplica<IReadOnlyCollection<int>>> GetLearnedRecipes(
+    public Task<Replica<HashSet<int>>> GetLearnedRecipes(
         string characterId,
         string? accessToken,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -201,7 +203,7 @@ public sealed class CraftingQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<IReplica<IReadOnlyCollection<string>>> GetDailyRecipes(
+    public Task<Replica<HashSet<string>>> GetDailyRecipes(
         CancellationToken cancellationToken = default
     )
     {
@@ -210,7 +212,7 @@ public sealed class CraftingQuery
     }
 
     [Scope(Permission.Progression)]
-    public Task<IReplica<IReadOnlyCollection<string>>> GetDailyRecipesOnCooldown(
+    public Task<Replica<HashSet<string>>> GetDailyRecipesOnCooldown(
         string? accessToken,
         CancellationToken cancellationToken = default
     )

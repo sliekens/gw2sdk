@@ -22,9 +22,9 @@ public class DyesQueryTest
 
         var actual = await sut.Dyes.GetColors();
 
-        Assert.Equal(actual.Context.ResultTotal, actual.Count);
+        Assert.Equal(actual.ResultContext.ResultTotal, actual.Value.Count);
         Assert.All(
-            actual,
+            actual.Value,
             color =>
             {
                 ColorFact.Base_rgb_contains_red_green_blue(color);
@@ -40,7 +40,7 @@ public class DyesQueryTest
 
         var actual = await sut.Dyes.GetColorsIndex();
 
-        Assert.Equal(actual.Context.ResultTotal, actual.Count);
+        Assert.Equal(actual.ResultContext.ResultTotal, actual.Value.Count);
     }
 
     [Fact]
@@ -72,7 +72,7 @@ public class DyesQueryTest
         var actual = await sut.Dyes.GetColorsByIds(ids);
 
         Assert.Collection(
-            actual,
+            actual.Value,
             first => Assert.Equal(1, first.Id),
             second => Assert.Equal(2, second.Id),
             third => Assert.Equal(3, third.Id)
@@ -87,8 +87,8 @@ public class DyesQueryTest
 
         var actual = await sut.Dyes.GetColorsByPage(0, 3);
 
-        Assert.Equal(3, actual.Count);
-        Assert.Equal(3, actual.Context.PageSize);
+        Assert.Equal(3, actual.Value.Count);
+        Assert.Equal(3, actual.PageContext.PageSize);
     }
 
     [Fact]

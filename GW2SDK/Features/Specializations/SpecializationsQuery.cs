@@ -18,7 +18,7 @@ public sealed class SpecializationsQuery
         http.BaseAddress ??= BaseAddress.DefaultUri;
     }
 
-    public Task<IReplicaSet<Specialization>> GetSpecializations(
+    public Task<Replica<HashSet<Specialization>>> GetSpecializations(
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
@@ -32,7 +32,7 @@ public sealed class SpecializationsQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<IReplicaSet<int>> GetSpecializationsIndex(
+    public Task<Replica<HashSet<int>>> GetSpecializationsIndex(
         CancellationToken cancellationToken = default
     )
     {
@@ -40,7 +40,7 @@ public sealed class SpecializationsQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<IReplica<Specialization>> GetSpecializationById(
+    public Task<Replica<Specialization>> GetSpecializationById(
         int specializationId,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -55,7 +55,7 @@ public sealed class SpecializationsQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<IReplicaSet<Specialization>> GetSpecializationsByIds(
+    public Task<Replica<HashSet<Specialization>>> GetSpecializationsByIds(
         IReadOnlyCollection<int> specializationIds,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,

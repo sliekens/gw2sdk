@@ -1,25 +1,18 @@
 ﻿using GuildWars2;
 
 // HttpClient has a fully customizable pipeline, but defaults are fine too
-using HttpClient httpClient = new();
-Gw2Client gw2Client = new(httpClient);
-var apiVersion = await gw2Client.Meta.GetApiVersion();
+using var httpClient = new HttpClient();
+var gw2 = new Gw2Client(httpClient);
 
+// Use Gw2Client to fetch data
+var apiVersion = await gw2.Meta.GetApiVersion();
+
+// The result is a Replica object that contains the value
+// and also some response headers such as Date
 Console.WriteLine("Output date: {0}", apiVersion.Date);
-Console.WriteLine("Output last modified: {0}", apiVersion.LastModified);
-Console.WriteLine("Output expires: {0}", apiVersion.Expires);
+
+// The actual data is available in the Value property
 foreach (var route in apiVersion.Value.Routes)
 {
     Console.WriteLine(route.Path);
 }
-
-// Output date: 4/30/2022 1:18:27 PM +00:00
-// Output last modified: 
-// Output expires: 
-// /v2/account
-// /v2/account/achievements
-// /v2/account/bank
-// /v2/account/buildstorage
-// /v2/account/dailycrafting
-// /v2/account/dungeons
-// ...

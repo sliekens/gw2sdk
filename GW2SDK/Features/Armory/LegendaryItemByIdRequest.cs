@@ -8,7 +8,7 @@ using static System.Net.Http.HttpMethod;
 namespace GuildWars2.Armory;
 
 [PublicAPI]
-public sealed class LegendaryItemByIdRequest : IHttpRequest<IReplica<LegendaryItem>>
+public sealed class LegendaryItemByIdRequest : IHttpRequest<Replica<LegendaryItem>>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/legendaryarmory")
     {
@@ -24,7 +24,7 @@ public sealed class LegendaryItemByIdRequest : IHttpRequest<IReplica<LegendaryIt
 
     public MissingMemberBehavior MissingMemberBehavior { get; init; }
 
-    public async Task<IReplica<LegendaryItem>> SendAsync(
+    public async Task<Replica<LegendaryItem>> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
     )
@@ -44,13 +44,13 @@ public sealed class LegendaryItemByIdRequest : IHttpRequest<IReplica<LegendaryIt
             .ConfigureAwait(false);
 
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
-
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
-
         return new Replica<LegendaryItem>
         {
             Value = json.RootElement.GetLegendaryItem(MissingMemberBehavior),
+            ResultContext = response.Headers.GetResultContext(),
+            PageContext = response.Headers.GetPageContext(),
             Date = response.Headers.Date.GetValueOrDefault(),
             Expires = response.Content.Headers.Expires,
             LastModified = response.Content.Headers.LastModified

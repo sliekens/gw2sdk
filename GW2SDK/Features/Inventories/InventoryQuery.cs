@@ -17,7 +17,7 @@ public sealed class InventoryQuery
         http.BaseAddress ??= BaseAddress.DefaultUri;
     }
 
-    public Task<IReplica<Inventory>> GetSharedInventory(
+    public Task<Replica<Inventory>> GetSharedInventory(
         string? accessToken,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
@@ -31,7 +31,7 @@ public sealed class InventoryQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<IReplica<Baggage>> GetInventory(
+    public Task<Replica<Baggage>> GetInventory(
         string characterName,
         string? accessToken,
         MissingMemberBehavior missingMemberBehavior = default,

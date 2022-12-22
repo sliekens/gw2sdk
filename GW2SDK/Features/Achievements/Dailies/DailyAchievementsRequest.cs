@@ -9,7 +9,7 @@ using static System.Net.Http.HttpMethod;
 namespace GuildWars2.Achievements.Dailies;
 
 [PublicAPI]
-public sealed class DailyAchievementsRequest : IHttpRequest<IReplica<DailyAchievementGroup>>
+public sealed class DailyAchievementsRequest : IHttpRequest<Replica<DailyAchievementGroup>>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/achievements/daily")
     {
@@ -21,7 +21,7 @@ public sealed class DailyAchievementsRequest : IHttpRequest<IReplica<DailyAchiev
 
     public MissingMemberBehavior MissingMemberBehavior { get; init; }
 
-    public async Task<IReplica<DailyAchievementGroup>> SendAsync(
+    public async Task<Replica<DailyAchievementGroup>> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
     )
@@ -42,13 +42,13 @@ public sealed class DailyAchievementsRequest : IHttpRequest<IReplica<DailyAchiev
             .ConfigureAwait(false);
 
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
-
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
-
         return new Replica<DailyAchievementGroup>
         {
             Value = json.RootElement.GetDailyAchievementGroup(MissingMemberBehavior),
+            ResultContext = response.Headers.GetResultContext(),
+            PageContext = response.Headers.GetPageContext(),
             Date = response.Headers.Date.GetValueOrDefault(),
             Expires = response.Content.Headers.Expires,
             LastModified = response.Content.Headers.LastModified

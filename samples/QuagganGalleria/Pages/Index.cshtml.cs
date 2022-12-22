@@ -34,7 +34,7 @@ public class IndexModel : PageModel
         logger.LogInformation("Retrieving the Quaggans.");
         var result = await quaggans.GetQuaggans();
         Refreshed = result.Date;
-        Quaggans = result.Values.Select(
+        Quaggans = result.Value.Select(
             (quaggan, index) => new QuagganViewModel
             {
                 Active = index == 0,

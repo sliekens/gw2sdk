@@ -7,7 +7,7 @@ using JetBrains.Annotations;
 namespace GuildWars2.BuildStorage;
 
 [PublicAPI]
-public sealed class BuildByIdRequest : IHttpRequest<IReplica<Build>>
+public sealed class BuildByIdRequest : IHttpRequest<Replica<Build>>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(HttpMethod.Get, "v2/account/buildstorage") { AcceptEncoding = "gzip" };
@@ -23,7 +23,7 @@ public sealed class BuildByIdRequest : IHttpRequest<IReplica<Build>>
 
     public MissingMemberBehavior MissingMemberBehavior { get; init; }
 
-    public async Task<IReplica<Build>> SendAsync(
+    public async Task<Replica<Build>> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
     )
@@ -44,13 +44,13 @@ public sealed class BuildByIdRequest : IHttpRequest<IReplica<Build>>
             .ConfigureAwait(false);
 
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
-
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
-
         return new Replica<Build>
         {
             Value = json.RootElement.GetBuild(MissingMemberBehavior),
+            ResultContext = response.Headers.GetResultContext(),
+            PageContext = response.Headers.GetPageContext(),
             Date = response.Headers.Date.GetValueOrDefault(),
             Expires = response.Content.Headers.Expires,
             LastModified = response.Content.Headers.LastModified

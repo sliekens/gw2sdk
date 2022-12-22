@@ -9,7 +9,7 @@ using JetBrains.Annotations;
 namespace GuildWars2.Finishers;
 
 [PublicAPI]
-public sealed class FinishersByIdsRequest : IHttpRequest<IReplicaSet<Finisher>>
+public sealed class FinishersByIdsRequest : IHttpRequest<Replica<HashSet<Finisher>>>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(HttpMethod.Get, "v2/finishers") { AcceptEncoding = "gzip" };
@@ -26,7 +26,7 @@ public sealed class FinishersByIdsRequest : IHttpRequest<IReplicaSet<Finisher>>
 
     public MissingMemberBehavior MissingMemberBehavior { get; init; }
 
-    public async Task<IReplicaSet<Finisher>> SendAsync(
+    public async Task<Replica<HashSet<Finisher>>> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
     )
@@ -47,14 +47,13 @@ public sealed class FinishersByIdsRequest : IHttpRequest<IReplicaSet<Finisher>>
             .ConfigureAwait(false);
 
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
-
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
-
-        return new ReplicaSet<Finisher>
+        return new Replica<HashSet<Finisher>>
         {
-            Values = json.RootElement.GetSet(entry => entry.GetFinisher(MissingMemberBehavior)),
-            Context = response.Headers.GetCollectionContext(),
+            Value = json.RootElement.GetSet(entry => entry.GetFinisher(MissingMemberBehavior)),
+            ResultContext = response.Headers.GetResultContext(),
+            PageContext = response.Headers.GetPageContext(),
             Date = response.Headers.Date.GetValueOrDefault(),
             Expires = response.Content.Headers.Expires,
             LastModified = response.Content.Headers.LastModified

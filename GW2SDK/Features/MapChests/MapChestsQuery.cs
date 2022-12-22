@@ -18,7 +18,7 @@ public sealed class MapChestsQuery
         http.BaseAddress ??= BaseAddress.DefaultUri;
     }
 
-    public Task<IReplicaSet<string>> GetMapChestsIndex(
+    public Task<Replica<HashSet<string>>> GetMapChestsIndex(
         CancellationToken cancellationToken = default
     )
     {
@@ -26,7 +26,7 @@ public sealed class MapChestsQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<IReplica<MapChest>> GetMapChestById(
+    public Task<Replica<MapChest>> GetMapChestById(
         string mapChestId,
         CancellationToken cancellationToken = default
     )
@@ -38,7 +38,7 @@ public sealed class MapChestsQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<IReplicaSet<MapChest>> GetMapChestsByIds(
+    public Task<Replica<HashSet<MapChest>>> GetMapChestsByIds(
         IReadOnlyCollection<string> mapChestIds,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
@@ -51,7 +51,7 @@ public sealed class MapChestsQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<IReplicaPage<MapChest>> GetMapChestsByPage(
+    public Task<Replica<HashSet<MapChest>>> GetMapChestsByPage(
         int pageIndex,
         int? pageSize = default,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -67,7 +67,7 @@ public sealed class MapChestsQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<IReplicaSet<MapChest>> GetMapChests(
+    public Task<Replica<HashSet<MapChest>>> GetMapChests(
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )

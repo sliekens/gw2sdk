@@ -140,7 +140,7 @@ internal class Program
         {
             return await craftingQuery
                 .GetRecipes(
-                    progress: new Progress<ICollectionContext>(ctx => UpdateProgress(ctx, progress))
+                    progress: new Progress<ResultContext>(ctx => UpdateProgress(ctx, progress))
                 )
                 .OrderByDescending(recipe => recipe.Id)
                 .ToListAsync();
@@ -162,7 +162,7 @@ internal class Program
         progress.StartTask();
         await foreach (var item in itemsQuery.GetItemsByIds(
                 itemIds,
-                progress: new Progress<ICollectionContext>(ctx => UpdateProgress(ctx, progress))
+                progress: new Progress<ResultContext>(ctx => UpdateProgress(ctx, progress))
             ))
         {
             items.Add(item);
@@ -173,7 +173,7 @@ internal class Program
         return items;
     }
 
-    private static void UpdateProgress(ICollectionContext ctx, ProgressTask progressTask)
+    private static void UpdateProgress(ResultContext ctx, ProgressTask progressTask)
     {
         progressTask.MaxValue(ctx.ResultTotal);
         progressTask.Increment(200);

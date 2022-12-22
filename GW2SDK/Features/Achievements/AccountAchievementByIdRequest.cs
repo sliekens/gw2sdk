@@ -8,7 +8,7 @@ using static System.Net.Http.HttpMethod;
 namespace GuildWars2.Achievements;
 
 [PublicAPI]
-public sealed class AccountAchievementByIdRequest : IHttpRequest<IReplica<AccountAchievement>>
+public sealed class AccountAchievementByIdRequest : IHttpRequest<Replica<AccountAchievement>>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/account/achievements") { AcceptEncoding = "gzip" };
@@ -24,7 +24,7 @@ public sealed class AccountAchievementByIdRequest : IHttpRequest<IReplica<Accoun
 
     public MissingMemberBehavior MissingMemberBehavior { get; init; }
 
-    public async Task<IReplica<AccountAchievement>> SendAsync(
+    public async Task<Replica<AccountAchievement>> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
     )
@@ -45,13 +45,13 @@ public sealed class AccountAchievementByIdRequest : IHttpRequest<IReplica<Accoun
             .ConfigureAwait(false);
 
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
-
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
-
         return new Replica<AccountAchievement>
         {
             Value = json.RootElement.GetAccountAchievement(MissingMemberBehavior),
+            ResultContext = response.Headers.GetResultContext(),
+            PageContext = response.Headers.GetPageContext(),
             Date = response.Headers.Date.GetValueOrDefault(),
             Expires = response.Content.Headers.Expires,
             LastModified = response.Content.Headers.LastModified

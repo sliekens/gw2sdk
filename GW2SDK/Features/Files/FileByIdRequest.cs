@@ -7,7 +7,7 @@ using JetBrains.Annotations;
 namespace GuildWars2.Files;
 
 [PublicAPI]
-public sealed class FileByIdRequest : IHttpRequest<IReplica<File>>
+public sealed class FileByIdRequest : IHttpRequest<Replica<File>>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(HttpMethod.Get, "v2/files") { AcceptEncoding = "gzip" };
@@ -21,7 +21,7 @@ public sealed class FileByIdRequest : IHttpRequest<IReplica<File>>
 
     public MissingMemberBehavior MissingMemberBehavior { get; init; }
 
-    public async Task<IReplica<File>> SendAsync(
+    public async Task<Replica<File>> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
     )
@@ -41,13 +41,13 @@ public sealed class FileByIdRequest : IHttpRequest<IReplica<File>>
             .ConfigureAwait(false);
 
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
-
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
-
         return new Replica<File>
         {
             Value = json.RootElement.GetFile(MissingMemberBehavior),
+            ResultContext = response.Headers.GetResultContext(),
+            PageContext = response.Headers.GetPageContext(),
             Date = response.Headers.Date.GetValueOrDefault(),
             Expires = response.Content.Headers.Expires,
             LastModified = response.Content.Headers.LastModified

@@ -20,7 +20,7 @@ public sealed class StoriesQuery
 
     #region v2/backstory/questions
 
-    public Task<IReplicaSet<BackstoryQuestion>> GetBackstoryQuestions(
+    public Task<Replica<HashSet<BackstoryQuestion>>> GetBackstoryQuestions(
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
@@ -34,7 +34,7 @@ public sealed class StoriesQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<IReplicaSet<int>> GetBackstoryQuestionsIndex(
+    public Task<Replica<HashSet<int>>> GetBackstoryQuestionsIndex(
         CancellationToken cancellationToken = default
     )
     {
@@ -42,7 +42,7 @@ public sealed class StoriesQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<IReplica<BackstoryQuestion>> GetBackstoryQuestionById(
+    public Task<Replica<BackstoryQuestion>> GetBackstoryQuestionById(
         int questionId,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -57,7 +57,7 @@ public sealed class StoriesQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<IReplicaSet<BackstoryQuestion>> GetBackstoryQuestionsByIds(
+    public Task<Replica<HashSet<BackstoryQuestion>>> GetBackstoryQuestionsByIds(
         IReadOnlyCollection<int> questionIds,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -72,7 +72,7 @@ public sealed class StoriesQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<IReplicaPage<BackstoryQuestion>> GetBackstoryQuestionsByPage(
+    public Task<Replica<HashSet<BackstoryQuestion>>> GetBackstoryQuestionsByPage(
         int pageIndex,
         int? pageSize = default,
         Language? language = default,
@@ -93,7 +93,7 @@ public sealed class StoriesQuery
 
     #region v2/backstory/answers
 
-    public Task<IReplicaSet<BackstoryAnswer>> GetBackstoryAnswers(
+    public Task<Replica<HashSet<BackstoryAnswer>>> GetBackstoryAnswers(
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
@@ -107,7 +107,7 @@ public sealed class StoriesQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<IReplicaSet<string>> GetBackstoryAnswersIndex(
+    public Task<Replica<HashSet<string>>> GetBackstoryAnswersIndex(
         CancellationToken cancellationToken = default
     )
     {
@@ -115,7 +115,7 @@ public sealed class StoriesQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<IReplica<BackstoryAnswer>> GetBackstoryAnswerById(
+    public Task<Replica<BackstoryAnswer>> GetBackstoryAnswerById(
         string answerId,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -130,7 +130,7 @@ public sealed class StoriesQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<IReplicaSet<BackstoryAnswer>> GetBackstoryAnswersByIds(
+    public Task<Replica<HashSet<BackstoryAnswer>>> GetBackstoryAnswersByIds(
         IReadOnlyCollection<string> answerIds,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -145,7 +145,7 @@ public sealed class StoriesQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<IReplicaPage<BackstoryAnswer>> GetBackstoryAnswersByPage(
+    public Task<Replica<HashSet<BackstoryAnswer>>> GetBackstoryAnswersByPage(
         int pageIndex,
         int? pageSize = default,
         Language? language = default,
@@ -166,7 +166,7 @@ public sealed class StoriesQuery
 
     #region v2/stories
 
-    public Task<IReplicaSet<Story>> GetStories(
+    public Task<Replica<HashSet<Story>>> GetStories(
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
@@ -180,13 +180,15 @@ public sealed class StoriesQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<IReplicaSet<int>> GetStoriesIndex(CancellationToken cancellationToken = default)
+    public Task<Replica<HashSet<int>>> GetStoriesIndex(
+        CancellationToken cancellationToken = default
+    )
     {
         StoriesIndexRequest request = new();
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<IReplica<Story>> GetStoryById(
+    public Task<Replica<Story>> GetStoryById(
         int storyId,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -201,7 +203,7 @@ public sealed class StoriesQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<IReplicaSet<Story>> GetStoriesByIds(
+    public Task<Replica<HashSet<Story>>> GetStoriesByIds(
         IReadOnlyCollection<int> storyIds,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -216,7 +218,7 @@ public sealed class StoriesQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<IReplicaPage<Story>> GetStoriesByPage(
+    public Task<Replica<HashSet<Story>>> GetStoriesByPage(
         int pageIndex,
         int? pageSize = default,
         Language? language = default,
@@ -237,7 +239,7 @@ public sealed class StoriesQuery
 
     #region v2/stories/seasons
 
-    public Task<IReplicaSet<Season>> GetSeasons(
+    public Task<Replica<HashSet<Season>>> GetSeasons(
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
@@ -251,13 +253,15 @@ public sealed class StoriesQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<IReplicaSet<string>> GetSeasonsIndex(CancellationToken cancellationToken = default)
+    public Task<Replica<HashSet<string>>> GetSeasonsIndex(
+        CancellationToken cancellationToken = default
+    )
     {
         SeasonsIndexRequest request = new();
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<IReplica<Season>> GetSeasonById(
+    public Task<Replica<Season>> GetSeasonById(
         string seasonId,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -272,7 +276,7 @@ public sealed class StoriesQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<IReplicaSet<Season>> GetSeasonsByIds(
+    public Task<Replica<HashSet<Season>>> GetSeasonsByIds(
         IReadOnlyCollection<string> seasonIds,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -287,7 +291,7 @@ public sealed class StoriesQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<IReplicaPage<Season>> GetSeasonsByPage(
+    public Task<Replica<HashSet<Season>>> GetSeasonsByPage(
         int pageIndex,
         int? pageSize = default,
         Language? language = default,

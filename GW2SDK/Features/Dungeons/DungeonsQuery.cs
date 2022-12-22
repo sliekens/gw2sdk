@@ -19,13 +19,15 @@ public sealed class DungeonsQuery
         http.BaseAddress ??= BaseAddress.DefaultUri;
     }
 
-    public Task<IReplicaSet<string>> GetDungeonsIndex(CancellationToken cancellationToken = default)
+    public Task<Replica<HashSet<string>>> GetDungeonsIndex(
+        CancellationToken cancellationToken = default
+    )
     {
         DungeonsIndexRequest request = new();
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<IReplica<Dungeon>> GetDungeonById(
+    public Task<Replica<Dungeon>> GetDungeonById(
         string dungeonId,
         CancellationToken cancellationToken = default
     )
@@ -37,7 +39,7 @@ public sealed class DungeonsQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<IReplicaSet<Dungeon>> GetDungeonsByIds(
+    public Task<Replica<HashSet<Dungeon>>> GetDungeonsByIds(
         IReadOnlyCollection<string> dungeonIds,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
@@ -50,7 +52,7 @@ public sealed class DungeonsQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<IReplicaPage<Dungeon>> GetDungeonsByPage(
+    public Task<Replica<HashSet<Dungeon>>> GetDungeonsByPage(
         int pageIndex,
         int? pageSize = default,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -66,7 +68,7 @@ public sealed class DungeonsQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<IReplicaSet<Dungeon>> GetDungeons(
+    public Task<Replica<HashSet<Dungeon>>> GetDungeons(
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
@@ -76,7 +78,7 @@ public sealed class DungeonsQuery
     }
 
     [Scope(Permission.Progression)]
-    public Task<IReplica<IReadOnlyCollection<string>>> GetCompletedPaths(
+    public Task<Replica<HashSet<string>>> GetCompletedPaths(
         string? accessToken,
         CancellationToken cancellationToken = default
     )

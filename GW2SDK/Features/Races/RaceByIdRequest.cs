@@ -7,7 +7,7 @@ using JetBrains.Annotations;
 namespace GuildWars2.Races;
 
 [PublicAPI]
-public sealed class RaceByIdRequest : IHttpRequest<IReplica<Race>>
+public sealed class RaceByIdRequest : IHttpRequest<Replica<Race>>
 {
     private static readonly HttpRequestMessageTemplate Template = new(HttpMethod.Get, "v2/races")
     {
@@ -25,7 +25,7 @@ public sealed class RaceByIdRequest : IHttpRequest<IReplica<Race>>
 
     public MissingMemberBehavior MissingMemberBehavior { get; init; }
 
-    public async Task<IReplica<Race>> SendAsync(
+    public async Task<Replica<Race>> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
     )
@@ -46,13 +46,13 @@ public sealed class RaceByIdRequest : IHttpRequest<IReplica<Race>>
             .ConfigureAwait(false);
 
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
-
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
-
         return new Replica<Race>
         {
             Value = json.RootElement.GetRace(MissingMemberBehavior),
+            ResultContext = response.Headers.GetResultContext(),
+            PageContext = response.Headers.GetPageContext(),
             Date = response.Headers.Date.GetValueOrDefault(),
             Expires = response.Content.Headers.Expires,
             LastModified = response.Content.Headers.LastModified

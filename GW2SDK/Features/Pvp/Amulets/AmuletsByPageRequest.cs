@@ -1,4 +1,5 @@
-﻿using System.Net.Http;
+﻿using System.Collections.Generic;
+using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 using GuildWars2.Http;
@@ -8,7 +9,7 @@ using JetBrains.Annotations;
 namespace GuildWars2.Pvp.Amulets;
 
 [PublicAPI]
-public sealed class AmuletsByPageRequest : IHttpRequest<IReplicaPage<Amulet>>
+public sealed class AmuletsByPageRequest : IHttpRequest<Replica<HashSet<Amulet>>>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(HttpMethod.Get, "v2/pvp/amulets") { AcceptEncoding = "gzip" };
@@ -26,7 +27,7 @@ public sealed class AmuletsByPageRequest : IHttpRequest<IReplicaPage<Amulet>>
 
     public MissingMemberBehavior MissingMemberBehavior { get; init; }
 
-    public async Task<IReplicaPage<Amulet>> SendAsync(
+    public async Task<Replica<HashSet<Amulet>>> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
     )
@@ -50,14 +51,13 @@ public sealed class AmuletsByPageRequest : IHttpRequest<IReplicaPage<Amulet>>
             .ConfigureAwait(false);
 
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
-
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
-
-        return new ReplicaPage<Amulet>
+        return new Replica<HashSet<Amulet>>
         {
-            Values = json.RootElement.GetSet(entry => entry.GetAmulet(MissingMemberBehavior)),
-            Context = response.Headers.GetPageContext(),
+            Value = json.RootElement.GetSet(entry => entry.GetAmulet(MissingMemberBehavior)),
+            ResultContext = response.Headers.GetResultContext(),
+            PageContext = response.Headers.GetPageContext(),
             Date = response.Headers.Date.GetValueOrDefault(),
             Expires = response.Content.Headers.Expires,
             LastModified = response.Content.Headers.LastModified

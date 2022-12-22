@@ -14,8 +14,8 @@ public class MapChestsIndex
 
         var actual = await sut.MapChests.GetMapChestsIndex();
 
-        Assert.NotEmpty(actual.Values);
-        Assert.Equal(actual.Count, actual.Context.ResultCount);
-        Assert.Equal(actual.Count, actual.Context.ResultTotal);
+        Assert.NotEmpty(actual.Value);
+        Assert.Equal(actual.Value.Count, actual.ResultContext.ResultCount);
+        Assert.Equal(actual.Value.Count, actual.ResultContext.ResultTotal);
     }
 }

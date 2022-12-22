@@ -17,7 +17,7 @@ public class JsonSkinService
         this.http = http;
     }
 
-    public async Task<ISet<string>> GetAllJsonSkins(IProgress<ICollectionContext> progress)
+    public async Task<ISet<string>> GetAllJsonSkins(IProgress<ResultContext> progress)
     {
         var ids = await GetSkinIds().ConfigureAwait(false);
         var items = new SortedSet<string>();
@@ -33,12 +33,12 @@ public class JsonSkinService
     {
         var request = new SkinsIndexRequest();
         var response = await request.SendAsync(http, CancellationToken.None);
-        return response.Values;
+        return response.Value;
     }
 
     public IAsyncEnumerable<string> GetJsonSkinsByIds(
         IReadOnlyCollection<int> itemIds,
-        IProgress<ICollectionContext>? progress = default,
+        IProgress<ResultContext>? progress = default,
         CancellationToken cancellationToken = default
     )
     {

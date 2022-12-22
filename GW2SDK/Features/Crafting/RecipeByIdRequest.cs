@@ -8,7 +8,7 @@ using static System.Net.Http.HttpMethod;
 namespace GuildWars2.Crafting;
 
 [PublicAPI]
-public sealed class RecipeByIdRequest : IHttpRequest<IReplica<Recipe>>
+public sealed class RecipeByIdRequest : IHttpRequest<Replica<Recipe>>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/recipes")
     {
@@ -24,7 +24,7 @@ public sealed class RecipeByIdRequest : IHttpRequest<IReplica<Recipe>>
 
     public MissingMemberBehavior MissingMemberBehavior { get; init; }
 
-    public async Task<IReplica<Recipe>> SendAsync(
+    public async Task<Replica<Recipe>> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
     )
@@ -44,13 +44,13 @@ public sealed class RecipeByIdRequest : IHttpRequest<IReplica<Recipe>>
             .ConfigureAwait(false);
 
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
-
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
-
         return new Replica<Recipe>
         {
             Value = json.RootElement.GetRecipe(MissingMemberBehavior),
+            ResultContext = response.Headers.GetResultContext(),
+            PageContext = response.Headers.GetPageContext(),
             Date = response.Headers.Date.GetValueOrDefault(),
             Expires = response.Content.Headers.Expires,
             LastModified = response.Content.Headers.LastModified

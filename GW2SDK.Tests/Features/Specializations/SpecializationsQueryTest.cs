@@ -41,9 +41,9 @@ public class SpecializationsQueryTest
 
         var actual = await sut.Specializations.GetSpecializations();
 
-        Assert.Equal(actual.Context.ResultTotal, actual.Count);
+        Assert.Equal(actual.ResultContext.ResultTotal, actual.Value.Count);
         Assert.All(
-            actual,
+            actual.Value,
             specialization =>
             {
                 SpecializationFact.Id_is_positive(specialization);
@@ -66,7 +66,7 @@ public class SpecializationsQueryTest
 
         var actual = await sut.Specializations.GetSpecializationsIndex();
 
-        Assert.Equal(actual.Context.ResultTotal, actual.Count);
+        Assert.Equal(actual.ResultContext.ResultTotal, actual.Value.Count);
     }
 
     [Fact]
@@ -98,7 +98,7 @@ public class SpecializationsQueryTest
         var actual = await sut.Specializations.GetSpecializationsByIds(ids);
 
         Assert.Collection(
-            actual,
+            actual.Value,
             first => Assert.Equal(1, first.Id),
             second => Assert.Equal(2, second.Id),
             third => Assert.Equal(3, third.Id)

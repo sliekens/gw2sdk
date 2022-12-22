@@ -1,4 +1,5 @@
-﻿using System.Net.Http;
+﻿using System.Collections.Generic;
+using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 using GuildWars2.Http;
@@ -8,7 +9,7 @@ using JetBrains.Annotations;
 namespace GuildWars2.Pvp.Ranks;
 
 [PublicAPI]
-public sealed class RanksByPageRequest : IHttpRequest<IReplicaPage<Rank>>
+public sealed class RanksByPageRequest : IHttpRequest<Replica<HashSet<Rank>>>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(HttpMethod.Get, "v2/pvp/ranks") { AcceptEncoding = "gzip" };
@@ -26,7 +27,7 @@ public sealed class RanksByPageRequest : IHttpRequest<IReplicaPage<Rank>>
 
     public MissingMemberBehavior MissingMemberBehavior { get; init; }
 
-    public async Task<IReplicaPage<Rank>> SendAsync(
+    public async Task<Replica<HashSet<Rank>>> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
     )
@@ -50,14 +51,13 @@ public sealed class RanksByPageRequest : IHttpRequest<IReplicaPage<Rank>>
             .ConfigureAwait(false);
 
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
-
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
-
-        return new ReplicaPage<Rank>
+        return new Replica<HashSet<Rank>>
         {
-            Values = json.RootElement.GetSet(entry => entry.GetRank(MissingMemberBehavior)),
-            Context = response.Headers.GetPageContext(),
+            Value = json.RootElement.GetSet(entry => entry.GetRank(MissingMemberBehavior)),
+            ResultContext = response.Headers.GetResultContext(),
+            PageContext = response.Headers.GetPageContext(),
             Date = response.Headers.Date.GetValueOrDefault(),
             Expires = response.Content.Headers.Expires,
             LastModified = response.Content.Headers.LastModified

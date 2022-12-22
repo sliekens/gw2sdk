@@ -22,7 +22,7 @@ public sealed class WalletQuery
     #region v2/account/wallet
 
     [Scope(Permission.Wallet)]
-    public Task<IReplica<IReadOnlyCollection<CurrencyAmount>>> GetWallet(
+    public Task<Replica<HashSet<CurrencyAmount>>> GetWallet(
         string? accessToken,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
@@ -40,7 +40,7 @@ public sealed class WalletQuery
 
     #region v2/currencies
 
-    public Task<IReplicaSet<Currency>> GetCurrencies(
+    public Task<Replica<HashSet<Currency>>> GetCurrencies(
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
@@ -54,13 +54,15 @@ public sealed class WalletQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<IReplicaSet<int>> GetCurrenciesIndex(CancellationToken cancellationToken = default)
+    public Task<Replica<HashSet<int>>> GetCurrenciesIndex(
+        CancellationToken cancellationToken = default
+    )
     {
         CurrenciesIndexRequest request = new();
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<IReplica<Currency>> GetCurrencyById(
+    public Task<Replica<Currency>> GetCurrencyById(
         int currencyId,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -75,7 +77,7 @@ public sealed class WalletQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<IReplicaSet<Currency>> GetCurrenciesByIds(
+    public Task<Replica<HashSet<Currency>>> GetCurrenciesByIds(
         IReadOnlyCollection<int> currencyIds,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -90,7 +92,7 @@ public sealed class WalletQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<IReplicaPage<Currency>> GetCurrenciesByPage(
+    public Task<Replica<HashSet<Currency>>> GetCurrenciesByPage(
         int pageIndex,
         int? pageSize = default,
         Language? language = default,

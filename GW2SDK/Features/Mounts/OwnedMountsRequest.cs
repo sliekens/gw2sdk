@@ -9,7 +9,7 @@ using JetBrains.Annotations;
 namespace GuildWars2.Mounts;
 
 [PublicAPI]
-public sealed class OwnedMountsRequest : IHttpRequest<IReplica<IReadOnlyCollection<MountName>>>
+public sealed class OwnedMountsRequest : IHttpRequest<Replica<HashSet<MountName>>>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(HttpMethod.Get, "v2/account/mounts/types")
@@ -27,7 +27,7 @@ public sealed class OwnedMountsRequest : IHttpRequest<IReplica<IReadOnlyCollecti
 
     public MissingMemberBehavior MissingMemberBehavior { get; init; }
 
-    public async Task<IReplica<IReadOnlyCollection<MountName>>> SendAsync(
+    public async Task<Replica<HashSet<MountName>>> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
     )
@@ -40,13 +40,13 @@ public sealed class OwnedMountsRequest : IHttpRequest<IReplica<IReadOnlyCollecti
             .ConfigureAwait(false);
 
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
-
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
-
-        return new Replica<IReadOnlyCollection<MountName>>
+        return new Replica<HashSet<MountName>>
         {
             Value = json.RootElement.GetSet(entry => entry.GetMountName(MissingMemberBehavior)),
+            ResultContext = response.Headers.GetResultContext(),
+            PageContext = response.Headers.GetPageContext(),
             Date = response.Headers.Date.GetValueOrDefault(),
             Expires = response.Content.Headers.Expires,
             LastModified = response.Content.Headers.LastModified

@@ -18,7 +18,7 @@ public sealed class ProfessionsQuery
         http.BaseAddress ??= BaseAddress.DefaultUri;
     }
 
-    public Task<IReplicaSet<Profession>> GetProfessions(
+    public Task<Replica<HashSet<Profession>>> GetProfessions(
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
@@ -32,7 +32,7 @@ public sealed class ProfessionsQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<IReplicaSet<ProfessionName>> GetProfessionNames(
+    public Task<Replica<HashSet<ProfessionName>>> GetProfessionNames(
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
@@ -41,7 +41,7 @@ public sealed class ProfessionsQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<IReplica<Profession>> GetProfessionByName(
+    public Task<Replica<Profession>> GetProfessionByName(
         ProfessionName professionName,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -56,7 +56,7 @@ public sealed class ProfessionsQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<IReplicaSet<Profession>> GetProfessionsByNames(
+    public Task<Replica<HashSet<Profession>>> GetProfessionsByNames(
         IReadOnlyCollection<ProfessionName> professionNames,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -71,7 +71,7 @@ public sealed class ProfessionsQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<IReplicaPage<Profession>> GetProfessionsByPage(
+    public Task<Replica<HashSet<Profession>>> GetProfessionsByPage(
         int pageIndex,
         int? pageSize = default,
         Language? language = default,

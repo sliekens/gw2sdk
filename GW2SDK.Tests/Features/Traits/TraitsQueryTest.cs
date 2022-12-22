@@ -22,9 +22,9 @@ public class TraitsQueryTest
 
         var actual = await sut.Traits.GetTraits();
 
-        Assert.Equal(actual.Context.ResultTotal, actual.Count);
+        Assert.Equal(actual.ResultContext.ResultTotal, actual.Value.Count);
         Assert.All(
-            actual,
+            actual.Value,
             trait =>
             {
                 TraitFact.Id_is_positive(trait);
@@ -40,7 +40,7 @@ public class TraitsQueryTest
 
         var actual = await sut.Traits.GetTraitsIndex();
 
-        Assert.Equal(actual.Context.ResultTotal, actual.Count);
+        Assert.Equal(actual.ResultContext.ResultTotal, actual.Value.Count);
     }
 
     [Fact]
@@ -72,7 +72,7 @@ public class TraitsQueryTest
         var actual = await sut.Traits.GetTraitsByIds(ids);
 
         Assert.Collection(
-            actual,
+            actual.Value,
             first => Assert.Equal(214, first.Id),
             second => Assert.Equal(221, second.Id),
             third => Assert.Equal(222, third.Id)
@@ -87,7 +87,7 @@ public class TraitsQueryTest
 
         var actual = await sut.Traits.GetTraitsByPage(0, 3);
 
-        Assert.Equal(3, actual.Count);
-        Assert.Equal(3, actual.Context.PageSize);
+        Assert.Equal(3, actual.Value.Count);
+        Assert.Equal(3, actual.PageContext.PageSize);
     }
 }

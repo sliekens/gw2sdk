@@ -8,7 +8,7 @@ using static System.Net.Http.HttpMethod;
 namespace GuildWars2.Tokens;
 
 [PublicAPI]
-public sealed class TokenInfoRequest : IHttpRequest<IReplica<TokenInfo>>
+public sealed class TokenInfoRequest : IHttpRequest<Replica<TokenInfo>>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/tokeninfo")
     {
@@ -25,7 +25,7 @@ public sealed class TokenInfoRequest : IHttpRequest<IReplica<TokenInfo>>
 
     public MissingMemberBehavior MissingMemberBehavior { get; init; }
 
-    public async Task<IReplica<TokenInfo>> SendAsync(
+    public async Task<Replica<TokenInfo>> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
     )
@@ -38,13 +38,13 @@ public sealed class TokenInfoRequest : IHttpRequest<IReplica<TokenInfo>>
             .ConfigureAwait(false);
 
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
-
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
-
         return new Replica<TokenInfo>
         {
             Value = json.RootElement.GetTokenInfo(MissingMemberBehavior),
+            ResultContext = response.Headers.GetResultContext(),
+            PageContext = response.Headers.GetPageContext(),
             Date = response.Headers.Date.GetValueOrDefault(),
             Expires = response.Content.Headers.Expires,
             LastModified = response.Content.Headers.LastModified

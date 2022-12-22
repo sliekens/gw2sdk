@@ -17,7 +17,7 @@ public class JsonRecipeService
         this.http = http;
     }
 
-    public async Task<ISet<string>> GetAllJsonRecipes(IProgress<ICollectionContext> progress)
+    public async Task<ISet<string>> GetAllJsonRecipes(IProgress<ResultContext> progress)
     {
         var ids = await GetRecipeIds().ConfigureAwait(false);
         var items = new SortedSet<string>();
@@ -33,12 +33,12 @@ public class JsonRecipeService
     {
         var request = new RecipesIndexRequest();
         var response = await request.SendAsync(http, CancellationToken.None);
-        return response.Values;
+        return response.Value;
     }
 
     public IAsyncEnumerable<string> GetJsonRecipesByIds(
         IReadOnlyCollection<int> itemIds,
-        IProgress<ICollectionContext>? progress = default,
+        IProgress<ResultContext>? progress = default,
         CancellationToken cancellationToken = default
     )
     {

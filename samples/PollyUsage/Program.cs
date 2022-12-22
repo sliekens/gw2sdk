@@ -1,4 +1,6 @@
 ﻿using GuildWars2;
+using GuildWars2.Achievements;
+using GuildWars2.Achievements.Dailies;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Polly;
@@ -43,15 +45,14 @@ var host = new HostBuilder().ConfigureServices(
     )
     .Build();
 
-var gw2Client = host.Services.GetRequiredService<Gw2Client>();
-var dailies = await gw2Client.Achievements.GetDailyAchievements();
-var fractals = await gw2Client.Achievements.GetAchievementsByIds(
-    dailies.Value.Fractals.Select(fractal => fractal.Id).ToList()
-);
 
-Console.WriteLine("Daily fractals: {0:m}", dailies.Date);
+var gw2 = host.Services.GetRequiredService<Gw2Client>();
+DailyAchievementGroup dailies = await gw2.Achievements.GetDailyAchievements();
+HashSet<Achievement> dailyFractals = await gw2.Achievements.GetAchievementsByIds(dailies.Fractals.Select(fractal => fractal.Id).ToList());
+
+Console.WriteLine("Daily fractals");
 Console.WriteLine("========================================");
-foreach (var fractal in fractals)
+foreach (var fractal in dailyFractals)
 {
     Console.WriteLine("{0,-40}: {1}", fractal.Name, fractal.Requirement);
 }

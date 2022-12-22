@@ -15,7 +15,7 @@ public class ItemStatsQueryTest
 
         var actual = await sut.ItemStats.GetItemStats();
 
-        Assert.Equal(actual.Context.ResultTotal, actual.Count);
+        Assert.Equal(actual.ResultContext.ResultTotal, actual.Value.Count);
     }
 
     [Fact]
@@ -26,7 +26,7 @@ public class ItemStatsQueryTest
 
         var actual = await sut.ItemStats.GetItemStatsIndex();
 
-        Assert.Equal(actual.Context.ResultTotal, actual.Count);
+        Assert.Equal(actual.ResultContext.ResultTotal, actual.Value.Count);
     }
 
     [Fact]
@@ -58,7 +58,7 @@ public class ItemStatsQueryTest
         var actual = await sut.ItemStats.GetItemStatsByIds(ids);
 
         Assert.Collection(
-            actual,
+            actual.Value,
             first => Assert.Contains(first.Id, ids),
             second => Assert.Contains(second.Id, ids),
             third => Assert.Contains(third.Id, ids)
@@ -73,8 +73,8 @@ public class ItemStatsQueryTest
 
         var actual = await sut.ItemStats.GetItemStatsByPage(0, 3);
 
-        Assert.Equal(3, actual.Count);
-        Assert.Equal(3, actual.Context.PageSize);
-        Assert.False(actual.Context.Next.IsEmpty);
+        Assert.Equal(3, actual.Value.Count);
+        Assert.Equal(3, actual.PageContext.PageSize);
+        Assert.False(actual.PageContext.Next.IsEmpty);
     }
 }

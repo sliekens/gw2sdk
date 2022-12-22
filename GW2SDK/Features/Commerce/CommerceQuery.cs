@@ -28,7 +28,7 @@ public sealed class CommerceQuery
     #region v2/commerce/delivery
 
     [Scope(Permission.TradingPost)]
-    public Task<IReplica<DeliveryBox>> GetDeliveryBox(
+    public Task<Replica<DeliveryBox>> GetDeliveryBox(
         string? accessToken,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
@@ -46,13 +46,15 @@ public sealed class CommerceQuery
 
     #region v2/commerce/prices
 
-    public Task<IReplicaSet<int>> GetItemPricesIndex(CancellationToken cancellationToken = default)
+    public Task<Replica<HashSet<int>>> GetItemPricesIndex(
+        CancellationToken cancellationToken = default
+    )
     {
         ItemPricesIndexRequest request = new();
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<IReplica<ItemPrice>> GetItemPriceById(
+    public Task<Replica<ItemPrice>> GetItemPriceById(
         int itemId,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
@@ -68,7 +70,7 @@ public sealed class CommerceQuery
     public IAsyncEnumerable<ItemPrice> GetItemPricesByIds(
         IReadOnlyCollection<int> itemIds,
         MissingMemberBehavior missingMemberBehavior = default,
-        IProgress<ICollectionContext>? progress = default,
+        IProgress<ResultContext>? progress = default,
         CancellationToken cancellationToken = default
     )
     {
@@ -80,7 +82,7 @@ public sealed class CommerceQuery
                     MissingMemberBehavior = missingMemberBehavior
                 };
                 var response = await request.SendAsync(http, ct).ConfigureAwait(false);
-                return response.Values;
+                return response.Value;
             },
             progress
         );
@@ -90,13 +92,13 @@ public sealed class CommerceQuery
 
     public async IAsyncEnumerable<ItemPrice> GetItemPrices(
         MissingMemberBehavior missingMemberBehavior = default,
-        IProgress<ICollectionContext>? progress = default,
+        IProgress<ResultContext>? progress = default,
         [EnumeratorCancellation] CancellationToken cancellationToken = default
     )
     {
         var index = await GetItemPricesIndex(cancellationToken).ConfigureAwait(false);
         var producer = GetItemPricesByIds(
-            index.Values,
+            index.Value,
             missingMemberBehavior,
             progress,
             cancellationToken
@@ -112,13 +114,15 @@ public sealed class CommerceQuery
 
     #region v2/commerce/listings
 
-    public Task<IReplicaSet<int>> GetOrderBooksIndex(CancellationToken cancellationToken = default)
+    public Task<Replica<HashSet<int>>> GetOrderBooksIndex(
+        CancellationToken cancellationToken = default
+    )
     {
         OrderBooksIndexRequest request = new();
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<IReplica<OrderBook>> GetOrderBookById(
+    public Task<Replica<OrderBook>> GetOrderBookById(
         int itemId,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
@@ -134,7 +138,7 @@ public sealed class CommerceQuery
     public IAsyncEnumerable<OrderBook> GetOrderBooksByIds(
         IReadOnlyCollection<int> itemIds,
         MissingMemberBehavior missingMemberBehavior = default,
-        IProgress<ICollectionContext>? progress = default,
+        IProgress<ResultContext>? progress = default,
         CancellationToken cancellationToken = default
     )
     {
@@ -146,7 +150,7 @@ public sealed class CommerceQuery
                     MissingMemberBehavior = missingMemberBehavior
                 };
                 var response = await request.SendAsync(http, ct).ConfigureAwait(false);
-                return response.Values;
+                return response.Value;
             },
             progress
         );
@@ -156,13 +160,13 @@ public sealed class CommerceQuery
 
     public async IAsyncEnumerable<OrderBook> GetOrderBooks(
         MissingMemberBehavior missingMemberBehavior = default,
-        IProgress<ICollectionContext>? progress = default,
+        IProgress<ResultContext>? progress = default,
         [EnumeratorCancellation] CancellationToken cancellationToken = default
     )
     {
         var index = await GetOrderBooksIndex(cancellationToken).ConfigureAwait(false);
         var producer = GetOrderBooksByIds(
-            index.Values,
+            index.Value,
             missingMemberBehavior,
             progress,
             cancellationToken
@@ -178,7 +182,7 @@ public sealed class CommerceQuery
 
     #region v2/commerce/exchange
 
-    public Task<IReplica<GemsForGoldExchange>> ExchangeGemsForGold(
+    public Task<Replica<GemsForGoldExchange>> ExchangeGemsForGold(
         int gemsCount,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
@@ -191,7 +195,7 @@ public sealed class CommerceQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<IReplica<GoldForGemsExchange>> ExchangeGoldForGems(
+    public Task<Replica<GoldForGemsExchange>> ExchangeGoldForGems(
         Coin coinsCount,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
@@ -208,7 +212,7 @@ public sealed class CommerceQuery
 
     #region v2/commerce/transactions
 
-    public Task<IReplicaPage<Order>> GetBuyOrders(
+    public Task<Replica<HashSet<Order>>> GetBuyOrders(
         int pageIndex,
         int? pageSize,
         string? accessToken,
@@ -225,7 +229,7 @@ public sealed class CommerceQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<IReplicaPage<Order>> GetSellOrders(
+    public Task<Replica<HashSet<Order>>> GetSellOrders(
         int pageIndex,
         int? pageSize,
         string? accessToken,
@@ -242,7 +246,7 @@ public sealed class CommerceQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<IReplicaPage<Transaction>> GetPurchases(
+    public Task<Replica<HashSet<Transaction>>> GetPurchases(
         int pageIndex,
         int? pageSize,
         string? accessToken,
@@ -259,7 +263,7 @@ public sealed class CommerceQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<IReplicaPage<Transaction>> GetSales(
+    public Task<Replica<HashSet<Transaction>>> GetSales(
         int pageIndex,
         int? pageSize,
         string? accessToken,

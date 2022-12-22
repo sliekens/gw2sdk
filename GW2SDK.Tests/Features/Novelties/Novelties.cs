@@ -14,11 +14,11 @@ public class Novelties
 
         var actual = await sut.Novelties.GetNovelties();
 
-        Assert.NotEmpty(actual);
-        Assert.Equal(actual.Count, actual.Context.ResultCount);
-        Assert.Equal(actual.Count, actual.Context.ResultTotal);
+        Assert.NotEmpty(actual.Value);
+        Assert.Equal(actual.Value.Count, actual.ResultContext.ResultCount);
+        Assert.Equal(actual.Value.Count, actual.ResultContext.ResultTotal);
         Assert.All(
-            actual,
+            actual.Value,
             entry =>
             {
                 entry.Has_id();

@@ -15,7 +15,7 @@ public class WardrobeQueryTest
 
         var actual = await sut.Wardrobe.GetSkinsIndex();
 
-        Assert.Equal(actual.Context.ResultTotal, actual.Count);
+        Assert.Equal(actual.ResultContext.ResultTotal, actual.Value.Count);
     }
 
     [Fact]
@@ -47,7 +47,7 @@ public class WardrobeQueryTest
         var actual = await sut.Wardrobe.GetSkinsByIds(ids);
 
         Assert.Collection(
-            actual,
+            actual.Value,
             skin => Assert.Equal(1, skin.Id),
             skin => Assert.Equal(2, skin.Id),
             skin => Assert.Equal(3, skin.Id)
@@ -62,7 +62,7 @@ public class WardrobeQueryTest
 
         var actual = await sut.Wardrobe.GetSkinsByPage(0, 3);
 
-        Assert.Equal(3, actual.Count);
-        Assert.Equal(3, actual.Context.PageSize);
+        Assert.Equal(3, actual.Value.Count);
+        Assert.Equal(3, actual.PageContext.PageSize);
     }
 }

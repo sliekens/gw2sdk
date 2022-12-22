@@ -18,7 +18,7 @@ public sealed class SkillsQuery
         http.BaseAddress ??= BaseAddress.DefaultUri;
     }
 
-    public Task<IReplicaSet<Skill>> GetSkills(
+    public Task<Replica<HashSet<Skill>>> GetSkills(
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
@@ -32,13 +32,15 @@ public sealed class SkillsQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<IReplicaSet<int>> GetSkillsIndex(CancellationToken cancellationToken = default)
+    public Task<Replica<HashSet<int>>> GetSkillsIndex(
+        CancellationToken cancellationToken = default
+    )
     {
         SkillsIndexRequest request = new();
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<IReplica<Skill>> GetSkillById(
+    public Task<Replica<Skill>> GetSkillById(
         int skillId,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -53,7 +55,7 @@ public sealed class SkillsQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<IReplicaSet<Skill>> GetSkillsByIds(
+    public Task<Replica<HashSet<Skill>>> GetSkillsByIds(
         IReadOnlyCollection<int> skillIds,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -68,7 +70,7 @@ public sealed class SkillsQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<IReplicaPage<Skill>> GetSkillsByPage(
+    public Task<Replica<HashSet<Skill>>> GetSkillsByPage(
         int pageIndex,
         int? pageSize = default,
         Language? language = default,

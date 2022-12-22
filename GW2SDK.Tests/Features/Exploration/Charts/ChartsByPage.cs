@@ -18,10 +18,10 @@ public class ChartsByPage
 
         var actual = await sut.Maps.GetChartsByPage(continentId, floorId, regionId, 0, 3);
 
-        Assert.Equal(3, actual.Count);
-        Assert.Equal(3, actual.Context.PageSize);
+        Assert.Equal(3, actual.Value.Count);
+        Assert.Equal(3, actual.PageContext.PageSize);
         Assert.All(
-            actual,
+            actual.Value,
             entry =>
             {
                 // TODO: complete validation

@@ -7,7 +7,7 @@ using JetBrains.Annotations;
 namespace GuildWars2.Home.Cats;
 
 [PublicAPI]
-public sealed class CatByIdRequest : IHttpRequest<IReplica<Cat>>
+public sealed class CatByIdRequest : IHttpRequest<Replica<Cat>>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(HttpMethod.Get, "v2/home/cats") { AcceptEncoding = "gzip" };
@@ -21,7 +21,7 @@ public sealed class CatByIdRequest : IHttpRequest<IReplica<Cat>>
 
     public MissingMemberBehavior MissingMemberBehavior { get; init; }
 
-    public async Task<IReplica<Cat>> SendAsync(
+    public async Task<Replica<Cat>> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
     )
@@ -41,13 +41,13 @@ public sealed class CatByIdRequest : IHttpRequest<IReplica<Cat>>
             .ConfigureAwait(false);
 
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
-
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
-
         return new Replica<Cat>
         {
             Value = json.RootElement.GetCat(MissingMemberBehavior),
+            ResultContext = response.Headers.GetResultContext(),
+            PageContext = response.Headers.GetPageContext(),
             Date = response.Headers.Date.GetValueOrDefault(),
             Expires = response.Content.Headers.Expires,
             LastModified = response.Content.Headers.LastModified

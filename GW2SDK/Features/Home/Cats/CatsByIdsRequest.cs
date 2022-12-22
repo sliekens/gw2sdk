@@ -9,7 +9,7 @@ using JetBrains.Annotations;
 namespace GuildWars2.Home.Cats;
 
 [PublicAPI]
-public sealed class CatsByIdsRequest : IHttpRequest<IReplicaSet<Cat>>
+public sealed class CatsByIdsRequest : IHttpRequest<Replica<HashSet<Cat>>>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(HttpMethod.Get, "v2/home/cats") { AcceptEncoding = "gzip" };
@@ -24,7 +24,7 @@ public sealed class CatsByIdsRequest : IHttpRequest<IReplicaSet<Cat>>
 
     public MissingMemberBehavior MissingMemberBehavior { get; init; }
 
-    public async Task<IReplicaSet<Cat>> SendAsync(
+    public async Task<Replica<HashSet<Cat>>> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
     )
@@ -44,14 +44,13 @@ public sealed class CatsByIdsRequest : IHttpRequest<IReplicaSet<Cat>>
             .ConfigureAwait(false);
 
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
-
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
-
-        return new ReplicaSet<Cat>
+        return new Replica<HashSet<Cat>>
         {
-            Values = json.RootElement.GetSet(entry => entry.GetCat(MissingMemberBehavior)),
-            Context = response.Headers.GetCollectionContext(),
+            Value = json.RootElement.GetSet(entry => entry.GetCat(MissingMemberBehavior)),
+            ResultContext = response.Headers.GetResultContext(),
+            PageContext = response.Headers.GetPageContext(),
             Date = response.Headers.Date.GetValueOrDefault(),
             Expires = response.Content.Headers.Expires,
             LastModified = response.Content.Headers.LastModified

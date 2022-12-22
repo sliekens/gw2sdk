@@ -18,7 +18,7 @@ public sealed class FinishersQuery
         http.BaseAddress ??= BaseAddress.DefaultUri;
     }
 
-    public Task<IReplicaSet<Finisher>> GetFinishers(
+    public Task<Replica<HashSet<Finisher>>> GetFinishers(
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
@@ -32,13 +32,15 @@ public sealed class FinishersQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<IReplicaSet<int>> GetFinishersIndex(CancellationToken cancellationToken = default)
+    public Task<Replica<HashSet<int>>> GetFinishersIndex(
+        CancellationToken cancellationToken = default
+    )
     {
         FinishersIndexRequest request = new();
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<IReplica<Finisher>> GetFinisherById(
+    public Task<Replica<Finisher>> GetFinisherById(
         int finisherId,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -53,7 +55,7 @@ public sealed class FinishersQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<IReplicaSet<Finisher>> GetFinishersByIds(
+    public Task<Replica<HashSet<Finisher>>> GetFinishersByIds(
         IReadOnlyCollection<int> finisherIds,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -68,7 +70,7 @@ public sealed class FinishersQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<IReplicaPage<Finisher>> GetFinishersByPage(
+    public Task<Replica<HashSet<Finisher>>> GetFinishersByPage(
         int pageIndex,
         int? pageSize = default,
         Language? language = default,

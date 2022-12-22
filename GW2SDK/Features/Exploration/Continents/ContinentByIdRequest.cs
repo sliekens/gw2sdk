@@ -8,7 +8,7 @@ using static System.Net.Http.HttpMethod;
 namespace GuildWars2.Exploration.Continents;
 
 [PublicAPI]
-public sealed class ContinentByIdRequest : IHttpRequest<IReplica<Continent>>
+public sealed class ContinentByIdRequest : IHttpRequest<Replica<Continent>>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/continents")
     {
@@ -26,7 +26,7 @@ public sealed class ContinentByIdRequest : IHttpRequest<IReplica<Continent>>
 
     public MissingMemberBehavior MissingMemberBehavior { get; init; }
 
-    public async Task<IReplica<Continent>> SendAsync(
+    public async Task<Replica<Continent>> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
     )
@@ -47,13 +47,13 @@ public sealed class ContinentByIdRequest : IHttpRequest<IReplica<Continent>>
             .ConfigureAwait(false);
 
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
-
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
-
         return new Replica<Continent>
         {
             Value = json.RootElement.GetContinent(MissingMemberBehavior),
+            ResultContext = response.Headers.GetResultContext(),
+            PageContext = response.Headers.GetPageContext(),
             Date = response.Headers.Date.GetValueOrDefault(),
             Expires = response.Content.Headers.Expires,
             LastModified = response.Content.Headers.LastModified

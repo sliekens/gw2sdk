@@ -44,7 +44,7 @@ public class CommerceQueryTest
 
         var actual = await sut.Commerce.GetItemPricesIndex();
 
-        Assert.Equal(actual.Context.ResultTotal, actual.Count);
+        Assert.Equal(actual.ResultContext.ResultTotal, actual.Value.Count);
     }
 
     [Fact]
@@ -138,7 +138,7 @@ public class CommerceQueryTest
 
         var actual = await sut.Commerce.GetOrderBooksIndex();
 
-        Assert.Equal(actual.Context.ResultTotal, actual.Count);
+        Assert.Equal(actual.ResultContext.ResultTotal, actual.Value.Count);
     }
 
     [Fact]
@@ -294,7 +294,7 @@ public class CommerceQueryTest
 
         var bids = await sut.Commerce.GetBuyOrders(0, 200, accessToken.Key);
 
-        Assert.NotEmpty(bids);
+        Assert.NotEmpty(bids.Value);
     }
 
     [Fact]
@@ -306,7 +306,7 @@ public class CommerceQueryTest
 
         var bids = await sut.Commerce.GetSellOrders(0, 200, accessToken.Key);
 
-        Assert.NotEmpty(bids);
+        Assert.NotEmpty(bids.Value);
     }
 
     [Fact]
@@ -318,7 +318,7 @@ public class CommerceQueryTest
 
         var bids = await sut.Commerce.GetPurchases(0, 200, accessToken.Key);
 
-        Assert.NotEmpty(bids);
+        Assert.NotEmpty(bids.Value);
     }
 
     [Fact]
@@ -330,6 +330,6 @@ public class CommerceQueryTest
 
         var bids = await sut.Commerce.GetSales(0, 200, accessToken.Key);
 
-        Assert.NotEmpty(bids);
+        Assert.NotEmpty(bids.Value);
     }
 }

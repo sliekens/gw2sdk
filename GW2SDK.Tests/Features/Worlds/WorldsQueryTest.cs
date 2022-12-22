@@ -15,9 +15,9 @@ public sealed class WorldsQueryTest
 
         var actual = await sut.Worlds.GetWorlds();
 
-        Assert.Equal(actual.Context.ResultTotal, actual.Count);
+        Assert.Equal(actual.ResultContext.ResultTotal, actual.Value.Count);
         Assert.All(
-            actual,
+            actual.Value,
             world =>
             {
                 world.Id_is_positive();
@@ -35,7 +35,7 @@ public sealed class WorldsQueryTest
 
         var actual = await sut.Worlds.GetWorldsIndex();
 
-        Assert.Equal(actual.Context.ResultTotal, actual.Count);
+        Assert.Equal(actual.ResultContext.ResultTotal, actual.Value.Count);
     }
 
     [Fact]
@@ -67,7 +67,7 @@ public sealed class WorldsQueryTest
         var actual = await sut.Worlds.GetWorldsByIds(ids);
 
         Assert.Collection(
-            actual,
+            actual.Value,
             world => Assert.Equal(1001, world.Id),
             world => Assert.Equal(1002, world.Id),
             world => Assert.Equal(1003, world.Id)
@@ -82,7 +82,7 @@ public sealed class WorldsQueryTest
 
         var actual = await sut.Worlds.GetWorldsByPage(0, 3);
 
-        Assert.Equal(3, actual.Count);
-        Assert.Equal(3, actual.Context.PageSize);
+        Assert.Equal(3, actual.Value.Count);
+        Assert.Equal(3, actual.PageContext.PageSize);
     }
 }

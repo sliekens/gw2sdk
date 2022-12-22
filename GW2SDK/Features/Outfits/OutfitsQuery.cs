@@ -18,7 +18,7 @@ public sealed class OutfitsQuery
         http.BaseAddress ??= BaseAddress.DefaultUri;
     }
 
-    public Task<IReplicaSet<Outfit>> GetOutfits(
+    public Task<Replica<HashSet<Outfit>>> GetOutfits(
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
@@ -32,13 +32,15 @@ public sealed class OutfitsQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<IReplicaSet<int>> GetOutfitsIndex(CancellationToken cancellationToken = default)
+    public Task<Replica<HashSet<int>>> GetOutfitsIndex(
+        CancellationToken cancellationToken = default
+    )
     {
         OutfitsIndexRequest request = new();
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<IReplica<Outfit>> GetOutfitById(
+    public Task<Replica<Outfit>> GetOutfitById(
         int outfitId,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -53,7 +55,7 @@ public sealed class OutfitsQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<IReplicaSet<Outfit>> GetOutfitsByIds(
+    public Task<Replica<HashSet<Outfit>>> GetOutfitsByIds(
         IReadOnlyCollection<int> outfitIds,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -68,7 +70,7 @@ public sealed class OutfitsQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<IReplicaPage<Outfit>> GetOutfitsByPage(
+    public Task<Replica<HashSet<Outfit>>> GetOutfitsByPage(
         int pageIndex,
         int? pageSize = default,
         Language? language = default,

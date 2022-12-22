@@ -1,4 +1,5 @@
-﻿using System.Net.Http;
+﻿using System.Collections.Generic;
+using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 using GuildWars2.Http;
@@ -9,7 +10,7 @@ using static System.Net.Http.HttpMethod;
 namespace GuildWars2.Achievements;
 
 [PublicAPI]
-public sealed class AccountAchievementsRequest : IHttpRequest<IReplicaSet<AccountAchievement>>
+public sealed class AccountAchievementsRequest : IHttpRequest<Replica<HashSet<AccountAchievement>>>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/account/achievements")
@@ -26,7 +27,7 @@ public sealed class AccountAchievementsRequest : IHttpRequest<IReplicaSet<Accoun
 
     public MissingMemberBehavior MissingMemberBehavior { get; init; }
 
-    public async Task<IReplicaSet<AccountAchievement>> SendAsync(
+    public async Task<Replica<HashSet<AccountAchievement>>> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
     )
@@ -39,14 +40,16 @@ public sealed class AccountAchievementsRequest : IHttpRequest<IReplicaSet<Accoun
             .ConfigureAwait(false);
 
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
-
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
-
-        return new ReplicaSet<AccountAchievement>
+        return new Replica<HashSet<AccountAchievement>>
         {
-            Values = json.RootElement.GetSet(entry => entry.GetAccountAchievement(MissingMemberBehavior)),
-            Context = response.Headers.GetCollectionContext(),
+            Value =
+                json.RootElement.GetSet(
+                    entry => entry.GetAccountAchievement(MissingMemberBehavior)
+                ),
+            ResultContext = response.Headers.GetResultContext(),
+            PageContext = response.Headers.GetPageContext(),
             Date = response.Headers.Date.GetValueOrDefault(),
             Expires = response.Content.Headers.Expires,
             LastModified = response.Content.Headers.LastModified

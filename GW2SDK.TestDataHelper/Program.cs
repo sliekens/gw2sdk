@@ -101,7 +101,7 @@ public class Program
         }
     }
 
-    private static Progress<ICollectionContext> Update(ProgressTask progressTask) =>
+    private static Progress<ResultContext> Update(ProgressTask progressTask) =>
         new(c => progressTask.MaxValue(c.ResultTotal).Value(c.ResultCount));
 
     private static StreamWriter CreateTextCompressed(string path) =>

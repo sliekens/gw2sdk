@@ -16,7 +16,7 @@ public class ItemsQueryTest
 
         var actual = await sut.Items.GetItemsIndex();
 
-        Assert.Equal(actual.Context.ResultTotal, actual.Count);
+        Assert.Equal(actual.ResultContext.ResultTotal, actual.Value.Count);
     }
 
     [Fact]
@@ -63,8 +63,8 @@ public class ItemsQueryTest
 
         var actual = await sut.Items.GetItemsByPage(0, 3);
 
-        Assert.Equal(3, actual.Count);
-        Assert.Equal(3, actual.Context.PageSize);
+        Assert.Equal(3, actual.Value.Count);
+        Assert.Equal(3, actual.PageContext.PageSize);
     }
 
     [Fact(

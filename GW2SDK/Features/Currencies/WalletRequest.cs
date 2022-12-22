@@ -9,7 +9,7 @@ using JetBrains.Annotations;
 namespace GuildWars2.Currencies;
 
 [PublicAPI]
-public sealed class WalletRequest : IHttpRequest<IReplica<IReadOnlyCollection<CurrencyAmount>>>
+public sealed class WalletRequest : IHttpRequest<Replica<HashSet<CurrencyAmount>>>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(HttpMethod.Get, "v2/account/wallet")
@@ -22,7 +22,7 @@ public sealed class WalletRequest : IHttpRequest<IReplica<IReadOnlyCollection<Cu
 
     public MissingMemberBehavior MissingMemberBehavior { get; init; }
 
-    public async Task<IReplica<IReadOnlyCollection<CurrencyAmount>>> SendAsync(
+    public async Task<Replica<HashSet<CurrencyAmount>>> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
     )
@@ -35,14 +35,14 @@ public sealed class WalletRequest : IHttpRequest<IReplica<IReadOnlyCollection<Cu
             .ConfigureAwait(false);
 
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
-
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
-
-        return new Replica<IReadOnlyCollection<CurrencyAmount>>
+        return new Replica<HashSet<CurrencyAmount>>
         {
             Value =
                 json.RootElement.GetSet(item => item.GetCurrencyAmount(MissingMemberBehavior)),
+            ResultContext = response.Headers.GetResultContext(),
+            PageContext = response.Headers.GetPageContext(),
             Date = response.Headers.Date.GetValueOrDefault(),
             Expires = response.Content.Headers.Expires,
             LastModified = response.Content.Headers.LastModified

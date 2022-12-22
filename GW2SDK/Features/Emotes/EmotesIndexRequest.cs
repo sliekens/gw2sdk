@@ -1,4 +1,5 @@
-﻿using System.Net.Http;
+﻿using System.Collections.Generic;
+using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 using GuildWars2.Http;
@@ -8,7 +9,7 @@ using JetBrains.Annotations;
 namespace GuildWars2.Emotes;
 
 [PublicAPI]
-public sealed class EmotesIndexRequest : IHttpRequest<IReplicaSet<string>>
+public sealed class EmotesIndexRequest : IHttpRequest<Replica<HashSet<string>>>
 {
     private static readonly HttpRequestMessageTemplate Template = new(HttpMethod.Get, "v2/emotes")
     {
@@ -16,7 +17,7 @@ public sealed class EmotesIndexRequest : IHttpRequest<IReplicaSet<string>>
         Arguments = new QueryBuilder { { "v", SchemaVersion.Recommended } }
     };
 
-    public async Task<IReplicaSet<string>> SendAsync(
+    public async Task<Replica<HashSet<string>>> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
     )
@@ -29,14 +30,13 @@ public sealed class EmotesIndexRequest : IHttpRequest<IReplicaSet<string>>
             .ConfigureAwait(false);
 
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
-
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
-
-        return new ReplicaSet<string>
+        return new Replica<HashSet<string>>
         {
-            Values = json.RootElement.GetSet(entry => entry.GetStringRequired()),
-            Context = response.Headers.GetCollectionContext(),
+            Value = json.RootElement.GetSet(entry => entry.GetStringRequired()),
+            ResultContext = response.Headers.GetResultContext(),
+            PageContext = response.Headers.GetPageContext(),
             Date = response.Headers.Date.GetValueOrDefault(),
             Expires = response.Content.Headers.Expires,
             LastModified = response.Content.Headers.LastModified

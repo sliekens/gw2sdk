@@ -45,9 +45,9 @@ public class WalletQueryTest
 
         var actual = await sut.Wallet.GetCurrencies();
 
-        Assert.Equal(actual.Context.ResultTotal, actual.Count);
+        Assert.Equal(actual.ResultContext.ResultTotal, actual.Value.Count);
         Assert.All(
-            actual,
+            actual.Value,
             currency =>
             {
                 CurrencyFact.Id_is_positive(currency);
@@ -67,7 +67,7 @@ public class WalletQueryTest
 
         var actual = await sut.Wallet.GetCurrenciesIndex();
 
-        Assert.Equal(actual.Context.ResultTotal, actual.Count);
+        Assert.Equal(actual.ResultContext.ResultTotal, actual.Value.Count);
     }
 
     [Fact]
@@ -99,7 +99,7 @@ public class WalletQueryTest
         var actual = await sut.Wallet.GetCurrenciesByIds(ids);
 
         Assert.Collection(
-            actual,
+            actual.Value,
             first => Assert.Equal(1, first.Id),
             second => Assert.Equal(2, second.Id),
             third => Assert.Equal(3, third.Id)
@@ -114,7 +114,7 @@ public class WalletQueryTest
 
         var actual = await sut.Wallet.GetCurrenciesByPage(0, 3);
 
-        Assert.Equal(3, actual.Count);
-        Assert.Equal(3, actual.Context.PageSize);
+        Assert.Equal(3, actual.Value.Count);
+        Assert.Equal(3, actual.PageContext.PageSize);
     }
 }

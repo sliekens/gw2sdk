@@ -17,11 +17,11 @@ public class PointsOfInterest
 
         var actual = await sut.Maps.GetPointsOfInterest(continentId, floorId, regionId, mapId);
 
-        Assert.NotEmpty(actual);
-        Assert.Equal(actual.Count, actual.Context.ResultCount);
-        Assert.Equal(actual.Count, actual.Context.ResultTotal);
-        actual.All_have_ids();
-        actual.Some_have_names();
-        actual.All_have_chat_links();
+        Assert.NotEmpty(actual.Value);
+        Assert.Equal(actual.Value.Count, actual.ResultContext.ResultCount);
+        Assert.Equal(actual.Value.Count, actual.ResultContext.ResultTotal);
+        actual.Value.All_have_ids();
+        actual.Value.Some_have_names();
+        actual.Value.All_have_chat_links();
     }
 }

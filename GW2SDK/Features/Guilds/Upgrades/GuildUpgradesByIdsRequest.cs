@@ -10,7 +10,7 @@ using JetBrains.Annotations;
 namespace GuildWars2.Guilds.Upgrades;
 
 [PublicAPI]
-public sealed class GuildUpgradesByIdsRequest : IHttpRequest<IReplicaSet<GuildUpgrade>>
+public sealed class GuildUpgradesByIdsRequest : IHttpRequest<Replica<HashSet<GuildUpgrade>>>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(HttpMethod.Get, "v2/guild/upgrades") { AcceptEncoding = "gzip" };
@@ -27,7 +27,7 @@ public sealed class GuildUpgradesByIdsRequest : IHttpRequest<IReplicaSet<GuildUp
 
     public MissingMemberBehavior MissingMemberBehavior { get; init; }
 
-    public async Task<IReplicaSet<GuildUpgrade>> SendAsync(
+    public async Task<Replica<HashSet<GuildUpgrade>>> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
     )
@@ -35,8 +35,7 @@ public sealed class GuildUpgradesByIdsRequest : IHttpRequest<IReplicaSet<GuildUp
         using var response = await httpClient.SendAsync(
                 Template with
                 {
-                    Arguments =
-                    new QueryBuilder
+                    Arguments = new QueryBuilder
                     {
                         { "ids", GuildUpgradeIds.Select(id => id.ToString()) },
                         { "v", SchemaVersion.Recommended }
@@ -49,14 +48,14 @@ public sealed class GuildUpgradesByIdsRequest : IHttpRequest<IReplicaSet<GuildUp
             .ConfigureAwait(false);
 
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
-
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
-
-        return new ReplicaSet<GuildUpgrade>
+        return new Replica<HashSet<GuildUpgrade>>
         {
-            Values = json.RootElement.GetSet(entry => entry.GetGuildUpgrade(MissingMemberBehavior)),
-            Context = response.Headers.GetCollectionContext(),
+            Value =
+                json.RootElement.GetSet(entry => entry.GetGuildUpgrade(MissingMemberBehavior)),
+            ResultContext = response.Headers.GetResultContext(),
+            PageContext = response.Headers.GetPageContext(),
             Date = response.Headers.Date.GetValueOrDefault(),
             Expires = response.Content.Headers.Expires,
             LastModified = response.Content.Headers.LastModified

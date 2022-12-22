@@ -7,7 +7,7 @@ using JetBrains.Annotations;
 namespace GuildWars2.Minipets;
 
 [PublicAPI]
-public sealed class MinipetByIdRequest : IHttpRequest<IReplica<Minipet>>
+public sealed class MinipetByIdRequest : IHttpRequest<Replica<Minipet>>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(HttpMethod.Get, "v2/minis") { AcceptEncoding = "gzip" };
@@ -23,7 +23,7 @@ public sealed class MinipetByIdRequest : IHttpRequest<IReplica<Minipet>>
 
     public MissingMemberBehavior MissingMemberBehavior { get; init; }
 
-    public async Task<IReplica<Minipet>> SendAsync(
+    public async Task<Replica<Minipet>> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
     )
@@ -44,13 +44,13 @@ public sealed class MinipetByIdRequest : IHttpRequest<IReplica<Minipet>>
             .ConfigureAwait(false);
 
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
-
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
-
         return new Replica<Minipet>
         {
             Value = json.RootElement.GetMinipet(MissingMemberBehavior),
+            ResultContext = response.Headers.GetResultContext(),
+            PageContext = response.Headers.GetPageContext(),
             Date = response.Headers.Date.GetValueOrDefault(),
             Expires = response.Content.Headers.Expires,
             LastModified = response.Content.Headers.LastModified

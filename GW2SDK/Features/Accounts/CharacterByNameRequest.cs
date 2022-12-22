@@ -8,7 +8,7 @@ using static System.Net.Http.HttpMethod;
 namespace GuildWars2.Accounts;
 
 [PublicAPI]
-public sealed class CharacterByNameRequest : IHttpRequest<IReplica<Character>>
+public sealed class CharacterByNameRequest : IHttpRequest<Replica<Character>>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/characters")
     {
@@ -26,7 +26,7 @@ public sealed class CharacterByNameRequest : IHttpRequest<IReplica<Character>>
 
     public MissingMemberBehavior MissingMemberBehavior { get; init; }
 
-    public async Task<IReplica<Character>> SendAsync(
+    public async Task<Replica<Character>> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
     )
@@ -47,13 +47,13 @@ public sealed class CharacterByNameRequest : IHttpRequest<IReplica<Character>>
             .ConfigureAwait(false);
 
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
-
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
-
         return new Replica<Character>
         {
             Value = json.RootElement.GetCharacter(MissingMemberBehavior),
+            ResultContext = response.Headers.GetResultContext(),
+            PageContext = response.Headers.GetPageContext(),
             Date = response.Headers.Date.GetValueOrDefault(),
             Expires = response.Content.Headers.Expires,
             LastModified = response.Content.Headers.LastModified

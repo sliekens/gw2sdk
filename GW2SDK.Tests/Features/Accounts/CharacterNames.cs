@@ -17,6 +17,6 @@ public class CharacterNames
 
         var expected = services.Resolve<TestCharacterName>().Name;
 
-        Assert.Contains(expected, actual);
+        Assert.Contains(expected, actual.Value);
     }
 }

@@ -25,10 +25,10 @@ public class ChartsByFilter
 
         var actual = await sut.Maps.GetChartsByIds(continentId, floorId, regionId, ids);
 
-        Assert.Equal(ids.Count, actual.Count);
-        Assert.Equal(ids.Count, actual.Context.ResultCount);
+        Assert.Equal(ids.Count, actual.Value.Count);
+        Assert.Equal(ids.Count, actual.ResultContext.ResultCount);
         Assert.All(
-            actual,
+            actual.Value,
             entry =>
             {
                 // TODO: complete validation

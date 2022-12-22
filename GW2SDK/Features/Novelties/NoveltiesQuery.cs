@@ -18,7 +18,7 @@ public sealed class NoveltiesQuery
         http.BaseAddress ??= BaseAddress.DefaultUri;
     }
 
-    public Task<IReplicaSet<Novelty>> GetNovelties(
+    public Task<Replica<HashSet<Novelty>>> GetNovelties(
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
@@ -32,13 +32,15 @@ public sealed class NoveltiesQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<IReplicaSet<int>> GetNoveltiesIndex(CancellationToken cancellationToken = default)
+    public Task<Replica<HashSet<int>>> GetNoveltiesIndex(
+        CancellationToken cancellationToken = default
+    )
     {
         NoveltiesIndexRequest request = new();
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<IReplica<Novelty>> GetNoveltyById(
+    public Task<Replica<Novelty>> GetNoveltyById(
         int noveltyId,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -53,7 +55,7 @@ public sealed class NoveltiesQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<IReplicaSet<Novelty>> GetNoveltiesByIds(
+    public Task<Replica<HashSet<Novelty>>> GetNoveltiesByIds(
         IReadOnlyCollection<int> noveltyIds,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -68,7 +70,7 @@ public sealed class NoveltiesQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<IReplicaPage<Novelty>> GetNoveltiesByPage(
+    public Task<Replica<HashSet<Novelty>>> GetNoveltiesByPage(
         int pageIndex,
         int? pageSize = default,
         Language? language = default,

@@ -1,4 +1,5 @@
-﻿using System.Globalization;
+﻿using System.Collections.Generic;
+using System.Globalization;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
@@ -10,7 +11,7 @@ using static System.Net.Http.HttpMethod;
 namespace GuildWars2.Exploration.Charts;
 
 [PublicAPI]
-public sealed class ChartsIndexRequest : IHttpRequest<IReplicaSet<int>>
+public sealed class ChartsIndexRequest : IHttpRequest<Replica<HashSet<int>>>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/continents/:id/floors/:floor/regions/:region/maps")
@@ -32,7 +33,7 @@ public sealed class ChartsIndexRequest : IHttpRequest<IReplicaSet<int>>
 
     public int RegionId { get; }
 
-    public async Task<IReplicaSet<int>> SendAsync(
+    public async Task<Replica<HashSet<int>>> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
     )
@@ -51,14 +52,13 @@ public sealed class ChartsIndexRequest : IHttpRequest<IReplicaSet<int>>
             .ConfigureAwait(false);
 
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
-
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
-
-        return new ReplicaSet<int>
+        return new Replica<HashSet<int>>
         {
-            Values = json.RootElement.GetSet(entry => entry.GetInt32()),
-            Context = response.Headers.GetCollectionContext(),
+            Value = json.RootElement.GetSet(entry => entry.GetInt32()),
+            ResultContext = response.Headers.GetResultContext(),
+            PageContext = response.Headers.GetPageContext(),
             Date = response.Headers.Date.GetValueOrDefault(),
             Expires = response.Content.Headers.Expires,
             LastModified = response.Content.Headers.LastModified

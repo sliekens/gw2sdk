@@ -1,4 +1,5 @@
-﻿using System.Net.Http;
+﻿using System.Collections.Generic;
+using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 using GuildWars2.Http;
@@ -8,7 +9,7 @@ using JetBrains.Annotations;
 namespace GuildWars2.Gliders;
 
 [PublicAPI]
-public sealed class GlidersRequest : IHttpRequest<IReplicaSet<Glider>>
+public sealed class GlidersRequest : IHttpRequest<Replica<HashSet<Glider>>>
 {
     private static readonly HttpRequestMessageTemplate Template = new(HttpMethod.Get, "v2/gliders")
     {
@@ -24,7 +25,7 @@ public sealed class GlidersRequest : IHttpRequest<IReplicaSet<Glider>>
 
     public MissingMemberBehavior MissingMemberBehavior { get; init; }
 
-    public async Task<IReplicaSet<Glider>> SendAsync(
+    public async Task<Replica<HashSet<Glider>>> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
     )
@@ -37,14 +38,13 @@ public sealed class GlidersRequest : IHttpRequest<IReplicaSet<Glider>>
             .ConfigureAwait(false);
 
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
-
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
-
-        return new ReplicaSet<Glider>
+        return new Replica<HashSet<Glider>>
         {
-            Values = json.RootElement.GetSet(entry => entry.GetGlider(MissingMemberBehavior)),
-            Context = response.Headers.GetCollectionContext(),
+            Value = json.RootElement.GetSet(entry => entry.GetGlider(MissingMemberBehavior)),
+            ResultContext = response.Headers.GetResultContext(),
+            PageContext = response.Headers.GetPageContext(),
             Date = response.Headers.Date.GetValueOrDefault(),
             Expires = response.Content.Headers.Expires,
             LastModified = response.Content.Headers.LastModified

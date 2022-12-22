@@ -9,7 +9,7 @@ using static System.Net.Http.HttpMethod;
 namespace GuildWars2.Exploration.PointsOfInterest;
 
 [PublicAPI]
-public sealed class PointOfInterestByIdRequest : IHttpRequest<IReplica<PointOfInterest>>
+public sealed class PointOfInterestByIdRequest : IHttpRequest<Replica<PointOfInterest>>
 {
     private static readonly HttpRequestMessageTemplate Template = new(
         Get,
@@ -45,7 +45,7 @@ public sealed class PointOfInterestByIdRequest : IHttpRequest<IReplica<PointOfIn
 
     public MissingMemberBehavior MissingMemberBehavior { get; init; }
 
-    public async Task<IReplica<PointOfInterest>> SendAsync(
+    public async Task<Replica<PointOfInterest>> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
     )
@@ -71,13 +71,13 @@ public sealed class PointOfInterestByIdRequest : IHttpRequest<IReplica<PointOfIn
             .ConfigureAwait(false);
 
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
-
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
-
         return new Replica<PointOfInterest>
         {
             Value = json.RootElement.GetPointOfInterest(MissingMemberBehavior),
+            ResultContext = response.Headers.GetResultContext(),
+            PageContext = response.Headers.GetPageContext(),
             Date = response.Headers.Date.GetValueOrDefault(),
             Expires = response.Content.Headers.Expires,
             LastModified = response.Content.Headers.LastModified

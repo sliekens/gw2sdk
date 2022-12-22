@@ -15,9 +15,9 @@ public class ArmoryQueryTest
 
         var actual = await sut.Armory.GetLegendaryItems();
 
-        Assert.Equal(actual.Context.ResultTotal, actual.Count);
+        Assert.Equal(actual.ResultContext.ResultTotal, actual.Value.Count);
         Assert.All(
-            actual,
+            actual.Value,
             entry =>
             {
                 Assert.True(entry.Id > 0);
@@ -34,7 +34,7 @@ public class ArmoryQueryTest
 
         var actual = await sut.Armory.GetLegendaryItemsIndex();
 
-        Assert.Equal(actual.Context.ResultTotal, actual.Count);
+        Assert.Equal(actual.ResultContext.ResultTotal, actual.Value.Count);
     }
 
     [Fact]
@@ -66,7 +66,7 @@ public class ArmoryQueryTest
         var actual = await sut.Armory.GetLegendaryItemsByIds(ids);
 
         Assert.Collection(
-            actual,
+            actual.Value,
             first => Assert.Equal(83162, first.Id),
             second => Assert.Equal(93105, second.Id),
             third => Assert.Equal(80111, third.Id)
@@ -81,8 +81,8 @@ public class ArmoryQueryTest
 
         var actual = await sut.Armory.GetLegendaryItemsByPage(0, 3);
 
-        Assert.Equal(3, actual.Count);
-        Assert.Equal(3, actual.Context.PageSize);
+        Assert.Equal(3, actual.Value.Count);
+        Assert.Equal(3, actual.PageContext.PageSize);
     }
 
     [Fact]
@@ -94,6 +94,6 @@ public class ArmoryQueryTest
 
         var actual = await sut.Armory.GetBoundLegendaryItems(accessToken.Key);
 
-        Assert.NotEmpty(actual);
+        Assert.NotEmpty(actual.Value);
     }
 }

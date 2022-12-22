@@ -1,4 +1,5 @@
-﻿using System.Net.Http;
+﻿using System.Collections.Generic;
+using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 using GuildWars2.Http;
@@ -9,7 +10,7 @@ using static System.Net.Http.HttpMethod;
 namespace GuildWars2.Professions;
 
 [PublicAPI]
-public sealed class ProfessionNamesRequest : IHttpRequest<IReplicaSet<ProfessionName>>
+public sealed class ProfessionNamesRequest : IHttpRequest<Replica<HashSet<ProfessionName>>>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/professions")
     {
@@ -19,7 +20,7 @@ public sealed class ProfessionNamesRequest : IHttpRequest<IReplicaSet<Profession
 
     public MissingMemberBehavior MissingMemberBehavior { get; init; }
 
-    public async Task<IReplicaSet<ProfessionName>> SendAsync(
+    public async Task<Replica<HashSet<ProfessionName>>> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
     )
@@ -32,16 +33,16 @@ public sealed class ProfessionNamesRequest : IHttpRequest<IReplicaSet<Profession
             .ConfigureAwait(false);
 
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
-
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
-
-        return new ReplicaSet<ProfessionName>
+        return new Replica<HashSet<ProfessionName>>
         {
-            Values = json.RootElement.GetSet(
-                entry => entry.GetProfessionName(MissingMemberBehavior)
-            ),
-            Context = response.Headers.GetCollectionContext(),
+            Value =
+                json.RootElement.GetSet(
+                    entry => entry.GetProfessionName(MissingMemberBehavior)
+                ),
+            ResultContext = response.Headers.GetResultContext(),
+            PageContext = response.Headers.GetPageContext(),
             Date = response.Headers.Date.GetValueOrDefault(),
             Expires = response.Content.Headers.Expires,
             LastModified = response.Content.Headers.LastModified

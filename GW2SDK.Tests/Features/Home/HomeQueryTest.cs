@@ -15,10 +15,10 @@ public class HomeQueryTest
 
         var actual = await sut.Home.GetCats();
 
-        Assert.NotEmpty(actual);
-        Assert.Equal(actual.Count, actual.Context.ResultTotal);
+        Assert.NotEmpty(actual.Value);
+        Assert.Equal(actual.Value.Count, actual.ResultContext.ResultTotal);
         Assert.All(
-            actual,
+            actual.Value,
             cat =>
             {
                 Assert.NotNull(cat);
@@ -34,8 +34,8 @@ public class HomeQueryTest
         await using Composer services = new();
         var sut = services.Resolve<Gw2Client>();
         var actual = await sut.Home.GetCatsIndex();
-        Assert.NotEmpty(actual);
-        Assert.Equal(actual.Context.ResultCount, actual.Count);
+        Assert.NotEmpty(actual.Value);
+        Assert.Equal(actual.ResultContext.ResultCount, actual.Value.Count);
     }
 
     [Fact]
@@ -64,7 +64,7 @@ public class HomeQueryTest
         var actual = await sut.Home.GetCatsByIds(ids);
 
         Assert.Collection(
-            actual,
+            actual.Value,
             first => Assert.Equal(1, first.Id),
             second => Assert.Equal(2, second.Id),
             third => Assert.Equal(3, third.Id)
@@ -79,10 +79,10 @@ public class HomeQueryTest
 
         var actual = await sut.Home.GetCatsByPage(0, 3);
 
-        Assert.Equal(3, actual.Count);
-        Assert.Equal(3, actual.Context.PageSize);
+        Assert.Equal(3, actual.Value.Count);
+        Assert.Equal(3, actual.PageContext.PageSize);
         Assert.All(
-            actual,
+            actual.Value,
             cat =>
             {
                 Assert.NotNull(cat);
@@ -113,10 +113,10 @@ public class HomeQueryTest
 
         var actual = await sut.Home.GetNodes();
 
-        Assert.NotEmpty(actual);
-        Assert.Equal(actual.Count, actual.Context.ResultTotal);
+        Assert.NotEmpty(actual.Value);
+        Assert.Equal(actual.Value.Count, actual.ResultContext.ResultTotal);
         Assert.All(
-            actual,
+            actual.Value,
             node =>
             {
                 Assert.NotNull(node);
@@ -131,8 +131,8 @@ public class HomeQueryTest
         await using Composer services = new();
         var sut = services.Resolve<Gw2Client>();
         var actual = await sut.Home.GetNodesIndex();
-        Assert.NotEmpty(actual);
-        Assert.Equal(actual.Context.ResultCount, actual.Count);
+        Assert.NotEmpty(actual.Value);
+        Assert.Equal(actual.ResultContext.ResultCount, actual.Value.Count);
     }
 
     [Fact]

@@ -9,7 +9,7 @@ using static System.Net.Http.HttpMethod;
 namespace GuildWars2.Exploration.Sectors;
 
 [PublicAPI]
-public sealed class SectorByIdRequest : IHttpRequest<IReplica<Sector>>
+public sealed class SectorByIdRequest : IHttpRequest<Replica<Sector>>
 {
     private static readonly HttpRequestMessageTemplate Template = new(
         Get,
@@ -39,7 +39,7 @@ public sealed class SectorByIdRequest : IHttpRequest<IReplica<Sector>>
 
     public MissingMemberBehavior MissingMemberBehavior { get; init; }
 
-    public async Task<IReplica<Sector>> SendAsync(
+    public async Task<Replica<Sector>> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
     )
@@ -65,13 +65,13 @@ public sealed class SectorByIdRequest : IHttpRequest<IReplica<Sector>>
             .ConfigureAwait(false);
 
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
-
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
-
         return new Replica<Sector>
         {
             Value = json.RootElement.GetSector(MissingMemberBehavior),
+            ResultContext = response.Headers.GetResultContext(),
+            PageContext = response.Headers.GetPageContext(),
             Date = response.Headers.Date.GetValueOrDefault(),
             Expires = response.Content.Headers.Expires,
             LastModified = response.Content.Headers.LastModified

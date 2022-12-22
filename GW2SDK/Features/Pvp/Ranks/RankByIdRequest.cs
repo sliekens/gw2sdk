@@ -7,7 +7,7 @@ using JetBrains.Annotations;
 namespace GuildWars2.Pvp.Ranks;
 
 [PublicAPI]
-public sealed class RankByIdRequest : IHttpRequest<IReplica<Rank>>
+public sealed class RankByIdRequest : IHttpRequest<Replica<Rank>>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(HttpMethod.Get, "v2/pvp/ranks") { AcceptEncoding = "gzip" };
@@ -23,7 +23,7 @@ public sealed class RankByIdRequest : IHttpRequest<IReplica<Rank>>
 
     public MissingMemberBehavior MissingMemberBehavior { get; init; }
 
-    public async Task<IReplica<Rank>> SendAsync(
+    public async Task<Replica<Rank>> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
     )
@@ -44,13 +44,13 @@ public sealed class RankByIdRequest : IHttpRequest<IReplica<Rank>>
             .ConfigureAwait(false);
 
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
-
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
-
         return new Replica<Rank>
         {
             Value = json.RootElement.GetRank(MissingMemberBehavior),
+            ResultContext = response.Headers.GetResultContext(),
+            PageContext = response.Headers.GetPageContext(),
             Date = response.Headers.Date.GetValueOrDefault(),
             Expires = response.Content.Headers.Expires,
             LastModified = response.Content.Headers.LastModified

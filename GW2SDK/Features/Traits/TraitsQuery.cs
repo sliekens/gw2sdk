@@ -18,7 +18,7 @@ public sealed class TraitsQuery
         http.BaseAddress ??= BaseAddress.DefaultUri;
     }
 
-    public Task<IReplicaSet<Trait>> GetTraits(
+    public Task<Replica<HashSet<Trait>>> GetTraits(
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
@@ -32,13 +32,15 @@ public sealed class TraitsQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<IReplicaSet<int>> GetTraitsIndex(CancellationToken cancellationToken = default)
+    public Task<Replica<HashSet<int>>> GetTraitsIndex(
+        CancellationToken cancellationToken = default
+    )
     {
         TraitsIndexRequest request = new();
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<IReplica<Trait>> GetTraitById(
+    public Task<Replica<Trait>> GetTraitById(
         int traitId,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -53,7 +55,7 @@ public sealed class TraitsQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<IReplicaSet<Trait>> GetTraitsByIds(
+    public Task<Replica<HashSet<Trait>>> GetTraitsByIds(
         IReadOnlyCollection<int> traitIds,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -68,7 +70,7 @@ public sealed class TraitsQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<IReplicaPage<Trait>> GetTraitsByPage(
+    public Task<Replica<HashSet<Trait>>> GetTraitsByPage(
         int pageIndex,
         int? pageSize = default,
         Language? language = default,

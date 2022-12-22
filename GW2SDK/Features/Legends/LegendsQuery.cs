@@ -18,13 +18,15 @@ public sealed class LegendsQuery
         http.BaseAddress ??= BaseAddress.DefaultUri;
     }
 
-    public Task<IReplicaSet<string>> GetLegendsIndex(CancellationToken cancellationToken = default)
+    public Task<Replica<HashSet<string>>> GetLegendsIndex(
+        CancellationToken cancellationToken = default
+    )
     {
         LegendsIndexRequest request = new();
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<IReplica<Legend>> GetLegendById(
+    public Task<Replica<Legend>> GetLegendById(
         string legendId,
         CancellationToken cancellationToken = default
     )
@@ -36,7 +38,7 @@ public sealed class LegendsQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<IReplicaSet<Legend>> GetLegendsByIds(
+    public Task<Replica<HashSet<Legend>>> GetLegendsByIds(
         IReadOnlyCollection<string> legendIds,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
@@ -49,7 +51,7 @@ public sealed class LegendsQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<IReplicaPage<Legend>> GetLegendsByPage(
+    public Task<Replica<HashSet<Legend>>> GetLegendsByPage(
         int pageIndex,
         int? pageSize = default,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -65,7 +67,7 @@ public sealed class LegendsQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<IReplicaSet<Legend>> GetLegends(
+    public Task<Replica<HashSet<Legend>>> GetLegends(
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )

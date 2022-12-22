@@ -55,9 +55,9 @@ public class MasteryQueryTest
 
         var actual = await sut.Masteries.GetMasteries();
 
-        Assert.Equal(actual.Context.ResultTotal, actual.Count);
+        Assert.Equal(actual.ResultContext.ResultTotal, actual.Value.Count);
         Assert.All(
-            actual,
+            actual.Value,
             mastery =>
             {
                 MasteryFact.Id_is_positive(mastery);
@@ -90,7 +90,7 @@ public class MasteryQueryTest
 
         var actual = await sut.Masteries.GetMasteriesIndex();
 
-        Assert.Equal(actual.Context.ResultTotal, actual.Count);
+        Assert.Equal(actual.ResultContext.ResultTotal, actual.Value.Count);
     }
 
     [Fact]
@@ -122,7 +122,7 @@ public class MasteryQueryTest
         var actual = await sut.Masteries.GetMasteriesByIds(ids);
 
         Assert.Collection(
-            actual,
+            actual.Value,
             first => Assert.Equal(1, first.Id),
             second => Assert.Equal(2, second.Id),
             third => Assert.Equal(3, third.Id)

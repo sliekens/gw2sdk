@@ -16,10 +16,10 @@ public class EmblemsQueryTest
 
         var actual = await sut.Emblems.GetForegroundEmblems();
 
-        Assert.NotEmpty(actual);
-        Assert.Equal(actual.Context.ResultTotal, actual.Count);
+        Assert.NotEmpty(actual.Value);
+        Assert.Equal(actual.ResultContext.ResultTotal, actual.Value.Count);
         Assert.All(
-            actual,
+            actual.Value,
             emblem =>
             {
                 Assert.True(emblem.Id > 0);
@@ -37,8 +37,8 @@ public class EmblemsQueryTest
 
         var actual = await sut.Emblems.GetForegroundEmblemsIndex();
 
-        Assert.NotEmpty(actual);
-        Assert.Equal(actual.Context.ResultTotal, actual.Count);
+        Assert.NotEmpty(actual.Value);
+        Assert.Equal(actual.ResultContext.ResultTotal, actual.Value.Count);
     }
 
     [Fact]
@@ -69,8 +69,8 @@ public class EmblemsQueryTest
 
         var actual = await sut.Emblems.GetForegroundEmblemsByIds(ids);
 
-        Assert.Equal(ids.Count, actual.Count);
-        Assert.All(ids, id => Assert.Contains(id, actual.Values.Select(value => value.Id)));
+        Assert.Equal(ids.Count, actual.Value.Count);
+        Assert.All(ids, id => Assert.Contains(id, actual.Value.Select(value => value.Id)));
     }
 
     [Fact]
@@ -81,8 +81,8 @@ public class EmblemsQueryTest
 
         var actual = await sut.Emblems.GetForegroundEmblemsByPage(0, 3);
 
-        Assert.Equal(3, actual.Count);
-        Assert.Equal(3, actual.Context.PageSize);
+        Assert.Equal(3, actual.Value.Count);
+        Assert.Equal(3, actual.PageContext.PageSize);
     }
 
     [Fact]
@@ -93,10 +93,10 @@ public class EmblemsQueryTest
 
         var actual = await sut.Emblems.GetBackgroundEmblems();
 
-        Assert.NotEmpty(actual);
-        Assert.Equal(actual.Context.ResultTotal, actual.Count);
+        Assert.NotEmpty(actual.Value);
+        Assert.Equal(actual.ResultContext.ResultTotal, actual.Value.Count);
         Assert.All(
-            actual,
+            actual.Value,
             emblem =>
             {
                 Assert.True(emblem.Id > 0);
@@ -114,8 +114,8 @@ public class EmblemsQueryTest
 
         var actual = await sut.Emblems.GetBackgroundEmblemsIndex();
 
-        Assert.NotEmpty(actual);
-        Assert.Equal(actual.Context.ResultTotal, actual.Count);
+        Assert.NotEmpty(actual.Value);
+        Assert.Equal(actual.ResultContext.ResultTotal, actual.Value.Count);
     }
 
     [Fact]
@@ -146,8 +146,8 @@ public class EmblemsQueryTest
 
         var actual = await sut.Emblems.GetBackgroundEmblemsByIds(ids);
 
-        Assert.Equal(ids.Count, actual.Count);
-        Assert.All(ids, id => Assert.Contains(id, actual.Values.Select(value => value.Id)));
+        Assert.Equal(ids.Count, actual.Value.Count);
+        Assert.All(ids, id => Assert.Contains(id, actual.Value.Select(value => value.Id)));
     }
 
     [Fact]
@@ -158,7 +158,7 @@ public class EmblemsQueryTest
 
         var actual = await sut.Emblems.GetBackgroundEmblemsByPage(0, 3);
 
-        Assert.Equal(3, actual.Count);
-        Assert.Equal(3, actual.Context.PageSize);
+        Assert.Equal(3, actual.Value.Count);
+        Assert.Equal(3, actual.PageContext.PageSize);
     }
 }

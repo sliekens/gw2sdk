@@ -14,8 +14,8 @@ public class QuestsIndex
 
         var actual = await sut.Quests.GetQuestsIndex();
 
-        Assert.NotEmpty(actual);
-        Assert.Equal(actual.Count, actual.Context.ResultCount);
-        Assert.Equal(actual.Count, actual.Context.ResultTotal);
+        Assert.NotEmpty(actual.Value);
+        Assert.Equal(actual.Value.Count, actual.ResultContext.ResultCount);
+        Assert.Equal(actual.Value.Count, actual.ResultContext.ResultTotal);
     }
 }

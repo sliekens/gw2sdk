@@ -9,7 +9,7 @@ using JetBrains.Annotations;
 namespace GuildWars2.MailCarriers;
 
 [PublicAPI]
-public sealed class OwnedMailCarriersRequest : IHttpRequest<IReplica<IReadOnlyCollection<int>>>
+public sealed class OwnedMailCarriersRequest : IHttpRequest<Replica<HashSet<int>>>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(HttpMethod.Get, "v2/account/mailcarriers")
@@ -20,7 +20,7 @@ public sealed class OwnedMailCarriersRequest : IHttpRequest<IReplica<IReadOnlyCo
 
     public string? AccessToken { get; init; }
 
-    public async Task<IReplica<IReadOnlyCollection<int>>> SendAsync(
+    public async Task<Replica<HashSet<int>>> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
     )
@@ -33,13 +33,13 @@ public sealed class OwnedMailCarriersRequest : IHttpRequest<IReplica<IReadOnlyCo
             .ConfigureAwait(false);
 
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
-
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
-
-        return new Replica<IReadOnlyCollection<int>>
+        return new Replica<HashSet<int>>
         {
             Value = json.RootElement.GetSet(entry => entry.GetInt32()),
+            ResultContext = response.Headers.GetResultContext(),
+            PageContext = response.Headers.GetPageContext(),
             Date = response.Headers.Date.GetValueOrDefault(),
             Expires = response.Content.Headers.Expires,
             LastModified = response.Content.Headers.LastModified

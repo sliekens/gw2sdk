@@ -9,7 +9,7 @@ using static System.Net.Http.HttpMethod;
 namespace GuildWars2.Exploration.Charts;
 
 [PublicAPI]
-public sealed class ChartByIdRequest : IHttpRequest<IReplica<Chart>>
+public sealed class ChartByIdRequest : IHttpRequest<Replica<Chart>>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/continents/:id/floors/:floor/regions/:region/maps")
@@ -37,7 +37,7 @@ public sealed class ChartByIdRequest : IHttpRequest<IReplica<Chart>>
 
     public MissingMemberBehavior MissingMemberBehavior { get; init; }
 
-    public async Task<IReplica<Chart>> SendAsync(
+    public async Task<Replica<Chart>> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
     )
@@ -62,13 +62,13 @@ public sealed class ChartByIdRequest : IHttpRequest<IReplica<Chart>>
             .ConfigureAwait(false);
 
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
-
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
-
         return new Replica<Chart>
         {
             Value = json.RootElement.GetChart(MissingMemberBehavior),
+            ResultContext = response.Headers.GetResultContext(),
+            PageContext = response.Headers.GetPageContext(),
             Date = response.Headers.Date.GetValueOrDefault(),
             Expires = response.Content.Headers.Expires,
             LastModified = response.Content.Headers.LastModified

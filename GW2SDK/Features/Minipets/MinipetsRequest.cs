@@ -1,4 +1,5 @@
-﻿using System.Net.Http;
+﻿using System.Collections.Generic;
+using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 using GuildWars2.Http;
@@ -8,7 +9,7 @@ using JetBrains.Annotations;
 namespace GuildWars2.Minipets;
 
 [PublicAPI]
-public sealed class MinipetsRequest : IHttpRequest<IReplicaSet<Minipet>>
+public sealed class MinipetsRequest : IHttpRequest<Replica<HashSet<Minipet>>>
 {
     private static readonly HttpRequestMessageTemplate Template = new(HttpMethod.Get, "v2/minis")
     {
@@ -24,7 +25,7 @@ public sealed class MinipetsRequest : IHttpRequest<IReplicaSet<Minipet>>
 
     public MissingMemberBehavior MissingMemberBehavior { get; init; }
 
-    public async Task<IReplicaSet<Minipet>> SendAsync(
+    public async Task<Replica<HashSet<Minipet>>> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
     )
@@ -37,14 +38,13 @@ public sealed class MinipetsRequest : IHttpRequest<IReplicaSet<Minipet>>
             .ConfigureAwait(false);
 
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
-
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
-
-        return new ReplicaSet<Minipet>
+        return new Replica<HashSet<Minipet>>
         {
-            Values = json.RootElement.GetSet(entry => entry.GetMinipet(MissingMemberBehavior)),
-            Context = response.Headers.GetCollectionContext(),
+            Value = json.RootElement.GetSet(entry => entry.GetMinipet(MissingMemberBehavior)),
+            ResultContext = response.Headers.GetResultContext(),
+            PageContext = response.Headers.GetPageContext(),
             Date = response.Headers.Date.GetValueOrDefault(),
             Expires = response.Content.Headers.Expires,
             LastModified = response.Content.Headers.LastModified

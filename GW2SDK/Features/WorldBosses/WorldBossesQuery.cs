@@ -19,14 +19,16 @@ public sealed class WorldBossesQuery
         http.BaseAddress ??= BaseAddress.DefaultUri;
     }
 
-    public Task<IReplicaSet<string>> GetWorldBosses(CancellationToken cancellationToken = default)
+    public Task<Replica<HashSet<string>>> GetWorldBosses(
+        CancellationToken cancellationToken = default
+    )
     {
         WorldBossesRequest request = new();
         return request.SendAsync(http, cancellationToken);
     }
 
     [Scope(Permission.Progression)]
-    public Task<IReplica<IReadOnlyCollection<string>>> GetDefeatedWorldBosses(
+    public Task<Replica<HashSet<string>>> GetDefeatedWorldBosses(
         string? accessToken,
         CancellationToken cancellationToken = default
     )

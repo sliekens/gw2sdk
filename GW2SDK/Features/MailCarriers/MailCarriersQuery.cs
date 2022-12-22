@@ -18,7 +18,7 @@ public sealed class MailCarriersQuery
         http.BaseAddress ??= BaseAddress.DefaultUri;
     }
 
-    public Task<IReplicaSet<MailCarrier>> GetMailCarriers(
+    public Task<Replica<HashSet<MailCarrier>>> GetMailCarriers(
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
@@ -32,7 +32,7 @@ public sealed class MailCarriersQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<IReplicaSet<int>> GetMailCarriersIndex(
+    public Task<Replica<HashSet<int>>> GetMailCarriersIndex(
         CancellationToken cancellationToken = default
     )
     {
@@ -40,7 +40,7 @@ public sealed class MailCarriersQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<IReplica<MailCarrier>> GetMailCarrierById(
+    public Task<Replica<MailCarrier>> GetMailCarrierById(
         int mailCarrierId,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -55,7 +55,7 @@ public sealed class MailCarriersQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<IReplicaSet<MailCarrier>> GetMailCarriersByIds(
+    public Task<Replica<HashSet<MailCarrier>>> GetMailCarriersByIds(
         IReadOnlyCollection<int> mailCarrierIds,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -70,7 +70,7 @@ public sealed class MailCarriersQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<IReplicaPage<MailCarrier>> GetMailCarriersByPage(
+    public Task<Replica<HashSet<MailCarrier>>> GetMailCarriersByPage(
         int pageIndex,
         int? pageSize = default,
         Language? language = default,
@@ -87,7 +87,7 @@ public sealed class MailCarriersQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<IReplica<IReadOnlyCollection<int>>> GetOwnedMailCarriers(
+    public Task<Replica<HashSet<int>>> GetOwnedMailCarriers(
         string? accessToken,
         CancellationToken cancellationToken = default
     )

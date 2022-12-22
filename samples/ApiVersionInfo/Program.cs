@@ -1,6 +1,7 @@
 ﻿using System.Net.Http;
 using System.Threading.Tasks;
 using GuildWars2;
+using GuildWars2.Meta;
 using Spectre.Console;
 
 namespace ApiVersionInfo;
@@ -22,20 +23,20 @@ public class Program
         var options = Options.Prompt();
         var routes = new RouteTable(options);
 
-        var v1 = await gw2.Meta.GetApiVersion("v1");
-        foreach (var route in v1.Value.Routes)
+        ApiVersion v1 = await gw2.Meta.GetApiVersion("v1");
+        foreach (var route in v1.Routes)
         {
-            routes.AddRoute(route, v1.Value.Languages);
+            routes.AddRoute(route, v1.Languages);
         }
 
-        var v2 = await gw2.Meta.GetApiVersion();
-        foreach (var route in v2.Value.Routes)
+        ApiVersion v2 = await gw2.Meta.GetApiVersion();
+        foreach (var route in v2.Routes)
         {
-            routes.AddRoute(route, v2.Value.Languages);
+            routes.AddRoute(route, v2.Languages);
         }
 
         var changes = new ReleaseNoteTable();
-        foreach (var schemaVersion in v2.Value.SchemaVersions)
+        foreach (var schemaVersion in v2.SchemaVersions)
         {
             changes.AddRow(schemaVersion);
         }

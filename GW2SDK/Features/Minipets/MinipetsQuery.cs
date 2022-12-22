@@ -18,7 +18,7 @@ public sealed class MinipetsQuery
         http.BaseAddress ??= BaseAddress.DefaultUri;
     }
 
-    public Task<IReplicaSet<Minipet>> GetMinipets(
+    public Task<Replica<HashSet<Minipet>>> GetMinipets(
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
@@ -32,13 +32,15 @@ public sealed class MinipetsQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<IReplicaSet<int>> GetMinipetsIndex(CancellationToken cancellationToken = default)
+    public Task<Replica<HashSet<int>>> GetMinipetsIndex(
+        CancellationToken cancellationToken = default
+    )
     {
         MinipetsIndexRequest request = new();
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<IReplica<Minipet>> GetMinipetById(
+    public Task<Replica<Minipet>> GetMinipetById(
         int minipetId,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -53,7 +55,7 @@ public sealed class MinipetsQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<IReplicaSet<Minipet>> GetMinipetsByIds(
+    public Task<Replica<HashSet<Minipet>>> GetMinipetsByIds(
         IReadOnlyCollection<int> minipetIds,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -68,7 +70,7 @@ public sealed class MinipetsQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<IReplicaPage<Minipet>> GetMinipetsByPage(
+    public Task<Replica<HashSet<Minipet>>> GetMinipetsByPage(
         int pageIndex,
         int? pageSize = default,
         Language? language = default,

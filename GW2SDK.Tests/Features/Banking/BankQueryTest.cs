@@ -71,9 +71,9 @@ public class BankQueryTest
 
         var actual = await sut.Bank.GetMaterialCategories();
 
-        Assert.Equal(actual.Context.ResultTotal, actual.Count);
+        Assert.Equal(actual.ResultContext.ResultTotal, actual.Value.Count);
         Assert.All(
-            actual,
+            actual.Value,
             materialCategory =>
             {
                 MaterialCategoryFact.Name_is_not_empty(materialCategory);
@@ -89,7 +89,7 @@ public class BankQueryTest
 
         var actual = await sut.Bank.GetMaterialCategoriesIndex();
 
-        Assert.Equal(actual.Context.ResultTotal, actual.Count);
+        Assert.Equal(actual.ResultContext.ResultTotal, actual.Value.Count);
     }
 
     [Fact]
@@ -121,7 +121,7 @@ public class BankQueryTest
         var actual = await sut.Bank.GetMaterialCategoriesByIds(ids);
 
         Assert.Collection(
-            actual,
+            actual.Value,
             first => Assert.Contains(first.Id, ids),
             second => Assert.Contains(second.Id, ids),
             third => Assert.Contains(third.Id, ids)

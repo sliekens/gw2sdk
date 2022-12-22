@@ -7,7 +7,7 @@ using JetBrains.Annotations;
 namespace GuildWars2.Pvp.Amulets;
 
 [PublicAPI]
-public sealed class AmuletByIdRequest : IHttpRequest<IReplica<Amulet>>
+public sealed class AmuletByIdRequest : IHttpRequest<Replica<Amulet>>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(HttpMethod.Get, "v2/pvp/amulets") { AcceptEncoding = "gzip" };
@@ -23,7 +23,7 @@ public sealed class AmuletByIdRequest : IHttpRequest<IReplica<Amulet>>
 
     public MissingMemberBehavior MissingMemberBehavior { get; init; }
 
-    public async Task<IReplica<Amulet>> SendAsync(
+    public async Task<Replica<Amulet>> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
     )
@@ -44,13 +44,13 @@ public sealed class AmuletByIdRequest : IHttpRequest<IReplica<Amulet>>
             .ConfigureAwait(false);
 
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
-
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
-
         return new Replica<Amulet>
         {
             Value = json.RootElement.GetAmulet(MissingMemberBehavior),
+            ResultContext = response.Headers.GetResultContext(),
+            PageContext = response.Headers.GetPageContext(),
             Date = response.Headers.Date.GetValueOrDefault(),
             Expires = response.Content.Headers.Expires,
             LastModified = response.Content.Headers.LastModified

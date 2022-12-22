@@ -20,7 +20,7 @@ public sealed class ArmoryQuery
 
     #region v2/account/legendaryarmory
 
-    public Task<IReplicaSet<BoundLegendaryItem>> GetBoundLegendaryItems(
+    public Task<Replica<HashSet<BoundLegendaryItem>>> GetBoundLegendaryItems(
         string? accessToken,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
@@ -35,7 +35,7 @@ public sealed class ArmoryQuery
 
     #region v2/legendaryarmory
 
-    public Task<IReplicaSet<LegendaryItem>> GetLegendaryItems(
+    public Task<Replica<HashSet<LegendaryItem>>> GetLegendaryItems(
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
@@ -44,7 +44,7 @@ public sealed class ArmoryQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<IReplicaSet<int>> GetLegendaryItemsIndex(
+    public Task<Replica<HashSet<int>>> GetLegendaryItemsIndex(
         CancellationToken cancellationToken = default
     )
     {
@@ -52,7 +52,7 @@ public sealed class ArmoryQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<IReplica<LegendaryItem>> GetLegendaryItemById(
+    public Task<Replica<LegendaryItem>> GetLegendaryItemById(
         int legendaryItemId,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
@@ -65,7 +65,7 @@ public sealed class ArmoryQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<IReplicaSet<LegendaryItem>> GetLegendaryItemsByIds(
+    public Task<Replica<HashSet<LegendaryItem>>> GetLegendaryItemsByIds(
         IReadOnlyCollection<int> legendaryItemIds,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
@@ -78,7 +78,7 @@ public sealed class ArmoryQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<IReplicaPage<LegendaryItem>> GetLegendaryItemsByPage(
+    public Task<Replica<HashSet<LegendaryItem>>> GetLegendaryItemsByPage(
         int pageIndex,
         int? pageSize = default,
         MissingMemberBehavior missingMemberBehavior = default,

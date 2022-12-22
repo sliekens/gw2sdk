@@ -17,7 +17,7 @@ public class MountsQueryTest
         var actual = await sut.Mounts.GetMounts();
 
         Assert.All(
-            actual,
+            actual.Value,
             mount =>
             {
                 Assert.True(
@@ -38,7 +38,7 @@ public class MountsQueryTest
         var actual = await sut.Mounts.GetMountNames();
 
         Assert.All(
-            actual,
+            actual.Value,
             name => Assert.True(Enum.IsDefined(typeof(MountName), name), "Enum.IsDefined(name)")
         );
     }
@@ -72,7 +72,7 @@ public class MountsQueryTest
         var actual = await sut.Mounts.GetMountsByNames(names);
 
         Assert.Collection(
-            actual,
+            actual.Value,
             first => Assert.Equal(names[0], first.Id),
             second => Assert.Equal(names[1], second.Id),
             third => Assert.Equal(names[2], third.Id)
@@ -87,8 +87,8 @@ public class MountsQueryTest
 
         var actual = await sut.Mounts.GetMountsByPage(0, 3);
 
-        Assert.Equal(3, actual.Count);
-        Assert.Equal(3, actual.Context.PageSize);
+        Assert.Equal(3, actual.Value.Count);
+        Assert.Equal(3, actual.PageContext.PageSize);
     }
 
     [Fact]
@@ -99,7 +99,7 @@ public class MountsQueryTest
 
         var actual = await sut.Mounts.GetMountSkins();
 
-        Assert.Equal(actual.Context.ResultTotal, actual.Count);
+        Assert.Equal(actual.ResultContext.ResultTotal, actual.Value.Count);
     }
 
     [Fact]
@@ -110,7 +110,7 @@ public class MountsQueryTest
 
         var actual = await sut.Mounts.GetMountSkinsIndex();
 
-        Assert.Equal(actual.Context.ResultTotal, actual.Count);
+        Assert.Equal(actual.ResultContext.ResultTotal, actual.Value.Count);
     }
 
     [Fact]
@@ -142,7 +142,7 @@ public class MountsQueryTest
         var actual = await sut.Mounts.GetMountSkinsByIds(ids);
 
         Assert.Collection(
-            actual,
+            actual.Value,
             first => Assert.Equal(1, first.Id),
             second => Assert.Equal(2, second.Id),
             third => Assert.Equal(3, third.Id)
@@ -157,8 +157,8 @@ public class MountsQueryTest
 
         var actual = await sut.Mounts.GetMountSkinsByPage(0, 3);
 
-        Assert.Equal(3, actual.Count);
-        Assert.Equal(3, actual.Context.PageSize);
+        Assert.Equal(3, actual.Value.Count);
+        Assert.Equal(3, actual.PageContext.PageSize);
     }
 
     [Fact]

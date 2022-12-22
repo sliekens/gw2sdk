@@ -15,10 +15,10 @@ public class ProfessionsQueryTest
 
         var actual = await sut.Professions.GetProfessions();
 
-        Assert.Equal(Enum.GetNames(typeof(ProfessionName)).Length, actual.Count);
+        Assert.Equal(Enum.GetNames(typeof(ProfessionName)).Length, actual.Value.Count);
 
         Assert.All(
-            actual,
+            actual.Value,
             profession =>
             {
                 Assert.True(
@@ -40,9 +40,9 @@ public class ProfessionsQueryTest
 
         var actual = await sut.Professions.GetProfessionNames();
 
-        Assert.Equal(Enum.GetNames(typeof(ProfessionName)).Length, actual.Count);
+        Assert.Equal(Enum.GetNames(typeof(ProfessionName)).Length, actual.Value.Count);
         Assert.All(
-            actual,
+            actual.Value,
             name => Assert.True(
                 Enum.IsDefined(typeof(ProfessionName), name),
                 "Enum.IsDefined(name)"
@@ -79,7 +79,7 @@ public class ProfessionsQueryTest
         var actual = await sut.Professions.GetProfessionsByNames(names);
 
         Assert.Collection(
-            actual,
+            actual.Value,
             first => Assert.Equal(names[0], first.Id),
             second => Assert.Equal(names[1], second.Id),
             third => Assert.Equal(names[2], third.Id)
@@ -94,7 +94,7 @@ public class ProfessionsQueryTest
 
         var actual = await sut.Professions.GetProfessionsByPage(0, 3);
 
-        Assert.Equal(3, actual.Count);
-        Assert.Equal(3, actual.Context.PageSize);
+        Assert.Equal(3, actual.Value.Count);
+        Assert.Equal(3, actual.PageContext.PageSize);
     }
 }

@@ -20,7 +20,7 @@ public sealed class HomeQuery
         http.BaseAddress ??= BaseAddress.DefaultUri;
     }
 
-    public Task<IReplicaSet<Cat>> GetCats(
+    public Task<Replica<HashSet<Cat>>> GetCats(
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
@@ -29,13 +29,13 @@ public sealed class HomeQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<IReplicaSet<int>> GetCatsIndex(CancellationToken cancellationToken = default)
+    public Task<Replica<HashSet<int>>> GetCatsIndex(CancellationToken cancellationToken = default)
     {
         CatsIndexRequest request = new();
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<IReplica<Cat>> GetCatById(
+    public Task<Replica<Cat>> GetCatById(
         int catId,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
@@ -45,7 +45,7 @@ public sealed class HomeQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<IReplicaSet<Cat>> GetCatsByIds(
+    public Task<Replica<HashSet<Cat>>> GetCatsByIds(
         IReadOnlyCollection<int> catIds,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
@@ -55,7 +55,7 @@ public sealed class HomeQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<IReplicaPage<Cat>> GetCatsByPage(
+    public Task<Replica<HashSet<Cat>>> GetCatsByPage(
         int pageIndex,
         int? pageSize,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -70,7 +70,7 @@ public sealed class HomeQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<IReplica<IReadOnlyCollection<int>>> GetOwnedCatsIndex(
+    public Task<Replica<HashSet<int>>> GetOwnedCatsIndex(
         string? accessToken,
         CancellationToken cancellationToken = default
     )
@@ -79,7 +79,7 @@ public sealed class HomeQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<IReplicaSet<Node>> GetNodes(
+    public Task<Replica<HashSet<Node>>> GetNodes(
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
@@ -88,13 +88,15 @@ public sealed class HomeQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<IReplicaSet<string>> GetNodesIndex(CancellationToken cancellationToken = default)
+    public Task<Replica<HashSet<string>>> GetNodesIndex(
+        CancellationToken cancellationToken = default
+    )
     {
         NodesIndexRequest request = new();
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<IReplica<IReadOnlyCollection<string>>> GetOwnedNodesIndex(
+    public Task<Replica<HashSet<string>>> GetOwnedNodesIndex(
         string? accessToken,
         CancellationToken cancellationToken = default
     )

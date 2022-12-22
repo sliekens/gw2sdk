@@ -1,4 +1,5 @@
-﻿using System.Net.Http;
+﻿using System.Collections.Generic;
+using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 using GuildWars2.Http;
@@ -8,7 +9,7 @@ using JetBrains.Annotations;
 namespace GuildWars2.MapChests;
 
 [PublicAPI]
-public sealed class MapChestsByPageRequest : IHttpRequest<IReplicaPage<MapChest>>
+public sealed class MapChestsByPageRequest : IHttpRequest<Replica<HashSet<MapChest>>>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(HttpMethod.Get, "v2/mapchests") { AcceptEncoding = "gzip" };
@@ -24,7 +25,7 @@ public sealed class MapChestsByPageRequest : IHttpRequest<IReplicaPage<MapChest>
 
     public MissingMemberBehavior MissingMemberBehavior { get; init; }
 
-    public async Task<IReplicaPage<MapChest>> SendAsync(
+    public async Task<Replica<HashSet<MapChest>>> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
     )
@@ -44,14 +45,13 @@ public sealed class MapChestsByPageRequest : IHttpRequest<IReplicaPage<MapChest>
             .ConfigureAwait(false);
 
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
-
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
-
-        return new ReplicaPage<MapChest>
+        return new Replica<HashSet<MapChest>>
         {
-            Values = json.RootElement.GetSet(entry => entry.GetMapChest(MissingMemberBehavior)),
-            Context = response.Headers.GetPageContext(),
+            Value = json.RootElement.GetSet(entry => entry.GetMapChest(MissingMemberBehavior)),
+            ResultContext = response.Headers.GetResultContext(),
+            PageContext = response.Headers.GetPageContext(),
             Date = response.Headers.Date.GetValueOrDefault(),
             Expires = response.Content.Headers.Expires,
             LastModified = response.Content.Headers.LastModified

@@ -1,4 +1,5 @@
-﻿using System.Globalization;
+﻿using System.Collections.Generic;
+using System.Globalization;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
@@ -10,7 +11,7 @@ using static System.Net.Http.HttpMethod;
 namespace GuildWars2.Exploration.Floors;
 
 [PublicAPI]
-public sealed class FloorsRequest : IHttpRequest<IReplicaSet<Floor>>
+public sealed class FloorsRequest : IHttpRequest<Replica<HashSet<Floor>>>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/continents/:id/floors")
@@ -34,7 +35,7 @@ public sealed class FloorsRequest : IHttpRequest<IReplicaSet<Floor>>
 
     public MissingMemberBehavior MissingMemberBehavior { get; init; }
 
-    public async Task<IReplicaSet<Floor>> SendAsync(
+    public async Task<Replica<HashSet<Floor>>> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
     )
@@ -54,14 +55,13 @@ public sealed class FloorsRequest : IHttpRequest<IReplicaSet<Floor>>
             .ConfigureAwait(false);
 
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
-
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
-
-        return new ReplicaSet<Floor>
+        return new Replica<HashSet<Floor>>
         {
-            Values = json.RootElement.GetSet(entry => entry.GetFloor(MissingMemberBehavior)),
-            Context = response.Headers.GetCollectionContext(),
+            Value = json.RootElement.GetSet(entry => entry.GetFloor(MissingMemberBehavior)),
+            ResultContext = response.Headers.GetResultContext(),
+            PageContext = response.Headers.GetPageContext(),
             Date = response.Headers.Date.GetValueOrDefault(),
             Expires = response.Content.Headers.Expires,
             LastModified = response.Content.Headers.LastModified

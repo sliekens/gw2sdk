@@ -9,9 +9,9 @@ using JetBrains.Annotations;
 namespace GuildWars2.Meta;
 
 [PublicAPI]
-public sealed class AssetCdnBuildRequest : IHttpRequest<IReplica<Build>>
+public sealed class AssetCdnBuildRequest : IHttpRequest<Replica<Build>>
 {
-    public async Task<IReplica<Build>> SendAsync(
+    public async Task<Replica<Build>> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
     )
@@ -38,9 +38,11 @@ public sealed class AssetCdnBuildRequest : IHttpRequest<IReplica<Build>>
         return new Replica<Build>
         {
             Value = value,
-            Date = DateTimeOffset.UtcNow,
+            Date = DateTimeOffset.UtcNow, // TODO: better use real header
             Expires = null,
-            LastModified = null
+            LastModified = null,
+            ResultContext = null,
+            PageContext = null
         };
     }
 }

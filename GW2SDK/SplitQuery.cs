@@ -30,7 +30,7 @@ public static class SplitQuery
 {
     public static SplitQuery<TKey, TRecord> Create<TKey, TRecord>(
         InQuery<TKey, TRecord> query,
-        IProgress<ICollectionContext>? progress,
+        IProgress<ResultContext>? progress,
         int maxConcurrency = 20
     ) =>
         new(query, progress, maxConcurrency);
@@ -49,13 +49,13 @@ public sealed class SplitQuery<TKey, TRecord>
 {
     private readonly int maxConcurrency;
 
-    private readonly IProgress<ICollectionContext>? progress;
+    private readonly IProgress<ResultContext>? progress;
 
     private readonly InQuery<TKey, TRecord> query;
 
     internal SplitQuery(
         InQuery<TKey, TRecord> query,
-        IProgress<ICollectionContext>? progress,
+        IProgress<ResultContext>? progress,
         int maxConcurrency
     )
     {
@@ -155,5 +155,5 @@ public sealed class SplitQuery<TKey, TRecord>
     }
 
     private void ReportProgress(int resultTotal, int resultCount) =>
-        progress?.Report(new CollectionContext(resultTotal, resultCount));
+        progress?.Report(new ResultContext(resultTotal, resultCount));
 }

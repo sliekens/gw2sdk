@@ -8,7 +8,7 @@ using static System.Net.Http.HttpMethod;
 namespace GuildWars2.Meta;
 
 [PublicAPI]
-public sealed class ApiVersionRequest : IHttpRequest<IReplica<ApiVersion>>
+public sealed class ApiVersionRequest : IHttpRequest<Replica<ApiVersion>>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "/:version.json")
     {
@@ -25,7 +25,7 @@ public sealed class ApiVersionRequest : IHttpRequest<IReplica<ApiVersion>>
 
     public MissingMemberBehavior MissingMemberBehavior { get; init; }
 
-    public async Task<IReplica<ApiVersion>> SendAsync(
+    public async Task<Replica<ApiVersion>> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
     )
@@ -38,13 +38,13 @@ public sealed class ApiVersionRequest : IHttpRequest<IReplica<ApiVersion>>
             .ConfigureAwait(false);
 
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
-
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
-
         return new Replica<ApiVersion>
         {
             Value = json.RootElement.GetApiVersion(MissingMemberBehavior),
+            ResultContext = response.Headers.GetResultContext(),
+            PageContext = response.Headers.GetPageContext(),
             Date = response.Headers.Date.GetValueOrDefault(),
             Expires = response.Content.Headers.Expires,
             LastModified = response.Content.Headers.LastModified

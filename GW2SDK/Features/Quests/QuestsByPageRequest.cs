@@ -1,4 +1,5 @@
-﻿using System.Net.Http;
+﻿using System.Collections.Generic;
+using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 using GuildWars2.Http;
@@ -8,7 +9,7 @@ using JetBrains.Annotations;
 namespace GuildWars2.Quests;
 
 [PublicAPI]
-public sealed class QuestsByPageRequest : IHttpRequest<IReplicaPage<Quest>>
+public sealed class QuestsByPageRequest : IHttpRequest<Replica<HashSet<Quest>>>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(HttpMethod.Get, "v2/quests") { AcceptEncoding = "gzip" };
@@ -26,7 +27,7 @@ public sealed class QuestsByPageRequest : IHttpRequest<IReplicaPage<Quest>>
 
     public MissingMemberBehavior MissingMemberBehavior { get; init; }
 
-    public async Task<IReplicaPage<Quest>> SendAsync(
+    public async Task<Replica<HashSet<Quest>>> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
     )
@@ -50,14 +51,13 @@ public sealed class QuestsByPageRequest : IHttpRequest<IReplicaPage<Quest>>
             .ConfigureAwait(false);
 
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
-
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
-
-        return new ReplicaPage<Quest>
+        return new Replica<HashSet<Quest>>
         {
-            Values = json.RootElement.GetSet(entry => entry.GetQuest(MissingMemberBehavior)),
-            Context = response.Headers.GetPageContext(),
+            Value = json.RootElement.GetSet(entry => entry.GetQuest(MissingMemberBehavior)),
+            ResultContext = response.Headers.GetResultContext(),
+            PageContext = response.Headers.GetPageContext(),
             Date = response.Headers.Date.GetValueOrDefault(),
             Expires = response.Content.Headers.Expires,
             LastModified = response.Content.Headers.LastModified

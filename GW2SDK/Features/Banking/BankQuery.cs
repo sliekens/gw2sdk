@@ -20,7 +20,7 @@ public sealed class BankQuery
     }
 
     [Scope(Permission.Inventories)]
-    public Task<IReplica<Bank>> GetBank(
+    public Task<Replica<Bank>> GetBank(
         string? accessToken,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
@@ -34,7 +34,7 @@ public sealed class BankQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<IReplicaSet<MaterialCategory>> GetMaterialCategories(
+    public Task<Replica<HashSet<MaterialCategory>>> GetMaterialCategories(
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
@@ -48,7 +48,7 @@ public sealed class BankQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<IReplicaSet<int>> GetMaterialCategoriesIndex(
+    public Task<Replica<HashSet<int>>> GetMaterialCategoriesIndex(
         CancellationToken cancellationToken = default
     )
     {
@@ -56,7 +56,7 @@ public sealed class BankQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<IReplica<MaterialCategory>> GetMaterialCategoryById(
+    public Task<Replica<MaterialCategory>> GetMaterialCategoryById(
         int materialCategoryId,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -71,7 +71,7 @@ public sealed class BankQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<IReplicaSet<MaterialCategory>> GetMaterialCategoriesByIds(
+    public Task<Replica<HashSet<MaterialCategory>>> GetMaterialCategoriesByIds(
         IReadOnlyCollection<int> materialCategoryIds,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,

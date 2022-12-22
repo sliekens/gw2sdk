@@ -20,7 +20,7 @@ public sealed class MountsQuery
 
     #region v2/account/mounts
 
-    public Task<IReplica<IReadOnlyCollection<MountName>>> GetOwnedMounts(
+    public Task<Replica<HashSet<MountName>>> GetOwnedMounts(
         string? accessToken,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
@@ -33,7 +33,7 @@ public sealed class MountsQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<IReplica<IReadOnlyCollection<int>>> GetOwnedMountSkins(
+    public Task<Replica<HashSet<int>>> GetOwnedMountSkins(
         string? accessToken,
         CancellationToken cancellationToken = default
     )
@@ -46,7 +46,7 @@ public sealed class MountsQuery
 
     #region v2/mounts
 
-    public Task<IReplicaSet<Mount>> GetMounts(
+    public Task<Replica<HashSet<Mount>>> GetMounts(
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
@@ -60,7 +60,7 @@ public sealed class MountsQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<IReplicaSet<MountName>> GetMountNames(
+    public Task<Replica<HashSet<MountName>>> GetMountNames(
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
@@ -69,7 +69,7 @@ public sealed class MountsQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<IReplica<Mount>> GetMountByName(
+    public Task<Replica<Mount>> GetMountByName(
         MountName mountName,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -84,7 +84,7 @@ public sealed class MountsQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<IReplicaSet<Mount>> GetMountsByNames(
+    public Task<Replica<HashSet<Mount>>> GetMountsByNames(
         IReadOnlyCollection<MountName> mountNames,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -99,7 +99,7 @@ public sealed class MountsQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<IReplicaPage<Mount>> GetMountsByPage(
+    public Task<Replica<HashSet<Mount>>> GetMountsByPage(
         int pageIndex,
         int? pageSize = default,
         Language? language = default,
@@ -116,7 +116,7 @@ public sealed class MountsQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<IReplicaSet<MountSkin>> GetMountSkins(
+    public Task<Replica<HashSet<MountSkin>>> GetMountSkins(
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
@@ -130,13 +130,15 @@ public sealed class MountsQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<IReplicaSet<int>> GetMountSkinsIndex(CancellationToken cancellationToken = default)
+    public Task<Replica<HashSet<int>>> GetMountSkinsIndex(
+        CancellationToken cancellationToken = default
+    )
     {
         MountSkinsIndexRequest request = new();
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<IReplica<MountSkin>> GetMountSkinById(
+    public Task<Replica<MountSkin>> GetMountSkinById(
         int mountSkinId,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -151,7 +153,7 @@ public sealed class MountsQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<IReplicaSet<MountSkin>> GetMountSkinsByIds(
+    public Task<Replica<HashSet<MountSkin>>> GetMountSkinsByIds(
         IReadOnlyCollection<int> mountSkinIds,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -166,7 +168,7 @@ public sealed class MountsQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<IReplicaPage<MountSkin>> GetMountSkinsByPage(
+    public Task<Replica<HashSet<MountSkin>>> GetMountSkinsByPage(
         int pageIndex,
         int? pageSize = default,
         Language? language = default,

@@ -1,4 +1,5 @@
-﻿using System.Net.Http;
+﻿using System.Collections.Generic;
+using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 using GuildWars2.Http;
@@ -8,7 +9,7 @@ using JetBrains.Annotations;
 namespace GuildWars2.Emotes;
 
 [PublicAPI]
-public sealed class EmotesByPageRequest : IHttpRequest<IReplicaPage<Emote>>
+public sealed class EmotesByPageRequest : IHttpRequest<Replica<HashSet<Emote>>>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(HttpMethod.Get, "v2/emotes") { AcceptEncoding = "gzip" };
@@ -24,7 +25,7 @@ public sealed class EmotesByPageRequest : IHttpRequest<IReplicaPage<Emote>>
 
     public MissingMemberBehavior MissingMemberBehavior { get; init; }
 
-    public async Task<IReplicaPage<Emote>> SendAsync(
+    public async Task<Replica<HashSet<Emote>>> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
     )
@@ -44,14 +45,13 @@ public sealed class EmotesByPageRequest : IHttpRequest<IReplicaPage<Emote>>
             .ConfigureAwait(false);
 
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
-
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
-
-        return new ReplicaPage<Emote>
+        return new Replica<HashSet<Emote>>
         {
-            Values = json.RootElement.GetSet(entry => entry.GetEmote(MissingMemberBehavior)),
-            Context = response.Headers.GetPageContext(),
+            Value = json.RootElement.GetSet(entry => entry.GetEmote(MissingMemberBehavior)),
+            ResultContext = response.Headers.GetResultContext(),
+            PageContext = response.Headers.GetPageContext(),
             Date = response.Headers.Date.GetValueOrDefault(),
             Expires = response.Content.Headers.Expires,
             LastModified = response.Content.Headers.LastModified

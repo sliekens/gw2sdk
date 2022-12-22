@@ -20,7 +20,7 @@ public sealed class WorldsQuery
 
     #region v2/worlds
 
-    public Task<IReplicaSet<World>> GetWorlds(
+    public Task<Replica<HashSet<World>>> GetWorlds(
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
@@ -34,13 +34,15 @@ public sealed class WorldsQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<IReplicaSet<int>> GetWorldsIndex(CancellationToken cancellationToken = default)
+    public Task<Replica<HashSet<int>>> GetWorldsIndex(
+        CancellationToken cancellationToken = default
+    )
     {
         WorldsIndexRequest request = new();
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<IReplica<World>> GetWorldById(
+    public Task<Replica<World>> GetWorldById(
         int worldId,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -55,7 +57,7 @@ public sealed class WorldsQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<IReplicaSet<World>> GetWorldsByIds(
+    public Task<Replica<HashSet<World>>> GetWorldsByIds(
         IReadOnlyCollection<int> worldIds,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -70,7 +72,7 @@ public sealed class WorldsQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<IReplicaPage<World>> GetWorldsByPage(
+    public Task<Replica<HashSet<World>>> GetWorldsByPage(
         int pageIndex,
         int? pageSize = default,
         Language? language = default,

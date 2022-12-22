@@ -8,7 +8,7 @@ using static System.Net.Http.HttpMethod;
 namespace GuildWars2.Commerce.Exchange;
 
 [PublicAPI]
-public sealed class ExchangeGemsForGoldRequest : IHttpRequest<IReplica<GemsForGoldExchange>>
+public sealed class ExchangeGemsForGoldRequest : IHttpRequest<Replica<GemsForGoldExchange>>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/commerce/exchange/gems") { AcceptEncoding = "gzip" };
@@ -22,7 +22,7 @@ public sealed class ExchangeGemsForGoldRequest : IHttpRequest<IReplica<GemsForGo
 
     public MissingMemberBehavior MissingMemberBehavior { get; init; }
 
-    public async Task<IReplica<GemsForGoldExchange>> SendAsync(
+    public async Task<Replica<GemsForGoldExchange>> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
     )
@@ -42,13 +42,13 @@ public sealed class ExchangeGemsForGoldRequest : IHttpRequest<IReplica<GemsForGo
             .ConfigureAwait(false);
 
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
-
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
-
         return new Replica<GemsForGoldExchange>
         {
             Value = json.RootElement.GetGemsForGoldExchange(MissingMemberBehavior),
+            ResultContext = response.Headers.GetResultContext(),
+            PageContext = response.Headers.GetPageContext(),
             Date = response.Headers.Date.GetValueOrDefault(),
             Expires = response.Content.Headers.Expires,
             LastModified = response.Content.Headers.LastModified

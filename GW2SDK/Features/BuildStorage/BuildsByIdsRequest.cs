@@ -9,7 +9,7 @@ using JetBrains.Annotations;
 namespace GuildWars2.BuildStorage;
 
 [PublicAPI]
-public sealed class BuildsByIdsRequest : IHttpRequest<IReplicaSet<Build>>
+public sealed class BuildsByIdsRequest : IHttpRequest<Replica<HashSet<Build>>>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(HttpMethod.Get, "v2/account/buildstorage") { AcceptEncoding = "gzip" };
@@ -25,7 +25,7 @@ public sealed class BuildsByIdsRequest : IHttpRequest<IReplicaSet<Build>>
 
     public MissingMemberBehavior MissingMemberBehavior { get; init; }
 
-    public async Task<IReplicaSet<Build>> SendAsync(
+    public async Task<Replica<HashSet<Build>>> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
     )
@@ -46,14 +46,13 @@ public sealed class BuildsByIdsRequest : IHttpRequest<IReplicaSet<Build>>
             .ConfigureAwait(false);
 
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
-
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
-
-        return new ReplicaSet<Build>
+        return new Replica<HashSet<Build>>
         {
-            Values = json.RootElement.GetSet(entry => entry.GetBuild(MissingMemberBehavior)),
-            Context = response.Headers.GetCollectionContext(),
+            Value = json.RootElement.GetSet(entry => entry.GetBuild(MissingMemberBehavior)),
+            ResultContext = response.Headers.GetResultContext(),
+            PageContext = response.Headers.GetPageContext(),
             Date = response.Headers.Date.GetValueOrDefault(),
             Expires = response.Content.Headers.Expires,
             LastModified = response.Content.Headers.LastModified

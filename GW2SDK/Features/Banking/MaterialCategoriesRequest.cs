@@ -1,4 +1,5 @@
-﻿using System.Net.Http;
+﻿using System.Collections.Generic;
+using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 using GuildWars2.Http;
@@ -9,7 +10,7 @@ using static System.Net.Http.HttpMethod;
 namespace GuildWars2.Banking;
 
 [PublicAPI]
-public sealed class MaterialCategoriesRequest : IHttpRequest<IReplicaSet<MaterialCategory>>
+public sealed class MaterialCategoriesRequest : IHttpRequest<Replica<HashSet<MaterialCategory>>>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/materials")
     {
@@ -25,7 +26,7 @@ public sealed class MaterialCategoriesRequest : IHttpRequest<IReplicaSet<Materia
 
     public MissingMemberBehavior MissingMemberBehavior { get; init; }
 
-    public async Task<IReplicaSet<MaterialCategory>> SendAsync(
+    public async Task<Replica<HashSet<MaterialCategory>>> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
     )
@@ -38,16 +39,16 @@ public sealed class MaterialCategoriesRequest : IHttpRequest<IReplicaSet<Materia
             .ConfigureAwait(false);
 
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
-
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
-
-        return new ReplicaSet<MaterialCategory>
+        return new Replica<HashSet<MaterialCategory>>
         {
-            Values = json.RootElement.GetSet(
-                entry => entry.GetMaterialCategory(MissingMemberBehavior)
-            ),
-            Context = response.Headers.GetCollectionContext(),
+            Value =
+                json.RootElement.GetSet(
+                    entry => entry.GetMaterialCategory(MissingMemberBehavior)
+                ),
+            ResultContext = response.Headers.GetResultContext(),
+            PageContext = response.Headers.GetPageContext(),
             Date = response.Headers.Date.GetValueOrDefault(),
             Expires = response.Content.Headers.Expires,
             LastModified = response.Content.Headers.LastModified

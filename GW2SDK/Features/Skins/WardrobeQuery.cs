@@ -20,13 +20,13 @@ public sealed class WardrobeQuery
         http.BaseAddress ??= BaseAddress.DefaultUri;
     }
 
-    public Task<IReplicaSet<int>> GetSkinsIndex(CancellationToken cancellationToken = default)
+    public Task<Replica<HashSet<int>>> GetSkinsIndex(CancellationToken cancellationToken = default)
     {
         SkinsIndexRequest request = new();
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<IReplica<Skin>> GetSkinById(
+    public Task<Replica<Skin>> GetSkinById(
         int skinId,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -41,7 +41,7 @@ public sealed class WardrobeQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<IReplicaSet<Skin>> GetSkinsByIds(
+    public Task<Replica<HashSet<Skin>>> GetSkinsByIds(
         IReadOnlyCollection<int> skinIds,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -56,7 +56,7 @@ public sealed class WardrobeQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<IReplicaPage<Skin>> GetSkinsByPage(
+    public Task<Replica<HashSet<Skin>>> GetSkinsByPage(
         int pageIndex,
         int? pageSize = default,
         Language? language = default,

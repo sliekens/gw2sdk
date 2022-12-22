@@ -18,7 +18,7 @@ public sealed class MasteriesQuery
         http.BaseAddress ??= BaseAddress.DefaultUri;
     }
 
-    public Task<IReplicaSet<Mastery>> GetMasteries(
+    public Task<Replica<HashSet<Mastery>>> GetMasteries(
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
@@ -32,13 +32,15 @@ public sealed class MasteriesQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<IReplicaSet<int>> GetMasteriesIndex(CancellationToken cancellationToken = default)
+    public Task<Replica<HashSet<int>>> GetMasteriesIndex(
+        CancellationToken cancellationToken = default
+    )
     {
         MasteriesIndexRequest request = new();
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<IReplica<Mastery>> GetMasteryById(
+    public Task<Replica<Mastery>> GetMasteryById(
         int masteryId,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -53,7 +55,7 @@ public sealed class MasteriesQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<IReplicaSet<Mastery>> GetMasteriesByIds(
+    public Task<Replica<HashSet<Mastery>>> GetMasteriesByIds(
         IReadOnlyCollection<int> masteryIds,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -68,7 +70,7 @@ public sealed class MasteriesQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<IReplica<IReadOnlyCollection<MasteryProgress>>> GetMasteryProgress(
+    public Task<Replica<HashSet<MasteryProgress>>> GetMasteryProgress(
         string? accessToken,
         CancellationToken cancellationToken = default
     )

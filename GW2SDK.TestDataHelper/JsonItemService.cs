@@ -17,7 +17,7 @@ public class JsonItemService
         this.http = http;
     }
 
-    public async Task<ISet<string>> GetAllJsonItems(IProgress<ICollectionContext> progress)
+    public async Task<ISet<string>> GetAllJsonItems(IProgress<ResultContext> progress)
     {
         var ids = await GetItemsIndex().ConfigureAwait(false);
         var items = new SortedSet<string>();
@@ -33,12 +33,12 @@ public class JsonItemService
     {
         var request = new ItemsIndexRequest();
         var response = await request.SendAsync(http, CancellationToken.None);
-        return response.Values;
+        return response.Value;
     }
 
     public IAsyncEnumerable<string> GetJsonItemsByIds(
         IReadOnlyCollection<int> itemIds,
-        IProgress<ICollectionContext>? progress = default,
+        IProgress<ResultContext>? progress = default,
         CancellationToken cancellationToken = default
     )
     {

@@ -42,9 +42,9 @@ public class MailCarriersQueryTest
 
         var actual = await sut.MailCarriers.GetMailCarriers();
 
-        Assert.Equal(actual.Context.ResultTotal, actual.Count);
+        Assert.Equal(actual.ResultContext.ResultTotal, actual.Value.Count);
         Assert.All(
-            actual,
+            actual.Value,
             mailCarrier =>
             {
                 MailCarrierFact.Id_is_positive(mailCarrier);
@@ -64,7 +64,7 @@ public class MailCarriersQueryTest
 
         var actual = await sut.MailCarriers.GetMailCarriersIndex();
 
-        Assert.Equal(actual.Context.ResultTotal, actual.Count);
+        Assert.Equal(actual.ResultContext.ResultTotal, actual.Value.Count);
     }
 
     [Fact]
@@ -96,7 +96,7 @@ public class MailCarriersQueryTest
         var actual = await sut.MailCarriers.GetMailCarriersByIds(ids);
 
         Assert.Collection(
-            actual,
+            actual.Value,
             first => Assert.Equal(1, first.Id),
             second => Assert.Equal(2, second.Id),
             third => Assert.Equal(3, third.Id)
@@ -111,8 +111,8 @@ public class MailCarriersQueryTest
 
         var actual = await sut.MailCarriers.GetMailCarriersByPage(0, 3);
 
-        Assert.Equal(3, actual.Count);
-        Assert.Equal(3, actual.Context.PageSize);
+        Assert.Equal(3, actual.Value.Count);
+        Assert.Equal(3, actual.PageContext.PageSize);
     }
 
     [Fact]
@@ -128,7 +128,7 @@ public class MailCarriersQueryTest
 
         var carriers = await sut.MailCarriers.GetMailCarriersByIds(actual.Value);
 
-        Assert.Equal(actual.Value.Count, carriers.Count);
-        Assert.All(carriers, carrier => Assert.Contains(carrier.Id, actual.Value));
+        Assert.Equal(actual.Value.Count, carriers.Value.Count);
+        Assert.All(carriers.Value, carrier => Assert.Contains(carrier.Id, actual.Value));
     }
 }

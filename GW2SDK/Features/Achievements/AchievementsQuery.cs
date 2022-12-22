@@ -25,7 +25,7 @@ public sealed class AchievementsQuery
 
     #region v2/achievements/daily
 
-    public Task<IReplica<DailyAchievementGroup>> GetDailyAchievements(
+    public Task<Replica<DailyAchievementGroup>> GetDailyAchievements(
         Day day = Day.Today,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
@@ -43,7 +43,7 @@ public sealed class AchievementsQuery
 
     #region v2/achievements
 
-    public Task<IReplicaSet<int>> GetAchievementsIndex(
+    public Task<Replica<HashSet<int>>> GetAchievementsIndex(
         CancellationToken cancellationToken = default
     )
     {
@@ -51,7 +51,7 @@ public sealed class AchievementsQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<IReplica<Achievement>> GetAchievementById(
+    public Task<Replica<Achievement>> GetAchievementById(
         int achievementId,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -66,7 +66,7 @@ public sealed class AchievementsQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<IReplicaSet<Achievement>> GetAchievementsByIds(
+    public Task<Replica<HashSet<Achievement>>> GetAchievementsByIds(
         IReadOnlyCollection<int> achievementIds,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -81,7 +81,7 @@ public sealed class AchievementsQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<IReplicaPage<Achievement>> GetAchievementsByPage(
+    public Task<Replica<HashSet<Achievement>>> GetAchievementsByPage(
         int pageIndex,
         int? pageSize = default,
         Language? language = default,
@@ -103,7 +103,7 @@ public sealed class AchievementsQuery
     #region v2/account/achievements
 
     [Scope(Permission.Progression)]
-    public Task<IReplica<AccountAchievement>> GetAccountAchievementById(
+    public Task<Replica<AccountAchievement>> GetAccountAchievementById(
         int achievementId,
         string? accessToken,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -119,7 +119,7 @@ public sealed class AchievementsQuery
     }
 
     [Scope(Permission.Progression)]
-    public Task<IReplicaSet<AccountAchievement>> GetAccountAchievementsByIds(
+    public Task<Replica<HashSet<AccountAchievement>>> GetAccountAchievementsByIds(
         IReadOnlyCollection<int> achievementIds,
         string? accessToken,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -135,7 +135,7 @@ public sealed class AchievementsQuery
     }
 
     [Scope(Permission.Progression)]
-    public Task<IReplicaSet<AccountAchievement>> GetAccountAchievements(
+    public Task<Replica<HashSet<AccountAchievement>>> GetAccountAchievements(
         string? accessToken,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
@@ -150,7 +150,7 @@ public sealed class AchievementsQuery
     }
 
     [Scope(Permission.Progression)]
-    public Task<IReplicaPage<AccountAchievement>> GetAccountAchievementsByPage(
+    public Task<Replica<HashSet<AccountAchievement>>> GetAccountAchievementsByPage(
         int pageIndex,
         int? pageSize,
         string? accessToken,
@@ -171,7 +171,7 @@ public sealed class AchievementsQuery
 
     #region v2/achievements/categories
 
-    public Task<IReplicaSet<AchievementCategory>> GetAchievementCategories(
+    public Task<Replica<HashSet<AchievementCategory>>> GetAchievementCategories(
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
@@ -185,7 +185,7 @@ public sealed class AchievementsQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<IReplicaSet<int>> GetAchievementCategoriesIndex(
+    public Task<Replica<HashSet<int>>> GetAchievementCategoriesIndex(
         CancellationToken cancellationToken = default
     )
     {
@@ -193,7 +193,7 @@ public sealed class AchievementsQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<IReplica<AchievementCategory>> GetAchievementCategoryById(
+    public Task<Replica<AchievementCategory>> GetAchievementCategoryById(
         int achievementCategoryId,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -208,7 +208,7 @@ public sealed class AchievementsQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<IReplicaSet<AchievementCategory>> GetAchievementCategoriesByIds(
+    public Task<Replica<HashSet<AchievementCategory>>> GetAchievementCategoriesByIds(
         IReadOnlyCollection<int> achievementCategoryIds,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -223,7 +223,7 @@ public sealed class AchievementsQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<IReplicaPage<AchievementCategory>> GetAchievementCategoriesByPage(
+    public Task<Replica<HashSet<AchievementCategory>>> GetAchievementCategoriesByPage(
         int pageIndex,
         int? pageSize = default,
         Language? language = default,
@@ -244,7 +244,7 @@ public sealed class AchievementsQuery
 
     #region v2/achievements/groups
 
-    public Task<IReplicaSet<AchievementGroup>> GetAchievementGroups(
+    public Task<Replica<HashSet<AchievementGroup>>> GetAchievementGroups(
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
@@ -258,7 +258,7 @@ public sealed class AchievementsQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<IReplicaSet<string>> GetAchievementGroupsIndex(
+    public Task<Replica<HashSet<string>>> GetAchievementGroupsIndex(
         CancellationToken cancellationToken = default
     )
     {
@@ -266,7 +266,7 @@ public sealed class AchievementsQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<IReplica<AchievementGroup>> GetAchievementGroupById(
+    public Task<Replica<AchievementGroup>> GetAchievementGroupById(
         string achievementGroupId,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -281,7 +281,7 @@ public sealed class AchievementsQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<IReplicaSet<AchievementGroup>> GetAchievementGroupsByIds(
+    public Task<Replica<HashSet<AchievementGroup>>> GetAchievementGroupsByIds(
         IReadOnlyCollection<string> achievementGroupIds,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -296,7 +296,7 @@ public sealed class AchievementsQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<IReplicaPage<AchievementGroup>> GetAchievementGroupsByPage(
+    public Task<Replica<HashSet<AchievementGroup>>> GetAchievementGroupsByPage(
         int pageIndex,
         int? pageSize = default,
         Language? language = default,
@@ -317,7 +317,7 @@ public sealed class AchievementsQuery
 
     #region v2/titles
 
-    public Task<IReplicaSet<Title>> GetTitles(
+    public Task<Replica<HashSet<Title>>> GetTitles(
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
@@ -331,13 +331,15 @@ public sealed class AchievementsQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<IReplicaSet<int>> GetTitlesIndex(CancellationToken cancellationToken = default)
+    public Task<Replica<HashSet<int>>> GetTitlesIndex(
+        CancellationToken cancellationToken = default
+    )
     {
         TitlesIndexRequest request = new();
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<IReplica<Title>> GetTitleById(
+    public Task<Replica<Title>> GetTitleById(
         int titleId,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -352,7 +354,7 @@ public sealed class AchievementsQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<IReplicaSet<Title>> GetTitlesByIds(
+    public Task<Replica<HashSet<Title>>> GetTitlesByIds(
         IReadOnlyCollection<int> titleIds,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -367,7 +369,7 @@ public sealed class AchievementsQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<IReplicaPage<Title>> GetTitlesByPage(
+    public Task<Replica<HashSet<Title>>> GetTitlesByPage(
         int pageIndex,
         int? pageSize = default,
         Language? language = default,

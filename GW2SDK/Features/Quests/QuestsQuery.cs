@@ -18,7 +18,7 @@ public sealed class QuestsQuery
         http.BaseAddress ??= BaseAddress.DefaultUri;
     }
 
-    public Task<IReplicaSet<Quest>> GetQuests(
+    public Task<Replica<HashSet<Quest>>> GetQuests(
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
@@ -32,13 +32,15 @@ public sealed class QuestsQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<IReplicaSet<int>> GetQuestsIndex(CancellationToken cancellationToken = default)
+    public Task<Replica<HashSet<int>>> GetQuestsIndex(
+        CancellationToken cancellationToken = default
+    )
     {
         QuestsIndexRequest request = new();
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<IReplica<Quest>> GetQuestById(
+    public Task<Replica<Quest>> GetQuestById(
         int questId,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -53,7 +55,7 @@ public sealed class QuestsQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<IReplicaSet<Quest>> GetQuestsByIds(
+    public Task<Replica<HashSet<Quest>>> GetQuestsByIds(
         IReadOnlyCollection<int> questIds,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -68,7 +70,7 @@ public sealed class QuestsQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<IReplicaPage<Quest>> GetQuestsByPage(
+    public Task<Replica<HashSet<Quest>>> GetQuestsByPage(
         int pageIndex,
         int? pageSize = default,
         Language? language = default,

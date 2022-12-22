@@ -1,4 +1,5 @@
-﻿using System.Net.Http;
+﻿using System.Collections.Generic;
+using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 using GuildWars2.Http;
@@ -9,7 +10,7 @@ using static System.Net.Http.HttpMethod;
 namespace GuildWars2.Exploration.Maps;
 
 [PublicAPI]
-public sealed class MapsRequest : IHttpRequest<IReplicaSet<Map>>
+public sealed class MapsRequest : IHttpRequest<Replica<HashSet<Map>>>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/maps")
     {
@@ -25,7 +26,7 @@ public sealed class MapsRequest : IHttpRequest<IReplicaSet<Map>>
 
     public MissingMemberBehavior MissingMemberBehavior { get; init; }
 
-    public async Task<IReplicaSet<Map>> SendAsync(
+    public async Task<Replica<HashSet<Map>>> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
     )
@@ -38,14 +39,13 @@ public sealed class MapsRequest : IHttpRequest<IReplicaSet<Map>>
             .ConfigureAwait(false);
 
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
-
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
-
-        return new ReplicaSet<Map>
+        return new Replica<HashSet<Map>>
         {
-            Values = json.RootElement.GetSet(entry => entry.GetMap(MissingMemberBehavior)),
-            Context = response.Headers.GetCollectionContext(),
+            Value = json.RootElement.GetSet(entry => entry.GetMap(MissingMemberBehavior)),
+            ResultContext = response.Headers.GetResultContext(),
+            PageContext = response.Headers.GetPageContext(),
             Date = response.Headers.Date.GetValueOrDefault(),
             Expires = response.Content.Headers.Expires,
             LastModified = response.Content.Headers.LastModified

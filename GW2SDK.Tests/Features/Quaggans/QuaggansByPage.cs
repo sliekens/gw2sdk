@@ -15,11 +15,11 @@ public class QuaggansByPage
         const int pageSize = 3;
         var actual = await sut.Quaggans.GetQuaggansByPage(0, pageSize);
 
-        Assert.Equal(pageSize, actual.Count);
-        Assert.Equal(pageSize, actual.Context.PageSize);
-        Assert.Equal(pageSize, actual.Context.ResultCount);
+        Assert.Equal(pageSize, actual.Value.Count);
+        Assert.Equal(pageSize, actual.PageContext.PageSize);
+        Assert.Equal(pageSize, actual.PageContext.ResultCount);
         Assert.All(
-            actual,
+            actual.Value,
             entry =>
             {
                 entry.Id_is_not_empty();

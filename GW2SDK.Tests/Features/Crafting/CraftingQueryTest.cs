@@ -16,7 +16,7 @@ public class CraftingQueryTest
 
         var actual = await sut.Crafting.GetRecipesIndex();
 
-        Assert.Equal(actual.Context.ResultTotal, actual.Count);
+        Assert.Equal(actual.ResultContext.ResultTotal, actual.Value.Count);
     }
 
     [Fact]
@@ -63,8 +63,8 @@ public class CraftingQueryTest
 
         var actual = await sut.Crafting.GetRecipesByPage(0, 3);
 
-        Assert.Equal(3, actual.Count);
-        Assert.Equal(3, actual.Context.PageSize);
+        Assert.Equal(3, actual.Value.Count);
+        Assert.Equal(3, actual.PageContext.PageSize);
     }
 
     [Fact]
@@ -77,7 +77,7 @@ public class CraftingQueryTest
         var actual = await sut.Crafting.GetRecipesIndexByIngredientItemId(ironOre);
 
         const int ironIngotRecipe = 19;
-        Assert.Contains(ironIngotRecipe, actual);
+        Assert.Contains(ironIngotRecipe, actual.Value);
     }
 
     [Fact]
@@ -90,7 +90,7 @@ public class CraftingQueryTest
         var actual = await sut.Crafting.GetRecipesByIngredientItemId(ironOre);
 
         const int ironIngotRecipe = 19;
-        Assert.Contains(actual, recipe => recipe.Id == ironIngotRecipe);
+        Assert.Contains(actual.Value, recipe => recipe.Id == ironIngotRecipe);
     }
 
     [Fact]
@@ -103,7 +103,7 @@ public class CraftingQueryTest
         var actual = await sut.Crafting.GetRecipesByIngredientItemIdByPage(ironOre, 0, 20);
 
         const int ironIngotRecipe = 19;
-        Assert.Contains(actual.Values, recipe => recipe.Id == ironIngotRecipe);
+        Assert.Contains(actual.Value, recipe => recipe.Id == ironIngotRecipe);
     }
 
     [Fact]
@@ -116,7 +116,7 @@ public class CraftingQueryTest
         var actual = await sut.Crafting.GetRecipesIndexByOutputItemId(ironIngot);
 
         const int ironIngotRecipe = 19;
-        Assert.Contains(ironIngotRecipe, actual);
+        Assert.Contains(ironIngotRecipe, actual.Value);
     }
 
     [Fact]
@@ -129,7 +129,7 @@ public class CraftingQueryTest
         var actual = await sut.Crafting.GetRecipesByOutputItemId(ironIngot);
 
         const int ironIngotRecipe = 19;
-        Assert.Contains(actual, recipe => recipe.Id == ironIngotRecipe);
+        Assert.Contains(actual.Value, recipe => recipe.Id == ironIngotRecipe);
     }
 
     [Fact]
@@ -142,7 +142,7 @@ public class CraftingQueryTest
         var actual = await sut.Crafting.GetRecipesByOutputItemIdByPage(ironIngot, 0, 20);
 
         const int ironIngotRecipe = 19;
-        Assert.Contains(actual.Values, recipe => recipe.Id == ironIngotRecipe);
+        Assert.Contains(actual.Value, recipe => recipe.Id == ironIngotRecipe);
     }
 
     [Fact]
@@ -157,11 +157,11 @@ public class CraftingQueryTest
         const int visionCrystal = 46746;
         var actual = await sut.Crafting.GetRecipesByIngredientItemId(visionCrystal);
 
-        Assert.NotInRange(actual.Count, 0, 200); // Greater than 200
-        Assert.Equal(actual.Context.ResultTotal, actual.Count);
-        Assert.Equal(actual.Context.ResultTotal, actual.Context.ResultCount);
+        Assert.NotInRange(actual.Value.Count, 0, 200); // Greater than 200
+        Assert.Equal(actual.ResultContext.ResultTotal, actual.Value.Count);
+        Assert.Equal(actual.ResultContext.ResultTotal, actual.ResultContext.ResultCount);
         Assert.All(
-            actual,
+            actual.Value,
             recipe => Assert.Contains(
                 recipe.Ingredients,
                 ingredient => ingredient.Id == visionCrystal

@@ -18,7 +18,7 @@ public sealed class ItemStatsQuery
         http.BaseAddress ??= BaseAddress.DefaultUri;
     }
 
-    public Task<IReplicaSet<ItemStat>> GetItemStats(
+    public Task<Replica<HashSet<ItemStat>>> GetItemStats(
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
@@ -32,13 +32,15 @@ public sealed class ItemStatsQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<IReplicaSet<int>> GetItemStatsIndex(CancellationToken cancellationToken = default)
+    public Task<Replica<HashSet<int>>> GetItemStatsIndex(
+        CancellationToken cancellationToken = default
+    )
     {
         ItemStatsIndexRequest request = new();
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<IReplica<ItemStat>> GetItemStatById(
+    public Task<Replica<ItemStat>> GetItemStatById(
         int itemStatId,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -53,7 +55,7 @@ public sealed class ItemStatsQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<IReplicaSet<ItemStat>> GetItemStatsByIds(
+    public Task<Replica<HashSet<ItemStat>>> GetItemStatsByIds(
         IReadOnlyCollection<int> itemStatIds,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -69,7 +71,7 @@ public sealed class ItemStatsQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<IReplicaPage<ItemStat>> GetItemStatsByPage(
+    public Task<Replica<HashSet<ItemStat>>> GetItemStatsByPage(
         int pageIndex,
         int? pageSize = default,
         Language? language = default,

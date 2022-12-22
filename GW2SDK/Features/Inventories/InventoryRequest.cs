@@ -7,7 +7,7 @@ using JetBrains.Annotations;
 namespace GuildWars2.Inventories;
 
 [PublicAPI]
-public sealed class InventoryRequest : IHttpRequest<IReplica<Baggage>>
+public sealed class InventoryRequest : IHttpRequest<Replica<Baggage>>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(HttpMethod.Get, "v2/characters/:id/inventory")
@@ -27,7 +27,7 @@ public sealed class InventoryRequest : IHttpRequest<IReplica<Baggage>>
 
     public MissingMemberBehavior MissingMemberBehavior { get; init; }
 
-    public async Task<IReplica<Baggage>> SendAsync(
+    public async Task<Replica<Baggage>> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
     )
@@ -44,13 +44,13 @@ public sealed class InventoryRequest : IHttpRequest<IReplica<Baggage>>
             .ConfigureAwait(false);
 
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
-
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
-
         return new Replica<Baggage>
         {
             Value = json.RootElement.GetBaggage(MissingMemberBehavior),
+            ResultContext = response.Headers.GetResultContext(),
+            PageContext = response.Headers.GetPageContext(),
             Date = response.Headers.Date.GetValueOrDefault(),
             Expires = response.Content.Headers.Expires,
             LastModified = response.Content.Headers.LastModified

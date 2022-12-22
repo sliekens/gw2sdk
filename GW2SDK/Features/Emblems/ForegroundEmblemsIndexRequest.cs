@@ -1,4 +1,5 @@
-﻿using System.Net.Http;
+﻿using System.Collections.Generic;
+using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 using GuildWars2.Http;
@@ -8,7 +9,7 @@ using JetBrains.Annotations;
 namespace GuildWars2.Emblems;
 
 [PublicAPI]
-public sealed class ForegroundEmblemsIndexRequest : IHttpRequest<IReplicaSet<int>>
+public sealed class ForegroundEmblemsIndexRequest : IHttpRequest<Replica<HashSet<int>>>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(HttpMethod.Get, "v2/emblem/foregrounds")
@@ -17,7 +18,7 @@ public sealed class ForegroundEmblemsIndexRequest : IHttpRequest<IReplicaSet<int
             Arguments = new QueryBuilder { { "v", SchemaVersion.Recommended } }
         };
 
-    public async Task<IReplicaSet<int>> SendAsync(
+    public async Task<Replica<HashSet<int>>> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
     )
@@ -30,14 +31,13 @@ public sealed class ForegroundEmblemsIndexRequest : IHttpRequest<IReplicaSet<int
             .ConfigureAwait(false);
 
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
-
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
-
-        return new ReplicaSet<int>
+        return new Replica<HashSet<int>>
         {
-            Values = json.RootElement.GetSet(entry => entry.GetInt32()),
-            Context = response.Headers.GetCollectionContext(),
+            Value = json.RootElement.GetSet(entry => entry.GetInt32()),
+            ResultContext = response.Headers.GetResultContext(),
+            PageContext = response.Headers.GetPageContext(),
             Date = response.Headers.Date.GetValueOrDefault(),
             Expires = response.Content.Headers.Expires,
             LastModified = response.Content.Headers.LastModified

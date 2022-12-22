@@ -7,7 +7,7 @@ using JetBrains.Annotations;
 namespace GuildWars2.Pvp.Seasons;
 
 [PublicAPI]
-public sealed class SeasonByIdRequest : IHttpRequest<IReplica<Season>>
+public sealed class SeasonByIdRequest : IHttpRequest<Replica<Season>>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(HttpMethod.Get, "v2/pvp/seasons") { AcceptEncoding = "gzip" };
@@ -23,7 +23,7 @@ public sealed class SeasonByIdRequest : IHttpRequest<IReplica<Season>>
 
     public MissingMemberBehavior MissingMemberBehavior { get; init; }
 
-    public async Task<IReplica<Season>> SendAsync(
+    public async Task<Replica<Season>> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
     )
@@ -44,13 +44,13 @@ public sealed class SeasonByIdRequest : IHttpRequest<IReplica<Season>>
             .ConfigureAwait(false);
 
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
-
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
-
         return new Replica<Season>
         {
             Value = json.RootElement.GetSeason(MissingMemberBehavior),
+            ResultContext = response.Headers.GetResultContext(),
+            PageContext = response.Headers.GetPageContext(),
             Date = response.Headers.Date.GetValueOrDefault(),
             Expires = response.Content.Headers.Expires,
             LastModified = response.Content.Headers.LastModified

@@ -1,4 +1,5 @@
-﻿using System.Net.Http;
+﻿using System.Collections.Generic;
+using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 using GuildWars2.Http;
@@ -9,7 +10,7 @@ using static System.Net.Http.HttpMethod;
 namespace GuildWars2.Stories;
 
 [PublicAPI]
-public sealed class BackstoryAnswersByPageRequest : IHttpRequest<IReplicaPage<BackstoryAnswer>>
+public sealed class BackstoryAnswersByPageRequest : IHttpRequest<Replica<HashSet<BackstoryAnswer>>>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/backstory/answers")
     {
@@ -29,7 +30,7 @@ public sealed class BackstoryAnswersByPageRequest : IHttpRequest<IReplicaPage<Ba
 
     public MissingMemberBehavior MissingMemberBehavior { get; init; }
 
-    public async Task<IReplicaPage<BackstoryAnswer>> SendAsync(
+    public async Task<Replica<HashSet<BackstoryAnswer>>> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
     )
@@ -53,17 +54,16 @@ public sealed class BackstoryAnswersByPageRequest : IHttpRequest<IReplicaPage<Ba
             .ConfigureAwait(false);
 
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
-
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
-
-        return new ReplicaPage<BackstoryAnswer>
+        return new Replica<HashSet<BackstoryAnswer>>
         {
-            Values =
+            Value =
                 json.RootElement.GetSet(
                     entry => entry.GetBackstoryAnswer(MissingMemberBehavior)
                 ),
-            Context = response.Headers.GetPageContext(),
+            ResultContext = response.Headers.GetResultContext(),
+            PageContext = response.Headers.GetPageContext(),
             Date = response.Headers.Date.GetValueOrDefault(),
             Expires = response.Content.Headers.Expires,
             LastModified = response.Content.Headers.LastModified

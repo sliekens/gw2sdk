@@ -10,7 +10,7 @@ using static System.Net.Http.HttpMethod;
 namespace GuildWars2.Skills;
 
 [PublicAPI]
-public sealed class SkillsByIdsRequest : IHttpRequest<IReplicaSet<Skill>>
+public sealed class SkillsByIdsRequest : IHttpRequest<Replica<HashSet<Skill>>>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/skills")
     {
@@ -29,7 +29,7 @@ public sealed class SkillsByIdsRequest : IHttpRequest<IReplicaSet<Skill>>
 
     public MissingMemberBehavior MissingMemberBehavior { get; init; }
 
-    public async Task<IReplicaSet<Skill>> SendAsync(
+    public async Task<Replica<HashSet<Skill>>> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
     )
@@ -50,14 +50,13 @@ public sealed class SkillsByIdsRequest : IHttpRequest<IReplicaSet<Skill>>
             .ConfigureAwait(false);
 
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
-
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
-
-        return new ReplicaSet<Skill>
+        return new Replica<HashSet<Skill>>
         {
-            Values = json.RootElement.GetSet(entry => entry.GetSkill(MissingMemberBehavior)),
-            Context = response.Headers.GetCollectionContext(),
+            Value = json.RootElement.GetSet(entry => entry.GetSkill(MissingMemberBehavior)),
+            ResultContext = response.Headers.GetResultContext(),
+            PageContext = response.Headers.GetPageContext(),
             Date = response.Headers.Date.GetValueOrDefault(),
             Expires = response.Content.Headers.Expires,
             LastModified = response.Content.Headers.LastModified

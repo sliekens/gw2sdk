@@ -8,7 +8,7 @@ using static System.Net.Http.HttpMethod;
 namespace GuildWars2.Stories;
 
 [PublicAPI]
-public sealed class BackstoryQuestionByIdRequest : IHttpRequest<IReplica<BackstoryQuestion>>
+public sealed class BackstoryQuestionByIdRequest : IHttpRequest<Replica<BackstoryQuestion>>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/backstory/questions") { AcceptEncoding = "gzip" };
@@ -24,7 +24,7 @@ public sealed class BackstoryQuestionByIdRequest : IHttpRequest<IReplica<Backsto
 
     public MissingMemberBehavior MissingMemberBehavior { get; init; }
 
-    public async Task<IReplica<BackstoryQuestion>> SendAsync(
+    public async Task<Replica<BackstoryQuestion>> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
     )
@@ -45,13 +45,13 @@ public sealed class BackstoryQuestionByIdRequest : IHttpRequest<IReplica<Backsto
             .ConfigureAwait(false);
 
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
-
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
-
         return new Replica<BackstoryQuestion>
         {
             Value = json.RootElement.GetBackstoryQuestion(MissingMemberBehavior),
+            ResultContext = response.Headers.GetResultContext(),
+            PageContext = response.Headers.GetPageContext(),
             Date = response.Headers.Date.GetValueOrDefault(),
             Expires = response.Content.Headers.Expires,
             LastModified = response.Content.Headers.LastModified

@@ -23,7 +23,7 @@ public sealed class GuildsQuery
 
     #region v2/guild/search
 
-    public Task<IReplica<IReadOnlyCollection<string>>> GetGuildsByName(
+    public Task<Replica<HashSet<string>>> GetGuildsByName(
         string name,
         CancellationToken cancellationToken = default
     )
@@ -36,7 +36,7 @@ public sealed class GuildsQuery
 
     #region v2/guild/permissions
 
-    public Task<IReplicaSet<GuildPermissionSummary>> GetGuildPermissions(
+    public Task<Replica<HashSet<GuildPermissionSummary>>> GetGuildPermissions(
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
@@ -50,7 +50,7 @@ public sealed class GuildsQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<IReplicaSet<string>> GetGuildPermissionsIndex(
+    public Task<Replica<HashSet<string>>> GetGuildPermissionsIndex(
         CancellationToken cancellationToken = default
     )
     {
@@ -58,7 +58,7 @@ public sealed class GuildsQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<IReplica<GuildPermissionSummary>> GetGuildPermissionById(
+    public Task<Replica<GuildPermissionSummary>> GetGuildPermissionById(
         GuildPermission guildPermissionId,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -73,7 +73,7 @@ public sealed class GuildsQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<IReplicaSet<GuildPermissionSummary>> GetGuildPermissionsByIds(
+    public Task<Replica<HashSet<GuildPermissionSummary>>> GetGuildPermissionsByIds(
         IReadOnlyCollection<GuildPermission> guildPermissionIds,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -88,7 +88,7 @@ public sealed class GuildsQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<IReplicaPage<GuildPermissionSummary>> GetGuildPermissionsByPage(
+    public Task<Replica<HashSet<GuildPermissionSummary>>> GetGuildPermissionsByPage(
         int pageIndex,
         int? pageSize = default,
         Language? language = default,
@@ -109,7 +109,7 @@ public sealed class GuildsQuery
 
     #region v2/guild/upgrades
 
-    public Task<IReplicaSet<GuildUpgrade>> GetGuildUpgrades(
+    public Task<Replica<HashSet<GuildUpgrade>>> GetGuildUpgrades(
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
@@ -123,7 +123,7 @@ public sealed class GuildsQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<IReplicaSet<int>> GetGuildUpgradesIndex(
+    public Task<Replica<HashSet<int>>> GetGuildUpgradesIndex(
         CancellationToken cancellationToken = default
     )
     {
@@ -131,7 +131,7 @@ public sealed class GuildsQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<IReplica<GuildUpgrade>> GetGuildUpgradeById(
+    public Task<Replica<GuildUpgrade>> GetGuildUpgradeById(
         int guildUpgradeId,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -146,7 +146,7 @@ public sealed class GuildsQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<IReplicaSet<GuildUpgrade>> GetGuildUpgradesByIds(
+    public Task<Replica<HashSet<GuildUpgrade>>> GetGuildUpgradesByIds(
         IReadOnlyCollection<int> guildUpgradeIds,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -161,7 +161,7 @@ public sealed class GuildsQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<IReplicaPage<GuildUpgrade>> GetGuildUpgradesByPage(
+    public Task<Replica<HashSet<GuildUpgrade>>> GetGuildUpgradesByPage(
         int pageIndex,
         int? pageSize = default,
         Language? language = default,

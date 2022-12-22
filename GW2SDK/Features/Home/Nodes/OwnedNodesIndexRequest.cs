@@ -9,7 +9,7 @@ using JetBrains.Annotations;
 namespace GuildWars2.Home.Nodes;
 
 [PublicAPI]
-public sealed class OwnedNodesIndexRequest : IHttpRequest<IReplica<IReadOnlyCollection<string>>>
+public sealed class OwnedNodesIndexRequest : IHttpRequest<Replica<HashSet<string>>>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(HttpMethod.Get, "v2/account/home/nodes")
@@ -25,7 +25,7 @@ public sealed class OwnedNodesIndexRequest : IHttpRequest<IReplica<IReadOnlyColl
 
     public string? AccessToken { get; }
 
-    public async Task<IReplica<IReadOnlyCollection<string>>> SendAsync(
+    public async Task<Replica<HashSet<string>>> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
     )
@@ -38,13 +38,13 @@ public sealed class OwnedNodesIndexRequest : IHttpRequest<IReplica<IReadOnlyColl
             .ConfigureAwait(false);
 
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
-
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
-
-        return new Replica<IReadOnlyCollection<string>>
+        return new Replica<HashSet<string>>
         {
             Value = json.RootElement.GetSet(entry => entry.GetStringRequired()),
+            ResultContext = response.Headers.GetResultContext(),
+            PageContext = response.Headers.GetPageContext(),
             Date = response.Headers.Date.GetValueOrDefault(),
             Expires = response.Content.Headers.Expires,
             LastModified = response.Content.Headers.LastModified

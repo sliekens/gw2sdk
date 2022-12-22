@@ -20,7 +20,7 @@ public sealed class EmblemsQuery
 
     #region v2/emblem/foregrounds
 
-    public Task<IReplicaSet<Emblem>> GetForegroundEmblems(
+    public Task<Replica<HashSet<Emblem>>> GetForegroundEmblems(
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
@@ -29,7 +29,7 @@ public sealed class EmblemsQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<IReplicaSet<int>> GetForegroundEmblemsIndex(
+    public Task<Replica<HashSet<int>>> GetForegroundEmblemsIndex(
         CancellationToken cancellationToken = default
     )
     {
@@ -37,7 +37,7 @@ public sealed class EmblemsQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<IReplica<Emblem>> GetForegroundEmblemById(
+    public Task<Replica<Emblem>> GetForegroundEmblemById(
         int foregroundEmblemId,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
@@ -48,7 +48,7 @@ public sealed class EmblemsQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<IReplicaSet<Emblem>> GetForegroundEmblemsByIds(
+    public Task<Replica<HashSet<Emblem>>> GetForegroundEmblemsByIds(
         IReadOnlyCollection<int> foregroundEmblemIds,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
@@ -59,7 +59,7 @@ public sealed class EmblemsQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<IReplicaPage<Emblem>> GetForegroundEmblemsByPage(
+    public Task<Replica<HashSet<Emblem>>> GetForegroundEmblemsByPage(
         int pageIndex,
         int? pageSize = default,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -78,7 +78,7 @@ public sealed class EmblemsQuery
 
     #region v2/emblem/backgrounds
 
-    public Task<IReplicaSet<Emblem>> GetBackgroundEmblems(
+    public Task<Replica<HashSet<Emblem>>> GetBackgroundEmblems(
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
@@ -87,7 +87,7 @@ public sealed class EmblemsQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<IReplicaSet<int>> GetBackgroundEmblemsIndex(
+    public Task<Replica<HashSet<int>>> GetBackgroundEmblemsIndex(
         CancellationToken cancellationToken = default
     )
     {
@@ -95,7 +95,7 @@ public sealed class EmblemsQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<IReplica<Emblem>> GetBackgroundEmblemById(
+    public Task<Replica<Emblem>> GetBackgroundEmblemById(
         int backgroundEmblemId,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
@@ -106,7 +106,7 @@ public sealed class EmblemsQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<IReplicaSet<Emblem>> GetBackgroundEmblemsByIds(
+    public Task<Replica<HashSet<Emblem>>> GetBackgroundEmblemsByIds(
         IReadOnlyCollection<int> backgroundEmblemIds,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
@@ -117,7 +117,7 @@ public sealed class EmblemsQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<IReplicaPage<Emblem>> GetBackgroundEmblemsByPage(
+    public Task<Replica<HashSet<Emblem>>> GetBackgroundEmblemsByPage(
         int pageIndex,
         int? pageSize = default,
         MissingMemberBehavior missingMemberBehavior = default,

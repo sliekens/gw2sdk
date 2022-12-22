@@ -7,7 +7,7 @@ using JetBrains.Annotations;
 namespace GuildWars2.MapChests;
 
 [PublicAPI]
-public sealed class MapChestByIdRequest : IHttpRequest<IReplica<MapChest>>
+public sealed class MapChestByIdRequest : IHttpRequest<Replica<MapChest>>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(HttpMethod.Get, "v2/mapchests") { AcceptEncoding = "gzip" };
@@ -21,7 +21,7 @@ public sealed class MapChestByIdRequest : IHttpRequest<IReplica<MapChest>>
 
     public MissingMemberBehavior MissingMemberBehavior { get; init; }
 
-    public async Task<IReplica<MapChest>> SendAsync(
+    public async Task<Replica<MapChest>> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
     )
@@ -41,13 +41,13 @@ public sealed class MapChestByIdRequest : IHttpRequest<IReplica<MapChest>>
             .ConfigureAwait(false);
 
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
-
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
-
         return new Replica<MapChest>
         {
             Value = json.RootElement.GetMapChest(MissingMemberBehavior),
+            ResultContext = response.Headers.GetResultContext(),
+            PageContext = response.Headers.GetPageContext(),
             Date = response.Headers.Date.GetValueOrDefault(),
             Expires = response.Content.Headers.Expires,
             LastModified = response.Content.Headers.LastModified

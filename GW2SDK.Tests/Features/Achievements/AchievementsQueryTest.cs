@@ -126,7 +126,7 @@ public class AchievementsQueryTest
 
         var actual = await sut.Achievements.GetAchievementsIndex();
 
-        Assert.Equal(actual.Context.ResultTotal, actual.Count);
+        Assert.Equal(actual.ResultContext.ResultTotal, actual.Value.Count);
     }
 
     [Fact]
@@ -158,7 +158,7 @@ public class AchievementsQueryTest
         var actual = await sut.Achievements.GetAchievementsByIds(achievementIds);
 
         Assert.Collection(
-            actual,
+            actual.Value,
             achievement => Assert.Equal(1, achievement.Id),
             achievement => Assert.Equal(2, achievement.Id),
             achievement => Assert.Equal(3, achievement.Id)
@@ -173,8 +173,8 @@ public class AchievementsQueryTest
 
         var actual = await sut.Achievements.GetAchievementsByPage(0, 3);
 
-        Assert.Equal(3, actual.Count);
-        Assert.Equal(3, actual.Context.PageSize);
+        Assert.Equal(3, actual.Value.Count);
+        Assert.Equal(3, actual.PageContext.PageSize);
     }
 
     [Fact]
@@ -186,10 +186,10 @@ public class AchievementsQueryTest
 
         var actual = await sut.Achievements.GetAccountAchievements(accessToken.Key);
 
-        Assert.Equal(actual.Context.ResultTotal, actual.Count);
+        Assert.Equal(actual.ResultContext.ResultTotal, actual.Value.Count);
 
         Assert.All(
-            actual,
+            actual.Value,
             achievement =>
             {
                 AccountAchievementFact.Id_is_positive(achievement);
@@ -229,7 +229,7 @@ public class AchievementsQueryTest
         var actual = await sut.Achievements.GetAccountAchievementsByIds(ids, accessToken.Key);
 
         Assert.Collection(
-            actual,
+            actual.Value,
             first => Assert.Equal(1, first.Id),
             second => Assert.Equal(2, second.Id),
             third => Assert.Equal(3, third.Id)
@@ -245,8 +245,8 @@ public class AchievementsQueryTest
 
         var actual = await sut.Achievements.GetAccountAchievementsByPage(0, 3, accessToken.Key);
 
-        Assert.Equal(3, actual.Count);
-        Assert.Equal(3, actual.Context.PageSize);
+        Assert.Equal(3, actual.Value.Count);
+        Assert.Equal(3, actual.PageContext.PageSize);
     }
 
     [Fact]
@@ -257,9 +257,9 @@ public class AchievementsQueryTest
 
         var actual = await sut.Achievements.GetAchievementCategories();
 
-        Assert.Equal(actual.Context.ResultTotal, actual.Count);
+        Assert.Equal(actual.ResultContext.ResultTotal, actual.Value.Count);
         Assert.All(
-            actual,
+            actual.Value,
             achievementCategory =>
             {
                 AchievementCategoryFact.Id_is_positive(achievementCategory);
@@ -276,7 +276,7 @@ public class AchievementsQueryTest
 
         var actual = await sut.Achievements.GetAchievementCategoriesIndex();
 
-        Assert.Equal(actual.Context.ResultTotal, actual.Count);
+        Assert.Equal(actual.ResultContext.ResultTotal, actual.Value.Count);
     }
 
     [Fact]
@@ -308,7 +308,7 @@ public class AchievementsQueryTest
         var actual = await sut.Achievements.GetAchievementCategoriesByIds(ids);
 
         Assert.Collection(
-            actual,
+            actual.Value,
             first => Assert.Equal(1, first.Id),
             second => Assert.Equal(2, second.Id),
             third => Assert.Equal(3, third.Id)
@@ -323,8 +323,8 @@ public class AchievementsQueryTest
 
         var actual = await sut.Achievements.GetAchievementCategoriesByPage(0, 3);
 
-        Assert.Equal(3, actual.Count);
-        Assert.Equal(3, actual.Context.PageSize);
+        Assert.Equal(3, actual.Value.Count);
+        Assert.Equal(3, actual.PageContext.PageSize);
     }
 
     [Fact]
@@ -335,9 +335,9 @@ public class AchievementsQueryTest
 
         var actual = await sut.Achievements.GetAchievementGroups();
 
-        Assert.Equal(actual.Context.ResultTotal, actual.Count);
+        Assert.Equal(actual.ResultContext.ResultTotal, actual.Value.Count);
         Assert.All(
-            actual,
+            actual.Value,
             achievementGroup =>
             {
                 AchievementGroupFact.Order_is_not_negative(achievementGroup);
@@ -353,7 +353,7 @@ public class AchievementsQueryTest
 
         var actual = await sut.Achievements.GetAchievementGroupsIndex();
 
-        Assert.Equal(actual.Context.ResultTotal, actual.Count);
+        Assert.Equal(actual.ResultContext.ResultTotal, actual.Value.Count);
     }
 
     [Fact]
@@ -385,7 +385,7 @@ public class AchievementsQueryTest
         var actual = await sut.Achievements.GetAchievementGroupsByIds(ids);
 
         Assert.Collection(
-            actual,
+            actual.Value,
             first => Assert.Contains(first.Id, ids),
             second => Assert.Contains(second.Id, ids),
             third => Assert.Contains(third.Id, ids)
@@ -400,8 +400,8 @@ public class AchievementsQueryTest
 
         var actual = await sut.Achievements.GetAchievementGroupsByPage(0, 3);
 
-        Assert.Equal(3, actual.Count);
-        Assert.Equal(3, actual.Context.PageSize);
+        Assert.Equal(3, actual.Value.Count);
+        Assert.Equal(3, actual.PageContext.PageSize);
     }
 
     [Fact]
@@ -412,9 +412,9 @@ public class AchievementsQueryTest
 
         var actual = await sut.Achievements.GetTitles();
 
-        Assert.Equal(actual.Context.ResultTotal, actual.Count);
+        Assert.Equal(actual.ResultContext.ResultTotal, actual.Value.Count);
         Assert.All(
-            actual,
+            actual.Value,
             title =>
             {
                 TitleFact.Id_is_positive(title);
@@ -432,7 +432,7 @@ public class AchievementsQueryTest
 
         var actual = await sut.Achievements.GetTitlesIndex();
 
-        Assert.Equal(actual.Context.ResultTotal, actual.Count);
+        Assert.Equal(actual.ResultContext.ResultTotal, actual.Value.Count);
     }
 
     [Fact]
@@ -464,7 +464,7 @@ public class AchievementsQueryTest
         var actual = await sut.Achievements.GetTitlesByIds(ids);
 
         Assert.Collection(
-            actual,
+            actual.Value,
             first => Assert.Equal(1, first.Id),
             second => Assert.Equal(2, second.Id),
             third => Assert.Equal(3, third.Id)
@@ -479,7 +479,7 @@ public class AchievementsQueryTest
 
         var actual = await sut.Achievements.GetTitlesByPage(0, 3);
 
-        Assert.Equal(3, actual.Count);
-        Assert.Equal(3, actual.Context.PageSize);
+        Assert.Equal(3, actual.Value.Count);
+        Assert.Equal(3, actual.PageContext.PageSize);
     }
 }

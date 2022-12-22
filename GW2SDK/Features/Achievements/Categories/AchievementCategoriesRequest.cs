@@ -1,4 +1,5 @@
-﻿using System.Net.Http;
+﻿using System.Collections.Generic;
+using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 using GuildWars2.Http;
@@ -9,7 +10,8 @@ using static System.Net.Http.HttpMethod;
 namespace GuildWars2.Achievements.Categories;
 
 [PublicAPI]
-public sealed class AchievementCategoriesRequest : IHttpRequest<IReplicaSet<AchievementCategory>>
+public sealed class
+    AchievementCategoriesRequest : IHttpRequest<Replica<HashSet<AchievementCategory>>>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/achievements/categories")
@@ -26,7 +28,7 @@ public sealed class AchievementCategoriesRequest : IHttpRequest<IReplicaSet<Achi
 
     public MissingMemberBehavior MissingMemberBehavior { get; init; }
 
-    public async Task<IReplicaSet<AchievementCategory>> SendAsync(
+    public async Task<Replica<HashSet<AchievementCategory>>> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
     )
@@ -39,16 +41,16 @@ public sealed class AchievementCategoriesRequest : IHttpRequest<IReplicaSet<Achi
             .ConfigureAwait(false);
 
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
-
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
-
-        return new ReplicaSet<AchievementCategory>
+        return new Replica<HashSet<AchievementCategory>>
         {
-            Values = json.RootElement.GetSet(
-                entry => entry.GetAchievementCategory(MissingMemberBehavior)
-            ),
-            Context = response.Headers.GetCollectionContext(),
+            Value =
+                json.RootElement.GetSet(
+                    entry => entry.GetAchievementCategory(MissingMemberBehavior)
+                ),
+            ResultContext = response.Headers.GetResultContext(),
+            PageContext = response.Headers.GetPageContext(),
             Date = response.Headers.Date.GetValueOrDefault(),
             Expires = response.Content.Headers.Expires,
             LastModified = response.Content.Headers.LastModified

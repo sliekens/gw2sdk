@@ -7,7 +7,7 @@ using JetBrains.Annotations;
 namespace GuildWars2.Novelties;
 
 [PublicAPI]
-public sealed class NoveltyByIdRequest : IHttpRequest<IReplica<Novelty>>
+public sealed class NoveltyByIdRequest : IHttpRequest<Replica<Novelty>>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(HttpMethod.Get, "v2/novelties") { AcceptEncoding = "gzip" };
@@ -23,7 +23,7 @@ public sealed class NoveltyByIdRequest : IHttpRequest<IReplica<Novelty>>
 
     public MissingMemberBehavior MissingMemberBehavior { get; init; }
 
-    public async Task<IReplica<Novelty>> SendAsync(
+    public async Task<Replica<Novelty>> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
     )
@@ -44,13 +44,13 @@ public sealed class NoveltyByIdRequest : IHttpRequest<IReplica<Novelty>>
             .ConfigureAwait(false);
 
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
-
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
-
         return new Replica<Novelty>
         {
             Value = json.RootElement.GetNovelty(MissingMemberBehavior),
+            ResultContext = response.Headers.GetResultContext(),
+            PageContext = response.Headers.GetPageContext(),
             Date = response.Headers.Date.GetValueOrDefault(),
             Expires = response.Content.Headers.Expires,
             LastModified = response.Content.Headers.LastModified

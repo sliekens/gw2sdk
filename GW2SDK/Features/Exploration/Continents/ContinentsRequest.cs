@@ -1,4 +1,5 @@
-﻿using System.Net.Http;
+﻿using System.Collections.Generic;
+using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 using GuildWars2.Http;
@@ -9,7 +10,7 @@ using static System.Net.Http.HttpMethod;
 namespace GuildWars2.Exploration.Continents;
 
 [PublicAPI]
-public sealed class ContinentsRequest : IHttpRequest<IReplicaSet<Continent>>
+public sealed class ContinentsRequest : IHttpRequest<Replica<HashSet<Continent>>>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/continents")
     {
@@ -25,7 +26,7 @@ public sealed class ContinentsRequest : IHttpRequest<IReplicaSet<Continent>>
 
     public MissingMemberBehavior MissingMemberBehavior { get; init; }
 
-    public async Task<IReplicaSet<Continent>> SendAsync(
+    public async Task<Replica<HashSet<Continent>>> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
     )
@@ -38,14 +39,13 @@ public sealed class ContinentsRequest : IHttpRequest<IReplicaSet<Continent>>
             .ConfigureAwait(false);
 
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
-
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
-
-        return new ReplicaSet<Continent>
+        return new Replica<HashSet<Continent>>
         {
-            Values = json.RootElement.GetSet(entry => entry.GetContinent(MissingMemberBehavior)),
-            Context = response.Headers.GetCollectionContext(),
+            Value = json.RootElement.GetSet(entry => entry.GetContinent(MissingMemberBehavior)),
+            ResultContext = response.Headers.GetResultContext(),
+            PageContext = response.Headers.GetPageContext(),
             Date = response.Headers.Date.GetValueOrDefault(),
             Expires = response.Content.Headers.Expires,
             LastModified = response.Content.Headers.LastModified

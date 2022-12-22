@@ -7,7 +7,7 @@ using JetBrains.Annotations;
 namespace GuildWars2.Finishers;
 
 [PublicAPI]
-public sealed class FinisherByIdRequest : IHttpRequest<IReplica<Finisher>>
+public sealed class FinisherByIdRequest : IHttpRequest<Replica<Finisher>>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(HttpMethod.Get, "v2/finishers") { AcceptEncoding = "gzip" };
@@ -23,7 +23,7 @@ public sealed class FinisherByIdRequest : IHttpRequest<IReplica<Finisher>>
 
     public MissingMemberBehavior MissingMemberBehavior { get; init; }
 
-    public async Task<IReplica<Finisher>> SendAsync(
+    public async Task<Replica<Finisher>> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
     )
@@ -44,13 +44,13 @@ public sealed class FinisherByIdRequest : IHttpRequest<IReplica<Finisher>>
             .ConfigureAwait(false);
 
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
-
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
-
         return new Replica<Finisher>
         {
             Value = json.RootElement.GetFinisher(MissingMemberBehavior),
+            ResultContext = response.Headers.GetResultContext(),
+            PageContext = response.Headers.GetPageContext(),
             Date = response.Headers.Date.GetValueOrDefault(),
             Expires = response.Content.Headers.Expires,
             LastModified = response.Content.Headers.LastModified

@@ -11,7 +11,7 @@ using static System.Net.Http.HttpMethod;
 namespace GuildWars2.Exploration.Charts;
 
 [PublicAPI]
-public sealed class ChartsByIdsRequest : IHttpRequest<IReplicaSet<Chart>>
+public sealed class ChartsByIdsRequest : IHttpRequest<Replica<HashSet<Chart>>>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/continents/:id/floors/:floor/regions/:region/maps")
@@ -45,7 +45,7 @@ public sealed class ChartsByIdsRequest : IHttpRequest<IReplicaSet<Chart>>
 
     public MissingMemberBehavior MissingMemberBehavior { get; init; }
 
-    public async Task<IReplicaSet<Chart>> SendAsync(
+    public async Task<Replica<HashSet<Chart>>> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
     )
@@ -70,14 +70,13 @@ public sealed class ChartsByIdsRequest : IHttpRequest<IReplicaSet<Chart>>
             .ConfigureAwait(false);
 
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
-
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
-
-        return new ReplicaSet<Chart>
+        return new Replica<HashSet<Chart>>
         {
-            Values = json.RootElement.GetSet(entry => entry.GetChart(MissingMemberBehavior)),
-            Context = response.Headers.GetCollectionContext(),
+            Value = json.RootElement.GetSet(entry => entry.GetChart(MissingMemberBehavior)),
+            ResultContext = response.Headers.GetResultContext(),
+            PageContext = response.Headers.GetPageContext(),
             Date = response.Headers.Date.GetValueOrDefault(),
             Expires = response.Content.Headers.Expires,
             LastModified = response.Content.Headers.LastModified

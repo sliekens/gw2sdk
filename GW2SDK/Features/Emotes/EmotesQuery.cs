@@ -20,7 +20,7 @@ public sealed class EmotesQuery
 
     #region v2/emotes
 
-    public Task<IReplicaSet<Emote>> GetEmotes(
+    public Task<Replica<HashSet<Emote>>> GetEmotes(
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
@@ -29,13 +29,15 @@ public sealed class EmotesQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<IReplicaSet<string>> GetEmotesIndex(CancellationToken cancellationToken = default)
+    public Task<Replica<HashSet<string>>> GetEmotesIndex(
+        CancellationToken cancellationToken = default
+    )
     {
         var request = new EmotesIndexRequest();
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<IReplica<Emote>> GetEmoteById(
+    public Task<Replica<Emote>> GetEmoteById(
         string emoteId,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
@@ -45,7 +47,7 @@ public sealed class EmotesQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<IReplicaSet<Emote>> GetEmotesByIds(
+    public Task<Replica<HashSet<Emote>>> GetEmotesByIds(
         IReadOnlyCollection<string> emoteIds,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
@@ -56,7 +58,7 @@ public sealed class EmotesQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<IReplicaPage<Emote>> GetEmotesByPage(
+    public Task<Replica<HashSet<Emote>>> GetEmotesByPage(
         int pageIndex,
         int? pageSize = default,
         MissingMemberBehavior missingMemberBehavior = default,

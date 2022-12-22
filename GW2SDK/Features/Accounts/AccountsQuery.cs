@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
@@ -20,7 +21,7 @@ public sealed class AccountsQuery
 
     #region v2/account
 
-    public Task<IReplica<AccountSummary>> GetSummary(
+    public Task<Replica<AccountSummary>> GetSummary(
         string? accessToken,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
@@ -39,7 +40,7 @@ public sealed class AccountsQuery
     #region v2/characters
 
     [Scope(Permission.Account, Permission.Characters)]
-    public Task<IReplicaSet<string>> GetCharactersIndex(
+    public Task<Replica<HashSet<string>>> GetCharactersIndex(
         string? accessToken,
         CancellationToken cancellationToken = default
     )
@@ -50,7 +51,7 @@ public sealed class AccountsQuery
 
     [Scope(Permission.Account, Permission.Characters)]
     [Scope(ScopeRequirement.Any, Permission.Builds, Permission.Inventories, Permission.Progression)]
-    public Task<IReplica<Character>> GetCharacterByName(
+    public Task<Replica<Character>> GetCharacterByName(
         string characterName,
         string? accessToken,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -67,7 +68,7 @@ public sealed class AccountsQuery
 
     [Scope(Permission.Account, Permission.Characters)]
     [Scope(ScopeRequirement.Any, Permission.Builds, Permission.Inventories, Permission.Progression)]
-    public Task<IReplicaSet<Character>> GetCharacters(
+    public Task<Replica<HashSet<Character>>> GetCharacters(
         string? accessToken,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default

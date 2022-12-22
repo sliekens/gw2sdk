@@ -1,4 +1,5 @@
-﻿using System.Globalization;
+﻿using System.Collections.Generic;
+using System.Globalization;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
@@ -10,7 +11,7 @@ using static System.Net.Http.HttpMethod;
 namespace GuildWars2.Exploration.Hearts;
 
 [PublicAPI]
-public sealed class HeartsByPageRequest : IHttpRequest<IReplicaPage<Heart>>
+public sealed class HeartsByPageRequest : IHttpRequest<Replica<HashSet<Heart>>>
 {
     private static readonly HttpRequestMessageTemplate Template = new(
         Get,
@@ -42,7 +43,7 @@ public sealed class HeartsByPageRequest : IHttpRequest<IReplicaPage<Heart>>
 
     public MissingMemberBehavior MissingMemberBehavior { get; init; }
 
-    public async Task<IReplicaPage<Heart>> SendAsync(
+    public async Task<Replica<HashSet<Heart>>> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
     )
@@ -71,14 +72,13 @@ public sealed class HeartsByPageRequest : IHttpRequest<IReplicaPage<Heart>>
             .ConfigureAwait(false);
 
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
-
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
-
-        return new ReplicaPage<Heart>
+        return new Replica<HashSet<Heart>>
         {
-            Values = json.RootElement.GetSet(entry => entry.GetHeart(MissingMemberBehavior)),
-            Context = response.Headers.GetPageContext(),
+            Value = json.RootElement.GetSet(entry => entry.GetHeart(MissingMemberBehavior)),
+            ResultContext = response.Headers.GetResultContext(),
+            PageContext = response.Headers.GetPageContext(),
             Date = response.Headers.Date.GetValueOrDefault(),
             Expires = response.Content.Headers.Expires,
             LastModified = response.Content.Headers.LastModified

@@ -18,13 +18,15 @@ public sealed class RaidsQuery
         http.BaseAddress ??= BaseAddress.DefaultUri;
     }
 
-    public Task<IReplicaSet<string>> GetRaidsIndex(CancellationToken cancellationToken = default)
+    public Task<Replica<HashSet<string>>> GetRaidsIndex(
+        CancellationToken cancellationToken = default
+    )
     {
         RaidsIndexRequest request = new();
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<IReplica<Raid>> GetRaidById(
+    public Task<Replica<Raid>> GetRaidById(
         string raidId,
         CancellationToken cancellationToken = default
     )
@@ -36,7 +38,7 @@ public sealed class RaidsQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<IReplicaSet<Raid>> GetRaidsByIds(
+    public Task<Replica<HashSet<Raid>>> GetRaidsByIds(
         IReadOnlyCollection<string> raidIds,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
@@ -46,7 +48,7 @@ public sealed class RaidsQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<IReplicaPage<Raid>> GetRaidsByPage(
+    public Task<Replica<HashSet<Raid>>> GetRaidsByPage(
         int pageIndex,
         int? pageSize = default,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -62,7 +64,7 @@ public sealed class RaidsQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<IReplicaSet<Raid>> GetRaids(
+    public Task<Replica<HashSet<Raid>>> GetRaids(
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )

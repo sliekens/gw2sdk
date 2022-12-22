@@ -7,7 +7,7 @@ using JetBrains.Annotations;
 namespace GuildWars2.Emotes;
 
 [PublicAPI]
-public sealed class EmoteByIdRequest : IHttpRequest<IReplica<Emote>>
+public sealed class EmoteByIdRequest : IHttpRequest<Replica<Emote>>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(HttpMethod.Get, "v2/emotes") { AcceptEncoding = "gzip" };
@@ -21,7 +21,7 @@ public sealed class EmoteByIdRequest : IHttpRequest<IReplica<Emote>>
 
     public MissingMemberBehavior MissingMemberBehavior { get; init; }
 
-    public async Task<IReplica<Emote>> SendAsync(
+    public async Task<Replica<Emote>> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
     )
@@ -41,13 +41,13 @@ public sealed class EmoteByIdRequest : IHttpRequest<IReplica<Emote>>
             .ConfigureAwait(false);
 
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
-
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
-
         return new Replica<Emote>
         {
             Value = json.RootElement.GetEmote(MissingMemberBehavior),
+            ResultContext = response.Headers.GetResultContext(),
+            PageContext = response.Headers.GetPageContext(),
             Date = response.Headers.Date.GetValueOrDefault(),
             Expires = response.Content.Headers.Expires,
             LastModified = response.Content.Headers.LastModified

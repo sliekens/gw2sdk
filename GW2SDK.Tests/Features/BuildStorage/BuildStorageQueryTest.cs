@@ -16,8 +16,8 @@ public class BuildStorageQueryTest
 
         var actual = await sut.BuildStorage.GetBuildStorageIndex(accessToken.Key);
 
-        Assert.NotEmpty(actual);
-        Assert.Equal(actual.Context.ResultTotal, actual.Count);
+        Assert.NotEmpty(actual.Value);
+        Assert.Equal(actual.ResultContext.ResultTotal, actual.Value.Count);
     }
 
     [Fact]
@@ -51,9 +51,9 @@ public class BuildStorageQueryTest
 
         var actual = await sut.BuildStorage.GetBuildStorageSpacesByIds(accessToken.Key, ids);
 
-        Assert.NotEmpty(actual);
+        Assert.NotEmpty(actual.Value);
         Assert.All(
-            actual,
+            actual.Value,
             space =>
             {
                 Assert.NotEmpty(space.Name);
@@ -70,8 +70,8 @@ public class BuildStorageQueryTest
 
         var actual = await sut.BuildStorage.GetBuildStorageSpacesByPage(accessToken.Key, 0, 3);
 
-        Assert.Equal(3, actual.Count);
-        Assert.Equal(3, actual.Context.PageSize);
+        Assert.Equal(3, actual.Value.Count);
+        Assert.Equal(3, actual.PageContext.PageSize);
     }
 
     [Fact]
@@ -83,9 +83,9 @@ public class BuildStorageQueryTest
 
         var actual = await sut.BuildStorage.GetBuildStorage(accessToken.Key);
 
-        Assert.NotEmpty(actual.Values);
+        Assert.NotEmpty(actual.Value);
         Assert.All(
-            actual,
+            actual.Value,
             space =>
             {
                 Assert.NotEmpty(space.Name);

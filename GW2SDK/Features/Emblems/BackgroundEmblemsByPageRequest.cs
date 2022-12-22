@@ -1,4 +1,5 @@
-﻿using System.Net.Http;
+﻿using System.Collections.Generic;
+using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 using GuildWars2.Http;
@@ -8,7 +9,7 @@ using JetBrains.Annotations;
 namespace GuildWars2.Emblems;
 
 [PublicAPI]
-public sealed class BackgroundEmblemsByPageRequest : IHttpRequest<IReplicaPage<Emblem>>
+public sealed class BackgroundEmblemsByPageRequest : IHttpRequest<Replica<HashSet<Emblem>>>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(HttpMethod.Get, "v2/emblem/backgrounds") { AcceptEncoding = "gzip" };
@@ -24,7 +25,7 @@ public sealed class BackgroundEmblemsByPageRequest : IHttpRequest<IReplicaPage<E
 
     public MissingMemberBehavior MissingMemberBehavior { get; init; }
 
-    public async Task<IReplicaPage<Emblem>> SendAsync(
+    public async Task<Replica<HashSet<Emblem>>> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
     )
@@ -44,14 +45,13 @@ public sealed class BackgroundEmblemsByPageRequest : IHttpRequest<IReplicaPage<E
             .ConfigureAwait(false);
 
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
-
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
-
-        return new ReplicaPage<Emblem>
+        return new Replica<HashSet<Emblem>>
         {
-            Values = json.RootElement.GetSet(entry => entry.GetEmblem(MissingMemberBehavior)),
-            Context = response.Headers.GetPageContext(),
+            Value = json.RootElement.GetSet(entry => entry.GetEmblem(MissingMemberBehavior)),
+            ResultContext = response.Headers.GetResultContext(),
+            PageContext = response.Headers.GetPageContext(),
             Date = response.Headers.Date.GetValueOrDefault(),
             Expires = response.Content.Headers.Expires,
             LastModified = response.Content.Headers.LastModified

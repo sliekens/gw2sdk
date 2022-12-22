@@ -23,7 +23,7 @@ public sealed class DyesQuery
 
     /// <summary>Gets the IDs of the dyes unlocked by the current account.</summary>
     [Scope(Permission.Unlocks)]
-    public Task<IReplica<IReadOnlyCollection<int>>> GetUnlockedDyesIndex(
+    public Task<Replica<HashSet<int>>> GetUnlockedDyesIndex(
         string? accessToken,
         CancellationToken cancellationToken = default
     )
@@ -36,7 +36,7 @@ public sealed class DyesQuery
 
     #region v2/colors
 
-    public Task<IReplicaSet<Dye>> GetColors(
+    public Task<Replica<HashSet<Dye>>> GetColors(
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
@@ -50,13 +50,15 @@ public sealed class DyesQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<IReplicaSet<int>> GetColorsIndex(CancellationToken cancellationToken = default)
+    public Task<Replica<HashSet<int>>> GetColorsIndex(
+        CancellationToken cancellationToken = default
+    )
     {
         ColorsIndexRequest request = new();
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<IReplica<Dye>> GetColorById(
+    public Task<Replica<Dye>> GetColorById(
         int colorId,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -71,7 +73,7 @@ public sealed class DyesQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<IReplicaSet<Dye>> GetColorsByIds(
+    public Task<Replica<HashSet<Dye>>> GetColorsByIds(
         IReadOnlyCollection<int> colorIds,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -86,7 +88,7 @@ public sealed class DyesQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<IReplicaPage<Dye>> GetColorsByPage(
+    public Task<Replica<HashSet<Dye>>> GetColorsByPage(
         int pageIndex,
         int? pageSize = default,
         Language? language = default,

@@ -1,4 +1,5 @@
-﻿using System.Net.Http;
+﻿using System.Collections.Generic;
+using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 using GuildWars2.Http;
@@ -9,7 +10,7 @@ using static System.Net.Http.HttpMethod;
 namespace GuildWars2.Mounts;
 
 [PublicAPI]
-public sealed class MountsByPageRequest : IHttpRequest<IReplicaPage<Mount>>
+public sealed class MountsByPageRequest : IHttpRequest<Replica<HashSet<Mount>>>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/mounts/types")
     {
@@ -29,7 +30,7 @@ public sealed class MountsByPageRequest : IHttpRequest<IReplicaPage<Mount>>
 
     public MissingMemberBehavior MissingMemberBehavior { get; init; }
 
-    public async Task<IReplicaPage<Mount>> SendAsync(
+    public async Task<Replica<HashSet<Mount>>> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
     )
@@ -53,14 +54,13 @@ public sealed class MountsByPageRequest : IHttpRequest<IReplicaPage<Mount>>
             .ConfigureAwait(false);
 
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
-
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
-
-        return new ReplicaPage<Mount>
+        return new Replica<HashSet<Mount>>
         {
-            Values = json.RootElement.GetSet(entry => entry.GetMount(MissingMemberBehavior)),
-            Context = response.Headers.GetPageContext(),
+            Value = json.RootElement.GetSet(entry => entry.GetMount(MissingMemberBehavior)),
+            ResultContext = response.Headers.GetResultContext(),
+            PageContext = response.Headers.GetPageContext(),
             Date = response.Headers.Date.GetValueOrDefault(),
             Expires = response.Content.Headers.Expires,
             LastModified = response.Content.Headers.LastModified
