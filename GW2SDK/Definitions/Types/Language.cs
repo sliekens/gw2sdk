@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 using System.Text.RegularExpressions;
 using JetBrains.Annotations;
 
@@ -21,6 +22,8 @@ public sealed class Language
     public static readonly Language French = new("fr");
 
     public static readonly Language Chinese = new("zh");
+
+    public static Language CurrentUICulture => new(CultureInfo.CurrentUICulture.TwoLetterISOLanguageName);
 
     public Language(string alpha2Code)
     {

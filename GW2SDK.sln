@@ -46,6 +46,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HttpClientFactoryUsage", "s
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PollyUsage", "samples\PollyUsage\PollyUsage.csproj", "{0BA80C1D-40A9-4B20-9558-82C0AA58BC1F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Translations", "samples\Translations\Translations.csproj", "{40937B58-1FFE-4B5B-A918-09F2DDEA2BF1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -92,6 +94,10 @@ Global
 		{0BA80C1D-40A9-4B20-9558-82C0AA58BC1F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0BA80C1D-40A9-4B20-9558-82C0AA58BC1F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0BA80C1D-40A9-4B20-9558-82C0AA58BC1F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{40937B58-1FFE-4B5B-A918-09F2DDEA2BF1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{40937B58-1FFE-4B5B-A918-09F2DDEA2BF1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{40937B58-1FFE-4B5B-A918-09F2DDEA2BF1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{40937B58-1FFE-4B5B-A918-09F2DDEA2BF1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -105,6 +111,7 @@ Global
 		{A3DDC8D6-5C42-42E5-AF42-B5F9ADD8542E} = {816817BB-0465-4D44-89A6-6CB64A1FF589}
 		{F63A66C7-5520-4265-9F28-64DCCD1A6AA8} = {816817BB-0465-4D44-89A6-6CB64A1FF589}
 		{0BA80C1D-40A9-4B20-9558-82C0AA58BC1F} = {816817BB-0465-4D44-89A6-6CB64A1FF589}
+		{40937B58-1FFE-4B5B-A918-09F2DDEA2BF1} = {816817BB-0465-4D44-89A6-6CB64A1FF589}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {30CA8636-682D-4E26-943C-45133727C406}
