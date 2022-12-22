@@ -29,12 +29,8 @@ public class JsonOrderBookService
         return items;
     }
 
-    private async Task<IReadOnlyCollection<int>> GetOrderBookIds()
-    {
-        var request = new OrderBooksIndexRequest();
-        var response = await request.SendAsync(http, CancellationToken.None);
-        return response.Value;
-    }
+    private async Task<HashSet<int>> GetOrderBookIds() =>
+        await new OrderBooksIndexRequest().SendAsync(http, CancellationToken.None);
 
     public IAsyncEnumerable<string> GetJsonItemListingsById(
         IReadOnlyCollection<int> itemIds,

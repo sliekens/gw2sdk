@@ -29,12 +29,8 @@ public class JsonRecipeService
         return items;
     }
 
-    private async Task<IReadOnlyCollection<int>> GetRecipeIds()
-    {
-        var request = new RecipesIndexRequest();
-        var response = await request.SendAsync(http, CancellationToken.None);
-        return response.Value;
-    }
+    private async Task<HashSet<int>> GetRecipeIds() =>
+        await new RecipesIndexRequest().SendAsync(http, CancellationToken.None);
 
     public IAsyncEnumerable<string> GetJsonRecipesByIds(
         IReadOnlyCollection<int> itemIds,

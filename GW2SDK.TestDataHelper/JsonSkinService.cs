@@ -29,12 +29,8 @@ public class JsonSkinService
         return items;
     }
 
-    private async Task<IReadOnlyCollection<int>> GetSkinIds()
-    {
-        var request = new SkinsIndexRequest();
-        var response = await request.SendAsync(http, CancellationToken.None);
-        return response.Value;
-    }
+    private async Task<HashSet<int>> GetSkinIds() =>
+        await new SkinsIndexRequest().SendAsync(http, CancellationToken.None);
 
     public IAsyncEnumerable<string> GetJsonSkinsByIds(
         IReadOnlyCollection<int> itemIds,

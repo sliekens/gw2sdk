@@ -29,12 +29,8 @@ public class JsonItemService
         return items;
     }
 
-    private async Task<IReadOnlyCollection<int>> GetItemsIndex()
-    {
-        var request = new ItemsIndexRequest();
-        var response = await request.SendAsync(http, CancellationToken.None);
-        return response.Value;
-    }
+    private async Task<HashSet<int>> GetItemsIndex() =>
+        await new ItemsIndexRequest().SendAsync(http, CancellationToken.None);
 
     public IAsyncEnumerable<string> GetJsonItemsByIds(
         IReadOnlyCollection<int> itemIds,

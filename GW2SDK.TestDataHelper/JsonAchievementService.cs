@@ -29,12 +29,8 @@ public class JsonAchievementService
         return items;
     }
 
-    private async Task<IReadOnlyCollection<int>> GetAchievementIds()
-    {
-        var request = new AchievementsIndexRequest();
-        var response = await request.SendAsync(http, CancellationToken.None);
-        return response.Value;
-    }
+    private async Task<HashSet<int>> GetAchievementIds() =>
+        await new AchievementsIndexRequest().SendAsync(http, CancellationToken.None);
 
     public IAsyncEnumerable<string> GetJsonAchievementsByIds(
         IReadOnlyCollection<int> itemIds,
