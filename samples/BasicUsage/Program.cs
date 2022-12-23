@@ -1,10 +1,13 @@
 ﻿using System.Globalization;
+using System.Text;
 using GuildWars2;
 using GuildWars2.Achievements;
 using GuildWars2.Items;
 
-CultureInfo.CurrentCulture = CultureInfo.InvariantCulture;
-CultureInfo.CurrentUICulture = CultureInfo.InvariantCulture;
+
+Console.OutputEncoding = Encoding.UTF8;
+CultureInfo.CurrentCulture = CultureInfo.GetCultureInfo("en");
+CultureInfo.CurrentUICulture = CultureInfo.GetCultureInfo("en");
 
 // HttpClient has a fully customizable pipeline, but defaults are fine too
 using var httpClient = new HttpClient();

@@ -17,8 +17,10 @@ export default defineConfig({
       '/guide/install',
       '/guide/usage',
       '/guide/translations',
+      '/guide/game-link',
       '/guide/http-client-factory',
-      '/guide/resiliency'
+      '/guide/resiliency',
+      '/guide/feedback'
     ],
     lastUpdated: true
   }
