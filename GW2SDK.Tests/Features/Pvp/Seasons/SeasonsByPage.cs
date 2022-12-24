@@ -17,7 +17,7 @@ public class SeasonsByPage
 
         Assert.Equal(pageSize, actual.Value.Count);
         Assert.Equal(pageSize, actual.PageContext.PageSize);
-        Assert.Equal(pageSize, actual.PageContext.ResultCount);
+        Assert.Equal(pageSize, actual.ResultContext.ResultCount);
         Assert.All(
             actual.Value,
             entry =>

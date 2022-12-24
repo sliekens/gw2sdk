@@ -4,8 +4,6 @@ namespace GuildWars2;
 
 [PublicAPI]
 public sealed record PageContext(
-    int ResultTotal,
-    int ResultCount,
     int PageTotal,
     int PageSize,
     Hyperlink First,

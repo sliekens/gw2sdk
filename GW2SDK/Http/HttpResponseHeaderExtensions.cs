@@ -39,7 +39,7 @@ public static class HttpResponseHeaderExtensions
     public static PageContext? GetPageContext(this HttpResponseHeaders instance)
     {
         if (instance is null) throw new ArgumentNullException(nameof(instance));
-        int pageTotal, pageSize, resultTotal, resultCount;
+        int pageTotal, pageSize;
         Hyperlink previous = Hyperlink.None,
             next = Hyperlink.None,
             self = Hyperlink.None,
@@ -59,26 +59,6 @@ public static class HttpResponseHeaderExtensions
         {
             // Assume that there is exactly one value for this header
             pageSize = int.Parse(pageSizes.Single());
-        }
-        else
-        {
-            return null;
-        }
-
-        if (instance.TryGetValues(ResultTotal, out var resultTotals))
-        {
-            // Assume that there is exactly one value for this header
-            resultTotal = int.Parse(resultTotals.Single());
-        }
-        else
-        {
-            return null;
-        }
-
-        if (instance.TryGetValues(ResultCount, out var resultCounts))
-        {
-            // Assume that there is exactly one value for this header
-            resultCount = int.Parse(resultCounts.Single());
         }
         else
         {
@@ -114,8 +94,6 @@ public static class HttpResponseHeaderExtensions
         }
 
         return new PageContext(
-            resultTotal,
-            resultCount,
             pageTotal,
             pageSize,
             first,
