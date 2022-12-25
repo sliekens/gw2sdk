@@ -22,6 +22,55 @@ public sealed class PvpQuery
         http.BaseAddress ??= BaseAddress.DefaultUri;
     }
 
+    #region v2/pvp/seasons/:id/leaderboards
+
+    public Task<Replica<HashSet<string>>> GetLeaderboards(
+        string seasonId,
+        CancellationToken cancellationToken = default
+    )
+    {
+        LeaderboardsRequest request = new(seasonId);
+        return request.SendAsync(http, cancellationToken);
+    }
+
+    #endregion
+
+    #region v2/pvp/seasons/:id/leaderboards/:board
+
+    public Task<Replica<HashSet<string>>> GetLeaderboardRegions(
+        string seasonId,
+        string boardId,
+        CancellationToken cancellationToken = default
+    )
+    {
+        LeaderboardRegionsRequest request = new(seasonId, boardId);
+        return request.SendAsync(http, cancellationToken);
+    }
+
+    #endregion
+
+    #region v2/pvp/seasons/:id/leaderboards/:board/:region
+
+    public Task<Replica<HashSet<LeaderboardEntry>>> GetLeaderboardEntries(
+        string seasonId,
+        string boardId,
+        string regionId,
+        int pageIndex,
+        int? pageSize = default,
+        MissingMemberBehavior missingMemberBehavior = default,
+        CancellationToken cancellationToken = default
+    )
+    {
+        LeaderboardEntriesRequest request = new(seasonId, boardId, regionId, pageIndex)
+        {
+            PageSize = pageSize,
+            MissingMemberBehavior = missingMemberBehavior
+        };
+        return request.SendAsync(http, cancellationToken);
+    }
+
+    #endregion
+
     #region v2/pvp/amulets
 
     public Task<Replica<HashSet<Amulet>>> GetAmulets(
