@@ -151,7 +151,7 @@ internal static class Routes
         //"/v2/wvw/matches/stats/:id/guilds/:guild_id",
         //"/v2/wvw/matches/stats/:id/teams/:team/top/kdr",
         //"/v2/wvw/matches/stats/:id/teams/:team/top/kills",
-        //"/v2/wvw/objectives",
+        "/v2/wvw/objectives",
         //"/v2/wvw/ranks",
         //"/v2/wvw/upgrades"
     };

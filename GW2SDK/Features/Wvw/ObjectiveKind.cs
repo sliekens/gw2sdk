@@ -5,7 +5,7 @@ namespace GuildWars2.Wvw;
 [PublicAPI]
 public enum ObjectiveKind
 {
-    Camp,
+    Camp = 1,
 
     Castle,
 
