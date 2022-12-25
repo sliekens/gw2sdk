@@ -45,6 +45,7 @@ using GuildWars2.Tokens;
 using GuildWars2.Traits;
 using GuildWars2.WorldBosses;
 using GuildWars2.Worlds;
+using GuildWars2.Wvw;
 using JetBrains.Annotations;
 
 namespace GuildWars2;
@@ -57,6 +58,7 @@ public sealed class Gw2Client
     public Gw2Client(HttpClient httpClient)
     {
         this.httpClient = httpClient ?? throw new ArgumentNullException(nameof(httpClient));
+        this.httpClient.BaseAddress ??= BaseAddress.DefaultUri;
     }
 
     public AccountsQuery Accounts => new(httpClient);
@@ -146,6 +148,8 @@ public sealed class Gw2Client
     public WorldBossesQuery WorldBosses => new(httpClient);
 
     public WorldsQuery Worlds => new(httpClient);
+
+    public WvwQuery Wvw => new(httpClient);
 
     public TokenProvider TokenProvider => new(httpClient);
 }

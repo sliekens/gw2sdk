@@ -15,7 +15,6 @@ internal static class Routes
         "/v2/account/dailycrafting",
         "/v2/account/dungeons",
         "/v2/account/dyes",
-
         //"/v2/account/emotes",
         //"/v2/account/finishers",
         "/v2/account/gliders",
@@ -24,27 +23,22 @@ internal static class Routes
         "/v2/account/home/nodes",
         "/v2/account/inventory",
         "/v2/account/legendaryarmory",
-
         //"/v2/account/luck",
         "/v2/account/mailcarriers",
-
         //"/v2/account/mapchests",
         "/v2/account/masteries",
-
         //"/v2/account/mastery/points",
         //"/v2/account/materials",
         //"/v2/account/minis",
         "/v2/account/mounts",
         "/v2/account/mounts/skins",
         "/v2/account/mounts/types",
-
         //"/v2/account/novelties",
         //"/v2/account/outfits",
         //"/v2/account/progression",
         //"/v2/account/pvp/heroes",
         //"/v2/account/raids",
         "/v2/account/recipes",
-
         //"/v2/account/skins",
         //"/v2/account/titles",
         "/v2/account/wallet",
@@ -58,7 +52,6 @@ internal static class Routes
         "/v2/backstory/questions",
         "/v2/build",
         "/v2/characters",
-
         //"/v2/characters/:id/backstory",
         //"/v2/characters/:id/buildtabs",
         //"/v2/characters/:id/buildtabs/active",
@@ -69,7 +62,6 @@ internal static class Routes
         //"/v2/characters/:id/equipmenttabs/active",
         //"/v2/characters/:id/heropoints",
         "/v2/characters/:id/inventory",
-
         //"/v2/characters/:id/quests",
         //"/v2/characters/:id/recipes",
         //"/v2/characters/:id/sab",
@@ -92,7 +84,6 @@ internal static class Routes
         "/v2/files",
         "/v2/finishers",
         "/v2/gliders",
-
         //"/v2/guild/:id",
         //"/v2/guild/:id/log",
         //"/v2/guild/:id/members",
@@ -125,7 +116,6 @@ internal static class Routes
         "/v2/outfits",
         "/v2/pets",
         "/v2/professions",
-
         //"/v2/pvp",
         "/v2/pvp/amulets",
         //"/v2/pvp/games",
@@ -152,9 +142,8 @@ internal static class Routes
         "/v2/tokeninfo",
         "/v2/traits",
         "/v2/worldbosses",
-        "/v2/worlds"
-
-        //"/v2/wvw/abilities",
+        "/v2/worlds",
+        "/v2/wvw/abilities",
         //"/v2/wvw/matches",
         //"/v2/wvw/matches/overview",
         //"/v2/wvw/matches/scores",
