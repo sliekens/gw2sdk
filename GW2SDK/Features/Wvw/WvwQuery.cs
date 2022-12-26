@@ -5,6 +5,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using GuildWars2.Wvw.Abilities;
 using GuildWars2.Wvw.Objectives;
+using GuildWars2.Wvw.Ranks;
 using JetBrains.Annotations;
 
 namespace GuildWars2.Wvw;
@@ -165,4 +166,78 @@ public sealed class WvwQuery
     }
 
     #endregion
+
+    #region v2/wvw/ranks
+
+    public Task<Replica<HashSet<Rank>>> GetRanks(
+        Language? language = default,
+        MissingMemberBehavior missingMemberBehavior = default,
+        CancellationToken cancellationToken = default
+    )
+    {
+        RanksRequest request = new()
+        {
+            Language = language,
+            MissingMemberBehavior = missingMemberBehavior
+        };
+        return request.SendAsync(http, cancellationToken);
+    }
+
+    public Task<Replica<HashSet<int>>> GetRanksIndex(
+        CancellationToken cancellationToken = default
+    )
+    {
+        RanksIndexRequest request = new();
+        return request.SendAsync(http, cancellationToken);
+    }
+
+    public Task<Replica<Rank>> GetRankById(
+        int rankId,
+        Language? language = default,
+        MissingMemberBehavior missingMemberBehavior = default,
+        CancellationToken cancellationToken = default
+    )
+    {
+        RankByIdRequest request = new(rankId)
+        {
+            Language = language,
+            MissingMemberBehavior = missingMemberBehavior
+        };
+        return request.SendAsync(http, cancellationToken);
+    }
+
+    public Task<Replica<HashSet<Rank>>> GetRanksByIds(
+        IReadOnlyCollection<int> rankIds,
+        Language? language = default,
+        MissingMemberBehavior missingMemberBehavior = default,
+        CancellationToken cancellationToken = default
+    )
+    {
+        RanksByIdsRequest request = new(rankIds)
+        {
+            Language = language,
+            MissingMemberBehavior = missingMemberBehavior
+        };
+        return request.SendAsync(http, cancellationToken);
+    }
+
+    public Task<Replica<HashSet<Rank>>> GetRanksByPage(
+        int pageIndex,
+        int? pageSize = default,
+        Language? language = default,
+        MissingMemberBehavior missingMemberBehavior = default,
+        CancellationToken cancellationToken = default
+    )
+    {
+        RanksByPageRequest request = new(pageIndex)
+        {
+            PageSize = pageSize,
+            Language = language,
+            MissingMemberBehavior = missingMemberBehavior
+        };
+        return request.SendAsync(http, cancellationToken);
+    }
+
+    #endregion
+
 }

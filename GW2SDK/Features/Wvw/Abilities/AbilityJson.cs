@@ -17,7 +17,7 @@ public static class AbilityJson
         RequiredMember<string> name = new("name");
         RequiredMember<string> description = new("description");
         RequiredMember<string> icon = new("icon");
-        RequiredMember<Rank> ranks = new("ranks");
+        RequiredMember<AbilityRank> ranks = new("ranks");
 
         foreach (var member in json.EnumerateObject())
         {
@@ -53,7 +53,7 @@ public static class AbilityJson
             Name = name.GetValue(),
             Description = description.GetValue(),
             Icon = icon.GetValue(),
-            Ranks = ranks.SelectMany(value => value.GetRank(missingMemberBehavior))
+            Ranks = ranks.SelectMany(value => value.GetAbilityRank(missingMemberBehavior))
         };
     }
 }

@@ -5,7 +5,7 @@ namespace GuildWars2.Wvw.Abilities;
 
 [PublicAPI]
 [DataTransferObject]
-public sealed record Rank
+public sealed record AbilityRank
 {
     public required int Cost { get; init; }
 

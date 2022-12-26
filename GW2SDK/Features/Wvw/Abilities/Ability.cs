@@ -16,5 +16,5 @@ public sealed record Ability
 
     public required string Icon { get; init; }
 
-    public required IReadOnlyCollection<Rank> Ranks { get; init; }
+    public required IReadOnlyCollection<AbilityRank> Ranks { get; init; }
 }

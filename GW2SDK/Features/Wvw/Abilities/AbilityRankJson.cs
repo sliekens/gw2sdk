@@ -6,9 +6,9 @@ using JetBrains.Annotations;
 namespace GuildWars2.Wvw.Abilities;
 
 [PublicAPI]
-public static class RankJson
+public static class AbilityRankJson
 {
-    public static Rank GetRank(
+    public static AbilityRank GetAbilityRank(
         this JsonElement json,
         MissingMemberBehavior missingMemberBehavior
     )
@@ -32,7 +32,7 @@ public static class RankJson
             }
         }
 
-        return new Rank
+        return new AbilityRank
         {
             Cost = cost.GetValue(),
             Effect = effect.GetValue()
