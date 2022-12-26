@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using GuildWars2.Wvw.Abilities;
 using GuildWars2.Wvw.Objectives;
 using GuildWars2.Wvw.Ranks;
+using GuildWars2.Wvw.Upgrades;
 using JetBrains.Annotations;
 
 namespace GuildWars2.Wvw;
@@ -183,9 +184,7 @@ public sealed class WvwQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<HashSet<int>>> GetRanksIndex(
-        CancellationToken cancellationToken = default
-    )
+    public Task<Replica<HashSet<int>>> GetRanksIndex(CancellationToken cancellationToken = default)
     {
         RanksIndexRequest request = new();
         return request.SendAsync(http, cancellationToken);
@@ -240,4 +239,76 @@ public sealed class WvwQuery
 
     #endregion
 
+    #region v2/wvw/upgrades
+
+    public Task<Replica<HashSet<Upgrade>>> GetUpgrades(
+        Language? language = default,
+        MissingMemberBehavior missingMemberBehavior = default,
+        CancellationToken cancellationToken = default
+    )
+    {
+        UpgradesRequest request = new()
+        {
+            Language = language,
+            MissingMemberBehavior = missingMemberBehavior
+        };
+        return request.SendAsync(http, cancellationToken);
+    }
+
+    public Task<Replica<HashSet<int>>> GetUpgradesIndex(
+        CancellationToken cancellationToken = default
+    )
+    {
+        UpgradesIndexRequest request = new();
+        return request.SendAsync(http, cancellationToken);
+    }
+
+    public Task<Replica<Upgrade>> GetUpgradeById(
+        int upgradeId,
+        Language? language = default,
+        MissingMemberBehavior missingMemberBehavior = default,
+        CancellationToken cancellationToken = default
+    )
+    {
+        UpgradeByIdRequest request = new(upgradeId)
+        {
+            Language = language,
+            MissingMemberBehavior = missingMemberBehavior
+        };
+        return request.SendAsync(http, cancellationToken);
+    }
+
+    public Task<Replica<HashSet<Upgrade>>> GetUpgradesByIds(
+        IReadOnlyCollection<int> upgradeIds,
+        Language? language = default,
+        MissingMemberBehavior missingMemberBehavior = default,
+        CancellationToken cancellationToken = default
+    )
+    {
+        UpgradesByIdsRequest request = new(upgradeIds)
+        {
+            Language = language,
+            MissingMemberBehavior = missingMemberBehavior
+        };
+        return request.SendAsync(http, cancellationToken);
+    }
+
+    public Task<Replica<HashSet<Upgrade>>> GetUpgradesByPage(
+        int pageIndex,
+        int? pageSize = default,
+        Language? language = default,
+        MissingMemberBehavior missingMemberBehavior = default,
+        CancellationToken cancellationToken = default
+    )
+    {
+        UpgradesByPageRequest request = new(pageIndex)
+        {
+            PageSize = pageSize,
+            Language = language,
+            MissingMemberBehavior = missingMemberBehavior
+        };
+        return request.SendAsync(http, cancellationToken);
+    }
+
+    #endregion
 }
