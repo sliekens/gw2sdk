@@ -241,7 +241,7 @@ public sealed class WvwQuery
 
     #region v2/wvw/upgrades
 
-    public Task<Replica<HashSet<Upgrade>>> GetUpgrades(
+    public Task<Replica<HashSet<ObjectiveUpgrade>>> GetUpgrades(
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
@@ -263,7 +263,7 @@ public sealed class WvwQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<Upgrade>> GetUpgradeById(
+    public Task<Replica<ObjectiveUpgrade>> GetUpgradeById(
         int upgradeId,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -278,7 +278,7 @@ public sealed class WvwQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<HashSet<Upgrade>>> GetUpgradesByIds(
+    public Task<Replica<HashSet<ObjectiveUpgrade>>> GetUpgradesByIds(
         IReadOnlyCollection<int> upgradeIds,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -293,7 +293,7 @@ public sealed class WvwQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<HashSet<Upgrade>>> GetUpgradesByPage(
+    public Task<Replica<HashSet<ObjectiveUpgrade>>> GetUpgradesByPage(
         int pageIndex,
         int? pageSize = default,
         Language? language = default,

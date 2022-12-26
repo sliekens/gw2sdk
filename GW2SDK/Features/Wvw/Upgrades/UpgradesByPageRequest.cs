@@ -9,7 +9,7 @@ using JetBrains.Annotations;
 namespace GuildWars2.Wvw.Upgrades;
 
 [PublicAPI]
-public sealed class UpgradesByPageRequest : IHttpRequest<Replica<HashSet<Upgrade>>>
+public sealed class UpgradesByPageRequest : IHttpRequest<Replica<HashSet<ObjectiveUpgrade>>>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(HttpMethod.Get, "v2/wvw/upgrades") { AcceptEncoding = "gzip" };
@@ -27,7 +27,7 @@ public sealed class UpgradesByPageRequest : IHttpRequest<Replica<HashSet<Upgrade
 
     public MissingMemberBehavior MissingMemberBehavior { get; init; }
 
-    public async Task<Replica<HashSet<Upgrade>>> SendAsync(
+    public async Task<Replica<HashSet<ObjectiveUpgrade>>> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
     )
@@ -53,9 +53,9 @@ public sealed class UpgradesByPageRequest : IHttpRequest<Replica<HashSet<Upgrade
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
-        return new Replica<HashSet<Upgrade>>
+        return new Replica<HashSet<ObjectiveUpgrade>>
         {
-            Value = json.RootElement.GetSet(entry => entry.GetUpgrade(MissingMemberBehavior)),
+            Value = json.RootElement.GetSet(entry => entry.GetObjectiveUpgrade(MissingMemberBehavior)),
             ResultContext = response.Headers.GetResultContext(),
             PageContext = response.Headers.GetPageContext(),
             Date = response.Headers.Date.GetValueOrDefault(),

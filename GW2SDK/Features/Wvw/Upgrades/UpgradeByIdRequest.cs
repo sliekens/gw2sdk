@@ -7,7 +7,7 @@ using JetBrains.Annotations;
 namespace GuildWars2.Wvw.Upgrades;
 
 [PublicAPI]
-public sealed class UpgradeByIdRequest : IHttpRequest<Replica<Upgrade>>
+public sealed class UpgradeByIdRequest : IHttpRequest<Replica<ObjectiveUpgrade>>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(HttpMethod.Get, "v2/wvw/upgrades") { AcceptEncoding = "gzip" };
@@ -23,7 +23,7 @@ public sealed class UpgradeByIdRequest : IHttpRequest<Replica<Upgrade>>
 
     public MissingMemberBehavior MissingMemberBehavior { get; init; }
 
-    public async Task<Replica<Upgrade>> SendAsync(
+    public async Task<Replica<ObjectiveUpgrade>> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
     )
@@ -46,9 +46,9 @@ public sealed class UpgradeByIdRequest : IHttpRequest<Replica<Upgrade>>
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
-        return new Replica<Upgrade>
+        return new Replica<ObjectiveUpgrade>
         {
-            Value = json.RootElement.GetUpgrade(MissingMemberBehavior),
+            Value = json.RootElement.GetObjectiveUpgrade(MissingMemberBehavior),
             ResultContext = response.Headers.GetResultContext(),
             PageContext = response.Headers.GetPageContext(),
             Date = response.Headers.Date.GetValueOrDefault(),

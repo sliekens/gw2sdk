@@ -8,23 +8,25 @@ namespace GuildWars2.Wvw.Upgrades;
 [PublicAPI]
 public static class UpgradeJson
 {
-    public static Upgrade GetUpgrade(
-        this JsonElement json,
-        MissingMemberBehavior missingMemberBehavior
-    )
+    public static Upgrade GetUpgrade(this JsonElement json, MissingMemberBehavior missingMemberBehavior)
     {
-        RequiredMember<int> id = new("id");
-        RequiredMember<UpgradeTier> tiers = new("tiers");
+        RequiredMember<string> name = new("name");
+        RequiredMember<string> description = new("description");
+        RequiredMember<string> icon = new("icon");
 
         foreach (var member in json.EnumerateObject())
         {
-            if (member.NameEquals(id.Name))
+            if (member.NameEquals(name.Name))
             {
-                id.Value = member.Value;
+                name.Value = member.Value;
             }
-            else if (member.NameEquals(tiers.Name))
+            else if (member.NameEquals(description.Name))
             {
-                tiers.Value = member.Value;
+                description.Value = member.Value;
+            }
+            else if (member.NameEquals(icon.Name))
+            {
+                icon.Value = member.Value;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {
@@ -34,8 +36,9 @@ public static class UpgradeJson
 
         return new Upgrade
         {
-            Id = id.GetValue(),
-            Tiers = tiers.SelectMany(value => value.GetUpgradeTier(missingMemberBehavior))
+            Name = name.GetValue(),
+            Description = description.GetValue(),
+            IconHref = icon.GetValue()
         };
     }
 }

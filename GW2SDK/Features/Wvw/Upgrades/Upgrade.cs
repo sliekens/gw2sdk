@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using GuildWars2.Annotations;
+﻿using GuildWars2.Annotations;
 using JetBrains.Annotations;
 
 namespace GuildWars2.Wvw.Upgrades;
@@ -8,7 +7,9 @@ namespace GuildWars2.Wvw.Upgrades;
 [DataTransferObject]
 public sealed record Upgrade
 {
-    public required int Id { get; init; }
+    public required string Name { get; init; }
 
-    public required IReadOnlyCollection<UpgradeTier> Tiers { get; init; }
+    public required string Description { get; init; }
+
+    public required string IconHref { get; init; }
 }

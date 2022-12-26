@@ -5,7 +5,7 @@ namespace GuildWars2.Tests.Features.Wvw.Upgrades;
 
 internal static class Invariants
 {
-    internal static void Has_id(this Upgrade actual) => Assert.True(actual.Id > 0);
+    internal static void Has_id(this ObjectiveUpgrade actual) => Assert.True(actual.Id > 0);
 
-    internal static void Has_tiers(this Upgrade actual) => Assert.NotEmpty(actual.Tiers);
+    internal static void Has_tiers(this ObjectiveUpgrade actual) => Assert.NotEmpty(actual.Tiers);
 }
