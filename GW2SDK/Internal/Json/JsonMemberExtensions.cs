@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text.Json;
 
 namespace GuildWars2.Json;
 
@@ -10,6 +11,9 @@ internal static class JsonMemberExtensions
 
     internal static int GetValue(this RequiredMember<int> instance) =>
         instance.Select(json => json.GetInt32());
+
+    internal static IReadOnlyCollection<int> GetValues(this RequiredMember<int> instance) =>
+        instance.SelectMany(json => json.GetInt32());
 
     internal static int? GetValue(this NullableMember<int> instance) =>
         instance.Select(json => json.GetInt32());
@@ -38,7 +42,13 @@ internal static class JsonMemberExtensions
     internal static bool? GetValue(this NullableMember<bool> instance) =>
         instance.Select(json => json.GetBoolean());
 
+    internal static IReadOnlyCollection<int?> GetValues(this RequiredMember<int?> instance) =>
+        instance.SelectMany(json => json.ValueKind == JsonValueKind.Null ? null : json.GetInt32());
+
     internal static DateTimeOffset GetValue(this RequiredMember<DateTimeOffset> instance) =>
+        instance.Select(json => json.GetDateTimeOffset());
+
+    internal static DateTimeOffset? GetValue(this NullableMember<DateTimeOffset> instance) =>
         instance.Select(json => json.GetDateTimeOffset());
 
     internal static TEnum? GetValue<TEnum>(

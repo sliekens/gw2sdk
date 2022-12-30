@@ -1,0 +1,13 @@
+﻿using GuildWars2.Annotations;
+using JetBrains.Annotations;
+
+namespace GuildWars2.Wvw.Matches;
+
+[PublicAPI]
+[DataTransferObject]
+public sealed record Bonus
+{
+    public required BonusKind Kind { get; init; }
+
+    public required TeamColor Owner { get; init; }
+}

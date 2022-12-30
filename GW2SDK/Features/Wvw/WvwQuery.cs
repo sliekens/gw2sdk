@@ -4,10 +4,12 @@ using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 using GuildWars2.Wvw.Abilities;
+using GuildWars2.Wvw.Matches;
 using GuildWars2.Wvw.Objectives;
 using GuildWars2.Wvw.Ranks;
 using GuildWars2.Wvw.Upgrades;
 using JetBrains.Annotations;
+using Objective = GuildWars2.Wvw.Objectives.Objective;
 
 namespace GuildWars2.Wvw;
 
@@ -302,6 +304,77 @@ public sealed class WvwQuery
     )
     {
         UpgradesByPageRequest request = new(pageIndex)
+        {
+            PageSize = pageSize,
+            Language = language,
+            MissingMemberBehavior = missingMemberBehavior
+        };
+        return request.SendAsync(http, cancellationToken);
+    }
+
+    #endregion
+
+    #region v2/wvw/matches
+
+    public Task<Replica<HashSet<Match>>> GetMatches(
+        Language? language = default,
+        MissingMemberBehavior missingMemberBehavior = default,
+        CancellationToken cancellationToken = default
+    )
+    {
+        MatchesRequest request = new()
+        {
+            Language = language,
+            MissingMemberBehavior = missingMemberBehavior
+        };
+        return request.SendAsync(http, cancellationToken);
+    }
+
+    public Task<Replica<HashSet<string>>> GetMatchesIndex(CancellationToken cancellationToken = default)
+    {
+        MatchesIndexRequest request = new();
+        return request.SendAsync(http, cancellationToken);
+    }
+
+    public Task<Replica<Match>> GetMatchById(
+        string matchId,
+        Language? language = default,
+        MissingMemberBehavior missingMemberBehavior = default,
+        CancellationToken cancellationToken = default
+    )
+    {
+        MatchByIdRequest request = new(matchId)
+        {
+            Language = language,
+            MissingMemberBehavior = missingMemberBehavior
+        };
+        return request.SendAsync(http, cancellationToken);
+    }
+
+    public Task<Replica<HashSet<Match>>> GetMatchesByIds(
+        IReadOnlyCollection<string> matchIds,
+        Language? language = default,
+        MissingMemberBehavior missingMemberBehavior = default,
+        CancellationToken cancellationToken = default
+    )
+    {
+        MatchesByIdsRequest request = new(matchIds)
+        {
+            Language = language,
+            MissingMemberBehavior = missingMemberBehavior
+        };
+        return request.SendAsync(http, cancellationToken);
+    }
+
+    public Task<Replica<HashSet<Match>>> GetMatchesByPage(
+        int pageIndex,
+        int? pageSize = default,
+        Language? language = default,
+        MissingMemberBehavior missingMemberBehavior = default,
+        CancellationToken cancellationToken = default
+    )
+    {
+        MatchesByPageRequest request = new(pageIndex)
         {
             PageSize = pageSize,
             Language = language,
