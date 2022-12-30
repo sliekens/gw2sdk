@@ -40,15 +40,10 @@ public class TestHttpClientFactory : IHttpClientFactory, IAsyncDisposable
                 http =>
                 {
                     http.BaseAddress = baseAddress;
+                    http.Timeout = TimeSpan.FromMinutes(1); // default 100 seconds is too long
                 }
             )
             .AddHttpMessageHandler<SchemaVersionHandler>()
-            .AddPolicyHandler(
-                Policy.TimeoutAsync<HttpResponseMessage>(
-                    TimeSpan.FromSeconds(100),
-                    TimeoutStrategy.Optimistic
-                )
-            )
             .AddPolicyHandler(
                 Policy<HttpResponseMessage>.HandleResult(
                         response => response.StatusCode is ServiceUnavailable
@@ -70,7 +65,7 @@ public class TestHttpClientFactory : IHttpClientFactory, IAsyncDisposable
             )
             .AddPolicyHandler(
                 Policy.TimeoutAsync<HttpResponseMessage>(
-                    TimeSpan.FromSeconds(30),
+                    TimeSpan.FromSeconds(10),
                     TimeoutStrategy.Optimistic
                 )
             );
