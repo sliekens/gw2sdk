@@ -5,6 +5,6 @@ namespace GuildWars2.Wvw.Matches;
 
 [PublicAPI]
 [DataTransferObject]
-public record Ruins : Objective
+public sealed record Ruins : Objective
 {
 }

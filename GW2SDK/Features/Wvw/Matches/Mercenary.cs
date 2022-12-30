@@ -5,6 +5,6 @@ namespace GuildWars2.Wvw.Matches;
 
 [PublicAPI]
 [DataTransferObject]
-public record Mercenary : Objective
+public sealed record Mercenary : Objective
 {
 }

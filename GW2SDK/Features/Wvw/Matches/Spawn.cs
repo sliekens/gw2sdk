@@ -5,6 +5,6 @@ namespace GuildWars2.Wvw.Matches;
 
 [PublicAPI]
 [DataTransferObject]
-public record Spawn : Objective
+public sealed record Spawn : Objective
 {
 }

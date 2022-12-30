@@ -7,7 +7,7 @@ namespace GuildWars2.Wvw.Matches;
 
 [PublicAPI]
 [DataTransferObject]
-public record Tower : Objective
+public sealed record Tower : Objective
 {
     public required string ClaimedBy { get; init; }
 
