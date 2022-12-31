@@ -5,6 +5,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using GuildWars2.Wvw.Abilities;
 using GuildWars2.Wvw.Matches;
+using GuildWars2.Wvw.Matches.Overview;
 using GuildWars2.Wvw.Objectives;
 using GuildWars2.Wvw.Ranks;
 using GuildWars2.Wvw.Upgrades;
@@ -388,4 +389,81 @@ public sealed class WvwQuery
     }
 
     #endregion
+
+    #region v2/wvw/matches/overview
+
+    public Task<Replica<HashSet<MatchOverview>>> GetMatchesOverview(
+        MissingMemberBehavior missingMemberBehavior = default,
+        CancellationToken cancellationToken = default
+    )
+    {
+        MatchesOverviewRequest request = new()
+        {
+            MissingMemberBehavior = missingMemberBehavior
+        };
+        return request.SendAsync(http, cancellationToken);
+    }
+
+    public Task<Replica<HashSet<string>>> GetMatchesOverviewIndex(CancellationToken cancellationToken = default)
+    {
+        MatchesOverviewIndexRequest request = new();
+        return request.SendAsync(http, cancellationToken);
+    }
+
+    public Task<Replica<MatchOverview>> GetMatchOverviewById(
+        string matchId,
+        MissingMemberBehavior missingMemberBehavior = default,
+        CancellationToken cancellationToken = default
+    )
+    {
+        MatchOverviewByIdRequest request = new(matchId)
+        {
+            MissingMemberBehavior = missingMemberBehavior
+        };
+        return request.SendAsync(http, cancellationToken);
+    }
+
+    public Task<Replica<HashSet<MatchOverview>>> GetMatchesOverviewByIds(
+        IReadOnlyCollection<string> matchIds,
+        MissingMemberBehavior missingMemberBehavior = default,
+        CancellationToken cancellationToken = default
+    )
+    {
+        MatchesOverviewByIdsRequest request = new(matchIds)
+        {
+            MissingMemberBehavior = missingMemberBehavior
+        };
+        return request.SendAsync(http, cancellationToken);
+    }
+
+    public Task<Replica<HashSet<MatchOverview>>> GetMatchesOverviewByPage(
+        int pageIndex,
+        int? pageSize = default,
+        MissingMemberBehavior missingMemberBehavior = default,
+        CancellationToken cancellationToken = default
+    )
+    {
+        MatchesOverviewByPageRequest request = new(pageIndex)
+        {
+            PageSize = pageSize,
+            MissingMemberBehavior = missingMemberBehavior
+        };
+        return request.SendAsync(http, cancellationToken);
+    }
+
+    public Task<Replica<MatchOverview>> GetMatchOverviewByWorldId(
+        int worldId,
+        MissingMemberBehavior missingMemberBehavior = default,
+        CancellationToken cancellationToken = default
+    )
+    {
+        MatchOverviewByWorldIdRequest request = new(worldId)
+        {
+            MissingMemberBehavior = missingMemberBehavior
+        };
+        return request.SendAsync(http, cancellationToken);
+    }
+
+    #endregion
+
 }

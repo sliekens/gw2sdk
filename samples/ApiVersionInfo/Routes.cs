@@ -145,7 +145,7 @@ internal static class Routes
         "/v2/worlds",
         "/v2/wvw/abilities",
         "/v2/wvw/matches",
-        //"/v2/wvw/matches/overview",
+        "/v2/wvw/matches/overview",
         //"/v2/wvw/matches/scores",
         //"/v2/wvw/matches/stats",
         //"/v2/wvw/matches/stats/:id/guilds/:guild_id",
