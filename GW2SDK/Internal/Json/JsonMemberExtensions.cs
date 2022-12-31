@@ -15,6 +15,12 @@ internal static class JsonMemberExtensions
     internal static IReadOnlyCollection<int> GetValues(this RequiredMember<int> instance) =>
         instance.SelectMany(json => json.GetInt32());
 
+    internal static int GetValue(this OptionalMember<int> instance) =>
+        instance.Select(json => json.GetInt32());
+
+    internal static IReadOnlyCollection<int> GetValues(this OptionalMember<int> instance) =>
+        instance.SelectMany(json => json.GetInt32()) ?? Array.Empty<int>();
+
     internal static int? GetValue(this NullableMember<int> instance) =>
         instance.Select(json => json.GetInt32());
 
