@@ -17,7 +17,7 @@ public class MatchByWorldId
         var actual = await sut.Wvw.GetMatchByWorldId(worldId);
 
         actual.Value.Has_id();
-        actual.Value.has_start_time();
+        actual.Value.Has_start_time();
         actual.Value.Has_end_time();
         actual.Value.Includes_world(worldId);
     }

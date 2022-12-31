@@ -23,7 +23,7 @@ public class MatchesByPage
             entry =>
             {
                 entry.Has_id();
-                entry.has_start_time();
+                entry.Has_start_time();
                 entry.Has_end_time();
             }
         );
