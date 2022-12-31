@@ -383,5 +383,20 @@ public sealed class WvwQuery
         return request.SendAsync(http, cancellationToken);
     }
 
+    public Task<Replica<Match>> GetMatchByWorldId(
+        int worldId,
+        Language? language = default,
+        MissingMemberBehavior missingMemberBehavior = default,
+        CancellationToken cancellationToken = default
+    )
+    {
+        MatchByWorldIdRequest request = new(worldId)
+        {
+            Language = language,
+            MissingMemberBehavior = missingMemberBehavior
+        };
+        return request.SendAsync(http, cancellationToken);
+    }
+
     #endregion
 }
