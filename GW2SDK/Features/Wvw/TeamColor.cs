@@ -1,11 +1,14 @@
-﻿using JetBrains.Annotations;
+﻿using System.ComponentModel;
+using JetBrains.Annotations;
 
 namespace GuildWars2.Wvw;
 
 [PublicAPI]
+[DefaultValue(Neutral)]
 public enum TeamColor
 {
-    Blue = 1,
+    Neutral,
+    Blue,
     Red,
     Green
 }
