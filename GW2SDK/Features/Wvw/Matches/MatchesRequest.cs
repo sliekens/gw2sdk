@@ -22,8 +22,6 @@ public sealed class MatchesRequest : IHttpRequest<Replica<HashSet<Match>>>
             }
         };
 
-    public Language? Language { get; init; }
-
     public MissingMemberBehavior MissingMemberBehavior { get; init; }
 
     public async Task<Replica<HashSet<Match>>> SendAsync(
@@ -32,7 +30,7 @@ public sealed class MatchesRequest : IHttpRequest<Replica<HashSet<Match>>>
     )
     {
         using var response = await httpClient.SendAsync(
-                Template with { AcceptLanguage = Language?.Alpha2Code },
+                Template,
                 HttpCompletionOption.ResponseHeadersRead,
                 cancellationToken
             )

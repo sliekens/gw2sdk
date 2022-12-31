@@ -23,8 +23,6 @@ public sealed class MatchesByPageRequest : IHttpRequest<Replica<HashSet<Match>>>
 
     public int? PageSize { get; init; }
 
-    public Language? Language { get; init; }
-
     public MissingMemberBehavior MissingMemberBehavior { get; init; }
 
     public async Task<Replica<HashSet<Match>>> SendAsync(
@@ -42,8 +40,7 @@ public sealed class MatchesByPageRequest : IHttpRequest<Replica<HashSet<Match>>>
         using var response = await httpClient.SendAsync(
                 Template with
                 {
-                    Arguments = search,
-                    AcceptLanguage = Language?.Alpha2Code
+                    Arguments = search
                 },
                 HttpCompletionOption.ResponseHeadersRead,
                 cancellationToken

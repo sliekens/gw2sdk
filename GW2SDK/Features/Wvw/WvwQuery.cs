@@ -317,20 +317,17 @@ public sealed class WvwQuery
     #region v2/wvw/matches
 
     public Task<Replica<HashSet<Match>>> GetMatches(
-        Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        MatchesRequest request = new()
-        {
-            Language = language,
-            MissingMemberBehavior = missingMemberBehavior
-        };
+        MatchesRequest request = new() { MissingMemberBehavior = missingMemberBehavior };
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<HashSet<string>>> GetMatchesIndex(CancellationToken cancellationToken = default)
+    public Task<Replica<HashSet<string>>> GetMatchesIndex(
+        CancellationToken cancellationToken = default
+    )
     {
         MatchesIndexRequest request = new();
         return request.SendAsync(http, cancellationToken);
@@ -338,14 +335,12 @@ public sealed class WvwQuery
 
     public Task<Replica<Match>> GetMatchById(
         string matchId,
-        Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
         MatchByIdRequest request = new(matchId)
         {
-            Language = language,
             MissingMemberBehavior = missingMemberBehavior
         };
         return request.SendAsync(http, cancellationToken);
@@ -353,14 +348,12 @@ public sealed class WvwQuery
 
     public Task<Replica<HashSet<Match>>> GetMatchesByIds(
         IReadOnlyCollection<string> matchIds,
-        Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
         MatchesByIdsRequest request = new(matchIds)
         {
-            Language = language,
             MissingMemberBehavior = missingMemberBehavior
         };
         return request.SendAsync(http, cancellationToken);
@@ -369,7 +362,6 @@ public sealed class WvwQuery
     public Task<Replica<HashSet<Match>>> GetMatchesByPage(
         int pageIndex,
         int? pageSize = default,
-        Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
@@ -377,7 +369,6 @@ public sealed class WvwQuery
         MatchesByPageRequest request = new(pageIndex)
         {
             PageSize = pageSize,
-            Language = language,
             MissingMemberBehavior = missingMemberBehavior
         };
         return request.SendAsync(http, cancellationToken);
@@ -385,14 +376,12 @@ public sealed class WvwQuery
 
     public Task<Replica<Match>> GetMatchByWorldId(
         int worldId,
-        Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
         MatchByWorldIdRequest request = new(worldId)
         {
-            Language = language,
             MissingMemberBehavior = missingMemberBehavior
         };
         return request.SendAsync(http, cancellationToken);

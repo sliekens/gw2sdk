@@ -19,8 +19,6 @@ public sealed class MatchByWorldIdRequest : IHttpRequest<Replica<Match>>
 
     public int WorldId { get; }
 
-    public Language? Language { get; init; }
-
     public MissingMemberBehavior MissingMemberBehavior { get; init; }
 
     public async Task<Replica<Match>> SendAsync(
@@ -35,8 +33,7 @@ public sealed class MatchByWorldIdRequest : IHttpRequest<Replica<Match>>
                     {
                         { "world", WorldId },
                         { "v", SchemaVersion.Recommended }
-                    },
-                    AcceptLanguage = Language?.Alpha2Code
+                    }
                 },
                 HttpCompletionOption.ResponseHeadersRead,
                 cancellationToken

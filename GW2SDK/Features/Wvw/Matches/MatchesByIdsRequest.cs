@@ -22,8 +22,6 @@ public sealed class MatchesByIdsRequest : IHttpRequest<Replica<HashSet<Match>>>
 
     public IReadOnlyCollection<string> MatchIds { get; }
 
-    public Language? Language { get; init; }
-
     public MissingMemberBehavior MissingMemberBehavior { get; init; }
 
     public async Task<Replica<HashSet<Match>>> SendAsync(
@@ -38,8 +36,7 @@ public sealed class MatchesByIdsRequest : IHttpRequest<Replica<HashSet<Match>>>
                     {
                         { "ids", MatchIds },
                         { "v", SchemaVersion.Recommended }
-                    },
-                    AcceptLanguage = Language?.Alpha2Code
+                    }
                 },
                 HttpCompletionOption.ResponseHeadersRead,
                 cancellationToken
