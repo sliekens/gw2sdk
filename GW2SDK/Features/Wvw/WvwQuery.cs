@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using GuildWars2.Wvw.Abilities;
 using GuildWars2.Wvw.Matches;
 using GuildWars2.Wvw.Matches.Overview;
+using GuildWars2.Wvw.Matches.Scores;
 using GuildWars2.Wvw.Objectives;
 using GuildWars2.Wvw.Ranks;
 using GuildWars2.Wvw.Upgrades;
@@ -466,4 +467,79 @@ public sealed class WvwQuery
 
     #endregion
 
+    #region v2/wvw/matches/scores
+
+    public Task<Replica<HashSet<MatchScores>>> GetMatchesScores(
+        MissingMemberBehavior missingMemberBehavior = default,
+        CancellationToken cancellationToken = default
+    )
+    {
+        MatchesScoresRequest request = new()
+        {
+            MissingMemberBehavior = missingMemberBehavior
+        };
+        return request.SendAsync(http, cancellationToken);
+    }
+
+    public Task<Replica<HashSet<string>>> GetMatchesScoresIndex(CancellationToken cancellationToken = default)
+    {
+        MatchesScoresIndexRequest request = new();
+        return request.SendAsync(http, cancellationToken);
+    }
+
+    public Task<Replica<MatchScores>> GetMatchScoresById(
+        string matchId,
+        MissingMemberBehavior missingMemberBehavior = default,
+        CancellationToken cancellationToken = default
+    )
+    {
+        MatchScoresByIdRequest request = new(matchId)
+        {
+            MissingMemberBehavior = missingMemberBehavior
+        };
+        return request.SendAsync(http, cancellationToken);
+    }
+
+    public Task<Replica<HashSet<MatchScores>>> GetMatchesScoresByIds(
+        IReadOnlyCollection<string> matchIds,
+        MissingMemberBehavior missingMemberBehavior = default,
+        CancellationToken cancellationToken = default
+    )
+    {
+        MatchesScoresByIdsRequest request = new(matchIds)
+        {
+            MissingMemberBehavior = missingMemberBehavior
+        };
+        return request.SendAsync(http, cancellationToken);
+    }
+
+    public Task<Replica<HashSet<MatchScores>>> GetMatchesScoresByPage(
+        int pageIndex,
+        int? pageSize = default,
+        MissingMemberBehavior missingMemberBehavior = default,
+        CancellationToken cancellationToken = default
+    )
+    {
+        MatchesScoresByPageRequest request = new(pageIndex)
+        {
+            PageSize = pageSize,
+            MissingMemberBehavior = missingMemberBehavior
+        };
+        return request.SendAsync(http, cancellationToken);
+    }
+
+    public Task<Replica<MatchScores>> GetMatchScoresByWorldId(
+        int worldId,
+        MissingMemberBehavior missingMemberBehavior = default,
+        CancellationToken cancellationToken = default
+    )
+    {
+        MatchScoresByWorldIdRequest request = new(worldId)
+        {
+            MissingMemberBehavior = missingMemberBehavior
+        };
+        return request.SendAsync(http, cancellationToken);
+    }
+
+    #endregion
 }
