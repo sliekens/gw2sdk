@@ -65,7 +65,7 @@ public class TestHttpClientFactory : IHttpClientFactory, IAsyncDisposable
             )
             .AddPolicyHandler(
                 Policy.TimeoutAsync<HttpResponseMessage>(
-                    TimeSpan.FromSeconds(20),
+                    TimeSpan.FromSeconds(30),
                     TimeoutStrategy.Optimistic
                 )
             );
