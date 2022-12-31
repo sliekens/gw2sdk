@@ -13,7 +13,7 @@ var host = new HostBuilder().ConfigureServices(
             // Gw2Client with the following policies applied
             // * Cancel after 1 minute of waiting for a success response (including any retries)
             // * In case of transient errors, retry with exponential delay (2s, 4s, 8s, 8s, 8s ...)
-            // * Each individual request (attempt) should complete in less than 10 seconds
+            // * Each individual request (attempt) should complete in less than 20 seconds
             services.AddHttpClient<Gw2Client>(
                     httpClient =>
                     {
@@ -36,7 +36,7 @@ var host = new HostBuilder().ConfigureServices(
                 )
                 .AddPolicyHandler(
                     Policy.TimeoutAsync<HttpResponseMessage>(
-                        TimeSpan.FromSeconds(10),
+                        TimeSpan.FromSeconds(20),
                         TimeoutStrategy.Optimistic
                     )
                 );
