@@ -40,7 +40,7 @@ public class TestHttpClientFactory : IHttpClientFactory, IAsyncDisposable
                 http =>
                 {
                     http.BaseAddress = baseAddress;
-                    http.Timeout = TimeSpan.FromMinutes(1); // default 100 seconds is too long
+                    http.Timeout = TimeSpan.FromSeconds(90);
                 }
             )
             .AddHttpMessageHandler<SchemaVersionHandler>()
