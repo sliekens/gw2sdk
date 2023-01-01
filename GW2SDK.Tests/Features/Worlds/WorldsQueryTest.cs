@@ -10,8 +10,7 @@ public sealed class WorldsQueryTest
     [Fact]
     public async Task Worlds_can_be_enumerated()
     {
-        await using Composer services = new();
-        var sut = services.Resolve<Gw2Client>();
+        var sut = Composer.Resolve<Gw2Client>();
 
         var actual = await sut.Worlds.GetWorlds();
 
@@ -30,8 +29,7 @@ public sealed class WorldsQueryTest
     [Fact]
     public async Task Worlds_index_is_not_empty()
     {
-        await using Composer services = new();
-        var sut = services.Resolve<Gw2Client>();
+        var sut = Composer.Resolve<Gw2Client>();
 
         var actual = await sut.Worlds.GetWorldsIndex();
 
@@ -41,8 +39,7 @@ public sealed class WorldsQueryTest
     [Fact]
     public async Task A_world_can_be_found_by_id()
     {
-        await using Composer services = new();
-        var sut = services.Resolve<Gw2Client>();
+        var sut = Composer.Resolve<Gw2Client>();
 
         const int worldId = 1001;
 
@@ -54,8 +51,7 @@ public sealed class WorldsQueryTest
     [Fact]
     public async Task Worlds_can_be_filtered_by_id()
     {
-        await using Composer services = new();
-        var sut = services.Resolve<Gw2Client>();
+        var sut = Composer.Resolve<Gw2Client>();
 
         HashSet<int> ids = new()
         {
@@ -77,8 +73,7 @@ public sealed class WorldsQueryTest
     [Fact]
     public async Task Worlds_can_be_filtered_by_page()
     {
-        await using Composer services = new();
-        var sut = services.Resolve<Gw2Client>();
+        var sut = Composer.Resolve<Gw2Client>();
 
         var actual = await sut.Worlds.GetWorldsByPage(0, 3);
 

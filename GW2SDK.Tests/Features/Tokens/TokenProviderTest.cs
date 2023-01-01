@@ -13,9 +13,8 @@ public class TokenProviderTest
     [Fact]
     public async Task It_can_get_the_token_info_for_an_api_key()
     {
-        await using Composer services = new();
-        var sut = services.Resolve<Gw2Client>();
-        var accessToken = services.Resolve<ApiKey>();
+        var sut = Composer.Resolve<Gw2Client>();
+        var accessToken = Composer.Resolve<ApiKey>();
 
         var actual = await sut.TokenProvider.GetTokenInfo(accessToken.Key);
 
@@ -37,9 +36,8 @@ public class TokenProviderTest
     [Fact]
     public async Task It_can_get_the_token_info_for_a_subtoken()
     {
-        await using Composer services = new();
-        var sut = services.Resolve<Gw2Client>();
-        var accessToken = services.Resolve<ApiKey>();
+        var sut = Composer.Resolve<Gw2Client>();
+        var accessToken = Composer.Resolve<ApiKey>();
 
         #region Create a new subtoken
 

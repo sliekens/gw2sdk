@@ -11,8 +11,7 @@ public class CommerceQueryTest
     [Fact]
     public async Task Gold_for_gems_exchange_rate_is_available()
     {
-        await using Composer services = new();
-        var sut = services.Resolve<Gw2Client>();
+        var sut = Composer.Resolve<Gw2Client>();
 
         Coin coins = new(100, 0, 0);
 
@@ -25,8 +24,7 @@ public class CommerceQueryTest
     [Fact]
     public async Task Gems_for_gold_exchange_rate_is_available()
     {
-        await using Composer services = new();
-        var sut = services.Resolve<Gw2Client>();
+        var sut = Composer.Resolve<Gw2Client>();
 
         const int gems = 800;
 
@@ -39,8 +37,7 @@ public class CommerceQueryTest
     [Fact]
     public async Task Item_prices_index_is_not_empty()
     {
-        await using Composer services = new();
-        var sut = services.Resolve<Gw2Client>();
+        var sut = Composer.Resolve<Gw2Client>();
 
         var actual = await sut.Commerce.GetItemPricesIndex();
 
@@ -50,8 +47,7 @@ public class CommerceQueryTest
     [Fact]
     public async Task An_item_price_can_be_found_by_id()
     {
-        await using Composer services = new();
-        var sut = services.Resolve<Gw2Client>();
+        var sut = Composer.Resolve<Gw2Client>();
 
         const int itemId = 24;
 
@@ -69,8 +65,7 @@ public class CommerceQueryTest
     [Fact]
     public async Task Item_prices_can_be_filtered_by_id()
     {
-        await using Composer services = new();
-        var sut = services.Resolve<Gw2Client>();
+        var sut = Composer.Resolve<Gw2Client>();
 
         HashSet<int> ids = new()
         {
@@ -95,8 +90,7 @@ public class CommerceQueryTest
     )]
     public async Task Item_prices_can_be_enumerated()
     {
-        await using Composer services = new();
-        var sut = services.Resolve<Gw2Client>();
+        var sut = Composer.Resolve<Gw2Client>();
 
         await foreach (var actual in sut.Commerce.GetItemPrices())
         {
@@ -133,8 +127,7 @@ public class CommerceQueryTest
     [Fact]
     public async Task Order_books_index_is_not_empty()
     {
-        await using Composer services = new();
-        var sut = services.Resolve<Gw2Client>();
+        var sut = Composer.Resolve<Gw2Client>();
 
         var actual = await sut.Commerce.GetOrderBooksIndex();
 
@@ -144,8 +137,7 @@ public class CommerceQueryTest
     [Fact]
     public async Task An_order_book_can_be_found_by_id()
     {
-        await using Composer services = new();
-        var sut = services.Resolve<Gw2Client>();
+        var sut = Composer.Resolve<Gw2Client>();
 
         const int itemId = 24;
 
@@ -189,8 +181,7 @@ public class CommerceQueryTest
     [Fact]
     public async Task Order_books_can_be_filtered_by_id()
     {
-        await using Composer services = new();
-        var sut = services.Resolve<Gw2Client>();
+        var sut = Composer.Resolve<Gw2Client>();
 
         HashSet<int> ids = new()
         {
@@ -215,8 +206,7 @@ public class CommerceQueryTest
     )]
     public async Task Order_books_can_be_enumerated()
     {
-        await using Composer services = new();
-        var sut = services.Resolve<Gw2Client>();
+        var sut = Composer.Resolve<Gw2Client>();
 
         await foreach (var actual in sut.Commerce.GetOrderBooks())
         {
@@ -275,9 +265,8 @@ public class CommerceQueryTest
     [Fact]
     public async Task The_delivery_box_can_be_found()
     {
-        await using Composer service = new();
-        var accessToken = service.Resolve<ApiKey>();
-        var sut = service.Resolve<Gw2Client>();
+        var accessToken = Composer.Resolve<ApiKey>();
+        var sut = Composer.Resolve<Gw2Client>();
 
         var deliveryBox = await sut.Commerce.GetDeliveryBox(accessToken.Key);
 
@@ -288,9 +277,8 @@ public class CommerceQueryTest
     [Fact]
     public async Task Current_bids_can_be_filtered_by_page()
     {
-        await using Composer service = new();
-        var accessToken = service.Resolve<ApiKey>();
-        var sut = service.Resolve<Gw2Client>();
+        var accessToken = Composer.Resolve<ApiKey>();
+        var sut = Composer.Resolve<Gw2Client>();
 
         var bids = await sut.Commerce.GetBuyOrders(0, 200, accessToken.Key);
 
@@ -300,9 +288,8 @@ public class CommerceQueryTest
     [Fact]
     public async Task Current_asks_can_be_filtered_by_page()
     {
-        await using Composer service = new();
-        var accessToken = service.Resolve<ApiKey>();
-        var sut = service.Resolve<Gw2Client>();
+        var accessToken = Composer.Resolve<ApiKey>();
+        var sut = Composer.Resolve<Gw2Client>();
 
         var bids = await sut.Commerce.GetSellOrders(0, 200, accessToken.Key);
 
@@ -312,9 +299,8 @@ public class CommerceQueryTest
     [Fact]
     public async Task Purchase_history_can_be_filtered_by_page()
     {
-        await using Composer service = new();
-        var accessToken = service.Resolve<ApiKey>();
-        var sut = service.Resolve<Gw2Client>();
+        var accessToken = Composer.Resolve<ApiKey>();
+        var sut = Composer.Resolve<Gw2Client>();
 
         var bids = await sut.Commerce.GetPurchases(0, 200, accessToken.Key);
 
@@ -324,9 +310,8 @@ public class CommerceQueryTest
     [Fact]
     public async Task Sales_history_can_be_filtered_by_page()
     {
-        await using Composer service = new();
-        var accessToken = service.Resolve<ApiKey>();
-        var sut = service.Resolve<Gw2Client>();
+        var accessToken = Composer.Resolve<ApiKey>();
+        var sut = Composer.Resolve<Gw2Client>();
 
         var bids = await sut.Commerce.GetSales(0, 200, accessToken.Key);
 

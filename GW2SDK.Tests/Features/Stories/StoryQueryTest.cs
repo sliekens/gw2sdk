@@ -43,8 +43,7 @@ public class StoryQueryTest
     [Fact]
     public async Task Backstory_questions_can_be_enumerated()
     {
-        await using Composer services = new();
-        var sut = services.Resolve<Gw2Client>();
+        var sut = Composer.Resolve<Gw2Client>();
 
         var actual = await sut.Stories.GetBackstoryQuestions();
 
@@ -65,8 +64,7 @@ public class StoryQueryTest
     [Fact]
     public async Task Backstory_answers_can_be_enumerated()
     {
-        await using Composer services = new();
-        var sut = services.Resolve<Gw2Client>();
+        var sut = Composer.Resolve<Gw2Client>();
 
         var actual = await sut.Stories.GetBackstoryAnswers();
 
@@ -88,8 +86,7 @@ public class StoryQueryTest
     [Fact]
     public async Task Backstory_questions_index_is_not_empty()
     {
-        await using Composer services = new();
-        var sut = services.Resolve<Gw2Client>();
+        var sut = Composer.Resolve<Gw2Client>();
 
         var actual = await sut.Stories.GetBackstoryQuestionsIndex();
 
@@ -99,8 +96,7 @@ public class StoryQueryTest
     [Fact]
     public async Task Backstory_answers_index_is_not_empty()
     {
-        await using Composer services = new();
-        var sut = services.Resolve<Gw2Client>();
+        var sut = Composer.Resolve<Gw2Client>();
 
         var actual = await sut.Stories.GetBackstoryAnswersIndex();
 
@@ -110,8 +106,7 @@ public class StoryQueryTest
     [Fact]
     public async Task A_backstory_question_can_be_found_by_id()
     {
-        await using Composer services = new();
-        var sut = services.Resolve<Gw2Client>();
+        var sut = Composer.Resolve<Gw2Client>();
 
         const int questionId = 7;
 
@@ -123,8 +118,7 @@ public class StoryQueryTest
     [Fact]
     public async Task A_backstory_answer_can_be_found_by_id()
     {
-        await using Composer services = new();
-        var sut = services.Resolve<Gw2Client>();
+        var sut = Composer.Resolve<Gw2Client>();
 
         const string answerId = "7-53";
 
@@ -136,8 +130,7 @@ public class StoryQueryTest
     [Fact]
     public async Task Backstory_questions_can_be_filtered_by_id()
     {
-        await using Composer services = new();
-        var sut = services.Resolve<Gw2Client>();
+        var sut = Composer.Resolve<Gw2Client>();
 
         HashSet<int> ids = new()
         {
@@ -159,8 +152,7 @@ public class StoryQueryTest
     [Fact]
     public async Task Backstory_answers_can_be_filtered_by_id()
     {
-        await using Composer services = new();
-        var sut = services.Resolve<Gw2Client>();
+        var sut = Composer.Resolve<Gw2Client>();
 
         HashSet<string> ids = new()
         {
@@ -182,8 +174,7 @@ public class StoryQueryTest
     [Fact]
     public async Task Backstory_questions_can_be_filtered_by_page()
     {
-        await using Composer services = new();
-        var sut = services.Resolve<Gw2Client>();
+        var sut = Composer.Resolve<Gw2Client>();
 
         var actual = await sut.Stories.GetBackstoryQuestionsByPage(0, 3);
 
@@ -194,8 +185,7 @@ public class StoryQueryTest
     [Fact]
     public async Task Backstory_answers_can_be_filtered_by_page()
     {
-        await using Composer services = new();
-        var sut = services.Resolve<Gw2Client>();
+        var sut = Composer.Resolve<Gw2Client>();
 
         var actual = await sut.Stories.GetBackstoryAnswersByPage(0, 3);
 

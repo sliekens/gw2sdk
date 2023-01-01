@@ -91,8 +91,7 @@ public class AchievementsQueryTest
     [InlineData(Day.Tomorrow)]
     public async Task Daily_achievements_can_be_found_by_day(Day day)
     {
-        await using Composer services = new();
-        var sut = services.Resolve<Gw2Client>();
+        var sut = Composer.Resolve<Gw2Client>();
 
         var actual = await sut.Achievements.GetDailyAchievements(day);
 
@@ -121,8 +120,7 @@ public class AchievementsQueryTest
     [Fact]
     public async Task Achievements_index_is_not_empty()
     {
-        await using Composer services = new();
-        var sut = services.Resolve<Gw2Client>();
+        var sut = Composer.Resolve<Gw2Client>();
 
         var actual = await sut.Achievements.GetAchievementsIndex();
 
@@ -132,8 +130,7 @@ public class AchievementsQueryTest
     [Fact]
     public async Task An_achievement_can_be_found_by_id()
     {
-        await using Composer services = new();
-        var sut = services.Resolve<Gw2Client>();
+        var sut = Composer.Resolve<Gw2Client>();
 
         const int achievementId = 1;
 
@@ -145,8 +142,7 @@ public class AchievementsQueryTest
     [Fact]
     public async Task Achievements_can_be_filtered_by_id()
     {
-        await using Composer services = new();
-        var sut = services.Resolve<Gw2Client>();
+        var sut = Composer.Resolve<Gw2Client>();
 
         HashSet<int> achievementIds = new()
         {
@@ -168,8 +164,7 @@ public class AchievementsQueryTest
     [Fact]
     public async Task Achievements_can_be_filtered_by_page()
     {
-        await using Composer services = new();
-        var sut = services.Resolve<Gw2Client>();
+        var sut = Composer.Resolve<Gw2Client>();
 
         var actual = await sut.Achievements.GetAchievementsByPage(0, 3);
 
@@ -180,9 +175,8 @@ public class AchievementsQueryTest
     [Fact]
     public async Task Account_achievements_can_be_enumerated()
     {
-        await using Composer services = new();
-        var sut = services.Resolve<Gw2Client>();
-        var accessToken = services.Resolve<ApiKey>();
+        var sut = Composer.Resolve<Gw2Client>();
+        var accessToken = Composer.Resolve<ApiKey>();
 
         var actual = await sut.Achievements.GetAccountAchievements(accessToken.Key);
 
@@ -200,9 +194,8 @@ public class AchievementsQueryTest
     [Fact]
     public async Task An_account_achievement_can_be_found_by_id()
     {
-        await using Composer services = new();
-        var sut = services.Resolve<Gw2Client>();
-        var accessToken = services.Resolve<ApiKey>();
+        var sut = Composer.Resolve<Gw2Client>();
+        var accessToken = Composer.Resolve<ApiKey>();
 
         const int achievementId = 1;
 
@@ -215,9 +208,8 @@ public class AchievementsQueryTest
     [Fact]
     public async Task Account_achievements_can_be_filtered_by_id()
     {
-        await using Composer services = new();
-        var sut = services.Resolve<Gw2Client>();
-        var accessToken = services.Resolve<ApiKey>();
+        var sut = Composer.Resolve<Gw2Client>();
+        var accessToken = Composer.Resolve<ApiKey>();
 
         HashSet<int> ids = new()
         {
@@ -239,9 +231,8 @@ public class AchievementsQueryTest
     [Fact]
     public async Task Account_achievements_can_be_filtered_by_page()
     {
-        await using Composer services = new();
-        var sut = services.Resolve<Gw2Client>();
-        var accessToken = services.Resolve<ApiKey>();
+        var sut = Composer.Resolve<Gw2Client>();
+        var accessToken = Composer.Resolve<ApiKey>();
 
         var actual = await sut.Achievements.GetAccountAchievementsByPage(0, 3, accessToken.Key);
 
@@ -252,8 +243,7 @@ public class AchievementsQueryTest
     [Fact]
     public async Task Achievement_categories_can_be_enumerated()
     {
-        await using Composer services = new();
-        var sut = services.Resolve<Gw2Client>();
+        var sut = Composer.Resolve<Gw2Client>();
 
         var actual = await sut.Achievements.GetAchievementCategories();
 
@@ -271,8 +261,7 @@ public class AchievementsQueryTest
     [Fact]
     public async Task Achievement_categories_index_is_not_empty()
     {
-        await using Composer services = new();
-        var sut = services.Resolve<Gw2Client>();
+        var sut = Composer.Resolve<Gw2Client>();
 
         var actual = await sut.Achievements.GetAchievementCategoriesIndex();
 
@@ -282,8 +271,7 @@ public class AchievementsQueryTest
     [Fact]
     public async Task An_achievement_category_can_be_found_by_id()
     {
-        await using Composer services = new();
-        var sut = services.Resolve<Gw2Client>();
+        var sut = Composer.Resolve<Gw2Client>();
 
         const int achievementCategoryId = 1;
 
@@ -295,8 +283,7 @@ public class AchievementsQueryTest
     [Fact]
     public async Task Achievement_categories_can_be_filtered_by_id()
     {
-        await using Composer services = new();
-        var sut = services.Resolve<Gw2Client>();
+        var sut = Composer.Resolve<Gw2Client>();
 
         HashSet<int> ids = new()
         {
@@ -318,8 +305,7 @@ public class AchievementsQueryTest
     [Fact]
     public async Task Achievement_categories_can_be_filtered_by_page()
     {
-        await using Composer services = new();
-        var sut = services.Resolve<Gw2Client>();
+        var sut = Composer.Resolve<Gw2Client>();
 
         var actual = await sut.Achievements.GetAchievementCategoriesByPage(0, 3);
 
@@ -330,8 +316,7 @@ public class AchievementsQueryTest
     [Fact]
     public async Task Achievement_groups_can_be_enumerated()
     {
-        await using Composer services = new();
-        var sut = services.Resolve<Gw2Client>();
+        var sut = Composer.Resolve<Gw2Client>();
 
         var actual = await sut.Achievements.GetAchievementGroups();
 
@@ -348,8 +333,7 @@ public class AchievementsQueryTest
     [Fact]
     public async Task Achievement_groups_index_is_not_empty()
     {
-        await using Composer services = new();
-        var sut = services.Resolve<Gw2Client>();
+        var sut = Composer.Resolve<Gw2Client>();
 
         var actual = await sut.Achievements.GetAchievementGroupsIndex();
 
@@ -359,8 +343,7 @@ public class AchievementsQueryTest
     [Fact]
     public async Task An_achievement_group_can_be_found_by_id()
     {
-        await using Composer services = new();
-        var sut = services.Resolve<Gw2Client>();
+        var sut = Composer.Resolve<Gw2Client>();
 
         const string achievementCategoryId = "A4ED8379-5B6B-4ECC-B6E1-70C350C902D2";
 
@@ -372,8 +355,7 @@ public class AchievementsQueryTest
     [Fact]
     public async Task Achievement_groups_can_be_filtered_by_id()
     {
-        await using Composer services = new();
-        var sut = services.Resolve<Gw2Client>();
+        var sut = Composer.Resolve<Gw2Client>();
 
         HashSet<string> ids = new()
         {
@@ -395,8 +377,7 @@ public class AchievementsQueryTest
     [Fact]
     public async Task Achievement_groups_can_be_filtered_by_page()
     {
-        await using Composer services = new();
-        var sut = services.Resolve<Gw2Client>();
+        var sut = Composer.Resolve<Gw2Client>();
 
         var actual = await sut.Achievements.GetAchievementGroupsByPage(0, 3);
 
@@ -407,8 +388,7 @@ public class AchievementsQueryTest
     [Fact]
     public async Task Titles_can_be_enumerated()
     {
-        await using Composer services = new();
-        var sut = services.Resolve<Gw2Client>();
+        var sut = Composer.Resolve<Gw2Client>();
 
         var actual = await sut.Achievements.GetTitles();
 
@@ -427,8 +407,7 @@ public class AchievementsQueryTest
     [Fact]
     public async Task Titles_index_is_not_empty()
     {
-        await using Composer services = new();
-        var sut = services.Resolve<Gw2Client>();
+        var sut = Composer.Resolve<Gw2Client>();
 
         var actual = await sut.Achievements.GetTitlesIndex();
 
@@ -438,8 +417,7 @@ public class AchievementsQueryTest
     [Fact]
     public async Task A_title_can_be_found_by_id()
     {
-        await using Composer services = new();
-        var sut = services.Resolve<Gw2Client>();
+        var sut = Composer.Resolve<Gw2Client>();
 
         const int titleId = 1;
 
@@ -451,8 +429,7 @@ public class AchievementsQueryTest
     [Fact]
     public async Task Titles_can_be_filtered_by_id()
     {
-        await using Composer services = new();
-        var sut = services.Resolve<Gw2Client>();
+        var sut = Composer.Resolve<Gw2Client>();
 
         HashSet<int> ids = new()
         {
@@ -474,8 +451,7 @@ public class AchievementsQueryTest
     [Fact]
     public async Task Titles_can_be_filtered_by_page()
     {
-        await using Composer services = new();
-        var sut = services.Resolve<Gw2Client>();
+        var sut = Composer.Resolve<Gw2Client>();
 
         var actual = await sut.Achievements.GetTitlesByPage(0, 3);
 

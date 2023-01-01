@@ -11,8 +11,7 @@ public class RegionsIndex
     [InlineData(2, 1)]
     public async Task Is_not_empty(int continentId, int floorId)
     {
-        await using Composer services = new();
-        var sut = services.Resolve<Gw2Client>();
+        var sut = Composer.Resolve<Gw2Client>();
 
         var actual = await sut.Maps.GetRegionsIndex(continentId, floorId);
 

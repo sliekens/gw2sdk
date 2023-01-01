@@ -1,61 +1,51 @@
 ﻿using System;
 using System.Net.Http;
-using System.Threading.Tasks;
 
 namespace GuildWars2.Tests.TestInfrastructure;
 
-public class Composer : IServiceProvider, IAsyncDisposable
+public static class Composer
 {
-    private readonly ConfigurationManager configuration = new();
+    private static readonly ConfigurationManager Configuration = new();
 
-    private readonly CompositeDisposable disposables = new();
+    private static readonly IHttpClientFactory HttpClientFactory;
 
-    private readonly IHttpClientFactory httpClientFactory;
-
-    public Composer()
+    static Composer()
     {
-        var gw2HttpClientFactory = new TestHttpClientFactory(BaseAddress.DefaultUri);
-        disposables.Add(gw2HttpClientFactory);
-        httpClientFactory = gw2HttpClientFactory;
+        HttpClientFactory = new TestHttpClientFactory(BaseAddress.DefaultUri);
     }
 
-    public async ValueTask DisposeAsync()
-    {
-        await disposables.DisposeAsync().ConfigureAwait(false);
-        GC.SuppressFinalize(this);
-    }
+    public static T Resolve<T>() =>
+        (T)GetService(typeof(T))
+        ?? throw new InvalidOperationException($"Unable to compose type '{typeof(T)}'");
 
-    public object GetService(Type serviceType)
+    private static object GetService(Type serviceType)
     {
         if (serviceType == typeof(TestCharacterName))
         {
-            return new TestCharacterName(configuration.CharacterName);
+            return new TestCharacterName(Configuration.CharacterName);
         }
 
         if (serviceType == typeof(ApiKeyBasic))
         {
-            return new ApiKeyBasic(configuration.ApiKeyBasic);
+            return new ApiKeyBasic(Configuration.ApiKeyBasic);
         }
 
         if (serviceType == typeof(ApiKey))
         {
-            return new ApiKey(configuration.ApiKey);
-        }
-
-        if (serviceType == typeof(HttpClient))
-        {
-            return httpClientFactory.CreateClient("GW2SDK");
+            return new ApiKey(Configuration.ApiKey);
         }
 
         if (serviceType == typeof(Gw2Client))
         {
-            return new Gw2Client(Resolve<HttpClient>());
+            var httpClient = HttpClientFactory.CreateClient("GW2SDK");
+            return new Gw2Client(httpClient);
+        }
+
+        if (serviceType == typeof(HttpClient))
+        {
+            return HttpClientFactory.CreateClient("GW2SDK");
         }
 
         return null;
     }
-
-    public T Resolve<T>() =>
-        (T)GetService(typeof(T))
-        ?? throw new InvalidOperationException($"Unable to compose type '{typeof(T)}'");
 }

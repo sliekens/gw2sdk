@@ -11,8 +11,7 @@ public class ItemsQueryTest
     [Fact]
     public async Task Items_index_is_not_empty()
     {
-        await using Composer services = new();
-        var sut = services.Resolve<Gw2Client>();
+        var sut = Composer.Resolve<Gw2Client>();
 
         var actual = await sut.Items.GetItemsIndex();
 
@@ -22,8 +21,7 @@ public class ItemsQueryTest
     [Fact]
     public async Task An_item_can_be_found_by_id()
     {
-        await using Composer services = new();
-        var sut = services.Resolve<Gw2Client>();
+        var sut = Composer.Resolve<Gw2Client>();
 
         const int itemId = 24;
 
@@ -35,8 +33,7 @@ public class ItemsQueryTest
     [Fact]
     public async Task Items_can_be_filtered_by_id()
     {
-        await using Composer services = new();
-        var sut = services.Resolve<Gw2Client>();
+        var sut = Composer.Resolve<Gw2Client>();
 
         HashSet<int> ids = new()
         {
@@ -58,8 +55,7 @@ public class ItemsQueryTest
     [Fact]
     public async Task Items_can_be_filtered_by_page()
     {
-        await using Composer services = new();
-        var sut = services.Resolve<Gw2Client>();
+        var sut = Composer.Resolve<Gw2Client>();
 
         var actual = await sut.Items.GetItemsByPage(0, 3);
 
@@ -73,8 +69,7 @@ public class ItemsQueryTest
     )]
     public async Task Items_can_be_enumerated()
     {
-        await using Composer services = new();
-        var sut = services.Resolve<Gw2Client>();
+        var sut = Composer.Resolve<Gw2Client>();
 
         await foreach (var actual in sut.Items.GetItems())
         {

@@ -28,9 +28,8 @@ public class WalletQueryTest
     [Fact]
     public async Task Wallet_can_be_found()
     {
-        await using Composer services = new();
-        var sut = services.Resolve<Gw2Client>();
-        var accessToken = services.Resolve<ApiKey>();
+        var sut = Composer.Resolve<Gw2Client>();
+        var accessToken = Composer.Resolve<ApiKey>();
         var actual = await sut.Wallet.GetWallet(accessToken.Key);
         var coins = actual.Value.Single(currency => currency.CurrencyId == 1);
         Coin coinsAmount = coins.Amount;
@@ -40,8 +39,7 @@ public class WalletQueryTest
     [Fact]
     public async Task Currencies_can_be_enumerated()
     {
-        await using Composer services = new();
-        var sut = services.Resolve<Gw2Client>();
+        var sut = Composer.Resolve<Gw2Client>();
 
         var actual = await sut.Wallet.GetCurrencies();
 
@@ -62,8 +60,7 @@ public class WalletQueryTest
     [Fact]
     public async Task Currencies_index_is_not_empty()
     {
-        await using Composer services = new();
-        var sut = services.Resolve<Gw2Client>();
+        var sut = Composer.Resolve<Gw2Client>();
 
         var actual = await sut.Wallet.GetCurrenciesIndex();
 
@@ -73,8 +70,7 @@ public class WalletQueryTest
     [Fact]
     public async Task A_currency_can_be_found_by_id()
     {
-        await using Composer services = new();
-        var sut = services.Resolve<Gw2Client>();
+        var sut = Composer.Resolve<Gw2Client>();
 
         const int currencyId = 1;
 
@@ -86,8 +82,7 @@ public class WalletQueryTest
     [Fact]
     public async Task Currencies_can_be_filtered_by_id()
     {
-        await using Composer services = new();
-        var sut = services.Resolve<Gw2Client>();
+        var sut = Composer.Resolve<Gw2Client>();
 
         HashSet<int> ids = new()
         {
@@ -109,8 +104,7 @@ public class WalletQueryTest
     [Fact]
     public async Task Currencies_can_be_filtered_by_page()
     {
-        await using Composer services = new();
-        var sut = services.Resolve<Gw2Client>();
+        var sut = Composer.Resolve<Gw2Client>();
 
         var actual = await sut.Wallet.GetCurrenciesByPage(0, 3);
 

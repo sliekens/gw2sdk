@@ -12,8 +12,7 @@ public class ChartsIndex
     [InlineData(1, 0, 3)]
     public async Task Is_not_empty(int continentId, int floorId, int regionId)
     {
-        await using Composer services = new();
-        var sut = services.Resolve<Gw2Client>();
+        var sut = Composer.Resolve<Gw2Client>();
 
         var actual = await sut.Maps.GetChartsIndex(continentId, floorId, regionId);
 

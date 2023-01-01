@@ -11,8 +11,7 @@ public class CraftingQueryTest
     [Fact]
     public async Task Recipes_index_is_not_empty()
     {
-        await using Composer services = new();
-        var sut = services.Resolve<Gw2Client>();
+        var sut = Composer.Resolve<Gw2Client>();
 
         var actual = await sut.Crafting.GetRecipesIndex();
 
@@ -22,8 +21,7 @@ public class CraftingQueryTest
     [Fact]
     public async Task A_recipe_can_be_found_by_id()
     {
-        await using Composer services = new();
-        var sut = services.Resolve<Gw2Client>();
+        var sut = Composer.Resolve<Gw2Client>();
 
         const int recipeId = 1;
 
@@ -35,8 +33,7 @@ public class CraftingQueryTest
     [Fact]
     public async Task Recipes_can_be_filtered_by_id()
     {
-        await using Composer services = new();
-        var sut = services.Resolve<Gw2Client>();
+        var sut = Composer.Resolve<Gw2Client>();
 
         HashSet<int> ids = new()
         {
@@ -58,8 +55,7 @@ public class CraftingQueryTest
     [Fact]
     public async Task Recipes_can_be_filtered_by_page()
     {
-        await using Composer services = new();
-        var sut = services.Resolve<Gw2Client>();
+        var sut = Composer.Resolve<Gw2Client>();
 
         var actual = await sut.Crafting.GetRecipesByPage(0, 3);
 
@@ -70,8 +66,7 @@ public class CraftingQueryTest
     [Fact]
     public async Task Recipes_index_can_be_filtered_by_ingredient_item_id()
     {
-        await using Composer services = new();
-        var sut = services.Resolve<Gw2Client>();
+        var sut = Composer.Resolve<Gw2Client>();
 
         const int ironOre = 19699;
         var actual = await sut.Crafting.GetRecipesIndexByIngredientItemId(ironOre);
@@ -83,8 +78,7 @@ public class CraftingQueryTest
     [Fact]
     public async Task Recipes_can_be_filtered_by_ingredient_item_id()
     {
-        await using Composer services = new();
-        var sut = services.Resolve<Gw2Client>();
+        var sut = Composer.Resolve<Gw2Client>();
 
         const int ironOre = 19699;
         var actual = await sut.Crafting.GetRecipesByIngredientItemId(ironOre);
@@ -96,8 +90,7 @@ public class CraftingQueryTest
     [Fact]
     public async Task Recipes_can_be_filtered_by_ingredient_item_id_and_page()
     {
-        await using Composer services = new();
-        var sut = services.Resolve<Gw2Client>();
+        var sut = Composer.Resolve<Gw2Client>();
 
         const int ironOre = 19699;
         var actual = await sut.Crafting.GetRecipesByIngredientItemIdByPage(ironOre, 0, 20);
@@ -109,8 +102,7 @@ public class CraftingQueryTest
     [Fact]
     public async Task Recipes_index_can_be_filtered_by_output_item_id()
     {
-        await using Composer services = new();
-        var sut = services.Resolve<Gw2Client>();
+        var sut = Composer.Resolve<Gw2Client>();
 
         const int ironIngot = 19683;
         var actual = await sut.Crafting.GetRecipesIndexByOutputItemId(ironIngot);
@@ -122,8 +114,7 @@ public class CraftingQueryTest
     [Fact]
     public async Task Recipes_can_be_filtered_by_output_item_id()
     {
-        await using Composer services = new();
-        var sut = services.Resolve<Gw2Client>();
+        var sut = Composer.Resolve<Gw2Client>();
 
         const int ironIngot = 19683;
         var actual = await sut.Crafting.GetRecipesByOutputItemId(ironIngot);
@@ -135,8 +126,7 @@ public class CraftingQueryTest
     [Fact]
     public async Task Recipes_can_be_filtered_by_output_item_id_and_page()
     {
-        await using Composer services = new();
-        var sut = services.Resolve<Gw2Client>();
+        var sut = Composer.Resolve<Gw2Client>();
 
         const int ironIngot = 19683;
         var actual = await sut.Crafting.GetRecipesByOutputItemIdByPage(ironIngot, 0, 20);
@@ -151,8 +141,7 @@ public class CraftingQueryTest
         // Normally the limit for ids=all is 200 items
         //   but that doesn't seem to apply for recipes search by input/output item
         // There are 800+ recipes that require a vision crystal
-        await using Composer services = new();
-        var sut = services.Resolve<Gw2Client>();
+        var sut = Composer.Resolve<Gw2Client>();
 
         const int visionCrystal = 46746;
         var actual = await sut.Crafting.GetRecipesByIngredientItemId(visionCrystal);
@@ -175,8 +164,7 @@ public class CraftingQueryTest
     )]
     public async Task Recipes_can_be_enumerated()
     {
-        await using Composer services = new();
-        var sut = services.Resolve<Gw2Client>();
+        var sut = Composer.Resolve<Gw2Client>();
 
         await foreach (var actual in sut.Crafting.GetRecipes())
         {
@@ -187,9 +175,8 @@ public class CraftingQueryTest
     [Fact]
     public async Task Unlocked_recipes_can_be_found()
     {
-        await using Composer services = new();
-        var sut = services.Resolve<Gw2Client>();
-        var accessToken = services.Resolve<ApiKey>();
+        var sut = Composer.Resolve<Gw2Client>();
+        var accessToken = Composer.Resolve<ApiKey>();
 
         var actual = await sut.Crafting.GetUnlockedRecipes(accessToken.Key);
 
@@ -200,10 +187,9 @@ public class CraftingQueryTest
     [Fact]
     public async Task Learned_recipes_can_be_found()
     {
-        await using Composer services = new();
-        var sut = services.Resolve<Gw2Client>();
-        var characterName = services.Resolve<TestCharacterName>();
-        var accessToken = services.Resolve<ApiKey>();
+        var sut = Composer.Resolve<Gw2Client>();
+        var characterName = Composer.Resolve<TestCharacterName>();
+        var accessToken = Composer.Resolve<ApiKey>();
 
         var actual = await sut.Crafting.GetLearnedRecipes(characterName.Name, accessToken.Key);
 
@@ -214,9 +200,8 @@ public class CraftingQueryTest
     [Fact]
     public async Task Daily_recipes_on_cooldown_can_be_found()
     {
-        await using Composer services = new();
-        var sut = services.Resolve<Gw2Client>();
-        var accessToken = services.Resolve<ApiKey>();
+        var sut = Composer.Resolve<Gw2Client>();
+        var accessToken = Composer.Resolve<ApiKey>();
 
         // This is not resistant to recipes being added to the game, so not great :)
         // For now I'll just maintain this by hand...

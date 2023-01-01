@@ -9,8 +9,7 @@ public class HeroById
     [Fact]
     public async Task Can_be_found()
     {
-        await using Composer services = new();
-        var sut = services.Resolve<Gw2Client>();
+        var sut = Composer.Resolve<Gw2Client>();
 
         const string id = "115C140F-C2F5-40EB-8EA2-C3773F2AE468";
 

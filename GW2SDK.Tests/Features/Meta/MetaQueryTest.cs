@@ -224,8 +224,7 @@ public class MetaQueryTest
     [Fact]
     public async Task Build_is_stuck()
     {
-        await using Composer services = new();
-        var http = services.Resolve<HttpClient>();
+        using var http = Composer.Resolve<HttpClient>();
         var request = new BuildRequest();
         var response = await request.SendAsync(http, CancellationToken.None);
         var actual = response.Value;
@@ -235,8 +234,7 @@ public class MetaQueryTest
     [Fact]
     public async Task It_can_get_the_current_build()
     {
-        await using Composer services = new();
-        var sut = services.Resolve<Gw2Client>();
+        var sut = Composer.Resolve<Gw2Client>();
 
         var actual = await sut.Meta.GetBuild();
 
@@ -246,8 +244,7 @@ public class MetaQueryTest
     [Fact]
     public async Task It_can_get_the_v1_api_info()
     {
-        await using Composer services = new();
-        var sut = services.Resolve<Gw2Client>();
+        var sut = Composer.Resolve<Gw2Client>();
 
         var actual = await sut.Meta.GetApiVersion("v1");
 
@@ -257,8 +254,7 @@ public class MetaQueryTest
     [Fact]
     public async Task It_can_get_the_v2_api_info()
     {
-        await using Composer services = new();
-        var sut = services.Resolve<Gw2Client>();
+        var sut = Composer.Resolve<Gw2Client>();
 
         var actual = await sut.Meta.GetApiVersion();
 

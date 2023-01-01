@@ -12,8 +12,7 @@ public class LegendById
     [InlineData("Legend3")]
     public async Task Can_be_found(string legendId)
     {
-        await using Composer services = new();
-        var sut = services.Resolve<Gw2Client>();
+        var sut = Composer.Resolve<Gw2Client>();
 
         var actual = await sut.Legends.GetLegendById(legendId);
 

@@ -10,9 +10,8 @@ public class BuildStorageQueryTest
     [Fact]
     public async Task Build_storage_index_is_not_empty()
     {
-        await using Composer services = new();
-        var sut = services.Resolve<Gw2Client>();
-        var accessToken = services.Resolve<ApiKey>();
+        var sut = Composer.Resolve<Gw2Client>();
+        var accessToken = Composer.Resolve<ApiKey>();
 
         var actual = await sut.BuildStorage.GetBuildStorageIndex(accessToken.Key);
 
@@ -23,9 +22,8 @@ public class BuildStorageQueryTest
     [Fact]
     public async Task A_build_storage_space_can_be_found_by_id()
     {
-        await using Composer services = new();
-        var sut = services.Resolve<Gw2Client>();
-        var accessToken = services.Resolve<ApiKey>();
+        var sut = Composer.Resolve<Gw2Client>();
+        var accessToken = Composer.Resolve<ApiKey>();
 
         const int id = 3;
 
@@ -38,9 +36,8 @@ public class BuildStorageQueryTest
     [Fact]
     public async Task Build_storage_can_be_filtered_by_id()
     {
-        await using Composer services = new();
-        var sut = services.Resolve<Gw2Client>();
-        var accessToken = services.Resolve<ApiKey>();
+        var sut = Composer.Resolve<Gw2Client>();
+        var accessToken = Composer.Resolve<ApiKey>();
 
         HashSet<int> ids = new()
         {
@@ -64,9 +61,8 @@ public class BuildStorageQueryTest
     [Fact]
     public async Task Build_storage_can_be_filtered_by_page()
     {
-        await using Composer services = new();
-        var sut = services.Resolve<Gw2Client>();
-        var accessToken = services.Resolve<ApiKey>();
+        var sut = Composer.Resolve<Gw2Client>();
+        var accessToken = Composer.Resolve<ApiKey>();
 
         var actual = await sut.BuildStorage.GetBuildStorageSpacesByPage(accessToken.Key, 0, 3);
 
@@ -77,9 +73,8 @@ public class BuildStorageQueryTest
     [Fact]
     public async Task Build_storage_can_be_enumerated()
     {
-        await using Composer services = new();
-        var sut = services.Resolve<Gw2Client>();
-        var accessToken = services.Resolve<ApiKey>();
+        var sut = Composer.Resolve<Gw2Client>();
+        var accessToken = Composer.Resolve<ApiKey>();
 
         var actual = await sut.BuildStorage.GetBuildStorage(accessToken.Key);
 

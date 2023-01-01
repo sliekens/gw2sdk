@@ -38,9 +38,8 @@ public class BankQueryTest
     [Fact]
     public async Task Bank_contents_can_be_found()
     {
-        await using Composer services = new();
-        var sut = services.Resolve<Gw2Client>();
-        var accessToken = services.Resolve<ApiKey>();
+        var sut = Composer.Resolve<Gw2Client>();
+        var accessToken = Composer.Resolve<ApiKey>();
 
         var actual = await sut.Bank.GetBank(accessToken.Key);
 
@@ -66,8 +65,7 @@ public class BankQueryTest
     [Fact]
     public async Task Material_categories_can_be_enumerated()
     {
-        await using Composer services = new();
-        var sut = services.Resolve<Gw2Client>();
+        var sut = Composer.Resolve<Gw2Client>();
 
         var actual = await sut.Bank.GetMaterialCategories();
 
@@ -84,8 +82,7 @@ public class BankQueryTest
     [Fact]
     public async Task Material_categories_index_is_not_empty()
     {
-        await using Composer services = new();
-        var sut = services.Resolve<Gw2Client>();
+        var sut = Composer.Resolve<Gw2Client>();
 
         var actual = await sut.Bank.GetMaterialCategoriesIndex();
 
@@ -95,8 +92,7 @@ public class BankQueryTest
     [Fact]
     public async Task A_material_category_can_be_found_by_id()
     {
-        await using Composer services = new();
-        var sut = services.Resolve<Gw2Client>();
+        var sut = Composer.Resolve<Gw2Client>();
 
         const int materialCategoryId = 5;
 
@@ -108,8 +104,7 @@ public class BankQueryTest
     [Fact]
     public async Task Material_categories_can_be_filtered_by_id()
     {
-        await using Composer services = new();
-        var sut = services.Resolve<Gw2Client>();
+        var sut = Composer.Resolve<Gw2Client>();
 
         HashSet<int> ids = new()
         {

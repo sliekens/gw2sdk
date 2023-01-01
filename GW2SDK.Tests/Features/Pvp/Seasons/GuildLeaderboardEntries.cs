@@ -11,8 +11,7 @@ public class GuildLeaderboardEntries
     [InlineData("2B2E80D3-0A74-424F-B0EA-E221500B323C", "guild", "na")]
     public async Task Can_be_found(string seasonId, string boardId, string regionId)
     {
-        await using Composer services = new();
-        var sut = services.Resolve<Gw2Client>();
+        var sut = Composer.Resolve<Gw2Client>();
 
         var actual = await sut.Pvp.GetLeaderboardEntries(seasonId, boardId, regionId, 0, 200);
 

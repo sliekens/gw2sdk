@@ -12,8 +12,7 @@ public class Sectors
     [InlineData(1, 0, 1, 28)]
     public async Task Can_be_enumerated(int continentId, int floorId, int regionId, int mapId)
     {
-        await using Composer services = new();
-        var sut = services.Resolve<Gw2Client>();
+        var sut = Composer.Resolve<Gw2Client>();
 
         var actual = await sut.Maps.GetSectors(continentId, floorId, regionId, mapId);
 

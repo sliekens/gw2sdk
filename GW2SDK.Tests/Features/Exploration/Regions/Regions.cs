@@ -11,8 +11,7 @@ public class Regions
     [InlineData(2, 1)]
     public async Task Can_be_enumerated(int continentId, int floorId)
     {
-        await using Composer services = new();
-        var sut = services.Resolve<Gw2Client>();
+        var sut = Composer.Resolve<Gw2Client>();
 
         var actual = await sut.Maps.GetRegions(continentId, floorId);
 

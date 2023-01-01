@@ -12,8 +12,7 @@ public class MapById
     [InlineData(18)]
     public async Task Can_be_found(int mapId)
     {
-        await using Composer services = new();
-        var sut = services.Resolve<Gw2Client>();
+        var sut = Composer.Resolve<Gw2Client>();
 
         var actual = await sut.Maps.GetMapById(mapId);
 

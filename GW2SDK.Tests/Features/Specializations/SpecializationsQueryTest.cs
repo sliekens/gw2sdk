@@ -36,8 +36,7 @@ public class SpecializationsQueryTest
     [Fact]
     public async Task Specializations_can_be_enumerated()
     {
-        await using Composer services = new();
-        var sut = services.Resolve<Gw2Client>();
+        var sut = Composer.Resolve<Gw2Client>();
 
         var actual = await sut.Specializations.GetSpecializations();
 
@@ -61,8 +60,7 @@ public class SpecializationsQueryTest
     [Fact]
     public async Task Specializations_index_is_not_empty()
     {
-        await using Composer services = new();
-        var sut = services.Resolve<Gw2Client>();
+        var sut = Composer.Resolve<Gw2Client>();
 
         var actual = await sut.Specializations.GetSpecializationsIndex();
 
@@ -72,8 +70,7 @@ public class SpecializationsQueryTest
     [Fact]
     public async Task A_specialization_can_be_found_by_id()
     {
-        await using Composer services = new();
-        var sut = services.Resolve<Gw2Client>();
+        var sut = Composer.Resolve<Gw2Client>();
 
         const int specializationId = 1;
 
@@ -85,8 +82,7 @@ public class SpecializationsQueryTest
     [Fact]
     public async Task Specializations_can_be_filtered_by_id()
     {
-        await using Composer services = new();
-        var sut = services.Resolve<Gw2Client>();
+        var sut = Composer.Resolve<Gw2Client>();
 
         HashSet<int> ids = new()
         {

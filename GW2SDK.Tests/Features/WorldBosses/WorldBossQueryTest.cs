@@ -9,9 +9,8 @@ public class WorldBossQueryTest
     [Fact]
     public async Task It_can_get_the_world_bosses()
     {
-        await using Composer services = new();
-        var sut = services.Resolve<Gw2Client>();
-        var accessToken = services.Resolve<ApiKey>();
+        var sut = Composer.Resolve<Gw2Client>();
+        var accessToken = Composer.Resolve<ApiKey>();
 
         // This is not resistant to bosses being added to the game, so not great :)
         // For now I'll just maintain this by hand...

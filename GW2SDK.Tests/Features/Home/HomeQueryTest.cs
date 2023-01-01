@@ -10,8 +10,7 @@ public class HomeQueryTest
     [Fact]
     public async Task Cats_can_be_enumerated()
     {
-        await using Composer services = new();
-        var sut = services.Resolve<Gw2Client>();
+        var sut = Composer.Resolve<Gw2Client>();
 
         var actual = await sut.Home.GetCats();
 
@@ -31,8 +30,7 @@ public class HomeQueryTest
     [Fact]
     public async Task Cats_index_is_not_empty()
     {
-        await using Composer services = new();
-        var sut = services.Resolve<Gw2Client>();
+        var sut = Composer.Resolve<Gw2Client>();
         var actual = await sut.Home.GetCatsIndex();
         Assert.NotEmpty(actual.Value);
         Assert.Equal(actual.ResultContext.ResultCount, actual.Value.Count);
@@ -41,8 +39,7 @@ public class HomeQueryTest
     [Fact]
     public async Task A_cat_can_be_found_by_id()
     {
-        await using Composer services = new();
-        var sut = services.Resolve<Gw2Client>();
+        var sut = Composer.Resolve<Gw2Client>();
         var actual = await sut.Home.GetCatById(20);
         Assert.NotNull(actual.Value);
         Assert.Equal(20, actual.Value.Id);
@@ -52,8 +49,7 @@ public class HomeQueryTest
     [Fact]
     public async Task Cats_can_be_filtered_by_id()
     {
-        await using Composer services = new();
-        var sut = services.Resolve<Gw2Client>();
+        var sut = Composer.Resolve<Gw2Client>();
         HashSet<int> ids = new()
         {
             1,
@@ -74,8 +70,7 @@ public class HomeQueryTest
     [Fact]
     public async Task Cats_can_be_filtered_by_page()
     {
-        await using Composer services = new();
-        var sut = services.Resolve<Gw2Client>();
+        var sut = Composer.Resolve<Gw2Client>();
 
         var actual = await sut.Home.GetCatsByPage(0, 3);
 
@@ -95,9 +90,8 @@ public class HomeQueryTest
     [Fact]
     public async Task Owned_cats_can_be_found()
     {
-        await using Composer services = new();
-        var sut = services.Resolve<Gw2Client>();
-        var token = services.Resolve<ApiKey>();
+        var sut = Composer.Resolve<Gw2Client>();
+        var token = Composer.Resolve<ApiKey>();
 
         var actual = await sut.Home.GetOwnedCatsIndex(token.Key);
 
@@ -108,8 +102,7 @@ public class HomeQueryTest
     [Fact]
     public async Task Nodes_can_be_enumerated()
     {
-        await using Composer services = new();
-        var sut = services.Resolve<Gw2Client>();
+        var sut = Composer.Resolve<Gw2Client>();
 
         var actual = await sut.Home.GetNodes();
 
@@ -128,8 +121,7 @@ public class HomeQueryTest
     [Fact]
     public async Task Nodes_index_is_not_empty()
     {
-        await using Composer services = new();
-        var sut = services.Resolve<Gw2Client>();
+        var sut = Composer.Resolve<Gw2Client>();
         var actual = await sut.Home.GetNodesIndex();
         Assert.NotEmpty(actual.Value);
         Assert.Equal(actual.ResultContext.ResultCount, actual.Value.Count);
@@ -138,9 +130,8 @@ public class HomeQueryTest
     [Fact]
     public async Task Owned_nodes_can_be_found()
     {
-        await using Composer services = new();
-        var sut = services.Resolve<Gw2Client>();
-        var token = services.Resolve<ApiKey>();
+        var sut = Composer.Resolve<Gw2Client>();
+        var token = Composer.Resolve<ApiKey>();
 
         var actual = await sut.Home.GetOwnedNodesIndex(token.Key);
 

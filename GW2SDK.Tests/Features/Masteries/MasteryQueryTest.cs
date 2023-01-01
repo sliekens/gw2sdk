@@ -50,8 +50,7 @@ public class MasteryQueryTest
     [Fact]
     public async Task Masteries_can_be_enumerated()
     {
-        await using Composer services = new();
-        var sut = services.Resolve<Gw2Client>();
+        var sut = Composer.Resolve<Gw2Client>();
 
         var actual = await sut.Masteries.GetMasteries();
 
@@ -85,8 +84,7 @@ public class MasteryQueryTest
     [Fact]
     public async Task Masteries_index_is_not_empty()
     {
-        await using Composer services = new();
-        var sut = services.Resolve<Gw2Client>();
+        var sut = Composer.Resolve<Gw2Client>();
 
         var actual = await sut.Masteries.GetMasteriesIndex();
 
@@ -96,8 +94,7 @@ public class MasteryQueryTest
     [Fact]
     public async Task A_mastery_can_be_found_by_id()
     {
-        await using Composer services = new();
-        var sut = services.Resolve<Gw2Client>();
+        var sut = Composer.Resolve<Gw2Client>();
 
         const int masteryId = 1;
 
@@ -109,8 +106,7 @@ public class MasteryQueryTest
     [Fact]
     public async Task Masteries_can_be_filtered_by_id()
     {
-        await using Composer services = new();
-        var sut = services.Resolve<Gw2Client>();
+        var sut = Composer.Resolve<Gw2Client>();
 
         HashSet<int> ids = new()
         {
@@ -132,9 +128,8 @@ public class MasteryQueryTest
     [Fact]
     public async Task Mastery_progress_can_be_found()
     {
-        await using Composer services = new();
-        var sut = services.Resolve<Gw2Client>();
-        var accessToken = services.Resolve<ApiKey>();
+        var sut = Composer.Resolve<Gw2Client>();
+        var accessToken = Composer.Resolve<ApiKey>();
 
         var actual = await sut.Masteries.GetMasteryProgress(accessToken.Key);
 

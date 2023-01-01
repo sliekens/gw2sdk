@@ -10,8 +10,7 @@ public class ArmoryQueryTest
     [Fact]
     public async Task Legendary_items_can_be_enumerated()
     {
-        await using Composer services = new();
-        var sut = services.Resolve<Gw2Client>();
+        var sut = Composer.Resolve<Gw2Client>();
 
         var actual = await sut.Armory.GetLegendaryItems();
 
@@ -29,8 +28,7 @@ public class ArmoryQueryTest
     [Fact]
     public async Task Legendary_items_index_is_not_empty()
     {
-        await using Composer services = new();
-        var sut = services.Resolve<Gw2Client>();
+        var sut = Composer.Resolve<Gw2Client>();
 
         var actual = await sut.Armory.GetLegendaryItemsIndex();
 
@@ -40,8 +38,7 @@ public class ArmoryQueryTest
     [Fact]
     public async Task A_legendary_item_can_be_found_by_id()
     {
-        await using Composer services = new();
-        var sut = services.Resolve<Gw2Client>();
+        var sut = Composer.Resolve<Gw2Client>();
 
         const int legendaryItemId = 80111;
 
@@ -53,8 +50,7 @@ public class ArmoryQueryTest
     [Fact]
     public async Task Legendary_items_can_be_filtered_by_id()
     {
-        await using Composer services = new();
-        var sut = services.Resolve<Gw2Client>();
+        var sut = Composer.Resolve<Gw2Client>();
 
         HashSet<int> ids = new()
         {
@@ -76,8 +72,7 @@ public class ArmoryQueryTest
     [Fact]
     public async Task Legendary_items_can_be_filtered_by_page()
     {
-        await using Composer services = new();
-        var sut = services.Resolve<Gw2Client>();
+        var sut = Composer.Resolve<Gw2Client>();
 
         var actual = await sut.Armory.GetLegendaryItemsByPage(0, 3);
 
@@ -88,9 +83,8 @@ public class ArmoryQueryTest
     [Fact]
     public async Task Bound_legendary_items_can_be_found()
     {
-        await using Composer services = new();
-        var sut = services.Resolve<Gw2Client>();
-        var accessToken = services.Resolve<ApiKey>();
+        var sut = Composer.Resolve<Gw2Client>();
+        var accessToken = Composer.Resolve<ApiKey>();
 
         var actual = await sut.Armory.GetBoundLegendaryItems(accessToken.Key);
 

@@ -9,9 +9,8 @@ public class Account
     [Fact]
     public async Task Basic_summary_with_any_access_token()
     {
-        await using Composer services = new();
-        var sut = services.Resolve<Gw2Client>();
-        var accessToken = services.Resolve<ApiKeyBasic>();
+        var sut = Composer.Resolve<Gw2Client>();
+        var accessToken = Composer.Resolve<ApiKeyBasic>();
 
         var actual = await sut.Accounts.GetSummary(accessToken.Key);
 
@@ -29,9 +28,8 @@ public class Account
     [Fact]
     public async Task Full_summary_with_high_trust_access_token()
     {
-        await using Composer services = new();
-        var sut = services.Resolve<Gw2Client>();
-        var accessToken = services.Resolve<ApiKey>();
+        var sut = Composer.Resolve<Gw2Client>();
+        var accessToken = Composer.Resolve<ApiKey>();
 
         var actual = await sut.Accounts.GetSummary(accessToken.Key);
 

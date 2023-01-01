@@ -10,8 +10,7 @@ public class GuildUpgradeById
     [Fact]
     public async Task Can_be_found()
     {
-        await using Composer services = new();
-        var sut = services.Resolve<Gw2Client>();
+        var sut = Composer.Resolve<Gw2Client>();
 
         const int guildUpgradeId = 43;
 

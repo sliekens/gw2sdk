@@ -37,8 +37,7 @@ public class MailCarriersQueryTest
     [Fact]
     public async Task Mail_carriers_can_be_enumerated()
     {
-        await using Composer services = new();
-        var sut = services.Resolve<Gw2Client>();
+        var sut = Composer.Resolve<Gw2Client>();
 
         var actual = await sut.MailCarriers.GetMailCarriers();
 
@@ -59,8 +58,7 @@ public class MailCarriersQueryTest
     [Fact]
     public async Task Mail_carriers_index_is_not_empty()
     {
-        await using Composer services = new();
-        var sut = services.Resolve<Gw2Client>();
+        var sut = Composer.Resolve<Gw2Client>();
 
         var actual = await sut.MailCarriers.GetMailCarriersIndex();
 
@@ -70,8 +68,7 @@ public class MailCarriersQueryTest
     [Fact]
     public async Task A_mail_carrier_can_be_found_by_id()
     {
-        await using Composer services = new();
-        var sut = services.Resolve<Gw2Client>();
+        var sut = Composer.Resolve<Gw2Client>();
 
         const int mailCarrierId = 1;
 
@@ -83,8 +80,7 @@ public class MailCarriersQueryTest
     [Fact]
     public async Task Mail_carriers_can_be_filtered_by_id()
     {
-        await using Composer services = new();
-        var sut = services.Resolve<Gw2Client>();
+        var sut = Composer.Resolve<Gw2Client>();
 
         HashSet<int> ids = new()
         {
@@ -106,8 +102,7 @@ public class MailCarriersQueryTest
     [Fact]
     public async Task Mail_carriers_can_be_filtered_by_page()
     {
-        await using Composer services = new();
-        var sut = services.Resolve<Gw2Client>();
+        var sut = Composer.Resolve<Gw2Client>();
 
         var actual = await sut.MailCarriers.GetMailCarriersByPage(0, 3);
 
@@ -118,9 +113,8 @@ public class MailCarriersQueryTest
     [Fact]
     public async Task Owned_mail_carriers_can_be_found()
     {
-        await using Composer services = new();
-        var sut = services.Resolve<Gw2Client>();
-        var accessToken = services.Resolve<ApiKey>();
+        var sut = Composer.Resolve<Gw2Client>();
+        var accessToken = Composer.Resolve<ApiKey>();
 
         var actual = await sut.MailCarriers.GetOwnedMailCarriers(accessToken.Key);
 

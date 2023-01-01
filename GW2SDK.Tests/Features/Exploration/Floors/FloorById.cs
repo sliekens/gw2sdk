@@ -16,8 +16,7 @@ public class FloorById
     [InlineData(2, 5)]
     public async Task Can_be_found(int continentId, int floorId)
     {
-        await using Composer services = new();
-        var sut = services.Resolve<Gw2Client>();
+        var sut = Composer.Resolve<Gw2Client>();
 
         var actual = await sut.Maps.GetFloorById(continentId, floorId);
 

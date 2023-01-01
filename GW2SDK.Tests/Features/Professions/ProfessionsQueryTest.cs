@@ -10,8 +10,7 @@ public class ProfessionsQueryTest
     [Fact]
     public async Task Professions_can_be_enumerated()
     {
-        await using Composer services = new();
-        var sut = services.Resolve<Gw2Client>();
+        var sut = Composer.Resolve<Gw2Client>();
 
         var actual = await sut.Professions.GetProfessions();
 
@@ -35,8 +34,7 @@ public class ProfessionsQueryTest
     [Fact]
     public async Task Profession_names_can_be_enumerated()
     {
-        await using Composer services = new();
-        var sut = services.Resolve<Gw2Client>();
+        var sut = Composer.Resolve<Gw2Client>();
 
         var actual = await sut.Professions.GetProfessionNames();
 
@@ -53,8 +51,7 @@ public class ProfessionsQueryTest
     [Fact]
     public async Task A_profession_can_be_found_by_name()
     {
-        await using Composer services = new();
-        var sut = services.Resolve<Gw2Client>();
+        var sut = Composer.Resolve<Gw2Client>();
 
         const ProfessionName name = ProfessionName.Engineer;
 
@@ -66,8 +63,7 @@ public class ProfessionsQueryTest
     [Fact]
     public async Task Professions_can_be_filtered_by_name()
     {
-        await using Composer services = new();
-        var sut = services.Resolve<Gw2Client>();
+        var sut = Composer.Resolve<Gw2Client>();
 
         ProfessionName[] names =
         {
@@ -89,8 +85,7 @@ public class ProfessionsQueryTest
     [Fact]
     public async Task Professions_can_be_filtered_by_page()
     {
-        await using Composer services = new();
-        var sut = services.Resolve<Gw2Client>();
+        var sut = Composer.Resolve<Gw2Client>();
 
         var actual = await sut.Professions.GetProfessionsByPage(0, 3);
 

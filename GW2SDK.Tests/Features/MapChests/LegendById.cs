@@ -12,8 +12,7 @@ public class MapChestById
     [InlineData("domain_of_vabbi_heros_choice_chest")]
     public async Task Can_be_found(string mapChestId)
     {
-        await using Composer services = new();
-        var sut = services.Resolve<Gw2Client>();
+        var sut = Composer.Resolve<Gw2Client>();
 
         var actual = await sut.MapChests.GetMapChestById(mapChestId);
 

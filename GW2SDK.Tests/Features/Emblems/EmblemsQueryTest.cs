@@ -11,8 +11,7 @@ public class EmblemsQueryTest
     [Fact]
     public async Task Forground_emblems_can_be_enumerated()
     {
-        await using Composer services = new();
-        var sut = services.Resolve<Gw2Client>();
+        var sut = Composer.Resolve<Gw2Client>();
 
         var actual = await sut.Emblems.GetForegroundEmblems();
 
@@ -32,8 +31,7 @@ public class EmblemsQueryTest
     [Fact]
     public async Task Foreground_emblems_index_is_not_empty()
     {
-        await using Composer services = new();
-        var sut = services.Resolve<Gw2Client>();
+        var sut = Composer.Resolve<Gw2Client>();
 
         var actual = await sut.Emblems.GetForegroundEmblemsIndex();
 
@@ -44,8 +42,7 @@ public class EmblemsQueryTest
     [Fact]
     public async Task A_foreground_emblem_can_be_found_by_id()
     {
-        await using Composer services = new();
-        var sut = services.Resolve<Gw2Client>();
+        var sut = Composer.Resolve<Gw2Client>();
 
         const int id = 1;
 
@@ -57,8 +54,7 @@ public class EmblemsQueryTest
     [Fact]
     public async Task Foreground_emblems_can_be_filtered_by_id()
     {
-        await using Composer services = new();
-        var sut = services.Resolve<Gw2Client>();
+        var sut = Composer.Resolve<Gw2Client>();
 
         HashSet<int> ids = new()
         {
@@ -76,8 +72,7 @@ public class EmblemsQueryTest
     [Fact]
     public async Task Foreground_emblems_can_be_filtered_by_page()
     {
-        await using Composer services = new();
-        var sut = services.Resolve<Gw2Client>();
+        var sut = Composer.Resolve<Gw2Client>();
 
         var actual = await sut.Emblems.GetForegroundEmblemsByPage(0, 3);
 
@@ -88,8 +83,7 @@ public class EmblemsQueryTest
     [Fact]
     public async Task Background_emblems_can_be_enumerated()
     {
-        await using Composer services = new();
-        var sut = services.Resolve<Gw2Client>();
+        var sut = Composer.Resolve<Gw2Client>();
 
         var actual = await sut.Emblems.GetBackgroundEmblems();
 
@@ -109,8 +103,7 @@ public class EmblemsQueryTest
     [Fact]
     public async Task Background_emblems_index_is_not_empty()
     {
-        await using Composer services = new();
-        var sut = services.Resolve<Gw2Client>();
+        var sut = Composer.Resolve<Gw2Client>();
 
         var actual = await sut.Emblems.GetBackgroundEmblemsIndex();
 
@@ -121,8 +114,7 @@ public class EmblemsQueryTest
     [Fact]
     public async Task A_background_emblem_can_be_found_by_id()
     {
-        await using Composer services = new();
-        var sut = services.Resolve<Gw2Client>();
+        var sut = Composer.Resolve<Gw2Client>();
 
         const int id = 1;
 
@@ -134,8 +126,7 @@ public class EmblemsQueryTest
     [Fact]
     public async Task Background_emblems_can_be_filtered_by_id()
     {
-        await using Composer services = new();
-        var sut = services.Resolve<Gw2Client>();
+        var sut = Composer.Resolve<Gw2Client>();
 
         HashSet<int> ids = new()
         {
@@ -153,8 +144,7 @@ public class EmblemsQueryTest
     [Fact]
     public async Task Background_emblems_can_be_filtered_by_page()
     {
-        await using Composer services = new();
-        var sut = services.Resolve<Gw2Client>();
+        var sut = Composer.Resolve<Gw2Client>();
 
         var actual = await sut.Emblems.GetBackgroundEmblemsByPage(0, 3);
 

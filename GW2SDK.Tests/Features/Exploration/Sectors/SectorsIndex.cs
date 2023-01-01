@@ -12,8 +12,7 @@ public class SectorsIndex
     [InlineData(1, 0, 1, 28)]
     public async Task Is_not_empty(int continentId, int floorId, int regionId, int mapId)
     {
-        await using Composer services = new();
-        var sut = services.Resolve<Gw2Client>();
+        var sut = Composer.Resolve<Gw2Client>();
 
         var actual = await sut.Maps.GetSectorsIndex(continentId, floorId, regionId, mapId);
 

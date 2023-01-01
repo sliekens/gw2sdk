@@ -9,8 +9,7 @@ public class Dungeons
     [Fact]
     public async Task Can_be_enumerated()
     {
-        await using Composer services = new();
-        var sut = services.Resolve<Gw2Client>();
+        var sut = Composer.Resolve<Gw2Client>();
 
         var actual = await sut.Dungeons.GetDungeons();
 

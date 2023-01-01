@@ -17,8 +17,7 @@ public class DyesQueryTest
     [Fact]
     public async Task Colors_can_be_enumerated()
     {
-        await using Composer services = new();
-        var sut = services.Resolve<Gw2Client>();
+        var sut = Composer.Resolve<Gw2Client>();
 
         var actual = await sut.Dyes.GetColors();
 
@@ -35,8 +34,7 @@ public class DyesQueryTest
     [Fact]
     public async Task Colors_index_is_not_empty()
     {
-        await using Composer services = new();
-        var sut = services.Resolve<Gw2Client>();
+        var sut = Composer.Resolve<Gw2Client>();
 
         var actual = await sut.Dyes.GetColorsIndex();
 
@@ -46,8 +44,7 @@ public class DyesQueryTest
     [Fact]
     public async Task A_color_can_be_found_by_id()
     {
-        await using Composer services = new();
-        var sut = services.Resolve<Gw2Client>();
+        var sut = Composer.Resolve<Gw2Client>();
 
         const int colorId = 1;
 
@@ -59,8 +56,7 @@ public class DyesQueryTest
     [Fact]
     public async Task Colors_can_be_filtered_by_id()
     {
-        await using Composer services = new();
-        var sut = services.Resolve<Gw2Client>();
+        var sut = Composer.Resolve<Gw2Client>();
 
         HashSet<int> ids = new()
         {
@@ -82,8 +78,7 @@ public class DyesQueryTest
     [Fact]
     public async Task Colors_can_be_filtered_by_page()
     {
-        await using Composer services = new();
-        var sut = services.Resolve<Gw2Client>();
+        var sut = Composer.Resolve<Gw2Client>();
 
         var actual = await sut.Dyes.GetColorsByPage(0, 3);
 
@@ -94,9 +89,8 @@ public class DyesQueryTest
     [Fact]
     public async Task Unlocked_dyes_can_be_found()
     {
-        await using Composer services = new();
-        var sut = services.Resolve<Gw2Client>();
-        var accessToken = services.Resolve<ApiKey>();
+        var sut = Composer.Resolve<Gw2Client>();
+        var accessToken = Composer.Resolve<ApiKey>();
 
         var actual = await sut.Dyes.GetUnlockedDyesIndex(accessToken.Key);
 

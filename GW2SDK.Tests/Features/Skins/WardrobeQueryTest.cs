@@ -10,8 +10,7 @@ public class WardrobeQueryTest
     [Fact]
     public async Task Skins_index_is_not_empty()
     {
-        await using Composer services = new();
-        var sut = services.Resolve<Gw2Client>();
+        var sut = Composer.Resolve<Gw2Client>();
 
         var actual = await sut.Wardrobe.GetSkinsIndex();
 
@@ -21,8 +20,7 @@ public class WardrobeQueryTest
     [Fact]
     public async Task A_skin_can_be_found_by_id()
     {
-        await using Composer services = new();
-        var sut = services.Resolve<Gw2Client>();
+        var sut = Composer.Resolve<Gw2Client>();
 
         const int skinId = 1;
 
@@ -34,8 +32,7 @@ public class WardrobeQueryTest
     [Fact]
     public async Task Skins_can_be_filtered_by_id()
     {
-        await using Composer services = new();
-        var sut = services.Resolve<Gw2Client>();
+        var sut = Composer.Resolve<Gw2Client>();
 
         HashSet<int> ids = new()
         {
@@ -57,8 +54,7 @@ public class WardrobeQueryTest
     [Fact]
     public async Task Skins_can_be_filtered_by_page()
     {
-        await using Composer services = new();
-        var sut = services.Resolve<Gw2Client>();
+        var sut = Composer.Resolve<Gw2Client>();
 
         var actual = await sut.Wardrobe.GetSkinsByPage(0, 3);
 

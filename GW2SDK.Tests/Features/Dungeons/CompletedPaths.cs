@@ -9,9 +9,8 @@ public class CompletedPaths
     [Fact]
     public async Task Can_be_enumerated()
     {
-        await using Composer services = new();
-        var sut = services.Resolve<Gw2Client>();
-        var accessToken = services.Resolve<ApiKey>();
+        var sut = Composer.Resolve<Gw2Client>();
+        var accessToken = Composer.Resolve<ApiKey>();
 
         // Completed paths reset every day, play some dungeons to test this properly
         var actual = await sut.Dungeons.GetCompletedPaths(accessToken.Key);

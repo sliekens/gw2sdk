@@ -12,8 +12,7 @@ public class Charts
     [InlineData(1, 0, 3)]
     public async Task Can_be_enumerated(int continentId, int floorId, int regionId)
     {
-        await using Composer services = new();
-        var sut = services.Resolve<Gw2Client>();
+        var sut = Composer.Resolve<Gw2Client>();
 
         var actual = await sut.Maps.GetCharts(continentId, floorId, regionId);
 

@@ -13,8 +13,7 @@ public class LeaderboardRegions
     [InlineData("5DD4CF6F-C68B-47E2-8926-8A7D0AE78462", "ladder")]
     public async Task Can_be_found(string seasonId, string boardId)
     {
-        await using Composer services = new();
-        var sut = services.Resolve<Gw2Client>();
+        var sut = Composer.Resolve<Gw2Client>();
 
         var actual = await sut.Pvp.GetLeaderboardRegions(seasonId, boardId);
 

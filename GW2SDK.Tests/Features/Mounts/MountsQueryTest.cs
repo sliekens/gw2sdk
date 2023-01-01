@@ -11,8 +11,7 @@ public class MountsQueryTest
     [Fact]
     public async Task Mounts_can_be_enumerated()
     {
-        await using Composer services = new();
-        var sut = services.Resolve<Gw2Client>();
+        var sut = Composer.Resolve<Gw2Client>();
 
         var actual = await sut.Mounts.GetMounts();
 
@@ -32,8 +31,7 @@ public class MountsQueryTest
     [Fact]
     public async Task Mount_names_can_be_enumerated()
     {
-        await using Composer services = new();
-        var sut = services.Resolve<Gw2Client>();
+        var sut = Composer.Resolve<Gw2Client>();
 
         var actual = await sut.Mounts.GetMountNames();
 
@@ -46,8 +44,7 @@ public class MountsQueryTest
     [Fact]
     public async Task A_mount_can_be_found_by_name()
     {
-        await using Composer services = new();
-        var sut = services.Resolve<Gw2Client>();
+        var sut = Composer.Resolve<Gw2Client>();
 
         const MountName name = MountName.Skyscale;
 
@@ -59,8 +56,7 @@ public class MountsQueryTest
     [Fact]
     public async Task Mounts_can_be_filtered_by_name()
     {
-        await using Composer services = new();
-        var sut = services.Resolve<Gw2Client>();
+        var sut = Composer.Resolve<Gw2Client>();
 
         MountName[] names =
         {
@@ -82,8 +78,7 @@ public class MountsQueryTest
     [Fact]
     public async Task Mounts_can_be_filtered_by_page()
     {
-        await using Composer services = new();
-        var sut = services.Resolve<Gw2Client>();
+        var sut = Composer.Resolve<Gw2Client>();
 
         var actual = await sut.Mounts.GetMountsByPage(0, 3);
 
@@ -94,8 +89,7 @@ public class MountsQueryTest
     [Fact]
     public async Task Mount_skins_can_be_enumerated()
     {
-        await using Composer services = new();
-        var sut = services.Resolve<Gw2Client>();
+        var sut = Composer.Resolve<Gw2Client>();
 
         var actual = await sut.Mounts.GetMountSkins();
 
@@ -105,8 +99,7 @@ public class MountsQueryTest
     [Fact]
     public async Task Mount_skins_index_is_not_empty()
     {
-        await using Composer services = new();
-        var sut = services.Resolve<Gw2Client>();
+        var sut = Composer.Resolve<Gw2Client>();
 
         var actual = await sut.Mounts.GetMountSkinsIndex();
 
@@ -116,8 +109,7 @@ public class MountsQueryTest
     [Fact]
     public async Task A_mount_skin_can_be_found_by_id()
     {
-        await using Composer services = new();
-        var sut = services.Resolve<Gw2Client>();
+        var sut = Composer.Resolve<Gw2Client>();
 
         const int mountSkinId = 1;
 
@@ -129,8 +121,7 @@ public class MountsQueryTest
     [Fact]
     public async Task Mount_skins_can_be_filtered_by_id()
     {
-        await using Composer services = new();
-        var sut = services.Resolve<Gw2Client>();
+        var sut = Composer.Resolve<Gw2Client>();
 
         HashSet<int> ids = new()
         {
@@ -152,8 +143,7 @@ public class MountsQueryTest
     [Fact]
     public async Task Mount_skins_can_be_filtered_by_page()
     {
-        await using Composer services = new();
-        var sut = services.Resolve<Gw2Client>();
+        var sut = Composer.Resolve<Gw2Client>();
 
         var actual = await sut.Mounts.GetMountSkinsByPage(0, 3);
 
@@ -164,9 +154,8 @@ public class MountsQueryTest
     [Fact]
     public async Task Owned_mounts_can_be_found()
     {
-        await using Composer services = new();
-        var sut = services.Resolve<Gw2Client>();
-        var accessToken = services.Resolve<ApiKey>();
+        var sut = Composer.Resolve<Gw2Client>();
+        var accessToken = Composer.Resolve<ApiKey>();
 
         var actual = await sut.Mounts.GetOwnedMounts(accessToken.Key);
 
@@ -176,9 +165,8 @@ public class MountsQueryTest
     [Fact]
     public async Task Owned_mount_skins_can_be_found()
     {
-        await using Composer services = new();
-        var sut = services.Resolve<Gw2Client>();
-        var accessToken = services.Resolve<ApiKey>();
+        var sut = Composer.Resolve<Gw2Client>();
+        var accessToken = Composer.Resolve<ApiKey>();
 
         var actual = await sut.Mounts.GetOwnedMountSkins(accessToken.Key);
 

@@ -9,8 +9,7 @@ public class FilesIndex
     [Fact]
     public async Task Is_not_empty()
     {
-        await using Composer services = new();
-        var sut = services.Resolve<Gw2Client>();
+        var sut = Composer.Resolve<Gw2Client>();
 
         var actual = await sut.Files.GetFilesIndex();
 

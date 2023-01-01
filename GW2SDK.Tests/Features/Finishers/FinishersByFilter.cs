@@ -10,8 +10,7 @@ public class FinishersByFilter
     [Fact]
     public async Task Can_be_filtered_by_id()
     {
-        await using Composer services = new();
-        var sut = services.Resolve<Gw2Client>();
+        var sut = Composer.Resolve<Gw2Client>();
 
         HashSet<int> ids = new()
         {
