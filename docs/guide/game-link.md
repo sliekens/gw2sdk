@@ -1,6 +1,31 @@
 # Game link
 
-The game client provides information about the server IP address, the player's position and movement on the current map, the player's camera and field of view, the location and size of the in-game compass, whether the player is using a commander tag, the player's color in competitive games, whether the player is in combat, whether the player is using a mount, the player's race, profession and specialization.
+The game client provides realtime information about the player:
+
+- the player's character name, [race], [profession] and [specialization]
+- the player's [world] ID
+- whether the player is in a competitive game mode
+- the player's team color in competitive games
+- whether the player is in combat
+- whether the player is using a commander tag
+- the player's mount (while using a mount)
+- the player's current map id, map type and player/map coordinates
+- the player's camera and field of view
+
+It also provides information about UI elements:
+
+- the UI size setting (Small, Normal, Large, Larger)
+- the width and height of the in-game compass
+- whether the compass is docked at the top or bottom
+- whether rotation is enabled for the compass, and the current rotation factor
+
+Last but not least, some metadata about the game.
+
+- the process ID of the game client
+- the build number of the game client
+- whether the game client has focus
+- whether the chat box has focus
+- the server IP address that the client connects to (same as typing /ip in the game)
 
 The entry point for accessing this information is `GuildWars2.GameLink`. This class implements `IObservable` so you should be familiar with the publisher-subscriber model. (Or have enough time and patience to learn it now. :D)
 
@@ -25,3 +50,7 @@ Output
 > Ctrl+C  
 > Goodbye.
 
+[race]:https://wiki.guildwars2.com/wiki/Playable_races
+[profession]:https://wiki.guildwars2.com/wiki/Profession
+[specialization]:https://wiki.guildwars2.com/wiki/Specialization
+[world]:https://wiki.guildwars2.com/wiki/World

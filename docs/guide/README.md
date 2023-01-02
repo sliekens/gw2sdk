@@ -4,20 +4,14 @@ GW2SDK is a .NET code library for interacting with the Guild Wars 2 API and game
 
 The Guild Wars 2 API is accessible over HTTPS. It provides information about the game, your account, PvP seasons, WvW matches and the in-game economy.
 
-The game client also provides information about the server IP address, the player's position and movement on the current map, the player's camera and field of view, the location and size of the in-game compass, whether the player is using a commander tag, the player's color in competitive games, whether the player is in combat, whether the player is using a mount, the player's race, profession and specialization.
+The game client on Windows provides realtime information about the player's movement in the world and the location and size of UI elements.
 
 ## Features
 
-GW2SDK provides access to both the API and the game client from the following entrypoints:
+GW2SDK has the following entrypoints:
 
-- Gw2Client
-- GameLink (Windows only)
-
-Additionally you can validate access tokens and create subtokens using the following entrypoint:
-
-- TokenProvider
-
-All of these entrypoint classes are inside the root `GuildWars2` namespace.
+- `GuildWars2.Gw2Client` provides access to the API,
+- `GuildWars2.GameLink` provides realtime information from the game client (Windows only)
 
 ## Authentication
 

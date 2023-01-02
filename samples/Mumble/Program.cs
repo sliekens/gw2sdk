@@ -103,6 +103,24 @@ public class GameObserver : IObserver<Snapshot>
         }
 
         var map = Maps[identity.MapId];
+        var activity = "traveling";
+        if (!context.UiState.HasFlag(UiState.GameHasFocus))
+        {
+            activity = "afk-ing";
+        }
+        else if (context.UiState.HasFlag(UiState.TextboxHasFocus))
+        {
+            activity = "typing";
+        }
+        else if (context.UiState.HasFlag(UiState.IsMapOpen))
+        {
+            activity = "looking at the map";
+        }
+        else if (context.UiState.HasFlag(UiState.IsInCombat))
+        {
+            activity = "in combat";
+        }
+
         Console.WriteLine(
             "[{0}] {1}, the {2} {3} ({4}) is {5} on {6} in {7}, Position: {{ Right = {8}, Up = {9}, Front = {10} }}",
             snapshot.UiTick,
@@ -110,7 +128,7 @@ public class GameObserver : IObserver<Snapshot>
             identity.Race,
             identity.Profession,
             specialization,
-            context.UiState.HasFlag(UiState.IsInCombat) ? "fighting" : "traveling",
+            activity,
             context.IsMounted ? context.GetMount() : "foot",
             map.Name,
             pos[0],
