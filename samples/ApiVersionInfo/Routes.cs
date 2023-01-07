@@ -67,7 +67,7 @@ internal static class Routes
         //"/v2/characters/:id/sab",
         //"/v2/characters/:id/skills",
         //"/v2/characters/:id/specializations",
-        //"/v2/characters/:id/training",
+        "/v2/characters/:id/training",
         "/v2/colors",
         "/v2/commerce/delivery",
         "/v2/commerce/exchange",

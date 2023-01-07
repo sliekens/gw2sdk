@@ -87,4 +87,23 @@ public sealed class ProfessionsQuery
         };
         return request.SendAsync(http, cancellationToken);
     }
+
+    #region v2/characters/:id/training
+
+    public Task<Replica<CharacterTraining>> GetCharacterTraining(
+        string characterName,
+        string? accessToken,
+        MissingMemberBehavior missingMemberBehavior = default,
+        CancellationToken cancellationToken = default
+    )
+    {
+        CharacterTrainingRequest request = new(characterName)
+        {
+            MissingMemberBehavior = missingMemberBehavior,
+            AccessToken = accessToken
+        };
+        return request.SendAsync(http, cancellationToken);
+    }
+
+    #endregion  
 }
