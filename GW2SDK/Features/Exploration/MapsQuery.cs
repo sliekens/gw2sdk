@@ -7,6 +7,7 @@ using GuildWars2.Exploration.Charts;
 using GuildWars2.Exploration.Continents;
 using GuildWars2.Exploration.Floors;
 using GuildWars2.Exploration.Hearts;
+using GuildWars2.Exploration.HeroChallenges;
 using GuildWars2.Exploration.Maps;
 using GuildWars2.Exploration.PointsOfInterest;
 using GuildWars2.Exploration.Regions;
@@ -699,5 +700,28 @@ public sealed class MapsQuery
         return request.SendAsync(http, cancellationToken);
     }
 
+    #endregion
+
+    #region v2/characters/:id/heropoints
+
+    /// <summary>
+    /// Fetches the IDs of completed hero challenges.
+    /// </summary>
+    /// <param name="characterName"></param>
+    /// <param name="accessToken"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public Task<Replica<HashSet<string>>> GetCompletedHeroChallenges(
+        string characterName,
+        string? accessToken,
+        CancellationToken cancellationToken = default
+    )
+    {
+        CompletedHeroChallengesRequest request = new(characterName)
+        {
+            AccessToken = accessToken
+        };
+        return request.SendAsync(http, cancellationToken);
+    }
     #endregion
 }
