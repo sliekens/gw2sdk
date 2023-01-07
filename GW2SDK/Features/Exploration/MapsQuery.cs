@@ -723,5 +723,6 @@ public sealed class MapsQuery
         };
         return request.SendAsync(http, cancellationToken);
     }
+
     #endregion
 }
