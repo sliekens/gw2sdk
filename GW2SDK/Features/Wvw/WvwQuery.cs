@@ -7,6 +7,7 @@ using GuildWars2.Wvw.Abilities;
 using GuildWars2.Wvw.Matches;
 using GuildWars2.Wvw.Matches.Overview;
 using GuildWars2.Wvw.Matches.Scores;
+using GuildWars2.Wvw.Matches.Stats;
 using GuildWars2.Wvw.Objectives;
 using GuildWars2.Wvw.Ranks;
 using GuildWars2.Wvw.Upgrades;
@@ -341,10 +342,7 @@ public sealed class WvwQuery
         CancellationToken cancellationToken = default
     )
     {
-        MatchByIdRequest request = new(matchId)
-        {
-            MissingMemberBehavior = missingMemberBehavior
-        };
+        MatchByIdRequest request = new(matchId) { MissingMemberBehavior = missingMemberBehavior };
         return request.SendAsync(http, cancellationToken);
     }
 
@@ -398,14 +396,13 @@ public sealed class WvwQuery
         CancellationToken cancellationToken = default
     )
     {
-        MatchesOverviewRequest request = new()
-        {
-            MissingMemberBehavior = missingMemberBehavior
-        };
+        MatchesOverviewRequest request = new() { MissingMemberBehavior = missingMemberBehavior };
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<HashSet<string>>> GetMatchesOverviewIndex(CancellationToken cancellationToken = default)
+    public Task<Replica<HashSet<string>>> GetMatchesOverviewIndex(
+        CancellationToken cancellationToken = default
+    )
     {
         MatchesOverviewIndexRequest request = new();
         return request.SendAsync(http, cancellationToken);
@@ -474,14 +471,13 @@ public sealed class WvwQuery
         CancellationToken cancellationToken = default
     )
     {
-        MatchesScoresRequest request = new()
-        {
-            MissingMemberBehavior = missingMemberBehavior
-        };
+        MatchesScoresRequest request = new() { MissingMemberBehavior = missingMemberBehavior };
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<HashSet<string>>> GetMatchesScoresIndex(CancellationToken cancellationToken = default)
+    public Task<Replica<HashSet<string>>> GetMatchesScoresIndex(
+        CancellationToken cancellationToken = default
+    )
     {
         MatchesScoresIndexRequest request = new();
         return request.SendAsync(http, cancellationToken);
@@ -535,6 +531,81 @@ public sealed class WvwQuery
     )
     {
         MatchScoresByWorldIdRequest request = new(worldId)
+        {
+            MissingMemberBehavior = missingMemberBehavior
+        };
+        return request.SendAsync(http, cancellationToken);
+    }
+
+    #endregion
+
+    #region v2/wvw/matches/stats
+
+    public Task<Replica<HashSet<MatchStats>>> GetMatchesStats(
+        MissingMemberBehavior missingMemberBehavior = default,
+        CancellationToken cancellationToken = default
+    )
+    {
+        MatchesStatsRequest request = new() { MissingMemberBehavior = missingMemberBehavior };
+        return request.SendAsync(http, cancellationToken);
+    }
+
+    public Task<Replica<HashSet<string>>> GetMatchesStatsIndex(
+        CancellationToken cancellationToken = default
+    )
+    {
+        MatchesStatsIndexRequest request = new();
+        return request.SendAsync(http, cancellationToken);
+    }
+
+    public Task<Replica<MatchStats>> GetMatchStatsById(
+        string matchId,
+        MissingMemberBehavior missingMemberBehavior = default,
+        CancellationToken cancellationToken = default
+    )
+    {
+        MatchStatsByIdRequest request = new(matchId)
+        {
+            MissingMemberBehavior = missingMemberBehavior
+        };
+        return request.SendAsync(http, cancellationToken);
+    }
+
+    public Task<Replica<HashSet<MatchStats>>> GetMatchesStatsByIds(
+        IReadOnlyCollection<string> matchIds,
+        MissingMemberBehavior missingMemberBehavior = default,
+        CancellationToken cancellationToken = default
+    )
+    {
+        MatchesStatsByIdsRequest request = new(matchIds)
+        {
+            MissingMemberBehavior = missingMemberBehavior
+        };
+        return request.SendAsync(http, cancellationToken);
+    }
+
+    public Task<Replica<HashSet<MatchStats>>> GetMatchesStatsByPage(
+        int pageIndex,
+        int? pageSize = default,
+        MissingMemberBehavior missingMemberBehavior = default,
+        CancellationToken cancellationToken = default
+    )
+    {
+        MatchesStatsByPageRequest request = new(pageIndex)
+        {
+            PageSize = pageSize,
+            MissingMemberBehavior = missingMemberBehavior
+        };
+        return request.SendAsync(http, cancellationToken);
+    }
+
+    public Task<Replica<MatchStats>> GetMatchStatsByWorldId(
+        int worldId,
+        MissingMemberBehavior missingMemberBehavior = default,
+        CancellationToken cancellationToken = default
+    )
+    {
+        MatchStatsByWorldIdRequest request = new(worldId)
         {
             MissingMemberBehavior = missingMemberBehavior
         };
