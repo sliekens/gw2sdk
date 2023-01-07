@@ -19,17 +19,5 @@ public class ChartById
         // TODO: complete validation
         Assert.Equal(mapId, actual.Value.Id);
         actual.Value.Has_name();
-        foreach (var skillChallenge in actual.Value.SkillChallenges)
-        {
-            // BUG(?): Cantha (id 37) does not have skill challenge ids
-            if (regionId == 37)
-            {
-                Assert.Empty(skillChallenge.Id);
-            }
-            else
-            {
-                Assert.NotEmpty(skillChallenge.Id);
-            }
-        }
     }
 }

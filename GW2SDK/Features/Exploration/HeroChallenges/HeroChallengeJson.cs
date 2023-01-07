@@ -3,12 +3,12 @@ using System.Text.Json;
 using GuildWars2.Json;
 using JetBrains.Annotations;
 
-namespace GuildWars2.Exploration.SkillChallenge;
+namespace GuildWars2.Exploration.HeroChallenges;
 
 [PublicAPI]
-public static class SkillChallengeJson
+public static class HeroChallengeJson
 {
-    public static SkillChallenge GetSkillChallenge(
+    public static HeroChallenge GetHeroChallenge(
         this JsonElement json,
         MissingMemberBehavior missingMemberBehavior
     )
@@ -33,7 +33,7 @@ public static class SkillChallengeJson
             }
         }
 
-        return new SkillChallenge
+        return new HeroChallenge
         {
             Id = id.GetValueOrEmpty(),
             Coordinates = coordinates.SelectMany(value => value.GetDouble())

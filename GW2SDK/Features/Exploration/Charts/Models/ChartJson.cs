@@ -5,10 +5,10 @@ using System.Text.Json;
 using GuildWars2.Exploration.Adventures;
 using GuildWars2.Exploration.GodShrines;
 using GuildWars2.Exploration.Hearts;
+using GuildWars2.Exploration.HeroChallenges;
 using GuildWars2.Exploration.MasteryPoints;
 using GuildWars2.Exploration.PointsOfInterest;
 using GuildWars2.Exploration.Sectors;
-using GuildWars2.Exploration.SkillChallenge;
 using GuildWars2.Json;
 using JetBrains.Annotations;
 
@@ -30,7 +30,7 @@ public static class ChartJson
             new("points_of_interest");
         OptionalMember<GodShrine> godShrines = new("god_shrines");
         RequiredMember<Dictionary<int, Heart>> tasks = new("tasks");
-        RequiredMember<SkillChallenge.SkillChallenge> skillChallenges = new("skill_challenges");
+        RequiredMember<HeroChallenge> skillChallenges = new("skill_challenges");
         RequiredMember<Dictionary<int, Sector>> sectors = new("sectors");
         RequiredMember<Adventure> adventures = new("adventures");
         RequiredMember<int> id = new("id");
@@ -121,8 +121,8 @@ public static class ChartJson
                 ),
             GodShrines = godShrines.SelectMany(value => value.GetGodShrine(missingMemberBehavior)),
             Hearts = tasks.Select(value => value.GetChartHearts(missingMemberBehavior)),
-            SkillChallenges =
-                skillChallenges.SelectMany(value => value.GetSkillChallenge(missingMemberBehavior)),
+            HeroChallenges =
+                skillChallenges.SelectMany(value => value.GetHeroChallenge(missingMemberBehavior)),
             Sectors = sectors.Select(value => value.GetChartSectors(missingMemberBehavior)),
             Adventures = adventures.SelectMany(value => value.GetAdventure(missingMemberBehavior)),
             MasteryPoints =

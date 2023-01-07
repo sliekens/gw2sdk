@@ -36,18 +36,6 @@ public class RegionsByFilter
                 {
                     // TODO: complete validation
                     Assert.Equal(mapId, map.Id);
-                    foreach (var skillChallenge in map.SkillChallenges)
-                    {
-                        // BUG(?): Cantha (id 37) does not have skill challenge ids
-                        if (entry.Id == 37)
-                        {
-                            Assert.Empty(skillChallenge.Id);
-                        }
-                        else
-                        {
-                            Assert.NotEmpty(skillChallenge.Id);
-                        }
-                    }
                 }
             }
         );

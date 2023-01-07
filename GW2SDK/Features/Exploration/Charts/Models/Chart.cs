@@ -4,6 +4,7 @@ using GuildWars2.Annotations;
 using GuildWars2.Exploration.Adventures;
 using GuildWars2.Exploration.GodShrines;
 using GuildWars2.Exploration.Hearts;
+using GuildWars2.Exploration.HeroChallenges;
 using GuildWars2.Exploration.MasteryPoints;
 using GuildWars2.Exploration.PointsOfInterest;
 using GuildWars2.Exploration.Sectors;
@@ -35,7 +36,7 @@ public sealed record Chart
 
     public required Dictionary<int, Heart> Hearts { get; init; }
 
-    public required IReadOnlyCollection<SkillChallenge.SkillChallenge> SkillChallenges
+    public required IReadOnlyCollection<HeroChallenge> HeroChallenges
     {
         get;
         init;

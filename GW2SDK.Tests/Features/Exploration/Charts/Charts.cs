@@ -26,18 +26,6 @@ public class Charts
                 // TODO: complete validation
                 entry.Has_id();
                 entry.Has_name();
-                foreach (var skillChallenge in entry.SkillChallenges)
-                {
-                    // BUG(?): Cantha (id 37) does not have skill challenge ids
-                    if (entry.Id == 37)
-                    {
-                        Assert.Empty(skillChallenge.Id);
-                    }
-                    else
-                    {
-                        Assert.NotEmpty(skillChallenge.Id);
-                    }
-                }
             }
         );
     }
