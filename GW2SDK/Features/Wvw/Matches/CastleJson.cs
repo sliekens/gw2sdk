@@ -20,8 +20,8 @@ public static class CastleJson
         RequiredMember<int> pointsCapture = new("points_capture");
         OptionalMember<string> claimedBy = new("claimed_by");
         NullableMember<DateTimeOffset> claimedAt = new("claimed_at");
-        RequiredMember<int> yaksDelivered = new("yaks_delivered");
-        RequiredMember<int> guildUpgrades = new("guild_upgrades");
+        OptionalMember<int> yaksDelivered = new("yaks_delivered");
+        OptionalMember<int> guildUpgrades = new("guild_upgrades");
 
         foreach (var member in json.EnumerateObject())
         {
