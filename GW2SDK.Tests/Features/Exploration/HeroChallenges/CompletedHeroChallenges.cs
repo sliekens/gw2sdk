@@ -10,10 +10,10 @@ public class CompletedHeroChallenges
     public async Task Can_be_found()
     {
         var sut = Composer.Resolve<Gw2Client>();
-        var characterName = Composer.Resolve<TestCharacterName>();
+        var character = Composer.Resolve<TestCharacter>();
         var accessToken = Composer.Resolve<ApiKey>();
 
-        var actual = await sut.Maps.GetCompletedHeroChallenges(characterName.Name, accessToken.Key);
+        var actual = await sut.Maps.GetCompletedHeroChallenges(character.Name, accessToken.Key);
 
         Assert.NotEmpty(actual.Value);
     }

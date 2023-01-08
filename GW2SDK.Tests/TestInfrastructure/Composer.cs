@@ -5,8 +5,6 @@ namespace GuildWars2.Tests.TestInfrastructure;
 
 public static class Composer
 {
-    private static readonly ConfigurationManager Configuration = new();
-
     private static readonly IHttpClientFactory HttpClientFactory;
 
     static Composer()
@@ -20,19 +18,19 @@ public static class Composer
 
     private static object GetService(Type serviceType)
     {
-        if (serviceType == typeof(TestCharacterName))
+        if (serviceType == typeof(TestCharacter))
         {
-            return new TestCharacterName(Configuration.CharacterName);
+            return TestConfiguration.TestCharacter;
         }
 
         if (serviceType == typeof(ApiKeyBasic))
         {
-            return new ApiKeyBasic(Configuration.ApiKeyBasic);
+            return TestConfiguration.ApiKeyBasic;
         }
 
         if (serviceType == typeof(ApiKey))
         {
-            return new ApiKey(Configuration.ApiKey);
+            return TestConfiguration.ApiKey;
         }
 
         if (serviceType == typeof(Gw2Client))

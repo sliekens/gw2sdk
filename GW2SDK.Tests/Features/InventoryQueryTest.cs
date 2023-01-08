@@ -10,7 +10,7 @@ public class InventoryQueryTest
     public async Task Inventory_can_be_found_by_character_name()
     {
         var sut = Composer.Resolve<Gw2Client>();
-        var character = Composer.Resolve<TestCharacterName>();
+        var character = Composer.Resolve<TestCharacter>();
         var accessToken = Composer.Resolve<ApiKey>();
 
         var actual = await sut.Inventory.GetInventory(character.Name, accessToken.Key);

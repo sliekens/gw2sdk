@@ -14,7 +14,7 @@ public class CharacterNames
 
         var actual = await sut.Accounts.GetCharactersIndex(accessToken.Key);
 
-        var expected = Composer.Resolve<TestCharacterName>().Name;
+        var expected = Composer.Resolve<TestCharacter>().Name;
 
         Assert.Contains(expected, actual.Value);
     }

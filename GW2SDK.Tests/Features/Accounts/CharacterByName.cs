@@ -10,11 +10,11 @@ public class CharacterByName
     public async Task Can_be_found()
     {
         var sut = Composer.Resolve<Gw2Client>();
-        var characterName = Composer.Resolve<TestCharacterName>();
+        var character = Composer.Resolve<TestCharacter>();
         var accessToken = Composer.Resolve<ApiKey>();
 
-        var actual = await sut.Accounts.GetCharacterByName(characterName.Name, accessToken.Key);
+        var actual = await sut.Accounts.GetCharacterByName(character.Name, accessToken.Key);
 
-        Assert.Equal(characterName.Name, actual.Value.Name);
+        Assert.Equal(character.Name, actual.Value.Name);
     }
 }

@@ -188,10 +188,10 @@ public class CraftingQueryTest
     public async Task Learned_recipes_can_be_found()
     {
         var sut = Composer.Resolve<Gw2Client>();
-        var characterName = Composer.Resolve<TestCharacterName>();
+        var character = Composer.Resolve<TestCharacter>();
         var accessToken = Composer.Resolve<ApiKey>();
 
-        var actual = await sut.Crafting.GetLearnedRecipes(characterName.Name, accessToken.Key);
+        var actual = await sut.Crafting.GetLearnedRecipes(character.Name, accessToken.Key);
 
         Assert.NotEmpty(actual.Value);
         Assert.All(actual.Value, id => Assert.NotEqual(0, id));
