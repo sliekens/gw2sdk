@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using GuildWars2.Annotations;
 using GuildWars2.Armory;
 using GuildWars2.Inventories;
+using GuildWars2.Professions;
 using JetBrains.Annotations;
 
 namespace GuildWars2.Accounts;
@@ -96,7 +97,7 @@ public sealed record Character
 
     /// <summary>The current character's hero point progression.</summary>
     [Scope(Permission.Builds)]
-    public required IReadOnlyCollection<TrainingTrack>? Training { get; init; }
+    public required IReadOnlyCollection<TrainingProgress>? Training { get; init; }
 
     /// <summary>The current character's bags, sorted by in-game order. Enumerated values can contain <c>null</c> when some bag
     /// expansion slots are empty.</summary>

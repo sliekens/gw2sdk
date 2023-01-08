@@ -3,6 +3,7 @@ using System.Text.Json;
 using GuildWars2.Armory;
 using GuildWars2.Inventories;
 using GuildWars2.Json;
+using GuildWars2.Professions;
 using JetBrains.Annotations;
 
 namespace GuildWars2.Accounts;
@@ -38,7 +39,7 @@ public static class CharacterJson
         OptionalMember<EquipmentItem> equipment = new("equipment");
         OptionalMember<EquipmentTab> equipmentTabs = new("equipment_tabs");
         OptionalMember<int> recipes = new("recipes");
-        OptionalMember<TrainingTrack> training = new("training");
+        OptionalMember<TrainingProgress> training = new("training");
         OptionalMember<Bag?> bags = new("bags");
 
         foreach (var member in json.EnumerateObject())
@@ -178,7 +179,7 @@ public static class CharacterJson
             EquipmentTabs =
                 equipmentTabs.SelectMany(value => value.GetEquipmentTab(missingMemberBehavior)),
             Recipes = recipes.SelectMany(value => value.GetInt32()),
-            Training = training.SelectMany(value => value.GetTrainingTrack(missingMemberBehavior)),
+            Training = training.SelectMany(value => value.GetTrainingProgress(missingMemberBehavior)),
             Bags = bags.SelectMany(value => value.GetBag(missingMemberBehavior))
         };
     }
