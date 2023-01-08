@@ -4,7 +4,7 @@ using Xunit;
 
 namespace GuildWars2.Tests.Features.Accounts;
 
-public class CharacterByName
+public class CharacterSummary
 {
     [Fact]
     public async Task Can_be_found()
@@ -13,7 +13,7 @@ public class CharacterByName
         var character = Composer.Resolve<TestCharacter>();
         var accessToken = Composer.Resolve<ApiKey>();
 
-        var actual = await sut.Accounts.GetCharacterByName(character.Name, accessToken.Key);
+        var actual = await sut.Accounts.GetCharacterSummary(character.Name, accessToken.Key);
 
         Assert.Equal(character.Name, actual.Value.Name);
         Assert.Equal(character.Race, actual.Value.Race);
