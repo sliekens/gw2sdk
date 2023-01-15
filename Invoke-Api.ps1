@@ -1,6 +1,7 @@
 $endpoint = $args[0]
 
-$secrets = dotnet user-secrets list --json --project $PSScriptRoot/GW2SDK.Tests | ConvertFrom-Json
+$json = dotnet user-secrets list --json --project $PSScriptRoot/GW2SDK.Tests
+$secrets = $json | % { $_ -replace '//(BEGIN|END)' } | ConvertFrom-Json
 $script = New-TemporaryFile
 
 Set-Content -Path $script -Value @(
