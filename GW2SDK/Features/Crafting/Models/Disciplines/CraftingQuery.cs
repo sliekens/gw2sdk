@@ -220,4 +220,24 @@ public sealed class CraftingQuery
         DailyCraftingOnCooldownRequest request = new() { AccessToken = accessToken };
         return request.SendAsync(http, cancellationToken);
     }
+
+    #region v2/characters/:id/crafting
+
+    public Task<Replica<LearnedCraftingDisciplines>> GetLearnedCraftingDisciplines(
+        string characterName,
+        string? accessToken,
+        MissingMemberBehavior missingMemberBehavior = default,
+        CancellationToken cancellationToken = default
+    )
+    {
+        LearnedCraftingDisciplinesRequest request = new(characterName)
+        {
+            MissingMemberBehavior = missingMemberBehavior,
+            AccessToken = accessToken
+        };
+        return request.SendAsync(http, cancellationToken);
+    }
+
+    #endregion
+
 }

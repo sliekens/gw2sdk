@@ -56,7 +56,7 @@ internal static class Routes
         //"/v2/characters/:id/buildtabs",
         //"/v2/characters/:id/buildtabs/active",
         "/v2/characters/:id/core",
-        //"/v2/characters/:id/crafting",
+        "/v2/characters/:id/crafting",
         //"/v2/characters/:id/equipment",
         //"/v2/characters/:id/equipmenttabs",
         //"/v2/characters/:id/equipmenttabs/active",

@@ -11,6 +11,6 @@ public sealed record CraftingDiscipline
     /// <summary>The level of progression.</summary>
     public required int Rating { get; init; }
 
-    /// <summary>Whether a character has access to the current discipline's station.</summary>
+    /// <summary>Whether a character has access to the crafting station.</summary>
     public required bool Active { get; init; }
 }
