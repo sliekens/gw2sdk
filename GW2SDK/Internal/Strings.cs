@@ -1,4 +1,7 @@
-﻿namespace GuildWars2;
+﻿using System;
+using System.Collections.Generic;
+
+namespace GuildWars2;
 
 /// <summary>Utility for formatting commonly used strings, e.g. Exception messages.</summary>
 internal static class Strings
@@ -35,4 +38,7 @@ internal static class Strings
             return hash1 + (hash2 * 1566083941);
         }
     }
+    internal static string UrlEncoded(this string value) => Uri.EscapeDataString(value);
+
+    internal static string ToCsv(this IEnumerable<string> values) => string.Join(",", values);
 }

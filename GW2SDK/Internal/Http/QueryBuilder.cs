@@ -43,19 +43,19 @@ public sealed class QueryBuilder : IEnumerable
     public void Add(string key, string value)
     {
         EnsureMutable();
-        arguments.Add(new Argument(key, value));
+        arguments.Add(new Argument(key, value.UrlEncoded()));
     }
 
     public void Add(string key, IEnumerable<string> values)
     {
         EnsureMutable();
-        arguments.Add(new Argument(key, ToCsv(values)));
+        arguments.Add(new Argument(key, values.Select(value => value.UrlEncoded()).ToCsv()));
     }
 
     public void Add(string key, IEnumerable<int> values)
     {
         EnsureMutable();
-        arguments.Add(new Argument(key, ToCsv(ToString(values))));
+        arguments.Add(new Argument(key, ToString(values).ToCsv()));
     }
 
     public void Freeze() => frozen = true;
@@ -150,8 +150,6 @@ public sealed class QueryBuilder : IEnumerable
     private static string ToString(int value) => value.ToString(InvariantInfo);
 
     private static IEnumerable<string> ToString(IEnumerable<int> values) => values.Select(ToString);
-
-    private static string ToCsv(IEnumerable<string> values) => string.Join(",", values);
 
     public override string ToString() => Build();
 }

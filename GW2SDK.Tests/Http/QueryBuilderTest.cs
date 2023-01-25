@@ -131,4 +131,22 @@ public class QueryBuilderTest
 
         Assert.Equal("?key=1,2,3", actual);
     }
+
+    [Fact]
+    public void String_values_are_escaped()
+    {
+        // Data characters that are allowed in a URI but do not have a reserved
+        // purpose are called unreserved.  These include upper and lower case
+        // letters, decimal digits, and a limited set of punctuation marks and
+        // symbols.
+        // Unreserved symbols are - _ . ! ~ * ' ( )
+        //
+        // Data must be escaped if it does not have a representation using an
+        // unreserved character
+        var sut = new QueryBuilder { { "key", "2019-02-21T00:00:00.000Z" } };
+
+        var actual = sut.Build();
+
+        Assert.Equal("?key=2019-02-21T00%3A00%3A00.000Z", actual);
+    }
 }

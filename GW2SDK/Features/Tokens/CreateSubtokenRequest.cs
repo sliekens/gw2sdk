@@ -51,7 +51,7 @@ public sealed class CreateSubtokenRequest : IHttpRequest<Replica<CreatedSubtoken
 
         if (Urls is { Count: not 0 })
         {
-            args.Add("urls", string.Join(",", Urls.Select(Uri.EscapeDataString)));
+            args.Add("urls", string.Join(",", Urls));
         }
 
         args.Add("v", SchemaVersion.Recommended);

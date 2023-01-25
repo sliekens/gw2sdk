@@ -41,7 +41,11 @@ public class TokenProviderTest
 
         #region Create a new subtoken
 
-        var subtokenPermissions = Enum.GetValues(typeof(Permission)).Cast<Permission>().ToHashSet();
+        var subtokenPermissions = new HashSet<Permission>();
+        foreach (Permission permission in Enum.GetValues(typeof(Permission)))
+        {
+            subtokenPermissions.Add(permission);
+        }
 
         var expiresAt = DateTimeOffset.UtcNow.AddDays(1);
 
