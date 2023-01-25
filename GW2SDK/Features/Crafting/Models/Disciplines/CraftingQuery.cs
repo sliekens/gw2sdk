@@ -21,6 +21,8 @@ public sealed class CraftingQuery
         http.BaseAddress ??= BaseAddress.DefaultUri;
     }
 
+    #region v2/recipes
+
     public Task<Replica<HashSet<int>>> GetRecipesIndex(
         CancellationToken cancellationToken = default
     )
@@ -76,6 +78,30 @@ public sealed class CraftingQuery
         };
         return request.SendAsync(http, cancellationToken);
     }
+
+    public async IAsyncEnumerable<Recipe> GetRecipes(
+        MissingMemberBehavior missingMemberBehavior = default,
+        IProgress<ResultContext>? progress = default,
+        [EnumeratorCancellation] CancellationToken cancellationToken = default
+    )
+    {
+        var index = await GetRecipesIndex(cancellationToken).ConfigureAwait(false);
+        var producer = GetRecipesByIds(
+            index.Value,
+            missingMemberBehavior,
+            progress,
+            cancellationToken
+        );
+        await foreach (var recipe in producer.WithCancellation(cancellationToken)
+            .ConfigureAwait(false))
+        {
+            yield return recipe;
+        }
+    }
+
+    #endregion
+
+    #region v2/recipes/search
 
     public Task<Replica<HashSet<int>>> GetRecipesIndexByIngredientItemId(
         int ingredientItemId,
@@ -153,25 +179,9 @@ public sealed class CraftingQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public async IAsyncEnumerable<Recipe> GetRecipes(
-        MissingMemberBehavior missingMemberBehavior = default,
-        IProgress<ResultContext>? progress = default,
-        [EnumeratorCancellation] CancellationToken cancellationToken = default
-    )
-    {
-        var index = await GetRecipesIndex(cancellationToken).ConfigureAwait(false);
-        var producer = GetRecipesByIds(
-            index.Value,
-            missingMemberBehavior,
-            progress,
-            cancellationToken
-        );
-        await foreach (var recipe in producer.WithCancellation(cancellationToken)
-            .ConfigureAwait(false))
-        {
-            yield return recipe;
-        }
-    }
+    #endregion
+
+    #region v2/account/recipes
 
     /// <summary>Gets the IDs of the recipes that were learned from recipe sheets. Unlocked recipes are automatically learned
     /// by characters once they reach the required crafting level.</summary>
@@ -184,6 +194,10 @@ public sealed class CraftingQuery
         UnlockedRecipesRequest request = new() { AccessToken = accessToken };
         return request.SendAsync(http, cancellationToken);
     }
+
+    #endregion
+
+    #region v2/characters/:id/recipes
 
     /// <summary>Gets the IDs of all the recipes that the current character has learned, excluding recipes from sheets for
     /// which the required crafting level is not reached.</summary>
@@ -203,6 +217,10 @@ public sealed class CraftingQuery
         return request.SendAsync(http, cancellationToken);
     }
 
+    #endregion
+
+    #region v2/dailycrafting
+
     public Task<Replica<HashSet<string>>> GetDailyRecipes(
         CancellationToken cancellationToken = default
     )
@@ -210,6 +228,10 @@ public sealed class CraftingQuery
         DailyCraftingRequest request = new();
         return request.SendAsync(http, cancellationToken);
     }
+
+    #endregion
+
+    #region v2/account/dailycrafting
 
     [Scope(Permission.Progression)]
     public Task<Replica<HashSet<string>>> GetDailyRecipesOnCooldown(
@@ -220,6 +242,8 @@ public sealed class CraftingQuery
         DailyCraftingOnCooldownRequest request = new() { AccessToken = accessToken };
         return request.SendAsync(http, cancellationToken);
     }
+
+    #endregion
 
     #region v2/characters/:id/crafting
 
@@ -239,5 +263,4 @@ public sealed class CraftingQuery
     }
 
     #endregion
-
 }
