@@ -37,6 +37,24 @@ public sealed class AccountsQuery
 
     #endregion
 
+    #region v2/account/luck
+
+    public Task<Replica<AccountLuck>> GetLuck(
+        string? accessToken,
+        MissingMemberBehavior missingMemberBehavior = default,
+        CancellationToken cancellationToken = default
+    )
+    {
+        AccountLuckRequest request = new()
+        {
+            AccessToken = accessToken,
+            MissingMemberBehavior = missingMemberBehavior
+        };
+        return request.SendAsync(http, cancellationToken);
+    }
+
+    #endregion
+
     #region v2/characters
 
     [Scope(Permission.Account, Permission.Characters)]
