@@ -23,7 +23,7 @@ internal static class Routes
         "/v2/account/home/nodes",
         "/v2/account/inventory",
         "/v2/account/legendaryarmory",
-        //"/v2/account/luck",
+        "/v2/account/luck",
         "/v2/account/mailcarriers",
         //"/v2/account/mapchests",
         "/v2/account/masteries",
