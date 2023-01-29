@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
+using GuildWars2.Annotations;
 using JetBrains.Annotations;
 
 namespace GuildWars2.MapChests;
@@ -17,6 +18,23 @@ public sealed class MapChestsQuery
         this.http = http ?? throw new ArgumentNullException(nameof(http));
         http.BaseAddress ??= BaseAddress.DefaultUri;
     }
+
+    #region v2/account/mapchests
+
+    [Scope(Permission.Progression)]
+
+    public Task<Replica<HashSet<string>>> GetReceivedMapChests(
+        string? accessToken,
+        CancellationToken cancellationToken = default
+    )
+    {
+        var request = new ReceivedMapChestsRequests { AccessToken = accessToken };
+        return request.SendAsync(http, cancellationToken);
+    }
+
+    #endregion
+
+    #region v2/mapchests
 
     public Task<Replica<HashSet<string>>> GetMapChestsIndex(
         CancellationToken cancellationToken = default
@@ -75,4 +93,6 @@ public sealed class MapChestsQuery
         MapChestsRequest request = new() { MissingMemberBehavior = missingMemberBehavior };
         return request.SendAsync(http, cancellationToken);
     }
+
+    #endregion
 }
