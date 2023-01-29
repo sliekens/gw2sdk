@@ -14,7 +14,7 @@ public static class RaidWingJson
     )
     {
         RequiredMember<string> id = new("id");
-        RequiredMember<RaidWingEvent> wings = new("events");
+        RequiredMember<Encounter> events = new("events");
 
         foreach (var member in json.EnumerateObject())
         {
@@ -22,9 +22,9 @@ public static class RaidWingJson
             {
                 id.Value = member.Value;
             }
-            else if (member.NameEquals(wings.Name))
+            else if (member.NameEquals(events.Name))
             {
-                wings.Value = member.Value;
+                events.Value = member.Value;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {
@@ -35,7 +35,7 @@ public static class RaidWingJson
         return new RaidWing
         {
             Id = id.GetValue(),
-            Events = wings.SelectMany(value => value.GetRaidWingEvent(missingMemberBehavior))
+            Encounters = events.SelectMany(value => value.GetRaidWingEvent(missingMemberBehavior))
         };
     }
 }

@@ -3,7 +3,7 @@
 namespace GuildWars2.Raids;
 
 [PublicAPI]
-public enum RaidWingEventKind
+public enum EncounterKind
 {
     Checkpoint = 1,
 

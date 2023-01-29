@@ -5,9 +5,9 @@ namespace GuildWars2.Raids;
 
 [PublicAPI]
 [DataTransferObject]
-public sealed record RaidWingEvent
+public sealed record Encounter
 {
     public required string Id { get; init; }
 
-    public required RaidWingEventKind Kind { get; init; }
+    public required EncounterKind Kind { get; init; }
 }

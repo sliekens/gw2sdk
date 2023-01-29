@@ -18,6 +18,8 @@ public sealed class RaidsQuery
         http.BaseAddress ??= BaseAddress.DefaultUri;
     }
 
+    #region v2/raids
+
     public Task<Replica<HashSet<string>>> GetRaidsIndex(
         CancellationToken cancellationToken = default
     )
@@ -72,4 +74,6 @@ public sealed class RaidsQuery
         RaidsRequest request = new() { MissingMemberBehavior = missingMemberBehavior };
         return request.SendAsync(http, cancellationToken);
     }
+
+    #endregion
 }

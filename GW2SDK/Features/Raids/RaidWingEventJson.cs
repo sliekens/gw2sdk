@@ -8,13 +8,13 @@ namespace GuildWars2.Raids;
 [PublicAPI]
 public static class RaidWingEventJson
 {
-    public static RaidWingEvent GetRaidWingEvent(
+    public static Encounter GetRaidWingEvent(
         this JsonElement json,
         MissingMemberBehavior missingMemberBehavior
     )
     {
         RequiredMember<string> id = new("id");
-        RequiredMember<RaidWingEventKind> kind = new("type");
+        RequiredMember<EncounterKind> type = new("type");
 
         foreach (var member in json.EnumerateObject())
         {
@@ -22,9 +22,9 @@ public static class RaidWingEventJson
             {
                 id.Value = member.Value;
             }
-            else if (member.NameEquals(kind.Name))
+            else if (member.NameEquals(type.Name))
             {
-                kind.Value = member.Value;
+                type.Value = member.Value;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {
@@ -32,10 +32,10 @@ public static class RaidWingEventJson
             }
         }
 
-        return new RaidWingEvent
+        return new Encounter
         {
             Id = id.GetValue(),
-            Kind = kind.GetValue(missingMemberBehavior)
+            Kind = type.GetValue(missingMemberBehavior)
         };
     }
 }
