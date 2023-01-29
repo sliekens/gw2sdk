@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
+using GuildWars2.Annotations;
 using JetBrains.Annotations;
 
 namespace GuildWars2.Raids;
@@ -17,6 +18,20 @@ public sealed class RaidsQuery
         this.http = http ?? throw new ArgumentNullException(nameof(http));
         http.BaseAddress ??= BaseAddress.DefaultUri;
     }
+
+    #region v2/account/raids
+
+    [Scope(Permission.Progression)]
+    public Task<Replica<HashSet<string>>> GetCompletedEncounters(
+        string? accessToken,
+        CancellationToken cancellationToken = default
+    )
+    {
+        var request = new CompletedEncountersRequest { AccessToken = accessToken };
+        return request.SendAsync(http, cancellationToken);
+    }
+
+    #endregion
 
     #region v2/raids
 
