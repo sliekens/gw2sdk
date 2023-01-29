@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
+using GuildWars2.Annotations;
 using JetBrains.Annotations;
 
 namespace GuildWars2.Emotes;
@@ -69,6 +70,24 @@ public sealed class EmotesQuery
         {
             PageSize = pageSize,
             MissingMemberBehavior = missingMemberBehavior
+        };
+        return request.SendAsync(http, cancellationToken);
+    }
+
+    #endregion
+
+    #region v2/account/emotes
+
+    [Scope(Permission.Progression, Permission.Unlocks)]
+
+    public Task<Replica<HashSet<string>>> GetUnlockedEmotes(
+        string? accessToken,
+        CancellationToken cancellationToken = default
+    )
+    {
+        var request = new UnlockedEmotesRequest
+        {
+            AccessToken = accessToken
         };
         return request.SendAsync(http, cancellationToken);
     }
