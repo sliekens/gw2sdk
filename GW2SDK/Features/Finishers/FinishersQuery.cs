@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
+using GuildWars2.Annotations;
 using JetBrains.Annotations;
 
 namespace GuildWars2.Finishers;
@@ -17,6 +18,27 @@ public sealed class FinishersQuery
         this.http = http ?? throw new ArgumentNullException(nameof(http));
         http.BaseAddress ??= BaseAddress.DefaultUri;
     }
+
+    #region v2/account/finishers
+
+    [Scope(Permission.Unlocks)]
+    public Task<Replica<HashSet<UnlockedFinisher>>> GetUnlockedFinishers(
+        string? accessToken,
+        MissingMemberBehavior missingMemberBehavior = default,
+        CancellationToken cancellationToken = default
+    )
+    {
+        var request = new UnlockedFinishersRequest
+        {
+            AccessToken = accessToken,
+            MissingMemberBehavior = missingMemberBehavior
+        };
+        return request.SendAsync(http, cancellationToken);
+    }
+
+    #endregion
+
+    #region v2/finishers
 
     public Task<Replica<HashSet<Finisher>>> GetFinishers(
         Language? language = default,
@@ -86,4 +108,6 @@ public sealed class FinishersQuery
         };
         return request.SendAsync(http, cancellationToken);
     }
+
+    #endregion
 }
