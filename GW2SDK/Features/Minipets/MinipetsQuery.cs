@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
+using GuildWars2.Annotations;
 using JetBrains.Annotations;
 
 namespace GuildWars2.Minipets;
@@ -17,6 +18,22 @@ public sealed class MinipetsQuery
         this.http = http ?? throw new ArgumentNullException(nameof(http));
         http.BaseAddress ??= BaseAddress.DefaultUri;
     }
+
+    #region v2/account/minis
+
+    [Scope(Permission.Unlocks)]
+    public Task<Replica<HashSet<int>>> GetUnlockedMinipets(
+        string? accessToken,
+        CancellationToken cancellationToken = default
+    )
+    {
+        var request = new UnlockedMinipetsRequest { AccessToken = accessToken };
+        return request.SendAsync(http, cancellationToken);
+    }
+
+    #endregion
+
+    #region v2/minis
 
     public Task<Replica<HashSet<Minipet>>> GetMinipets(
         Language? language = default,
@@ -86,4 +103,6 @@ public sealed class MinipetsQuery
         };
         return request.SendAsync(http, cancellationToken);
     }
+
+    #endregion
 }
