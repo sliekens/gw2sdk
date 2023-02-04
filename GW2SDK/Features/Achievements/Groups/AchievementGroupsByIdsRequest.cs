@@ -10,8 +10,7 @@ using static System.Net.Http.HttpMethod;
 namespace GuildWars2.Achievements.Groups;
 
 [PublicAPI]
-public sealed class
-    AchievementGroupsByIdsRequest : IHttpRequest<Replica<HashSet<AchievementGroup>>>
+public sealed class AchievementGroupsByIdsRequest : IHttpRequest<Replica<HashSet<AchievementGroup>>>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/achievements/groups") { AcceptEncoding = "gzip" };

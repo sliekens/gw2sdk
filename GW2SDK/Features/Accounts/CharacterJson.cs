@@ -180,7 +180,8 @@ public static class CharacterJson
             EquipmentTabs =
                 equipmentTabs.SelectMany(value => value.GetEquipmentTab(missingMemberBehavior)),
             Recipes = recipes.SelectMany(value => value.GetInt32()),
-            Training = training.SelectMany(value => value.GetTrainingProgress(missingMemberBehavior)),
+            Training =
+                training.SelectMany(value => value.GetTrainingProgress(missingMemberBehavior)),
             Bags = bags.SelectMany(value => value.GetBag(missingMemberBehavior))
         };
     }

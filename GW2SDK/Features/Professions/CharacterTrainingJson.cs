@@ -29,7 +29,9 @@ public static class CharacterTrainingJson
 
         return new CharacterTraining
         {
-            Training = training.SelectMany(value => value.GetTrainingProgress(missingMemberBehavior))
+            Training = training.SelectMany(
+                value => value.GetTrainingProgress(missingMemberBehavior)
+            )
         };
     }
 }

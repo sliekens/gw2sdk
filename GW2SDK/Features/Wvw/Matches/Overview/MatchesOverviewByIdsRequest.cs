@@ -48,7 +48,8 @@ public sealed class MatchesOverviewByIdsRequest : IHttpRequest<Replica<HashSet<M
             .ConfigureAwait(false);
         return new Replica<HashSet<MatchOverview>>
         {
-            Value = json.RootElement.GetSet(entry => entry.GetMatchOverview(MissingMemberBehavior)),
+            Value =
+                json.RootElement.GetSet(entry => entry.GetMatchOverview(MissingMemberBehavior)),
             ResultContext = response.Headers.GetResultContext(),
             PageContext = response.Headers.GetPageContext(),
             Date = response.Headers.Date.GetValueOrDefault(),

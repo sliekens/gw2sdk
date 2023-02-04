@@ -38,10 +38,7 @@ public sealed class MatchesByPageRequest : IHttpRequest<Replica<HashSet<Match>>>
 
         search.Add("v", SchemaVersion.Recommended);
         using var response = await httpClient.SendAsync(
-                Template with
-                {
-                    Arguments = search
-                },
+                Template with { Arguments = search },
                 HttpCompletionOption.ResponseHeadersRead,
                 cancellationToken
             )

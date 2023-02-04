@@ -4,7 +4,6 @@ using GuildWars2;
 using GuildWars2.Achievements;
 using GuildWars2.Items;
 
-
 Console.OutputEncoding = Encoding.UTF8;
 CultureInfo.CurrentCulture = CultureInfo.GetCultureInfo("en");
 CultureInfo.CurrentUICulture = CultureInfo.GetCultureInfo("en");

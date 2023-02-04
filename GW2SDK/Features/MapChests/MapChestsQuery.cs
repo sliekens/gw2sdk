@@ -22,7 +22,6 @@ public sealed class MapChestsQuery
     #region v2/account/mapchests
 
     [Scope(Permission.Progression)]
-
     public Task<Replica<HashSet<string>>> GetReceivedMapChests(
         string? accessToken,
         CancellationToken cancellationToken = default

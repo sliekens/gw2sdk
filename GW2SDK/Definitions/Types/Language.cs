@@ -23,8 +23,6 @@ public sealed class Language
 
     public static readonly Language Chinese = new("zh");
 
-    public static Language CurrentUICulture => new(CultureInfo.CurrentUICulture.TwoLetterISOLanguageName);
-
     public Language(string alpha2Code)
     {
         if (string.IsNullOrWhiteSpace(alpha2Code))
@@ -39,6 +37,9 @@ public sealed class Language
 
         Alpha2Code = alpha2Code.ToLowerInvariant();
     }
+
+    public static Language CurrentUICulture =>
+        new(CultureInfo.CurrentUICulture.TwoLetterISOLanguageName);
 
     public string Alpha2Code { get; }
 

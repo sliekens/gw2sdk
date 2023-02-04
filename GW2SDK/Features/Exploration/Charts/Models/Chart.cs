@@ -36,11 +36,7 @@ public sealed record Chart
 
     public required Dictionary<int, Heart> Hearts { get; init; }
 
-    public required IReadOnlyCollection<HeroChallenge> HeroChallenges
-    {
-        get;
-        init;
-    }
+    public required IReadOnlyCollection<HeroChallenge> HeroChallenges { get; init; }
 
     public required Dictionary<int, Sector> Sectors { get; init; }
 

@@ -32,9 +32,7 @@ public sealed class SkillsQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<HashSet<int>>> GetSkillsIndex(
-        CancellationToken cancellationToken = default
-    )
+    public Task<Replica<HashSet<int>>> GetSkillsIndex(CancellationToken cancellationToken = default)
     {
         SkillsIndexRequest request = new();
         return request.SendAsync(http, cancellationToken);

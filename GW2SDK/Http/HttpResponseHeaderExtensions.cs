@@ -93,14 +93,6 @@ public static class HttpResponseHeaderExtensions
             }
         }
 
-        return new PageContext(
-            pageTotal,
-            pageSize,
-            first,
-            self,
-            last,
-            previous,
-            next
-        );
+        return new PageContext(pageTotal, pageSize, first, self, last, previous, next);
     }
 }

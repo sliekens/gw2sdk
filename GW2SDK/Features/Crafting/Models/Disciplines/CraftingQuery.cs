@@ -21,6 +21,89 @@ public sealed class CraftingQuery
         http.BaseAddress ??= BaseAddress.DefaultUri;
     }
 
+    #region v2/account/recipes
+
+    /// <summary>Gets the IDs of the recipes that were learned from recipe sheets. Unlocked recipes are automatically learned
+    /// by characters once they reach the required crafting level.</summary>
+    [Scope(Permission.Unlocks)]
+    public Task<Replica<HashSet<int>>> GetUnlockedRecipes(
+        string? accessToken,
+        CancellationToken cancellationToken = default
+    )
+    {
+        UnlockedRecipesRequest request = new() { AccessToken = accessToken };
+        return request.SendAsync(http, cancellationToken);
+    }
+
+    #endregion
+
+    #region v2/characters/:id/recipes
+
+    /// <summary>Gets the IDs of all the recipes that the current character has learned, excluding recipes from sheets for
+    /// which the required crafting level is not reached.</summary>
+    [Scope(Permission.Characters, Permission.Inventories)]
+    public Task<Replica<HashSet<int>>> GetLearnedRecipes(
+        string characterId,
+        string? accessToken,
+        MissingMemberBehavior missingMemberBehavior = default,
+        CancellationToken cancellationToken = default
+    )
+    {
+        LearnedRecipesRequest request = new(characterId)
+        {
+            AccessToken = accessToken,
+            MissingMemberBehavior = missingMemberBehavior
+        };
+        return request.SendAsync(http, cancellationToken);
+    }
+
+    #endregion
+
+    #region v2/dailycrafting
+
+    public Task<Replica<HashSet<string>>> GetDailyRecipes(
+        CancellationToken cancellationToken = default
+    )
+    {
+        DailyCraftingRequest request = new();
+        return request.SendAsync(http, cancellationToken);
+    }
+
+    #endregion
+
+    #region v2/account/dailycrafting
+
+    [Scope(Permission.Progression)]
+    public Task<Replica<HashSet<string>>> GetDailyRecipesOnCooldown(
+        string? accessToken,
+        CancellationToken cancellationToken = default
+    )
+    {
+        DailyCraftingOnCooldownRequest request = new() { AccessToken = accessToken };
+        return request.SendAsync(http, cancellationToken);
+    }
+
+    #endregion
+
+    #region v2/characters/:id/crafting
+
+    public Task<Replica<LearnedCraftingDisciplines>> GetLearnedCraftingDisciplines(
+        string characterName,
+        string? accessToken,
+        MissingMemberBehavior missingMemberBehavior = default,
+        CancellationToken cancellationToken = default
+    )
+    {
+        LearnedCraftingDisciplinesRequest request = new(characterName)
+        {
+            MissingMemberBehavior = missingMemberBehavior,
+            AccessToken = accessToken
+        };
+        return request.SendAsync(http, cancellationToken);
+    }
+
+    #endregion
+
     #region v2/recipes
 
     public Task<Replica<HashSet<int>>> GetRecipesIndex(
@@ -175,89 +258,6 @@ public sealed class CraftingQuery
         {
             PageSize = pageSize,
             MissingMemberBehavior = missingMemberBehavior
-        };
-        return request.SendAsync(http, cancellationToken);
-    }
-
-    #endregion
-
-    #region v2/account/recipes
-
-    /// <summary>Gets the IDs of the recipes that were learned from recipe sheets. Unlocked recipes are automatically learned
-    /// by characters once they reach the required crafting level.</summary>
-    [Scope(Permission.Unlocks)]
-    public Task<Replica<HashSet<int>>> GetUnlockedRecipes(
-        string? accessToken,
-        CancellationToken cancellationToken = default
-    )
-    {
-        UnlockedRecipesRequest request = new() { AccessToken = accessToken };
-        return request.SendAsync(http, cancellationToken);
-    }
-
-    #endregion
-
-    #region v2/characters/:id/recipes
-
-    /// <summary>Gets the IDs of all the recipes that the current character has learned, excluding recipes from sheets for
-    /// which the required crafting level is not reached.</summary>
-    [Scope(Permission.Characters, Permission.Inventories)]
-    public Task<Replica<HashSet<int>>> GetLearnedRecipes(
-        string characterId,
-        string? accessToken,
-        MissingMemberBehavior missingMemberBehavior = default,
-        CancellationToken cancellationToken = default
-    )
-    {
-        LearnedRecipesRequest request = new(characterId)
-        {
-            AccessToken = accessToken,
-            MissingMemberBehavior = missingMemberBehavior
-        };
-        return request.SendAsync(http, cancellationToken);
-    }
-
-    #endregion
-
-    #region v2/dailycrafting
-
-    public Task<Replica<HashSet<string>>> GetDailyRecipes(
-        CancellationToken cancellationToken = default
-    )
-    {
-        DailyCraftingRequest request = new();
-        return request.SendAsync(http, cancellationToken);
-    }
-
-    #endregion
-
-    #region v2/account/dailycrafting
-
-    [Scope(Permission.Progression)]
-    public Task<Replica<HashSet<string>>> GetDailyRecipesOnCooldown(
-        string? accessToken,
-        CancellationToken cancellationToken = default
-    )
-    {
-        DailyCraftingOnCooldownRequest request = new() { AccessToken = accessToken };
-        return request.SendAsync(http, cancellationToken);
-    }
-
-    #endregion
-
-    #region v2/characters/:id/crafting
-
-    public Task<Replica<LearnedCraftingDisciplines>> GetLearnedCraftingDisciplines(
-        string characterName,
-        string? accessToken,
-        MissingMemberBehavior missingMemberBehavior = default,
-        CancellationToken cancellationToken = default
-    )
-    {
-        LearnedCraftingDisciplinesRequest request = new(characterName)
-        {
-            MissingMemberBehavior = missingMemberBehavior,
-            AccessToken = accessToken
         };
         return request.SendAsync(http, cancellationToken);
     }

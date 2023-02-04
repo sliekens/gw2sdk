@@ -6,9 +6,7 @@ namespace GuildWars2.Tasks;
 
 internal static class InterleavedTask
 {
-    /// <summary>
-    /// Reorders tasks in order of their completion.
-    /// </summary>
+    /// <summary>Reorders tasks in order of their completion.</summary>
     /// <typeparam name="T">The type of the results produced by the input tasks.</typeparam>
     /// <param name="inputTasks">The tasks to reorder.</param>
     /// <returns>A stream of the values produced by the input tasks in the order of their completion.</returns>

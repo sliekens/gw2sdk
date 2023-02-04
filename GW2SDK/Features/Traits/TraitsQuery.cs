@@ -32,9 +32,7 @@ public sealed class TraitsQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<HashSet<int>>> GetTraitsIndex(
-        CancellationToken cancellationToken = default
-    )
+    public Task<Replica<HashSet<int>>> GetTraitsIndex(CancellationToken cancellationToken = default)
     {
         TraitsIndexRequest request = new();
         return request.SendAsync(http, cancellationToken);

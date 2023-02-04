@@ -9,8 +9,7 @@ internal sealed class RouteTable : IRenderable
 {
     private readonly Options options;
 
-    private readonly Table table = new Table()
-        .AddColumn("Route")
+    private readonly Table table = new Table().AddColumn("Route")
         .AddColumn("Authorization")
         .AddColumn("Localization")
         .MinimalBorder();
@@ -19,6 +18,12 @@ internal sealed class RouteTable : IRenderable
     {
         this.options = options;
     }
+
+    public Measurement Measure(RenderContext context, int maxWidth) =>
+        ((IRenderable)table).Measure(context, maxWidth);
+
+    public IEnumerable<Segment> Render(RenderContext context, int maxWidth) =>
+        ((IRenderable)table).Render(context, maxWidth);
 
     public void AddRoute(Route route, IReadOnlyCollection<string> languages)
     {
@@ -44,15 +49,5 @@ internal sealed class RouteTable : IRenderable
             route.RequiresAuthorization ? "Access token" : "⸻",
             route.Multilingual ? string.Join(", ", languages) : "⸻"
         );
-    }
-
-    public Measurement Measure(RenderContext context, int maxWidth)
-    {
-        return ((IRenderable)table).Measure(context, maxWidth);
-    }
-
-    public IEnumerable<Segment> Render(RenderContext context, int maxWidth)
-    {
-        return ((IRenderable)table).Render(context, maxWidth);
     }
 }

@@ -32,9 +32,7 @@ public sealed class QuestsQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<HashSet<int>>> GetQuestsIndex(
-        CancellationToken cancellationToken = default
-    )
+    public Task<Replica<HashSet<int>>> GetQuestsIndex(CancellationToken cancellationToken = default)
     {
         QuestsIndexRequest request = new();
         return request.SendAsync(http, cancellationToken);

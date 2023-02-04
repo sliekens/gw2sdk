@@ -10,8 +10,7 @@ internal static class Invariants
 
     internal static void Has_name(this Novelty actual) => Assert.NotEmpty(actual.Name);
 
-    internal static void Has_description(this Novelty actual) =>
-        Assert.NotNull(actual.Description);
+    internal static void Has_description(this Novelty actual) => Assert.NotNull(actual.Description);
 
     internal static void Has_icon(this Novelty actual) => Assert.NotEmpty(actual.Icon);
 

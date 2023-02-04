@@ -13,7 +13,11 @@ public class ContinentsIndex
 
         var actual = await sut.Maps.GetContinentsIndex();
 
-        Assert.Collection(actual.Value, tyria => Assert.Equal(1, tyria), mists => Assert.Equal(2, mists));
+        Assert.Collection(
+            actual.Value,
+            tyria => Assert.Equal(1, tyria),
+            mists => Assert.Equal(2, mists)
+        );
         Assert.Equal(actual.Value.Count, actual.ResultContext.ResultCount);
         Assert.Equal(actual.Value.Count, actual.ResultContext.ResultTotal);
     }

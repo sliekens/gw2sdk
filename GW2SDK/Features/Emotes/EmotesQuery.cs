@@ -19,6 +19,20 @@ public sealed class EmotesQuery
         http.BaseAddress ??= BaseAddress.DefaultUri;
     }
 
+    #region v2/account/emotes
+
+    [Scope(Permission.Progression, Permission.Unlocks)]
+    public Task<Replica<HashSet<string>>> GetUnlockedEmotes(
+        string? accessToken,
+        CancellationToken cancellationToken = default
+    )
+    {
+        var request = new UnlockedEmotesRequest { AccessToken = accessToken };
+        return request.SendAsync(http, cancellationToken);
+    }
+
+    #endregion
+
     #region v2/emotes
 
     public Task<Replica<HashSet<Emote>>> GetEmotes(
@@ -70,24 +84,6 @@ public sealed class EmotesQuery
         {
             PageSize = pageSize,
             MissingMemberBehavior = missingMemberBehavior
-        };
-        return request.SendAsync(http, cancellationToken);
-    }
-
-    #endregion
-
-    #region v2/account/emotes
-
-    [Scope(Permission.Progression, Permission.Unlocks)]
-
-    public Task<Replica<HashSet<string>>> GetUnlockedEmotes(
-        string? accessToken,
-        CancellationToken cancellationToken = default
-    )
-    {
-        var request = new UnlockedEmotesRequest
-        {
-            AccessToken = accessToken
         };
         return request.SendAsync(http, cancellationToken);
     }

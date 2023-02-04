@@ -8,7 +8,10 @@ namespace GuildWars2.Wvw.Upgrades;
 [PublicAPI]
 public static class UpgradeJson
 {
-    public static Upgrade GetUpgrade(this JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    public static Upgrade GetUpgrade(
+        this JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         RequiredMember<string> name = new("name");
         RequiredMember<string> description = new("description");

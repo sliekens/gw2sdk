@@ -9,8 +9,7 @@ using JetBrains.Annotations;
 namespace GuildWars2.Guilds.Permissions;
 
 [PublicAPI]
-public sealed class
-    GuildPermissionsRequest : IHttpRequest<Replica<HashSet<GuildPermissionSummary>>>
+public sealed class GuildPermissionsRequest : IHttpRequest<Replica<HashSet<GuildPermissionSummary>>>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(HttpMethod.Get, "v2/guild/permissions")

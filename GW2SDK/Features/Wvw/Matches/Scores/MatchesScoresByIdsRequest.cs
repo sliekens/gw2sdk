@@ -48,7 +48,8 @@ public sealed class MatchesScoresByIdsRequest : IHttpRequest<Replica<HashSet<Mat
             .ConfigureAwait(false);
         return new Replica<HashSet<MatchScores>>
         {
-            Value = json.RootElement.GetSet(entry => entry.GetMatchScores(MissingMemberBehavior)),
+            Value =
+                json.RootElement.GetSet(entry => entry.GetMatchScores(MissingMemberBehavior)),
             ResultContext = response.Headers.GetResultContext(),
             PageContext = response.Headers.GetPageContext(),
             Date = response.Headers.Date.GetValueOrDefault(),

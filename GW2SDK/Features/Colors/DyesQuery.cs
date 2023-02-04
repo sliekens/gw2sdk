@@ -50,9 +50,7 @@ public sealed class DyesQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<HashSet<int>>> GetColorsIndex(
-        CancellationToken cancellationToken = default
-    )
+    public Task<Replica<HashSet<int>>> GetColorsIndex(CancellationToken cancellationToken = default)
     {
         ColorsIndexRequest request = new();
         return request.SendAsync(http, cancellationToken);

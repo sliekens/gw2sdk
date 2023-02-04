@@ -34,9 +34,7 @@ public sealed class WorldsQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<HashSet<int>>> GetWorldsIndex(
-        CancellationToken cancellationToken = default
-    )
+    public Task<Replica<HashSet<int>>> GetWorldsIndex(CancellationToken cancellationToken = default)
     {
         WorldsIndexRequest request = new();
         return request.SendAsync(http, cancellationToken);

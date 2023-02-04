@@ -29,7 +29,8 @@ public class JsonItemPriceService
         return items;
     }
 
-    private async Task<HashSet<int>> GetItemPriceIds() => await new ItemPricesIndexRequest().SendAsync(http, CancellationToken.None);
+    private async Task<HashSet<int>> GetItemPriceIds() =>
+        await new ItemPricesIndexRequest().SendAsync(http, CancellationToken.None);
 
     public IAsyncEnumerable<string> GetJsonItemPricesById(
         IReadOnlyCollection<int> itemIds,

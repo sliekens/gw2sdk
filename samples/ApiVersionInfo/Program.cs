@@ -54,11 +54,13 @@ public class Program
 internal sealed class Options
 {
     public bool ShowDisabled { get; init; }
+
     public bool ShowAuthorized { get; init; }
 
-    public static Options Prompt() => new Options
-    {
-        ShowDisabled = AnsiConsole.Confirm("Show disabled routes?", false),
-        ShowAuthorized = AnsiConsole.Confirm("Show routes that require an account?")
-    };
+    public static Options Prompt() =>
+        new()
+        {
+            ShowDisabled = AnsiConsole.Confirm("Show disabled routes?", false),
+            ShowAuthorized = AnsiConsole.Confirm("Show routes that require an account?")
+        };
 }

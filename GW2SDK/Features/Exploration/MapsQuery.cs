@@ -27,6 +27,25 @@ public sealed class MapsQuery
         http.BaseAddress ??= BaseAddress.DefaultUri;
     }
 
+    #region v2/characters/:id/heropoints
+
+    /// <summary>Fetches the IDs of completed hero challenges.</summary>
+    /// <param name="characterName"></param>
+    /// <param name="accessToken"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public Task<Replica<HashSet<string>>> GetCompletedHeroChallenges(
+        string characterName,
+        string? accessToken,
+        CancellationToken cancellationToken = default
+    )
+    {
+        CompletedHeroChallengesRequest request = new(characterName) { AccessToken = accessToken };
+        return request.SendAsync(http, cancellationToken);
+    }
+
+    #endregion
+
     #region v2/continents
 
     public Task<Replica<HashSet<Continent>>> GetContinents(
@@ -696,30 +715,6 @@ public sealed class MapsQuery
             PageSize = pageSize,
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
-        };
-        return request.SendAsync(http, cancellationToken);
-    }
-
-    #endregion
-
-    #region v2/characters/:id/heropoints
-
-    /// <summary>
-    /// Fetches the IDs of completed hero challenges.
-    /// </summary>
-    /// <param name="characterName"></param>
-    /// <param name="accessToken"></param>
-    /// <param name="cancellationToken"></param>
-    /// <returns></returns>
-    public Task<Replica<HashSet<string>>> GetCompletedHeroChallenges(
-        string characterName,
-        string? accessToken,
-        CancellationToken cancellationToken = default
-    )
-    {
-        CompletedHeroChallengesRequest request = new(characterName)
-        {
-            AccessToken = accessToken
         };
         return request.SendAsync(http, cancellationToken);
     }

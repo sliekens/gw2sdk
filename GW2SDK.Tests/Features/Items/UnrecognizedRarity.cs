@@ -27,7 +27,10 @@ public class UnrecognizedRarity
 
         using var json = JsonDocument.Parse(text);
 
-        Item Act() => json.RootElement.GetItem(default);
+        Item Act()
+        {
+            return json.RootElement.GetItem(default);
+        }
 
         var actual = Assert.ThrowsAny<InvalidOperationException>(Act);
 

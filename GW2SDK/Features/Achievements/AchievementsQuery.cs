@@ -331,9 +331,7 @@ public sealed class AchievementsQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<HashSet<int>>> GetTitlesIndex(
-        CancellationToken cancellationToken = default
-    )
+    public Task<Replica<HashSet<int>>> GetTitlesIndex(CancellationToken cancellationToken = default)
     {
         TitlesIndexRequest request = new();
         return request.SendAsync(http, cancellationToken);

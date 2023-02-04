@@ -55,6 +55,26 @@ public sealed class AccountsQuery
 
     #endregion
 
+    #region v2/characters/:id/core
+
+    [Scope(Permission.Account, Permission.Characters)]
+    public Task<Replica<CharacterSummary>> GetCharacterSummary(
+        string characterName,
+        string? accessToken,
+        MissingMemberBehavior missingMemberBehavior = default,
+        CancellationToken cancellationToken = default
+    )
+    {
+        CharacterSummaryRequest request = new(characterName)
+        {
+            AccessToken = accessToken,
+            MissingMemberBehavior = missingMemberBehavior
+        };
+        return request.SendAsync(http, cancellationToken);
+    }
+
+    #endregion
+
     #region v2/characters
 
     [Scope(Permission.Account, Permission.Characters)]
@@ -100,24 +120,5 @@ public sealed class AccountsQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    #endregion
-
-    #region v2/characters/:id/core
-
-    [Scope(Permission.Account, Permission.Characters)]
-    public Task<Replica<CharacterSummary>> GetCharacterSummary(
-        string characterName,
-        string? accessToken,
-        MissingMemberBehavior missingMemberBehavior = default,
-        CancellationToken cancellationToken = default
-    )
-    {
-        CharacterSummaryRequest request = new(characterName)
-        {
-            AccessToken = accessToken,
-            MissingMemberBehavior = missingMemberBehavior
-        };
-        return request.SendAsync(http, cancellationToken);
-    }
     #endregion
 }

@@ -21,7 +21,10 @@ public class ImmutableDataTest : IClassFixture<AssemblyFixture>
             fixture.DataTransferObjects.SelectMany(type => type.GetProperties()),
             actual =>
             {
-                Assert.True(IsReadOnly(actual), $"{actual.DeclaringType?.Name}.{actual.Name} must be read-only or init-only.");
+                Assert.True(
+                    IsReadOnly(actual),
+                    $"{actual.DeclaringType?.Name}.{actual.Name} must be read-only or init-only."
+                );
             }
         );
 

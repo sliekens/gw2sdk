@@ -105,5 +105,5 @@ public sealed class ProfessionsQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    #endregion  
+    #endregion
 }

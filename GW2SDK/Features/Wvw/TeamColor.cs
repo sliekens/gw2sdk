@@ -8,7 +8,10 @@ namespace GuildWars2.Wvw;
 public enum TeamColor
 {
     Neutral,
+
     Blue,
+
     Red,
+
     Green
 }

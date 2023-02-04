@@ -16,16 +16,22 @@ public class UnlockedEmotes
 
         // Can be empty if you haven't unlocked any emotes
         // The best we can do is verify that there are no unexpected emotes
-        Assert.All(actual.Value, chest => Assert.Contains(chest, new[]
-        {
-            "Shiverplus",
-            "Stretch",
-            "geargrind",
-            "playdead",
-            "rockout",
-            "shiver",
-            "shuffle",
-            "step"
-        }));
+        Assert.All(
+            actual.Value,
+            chest => Assert.Contains(
+                chest,
+                new[]
+                {
+                    "Shiverplus",
+                    "Stretch",
+                    "geargrind",
+                    "playdead",
+                    "rockout",
+                    "shiver",
+                    "shuffle",
+                    "step"
+                }
+            )
+        );
     }
 }

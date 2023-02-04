@@ -13,8 +13,7 @@ public class CharacterTraining
         var character = Composer.Resolve<TestCharacter>();
         var accessToken = Composer.Resolve<ApiKey>();
 
-        var actual =
-            await sut.Professions.GetCharacterTraining(character.Name, accessToken.Key);
+        var actual = await sut.Professions.GetCharacterTraining(character.Name, accessToken.Key);
 
         Assert.NotEmpty(actual.Value.Training);
         Assert.All(actual.Value.Training, entry => Assert.NotEqual(0, entry.Spent));

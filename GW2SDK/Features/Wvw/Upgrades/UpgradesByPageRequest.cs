@@ -55,7 +55,10 @@ public sealed class UpgradesByPageRequest : IHttpRequest<Replica<HashSet<Objecti
             .ConfigureAwait(false);
         return new Replica<HashSet<ObjectiveUpgrade>>
         {
-            Value = json.RootElement.GetSet(entry => entry.GetObjectiveUpgrade(MissingMemberBehavior)),
+            Value =
+                json.RootElement.GetSet(
+                    entry => entry.GetObjectiveUpgrade(MissingMemberBehavior)
+                ),
             ResultContext = response.Headers.GetResultContext(),
             PageContext = response.Headers.GetPageContext(),
             Date = response.Headers.Date.GetValueOrDefault(),

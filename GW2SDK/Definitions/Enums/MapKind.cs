@@ -27,5 +27,5 @@ public enum MapKind
 
     GreenHome,
 
-    EdgeOfTheMists,
+    EdgeOfTheMists
 }

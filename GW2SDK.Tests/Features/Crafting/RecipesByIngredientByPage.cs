@@ -1,5 +1,4 @@
-﻿using System.Drawing.Printing;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using GuildWars2.Tests.TestInfrastructure;
 using Xunit;
 
@@ -14,7 +13,8 @@ public class RecipesByIngredientByPage
 
         const int visionCrystal = 46746;
         const int pageSize = 3;
-        var actual = await sut.Crafting.GetRecipesByIngredientItemIdByPage(visionCrystal, 0, pageSize);
+        var actual =
+            await sut.Crafting.GetRecipesByIngredientItemIdByPage(visionCrystal, 0, pageSize);
 
         Assert.Equal(pageSize, actual.Value.Count);
         Assert.Equal(pageSize, actual.Value.Count);
