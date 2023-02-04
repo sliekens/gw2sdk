@@ -6,9 +6,9 @@ using JetBrains.Annotations;
 namespace GuildWars2.Raids;
 
 [PublicAPI]
-public static class RaidWingEventJson
+public static class EncounterJson
 {
-    public static Encounter GetRaidWingEvent(
+    public static Encounter GetEncounter(
         this JsonElement json,
         MissingMemberBehavior missingMemberBehavior
     )
