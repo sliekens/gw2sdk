@@ -1,8 +1,10 @@
-﻿namespace GuildWars2.Tests.TestInfrastructure;
+﻿#if NET48
+using System.Collections.Generic;
+
+namespace GuildWars2.Tests.TestInfrastructure;
 
 internal static class Polyfills
 {
-#if NET48
     public static void Deconstruct<TKey, TValue>(
         this KeyValuePair<TKey, TValue> kvp,
         out TKey key,
@@ -12,5 +14,5 @@ internal static class Polyfills
         key = kvp.Key;
         value = kvp.Value;
     }
-#endif
 }
+#endif
