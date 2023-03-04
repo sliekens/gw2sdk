@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using GuildWars2.Meta;
 using Spectre.Console;
@@ -13,11 +13,11 @@ internal sealed class ReleaseNoteTable : IRenderable
         .AddColumn("Description")
         .MinimalBorder();
 
-    public Measurement Measure(RenderContext context, int maxWidth) =>
-        ((IRenderable)table).Measure(context, maxWidth);
+    public Measurement Measure(RenderOptions options, int maxWidth) =>
+        ((IRenderable)table).Measure(options, maxWidth);
 
-    public IEnumerable<Segment> Render(RenderContext context, int maxWidth) =>
-        ((IRenderable)table).Render(context, maxWidth);
+    public IEnumerable<Segment> Render(RenderOptions options, int maxWidth) =>
+        ((IRenderable)table).Render(options, maxWidth);
 
     public void AddRow(Schema schemaVersion)
     {

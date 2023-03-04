@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using GuildWars2.Meta;
 using Spectre.Console;
 using Spectre.Console.Rendering;
@@ -7,32 +7,32 @@ namespace ApiVersionInfo;
 
 internal sealed class RouteTable : IRenderable
 {
-    private readonly Options options;
+    private readonly RouteOptions routeOptions;
 
     private readonly Table table = new Table().AddColumn("Route")
         .AddColumn("Authorization")
         .AddColumn("Localization")
         .MinimalBorder();
 
-    public RouteTable(Options options)
+    public RouteTable(RouteOptions routeOptions)
     {
-        this.options = options;
+        this.routeOptions = routeOptions;
     }
 
-    public Measurement Measure(RenderContext context, int maxWidth) =>
-        ((IRenderable)table).Measure(context, maxWidth);
+    public Measurement Measure(RenderOptions options, int maxWidth) =>
+        ((IRenderable)table).Measure(options, maxWidth);
 
-    public IEnumerable<Segment> Render(RenderContext context, int maxWidth) =>
-        ((IRenderable)table).Render(context, maxWidth);
+    public IEnumerable<Segment> Render(RenderOptions options, int maxWidth) =>
+        ((IRenderable)table).Render(options, maxWidth);
 
     public void AddRoute(Route route, IReadOnlyCollection<string> languages)
     {
-        if (route.RequiresAuthorization && !options.ShowAuthorized)
+        if (route.RequiresAuthorization && !routeOptions.ShowAuthorized)
         {
             return;
         }
 
-        if (!route.Active && !options.ShowDisabled)
+        if (!route.Active && !routeOptions.ShowDisabled)
         {
             return;
         }
