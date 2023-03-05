@@ -13,7 +13,7 @@ public static class MaterialStorageJson
         List<MaterialSlot> slots = new(json.GetArrayLength());
 
         slots.AddRange(
-            json.EnumerateArray().Select(entry => entry.GetCraftingMaterial(missingMemberBehavior))
+            json.EnumerateArray().Select(entry => entry.GetMaterialSlot(missingMemberBehavior))
         );
 
         return new MaterialStorage(slots);
