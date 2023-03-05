@@ -30,16 +30,9 @@ public static class SplitQuery
 {
     public static SplitQuery<TKey, TRecord> Create<TKey, TRecord>(
         InQuery<TKey, TRecord> query,
-        IProgress<ResultContext>? progress,
         int maxConcurrency = 20
     ) =>
-        new(query, progress, maxConcurrency);
-
-    public static SplitQuery<TKey, TRecord> Create<TKey, TRecord>(
-        InQuery<TKey, TRecord> query,
-        int maxConcurrency = 20
-    ) =>
-        new(query, default, maxConcurrency);
+        new(query, maxConcurrency);
 }
 
 /// <summary>Helps you retrieve all records in a given index by splitting it into smaller chunks before quering. This is
@@ -49,24 +42,21 @@ public sealed class SplitQuery<TKey, TRecord>
 {
     private readonly int maxConcurrency;
 
-    private readonly IProgress<ResultContext>? progress;
-
     private readonly InQuery<TKey, TRecord> query;
 
     internal SplitQuery(
         InQuery<TKey, TRecord> query,
-        IProgress<ResultContext>? progress,
         int maxConcurrency
     )
     {
         this.query = query;
-        this.progress = progress;
         this.maxConcurrency = Math.Max(1, maxConcurrency);
     }
 
     public async IAsyncEnumerable<TRecord> QueryAsync(
         IReadOnlyCollection<TKey> index,
         int bufferSize = 200,
+        IProgress<ResultContext>? progress = default,
         [EnumeratorCancellation] CancellationToken cancellationToken = default
     )
     {
@@ -85,13 +75,13 @@ public sealed class SplitQuery<TKey, TRecord>
             );
         }
 
-        ReportProgress(resultTotal, 0);
+        progress?.Report(new ResultContext(resultTotal, 0));
 
         // PERF: no need to split if index is small enough
         if (index.Count <= bufferSize)
         {
             var result = await query(index, cancellationToken).ConfigureAwait(false);
-            ReportProgress(resultTotal, result.Count);
+            progress?.Report(new ResultContext(resultTotal, result.Count));
             foreach (var record in result)
             {
                 cancellationToken.ThrowIfCancellationRequested();
@@ -118,7 +108,7 @@ public sealed class SplitQuery<TKey, TRecord>
                 .WithCancellation(cancellationToken))
             {
                 resultCount += result.Count;
-                ReportProgress(resultTotal, resultCount);
+                progress?.Report(new ResultContext(resultTotal, resultCount));
                 foreach (var record in result)
                 {
                     cancellationToken.ThrowIfCancellationRequested();
@@ -153,7 +143,4 @@ public sealed class SplitQuery<TKey, TRecord>
             yield return new HashSet<TKey>(subset);
         }
     }
-
-    private void ReportProgress(int resultTotal, int resultCount) =>
-        progress?.Report(new ResultContext(resultTotal, resultCount));
 }

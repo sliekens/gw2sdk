@@ -58,10 +58,9 @@ public sealed class ItemsQuery
                 };
                 var response = await request.SendAsync(http, ct).ConfigureAwait(false);
                 return response.Value;
-            },
-            progress
+            }
         );
-        return producer.QueryAsync(itemIds, cancellationToken: cancellationToken);
+        return producer.QueryAsync(itemIds, progress: progress, cancellationToken: cancellationToken);
     }
 
     public Task<Replica<HashSet<Item>>> GetItemsByPage(

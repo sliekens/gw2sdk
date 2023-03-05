@@ -140,11 +140,10 @@ public sealed class CraftingQuery
                 };
                 var response = await request.SendAsync(http, ct).ConfigureAwait(false);
                 return response.Value;
-            },
-            progress
+            }
         );
 
-        return producer.QueryAsync(recipeIds, cancellationToken: cancellationToken);
+        return producer.QueryAsync(recipeIds, progress: progress, cancellationToken: cancellationToken);
     }
 
     public Task<Replica<HashSet<Recipe>>> GetRecipesByPage(

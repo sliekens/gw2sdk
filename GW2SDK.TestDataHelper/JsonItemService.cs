@@ -50,9 +50,8 @@ public class JsonItemService
                             ?? throw new InvalidOperationException("Unexpected null in JSON array.")
                     )
                     .ToList();
-            },
-            progress
+            }
         );
-        return producer.QueryAsync(itemIds, cancellationToken: cancellationToken);
+        return producer.QueryAsync(itemIds, progress: progress, cancellationToken: cancellationToken);
     }
 }

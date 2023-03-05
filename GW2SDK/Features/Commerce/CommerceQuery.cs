@@ -83,11 +83,10 @@ public sealed class CommerceQuery
                 };
                 var response = await request.SendAsync(http, ct).ConfigureAwait(false);
                 return response.Value;
-            },
-            progress
+            }
         );
 
-        return producer.QueryAsync(itemIds, cancellationToken: cancellationToken);
+        return producer.QueryAsync(itemIds, progress: progress, cancellationToken: cancellationToken);
     }
 
     public async IAsyncEnumerable<ItemPrice> GetItemPrices(
@@ -151,11 +150,10 @@ public sealed class CommerceQuery
                 };
                 var response = await request.SendAsync(http, ct).ConfigureAwait(false);
                 return response.Value;
-            },
-            progress
+            }
         );
 
-        return producer.QueryAsync(itemIds, cancellationToken: cancellationToken);
+        return producer.QueryAsync(itemIds, progress: progress, cancellationToken: cancellationToken);
     }
 
     public async IAsyncEnumerable<OrderBook> GetOrderBooks(
