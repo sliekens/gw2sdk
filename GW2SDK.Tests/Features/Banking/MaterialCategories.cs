@@ -4,19 +4,18 @@ using Xunit;
 
 namespace GuildWars2.Tests.Features.Banking;
 
-public class MaterialCategoriesByPage
+public class MaterialCategories
 {
     [Fact]
-    public async Task Can_be_filtered_by_page()
+    public async Task Can_be_enumerated()
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        const int pageSize = 3;
-        var actual = await sut.Bank.GetMaterialCategoriesByPage(0, pageSize);
+        var actual = await sut.Bank.GetMaterialCategories();
 
-        Assert.Equal(pageSize, actual.Value.Count);
-        Assert.Equal(pageSize, actual.PageContext.PageSize);
-        Assert.Equal(pageSize, actual.ResultContext.ResultCount);
+        Assert.NotEmpty(actual.Value);
+        Assert.Equal(actual.Value.Count, actual.ResultContext.ResultCount);
+        Assert.Equal(actual.Value.Count, actual.ResultContext.ResultTotal);
         Assert.All(
             actual.Value,
             entry =>

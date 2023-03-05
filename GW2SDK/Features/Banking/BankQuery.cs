@@ -19,6 +19,8 @@ public sealed class BankQuery
         http.BaseAddress ??= BaseAddress.DefaultUri;
     }
 
+    #region v2/account/bank
+
     [Scope(Permission.Inventories)]
     public Task<Replica<Bank>> GetBank(
         string? accessToken,
@@ -33,6 +35,10 @@ public sealed class BankQuery
         };
         return request.SendAsync(http, cancellationToken);
     }
+
+    #endregion
+
+    #region v2/materials
 
     public Task<Replica<HashSet<MaterialCategory>>> GetMaterialCategories(
         Language? language = default,
@@ -102,4 +108,6 @@ public sealed class BankQuery
         };
         return request.SendAsync(http, cancellationToken);
     }
+
+    #endregion
 }
