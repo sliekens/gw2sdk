@@ -38,6 +38,25 @@ public sealed class BankQuery
 
     #endregion
 
+    #region v2/account/materials
+
+    [Scope(Permission.Inventories)]
+    public Task<Replica<MaterialStorage>> GetMaterialStorage(
+        string? accessToken,
+        MissingMemberBehavior missingMemberBehavior = default,
+        CancellationToken cancellationToken = default
+    )
+    {
+        MaterialStorageRequest request = new()
+        {
+            AccessToken = accessToken,
+            MissingMemberBehavior = missingMemberBehavior
+        };
+        return request.SendAsync(http, cancellationToken);
+    }
+
+    #endregion
+
     #region v2/materials
 
     public Task<Replica<HashSet<MaterialCategory>>> GetMaterialCategories(
