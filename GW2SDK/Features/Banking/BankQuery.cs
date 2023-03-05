@@ -85,4 +85,21 @@ public sealed class BankQuery
         };
         return request.SendAsync(http, cancellationToken);
     }
+
+    public Task<Replica<HashSet<MaterialCategory>>> GetMaterialCategoriesByPage(
+        int pageIndex,
+        int? pageSize = default,
+        Language? language = default,
+        MissingMemberBehavior missingMemberBehavior = default,
+        CancellationToken cancellationToken = default
+    )
+    {
+        MaterialCategoriesByPageRequest request = new(pageIndex)
+        {
+            PageSize = pageSize,
+            Language = language,
+            MissingMemberBehavior = missingMemberBehavior
+        };
+        return request.SendAsync(http, cancellationToken);
+    }
 }
