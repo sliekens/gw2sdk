@@ -1,181 +1,30 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using System.Net.Http;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Net.Http;
 using GuildWars2;
-using GuildWars2.Crafting;
-using GuildWars2.Items;
+using MostVersatileMaterials;
 using Spectre.Console;
 
-namespace MostVersatileMaterials;
+using var http = new HttpClient();
+var gw2 = new Gw2Client(http);
+var referenceData = await ReferenceData.Fetch(gw2);
 
-internal class Program
+do
 {
-    static Program()
-    {
-        Console.OutputEncoding = Encoding.UTF8;
-        CultureInfo.CurrentCulture = CultureInfo.GetCultureInfo("en");
-        CultureInfo.CurrentUICulture = CultureInfo.GetCultureInfo("en");
-    }
+    AnsiConsole.Clear();
 
-    private static async Task Main()
-    {
-        using var http = new HttpClient();
-        var gw2 = new Gw2Client(http);
+    var ingredient = ItemPicker.Prompt(referenceData.Ingredients);
 
-        var (ingredients, recipes) = await Progress()
-            .StartAsync(
-                async ctx =>
-                {
-                    var recipesProgress = ctx.AddTask(
-                        "Fetching recipes",
-                        new ProgressTaskSettings { AutoStart = false }
-                    );
-                    var ingredientsProgress = ctx.AddTask(
-                        "Fetching ingredients",
-                        new ProgressTaskSettings { AutoStart = false }
-                    );
+    var card = new ItemCard(http);
+    await card.Show(ingredient);
 
-                    var craftingRecipes = await GetRecipes(gw2.Crafting, recipesProgress);
-
-                    var groupedByIngredient = craftingRecipes
-                        .SelectMany(
-                            recipe => recipe.Ingredients
-                                .Where(ingredient => ingredient.Kind == IngredientKind.Item)
-                                .Select(ingredient => (Ingredient: ingredient.Id, Recipe: recipe))
-                        )
-                        .ToLookup(grouping => grouping.Ingredient, grouping => grouping.Recipe);
-
-                    var ingredientIndex = groupedByIngredient.Select(grouping => grouping.Key)
-                        .ToHashSet();
-
-                    var craftingIngredients = await GetItems(
-                        ingredientIndex,
-                        gw2.Items,
-                        ingredientsProgress
-                    );
-
-                    var ingredientsById = craftingIngredients.ToDictionary(item => item.Id);
-
-                    var mostCommon = groupedByIngredient
-                        .OrderByDescending(grouping => grouping.Count())
-                        .Select(grouping => ingredientsById[grouping.Key])
-                        .ToList();
-
-                    return (Ingredients: mostCommon, Craftable: groupedByIngredient);
-                }
-            );
-
-        do
+    var recipesTable = new RecipesTable();
+    AnsiConsole.Live(recipesTable).Start(
+        live =>
         {
-            AnsiConsole.Clear();
-
-            var choice = AnsiConsole.Prompt(
-                new SelectionPrompt<Item>().Title("Pick an ingredient to see the available recipes")
-                    .MoreChoicesText("Scroll down for less commonly used ingredients")
-                    .AddChoices(ingredients)
-                    .UseConverter(item => item.Name)
-                    .PageSize(20)
-            );
-
-            await using var ingredientIcon = await http.GetStreamAsync(choice.Icon!);
-            var choiceTable = new Table().AddColumn("Icon")
-                .AddColumn("Ingredient")
-                .AddColumn("Description");
-
-            choiceTable.AddRow(
-                new CanvasImage(ingredientIcon).MaxWidth(32),
-                new Markup(choice.Name.EscapeMarkup()),
-                new Markup(choice.Description.EscapeMarkup())
-            );
-
-            AnsiConsole.Write(choiceTable);
-
-            var outputs = await Progress()
-                .StartAsync(
-                    async ctx =>
-                    {
-                        var itemIds = recipes[choice.Id]
-                            .Select(recipe => recipe.OutputItemId)
-                            .ToHashSet();
-                        return await GetItems(
-                            itemIds,
-                            gw2.Items,
-                            ctx.AddTask("Fetching output items")
-                        );
-                    }
-                );
-
-            var recipesTable = new Table().AddColumn("Recipe").AddColumn("Description");
-
-            foreach (var recipe in outputs)
+            foreach (var recipe in referenceData.OutputsByIngredient[ingredient.Id])
             {
-                recipesTable.AddRow(recipe.Name.EscapeMarkup(), recipe.Description.EscapeMarkup());
+                recipesTable.AddRow(recipe);
+                live.Refresh();
             }
-
-            AnsiConsole.Write(recipesTable);
-        } while (AnsiConsole.Confirm("Do you want to choose again?"));
-    }
-
-    private static Progress Progress() =>
-        AnsiConsole.Progress()
-            .Columns(
-                new TaskDescriptionColumn(),
-                new ProgressBarColumn(),
-                new PercentageColumn(),
-                new RemainingTimeColumn(),
-                new SpinnerColumn()
-            );
-
-    private static async Task<List<Recipe>> GetRecipes(
-        CraftingQuery craftingQuery,
-        ProgressTask progress
-    )
-    {
-        progress.StartTask();
-        try
-        {
-            return await craftingQuery
-                .GetRecipes(
-                    progress: new Progress<ResultContext>(ctx => UpdateProgress(ctx, progress))
-                )
-                .OrderByDescending(recipe => recipe.Id)
-                .ToListAsync();
         }
-        finally
-        {
-            progress.StopTask();
-        }
-    }
-
-    private static async Task<List<Item>> GetItems(
-        IReadOnlyCollection<int> itemIds,
-        ItemsQuery itemsQuery,
-        ProgressTask progress
-    )
-    {
-        var items = new List<Item>(itemIds.Count);
-
-        progress.StartTask();
-        await foreach (var item in itemsQuery.GetItemsByIds(
-                itemIds,
-                progress: new Progress<ResultContext>(ctx => UpdateProgress(ctx, progress))
-            ))
-        {
-            items.Add(item);
-        }
-
-        progress.StopTask();
-
-        return items;
-    }
-
-    private static void UpdateProgress(ResultContext ctx, ProgressTask progressTask)
-    {
-        progressTask.MaxValue(ctx.ResultTotal);
-        progressTask.Increment(200);
-    }
-}
+    );
+} while (AnsiConsole.Confirm("Do you want to choose again?"));
