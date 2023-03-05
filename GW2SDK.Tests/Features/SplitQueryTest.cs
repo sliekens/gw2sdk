@@ -82,7 +82,7 @@ public class SplitQueryTest
     public async Task It_can_skip_buffering_if_the_index_is_small_enough()
     {
         // Simulate 100 records
-        var index = Enumerable.Range(1, 1000).ToHashSet();
+        var index = Enumerable.Range(1, 100).ToHashSet();
         var records = index.Select(id => new StubRecord(id)).ToList();
 
         var sut = SplitQuery.Create<int, StubRecord>(
