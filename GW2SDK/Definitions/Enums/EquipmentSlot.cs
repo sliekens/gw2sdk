@@ -37,15 +37,21 @@ public enum EquipmentSlot
 
     Sickle,
 
+    /// <summary>Primary main hand.</summary>
     WeaponA1,
 
+    /// <summary>Primary off-hand.</summary>
     WeaponA2,
 
+    /// <summary>Primary aquatic weapon.</summary>
     WeaponAquaticA,
 
+    /// <summary>Secondary aquatic weapon.</summary>
     WeaponAquaticB,
 
+    /// <summary>Secondary main hand.</summary>
     WeaponB1,
 
+    /// <summary>Secondary off-hand.</summary>
     WeaponB2
 }
