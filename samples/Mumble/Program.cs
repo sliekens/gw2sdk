@@ -7,7 +7,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using GuildWars2;
 using GuildWars2.Exploration.Maps;
-using GuildWars2.Mumble;
 using GuildWars2.Specializations;
 
 Console.OutputEncoding = Encoding.UTF8;
@@ -21,7 +20,7 @@ if (!GameLink.IsSupported())
 }
 
 var cts = new CancellationTokenSource();
-Console.CancelKeyPress += (sender, args) =>
+Console.CancelKeyPress += (_, args) =>
 {
     cts.Cancel();
     args.Cancel = true; // don't terminate the app
@@ -33,7 +32,7 @@ HashSet<Map> maps = await gw2.Maps.GetMaps(cancellationToken: cts.Token);
 HashSet<Specialization> specializations =
     await gw2.Specializations.GetSpecializations(cancellationToken: cts.Token);
 
-var gameObserver = new GameObserver(cts.Token);
+var gameObserver = new GameReporter();
 foreach (var map in maps)
 {
     gameObserver.Maps[map.Id] = map;
@@ -47,93 +46,7 @@ foreach (var specialization in specializations)
 using var gameLink = GameLink.Open();
 using var subscription = gameLink.Subscribe(gameObserver);
 
-try
+while (!cts.IsCancellationRequested)
 {
-    await gameObserver.Observations.ConfigureAwait(false);
-}
-catch (OperationCanceledException)
-{
-    Console.WriteLine("Ctrl+C");
-}
-finally
-{
-    Console.WriteLine("Goodbye.");
-}
-
-public class GameObserver : IObserver<Snapshot>
-{
-    private readonly TaskCompletionSource tcs = new();
-
-    public GameObserver(CancellationToken cancellationToken)
-    {
-        cancellationToken.Register(() => tcs.TrySetCanceled());
-    }
-
-    public Task Observations => tcs.Task;
-
-    public Dictionary<int, Map> Maps { get; } = new();
-
-    public Dictionary<int, Specialization> Specializations { get; } = new();
-
-    public void OnCompleted() => tcs.TrySetResult();
-
-    public void OnError(Exception error) => tcs.TrySetException(error);
-
-    public void OnNext(Snapshot snapshot) => ThreadPool.QueueUserWorkItem(CallBack, snapshot);
-
-    private void CallBack(object state)
-    {
-        var snapshot = (Snapshot)state;
-        var pos = snapshot.AvatarPosition;
-
-        if (!snapshot.TryGetIdentity(out var identity, MissingMemberBehavior.Error))
-        {
-            return;
-        }
-
-        if (!snapshot.TryGetContext(out var context))
-        {
-            return;
-        }
-
-        var specialization = "no specialization";
-        if (Specializations.TryGetValue(identity.SpecializationId, out var found))
-        {
-            specialization = found.Name;
-        }
-
-        var map = Maps[identity.MapId];
-        var activity = "traveling";
-        if (!context.UiState.HasFlag(UiState.GameHasFocus))
-        {
-            activity = "afk-ing";
-        }
-        else if (context.UiState.HasFlag(UiState.TextboxHasFocus))
-        {
-            activity = "typing";
-        }
-        else if (context.UiState.HasFlag(UiState.IsMapOpen))
-        {
-            activity = "looking at the map";
-        }
-        else if (context.UiState.HasFlag(UiState.IsInCombat))
-        {
-            activity = "in combat";
-        }
-
-        Console.WriteLine(
-            "[{0}] {1}, the {2} {3} ({4}) is {5} on {6} in {7}, Position: {{ Right = {8}, Up = {9}, Front = {10} }}",
-            snapshot.UiTick,
-            identity.Name,
-            identity.Race,
-            identity.Profession,
-            specialization,
-            activity,
-            context.IsMounted ? context.GetMount() : "foot",
-            map.Name,
-            pos[0],
-            pos[1],
-            pos[2]
-        );
-    }
+    await Task.Delay(100);
 }

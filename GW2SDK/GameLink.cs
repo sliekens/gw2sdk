@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Buffers;
 using System.Collections.Generic;
-using System.IO.MemoryMappedFiles;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Timers;
@@ -17,47 +15,41 @@ namespace GuildWars2
     [PublicAPI]
     public sealed class GameLink : IDisposable, IObservable<Snapshot>
     {
-        public const int Length = 0x2000;
+        /// <summary>The smallest allowed polling interval.</summary>
+        public readonly TimeSpan MinimumRefreshInterval = TimeSpan.FromMilliseconds(1d);
 
-        private readonly byte[] buffer;
+        /// <summary>Represents the memory-mapped file used by the game client.</summary>
+        private readonly MumbleLink mumbleLink;
 
-        private readonly nint bufferAddress;
-
-        private readonly MemoryMappedViewStream content;
-
-        private readonly MemoryMappedFile file;
-
-        private readonly byte[] integrityBuffer;
-
+        /// <summary>A list of observers who want to receive values.</summary>
         private readonly List<IObserver<Snapshot>> subscribers = new();
 
+        /// <summary>We don't get notified when the shared memory is updated, so we use a Timer to poll for changes.</summary>
         private readonly Timer timer;
 
-        private GCHandle bufferHandle;
+        /// <summary>The tick of the last snapshot that was published to observers.</summary>
+        private long lastTick = -1;
 
-        private long lastIssued = -1;
-
-        private GameLink(MemoryMappedFile file, TimeSpan refreshRate)
+        private GameLink(MumbleLink mumbleLink, TimeSpan refreshInterval)
         {
-            this.file = file;
-            var safeInterval = TimeSpan.FromMilliseconds(1);
-            var interval = refreshRate < safeInterval ? safeInterval : refreshRate;
-            timer = new Timer(interval.TotalMilliseconds)
+            this.mumbleLink = mumbleLink;
+            timer = new Timer(
+                Math.Max(
+                    refreshInterval.TotalMilliseconds,
+                    MinimumRefreshInterval.TotalMilliseconds
+                )
+            )
             {
                 AutoReset = false,
                 Enabled = false
             };
-            timer.Elapsed += Publish;
-            timer.Disposed += RealDispose;
-            content = file.CreateViewStream(0, Length, MemoryMappedFileAccess.Read);
-            buffer = ArrayPool<byte>.Shared.Rent(Length);
-            integrityBuffer = ArrayPool<byte>.Shared.Rent(Length);
-            bufferHandle = GCHandle.Alloc(buffer, GCHandleType.Pinned);
-            bufferAddress = bufferHandle.AddrOfPinnedObject();
+            timer.Elapsed += (_, _) => Publish();
+            timer.Disposed += (_, _) => mumbleLink.Dispose();
         }
 
         public void Dispose()
         {
+            subscribers.Clear();
             timer.Stop();
             timer.Dispose();
         }
@@ -69,34 +61,34 @@ namespace GuildWars2
                 subscribers.Add(observer);
             }
 
-            Subscription subscription = new();
-            subscription.Unsubscribed += (_, _) =>
+            if (!timer.Enabled)
             {
-                subscribers.Remove(observer);
-            };
+                timer.Start();
+            }
 
-            timer.Start();
-            return subscription;
+            return new Subscription(() => subscribers.Remove(observer));
         }
 
-        private void Publish(object? sender, ElapsedEventArgs e)
+        private void Publish()
         {
+            if (subscribers.Count == 0)
+            {
+                return;
+            }
+
             try
             {
                 var snapshot = GetSnapshot();
-                if (snapshot.UiTick != lastIssued)
+                if (snapshot.UiTick != lastTick)
                 {
-                    lastIssued = snapshot.UiTick;
+                    lastTick = snapshot.UiTick;
                     foreach (var subscriber in subscribers.ToList())
                     {
                         subscriber.OnNext(snapshot);
                     }
                 }
 
-                if (subscribers.Count != 0)
-                {
-                    timer.Start();
-                }
+                timer.Start();
             }
             catch (Exception reason)
             {
@@ -107,15 +99,6 @@ namespace GuildWars2
 
                 subscribers.Clear();
             }
-        }
-
-        private void RealDispose(object? sender, EventArgs e)
-        {
-            content.Dispose();
-            file.Dispose();
-            bufferHandle.Free();
-            ArrayPool<byte>.Shared.Return(integrityBuffer);
-            ArrayPool<byte>.Shared.Return(buffer);
         }
 
 #if NET
@@ -135,76 +118,17 @@ namespace GuildWars2
 #if NET
         [SupportedOSPlatform("windows")]
 #endif
-        public static GameLink Open(TimeSpan refreshRate = default, string? name = "MumbleLink")
+        public static GameLink Open(TimeSpan refreshInterval = default, string name = "MumbleLink")
         {
             if (!IsSupported())
             {
                 throw new PlatformNotSupportedException("Link is only supported on Windows.");
             }
 
-            name ??= "MumbleLink";
-            const long size = Length;
-            var file = MemoryMappedFile.CreateOrOpen(name, size, MemoryMappedFileAccess.ReadWrite);
-            return new GameLink(file, refreshRate);
+            var link = MumbleLink.CreateOrOpen(name);
+            return new GameLink(link, refreshInterval);
         }
 
-        public Snapshot GetSnapshot()
-        {
-            // First buffer the entire content
-            // Then buffer the entire content again to check for integrity errors
-            // Note the need to specify the length because we use pooled arrays
-            var next = buffer.AsSpan(0, Length);
-            var control = integrityBuffer.AsSpan(0, Length);
-
-            BufferContent(buffer);
-
-            // This check is designed to detect dirty reads
-            // Read the memory mapped file again and again, until we get the same result 5 times in a row
-            // The number 5 seems magic but that's the minimum number of checks before I stopped getting invalid results
-            for (var samenessCount = 0; samenessCount < 4; samenessCount++)
-            {
-                BufferContent(integrityBuffer);
-                if (!next.SequenceEqual(control))
-                {
-                    // Change detected so replace the buffer with the latest contents of the memory mapped file, then reset the sameness counter
-                    control.CopyTo(next);
-                    samenessCount = 0;
-                }
-            }
-
-            return Marshal.PtrToStructure<Snapshot>(bufferAddress);
-        }
-
-        private void BufferContent(byte[] destination)
-        {
-            try
-            {
-                // Note the need to specify the length because we use pooled arrays
-#if NET
-                var buffered = content.Read(destination.AsSpan(0, Length));
-
-#else
-                var buffered = content.Read(destination, 0, Length);
-#endif
-                if (buffered != Length)
-                {
-                    throw new InvalidOperationException(
-                        $"Expected {Length} bytes but received {buffered}. This can happen when GetSnapshot is called concurrently because this class is not thread-safe. Synchronize access to GetSnapshot, or use multiple instances of GameLink to avoid this error."
-                    );
-                }
-            }
-            finally
-            {
-                // Reset the view stream for the next usage
-                content.Position = 0;
-            }
-        }
-
-        private class Subscription : IDisposable
-        {
-            public void Dispose() => Unsubscribed?.Invoke(this, EventArgs.Empty);
-
-            public event EventHandler? Unsubscribed;
-        }
+        public Snapshot GetSnapshot() => mumbleLink.GetValue<Snapshot>();
     }
 }
