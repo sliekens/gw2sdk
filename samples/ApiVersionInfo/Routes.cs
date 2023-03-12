@@ -71,8 +71,6 @@ internal static class Routes
         //"/v2/characters/:id/quests",
         "/v2/characters/:id/recipes",
         "/v2/characters/:id/sab",
-        //"/v2/characters/:id/skills",
-        //"/v2/characters/:id/specializations",
         "/v2/characters/:id/training",
         "/v2/colors",
         "/v2/commerce/delivery",
@@ -163,5 +161,20 @@ internal static class Routes
         "/v2/wvw/upgrades"
     };
 
+    private static readonly IReadOnlySet<string> Problematic = new HashSet<string>
+    {
+        // Superseded by /v2/characters/:id/buildtabs, the old skills and specializations might be wrong
+        "/v2/characters/:id/skills",
+        "/v2/characters/:id/specializations",
+
+        // WvW endpoints return nothing
+        "/v2/wvw/matches/stats/:id/guilds/:guild_id",
+        "/v2/wvw/matches/stats/:id/teams/:team/top/kdr",
+        "/v2/wvw/matches/stats/:id/teams/:team/top/kills"
+    };
+
     public static bool IsSupported(Route route) => Supported.Contains(route.Path);
+
+    public static bool IsProblematic(Route route) => Problematic.Contains(route.Path);
+
 }

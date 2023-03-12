@@ -41,6 +41,7 @@ internal sealed class RouteTable : IRenderable
         {
             false => ":no_entry: [dim bold]{0}[/]",
             true when Routes.IsSupported(route) => ":rocket: [bold blue]{0}[/]",
+            true when Routes.IsProblematic(route) => ":bug: [dim]{0}[/]",
             _ => ":construction: {0}"
         };
 
