@@ -32,7 +32,7 @@ jobs:
         password: ${{ secrets.GITHUB_TOKEN }}
         
     - run: npm install -g @vscode/dev-container-cli
-    - run: chmod +x ./.devcontainer/use-dockerfile && ./.devcontainer/use-dockerfile
+    - run: ./.devcontainer/use-dockerfile.sh
       shell: bash
     - run: devcontainer build --image-name ghcr.io/sliekens/gw2sdk/devcontainer --push
         
