@@ -1,15 +1,16 @@
 {
   "name": "GW2SDK",
-  "image": "ghcr.io/sliekens/gw2sdk/devcontainer:latest",
-  "settings": {
-    "omnisharp.useModernNet": true
+  "image": "ghcr.io/sliekens/gw2sdk/devcontainer",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-dotnettools.csharp",
+        "ms-azuretools.vscode-docker"
+      ]
+    }
   },
-  "extensions": [
-    "ms-dotnettools.csharp",
-    "ms-azuretools.vscode-docker"
-  ],
   "initializeCommand": [ ".devcontainer/initialize-host" ],
-  "postCreateCommand": [ ".devcontainer/post-create" ],
+  "postCreateCommand": [ ".devcontainer/post-create.sh" ],
   "mounts": [
     "type=bind,source=/var/run/docker.sock,target=/var/run/docker-host.sock",
     "type=volume,source=gw2sdk-extensions,target=/home/vscode/.vscode-server/extensions",
