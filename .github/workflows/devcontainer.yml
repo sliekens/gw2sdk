@@ -35,4 +35,4 @@ jobs:
         run: npm install -g @devcontainers/cli
 
       - name: Build and push ghcr.io/sliekens/gw2sdk/devcontainer
-        run: devcontainer build --image-name ghcr.io/sliekens/gw2sdk/devcontainer --push
+        run: devcontainer build --no-cache --image-name ghcr.io/sliekens/gw2sdk/devcontainer --push --workspace-folder .
