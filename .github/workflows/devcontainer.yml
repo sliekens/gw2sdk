@@ -2,16 +2,16 @@
 # For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
 
 name: Build a dev container image
-on: 
+on:
   workflow_dispatch: # Manual trigger
   schedule:
-    - cron: '30 17 * * 0'
+    - cron: "30 17 * * 0"
   push:
     branches:
-    - main
+      - main
     paths:
-    - .devcontainer/**
-    - .github/workflows/devcontainer.yml
+      - .devcontainer/**
+      - .github/workflows/devcontainer.yml
 
 jobs:
   build-and-push:
@@ -21,18 +21,18 @@ jobs:
       packages: write
       contents: read
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v3
+      - name: Checkout code
+        uses: actions/checkout@v3
 
-    - name: Log in to GitHub Docker Registry
-      uses: docker/login-action@v1
-      with:
-        registry: ghcr.io
-        username: ${{ github.actor }}
-        password: ${{ secrets.GITHUB_TOKEN }}
-        
-    - run: npm install -g @vscode/dev-container-cli
-    - run: ./.devcontainer/use-dockerfile.sh
-      shell: bash
-    - run: devcontainer build --image-name ghcr.io/sliekens/gw2sdk/devcontainer --push
-        
+      - name: Log in to GitHub Docker Registry
+        uses: docker/login-action@v1
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Install Dev Container CLI
+        run: npm install -g @devcontainers/cli
+
+      - name: Build and push ghcr.io/sliekens/gw2sdk/devcontainer
+        run: devcontainer build --image-name ghcr.io/sliekens/gw2sdk/devcontainer --push

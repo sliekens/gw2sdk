@@ -1,6 +1,9 @@
 {
   "name": "GW2SDK",
-  "image": "ghcr.io/sliekens/gw2sdk/devcontainer",
+  "dockerFile": "Dockerfile",
+  "build": {
+    "cacheFrom": "ghcr.io/sliekens/gw2sdk/devcontainer"
+  },
   "customizations": {
     "vscode": {
       "extensions": [
