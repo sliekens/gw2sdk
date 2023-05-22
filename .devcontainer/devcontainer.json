@@ -4,18 +4,28 @@
   "build": {
     "cacheFrom": "ghcr.io/sliekens/gw2sdk/devcontainer"
   },
-  "customizations": {
-    "vscode": {
-      "extensions": [
-        "ms-dotnettools.csharp",
-        "ms-azuretools.vscode-docker"
-      ]
-    }
+  "features": {
+    "./dotnet-multi1": {
+      "version": "3.1"
+    },
+    "./dotnet-multi2": {
+      "version": "5"
+    },
+    "./dotnet-multi3": {
+      "version": "6"
+    },
+    "./dotnet-multi4": {
+      "version": "7"
+    },
+    "ghcr.io/devcontainers/features/docker-in-docker:2": {}
   },
-  "initializeCommand": [ ".devcontainer/initialize-host" ],
-  "postCreateCommand": [ ".devcontainer/post-create.sh" ],
+  "initializeCommand": [
+    ".devcontainer/initialize-host"
+  ],
+  "postCreateCommand": [
+    ".devcontainer/post-create.sh"
+  ],
   "mounts": [
-    "type=bind,source=/var/run/docker.sock,target=/var/run/docker-host.sock",
     "type=volume,source=gw2sdk-extensions,target=/home/vscode/.vscode-server/extensions",
     "type=volume,source=gw2sdk-packages,target=/home/vscode/.nuget/packages",
     "type=volume,source=gw2sdk-secrets,target=/home/vscode/.microsoft/usersecrets"
