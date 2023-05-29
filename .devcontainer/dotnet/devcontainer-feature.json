@@ -29,7 +29,7 @@
         }
     },
     "containerEnv": {
-        "DOTNET_ROOT": "/usr/local/dotnet",
+        "DOTNET_ROOT": "/usr/share/dotnet",
         "PATH": "${DOTNET_ROOT}:${PATH}"
     },
     "customizations": {
