@@ -30,7 +30,7 @@
     },
     "containerEnv": {
         "DOTNET_ROOT": "/usr/local/dotnet",
-        "PATH": "/usr/local/dotnet/current:${PATH}"
+        "PATH": "${DOTNET_ROOT}:${PATH}"
     },
     "customizations": {
         "vscode": {
