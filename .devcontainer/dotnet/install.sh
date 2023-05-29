@@ -13,7 +13,7 @@ DOTNET_RUNTIME_ONLY="${RUNTIMEONLY:-"false"}"
 
 DOTNET_INSTALL_SCRIPT_URL='https://dot.net/v1/dotnet-install.sh'
 DOTNET_INSTALL_SCRIPT='/tmp/dotnet-install.sh'
-DOTNET_INSTALL_DIR='/usr/local/dotnet/current'
+DOTNET_INSTALL_DIR='/usr/local/dotnet'
 
 set -e
 
