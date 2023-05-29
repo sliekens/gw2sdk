@@ -1,0 +1,17 @@
+{
+    "id": "mono",
+    "version": "1.0.0",
+    "name": "Mono",
+    "documentationURL": "",
+    "description": "Mono",
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "ms-dotnettools.csharp"
+            ]
+        }
+    },
+    "installsAfter": [
+        "ghcr.io/devcontainers/features/common-utils"
+    ]
+}
