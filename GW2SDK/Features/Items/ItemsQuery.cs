@@ -60,7 +60,11 @@ public sealed class ItemsQuery
                 return response.Value;
             }
         );
-        return producer.QueryAsync(itemIds, progress: progress, cancellationToken: cancellationToken);
+        return producer.QueryAsync(
+            itemIds,
+            progress: progress,
+            cancellationToken: cancellationToken
+        );
     }
 
     public Task<Replica<HashSet<Item>>> GetItemsByPage(

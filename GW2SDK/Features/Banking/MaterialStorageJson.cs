@@ -8,7 +8,10 @@ namespace GuildWars2.Banking;
 [PublicAPI]
 public static class MaterialStorageJson
 {
-    public static MaterialStorage GetMaterialStorage(this JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    public static MaterialStorage GetMaterialStorage(
+        this JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         List<MaterialSlot> slots = new(json.GetArrayLength());
 

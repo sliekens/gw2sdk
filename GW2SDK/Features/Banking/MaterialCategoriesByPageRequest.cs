@@ -9,7 +9,8 @@ using JetBrains.Annotations;
 namespace GuildWars2.Banking;
 
 [PublicAPI]
-public sealed class MaterialCategoriesByPageRequest : IHttpRequest<Replica<HashSet<MaterialCategory>>>
+public sealed class
+    MaterialCategoriesByPageRequest : IHttpRequest<Replica<HashSet<MaterialCategory>>>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(HttpMethod.Get, "v2/materials") { AcceptEncoding = "gzip" };
@@ -55,7 +56,10 @@ public sealed class MaterialCategoriesByPageRequest : IHttpRequest<Replica<HashS
             .ConfigureAwait(false);
         return new Replica<HashSet<MaterialCategory>>
         {
-            Value = json.RootElement.GetSet(entry => entry.GetMaterialCategory(MissingMemberBehavior)),
+            Value =
+                json.RootElement.GetSet(
+                    entry => entry.GetMaterialCategory(MissingMemberBehavior)
+                ),
             ResultContext = response.Headers.GetResultContext(),
             PageContext = response.Headers.GetPageContext(),
             Date = response.Headers.Date.GetValueOrDefault(),

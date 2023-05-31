@@ -9,11 +9,12 @@ namespace GuildWars2.Banking;
 [PublicAPI]
 public sealed class MaterialStorageRequest : IHttpRequest<Replica<MaterialStorage>>
 {
-    private static readonly HttpRequestMessageTemplate Template = new(HttpMethod.Get, "v2/account/materials")
-    {
-        AcceptEncoding = "gzip",
-        Arguments = new QueryBuilder { { "v", SchemaVersion.Recommended } }
-    };
+    private static readonly HttpRequestMessageTemplate Template =
+        new(HttpMethod.Get, "v2/account/materials")
+        {
+            AcceptEncoding = "gzip",
+            Arguments = new QueryBuilder { { "v", SchemaVersion.Recommended } }
+        };
 
     public string? AccessToken { get; init; }
 

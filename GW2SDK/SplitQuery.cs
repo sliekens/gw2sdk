@@ -44,10 +44,7 @@ public sealed class SplitQuery<TKey, TRecord>
 
     private readonly InQuery<TKey, TRecord> query;
 
-    internal SplitQuery(
-        InQuery<TKey, TRecord> query,
-        int maxConcurrency
-    )
+    internal SplitQuery(InQuery<TKey, TRecord> query, int maxConcurrency)
     {
         this.query = query;
         this.maxConcurrency = Math.Max(1, maxConcurrency);

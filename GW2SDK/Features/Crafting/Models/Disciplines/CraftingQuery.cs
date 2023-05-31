@@ -143,7 +143,11 @@ public sealed class CraftingQuery
             }
         );
 
-        return producer.QueryAsync(recipeIds, progress: progress, cancellationToken: cancellationToken);
+        return producer.QueryAsync(
+            recipeIds,
+            progress: progress,
+            cancellationToken: cancellationToken
+        );
     }
 
     public Task<Replica<HashSet<Recipe>>> GetRecipesByPage(
