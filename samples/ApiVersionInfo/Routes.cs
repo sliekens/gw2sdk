@@ -176,5 +176,4 @@ internal static class Routes
     public static bool IsSupported(Route route) => Supported.Contains(route.Path);
 
     public static bool IsProblematic(Route route) => Problematic.Contains(route.Path);
-
 }

@@ -52,6 +52,10 @@ public class JsonRecipeService
                     .ToList();
             }
         );
-        return producer.QueryAsync(itemIds, progress: progress, cancellationToken: cancellationToken);
+        return producer.QueryAsync(
+            itemIds,
+            progress: progress,
+            cancellationToken: cancellationToken
+        );
     }
 }

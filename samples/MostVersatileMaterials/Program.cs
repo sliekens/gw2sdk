@@ -17,14 +17,15 @@ do
     await card.Show(ingredient);
 
     var recipesTable = new RecipesTable();
-    AnsiConsole.Live(recipesTable).Start(
-        live =>
-        {
-            foreach (var recipe in referenceData.OutputsByIngredient[ingredient.Id])
+    AnsiConsole.Live(recipesTable)
+        .Start(
+            live =>
             {
-                recipesTable.AddRow(recipe);
-                live.Refresh();
+                foreach (var recipe in referenceData.OutputsByIngredient[ingredient.Id])
+                {
+                    recipesTable.AddRow(recipe);
+                    live.Refresh();
+                }
             }
-        }
-    );
+        );
 } while (AnsiConsole.Confirm("Do you want to choose again?"));
