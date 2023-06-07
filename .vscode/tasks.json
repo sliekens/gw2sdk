@@ -62,6 +62,13 @@
       "type": "shell",
       "command": "dotnet jb cleanupcode ${workspaceFolder}/GW2SDK.sln --include=${relativeFileDirname}/**/* --verbosity=ERROR",
       "problemMatcher": []
+    },
+    {
+      "label": "Refresh test data",
+      "detail": "Creates a local copy of API data such as achievements and items.",
+      "type": "process",
+      "command": "pwsh",
+      "args": ["./Invoke-TestDataHelper.ps1"]
     }
   ]
 }
