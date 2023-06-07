@@ -8,7 +8,7 @@ namespace GuildWars2.BuildStorage;
 [DataTransferObject]
 public sealed record Build
 {
-    /// <summary>The player-chosen name of this build.</summary>
+    /// <summary>The player-chosen name of this build. Can be empty but not null.</summary>
     public required string Name { get; init; }
 
     public required ProfessionName Profession { get; init; }

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using GuildWars2.Tests.TestInfrastructure;
 using Xunit;
@@ -83,7 +84,14 @@ public class BuildStorageQueryTest
             actual.Value,
             space =>
             {
-                Assert.NotEmpty(space.Name);
+                Assert.NotNull(space.Name);
+                Assert.True(
+                    Enum.IsDefined(typeof(ProfessionName), space.Profession),
+                    "Enum.IsDefined(space.Profession)"
+                );
+                Assert.Equal(3, space.Specializations.Count);
+                Assert.NotNull(space.Skills);
+                Assert.NotNull(space.AquaticSkills);
             }
         );
     }
