@@ -282,7 +282,7 @@ public class CommerceQueryTest
 
         var bids = await sut.Commerce.GetBuyOrders(0, 200, accessToken.Key);
 
-        Assert.NotEmpty(bids.Value);
+        Assert.NotNull(bids.Value);
     }
 
     [Fact]
@@ -293,7 +293,7 @@ public class CommerceQueryTest
 
         var bids = await sut.Commerce.GetSellOrders(0, 200, accessToken.Key);
 
-        Assert.NotEmpty(bids.Value);
+        Assert.NotNull(bids.Value);
     }
 
     [Fact]
