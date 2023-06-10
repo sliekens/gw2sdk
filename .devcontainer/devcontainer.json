@@ -37,7 +37,8 @@
   "customizations": {
     "vscode": {
       "extensions": [
-        "editorconfig.editorconfig"
+        "editorconfig.editorconfig",
+        "github.vscode-github-actions"
       ]
     }
   }

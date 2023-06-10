@@ -40,19 +40,14 @@ jobs:
       env:
         ApiKeyBasic: ${{ secrets.API_TOKEN_BASIC }}
         ApiKey: ${{ secrets.API_TOKEN_FULL }}
-    - name: Upload coverage
-      uses: actions/upload-artifact@v2
-      with:
-        name: coverage
-        path: "**/coverage.cobertura.xml"
     - name: Upload coverage to Codecov
-      uses: codecov/codecov-action@v1.5.0
+      uses: codecov/codecov-action@v2
     - name: Build
       run: dotnet build --configuration ${{ env.build-configuration }} --no-restore
     - name: Pack artifacts
       run: dotnet pack --configuration ${{ env.build-configuration }} --no-build --output artifacts --version-suffix CI-$(date --utc '+%Y%m%d-%H%M%S')
     - name: Upload artifacts
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v3
       with:
         name: packages
         path: artifacts
