@@ -41,7 +41,7 @@ jobs:
         ApiKeyBasic: ${{ secrets.API_TOKEN_BASIC }}
         ApiKey: ${{ secrets.API_TOKEN_FULL }}
     - name: Upload coverage to Codecov
-      uses: codecov/codecov-action@v2
+      uses: codecov/codecov-action@v3
     - name: Build
       run: dotnet build --configuration ${{ env.build-configuration }} --no-restore
     - name: Pack artifacts
