@@ -68,7 +68,49 @@
       "detail": "Creates a local copy of API data such as achievements and items.",
       "type": "process",
       "command": "pwsh",
-      "args": ["./Invoke-TestDataHelper.ps1"]
+      "args": [
+        "./Invoke-TestDataHelper.ps1"
+      ]
+    },
+    {
+      "label": "Configure API key (account only)",
+      "detail": "The key must have only account permissions enabled.",
+      "type": "shell",
+      "command": "dotnet",
+      "args": [
+        "user-secrets",
+        "set",
+        "ApiKeyBasic",
+        "${input:apikey}"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}/GW2SDK.Tests"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Configure API key (all permissions)",
+      "detail": "The key must have all permissions enabled.",
+      "type": "shell",
+      "command": "dotnet",
+      "args": [
+        "user-secrets",
+        "set",
+        "ApiKeyBasic",
+        "${input:apikey}"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}/GW2SDK.Tests"
+      },
+      "problemMatcher": []
+    }
+  ],
+  "inputs": [
+    {
+      "id": "apikey",
+      "type": "promptString",
+      "description": "Enter your API key (or go to [API Key Management](https://account.arena.net/applications))",
+      "password": true
     }
   ]
 }
