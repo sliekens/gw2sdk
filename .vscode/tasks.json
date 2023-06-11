@@ -96,7 +96,7 @@
       "args": [
         "user-secrets",
         "set",
-        "ApiKeyBasic",
+        "ApiKey",
         "${input:apikey}"
       ],
       "options": {
