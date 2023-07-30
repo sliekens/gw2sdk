@@ -1,45 +1,40 @@
 {
-    "id": "dotnet",
-    "version": "2.0.0",
-    "name": "Dotnet CLI",
-    "documentationURL": "https://github.com/devcontainers/features/tree/main/src/dotnet",
-    "description": "Installs .NET and its CLI. Offers options to install a specific version of .NET, additional versions of .NET, or just the .NET runtime.",
-    "options": {
-        "version": {
-            "type": "string",
-            "proposals": [
-                "latest",
-                "lts",
-                "7",
-                "6",
-                "3"
-            ],
-            "default": "latest",
-            "description": "Version of .NET to install. Use 'latest' for the latest version, 'lts' for the latest LTS version, 'X' for the latest of a major version, or 'X.Y.Z' for a specific version."
-        },
-        "additionalVersions": {
-            "type": "string",
-            "default": "",
-            "description": "Comma-separated list of additional .NET versions to install. Use 'latest' for the latest version, 'lts' for the latest LTS version, 'X' for the latest of a major version, or 'X.Y.Z' for a specific version."
-        },
-        "runtimeOnly": {
-            "type": "boolean",
-            "default": false,
-            "description": "Only install the .NET runtime. If true, then the .NET SDK is not installed."
-        }
-    },
-    "containerEnv": {
-        "DOTNET_ROOT": "/usr/share/dotnet",
-        "PATH": "${DOTNET_ROOT}:${PATH}"
-    },
-    "customizations": {
-        "vscode": {
-            "extensions": [
-                "ms-dotnettools.csdevkit"                
-            ]
-        }
-    },
-    "installsAfter": [
-        "ghcr.io/devcontainers/features/common-utils"
-    ]
+  "id": "dotnet",
+  "version": "2.0.0",
+  "name": "Dotnet CLI",
+  "documentationURL": "https://github.com/devcontainers/features/tree/main/src/dotnet",
+  "description": "Installs .NET SDK, which includes the .NET CLI and the shared runtime. Offers options to install multiple SDK versions.",
+  "options": {
+      "version": {
+          "type": "string",
+          "proposals": [
+              "latest",
+              "lts",
+              "8.0",
+              "7.0",
+              "6.0"
+          ],
+          "default": "latest",
+          "description": "Version of .NET SDK to install. Use 'latest' for the latest version, 'lts' for the latest LTS version, 'X.Y' or 'X.Y.Z' for a specific version."
+      },
+      "additionalVersions": {
+          "type": "string",
+          "default": "",
+          "description": "Comma-separated list of additional .NET SDK versions to install. Use 'latest' for the latest version, 'lts' for the latest LTS version, 'X.Y' or 'X.Y.Z' for a specific version."
+      }
+  },
+  "containerEnv": {
+      "DOTNET_ROOT": "/usr/share/dotnet",
+      "PATH": "$PATH:$DOTNET_ROOT:~/.dotnet/tools"
+  },
+  "customizations": {
+      "vscode": {
+          "extensions": [
+              "ms-dotnettools.csharp"
+          ]
+      }
+  },
+  "installsAfter": [
+      "ghcr.io/devcontainers/features/common-utils"
+  ]
 }
