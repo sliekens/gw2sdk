@@ -33,7 +33,7 @@ To use the GameLink, create an observer object that implements `IObserver<Snapsh
 
 Here is an example observer that prints each update to the console. The link provides map IDs and specialization IDs that can be used to fetch data from the API.
 
-<<< @/samples/Mumble/Program.cs
+@[code](../../samples/Mumble/Program.cs)
 
 Output
 

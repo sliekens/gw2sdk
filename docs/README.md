@@ -1,7 +1,9 @@
 ---
 home: true
-actionText: Get started →
-actionLink: /guide/
+actions:
+- text: Get started →
+  link: /guide/
+  type: primary
 features:
 - title: Easy API object model
   details: Access data directly from Guild Wars 2 servers through intuitive interfaces.

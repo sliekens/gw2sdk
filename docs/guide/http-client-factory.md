@@ -4,6 +4,6 @@ Creating ad-hoc instances of `HttpClient` is great for short-lived console apps,
 
 You can also use `IHttpClientFactory` in a console app if you wish. It can be useful if your console app is expected to stay alive for a long time.
 
-<<< @/samples/HttpClientFactoryUsage/Program.cs
+@[code](../../samples/HttpClientFactoryUsage/Program.cs)
 
 You may also want to use Polly to become more resilient against other network errors.

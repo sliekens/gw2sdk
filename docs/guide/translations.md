@@ -14,7 +14,7 @@ If you don't specify any language, or if the language is not supported, English 
 
 **There is no automatic language selection.** If your application uses `CultureInfo.CurrentUICulture` for translations, that won't automatically work for `Gw2Client`. You must explicitly opt-in to translations by using `Language.CurrentUICulture`. Let's have a discussion if you think `CurrentUICulture` should be used by default.
 
-<<< @/samples/Translations/Program.cs
+@[code](../../samples/Translations/Program.cs)
 
 Output
 

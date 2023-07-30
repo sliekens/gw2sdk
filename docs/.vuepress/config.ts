@@ -1,15 +1,15 @@
-import { defineConfig } from "vuepress/config";
+import { defaultTheme } from 'vuepress';
 
-export default defineConfig({
+export default {
   title: 'GW2SDK',
   description: 'A .NET code library for interacting with the Guild Wars 2 API and game client.',
   base: '/gw2sdk/',
-  themeConfig: {
+  theme: defaultTheme({
     repo: 'sliekens/gw2sdk',
     docsDir: 'docs',
     docsBranch: 'main',
-    editLinks: true,
-    nav: [
+    editLink: true,
+    navbar: [
       { link: '/guide/', text: 'Guide' },
     ],
     sidebar: [
@@ -23,5 +23,5 @@ export default defineConfig({
       '/guide/feedback'
     ],
     lastUpdated: true
-  }
-});
+  })
+};
