@@ -50,7 +50,7 @@ public class TestHttpClientFactory : IHttpClientFactory, IAsyncDisposable
                     http.Timeout = TimeSpan.FromMinutes(5);
                 }
             )
-#if NETCOREAPP
+#if NET
             .ConfigurePrimaryHttpMessageHandler(
                 () => new SocketsHttpHandler
                 {
