@@ -1,1 +1,0 @@
-docker pull ghcr.io/sliekens/gw2sdk/devcontainer:latest

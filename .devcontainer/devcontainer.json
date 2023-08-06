@@ -16,14 +16,12 @@
     "ghcr.io/devcontainers/features/powershell:1": {}
   },
   "containerEnv": {
-    "DOTNET_RUNNING_IN_CONTAINER": "true",
     "DOTNET_NOLOGO": "true",
-    "DOTNET_USE_POLLING_FILE_WATCHER": "true",
     "DOTNET_CLI_TELEMETRY_OPTOUT": "true"
   },
-  "initializeCommand": [
-    ".devcontainer/initialize-host"
-  ],
+  "initializeCommand": {
+    "pull-latest": "docker pull ghcr.io/sliekens/gw2sdk/devcontainer:latest"
+  },
   "postCreateCommand": [
     ".devcontainer/post-create.sh"
   ],
