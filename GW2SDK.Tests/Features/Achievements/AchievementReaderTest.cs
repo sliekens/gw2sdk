@@ -64,27 +64,26 @@ public class AchievementReaderTest : IClassFixture<AchievementFixture>
     }
 
     [Fact]
-    public void Achievements_can_be_created_from_json() =>
-        AssertEx.ForEach(
-            fixture.Achievements,
-            json =>
-            {
-                using var document = JsonDocument.Parse(json);
+    public void Achievements_can_be_created_from_json()
+    {
+        foreach (var json in fixture.Achievements)
+        {
+            using var document = JsonDocument.Parse(json);
 
-                var actual = document.RootElement.GetAchievement(MissingMemberBehavior.Error);
+            var actual = document.RootElement.GetAchievement(MissingMemberBehavior.Error);
 
-                AchievementFact.Name_is_not_empty(actual);
-                AchievementFact.Description_is_not_null(actual);
-                AchievementFact.Requirement_is_not_null(actual);
-                AchievementFact.LockedText_is_not_null(actual);
-                AchievementFact.Flags_is_not_empty(actual);
-                AchievementFact.Tiers_is_not_empty(actual);
-                AchievementFact.Tiers_does_not_contain_null(actual);
-                AchievementFact.Rewards_does_not_contain_null(actual);
-                AchievementFact.Bits_does_not_contain_null(actual);
-                AchievementFact.PointCap_is_negative_1_for_repeatable_achievements_without_points(
-                    actual
-                );
-            }
-        );
+            AchievementFact.Name_is_not_empty(actual);
+            AchievementFact.Description_is_not_null(actual);
+            AchievementFact.Requirement_is_not_null(actual);
+            AchievementFact.LockedText_is_not_null(actual);
+            AchievementFact.Flags_is_not_empty(actual);
+            AchievementFact.Tiers_is_not_empty(actual);
+            AchievementFact.Tiers_does_not_contain_null(actual);
+            AchievementFact.Rewards_does_not_contain_null(actual);
+            AchievementFact.Bits_does_not_contain_null(actual);
+            AchievementFact.PointCap_is_negative_1_for_repeatable_achievements_without_points(
+                actual
+            );
+        }
+    }
 }

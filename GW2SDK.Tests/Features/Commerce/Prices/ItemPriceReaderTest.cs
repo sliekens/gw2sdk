@@ -29,17 +29,16 @@ public class ItemPriceReaderTest : IClassFixture<ItemPriceFixture>
     }
 
     [Fact]
-    public void Item_prices_can_be_created_from_json() =>
-        AssertEx.ForEach(
-            fixture.ItemPrices,
-            json =>
-            {
-                using var document = JsonDocument.Parse(json);
+    public void Item_prices_can_be_created_from_json()
+    {
+        foreach (var json in fixture.ItemPrices)
+        {
+            using var document = JsonDocument.Parse(json);
 
-                var actual = document.RootElement.GetItemPrice(MissingMemberBehavior.Error);
+            var actual = document.RootElement.GetItemPrice(MissingMemberBehavior.Error);
 
-                ItemPriceFact.Id_is_positive(actual);
-                ItemPriceFact.Best_ask_is_greater_than_best_bid(actual);
-            }
-        );
+            ItemPriceFact.Id_is_positive(actual);
+            ItemPriceFact.Best_ask_is_greater_than_best_bid(actual);
+        }
+    }
 }

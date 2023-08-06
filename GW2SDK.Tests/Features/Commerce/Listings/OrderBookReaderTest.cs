@@ -21,16 +21,15 @@ public class OrderBookReaderTest : IClassFixture<OrderBookFixture>
     }
 
     [Fact]
-    public void Order_book_can_be_created_from_json() =>
-        AssertEx.ForEach(
-            fixture.ItemPrices,
-            json =>
-            {
-                using var document = JsonDocument.Parse(json);
+    public void Order_book_can_be_created_from_json()
+    {
+        foreach (var json in fixture.ItemPrices)
+        {
+            using var document = JsonDocument.Parse(json);
 
-                var actual = document.RootElement.GetOrderBook(MissingMemberBehavior.Error);
+            var actual = document.RootElement.GetOrderBook(MissingMemberBehavior.Error);
 
-                OrderBookFact.Id_is_positive(actual);
-            }
-        );
+            OrderBookFact.Id_is_positive(actual);
+        }
+    }
 }
