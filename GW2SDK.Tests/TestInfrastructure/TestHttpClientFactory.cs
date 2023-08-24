@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using GuildWars2.Http;
@@ -7,6 +6,10 @@ using Microsoft.Extensions.DependencyInjection;
 using Polly;
 using Polly.Timeout;
 using static System.Net.HttpStatusCode;
+
+#if NETFRAMEWORK
+using static GuildWars2.Http.HttpStatusCodeEx;
+#endif
 
 namespace GuildWars2.Tests.TestInfrastructure;
 
@@ -43,10 +46,9 @@ public class TestHttpClientFactory : IHttpClientFactory, IAsyncDisposable
                     http.BaseAddress = baseAddress;
 
                     // The default timeout is 100 seconds, but it's not always enough
-                    // Due to rate limiting, an individual request can get stuck in a delayed retry-loop
+                    // Requests can get stuck in a delayed retry-loop due to rate limiting
                     // A better solution might be to queue up requests
                     //   (so that new requests have to wait until there are no more delayed requests)
-                    // Perhaps a circuit breaker is also suitable
                     http.Timeout = TimeSpan.FromMinutes(5);
                 }
             )
@@ -61,7 +63,10 @@ public class TestHttpClientFactory : IHttpClientFactory, IAsyncDisposable
                     MaxConnectionsPerServer = maxConnections,
 
                     // Creating a new connection shouldn't take more than 10 seconds
-                    ConnectTimeout = TimeSpan.FromSeconds(10)
+                    ConnectTimeout = TimeSpan.FromSeconds(10),
+
+                    // Save bandwidth
+                    AutomaticDecompression = System.Net.DecompressionMethods.GZip
                 }
             )
 #else
@@ -70,45 +75,27 @@ public class TestHttpClientFactory : IHttpClientFactory, IAsyncDisposable
             )
 #endif
             .AddHttpMessageHandler<SchemaVersionHandler>()
-            .AddPolicyHandler(
 
-                // Transient errors for which we want a a delayed retry
-                // (currently only includes rate-limit errors)
-                Policy<HttpResponseMessage>.HandleResult(
-                        response => response.StatusCode is (HttpStatusCode)429 // TooManyRequests
-                    )
-                    .WaitAndRetryForeverAsync(_ => TimeSpan.FromSeconds(10))
-            )
-            .AddPolicyHandler(
+            // The API has rate limiting (by IP address) so wait and retry when the server indicates too many requests
+            .AddPolicyHandler(Policy.HandleResult<HttpResponseMessage>(response => response.StatusCode == TooManyRequests).WaitAndRetryAsync(10, _ => TimeSpan.FromSeconds(10)))
 
-                // Transient errors for which we want an immediate retry
-                Policy<HttpResponseMessage>
-                    .HandleResult(response => response.StatusCode >= InternalServerError)
-                    .Or<TimeoutRejectedException>()
-                    .Or<UnauthorizedOperationException>(
+            // The API can be disabled intentionally to avoid leaking spoilers, or it can be unavailable due to technical difficulties
+            // Since it's not easy to tell the difference, give it one retry
+            .AddPolicyHandler(Policy.HandleResult<HttpResponseMessage>(response => response.StatusCode == ServiceUnavailable).RetryAsync())
 
-                        // Sometimes the API fails to validate the access key
-                        // This is a server error, real token problems result in a different error
-                        // eg. "Invalid access token"
-                        reason => reason.Message == "endpoint requires authentication"
-                    )
-                    .Or<ArgumentException>(
+            // Assume internal errors are retryable (within reason)
+            .AddPolicyHandler(Policy.HandleResult<HttpResponseMessage>(response => response.StatusCode is InternalServerError or BadGateway or GatewayTimeout).RetryAsync(5))
 
-                        // Sometimes the API returns a Bad Request with an unknown error for perfectly valid requests
-                        reason => reason.Message == "unknown error"
-                    )
-                    .RetryForeverAsync()
-            )
-            .AddPolicyHandler(
+            // Sometimes the API fails to validate the access token even though the token is valid
+            // This is retryable because real token errors result in a different error message, eg. "Invalid access token"
+            .AddPolicyHandler(Policy<HttpResponseMessage>.Handle<UnauthorizedOperationException>(reason => reason.Message == "endpoint requires authentication").RetryAsync(10))
 
-                // An individual attempt shouldn't take more than 20 seconds to complete
-                // Assume longer means the API is stuck, and we should cancel the request
-                //
-                Policy.TimeoutAsync<HttpResponseMessage>(
-                    TimeSpan.FromSeconds(20),
-                    TimeoutStrategy.Optimistic
-                )
-            );
+            // Sometimes the API returns a Bad Request with an unknown error for perfectly valid requests
+            .AddPolicyHandler(Policy<HttpResponseMessage>.Handle<ArgumentException>(reason => reason.Message == "unknown error").RetryAsync())
+
+            // Abort each attempted request after max 20 seconds and perform retries (within reason)
+            .AddPolicyHandler(Policy<HttpResponseMessage>.Handle<TimeoutRejectedException>().RetryAsync(10))
+            .AddPolicyHandler(Policy.TimeoutAsync<HttpResponseMessage>(TimeSpan.FromSeconds(20), TimeoutStrategy.Optimistic));
 
         return services.BuildServiceProvider();
     }

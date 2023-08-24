@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
@@ -21,41 +20,48 @@ public class Container : IDisposable, IAsyncDisposable
                 client =>
                 {
                     client.BaseAddress = BaseAddress.DefaultUri;
+
+                    // The default timeout is 100 seconds, but it's not always enough
+                    // Due to rate limiting, an individual request can get stuck in a delayed retry-loop
+                    // A better solution might be to queue up requests
+                    //   (so that new requests have to wait until there are no more delayed requests)
+                    client.Timeout = TimeSpan.FromMinutes(5);
                 }
             )
+            .ConfigurePrimaryHttpMessageHandler(
+                () => new SocketsHttpHandler
+                {
+                    MaxConnectionsPerServer = 20,
+
+                    // Creating a new connection shouldn't take more than 10 seconds
+                    ConnectTimeout = TimeSpan.FromSeconds(10),
+
+                    // Save bandwidth
+                    AutomaticDecompression = System.Net.DecompressionMethods.GZip
+                }
+            )
+            // The API has rate limiting (by IP address) so wait and retry when the server indicates too many requests
+            .AddPolicyHandler(Policy.HandleResult<HttpResponseMessage>(response => response.StatusCode == TooManyRequests).WaitAndRetryAsync(10, _ => TimeSpan.FromSeconds(10)))
+
+            // The API can be disabled intentionally to avoid leaking spoilers, or it can be unavailable due to technical difficulties
+            // Since it's not easy to tell the difference, give it one retry
+            .AddPolicyHandler(Policy.HandleResult<HttpResponseMessage>(response => response.StatusCode == ServiceUnavailable).RetryAsync())
+
+            // Assume internal errors are retryable (within reason)
+            .AddPolicyHandler(Policy.HandleResult<HttpResponseMessage>(response => response.StatusCode is InternalServerError or BadGateway or GatewayTimeout).RetryAsync(5))
+
+            // Sometimes the API returns a Bad Request with an unknown error for perfectly valid requests
+            .AddPolicyHandler(Policy<HttpResponseMessage>.Handle<ArgumentException>(reason => reason.Message == "unknown error").RetryAsync())
+
+            // Abort each attempted request after max 20 seconds and perform retries (within reason)
+            .AddPolicyHandler(Policy<HttpResponseMessage>.Handle<TimeoutRejectedException>().RetryAsync(10))
+            .AddPolicyHandler(Policy.TimeoutAsync<HttpResponseMessage>(TimeSpan.FromSeconds(20), TimeoutStrategy.Optimistic))
             .AddTypedClient<JsonAchievementService>()
             .AddTypedClient<JsonItemPriceService>()
             .AddTypedClient<JsonOrderBookService>()
             .AddTypedClient<JsonItemService>()
             .AddTypedClient<JsonRecipeService>()
-            .AddTypedClient<JsonSkinService>()
-            .ConfigurePrimaryHttpMessageHandler(
-                () => new SocketsHttpHandler { AutomaticDecompression = DecompressionMethods.GZip }
-            )
-            .AddPolicyHandler(
-                Policy.TimeoutAsync<HttpResponseMessage>(
-                    TimeSpan.FromSeconds(100),
-                    TimeoutStrategy.Optimistic
-                )
-            )
-            .AddPolicyHandler(
-                Policy<HttpResponseMessage>.HandleResult(
-                        response => response.StatusCode is ServiceUnavailable
-                            or GatewayTimeout
-                            or BadGateway
-                            or (HttpStatusCode)429 // TooManyRequests
-                    )
-                    .Or<TimeoutRejectedException>()
-                    .WaitAndRetryForeverAsync(
-                        retryAttempt => TimeSpan.FromSeconds(Math.Min(8, Math.Pow(2, retryAttempt)))
-                    )
-            )
-            .AddPolicyHandler(
-                Policy.TimeoutAsync<HttpResponseMessage>(
-                    TimeSpan.FromSeconds(30),
-                    TimeoutStrategy.Optimistic
-                )
-            );
+            .AddTypedClient<JsonSkinService>();
 
         serviceProvider = services.BuildServiceProvider();
     }

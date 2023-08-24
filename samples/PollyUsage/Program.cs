@@ -10,36 +10,35 @@ using static System.Net.HttpStatusCode;
 var host = new HostBuilder().ConfigureServices(
         services =>
         {
-            // Gw2Client with the following policies applied
-            // * Cancel after 1 minute of waiting for a success response (including any retries)
-            // * In case of transient errors, retry with exponential delay (2s, 4s, 8s, 8s, 8s ...)
-            // * Each individual request (attempt) should complete in less than 20 seconds
             services.AddHttpClient<Gw2Client>(
                     httpClient =>
                     {
-                        httpClient.Timeout = TimeSpan.FromMinutes(1);
+                        // Configure a timeout after which OperationCanceledException is thrown
+                        // The default timeout is 100 seconds, but it's not always enough for background work
+                        //  because requests can get stuck in a delayed retry-loop due to rate limiting
+                        httpClient.Timeout = TimeSpan.FromSeconds(600);
+
+                        // For user interactive apps, you want to set a lower timeout
+                        // to avoid long waiting periods when there are technical difficulties
+                        httpClient.Timeout = TimeSpan.FromSeconds(20);
                     }
                 )
-                .AddPolicyHandler(
-                    Policy<HttpResponseMessage>
-                        .HandleResult(
-                            response => response.StatusCode is ServiceUnavailable
-                                or GatewayTimeout
-                                or BadGateway
-                                or TooManyRequests
-                        )
-                        .Or<TimeoutRejectedException>()
-                        .WaitAndRetryForeverAsync(
-                            retryAttempt =>
-                                TimeSpan.FromSeconds(Math.Min(8, Math.Pow(2, retryAttempt)))
-                        )
-                )
-                .AddPolicyHandler(
-                    Policy.TimeoutAsync<HttpResponseMessage>(
-                        TimeSpan.FromSeconds(20),
-                        TimeoutStrategy.Optimistic
-                    )
-                );
+                // The API has rate limiting (by IP address) so wait and retry when the server indicates too many requests
+                .AddPolicyHandler(Policy.HandleResult<HttpResponseMessage>(response => response.StatusCode == TooManyRequests).WaitAndRetryAsync(10, _ => TimeSpan.FromSeconds(10)))
+
+                // The API can be disabled intentionally to avoid leaking spoilers, or it can be unavailable due to technical difficulties
+                // Since it's not easy to tell the difference, give it one retry
+                .AddPolicyHandler(Policy.HandleResult<HttpResponseMessage>(response => response.StatusCode == ServiceUnavailable).RetryAsync())
+
+                // Assume internal errors are retryable (within reason)
+                .AddPolicyHandler(Policy.HandleResult<HttpResponseMessage>(response => response.StatusCode is InternalServerError or BadGateway or GatewayTimeout).RetryAsync(5))
+
+                // Sometimes the API returns a Bad Request with an unknown error for perfectly valid requests
+                .AddPolicyHandler(Policy<HttpResponseMessage>.Handle<ArgumentException>(reason => reason.Message == "unknown error").RetryAsync())
+
+                // Abort each attempted request after max 20 seconds and perform retries (within reason)
+                .AddPolicyHandler(Policy<HttpResponseMessage>.Handle<TimeoutRejectedException>().RetryAsync(10))
+                .AddPolicyHandler(Policy.TimeoutAsync<HttpResponseMessage>(TimeSpan.FromSeconds(20), TimeoutStrategy.Optimistic));
         }
     )
     .Build();
