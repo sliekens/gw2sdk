@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using GuildWars2.Achievements;
 using GuildWars2.Achievements.Categories;
@@ -154,7 +155,7 @@ public class AchievementsQueryTest
         var actual = await sut.Achievements.GetAchievementsByIds(achievementIds);
 
         Assert.Collection(
-            actual.Value,
+            actual.Value.OrderBy(achievement => achievement.Id),
             achievement => Assert.Equal(1, achievement.Id),
             achievement => Assert.Equal(2, achievement.Id),
             achievement => Assert.Equal(3, achievement.Id)
