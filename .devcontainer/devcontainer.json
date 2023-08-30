@@ -6,7 +6,7 @@
   },
   "features": {
     "./dotnet": {
-      "version": "7.0",
+      "version": "7.0.3xx",
       "additionalVersions": [
         "6.0"
       ]
