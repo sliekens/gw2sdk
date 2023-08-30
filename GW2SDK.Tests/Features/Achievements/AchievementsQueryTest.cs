@@ -7,6 +7,7 @@ using GuildWars2.Achievements.Categories;
 using GuildWars2.Achievements.Dailies;
 using GuildWars2.Achievements.Groups;
 using GuildWars2.Achievements.Titles;
+using GuildWars2.Http;
 using GuildWars2.Tests.TestInfrastructure;
 using Xunit;
 using static GuildWars2.ProductName;
@@ -94,28 +95,35 @@ public class AchievementsQueryTest
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        var actual = await sut.Achievements.GetDailyAchievements(day);
+        var e = await Record.ExceptionAsync(async () =>
+        {
+            var actual = await sut.Achievements.GetDailyAchievements(day);
 
-        Assert.All(actual.Value.Pve, DailyAchievementFact.Id_is_positive);
-        Assert.All(actual.Value.Pvp, DailyAchievementFact.Id_is_positive);
-        Assert.All(actual.Value.Wvw, DailyAchievementFact.Id_is_positive);
-        Assert.All(actual.Value.Fractals, DailyAchievementFact.Id_is_positive);
-        Assert.All(actual.Value.Special, DailyAchievementFact.Id_is_positive);
-        Assert.All(actual.Value.Pve, DailyAchievementFact.Min_level_is_between_1_and_80);
-        Assert.All(actual.Value.Pvp, DailyAchievementFact.Min_level_is_between_1_and_80);
-        Assert.All(actual.Value.Wvw, DailyAchievementFact.Min_level_is_between_1_and_80);
-        Assert.All(actual.Value.Fractals, DailyAchievementFact.Min_level_is_between_1_and_80);
-        Assert.All(actual.Value.Special, DailyAchievementFact.Min_level_is_between_1_and_80);
-        Assert.All(actual.Value.Pve, DailyAchievementFact.Max_level_is_between_1_and_80);
-        Assert.All(actual.Value.Pvp, DailyAchievementFact.Max_level_is_between_1_and_80);
-        Assert.All(actual.Value.Wvw, DailyAchievementFact.Max_level_is_between_1_and_80);
-        Assert.All(actual.Value.Fractals, DailyAchievementFact.Max_level_is_between_1_and_80);
-        Assert.All(actual.Value.Special, DailyAchievementFact.Max_level_is_between_1_and_80);
-        Assert.All(actual.Value.Pve, DailyAchievementFact.Can_have_a_product_requirement);
-        Assert.All(actual.Value.Pvp, DailyAchievementFact.Can_have_a_product_requirement);
-        Assert.All(actual.Value.Wvw, DailyAchievementFact.Can_have_a_product_requirement);
-        Assert.All(actual.Value.Fractals, DailyAchievementFact.Can_have_a_product_requirement);
-        Assert.All(actual.Value.Special, DailyAchievementFact.Can_have_a_product_requirement);
+            Assert.All(actual.Value.Pve, DailyAchievementFact.Id_is_positive);
+            Assert.All(actual.Value.Pvp, DailyAchievementFact.Id_is_positive);
+            Assert.All(actual.Value.Wvw, DailyAchievementFact.Id_is_positive);
+            Assert.All(actual.Value.Fractals, DailyAchievementFact.Id_is_positive);
+            Assert.All(actual.Value.Special, DailyAchievementFact.Id_is_positive);
+            Assert.All(actual.Value.Pve, DailyAchievementFact.Min_level_is_between_1_and_80);
+            Assert.All(actual.Value.Pvp, DailyAchievementFact.Min_level_is_between_1_and_80);
+            Assert.All(actual.Value.Wvw, DailyAchievementFact.Min_level_is_between_1_and_80);
+            Assert.All(actual.Value.Fractals, DailyAchievementFact.Min_level_is_between_1_and_80);
+            Assert.All(actual.Value.Special, DailyAchievementFact.Min_level_is_between_1_and_80);
+            Assert.All(actual.Value.Pve, DailyAchievementFact.Max_level_is_between_1_and_80);
+            Assert.All(actual.Value.Pvp, DailyAchievementFact.Max_level_is_between_1_and_80);
+            Assert.All(actual.Value.Wvw, DailyAchievementFact.Max_level_is_between_1_and_80);
+            Assert.All(actual.Value.Fractals, DailyAchievementFact.Max_level_is_between_1_and_80);
+            Assert.All(actual.Value.Special, DailyAchievementFact.Max_level_is_between_1_and_80);
+            Assert.All(actual.Value.Pve, DailyAchievementFact.Can_have_a_product_requirement);
+            Assert.All(actual.Value.Pvp, DailyAchievementFact.Can_have_a_product_requirement);
+            Assert.All(actual.Value.Wvw, DailyAchievementFact.Can_have_a_product_requirement);
+            Assert.All(actual.Value.Fractals, DailyAchievementFact.Can_have_a_product_requirement);
+            Assert.All(actual.Value.Special, DailyAchievementFact.Can_have_a_product_requirement);
+        });
+
+        // Unavailable due to Wizard Vault changes
+        var reason = Assert.IsType<GatewayException>(e);
+        Assert.Equal("Service Unavailable", reason.Message);
     }
 
     [Fact]
