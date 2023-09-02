@@ -103,6 +103,23 @@
         "cwd": "${workspaceFolder}/GW2SDK.Tests"
       },
       "problemMatcher": []
+    },
+    {
+      "label": "Update test dataset",
+      "type": "shell",
+      "command": "pwsh",
+      "args": [
+        "-File",
+        "Invoke-TestDataHelper.ps1"
+      ],
+      "group": {
+        "kind": "test",
+        "isDefault": false
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      }
     }
   ],
   "inputs": [
