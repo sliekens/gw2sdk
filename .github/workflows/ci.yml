@@ -29,8 +29,8 @@ jobs:
       uses: actions/setup-dotnet@v3
       with:
         source-url: https://nuget.pkg.github.com/sliekens/index.json
-        dotnet-version: null
-        global-json-file: null
+        dotnet-version: ""
+        global-json-file: ""
       env:
         NUGET_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
     - name: Install dependencies
