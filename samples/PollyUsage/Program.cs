@@ -36,9 +36,9 @@ var host = new HostBuilder().ConfigureServices(
                 // Sometimes the API returns a Bad Request with an unknown error for perfectly valid requests
                 .AddPolicyHandler(Policy<HttpResponseMessage>.Handle<ArgumentException>(reason => reason.Message == "unknown error").RetryAsync())
 
-                // Abort each attempted request after max 20 seconds and perform retries (within reason)
+                // Abort each attempted request after max 30 seconds and perform retries (within reason)
                 .AddPolicyHandler(Policy<HttpResponseMessage>.Handle<TimeoutRejectedException>().RetryAsync(10))
-                .AddPolicyHandler(Policy.TimeoutAsync<HttpResponseMessage>(TimeSpan.FromSeconds(20), TimeoutStrategy.Optimistic));
+                .AddPolicyHandler(Policy.TimeoutAsync<HttpResponseMessage>(TimeSpan.FromSeconds(30), TimeoutStrategy.Optimistic));
         }
     )
     .Build();
