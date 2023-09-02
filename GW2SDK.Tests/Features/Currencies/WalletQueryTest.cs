@@ -50,7 +50,16 @@ public class WalletQueryTest
             {
                 CurrencyFact.Id_is_positive(currency);
                 CurrencyFact.Name_is_not_empty(currency);
-                CurrencyFact.Description_is_not_empty(currency);
+                if (currency.Id == 63)
+                {
+                    // Astral Acclaim is missing a tooltip
+                    Assert.Empty(currency.Description);
+                }
+                else
+                {
+                    CurrencyFact.Description_is_not_empty(currency);
+                }
+
                 CurrencyFact.Order_is_positive(currency);
                 CurrencyFact.Icon_is_not_empty(currency);
             }
