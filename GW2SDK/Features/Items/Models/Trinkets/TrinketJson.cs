@@ -45,7 +45,7 @@ public static class TrinketJson
         {
             if (member.NameEquals("type"))
             {
-                if (!member.Value.ValueEquals("Gizmo"))
+                if (!member.Value.ValueEquals("Trinket"))
                 {
                     throw new InvalidOperationException(
                         Strings.InvalidDiscriminator(member.Value.GetString())
