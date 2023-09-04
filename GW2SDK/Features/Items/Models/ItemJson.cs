@@ -36,6 +36,8 @@ public static class ItemJson
                 return json.GetMinipet(missingMemberBehavior);
             case "PowerCore":
                 return json.GetPowerCore(missingMemberBehavior);
+            case "Relic" or "Mwcc":
+                return json.GetRelic(missingMemberBehavior);
             case "Tool":
                 return json.GetTool(missingMemberBehavior);
             case "Trinket":
