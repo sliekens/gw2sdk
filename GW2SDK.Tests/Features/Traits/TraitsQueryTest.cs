@@ -1,19 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using GuildWars2.Tests.TestInfrastructure;
-using GuildWars2.Traits;
 using Xunit;
 
 namespace GuildWars2.Tests.Features.Traits;
 
 public class TraitsQueryTest
 {
-    private static class TraitFact
-    {
-        public static void Id_is_positive(Trait actual) =>
-            Assert.InRange(actual.Id, 1, int.MaxValue);
-    }
-
     [Fact]
     public async Task Traits_can_be_enumerated()
     {
@@ -26,7 +19,7 @@ public class TraitsQueryTest
             actual.Value,
             trait =>
             {
-                TraitFact.Id_is_positive(trait);
+                trait.Id_is_positive();
             }
         );
     }

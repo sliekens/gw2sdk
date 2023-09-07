@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using GuildWars2.Stories;
 using GuildWars2.Tests.TestInfrastructure;
 using Xunit;
 
@@ -8,37 +7,6 @@ namespace GuildWars2.Tests.Features.Stories;
 
 public class StoryQueryTest
 {
-    private static class BackstoryQuestionFact
-    {
-        public static void Id_is_positive(BackstoryQuestion actual) =>
-            Assert.InRange(actual.Id, 1, int.MaxValue);
-
-        public static void Title_is_not_null(BackstoryQuestion actual) =>
-            Assert.NotNull(actual.Title);
-
-        public static void Description_is_not_empty(BackstoryQuestion actual) =>
-            Assert.NotEmpty(actual.Description);
-
-        public static void Has_3_to_8_answers(BackstoryQuestion actual) =>
-            Assert.InRange(actual.Answers.Count, 3, 8);
-    }
-
-    private static class BackstoryAnswerFact
-    {
-        public static void Id_is_not_empty(BackstoryAnswer actual) => Assert.NotEmpty(actual.Id);
-
-        public static void Title_is_not_null(BackstoryAnswer actual) =>
-            Assert.NotNull(actual.Title);
-
-        public static void Description_is_not_empty(BackstoryAnswer actual) =>
-            Assert.NotEmpty(actual.Description);
-
-        public static void Journal_is_not_empty(BackstoryAnswer actual) =>
-            Assert.NotEmpty(actual.Journal);
-
-        public static void Has_a_question(BackstoryAnswer actual) =>
-            Assert.InRange(actual.Question, 1, 999);
-    }
 
     [Fact]
     public async Task Backstory_questions_can_be_enumerated()
@@ -53,10 +21,10 @@ public class StoryQueryTest
             actual.Value,
             question =>
             {
-                BackstoryQuestionFact.Id_is_positive(question);
-                BackstoryQuestionFact.Title_is_not_null(question);
-                BackstoryQuestionFact.Description_is_not_empty(question);
-                BackstoryQuestionFact.Has_3_to_8_answers(question);
+                question.Id_is_positive();
+                question.Title_is_not_null();
+                question.Description_is_not_empty();
+                question.Has_3_to_8_answers();
             }
         );
     }
@@ -74,11 +42,11 @@ public class StoryQueryTest
             actual.Value,
             answer =>
             {
-                BackstoryAnswerFact.Id_is_not_empty(answer);
-                BackstoryAnswerFact.Title_is_not_null(answer);
-                BackstoryAnswerFact.Description_is_not_empty(answer);
-                BackstoryAnswerFact.Journal_is_not_empty(answer);
-                BackstoryAnswerFact.Has_a_question(answer);
+                answer.Id_is_not_empty();
+                answer.Title_is_not_null();
+                answer.Description_is_not_empty();
+                answer.Journal_is_not_empty();
+                answer.Has_a_question();
             }
         );
     }

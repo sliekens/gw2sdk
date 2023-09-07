@@ -1,93 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using GuildWars2.Achievements;
-using GuildWars2.Achievements.Categories;
-using GuildWars2.Achievements.Dailies;
-using GuildWars2.Achievements.Groups;
-using GuildWars2.Achievements.Titles;
 using GuildWars2.Http;
 using GuildWars2.Tests.TestInfrastructure;
 using Xunit;
-using static GuildWars2.ProductName;
 
 namespace GuildWars2.Tests.Features.Achievements;
 
 public class AchievementsQueryTest
 {
-    private static class AccountAchievementFact
-    {
-        public static void Id_is_positive(AccountAchievement actual) =>
-            Assert.InRange(actual.Id, 1, int.MaxValue);
-    }
-
-    private static class AchievementCategoryFact
-    {
-        public static void Id_is_positive(AchievementCategory actual) =>
-            Assert.InRange(actual.Id, 1, int.MaxValue);
-
-        public static void Order_is_not_negative(AchievementCategory actual) =>
-            Assert.InRange(actual.Order, 0, int.MaxValue);
-    }
-
-    private static class DailyAchievementFact
-    {
-        public static void Id_is_positive(DailyAchievement actual) =>
-            Assert.InRange(actual.Id, 1, int.MaxValue);
-
-        public static void Min_level_is_between_1_and_80(DailyAchievement actual) =>
-            Assert.InRange(actual.Level.Min, 1, 80);
-
-        public static void Max_level_is_between_1_and_80(DailyAchievement actual) =>
-            Assert.InRange(actual.Level.Max, 1, 80);
-
-        public static void Can_have_a_product_requirement(DailyAchievement actual)
-        {
-            if (actual.RequiredAccess is not null)
-            {
-                Assert.Subset(
-                    new HashSet<ProductName>
-                    {
-                        HeartOfThorns,
-                        PathOfFire
-                    },
-                    new HashSet<ProductName> { actual.RequiredAccess.Product }
-                );
-
-                Assert.True(
-                    Enum.IsDefined(typeof(AccessCondition), actual.RequiredAccess.Condition)
-                );
-            }
-        }
-    }
-
-    private static class AchievementGroupFact
-    {
-        public static void Order_is_not_negative(AchievementGroup actual) =>
-            Assert.InRange(actual.Order, 0, int.MaxValue);
-    }
-
-    private static class TitleFact
-    {
-        public static void Id_is_positive(Title actual) =>
-            Assert.InRange(actual.Id, 1, int.MaxValue);
-
-        public static void Name_is_not_empty(Title actual) => Assert.NotEmpty(actual.Name);
-
-        public static void Can_be_unlocked_by_achievements_or_achievement_points(Title actual)
-        {
-            if (actual.AchievementPointsRequired.HasValue)
-            {
-                Assert.InRange(actual.AchievementPointsRequired.Value, 1, 100000);
-            }
-            else
-            {
-                Assert.NotEmpty(actual.Achievements!);
-            }
-        }
-    }
-
     [Theory]
     [InlineData(Day.Today)]
     [InlineData(Day.Tomorrow)]
@@ -98,27 +19,6 @@ public class AchievementsQueryTest
         var e = await Record.ExceptionAsync(async () =>
         {
             var actual = await sut.Achievements.GetDailyAchievements(day);
-
-            Assert.All(actual.Value.Pve, DailyAchievementFact.Id_is_positive);
-            Assert.All(actual.Value.Pvp, DailyAchievementFact.Id_is_positive);
-            Assert.All(actual.Value.Wvw, DailyAchievementFact.Id_is_positive);
-            Assert.All(actual.Value.Fractals, DailyAchievementFact.Id_is_positive);
-            Assert.All(actual.Value.Special, DailyAchievementFact.Id_is_positive);
-            Assert.All(actual.Value.Pve, DailyAchievementFact.Min_level_is_between_1_and_80);
-            Assert.All(actual.Value.Pvp, DailyAchievementFact.Min_level_is_between_1_and_80);
-            Assert.All(actual.Value.Wvw, DailyAchievementFact.Min_level_is_between_1_and_80);
-            Assert.All(actual.Value.Fractals, DailyAchievementFact.Min_level_is_between_1_and_80);
-            Assert.All(actual.Value.Special, DailyAchievementFact.Min_level_is_between_1_and_80);
-            Assert.All(actual.Value.Pve, DailyAchievementFact.Max_level_is_between_1_and_80);
-            Assert.All(actual.Value.Pvp, DailyAchievementFact.Max_level_is_between_1_and_80);
-            Assert.All(actual.Value.Wvw, DailyAchievementFact.Max_level_is_between_1_and_80);
-            Assert.All(actual.Value.Fractals, DailyAchievementFact.Max_level_is_between_1_and_80);
-            Assert.All(actual.Value.Special, DailyAchievementFact.Max_level_is_between_1_and_80);
-            Assert.All(actual.Value.Pve, DailyAchievementFact.Can_have_a_product_requirement);
-            Assert.All(actual.Value.Pvp, DailyAchievementFact.Can_have_a_product_requirement);
-            Assert.All(actual.Value.Wvw, DailyAchievementFact.Can_have_a_product_requirement);
-            Assert.All(actual.Value.Fractals, DailyAchievementFact.Can_have_a_product_requirement);
-            Assert.All(actual.Value.Special, DailyAchievementFact.Can_have_a_product_requirement);
         });
 
         // Unavailable due to Wizard Vault changes
@@ -195,7 +95,7 @@ public class AchievementsQueryTest
             actual.Value,
             achievement =>
             {
-                AccountAchievementFact.Id_is_positive(achievement);
+                achievement.Id_is_positive();
             }
         );
     }
@@ -261,8 +161,8 @@ public class AchievementsQueryTest
             actual.Value,
             achievementCategory =>
             {
-                AchievementCategoryFact.Id_is_positive(achievementCategory);
-                AchievementCategoryFact.Order_is_not_negative(achievementCategory);
+                achievementCategory.Id_is_positive();
+                achievementCategory.Order_is_not_negative();
             }
         );
     }
@@ -334,7 +234,7 @@ public class AchievementsQueryTest
             actual.Value,
             achievementGroup =>
             {
-                AchievementGroupFact.Order_is_not_negative(achievementGroup);
+                achievementGroup.Order_is_not_negative();
             }
         );
     }
@@ -406,9 +306,9 @@ public class AchievementsQueryTest
             actual.Value,
             title =>
             {
-                TitleFact.Id_is_positive(title);
-                TitleFact.Name_is_not_empty(title);
-                TitleFact.Can_be_unlocked_by_achievements_or_achievement_points(title);
+                title.Id_is_positive();
+                title.Name_is_not_empty();
+                title.Can_be_unlocked_by_achievements_or_achievement_points();
             }
         );
     }

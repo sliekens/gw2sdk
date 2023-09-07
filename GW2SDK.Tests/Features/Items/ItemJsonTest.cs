@@ -21,7 +21,7 @@ public class ItemJsonTest : IClassFixture<ItemFixture>
             {
                 using var document = JsonDocument.Parse(json);
                 var actual = document.RootElement.GetItem(MissingMemberBehavior.Error);
-                ItemFacts.Validate(actual);
+                actual.Validate();
             }
         );
 }

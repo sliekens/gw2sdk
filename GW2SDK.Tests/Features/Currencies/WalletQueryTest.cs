@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using GuildWars2.Currencies;
 using GuildWars2.Tests.TestInfrastructure;
 using Xunit;
 
@@ -9,22 +8,6 @@ namespace GuildWars2.Tests.Features.Currencies;
 
 public class WalletQueryTest
 {
-    private static class CurrencyFact
-    {
-        public static void Id_is_positive(Currency actual) =>
-            Assert.InRange(actual.Id, 1, int.MaxValue);
-
-        public static void Name_is_not_empty(Currency actual) => Assert.NotEmpty(actual.Name);
-
-        public static void Description_is_not_empty(Currency actual) =>
-            Assert.NotEmpty(actual.Description);
-
-        public static void Order_is_positive(Currency actual) =>
-            Assert.InRange(actual.Order, 1, 1000);
-
-        public static void Icon_is_not_empty(Currency actual) => Assert.NotEmpty(actual.Icon);
-    }
-
     [Fact]
     public async Task Wallet_can_be_found()
     {
@@ -48,8 +31,8 @@ public class WalletQueryTest
             actual.Value,
             currency =>
             {
-                CurrencyFact.Id_is_positive(currency);
-                CurrencyFact.Name_is_not_empty(currency);
+                currency.Id_is_positive();
+                currency.Name_is_not_empty();
                 if (currency.Id == 63)
                 {
                     // Astral Acclaim is missing a tooltip
@@ -57,11 +40,11 @@ public class WalletQueryTest
                 }
                 else
                 {
-                    CurrencyFact.Description_is_not_empty(currency);
+                    currency.Description_is_not_empty();
                 }
 
-                CurrencyFact.Order_is_positive(currency);
-                CurrencyFact.Icon_is_not_empty(currency);
+                currency.Order_is_positive();
+                currency.Icon_is_not_empty();
             }
         );
     }

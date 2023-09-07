@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using GuildWars2.Masteries;
 using GuildWars2.Tests.TestInfrastructure;
 using Xunit;
 
@@ -8,45 +7,6 @@ namespace GuildWars2.Tests.Features.Masteries;
 
 public class MasteryQueryTest
 {
-    private static class MasteryFact
-    {
-        public static void Id_is_positive(Mastery actual) =>
-            Assert.InRange(actual.Id, 1, int.MaxValue);
-
-        public static void Name_is_not_empty(Mastery actual) => Assert.NotEmpty(actual.Name);
-
-        public static void Requirement_is_not_null(Mastery actual) =>
-            Assert.NotNull(actual.Requirement);
-
-        public static void Order_is_not_negative(Mastery actual) =>
-            Assert.InRange(actual.Order, 0, int.MaxValue);
-
-        public static void Background_is_not_empty(Mastery actual) =>
-            Assert.NotEmpty(actual.Background);
-
-        public static void Region_is_known(Mastery actual) =>
-            Assert.NotEqual(MasteryRegionName.Unknown, actual.Region);
-    }
-
-    private static class MasteryLevelFact
-    {
-        public static void Name_is_not_empty(MasteryLevel actual) => Assert.NotEmpty(actual.Name);
-
-        public static void Description_is_not_empty(MasteryLevel actual) =>
-            Assert.NotEmpty(actual.Description);
-
-        public static void Instruction_is_not_empty(MasteryLevel actual) =>
-            Assert.NotEmpty(actual.Instruction);
-
-        public static void Icon_is_not_empty(MasteryLevel actual) => Assert.NotEmpty(actual.Icon);
-
-        public static void Costs_points(MasteryLevel actual) =>
-            Assert.InRange(actual.PointCost, 1, int.MaxValue);
-
-        public static void Costs_experience(MasteryLevel actual) =>
-            Assert.InRange(actual.ExperienceCost, 1, int.MaxValue);
-    }
-
     [Fact]
     public async Task Masteries_can_be_enumerated()
     {
@@ -59,22 +19,22 @@ public class MasteryQueryTest
             actual.Value,
             mastery =>
             {
-                MasteryFact.Id_is_positive(mastery);
-                MasteryFact.Name_is_not_empty(mastery);
-                MasteryFact.Requirement_is_not_null(mastery);
-                MasteryFact.Order_is_not_negative(mastery);
-                MasteryFact.Background_is_not_empty(mastery);
-                MasteryFact.Region_is_known(mastery);
+                mastery.Id_is_positive();
+                mastery.Name_is_not_empty();
+                mastery.Requirement_is_not_null();
+                mastery.Order_is_not_negative();
+                mastery.Background_is_not_empty();
+                mastery.Region_is_known();
                 Assert.All(
                     mastery.Levels,
                     level =>
                     {
-                        MasteryLevelFact.Name_is_not_empty(level);
-                        MasteryLevelFact.Description_is_not_empty(level);
-                        MasteryLevelFact.Instruction_is_not_empty(level);
-                        MasteryLevelFact.Icon_is_not_empty(level);
-                        MasteryLevelFact.Costs_points(level);
-                        MasteryLevelFact.Costs_experience(level);
+                        level.Name_is_not_empty();
+                        level.Description_is_not_empty();
+                        level.Instruction_is_not_empty();
+                        level.Icon_is_not_empty();
+                        level.Costs_points();
+                        level.Costs_experience();
                     }
                 );
             }

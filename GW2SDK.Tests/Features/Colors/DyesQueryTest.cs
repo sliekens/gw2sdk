@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using GuildWars2.Colors;
 using GuildWars2.Tests.TestInfrastructure;
 using Xunit;
 
@@ -8,12 +7,6 @@ namespace GuildWars2.Tests.Features.Colors;
 
 public class DyesQueryTest
 {
-    private static class ColorFact
-    {
-        public static void Base_rgb_contains_red_green_blue(Dye actual) =>
-            Assert.False(actual.BaseRgb.IsEmpty);
-    }
-
     [Fact]
     public async Task Colors_can_be_enumerated()
     {
@@ -26,7 +19,7 @@ public class DyesQueryTest
             actual.Value,
             color =>
             {
-                ColorFact.Base_rgb_contains_red_green_blue(color);
+                color.Base_rgb_contains_red_green_blue();
             }
         );
     }

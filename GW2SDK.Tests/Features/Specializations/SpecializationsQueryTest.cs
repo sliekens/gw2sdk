@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using GuildWars2.Specializations;
 using GuildWars2.Tests.TestInfrastructure;
 using Xunit;
 
@@ -8,31 +7,6 @@ namespace GuildWars2.Tests.Features.Specializations;
 
 public class SpecializationsQueryTest
 {
-    private static class SpecializationFact
-    {
-        public static void Id_is_positive(Specialization actual) =>
-            Assert.InRange(actual.Id, 1, int.MaxValue);
-
-        public static void Name_is_not_empty(Specialization actual) => Assert.NotEmpty(actual.Name);
-
-        public static void It_has_minor_traits(Specialization actual) =>
-            Assert.NotEmpty(actual.MinorTraits);
-
-        public static void It_has_major_traits(Specialization actual) =>
-            Assert.NotEmpty(actual.MajorTraits);
-
-        public static void Icon_is_not_empty(Specialization actual) => Assert.NotEmpty(actual.Icon);
-
-        public static void Background_is_not_empty(Specialization actual) =>
-            Assert.NotEmpty(actual.Icon);
-
-        public static void Profession_icon_is_not_null(Specialization actual) =>
-            Assert.NotNull(actual.ProfessionIcon);
-
-        public static void Big_profession_icon_is_not_null(Specialization actual) =>
-            Assert.NotNull(actual.ProfessionIconBig);
-    }
-
     [Fact]
     public async Task Specializations_can_be_enumerated()
     {
@@ -45,14 +19,14 @@ public class SpecializationsQueryTest
             actual.Value,
             specialization =>
             {
-                SpecializationFact.Id_is_positive(specialization);
-                SpecializationFact.Name_is_not_empty(specialization);
-                SpecializationFact.It_has_minor_traits(specialization);
-                SpecializationFact.It_has_major_traits(specialization);
-                SpecializationFact.Icon_is_not_empty(specialization);
-                SpecializationFact.Background_is_not_empty(specialization);
-                SpecializationFact.Big_profession_icon_is_not_null(specialization);
-                SpecializationFact.Profession_icon_is_not_null(specialization);
+                specialization.Id_is_positive();
+                specialization.Name_is_not_empty();
+                specialization.It_has_minor_traits();
+                specialization.It_has_major_traits();
+                specialization.Icon_is_not_empty();
+                specialization.Background_is_not_empty();
+                specialization.Big_profession_icon_is_not_null();
+                specialization.Profession_icon_is_not_null();
             }
         );
     }

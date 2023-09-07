@@ -73,7 +73,7 @@ public class ItemsQueryTest
 
         await foreach (var actual in sut.Items.GetItems())
         {
-            ItemFacts.Validate(actual);
+            actual.Validate();
         }
     }
 }
