@@ -12,15 +12,13 @@ public sealed record AccountAchievement
 
     public required IReadOnlyCollection<int>? Bits { get; init; }
 
-    /// <summary>The current number of things completed.
+    /// <summary>The current number of things completed.</summary>
     /// <example>The number of things already killed for a Slayer achievement.</example>
-    /// </summary>
     /// <remarks>This can be greater than <see cref="Max" /> but there are no rewards for any additional progress.</remarks>
     public required int Current { get; init; }
 
-    /// <summary>The total number of things required to complete the achievement.
+    /// <summary>The total number of things required to complete the achievement.</summary>
     /// <example>The total number of kills required for a Slayer achievement.</example>
-    /// </summary>
     /// <remarks>This can be less than <see cref="Current" /> but there are no rewards for any additional progress.</remarks>
     public required int Max { get; init; }
 
