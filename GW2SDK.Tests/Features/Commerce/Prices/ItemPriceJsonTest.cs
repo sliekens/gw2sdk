@@ -4,9 +4,9 @@ using Xunit;
 
 namespace GuildWars2.Tests.Features.Commerce.Prices;
 
-public class ItemPriceReaderTest : IClassFixture<ItemPriceFixture>
+public class ItemPriceJsonTest : IClassFixture<ItemPriceFixture>
 {
-    public ItemPriceReaderTest(ItemPriceFixture fixture)
+    public ItemPriceJsonTest(ItemPriceFixture fixture)
     {
         this.fixture = fixture;
     }

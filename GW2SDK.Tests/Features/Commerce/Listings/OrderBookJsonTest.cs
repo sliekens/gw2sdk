@@ -3,9 +3,9 @@ using GuildWars2.Commerce.Listings;
 using Xunit;
 
 namespace GuildWars2.Tests.Features.Commerce.Listings;
-public class OrderBookReaderTest : IClassFixture<OrderBookFixture>
+public class OrderBookJsonTest : IClassFixture<OrderBookFixture>
 {
-    public OrderBookReaderTest(OrderBookFixture fixture)
+    public OrderBookJsonTest(OrderBookFixture fixture)
     {
         this.fixture = fixture;
     }

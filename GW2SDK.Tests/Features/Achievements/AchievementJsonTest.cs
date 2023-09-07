@@ -4,9 +4,9 @@ using Xunit;
 
 namespace GuildWars2.Tests.Features.Achievements;
 
-public class AchievementReaderTest : IClassFixture<AchievementFixture>
+public class AchievementJsonTest : IClassFixture<AchievementFixture>
 {
-    public AchievementReaderTest(AchievementFixture fixture)
+    public AchievementJsonTest(AchievementFixture fixture)
     {
         this.fixture = fixture;
     }
