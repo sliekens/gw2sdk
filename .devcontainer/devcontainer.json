@@ -19,12 +19,18 @@
     "DOTNET_NOLOGO": "true",
     "DOTNET_CLI_TELEMETRY_OPTOUT": "true"
   },
-  "initializeCommand": {
-    "pull-latest": "docker pull ghcr.io/sliekens/gw2sdk/devcontainer:latest"
+  "initializeCommand": "docker pull ghcr.io/sliekens/gw2sdk/devcontainer:latest",
+  "onCreateCommand": "sudo chown -R vscode:vscode /home/vscode/.nuget",
+  "postCreateCommand": {
+    "alias ll": "echo \"alias ll='ls -lah'\" >> ~/.bashrc",
+    "alias jb": "echo \"alias jb='dotnet jb'\" >> ~/.bashrc",
+    "alias vuepress": "echo \"alias vuepress='npx vuepress'\" >> ~/.bashrc",
+    "alias httprepl": "echo \"alias httprepl='dotnet httprepl https://api.guildwars2.com'\" >> ~/.bashrc"
   },
-  "postCreateCommand": [
-    ".devcontainer/post-create.sh"
-  ],
+  "postStartCommand": {
+    "dotnet restore": "dotnet restore",
+    "dotnet tool restore": "dotnet tool restore"
+  },
   "mounts": [
     "type=volume,source=gw2sdk-packages,target=/home/vscode/.nuget/packages",
     "type=volume,source=gw2sdk-secrets,target=/home/vscode/.microsoft/usersecrets"
