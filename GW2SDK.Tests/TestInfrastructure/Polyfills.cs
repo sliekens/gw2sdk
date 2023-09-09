@@ -1,4 +1,4 @@
-﻿#if NET48
+﻿#if NETFRAMEWORK
 using System.Collections.Generic;
 
 namespace GuildWars2.Tests.TestInfrastructure;
