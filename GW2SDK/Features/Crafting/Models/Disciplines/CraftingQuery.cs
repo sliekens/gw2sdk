@@ -131,10 +131,10 @@ public sealed class CraftingQuery
         CancellationToken cancellationToken = default
     )
     {
-        var producer = SplitQuery.Create<int, Recipe>(
-            async (range, ct) =>
+        var producer = BulkQuery.Create<int, Recipe>(
+            async (chunk, ct) =>
             {
-                RecipesByIdsRequest request = new(range)
+                RecipesByIdsRequest request = new(chunk)
                 {
                     MissingMemberBehavior = missingMemberBehavior
                 };

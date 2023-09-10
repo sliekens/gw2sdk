@@ -38,10 +38,10 @@ public class JsonRecipeService
         CancellationToken cancellationToken = default
     )
     {
-        var producer = SplitQuery.Create<int, string>(
-            async (range, ct) =>
+        var producer = BulkQuery.Create<int, string>(
+            async (chunk, ct) =>
             {
-                var request = new BulkRequest("/v2/recipes") { Ids = range };
+                var request = new BulkRequest("/v2/recipes") { Ids = chunk };
                 var json = await request.SendAsync(http, ct);
                 return json.Indent(false)
                     .RootElement.EnumerateArray()

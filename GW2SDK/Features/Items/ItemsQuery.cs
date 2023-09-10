@@ -48,10 +48,10 @@ public sealed class ItemsQuery
         CancellationToken cancellationToken = default
     )
     {
-        var producer = SplitQuery.Create<int, Item>(
-            async (range, ct) =>
+        var producer = BulkQuery.Create<int, Item>(
+            async (chunk, ct) =>
             {
-                var request = new ItemsByIdsRequest(range)
+                var request = new ItemsByIdsRequest(chunk)
                 {
                     Language = language,
                     MissingMemberBehavior = missingMemberBehavior

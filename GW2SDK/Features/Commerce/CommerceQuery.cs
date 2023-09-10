@@ -74,10 +74,10 @@ public sealed class CommerceQuery
         CancellationToken cancellationToken = default
     )
     {
-        var producer = SplitQuery.Create<int, ItemPrice>(
-            async (range, ct) =>
+        var producer = BulkQuery.Create<int, ItemPrice>(
+            async (chunk, ct) =>
             {
-                ItemPricesByIdsRequest request = new(range)
+                ItemPricesByIdsRequest request = new(chunk)
                 {
                     MissingMemberBehavior = missingMemberBehavior
                 };
@@ -145,10 +145,10 @@ public sealed class CommerceQuery
         CancellationToken cancellationToken = default
     )
     {
-        var producer = SplitQuery.Create<int, OrderBook>(
-            async (range, ct) =>
+        var producer = BulkQuery.Create<int, OrderBook>(
+            async (chunk, ct) =>
             {
-                OrderBooksByIdsRequest request = new(range)
+                OrderBooksByIdsRequest request = new(chunk)
                 {
                     MissingMemberBehavior = missingMemberBehavior
                 };
