@@ -31,7 +31,7 @@ public class Container : IDisposable, IAsyncDisposable
             .ConfigurePrimaryHttpMessageHandler(
                 () => new SocketsHttpHandler
                 {
-                    MaxConnectionsPerServer = 20,
+                    MaxConnectionsPerServer = 1000,
 
                     // Creating a new connection shouldn't take more than 10 seconds
                     ConnectTimeout = TimeSpan.FromSeconds(10),

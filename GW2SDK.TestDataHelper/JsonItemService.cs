@@ -33,7 +33,7 @@ public class JsonItemService
         await new ItemsIndexRequest().SendAsync(http, CancellationToken.None);
 
     public IAsyncEnumerable<string> GetJsonItemsByIds(
-        IReadOnlyCollection<int> itemIds,
+        IReadOnlyCollection<int> ids,
         IProgress<ResultContext>? progress = default,
         CancellationToken cancellationToken = default
     )
@@ -53,7 +53,8 @@ public class JsonItemService
             }
         );
         return producer.QueryAsync(
-            itemIds,
+            ids,
+            degreeOfParalllelism: 100,
             progress: progress,
             cancellationToken: cancellationToken
         );

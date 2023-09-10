@@ -33,7 +33,7 @@ public class JsonOrderBookService
         await new OrderBooksIndexRequest().SendAsync(http, CancellationToken.None);
 
     public IAsyncEnumerable<string> GetJsonItemListingsById(
-        IReadOnlyCollection<int> itemIds,
+        IReadOnlyCollection<int> ids,
         IProgress<ResultContext>? progress = default,
         CancellationToken cancellationToken = default
     )
@@ -53,7 +53,8 @@ public class JsonOrderBookService
             }
         );
         return producer.QueryAsync(
-            itemIds,
+            ids,
+            degreeOfParalllelism: 100,
             progress: progress,
             cancellationToken: cancellationToken
         );

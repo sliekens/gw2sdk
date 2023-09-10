@@ -33,7 +33,7 @@ public class JsonRecipeService
         await new RecipesIndexRequest().SendAsync(http, CancellationToken.None);
 
     public IAsyncEnumerable<string> GetJsonRecipesByIds(
-        IReadOnlyCollection<int> itemIds,
+        IReadOnlyCollection<int> ids,
         IProgress<ResultContext>? progress = default,
         CancellationToken cancellationToken = default
     )
@@ -53,7 +53,8 @@ public class JsonRecipeService
             }
         );
         return producer.QueryAsync(
-            itemIds,
+            ids,
+            degreeOfParalllelism: 100,
             progress: progress,
             cancellationToken: cancellationToken
         );

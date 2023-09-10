@@ -16,24 +16,18 @@ public class BulkRequest : IHttpRequest<JsonDocument>
         this.requestUri = requestUri;
     }
 
-    public IReadOnlyCollection<int>? Ids { get; init; }
+    public required IReadOnlyCollection<int> Ids { get; init; }
 
     public async Task<JsonDocument> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
     )
     {
-        QueryBuilder search = new();
-        if (Ids is not { Count: > 0 })
+        QueryBuilder search = new()
         {
-            search.Add("ids", "all");
-        }
-        else
-        {
-            search.Add("ids", Ids);
-        }
-
-        search.Add("v", "3");
+            { "ids", Ids },
+            { "v", "3" }
+        };
 
         var requestTemplate = new HttpRequestMessageTemplate(HttpMethod.Get, requestUri)
         {
