@@ -109,14 +109,7 @@ public sealed class BulkQuery<TKey, TRecord>
             .Select(async chunk =>
             {
                 await limiter.WaitAsync(cancellationToken).ConfigureAwait(false);
-                try
-                {
-                    return await chunkQuery(chunk, cancellationToken).ConfigureAwait(false);
-                }
-                finally
-                {
-                    limiter.Release();
-                }
+                return await chunkQuery(chunk, cancellationToken).ConfigureAwait(false);
             })
             .ToList()
             .OrderByCompletion()
@@ -129,6 +122,8 @@ public sealed class BulkQuery<TKey, TRecord>
                 cancellationToken.ThrowIfCancellationRequested();
                 yield return record;
             }
+
+            limiter.Release();
         }
 
         static IEnumerable<List<TKey>> Chunk(List<TKey> index, int size)
