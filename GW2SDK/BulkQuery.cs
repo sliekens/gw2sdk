@@ -28,14 +28,13 @@ public delegate Task<IReadOnlyCollection<TRecord>> ChunkQuery<TKey, TRecord>(
 [PublicAPI]
 public static class BulkQuery
 {
+    public const int DefaultChunkSize = 200;
+
     public const int DefaultDegreeOfParalllelism = 20;
 
-    public static BulkQuery<TKey, TRecord> Create<TKey, TRecord>(
-        ChunkQuery<TKey, TRecord> chunkQuery,
-        int degreeOfParalllelism = DefaultDegreeOfParalllelism
-    )
+    public static BulkQuery<TKey, TRecord> Create<TKey, TRecord>(ChunkQuery<TKey, TRecord> chunkQuery)
     {
-        return new(chunkQuery, degreeOfParalllelism);
+        return new(chunkQuery);
     }
 }
 
@@ -46,17 +45,15 @@ public sealed class BulkQuery<TKey, TRecord>
 {
     private readonly ChunkQuery<TKey, TRecord> chunkQuery;
 
-    private readonly int degreeOfParalllelism;
-
-    internal BulkQuery(ChunkQuery<TKey, TRecord> chunkQuery, int degreeOfParalllelism)
+    internal BulkQuery(ChunkQuery<TKey, TRecord> chunkQuery)
     {
         this.chunkQuery = chunkQuery;
-        this.degreeOfParalllelism = Math.Max(1, degreeOfParalllelism);
     }
 
     public async IAsyncEnumerable<TRecord> QueryAsync(
         IReadOnlyCollection<TKey> index,
-        int chunkSize = 200,
+        int chunkSize = BulkQuery.DefaultChunkSize,
+        int degreeOfParalllelism = BulkQuery.DefaultDegreeOfParalllelism,
         IProgress<ResultContext>? progress = default,
         [EnumeratorCancellation] CancellationToken cancellationToken = default
     )
@@ -71,7 +68,16 @@ public sealed class BulkQuery<TKey, TRecord>
             throw new ArgumentOutOfRangeException(
                 nameof(chunkSize),
                 chunkSize,
-                "The chunk size must be a number between 1 and 200"
+                "The chunk size must be a number between 1 and 200."
+            );
+        }
+
+        if (degreeOfParalllelism < 1)
+        {
+            throw new ArgumentOutOfRangeException(
+                nameof(degreeOfParalllelism),
+                degreeOfParalllelism,
+                "The degree of paralellism must be at least 1."
             );
         }
 

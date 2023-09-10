@@ -26,18 +26,19 @@ public class BulkQueryTest
             {
                 var found = records.Where(record => chunk.Contains(record.Id)).ToHashSet();
                 return Task.FromResult((IReadOnlyCollection<StubRecord>)found);
-            },
-            chunkSize
+            }
         );
 
+        // Cancel after 107 records have been received (arbitrary positive number less than the total)
+        const int cutoff = 107;
         var received = 0;
-        var producer = sut.QueryAsync(index, cancellationToken: cancellationTokenSource.Token);
+        var producer = sut.QueryAsync(index, chunkSize: chunkSize, cancellationToken: cancellationTokenSource.Token);
         var reason = await Assert.ThrowsAsync<OperationCanceledException>(
             async () =>
             {
                 await foreach (var _ in producer.WithCancellation(cancellationTokenSource.Token))
                 {
-                    if (++received == 107)
+                    if (++received == cutoff)
                     {
                         cancellationTokenSource.Cancel();
                     }
@@ -46,7 +47,7 @@ public class BulkQueryTest
         );
 
         Assert.True(cancellationTokenSource.Token.Equals(reason.CancellationToken));
-        Assert.Equal(107, received);
+        Assert.Equal(cutoff, received);
     }
 
     [Fact]
