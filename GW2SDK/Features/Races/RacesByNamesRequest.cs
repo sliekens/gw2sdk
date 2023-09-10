@@ -1,31 +1,35 @@
-﻿using System.Net.Http;
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 using GuildWars2.Http;
+using GuildWars2.Json;
 using JetBrains.Annotations;
 
 namespace GuildWars2.Races;
 
 [PublicAPI]
-public sealed class RaceByIdRequest : IHttpRequest<Replica<Race>>
+public sealed class RacesByNamesRequest : IHttpRequest<Replica<HashSet<Race>>>
 {
     private static readonly HttpRequestMessageTemplate Template = new(HttpMethod.Get, "v2/races")
     {
         AcceptEncoding = "gzip"
     };
 
-    public RaceByIdRequest(RaceName raceId)
+    public RacesByNamesRequest(IReadOnlyCollection<RaceName> raceIds)
     {
-        RaceId = raceId;
+        Check.Collection(raceIds, nameof(raceIds));
+        RaceIds = raceIds;
     }
 
-    public RaceName RaceId { get; }
+    public IReadOnlyCollection<RaceName> RaceIds { get; }
 
     public Language? Language { get; init; }
 
     public MissingMemberBehavior MissingMemberBehavior { get; init; }
 
-    public async Task<Replica<Race>> SendAsync(
+    public async Task<Replica<HashSet<Race>>> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
     )
@@ -35,7 +39,7 @@ public sealed class RaceByIdRequest : IHttpRequest<Replica<Race>>
                 {
                     Arguments = new QueryBuilder
                     {
-                        { "id", RaceId.ToString() },
+                        { "ids", RaceIds.Select(id => id.ToString()) },
                         { "v", SchemaVersion.Recommended }
                     },
                     AcceptLanguage = Language?.Alpha2Code
@@ -48,9 +52,9 @@ public sealed class RaceByIdRequest : IHttpRequest<Replica<Race>>
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
-        return new Replica<Race>
+        return new Replica<HashSet<Race>>
         {
-            Value = json.RootElement.GetRace(MissingMemberBehavior),
+            Value = json.RootElement.GetSet(entry => entry.GetRace(MissingMemberBehavior)),
             ResultContext = response.Headers.GetResultContext(),
             PageContext = response.Headers.GetPageContext(),
             Date = response.Headers.Date.GetValueOrDefault(),

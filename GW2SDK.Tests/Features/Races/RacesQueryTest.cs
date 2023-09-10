@@ -28,36 +28,36 @@ public class RacesQueryTest
     }
 
     [Fact]
-    public async Task A_race_can_be_found_by_id()
+    public async Task A_race_can_be_found_by_name()
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        const RaceName raceId = RaceName.Human;
+        const RaceName name = RaceName.Human;
 
-        var actual = await sut.Races.GetRaceById(raceId);
+        var actual = await sut.Races.GetRaceByName(name);
 
-        Assert.Equal(raceId, actual.Value.Id);
+        Assert.Equal(name, actual.Value.Id);
     }
 
     [Fact]
-    public async Task Races_can_be_filtered_by_id()
+    public async Task Races_can_be_filtered_by_name()
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        HashSet<RaceName> ids = new()
+        HashSet<RaceName> names = new()
         {
             RaceName.Asura,
             RaceName.Charr,
             RaceName.Norn
         };
 
-        var actual = await sut.Races.GetRacesByIds(ids);
+        var actual = await sut.Races.GetRacesByNames(names);
 
         Assert.Collection(
             actual.Value,
-            first => Assert.Contains(first.Id, ids),
-            second => Assert.Contains(second.Id, ids),
-            third => Assert.Contains(third.Id, ids)
+            first => Assert.Contains(first.Id, names),
+            second => Assert.Contains(second.Id, names),
+            third => Assert.Contains(third.Id, names)
         );
     }
 

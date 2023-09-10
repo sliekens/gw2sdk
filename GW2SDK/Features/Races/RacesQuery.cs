@@ -40,14 +40,14 @@ public sealed class RacesQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<Race>> GetRaceById(
-        RaceName raceId,
+    public Task<Replica<Race>> GetRaceByName(
+        RaceName raceName,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        RaceByIdRequest request = new(raceId)
+        RaceByNameRequest request = new(raceName)
         {
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
@@ -55,14 +55,14 @@ public sealed class RacesQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<HashSet<Race>>> GetRacesByIds(
-        IReadOnlyCollection<RaceName> raceIds,
+    public Task<Replica<HashSet<Race>>> GetRacesByNames(
+        IReadOnlyCollection<RaceName> raceNames,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        RacesByIdsRequest request = new(raceIds)
+        RacesByNamesRequest request = new(raceNames)
         {
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
