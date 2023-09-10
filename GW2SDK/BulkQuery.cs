@@ -28,14 +28,14 @@ public delegate Task<IReadOnlyCollection<TRecord>> ChunkQuery<TKey, TRecord>(
 [PublicAPI]
 public static class BulkQuery
 {
-    public const int DefaultConcurrency = 20;
+    public const int DefaultDegreeOfParalllelism = 20;
 
     public static BulkQuery<TKey, TRecord> Create<TKey, TRecord>(
         ChunkQuery<TKey, TRecord> chunkQuery,
-        int maxConcurrency = DefaultConcurrency
+        int degreeOfParalllelism = DefaultDegreeOfParalllelism
     )
     {
-        return new(chunkQuery, maxConcurrency);
+        return new(chunkQuery, degreeOfParalllelism);
     }
 }
 
@@ -46,12 +46,12 @@ public sealed class BulkQuery<TKey, TRecord>
 {
     private readonly ChunkQuery<TKey, TRecord> chunkQuery;
 
-    private readonly int maxConcurrency;
+    private readonly int degreeOfParalllelism;
 
-    internal BulkQuery(ChunkQuery<TKey, TRecord> chunkQuery, int maxConcurrency)
+    internal BulkQuery(ChunkQuery<TKey, TRecord> chunkQuery, int degreeOfParalllelism)
     {
         this.chunkQuery = chunkQuery;
-        this.maxConcurrency = Math.Max(1, maxConcurrency);
+        this.degreeOfParalllelism = Math.Max(1, degreeOfParalllelism);
     }
 
     public async IAsyncEnumerable<TRecord> QueryAsync(
@@ -99,7 +99,7 @@ public sealed class BulkQuery<TKey, TRecord>
 
         // Proceed with the queries in parallel, but limit the number of concurrent queries
         var queries = chunks.AsParallel()
-            .WithDegreeOfParallelism(maxConcurrency)
+            .WithDegreeOfParallelism(degreeOfParalllelism)
             .WithCancellation(cancellationToken)
             .WithMergeOptions(ParallelMergeOptions.NotBuffered)
             .Select(chunk => chunkQuery(chunk, cancellationToken))
