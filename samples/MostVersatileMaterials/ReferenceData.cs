@@ -94,7 +94,7 @@ public class ReferenceData
         try
         {
             var report = new Progress<ResultContext>(ctx => UpdateProgress(ctx, progress));
-            return await craftingQuery.GetRecipes(progress: report)
+            return await craftingQuery.GetRecipesBulk(progress: report)
                 .OrderByDescending(recipe => recipe.Id)
                 .ToListAsync();
         }
@@ -115,7 +115,7 @@ public class ReferenceData
         try
         {
             var report = new Progress<ResultContext>(ctx => UpdateProgress(ctx, progress));
-            return await itemsQuery.GetItemsByIds(itemIds, progress: report).ToListAsync();
+            return await itemsQuery.GetItemsBulk(itemIds, progress: report).ToListAsync();
         }
         finally
         {

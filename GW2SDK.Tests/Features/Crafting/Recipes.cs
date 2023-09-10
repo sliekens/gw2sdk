@@ -7,26 +7,22 @@ namespace GuildWars2.Tests.Features.Crafting;
 
 public class Recipes
 {
-    [Fact(
-        Skip =
-            "This test is best used interactively, otherwise it will hit rate limits in this as well as other tests."
-    )]
+    [Fact]
     public async Task Can_be_enumerated()
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        var actual = await sut.Crafting.GetRecipes().ToListAsync();
-
-        Assert.All(
-            actual,
-            entry =>
-            {
-                entry.Has_id();
-                entry.Has_output_item_id();
-                entry.Has_item_count();
-                entry.Has_min_rating_between_0_and_500();
-                entry.Has_time_to_craft();
-            }
-        );
+        // You wouldn't want to use Take() in production code
+        //   but enumerating all entries is too expensive for a test
+        // This code will actually try to fetch more than 600 entries
+        //  but the extra requests will be cancelled when this test completes
+        await foreach (var actual in sut.Crafting.GetRecipesBulk(degreeOfParalllelism: 3).Take(600))
+        {
+            actual.Has_id();
+            actual.Has_output_item_id();
+            actual.Has_item_count();
+            actual.Has_min_rating_between_0_and_500();
+            actual.Has_time_to_craft();
+        }
     }
 }

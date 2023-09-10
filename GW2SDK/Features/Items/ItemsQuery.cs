@@ -40,31 +40,19 @@ public sealed class ItemsQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public IAsyncEnumerable<Item> GetItemsByIds(
+    public Task<Replica<HashSet<Item>>> GetItemsByIds(
         IReadOnlyCollection<int> itemIds,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
-        IProgress<ResultContext>? progress = default,
         CancellationToken cancellationToken = default
     )
     {
-        var producer = BulkQuery.Create<int, Item>(
-            async (chunk, ct) =>
-            {
-                var request = new ItemsByIdsRequest(chunk)
-                {
-                    Language = language,
-                    MissingMemberBehavior = missingMemberBehavior
-                };
-                var response = await request.SendAsync(http, ct).ConfigureAwait(false);
-                return response.Value;
-            }
-        );
-        return producer.QueryAsync(
-            itemIds,
-            progress: progress,
-            cancellationToken: cancellationToken
-        );
+        ItemsByIdsRequest request = new(itemIds)
+        {
+            Language = language,
+            MissingMemberBehavior = missingMemberBehavior
+        };
+        return request.SendAsync(http, cancellationToken);
     }
 
     public Task<Replica<HashSet<Item>>> GetItemsByPage(
@@ -85,18 +73,49 @@ public sealed class ItemsQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public async IAsyncEnumerable<Item> GetItems(
+    public IAsyncEnumerable<Item> GetItemsBulk(
+        IReadOnlyCollection<int> itemIds,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
+        int degreeOfParalllelism = BulkQuery.DefaultDegreeOfParalllelism,
+        int chunkSize = BulkQuery.DefaultChunkSize,
+        IProgress<ResultContext>? progress = default,
+        CancellationToken cancellationToken = default
+    )
+    {
+        var producer = BulkQuery.Create<int, Item>(
+            async (chunk, ct) =>
+            {
+                var response = await GetItemsByIds(chunk, language, missingMemberBehavior, ct)
+                    .ConfigureAwait(false);
+                return response.Value;
+            }
+        );
+        return producer.QueryAsync(
+            itemIds,
+            degreeOfParalllelism,
+            chunkSize,
+            progress,
+            cancellationToken
+        );
+    }
+
+    public async IAsyncEnumerable<Item> GetItemsBulk(
+        Language? language = default,
+        MissingMemberBehavior missingMemberBehavior = default,
+        int degreeOfParalllelism = BulkQuery.DefaultDegreeOfParalllelism,
+        int chunkSize = BulkQuery.DefaultChunkSize,
         IProgress<ResultContext>? progress = default,
         [EnumeratorCancellation] CancellationToken cancellationToken = default
     )
     {
         var index = await GetItemsIndex(cancellationToken).ConfigureAwait(false);
-        var producer = GetItemsByIds(
+        var producer = GetItemsBulk(
             index.Value,
             language,
             missingMemberBehavior,
+            degreeOfParalllelism,
+            chunkSize,
             progress,
             cancellationToken
         );

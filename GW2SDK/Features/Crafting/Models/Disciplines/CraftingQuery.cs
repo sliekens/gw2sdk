@@ -124,30 +124,17 @@ public sealed class CraftingQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public IAsyncEnumerable<Recipe> GetRecipesByIds(
+    public Task<Replica<HashSet<Recipe>>> GetRecipesByIds(
         IReadOnlyCollection<int> recipeIds,
         MissingMemberBehavior missingMemberBehavior = default,
-        IProgress<ResultContext>? progress = default,
         CancellationToken cancellationToken = default
     )
     {
-        var producer = BulkQuery.Create<int, Recipe>(
-            async (chunk, ct) =>
-            {
-                RecipesByIdsRequest request = new(chunk)
-                {
-                    MissingMemberBehavior = missingMemberBehavior
-                };
-                var response = await request.SendAsync(http, ct).ConfigureAwait(false);
-                return response.Value;
-            }
-        );
-
-        return producer.QueryAsync(
-            recipeIds,
-            progress: progress,
-            cancellationToken: cancellationToken
-        );
+        RecipesByIdsRequest request = new(recipeIds)
+        {
+            MissingMemberBehavior = missingMemberBehavior
+        };
+        return request.SendAsync(http, cancellationToken);
     }
 
     public Task<Replica<HashSet<Recipe>>> GetRecipesByPage(
@@ -165,16 +152,47 @@ public sealed class CraftingQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public async IAsyncEnumerable<Recipe> GetRecipes(
+    public IAsyncEnumerable<Recipe> GetRecipesBulk(
+        IReadOnlyCollection<int> recipeIds,
         MissingMemberBehavior missingMemberBehavior = default,
+        int degreeOfParalllelism = BulkQuery.DefaultDegreeOfParalllelism,
+        int chunkSize = BulkQuery.DefaultChunkSize,
+        IProgress<ResultContext>? progress = default,
+        CancellationToken cancellationToken = default
+    )
+    {
+        var producer = BulkQuery.Create<int, Recipe>(
+            async (chunk, ct) =>
+            {
+                var response = await GetRecipesByIds(recipeIds, missingMemberBehavior, ct)
+                    .ConfigureAwait(false);
+                return response.Value;
+            }
+        );
+
+        return producer.QueryAsync(
+            recipeIds,
+            degreeOfParalllelism,
+            chunkSize,
+            progress: progress,
+            cancellationToken: cancellationToken
+        );
+    }
+
+    public async IAsyncEnumerable<Recipe> GetRecipesBulk(
+        MissingMemberBehavior missingMemberBehavior = default,
+        int degreeOfParalllelism = BulkQuery.DefaultDegreeOfParalllelism,
+        int chunkSize = BulkQuery.DefaultChunkSize,
         IProgress<ResultContext>? progress = default,
         [EnumeratorCancellation] CancellationToken cancellationToken = default
     )
     {
         var index = await GetRecipesIndex(cancellationToken).ConfigureAwait(false);
-        var producer = GetRecipesByIds(
+        var producer = GetRecipesBulk(
             index.Value,
             missingMemberBehavior,
+            degreeOfParalllelism,
+            chunkSize,
             progress,
             cancellationToken
         );

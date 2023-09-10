@@ -74,25 +74,26 @@ public class CommerceQueryTest
             35984
         };
 
-        var actual = await sut.Commerce.GetItemPricesByIds(ids).ToListAsync();
+        var actual = await sut.Commerce.GetItemPricesByIds(ids);
 
         Assert.Collection(
             ids,
-            first => Assert.Contains(actual, found => found.Id == first),
-            second => Assert.Contains(actual, found => found.Id == second),
-            third => Assert.Contains(actual, found => found.Id == third)
+            first => Assert.Contains(actual.Value, found => found.Id == first),
+            second => Assert.Contains(actual.Value, found => found.Id == second),
+            third => Assert.Contains(actual.Value, found => found.Id == third)
         );
     }
 
-    [Fact(
-        Skip =
-            "This test is best used interactively, otherwise it will hit rate limits in this as well as other tests."
-    )]
+    [Fact]
     public async Task Item_prices_can_be_enumerated()
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        await foreach (var actual in sut.Commerce.GetItemPrices())
+        // You wouldn't want to use Take() in production code
+        //   but enumerating all entries is too expensive for a test
+        // This code will actually try to fetch more than 600 entries
+        //  but the extra requests will be cancelled when this test completes
+        await foreach (var actual in sut.Commerce.GetItemPricesBulk(degreeOfParalllelism: 3).Take(600))
         {
             Assert.True(actual.Id > 0);
             if (actual.TotalSupply == 0)
@@ -190,25 +191,26 @@ public class CommerceQueryTest
             35984
         };
 
-        var actual = await sut.Commerce.GetOrderBooksByIds(ids).ToListAsync();
+        var actual = await sut.Commerce.GetOrderBooksByIds(ids);
 
         Assert.Collection(
             ids,
-            first => Assert.Contains(actual, found => found.Id == first),
-            second => Assert.Contains(actual, found => found.Id == second),
-            third => Assert.Contains(actual, found => found.Id == third)
+            first => Assert.Contains(actual.Value, found => found.Id == first),
+            second => Assert.Contains(actual.Value, found => found.Id == second),
+            third => Assert.Contains(actual.Value, found => found.Id == third)
         );
     }
 
-    [Fact(
-        Skip =
-            "This test is best used interactively, otherwise it will hit rate limits in this as well as other tests."
-    )]
+    [Fact]
     public async Task Order_books_can_be_enumerated()
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        await foreach (var actual in sut.Commerce.GetOrderBooks())
+        // You wouldn't want to use Take() in production code
+        //   but enumerating all entries is too expensive for a test
+        // This code will actually try to fetch more than 600 entries
+        //  but the extra requests will be cancelled when this test completes
+        await foreach (var actual in sut.Commerce.GetOrderBooksBulk(degreeOfParalllelism: 3).Take(600))
         {
             Assert.True(actual.Id > 0);
             if (actual.TotalSupply == 0)

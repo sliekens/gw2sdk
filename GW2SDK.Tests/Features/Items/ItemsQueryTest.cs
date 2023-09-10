@@ -42,13 +42,13 @@ public class ItemsQueryTest
             56
         };
 
-        var actual = await sut.Items.GetItemsByIds(ids).ToListAsync();
+        var actual = await sut.Items.GetItemsByIds(ids);
 
         Assert.Collection(
             ids,
-            first => Assert.Contains(actual, found => found.Id == first),
-            second => Assert.Contains(actual, found => found.Id == second),
-            third => Assert.Contains(actual, found => found.Id == third)
+            first => Assert.Contains(actual.Value, found => found.Id == first),
+            second => Assert.Contains(actual.Value, found => found.Id == second),
+            third => Assert.Contains(actual.Value, found => found.Id == third)
         );
     }
 
@@ -63,15 +63,16 @@ public class ItemsQueryTest
         Assert.Equal(3, actual.PageContext.PageSize);
     }
 
-    [Fact(
-        Skip =
-            "This test is best used interactively, otherwise it will hit rate limits in this as well as other tests."
-    )]
+    [Fact]
     public async Task Items_can_be_enumerated()
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        await foreach (var actual in sut.Items.GetItems())
+        // You wouldn't want to use Take() in production code
+        //   but enumerating all entries is too expensive for a test
+        // This code will actually try to fetch more than 600 entries
+        //  but the extra requests will be cancelled when this test completes
+        await foreach (var actual in sut.Items.GetItemsBulk(degreeOfParalllelism: 3).Take(600))
         {
             actual.Validate();
         }
