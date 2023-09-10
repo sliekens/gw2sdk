@@ -98,14 +98,22 @@ public sealed class BulkQuery<TKey, TRecord>
         var chunks = Chunk(index.ToList(), chunkSize);
 
         // Proceed with the queries in parallel, but limit the number of concurrent queries
-        var queries = chunks.AsParallel()
-            .WithDegreeOfParallelism(degreeOfParalllelism)
-            .WithCancellation(cancellationToken)
-            .WithMergeOptions(ParallelMergeOptions.NotBuffered)
-            .Select(chunk => chunkQuery(chunk, cancellationToken))
-            .ToList();
-
-        await foreach (var result in queries.OrderByCompletion()
+        using SemaphoreSlim limiter = new(degreeOfParalllelism);
+        await foreach (var result in chunks
+            .Select(async chunk =>
+            {
+                await limiter.WaitAsync(cancellationToken).ConfigureAwait(false);
+                try
+                {
+                    return await chunkQuery(chunk, cancellationToken).ConfigureAwait(false);
+                }
+                finally
+                {
+                    limiter.Release();
+                }
+            })
+            .ToList()
+            .OrderByCompletion()
             .WithCancellation(cancellationToken))
         {
             resultCount += result.Count;
@@ -117,13 +125,12 @@ public sealed class BulkQuery<TKey, TRecord>
             }
         }
 
-    }
-
-    private static IEnumerable<List<TKey>> Chunk(List<TKey> index, int size)
-    {
-        for (var offset = 0; offset < index.Count; offset += size)
+        static IEnumerable<List<TKey>> Chunk(List<TKey> index, int size)
         {
-            yield return index.GetRange(offset, Math.Min(size, index.Count - offset));
+            for (var offset = 0; offset < index.Count; offset += size)
+            {
+                yield return index.GetRange(offset, Math.Min(size, index.Count - offset));
+            }
         }
     }
 }
