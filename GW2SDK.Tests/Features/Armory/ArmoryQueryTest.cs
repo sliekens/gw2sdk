@@ -62,10 +62,10 @@ public class ArmoryQueryTest
         var actual = await sut.Armory.GetLegendaryItemsByIds(ids);
 
         Assert.Collection(
-            actual.Value,
-            first => Assert.Equal(83162, first.Id),
-            second => Assert.Equal(93105, second.Id),
-            third => Assert.Equal(80111, third.Id)
+            ids,
+            first => Assert.Contains(actual.Value, found => found.Id == first),
+            second => Assert.Contains(actual.Value, found => found.Id == second),
+            third => Assert.Contains(actual.Value, found => found.Id == third)
         );
     }
 

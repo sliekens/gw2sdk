@@ -40,7 +40,7 @@ public class ItemStatsQueryTest
     }
 
     [Fact]
-    public async Task Item_stats_can_be_filtered_by_ids()
+    public async Task Item_stats_can_be_filtered_by_id()
     {
         var sut = Composer.Resolve<Gw2Client>();
 
@@ -54,10 +54,10 @@ public class ItemStatsQueryTest
         var actual = await sut.ItemStats.GetItemStatsByIds(ids);
 
         Assert.Collection(
-            actual.Value,
-            first => Assert.Contains(first.Id, ids),
-            second => Assert.Contains(second.Id, ids),
-            third => Assert.Contains(third.Id, ids)
+            ids,
+            first => Assert.Contains(actual.Value, found => found.Id == first),
+            second => Assert.Contains(actual.Value, found => found.Id == second),
+            third => Assert.Contains(actual.Value, found => found.Id == third)
         );
     }
 

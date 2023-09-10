@@ -54,10 +54,10 @@ public class SkillsQueryTest
         var actual = await sut.Skills.GetSkillsByIds(ids);
 
         Assert.Collection(
-            actual.Value,
-            first => Assert.Contains(first.Id, ids),
-            second => Assert.Contains(second.Id, ids),
-            third => Assert.Contains(third.Id, ids)
+            ids,
+            first => Assert.Contains(actual.Value, found => found.Id == first),
+            second => Assert.Contains(actual.Value, found => found.Id == second),
+            third => Assert.Contains(actual.Value, found => found.Id == third)
         );
     }
 

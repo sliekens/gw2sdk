@@ -77,10 +77,10 @@ public class CommerceQueryTest
         var actual = await sut.Commerce.GetItemPricesByIds(ids).ToListAsync();
 
         Assert.Collection(
-            actual,
-            first => Assert.Equal(24, first.Id),
-            second => Assert.Equal(19699, second.Id),
-            third => Assert.Equal(35984, third.Id)
+            ids,
+            first => Assert.Contains(actual, found => found.Id == first),
+            second => Assert.Contains(actual, found => found.Id == second),
+            third => Assert.Contains(actual, found => found.Id == third)
         );
     }
 
@@ -193,10 +193,10 @@ public class CommerceQueryTest
         var actual = await sut.Commerce.GetOrderBooksByIds(ids).ToListAsync();
 
         Assert.Collection(
-            actual,
-            first => Assert.Equal(24, first.Id),
-            second => Assert.Equal(19699, second.Id),
-            third => Assert.Equal(35984, third.Id)
+            ids,
+            first => Assert.Contains(actual, found => found.Id == first),
+            second => Assert.Contains(actual, found => found.Id == second),
+            third => Assert.Contains(actual, found => found.Id == third)
         );
     }
 

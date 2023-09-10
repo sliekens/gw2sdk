@@ -58,7 +58,7 @@ public class MountsQueryTest
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        MountName[] names =
+        HashSet<MountName> names = new()
         {
             MountName.Raptor,
             MountName.Jackal,
@@ -68,10 +68,10 @@ public class MountsQueryTest
         var actual = await sut.Mounts.GetMountsByNames(names);
 
         Assert.Collection(
-            actual.Value,
-            first => Assert.Equal(names[0], first.Id),
-            second => Assert.Equal(names[1], second.Id),
-            third => Assert.Equal(names[2], third.Id)
+            names,
+            first => Assert.Contains(actual.Value, found => found.Id == first),
+            second => Assert.Contains(actual.Value, found => found.Id == second),
+            third => Assert.Contains(actual.Value, found => found.Id == third)
         );
     }
 
@@ -133,10 +133,10 @@ public class MountsQueryTest
         var actual = await sut.Mounts.GetMountSkinsByIds(ids);
 
         Assert.Collection(
-            actual.Value,
-            first => Assert.Equal(1, first.Id),
-            second => Assert.Equal(2, second.Id),
-            third => Assert.Equal(3, third.Id)
+            ids,
+            first => Assert.Contains(actual.Value, found => found.Id == first),
+            second => Assert.Contains(actual.Value, found => found.Id == second),
+            third => Assert.Contains(actual.Value, found => found.Id == third)
         );
     }
 

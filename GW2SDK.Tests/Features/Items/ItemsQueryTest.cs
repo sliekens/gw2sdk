@@ -45,10 +45,10 @@ public class ItemsQueryTest
         var actual = await sut.Items.GetItemsByIds(ids).ToListAsync();
 
         Assert.Collection(
-            actual,
-            first => Assert.Contains(first.Id, ids),
-            second => Assert.Contains(second.Id, ids),
-            third => Assert.Contains(third.Id, ids)
+            ids,
+            first => Assert.Contains(actual, found => found.Id == first),
+            second => Assert.Contains(actual, found => found.Id == second),
+            third => Assert.Contains(actual, found => found.Id == third)
         );
     }
 

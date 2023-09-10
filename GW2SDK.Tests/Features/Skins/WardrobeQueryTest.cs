@@ -44,10 +44,10 @@ public class WardrobeQueryTest
         var actual = await sut.Wardrobe.GetSkinsByIds(ids);
 
         Assert.Collection(
-            actual.Value,
-            skin => Assert.Equal(1, skin.Id),
-            skin => Assert.Equal(2, skin.Id),
-            skin => Assert.Equal(3, skin.Id)
+            ids,
+            first => Assert.Contains(actual.Value, found => found.Id == first),
+            second => Assert.Contains(actual.Value, found => found.Id == second),
+            third => Assert.Contains(actual.Value, found => found.Id == third)
         );
     }
 

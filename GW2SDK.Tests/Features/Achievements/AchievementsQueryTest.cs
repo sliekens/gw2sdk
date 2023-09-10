@@ -63,10 +63,10 @@ public class AchievementsQueryTest
         var actual = await sut.Achievements.GetAchievementsByIds(ids);
 
         Assert.Collection(
-            actual.Value.OrderBy(achievement => achievement.Id),
-            achievement => Assert.Equal(1, achievement.Id),
-            achievement => Assert.Equal(2, achievement.Id),
-            achievement => Assert.Equal(3, achievement.Id)
+            ids,
+            first => Assert.Contains(actual.Value, found => found.Id == first),
+            second => Assert.Contains(actual.Value, found => found.Id == second),
+            third => Assert.Contains(actual.Value, found => found.Id == third)
         );
     }
 
@@ -130,10 +130,10 @@ public class AchievementsQueryTest
         var actual = await sut.Achievements.GetAccountAchievementsByIds(ids, accessToken.Key);
 
         Assert.Collection(
-            actual.Value,
-            first => Assert.Equal(1, first.Id),
-            second => Assert.Equal(2, second.Id),
-            third => Assert.Equal(3, third.Id)
+            ids,
+            first => Assert.Contains(actual.Value, found => found.Id == first),
+            second => Assert.Contains(actual.Value, found => found.Id == second),
+            third => Assert.Contains(actual.Value, found => found.Id == third)
         );
     }
 
@@ -204,10 +204,10 @@ public class AchievementsQueryTest
         var actual = await sut.Achievements.GetAchievementCategoriesByIds(ids);
 
         Assert.Collection(
-            actual.Value,
-            first => Assert.Equal(1, first.Id),
-            second => Assert.Equal(2, second.Id),
-            third => Assert.Equal(3, third.Id)
+            ids,
+            first => Assert.Contains(actual.Value, found => found.Id == first),
+            second => Assert.Contains(actual.Value, found => found.Id == second),
+            third => Assert.Contains(actual.Value, found => found.Id == third)
         );
     }
 
@@ -276,10 +276,10 @@ public class AchievementsQueryTest
         var actual = await sut.Achievements.GetAchievementGroupsByIds(ids);
 
         Assert.Collection(
-            actual.Value,
-            first => Assert.Contains(first.Id, ids),
-            second => Assert.Contains(second.Id, ids),
-            third => Assert.Contains(third.Id, ids)
+            ids,
+            first => Assert.Contains(actual.Value, found => found.Id == first),
+            second => Assert.Contains(actual.Value, found => found.Id == second),
+            third => Assert.Contains(actual.Value, found => found.Id == third)
         );
     }
 
@@ -350,10 +350,10 @@ public class AchievementsQueryTest
         var actual = await sut.Achievements.GetTitlesByIds(ids);
 
         Assert.Collection(
-            actual.Value,
-            first => Assert.Equal(1, first.Id),
-            second => Assert.Equal(2, second.Id),
-            third => Assert.Equal(3, third.Id)
+            ids,
+            first => Assert.Contains(actual.Value, found => found.Id == first),
+            second => Assert.Contains(actual.Value, found => found.Id == second),
+            third => Assert.Contains(actual.Value, found => found.Id == third)
         );
     }
 

@@ -63,10 +63,10 @@ public sealed class WorldsQueryTest
         var actual = await sut.Worlds.GetWorldsByIds(ids);
 
         Assert.Collection(
-            actual.Value,
-            world => Assert.Equal(1001, world.Id),
-            world => Assert.Equal(1002, world.Id),
-            world => Assert.Equal(1003, world.Id)
+            ids,
+            first => Assert.Contains(actual.Value, found => found.Id == first),
+            second => Assert.Contains(actual.Value, found => found.Id == second),
+            third => Assert.Contains(actual.Value, found => found.Id == third)
         );
     }
 

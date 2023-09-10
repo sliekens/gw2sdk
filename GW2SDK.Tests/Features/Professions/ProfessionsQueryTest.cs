@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using GuildWars2.Tests.TestInfrastructure;
 using Xunit;
@@ -65,7 +66,7 @@ public class ProfessionsQueryTest
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        ProfessionName[] names =
+        HashSet<ProfessionName> names = new()
         {
             ProfessionName.Mesmer,
             ProfessionName.Necromancer,
@@ -75,10 +76,10 @@ public class ProfessionsQueryTest
         var actual = await sut.Professions.GetProfessionsByNames(names);
 
         Assert.Collection(
-            actual.Value,
-            first => Assert.Equal(names[0], first.Id),
-            second => Assert.Equal(names[1], second.Id),
-            third => Assert.Equal(names[2], third.Id)
+            names,
+            first => Assert.Contains(actual.Value, found => found.Id == first),
+            second => Assert.Contains(actual.Value, found => found.Id == second),
+            third => Assert.Contains(actual.Value, found => found.Id == third)
         );
     }
 

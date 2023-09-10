@@ -54,10 +54,10 @@ public class RacesQueryTest
         var actual = await sut.Races.GetRacesByNames(names);
 
         Assert.Collection(
-            actual.Value,
-            first => Assert.Contains(first.Id, names),
-            second => Assert.Contains(second.Id, names),
-            third => Assert.Contains(third.Id, names)
+            names,
+            first => Assert.Contains(actual.Value, found => found.Id == first),
+            second => Assert.Contains(actual.Value, found => found.Id == second),
+            third => Assert.Contains(actual.Value, found => found.Id == third)
         );
     }
 

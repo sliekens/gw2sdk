@@ -61,10 +61,10 @@ public class TraitsQueryTest
         var actual = await sut.Traits.GetTraitsByIds(ids);
 
         Assert.Collection(
-            actual.Value,
-            first => Assert.Equal(214, first.Id),
-            second => Assert.Equal(221, second.Id),
-            third => Assert.Equal(222, third.Id)
+            ids,
+            first => Assert.Contains(actual.Value, found => found.Id == first),
+            second => Assert.Contains(actual.Value, found => found.Id == second),
+            third => Assert.Contains(actual.Value, found => found.Id == third)
         );
     }
 

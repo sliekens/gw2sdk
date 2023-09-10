@@ -78,10 +78,10 @@ public class MasteryQueryTest
         var actual = await sut.Masteries.GetMasteriesByIds(ids);
 
         Assert.Collection(
-            actual.Value,
-            first => Assert.Equal(1, first.Id),
-            second => Assert.Equal(2, second.Id),
-            third => Assert.Equal(3, third.Id)
+            ids,
+            first => Assert.Contains(actual.Value, found => found.Id == first),
+            second => Assert.Contains(actual.Value, found => found.Id == second),
+            third => Assert.Contains(actual.Value, found => found.Id == third)
         );
     }
 
