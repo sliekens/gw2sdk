@@ -32,11 +32,11 @@ public class ItemStatsQueryTest
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        const int itemStatId = 559;
+        const int id = 559;
 
-        var actual = await sut.ItemStats.GetItemStatById(itemStatId);
+        var actual = await sut.ItemStats.GetItemStatById(id);
 
-        Assert.Equal(itemStatId, actual.Value.Id);
+        Assert.Equal(id, actual.Value.Id);
     }
 
     [Fact]

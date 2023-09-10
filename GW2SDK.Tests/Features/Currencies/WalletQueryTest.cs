@@ -64,11 +64,11 @@ public class WalletQueryTest
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        const int currencyId = 1;
+        const int id = 1;
 
-        var actual = await sut.Wallet.GetCurrencyById(currencyId);
+        var actual = await sut.Wallet.GetCurrencyById(id);
 
-        Assert.Equal(currencyId, actual.Value.Id);
+        Assert.Equal(id, actual.Value.Id);
     }
 
     [Fact]

@@ -49,12 +49,12 @@ public class CommerceQueryTest
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        const int itemId = 24;
+        const int id = 24;
 
-        var actual = await sut.Commerce.GetItemPriceById(itemId);
+        var actual = await sut.Commerce.GetItemPriceById(id);
 
         var value = actual.Value;
-        Assert.Equal(itemId, value.Id);
+        Assert.Equal(id, value.Id);
         Assert.True(value.TotalSupply > 0);
         Assert.True(value.BestAsk > 0);
         Assert.True(value.TotalDemand > 0);
@@ -139,12 +139,12 @@ public class CommerceQueryTest
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        const int itemId = 24;
+        const int id = 24;
 
-        var actual = await sut.Commerce.GetOrderBookById(itemId);
+        var actual = await sut.Commerce.GetOrderBookById(id);
 
         var value = actual.Value;
-        Assert.Equal(itemId, value.Id);
+        Assert.Equal(id, value.Id);
 
         Assert.True(value.TotalSupply > 0);
         Assert.True(value.BestAsk > Coin.Zero);

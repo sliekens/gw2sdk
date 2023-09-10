@@ -11,11 +11,11 @@ public class QuestById
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        const int questId = 15;
+        const int id = 15;
 
-        var actual = await sut.Quests.GetQuestById(questId);
+        var actual = await sut.Quests.GetQuestById(id);
 
-        Assert.Equal(questId, actual.Value.Id);
+        Assert.Equal(id, actual.Value.Id);
         actual.Value.Has_name();
         actual.Value.Has_level();
         actual.Value.Has_story();

@@ -11,11 +11,11 @@ public class MaterialCategoryById
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        const int materialCategoryId = 5;
+        const int id = 5;
 
-        var actual = await sut.Bank.GetMaterialCategoryById(materialCategoryId);
+        var actual = await sut.Bank.GetMaterialCategoryById(id);
 
-        Assert.Equal(materialCategoryId, actual.Value.Id);
+        Assert.Equal(id, actual.Value.Id);
         actual.Value.Has_name();
         actual.Value.Has_items();
         actual.Value.Has_order();

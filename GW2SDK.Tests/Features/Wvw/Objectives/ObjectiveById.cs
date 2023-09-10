@@ -11,11 +11,11 @@ public class ObjectiveById
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        const string objectiveId = "1099-99";
+        const string id = "1099-99";
 
-        var actual = await sut.Wvw.GetObjectiveById(objectiveId);
+        var actual = await sut.Wvw.GetObjectiveById(id);
 
-        Assert.Equal(objectiveId, actual.Value.Id);
+        Assert.Equal(id, actual.Value.Id);
         actual.Value.Has_name();
         actual.Value.Has_sector_id();
         actual.Value.Has_map_id();

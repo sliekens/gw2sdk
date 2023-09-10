@@ -111,11 +111,11 @@ public class MountsQueryTest
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        const int mountSkinId = 1;
+        const int id = 1;
 
-        var actual = await sut.Mounts.GetMountSkinById(mountSkinId);
+        var actual = await sut.Mounts.GetMountSkinById(id);
 
-        Assert.Equal(mountSkinId, actual.Value.Id);
+        Assert.Equal(id, actual.Value.Id);
     }
 
     [Fact]

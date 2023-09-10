@@ -39,11 +39,11 @@ public class TraitsQueryTest
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        const int traitId = 214;
+        const int id = 214;
 
-        var actual = await sut.Traits.GetTraitById(traitId);
+        var actual = await sut.Traits.GetTraitById(id);
 
-        Assert.Equal(traitId, actual.Value.Id);
+        Assert.Equal(id, actual.Value.Id);
     }
 
     [Fact]

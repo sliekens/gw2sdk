@@ -11,11 +11,11 @@ public class GliderById
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        const int gliderId = 58;
+        const int id = 58;
 
-        var actual = await sut.Gliders.GetGliderById(gliderId);
+        var actual = await sut.Gliders.GetGliderById(id);
 
-        Assert.Equal(gliderId, actual.Value.Id);
+        Assert.Equal(id, actual.Value.Id);
         actual.Value.Has_unlock_items();
         actual.Value.Has_order();
         actual.Value.Has_icon();

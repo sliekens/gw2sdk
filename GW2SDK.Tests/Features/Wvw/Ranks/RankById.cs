@@ -11,11 +11,11 @@ public class RankById
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        const int rankId = 105;
+        const int id = 105;
 
-        var actual = await sut.Wvw.GetRankById(rankId);
+        var actual = await sut.Wvw.GetRankById(id);
 
-        Assert.Equal(rankId, actual.Value.Id);
+        Assert.Equal(id, actual.Value.Id);
         actual.Value.Has_title();
         actual.Value.Has_min_rank();
     }

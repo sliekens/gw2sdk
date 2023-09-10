@@ -32,11 +32,11 @@ public class SkillsQueryTest
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        const int skillId = 61533;
+        const int id = 61533;
 
-        var actual = await sut.Skills.GetSkillById(skillId);
+        var actual = await sut.Skills.GetSkillById(id);
 
-        Assert.Equal(skillId, actual.Value.Id);
+        Assert.Equal(id, actual.Value.Id);
     }
 
     [Fact]

@@ -45,11 +45,11 @@ public class MailCarriersQueryTest
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        const int mailCarrierId = 1;
+        const int id = 1;
 
-        var actual = await sut.MailCarriers.GetMailCarrierById(mailCarrierId);
+        var actual = await sut.MailCarriers.GetMailCarrierById(id);
 
-        Assert.Equal(mailCarrierId, actual.Value.Id);
+        Assert.Equal(id, actual.Value.Id);
     }
 
     [Fact]

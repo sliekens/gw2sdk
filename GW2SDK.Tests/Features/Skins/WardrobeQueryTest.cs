@@ -22,11 +22,11 @@ public class WardrobeQueryTest
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        const int skinId = 1;
+        const int id = 1;
 
-        var actual = await sut.Wardrobe.GetSkinById(skinId);
+        var actual = await sut.Wardrobe.GetSkinById(id);
 
-        Assert.Equal(skinId, actual.Value.Id);
+        Assert.Equal(id, actual.Value.Id);
     }
 
     [Fact]

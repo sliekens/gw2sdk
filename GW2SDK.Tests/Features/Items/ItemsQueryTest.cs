@@ -23,11 +23,11 @@ public class ItemsQueryTest
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        const int itemId = 24;
+        const int id = 24;
 
-        var actual = await sut.Items.GetItemById(itemId);
+        var actual = await sut.Items.GetItemById(id);
 
-        Assert.Equal(itemId, actual.Value.Id);
+        Assert.Equal(id, actual.Value.Id);
     }
 
     [Fact]

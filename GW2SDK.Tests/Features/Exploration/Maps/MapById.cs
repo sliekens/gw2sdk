@@ -10,13 +10,13 @@ public class MapById
     [InlineData(15)]
     [InlineData(17)]
     [InlineData(18)]
-    public async Task Can_be_found(int mapId)
+    public async Task Can_be_found(int id)
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        var actual = await sut.Maps.GetMapById(mapId);
+        var actual = await sut.Maps.GetMapById(id);
 
-        Assert.Equal(mapId, actual.Value.Id);
+        Assert.Equal(id, actual.Value.Id);
         actual.Value.Has_name();
     }
 }

@@ -9,13 +9,13 @@ public class ContinentById
     [Theory]
     [InlineData(1)]
     [InlineData(2)]
-    public async Task Can_be_found(int continentId)
+    public async Task Can_be_found(int id)
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        var actual = await sut.Maps.GetContinentById(continentId);
+        var actual = await sut.Maps.GetContinentById(id);
 
-        Assert.Equal(continentId, actual.Value.Id);
+        Assert.Equal(id, actual.Value.Id);
         actual.Value.Has_name();
         actual.Value.Has_dimensions();
         actual.Value.Has_min_zoom();

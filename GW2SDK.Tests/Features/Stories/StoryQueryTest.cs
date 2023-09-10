@@ -76,11 +76,11 @@ public class StoryQueryTest
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        const int questionId = 7;
+        const int id = 7;
 
-        var actual = await sut.Stories.GetBackstoryQuestionById(questionId);
+        var actual = await sut.Stories.GetBackstoryQuestionById(id);
 
-        Assert.Equal(questionId, actual.Value.Id);
+        Assert.Equal(id, actual.Value.Id);
     }
 
     [Fact]
@@ -88,11 +88,11 @@ public class StoryQueryTest
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        const string answerId = "7-53";
+        const string id = "7-53";
 
-        var actual = await sut.Stories.GetBackstoryAnswerById(answerId);
+        var actual = await sut.Stories.GetBackstoryAnswerById(id);
 
-        Assert.Equal(answerId, actual.Value.Id);
+        Assert.Equal(id, actual.Value.Id);
     }
 
     [Fact]

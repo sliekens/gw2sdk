@@ -11,11 +11,11 @@ public class QuagganById
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        const string quagganId = "present";
+        const string id = "present";
 
-        var actual = await sut.Quaggans.GetQuagganById(quagganId);
+        var actual = await sut.Quaggans.GetQuagganById(id);
 
-        Assert.Equal(quagganId, actual.Value.Id);
+        Assert.Equal(id, actual.Value.Id);
         actual.Value.Quaggan_has_picture();
     }
 }

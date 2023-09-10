@@ -40,11 +40,11 @@ public class ArmoryQueryTest
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        const int legendaryItemId = 80111;
+        const int id = 80111;
 
-        var actual = await sut.Armory.GetLegendaryItemById(legendaryItemId);
+        var actual = await sut.Armory.GetLegendaryItemById(id);
 
-        Assert.Equal(legendaryItemId, actual.Value.Id);
+        Assert.Equal(id, actual.Value.Id);
     }
 
     [Fact]

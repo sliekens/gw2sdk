@@ -12,11 +12,11 @@ public class GuildUpgradeById
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        const int guildUpgradeId = 43;
+        const int id = 43;
 
-        var actual = await sut.Guilds.GetGuildUpgradeById(guildUpgradeId);
+        var actual = await sut.Guilds.GetGuildUpgradeById(id);
 
-        Assert.Equal(guildUpgradeId, actual.Value.Id);
+        Assert.Equal(id, actual.Value.Id);
         actual.Value.Has_name();
         actual.Value.Has_description();
         actual.Value.Has_icon();

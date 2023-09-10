@@ -11,11 +11,11 @@ public class UpgradeById
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        const int upgradeId = 57;
+        const int id = 57;
 
-        var actual = await sut.Wvw.GetUpgradeById(upgradeId);
+        var actual = await sut.Wvw.GetUpgradeById(id);
 
-        Assert.Equal(upgradeId, actual.Value.Id);
+        Assert.Equal(id, actual.Value.Id);
         actual.Value.Has_tiers();
     }
 }

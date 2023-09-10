@@ -11,10 +11,10 @@ public class RecipeById
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        const int recipeId = 1;
+        const int id = 1;
 
-        var actual = await sut.Crafting.GetRecipeById(recipeId);
+        var actual = await sut.Crafting.GetRecipeById(id);
 
-        Assert.Equal(recipeId, actual.Value.Id);
+        Assert.Equal(id, actual.Value.Id);
     }
 }

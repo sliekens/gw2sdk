@@ -11,11 +11,11 @@ public class NoveltyById
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        const int noveltyId = 1;
+        const int id = 1;
 
-        var actual = await sut.Novelties.GetNoveltyById(noveltyId);
+        var actual = await sut.Novelties.GetNoveltyById(id);
 
-        Assert.Equal(noveltyId, actual.Value.Id);
+        Assert.Equal(id, actual.Value.Id);
         actual.Value.Has_name();
         actual.Value.Has_description();
         actual.Value.Has_icon();

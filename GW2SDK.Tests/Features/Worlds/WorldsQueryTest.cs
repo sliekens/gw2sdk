@@ -41,11 +41,11 @@ public sealed class WorldsQueryTest
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        const int worldId = 1001;
+        const int id = 1001;
 
-        var actual = await sut.Worlds.GetWorldById(worldId);
+        var actual = await sut.Worlds.GetWorldById(id);
 
-        Assert.Equal(worldId, actual.Value.Id);
+        Assert.Equal(id, actual.Value.Id);
     }
 
     [Fact]

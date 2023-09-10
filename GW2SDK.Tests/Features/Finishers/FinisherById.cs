@@ -11,11 +11,11 @@ public class FinisherById
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        const int finisherId = 58;
+        const int id = 58;
 
-        var actual = await sut.Finishers.GetFinisherById(finisherId);
+        var actual = await sut.Finishers.GetFinisherById(id);
 
-        Assert.Equal(finisherId, actual.Value.Id);
+        Assert.Equal(id, actual.Value.Id);
         actual.Value.Has_unlock_details();
         actual.Value.Has_unlock_items();
         actual.Value.Has_order();

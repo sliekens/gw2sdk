@@ -10,13 +10,13 @@ public class LegendById
     [InlineData("Legend1")]
     [InlineData("Legend2")]
     [InlineData("Legend3")]
-    public async Task Can_be_found(string legendId)
+    public async Task Can_be_found(string id)
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        var actual = await sut.Legends.GetLegendById(legendId);
+        var actual = await sut.Legends.GetLegendById(id);
 
-        Assert.Equal(legendId, actual.Value.Id);
+        Assert.Equal(id, actual.Value.Id);
         actual.Value.Has_code();
     }
 }

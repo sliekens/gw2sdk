@@ -11,11 +11,11 @@ public class MinipetById
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        const int minipetId = 1;
+        const int id = 1;
 
-        var actual = await sut.Minipets.GetMinipetById(minipetId);
+        var actual = await sut.Minipets.GetMinipetById(id);
 
-        Assert.Equal(minipetId, actual.Value.Id);
+        Assert.Equal(id, actual.Value.Id);
         actual.Value.Has_name();
         actual.Value.Has_icon();
         actual.Value.Has_order();

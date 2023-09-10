@@ -11,11 +11,11 @@ public class GuildPermissionById
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        const GuildPermission guildPermissionId = GuildPermission.StartingRole;
+        const GuildPermission id = GuildPermission.StartingRole;
 
-        var actual = await sut.Guilds.GetGuildPermissionById(guildPermissionId);
+        var actual = await sut.Guilds.GetGuildPermissionById(id);
 
-        Assert.Equal(guildPermissionId, actual.Value.Id);
+        Assert.Equal(id, actual.Value.Id);
         actual.Value.Has_name();
         actual.Value.Has_description();
     }

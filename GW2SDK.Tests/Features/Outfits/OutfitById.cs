@@ -11,11 +11,11 @@ public class OutfitById
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        const int outfitId = 1;
+        const int id = 1;
 
-        var actual = await sut.Outfits.GetOutfitById(outfitId);
+        var actual = await sut.Outfits.GetOutfitById(id);
 
-        Assert.Equal(outfitId, actual.Value.Id);
+        Assert.Equal(id, actual.Value.Id);
         actual.Value.Has_name();
         actual.Value.Has_icon();
         actual.Value.Has_unlock_items();

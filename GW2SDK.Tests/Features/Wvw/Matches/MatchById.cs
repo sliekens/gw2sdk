@@ -11,11 +11,11 @@ public class MatchById
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        const string matchId = "1-1";
+        const string id = "1-1";
 
-        var actual = await sut.Wvw.GetMatchById(matchId);
+        var actual = await sut.Wvw.GetMatchById(id);
 
-        Assert.Equal(matchId, actual.Value.Id);
+        Assert.Equal(id, actual.Value.Id);
         actual.Value.Has_start_time();
         actual.Value.Has_end_time();
     }

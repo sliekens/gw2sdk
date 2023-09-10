@@ -11,11 +11,11 @@ public class EmoteById
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        const string emoteId = "rockout";
+        const string id = "rockout";
 
-        var actual = await sut.Emotes.GetEmoteById(emoteId);
+        var actual = await sut.Emotes.GetEmoteById(id);
 
-        Assert.Equal(emoteId, actual.Value.Id);
+        Assert.Equal(id, actual.Value.Id);
         actual.Value.Has_commands();
         actual.Value.Has_unlock_items();
     }

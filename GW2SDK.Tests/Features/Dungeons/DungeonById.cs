@@ -11,11 +11,11 @@ public class DungeonById
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        const string dungeonId = "citadel_of_flame";
+        const string id = "citadel_of_flame";
 
-        var actual = await sut.Dungeons.GetDungeonById(dungeonId);
+        var actual = await sut.Dungeons.GetDungeonById(id);
 
-        Assert.Equal(dungeonId, actual.Value.Id);
+        Assert.Equal(id, actual.Value.Id);
         actual.Value.Has_paths();
     }
 }

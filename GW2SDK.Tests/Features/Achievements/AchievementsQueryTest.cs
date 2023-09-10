@@ -41,11 +41,11 @@ public class AchievementsQueryTest
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        const int achievementId = 1;
+        const int id = 1;
 
-        var actual = await sut.Achievements.GetAchievementById(achievementId);
+        var actual = await sut.Achievements.GetAchievementById(id);
 
-        Assert.Equal(achievementId, actual.Value.Id);
+        Assert.Equal(id, actual.Value.Id);
     }
 
     [Fact]
@@ -53,14 +53,14 @@ public class AchievementsQueryTest
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        HashSet<int> achievementIds = new()
+        HashSet<int> ids = new()
         {
             1,
             2,
             3
         };
 
-        var actual = await sut.Achievements.GetAchievementsByIds(achievementIds);
+        var actual = await sut.Achievements.GetAchievementsByIds(ids);
 
         Assert.Collection(
             actual.Value.OrderBy(achievement => achievement.Id),
@@ -106,12 +106,12 @@ public class AchievementsQueryTest
         var sut = Composer.Resolve<Gw2Client>();
         var accessToken = Composer.Resolve<ApiKey>();
 
-        const int achievementId = 1;
+        const int id = 1;
 
         var actual =
-            await sut.Achievements.GetAccountAchievementById(achievementId, accessToken.Key);
+            await sut.Achievements.GetAccountAchievementById(id, accessToken.Key);
 
-        Assert.Equal(achievementId, actual.Value.Id);
+        Assert.Equal(id, actual.Value.Id);
     }
 
     [Fact]
@@ -182,11 +182,11 @@ public class AchievementsQueryTest
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        const int achievementCategoryId = 1;
+        const int id = 1;
 
-        var actual = await sut.Achievements.GetAchievementCategoryById(achievementCategoryId);
+        var actual = await sut.Achievements.GetAchievementCategoryById(id);
 
-        Assert.Equal(achievementCategoryId, actual.Value.Id);
+        Assert.Equal(id, actual.Value.Id);
     }
 
     [Fact]
@@ -254,11 +254,11 @@ public class AchievementsQueryTest
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        const string achievementCategoryId = "A4ED8379-5B6B-4ECC-B6E1-70C350C902D2";
+        const string id = "A4ED8379-5B6B-4ECC-B6E1-70C350C902D2";
 
-        var actual = await sut.Achievements.GetAchievementGroupById(achievementCategoryId);
+        var actual = await sut.Achievements.GetAchievementGroupById(id);
 
-        Assert.Equal(achievementCategoryId, actual.Value.Id);
+        Assert.Equal(id, actual.Value.Id);
     }
 
     [Fact]
@@ -328,11 +328,11 @@ public class AchievementsQueryTest
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        const int titleId = 1;
+        const int id = 1;
 
-        var actual = await sut.Achievements.GetTitleById(titleId);
+        var actual = await sut.Achievements.GetTitleById(id);
 
-        Assert.Equal(titleId, actual.Value.Id);
+        Assert.Equal(id, actual.Value.Id);
     }
 
     [Fact]

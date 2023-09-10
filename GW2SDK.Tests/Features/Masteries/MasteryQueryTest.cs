@@ -56,11 +56,11 @@ public class MasteryQueryTest
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        const int masteryId = 1;
+        const int id = 1;
 
-        var actual = await sut.Masteries.GetMasteryById(masteryId);
+        var actual = await sut.Masteries.GetMasteryById(id);
 
-        Assert.Equal(masteryId, actual.Value.Id);
+        Assert.Equal(id, actual.Value.Id);
     }
 
     [Fact]

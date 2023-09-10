@@ -11,11 +11,11 @@ public class AbilityById
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        const int abilityId = 26;
+        const int id = 26;
 
-        var actual = await sut.Wvw.GetAbilityById(abilityId);
+        var actual = await sut.Wvw.GetAbilityById(id);
 
-        Assert.Equal(abilityId, actual.Value.Id);
+        Assert.Equal(id, actual.Value.Id);
         actual.Value.Has_name();
         actual.Value.Has_description();
         actual.Value.Has_icon();

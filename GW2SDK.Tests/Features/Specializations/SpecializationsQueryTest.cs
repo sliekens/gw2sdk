@@ -46,11 +46,11 @@ public class SpecializationsQueryTest
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        const int specializationId = 1;
+        const int id = 1;
 
-        var actual = await sut.Specializations.GetSpecializationById(specializationId);
+        var actual = await sut.Specializations.GetSpecializationById(id);
 
-        Assert.Equal(specializationId, actual.Value.Id);
+        Assert.Equal(id, actual.Value.Id);
     }
 
     [Fact]

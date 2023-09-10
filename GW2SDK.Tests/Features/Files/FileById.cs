@@ -11,11 +11,11 @@ public class FileById
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        const string fileId = "map_vendor_ecto";
+        const string id = "map_vendor_ecto";
 
-        var actual = await sut.Files.GetFileById(fileId);
+        var actual = await sut.Files.GetFileById(id);
 
-        Assert.Equal(fileId, actual.Value.Id);
+        Assert.Equal(id, actual.Value.Id);
         actual.Value.Has_icon();
     }
 }

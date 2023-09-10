@@ -39,11 +39,11 @@ public class DyesQueryTest
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        const int colorId = 1;
+        const int id = 1;
 
-        var actual = await sut.Dyes.GetColorById(colorId);
+        var actual = await sut.Dyes.GetColorById(id);
 
-        Assert.Equal(colorId, actual.Value.Id);
+        Assert.Equal(id, actual.Value.Id);
     }
 
     [Fact]

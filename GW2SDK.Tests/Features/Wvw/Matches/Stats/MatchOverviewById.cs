@@ -11,11 +11,11 @@ public class MatchStatsById
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        const string matchId = "1-1";
+        const string id = "1-1";
 
-        var actual = await sut.Wvw.GetMatchStatsById(matchId);
+        var actual = await sut.Wvw.GetMatchStatsById(id);
 
-        Assert.Equal(matchId, actual.Value.Id);
+        Assert.Equal(id, actual.Value.Id);
         actual.Value.Has_kills();
         actual.Value.Has_deaths();
         actual.Value.Has_maps();

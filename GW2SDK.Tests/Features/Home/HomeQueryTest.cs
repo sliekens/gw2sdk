@@ -40,7 +40,11 @@ public class HomeQueryTest
     public async Task A_cat_can_be_found_by_id()
     {
         var sut = Composer.Resolve<Gw2Client>();
-        var actual = await sut.Home.GetCatById(20);
+
+        const int id = 20;
+
+        var actual = await sut.Home.GetCatById(id);
+
         Assert.NotNull(actual.Value);
         Assert.Equal(20, actual.Value.Id);
         Assert.Equal("necromancer", actual.Value.Hint);
