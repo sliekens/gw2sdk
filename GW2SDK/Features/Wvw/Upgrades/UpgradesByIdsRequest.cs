@@ -16,7 +16,7 @@ public sealed class UpgradesByIdsRequest : IHttpRequest<Replica<HashSet<Objectiv
 
     public UpgradesByIdsRequest(IReadOnlyCollection<int> upgradeIds)
     {
-        Check.Collection(upgradeIds, nameof(upgradeIds));
+        Check.Collection(upgradeIds);
         UpgradeIds = upgradeIds;
     }
 

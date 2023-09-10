@@ -16,7 +16,7 @@ public sealed class MapChestsByIdsRequest : IHttpRequest<Replica<HashSet<MapChes
 
     public MapChestsByIdsRequest(IReadOnlyCollection<string> mapChestIds)
     {
-        Check.Collection(mapChestIds, nameof(mapChestIds));
+        Check.Collection(mapChestIds);
         MapChestIds = mapChestIds;
     }
 

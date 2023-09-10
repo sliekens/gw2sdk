@@ -19,7 +19,7 @@ public sealed class ContinentsByIdsRequest : IHttpRequest<Replica<HashSet<Contin
 
     public ContinentsByIdsRequest(IReadOnlyCollection<int> continentIds)
     {
-        Check.Collection(continentIds, nameof(continentIds));
+        Check.Collection(continentIds);
         ContinentIds = continentIds;
     }
 

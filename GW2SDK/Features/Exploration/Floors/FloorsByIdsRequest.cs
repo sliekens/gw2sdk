@@ -18,7 +18,7 @@ public sealed class FloorsByIdsRequest : IHttpRequest<Replica<HashSet<Floor>>>
 
     public FloorsByIdsRequest(int continentId, IReadOnlyCollection<int> floorIds)
     {
-        Check.Collection(floorIds, nameof(floorIds));
+        Check.Collection(floorIds);
         ContinentId = continentId;
         FloorIds = floorIds;
     }

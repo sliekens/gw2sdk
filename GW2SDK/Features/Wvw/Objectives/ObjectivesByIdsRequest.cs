@@ -16,7 +16,7 @@ public sealed class ObjectivesByIdsRequest : IHttpRequest<Replica<HashSet<Object
 
     public ObjectivesByIdsRequest(IReadOnlyCollection<string> objectiveIds)
     {
-        Check.Collection(objectiveIds, nameof(objectiveIds));
+        Check.Collection(objectiveIds);
         ObjectiveIds = objectiveIds;
     }
 

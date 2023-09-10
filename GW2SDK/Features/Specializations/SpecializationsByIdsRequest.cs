@@ -19,7 +19,7 @@ public sealed class SpecializationsByIdsRequest : IHttpRequest<Replica<HashSet<S
 
     public SpecializationsByIdsRequest(IReadOnlyCollection<int> specializationIds)
     {
-        Check.Collection(specializationIds, nameof(specializationIds));
+        Check.Collection(specializationIds);
         SpecializationIds = specializationIds;
     }
 

@@ -18,7 +18,7 @@ public sealed class
 
     public AchievementCategoriesByIdsRequest(IReadOnlyCollection<int> achievementCategoryIds)
     {
-        Check.Collection(achievementCategoryIds, nameof(achievementCategoryIds));
+        Check.Collection(achievementCategoryIds);
         AchievementCategoryIds = achievementCategoryIds;
     }
 

@@ -26,7 +26,7 @@ public sealed class SectorsByIdsRequest : IHttpRequest<Replica<HashSet<Sector>>>
         IReadOnlyCollection<int> sectorIds
     )
     {
-        Check.Collection(sectorIds, nameof(sectorIds));
+        Check.Collection(sectorIds);
         ContinentId = continentId;
         FloorId = floorId;
         RegionId = regionId;

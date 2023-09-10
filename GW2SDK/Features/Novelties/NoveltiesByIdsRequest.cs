@@ -16,7 +16,7 @@ public sealed class NoveltiesByIdsRequest : IHttpRequest<Replica<HashSet<Novelty
 
     public NoveltiesByIdsRequest(IReadOnlyCollection<int> noveltyIds)
     {
-        Check.Collection(noveltyIds, nameof(noveltyIds));
+        Check.Collection(noveltyIds);
         NoveltyIds = noveltyIds;
     }
 

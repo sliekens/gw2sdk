@@ -19,7 +19,7 @@ public sealed class MountSkinsByIdsRequest : IHttpRequest<Replica<HashSet<MountS
 
     public MountSkinsByIdsRequest(IReadOnlyCollection<int> mountSkinIds)
     {
-        Check.Collection(mountSkinIds, nameof(mountSkinIds));
+        Check.Collection(mountSkinIds);
         MountSkinIds = mountSkinIds;
     }
 

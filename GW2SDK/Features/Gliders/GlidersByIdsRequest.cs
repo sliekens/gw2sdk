@@ -16,7 +16,7 @@ public sealed class GlidersByIdsRequest : IHttpRequest<Replica<HashSet<Glider>>>
 
     public GlidersByIdsRequest(IReadOnlyCollection<int> gliderIds)
     {
-        Check.Collection(gliderIds, nameof(gliderIds));
+        Check.Collection(gliderIds);
         GliderIds = gliderIds;
     }
 

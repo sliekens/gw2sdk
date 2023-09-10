@@ -16,7 +16,7 @@ public sealed class CatsByIdsRequest : IHttpRequest<Replica<HashSet<Cat>>>
 
     public CatsByIdsRequest(IReadOnlyCollection<int> catIds)
     {
-        Check.Collection(catIds, nameof(catIds));
+        Check.Collection(catIds);
         CatIds = catIds;
     }
 

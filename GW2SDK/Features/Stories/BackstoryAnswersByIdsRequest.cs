@@ -19,7 +19,7 @@ public sealed class BackstoryAnswersByIdsRequest : IHttpRequest<Replica<HashSet<
 
     public BackstoryAnswersByIdsRequest(IReadOnlyCollection<string> answerIds)
     {
-        Check.Collection(answerIds, nameof(answerIds));
+        Check.Collection(answerIds);
         AnswerIds = answerIds;
     }
 

@@ -19,7 +19,7 @@ public sealed class MailCarriersByIdsRequest : IHttpRequest<Replica<HashSet<Mail
 
     public MailCarriersByIdsRequest(IReadOnlyCollection<int> mailCarrierIds)
     {
-        Check.Collection(mailCarrierIds, nameof(mailCarrierIds));
+        Check.Collection(mailCarrierIds);
         MailCarrierIds = mailCarrierIds;
     }
 

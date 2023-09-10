@@ -19,7 +19,7 @@ public sealed class MapsByIdsRequest : IHttpRequest<Replica<HashSet<Map>>>
 
     public MapsByIdsRequest(IReadOnlyCollection<int> mapIds)
     {
-        Check.Collection(mapIds, nameof(mapIds));
+        Check.Collection(mapIds);
         MapIds = mapIds;
     }
 

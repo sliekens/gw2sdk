@@ -16,7 +16,7 @@ public sealed class AbilitiesByIdsRequest : IHttpRequest<Replica<HashSet<Ability
 
     public AbilitiesByIdsRequest(IReadOnlyCollection<int> abilityIds)
     {
-        Check.Collection(abilityIds, nameof(abilityIds));
+        Check.Collection(abilityIds);
         AbilityIds = abilityIds;
     }
 

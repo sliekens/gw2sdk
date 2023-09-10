@@ -19,7 +19,7 @@ public sealed class RacesByNamesRequest : IHttpRequest<Replica<HashSet<Race>>>
 
     public RacesByNamesRequest(IReadOnlyCollection<RaceName> raceIds)
     {
-        Check.Collection(raceIds, nameof(raceIds));
+        Check.Collection(raceIds);
         RaceIds = raceIds;
     }
 

@@ -18,7 +18,7 @@ public sealed class
 
     public BackstoryQuestionsByIdsRequest(IReadOnlyCollection<int> questionIds)
     {
-        Check.Collection(questionIds, nameof(questionIds));
+        Check.Collection(questionIds);
         QuestionIds = questionIds;
     }
 

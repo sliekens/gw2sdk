@@ -18,7 +18,7 @@ public sealed class RegionsByIdsRequest : IHttpRequest<Replica<HashSet<Region>>>
 
     public RegionsByIdsRequest(int continentId, int floorId, IReadOnlyCollection<int> regionIds)
     {
-        Check.Collection(regionIds, nameof(regionIds));
+        Check.Collection(regionIds);
         ContinentId = continentId;
         FloorId = floorId;
         RegionIds = regionIds;

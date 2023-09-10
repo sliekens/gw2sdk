@@ -20,7 +20,7 @@ public sealed class
 
     public MaterialCategoriesByIdsRequest(IReadOnlyCollection<int> materialCategoriesIds)
     {
-        Check.Collection(materialCategoriesIds, nameof(materialCategoriesIds));
+        Check.Collection(materialCategoriesIds);
         MaterialCategoriesIds = materialCategoriesIds;
     }
 

@@ -16,7 +16,7 @@ public sealed class BackgroundEmblemsByIdsRequest : IHttpRequest<Replica<HashSet
 
     public BackgroundEmblemsByIdsRequest(IReadOnlyCollection<int> backgroundEmblemIds)
     {
-        Check.Collection(backgroundEmblemIds, nameof(backgroundEmblemIds));
+        Check.Collection(backgroundEmblemIds);
         BackgroundEmblemIds = backgroundEmblemIds;
     }
 

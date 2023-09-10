@@ -26,7 +26,7 @@ public sealed class HeartsByIdsRequest : IHttpRequest<Replica<HashSet<Heart>>>
         IReadOnlyCollection<int> heartIds
     )
     {
-        Check.Collection(heartIds, nameof(heartIds));
+        Check.Collection(heartIds);
         ContinentId = continentId;
         FloorId = floorId;
         RegionId = regionId;

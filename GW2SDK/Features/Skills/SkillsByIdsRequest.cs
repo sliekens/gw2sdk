@@ -19,7 +19,7 @@ public sealed class SkillsByIdsRequest : IHttpRequest<Replica<HashSet<Skill>>>
 
     public SkillsByIdsRequest(IReadOnlyCollection<int> skillIds)
     {
-        Check.Collection(skillIds, nameof(skillIds));
+        Check.Collection(skillIds);
         SkillIds = skillIds;
     }
 

@@ -26,7 +26,7 @@ public sealed class ChartsByIdsRequest : IHttpRequest<Replica<HashSet<Chart>>>
         IReadOnlyCollection<int> mapIds
     )
     {
-        Check.Collection(mapIds, nameof(mapIds));
+        Check.Collection(mapIds);
         ContinentId = continentId;
         FloorId = floorId;
         RegionId = regionId;

@@ -17,7 +17,7 @@ public sealed class AchievementGroupsByIdsRequest : IHttpRequest<Replica<HashSet
 
     public AchievementGroupsByIdsRequest(IReadOnlyCollection<string> achievementGroupIds)
     {
-        Check.Collection(achievementGroupIds, nameof(achievementGroupIds));
+        Check.Collection(achievementGroupIds);
         AchievementGroupIds = achievementGroupIds;
     }
 

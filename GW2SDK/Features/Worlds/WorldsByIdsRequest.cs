@@ -19,7 +19,7 @@ public sealed class WorldsByIdsRequest : IHttpRequest<Replica<HashSet<World>>>
 
     public WorldsByIdsRequest(IReadOnlyCollection<int> worldIds)
     {
-        Check.Collection(worldIds, nameof(worldIds));
+        Check.Collection(worldIds);
         WorldIds = worldIds;
     }
 

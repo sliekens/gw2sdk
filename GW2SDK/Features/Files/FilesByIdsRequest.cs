@@ -18,7 +18,7 @@ public sealed class FilesByIdsRequest : IHttpRequest<Replica<HashSet<File>>>
 
     public FilesByIdsRequest(IReadOnlyCollection<string> fileIds)
     {
-        Check.Collection(fileIds, nameof(fileIds));
+        Check.Collection(fileIds);
         FileIds = fileIds;
     }
 

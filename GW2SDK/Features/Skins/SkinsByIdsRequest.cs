@@ -19,7 +19,7 @@ public sealed class SkinsByIdsRequest : IHttpRequest<Replica<HashSet<Skin>>>
 
     public SkinsByIdsRequest(IReadOnlyCollection<int> skinIds)
     {
-        Check.Collection(skinIds, nameof(skinIds));
+        Check.Collection(skinIds);
         SkinIds = skinIds;
     }
 

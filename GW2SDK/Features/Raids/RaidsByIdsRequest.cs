@@ -16,7 +16,7 @@ public sealed class RaidsByIdsRequest : IHttpRequest<Replica<HashSet<Raid>>>
 
     public RaidsByIdsRequest(IReadOnlyCollection<string> raidIds)
     {
-        Check.Collection(raidIds, nameof(raidIds));
+        Check.Collection(raidIds);
         RaidIds = raidIds;
     }
 

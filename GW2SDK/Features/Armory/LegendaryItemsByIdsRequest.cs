@@ -19,7 +19,7 @@ public sealed class LegendaryItemsByIdsRequest : IHttpRequest<Replica<HashSet<Le
 
     public LegendaryItemsByIdsRequest(IReadOnlyCollection<int> legendaryItemIds)
     {
-        Check.Collection(legendaryItemIds, nameof(legendaryItemIds));
+        Check.Collection(legendaryItemIds);
         LegendaryItemIds = legendaryItemIds;
     }
 

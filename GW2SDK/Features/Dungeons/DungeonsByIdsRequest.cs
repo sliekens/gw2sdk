@@ -16,7 +16,7 @@ public sealed class DungeonsByIdsRequest : IHttpRequest<Replica<HashSet<Dungeon>
 
     public DungeonsByIdsRequest(IReadOnlyCollection<string> dungeonIds)
     {
-        Check.Collection(dungeonIds, nameof(dungeonIds));
+        Check.Collection(dungeonIds);
         DungeonIds = dungeonIds;
     }
 

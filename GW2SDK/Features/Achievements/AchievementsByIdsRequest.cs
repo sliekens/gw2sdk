@@ -19,7 +19,7 @@ public sealed class AchievementsByIdsRequest : IHttpRequest<Replica<HashSet<Achi
 
     public AchievementsByIdsRequest(IReadOnlyCollection<int> achievementIds)
     {
-        Check.Collection(achievementIds, nameof(achievementIds));
+        Check.Collection(achievementIds);
         AchievementIds = achievementIds;
     }
 

@@ -16,7 +16,7 @@ public sealed class EmotesByIdsRequest : IHttpRequest<Replica<HashSet<Emote>>>
 
     public EmotesByIdsRequest(IReadOnlyCollection<string> emoteIds)
     {
-        Check.Collection(emoteIds, nameof(emoteIds));
+        Check.Collection(emoteIds);
         EmoteIds = emoteIds;
     }
 

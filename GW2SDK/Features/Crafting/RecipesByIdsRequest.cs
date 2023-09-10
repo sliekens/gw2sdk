@@ -19,7 +19,7 @@ public sealed class RecipesByIdsRequest : IHttpRequest<Replica<HashSet<Recipe>>>
 
     public RecipesByIdsRequest(IReadOnlyCollection<int> recipeIds)
     {
-        Check.Collection(recipeIds, nameof(recipeIds));
+        Check.Collection(recipeIds);
         RecipeIds = recipeIds;
     }
 

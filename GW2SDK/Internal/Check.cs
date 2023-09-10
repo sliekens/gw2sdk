@@ -1,12 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 
 namespace GuildWars2;
 
 /// <summary>Contains commonly used precondition checks.</summary>
 internal static class Check
 {
-    internal static void String(string text, string parameterName)
+    internal static void String(
+        string text,
+        [CallerArgumentExpression("text")] string parameterName = ""
+    )
     {
         // ReSharper disable once ConditionIsAlwaysTrueOrFalse // don't trust NRT
         if (text is null)
@@ -20,8 +24,10 @@ internal static class Check
         }
     }
 
-    internal static void Constant<TEnum>(TEnum value, string parameterName)
-        where TEnum : struct, Enum
+    internal static void Constant<TEnum>(
+        TEnum value,
+        [CallerArgumentExpression("value")] string parameterName = ""
+    ) where TEnum : struct, Enum
     {
 #if NET
         if (!Enum.IsDefined(value))
@@ -33,12 +39,12 @@ internal static class Check
         }
     }
 
-    internal static void Collection(IReadOnlyCollection<int> collection, string parameterName) =>
+    internal static void Collection(IReadOnlyCollection<int> collection, [CallerArgumentExpression("collection")] string parameterName = "") =>
         EnsureCollectionNotNullOrEmpty(collection, parameterName);
 
     internal static void Collection<TEnum>(
         IReadOnlyCollection<TEnum> collection,
-        string parameterName
+        [CallerArgumentExpression("collection")] string parameterName = ""
     ) where TEnum : struct, Enum
     {
         EnsureCollectionNotNullOrEmpty(collection, parameterName);
@@ -60,7 +66,10 @@ internal static class Check
         }
     }
 
-    internal static void Collection(IReadOnlyCollection<string> collection, string parameterName)
+    internal static void Collection(
+        IReadOnlyCollection<string> collection,
+        [CallerArgumentExpression("collection")] string parameterName = ""
+    )
     {
         EnsureCollectionNotNullOrEmpty(collection, parameterName);
 

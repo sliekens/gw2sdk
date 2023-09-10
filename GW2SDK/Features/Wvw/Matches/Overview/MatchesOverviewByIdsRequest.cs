@@ -16,7 +16,7 @@ public sealed class MatchesOverviewByIdsRequest : IHttpRequest<Replica<HashSet<M
 
     public MatchesOverviewByIdsRequest(IReadOnlyCollection<string> matchIds)
     {
-        Check.Collection(matchIds, nameof(matchIds));
+        Check.Collection(matchIds);
         MatchIds = matchIds;
     }
 

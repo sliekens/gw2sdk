@@ -16,7 +16,7 @@ public sealed class ForegroundEmblemsByIdsRequest : IHttpRequest<Replica<HashSet
 
     public ForegroundEmblemsByIdsRequest(IReadOnlyCollection<int> foregroundEmblemIds)
     {
-        Check.Collection(foregroundEmblemIds, nameof(foregroundEmblemIds));
+        Check.Collection(foregroundEmblemIds);
         ForegroundEmblemIds = foregroundEmblemIds;
     }
 

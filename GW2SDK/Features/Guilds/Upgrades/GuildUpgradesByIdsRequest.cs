@@ -17,7 +17,7 @@ public sealed class GuildUpgradesByIdsRequest : IHttpRequest<Replica<HashSet<Gui
 
     public GuildUpgradesByIdsRequest(IReadOnlyCollection<int> guildUpgradeIds)
     {
-        Check.Collection(guildUpgradeIds, nameof(guildUpgradeIds));
+        Check.Collection(guildUpgradeIds);
         GuildUpgradeIds = guildUpgradeIds;
     }
 

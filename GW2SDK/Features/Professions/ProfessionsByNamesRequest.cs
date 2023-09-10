@@ -20,7 +20,7 @@ public sealed class ProfessionsByNamesRequest : IHttpRequest<Replica<HashSet<Pro
 
     public ProfessionsByNamesRequest(IReadOnlyCollection<ProfessionName> professionNames)
     {
-        Check.Collection(professionNames, nameof(professionNames));
+        Check.Collection(professionNames);
         ProfessionNames = professionNames;
     }
 

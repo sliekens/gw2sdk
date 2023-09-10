@@ -16,7 +16,7 @@ public sealed class FinishersByIdsRequest : IHttpRequest<Replica<HashSet<Finishe
 
     public FinishersByIdsRequest(IReadOnlyCollection<int> finisherIds)
     {
-        Check.Collection(finisherIds, nameof(finisherIds));
+        Check.Collection(finisherIds);
         FinisherIds = finisherIds;
     }
 

@@ -16,7 +16,7 @@ public sealed class AmuletsByIdsRequest : IHttpRequest<Replica<HashSet<Amulet>>>
 
     public AmuletsByIdsRequest(IReadOnlyCollection<int> amuletIds)
     {
-        Check.Collection(amuletIds, nameof(amuletIds));
+        Check.Collection(amuletIds);
         AmuletIds = amuletIds;
     }
 

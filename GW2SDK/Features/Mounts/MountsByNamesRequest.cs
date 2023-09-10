@@ -20,7 +20,7 @@ public sealed class MountsByNamesRequest : IHttpRequest<Replica<HashSet<Mount>>>
 
     public MountsByNamesRequest(IReadOnlyCollection<MountName> mountNames)
     {
-        Check.Collection(mountNames, nameof(mountNames));
+        Check.Collection(mountNames);
         MountNames = mountNames;
     }
 

@@ -16,7 +16,7 @@ public sealed class QuestsByIdsRequest : IHttpRequest<Replica<HashSet<Quest>>>
 
     public QuestsByIdsRequest(IReadOnlyCollection<int> questIds)
     {
-        Check.Collection(questIds, nameof(questIds));
+        Check.Collection(questIds);
         QuestIds = questIds;
     }
 

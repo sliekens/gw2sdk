@@ -19,7 +19,7 @@ public sealed class ColorsByIdsRequest : IHttpRequest<Replica<HashSet<Dye>>>
 
     public ColorsByIdsRequest(IReadOnlyCollection<int> colorIds)
     {
-        Check.Collection(colorIds, nameof(colorIds));
+        Check.Collection(colorIds);
         ColorIds = colorIds;
     }
 

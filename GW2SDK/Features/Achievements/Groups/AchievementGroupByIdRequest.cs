@@ -15,7 +15,7 @@ public sealed class AchievementGroupByIdRequest : IHttpRequest<Replica<Achieveme
 
     public AchievementGroupByIdRequest(string achievementGroupId)
     {
-        Check.String(achievementGroupId, nameof(achievementGroupId));
+        Check.String(achievementGroupId);
         AchievementGroupId = achievementGroupId;
     }
 

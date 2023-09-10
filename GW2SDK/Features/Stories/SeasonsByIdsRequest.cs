@@ -16,7 +16,7 @@ public sealed class SeasonsByIdsRequest : IHttpRequest<Replica<HashSet<Season>>>
 
     public SeasonsByIdsRequest(IReadOnlyCollection<string> seasonIds)
     {
-        Check.Collection(seasonIds, nameof(seasonIds));
+        Check.Collection(seasonIds);
         SeasonIds = seasonIds;
     }
 

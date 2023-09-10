@@ -17,7 +17,7 @@ public sealed class MountByNameRequest : IHttpRequest<Replica<Mount>>
 
     public MountByNameRequest(MountName mountName)
     {
-        Check.Constant(mountName, nameof(mountName));
+        Check.Constant(mountName);
         MountName = mountName;
     }
 

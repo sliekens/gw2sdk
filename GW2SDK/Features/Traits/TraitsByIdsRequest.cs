@@ -19,7 +19,7 @@ public sealed class TraitsByIdsRequest : IHttpRequest<Replica<HashSet<Trait>>>
 
     public TraitsByIdsRequest(IReadOnlyCollection<int> traitIds)
     {
-        Check.Collection(traitIds, nameof(traitIds));
+        Check.Collection(traitIds);
         TraitIds = traitIds;
     }
 

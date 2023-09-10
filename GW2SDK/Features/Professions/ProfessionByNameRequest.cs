@@ -17,7 +17,7 @@ public sealed class ProfessionByNameRequest : IHttpRequest<Replica<Profession>>
 
     public ProfessionByNameRequest(ProfessionName professionName)
     {
-        Check.Constant(professionName, nameof(professionName));
+        Check.Constant(professionName);
         ProfessionName = professionName;
     }
 

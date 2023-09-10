@@ -18,7 +18,7 @@ public sealed class
 
     public GuildPermissionsByIdsRequest(IReadOnlyCollection<GuildPermission> guildPermissionIds)
     {
-        Check.Collection(guildPermissionIds, nameof(guildPermissionIds));
+        Check.Collection(guildPermissionIds);
         GuildPermissionIds = guildPermissionIds;
     }
 

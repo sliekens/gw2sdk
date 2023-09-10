@@ -19,7 +19,7 @@ public sealed class QuaggansByIdsRequest : IHttpRequest<Replica<HashSet<Quaggan>
 
     public QuaggansByIdsRequest(IReadOnlyCollection<string> quagganIds)
     {
-        Check.Collection(quagganIds, nameof(quagganIds));
+        Check.Collection(quagganIds);
         QuagganIds = quagganIds;
     }
 

@@ -19,7 +19,7 @@ public sealed class CurrenciesByIdsRequest : IHttpRequest<Replica<HashSet<Curren
 
     public CurrenciesByIdsRequest(IReadOnlyCollection<int> currencyIds)
     {
-        Check.Collection(currencyIds, nameof(currencyIds));
+        Check.Collection(currencyIds);
         CurrencyIds = currencyIds;
     }
 

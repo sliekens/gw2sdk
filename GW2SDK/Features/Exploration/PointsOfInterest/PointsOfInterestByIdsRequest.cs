@@ -26,7 +26,7 @@ public sealed class PointsOfInterestByIdsRequest : IHttpRequest<Replica<HashSet<
         IReadOnlyCollection<int> pointsOfInterestIds
     )
     {
-        Check.Collection(pointsOfInterestIds, nameof(pointsOfInterestIds));
+        Check.Collection(pointsOfInterestIds);
         ContinentId = continentId;
         FloorId = floorId;
         RegionId = regionId;
