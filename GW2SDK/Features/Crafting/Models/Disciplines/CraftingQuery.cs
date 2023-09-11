@@ -164,7 +164,7 @@ public sealed class CraftingQuery
         var producer = BulkQuery.Create<int, Recipe>(
             async (chunk, ct) =>
             {
-                var response = await GetRecipesByIds(recipeIds, missingMemberBehavior, ct)
+                var response = await GetRecipesByIds(chunk, missingMemberBehavior, ct)
                     .ConfigureAwait(false);
                 return response.Value;
             }
