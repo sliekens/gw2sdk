@@ -34,7 +34,7 @@ public class TestHttpClientFactory : IHttpClientFactory, IAsyncDisposable
     /// <summary>Creates a service provider for the HTTP factory which is unfortunately very dependent on ServiceCollection.</summary>
     private static ServiceProvider BuildHttpClientProvider(Uri baseAddress)
     {
-        const int maxConnections = 1000;
+        const int maxConnections = 100;
         var services = new ServiceCollection();
 
         services.AddTransient<SchemaVersionHandler>();
