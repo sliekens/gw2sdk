@@ -59,7 +59,7 @@ public class TestHttpClientFactory : IHttpClientFactory, IAsyncDisposable
                     //   because we have many tests trying to use the API concurrently,
                     //   resulting in a stupid amount of connections being opened
                     // The desired effect is to open a smaller number of connections that are reused often
-                    MaxConnectionsPerServer = 10,
+                    MaxConnectionsPerServer = 100,
 
                     // Creating a new connection shouldn't take more than 10 seconds
                     ConnectTimeout = TimeSpan.FromSeconds(10),
@@ -70,7 +70,7 @@ public class TestHttpClientFactory : IHttpClientFactory, IAsyncDisposable
             )
 #else
             .ConfigurePrimaryHttpMessageHandler(
-                () => new HttpClientHandler { MaxConnectionsPerServer = 10 }
+                () => new HttpClientHandler { MaxConnectionsPerServer = 100 }
             )
 #endif
             .AddHttpMessageHandler<SchemaVersionHandler>()

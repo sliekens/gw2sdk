@@ -38,25 +38,25 @@ public class JsonSkinService
         CancellationToken cancellationToken = default
     )
     {
-        var producer = BulkQuery.Create<int, string>(
-            async (chunk, ct) =>
-            {
-                var request = new BulkRequest("/v2/skins") { Ids = chunk };
-                var json = await request.SendAsync(http, ct);
-                return json.Indent(false)
-                    .RootElement.EnumerateArray()
-                    .Select(
-                        item => item.ToString()
-                            ?? throw new InvalidOperationException("Unexpected null in JSON array.")
-                    )
-                    .ToList();
-            }
-        );
-        return producer.QueryAsync(
+        return BulkQuery.QueryAsync(
             ids,
+            GetChunk,
             degreeOfParalllelism: 100,
             progress: progress,
             cancellationToken: cancellationToken
         );
+
+        async Task<IReadOnlyCollection<string>> GetChunk(IReadOnlyCollection<int> chunk, CancellationToken cancellationToken)
+        {
+            var request = new BulkRequest("/v2/skins") { Ids = chunk };
+            var json = await request.SendAsync(http, cancellationToken);
+            return json.Indent(false)
+                .RootElement.EnumerateArray()
+                .Select(
+                    item => item.ToString()
+                        ?? throw new InvalidOperationException("Unexpected null in JSON array.")
+                )
+                .ToList();
+        }
     }
 }

@@ -89,22 +89,21 @@ public sealed class CommerceQuery
         CancellationToken cancellationToken = default
     )
     {
-        var producer = BulkQuery.Create<int, ItemPrice>(
-            async (chunk, ct) =>
-            {
-                var response = await GetItemPricesByIds(chunk, missingMemberBehavior, ct)
-                    .ConfigureAwait(false);
-                return response.Value;
-            }
-        );
-
-        return producer.QueryAsync(
+        return BulkQuery.QueryAsync(
             itemIds,
+            GetChunk,
             degreeOfParalllelism,
             chunkSize,
             progress: progress,
             cancellationToken: cancellationToken
         );
+
+        async Task<IReadOnlyCollection<ItemPrice>> GetChunk(IReadOnlyCollection<int> chunk, CancellationToken cancellationToken)
+        {
+            var response = await GetItemPricesByIds(chunk, missingMemberBehavior, cancellationToken)
+                .ConfigureAwait(false);
+            return response.Value;
+        }
     }
 
     public async IAsyncEnumerable<ItemPrice> GetItemPricesBulk(
@@ -178,22 +177,21 @@ public sealed class CommerceQuery
         CancellationToken cancellationToken = default
     )
     {
-        var producer = BulkQuery.Create<int, OrderBook>(
-            async (chunk, ct) =>
-            {
-                var response = await GetOrderBooksByIds(chunk, missingMemberBehavior, ct)
-                    .ConfigureAwait(false);
-                return response.Value;
-            }
-        );
-
-        return producer.QueryAsync(
+        return BulkQuery.QueryAsync(
             itemIds,
+            GetChunk,
             degreeOfParalllelism,
             chunkSize,
             progress: progress,
             cancellationToken: cancellationToken
         );
+
+        async Task<IReadOnlyCollection<OrderBook>> GetChunk(IReadOnlyCollection<int> chunk, CancellationToken cancellationToken)
+        {
+            var response = await GetOrderBooksByIds(chunk, missingMemberBehavior, cancellationToken)
+                .ConfigureAwait(false);
+            return response.Value;
+        }
     }
 
     public async IAsyncEnumerable<OrderBook> GetOrderBooksBulk(

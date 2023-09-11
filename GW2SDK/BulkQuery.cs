@@ -32,28 +32,13 @@ public static class BulkQuery
 
     public const int DefaultDegreeOfParalllelism = 20;
 
-    public static BulkQuery<TKey, TRecord> Create<TKey, TRecord>(ChunkQuery<TKey, TRecord> chunkQuery)
-    {
-        return new(chunkQuery);
-    }
-}
-
-/// <summary>Helps you retrieve all records in a given index by splitting it into smaller chunks before quering. This is
-/// useful when your index contains more than 200 items (the maximum allowed per query).</summary>
-[PublicAPI]
-public sealed class BulkQuery<TKey, TRecord>
-{
-    private readonly ChunkQuery<TKey, TRecord> chunkQuery;
-
-    internal BulkQuery(ChunkQuery<TKey, TRecord> chunkQuery)
-    {
-        this.chunkQuery = chunkQuery;
-    }
-
-    public async IAsyncEnumerable<TRecord> QueryAsync(
+    /// <summary>Helps you retrieve all records in a given index by splitting it into smaller chunks before quering. This is
+    /// useful when your index contains more than 200 items (the maximum allowed per query).</summary>
+    public static async IAsyncEnumerable<TRecord> QueryAsync<TKey, TRecord>(
         IReadOnlyCollection<TKey> index,
-        int chunkSize = BulkQuery.DefaultChunkSize,
-        int degreeOfParalllelism = BulkQuery.DefaultDegreeOfParalllelism,
+        ChunkQuery<TKey, TRecord> chunkQuery,
+        int degreeOfParalllelism = DefaultDegreeOfParalllelism,
+        int chunkSize = DefaultChunkSize,
         IProgress<ResultContext>? progress = default,
         [EnumeratorCancellation] CancellationToken cancellationToken = default
     )

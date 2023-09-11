@@ -83,21 +83,20 @@ public sealed class ItemsQuery
         CancellationToken cancellationToken = default
     )
     {
-        var producer = BulkQuery.Create<int, Item>(
-            async (chunk, ct) =>
-            {
-                var response = await GetItemsByIds(chunk, language, missingMemberBehavior, ct)
-                    .ConfigureAwait(false);
-                return response.Value;
-            }
-        );
-        return producer.QueryAsync(
+        return BulkQuery.QueryAsync(
             itemIds,
+            GetChunk,
             degreeOfParalllelism,
             chunkSize,
             progress,
             cancellationToken
         );
+
+        async Task<IReadOnlyCollection<Item>> GetChunk(IReadOnlyCollection<int> chunk, CancellationToken cancellationToken)
+        {
+            var result = await GetItemsByIds(chunk, language, missingMemberBehavior, cancellationToken);
+            return result.Value;
+        }
     }
 
     public async IAsyncEnumerable<Item> GetItemsBulk(

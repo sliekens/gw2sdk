@@ -21,18 +21,19 @@ public class BulkQueryTest
         var index = Enumerable.Range(1, resultTotal).ToHashSet();
         var records = index.Select(id => new StubRecord(id)).ToList();
 
-        var sut = BulkQuery.Create<int, StubRecord>(
+        // Cancel after 107 records have been received (arbitrary positive number less than the total)
+        const int cutoff = 107;
+        var received = 0;
+        var producer = BulkQuery.QueryAsync(
+            index,
             (chunk, _) =>
             {
                 var found = records.Where(record => chunk.Contains(record.Id)).ToHashSet();
                 return Task.FromResult((IReadOnlyCollection<StubRecord>)found);
-            }
+            },
+            chunkSize: chunkSize,
+            cancellationToken: cancellationTokenSource.Token
         );
-
-        // Cancel after 107 records have been received (arbitrary positive number less than the total)
-        const int cutoff = 107;
-        var received = 0;
-        var producer = sut.QueryAsync(index, chunkSize: chunkSize, cancellationToken: cancellationTokenSource.Token);
         var reason = await Assert.ThrowsAsync<OperationCanceledException>(
             async () =>
             {
@@ -58,15 +59,15 @@ public class BulkQueryTest
         var records = index.Select(id => new StubRecord(id)).ToList();
 
         const int chunkSize = 10;
-        var sut = BulkQuery.Create<int, StubRecord>(
+        var actual = await BulkQuery.QueryAsync(
+            index,
             (chunk, _) =>
             {
                 var found = records.Where(record => chunk.Contains(record.Id)).ToHashSet();
                 return Task.FromResult((IReadOnlyCollection<StubRecord>)found);
-            }
-        );
-
-        var actual = await sut.QueryAsync(index, chunkSize).ToListAsync();
+            },
+            chunkSize: chunkSize
+        ).ToListAsync();
 
         Assert.Equal(index.Count, actual.Count);
         Assert.All(index, id => Assert.Contains(actual, record => record.Id == id));
@@ -86,15 +87,14 @@ public class BulkQueryTest
         var index = Enumerable.Range(1, 100).ToHashSet();
         var records = index.Select(id => new StubRecord(id)).ToList();
 
-        var sut = BulkQuery.Create<int, StubRecord>(
+        var actual = await BulkQuery.QueryAsync(
+            index,
             (chunk, _) =>
             {
                 var found = records.Where(record => chunk.Contains(record.Id)).ToHashSet();
                 return Task.FromResult((IReadOnlyCollection<StubRecord>)found);
             }
-        );
-
-        var actual = await sut.QueryAsync(index).ToListAsync();
+        ).ToListAsync();
 
         Assert.Equal(index.Count, actual.Count);
         Assert.All(index, id => Assert.Contains(actual, record => record.Id == id));

@@ -161,22 +161,22 @@ public sealed class CraftingQuery
         CancellationToken cancellationToken = default
     )
     {
-        var producer = BulkQuery.Create<int, Recipe>(
-            async (chunk, ct) =>
-            {
-                var response = await GetRecipesByIds(chunk, missingMemberBehavior, ct)
-                    .ConfigureAwait(false);
-                return response.Value;
-            }
-        );
-
-        return producer.QueryAsync(
+        return BulkQuery.QueryAsync(
             recipeIds,
+            GetChunk,
             degreeOfParalllelism,
             chunkSize,
             progress: progress,
             cancellationToken: cancellationToken
         );
+
+        async Task<IReadOnlyCollection<Recipe>> GetChunk(IReadOnlyCollection<int> chunk, CancellationToken cancellationToken)
+        {
+            var response = await GetRecipesByIds(chunk, missingMemberBehavior, cancellationToken)
+                .ConfigureAwait(false);
+            return response.Value;
+        }
+
     }
 
     public async IAsyncEnumerable<Recipe> GetRecipesBulk(
