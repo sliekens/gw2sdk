@@ -34,7 +34,6 @@ public class TestHttpClientFactory : IHttpClientFactory, IAsyncDisposable
     /// <summary>Creates a service provider for the HTTP factory which is unfortunately very dependent on ServiceCollection.</summary>
     private static ServiceProvider BuildHttpClientProvider(Uri baseAddress)
     {
-        const int maxConnections = 100;
         var services = new ServiceCollection();
 
         services.AddTransient<SchemaVersionHandler>();
@@ -60,7 +59,7 @@ public class TestHttpClientFactory : IHttpClientFactory, IAsyncDisposable
                     //   because we have many tests trying to use the API concurrently,
                     //   resulting in a stupid amount of connections being opened
                     // The desired effect is to open a smaller number of connections that are reused often
-                    MaxConnectionsPerServer = maxConnections,
+                    MaxConnectionsPerServer = 10,
 
                     // Creating a new connection shouldn't take more than 10 seconds
                     ConnectTimeout = TimeSpan.FromSeconds(10),
@@ -71,7 +70,7 @@ public class TestHttpClientFactory : IHttpClientFactory, IAsyncDisposable
             )
 #else
             .ConfigurePrimaryHttpMessageHandler(
-                () => new HttpClientHandler { MaxConnectionsPerServer = maxConnections }
+                () => new HttpClientHandler { MaxConnectionsPerServer = 10 }
             )
 #endif
             .AddHttpMessageHandler<SchemaVersionHandler>()
