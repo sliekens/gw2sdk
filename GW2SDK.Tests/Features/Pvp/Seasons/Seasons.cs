@@ -7,7 +7,7 @@ namespace GuildWars2.Tests.Features.Pvp.Seasons;
 public class Seasons
 {
     [Fact]
-    public async Task Can_be_enumerated()
+    public async Task Can_be_listed()
     {
         var sut = Composer.Resolve<Gw2Client>();
 

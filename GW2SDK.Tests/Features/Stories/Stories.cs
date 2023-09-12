@@ -7,7 +7,7 @@ namespace GuildWars2.Tests.Features.Stories;
 public class Stories
 {
     [Fact]
-    public async Task Can_be_enumerated()
+    public async Task Can_be_listed()
     {
         var sut = Composer.Resolve<Gw2Client>();
 
