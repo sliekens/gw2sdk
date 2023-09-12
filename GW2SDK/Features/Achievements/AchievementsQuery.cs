@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Net.Http;
+using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Threading.Tasks;
 using GuildWars2.Achievements.Categories;
@@ -96,6 +97,59 @@ public sealed class AchievementsQuery
             MissingMemberBehavior = missingMemberBehavior
         };
         return request.SendAsync(http, cancellationToken);
+    }
+
+    public IAsyncEnumerable<Achievement> GetAchievementsBulk(
+        IReadOnlyCollection<int> achievementIds,
+        Language? language = default,
+        MissingMemberBehavior missingMemberBehavior = default,
+        int degreeOfParalllelism = BulkQuery.DefaultDegreeOfParalllelism,
+        int chunkSize = BulkQuery.DefaultChunkSize,
+        IProgress<ResultContext>? progress = default,
+        CancellationToken cancellationToken = default
+    )
+    {
+        return BulkQuery.QueryAsync(
+            achievementIds,
+            GetChunk,
+            degreeOfParalllelism,
+            chunkSize,
+            progress: progress,
+            cancellationToken: cancellationToken
+        );
+
+        async Task<IReadOnlyCollection<Achievement>> GetChunk(IReadOnlyCollection<int> chunk, CancellationToken cancellationToken)
+        {
+            var response = await GetAchievementsByIds(chunk, language, missingMemberBehavior, cancellationToken)
+                .ConfigureAwait(false);
+            return response.Value;
+        }
+    }
+
+    public async IAsyncEnumerable<Achievement> GetAchievementsBulk(
+        Language? language = default,
+        MissingMemberBehavior missingMemberBehavior = default,
+        int degreeOfParalllelism = BulkQuery.DefaultDegreeOfParalllelism,
+        int chunkSize = BulkQuery.DefaultChunkSize,
+        IProgress<ResultContext>? progress = default,
+        [EnumeratorCancellation] CancellationToken cancellationToken = default
+    )
+    {
+        var index = await GetAchievementsIndex(cancellationToken).ConfigureAwait(false);
+        var producer = GetAchievementsBulk(
+                index.Value,
+                language,
+                missingMemberBehavior,
+                degreeOfParalllelism,
+                chunkSize,
+                progress,
+                cancellationToken
+            );
+        await foreach (var achievement in producer.WithCancellation(cancellationToken)
+            .ConfigureAwait(false))
+        {
+            yield return achievement;
+        }
     }
 
     #endregion
