@@ -12,12 +12,14 @@ public sealed record AchievementCategory
 
     public required string Name { get; init; }
 
+    /// <remarks>Can be empty.</remarks>
     public required string Description { get; init; }
 
     public required int Order { get; init; }
 
     public required string Icon { get; init; }
 
+    /// <remarks>Can be empty.</remarks>
     public required IReadOnlyCollection<AchievementRef> Achievements { get; init; }
 
     public required IReadOnlyCollection<AchievementRef>? Tomorrow { get; init; }

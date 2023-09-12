@@ -23,12 +23,12 @@ public class AchievementJsonTest : IClassFixture<AchievementFixture>
 
             var actual = document.RootElement.GetAchievement(MissingMemberBehavior.Error);
 
-            actual.Name_is_not_empty();
-            actual.Description_is_not_null();
-            actual.Requirement_is_not_null();
-            actual.LockedText_is_not_null();
-            actual.Flags_is_not_empty();
-            actual.Tiers_is_not_empty();
+            actual.Has_name();
+            actual.Has_description();
+            actual.Has_requirement();
+            actual.Has_LockedText();
+            actual.Has_flags();
+            actual.Has_tiers();
             actual.Tiers_does_not_contain_null();
             actual.Rewards_does_not_contain_null();
             actual.Bits_does_not_contain_null();

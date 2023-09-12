@@ -9,20 +9,22 @@ namespace GuildWars2.Tests.Features.Achievements;
 
 internal static class Invariants
 {
-    internal static void Name_is_not_empty(this Achievement actual) => Assert.NotEmpty(actual.Name);
+    internal static void Has_id(this Achievement actual) => Assert.True(actual.Id > 0);
 
-    internal static void Description_is_not_null(this Achievement actual) =>
+    internal static void Has_name(this Achievement actual) => Assert.NotEmpty(actual.Name);
+
+    internal static void Has_description(this Achievement actual) =>
         Assert.NotNull(actual.Description);
 
-    internal static void Requirement_is_not_null(this Achievement actual) =>
+    internal static void Has_requirement(this Achievement actual) =>
         Assert.NotNull(actual.Requirement);
 
-    internal static void LockedText_is_not_null(this Achievement actual) =>
+    internal static void Has_LockedText(this Achievement actual) =>
         Assert.NotNull(actual.LockedText);
 
-    internal static void Flags_is_not_empty(this Achievement actual) => Assert.NotEmpty(actual.Flags);
+    internal static void Has_flags(this Achievement actual) => Assert.NotEmpty(actual.Flags);
 
-    internal static void Tiers_is_not_empty(this Achievement actual) => Assert.NotEmpty(actual.Tiers);
+    internal static void Has_tiers(this Achievement actual) => Assert.NotEmpty(actual.Tiers);
 
     internal static void Tiers_does_not_contain_null(this Achievement actual) =>
         Assert.DoesNotContain(null, actual.Tiers);
@@ -53,22 +55,44 @@ internal static class Invariants
             Assert.Equal(-1, actual.PointCap);
         }
     }
-    internal static void Id_is_positive(this AccountAchievement actual) =>
-        Assert.InRange(actual.Id, 1, int.MaxValue);
-    internal static void Id_is_positive(this AchievementCategory actual) =>
+
+    internal static void Has_id(this AccountAchievement actual) =>
         Assert.InRange(actual.Id, 1, int.MaxValue);
 
-    internal static void Order_is_not_negative(this AchievementCategory actual) =>
+    internal static void Has_id(this AchievementCategory actual) =>
+        Assert.InRange(actual.Id, 1, int.MaxValue);
+
+    internal static void Has_name(this AchievementCategory actual) => Assert.NotEmpty(actual.Name);
+
+    internal static void Has_description(this AchievementCategory actual) =>
+        Assert.NotNull(actual.Description);
+
+    internal static void Has_icon(this AchievementCategory actual) => Assert.NotEmpty(actual.Icon);
+
+    internal static void Has_achievements(this AchievementCategory actual) =>
+        Assert.NotNull(actual.Achievements);
+
+    internal static void Has_order(this AchievementCategory actual) =>
         Assert.InRange(actual.Order, 0, int.MaxValue);
 
-    internal static void Order_is_not_negative(this AchievementGroup actual) =>
+    internal static void Has_id(this AchievementGroup actual) => Assert.NotEmpty(actual.Id);
+
+    internal static void Has_name(this AchievementGroup actual) => Assert.NotEmpty(actual.Name);
+
+    internal static void Has_description(this AchievementGroup actual) =>
+        Assert.NotNull(actual.Description);
+
+    internal static void Has_categories(this AchievementGroup actual) =>
+        Assert.NotEmpty(actual.Categories);
+
+    internal static void Has_order(this AchievementGroup actual) =>
         Assert.InRange(actual.Order, 0, int.MaxValue);
-    internal static void Id_is_positive(this Title actual) =>
-        Assert.InRange(actual.Id, 1, int.MaxValue);
 
-    internal static void Name_is_not_empty(this Title actual) => Assert.NotEmpty(actual.Name);
+    internal static void Has_id(this Title actual) => Assert.InRange(actual.Id, 1, int.MaxValue);
 
-    internal static void Can_be_unlocked_by_achievements_or_achievement_points(this Title actual)
+    internal static void Has_name(this Title actual) => Assert.NotEmpty(actual.Name);
+
+    internal static void Can_be_unlocked_by_achievements(this Title actual)
     {
         if (actual.AchievementPointsRequired.HasValue)
         {
