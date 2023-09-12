@@ -5,7 +5,7 @@
     "cacheFrom": "ghcr.io/sliekens/gw2sdk/devcontainer"
   },
   "features": {
-    "./dotnet": {
+    "ghcr.io/devcontainers/features/dotnet:2": {
       "version": "7.0.3xx",
       "additionalVersions": [
         "6.0"
