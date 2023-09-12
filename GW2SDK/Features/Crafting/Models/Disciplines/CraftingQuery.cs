@@ -176,7 +176,6 @@ public sealed class CraftingQuery
                 .ConfigureAwait(false);
             return response.Value;
         }
-
     }
 
     public async IAsyncEnumerable<Recipe> GetRecipesBulk(
