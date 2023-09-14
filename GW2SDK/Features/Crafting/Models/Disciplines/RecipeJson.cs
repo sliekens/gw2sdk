@@ -45,8 +45,6 @@ public static class RecipeJson
                 return json.GetFeastRecipe(missingMemberBehavior);
             case "Focus":
                 return json.GetFocusRecipe(missingMemberBehavior);
-            case "Food":
-                return json.GetFoodRecipe(missingMemberBehavior);
             case "Gloves":
                 return json.GetGlovesRecipe(missingMemberBehavior);
             case "Greatsword":
