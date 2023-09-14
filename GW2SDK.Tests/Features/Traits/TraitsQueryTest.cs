@@ -8,7 +8,7 @@ namespace GuildWars2.Tests.Features.Traits;
 public class TraitsQueryTest
 {
     [Fact]
-    public async Task Traits_can_be_enumerated()
+    public async Task Traits_can_be_listed()
     {
         var sut = Composer.Resolve<Gw2Client>();
 

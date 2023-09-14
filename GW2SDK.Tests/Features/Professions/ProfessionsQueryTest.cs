@@ -9,7 +9,7 @@ namespace GuildWars2.Tests.Features.Professions;
 public class ProfessionsQueryTest
 {
     [Fact]
-    public async Task Professions_can_be_enumerated()
+    public async Task Professions_can_be_listed()
     {
         var sut = Composer.Resolve<Gw2Client>();
 
@@ -33,7 +33,7 @@ public class ProfessionsQueryTest
     }
 
     [Fact]
-    public async Task Profession_names_can_be_enumerated()
+    public async Task Profession_names_can_be_listed()
     {
         var sut = Composer.Resolve<Gw2Client>();
 

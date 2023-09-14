@@ -9,7 +9,7 @@ namespace GuildWars2.Tests.Features.Emblems;
 public class EmblemsQueryTest
 {
     [Fact]
-    public async Task Forground_emblems_can_be_enumerated()
+    public async Task Forground_emblems_can_be_listed()
     {
         var sut = Composer.Resolve<Gw2Client>();
 
@@ -81,7 +81,7 @@ public class EmblemsQueryTest
     }
 
     [Fact]
-    public async Task Background_emblems_can_be_enumerated()
+    public async Task Background_emblems_can_be_listed()
     {
         var sut = Composer.Resolve<Gw2Client>();
 

@@ -9,7 +9,7 @@ namespace GuildWars2.Tests.Features.Mounts;
 public class MountsQueryTest
 {
     [Fact]
-    public async Task Mounts_can_be_enumerated()
+    public async Task Mounts_can_be_listed()
     {
         var sut = Composer.Resolve<Gw2Client>();
 
@@ -29,7 +29,7 @@ public class MountsQueryTest
     }
 
     [Fact]
-    public async Task Mount_names_can_be_enumerated()
+    public async Task Mount_names_can_be_listed()
     {
         var sut = Composer.Resolve<Gw2Client>();
 
@@ -87,7 +87,7 @@ public class MountsQueryTest
     }
 
     [Fact]
-    public async Task Mount_skins_can_be_enumerated()
+    public async Task Mount_skins_can_be_listed()
     {
         var sut = Composer.Resolve<Gw2Client>();
 

@@ -72,7 +72,7 @@ public class BuildStorageQueryTest
     }
 
     [Fact]
-    public async Task Build_storage_can_be_enumerated()
+    public async Task Build_storage_can_be_listed()
     {
         var sut = Composer.Resolve<Gw2Client>();
         var accessToken = Composer.Resolve<ApiKey>();

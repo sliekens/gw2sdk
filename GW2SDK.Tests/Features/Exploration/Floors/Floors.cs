@@ -10,7 +10,7 @@ public class Floors
     [Theory]
     [InlineData(1)]
     [InlineData(2)]
-    public async Task Can_be_enumerated(int continentId)
+    public async Task Can_be_listed(int continentId)
     {
         var sut = Composer.Resolve<Gw2Client>();
 

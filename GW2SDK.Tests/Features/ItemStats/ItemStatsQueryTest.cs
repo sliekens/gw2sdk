@@ -8,7 +8,7 @@ namespace GuildWars2.Tests.Features.ItemStats;
 public class ItemStatsQueryTest
 {
     [Fact]
-    public async Task Item_stats_can_be_enumerated()
+    public async Task Item_stats_can_be_listed()
     {
         var sut = Composer.Resolve<Gw2Client>();
 

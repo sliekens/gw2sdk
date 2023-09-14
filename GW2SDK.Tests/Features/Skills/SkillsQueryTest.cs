@@ -8,7 +8,7 @@ namespace GuildWars2.Tests.Features.Skills;
 public class SkillsQueryTest
 {
     [Fact]
-    public async Task Skills_can_be_enumerated()
+    public async Task Skills_can_be_listed()
     {
         var sut = Composer.Resolve<Gw2Client>();
 

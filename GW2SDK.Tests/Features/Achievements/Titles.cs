@@ -7,7 +7,7 @@ namespace GuildWars2.Tests.Features.Achievements;
 public class Titles
 {
     [Fact]
-    public async Task Titles_can_be_enumerated()
+    public async Task Titles_can_be_listed()
     {
         var sut = Composer.Resolve<Gw2Client>();
 

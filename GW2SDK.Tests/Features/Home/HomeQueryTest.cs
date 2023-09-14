@@ -8,7 +8,7 @@ namespace GuildWars2.Tests.Features.Home;
 public class HomeQueryTest
 {
     [Fact]
-    public async Task Cats_can_be_enumerated()
+    public async Task Cats_can_be_listed()
     {
         var sut = Composer.Resolve<Gw2Client>();
 
@@ -104,7 +104,7 @@ public class HomeQueryTest
     }
 
     [Fact]
-    public async Task Nodes_can_be_enumerated()
+    public async Task Nodes_can_be_listed()
     {
         var sut = Composer.Resolve<Gw2Client>();
 

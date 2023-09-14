@@ -20,7 +20,7 @@ public class WalletQueryTest
     }
 
     [Fact]
-    public async Task Currencies_can_be_enumerated()
+    public async Task Currencies_can_be_listed()
     {
         var sut = Composer.Resolve<Gw2Client>();
 

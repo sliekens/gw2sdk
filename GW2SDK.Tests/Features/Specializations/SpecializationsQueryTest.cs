@@ -8,7 +8,7 @@ namespace GuildWars2.Tests.Features.Specializations;
 public class SpecializationsQueryTest
 {
     [Fact]
-    public async Task Specializations_can_be_enumerated()
+    public async Task Specializations_can_be_listed()
     {
         var sut = Composer.Resolve<Gw2Client>();
 
