@@ -4,9 +4,9 @@ using Xunit;
 
 namespace GuildWars2.Tests.Features.Items;
 
-public class ItemJsonTest : IClassFixture<ItemFixture>
+public class ItemJson : IClassFixture<ItemFixture>
 {
-    public ItemJsonTest(ItemFixture fixture)
+    public ItemJson(ItemFixture fixture)
     {
         this.fixture = fixture;
     }

@@ -5,17 +5,23 @@ using Xunit;
 
 namespace GuildWars2.Tests.Features.Items;
 
-public class UnrecognizedGatheringTool
+public class MissingRarity
 {
     [Fact]
     public void Throws_by_default()
     {
         const string text = """
             { 
-              "type": "Gathering",
-              "details": {
-                "type": "Hunting"
-              }
+              "type": "Trophy",
+              "rarity": "Epic",
+              "id": 0,
+              "name": "",
+              "level": 0,
+              "vendor_value": 0,
+              "game_types": [],
+              "flags": [],
+              "restrictions": [],
+              "chat_link": ""
             }
             """;
 
@@ -28,22 +34,20 @@ public class UnrecognizedGatheringTool
 
         var actual = Assert.ThrowsAny<InvalidOperationException>(Act);
 
-        Assert.Equal("Unexpected discriminator value 'Hunting'.", actual.Message);
+        Assert.Equal("Value for 'rarity' is incompatible.", actual.Message);
+        Assert.Equal("Unexpected member 'Epic'.", actual.InnerException!.Message);
     }
 
     [Fact]
-    public void Uses_base_type_when_MissingMemberBehavior_is_Undefined()
+    public void Uses_generated_value_when_MissingMemberBehavior_is_Undefined()
     {
         const string text = """
             { 
-              "type": "Gathering",
-              "details": {
-                "type": "Hunting"
-              },
+              "type": "Trophy",
+              "rarity": "Epic",
               "id": 0,
               "name": "",
               "level": 0,
-              "rarity": "",
               "vendor_value": 0,
               "game_types": [],
               "flags": [],
@@ -56,6 +60,9 @@ public class UnrecognizedGatheringTool
 
         var actual = json.RootElement.GetItem(MissingMemberBehavior.Undefined);
 
-        Assert.IsType<GatheringTool>(actual);
+        var trophy = Assert.IsType<Trophy>(actual);
+
+        const Rarity epic = (Rarity)126655543;
+        Assert.Equal(epic, trophy.Rarity);
     }
 }
