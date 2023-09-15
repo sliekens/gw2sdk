@@ -42,6 +42,7 @@
   "customizations": {
     "vscode": {
       "extensions": [
+        "ms-dotnettools.csdevkit",
         "editorconfig.editorconfig",
         "github.vscode-github-actions"
       ]
