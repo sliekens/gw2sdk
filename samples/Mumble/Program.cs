@@ -1,13 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Net.Http;
 using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 using GuildWars2;
-using GuildWars2.Exploration.Maps;
-using GuildWars2.Specializations;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
+using Mumble;
 
 Console.OutputEncoding = Encoding.UTF8;
 CultureInfo.CurrentCulture = CultureInfo.GetCultureInfo("en");
@@ -19,34 +17,18 @@ if (!GameLink.IsSupported())
     return;
 }
 
-var cts = new CancellationTokenSource();
-Console.CancelKeyPress += (_, args) =>
-{
-    cts.Cancel();
-    args.Cancel = true; // don't terminate the app
-};
+var builder = Host.CreateApplicationBuilder(args);
 
-using var httpClient = new HttpClient();
-var gw2 = new Gw2Client(httpClient);
-HashSet<Map> maps = await gw2.Maps.GetMaps(cancellationToken: cts.Token);
-HashSet<Specialization> specializations =
-    await gw2.Specializations.GetSpecializations(cancellationToken: cts.Token);
+builder.Services.AddHttpClient<Gw2Client>();
+builder.Services.AddHostedService<GameReporter>();
+builder.Logging.AddSimpleConsole(
+    options =>
+    {
+        options.SingleLine = true;
+        options.TimestampFormat = "HH:mm:ss.fff ";
+        options.UseUtcTimestamp = true;
+    });
 
-var gameObserver = new GameReporter();
-foreach (var map in maps)
-{
-    gameObserver.Maps[map.Id] = map;
-}
+var app = builder.Build();
 
-foreach (var specialization in specializations)
-{
-    gameObserver.Specializations[specialization.Id] = specialization;
-}
-
-using var gameLink = GameLink.Open();
-using var subscription = gameLink.Subscribe(gameObserver);
-
-while (!cts.IsCancellationRequested)
-{
-    await Task.Delay(100);
-}
+app.Run();
