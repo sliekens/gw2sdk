@@ -53,11 +53,8 @@ public class GameLinkTest
         var gameTick = sut.GetSnapshot();
         Assert.True(gameTick.Context.BuildId > 100_000, "Game build should be over 100,000");
 
-        var server = gameTick.Context.GetServerAddress();
+        var server = gameTick.Context.ServerAddress;
         Assert.NotEmpty(server.ToString());
-
-        var address = gameTick.Context.GetServerAddress();
-        Assert.NotNull(address.Address);
 
         // Port is not specified
         Assert.Equal(0, server.Port);

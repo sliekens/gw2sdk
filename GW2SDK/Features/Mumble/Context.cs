@@ -8,10 +8,10 @@ namespace GuildWars2.Mumble;
 
 [PublicAPI]
 [StructLayout(LayoutKind.Explicit, CharSet = CharSet.Unicode)]
-public struct Context
+public record struct Context
 {
     [FieldOffset(0)]
-    internal readonly sockaddr_in ServerAddress;
+    internal readonly sockaddr_in serverAddress;
 
     [FieldOffset(28)]
     public readonly uint MapId;
@@ -63,9 +63,8 @@ public struct Context
 
     public bool IsMounted => MountIndex != 0;
 
-    [Pure]
-    public IPEndPoint GetServerAddress() =>
-        new(ServerAddress.sin_addr.s_un.s_addr, ServerAddress.sin_port);
+    public readonly IPEndPoint ServerAddress =>
+        new(serverAddress.sin_addr.s_un.s_addr, serverAddress.sin_port);
 
     [Pure]
     public MountName GetMount() =>
