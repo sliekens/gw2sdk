@@ -8,34 +8,28 @@ namespace GuildWars2.Mumble;
 [PublicAPI]
 [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
 public struct GameTick
-
 {
     public readonly uint UiVersion;
 
     public readonly uint UiTick;
 
-    /// <summary>Avatar position is the position of the player in the coordinate system of the map. While the game uses inches
-    /// as unit, mumble uses meters.</summary>
-    [MarshalAs(UnmanagedType.ByValArray, SizeConst = 3)]
-    public readonly float[] AvatarPosition;
+    /// <summary>Avatar position is the position of the player in the coordinate system of the map. X is measured along the
+    /// east-west axis, Y measures elevation, Z is measured along the north-south axis.</summary>
+    /// <remarks>While the game uses inches as unit, mumble uses meters.</remarks>
+    public readonly Vector3D AvatarPosition;
 
-    [MarshalAs(UnmanagedType.ByValArray, SizeConst = 3)]
-    public readonly float[] AvatarFront;
+    public readonly Vector3D AvatarFront;
 
-    [MarshalAs(UnmanagedType.ByValArray, SizeConst = 3)]
-    public readonly float[] AvatarTop;
+    public readonly Vector3D AvatarTop;
 
     [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 256)]
     public readonly string Name;
 
-    [MarshalAs(UnmanagedType.ByValArray, SizeConst = 3)]
-    public readonly float[] CameraPosition;
+    public readonly Vector3D CameraPosition;
 
-    [MarshalAs(UnmanagedType.ByValArray, SizeConst = 3)]
-    public readonly float[] CameraFront;
+    public readonly Vector3D CameraFront;
 
-    [MarshalAs(UnmanagedType.ByValArray, SizeConst = 3)]
-    public readonly float[] CameraTop;
+    public readonly Vector3D CameraTop;
 
     [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 256)]
     public readonly string Identity;

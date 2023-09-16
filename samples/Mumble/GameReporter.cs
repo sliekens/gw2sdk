@@ -119,16 +119,16 @@ public class GameReporter : BackgroundService
                     }
 
                     logger.LogInformation(
-                        "[{UiTick}] {Name}, {Title} ({Specialization}) is on {Transport} in {Map}, Position: {{ Right = {Pos0}, Up = {Pos1}, Front = {Pos2} }}",
+                        "[{UiTick}] {Name}, {Title} ({Specialization}) is on {Transport} in {Map}, Position: {{ Latitude = {X}, Longitude = {Z}, Elevation = {Y} }}",
                         snapshot.UiTick,
                         identity.Name,
                         title,
                         specialization,
                         transport,
                         map.Name,
-                        snapshot.AvatarPosition[0],
-                        snapshot.AvatarPosition[1],
-                        snapshot.AvatarPosition[2]
+                        snapshot.AvatarPosition.X,
+                        snapshot.AvatarPosition.Z,
+                        snapshot.AvatarPosition.Y
                     );
                 }
             },
