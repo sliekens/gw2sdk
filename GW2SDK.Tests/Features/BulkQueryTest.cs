@@ -9,28 +9,79 @@ namespace GuildWars2.Tests.Features;
 
 public class BulkQueryTest
 {
+    [Fact]
+    public async Task Large_queries_are_chunked()
+    {
+        // Simulate 1000 records
+        var index = Enumerable.Range(1, 1000).ToHashSet();
+
+        Task<IReadOnlyCollection<StubRecord>> GetChunk(
+            IReadOnlyCollection<int> chunk,
+            CancellationToken cancellationToken
+        )
+        {
+            cancellationToken.ThrowIfCancellationRequested();
+            Assert.NotSame(index, chunk);
+            IReadOnlyCollection<StubRecord> result = chunk.Select(id => new StubRecord(id)).ToList();
+            return Task.FromResult(result);
+        }
+
+        var actual = await BulkQuery.QueryAsync(index, GetChunk).ToListAsync();
+
+        Assert.Equal(index.Count, actual.Count);
+        Assert.All(index, id => Assert.Contains(actual, record => record.Id == id));
+        Assert.All(actual, record => Assert.Contains(record.Id, index));
+    }
+
+    [Fact]
+    public async Task Small_queries_are_not_chunked()
+    {
+        // Simulate 100 records
+        var index = Enumerable.Range(1, 100).ToHashSet();
+
+        Task<IReadOnlyCollection<StubRecord>> GetChunk(
+            IReadOnlyCollection<int> chunk,
+            CancellationToken cancellationToken
+        )
+        {
+            cancellationToken.ThrowIfCancellationRequested();
+            Assert.Same(index, chunk);
+            IReadOnlyCollection<StubRecord> result = chunk.Select(id => new StubRecord(id)).ToList();
+            return Task.FromResult(result);
+        }
+
+        var actual = await BulkQuery.QueryAsync(index, GetChunk).ToListAsync();
+
+        Assert.Equal(index.Count, actual.Count);
+        Assert.All(index, id => Assert.Contains(actual, record => record.Id == id));
+        Assert.All(actual, record => Assert.Contains(record.Id, index));
+    }
+
     [Theory]
     [InlineData(1000, 10)]
     [InlineData(150, 200)]
-    public async Task It_respects_cancellation_requested(int resultTotal, int chunkSize)
+    public async Task Can_be_cancelled(int resultTotal, int chunkSize)
     {
-        // Check if cancellation works in both scenarios where the chunk size is smaller or larger than the index
-        // because the implementation is slightly optimized for the case where chunking is not needed
+        // Ensuyre cancellation works in both scenarios where the query is chunked or not
         CancellationTokenSource cancellationTokenSource = new();
 
+        Task<IReadOnlyCollection<StubRecord>> GetChunk(
+            IReadOnlyCollection<int> chunk,
+            CancellationToken cancellationToken
+        )
+        {
+            cancellationToken.ThrowIfCancellationRequested();
+            IReadOnlyCollection<StubRecord> result = chunk.Select(id => new StubRecord(id)).ToList();
+            return Task.FromResult(result);
+        }
+
         var index = Enumerable.Range(1, resultTotal).ToHashSet();
-        var records = index.Select(id => new StubRecord(id)).ToList();
 
         // Cancel after 107 records have been received (arbitrary positive number less than the total)
         const int cutoff = 107;
         var received = 0;
         var producer = BulkQuery.QueryAsync(
-            index,
-            (chunk, _) =>
-            {
-                var found = records.Where(record => chunk.Contains(record.Id)).ToHashSet();
-                return Task.FromResult((IReadOnlyCollection<StubRecord>)found);
-            },
+            index, GetChunk,
             chunkSize: chunkSize,
             cancellationToken: cancellationTokenSource.Token
         );
@@ -49,62 +100,6 @@ public class BulkQueryTest
 
         Assert.True(cancellationTokenSource.Token.Equals(reason.CancellationToken));
         Assert.Equal(cutoff, received);
-    }
-
-    [Fact]
-    public async Task It_can_split_large_queries_into_chunks()
-    {
-        // Simulate 1000 records
-        var index = Enumerable.Range(1, 1000).ToHashSet();
-        var records = index.Select(id => new StubRecord(id)).ToList();
-
-        const int chunkSize = 10;
-        var actual = await BulkQuery.QueryAsync(
-            index,
-            (chunk, _) =>
-            {
-                var found = records.Where(record => chunk.Contains(record.Id)).ToHashSet();
-                return Task.FromResult((IReadOnlyCollection<StubRecord>)found);
-            },
-            chunkSize: chunkSize
-        ).ToListAsync();
-
-        Assert.Equal(index.Count, actual.Count);
-        Assert.All(index, id => Assert.Contains(actual, record => record.Id == id));
-        Assert.All(
-            actual,
-            record =>
-            {
-                Assert.Contains(record.Id, index);
-            }
-        );
-    }
-
-    [Fact]
-    public async Task It_can_skip_chunking_if_the_index_is_small_enough()
-    {
-        // Simulate 100 records
-        var index = Enumerable.Range(1, 100).ToHashSet();
-        var records = index.Select(id => new StubRecord(id)).ToList();
-
-        var actual = await BulkQuery.QueryAsync(
-            index,
-            (chunk, _) =>
-            {
-                var found = records.Where(record => chunk.Contains(record.Id)).ToHashSet();
-                return Task.FromResult((IReadOnlyCollection<StubRecord>)found);
-            }
-        ).ToListAsync();
-
-        Assert.Equal(index.Count, actual.Count);
-        Assert.All(index, id => Assert.Contains(actual, record => record.Id == id));
-        Assert.All(
-            actual,
-            record =>
-            {
-                Assert.Contains(record.Id, index);
-            }
-        );
     }
 }
 
