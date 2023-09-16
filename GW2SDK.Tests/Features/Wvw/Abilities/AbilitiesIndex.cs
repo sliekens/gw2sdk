@@ -7,7 +7,7 @@ namespace GuildWars2.Tests.Features.Wvw.Abilities;
 public class AbilitiesIndex
 {
     [Fact]
-    public async Task Is_not_empty()
+    public async Task Can_be_listed()
     {
         var sut = Composer.Resolve<Gw2Client>();
 

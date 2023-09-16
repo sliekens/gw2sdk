@@ -7,12 +7,14 @@ namespace GuildWars2.Tests.Features.Masteries;
 public class MasteriesIndex
 {
     [Fact]
-    public async Task Masteries_index_is_not_empty()
+    public async Task Masteries_index_Can_be_listed()
     {
         var sut = Composer.Resolve<Gw2Client>();
 
         var actual = await sut.Masteries.GetMasteriesIndex();
 
-        Assert.Equal(actual.ResultContext.ResultTotal, actual.Value.Count);
+        Assert.NotEmpty(actual.Value);
+        Assert.Equal(actual.Value.Count, actual.ResultContext.ResultCount);
+        Assert.Equal(actual.Value.Count, actual.ResultContext.ResultTotal);
     }
 }

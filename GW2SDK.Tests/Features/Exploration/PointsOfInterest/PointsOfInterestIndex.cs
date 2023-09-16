@@ -10,7 +10,7 @@ public class PointsOfInterestIndex
     [InlineData(1, 0, 1, 26)]
     [InlineData(1, 0, 1, 27)]
     [InlineData(1, 0, 1, 28)]
-    public async Task Is_not_empty(int continentId, int floorId, int regionId, int mapId)
+    public async Task Can_be_listed(int continentId, int floorId, int regionId, int mapId)
     {
         var sut = Composer.Resolve<Gw2Client>();
 

@@ -9,7 +9,7 @@ public class RegionsIndex
     [Theory]
     [InlineData(1, 0)]
     [InlineData(2, 1)]
-    public async Task Is_not_empty(int continentId, int floorId)
+    public async Task Can_be_listed(int continentId, int floorId)
     {
         var sut = Composer.Resolve<Gw2Client>();
 

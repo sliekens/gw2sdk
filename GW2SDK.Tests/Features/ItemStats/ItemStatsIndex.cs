@@ -7,12 +7,14 @@ namespace GuildWars2.Tests.Features.ItemStats;
 public class ItemStatsIndex
 {
     [Fact]
-    public async Task Is_not_empty()
+    public async Task Can_be_listed()
     {
         var sut = Composer.Resolve<Gw2Client>();
 
         var actual = await sut.ItemStats.GetItemStatsIndex();
 
-        Assert.Equal(actual.ResultContext.ResultTotal, actual.Value.Count);
+        Assert.NotEmpty(actual.Value);
+        Assert.Equal(actual.Value.Count, actual.ResultContext.ResultCount);
+        Assert.Equal(actual.Value.Count, actual.ResultContext.ResultTotal);
     }
 }
