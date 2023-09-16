@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -28,27 +29,28 @@ public class GameReporter : BackgroundService
             throw new NotSupportedException();
         }
 
-        // BackgroundService starts synchronously, i.e. app startup is delayed until the first await
+        // Workaround for synchronous starts (BackgroundService delays app startup until the first await)
         await Task.Yield();
 
-        // Initialize the shared memory link
-        using var gameLink = GameLink.Open();
-
-        // The game link emits the current player's map ID and specialization ID
-        // Additional information about those can be retrieved from the API
+        // Prepare a dictionary of maps
         var maps = await gw2.Maps.GetMaps(cancellationToken: stoppingToken);
         var mapsDictionary = maps.Value.ToDictionary(map => map.Id);
 
+        // Prepare a dictionary of elite specializations
         var specializations =
             await gw2.Specializations.GetSpecializations(cancellationToken: stoppingToken);
         var specializationsDictionary =
             specializations.Value.ToDictionary(specialization => specialization.Id);
 
+        // Initialize the shared memory link
+        using var gameLink = GameLink.Open();
+
+        // Subscribe to the GameLink observable
+        // I recommend using Rx (System.Reactive) instead of implementing IObserver<T> yourself
         gameLink.Subscribe(
             snapshot =>
             {
-                var pos = snapshot.AvatarPosition;
-
+                // This callback is executed whenever the game client updates the shared memory
                 if (!snapshot.TryGetIdentity(out var identity, MissingMemberBehavior.Error))
                 {
                     return;
@@ -66,38 +68,69 @@ public class GameReporter : BackgroundService
                 }
 
                 var map = mapsDictionary[identity.MapId];
-                var activity = "traveling";
+
+                var title = $"the {identity.Race} {identity.Profession}";
                 if (!context.UiState.HasFlag(UiState.GameHasFocus))
                 {
-                    activity = "afk-ing";
+                    logger.LogInformation(
+                        "[{UiTick}] {Name}, {Title} ({Specialization}) is afk",
+                        snapshot.UiTick,
+                        identity.Name,
+                        title,
+                        specialization
+                    );
                 }
                 else if (context.UiState.HasFlag(UiState.TextboxHasFocus))
                 {
-                    activity = "typing";
+                    logger.LogInformation(
+                        "[{UiTick}] {Name}, {Title} ({Specialization}) is typing",
+                        snapshot.UiTick,
+                        identity.Name,
+                        title,
+                        specialization
+                    );
                 }
                 else if (context.UiState.HasFlag(UiState.IsMapOpen))
                 {
-                    activity = "looking at the map";
+                    logger.LogInformation(
+                        "[{UiTick}] {Name}, {Title} ({Specialization}) is looking at the map",
+                        snapshot.UiTick,
+                        identity.Name,
+                        title,
+                        specialization
+                    );
                 }
                 else if (context.UiState.HasFlag(UiState.IsInCombat))
                 {
-                    activity = "in combat";
+                    logger.LogInformation(
+                        "[{UiTick}] {Name}, {Title} ({Specialization}) is in combat",
+                        snapshot.UiTick,
+                        identity.Name,
+                        title,
+                        specialization
+                    );
                 }
+                else
+                {
+                    var transport = "foot";
+                    if (context.IsMounted)
+                    {
+                        transport = context.GetMount( ).ToString();
+                    }
 
-                logger.LogInformation(
-                    "[{UiTick}] {Name}, the {Race} {Profession} ({Specialization}) is {Activity} on {Transport} in {Map}, Position: {{ Right = {Pos0}, Up = {Pos1}, Front = {Pos2} }}",
-                    snapshot.UiTick,
-                    identity.Name,
-                    identity.Race,
-                    identity.Profession,
-                    specialization,
-                    activity,
-                    context.IsMounted ? context.GetMount() : "foot",
-                    map.Name,
-                    pos[0],
-                    pos[1],
-                    pos[2]
-                );
+                    logger.LogInformation(
+                        "[{UiTick}] {Name}, {Title} ({Specialization}) is on {Transport} in {Map}, Position: {{ Right = {Pos0}, Up = {Pos1}, Front = {Pos2} }}",
+                        snapshot.UiTick,
+                        identity.Name,
+                        title,
+                        specialization,
+                        transport,
+                        map.Name,
+                        snapshot.AvatarPosition[0],
+                        snapshot.AvatarPosition[1],
+                        snapshot.AvatarPosition[2]
+                    );
+                }
             },
             stoppingToken
         );
