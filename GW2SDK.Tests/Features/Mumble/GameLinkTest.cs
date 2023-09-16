@@ -3,46 +3,10 @@ using System.IO;
 using System.IO.MemoryMappedFiles;
 using System.Threading;
 using System.Threading.Tasks;
-using GuildWars2.Mumble;
 using Xunit;
 
 #pragma warning disable CA1416
 namespace GuildWars2.Tests.Features.Mumble;
-
-public class GameLinkTestObserver : IObserver<Snapshot>
-{
-    private readonly TaskCompletionSource<bool> tcs;
-
-    public GameLinkTestObserver(CancellationToken ct)
-    {
-        tcs = new TaskCompletionSource<bool>();
-        ct.Register(tcs.SetCanceled);
-    }
-
-    public Task<bool> Handle => tcs.Task;
-
-    public Snapshot First { get; private set; }
-
-    public Snapshot Last { get; private set; }
-
-    public void OnCompleted() => tcs.SetResult(true);
-
-    public void OnError(Exception error) => tcs.SetException(error);
-
-    public void OnNext(Snapshot value)
-    {
-        // ReSharper disable once ConditionIsAlwaysTrueOrFalse
-        if (First.UiTick == 0)
-        {
-            First = value;
-        }
-        else
-        {
-            Last = value;
-            tcs.TrySetResult(true);
-        }
-    }
-}
 
 public class GameLinkTest
 {
@@ -107,30 +71,5 @@ public class GameLinkTest
         var snapshot = sut.GetSnapshot();
         Assert.True(snapshot.TryGetIdentity(out var actual, MissingMemberBehavior.Error));
         Assert.NotNull(actual);
-    }
-}
-
-public sealed class MumbleLinkFact : FactAttribute
-{
-    public MumbleLinkFact()
-    {
-        if (!GameLink.IsSupported())
-        {
-            Skip = "GameLink is not supported on the current platform.";
-            return;
-        }
-
-        try
-        {
-            using var file = MemoryMappedFile.OpenExisting(
-                "MumbleLink",
-                MemoryMappedFileRights.Read
-            );
-        }
-        catch (FileNotFoundException)
-        {
-            Skip =
-                "The GameLink is not initialized. Start Mumble -and- Guild Wars 2 before running this test.";
-        }
     }
 }
