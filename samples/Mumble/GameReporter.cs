@@ -106,12 +106,7 @@ public class GameReporter : BackgroundService
                 }
                 else
                 {
-                    var transport = "foot";
-                    if (tick.Context.IsMounted)
-                    {
-                        transport = tick.Context.GetMount().ToString();
-                    }
-
+                    var transport = tick.Context.IsMounted ? tick.Context.Mount.ToString() : "foot";
                     logger.LogInformation(
                         "[{UiTick}] {Name}, {Title} ({Specialization}) is on {Transport} in {Map}, Position: {{ Latitude = {X}, Longitude = {Z}, Elevation = {Y} }}",
                         tick.UiTick,

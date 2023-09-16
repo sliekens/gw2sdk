@@ -56,6 +56,11 @@ public class GameLinkTest
         var server = gameTick.Context.ServerAddress;
         Assert.NotEmpty(server.ToString());
 
+        if (gameTick.Context.IsMounted)
+        {
+            Assert.True(Enum.IsDefined(typeof(MountName), gameTick.Context.Mount));
+        }
+
         // Port is not specified
         Assert.Equal(0, server.Port);
     }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Net;
 using System.Runtime.InteropServices;
 using GuildWars2.Win32;
@@ -61,15 +62,16 @@ public record struct Context
     [FieldOffset(84)]
     internal readonly byte MountIndex;
 
-    public bool IsMounted => MountIndex != 0;
+    [MemberNotNullWhen(true, nameof(Mount))]
+    public readonly bool IsMounted => MountIndex != 0;
 
     public readonly IPEndPoint ServerAddress =>
         new(serverAddress.sin_addr.s_un.s_addr, serverAddress.sin_port);
 
-    [Pure]
-    public MountName GetMount() =>
+    public readonly MountName? Mount =>
         MountIndex switch
         {
+            0 => null,
             1 => MountName.Jackal,
             2 => MountName.Griffon,
             3 => MountName.Springer,
