@@ -13,7 +13,7 @@ using System.Runtime.Versioning;
 namespace GuildWars2
 {
     [PublicAPI]
-    public sealed class GameLink : IDisposable, IObservable<Snapshot>
+    public sealed class GameLink : IDisposable, IObservable<GameTick>
     {
         /// <summary>The smallest allowed polling interval.</summary>
         public readonly TimeSpan MinimumRefreshInterval = TimeSpan.FromMilliseconds(1d);
@@ -22,7 +22,7 @@ namespace GuildWars2
         private readonly MumbleLink mumbleLink;
 
         /// <summary>A list of observers who want to receive values.</summary>
-        private readonly List<IObserver<Snapshot>> subscribers = new();
+        private readonly List<IObserver<GameTick>> subscribers = new();
 
         /// <summary>We don't get notified when the shared memory is updated, so we use a Timer to poll for changes.</summary>
         private readonly Timer timer;
@@ -54,7 +54,7 @@ namespace GuildWars2
             timer.Dispose();
         }
 
-        public IDisposable Subscribe(IObserver<Snapshot> observer)
+        public IDisposable Subscribe(IObserver<GameTick> observer)
         {
             if (!subscribers.Contains(observer))
             {
@@ -129,6 +129,6 @@ namespace GuildWars2
             return new GameLink(link, refreshInterval);
         }
 
-        public Snapshot GetSnapshot() => mumbleLink.GetValue<Snapshot>();
+        public GameTick GetSnapshot() => mumbleLink.GetValue<GameTick>();
     }
 }

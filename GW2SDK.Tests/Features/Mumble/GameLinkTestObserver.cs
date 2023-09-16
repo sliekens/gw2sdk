@@ -5,7 +5,7 @@ using GuildWars2.Mumble;
 
 namespace GuildWars2.Tests.Features.Mumble;
 
-public class GameLinkTestObserver : IObserver<Snapshot>
+public class GameLinkTestObserver : IObserver<GameTick>
 {
     private readonly TaskCompletionSource<bool> tcs;
 
@@ -17,15 +17,15 @@ public class GameLinkTestObserver : IObserver<Snapshot>
 
     public Task<bool> Handle => tcs.Task;
 
-    public Snapshot First { get; private set; }
+    public GameTick First { get; private set; }
 
-    public Snapshot Last { get; private set; }
+    public GameTick Last { get; private set; }
 
     public void OnCompleted() => tcs.SetResult(true);
 
     public void OnError(Exception error) => tcs.SetException(error);
 
-    public void OnNext(Snapshot value)
+    public void OnNext(GameTick value)
     {
         // ReSharper disable once ConditionIsAlwaysTrueOrFalse
         if (First.UiTick == 0)
