@@ -1,4 +1,3 @@
-﻿using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
@@ -8,7 +7,7 @@ using Xunit;
 
 namespace GuildWars2.Tests.Features.Meta;
 
-public class MetaQueryTest
+public class Build
 {
     [Fact]
     public async Task Build_is_stuck()
@@ -28,27 +27,5 @@ public class MetaQueryTest
         var actual = await sut.Meta.GetBuild();
 
         Assert.True(actual.Value.Id >= 127440);
-    }
-
-    [Fact]
-    public async Task It_can_get_the_v1_api_info()
-    {
-        var sut = Composer.Resolve<Gw2Client>();
-
-        var actual = await sut.Meta.GetApiVersion("v1");
-
-        actual.Value.There_are_no_newer_translations();
-    }
-
-    [Fact]
-    public async Task It_can_get_the_v2_api_info()
-    {
-        var sut = Composer.Resolve<Gw2Client>();
-
-        var actual = await sut.Meta.GetApiVersion();
-
-        actual.Value.There_are_no_newer_translations();
-        actual.Value.There_are_no_surprise_endpoints();
-        actual.Value.There_are_no_newer_schema_versions();
     }
 }
