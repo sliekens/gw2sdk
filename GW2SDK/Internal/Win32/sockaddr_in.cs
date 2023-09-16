@@ -5,7 +5,7 @@ using JetBrains.Annotations;
 #pragma warning disable IDE1006 // Naming Styles
 namespace GuildWars2.Win32;
 
-[StructLayout(LayoutKind.Sequential)]
+[StructLayout(LayoutKind.Sequential, Size = 28)]
 [UsedImplicitly(ImplicitUseTargetFlags.Members)]
 internal readonly struct sockaddr_in
 {
