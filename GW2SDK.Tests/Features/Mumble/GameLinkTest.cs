@@ -70,8 +70,9 @@ public class GameLinkTest
     {
         using var sut = GameLink.Open();
 
-        var snapshot = sut.GetSnapshot();
-        Assert.True(snapshot.TryGetIdentity(out var actual, MissingMemberBehavior.Error));
-        Assert.NotNull(actual);
+        var actual = sut.GetSnapshot().GetIdentity(MissingMemberBehavior.Error);
+
+        Assert.NotEmpty(actual.Name);
+        Assert.True(Enum.IsDefined(typeof(UiSize), actual.UiSize));
     }
 }

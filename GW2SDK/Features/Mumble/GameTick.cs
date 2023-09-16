@@ -1,5 +1,4 @@
-﻿using System.Diagnostics.CodeAnalysis;
-using System.Runtime.InteropServices;
+﻿using System.Runtime.InteropServices;
 using System.Text.Json;
 using JetBrains.Annotations;
 
@@ -44,33 +43,9 @@ public readonly record struct GameTick
     [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 2048)]
     public readonly string Description;
 
-    public bool TryGetIdentity(
-        [NotNullWhen(true)] out Identity? identity,
-        MissingMemberBehavior missingMemberBehavior
-    )
+    public Identity GetIdentity(MissingMemberBehavior missingMemberBehavior = MissingMemberBehavior.Error)
     {
-        identity = default;
-        if (Name != "Guild Wars 2")
-        {
-            return false;
-        }
-
-        try
-        {
-            using var json = JsonDocument.Parse(Identity);
-            identity = json.RootElement.GetIdentity(missingMemberBehavior);
-            return true;
-        }
-        catch (JsonException)
-        {
-            // There is no synchronization between the game and Mumble, so we occassionally get a dirty read
-            // The result of dirty reads is that we can get partially modified JSON that is potentially invalid
-            //
-            // Example: toggling between commander tag on/off might give a partial snapshot where 'true' and 'false' leak into each other
-            //  "commander": frue,
-            //
-            //
-            return false;
-        }
+        using var json = JsonDocument.Parse(Identity);
+        return json.RootElement.GetIdentity(missingMemberBehavior);
     }
 }
