@@ -13,9 +13,9 @@
       },
       "Microsoft.Extensions.Http.Polly": {
         "type": "Direct",
-        "requested": "[7.0.9, )",
-        "resolved": "7.0.9",
-        "contentHash": "Z5/e+XoWww3bEEoKM3B5X/7nDmj9RQZsdm5kdYKC0SCuuMtJ8m9aFKL6AZVo3hf1mfolhk60PSP/F+KoKN1fag==",
+        "requested": "[7.0.11, )",
+        "resolved": "7.0.11",
+        "contentHash": "S5Hf0yN82oa9Z/gy+fzyKfnTfuItDoF1hL+ikJrruJGv+STC622gLqXZyntMSQjLfwGYIf9zrLU8AESMWIRj0g==",
         "dependencies": {
           "Microsoft.Extensions.Http": "7.0.0",
           "Polly": "7.2.3",
@@ -39,13 +39,13 @@
       },
       "System.CommandLine.DragonFruit": {
         "type": "Direct",
-        "requested": "[0.4.0-alpha.21617.1, )",
-        "resolved": "0.4.0-alpha.21617.1",
-        "contentHash": "6OzMPTY5DKq6lT9dTCJ/JR+474OaAKfcXIi6+/lfGmOJ4FBl6uNNc5aY/BRVEp1LSGtg/DF2JCcurNbT1ts7Tg==",
+        "requested": "[0.4.0-alpha.22272.1, )",
+        "resolved": "0.4.0-alpha.22272.1",
+        "contentHash": "E20ryy4/7RIbYsSj9+J2VBzdxFRG1D+Lu3bLSdfULdpSld6Vm+OuziStuxpnFf7nGaEtrN4FHpHF9uHINDMd4A==",
         "dependencies": {
-          "System.CommandLine": "2.0.0-beta2.21617.1",
-          "System.CommandLine.NamingConventionBinder": "2.0.0-beta2.21617.1",
-          "System.CommandLine.Rendering": "0.4.0-alpha.21617.1"
+          "System.CommandLine": "2.0.0-beta4.22272.1",
+          "System.CommandLine.NamingConventionBinder": "2.0.0-beta4.22272.1",
+          "System.CommandLine.Rendering": "0.4.0-alpha.22272.1"
         }
       },
       "System.Interactive": {
@@ -115,27 +115,24 @@
       },
       "System.CommandLine": {
         "type": "Transitive",
-        "resolved": "2.0.0-beta2.21617.1",
-        "contentHash": "ZZqhoSu8ibW8zwAehKSQ1B3UMwZx6Dmt6oBbEMA8YD5EpyOm2ab7xQfzbN21Xi85KGJQkgeEf5wbsGHYE93cYQ==",
-        "dependencies": {
-          "system.memory": "4.5.4"
-        }
+        "resolved": "2.0.0-beta4.22272.1",
+        "contentHash": "1uqED/q2H0kKoLJ4+hI2iPSBSEdTuhfCYADeJrAqERmiGQ2NNacYKRNEQ+gFbU4glgVyK8rxI+ZOe1onEtr/Pg=="
       },
       "System.CommandLine.NamingConventionBinder": {
         "type": "Transitive",
-        "resolved": "2.0.0-beta2.21617.1",
-        "contentHash": "5cBvkPhW3W8h06539Z0aAxgjfVDim4RNk8ru2vySC5tQU35iYw2dHsJ7UsQemiQLAKbUaESC/9d3JoBk1pOV1A==",
+        "resolved": "2.0.0-beta4.22272.1",
+        "contentHash": "ux2eUA/syF+JtlpMDc/Lsd6PBIBuwjH3AvHnestoh5uD0WKT5b+wkQxDWVCqp9qgVjMBTLNhX19ZYFtenunt9A==",
         "dependencies": {
-          "System.CommandLine": "2.0.0-beta2.21617.1"
+          "System.CommandLine": "2.0.0-beta4.22272.1"
         }
       },
       "System.CommandLine.Rendering": {
         "type": "Transitive",
-        "resolved": "0.4.0-alpha.21617.1",
-        "contentHash": "03DBuFV0eScouK3tLuAy6WksVTJx/At6CWpJFTSEfhti1loJ/x+333ZF5OzdGV2m6K4yT83nmiRhZ+kQTb+muw==",
+        "resolved": "0.4.0-alpha.22272.1",
+        "contentHash": "PQd7HStYn6RYjc5zuerR41sALm3qFDutzDHISB5DYbExSgll6s8zghfyYFdLioLPWpFxVyMj3L9Ki69jqqum/g==",
         "dependencies": {
           "Microsoft.CSharp": "4.7.0",
-          "System.CommandLine": "2.0.0-beta2.21617.1"
+          "System.CommandLine": "2.0.0-beta4.22272.1"
         }
       },
       "System.Memory": {
