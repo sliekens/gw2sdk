@@ -71,32 +71,67 @@ public sealed class GameLink : IDisposable, IObservable<GameTick>
     {
         if (subscribers.Count == 0)
         {
+            // Not sure if this is possible, the timer only starts after someone subscribes
             return;
         }
 
+        GameTick tick;
         try
         {
-            var snapshot = GetSnapshot();
-            if (snapshot.UiTick != lastTick)
-            {
-                lastTick = snapshot.UiTick;
-                foreach (var subscriber in subscribers.ToList())
-                {
-                    subscriber.OnNext(snapshot);
-                }
-            }
-
-            timer.Start();
+            tick = GetSnapshot();
         }
         catch (Exception reason)
         {
+            // Notify every observer that there has been an internal error
             foreach (var subscriber in subscribers.ToList())
             {
-                subscriber.OnError(reason);
+                try
+                {
+                    subscriber.OnError(reason);
+                }
+                catch
+                {
+                    // They did not respond well to the bad news
+                }
             }
 
             subscribers.Clear();
+            return;
         }
+
+        // The timer can be faster than the refresh rate of the shared memory
+        // so ensure that the UiTick has changed, to avoid sending duplicates
+        // This is especially important during loading screens or character selection
+        if (tick.UiTick != lastTick)
+        {
+            lastTick = tick.UiTick;
+            foreach (var subscriber in subscribers.ToList())
+            {
+                try
+                {
+                    subscriber.OnNext(tick);
+                }
+                catch (Exception reason)
+                {
+                    // The observer threw an unhandled exception, which an observer should never do
+                    try
+                    {
+                        // Notify them of their own error and then unsubscribe them
+                        subscriber.OnError(reason);
+                    }
+                    catch
+                    {
+                        // At least we tried the diplomatic approach but they chose violence
+                    }
+                    finally
+                    {
+                        subscribers.Remove(subscriber);
+                    }
+                }
+            }
+        }
+
+        timer.Start();
     }
 
 #if NET
