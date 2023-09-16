@@ -27,7 +27,8 @@ builder.Logging.AddSimpleConsole(
         options.SingleLine = true;
         options.TimestampFormat = "HH:mm:ss.fff ";
         options.UseUtcTimestamp = true;
-    });
+    }
+);
 
 var app = builder.Build();
 

@@ -63,9 +63,11 @@ public struct Context
 
     public bool IsMounted => MountIndex != 0;
 
+    [Pure]
     public IPEndPoint GetServerAddress() =>
         new(ServerAddress.sin_addr.s_un.s_addr, ServerAddress.sin_port);
 
+    [Pure]
     public MountName GetMount() =>
         MountIndex switch
         {

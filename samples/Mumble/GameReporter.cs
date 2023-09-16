@@ -1,5 +1,4 @@
 ﻿using System;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -48,15 +47,10 @@ public class GameReporter : BackgroundService
         // Subscribe to the GameLink observable
         // I recommend using Rx (System.Reactive) instead of implementing IObserver<T> yourself
         gameLink.Subscribe(
-            snapshot =>
+            tick =>
             {
                 // This callback is executed whenever the game client updates the shared memory
-                if (!snapshot.TryGetIdentity(out var identity, MissingMemberBehavior.Error))
-                {
-                    return;
-                }
-
-                if (!snapshot.TryGetContext(out var context))
+                if (!tick.TryGetIdentity(out var identity, MissingMemberBehavior.Error))
                 {
                     return;
                 }
@@ -70,41 +64,41 @@ public class GameReporter : BackgroundService
                 var map = mapsDictionary[identity.MapId];
 
                 var title = $"the {identity.Race} {identity.Profession}";
-                if (!context.UiState.HasFlag(UiState.GameHasFocus))
+                if (!tick.Context.UiState.HasFlag(UiState.GameHasFocus))
                 {
                     logger.LogInformation(
                         "[{UiTick}] {Name}, {Title} ({Specialization}) is afk",
-                        snapshot.UiTick,
+                        tick.UiTick,
                         identity.Name,
                         title,
                         specialization
                     );
                 }
-                else if (context.UiState.HasFlag(UiState.TextboxHasFocus))
+                else if (tick.Context.UiState.HasFlag(UiState.TextboxHasFocus))
                 {
                     logger.LogInformation(
                         "[{UiTick}] {Name}, {Title} ({Specialization}) is typing",
-                        snapshot.UiTick,
+                        tick.UiTick,
                         identity.Name,
                         title,
                         specialization
                     );
                 }
-                else if (context.UiState.HasFlag(UiState.IsMapOpen))
+                else if (tick.Context.UiState.HasFlag(UiState.IsMapOpen))
                 {
                     logger.LogInformation(
                         "[{UiTick}] {Name}, {Title} ({Specialization}) is looking at the map",
-                        snapshot.UiTick,
+                        tick.UiTick,
                         identity.Name,
                         title,
                         specialization
                     );
                 }
-                else if (context.UiState.HasFlag(UiState.IsInCombat))
+                else if (tick.Context.UiState.HasFlag(UiState.IsInCombat))
                 {
                     logger.LogInformation(
                         "[{UiTick}] {Name}, {Title} ({Specialization}) is in combat",
-                        snapshot.UiTick,
+                        tick.UiTick,
                         identity.Name,
                         title,
                         specialization
@@ -113,22 +107,22 @@ public class GameReporter : BackgroundService
                 else
                 {
                     var transport = "foot";
-                    if (context.IsMounted)
+                    if (tick.Context.IsMounted)
                     {
-                        transport = context.GetMount( ).ToString();
+                        transport = tick.Context.GetMount().ToString();
                     }
 
                     logger.LogInformation(
                         "[{UiTick}] {Name}, {Title} ({Specialization}) is on {Transport} in {Map}, Position: {{ Latitude = {X}, Longitude = {Z}, Elevation = {Y} }}",
-                        snapshot.UiTick,
+                        tick.UiTick,
                         identity.Name,
                         title,
                         specialization,
                         transport,
                         map.Name,
-                        snapshot.AvatarPosition.X,
-                        snapshot.AvatarPosition.Z,
-                        snapshot.AvatarPosition.Y
+                        tick.AvatarPosition.X,
+                        tick.AvatarPosition.Z,
+                        tick.AvatarPosition.Y
                     );
                 }
             },
