@@ -4,9 +4,9 @@ using Xunit;
 
 namespace GuildWars2.Tests.Features.Skins;
 
-public class SkinJsonTest : IClassFixture<SkinFixture>
+public class SkinJson : IClassFixture<SkinFixture>
 {
-    public SkinJsonTest(SkinFixture fixture)
+    public SkinJson(SkinFixture fixture)
     {
         this.fixture = fixture;
     }
