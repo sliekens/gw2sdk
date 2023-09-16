@@ -7,7 +7,7 @@ namespace GuildWars2.Mumble;
 
 [PublicAPI]
 [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
-public struct GameTick
+public readonly record struct GameTick
 {
     public readonly uint UiVersion;
 

@@ -1,9 +1,11 @@
 ﻿using System.Runtime.InteropServices;
+using JetBrains.Annotations;
 
 namespace GuildWars2.Mumble;
 
+[PublicAPI]
 [StructLayout(LayoutKind.Sequential)]
-public record struct Vector3D
+public readonly record struct Vector3D
 {
     public readonly float X;
 
