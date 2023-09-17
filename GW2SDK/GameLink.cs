@@ -24,8 +24,7 @@ public sealed class GameLink : IDisposable, IObservable<GameTick>
     /// <summary>We don't get notified when the shared memory is updated, so we use a Timer to poll for changes.</summary>
     private readonly Timer timer;
 
-    /// <summary>The tick of the last snapshot that was published to observers.</summary>
-    private long lastTick = -1;
+    private GameTick lastTick;
 
     private GameLink(MumbleLink mumbleLink, TimeSpan refreshInterval)
     {
@@ -95,9 +94,9 @@ public sealed class GameLink : IDisposable, IObservable<GameTick>
         // The timer can be faster than the refresh rate of the shared memory
         // so ensure that the UiTick has changed, to avoid sending duplicates
         // This is especially important during loading screens or character selection
-        if (tick.UiTick != lastTick)
+        if (tick.UiTick != lastTick.UiTick)
         {
-            lastTick = tick.UiTick;
+            lastTick = tick;
             foreach (var subscriber in subscribers.ToList())
             {
                 try
