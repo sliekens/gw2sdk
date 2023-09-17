@@ -43,9 +43,23 @@ public readonly record struct GameTick
     [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 2048)]
     public readonly string Description;
 
-    public Identity GetIdentity(MissingMemberBehavior missingMemberBehavior = MissingMemberBehavior.Error)
+    public Identity? GetIdentity(MissingMemberBehavior missingMemberBehavior = MissingMemberBehavior.Error)
     {
-        using var json = JsonDocument.Parse(Identity);
-        return json.RootElement.GetIdentity(missingMemberBehavior);
+        if (string.IsNullOrEmpty(Identity))
+        {
+            return null;
+        }
+
+        try
+        {
+            using var json = JsonDocument.Parse(Identity);
+            return json.RootElement.GetIdentity(missingMemberBehavior);
+        }
+        catch (JsonException)
+        {
+            // There is a MINISCULE chance to receive mangled JSON while the
+            //   shared memory is being updated by the game client
+            return null;
+        }
     }
 }

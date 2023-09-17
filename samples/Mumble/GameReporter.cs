@@ -51,6 +51,12 @@ public class GameReporter : BackgroundService
             {
                 // This callback is executed whenever the game client updates the shared memory
                 var identity = tick.GetIdentity();
+                if (identity is null)
+                {
+                    // Identity might be unavailable when the game client is not running
+                    // Extremely rarely it might be unavailable due to concurrent reads and writes
+                    return;
+                }
 
                 var specialization = "no specialization";
                 if (specializationsDictionary.TryGetValue(identity.SpecializationId, out var found))
