@@ -1,14 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Runtime.Versioning;
 using System.Timers;
 using GuildWars2.Mumble;
 using JetBrains.Annotations;
-
-#if NETSTANDARD
-using System.Runtime.InteropServices;
-#endif
 
 namespace GuildWars2;
 
@@ -130,16 +127,7 @@ public sealed class GameLink : IDisposable, IObservable<GameTick>
     }
 
     [SupportedOSPlatformGuard("windows")]
-    public static bool IsSupported()
-    {
-#if NET
-        return OperatingSystem.IsWindows();
-#elif NETFRAMEWORK
-        return Environment.OSVersion.Platform == PlatformID.Win32NT;
-#elif NETSTANDARD
-        return RuntimeInformation.IsOSPlatform(OSPlatform.Windows);
-#endif
-    }
+    public static bool IsSupported() => RuntimeInformation.IsOSPlatform(OSPlatform.Windows);
 
     [SupportedOSPlatform("windows")]
     public static GameLink Open(TimeSpan refreshInterval = default, string name = "MumbleLink")
