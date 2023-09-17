@@ -2,10 +2,8 @@
 using System.Buffers;
 using System.IO.MemoryMappedFiles;
 using System.Runtime.InteropServices;
-using System.Threading;
-#if NET
 using System.Runtime.Versioning;
-#endif
+using System.Threading;
 
 namespace GuildWars2;
 
@@ -53,9 +51,7 @@ internal sealed class MumbleLink : IDisposable
         disposed = true;
     }
 
-#if NET
     [SupportedOSPlatform("windows")]
-#endif
     public static MumbleLink CreateOrOpen(string name)
     {
         using var mutex = new Mutex(true, name + "_mutex", out var created);

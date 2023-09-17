@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Versioning;
 using System.Timers;
 using GuildWars2.Mumble;
 using JetBrains.Annotations;
-#if NET
-using System.Runtime.Versioning;
 
-#elif NETSTANDARD
+#if NETSTANDARD
 using System.Runtime.InteropServices;
 #endif
 
@@ -130,9 +129,7 @@ public sealed class GameLink : IDisposable, IObservable<GameTick>
         timer.Start();
     }
 
-#if NET
     [SupportedOSPlatformGuard("windows")]
-#endif
     public static bool IsSupported()
     {
 #if NET
@@ -144,9 +141,7 @@ public sealed class GameLink : IDisposable, IObservable<GameTick>
 #endif
     }
 
-#if NET
     [SupportedOSPlatform("windows")]
-#endif
     public static GameLink Open(TimeSpan refreshInterval = default, string name = "MumbleLink")
     {
         if (!IsSupported())
