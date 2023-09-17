@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Buffers;
 using System.IO.MemoryMappedFiles;
 using System.Runtime.InteropServices;
 using System.Runtime.Versioning;
@@ -18,10 +17,6 @@ internal sealed class MumbleLink : IDisposable
     /// <remarks>Obtained with Process Explorer.</remarks>
     private const int Length = 0x2000;
 
-    private readonly byte[] buffer;
-
-    private readonly GCHandle bufferHandle;
-
     private readonly MemoryMappedFile file;
 
     private readonly MemoryMappedViewAccessor view;
@@ -32,8 +27,6 @@ internal sealed class MumbleLink : IDisposable
     {
         this.file = file;
         view = file.CreateViewAccessor(0, Length, MemoryMappedFileAccess.Read);
-        buffer = ArrayPool<byte>.Shared.Rent(Length);
-        bufferHandle = GCHandle.Alloc(buffer, GCHandleType.Pinned);
     }
 
     public void Dispose()
@@ -42,10 +35,6 @@ internal sealed class MumbleLink : IDisposable
         {
             view.Dispose();
             file.Dispose();
-
-            // ReSharper disable once PossiblyImpureMethodCallOnReadonlyVariable
-            bufferHandle.Free();
-            ArrayPool<byte>.Shared.Return(buffer);
         }
 
         disposed = true;
@@ -68,9 +57,7 @@ internal sealed class MumbleLink : IDisposable
 
         try
         {
-            return new MumbleLink(
-                MemoryMappedFile.CreateOrOpen(name, Length)
-            );
+            return new MumbleLink(MemoryMappedFile.CreateOrOpen(name, Length));
         }
         finally
         {
@@ -85,15 +72,19 @@ internal sealed class MumbleLink : IDisposable
             throw new ObjectDisposedException(nameof(MumbleLink));
         }
 
-        var buffered = view.ReadArray(0, buffer, 0, Length);
-        if (buffered != Length)
+        var success = false;
+        try
         {
-            throw new InvalidOperationException(
-                $"Expected {Length} bytes but received {buffered}. This usually indicates concurrent access to the current object, which is not supported."
-            );
+            view.SafeMemoryMappedViewHandle.DangerousAddRef(ref success);
+            var location = view.SafeMemoryMappedViewHandle.DangerousGetHandle();
+            return Marshal.PtrToStructure<T>(location);
         }
-
-        // ReSharper disable once PossiblyImpureMethodCallOnReadonlyVariable
-        return Marshal.PtrToStructure<T>(bufferHandle.AddrOfPinnedObject());
+        finally
+        {
+            if (!success)
+            {
+                view.SafeMemoryMappedViewHandle.DangerousRelease();
+            }
+        }
     }
 }
