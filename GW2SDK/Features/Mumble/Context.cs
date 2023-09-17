@@ -16,7 +16,7 @@ public readonly record struct Context
 
     public readonly uint MapId;
 
-    public readonly uint MapType;
+    public readonly MapType MapType;
 
     public readonly uint ShardId;
 

@@ -105,13 +105,14 @@ public class GameReporter : BackgroundService
                 {
                     var transport = tick.Context.IsMounted ? tick.Context.Mount.ToString() : "foot";
                     logger.LogInformation(
-                        "[{UiTick}] {Name}, {Title} ({Specialization}) is on {Transport} in {Map}, Position: {{ Latitude = {X}, Longitude = {Z}, Elevation = {Y} }}",
+                        "[{UiTick}] {Name}, {Title} ({Specialization}) is on {Transport} in {Map} ({Type}), Position: {{ Latitude = {X}, Longitude = {Z}, Elevation = {Y} }}",
                         tick.UiTick,
                         identity.Name,
                         title,
                         specialization,
                         transport,
                         map.Name,
+                        tick.Context.MapType.ToString(),
                         tick.AvatarPosition.X,
                         tick.AvatarPosition.Z,
                         tick.AvatarPosition.Y
