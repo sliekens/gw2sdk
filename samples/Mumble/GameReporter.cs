@@ -119,6 +119,10 @@ public class GameReporter : BackgroundService
                     );
                 }
             },
+            err =>
+            {
+                logger.LogError(err, "Something went wrong.");
+            },
             stoppingToken
         );
 
