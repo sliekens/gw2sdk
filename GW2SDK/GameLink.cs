@@ -64,6 +64,7 @@ public sealed class GameLink : IDisposable, IObservable<GameTick>
     {
         if (subscribers.Count == 0)
         {
+            lastTick = default;
             return;
         }
 
