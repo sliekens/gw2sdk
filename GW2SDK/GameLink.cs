@@ -59,10 +59,7 @@ public sealed class GameLink : IDisposable, IObservable<GameTick>
             subscribers.Add(observer);
         }
 
-        if (!timer.Enabled)
-        {
-            timer.Start();
-        }
+        Publish();
 
         return new Subscription(() => subscribers.Remove(observer));
     }
@@ -71,7 +68,6 @@ public sealed class GameLink : IDisposable, IObservable<GameTick>
     {
         if (subscribers.Count == 0)
         {
-            // Not sure if this is possible, the timer only starts after someone subscribes
             return;
         }
 
