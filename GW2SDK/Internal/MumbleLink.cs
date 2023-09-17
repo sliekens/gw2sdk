@@ -2,14 +2,22 @@
 using System.Buffers;
 using System.IO.MemoryMappedFiles;
 using System.Runtime.InteropServices;
+using System.Threading;
+#if NET
 using System.Runtime.Versioning;
+#endif
 
 namespace GuildWars2;
 
 /// <summary>Represents a block of shared memory and provides an optimized way to copy that memory to a struct.</summary>
+/// <remarks>Reference implementation:
+/// <see
+///     href="https://github.com/mumble-voip/mumble/blob/27e9552e896d8862bf75d96634f3295dfebb3196/plugins/link/LinkedMem.h" />
+/// .</remarks>
 internal sealed class MumbleLink : IDisposable
 {
     /// <summary>The size of the memory-mapped file.</summary>
+    /// <remarks>Obtained with Process Explorer.</remarks>
     private const int Length = 0x2000;
 
     private readonly byte[] buffer;
@@ -36,7 +44,7 @@ internal sealed class MumbleLink : IDisposable
         {
             view.Dispose();
             file.Dispose();
-            
+
             // ReSharper disable once PossiblyImpureMethodCallOnReadonlyVariable
             bufferHandle.Free();
             ArrayPool<byte>.Shared.Return(buffer);
@@ -48,8 +56,31 @@ internal sealed class MumbleLink : IDisposable
 #if NET
     [SupportedOSPlatform("windows")]
 #endif
-    public static MumbleLink CreateOrOpen(string name) =>
-        new(MemoryMappedFile.CreateOrOpen(name, Length, MemoryMappedFileAccess.Read));
+    public static MumbleLink CreateOrOpen(string name)
+    {
+        using var mutex = new Mutex(true, name + "_mutex", out var created);
+        if (!created)
+        {
+            var acquired = mutex.WaitOne(TimeSpan.FromSeconds(5));
+            if (!acquired)
+            {
+                throw new TimeoutException(
+                    "Could not access the shared memory within the allotted time."
+                );
+            }
+        }
+
+        try
+        {
+            return new MumbleLink(
+                MemoryMappedFile.CreateOrOpen(name, Length, MemoryMappedFileAccess.Read)
+            );
+        }
+        finally
+        {
+            mutex.ReleaseMutex();
+        }
+    }
 
     public T GetValue<T>() where T : struct
     {
