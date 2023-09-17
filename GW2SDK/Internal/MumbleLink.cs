@@ -69,7 +69,7 @@ internal sealed class MumbleLink : IDisposable
         try
         {
             return new MumbleLink(
-                MemoryMappedFile.CreateOrOpen(name, Length, MemoryMappedFileAccess.Read)
+                MemoryMappedFile.CreateOrOpen(name, Length)
             );
         }
         finally
