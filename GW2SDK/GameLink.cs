@@ -49,12 +49,19 @@ public sealed class GameLink : IDisposable, IObservable<GameTick>
 
     public IDisposable Subscribe(IObserver<GameTick> observer)
     {
+        // Ensure no duplicate subscriptions
         if (!subscribers.Contains(observer))
         {
-            subscribers.Add(observer);
-        }
+            // Send an immediate snapshot to new subscribers
+            var tick = GetSnapshot();
+            if (tick.UiTick > 0)
+            {
+                observer.OnNext(tick);
+            }
 
-        Publish();
+            subscribers.Add(observer);
+            timer.Start();
+        }
 
         return new Subscription(() => subscribers.Remove(observer));
     }
