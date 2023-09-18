@@ -152,7 +152,7 @@ public sealed class GameLink : IObservable<GameTick>, IDisposable
             // The timer can be faster than the refresh rate of the shared memory
             // so ensure that the UiTick has changed, to avoid sending duplicates
             // This is especially important during loading screens or character selection
-            if (tick.UiTick != lastTick)
+            if (tick.UiTick > 0 && tick.UiTick != lastTick)
             {
                 lastTick = tick.UiTick;
                 foreach (var subscriber in subscribers.ToList())
