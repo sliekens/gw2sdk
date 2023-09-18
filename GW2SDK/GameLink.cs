@@ -86,13 +86,20 @@ public sealed class GameLink : IObservable<GameTick>, IDisposable
         if (!subscribers.Contains(observer))
         {
             // Send an immediate snapshot to new subscribers
-            var tick = GetSnapshot();
-            if (tick.UiTick > 0)
+            try
             {
-                observer.OnNext(tick);
-            }
+                var tick = GetSnapshot();
+                if (tick.UiTick > 0)
+                {
+                    observer.OnNext(tick);
+                }
 
-            subscribers.Add(observer);
+                subscribers.Add(observer);
+            }
+            catch (Exception oops)
+            {
+                observer.OnError(oops);
+            }
         }
 
         return new Subscription(() => subscribers.Remove(observer));
