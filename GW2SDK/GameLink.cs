@@ -27,6 +27,8 @@ public sealed class GameLink : IObservable<GameTick>, IDisposable
     /// <summary>Flag indicating whether subscribers are being notified.</summary>
     private bool busy;
 
+    private bool disposed;
+
     /// <summary>Used to keep track of the last UiTick that was published, to prevent repeating the same state.</summary>
     private uint lastTick;
 
@@ -43,12 +45,43 @@ public sealed class GameLink : IObservable<GameTick>, IDisposable
 
     public void Dispose()
     {
-        timer.Dispose();
-        mumbleLink.Dispose();
+        if (disposed)
+        {
+            return;
+        }
+
+        // Disposing Timer is a bit tricky because a callback might be running at the moment
+        // The solution is to pass a WaitHandle which the Timer will set when all callbacks have finished
+        using ManualResetEventSlim callbacksFinished = new(false);
+
+        // When Dispose returns true, wait for callbacks to finish and then do the cleanup
+        // When Dispose returns false, it means Dispose was called twice, so do nothing
+        if (timer.Dispose(callbacksFinished.WaitHandle))
+        {
+            callbacksFinished.WaitHandle.WaitOne();
+
+            // Notify subscribers that there will be no more updates
+            foreach (var subscriber in subscribers)
+            {
+                subscriber.OnCompleted();
+            }
+
+            // Close the shared memory AFTER OnCompleted
+            // because observers might still attempt to use GetSnapshot() in OnCompleted
+            mumbleLink.Dispose();
+
+            // Set flag to prevent reusing a disposed instance
+            disposed = true;
+        }
     }
 
     public IDisposable Subscribe(IObserver<GameTick> observer)
     {
+        if (disposed)
+        {
+            throw new ObjectDisposedException(nameof(GameLink));
+        }
+
         // Ensure no duplicate subscriptions
         if (!subscribers.Contains(observer))
         {
@@ -63,6 +96,16 @@ public sealed class GameLink : IObservable<GameTick>, IDisposable
         }
 
         return new Subscription(() => subscribers.Remove(observer));
+    }
+
+    public GameTick GetSnapshot()
+    {
+        if (disposed)
+        {
+            throw new ObjectDisposedException(nameof(GameLink));
+        }
+
+        return mumbleLink.GetValue<GameTick>();
     }
 
     private void Publish()
@@ -151,6 +194,4 @@ public sealed class GameLink : IObservable<GameTick>, IDisposable
         var link = MumbleLink.CreateOrOpen(name);
         return new GameLink(link, refreshInterval);
     }
-
-    public GameTick GetSnapshot() => mumbleLink.GetValue<GameTick>();
 }

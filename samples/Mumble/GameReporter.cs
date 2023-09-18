@@ -47,14 +47,14 @@ public class GameReporter : BackgroundService
         // Subscribe to the GameLink observable
         // I recommend using Rx (System.Reactive) instead of implementing IObserver<T> yourself
         gameLink.Subscribe(
+            // OnNext(GameTick) is executed whenever the game client updates the shared memory
             tick =>
             {
-                // This callback is executed whenever the game client updates the shared memory
                 var identity = tick.GetIdentity();
                 if (identity is null)
                 {
-                    // Identity might be unavailable when the game client is not running
-                    // Extremely rarely it might be unavailable due to concurrent reads and writes
+                    // Identity might be null due to invalid JSON
+                    // (happens very rarely due to concurrent reads/writes)
                     return;
                 }
 
@@ -125,9 +125,18 @@ public class GameReporter : BackgroundService
                     );
                 }
             },
+
+            // OnError(Exception) is executed when there is an internal error while reading from the shared memory
+            // or when your OnNext callback throws an exception, it will also end up here
             err =>
             {
                 logger.LogError(err, "Something went wrong.");
+            },
+
+            // OnComplete callback runs when you unsubscribe or when the GameLink is being disposed
+            () =>
+            {
+                logger.LogInformation("Stopping on tick {UiTick}", gameLink.GetSnapshot().UiTick);
             },
             stoppingToken
         );
