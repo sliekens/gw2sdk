@@ -13,9 +13,8 @@ namespace GuildWars2;
 /// .</remarks>
 internal sealed class MumbleLink : IDisposable
 {
-    /// <summary>The size of the memory-mapped file.</summary>
-    /// <remarks>Obtained with Process Explorer.</remarks>
-    private const int Length = 0x2000;
+    /// <summary>The size of the shared memory struct.</summary>
+    private const int Length = 5460;
 
     private readonly MemoryMappedFile file;
 
