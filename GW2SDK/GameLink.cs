@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Runtime.Versioning;
-using System.Timers;
+using System.Threading;
 using GuildWars2.Mumble;
 using JetBrains.Annotations;
 
@@ -13,7 +13,7 @@ namespace GuildWars2;
 public sealed class GameLink : IDisposable, IObservable<GameTick>
 {
     /// <summary>The smallest allowed polling interval.</summary>
-    public readonly TimeSpan MinimumRefreshInterval = TimeSpan.FromMilliseconds(1d);
+    public readonly TimeSpan MinimumRefreshInterval = TimeSpan.FromMilliseconds(1);
 
     /// <summary>Represents the memory-mapped file used by the game client.</summary>
     private readonly MumbleLink mumbleLink;
@@ -24,27 +24,25 @@ public sealed class GameLink : IDisposable, IObservable<GameTick>
     /// <summary>We don't get notified when the shared memory is updated, so we use a Timer to poll for changes.</summary>
     private readonly Timer timer;
 
-    private GameTick lastTick;
+    private bool busy;
+
+    private uint lastTick;
 
     private GameLink(MumbleLink mumbleLink, TimeSpan refreshInterval)
     {
         this.mumbleLink = mumbleLink;
         timer = new Timer(
-            Math.Max(refreshInterval.TotalMilliseconds, MinimumRefreshInterval.TotalMilliseconds)
-        )
-        {
-            AutoReset = false,
-            Enabled = false
-        };
-        timer.Elapsed += (_, _) => Publish();
-        timer.Disposed += (_, _) => mumbleLink.Dispose();
+            _ => Publish(),
+            null,
+            TimeSpan.Zero,
+            TimeSpan.FromTicks(Math.Max(refreshInterval.Ticks, MinimumRefreshInterval.Ticks))
+        );
     }
 
     public void Dispose()
     {
-        subscribers.Clear();
-        timer.Stop();
         timer.Dispose();
+        mumbleLink.Dispose();
     }
 
     public IDisposable Subscribe(IObserver<GameTick> observer)
@@ -60,7 +58,6 @@ public sealed class GameLink : IDisposable, IObservable<GameTick>
             }
 
             subscribers.Add(observer);
-            timer.Start();
         }
 
         return new Subscription(() => subscribers.Remove(observer));
@@ -68,69 +65,74 @@ public sealed class GameLink : IDisposable, IObservable<GameTick>
 
     private void Publish()
     {
-        if (subscribers.Count == 0)
+        if (busy || subscribers.Count == 0)
         {
-            lastTick = default;
             return;
         }
 
-        GameTick tick;
+        busy = true;
         try
         {
-            tick = GetSnapshot();
-        }
-        catch (Exception reason)
-        {
-            // Notify every observer that there has been an internal error
-            foreach (var subscriber in subscribers.ToList())
+            GameTick tick;
+            try
             {
-                try
-                {
-                    subscriber.OnError(reason);
-                }
-                catch
-                {
-                    // They did not respond well to the bad news
-                }
+                tick = GetSnapshot();
             }
-
-            subscribers.Clear();
-            return;
-        }
-
-        // The timer can be faster than the refresh rate of the shared memory
-        // so ensure that the UiTick has changed, to avoid sending duplicates
-        // This is especially important during loading screens or character selection
-        if (tick.UiTick != lastTick.UiTick)
-        {
-            lastTick = tick;
-            foreach (var subscriber in subscribers.ToList())
+            catch (Exception reason)
             {
-                try
+                // Notify every observer that there has been an internal error
+                foreach (var subscriber in subscribers.ToList())
                 {
-                    subscriber.OnNext(tick);
-                }
-                catch (Exception reason)
-                {
-                    // The observer threw an unhandled exception, which an observer should never do
                     try
                     {
-                        // Notify them of their own error and then unsubscribe them
                         subscriber.OnError(reason);
                     }
                     catch
                     {
-                        // At least we tried the diplomatic approach but they chose violence
+                        // They did not respond well to the bad news
                     }
-                    finally
+                }
+
+                subscribers.Clear();
+                return;
+            }
+
+            // The timer can be faster than the refresh rate of the shared memory
+            // so ensure that the UiTick has changed, to avoid sending duplicates
+            // This is especially important during loading screens or character selection
+            if (tick.UiTick != lastTick)
+            {
+                lastTick = tick.UiTick;
+                foreach (var subscriber in subscribers.ToList())
+                {
+                    try
                     {
-                        subscribers.Remove(subscriber);
+                        subscriber.OnNext(tick);
+                    }
+                    catch (Exception reason)
+                    {
+                        // The observer threw an unhandled exception, which an observer should never do
+                        try
+                        {
+                            // Notify them of their own error and then unsubscribe them
+                            subscriber.OnError(reason);
+                        }
+                        catch
+                        {
+                            // At least we tried the diplomatic approach but they chose violence
+                        }
+                        finally
+                        {
+                            subscribers.Remove(subscriber);
+                        }
                     }
                 }
             }
         }
-
-        timer.Start();
+        finally
+        {
+            busy = false;
+        }
     }
 
     [SupportedOSPlatformGuard("windows")]
