@@ -10,22 +10,24 @@ using JetBrains.Annotations;
 namespace GuildWars2;
 
 [PublicAPI]
-public sealed class GameLink : IDisposable, IObservable<GameTick>
+public sealed class GameLink : IObservable<GameTick>, IDisposable
 {
     /// <summary>The smallest allowed polling interval.</summary>
-    public readonly TimeSpan MinimumRefreshInterval = TimeSpan.FromMilliseconds(1);
+    public static readonly TimeSpan MinimumRefreshInterval = TimeSpan.FromMilliseconds(1);
 
     /// <summary>Represents the memory-mapped file used by the game client.</summary>
     private readonly MumbleLink mumbleLink;
 
-    /// <summary>A list of observers who want to receive values.</summary>
+    /// <summary>A list of observers who want to receive realtime game state.</summary>
     private readonly List<IObserver<GameTick>> subscribers = new();
 
-    /// <summary>We don't get notified when the shared memory is updated, so we use a Timer to poll for changes.</summary>
+    /// <summary>A Timer is used to poll for changes to the shared memory as there is no push mechanism.</summary>
     private readonly Timer timer;
 
+    /// <summary>Flag indicating whether subscribers are being notified.</summary>
     private bool busy;
 
+    /// <summary>Used to keep track of the last UiTick that was published, to prevent repeating the same state.</summary>
     private uint lastTick;
 
     private GameLink(MumbleLink mumbleLink, TimeSpan refreshInterval)
