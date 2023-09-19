@@ -23,22 +23,52 @@ var host = new HostBuilder().ConfigureServices(
                         httpClient.Timeout = TimeSpan.FromSeconds(20);
                     }
                 )
+
                 // The API has rate limiting (by IP address) so wait and retry when the server indicates too many requests
-                .AddPolicyHandler(Policy.HandleResult<HttpResponseMessage>(response => response.StatusCode == TooManyRequests).WaitAndRetryAsync(10, _ => TimeSpan.FromSeconds(10)))
+                .AddPolicyHandler(
+                    Policy.HandleResult<HttpResponseMessage>(
+                            response => response.StatusCode == TooManyRequests
+                        )
+                        .WaitAndRetryAsync(10, _ => TimeSpan.FromSeconds(10))
+                )
 
                 // The API can be disabled intentionally to avoid leaking spoilers, or it can be unavailable due to technical difficulties
                 // Since it's not easy to tell the difference, give it one retry
-                .AddPolicyHandler(Policy.HandleResult<HttpResponseMessage>(response => response.StatusCode == ServiceUnavailable).RetryAsync())
+                .AddPolicyHandler(
+                    Policy.HandleResult<HttpResponseMessage>(
+                            response => response.StatusCode == ServiceUnavailable
+                        )
+                        .RetryAsync()
+                )
 
                 // Assume internal errors are retryable (within reason)
-                .AddPolicyHandler(Policy.HandleResult<HttpResponseMessage>(response => response.StatusCode is InternalServerError or BadGateway or GatewayTimeout).RetryAsync(5))
+                .AddPolicyHandler(
+                    Policy.HandleResult<HttpResponseMessage>(
+                            response =>
+                                response.StatusCode is InternalServerError
+                                    or BadGateway
+                                    or GatewayTimeout
+                        )
+                        .RetryAsync(5)
+                )
 
                 // Sometimes the API returns a Bad Request with an unknown error for perfectly valid requests
-                .AddPolicyHandler(Policy<HttpResponseMessage>.Handle<ArgumentException>(reason => reason.Message == "unknown error").RetryAsync())
+                .AddPolicyHandler(
+                    Policy<HttpResponseMessage>
+                        .Handle<ArgumentException>(reason => reason.Message == "unknown error")
+                        .RetryAsync()
+                )
 
                 // Abort each attempted request after max 30 seconds and perform retries (within reason)
-                .AddPolicyHandler(Policy<HttpResponseMessage>.Handle<TimeoutRejectedException>().RetryAsync(10))
-                .AddPolicyHandler(Policy.TimeoutAsync<HttpResponseMessage>(TimeSpan.FromSeconds(30), TimeoutStrategy.Optimistic));
+                .AddPolicyHandler(
+                    Policy<HttpResponseMessage>.Handle<TimeoutRejectedException>().RetryAsync(10)
+                )
+                .AddPolicyHandler(
+                    Policy.TimeoutAsync<HttpResponseMessage>(
+                        TimeSpan.FromSeconds(30),
+                        TimeoutStrategy.Optimistic
+                    )
+                );
         }
     )
     .Build();

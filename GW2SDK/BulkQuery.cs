@@ -90,12 +90,13 @@ public static class BulkQuery
 
         // Proceed with the queries in parallel, but limit the number of concurrent queries
         using SemaphoreSlim limiter = new(degreeOfParalllelism);
-        await foreach (var result in chunks
-            .Select(async chunk =>
-            {
-                await limiter.WaitAsync(cancellationToken).ConfigureAwait(false);
-                return await chunkQuery(chunk, cancellationToken).ConfigureAwait(false);
-            })
+        await foreach (var result in chunks.Select(
+                async chunk =>
+                {
+                    await limiter.WaitAsync(cancellationToken).ConfigureAwait(false);
+                    return await chunkQuery(chunk, cancellationToken).ConfigureAwait(false);
+                }
+            )
             .ToList()
             .OrderByCompletion()
             .WithCancellation(cancellationToken))

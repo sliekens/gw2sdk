@@ -94,11 +94,14 @@ public sealed class CommerceQuery
             GetChunk,
             degreeOfParalllelism,
             chunkSize,
-            progress: progress,
-            cancellationToken: cancellationToken
+            progress,
+            cancellationToken
         );
 
-        async Task<IReadOnlyCollection<ItemPrice>> GetChunk(IReadOnlyCollection<int> chunk, CancellationToken cancellationToken)
+        async Task<IReadOnlyCollection<ItemPrice>> GetChunk(
+            IReadOnlyCollection<int> chunk,
+            CancellationToken cancellationToken
+        )
         {
             var response = await GetItemPricesByIds(chunk, missingMemberBehavior, cancellationToken)
                 .ConfigureAwait(false);
@@ -182,11 +185,14 @@ public sealed class CommerceQuery
             GetChunk,
             degreeOfParalllelism,
             chunkSize,
-            progress: progress,
-            cancellationToken: cancellationToken
+            progress,
+            cancellationToken
         );
 
-        async Task<IReadOnlyCollection<OrderBook>> GetChunk(IReadOnlyCollection<int> chunk, CancellationToken cancellationToken)
+        async Task<IReadOnlyCollection<OrderBook>> GetChunk(
+            IReadOnlyCollection<int> chunk,
+            CancellationToken cancellationToken
+        )
         {
             var response = await GetOrderBooksByIds(chunk, missingMemberBehavior, cancellationToken)
                 .ConfigureAwait(false);

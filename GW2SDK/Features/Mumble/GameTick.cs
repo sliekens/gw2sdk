@@ -43,7 +43,9 @@ public readonly record struct GameTick
     [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 2048)]
     public readonly string Description;
 
-    public Identity? GetIdentity(MissingMemberBehavior missingMemberBehavior = MissingMemberBehavior.Error)
+    public Identity? GetIdentity(
+        MissingMemberBehavior missingMemberBehavior = MissingMemberBehavior.Error
+    )
     {
         if (string.IsNullOrEmpty(Identity))
         {

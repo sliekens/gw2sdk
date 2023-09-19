@@ -166,11 +166,14 @@ public sealed class CraftingQuery
             GetChunk,
             degreeOfParalllelism,
             chunkSize,
-            progress: progress,
-            cancellationToken: cancellationToken
+            progress,
+            cancellationToken
         );
 
-        async Task<IReadOnlyCollection<Recipe>> GetChunk(IReadOnlyCollection<int> chunk, CancellationToken cancellationToken)
+        async Task<IReadOnlyCollection<Recipe>> GetChunk(
+            IReadOnlyCollection<int> chunk,
+            CancellationToken cancellationToken
+        )
         {
             var response = await GetRecipesByIds(chunk, missingMemberBehavior, cancellationToken)
                 .ConfigureAwait(false);

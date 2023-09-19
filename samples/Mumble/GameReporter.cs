@@ -47,6 +47,7 @@ public class GameReporter : BackgroundService
         // Subscribe to the GameLink observable
         // I recommend using Rx (System.Reactive) instead of implementing IObserver<T> yourself
         gameLink.Subscribe(
+
             // OnNext(GameTick) is executed whenever the game client updates the shared memory
             tick =>
             {

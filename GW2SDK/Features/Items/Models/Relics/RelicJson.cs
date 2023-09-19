@@ -8,10 +8,7 @@ namespace GuildWars2.Items;
 [PublicAPI]
 public static class RelicJson
 {
-    public static Relic GetRelic(
-        this JsonElement json,
-        MissingMemberBehavior missingMemberBehavior
-    )
+    public static Relic GetRelic(this JsonElement json, MissingMemberBehavior missingMemberBehavior)
     {
         RequiredMember<string> name = new("name");
         OptionalMember<string> description = new("description");

@@ -39,7 +39,10 @@ internal static class Check
         }
     }
 
-    internal static void Collection(IReadOnlyCollection<int> collection, [CallerArgumentExpression("collection")] string parameterName = "") =>
+    internal static void Collection(
+        IReadOnlyCollection<int> collection,
+        [CallerArgumentExpression("collection")] string parameterName = ""
+    ) =>
         EnsureCollectionNotNullOrEmpty(collection, parameterName);
 
     internal static void Collection<TEnum>(

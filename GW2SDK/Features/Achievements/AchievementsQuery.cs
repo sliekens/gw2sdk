@@ -114,13 +114,21 @@ public sealed class AchievementsQuery
             GetChunk,
             degreeOfParalllelism,
             chunkSize,
-            progress: progress,
-            cancellationToken: cancellationToken
+            progress,
+            cancellationToken
         );
 
-        async Task<IReadOnlyCollection<Achievement>> GetChunk(IReadOnlyCollection<int> chunk, CancellationToken cancellationToken)
+        async Task<IReadOnlyCollection<Achievement>> GetChunk(
+            IReadOnlyCollection<int> chunk,
+            CancellationToken cancellationToken
+        )
         {
-            var response = await GetAchievementsByIds(chunk, language, missingMemberBehavior, cancellationToken)
+            var response = await GetAchievementsByIds(
+                    chunk,
+                    language,
+                    missingMemberBehavior,
+                    cancellationToken
+                )
                 .ConfigureAwait(false);
             return response.Value;
         }
@@ -137,14 +145,14 @@ public sealed class AchievementsQuery
     {
         var index = await GetAchievementsIndex(cancellationToken).ConfigureAwait(false);
         var producer = GetAchievementsBulk(
-                index.Value,
-                language,
-                missingMemberBehavior,
-                degreeOfParalllelism,
-                chunkSize,
-                progress,
-                cancellationToken
-            );
+            index.Value,
+            language,
+            missingMemberBehavior,
+            degreeOfParalllelism,
+            chunkSize,
+            progress,
+            cancellationToken
+        );
         await foreach (var achievement in producer.WithCancellation(cancellationToken)
             .ConfigureAwait(false))
         {

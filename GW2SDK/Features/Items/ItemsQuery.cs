@@ -92,9 +92,17 @@ public sealed class ItemsQuery
             cancellationToken
         );
 
-        async Task<IReadOnlyCollection<Item>> GetChunk(IReadOnlyCollection<int> chunk, CancellationToken cancellationToken)
+        async Task<IReadOnlyCollection<Item>> GetChunk(
+            IReadOnlyCollection<int> chunk,
+            CancellationToken cancellationToken
+        )
         {
-            var result = await GetItemsByIds(chunk, language, missingMemberBehavior, cancellationToken);
+            var result = await GetItemsByIds(
+                chunk,
+                language,
+                missingMemberBehavior,
+                cancellationToken
+            );
             return result.Value;
         }
     }
