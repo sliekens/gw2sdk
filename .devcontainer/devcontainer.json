@@ -17,7 +17,8 @@
   },
   "containerEnv": {
     "DOTNET_NOLOGO": "true",
-    "DOTNET_CLI_TELEMETRY_OPTOUT": "true"
+    "DOTNET_CLI_TELEMETRY_OPTOUT": "true",
+    "DOTNET_HTTPREPL_TELEMETRY_OPTOUT": "true"
   },
   "initializeCommand": "docker pull ghcr.io/sliekens/gw2sdk/devcontainer:latest",
   "onCreateCommand": "sudo chown -R vscode:vscode /home/vscode/.nuget",
