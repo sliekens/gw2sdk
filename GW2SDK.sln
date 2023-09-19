@@ -9,11 +9,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GW2SDK.Tests", "GW2SDK.Test
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GW2SDK.TestDataHelper", "GW2SDK.TestDataHelper\GW2SDK.TestDataHelper.csproj", "{3F9597CF-264D-4C23-9E61-A774782EEAFB}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{4EB0CF28-5D3A-47AD-B4E3-8E94F9289B5C}"
-	ProjectSection(SolutionItems) = preProject
-		.github\workflows\ci.yml = .github\workflows\ci.yml
-	EndProjectSection
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "root", "root", "{63243B77-9BE8-41CE-B2F6-B306E3F150CB}"
 	ProjectSection(SolutionItems) = preProject
 		.editorconfig = .editorconfig
@@ -46,7 +41,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HttpClientFactoryUsage", "s
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PollyUsage", "samples\PollyUsage\PollyUsage.csproj", "{0BA80C1D-40A9-4B20-9558-82C0AA58BC1F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Translations", "samples\Translations\Translations.csproj", "{40937B58-1FFE-4B5B-A918-09F2DDEA2BF1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Translations", "samples\Translations\Translations.csproj", "{40937B58-1FFE-4B5B-A918-09F2DDEA2BF1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -103,7 +98,6 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{4EB0CF28-5D3A-47AD-B4E3-8E94F9289B5C} = {63243B77-9BE8-41CE-B2F6-B306E3F150CB}
 		{7322DA3F-5F6F-4EBA-BB85-DCFB67B3B620} = {816817BB-0465-4D44-89A6-6CB64A1FF589}
 		{B374256A-3BF9-41AC-B68E-CA8FA39CA328} = {816817BB-0465-4D44-89A6-6CB64A1FF589}
 		{506EA451-0D44-4B1F-BF58-ACB7BC312AEA} = {816817BB-0465-4D44-89A6-6CB64A1FF589}
