@@ -23,9 +23,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "root", "root", "{63243B77-9
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "samples", "samples", "{816817BB-0465-4D44-89A6-6CB64A1FF589}"
-	ProjectSection(SolutionItems) = preProject
-		samples\Directory.Build.props = samples\Directory.Build.props
-	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApiVersionInfo", "samples\ApiVersionInfo\ApiVersionInfo.csproj", "{7322DA3F-5F6F-4EBA-BB85-DCFB67B3B620}"
 EndProject
