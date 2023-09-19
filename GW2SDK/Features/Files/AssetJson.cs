@@ -6,9 +6,9 @@ using JetBrains.Annotations;
 namespace GuildWars2.Files;
 
 [PublicAPI]
-public static class FileJson
+public static class AssetJson
 {
-    public static File GetFile(this JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    public static Asset GetAsset(this JsonElement json, MissingMemberBehavior missingMemberBehavior)
     {
         RequiredMember<string> id = new("id");
         RequiredMember<string> icon = new("icon");
@@ -29,7 +29,7 @@ public static class FileJson
             }
         }
 
-        return new File
+        return new Asset
         {
             Id = id.GetValue(),
             Icon = icon.GetValue()

@@ -18,7 +18,7 @@ public sealed class FilesQuery
         http.BaseAddress ??= BaseAddress.DefaultUri;
     }
 
-    public Task<Replica<HashSet<File>>> GetFiles(
+    public Task<Replica<HashSet<Asset>>> GetFiles(
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
@@ -35,7 +35,7 @@ public sealed class FilesQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<File>> GetFileById(
+    public Task<Replica<Asset>> GetFileById(
         string fileId,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
@@ -45,7 +45,7 @@ public sealed class FilesQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<HashSet<File>>> GetFilesByIds(
+    public Task<Replica<HashSet<Asset>>> GetFilesByIds(
         IReadOnlyCollection<string> fileIds,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
@@ -55,7 +55,7 @@ public sealed class FilesQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<HashSet<File>>> GetFilesByPage(
+    public Task<Replica<HashSet<Asset>>> GetFilesByPage(
         int pageIndex,
         int? pageSize = default,
         Language? language = default,

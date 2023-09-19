@@ -9,7 +9,7 @@ using JetBrains.Annotations;
 namespace GuildWars2.Files;
 
 [PublicAPI]
-public sealed class FilesRequest : IHttpRequest<Replica<HashSet<File>>>
+public sealed class FilesRequest : IHttpRequest<Replica<HashSet<Asset>>>
 {
     private static readonly HttpRequestMessageTemplate Template = new(HttpMethod.Get, "v2/files")
     {
@@ -23,7 +23,7 @@ public sealed class FilesRequest : IHttpRequest<Replica<HashSet<File>>>
 
     public MissingMemberBehavior MissingMemberBehavior { get; init; }
 
-    public async Task<Replica<HashSet<File>>> SendAsync(
+    public async Task<Replica<HashSet<Asset>>> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
     )
@@ -38,9 +38,9 @@ public sealed class FilesRequest : IHttpRequest<Replica<HashSet<File>>>
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
-        return new Replica<HashSet<File>>
+        return new Replica<HashSet<Asset>>
         {
-            Value = json.RootElement.GetSet(entry => entry.GetFile(MissingMemberBehavior)),
+            Value = json.RootElement.GetSet(entry => entry.GetAsset(MissingMemberBehavior)),
             ResultContext = response.Headers.GetResultContext(),
             PageContext = response.Headers.GetPageContext(),
             Date = response.Headers.Date.GetValueOrDefault(),
