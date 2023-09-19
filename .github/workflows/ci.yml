@@ -32,7 +32,7 @@ jobs:
     - name: Build
       run: dotnet build --configuration ${{ env.build-configuration }} --no-restore
     - name: Pack artifacts
-      run: dotnet pack --configuration ${{ env.build-configuration }} --no-build --output artifacts --version-suffix CI-$(date --utc '+%Y%m%d-%H%M%S')
+      run: dotnet pack GW2SDK --configuration ${{ env.build-configuration }} --no-build --output artifacts --version-suffix CI-$(date --utc '+%Y%m%d-%H%M%S')
     - name: Upload artifacts
       uses: actions/upload-artifact@v3
       with:
@@ -40,4 +40,4 @@ jobs:
         path: artifacts
     - name: Upload packages to GitHub Packages
       run: dotnet nuget push artifacts/*.nupkg --source https://nuget.pkg.github.com/sliekens/index.json --api-key ${{secrets.GITHUB_TOKEN}}
-      if:  ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
+      if:  ${{ github.event_name == 'push' }}

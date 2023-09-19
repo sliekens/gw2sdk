@@ -3,7 +3,6 @@
   <PropertyGroup>
     <TargetFrameworks>net7.0;net481</TargetFrameworks>
     <UserSecretsId>a8ab34fc-ca23-453c-b913-59b025c2b48e</UserSecretsId>
-    <IsPackable>false</IsPackable>
     <Nullable>Disable</Nullable>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <SuppressTfmSupportBuildWarnings>true</SuppressTfmSupportBuildWarnings>
