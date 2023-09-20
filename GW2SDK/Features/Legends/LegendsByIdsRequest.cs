@@ -7,7 +7,7 @@ namespace GuildWars2.Legends;
 public sealed class LegendsByIdsRequest : IHttpRequest<Replica<HashSet<Legend>>>
 {
     private static readonly HttpRequestMessageTemplate Template =
-        new(HttpMethod.Get, "v2/legends") { AcceptEncoding = "gzip" };
+        new(Get, "v2/legends") { AcceptEncoding = "gzip" };
 
     public LegendsByIdsRequest(IReadOnlyCollection<string> legendIds)
     {

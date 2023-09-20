@@ -7,7 +7,7 @@ namespace GuildWars2.Guilds.Search;
 public sealed class GuildsByNameRequest : IHttpRequest<Replica<HashSet<string>>>
 {
     private static readonly HttpRequestMessageTemplate Template =
-        new(HttpMethod.Get, "v2/guild/search") { AcceptEncoding = "gzip" };
+        new(Get, "v2/guild/search") { AcceptEncoding = "gzip" };
 
     public GuildsByNameRequest(string name)
     {

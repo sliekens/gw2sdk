@@ -7,7 +7,7 @@ namespace GuildWars2.Guilds.Permissions;
 public sealed class GuildPermissionsIndexRequest : IHttpRequest<Replica<HashSet<string>>>
 {
     private static readonly HttpRequestMessageTemplate Template =
-        new(HttpMethod.Get, "v2/guild/permissions")
+        new(Get, "v2/guild/permissions")
         {
             AcceptEncoding = "gzip",
             Arguments = new QueryBuilder { { "v", SchemaVersion.Recommended } }

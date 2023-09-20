@@ -7,7 +7,7 @@ namespace GuildWars2.Emotes;
 public sealed class EmotesByIdsRequest : IHttpRequest<Replica<HashSet<Emote>>>
 {
     private static readonly HttpRequestMessageTemplate Template =
-        new(HttpMethod.Get, "v2/emotes") { AcceptEncoding = "gzip" };
+        new(Get, "v2/emotes") { AcceptEncoding = "gzip" };
 
     public EmotesByIdsRequest(IReadOnlyCollection<string> emoteIds)
     {

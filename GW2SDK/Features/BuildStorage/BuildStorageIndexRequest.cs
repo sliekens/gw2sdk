@@ -7,7 +7,7 @@ namespace GuildWars2.BuildStorage;
 public sealed class BuildStorageIndexRequest : IHttpRequest<Replica<HashSet<int>>>
 {
     private static readonly HttpRequestMessageTemplate Template =
-        new(HttpMethod.Get, "v2/account/buildstorage")
+        new(Get, "v2/account/buildstorage")
         {
             AcceptEncoding = "gzip",
             Arguments = new QueryBuilder { { "v", SchemaVersion.Recommended } }

@@ -7,7 +7,7 @@ namespace GuildWars2.Gliders;
 public sealed class GlidersByPageRequest : IHttpRequest<Replica<HashSet<Glider>>>
 {
     private static readonly HttpRequestMessageTemplate Template =
-        new(HttpMethod.Get, "v2/gliders") { AcceptEncoding = "gzip" };
+        new(Get, "v2/gliders") { AcceptEncoding = "gzip" };
 
     public GlidersByPageRequest(int pageIndex)
     {

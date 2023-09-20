@@ -6,7 +6,7 @@ namespace GuildWars2.Novelties;
 public sealed class NoveltyByIdRequest : IHttpRequest<Replica<Novelty>>
 {
     private static readonly HttpRequestMessageTemplate Template =
-        new(HttpMethod.Get, "v2/novelties") { AcceptEncoding = "gzip" };
+        new(Get, "v2/novelties") { AcceptEncoding = "gzip" };
 
     public NoveltyByIdRequest(int noveltyId)
     {

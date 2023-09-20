@@ -7,7 +7,7 @@ namespace GuildWars2.Pvp.Ranks;
 public sealed class RankIndexRequest : IHttpRequest<Replica<HashSet<int>>>
 {
     private static readonly HttpRequestMessageTemplate Template =
-        new(HttpMethod.Get, "v2/pvp/ranks")
+        new(Get, "v2/pvp/ranks")
         {
             AcceptEncoding = "gzip",
             Arguments = new QueryBuilder { { "v", SchemaVersion.Recommended } }

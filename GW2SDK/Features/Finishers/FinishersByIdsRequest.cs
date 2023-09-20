@@ -7,7 +7,7 @@ namespace GuildWars2.Finishers;
 public sealed class FinishersByIdsRequest : IHttpRequest<Replica<HashSet<Finisher>>>
 {
     private static readonly HttpRequestMessageTemplate Template =
-        new(HttpMethod.Get, "v2/finishers") { AcceptEncoding = "gzip" };
+        new(Get, "v2/finishers") { AcceptEncoding = "gzip" };
 
     public FinishersByIdsRequest(IReadOnlyCollection<int> finisherIds)
     {

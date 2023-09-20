@@ -7,7 +7,7 @@ namespace GuildWars2.Wvw.Matches.Stats;
 public sealed class MatchesStatsByPageRequest : IHttpRequest<Replica<HashSet<MatchStats>>>
 {
     private static readonly HttpRequestMessageTemplate Template =
-        new(HttpMethod.Get, "v2/wvw/matches/stats") { AcceptEncoding = "gzip" };
+        new(Get, "v2/wvw/matches/stats") { AcceptEncoding = "gzip" };
 
     public MatchesStatsByPageRequest(int pageIndex)
     {

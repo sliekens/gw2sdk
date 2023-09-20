@@ -6,7 +6,7 @@ namespace GuildWars2.Inventories;
 public sealed class InventoryRequest : IHttpRequest<Replica<Baggage>>
 {
     private static readonly HttpRequestMessageTemplate Template =
-        new(HttpMethod.Get, "v2/characters/:id/inventory")
+        new(Get, "v2/characters/:id/inventory")
         {
             AcceptEncoding = "gzip",
             Arguments = new QueryBuilder { { "v", SchemaVersion.Recommended } }

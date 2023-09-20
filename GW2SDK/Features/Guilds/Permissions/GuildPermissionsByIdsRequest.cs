@@ -8,7 +8,7 @@ public sealed class
     GuildPermissionsByIdsRequest : IHttpRequest<Replica<HashSet<GuildPermissionSummary>>>
 {
     private static readonly HttpRequestMessageTemplate Template =
-        new(HttpMethod.Get, "v2/guild/permissions") { AcceptEncoding = "gzip" };
+        new(Get, "v2/guild/permissions") { AcceptEncoding = "gzip" };
 
     public GuildPermissionsByIdsRequest(IReadOnlyCollection<GuildPermission> guildPermissionIds)
     {

@@ -7,7 +7,7 @@ namespace GuildWars2.Home.Nodes;
 public sealed class OwnedNodesIndexRequest : IHttpRequest<Replica<HashSet<string>>>
 {
     private static readonly HttpRequestMessageTemplate Template =
-        new(HttpMethod.Get, "v2/account/home/nodes")
+        new(Get, "v2/account/home/nodes")
         {
             AcceptEncoding = "gzip",
             Arguments = new QueryBuilder { { "v", SchemaVersion.Recommended } }

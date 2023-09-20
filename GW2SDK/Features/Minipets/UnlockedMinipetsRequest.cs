@@ -7,7 +7,7 @@ namespace GuildWars2.Minipets;
 public sealed class UnlockedMinipetsRequest : IHttpRequest<Replica<HashSet<int>>>
 {
     private static readonly HttpRequestMessageTemplate Template =
-        new(HttpMethod.Get, "v2/account/minis")
+        new(Get, "v2/account/minis")
         {
             AcceptEncoding = "gzip",
             Arguments = new QueryBuilder { { "v", SchemaVersion.Recommended } }

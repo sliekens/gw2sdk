@@ -6,7 +6,7 @@ namespace GuildWars2.Wvw.Matches.Stats;
 public sealed class MatchStatsByWorldIdRequest : IHttpRequest<Replica<MatchStats>>
 {
     private static readonly HttpRequestMessageTemplate Template =
-        new(HttpMethod.Get, "v2/wvw/matches/stats") { AcceptEncoding = "gzip" };
+        new(Get, "v2/wvw/matches/stats") { AcceptEncoding = "gzip" };
 
     public MatchStatsByWorldIdRequest(int worldId)
     {

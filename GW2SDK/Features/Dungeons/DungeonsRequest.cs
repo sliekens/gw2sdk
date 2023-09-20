@@ -6,7 +6,7 @@ namespace GuildWars2.Dungeons;
 [PublicAPI]
 public sealed class DungeonsRequest : IHttpRequest<Replica<HashSet<Dungeon>>>
 {
-    private static readonly HttpRequestMessageTemplate Template = new(HttpMethod.Get, "v2/dungeons")
+    private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/dungeons")
     {
         AcceptEncoding = "gzip",
         Arguments = new QueryBuilder

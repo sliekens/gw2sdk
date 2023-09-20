@@ -7,7 +7,7 @@ public sealed class
     SuperAdventureBoxProgressRequest : IHttpRequest<Replica<SuperAdventureBoxProgress>>
 {
     private static readonly HttpRequestMessageTemplate Template =
-        new(HttpMethod.Get, "v2/characters/:id/sab")
+        new(Get, "v2/characters/:id/sab")
         {
             AcceptEncoding = "gzip",
             Arguments = new QueryBuilder { { "v", SchemaVersion.Recommended } }

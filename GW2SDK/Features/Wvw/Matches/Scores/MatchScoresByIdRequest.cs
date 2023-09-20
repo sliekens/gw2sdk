@@ -6,7 +6,7 @@ namespace GuildWars2.Wvw.Matches.Scores;
 public sealed class MatchScoresByIdRequest : IHttpRequest<Replica<MatchScores>>
 {
     private static readonly HttpRequestMessageTemplate Template =
-        new(HttpMethod.Get, "v2/wvw/matches/scores") { AcceptEncoding = "gzip" };
+        new(Get, "v2/wvw/matches/scores") { AcceptEncoding = "gzip" };
 
     public MatchScoresByIdRequest(string matchId)
     {

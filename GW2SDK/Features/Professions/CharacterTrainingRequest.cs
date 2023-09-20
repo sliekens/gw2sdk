@@ -6,7 +6,7 @@ namespace GuildWars2.Professions;
 public sealed class CharacterTrainingRequest : IHttpRequest<Replica<CharacterTraining>>
 {
     private static readonly HttpRequestMessageTemplate Template =
-        new(HttpMethod.Get, "v2/characters/:id/training")
+        new(Get, "v2/characters/:id/training")
         {
             AcceptEncoding = "gzip",
             Arguments = new QueryBuilder { { "v", SchemaVersion.Recommended } }

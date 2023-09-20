@@ -6,7 +6,7 @@ namespace GuildWars2.Legends;
 [PublicAPI]
 public sealed class LegendsRequest : IHttpRequest<Replica<HashSet<Legend>>>
 {
-    private static readonly HttpRequestMessageTemplate Template = new(HttpMethod.Get, "v2/legends")
+    private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/legends")
     {
         AcceptEncoding = "gzip",
         Arguments = new QueryBuilder

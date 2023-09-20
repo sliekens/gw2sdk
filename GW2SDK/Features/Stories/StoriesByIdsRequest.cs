@@ -7,7 +7,7 @@ namespace GuildWars2.Stories;
 public sealed class StoriesByIdsRequest : IHttpRequest<Replica<HashSet<Story>>>
 {
     private static readonly HttpRequestMessageTemplate Template =
-        new(HttpMethod.Get, "v2/stories") { AcceptEncoding = "gzip" };
+        new(Get, "v2/stories") { AcceptEncoding = "gzip" };
 
     public StoriesByIdsRequest(IReadOnlyCollection<int> storyIds)
     {

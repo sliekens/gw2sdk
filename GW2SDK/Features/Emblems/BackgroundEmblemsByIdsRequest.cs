@@ -7,7 +7,7 @@ namespace GuildWars2.Emblems;
 public sealed class BackgroundEmblemsByIdsRequest : IHttpRequest<Replica<HashSet<Emblem>>>
 {
     private static readonly HttpRequestMessageTemplate Template =
-        new(HttpMethod.Get, "v2/emblem/backgrounds") { AcceptEncoding = "gzip" };
+        new(Get, "v2/emblem/backgrounds") { AcceptEncoding = "gzip" };
 
     public BackgroundEmblemsByIdsRequest(IReadOnlyCollection<int> backgroundEmblemIds)
     {

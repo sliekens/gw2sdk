@@ -7,7 +7,7 @@ namespace GuildWars2.Emotes;
 public sealed class UnlockedEmotesRequest : IHttpRequest<Replica<HashSet<string>>>
 {
     private static readonly HttpRequestMessageTemplate Template =
-        new(HttpMethod.Get, "v2/account/emotes")
+        new(Get, "v2/account/emotes")
         {
             AcceptEncoding = "gzip",
             Arguments = new QueryBuilder { { "v", SchemaVersion.Recommended } }

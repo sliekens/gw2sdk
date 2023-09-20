@@ -6,7 +6,7 @@ namespace GuildWars2.BuildStorage;
 public sealed class BuildByIdRequest : IHttpRequest<Replica<Build>>
 {
     private static readonly HttpRequestMessageTemplate Template =
-        new(HttpMethod.Get, "v2/account/buildstorage") { AcceptEncoding = "gzip" };
+        new(Get, "v2/account/buildstorage") { AcceptEncoding = "gzip" };
 
     public BuildByIdRequest(int buildStorageId)
     {

@@ -7,7 +7,7 @@ namespace GuildWars2.Raids;
 public sealed class RaidsByPageRequest : IHttpRequest<Replica<HashSet<Raid>>>
 {
     private static readonly HttpRequestMessageTemplate Template =
-        new(HttpMethod.Get, "v2/raids") { AcceptEncoding = "gzip" };
+        new(Get, "v2/raids") { AcceptEncoding = "gzip" };
 
     public RaidsByPageRequest(int pageIndex)
     {

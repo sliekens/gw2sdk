@@ -6,7 +6,7 @@ namespace GuildWars2.Pets;
 public sealed class PetByIdRequest : IHttpRequest<Replica<Pet>>
 {
     private static readonly HttpRequestMessageTemplate Template =
-        new(HttpMethod.Get, "v2/pets") { AcceptEncoding = "gzip" };
+        new(Get, "v2/pets") { AcceptEncoding = "gzip" };
 
     public PetByIdRequest(int petId)
     {

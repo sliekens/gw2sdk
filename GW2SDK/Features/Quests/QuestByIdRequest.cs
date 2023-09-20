@@ -6,7 +6,7 @@ namespace GuildWars2.Quests;
 public sealed class QuestByIdRequest : IHttpRequest<Replica<Quest>>
 {
     private static readonly HttpRequestMessageTemplate Template =
-        new(HttpMethod.Get, "v2/quests") { AcceptEncoding = "gzip" };
+        new(Get, "v2/quests") { AcceptEncoding = "gzip" };
 
     public QuestByIdRequest(int questId)
     {

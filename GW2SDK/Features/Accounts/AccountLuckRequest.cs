@@ -6,7 +6,7 @@ namespace GuildWars2.Accounts;
 public sealed class AccountLuckRequest : IHttpRequest<Replica<AccountLuck>>
 {
     private static readonly HttpRequestMessageTemplate Template =
-        new(HttpMethod.Get, "v2/account/luck")
+        new(Get, "v2/account/luck")
         {
             AcceptEncoding = "gzip",
             Arguments = new QueryBuilder { { "v", SchemaVersion.Recommended } }

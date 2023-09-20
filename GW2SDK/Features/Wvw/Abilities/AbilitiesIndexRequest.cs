@@ -7,7 +7,7 @@ namespace GuildWars2.Wvw.Abilities;
 public sealed class AbilitiesIndexRequest : IHttpRequest<Replica<HashSet<int>>>
 {
     private static readonly HttpRequestMessageTemplate Template =
-        new(HttpMethod.Get, "v2/wvw/abilities")
+        new(Get, "v2/wvw/abilities")
         {
             AcceptEncoding = "gzip",
             Arguments = new QueryBuilder { { "v", SchemaVersion.Recommended } }

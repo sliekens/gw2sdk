@@ -7,7 +7,7 @@ namespace GuildWars2.Wvw.Ranks;
 public sealed class RanksByPageRequest : IHttpRequest<Replica<HashSet<Rank>>>
 {
     private static readonly HttpRequestMessageTemplate Template =
-        new(HttpMethod.Get, "v2/wvw/ranks") { AcceptEncoding = "gzip" };
+        new(Get, "v2/wvw/ranks") { AcceptEncoding = "gzip" };
 
     public RanksByPageRequest(int pageIndex)
     {

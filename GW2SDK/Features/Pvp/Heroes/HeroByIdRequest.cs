@@ -6,7 +6,7 @@ namespace GuildWars2.Pvp.Heroes;
 public sealed class HeroByIdRequest : IHttpRequest<Replica<Hero>>
 {
     private static readonly HttpRequestMessageTemplate Template =
-        new(HttpMethod.Get, "v2/pvp/heroes") { AcceptEncoding = "gzip" };
+        new(Get, "v2/pvp/heroes") { AcceptEncoding = "gzip" };
 
     public HeroByIdRequest(string heroId)
     {

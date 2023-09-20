@@ -7,7 +7,7 @@ namespace GuildWars2.Currencies;
 public sealed class WalletRequest : IHttpRequest<Replica<HashSet<CurrencyAmount>>>
 {
     private static readonly HttpRequestMessageTemplate Template =
-        new(HttpMethod.Get, "v2/account/wallet")
+        new(Get, "v2/account/wallet")
         {
             AcceptEncoding = "gzip",
             Arguments = new QueryBuilder { { "v", SchemaVersion.Recommended } }

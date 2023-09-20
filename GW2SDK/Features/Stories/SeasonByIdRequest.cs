@@ -6,7 +6,7 @@ namespace GuildWars2.Stories;
 public sealed class SeasonByIdRequest : IHttpRequest<Replica<Season>>
 {
     private static readonly HttpRequestMessageTemplate Template =
-        new(HttpMethod.Get, "v2/stories/seasons") { AcceptEncoding = "gzip" };
+        new(Get, "v2/stories/seasons") { AcceptEncoding = "gzip" };
 
     public SeasonByIdRequest(string seasonId)
     {

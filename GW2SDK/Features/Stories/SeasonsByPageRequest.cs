@@ -7,7 +7,7 @@ namespace GuildWars2.Stories;
 public sealed class SeasonsByPageRequest : IHttpRequest<Replica<HashSet<Season>>>
 {
     private static readonly HttpRequestMessageTemplate Template =
-        new(HttpMethod.Get, "v2/stories/seasons") { AcceptEncoding = "gzip" };
+        new(Get, "v2/stories/seasons") { AcceptEncoding = "gzip" };
 
     public SeasonsByPageRequest(int pageIndex)
     {

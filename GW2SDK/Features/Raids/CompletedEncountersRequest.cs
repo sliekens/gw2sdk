@@ -7,7 +7,7 @@ namespace GuildWars2.Raids;
 public sealed class CompletedEncountersRequest : IHttpRequest<Replica<HashSet<string>>>
 {
     private static readonly HttpRequestMessageTemplate Template =
-        new(HttpMethod.Get, "v2/account/raids")
+        new(Get, "v2/account/raids")
         {
             AcceptEncoding = "gzip",
             Arguments = new QueryBuilder { { "v", SchemaVersion.Recommended } }

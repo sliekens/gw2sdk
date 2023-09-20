@@ -6,7 +6,7 @@ namespace GuildWars2.Quests;
 [PublicAPI]
 public sealed class QuestsIndexRequest : IHttpRequest<Replica<HashSet<int>>>
 {
-    private static readonly HttpRequestMessageTemplate Template = new(HttpMethod.Get, "v2/quests")
+    private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/quests")
     {
         AcceptEncoding = "gzip",
         Arguments = new QueryBuilder { { "v", SchemaVersion.Recommended } }

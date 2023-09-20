@@ -7,7 +7,7 @@ namespace GuildWars2.Wvw.Objectives;
 public sealed class ObjectivesIndexRequest : IHttpRequest<Replica<HashSet<string>>>
 {
     private static readonly HttpRequestMessageTemplate Template =
-        new(HttpMethod.Get, "v2/wvw/objectives")
+        new(Get, "v2/wvw/objectives")
         {
             AcceptEncoding = "gzip",
             Arguments = new QueryBuilder { { "v", SchemaVersion.Recommended } }

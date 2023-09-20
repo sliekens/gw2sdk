@@ -7,7 +7,7 @@ namespace GuildWars2.Home.Cats;
 public sealed class CatsByPageRequest : IHttpRequest<Replica<HashSet<Cat>>>
 {
     private static readonly HttpRequestMessageTemplate Template =
-        new(HttpMethod.Get, "v2/home/cats") { AcceptEncoding = "gzip" };
+        new(Get, "v2/home/cats") { AcceptEncoding = "gzip" };
 
     public CatsByPageRequest(int pageIndex)
     {

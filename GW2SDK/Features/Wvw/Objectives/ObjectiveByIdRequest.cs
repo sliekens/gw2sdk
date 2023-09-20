@@ -6,7 +6,7 @@ namespace GuildWars2.Wvw.Objectives;
 public sealed class ObjectiveByIdRequest : IHttpRequest<Replica<Objective>>
 {
     private static readonly HttpRequestMessageTemplate Template =
-        new(HttpMethod.Get, "v2/wvw/objectives") { AcceptEncoding = "gzip" };
+        new(Get, "v2/wvw/objectives") { AcceptEncoding = "gzip" };
 
     public ObjectiveByIdRequest(string objectiveId)
     {

@@ -7,7 +7,7 @@ namespace GuildWars2.Armory;
 public sealed class LegendaryItemsIndexRequest : IHttpRequest<Replica<HashSet<int>>>
 {
     private static readonly HttpRequestMessageTemplate Template =
-        new(HttpMethod.Get, "v2/legendaryarmory")
+        new(Get, "v2/legendaryarmory")
         {
             AcceptEncoding = "gzip",
             Arguments = new QueryBuilder { { "v", SchemaVersion.Recommended } }

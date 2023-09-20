@@ -6,7 +6,7 @@ namespace GuildWars2.Accounts;
 public sealed class CharacterSummaryRequest : IHttpRequest<Replica<CharacterSummary>>
 {
     private static readonly HttpRequestMessageTemplate Template =
-        new(HttpMethod.Get, "v2/characters/:id/core")
+        new(Get, "v2/characters/:id/core")
         {
             AcceptEncoding = "gzip",
             Arguments = new QueryBuilder { { "v", SchemaVersion.Recommended } }

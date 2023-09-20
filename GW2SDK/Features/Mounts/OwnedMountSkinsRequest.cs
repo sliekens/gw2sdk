@@ -7,7 +7,7 @@ namespace GuildWars2.Mounts;
 public sealed class OwnedMountSkinsRequest : IHttpRequest<Replica<HashSet<int>>>
 {
     private static readonly HttpRequestMessageTemplate Template =
-        new(HttpMethod.Get, "v2/account/mounts/skins")
+        new(Get, "v2/account/mounts/skins")
         {
             AcceptEncoding = "gzip",
             Arguments = new QueryBuilder { { "v", SchemaVersion.Recommended } }

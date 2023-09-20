@@ -6,7 +6,7 @@ namespace GuildWars2.Gliders;
 [PublicAPI]
 public sealed class GlidersIndexRequest : IHttpRequest<Replica<HashSet<int>>>
 {
-    private static readonly HttpRequestMessageTemplate Template = new(HttpMethod.Get, "v2/gliders")
+    private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/gliders")
     {
         AcceptEncoding = "gzip",
         Arguments = new QueryBuilder { { "v", SchemaVersion.Recommended } }

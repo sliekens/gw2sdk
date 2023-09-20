@@ -7,7 +7,7 @@ namespace GuildWars2.Home.Cats;
 public sealed class OwnedCatsIndexRequest : IHttpRequest<Replica<HashSet<int>>>
 {
     private static readonly HttpRequestMessageTemplate Template =
-        new(HttpMethod.Get, "v2/account/home/cats")
+        new(Get, "v2/account/home/cats")
         {
             AcceptEncoding = "gzip",
             Arguments = new QueryBuilder { { "v", SchemaVersion.Recommended } }

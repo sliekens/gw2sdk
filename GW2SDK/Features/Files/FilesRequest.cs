@@ -6,7 +6,7 @@ namespace GuildWars2.Files;
 [PublicAPI]
 public sealed class FilesRequest : IHttpRequest<Replica<HashSet<Asset>>>
 {
-    private static readonly HttpRequestMessageTemplate Template = new(HttpMethod.Get, "v2/files")
+    private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/files")
     {
         AcceptEncoding = "gzip",
         Arguments = new QueryBuilder

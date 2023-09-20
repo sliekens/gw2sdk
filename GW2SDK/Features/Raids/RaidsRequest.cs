@@ -6,7 +6,7 @@ namespace GuildWars2.Raids;
 [PublicAPI]
 public sealed class RaidsRequest : IHttpRequest<Replica<HashSet<Raid>>>
 {
-    private static readonly HttpRequestMessageTemplate Template = new(HttpMethod.Get, "v2/raids")
+    private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/raids")
     {
         AcceptEncoding = "gzip",
         Arguments = new QueryBuilder

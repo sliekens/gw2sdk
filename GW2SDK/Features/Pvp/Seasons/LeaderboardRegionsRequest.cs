@@ -7,7 +7,7 @@ namespace GuildWars2.Pvp.Seasons;
 public sealed class LeaderboardRegionsRequest : IHttpRequest<Replica<HashSet<string>>>
 {
     private static readonly HttpRequestMessageTemplate Template =
-        new(HttpMethod.Get, "v2/pvp/seasons/:id/leaderboards/:board") { AcceptEncoding = "gzip" };
+        new(Get, "v2/pvp/seasons/:id/leaderboards/:board") { AcceptEncoding = "gzip" };
 
     public LeaderboardRegionsRequest(string seasonId, string boardId)
     {

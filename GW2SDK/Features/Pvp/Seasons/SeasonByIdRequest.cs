@@ -6,7 +6,7 @@ namespace GuildWars2.Pvp.Seasons;
 public sealed class SeasonByIdRequest : IHttpRequest<Replica<Season>>
 {
     private static readonly HttpRequestMessageTemplate Template =
-        new(HttpMethod.Get, "v2/pvp/seasons") { AcceptEncoding = "gzip" };
+        new(Get, "v2/pvp/seasons") { AcceptEncoding = "gzip" };
 
     public SeasonByIdRequest(string seasonId)
     {

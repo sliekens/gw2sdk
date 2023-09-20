@@ -6,7 +6,7 @@ namespace GuildWars2.Pets;
 [PublicAPI]
 public sealed class PetsRequest : IHttpRequest<Replica<HashSet<Pet>>>
 {
-    private static readonly HttpRequestMessageTemplate Template = new(HttpMethod.Get, "v2/pets")
+    private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/pets")
     {
         AcceptEncoding = "gzip",
         Arguments = new QueryBuilder

@@ -7,7 +7,7 @@ namespace GuildWars2.Finishers;
 public sealed class UnlockedFinishersRequest : IHttpRequest<Replica<HashSet<UnlockedFinisher>>>
 {
     private static readonly HttpRequestMessageTemplate Template =
-        new(HttpMethod.Get, "v2/account/finishers")
+        new(Get, "v2/account/finishers")
         {
             AcceptEncoding = "gzip",
             Arguments = new QueryBuilder { { "v", SchemaVersion.Recommended } }

@@ -6,7 +6,7 @@ namespace GuildWars2.Raids;
 public sealed class RaidByIdRequest : IHttpRequest<Replica<Raid>>
 {
     private static readonly HttpRequestMessageTemplate Template =
-        new(HttpMethod.Get, "v2/raids") { AcceptEncoding = "gzip" };
+        new(Get, "v2/raids") { AcceptEncoding = "gzip" };
 
     public RaidByIdRequest(string raidId)
     {

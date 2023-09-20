@@ -6,7 +6,7 @@ namespace GuildWars2.Wvw.Upgrades;
 public sealed class UpgradeByIdRequest : IHttpRequest<Replica<ObjectiveUpgrade>>
 {
     private static readonly HttpRequestMessageTemplate Template =
-        new(HttpMethod.Get, "v2/wvw/upgrades") { AcceptEncoding = "gzip" };
+        new(Get, "v2/wvw/upgrades") { AcceptEncoding = "gzip" };
 
     public UpgradeByIdRequest(int upgradeId)
     {

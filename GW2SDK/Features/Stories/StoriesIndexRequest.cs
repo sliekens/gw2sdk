@@ -6,7 +6,7 @@ namespace GuildWars2.Stories;
 [PublicAPI]
 public sealed class StoriesIndexRequest : IHttpRequest<Replica<HashSet<int>>>
 {
-    private static readonly HttpRequestMessageTemplate Template = new(HttpMethod.Get, "v2/stories")
+    private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/stories")
     {
         AcceptEncoding = "gzip",
         Arguments = new QueryBuilder { { "v", SchemaVersion.Recommended } }

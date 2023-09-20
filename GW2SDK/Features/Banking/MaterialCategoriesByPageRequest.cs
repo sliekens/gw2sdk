@@ -8,7 +8,7 @@ public sealed class
     MaterialCategoriesByPageRequest : IHttpRequest<Replica<HashSet<MaterialCategory>>>
 {
     private static readonly HttpRequestMessageTemplate Template =
-        new(HttpMethod.Get, "v2/materials") { AcceptEncoding = "gzip" };
+        new(Get, "v2/materials") { AcceptEncoding = "gzip" };
 
     public MaterialCategoriesByPageRequest(int pageIndex)
     {

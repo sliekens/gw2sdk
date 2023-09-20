@@ -6,7 +6,7 @@ namespace GuildWars2.Wvw.Ranks;
 public sealed class RankByIdRequest : IHttpRequest<Replica<Rank>>
 {
     private static readonly HttpRequestMessageTemplate Template =
-        new(HttpMethod.Get, "v2/wvw/ranks") { AcceptEncoding = "gzip" };
+        new(Get, "v2/wvw/ranks") { AcceptEncoding = "gzip" };
 
     public RankByIdRequest(int rankId)
     {

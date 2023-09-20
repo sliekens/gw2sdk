@@ -1,6 +1,5 @@
 ﻿using GuildWars2.Http;
 using GuildWars2.Json;
-using static System.Net.Http.HttpMethod;
 
 namespace GuildWars2.Achievements;
 

@@ -6,7 +6,7 @@ namespace GuildWars2.Outfits;
 [PublicAPI]
 public sealed class OutfitsIndexRequest : IHttpRequest<Replica<HashSet<int>>>
 {
-    private static readonly HttpRequestMessageTemplate Template = new(HttpMethod.Get, "v2/outfits")
+    private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/outfits")
     {
         AcceptEncoding = "gzip",
         Arguments = new QueryBuilder { { "v", SchemaVersion.Recommended } }

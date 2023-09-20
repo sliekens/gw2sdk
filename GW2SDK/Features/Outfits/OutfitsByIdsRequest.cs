@@ -7,7 +7,7 @@ namespace GuildWars2.Outfits;
 public sealed class OutfitsByIdsRequest : IHttpRequest<Replica<HashSet<Outfit>>>
 {
     private static readonly HttpRequestMessageTemplate Template =
-        new(HttpMethod.Get, "v2/outfits") { AcceptEncoding = "gzip" };
+        new(Get, "v2/outfits") { AcceptEncoding = "gzip" };
 
     public OutfitsByIdsRequest(IReadOnlyCollection<int> outfitIds)
     {

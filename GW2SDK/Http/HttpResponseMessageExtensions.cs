@@ -54,7 +54,7 @@ public static class HttpResponseMessageExtensions
             };
         }
 
-        if (instance.StatusCode == HttpStatusCode.NotFound)
+        if (instance.StatusCode == NotFound)
         {
             if (instance.Content.Headers.ContentType?.MediaType != "application/json")
             {
@@ -80,7 +80,7 @@ public static class HttpResponseMessageExtensions
             };
         }
 
-        if (instance.StatusCode == HttpStatusCode.BadRequest)
+        if (instance.StatusCode == BadRequest)
         {
             if (instance.Content.Headers.ContentType?.MediaType != "application/json")
             {
@@ -105,7 +105,7 @@ public static class HttpResponseMessageExtensions
             {
                 // Sometimes the API responds with 400 Bad Request and message ErrTimeout
                 // That's not a user error and should be handled as 504 Gateway Timeout
-                throw new GatewayException(HttpStatusCode.GatewayTimeout, reason)
+                throw new GatewayException(GatewayTimeout, reason)
                 {
                     Data = { ["RequestUri"] = instance.RequestMessage?.RequestUri?.ToString() }
                 };
@@ -117,7 +117,7 @@ public static class HttpResponseMessageExtensions
             };
         }
 
-        if (instance.StatusCode is HttpStatusCode.Unauthorized or HttpStatusCode.Forbidden)
+        if (instance.StatusCode is Unauthorized or Forbidden)
         {
             if (instance.Content.Headers.ContentType?.MediaType != "application/json")
             {
@@ -143,7 +143,7 @@ public static class HttpResponseMessageExtensions
             };
         }
 
-        if (instance.StatusCode == HttpStatusCodeEx.TooManyRequests)
+        if (instance.StatusCode == TooManyRequests)
         {
             if (instance.Content.Headers.ContentType?.MediaType != "application/json")
             {

@@ -7,7 +7,7 @@ namespace GuildWars2.Emblems;
 public sealed class ForegroundEmblemsRequest : IHttpRequest<Replica<HashSet<Emblem>>>
 {
     private static readonly HttpRequestMessageTemplate Template =
-        new(HttpMethod.Get, "v2/emblem/foregrounds") { AcceptEncoding = "gzip" };
+        new(Get, "v2/emblem/foregrounds") { AcceptEncoding = "gzip" };
 
     public MissingMemberBehavior MissingMemberBehavior { get; init; }
 

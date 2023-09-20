@@ -7,7 +7,7 @@ namespace GuildWars2.Minipets;
 public sealed class MinipetsByPageRequest : IHttpRequest<Replica<HashSet<Minipet>>>
 {
     private static readonly HttpRequestMessageTemplate Template =
-        new(HttpMethod.Get, "v2/minis") { AcceptEncoding = "gzip" };
+        new(Get, "v2/minis") { AcceptEncoding = "gzip" };
 
     public MinipetsByPageRequest(int pageIndex)
     {

@@ -6,7 +6,7 @@ namespace GuildWars2.Races;
 [PublicAPI]
 public sealed class RacesByPageRequest : IHttpRequest<Replica<HashSet<Race>>>
 {
-    private static readonly HttpRequestMessageTemplate Template = new(HttpMethod.Get, "v2/races")
+    private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/races")
     {
         AcceptEncoding = "gzip"
     };

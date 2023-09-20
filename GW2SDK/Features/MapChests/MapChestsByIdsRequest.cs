@@ -7,7 +7,7 @@ namespace GuildWars2.MapChests;
 public sealed class MapChestsByIdsRequest : IHttpRequest<Replica<HashSet<MapChest>>>
 {
     private static readonly HttpRequestMessageTemplate Template =
-        new(HttpMethod.Get, "v2/mapchests") { AcceptEncoding = "gzip" };
+        new(Get, "v2/mapchests") { AcceptEncoding = "gzip" };
 
     public MapChestsByIdsRequest(IReadOnlyCollection<string> mapChestIds)
     {

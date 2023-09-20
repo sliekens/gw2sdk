@@ -7,7 +7,7 @@ namespace GuildWars2.Masteries;
 public sealed class MasteryProgressRequest : IHttpRequest<Replica<HashSet<MasteryProgress>>>
 {
     private static readonly HttpRequestMessageTemplate Template =
-        new(HttpMethod.Get, "v2/account/masteries")
+        new(Get, "v2/account/masteries")
         {
             AcceptEncoding = "gzip",
             Arguments = new QueryBuilder { { "v", SchemaVersion.Recommended } }

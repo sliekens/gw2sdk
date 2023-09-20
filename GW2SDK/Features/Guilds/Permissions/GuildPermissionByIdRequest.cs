@@ -6,7 +6,7 @@ namespace GuildWars2.Guilds.Permissions;
 public sealed class GuildPermissionByIdRequest : IHttpRequest<Replica<GuildPermissionSummary>>
 {
     private static readonly HttpRequestMessageTemplate Template =
-        new(HttpMethod.Get, "v2/guild/permissions") { AcceptEncoding = "gzip" };
+        new(Get, "v2/guild/permissions") { AcceptEncoding = "gzip" };
 
     public GuildPermissionByIdRequest(GuildPermission guildPermissionId)
     {

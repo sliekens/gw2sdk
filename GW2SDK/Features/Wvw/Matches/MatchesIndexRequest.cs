@@ -7,7 +7,7 @@ namespace GuildWars2.Wvw.Matches;
 public sealed class MatchesIndexRequest : IHttpRequest<Replica<HashSet<string>>>
 {
     private static readonly HttpRequestMessageTemplate Template =
-        new(HttpMethod.Get, "v2/wvw/matches")
+        new(Get, "v2/wvw/matches")
         {
             AcceptEncoding = "gzip",
             Arguments = new QueryBuilder { { "v", SchemaVersion.Recommended } }

@@ -1,6 +1,5 @@
 ﻿using System.Globalization;
 using GuildWars2.Http;
-using static System.Net.Http.HttpMethod;
 
 namespace GuildWars2.Exploration.Sectors;
 

@@ -7,7 +7,7 @@ namespace GuildWars2.Wvw.Abilities;
 public sealed class AbilitiesByPageRequest : IHttpRequest<Replica<HashSet<Ability>>>
 {
     private static readonly HttpRequestMessageTemplate Template =
-        new(HttpMethod.Get, "v2/wvw/abilities") { AcceptEncoding = "gzip" };
+        new(Get, "v2/wvw/abilities") { AcceptEncoding = "gzip" };
 
     public AbilitiesByPageRequest(int pageIndex)
     {

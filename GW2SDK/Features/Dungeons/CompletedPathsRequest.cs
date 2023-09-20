@@ -7,7 +7,7 @@ namespace GuildWars2.Dungeons;
 public sealed class CompletedPathsRequest : IHttpRequest<Replica<HashSet<string>>>
 {
     private static readonly HttpRequestMessageTemplate Template =
-        new(HttpMethod.Get, "v2/account/dungeons")
+        new(Get, "v2/account/dungeons")
         {
             AcceptEncoding = "gzip",
             Arguments = new QueryBuilder { { "v", SchemaVersion.Recommended } }

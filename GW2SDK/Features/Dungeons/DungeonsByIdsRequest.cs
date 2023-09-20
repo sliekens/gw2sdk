@@ -7,7 +7,7 @@ namespace GuildWars2.Dungeons;
 public sealed class DungeonsByIdsRequest : IHttpRequest<Replica<HashSet<Dungeon>>>
 {
     private static readonly HttpRequestMessageTemplate Template =
-        new(HttpMethod.Get, "v2/dungeons") { AcceptEncoding = "gzip" };
+        new(Get, "v2/dungeons") { AcceptEncoding = "gzip" };
 
     public DungeonsByIdsRequest(IReadOnlyCollection<string> dungeonIds)
     {

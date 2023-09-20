@@ -6,7 +6,7 @@ namespace GuildWars2.Emblems;
 public sealed class ForegroundEmblemByIdRequest : IHttpRequest<Replica<Emblem>>
 {
     private static readonly HttpRequestMessageTemplate Template =
-        new(HttpMethod.Get, "v2/emblem/foregrounds") { AcceptEncoding = "gzip" };
+        new(Get, "v2/emblem/foregrounds") { AcceptEncoding = "gzip" };
 
     public ForegroundEmblemByIdRequest(int foregroundEmblemId)
     {

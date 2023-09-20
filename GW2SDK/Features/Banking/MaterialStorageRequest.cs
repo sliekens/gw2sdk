@@ -6,7 +6,7 @@ namespace GuildWars2.Banking;
 public sealed class MaterialStorageRequest : IHttpRequest<Replica<MaterialStorage>>
 {
     private static readonly HttpRequestMessageTemplate Template =
-        new(HttpMethod.Get, "v2/account/materials")
+        new(Get, "v2/account/materials")
         {
             AcceptEncoding = "gzip",
             Arguments = new QueryBuilder { { "v", SchemaVersion.Recommended } }

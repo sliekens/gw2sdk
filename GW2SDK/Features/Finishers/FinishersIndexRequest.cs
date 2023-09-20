@@ -7,7 +7,7 @@ namespace GuildWars2.Finishers;
 public sealed class FinishersIndexRequest : IHttpRequest<Replica<HashSet<int>>>
 {
     private static readonly HttpRequestMessageTemplate Template =
-        new(HttpMethod.Get, "v2/finishers")
+        new(Get, "v2/finishers")
         {
             AcceptEncoding = "gzip",
             Arguments = new QueryBuilder { { "v", SchemaVersion.Recommended } }

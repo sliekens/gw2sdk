@@ -7,7 +7,7 @@ namespace GuildWars2.MailCarriers;
 public sealed class OwnedMailCarriersRequest : IHttpRequest<Replica<HashSet<int>>>
 {
     private static readonly HttpRequestMessageTemplate Template =
-        new(HttpMethod.Get, "v2/account/mailcarriers")
+        new(Get, "v2/account/mailcarriers")
         {
             AcceptEncoding = "gzip",
             Arguments = new QueryBuilder { { "v", SchemaVersion.Recommended } }

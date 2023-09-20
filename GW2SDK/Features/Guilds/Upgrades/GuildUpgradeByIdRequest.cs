@@ -6,7 +6,7 @@ namespace GuildWars2.Guilds.Upgrades;
 public sealed class GuildUpgradeByIdRequest : IHttpRequest<Replica<GuildUpgrade>>
 {
     private static readonly HttpRequestMessageTemplate Template =
-        new(HttpMethod.Get, "v2/guild/upgrades") { AcceptEncoding = "gzip" };
+        new(Get, "v2/guild/upgrades") { AcceptEncoding = "gzip" };
 
     public GuildUpgradeByIdRequest(int guildUpgradeId)
     {

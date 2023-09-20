@@ -6,7 +6,7 @@ namespace GuildWars2.Pvp.Amulets;
 public sealed class AmuletByIdRequest : IHttpRequest<Replica<Amulet>>
 {
     private static readonly HttpRequestMessageTemplate Template =
-        new(HttpMethod.Get, "v2/pvp/amulets") { AcceptEncoding = "gzip" };
+        new(Get, "v2/pvp/amulets") { AcceptEncoding = "gzip" };
 
     public AmuletByIdRequest(int amuletId)
     {

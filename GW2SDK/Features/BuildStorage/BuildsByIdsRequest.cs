@@ -7,7 +7,7 @@ namespace GuildWars2.BuildStorage;
 public sealed class BuildsByIdsRequest : IHttpRequest<Replica<HashSet<Build>>>
 {
     private static readonly HttpRequestMessageTemplate Template =
-        new(HttpMethod.Get, "v2/account/buildstorage") { AcceptEncoding = "gzip" };
+        new(Get, "v2/account/buildstorage") { AcceptEncoding = "gzip" };
 
     public BuildsByIdsRequest(IReadOnlyCollection<int> buildStorageIds)
     {

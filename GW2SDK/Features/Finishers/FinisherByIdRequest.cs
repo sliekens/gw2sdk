@@ -6,7 +6,7 @@ namespace GuildWars2.Finishers;
 public sealed class FinisherByIdRequest : IHttpRequest<Replica<Finisher>>
 {
     private static readonly HttpRequestMessageTemplate Template =
-        new(HttpMethod.Get, "v2/finishers") { AcceptEncoding = "gzip" };
+        new(Get, "v2/finishers") { AcceptEncoding = "gzip" };
 
     public FinisherByIdRequest(int finisherId)
     {

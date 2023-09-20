@@ -7,7 +7,7 @@ namespace GuildWars2.Mounts;
 public sealed class OwnedMountsRequest : IHttpRequest<Replica<HashSet<MountName>>>
 {
     private static readonly HttpRequestMessageTemplate Template =
-        new(HttpMethod.Get, "v2/account/mounts/types")
+        new(Get, "v2/account/mounts/types")
         {
             AcceptEncoding = "gzip",
             Arguments = new QueryBuilder { { "v", SchemaVersion.Recommended } }

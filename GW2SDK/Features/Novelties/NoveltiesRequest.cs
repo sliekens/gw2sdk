@@ -7,7 +7,7 @@ namespace GuildWars2.Novelties;
 public sealed class NoveltiesRequest : IHttpRequest<Replica<HashSet<Novelty>>>
 {
     private static readonly HttpRequestMessageTemplate Template =
-        new(HttpMethod.Get, "v2/novelties")
+        new(Get, "v2/novelties")
         {
             AcceptEncoding = "gzip",
             Arguments = new QueryBuilder

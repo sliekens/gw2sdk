@@ -6,7 +6,7 @@ namespace GuildWars2.Wvw.Matches;
 public sealed class MatchByIdRequest : IHttpRequest<Replica<Match>>
 {
     private static readonly HttpRequestMessageTemplate Template =
-        new(HttpMethod.Get, "v2/wvw/matches") { AcceptEncoding = "gzip" };
+        new(Get, "v2/wvw/matches") { AcceptEncoding = "gzip" };
 
     public MatchByIdRequest(string matchId)
     {

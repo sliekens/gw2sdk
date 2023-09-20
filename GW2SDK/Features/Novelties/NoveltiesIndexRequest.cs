@@ -7,7 +7,7 @@ namespace GuildWars2.Novelties;
 public sealed class NoveltiesIndexRequest : IHttpRequest<Replica<HashSet<int>>>
 {
     private static readonly HttpRequestMessageTemplate Template =
-        new(HttpMethod.Get, "v2/novelties")
+        new(Get, "v2/novelties")
         {
             AcceptEncoding = "gzip",
             Arguments = new QueryBuilder { { "v", SchemaVersion.Recommended } }
