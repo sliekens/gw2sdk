@@ -27,6 +27,7 @@
     <When Condition="'$(SYMBOL_PACKAGE)' == 'true'">
       <!-- Create a standalone snupkg with PDB files -->
       <PropertyGroup>
+        <DebugType>portable</DebugType>
         <IncludeSymbols>true</IncludeSymbols>
         <SymbolPackageFormat>snupkg</SymbolPackageFormat>
       </PropertyGroup>
