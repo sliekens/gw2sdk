@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Net.Http;
-using System.Threading;
-using System.Threading.Tasks;
-using JetBrains.Annotations;
-
-namespace GuildWars2.Skills;
+﻿namespace GuildWars2.Skills;
 
 [PublicAPI]
 public sealed class SkillsQuery

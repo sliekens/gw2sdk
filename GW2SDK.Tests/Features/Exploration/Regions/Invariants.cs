@@ -1,5 +1,4 @@
 ﻿using GuildWars2.Exploration.Regions;
-using Xunit;
 
 namespace GuildWars2.Tests.Features.Exploration.Regions;
 

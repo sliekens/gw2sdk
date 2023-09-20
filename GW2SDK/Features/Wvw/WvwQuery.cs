@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Net.Http;
-using System.Threading;
-using System.Threading.Tasks;
-using GuildWars2.Wvw.Abilities;
+﻿using GuildWars2.Wvw.Abilities;
 using GuildWars2.Wvw.Matches;
 using GuildWars2.Wvw.Matches.Overview;
 using GuildWars2.Wvw.Matches.Scores;
@@ -11,7 +6,6 @@ using GuildWars2.Wvw.Matches.Stats;
 using GuildWars2.Wvw.Objectives;
 using GuildWars2.Wvw.Ranks;
 using GuildWars2.Wvw.Upgrades;
-using JetBrains.Annotations;
 using Objective = GuildWars2.Wvw.Objectives.Objective;
 
 namespace GuildWars2.Wvw;

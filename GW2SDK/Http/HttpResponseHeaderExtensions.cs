@@ -1,7 +1,4 @@
-﻿using System;
-using System.Linq;
-using System.Net.Http.Headers;
-using JetBrains.Annotations;
+﻿using System.Net.Http.Headers;
 using static GuildWars2.Http.Gw2ResponseHeaderName;
 
 namespace GuildWars2.Http;

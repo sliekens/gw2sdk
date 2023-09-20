@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace GuildWars2.Accounts;
+﻿namespace GuildWars2.Accounts;
 
 internal static class MagicFindThresholds
 {

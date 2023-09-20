@@ -1,5 +1,4 @@
 ﻿using GuildWars2.Exploration.Maps;
-using Xunit;
 
 namespace GuildWars2.Tests.Features.Exploration.Maps;
 

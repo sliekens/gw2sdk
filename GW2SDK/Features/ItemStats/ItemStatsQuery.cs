@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Net.Http;
-using System.Threading;
-using System.Threading.Tasks;
-using JetBrains.Annotations;
-
-namespace GuildWars2.ItemStats;
+﻿namespace GuildWars2.ItemStats;
 
 [PublicAPI]
 public sealed class ItemStatsQuery

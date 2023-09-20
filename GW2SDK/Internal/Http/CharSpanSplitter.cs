@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace GuildWars2.Http;
+﻿namespace GuildWars2.Http;
 
 /// <summary>An utility like String.Split, but for Spans. This should avoid allocations.</summary>
 internal ref struct CharSpanSplitter

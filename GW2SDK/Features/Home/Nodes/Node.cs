@@ -1,7 +1,4 @@
-﻿using GuildWars2.Annotations;
-using JetBrains.Annotations;
-
-namespace GuildWars2.Home.Nodes;
+﻿namespace GuildWars2.Home.Nodes;
 
 [PublicAPI]
 [DataTransferObject]

@@ -1,5 +1,4 @@
 ﻿using GuildWars2.Files;
-using Xunit;
 
 namespace GuildWars2.Tests.Features.Files;
 

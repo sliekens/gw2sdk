@@ -1,7 +1,4 @@
-﻿using GuildWars2.Annotations;
-using JetBrains.Annotations;
-
-namespace GuildWars2.Wvw.Ranks;
+﻿namespace GuildWars2.Wvw.Ranks;
 
 [PublicAPI]
 [DataTransferObject]

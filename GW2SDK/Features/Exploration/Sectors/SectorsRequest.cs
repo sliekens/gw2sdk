@@ -1,11 +1,6 @@
-﻿using System.Collections.Generic;
-using System.Globalization;
-using System.Net.Http;
-using System.Threading;
-using System.Threading.Tasks;
+﻿using System.Globalization;
 using GuildWars2.Http;
 using GuildWars2.Json;
-using JetBrains.Annotations;
 using static System.Net.Http.HttpMethod;
 
 namespace GuildWars2.Exploration.Sectors;

@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using JetBrains.Annotations;
-
-namespace GuildWars2.Skills;
+﻿namespace GuildWars2.Skills;
 
 [PublicAPI]
 public sealed record UtilitySkill : Skill

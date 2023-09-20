@@ -1,7 +1,4 @@
-﻿using GuildWars2.Annotations;
-using JetBrains.Annotations;
-
-namespace GuildWars2.Tokens;
+﻿namespace GuildWars2.Tokens;
 
 [PublicAPI]
 [DataTransferObject]

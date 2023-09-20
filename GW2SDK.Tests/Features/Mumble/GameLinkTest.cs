@@ -1,9 +1,4 @@
-﻿using System;
-using System.Threading;
-using System.Threading.Tasks;
-using Xunit;
-
-#pragma warning disable CA1416
+﻿#pragma warning disable CA1416
 namespace GuildWars2.Tests.Features.Mumble;
 
 public class GameLinkTest

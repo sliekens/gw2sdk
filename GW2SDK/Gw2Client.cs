@@ -1,6 +1,4 @@
-﻿using System;
-using System.Net.Http;
-using GuildWars2.Accounts;
+﻿using GuildWars2.Accounts;
 using GuildWars2.Achievements;
 using GuildWars2.Armory;
 using GuildWars2.Banking;
@@ -47,7 +45,6 @@ using GuildWars2.Traits;
 using GuildWars2.WorldBosses;
 using GuildWars2.Worlds;
 using GuildWars2.Wvw;
-using JetBrains.Annotations;
 
 namespace GuildWars2;
 

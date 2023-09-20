@@ -1,6 +1,4 @@
-﻿using JetBrains.Annotations;
-
-namespace GuildWars2.Professions;
+﻿namespace GuildWars2.Professions;
 
 [PublicAPI]
 public sealed record ProfessionSkillReference : SkillReference

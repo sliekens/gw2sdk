@@ -1,8 +1,4 @@
-﻿using System.Collections.Generic;
-using GuildWars2.Annotations;
-using JetBrains.Annotations;
-
-namespace GuildWars2.Pvp.Amulets;
+﻿namespace GuildWars2.Pvp.Amulets;
 
 [PublicAPI]
 [DataTransferObject]

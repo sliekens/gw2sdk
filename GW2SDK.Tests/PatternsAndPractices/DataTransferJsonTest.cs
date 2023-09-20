@@ -1,9 +1,6 @@
-﻿using System;
-using System.Linq;
-using System.Runtime.CompilerServices;
+﻿using System.Runtime.CompilerServices;
 using System.Text.Json;
 using GuildWars2.Tests.TestInfrastructure;
-using Xunit;
 using static System.Reflection.BindingFlags;
 
 namespace GuildWars2.Tests.PatternsAndPractices;

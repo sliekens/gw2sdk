@@ -1,7 +1,4 @@
-﻿using System;
-using System.Net.Http;
-using System.Net.Http.Headers;
-using JetBrains.Annotations;
+﻿using System.Net.Http.Headers;
 
 namespace GuildWars2.Http;
 

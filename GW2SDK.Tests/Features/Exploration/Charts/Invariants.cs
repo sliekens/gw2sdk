@@ -1,5 +1,4 @@
 ﻿using GuildWars2.Exploration.Charts;
-using Xunit;
 
 namespace GuildWars2.Tests.Features.Exploration.Charts;
 

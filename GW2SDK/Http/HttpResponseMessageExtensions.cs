@@ -1,12 +1,6 @@
-﻿using System;
-using System.IO.Compression;
-using System.Linq;
+﻿using System.IO.Compression;
 using System.Net;
-using System.Net.Http;
 using System.Text.Json;
-using System.Threading;
-using System.Threading.Tasks;
-using JetBrains.Annotations;
 
 namespace GuildWars2.Http;
 

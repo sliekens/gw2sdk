@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using GuildWars2.Annotations;
-using JetBrains.Annotations;
-
-namespace GuildWars2.Crafting;
+﻿namespace GuildWars2.Crafting;
 
 [PublicAPI]
 [Inheritable]

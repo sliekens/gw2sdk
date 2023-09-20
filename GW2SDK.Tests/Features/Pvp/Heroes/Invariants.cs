@@ -1,5 +1,4 @@
 ﻿using GuildWars2.Pvp.Heroes;
-using Xunit;
 
 namespace GuildWars2.Tests.Features.Pvp.Heroes;
 

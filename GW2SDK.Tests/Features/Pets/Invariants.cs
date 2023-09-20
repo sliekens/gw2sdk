@@ -1,5 +1,4 @@
 ﻿using GuildWars2.Pets;
-using Xunit;
 
 namespace GuildWars2.Tests.Features.Pets;
 

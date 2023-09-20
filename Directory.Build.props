@@ -2,6 +2,7 @@
   <PropertyGroup>
     <LangVersion>11.0</LangVersion>
     <Nullable>Enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
     <PolySharpIncludeRuntimeSupportedAttributes>true</PolySharpIncludeRuntimeSupportedAttributes>
     <RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
     <DisableImplicitNuGetFallbackFolder>true</DisableImplicitNuGetFallbackFolder>

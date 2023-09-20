@@ -1,12 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Net.Http;
-using System.Threading;
-using System.Threading.Tasks;
-using GuildWars2.Annotations;
-using JetBrains.Annotations;
-
-namespace GuildWars2.Finishers;
+﻿namespace GuildWars2.Finishers;
 
 [PublicAPI]
 public sealed class FinishersQuery

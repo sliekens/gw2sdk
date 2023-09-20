@@ -1,7 +1,4 @@
-﻿using System;
-using JetBrains.Annotations;
-
-namespace GuildWars2;
+﻿namespace GuildWars2;
 
 /// <summary>Contains a replica (copy) of some value along with contextual information about the value.</summary>
 /// <typeparam name="T">The type of the value.</typeparam>

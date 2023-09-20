@@ -1,6 +1,4 @@
-﻿using System;
-using GuildWars2.Mounts;
-using Xunit;
+﻿using GuildWars2.Mounts;
 
 namespace GuildWars2.Tests.Features.Mounts;
 

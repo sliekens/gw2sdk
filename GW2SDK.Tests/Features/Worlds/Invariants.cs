@@ -1,6 +1,4 @@
-﻿using System;
-using GuildWars2.Worlds;
-using Xunit;
+﻿using GuildWars2.Worlds;
 
 namespace GuildWars2.Tests.Features.Worlds;
 

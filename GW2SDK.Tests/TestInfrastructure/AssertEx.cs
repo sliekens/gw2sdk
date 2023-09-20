@@ -1,7 +1,4 @@
-﻿using System;
-using Xunit;
-
-namespace GuildWars2.Tests.TestInfrastructure;
+﻿namespace GuildWars2.Tests.TestInfrastructure;
 
 public static class AssertEx
 {

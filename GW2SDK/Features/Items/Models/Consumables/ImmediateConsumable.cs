@@ -1,7 +1,4 @@
-﻿using System;
-using JetBrains.Annotations;
-
-namespace GuildWars2.Items;
+﻿namespace GuildWars2.Items;
 
 [PublicAPI]
 public sealed record ImmediateConsumable : Consumable

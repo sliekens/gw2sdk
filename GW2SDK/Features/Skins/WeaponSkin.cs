@@ -1,7 +1,4 @@
-﻿using GuildWars2.Annotations;
-using JetBrains.Annotations;
-
-namespace GuildWars2.Skins;
+﻿namespace GuildWars2.Skins;
 
 [PublicAPI]
 [Inheritable]

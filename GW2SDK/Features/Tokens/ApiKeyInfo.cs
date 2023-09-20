@@ -1,5 +1,3 @@
-using JetBrains.Annotations;
-
 namespace GuildWars2.Tokens;
 
 [PublicAPI]

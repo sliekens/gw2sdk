@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Net.Http;
-using GuildWars2.Http;
-using Xunit;
+﻿using GuildWars2.Http;
 
 namespace GuildWars2.Tests.Http;
 

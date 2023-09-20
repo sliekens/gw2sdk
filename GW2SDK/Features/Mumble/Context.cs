@@ -1,9 +1,7 @@
-﻿using System;
-using System.Diagnostics.CodeAnalysis;
+﻿using System.Diagnostics.CodeAnalysis;
 using System.Net;
 using System.Runtime.InteropServices;
 using GuildWars2.Win32;
-using JetBrains.Annotations;
 
 namespace GuildWars2.Mumble;
 

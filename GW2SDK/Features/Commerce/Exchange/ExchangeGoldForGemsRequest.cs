@@ -1,8 +1,4 @@
-﻿using System.Net.Http;
-using System.Threading;
-using System.Threading.Tasks;
-using GuildWars2.Http;
-using JetBrains.Annotations;
+﻿using GuildWars2.Http;
 using static System.Net.Http.HttpMethod;
 
 namespace GuildWars2.Commerce.Exchange;

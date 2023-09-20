@@ -1,6 +1,4 @@
-﻿using JetBrains.Annotations;
-
-namespace GuildWars2.Armory;
+﻿namespace GuildWars2.Armory;
 
 [PublicAPI]
 public sealed record BoundLegendaryItem

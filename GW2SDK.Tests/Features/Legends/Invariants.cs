@@ -1,5 +1,4 @@
 ﻿using GuildWars2.Legends;
-using Xunit;
 
 namespace GuildWars2.Tests.Features.Legends;
 

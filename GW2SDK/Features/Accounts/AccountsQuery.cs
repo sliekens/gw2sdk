@@ -1,12 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Net.Http;
-using System.Threading;
-using System.Threading.Tasks;
-using GuildWars2.Annotations;
-using JetBrains.Annotations;
-
-namespace GuildWars2.Accounts;
+﻿namespace GuildWars2.Accounts;
 
 [PublicAPI]
 public sealed class AccountsQuery

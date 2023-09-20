@@ -1,8 +1,6 @@
-﻿using System;
-using System.Drawing;
+﻿using System.Drawing;
 using System.Text.Json;
 using GuildWars2.Json;
-using JetBrains.Annotations;
 
 namespace GuildWars2.Exploration.PointsOfInterest;
 

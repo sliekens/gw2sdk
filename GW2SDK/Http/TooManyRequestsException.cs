@@ -1,7 +1,4 @@
-﻿using System;
-using JetBrains.Annotations;
-
-namespace GuildWars2.Http;
+﻿namespace GuildWars2.Http;
 
 [PublicAPI]
 public sealed class TooManyRequestsException : InvalidOperationException

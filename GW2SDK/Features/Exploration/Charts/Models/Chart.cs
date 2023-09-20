@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Drawing;
-using GuildWars2.Annotations;
+﻿using System.Drawing;
 using GuildWars2.Exploration.Adventures;
 using GuildWars2.Exploration.GodShrines;
 using GuildWars2.Exploration.Hearts;
@@ -8,7 +6,6 @@ using GuildWars2.Exploration.HeroChallenges;
 using GuildWars2.Exploration.MasteryPoints;
 using GuildWars2.Exploration.PointsOfInterest;
 using GuildWars2.Exploration.Sectors;
-using JetBrains.Annotations;
 
 namespace GuildWars2.Exploration.Charts;
 

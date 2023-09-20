@@ -1,5 +1,4 @@
 using GuildWars2.Specializations;
-using Xunit;
 
 namespace GuildWars2.Tests.Features.Specializations;
 

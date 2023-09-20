@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
+﻿using System.Drawing;
 using System.Text.Json;
 using GuildWars2.Exploration.Adventures;
 using GuildWars2.Exploration.GodShrines;
@@ -10,7 +8,6 @@ using GuildWars2.Exploration.MasteryPoints;
 using GuildWars2.Exploration.PointsOfInterest;
 using GuildWars2.Exploration.Sectors;
 using GuildWars2.Json;
-using JetBrains.Annotations;
 
 namespace GuildWars2.Exploration.Charts;
 

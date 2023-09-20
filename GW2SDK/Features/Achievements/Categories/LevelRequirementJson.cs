@@ -1,5 +1,4 @@
 ﻿using System.Text.Json;
-using JetBrains.Annotations;
 
 namespace GuildWars2.Achievements.Categories;
 

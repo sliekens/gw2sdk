@@ -1,15 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Net.Http;
-using System.Runtime.CompilerServices;
-using System.Threading;
-using System.Threading.Tasks;
+﻿using System.Runtime.CompilerServices;
 using GuildWars2.Achievements.Categories;
 using GuildWars2.Achievements.Dailies;
 using GuildWars2.Achievements.Groups;
 using GuildWars2.Achievements.Titles;
-using GuildWars2.Annotations;
-using JetBrains.Annotations;
 
 namespace GuildWars2.Achievements;
 

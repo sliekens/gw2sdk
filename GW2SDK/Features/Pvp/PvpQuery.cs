@@ -1,13 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Net.Http;
-using System.Threading;
-using System.Threading.Tasks;
-using GuildWars2.Pvp.Amulets;
+﻿using GuildWars2.Pvp.Amulets;
 using GuildWars2.Pvp.Heroes;
 using GuildWars2.Pvp.Ranks;
 using GuildWars2.Pvp.Seasons;
-using JetBrains.Annotations;
 
 namespace GuildWars2.Pvp;
 

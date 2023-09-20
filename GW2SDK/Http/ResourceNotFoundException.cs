@@ -1,7 +1,4 @@
-﻿using System;
-using JetBrains.Annotations;
-
-namespace GuildWars2.Http;
+﻿namespace GuildWars2.Http;
 
 /// <summary>Thrown when a server returns a Not Found result (404).</summary>
 [PublicAPI]

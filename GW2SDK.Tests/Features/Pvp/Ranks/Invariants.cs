@@ -1,5 +1,4 @@
 ﻿using GuildWars2.Pvp.Ranks;
-using Xunit;
 
 namespace GuildWars2.Tests.Features.Pvp.Ranks;
 

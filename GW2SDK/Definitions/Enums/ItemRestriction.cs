@@ -1,6 +1,4 @@
-﻿using JetBrains.Annotations;
-
-namespace GuildWars2;
+﻿namespace GuildWars2;
 
 /// <summary>A list of possible restrictions for items that are limited to some races, genders or professions.</summary>
 [PublicAPI]

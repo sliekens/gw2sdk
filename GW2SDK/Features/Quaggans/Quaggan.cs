@@ -1,7 +1,4 @@
-﻿using GuildWars2.Annotations;
-using JetBrains.Annotations;
-
-namespace GuildWars2.Quaggans;
+﻿namespace GuildWars2.Quaggans;
 
 [PublicAPI]
 [DataTransferObject]

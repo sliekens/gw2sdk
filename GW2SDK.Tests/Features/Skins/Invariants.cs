@@ -1,5 +1,4 @@
 using GuildWars2.Skins;
-using Xunit;
 
 namespace GuildWars2.Tests.Features.Skins;
 

@@ -1,6 +1,5 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using GuildWars2.Items;
-using Xunit;
 
 namespace GuildWars2.Tests.Features.Items;
 

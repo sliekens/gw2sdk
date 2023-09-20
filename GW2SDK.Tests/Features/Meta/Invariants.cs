@@ -1,6 +1,4 @@
-using System.Collections.Generic;
 using GuildWars2.Meta;
-using Xunit;
 
 namespace GuildWars2.Tests.Features.Meta;
 

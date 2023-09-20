@@ -1,6 +1,4 @@
-﻿using JetBrains.Annotations;
-
-namespace GuildWars2.Achievements;
+﻿namespace GuildWars2.Achievements;
 
 [PublicAPI]
 public sealed record CoinsReward : AchievementReward

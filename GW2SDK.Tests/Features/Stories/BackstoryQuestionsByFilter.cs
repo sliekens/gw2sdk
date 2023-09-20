@@ -1,7 +1,4 @@
-using System.Collections.Generic;
-using System.Threading.Tasks;
 using GuildWars2.Tests.TestInfrastructure;
-using Xunit;
 
 namespace GuildWars2.Tests.Features.Stories;
 

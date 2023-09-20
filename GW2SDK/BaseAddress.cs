@@ -1,7 +1,4 @@
-﻿using System;
-using JetBrains.Annotations;
-
-namespace GuildWars2;
+﻿namespace GuildWars2;
 
 [PublicAPI]
 public static class BaseAddress

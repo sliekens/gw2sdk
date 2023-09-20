@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using GuildWars2;
+﻿using GuildWars2;
 using GuildWars2.Crafting;
 using GuildWars2.Items;
 using Spectre.Console;

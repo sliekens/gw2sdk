@@ -1,7 +1,4 @@
-﻿using GuildWars2.Annotations;
-using JetBrains.Annotations;
-
-namespace GuildWars2.Wvw.Matches.Stats;
+﻿namespace GuildWars2.Wvw.Matches.Stats;
 
 [PublicAPI]
 [DataTransferObject]

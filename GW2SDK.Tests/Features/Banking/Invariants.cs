@@ -1,6 +1,5 @@
 ﻿using GuildWars2.Banking;
 using GuildWars2.Inventories;
-using Xunit;
 
 namespace GuildWars2.Tests.Features.Banking;
 

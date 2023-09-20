@@ -1,5 +1,4 @@
 ﻿using GuildWars2.Pvp.Seasons;
-using Xunit;
 
 namespace GuildWars2.Tests.Features.Pvp.Seasons;
 

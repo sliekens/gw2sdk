@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using GuildWars2.Exploration.Hearts;
-using Xunit;
+﻿using GuildWars2.Exploration.Hearts;
 
 namespace GuildWars2.Tests.Features.Exploration.Hearts;
 

@@ -1,8 +1,4 @@
-﻿using System.Net.Http;
-using System.Threading;
-using System.Threading.Tasks;
-using GuildWars2.Http;
-using JetBrains.Annotations;
+﻿using GuildWars2.Http;
 
 namespace GuildWars2.Wvw.Matches.Stats;
 

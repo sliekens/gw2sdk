@@ -1,7 +1,4 @@
-﻿using System;
-using System.Net.Http;
-using System.Threading.Tasks;
-using GuildWars2.Http;
+﻿using GuildWars2.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Polly;
 using Polly.Timeout;

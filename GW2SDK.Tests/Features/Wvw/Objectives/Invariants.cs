@@ -1,5 +1,4 @@
 ﻿using GuildWars2.Wvw.Objectives;
-using Xunit;
 
 namespace GuildWars2.Tests.Features.Wvw.Objectives;
 

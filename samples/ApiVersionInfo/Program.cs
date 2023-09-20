@@ -1,5 +1,4 @@
-﻿using System.Net.Http;
-using ApiVersionInfo;
+﻿using ApiVersionInfo;
 using GuildWars2;
 using GuildWars2.Meta;
 using Spectre.Console;

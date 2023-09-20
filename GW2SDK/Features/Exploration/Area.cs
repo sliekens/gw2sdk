@@ -1,5 +1,4 @@
 ﻿using System.Drawing;
-using JetBrains.Annotations;
 
 namespace GuildWars2.Exploration;
 

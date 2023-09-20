@@ -1,5 +1,4 @@
 ﻿using System.Runtime.InteropServices;
-using JetBrains.Annotations;
 
 // ReSharper disable InconsistentNaming // because this is based on operating system APIs
 #pragma warning disable IDE1006 // Naming Styles

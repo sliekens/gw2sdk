@@ -1,10 +1,5 @@
-﻿using System.Collections.Generic;
-using System.Net.Http;
-using System.Threading;
-using System.Threading.Tasks;
-using GuildWars2.Http;
+﻿using GuildWars2.Http;
 using GuildWars2.Json;
-using JetBrains.Annotations;
 using static System.Net.Http.HttpMethod;
 
 namespace GuildWars2.Races;

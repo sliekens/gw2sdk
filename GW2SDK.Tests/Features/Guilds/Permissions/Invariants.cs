@@ -1,6 +1,4 @@
-﻿using System;
-using GuildWars2.Guilds.Permissions;
-using Xunit;
+﻿using GuildWars2.Guilds.Permissions;
 
 namespace GuildWars2.Tests.Features.Guilds.Permissions;
 

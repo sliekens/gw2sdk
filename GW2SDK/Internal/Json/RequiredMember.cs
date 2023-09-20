@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text.Json;
+﻿using System.Text.Json;
 using static System.Text.Json.JsonValueKind;
 
 namespace GuildWars2.Json;

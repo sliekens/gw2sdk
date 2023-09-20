@@ -1,8 +1,5 @@
-﻿using System.Collections.Generic;
-using System.Drawing;
-using GuildWars2.Annotations;
+﻿using System.Drawing;
 using GuildWars2.Exploration.Charts;
-using JetBrains.Annotations;
 
 namespace GuildWars2.Exploration.Regions;
 

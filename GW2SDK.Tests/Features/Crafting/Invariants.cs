@@ -1,5 +1,4 @@
 ﻿using GuildWars2.Crafting;
-using Xunit;
 
 namespace GuildWars2.Tests.Features.Crafting;
 

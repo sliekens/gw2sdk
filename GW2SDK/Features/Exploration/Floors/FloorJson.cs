@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
+﻿using System.Drawing;
 using System.Text.Json;
 using GuildWars2.Json;
-using JetBrains.Annotations;
 using GeoRegion = GuildWars2.Exploration.Regions.Region;
 
 namespace GuildWars2.Exploration.Floors;

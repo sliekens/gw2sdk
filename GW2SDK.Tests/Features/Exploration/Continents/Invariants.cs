@@ -1,6 +1,5 @@
 ﻿using System.Drawing;
 using GuildWars2.Exploration.Continents;
-using Xunit;
 
 namespace GuildWars2.Tests.Features.Exploration.Continents;
 

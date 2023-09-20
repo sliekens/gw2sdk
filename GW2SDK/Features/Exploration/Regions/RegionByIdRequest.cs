@@ -1,9 +1,5 @@
 ﻿using System.Globalization;
-using System.Net.Http;
-using System.Threading;
-using System.Threading.Tasks;
 using GuildWars2.Http;
-using JetBrains.Annotations;
 using static System.Net.Http.HttpMethod;
 
 namespace GuildWars2.Exploration.Regions;

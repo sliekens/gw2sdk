@@ -1,6 +1,4 @@
-﻿using System;
-using GuildWars2.Accounts;
-using Xunit;
+﻿using GuildWars2.Accounts;
 
 namespace GuildWars2.Tests.Features.Accounts;
 

@@ -1,7 +1,4 @@
-﻿using GuildWars2.Annotations;
-using JetBrains.Annotations;
-
-namespace GuildWars2.Guilds.Upgrades;
+﻿namespace GuildWars2.Guilds.Upgrades;
 
 [PublicAPI]
 [DataTransferObject]

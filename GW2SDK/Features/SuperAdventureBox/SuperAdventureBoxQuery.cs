@@ -1,11 +1,4 @@
-﻿using System;
-using System.Net.Http;
-using System.Threading;
-using System.Threading.Tasks;
-using GuildWars2.Annotations;
-using JetBrains.Annotations;
-
-namespace GuildWars2.SuperAdventureBox;
+﻿namespace GuildWars2.SuperAdventureBox;
 
 [PublicAPI]
 public sealed class SuperAdventureBoxQuery

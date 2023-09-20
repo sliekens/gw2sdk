@@ -1,8 +1,6 @@
-﻿using System;
-using System.IO.MemoryMappedFiles;
+﻿using System.IO.MemoryMappedFiles;
 using System.Runtime.InteropServices;
 using System.Runtime.Versioning;
-using System.Threading;
 
 namespace GuildWars2;
 

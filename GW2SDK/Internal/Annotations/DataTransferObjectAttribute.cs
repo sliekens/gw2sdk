@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace GuildWars2.Annotations;
+﻿namespace GuildWars2.Annotations;
 
 [AttributeUsage(AttributeTargets.Class)]
 internal sealed class DataTransferObjectAttribute : Attribute

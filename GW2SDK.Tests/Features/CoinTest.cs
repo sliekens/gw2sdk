@@ -1,7 +1,4 @@
-﻿using System;
-using Xunit;
-
-namespace GuildWars2.Tests.Features;
+﻿namespace GuildWars2.Tests.Features;
 
 public class CoinTest
 {

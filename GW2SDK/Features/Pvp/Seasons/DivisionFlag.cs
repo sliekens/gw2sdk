@@ -1,6 +1,4 @@
-﻿using JetBrains.Annotations;
-
-namespace GuildWars2.Pvp.Seasons;
+﻿namespace GuildWars2.Pvp.Seasons;
 
 [PublicAPI]
 public enum DivisionFlag

@@ -1,5 +1,4 @@
 ﻿using System.Runtime.InteropServices;
-using JetBrains.Annotations;
 
 namespace GuildWars2.Mumble;
 

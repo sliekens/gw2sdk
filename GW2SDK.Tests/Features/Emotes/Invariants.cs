@@ -1,5 +1,4 @@
 ﻿using GuildWars2.Emotes;
-using Xunit;
 
 namespace GuildWars2.Tests.Features.Emotes;
 

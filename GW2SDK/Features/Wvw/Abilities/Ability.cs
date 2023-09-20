@@ -1,8 +1,4 @@
-﻿using System.Collections.Generic;
-using GuildWars2.Annotations;
-using JetBrains.Annotations;
-
-namespace GuildWars2.Wvw.Abilities;
+﻿namespace GuildWars2.Wvw.Abilities;
 
 [PublicAPI]
 [DataTransferObject]

@@ -1,16 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Net.Http;
-using System.Runtime.CompilerServices;
-using System.Threading;
-using System.Threading.Tasks;
-using GuildWars2.Annotations;
+﻿using System.Runtime.CompilerServices;
 using GuildWars2.Commerce.Delivery;
 using GuildWars2.Commerce.Exchange;
 using GuildWars2.Commerce.Listings;
 using GuildWars2.Commerce.Prices;
 using GuildWars2.Commerce.Transactions;
-using JetBrains.Annotations;
 
 namespace GuildWars2.Commerce;
 

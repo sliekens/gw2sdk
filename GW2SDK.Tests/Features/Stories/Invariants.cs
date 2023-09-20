@@ -1,5 +1,4 @@
 ﻿using GuildWars2.Stories;
-using Xunit;
 
 namespace GuildWars2.Tests.Features.Stories;
 

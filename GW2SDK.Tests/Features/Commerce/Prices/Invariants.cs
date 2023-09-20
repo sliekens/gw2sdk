@@ -1,5 +1,4 @@
 using GuildWars2.Commerce.Prices;
-using Xunit;
 
 namespace GuildWars2.Tests.Features.Commerce.Prices;
 

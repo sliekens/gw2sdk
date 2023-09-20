@@ -1,8 +1,4 @@
-﻿using System.Collections.Generic;
-using GuildWars2.Annotations;
-using JetBrains.Annotations;
-
-namespace GuildWars2.Exploration.Adventures;
+﻿namespace GuildWars2.Exploration.Adventures;
 
 [PublicAPI]
 [DataTransferObject]

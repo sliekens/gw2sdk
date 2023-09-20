@@ -1,8 +1,6 @@
-﻿using System.Linq;
-using System.Text.Json;
+﻿using System.Text.Json;
 using GuildWars2.Crafting;
 using GuildWars2.Tests.TestInfrastructure;
-using Xunit;
 
 namespace GuildWars2.Tests.Features.Crafting;
 

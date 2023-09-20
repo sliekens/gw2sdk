@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Net.Http;
-using System.Threading;
-using System.Threading.Tasks;
-using JetBrains.Annotations;
-
-namespace GuildWars2.Quaggans;
+﻿namespace GuildWars2.Quaggans;
 
 [PublicAPI]
 public sealed class QuaggansQuery

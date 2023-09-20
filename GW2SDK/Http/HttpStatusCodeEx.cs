@@ -1,5 +1,4 @@
 ﻿using System.Net;
-using JetBrains.Annotations;
 
 namespace GuildWars2.Http;
 

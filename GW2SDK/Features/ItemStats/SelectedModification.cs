@@ -1,7 +1,4 @@
-﻿using GuildWars2.Annotations;
-using JetBrains.Annotations;
-
-namespace GuildWars2.ItemStats;
+﻿namespace GuildWars2.ItemStats;
 
 /// <summary>A combination of item attributes.</summary>
 [PublicAPI]

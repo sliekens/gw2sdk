@@ -1,5 +1,4 @@
 using GuildWars2.Colors;
-using Xunit;
 
 namespace GuildWars2.Tests.Features.Colors;
 

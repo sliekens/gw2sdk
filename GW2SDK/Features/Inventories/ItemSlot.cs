@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using GuildWars2.Annotations;
-using GuildWars2.ItemStats;
-using JetBrains.Annotations;
+﻿using GuildWars2.ItemStats;
 
 namespace GuildWars2.Inventories;
 

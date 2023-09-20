@@ -1,6 +1,4 @@
-using System.Linq;
 using GuildWars2.MailCarriers;
-using Xunit;
 
 namespace GuildWars2.Tests.Features.MailCarriers;
 

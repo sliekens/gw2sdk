@@ -1,9 +1,4 @@
-﻿using System;
-using System.Diagnostics.CodeAnalysis;
-using System.Net.Http;
-using System.Threading;
-using System.Threading.Tasks;
-using JetBrains.Annotations;
+﻿using System.Diagnostics.CodeAnalysis;
 
 namespace GuildWars2.Meta;
 

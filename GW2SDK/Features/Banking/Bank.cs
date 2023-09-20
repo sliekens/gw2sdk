@@ -1,7 +1,5 @@
-﻿using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using GuildWars2.Inventories;
-using JetBrains.Annotations;
 
 namespace GuildWars2.Banking;
 

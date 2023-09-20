@@ -1,6 +1,4 @@
-﻿using System;
-using GuildWars2.Dungeons;
-using Xunit;
+﻿using GuildWars2.Dungeons;
 
 namespace GuildWars2.Tests.Features.Dungeons;
 

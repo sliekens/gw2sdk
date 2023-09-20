@@ -1,9 +1,5 @@
-using System.Net.Http;
-using System.Threading;
-using System.Threading.Tasks;
 using GuildWars2.Meta;
 using GuildWars2.Tests.TestInfrastructure;
-using Xunit;
 
 namespace GuildWars2.Tests.Features.Meta;
 

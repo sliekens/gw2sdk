@@ -1,7 +1,4 @@
-﻿using System;
-using System.Net.Http;
-
-namespace GuildWars2.Tests.TestInfrastructure;
+﻿namespace GuildWars2.Tests.TestInfrastructure;
 
 public static class Composer
 {

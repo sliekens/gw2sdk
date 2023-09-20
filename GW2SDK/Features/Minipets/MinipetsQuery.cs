@@ -1,12 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Net.Http;
-using System.Threading;
-using System.Threading.Tasks;
-using GuildWars2.Annotations;
-using JetBrains.Annotations;
-
-namespace GuildWars2.Minipets;
+﻿namespace GuildWars2.Minipets;
 
 [PublicAPI]
 public sealed class MinipetsQuery

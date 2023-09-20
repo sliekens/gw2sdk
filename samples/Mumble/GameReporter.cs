@@ -1,8 +1,4 @@
-﻿using System;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
-using GuildWars2;
+﻿using GuildWars2;
 using GuildWars2.Mumble;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;

@@ -1,5 +1,4 @@
 ﻿using GuildWars2.Wvw.Abilities;
-using Xunit;
 
 namespace GuildWars2.Tests.Features.Wvw.Abilities;
 

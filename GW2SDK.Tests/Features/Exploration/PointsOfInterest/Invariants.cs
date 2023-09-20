@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using GuildWars2.Exploration.PointsOfInterest;
-using Xunit;
+﻿using GuildWars2.Exploration.PointsOfInterest;
 
 namespace GuildWars2.Tests.Features.Exploration.PointsOfInterest;
 

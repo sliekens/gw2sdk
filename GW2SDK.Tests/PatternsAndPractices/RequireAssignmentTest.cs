@@ -1,7 +1,5 @@
-﻿using System.Linq;
-using System.Reflection;
+﻿using System.Reflection;
 using GuildWars2.Tests.TestInfrastructure;
-using Xunit;
 
 namespace GuildWars2.Tests.PatternsAndPractices;
 

@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Net.Http;
-using System.Runtime.CompilerServices;
-using System.Threading;
-using System.Threading.Tasks;
-using GuildWars2.Annotations;
-using JetBrains.Annotations;
+﻿using System.Runtime.CompilerServices;
 
 namespace GuildWars2.Crafting;
 

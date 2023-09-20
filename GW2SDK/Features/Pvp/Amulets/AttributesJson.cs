@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text.Json;
-using JetBrains.Annotations;
+﻿using System.Text.Json;
 
 namespace GuildWars2.Pvp.Amulets;
 

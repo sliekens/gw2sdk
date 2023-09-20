@@ -1,9 +1,4 @@
-﻿using System;
-using System.Net.Http;
-using System.Threading;
-using System.Threading.Tasks;
-
-namespace GuildWars2.Tests.TestInfrastructure;
+﻿namespace GuildWars2.Tests.TestInfrastructure;
 
 internal class SchemaVersionHandler : DelegatingHandler
 {

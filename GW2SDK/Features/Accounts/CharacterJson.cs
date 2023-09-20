@@ -1,11 +1,9 @@
-﻿using System;
-using System.Text.Json;
+﻿using System.Text.Json;
 using GuildWars2.Armory;
 using GuildWars2.Crafting;
 using GuildWars2.Inventories;
 using GuildWars2.Json;
 using GuildWars2.Professions;
-using JetBrains.Annotations;
 
 namespace GuildWars2.Accounts;
 

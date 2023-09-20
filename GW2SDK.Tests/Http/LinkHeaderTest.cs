@@ -1,5 +1,4 @@
 ﻿using GuildWars2.Http;
-using Xunit;
 
 namespace GuildWars2.Tests.Http;
 

@@ -1,7 +1,4 @@
-﻿using System;
-using System.Linq;
-using GuildWars2.Wvw.Matches.Overview;
-using Xunit;
+﻿using GuildWars2.Wvw.Matches.Overview;
 
 namespace GuildWars2.Tests.Features.Wvw.Matches.Overview;
 

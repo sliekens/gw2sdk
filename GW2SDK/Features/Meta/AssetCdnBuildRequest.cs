@@ -1,10 +1,5 @@
-﻿using System;
-using System.Globalization;
-using System.Net.Http;
-using System.Threading;
-using System.Threading.Tasks;
+﻿using System.Globalization;
 using GuildWars2.Http;
-using JetBrains.Annotations;
 
 namespace GuildWars2.Meta;
 

@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Net.Http;
-using System.Threading;
-using System.Threading.Tasks;
-using JetBrains.Annotations;
-
-namespace GuildWars2.Emblems;
+﻿namespace GuildWars2.Emblems;
 
 [PublicAPI]
 public sealed class EmblemsQuery

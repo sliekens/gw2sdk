@@ -1,8 +1,4 @@
-﻿using System.Collections.Generic;
-using GuildWars2.Annotations;
-using JetBrains.Annotations;
-
-namespace GuildWars2.Achievements.Dailies;
+﻿namespace GuildWars2.Achievements.Dailies;
 
 [PublicAPI]
 [DataTransferObject]

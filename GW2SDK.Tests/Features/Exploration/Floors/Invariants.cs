@@ -1,6 +1,5 @@
 ﻿using System.Drawing;
 using GuildWars2.Exploration.Floors;
-using Xunit;
 
 namespace GuildWars2.Tests.Features.Exploration.Floors;
 

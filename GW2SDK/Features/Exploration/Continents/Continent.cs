@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Drawing;
-using GuildWars2.Annotations;
-using JetBrains.Annotations;
+﻿using System.Drawing;
 
 namespace GuildWars2.Exploration.Continents;
 

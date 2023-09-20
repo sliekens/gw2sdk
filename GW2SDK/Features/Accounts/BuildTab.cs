@@ -1,6 +1,4 @@
-﻿using GuildWars2.Annotations;
-using GuildWars2.BuildStorage;
-using JetBrains.Annotations;
+﻿using GuildWars2.BuildStorage;
 
 namespace GuildWars2.Accounts;
 

@@ -1,6 +1,4 @@
-﻿using System;
-using System.Net;
-using JetBrains.Annotations;
+﻿using System.Net;
 
 namespace GuildWars2.Http;
 

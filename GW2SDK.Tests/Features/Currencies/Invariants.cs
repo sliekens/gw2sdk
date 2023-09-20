@@ -1,5 +1,4 @@
 using GuildWars2.Currencies;
-using Xunit;
 
 namespace GuildWars2.Tests.Features.Currencies;
 

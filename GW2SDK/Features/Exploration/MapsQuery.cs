@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Net.Http;
-using System.Threading;
-using System.Threading.Tasks;
-using GuildWars2.Exploration.Charts;
+﻿using GuildWars2.Exploration.Charts;
 using GuildWars2.Exploration.Continents;
 using GuildWars2.Exploration.Floors;
 using GuildWars2.Exploration.Hearts;
@@ -12,7 +7,6 @@ using GuildWars2.Exploration.Maps;
 using GuildWars2.Exploration.PointsOfInterest;
 using GuildWars2.Exploration.Regions;
 using GuildWars2.Exploration.Sectors;
-using JetBrains.Annotations;
 
 namespace GuildWars2.Exploration;
 

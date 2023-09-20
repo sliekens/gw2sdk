@@ -1,5 +1,4 @@
 using GuildWars2.Traits;
-using Xunit;
 
 namespace GuildWars2.Tests.Features.Traits;
 

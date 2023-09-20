@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Net.Http;
-using System.Threading;
-using System.Threading.Tasks;
-using GuildWars2.Guilds.Permissions;
+﻿using GuildWars2.Guilds.Permissions;
 using GuildWars2.Guilds.Search;
 using GuildWars2.Guilds.Upgrades;
-using JetBrains.Annotations;
 
 namespace GuildWars2.Guilds;
 

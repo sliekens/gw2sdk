@@ -1,6 +1,4 @@
-﻿using System;
-using JetBrains.Annotations;
-using static System.String;
+﻿using static System.String;
 
 namespace GuildWars2;
 

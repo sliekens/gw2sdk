@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using JetBrains.Annotations;
-
-namespace GuildWars2.Items;
+﻿namespace GuildWars2.Items;
 
 [PublicAPI]
 public sealed record Backpack : Item

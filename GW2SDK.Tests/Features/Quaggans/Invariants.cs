@@ -1,6 +1,4 @@
-﻿using System;
-using GuildWars2.Quaggans;
-using Xunit;
+﻿using GuildWars2.Quaggans;
 
 namespace GuildWars2.Tests.Features.Quaggans;
 

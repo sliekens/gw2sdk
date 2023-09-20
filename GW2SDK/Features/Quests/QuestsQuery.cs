@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Net.Http;
-using System.Threading;
-using System.Threading.Tasks;
-using JetBrains.Annotations;
-
-namespace GuildWars2.Quests;
+﻿namespace GuildWars2.Quests;
 
 [PublicAPI]
 public sealed class QuestsQuery

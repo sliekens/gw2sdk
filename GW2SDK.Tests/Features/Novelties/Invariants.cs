@@ -1,6 +1,4 @@
-﻿using System;
-using GuildWars2.Novelties;
-using Xunit;
+﻿using GuildWars2.Novelties;
 
 namespace GuildWars2.Tests.Features.Novelties;
 

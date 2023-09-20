@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using JetBrains.Annotations;
-
 namespace GuildWars2.Tokens;
 
 [PublicAPI]

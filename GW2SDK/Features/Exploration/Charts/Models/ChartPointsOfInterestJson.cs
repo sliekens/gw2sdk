@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text.Json;
+﻿using System.Text.Json;
 using GuildWars2.Exploration.PointsOfInterest;
-using JetBrains.Annotations;
 
 namespace GuildWars2.Exploration.Charts;
 

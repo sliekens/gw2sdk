@@ -1,6 +1,4 @@
-using System.IO;
 using System.IO.MemoryMappedFiles;
-using Xunit;
 
 #pragma warning disable CA1416
 namespace GuildWars2.Tests.Features.Mumble;

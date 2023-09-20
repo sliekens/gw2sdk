@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using GuildWars2.Items;
+﻿using GuildWars2.Items;
 using Spectre.Console;
 
 namespace MostVersatileMaterials;

@@ -1,6 +1,5 @@
 ﻿using System.Text.Json;
 using GuildWars2.Achievements;
-using Xunit;
 
 namespace GuildWars2.Tests.Features.Achievements;
 

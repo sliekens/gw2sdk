@@ -1,9 +1,7 @@
-using System.Linq;
 using GuildWars2.Achievements;
 using GuildWars2.Achievements.Categories;
 using GuildWars2.Achievements.Groups;
 using GuildWars2.Achievements.Titles;
-using Xunit;
 
 namespace GuildWars2.Tests.Features.Achievements;
 

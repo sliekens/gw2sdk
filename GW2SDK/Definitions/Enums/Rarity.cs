@@ -1,6 +1,4 @@
-﻿using JetBrains.Annotations;
-
-namespace GuildWars2;
+﻿namespace GuildWars2;
 
 [PublicAPI]
 public enum Rarity

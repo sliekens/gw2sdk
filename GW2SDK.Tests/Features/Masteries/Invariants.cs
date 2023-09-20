@@ -1,5 +1,4 @@
 using GuildWars2.Masteries;
-using Xunit;
 
 namespace GuildWars2.Tests.Features.Masteries;
 

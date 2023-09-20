@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
+﻿using System.Drawing;
 using System.Text.Json;
 using GuildWars2.Exploration.Charts;
 using GuildWars2.Json;
-using JetBrains.Annotations;
 
 namespace GuildWars2.Exploration.Regions;
 

@@ -1,6 +1,4 @@
-﻿using JetBrains.Annotations;
-
-namespace GuildWars2.Raids;
+﻿namespace GuildWars2.Raids;
 
 [PublicAPI]
 public enum EncounterKind

@@ -1,6 +1,5 @@
 ﻿using System.Text.Json;
 using GuildWars2.Items;
-using Xunit;
 
 namespace GuildWars2.Tests.Features.Items;
 

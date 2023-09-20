@@ -1,7 +1,4 @@
-﻿using System;
-using JetBrains.Annotations;
-
-namespace GuildWars2.Mounts;
+﻿namespace GuildWars2.Mounts;
 
 [PublicAPI]
 public static class MountNameFormatter

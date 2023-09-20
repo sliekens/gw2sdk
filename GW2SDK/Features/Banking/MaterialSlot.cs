@@ -1,7 +1,4 @@
-﻿using GuildWars2.Annotations;
-using JetBrains.Annotations;
-
-namespace GuildWars2.Banking;
+﻿namespace GuildWars2.Banking;
 
 [PublicAPI]
 [DataTransferObject]

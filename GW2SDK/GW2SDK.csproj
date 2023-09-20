@@ -21,7 +21,6 @@
     <RepositoryType>git</RepositoryType>
     <ContinuousIntegrationBuild Condition="'$(GITHUB_ACTIONS)' == 'true'">true</ContinuousIntegrationBuild>
     <EmbedUntrackedSources>true</EmbedUntrackedSources>
-    <ImplicitUsings>disable</ImplicitUsings>
   </PropertyGroup>
 
   <Choose>

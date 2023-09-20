@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace GuildWars2;
+﻿namespace GuildWars2;
 
 /// <summary>A generic Subscription that delegates unsubscribe actions.</summary>
 internal class Subscription : IDisposable

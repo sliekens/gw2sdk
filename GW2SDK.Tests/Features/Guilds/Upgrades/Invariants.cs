@@ -1,5 +1,4 @@
 ﻿using GuildWars2.Guilds.Upgrades;
-using Xunit;
 
 namespace GuildWars2.Tests.Features.Guilds.Upgrades;
 

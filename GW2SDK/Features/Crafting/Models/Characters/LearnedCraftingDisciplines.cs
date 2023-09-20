@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using JetBrains.Annotations;
-
-namespace GuildWars2.Crafting;
+﻿namespace GuildWars2.Crafting;
 
 [PublicAPI]
 public sealed record LearnedCraftingDisciplines

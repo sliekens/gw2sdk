@@ -1,6 +1,3 @@
-using System;
-using System.Threading;
-using System.Threading.Tasks;
 using GuildWars2.Mumble;
 
 namespace GuildWars2.Tests.Features.Mumble;

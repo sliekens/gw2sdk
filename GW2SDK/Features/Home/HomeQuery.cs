@@ -1,11 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Net.Http;
-using System.Threading;
-using System.Threading.Tasks;
-using GuildWars2.Home.Cats;
+﻿using GuildWars2.Home.Cats;
 using GuildWars2.Home.Nodes;
-using JetBrains.Annotations;
 
 namespace GuildWars2.Home;
 
