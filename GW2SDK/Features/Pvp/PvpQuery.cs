@@ -1,4 +1,5 @@
 ﻿using GuildWars2.Pvp.Amulets;
+using GuildWars2.Pvp.Games;
 using GuildWars2.Pvp.Heroes;
 using GuildWars2.Pvp.Ranks;
 using GuildWars2.Pvp.Seasons;
@@ -348,6 +349,83 @@ public sealed class PvpQuery
         {
             PageSize = pageSize,
             Language = language,
+            MissingMemberBehavior = missingMemberBehavior
+        };
+        return request.SendAsync(http, cancellationToken);
+    }
+
+    #endregion
+
+    #region  v2/pvp/games
+
+    public Task<Replica<HashSet<Game>>> GetGames(
+        string? accessToken,
+        MissingMemberBehavior missingMemberBehavior = default,
+        CancellationToken cancellationToken = default
+    )
+    {
+        GamesRequest request = new()
+        {
+            AccessToken = accessToken,
+            MissingMemberBehavior = missingMemberBehavior
+        };
+        return request.SendAsync(http, cancellationToken);
+    }
+
+    public Task<Replica<HashSet<string>>> GetGamesIndex(
+        string? accessToken,
+        CancellationToken cancellationToken = default
+    )
+    {
+        GamesIndexRequest request = new()
+        {
+            AccessToken = accessToken
+        };
+        return request.SendAsync(http, cancellationToken);
+    }
+
+    public Task<Replica<Game>> GetGameById(
+        string gameId,
+        string? accessToken,
+        MissingMemberBehavior missingMemberBehavior = default,
+        CancellationToken cancellationToken = default
+    )
+    {
+        GameByIdRequest request = new(gameId)
+        {
+            AccessToken = accessToken,
+            MissingMemberBehavior = missingMemberBehavior
+        };
+        return request.SendAsync(http, cancellationToken);
+    }
+
+    public Task<Replica<HashSet<Game>>> GetGamesByIds(
+        IReadOnlyCollection<string> gameIds,
+        string? accessToken,
+        MissingMemberBehavior missingMemberBehavior = default,
+        CancellationToken cancellationToken = default
+    )
+    {
+        GamesByIdsRequest request = new(gameIds)
+        {
+            AccessToken = accessToken,
+            MissingMemberBehavior = missingMemberBehavior
+        };
+        return request.SendAsync(http, cancellationToken);
+    }
+
+    public Task<Replica<HashSet<Game>>> GetGamesByPage(
+        int pageIndex,
+        int? pageSize = default,
+        string? accessToken = default,
+        MissingMemberBehavior missingMemberBehavior = default,
+        CancellationToken cancellationToken = default
+    )
+    {
+        GamesByPageRequest request = new(pageIndex)
+        {
+            PageSize = pageSize,
+            AccessToken = accessToken,
             MissingMemberBehavior = missingMemberBehavior
         };
         return request.SendAsync(http, cancellationToken);
