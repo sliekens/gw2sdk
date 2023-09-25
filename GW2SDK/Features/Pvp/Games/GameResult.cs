@@ -4,5 +4,6 @@ namespace GuildWars2.Pvp.Games;
 public enum GameResult
 {
     Victory = 1,
-    Defeat
+    Defeat,
+    Forfeit
 }
