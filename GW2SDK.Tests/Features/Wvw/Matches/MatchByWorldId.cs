@@ -16,6 +16,8 @@ public class MatchByWorldId
         actual.Value.Has_id();
         actual.Value.Has_start_time();
         actual.Value.Has_end_time();
+
+        // Can fail on a Friday after reset (which is a bit odd, you'd expect no result from GetMatchByWorldId)
         actual.Value.Includes_world(worldId);
     }
 }

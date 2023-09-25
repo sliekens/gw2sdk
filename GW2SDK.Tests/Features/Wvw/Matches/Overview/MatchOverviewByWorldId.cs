@@ -11,6 +11,8 @@ public class MatchOverviewByWorldId
 
         const int worldId = 2006;
 
+        // Can fail on a Friday after reset
+        // ---> GuildWars2.Http.ResourceNotFoundException : world not currently in a match
         var actual = await sut.Wvw.GetMatchOverviewByWorldId(worldId);
 
         actual.Value.Has_id();
