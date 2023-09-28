@@ -5,5 +5,7 @@ public enum GameResult
 {
     Victory = 1,
     Defeat,
-    Forfeit
+    Bye,
+    Forfeit,
+    Desertion
 }
