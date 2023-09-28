@@ -17,6 +17,12 @@ public enum EquipmentSlot
 
     Coat,
 
+    FishingBait,
+
+    FishingLure,
+
+    FishingRod,
+
     Gloves,
 
     Helm,
@@ -27,9 +33,17 @@ public enum EquipmentSlot
 
     Pick,
 
+    PowerCore,
+
+    Relic,
+
     Ring1,
 
     Ring2,
+
+    SensoryArray,
+
+    ServiceChip,
 
     Shoulders,
 
