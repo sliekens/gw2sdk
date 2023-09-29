@@ -23,8 +23,7 @@ public static class RelicJson
         {
             if (member.NameEquals("type"))
             {
-                if (!member.Value.ValueEquals("Relic")
-                    && !member.Value.ValueEquals("Mwcc")) // Temporary value
+                if (!member.Value.ValueEquals("Relic"))
                 {
                     throw new InvalidOperationException(
                         Strings.InvalidDiscriminator(member.Value.GetString())
