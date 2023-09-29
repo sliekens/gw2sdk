@@ -33,7 +33,7 @@ You are also welcome to propose changes directly with a pull request.
 [//]:# (add links to the section below)
 [actions]:https://github.com/sliekens/gw2sdk/actions?query=workflow%3A%22Continuous+Integration%22
 [api]:https://wiki.guildwars2.com/wiki/API:Main
-[ci-badge]:https://github.com/sliekens/gw2sdk/workflows/Continuous%20Integration/badge.svg
+[ci-badge]:https://github.com/sliekens/gw2sdk/actions/workflows/ci.yml/badge.svg
 [codecov-badge]:https://codecov.io/gh/sliekens/gw2sdk/branch/main/graph/badge.svg?token=2ZTDBRWWLR
 [codecov]:https://codecov.io/gh/sliekens/gw2sdk
 [free]:https://docs.github.com/en/billing/managing-billing-for-github-codespaces/about-billing-for-github-codespaces#monthly-included-storage-and-core-hours-for-personal-accounts
