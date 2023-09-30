@@ -3,6 +3,7 @@
 public class CoinTest
 {
     [Theory]
+    [InlineData("⸻", 0)]
     [InlineData("1 copper", 1)]
     [InlineData("1 silver", 1_00)]
     [InlineData("1 gold", 1_00_00)]
@@ -22,15 +23,6 @@ public class CoinTest
         var actual = sut.ToString();
 
         Assert.Equal(expected, actual);
-    }
-
-    [Fact]
-    public void Zero_coins_is_formatted_as_long_dash()
-    {
-        Coin nil = default;
-        var actual = nil.ToString();
-
-        Assert.Equal("⸻", actual);
     }
 
     [Fact]

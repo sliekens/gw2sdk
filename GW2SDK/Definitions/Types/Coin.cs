@@ -4,7 +4,7 @@ namespace GuildWars2;
 
 /// <summary>Represents an amount of coins and provides methods to compare and convert coins to other formats.</summary>
 [PublicAPI]
-public readonly record struct Coin :  IComparable, IComparable<Coin>
+public readonly record struct Coin : IComparable, IComparable<Coin>
 {
     /// <summary>Gets the total value in copper coins.</summary>
     public readonly int Amount;
@@ -74,42 +74,111 @@ public readonly record struct Coin :  IComparable, IComparable<Coin>
 
     public override string ToString()
     {
-        var str = new StringBuilder(32);
+        if (Amount == 0)
+        {
+            return "⸻";
+        }
+
         var copper = Amount;
         var gold = copper / 1_00_00;
         copper %= 1_00_00;
         var silver = copper / 1_00;
         copper %= 1_00;
+
+        string? formattedGold = null;
+        string? formattedSilver = null;
+        string? formattedCopper = null;
+        int length = 0;
         if (gold != 0)
         {
-            str.AppendFormat("{0:N0} gold", gold);
+            formattedGold = $"{gold:N0} gold";
+            length += formattedGold.Length;
         }
 
         if (silver != 0)
         {
-            if (str.Length != 0)
+            if (length > 0)
             {
-                str.Append(", ");
+                length += 2;
             }
 
-            str.AppendFormat("{0:N0} silver", silver);
+            formattedSilver = $"{silver:N0} silver";
+            length += formattedSilver.Length;
         }
 
         if (copper != 0)
         {
+            if (length > 0)
+            {
+                length += 2;
+            }
+
+            formattedCopper = $"{copper:N0} copper";
+            length += formattedCopper.Length;
+        }
+
+#if NET
+        return string.Create(length, (formattedGold, formattedSilver, formattedCopper), (buffer, state) =>
+        {
+            var pos = 0;
+
+            if (state.formattedGold is not null)
+            {
+                state.formattedGold.AsSpan().CopyTo(buffer);
+                pos += state.formattedGold.Length;
+            }
+
+            if (state.formattedSilver is not null)
+            {
+                if (pos > 0)
+                {
+                    buffer[pos++] = ',';
+                    buffer[pos++] = ' ';
+                }
+
+                state.formattedSilver.AsSpan().CopyTo(buffer[pos..]);
+                pos += state.formattedSilver.Length;
+            }
+
+            if (state.formattedCopper is not null)
+            {
+                if (pos > 0)
+                {
+                    buffer[pos++] = ',';
+                    buffer[pos++] = ' ';
+                }
+
+                state.formattedCopper.AsSpan().CopyTo(buffer[pos..]);
+            }
+        });
+#else
+        var str = new StringBuilder(length);
+        if (formattedGold is not null)
+        {
+            str.Append(formattedGold);
+        }
+
+        if (formattedSilver is not null)
+        {
             if (str.Length != 0)
             {
                 str.Append(", ");
             }
 
-            str.AppendFormat("{0:N0} copper", copper);
+            str.Append(formattedSilver);
         }
 
-        if (str.Length == 0)
+        if (formattedCopper is not null)
         {
-            str.Append('⸻');
+            if (str.Length != 0)
+            {
+                str.Append(", ");
+            }
+
+            str.Append(formattedCopper);
         }
 
         return str.ToString();
+#endif
     }
 }
