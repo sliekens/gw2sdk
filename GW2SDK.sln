@@ -11,12 +11,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GW2SDK.TestDataHelper", "GW
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "root", "root", "{63243B77-9BE8-41CE-B2F6-B306E3F150CB}"
 	ProjectSection(SolutionItems) = preProject
+		.config\dotnet-tools.json = .config\dotnet-tools.json
 		.editorconfig = .editorconfig
 		.gitattributes = .gitattributes
-		coverletArgs.runsettings = coverletArgs.runsettings
+		coverlet.runsettings = coverlet.runsettings
 		Directory.Build.props = Directory.Build.props
 		Directory.Build.targets = Directory.Build.targets
-		.config\dotnet-tools.json = .config\dotnet-tools.json
 		global.json = global.json
 		GW2SDK.sln.DotSettings = GW2SDK.sln.DotSettings
 		nuget.config = nuget.config
