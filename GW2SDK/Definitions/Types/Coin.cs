@@ -25,14 +25,6 @@ public readonly record struct Coin :  IComparable, IComparable<Coin>
     /// <param name="amount">The total number of copper coins.</param>
     public Coin(int amount)
     {
-        if (amount < Zero.Amount)
-        {
-            throw new ArgumentOutOfRangeException(
-                nameof(amount),
-                "The amount of coins cannot be negative."
-            );
-        }
-
         Amount = amount;
     }
 

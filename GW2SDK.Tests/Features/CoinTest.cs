@@ -13,6 +13,8 @@ public class CoinTest
     [InlineData("1 gold, 2 copper", 1_00_02)]
     [InlineData("1 gold, 2 silver", 1_02_00)]
     [InlineData("1 gold, 2 silver, 3 copper", 1_02_03)]
+    [InlineData("214,748 gold, 36 silver, 47 copper", int.MaxValue)]
+    [InlineData("-214,748 gold, -36 silver, -48 copper", int.MinValue)]
     public void Coins_are_formatted_for_humans(string expected, int amount)
     {
         Coin sut = amount;
@@ -29,18 +31,6 @@ public class CoinTest
         var actual = nil.ToString();
 
         Assert.Equal("⸻", actual);
-    }
-
-    [Fact]
-    public void Number_of_coins_cannot_be_negative()
-    {
-        static void NegativeCoins()
-        {
-            // ReSharper disable once UnusedVariable
-            Coin coin = -1;
-        }
-
-        Assert.Throws<ArgumentOutOfRangeException>("amount", NegativeCoins);
     }
 
     [Fact]
@@ -155,21 +145,6 @@ public class CoinTest
         var one = three - two;
 
         Assert.Equal(1, one.Amount);
-    }
-
-    [Fact]
-    public void Coins_subtraction_cannot_result_in_negative_coins()
-    {
-        Coin three = 3;
-        Coin four = 4;
-
-        void Negative_subtraction()
-        {
-            var _ = three - four;
-        }
-
-        var reason = Assert.Throws<ArgumentOutOfRangeException>("amount", Negative_subtraction);
-        Assert.StartsWith("The amount of coins cannot be negative.", reason.Message);
     }
 
     [Fact]
