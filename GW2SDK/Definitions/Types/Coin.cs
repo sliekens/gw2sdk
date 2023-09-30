@@ -4,7 +4,7 @@ namespace GuildWars2;
 
 /// <summary>Represents an amount of coins and provides methods to compare and convert coins to other formats.</summary>
 [PublicAPI]
-public readonly struct Coin : IEquatable<Coin>, IComparable<Coin>, IComparable
+public readonly record struct Coin : IComparable<Coin>, IComparable
 {
     /// <summary>Gets the total value in copper coins.</summary>
     public readonly int Amount;
@@ -35,16 +35,6 @@ public readonly struct Coin : IEquatable<Coin>, IComparable<Coin>, IComparable
 
         Amount = amount;
     }
-
-    public bool Equals(Coin other) => Amount == other.Amount;
-
-    public override bool Equals(object? obj) => obj is Coin other && Equals(other);
-
-    public override int GetHashCode() => Amount;
-
-    public static bool operator ==(Coin left, Coin right) => left.Equals(right);
-
-    public static bool operator !=(Coin left, Coin right) => !left.Equals(right);
 
     public int CompareTo(Coin other) => Amount.CompareTo(other.Amount);
 

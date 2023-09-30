@@ -50,6 +50,13 @@ public class CoinTest
         Coin right = new(10);
 
         Assert.Equal(left, right);
+
+        // Also make sure it works with boxing
+        Assert.True(Equals(left, right));
+
+        // Also check operators
+        Assert.True(left == right);
+        Assert.False(left != right);
     }
 
     [Fact]
@@ -59,6 +66,13 @@ public class CoinTest
         Coin right = new(20);
 
         Assert.NotEqual(left, right);
+
+        // Also make sure it works with boxing
+        Assert.False(Equals(left, right));
+
+        // Also check operators
+        Assert.True(left != right);
+        Assert.False(left == right);
     }
 
     [Fact]
