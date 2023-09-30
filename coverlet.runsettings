@@ -5,10 +5,14 @@
       <DataCollector friendlyName="XPlat code coverage">
         <Configuration>
           <Include>[GW2SDK]*</Include> <!-- [Assembly-Filter]Type-Filter -->
+          <Exclude>[GW2SDK]JetBrains.Annotations.*</Exclude>
           <ExcludeByAttribute>Obsolete,GeneratedCodeAttribute,CompilerGeneratedAttribute</ExcludeByAttribute>
-          <ExcludeByFile>../**/*.generated.cs</ExcludeByFile> <!-- Absolute or relative file paths -->
+          <ExcludeByFile>**/*.generated.cs,**/*.g.cs</ExcludeByFile>
           <SingleHit>false</SingleHit>
-          <UseSourceLink>false</UseSourceLink>
+          <DeterministicReport>true</DeterministicReport>
+
+          <!-- Generates results with filename=https://raw.githubusercontent.com, making report generation super slow and network intensive. -->
+          <UseSourceLink>false</UseSourceLink> 
         </Configuration>
       </DataCollector>
     </DataCollectors>
