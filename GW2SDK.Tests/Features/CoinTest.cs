@@ -15,7 +15,7 @@ public class CoinTest
     [InlineData("1 gold, 2 silver, 3 copper", 1_02_03)]
     public void Coins_are_formatted_for_humans(string expected, int amount)
     {
-        Coin sut = new(amount);
+        Coin sut = amount;
 
         var actual = sut.ToString();
 
@@ -37,7 +37,7 @@ public class CoinTest
         static void NegativeCoins()
         {
             // ReSharper disable once UnusedVariable
-            Coin coin = new(-1);
+            Coin coin = -1;
         }
 
         Assert.Throws<ArgumentOutOfRangeException>("amount", NegativeCoins);
@@ -46,8 +46,8 @@ public class CoinTest
     [Fact]
     public void Coins_can_be_equal()
     {
-        Coin left = new(10);
-        Coin right = new(10);
+        Coin left = 10;
+        Coin right = 10;
 
         Assert.Equal(left, right);
 
@@ -62,8 +62,8 @@ public class CoinTest
     [Fact]
     public void Coins_can_be_inequal()
     {
-        Coin left = new(10);
-        Coin right = new(20);
+        Coin left = 10;
+        Coin right = 20;
 
         Assert.NotEqual(left, right);
 
@@ -78,9 +78,9 @@ public class CoinTest
     [Fact]
     public void Coins_can_be_compared()
     {
-        Coin head = new(1);
-        Coin body = new(1_00);
-        Coin tail = new(1_00_00);
+        Coin head = 1;
+        Coin body = 1_00;
+        Coin tail = 1_00_00;
 
         Assert.Equal(0, head.CompareTo(new Coin(head.Amount)));
         Assert.Equal(1, head.CompareTo(Coin.Zero));
@@ -93,30 +93,6 @@ public class CoinTest
         Assert.Equal(0, tail.CompareTo(new Coin(tail.Amount)));
         Assert.Equal(1, tail.CompareTo(body));
         Assert.Equal(-1, tail.CompareTo(new Coin(int.MaxValue)));
-    }
-
-    [Fact]
-    public void Coins_can_be_added()
-    {
-        Coin part1 = new(1);
-        Coin part2 = new(2);
-
-        var actual = part1 + part2;
-
-        Assert.Equal(3, actual.Amount);
-    }
-
-    [Fact]
-    public void Coins_cannot_be_divided_by_zero()
-    {
-        Coin dividend = new(1);
-
-        void DivideByZero()
-        {
-            var _ = dividend / Coin.Zero;
-        }
-
-        Assert.Throws<DivideByZeroException>(DivideByZero);
     }
 
     [Fact]
@@ -137,5 +113,201 @@ public class CoinTest
         var actual = sut.Amount;
 
         Assert.Equal(12_00_00, actual);
+    }
+
+    [Fact]
+    public void Coins_can_be_greater_than()
+    {
+        Coin one = 1;
+
+        Assert.True(one > Coin.Zero);
+        Assert.True(one >= Coin.Zero);
+        Assert.True(one >= +one);
+    }
+
+    [Fact]
+    public void Coins_can_be_less_than()
+    {
+        Coin one = 1;
+
+        Assert.True(Coin.Zero < one);
+        Assert.True(Coin.Zero <= one);
+        Assert.True(one <= +one);
+    }
+
+    [Fact]
+    public void Coins_can_be_added()
+    {
+        Coin one = 1;
+        Coin two = 2;
+
+        var three = one + two;
+
+        Assert.Equal(3, three.Amount);
+    }
+
+    [Fact]
+    public void Coins_can_be_subtracted()
+    {
+        Coin three = 3;
+        Coin two = 2;
+
+        var one = three - two;
+
+        Assert.Equal(1, one.Amount);
+    }
+
+    [Fact]
+    public void Coins_subtraction_cannot_result_in_negative_coins()
+    {
+        Coin three = 3;
+        Coin four = 4;
+
+        void Negative_subtraction()
+        {
+            var _ = three - four;
+        }
+
+        var reason = Assert.Throws<ArgumentOutOfRangeException>("amount", Negative_subtraction);
+        Assert.StartsWith("The amount of coins cannot be negative.", reason.Message);
+    }
+
+    [Fact]
+    public void Coins_can_be_multiplied()
+    {
+        Coin two = 2;
+        Coin three = 3;
+
+        var six = two * three;
+
+        Assert.Equal(6, six.Amount);
+    }
+
+    [Fact]
+    public void Coins_can_be_divided()
+    {
+        Coin six = 6;
+        Coin three = 3;
+
+        var two = six / three;
+
+        Assert.Equal(2, two.Amount);
+    }
+
+    [Fact]
+    public void Coins_can_be_moduloed()
+    {
+        Coin ten = 10;
+        Coin three = 3;
+
+        var one = ten % three;
+
+        Assert.Equal(1, one.Amount);
+    }
+
+    [Fact]
+    public void Coins_cannot_be_divided_by_zero()
+    {
+        Coin dividend = 1;
+
+        void DivideByZero()
+        {
+            var _ = dividend / Coin.Zero;
+        }
+
+        Assert.Throws<DivideByZeroException>(DivideByZero);
+    }
+
+    [Fact]
+    public void Coins_can_be_incremented()
+    {
+        Coin coin = 1;
+        coin++;
+
+        Assert.Equal(2, coin.Amount);
+    }
+
+    [Fact]
+    public void Coins_can_be_decremented()
+    {
+        Coin coin = 2;
+        coin--;
+
+        Assert.Equal(1, coin.Amount);
+    }
+
+    [Fact]
+    public void Coins_can_be_assigned_to_int()
+    {
+        Coin two = 2;
+        int intTwo = two;
+        Assert.Equal(2, intTwo);
+    }
+
+    [Fact]
+    public void Coins_can_be_sorted()
+    {
+        // This should test the generic IComparable<T> which prevents unnecessary boxing
+        // although there is no way to test that directly
+        var coins = new List<Coin>
+        {
+            10,
+            5,
+            20
+        };
+
+        coins.Sort();
+
+        Assert.Collection(
+            coins,
+            coin => Assert.Equal(5, coin.Amount),
+            coin => Assert.Equal(10, coin.Amount),
+            coin => Assert.Equal(20, coin.Amount)
+        );
+    }
+
+    [Fact]
+    public void Coins_can_be_sorted_when_boxed()
+    {
+        // This tests the non-generic IComparable which is used in boxing scenarios
+        var coins = new List<object>
+        {
+            new Coin(10),
+            new Coin(5),
+            new Coin(20)
+        };
+
+        coins.Sort();
+
+        Assert.Collection(
+            coins.Cast<Coin>(),
+            coin => Assert.Equal(5, coin.Amount),
+            coin => Assert.Equal(10, coin.Amount),
+            coin => Assert.Equal(20, coin.Amount)
+        );
+    }
+
+    [Fact]
+    public void Coins_can_be_sorted_after_null()
+    {
+        var sut = Coin.Zero;
+
+        var actual = sut.CompareTo(null);
+
+        Assert.Equal(1, actual);
+    }
+
+    [Fact]
+    public void Coins_cannot_be_sorted_after_other_types()
+    {
+        var sut = Coin.Zero;
+
+        void CompareToString()
+        {
+            var _ = sut.CompareTo("0");
+        }
+
+        var reason = Assert.Throws<ArgumentException>("obj", CompareToString);
+        Assert.StartsWith("Object must be of type Coin", reason.Message);
     }
 }

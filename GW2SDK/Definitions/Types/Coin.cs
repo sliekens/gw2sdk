@@ -4,7 +4,7 @@ namespace GuildWars2;
 
 /// <summary>Represents an amount of coins and provides methods to compare and convert coins to other formats.</summary>
 [PublicAPI]
-public readonly record struct Coin : IComparable<Coin>, IComparable
+public readonly record struct Coin :  IComparable, IComparable<Coin>
 {
     /// <summary>Gets the total value in copper coins.</summary>
     public readonly int Amount;
@@ -47,7 +47,7 @@ public readonly record struct Coin : IComparable<Coin>, IComparable
 
         return obj is Coin other
             ? CompareTo(other)
-            : throw new ArgumentException($"Object must be of type {nameof(Coin)}");
+            : throw new ArgumentException($"Object must be of type {nameof(Coin)}", nameof(obj));
     }
 
     public static bool operator <(Coin left, Coin right) => left.CompareTo(right) < 0;
