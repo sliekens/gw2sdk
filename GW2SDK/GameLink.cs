@@ -97,7 +97,7 @@ public sealed class GameLink : IObservable<GameTick>, IDisposable
             }
         }
 
-        return new Subscription(() => subscribers.Remove(observer));
+        return new Subscription(this, observer);
     }
 
     public GameTick GetSnapshot()
@@ -195,5 +195,20 @@ public sealed class GameLink : IObservable<GameTick>, IDisposable
 
         var link = MumbleLink.CreateOrOpen(name);
         return new GameLink(link, refreshInterval);
+    }
+
+    private class Subscription : IDisposable
+    {
+        private readonly GameLink producer;
+
+        private readonly IObserver<GameTick> observer;
+
+        public Subscription(GameLink producer, IObserver<GameTick> observer)
+        {
+            this.producer = producer;
+            this.observer = observer;
+        }
+
+        public void Dispose() => producer.subscribers.Remove(observer);
     }
 }
