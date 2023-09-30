@@ -159,6 +159,16 @@ public class CoinTest
     }
 
     [Fact]
+    public void Coins_can_be_negated()
+    {
+        Coin sut = 1_00_00;
+
+        var actual = -sut;
+        
+        Assert.Equal(-1_00_00, actual.Amount);
+    }
+
+    [Fact]
     public void Coins_can_be_divided()
     {
         Coin six = 6;
