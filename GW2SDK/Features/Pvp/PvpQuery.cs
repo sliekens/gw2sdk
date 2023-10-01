@@ -3,6 +3,7 @@ using GuildWars2.Pvp.Games;
 using GuildWars2.Pvp.Heroes;
 using GuildWars2.Pvp.Ranks;
 using GuildWars2.Pvp.Seasons;
+using GuildWars2.Pvp.Standings;
 
 namespace GuildWars2.Pvp;
 
@@ -356,7 +357,7 @@ public sealed class PvpQuery
 
     #endregion
 
-    #region  v2/pvp/games
+    #region v2/pvp/games
 
     public Task<Replica<HashSet<Game>>> GetGames(
         string? accessToken,
@@ -425,6 +426,24 @@ public sealed class PvpQuery
         GamesByPageRequest request = new(pageIndex)
         {
             PageSize = pageSize,
+            AccessToken = accessToken,
+            MissingMemberBehavior = missingMemberBehavior
+        };
+        return request.SendAsync(http, cancellationToken);
+    }
+
+    #endregion
+
+    #region v2/pvp/standings
+
+    public Task<Replica<HashSet<Standing>>> GetStandings(
+        string? accessToken,
+        MissingMemberBehavior missingMemberBehavior = default,
+        CancellationToken cancellationToken = default
+    )
+    {
+        StandingsRequest request = new()
+        {
             AccessToken = accessToken,
             MissingMemberBehavior = missingMemberBehavior
         };

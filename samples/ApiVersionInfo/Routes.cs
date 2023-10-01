@@ -130,8 +130,7 @@ internal static class Routes
         "/v2/pvp/seasons/:id/leaderboards",
         "/v2/pvp/seasons/:id/leaderboards/:board",
         "/v2/pvp/seasons/:id/leaderboards/:board/:region",
-
-        //"/v2/pvp/standings",
+        "/v2/pvp/standings",
         //"/v2/pvp/stats",
         "/v2/quaggans",
         "/v2/quests",
