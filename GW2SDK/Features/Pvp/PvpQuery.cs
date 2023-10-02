@@ -4,6 +4,7 @@ using GuildWars2.Pvp.Heroes;
 using GuildWars2.Pvp.Ranks;
 using GuildWars2.Pvp.Seasons;
 using GuildWars2.Pvp.Standings;
+using GuildWars2.Pvp.Stats;
 
 namespace GuildWars2.Pvp;
 
@@ -443,6 +444,24 @@ public sealed class PvpQuery
     )
     {
         StandingsRequest request = new()
+        {
+            AccessToken = accessToken,
+            MissingMemberBehavior = missingMemberBehavior
+        };
+        return request.SendAsync(http, cancellationToken);
+    }
+
+    #endregion
+
+    #region v2/pvp/stats
+
+    public Task<Replica<AccountStats>> GetStats(
+        string? accessToken,
+        MissingMemberBehavior missingMemberBehavior = default,
+        CancellationToken cancellationToken = default
+    )
+    {
+        StatsRequest request = new()
         {
             AccessToken = accessToken,
             MissingMemberBehavior = missingMemberBehavior

@@ -120,8 +120,7 @@ internal static class Routes
         "/v2/outfits",
         "/v2/pets",
         "/v2/professions",
-
-        //"/v2/pvp",
+        "/v2/pvp",
         "/v2/pvp/amulets",
         "/v2/pvp/games",
         "/v2/pvp/heroes",
@@ -131,7 +130,7 @@ internal static class Routes
         "/v2/pvp/seasons/:id/leaderboards/:board",
         "/v2/pvp/seasons/:id/leaderboards/:board/:region",
         "/v2/pvp/standings",
-        //"/v2/pvp/stats",
+        "/v2/pvp/stats",
         "/v2/quaggans",
         "/v2/quests",
         "/v2/races",
