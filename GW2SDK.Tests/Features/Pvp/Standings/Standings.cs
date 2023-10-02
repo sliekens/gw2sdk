@@ -1,6 +1,6 @@
 ﻿using GuildWars2.Tests.TestInfrastructure;
 
-namespace GuildWars2.Tests;
+namespace GuildWars2.Tests.Features.Pvp.Standings;
 
 public class Standings
 {
