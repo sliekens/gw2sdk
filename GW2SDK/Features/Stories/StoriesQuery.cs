@@ -157,6 +157,25 @@ public sealed class StoriesQuery
 
     #endregion
 
+    #region v2/characters/:id/backstory
+
+    public Task<Replica<CharacterBackstory>> GetCharacterBackstory(
+        string characterName,
+        string? accessToken,
+        MissingMemberBehavior missingMemberBehavior = default,
+        CancellationToken cancellationToken = default
+    )
+    {
+        CharacterBackstoryRequest request = new(characterName)
+        {
+            AccessToken = accessToken,
+            MissingMemberBehavior = missingMemberBehavior
+        };
+        return request.SendAsync(http, cancellationToken);
+    }
+
+    #endregion
+
     #region v2/stories
 
     public Task<Replica<HashSet<Story>>> GetStories(
