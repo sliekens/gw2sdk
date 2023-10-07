@@ -2,12 +2,13 @@ name: Continuous Integration
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
   pull_request:
-    branches: [ main ]
+    branches: [main]
 
 env:
   SYMBOL_PACKAGE: false
+
 jobs:
   build-and-deploy:
     name: Build and deploy
@@ -16,28 +17,33 @@ jobs:
     runs-on: ubuntu-latest
     container: ghcr.io/sliekens/gw2sdk/devcontainer:latest
     steps:
-    - name: Checkout
-      uses: actions/checkout@v3
-      with:
-        submodules: true
-    - name: Install dependencies
-      run: dotnet restore --locked-mode
-    - name: Test
-      run: dotnet test --collect:"XPlat Code Coverage" --settings coverlet.runsettings --no-restore
-      env:
-        ApiKeyBasic: ${{ secrets.API_TOKEN_BASIC }}
-        ApiKey: ${{ secrets.API_TOKEN_FULL }}
-    - name: Upload coverage to Codecov
-      uses: codecov/codecov-action@v3
-    - name: Build
-      run: dotnet build --configuration ${{ env.build-configuration }} --no-restore
-    - name: Pack artifacts
-      run: dotnet pack GW2SDK --configuration ${{ env.build-configuration }} --no-build --output artifacts --version-suffix CI-$(date --utc '+%Y%m%d-%H%M%S')
-    - name: Upload artifacts
-      uses: actions/upload-artifact@v3
-      with:
-        name: packages
-        path: artifacts
-    - name: Upload packages to GitHub Packages
-      run: dotnet nuget push artifacts/*.nupkg --source https://nuget.pkg.github.com/sliekens/index.json --api-key ${{secrets.GITHUB_TOKEN}}
-      if:  ${{ github.event_name == 'push' }}
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Install dependencies
+        run: dotnet restore --locked-mode
+
+      - name: Test
+        run: dotnet test --collect:"XPlat Code Coverage" --settings coverlet.runsettings --no-restore
+        env:
+          ApiKeyBasic: ${{ secrets.API_TOKEN_BASIC }}
+          ApiKey: ${{ secrets.API_TOKEN_FULL }}
+
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v3
+
+      - name: Build
+        run: dotnet build --configuration ${{ env.build-configuration }} --no-restore
+
+      - name: Pack artifacts
+        run: dotnet pack GW2SDK --configuration ${{ env.build-configuration }} --no-build --output artifacts --version-suffix CI-$(date --utc '+%Y%m%d-%H%M%S')
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: packages
+          path: artifacts
+
+      - name: Upload packages to GitHub Packages
+        run: dotnet nuget push artifacts/*.nupkg --source https://nuget.pkg.github.com/sliekens/index.json --api-key ${{secrets.GITHUB_TOKEN}}
+        if: ${{ github.event_name == 'push' }}
