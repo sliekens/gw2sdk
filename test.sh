@@ -10,7 +10,7 @@ rm -r GW2SDK.Tests/TestResults/* || true
 dotnet test --collect:"XPlat Code Coverage" --settings coverlet.runsettings "$@"
 
 # Remove reports from previous runs
-rm -r reports
+rm -r reports || true
 
 # Generate coverage report
 dotnet reportgenerator -reports:*/TestResults/*/coverage.cobertura.xml -targetdir:reports
