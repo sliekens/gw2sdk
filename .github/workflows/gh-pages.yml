@@ -22,4 +22,4 @@ jobs:
           git config user.name "GitHub Actions Bot"
           git config user.email "<>"
       - name: Publish docs to gh-pages
-        run: publish-docs.sh
+        run: ./publish-docs.sh
