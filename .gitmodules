@@ -1,3 +1,0 @@
-[submodule ".github/wiki"]
-	path = .github/wiki
-	url = https://github.com/StevenLiekens/gw2sdk.wiki.git
