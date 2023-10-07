@@ -341,5 +341,7 @@ healthchecksdb
 
 # vuepress build output
 .vuepress/dist
+.temp/
+.cache/
 
 reports/*
