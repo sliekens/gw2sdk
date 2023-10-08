@@ -340,8 +340,8 @@ ASALocalRun/
 healthchecksdb
 
 # vuepress build output
-.vuepress/dist
-.temp/
-.cache/
+docs/.vuepress/dist/
+docs/.vuepress/.temp/
+docs/.vuepress/.cache/
 
 reports/*
