@@ -1,3 +1,6 @@
 {
-    "dotnet.defaultSolution": "GW2SDK.sln"
+    "dotnet.defaultSolution": "GW2SDK.sln",
+    "search.exclude": {
+        "packages.lock.json": true
+    }
 }

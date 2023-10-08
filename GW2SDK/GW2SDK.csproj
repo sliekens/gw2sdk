@@ -1,4 +1,4 @@
-﻿<!--EXTERNAL_PROPERTIES: GITHUB_ACTIONS-->
+<!--EXTERNAL_PROPERTIES: GITHUB_ACTIONS-->
 <!--EXTERNAL_PROPERTIES: SYMBOL_PACKAGE-->
 <Project Sdk="Microsoft.NET.Sdk">
 
@@ -52,7 +52,7 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
-    <PackageReference Include="System.Text.Json" Version="7.0.3" />
+    <PackageReference Include="System.Text.Json" Version="8.0.0-rc.1.23419.4" />
   </ItemGroup>
 
   <!-- Reference assemblies that are not included by default in .NET Framework -->

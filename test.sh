@@ -6,7 +6,7 @@ rm -r GW2SDK.Tests/TestResults/* || true
 
 # Run tests with coverage, additional arguments are passed on to dotnet test
 # e.g. ./test.sh --filter Colors
-# e.g. ./test.sh --framework net7.0
+# e.g. ./test.sh --framework net8.0
 dotnet test --collect:"XPlat Code Coverage" --settings coverlet.runsettings "$@"
 
 # Remove reports from previous runs
