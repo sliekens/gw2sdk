@@ -19,6 +19,8 @@ concurrency:
 jobs:
   build-docs:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read # to parse Git commit history (used in page footers)
     steps:
       - name: Checkout
         uses: actions/checkout@v3
