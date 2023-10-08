@@ -28,9 +28,6 @@ jobs:
           filter: tree:0 # (treeless clone)
           fetch-depth: 0 # (no history limit)
 
-      - name: Debug
-        run: git log docs/guide/game-link.md
-
       - name: Setup Pages
         uses: actions/configure-pages@v3
 
