@@ -25,8 +25,13 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
         with:
+          fetch-depth: 0 # (no limit)
           filter: blob:none
-          fetch-depth: 0 # (no history limit)
+          sparse-checkout: |
+            docs
+            package.json
+            package-lock.json
+          fetch-tags: false
           show-progress: false
 
       - name: Setup Pages
