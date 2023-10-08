@@ -20,7 +20,7 @@ jobs:
   build-docs:
     runs-on: ubuntu-latest
     permissions:
-      contents: read # to parse Git commit history (used in page footers)
+      contents: read
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -30,8 +30,6 @@ jobs:
           sparse-checkout: |
             docs
             samples
-            package.json
-            package-lock.json
           fetch-tags: false
           show-progress: false
 
@@ -40,8 +38,8 @@ jobs:
 
       - name: Build site
         run: |
-          npm ci
-          npm run build
+          npm ci --prefix docs
+          npm run build --prefix docs
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v2
@@ -55,7 +53,6 @@ jobs:
       name: github-pages
       url: ${{steps.deployment.outputs.page_url}}
 
-    # Grant GITHUB_TOKEN the permissions required to make a Pages deployment
     permissions:
       pages: write # to deploy to Pages
       id-token: write # to verify the deployment originates from an appropriate source
