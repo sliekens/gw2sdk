@@ -2,26 +2,52 @@ name: Update GitHub Pages
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
     paths:
-    - docs/**
-    - .github/workflows/gh-pages.yml
-    - publish-docs.sh
+      - docs/**
+      - .github/workflows/gh-pages.yml
 
+  # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
+
+# Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
+# However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
 concurrency:
-  group: docs
-  cancel-in-progress: true
+  group: "pages"
+  cancel-in-progress: false
+
 jobs:
-  build:
+  build-docs:
     runs-on: ubuntu-latest
-
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout
+        uses: actions/checkout@v3
 
-      - name: setup git config
+      - name: Setup Pages
+        uses: actions/configure-pages@v3
+
+      - name: Build site
         run: |
-          git config user.name "GitHub Actions Bot"
-          git config user.email "<>"
-      - name: Publish docs to gh-pages
-        run: ./publish-docs.sh
+          npm ci
+          npm run build
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v2
+        with:
+          path: docs/.vuepress/dist
+
+  publish-docs:
+    needs: build-docs
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{steps.deployment.outputs.page_url}}
+
+    # Grant GITHUB_TOKEN the permissions required to make a Pages deployment
+    permissions:
+      pages: write # to deploy to Pages
+      id-token: write # to verify the deployment originates from an appropriate source
+    steps:
+      - name: Deploy artifact
+        id: deployment
+        uses: actions/deploy-pages@v2
