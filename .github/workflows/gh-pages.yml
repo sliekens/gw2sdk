@@ -29,6 +29,7 @@ jobs:
           filter: blob:none
           sparse-checkout: |
             docs
+            samples
             package.json
             package-lock.json
           fetch-tags: false
