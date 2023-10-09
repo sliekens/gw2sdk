@@ -1,0 +1,103 @@
+{
+  "configurations": [
+    {
+      "name": "TestDataHelper",
+      "type": "dotnet",
+      "request": "launch",
+      "projectPath": "${workspaceFolder}/GW2SDK.TestDataHelper/GW2SDK.TestDataHelper.csproj",
+      "launchConfigurationId": "TargetFramework=;GW2SDK.TestDataHelper",
+      "internalConsoleOptions": "neverOpen",
+      "presentation": {
+        "group": "helper"
+      }
+    },
+    {
+      "name": "(samples) ApiVersionInfo",
+      "type": "dotnet",
+      "request": "launch",
+      "projectPath": "${workspaceFolder}/samples/ApiVersionInfo/ApiVersionInfo.csproj",
+      "launchConfigurationId": "TargetFramework=;ApiVersionInfo",
+      "internalConsoleOptions": "neverOpen",
+      "presentation": {
+        "group": "samples"
+      }
+    },
+    {
+      "name": "(samples) BasicUsage",
+      "type": "dotnet",
+      "request": "launch",
+      "projectPath": "${workspaceFolder}/samples/BasicUsage/BasicUsage.csproj",
+      "launchConfigurationId": "TargetFramework=;BasicUsage",
+      "internalConsoleOptions": "neverOpen",
+      "presentation": {
+        "group": "samples"
+      }
+    },
+    {
+      "name": "(samples) Translations",
+      "type": "dotnet",
+      "request": "launch",
+      "projectPath": "${workspaceFolder}/samples/Translations/Translations.csproj",
+      "launchConfigurationId": "TargetFramework=;Translations",
+      "internalConsoleOptions": "neverOpen",
+      "presentation": {
+        "group": "samples"
+      }
+    },
+    {
+      "name": "(samples) HttpClientFactoryUsage",
+      "type": "dotnet",
+      "request": "launch",
+      "projectPath": "${workspaceFolder}/samples/HttpClientFactoryUsage/HttpClientFactoryUsage.csproj",
+      "launchConfigurationId": "TargetFramework=;HttpClientFactoryUsage",
+      "internalConsoleOptions": "neverOpen",
+      "presentation": {
+        "group": "samples"
+      }
+    },
+    {
+      "name": "(samples) MostVersatileMaterials",
+      "type": "dotnet",
+      "request": "launch",
+      "projectPath": "${workspaceFolder}/samples/MostVersatileMaterials/MostVersatileMaterials.csproj",
+      "launchConfigurationId": "TargetFramework=;MostVersatileMaterials",
+      "internalConsoleOptions": "neverOpen",
+      "presentation": {
+        "group": "samples"
+      }
+    },
+    {
+      "name": "(samples) PollyUsage",
+      "type": "dotnet",
+      "request": "launch",
+      "projectPath": "${workspaceFolder}/samples/PollyUsage/PollyUsage.csproj",
+      "launchConfigurationId": "TargetFramework=;PollyUsage",
+      "internalConsoleOptions": "neverOpen",
+      "presentation": {
+        "group": "samples"
+      }
+    },
+    {
+      "name": "(samples) QuagganGalleria",
+      "type": "dotnet",
+      "request": "launch",
+      "projectPath": "${workspaceFolder}/samples/QuagganGalleria/QuagganGalleria.csproj",
+      "launchConfigurationId": "TargetFramework=;QuagganGalleria",
+      "internalConsoleOptions": "neverOpen",
+      "presentation": {
+        "group": "samples"
+      }
+    },
+    {
+      "name": "(samples) Mumble",
+      "type": "dotnet",
+      "request": "launch",
+      "projectPath": "${workspaceFolder}/samples/Mumble/Mumble.csproj",
+      "launchConfigurationId": "TargetFramework=;Mumble",
+      "internalConsoleOptions": "neverOpen",
+      "presentation": {
+        "group": "samples"
+      }
+    }
+  ]
+}
