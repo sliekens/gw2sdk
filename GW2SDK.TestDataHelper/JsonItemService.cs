@@ -14,19 +14,19 @@ public class JsonItemService
     public async Task<ISet<string>> GetAllJsonItems(IProgress<ResultContext> progress)
     {
         var ids = await GetItemsIndex().ConfigureAwait(false);
-        var items = new SortedSet<string>();
-        await foreach (var item in GetJsonItemsByIds(ids, progress))
+        var entries = new SortedDictionary<int, string>();
+        await foreach (var (id, entry) in GetJsonItemsByIds(ids, progress))
         {
-            items.Add(item);
+            entries[id] = entry;
         }
 
-        return items;
+        return entries.Values.ToHashSet();
     }
 
     private async Task<HashSet<int>> GetItemsIndex() =>
         await new ItemsIndexRequest().SendAsync(http, CancellationToken.None);
 
-    public IAsyncEnumerable<string> GetJsonItemsByIds(
+    public IAsyncEnumerable<(int, string)> GetJsonItemsByIds(
         IReadOnlyCollection<int> ids,
         IProgress<ResultContext>? progress = default,
         CancellationToken cancellationToken = default
@@ -40,7 +40,7 @@ public class JsonItemService
             cancellationToken: cancellationToken
         );
 
-        async Task<IReadOnlyCollection<string>> GetChunk(IReadOnlyCollection<int> chunk, CancellationToken cancellationToken)
+        async Task<IReadOnlyCollection<(int, string)>> GetChunk(IReadOnlyCollection<int> chunk, CancellationToken cancellationToken)
         {
 
             var request = new BulkRequest("/v2/items") { Ids = chunk };
@@ -48,8 +48,7 @@ public class JsonItemService
             return json.Indent(false)
                 .RootElement.EnumerateArray()
                 .Select(
-                    item => item.ToString()
-                        ?? throw new InvalidOperationException("Unexpected null in JSON array.")
+                    item => (item.GetProperty("id").GetInt32(), item.ToString())
                 )
                 .ToList();
         }
