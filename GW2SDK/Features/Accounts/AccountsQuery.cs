@@ -1,4 +1,6 @@
-﻿namespace GuildWars2.Accounts;
+﻿using GW2SDK.Features.Accounts;
+
+namespace GuildWars2.Accounts;
 
 [PublicAPI]
 public sealed class AccountsQuery
@@ -20,6 +22,24 @@ public sealed class AccountsQuery
     )
     {
         AccountRequest request = new()
+        {
+            AccessToken = accessToken,
+            MissingMemberBehavior = missingMemberBehavior
+        };
+        return request.SendAsync(http, cancellationToken);
+    }
+
+    #endregion
+
+    #region v2/account/progression
+
+    public Task<Replica<HashSet<Progression>>> GetProgression(
+        string? accessToken,
+        MissingMemberBehavior missingMemberBehavior = default,
+        CancellationToken cancellationToken = default
+    )
+    {
+        ProgressionRequest request = new()
         {
             AccessToken = accessToken,
             MissingMemberBehavior = missingMemberBehavior

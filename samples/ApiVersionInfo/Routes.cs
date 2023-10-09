@@ -36,7 +36,7 @@ internal static class Routes
 
         //"/v2/account/novelties",
         //"/v2/account/outfits",
-        //"/v2/account/progression",
+        "/v2/account/progression",
         //"/v2/account/pvp/heroes",
         "/v2/account/raids",
         "/v2/account/recipes",
