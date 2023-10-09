@@ -1,5 +1,6 @@
 namespace GW2SDK.Features.Accounts;
 
+[PublicAPI]
 public static class ProgressionKind
 {
     public const string FractalAgonyImpedance = "fractal_agony_impedance";
