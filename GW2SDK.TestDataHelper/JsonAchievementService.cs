@@ -14,19 +14,19 @@ public class JsonAchievementService
     public async Task<ISet<string>> GetAllJsonAchievements(IProgress<ResultContext> progress)
     {
         var ids = await GetAchievementIds().ConfigureAwait(false);
-        var items = new SortedSet<string>();
-        await foreach (var item in GetJsonAchievementsByIds(ids, progress))
+        var entries = new SortedDictionary<int, string>();
+        await foreach (var (id, entry) in GetJsonAchievementsByIds(ids, progress))
         {
-            items.Add(item);
+            entries[id] = entry;
         }
 
-        return items;
+        return entries.Values.ToHashSet();
     }
 
     private async Task<HashSet<int>> GetAchievementIds() =>
         await new AchievementsIndexRequest().SendAsync(http, CancellationToken.None);
 
-    public IAsyncEnumerable<string> GetJsonAchievementsByIds(
+    public IAsyncEnumerable<(int, string)> GetJsonAchievementsByIds(
         IReadOnlyCollection<int> ids,
         IProgress<ResultContext>? progress = default,
         CancellationToken cancellationToken = default
@@ -40,15 +40,14 @@ public class JsonAchievementService
             cancellationToken: cancellationToken
         );
 
-        async Task<IReadOnlyCollection<string>> GetChunk(IReadOnlyCollection<int> chunk, CancellationToken cancellationToken)
+        async Task<IReadOnlyCollection<(int, string)>> GetChunk(IReadOnlyCollection<int> chunk, CancellationToken cancellationToken)
         {
             var request = new BulkRequest("/v2/achievements") { Ids = chunk };
             var json = await request.SendAsync(http, cancellationToken);
             return json.Indent(false)
                 .RootElement.EnumerateArray()
                 .Select(
-                    item => item.ToString()
-                        ?? throw new InvalidOperationException("Unexpected null in JSON array.")
+                    item => (item.GetProperty("id").GetInt32(), item.ToString())
                 )
                 .ToList();
         }

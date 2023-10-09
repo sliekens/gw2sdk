@@ -54,8 +54,6 @@ public class Container : IDisposable, IAsyncDisposable
             .AddPolicyHandler(Policy<HttpResponseMessage>.Handle<TimeoutRejectedException>().RetryAsync(10))
             .AddPolicyHandler(Policy.TimeoutAsync<HttpResponseMessage>(TimeSpan.FromSeconds(30), TimeoutStrategy.Optimistic))
             .AddTypedClient<JsonAchievementService>()
-            .AddTypedClient<JsonItemPriceService>()
-            .AddTypedClient<JsonOrderBookService>()
             .AddTypedClient<JsonItemService>()
             .AddTypedClient<JsonRecipeService>()
             .AddTypedClient<JsonSkinService>();

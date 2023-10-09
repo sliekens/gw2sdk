@@ -65,30 +65,6 @@ public class Program
                                 await file.WriteLineAsync(document);
                             }
                         }
-
-                        var prices = ctx.AddTask("Downloading prices.");
-                        await using (var file =
-                            CreateTextCompressed(Path.Combine(outDir, "prices.json.gz")))
-                        {
-                            var service = services.Resolve<JsonItemPriceService>();
-                            var documents = await service.GetJsonItemPrices(Update(prices));
-                            foreach (var document in documents)
-                            {
-                                await file.WriteLineAsync(document);
-                            }
-                        }
-
-                        var orders = ctx.AddTask("Downloading orders.");
-                        await using (var file =
-                            CreateTextCompressed(Path.Combine(outDir, "listings.json.gz")))
-                        {
-                            var service = services.Resolve<JsonOrderBookService>();
-                            var documents = await service.GetJsonOrderBooks(Update(orders));
-                            foreach (var document in documents)
-                            {
-                                await file.WriteLineAsync(document);
-                            }
-                        }
                     }
                 );
         }
