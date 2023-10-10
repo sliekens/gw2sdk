@@ -26,8 +26,7 @@ internal static class Routes
         "/v2/account/mailcarriers",
         "/v2/account/mapchests",
         "/v2/account/masteries",
-
-        //"/v2/account/mastery/points",
+        "/v2/account/mastery/points",
         "/v2/account/materials",
         "/v2/account/minis",
         "/v2/account/mounts",
