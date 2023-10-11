@@ -11,6 +11,8 @@ public sealed class OutfitsQuery
         http.BaseAddress ??= BaseAddress.DefaultUri;
     }
 
+    #region v2/outfits
+
     public Task<Replica<HashSet<Outfit>>> GetOutfits(
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -79,4 +81,20 @@ public sealed class OutfitsQuery
         };
         return request.SendAsync(http, cancellationToken);
     }
+
+    #endregion v2/outfits
+
+    #region v2/account/outfits
+
+    public Task<Replica<HashSet<int>>> GetUnlockedOutfitsIndex(
+        string? accessToken,
+        CancellationToken cancellationToken = default
+    )
+    {
+        UnlockedOutfitsRequest request = new() { AccessToken = accessToken };
+        return request.SendAsync(http, cancellationToken);
+    }
+
+    #endregion v2/account/outfits
+
 }
