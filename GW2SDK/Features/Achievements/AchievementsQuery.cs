@@ -33,7 +33,7 @@ public sealed class AchievementsQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    #endregion
+    #endregion v2/achievements/daily
 
     #region v2/achievements
 
@@ -153,7 +153,7 @@ public sealed class AchievementsQuery
         }
     }
 
-    #endregion
+    #endregion v2/achievements
 
     #region v2/account/achievements
 
@@ -222,7 +222,7 @@ public sealed class AchievementsQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    #endregion
+    #endregion v2/account/achievements
 
     #region v2/achievements/categories
 
@@ -295,7 +295,7 @@ public sealed class AchievementsQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    #endregion
+    #endregion v2/achievements/categories
 
     #region v2/achievements/groups
 
@@ -368,7 +368,7 @@ public sealed class AchievementsQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    #endregion
+    #endregion v2/achievements/groups
 
     #region v2/titles
 
@@ -439,5 +439,18 @@ public sealed class AchievementsQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    #endregion
+    #endregion v2/titles
+
+    #region v2/account/titles
+
+    public Task<Replica<HashSet<int>>> GetUnlockedTitlesIndex(
+        string? accessToken,
+        CancellationToken cancellationToken = default
+    )
+    {
+        UnlockedTitlesRequest request = new() { AccessToken = accessToken };
+        return request.SendAsync(http, cancellationToken);
+    }
+
+    #endregion v2/account/titles
 }
