@@ -1,6 +1,6 @@
-﻿namespace GuildWars2.Skins;
+﻿using System.Runtime.CompilerServices;
 
-// TODO: add IAsyncEnumerable helper
+namespace GuildWars2.Skins;
 
 [PublicAPI]
 public sealed class WardrobeQuery
@@ -66,6 +66,66 @@ public sealed class WardrobeQuery
             MissingMemberBehavior = missingMemberBehavior
         };
         return request.SendAsync(http, cancellationToken);
+    }
+
+    public IAsyncEnumerable<Skin> GetSkinsBulk(
+        IReadOnlyCollection<int> skinIds,
+        Language? language = default,
+        MissingMemberBehavior missingMemberBehavior = default,
+        int degreeOfParalllelism = BulkQuery.DefaultDegreeOfParalllelism,
+        int chunkSize = BulkQuery.DefaultChunkSize,
+        IProgress<ResultContext>? progress = default,
+        CancellationToken cancellationToken = default
+    )
+    {
+        return BulkQuery.QueryAsync(
+            skinIds,
+            GetChunk,
+            degreeOfParalllelism,
+            chunkSize,
+            progress,
+            cancellationToken
+        );
+
+        async Task<IReadOnlyCollection<Skin>> GetChunk(
+            IReadOnlyCollection<int> chunk,
+            CancellationToken cancellationToken
+        )
+        {
+            var result = await GetSkinsByIds(
+                chunk,
+                language,
+                missingMemberBehavior,
+                cancellationToken
+            );
+            return result.Value;
+        }
+    }
+
+    public async IAsyncEnumerable<Skin> GetSkinsBulk(
+        Language? language = default,
+        MissingMemberBehavior missingMemberBehavior = default,
+        int degreeOfParalllelism = BulkQuery.DefaultDegreeOfParalllelism,
+        int chunkSize = BulkQuery.DefaultChunkSize,
+        IProgress<ResultContext>? progress = default,
+        [EnumeratorCancellation] CancellationToken cancellationToken = default
+    )
+    {
+        var index = await GetSkinsIndex(cancellationToken).ConfigureAwait(false);
+        var producer = GetSkinsBulk(
+            index.Value,
+            language,
+            missingMemberBehavior,
+            degreeOfParalllelism,
+            chunkSize,
+            progress,
+            cancellationToken
+        );
+        await foreach (var skin in producer.WithCancellation(cancellationToken)
+            .ConfigureAwait(false))
+        {
+            yield return skin;
+        }
     }
 
     #endregion v2/skins

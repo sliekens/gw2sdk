@@ -22,7 +22,7 @@ public class SkinJson : IClassFixture<SkinFixture>
 
             var actual = document.RootElement.GetSkin(MissingMemberBehavior.Error);
 
-            actual.Id_is_positive();
+            actual.Has_id();
         }
     }
 }
