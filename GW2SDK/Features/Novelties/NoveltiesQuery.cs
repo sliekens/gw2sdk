@@ -11,6 +11,7 @@ public sealed class NoveltiesQuery
         http.BaseAddress ??= BaseAddress.DefaultUri;
     }
 
+    #region v2/novelties
     public Task<Replica<HashSet<Novelty>>> GetNovelties(
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -79,4 +80,19 @@ public sealed class NoveltiesQuery
         };
         return request.SendAsync(http, cancellationToken);
     }
+
+    #endregion v2/novelties
+
+    #region v2/account/novelties
+
+    public Task<Replica<HashSet<int>>> GetUnlockedNoveltiesIndex(
+        string? accessToken,
+        CancellationToken cancellationToken = default
+    )
+    {
+        UnlockedNoveltiesRequest request = new() { AccessToken = accessToken };
+        return request.SendAsync(http, cancellationToken);
+    }
+
+    #endregion v2/account/novelties
 }

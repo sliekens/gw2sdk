@@ -32,8 +32,7 @@ internal static class Routes
         "/v2/account/mounts",
         "/v2/account/mounts/skins",
         "/v2/account/mounts/types",
-
-        //"/v2/account/novelties",
+        "/v2/account/novelties",
         //"/v2/account/outfits",
         "/v2/account/progression",
         //"/v2/account/pvp/heroes",
