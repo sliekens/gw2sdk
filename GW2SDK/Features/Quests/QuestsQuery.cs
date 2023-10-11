@@ -11,6 +11,8 @@ public sealed class QuestsQuery
         http.BaseAddress ??= BaseAddress.DefaultUri;
     }
 
+    #region v2/quests
+
     public Task<Replica<HashSet<Quest>>> GetQuests(
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -77,4 +79,26 @@ public sealed class QuestsQuery
         };
         return request.SendAsync(http, cancellationToken);
     }
+
+    #endregion v2/quests
+
+    #region v2/characters/:id/quests
+
+    public Task<Replica<HashSet<int>>> GetCharacterQuests(
+        string characterName,
+        string? accessToken,
+        MissingMemberBehavior missingMemberBehavior = default,
+        CancellationToken cancellationToken = default
+    )
+    {
+        CharacterQuestsRequest request = new(characterName)
+        {
+            AccessToken = accessToken,
+            MissingMemberBehavior = missingMemberBehavior
+        };
+        return request.SendAsync(http, cancellationToken);
+    }
+
+    #endregion v2/characters/:id/quests
+
 }

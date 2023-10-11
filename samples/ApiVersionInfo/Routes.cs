@@ -62,8 +62,7 @@ internal static class Routes
         //"/v2/characters/:id/equipmenttabs/active",
         "/v2/characters/:id/heropoints",
         "/v2/characters/:id/inventory",
-
-        //"/v2/characters/:id/quests",
+        "/v2/characters/:id/quests",
         "/v2/characters/:id/recipes",
         "/v2/characters/:id/sab",
         "/v2/characters/:id/training",
