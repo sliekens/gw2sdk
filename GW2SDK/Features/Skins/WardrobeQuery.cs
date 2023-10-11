@@ -13,6 +13,8 @@ public sealed class WardrobeQuery
         http.BaseAddress ??= BaseAddress.DefaultUri;
     }
 
+    #region v2/skins
+
     public Task<Replica<HashSet<int>>> GetSkinsIndex(CancellationToken cancellationToken = default)
     {
         SkinsIndexRequest request = new();
@@ -65,4 +67,20 @@ public sealed class WardrobeQuery
         };
         return request.SendAsync(http, cancellationToken);
     }
+
+    #endregion v2/skins
+
+    #region v2/account/skins
+
+    public Task<Replica<HashSet<int>>> GetUnlockedSkinsIndex(
+        string? accessToken,
+        CancellationToken cancellationToken = default
+    )
+    {
+        UnlockedSkinsRequest request = new() { AccessToken = accessToken };
+        return request.SendAsync(http, cancellationToken);
+    }
+
+    #endregion v2/account/skins
+
 }

@@ -38,8 +38,7 @@ internal static class Routes
         "/v2/account/pvp/heroes",
         "/v2/account/raids",
         "/v2/account/recipes",
-
-        //"/v2/account/skins",
+        "/v2/account/skins",
         //"/v2/account/titles",
         "/v2/account/wallet",
         "/v2/account/worldbosses",
