@@ -214,6 +214,19 @@ public sealed class PvpQuery
 
     #endregion
 
+    #region v2/account/pvp/heroes
+
+    #endregion v2/account/pvp/heroes
+
+    public Task<Replica<HashSet<int>>> GetUnlockedHeroesIndex(
+        string? accessToken,
+        CancellationToken cancellationToken = default
+    )
+    {
+        UnlockedHeroesRequest request = new() { AccessToken = accessToken };
+        return request.SendAsync(http, cancellationToken);
+    }
+
     #region v2/pvp/ranks
 
     public Task<Replica<HashSet<Rank>>> GetRanks(
