@@ -11,6 +11,25 @@ public sealed class ArmoryQuery
         http.BaseAddress ??= BaseAddress.DefaultUri;
     }
 
+    #region v2/characters/:id/equipment
+
+    public Task<Replica<CharacterEquipment>> GetCharacterEquipment(
+        string characterName,
+        string? accessToken,
+        MissingMemberBehavior missingMemberBehavior = default,
+        CancellationToken cancellationToken = default
+    )
+    {
+        CharacterEquipmentRequest request = new(characterName)
+        {
+            AccessToken = accessToken,
+            MissingMemberBehavior = missingMemberBehavior
+        };
+        return request.SendAsync(http, cancellationToken);
+    }
+
+    #endregion v2/characters/:id/equipment
+
     #region v2/account/legendaryarmory
 
     public Task<Replica<HashSet<BoundLegendaryItem>>> GetBoundLegendaryItems(
@@ -24,7 +43,7 @@ public sealed class ArmoryQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    #endregion
+    #endregion v2/account/legendaryarmory
 
     #region v2/legendaryarmory
 
@@ -86,5 +105,5 @@ public sealed class ArmoryQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    #endregion
+    #endregion v2/legendaryarmory
 }
