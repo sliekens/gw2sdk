@@ -1,8 +1,7 @@
 ﻿using System.Text.Json;
-using GuildWars2.BuildStorage;
 using GuildWars2.Json;
 
-namespace GuildWars2.Accounts;
+namespace GuildWars2.BuildStorage;
 
 [PublicAPI]
 public static class BuildTabJson
@@ -13,6 +12,7 @@ public static class BuildTabJson
     )
     {
         RequiredMember<int> tab = new("tab");
+        RequiredMember<bool> isActive = new("is_active");
         RequiredMember<Build> build = new("build");
 
         foreach (var member in json.EnumerateObject())
@@ -25,12 +25,9 @@ public static class BuildTabJson
             {
                 build.Value = member.Value;
             }
-            else if (member.NameEquals("is_active"))
+            else if (member.NameEquals(isActive.Name))
             {
-                // Ignore this because you should only use ActiveBuildTab
-                // => player.BuildTabs.Single(tab => tab.Tab == player.ActiveBuildTab);
-
-                // Otherwise you have to update two objects when the active tab changes and you can't do that atomically
+                isActive.Value = member.Value;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {
@@ -41,6 +38,7 @@ public static class BuildTabJson
         return new BuildTab
         {
             Tab = tab.GetValue(),
+            IsActive = isActive.GetValue(),
             Build = build.Select(value => value.GetBuild(missingMemberBehavior))
         };
     }

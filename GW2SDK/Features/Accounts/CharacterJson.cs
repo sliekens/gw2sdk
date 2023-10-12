@@ -1,5 +1,6 @@
 ﻿using System.Text.Json;
 using GuildWars2.Armory;
+using GuildWars2.BuildStorage;
 using GuildWars2.Crafting;
 using GuildWars2.Inventories;
 using GuildWars2.Json;

@@ -11,6 +11,8 @@ public sealed record BuildStorageQuery
         http.BaseAddress ??= BaseAddress.DefaultUri;
     }
 
+    #region v2/account/buildstorage
+
     public Task<Replica<HashSet<Build>>> GetBuildStorage(
         string? accessToken,
         MissingMemberBehavior missingMemberBehavior = default,
@@ -80,4 +82,51 @@ public sealed record BuildStorageQuery
         };
         return request.SendAsync(http, cancellationToken);
     }
+
+    #endregion v2/account/buildstorage
+
+    #region v2/characters/:id/buildtabs
+
+    public Task<Replica<HashSet<int>>> GetBuildTabsIndex(
+        string characterName,
+        string? accessToken,
+        CancellationToken cancellationToken = default
+    )
+    {
+        BuildTabsIndexRequest request = new(characterName) { AccessToken = accessToken };
+        return request.SendAsync(http, cancellationToken);
+    }
+
+    public Task<Replica<BuildTab>> GetBuildTab(
+        string characterName,
+        int tab,
+        string? accessToken,
+        CancellationToken cancellationToken = default
+    )
+    {
+        BuildTabRequest request = new(characterName, tab) { AccessToken = accessToken };
+        return request.SendAsync(http, cancellationToken);
+    }
+
+    public Task<Replica<HashSet<BuildTab>>> GetBuildTabs(
+        string characterName,
+        string? accessToken,
+        CancellationToken cancellationToken = default
+    )
+    {
+        BuildTabsRequest request = new(characterName) { AccessToken = accessToken };
+        return request.SendAsync(http, cancellationToken);
+    }
+
+    public Task<Replica<BuildTab>> GetActiveBuildTab(
+        string characterName,
+        string? accessToken,
+        CancellationToken cancellationToken = default
+    )
+    {
+        ActiveBuildTabRequest request = new(characterName) { AccessToken = accessToken };
+        return request.SendAsync(http, cancellationToken);
+    }
+
+    #endregion v2/characters/:id/buildtabs
 }
