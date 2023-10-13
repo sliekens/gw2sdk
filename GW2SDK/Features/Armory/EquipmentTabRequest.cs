@@ -6,7 +6,7 @@ namespace GuildWars2.Armory;
 [PublicAPI]
 public sealed class EquipmentTabRequest : IHttpRequest<Replica<EquipmentTab>>
 {
-    private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/characters/:id/aquipmenttabs/:tab")
+    private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/characters/:id/equipmenttabs/:tab")
     {
         AcceptEncoding = "gzip"
     };
