@@ -20,6 +20,11 @@ public static class Composer
             return TestConfiguration.TestCharacter;
         }
 
+        if (serviceType == typeof(TestGuild))
+        {
+            return TestConfiguration.TestGuild;
+        }
+
         if (serviceType == typeof(ApiKeyBasic))
         {
             return TestConfiguration.ApiKeyBasic;

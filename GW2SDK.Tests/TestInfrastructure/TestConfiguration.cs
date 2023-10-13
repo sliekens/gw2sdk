@@ -45,6 +45,21 @@ public static class TestConfiguration
                 ?? throw new InvalidOperationException("Missing Character:Profession.")
             )
         };
+    public static TestGuild TestGuild =>
+        new()
+        {
+            Name =
+                Configuration["Guild:Name"]
+                ?? throw new InvalidOperationException("Missing Guild:Name."),
+
+            Tag =
+                Configuration["Guild:Tag"]
+                ?? throw new InvalidOperationException("Missing Guild:Tag."),
+
+            Id =
+                Configuration["Guild:Id"]
+                ?? throw new InvalidOperationException("Missing Guild:Id."),
+        };
 }
 
 public sealed record TestCharacter
@@ -54,6 +69,15 @@ public sealed record TestCharacter
     public required RaceName Race { get; init; }
 
     public required ProfessionName Profession { get; init; }
+}
+
+public sealed record TestGuild
+{
+    public required string Name { get; init; }
+
+    public required string Tag { get; init; }
+
+    public required string Id { get; init; }
 }
 
 public sealed record ApiKeyBasic

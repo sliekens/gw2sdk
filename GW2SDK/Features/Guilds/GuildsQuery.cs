@@ -173,4 +173,23 @@ public sealed class GuildsQuery
     }
 
     #endregion
+
+    #region v2/guild/:id
+
+    public Task<Replica<Guild>> GetGuildById(
+        string guildId,
+        string? accessToken,
+        MissingMemberBehavior missingMemberBehavior = default,
+        CancellationToken cancellationToken = default
+    )
+    {
+        GuildByIdRequest request = new(guildId)
+        {
+            AccessToken = accessToken,
+            MissingMemberBehavior = missingMemberBehavior
+        };
+        return request.SendAsync(http, cancellationToken);
+    }
+
+    #endregion
 }
