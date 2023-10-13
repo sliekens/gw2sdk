@@ -1,6 +1,6 @@
 using GuildWars2.Tests.TestInfrastructure;
 
-namespace GuildWars2.Tests.Features.BuildStorage;
+namespace GuildWars2.Tests.Features.Armory;
 
 public class CharacterEquipment
 {
