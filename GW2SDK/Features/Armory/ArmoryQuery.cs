@@ -30,6 +30,51 @@ public sealed class ArmoryQuery
 
     #endregion v2/characters/:id/equipment
 
+    #region v2/characters/:id/equipmenttabs
+
+    public Task<Replica<HashSet<int>>> GetEquipmentTabsIndex(
+        string characterName,
+        string? accessToken,
+        CancellationToken cancellationToken = default
+    )
+    {
+        EquipmentTabsIndexRequest request = new(characterName) { AccessToken = accessToken };
+        return request.SendAsync(http, cancellationToken);
+    }
+
+    public Task<Replica<EquipmentTab>> GetEquipmentTab(
+        string characterName,
+        int tab,
+        string? accessToken,
+        CancellationToken cancellationToken = default
+    )
+    {
+        EquipmentTabRequest request = new(characterName, tab) { AccessToken = accessToken };
+        return request.SendAsync(http, cancellationToken);
+    }
+
+    public Task<Replica<HashSet<EquipmentTab>>> GetEquipmentTabs(
+        string characterName,
+        string? accessToken,
+        CancellationToken cancellationToken = default
+    )
+    {
+        EquipmentTabsRequest request = new(characterName) { AccessToken = accessToken };
+        return request.SendAsync(http, cancellationToken);
+    }
+
+    public Task<Replica<EquipmentTab>> GetActiveEquipmentTab(
+        string characterName,
+        string? accessToken,
+        CancellationToken cancellationToken = default
+    )
+    {
+        ActiveEquipmentTabRequest request = new(characterName) { AccessToken = accessToken };
+        return request.SendAsync(http, cancellationToken);
+    }
+
+    #endregion v2/characters/:id/equipmenttabs
+
     #region v2/account/legendaryarmory
 
     public Task<Replica<HashSet<BoundLegendaryItem>>> GetBoundLegendaryItems(

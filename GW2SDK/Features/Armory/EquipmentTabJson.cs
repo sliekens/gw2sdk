@@ -1,8 +1,7 @@
 ﻿using System.Text.Json;
-using GuildWars2.Armory;
 using GuildWars2.Json;
 
-namespace GuildWars2.Accounts;
+namespace GuildWars2.Armory;
 
 [PublicAPI]
 public static class EquipmentTabJson
