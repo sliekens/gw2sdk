@@ -6,5 +6,5 @@ public sealed record Raid
 {
     public required string Id { get; init; }
 
-    public required IReadOnlyCollection<RaidWing> Wings { get; init; }
+    public required IReadOnlyList<RaidWing> Wings { get; init; }
 }
