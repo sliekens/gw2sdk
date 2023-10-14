@@ -15,12 +15,12 @@
   <!-- NuGet properties -->
   <PropertyGroup>
     <PackageId>GW2SDK</PackageId>
-    <Authors>Steven Liekens &amp; Contributors</Authors>
-    <Company>None</Company>
+    <Authors>Steven Liekens</Authors>
     <RepositoryUrl>https://github.com/sliekens/gw2sdk.git</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <ContinuousIntegrationBuild Condition="'$(GITHUB_ACTIONS)' == 'true'">true</ContinuousIntegrationBuild>
     <EmbedUntrackedSources>true</EmbedUntrackedSources>
+    <VersionPrefix>1.0.0</VersionPrefix>
   </PropertyGroup>
 
   <Choose>
