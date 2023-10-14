@@ -26,7 +26,7 @@ public static class LeaderboardTierRangeJson
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {
-                throw new InvalidOperationException(Strings.UnexpectedMember(json.GetRawText()));
+                throw new InvalidOperationException(Strings.UnexpectedArrayLength(json.GetArrayLength()));
             }
         }
 
