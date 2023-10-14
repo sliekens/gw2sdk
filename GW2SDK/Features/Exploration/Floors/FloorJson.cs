@@ -1,7 +1,7 @@
 ﻿using System.Drawing;
 using System.Text.Json;
+using GuildWars2.Exploration.Regions;
 using GuildWars2.Json;
-using GeoRegion = GuildWars2.Exploration.Regions.Region;
 
 namespace GuildWars2.Exploration.Floors;
 
@@ -12,7 +12,7 @@ public static class FloorJson
     {
         RequiredMember<Size> textureDimensions = new("texture_dims");
         OptionalMember<Rectangle> clampedView = new("clamped_view");
-        RequiredMember<Dictionary<int, GeoRegion>> regions = new("regions");
+        RequiredMember<Dictionary<int, Region>> regions = new("regions");
         RequiredMember<int> id = new("id");
         foreach (var member in json.EnumerateObject())
         {
@@ -44,7 +44,10 @@ public static class FloorJson
             TextureDimensions =
                 textureDimensions.Select(value => value.GetDimensions(missingMemberBehavior)),
             ClampedView = clampedView.Select(value => value.GetContinentRectangle(missingMemberBehavior)),
-            Regions = regions.Select(value => value.GetFloorRegions(missingMemberBehavior))
+            Regions = regions.Select(
+                value => value.GetMap(entry => entry.GetRegion(missingMemberBehavior))
+                    .ToDictionary(kvp => int.Parse(kvp.Key), kvp => kvp.Value)
+            ),
         };
     }
 }
