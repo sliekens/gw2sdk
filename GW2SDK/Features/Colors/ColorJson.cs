@@ -8,9 +8,13 @@ public static class ColorJson
 {
     public static Color GetColor(this JsonElement value)
     {
-        if (value.GetArrayLength() != 3)
+        if (value.GetArrayLength() < 3)
         {
             throw new InvalidOperationException($"Missing RGB value.");
+        }
+        else if (value.GetArrayLength() > 3)
+        {
+            throw new InvalidOperationException($"Unexpected RGB value.");
         }
 
         var red = value[0].GetInt32();
