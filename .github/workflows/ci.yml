@@ -16,7 +16,7 @@ jobs:
     env:
       build-configuration: Release
     runs-on: ubuntu-latest
-    # container: ghcr.io/sliekens/gw2sdk/devcontainer:latest
+    container: ghcr.io/sliekens/gw2sdk/devcontainer:latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -25,12 +25,11 @@ jobs:
           # Not supported by Source Link https://github.com/dotnet/sourcelink/issues/1111
           # filter: tree:0
 
-      - uses: actions/setup-dotnet@v3
-        with:
-          dotnet-version: '8.0'
+      - run: tree /__w/
 
       - name: Install dependencies
         run: dotnet restore --locked-mode
+
 
       # - name: Test
       #   run: dotnet test --collect:"XPlat Code Coverage" --settings coverlet.runsettings --no-restore
