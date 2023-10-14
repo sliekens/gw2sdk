@@ -11,16 +11,16 @@ public static class LevelRequirementJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember<int> min = new("min");
-        RequiredMember<int> max = new("max");
+        RequiredMember<int> min = new("[0]");
+        RequiredMember<int> max = new("[1]");
 
         foreach (var entry in json.EnumerateArray())
         {
-            if (min.IsMissing)
+            if (min.IsUndefined)
             {
                 min.Value = entry;
             }
-            else if (max.IsMissing)
+            else if (max.IsUndefined)
             {
                 max.Value = entry;
             }

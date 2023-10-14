@@ -12,21 +12,21 @@ public static class ColorJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember<int> red = new("red");
-        RequiredMember<int> green = new("green");
-        RequiredMember<int> blue = new("blue");
+        RequiredMember<int> red = new("[0]");
+        RequiredMember<int> green = new("[1]");
+        RequiredMember<int> blue = new("[2]");
 
         foreach (var entry in json.EnumerateArray())
         {
-            if (red.IsMissing)
+            if (red.IsUndefined)
             {
                 red.Value = entry;
             }
-            else if (green.IsMissing)
+            else if (green.IsUndefined)
             {
                 green.Value = entry;
             }
-            else if (blue.IsMissing)
+            else if (blue.IsUndefined)
             {
                 blue.Value = entry;
             }

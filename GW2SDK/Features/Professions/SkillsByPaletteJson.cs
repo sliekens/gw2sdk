@@ -29,11 +29,11 @@ public static class SkillsByPaletteJson
 
             foreach (var keyOrValue in entry.EnumerateArray())
             {
-                if (key.IsMissing)
+                if (key.IsUndefined)
                 {
                     key.Value = keyOrValue;
                 }
-                else if (value.IsMissing)
+                else if (value.IsUndefined)
                 {
                     value.Value = keyOrValue;
                 }

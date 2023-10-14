@@ -16,11 +16,11 @@ public static class LeaderboardTierRangeJson
 
         foreach (var member in json.EnumerateArray())
         {
-            if (max.IsMissing)
+            if (max.IsUndefined)
             {
                 max.Value = member;
             }
-            else if (min.IsMissing)
+            else if (min.IsUndefined)
             {
                 min.Value = member;
             }
