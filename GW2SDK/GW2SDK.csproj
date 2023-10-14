@@ -21,6 +21,7 @@
     <ContinuousIntegrationBuild Condition="'$(GITHUB_ACTIONS)' == 'true'">true</ContinuousIntegrationBuild>
     <EmbedUntrackedSources>true</EmbedUntrackedSources>
     <VersionPrefix>1.0.0</VersionPrefix>
+    <EnablePackageValidation>true</EnablePackageValidation>
   </PropertyGroup>
 
   <Choose>
