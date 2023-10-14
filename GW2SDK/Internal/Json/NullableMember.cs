@@ -44,7 +44,7 @@ internal ref struct NullableMember<T> where T : struct
         }
     }
 
-    internal IReadOnlyCollection<T?> SelectMany(Func<JsonElement, T?> resultSelector)
+    internal IReadOnlyList<T?> SelectMany(Func<JsonElement, T?> resultSelector)
     {
         if (IsMissing)
         {

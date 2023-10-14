@@ -43,7 +43,7 @@ internal ref struct OptionalMember<T>
         }
     }
 
-    internal IReadOnlyCollection<T>? SelectMany(Func<JsonElement, T> resultSelector)
+    internal IReadOnlyList<T>? SelectMany(Func<JsonElement, T> resultSelector)
     {
         if (IsMissing)
         {
