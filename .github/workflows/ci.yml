@@ -25,6 +25,7 @@ jobs:
           # Not supported by Source Link https://github.com/dotnet/sourcelink/issues/1111
           # filter: tree:0
 
+      - run: git config --global --list
       - run: git log
       - run: tree /__w/
 
