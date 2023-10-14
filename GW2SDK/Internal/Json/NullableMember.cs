@@ -8,7 +8,9 @@ internal ref struct NullableMember<T> where T : struct
 {
     public JsonElement Value = default;
 
-    public bool IsMissing => Value.ValueKind is Null or Undefined;
+    public readonly bool IsUndefined => Value.ValueKind == Undefined;
+
+    public readonly bool IsMissing => Value.ValueKind is Null or Undefined;
 
 #if !NET // Because there is no implicit cast from String to ReadOnlySpan
     internal NullableMember(string name)
