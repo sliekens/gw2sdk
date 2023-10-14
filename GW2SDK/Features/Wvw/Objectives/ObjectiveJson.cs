@@ -1,4 +1,5 @@
 ﻿using System.Drawing;
+using System.Numerics;
 using System.Text.Json;
 using GuildWars2.Json;
 
@@ -19,7 +20,7 @@ public static class ObjectiveJson
         RequiredMember<MapKind> mapType = new("map_type");
         RequiredMember<int> mapId = new("map_id");
         NullableMember<int> upgradeId = new("upgrade_id");
-        OptionalMember<double> coordinates = new("coord");
+        OptionalMember<Vector3> coordinates = new("coord");
         NullableMember<PointF> labelCoordinates = new("label_coord");
         OptionalMember<string> marker = new("marker");
         RequiredMember<string> chatLink = new("chat_link");
@@ -85,9 +86,9 @@ public static class ObjectiveJson
             MapKind = mapType.GetValue(missingMemberBehavior),
             MapId = mapId.GetValue(),
             UpgradeId = upgradeId.GetValue(),
-            Coordinates = coordinates.SelectMany(value => value.GetDouble()),
+            Coordinates = coordinates.Select(value => value.GetCoordinate3(missingMemberBehavior)),
             LabelCoordinates =
-                labelCoordinates.Select(value => value.GetLabelCoordinate(missingMemberBehavior)),
+                labelCoordinates.Select(value => value.GetCoordinateF(missingMemberBehavior)),
             MarkerHref = marker.GetValueOrEmpty(),
             ChatLink = chatLink.GetValue()
         };

@@ -1,4 +1,5 @@
 ﻿using System.Drawing;
+using System.Numerics;
 
 namespace GuildWars2.Wvw.Objectives;
 
@@ -20,7 +21,7 @@ public sealed record Objective
 
     public required int? UpgradeId { get; init; }
 
-    public required IReadOnlyCollection<double>? Coordinates { get; init; }
+    public required Vector3? Coordinates { get; init; }
 
     public required PointF? LabelCoordinates { get; init; }
 
