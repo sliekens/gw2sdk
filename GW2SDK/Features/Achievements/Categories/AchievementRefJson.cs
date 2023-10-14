@@ -46,7 +46,7 @@ public static class AchievementRefJson
             RequiredAccess =
                 requiredAccess.Select(value => value.GetProductRequirement(missingMemberBehavior)),
             Flags = flags.GetValues(missingMemberBehavior),
-            Level = level.Select(value => value.GetLevelRequirement(missingMemberBehavior))
+            Level = level.Select(value => value.GetLevelRequirement())
         };
     }
 }
