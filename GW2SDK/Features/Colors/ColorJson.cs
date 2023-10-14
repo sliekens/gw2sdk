@@ -1,25 +1,45 @@
 ﻿using System.Drawing;
 using System.Text.Json;
+using GuildWars2.Json;
 
 namespace GuildWars2.Colors;
 
 [PublicAPI]
 public static class ColorJson
 {
-    public static Color GetColor(this JsonElement json)
+    public static Color GetColor(
+        this JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
-        if (json.GetArrayLength() < 3)
+        RequiredMember<int> red = new("red");
+        RequiredMember<int> green = new("green");
+        RequiredMember<int> blue = new("blue");
+
+        foreach (var entry in json.EnumerateArray())
         {
-            throw new InvalidOperationException($"Missing RGB value.");
-        }
-        else if (json.GetArrayLength() > 3)
-        {
-            throw new InvalidOperationException($"Unexpected RGB value.");
+            if (red.IsMissing)
+            {
+                red.Value = entry;
+            }
+            else if (green.IsMissing)
+            {
+                green.Value = entry;
+            }
+            else if (blue.IsMissing)
+            {
+                blue.Value = entry;
+            }
+            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            {
+                throw new InvalidOperationException(Strings.UnexpectedArrayLength(json.GetArrayLength()));
+            }
         }
 
-        var red = json[0].GetInt32();
-        var green = json[1].GetInt32();
-        var blue = json[2].GetInt32();
-        return Color.FromArgb(red, green, blue);
+        return Color.FromArgb(
+            red.GetValue(),
+            green.GetValue(),
+            blue.GetValue()
+        );
     }
 }

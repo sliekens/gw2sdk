@@ -58,7 +58,7 @@ public static class ColorInfoJson
             Hue = hue.GetValue(),
             Saturation = saturation.GetValue(),
             Lightness = lightness.GetValue(),
-            Rgb = rgb.Select(value => value.GetColor())
+            Rgb = rgb.Select(value => value.GetColor(missingMemberBehavior))
         };
     }
 }
