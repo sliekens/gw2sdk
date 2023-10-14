@@ -6,12 +6,13 @@ namespace GuildWars2.Colors;
 [PublicAPI]
 public static class ColorJson
 {
-    public static Color GetColor(
-        this JsonElement value,
-        MissingMemberBehavior missingMemberBehavior
-    )
+    public static Color GetColor(this JsonElement value)
     {
-        // TODO: use MissingMemberBehavior
+        if (value.GetArrayLength() != 3)
+        {
+            throw new InvalidOperationException($"Missing RGB value.");
+        }
+
         var red = value[0].GetInt32();
         var green = value[1].GetInt32();
         var blue = value[2].GetInt32();

@@ -67,7 +67,7 @@ public static class DyeJson
         {
             Id = id.GetValue(),
             Name = name.GetValue(),
-            BaseRgb = baseRgb.Select(value => value.GetColor(missingMemberBehavior)),
+            BaseRgb = baseRgb.Select(value => value.GetColor()),
             Cloth = cloth.Select(value => value.GetColorInfo(missingMemberBehavior)),
             Leather = leather.Select(value => value.GetColorInfo(missingMemberBehavior)),
             Metal = metal.Select(value => value.GetColorInfo(missingMemberBehavior)),
