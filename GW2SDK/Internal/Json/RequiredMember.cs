@@ -9,7 +9,7 @@ internal ref struct RequiredMember<T>
 
     public readonly bool IsUndefined => Value.ValueKind == Undefined;
 
-    public readonly bool IsMissing => Value.ValueKind is Null or Undefined;
+    public readonly bool IsUndefinedOrNull => IsUndefined || Value.ValueKind == Null;
 
 #if !NET // Because there is no implicit cast from String to ReadOnlySpan
     internal RequiredMember(string name)
@@ -27,7 +27,7 @@ internal ref struct RequiredMember<T>
 
     internal T Select(Func<JsonElement, T> resultSelector)
     {
-        if (IsMissing)
+        if (IsUndefinedOrNull)
         {
             throw new InvalidOperationException($"Missing value for '{Name.ToString()}'.");
         }
@@ -47,7 +47,7 @@ internal ref struct RequiredMember<T>
 
     internal IReadOnlyList<T> SelectMany(Func<JsonElement, T> resultSelector)
     {
-        if (IsMissing)
+        if (IsUndefinedOrNull)
         {
             throw new InvalidOperationException($"Missing value for '{Name.ToString()}'.");
         }

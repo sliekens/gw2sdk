@@ -10,7 +10,7 @@ internal ref struct NullableMember<T> where T : struct
 
     public readonly bool IsUndefined => Value.ValueKind == Undefined;
 
-    public readonly bool IsMissing => Value.ValueKind is Null or Undefined;
+    public readonly bool IsUndefinedOrNull => IsUndefined || Value.ValueKind == Null;
 
 #if !NET // Because there is no implicit cast from String to ReadOnlySpan
     internal NullableMember(string name)
@@ -28,7 +28,7 @@ internal ref struct NullableMember<T> where T : struct
 
     internal T? Select(Func<JsonElement, T?> resultSelector)
     {
-        if (IsMissing)
+        if (IsUndefinedOrNull)
         {
             return default;
         }
@@ -48,7 +48,7 @@ internal ref struct NullableMember<T> where T : struct
 
     internal IReadOnlyList<T?> SelectMany(Func<JsonElement, T?> resultSelector)
     {
-        if (IsMissing)
+        if (IsUndefinedOrNull)
         {
             return Array.Empty<T?>();
         }
