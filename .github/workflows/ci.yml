@@ -23,7 +23,7 @@ jobs:
         with:
           fetch-depth: 0 # (no history limit)
           # Not supported by Source Link / MinVer
-          # filter: tree:0
+          filter: tree:0
 
       - uses: actions/setup-dotnet@v3
         with:
