@@ -24,23 +24,23 @@ jobs:
           fetch-depth: 0 # (no history limit)
           # Not supported by Source Link https://github.com/dotnet/sourcelink/issues/1111
           # filter: tree:0
-      - run: git config --global safe.directory '*'
-      - run: git config --global --list
-      - run: git log
-      - run: tree /__w/
+        
+      # Allow git to be used in the container without complaining about ownership of the repository
+      # Otherwise MinVer won't be able to determine the version from git history
+      - name: Disable git ownership checks
+        run: git config --global safe.directory '*'
 
       - name: Install dependencies
         run: dotnet restore --locked-mode
 
+      - name: Test
+        run: dotnet test --collect:"XPlat Code Coverage" --settings coverlet.runsettings --no-restore
+        env:
+          ApiKeyBasic: ${{ secrets.API_TOKEN_BASIC }}
+          ApiKey: ${{ secrets.API_TOKEN_FULL }}
 
-      # - name: Test
-      #   run: dotnet test --collect:"XPlat Code Coverage" --settings coverlet.runsettings --no-restore
-      #   env:
-      #     ApiKeyBasic: ${{ secrets.API_TOKEN_BASIC }}
-      #     ApiKey: ${{ secrets.API_TOKEN_FULL }}
-
-      # - name: Upload coverage to Codecov
-      #   uses: codecov/codecov-action@v3
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v3
 
       - name: Build
         run: dotnet build --configuration ${{ env.build-configuration }} --no-restore
