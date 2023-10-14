@@ -10,8 +10,8 @@ public static class FloorJson
 {
     public static Floor GetFloor(this JsonElement json, MissingMemberBehavior missingMemberBehavior)
     {
-        RequiredMember<SizeF> textureDimensions = new("texture_dims");
-        OptionalMember<Area> clampedView = new("clamped_view");
+        RequiredMember<Size> textureDimensions = new("texture_dims");
+        OptionalMember<Rectangle> clampedView = new("clamped_view");
         RequiredMember<Dictionary<int, GeoRegion>> regions = new("regions");
         RequiredMember<int> id = new("id");
         foreach (var member in json.EnumerateObject())
@@ -43,7 +43,7 @@ public static class FloorJson
             Id = id.GetValue(),
             TextureDimensions =
                 textureDimensions.Select(value => value.GetDimensions(missingMemberBehavior)),
-            ClampedView = clampedView.Select(value => value.GetArea(missingMemberBehavior)),
+            ClampedView = clampedView.Select(value => value.GetContinentRectangle(missingMemberBehavior)),
             Regions = regions.Select(value => value.GetFloorRegions(missingMemberBehavior))
         };
     }

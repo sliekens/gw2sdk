@@ -1,11 +1,10 @@
 ﻿using System.Globalization;
 using GuildWars2.Http;
-using GuildWars2.Json;
 
-namespace GuildWars2.Exploration.Charts;
+namespace GuildWars2.Exploration.Maps;
 
 [PublicAPI]
-public sealed class ChartsByIdsRequest : IHttpRequest<Replica<HashSet<Chart>>>
+public sealed class MapByIdRequest : IHttpRequest<Replica<Map>>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/continents/:id/floors/:floor/regions/:region/maps")
@@ -13,18 +12,12 @@ public sealed class ChartsByIdsRequest : IHttpRequest<Replica<HashSet<Chart>>>
             AcceptEncoding = "gzip"
         };
 
-    public ChartsByIdsRequest(
-        int continentId,
-        int floorId,
-        int regionId,
-        IReadOnlyCollection<int> mapIds
-    )
+    public MapByIdRequest(int continentId, int floorId, int regionId, int mapId)
     {
-        Check.Collection(mapIds);
         ContinentId = continentId;
         FloorId = floorId;
         RegionId = regionId;
-        MapIds = mapIds;
+        MapId = mapId;
     }
 
     public int ContinentId { get; }
@@ -33,13 +26,13 @@ public sealed class ChartsByIdsRequest : IHttpRequest<Replica<HashSet<Chart>>>
 
     public int RegionId { get; }
 
-    public IReadOnlyCollection<int> MapIds { get; }
+    public int MapId { get; }
 
     public Language? Language { get; init; }
 
     public MissingMemberBehavior MissingMemberBehavior { get; init; }
 
-    public async Task<Replica<HashSet<Chart>>> SendAsync(
+    public async Task<Replica<Map>> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
     )
@@ -53,7 +46,7 @@ public sealed class ChartsByIdsRequest : IHttpRequest<Replica<HashSet<Chart>>>
                         .Replace(":region", RegionId.ToString(CultureInfo.InvariantCulture)),
                     Arguments = new QueryBuilder
                     {
-                        { "ids", MapIds },
+                        { "id", MapId },
                         { "v", SchemaVersion.Recommended }
                     },
                     AcceptLanguage = Language?.Alpha2Code
@@ -66,9 +59,9 @@ public sealed class ChartsByIdsRequest : IHttpRequest<Replica<HashSet<Chart>>>
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
-        return new Replica<HashSet<Chart>>
+        return new Replica<Map>
         {
-            Value = json.RootElement.GetSet(entry => entry.GetChart(MissingMemberBehavior)),
+            Value = json.RootElement.GetMap(MissingMemberBehavior),
             ResultContext = response.Headers.GetResultContext(),
             PageContext = response.Headers.GetPageContext(),
             Date = response.Headers.Date.GetValueOrDefault(),

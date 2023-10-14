@@ -1,24 +1,39 @@
-﻿using GuildWars2.Http;
+﻿using System.Globalization;
+using GuildWars2.Http;
 using GuildWars2.Json;
 
 namespace GuildWars2.Exploration.Maps;
 
 [PublicAPI]
-public sealed class MapsByPageRequest : IHttpRequest<Replica<HashSet<Map>>>
+public sealed class MapsByIdsRequest : IHttpRequest<Replica<HashSet<Map>>>
 {
-    private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/maps")
-    {
-        AcceptEncoding = "gzip"
-    };
+    private static readonly HttpRequestMessageTemplate Template =
+        new(Get, "v2/continents/:id/floors/:floor/regions/:region/maps")
+        {
+            AcceptEncoding = "gzip"
+        };
 
-    public MapsByPageRequest(int pageIndex)
+    public MapsByIdsRequest(
+        int continentId,
+        int floorId,
+        int regionId,
+        IReadOnlyCollection<int> mapIds
+    )
     {
-        PageIndex = pageIndex;
+        Check.Collection(mapIds);
+        ContinentId = continentId;
+        FloorId = floorId;
+        RegionId = regionId;
+        MapIds = mapIds;
     }
 
-    public int PageIndex { get; }
+    public int ContinentId { get; }
 
-    public int? PageSize { get; init; }
+    public int FloorId { get; }
+
+    public int RegionId { get; }
+
+    public IReadOnlyCollection<int> MapIds { get; }
 
     public Language? Language { get; init; }
 
@@ -29,17 +44,18 @@ public sealed class MapsByPageRequest : IHttpRequest<Replica<HashSet<Map>>>
         CancellationToken cancellationToken
     )
     {
-        QueryBuilder search = new() { { "page", PageIndex } };
-        if (PageSize.HasValue)
-        {
-            search.Add("page_size", PageSize.Value);
-        }
-
-        search.Add("v", SchemaVersion.Recommended);
         using var response = await httpClient.SendAsync(
                 Template with
                 {
-                    Arguments = search,
+                    Path = Template.Path
+                        .Replace(":id", ContinentId.ToString(CultureInfo.InvariantCulture))
+                        .Replace(":floor", FloorId.ToString(CultureInfo.InvariantCulture))
+                        .Replace(":region", RegionId.ToString(CultureInfo.InvariantCulture)),
+                    Arguments = new QueryBuilder
+                    {
+                        { "ids", MapIds },
+                        { "v", SchemaVersion.Recommended }
+                    },
                     AcceptLanguage = Language?.Alpha2Code
                 },
                 HttpCompletionOption.ResponseHeadersRead,

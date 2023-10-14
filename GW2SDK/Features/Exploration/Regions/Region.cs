@@ -1,5 +1,5 @@
 ﻿using System.Drawing;
-using GuildWars2.Exploration.Charts;
+using GuildWars2.Exploration.Maps;
 
 namespace GuildWars2.Exploration.Regions;
 
@@ -11,9 +11,9 @@ public sealed record Region
 
     public required string Name { get; init; }
 
-    public required PointF LabelCoordinates { get; init; }
+    public required Point LabelCoordinates { get; init; }
 
-    public required Area ContinentRectangle { get; init; }
+    public required Rectangle ContinentRectangle { get; init; }
 
-    public required Dictionary<int, Chart> Maps { get; init; }
+    public required Dictionary<int, Map> Maps { get; init; }
 }

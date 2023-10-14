@@ -2,10 +2,10 @@
 using GuildWars2.Http;
 using GuildWars2.Json;
 
-namespace GuildWars2.Exploration.Charts;
+namespace GuildWars2.Exploration.Maps;
 
 [PublicAPI]
-public sealed class ChartsIndexRequest : IHttpRequest<Replica<HashSet<int>>>
+public sealed class MapsIndexRequest : IHttpRequest<Replica<HashSet<int>>>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/continents/:id/floors/:floor/regions/:region/maps")
@@ -14,7 +14,7 @@ public sealed class ChartsIndexRequest : IHttpRequest<Replica<HashSet<int>>>
             Arguments = new QueryBuilder { { "v", SchemaVersion.Recommended } }
         };
 
-    public ChartsIndexRequest(int continentId, int floorId, int regionId)
+    public MapsIndexRequest(int continentId, int floorId, int regionId)
     {
         ContinentId = continentId;
         FloorId = floorId;

@@ -2,17 +2,14 @@
 
 namespace GuildWars2.Tests.Features.Exploration.Maps;
 
-public class MapsIndex
+public class MapSummariesIndex
 {
-    [Theory]
-    [InlineData(1, 0, 1)]
-    [InlineData(1, 0, 2)]
-    [InlineData(1, 0, 3)]
-    public async Task Can_be_listed(int continentId, int floorId, int regionId)
+    [Fact]
+    public async Task Can_be_listed()
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        var actual = await sut.Maps.GetMapsIndex(continentId, floorId, regionId);
+        var actual = await sut.Maps.GetMapSummariesIndex();
 
         Assert.NotEmpty(actual.Value);
         Assert.Equal(actual.Value.Count, actual.ResultContext.ResultCount);

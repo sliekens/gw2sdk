@@ -7,11 +7,11 @@ using GuildWars2.Exploration.MasteryPoints;
 using GuildWars2.Exploration.PointsOfInterest;
 using GuildWars2.Exploration.Sectors;
 
-namespace GuildWars2.Exploration.Charts;
+namespace GuildWars2.Exploration.Maps;
 
 [PublicAPI]
 [DataTransferObject]
-public sealed record Chart
+public sealed record Map
 {
     public required int Id { get; init; }
 
@@ -23,11 +23,14 @@ public sealed record Chart
 
     public required int DefaultFloor { get; init; }
 
-    public required PointF? LabelCoordinates { get; init; }
+    public required Point? LabelCoordinates { get; init; }
 
-    public required MapArea ChartRectangle { get; init; }
+    /// <summary>The dimensions of a map.</summary>
+    public required Rectangle MapRectangle { get; init; }
 
-    public required Area ContinentRectangle { get; init; }
+
+    /// <summary>The dimensions of a map within the continent coordinate system.</summary>
+    public required Rectangle ContinentRectangle { get; init; }
 
     public required Dictionary<int, PointOfInterest> PointsOfInterest { get; init; }
 

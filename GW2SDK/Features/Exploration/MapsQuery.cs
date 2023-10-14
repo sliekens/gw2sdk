@@ -1,5 +1,4 @@
-﻿using GuildWars2.Exploration.Charts;
-using GuildWars2.Exploration.Continents;
+﻿using GuildWars2.Exploration.Continents;
 using GuildWars2.Exploration.Floors;
 using GuildWars2.Exploration.Hearts;
 using GuildWars2.Exploration.HeroChallenges;
@@ -276,7 +275,7 @@ public sealed class MapsQuery
 
     #region v2/continents/:id/floors/:floor/regions/:region/maps
 
-    public Task<Replica<HashSet<Chart>>> GetCharts(
+    public Task<Replica<HashSet<Map>>> GetMaps(
         int continentId,
         int floorId,
         int regionId,
@@ -285,7 +284,7 @@ public sealed class MapsQuery
         CancellationToken cancellationToken = default
     )
     {
-        ChartsRequest request = new(continentId, floorId, regionId)
+        MapsRequest request = new(continentId, floorId, regionId)
         {
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
@@ -293,18 +292,18 @@ public sealed class MapsQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<HashSet<int>>> GetChartsIndex(
+    public Task<Replica<HashSet<int>>> GetMapsIndex(
         int continentId,
         int floorId,
         int regionId,
         CancellationToken cancellationToken = default
     )
     {
-        ChartsIndexRequest request = new(continentId, floorId, regionId);
+        MapsIndexRequest request = new(continentId, floorId, regionId);
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<Chart>> GetChartById(
+    public Task<Replica<Map>> GetMapById(
         int continentId,
         int floorId,
         int regionId,
@@ -314,7 +313,7 @@ public sealed class MapsQuery
         CancellationToken cancellationToken = default
     )
     {
-        ChartByIdRequest request = new(continentId, floorId, regionId, mapId)
+        MapByIdRequest request = new(continentId, floorId, regionId, mapId)
         {
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
@@ -322,7 +321,7 @@ public sealed class MapsQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<HashSet<Chart>>> GetChartsByIds(
+    public Task<Replica<HashSet<Map>>> GetMapsByIds(
         int continentId,
         int floorId,
         int regionId,
@@ -332,7 +331,7 @@ public sealed class MapsQuery
         CancellationToken cancellationToken = default
     )
     {
-        ChartsByIdsRequest request = new(continentId, floorId, regionId, mapIds)
+        MapsByIdsRequest request = new(continentId, floorId, regionId, mapIds)
         {
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
@@ -340,7 +339,7 @@ public sealed class MapsQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<HashSet<Chart>>> GetChartsByPage(
+    public Task<Replica<HashSet<Map>>> GetMapsByPage(
         int continentId,
         int floorId,
         int regionId,
@@ -351,7 +350,7 @@ public sealed class MapsQuery
         CancellationToken cancellationToken = default
     )
     {
-        ChartsByPageRequest request = new(continentId, floorId, regionId, pageIndex)
+        MapsByPageRequest request = new(continentId, floorId, regionId, pageIndex)
         {
             PageSize = pageSize,
             Language = language,
@@ -646,13 +645,13 @@ public sealed class MapsQuery
 
     #region v2/maps
 
-    public Task<Replica<HashSet<Map>>> GetMaps(
+    public Task<Replica<HashSet<MapSummary>>> GetMapSummaries(
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        MapsRequest request = new()
+        MapSummariesRequest request = new()
         {
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
@@ -660,20 +659,20 @@ public sealed class MapsQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<HashSet<int>>> GetMapsIndex(CancellationToken cancellationToken = default)
+    public Task<Replica<HashSet<int>>> GetMapSummariesIndex(CancellationToken cancellationToken = default)
     {
-        MapsIndexRequest request = new();
+        MapSummariesIndexRequest request = new();
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<Map>> GetMapById(
+    public Task<Replica<MapSummary>> GetMapSummaryById(
         int mapId,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        MapByIdRequest request = new(mapId)
+        MapSummaryByIdRequest request = new(mapId)
         {
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
@@ -681,14 +680,14 @@ public sealed class MapsQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<HashSet<Map>>> GetMapsByIds(
+    public Task<Replica<HashSet<MapSummary>>> MapSummariesByIds(
         IReadOnlyCollection<int> mapIds,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
         CancellationToken cancellationToken = default
     )
     {
-        MapsByIdsRequest request = new(mapIds)
+        MapSummariesByIdsRequest request = new(mapIds)
         {
             Language = language,
             MissingMemberBehavior = missingMemberBehavior
@@ -696,7 +695,7 @@ public sealed class MapsQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<HashSet<Map>>> GetMapsByPage(
+    public Task<Replica<HashSet<MapSummary>>> MapSummariesByPage(
         int pageIndex,
         int? pageSize = default,
         Language? language = default,
@@ -704,7 +703,7 @@ public sealed class MapsQuery
         CancellationToken cancellationToken = default
     )
     {
-        MapsByPageRequest request = new(pageIndex)
+        MapSummariesByPageRequest request = new(pageIndex)
         {
             PageSize = pageSize,
             Language = language,

@@ -1,4 +1,6 @@
-﻿namespace GuildWars2.Exploration.GodShrines;
+﻿using System.Drawing;
+
+namespace GuildWars2.Exploration.GodShrines;
 
 [PublicAPI]
 [DataTransferObject]
@@ -16,5 +18,5 @@ public sealed record GodShrine
 
     public required string IconContested { get; init; }
 
-    public required IReadOnlyCollection<double> Coordinates { get; init; }
+    public required PointF Coordinates { get; init; }
 }

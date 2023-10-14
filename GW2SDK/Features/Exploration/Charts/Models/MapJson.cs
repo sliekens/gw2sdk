@@ -9,20 +9,20 @@ using GuildWars2.Exploration.PointsOfInterest;
 using GuildWars2.Exploration.Sectors;
 using GuildWars2.Json;
 
-namespace GuildWars2.Exploration.Charts;
+namespace GuildWars2.Exploration.Maps;
 
 [PublicAPI]
-public static class ChartJson
+public static class MapJson
 {
-    public static Chart GetChart(this JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    public static Map GetMap(this JsonElement json, MissingMemberBehavior missingMemberBehavior)
     {
         RequiredMember<string> name = new("name");
         RequiredMember<int> minLevel = new("min_level");
         RequiredMember<int> maxLevel = new("max_level");
         RequiredMember<int> defaultFloor = new("default_floor");
-        OptionalMember<PointF> labelCoordinates = new("label_coord");
-        RequiredMember<MapArea> mapRectangle = new("map_rect");
-        RequiredMember<Area> continentRectangle = new("continent_rect");
+        OptionalMember<Point> labelCoordinates = new("label_coord");
+        RequiredMember<Rectangle> mapRectangle = new("map_rect");
+        RequiredMember<Rectangle> continentRectangle = new("continent_rect");
         RequiredMember<Dictionary<int, PointOfInterest>> pointsOfInterest =
             new("points_of_interest");
         OptionalMember<GodShrine> godShrines = new("god_shrines");
@@ -100,7 +100,7 @@ public static class ChartJson
             }
         }
 
-        return new Chart
+        return new Map
         {
             Id = id.GetValue(),
             Name = name.GetValue(),
@@ -109,18 +109,23 @@ public static class ChartJson
             DefaultFloor = defaultFloor.GetValue(),
             LabelCoordinates =
                 labelCoordinates.Select(value => value.GetCoordinate(missingMemberBehavior)),
-            ChartRectangle = mapRectangle.Select(value => value.GetMapArea(missingMemberBehavior)),
+            MapRectangle = mapRectangle.Select(value => value.GetMapRectangle(missingMemberBehavior)),
             ContinentRectangle =
-                continentRectangle.Select(value => value.GetArea(missingMemberBehavior)),
-            PointsOfInterest =
-                pointsOfInterest.Select(
-                    value => value.GetChartPointsOfInterest(missingMemberBehavior)
-                ),
+                continentRectangle.Select(value => value.GetContinentRectangle(missingMemberBehavior)),
+            PointsOfInterest = pointsOfInterest.Select(
+                value => value.GetMap(entry => entry.GetPointOfInterest(missingMemberBehavior))
+                    .ToDictionary(kvp => int.Parse(kvp.Key), kvp => kvp.Value)
+            ),
             GodShrines = godShrines.SelectMany(value => value.GetGodShrine(missingMemberBehavior)),
-            Hearts = tasks.Select(value => value.GetChartHearts(missingMemberBehavior)),
-            HeroChallenges =
-                skillChallenges.SelectMany(value => value.GetHeroChallenge(missingMemberBehavior)),
-            Sectors = sectors.Select(value => value.GetChartSectors(missingMemberBehavior)),
+            Hearts = tasks.Select(
+                value => value.GetMap(entry => entry.GetHeart(missingMemberBehavior))
+                    .ToDictionary(kvp => int.Parse(kvp.Key), kvp => kvp.Value)
+            ),
+            HeroChallenges = skillChallenges.SelectMany(value => value.GetHeroChallenge(missingMemberBehavior)),
+            Sectors = sectors.Select(
+                value => value.GetMap(entry => entry.GetSector(missingMemberBehavior))
+                    .ToDictionary(kvp => int.Parse(kvp.Key), kvp => kvp.Value)
+            ),
             Adventures = adventures.SelectMany(value => value.GetAdventure(missingMemberBehavior)),
             MasteryPoints =
                 masteryPoints.SelectMany(item => item.GetMasteryPoint(missingMemberBehavior))

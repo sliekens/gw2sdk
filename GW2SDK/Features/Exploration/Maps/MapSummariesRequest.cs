@@ -4,7 +4,7 @@ using GuildWars2.Json;
 namespace GuildWars2.Exploration.Maps;
 
 [PublicAPI]
-public sealed class MapsRequest : IHttpRequest<Replica<HashSet<Map>>>
+public sealed class MapSummariesRequest : IHttpRequest<Replica<HashSet<MapSummary>>>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/maps")
     {
@@ -20,7 +20,7 @@ public sealed class MapsRequest : IHttpRequest<Replica<HashSet<Map>>>
 
     public MissingMemberBehavior MissingMemberBehavior { get; init; }
 
-    public async Task<Replica<HashSet<Map>>> SendAsync(
+    public async Task<Replica<HashSet<MapSummary>>> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
     )
@@ -35,9 +35,9 @@ public sealed class MapsRequest : IHttpRequest<Replica<HashSet<Map>>>
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
-        return new Replica<HashSet<Map>>
+        return new Replica<HashSet<MapSummary>>
         {
-            Value = json.RootElement.GetSet(entry => entry.GetMap(MissingMemberBehavior)),
+            Value = json.RootElement.GetSet(entry => entry.GetMapSummary(MissingMemberBehavior)),
             ResultContext = response.Headers.GetResultContext(),
             PageContext = response.Headers.GetPageContext(),
             Date = response.Headers.Date.GetValueOrDefault(),

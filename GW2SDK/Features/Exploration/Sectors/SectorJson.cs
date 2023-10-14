@@ -55,8 +55,8 @@ public static class SectorJson
             Id = id.GetValue(),
             Name = name.GetValueOrEmpty(),
             Level = level.GetValue(),
-            Coordinates = coordinates.Select(value => value.GetCoordinate(missingMemberBehavior)),
-            Boundaries = boundaries.SelectMany(value => value.GetCoordinate(missingMemberBehavior)),
+            Coordinates = coordinates.Select(value => value.GetCoordinateF(missingMemberBehavior)),
+            Boundaries = boundaries.SelectMany(value => value.GetCoordinateF(missingMemberBehavior)),
             ChatLink = chatLink.GetValue()
         };
     }

@@ -1,12 +1,13 @@
-﻿using System.Text.Json;
+﻿using System.Drawing;
+using System.Text.Json;
 using GuildWars2.Json;
 
 namespace GuildWars2.Exploration.Maps;
 
 [PublicAPI]
-public static class MapJson
+public static class MapSummaryJson
 {
-    public static Map GetMap(this JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    public static MapSummary GetMapSummary(this JsonElement json, MissingMemberBehavior missingMemberBehavior)
     {
         RequiredMember<int> id = new("id");
         RequiredMember<string> name = new("name");
@@ -19,8 +20,8 @@ public static class MapJson
         OptionalMember<string> regionName = new("region_name");
         NullableMember<int> continentId = new("continent_id");
         OptionalMember<string> continentName = new("continent_name");
-        RequiredMember<MapArea> mapRectangle = new("map_rect");
-        RequiredMember<Area> continentRectangle = new("continent_rect");
+        RequiredMember<Rectangle> mapRectangle = new("map_rect");
+        RequiredMember<Rectangle> continentRectangle = new("continent_rect");
         foreach (var member in json.EnumerateObject())
         {
             if (member.NameEquals(id.Name))
@@ -81,7 +82,7 @@ public static class MapJson
             }
         }
 
-        return new Map
+        return new MapSummary
         {
             Id = id.GetValue(),
             Name = name.GetValue(),
@@ -94,9 +95,9 @@ public static class MapJson
             RegionName = regionName.GetValueOrEmpty(),
             ContinentId = continentId.GetValue(),
             ContinentName = continentName.GetValueOrEmpty(),
-            MapRectangle = mapRectangle.Select(value => value.GetMapArea(missingMemberBehavior)),
+            MapRectangle = mapRectangle.Select(value => value.GetMapRectangle(missingMemberBehavior)),
             ContinentRectangle =
-                continentRectangle.Select(value => value.GetArea(missingMemberBehavior))
+                continentRectangle.Select(value => value.GetContinentRectangle(missingMemberBehavior))
         };
     }
 }

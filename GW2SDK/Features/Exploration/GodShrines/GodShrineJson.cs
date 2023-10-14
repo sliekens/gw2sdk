@@ -1,4 +1,5 @@
-﻿using System.Text.Json;
+﻿using System.Drawing;
+using System.Text.Json;
 using GuildWars2.Json;
 
 namespace GuildWars2.Exploration.GodShrines;
@@ -15,7 +16,7 @@ public static class GodShrineJson
         RequiredMember<string> name = new("name");
         RequiredMember<string> nameContested = new("name_contested");
         RequiredMember<int> pointOfInterestId = new("poi_id");
-        RequiredMember<double> coordinates = new("coord");
+        RequiredMember<PointF> coordinates = new("coord");
         RequiredMember<string> icon = new("icon");
         RequiredMember<string> iconContested = new("icon_contested");
         foreach (var member in json.EnumerateObject())
@@ -60,7 +61,7 @@ public static class GodShrineJson
             Name = name.GetValue(),
             NameContested = nameContested.GetValue(),
             PointOfInterestId = pointOfInterestId.GetValue(),
-            Coordinates = coordinates.SelectMany(value => value.GetDouble()),
+            Coordinates = coordinates.Select(value => value.GetCoordinateF(missingMemberBehavior)),
             Icon = icon.GetValue(),
             IconContested = iconContested.GetValue()
         };

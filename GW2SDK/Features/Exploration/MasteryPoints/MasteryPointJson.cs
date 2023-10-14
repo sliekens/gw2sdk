@@ -1,4 +1,5 @@
-﻿using System.Text.Json;
+﻿using System.Drawing;
+using System.Text.Json;
 using GuildWars2.Json;
 
 namespace GuildWars2.Exploration.MasteryPoints;
@@ -11,7 +12,7 @@ public static class MasteryPointJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember<double> coordinates = new("coord");
+        RequiredMember<PointF> coordinates = new("coord");
         RequiredMember<int> id = new("id");
         RequiredMember<MasteryRegionName> region = new("region");
         foreach (var member in json.EnumerateObject())
@@ -37,7 +38,7 @@ public static class MasteryPointJson
         return new MasteryPoint
         {
             Id = id.GetValue(),
-            Coordinates = coordinates.SelectMany(value => value.GetDouble()),
+            Coordinates = coordinates.Select(value => value.GetCoordinateF(missingMemberBehavior)),
             Region = region.GetValue(missingMemberBehavior)
         };
     }

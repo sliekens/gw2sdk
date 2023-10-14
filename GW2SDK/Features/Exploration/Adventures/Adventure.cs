@@ -1,4 +1,6 @@
-﻿namespace GuildWars2.Exploration.Adventures;
+﻿using System.Drawing;
+
+namespace GuildWars2.Exploration.Adventures;
 
 [PublicAPI]
 [DataTransferObject]
@@ -10,5 +12,5 @@ public sealed record Adventure
 
     public required string Description { get; init; }
 
-    public required IReadOnlyCollection<double> Coordinates { get; init; }
+    public required PointF Coordinates { get; init; }
 }

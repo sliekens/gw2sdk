@@ -1,4 +1,6 @@
-﻿namespace GuildWars2.Exploration.MasteryPoints;
+﻿using System.Drawing;
+
+namespace GuildWars2.Exploration.MasteryPoints;
 
 [PublicAPI]
 [DataTransferObject]
@@ -8,5 +10,5 @@ public sealed record MasteryPoint
 
     public required MasteryRegionName Region { get; init; }
 
-    public required IReadOnlyCollection<double> Coordinates { get; init; }
+    public required PointF Coordinates { get; init; }
 }

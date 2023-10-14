@@ -52,8 +52,8 @@ public static class HeartJson
             Id = id.GetValue(),
             Objective = objective.GetValue(),
             Level = level.GetValue(),
-            Coordinates = coordinates.Select(value => value.GetCoordinate(missingMemberBehavior)),
-            Boundaries = boundaries.SelectMany(value => value.GetCoordinate(missingMemberBehavior)),
+            Coordinates = coordinates.Select(value => value.GetCoordinateF(missingMemberBehavior)),
+            Boundaries = boundaries.SelectMany(value => value.GetCoordinateF(missingMemberBehavior)),
             ChatLink = chatLink.GetValue()
         };
     }

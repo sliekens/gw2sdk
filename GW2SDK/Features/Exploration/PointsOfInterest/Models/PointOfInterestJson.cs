@@ -71,7 +71,7 @@ public static class PointOfInterestJson
             Id = id.GetValue(),
             Name = name.GetValueOrEmpty(),
             Floor = floor.GetValue(),
-            Coordinates = coordinates.Select(value => value.GetCoordinate(missingMemberBehavior)),
+            Coordinates = coordinates.Select(value => value.GetCoordinateF(missingMemberBehavior)),
             ChatLink = chatLink.GetValue()
         };
     }

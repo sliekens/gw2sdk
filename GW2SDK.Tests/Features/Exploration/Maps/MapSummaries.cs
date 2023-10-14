@@ -1,18 +1,15 @@
 ﻿using GuildWars2.Tests.TestInfrastructure;
 
-namespace GuildWars2.Tests.Features.Exploration.Charts;
+namespace GuildWars2.Tests.Features.Exploration.Maps;
 
-public class Charts
+public class MapSummaries
 {
-    [Theory]
-    [InlineData(1, 0, 1)]
-    [InlineData(1, 0, 2)]
-    [InlineData(1, 0, 3)]
-    public async Task Can_be_listed(int continentId, int floorId, int regionId)
+    [Fact]
+    public async Task Can_be_listed()
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        var actual = await sut.Maps.GetCharts(continentId, floorId, regionId);
+        var actual = await sut.Maps.GetMapSummaries();
 
         Assert.NotEmpty(actual.Value);
         Assert.Equal(actual.Value.Count, actual.ResultContext.ResultCount);
@@ -21,7 +18,6 @@ public class Charts
             actual.Value,
             entry =>
             {
-                // TODO: complete validation
                 entry.Has_id();
                 entry.Has_name();
             }

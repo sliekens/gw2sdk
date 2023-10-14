@@ -28,7 +28,7 @@ public class GameReporter : BackgroundService
         await Task.Yield();
 
         // Prepare a dictionary of maps
-        var maps = await gw2.Maps.GetMaps(cancellationToken: stoppingToken);
+        var maps = await gw2.Maps.GetMapSummaries(cancellationToken: stoppingToken);
         var mapsDictionary = maps.Value.ToDictionary(map => map.Id);
 
         // Prepare a dictionary of elite specializations

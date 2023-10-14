@@ -1,41 +1,24 @@
 ﻿using GuildWars2.Http;
+using GuildWars2.Json;
 
 namespace GuildWars2.Exploration.Maps;
 
 [PublicAPI]
-public sealed class MapByIdRequest : IHttpRequest<Replica<Map>>
+public sealed class MapSummariesIndexRequest : IHttpRequest<Replica<HashSet<int>>>
 {
     private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/maps")
     {
-        AcceptEncoding = "gzip"
+        AcceptEncoding = "gzip",
+        Arguments = new QueryBuilder { { "v", SchemaVersion.Recommended } }
     };
 
-    public MapByIdRequest(int mapId)
-    {
-        MapId = mapId;
-    }
-
-    public int MapId { get; }
-
-    public Language? Language { get; init; }
-
-    public MissingMemberBehavior MissingMemberBehavior { get; init; }
-
-    public async Task<Replica<Map>> SendAsync(
+    public async Task<Replica<HashSet<int>>> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
     )
     {
         using var response = await httpClient.SendAsync(
-                Template with
-                {
-                    Arguments = new QueryBuilder
-                    {
-                        { "id", MapId },
-                        { "v", SchemaVersion.Recommended }
-                    },
-                    AcceptLanguage = Language?.Alpha2Code
-                },
+                Template,
                 HttpCompletionOption.ResponseHeadersRead,
                 cancellationToken
             )
@@ -44,9 +27,9 @@ public sealed class MapByIdRequest : IHttpRequest<Replica<Map>>
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
-        return new Replica<Map>
+        return new Replica<HashSet<int>>
         {
-            Value = json.RootElement.GetMap(MissingMemberBehavior),
+            Value = json.RootElement.GetSet(entry => entry.GetInt32()),
             ResultContext = response.Headers.GetResultContext(),
             PageContext = response.Headers.GetPageContext(),
             Date = response.Headers.Date.GetValueOrDefault(),

@@ -4,12 +4,15 @@ namespace GuildWars2.Tests.Features.Exploration.Maps;
 
 public class Maps
 {
-    [Fact]
-    public async Task Can_be_listed()
+    [Theory]
+    [InlineData(1, 0, 1)]
+    [InlineData(1, 0, 2)]
+    [InlineData(1, 0, 3)]
+    public async Task Can_be_listed(int continentId, int floorId, int regionId)
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        var actual = await sut.Maps.GetMaps();
+        var actual = await sut.Maps.GetMaps(continentId, floorId, regionId);
 
         Assert.NotEmpty(actual.Value);
         Assert.Equal(actual.Value.Count, actual.ResultContext.ResultCount);
@@ -18,6 +21,7 @@ public class Maps
             actual.Value,
             entry =>
             {
+                // TODO: complete validation
                 entry.Has_id();
                 entry.Has_name();
             }

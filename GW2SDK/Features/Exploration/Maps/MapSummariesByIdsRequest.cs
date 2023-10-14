@@ -1,38 +1,29 @@
-﻿using System.Globalization;
-using GuildWars2.Http;
+﻿using GuildWars2.Http;
+using GuildWars2.Json;
 
-namespace GuildWars2.Exploration.Charts;
+namespace GuildWars2.Exploration.Maps;
 
 [PublicAPI]
-public sealed class ChartByIdRequest : IHttpRequest<Replica<Chart>>
+public sealed class MapSummariesByIdsRequest : IHttpRequest<Replica<HashSet<MapSummary>>>
 {
-    private static readonly HttpRequestMessageTemplate Template =
-        new(Get, "v2/continents/:id/floors/:floor/regions/:region/maps")
-        {
-            AcceptEncoding = "gzip"
-        };
-
-    public ChartByIdRequest(int continentId, int floorId, int regionId, int mapId)
+    private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/maps")
     {
-        ContinentId = continentId;
-        FloorId = floorId;
-        RegionId = regionId;
-        MapId = mapId;
+        AcceptEncoding = "gzip"
+    };
+
+    public MapSummariesByIdsRequest(IReadOnlyCollection<int> mapIds)
+    {
+        Check.Collection(mapIds);
+        MapIds = mapIds;
     }
 
-    public int ContinentId { get; }
-
-    public int FloorId { get; }
-
-    public int RegionId { get; }
-
-    public int MapId { get; }
+    public IReadOnlyCollection<int> MapIds { get; }
 
     public Language? Language { get; init; }
 
     public MissingMemberBehavior MissingMemberBehavior { get; init; }
 
-    public async Task<Replica<Chart>> SendAsync(
+    public async Task<Replica<HashSet<MapSummary>>> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
     )
@@ -40,13 +31,9 @@ public sealed class ChartByIdRequest : IHttpRequest<Replica<Chart>>
         using var response = await httpClient.SendAsync(
                 Template with
                 {
-                    Path = Template.Path
-                        .Replace(":id", ContinentId.ToString(CultureInfo.InvariantCulture))
-                        .Replace(":floor", FloorId.ToString(CultureInfo.InvariantCulture))
-                        .Replace(":region", RegionId.ToString(CultureInfo.InvariantCulture)),
                     Arguments = new QueryBuilder
                     {
-                        { "id", MapId },
+                        { "ids", MapIds },
                         { "v", SchemaVersion.Recommended }
                     },
                     AcceptLanguage = Language?.Alpha2Code
@@ -59,9 +46,9 @@ public sealed class ChartByIdRequest : IHttpRequest<Replica<Chart>>
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
-        return new Replica<Chart>
+        return new Replica<HashSet<MapSummary>>
         {
-            Value = json.RootElement.GetChart(MissingMemberBehavior),
+            Value = json.RootElement.GetSet(entry => entry.GetMapSummary(MissingMemberBehavior)),
             ResultContext = response.Headers.GetResultContext(),
             PageContext = response.Headers.GetPageContext(),
             Date = response.Headers.Date.GetValueOrDefault(),

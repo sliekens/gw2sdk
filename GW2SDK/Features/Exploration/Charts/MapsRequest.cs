@@ -2,23 +2,27 @@
 using GuildWars2.Http;
 using GuildWars2.Json;
 
-namespace GuildWars2.Exploration.Charts;
+namespace GuildWars2.Exploration.Maps;
 
 [PublicAPI]
-public sealed class ChartsByPageRequest : IHttpRequest<Replica<HashSet<Chart>>>
+public sealed class MapsRequest : IHttpRequest<Replica<HashSet<Map>>>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/continents/:id/floors/:floor/regions/:region/maps")
         {
-            AcceptEncoding = "gzip"
+            AcceptEncoding = "gzip",
+            Arguments = new QueryBuilder
+            {
+                { "ids", "all" },
+                { "v", SchemaVersion.Recommended }
+            }
         };
 
-    public ChartsByPageRequest(int continentId, int floorId, int regionId, int pageIndex)
+    public MapsRequest(int continentId, int floorId, int regionId)
     {
         ContinentId = continentId;
         FloorId = floorId;
         RegionId = regionId;
-        PageIndex = pageIndex;
     }
 
     public int ContinentId { get; }
@@ -27,26 +31,15 @@ public sealed class ChartsByPageRequest : IHttpRequest<Replica<HashSet<Chart>>>
 
     public int RegionId { get; }
 
-    public int PageIndex { get; }
-
-    public int? PageSize { get; init; }
-
     public Language? Language { get; init; }
 
     public MissingMemberBehavior MissingMemberBehavior { get; init; }
 
-    public async Task<Replica<HashSet<Chart>>> SendAsync(
+    public async Task<Replica<HashSet<Map>>> SendAsync(
         HttpClient httpClient,
         CancellationToken cancellationToken
     )
     {
-        QueryBuilder search = new() { { "page", PageIndex } };
-        if (PageSize.HasValue)
-        {
-            search.Add("page_size", PageSize.Value);
-        }
-
-        search.Add("v", SchemaVersion.Recommended);
         using var response = await httpClient.SendAsync(
                 Template with
                 {
@@ -54,7 +47,6 @@ public sealed class ChartsByPageRequest : IHttpRequest<Replica<HashSet<Chart>>>
                         .Replace(":id", ContinentId.ToString(CultureInfo.InvariantCulture))
                         .Replace(":floor", FloorId.ToString(CultureInfo.InvariantCulture))
                         .Replace(":region", RegionId.ToString(CultureInfo.InvariantCulture)),
-                    Arguments = search,
                     AcceptLanguage = Language?.Alpha2Code
                 },
                 HttpCompletionOption.ResponseHeadersRead,
@@ -65,9 +57,9 @@ public sealed class ChartsByPageRequest : IHttpRequest<Replica<HashSet<Chart>>>
         await response.EnsureResult(cancellationToken).ConfigureAwait(false);
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
-        return new Replica<HashSet<Chart>>
+        return new Replica<HashSet<Map>>
         {
-            Value = json.RootElement.GetSet(entry => entry.GetChart(MissingMemberBehavior)),
+            Value = json.RootElement.GetSet(entry => entry.GetMap(MissingMemberBehavior)),
             ResultContext = response.Headers.GetResultContext(),
             PageContext = response.Headers.GetPageContext(),
             Date = response.Headers.Date.GetValueOrDefault(),

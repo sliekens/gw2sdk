@@ -1,25 +1,22 @@
 ﻿using GuildWars2.Tests.TestInfrastructure;
 
-namespace GuildWars2.Tests.Features.Exploration.Charts;
+namespace GuildWars2.Tests.Features.Exploration.Maps;
 
-public class ChartsByFilter
+public class MapSummariesByFilter
 {
     [Fact]
     public async Task Can_be_filtered_by_id()
     {
         var sut = Composer.Resolve<Gw2Client>();
 
-        const int continentId = 1;
-        const int floorId = 0;
-        const int regionId = 1;
         HashSet<int> ids = new()
         {
-            26,
-            27,
-            28
+            15,
+            17,
+            18
         };
 
-        var actual = await sut.Maps.GetChartsByIds(continentId, floorId, regionId, ids);
+        var actual = await sut.Maps.MapSummariesByIds(ids);
 
         Assert.Equal(ids.Count, actual.Value.Count);
         Assert.Equal(ids.Count, actual.ResultContext.ResultCount);
@@ -27,7 +24,6 @@ public class ChartsByFilter
             actual.Value,
             entry =>
             {
-                // TODO: complete validation
                 entry.Has_id();
                 entry.Has_name();
             }

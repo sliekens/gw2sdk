@@ -1,8 +1,10 @@
-﻿namespace GuildWars2.Exploration.Maps;
+﻿using System.Drawing;
+
+namespace GuildWars2.Exploration.Maps;
 
 [PublicAPI]
 [DataTransferObject]
-public sealed record Map
+public sealed record MapSummary
 {
     public required int Id { get; init; }
 
@@ -26,7 +28,7 @@ public sealed record Map
 
     public required string ContinentName { get; init; }
 
-    public required MapArea MapRectangle { get; init; }
+    public required Rectangle MapRectangle { get; init; }
 
-    public required Area ContinentRectangle { get; init; }
+    public required Rectangle ContinentRectangle { get; init; }
 }

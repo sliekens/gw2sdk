@@ -14,7 +14,7 @@ public sealed record Sector
 
     public required PointF Coordinates { get; init; }
 
-    public required IReadOnlyCollection<PointF> Boundaries { get; init; }
+    public required IReadOnlyList<PointF> Boundaries { get; init; }
 
     public required string ChatLink { get; init; }
 }
