@@ -1,15 +1,30 @@
 ﻿using System.Globalization;
-using System.Text;
 using GuildWars2;
-using GuildWars2.Mounts;
-
-Console.OutputEncoding = Encoding.UTF8;
 
 using var httpClient = new HttpClient();
 var gw2 = new Gw2Client(httpClient);
 
-// The default set of supported languages
-var languages = new HashSet<Language>
+// For demonstration, pretend the user has selected German as the preferred language
+CultureInfo.CurrentUICulture = CultureInfo.GetCultureInfo("de");
+
+// Typically you want to configure the user's preferred language (CurrentUICulture) as the default
+httpClient.DefaultRequestHeaders.AcceptLanguage.Add(
+    new System.Net.Http.Headers.StringWithQualityHeaderValue(Language.CurrentUICulture.Alpha2Code)
+);
+
+var mounts = await gw2.Mounts.GetMounts();
+
+Console.WriteLine("Preferred language");
+foreach (var mount in mounts.Value)
+{
+    Console.WriteLine("* {0}", mount.Name);
+}
+
+Console.WriteLine();
+
+// Alternatively you can specify a language per request
+// See the default set of supported languages
+HashSet<Language> languages = new()
 {
     Language.English,
     Language.German,
@@ -18,22 +33,29 @@ var languages = new HashSet<Language>
     Language.Chinese
 };
 
-// If your application uses CultureInfo.CurrentUICulture for translations, you might want to use Language.CurrentUICulture
-CultureInfo.CurrentUICulture = CultureInfo.GetCultureInfo("ko");
-languages.Add(Language.CurrentUICulture);
-
-// Loop over the languages, show names of Mounts in each language
 foreach (var language in languages)
 {
-    Console.WriteLine(CultureInfo.GetCultureInfo(language.Alpha2Code).EnglishName);
+    // Localizable endpoints accept an optional language parameter
+    // When omitted, the default language is used (as specified in Accept-Language, or English if not specified)
+    mounts = await gw2.Mounts.GetMounts(language);
 
-    // Pass the Language object when fetching the data
-    // If you don't pass any Language, or if the language is not supported, English is used
-    // So you will see the English names for Korean ("ko") because the server does not support Korean
-    foreach (var mount in (HashSet<Mount>)await gw2.Mounts.GetMounts(language))
+    Console.WriteLine(language.CultureInfo.EnglishName);
+    foreach (var mount in mounts.Value)
     {
         Console.WriteLine("* {0}", mount.Name);
     }
 
     Console.WriteLine();
 }
+
+// Finally let's see what happens when an unsupported language is used
+var unsupportedLanguage = new Language("ko");
+mounts = await gw2.Mounts.GetMounts(unsupportedLanguage);
+
+Console.WriteLine(unsupportedLanguage.CultureInfo.EnglishName + " (unsupported)");
+foreach (var mount in mounts.Value)
+{
+    Console.WriteLine("* {0}", mount.Name);
+}
+
+Console.WriteLine();

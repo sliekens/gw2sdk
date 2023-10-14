@@ -41,5 +41,7 @@ public sealed class Language
 
     public string Alpha2Code { get; }
 
+    public CultureInfo CultureInfo => CultureInfo.GetCultureInfo(Alpha2Code);
+
     public override string ToString() => Alpha2Code;
 }
