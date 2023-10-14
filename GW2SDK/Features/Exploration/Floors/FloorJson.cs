@@ -12,7 +12,9 @@ public static class FloorJson
     {
         RequiredMember<Size> textureDimensions = new("texture_dims");
         OptionalMember<Rectangle> clampedView = new("clamped_view");
-        RequiredMember<Dictionary<int, Region>> regions = new("regions");
+        RequiredMember<Dictionary<int, GuildWars2.Exploration.Regions.Region>> regions = new("regions");
+
+
         RequiredMember<int> id = new("id");
         foreach (var member in json.EnumerateObject())
         {
