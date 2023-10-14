@@ -1,4 +1,5 @@
 using System.Text.Json;
+using GuildWars2.Json;
 
 namespace GuildWars2.Professions;
 
@@ -19,22 +20,30 @@ public static class SkillsByPaletteJson
         // ]
         //
         // In JavaScript you could just do new Map([[1,12343],[2,12417]])
-        // In C# there are no shortcuts but we can convert it to an IEnumerable<KeyValuePair>
-        //  then convert that to Dictionary
-        // TODO: use MissingMemberBehavior
+        // In C# there are no shortcuts
         Dictionary<int, int> map = new(json.GetArrayLength());
-        foreach (var member in json.EnumerateArray())
+        foreach (var entry in json.EnumerateArray())
         {
-            // Short-circuit invalid data
-            if (member.GetArrayLength() != 2)
+            RequiredMember<int> key = new("key");
+            RequiredMember<int> value = new("value");
+
+            foreach (var keyOrValue in entry.EnumerateArray())
             {
-                break;
+                if (key.IsMissing)
+                {
+                    key.Value = keyOrValue;
+                }
+                else if (value.IsMissing)
+                {
+                    value.Value = keyOrValue;
+                }
+                else if (missingMemberBehavior == MissingMemberBehavior.Error)
+                {
+                    throw new InvalidOperationException(Strings.UnexpectedArrayLength(entry.GetArrayLength()));
+                }
             }
 
-            var key = member[0].GetInt32();
-            var value = member[1].GetInt32();
-
-            map[key] = value;
+            map[key.GetValue()] = value.GetValue();
         }
 
         return map;
