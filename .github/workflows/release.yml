@@ -1,0 +1,35 @@
+name: Release
+
+on:
+  push:
+    tags: v*
+
+env:
+  SYMBOL_PACKAGE: true
+
+jobs:
+  build-and-deploy:
+    name: Build and deploy
+    env:
+      build-configuration: Release
+    runs-on: ubuntu-latest
+    container: ghcr.io/sliekens/gw2sdk/devcontainer:latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Install dependencies
+        run: dotnet restore --locked-mode
+
+      - name: Build
+        run: dotnet build --configuration ${{ env.build-configuration }} --no-restore
+
+      - name: Pack artifacts
+        run: dotnet pack GW2SDK --configuration ${{ env.build-configuration }} --no-build --output artifacts --p:Version=$(echo $GITHUB_REF | sed -e 's/refs\/tags\/v//')
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: packages
+          path: artifacts
+
