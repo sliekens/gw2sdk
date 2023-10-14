@@ -1,4 +1,5 @@
-﻿using System.Runtime.InteropServices;
+﻿using System.Numerics;
+using System.Runtime.InteropServices;
 using System.Text.Json;
 
 namespace GuildWars2.Mumble;
@@ -15,20 +16,20 @@ public readonly record struct GameTick
     /// <summary>Avatar position is the position of the player in the coordinate system of the map. X is measured along the
     /// east-west axis, Y measures elevation, Z is measured along the north-south axis.</summary>
     /// <remarks>While the game uses inches as unit, mumble uses meters.</remarks>
-    public readonly Vector3D AvatarPosition;
+    public readonly Vector3 AvatarPosition;
 
-    public readonly Vector3D AvatarFront;
+    public readonly Vector3 AvatarFront;
 
-    public readonly Vector3D AvatarTop;
+    public readonly Vector3 AvatarTop;
 
     [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 256)]
     public readonly string Name;
 
-    public readonly Vector3D CameraPosition;
+    public readonly Vector3 CameraPosition;
 
-    public readonly Vector3D CameraFront;
+    public readonly Vector3 CameraFront;
 
-    public readonly Vector3D CameraTop;
+    public readonly Vector3 CameraTop;
 
     [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 256)]
     public readonly string Identity;
