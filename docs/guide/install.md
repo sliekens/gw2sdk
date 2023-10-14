@@ -4,7 +4,7 @@
 
 GW2SDK is still under development. Preview packages will be published to nuget.org later.
 
-You can install development packages from GitHub from [here][packages]. These packages are updated on every commit to the main branch and versioned by date and time. (Format: 1.0.0-CI-YYYYMMDD-hhmmss)
+You can install development packages from GitHub from [here][packages]. These packages are updated on every commit to the main branch and versioned by number of git commits since the last release. (Format: 1.0.0-preview.0.123)
 
 First create a personal access token [here][tokens] with the _read:packages_ scope. Then run the following command.
 
@@ -27,6 +27,7 @@ Encryption is not supported on every platform. If you get an error, try the comm
 ## Uninstalling development packages
 
 To stop using development packages, you can remove the NuGet source from your machine. This will remove the source and your token.
+
 ``` sh
 dotnet nuget remove source sliekens
 ```
