@@ -1,27 +1,39 @@
 ﻿using System.Text.Json;
+using GuildWars2.Json;
 
 namespace GuildWars2.Achievements.Categories;
 
 [PublicAPI]
 public static class LevelRequirementJson
 {
-    public static LevelRequirement GetLevelRequirement(this JsonElement json)
+    public static LevelRequirement GetLevelRequirement(
+        this JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
-        if (json.GetArrayLength() < 2)
+        RequiredMember<int> min = new("min");
+        RequiredMember<int> max = new("max");
+
+        foreach (var entry in json.EnumerateArray())
         {
-            throw new InvalidOperationException($"Missing level requirement(s).");
-        }
-        else if (json.GetArrayLength() > 2)
-        {
-            throw new InvalidOperationException($"Unexpected level requirement(s).");
+            if (min.IsMissing)
+            {
+                min.Value = entry;
+            }
+            else if (max.IsMissing)
+            {
+                max.Value = entry;
+            }
+            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            {
+                throw new InvalidOperationException(Strings.UnexpectedArrayLength(json.GetArrayLength()));
+            }
         }
 
-        var min = json[0].GetInt32();
-        var max = json[1].GetInt32();
         return new LevelRequirement
         {
-            Min = min,
-            Max = max
+            Min = min.GetValue(),
+            Max = max.GetValue()
         };
     }
 }
