@@ -6,35 +6,56 @@ The `Gw2Client` has a single dependency on `System.Net.Http.HttpClient` which yo
 
 A very simple console app might look like this.
 
-@[code cs{13,16,29,41}](../../samples/BasicUsage/Program.cs)
+@[code cs{4-5,9,14,20}](../../samples/BasicUsage/Program.cs)
 
 Output
 
-> Daily achievements of Thursday, 22 December 2022  
->
-> Daily Recommended Fractal-Scale 18  
-> Complete  scale 18 fractal in the Fractals of the Mists through the portal in Lion's Arch.  
-> Rewards Fractal Initiate's Research Chest (1)  
-> Double-click to open.  
-> Contains a Pristine Fractal Relic, a +1 Agony Infusion, a Large Mist Defensive Potion, 2 Fractal Encryptions, and a Fractal Research Page.  
-> Bonus rewards with the Agony Channeler or the Recursive Resourcing Mastery.  
->
-> Daily Recommended Fractal-Scale 27  
-> Complete the fractal dungeon at this difficulty in the Fractals of the Mists through the portal in Lion's Arch.  
-> Requires the mastery Follows Advice.  
-> Rewards Fractal Adept's Research Chest (1)  
-> Double-click to open.  
-> Contains a Pristine Fractal Relic, 2 +1 Agony Infusions, a Large Mist Mobility Potion, 3 Fractal Encryptions, and a Fractal Research Page.  
-> Bonus rewards with the Agony Channeler or Recursive Resourcing Mastery.  
->
-> Daily Recommended Fractal-Scale 64  
-> Complete the fractal dungeon at this difficulty in the Fractals of the Mists through the portal in Lion's Arch.  
-> Requires the mastery Follows Advice.  
-> Rewards Fractal Expert's Research Chest (1)  
-> Double-click to open.  
-> Contains a Pristine Fractal Relic, 2 +1 Agony Infusions, a Large Mist Offensive Potion, 3 Fractal Encryptions, and a Fractal Research Page.  
-> Bonus rewards with the Agony Channeler or Recursive Resourcing Mastery.  
->
-> ...
+``` text
+The current game version is 152,325
 
-This code is not optimized. Every daily achievement results in 2 additional network requests being made to fetch the achievement details and item reward. In a real application, you might fetch all related data in as few network calls as possible.
+282 gems cost 100 gold
+1 gem costs 35 silver, 46 copper
+
+Raid: forsaken_thicket
+  W1: spirit_vale
+    Encounter 1: vale_guardian (Boss)
+    Encounter 2: spirit_woods (Checkpoint)
+    Encounter 3: gorseval (Boss)
+    Encounter 4: sabetha (Boss)
+  W2: salvation_pass
+    Encounter 1: slothasor (Boss)
+    Encounter 2: bandit_trio (Boss)
+    Encounter 3: matthias (Boss)
+  W3: stronghold_of_the_faithful
+    Encounter 1: escort (Boss)
+    Encounter 2: keep_construct (Boss)
+    Encounter 3: twisted_castle (Checkpoint)
+    Encounter 4: xera (Boss)
+
+Raid: bastion_of_the_penitent
+  W1: bastion_of_the_penitent
+    Encounter 1: cairn (Boss)
+    Encounter 2: mursaat_overseer (Boss)
+    Encounter 3: samarog (Boss)
+    Encounter 4: deimos (Boss)
+
+Raid: hall_of_chains
+  W1: hall_of_chains
+    Encounter 1: soulless_horror (Boss)
+    Encounter 2: river_of_souls (Boss)
+    Encounter 3: statues_of_grenth (Boss)
+    Encounter 4: voice_in_the_void (Boss)
+
+Raid: mythwright_gambit
+  W1: mythwright_gambit
+    Encounter 1: conjured_amalgamate (Boss)
+    Encounter 2: twin_largos (Boss)
+    Encounter 3: qadim (Boss)
+
+Raid: the_key_of_ahdashim
+  W1: the_key_of_ahdashim
+    Encounter 1: gate (Checkpoint)
+    Encounter 2: adina (Boss)
+    Encounter 3: sabir (Boss)
+    Encounter 4: qadim_the_peerless (Boss)
+```

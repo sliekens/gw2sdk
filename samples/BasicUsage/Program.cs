@@ -1,47 +1,38 @@
-﻿using System.Globalization;
-using System.Text;
-using GuildWars2;
-using GuildWars2.Achievements;
-using GuildWars2.Items;
+﻿using GuildWars2;
 
-Console.OutputEncoding = Encoding.UTF8;
-CultureInfo.CurrentCulture = CultureInfo.GetCultureInfo("en");
-CultureInfo.CurrentUICulture = CultureInfo.GetCultureInfo("en");
-
-// HttpClient has a fully customizable pipeline, but defaults are fine too
+// Create a Gw2Client which requires an HttpClient
 using var httpClient = new HttpClient();
 var gw2 = new Gw2Client(httpClient);
 
-// Use Gw2Client to fetch daily achievements
-var dailyAchievements = await gw2.Achievements.GetDailyAchievements();
+// Use the Gw2Client to access the API
+// For example, print the game version number
+var version = await gw2.Meta.GetBuild();
+Console.WriteLine($"The current game version is {version.Value.Id:N0}");
+Console.WriteLine();
 
-// The result is a Replica<DailyAchievementGroup> object that contains the achievements
-// and also some response headers such as Date
-Console.WriteLine("Daily achievements of {0:D}\n", dailyAchievements.Date);
+// For example, print the current gem exchange rate for 100 gold
+var gems = await gw2.Commerce.ExchangeGoldForGems(new Coin(100, 0, 0));
+Console.WriteLine($"{gems.Value.GemsToReceive} gems cost 100 gold");
+Console.WriteLine($"1 gem costs {gems.Value.CoinsPerGem}");
+Console.WriteLine();
 
-// The actual achievements are available in the Value property
-// This data is highly normalized, it's necessary to make additional requests
-// to fetch the achievement names and item rewards
-foreach (var dailyFractal in dailyAchievements.Value.Fractals)
+// For example, print raids and their wings and encounters
+var raids = await gw2.Raids.GetRaids();
+foreach (var raid in raids.Value)
 {
-    // Get the fractal achievement details by the achievement ID
-    // By the way, you can cast a 'Replica<T>' to 'T' if you don't care about the response headers
-    var achievement = (Achievement)await gw2.Achievements.GetAchievementById(dailyFractal.Id);
+    Console.WriteLine($"Raid: {raid.Id}");
 
-    Console.WriteLine(achievement.Name);
-    Console.WriteLine(achievement.Requirement);
-
-    foreach (var reward in achievement.Rewards ?? Enumerable.Empty<AchievementReward>())
+    int wingNumber = 0;
+    foreach (var wing in raid.Wings)
     {
-        // Get the item details by the ID of the item reward
-        if (reward is ItemReward itemReward)
-        {
-            // By the way, you can assign 'Replica<T>' to 'T' without casting
-            // although some say this makes the code less clear
-            Item item = await gw2.Items.GetItemById(itemReward.Id);
+        wingNumber++;
+        Console.WriteLine($"  W{wingNumber}: {wing.Id}");
 
-            Console.WriteLine("Rewards {0} ({1})", item.Name, itemReward.Count);
-            Console.WriteLine(item.Description);
+        int encounterNumber = 0;
+        foreach (var encounter in wing.Encounters)
+        {
+            encounterNumber++;
+            Console.WriteLine($"    Encounter {encounterNumber}: {encounter.Id} ({encounter.Kind})");
         }
     }
 
