@@ -77,17 +77,17 @@ public class TestHttpClientFactory : IHttpClientFactory, IAsyncDisposable
 
             // The API can be disabled intentionally to avoid leaking spoilers, or it can be unavailable due to technical difficulties
             // Since it's not easy to tell the difference, give it one retry
-            .AddPolicyHandler(Policy.HandleResult<HttpResponseMessage>(response => response.StatusCode == ServiceUnavailable).RetryAsync())
+            .AddPolicyHandler(Policy.HandleResult<HttpResponseMessage>(response => response.StatusCode == ServiceUnavailable).WaitAndRetryAsync(10, _ => TimeSpan.FromSeconds(1)))
 
             // Assume internal errors are retryable (within reason)
-            .AddPolicyHandler(Policy.HandleResult<HttpResponseMessage>(response => response.StatusCode is InternalServerError or BadGateway or GatewayTimeout).RetryAsync(5))
+            .AddPolicyHandler(Policy.HandleResult<HttpResponseMessage>(response => response.StatusCode is InternalServerError or BadGateway or GatewayTimeout).WaitAndRetryAsync(10, _ => TimeSpan.FromSeconds(1)))
 
             // Sometimes the API fails to validate the access token even though the token is valid
             // This is retryable because real token errors result in a different error message, eg. "Invalid access token"
-            .AddPolicyHandler(Policy<HttpResponseMessage>.Handle<UnauthorizedOperationException>(reason => reason.Message == "endpoint requires authentication").RetryAsync(10))
+            .AddPolicyHandler(Policy<HttpResponseMessage>.Handle<UnauthorizedOperationException>(reason => reason.Message == "endpoint requires authentication").WaitAndRetryAsync(10, _ => TimeSpan.FromSeconds(1)))
 
             // Sometimes the API returns a Bad Request with an unknown error for perfectly valid requests
-            .AddPolicyHandler(Policy<HttpResponseMessage>.Handle<ArgumentException>(reason => reason.Message == "unknown error").RetryAsync())
+            .AddPolicyHandler(Policy<HttpResponseMessage>.Handle<ArgumentException>(reason => reason.Message == "unknown error").WaitAndRetryAsync(1, _ => TimeSpan.FromSeconds(1)))
 
             // Abort each attempted request after max 30 seconds and perform retries (within reason)
             .AddPolicyHandler(Policy<HttpResponseMessage>.Handle<TimeoutRejectedException>().RetryAsync(10))
