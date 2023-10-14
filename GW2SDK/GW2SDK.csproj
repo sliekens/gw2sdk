@@ -43,7 +43,7 @@
   </Choose>
 
   <ItemGroup>
-      <None Include="../README.md" Pack="true" PackagePath="\"/>
+      <None Include="../README.md" Pack="true" PackagePath="\" />
   </ItemGroup>
 
   <ItemGroup>
@@ -58,7 +58,7 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
-    <PackageReference Include="System.Text.Json" Version="8.0.0-rc.1.23419.4" />
+    <PackageReference Include="System.Text.Json" Version="8.0.0-rc.2.23479.6" />
   </ItemGroup>
 
   <!-- Reference assemblies that are not included by default in .NET Framework -->

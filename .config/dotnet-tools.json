@@ -19,6 +19,12 @@
       "commands": [
         "reportgenerator"
       ]
+    },
+    "dotnet-outdated-tool": {
+      "version": "4.5.3",
+      "commands": [
+        "dotnet-outdated"
+      ]
     }
   }
 }
