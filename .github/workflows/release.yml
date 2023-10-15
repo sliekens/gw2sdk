@@ -54,4 +54,20 @@ jobs:
           path: artifacts
 
       - name: Upload packages to GitHub Packages
-        run: dotnet nuget push artifacts/*.nupkg --source https://nuget.pkg.github.com/sliekens/index.json --api-key ${{secrets.GITHUB_TOKEN}}
+        run: dotnet nuget push artifacts/*.nupkg --source https://nuget.pkg.github.com/sliekens/index.json --api-key ${{ secrets.GITHUB_TOKEN }}
+
+  deploy-to-nuget:
+    name: Deploy to NuGet
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: nuget-integration
+    steps:
+      - name: Download artifacts
+        uses: actions/download-artifact@v3
+        with:
+          name: packages
+          path: artifacts
+
+      - name: Upload packages to NuGet
+        run: dotnet nuget push artifacts/*.nupkg --source ${{ vars.NUGET_API_URL }} --api-key ${{ secrets.NUGET_API_KEY }}
