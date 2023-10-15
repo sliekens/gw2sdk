@@ -11,7 +11,8 @@
           <SingleHit>false</SingleHit>
           <DeterministicReport>true</DeterministicReport>
 
-          <!-- Generates results with filename=https://raw.githubusercontent.com, making report generation super slow and network intensive. -->
+          <!-- UseSourceLink generates results with filename=https://raw.githubusercontent.com/etc instead of local file paths,
+               which makes report generation super slow and network intensive. -->
           <UseSourceLink>false</UseSourceLink> 
         </Configuration>
       </DataCollector>
