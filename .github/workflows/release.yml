@@ -40,23 +40,7 @@ jobs:
           name: packages
           path: artifacts
 
-  deploy-to-github-packages:
-    name: Deploy to GitHub Packages
-    needs: build
-    runs-on: ubuntu-latest
-    environment:
-      name: github-packages
-    steps:
-      - name: Download artifacts
-        uses: actions/download-artifact@v3
-        with:
-          name: packages
-          path: artifacts
-
-      - name: Upload packages to GitHub Packages
-        run: dotnet nuget push artifacts/*.nupkg --source https://nuget.pkg.github.com/sliekens/index.json --api-key ${{ secrets.GITHUB_TOKEN }}
-
-  deploy-to-nuget:
+  deploy:
     name: Deploy to NuGet
     needs: build
     runs-on: ubuntu-latest
