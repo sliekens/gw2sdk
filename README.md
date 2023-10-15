@@ -25,7 +25,7 @@ You are also welcome to propose changes directly with a pull request.
 - Small changes can be made with the free [github.dev] editor.
 - A Dev Container definition is provided for larger changes.
 
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/sliekens/gw2sdk)
+[![Open in GitHub Codespaces][codespaces-badge]](https://codespaces.new/sliekens/gw2sdk)
 
 (Light usage of Codespaces is [free]*, up to around 60 hours per month if you choose the lightest machine and don't exceed 15GB disk usage. This codespace weighs around 2.84GB.)
 
@@ -36,6 +36,7 @@ You are also welcome to propose changes directly with a pull request.
 [ci-badge]:https://github.com/sliekens/gw2sdk/actions/workflows/ci.yml/badge.svg
 [codecov-badge]:https://codecov.io/gh/sliekens/gw2sdk/branch/main/graph/badge.svg?token=2ZTDBRWWLR
 [codecov]:https://codecov.io/gh/sliekens/gw2sdk
+[codespaces-badge]:https://github.com/codespaces/badge.svg
 [free]:https://docs.github.com/en/billing/managing-billing-for-github-codespaces/about-billing-for-github-codespaces#monthly-included-storage-and-core-hours-for-personal-accounts
 [github.dev]:https://github.dev/sliekens/gw2sdk
 [installation]:https://sliekens.github.io/gw2sdk/guide/install.html
@@ -44,5 +45,5 @@ You are also welcome to propose changes directly with a pull request.
 [new-issue]:https://github.com/sliekens/gw2sdk/issues/new
 [twitter]:https://twitter.com/LiekensSteven
 [usage]:https://sliekens.github.io/gw2sdk/guide/usage.html
-[wiki]:https://github.com/sliekens/gw2sdk/wiki
 [user manual]:https://sliekens.github.io/gw2sdk/
+[wiki]:https://github.com/sliekens/gw2sdk/wiki
