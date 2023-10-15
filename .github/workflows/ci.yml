@@ -16,7 +16,9 @@ jobs:
     env:
       build-configuration: Release
     runs-on: ubuntu-latest
-    container: ghcr.io/sliekens/gw2sdk/devcontainer:latest
+    container:
+      image: ghcr.io/sliekens/gw2sdk/devcontainer:latest
+      options: --user 1001
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -24,15 +26,6 @@ jobs:
           fetch-depth: 0 # (no history limit)
           # Not supported by Source Link https://github.com/dotnet/sourcelink/issues/1111
           # filter: tree:0
-
-      - run: id
-      - run: ls -lah /__w/gw2sdk/gw2sdk
-      - run: ls -lah /__w/gw2sdk/gw2sdk/.git
-        
-      # Allow git to be used in the container without complaining about ownership of the repository
-      # Otherwise MinVer won't be able to determine the version from git history
-      - name: Disable git ownership checks
-        run: git config --global safe.directory '*'
 
       - name: Install dependencies
         run: dotnet restore --locked-mode

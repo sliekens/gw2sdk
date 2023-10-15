@@ -14,7 +14,9 @@ jobs:
     env:
       build-configuration: Release
     runs-on: ubuntu-latest
-    container: ghcr.io/sliekens/gw2sdk/devcontainer:latest
+    container:
+      image: ghcr.io/sliekens/gw2sdk/devcontainer:latest
+      options: --user 1001
     steps:
       - name: Checkout
         uses: actions/checkout@v4
