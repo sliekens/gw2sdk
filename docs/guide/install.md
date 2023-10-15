@@ -1,8 +1,14 @@
 # Installation
 
-## Development packages
+The recommended way to install the Guild Wars 2 SDK is to use the [NuGet package][nuget]. You can install the package from the command line using the .NET CLI.
 
-GW2SDK is still under development. Preview packages will be published to nuget.org later.
+Currently only preview versions are available.
+
+``` sh
+dotnet add package GW2SDK --prerelease
+```
+
+## Development packages
 
 You can install development packages from GitHub from [here][packages]. These packages are updated on every commit to the main branch and versioned by number of git commits since the last release. (Format: 1.0.0-preview.0.123)
 
@@ -34,3 +40,4 @@ dotnet nuget remove source sliekens
 
 [tokens]:https://github.com/settings/tokens
 [packages]:https://github.com/sliekens/gw2sdk/packages
+[nuget]:https://www.nuget.org/packages/GW2SDK/
