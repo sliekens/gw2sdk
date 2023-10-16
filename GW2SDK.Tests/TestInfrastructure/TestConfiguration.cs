@@ -61,31 +61,3 @@ public static class TestConfiguration
                 ?? throw new InvalidOperationException("Missing Guild:Id."),
         };
 }
-
-public sealed record TestCharacter
-{
-    public required string Name { get; init; }
-
-    public required RaceName Race { get; init; }
-
-    public required ProfessionName Profession { get; init; }
-}
-
-public sealed record TestGuild
-{
-    public required string Name { get; init; }
-
-    public required string Tag { get; init; }
-
-    public required string Id { get; init; }
-}
-
-public sealed record ApiKeyBasic
-{
-    public required string Key { get; init; }
-}
-
-public sealed record ApiKey
-{
-    public required string Key { get; init; }
-}

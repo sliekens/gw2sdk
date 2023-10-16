@@ -1,5 +1,4 @@
-﻿using System.ComponentModel;
-using System.Diagnostics.CodeAnalysis;
+﻿using System.Diagnostics.CodeAnalysis;
 using static System.AttributeTargets;
 
 namespace GuildWars2.Annotations;
@@ -22,12 +21,4 @@ internal sealed class ScopeAttribute : Attribute
     internal Permission[] Permission { get; }
 
     internal ScopeRequirement Requirement { get; }
-}
-
-[DefaultValue(All)]
-internal enum ScopeRequirement
-{
-    All,
-
-    Any
 }

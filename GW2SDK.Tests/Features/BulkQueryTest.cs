@@ -95,5 +95,3 @@ public class BulkQueryTest
         Assert.Equal(cutoff, received);
     }
 }
-
-internal sealed record StubRecord(int Id);
