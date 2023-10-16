@@ -1,7 +1,7 @@
 ﻿using System.Text.Json;
 using GuildWars2.Items;
 
-namespace GuildWars2.Tests.Features.Items;
+namespace GuildWars2.Tests.Features.Items.MissingMembers;
 
 public class MissingGatheringTool
 {

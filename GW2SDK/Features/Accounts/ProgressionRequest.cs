@@ -1,8 +1,7 @@
-using GuildWars2;
-using GuildWars2.Http;
+﻿using GuildWars2.Http;
 using GuildWars2.Json;
 
-namespace GW2SDK.Features.Accounts;
+namespace GuildWars2.Accounts;
 
 [PublicAPI]
 public sealed class ProgressionRequest : IHttpRequest<Replica<HashSet<Progression>>>

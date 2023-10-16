@@ -39,17 +39,3 @@ AnsiConsole.WriteLine("Highlighted routes are supported by GW2SDK. Dim routes ar
 AnsiConsole.Write(routes);
 AnsiConsole.Write(new Rule("Notable changes").LeftJustified());
 AnsiConsole.Write(changes);
-
-internal sealed class RouteOptions
-{
-    public bool ShowDisabled { get; init; }
-
-    public bool ShowAuthorized { get; init; }
-
-    public static RouteOptions Prompt() =>
-        new()
-        {
-            ShowDisabled = AnsiConsole.Confirm("Show disabled routes?", false),
-            ShowAuthorized = AnsiConsole.Confirm("Show routes that require an account?")
-        };
-}

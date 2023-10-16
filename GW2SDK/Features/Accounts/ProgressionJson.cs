@@ -1,8 +1,7 @@
-using System.Text.Json;
-using GuildWars2;
+﻿using System.Text.Json;
 using GuildWars2.Json;
 
-namespace GW2SDK.Features.Accounts;
+namespace GuildWars2.Accounts;
 
 [PublicAPI]
 public static class ProgressionJson

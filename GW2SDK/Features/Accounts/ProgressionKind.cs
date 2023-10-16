@@ -1,4 +1,4 @@
-namespace GW2SDK.Features.Accounts;
+﻿namespace GuildWars2.Accounts;
 
 [PublicAPI]
 public static class ProgressionKind

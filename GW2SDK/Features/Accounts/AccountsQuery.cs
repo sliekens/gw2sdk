@@ -1,6 +1,4 @@
-﻿using GW2SDK.Features.Accounts;
-
-namespace GuildWars2.Accounts;
+﻿namespace GuildWars2.Accounts;
 
 [PublicAPI]
 public sealed class AccountsQuery

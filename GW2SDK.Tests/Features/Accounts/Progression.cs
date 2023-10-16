@@ -1,5 +1,5 @@
+﻿using GuildWars2.Accounts;
 using GuildWars2.Tests.TestInfrastructure;
-using GW2SDK.Features.Accounts;
 
 namespace GuildWars2.Tests.Features.Accounts;
 
