@@ -25,7 +25,6 @@
     <MinVerTagPrefix>v</MinVerTagPrefix>
     <MinVerMinimumMajorMinor>1.0</MinVerMinimumMajorMinor>
     <MinVerDefaultPreReleaseIdentifiers>preview.0</MinVerDefaultPreReleaseIdentifiers>
-    <MinVerVerbosity>detailed</MinVerVerbosity>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
   </PropertyGroup>
 
