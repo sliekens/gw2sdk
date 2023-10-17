@@ -1,4 +1,5 @@
-﻿using GuildWars2.Guilds.Permissions;
+﻿using GuildWars2.Guilds.Logs;
+using GuildWars2.Guilds.Permissions;
 using GuildWars2.Guilds.Search;
 using GuildWars2.Guilds.Upgrades;
 
@@ -26,7 +27,7 @@ public sealed class GuildsQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    #endregion
+    #endregion v2/guild/search
 
     #region v2/guild/permissions
 
@@ -99,7 +100,7 @@ public sealed class GuildsQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    #endregion
+    #endregion v2/guild/permissions
 
     #region v2/guild/upgrades
 
@@ -172,7 +173,7 @@ public sealed class GuildsQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    #endregion
+    #endregion v2/guild/upgrades
 
     #region v2/guild/:id
 
@@ -191,5 +192,24 @@ public sealed class GuildsQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    #endregion
+    #endregion v2/guild/:id
+
+    #region v2/guild/:id/log
+
+    public Task<Replica<List<GuildLog>>> GetGuildLog(
+        string guildId,
+        string? accessToken,
+        MissingMemberBehavior missingMemberBehavior = default,
+        CancellationToken cancellationToken = default
+    )
+    {
+        GuildLogRequest request = new(guildId)
+        {
+            AccessToken = accessToken,
+            MissingMemberBehavior = missingMemberBehavior
+        };
+        return request.SendAsync(http, cancellationToken);
+    }
+
+    #endregion v2/guild/:id/log
 }

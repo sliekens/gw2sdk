@@ -45,19 +45,25 @@ public static class TestConfiguration
                 ?? throw new InvalidOperationException("Missing Character:Profession.")
             )
         };
+
     public static TestGuild TestGuild =>
         new()
         {
             Name =
                 Configuration["Guild:Name"]
                 ?? throw new InvalidOperationException("Missing Guild:Name."),
-
-            Tag =
-                Configuration["Guild:Tag"]
+            Tag = Configuration["Guild:Tag"]
                 ?? throw new InvalidOperationException("Missing Guild:Tag."),
+            Id = Configuration["Guild:Id"]
+                ?? throw new InvalidOperationException("Missing Guild:Id.")
+        };
 
-            Id =
-                Configuration["Guild:Id"]
-                ?? throw new InvalidOperationException("Missing Guild:Id."),
+    public static TestGuildLeader TestGuildLeader =>
+        new()
+        {
+            Id = Configuration["GuildLeader:Id"]
+                ?? throw new InvalidOperationException("Missing GuildLeader:Id."),
+            Token = Configuration["GuildLeader:Token"]
+                ?? throw new InvalidOperationException("Missing GuildLeader:Token.")
         };
 }

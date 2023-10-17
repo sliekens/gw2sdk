@@ -20,6 +20,22 @@ internal static class JsonElementExtensions
         return value;
     }
 
+
+    /// <summary>Converts a JSON array to a list.</summary>
+    /// <typeparam name="TValue">The type of values in the list.</typeparam>
+    /// <param name="json">The array element.</param>
+    /// <param name="resultSelector">A function that converts each item in the array to its destination type.</param>
+    /// <returns></returns>
+    internal static List<TValue> GetList<TValue>(
+        this JsonElement json,
+        Func<JsonElement, TValue> resultSelector
+    )
+    {
+        var values = new List<TValue>(json.GetArrayLength());
+        values.AddRange(json.EnumerateArray().Select(resultSelector));
+        return values;
+    }
+
     /// <summary>Converts a JSON array to a set.</summary>
     /// <typeparam name="TValue">The type of values in the set.</typeparam>
     /// <param name="json">The array element.</param>
