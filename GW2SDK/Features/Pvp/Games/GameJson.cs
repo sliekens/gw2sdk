@@ -1,4 +1,4 @@
-using System.Text.Json;
+﻿using System.Text.Json;
 using GuildWars2.Json;
 
 namespace GuildWars2.Pvp.Games;
@@ -84,7 +84,7 @@ public static class GameJson
             Result = result.GetValue(missingMemberBehavior),
             Team = team.GetValue(missingMemberBehavior),
             Profession = profession.GetValue(missingMemberBehavior),
-            RatingType = ratingType.GetValue(missingMemberBehavior),
+            RatingType = ratingType.Select(value => value.GetRatingType(missingMemberBehavior)),
             RatingChange = ratingChange.GetValue(),
             SeasonId = seasonId.GetValueOrNull(),
             Score = score.Select(value => value.GetScore(missingMemberBehavior))

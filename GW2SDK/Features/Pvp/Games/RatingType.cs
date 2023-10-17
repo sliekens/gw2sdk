@@ -1,4 +1,4 @@
-using System.ComponentModel;
+﻿using System.ComponentModel;
 
 namespace GuildWars2.Pvp.Games;
 
@@ -8,6 +8,8 @@ public enum RatingType
 {
     None,
     Ranked,
+    Ranked2v2,
+    Ranked3v3,
     Unranked,
     Placeholder
 }
