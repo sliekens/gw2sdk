@@ -1,4 +1,4 @@
-using GuildWars2.Mumble;
+﻿using GuildWars2.Mumble;
 
 namespace GuildWars2.Tests.Features.Mumble;
 
@@ -9,7 +9,7 @@ public class GameLinkTestObserver : IObserver<GameTick>
     public GameLinkTestObserver(CancellationToken ct)
     {
         tcs = new TaskCompletionSource<bool>();
-        ct.Register(tcs.SetCanceled);
+        ct.Register(() => tcs.TrySetCanceled());
     }
 
     public Task<bool> Handle => tcs.Task;
@@ -18,7 +18,7 @@ public class GameLinkTestObserver : IObserver<GameTick>
 
     public GameTick Last { get; private set; }
 
-    public void OnCompleted() => tcs.SetResult(true);
+    public void OnCompleted() => tcs.TrySetResult(true);
 
     public void OnError(Exception error) => tcs.SetException(error);
 
@@ -29,7 +29,7 @@ public class GameLinkTestObserver : IObserver<GameTick>
         {
             First = value;
         }
-        else
+        else if (value.UiTick > First.UiTick)
         {
             Last = value;
             tcs.TrySetResult(true);
