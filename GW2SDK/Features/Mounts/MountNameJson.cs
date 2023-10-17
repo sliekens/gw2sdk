@@ -23,13 +23,9 @@ public static class MountNameJson
             "springer" => MountName.Springer,
             "warclaw" => MountName.Warclaw,
             "turtle" => MountName.Turtle,
-            _ when missingMemberBehavior is MissingMemberBehavior.Error => UnexpectedMemberError(),
+            _ when missingMemberBehavior is MissingMemberBehavior.Error =>
+                throw new InvalidOperationException(Strings.UnexpectedMember(text)),
             _ => (MountName)text.GetDeterministicHashCode()
         };
-
-        MountName UnexpectedMemberError()
-        {
-            throw new InvalidOperationException(Strings.UnexpectedMember(text));
-        }
     }
 }
