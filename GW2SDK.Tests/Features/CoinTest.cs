@@ -1,4 +1,6 @@
-﻿namespace GuildWars2.Tests.Features;
+﻿using System.Globalization;
+
+namespace GuildWars2.Tests.Features;
 
 public class CoinTest
 {
@@ -18,6 +20,9 @@ public class CoinTest
     [InlineData("-214,748 gold, -36 silver, -48 copper", int.MinValue)]
     public void Coins_are_formatted_for_humans(string expected, int amount)
     {
+        // Number formatting depends on current culture
+        CultureInfo.CurrentCulture = CultureInfo.InvariantCulture;
+
         Coin sut = amount;
 
         var actual = sut.ToString();
