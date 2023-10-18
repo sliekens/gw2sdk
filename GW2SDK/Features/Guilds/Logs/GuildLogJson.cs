@@ -13,22 +13,26 @@ public static class GuildLogJson
     {
         switch (json.GetProperty("type").GetString())
         {
-            case "upgrade":
-                return json.GetGuildUpgradeActivity(missingMemberBehavior);
-            case "treasury":
-                return json.GetTreasuryDeposit(missingMemberBehavior);
-            case "stash":
-                return json.GetStashActivity(missingMemberBehavior);
-            case "rank_change":
-                return json.GetRankChange(missingMemberBehavior);
-            case "motd":
-                return json.GetNewMessageOfTheDay(missingMemberBehavior);
-            case "kick":
-                return json.GetMemberKicked(missingMemberBehavior);
-            case "joined":
-                return json.GetMemberJoined(missingMemberBehavior);
+            case "influence":
+                return json.GetInfluenceActivity(missingMemberBehavior);
+            case "invite_declined":
+                return json.GetInviteDeclined(missingMemberBehavior);
             case "invited":
                 return json.GetMemberInvited(missingMemberBehavior);
+            case "joined":
+                return json.GetMemberJoined(missingMemberBehavior);
+            case "kick":
+                return json.GetMemberKicked(missingMemberBehavior);
+            case "motd":
+                return json.GetNewMessageOfTheDay(missingMemberBehavior);
+            case "rank_change":
+                return json.GetRankChange(missingMemberBehavior);
+            case "stash":
+                return json.GetStashActivity(missingMemberBehavior);
+            case "treasury":
+                return json.GetTreasuryDeposit(missingMemberBehavior);
+            case "upgrade":
+                return json.GetGuildUpgradeActivity(missingMemberBehavior);
         }
 
         RequiredMember<int> id = new("id");

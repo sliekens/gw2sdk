@@ -13,9 +13,12 @@ public static class GuildUpgradeActivityJson
     {
         RequiredMember<int> id = new("id");
         RequiredMember<DateTimeOffset> time = new("time");
+        OptionalMember<string> user = new("user");
         RequiredMember<GuildUpgradeAction> action = new("action");
         RequiredMember<int> upgradeId = new("upgrade_id");
-        RequiredMember<int> recipeId = new("recipe_id");
+        NullableMember<int> recipeId = new("recipe_id");
+        NullableMember<int> itemId = new("item_id");
+        NullableMember<int> count = new("count");
 
         foreach (var member in json.EnumerateObject())
         {
@@ -36,6 +39,10 @@ public static class GuildUpgradeActivityJson
             {
                 time.Value = member.Value;
             }
+            else if (member.NameEquals(user.Name))
+            {
+                user.Value = member.Value;
+            }
             else if (member.NameEquals(action.Name))
             {
                 action.Value = member.Value;
@@ -43,11 +50,19 @@ public static class GuildUpgradeActivityJson
             else if (member.NameEquals(upgradeId.Name))
             {
 				upgradeId.Value = member.Value;
-			}
-			else if (member.NameEquals(recipeId.Name))
+            }
+            else if (member.NameEquals(recipeId.Name))
             {
-				recipeId.Value = member.Value;
-			}
+                recipeId.Value = member.Value;
+            }
+            else if (member.NameEquals(itemId.Name))
+            {
+                itemId.Value = member.Value;
+            }
+            else if (member.NameEquals(count.Name))
+            {
+                count.Value = member.Value;
+            }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {
                 throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
@@ -58,9 +73,12 @@ public static class GuildUpgradeActivityJson
         {
             Id = id.GetValue(),
             Time = time.GetValue(),
+            User = user.GetValueOrEmpty(),
             Action = action.GetValue(missingMemberBehavior),
             UpgradeId = upgradeId.GetValue(),
-            RecipeId = recipeId.GetValue()
+            RecipeId = recipeId.GetValue(),
+            ItemId = itemId.GetValue(),
+            Count = count.GetValue()
         };
     }
 }
