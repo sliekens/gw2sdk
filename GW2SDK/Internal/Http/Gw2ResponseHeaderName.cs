@@ -10,5 +10,5 @@ internal static class Gw2ResponseHeaderName
 
     internal const string ResultTotal = "X-Result-Total";
 
-    internal const string ResultCount = "X-Result-Size";
+    internal const string ResultCount = "X-Result-Count";
 }
