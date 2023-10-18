@@ -3,6 +3,7 @@ using GuildWars2.Guilds.Members;
 using GuildWars2.Guilds.Permissions;
 using GuildWars2.Guilds.Ranks;
 using GuildWars2.Guilds.Search;
+using GuildWars2.Guilds.Treasury;
 using GuildWars2.Guilds.Upgrades;
 
 namespace GuildWars2.Guilds;
@@ -106,6 +107,25 @@ public sealed class GuildsQuery
     }
 
     #endregion v2/guild/:id/members
+
+    #region v2/guild/:id/treasury
+
+    public Task<Replica<List<GuildTreasurySlot>>> GetGuildTreasury(
+        string guildId,
+        string? accessToken,
+        MissingMemberBehavior missingMemberBehavior = default,
+        CancellationToken cancellationToken = default
+    )
+    {
+        GuildTreasuryRequest request = new(guildId)
+        {
+            AccessToken = accessToken,
+            MissingMemberBehavior = missingMemberBehavior
+        };
+        return request.SendAsync(http, cancellationToken);
+    }
+
+    #endregion v2/guild/:id/treasury
 
     #region v2/guild/permissions
 
