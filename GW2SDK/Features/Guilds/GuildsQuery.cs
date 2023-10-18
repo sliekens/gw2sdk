@@ -1,4 +1,5 @@
-﻿using GuildWars2.Guilds.Logs;
+﻿using GuildWars2.Guilds.Bank;
+using GuildWars2.Guilds.Logs;
 using GuildWars2.Guilds.Members;
 using GuildWars2.Guilds.Permissions;
 using GuildWars2.Guilds.Ranks;
@@ -126,6 +127,25 @@ public sealed class GuildsQuery
     }
 
     #endregion v2/guild/:id/treasury
+
+    #region v2/guild/:id/stash
+
+    public Task<Replica<List<GuildBankTab>>> GetGuildBank(
+        string guildId,
+        string? accessToken,
+        MissingMemberBehavior missingMemberBehavior = default,
+        CancellationToken cancellationToken = default
+    )
+    {
+        GuildBankRequest request = new(guildId)
+        {
+            AccessToken = accessToken,
+            MissingMemberBehavior = missingMemberBehavior
+        };
+        return request.SendAsync(http, cancellationToken);
+    }
+
+    #endregion v2/guild/:id/stash
 
     #region v2/guild/permissions
 

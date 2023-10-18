@@ -1,0 +1,57 @@
+﻿using System.Text.Json;
+using GuildWars2.Json;
+
+namespace GuildWars2.Guilds.Bank;
+
+[PublicAPI]
+public static class GuildBankTabJson
+{
+    public static GuildBankTab GetGuildBankTab(
+        this JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
+    {
+        RequiredMember<int> upgradeId = new("upgrade_id");
+        RequiredMember<int> size = new("size");
+        RequiredMember<Coin> coins = new("coins");
+        OptionalMember<string> note = new("note");
+        RequiredMember<GuildBankSlot?> inventory = new("inventory");
+
+        foreach (var member in json.EnumerateObject())
+        {
+            if (member.NameEquals(upgradeId.Name))
+            {
+                upgradeId.Value = member.Value;
+            }
+            else if (member.NameEquals(size.Name))
+            {
+                size.Value = member.Value;
+            }
+            else if (member.NameEquals(coins.Name))
+            {
+                coins.Value = member.Value;
+            }
+            else if (member.NameEquals(note.Name))
+            {
+                note.Value = member.Value;
+            }
+            else if (member.NameEquals(inventory.Name))
+            {
+                inventory.Value = member.Value;
+            }
+            else if (missingMemberBehavior == MissingMemberBehavior.Error)
+            {
+                throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
+            }
+        }
+
+        return new GuildBankTab
+        {
+            UpgradeId = upgradeId.GetValue(),
+            Size = size.GetValue(),
+            Coins = coins.GetValue(),
+            Note = note.GetValueOrEmpty(),
+            Inventory = inventory.SelectMany(value => value.GetGuildBankSlot(missingMemberBehavior))
+        };
+    }
+}
