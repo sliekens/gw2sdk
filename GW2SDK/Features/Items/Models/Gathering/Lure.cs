@@ -1,5 +1,4 @@
 ﻿namespace GuildWars2.Items;
 
 [PublicAPI]
-[Inheritable]
-public record Lure : GatheringTool;
+public sealed record Lure : GatheringTool;

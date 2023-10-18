@@ -40,8 +40,32 @@ public class DesignedForInheritanceTest : IClassFixture<AssemblyFixture>
                 }
 
                 throw new ApplicationException(
-                    $"Type '{type}' is public but not abstract, seal it or mark it as [Inheritable]."
+                    $"Type '{type}' is not abstract nor sealed, check if it needs to be abstract or sealed or marked as [Inheritable]."
                 );
+            }
+        );
+    }
+
+    [Fact]
+    public void Every_exported_class_with_InheritableAttribute_has_a_subtype()
+    {
+        var classes = fixture.Assembly.ExportedTypes.Where(type => type.IsClass).ToList();
+        var inheritableClasses = classes.Where(
+                type => type.GetCustomAttributes()
+                    .Any(att => att.GetType().Name == "InheritableAttribute")
+            )
+            .ToList();
+        Assert.All(
+            inheritableClasses,
+            type =>
+            {
+                var subtypes = classes.Where(subtype => subtype.IsSubclassOf(type)).ToList();
+                if (subtypes.Count == 0)
+                {
+                    throw new ApplicationException(
+                        $"Type '{type}' is marked as [Inheritable] but has no subtypes."
+                    );
+                }
             }
         );
     }
