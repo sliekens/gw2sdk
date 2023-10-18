@@ -6,7 +6,7 @@
 public sealed record GuildTreasurySlot
 {
     /// <summary>The item's ID.</summary>
-    public required string ItemId { get; init; }
+    public required int ItemId { get; init; }
 
     /// <summary>How many of the item are currently in the treasury.</summary>
     public required int Count { get; init; }

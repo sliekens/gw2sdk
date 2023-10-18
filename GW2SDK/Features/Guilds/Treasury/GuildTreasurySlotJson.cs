@@ -11,7 +11,7 @@ public static class GuildTreasurySlotJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember<string> itemId = new("item_id");
+        RequiredMember<int> itemId = new("item_id");
         RequiredMember<int> count = new("count");
         RequiredMember<CountNeededForUpgrade> countNeededForUpgrade = new("needed_by");
 
