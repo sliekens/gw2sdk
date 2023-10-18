@@ -2,7 +2,5 @@
 
 public sealed record TestGuildLeader
 {
-    public required string GuildId { get; init; }
-
     public required string Token { get; init; }
 }

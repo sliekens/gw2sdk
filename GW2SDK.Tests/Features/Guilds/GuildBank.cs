@@ -10,8 +10,11 @@ public class GuildBank
         var sut = Composer.Resolve<Gw2Client>();
         var guildLeader = Composer.Resolve<TestGuildLeader>();
 
-        var actual = await sut.Guilds.GetGuildBank(guildLeader.GuildId, guildLeader.Token);
-
-        Assert.NotNull(actual.Value);
+        var account = await sut.Accounts.GetSummary(guildLeader.Token);
+        foreach (var guildId in account.Value.LeaderOfGuildIds!)
+        {
+            var actual = await sut.Guilds.GetGuildBank(guildId, guildLeader.Token);
+            Assert.NotNull(actual.Value);
+        }
     }
 }
