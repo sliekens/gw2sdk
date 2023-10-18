@@ -187,6 +187,20 @@ public sealed class GuildsQuery
 
     #endregion v2/guild/:id/storage
 
+    #region v2/guild/:id/upgrades
+
+    public Task<Replica<HashSet<int>>> GetCompletedGuildUpgrades(
+        string guildId,
+        string? accessToken,
+        CancellationToken cancellationToken = default
+    )
+    {
+        CompletedGuildUpgradesRequest request = new(guildId) { AccessToken = accessToken };
+        return request.SendAsync(http, cancellationToken);
+    }
+
+    #endregion v2/guild/:id/upgrades
+
     #region v2/guild/permissions
 
     public Task<Replica<HashSet<GuildPermissionSummary>>> GetGuildPermissions(
