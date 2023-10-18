@@ -61,8 +61,8 @@ public static class TestConfiguration
     public static TestGuildLeader TestGuildLeader =>
         new()
         {
-            Id = Configuration["GuildLeader:Id"]
-                ?? throw new InvalidOperationException("Missing GuildLeader:Id."),
+            GuildId = Configuration["GuildLeader:GuildId"]
+                ?? throw new InvalidOperationException("Missing GuildLeader:GuildId."),
             Token = Configuration["GuildLeader:Token"]
                 ?? throw new InvalidOperationException("Missing GuildLeader:Token.")
         };

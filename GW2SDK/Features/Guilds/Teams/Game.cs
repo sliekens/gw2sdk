@@ -1,4 +1,4 @@
-﻿namespace GuildWars2.Pvp.Games;
+﻿namespace GuildWars2.Guilds.Teams;
 
 [PublicAPI]
 [DataTransferObject]
@@ -15,8 +15,6 @@ public sealed record Game
     public required PvpResult Result { get; init; }
 
     public required PvpTeamColor Team { get; init; }
-
-    public required ProfessionName Profession { get; init; }
 
     public required PvpRatingType RatingType { get; init; }
 

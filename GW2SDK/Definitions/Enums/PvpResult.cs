@@ -1,7 +1,8 @@
-namespace GuildWars2.Pvp.Games;
+﻿namespace GuildWars2;
 
 [PublicAPI]
-public enum GameResult
+public enum PvpResult
+
 {
     Victory = 1,
     Defeat,

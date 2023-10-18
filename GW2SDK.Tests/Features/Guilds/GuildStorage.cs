@@ -10,7 +10,7 @@ public class GuildStorage
         var sut = Composer.Resolve<Gw2Client>();
         var guildLeader = Composer.Resolve<TestGuildLeader>();
 
-        var actual = await sut.Guilds.GetGuildStorage(guildLeader.Id, guildLeader.Token);
+        var actual = await sut.Guilds.GetGuildStorage(guildLeader.GuildId, guildLeader.Token);
 
         Assert.NotNull(actual.Value);
     }

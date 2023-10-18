@@ -1,10 +1,10 @@
 ﻿using System.ComponentModel;
 
-namespace GuildWars2.Pvp.Games;
+namespace GuildWars2;
 
 [PublicAPI]
 [DefaultValue(None)]
-public enum RatingType
+public enum PvpRatingType
 {
     None,
     Ranked,

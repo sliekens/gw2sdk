@@ -1,7 +1,7 @@
 ﻿using System.Text.Json;
 using GuildWars2.Json;
 
-namespace GuildWars2.Pvp.Games;
+namespace GuildWars2.Guilds.Teams;
 
 [PublicAPI]
 public static class GameJson
@@ -17,7 +17,6 @@ public static class GameJson
         RequiredMember<DateTimeOffset> ended = new("ended");
         RequiredMember<PvpResult> result = new("result");
         RequiredMember<PvpTeamColor> team = new("team");
-        RequiredMember<ProfessionName> profession = new("profession");
         RequiredMember<PvpRatingType> ratingType = new("rating_type");
         OptionalMember<int> ratingChange = new("rating_change");
         OptionalMember<string> seasonId = new("season");
@@ -49,10 +48,6 @@ public static class GameJson
             {
                 team.Value = member.Value;
             }
-            else if (member.NameEquals(profession.Name))
-            {
-                profession.Value = member.Value;
-            }
             else if (member.NameEquals(ratingType.Name))
             {
                 ratingType.Value = member.Value;
@@ -83,7 +78,6 @@ public static class GameJson
             Ended = ended.GetValue(),
             Result = result.GetValue(missingMemberBehavior),
             Team = team.GetValue(missingMemberBehavior),
-            Profession = profession.GetValue(missingMemberBehavior),
             RatingType = ratingType.Select(value => value.GetRatingType(missingMemberBehavior)),
             RatingChange = ratingChange.GetValue(),
             SeasonId = seasonId.GetValueOrNull(),

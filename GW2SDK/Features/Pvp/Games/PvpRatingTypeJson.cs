@@ -4,9 +4,9 @@ using GuildWars2.Json;
 namespace GuildWars2.Pvp.Games;
 
 [PublicAPI]
-public static class RatingTypeJson
+public static class PvpRatingTypeJson
 {
-    public static RatingType GetRatingType(
+    public static PvpRatingType GetRatingType(
         this JsonElement json,
         MissingMemberBehavior missingMemberBehavior
     )
@@ -14,15 +14,15 @@ public static class RatingTypeJson
         var text = json.GetStringRequired();
         return text switch
         {
-            "None" => RatingType.None,
-            "Ranked" => RatingType.Ranked,
-            "2v2Ranked" => RatingType.Ranked2v2,
-            "3v3Ranked" => RatingType.Ranked3v3,
-            "Unranked" => RatingType.Unranked,
-            "Placeholder" => RatingType.Placeholder,
+            "None" => PvpRatingType.None,
+            "Ranked" => PvpRatingType.Ranked,
+            "2v2Ranked" => PvpRatingType.Ranked2v2,
+            "3v3Ranked" => PvpRatingType.Ranked3v3,
+            "Unranked" => PvpRatingType.Unranked,
+            "Placeholder" => PvpRatingType.Placeholder,
             _ when missingMemberBehavior is MissingMemberBehavior.Error =>
                 throw new InvalidOperationException(Strings.UnexpectedMember(text)),
-            _ => (RatingType)text.GetDeterministicHashCode()
+            _ => (PvpRatingType)text.GetDeterministicHashCode()
         };
     }
 }

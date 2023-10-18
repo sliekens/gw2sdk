@@ -10,7 +10,7 @@ public class GuildMembers
         var sut = Composer.Resolve<Gw2Client>();
         var guildLeader = Composer.Resolve<TestGuildLeader>();
 
-        var actual = await sut.Guilds.GetGuildMembers(guildLeader.Id, guildLeader.Token);
+        var actual = await sut.Guilds.GetGuildMembers(guildLeader.GuildId, guildLeader.Token);
 
         Assert.NotEmpty(actual.Value);
     }

@@ -2,7 +2,7 @@
 
 namespace GuildWars2.Tests.Features.Guilds;
 
-public class GuildBank
+public class GuildTeams
 {
     [Fact]
     public async Task Can_be_found()
@@ -10,7 +10,7 @@ public class GuildBank
         var sut = Composer.Resolve<Gw2Client>();
         var guildLeader = Composer.Resolve<TestGuildLeader>();
 
-        var actual = await sut.Guilds.GetGuildBank(guildLeader.GuildId, guildLeader.Token);
+        var actual = await sut.Guilds.GetGuildTeams(guildLeader.GuildId, guildLeader.Token);
 
         Assert.NotNull(actual.Value);
     }

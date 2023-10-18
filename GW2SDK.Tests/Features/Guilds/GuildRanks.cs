@@ -10,7 +10,7 @@ public class GuildRanks
         var sut = Composer.Resolve<Gw2Client>();
         var guildLeader = Composer.Resolve<TestGuildLeader>();
 
-        var actual = await sut.Guilds.GetGuildRanks(guildLeader.Id, guildLeader.Token);
+        var actual = await sut.Guilds.GetGuildRanks(guildLeader.GuildId, guildLeader.Token);
 
         Assert.NotEmpty(actual.Value);
     }
