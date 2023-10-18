@@ -3,7 +3,8 @@ name: Release
 on:
   workflow_dispatch:
   push:
-    tags: v*
+    tags:
+      - v*
 
 env:
   SYMBOL_PACKAGE: true
@@ -30,7 +31,7 @@ jobs:
       - name: Build
         run: dotnet build --configuration ${{ env.build-configuration }} --no-restore
 
-      - name: Pack artifacts
+      - name: Create packages
         run: dotnet pack GW2SDK --configuration ${{ env.build-configuration }} --no-build --output artifacts
 
       - name: Upload artifacts
@@ -38,6 +39,22 @@ jobs:
         with:
           name: packages
           path: artifacts
+
+  deploy-integration:
+    name: Deploy to NuGet integration environment
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: nuget-integration
+    steps:
+      - name: Download artifacts
+        uses: actions/download-artifact@v3
+        with:
+          name: packages
+          path: artifacts
+
+      - name: Push packages
+        run: dotnet nuget push artifacts/*.nupkg --source ${{ vars.NUGET_API_URL }} --api-key ${{ secrets.NUGET_API_KEY }}
 
   deploy:
     name: Deploy to NuGet
@@ -52,5 +69,5 @@ jobs:
           name: packages
           path: artifacts
 
-      - name: Upload packages to NuGet
+      - name: Push packages
         run: dotnet nuget push artifacts/*.nupkg --source ${{ vars.NUGET_API_URL }} --api-key ${{ secrets.NUGET_API_KEY }}
