@@ -84,7 +84,7 @@ internal static class Routes
         "/v2/guild/:id",
         "/v2/guild/:id/log",
         //"/v2/guild/:id/members",
-        //"/v2/guild/:id/ranks",
+        "/v2/guild/:id/ranks",
         //"/v2/guild/:id/stash",
         //"/v2/guild/:id/storage",
         //"/v2/guild/:id/teams",
