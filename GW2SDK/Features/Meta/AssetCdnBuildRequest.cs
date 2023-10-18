@@ -11,7 +11,7 @@ public sealed class AssetCdnBuildRequest : IHttpRequest<Replica<Build>>
         CancellationToken cancellationToken
     )
     {
-        const string resource = "http://assetcdn.101.ArenaNetworks.com/latest64/101";
+        const string resource = "http://assetcdn.101.ArenaNetworks.com/latest/101";
         var latest64 = await httpClient
 #if NET
             .GetStringAsync(resource, cancellationToken)
