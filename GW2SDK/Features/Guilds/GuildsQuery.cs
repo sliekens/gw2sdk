@@ -1,4 +1,5 @@
 ﻿using GuildWars2.Guilds.Logs;
+using GuildWars2.Guilds.Members;
 using GuildWars2.Guilds.Permissions;
 using GuildWars2.Guilds.Ranks;
 using GuildWars2.Guilds.Search;
@@ -86,6 +87,25 @@ public sealed class GuildsQuery
     }
 
     #endregion v2/guild/:id/ranks
+
+    #region v2/guild/:id/members
+
+    public Task<Replica<List<GuildMember>>> GetGuildMembers(
+        string guildId,
+        string? accessToken,
+        MissingMemberBehavior missingMemberBehavior = default,
+        CancellationToken cancellationToken = default
+    )
+    {
+        GuildMembersRequest request = new(guildId)
+        {
+            AccessToken = accessToken,
+            MissingMemberBehavior = missingMemberBehavior
+        };
+        return request.SendAsync(http, cancellationToken);
+    }
+
+    #endregion v2/guild/:id/members
 
     #region v2/guild/permissions
 
