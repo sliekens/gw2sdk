@@ -2,8 +2,7 @@
 
 [PublicAPI]
 [DataTransferObject]
-[Inheritable]
-public record GuildMember
+public sealed record GuildMember
 {
     public required string Name { get; init; }
 

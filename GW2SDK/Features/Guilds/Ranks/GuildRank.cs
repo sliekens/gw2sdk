@@ -2,8 +2,7 @@
 
 [PublicAPI]
 [DataTransferObject]
-[Inheritable]
-public record GuildRank
+public sealed record GuildRank
 {
     public required string Id { get; init; }
 
