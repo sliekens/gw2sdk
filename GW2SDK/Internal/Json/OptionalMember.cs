@@ -48,28 +48,4 @@ internal readonly ref struct OptionalMember
             );
         }
     }
-
-    public IReadOnlyList<TValue>? SelectMany<TValue>(Func<JsonElement, TValue> resultSelector)
-    {
-        if (IsUndefinedOrNull)
-        {
-            return null;
-        }
-
-        try
-        {
-            // ReSharper disable once ConvertClosureToMethodGroup
-            return Value.EnumerateArray()
-                .Select(item => resultSelector(item))
-                .ToList()
-                .AsReadOnly();
-        }
-        catch (Exception reason)
-        {
-            throw new InvalidOperationException(
-                $"Value for '{Name.ToString()}' is incompatible.",
-                reason
-            );
-        }
-    }
 }

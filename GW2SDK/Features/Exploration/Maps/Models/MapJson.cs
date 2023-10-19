@@ -115,19 +115,19 @@ public static class MapJson
                 value => value.GetMap(entry => entry.GetPointOfInterest(missingMemberBehavior))
                     .ToDictionary(kvp => int.Parse(kvp.Key), kvp => kvp.Value)
             ),
-            GodShrines = godShrines.SelectMany(value => value.GetGodShrine(missingMemberBehavior)),
+            GodShrines = godShrines.Select(values => values.GetList(value => value.GetGodShrine(missingMemberBehavior))),
             Hearts = tasks.Select(
                 value => value.GetMap(entry => entry.GetHeart(missingMemberBehavior))
                     .ToDictionary(kvp => int.Parse(kvp.Key), kvp => kvp.Value)
             ),
-            HeroChallenges = skillChallenges.SelectMany(value => value.GetHeroChallenge(missingMemberBehavior)),
+            HeroChallenges = skillChallenges.Select(values => values.GetList(value => value.GetHeroChallenge(missingMemberBehavior))),
             Sectors = sectors.Select(
                 value => value.GetMap(entry => entry.GetSector(missingMemberBehavior))
                     .ToDictionary(kvp => int.Parse(kvp.Key), kvp => kvp.Value)
             ),
-            Adventures = adventures.SelectMany(value => value.GetAdventure(missingMemberBehavior)),
+            Adventures = adventures.Select(values => values.GetList(value => value.GetAdventure(missingMemberBehavior))),
             MasteryPoints =
-                masteryPoints.SelectMany(item => item.GetMasteryPoint(missingMemberBehavior))
+                masteryPoints.Select(values => values.GetList(item => item.GetMasteryPoint(missingMemberBehavior)))
         };
     }
 }

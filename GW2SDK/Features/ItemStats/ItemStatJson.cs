@@ -40,7 +40,7 @@ public static class ItemStatJson
             Id = id.Select(value => value.GetInt32()),
             Name = name.Select(value => value.GetStringRequired()),
             Attributes =
-                attributes.SelectMany(value => value.GetItemStatAttribute(missingMemberBehavior))
+                attributes.Select(values => values.GetList(value => value.GetItemStatAttribute(missingMemberBehavior)))
         };
     }
 }

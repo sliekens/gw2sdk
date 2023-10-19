@@ -47,8 +47,8 @@ public static class MountJson
             Id = id.Select(value => value.GetMountName(missingMemberBehavior)),
             Name = name.Select(value => value.GetStringRequired()),
             DefaultSkin = defaultSkin.Select(value => value.GetInt32()),
-            Skins = skins.SelectMany(value => value.GetInt32()),
-            Skills = skills.SelectMany(value => value.GetSkillReference(missingMemberBehavior))
+            Skins = skins.Select(values => values.GetList(value => value.GetInt32())),
+            Skills = skills.Select(values => values.GetList(value => value.GetSkillReference(missingMemberBehavior)))
         };
     }
 }

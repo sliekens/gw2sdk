@@ -155,7 +155,7 @@ public static class CharacterJson
             Name = name.Select(value => value.GetStringRequired()),
             Race = race.Select(value => value.GetEnum<RaceName>(missingMemberBehavior)),
             Gender = gender.Select(value => value.GetEnum<Gender>(missingMemberBehavior)),
-            Flags = flags.SelectMany(value => value.GetEnum<CharacterFlag>(missingMemberBehavior)),
+            Flags = flags.Select(values => values.GetList(value => value.GetEnum<CharacterFlag>(missingMemberBehavior))),
             Level = level.Select(value => value.GetInt32()),
             GuildId = guild.Select(value => value.GetString()) ?? "",
             Profession = profession.Select(value => value.GetEnum<ProfessionName>(missingMemberBehavior)),
@@ -164,24 +164,24 @@ public static class CharacterJson
             Created = created.Select(value => value.GetDateTimeOffset()),
             Deaths = deaths.Select(value => value.GetInt32()),
             CraftingDisciplines =
-                crafting.SelectMany(value => value.GetCraftingDiscipline(missingMemberBehavior)),
+                crafting.Select(values => values.GetList(value => value.GetCraftingDiscipline(missingMemberBehavior))),
             TitleId = title.Select(value => value.GetInt32()),
-            Backstory = backstory.SelectMany(value => value.GetStringRequired()),
+            Backstory = backstory.Select(values => values.GetList(value => value.GetStringRequired())),
             WvwAbilities =
-                wvwAbilities.SelectMany(value => value.GetWvwAbility(missingMemberBehavior)),
+                wvwAbilities.Select(values => values.GetList(value => value.GetWvwAbility(missingMemberBehavior))),
             BuildTabsUnlocked = buildTabsUnlocked.Select(value => value.GetInt32()),
             ActiveBuildTab = activeBuildTab.Select(value => value.GetInt32()),
-            BuildTabs = buildTabs.SelectMany(value => value.GetBuildTab(missingMemberBehavior)),
+            BuildTabs = buildTabs.Select(values => values.GetList(value => value.GetBuildTab(missingMemberBehavior))),
             EquipmentTabsUnlocked = equipmentTabsUnlocked.Select(value => value.GetInt32()),
             ActiveEquipmentTab = activeEquipmentTab.Select(value => value.GetInt32()),
             Equipment =
-                equipment.SelectMany(value => value.GetEquipmentItem(missingMemberBehavior)),
+                equipment.Select(values => values.GetList(value => value.GetEquipmentItem(missingMemberBehavior))),
             EquipmentTabs =
-                equipmentTabs.SelectMany(value => value.GetEquipmentTab(missingMemberBehavior)),
-            Recipes = recipes.SelectMany(value => value.GetInt32()),
+                equipmentTabs.Select(values => values.GetList(value => value.GetEquipmentTab(missingMemberBehavior))),
+            Recipes = recipes.Select(values => values.GetList(value => value.GetInt32())),
             Training =
-                training.SelectMany(value => value.GetTrainingProgress(missingMemberBehavior)),
-            Bags = bags.SelectMany(value => value.GetBag(missingMemberBehavior))
+                training.Select(values => values.GetList(value => value.GetTrainingProgress(missingMemberBehavior))),
+            Bags = bags.Select(values => values.GetList(value => value.GetBag(missingMemberBehavior)))
         };
     }
 }

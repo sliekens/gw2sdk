@@ -57,7 +57,7 @@ public static class NoveltyJson
             Description = description.Select(value => value.GetString()) ?? "",
             Icon = icon.Select(value => value.GetStringRequired()),
             Slot = slot.Select(value => value.GetEnum<NoveltyKind>(missingMemberBehavior)),
-            UnlockItems = unlockItems.SelectMany(value => value.GetInt32())
+            UnlockItems = unlockItems.Select(values => values.GetList(value => value.GetInt32()))
         };
     }
 }

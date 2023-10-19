@@ -25,6 +25,6 @@ public static class LearnedRecipesJson
             }
         }
 
-        return new HashSet<int>(recipes.SelectMany(value => value.GetInt32()));
+        return new HashSet<int>(recipes.Select(values => values.GetList(value => value.GetInt32())));
     }
 }

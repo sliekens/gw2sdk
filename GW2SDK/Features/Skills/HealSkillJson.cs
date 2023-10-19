@@ -1,4 +1,4 @@
-using System.Text.Json;
+﻿using System.Text.Json;
 using GuildWars2.Json;
 
 namespace GuildWars2.Skills;
@@ -138,26 +138,26 @@ public static class HealSkillJson
         {
             Id = id.Select(value => value.GetInt32()),
             Name = name.Select(value => value.GetStringRequired()),
-            Facts = facts.SelectMany(
-                value => value.GetSkillFact(missingMemberBehavior, out _, out _)
+            Facts = facts.Select(
+                values => values.GetList(value => value.GetSkillFact(missingMemberBehavior, out _, out _))
             ),
             TraitedFacts =
-                traitedFacts.SelectMany(value => value.GetTraitedSkillFact(missingMemberBehavior)),
+                traitedFacts.Select(values => values.GetList(value => value.GetTraitedSkillFact(missingMemberBehavior))),
             Description = description.Select(value => value.GetStringRequired()),
             Icon = icon.Select(value => value.GetString()),
             WeaponType = weaponType.Select(value => value.GetEnum<WeaponType>(missingMemberBehavior)),
-            Professions = professions.SelectMany(value => value.GetEnum<ProfessionName>(missingMemberBehavior)),
+            Professions = professions.Select(values => values.GetList(value => value.GetEnum<ProfessionName>(missingMemberBehavior))),
             Slot = slot.Select(value => value.GetEnum<SkillSlot>(missingMemberBehavior)),
             FlipSkill = flipSkill.Select(value => value.GetInt32()),
             NextChain = nextChain.Select(value => value.GetInt32()),
             PreviousChain = prevChain.Select(value => value.GetInt32()),
-            SkillFlag = flags.SelectMany(value => value.GetEnum<SkillFlag>(missingMemberBehavior)),
+            SkillFlag = flags.Select(values => values.GetList(value => value.GetEnum<SkillFlag>(missingMemberBehavior))),
             Specialization = specialization.Select(value => value.GetInt32()),
             ChatLink = chatLink.Select(value => value.GetStringRequired()),
-            Categories = categories.SelectMany(value => value.GetEnum<SkillCategoryName>(missingMemberBehavior)),
+            Categories = categories.Select(values => values.GetList(value => value.GetEnum<SkillCategoryName>(missingMemberBehavior))),
             Subskills =
-                subskills.SelectMany(value => value.GetSkillReference(missingMemberBehavior)),
-            BundleSkills = bundleSkills.SelectMany(value => value.GetInt32()),
+                subskills.Select(values => values.GetList(value => value.GetSkillReference(missingMemberBehavior))),
+            BundleSkills = bundleSkills.Select(values => values.GetList(value => value.GetInt32())),
             Attunement = attunement.Select(value => value.GetEnum<Attunement>(missingMemberBehavior)),
             Cost = cost.Select(value => value.GetInt32()),
             ToolbeltSkill = toolbeltSkill.Select(value => value.GetInt32())

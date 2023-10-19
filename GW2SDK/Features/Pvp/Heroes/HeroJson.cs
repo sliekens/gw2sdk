@@ -66,7 +66,7 @@ public static class HeroJson
             Stats = stats.Select(value => value.GetHeroStats(missingMemberBehavior)),
             Overlay = overlay.Select(value => value.GetStringRequired()),
             Underlay = underlay.Select(value => value.GetStringRequired()),
-            Skins = skins.SelectMany(value => value.GetHeroSkin(missingMemberBehavior))
+            Skins = skins.Select(values => values.GetList(value => value.GetHeroSkin(missingMemberBehavior)))
         };
     }
 }

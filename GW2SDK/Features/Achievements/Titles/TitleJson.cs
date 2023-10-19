@@ -47,7 +47,7 @@ public static class TitleJson
         {
             Id = id.Select(value => value.GetInt32()),
             Name = name.Select(value => value.GetStringRequired()),
-            Achievements = achievements.SelectMany(value => value.GetInt32()),
+            Achievements = achievements.Select(values => values.GetList(value => value.GetInt32())),
             AchievementPointsRequired = achievementPointsRequired.Select(value => value.GetInt32())
         };
     }

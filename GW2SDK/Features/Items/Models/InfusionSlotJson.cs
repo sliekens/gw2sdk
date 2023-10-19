@@ -1,4 +1,4 @@
-using System.Text.Json;
+﻿using System.Text.Json;
 using GuildWars2.Json;
 
 namespace GuildWars2.Items;
@@ -31,7 +31,7 @@ public static class InfusionSlotJson
 
         return new InfusionSlot
         {
-            Flags = flags.SelectMany(value => value.GetEnum<InfusionSlotFlag>(missingMemberBehavior)),
+            Flags = flags.Select(values => values.GetList(value => value.GetEnum<InfusionSlotFlag>(missingMemberBehavior))),
             ItemId = itemId.Select(value => value.GetInt32())
         };
     }

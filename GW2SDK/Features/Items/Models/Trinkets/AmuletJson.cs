@@ -1,4 +1,4 @@
-using System.Text.Json;
+﻿using System.Text.Json;
 using GuildWars2.Json;
 
 namespace GuildWars2.Items;
@@ -145,21 +145,21 @@ public static class AmuletJson
             Level = level.Select(value => value.GetInt32()),
             Rarity = rarity.Select(value => value.GetEnum<Rarity>(missingMemberBehavior)),
             VendorValue = vendorValue.Select(value => value.GetInt32()),
-            GameTypes = gameTypes.SelectMany(value => value.GetEnum<GameType>(missingMemberBehavior)),
-            Flags = flags.SelectMany(value => value.GetEnum<ItemFlag>(missingMemberBehavior)),
-            Restrictions = restrictions.SelectMany(value => value.GetEnum<ItemRestriction>(missingMemberBehavior)),
+            GameTypes = gameTypes.Select(values => values.GetList(value => value.GetEnum<GameType>(missingMemberBehavior))),
+            Flags = flags.Select(values => values.GetList(value => value.GetEnum<ItemFlag>(missingMemberBehavior))),
+            Restrictions = restrictions.Select(values => values.GetList(value => value.GetEnum<ItemRestriction>(missingMemberBehavior))),
             ChatLink = chatLink.Select(value => value.GetStringRequired()),
             Icon = icon.Select(value => value.GetString()),
             InfusionSlots =
-                infusionSlots.SelectMany(value => value.GetInfusionSlot(missingMemberBehavior)),
+                infusionSlots.Select(values => values.GetList(value => value.GetInfusionSlot(missingMemberBehavior))),
             AttributeAdjustment = attributeAdjustment.Select(value => value.GetDouble()),
-            StatChoices = statChoices.SelectMany(value => value.GetInt32()),
+            StatChoices = statChoices.Select(values => values.GetList(value => value.GetInt32())),
             Prefix = infixUpgrade.Select(value => value.GetInfixUpgrade(missingMemberBehavior)),
             SuffixItemId = suffixItemId.Select(value => value.GetInt32()),
             UpgradesInto =
-                upgradesInto.SelectMany(value => value.GetItemUpgrade(missingMemberBehavior)),
+                upgradesInto.Select(values => values.GetList(value => value.GetItemUpgrade(missingMemberBehavior))),
             UpgradesFrom =
-                upgradesFrom.SelectMany(value => value.GetItemUpgrade(missingMemberBehavior))
+                upgradesFrom.Select(values => values.GetList(value => value.GetItemUpgrade(missingMemberBehavior)))
         };
     }
 }

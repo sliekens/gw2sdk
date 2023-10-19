@@ -81,14 +81,14 @@ public static class ProfessionJson
             Code = code.Select(value => value.GetInt32()),
             Icon = icon.Select(value => value.GetStringRequired()),
             IconBig = iconBig.Select(value => value.GetStringRequired()),
-            Specializations = specializations.SelectMany(value => value.GetInt32()),
+            Specializations = specializations.Select(values => values.GetList(value => value.GetInt32())),
             Weapons =
                 weapons.Select(
                     value => value.GetMap(item => item.GetWeaponProficiency(missingMemberBehavior))
                 ),
-            Flags = flags.SelectMany(value => value.GetEnum<ProfessionFlag>(missingMemberBehavior)),
-            Skills = skills.SelectMany(value => value.GetSkillReference(missingMemberBehavior)),
-            Training = training.SelectMany(value => value.GetTraining(missingMemberBehavior)),
+            Flags = flags.Select(values => values.GetList(value => value.GetEnum<ProfessionFlag>(missingMemberBehavior))),
+            Skills = skills.Select(values => values.GetList(value => value.GetSkillReference(missingMemberBehavior))),
+            Training = training.Select(values => values.GetList(value => value.GetTraining(missingMemberBehavior))),
             SkillsByPalette =
                 skillsByPalette.Select(value => value.GetSkillsByPalette(missingMemberBehavior))
         };

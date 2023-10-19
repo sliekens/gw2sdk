@@ -50,7 +50,7 @@ public static class MountSkinJson
             Id = id.Select(value => value.GetInt32()),
             Name = name.Select(value => value.GetStringRequired()),
             Icon = icon.Select(value => value.GetStringRequired()),
-            DyeSlots = dyeSlots.SelectMany(value => value.GetDyeSlot(missingMemberBehavior)),
+            DyeSlots = dyeSlots.Select(values => values.GetList(value => value.GetDyeSlot(missingMemberBehavior))),
             Mount = mount.Select(value => value.GetMountName(missingMemberBehavior))
         };
     }

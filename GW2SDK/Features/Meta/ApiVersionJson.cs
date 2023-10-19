@@ -37,11 +37,11 @@ public static class ApiVersionJson
 
         return new ApiVersion
         {
-            Languages = languages.SelectMany(value => value.GetStringRequired()),
-            Routes = routes.SelectMany(value => value.GetRoute(missingMemberBehavior)),
+            Languages = languages.Select(values => values.GetList(value => value.GetStringRequired())),
+            Routes = routes.Select(values => values.GetList(value => value.GetRoute(missingMemberBehavior))),
             SchemaVersions =
-                schemaVersions.SelectMany(value => value.GetSchema(missingMemberBehavior))
-                ?? Array.Empty<Schema>()
+                schemaVersions.Select(values => values.GetList(value => value.GetSchema(missingMemberBehavior)))
+                ?? new List<Schema>()
         };
     }
 }

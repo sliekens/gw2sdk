@@ -38,8 +38,8 @@ public static class OrderBookJson
         return new OrderBook
         {
             Id = id.Select(value => value.GetInt32()),
-            Demand = demand.SelectMany(value => value.GetOrderBookLine(missingMemberBehavior)),
-            Supply = supply.SelectMany(value => value.GetOrderBookLine(missingMemberBehavior))
+            Demand = demand.Select(values => values.GetList(value => value.GetOrderBookLine(missingMemberBehavior))),
+            Supply = supply.Select(values => values.GetList(value => value.GetOrderBookLine(missingMemberBehavior)))
         };
     }
 }

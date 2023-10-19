@@ -1,6 +1,5 @@
 ﻿using System.Text.Json;
 using static System.Text.Json.JsonValueKind;
-using Array = System.Array;
 
 namespace GuildWars2.Json;
 
@@ -40,31 +39,6 @@ internal readonly ref struct NullableMember
         try
         {
             return resultSelector(Value);
-        }
-        catch (Exception reason)
-        {
-            throw new InvalidOperationException(
-                $"Value for '{Name.ToString()}' is incompatible.",
-                reason
-            );
-        }
-    }
-
-    public IReadOnlyList<TValue?> SelectMany<TValue>(Func<JsonElement, TValue?> resultSelector)
-        where TValue : struct
-    {
-        if (IsUndefinedOrNull)
-        {
-            return Array.Empty<TValue?>();
-        }
-
-        try
-        {
-            // ReSharper disable once ConvertClosureToMethodGroup
-            return Value.EnumerateArray()
-                .Select(item => resultSelector(item))
-                .ToList()
-                .AsReadOnly();
         }
         catch (Exception reason)
         {

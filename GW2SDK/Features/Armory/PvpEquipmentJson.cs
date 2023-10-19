@@ -39,8 +39,8 @@ public static class PvpEquipmentJson
         {
             AmuletId = amulet.Select(value => value.GetInt32()),
             RuneId = rune.Select(value => value.GetInt32()),
-            SigilIds = sigils.SelectMany<int?>(
-                value => value.ValueKind == JsonValueKind.Null ? null : value.GetInt32()
+            SigilIds = sigils.Select(
+                values => values.GetList(value => value.GetNullableInt32())
             )
         };
     }

@@ -91,69 +91,111 @@ public static class DyeSlotInfoJson
         return new DyeSlotInfo
         {
             Default =
-                @default.SelectMany(
-                    value => value.ValueKind == JsonValueKind.Null
-                        ? null
-                        : value.GetDyeSlot(missingMemberBehavior)
+                @default.Select(
+                    values =>
+                        values.GetList(
+                            value =>
+                                value.ValueKind == JsonValueKind.Null
+                                    ? null
+                                    : value.GetDyeSlot(missingMemberBehavior)
+                        )
                 ),
             AsuraFemale =
-                asuraFemale.SelectMany(
-                    value => value.ValueKind == JsonValueKind.Null
-                        ? null
-                        : value.GetDyeSlot(missingMemberBehavior)
+                asuraFemale.Select(
+                    values =>
+                        values.GetList(
+                            value =>
+                                value.ValueKind == JsonValueKind.Null
+                                    ? null
+                                    : value.GetDyeSlot(missingMemberBehavior)
+                        )
                 ),
             AsuraMale =
-                asuraMale.SelectMany(
-                    value => value.ValueKind == JsonValueKind.Null
-                        ? null
-                        : value.GetDyeSlot(missingMemberBehavior)
+                asuraMale.Select(
+                    values =>
+                        values.GetList(
+                            value =>
+                                value.ValueKind == JsonValueKind.Null
+                                    ? null
+                                    : value.GetDyeSlot(missingMemberBehavior)
+                        )
                 ),
             CharrFemale =
-                charrFemale.SelectMany(
-                    value => value.ValueKind == JsonValueKind.Null
-                        ? null
-                        : value.GetDyeSlot(missingMemberBehavior)
+                charrFemale.Select(
+                    values =>
+                        values.GetList(
+                            value =>
+                                value.ValueKind == JsonValueKind.Null
+                                    ? null
+                                    : value.GetDyeSlot(missingMemberBehavior)
+                        )
                 ),
             CharrMale =
-                charrMale.SelectMany(
-                    value => value.ValueKind == JsonValueKind.Null
-                        ? null
-                        : value.GetDyeSlot(missingMemberBehavior)
+                charrMale.Select(
+                    values =>
+                        values.GetList(
+                            value =>
+                                value.ValueKind == JsonValueKind.Null
+                                    ? null
+                                    : value.GetDyeSlot(missingMemberBehavior)
+                        )
                 ),
             HumanFemale =
-                humanFemale.SelectMany(
-                    value => value.ValueKind == JsonValueKind.Null
-                        ? null
-                        : value.GetDyeSlot(missingMemberBehavior)
+                humanFemale.Select(
+                    values =>
+                        values.GetList(
+                            value =>
+                                value.ValueKind == JsonValueKind.Null
+                                    ? null
+                                    : value.GetDyeSlot(missingMemberBehavior)
+                        )
                 ),
             HumanMale =
-                humanMale.SelectMany(
-                    value => value.ValueKind == JsonValueKind.Null
-                        ? null
-                        : value.GetDyeSlot(missingMemberBehavior)
+                humanMale.Select(
+                    values =>
+                        values.GetList(
+                            value =>
+                                value.ValueKind == JsonValueKind.Null
+                                    ? null
+                                    : value.GetDyeSlot(missingMemberBehavior)
+                        )
                 ),
             NornFemale =
-                nornFemale.SelectMany(
-                    value => value.ValueKind == JsonValueKind.Null
-                        ? null
-                        : value.GetDyeSlot(missingMemberBehavior)
+                nornFemale.Select(
+                    values =>
+                        values.GetList(
+                            value =>
+                                value.ValueKind == JsonValueKind.Null
+                                    ? null
+                                    : value.GetDyeSlot(missingMemberBehavior)
+                        )
                 ),
             NornMale =
-                nornMale.SelectMany(
-                    value => value.ValueKind == JsonValueKind.Null
-                        ? null
-                        : value.GetDyeSlot(missingMemberBehavior)
+                nornMale.Select(
+                    values =>
+                        values.GetList(
+                            value =>
+                                value.ValueKind == JsonValueKind.Null
+                                    ? null
+                                    : value.GetDyeSlot(missingMemberBehavior)
+                        )
                 ),
             SylvariFemale =
-                sylvariFemale.SelectMany(
+                sylvariFemale.Select(
+                    values =>
+                        values.GetList(
+                            value =>
+                                value.ValueKind == JsonValueKind.Null
+                                    ? null
+                                    : value.GetDyeSlot(missingMemberBehavior)
+                        )
+                ),
+            SylvariMale = sylvariMale.Select(
+                values => values.GetList(
                     value => value.ValueKind == JsonValueKind.Null
                         ? null
                         : value.GetDyeSlot(missingMemberBehavior)
-                ),
-            SylvariMale = sylvariMale.SelectMany(
-                value => value.ValueKind == JsonValueKind.Null
-                    ? null
-                    : value.GetDyeSlot(missingMemberBehavior)
+                )
             )
         };
     }

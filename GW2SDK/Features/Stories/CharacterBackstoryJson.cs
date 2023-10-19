@@ -1,4 +1,4 @@
-using System.Text.Json;
+﻿using System.Text.Json;
 using GuildWars2.Json;
 
 namespace GuildWars2.Stories;
@@ -27,7 +27,7 @@ public static class CharacterBackstoryJson
 
         return new CharacterBackstory
         {
-            Backstory = backstory.SelectMany(entry => entry.GetStringRequired()).ToList()
+            Backstory = backstory.Select(values => values.GetList(entry => entry.GetStringRequired())).ToList()
         };
     }
 }

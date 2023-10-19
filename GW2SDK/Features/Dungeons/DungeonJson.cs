@@ -33,7 +33,7 @@ public static class DungeonJson
         return new Dungeon
         {
             Id = id.Select(value => value.GetStringRequired()),
-            Paths = paths.SelectMany(value => value.GetDungeonPath(missingMemberBehavior))
+            Paths = paths.Select(values => values.GetList(value => value.GetDungeonPath(missingMemberBehavior)))
         };
     }
 }

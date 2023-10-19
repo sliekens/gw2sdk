@@ -63,8 +63,8 @@ public static class AchievementCategoryJson
             Order = order.Select(value => value.GetInt32()),
             Icon = icon.Select(value => value.GetStringRequired()),
             Achievements =
-                achievements.SelectMany(item => item.GetAchievementRef(missingMemberBehavior)),
-            Tomorrow = tomorrow.SelectMany(item => item.GetAchievementRef(missingMemberBehavior))
+                achievements.Select(values => values.GetList(item => item.GetAchievementRef(missingMemberBehavior))),
+            Tomorrow = tomorrow.Select(values => values.GetList(item => item.GetAchievementRef(missingMemberBehavior)))
         };
     }
 }

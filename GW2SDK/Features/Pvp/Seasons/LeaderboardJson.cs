@@ -34,8 +34,8 @@ public static class LeaderboardJson
         {
             Settings =
                 settings.Select(value => value.GetLeaderboardSetting(missingMemberBehavior)),
-            Scorings = scorings.SelectMany(
-                value => value.GetLeaderboardScoring(missingMemberBehavior)
+            Scorings = scorings.Select(
+                values => values.GetList(value => value.GetLeaderboardScoring(missingMemberBehavior))
             )
         };
     }

@@ -39,8 +39,8 @@ public static class GuildTreasurySlotJson
         {
             ItemId = itemId.Select(value => value.GetInt32()),
             Count = count.Select(value => value.GetInt32()),
-            CountNeededForUpgrades = countNeededForUpgrade.SelectMany(
-                value => value.GetCountNeededForUpgrade(missingMemberBehavior)
+            CountNeededForUpgrades = countNeededForUpgrade.Select(
+                values => values.GetList(value => value.GetCountNeededForUpgrade(missingMemberBehavior))
             )
         };
     }

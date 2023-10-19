@@ -51,7 +51,7 @@ public static class AbilityJson
             Name = name.Select(value => value.GetStringRequired()),
             Description = description.Select(value => value.GetStringRequired()),
             Icon = icon.Select(value => value.GetStringRequired()),
-            Ranks = ranks.SelectMany(value => value.GetAbilityRank(missingMemberBehavior))
+            Ranks = ranks.Select(values => values.GetList(value => value.GetAbilityRank(missingMemberBehavior)))
         };
     }
 }

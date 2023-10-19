@@ -44,7 +44,7 @@ public static class MaterialCategoryJson
         {
             Id = id.Select(value => value.GetInt32()),
             Name = name.Select(value => value.GetStringRequired()),
-            Items = items.SelectMany(value => value.GetInt32()),
+            Items = items.Select(values => values.GetList(value => value.GetInt32())),
             Order = order.Select(value => value.GetInt32())
         };
     }

@@ -72,7 +72,7 @@ public static class DyeJson
             Metal = metal.Select(value => value.GetColorInfo(missingMemberBehavior)),
             Fur = fur.Select(value => value.GetColorInfo(missingMemberBehavior)),
             Item = itemId.Select(value => value.GetInt32()),
-            Categories = categories.SelectMany(value => value.GetEnum<ColorCategoryName>(missingMemberBehavior))
+            Categories = categories.Select(values => values.GetList(value => value.GetEnum<ColorCategoryName>(missingMemberBehavior)))
         };
     }
 }

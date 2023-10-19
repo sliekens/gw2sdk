@@ -44,7 +44,7 @@ public static class GuildRankJson
         {
             Id = id.Select(value => value.GetStringRequired()),
             Order = order.Select(value => value.GetInt32()),
-            Permissions = permissions.SelectMany(value => value.GetEnum<GuildPermission>(missingMemberBehavior)),
+            Permissions = permissions.Select(values => values.GetList(value => value.GetEnum<GuildPermission>(missingMemberBehavior))),
             IconHref = iconHref.Select(value => value.GetStringRequired())
         };
     }

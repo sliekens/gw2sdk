@@ -47,13 +47,38 @@ public static class DailyAchievementGroupJson
 
         return new DailyAchievementGroup
         {
-            Pve = pve.SelectMany(value => value.GetDailyAchievement(missingMemberBehavior)),
-            Pvp = pvp.SelectMany(value => value.GetDailyAchievement(missingMemberBehavior)),
-            Wvw = wvw.SelectMany(value => value.GetDailyAchievement(missingMemberBehavior)),
+            Pve =
+                pve.Select(
+                    values =>
+                        values.GetList(
+                            value => value.GetDailyAchievement(missingMemberBehavior)
+                        )
+                ),
+            Pvp =
+                pvp.Select(
+                    values =>
+                        values.GetList(
+                            value => value.GetDailyAchievement(missingMemberBehavior)
+                        )
+                ),
+            Wvw =
+                wvw.Select(
+                    values =>
+                        values.GetList(
+                            value => value.GetDailyAchievement(missingMemberBehavior)
+                        )
+                ),
             Fractals =
-                fractals.SelectMany(value => value.GetDailyAchievement(missingMemberBehavior)),
-            Special = special.SelectMany(
-                value => value.GetDailyAchievement(missingMemberBehavior)
+                fractals.Select(
+                    values =>
+                        values.GetList(
+                            value => value.GetDailyAchievement(missingMemberBehavior)
+                        )
+                ),
+            Special = special.Select(
+                values => values.GetList(
+                    value => value.GetDailyAchievement(missingMemberBehavior)
+                )
             )
         };
     }

@@ -109,8 +109,8 @@ public static class GatheringToolSkinJson
             Name = name.Select(value => value.GetStringRequired()),
             Description = description.Select(value => value.GetString()) ?? "",
             Rarity = rarity.Select(value => value.GetEnum<Rarity>(missingMemberBehavior)),
-            Flags = flags.SelectMany(value => value.GetEnum<SkinFlag>(missingMemberBehavior)),
-            Restrictions = restrictions.SelectMany(value => value.GetEnum<SkinRestriction>(missingMemberBehavior)),
+            Flags = flags.Select(values => values.GetList(value => value.GetEnum<SkinFlag>(missingMemberBehavior))),
+            Restrictions = restrictions.Select(values => values.GetList(value => value.GetEnum<SkinRestriction>(missingMemberBehavior))),
             Icon = icon.Select(value => value.GetString())
         };
     }

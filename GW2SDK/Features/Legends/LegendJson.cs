@@ -57,7 +57,7 @@ public static class LegendJson
             Swap = swap.Select(value => value.GetInt32()),
             Heal = heal.Select(value => value.GetInt32()),
             Elite = elite.Select(value => value.GetInt32()),
-            Utilities = utilities.SelectMany(value => value.GetInt32())
+            Utilities = utilities.Select(values => values.GetList(value => value.GetInt32()))
         };
     }
 }

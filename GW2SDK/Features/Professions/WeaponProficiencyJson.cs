@@ -38,8 +38,13 @@ public static class WeaponProficiencyJson
         return new WeaponProficiency
         {
             RequiredSpecialization = specialization.Select(value => value.GetInt32()),
-            Flags = flags.SelectMany(value => value.GetEnum<WeaponFlag>(missingMemberBehavior)),
-            Skills = skills.SelectMany(value => value.GetWeaponSkill(missingMemberBehavior))
+            Flags = flags.Select(
+                values =>
+                    values.GetList(value => value.GetEnum<WeaponFlag>(missingMemberBehavior))
+            ),
+            Skills = skills.Select(
+                values => values.GetList(value => value.GetWeaponSkill(missingMemberBehavior))
+            )
         };
     }
 }

@@ -45,7 +45,7 @@ public static class OutfitJson
             Id = id.Select(value => value.GetInt32()),
             Name = name.Select(value => value.GetStringRequired()),
             Icon = icon.Select(value => value.GetStringRequired()),
-            UnlockItems = unlockItems.SelectMany(value => value.GetInt32())
+            UnlockItems = unlockItems.Select(values => values.GetList(value => value.GetInt32()))
         };
     }
 }

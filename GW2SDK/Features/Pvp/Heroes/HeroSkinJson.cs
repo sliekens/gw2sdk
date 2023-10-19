@@ -51,7 +51,7 @@ public static class HeroSkinJson
             Name = name.Select(value => value.GetStringRequired()),
             Icon = icon.Select(value => value.GetStringRequired()),
             Default = @default.Select(value => value.GetBoolean()),
-            UnlockItemIds = unlockItems.SelectMany(value => value.GetInt32())
+            UnlockItemIds = unlockItems.Select(values => values.GetList(value => value.GetInt32()))
         };
     }
 }

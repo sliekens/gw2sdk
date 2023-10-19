@@ -1,4 +1,4 @@
-using System.Text.Json;
+﻿using System.Text.Json;
 using GuildWars2.Json;
 
 namespace GuildWars2.Crafting;
@@ -84,10 +84,10 @@ public static class AxeRecipeJson
             OutputItemCount = outputItemCount.Select(value => value.GetInt32()),
             MinRating = minRating.Select(value => value.GetInt32()),
             TimeToCraft = timeToCraft.Select(value => TimeSpan.FromMilliseconds(value.GetDouble())),
-            Disciplines = disciplines.SelectMany(value => value.GetEnum<CraftingDisciplineName>(missingMemberBehavior)),
-            Flags = flags.SelectMany(value => value.GetEnum<RecipeFlag>(missingMemberBehavior)),
+            Disciplines = disciplines.Select(values => values.GetList(value => value.GetEnum<CraftingDisciplineName>(missingMemberBehavior))),
+            Flags = flags.Select(values => values.GetList(value => value.GetEnum<RecipeFlag>(missingMemberBehavior))),
             Ingredients =
-                ingredients.SelectMany(value => value.GetIngredient(missingMemberBehavior)),
+                ingredients.Select(values => values.GetList(value => value.GetIngredient(missingMemberBehavior))),
             ChatLink = chatLink.Select(value => value.GetStringRequired())
         };
     }

@@ -60,7 +60,7 @@ public static class RankJson
             Icon = icon.Select(value => value.GetStringRequired()),
             MinRank = minRank.Select(value => value.GetInt32()),
             MaxRank = maxRank.Select(value => value.GetInt32()),
-            Levels = levels.SelectMany(value => value.GetLevel(missingMemberBehavior))
+            Levels = levels.Select(values => values.GetList(value => value.GetLevel(missingMemberBehavior)))
         };
     }
 }

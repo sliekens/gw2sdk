@@ -59,10 +59,10 @@ public static class BackstoryQuestionJson
             Id = id.Select(value => value.GetInt32()),
             Title = title.Select(value => value.GetStringRequired()),
             Description = description.Select(value => value.GetStringRequired()),
-            Answers = answers.SelectMany(value => value.GetStringRequired()),
+            Answers = answers.Select(values => values.GetList(value => value.GetStringRequired())),
             Order = order.Select(value => value.GetInt32()),
-            Professions = professions.SelectMany(value => value.GetEnum<ProfessionName>(missingMemberBehavior)),
-            Races = races.SelectMany(value => value.GetEnum<RaceName>(missingMemberBehavior))
+            Professions = professions.Select(values => values.GetList(value => value.GetEnum<ProfessionName>(missingMemberBehavior))),
+            Races = races.Select(values => values.GetList(value => value.GetEnum<RaceName>(missingMemberBehavior)))
         };
     }
 }

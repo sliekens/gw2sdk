@@ -1,4 +1,4 @@
-using System.Text.Json;
+﻿using System.Text.Json;
 using GuildWars2.Json;
 
 namespace GuildWars2.Emotes;
@@ -35,8 +35,8 @@ public static class EmoteJson
         return new Emote
         {
             Id = id.Select(value => value.GetStringRequired()),
-            Commands = commands.SelectMany(entry => entry.GetStringRequired()),
-            UnlockItems = unlockItems.SelectMany(entry => entry.GetInt32())
+            Commands = commands.Select(values => values.GetList(entry => entry.GetStringRequired())),
+            UnlockItems = unlockItems.Select(values => values.GetList(entry => entry.GetInt32()))
         };
     }
 }

@@ -61,8 +61,8 @@ public static class BackstoryAnswerJson
             Description = description.Select(value => value.GetStringRequired()),
             Journal = journal.Select(value => value.GetStringRequired()),
             Question = question.Select(value => value.GetInt32()),
-            Professions = professions.SelectMany(value => value.GetEnum<ProfessionName>(missingMemberBehavior)),
-            Races = races.SelectMany(value => value.GetEnum<RaceName>(missingMemberBehavior))
+            Professions = professions.Select(values => values.GetList(value => value.GetEnum<ProfessionName>(missingMemberBehavior))),
+            Races = races.Select(values => values.GetList(value => value.GetEnum<RaceName>(missingMemberBehavior)))
         };
     }
 }

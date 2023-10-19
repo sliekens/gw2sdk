@@ -89,7 +89,7 @@ public static class MapSummaryJson
             MaxLevel = maxLevel.Select(value => value.GetInt32()),
             DefaultFloor = defaultFloor.Select(value => value.GetInt32()),
             Kind = kind.Select(value => value.GetEnum<MapKind>(missingMemberBehavior)),
-            Floors = floors.SelectMany(value => value.GetInt32()),
+            Floors = floors.Select(values => values.GetList(value => value.GetInt32())),
             RegionId = regionId.Select(value => value.GetInt32()),
             RegionName = regionName.Select(value => value.GetString()) ?? "",
             ContinentId = continentId.Select(value => value.GetInt32()),

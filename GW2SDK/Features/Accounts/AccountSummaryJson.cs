@@ -101,10 +101,16 @@ public static class AccountSummaryJson
             Age = age.Select(value => TimeSpan.FromSeconds(value.GetDouble())),
             LastModified = lastModified.Select(value => value.GetDateTimeOffset()),
             WorldId = world.Select(value => value.GetInt32()),
-            GuildIds = guilds.SelectMany(value => value.GetStringRequired()),
-            LeaderOfGuildIds = guildLeader.SelectMany(value => value.GetStringRequired()),
+            GuildIds = guilds.Select(values => values.GetList(value => value.GetStringRequired())),
+            LeaderOfGuildIds =
+                guildLeader.Select(values => values.GetList(value => value.GetStringRequired())),
             Created = created.Select(value => value.GetDateTimeOffset()),
-            Access = access.SelectMany(value => value.GetEnum<ProductName>(missingMemberBehavior)),
+            Access =
+                access.Select(
+                    values => values.GetList(
+                        value => value.GetEnum<ProductName>(missingMemberBehavior)
+                    )
+                ),
             Commander = commander.Select(value => value.GetBoolean()),
             FractalLevel = fractalLevel.Select(value => value.GetInt32()),
             DailyAchievementPoints = dailyAp.Select(value => value.GetInt32()),

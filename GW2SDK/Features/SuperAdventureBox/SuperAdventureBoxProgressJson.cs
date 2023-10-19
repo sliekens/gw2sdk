@@ -38,15 +38,15 @@ public static class SuperAdventureBoxProgressJson
         return new SuperAdventureBoxProgress
         {
             Zones =
-                zones.SelectMany(
-                    entry => entry.GetSuperAdventureBoxZone(missingMemberBehavior)
+                zones.Select(
+                    values => values.GetList(entry => entry.GetSuperAdventureBoxZone(missingMemberBehavior))
                 ),
             Unlocks =
-                unlocks.SelectMany(
-                    entry => entry.GetSuperAdventureBoxUpgrade(missingMemberBehavior)
+                unlocks.Select(
+                    values => values.GetList(entry => entry.GetSuperAdventureBoxUpgrade(missingMemberBehavior))
                 ),
-            Songs = songs.SelectMany(
-                entry => entry.GetSuperAdventureBoxSong(missingMemberBehavior)
+            Songs = songs.Select(
+                values => values.GetList(entry => entry.GetSuperAdventureBoxSong(missingMemberBehavior))
             )
         };
     }

@@ -50,7 +50,7 @@ public static class AchievementGroupJson
             Name = name.Select(value => value.GetStringRequired()),
             Description = description.Select(value => value.GetStringRequired()),
             Order = order.Select(value => value.GetInt32()),
-            Categories = categories.SelectMany(value => value.GetInt32())
+            Categories = categories.Select(values => values.GetList(value => value.GetInt32()))
         };
     }
 }

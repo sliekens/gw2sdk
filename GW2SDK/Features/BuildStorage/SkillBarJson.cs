@@ -39,8 +39,8 @@ public static class SkillBarJson
         {
             Heal = heal.Select(value => value.GetInt32()),
             Utilities =
-                utilities.SelectMany<int?>(
-                    value => value.ValueKind == JsonValueKind.Null ? null : value.GetInt32()
+                utilities.Select(
+                    values => values.GetList(value => value.GetNullableInt32())
                 ),
             Elite = elite.Select(value => value.GetInt32())
         };

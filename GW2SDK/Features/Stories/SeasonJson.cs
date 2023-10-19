@@ -45,7 +45,7 @@ public static class SeasonJson
             Id = id.Select(value => value.GetStringRequired()),
             Name = name.Select(value => value.GetStringRequired()),
             Order = order.Select(value => value.GetInt32()),
-            StoryIds = stories.SelectMany(value => value.GetInt32())
+            StoryIds = stories.Select(values => values.GetList(value => value.GetInt32()))
         };
     }
 }

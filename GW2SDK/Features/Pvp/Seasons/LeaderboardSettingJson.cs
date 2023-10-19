@@ -43,7 +43,7 @@ public static class LeaderboardSettingJson
         {
             Name = name.Select(value => value.GetStringRequired()),
             ScoringId = scoring.Select(value => value.GetStringRequired()),
-            Tiers = tiers.SelectMany(value => value.GetLeaderboardTier(missingMemberBehavior))
+            Tiers = tiers.Select(values => values.GetList(value => value.GetLeaderboardTier(missingMemberBehavior)))
         };
     }
 }

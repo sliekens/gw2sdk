@@ -36,7 +36,7 @@ public static class RaceJson
         {
             Id = id.Select(value => value.GetEnum<RaceName>(missingMemberBehavior)),
             Name = name.Select(value => value.GetStringRequired()),
-            Skills = skills.SelectMany(value => value.GetInt32())
+            Skills = skills.Select(values => values.GetList(value => value.GetInt32()))
         };
     }
 }

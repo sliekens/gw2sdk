@@ -1,4 +1,4 @@
-using System.Text.Json;
+﻿using System.Text.Json;
 using GuildWars2.Json;
 
 namespace GuildWars2.Tokens;
@@ -47,7 +47,7 @@ public static class ApiKeyInfoJson
         {
             Id = id.Select(value => value.GetStringRequired()),
             Name = name.Select(value => value.GetStringRequired()),
-            Permissions = permissions.SelectMany(value => value.GetEnum<Permission>(missingMemberBehavior))
+            Permissions = permissions.Select(values => values.GetList(value => value.GetEnum<Permission>(missingMemberBehavior)))
         };
     }
 }

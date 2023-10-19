@@ -45,7 +45,7 @@ public static class AchievementRefJson
             Id = id.Select(value => value.GetInt32()),
             RequiredAccess =
                 requiredAccess.Select(value => value.GetProductRequirement(missingMemberBehavior)),
-            Flags = flags.SelectMany(value => value.GetEnum<AchievementFlag>(missingMemberBehavior)),
+            Flags = flags.Select(values => values.GetList(value => value.GetEnum<AchievementFlag>(missingMemberBehavior))),
             Level = level.Select(value => value.GetLevelRequirement(missingMemberBehavior))
         };
     }

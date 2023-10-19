@@ -57,7 +57,7 @@ public static class ContinentJson
                 continentDimensions.Select(value => value.GetDimensions(missingMemberBehavior)),
             MinZoom = minZoom.Select(value => value.GetInt32()),
             MaxZoom = maxZoom.Select(value => value.GetInt32()),
-            Floors = floors.SelectMany(value => value.GetInt32())
+            Floors = floors.Select(values => values.GetList(value => value.GetInt32()))
         };
     }
 }

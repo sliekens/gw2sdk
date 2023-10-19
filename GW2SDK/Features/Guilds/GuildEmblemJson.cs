@@ -1,4 +1,4 @@
-using System.Text.Json;
+﻿using System.Text.Json;
 using GuildWars2.Json;
 
 namespace GuildWars2.Guilds;
@@ -39,7 +39,7 @@ public static class GuildEmblemJson
         {
             Background = background.Select(value => value.GetGuildEmblemPart(missingMemberBehavior)),
             Foreground = foreground.Select(value => value.GetGuildEmblemPart(missingMemberBehavior)),
-            Flags = flags.SelectMany(value => value.GetEnum<GuildEmblemFlag>(missingMemberBehavior))
+            Flags = flags.Select(values => values.GetList(value => value.GetEnum<GuildEmblemFlag>(missingMemberBehavior)))
         };
     }
 }

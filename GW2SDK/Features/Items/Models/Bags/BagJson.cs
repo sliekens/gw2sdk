@@ -1,4 +1,4 @@
-using System.Text.Json;
+﻿using System.Text.Json;
 using GuildWars2.Json;
 
 namespace GuildWars2.Items;
@@ -108,9 +108,9 @@ public static class BagJson
             Level = level.Select(value => value.GetInt32()),
             Rarity = rarity.Select(value => value.GetEnum<Rarity>(missingMemberBehavior)),
             VendorValue = vendorValue.Select(value => value.GetInt32()),
-            GameTypes = gameTypes.SelectMany(value => value.GetEnum<GameType>(missingMemberBehavior)),
-            Flags = flags.SelectMany(value => value.GetEnum<ItemFlag>(missingMemberBehavior)),
-            Restrictions = restrictions.SelectMany(value => value.GetEnum<ItemRestriction>(missingMemberBehavior)),
+            GameTypes = gameTypes.Select(values => values.GetList(value => value.GetEnum<GameType>(missingMemberBehavior))),
+            Flags = flags.Select(values => values.GetList(value => value.GetEnum<ItemFlag>(missingMemberBehavior))),
+            Restrictions = restrictions.Select(values => values.GetList(value => value.GetEnum<ItemRestriction>(missingMemberBehavior))),
             ChatLink = chatLink.Select(value => value.GetStringRequired()),
             Icon = icon.Select(value => value.GetString()),
             NoSellOrSort = noSellOrSort.Select(value => value.GetBoolean()),

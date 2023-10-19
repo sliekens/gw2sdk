@@ -58,12 +58,14 @@ public static class GliderJson
         return new Glider
         {
             Id = id.Select(value => value.GetInt32()),
-            UnlockItems = unlockItems.SelectMany(entry => entry.GetInt32()) ?? Array.Empty<int>(),
+            UnlockItems =
+                unlockItems.Select(values => values.GetList(entry => entry.GetInt32()))
+                ?? new List<int>(),
             Order = order.Select(value => value.GetInt32()),
             Icon = icon.Select(value => value.GetStringRequired()),
             Name = name.Select(value => value.GetStringRequired()),
             Description = description.Select(value => value.GetStringRequired()),
-            DefaultDyes = defaultDyes.SelectMany(entry => entry.GetInt32())
+            DefaultDyes = defaultDyes.Select(values => values.GetList(entry => entry.GetInt32()))
         };
     }
 }

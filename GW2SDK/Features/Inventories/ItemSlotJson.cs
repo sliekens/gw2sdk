@@ -88,13 +88,11 @@ public static class ItemSlotJson
             Count = count.Select(value => value.GetInt32()),
             Charges = charges.Select(value => value.GetInt32()),
             Skin = skin.Select(value => value.GetInt32()),
-            Upgrades = upgrades.SelectMany(value => value.GetInt32()),
-            UpgradeSlotIndices = upgradeSlotIndices.SelectMany(value => value.GetInt32()),
-            Infusions = infusions.SelectMany(value => value.GetInt32()),
-            Dyes =
-                dyes.SelectMany<int?>(
-                    value => value.ValueKind == JsonValueKind.Null ? null : value.GetInt32()
-                ),
+            Upgrades = upgrades.Select(values => values.GetList(value => value.GetInt32())),
+            UpgradeSlotIndices =
+                upgradeSlotIndices.Select(values => values.GetList(value => value.GetInt32())),
+            Infusions = infusions.Select(values => values.GetList(value => value.GetInt32())),
+            Dyes = dyes.Select(values => values.GetList(value => value.GetNullableInt32())),
             Binding = binding.Select(value => value.GetEnum<ItemBinding>(missingMemberBehavior)),
             BoundTo = boundTo.Select(value => value.GetString()) ?? "",
             Stats = stats.Select(value => value.GetSelectedStat(missingMemberBehavior))

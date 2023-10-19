@@ -48,7 +48,7 @@ public static class PetJson
             Name = name.Select(value => value.GetStringRequired()),
             Description = description.Select(value => value.GetStringRequired()),
             Icon = icon.Select(value => value.GetStringRequired()),
-            Skills = skills.SelectMany(value => value.GetPetSkill(missingMemberBehavior))
+            Skills = skills.Select(values => values.GetList(value => value.GetPetSkill(missingMemberBehavior)))
         };
     }
 }

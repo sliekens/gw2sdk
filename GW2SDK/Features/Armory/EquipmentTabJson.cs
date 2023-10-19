@@ -52,7 +52,7 @@ public static class EquipmentTabJson
             Tab = tab.Select(value => value.GetInt32()),
             Name = name.Select(value => value.GetStringRequired()),
             Equipment =
-                equipment.SelectMany(value => value.GetEquipmentItem(missingMemberBehavior)),
+                equipment.Select(values => values.GetList(value => value.GetEquipmentItem(missingMemberBehavior))),
             PvpEquipment =
                 pvpEquipment.Select(value => value.GetPvpEquipment(missingMemberBehavior))
         };

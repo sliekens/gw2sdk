@@ -4,6 +4,9 @@ namespace GuildWars2.Json;
 
 internal static class JsonElementExtensions
 {
+    internal static int? GetNullableInt32(this JsonElement json) =>
+        json.ValueKind == JsonValueKind.Null ? null : json.GetInt32();
+
     /// <summary>Returns a string, or throws if the element is null or not a string.</summary>
     /// <param name="json">A String value.</param>
     /// <returns>The value of the JSON element as a non-null string (can be empty).</returns>

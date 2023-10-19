@@ -1,4 +1,4 @@
-using System.Text.Json;
+﻿using System.Text.Json;
 using GuildWars2.Json;
 
 namespace GuildWars2.Items;
@@ -38,7 +38,7 @@ public static class InfixUpgradeJson
         {
             ItemstatsId = id.Select(value => value.GetInt32()),
             Attributes =
-                attributes.SelectMany(value => value.GetUpgradeAttribute(missingMemberBehavior)),
+                attributes.Select(values => values.GetList(value => value.GetUpgradeAttribute(missingMemberBehavior))),
             Buff = buff.Select(value => value.GetBuff(missingMemberBehavior))
         };
     }

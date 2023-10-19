@@ -33,8 +33,8 @@ public static class SpecializationJson
         return new Specialization
         {
             Id = id.Select(value => value.GetInt32()),
-            Traits = traits.SelectMany<int?>(
-                value => value.ValueKind == JsonValueKind.Null ? null : value.GetInt32()
+            Traits = traits.Select(
+                values => values.GetList(value => value.GetNullableInt32())
             )
         };
     }

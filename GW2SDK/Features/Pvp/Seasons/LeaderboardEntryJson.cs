@@ -63,7 +63,7 @@ public static class LeaderboardEntryJson
             TeamId = teamId.Select(value => value.GetInt32()),
             Rank = rank.Select(value => value.GetInt32()),
             Date = date.Select(value => value.GetDateTimeOffset()),
-            Scores = scores.SelectMany(value => value.GetScore(missingMemberBehavior))
+            Scores = scores.Select(values => values.GetList(value => value.GetScore(missingMemberBehavior)))
         };
     }
 }

@@ -33,7 +33,7 @@ public static class EmblemJson
         return new Emblem
         {
             Id = id.Select(value => value.GetInt32()),
-            Layers = layers.SelectMany(value => value.GetStringRequired())
+            Layers = layers.Select(values => values.GetList(value => value.GetStringRequired()))
         };
     }
 }

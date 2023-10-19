@@ -33,7 +33,7 @@ public static class DeliveryBoxJson
         return new DeliveryBox
         {
             Coins = coins.Select(value => value.GetInt32()),
-            Items = items.SelectMany(item => item.GetDeliveredItem(missingMemberBehavior))
+            Items = items.Select(values => values.GetList(item => item.GetDeliveredItem(missingMemberBehavior)))
         };
     }
 }

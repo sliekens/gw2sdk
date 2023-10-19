@@ -109,8 +109,8 @@ public static class GuildUpgradeJson
             Icon = icon.Select(value => value.GetStringRequired()),
             RequiredLevel = requiredLevel.Select(value => value.GetInt32()),
             Experience = experience.Select(value => value.GetInt32()),
-            Prerequisites = prerequisites.SelectMany(value => value.GetInt32()),
-            Costs = costs.SelectMany(value => value.GetGuildUpgradeCost(missingMemberBehavior))
+            Prerequisites = prerequisites.Select(values => values.GetList(value => value.GetInt32())),
+            Costs = costs.Select(values => values.GetList(value => value.GetGuildUpgradeCost(missingMemberBehavior)))
         };
     }
 }

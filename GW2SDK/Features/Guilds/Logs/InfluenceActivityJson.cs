@@ -66,7 +66,7 @@ public static class InfluenceActivityJson
             Time = time.Select(value => value.GetDateTimeOffset()),
             Activity = activity.Select(value => value.GetEnum<InfluenceActivityKind>(missingMemberBehavior)),
             TotalParticipants = totalParticipants.Select(value => value.GetInt32()),
-            Participants = participants.SelectMany(value => value.GetStringRequired())
+            Participants = participants.Select(values => values.GetList(value => value.GetStringRequired()))
         };
     }
 }

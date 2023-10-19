@@ -53,11 +53,15 @@ public static class MailCarrierJson
         return new MailCarrier
         {
             Id = id.Select(value => value.GetInt32()),
-            UnlockItems = unlockItems.SelectMany(value => value.GetInt32()),
+            UnlockItems = unlockItems.Select(values => values.GetList(value => value.GetInt32())),
             Order = order.Select(value => value.GetInt32()),
             Icon = icon.Select(value => value.GetStringRequired()),
             Name = name.Select(value => value.GetStringRequired()),
-            Flags = flags.SelectMany(value => value.GetEnum<MailCarrierFlag>(missingMemberBehavior))
+            Flags = flags.Select(
+                values => values.GetList(
+                    value => value.GetEnum<MailCarrierFlag>(missingMemberBehavior)
+                )
+            )
         };
     }
 }

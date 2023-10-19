@@ -63,14 +63,14 @@ public static class GuildTeamJson
         return new GuildTeam
         {
             Id = id.Select(value => value.GetInt32()),
-            Members = members.SelectMany(value => value.GetGuildTeamMember(missingMemberBehavior)),
+            Members = members.Select(values => values.GetList(value => value.GetGuildTeamMember(missingMemberBehavior))),
             Name = name.Select(value => value.GetStringRequired()),
             State = state.Select(value => value.GetEnum<GuildTeamState>(missingMemberBehavior)),
             Aggregate = aggregate.Select(value => value.GetResults(missingMemberBehavior)),
             Ladders = ladders.Select(value => value.GetLadders(missingMemberBehavior)),
-            Games = games.SelectMany(value => value.GetGame(missingMemberBehavior)),
-            Seasons = seasons.SelectMany(value => value.GetSeason(missingMemberBehavior))
-                ?? Array.Empty<Season>()
+            Games = games.Select(values => values.GetList(value => value.GetGame(missingMemberBehavior))),
+            Seasons = seasons.Select(values => values.GetList(value => value.GetSeason(missingMemberBehavior)))
+                ?? new List<Season>()
         };
     }
 }

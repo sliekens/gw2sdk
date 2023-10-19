@@ -55,7 +55,7 @@ public static class TokenInfoJson
         {
             Id = id.Select(value => value.GetStringRequired()),
             Name = name.Select(value => value.GetStringRequired()),
-            Permissions = permissions.SelectMany(value => value.GetEnum<Permission>(missingMemberBehavior))
+            Permissions = permissions.Select(values => values.GetList(value => value.GetEnum<Permission>(missingMemberBehavior)))
         };
     }
 }

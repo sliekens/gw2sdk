@@ -75,10 +75,23 @@ public static class StoryJson
             Description = description.Select(value => value.GetStringRequired()),
             Timeline = timeline.Select(value => value.GetStringRequired()),
             Level = level.Select(value => value.GetInt32()),
-            Races = races.SelectMany(value => value.GetEnum<RaceName>(missingMemberBehavior)),
+            Races =
+                races.Select(
+                    values => values.GetList(
+                        value => value.GetEnum<RaceName>(missingMemberBehavior)
+                    )
+                ),
             Order = order.Select(value => value.GetInt32()),
-            Chapters = chapters.SelectMany(value => value.GetChapter(missingMemberBehavior)),
-            Flags = flags.SelectMany(value => value.GetEnum<StoryFlag>(missingMemberBehavior)) ?? Array.Empty<StoryFlag>()
+            Chapters =
+                chapters.Select(
+                    values => values.GetList(value => value.GetChapter(missingMemberBehavior))
+                ),
+            Flags = flags.Select(
+                    values => values.GetList(
+                        value => value.GetEnum<StoryFlag>(missingMemberBehavior)
+                    )
+                )
+                ?? new List<StoryFlag>()
         };
     }
 }

@@ -45,7 +45,7 @@ public static class TrainingJson
             Id = id.Select(value => value.GetInt32()),
             Category = category.Select(value => value.GetEnum<TrainingCategory>(missingMemberBehavior)),
             Name = name.Select(value => value.GetStringRequired()),
-            Track = track.SelectMany(value => value.GetTrainingObjective(missingMemberBehavior))
+            Track = track.Select(values => values.GetList(value => value.GetTrainingObjective(missingMemberBehavior)))
         };
     }
 }

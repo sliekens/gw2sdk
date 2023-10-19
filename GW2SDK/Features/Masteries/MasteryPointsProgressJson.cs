@@ -1,4 +1,4 @@
-using System.Text.Json;
+﻿using System.Text.Json;
 using GuildWars2.Json;
 
 namespace GuildWars2.Masteries;
@@ -32,8 +32,8 @@ public static class MasteryPointsProgressJson
 
         return new MasteryPointsProgress
         {
-            Totals = totals.SelectMany(entry => entry.GetMasteryPointsTotal(missingMemberBehavior)),
-            Unlocked = unlocked.SelectMany(value => value.GetInt32())
+            Totals = totals.Select(values => values.GetList(entry => entry.GetMasteryPointsTotal(missingMemberBehavior))),
+            Unlocked = unlocked.Select(values => values.GetList(value => value.GetInt32()))
         };
     }
 }

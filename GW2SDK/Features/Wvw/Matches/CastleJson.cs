@@ -84,7 +84,9 @@ public static class CastleJson
             ClaimedBy = claimedBy.Select(value => value.GetString()) ?? "",
             ClaimedAt = claimedAt.Select(value => value.GetDateTimeOffset()),
             YaksDelivered = yaksDelivered.Select(value => value.GetInt32()),
-            GuildUpgrades = guildUpgrades.SelectMany(value => value.GetInt32()) ?? Array.Empty<int>()
+            GuildUpgrades =
+                guildUpgrades.Select(values => values.GetList(value => value.GetInt32()))
+                ?? new List<int>()
         };
     }
 }

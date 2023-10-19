@@ -82,12 +82,12 @@ public static class TraitJson
             Slot = slot.Select(value => value.GetEnum<TraitSlot>(missingMemberBehavior)),
             Icon = icon.Select(value => value.GetStringRequired()),
             SpezializationId = specialization.Select(value => value.GetInt32()),
-            Facts = facts.SelectMany(
-                value => value.GetTraitFact(missingMemberBehavior, out _, out _)
+            Facts = facts.Select(
+                values => values.GetList(value => value.GetTraitFact(missingMemberBehavior, out _, out _))
             ),
             TraitedFacts =
-                traitedFacts.SelectMany(value => value.GetCompoundTraitFact(missingMemberBehavior)),
-            Skills = skills.SelectMany(value => value.GetTraitSkill(missingMemberBehavior))
+                traitedFacts.Select(values => values.GetList(value => value.GetCompoundTraitFact(missingMemberBehavior))),
+            Skills = skills.Select(values => values.GetList(value => value.GetTraitSkill(missingMemberBehavior)))
         };
     }
 }

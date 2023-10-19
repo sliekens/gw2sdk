@@ -62,12 +62,12 @@ public static class BuildJson
             Name = name.Select(value => value.GetStringRequired()),
             Profession = profession.Select(value => value.GetEnum<ProfessionName>(missingMemberBehavior)),
             Specializations =
-                specializations.SelectMany(value => value.GetSpecialization(missingMemberBehavior)),
+                specializations.Select(values => values.GetList(value => value.GetSpecialization(missingMemberBehavior))),
             Skills = skills.Select(value => value.GetSkillBar(missingMemberBehavior)),
             AquaticSkills = aquaticSkills.Select(value => value.GetSkillBar(missingMemberBehavior)),
             Pets = pets.Select(value => value.GetPetSkillBar(missingMemberBehavior)),
-            Legends = legends.SelectMany(value => value.GetString()),
-            AquaticLegends = aquaticLegends.SelectMany(value => value.GetString())
+            Legends = legends.Select(values => values.GetList(value => value.GetString())),
+            AquaticLegends = aquaticLegends.Select(values => values.GetList(value => value.GetString()))
         };
     }
 }

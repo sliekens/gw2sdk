@@ -61,7 +61,7 @@ public static class AccountAchievementJson
             Current = current.Select(value => value.GetInt32()),
             Max = max.Select(value => value.GetInt32()),
             Done = done.Select(value => value.GetBoolean()),
-            Bits = bits.SelectMany(value => value.GetInt32()),
+            Bits = bits.Select(values => values.GetList(value => value.GetInt32())),
             Repeated = repeated.Select(value => value.GetInt32()),
             Unlocked = unlocked.Select(value => value.GetBoolean())
         };

@@ -86,16 +86,16 @@ public static class EquipmentItemJson
             Id = id.Select(value => value.GetInt32()),
             Count = count.Select(value => value.GetInt32()),
             Slot = slot.Select(value => value.GetEnum<EquipmentSlot>(missingMemberBehavior)),
-            Upgrades = upgrades.SelectMany(value => value.GetInt32()),
-            Infusions = infusions.SelectMany(value => value.GetInt32()),
+            Upgrades = upgrades.Select(values => values.GetList(value => value.GetInt32())),
+            Infusions = infusions.Select(values => values.GetList(value => value.GetInt32())),
             SkinId = skin.Select(value => value.GetInt32()),
             Stats = stats.Select(value => value.GetSelectedStat(missingMemberBehavior)),
             Binding = binding.Select(value => value.GetEnum<ItemBinding>(missingMemberBehavior)),
             BoundTo = boundTo.Select(value => value.GetString()) ?? "",
             Location = location.Select(value => value.GetEnum<EquipmentLocation>(missingMemberBehavior)),
-            Tabs = tabs.SelectMany(value => value.GetInt32()),
-            Dyes = dyes.SelectMany<int?>(
-                value => value.ValueKind == JsonValueKind.Null ? null : value.GetInt32()
+            Tabs = tabs.Select(values => values.GetList(value => value.GetInt32())),
+            Dyes = dyes.Select(
+                values => values.GetList(value => value.GetNullableInt32())
             )
         };
     }

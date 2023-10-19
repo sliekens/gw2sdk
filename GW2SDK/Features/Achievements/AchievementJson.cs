@@ -105,13 +105,20 @@ public static class AchievementJson
             Description = description.Select(value => value.GetStringRequired()),
             Requirement = requirement.Select(value => value.GetStringRequired()),
             LockedText = lockedText.Select(value => value.GetStringRequired()),
-            Flags = flags.SelectMany(value => value.GetEnum<AchievementFlag>(missingMemberBehavior)),
-            Tiers = tiers.SelectMany(value => value.GetAchievementTier(missingMemberBehavior)),
-            Prerequisites = prerequisites.SelectMany(value => value.GetInt32()),
-            Rewards = rewards.SelectMany(
-                value => value.GetAchievementReward(missingMemberBehavior)
+            Flags =
+                flags.Select(
+                    values =>
+                        values.GetList(
+                            value => value.GetEnum<AchievementFlag>(missingMemberBehavior)
+                        )
+                ),
+            Tiers = tiers.Select(values => values.GetList(value => value.GetAchievementTier(missingMemberBehavior))),
+            Prerequisites =
+                prerequisites.Select(values => values.GetList(value => value.GetInt32())),
+            Rewards = rewards.Select(
+                values => values.GetList(value => value.GetAchievementReward(missingMemberBehavior))
             ),
-            Bits = bits.SelectMany(value => value.GetAchievementBit(missingMemberBehavior)),
+            Bits = bits.Select(values => values.GetList(value => value.GetAchievementBit(missingMemberBehavior))),
             PointCap = pointCap.Select(value => value.GetInt32())
         };
     }
