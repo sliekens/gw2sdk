@@ -96,7 +96,7 @@ public sealed class AchievementsQuery
         IReadOnlyCollection<int> achievementIds,
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
-        int degreeOfParalllelism = BulkQuery.DefaultDegreeOfParalllelism,
+        int degreeOfParalllelism = BulkQuery.DefaultDegreeOfParallelism,
         int chunkSize = BulkQuery.DefaultChunkSize,
         IProgress<ResultContext>? progress = default,
         CancellationToken cancellationToken = default
@@ -130,7 +130,7 @@ public sealed class AchievementsQuery
     public async IAsyncEnumerable<Achievement> GetAchievementsBulk(
         Language? language = default,
         MissingMemberBehavior missingMemberBehavior = default,
-        int degreeOfParalllelism = BulkQuery.DefaultDegreeOfParalllelism,
+        int degreeOfParalllelism = BulkQuery.DefaultDegreeOfParallelism,
         int chunkSize = BulkQuery.DefaultChunkSize,
         IProgress<ResultContext>? progress = default,
         [EnumeratorCancellation] CancellationToken cancellationToken = default

@@ -76,7 +76,7 @@ public sealed class CommerceQuery
     public IAsyncEnumerable<ItemPrice> GetItemPricesBulk(
         IReadOnlyCollection<int> itemIds,
         MissingMemberBehavior missingMemberBehavior = default,
-        int degreeOfParalllelism = BulkQuery.DefaultDegreeOfParalllelism,
+        int degreeOfParalllelism = BulkQuery.DefaultDegreeOfParallelism,
         int chunkSize = BulkQuery.DefaultChunkSize,
         IProgress<ResultContext>? progress = default,
         CancellationToken cancellationToken = default
@@ -104,7 +104,7 @@ public sealed class CommerceQuery
 
     public async IAsyncEnumerable<ItemPrice> GetItemPricesBulk(
         MissingMemberBehavior missingMemberBehavior = default,
-        int degreeOfParalllelism = BulkQuery.DefaultDegreeOfParalllelism,
+        int degreeOfParalllelism = BulkQuery.DefaultDegreeOfParallelism,
         int chunkSize = BulkQuery.DefaultChunkSize,
         IProgress<ResultContext>? progress = default,
         [EnumeratorCancellation] CancellationToken cancellationToken = default
@@ -167,7 +167,7 @@ public sealed class CommerceQuery
     public IAsyncEnumerable<OrderBook> GetOrderBooksBulk(
         IReadOnlyCollection<int> itemIds,
         MissingMemberBehavior missingMemberBehavior = default,
-        int degreeOfParalllelism = BulkQuery.DefaultDegreeOfParalllelism,
+        int degreeOfParalllelism = BulkQuery.DefaultDegreeOfParallelism,
         int chunkSize = BulkQuery.DefaultChunkSize,
         IProgress<ResultContext>? progress = default,
         CancellationToken cancellationToken = default
@@ -195,7 +195,7 @@ public sealed class CommerceQuery
 
     public async IAsyncEnumerable<OrderBook> GetOrderBooksBulk(
         MissingMemberBehavior missingMemberBehavior = default,
-        int degreeOfParalllelism = BulkQuery.DefaultDegreeOfParalllelism,
+        int degreeOfParalllelism = BulkQuery.DefaultDegreeOfParallelism,
         int chunkSize = BulkQuery.DefaultChunkSize,
         IProgress<ResultContext>? progress = default,
         [EnumeratorCancellation] CancellationToken cancellationToken = default

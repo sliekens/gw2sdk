@@ -3,20 +3,19 @@ using GuildWars2.Tasks;
 
 namespace GuildWars2;
 
-/// <inheritdoc cref="BulkQuery{TKey,TRecord}" />
 [PublicAPI]
 public static class BulkQuery
 {
     public const int DefaultChunkSize = 200;
 
-    public const int DefaultDegreeOfParalllelism = 20;
+    public const int DefaultDegreeOfParallelism = 20;
 
-    /// <summary>Helps you retrieve all records in a given index by splitting it into smaller chunks before quering. This is
-    /// useful when your index contains more than 200 items (the maximum allowed per query).</summary>
+    /// <summary>Helps you retrieve all records in a given index by splitting it into smaller chunks. This is useful when your
+    /// index contains more than 200 items (the maximum allowed per query).</summary>
     public static async IAsyncEnumerable<TRecord> QueryAsync<TKey, TRecord>(
         IReadOnlyCollection<TKey> index,
         ChunkQuery<TKey, TRecord> chunkQuery,
-        int degreeOfParalllelism = DefaultDegreeOfParalllelism,
+        int degreeOfParallelism = DefaultDegreeOfParallelism,
         int chunkSize = DefaultChunkSize,
         IProgress<ResultContext>? progress = default,
         [EnumeratorCancellation] CancellationToken cancellationToken = default
@@ -36,12 +35,12 @@ public static class BulkQuery
             );
         }
 
-        if (degreeOfParalllelism < 1)
+        if (degreeOfParallelism < 1)
         {
             throw new ArgumentOutOfRangeException(
-                nameof(degreeOfParalllelism),
-                degreeOfParalllelism,
-                "The degree of paralellism must be at least 1."
+                nameof(degreeOfParallelism),
+                degreeOfParallelism,
+                "The degree of parallelism must be at least 1."
             );
         }
 
@@ -68,7 +67,7 @@ public static class BulkQuery
         var chunks = Chunk(index.ToList(), chunkSize);
 
         // Proceed with the queries in parallel, but limit the number of concurrent queries
-        using SemaphoreSlim limiter = new(degreeOfParalllelism);
+        using SemaphoreSlim limiter = new(degreeOfParallelism);
         await foreach (var result in chunks.Select(
                 async chunk =>
                 {

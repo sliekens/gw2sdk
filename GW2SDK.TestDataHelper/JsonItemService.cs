@@ -35,7 +35,7 @@ public class JsonItemService
         return BulkQuery.QueryAsync(
             ids,
             GetChunk,
-            degreeOfParalllelism: 100,
+            degreeOfParallelism: 100,
             progress: progress,
             cancellationToken: cancellationToken
         );
