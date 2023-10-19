@@ -82,18 +82,18 @@ public static class GuildJson
 
         return new Guild
         {
-            Level = level.Select(value => value.GetInt32()),
-            MessageOfTheDay = motd.Select(value => value.GetStringRequired()),
-            Influence = influence.Select(value => value.GetInt32()),
-            Aetherium = aetherium.Select(value => value.GetInt32()),
-            Resonance = resonance.Select(value => value.GetInt32()),
-            Favor = favor.Select(value => value.GetInt32()),
-            MemberCount = memberCount.Select(value => value.GetInt32()),
-            MemberCapacity = memberCapacity.Select(value => value.GetInt32()),
-            Id = id.Select(value => value.GetStringRequired()),
-            Name = name.Select(value => value.GetStringRequired()),
-            Tag = tag.Select(value => value.GetStringRequired()),
-            Emblem = emblem.Select(value => value.GetGuildEmblem(missingMemberBehavior))
+            Level = level.Map(value => value.GetInt32()),
+            MessageOfTheDay = motd.Map(value => value.GetStringRequired()),
+            Influence = influence.Map(value => value.GetInt32()),
+            Aetherium = aetherium.Map(value => value.GetInt32()),
+            Resonance = resonance.Map(value => value.GetInt32()),
+            Favor = favor.Map(value => value.GetInt32()),
+            MemberCount = memberCount.Map(value => value.GetInt32()),
+            MemberCapacity = memberCapacity.Map(value => value.GetInt32()),
+            Id = id.Map(value => value.GetStringRequired()),
+            Name = name.Map(value => value.GetStringRequired()),
+            Tag = tag.Map(value => value.GetStringRequired()),
+            Emblem = emblem.Map(value => value.GetGuildEmblem(missingMemberBehavior))
         };
     }
 }

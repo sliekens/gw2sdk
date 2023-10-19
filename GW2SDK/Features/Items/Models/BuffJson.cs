@@ -28,8 +28,8 @@ public static class BuffJson
 
         return new Buff
         {
-            SkillId = skillId.Select(value => value.GetInt32()),
-            Description = description.Select(value => value.GetString()) ?? ""
+            SkillId = skillId.Map(value => value.GetInt32()),
+            Description = description.Map(value => value.GetString()) ?? ""
         };
     }
 }

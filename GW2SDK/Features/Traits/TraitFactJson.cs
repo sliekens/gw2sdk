@@ -169,8 +169,8 @@ public static class TraitFactJson
 
         return new TraitFact
         {
-            Text = text.Select(value => value.GetString()) ?? "",
-            Icon = icon.Select(value => value.GetString()) ?? ""
+            Text = text.Map(value => value.GetString()) ?? "",
+            Icon = icon.Map(value => value.GetString()) ?? ""
         };
     }
 }

@@ -36,10 +36,10 @@ public static class InfixUpgradeJson
 
         return new InfixUpgrade
         {
-            ItemstatsId = id.Select(value => value.GetInt32()),
+            ItemstatsId = id.Map(value => value.GetInt32()),
             Attributes =
-                attributes.Select(values => values.GetList(value => value.GetUpgradeAttribute(missingMemberBehavior))),
-            Buff = buff.Select(value => value.GetBuff(missingMemberBehavior))
+                attributes.Map(values => values.GetList(value => value.GetUpgradeAttribute(missingMemberBehavior))),
+            Buff = buff.Map(value => value.GetBuff(missingMemberBehavior))
         };
     }
 }

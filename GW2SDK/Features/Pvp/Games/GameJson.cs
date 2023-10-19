@@ -77,17 +77,17 @@ public static class GameJson
 
         return new Game
         {
-            Id = id.Select(value => value.GetStringRequired()),
-            MapId = mapId.Select(value => value.GetInt32()),
-            Started = started.Select(value => value.GetDateTimeOffset()),
-            Ended = ended.Select(value => value.GetDateTimeOffset()),
-            Result = result.Select(value => value.GetEnum<PvpResult>(missingMemberBehavior)),
-            Team = team.Select(value => value.GetEnum<PvpTeamColor>(missingMemberBehavior)),
-            Profession = profession.Select(value => value.GetEnum<ProfessionName>(missingMemberBehavior)),
-            RatingType = ratingType.Select(value => value.GetRatingType(missingMemberBehavior)),
-            RatingChange = ratingChange.Select(value => value.GetInt32()),
-            SeasonId = seasonId.Select(value => value.GetString()),
-            Score = score.Select(value => value.GetScore(missingMemberBehavior))
+            Id = id.Map(value => value.GetStringRequired()),
+            MapId = mapId.Map(value => value.GetInt32()),
+            Started = started.Map(value => value.GetDateTimeOffset()),
+            Ended = ended.Map(value => value.GetDateTimeOffset()),
+            Result = result.Map(value => value.GetEnum<PvpResult>(missingMemberBehavior)),
+            Team = team.Map(value => value.GetEnum<PvpTeamColor>(missingMemberBehavior)),
+            Profession = profession.Map(value => value.GetEnum<ProfessionName>(missingMemberBehavior)),
+            RatingType = ratingType.Map(value => value.GetRatingType(missingMemberBehavior)),
+            RatingChange = ratingChange.Map(value => value.GetInt32()),
+            SeasonId = seasonId.Map(value => value.GetString()),
+            Score = score.Map(value => value.GetScore(missingMemberBehavior))
         };
 
     }

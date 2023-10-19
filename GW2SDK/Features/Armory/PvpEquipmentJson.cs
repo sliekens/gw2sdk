@@ -37,9 +37,9 @@ public static class PvpEquipmentJson
 
         return new PvpEquipment
         {
-            AmuletId = amulet.Select(value => value.GetInt32()),
-            RuneId = rune.Select(value => value.GetInt32()),
-            SigilIds = sigils.Select(
+            AmuletId = amulet.Map(value => value.GetInt32()),
+            RuneId = rune.Map(value => value.GetInt32()),
+            SigilIds = sigils.Map(
                 values => values.GetList(value => value.GetNullableInt32())
             )
         };

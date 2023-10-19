@@ -39,10 +39,10 @@ public static class RouteJson
 
         return new Route
         {
-            Path = path.Select(value => value.GetStringRequired()),
-            Multilingual = lang.Select(value => value.GetBoolean()),
-            RequiresAuthorization = auth.Select(value => value.GetBoolean()),
-            Active = active.Select(value => value.GetBoolean())
+            Path = path.Map(value => value.GetStringRequired()),
+            Multilingual = lang.Map(value => value.GetBoolean()),
+            RequiresAuthorization = auth.Map(value => value.GetBoolean()),
+            Active = active.Map(value => value.GetBoolean())
         };
     }
 }

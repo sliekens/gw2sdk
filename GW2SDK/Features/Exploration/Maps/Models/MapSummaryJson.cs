@@ -83,20 +83,20 @@ public static class MapSummaryJson
 
         return new MapSummary
         {
-            Id = id.Select(value => value.GetInt32()),
-            Name = name.Select(value => value.GetStringRequired()),
-            MinLevel = minLevel.Select(value => value.GetInt32()),
-            MaxLevel = maxLevel.Select(value => value.GetInt32()),
-            DefaultFloor = defaultFloor.Select(value => value.GetInt32()),
-            Kind = kind.Select(value => value.GetEnum<MapKind>(missingMemberBehavior)),
-            Floors = floors.Select(values => values.GetList(value => value.GetInt32())),
-            RegionId = regionId.Select(value => value.GetInt32()),
-            RegionName = regionName.Select(value => value.GetString()) ?? "",
-            ContinentId = continentId.Select(value => value.GetInt32()),
-            ContinentName = continentName.Select(value => value.GetString()) ?? "",
-            MapRectangle = mapRectangle.Select(value => value.GetMapRectangle(missingMemberBehavior)),
+            Id = id.Map(value => value.GetInt32()),
+            Name = name.Map(value => value.GetStringRequired()),
+            MinLevel = minLevel.Map(value => value.GetInt32()),
+            MaxLevel = maxLevel.Map(value => value.GetInt32()),
+            DefaultFloor = defaultFloor.Map(value => value.GetInt32()),
+            Kind = kind.Map(value => value.GetEnum<MapKind>(missingMemberBehavior)),
+            Floors = floors.Map(values => values.GetList(value => value.GetInt32())),
+            RegionId = regionId.Map(value => value.GetInt32()),
+            RegionName = regionName.Map(value => value.GetString()) ?? "",
+            ContinentId = continentId.Map(value => value.GetInt32()),
+            ContinentName = continentName.Map(value => value.GetString()) ?? "",
+            MapRectangle = mapRectangle.Map(value => value.GetMapRectangle(missingMemberBehavior)),
             ContinentRectangle =
-                continentRectangle.Select(value => value.GetContinentRectangle(missingMemberBehavior))
+                continentRectangle.Map(value => value.GetContinentRectangle(missingMemberBehavior))
         };
     }
 }

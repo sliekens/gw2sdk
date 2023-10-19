@@ -78,7 +78,7 @@ public static class IdentityJson
         if (missingMemberBehavior == MissingMemberBehavior.Error)
         {
             // The 'map' and 'map_id' seem to be redundant, but check my assumptions...
-            if (map.Select(value => value.GetInt32()) != mapId.Select(value => value.GetInt32()))
+            if (map.Map(value => value.GetInt32()) != mapId.Map(value => value.GetInt32()))
             {
                 throw new InvalidOperationException(Strings.UnexpectedMember("map"));
             }
@@ -86,16 +86,16 @@ public static class IdentityJson
 
         return new Identity
         {
-            Name = name.Select(value => value.GetStringRequired()),
-            Profession = profession.Select(value => (ProfessionName)value.GetInt32()),
-            SpecializationId = specializationId.Select(value => value.GetInt32()),
-            Race = race.Select(value => (RaceName)(value.GetInt32() + 1)),
-            MapId = mapId.Select(value => value.GetInt32()),
-            WorldId = worldId.Select(value => value.GetInt64()),
-            TeamColorId = teamColorId.Select(value => value.GetInt32()),
-            Commander = commander.Select(value => value.GetBoolean()),
-            FieldOfView = fieldOfView.Select(value => value.GetDouble()),
-            UiSize = uiSize.Select(value => (UiSize)value.GetInt32())
+            Name = name.Map(value => value.GetStringRequired()),
+            Profession = profession.Map(value => (ProfessionName)value.GetInt32()),
+            SpecializationId = specializationId.Map(value => value.GetInt32()),
+            Race = race.Map(value => (RaceName)(value.GetInt32() + 1)),
+            MapId = mapId.Map(value => value.GetInt32()),
+            WorldId = worldId.Map(value => value.GetInt64()),
+            TeamColorId = teamColorId.Map(value => value.GetInt32()),
+            Commander = commander.Map(value => value.GetBoolean()),
+            FieldOfView = fieldOfView.Map(value => value.GetDouble()),
+            UiSize = uiSize.Map(value => (UiSize)value.GetInt32())
         };
     }
 }

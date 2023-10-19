@@ -37,9 +37,9 @@ public static class UnlockedFinisherJson
 
         return new UnlockedFinisher
         {
-            Id = id.Select(value => value.GetInt32()),
-            Permanent = permanent.Select(value => value.GetBoolean()),
-            Quantity = quantity.Select(value => value.GetInt32())
+            Id = id.Map(value => value.GetInt32()),
+            Permanent = permanent.Map(value => value.GetBoolean()),
+            Quantity = quantity.Map(value => value.GetInt32())
         };
     }
 }

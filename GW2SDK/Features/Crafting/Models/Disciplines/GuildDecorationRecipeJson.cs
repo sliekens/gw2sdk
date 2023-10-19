@@ -89,21 +89,21 @@ public static class GuildDecorationRecipeJson
 
         return new GuildDecorationRecipe
         {
-            Id = id.Select(value => value.GetInt32()),
-            OutputItemId = outputItemId.Select(value => value.GetInt32()),
-            OutputItemCount = outputItemCount.Select(value => value.GetInt32()),
-            MinRating = minRating.Select(value => value.GetInt32()),
-            TimeToCraft = timeToCraft.Select(value => TimeSpan.FromMilliseconds(value.GetDouble())),
-            Disciplines = disciplines.Select(values => values.GetList(value => value.GetEnum<CraftingDisciplineName>(missingMemberBehavior))),
-            Flags = flags.Select(values => values.GetList(value => value.GetEnum<RecipeFlag>(missingMemberBehavior))),
+            Id = id.Map(value => value.GetInt32()),
+            OutputItemId = outputItemId.Map(value => value.GetInt32()),
+            OutputItemCount = outputItemCount.Map(value => value.GetInt32()),
+            MinRating = minRating.Map(value => value.GetInt32()),
+            TimeToCraft = timeToCraft.Map(value => TimeSpan.FromMilliseconds(value.GetDouble())),
+            Disciplines = disciplines.Map(values => values.GetList(value => value.GetEnum<CraftingDisciplineName>(missingMemberBehavior))),
+            Flags = flags.Map(values => values.GetList(value => value.GetEnum<RecipeFlag>(missingMemberBehavior))),
             Ingredients =
-                ingredients.Select(values => values.GetList(value => value.GetIngredient(missingMemberBehavior))),
+                ingredients.Map(values => values.GetList(value => value.GetIngredient(missingMemberBehavior))),
             GuildIngredients =
-                guildIngredients.Select(
+                guildIngredients.Map(
                     values => values.GetList(value => value.GetGuildIngredient(missingMemberBehavior))
                 ),
-            OutputUpgradeId = outputUpgradeId.Select(value => value.GetInt32()),
-            ChatLink = chatLink.Select(value => value.GetStringRequired())
+            OutputUpgradeId = outputUpgradeId.Map(value => value.GetInt32()),
+            ChatLink = chatLink.Map(value => value.GetStringRequired())
         };
     }
 }

@@ -47,11 +47,11 @@ public static class MountSkinJson
 
         return new MountSkin
         {
-            Id = id.Select(value => value.GetInt32()),
-            Name = name.Select(value => value.GetStringRequired()),
-            Icon = icon.Select(value => value.GetStringRequired()),
-            DyeSlots = dyeSlots.Select(values => values.GetList(value => value.GetDyeSlot(missingMemberBehavior))),
-            Mount = mount.Select(value => value.GetMountName(missingMemberBehavior))
+            Id = id.Map(value => value.GetInt32()),
+            Name = name.Map(value => value.GetStringRequired()),
+            Icon = icon.Map(value => value.GetStringRequired()),
+            DyeSlots = dyeSlots.Map(values => values.GetList(value => value.GetDyeSlot(missingMemberBehavior))),
+            Mount = mount.Map(value => value.GetMountName(missingMemberBehavior))
         };
     }
 }

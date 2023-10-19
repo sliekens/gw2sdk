@@ -32,8 +32,8 @@ public static class SuperAdventureBoxUpgradeJson
 
         return new SuperAdventureBoxUpgrade
         {
-            Id = id.Select(value => value.GetInt32()),
-            Name = name.Select(value => value.GetString()) ?? ""
+            Id = id.Map(value => value.GetInt32()),
+            Name = name.Map(value => value.GetString()) ?? ""
         };
     }
 }

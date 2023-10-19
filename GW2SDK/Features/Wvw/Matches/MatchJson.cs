@@ -74,18 +74,18 @@ public static class MatchJson
 
         return new Match
         {
-            Id = id.Select(value => value.GetStringRequired()),
-            StartTime = startTime.Select(value => value.GetDateTimeOffset()),
-            EndTime = endTime.Select(value => value.GetDateTimeOffset()),
-            Scores = scores.Select(value => value.GetDistribution(missingMemberBehavior)),
-            Worlds = worlds.Select(value => value.GetWorlds(missingMemberBehavior)),
-            AllWorlds = allWorlds.Select(value => value.GetAllWorlds(missingMemberBehavior)),
-            Deaths = deaths.Select(value => value.GetDistribution(missingMemberBehavior)),
-            Kills = kills.Select(value => value.GetDistribution(missingMemberBehavior)),
+            Id = id.Map(value => value.GetStringRequired()),
+            StartTime = startTime.Map(value => value.GetDateTimeOffset()),
+            EndTime = endTime.Map(value => value.GetDateTimeOffset()),
+            Scores = scores.Map(value => value.GetDistribution(missingMemberBehavior)),
+            Worlds = worlds.Map(value => value.GetWorlds(missingMemberBehavior)),
+            AllWorlds = allWorlds.Map(value => value.GetAllWorlds(missingMemberBehavior)),
+            Deaths = deaths.Map(value => value.GetDistribution(missingMemberBehavior)),
+            Kills = kills.Map(value => value.GetDistribution(missingMemberBehavior)),
             VictoryPoints =
-                victoryPoints.Select(value => value.GetDistribution(missingMemberBehavior)),
-            Skirmishes = skirmishes.Select(values => values.GetList(value => value.GetSkirmish(missingMemberBehavior))),
-            Maps = maps.Select(values => values.GetList(value => value.GetMap(missingMemberBehavior)))
+                victoryPoints.Map(value => value.GetDistribution(missingMemberBehavior)),
+            Skirmishes = skirmishes.Map(values => values.GetList(value => value.GetSkirmish(missingMemberBehavior))),
+            Maps = maps.Map(values => values.GetList(value => value.GetMap(missingMemberBehavior)))
         };
     }
 }

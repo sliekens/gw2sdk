@@ -52,12 +52,12 @@ public static class MailCarrierJson
 
         return new MailCarrier
         {
-            Id = id.Select(value => value.GetInt32()),
-            UnlockItems = unlockItems.Select(values => values.GetList(value => value.GetInt32())),
-            Order = order.Select(value => value.GetInt32()),
-            Icon = icon.Select(value => value.GetStringRequired()),
-            Name = name.Select(value => value.GetStringRequired()),
-            Flags = flags.Select(
+            Id = id.Map(value => value.GetInt32()),
+            UnlockItems = unlockItems.Map(values => values.GetList(value => value.GetInt32())),
+            Order = order.Map(value => value.GetInt32()),
+            Icon = icon.Map(value => value.GetStringRequired()),
+            Name = name.Map(value => value.GetStringRequired()),
+            Flags = flags.Map(
                 values => values.GetList(
                     value => value.GetEnum<MailCarrierFlag>(missingMemberBehavior)
                 )

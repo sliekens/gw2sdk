@@ -101,33 +101,33 @@ public static class MapJson
 
         return new Map
         {
-            Id = id.Select(value => value.GetInt32()),
-            Name = name.Select(value => value.GetStringRequired()),
-            MinLevel = minLevel.Select(value => value.GetInt32()),
-            MaxLevel = maxLevel.Select(value => value.GetInt32()),
-            DefaultFloor = defaultFloor.Select(value => value.GetInt32()),
+            Id = id.Map(value => value.GetInt32()),
+            Name = name.Map(value => value.GetStringRequired()),
+            MinLevel = minLevel.Map(value => value.GetInt32()),
+            MaxLevel = maxLevel.Map(value => value.GetInt32()),
+            DefaultFloor = defaultFloor.Map(value => value.GetInt32()),
             LabelCoordinates =
-                labelCoordinates.Select(value => value.GetCoordinate(missingMemberBehavior)),
-            MapRectangle = mapRectangle.Select(value => value.GetMapRectangle(missingMemberBehavior)),
+                labelCoordinates.Map(value => value.GetCoordinate(missingMemberBehavior)),
+            MapRectangle = mapRectangle.Map(value => value.GetMapRectangle(missingMemberBehavior)),
             ContinentRectangle =
-                continentRectangle.Select(value => value.GetContinentRectangle(missingMemberBehavior)),
-            PointsOfInterest = pointsOfInterest.Select(
+                continentRectangle.Map(value => value.GetContinentRectangle(missingMemberBehavior)),
+            PointsOfInterest = pointsOfInterest.Map(
                 value => value.GetMap(entry => entry.GetPointOfInterest(missingMemberBehavior))
                     .ToDictionary(kvp => int.Parse(kvp.Key), kvp => kvp.Value)
             ),
-            GodShrines = godShrines.Select(values => values.GetList(value => value.GetGodShrine(missingMemberBehavior))),
-            Hearts = tasks.Select(
+            GodShrines = godShrines.Map(values => values.GetList(value => value.GetGodShrine(missingMemberBehavior))),
+            Hearts = tasks.Map(
                 value => value.GetMap(entry => entry.GetHeart(missingMemberBehavior))
                     .ToDictionary(kvp => int.Parse(kvp.Key), kvp => kvp.Value)
             ),
-            HeroChallenges = skillChallenges.Select(values => values.GetList(value => value.GetHeroChallenge(missingMemberBehavior))),
-            Sectors = sectors.Select(
+            HeroChallenges = skillChallenges.Map(values => values.GetList(value => value.GetHeroChallenge(missingMemberBehavior))),
+            Sectors = sectors.Map(
                 value => value.GetMap(entry => entry.GetSector(missingMemberBehavior))
                     .ToDictionary(kvp => int.Parse(kvp.Key), kvp => kvp.Value)
             ),
-            Adventures = adventures.Select(values => values.GetList(value => value.GetAdventure(missingMemberBehavior))),
+            Adventures = adventures.Map(values => values.GetList(value => value.GetAdventure(missingMemberBehavior))),
             MasteryPoints =
-                masteryPoints.Select(values => values.GetList(item => item.GetMasteryPoint(missingMemberBehavior)))
+                masteryPoints.Map(values => values.GetList(item => item.GetMasteryPoint(missingMemberBehavior)))
         };
     }
 }

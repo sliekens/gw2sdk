@@ -27,7 +27,7 @@ public static class CharacterBackstoryJson
 
         return new CharacterBackstory
         {
-            Backstory = backstory.Select(values => values.GetList(entry => entry.GetStringRequired())).ToList()
+            Backstory = backstory.Map(values => values.GetList(entry => entry.GetStringRequired())).ToList()
         };
     }
 }

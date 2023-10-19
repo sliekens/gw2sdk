@@ -40,8 +40,8 @@ public static class TraitObjectiveJson
 
         return new TraitObjective
         {
-            Cost = cost.Select(value => value.GetInt32()),
-            TraitId = traitId.Select(value => value.GetInt32())
+            Cost = cost.Map(value => value.GetInt32()),
+            TraitId = traitId.Map(value => value.GetInt32())
         };
     }
 }

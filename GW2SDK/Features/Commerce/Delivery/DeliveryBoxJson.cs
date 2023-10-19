@@ -32,8 +32,8 @@ public static class DeliveryBoxJson
 
         return new DeliveryBox
         {
-            Coins = coins.Select(value => value.GetInt32()),
-            Items = items.Select(values => values.GetList(item => item.GetDeliveredItem(missingMemberBehavior)))
+            Coins = coins.Map(value => value.GetInt32()),
+            Items = items.Map(values => values.GetList(item => item.GetDeliveredItem(missingMemberBehavior)))
         };
     }
 }

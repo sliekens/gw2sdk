@@ -29,8 +29,8 @@ public static class ScoreJson
 
         return new Score
         {
-            Id = id.Select(value => value.GetStringRequired()),
-            Value = score.Select(value => value.GetInt32())
+            Id = id.Map(value => value.GetStringRequired()),
+            Value = score.Map(value => value.GetInt32())
         };
     }
 }

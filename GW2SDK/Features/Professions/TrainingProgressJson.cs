@@ -37,9 +37,9 @@ public static class TrainingProgressJson
 
         return new TrainingProgress
         {
-            Id = id.Select(value => value.GetInt32()),
-            Spent = spent.Select(value => value.GetInt32()),
-            Done = done.Select(value => value.GetBoolean())
+            Id = id.Map(value => value.GetInt32()),
+            Spent = spent.Map(value => value.GetInt32()),
+            Done = done.Map(value => value.GetBoolean())
         };
     }
 }

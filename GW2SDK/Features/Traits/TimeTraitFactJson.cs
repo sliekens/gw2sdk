@@ -57,9 +57,9 @@ public static class TimeTraitFactJson
 
         return new TimeTraitFact
         {
-            Text = text.Select(value => value.GetString()) ?? "",
-            Icon = icon.Select(value => value.GetString()) ?? "",
-            Duration = duration.Select(value => TimeSpan.FromSeconds(value.GetDouble()))
+            Text = text.Map(value => value.GetString()) ?? "",
+            Icon = icon.Map(value => value.GetString()) ?? "",
+            Duration = duration.Map(value => TimeSpan.FromSeconds(value.GetDouble()))
         };
     }
 }

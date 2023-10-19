@@ -37,9 +37,9 @@ public static class LeaderboardGroupJson
 
         return new LeaderboardGroup
         {
-            Ladder = ladder.Select(value => value.GetLeaderboard(missingMemberBehavior)),
-            Legendary = legendary.Select(value => value.GetLeaderboard(missingMemberBehavior)),
-            Guild = guild.Select(value => value.GetLeaderboard(missingMemberBehavior))
+            Ladder = ladder.Map(value => value.GetLeaderboard(missingMemberBehavior)),
+            Legendary = legendary.Map(value => value.GetLeaderboard(missingMemberBehavior)),
+            Guild = guild.Map(value => value.GetLeaderboard(missingMemberBehavior))
         };
     }
 }

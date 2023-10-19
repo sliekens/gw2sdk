@@ -42,10 +42,10 @@ public static class TrainingJson
 
         return new Training
         {
-            Id = id.Select(value => value.GetInt32()),
-            Category = category.Select(value => value.GetEnum<TrainingCategory>(missingMemberBehavior)),
-            Name = name.Select(value => value.GetStringRequired()),
-            Track = track.Select(values => values.GetList(value => value.GetTrainingObjective(missingMemberBehavior)))
+            Id = id.Map(value => value.GetInt32()),
+            Category = category.Map(value => value.GetEnum<TrainingCategory>(missingMemberBehavior)),
+            Name = name.Map(value => value.GetStringRequired()),
+            Track = track.Map(values => values.GetList(value => value.GetTrainingObjective(missingMemberBehavior)))
         };
     }
 }

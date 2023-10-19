@@ -57,9 +57,9 @@ public static class RadiusTraitFactJson
 
         return new RadiusTraitFact
         {
-            Text = text.Select(value => value.GetString()) ?? "",
-            Icon = icon.Select(value => value.GetString()) ?? "",
-            Distance = distance.Select(value => value.GetInt32())
+            Text = text.Map(value => value.GetString()) ?? "",
+            Icon = icon.Map(value => value.GetString()) ?? "",
+            Distance = distance.Map(value => value.GetInt32())
         };
     }
 }

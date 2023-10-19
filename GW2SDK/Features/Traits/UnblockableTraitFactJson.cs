@@ -57,9 +57,9 @@ public static class UnblockableTraitFactJson
 
         return new UnblockableTraitFact
         {
-            Text = text.Select(value => value.GetString()) ?? "",
-            Icon = icon.Select(value => value.GetString()) ?? "",
-            Value = unblockable.Select(value => value.GetBoolean())
+            Text = text.Map(value => value.GetString()) ?? "",
+            Icon = icon.Map(value => value.GetString()) ?? "",
+            Value = unblockable.Map(value => value.GetBoolean())
         };
     }
 }

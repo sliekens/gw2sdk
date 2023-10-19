@@ -37,10 +37,10 @@ public static class ItemStatJson
 
         return new ItemStat
         {
-            Id = id.Select(value => value.GetInt32()),
-            Name = name.Select(value => value.GetStringRequired()),
+            Id = id.Map(value => value.GetInt32()),
+            Name = name.Map(value => value.GetStringRequired()),
             Attributes =
-                attributes.Select(values => values.GetList(value => value.GetItemStatAttribute(missingMemberBehavior)))
+                attributes.Map(values => values.GetList(value => value.GetItemStatAttribute(missingMemberBehavior)))
         };
     }
 }

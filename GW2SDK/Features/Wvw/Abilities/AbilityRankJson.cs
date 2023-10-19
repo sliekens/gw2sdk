@@ -32,8 +32,8 @@ public static class AbilityRankJson
 
         return new AbilityRank
         {
-            Cost = cost.Select(value => value.GetInt32()),
-            Effect = effect.Select(value => value.GetStringRequired())
+            Cost = cost.Map(value => value.GetInt32()),
+            Effect = effect.Map(value => value.GetStringRequired())
         };
     }
 }

@@ -64,15 +64,15 @@ public static class DyeJson
 
         return new Dye
         {
-            Id = id.Select(value => value.GetInt32()),
-            Name = name.Select(value => value.GetStringRequired()),
-            BaseRgb = baseRgb.Select(value => value.GetColor(missingMemberBehavior)),
-            Cloth = cloth.Select(value => value.GetColorInfo(missingMemberBehavior)),
-            Leather = leather.Select(value => value.GetColorInfo(missingMemberBehavior)),
-            Metal = metal.Select(value => value.GetColorInfo(missingMemberBehavior)),
-            Fur = fur.Select(value => value.GetColorInfo(missingMemberBehavior)),
-            Item = itemId.Select(value => value.GetInt32()),
-            Categories = categories.Select(values => values.GetList(value => value.GetEnum<ColorCategoryName>(missingMemberBehavior)))
+            Id = id.Map(value => value.GetInt32()),
+            Name = name.Map(value => value.GetStringRequired()),
+            BaseRgb = baseRgb.Map(value => value.GetColor(missingMemberBehavior)),
+            Cloth = cloth.Map(value => value.GetColorInfo(missingMemberBehavior)),
+            Leather = leather.Map(value => value.GetColorInfo(missingMemberBehavior)),
+            Metal = metal.Map(value => value.GetColorInfo(missingMemberBehavior)),
+            Fur = fur.Map(value => value.GetColorInfo(missingMemberBehavior)),
+            Item = itemId.Map(value => value.GetInt32()),
+            Categories = categories.Map(values => values.GetList(value => value.GetEnum<ColorCategoryName>(missingMemberBehavior)))
         };
     }
 }

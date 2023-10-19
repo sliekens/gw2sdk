@@ -51,10 +51,10 @@ public static class ProfessionSkillReferenceJson
 
         return new ProfessionSkillReference
         {
-            Id = id.Select(value => value.GetInt32()),
-            Slot = slot.Select(value => value.GetEnum<SkillSlot>(missingMemberBehavior)),
-            Source = source.Select(value => value.GetEnum<ProfessionName>(missingMemberBehavior)),
-            Attunement = attunement.Select(value => value.GetEnum<Attunement>(missingMemberBehavior))
+            Id = id.Map(value => value.GetInt32()),
+            Slot = slot.Map(value => value.GetEnum<SkillSlot>(missingMemberBehavior)),
+            Source = source.Map(value => value.GetEnum<ProfessionName>(missingMemberBehavior)),
+            Attunement = attunement.Map(value => value.GetEnum<Attunement>(missingMemberBehavior))
         };
     }
 }

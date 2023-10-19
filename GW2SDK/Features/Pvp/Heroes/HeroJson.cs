@@ -59,14 +59,14 @@ public static class HeroJson
 
         return new Hero
         {
-            Id = id.Select(value => value.GetStringRequired()),
-            Name = name.Select(value => value.GetStringRequired()),
-            Description = description.Select(value => value.GetStringRequired()),
-            Type = type.Select(value => value.GetStringRequired()),
-            Stats = stats.Select(value => value.GetHeroStats(missingMemberBehavior)),
-            Overlay = overlay.Select(value => value.GetStringRequired()),
-            Underlay = underlay.Select(value => value.GetStringRequired()),
-            Skins = skins.Select(values => values.GetList(value => value.GetHeroSkin(missingMemberBehavior)))
+            Id = id.Map(value => value.GetStringRequired()),
+            Name = name.Map(value => value.GetStringRequired()),
+            Description = description.Map(value => value.GetStringRequired()),
+            Type = type.Map(value => value.GetStringRequired()),
+            Stats = stats.Map(value => value.GetHeroStats(missingMemberBehavior)),
+            Overlay = overlay.Map(value => value.GetStringRequired()),
+            Underlay = underlay.Map(value => value.GetStringRequired()),
+            Skins = skins.Map(values => values.GetList(value => value.GetHeroSkin(missingMemberBehavior)))
         };
     }
 }

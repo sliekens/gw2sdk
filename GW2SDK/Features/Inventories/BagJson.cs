@@ -39,9 +39,9 @@ public static class BagJson
 
         return new Bag
         {
-            Id = id.Select(value => value.GetInt32()),
-            Size = size.Select(value => value.GetInt32()),
-            Inventory = inventory.Select(value => value.GetInventory(missingMemberBehavior))
+            Id = id.Map(value => value.GetInt32()),
+            Size = size.Map(value => value.GetInt32()),
+            Inventory = inventory.Map(value => value.GetInventory(missingMemberBehavior))
         };
     }
 }

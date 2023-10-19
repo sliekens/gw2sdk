@@ -71,14 +71,14 @@ public static class GuildUpgradeActivityJson
 
         return new GuildUpgradeActivity
         {
-            Id = id.Select(value => value.GetInt32()),
-            Time = time.Select(value => value.GetDateTimeOffset()),
-            User = user.Select(value => value.GetString()) ?? "",
-            Action = action.Select(value => value.GetEnum<GuildUpgradeAction>(missingMemberBehavior)),
-            UpgradeId = upgradeId.Select(value => value.GetInt32()),
-            RecipeId = recipeId.Select(value => value.GetInt32()),
-            ItemId = itemId.Select(value => value.GetInt32()),
-            Count = count.Select(value => value.GetInt32())
+            Id = id.Map(value => value.GetInt32()),
+            Time = time.Map(value => value.GetDateTimeOffset()),
+            User = user.Map(value => value.GetString()) ?? "",
+            Action = action.Map(value => value.GetEnum<GuildUpgradeAction>(missingMemberBehavior)),
+            UpgradeId = upgradeId.Map(value => value.GetInt32()),
+            RecipeId = recipeId.Map(value => value.GetInt32()),
+            ItemId = itemId.Map(value => value.GetInt32()),
+            Count = count.Map(value => value.GetInt32())
         };
     }
 }

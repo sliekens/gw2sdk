@@ -47,11 +47,11 @@ public static class AbilityJson
 
         return new Ability
         {
-            Id = id.Select(value => value.GetInt32()),
-            Name = name.Select(value => value.GetStringRequired()),
-            Description = description.Select(value => value.GetStringRequired()),
-            Icon = icon.Select(value => value.GetStringRequired()),
-            Ranks = ranks.Select(values => values.GetList(value => value.GetAbilityRank(missingMemberBehavior)))
+            Id = id.Map(value => value.GetInt32()),
+            Name = name.Map(value => value.GetStringRequired()),
+            Description = description.Map(value => value.GetStringRequired()),
+            Icon = icon.Map(value => value.GetStringRequired()),
+            Ranks = ranks.Map(values => values.GetList(value => value.GetAbilityRank(missingMemberBehavior)))
         };
     }
 }

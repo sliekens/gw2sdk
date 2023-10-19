@@ -29,7 +29,7 @@ internal readonly ref struct OptionalMember
     public static implicit operator OptionalMember(JsonProperty member) =>
         new(member.Name.AsSpan(), member.Value);
 
-    public TValue? Select<TValue>(Func<JsonElement, TValue> resultSelector)
+    public TValue? Map<TValue>(Func<JsonElement, TValue> resultSelector)
     {
         if (IsUndefinedOrNull)
         {

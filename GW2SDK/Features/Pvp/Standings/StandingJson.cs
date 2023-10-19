@@ -37,9 +37,9 @@ public static class StandingJson
 
         return new Standing
         {
-            SeasonId = seasonId.Select(value => value.GetStringRequired()),
-            Current = current.Select(value => value.GetCurrentStanding(missingMemberBehavior)),
-            Best = best.Select(value => value.GetBestStanding(missingMemberBehavior))
+            SeasonId = seasonId.Map(value => value.GetStringRequired()),
+            Current = current.Map(value => value.GetCurrentStanding(missingMemberBehavior)),
+            Best = best.Map(value => value.GetBestStanding(missingMemberBehavior))
         };
     }
 }

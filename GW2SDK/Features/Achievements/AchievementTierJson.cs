@@ -30,8 +30,8 @@ public static class AchievementTierJson
         }
         return new AchievementTier
         {
-            Count = count.Select(value => value.GetInt32()),
-            Points = points.Select(value => value.GetInt32())
+            Count = count.Map(value => value.GetInt32()),
+            Points = points.Map(value => value.GetInt32())
         };
     }
 }

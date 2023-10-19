@@ -32,8 +32,8 @@ public static class MapScoresJson
 
         return new MapScores
         {
-            Kind = type.Select(value => value.GetEnum<MapKind>(missingMemberBehavior)),
-            Scores = scores.Select(value => value.GetDistribution(missingMemberBehavior))
+            Kind = type.Map(value => value.GetEnum<MapKind>(missingMemberBehavior)),
+            Scores = scores.Map(value => value.GetDistribution(missingMemberBehavior))
         };
     }
 }

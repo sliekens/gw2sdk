@@ -77,13 +77,13 @@ public static class PrefixedBuffTraitFactJson
 
         return new PrefixedBuffTraitFact
         {
-            Text = text.Select(value => value.GetString()) ?? "",
-            Icon = icon.Select(value => value.GetString()) ?? "",
-            Duration = duration.Select(value => TimeSpan.FromSeconds(value.GetDouble())),
-            Status = status.Select(value => value.GetString()) ?? "",
-            Description = description.Select(value => value.GetString()) ?? "",
-            ApplyCount = applyCount.Select(value => value.GetInt32()),
-            Prefix = prefix.Select(value => value.GetBuffPrefix(missingMemberBehavior))
+            Text = text.Map(value => value.GetString()) ?? "",
+            Icon = icon.Map(value => value.GetString()) ?? "",
+            Duration = duration.Map(value => TimeSpan.FromSeconds(value.GetDouble())),
+            Status = status.Map(value => value.GetString()) ?? "",
+            Description = description.Map(value => value.GetString()) ?? "",
+            ApplyCount = applyCount.Map(value => value.GetInt32()),
+            Prefix = prefix.Map(value => value.GetBuffPrefix(missingMemberBehavior))
         };
     }
 }

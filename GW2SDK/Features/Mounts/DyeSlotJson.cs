@@ -31,8 +31,8 @@ public static class DyeSlotJson
 
         return new DyeSlot
         {
-            ColorId = colorId.Select(value => value.GetInt32()),
-            Material = material.Select(value => value.GetEnum<Material>(missingMemberBehavior))
+            ColorId = colorId.Map(value => value.GetInt32()),
+            Material = material.Map(value => value.GetEnum<Material>(missingMemberBehavior))
         };
     }
 }

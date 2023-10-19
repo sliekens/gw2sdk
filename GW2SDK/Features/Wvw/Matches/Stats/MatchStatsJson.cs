@@ -42,10 +42,10 @@ public static class MatchStatsJson
 
         return new MatchStats
         {
-            Id = id.Select(value => value.GetStringRequired()),
-            Deaths = deaths.Select(value => value.GetDistribution(missingMemberBehavior)),
-            Kills = kills.Select(value => value.GetDistribution(missingMemberBehavior)),
-            Maps = maps.Select(values => values.GetList(value => value.GetMapSummary(missingMemberBehavior)))
+            Id = id.Map(value => value.GetStringRequired()),
+            Deaths = deaths.Map(value => value.GetDistribution(missingMemberBehavior)),
+            Kills = kills.Map(value => value.GetDistribution(missingMemberBehavior)),
+            Maps = maps.Map(values => values.GetList(value => value.GetMapSummary(missingMemberBehavior)))
         };
     }
 }

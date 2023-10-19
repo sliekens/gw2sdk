@@ -56,13 +56,13 @@ public static class GodShrineJson
 
         return new GodShrine
         {
-            Id = id.Select(value => value.GetInt32()),
-            Name = name.Select(value => value.GetStringRequired()),
-            NameContested = nameContested.Select(value => value.GetStringRequired()),
-            PointOfInterestId = pointOfInterestId.Select(value => value.GetInt32()),
-            Coordinates = coordinates.Select(value => value.GetCoordinateF(missingMemberBehavior)),
-            Icon = icon.Select(value => value.GetStringRequired()),
-            IconContested = iconContested.Select(value => value.GetStringRequired())
+            Id = id.Map(value => value.GetInt32()),
+            Name = name.Map(value => value.GetStringRequired()),
+            NameContested = nameContested.Map(value => value.GetStringRequired()),
+            PointOfInterestId = pointOfInterestId.Map(value => value.GetInt32()),
+            Coordinates = coordinates.Map(value => value.GetCoordinateF(missingMemberBehavior)),
+            Icon = icon.Map(value => value.GetStringRequired()),
+            IconContested = iconContested.Map(value => value.GetStringRequired())
         };
     }
 }

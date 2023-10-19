@@ -135,28 +135,28 @@ public static class BackpackJson
 
         return new Backpack
         {
-            Id = id.Select(value => value.GetInt32()),
-            Name = name.Select(value => value.GetStringRequired()),
-            Description = description.Select(value => value.GetString()) ?? "",
-            Level = level.Select(value => value.GetInt32()),
-            Rarity = rarity.Select(value => value.GetEnum<Rarity>(missingMemberBehavior)),
-            VendorValue = vendorValue.Select(value => value.GetInt32()),
-            DefaultSkin = defaultSkin.Select(value => value.GetInt32()),
-            GameTypes = gameTypes.Select(values => values.GetList(value => value.GetEnum<GameType>(missingMemberBehavior))),
-            Flags = flags.Select(values => values.GetList(value => value.GetEnum<ItemFlag>(missingMemberBehavior))),
-            Restrictions = restrictions.Select(values => values.GetList(value => value.GetEnum<ItemRestriction>(missingMemberBehavior))),
-            ChatLink = chatLink.Select(value => value.GetStringRequired()),
-            Icon = icon.Select(value => value.GetString()),
+            Id = id.Map(value => value.GetInt32()),
+            Name = name.Map(value => value.GetStringRequired()),
+            Description = description.Map(value => value.GetString()) ?? "",
+            Level = level.Map(value => value.GetInt32()),
+            Rarity = rarity.Map(value => value.GetEnum<Rarity>(missingMemberBehavior)),
+            VendorValue = vendorValue.Map(value => value.GetInt32()),
+            DefaultSkin = defaultSkin.Map(value => value.GetInt32()),
+            GameTypes = gameTypes.Map(values => values.GetList(value => value.GetEnum<GameType>(missingMemberBehavior))),
+            Flags = flags.Map(values => values.GetList(value => value.GetEnum<ItemFlag>(missingMemberBehavior))),
+            Restrictions = restrictions.Map(values => values.GetList(value => value.GetEnum<ItemRestriction>(missingMemberBehavior))),
+            ChatLink = chatLink.Map(value => value.GetStringRequired()),
+            Icon = icon.Map(value => value.GetString()),
             InfusionSlots =
-                infusionSlots.Select(values => values.GetList(value => value.GetInfusionSlot(missingMemberBehavior))),
-            AttributeAdjustment = attributeAdjustment.Select(value => value.GetDouble()),
-            Prefix = infixUpgrade.Select(value => value.GetInfixUpgrade(missingMemberBehavior)),
-            SuffixItemId = suffixItemId.Select(value => value.GetInt32()),
-            StatChoices = statChoices.Select(values => values.GetList(value => value.GetInt32())),
+                infusionSlots.Map(values => values.GetList(value => value.GetInfusionSlot(missingMemberBehavior))),
+            AttributeAdjustment = attributeAdjustment.Map(value => value.GetDouble()),
+            Prefix = infixUpgrade.Map(value => value.GetInfixUpgrade(missingMemberBehavior)),
+            SuffixItemId = suffixItemId.Map(value => value.GetInt32()),
+            StatChoices = statChoices.Map(values => values.GetList(value => value.GetInt32())),
             UpgradesInto =
-                upgradesInto.Select(values => values.GetList(value => value.GetItemUpgrade(missingMemberBehavior))),
+                upgradesInto.Map(values => values.GetList(value => value.GetItemUpgrade(missingMemberBehavior))),
             UpgradesFrom =
-                upgradesFrom.Select(values => values.GetList(value => value.GetItemUpgrade(missingMemberBehavior)))
+                upgradesFrom.Map(values => values.GetList(value => value.GetItemUpgrade(missingMemberBehavior)))
         };
     }
 }

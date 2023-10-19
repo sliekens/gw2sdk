@@ -37,9 +37,9 @@ public static class OrderBookLineJson
 
         return new OrderBookLine
         {
-            Listings = listings.Select(value => value.GetInt32()),
-            UnitPrice = unitPrice.Select(value => value.GetInt32()),
-            Quantity = quantity.Select(value => value.GetInt32())
+            Listings = listings.Map(value => value.GetInt32()),
+            UnitPrice = unitPrice.Map(value => value.GetInt32()),
+            Quantity = quantity.Map(value => value.GetInt32())
         };
     }
 }

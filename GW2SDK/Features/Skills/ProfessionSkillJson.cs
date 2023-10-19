@@ -126,28 +126,28 @@ public static class ProfessionSkillJson
 
         return new ProfessionSkill
         {
-            Id = id.Select(value => value.GetInt32()),
-            Name = name.Select(value => value.GetStringRequired()),
-            Facts = facts.Select(
+            Id = id.Map(value => value.GetInt32()),
+            Name = name.Map(value => value.GetStringRequired()),
+            Facts = facts.Map(
                 values => values.GetList(value => value.GetSkillFact(missingMemberBehavior, out _, out _))
             ),
             TraitedFacts =
-                traitedFacts.Select(values => values.GetList(value => value.GetTraitedSkillFact(missingMemberBehavior))),
-            Description = description.Select(value => value.GetStringRequired()),
-            Icon = icon.Select(value => value.GetString()),
-            WeaponType = weaponType.Select(value => value.GetEnum<WeaponType>(missingMemberBehavior)),
-            Professions = professions.Select(values => values.GetList(value => value.GetEnum<ProfessionName>(missingMemberBehavior))),
-            Slot = slot.Select(value => value.GetEnum<SkillSlot>(missingMemberBehavior)),
-            FlipSkill = flipSkill.Select(value => value.GetInt32()),
-            NextChain = nextChain.Select(value => value.GetInt32()),
-            PreviousChain = prevChain.Select(value => value.GetInt32()),
-            TransformSkills = transformSkills.Select(values => values.GetList(value => value.GetInt32())),
-            SkillFlag = flags.Select(values => values.GetList(value => value.GetEnum<SkillFlag>(missingMemberBehavior))),
-            Specialization = specialization.Select(value => value.GetInt32()),
-            ChatLink = chatLink.Select(value => value.GetStringRequired()),
-            Categories = categories.Select(values => values.GetList(value => value.GetEnum<SkillCategoryName>(missingMemberBehavior))),
-            Attunement = attunement.Select(value => value.GetEnum<Attunement>(missingMemberBehavior)),
-            Cost = cost.Select(value => value.GetInt32())
+                traitedFacts.Map(values => values.GetList(value => value.GetTraitedSkillFact(missingMemberBehavior))),
+            Description = description.Map(value => value.GetStringRequired()),
+            Icon = icon.Map(value => value.GetString()),
+            WeaponType = weaponType.Map(value => value.GetEnum<WeaponType>(missingMemberBehavior)),
+            Professions = professions.Map(values => values.GetList(value => value.GetEnum<ProfessionName>(missingMemberBehavior))),
+            Slot = slot.Map(value => value.GetEnum<SkillSlot>(missingMemberBehavior)),
+            FlipSkill = flipSkill.Map(value => value.GetInt32()),
+            NextChain = nextChain.Map(value => value.GetInt32()),
+            PreviousChain = prevChain.Map(value => value.GetInt32()),
+            TransformSkills = transformSkills.Map(values => values.GetList(value => value.GetInt32())),
+            SkillFlag = flags.Map(values => values.GetList(value => value.GetEnum<SkillFlag>(missingMemberBehavior))),
+            Specialization = specialization.Map(value => value.GetInt32()),
+            ChatLink = chatLink.Map(value => value.GetStringRequired()),
+            Categories = categories.Map(values => values.GetList(value => value.GetEnum<SkillCategoryName>(missingMemberBehavior))),
+            Attunement = attunement.Map(value => value.GetEnum<Attunement>(missingMemberBehavior)),
+            Cost = cost.Map(value => value.GetInt32())
         };
     }
 }

@@ -41,11 +41,11 @@ public static class FloorJson
 
         return new Floor
         {
-            Id = id.Select(value => value.GetInt32()),
+            Id = id.Map(value => value.GetInt32()),
             TextureDimensions =
-                textureDimensions.Select(value => value.GetDimensions(missingMemberBehavior)),
-            ClampedView = clampedView.Select(value => value.GetContinentRectangle(missingMemberBehavior)),
-            Regions = regions.Select(
+                textureDimensions.Map(value => value.GetDimensions(missingMemberBehavior)),
+            ClampedView = clampedView.Map(value => value.GetContinentRectangle(missingMemberBehavior)),
+            Regions = regions.Map(
                 value => value.GetMap(entry => entry.GetRegion(missingMemberBehavior))
                     .ToDictionary(kvp => int.Parse(kvp.Key), kvp => kvp.Value)
             ),

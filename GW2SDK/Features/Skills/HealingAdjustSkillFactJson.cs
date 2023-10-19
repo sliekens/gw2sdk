@@ -59,9 +59,9 @@ public static class HealingAdjustSkillFactJson
 
         return new HealingAdjustSkillFact
         {
-            Text = text.Select(value => value.GetStringRequired()),
-            Icon = icon.Select(value => value.GetStringRequired()),
-            HitCount = hitCount.Select(value => value.GetInt32())
+            Text = text.Map(value => value.GetStringRequired()),
+            Icon = icon.Map(value => value.GetStringRequired()),
+            HitCount = hitCount.Map(value => value.GetInt32())
         };
     }
 }

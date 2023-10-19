@@ -102,15 +102,15 @@ public static class GuildUpgradeJson
 
         return new GuildUpgrade
         {
-            Id = id.Select(value => value.GetInt32()),
-            Name = name.Select(value => value.GetStringRequired()),
-            Description = description.Select(value => value.GetStringRequired()),
-            BuildTime = buildTime.Select(value => TimeSpan.FromMinutes(value.GetDouble())),
-            Icon = icon.Select(value => value.GetStringRequired()),
-            RequiredLevel = requiredLevel.Select(value => value.GetInt32()),
-            Experience = experience.Select(value => value.GetInt32()),
-            Prerequisites = prerequisites.Select(values => values.GetList(value => value.GetInt32())),
-            Costs = costs.Select(values => values.GetList(value => value.GetGuildUpgradeCost(missingMemberBehavior)))
+            Id = id.Map(value => value.GetInt32()),
+            Name = name.Map(value => value.GetStringRequired()),
+            Description = description.Map(value => value.GetStringRequired()),
+            BuildTime = buildTime.Map(value => TimeSpan.FromMinutes(value.GetDouble())),
+            Icon = icon.Map(value => value.GetStringRequired()),
+            RequiredLevel = requiredLevel.Map(value => value.GetInt32()),
+            Experience = experience.Map(value => value.GetInt32()),
+            Prerequisites = prerequisites.Map(values => values.GetList(value => value.GetInt32())),
+            Costs = costs.Map(values => values.GetList(value => value.GetGuildUpgradeCost(missingMemberBehavior)))
         };
     }
 }

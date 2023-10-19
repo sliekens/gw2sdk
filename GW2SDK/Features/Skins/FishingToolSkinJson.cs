@@ -84,13 +84,13 @@ public static class FishingToolSkinJson
 
         return new FishingToolSkin
         {
-            Id = id.Select(value => value.GetInt32()),
-            Name = name.Select(value => value.GetStringRequired()),
-            Description = description.Select(value => value.GetString()) ?? "",
-            Rarity = rarity.Select(value => value.GetEnum<Rarity>(missingMemberBehavior)),
-            Flags = flags.Select(values => values.GetList(value => value.GetEnum<SkinFlag>(missingMemberBehavior))),
-            Restrictions = restrictions.Select(values => values.GetList(value => value.GetEnum<SkinRestriction>(missingMemberBehavior))),
-            Icon = icon.Select(value => value.GetString())
+            Id = id.Map(value => value.GetInt32()),
+            Name = name.Map(value => value.GetStringRequired()),
+            Description = description.Map(value => value.GetString()) ?? "",
+            Rarity = rarity.Map(value => value.GetEnum<Rarity>(missingMemberBehavior)),
+            Flags = flags.Map(values => values.GetList(value => value.GetEnum<SkinFlag>(missingMemberBehavior))),
+            Restrictions = restrictions.Map(values => values.GetList(value => value.GetEnum<SkinRestriction>(missingMemberBehavior))),
+            Icon = icon.Map(value => value.GetString())
         };
     }
 }

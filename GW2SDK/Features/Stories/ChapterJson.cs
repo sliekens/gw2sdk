@@ -25,6 +25,6 @@ public static class ChapterJson
             }
         }
 
-        return new Chapter { Name = name.Select(value => value.GetStringRequired()) };
+        return new Chapter { Name = name.Map(value => value.GetStringRequired()) };
     }
 }

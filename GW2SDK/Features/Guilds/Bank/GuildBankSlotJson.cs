@@ -37,8 +37,8 @@ public static class GuildBankSlotJson
 
         return new GuildBankSlot
         {
-            ItemId = itemId.Select(value => value.GetInt32()),
-            Count = count.Select(value => value.GetInt32())
+            ItemId = itemId.Map(value => value.GetInt32()),
+            Count = count.Map(value => value.GetInt32())
         };
     }
 }

@@ -36,9 +36,9 @@ public static class IngredientJson
 
         return new Ingredient
         {
-            Kind = type.Select(value => value.GetEnum<IngredientKind>(missingMemberBehavior)),
-            Id = id.Select(value => value.GetInt32()),
-            Count = count.Select(value => value.GetInt32())
+            Kind = type.Map(value => value.GetEnum<IngredientKind>(missingMemberBehavior)),
+            Id = id.Map(value => value.GetInt32()),
+            Count = count.Map(value => value.GetInt32())
         };
     }
 }

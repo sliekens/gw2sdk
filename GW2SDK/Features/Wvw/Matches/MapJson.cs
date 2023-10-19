@@ -54,13 +54,13 @@ public static class MapJson
 
         return new Map
         {
-            Id = id.Select(value => value.GetInt32()),
-            Kind = type.Select(value => value.GetEnum<MapKind>(missingMemberBehavior)),
-            Scores = scores.Select(value => value.GetDistribution(missingMemberBehavior)),
-            Bonuses = bonuses.Select(values => values.GetList(value => value.GetBonus(missingMemberBehavior))),
-            Objectives = objectives.Select(values => values.GetList(value => value.GetObjective(missingMemberBehavior))),
-            Deaths = deaths.Select(value => value.GetDistribution(missingMemberBehavior)),
-            Kills = kills.Select(value => value.GetDistribution(missingMemberBehavior))
+            Id = id.Map(value => value.GetInt32()),
+            Kind = type.Map(value => value.GetEnum<MapKind>(missingMemberBehavior)),
+            Scores = scores.Map(value => value.GetDistribution(missingMemberBehavior)),
+            Bonuses = bonuses.Map(values => values.GetList(value => value.GetBonus(missingMemberBehavior))),
+            Objectives = objectives.Map(values => values.GetList(value => value.GetObjective(missingMemberBehavior))),
+            Deaths = deaths.Map(value => value.GetDistribution(missingMemberBehavior)),
+            Kills = kills.Map(value => value.GetDistribution(missingMemberBehavior))
         };
     }
 }

@@ -32,8 +32,8 @@ public static class ProductRequirementJson
 
         return new ProductRequirement
         {
-            Product = product.Select(value => value.GetEnum<ProductName>(missingMemberBehavior)),
-            Condition = condition.Select(value => value.GetEnum<AccessCondition>(missingMemberBehavior))
+            Product = product.Map(value => value.GetEnum<ProductName>(missingMemberBehavior)),
+            Condition = condition.Map(value => value.GetEnum<AccessCondition>(missingMemberBehavior))
         };
     }
 }

@@ -57,13 +57,13 @@ public static class LeaderboardEntryJson
 
         return new LeaderboardEntry
         {
-            Name = name.Select(value => value.GetStringRequired()),
-            GuildId = guildId.Select(value => value.GetString()) ?? "",
-            TeamName = teamName.Select(value => value.GetString()) ?? "",
-            TeamId = teamId.Select(value => value.GetInt32()),
-            Rank = rank.Select(value => value.GetInt32()),
-            Date = date.Select(value => value.GetDateTimeOffset()),
-            Scores = scores.Select(values => values.GetList(value => value.GetScore(missingMemberBehavior)))
+            Name = name.Map(value => value.GetStringRequired()),
+            GuildId = guildId.Map(value => value.GetString()) ?? "",
+            TeamName = teamName.Map(value => value.GetString()) ?? "",
+            TeamId = teamId.Map(value => value.GetInt32()),
+            Rank = rank.Map(value => value.GetInt32()),
+            Date = date.Map(value => value.GetDateTimeOffset()),
+            Scores = scores.Map(values => values.GetList(value => value.GetScore(missingMemberBehavior)))
         };
     }
 }

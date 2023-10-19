@@ -59,9 +59,9 @@ public static class UnblockableSkillFactJson
 
         return new UnblockableSkillFact
         {
-            Text = text.Select(value => value.GetStringRequired()),
-            Icon = icon.Select(value => value.GetStringRequired()),
-            Value = unblockable.Select(value => value.GetBoolean())
+            Text = text.Map(value => value.GetStringRequired()),
+            Icon = icon.Map(value => value.GetStringRequired()),
+            Value = unblockable.Map(value => value.GetBoolean())
         };
     }
 }

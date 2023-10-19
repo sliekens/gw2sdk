@@ -47,11 +47,11 @@ public static class GuildBankTabJson
 
         return new GuildBankTab
         {
-            UpgradeId = upgradeId.Select(value => value.GetInt32()),
-            Size = size.Select(value => value.GetInt32()),
-            Coins = coins.Select(value => value.GetInt32()),
-            Note = note.Select(value => value.GetString()) ?? "",
-            Inventory = inventory.Select(values => values.GetList(value => value.GetGuildBankSlot(missingMemberBehavior)))
+            UpgradeId = upgradeId.Map(value => value.GetInt32()),
+            Size = size.Map(value => value.GetInt32()),
+            Coins = coins.Map(value => value.GetInt32()),
+            Note = note.Map(value => value.GetString()) ?? "",
+            Inventory = inventory.Map(values => values.GetList(value => value.GetGuildBankSlot(missingMemberBehavior)))
         };
     }
 }

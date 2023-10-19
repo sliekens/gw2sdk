@@ -59,9 +59,9 @@ public static class NumberSkillFactJson
 
         return new NumberSkillFact
         {
-            Text = text.Select(value => value.GetString()) ?? "",
-            Icon = icon.Select(value => value.GetStringRequired()),
-            Value = number.Select(value => value.GetInt32())
+            Text = text.Map(value => value.GetString()) ?? "",
+            Icon = icon.Map(value => value.GetStringRequired()),
+            Value = number.Map(value => value.GetInt32())
         };
     }
 }

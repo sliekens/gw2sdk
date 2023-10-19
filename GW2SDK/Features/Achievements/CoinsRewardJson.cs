@@ -33,6 +33,6 @@ public static class CoinsRewardJson
             }
         }
 
-        return new CoinsReward { Coins = coins.Select(value => value.GetInt32()) };
+        return new CoinsReward { Coins = coins.Map(value => value.GetInt32()) };
     }
 }

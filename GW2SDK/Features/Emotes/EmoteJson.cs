@@ -34,9 +34,9 @@ public static class EmoteJson
 
         return new Emote
         {
-            Id = id.Select(value => value.GetStringRequired()),
-            Commands = commands.Select(values => values.GetList(entry => entry.GetStringRequired())),
-            UnlockItems = unlockItems.Select(values => values.GetList(entry => entry.GetInt32()))
+            Id = id.Map(value => value.GetStringRequired()),
+            Commands = commands.Map(values => values.GetList(entry => entry.GetStringRequired())),
+            UnlockItems = unlockItems.Map(values => values.GetList(entry => entry.GetInt32()))
         };
     }
 }

@@ -52,12 +52,12 @@ public static class DivisionJson
 
         return new Division
         {
-            Name = name.Select(value => value.GetStringRequired()),
-            Flags = flags.Select(values => values.GetList(value => value.GetEnum<DivisionFlag>(missingMemberBehavior))),
-            LargeIcon = largeIcon.Select(value => value.GetStringRequired()),
-            SmallIcon = smallIcon.Select(value => value.GetStringRequired()),
-            PipIcon = pipIcon.Select(value => value.GetStringRequired()),
-            Tiers = tiers.Select(values => values.GetList(value => value.GetDivisionTier(missingMemberBehavior)))
+            Name = name.Map(value => value.GetStringRequired()),
+            Flags = flags.Map(values => values.GetList(value => value.GetEnum<DivisionFlag>(missingMemberBehavior))),
+            LargeIcon = largeIcon.Map(value => value.GetStringRequired()),
+            SmallIcon = smallIcon.Map(value => value.GetStringRequired()),
+            PipIcon = pipIcon.Map(value => value.GetStringRequired()),
+            Tiers = tiers.Map(values => values.GetList(value => value.GetDivisionTier(missingMemberBehavior)))
         };
     }
 }

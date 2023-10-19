@@ -44,6 +44,6 @@ public static class AccountLuckJson
             }
         }
 
-        return new AccountLuck { Luck = value.Select(luck => luck.GetInt32()) };
+        return new AccountLuck { Luck = value.Map(luck => luck.GetInt32()) };
     }
 }

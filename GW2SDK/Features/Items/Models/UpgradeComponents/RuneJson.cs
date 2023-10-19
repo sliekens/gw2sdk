@@ -131,23 +131,23 @@ public static class RuneJson
 
         return new Rune
         {
-            Id = id.Select(value => value.GetInt32()),
-            Name = name.Select(value => value.GetStringRequired()),
-            Description = description.Select(value => value.GetString()) ?? "",
-            Level = level.Select(value => value.GetInt32()),
-            Rarity = rarity.Select(value => value.GetEnum<Rarity>(missingMemberBehavior)),
-            VendorValue = vendorValue.Select(value => value.GetInt32()),
-            GameTypes = gameTypes.Select(values => values.GetList(value => value.GetEnum<GameType>(missingMemberBehavior))),
-            Flags = flags.Select(values => values.GetList(value => value.GetEnum<ItemFlag>(missingMemberBehavior))),
-            Restrictions = restrictions.Select(values => values.GetList(value => value.GetEnum<ItemRestriction>(missingMemberBehavior))),
-            ChatLink = chatLink.Select(value => value.GetStringRequired()),
-            Icon = icon.Select(value => value.GetString()),
-            UpgradeComponentFlags = upgradeComponentFlags.Select(values => values.GetList(value => value.GetEnum<UpgradeComponentFlag>(missingMemberBehavior))),
-            InfusionUpgradeFlags = infusionUpgradeFlags.Select(values => values.GetList(value => value.GetEnum<InfusionSlotFlag>(missingMemberBehavior))),
-            AttributeAdjustment = attributeAdjustment.Select(value => value.GetDouble()),
-            Suffix = infixUpgrade.Select(value => value.GetInfixUpgrade(missingMemberBehavior)),
-            SuffixName = suffix.Select(value => value.GetStringRequired()),
-            Bonuses = bonuses.Select(values => values.GetList(value => value.GetStringRequired()))
+            Id = id.Map(value => value.GetInt32()),
+            Name = name.Map(value => value.GetStringRequired()),
+            Description = description.Map(value => value.GetString()) ?? "",
+            Level = level.Map(value => value.GetInt32()),
+            Rarity = rarity.Map(value => value.GetEnum<Rarity>(missingMemberBehavior)),
+            VendorValue = vendorValue.Map(value => value.GetInt32()),
+            GameTypes = gameTypes.Map(values => values.GetList(value => value.GetEnum<GameType>(missingMemberBehavior))),
+            Flags = flags.Map(values => values.GetList(value => value.GetEnum<ItemFlag>(missingMemberBehavior))),
+            Restrictions = restrictions.Map(values => values.GetList(value => value.GetEnum<ItemRestriction>(missingMemberBehavior))),
+            ChatLink = chatLink.Map(value => value.GetStringRequired()),
+            Icon = icon.Map(value => value.GetString()),
+            UpgradeComponentFlags = upgradeComponentFlags.Map(values => values.GetList(value => value.GetEnum<UpgradeComponentFlag>(missingMemberBehavior))),
+            InfusionUpgradeFlags = infusionUpgradeFlags.Map(values => values.GetList(value => value.GetEnum<InfusionSlotFlag>(missingMemberBehavior))),
+            AttributeAdjustment = attributeAdjustment.Map(value => value.GetDouble()),
+            Suffix = infixUpgrade.Map(value => value.GetInfixUpgrade(missingMemberBehavior)),
+            SuffixName = suffix.Map(value => value.GetStringRequired()),
+            Bonuses = bonuses.Map(values => values.GetList(value => value.GetStringRequired()))
         };
     }
 }

@@ -57,13 +57,13 @@ public static class MasteryJson
 
         return new Mastery
         {
-            Id = id.Select(value => value.GetInt32()),
-            Name = name.Select(value => value.GetStringRequired()),
-            Requirement = requirement.Select(value => value.GetStringRequired()),
-            Order = order.Select(value => value.GetInt32()),
-            Background = background.Select(value => value.GetStringRequired()),
-            Region = region.Select(value => value.GetEnum<MasteryRegionName>(missingMemberBehavior)),
-            Levels = levels.Select(values => values.GetList(value => value.GetMasteryLevel(missingMemberBehavior)))
+            Id = id.Map(value => value.GetInt32()),
+            Name = name.Map(value => value.GetStringRequired()),
+            Requirement = requirement.Map(value => value.GetStringRequired()),
+            Order = order.Map(value => value.GetInt32()),
+            Background = background.Map(value => value.GetStringRequired()),
+            Region = region.Map(value => value.GetEnum<MasteryRegionName>(missingMemberBehavior)),
+            Levels = levels.Map(values => values.GetList(value => value.GetMasteryLevel(missingMemberBehavior)))
         };
     }
 }

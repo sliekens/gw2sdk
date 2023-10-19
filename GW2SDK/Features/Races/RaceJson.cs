@@ -34,9 +34,9 @@ public static class RaceJson
 
         return new Race
         {
-            Id = id.Select(value => value.GetEnum<RaceName>(missingMemberBehavior)),
-            Name = name.Select(value => value.GetStringRequired()),
-            Skills = skills.Select(values => values.GetList(value => value.GetInt32()))
+            Id = id.Map(value => value.GetEnum<RaceName>(missingMemberBehavior)),
+            Name = name.Map(value => value.GetStringRequired()),
+            Skills = skills.Map(values => values.GetList(value => value.GetInt32()))
         };
     }
 }

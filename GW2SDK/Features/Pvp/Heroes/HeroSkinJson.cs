@@ -47,11 +47,11 @@ public static class HeroSkinJson
 
         return new HeroSkin
         {
-            Id = id.Select(value => value.GetInt32()),
-            Name = name.Select(value => value.GetStringRequired()),
-            Icon = icon.Select(value => value.GetStringRequired()),
-            Default = @default.Select(value => value.GetBoolean()),
-            UnlockItemIds = unlockItems.Select(values => values.GetList(value => value.GetInt32()))
+            Id = id.Map(value => value.GetInt32()),
+            Name = name.Map(value => value.GetStringRequired()),
+            Icon = icon.Map(value => value.GetStringRequired()),
+            Default = @default.Map(value => value.GetBoolean()),
+            UnlockItemIds = unlockItems.Map(values => values.GetList(value => value.GetInt32()))
         };
     }
 }

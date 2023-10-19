@@ -112,15 +112,15 @@ public static class ArmorSkinJson
 
         return new ArmorSkin
         {
-            Id = id.Select(value => value.GetInt32()),
-            Name = name.Select(value => value.GetStringRequired()),
-            Description = description.Select(value => value.GetString()) ?? "",
-            Rarity = rarity.Select(value => value.GetEnum<Rarity>(missingMemberBehavior)),
-            Flags = flags.Select(values => values.GetList(value => value.GetEnum<SkinFlag>(missingMemberBehavior))),
-            Restrictions = restrictions.Select(values => values.GetList(value => value.GetEnum<SkinRestriction>(missingMemberBehavior))),
-            Icon = icon.Select(value => value.GetString()),
-            WeightClass = weightClass.Select(value => value.GetEnum<WeightClass>(missingMemberBehavior)),
-            DyeSlots = dyeSlots.Select(value => value.GetDyeSlotInfo(missingMemberBehavior))
+            Id = id.Map(value => value.GetInt32()),
+            Name = name.Map(value => value.GetStringRequired()),
+            Description = description.Map(value => value.GetString()) ?? "",
+            Rarity = rarity.Map(value => value.GetEnum<Rarity>(missingMemberBehavior)),
+            Flags = flags.Map(values => values.GetList(value => value.GetEnum<SkinFlag>(missingMemberBehavior))),
+            Restrictions = restrictions.Map(values => values.GetList(value => value.GetEnum<SkinRestriction>(missingMemberBehavior))),
+            Icon = icon.Map(value => value.GetString()),
+            WeightClass = weightClass.Map(value => value.GetEnum<WeightClass>(missingMemberBehavior)),
+            DyeSlots = dyeSlots.Map(value => value.GetDyeSlotInfo(missingMemberBehavior))
         };
     }
 }

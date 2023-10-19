@@ -42,10 +42,10 @@ public static class OutfitJson
 
         return new Outfit
         {
-            Id = id.Select(value => value.GetInt32()),
-            Name = name.Select(value => value.GetStringRequired()),
-            Icon = icon.Select(value => value.GetStringRequired()),
-            UnlockItems = unlockItems.Select(values => values.GetList(value => value.GetInt32()))
+            Id = id.Map(value => value.GetInt32()),
+            Name = name.Map(value => value.GetStringRequired()),
+            Icon = icon.Map(value => value.GetStringRequired()),
+            UnlockItems = unlockItems.Map(values => values.GetList(value => value.GetInt32()))
         };
     }
 }

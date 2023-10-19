@@ -32,8 +32,8 @@ public static class RaidWingJson
 
         return new RaidWing
         {
-            Id = id.Select(value => value.GetStringRequired()),
-            Encounters = events.Select(values => values.GetList(value => value.GetEncounter(missingMemberBehavior)))
+            Id = id.Map(value => value.GetStringRequired()),
+            Encounters = events.Map(values => values.GetList(value => value.GetEncounter(missingMemberBehavior)))
         };
     }
 }

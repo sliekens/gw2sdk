@@ -31,8 +31,8 @@ public static class GemsForGoldExchangeJson
 
         return new GemsForGoldExchange
         {
-            CoinsPerGem = coinsPerGem.Select(value => value.GetInt32()),
-            CoinsToReceive = quantity.Select(value => value.GetInt32())
+            CoinsPerGem = coinsPerGem.Map(value => value.GetInt32()),
+            CoinsToReceive = quantity.Map(value => value.GetInt32())
         };
     }
 }

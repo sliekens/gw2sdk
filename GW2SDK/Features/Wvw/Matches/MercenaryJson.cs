@@ -56,11 +56,11 @@ public static class MercenaryJson
 
         return new Mercenary
         {
-            Id = id.Select(value => value.GetStringRequired()),
-            Owner = owner.Select(value => value.GetEnum<TeamColor>(missingMemberBehavior)),
-            LastFlipped = lastFlipped.Select(value => value.GetDateTimeOffset()),
-            PointsTick = pointsTick.Select(value => value.GetInt32()),
-            PointsCapture = pointsCapture.Select(value => value.GetInt32())
+            Id = id.Map(value => value.GetStringRequired()),
+            Owner = owner.Map(value => value.GetEnum<TeamColor>(missingMemberBehavior)),
+            LastFlipped = lastFlipped.Map(value => value.GetDateTimeOffset()),
+            PointsTick = pointsTick.Map(value => value.GetInt32()),
+            PointsCapture = pointsCapture.Map(value => value.GetInt32())
         };
     }
 }

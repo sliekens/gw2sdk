@@ -25,6 +25,6 @@ public static class CreatedSubtokenJson
             }
         }
 
-        return new CreatedSubtoken { Subtoken = subtoken.Select(value => value.GetStringRequired()) };
+        return new CreatedSubtoken { Subtoken = subtoken.Map(value => value.GetStringRequired()) };
     }
 }

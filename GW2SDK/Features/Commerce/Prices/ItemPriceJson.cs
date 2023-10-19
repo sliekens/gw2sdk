@@ -72,12 +72,12 @@ public static class ItemPriceJson
 
         return new ItemPrice
         {
-            Id = id.Select(value => value.GetInt32()),
-            Whitelisted = whitelisted.Select(value => value.GetBoolean()),
-            TotalDemand = demand.Select(value => value.GetInt32()),
-            TotalSupply = supply.Select(value => value.GetInt32()),
-            BestBid = bestBid.Select(value => value.GetInt32()),
-            BestAsk = bestAsk.Select(value => value.GetInt32())
+            Id = id.Map(value => value.GetInt32()),
+            Whitelisted = whitelisted.Map(value => value.GetBoolean()),
+            TotalDemand = demand.Map(value => value.GetInt32()),
+            TotalSupply = supply.Map(value => value.GetInt32()),
+            BestBid = bestBid.Map(value => value.GetInt32()),
+            BestAsk = bestAsk.Map(value => value.GetInt32())
         };
     }
 }

@@ -66,13 +66,13 @@ public static class StashActivityJson
 
         return new StashActivity
         {
-            Id = id.Select(value => value.GetInt32()),
-            Time = time.Select(value => value.GetDateTimeOffset()),
-            User = user.Select(value => value.GetStringRequired()),
-            Operation = operation.Select(value => value.GetEnum<StashOperation>(missingMemberBehavior)),
-            ItemId = itemId.Select(value => value.GetInt32()),
-            Count = count.Select(value => value.GetInt32()),
-            Coins = coins.Select(value => value.GetInt32())
+            Id = id.Map(value => value.GetInt32()),
+            Time = time.Map(value => value.GetDateTimeOffset()),
+            User = user.Map(value => value.GetStringRequired()),
+            Operation = operation.Map(value => value.GetEnum<StashOperation>(missingMemberBehavior)),
+            ItemId = itemId.Map(value => value.GetInt32()),
+            Count = count.Map(value => value.GetInt32()),
+            Coins = coins.Map(value => value.GetInt32())
         };
     }
 }

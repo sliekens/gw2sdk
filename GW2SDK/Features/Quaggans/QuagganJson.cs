@@ -32,8 +32,8 @@ public static class QuagganJson
 
         return new Quaggan
         {
-            Id = id.Select(value => value.GetStringRequired()),
-            PictureHref = url.Select(value => value.GetStringRequired())
+            Id = id.Map(value => value.GetStringRequired()),
+            PictureHref = url.Map(value => value.GetStringRequired())
         };
     }
 }

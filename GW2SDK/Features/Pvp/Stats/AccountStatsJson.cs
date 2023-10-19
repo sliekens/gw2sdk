@@ -52,18 +52,18 @@ public static class AccountStatsJson
 
         return new AccountStats
         {
-            PvpRank = pvpRank.Select(value => value.GetInt32()),
-            PvpRankPoints = pvpRankPoints.Select(value => value.GetInt32()),
-            PvpRankRollovers = pvpRankRollovers.Select(value => value.GetInt32()),
-            Aggregate = aggregate.Select(value => value.GetResults(missingMemberBehavior)),
-            Professions = professions.Select(
+            PvpRank = pvpRank.Map(value => value.GetInt32()),
+            PvpRankPoints = pvpRankPoints.Map(value => value.GetInt32()),
+            PvpRankRollovers = pvpRankRollovers.Map(value => value.GetInt32()),
+            Aggregate = aggregate.Map(value => value.GetResults(missingMemberBehavior)),
+            Professions = professions.Map(
                 value => value.EnumerateObject()
                     .ToDictionary(
                         pair => (ProfessionName)Enum.Parse(typeof(ProfessionName), pair.Name, true),
                         pair => pair.Value.GetResults(missingMemberBehavior)
                     )
             ),
-            Ladders = ladders.Select(value => value.GetLadders(missingMemberBehavior))
+            Ladders = ladders.Map(value => value.GetLadders(missingMemberBehavior))
         };
     }
 }

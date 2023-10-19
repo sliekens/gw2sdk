@@ -47,11 +47,11 @@ public static class CurrencyJson
 
         return new Currency
         {
-            Id = id.Select(value => value.GetInt32()),
-            Name = name.Select(value => value.GetStringRequired()),
-            Description = description.Select(value => value.GetStringRequired()),
-            Order = order.Select(value => value.GetInt32()),
-            Icon = icon.Select(value => value.GetStringRequired())
+            Id = id.Map(value => value.GetInt32()),
+            Name = name.Map(value => value.GetStringRequired()),
+            Description = description.Map(value => value.GetStringRequired()),
+            Order = order.Map(value => value.GetInt32()),
+            Icon = icon.Map(value => value.GetStringRequired())
         };
     }
 }

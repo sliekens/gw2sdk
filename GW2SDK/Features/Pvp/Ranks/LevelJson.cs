@@ -34,9 +34,9 @@ public static class LevelJson
 
         return new Level
         {
-            MinRank = minLevel.Select(value => value.GetInt32()),
-            MaxRank = maxLevel.Select(value => value.GetInt32()),
-            Points = points.Select(value => value.GetInt32())
+            MinRank = minLevel.Map(value => value.GetInt32()),
+            MaxRank = maxLevel.Map(value => value.GetInt32()),
+            Points = points.Map(value => value.GetInt32())
         };
     }
 }

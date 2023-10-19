@@ -52,12 +52,12 @@ public static class MasteryLevelJson
 
         return new MasteryLevel
         {
-            Name = name.Select(value => value.GetStringRequired()),
-            Description = description.Select(value => value.GetStringRequired()),
-            Instruction = instruction.Select(value => value.GetStringRequired()),
-            Icon = icon.Select(value => value.GetStringRequired()),
-            PointCost = pointCost.Select(value => value.GetInt32()),
-            ExperienceCost = experienceCost.Select(value => value.GetInt32())
+            Name = name.Map(value => value.GetStringRequired()),
+            Description = description.Map(value => value.GetStringRequired()),
+            Instruction = instruction.Map(value => value.GetStringRequired()),
+            Icon = icon.Map(value => value.GetStringRequired()),
+            PointCost = pointCost.Map(value => value.GetInt32()),
+            ExperienceCost = experienceCost.Map(value => value.GetInt32())
         };
     }
 }

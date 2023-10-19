@@ -73,16 +73,16 @@ public static class CampJson
 
         return new Camp
         {
-            Id = id.Select(value => value.GetStringRequired()),
-            Owner = owner.Select(value => value.GetEnum<TeamColor>(missingMemberBehavior)),
-            LastFlipped = lastFlipped.Select(value => value.GetDateTimeOffset()),
-            PointsTick = pointsTick.Select(value => value.GetInt32()),
-            PointsCapture = pointsCapture.Select(value => value.GetInt32()),
-            ClaimedBy = claimedBy.Select(value => value.GetString()) ?? "",
-            ClaimedAt = claimedAt.Select(value => value.GetDateTimeOffset()),
-            YaksDelivered = yaksDelivered.Select(value => value.GetInt32()),
+            Id = id.Map(value => value.GetStringRequired()),
+            Owner = owner.Map(value => value.GetEnum<TeamColor>(missingMemberBehavior)),
+            LastFlipped = lastFlipped.Map(value => value.GetDateTimeOffset()),
+            PointsTick = pointsTick.Map(value => value.GetInt32()),
+            PointsCapture = pointsCapture.Map(value => value.GetInt32()),
+            ClaimedBy = claimedBy.Map(value => value.GetString()) ?? "",
+            ClaimedAt = claimedAt.Map(value => value.GetDateTimeOffset()),
+            YaksDelivered = yaksDelivered.Map(value => value.GetInt32()),
             GuildUpgrades =
-                guildUpgrades.Select(values => values.GetList(value => value.GetInt32()))
+                guildUpgrades.Map(values => values.GetList(value => value.GetInt32()))
                 ?? new List<int>()
         };
     }

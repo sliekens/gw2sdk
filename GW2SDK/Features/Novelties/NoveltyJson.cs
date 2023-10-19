@@ -52,12 +52,12 @@ public static class NoveltyJson
 
         return new Novelty
         {
-            Id = id.Select(value => value.GetInt32()),
-            Name = name.Select(value => value.GetStringRequired()),
-            Description = description.Select(value => value.GetString()) ?? "",
-            Icon = icon.Select(value => value.GetStringRequired()),
-            Slot = slot.Select(value => value.GetEnum<NoveltyKind>(missingMemberBehavior)),
-            UnlockItems = unlockItems.Select(values => values.GetList(value => value.GetInt32()))
+            Id = id.Map(value => value.GetInt32()),
+            Name = name.Map(value => value.GetStringRequired()),
+            Description = description.Map(value => value.GetString()) ?? "",
+            Icon = icon.Map(value => value.GetStringRequired()),
+            Slot = slot.Map(value => value.GetEnum<NoveltyKind>(missingMemberBehavior)),
+            UnlockItems = unlockItems.Map(values => values.GetList(value => value.GetInt32()))
         };
     }
 }

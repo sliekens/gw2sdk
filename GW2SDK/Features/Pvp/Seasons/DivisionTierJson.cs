@@ -25,6 +25,6 @@ public static class DivisionTierJson
             }
         }
 
-        return new DivisionTier { Points = points.Select(value => value.GetInt32()) };
+        return new DivisionTier { Points = points.Map(value => value.GetInt32()) };
     }
 }

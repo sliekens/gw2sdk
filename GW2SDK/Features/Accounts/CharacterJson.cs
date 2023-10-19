@@ -152,36 +152,36 @@ public static class CharacterJson
 
         return new Character
         {
-            Name = name.Select(value => value.GetStringRequired()),
-            Race = race.Select(value => value.GetEnum<RaceName>(missingMemberBehavior)),
-            Gender = gender.Select(value => value.GetEnum<Gender>(missingMemberBehavior)),
-            Flags = flags.Select(values => values.GetList(value => value.GetEnum<CharacterFlag>(missingMemberBehavior))),
-            Level = level.Select(value => value.GetInt32()),
-            GuildId = guild.Select(value => value.GetString()) ?? "",
-            Profession = profession.Select(value => value.GetEnum<ProfessionName>(missingMemberBehavior)),
-            Age = age.Select(value => TimeSpan.FromSeconds(value.GetDouble())),
-            LastModified = lastModified.Select(value => value.GetDateTimeOffset()),
-            Created = created.Select(value => value.GetDateTimeOffset()),
-            Deaths = deaths.Select(value => value.GetInt32()),
+            Name = name.Map(value => value.GetStringRequired()),
+            Race = race.Map(value => value.GetEnum<RaceName>(missingMemberBehavior)),
+            Gender = gender.Map(value => value.GetEnum<Gender>(missingMemberBehavior)),
+            Flags = flags.Map(values => values.GetList(value => value.GetEnum<CharacterFlag>(missingMemberBehavior))),
+            Level = level.Map(value => value.GetInt32()),
+            GuildId = guild.Map(value => value.GetString()) ?? "",
+            Profession = profession.Map(value => value.GetEnum<ProfessionName>(missingMemberBehavior)),
+            Age = age.Map(value => TimeSpan.FromSeconds(value.GetDouble())),
+            LastModified = lastModified.Map(value => value.GetDateTimeOffset()),
+            Created = created.Map(value => value.GetDateTimeOffset()),
+            Deaths = deaths.Map(value => value.GetInt32()),
             CraftingDisciplines =
-                crafting.Select(values => values.GetList(value => value.GetCraftingDiscipline(missingMemberBehavior))),
-            TitleId = title.Select(value => value.GetInt32()),
-            Backstory = backstory.Select(values => values.GetList(value => value.GetStringRequired())),
+                crafting.Map(values => values.GetList(value => value.GetCraftingDiscipline(missingMemberBehavior))),
+            TitleId = title.Map(value => value.GetInt32()),
+            Backstory = backstory.Map(values => values.GetList(value => value.GetStringRequired())),
             WvwAbilities =
-                wvwAbilities.Select(values => values.GetList(value => value.GetWvwAbility(missingMemberBehavior))),
-            BuildTabsUnlocked = buildTabsUnlocked.Select(value => value.GetInt32()),
-            ActiveBuildTab = activeBuildTab.Select(value => value.GetInt32()),
-            BuildTabs = buildTabs.Select(values => values.GetList(value => value.GetBuildTab(missingMemberBehavior))),
-            EquipmentTabsUnlocked = equipmentTabsUnlocked.Select(value => value.GetInt32()),
-            ActiveEquipmentTab = activeEquipmentTab.Select(value => value.GetInt32()),
+                wvwAbilities.Map(values => values.GetList(value => value.GetWvwAbility(missingMemberBehavior))),
+            BuildTabsUnlocked = buildTabsUnlocked.Map(value => value.GetInt32()),
+            ActiveBuildTab = activeBuildTab.Map(value => value.GetInt32()),
+            BuildTabs = buildTabs.Map(values => values.GetList(value => value.GetBuildTab(missingMemberBehavior))),
+            EquipmentTabsUnlocked = equipmentTabsUnlocked.Map(value => value.GetInt32()),
+            ActiveEquipmentTab = activeEquipmentTab.Map(value => value.GetInt32()),
             Equipment =
-                equipment.Select(values => values.GetList(value => value.GetEquipmentItem(missingMemberBehavior))),
+                equipment.Map(values => values.GetList(value => value.GetEquipmentItem(missingMemberBehavior))),
             EquipmentTabs =
-                equipmentTabs.Select(values => values.GetList(value => value.GetEquipmentTab(missingMemberBehavior))),
-            Recipes = recipes.Select(values => values.GetList(value => value.GetInt32())),
+                equipmentTabs.Map(values => values.GetList(value => value.GetEquipmentTab(missingMemberBehavior))),
+            Recipes = recipes.Map(values => values.GetList(value => value.GetInt32())),
             Training =
-                training.Select(values => values.GetList(value => value.GetTrainingProgress(missingMemberBehavior))),
-            Bags = bags.Select(values => values.GetList(value => value.GetBag(missingMemberBehavior)))
+                training.Map(values => values.GetList(value => value.GetTrainingProgress(missingMemberBehavior))),
+            Bags = bags.Map(values => values.GetList(value => value.GetBag(missingMemberBehavior)))
         };
     }
 }

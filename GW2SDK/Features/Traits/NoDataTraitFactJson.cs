@@ -52,8 +52,8 @@ public static class NoDataTraitFactJson
 
         return new NoDataTraitFact
         {
-            Text = text.Select(value => value.GetString()) ?? "",
-            Icon = icon.Select(value => value.GetString()) ?? ""
+            Text = text.Map(value => value.GetString()) ?? "",
+            Icon = icon.Map(value => value.GetString()) ?? ""
         };
     }
 }

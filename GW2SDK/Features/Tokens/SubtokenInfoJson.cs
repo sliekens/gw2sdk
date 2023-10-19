@@ -1,4 +1,4 @@
-﻿using System.Text.Json;
+using System.Text.Json;
 using GuildWars2.Json;
 
 namespace GuildWars2.Tokens;
@@ -60,12 +60,12 @@ public static class SubtokenInfoJson
 
         return new SubtokenInfo
         {
-            Id = id.Select(value => value.GetStringRequired()),
-            Name = name.Select(value => value.GetStringRequired()),
-            Permissions = permissions.Select(values => values.GetList(value => value.GetEnum<Permission>(missingMemberBehavior))),
-            ExpiresAt = expiresAt.Select(value => value.GetDateTimeOffset()),
-            IssuedAt = issuedAt.Select(value => value.GetDateTimeOffset()),
-            Urls = urls.Select(values => values.GetList(item => new Uri(item.GetStringRequired(), UriKind.Relative)))
+            Id = id.Map(value => value.GetStringRequired()),
+            Name = name.Map(value => value.GetStringRequired()),
+            Permissions = permissions.Map(values => values.GetList(value => value.GetEnum<Permission>(missingMemberBehavior))),
+            ExpiresAt = expiresAt.Map(value => value.GetDateTimeOffset()),
+            IssuedAt = issuedAt.Map(value => value.GetDateTimeOffset()),
+            Urls = urls.Map(values => values.GetList(item => new Uri(item.GetStringRequired(), UriKind.Relative)))
         };
     }
 }

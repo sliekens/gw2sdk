@@ -62,10 +62,10 @@ public static class AttributeAdjustTraitFactJson
 
         return new AttributeAdjustTraitFact
         {
-            Text = text.Select(value => value.GetString()) ?? "",
-            Icon = icon.Select(value => value.GetString()) ?? "",
-            Value = adjustment.Select(value => value.GetInt32()),
-            Target = target.Select(value => value.GetEnum<AttributeAdjustTarget>(missingMemberBehavior))
+            Text = text.Map(value => value.GetString()) ?? "",
+            Icon = icon.Map(value => value.GetString()) ?? "",
+            Value = adjustment.Map(value => value.GetInt32()),
+            Target = target.Map(value => value.GetEnum<AttributeAdjustTarget>(missingMemberBehavior))
         };
     }
 }

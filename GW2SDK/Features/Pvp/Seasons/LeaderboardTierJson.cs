@@ -42,10 +42,10 @@ public static class LeaderboardTierJson
 
         return new LeaderboardTier
         {
-            Color = color.Select(value => value.GetString()) ?? "",
-            Kind = type.Select(value => value.GetEnum<LeaderboardTierKind>(missingMemberBehavior)),
-            Name = name.Select(value => value.GetString()) ?? "",
-            Range = range.Select(value => value.GetLeaderboardTierRange(missingMemberBehavior))
+            Color = color.Map(value => value.GetString()) ?? "",
+            Kind = type.Map(value => value.GetEnum<LeaderboardTierKind>(missingMemberBehavior)),
+            Name = name.Map(value => value.GetString()) ?? "",
+            Range = range.Map(value => value.GetLeaderboardTierRange(missingMemberBehavior))
         };
     }
 }

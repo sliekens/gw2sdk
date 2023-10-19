@@ -41,10 +41,10 @@ public static class BuffPrefixJson
 
         return new BuffPrefix
         {
-            Text = text.Select(value => value.GetStringRequired()),
-            Icon = icon.Select(value => value.GetStringRequired()),
-            Status = status.Select(value => value.GetString()) ?? "",
-            Description = description.Select(value => value.GetString()) ?? ""
+            Text = text.Map(value => value.GetStringRequired()),
+            Icon = icon.Map(value => value.GetStringRequired()),
+            Status = status.Map(value => value.GetString()) ?? "",
+            Description = description.Map(value => value.GetString()) ?? ""
         };
     }
 }

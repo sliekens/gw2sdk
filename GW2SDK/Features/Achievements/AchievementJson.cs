@@ -99,27 +99,27 @@ public static class AchievementJson
 
         return new Achievement
         {
-            Id = id.Select(value => value.GetInt32()),
-            Icon = icon.Select(value => value.GetString()) ?? "",
-            Name = name.Select(value => value.GetStringRequired()),
-            Description = description.Select(value => value.GetStringRequired()),
-            Requirement = requirement.Select(value => value.GetStringRequired()),
-            LockedText = lockedText.Select(value => value.GetStringRequired()),
+            Id = id.Map(value => value.GetInt32()),
+            Icon = icon.Map(value => value.GetString()) ?? "",
+            Name = name.Map(value => value.GetStringRequired()),
+            Description = description.Map(value => value.GetStringRequired()),
+            Requirement = requirement.Map(value => value.GetStringRequired()),
+            LockedText = lockedText.Map(value => value.GetStringRequired()),
             Flags =
-                flags.Select(
+                flags.Map(
                     values =>
                         values.GetList(
                             value => value.GetEnum<AchievementFlag>(missingMemberBehavior)
                         )
                 ),
-            Tiers = tiers.Select(values => values.GetList(value => value.GetAchievementTier(missingMemberBehavior))),
+            Tiers = tiers.Map(values => values.GetList(value => value.GetAchievementTier(missingMemberBehavior))),
             Prerequisites =
-                prerequisites.Select(values => values.GetList(value => value.GetInt32())),
-            Rewards = rewards.Select(
+                prerequisites.Map(values => values.GetList(value => value.GetInt32())),
+            Rewards = rewards.Map(
                 values => values.GetList(value => value.GetAchievementReward(missingMemberBehavior))
             ),
-            Bits = bits.Select(values => values.GetList(value => value.GetAchievementBit(missingMemberBehavior))),
-            PointCap = pointCap.Select(value => value.GetInt32())
+            Bits = bits.Map(values => values.GetList(value => value.GetAchievementBit(missingMemberBehavior))),
+            PointCap = pointCap.Map(value => value.GetInt32())
         };
     }
 }

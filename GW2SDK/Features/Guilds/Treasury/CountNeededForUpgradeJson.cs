@@ -32,8 +32,8 @@ public static class CountNeededForUpgradeJson
 
         return new CountNeededForUpgrade
         {
-            UpgradeId = upgradeId.Select(value => value.GetInt32()),
-            Count = count.Select(value => value.GetInt32())
+            UpgradeId = upgradeId.Map(value => value.GetInt32()),
+            Count = count.Map(value => value.GetInt32())
         };
     }
 }

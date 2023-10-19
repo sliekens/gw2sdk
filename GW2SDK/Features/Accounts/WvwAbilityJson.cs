@@ -32,8 +32,8 @@ public static class WvwAbilityJson
 
         return new WvwAbility
         {
-            Id = id.Select(value => value.GetInt32()),
-            Rank = rank.Select(value => value.GetInt32())
+            Id = id.Map(value => value.GetInt32()),
+            Rank = rank.Map(value => value.GetInt32())
         };
     }
 }

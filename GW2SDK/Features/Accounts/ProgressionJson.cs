@@ -32,8 +32,8 @@ public static class ProgressionJson
 
         return new Progression
         {
-            Id = progressId.Select(value => value.GetStringRequired()),
-            Value = progress.Select(value => value.GetInt32())
+            Id = progressId.Map(value => value.GetStringRequired()),
+            Value = progress.Map(value => value.GetInt32())
         };
     }
 }

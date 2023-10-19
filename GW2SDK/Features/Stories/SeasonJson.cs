@@ -42,10 +42,10 @@ public static class SeasonJson
 
         return new Season
         {
-            Id = id.Select(value => value.GetStringRequired()),
-            Name = name.Select(value => value.GetStringRequired()),
-            Order = order.Select(value => value.GetInt32()),
-            StoryIds = stories.Select(values => values.GetList(value => value.GetInt32()))
+            Id = id.Map(value => value.GetStringRequired()),
+            Name = name.Map(value => value.GetStringRequired()),
+            Order = order.Map(value => value.GetInt32()),
+            StoryIds = stories.Map(values => values.GetList(value => value.GetInt32()))
         };
     }
 }

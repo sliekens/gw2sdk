@@ -44,11 +44,11 @@ public static class OrderJson
 
         return new Order
         {
-            Id = id.Select(value => value.GetInt64()),
-            ItemId = itemId.Select(value => value.GetInt32()),
-            Price = price.Select(value => value.GetInt32()),
-            Quantity = quantity.Select(value => value.GetInt32()),
-            Created = created.Select(value => value.GetDateTimeOffset())
+            Id = id.Map(value => value.GetInt64()),
+            ItemId = itemId.Map(value => value.GetInt32()),
+            Price = price.Map(value => value.GetInt32()),
+            Quantity = quantity.Map(value => value.GetInt32()),
+            Created = created.Map(value => value.GetDateTimeOffset())
         };
     }
 }

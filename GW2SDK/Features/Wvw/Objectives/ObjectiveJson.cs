@@ -77,18 +77,18 @@ public static class ObjectiveJson
 
         return new Objective
         {
-            Id = id.Select(value => value.GetStringRequired()),
-            Name = name.Select(value => value.GetStringRequired()),
-            SectorId = sectorId.Select(value => value.GetInt32()),
-            Kind = type.Select(value => value.GetEnum<ObjectiveKind>(missingMemberBehavior)),
-            MapKind = mapType.Select(value => value.GetEnum<MapKind>(missingMemberBehavior)),
-            MapId = mapId.Select(value => value.GetInt32()),
-            UpgradeId = upgradeId.Select(value => value.GetInt32()),
-            Coordinates = coordinates.Select(value => value.GetCoordinate3(missingMemberBehavior)),
+            Id = id.Map(value => value.GetStringRequired()),
+            Name = name.Map(value => value.GetStringRequired()),
+            SectorId = sectorId.Map(value => value.GetInt32()),
+            Kind = type.Map(value => value.GetEnum<ObjectiveKind>(missingMemberBehavior)),
+            MapKind = mapType.Map(value => value.GetEnum<MapKind>(missingMemberBehavior)),
+            MapId = mapId.Map(value => value.GetInt32()),
+            UpgradeId = upgradeId.Map(value => value.GetInt32()),
+            Coordinates = coordinates.Map(value => value.GetCoordinate3(missingMemberBehavior)),
             LabelCoordinates =
-                labelCoordinates.Select(value => value.GetCoordinateF(missingMemberBehavior)),
-            MarkerHref = marker.Select(value => value.GetString()) ?? "",
-            ChatLink = chatLink.Select(value => value.GetStringRequired())
+                labelCoordinates.Map(value => value.GetCoordinateF(missingMemberBehavior)),
+            MarkerHref = marker.Map(value => value.GetString()) ?? "",
+            ChatLink = chatLink.Map(value => value.GetStringRequired())
         };
     }
 }

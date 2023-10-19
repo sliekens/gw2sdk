@@ -1,4 +1,4 @@
-﻿using System.Text.Json;
+using System.Text.Json;
 using GuildWars2.Json;
 
 namespace GuildWars2.Traits;
@@ -70,17 +70,17 @@ public static class TraitSkillJson
 
         return new TraitSkill
         {
-            Name = name.Select(value => value.GetStringRequired()),
-            Facts = facts.Select(
+            Name = name.Map(value => value.GetStringRequired()),
+            Facts = facts.Map(
                 values => values.GetList(item => item.GetTraitFact(missingMemberBehavior, out _, out _))
             ),
             TraitedFacts =
-                traitedFacts.Select(values => values.GetList(value => value.GetCompoundTraitFact(missingMemberBehavior))),
-            Description = description.Select(value => value.GetStringRequired()),
-            Icon = icon.Select(value => value.GetStringRequired()),
-            Id = id.Select(value => value.GetInt32()),
-            ChatLink = chatLink.Select(value => value.GetStringRequired()),
-            Categories = categories.Select(values => values.GetList(value => value.GetEnum<SkillCategoryName>(missingMemberBehavior)))
+                traitedFacts.Map(values => values.GetList(value => value.GetCompoundTraitFact(missingMemberBehavior))),
+            Description = description.Map(value => value.GetStringRequired()),
+            Icon = icon.Map(value => value.GetStringRequired()),
+            Id = id.Map(value => value.GetInt32()),
+            ChatLink = chatLink.Map(value => value.GetStringRequired()),
+            Categories = categories.Map(values => values.GetList(value => value.GetEnum<SkillCategoryName>(missingMemberBehavior)))
         };
     }
 }

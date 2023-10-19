@@ -47,11 +47,11 @@ public static class MatchOverviewJson
 
         return new MatchOverview
         {
-            Id = id.Select(value => value.GetStringRequired()),
-            Worlds = worlds.Select(value => value.GetWorlds(missingMemberBehavior)),
-            AllWorlds = allWorlds.Select(value => value.GetAllWorlds(missingMemberBehavior)),
-            StartTime = startTime.Select(value => value.GetDateTimeOffset()),
-            EndTime = endTime.Select(value => value.GetDateTimeOffset())
+            Id = id.Map(value => value.GetStringRequired()),
+            Worlds = worlds.Map(value => value.GetWorlds(missingMemberBehavior)),
+            AllWorlds = allWorlds.Map(value => value.GetAllWorlds(missingMemberBehavior)),
+            StartTime = startTime.Map(value => value.GetDateTimeOffset()),
+            EndTime = endTime.Map(value => value.GetDateTimeOffset())
         };
     }
 }

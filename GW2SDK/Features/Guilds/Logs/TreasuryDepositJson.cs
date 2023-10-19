@@ -56,11 +56,11 @@ public static class TreasuryDepositJson
 
         return new TreasuryDeposit
         {
-            Id = id.Select(value => value.GetInt32()),
-            Time = time.Select(value => value.GetDateTimeOffset()),
-            User = user.Select(value => value.GetStringRequired()),
-            ItemId = itemId.Select(value => value.GetInt32()),
-            Count = count.Select(value => value.GetInt32())
+            Id = id.Map(value => value.GetInt32()),
+            Time = time.Map(value => value.GetDateTimeOffset()),
+            User = user.Map(value => value.GetStringRequired()),
+            ItemId = itemId.Map(value => value.GetInt32()),
+            Count = count.Map(value => value.GetInt32())
         };
     }
 }

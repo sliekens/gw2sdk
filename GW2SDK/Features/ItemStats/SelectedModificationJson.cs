@@ -71,16 +71,16 @@ public static class SelectedModificationJson
 
         return new SelectedModification
         {
-            AgonyResistance = agonyResistance.Select(value => value.GetInt32()),
-            BoonDuration = boonDuration.Select(value => value.GetInt32()),
-            ConditionDamage = conditionDamage.Select(value => value.GetInt32()),
-            ConditionDuration = conditionDuration.Select(value => value.GetInt32()),
-            CritDamage = critDamage.Select(value => value.GetInt32()),
-            Healing = healing.Select(value => value.GetInt32()),
-            Power = power.Select(value => value.GetInt32()),
-            Precision = precision.Select(value => value.GetInt32()),
-            Toughness = toughness.Select(value => value.GetInt32()),
-            Vitality = vitality.Select(value => value.GetInt32())
+            AgonyResistance = agonyResistance.Map(value => value.GetInt32()),
+            BoonDuration = boonDuration.Map(value => value.GetInt32()),
+            ConditionDamage = conditionDamage.Map(value => value.GetInt32()),
+            ConditionDuration = conditionDuration.Map(value => value.GetInt32()),
+            CritDamage = critDamage.Map(value => value.GetInt32()),
+            Healing = healing.Map(value => value.GetInt32()),
+            Power = power.Map(value => value.GetInt32()),
+            Precision = precision.Map(value => value.GetInt32()),
+            Toughness = toughness.Map(value => value.GetInt32()),
+            Vitality = vitality.Map(value => value.GetInt32())
         };
     }
 }

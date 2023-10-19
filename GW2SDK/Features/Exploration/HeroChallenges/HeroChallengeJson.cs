@@ -33,8 +33,8 @@ public static class HeroChallengeJson
 
         return new HeroChallenge
         {
-            Id = id.Select(value => value.GetString()) ?? "",
-            Coordinates = coordinates.Select(value => value.GetCoordinateF(missingMemberBehavior))
+            Id = id.Map(value => value.GetString()) ?? "",
+            Coordinates = coordinates.Map(value => value.GetCoordinateF(missingMemberBehavior))
         };
     }
 }

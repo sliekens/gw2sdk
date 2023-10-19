@@ -32,8 +32,8 @@ public static class EncounterJson
 
         return new Encounter
         {
-            Id = id.Select(value => value.GetStringRequired()),
-            Kind = type.Select(value => value.GetEnum<EncounterKind>(missingMemberBehavior))
+            Id = id.Map(value => value.GetStringRequired()),
+            Kind = type.Map(value => value.GetEnum<EncounterKind>(missingMemberBehavior))
         };
     }
 }

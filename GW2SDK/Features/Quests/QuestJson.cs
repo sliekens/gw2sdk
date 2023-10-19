@@ -44,11 +44,11 @@ public static class QuestJson
 
         return new Quest
         {
-            Id = id.Select(value => value.GetInt32()),
-            Name = name.Select(value => value.GetStringRequired()),
-            Level = level.Select(value => value.GetInt32()),
-            Story = story.Select(value => value.GetInt32()),
-            Goals = goals.Select(values => values.GetList(value => value.GetGoal(missingMemberBehavior)))
+            Id = id.Map(value => value.GetInt32()),
+            Name = name.Map(value => value.GetStringRequired()),
+            Level = level.Map(value => value.GetInt32()),
+            Story = story.Map(value => value.GetInt32()),
+            Goals = goals.Map(values => values.GetList(value => value.GetGoal(missingMemberBehavior)))
         };
     }
 }

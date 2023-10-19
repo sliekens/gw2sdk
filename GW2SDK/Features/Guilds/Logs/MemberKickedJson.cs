@@ -51,10 +51,10 @@ public static class MemberKickedJson
 
         return new MemberKicked
         {
-            Id = id.Select(value => value.GetInt32()),
-            Time = time.Select(value => value.GetDateTimeOffset()),
-            User = user.Select(value => value.GetStringRequired()),
-            KickedBy = kickedBy.Select(value => value.GetStringRequired())
+            Id = id.Map(value => value.GetInt32()),
+            Time = time.Map(value => value.GetDateTimeOffset()),
+            User = user.Map(value => value.GetStringRequired()),
+            KickedBy = kickedBy.Map(value => value.GetStringRequired())
         };
     }
 }

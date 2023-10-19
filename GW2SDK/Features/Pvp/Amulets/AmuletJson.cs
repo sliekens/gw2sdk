@@ -42,10 +42,10 @@ public static class AmuletJson
 
         return new Amulet
         {
-            Id = id.Select(value => value.GetInt32()),
-            Name = name.Select(value => value.GetStringRequired()),
-            Icon = icon.Select(value => value.GetStringRequired()),
-            Attributes = attributes.Select(value => value.GetAttributes(missingMemberBehavior))
+            Id = id.Map(value => value.GetInt32()),
+            Name = name.Map(value => value.GetStringRequired()),
+            Icon = icon.Map(value => value.GetStringRequired()),
+            Attributes = attributes.Map(value => value.GetAttributes(missingMemberBehavior))
         };
     }
 }

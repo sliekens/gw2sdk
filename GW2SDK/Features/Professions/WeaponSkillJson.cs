@@ -42,10 +42,10 @@ public static class WeaponSkillJson
 
         return new WeaponSkill
         {
-            Id = id.Select(value => value.GetInt32()),
-            Slot = slot.Select(value => value.GetEnum<SkillSlot>(missingMemberBehavior)),
-            Offhand = offhand.Select(value => value.GetEnum<Offhand>(missingMemberBehavior)),
-            Attunement = attunement.Select(value => value.GetEnum<Attunement>(missingMemberBehavior))
+            Id = id.Map(value => value.GetInt32()),
+            Slot = slot.Map(value => value.GetEnum<SkillSlot>(missingMemberBehavior)),
+            Offhand = offhand.Map(value => value.GetEnum<Offhand>(missingMemberBehavior)),
+            Attunement = attunement.Map(value => value.GetEnum<Attunement>(missingMemberBehavior))
         };
     }
 }

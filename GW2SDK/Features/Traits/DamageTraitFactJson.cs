@@ -62,10 +62,10 @@ public static class DamageTraitFactJson
 
         return new DamageTraitFact
         {
-            Text = text.Select(value => value.GetString()) ?? "",
-            Icon = icon.Select(value => value.GetString()) ?? "",
-            HitCount = hitCount.Select(value => value.GetInt32()),
-            DamageMultiplier = damageMultiplier.Select(value => value.GetDouble())
+            Text = text.Map(value => value.GetString()) ?? "",
+            Icon = icon.Map(value => value.GetString()) ?? "",
+            HitCount = hitCount.Map(value => value.GetInt32()),
+            DamageMultiplier = damageMultiplier.Map(value => value.GetDouble())
         };
     }
 }

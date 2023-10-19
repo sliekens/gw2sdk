@@ -59,9 +59,9 @@ public static class ComboFieldSkillFactJson
 
         return new ComboFieldSkillFact
         {
-            Text = text.Select(value => value.GetStringRequired()),
-            Icon = icon.Select(value => value.GetStringRequired()),
-            Field = fieldType.Select(value => value.GetEnum<ComboFieldName>(missingMemberBehavior))
+            Text = text.Map(value => value.GetStringRequired()),
+            Icon = icon.Map(value => value.GetStringRequired()),
+            Field = fieldType.Map(value => value.GetEnum<ComboFieldName>(missingMemberBehavior))
         };
     }
 }

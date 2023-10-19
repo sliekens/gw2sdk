@@ -32,8 +32,8 @@ public static class ScoreJson
 
         return new Score
         {
-            Red = red.Select(value => value.GetInt32()),
-            Blue = blue.Select(value => value.GetInt32())
+            Red = red.Map(value => value.GetInt32()),
+            Blue = blue.Map(value => value.GetInt32())
         };
     }
 }

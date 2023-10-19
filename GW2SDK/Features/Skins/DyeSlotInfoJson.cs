@@ -91,7 +91,7 @@ public static class DyeSlotInfoJson
         return new DyeSlotInfo
         {
             Default =
-                @default.Select(
+                @default.Map(
                     values =>
                         values.GetList(
                             value =>
@@ -101,7 +101,7 @@ public static class DyeSlotInfoJson
                         )
                 ),
             AsuraFemale =
-                asuraFemale.Select(
+                asuraFemale.Map(
                     values =>
                         values.GetList(
                             value =>
@@ -111,7 +111,7 @@ public static class DyeSlotInfoJson
                         )
                 ),
             AsuraMale =
-                asuraMale.Select(
+                asuraMale.Map(
                     values =>
                         values.GetList(
                             value =>
@@ -121,7 +121,7 @@ public static class DyeSlotInfoJson
                         )
                 ),
             CharrFemale =
-                charrFemale.Select(
+                charrFemale.Map(
                     values =>
                         values.GetList(
                             value =>
@@ -131,7 +131,7 @@ public static class DyeSlotInfoJson
                         )
                 ),
             CharrMale =
-                charrMale.Select(
+                charrMale.Map(
                     values =>
                         values.GetList(
                             value =>
@@ -141,7 +141,7 @@ public static class DyeSlotInfoJson
                         )
                 ),
             HumanFemale =
-                humanFemale.Select(
+                humanFemale.Map(
                     values =>
                         values.GetList(
                             value =>
@@ -151,7 +151,7 @@ public static class DyeSlotInfoJson
                         )
                 ),
             HumanMale =
-                humanMale.Select(
+                humanMale.Map(
                     values =>
                         values.GetList(
                             value =>
@@ -161,7 +161,7 @@ public static class DyeSlotInfoJson
                         )
                 ),
             NornFemale =
-                nornFemale.Select(
+                nornFemale.Map(
                     values =>
                         values.GetList(
                             value =>
@@ -171,7 +171,7 @@ public static class DyeSlotInfoJson
                         )
                 ),
             NornMale =
-                nornMale.Select(
+                nornMale.Map(
                     values =>
                         values.GetList(
                             value =>
@@ -181,7 +181,7 @@ public static class DyeSlotInfoJson
                         )
                 ),
             SylvariFemale =
-                sylvariFemale.Select(
+                sylvariFemale.Map(
                     values =>
                         values.GetList(
                             value =>
@@ -190,7 +190,7 @@ public static class DyeSlotInfoJson
                                     : value.GetDyeSlot(missingMemberBehavior)
                         )
                 ),
-            SylvariMale = sylvariMale.Select(
+            SylvariMale = sylvariMale.Map(
                 values => values.GetList(
                     value => value.ValueKind == JsonValueKind.Null
                         ? null

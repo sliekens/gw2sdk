@@ -57,9 +57,9 @@ public static class RangeTraitFactJson
 
         return new RangeTraitFact
         {
-            Text = text.Select(value => value.GetString()) ?? "",
-            Icon = icon.Select(value => value.GetString()) ?? "",
-            Value = range.Select(value => value.GetInt32())
+            Text = text.Map(value => value.GetString()) ?? "",
+            Icon = icon.Map(value => value.GetString()) ?? "",
+            Value = range.Map(value => value.GetInt32())
         };
     }
 }

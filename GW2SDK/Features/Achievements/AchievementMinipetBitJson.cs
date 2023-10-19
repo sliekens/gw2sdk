@@ -33,6 +33,6 @@ public static class AchievementMinipetBitJson
             }
         }
 
-        return new AchievementMinipetBit { Id = id.Select(value => value.GetInt32()) };
+        return new AchievementMinipetBit { Id = id.Map(value => value.GetInt32()) };
     }
 }

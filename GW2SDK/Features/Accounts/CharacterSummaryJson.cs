@@ -77,17 +77,17 @@ public static class CharacterSummaryJson
 
         return new CharacterSummary
         {
-            Name = name.Select(value => value.GetStringRequired()),
-            Race = race.Select(value => value.GetEnum<RaceName>(missingMemberBehavior)),
-            Gender = gender.Select(value => value.GetEnum<Gender>(missingMemberBehavior)),
-            Level = level.Select(value => value.GetInt32()),
-            GuildId = guild.Select(value => value.GetString()) ?? "",
-            Profession = profession.Select(value => value.GetEnum<ProfessionName>(missingMemberBehavior)),
-            Age = age.Select(value => TimeSpan.FromSeconds(value.GetDouble())),
-            LastModified = lastModified.Select(value => value.GetDateTimeOffset()),
-            Created = created.Select(value => value.GetDateTimeOffset()),
-            Deaths = deaths.Select(value => value.GetInt32()),
-            TitleId = title.Select(value => value.GetInt32())
+            Name = name.Map(value => value.GetStringRequired()),
+            Race = race.Map(value => value.GetEnum<RaceName>(missingMemberBehavior)),
+            Gender = gender.Map(value => value.GetEnum<Gender>(missingMemberBehavior)),
+            Level = level.Map(value => value.GetInt32()),
+            GuildId = guild.Map(value => value.GetString()) ?? "",
+            Profession = profession.Map(value => value.GetEnum<ProfessionName>(missingMemberBehavior)),
+            Age = age.Map(value => TimeSpan.FromSeconds(value.GetDouble())),
+            LastModified = lastModified.Map(value => value.GetDateTimeOffset()),
+            Created = created.Map(value => value.GetDateTimeOffset()),
+            Deaths = deaths.Map(value => value.GetInt32()),
+            TitleId = title.Map(value => value.GetInt32())
         };
     }
 }

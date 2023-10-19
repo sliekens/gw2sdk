@@ -54,8 +54,8 @@ public static class NoDataSkillFactJson
 
         return new NoDataSkillFact
         {
-            Text = text.Select(value => value.GetStringRequired()),
-            Icon = icon.Select(value => value.GetStringRequired())
+            Text = text.Map(value => value.GetStringRequired()),
+            Icon = icon.Map(value => value.GetStringRequired())
         };
     }
 }

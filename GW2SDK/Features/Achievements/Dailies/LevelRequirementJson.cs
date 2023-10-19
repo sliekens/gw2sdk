@@ -32,8 +32,8 @@ public static class LevelRequirementJson
 
         return new LevelRequirement
         {
-            Min = min.Select(value => value.GetInt32()),
-            Max = max.Select(value => value.GetInt32())
+            Min = min.Map(value => value.GetInt32()),
+            Max = max.Map(value => value.GetInt32())
         };
     }
 }

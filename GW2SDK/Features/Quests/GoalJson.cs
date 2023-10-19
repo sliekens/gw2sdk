@@ -29,8 +29,8 @@ public static class GoalJson
 
         return new Goal
         {
-            Active = active.Select(value => value.GetStringRequired()),
-            Complete = complete.Select(value => value.GetStringRequired())
+            Active = active.Map(value => value.GetStringRequired()),
+            Complete = complete.Map(value => value.GetStringRequired())
         };
     }
 }

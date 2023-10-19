@@ -54,13 +54,13 @@ public static class RankJson
 
         return new Rank
         {
-            Id = id.Select(value => value.GetInt32()),
-            FinisherId = finisherId.Select(value => value.GetInt32()),
-            Name = name.Select(value => value.GetStringRequired()),
-            Icon = icon.Select(value => value.GetStringRequired()),
-            MinRank = minRank.Select(value => value.GetInt32()),
-            MaxRank = maxRank.Select(value => value.GetInt32()),
-            Levels = levels.Select(values => values.GetList(value => value.GetLevel(missingMemberBehavior)))
+            Id = id.Map(value => value.GetInt32()),
+            FinisherId = finisherId.Map(value => value.GetInt32()),
+            Name = name.Map(value => value.GetStringRequired()),
+            Icon = icon.Map(value => value.GetStringRequired()),
+            MinRank = minRank.Map(value => value.GetInt32()),
+            MaxRank = maxRank.Map(value => value.GetInt32()),
+            Levels = levels.Map(values => values.GetList(value => value.GetLevel(missingMemberBehavior)))
         };
     }
 }

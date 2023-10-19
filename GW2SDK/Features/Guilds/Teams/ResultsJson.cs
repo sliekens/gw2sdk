@@ -47,11 +47,11 @@ public static class ResultsJson
 
         return new Results
         {
-            Wins = wins.Select(value => value.GetInt32()),
-            Losses = losses.Select(value => value.GetInt32()),
-            Desertions = desertions.Select(value => value.GetInt32()),
-            Byes = byes.Select(value => value.GetInt32()),
-            Forfeits = forfeits.Select(value => value.GetInt32())
+            Wins = wins.Map(value => value.GetInt32()),
+            Losses = losses.Map(value => value.GetInt32()),
+            Desertions = desertions.Map(value => value.GetInt32()),
+            Byes = byes.Map(value => value.GetInt32()),
+            Forfeits = forfeits.Map(value => value.GetInt32())
         };
     }
 }

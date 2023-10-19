@@ -42,11 +42,11 @@ public static class AchievementRefJson
 
         return new AchievementRef
         {
-            Id = id.Select(value => value.GetInt32()),
+            Id = id.Map(value => value.GetInt32()),
             RequiredAccess =
-                requiredAccess.Select(value => value.GetProductRequirement(missingMemberBehavior)),
-            Flags = flags.Select(values => values.GetList(value => value.GetEnum<AchievementFlag>(missingMemberBehavior))),
-            Level = level.Select(value => value.GetLevelRequirement(missingMemberBehavior))
+                requiredAccess.Map(value => value.GetProductRequirement(missingMemberBehavior)),
+            Flags = flags.Map(values => values.GetList(value => value.GetEnum<AchievementFlag>(missingMemberBehavior))),
+            Level = level.Map(value => value.GetLevelRequirement(missingMemberBehavior))
         };
     }
 }

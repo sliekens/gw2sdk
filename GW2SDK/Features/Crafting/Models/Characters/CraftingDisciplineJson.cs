@@ -37,9 +37,9 @@ public static class CraftingDisciplineJson
 
         return new CraftingDiscipline
         {
-            Discipline = discipline.Select(value => value.GetEnum<CraftingDisciplineName>(missingMemberBehavior)),
-            Rating = rating.Select(value => value.GetInt32()),
-            Active = active.Select(value => value.GetBoolean())
+            Discipline = discipline.Map(value => value.GetEnum<CraftingDisciplineName>(missingMemberBehavior)),
+            Rating = rating.Map(value => value.GetInt32()),
+            Active = active.Map(value => value.GetBoolean())
         };
     }
 }

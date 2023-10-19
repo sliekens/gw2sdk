@@ -41,10 +41,10 @@ public static class AdventureJson
 
         return new Adventure
         {
-            Id = id.Select(value => value.GetStringRequired()),
-            Coordinates = coordinates.Select(value => value.GetCoordinateF(missingMemberBehavior)),
-            Name = name.Select(value => value.GetStringRequired()),
-            Description = description.Select(value => value.GetStringRequired())
+            Id = id.Map(value => value.GetStringRequired()),
+            Coordinates = coordinates.Map(value => value.GetCoordinateF(missingMemberBehavior)),
+            Name = name.Map(value => value.GetStringRequired()),
+            Description = description.Map(value => value.GetStringRequired())
         };
     }
 }

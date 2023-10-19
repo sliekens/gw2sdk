@@ -31,8 +31,8 @@ public static class UpgradeAttributeJson
 
         return new UpgradeAttribute
         {
-            Attribute = attribute.Select(value => value.GetEnum<UpgradeAttributeName>(missingMemberBehavior)),
-            Modifier = modifier.Select(value => value.GetInt32())
+            Attribute = attribute.Map(value => value.GetEnum<UpgradeAttributeName>(missingMemberBehavior)),
+            Modifier = modifier.Map(value => value.GetInt32())
         };
     }
 }

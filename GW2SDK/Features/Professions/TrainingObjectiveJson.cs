@@ -41,6 +41,6 @@ public static class TrainingObjectiveJson
             }
         }
 
-        return new TrainingObjective { Cost = cost.Select(value => value.GetInt32()) };
+        return new TrainingObjective { Cost = cost.Map(value => value.GetInt32()) };
     }
 }

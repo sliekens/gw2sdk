@@ -32,8 +32,8 @@ public static class SuperAdventureBoxSongJson
 
         return new SuperAdventureBoxSong
         {
-            Id = id.Select(value => value.GetInt32()),
-            Name = name.Select(value => value.GetStringRequired())
+            Id = id.Map(value => value.GetInt32()),
+            Name = name.Map(value => value.GetStringRequired())
         };
     }
 }

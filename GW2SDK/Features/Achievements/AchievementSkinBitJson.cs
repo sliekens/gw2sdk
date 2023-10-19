@@ -33,6 +33,6 @@ public static class AchievementSkinBitJson
             }
         }
 
-        return new AchievementSkinBit { Id = id.Select(value => value.GetInt32()) };
+        return new AchievementSkinBit { Id = id.Map(value => value.GetInt32()) };
     }
 }

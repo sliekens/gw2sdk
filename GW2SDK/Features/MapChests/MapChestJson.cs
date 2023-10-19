@@ -25,6 +25,6 @@ public static class MapChestJson
             }
         }
 
-        return new MapChest { Id = id.Select(value => value.GetStringRequired()) };
+        return new MapChest { Id = id.Map(value => value.GetStringRequired()) };
     }
 }

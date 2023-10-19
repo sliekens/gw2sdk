@@ -68,10 +68,10 @@ public static class ComboFinisherSkillFactJson
 
         return new ComboFinisherSkillFact
         {
-            Text = text.Select(value => value.GetStringRequired()),
-            Icon = icon.Select(value => value.GetStringRequired()),
-            Percent = percent.Select(value => value.GetInt32()),
-            FinisherName = finisherType.Select(value => value.GetEnum<ComboFinisherName>(missingMemberBehavior))
+            Text = text.Map(value => value.GetStringRequired()),
+            Icon = icon.Map(value => value.GetStringRequired()),
+            Percent = percent.Map(value => value.GetInt32()),
+            FinisherName = finisherType.Map(value => value.GetEnum<ComboFinisherName>(missingMemberBehavior))
         };
 
         static bool IsDefaultInt32(JsonProperty jsonProperty)

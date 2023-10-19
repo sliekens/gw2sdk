@@ -31,8 +31,8 @@ public static class InfusionSlotJson
 
         return new InfusionSlot
         {
-            Flags = flags.Select(values => values.GetList(value => value.GetEnum<InfusionSlotFlag>(missingMemberBehavior))),
-            ItemId = itemId.Select(value => value.GetInt32())
+            Flags = flags.Map(values => values.GetList(value => value.GetEnum<InfusionSlotFlag>(missingMemberBehavior))),
+            ItemId = itemId.Map(value => value.GetInt32())
         };
     }
 }

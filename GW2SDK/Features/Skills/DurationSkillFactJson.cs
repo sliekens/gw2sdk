@@ -59,9 +59,9 @@ public static class DurationSkillFactJson
 
         return new DurationSkillFact
         {
-            Text = text.Select(value => value.GetStringRequired()),
-            Icon = icon.Select(value => value.GetStringRequired()),
-            Duration = duration.Select(value => TimeSpan.FromSeconds(value.GetDouble()))
+            Text = text.Map(value => value.GetStringRequired()),
+            Icon = icon.Map(value => value.GetStringRequired()),
+            Duration = duration.Map(value => TimeSpan.FromSeconds(value.GetDouble()))
         };
     }
 }

@@ -59,9 +59,9 @@ public static class RangeSkillFactJson
 
         return new RangeSkillFact
         {
-            Text = text.Select(value => value.GetStringRequired()),
-            Icon = icon.Select(value => value.GetStringRequired()),
-            Value = range.Select(value => value.GetInt32())
+            Text = text.Map(value => value.GetStringRequired()),
+            Icon = icon.Map(value => value.GetStringRequired()),
+            Value = range.Map(value => value.GetInt32())
         };
     }
 }

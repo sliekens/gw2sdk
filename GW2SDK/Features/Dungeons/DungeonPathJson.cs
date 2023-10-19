@@ -32,8 +32,8 @@ public static class DungeonPathJson
 
         return new DungeonPath
         {
-            Id = id.Select(value => value.GetStringRequired()),
-            Kind = kind.Select(value => value.GetEnum<DungeonKind>(missingMemberBehavior))
+            Id = id.Map(value => value.GetStringRequired()),
+            Kind = kind.Map(value => value.GetEnum<DungeonKind>(missingMemberBehavior))
         };
     }
 }

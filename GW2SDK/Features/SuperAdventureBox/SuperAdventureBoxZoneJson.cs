@@ -42,10 +42,10 @@ public static class SuperAdventureBoxZoneJson
 
         return new SuperAdventureBoxZone
         {
-            Id = id.Select(value => value.GetInt32()),
-            Mode = mode.Select(value => value.GetEnum<SuperAdventureBoxMode>(missingMemberBehavior)),
-            World = world.Select(value => value.GetInt32()),
-            Zone = zone.Select(value => value.GetInt32())
+            Id = id.Map(value => value.GetInt32()),
+            Mode = mode.Map(value => value.GetEnum<SuperAdventureBoxMode>(missingMemberBehavior)),
+            World = world.Map(value => value.GetInt32()),
+            Zone = zone.Map(value => value.GetInt32())
         };
     }
 }

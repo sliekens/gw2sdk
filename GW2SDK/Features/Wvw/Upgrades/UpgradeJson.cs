@@ -37,9 +37,9 @@ public static class UpgradeJson
 
         return new Upgrade
         {
-            Name = name.Select(value => value.GetStringRequired()),
-            Description = description.Select(value => value.GetStringRequired()),
-            IconHref = icon.Select(value => value.GetStringRequired())
+            Name = name.Map(value => value.GetStringRequired()),
+            Description = description.Map(value => value.GetStringRequired()),
+            IconHref = icon.Map(value => value.GetStringRequired())
         };
     }
 }

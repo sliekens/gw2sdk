@@ -47,12 +47,12 @@ public static class MatchScoresJson
 
         return new MatchScores
         {
-            Id = id.Select(value => value.GetStringRequired()),
-            Scores = scores.Select(value => value.GetDistribution(missingMemberBehavior)),
+            Id = id.Map(value => value.GetStringRequired()),
+            Scores = scores.Map(value => value.GetDistribution(missingMemberBehavior)),
             VictoryPoints =
-                victoryPoints.Select(value => value.GetDistribution(missingMemberBehavior)),
-            Skirmishes = skirmishes.Select(values => values.GetList(value => value.GetSkirmish(missingMemberBehavior))),
-            Maps = maps.Select(values => values.GetList(value => value.GetMapSummary(missingMemberBehavior)))
+                victoryPoints.Map(value => value.GetDistribution(missingMemberBehavior)),
+            Skirmishes = skirmishes.Map(values => values.GetList(value => value.GetSkirmish(missingMemberBehavior))),
+            Maps = maps.Map(values => values.GetList(value => value.GetMapSummary(missingMemberBehavior)))
         };
     }
 }

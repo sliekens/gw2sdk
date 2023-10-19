@@ -61,12 +61,12 @@ public static class RankChangeJson
 
         return new RankChange
         {
-            Id = id.Select(value => value.GetInt32()),
-            Time = time.Select(value => value.GetDateTimeOffset()),
-            User = user.Select(value => value.GetStringRequired()),
-            ChangedBy = changedBy.Select(value => value.GetString()) ?? "",
-            OldRank = oldRank.Select(value => value.GetStringRequired()),
-            NewRank = newRank.Select(value => value.GetStringRequired())
+            Id = id.Map(value => value.GetInt32()),
+            Time = time.Map(value => value.GetDateTimeOffset()),
+            User = user.Map(value => value.GetStringRequired()),
+            ChangedBy = changedBy.Map(value => value.GetString()) ?? "",
+            OldRank = oldRank.Map(value => value.GetStringRequired()),
+            NewRank = newRank.Map(value => value.GetStringRequired())
         };
     }
 }

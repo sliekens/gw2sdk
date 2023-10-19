@@ -126,22 +126,22 @@ public static class FoodJson
 
         return new Food
         {
-            Id = id.Select(value => value.GetInt32()),
-            Name = name.Select(value => value.GetStringRequired()),
-            Description = description.Select(value => value.GetString()) ?? "",
-            Level = level.Select(value => value.GetInt32()),
-            Rarity = rarity.Select(value => value.GetEnum<Rarity>(missingMemberBehavior)),
-            VendorValue = vendorValue.Select(value => value.GetInt32()),
-            GameTypes = gameTypes.Select(values => values.GetList(value => value.GetEnum<GameType>(missingMemberBehavior))),
-            Flags = flags.Select(values => values.GetList(value => value.GetEnum<ItemFlag>(missingMemberBehavior))),
-            Restrictions = restrictions.Select(values => values.GetList(value => value.GetEnum<ItemRestriction>(missingMemberBehavior))),
-            ChatLink = chatLink.Select(value => value.GetStringRequired()),
-            Icon = icon.Select(value => value.GetString()),
-            Duration = duration.Select(value => TimeSpan.FromMilliseconds(value.GetDouble())),
-            ApplyCount = applyCount.Select(value => value.GetInt32()),
-            EffectName = effectName.Select(value => value.GetString()) ?? "",
-            EffectIcon = effectIcon.Select(value => value.GetString()),
-            EffectDescription = effectDescription.Select(value => value.GetString()) ?? ""
+            Id = id.Map(value => value.GetInt32()),
+            Name = name.Map(value => value.GetStringRequired()),
+            Description = description.Map(value => value.GetString()) ?? "",
+            Level = level.Map(value => value.GetInt32()),
+            Rarity = rarity.Map(value => value.GetEnum<Rarity>(missingMemberBehavior)),
+            VendorValue = vendorValue.Map(value => value.GetInt32()),
+            GameTypes = gameTypes.Map(values => values.GetList(value => value.GetEnum<GameType>(missingMemberBehavior))),
+            Flags = flags.Map(values => values.GetList(value => value.GetEnum<ItemFlag>(missingMemberBehavior))),
+            Restrictions = restrictions.Map(values => values.GetList(value => value.GetEnum<ItemRestriction>(missingMemberBehavior))),
+            ChatLink = chatLink.Map(value => value.GetStringRequired()),
+            Icon = icon.Map(value => value.GetString()),
+            Duration = duration.Map(value => TimeSpan.FromMilliseconds(value.GetDouble())),
+            ApplyCount = applyCount.Map(value => value.GetInt32()),
+            EffectName = effectName.Map(value => value.GetString()) ?? "",
+            EffectIcon = effectIcon.Map(value => value.GetString()),
+            EffectDescription = effectDescription.Map(value => value.GetString()) ?? ""
         };
     }
 }

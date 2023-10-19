@@ -52,12 +52,12 @@ public static class FinisherJson
 
         return new Finisher
         {
-            Id = id.Select(value => value.GetInt32()),
-            UnlockDetails = unlockDetails.Select(value => value.GetStringRequired()),
-            UnlockItems = unlockItems.Select(values => values.GetList(entry => entry.GetInt32())),
-            Order = order.Select(value => value.GetInt32()),
-            Icon = icon.Select(value => value.GetStringRequired()),
-            Name = name.Select(value => value.GetStringRequired())
+            Id = id.Map(value => value.GetInt32()),
+            UnlockDetails = unlockDetails.Map(value => value.GetStringRequired()),
+            UnlockItems = unlockItems.Map(values => values.GetList(entry => entry.GetInt32())),
+            Order = order.Map(value => value.GetInt32()),
+            Icon = icon.Map(value => value.GetStringRequired()),
+            Name = name.Map(value => value.GetStringRequired())
         };
     }
 }

@@ -28,7 +28,7 @@ public static class CharacterEquipmentJson
         return new CharacterEquipment
         {
             Equipment =
-                equipment.Select(values => values.GetList(value => value.GetEquipmentItem(missingMemberBehavior)))
+                equipment.Map(values => values.GetList(value => value.GetEquipmentItem(missingMemberBehavior)))
         };
     }
 }

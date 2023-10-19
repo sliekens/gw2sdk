@@ -44,11 +44,11 @@ public static class MountJson
 
         return new Mount
         {
-            Id = id.Select(value => value.GetMountName(missingMemberBehavior)),
-            Name = name.Select(value => value.GetStringRequired()),
-            DefaultSkin = defaultSkin.Select(value => value.GetInt32()),
-            Skins = skins.Select(values => values.GetList(value => value.GetInt32())),
-            Skills = skills.Select(values => values.GetList(value => value.GetSkillReference(missingMemberBehavior)))
+            Id = id.Map(value => value.GetMountName(missingMemberBehavior)),
+            Name = name.Map(value => value.GetStringRequired()),
+            DefaultSkin = defaultSkin.Map(value => value.GetInt32()),
+            Skins = skins.Map(values => values.GetList(value => value.GetInt32())),
+            Skills = skills.Map(values => values.GetList(value => value.GetSkillReference(missingMemberBehavior)))
         };
     }
 }

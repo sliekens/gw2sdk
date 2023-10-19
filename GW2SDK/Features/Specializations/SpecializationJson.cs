@@ -77,17 +77,17 @@ public static class SpecializationJson
 
         return new Specialization
         {
-            Id = id.Select(value => value.GetInt32()),
-            Name = name.Select(value => value.GetStringRequired()),
-            Profession = profession.Select(value => value.GetEnum<ProfessionName>(missingMemberBehavior)),
-            Elite = elite.Select(value => value.GetBoolean()),
-            MinorTraits = minorTraits.Select(values => values.GetList(value => value.GetInt32())),
-            MajorTraits = majorTraits.Select(values => values.GetList(value => value.GetInt32())),
-            WeaponTrait = weaponTrait.Select(value => value.GetInt32()),
-            Icon = icon.Select(value => value.GetStringRequired()),
-            Background = background.Select(value => value.GetStringRequired()),
-            ProfessionIconBig = professionIconBig.Select(value => value.GetString()) ?? "",
-            ProfessionIcon = professionIcon.Select(value => value.GetString()) ?? ""
+            Id = id.Map(value => value.GetInt32()),
+            Name = name.Map(value => value.GetStringRequired()),
+            Profession = profession.Map(value => value.GetEnum<ProfessionName>(missingMemberBehavior)),
+            Elite = elite.Map(value => value.GetBoolean()),
+            MinorTraits = minorTraits.Map(values => values.GetList(value => value.GetInt32())),
+            MajorTraits = majorTraits.Map(values => values.GetList(value => value.GetInt32())),
+            WeaponTrait = weaponTrait.Map(value => value.GetInt32()),
+            Icon = icon.Map(value => value.GetStringRequired()),
+            Background = background.Map(value => value.GetStringRequired()),
+            ProfessionIconBig = professionIconBig.Map(value => value.GetString()) ?? "",
+            ProfessionIcon = professionIcon.Map(value => value.GetString()) ?? ""
         };
     }
 }

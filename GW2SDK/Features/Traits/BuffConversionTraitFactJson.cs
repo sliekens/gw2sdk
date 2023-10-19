@@ -67,11 +67,11 @@ public static class BuffConversionTraitFactJson
 
         return new BuffConversionTraitFact
         {
-            Text = text.Select(value => value.GetString()) ?? "",
-            Icon = icon.Select(value => value.GetString()) ?? "",
-            Percent = percent.Select(value => value.GetInt32()),
-            Source = source.Select(value => value.GetEnum<AttributeAdjustTarget>(missingMemberBehavior)),
-            Target = target.Select(value => value.GetEnum<AttributeAdjustTarget>(missingMemberBehavior))
+            Text = text.Map(value => value.GetString()) ?? "",
+            Icon = icon.Map(value => value.GetString()) ?? "",
+            Percent = percent.Map(value => value.GetInt32()),
+            Source = source.Map(value => value.GetEnum<AttributeAdjustTarget>(missingMemberBehavior)),
+            Target = target.Map(value => value.GetEnum<AttributeAdjustTarget>(missingMemberBehavior))
         };
     }
 }

@@ -29,8 +29,8 @@ public static class CatJson
 
         return new Cat
         {
-            Id = id.Select(value => value.GetInt32()),
-            Hint = hint.Select(value => value.GetStringRequired())
+            Id = id.Map(value => value.GetInt32()),
+            Hint = hint.Map(value => value.GetStringRequired())
         };
     }
 }

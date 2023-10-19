@@ -74,12 +74,12 @@ public static class BuffSkillFactJson
 
         return new BuffSkillFact
         {
-            Text = text.Select(value => value.GetStringRequired()),
-            Icon = icon.Select(value => value.GetStringRequired()),
-            Duration = duration.Select(value => TimeSpan.FromSeconds(value.GetDouble())),
-            Status = status.Select(value => value.GetString()) ?? "",
-            Description = description.Select(value => value.GetString()) ?? "",
-            ApplyCount = applyCount.Select(value => value.GetInt32())
+            Text = text.Map(value => value.GetStringRequired()),
+            Icon = icon.Map(value => value.GetStringRequired()),
+            Duration = duration.Map(value => TimeSpan.FromSeconds(value.GetDouble())),
+            Status = status.Map(value => value.GetString()) ?? "",
+            Description = description.Map(value => value.GetString()) ?? "",
+            ApplyCount = applyCount.Map(value => value.GetInt32())
         };
     }
 }

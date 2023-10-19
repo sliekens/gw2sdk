@@ -76,21 +76,21 @@ public static class ProfessionJson
 
         return new Profession
         {
-            Id = id.Select(value => value.GetEnum<ProfessionName>(missingMemberBehavior)),
-            Name = name.Select(value => value.GetStringRequired()),
-            Code = code.Select(value => value.GetInt32()),
-            Icon = icon.Select(value => value.GetStringRequired()),
-            IconBig = iconBig.Select(value => value.GetStringRequired()),
-            Specializations = specializations.Select(values => values.GetList(value => value.GetInt32())),
+            Id = id.Map(value => value.GetEnum<ProfessionName>(missingMemberBehavior)),
+            Name = name.Map(value => value.GetStringRequired()),
+            Code = code.Map(value => value.GetInt32()),
+            Icon = icon.Map(value => value.GetStringRequired()),
+            IconBig = iconBig.Map(value => value.GetStringRequired()),
+            Specializations = specializations.Map(values => values.GetList(value => value.GetInt32())),
             Weapons =
-                weapons.Select(
+                weapons.Map(
                     value => value.GetMap(item => item.GetWeaponProficiency(missingMemberBehavior))
                 ),
-            Flags = flags.Select(values => values.GetList(value => value.GetEnum<ProfessionFlag>(missingMemberBehavior))),
-            Skills = skills.Select(values => values.GetList(value => value.GetSkillReference(missingMemberBehavior))),
-            Training = training.Select(values => values.GetList(value => value.GetTraining(missingMemberBehavior))),
+            Flags = flags.Map(values => values.GetList(value => value.GetEnum<ProfessionFlag>(missingMemberBehavior))),
+            Skills = skills.Map(values => values.GetList(value => value.GetSkillReference(missingMemberBehavior))),
+            Training = training.Map(values => values.GetList(value => value.GetTraining(missingMemberBehavior))),
             SkillsByPalette =
-                skillsByPalette.Select(value => value.GetSkillsByPalette(missingMemberBehavior))
+                skillsByPalette.Map(value => value.GetSkillsByPalette(missingMemberBehavior))
         };
     }
 }

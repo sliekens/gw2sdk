@@ -64,10 +64,10 @@ public static class DamageSkillFactJson
 
         return new DamageSkillFact
         {
-            Text = text.Select(value => value.GetStringRequired()),
-            Icon = icon.Select(value => value.GetStringRequired()),
-            HitCount = hitCount.Select(value => value.GetInt32()),
-            DamageMultiplier = damageMultiplier.Select(value => value.GetDouble())
+            Text = text.Map(value => value.GetStringRequired()),
+            Icon = icon.Map(value => value.GetStringRequired()),
+            HitCount = hitCount.Map(value => value.GetInt32()),
+            DamageMultiplier = damageMultiplier.Map(value => value.GetDouble())
         };
     }
 }

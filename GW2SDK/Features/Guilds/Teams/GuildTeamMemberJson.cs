@@ -32,8 +32,8 @@ public static class GuildTeamMemberJson
 
         return new GuildTeamMember
         {
-            Name = name.Select(value => value.GetStringRequired()),
-            Role = role.Select(value => value.GetEnum<GuildTeamRole>(missingMemberBehavior))
+            Name = name.Map(value => value.GetStringRequired()),
+            Role = role.Map(value => value.GetEnum<GuildTeamRole>(missingMemberBehavior))
         };
     }
 }

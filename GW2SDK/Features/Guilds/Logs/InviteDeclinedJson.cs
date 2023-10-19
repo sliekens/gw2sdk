@@ -51,10 +51,10 @@ public static class InviteDeclinedJson
 
         return new InviteDeclined
         {
-            Id = id.Select(value => value.GetInt32()),
-            Time = time.Select(value => value.GetDateTimeOffset()),
-            User = user.Select(value => value.GetStringRequired()),
-            DeclinedBy = declinedBy.Select(value => value.GetStringRequired())
+            Id = id.Map(value => value.GetInt32()),
+            Time = time.Map(value => value.GetDateTimeOffset()),
+            User = user.Map(value => value.GetStringRequired()),
+            DeclinedBy = declinedBy.Map(value => value.GetStringRequired())
         };
     }
 }

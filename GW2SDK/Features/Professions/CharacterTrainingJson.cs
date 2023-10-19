@@ -27,7 +27,7 @@ public static class CharacterTrainingJson
 
         return new CharacterTraining
         {
-            Training = training.Select(
+            Training = training.Map(
                 values => values.GetList(value => value.GetTrainingProgress(missingMemberBehavior))
             )
         };

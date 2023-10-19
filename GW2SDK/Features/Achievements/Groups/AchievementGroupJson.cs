@@ -46,11 +46,11 @@ public static class AchievementGroupJson
 
         return new AchievementGroup
         {
-            Id = id.Select(value => value.GetStringRequired()),
-            Name = name.Select(value => value.GetStringRequired()),
-            Description = description.Select(value => value.GetStringRequired()),
-            Order = order.Select(value => value.GetInt32()),
-            Categories = categories.Select(values => values.GetList(value => value.GetInt32()))
+            Id = id.Map(value => value.GetStringRequired()),
+            Name = name.Map(value => value.GetStringRequired()),
+            Description = description.Map(value => value.GetStringRequired()),
+            Order = order.Map(value => value.GetInt32()),
+            Categories = categories.Map(values => values.GetList(value => value.GetInt32()))
         };
     }
 }

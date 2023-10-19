@@ -33,9 +33,9 @@ public static class WorldJson
 
         return new World
         {
-            Id = id.Select(value => value.GetInt32()),
-            Name = name.Select(value => value.GetStringRequired()),
-            Population = population.Select(value => value.GetEnum<WorldPopulation>(missingMemberBehavior))
+            Id = id.Map(value => value.GetInt32()),
+            Name = name.Map(value => value.GetStringRequired()),
+            Population = population.Map(value => value.GetEnum<WorldPopulation>(missingMemberBehavior))
         };
     }
 }

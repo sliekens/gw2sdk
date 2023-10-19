@@ -25,6 +25,6 @@ public static class RankTierJson
             }
         }
 
-        return new RankTier { Rating = rating.Select(value => value.GetInt32()) };
+        return new RankTier { Rating = rating.Map(value => value.GetInt32()) };
     }
 }

@@ -41,9 +41,9 @@ public static class LeaderboardSettingJson
 
         return new LeaderboardSetting
         {
-            Name = name.Select(value => value.GetStringRequired()),
-            ScoringId = scoring.Select(value => value.GetStringRequired()),
-            Tiers = tiers.Select(values => values.GetList(value => value.GetLeaderboardTier(missingMemberBehavior)))
+            Name = name.Map(value => value.GetStringRequired()),
+            ScoringId = scoring.Map(value => value.GetStringRequired()),
+            Tiers = tiers.Map(values => values.GetList(value => value.GetLeaderboardTier(missingMemberBehavior)))
         };
     }
 }

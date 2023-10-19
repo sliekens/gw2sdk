@@ -37,9 +37,9 @@ public static class DistributionJson
 
         return new Distribution
         {
-            Red = red.Select(value => value.GetInt32()),
-            Blue = blue.Select(value => value.GetInt32()),
-            Green = green.Select(value => value.GetInt32())
+            Red = red.Map(value => value.GetInt32()),
+            Blue = blue.Map(value => value.GetInt32()),
+            Green = green.Map(value => value.GetInt32())
         };
     }
 }

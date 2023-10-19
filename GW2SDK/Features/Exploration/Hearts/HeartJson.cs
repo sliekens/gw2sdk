@@ -48,12 +48,12 @@ public static class HeartJson
 
         return new Heart
         {
-            Id = id.Select(value => value.GetInt32()),
-            Objective = objective.Select(value => value.GetStringRequired()),
-            Level = level.Select(value => value.GetInt32()),
-            Coordinates = coordinates.Select(value => value.GetCoordinateF(missingMemberBehavior)),
-            Boundaries = boundaries.Select(values => values.GetList(value => value.GetCoordinateF(missingMemberBehavior))),
-            ChatLink = chatLink.Select(value => value.GetStringRequired())
+            Id = id.Map(value => value.GetInt32()),
+            Objective = objective.Map(value => value.GetStringRequired()),
+            Level = level.Map(value => value.GetInt32()),
+            Coordinates = coordinates.Map(value => value.GetCoordinateF(missingMemberBehavior)),
+            Boundaries = boundaries.Map(values => values.GetList(value => value.GetCoordinateF(missingMemberBehavior))),
+            ChatLink = chatLink.Map(value => value.GetStringRequired())
         };
     }
 }

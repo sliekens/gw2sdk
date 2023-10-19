@@ -37,12 +37,12 @@ public static class SkillBarJson
 
         return new SkillBar
         {
-            Heal = heal.Select(value => value.GetInt32()),
+            Heal = heal.Map(value => value.GetInt32()),
             Utilities =
-                utilities.Select(
+                utilities.Map(
                     values => values.GetList(value => value.GetNullableInt32())
                 ),
-            Elite = elite.Select(value => value.GetInt32())
+            Elite = elite.Map(value => value.GetInt32())
         };
     }
 }

@@ -49,12 +49,12 @@ public static class EquipmentTabJson
 
         return new EquipmentTab
         {
-            Tab = tab.Select(value => value.GetInt32()),
-            Name = name.Select(value => value.GetStringRequired()),
+            Tab = tab.Map(value => value.GetInt32()),
+            Name = name.Map(value => value.GetStringRequired()),
             Equipment =
-                equipment.Select(values => values.GetList(value => value.GetEquipmentItem(missingMemberBehavior))),
+                equipment.Map(values => values.GetList(value => value.GetEquipmentItem(missingMemberBehavior))),
             PvpEquipment =
-                pvpEquipment.Select(value => value.GetPvpEquipment(missingMemberBehavior))
+                pvpEquipment.Map(value => value.GetPvpEquipment(missingMemberBehavior))
         };
     }
 }

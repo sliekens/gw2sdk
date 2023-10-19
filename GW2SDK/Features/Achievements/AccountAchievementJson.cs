@@ -57,13 +57,13 @@ public static class AccountAchievementJson
 
         return new AccountAchievement
         {
-            Id = id.Select(value => value.GetInt32()),
-            Current = current.Select(value => value.GetInt32()),
-            Max = max.Select(value => value.GetInt32()),
-            Done = done.Select(value => value.GetBoolean()),
-            Bits = bits.Select(values => values.GetList(value => value.GetInt32())),
-            Repeated = repeated.Select(value => value.GetInt32()),
-            Unlocked = unlocked.Select(value => value.GetBoolean())
+            Id = id.Map(value => value.GetInt32()),
+            Current = current.Map(value => value.GetInt32()),
+            Max = max.Map(value => value.GetInt32()),
+            Done = done.Map(value => value.GetBoolean()),
+            Bits = bits.Map(values => values.GetList(value => value.GetInt32())),
+            Repeated = repeated.Map(value => value.GetInt32()),
+            Unlocked = unlocked.Map(value => value.GetBoolean())
         };
     }
 }

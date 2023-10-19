@@ -33,6 +33,6 @@ public static class TitleRewardJson
             }
         }
 
-        return new TitleReward { Id = id.Select(value => value.GetInt32()) };
+        return new TitleReward { Id = id.Map(value => value.GetInt32()) };
     }
 }

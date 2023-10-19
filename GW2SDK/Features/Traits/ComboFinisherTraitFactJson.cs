@@ -62,10 +62,10 @@ public static class ComboFinisherTraitFactJson
 
         return new ComboFinisherTraitFact
         {
-            Text = text.Select(value => value.GetString()) ?? "",
-            Icon = icon.Select(value => value.GetString()) ?? "",
-            Percent = percent.Select(value => value.GetInt32()),
-            FinisherName = finisherType.Select(value => value.GetEnum<ComboFinisherName>(missingMemberBehavior))
+            Text = text.Map(value => value.GetString()) ?? "",
+            Icon = icon.Map(value => value.GetString()) ?? "",
+            Percent = percent.Map(value => value.GetInt32()),
+            FinisherName = finisherType.Map(value => value.GetEnum<ComboFinisherName>(missingMemberBehavior))
         };
     }
 }

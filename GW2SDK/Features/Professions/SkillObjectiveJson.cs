@@ -40,8 +40,8 @@ public static class SkillObjectiveJson
 
         return new SkillObjective
         {
-            Cost = cost.Select(value => value.GetInt32()),
-            SkillId = skillId.Select(value => value.GetInt32())
+            Cost = cost.Map(value => value.GetInt32()),
+            SkillId = skillId.Map(value => value.GetInt32())
         };
     }
 }

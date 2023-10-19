@@ -57,13 +57,13 @@ public static class CurrentStandingJson
 
         return new CurrentStanding
         {
-            TotalPoints = totalPoints.Select(value => value.GetInt32()),
-            Division = division.Select(value => value.GetInt32()),
-            Tier = tier.Select(value => value.GetInt32()),
-            Points = points.Select(value => value.GetInt32()),
-            Repeats = repeats.Select(value => value.GetInt32()),
-            Rating = rating.Select(value => value.GetInt32()),
-            Decay = decay.Select(value => value.GetInt32())
+            TotalPoints = totalPoints.Map(value => value.GetInt32()),
+            Division = division.Map(value => value.GetInt32()),
+            Tier = tier.Map(value => value.GetInt32()),
+            Points = points.Map(value => value.GetInt32()),
+            Repeats = repeats.Map(value => value.GetInt32()),
+            Rating = rating.Map(value => value.GetInt32()),
+            Decay = decay.Map(value => value.GetInt32())
         };
     }
 }

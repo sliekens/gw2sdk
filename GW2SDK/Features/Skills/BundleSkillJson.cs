@@ -111,45 +111,45 @@ public static class BundleSkillJson
 
         return new BundleSkill
         {
-            Id = id.Select(value => value.GetInt32()),
-            Name = name.Select(value => value.GetStringRequired()),
+            Id = id.Map(value => value.GetInt32()),
+            Name = name.Map(value => value.GetStringRequired()),
             Facts =
-                facts.Select(
+                facts.Map(
                     values =>
                         values.GetList(
                             value => value.GetSkillFact(missingMemberBehavior, out _, out _)
                         )
                 ),
             TraitedFacts =
-                traitedFacts.Select(
+                traitedFacts.Map(
                     values => values.GetList(
                         value => value.GetTraitedSkillFact(missingMemberBehavior)
                     )
                 ),
-            Description = description.Select(value => value.GetStringRequired()),
-            Icon = icon.Select(value => value.GetString()),
+            Description = description.Map(value => value.GetStringRequired()),
+            Icon = icon.Map(value => value.GetString()),
             WeaponType =
-                weaponType.Select(value => value.GetEnum<WeaponType>(missingMemberBehavior)),
+                weaponType.Map(value => value.GetEnum<WeaponType>(missingMemberBehavior)),
             Professions =
-                professions.Select(
+                professions.Map(
                     values =>
                         values.GetList(
                             value => value.GetEnum<ProfessionName>(missingMemberBehavior)
                         )
                 ),
-            Slot = slot.Select(value => value.GetEnum<SkillSlot>(missingMemberBehavior)),
-            FlipSkill = flipSkill.Select(value => value.GetInt32()),
-            NextChain = nextChain.Select(value => value.GetInt32()),
-            PreviousChain = prevChain.Select(value => value.GetInt32()),
+            Slot = slot.Map(value => value.GetEnum<SkillSlot>(missingMemberBehavior)),
+            FlipSkill = flipSkill.Map(value => value.GetInt32()),
+            NextChain = nextChain.Map(value => value.GetInt32()),
+            PreviousChain = prevChain.Map(value => value.GetInt32()),
             SkillFlag =
-                flags.Select(
+                flags.Map(
                     values => values.GetList(
                         value => value.GetEnum<SkillFlag>(missingMemberBehavior)
                     )
                 ),
-            Specialization = specialization.Select(value => value.GetInt32()),
-            ChatLink = chatLink.Select(value => value.GetStringRequired()),
-            Categories = categories.Select(
+            Specialization = specialization.Map(value => value.GetInt32()),
+            ChatLink = chatLink.Map(value => value.GetStringRequired()),
+            Categories = categories.Map(
                 values => values.GetList(
                     value => value.GetEnum<SkillCategoryName>(missingMemberBehavior)
                 )

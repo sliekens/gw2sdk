@@ -22,6 +22,6 @@ public static class BuildJson
             }
         }
 
-        return new Build { Id = id.Select(value => value.GetInt32()) };
+        return new Build { Id = id.Map(value => value.GetInt32()) };
     }
 }

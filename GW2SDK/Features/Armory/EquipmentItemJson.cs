@@ -83,18 +83,18 @@ public static class EquipmentItemJson
 
         return new EquipmentItem
         {
-            Id = id.Select(value => value.GetInt32()),
-            Count = count.Select(value => value.GetInt32()),
-            Slot = slot.Select(value => value.GetEnum<EquipmentSlot>(missingMemberBehavior)),
-            Upgrades = upgrades.Select(values => values.GetList(value => value.GetInt32())),
-            Infusions = infusions.Select(values => values.GetList(value => value.GetInt32())),
-            SkinId = skin.Select(value => value.GetInt32()),
-            Stats = stats.Select(value => value.GetSelectedStat(missingMemberBehavior)),
-            Binding = binding.Select(value => value.GetEnum<ItemBinding>(missingMemberBehavior)),
-            BoundTo = boundTo.Select(value => value.GetString()) ?? "",
-            Location = location.Select(value => value.GetEnum<EquipmentLocation>(missingMemberBehavior)),
-            Tabs = tabs.Select(values => values.GetList(value => value.GetInt32())),
-            Dyes = dyes.Select(
+            Id = id.Map(value => value.GetInt32()),
+            Count = count.Map(value => value.GetInt32()),
+            Slot = slot.Map(value => value.GetEnum<EquipmentSlot>(missingMemberBehavior)),
+            Upgrades = upgrades.Map(values => values.GetList(value => value.GetInt32())),
+            Infusions = infusions.Map(values => values.GetList(value => value.GetInt32())),
+            SkinId = skin.Map(value => value.GetInt32()),
+            Stats = stats.Map(value => value.GetSelectedStat(missingMemberBehavior)),
+            Binding = binding.Map(value => value.GetEnum<ItemBinding>(missingMemberBehavior)),
+            BoundTo = boundTo.Map(value => value.GetString()) ?? "",
+            Location = location.Map(value => value.GetEnum<EquipmentLocation>(missingMemberBehavior)),
+            Tabs = tabs.Map(values => values.GetList(value => value.GetInt32())),
+            Dyes = dyes.Map(
                 values => values.GetList(value => value.GetNullableInt32())
             )
         };

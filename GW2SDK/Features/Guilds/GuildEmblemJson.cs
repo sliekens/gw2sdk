@@ -37,9 +37,9 @@ public static class GuildEmblemJson
 
         return new GuildEmblem
         {
-            Background = background.Select(value => value.GetGuildEmblemPart(missingMemberBehavior)),
-            Foreground = foreground.Select(value => value.GetGuildEmblemPart(missingMemberBehavior)),
-            Flags = flags.Select(values => values.GetList(value => value.GetEnum<GuildEmblemFlag>(missingMemberBehavior)))
+            Background = background.Map(value => value.GetGuildEmblemPart(missingMemberBehavior)),
+            Foreground = foreground.Map(value => value.GetGuildEmblemPart(missingMemberBehavior)),
+            Flags = flags.Map(values => values.GetList(value => value.GetEnum<GuildEmblemFlag>(missingMemberBehavior)))
         };
     }
 }

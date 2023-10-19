@@ -29,7 +29,7 @@ internal readonly ref struct NullableMember
     public static implicit operator NullableMember(JsonProperty member) =>
         new(member.Name.AsSpan(), member.Value);
 
-    public TValue? Select<TValue>(Func<JsonElement, TValue> resultSelector) where TValue : struct
+    public TValue? Map<TValue>(Func<JsonElement, TValue> resultSelector) where TValue : struct
     {
         if (IsUndefinedOrNull)
         {

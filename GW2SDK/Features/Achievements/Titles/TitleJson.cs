@@ -45,10 +45,10 @@ public static class TitleJson
 
         return new Title
         {
-            Id = id.Select(value => value.GetInt32()),
-            Name = name.Select(value => value.GetStringRequired()),
-            Achievements = achievements.Select(values => values.GetList(value => value.GetInt32())),
-            AchievementPointsRequired = achievementPointsRequired.Select(value => value.GetInt32())
+            Id = id.Map(value => value.GetInt32()),
+            Name = name.Map(value => value.GetStringRequired()),
+            Achievements = achievements.Map(values => values.GetList(value => value.GetInt32())),
+            AchievementPointsRequired = achievementPointsRequired.Map(value => value.GetInt32())
         };
     }
 }

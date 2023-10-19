@@ -56,13 +56,13 @@ public static class BackstoryAnswerJson
 
         return new BackstoryAnswer
         {
-            Id = id.Select(value => value.GetStringRequired()),
-            Title = title.Select(value => value.GetStringRequired()),
-            Description = description.Select(value => value.GetStringRequired()),
-            Journal = journal.Select(value => value.GetStringRequired()),
-            Question = question.Select(value => value.GetInt32()),
-            Professions = professions.Select(values => values.GetList(value => value.GetEnum<ProfessionName>(missingMemberBehavior))),
-            Races = races.Select(values => values.GetList(value => value.GetEnum<RaceName>(missingMemberBehavior)))
+            Id = id.Map(value => value.GetStringRequired()),
+            Title = title.Map(value => value.GetStringRequired()),
+            Description = description.Map(value => value.GetStringRequired()),
+            Journal = journal.Map(value => value.GetStringRequired()),
+            Question = question.Map(value => value.GetInt32()),
+            Professions = professions.Map(values => values.GetList(value => value.GetEnum<ProfessionName>(missingMemberBehavior))),
+            Races = races.Map(values => values.GetList(value => value.GetEnum<RaceName>(missingMemberBehavior)))
         };
     }
 }

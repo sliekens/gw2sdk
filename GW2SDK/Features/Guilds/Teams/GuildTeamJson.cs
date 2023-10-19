@@ -62,14 +62,14 @@ public static class GuildTeamJson
 
         return new GuildTeam
         {
-            Id = id.Select(value => value.GetInt32()),
-            Members = members.Select(values => values.GetList(value => value.GetGuildTeamMember(missingMemberBehavior))),
-            Name = name.Select(value => value.GetStringRequired()),
-            State = state.Select(value => value.GetEnum<GuildTeamState>(missingMemberBehavior)),
-            Aggregate = aggregate.Select(value => value.GetResults(missingMemberBehavior)),
-            Ladders = ladders.Select(value => value.GetLadders(missingMemberBehavior)),
-            Games = games.Select(values => values.GetList(value => value.GetGame(missingMemberBehavior))),
-            Seasons = seasons.Select(values => values.GetList(value => value.GetSeason(missingMemberBehavior)))
+            Id = id.Map(value => value.GetInt32()),
+            Members = members.Map(values => values.GetList(value => value.GetGuildTeamMember(missingMemberBehavior))),
+            Name = name.Map(value => value.GetStringRequired()),
+            State = state.Map(value => value.GetEnum<GuildTeamState>(missingMemberBehavior)),
+            Aggregate = aggregate.Map(value => value.GetResults(missingMemberBehavior)),
+            Ladders = ladders.Map(value => value.GetLadders(missingMemberBehavior)),
+            Games = games.Map(values => values.GetList(value => value.GetGame(missingMemberBehavior))),
+            Seasons = seasons.Map(values => values.GetList(value => value.GetSeason(missingMemberBehavior)))
                 ?? new List<Season>()
         };
     }

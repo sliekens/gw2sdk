@@ -36,9 +36,9 @@ public static class MasteryPointJson
 
         return new MasteryPoint
         {
-            Id = id.Select(value => value.GetInt32()),
-            Coordinates = coordinates.Select(value => value.GetCoordinateF(missingMemberBehavior)),
-            Region = region.Select(value => value.GetEnum<MasteryRegionName>(missingMemberBehavior))
+            Id = id.Map(value => value.GetInt32()),
+            Coordinates = coordinates.Map(value => value.GetCoordinateF(missingMemberBehavior)),
+            Region = region.Map(value => value.GetEnum<MasteryRegionName>(missingMemberBehavior))
         };
     }
 }

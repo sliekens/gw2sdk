@@ -34,9 +34,9 @@ public static class RankJson
 
         return new Rank
         {
-            Id = id.Select(value => value.GetInt32()),
-            Title = title.Select(value => value.GetStringRequired()),
-            MinRank = minRank.Select(value => value.GetInt32())
+            Id = id.Map(value => value.GetInt32()),
+            Title = title.Map(value => value.GetStringRequired()),
+            MinRank = minRank.Map(value => value.GetInt32())
         };
     }
 }

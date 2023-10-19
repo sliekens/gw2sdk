@@ -65,8 +65,8 @@ public static class GuildLogJson
 
         return new GuildLog
         {
-            Id = id.Select(value => value.GetInt32()),
-            Time = time.Select(value => value.GetDateTimeOffset())
+            Id = id.Map(value => value.GetInt32()),
+            Time = time.Map(value => value.GetDateTimeOffset())
         };
     }
 }

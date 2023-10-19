@@ -37,9 +37,9 @@ public static class GuildPermissionSummaryJson
 
         return new GuildPermissionSummary
         {
-            Id = id.Select(value => value.GetEnum<GuildPermission>(missingMemberBehavior)),
-            Name = name.Select(value => value.GetStringRequired()),
-            Description = description.Select(value => value.GetStringRequired())
+            Id = id.Map(value => value.GetEnum<GuildPermission>(missingMemberBehavior)),
+            Name = name.Map(value => value.GetStringRequired()),
+            Description = description.Map(value => value.GetStringRequired())
         };
     }
 }

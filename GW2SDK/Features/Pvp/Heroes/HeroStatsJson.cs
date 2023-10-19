@@ -37,9 +37,9 @@ public static class HeroStatsJson
 
         return new HeroStats
         {
-            Offense = offense.Select(value => value.GetInt32()),
-            Defense = defense.Select(value => value.GetInt32()),
-            Speed = speed.Select(value => value.GetInt32())
+            Offense = offense.Map(value => value.GetInt32()),
+            Defense = defense.Map(value => value.GetInt32()),
+            Speed = speed.Map(value => value.GetInt32())
         };
     }
 }

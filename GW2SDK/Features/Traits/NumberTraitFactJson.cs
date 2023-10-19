@@ -57,9 +57,9 @@ public static class NumberTraitFactJson
 
         return new NumberTraitFact
         {
-            Text = text.Select(value => value.GetString()) ?? "",
-            Icon = icon.Select(value => value.GetString()) ?? "",
-            Value = number.Select(value => value.GetInt32())
+            Text = text.Map(value => value.GetString()) ?? "",
+            Icon = icon.Map(value => value.GetString()) ?? "",
+            Value = number.Map(value => value.GetInt32())
         };
     }
 }

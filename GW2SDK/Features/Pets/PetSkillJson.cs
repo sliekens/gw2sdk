@@ -25,6 +25,6 @@ public static class PetSkillJson
             }
         }
 
-        return new PetSkill { Id = id.Select(value => value.GetInt32()) };
+        return new PetSkill { Id = id.Map(value => value.GetInt32()) };
     }
 }

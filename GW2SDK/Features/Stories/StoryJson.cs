@@ -69,24 +69,24 @@ public static class StoryJson
 
         return new Story
         {
-            Id = id.Select(value => value.GetInt32()),
-            SeasonId = season.Select(value => value.GetStringRequired()),
-            Name = name.Select(value => value.GetStringRequired()),
-            Description = description.Select(value => value.GetStringRequired()),
-            Timeline = timeline.Select(value => value.GetStringRequired()),
-            Level = level.Select(value => value.GetInt32()),
+            Id = id.Map(value => value.GetInt32()),
+            SeasonId = season.Map(value => value.GetStringRequired()),
+            Name = name.Map(value => value.GetStringRequired()),
+            Description = description.Map(value => value.GetStringRequired()),
+            Timeline = timeline.Map(value => value.GetStringRequired()),
+            Level = level.Map(value => value.GetInt32()),
             Races =
-                races.Select(
+                races.Map(
                     values => values.GetList(
                         value => value.GetEnum<RaceName>(missingMemberBehavior)
                     )
                 ),
-            Order = order.Select(value => value.GetInt32()),
+            Order = order.Map(value => value.GetInt32()),
             Chapters =
-                chapters.Select(
+                chapters.Map(
                     values => values.GetList(value => value.GetChapter(missingMemberBehavior))
                 ),
-            Flags = flags.Select(
+            Flags = flags.Map(
                     values => values.GetList(
                         value => value.GetEnum<StoryFlag>(missingMemberBehavior)
                     )

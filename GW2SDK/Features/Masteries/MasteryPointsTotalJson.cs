@@ -37,9 +37,9 @@ public static class MasteryPointsTotalJson
 
         return new MasteryPointsTotal
         {
-            Region = region.Select(value => value.GetStringRequired()),
-            Spent = spent.Select(value => value.GetInt32()),
-            Earned = earned.Select(value => value.GetInt32())
+            Region = region.Map(value => value.GetStringRequired()),
+            Spent = spent.Map(value => value.GetInt32()),
+            Earned = earned.Map(value => value.GetInt32())
         };
     }
 }

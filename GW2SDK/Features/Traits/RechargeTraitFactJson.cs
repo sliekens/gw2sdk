@@ -57,9 +57,9 @@ public static class RechargeTraitFactJson
 
         return new RechargeTraitFact
         {
-            Text = text.Select(value => value.GetString()) ?? "",
-            Icon = icon.Select(value => value.GetString()) ?? "",
-            Value = recharge.Select(value => value.GetDouble())
+            Text = text.Map(value => value.GetString()) ?? "",
+            Icon = icon.Map(value => value.GetString()) ?? "",
+            Value = recharge.Map(value => value.GetDouble())
         };
     }
 }

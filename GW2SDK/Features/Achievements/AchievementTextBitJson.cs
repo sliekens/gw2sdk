@@ -33,6 +33,6 @@ public static class AchievementTextBitJson
             }
         }
 
-        return new AchievementTextBit { Text = text.Select(value => value.GetStringRequired()) };
+        return new AchievementTextBit { Text = text.Map(value => value.GetStringRequired()) };
     }
 }

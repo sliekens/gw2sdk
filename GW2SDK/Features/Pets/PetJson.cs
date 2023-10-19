@@ -44,11 +44,11 @@ public static class PetJson
 
         return new Pet
         {
-            Id = id.Select(value => value.GetInt32()),
-            Name = name.Select(value => value.GetStringRequired()),
-            Description = description.Select(value => value.GetStringRequired()),
-            Icon = icon.Select(value => value.GetStringRequired()),
-            Skills = skills.Select(values => values.GetList(value => value.GetPetSkill(missingMemberBehavior)))
+            Id = id.Map(value => value.GetInt32()),
+            Name = name.Map(value => value.GetStringRequired()),
+            Description = description.Map(value => value.GetStringRequired()),
+            Icon = icon.Map(value => value.GetStringRequired()),
+            Skills = skills.Map(values => values.GetList(value => value.GetPetSkill(missingMemberBehavior)))
         };
     }
 }

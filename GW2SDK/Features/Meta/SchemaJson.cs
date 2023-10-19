@@ -33,8 +33,8 @@ public static class SchemaJson
 
         return new Schema
         {
-            Version = version.Select(value => value.GetStringRequired()),
-            Description = description.Select(value => value.GetStringRequired())
+            Version = version.Map(value => value.GetStringRequired()),
+            Description = description.Map(value => value.GetStringRequired())
         };
     }
 }

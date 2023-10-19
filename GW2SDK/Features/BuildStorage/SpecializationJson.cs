@@ -32,8 +32,8 @@ public static class SpecializationJson
 
         return new Specialization
         {
-            Id = id.Select(value => value.GetInt32()),
-            Traits = traits.Select(
+            Id = id.Map(value => value.GetInt32()),
+            Traits = traits.Map(
                 values => values.GetList(value => value.GetNullableInt32())
             )
         };

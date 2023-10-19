@@ -60,9 +60,9 @@ public static class PercentSkillFactJson
 
         return new PercentSkillFact
         {
-            Text = text.Select(value => value.GetStringRequired()),
-            Icon = icon.Select(value => value.GetStringRequired()),
-            Percent = percent.Select(value => value.GetDouble())
+            Text = text.Map(value => value.GetStringRequired()),
+            Icon = icon.Map(value => value.GetStringRequired()),
+            Percent = percent.Map(value => value.GetDouble())
         };
     }
 }

@@ -58,13 +58,13 @@ public static class LaddersJson
 
         return new Ladders
         {
-            None = none.Select(value => value.GetResults(missingMemberBehavior)),
-            Unranked = unranked.Select(value => value.GetResults(missingMemberBehavior)),
-            Ranked = ranked.Select(value => value.GetResults(missingMemberBehavior)),
-            Ranked2v2 = ranked2v2.Select(value => value.GetResults(missingMemberBehavior)),
-            Ranked3v3 = ranked3v3.Select(value => value.GetResults(missingMemberBehavior)),
-            SoloArenaRated = soloArenaRated.Select(value => value.GetResults(missingMemberBehavior)),
-            TeamArenaRated = teamArenaRated.Select(value => value.GetResults(missingMemberBehavior))
+            None = none.Map(value => value.GetResults(missingMemberBehavior)),
+            Unranked = unranked.Map(value => value.GetResults(missingMemberBehavior)),
+            Ranked = ranked.Map(value => value.GetResults(missingMemberBehavior)),
+            Ranked2v2 = ranked2v2.Map(value => value.GetResults(missingMemberBehavior)),
+            Ranked3v3 = ranked3v3.Map(value => value.GetResults(missingMemberBehavior)),
+            SoloArenaRated = soloArenaRated.Map(value => value.GetResults(missingMemberBehavior)),
+            TeamArenaRated = teamArenaRated.Map(value => value.GetResults(missingMemberBehavior))
         };
     }
 }

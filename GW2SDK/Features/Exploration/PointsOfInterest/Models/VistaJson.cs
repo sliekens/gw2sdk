@@ -52,11 +52,11 @@ public static class VistaJson
 
         return new Vista
         {
-            Id = id.Select(value => value.GetInt32()),
-            Name = name.Select(value => value.GetString()) ?? "",
-            Floor = floor.Select(value => value.GetInt32()),
-            Coordinates = coordinates.Select(value => value.GetCoordinateF(missingMemberBehavior)),
-            ChatLink = chatLink.Select(value => value.GetStringRequired())
+            Id = id.Map(value => value.GetInt32()),
+            Name = name.Map(value => value.GetString()) ?? "",
+            Floor = floor.Map(value => value.GetInt32()),
+            Coordinates = coordinates.Map(value => value.GetCoordinateF(missingMemberBehavior)),
+            ChatLink = chatLink.Map(value => value.GetStringRequired())
         };
     }
 }

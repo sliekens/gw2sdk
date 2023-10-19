@@ -32,8 +32,8 @@ public static class BoundLegendaryItemJson
 
         return new BoundLegendaryItem
         {
-            Id = id.Select(value => value.GetInt32()),
-            Count = count.Select(value => value.GetInt32())
+            Id = id.Map(value => value.GetInt32()),
+            Count = count.Map(value => value.GetInt32())
         };
     }
 }

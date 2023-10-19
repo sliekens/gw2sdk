@@ -31,8 +31,8 @@ public static class ItemUpgradeJson
 
         return new ItemUpgrade
         {
-            Upgrade = upgrade.Select(value => value.GetEnum<UpgradeType>(missingMemberBehavior)),
-            ItemId = itemId.Select(value => value.GetInt32())
+            Upgrade = upgrade.Map(value => value.GetEnum<UpgradeType>(missingMemberBehavior)),
+            ItemId = itemId.Map(value => value.GetInt32())
         };
     }
 }

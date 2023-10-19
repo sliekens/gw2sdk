@@ -59,9 +59,9 @@ public static class StunBreakSkillFactJson
 
         return new StunBreakSkillFact
         {
-            Text = text.Select(value => value.GetStringRequired()),
-            Icon = icon.Select(value => value.GetStringRequired()),
-            Value = stunBreak.Select(value => value.GetBoolean())
+            Text = text.Map(value => value.GetStringRequired()),
+            Icon = icon.Map(value => value.GetStringRequired()),
+            Value = stunBreak.Map(value => value.GetBoolean())
         };
     }
 }

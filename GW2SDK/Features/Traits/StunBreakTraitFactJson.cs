@@ -57,9 +57,9 @@ public static class StunBreakTraitFactJson
 
         return new StunBreakTraitFact
         {
-            Text = text.Select(value => value.GetString()) ?? "",
-            Icon = icon.Select(value => value.GetString()) ?? "",
-            Value = stunBreak.Select(value => value.GetBoolean())
+            Text = text.Map(value => value.GetString()) ?? "",
+            Icon = icon.Map(value => value.GetString()) ?? "",
+            Value = stunBreak.Map(value => value.GetBoolean())
         };
     }
 }

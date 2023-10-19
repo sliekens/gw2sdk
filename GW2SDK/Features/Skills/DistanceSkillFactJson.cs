@@ -59,9 +59,9 @@ public static class DistanceSkillFactJson
 
         return new DistanceSkillFact
         {
-            Text = text.Select(value => value.GetStringRequired()),
-            Icon = icon.Select(value => value.GetStringRequired()),
-            Distance = distance.Select(value => value.GetInt32())
+            Text = text.Map(value => value.GetStringRequired()),
+            Icon = icon.Map(value => value.GetStringRequired()),
+            Distance = distance.Map(value => value.GetInt32())
         };
     }
 }

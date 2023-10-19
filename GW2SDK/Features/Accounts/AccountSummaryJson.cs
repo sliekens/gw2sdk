@@ -96,27 +96,27 @@ public static class AccountSummaryJson
 
         return new AccountSummary
         {
-            Id = id.Select(value => value.GetStringRequired()),
-            DisplayName = name.Select(value => value.GetStringRequired()),
-            Age = age.Select(value => TimeSpan.FromSeconds(value.GetDouble())),
-            LastModified = lastModified.Select(value => value.GetDateTimeOffset()),
-            WorldId = world.Select(value => value.GetInt32()),
-            GuildIds = guilds.Select(values => values.GetList(value => value.GetStringRequired())),
+            Id = id.Map(value => value.GetStringRequired()),
+            DisplayName = name.Map(value => value.GetStringRequired()),
+            Age = age.Map(value => TimeSpan.FromSeconds(value.GetDouble())),
+            LastModified = lastModified.Map(value => value.GetDateTimeOffset()),
+            WorldId = world.Map(value => value.GetInt32()),
+            GuildIds = guilds.Map(values => values.GetList(value => value.GetStringRequired())),
             LeaderOfGuildIds =
-                guildLeader.Select(values => values.GetList(value => value.GetStringRequired())),
-            Created = created.Select(value => value.GetDateTimeOffset()),
+                guildLeader.Map(values => values.GetList(value => value.GetStringRequired())),
+            Created = created.Map(value => value.GetDateTimeOffset()),
             Access =
-                access.Select(
+                access.Map(
                     values => values.GetList(
                         value => value.GetEnum<ProductName>(missingMemberBehavior)
                     )
                 ),
-            Commander = commander.Select(value => value.GetBoolean()),
-            FractalLevel = fractalLevel.Select(value => value.GetInt32()),
-            DailyAchievementPoints = dailyAp.Select(value => value.GetInt32()),
-            MonthlyAchievementPoints = monthlyAp.Select(value => value.GetInt32()),
-            WvwRank = wvwRank.Select(value => value.GetInt32()),
-            BuildStorageSlots = buildStorageSlots.Select(value => value.GetInt32())
+            Commander = commander.Map(value => value.GetBoolean()),
+            FractalLevel = fractalLevel.Map(value => value.GetInt32()),
+            DailyAchievementPoints = dailyAp.Map(value => value.GetInt32()),
+            MonthlyAchievementPoints = monthlyAp.Map(value => value.GetInt32()),
+            WvwRank = wvwRank.Map(value => value.GetInt32()),
+            BuildStorageSlots = buildStorageSlots.Map(value => value.GetInt32())
         };
     }
 }

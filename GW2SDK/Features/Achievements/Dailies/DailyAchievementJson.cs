@@ -37,10 +37,10 @@ public static class DailyAchievementJson
 
         return new DailyAchievement
         {
-            Id = id.Select(value => value.GetInt32()),
-            Level = level.Select(value => value.GetLevelRequirement(missingMemberBehavior)),
+            Id = id.Map(value => value.GetInt32()),
+            Level = level.Map(value => value.GetLevelRequirement(missingMemberBehavior)),
             RequiredAccess =
-                requiredAccess.Select(value => value.GetProductRequirement(missingMemberBehavior))
+                requiredAccess.Map(value => value.GetProductRequirement(missingMemberBehavior))
         };
     }
 }

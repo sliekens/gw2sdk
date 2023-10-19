@@ -47,11 +47,11 @@ public static class LeaderboardScoringJson
 
         return new LeaderboardScoring
         {
-            Id = id.Select(value => value.GetStringRequired()),
-            Type = type.Select(value => value.GetStringRequired()),
-            Description = description.Select(value => value.GetStringRequired()),
-            Name = type.Select(value => value.GetStringRequired()),
-            Ordering = ordering.Select(value => value.GetStringRequired())
+            Id = id.Map(value => value.GetStringRequired()),
+            Type = type.Map(value => value.GetStringRequired()),
+            Description = description.Map(value => value.GetStringRequired()),
+            Name = type.Map(value => value.GetStringRequired()),
+            Ordering = ordering.Map(value => value.GetStringRequired())
         };
     }
 }

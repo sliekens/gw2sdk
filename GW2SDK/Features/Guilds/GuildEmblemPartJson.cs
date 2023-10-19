@@ -32,8 +32,8 @@ public static class GuildEmblemPartJson
 
         return new GuildEmblemPart
         {
-            Id = id.Select(value => value.GetInt32()),
-            Colors = colors.Select(values => values.GetList(value => value.GetInt32()))
+            Id = id.Map(value => value.GetInt32()),
+            Colors = colors.Map(values => values.GetList(value => value.GetInt32()))
         };
     }
 }

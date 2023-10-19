@@ -42,10 +42,10 @@ public static class GuildRankJson
 
         return new GuildRank
         {
-            Id = id.Select(value => value.GetStringRequired()),
-            Order = order.Select(value => value.GetInt32()),
-            Permissions = permissions.Select(values => values.GetList(value => value.GetEnum<GuildPermission>(missingMemberBehavior))),
-            IconHref = iconHref.Select(value => value.GetStringRequired())
+            Id = id.Map(value => value.GetStringRequired()),
+            Order = order.Map(value => value.GetInt32()),
+            Permissions = permissions.Map(values => values.GetList(value => value.GetEnum<GuildPermission>(missingMemberBehavior))),
+            IconHref = iconHref.Map(value => value.GetStringRequired())
         };
     }
 }

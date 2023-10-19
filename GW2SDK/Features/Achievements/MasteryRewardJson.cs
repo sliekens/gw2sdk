@@ -40,8 +40,8 @@ public static class MasteryRewardJson
 
         return new MasteryReward
         {
-            Id = id.Select(value => value.GetInt32()),
-            Region = region.Select(value => value.GetEnum<MasteryRegionName>(missingMemberBehavior))
+            Id = id.Map(value => value.GetInt32()),
+            Region = region.Map(value => value.GetEnum<MasteryRegionName>(missingMemberBehavior))
         };
     }
 }

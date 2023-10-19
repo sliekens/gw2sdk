@@ -37,9 +37,9 @@ public static class BuildTabJson
 
         return new BuildTab
         {
-            Tab = tab.Select(value => value.GetInt32()),
-            IsActive = isActive.Select(value => value.GetBoolean()),
-            Build = build.Select(value => value.GetBuild(missingMemberBehavior))
+            Tab = tab.Map(value => value.GetInt32()),
+            IsActive = isActive.Map(value => value.GetBoolean()),
+            Build = build.Map(value => value.GetBuild(missingMemberBehavior))
         };
     }
 }

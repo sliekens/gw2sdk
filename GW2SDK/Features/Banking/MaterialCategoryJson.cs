@@ -42,10 +42,10 @@ public static class MaterialCategoryJson
 
         return new MaterialCategory
         {
-            Id = id.Select(value => value.GetInt32()),
-            Name = name.Select(value => value.GetStringRequired()),
-            Items = items.Select(values => values.GetList(value => value.GetInt32())),
-            Order = order.Select(value => value.GetInt32())
+            Id = id.Map(value => value.GetInt32()),
+            Name = name.Map(value => value.GetStringRequired()),
+            Items = items.Map(values => values.GetList(value => value.GetInt32())),
+            Order = order.Map(value => value.GetInt32())
         };
     }
 }

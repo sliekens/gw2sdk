@@ -74,20 +74,20 @@ public static class TraitJson
 
         return new Trait
         {
-            Id = id.Select(value => value.GetInt32()),
-            Tier = tier.Select(value => value.GetInt32()),
-            Order = order.Select(value => value.GetInt32()),
-            Name = name.Select(value => value.GetStringRequired()),
-            Description = description.Select(value => value.GetString()) ?? "",
-            Slot = slot.Select(value => value.GetEnum<TraitSlot>(missingMemberBehavior)),
-            Icon = icon.Select(value => value.GetStringRequired()),
-            SpezializationId = specialization.Select(value => value.GetInt32()),
-            Facts = facts.Select(
+            Id = id.Map(value => value.GetInt32()),
+            Tier = tier.Map(value => value.GetInt32()),
+            Order = order.Map(value => value.GetInt32()),
+            Name = name.Map(value => value.GetStringRequired()),
+            Description = description.Map(value => value.GetString()) ?? "",
+            Slot = slot.Map(value => value.GetEnum<TraitSlot>(missingMemberBehavior)),
+            Icon = icon.Map(value => value.GetStringRequired()),
+            SpezializationId = specialization.Map(value => value.GetInt32()),
+            Facts = facts.Map(
                 values => values.GetList(value => value.GetTraitFact(missingMemberBehavior, out _, out _))
             ),
             TraitedFacts =
-                traitedFacts.Select(values => values.GetList(value => value.GetCompoundTraitFact(missingMemberBehavior))),
-            Skills = skills.Select(values => values.GetList(value => value.GetTraitSkill(missingMemberBehavior)))
+                traitedFacts.Map(values => values.GetList(value => value.GetCompoundTraitFact(missingMemberBehavior))),
+            Skills = skills.Map(values => values.GetList(value => value.GetTraitSkill(missingMemberBehavior)))
         };
     }
 }

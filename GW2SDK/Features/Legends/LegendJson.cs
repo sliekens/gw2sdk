@@ -52,12 +52,12 @@ public static class LegendJson
 
         return new Legend
         {
-            Id = id.Select(value => value.GetStringRequired()),
-            Code = code.Select(value => value.GetInt32()),
-            Swap = swap.Select(value => value.GetInt32()),
-            Heal = heal.Select(value => value.GetInt32()),
-            Elite = elite.Select(value => value.GetInt32()),
-            Utilities = utilities.Select(values => values.GetList(value => value.GetInt32()))
+            Id = id.Map(value => value.GetStringRequired()),
+            Code = code.Map(value => value.GetInt32()),
+            Swap = swap.Map(value => value.GetInt32()),
+            Heal = heal.Map(value => value.GetInt32()),
+            Elite = elite.Map(value => value.GetInt32()),
+            Utilities = utilities.Map(values => values.GetList(value => value.GetInt32()))
         };
     }
 }

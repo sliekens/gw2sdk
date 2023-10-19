@@ -52,12 +52,12 @@ public static class ColorInfoJson
 
         return new ColorInfo
         {
-            Brightness = brightness.Select(value => value.GetInt32()),
-            Contrast = contrast.Select(value => value.GetDouble()),
-            Hue = hue.Select(value => value.GetInt32()),
-            Saturation = saturation.Select(value => value.GetDouble()),
-            Lightness = lightness.Select(value => value.GetDouble()),
-            Rgb = rgb.Select(value => value.GetColor(missingMemberBehavior))
+            Brightness = brightness.Map(value => value.GetInt32()),
+            Contrast = contrast.Map(value => value.GetDouble()),
+            Hue = hue.Map(value => value.GetInt32()),
+            Saturation = saturation.Map(value => value.GetDouble()),
+            Lightness = lightness.Map(value => value.GetDouble()),
+            Rgb = rgb.Map(value => value.GetColor(missingMemberBehavior))
         };
     }
 }

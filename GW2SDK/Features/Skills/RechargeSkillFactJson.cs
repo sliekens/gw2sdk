@@ -59,9 +59,9 @@ public static class RechargeSkillFactJson
 
         return new RechargeSkillFact
         {
-            Text = text.Select(value => value.GetStringRequired()),
-            Icon = icon.Select(value => value.GetStringRequired()),
-            Value = recharge.Select(value => value.GetDouble())
+            Text = text.Map(value => value.GetStringRequired()),
+            Icon = icon.Map(value => value.GetStringRequired()),
+            Value = recharge.Map(value => value.GetDouble())
         };
     }
 }

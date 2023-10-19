@@ -32,8 +32,8 @@ public static class CurrencyAmountJson
 
         return new CurrencyAmount
         {
-            CurrencyId = currencyId.Select(value => value.GetInt32()),
-            Amount = amount.Select(value => value.GetInt32())
+            CurrencyId = currencyId.Map(value => value.GetInt32()),
+            Amount = amount.Map(value => value.GetInt32())
         };
     }
 }

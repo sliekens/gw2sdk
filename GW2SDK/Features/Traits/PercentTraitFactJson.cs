@@ -57,9 +57,9 @@ public static class PercentTraitFactJson
 
         return new PercentTraitFact
         {
-            Text = text.Select(value => value.GetString()) ?? "",
-            Icon = icon.Select(value => value.GetString()) ?? "",
-            Percent = percent.Select(value => value.GetDouble())
+            Text = text.Map(value => value.GetString()) ?? "",
+            Icon = icon.Map(value => value.GetString()) ?? "",
+            Percent = percent.Map(value => value.GetDouble())
         };
     }
 }

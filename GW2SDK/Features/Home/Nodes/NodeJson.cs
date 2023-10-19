@@ -22,6 +22,6 @@ public static class NodeJson
             }
         }
 
-        return new Node { Id = id.Select(value => value.GetStringRequired()) };
+        return new Node { Id = id.Map(value => value.GetStringRequired()) };
     }
 }

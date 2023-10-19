@@ -37,9 +37,9 @@ public static class GuildMemberJson
 
         return new GuildMember
         {
-            Name = name.Select(value => value.GetStringRequired()),
-            Rank = rank.Select(value => value.GetStringRequired()),
-            Joined = joined.Select(value => value.GetDateTimeOffset())
+            Name = name.Map(value => value.GetStringRequired()),
+            Rank = rank.Map(value => value.GetStringRequired()),
+            Joined = joined.Map(value => value.GetDateTimeOffset())
         };
     }
 }

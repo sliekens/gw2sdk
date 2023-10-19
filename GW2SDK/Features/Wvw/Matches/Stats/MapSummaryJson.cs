@@ -42,10 +42,10 @@ public static class MapSummaryJson
 
         return new MapSummary
         {
-            Id = id.Select(value => value.GetInt32()),
-            Kind = type.Select(value => value.GetEnum<MapKind>(missingMemberBehavior)),
-            Deaths = deaths.Select(value => value.GetDistribution(missingMemberBehavior)),
-            Kills = kills.Select(value => value.GetDistribution(missingMemberBehavior))
+            Id = id.Map(value => value.GetInt32()),
+            Kind = type.Map(value => value.GetEnum<MapKind>(missingMemberBehavior)),
+            Deaths = deaths.Map(value => value.GetDistribution(missingMemberBehavior)),
+            Kills = kills.Map(value => value.GetDistribution(missingMemberBehavior))
         };
     }
 }

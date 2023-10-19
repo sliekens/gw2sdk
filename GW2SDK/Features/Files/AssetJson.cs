@@ -29,8 +29,8 @@ public static class AssetJson
 
         return new Asset
         {
-            Id = id.Select(value => value.GetStringRequired()),
-            Icon = icon.Select(value => value.GetStringRequired())
+            Id = id.Map(value => value.GetStringRequired()),
+            Icon = icon.Map(value => value.GetStringRequired())
         };
     }
 }

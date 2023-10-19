@@ -37,9 +37,9 @@ public static class SkillReferenceJson
 
         return new SkillReference
         {
-            Id = id.Select(value => value.GetInt32()),
-            Attunement = attunement.Select(value => value.GetEnum<Attunement>(missingMemberBehavior)),
-            Form = form.Select(value => value.GetEnum<Transformation>(missingMemberBehavior))
+            Id = id.Map(value => value.GetInt32()),
+            Attunement = attunement.Map(value => value.GetEnum<Attunement>(missingMemberBehavior)),
+            Form = form.Map(value => value.GetEnum<Transformation>(missingMemberBehavior))
         };
     }
 }

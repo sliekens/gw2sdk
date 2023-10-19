@@ -62,15 +62,15 @@ public static class SeasonJson
 
         return new Season
         {
-            Id = id.Select(value => value.GetStringRequired()),
-            Name = name.Select(value => value.GetStringRequired()),
-            Start = start.Select(value => value.GetDateTime()),
-            End = end.Select(value => value.GetDateTime()),
-            Active = active.Select(value => value.GetBoolean()),
-            Divisions = divisions.Select(values => values.GetList(value => value.GetDivision(missingMemberBehavior))),
-            Ranks = ranks.Select(values => values.GetList(value => value.GetSeasonRank(missingMemberBehavior))),
+            Id = id.Map(value => value.GetStringRequired()),
+            Name = name.Map(value => value.GetStringRequired()),
+            Start = start.Map(value => value.GetDateTime()),
+            End = end.Map(value => value.GetDateTime()),
+            Active = active.Map(value => value.GetBoolean()),
+            Divisions = divisions.Map(values => values.GetList(value => value.GetDivision(missingMemberBehavior))),
+            Ranks = ranks.Map(values => values.GetList(value => value.GetSeasonRank(missingMemberBehavior))),
             Leaderboards =
-                leaderboards.Select(value => value.GetLeaderboardGroup(missingMemberBehavior))
+                leaderboards.Map(value => value.GetLeaderboardGroup(missingMemberBehavior))
         };
     }
 }

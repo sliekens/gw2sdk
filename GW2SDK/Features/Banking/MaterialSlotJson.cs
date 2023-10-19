@@ -42,10 +42,10 @@ public static class MaterialSlotJson
 
         return new MaterialSlot
         {
-            ItemId = id.Select(value => value.GetInt32()),
-            CategoryId = category.Select(value => value.GetInt32()),
-            Binding = binding.Select(value => value.GetEnum<ItemBinding>(missingMemberBehavior)),
-            Count = count.Select(value => value.GetInt32())
+            ItemId = id.Map(value => value.GetInt32()),
+            CategoryId = category.Map(value => value.GetInt32()),
+            Binding = binding.Map(value => value.GetEnum<ItemBinding>(missingMemberBehavior)),
+            Count = count.Map(value => value.GetInt32())
         };
     }
 }

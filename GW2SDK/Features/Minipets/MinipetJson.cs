@@ -52,12 +52,12 @@ public static class MinipetJson
 
         return new Minipet
         {
-            Id = id.Select(value => value.GetInt32()),
-            Name = name.Select(value => value.GetStringRequired()),
-            Unlock = unlock.Select(value => value.GetString()) ?? "",
-            Icon = icon.Select(value => value.GetStringRequired()),
-            Order = order.Select(value => value.GetInt32()),
-            ItemId = itemId.Select(value => value.GetInt32())
+            Id = id.Map(value => value.GetInt32()),
+            Name = name.Map(value => value.GetStringRequired()),
+            Unlock = unlock.Map(value => value.GetString()) ?? "",
+            Icon = icon.Map(value => value.GetStringRequired()),
+            Order = order.Map(value => value.GetInt32()),
+            ItemId = itemId.Map(value => value.GetInt32())
         };
     }
 }

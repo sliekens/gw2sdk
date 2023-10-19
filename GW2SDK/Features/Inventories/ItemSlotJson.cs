@@ -84,18 +84,18 @@ public static class ItemSlotJson
 
         return new ItemSlot
         {
-            Id = id.Select(value => value.GetInt32()),
-            Count = count.Select(value => value.GetInt32()),
-            Charges = charges.Select(value => value.GetInt32()),
-            Skin = skin.Select(value => value.GetInt32()),
-            Upgrades = upgrades.Select(values => values.GetList(value => value.GetInt32())),
+            Id = id.Map(value => value.GetInt32()),
+            Count = count.Map(value => value.GetInt32()),
+            Charges = charges.Map(value => value.GetInt32()),
+            Skin = skin.Map(value => value.GetInt32()),
+            Upgrades = upgrades.Map(values => values.GetList(value => value.GetInt32())),
             UpgradeSlotIndices =
-                upgradeSlotIndices.Select(values => values.GetList(value => value.GetInt32())),
-            Infusions = infusions.Select(values => values.GetList(value => value.GetInt32())),
-            Dyes = dyes.Select(values => values.GetList(value => value.GetNullableInt32())),
-            Binding = binding.Select(value => value.GetEnum<ItemBinding>(missingMemberBehavior)),
-            BoundTo = boundTo.Select(value => value.GetString()) ?? "",
-            Stats = stats.Select(value => value.GetSelectedStat(missingMemberBehavior))
+                upgradeSlotIndices.Map(values => values.GetList(value => value.GetInt32())),
+            Infusions = infusions.Map(values => values.GetList(value => value.GetInt32())),
+            Dyes = dyes.Map(values => values.GetList(value => value.GetNullableInt32())),
+            Binding = binding.Map(value => value.GetEnum<ItemBinding>(missingMemberBehavior)),
+            BoundTo = boundTo.Map(value => value.GetString()) ?? "",
+            Stats = stats.Map(value => value.GetSelectedStat(missingMemberBehavior))
         };
     }
 }

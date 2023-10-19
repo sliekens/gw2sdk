@@ -51,13 +51,13 @@ public static class ContinentJson
 
         return new Continent
         {
-            Id = id.Select(value => value.GetInt32()),
-            Name = name.Select(value => value.GetStringRequired()),
+            Id = id.Map(value => value.GetInt32()),
+            Name = name.Map(value => value.GetStringRequired()),
             ContinentDimensions =
-                continentDimensions.Select(value => value.GetDimensions(missingMemberBehavior)),
-            MinZoom = minZoom.Select(value => value.GetInt32()),
-            MaxZoom = maxZoom.Select(value => value.GetInt32()),
-            Floors = floors.Select(values => values.GetList(value => value.GetInt32()))
+                continentDimensions.Map(value => value.GetDimensions(missingMemberBehavior)),
+            MinZoom = minZoom.Map(value => value.GetInt32()),
+            MaxZoom = maxZoom.Map(value => value.GetInt32()),
+            Floors = floors.Map(values => values.GetList(value => value.GetInt32()))
         };
     }
 }

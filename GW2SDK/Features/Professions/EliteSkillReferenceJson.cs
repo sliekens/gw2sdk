@@ -41,8 +41,8 @@ public static class EliteSkillReferenceJson
 
         return new EliteSkillReference
         {
-            Id = id.Select(value => value.GetInt32()),
-            Slot = slot.Select(value => value.GetEnum<SkillSlot>(missingMemberBehavior))
+            Id = id.Map(value => value.GetInt32()),
+            Slot = slot.Map(value => value.GetEnum<SkillSlot>(missingMemberBehavior))
         };
     }
 }

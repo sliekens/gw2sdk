@@ -32,8 +32,8 @@ public static class LegendaryItemJson
 
         return new LegendaryItem
         {
-            Id = id.Select(value => value.GetInt32()),
-            MaxCount = maxCount.Select(value => value.GetInt32())
+            Id = id.Map(value => value.GetInt32()),
+            MaxCount = maxCount.Map(value => value.GetInt32())
         };
     }
 }

@@ -45,9 +45,9 @@ public static class ApiKeyInfoJson
 
         return new ApiKeyInfo
         {
-            Id = id.Select(value => value.GetStringRequired()),
-            Name = name.Select(value => value.GetStringRequired()),
-            Permissions = permissions.Select(values => values.GetList(value => value.GetEnum<Permission>(missingMemberBehavior)))
+            Id = id.Map(value => value.GetStringRequired()),
+            Name = name.Map(value => value.GetStringRequired()),
+            Permissions = permissions.Map(values => values.GetList(value => value.GetEnum<Permission>(missingMemberBehavior)))
         };
     }
 }

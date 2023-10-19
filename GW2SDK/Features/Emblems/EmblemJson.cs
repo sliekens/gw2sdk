@@ -32,8 +32,8 @@ public static class EmblemJson
 
         return new Emblem
         {
-            Id = id.Select(value => value.GetInt32()),
-            Layers = layers.Select(values => values.GetList(value => value.GetStringRequired()))
+            Id = id.Map(value => value.GetInt32()),
+            Layers = layers.Map(values => values.GetList(value => value.GetStringRequired()))
         };
     }
 }

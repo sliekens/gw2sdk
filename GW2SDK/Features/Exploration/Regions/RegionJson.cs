@@ -47,13 +47,13 @@ public static class RegionJson
 
         return new Region
         {
-            Id = id.Select(value => value.GetInt32()),
-            Name = name.Select(value => value.GetStringRequired()),
+            Id = id.Map(value => value.GetInt32()),
+            Name = name.Map(value => value.GetStringRequired()),
             LabelCoordinates =
-                labelCoordinates.Select(value => value.GetCoordinate(missingMemberBehavior)),
+                labelCoordinates.Map(value => value.GetCoordinate(missingMemberBehavior)),
             ContinentRectangle =
-                continentRectangle.Select(value => value.GetContinentRectangle(missingMemberBehavior)),
-            Maps = maps.Select(
+                continentRectangle.Map(value => value.GetContinentRectangle(missingMemberBehavior)),
+            Maps = maps.Map(
                 value => value.GetMap(entry => entry.GetMap(missingMemberBehavior))
                     .ToDictionary(kvp => int.Parse(kvp.Key), kvp => kvp.Value)
             ),

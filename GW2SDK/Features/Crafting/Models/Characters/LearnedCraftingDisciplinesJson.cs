@@ -27,7 +27,7 @@ public static class LearnedCraftingDisciplinesJson
 
         return new LearnedCraftingDisciplines
         {
-            Disciplines = crafting.Select(
+            Disciplines = crafting.Map(
                 values => values.GetList(value => value.GetCraftingDiscipline(missingMemberBehavior))
             )
         };

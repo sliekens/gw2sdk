@@ -59,15 +59,15 @@ public static class BuildJson
 
         return new Build
         {
-            Name = name.Select(value => value.GetStringRequired()),
-            Profession = profession.Select(value => value.GetEnum<ProfessionName>(missingMemberBehavior)),
+            Name = name.Map(value => value.GetStringRequired()),
+            Profession = profession.Map(value => value.GetEnum<ProfessionName>(missingMemberBehavior)),
             Specializations =
-                specializations.Select(values => values.GetList(value => value.GetSpecialization(missingMemberBehavior))),
-            Skills = skills.Select(value => value.GetSkillBar(missingMemberBehavior)),
-            AquaticSkills = aquaticSkills.Select(value => value.GetSkillBar(missingMemberBehavior)),
-            Pets = pets.Select(value => value.GetPetSkillBar(missingMemberBehavior)),
-            Legends = legends.Select(values => values.GetList(value => value.GetString())),
-            AquaticLegends = aquaticLegends.Select(values => values.GetList(value => value.GetString()))
+                specializations.Map(values => values.GetList(value => value.GetSpecialization(missingMemberBehavior))),
+            Skills = skills.Map(value => value.GetSkillBar(missingMemberBehavior)),
+            AquaticSkills = aquaticSkills.Map(value => value.GetSkillBar(missingMemberBehavior)),
+            Pets = pets.Map(value => value.GetPetSkillBar(missingMemberBehavior)),
+            Legends = legends.Map(values => values.GetList(value => value.GetString())),
+            AquaticLegends = aquaticLegends.Map(values => values.GetList(value => value.GetString()))
         };
     }
 }

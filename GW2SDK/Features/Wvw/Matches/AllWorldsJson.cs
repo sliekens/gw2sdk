@@ -37,9 +37,9 @@ public static class AllWorldsJson
 
         return new AllWorlds
         {
-            Red = red.Select(values => values.GetList(value => value.GetInt32())),
-            Blue = blue.Select(values => values.GetList(value => value.GetInt32())),
-            Green = green.Select(values => values.GetList(value => value.GetInt32()))
+            Red = red.Map(values => values.GetList(value => value.GetInt32())),
+            Blue = blue.Map(values => values.GetList(value => value.GetInt32())),
+            Green = green.Map(values => values.GetList(value => value.GetInt32()))
         };
     }
 }

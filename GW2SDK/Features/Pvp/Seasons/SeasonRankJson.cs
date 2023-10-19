@@ -52,12 +52,12 @@ public static class SeasonRankJson
 
         return new SeasonRank
         {
-            Name = name.Select(value => value.GetStringRequired()),
-            Description = description.Select(value => value.GetStringRequired()),
-            Icon = icon.Select(value => value.GetStringRequired()),
-            Overlay = overlay.Select(value => value.GetStringRequired()),
-            SmallOverlay = smallOverlay.Select(value => value.GetStringRequired()),
-            Tiers = tiers.Select(values => values.GetList(value => value.GetRankTier(missingMemberBehavior)))
+            Name = name.Map(value => value.GetStringRequired()),
+            Description = description.Map(value => value.GetStringRequired()),
+            Icon = icon.Map(value => value.GetStringRequired()),
+            Overlay = overlay.Map(value => value.GetStringRequired()),
+            SmallOverlay = smallOverlay.Map(value => value.GetStringRequired()),
+            Tiers = tiers.Map(values => values.GetList(value => value.GetRankTier(missingMemberBehavior)))
         };
     }
 }

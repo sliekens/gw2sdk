@@ -57,9 +57,9 @@ public static class ComboFieldTraitFactJson
 
         return new ComboFieldTraitFact
         {
-            Text = text.Select(value => value.GetString()) ?? "",
-            Icon = icon.Select(value => value.GetString()) ?? "",
-            Field = fieldType.Select(value => value.GetEnum<ComboFieldName>(missingMemberBehavior))
+            Text = text.Map(value => value.GetString()) ?? "",
+            Icon = icon.Map(value => value.GetString()) ?? "",
+            Field = fieldType.Map(value => value.GetEnum<ComboFieldName>(missingMemberBehavior))
         };
     }
 }

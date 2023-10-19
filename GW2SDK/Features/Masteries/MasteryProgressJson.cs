@@ -32,8 +32,8 @@ public static class MasteryProgressJson
 
         return new MasteryProgress
         {
-            Id = id.Select(value => value.GetInt32()),
-            Level = level.Select(value => value.GetInt32())
+            Id = id.Map(value => value.GetInt32()),
+            Level = level.Map(value => value.GetInt32())
         };
     }
 }

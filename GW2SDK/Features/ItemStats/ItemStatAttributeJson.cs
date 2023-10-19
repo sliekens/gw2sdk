@@ -37,9 +37,9 @@ public static class ItemStatAttributeJson
 
         return new ItemStatAttribute
         {
-            Attribute = attribute.Select(value => value.GetEnum<UpgradeAttributeName>(missingMemberBehavior)),
-            Multiplier = multiplier.Select(value => value.GetDouble()),
-            Value = amount.Select(value => value.GetInt32())
+            Attribute = attribute.Map(value => value.GetEnum<UpgradeAttributeName>(missingMemberBehavior)),
+            Multiplier = multiplier.Map(value => value.GetDouble()),
+            Value = amount.Map(value => value.GetInt32())
         };
     }
 }

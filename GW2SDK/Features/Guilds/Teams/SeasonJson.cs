@@ -42,10 +42,10 @@ public static class SeasonJson
 
         return new Season
         {
-            Id = id.Select(value => value.GetStringRequired()),
-            Wins = wins.Select(value => value.GetInt32()),
-            Losses = losses.Select(value => value.GetInt32()),
-            Rating = rating.Select(value => value.GetInt32())
+            Id = id.Map(value => value.GetStringRequired()),
+            Wins = wins.Map(value => value.GetInt32()),
+            Losses = losses.Map(value => value.GetInt32()),
+            Rating = rating.Map(value => value.GetInt32())
         };
     }
 }
