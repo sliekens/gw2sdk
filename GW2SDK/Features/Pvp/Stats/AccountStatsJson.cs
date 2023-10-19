@@ -1,4 +1,4 @@
-using System.Text.Json;
+﻿using System.Text.Json;
 using GuildWars2.Json;
 
 namespace GuildWars2.Pvp.Stats;
@@ -56,11 +56,13 @@ public static class AccountStatsJson
             PvpRankPoints = pvpRankPoints.Select(value => value.GetInt32()),
             PvpRankRollovers = pvpRankRollovers.Select(value => value.GetInt32()),
             Aggregate = aggregate.Select(value => value.GetResults(missingMemberBehavior)),
-            Professions = professions.Value.EnumerateObject()
-                .ToDictionary(
-                    pair => (ProfessionName)Enum.Parse(typeof(ProfessionName), pair.Name, ignoreCase: true),
-                    pair => pair.Value.GetResults(missingMemberBehavior)
-                ),
+            Professions = professions.Select(
+                value => value.EnumerateObject()
+                    .ToDictionary(
+                        pair => (ProfessionName)Enum.Parse(typeof(ProfessionName), pair.Name, true),
+                        pair => pair.Value.GetResults(missingMemberBehavior)
+                    )
+            ),
             Ladders = ladders.Select(value => value.GetLadders(missingMemberBehavior))
         };
     }
