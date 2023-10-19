@@ -11,8 +11,8 @@ public static class AchievementTierJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember count = new("count");
-        RequiredMember points = new("points");
+        RequiredMember count = "count";
+        RequiredMember points = "points";
         foreach (var member in json.EnumerateObject())
         {
             if (member.NameEquals(count.Name))

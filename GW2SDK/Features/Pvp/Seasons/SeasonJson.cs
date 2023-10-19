@@ -11,14 +11,14 @@ public static class SeasonJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember id = new("id");
-        RequiredMember name = new("name");
-        RequiredMember start = new("start");
-        RequiredMember end = new("end");
-        RequiredMember active = new("active");
-        RequiredMember divisions = new("divisions");
-        OptionalMember ranks = new("ranks");
-        RequiredMember leaderboards = new("leaderboards");
+        RequiredMember id = "id";
+        RequiredMember name = "name";
+        RequiredMember start = "start";
+        RequiredMember end = "end";
+        RequiredMember active = "active";
+        RequiredMember divisions = "divisions";
+        OptionalMember ranks = "ranks";
+        RequiredMember leaderboards = "leaderboards";
 
         foreach (var member in json.EnumerateObject())
         {

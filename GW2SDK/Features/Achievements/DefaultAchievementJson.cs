@@ -11,18 +11,18 @@ public static class DefaultAchievementJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember id = new("id");
-        OptionalMember icon = new("icon");
-        RequiredMember name = new("name");
-        RequiredMember description = new("description");
-        RequiredMember requirement = new("requirement");
-        RequiredMember lockedText = new("locked_text");
-        RequiredMember flags = new("flags");
-        RequiredMember tiers = new("tiers");
-        OptionalMember prerequisites = new("prerequisites");
-        OptionalMember rewards = new("rewards");
-        OptionalMember bits = new("bits");
-        NullableMember pointCap = new("point_cap");
+        RequiredMember id = "id";
+        OptionalMember icon = "icon";
+        RequiredMember name = "name";
+        RequiredMember description = "description";
+        RequiredMember requirement = "requirement";
+        RequiredMember lockedText = "locked_text";
+        RequiredMember flags = "flags";
+        RequiredMember tiers = "tiers";
+        OptionalMember prerequisites = "prerequisites";
+        OptionalMember rewards = "rewards";
+        OptionalMember bits = "bits";
+        NullableMember pointCap = "point_cap";
 
         foreach (var member in json.EnumerateObject())
         {

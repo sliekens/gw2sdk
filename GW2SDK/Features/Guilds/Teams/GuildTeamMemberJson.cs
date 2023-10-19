@@ -11,8 +11,8 @@ public static class GuildTeamMemberJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember name = new("name");
-        RequiredMember role = new("role");
+        RequiredMember name = "name";
+        RequiredMember role = "role";
 
         foreach (var member in json.EnumerateObject())
         {

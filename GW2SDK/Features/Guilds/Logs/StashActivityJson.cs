@@ -11,13 +11,13 @@ public static class StashActivityJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember id = new("id");
-        RequiredMember time = new("time");
-        RequiredMember user = new("user");
-        RequiredMember operation = new("operation");
-        RequiredMember itemId = new("item_id");
-        RequiredMember count = new("count");
-        RequiredMember coins = new("coins");
+        RequiredMember id = "id";
+        RequiredMember time = "time";
+        RequiredMember user = "user";
+        RequiredMember operation = "operation";
+        RequiredMember itemId = "item_id";
+        RequiredMember count = "count";
+        RequiredMember coins = "coins";
 
         foreach (var member in json.EnumerateObject())
         {

@@ -11,12 +11,12 @@ public static class SubtokenInfoJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember name = new("name");
-        RequiredMember id = new("id");
-        RequiredMember permissions = new("permissions");
-        RequiredMember expiresAt = new("expires_at");
-        RequiredMember issuedAt = new("issued_at");
-        OptionalMember urls = new("urls");
+        RequiredMember name = "name";
+        RequiredMember id = "id";
+        RequiredMember permissions = "permissions";
+        RequiredMember expiresAt = "expires_at";
+        RequiredMember issuedAt = "issued_at";
+        OptionalMember urls = "urls";
         foreach (var member in json.EnumerateObject())
         {
             if (member.NameEquals("type"))

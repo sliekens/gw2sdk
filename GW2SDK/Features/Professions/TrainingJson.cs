@@ -11,10 +11,10 @@ public static class TrainingJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember id = new("id");
-        RequiredMember category = new("category");
-        RequiredMember name = new("name");
-        RequiredMember track = new("track");
+        RequiredMember id = "id";
+        RequiredMember category = "category";
+        RequiredMember name = "name";
+        RequiredMember track = "track";
 
         foreach (var member in json.EnumerateObject())
         {

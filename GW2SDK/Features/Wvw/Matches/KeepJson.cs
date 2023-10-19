@@ -8,15 +8,15 @@ public static class KeepJson
 {
     public static Keep GetKeep(this JsonElement json, MissingMemberBehavior missingMemberBehavior)
     {
-        RequiredMember id = new("id");
-        RequiredMember owner = new("owner");
-        RequiredMember lastFlipped = new("last_flipped");
-        RequiredMember pointsTick = new("points_tick");
-        RequiredMember pointsCapture = new("points_capture");
-        OptionalMember claimedBy = new("claimed_by");
-        NullableMember claimedAt = new("claimed_at");
-        OptionalMember yaksDelivered = new("yaks_delivered");
-        OptionalMember guildUpgrades = new("guild_upgrades");
+        RequiredMember id = "id";
+        RequiredMember owner = "owner";
+        RequiredMember lastFlipped = "last_flipped";
+        RequiredMember pointsTick = "points_tick";
+        RequiredMember pointsCapture = "points_capture";
+        OptionalMember claimedBy = "claimed_by";
+        NullableMember claimedAt = "claimed_at";
+        OptionalMember yaksDelivered = "yaks_delivered";
+        OptionalMember guildUpgrades = "guild_upgrades";
 
         foreach (var member in json.EnumerateObject())
         {

@@ -138,8 +138,8 @@ public static class SkillFactJson
                 );
         }
 
-        RequiredMember text = new("text");
-        RequiredMember icon = new("icon");
+        RequiredMember text = "text";
+        RequiredMember icon = "icon";
 
         foreach (var member in json.EnumerateObject())
         {

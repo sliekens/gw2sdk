@@ -11,10 +11,10 @@ public static class NewMessageOfTheDayJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember id = new("id");
-        RequiredMember time = new("time");
-        RequiredMember user = new("user");
-        RequiredMember motd = new("motd");
+        RequiredMember id = "id";
+        RequiredMember time = "time";
+        RequiredMember user = "user";
+        RequiredMember motd = "motd";
 
         foreach (var member in json.EnumerateObject())
         {

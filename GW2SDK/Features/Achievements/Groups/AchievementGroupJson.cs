@@ -11,11 +11,11 @@ public static class AchievementGroupJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember id = new("id");
-        RequiredMember name = new("name");
-        RequiredMember description = new("description");
-        RequiredMember order = new("order");
-        RequiredMember categories = new("categories");
+        RequiredMember id = "id";
+        RequiredMember name = "name";
+        RequiredMember description = "description";
+        RequiredMember order = "order";
+        RequiredMember categories = "categories";
         foreach (var member in json.EnumerateObject())
         {
             if (member.NameEquals(id.Name))

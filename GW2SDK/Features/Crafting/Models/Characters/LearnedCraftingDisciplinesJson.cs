@@ -11,7 +11,7 @@ public static class LearnedCraftingDisciplinesJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember crafting = new("crafting");
+        RequiredMember crafting = "crafting";
 
         foreach (var member in json.EnumerateObject())
         {

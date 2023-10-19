@@ -11,8 +11,8 @@ public static class CountNeededForUpgradeJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember upgradeId = new("upgrade_id");
-        RequiredMember count = new("count");
+        RequiredMember upgradeId = "upgrade_id";
+        RequiredMember count = "count";
 
         foreach (var member in json.EnumerateObject())
         {

@@ -11,10 +11,10 @@ public static class GuildUpgradeCostJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember kind = new("type");
-        OptionalMember name = new("name");
-        RequiredMember count = new("count");
-        NullableMember itemId = new("item_id");
+        RequiredMember kind = "type";
+        OptionalMember name = "name";
+        RequiredMember count = "count";
+        NullableMember itemId = "item_id";
 
         foreach (var member in json.EnumerateObject())
         {

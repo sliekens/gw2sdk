@@ -11,12 +11,12 @@ public static class RankChangeJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember id = new("id");
-        RequiredMember time = new("time");
-        RequiredMember user = new("user");
-        OptionalMember changedBy = new("changed_by");
-        RequiredMember oldRank = new("old_rank");
-        RequiredMember newRank = new("new_rank");
+        RequiredMember id = "id";
+        RequiredMember time = "time";
+        RequiredMember user = "user";
+        OptionalMember changedBy = "changed_by";
+        RequiredMember oldRank = "old_rank";
+        RequiredMember newRank = "new_rank";
 
         foreach (var member in json.EnumerateObject())
         {

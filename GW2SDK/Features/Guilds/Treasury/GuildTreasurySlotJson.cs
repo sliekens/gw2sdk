@@ -11,9 +11,9 @@ public static class GuildTreasurySlotJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember itemId = new("item_id");
-        RequiredMember count = new("count");
-        RequiredMember countNeededForUpgrade = new("needed_by");
+        RequiredMember itemId = "item_id";
+        RequiredMember count = "count";
+        RequiredMember countNeededForUpgrade = "needed_by";
 
         foreach (var member in json.EnumerateObject())
         {

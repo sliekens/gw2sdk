@@ -11,25 +11,25 @@ public static class HelmAquaticJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember name = new("name");
-        OptionalMember description = new("description");
-        RequiredMember level = new("level");
-        RequiredMember rarity = new("rarity");
-        RequiredMember vendorValue = new("vendor_value");
-        RequiredMember defaultSkin = new("default_skin");
-        RequiredMember gameTypes = new("game_types");
-        RequiredMember flags = new("flags");
-        RequiredMember restrictions = new("restrictions");
-        RequiredMember id = new("id");
-        RequiredMember chatLink = new("chat_link");
-        OptionalMember icon = new("icon");
-        RequiredMember weightClass = new("weight_class");
-        RequiredMember defense = new("defense");
-        RequiredMember infusionSlots = new("infusion_slots");
-        RequiredMember attributeAdjustment = new("attribute_adjustment");
-        OptionalMember infixUpgrade = new("infix_upgrade");
-        NullableMember suffixItemId = new("suffix_item_id");
-        OptionalMember statChoices = new("stat_choices");
+        RequiredMember name = "name";
+        OptionalMember description = "description";
+        RequiredMember level = "level";
+        RequiredMember rarity = "rarity";
+        RequiredMember vendorValue = "vendor_value";
+        RequiredMember defaultSkin = "default_skin";
+        RequiredMember gameTypes = "game_types";
+        RequiredMember flags = "flags";
+        RequiredMember restrictions = "restrictions";
+        RequiredMember id = "id";
+        RequiredMember chatLink = "chat_link";
+        OptionalMember icon = "icon";
+        RequiredMember weightClass = "weight_class";
+        RequiredMember defense = "defense";
+        RequiredMember infusionSlots = "infusion_slots";
+        RequiredMember attributeAdjustment = "attribute_adjustment";
+        OptionalMember infixUpgrade = "infix_upgrade";
+        NullableMember suffixItemId = "suffix_item_id";
+        OptionalMember statChoices = "stat_choices";
         foreach (var member in json.EnumerateObject())
         {
             if (member.NameEquals("type"))

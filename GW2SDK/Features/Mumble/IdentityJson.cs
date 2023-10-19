@@ -11,17 +11,17 @@ public static class IdentityJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember name = new("name");
-        RequiredMember profession = new("profession");
-        RequiredMember specializationId = new("spec");
-        RequiredMember race = new("race");
-        RequiredMember mapId = new("map_id");
-        RequiredMember map = new("map");
-        RequiredMember worldId = new("world_id");
-        RequiredMember teamColorId = new("team_color_id");
-        RequiredMember commander = new("commander");
-        RequiredMember fieldOfView = new("fov");
-        RequiredMember uiSize = new("uisz");
+        RequiredMember name = "name";
+        RequiredMember profession = "profession";
+        RequiredMember specializationId = "spec";
+        RequiredMember race = "race";
+        RequiredMember mapId = "map_id";
+        RequiredMember map = "map";
+        RequiredMember worldId = "world_id";
+        RequiredMember teamColorId = "team_color_id";
+        RequiredMember commander = "commander";
+        RequiredMember fieldOfView = "fov";
+        RequiredMember uiSize = "uisz";
 
         foreach (var member in json.EnumerateObject())
         {

@@ -11,11 +11,11 @@ public static class MountSkinJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember id = new("id");
-        RequiredMember name = new("name");
-        RequiredMember icon = new("icon");
-        RequiredMember dyeSlots = new("dye_slots");
-        RequiredMember mount = new("mount");
+        RequiredMember id = "id";
+        RequiredMember name = "name";
+        RequiredMember icon = "icon";
+        RequiredMember dyeSlots = "dye_slots";
+        RequiredMember mount = "mount";
 
         foreach (var member in json.EnumerateObject())
         {

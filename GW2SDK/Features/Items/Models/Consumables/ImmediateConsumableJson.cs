@@ -11,23 +11,23 @@ public static class ImmediateConsumableJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember name = new("name");
-        OptionalMember description = new("description");
-        RequiredMember level = new("level");
-        RequiredMember rarity = new("rarity");
-        RequiredMember vendorValue = new("vendor_value");
-        RequiredMember gameTypes = new("game_types");
-        RequiredMember flags = new("flags");
-        RequiredMember restrictions = new("restrictions");
-        RequiredMember id = new("id");
-        RequiredMember chatLink = new("chat_link");
-        OptionalMember icon = new("icon");
-        NullableMember duration = new("duration_ms");
-        NullableMember applyCount = new("apply_count");
-        OptionalMember effectName = new("name");
-        OptionalMember effectIcon = new("icon");
-        OptionalMember effectDescription = new("description");
-        NullableMember guildUpgradeId = new("guild_upgrade_id");
+        RequiredMember name = "name";
+        OptionalMember description = "description";
+        RequiredMember level = "level";
+        RequiredMember rarity = "rarity";
+        RequiredMember vendorValue = "vendor_value";
+        RequiredMember gameTypes = "game_types";
+        RequiredMember flags = "flags";
+        RequiredMember restrictions = "restrictions";
+        RequiredMember id = "id";
+        RequiredMember chatLink = "chat_link";
+        OptionalMember icon = "icon";
+        NullableMember duration = "duration_ms";
+        NullableMember applyCount = "apply_count";
+        OptionalMember effectName = "name";
+        OptionalMember effectIcon = "icon";
+        OptionalMember effectDescription = "description";
+        NullableMember guildUpgradeId = "guild_upgrade_id";
         foreach (var member in json.EnumerateObject())
         {
             if (member.NameEquals("type"))

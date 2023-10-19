@@ -15,9 +15,9 @@ public static class PercentTraitFactJson
     {
         requiresTrait = null;
         overrides = null;
-        OptionalMember text = new("text");
-        OptionalMember icon = new("icon");
-        RequiredMember percent = new("percent");
+        OptionalMember text = "text";
+        OptionalMember icon = "icon";
+        RequiredMember percent = "percent";
         foreach (var member in json.EnumerateObject())
         {
             if (member.NameEquals("type"))

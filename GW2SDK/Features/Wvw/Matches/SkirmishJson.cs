@@ -11,9 +11,9 @@ public static class SkirmishJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember id = new("id");
-        RequiredMember scores = new("scores");
-        RequiredMember mapScores = new("map_scores");
+        RequiredMember id = "id";
+        RequiredMember scores = "scores";
+        RequiredMember mapScores = "map_scores";
 
         foreach (var member in json.EnumerateObject())
         {

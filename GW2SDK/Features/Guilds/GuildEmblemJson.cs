@@ -11,9 +11,9 @@ public static class GuildEmblemJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember background = new("background");
-        RequiredMember foreground = new("foreground");
-        RequiredMember flags = new("flags");
+        RequiredMember background = "background";
+        RequiredMember foreground = "foreground";
+        RequiredMember flags = "flags";
 
         foreach (var member in json.EnumerateObject())
         {

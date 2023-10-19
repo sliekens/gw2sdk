@@ -15,9 +15,9 @@ public static class RechargeTraitFactJson
     {
         requiresTrait = null;
         overrides = null;
-        OptionalMember text = new("text");
-        OptionalMember icon = new("icon");
-        RequiredMember recharge = new("value");
+        OptionalMember text = "text";
+        OptionalMember icon = "icon";
+        RequiredMember recharge = "value";
         foreach (var member in json.EnumerateObject())
         {
             if (member.NameEquals("type"))

@@ -11,10 +11,10 @@ public static class EquipmentTabJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember tab = new("tab");
-        RequiredMember name = new("name");
-        RequiredMember equipment = new("equipment");
-        RequiredMember pvpEquipment = new("equipment_pvp");
+        RequiredMember tab = "tab";
+        RequiredMember name = "name";
+        RequiredMember equipment = "equipment";
+        RequiredMember pvpEquipment = "equipment_pvp";
 
         foreach (var member in json.EnumerateObject())
         {

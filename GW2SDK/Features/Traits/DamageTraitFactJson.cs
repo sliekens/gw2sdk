@@ -15,10 +15,10 @@ public static class DamageTraitFactJson
     {
         requiresTrait = null;
         overrides = null;
-        OptionalMember text = new("text");
-        OptionalMember icon = new("icon");
-        RequiredMember hitCount = new("hit_count");
-        RequiredMember damageMultiplier = new("dmg_multiplier");
+        OptionalMember text = "text";
+        OptionalMember icon = "icon";
+        RequiredMember hitCount = "hit_count";
+        RequiredMember damageMultiplier = "dmg_multiplier";
         foreach (var member in json.EnumerateObject())
         {
             if (member.NameEquals("type"))

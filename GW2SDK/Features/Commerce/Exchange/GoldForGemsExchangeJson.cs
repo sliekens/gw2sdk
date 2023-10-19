@@ -11,8 +11,8 @@ public static class GoldForGemsExchangeJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember coinsPerGem = new("coins_per_gem");
-        RequiredMember quantity = new("quantity");
+        RequiredMember coinsPerGem = "coins_per_gem";
+        RequiredMember quantity = "quantity";
         foreach (var member in json.EnumerateObject())
         {
             if (member.NameEquals(coinsPerGem.Name))

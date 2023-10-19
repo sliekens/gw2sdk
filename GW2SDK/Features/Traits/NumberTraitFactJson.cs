@@ -15,9 +15,9 @@ public static class NumberTraitFactJson
     {
         requiresTrait = null;
         overrides = null;
-        OptionalMember text = new("text");
-        OptionalMember icon = new("icon");
-        RequiredMember number = new("value");
+        OptionalMember text = "text";
+        OptionalMember icon = "icon";
+        RequiredMember number = "value";
         foreach (var member in json.EnumerateObject())
         {
             if (member.NameEquals("type"))

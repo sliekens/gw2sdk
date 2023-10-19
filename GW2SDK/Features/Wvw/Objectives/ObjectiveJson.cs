@@ -11,17 +11,17 @@ public static class ObjectiveJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember id = new("id");
-        RequiredMember name = new("name");
-        RequiredMember sectorId = new("sector_id");
-        RequiredMember type = new("type");
-        RequiredMember mapType = new("map_type");
-        RequiredMember mapId = new("map_id");
-        NullableMember upgradeId = new("upgrade_id");
-        OptionalMember coordinates = new("coord");
-        NullableMember labelCoordinates = new("label_coord");
-        OptionalMember marker = new("marker");
-        RequiredMember chatLink = new("chat_link");
+        RequiredMember id = "id";
+        RequiredMember name = "name";
+        RequiredMember sectorId = "sector_id";
+        RequiredMember type = "type";
+        RequiredMember mapType = "map_type";
+        RequiredMember mapId = "map_id";
+        NullableMember upgradeId = "upgrade_id";
+        OptionalMember coordinates = "coord";
+        NullableMember labelCoordinates = "label_coord";
+        OptionalMember marker = "marker";
+        RequiredMember chatLink = "chat_link";
 
         foreach (var member in json.EnumerateObject())
         {

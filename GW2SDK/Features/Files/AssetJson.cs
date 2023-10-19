@@ -8,8 +8,8 @@ public static class AssetJson
 {
     public static Asset GetAsset(this JsonElement json, MissingMemberBehavior missingMemberBehavior)
     {
-        RequiredMember id = new("id");
-        RequiredMember icon = new("icon");
+        RequiredMember id = "id";
+        RequiredMember icon = "icon";
 
         foreach (var member in json.EnumerateObject())
         {

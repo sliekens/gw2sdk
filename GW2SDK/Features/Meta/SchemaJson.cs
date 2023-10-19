@@ -11,9 +11,9 @@ public static class SchemaJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember version = new("v");
+        RequiredMember version = "v";
 
-        RequiredMember description = new("desc");
+        RequiredMember description = "desc";
 
         foreach (var member in jsonElement.EnumerateObject())
         {

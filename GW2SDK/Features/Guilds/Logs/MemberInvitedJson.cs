@@ -11,10 +11,10 @@ public static class MemberInvitedJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember id = new("id");
-        RequiredMember time = new("time");
-        RequiredMember user = new("user");
-        RequiredMember invitedBy = new("invited_by");
+        RequiredMember id = "id";
+        RequiredMember time = "time";
+        RequiredMember user = "user";
+        RequiredMember invitedBy = "invited_by";
 
         foreach (var member in json.EnumerateObject())
         {

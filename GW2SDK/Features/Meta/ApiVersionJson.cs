@@ -11,9 +11,9 @@ public static class ApiVersionJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember languages = new("langs");
-        RequiredMember routes = new("routes");
-        OptionalMember schemaVersions = new("schema_versions");
+        RequiredMember languages = "langs";
+        RequiredMember routes = "routes";
+        OptionalMember schemaVersions = "schema_versions";
 
         foreach (var member in json.EnumerateObject())
         {

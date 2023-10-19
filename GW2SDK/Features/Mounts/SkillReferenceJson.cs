@@ -11,8 +11,8 @@ public static class SkillReferenceJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember id = new("id");
-        RequiredMember slot = new("slot");
+        RequiredMember id = "id";
+        RequiredMember slot = "slot";
 
         foreach (var member in json.EnumerateObject())
         {

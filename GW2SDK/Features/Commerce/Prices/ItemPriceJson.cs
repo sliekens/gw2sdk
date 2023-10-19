@@ -11,12 +11,12 @@ public static class ItemPriceJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember id = new("id");
-        RequiredMember whitelisted = new("whitelisted");
-        RequiredMember demand = new("quantity");
-        RequiredMember bestBid = new("unit_price");
-        RequiredMember supply = new("quantity");
-        RequiredMember bestAsk = new("unit_price");
+        RequiredMember id = "id";
+        RequiredMember whitelisted = "whitelisted";
+        RequiredMember demand = "quantity";
+        RequiredMember bestBid = "unit_price";
+        RequiredMember supply = "quantity";
+        RequiredMember bestAsk = "unit_price";
 
         foreach (var member in json.EnumerateObject())
         {

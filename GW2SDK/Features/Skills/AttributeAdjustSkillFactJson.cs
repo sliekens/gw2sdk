@@ -16,10 +16,10 @@ public static class AttributeAdjustSkillFactJson
         requiresTrait = null;
         overrides = null;
 
-        OptionalMember text = new("text");
-        RequiredMember icon = new("icon");
-        NullableMember adjustment = new("value");
-        RequiredMember target = new("target");
+        OptionalMember text = "text";
+        RequiredMember icon = "icon";
+        NullableMember adjustment = "value";
+        RequiredMember target = "target";
 
         foreach (var member in json.EnumerateObject())
         {

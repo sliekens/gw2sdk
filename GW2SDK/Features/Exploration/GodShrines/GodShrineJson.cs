@@ -11,13 +11,13 @@ public static class GodShrineJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember id = new("id");
-        RequiredMember name = new("name");
-        RequiredMember nameContested = new("name_contested");
-        RequiredMember pointOfInterestId = new("poi_id");
-        RequiredMember coordinates = new("coord");
-        RequiredMember icon = new("icon");
-        RequiredMember iconContested = new("icon_contested");
+        RequiredMember id = "id";
+        RequiredMember name = "name";
+        RequiredMember nameContested = "name_contested";
+        RequiredMember pointOfInterestId = "poi_id";
+        RequiredMember coordinates = "coord";
+        RequiredMember icon = "icon";
+        RequiredMember iconContested = "icon_contested";
         foreach (var member in json.EnumerateObject())
         {
             if (member.NameEquals(id.Name))

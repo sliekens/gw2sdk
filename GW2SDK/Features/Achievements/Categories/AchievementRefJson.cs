@@ -11,10 +11,10 @@ public static class AchievementRefJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember id = new("id");
-        OptionalMember requiredAccess = new("required_access");
-        OptionalMember flags = new("flags");
-        OptionalMember level = new("level");
+        RequiredMember id = "id";
+        OptionalMember requiredAccess = "required_access";
+        OptionalMember flags = "flags";
+        OptionalMember level = "level";
 
         foreach (var member in json.EnumerateObject())
         {

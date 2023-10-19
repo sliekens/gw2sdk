@@ -11,8 +11,8 @@ public static class ItemUpgradeJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember upgrade = new("upgrade");
-        RequiredMember itemId = new("item_id");
+        RequiredMember upgrade = "upgrade";
+        RequiredMember itemId = "item_id";
         foreach (var member in json.EnumerateObject())
         {
             if (member.NameEquals(upgrade.Name))

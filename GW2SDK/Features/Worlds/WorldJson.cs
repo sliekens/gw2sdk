@@ -8,9 +8,9 @@ public static class WorldJson
 {
     public static World GetWorld(this JsonElement json, MissingMemberBehavior missingMemberBehavior)
     {
-        RequiredMember id = new("id");
-        RequiredMember name = new("name");
-        RequiredMember population = new("population");
+        RequiredMember id = "id";
+        RequiredMember name = "name";
+        RequiredMember population = "population";
         foreach (var member in json.EnumerateObject())
         {
             if (member.NameEquals(id.Name))

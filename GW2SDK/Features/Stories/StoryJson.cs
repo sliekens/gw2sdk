@@ -8,16 +8,16 @@ public static class StoryJson
 {
     public static Story GetStory(this JsonElement json, MissingMemberBehavior missingMemberBehavior)
     {
-        RequiredMember id = new("id");
-        RequiredMember season = new("season");
-        RequiredMember name = new("name");
-        RequiredMember description = new("description");
-        RequiredMember timeline = new("timeline");
-        RequiredMember level = new("level");
-        OptionalMember races = new("races");
-        RequiredMember order = new("order");
-        RequiredMember chapters = new("chapters");
-        OptionalMember flags = new("flags");
+        RequiredMember id = "id";
+        RequiredMember season = "season";
+        RequiredMember name = "name";
+        RequiredMember description = "description";
+        RequiredMember timeline = "timeline";
+        RequiredMember level = "level";
+        OptionalMember races = "races";
+        RequiredMember order = "order";
+        RequiredMember chapters = "chapters";
+        OptionalMember flags = "flags";
 
         foreach (var member in json.EnumerateObject())
         {

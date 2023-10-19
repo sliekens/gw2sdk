@@ -16,9 +16,9 @@ public static class RangeSkillFactJson
         requiresTrait = null;
         overrides = null;
 
-        RequiredMember text = new("text");
-        RequiredMember icon = new("icon");
-        RequiredMember range = new("value");
+        RequiredMember text = "text";
+        RequiredMember icon = "icon";
+        RequiredMember range = "value";
 
         foreach (var member in json.EnumerateObject())
         {

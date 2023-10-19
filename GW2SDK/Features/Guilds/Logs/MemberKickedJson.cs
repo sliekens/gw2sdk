@@ -11,10 +11,10 @@ public static class MemberKickedJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember id = new("id");
-        RequiredMember time = new("time");
-        RequiredMember user = new("user");
-        RequiredMember kickedBy = new("kicked_by");
+        RequiredMember id = "id";
+        RequiredMember time = "time";
+        RequiredMember user = "user";
+        RequiredMember kickedBy = "kicked_by";
 
         foreach (var member in json.EnumerateObject())
         {

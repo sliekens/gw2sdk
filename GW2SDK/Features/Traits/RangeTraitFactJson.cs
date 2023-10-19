@@ -15,9 +15,9 @@ public static class RangeTraitFactJson
     {
         requiresTrait = null;
         overrides = null;
-        OptionalMember text = new("text");
-        OptionalMember icon = new("icon");
-        RequiredMember range = new("value");
+        OptionalMember text = "text";
+        OptionalMember icon = "icon";
+        RequiredMember range = "value";
         foreach (var member in json.EnumerateObject())
         {
             if (member.NameEquals("type"))

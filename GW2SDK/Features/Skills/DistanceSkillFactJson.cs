@@ -16,9 +16,9 @@ public static class DistanceSkillFactJson
         requiresTrait = null;
         overrides = null;
 
-        RequiredMember text = new("text");
-        RequiredMember icon = new("icon");
-        RequiredMember distance = new("distance");
+        RequiredMember text = "text";
+        RequiredMember icon = "icon";
+        RequiredMember distance = "distance";
 
         foreach (var member in json.EnumerateObject())
         {

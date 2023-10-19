@@ -11,21 +11,21 @@ public static class AccountSummaryJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember id = new("id");
-        RequiredMember name = new("name");
-        RequiredMember age = new("age");
-        RequiredMember lastModified = new("last_modified");
-        RequiredMember world = new("world");
-        RequiredMember guilds = new("guilds");
-        OptionalMember guildLeader = new("guild_leader");
-        RequiredMember created = new("created");
-        RequiredMember access = new("access");
-        RequiredMember commander = new("commander");
-        NullableMember fractalLevel = new("fractal_level");
-        NullableMember dailyAp = new("daily_ap");
-        NullableMember monthlyAp = new("monthly_ap");
-        NullableMember wvwRank = new("wvw_rank");
-        NullableMember buildStorageSlots = new("build_storage_slots");
+        RequiredMember id = "id";
+        RequiredMember name = "name";
+        RequiredMember age = "age";
+        RequiredMember lastModified = "last_modified";
+        RequiredMember world = "world";
+        RequiredMember guilds = "guilds";
+        OptionalMember guildLeader = "guild_leader";
+        RequiredMember created = "created";
+        RequiredMember access = "access";
+        RequiredMember commander = "commander";
+        NullableMember fractalLevel = "fractal_level";
+        NullableMember dailyAp = "daily_ap";
+        NullableMember monthlyAp = "monthly_ap";
+        NullableMember wvwRank = "wvw_rank";
+        NullableMember buildStorageSlots = "build_storage_slots";
         foreach (var member in json.EnumerateObject())
         {
             if (member.NameEquals(id.Name))

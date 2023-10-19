@@ -11,8 +11,8 @@ public static class LevelRequirementJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember min = new("min");
-        RequiredMember max = new("max");
+        RequiredMember min = "min";
+        RequiredMember max = "max";
 
         foreach (var member in json.EnumerateObject())
         {

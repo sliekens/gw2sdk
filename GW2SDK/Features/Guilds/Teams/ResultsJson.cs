@@ -11,11 +11,11 @@ public static class ResultsJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember wins = new("wins");
-        RequiredMember losses = new("losses");
-        RequiredMember desertions = new("desertions");
-        RequiredMember byes = new("byes");
-        RequiredMember forfeits = new("forfeits");
+        RequiredMember wins = "wins";
+        RequiredMember losses = "losses";
+        RequiredMember desertions = "desertions";
+        RequiredMember byes = "byes";
+        RequiredMember forfeits = "forfeits";
 
         foreach (var member in json.EnumerateObject())
         {

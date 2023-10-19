@@ -11,9 +11,9 @@ public static class ApiKeyInfoJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember name = new("name");
-        RequiredMember id = new("id");
-        RequiredMember permissions = new("permissions");
+        RequiredMember name = "name";
+        RequiredMember id = "id";
+        RequiredMember permissions = "permissions";
         foreach (var member in json.EnumerateObject())
         {
             if (member.NameEquals("type"))

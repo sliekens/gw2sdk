@@ -11,9 +11,9 @@ public static class IngredientJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember type = new("type");
-        RequiredMember id = new("id");
-        RequiredMember count = new("count");
+        RequiredMember type = "type";
+        RequiredMember id = "id";
+        RequiredMember count = "count";
         foreach (var member in json.EnumerateObject())
         {
             if (member.NameEquals(type.Name))

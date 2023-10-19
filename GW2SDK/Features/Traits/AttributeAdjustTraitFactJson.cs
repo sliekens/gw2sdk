@@ -15,10 +15,10 @@ public static class AttributeAdjustTraitFactJson
     {
         requiresTrait = null;
         overrides = null;
-        OptionalMember text = new("text");
-        OptionalMember icon = new("icon");
-        RequiredMember adjustment = new("value");
-        RequiredMember target = new("target");
+        OptionalMember text = "text";
+        OptionalMember icon = "icon";
+        RequiredMember adjustment = "value";
+        RequiredMember target = "target";
         foreach (var member in json.EnumerateObject())
         {
             if (member.NameEquals("type"))

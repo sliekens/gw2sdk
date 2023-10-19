@@ -21,24 +21,24 @@ public static class TrinketJson
                 return json.GetRing(missingMemberBehavior);
         }
 
-        RequiredMember name = new("name");
-        OptionalMember description = new("description");
-        RequiredMember level = new("level");
-        RequiredMember rarity = new("rarity");
-        RequiredMember vendorValue = new("vendor_value");
-        RequiredMember gameTypes = new("game_types");
-        RequiredMember flags = new("flags");
-        RequiredMember restrictions = new("restrictions");
-        RequiredMember id = new("id");
-        RequiredMember chatLink = new("chat_link");
-        OptionalMember icon = new("icon");
-        RequiredMember infusionSlots = new("infusion_slots");
-        RequiredMember attributeAdjustment = new("attribute_adjustment");
-        OptionalMember infixUpgrade = new("infix_upgrade");
-        NullableMember suffixItemId = new("suffix_item_id");
-        OptionalMember statChoices = new("stat_choices");
-        OptionalMember upgradesInto = new("upgrades_into");
-        OptionalMember upgradesFrom = new("upgrades_from");
+        RequiredMember name = "name";
+        OptionalMember description = "description";
+        RequiredMember level = "level";
+        RequiredMember rarity = "rarity";
+        RequiredMember vendorValue = "vendor_value";
+        RequiredMember gameTypes = "game_types";
+        RequiredMember flags = "flags";
+        RequiredMember restrictions = "restrictions";
+        RequiredMember id = "id";
+        RequiredMember chatLink = "chat_link";
+        OptionalMember icon = "icon";
+        RequiredMember infusionSlots = "infusion_slots";
+        RequiredMember attributeAdjustment = "attribute_adjustment";
+        OptionalMember infixUpgrade = "infix_upgrade";
+        NullableMember suffixItemId = "suffix_item_id";
+        OptionalMember statChoices = "stat_choices";
+        OptionalMember upgradesInto = "upgrades_into";
+        OptionalMember upgradesFrom = "upgrades_from";
         foreach (var member in json.EnumerateObject())
         {
             if (member.NameEquals("type"))

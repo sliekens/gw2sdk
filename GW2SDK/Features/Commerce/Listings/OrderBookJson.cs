@@ -11,9 +11,9 @@ public static class OrderBookJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember id = new("id");
-        RequiredMember demand = new("buys");
-        RequiredMember supply = new("sells");
+        RequiredMember id = "id";
+        RequiredMember demand = "buys";
+        RequiredMember supply = "sells";
 
         foreach (var member in json.EnumerateObject())
         {

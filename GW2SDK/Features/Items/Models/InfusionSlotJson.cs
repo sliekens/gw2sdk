@@ -11,8 +11,8 @@ public static class InfusionSlotJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember flags = new("flags");
-        NullableMember itemId = new("item_id");
+        RequiredMember flags = "flags";
+        NullableMember itemId = "item_id";
         foreach (var member in json.EnumerateObject())
         {
             if (member.NameEquals(flags.Name))

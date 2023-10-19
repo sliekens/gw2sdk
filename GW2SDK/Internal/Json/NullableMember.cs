@@ -14,19 +14,21 @@ internal readonly ref struct NullableMember
 
     public bool IsUndefinedOrNull => IsUndefined || Value.ValueKind == Null;
 
-    public NullableMember(string name)
+    private NullableMember(ReadOnlySpan<char> name)
     {
-        Name = name.AsSpan();
+        Name = name;
     }
 
-    private NullableMember(string name, JsonElement value)
+    private NullableMember(ReadOnlySpan<char> name, JsonElement value)
     {
-        Name = name.AsSpan();
+        Name = name;
         Value = value;
     }
 
+    public static implicit operator NullableMember(string name) => new(name.AsSpan());
+
     public static implicit operator NullableMember(JsonProperty member) =>
-        new(member.Name, member.Value);
+        new(member.Name.AsSpan(), member.Value);
 
     public TValue? Select<TValue>(Func<JsonElement, TValue> resultSelector) where TValue : struct
     {

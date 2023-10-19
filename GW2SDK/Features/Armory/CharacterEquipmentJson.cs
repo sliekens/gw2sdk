@@ -11,7 +11,7 @@ public static class CharacterEquipmentJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember equipment = new("equipment");
+        RequiredMember equipment = "equipment";
 
         foreach (var member in json.EnumerateObject())
         {

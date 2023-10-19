@@ -15,11 +15,11 @@ public static class BuffConversionTraitFactJson
     {
         requiresTrait = null;
         overrides = null;
-        OptionalMember text = new("text");
-        OptionalMember icon = new("icon");
-        RequiredMember percent = new("percent");
-        RequiredMember source = new("source");
-        RequiredMember target = new("target");
+        OptionalMember text = "text";
+        OptionalMember icon = "icon";
+        RequiredMember percent = "percent";
+        RequiredMember source = "source";
+        RequiredMember target = "target";
         foreach (var member in json.EnumerateObject())
         {
             if (member.NameEquals("type"))

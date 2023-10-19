@@ -11,11 +11,11 @@ public static class HeroSkinJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember id = new("id");
-        RequiredMember name = new("name");
-        RequiredMember icon = new("icon");
-        RequiredMember @default = new("default");
-        RequiredMember unlockItems = new("unlock_items");
+        RequiredMember id = "id";
+        RequiredMember name = "name";
+        RequiredMember icon = "icon";
+        RequiredMember @default = "default";
+        RequiredMember unlockItems = "unlock_items";
 
         foreach (var member in json.EnumerateObject())
         {

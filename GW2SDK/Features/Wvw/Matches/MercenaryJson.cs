@@ -11,11 +11,11 @@ public static class MercenaryJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember id = new("id");
-        RequiredMember owner = new("owner");
-        RequiredMember lastFlipped = new("last_flipped");
-        RequiredMember pointsTick = new("points_tick");
-        RequiredMember pointsCapture = new("points_capture");
+        RequiredMember id = "id";
+        RequiredMember owner = "owner";
+        RequiredMember lastFlipped = "last_flipped";
+        RequiredMember pointsTick = "points_tick";
+        RequiredMember pointsCapture = "points_capture";
 
         foreach (var member in json.EnumerateObject())
         {

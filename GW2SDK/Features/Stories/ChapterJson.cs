@@ -11,7 +11,7 @@ public static class ChapterJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember name = new("name");
+        RequiredMember name = "name";
 
         foreach (var member in json.EnumerateObject())
         {

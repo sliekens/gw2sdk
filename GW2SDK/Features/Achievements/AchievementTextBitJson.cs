@@ -11,7 +11,7 @@ public static class AchievementTextBitJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember text = new("text");
+        RequiredMember text = "text";
         foreach (var member in json.EnumerateObject())
         {
             if (member.NameEquals("type"))

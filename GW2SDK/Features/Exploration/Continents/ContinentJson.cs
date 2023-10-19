@@ -11,12 +11,12 @@ public static class ContinentJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember name = new("name");
-        RequiredMember continentDimensions = new("continent_dims");
-        RequiredMember minZoom = new("min_zoom");
-        RequiredMember maxZoom = new("max_zoom");
-        RequiredMember floors = new("floors");
-        RequiredMember id = new("id");
+        RequiredMember name = "name";
+        RequiredMember continentDimensions = "continent_dims";
+        RequiredMember minZoom = "min_zoom";
+        RequiredMember maxZoom = "max_zoom";
+        RequiredMember floors = "floors";
+        RequiredMember id = "id";
         foreach (var member in json.EnumerateObject())
         {
             if (member.NameEquals(name.Name))

@@ -11,22 +11,22 @@ public static class MonsterSkillJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember id = new("id");
-        RequiredMember name = new("name");
-        OptionalMember facts = new("facts");
-        OptionalMember traitedFacts = new("traited_facts");
-        RequiredMember description = new("description");
-        OptionalMember icon = new("icon");
-        NullableMember weaponType = new("weapon_type");
-        OptionalMember professions = new("professions");
-        NullableMember slot = new("slot");
-        NullableMember flipSkill = new("flip_skill");
-        NullableMember nextChain = new("next_chain");
-        NullableMember prevChain = new("prev_chain");
-        RequiredMember flags = new("flags");
-        NullableMember specialization = new("specialization");
-        RequiredMember chatLink = new("chat_link");
-        OptionalMember categories = new("categories");
+        RequiredMember id = "id";
+        RequiredMember name = "name";
+        OptionalMember facts = "facts";
+        OptionalMember traitedFacts = "traited_facts";
+        RequiredMember description = "description";
+        OptionalMember icon = "icon";
+        NullableMember weaponType = "weapon_type";
+        OptionalMember professions = "professions";
+        NullableMember slot = "slot";
+        NullableMember flipSkill = "flip_skill";
+        NullableMember nextChain = "next_chain";
+        NullableMember prevChain = "prev_chain";
+        RequiredMember flags = "flags";
+        NullableMember specialization = "specialization";
+        RequiredMember chatLink = "chat_link";
+        OptionalMember categories = "categories";
 
         foreach (var member in json.EnumerateObject())
         {

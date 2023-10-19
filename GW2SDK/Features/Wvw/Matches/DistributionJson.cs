@@ -11,9 +11,9 @@ public static class DistributionJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember red = new("red");
-        RequiredMember blue = new("blue");
-        RequiredMember green = new("green");
+        RequiredMember red = "red";
+        RequiredMember blue = "blue";
+        RequiredMember green = "green";
 
         foreach (var member in json.EnumerateObject())
         {

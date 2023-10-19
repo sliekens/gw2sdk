@@ -11,18 +11,18 @@ public static class GuildJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember level = new("level");
-        RequiredMember motd = new("motd");
-        RequiredMember influence = new("influence");
-        RequiredMember aetherium = new("aetherium");
-        RequiredMember resonance = new("resonance");
-        RequiredMember favor = new("favor");
-        RequiredMember memberCount = new("member_count");
-        RequiredMember memberCapacity = new("member_capacity");
-        RequiredMember id = new("id");
-        RequiredMember name = new("name");
-        RequiredMember tag = new("tag");
-        RequiredMember emblem = new("emblem");
+        RequiredMember level = "level";
+        RequiredMember motd = "motd";
+        RequiredMember influence = "influence";
+        RequiredMember aetherium = "aetherium";
+        RequiredMember resonance = "resonance";
+        RequiredMember favor = "favor";
+        RequiredMember memberCount = "member_count";
+        RequiredMember memberCapacity = "member_capacity";
+        RequiredMember id = "id";
+        RequiredMember name = "name";
+        RequiredMember tag = "tag";
+        RequiredMember emblem = "emblem";
 
         foreach (var member in json.EnumerateObject())
         {

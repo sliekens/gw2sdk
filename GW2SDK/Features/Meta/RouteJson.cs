@@ -8,10 +8,10 @@ public static class RouteJson
 {
     public static Route GetRoute(this JsonElement json, MissingMemberBehavior missingMemberBehavior)
     {
-        RequiredMember path = new("path");
-        RequiredMember lang = new("lang");
-        OptionalMember auth = new("auth");
-        RequiredMember active = new("active");
+        RequiredMember path = "path";
+        RequiredMember lang = "lang";
+        OptionalMember auth = "auth";
+        RequiredMember active = "active";
 
         foreach (var member in json.EnumerateObject())
         {

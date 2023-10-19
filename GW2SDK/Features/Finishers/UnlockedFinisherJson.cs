@@ -11,9 +11,9 @@ public static class UnlockedFinisherJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember id = new("id");
-        RequiredMember permanent = new("permanent");
-        NullableMember quantity = new("quantity");
+        RequiredMember id = "id";
+        RequiredMember permanent = "permanent";
+        NullableMember quantity = "quantity";
 
         foreach (var member in json.EnumerateObject())
         {

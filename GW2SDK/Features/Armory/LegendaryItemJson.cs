@@ -11,8 +11,8 @@ public static class LegendaryItemJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember id = new("id");
-        RequiredMember maxCount = new("max_count");
+        RequiredMember id = "id";
+        RequiredMember maxCount = "max_count";
 
         foreach (var member in json.EnumerateObject())
         {

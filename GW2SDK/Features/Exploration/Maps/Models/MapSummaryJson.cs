@@ -8,19 +8,19 @@ public static class MapSummaryJson
 {
     public static MapSummary GetMapSummary(this JsonElement json, MissingMemberBehavior missingMemberBehavior)
     {
-        RequiredMember id = new("id");
-        RequiredMember name = new("name");
-        RequiredMember minLevel = new("min_level");
-        RequiredMember maxLevel = new("max_level");
-        RequiredMember defaultFloor = new("default_floor");
-        RequiredMember kind = new("type");
-        RequiredMember floors = new("floors");
-        NullableMember regionId = new("region_id");
-        OptionalMember regionName = new("region_name");
-        NullableMember continentId = new("continent_id");
-        OptionalMember continentName = new("continent_name");
-        RequiredMember mapRectangle = new("map_rect");
-        RequiredMember continentRectangle = new("continent_rect");
+        RequiredMember id = "id";
+        RequiredMember name = "name";
+        RequiredMember minLevel = "min_level";
+        RequiredMember maxLevel = "max_level";
+        RequiredMember defaultFloor = "default_floor";
+        RequiredMember kind = "type";
+        RequiredMember floors = "floors";
+        NullableMember regionId = "region_id";
+        OptionalMember regionName = "region_name";
+        NullableMember continentId = "continent_id";
+        OptionalMember continentName = "continent_name";
+        RequiredMember mapRectangle = "map_rect";
+        RequiredMember continentRectangle = "continent_rect";
         foreach (var member in json.EnumerateObject())
         {
             if (member.NameEquals(id.Name))

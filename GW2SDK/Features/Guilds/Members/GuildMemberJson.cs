@@ -11,9 +11,9 @@ public static class GuildMemberJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember name = new("name");
-        RequiredMember rank = new("rank");
-        NullableMember joined = new("joined");
+        RequiredMember name = "name";
+        RequiredMember rank = "rank";
+        NullableMember joined = "joined";
 
         foreach (var member in json.EnumerateObject())
         {

@@ -16,9 +16,9 @@ public static class StunBreakSkillFactJson
         requiresTrait = null;
         overrides = null;
 
-        RequiredMember text = new("text");
-        RequiredMember icon = new("icon");
-        RequiredMember stunBreak = new("value");
+        RequiredMember text = "text";
+        RequiredMember icon = "icon";
+        RequiredMember stunBreak = "value";
 
         foreach (var member in json.EnumerateObject())
         {

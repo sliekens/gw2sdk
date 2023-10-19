@@ -11,11 +11,11 @@ public static class MatchOverviewJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember id = new("id");
-        RequiredMember worlds = new("worlds");
-        RequiredMember allWorlds = new("all_worlds");
-        RequiredMember startTime = new("start_time");
-        RequiredMember endTime = new("end_time");
+        RequiredMember id = "id";
+        RequiredMember worlds = "worlds";
+        RequiredMember allWorlds = "all_worlds";
+        RequiredMember startTime = "start_time";
+        RequiredMember endTime = "end_time";
 
         foreach (var member in json.EnumerateObject())
         {

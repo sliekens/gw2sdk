@@ -15,9 +15,9 @@ public static class ComboFieldTraitFactJson
     {
         requiresTrait = null;
         overrides = null;
-        OptionalMember text = new("text");
-        OptionalMember icon = new("icon");
-        RequiredMember fieldType = new("field_type");
+        OptionalMember text = "text";
+        OptionalMember icon = "icon";
+        RequiredMember fieldType = "field_type";
         foreach (var member in json.EnumerateObject())
         {
             if (member.NameEquals("type"))

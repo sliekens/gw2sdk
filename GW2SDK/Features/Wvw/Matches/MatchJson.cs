@@ -8,17 +8,17 @@ public static class MatchJson
 {
     public static Match GetMatch(this JsonElement json, MissingMemberBehavior missingMemberBehavior)
     {
-        RequiredMember id = new("id");
-        RequiredMember startTime = new("start_time");
-        RequiredMember endTime = new("end_time");
-        RequiredMember scores = new("scores");
-        RequiredMember worlds = new("worlds");
-        RequiredMember allWorlds = new("all_worlds");
-        RequiredMember deaths = new("deaths");
-        RequiredMember kills = new("kills");
-        RequiredMember victoryPoints = new("victory_points");
-        RequiredMember skirmishes = new("skirmishes");
-        RequiredMember maps = new("maps");
+        RequiredMember id = "id";
+        RequiredMember startTime = "start_time";
+        RequiredMember endTime = "end_time";
+        RequiredMember scores = "scores";
+        RequiredMember worlds = "worlds";
+        RequiredMember allWorlds = "all_worlds";
+        RequiredMember deaths = "deaths";
+        RequiredMember kills = "kills";
+        RequiredMember victoryPoints = "victory_points";
+        RequiredMember skirmishes = "skirmishes";
+        RequiredMember maps = "maps";
 
         foreach (var member in json.EnumerateObject())
         {

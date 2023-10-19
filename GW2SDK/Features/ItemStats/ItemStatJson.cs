@@ -11,9 +11,9 @@ public static class ItemStatJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember id = new("id");
-        RequiredMember name = new("name");
-        RequiredMember attributes = new("attributes");
+        RequiredMember id = "id";
+        RequiredMember name = "name";
+        RequiredMember attributes = "attributes";
 
         foreach (var member in json.EnumerateObject())
         {

@@ -11,11 +11,11 @@ public static class GuildBankTabJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember upgradeId = new("upgrade_id");
-        RequiredMember size = new("size");
-        RequiredMember coins = new("coins");
-        OptionalMember note = new("note");
-        RequiredMember inventory = new("inventory");
+        RequiredMember upgradeId = "upgrade_id";
+        RequiredMember size = "size";
+        RequiredMember coins = "coins";
+        OptionalMember note = "note";
+        RequiredMember inventory = "inventory";
 
         foreach (var member in json.EnumerateObject())
         {

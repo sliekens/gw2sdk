@@ -11,9 +11,9 @@ public static class SuperAdventureBoxProgressJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember zones = new("zones");
-        RequiredMember unlocks = new("unlocks");
-        RequiredMember songs = new("songs");
+        RequiredMember zones = "zones";
+        RequiredMember unlocks = "unlocks";
+        RequiredMember songs = "songs";
 
         foreach (var member in json.EnumerateObject())
         {

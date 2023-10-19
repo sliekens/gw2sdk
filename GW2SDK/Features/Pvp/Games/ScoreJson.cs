@@ -11,8 +11,8 @@ public static class ScoreJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember red = new("red");
-        RequiredMember blue = new("blue");
+        RequiredMember red = "red";
+        RequiredMember blue = "blue";
 
         foreach (var member in json.EnumerateObject())
         {

@@ -15,9 +15,9 @@ public static class TimeTraitFactJson
     {
         requiresTrait = null;
         overrides = null;
-        OptionalMember text = new("text");
-        OptionalMember icon = new("icon");
-        RequiredMember duration = new("duration");
+        OptionalMember text = "text";
+        OptionalMember icon = "icon";
+        RequiredMember duration = "duration";
         foreach (var member in json.EnumerateObject())
         {
             if (member.NameEquals("type"))

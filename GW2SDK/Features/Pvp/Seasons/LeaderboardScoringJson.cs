@@ -11,11 +11,11 @@ public static class LeaderboardScoringJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember id = new("id");
-        RequiredMember type = new("type");
-        RequiredMember description = new("description");
-        RequiredMember name = new("name");
-        RequiredMember ordering = new("ordering");
+        RequiredMember id = "id";
+        RequiredMember type = "type";
+        RequiredMember description = "description";
+        RequiredMember name = "name";
+        RequiredMember ordering = "ordering";
 
         foreach (var member in json.EnumerateObject())
         {

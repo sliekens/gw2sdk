@@ -11,11 +11,11 @@ public static class AbilityJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember id = new("id");
-        RequiredMember name = new("name");
-        RequiredMember description = new("description");
-        RequiredMember icon = new("icon");
-        RequiredMember ranks = new("ranks");
+        RequiredMember id = "id";
+        RequiredMember name = "name";
+        RequiredMember description = "description";
+        RequiredMember icon = "icon";
+        RequiredMember ranks = "ranks";
 
         foreach (var member in json.EnumerateObject())
         {

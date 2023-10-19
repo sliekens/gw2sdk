@@ -11,10 +11,10 @@ public static class ProfessionSkillReferenceJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember id = new("id");
-        RequiredMember slot = new("slot");
-        NullableMember source = new("source");
-        NullableMember attunement = new("attunement");
+        RequiredMember id = "id";
+        RequiredMember slot = "slot";
+        NullableMember source = "source";
+        NullableMember attunement = "attunement";
 
         foreach (var member in json.EnumerateObject())
         {

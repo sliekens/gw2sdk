@@ -11,11 +11,11 @@ public static class MatchScoresJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember id = new("id");
-        RequiredMember scores = new("scores");
-        RequiredMember victoryPoints = new("victory_points");
-        RequiredMember skirmishes = new("skirmishes");
-        RequiredMember maps = new("maps");
+        RequiredMember id = "id";
+        RequiredMember scores = "scores";
+        RequiredMember victoryPoints = "victory_points";
+        RequiredMember skirmishes = "skirmishes";
+        RequiredMember maps = "maps";
 
         foreach (var member in json.EnumerateObject())
         {

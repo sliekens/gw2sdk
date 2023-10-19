@@ -8,13 +8,13 @@ public static class MapJson
 {
     public static Map GetMap(this JsonElement json, MissingMemberBehavior missingMemberBehavior)
     {
-        RequiredMember id = new("id");
-        RequiredMember type = new("type");
-        RequiredMember scores = new("scores");
-        RequiredMember bonuses = new("bonuses");
-        RequiredMember objectives = new("objectives");
-        RequiredMember deaths = new("deaths");
-        RequiredMember kills = new("kills");
+        RequiredMember id = "id";
+        RequiredMember type = "type";
+        RequiredMember scores = "scores";
+        RequiredMember bonuses = "bonuses";
+        RequiredMember objectives = "objectives";
+        RequiredMember deaths = "deaths";
+        RequiredMember kills = "kills";
 
         foreach (var member in json.EnumerateObject())
         {

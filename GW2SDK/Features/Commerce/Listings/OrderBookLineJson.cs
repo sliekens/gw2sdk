@@ -11,9 +11,9 @@ public static class OrderBookLineJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember listings = new("listings");
-        RequiredMember unitPrice = new("unit_price");
-        RequiredMember quantity = new("quantity");
+        RequiredMember listings = "listings";
+        RequiredMember unitPrice = "unit_price";
+        RequiredMember quantity = "quantity";
 
         foreach (var member in json.EnumerateObject())
         {

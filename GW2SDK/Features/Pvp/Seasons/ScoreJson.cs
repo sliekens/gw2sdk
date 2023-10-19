@@ -8,8 +8,8 @@ public static class ScoreJson
 {
     public static Score GetScore(this JsonElement json, MissingMemberBehavior missingMemberBehavior)
     {
-        RequiredMember id = new("id");
-        RequiredMember score = new("value");
+        RequiredMember id = "id";
+        RequiredMember score = "value";
 
         foreach (var member in json.EnumerateObject())
         {

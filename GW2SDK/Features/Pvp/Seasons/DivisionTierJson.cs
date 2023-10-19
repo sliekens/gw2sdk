@@ -11,7 +11,7 @@ public static class DivisionTierJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember points = new("points");
+        RequiredMember points = "points";
 
         foreach (var member in json.EnumerateObject())
         {

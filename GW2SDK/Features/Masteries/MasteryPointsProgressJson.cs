@@ -11,8 +11,8 @@ public static class MasteryPointsProgressJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember totals = new("totals");
-        RequiredMember unlocked = new("unlocked");
+        RequiredMember totals = "totals";
+        RequiredMember unlocked = "unlocked";
 
         foreach (var member in json.EnumerateObject())
         {

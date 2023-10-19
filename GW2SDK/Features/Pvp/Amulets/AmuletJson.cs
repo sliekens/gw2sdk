@@ -11,10 +11,10 @@ public static class AmuletJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember id = new("id");
-        RequiredMember name = new("name");
-        RequiredMember icon = new("icon");
-        RequiredMember attributes = new("attributes");
+        RequiredMember id = "id";
+        RequiredMember name = "name";
+        RequiredMember icon = "icon";
+        RequiredMember attributes = "attributes";
 
         foreach (var member in json.EnumerateObject())
         {

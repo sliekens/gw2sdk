@@ -35,8 +35,8 @@ public static class GuildLogJson
                 return json.GetGuildUpgradeActivity(missingMemberBehavior);
         }
 
-        RequiredMember id = new("id");
-        RequiredMember time = new("time");
+        RequiredMember id = "id";
+        RequiredMember time = "time";
 
         foreach (var member in json.EnumerateObject())
         {

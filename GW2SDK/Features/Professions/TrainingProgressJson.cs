@@ -11,9 +11,9 @@ public static class TrainingProgressJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember id = new("id");
-        RequiredMember spent = new("spent");
-        RequiredMember done = new("done");
+        RequiredMember id = "id";
+        RequiredMember spent = "spent";
+        RequiredMember done = "done";
 
         foreach (var member in json.EnumerateObject())
         {

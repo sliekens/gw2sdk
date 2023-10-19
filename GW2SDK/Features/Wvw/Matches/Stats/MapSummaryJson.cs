@@ -11,10 +11,10 @@ public static class MapSummaryJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember id = new("id");
-        RequiredMember type = new("type");
-        RequiredMember deaths = new("deaths");
-        RequiredMember kills = new("kills");
+        RequiredMember id = "id";
+        RequiredMember type = "type";
+        RequiredMember deaths = "deaths";
+        RequiredMember kills = "kills";
 
         foreach (var member in json.EnumerateObject())
         {

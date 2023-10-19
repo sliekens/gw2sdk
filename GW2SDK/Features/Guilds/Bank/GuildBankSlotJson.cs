@@ -16,8 +16,8 @@ public static class GuildBankSlotJson
             return null;
         }
 
-        RequiredMember itemId = new("id");
-        RequiredMember count = new("count");
+        RequiredMember itemId = "id";
+        RequiredMember count = "count";
 
         foreach (var member in json.EnumerateObject())
         {

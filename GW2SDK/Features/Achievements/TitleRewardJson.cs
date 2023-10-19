@@ -11,7 +11,7 @@ public static class TitleRewardJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember id = new("id");
+        RequiredMember id = "id";
         foreach (var member in json.EnumerateObject())
         {
             if (member.NameEquals("type"))

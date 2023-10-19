@@ -16,9 +16,9 @@ public static class HealingAdjustSkillFactJson
         requiresTrait = null;
         overrides = null;
 
-        RequiredMember text = new("text");
-        RequiredMember icon = new("icon");
-        RequiredMember hitCount = new("hit_count");
+        RequiredMember text = "text";
+        RequiredMember icon = "icon";
+        RequiredMember hitCount = "hit_count";
 
         foreach (var member in json.EnumerateObject())
         {

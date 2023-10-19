@@ -16,9 +16,9 @@ public static class RechargeSkillFactJson
         requiresTrait = null;
         overrides = null;
 
-        RequiredMember text = new("text");
-        RequiredMember icon = new("icon");
-        RequiredMember recharge = new("value");
+        RequiredMember text = "text";
+        RequiredMember icon = "icon";
+        RequiredMember recharge = "value";
 
         foreach (var member in json.EnumerateObject())
         {

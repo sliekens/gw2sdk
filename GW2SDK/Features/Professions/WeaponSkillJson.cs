@@ -11,10 +11,10 @@ public static class WeaponSkillJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember id = new("id");
-        RequiredMember slot = new("slot");
-        NullableMember offhand = new("offhand");
-        NullableMember attunement = new("attunement");
+        RequiredMember id = "id";
+        RequiredMember slot = "slot";
+        NullableMember offhand = "offhand";
+        NullableMember attunement = "attunement";
 
         foreach (var member in json.EnumerateObject())
         {

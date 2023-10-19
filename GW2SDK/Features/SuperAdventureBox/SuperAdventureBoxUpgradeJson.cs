@@ -11,8 +11,8 @@ public static class SuperAdventureBoxUpgradeJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember id = new("id");
-        OptionalMember name = new("name");
+        RequiredMember id = "id";
+        OptionalMember name = "name";
 
         foreach (var member in json.EnumerateObject())
         {

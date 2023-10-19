@@ -8,8 +8,8 @@ public static class BonusJson
 {
     public static Bonus GetBonus(this JsonElement json, MissingMemberBehavior missingMemberBehavior)
     {
-        RequiredMember type = new("type");
-        RequiredMember owner = new("owner");
+        RequiredMember type = "type";
+        RequiredMember owner = "owner";
 
         foreach (var member in json.EnumerateObject())
         {

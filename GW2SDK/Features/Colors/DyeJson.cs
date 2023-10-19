@@ -8,15 +8,15 @@ public static class DyeJson
 {
     public static Dye GetDye(this JsonElement json, MissingMemberBehavior missingMemberBehavior)
     {
-        RequiredMember id = new("id");
-        RequiredMember name = new("name");
-        RequiredMember baseRgb = new("base_rgb");
-        RequiredMember cloth = new("cloth");
-        RequiredMember leather = new("leather");
-        RequiredMember metal = new("metal");
-        OptionalMember fur = new("fur");
-        NullableMember itemId = new("item");
-        RequiredMember categories = new("categories");
+        RequiredMember id = "id";
+        RequiredMember name = "name";
+        RequiredMember baseRgb = "base_rgb";
+        RequiredMember cloth = "cloth";
+        RequiredMember leather = "leather";
+        RequiredMember metal = "metal";
+        OptionalMember fur = "fur";
+        NullableMember itemId = "item";
+        RequiredMember categories = "categories";
 
         foreach (var member in json.EnumerateObject())
         {

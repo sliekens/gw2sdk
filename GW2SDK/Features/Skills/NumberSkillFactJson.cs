@@ -16,9 +16,9 @@ public static class NumberSkillFactJson
         requiresTrait = null;
         overrides = null;
 
-        OptionalMember text = new("text");
-        RequiredMember icon = new("icon");
-        RequiredMember number = new("value");
+        OptionalMember text = "text";
+        RequiredMember icon = "icon";
+        RequiredMember number = "value";
 
         foreach (var member in json.EnumerateObject())
         {

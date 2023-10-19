@@ -11,8 +11,8 @@ public static class DyeSlotJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember colorId = new("color_id");
-        RequiredMember material = new("material");
+        RequiredMember colorId = "color_id";
+        RequiredMember material = "material";
         foreach (var member in json.EnumerateObject())
         {
             if (member.NameEquals(colorId.Name))

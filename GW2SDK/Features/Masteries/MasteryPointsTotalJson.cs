@@ -11,9 +11,9 @@ public static class MasteryPointsTotalJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember region = new("region");
-        RequiredMember spent = new("spent");
-        RequiredMember earned = new("earned");
+        RequiredMember region = "region";
+        RequiredMember spent = "spent";
+        RequiredMember earned = "earned";
 
         foreach (var member in json.EnumerateObject())
         {

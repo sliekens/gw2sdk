@@ -11,8 +11,8 @@ public static class SuperAdventureBoxSongJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember id = new("id");
-        RequiredMember name = new("name");
+        RequiredMember id = "id";
+        RequiredMember name = "name";
 
         foreach (var member in json.EnumerateObject())
         {

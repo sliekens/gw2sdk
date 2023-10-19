@@ -11,12 +11,12 @@ public static class MasteryLevelJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember name = new("name");
-        RequiredMember description = new("description");
-        RequiredMember instruction = new("instruction");
-        RequiredMember icon = new("icon");
-        RequiredMember pointCost = new("point_cost");
-        RequiredMember experienceCost = new("exp_cost");
+        RequiredMember name = "name";
+        RequiredMember description = "description";
+        RequiredMember instruction = "instruction";
+        RequiredMember icon = "icon";
+        RequiredMember pointCost = "point_cost";
+        RequiredMember experienceCost = "exp_cost";
 
         foreach (var member in json.EnumerateObject())
         {

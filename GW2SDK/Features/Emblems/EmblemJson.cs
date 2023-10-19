@@ -11,8 +11,8 @@ public static class EmblemJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember id = new("id");
-        RequiredMember layers = new("layers");
+        RequiredMember id = "id";
+        RequiredMember layers = "layers";
 
         foreach (var member in json.EnumerateObject())
         {

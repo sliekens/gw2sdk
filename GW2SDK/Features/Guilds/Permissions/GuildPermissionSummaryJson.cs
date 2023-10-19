@@ -11,9 +11,9 @@ public static class GuildPermissionSummaryJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember id = new("id");
-        RequiredMember name = new("name");
-        RequiredMember description = new("description");
+        RequiredMember id = "id";
+        RequiredMember name = "name";
+        RequiredMember description = "description";
 
         foreach (var member in json.EnumerateObject())
         {

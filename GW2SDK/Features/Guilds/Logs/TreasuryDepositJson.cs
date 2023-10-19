@@ -11,11 +11,11 @@ public static class TreasuryDepositJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember id = new("id");
-        RequiredMember time = new("time");
-        RequiredMember user = new("user");
-        RequiredMember itemId = new("item_id");
-        RequiredMember count = new("count");
+        RequiredMember id = "id";
+        RequiredMember time = "time";
+        RequiredMember user = "user";
+        RequiredMember itemId = "item_id";
+        RequiredMember count = "count";
 
         foreach (var member in json.EnumerateObject())
         {

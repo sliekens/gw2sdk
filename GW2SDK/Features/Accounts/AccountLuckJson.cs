@@ -21,7 +21,7 @@ public static class AccountLuckJson
         // The endpoint returns an array with a singular object containing the following:
         // id (string) – The string "luck".
         // value (number) – The amount of luck consumed
-        RequiredMember value = new("value");
+        RequiredMember value = "value";
 
         foreach (var member in json[0].EnumerateObject())
         {

@@ -11,9 +11,9 @@ public static class HeroStatsJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember offense = new("offense");
-        RequiredMember defense = new("defense");
-        RequiredMember speed = new("speed");
+        RequiredMember offense = "offense";
+        RequiredMember defense = "defense";
+        RequiredMember speed = "speed";
 
         foreach (var member in json.EnumerateObject())
         {

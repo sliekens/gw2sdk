@@ -11,13 +11,13 @@ public static class LeaderboardEntryJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember name = new("name");
-        OptionalMember guildId = new("id");
-        OptionalMember teamName = new("team");
-        NullableMember teamId = new("team_id");
-        RequiredMember rank = new("rank");
-        RequiredMember date = new("date");
-        RequiredMember scores = new("scores");
+        RequiredMember name = "name";
+        OptionalMember guildId = "id";
+        OptionalMember teamName = "team";
+        NullableMember teamId = "team_id";
+        RequiredMember rank = "rank";
+        RequiredMember date = "date";
+        RequiredMember scores = "scores";
 
         foreach (var member in json.EnumerateObject())
         {

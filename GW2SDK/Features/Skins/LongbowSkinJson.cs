@@ -11,14 +11,14 @@ public static class LongbowSkinJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember name = new("name");
-        OptionalMember description = new("description");
-        RequiredMember rarity = new("rarity");
-        RequiredMember flags = new("flags");
-        RequiredMember restrictions = new("restrictions");
-        RequiredMember id = new("id");
-        OptionalMember icon = new("icon");
-        RequiredMember damageType = new("damage_type");
+        RequiredMember name = "name";
+        OptionalMember description = "description";
+        RequiredMember rarity = "rarity";
+        RequiredMember flags = "flags";
+        RequiredMember restrictions = "restrictions";
+        RequiredMember id = "id";
+        OptionalMember icon = "icon";
+        RequiredMember damageType = "damage_type";
         foreach (var member in json.EnumerateObject())
         {
             if (member.NameEquals("type"))

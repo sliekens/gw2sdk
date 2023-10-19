@@ -11,16 +11,16 @@ public static class SelectedModificationJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        NullableMember agonyResistance = new("AgonyResistance");
-        NullableMember boonDuration = new("BoonDuration");
-        NullableMember conditionDamage = new("ConditionDamage");
-        NullableMember conditionDuration = new("ConditionDuration");
-        NullableMember critDamage = new("CritDamage");
-        NullableMember healing = new("Healing");
-        NullableMember power = new("Power");
-        NullableMember precision = new("Precision");
-        NullableMember toughness = new("Toughness");
-        NullableMember vitality = new("Vitality");
+        NullableMember agonyResistance = "AgonyResistance";
+        NullableMember boonDuration = "BoonDuration";
+        NullableMember conditionDamage = "ConditionDamage";
+        NullableMember conditionDuration = "ConditionDuration";
+        NullableMember critDamage = "CritDamage";
+        NullableMember healing = "Healing";
+        NullableMember power = "Power";
+        NullableMember precision = "Precision";
+        NullableMember toughness = "Toughness";
+        NullableMember vitality = "Vitality";
         foreach (var member in json.EnumerateObject())
         {
             if (member.NameEquals(agonyResistance.Name))

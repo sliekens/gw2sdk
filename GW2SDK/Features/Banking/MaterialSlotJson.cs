@@ -11,10 +11,10 @@ public static class MaterialSlotJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember id = new("id");
-        RequiredMember category = new("category");
-        OptionalMember binding = new("binding");
-        RequiredMember count = new("count");
+        RequiredMember id = "id";
+        RequiredMember category = "category";
+        OptionalMember binding = "binding";
+        RequiredMember count = "count";
 
         foreach (var member in json.EnumerateObject())
         {

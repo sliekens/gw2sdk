@@ -11,9 +11,9 @@ public static class CraftingDisciplineJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember discipline = new("discipline");
-        RequiredMember rating = new("rating");
-        RequiredMember active = new("active");
+        RequiredMember discipline = "discipline";
+        RequiredMember rating = "rating";
+        RequiredMember active = "active";
 
         foreach (var member in json.EnumerateObject())
         {

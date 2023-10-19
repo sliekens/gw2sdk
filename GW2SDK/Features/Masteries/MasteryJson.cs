@@ -11,13 +11,13 @@ public static class MasteryJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember id = new("id");
-        RequiredMember name = new("name");
-        RequiredMember requirement = new("requirement");
-        RequiredMember order = new("order");
-        RequiredMember background = new("background");
-        RequiredMember region = new("region");
-        RequiredMember levels = new("levels");
+        RequiredMember id = "id";
+        RequiredMember name = "name";
+        RequiredMember requirement = "requirement";
+        RequiredMember order = "order";
+        RequiredMember background = "background";
+        RequiredMember region = "region";
+        RequiredMember levels = "levels";
 
         foreach (var member in json.EnumerateObject())
         {

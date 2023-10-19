@@ -8,15 +8,15 @@ public static class HubJson
 {
     public static Hub GetHub(this JsonElement json, MissingMemberBehavior missingMemberBehavior)
     {
-        RequiredMember id = new("id");
-        RequiredMember name = new("name");
-        RequiredMember description = new("description");
-        RequiredMember buildTime = new("build_time");
-        RequiredMember icon = new("icon");
-        RequiredMember requiredLevel = new("required_level");
-        RequiredMember experience = new("experience");
-        RequiredMember prerequisites = new("prerequisites");
-        RequiredMember costs = new("costs");
+        RequiredMember id = "id";
+        RequiredMember name = "name";
+        RequiredMember description = "description";
+        RequiredMember buildTime = "build_time";
+        RequiredMember icon = "icon";
+        RequiredMember requiredLevel = "required_level";
+        RequiredMember experience = "experience";
+        RequiredMember prerequisites = "prerequisites";
+        RequiredMember costs = "costs";
 
         foreach (var member in json.EnumerateObject())
         {

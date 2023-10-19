@@ -11,9 +11,9 @@ public static class DailyAchievementJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember id = new("id");
-        RequiredMember level = new("level");
-        OptionalMember requiredAccess = new("required_access");
+        RequiredMember id = "id";
+        RequiredMember level = "level";
+        OptionalMember requiredAccess = "required_access";
 
         foreach (var member in json.EnumerateObject())
         {

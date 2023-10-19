@@ -11,12 +11,12 @@ public static class FinisherJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember id = new("id");
-        RequiredMember unlockDetails = new("unlock_details");
-        RequiredMember unlockItems = new("unlock_items");
-        RequiredMember order = new("order");
-        RequiredMember icon = new("icon");
-        RequiredMember name = new("name");
+        RequiredMember id = "id";
+        RequiredMember unlockDetails = "unlock_details";
+        RequiredMember unlockItems = "unlock_items";
+        RequiredMember order = "order";
+        RequiredMember icon = "icon";
+        RequiredMember name = "name";
 
         foreach (var member in json.EnumerateObject())
         {

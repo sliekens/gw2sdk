@@ -8,11 +8,11 @@ public static class OrderJson
 {
     public static Order GetOrder(this JsonElement json, MissingMemberBehavior missingMemberBehavior)
     {
-        RequiredMember id = new("id");
-        RequiredMember itemId = new("item_id");
-        RequiredMember price = new("price");
-        RequiredMember quantity = new("quantity");
-        RequiredMember created = new("created");
+        RequiredMember id = "id";
+        RequiredMember itemId = "item_id";
+        RequiredMember price = "price";
+        RequiredMember quantity = "quantity";
+        RequiredMember created = "created";
 
         foreach (var member in json.EnumerateObject())
         {

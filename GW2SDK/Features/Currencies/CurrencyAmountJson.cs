@@ -11,8 +11,8 @@ public static class CurrencyAmountJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember currencyId = new("id");
-        RequiredMember amount = new("value");
+        RequiredMember currencyId = "id";
+        RequiredMember amount = "value";
 
         foreach (var member in json.EnumerateObject())
         {

@@ -12,18 +12,18 @@ public static class EquipmentItemJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember id = new("id");
-        NullableMember count = new("count");
-        NullableMember slot = new("slot");
-        OptionalMember upgrades = new("upgrades");
-        OptionalMember infusions = new("infusions");
-        NullableMember skin = new("skin");
-        OptionalMember stats = new("stats");
-        OptionalMember binding = new("binding");
-        OptionalMember boundTo = new("bound_to");
-        RequiredMember location = new("location");
-        OptionalMember tabs = new("tabs");
-        OptionalMember dyes = new("dyes");
+        RequiredMember id = "id";
+        NullableMember count = "count";
+        NullableMember slot = "slot";
+        OptionalMember upgrades = "upgrades";
+        OptionalMember infusions = "infusions";
+        NullableMember skin = "skin";
+        OptionalMember stats = "stats";
+        OptionalMember binding = "binding";
+        OptionalMember boundTo = "bound_to";
+        RequiredMember location = "location";
+        OptionalMember tabs = "tabs";
+        OptionalMember dyes = "dyes";
 
         foreach (var member in json.EnumerateObject())
         {

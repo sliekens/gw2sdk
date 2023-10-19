@@ -11,9 +11,9 @@ public static class StandingJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember seasonId = new("season_id");
-        RequiredMember current = new("current");
-        RequiredMember best = new("best");
+        RequiredMember seasonId = "season_id";
+        RequiredMember current = "current";
+        RequiredMember best = "best";
 
         foreach (var member in json.EnumerateObject())
         {

@@ -11,12 +11,12 @@ public static class SectorJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        OptionalMember name = new("name");
-        RequiredMember level = new("level");
-        RequiredMember coordinates = new("coord");
-        RequiredMember boundaries = new("bounds");
-        RequiredMember id = new("id");
-        RequiredMember chatLink = new("chat_link");
+        OptionalMember name = "name";
+        RequiredMember level = "level";
+        RequiredMember coordinates = "coord";
+        RequiredMember boundaries = "bounds";
+        RequiredMember id = "id";
+        RequiredMember chatLink = "chat_link";
         foreach (var member in json.EnumerateObject())
         {
             if (member.NameEquals(name.Name))

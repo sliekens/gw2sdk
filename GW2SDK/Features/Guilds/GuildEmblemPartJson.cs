@@ -11,8 +11,8 @@ public static class GuildEmblemPartJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember id = new("id");
-        RequiredMember colors = new("colors");
+        RequiredMember id = "id";
+        RequiredMember colors = "colors";
 
         foreach (var member in json.EnumerateObject())
         {

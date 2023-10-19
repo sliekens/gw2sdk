@@ -11,17 +11,17 @@ public static class GuildConsumableRecipeJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember outputItemId = new("output_item_id");
-        RequiredMember outputItemCount = new("output_item_count");
-        RequiredMember minRating = new("min_rating");
-        RequiredMember timeToCraft = new("time_to_craft_ms");
-        RequiredMember disciplines = new("disciplines");
-        RequiredMember flags = new("flags");
-        RequiredMember ingredients = new("ingredients");
-        OptionalMember guildIngredients = new("guild_ingredients");
-        RequiredMember outputUpgradeId = new("output_upgrade_id");
-        RequiredMember id = new("id");
-        RequiredMember chatLink = new("chat_link");
+        RequiredMember outputItemId = "output_item_id";
+        RequiredMember outputItemCount = "output_item_count";
+        RequiredMember minRating = "min_rating";
+        RequiredMember timeToCraft = "time_to_craft_ms";
+        RequiredMember disciplines = "disciplines";
+        RequiredMember flags = "flags";
+        RequiredMember ingredients = "ingredients";
+        OptionalMember guildIngredients = "guild_ingredients";
+        RequiredMember outputUpgradeId = "output_upgrade_id";
+        RequiredMember id = "id";
+        RequiredMember chatLink = "chat_link";
         foreach (var member in json.EnumerateObject())
         {
             if (member.NameEquals("type"))

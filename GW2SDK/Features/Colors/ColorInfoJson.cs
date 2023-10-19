@@ -11,12 +11,12 @@ public static class ColorInfoJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember brightness = new("brightness");
-        RequiredMember contrast = new("contrast");
-        RequiredMember hue = new("hue");
-        RequiredMember saturation = new("saturation");
-        RequiredMember lightness = new("lightness");
-        RequiredMember rgb = new("rgb");
+        RequiredMember brightness = "brightness";
+        RequiredMember contrast = "contrast";
+        RequiredMember hue = "hue";
+        RequiredMember saturation = "saturation";
+        RequiredMember lightness = "lightness";
+        RequiredMember rgb = "rgb";
 
         foreach (var member in json.EnumerateObject())
         {

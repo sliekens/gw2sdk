@@ -8,9 +8,9 @@ public static class RankJson
 {
     public static Rank GetRank(this JsonElement json, MissingMemberBehavior missingMemberBehavior)
     {
-        RequiredMember id = new("id");
-        RequiredMember title = new("title");
-        RequiredMember minRank = new("min_rank");
+        RequiredMember id = "id";
+        RequiredMember title = "title";
+        RequiredMember minRank = "min_rank";
 
         foreach (var member in json.EnumerateObject())
         {

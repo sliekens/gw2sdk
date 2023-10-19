@@ -14,9 +14,9 @@ public static class BagJson
             return null;
         }
 
-        RequiredMember id = new("id");
-        RequiredMember size = new("size");
-        RequiredMember inventory = new("inventory");
+        RequiredMember id = "id";
+        RequiredMember size = "size";
+        RequiredMember inventory = "inventory";
         foreach (var member in json.EnumerateObject())
         {
             if (member.NameEquals(id.Name))

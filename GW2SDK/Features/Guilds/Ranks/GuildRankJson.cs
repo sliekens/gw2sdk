@@ -11,10 +11,10 @@ public static class GuildRankJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember id = new("id");
-        RequiredMember order = new("order");
-        RequiredMember permissions = new("permissions");
-        RequiredMember iconHref = new("icon");
+        RequiredMember id = "id";
+        RequiredMember order = "order";
+        RequiredMember permissions = "permissions";
+        RequiredMember iconHref = "icon";
 
         foreach (var member in json.EnumerateObject())
         {

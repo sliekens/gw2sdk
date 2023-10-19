@@ -11,12 +11,12 @@ public static class SeasonRankJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember name = new("name");
-        RequiredMember description = new("description");
-        RequiredMember icon = new("icon");
-        RequiredMember overlay = new("overlay");
-        RequiredMember smallOverlay = new("overlay_small");
-        RequiredMember tiers = new("tiers");
+        RequiredMember name = "name";
+        RequiredMember description = "description";
+        RequiredMember icon = "icon";
+        RequiredMember overlay = "overlay";
+        RequiredMember smallOverlay = "overlay_small";
+        RequiredMember tiers = "tiers";
 
         foreach (var member in json.EnumerateObject())
         {

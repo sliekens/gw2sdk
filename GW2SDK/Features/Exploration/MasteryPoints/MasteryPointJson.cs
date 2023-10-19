@@ -11,9 +11,9 @@ public static class MasteryPointJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember coordinates = new("coord");
-        RequiredMember id = new("id");
-        RequiredMember region = new("region");
+        RequiredMember coordinates = "coord";
+        RequiredMember id = "id";
+        RequiredMember region = "region";
         foreach (var member in json.EnumerateObject())
         {
             if (member.NameEquals(coordinates.Name))

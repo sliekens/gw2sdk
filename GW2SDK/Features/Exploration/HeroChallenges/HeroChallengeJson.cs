@@ -11,10 +11,10 @@ public static class HeroChallengeJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember coordinates = new("coord");
+        RequiredMember coordinates = "coord";
 
         // The 'id' is missing from hero points in End of Dragon maps
-        OptionalMember id = new("id");
+        OptionalMember id = "id";
         foreach (var member in json.EnumerateObject())
         {
             if (member.NameEquals(coordinates.Name))

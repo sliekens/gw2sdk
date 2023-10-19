@@ -11,17 +11,17 @@ public static class SpecializationJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember id = new("id");
-        RequiredMember name = new("name");
-        RequiredMember profession = new("profession");
-        RequiredMember elite = new("elite");
-        RequiredMember minorTraits = new("minor_traits");
-        RequiredMember majorTraits = new("major_traits");
-        NullableMember weaponTrait = new("weapon_trait");
-        RequiredMember icon = new("icon");
-        RequiredMember background = new("background");
-        OptionalMember professionIconBig = new("profession_icon_big");
-        OptionalMember professionIcon = new("profession_icon");
+        RequiredMember id = "id";
+        RequiredMember name = "name";
+        RequiredMember profession = "profession";
+        RequiredMember elite = "elite";
+        RequiredMember minorTraits = "minor_traits";
+        RequiredMember majorTraits = "major_traits";
+        NullableMember weaponTrait = "weapon_trait";
+        RequiredMember icon = "icon";
+        RequiredMember background = "background";
+        OptionalMember professionIconBig = "profession_icon_big";
+        OptionalMember professionIcon = "profession_icon";
 
         foreach (var member in json.EnumerateObject())
         {

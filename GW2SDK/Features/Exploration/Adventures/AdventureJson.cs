@@ -11,10 +11,10 @@ public static class AdventureJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember coordinates = new("coord");
-        RequiredMember id = new("id");
-        RequiredMember name = new("name");
-        RequiredMember description = new("description");
+        RequiredMember coordinates = "coord";
+        RequiredMember id = "id";
+        RequiredMember name = "name";
+        RequiredMember description = "description";
         foreach (var member in json.EnumerateObject())
         {
             if (member.NameEquals(coordinates.Name))

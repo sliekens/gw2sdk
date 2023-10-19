@@ -11,8 +11,8 @@ public static class PetSkillBarJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember terrestrial = new("terrestrial");
-        RequiredMember aquatic = new("aquatic");
+        RequiredMember terrestrial = "terrestrial";
+        RequiredMember aquatic = "aquatic";
 
         foreach (var member in json.EnumerateObject())
         {

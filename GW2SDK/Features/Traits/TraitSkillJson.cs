@@ -11,14 +11,14 @@ public static class TraitSkillJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember name = new("name");
-        RequiredMember facts = new("facts");
-        OptionalMember traitedFacts = new("traited_facts");
-        RequiredMember description = new("description");
-        RequiredMember icon = new("icon");
-        RequiredMember id = new("id");
-        RequiredMember chatLink = new("chat_link");
-        OptionalMember categories = new("categories");
+        RequiredMember name = "name";
+        RequiredMember facts = "facts";
+        OptionalMember traitedFacts = "traited_facts";
+        RequiredMember description = "description";
+        RequiredMember icon = "icon";
+        RequiredMember id = "id";
+        RequiredMember chatLink = "chat_link";
+        OptionalMember categories = "categories";
         foreach (var member in json.EnumerateObject())
         {
             if (member.NameEquals(name.Name))

@@ -11,10 +11,10 @@ public static class InviteDeclinedJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember id = new("id");
-        RequiredMember time = new("time");
-        RequiredMember user = new("user");
-        RequiredMember declinedBy = new("declined_by");
+        RequiredMember id = "id";
+        RequiredMember time = "time";
+        RequiredMember user = "user";
+        RequiredMember declinedBy = "declined_by";
 
         foreach (var member in json.EnumerateObject())
         {

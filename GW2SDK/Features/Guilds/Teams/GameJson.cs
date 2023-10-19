@@ -11,16 +11,16 @@ public static class GameJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember id = new("id");
-        RequiredMember mapId = new("map_id");
-        RequiredMember started = new("started");
-        RequiredMember ended = new("ended");
-        RequiredMember result = new("result");
-        RequiredMember team = new("team");
-        RequiredMember ratingType = new("rating_type");
-        OptionalMember ratingChange = new("rating_change");
-        OptionalMember seasonId = new("season");
-        RequiredMember score = new("scores");
+        RequiredMember id = "id";
+        RequiredMember mapId = "map_id";
+        RequiredMember started = "started";
+        RequiredMember ended = "ended";
+        RequiredMember result = "result";
+        RequiredMember team = "team";
+        RequiredMember ratingType = "rating_type";
+        OptionalMember ratingChange = "rating_change";
+        OptionalMember seasonId = "season";
+        RequiredMember score = "scores";
 
         foreach (var member in json.EnumerateObject())
         {

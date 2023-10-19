@@ -16,13 +16,13 @@ public static class PrefixedBuffSkillFactJson
         requiresTrait = null;
         overrides = null;
 
-        RequiredMember text = new("text");
-        RequiredMember icon = new("icon");
-        NullableMember duration = new("duration");
-        OptionalMember status = new("status");
-        OptionalMember description = new("description");
-        NullableMember applyCount = new("apply_count");
-        RequiredMember prefix = new("prefix");
+        RequiredMember text = "text";
+        RequiredMember icon = "icon";
+        NullableMember duration = "duration";
+        OptionalMember status = "status";
+        OptionalMember description = "description";
+        NullableMember applyCount = "apply_count";
+        RequiredMember prefix = "prefix";
 
         foreach (var member in json.EnumerateObject())
         {

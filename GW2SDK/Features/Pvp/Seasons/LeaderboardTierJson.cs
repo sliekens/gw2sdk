@@ -11,10 +11,10 @@ public static class LeaderboardTierJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        OptionalMember color = new("color");
-        OptionalMember type = new("type");
-        OptionalMember name = new("name");
-        RequiredMember range = new("range");
+        OptionalMember color = "color";
+        OptionalMember type = "type";
+        OptionalMember name = "name";
+        RequiredMember range = "range";
 
         foreach (var member in json.EnumerateObject())
         {

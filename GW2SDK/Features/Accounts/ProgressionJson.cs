@@ -11,8 +11,8 @@ public static class ProgressionJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember progressId = new("id");
-        RequiredMember progress = new("value");
+        RequiredMember progressId = "id";
+        RequiredMember progress = "value";
 
         foreach (var member in json.EnumerateObject())
         {

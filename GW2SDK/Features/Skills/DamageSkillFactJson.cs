@@ -16,10 +16,10 @@ public static class DamageSkillFactJson
         requiresTrait = null;
         overrides = null;
 
-        RequiredMember text = new("text");
-        RequiredMember icon = new("icon");
-        RequiredMember hitCount = new("hit_count");
-        RequiredMember damageMultiplier = new("dmg_multiplier");
+        RequiredMember text = "text";
+        RequiredMember icon = "icon";
+        RequiredMember hitCount = "hit_count";
+        RequiredMember damageMultiplier = "dmg_multiplier";
 
         foreach (var member in json.EnumerateObject())
         {

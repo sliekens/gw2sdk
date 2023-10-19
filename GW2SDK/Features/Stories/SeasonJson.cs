@@ -11,10 +11,10 @@ public static class SeasonJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember id = new("id");
-        RequiredMember name = new("name");
-        RequiredMember order = new("order");
-        RequiredMember stories = new("stories");
+        RequiredMember id = "id";
+        RequiredMember name = "name";
+        RequiredMember order = "order";
+        RequiredMember stories = "stories";
 
         foreach (var member in json.EnumerateObject())
         {

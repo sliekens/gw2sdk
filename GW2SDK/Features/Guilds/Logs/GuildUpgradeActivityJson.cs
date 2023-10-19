@@ -11,14 +11,14 @@ public static class GuildUpgradeActivityJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember id = new("id");
-        RequiredMember time = new("time");
-        OptionalMember user = new("user");
-        RequiredMember action = new("action");
-        RequiredMember upgradeId = new("upgrade_id");
-        NullableMember recipeId = new("recipe_id");
-        NullableMember itemId = new("item_id");
-        NullableMember count = new("count");
+        RequiredMember id = "id";
+        RequiredMember time = "time";
+        OptionalMember user = "user";
+        RequiredMember action = "action";
+        RequiredMember upgradeId = "upgrade_id";
+        NullableMember recipeId = "recipe_id";
+        NullableMember itemId = "item_id";
+        NullableMember count = "count";
 
         foreach (var member in json.EnumerateObject())
         {

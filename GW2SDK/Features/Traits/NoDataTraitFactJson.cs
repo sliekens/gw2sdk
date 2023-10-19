@@ -15,8 +15,8 @@ public static class NoDataTraitFactJson
     {
         requiresTrait = null;
         overrides = null;
-        OptionalMember text = new("text");
-        OptionalMember icon = new("icon");
+        OptionalMember text = "text";
+        OptionalMember icon = "icon";
         foreach (var member in json.EnumerateObject())
         {
             if (member.NameEquals("type"))

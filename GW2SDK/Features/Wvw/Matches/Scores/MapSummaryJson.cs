@@ -11,9 +11,9 @@ public static class MapSummaryJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember id = new("id");
-        RequiredMember type = new("type");
-        RequiredMember scores = new("scores");
+        RequiredMember id = "id";
+        RequiredMember type = "type";
+        RequiredMember scores = "scores";
 
         foreach (var member in json.EnumerateObject())
         {

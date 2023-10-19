@@ -15,9 +15,9 @@ public static class UnblockableTraitFactJson
     {
         requiresTrait = null;
         overrides = null;
-        OptionalMember text = new("text");
-        OptionalMember icon = new("icon");
-        RequiredMember unblockable = new("value");
+        OptionalMember text = "text";
+        OptionalMember icon = "icon";
+        RequiredMember unblockable = "value";
         foreach (var member in json.EnumerateObject())
         {
             if (member.NameEquals("type"))

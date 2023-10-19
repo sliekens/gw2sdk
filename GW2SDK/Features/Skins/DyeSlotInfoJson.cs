@@ -11,17 +11,17 @@ public static class DyeSlotInfoJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember @default = new("default");
-        OptionalMember asuraFemale = new("AsuraFemale");
-        OptionalMember asuraMale = new("AsuraMale");
-        OptionalMember charrFemale = new("CharrFemale");
-        OptionalMember charrMale = new("CharrMale");
-        OptionalMember humanFemale = new("HumanFemale");
-        OptionalMember humanMale = new("HumanMale");
-        OptionalMember nornFemale = new("NornFemale");
-        OptionalMember nornMale = new("NornMale");
-        OptionalMember sylvariFemale = new("SylvariFemale");
-        OptionalMember sylvariMale = new("SylvariMale");
+        RequiredMember @default = "default";
+        OptionalMember asuraFemale = "AsuraFemale";
+        OptionalMember asuraMale = "AsuraMale";
+        OptionalMember charrFemale = "CharrFemale";
+        OptionalMember charrMale = "CharrMale";
+        OptionalMember humanFemale = "HumanFemale";
+        OptionalMember humanMale = "HumanMale";
+        OptionalMember nornFemale = "NornFemale";
+        OptionalMember nornMale = "NornMale";
+        OptionalMember sylvariFemale = "SylvariFemale";
+        OptionalMember sylvariMale = "SylvariMale";
         foreach (var member in json.EnumerateObject())
         {
             if (member.NameEquals(@default.Name))

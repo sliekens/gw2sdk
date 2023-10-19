@@ -11,8 +11,8 @@ public static class EncounterJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember id = new("id");
-        RequiredMember type = new("type");
+        RequiredMember id = "id";
+        RequiredMember type = "type";
 
         foreach (var member in json.EnumerateObject())
         {

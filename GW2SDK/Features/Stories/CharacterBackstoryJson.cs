@@ -11,7 +11,7 @@ public static class CharacterBackstoryJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember backstory = new("backstory");
+        RequiredMember backstory = "backstory";
 
         foreach (var member in json.EnumerateObject())  
         {

@@ -16,31 +16,31 @@ public static class CharacterJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember name = new("name");
-        RequiredMember race = new("race");
-        RequiredMember gender = new("gender");
-        RequiredMember flags = new("flags");
-        RequiredMember profession = new("profession");
-        RequiredMember level = new("level");
-        OptionalMember guild = new("guild");
-        RequiredMember age = new("age");
-        RequiredMember lastModified = new("last_modified");
-        RequiredMember created = new("created");
-        RequiredMember deaths = new("deaths");
-        RequiredMember crafting = new("crafting");
-        NullableMember title = new("title");
-        RequiredMember backstory = new("backstory");
-        OptionalMember wvwAbilities = new("wvw_abilities");
-        NullableMember buildTabsUnlocked = new("build_tabs_unlocked");
-        NullableMember activeBuildTab = new("active_build_tab");
-        OptionalMember buildTabs = new("build_tabs");
-        NullableMember equipmentTabsUnlocked = new("equipment_tabs_unlocked");
-        NullableMember activeEquipmentTab = new("active_equipment_tab");
-        OptionalMember equipment = new("equipment");
-        OptionalMember equipmentTabs = new("equipment_tabs");
-        OptionalMember recipes = new("recipes");
-        OptionalMember training = new("training");
-        OptionalMember bags = new("bags");
+        RequiredMember name = "name";
+        RequiredMember race = "race";
+        RequiredMember gender = "gender";
+        RequiredMember flags = "flags";
+        RequiredMember profession = "profession";
+        RequiredMember level = "level";
+        OptionalMember guild = "guild";
+        RequiredMember age = "age";
+        RequiredMember lastModified = "last_modified";
+        RequiredMember created = "created";
+        RequiredMember deaths = "deaths";
+        RequiredMember crafting = "crafting";
+        NullableMember title = "title";
+        RequiredMember backstory = "backstory";
+        OptionalMember wvwAbilities = "wvw_abilities";
+        NullableMember buildTabsUnlocked = "build_tabs_unlocked";
+        NullableMember activeBuildTab = "active_build_tab";
+        OptionalMember buildTabs = "build_tabs";
+        NullableMember equipmentTabsUnlocked = "equipment_tabs_unlocked";
+        NullableMember activeEquipmentTab = "active_equipment_tab";
+        OptionalMember equipment = "equipment";
+        OptionalMember equipmentTabs = "equipment_tabs";
+        OptionalMember recipes = "recipes";
+        OptionalMember training = "training";
+        OptionalMember bags = "bags";
 
         foreach (var member in json.EnumerateObject())
         {

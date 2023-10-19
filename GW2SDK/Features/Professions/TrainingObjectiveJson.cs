@@ -19,7 +19,7 @@ public static class TrainingObjectiveJson
                 return json.GetTraitObjective(missingMemberBehavior);
         }
 
-        RequiredMember cost = new("cost");
+        RequiredMember cost = "cost";
         foreach (var member in json.EnumerateObject())
         {
             if (member.NameEquals("type"))

@@ -11,8 +11,8 @@ public static class ProductRequirementJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember product = new("product");
-        RequiredMember condition = new("condition");
+        RequiredMember product = "product";
+        RequiredMember condition = "condition";
 
         foreach (var member in json.EnumerateObject())
         {

@@ -23,22 +23,22 @@ public static class UpgradeComponentJson
                 return json.GetSigil(missingMemberBehavior);
         }
 
-        RequiredMember name = new("name");
-        OptionalMember description = new("description");
-        RequiredMember level = new("level");
-        RequiredMember rarity = new("rarity");
-        RequiredMember vendorValue = new("vendor_value");
-        RequiredMember gameTypes = new("game_types");
-        RequiredMember flags = new("flags");
-        RequiredMember restrictions = new("restrictions");
-        RequiredMember id = new("id");
-        RequiredMember chatLink = new("chat_link");
-        OptionalMember icon = new("icon");
-        RequiredMember upgradeComponentFlags = new("flags");
-        RequiredMember infusionUpgradeFlags = new("infusion_upgrade_flags");
-        RequiredMember attributeAdjustment = new("attribute_adjustment");
-        RequiredMember infixUpgrade = new("infix_upgrade");
-        RequiredMember suffix = new("suffix");
+        RequiredMember name = "name";
+        OptionalMember description = "description";
+        RequiredMember level = "level";
+        RequiredMember rarity = "rarity";
+        RequiredMember vendorValue = "vendor_value";
+        RequiredMember gameTypes = "game_types";
+        RequiredMember flags = "flags";
+        RequiredMember restrictions = "restrictions";
+        RequiredMember id = "id";
+        RequiredMember chatLink = "chat_link";
+        OptionalMember icon = "icon";
+        RequiredMember upgradeComponentFlags = "flags";
+        RequiredMember infusionUpgradeFlags = "infusion_upgrade_flags";
+        RequiredMember attributeAdjustment = "attribute_adjustment";
+        RequiredMember infixUpgrade = "infix_upgrade";
+        RequiredMember suffix = "suffix";
         foreach (var member in json.EnumerateObject())
         {
             if (member.NameEquals("type"))

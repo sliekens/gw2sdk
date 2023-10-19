@@ -9,12 +9,12 @@ public static class FloorJson
 {
     public static Floor GetFloor(this JsonElement json, MissingMemberBehavior missingMemberBehavior)
     {
-        RequiredMember textureDimensions = new("texture_dims");
-        OptionalMember clampedView = new("clamped_view");
-        RequiredMember regions = new("regions");
+        RequiredMember textureDimensions = "texture_dims";
+        OptionalMember clampedView = "clamped_view";
+        RequiredMember regions = "regions";
 
 
-        RequiredMember id = new("id");
+        RequiredMember id = "id";
         foreach (var member in json.EnumerateObject())
         {
             if (member.NameEquals(textureDimensions.Name))

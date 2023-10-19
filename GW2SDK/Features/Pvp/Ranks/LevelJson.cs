@@ -8,9 +8,9 @@ public static class LevelJson
 {
     public static Level GetLevel(this JsonElement json, MissingMemberBehavior missingMemberBehavior)
     {
-        RequiredMember minLevel = new("min_rank");
-        RequiredMember maxLevel = new("max_rank");
-        RequiredMember points = new("points");
+        RequiredMember minLevel = "min_rank";
+        RequiredMember maxLevel = "max_rank";
+        RequiredMember points = "points";
 
         foreach (var member in json.EnumerateObject())
         {

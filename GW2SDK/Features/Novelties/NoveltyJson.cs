@@ -11,12 +11,12 @@ public static class NoveltyJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember id = new("id");
-        RequiredMember name = new("name");
-        OptionalMember description = new("description");
-        RequiredMember icon = new("icon");
-        RequiredMember slot = new("slot");
-        RequiredMember unlockItems = new("unlock_item");
+        RequiredMember id = "id";
+        RequiredMember name = "name";
+        OptionalMember description = "description";
+        RequiredMember icon = "icon";
+        RequiredMember slot = "slot";
+        RequiredMember unlockItems = "unlock_item";
 
         foreach (var member in json.EnumerateObject())
         {

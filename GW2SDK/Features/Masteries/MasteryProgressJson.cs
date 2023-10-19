@@ -11,8 +11,8 @@ public static class MasteryProgressJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember id = new("id");
-        RequiredMember level = new("level");
+        RequiredMember id = "id";
+        RequiredMember level = "level";
 
         foreach (var member in json.EnumerateObject())
         {

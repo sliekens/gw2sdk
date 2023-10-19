@@ -15,13 +15,13 @@ public static class PrefixedBuffTraitFactJson
     {
         requiresTrait = null;
         overrides = null;
-        OptionalMember text = new("text");
-        OptionalMember icon = new("icon");
-        NullableMember duration = new("duration");
-        OptionalMember status = new("status");
-        OptionalMember description = new("description");
-        NullableMember applyCount = new("apply_count");
-        RequiredMember prefix = new("prefix");
+        OptionalMember text = "text";
+        OptionalMember icon = "icon";
+        NullableMember duration = "duration";
+        OptionalMember status = "status";
+        OptionalMember description = "description";
+        NullableMember applyCount = "apply_count";
+        RequiredMember prefix = "prefix";
         foreach (var member in json.EnumerateObject())
         {
             if (member.NameEquals("type"))

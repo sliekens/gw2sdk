@@ -8,9 +8,9 @@ public static class RaceJson
 {
     public static Race GetRace(this JsonElement json, MissingMemberBehavior missingMemberBehavior)
     {
-        RequiredMember id = new("id");
-        RequiredMember name = new("name");
-        RequiredMember skills = new("skills");
+        RequiredMember id = "id";
+        RequiredMember name = "name";
+        RequiredMember skills = "skills";
 
         foreach (var member in json.EnumerateObject())
         {

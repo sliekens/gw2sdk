@@ -16,10 +16,10 @@ public static class ComboFinisherSkillFactJson
         requiresTrait = null;
         overrides = null;
 
-        RequiredMember text = new("text");
-        RequiredMember icon = new("icon");
-        RequiredMember percent = new("percent");
-        RequiredMember finisherType = new("finisher_type");
+        RequiredMember text = "text";
+        RequiredMember icon = "icon";
+        RequiredMember percent = "percent";
+        RequiredMember finisherType = "finisher_type";
 
         foreach (var member in json.EnumerateObject())
         {

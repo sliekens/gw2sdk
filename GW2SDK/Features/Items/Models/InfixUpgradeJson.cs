@@ -11,9 +11,9 @@ public static class InfixUpgradeJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember id = new("id");
-        RequiredMember attributes = new("attributes");
-        OptionalMember buff = new("buff");
+        RequiredMember id = "id";
+        RequiredMember attributes = "attributes";
+        OptionalMember buff = "buff";
         foreach (var member in json.EnumerateObject())
         {
             if (member.NameEquals(id.Name))

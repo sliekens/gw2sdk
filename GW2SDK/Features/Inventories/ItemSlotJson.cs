@@ -18,17 +18,17 @@ public static class ItemSlotJson
             return null;
         }
 
-        RequiredMember id = new("id");
-        RequiredMember count = new("count");
-        NullableMember charges = new("charges");
-        NullableMember skin = new("skin");
-        OptionalMember upgrades = new("upgrades");
-        OptionalMember upgradeSlotIndices = new("upgrade_slot_indices");
-        OptionalMember infusions = new("infusions");
-        OptionalMember dyes = new("dyes");
-        OptionalMember binding = new("binding");
-        OptionalMember boundTo = new("bound_to");
-        OptionalMember stats = new("stats");
+        RequiredMember id = "id";
+        RequiredMember count = "count";
+        NullableMember charges = "charges";
+        NullableMember skin = "skin";
+        OptionalMember upgrades = "upgrades";
+        OptionalMember upgradeSlotIndices = "upgrade_slot_indices";
+        OptionalMember infusions = "infusions";
+        OptionalMember dyes = "dyes";
+        OptionalMember binding = "binding";
+        OptionalMember boundTo = "bound_to";
+        OptionalMember stats = "stats";
 
         foreach (var member in json.EnumerateObject())
         {

@@ -8,10 +8,10 @@ public static class TitleJson
 {
     public static Title GetTitle(this JsonElement json, MissingMemberBehavior missingMemberBehavior)
     {
-        RequiredMember id = new("id");
-        RequiredMember name = new("name");
-        OptionalMember achievements = new("achievements");
-        NullableMember achievementPointsRequired = new("ap_required");
+        RequiredMember id = "id";
+        RequiredMember name = "name";
+        OptionalMember achievements = "achievements";
+        NullableMember achievementPointsRequired = "ap_required";
 
         foreach (var member in json.EnumerateObject())
         {

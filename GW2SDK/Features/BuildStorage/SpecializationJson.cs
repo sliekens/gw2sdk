@@ -11,8 +11,8 @@ public static class SpecializationJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        NullableMember id = new("id");
-        RequiredMember traits = new("traits");
+        NullableMember id = "id";
+        RequiredMember traits = "traits";
 
         foreach (var member in json.EnumerateObject())
         {

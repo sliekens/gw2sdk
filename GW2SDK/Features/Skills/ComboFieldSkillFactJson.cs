@@ -16,9 +16,9 @@ public static class ComboFieldSkillFactJson
         requiresTrait = null;
         overrides = null;
 
-        RequiredMember text = new("text");
-        RequiredMember icon = new("icon");
-        RequiredMember fieldType = new("field_type");
+        RequiredMember text = "text";
+        RequiredMember icon = "icon";
+        RequiredMember fieldType = "field_type";
 
         foreach (var member in json.EnumerateObject())
         {

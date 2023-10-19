@@ -8,9 +8,9 @@ public static class EmoteJson
 {
     public static Emote GetEmote(this JsonElement json, MissingMemberBehavior missingMemberBehavior)
     {
-        RequiredMember id = new("id");
-        RequiredMember commands = new("commands");
-        RequiredMember unlockItems = new("unlock_items");
+        RequiredMember id = "id";
+        RequiredMember commands = "commands";
+        RequiredMember unlockItems = "unlock_items";
 
         foreach (var member in json.EnumerateObject())
         {

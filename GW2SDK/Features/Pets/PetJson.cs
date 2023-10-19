@@ -8,11 +8,11 @@ public static class PetJson
 {
     public static Pet GetPet(this JsonElement json, MissingMemberBehavior missingMemberBehavior)
     {
-        RequiredMember id = new("id");
-        RequiredMember name = new("name");
-        RequiredMember description = new("description");
-        RequiredMember icon = new("icon");
-        RequiredMember skills = new("skills");
+        RequiredMember id = "id";
+        RequiredMember name = "name";
+        RequiredMember description = "description";
+        RequiredMember icon = "icon";
+        RequiredMember skills = "skills";
 
         foreach (var member in json.EnumerateObject())
         {

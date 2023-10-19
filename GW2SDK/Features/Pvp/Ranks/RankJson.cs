@@ -8,13 +8,13 @@ public static class RankJson
 {
     public static Rank GetRank(this JsonElement json, MissingMemberBehavior missingMemberBehavior)
     {
-        RequiredMember id = new("id");
-        RequiredMember finisherId = new("finisher_id");
-        RequiredMember name = new("name");
-        RequiredMember icon = new("icon");
-        RequiredMember minRank = new("min_rank");
-        RequiredMember maxRank = new("max_rank");
-        RequiredMember levels = new("levels");
+        RequiredMember id = "id";
+        RequiredMember finisherId = "finisher_id";
+        RequiredMember name = "name";
+        RequiredMember icon = "icon";
+        RequiredMember minRank = "min_rank";
+        RequiredMember maxRank = "max_rank";
+        RequiredMember levels = "levels";
 
         foreach (var member in json.EnumerateObject())
         {

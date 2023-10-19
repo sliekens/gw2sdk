@@ -11,17 +11,17 @@ public static class CharacterSummaryJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember name = new("name");
-        RequiredMember race = new("race");
-        RequiredMember gender = new("gender");
-        RequiredMember profession = new("profession");
-        RequiredMember level = new("level");
-        OptionalMember guild = new("guild");
-        RequiredMember age = new("age");
-        RequiredMember lastModified = new("last_modified");
-        RequiredMember created = new("created");
-        RequiredMember deaths = new("deaths");
-        NullableMember title = new("title");
+        RequiredMember name = "name";
+        RequiredMember race = "race";
+        RequiredMember gender = "gender";
+        RequiredMember profession = "profession";
+        RequiredMember level = "level";
+        OptionalMember guild = "guild";
+        RequiredMember age = "age";
+        RequiredMember lastModified = "last_modified";
+        RequiredMember created = "created";
+        RequiredMember deaths = "deaths";
+        NullableMember title = "title";
 
         foreach (var member in json.EnumerateObject())
         {

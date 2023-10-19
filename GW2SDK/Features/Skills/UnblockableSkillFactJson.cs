@@ -16,9 +16,9 @@ public static class UnblockableSkillFactJson
         requiresTrait = null;
         overrides = null;
 
-        RequiredMember text = new("text");
-        RequiredMember icon = new("icon");
-        RequiredMember unblockable = new("value");
+        RequiredMember text = "text";
+        RequiredMember icon = "icon";
+        RequiredMember unblockable = "value";
 
         foreach (var member in json.EnumerateObject())
         {

@@ -16,12 +16,12 @@ public static class BuffSkillFactJson
         requiresTrait = null;
         overrides = null;
 
-        RequiredMember text = new("text");
-        RequiredMember icon = new("icon");
-        NullableMember duration = new("duration");
-        OptionalMember status = new("status");
-        OptionalMember description = new("description");
-        NullableMember applyCount = new("apply_count");
+        RequiredMember text = "text";
+        RequiredMember icon = "icon";
+        NullableMember duration = "duration";
+        OptionalMember status = "status";
+        OptionalMember description = "description";
+        NullableMember applyCount = "apply_count";
 
         foreach (var member in json.EnumerateObject())
         {

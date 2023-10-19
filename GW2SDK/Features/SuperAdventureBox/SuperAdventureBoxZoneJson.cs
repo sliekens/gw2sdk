@@ -11,10 +11,10 @@ public static class SuperAdventureBoxZoneJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember id = new("id");
-        RequiredMember mode = new("mode");
-        RequiredMember world = new("world");
-        RequiredMember zone = new("zone");
+        RequiredMember id = "id";
+        RequiredMember mode = "mode";
+        RequiredMember world = "world";
+        RequiredMember zone = "zone";
 
         foreach (var member in json.EnumerateObject())
         {

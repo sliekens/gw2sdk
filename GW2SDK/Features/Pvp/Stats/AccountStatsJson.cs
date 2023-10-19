@@ -11,12 +11,12 @@ public static class AccountStatsJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember pvpRank = new("pvp_rank");
-        RequiredMember pvpRankPoints = new("pvp_rank_points");
-        RequiredMember pvpRankRollovers = new("pvp_rank_rollovers");
-        RequiredMember aggregate = new("aggregate");
-        RequiredMember professions = new("professions");
-        RequiredMember ladders = new("ladders");
+        RequiredMember pvpRank = "pvp_rank";
+        RequiredMember pvpRankPoints = "pvp_rank_points";
+        RequiredMember pvpRankRollovers = "pvp_rank_rollovers";
+        RequiredMember aggregate = "aggregate";
+        RequiredMember professions = "professions";
+        RequiredMember ladders = "ladders";
 
         foreach (var member in json.EnumerateObject())
         {

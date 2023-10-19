@@ -17,11 +17,11 @@ public static class InfluenceActivityJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember id = new("id");
-        RequiredMember time = new("time");
-        RequiredMember activity = new("activity");
-        RequiredMember totalParticipants = new("total_participants");
-        RequiredMember participants = new("participants");
+        RequiredMember id = "id";
+        RequiredMember time = "time";
+        RequiredMember activity = "activity";
+        RequiredMember totalParticipants = "total_participants";
+        RequiredMember participants = "participants";
 
         foreach (var member in json.EnumerateObject())
         {

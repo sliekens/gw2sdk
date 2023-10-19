@@ -11,9 +11,9 @@ public static class UpgradeTierJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember name = new("name");
-        RequiredMember yaksRequired = new("yaks_required");
-        RequiredMember upgrades = new("upgrades");
+        RequiredMember name = "name";
+        RequiredMember yaksRequired = "yaks_required";
+        RequiredMember upgrades = "upgrades";
 
         foreach (var member in json.EnumerateObject())
         {

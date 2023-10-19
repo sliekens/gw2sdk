@@ -11,8 +11,8 @@ public static class UpgradeAttributeJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember attribute = new("attribute");
-        RequiredMember modifier = new("modifier");
+        RequiredMember attribute = "attribute";
+        RequiredMember modifier = "modifier";
         foreach (var member in json.EnumerateObject())
         {
             if (member.NameEquals(attribute.Name))

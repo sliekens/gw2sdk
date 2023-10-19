@@ -11,13 +11,13 @@ public static class LaddersJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        OptionalMember none = new("none");
-        OptionalMember unranked = new("unranked");
-        OptionalMember ranked = new("ranked");
-        OptionalMember ranked2v2 = new("2v2ranked");
-        OptionalMember ranked3v3 = new("3v3ranked");
-        OptionalMember soloArenaRated = new("soloarenarated");
-        OptionalMember teamArenaRated = new("teamarenarated");
+        OptionalMember none = "none";
+        OptionalMember unranked = "unranked";
+        OptionalMember ranked = "ranked";
+        OptionalMember ranked2v2 = "2v2ranked";
+        OptionalMember ranked3v3 = "3v3ranked";
+        OptionalMember soloArenaRated = "soloarenarated";
+        OptionalMember teamArenaRated = "teamarenarated";
 
 
         foreach (var member in json.EnumerateObject())

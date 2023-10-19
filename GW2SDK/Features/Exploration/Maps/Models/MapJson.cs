@@ -15,22 +15,22 @@ public static class MapJson
 {
     public static Map GetMap(this JsonElement json, MissingMemberBehavior missingMemberBehavior)
     {
-        RequiredMember name = new("name");
-        RequiredMember minLevel = new("min_level");
-        RequiredMember maxLevel = new("max_level");
-        RequiredMember defaultFloor = new("default_floor");
-        OptionalMember labelCoordinates = new("label_coord");
-        RequiredMember mapRectangle = new("map_rect");
-        RequiredMember continentRectangle = new("continent_rect");
+        RequiredMember name = "name";
+        RequiredMember minLevel = "min_level";
+        RequiredMember maxLevel = "max_level";
+        RequiredMember defaultFloor = "default_floor";
+        OptionalMember labelCoordinates = "label_coord";
+        RequiredMember mapRectangle = "map_rect";
+        RequiredMember continentRectangle = "continent_rect";
         RequiredMember pointsOfInterest =
-            new("points_of_interest");
-        OptionalMember godShrines = new("god_shrines");
-        RequiredMember tasks = new("tasks");
-        RequiredMember skillChallenges = new("skill_challenges");
-        RequiredMember sectors = new("sectors");
-        RequiredMember adventures = new("adventures");
-        RequiredMember id = new("id");
-        RequiredMember masteryPoints = new("mastery_points");
+            "points_of_interest";
+        OptionalMember godShrines = "god_shrines";
+        RequiredMember tasks = "tasks";
+        RequiredMember skillChallenges = "skill_challenges";
+        RequiredMember sectors = "sectors";
+        RequiredMember adventures = "adventures";
+        RequiredMember id = "id";
+        RequiredMember masteryPoints = "mastery_points";
         foreach (var member in json.EnumerateObject())
         {
             if (member.NameEquals(name.Name))

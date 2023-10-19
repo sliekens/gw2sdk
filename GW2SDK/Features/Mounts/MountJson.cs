@@ -8,11 +8,11 @@ public static class MountJson
 {
     public static Mount GetMount(this JsonElement json, MissingMemberBehavior missingMemberBehavior)
     {
-        RequiredMember id = new("id");
-        RequiredMember name = new("name");
-        RequiredMember defaultSkin = new("default_skin");
-        RequiredMember skins = new("skins");
-        RequiredMember skills = new("skills");
+        RequiredMember id = "id";
+        RequiredMember name = "name";
+        RequiredMember defaultSkin = "default_skin";
+        RequiredMember skins = "skins";
+        RequiredMember skills = "skills";
 
         foreach (var member in json.EnumerateObject())
         {

@@ -11,7 +11,7 @@ public static class BaggageJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember bags = new("bags");
+        RequiredMember bags = "bags";
 
         foreach (var member in json.EnumerateObject())
         {

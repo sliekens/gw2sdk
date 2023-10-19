@@ -15,9 +15,9 @@ public static class DistanceTraitFactJson
     {
         requiresTrait = null;
         overrides = null;
-        OptionalMember text = new("text");
-        OptionalMember icon = new("icon");
-        RequiredMember distance = new("distance");
+        OptionalMember text = "text";
+        OptionalMember icon = "icon";
+        RequiredMember distance = "distance";
         foreach (var member in json.EnumerateObject())
         {
             if (member.NameEquals("type"))

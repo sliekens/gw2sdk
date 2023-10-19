@@ -11,12 +11,12 @@ public static class MailCarrierJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember id = new("id");
-        RequiredMember unlockItems = new("unlock_items");
-        RequiredMember order = new("order");
-        RequiredMember icon = new("icon");
-        RequiredMember name = new("name");
-        RequiredMember flags = new("flags");
+        RequiredMember id = "id";
+        RequiredMember unlockItems = "unlock_items";
+        RequiredMember order = "order";
+        RequiredMember icon = "icon";
+        RequiredMember name = "name";
+        RequiredMember flags = "flags";
 
         foreach (var member in json.EnumerateObject())
         {

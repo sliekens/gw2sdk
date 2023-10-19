@@ -13,19 +13,21 @@ internal readonly ref struct OptionalMember
 
     public bool IsUndefinedOrNull => IsUndefined || Value.ValueKind == Null;
 
-    public OptionalMember(string name)
+    private OptionalMember(ReadOnlySpan<char> name)
     {
-        Name = name.AsSpan();
+        Name = name;
     }
 
-    private OptionalMember(string name, JsonElement value)
+    private OptionalMember(ReadOnlySpan<char> name, JsonElement value)
     {
-        Name = name.AsSpan();
+        Name = name;
         Value = value;
     }
 
+    public static implicit operator OptionalMember(string name) => new(name.AsSpan());
+
     public static implicit operator OptionalMember(JsonProperty member) =>
-        new(member.Name, member.Value);
+        new(member.Name.AsSpan(), member.Value);
 
     public TValue? Select<TValue>(Func<JsonElement, TValue> resultSelector)
     {

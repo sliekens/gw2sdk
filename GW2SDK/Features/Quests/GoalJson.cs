@@ -8,8 +8,8 @@ public static class GoalJson
 {
     public static Goal GetGoal(this JsonElement json, MissingMemberBehavior missingMemberBehavior)
     {
-        RequiredMember active = new("active");
-        RequiredMember complete = new("complete");
+        RequiredMember active = "active";
+        RequiredMember complete = "complete";
 
         foreach (var member in json.EnumerateObject())
         {

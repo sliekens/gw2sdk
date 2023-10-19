@@ -11,13 +11,13 @@ public static class GliderJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember id = new("id");
-        OptionalMember unlockItems = new("unlock_items");
-        RequiredMember order = new("order");
-        RequiredMember icon = new("icon");
-        RequiredMember name = new("name");
-        RequiredMember description = new("description");
-        RequiredMember defaultDyes = new("default_dyes");
+        RequiredMember id = "id";
+        OptionalMember unlockItems = "unlock_items";
+        RequiredMember order = "order";
+        RequiredMember icon = "icon";
+        RequiredMember name = "name";
+        RequiredMember description = "description";
+        RequiredMember defaultDyes = "default_dyes";
 
         foreach (var member in json.EnumerateObject())
         {

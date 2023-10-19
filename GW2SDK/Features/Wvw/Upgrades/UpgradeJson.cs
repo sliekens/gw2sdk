@@ -11,9 +11,9 @@ public static class UpgradeJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember name = new("name");
-        RequiredMember description = new("description");
-        RequiredMember icon = new("icon");
+        RequiredMember name = "name";
+        RequiredMember description = "description";
+        RequiredMember icon = "icon";
 
         foreach (var member in json.EnumerateObject())
         {

@@ -11,9 +11,9 @@ public static class SkillBarJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        NullableMember heal = new("heal");
-        RequiredMember utilities = new("utilities");
-        NullableMember elite = new("elite");
+        NullableMember heal = "heal";
+        RequiredMember utilities = "utilities";
+        NullableMember elite = "elite";
 
         foreach (var member in json.EnumerateObject())
         {

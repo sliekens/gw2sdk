@@ -11,7 +11,7 @@ public static class CoinsRewardJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember coins = new("count");
+        RequiredMember coins = "count";
         foreach (var member in json.EnumerateObject())
         {
             if (member.NameEquals("type"))

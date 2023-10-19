@@ -11,10 +11,10 @@ public static class OutfitJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember id = new("id");
-        RequiredMember name = new("name");
-        RequiredMember icon = new("icon");
-        RequiredMember unlockItems = new("unlock_items");
+        RequiredMember id = "id";
+        RequiredMember name = "name";
+        RequiredMember icon = "icon";
+        RequiredMember unlockItems = "unlock_items";
 
         foreach (var member in json.EnumerateObject())
         {

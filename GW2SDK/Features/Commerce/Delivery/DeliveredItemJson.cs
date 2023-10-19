@@ -11,8 +11,8 @@ public static class DeliveredItemJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember id = new("id");
-        RequiredMember count = new("count");
+        RequiredMember id = "id";
+        RequiredMember count = "count";
 
         foreach (var member in json.EnumerateObject())
         {

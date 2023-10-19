@@ -11,9 +11,9 @@ public static class WeaponProficiencyJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        NullableMember specialization = new("specialization");
-        RequiredMember flags = new("flags");
-        RequiredMember skills = new("skills");
+        NullableMember specialization = "specialization";
+        RequiredMember flags = "flags";
+        RequiredMember skills = "skills";
 
         foreach (var member in json.EnumerateObject())
         {

@@ -11,7 +11,7 @@ public static class CreatedSubtokenJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember subtoken = new("subtoken");
+        RequiredMember subtoken = "subtoken";
 
         foreach (var member in json.EnumerateObject())
         {

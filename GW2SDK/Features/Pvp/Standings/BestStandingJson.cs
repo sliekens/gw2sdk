@@ -11,11 +11,11 @@ public static class BestStandingJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember totalPoints = new("total_points");
-        RequiredMember division = new("division");
-        RequiredMember tier = new("tier");
-        RequiredMember points = new("points");
-        RequiredMember repeats = new("repeats");
+        RequiredMember totalPoints = "total_points";
+        RequiredMember division = "division";
+        RequiredMember tier = "tier";
+        RequiredMember points = "points";
+        RequiredMember repeats = "repeats";
 
         foreach (var member in json.EnumerateObject())
         {

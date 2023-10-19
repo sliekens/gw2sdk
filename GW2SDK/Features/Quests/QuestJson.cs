@@ -8,11 +8,11 @@ public static class QuestJson
 {
     public static Quest GetQuest(this JsonElement json, MissingMemberBehavior missingMemberBehavior)
     {
-        RequiredMember name = new("name");
-        RequiredMember level = new("level");
-        RequiredMember story = new("story");
-        RequiredMember goals = new("goals");
-        RequiredMember id = new("id");
+        RequiredMember name = "name";
+        RequiredMember level = "level";
+        RequiredMember story = "story";
+        RequiredMember goals = "goals";
+        RequiredMember id = "id";
 
         foreach (var member in json.EnumerateObject())
         {

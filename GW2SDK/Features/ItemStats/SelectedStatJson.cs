@@ -11,8 +11,8 @@ public static class SelectedStatJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember id = new("id");
-        RequiredMember attributes = new("attributes");
+        RequiredMember id = "id";
+        RequiredMember attributes = "attributes";
         foreach (var member in json.EnumerateObject())
         {
             if (member.NameEquals(id.Name))

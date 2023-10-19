@@ -16,8 +16,8 @@ public static class NoDataSkillFactJson
         requiresTrait = null;
         overrides = null;
 
-        RequiredMember text = new("text");
-        RequiredMember icon = new("icon");
+        RequiredMember text = "text";
+        RequiredMember icon = "icon";
 
         foreach (var member in json.EnumerateObject())
         {

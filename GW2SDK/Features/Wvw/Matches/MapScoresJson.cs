@@ -11,8 +11,8 @@ public static class MapScoresJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember type = new("type");
-        RequiredMember scores = new("scores");
+        RequiredMember type = "type";
+        RequiredMember scores = "scores";
 
         foreach (var member in json.EnumerateObject())
         {

@@ -11,9 +11,9 @@ public static class SkillReferenceJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember id = new("id");
-        NullableMember attunement = new("attunement");
-        NullableMember form = new("form");
+        RequiredMember id = "id";
+        NullableMember attunement = "attunement";
+        NullableMember form = "form";
 
         foreach (var member in json.EnumerateObject())
         {

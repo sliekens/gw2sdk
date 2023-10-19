@@ -11,17 +11,17 @@ public static class ProfessionJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember id = new("id");
-        RequiredMember name = new("name");
-        RequiredMember code = new("code");
-        RequiredMember icon = new("icon");
-        RequiredMember iconBig = new("icon_big");
-        RequiredMember specializations = new("specializations");
-        RequiredMember weapons = new("weapons");
-        RequiredMember flags = new("flags");
-        RequiredMember skills = new("skills");
-        RequiredMember training = new("training");
-        RequiredMember skillsByPalette = new("skills_by_palette");
+        RequiredMember id = "id";
+        RequiredMember name = "name";
+        RequiredMember code = "code";
+        RequiredMember icon = "icon";
+        RequiredMember iconBig = "icon_big";
+        RequiredMember specializations = "specializations";
+        RequiredMember weapons = "weapons";
+        RequiredMember flags = "flags";
+        RequiredMember skills = "skills";
+        RequiredMember training = "training";
+        RequiredMember skillsByPalette = "skills_by_palette";
         foreach (var member in json.EnumerateObject())
         {
             if (member.NameEquals(id.Name))

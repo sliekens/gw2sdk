@@ -8,17 +8,17 @@ public static class TraitJson
 {
     public static Trait GetTrait(this JsonElement json, MissingMemberBehavior missingMemberBehavior)
     {
-        RequiredMember id = new("id");
-        RequiredMember tier = new("tier");
-        RequiredMember order = new("order");
-        RequiredMember name = new("name");
-        OptionalMember description = new("description");
-        RequiredMember slot = new("slot");
-        OptionalMember facts = new("facts");
-        OptionalMember traitedFacts = new("traited_facts");
-        OptionalMember skills = new("skills");
-        RequiredMember specialization = new("specialization");
-        RequiredMember icon = new("icon");
+        RequiredMember id = "id";
+        RequiredMember tier = "tier";
+        RequiredMember order = "order";
+        RequiredMember name = "name";
+        OptionalMember description = "description";
+        RequiredMember slot = "slot";
+        OptionalMember facts = "facts";
+        OptionalMember traitedFacts = "traited_facts";
+        OptionalMember skills = "skills";
+        RequiredMember specialization = "specialization";
+        RequiredMember icon = "icon";
 
         foreach (var member in json.EnumerateObject())
         {

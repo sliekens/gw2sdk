@@ -8,14 +8,14 @@ public static class HeroJson
 {
     public static Hero GetHero(this JsonElement json, MissingMemberBehavior missingMemberBehavior)
     {
-        RequiredMember id = new("id");
-        RequiredMember name = new("name");
-        RequiredMember description = new("description");
-        RequiredMember type = new("type");
-        RequiredMember stats = new("stats");
-        RequiredMember overlay = new("overlay");
-        RequiredMember underlay = new("underlay");
-        RequiredMember skins = new("skins");
+        RequiredMember id = "id";
+        RequiredMember name = "name";
+        RequiredMember description = "description";
+        RequiredMember type = "type";
+        RequiredMember stats = "stats";
+        RequiredMember overlay = "overlay";
+        RequiredMember underlay = "underlay";
+        RequiredMember skins = "skins";
 
         foreach (var member in json.EnumerateObject())
         {

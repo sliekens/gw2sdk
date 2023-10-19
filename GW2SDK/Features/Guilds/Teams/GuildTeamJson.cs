@@ -11,14 +11,14 @@ public static class GuildTeamJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember id = new("id");
-        RequiredMember members = new("members");
-        RequiredMember name = new("name");
-        RequiredMember state = new("state");
-        RequiredMember aggregate = new("aggregate");
-        RequiredMember ladders = new("ladders");
-        RequiredMember games = new("games");
-        OptionalMember seasons = new("seasons");
+        RequiredMember id = "id";
+        RequiredMember members = "members";
+        RequiredMember name = "name";
+        RequiredMember state = "state";
+        RequiredMember aggregate = "aggregate";
+        RequiredMember ladders = "ladders";
+        RequiredMember games = "games";
+        OptionalMember seasons = "seasons";
 
         foreach (var member in json.EnumerateObject())
         {

@@ -11,13 +11,13 @@ public static class AccountAchievementJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember id = new("id");
-        RequiredMember current = new("current");
-        RequiredMember max = new("max");
-        RequiredMember done = new("done");
-        OptionalMember bits = new("bits");
-        NullableMember repeated = new("repeated");
-        NullableMember unlocked = new("unlocked");
+        RequiredMember id = "id";
+        RequiredMember current = "current";
+        RequiredMember max = "max";
+        RequiredMember done = "done";
+        OptionalMember bits = "bits";
+        NullableMember repeated = "repeated";
+        NullableMember unlocked = "unlocked";
 
         foreach (var member in json.EnumerateObject())
         {

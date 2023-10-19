@@ -11,9 +11,9 @@ public static class ItemStatAttributeJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember attribute = new("attribute");
-        RequiredMember multiplier = new("multiplier");
-        RequiredMember amount = new("value");
+        RequiredMember attribute = "attribute";
+        RequiredMember multiplier = "multiplier";
+        RequiredMember amount = "value";
 
         foreach (var member in json.EnumerateObject())
         {

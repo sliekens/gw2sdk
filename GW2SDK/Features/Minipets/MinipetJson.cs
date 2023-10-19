@@ -11,12 +11,12 @@ public static class MinipetJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember id = new("id");
-        RequiredMember name = new("name");
-        OptionalMember unlock = new("unlock");
-        RequiredMember icon = new("icon");
-        RequiredMember order = new("order");
-        RequiredMember itemId = new("item_id");
+        RequiredMember id = "id";
+        RequiredMember name = "name";
+        OptionalMember unlock = "unlock";
+        RequiredMember icon = "icon";
+        RequiredMember order = "order";
+        RequiredMember itemId = "item_id";
 
         foreach (var member in json.EnumerateObject())
         {

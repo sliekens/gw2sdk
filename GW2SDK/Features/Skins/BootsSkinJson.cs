@@ -11,15 +11,15 @@ public static class BootsSkinJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember name = new("name");
-        OptionalMember description = new("description");
-        RequiredMember rarity = new("rarity");
-        RequiredMember flags = new("flags");
-        RequiredMember restrictions = new("restrictions");
-        RequiredMember id = new("id");
-        OptionalMember icon = new("icon");
-        RequiredMember weightClass = new("weight_class");
-        OptionalMember dyeSlots = new("dye_slots");
+        RequiredMember name = "name";
+        OptionalMember description = "description";
+        RequiredMember rarity = "rarity";
+        RequiredMember flags = "flags";
+        RequiredMember restrictions = "restrictions";
+        RequiredMember id = "id";
+        OptionalMember icon = "icon";
+        RequiredMember weightClass = "weight_class";
+        OptionalMember dyeSlots = "dye_slots";
         foreach (var member in json.EnumerateObject())
         {
             if (member.NameEquals("type"))

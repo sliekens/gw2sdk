@@ -11,10 +11,10 @@ public static class MaterialCategoryJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember id = new("id");
-        RequiredMember name = new("name");
-        RequiredMember items = new("items");
-        RequiredMember order = new("order");
+        RequiredMember id = "id";
+        RequiredMember name = "name";
+        RequiredMember items = "items";
+        RequiredMember order = "order";
 
         foreach (var member in json.EnumerateObject())
         {

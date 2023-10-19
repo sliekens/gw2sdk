@@ -11,10 +11,10 @@ public static class BuffPrefixJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember text = new("text");
-        RequiredMember icon = new("icon");
-        OptionalMember status = new("status");
-        OptionalMember description = new("description");
+        RequiredMember text = "text";
+        RequiredMember icon = "icon";
+        OptionalMember status = "status";
+        OptionalMember description = "description";
         foreach (var member in json.EnumerateObject())
         {
             if (member.NameEquals(text.Name))

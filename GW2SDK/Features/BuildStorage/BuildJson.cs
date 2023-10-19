@@ -8,14 +8,14 @@ public static class BuildJson
 {
     public static Build GetBuild(this JsonElement json, MissingMemberBehavior missingMemberBehavior)
     {
-        RequiredMember name = new("name");
-        RequiredMember profession = new("profession");
-        RequiredMember specializations = new("specializations");
-        RequiredMember skills = new("skills");
-        RequiredMember aquaticSkills = new("aquatic_skills");
-        OptionalMember pets = new("pets");
-        OptionalMember legends = new("legends");
-        OptionalMember aquaticLegends = new("aquatic_legends");
+        RequiredMember name = "name";
+        RequiredMember profession = "profession";
+        RequiredMember specializations = "specializations";
+        RequiredMember skills = "skills";
+        RequiredMember aquaticSkills = "aquatic_skills";
+        OptionalMember pets = "pets";
+        OptionalMember legends = "legends";
+        OptionalMember aquaticLegends = "aquatic_legends";
 
         foreach (var member in json.EnumerateObject())
         {

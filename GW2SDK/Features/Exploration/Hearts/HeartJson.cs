@@ -8,12 +8,12 @@ public static class HeartJson
 {
     public static Heart GetHeart(this JsonElement json, MissingMemberBehavior missingMemberBehavior)
     {
-        RequiredMember objective = new("objective");
-        RequiredMember level = new("level");
-        RequiredMember coordinates = new("coord");
-        RequiredMember boundaries = new("bounds");
-        RequiredMember id = new("id");
-        RequiredMember chatLink = new("chat_link");
+        RequiredMember objective = "objective";
+        RequiredMember level = "level";
+        RequiredMember coordinates = "coord";
+        RequiredMember boundaries = "bounds";
+        RequiredMember id = "id";
+        RequiredMember chatLink = "chat_link";
         foreach (var member in json.EnumerateObject())
         {
             if (member.NameEquals(objective.Name))

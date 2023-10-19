@@ -11,13 +11,13 @@ public static class AchievementCategoryJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember id = new("id");
-        RequiredMember name = new("name");
-        RequiredMember description = new("description");
-        RequiredMember order = new("order");
-        RequiredMember icon = new("icon");
-        RequiredMember achievements = new("achievements");
-        OptionalMember tomorrow = new("tomorrow");
+        RequiredMember id = "id";
+        RequiredMember name = "name";
+        RequiredMember description = "description";
+        RequiredMember order = "order";
+        RequiredMember icon = "icon";
+        RequiredMember achievements = "achievements";
+        OptionalMember tomorrow = "tomorrow";
 
         foreach (var member in json.EnumerateObject())
         {

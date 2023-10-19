@@ -11,13 +11,13 @@ public static class CurrentStandingJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember totalPoints = new("total_points");
-        RequiredMember division = new("division");
-        RequiredMember tier = new("tier");
-        RequiredMember points = new("points");
-        RequiredMember repeats = new("repeats");
-        NullableMember rating = new("rating");
-        NullableMember decay = new("decay");
+        RequiredMember totalPoints = "total_points";
+        RequiredMember division = "division";
+        RequiredMember tier = "tier";
+        RequiredMember points = "points";
+        RequiredMember repeats = "repeats";
+        NullableMember rating = "rating";
+        NullableMember decay = "decay";
 
         foreach (var member in json.EnumerateObject())
         {

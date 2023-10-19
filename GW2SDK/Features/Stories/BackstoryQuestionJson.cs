@@ -11,13 +11,13 @@ public static class BackstoryQuestionJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember id = new("id");
-        RequiredMember title = new("title");
-        RequiredMember description = new("description");
-        RequiredMember answers = new("answers");
-        RequiredMember order = new("order");
-        OptionalMember professions = new("professions");
-        OptionalMember races = new("races");
+        RequiredMember id = "id";
+        RequiredMember title = "title";
+        RequiredMember description = "description";
+        RequiredMember answers = "answers";
+        RequiredMember order = "order";
+        OptionalMember professions = "professions";
+        OptionalMember races = "races";
         foreach (var member in json.EnumerateObject())
         {
             if (member.NameEquals(id.Name))

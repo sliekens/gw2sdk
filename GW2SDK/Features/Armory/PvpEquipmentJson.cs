@@ -11,9 +11,9 @@ public static class PvpEquipmentJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        NullableMember amulet = new("amulet");
-        NullableMember rune = new("rune");
-        RequiredMember sigils = new("sigils");
+        NullableMember amulet = "amulet";
+        NullableMember rune = "rune";
+        RequiredMember sigils = "sigils";
 
         foreach (var member in json.EnumerateObject())
         {

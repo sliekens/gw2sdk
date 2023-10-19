@@ -11,12 +11,12 @@ public static class DivisionJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember name = new("name");
-        RequiredMember flags = new("flags");
-        RequiredMember largeIcon = new("large_icon");
-        RequiredMember smallIcon = new("small_icon");
-        RequiredMember pipIcon = new("pip_icon");
-        RequiredMember tiers = new("tiers");
+        RequiredMember name = "name";
+        RequiredMember flags = "flags";
+        RequiredMember largeIcon = "large_icon";
+        RequiredMember smallIcon = "small_icon";
+        RequiredMember pipIcon = "pip_icon";
+        RequiredMember tiers = "tiers";
 
         foreach (var member in json.EnumerateObject())
         {

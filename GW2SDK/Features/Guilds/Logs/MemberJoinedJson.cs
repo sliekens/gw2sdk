@@ -11,9 +11,9 @@ public static class MemberJoinedJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember id = new("id");
-        RequiredMember time = new("time");
-        RequiredMember user = new("user");
+        RequiredMember id = "id";
+        RequiredMember time = "time";
+        RequiredMember user = "user";
 
         foreach (var member in json.EnumerateObject())
         {

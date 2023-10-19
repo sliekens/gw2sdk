@@ -11,8 +11,8 @@ public static class DeliveryBoxJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember coins = new("coins");
-        RequiredMember items = new("items");
+        RequiredMember coins = "coins";
+        RequiredMember items = "items";
 
         foreach (var member in json.EnumerateObject())
         {

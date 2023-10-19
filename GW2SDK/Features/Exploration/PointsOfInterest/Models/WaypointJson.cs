@@ -11,11 +11,11 @@ public static class WaypointJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        OptionalMember name = new("name");
-        RequiredMember floor = new("floor");
-        RequiredMember coordinates = new("coord");
-        RequiredMember id = new("id");
-        RequiredMember chatLink = new("chat_link");
+        OptionalMember name = "name";
+        RequiredMember floor = "floor";
+        RequiredMember coordinates = "coord";
+        RequiredMember id = "id";
+        RequiredMember chatLink = "chat_link";
         foreach (var member in json.EnumerateObject())
         {
             if (member.NameEquals("type"))

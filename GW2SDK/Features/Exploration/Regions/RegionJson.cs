@@ -12,11 +12,11 @@ public static class RegionJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember name = new("name");
-        RequiredMember labelCoordinates = new("label_coord");
-        RequiredMember continentRectangle = new("continent_rect");
-        RequiredMember maps = new("maps");
-        RequiredMember id = new("id");
+        RequiredMember name = "name";
+        RequiredMember labelCoordinates = "label_coord";
+        RequiredMember continentRectangle = "continent_rect";
+        RequiredMember maps = "maps";
+        RequiredMember id = "id";
         foreach (var member in json.EnumerateObject())
         {
             if (member.NameEquals(name.Name))
