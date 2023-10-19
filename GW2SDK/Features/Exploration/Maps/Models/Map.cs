@@ -28,7 +28,6 @@ public sealed record Map
     /// <summary>The dimensions of a map.</summary>
     public required Rectangle MapRectangle { get; init; }
 
-
     /// <summary>The dimensions of a map within the continent coordinate system.</summary>
     public required Rectangle ContinentRectangle { get; init; }
 

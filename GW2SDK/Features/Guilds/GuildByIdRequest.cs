@@ -16,6 +16,7 @@ public sealed class GuildByIdRequest : IHttpRequest<Replica<Guild>>
     public string Id { get; }
 
     public string? AccessToken { get; init; }
+
     public MissingMemberBehavior MissingMemberBehavior { get; init; }
 
     public async Task<Replica<Guild>> SendAsync(
@@ -27,10 +28,7 @@ public sealed class GuildByIdRequest : IHttpRequest<Replica<Guild>>
                 Template with
                 {
                     Path = Template.Path.Replace(":id", Id),
-                    Arguments = new QueryBuilder
-                    {
-                        { "v", SchemaVersion.Recommended }
-                    },
+                    Arguments = new QueryBuilder { { "v", SchemaVersion.Recommended } },
                     BearerToken = AccessToken
                 },
                 HttpCompletionOption.ResponseHeadersRead,

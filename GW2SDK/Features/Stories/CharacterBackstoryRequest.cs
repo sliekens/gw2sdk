@@ -5,14 +5,13 @@ namespace GuildWars2.Stories;
 [PublicAPI]
 public sealed class CharacterBackstoryRequest : IHttpRequest<Replica<CharacterBackstory>>
 {
-    private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/characters/:id/backstory")
-    {
-        AcceptEncoding = "gzip",
-        Arguments = new QueryBuilder
+    private static readonly HttpRequestMessageTemplate Template =
+        new(Get, "v2/characters/:id/backstory")
         {
-            { "v", SchemaVersion.Recommended }
-        }
-    };
+            AcceptEncoding = "gzip",
+            Arguments = new QueryBuilder { { "v", SchemaVersion.Recommended } }
+        };
+
     public CharacterBackstoryRequest(string characterName)
     {
         CharacterName = characterName;
@@ -26,7 +25,8 @@ public sealed class CharacterBackstoryRequest : IHttpRequest<Replica<CharacterBa
 
     public async Task<Replica<CharacterBackstory>> SendAsync(
         HttpClient httpClient,
-        CancellationToken cancellationToken)
+        CancellationToken cancellationToken
+    )
     {
         using var response = await httpClient.SendAsync(
                 Template with

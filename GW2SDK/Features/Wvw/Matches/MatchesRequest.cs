@@ -6,16 +6,15 @@ namespace GuildWars2.Wvw.Matches;
 [PublicAPI]
 public sealed class MatchesRequest : IHttpRequest<Replica<HashSet<Match>>>
 {
-    private static readonly HttpRequestMessageTemplate Template =
-        new(Get, "v2/wvw/matches")
+    private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/wvw/matches")
+    {
+        AcceptEncoding = "gzip",
+        Arguments = new QueryBuilder
         {
-            AcceptEncoding = "gzip",
-            Arguments = new QueryBuilder
-            {
-                { "ids", "all" },
-                { "v", SchemaVersion.Recommended }
-            }
-        };
+            { "ids", "all" },
+            { "v", SchemaVersion.Recommended }
+        }
+    };
 
     public MissingMemberBehavior MissingMemberBehavior { get; init; }
 

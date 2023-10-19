@@ -39,14 +39,22 @@ public static class SuperAdventureBoxProgressJson
         {
             Zones =
                 zones.Map(
-                    values => values.GetList(entry => entry.GetSuperAdventureBoxZone(missingMemberBehavior))
+                    values =>
+                        values.GetList(
+                            entry => entry.GetSuperAdventureBoxZone(missingMemberBehavior)
+                        )
                 ),
             Unlocks =
                 unlocks.Map(
-                    values => values.GetList(entry => entry.GetSuperAdventureBoxUpgrade(missingMemberBehavior))
+                    values =>
+                        values.GetList(
+                            entry => entry.GetSuperAdventureBoxUpgrade(missingMemberBehavior)
+                        )
                 ),
             Songs = songs.Map(
-                values => values.GetList(entry => entry.GetSuperAdventureBoxSong(missingMemberBehavior))
+                values => values.GetList(
+                    entry => entry.GetSuperAdventureBoxSong(missingMemberBehavior)
+                )
             )
         };
     }

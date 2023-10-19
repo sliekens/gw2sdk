@@ -45,7 +45,9 @@ public static class MatchStatsJson
             Id = id.Map(value => value.GetStringRequired()),
             Deaths = deaths.Map(value => value.GetDistribution(missingMemberBehavior)),
             Kills = kills.Map(value => value.GetDistribution(missingMemberBehavior)),
-            Maps = maps.Map(values => values.GetList(value => value.GetMapSummary(missingMemberBehavior)))
+            Maps = maps.Map(
+                values => values.GetList(value => value.GetMapSummary(missingMemberBehavior))
+            )
         };
     }
 }

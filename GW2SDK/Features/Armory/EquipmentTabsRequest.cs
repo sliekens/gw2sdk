@@ -7,10 +7,8 @@ namespace GuildWars2.Armory;
 public sealed class EquipmentTabsRequest : IHttpRequest<Replica<HashSet<EquipmentTab>>>
 {
     // There is no ids=all support, but page=0 works
-    private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/characters/:id/equipmenttabs?page=0")
-    {
-        AcceptEncoding = "gzip"
-    };
+    private static readonly HttpRequestMessageTemplate Template =
+        new(Get, "v2/characters/:id/equipmenttabs?page=0") { AcceptEncoding = "gzip" };
 
     public EquipmentTabsRequest(string characterName)
     {
@@ -32,10 +30,7 @@ public sealed class EquipmentTabsRequest : IHttpRequest<Replica<HashSet<Equipmen
                 Template with
                 {
                     Path = Template.Path.Replace(":id", CharacterName),
-                    Arguments = new QueryBuilder
-                    {
-                        { "v", SchemaVersion.Recommended }
-                    },
+                    Arguments = new QueryBuilder { { "v", SchemaVersion.Recommended } },
                     BearerToken = AccessToken
                 },
                 HttpCompletionOption.ResponseHeadersRead,
@@ -48,7 +43,8 @@ public sealed class EquipmentTabsRequest : IHttpRequest<Replica<HashSet<Equipmen
             .ConfigureAwait(false);
         return new Replica<HashSet<EquipmentTab>>
         {
-            Value = json.RootElement.GetSet(entry => entry.GetEquipmentTab(MissingMemberBehavior)),
+            Value =
+                json.RootElement.GetSet(entry => entry.GetEquipmentTab(MissingMemberBehavior)),
             ResultContext = response.Headers.GetResultContext(),
             PageContext = response.Headers.GetPageContext(),
             Date = response.Headers.Date.GetValueOrDefault(),

@@ -61,8 +61,16 @@ public static class BackstoryQuestionJson
             Description = description.Map(value => value.GetStringRequired()),
             Answers = answers.Map(values => values.GetList(value => value.GetStringRequired())),
             Order = order.Map(value => value.GetInt32()),
-            Professions = professions.Map(values => values.GetList(value => value.GetEnum<ProfessionName>(missingMemberBehavior))),
-            Races = races.Map(values => values.GetList(value => value.GetEnum<RaceName>(missingMemberBehavior)))
+            Professions =
+                professions.Map(
+                    values =>
+                        values.GetList(
+                            value => value.GetEnum<ProfessionName>(missingMemberBehavior)
+                        )
+                ),
+            Races = races.Map(
+                values => values.GetList(value => value.GetEnum<RaceName>(missingMemberBehavior))
+            )
         };
     }
 }

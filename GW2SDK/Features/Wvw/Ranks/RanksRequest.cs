@@ -6,16 +6,15 @@ namespace GuildWars2.Wvw.Ranks;
 [PublicAPI]
 public sealed class RanksRequest : IHttpRequest<Replica<HashSet<Rank>>>
 {
-    private static readonly HttpRequestMessageTemplate Template =
-        new(Get, "v2/wvw/ranks")
+    private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/wvw/ranks")
+    {
+        AcceptEncoding = "gzip",
+        Arguments = new QueryBuilder
         {
-            AcceptEncoding = "gzip",
-            Arguments = new QueryBuilder
-            {
-                { "ids", "all" },
-                { "v", SchemaVersion.Recommended }
-            }
-        };
+            { "ids", "all" },
+            { "v", SchemaVersion.Recommended }
+        }
+    };
 
     public Language? Language { get; init; }
 

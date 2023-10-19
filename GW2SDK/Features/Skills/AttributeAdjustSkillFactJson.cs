@@ -67,7 +67,9 @@ public static class AttributeAdjustSkillFactJson
             Text = text.Map(value => value.GetString()) ?? "",
             Icon = icon.Map(value => value.GetStringRequired()),
             Value = adjustment.Map(value => value.GetInt32()),
-            Target = target.Map(value => value.GetEnum<AttributeAdjustTarget>(missingMemberBehavior))
+            Target = target.Map(
+                value => value.GetEnum<AttributeAdjustTarget>(missingMemberBehavior)
+            )
         };
     }
 }

@@ -48,7 +48,9 @@ public static class PetJson
             Name = name.Map(value => value.GetStringRequired()),
             Description = description.Map(value => value.GetStringRequired()),
             Icon = icon.Map(value => value.GetStringRequired()),
-            Skills = skills.Map(values => values.GetList(value => value.GetPetSkill(missingMemberBehavior)))
+            Skills = skills.Map(
+                values => values.GetList(value => value.GetPetSkill(missingMemberBehavior))
+            )
         };
     }
 }

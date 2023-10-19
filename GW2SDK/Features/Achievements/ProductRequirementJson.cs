@@ -33,7 +33,9 @@ public static class ProductRequirementJson
         return new ProductRequirement
         {
             Product = product.Map(value => value.GetEnum<ProductName>(missingMemberBehavior)),
-            Condition = condition.Map(value => value.GetEnum<AccessCondition>(missingMemberBehavior))
+            Condition = condition.Map(
+                value => value.GetEnum<AccessCondition>(missingMemberBehavior)
+            )
         };
     }
 }

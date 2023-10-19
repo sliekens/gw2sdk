@@ -6,10 +6,7 @@ namespace GuildWars2.Guilds.Teams;
 [PublicAPI]
 public static class GameJson
 {
-    public static Game GetGame(
-        this JsonElement json,
-        MissingMemberBehavior missingMemberBehavior
-    )
+    public static Game GetGame(this JsonElement json, MissingMemberBehavior missingMemberBehavior)
     {
         RequiredMember id = "id";
         RequiredMember mapId = "map_id";
@@ -83,6 +80,5 @@ public static class GameJson
             SeasonId = seasonId.Map(value => value.GetString()),
             Score = score.Map(value => value.GetScore(missingMemberBehavior))
         };
-
     }
 }

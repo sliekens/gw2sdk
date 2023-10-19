@@ -6,12 +6,11 @@ namespace GuildWars2.Wvw.Objectives;
 [PublicAPI]
 public sealed class ObjectivesIndexRequest : IHttpRequest<Replica<HashSet<string>>>
 {
-    private static readonly HttpRequestMessageTemplate Template =
-        new(Get, "v2/wvw/objectives")
-        {
-            AcceptEncoding = "gzip",
-            Arguments = new QueryBuilder { { "v", SchemaVersion.Recommended } }
-        };
+    private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/wvw/objectives")
+    {
+        AcceptEncoding = "gzip",
+        Arguments = new QueryBuilder { { "v", SchemaVersion.Recommended } }
+    };
 
     public async Task<Replica<HashSet<string>>> SendAsync(
         HttpClient httpClient,

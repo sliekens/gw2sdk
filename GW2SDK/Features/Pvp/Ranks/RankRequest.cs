@@ -6,16 +6,15 @@ namespace GuildWars2.Pvp.Ranks;
 [PublicAPI]
 public sealed class RankRequest : IHttpRequest<Replica<HashSet<Rank>>>
 {
-    private static readonly HttpRequestMessageTemplate Template =
-        new(Get, "v2/pvp/ranks")
+    private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/pvp/ranks")
+    {
+        AcceptEncoding = "gzip",
+        Arguments = new QueryBuilder
         {
-            AcceptEncoding = "gzip",
-            Arguments = new QueryBuilder
-            {
-                { "ids", "all" },
-                { "v", SchemaVersion.Recommended }
-            }
-        };
+            { "ids", "all" },
+            { "v", SchemaVersion.Recommended }
+        }
+    };
 
     public Language? Language { get; init; }
 

@@ -6,12 +6,11 @@ namespace GuildWars2.Guilds.Permissions;
 [PublicAPI]
 public sealed class GuildPermissionsIndexRequest : IHttpRequest<Replica<HashSet<string>>>
 {
-    private static readonly HttpRequestMessageTemplate Template =
-        new(Get, "v2/guild/permissions")
-        {
-            AcceptEncoding = "gzip",
-            Arguments = new QueryBuilder { { "v", SchemaVersion.Recommended } }
-        };
+    private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/guild/permissions")
+    {
+        AcceptEncoding = "gzip",
+        Arguments = new QueryBuilder { { "v", SchemaVersion.Recommended } }
+    };
 
     public async Task<Replica<HashSet<string>>> SendAsync(
         HttpClient httpClient,

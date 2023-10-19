@@ -6,16 +6,15 @@ namespace GuildWars2.Home.Nodes;
 [PublicAPI]
 public sealed class NodesRequest : IHttpRequest<Replica<HashSet<Node>>>
 {
-    private static readonly HttpRequestMessageTemplate Template =
-        new(Get, "v2/home/nodes")
+    private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/home/nodes")
+    {
+        AcceptEncoding = "gzip",
+        Arguments = new QueryBuilder
         {
-            AcceptEncoding = "gzip",
-            Arguments = new QueryBuilder
-            {
-                { "ids", "all" },
-                { "v", SchemaVersion.Recommended }
-            }
-        };
+            { "ids", "all" },
+            { "v", SchemaVersion.Recommended }
+        }
+    };
 
     public MissingMemberBehavior MissingMemberBehavior { get; init; }
 

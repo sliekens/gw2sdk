@@ -71,16 +71,28 @@ public static class TraitSkillJson
         return new TraitSkill
         {
             Name = name.Map(value => value.GetStringRequired()),
-            Facts = facts.Map(
-                values => values.GetList(item => item.GetTraitFact(missingMemberBehavior, out _, out _))
-            ),
+            Facts =
+                facts.Map(
+                    values =>
+                        values.GetList(
+                            item => item.GetTraitFact(missingMemberBehavior, out _, out _)
+                        )
+                ),
             TraitedFacts =
-                traitedFacts.Map(values => values.GetList(value => value.GetCompoundTraitFact(missingMemberBehavior))),
+                traitedFacts.Map(
+                    values => values.GetList(
+                        value => value.GetCompoundTraitFact(missingMemberBehavior)
+                    )
+                ),
             Description = description.Map(value => value.GetStringRequired()),
             Icon = icon.Map(value => value.GetStringRequired()),
             Id = id.Map(value => value.GetInt32()),
             ChatLink = chatLink.Map(value => value.GetStringRequired()),
-            Categories = categories.Map(values => values.GetList(value => value.GetEnum<SkillCategoryName>(missingMemberBehavior)))
+            Categories = categories.Map(
+                values => values.GetList(
+                    value => value.GetEnum<SkillCategoryName>(missingMemberBehavior)
+                )
+            )
         };
     }
 }

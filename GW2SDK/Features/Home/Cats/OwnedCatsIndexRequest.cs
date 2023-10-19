@@ -6,12 +6,11 @@ namespace GuildWars2.Home.Cats;
 [PublicAPI]
 public sealed class OwnedCatsIndexRequest : IHttpRequest<Replica<HashSet<int>>>
 {
-    private static readonly HttpRequestMessageTemplate Template =
-        new(Get, "v2/account/home/cats")
-        {
-            AcceptEncoding = "gzip",
-            Arguments = new QueryBuilder { { "v", SchemaVersion.Recommended } }
-        };
+    private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/account/home/cats")
+    {
+        AcceptEncoding = "gzip",
+        Arguments = new QueryBuilder { { "v", SchemaVersion.Recommended } }
+    };
 
     public OwnedCatsIndexRequest(string? accessToken)
     {

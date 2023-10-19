@@ -39,7 +39,9 @@ public static class UpgradeTierJson
         {
             Name = name.Map(value => value.GetStringRequired()),
             YaksRequired = yaksRequired.Map(value => value.GetInt32()),
-            Upgrades = upgrades.Map(values => values.GetList(value => value.GetUpgrade(missingMemberBehavior)))
+            Upgrades = upgrades.Map(
+                values => values.GetList(value => value.GetUpgrade(missingMemberBehavior))
+            )
         };
     }
 }

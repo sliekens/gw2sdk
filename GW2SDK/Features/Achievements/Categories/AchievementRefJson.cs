@@ -45,7 +45,11 @@ public static class AchievementRefJson
             Id = id.Map(value => value.GetInt32()),
             RequiredAccess =
                 requiredAccess.Map(value => value.GetProductRequirement(missingMemberBehavior)),
-            Flags = flags.Map(values => values.GetList(value => value.GetEnum<AchievementFlag>(missingMemberBehavior))),
+            Flags = flags.Map(
+                values => values.GetList(
+                    value => value.GetEnum<AchievementFlag>(missingMemberBehavior)
+                )
+            ),
             Level = level.Map(value => value.GetLevelRequirement(missingMemberBehavior))
         };
     }

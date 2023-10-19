@@ -6,16 +6,15 @@ namespace GuildWars2.Novelties;
 [PublicAPI]
 public sealed class NoveltiesRequest : IHttpRequest<Replica<HashSet<Novelty>>>
 {
-    private static readonly HttpRequestMessageTemplate Template =
-        new(Get, "v2/novelties")
+    private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/novelties")
+    {
+        AcceptEncoding = "gzip",
+        Arguments = new QueryBuilder
         {
-            AcceptEncoding = "gzip",
-            Arguments = new QueryBuilder
-            {
-                { "ids", "all" },
-                { "v", SchemaVersion.Recommended }
-            }
-        };
+            { "ids", "all" },
+            { "v", SchemaVersion.Recommended }
+        }
+    };
 
     public Language? Language { get; init; }
 

@@ -63,7 +63,9 @@ public static class MasteryJson
             Order = order.Map(value => value.GetInt32()),
             Background = background.Map(value => value.GetStringRequired()),
             Region = region.Map(value => value.GetEnum<MasteryRegionName>(missingMemberBehavior)),
-            Levels = levels.Map(values => values.GetList(value => value.GetMasteryLevel(missingMemberBehavior)))
+            Levels = levels.Map(
+                values => values.GetList(value => value.GetMasteryLevel(missingMemberBehavior))
+            )
         };
     }
 }

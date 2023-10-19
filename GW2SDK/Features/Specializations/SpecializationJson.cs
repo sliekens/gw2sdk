@@ -79,7 +79,8 @@ public static class SpecializationJson
         {
             Id = id.Map(value => value.GetInt32()),
             Name = name.Map(value => value.GetStringRequired()),
-            Profession = profession.Map(value => value.GetEnum<ProfessionName>(missingMemberBehavior)),
+            Profession =
+                profession.Map(value => value.GetEnum<ProfessionName>(missingMemberBehavior)),
             Elite = elite.Map(value => value.GetBoolean()),
             MinorTraits = minorTraits.Map(values => values.GetList(value => value.GetInt32())),
             MajorTraits = majorTraits.Map(values => values.GetList(value => value.GetInt32())),

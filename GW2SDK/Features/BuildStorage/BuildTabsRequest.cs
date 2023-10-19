@@ -7,10 +7,8 @@ namespace GuildWars2.BuildStorage;
 public sealed class BuildTabsRequest : IHttpRequest<Replica<HashSet<BuildTab>>>
 {
     // There is no ids=all support, but page=0 works
-    private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/characters/:id/buildtabs?page=0")
-    {
-        AcceptEncoding = "gzip"
-    };
+    private static readonly HttpRequestMessageTemplate Template =
+        new(Get, "v2/characters/:id/buildtabs?page=0") { AcceptEncoding = "gzip" };
 
     public BuildTabsRequest(string characterName)
     {
@@ -32,10 +30,7 @@ public sealed class BuildTabsRequest : IHttpRequest<Replica<HashSet<BuildTab>>>
                 Template with
                 {
                     Path = Template.Path.Replace(":id", CharacterName),
-                    Arguments = new QueryBuilder
-                    {
-                        { "v", SchemaVersion.Recommended }
-                    },
+                    Arguments = new QueryBuilder { { "v", SchemaVersion.Recommended } },
                     BearerToken = AccessToken
                 },
                 HttpCompletionOption.ResponseHeadersRead,

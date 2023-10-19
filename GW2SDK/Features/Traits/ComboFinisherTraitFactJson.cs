@@ -65,7 +65,8 @@ public static class ComboFinisherTraitFactJson
             Text = text.Map(value => value.GetString()) ?? "",
             Icon = icon.Map(value => value.GetString()) ?? "",
             Percent = percent.Map(value => value.GetInt32()),
-            FinisherName = finisherType.Map(value => value.GetEnum<ComboFinisherName>(missingMemberBehavior))
+            FinisherName =
+                finisherType.Map(value => value.GetEnum<ComboFinisherName>(missingMemberBehavior))
         };
     }
 }

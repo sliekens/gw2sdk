@@ -9,10 +9,7 @@ public sealed class StandingsRequest : IHttpRequest<Replica<HashSet<Standing>>>
     private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/pvp/standings")
     {
         AcceptEncoding = "gzip",
-        Arguments = new QueryBuilder
-        {
-            { "v", SchemaVersion.Recommended }
-        }
+        Arguments = new QueryBuilder { { "v", SchemaVersion.Recommended } }
     };
 
     public string? AccessToken { get; init; }

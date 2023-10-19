@@ -43,9 +43,12 @@ public static class TrainingJson
         return new Training
         {
             Id = id.Map(value => value.GetInt32()),
-            Category = category.Map(value => value.GetEnum<TrainingCategory>(missingMemberBehavior)),
+            Category =
+                category.Map(value => value.GetEnum<TrainingCategory>(missingMemberBehavior)),
             Name = name.Map(value => value.GetStringRequired()),
-            Track = track.Map(values => values.GetList(value => value.GetTrainingObjective(missingMemberBehavior)))
+            Track = track.Map(
+                values => values.GetList(value => value.GetTrainingObjective(missingMemberBehavior))
+            )
         };
     }
 }

@@ -93,8 +93,19 @@ public static class ToySkinJson
             Name = name.Map(value => value.GetStringRequired()),
             Description = description.Map(value => value.GetString()) ?? "",
             Rarity = rarity.Map(value => value.GetEnum<Rarity>(missingMemberBehavior)),
-            Flags = flags.Map(values => values.GetList(value => value.GetEnum<SkinFlag>(missingMemberBehavior))),
-            Restrictions = restrictions.Map(values => values.GetList(value => value.GetEnum<SkinRestriction>(missingMemberBehavior))),
+            Flags =
+                flags.Map(
+                    values => values.GetList(
+                        value => value.GetEnum<SkinFlag>(missingMemberBehavior)
+                    )
+                ),
+            Restrictions =
+                restrictions.Map(
+                    values =>
+                        values.GetList(
+                            value => value.GetEnum<SkinRestriction>(missingMemberBehavior)
+                        )
+                ),
             Icon = icon.Map(value => value.GetString()),
             DamageType = damageType.Map(value => value.GetEnum<DamageType>(missingMemberBehavior))
         };

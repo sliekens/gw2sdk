@@ -6,12 +6,11 @@ namespace GuildWars2.SuperAdventureBox;
 public sealed class
     SuperAdventureBoxProgressRequest : IHttpRequest<Replica<SuperAdventureBoxProgress>>
 {
-    private static readonly HttpRequestMessageTemplate Template =
-        new(Get, "v2/characters/:id/sab")
-        {
-            AcceptEncoding = "gzip",
-            Arguments = new QueryBuilder { { "v", SchemaVersion.Recommended } }
-        };
+    private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/characters/:id/sab")
+    {
+        AcceptEncoding = "gzip",
+        Arguments = new QueryBuilder { { "v", SchemaVersion.Recommended } }
+    };
 
     public SuperAdventureBoxProgressRequest(string characterName)
     {

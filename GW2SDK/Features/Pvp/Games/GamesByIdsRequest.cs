@@ -6,16 +6,15 @@ namespace GuildWars2.Pvp.Games;
 [PublicAPI]
 public sealed class GamesByIdsRequest : IHttpRequest<Replica<HashSet<Game>>>
 {
-    private static readonly HttpRequestMessageTemplate Template =
-        new(Get, "v2/pvp/games")
+    private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/pvp/games")
+    {
+        AcceptEncoding = "gzip",
+        Arguments = new QueryBuilder
         {
-            AcceptEncoding = "gzip",
-            Arguments = new QueryBuilder
-            {
-                { "ids", "all" },
-                { "v", SchemaVersion.Recommended }
-            }
-        };
+            { "ids", "all" },
+            { "v", SchemaVersion.Recommended }
+        }
+    };
 
     public GamesByIdsRequest(IReadOnlyCollection<string> gameIds)
     {

@@ -76,8 +76,8 @@ public sealed record Character
     public required int? EquipmentTabsUnlocked { get; init; }
 
     /// <summary>The active equipment tab of the current character.</summary>
-    /// <remarks>This starts counting at 1, do not use as a collection index.
-    /// Expect API updates to be delayed by a few minutes when switching the active build tab in the game.</remarks>
+    /// <remarks>This starts counting at 1, do not use as a collection index. Expect API updates to be delayed by a few minutes
+    /// when switching the active build tab in the game.</remarks>
     [Scope(ScopeRequirement.Any, Permission.Builds, Permission.Inventories)]
     public required int? ActiveEquipmentTab { get; init; }
 

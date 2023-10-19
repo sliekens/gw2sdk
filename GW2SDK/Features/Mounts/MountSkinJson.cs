@@ -50,7 +50,10 @@ public static class MountSkinJson
             Id = id.Map(value => value.GetInt32()),
             Name = name.Map(value => value.GetStringRequired()),
             Icon = icon.Map(value => value.GetStringRequired()),
-            DyeSlots = dyeSlots.Map(values => values.GetList(value => value.GetDyeSlot(missingMemberBehavior))),
+            DyeSlots =
+                dyeSlots.Map(
+                    values => values.GetList(value => value.GetDyeSlot(missingMemberBehavior))
+                ),
             Mount = mount.Map(value => value.GetMountName(missingMemberBehavior))
         };
     }

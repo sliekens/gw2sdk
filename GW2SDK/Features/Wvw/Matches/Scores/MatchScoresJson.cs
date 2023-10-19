@@ -51,8 +51,13 @@ public static class MatchScoresJson
             Scores = scores.Map(value => value.GetDistribution(missingMemberBehavior)),
             VictoryPoints =
                 victoryPoints.Map(value => value.GetDistribution(missingMemberBehavior)),
-            Skirmishes = skirmishes.Map(values => values.GetList(value => value.GetSkirmish(missingMemberBehavior))),
-            Maps = maps.Map(values => values.GetList(value => value.GetMapSummary(missingMemberBehavior)))
+            Skirmishes =
+                skirmishes.Map(
+                    values => values.GetList(value => value.GetSkirmish(missingMemberBehavior))
+                ),
+            Maps = maps.Map(
+                values => values.GetList(value => value.GetMapSummary(missingMemberBehavior))
+            )
         };
     }
 }

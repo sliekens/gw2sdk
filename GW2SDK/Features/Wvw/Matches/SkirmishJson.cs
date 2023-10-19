@@ -39,7 +39,9 @@ public static class SkirmishJson
         {
             Id = id.Map(value => value.GetInt32()),
             Scores = scores.Map(value => value.GetDistribution(missingMemberBehavior)),
-            MapScores = mapScores.Map(values => values.GetList(value => value.GetMapScores(missingMemberBehavior)))
+            MapScores = mapScores.Map(
+                values => values.GetList(value => value.GetMapScores(missingMemberBehavior))
+            )
         };
     }
 }

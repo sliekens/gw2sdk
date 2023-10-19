@@ -6,12 +6,11 @@ namespace GuildWars2.Wvw.Matches.Stats;
 [PublicAPI]
 public sealed class MatchesStatsIndexRequest : IHttpRequest<Replica<HashSet<string>>>
 {
-    private static readonly HttpRequestMessageTemplate Template =
-        new(Get, "v2/wvw/matches/stats")
-        {
-            AcceptEncoding = "gzip",
-            Arguments = new QueryBuilder { { "v", SchemaVersion.Recommended } }
-        };
+    private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/wvw/matches/stats")
+    {
+        AcceptEncoding = "gzip",
+        Arguments = new QueryBuilder { { "v", SchemaVersion.Recommended } }
+    };
 
     public async Task<Replica<HashSet<string>>> SendAsync(
         HttpClient httpClient,

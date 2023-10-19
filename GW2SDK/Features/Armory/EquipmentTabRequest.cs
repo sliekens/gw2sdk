@@ -6,10 +6,8 @@ namespace GuildWars2.Armory;
 [PublicAPI]
 public sealed class EquipmentTabRequest : IHttpRequest<Replica<EquipmentTab>>
 {
-    private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/characters/:id/equipmenttabs/:tab")
-    {
-        AcceptEncoding = "gzip"
-    };
+    private static readonly HttpRequestMessageTemplate Template =
+        new(Get, "v2/characters/:id/equipmenttabs/:tab") { AcceptEncoding = "gzip" };
 
     public EquipmentTabRequest(string characterName, int tab)
     {
@@ -33,13 +31,9 @@ public sealed class EquipmentTabRequest : IHttpRequest<Replica<EquipmentTab>>
         using var response = await httpClient.SendAsync(
                 Template with
                 {
-                    Path = Template.Path
-                        .Replace(":id", CharacterName)
+                    Path = Template.Path.Replace(":id", CharacterName)
                         .Replace(":tab", Tab.ToString(CultureInfo.InvariantCulture)),
-                    Arguments = new QueryBuilder
-                    {
-                        { "v", SchemaVersion.Recommended }
-                    },
+                    Arguments = new QueryBuilder { { "v", SchemaVersion.Recommended } },
                     BearerToken = AccessToken
                 },
                 HttpCompletionOption.ResponseHeadersRead,

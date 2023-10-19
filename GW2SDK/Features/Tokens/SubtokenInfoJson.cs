@@ -62,10 +62,19 @@ public static class SubtokenInfoJson
         {
             Id = id.Map(value => value.GetStringRequired()),
             Name = name.Map(value => value.GetStringRequired()),
-            Permissions = permissions.Map(values => values.GetList(value => value.GetEnum<Permission>(missingMemberBehavior))),
+            Permissions =
+                permissions.Map(
+                    values => values.GetList(
+                        value => value.GetEnum<Permission>(missingMemberBehavior)
+                    )
+                ),
             ExpiresAt = expiresAt.Map(value => value.GetDateTimeOffset()),
             IssuedAt = issuedAt.Map(value => value.GetDateTimeOffset()),
-            Urls = urls.Map(values => values.GetList(item => new Uri(item.GetStringRequired(), UriKind.Relative)))
+            Urls = urls.Map(
+                values => values.GetList(
+                    item => new Uri(item.GetStringRequired(), UriKind.Relative)
+                )
+            )
         };
     }
 }

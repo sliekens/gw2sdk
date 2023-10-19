@@ -32,8 +32,9 @@ public static class SelectedStatJson
         return new SelectedStat
         {
             Id = id.Map(value => value.GetInt32()),
-            Attributes =
-                attributes.Map(value => value.GetSelectedModification(missingMemberBehavior))
+            Attributes = attributes.Map(
+                value => value.GetSelectedModification(missingMemberBehavior)
+            )
         };
     }
 }

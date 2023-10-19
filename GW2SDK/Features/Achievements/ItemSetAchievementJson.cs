@@ -97,13 +97,26 @@ public static class ItemSetAchievementJson
             Description = description.Map(value => value.GetStringRequired()),
             Requirement = requirement.Map(value => value.GetStringRequired()),
             LockedText = lockedText.Map(value => value.GetStringRequired()),
-            Flags = flags.Map(values => values.GetList(value => value.GetEnum<AchievementFlag>(missingMemberBehavior))),
-            Tiers = tiers.Map(values => values.GetList(value => value.GetAchievementTier(missingMemberBehavior))),
+            Flags =
+                flags.Map(
+                    values =>
+                        values.GetList(
+                            value => value.GetEnum<AchievementFlag>(missingMemberBehavior)
+                        )
+                ),
+            Tiers =
+                tiers.Map(
+                    values => values.GetList(
+                        value => value.GetAchievementTier(missingMemberBehavior)
+                    )
+                ),
             Prerequisites = prerequisites.Map(values => values.GetList(value => value.GetInt32())),
             Rewards = rewards.Map(
                 values => values.GetList(value => value.GetAchievementReward(missingMemberBehavior))
             ),
-            Bits = bits.Map(values => values.GetList(value => value.GetAchievementBit(missingMemberBehavior))),
+            Bits = bits.Map(
+                values => values.GetList(value => value.GetAchievementBit(missingMemberBehavior))
+            ),
             PointCap = pointCap.Map(value => value.GetInt32())
         };
     }

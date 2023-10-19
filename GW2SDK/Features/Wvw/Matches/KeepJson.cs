@@ -81,8 +81,7 @@ public static class KeepJson
             ClaimedBy = claimedBy.Map(value => value.GetString()) ?? "",
             ClaimedAt = claimedAt.Map(value => value.GetDateTimeOffset()),
             YaksDelivered = yaksDelivered.Map(value => value.GetInt32()),
-            GuildUpgrades =
-                guildUpgrades.Map(values => values.GetList(value => value.GetInt32()))
+            GuildUpgrades = guildUpgrades.Map(values => values.GetList(value => value.GetInt32()))
                 ?? new List<int>()
         };
     }

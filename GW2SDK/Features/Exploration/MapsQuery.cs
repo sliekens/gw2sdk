@@ -659,7 +659,9 @@ public sealed class MapsQuery
         return request.SendAsync(http, cancellationToken);
     }
 
-    public Task<Replica<HashSet<int>>> GetMapSummariesIndex(CancellationToken cancellationToken = default)
+    public Task<Replica<HashSet<int>>> GetMapSummariesIndex(
+        CancellationToken cancellationToken = default
+    )
     {
         MapSummariesIndexRequest request = new();
         return request.SendAsync(http, cancellationToken);

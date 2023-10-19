@@ -20,7 +20,6 @@ public sealed class BuildTabsIndexRequest : IHttpRequest<Replica<HashSet<int>>>
 
     public string CharacterName { get; }
 
-
     public string? AccessToken { get; init; }
 
     public async Task<Replica<HashSet<int>>> SendAsync(

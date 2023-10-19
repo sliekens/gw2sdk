@@ -52,7 +52,8 @@ public sealed class MapSummariesByPageRequest : IHttpRequest<Replica<HashSet<Map
             .ConfigureAwait(false);
         return new Replica<HashSet<MapSummary>>
         {
-            Value = json.RootElement.GetSet(entry => entry.GetMapSummary(MissingMemberBehavior)),
+            Value =
+                json.RootElement.GetSet(entry => entry.GetMapSummary(MissingMemberBehavior)),
             ResultContext = response.Headers.GetResultContext(),
             PageContext = response.Headers.GetPageContext(),
             Date = response.Headers.Date.GetValueOrDefault(),

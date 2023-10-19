@@ -6,10 +6,7 @@ namespace GuildWars2.Pvp.Games;
 public sealed class GameByIdRequest : IHttpRequest<Replica<Game>>
 {
     private static readonly HttpRequestMessageTemplate Template =
-        new(Get, "v2/pvp/games")
-        {
-            AcceptEncoding = "gzip"
-        };
+        new(Get, "v2/pvp/games") { AcceptEncoding = "gzip" };
 
     public GameByIdRequest(string gameId)
     {

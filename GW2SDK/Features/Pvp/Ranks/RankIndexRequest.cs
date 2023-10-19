@@ -6,12 +6,11 @@ namespace GuildWars2.Pvp.Ranks;
 [PublicAPI]
 public sealed class RankIndexRequest : IHttpRequest<Replica<HashSet<int>>>
 {
-    private static readonly HttpRequestMessageTemplate Template =
-        new(Get, "v2/pvp/ranks")
-        {
-            AcceptEncoding = "gzip",
-            Arguments = new QueryBuilder { { "v", SchemaVersion.Recommended } }
-        };
+    private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/pvp/ranks")
+    {
+        AcceptEncoding = "gzip",
+        Arguments = new QueryBuilder { { "v", SchemaVersion.Recommended } }
+    };
 
     public async Task<Replica<HashSet<int>>> SendAsync(
         HttpClient httpClient,

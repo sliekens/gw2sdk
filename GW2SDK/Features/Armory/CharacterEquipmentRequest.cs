@@ -1,15 +1,12 @@
-﻿using GuildWars2.Accounts;
-using GuildWars2.Http;
+﻿using GuildWars2.Http;
 
 namespace GuildWars2.Armory;
 
 [PublicAPI]
 public sealed class CharacterEquipmentRequest : IHttpRequest<Replica<CharacterEquipment>>
 {
-    private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/characters/:id/equipment")
-    {
-        AcceptEncoding = "gzip"
-    };
+    private static readonly HttpRequestMessageTemplate Template =
+        new(Get, "v2/characters/:id/equipment") { AcceptEncoding = "gzip" };
 
     public CharacterEquipmentRequest(string characterName)
     {
@@ -31,10 +28,7 @@ public sealed class CharacterEquipmentRequest : IHttpRequest<Replica<CharacterEq
                 Template with
                 {
                     Path = Template.Path.Replace(":id", CharacterName),
-                    Arguments = new QueryBuilder
-                    {
-                        { "v", SchemaVersion.Recommended }
-                    },
+                    Arguments = new QueryBuilder { { "v", SchemaVersion.Recommended } },
                     BearerToken = AccessToken
                 },
                 HttpCompletionOption.ResponseHeadersRead,

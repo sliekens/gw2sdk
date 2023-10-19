@@ -107,9 +107,25 @@ public static class BoozeJson
             Level = level.Map(value => value.GetInt32()),
             Rarity = rarity.Map(value => value.GetEnum<Rarity>(missingMemberBehavior)),
             VendorValue = vendorValue.Map(value => value.GetInt32()),
-            GameTypes = gameTypes.Map(values => values.GetList(value => value.GetEnum<GameType>(missingMemberBehavior))),
-            Flags = flags.Map(values => values.GetList(value => value.GetEnum<ItemFlag>(missingMemberBehavior))),
-            Restrictions = restrictions.Map(values => values.GetList(value => value.GetEnum<ItemRestriction>(missingMemberBehavior))),
+            GameTypes =
+                gameTypes.Map(
+                    values => values.GetList(
+                        value => value.GetEnum<GameType>(missingMemberBehavior)
+                    )
+                ),
+            Flags =
+                flags.Map(
+                    values => values.GetList(
+                        value => value.GetEnum<ItemFlag>(missingMemberBehavior)
+                    )
+                ),
+            Restrictions =
+                restrictions.Map(
+                    values =>
+                        values.GetList(
+                            value => value.GetEnum<ItemRestriction>(missingMemberBehavior)
+                        )
+                ),
             ChatLink = chatLink.Map(value => value.GetStringRequired()),
             Icon = icon.Map(value => value.GetString())
         };

@@ -6,16 +6,15 @@ namespace GuildWars2.Wvw.Objectives;
 [PublicAPI]
 public sealed class ObjectivesRequest : IHttpRequest<Replica<HashSet<Objective>>>
 {
-    private static readonly HttpRequestMessageTemplate Template =
-        new(Get, "v2/wvw/objectives")
+    private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/wvw/objectives")
+    {
+        AcceptEncoding = "gzip",
+        Arguments = new QueryBuilder
         {
-            AcceptEncoding = "gzip",
-            Arguments = new QueryBuilder
-            {
-                { "ids", "all" },
-                { "v", SchemaVersion.Recommended }
-            }
-        };
+            { "ids", "all" },
+            { "v", SchemaVersion.Recommended }
+        }
+    };
 
     public Language? Language { get; init; }
 

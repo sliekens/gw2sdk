@@ -48,7 +48,9 @@ public static class MountJson
             Name = name.Map(value => value.GetStringRequired()),
             DefaultSkin = defaultSkin.Map(value => value.GetInt32()),
             Skins = skins.Map(values => values.GetList(value => value.GetInt32())),
-            Skills = skills.Map(values => values.GetList(value => value.GetSkillReference(missingMemberBehavior)))
+            Skills = skills.Map(
+                values => values.GetList(value => value.GetSkillReference(missingMemberBehavior))
+            )
         };
     }
 }

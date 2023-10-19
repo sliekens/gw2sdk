@@ -53,11 +53,17 @@ public static class DivisionJson
         return new Division
         {
             Name = name.Map(value => value.GetStringRequired()),
-            Flags = flags.Map(values => values.GetList(value => value.GetEnum<DivisionFlag>(missingMemberBehavior))),
+            Flags =
+                flags.Map(
+                    values =>
+                        values.GetList(value => value.GetEnum<DivisionFlag>(missingMemberBehavior))
+                ),
             LargeIcon = largeIcon.Map(value => value.GetStringRequired()),
             SmallIcon = smallIcon.Map(value => value.GetStringRequired()),
             PipIcon = pipIcon.Map(value => value.GetStringRequired()),
-            Tiers = tiers.Map(values => values.GetList(value => value.GetDivisionTier(missingMemberBehavior)))
+            Tiers = tiers.Map(
+                values => values.GetList(value => value.GetDivisionTier(missingMemberBehavior))
+            )
         };
     }
 }

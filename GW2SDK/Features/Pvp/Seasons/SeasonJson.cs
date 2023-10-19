@@ -67,8 +67,14 @@ public static class SeasonJson
             Start = start.Map(value => value.GetDateTime()),
             End = end.Map(value => value.GetDateTime()),
             Active = active.Map(value => value.GetBoolean()),
-            Divisions = divisions.Map(values => values.GetList(value => value.GetDivision(missingMemberBehavior))),
-            Ranks = ranks.Map(values => values.GetList(value => value.GetSeasonRank(missingMemberBehavior))),
+            Divisions =
+                divisions.Map(
+                    values => values.GetList(value => value.GetDivision(missingMemberBehavior))
+                ),
+            Ranks =
+                ranks.Map(
+                    values => values.GetList(value => value.GetSeasonRank(missingMemberBehavior))
+                ),
             Leaderboards =
                 leaderboards.Map(value => value.GetLeaderboardGroup(missingMemberBehavior))
         };

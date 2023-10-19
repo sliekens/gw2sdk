@@ -35,7 +35,9 @@ public static class LeaderboardJson
             Settings =
                 settings.Map(value => value.GetLeaderboardSetting(missingMemberBehavior)),
             Scorings = scorings.Map(
-                values => values.GetList(value => value.GetLeaderboardScoring(missingMemberBehavior))
+                values => values.GetList(
+                    value => value.GetLeaderboardScoring(missingMemberBehavior)
+                )
             )
         };
     }

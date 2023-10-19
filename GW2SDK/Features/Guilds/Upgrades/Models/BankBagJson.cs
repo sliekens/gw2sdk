@@ -94,7 +94,12 @@ public static class BankBagJson
             RequiredLevel = requiredLevel.Map(value => value.GetInt32()),
             Experience = experience.Map(value => value.GetInt32()),
             Prerequisites = prerequisites.Map(values => values.GetList(value => value.GetInt32())),
-            Costs = costs.Map(values => values.GetList(value => value.GetGuildUpgradeCost(missingMemberBehavior))),
+            Costs =
+                costs.Map(
+                    values => values.GetList(
+                        value => value.GetGuildUpgradeCost(missingMemberBehavior)
+                    )
+                ),
             MaxItems = maxItems.Map(value => value.GetInt32()),
             MaxCoins = maxCoins.Map(value => value.GetInt32())
         };

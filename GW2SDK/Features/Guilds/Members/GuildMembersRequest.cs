@@ -42,7 +42,8 @@ public sealed class GuildMembersRequest : IHttpRequest<Replica<List<GuildMember>
             .ConfigureAwait(false);
         return new Replica<List<GuildMember>>
         {
-            Value = json.RootElement.GetList(entry => entry.GetGuildMember(MissingMemberBehavior)),
+            Value =
+                json.RootElement.GetList(entry => entry.GetGuildMember(MissingMemberBehavior)),
             ResultContext = response.Headers.GetResultContext(),
             PageContext = response.Headers.GetPageContext(),
             Date = response.Headers.Date.GetValueOrDefault(),

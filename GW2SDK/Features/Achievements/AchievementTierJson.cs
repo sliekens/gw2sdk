@@ -28,6 +28,7 @@ public static class AchievementTierJson
                 throw new InvalidOperationException(Strings.UnexpectedMember(member.Name));
             }
         }
+
         return new AchievementTier
         {
             Count = count.Map(value => value.GetInt32()),

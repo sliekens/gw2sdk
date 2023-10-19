@@ -30,7 +30,9 @@ public static class RaidJson
         return new Raid
         {
             Id = id.Map(value => value.GetStringRequired()),
-            Wings = wings.Map(values => values.GetList(value => value.GetRaidWing(missingMemberBehavior)))
+            Wings = wings.Map(
+                values => values.GetList(value => value.GetRaidWing(missingMemberBehavior))
+            )
         };
     }
 }

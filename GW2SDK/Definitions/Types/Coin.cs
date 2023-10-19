@@ -1,4 +1,6 @@
-﻿using System.Text;
+﻿#if !NET
+using System.Text;
+#endif
 
 namespace GuildWars2;
 
@@ -6,10 +8,10 @@ namespace GuildWars2;
 [PublicAPI]
 public readonly record struct Coin : IComparable, IComparable<Coin>
 {
+    public static readonly Coin Zero = 0;
+
     /// <summary>Gets the total value in copper coins.</summary>
     public readonly int Amount;
-
-    public static readonly Coin Zero = 0;
 
     public Coin(int gold, int silver, int copper)
         : this((10_000 * gold) + (100 * silver) + copper)
@@ -28,8 +30,6 @@ public readonly record struct Coin : IComparable, IComparable<Coin>
         Amount = amount;
     }
 
-    public int CompareTo(Coin other) => Amount.CompareTo(other.Amount);
-
     public int CompareTo(object? obj)
     {
         if (ReferenceEquals(null, obj))
@@ -41,6 +41,8 @@ public readonly record struct Coin : IComparable, IComparable<Coin>
             ? CompareTo(other)
             : throw new ArgumentException($"Object must be of type {nameof(Coin)}", nameof(obj));
     }
+
+    public int CompareTo(Coin other) => Amount.CompareTo(other.Amount);
 
     public static bool operator <(Coin left, Coin right) => left.CompareTo(right) < 0;
 
@@ -88,7 +90,7 @@ public readonly record struct Coin : IComparable, IComparable<Coin>
         string? formattedGold = null;
         string? formattedSilver = null;
         string? formattedCopper = null;
-        int length = 0;
+        var length = 0;
         if (gold != 0)
         {
             formattedGold = $"{gold:N0} gold";
@@ -118,39 +120,43 @@ public readonly record struct Coin : IComparable, IComparable<Coin>
         }
 
 #if NET
-        return string.Create(length, (formattedGold, formattedSilver, formattedCopper), (buffer, state) =>
-        {
-            var pos = 0;
-
-            if (state.formattedGold is not null)
+        return string.Create(
+            length,
+            (formattedGold, formattedSilver, formattedCopper),
+            (buffer, state) =>
             {
-                state.formattedGold.AsSpan().CopyTo(buffer);
-                pos += state.formattedGold.Length;
-            }
+                var pos = 0;
 
-            if (state.formattedSilver is not null)
-            {
-                if (pos > 0)
+                if (state.formattedGold is not null)
                 {
-                    buffer[pos++] = ',';
-                    buffer[pos++] = ' ';
+                    state.formattedGold.AsSpan().CopyTo(buffer);
+                    pos += state.formattedGold.Length;
                 }
 
-                state.formattedSilver.AsSpan().CopyTo(buffer[pos..]);
-                pos += state.formattedSilver.Length;
-            }
-
-            if (state.formattedCopper is not null)
-            {
-                if (pos > 0)
+                if (state.formattedSilver is not null)
                 {
-                    buffer[pos++] = ',';
-                    buffer[pos++] = ' ';
+                    if (pos > 0)
+                    {
+                        buffer[pos++] = ',';
+                        buffer[pos++] = ' ';
+                    }
+
+                    state.formattedSilver.AsSpan().CopyTo(buffer[pos..]);
+                    pos += state.formattedSilver.Length;
                 }
 
-                state.formattedCopper.AsSpan().CopyTo(buffer[pos..]);
+                if (state.formattedCopper is not null)
+                {
+                    if (pos > 0)
+                    {
+                        buffer[pos++] = ',';
+                        buffer[pos++] = ' ';
+                    }
+
+                    state.formattedCopper.AsSpan().CopyTo(buffer[pos..]);
+                }
             }
-        });
+        );
 #else
         var str = new StringBuilder(length);
         if (formattedGold is not null)

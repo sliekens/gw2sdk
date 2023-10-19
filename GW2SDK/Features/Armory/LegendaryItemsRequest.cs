@@ -6,16 +6,15 @@ namespace GuildWars2.Armory;
 [PublicAPI]
 public sealed class LegendaryItemsRequest : IHttpRequest<Replica<HashSet<LegendaryItem>>>
 {
-    private static readonly HttpRequestMessageTemplate Template =
-        new(Get, "v2/legendaryarmory")
+    private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/legendaryarmory")
+    {
+        AcceptEncoding = "gzip",
+        Arguments = new QueryBuilder
         {
-            AcceptEncoding = "gzip",
-            Arguments = new QueryBuilder
-            {
-                { "ids", "all" },
-                { "v", SchemaVersion.Recommended }
-            }
-        };
+            { "ids", "all" },
+            { "v", SchemaVersion.Recommended }
+        }
+    };
 
     public MissingMemberBehavior MissingMemberBehavior { get; init; }
 

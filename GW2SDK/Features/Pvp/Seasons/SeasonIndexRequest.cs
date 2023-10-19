@@ -6,12 +6,11 @@ namespace GuildWars2.Pvp.Seasons;
 [PublicAPI]
 public sealed class SeasonIndexRequest : IHttpRequest<Replica<HashSet<string>>>
 {
-    private static readonly HttpRequestMessageTemplate Template =
-        new(Get, "v2/pvp/seasons")
-        {
-            AcceptEncoding = "gzip",
-            Arguments = new QueryBuilder { { "v", SchemaVersion.Recommended } }
-        };
+    private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/pvp/seasons")
+    {
+        AcceptEncoding = "gzip",
+        Arguments = new QueryBuilder { { "v", SchemaVersion.Recommended } }
+    };
 
     public async Task<Replica<HashSet<string>>> SendAsync(
         HttpClient httpClient,

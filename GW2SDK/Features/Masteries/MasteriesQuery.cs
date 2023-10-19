@@ -11,6 +11,40 @@ public sealed class MasteriesQuery
         http.BaseAddress ??= BaseAddress.DefaultUri;
     }
 
+    #region v2/account/masteries
+
+    public Task<Replica<HashSet<MasteryProgress>>> GetMasteryProgress(
+        string? accessToken,
+        CancellationToken cancellationToken = default
+    )
+    {
+        MasteryProgressRequest request = new()
+        {
+            AccessToken = accessToken,
+            MissingMemberBehavior = MissingMemberBehavior.Error
+        };
+        return request.SendAsync(http, cancellationToken);
+    }
+
+    #endregion v2/account/masteries
+
+    #region v2/account/mastery/points
+
+    public Task<Replica<MasteryPointsProgress>> GetMasteryPointsProgress(
+        string? accessToken,
+        CancellationToken cancellationToken = default
+    )
+    {
+        MasteryPointsProgressRequest request = new()
+        {
+            AccessToken = accessToken,
+            MissingMemberBehavior = MissingMemberBehavior.Error
+        };
+        return request.SendAsync(http, cancellationToken);
+    }
+
+    #endregion v2/account/mastery/points
+
     #region v2/masteries
 
     public Task<Replica<HashSet<Mastery>>> GetMasteries(
@@ -66,38 +100,4 @@ public sealed class MasteriesQuery
     }
 
     #endregion v2/masteries
-
-    #region v2/account/masteries
-
-    public Task<Replica<HashSet<MasteryProgress>>> GetMasteryProgress(
-        string? accessToken,
-        CancellationToken cancellationToken = default
-    )
-    {
-        MasteryProgressRequest request = new()
-        {
-            AccessToken = accessToken,
-            MissingMemberBehavior = MissingMemberBehavior.Error
-        };
-        return request.SendAsync(http, cancellationToken);
-    }
-
-    #endregion v2/account/masteries
-
-    #region v2/account/mastery/points
-
-    public Task<Replica<MasteryPointsProgress>> GetMasteryPointsProgress(
-        string? accessToken,
-        CancellationToken cancellationToken = default
-    )
-    {
-        MasteryPointsProgressRequest request = new()
-        {
-            AccessToken = accessToken,
-            MissingMemberBehavior = MissingMemberBehavior.Error
-        };
-        return request.SendAsync(http, cancellationToken);
-    }
-
-    #endregion v2/account/mastery/points
 }

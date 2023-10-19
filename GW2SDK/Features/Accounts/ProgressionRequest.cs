@@ -33,7 +33,8 @@ public sealed class ProgressionRequest : IHttpRequest<Replica<HashSet<Progressio
             .ConfigureAwait(false);
         return new Replica<HashSet<Progression>>
         {
-            Value = json.RootElement.GetSet(entry => entry.GetProgression(MissingMemberBehavior)),
+            Value =
+                json.RootElement.GetSet(entry => entry.GetProgression(MissingMemberBehavior)),
             ResultContext = response.Headers.GetResultContext(),
             PageContext = response.Headers.GetPageContext(),
             Date = response.Headers.Date.GetValueOrDefault(),

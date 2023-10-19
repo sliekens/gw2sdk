@@ -5,12 +5,11 @@ namespace GuildWars2.Inventories;
 [PublicAPI]
 public sealed class SharedInventoryRequest : IHttpRequest<Replica<Inventory>>
 {
-    private static readonly HttpRequestMessageTemplate Template =
-        new(Get, "v2/account/inventory")
-        {
-            AcceptEncoding = "gzip",
-            Arguments = new QueryBuilder { { "v", SchemaVersion.Recommended } }
-        };
+    private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/account/inventory")
+    {
+        AcceptEncoding = "gzip",
+        Arguments = new QueryBuilder { { "v", SchemaVersion.Recommended } }
+    };
 
     public string? AccessToken { get; init; }
 

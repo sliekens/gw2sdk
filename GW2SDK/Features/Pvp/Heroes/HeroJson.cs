@@ -66,7 +66,9 @@ public static class HeroJson
             Stats = stats.Map(value => value.GetHeroStats(missingMemberBehavior)),
             Overlay = overlay.Map(value => value.GetStringRequired()),
             Underlay = underlay.Map(value => value.GetStringRequired()),
-            Skins = skins.Map(values => values.GetList(value => value.GetHeroSkin(missingMemberBehavior)))
+            Skins = skins.Map(
+                values => values.GetList(value => value.GetHeroSkin(missingMemberBehavior))
+            )
         };
     }
 }

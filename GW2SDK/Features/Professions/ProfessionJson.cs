@@ -81,14 +81,29 @@ public static class ProfessionJson
             Code = code.Map(value => value.GetInt32()),
             Icon = icon.Map(value => value.GetStringRequired()),
             IconBig = iconBig.Map(value => value.GetStringRequired()),
-            Specializations = specializations.Map(values => values.GetList(value => value.GetInt32())),
+            Specializations =
+                specializations.Map(values => values.GetList(value => value.GetInt32())),
             Weapons =
                 weapons.Map(
-                    value => value.GetMap(item => item.GetWeaponProficiency(missingMemberBehavior))
+                    value =>
+                        value.GetMap(item => item.GetWeaponProficiency(missingMemberBehavior))
                 ),
-            Flags = flags.Map(values => values.GetList(value => value.GetEnum<ProfessionFlag>(missingMemberBehavior))),
-            Skills = skills.Map(values => values.GetList(value => value.GetSkillReference(missingMemberBehavior))),
-            Training = training.Map(values => values.GetList(value => value.GetTraining(missingMemberBehavior))),
+            Flags =
+                flags.Map(
+                    values =>
+                        values.GetList(
+                            value => value.GetEnum<ProfessionFlag>(missingMemberBehavior)
+                        )
+                ),
+            Skills =
+                skills.Map(
+                    values =>
+                        values.GetList(value => value.GetSkillReference(missingMemberBehavior))
+                ),
+            Training =
+                training.Map(
+                    values => values.GetList(value => value.GetTraining(missingMemberBehavior))
+                ),
             SkillsByPalette =
                 skillsByPalette.Map(value => value.GetSkillsByPalette(missingMemberBehavior))
         };

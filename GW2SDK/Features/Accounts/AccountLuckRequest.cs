@@ -5,12 +5,11 @@ namespace GuildWars2.Accounts;
 [PublicAPI]
 public sealed class AccountLuckRequest : IHttpRequest<Replica<AccountLuck>>
 {
-    private static readonly HttpRequestMessageTemplate Template =
-        new(Get, "v2/account/luck")
-        {
-            AcceptEncoding = "gzip",
-            Arguments = new QueryBuilder { { "v", SchemaVersion.Recommended } }
-        };
+    private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/account/luck")
+    {
+        AcceptEncoding = "gzip",
+        Arguments = new QueryBuilder { { "v", SchemaVersion.Recommended } }
+    };
 
     public string? AccessToken { get; init; }
 

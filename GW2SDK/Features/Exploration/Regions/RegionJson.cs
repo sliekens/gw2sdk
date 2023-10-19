@@ -56,7 +56,7 @@ public static class RegionJson
             Maps = maps.Map(
                 value => value.GetMap(entry => entry.GetMap(missingMemberBehavior))
                     .ToDictionary(kvp => int.Parse(kvp.Key), kvp => kvp.Value)
-            ),
+            )
         };
     }
 }

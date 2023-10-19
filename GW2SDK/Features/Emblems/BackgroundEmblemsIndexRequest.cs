@@ -6,12 +6,11 @@ namespace GuildWars2.Emblems;
 [PublicAPI]
 public sealed class BackgroundEmblemsIndexRequest : IHttpRequest<Replica<HashSet<int>>>
 {
-    private static readonly HttpRequestMessageTemplate Template =
-        new(Get, "v2/emblem/backgrounds")
-        {
-            AcceptEncoding = "gzip",
-            Arguments = new QueryBuilder { { "v", SchemaVersion.Recommended } }
-        };
+    private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/emblem/backgrounds")
+    {
+        AcceptEncoding = "gzip",
+        Arguments = new QueryBuilder { { "v", SchemaVersion.Recommended } }
+    };
 
     public async Task<Replica<HashSet<int>>> SendAsync(
         HttpClient httpClient,

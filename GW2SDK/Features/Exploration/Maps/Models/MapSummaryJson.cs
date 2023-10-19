@@ -6,7 +6,10 @@ namespace GuildWars2.Exploration.Maps;
 [PublicAPI]
 public static class MapSummaryJson
 {
-    public static MapSummary GetMapSummary(this JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    public static MapSummary GetMapSummary(
+        this JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
         RequiredMember id = "id";
         RequiredMember name = "name";

@@ -49,7 +49,7 @@ public static class GuildUpgradeActivityJson
             }
             else if (member.NameEquals(upgradeId.Name))
             {
-				upgradeId = member;
+                upgradeId = member;
             }
             else if (member.NameEquals(recipeId.Name))
             {

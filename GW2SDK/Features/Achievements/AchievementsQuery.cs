@@ -35,6 +35,19 @@ public sealed class AchievementsQuery
 
     #endregion v2/achievements/daily
 
+    #region v2/account/titles
+
+    public Task<Replica<HashSet<int>>> GetUnlockedTitlesIndex(
+        string? accessToken,
+        CancellationToken cancellationToken = default
+    )
+    {
+        UnlockedTitlesRequest request = new() { AccessToken = accessToken };
+        return request.SendAsync(http, cancellationToken);
+    }
+
+    #endregion v2/account/titles
+
     #region v2/achievements
 
     public Task<Replica<HashSet<int>>> GetAchievementsIndex(
@@ -440,17 +453,4 @@ public sealed class AchievementsQuery
     }
 
     #endregion v2/titles
-
-    #region v2/account/titles
-
-    public Task<Replica<HashSet<int>>> GetUnlockedTitlesIndex(
-        string? accessToken,
-        CancellationToken cancellationToken = default
-    )
-    {
-        UnlockedTitlesRequest request = new() { AccessToken = accessToken };
-        return request.SendAsync(http, cancellationToken);
-    }
-
-    #endregion v2/account/titles
 }

@@ -33,7 +33,7 @@ public static class GuildStorageSlotJson
         return new GuildStorageSlot
         {
             ItemId = itemId.Map(value => value.GetInt32()),
-            Count = count.Map(value => value.GetInt32()),
+            Count = count.Map(value => value.GetInt32())
         };
     }
 }

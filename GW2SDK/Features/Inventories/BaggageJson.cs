@@ -25,6 +25,11 @@ public static class BaggageJson
             }
         }
 
-        return new Baggage { Bags = bags.Map(values => values.GetList(value => value.GetBag(missingMemberBehavior))) };
+        return new Baggage
+        {
+            Bags = bags.Map(
+                values => values.GetList(value => value.GetBag(missingMemberBehavior))
+            )
+        };
     }
 }

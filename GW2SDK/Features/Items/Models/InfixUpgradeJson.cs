@@ -38,7 +38,11 @@ public static class InfixUpgradeJson
         {
             ItemstatsId = id.Map(value => value.GetInt32()),
             Attributes =
-                attributes.Map(values => values.GetList(value => value.GetUpgradeAttribute(missingMemberBehavior))),
+                attributes.Map(
+                    values => values.GetList(
+                        value => value.GetUpgradeAttribute(missingMemberBehavior)
+                    )
+                ),
             Buff = buff.Map(value => value.GetBuff(missingMemberBehavior))
         };
     }

@@ -11,6 +11,25 @@ public sealed class StoriesQuery
         http.BaseAddress ??= BaseAddress.DefaultUri;
     }
 
+    #region v2/characters/:id/backstory
+
+    public Task<Replica<CharacterBackstory>> GetCharacterBackstory(
+        string characterName,
+        string? accessToken,
+        MissingMemberBehavior missingMemberBehavior = default,
+        CancellationToken cancellationToken = default
+    )
+    {
+        CharacterBackstoryRequest request = new(characterName)
+        {
+            AccessToken = accessToken,
+            MissingMemberBehavior = missingMemberBehavior
+        };
+        return request.SendAsync(http, cancellationToken);
+    }
+
+    #endregion
+
     #region v2/backstory/questions
 
     public Task<Replica<HashSet<BackstoryQuestion>>> GetBackstoryQuestions(
@@ -150,25 +169,6 @@ public sealed class StoriesQuery
         {
             PageSize = pageSize,
             Language = language,
-            MissingMemberBehavior = missingMemberBehavior
-        };
-        return request.SendAsync(http, cancellationToken);
-    }
-
-    #endregion
-
-    #region v2/characters/:id/backstory
-
-    public Task<Replica<CharacterBackstory>> GetCharacterBackstory(
-        string characterName,
-        string? accessToken,
-        MissingMemberBehavior missingMemberBehavior = default,
-        CancellationToken cancellationToken = default
-    )
-    {
-        CharacterBackstoryRequest request = new(characterName)
-        {
-            AccessToken = accessToken,
             MissingMemberBehavior = missingMemberBehavior
         };
         return request.SendAsync(http, cancellationToken);

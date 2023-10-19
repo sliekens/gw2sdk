@@ -57,7 +57,9 @@ public static class SeasonRankJson
             Icon = icon.Map(value => value.GetStringRequired()),
             Overlay = overlay.Map(value => value.GetStringRequired()),
             SmallOverlay = smallOverlay.Map(value => value.GetStringRequired()),
-            Tiers = tiers.Map(values => values.GetList(value => value.GetRankTier(missingMemberBehavior)))
+            Tiers = tiers.Map(
+                values => values.GetList(value => value.GetRankTier(missingMemberBehavior))
+            )
         };
     }
 }

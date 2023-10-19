@@ -48,7 +48,9 @@ public static class QuestJson
             Name = name.Map(value => value.GetStringRequired()),
             Level = level.Map(value => value.GetInt32()),
             Story = story.Map(value => value.GetInt32()),
-            Goals = goals.Map(values => values.GetList(value => value.GetGoal(missingMemberBehavior)))
+            Goals = goals.Map(
+                values => values.GetList(value => value.GetGoal(missingMemberBehavior))
+            )
         };
     }
 }

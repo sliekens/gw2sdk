@@ -6,16 +6,15 @@ namespace GuildWars2.Pvp.Heroes;
 [PublicAPI]
 public sealed class HeroRequest : IHttpRequest<Replica<HashSet<Hero>>>
 {
-    private static readonly HttpRequestMessageTemplate Template =
-        new(Get, "v2/pvp/heroes")
+    private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/pvp/heroes")
+    {
+        AcceptEncoding = "gzip",
+        Arguments = new QueryBuilder
         {
-            AcceptEncoding = "gzip",
-            Arguments = new QueryBuilder
-            {
-                { "ids", "all" },
-                { "v", SchemaVersion.Recommended }
-            }
-        };
+            { "ids", "all" },
+            { "v", SchemaVersion.Recommended }
+        }
+    };
 
     public Language? Language { get; init; }
 

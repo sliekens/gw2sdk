@@ -6,10 +6,7 @@ namespace GuildWars2.Pvp.Games;
 [PublicAPI]
 public static class ScoreJson
 {
-    public static Score GetScore(
-        this JsonElement json,
-        MissingMemberBehavior missingMemberBehavior
-    )
+    public static Score GetScore(this JsonElement json, MissingMemberBehavior missingMemberBehavior)
     {
         RequiredMember red = "red";
         RequiredMember blue = "blue";

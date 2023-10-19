@@ -30,6 +30,21 @@ public sealed class ArmoryQuery
 
     #endregion v2/characters/:id/equipment
 
+    #region v2/account/legendaryarmory
+
+    public Task<Replica<HashSet<BoundLegendaryItem>>> GetBoundLegendaryItems(
+        string? accessToken,
+        MissingMemberBehavior missingMemberBehavior = default,
+        CancellationToken cancellationToken = default
+    )
+    {
+        BoundLegendaryItemsRequest request =
+            new(accessToken) { MissingMemberBehavior = missingMemberBehavior };
+        return request.SendAsync(http, cancellationToken);
+    }
+
+    #endregion v2/account/legendaryarmory
+
     #region v2/characters/:id/equipmenttabs
 
     public Task<Replica<HashSet<int>>> GetEquipmentTabsIndex(
@@ -74,21 +89,6 @@ public sealed class ArmoryQuery
     }
 
     #endregion v2/characters/:id/equipmenttabs
-
-    #region v2/account/legendaryarmory
-
-    public Task<Replica<HashSet<BoundLegendaryItem>>> GetBoundLegendaryItems(
-        string? accessToken,
-        MissingMemberBehavior missingMemberBehavior = default,
-        CancellationToken cancellationToken = default
-    )
-    {
-        BoundLegendaryItemsRequest request =
-            new(accessToken) { MissingMemberBehavior = missingMemberBehavior };
-        return request.SendAsync(http, cancellationToken);
-    }
-
-    #endregion v2/account/legendaryarmory
 
     #region v2/legendaryarmory
 

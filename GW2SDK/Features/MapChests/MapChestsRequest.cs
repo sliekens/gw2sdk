@@ -6,16 +6,15 @@ namespace GuildWars2.MapChests;
 [PublicAPI]
 public sealed class MapChestsRequest : IHttpRequest<Replica<HashSet<MapChest>>>
 {
-    private static readonly HttpRequestMessageTemplate Template =
-        new(Get, "v2/mapchests")
+    private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/mapchests")
+    {
+        AcceptEncoding = "gzip",
+        Arguments = new QueryBuilder
         {
-            AcceptEncoding = "gzip",
-            Arguments = new QueryBuilder
-            {
-                { "ids", "all" },
-                { "v", SchemaVersion.Recommended }
-            }
-        };
+            { "ids", "all" },
+            { "v", SchemaVersion.Recommended }
+        }
+    };
 
     public MissingMemberBehavior MissingMemberBehavior { get; init; }
 

@@ -63,13 +63,22 @@ public static class GuildTeamJson
         return new GuildTeam
         {
             Id = id.Map(value => value.GetInt32()),
-            Members = members.Map(values => values.GetList(value => value.GetGuildTeamMember(missingMemberBehavior))),
+            Members =
+                members.Map(
+                    values => values.GetList(
+                        value => value.GetGuildTeamMember(missingMemberBehavior)
+                    )
+                ),
             Name = name.Map(value => value.GetStringRequired()),
             State = state.Map(value => value.GetEnum<GuildTeamState>(missingMemberBehavior)),
             Aggregate = aggregate.Map(value => value.GetResults(missingMemberBehavior)),
             Ladders = ladders.Map(value => value.GetLadders(missingMemberBehavior)),
-            Games = games.Map(values => values.GetList(value => value.GetGame(missingMemberBehavior))),
-            Seasons = seasons.Map(values => values.GetList(value => value.GetSeason(missingMemberBehavior)))
+            Games = games.Map(
+                values => values.GetList(value => value.GetGame(missingMemberBehavior))
+            ),
+            Seasons = seasons.Map(
+                    values => values.GetList(value => value.GetSeason(missingMemberBehavior))
+                )
                 ?? new List<Season>()
         };
     }

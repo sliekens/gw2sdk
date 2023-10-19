@@ -51,7 +51,9 @@ public static class AbilityJson
             Name = name.Map(value => value.GetStringRequired()),
             Description = description.Map(value => value.GetStringRequired()),
             Icon = icon.Map(value => value.GetStringRequired()),
-            Ranks = ranks.Map(values => values.GetList(value => value.GetAbilityRank(missingMemberBehavior)))
+            Ranks = ranks.Map(
+                values => values.GetList(value => value.GetAbilityRank(missingMemberBehavior))
+            )
         };
     }
 }

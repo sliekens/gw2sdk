@@ -84,10 +84,23 @@ public static class ScepterRecipeJson
             OutputItemCount = outputItemCount.Map(value => value.GetInt32()),
             MinRating = minRating.Map(value => value.GetInt32()),
             TimeToCraft = timeToCraft.Map(value => TimeSpan.FromMilliseconds(value.GetDouble())),
-            Disciplines = disciplines.Map(values => values.GetList(value => value.GetEnum<CraftingDisciplineName>(missingMemberBehavior))),
-            Flags = flags.Map(values => values.GetList(value => value.GetEnum<RecipeFlag>(missingMemberBehavior))),
+            Disciplines =
+                disciplines.Map(
+                    values =>
+                        values.GetList(
+                            value => value.GetEnum<CraftingDisciplineName>(missingMemberBehavior)
+                        )
+                ),
+            Flags =
+                flags.Map(
+                    values => values.GetList(
+                        value => value.GetEnum<RecipeFlag>(missingMemberBehavior)
+                    )
+                ),
             Ingredients =
-                ingredients.Map(values => values.GetList(value => value.GetIngredient(missingMemberBehavior))),
+                ingredients.Map(
+                    values => values.GetList(value => value.GetIngredient(missingMemberBehavior))
+                ),
             ChatLink = chatLink.Map(value => value.GetStringRequired())
         };
     }

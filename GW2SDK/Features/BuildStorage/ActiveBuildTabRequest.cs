@@ -5,10 +5,8 @@ namespace GuildWars2.BuildStorage;
 [PublicAPI]
 public sealed class ActiveBuildTabRequest : IHttpRequest<Replica<BuildTab>>
 {
-    private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/characters/:id/buildtabs/active")
-    {
-        AcceptEncoding = "gzip"
-    };
+    private static readonly HttpRequestMessageTemplate Template =
+        new(Get, "v2/characters/:id/buildtabs/active") { AcceptEncoding = "gzip" };
 
     public ActiveBuildTabRequest(string characterName)
     {
@@ -30,10 +28,7 @@ public sealed class ActiveBuildTabRequest : IHttpRequest<Replica<BuildTab>>
                 Template with
                 {
                     Path = Template.Path.Replace(":id", CharacterName),
-                    Arguments = new QueryBuilder
-                    {
-                        { "v", SchemaVersion.Recommended }
-                    },
+                    Arguments = new QueryBuilder { { "v", SchemaVersion.Recommended } },
                     BearerToken = AccessToken
                 },
                 HttpCompletionOption.ResponseHeadersRead,

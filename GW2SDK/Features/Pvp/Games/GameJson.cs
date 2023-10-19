@@ -6,10 +6,7 @@ namespace GuildWars2.Pvp.Games;
 [PublicAPI]
 public static class GameJson
 {
-    public static Game GetGame(
-        this JsonElement json,
-        MissingMemberBehavior missingMemberBehavior
-    )
+    public static Game GetGame(this JsonElement json, MissingMemberBehavior missingMemberBehavior)
     {
         RequiredMember id = "id";
         RequiredMember mapId = "map_id";
@@ -83,12 +80,12 @@ public static class GameJson
             Ended = ended.Map(value => value.GetDateTimeOffset()),
             Result = result.Map(value => value.GetEnum<PvpResult>(missingMemberBehavior)),
             Team = team.Map(value => value.GetEnum<PvpTeamColor>(missingMemberBehavior)),
-            Profession = profession.Map(value => value.GetEnum<ProfessionName>(missingMemberBehavior)),
+            Profession =
+                profession.Map(value => value.GetEnum<ProfessionName>(missingMemberBehavior)),
             RatingType = ratingType.Map(value => value.GetRatingType(missingMemberBehavior)),
             RatingChange = ratingChange.Map(value => value.GetInt32()),
             SeasonId = seasonId.Map(value => value.GetString()),
             Score = score.Map(value => value.GetScore(missingMemberBehavior))
         };
-
     }
 }

@@ -6,12 +6,11 @@ namespace GuildWars2.Masteries;
 [PublicAPI]
 public sealed class MasteryProgressRequest : IHttpRequest<Replica<HashSet<MasteryProgress>>>
 {
-    private static readonly HttpRequestMessageTemplate Template =
-        new(Get, "v2/account/masteries")
-        {
-            AcceptEncoding = "gzip",
-            Arguments = new QueryBuilder { { "v", SchemaVersion.Recommended } }
-        };
+    private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/account/masteries")
+    {
+        AcceptEncoding = "gzip",
+        Arguments = new QueryBuilder { { "v", SchemaVersion.Recommended } }
+    };
 
     public string? AccessToken { get; init; }
 

@@ -112,13 +112,19 @@ public static class AchievementJson
                             value => value.GetEnum<AchievementFlag>(missingMemberBehavior)
                         )
                 ),
-            Tiers = tiers.Map(values => values.GetList(value => value.GetAchievementTier(missingMemberBehavior))),
-            Prerequisites =
-                prerequisites.Map(values => values.GetList(value => value.GetInt32())),
+            Tiers =
+                tiers.Map(
+                    values => values.GetList(
+                        value => value.GetAchievementTier(missingMemberBehavior)
+                    )
+                ),
+            Prerequisites = prerequisites.Map(values => values.GetList(value => value.GetInt32())),
             Rewards = rewards.Map(
                 values => values.GetList(value => value.GetAchievementReward(missingMemberBehavior))
             ),
-            Bits = bits.Map(values => values.GetList(value => value.GetAchievementBit(missingMemberBehavior))),
+            Bits = bits.Map(
+                values => values.GetList(value => value.GetAchievementBit(missingMemberBehavior))
+            ),
             PointCap = pointCap.Map(value => value.GetInt32())
         };
     }

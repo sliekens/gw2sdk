@@ -38,10 +38,7 @@ public static class SkillBarJson
         return new SkillBar
         {
             Heal = heal.Map(value => value.GetInt32()),
-            Utilities =
-                utilities.Map(
-                    values => values.GetList(value => value.GetNullableInt32())
-                ),
+            Utilities = utilities.Map(values => values.GetList(value => value.GetNullableInt32())),
             Elite = elite.Map(value => value.GetInt32())
         };
     }

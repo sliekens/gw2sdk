@@ -69,7 +69,8 @@ public static class StashActivityJson
             Id = id.Map(value => value.GetInt32()),
             Time = time.Map(value => value.GetDateTimeOffset()),
             User = user.Map(value => value.GetStringRequired()),
-            Operation = operation.Map(value => value.GetEnum<StashOperation>(missingMemberBehavior)),
+            Operation =
+                operation.Map(value => value.GetEnum<StashOperation>(missingMemberBehavior)),
             ItemId = itemId.Map(value => value.GetInt32()),
             Count = count.Map(value => value.GetInt32()),
             Coins = coins.Map(value => value.GetInt32())

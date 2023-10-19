@@ -13,7 +13,7 @@ public static class CharacterBackstoryJson
     {
         RequiredMember backstory = "backstory";
 
-        foreach (var member in json.EnumerateObject())  
+        foreach (var member in json.EnumerateObject())
         {
             if (member.NameEquals(backstory.Name))
             {
@@ -27,7 +27,9 @@ public static class CharacterBackstoryJson
 
         return new CharacterBackstory
         {
-            Backstory = backstory.Map(values => values.GetList(entry => entry.GetStringRequired())).ToList()
+            Backstory = backstory
+                .Map(values => values.GetList(entry => entry.GetStringRequired()))
+                .ToList()
         };
     }
 }

@@ -128,8 +128,7 @@ public static class BundleSkillJson
                 ),
             Description = description.Map(value => value.GetStringRequired()),
             Icon = icon.Map(value => value.GetString()),
-            WeaponType =
-                weaponType.Map(value => value.GetEnum<WeaponType>(missingMemberBehavior)),
+            WeaponType = weaponType.Map(value => value.GetEnum<WeaponType>(missingMemberBehavior)),
             Professions =
                 professions.Map(
                     values =>

@@ -6,15 +6,11 @@ namespace GuildWars2.Pvp.Games;
 [PublicAPI]
 public sealed class GamesByPageRequest : IHttpRequest<Replica<HashSet<Game>>>
 {
-    private static readonly HttpRequestMessageTemplate Template =
-        new(Get, "v2/pvp/games")
-        {
-            AcceptEncoding = "gzip",
-            Arguments = new QueryBuilder
-            {
-                { "v", SchemaVersion.Recommended }
-            }
-        };
+    private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/pvp/games")
+    {
+        AcceptEncoding = "gzip",
+        Arguments = new QueryBuilder { { "v", SchemaVersion.Recommended } }
+    };
 
     public GamesByPageRequest(int pageIndex)
     {
@@ -56,7 +52,6 @@ public sealed class GamesByPageRequest : IHttpRequest<Replica<HashSet<Game>>>
         using var json = await response.Content.ReadAsJsonAsync(cancellationToken)
             .ConfigureAwait(false);
         return new Replica<HashSet<Game>>
-        
         {
             Value = json.RootElement.GetSet(entry => entry.GetGame(MissingMemberBehavior)),
             ResultContext = response.Headers.GetResultContext(),

@@ -7,9 +7,14 @@ namespace GuildWars2;
 public enum PvpRatingType
 {
     None,
+
     Ranked,
+
     Ranked2v2,
+
     Ranked3v3,
+
     Unranked,
+
     Placeholder
 }

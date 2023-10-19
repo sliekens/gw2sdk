@@ -6,16 +6,15 @@ namespace GuildWars2.Stories;
 [PublicAPI]
 public sealed class SeasonsRequest : IHttpRequest<Replica<HashSet<Season>>>
 {
-    private static readonly HttpRequestMessageTemplate Template =
-        new(Get, "v2/stories/seasons")
+    private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/stories/seasons")
+    {
+        AcceptEncoding = "gzip",
+        Arguments = new QueryBuilder
         {
-            AcceptEncoding = "gzip",
-            Arguments = new QueryBuilder
-            {
-                { "ids", "all" },
-                { "v", SchemaVersion.Recommended }
-            }
-        };
+            { "ids", "all" },
+            { "v", SchemaVersion.Recommended }
+        }
+    };
 
     public Language? Language { get; init; }
 

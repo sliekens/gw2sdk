@@ -6,18 +6,20 @@ namespace GuildWars2.Pvp.Games;
 [PublicAPI]
 public sealed class GamesIndexRequest : IHttpRequest<Replica<HashSet<string>>>
 {
-    private static readonly HttpRequestMessageTemplate Template =
-        new(Get, "v2/pvp/games")
-        {
-            AcceptEncoding = "gzip",
-            Arguments = new QueryBuilder { { "v", SchemaVersion.Recommended } }
-        };
+    private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/pvp/games")
+    {
+        AcceptEncoding = "gzip",
+        Arguments = new QueryBuilder { { "v", SchemaVersion.Recommended } }
+    };
 
     public string? AccessToken { get; init; }
 
     public MissingMemberBehavior MissingMemberBehavior { get; init; }
 
-    public async Task<Replica<HashSet<string>>> SendAsync(HttpClient httpClient, CancellationToken cancellationToken)
+    public async Task<Replica<HashSet<string>>> SendAsync(
+        HttpClient httpClient,
+        CancellationToken cancellationToken
+    )
     {
         using var response = await httpClient.SendAsync(
                 Template with { BearerToken = AccessToken },

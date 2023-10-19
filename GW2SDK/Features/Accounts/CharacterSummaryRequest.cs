@@ -5,12 +5,11 @@ namespace GuildWars2.Accounts;
 [PublicAPI]
 public sealed class CharacterSummaryRequest : IHttpRequest<Replica<CharacterSummary>>
 {
-    private static readonly HttpRequestMessageTemplate Template =
-        new(Get, "v2/characters/:id/core")
-        {
-            AcceptEncoding = "gzip",
-            Arguments = new QueryBuilder { { "v", SchemaVersion.Recommended } }
-        };
+    private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/characters/:id/core")
+    {
+        AcceptEncoding = "gzip",
+        Arguments = new QueryBuilder { { "v", SchemaVersion.Recommended } }
+    };
 
     public CharacterSummaryRequest(string characterName)
     {

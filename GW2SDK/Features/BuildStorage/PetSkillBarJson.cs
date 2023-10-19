@@ -34,9 +34,7 @@ public static class PetSkillBarJson
         {
             Terrestrial =
                 terrestrial.Map(values => values.GetList(value => value.GetNullableInt32())),
-            Aquatic = aquatic.Map(
-                values => values.GetList(value => value.GetNullableInt32())
-            )
+            Aquatic = aquatic.Map(values => values.GetList(value => value.GetNullableInt32()))
         };
     }
 }

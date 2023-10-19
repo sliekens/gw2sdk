@@ -42,7 +42,8 @@ public static class GuildUpgradeCostJson
 
         return new GuildUpgradeCost
         {
-            Kind = kind.Map(value => value.GetEnum<GuildUpgradeCostKind>(missingMemberBehavior)),
+            Kind =
+                kind.Map(value => value.GetEnum<GuildUpgradeCostKind>(missingMemberBehavior)),
             Name = name.Map(value => value.GetString()) ?? "",
             Count = count.Map(value => value.GetInt32()),
             ItemId = itemId.Map(value => value.GetInt32())

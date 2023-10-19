@@ -10,4 +10,3 @@ public sealed record GuildEmblem
 
     public required IReadOnlyCollection<GuildEmblemFlag> Flags { get; init; }
 }
-

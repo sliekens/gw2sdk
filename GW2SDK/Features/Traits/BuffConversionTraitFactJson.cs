@@ -70,8 +70,12 @@ public static class BuffConversionTraitFactJson
             Text = text.Map(value => value.GetString()) ?? "",
             Icon = icon.Map(value => value.GetString()) ?? "",
             Percent = percent.Map(value => value.GetInt32()),
-            Source = source.Map(value => value.GetEnum<AttributeAdjustTarget>(missingMemberBehavior)),
-            Target = target.Map(value => value.GetEnum<AttributeAdjustTarget>(missingMemberBehavior))
+            Source = source.Map(
+                value => value.GetEnum<AttributeAdjustTarget>(missingMemberBehavior)
+            ),
+            Target = target.Map(
+                value => value.GetEnum<AttributeAdjustTarget>(missingMemberBehavior)
+            )
         };
     }
 }

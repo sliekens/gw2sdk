@@ -1,5 +1,4 @@
 ﻿using System.Text.Json;
-using GuildWars2.Json;
 
 namespace GuildWars2.Pvp.Seasons;
 
@@ -26,7 +25,9 @@ public static class LeaderboardTierRangeJson
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {
-                throw new InvalidOperationException(Strings.UnexpectedArrayLength(json.GetArrayLength()));
+                throw new InvalidOperationException(
+                    Strings.UnexpectedArrayLength(json.GetArrayLength())
+                );
             }
         }
 

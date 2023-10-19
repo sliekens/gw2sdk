@@ -60,14 +60,20 @@ public static class BuildJson
         return new Build
         {
             Name = name.Map(value => value.GetStringRequired()),
-            Profession = profession.Map(value => value.GetEnum<ProfessionName>(missingMemberBehavior)),
+            Profession =
+                profession.Map(value => value.GetEnum<ProfessionName>(missingMemberBehavior)),
             Specializations =
-                specializations.Map(values => values.GetList(value => value.GetSpecialization(missingMemberBehavior))),
+                specializations.Map(
+                    values => values.GetList(
+                        value => value.GetSpecialization(missingMemberBehavior)
+                    )
+                ),
             Skills = skills.Map(value => value.GetSkillBar(missingMemberBehavior)),
             AquaticSkills = aquaticSkills.Map(value => value.GetSkillBar(missingMemberBehavior)),
             Pets = pets.Map(value => value.GetPetSkillBar(missingMemberBehavior)),
             Legends = legends.Map(values => values.GetList(value => value.GetString())),
-            AquaticLegends = aquaticLegends.Map(values => values.GetList(value => value.GetString()))
+            AquaticLegends =
+                aquaticLegends.Map(values => values.GetList(value => value.GetString()))
         };
     }
 }

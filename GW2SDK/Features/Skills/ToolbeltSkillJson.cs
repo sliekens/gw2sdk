@@ -113,23 +113,46 @@ public static class ToolbeltSkillJson
         {
             Id = id.Map(value => value.GetInt32()),
             Name = name.Map(value => value.GetStringRequired()),
-            Facts = facts.Map(
-                values => values.GetList(value => value.GetSkillFact(missingMemberBehavior, out _, out _))
-            ),
+            Facts =
+                facts.Map(
+                    values =>
+                        values.GetList(
+                            value => value.GetSkillFact(missingMemberBehavior, out _, out _)
+                        )
+                ),
             TraitedFacts =
-                traitedFacts.Map(values => values.GetList(value => value.GetTraitedSkillFact(missingMemberBehavior))),
+                traitedFacts.Map(
+                    values => values.GetList(
+                        value => value.GetTraitedSkillFact(missingMemberBehavior)
+                    )
+                ),
             Description = description.Map(value => value.GetStringRequired()),
             Icon = icon.Map(value => value.GetString()),
             WeaponType = weaponType.Map(value => value.GetEnum<WeaponType>(missingMemberBehavior)),
-            Professions = professions.Map(values => values.GetList(value => value.GetEnum<ProfessionName>(missingMemberBehavior))),
+            Professions =
+                professions.Map(
+                    values =>
+                        values.GetList(
+                            value => value.GetEnum<ProfessionName>(missingMemberBehavior)
+                        )
+                ),
             Slot = slot.Map(value => value.GetEnum<SkillSlot>(missingMemberBehavior)),
             FlipSkill = flipSkill.Map(value => value.GetInt32()),
             NextChain = nextChain.Map(value => value.GetInt32()),
             PreviousChain = prevChain.Map(value => value.GetInt32()),
-            SkillFlag = flags.Map(values => values.GetList(value => value.GetEnum<SkillFlag>(missingMemberBehavior))),
+            SkillFlag =
+                flags.Map(
+                    values => values.GetList(
+                        value => value.GetEnum<SkillFlag>(missingMemberBehavior)
+                    )
+                ),
             Specialization = specialization.Map(value => value.GetInt32()),
             ChatLink = chatLink.Map(value => value.GetStringRequired()),
-            Categories = categories.Map(values => values.GetList(value => value.GetEnum<SkillCategoryName>(missingMemberBehavior)))
+            Categories = categories.Map(
+                values => values.GetList(
+                    value => value.GetEnum<SkillCategoryName>(missingMemberBehavior)
+                )
+            )
         };
     }
 }

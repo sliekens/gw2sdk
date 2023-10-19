@@ -4,8 +4,7 @@ using GuildWars2.Json;
 namespace GuildWars2.Guilds.Storage;
 
 [PublicAPI]
-public sealed class GuildStorageRequest
-    : IHttpRequest<Replica<List<GuildStorageSlot>>>
+public sealed class GuildStorageRequest : IHttpRequest<Replica<List<GuildStorageSlot>>>
 {
     private static readonly HttpRequestMessageTemplate Template =
         new(Get, "v2/guild/:id/storage") { AcceptEncoding = "gzip" };
@@ -43,7 +42,10 @@ public sealed class GuildStorageRequest
             .ConfigureAwait(false);
         return new Replica<List<GuildStorageSlot>>
         {
-            Value = json.RootElement.GetList(entry => entry.GetGuildStorageSlot(MissingMemberBehavior)),
+            Value =
+                json.RootElement.GetList(
+                    entry => entry.GetGuildStorageSlot(MissingMemberBehavior)
+                ),
             ResultContext = response.Headers.GetResultContext(),
             PageContext = response.Headers.GetPageContext(),
             Date = response.Headers.Date.GetValueOrDefault(),

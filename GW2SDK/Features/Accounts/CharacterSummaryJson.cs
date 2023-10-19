@@ -82,7 +82,8 @@ public static class CharacterSummaryJson
             Gender = gender.Map(value => value.GetEnum<Gender>(missingMemberBehavior)),
             Level = level.Map(value => value.GetInt32()),
             GuildId = guild.Map(value => value.GetString()) ?? "",
-            Profession = profession.Map(value => value.GetEnum<ProfessionName>(missingMemberBehavior)),
+            Profession =
+                profession.Map(value => value.GetEnum<ProfessionName>(missingMemberBehavior)),
             Age = age.Map(value => TimeSpan.FromSeconds(value.GetDouble())),
             LastModified = lastModified.Map(value => value.GetDateTimeOffset()),
             Created = created.Map(value => value.GetDateTimeOffset()),

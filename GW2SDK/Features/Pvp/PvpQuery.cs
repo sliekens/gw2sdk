@@ -68,6 +68,51 @@ public sealed class PvpQuery
 
     #endregion
 
+    public Task<Replica<HashSet<int>>> GetUnlockedHeroesIndex(
+        string? accessToken,
+        CancellationToken cancellationToken = default
+    )
+    {
+        UnlockedHeroesRequest request = new() { AccessToken = accessToken };
+        return request.SendAsync(http, cancellationToken);
+    }
+
+    #region v2/pvp/standings
+
+    public Task<Replica<HashSet<Standing>>> GetStandings(
+        string? accessToken,
+        MissingMemberBehavior missingMemberBehavior = default,
+        CancellationToken cancellationToken = default
+    )
+    {
+        StandingsRequest request = new()
+        {
+            AccessToken = accessToken,
+            MissingMemberBehavior = missingMemberBehavior
+        };
+        return request.SendAsync(http, cancellationToken);
+    }
+
+    #endregion
+
+    #region v2/pvp/stats
+
+    public Task<Replica<AccountStats>> GetStats(
+        string? accessToken,
+        MissingMemberBehavior missingMemberBehavior = default,
+        CancellationToken cancellationToken = default
+    )
+    {
+        StatsRequest request = new()
+        {
+            AccessToken = accessToken,
+            MissingMemberBehavior = missingMemberBehavior
+        };
+        return request.SendAsync(http, cancellationToken);
+    }
+
+    #endregion
+
     #region v2/pvp/amulets
 
     public Task<Replica<HashSet<Amulet>>> GetAmulets(
@@ -217,15 +262,6 @@ public sealed class PvpQuery
     #region v2/account/pvp/heroes
 
     #endregion v2/account/pvp/heroes
-
-    public Task<Replica<HashSet<int>>> GetUnlockedHeroesIndex(
-        string? accessToken,
-        CancellationToken cancellationToken = default
-    )
-    {
-        UnlockedHeroesRequest request = new() { AccessToken = accessToken };
-        return request.SendAsync(http, cancellationToken);
-    }
 
     #region v2/pvp/ranks
 
@@ -392,10 +428,7 @@ public sealed class PvpQuery
         CancellationToken cancellationToken = default
     )
     {
-        GamesIndexRequest request = new()
-        {
-            AccessToken = accessToken
-        };
+        GamesIndexRequest request = new() { AccessToken = accessToken };
         return request.SendAsync(http, cancellationToken);
     }
 
@@ -440,42 +473,6 @@ public sealed class PvpQuery
         GamesByPageRequest request = new(pageIndex)
         {
             PageSize = pageSize,
-            AccessToken = accessToken,
-            MissingMemberBehavior = missingMemberBehavior
-        };
-        return request.SendAsync(http, cancellationToken);
-    }
-
-    #endregion
-
-    #region v2/pvp/standings
-
-    public Task<Replica<HashSet<Standing>>> GetStandings(
-        string? accessToken,
-        MissingMemberBehavior missingMemberBehavior = default,
-        CancellationToken cancellationToken = default
-    )
-    {
-        StandingsRequest request = new()
-        {
-            AccessToken = accessToken,
-            MissingMemberBehavior = missingMemberBehavior
-        };
-        return request.SendAsync(http, cancellationToken);
-    }
-
-    #endregion
-
-    #region v2/pvp/stats
-
-    public Task<Replica<AccountStats>> GetStats(
-        string? accessToken,
-        MissingMemberBehavior missingMemberBehavior = default,
-        CancellationToken cancellationToken = default
-    )
-    {
-        StatsRequest request = new()
-        {
             AccessToken = accessToken,
             MissingMemberBehavior = missingMemberBehavior
         };

@@ -32,7 +32,10 @@ public static class MasteryPointsProgressJson
 
         return new MasteryPointsProgress
         {
-            Totals = totals.Map(values => values.GetList(entry => entry.GetMasteryPointsTotal(missingMemberBehavior))),
+            Totals = totals.Map(
+                values =>
+                    values.GetList(entry => entry.GetMasteryPointsTotal(missingMemberBehavior))
+            ),
             Unlocked = unlocked.Map(values => values.GetList(value => value.GetInt32()))
         };
     }

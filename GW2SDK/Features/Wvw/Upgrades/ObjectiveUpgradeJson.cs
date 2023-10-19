@@ -33,7 +33,9 @@ public static class ObjectiveUpgradeJson
         return new ObjectiveUpgrade
         {
             Id = id.Map(value => value.GetInt32()),
-            Tiers = tiers.Map(values => values.GetList(value => value.GetUpgradeTier(missingMemberBehavior)))
+            Tiers = tiers.Map(
+                values => values.GetList(value => value.GetUpgradeTier(missingMemberBehavior))
+            )
         };
     }
 }

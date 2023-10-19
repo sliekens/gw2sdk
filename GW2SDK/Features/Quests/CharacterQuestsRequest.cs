@@ -6,14 +6,13 @@ namespace GuildWars2.Quests;
 [PublicAPI]
 public sealed class CharacterQuestsRequest : IHttpRequest<Replica<HashSet<int>>>
 {
-    private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/characters/:id/quests")
-    {
-        AcceptEncoding = "gzip",
-        Arguments = new QueryBuilder
+    private static readonly HttpRequestMessageTemplate Template =
+        new(Get, "v2/characters/:id/quests")
         {
-            { "v", SchemaVersion.Recommended }
-        }
-    };
+            AcceptEncoding = "gzip",
+            Arguments = new QueryBuilder { { "v", SchemaVersion.Recommended } }
+        };
+
     public CharacterQuestsRequest(string characterName)
     {
         CharacterName = characterName;
@@ -27,7 +26,8 @@ public sealed class CharacterQuestsRequest : IHttpRequest<Replica<HashSet<int>>>
 
     public async Task<Replica<HashSet<int>>> SendAsync(
         HttpClient httpClient,
-        CancellationToken cancellationToken)
+        CancellationToken cancellationToken
+    )
     {
         using var response = await httpClient.SendAsync(
                 Template with

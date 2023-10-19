@@ -199,9 +199,9 @@ public sealed class GameLink : IObservable<GameTick>, IDisposable
 
     private class Subscription : IDisposable
     {
-        private readonly GameLink producer;
-
         private readonly IObserver<GameTick> observer;
+
+        private readonly GameLink producer;
 
         public Subscription(GameLink producer, IObserver<GameTick> observer)
         {

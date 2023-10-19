@@ -8,10 +8,7 @@ public sealed class StatsRequest : IHttpRequest<Replica<AccountStats>>
     private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/pvp/stats")
     {
         AcceptEncoding = "gzip",
-        Arguments = new QueryBuilder
-        {
-            { "v", SchemaVersion.Recommended }
-        }
+        Arguments = new QueryBuilder { { "v", SchemaVersion.Recommended } }
     };
 
     public string? AccessToken { get; init; }

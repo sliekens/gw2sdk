@@ -19,7 +19,6 @@ public static class LaddersJson
         OptionalMember soloArenaRated = "soloarenarated";
         OptionalMember teamArenaRated = "teamarenarated";
 
-
         foreach (var member in json.EnumerateObject())
         {
             if (member.NameEquals(none.Name))

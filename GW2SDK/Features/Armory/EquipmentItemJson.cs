@@ -92,11 +92,11 @@ public static class EquipmentItemJson
             Stats = stats.Map(value => value.GetSelectedStat(missingMemberBehavior)),
             Binding = binding.Map(value => value.GetEnum<ItemBinding>(missingMemberBehavior)),
             BoundTo = boundTo.Map(value => value.GetString()) ?? "",
-            Location = location.Map(value => value.GetEnum<EquipmentLocation>(missingMemberBehavior)),
+            Location = location.Map(
+                value => value.GetEnum<EquipmentLocation>(missingMemberBehavior)
+            ),
             Tabs = tabs.Map(values => values.GetList(value => value.GetInt32())),
-            Dyes = dyes.Map(
-                values => values.GetList(value => value.GetNullableInt32())
-            )
+            Dyes = dyes.Map(values => values.GetList(value => value.GetNullableInt32()))
         };
     }
 }

@@ -6,10 +6,7 @@ namespace GuildWars2.Guilds;
 [PublicAPI]
 public static class GuildJson
 {
-    public static Guild GetGuild(
-        this JsonElement json,
-        MissingMemberBehavior missingMemberBehavior
-    )
+    public static Guild GetGuild(this JsonElement json, MissingMemberBehavior missingMemberBehavior)
     {
         RequiredMember level = "level";
         RequiredMember motd = "motd";

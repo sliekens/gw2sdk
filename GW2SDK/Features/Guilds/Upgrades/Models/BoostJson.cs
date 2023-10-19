@@ -81,7 +81,9 @@ public static class BoostJson
             RequiredLevel = requiredLevel.Map(value => value.GetInt32()),
             Experience = experience.Map(value => value.GetInt32()),
             Prerequisites = prerequisites.Map(values => values.GetList(value => value.GetInt32())),
-            Costs = costs.Map(values => values.GetList(value => value.GetGuildUpgradeCost(missingMemberBehavior)))
+            Costs = costs.Map(
+                values => values.GetList(value => value.GetGuildUpgradeCost(missingMemberBehavior))
+            )
         };
     }
 }

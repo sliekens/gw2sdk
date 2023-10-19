@@ -4,7 +4,6 @@
 [DataTransferObject]
 public sealed record Asset
 
-
 {
     public required string Id { get; init; }
 

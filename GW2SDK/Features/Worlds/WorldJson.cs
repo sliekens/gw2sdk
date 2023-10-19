@@ -35,7 +35,9 @@ public static class WorldJson
         {
             Id = id.Map(value => value.GetInt32()),
             Name = name.Map(value => value.GetStringRequired()),
-            Population = population.Map(value => value.GetEnum<WorldPopulation>(missingMemberBehavior))
+            Population = population.Map(
+                value => value.GetEnum<WorldPopulation>(missingMemberBehavior)
+            )
         };
     }
 }

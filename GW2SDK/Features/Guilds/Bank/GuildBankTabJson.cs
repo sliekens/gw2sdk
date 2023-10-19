@@ -51,7 +51,9 @@ public static class GuildBankTabJson
             Size = size.Map(value => value.GetInt32()),
             Coins = coins.Map(value => value.GetInt32()),
             Note = note.Map(value => value.GetString()) ?? "",
-            Inventory = inventory.Map(values => values.GetList(value => value.GetGuildBankSlot(missingMemberBehavior)))
+            Inventory = inventory.Map(
+                values => values.GetList(value => value.GetGuildBankSlot(missingMemberBehavior))
+            )
         };
     }
 }

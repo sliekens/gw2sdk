@@ -39,8 +39,9 @@ public static class ItemStatJson
         {
             Id = id.Map(value => value.GetInt32()),
             Name = name.Map(value => value.GetStringRequired()),
-            Attributes =
-                attributes.Map(values => values.GetList(value => value.GetItemStatAttribute(missingMemberBehavior)))
+            Attributes = attributes.Map(
+                values => values.GetList(value => value.GetItemStatAttribute(missingMemberBehavior))
+            )
         };
     }
 }

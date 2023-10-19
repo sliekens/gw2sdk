@@ -6,12 +6,11 @@ namespace GuildWars2.Currencies;
 [PublicAPI]
 public sealed class WalletRequest : IHttpRequest<Replica<HashSet<CurrencyAmount>>>
 {
-    private static readonly HttpRequestMessageTemplate Template =
-        new(Get, "v2/account/wallet")
-        {
-            AcceptEncoding = "gzip",
-            Arguments = new QueryBuilder { { "v", SchemaVersion.Recommended } }
-        };
+    private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/account/wallet")
+    {
+        AcceptEncoding = "gzip",
+        Arguments = new QueryBuilder { { "v", SchemaVersion.Recommended } }
+    };
 
     public string? AccessToken { get; init; }
 

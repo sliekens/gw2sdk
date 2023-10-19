@@ -166,9 +166,25 @@ public static class GreatswordJson
             Rarity = rarity.Map(value => value.GetEnum<Rarity>(missingMemberBehavior)),
             VendorValue = vendorValue.Map(value => value.GetInt32()),
             DefaultSkin = defaultSkin.Map(value => value.GetInt32()),
-            GameTypes = gameTypes.Map(values => values.GetList(value => value.GetEnum<GameType>(missingMemberBehavior))),
-            Flags = flags.Map(values => values.GetList(value => value.GetEnum<ItemFlag>(missingMemberBehavior))),
-            Restrictions = restrictions.Map(values => values.GetList(value => value.GetEnum<ItemRestriction>(missingMemberBehavior))),
+            GameTypes =
+                gameTypes.Map(
+                    values => values.GetList(
+                        value => value.GetEnum<GameType>(missingMemberBehavior)
+                    )
+                ),
+            Flags =
+                flags.Map(
+                    values => values.GetList(
+                        value => value.GetEnum<ItemFlag>(missingMemberBehavior)
+                    )
+                ),
+            Restrictions =
+                restrictions.Map(
+                    values =>
+                        values.GetList(
+                            value => value.GetEnum<ItemRestriction>(missingMemberBehavior)
+                        )
+                ),
             ChatLink = chatLink.Map(value => value.GetStringRequired()),
             Icon = icon.Map(value => value.GetString()),
             DamageType = damageType.Map(value => value.GetEnum<DamageType>(missingMemberBehavior)),
@@ -176,7 +192,9 @@ public static class GreatswordJson
             MaxPower = maxPower.Map(value => value.GetInt32()),
             Defense = defense.Map(value => value.GetInt32()),
             InfusionSlots =
-                infusionSlots.Map(values => values.GetList(value => value.GetInfusionSlot(missingMemberBehavior))),
+                infusionSlots.Map(
+                    values => values.GetList(value => value.GetInfusionSlot(missingMemberBehavior))
+                ),
             AttributeAdjustment = attributeAdjustment.Map(value => value.GetDouble()),
             StatChoices = statChoices.Map(values => values.GetList(value => value.GetInt32())),
             Prefix = infixUpgrade.Map(value => value.GetInfixUpgrade(missingMemberBehavior)),

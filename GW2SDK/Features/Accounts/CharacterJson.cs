@@ -155,32 +155,53 @@ public static class CharacterJson
             Name = name.Map(value => value.GetStringRequired()),
             Race = race.Map(value => value.GetEnum<RaceName>(missingMemberBehavior)),
             Gender = gender.Map(value => value.GetEnum<Gender>(missingMemberBehavior)),
-            Flags = flags.Map(values => values.GetList(value => value.GetEnum<CharacterFlag>(missingMemberBehavior))),
+            Flags =
+                flags.Map(
+                    values =>
+                        values.GetList(value => value.GetEnum<CharacterFlag>(missingMemberBehavior))
+                ),
             Level = level.Map(value => value.GetInt32()),
             GuildId = guild.Map(value => value.GetString()) ?? "",
-            Profession = profession.Map(value => value.GetEnum<ProfessionName>(missingMemberBehavior)),
+            Profession =
+                profession.Map(value => value.GetEnum<ProfessionName>(missingMemberBehavior)),
             Age = age.Map(value => TimeSpan.FromSeconds(value.GetDouble())),
             LastModified = lastModified.Map(value => value.GetDateTimeOffset()),
             Created = created.Map(value => value.GetDateTimeOffset()),
             Deaths = deaths.Map(value => value.GetInt32()),
             CraftingDisciplines =
-                crafting.Map(values => values.GetList(value => value.GetCraftingDiscipline(missingMemberBehavior))),
+                crafting.Map(
+                    values =>
+                        values.GetList(value => value.GetCraftingDiscipline(missingMemberBehavior))
+                ),
             TitleId = title.Map(value => value.GetInt32()),
             Backstory = backstory.Map(values => values.GetList(value => value.GetStringRequired())),
             WvwAbilities =
-                wvwAbilities.Map(values => values.GetList(value => value.GetWvwAbility(missingMemberBehavior))),
+                wvwAbilities.Map(
+                    values => values.GetList(value => value.GetWvwAbility(missingMemberBehavior))
+                ),
             BuildTabsUnlocked = buildTabsUnlocked.Map(value => value.GetInt32()),
             ActiveBuildTab = activeBuildTab.Map(value => value.GetInt32()),
-            BuildTabs = buildTabs.Map(values => values.GetList(value => value.GetBuildTab(missingMemberBehavior))),
+            BuildTabs =
+                buildTabs.Map(
+                    values => values.GetList(value => value.GetBuildTab(missingMemberBehavior))
+                ),
             EquipmentTabsUnlocked = equipmentTabsUnlocked.Map(value => value.GetInt32()),
             ActiveEquipmentTab = activeEquipmentTab.Map(value => value.GetInt32()),
             Equipment =
-                equipment.Map(values => values.GetList(value => value.GetEquipmentItem(missingMemberBehavior))),
+                equipment.Map(
+                    values => values.GetList(value => value.GetEquipmentItem(missingMemberBehavior))
+                ),
             EquipmentTabs =
-                equipmentTabs.Map(values => values.GetList(value => value.GetEquipmentTab(missingMemberBehavior))),
+                equipmentTabs.Map(
+                    values => values.GetList(value => value.GetEquipmentTab(missingMemberBehavior))
+                ),
             Recipes = recipes.Map(values => values.GetList(value => value.GetInt32())),
             Training =
-                training.Map(values => values.GetList(value => value.GetTrainingProgress(missingMemberBehavior))),
+                training.Map(
+                    values => values.GetList(
+                        value => value.GetTrainingProgress(missingMemberBehavior)
+                    )
+                ),
             Bags = bags.Map(values => values.GetList(value => value.GetBag(missingMemberBehavior)))
         };
     }

@@ -4,5 +4,6 @@ namespace GuildWars2.Guilds;
 public enum GuildEmblemFlag
 {
     FlipBackgroundHorizontal = 1,
+
     FlipBackgroundVertical
 }

@@ -39,9 +39,7 @@ public static class PvpEquipmentJson
         {
             AmuletId = amulet.Map(value => value.GetInt32()),
             RuneId = rune.Map(value => value.GetInt32()),
-            SigilIds = sigils.Map(
-                values => values.GetList(value => value.GetNullableInt32())
-            )
+            SigilIds = sigils.Map(values => values.GetList(value => value.GetNullableInt32()))
         };
     }
 }

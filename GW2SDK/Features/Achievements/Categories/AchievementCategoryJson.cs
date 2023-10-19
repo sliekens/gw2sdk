@@ -63,8 +63,12 @@ public static class AchievementCategoryJson
             Order = order.Map(value => value.GetInt32()),
             Icon = icon.Map(value => value.GetStringRequired()),
             Achievements =
-                achievements.Map(values => values.GetList(item => item.GetAchievementRef(missingMemberBehavior))),
-            Tomorrow = tomorrow.Map(values => values.GetList(item => item.GetAchievementRef(missingMemberBehavior)))
+                achievements.Map(
+                    values => values.GetList(item => item.GetAchievementRef(missingMemberBehavior))
+                ),
+            Tomorrow = tomorrow.Map(
+                values => values.GetList(item => item.GetAchievementRef(missingMemberBehavior))
+            )
         };
     }
 }

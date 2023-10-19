@@ -6,16 +6,15 @@ namespace GuildWars2.Pvp.Amulets;
 [PublicAPI]
 public sealed class AmuletRequest : IHttpRequest<Replica<HashSet<Amulet>>>
 {
-    private static readonly HttpRequestMessageTemplate Template =
-        new(Get, "v2/pvp/amulets")
+    private static readonly HttpRequestMessageTemplate Template = new(Get, "v2/pvp/amulets")
+    {
+        AcceptEncoding = "gzip",
+        Arguments = new QueryBuilder
         {
-            AcceptEncoding = "gzip",
-            Arguments = new QueryBuilder
-            {
-                { "ids", "all" },
-                { "v", SchemaVersion.Recommended }
-            }
-        };
+            { "ids", "all" },
+            { "v", SchemaVersion.Recommended }
+        }
+    };
 
     public Language? Language { get; init; }
 

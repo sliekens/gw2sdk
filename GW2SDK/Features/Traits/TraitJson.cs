@@ -83,11 +83,18 @@ public static class TraitJson
             Icon = icon.Map(value => value.GetStringRequired()),
             SpezializationId = specialization.Map(value => value.GetInt32()),
             Facts = facts.Map(
-                values => values.GetList(value => value.GetTraitFact(missingMemberBehavior, out _, out _))
+                values =>
+                    values.GetList(value => value.GetTraitFact(missingMemberBehavior, out _, out _))
             ),
             TraitedFacts =
-                traitedFacts.Map(values => values.GetList(value => value.GetCompoundTraitFact(missingMemberBehavior))),
-            Skills = skills.Map(values => values.GetList(value => value.GetTraitSkill(missingMemberBehavior)))
+                traitedFacts.Map(
+                    values => values.GetList(
+                        value => value.GetCompoundTraitFact(missingMemberBehavior)
+                    )
+                ),
+            Skills = skills.Map(
+                values => values.GetList(value => value.GetTraitSkill(missingMemberBehavior))
+            )
         };
     }
 }
