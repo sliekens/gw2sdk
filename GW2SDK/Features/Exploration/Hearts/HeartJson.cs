@@ -18,27 +18,27 @@ public static class HeartJson
         {
             if (member.NameEquals(objective.Name))
             {
-                objective.Value = member.Value;
+                objective = member;
             }
             else if (member.NameEquals(level.Name))
             {
-                level.Value = member.Value;
+                level = member;
             }
             else if (member.NameEquals(coordinates.Name))
             {
-                coordinates.Value = member.Value;
+                coordinates = member;
             }
             else if (member.NameEquals(boundaries.Name))
             {
-                boundaries.Value = member.Value;
+                boundaries = member;
             }
             else if (member.NameEquals(id.Name))
             {
-                id.Value = member.Value;
+                id = member;
             }
             else if (member.NameEquals(chatLink.Name))
             {
-                chatLink.Value = member.Value;
+                chatLink = member;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {

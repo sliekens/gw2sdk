@@ -27,47 +27,47 @@ public static class ObjectiveJson
         {
             if (member.NameEquals(id.Name))
             {
-                id.Value = member.Value;
+                id = member;
             }
             else if (member.NameEquals(name.Name))
             {
-                name.Value = member.Value;
+                name = member;
             }
             else if (member.NameEquals(sectorId.Name))
             {
-                sectorId.Value = member.Value;
+                sectorId = member;
             }
             else if (member.NameEquals(type.Name))
             {
-                type.Value = member.Value;
+                type = member;
             }
             else if (member.NameEquals(mapType.Name))
             {
-                mapType.Value = member.Value;
+                mapType = member;
             }
             else if (member.NameEquals(mapId.Name))
             {
-                mapId.Value = member.Value;
+                mapId = member;
             }
             else if (member.NameEquals(upgradeId.Name))
             {
-                upgradeId.Value = member.Value;
+                upgradeId = member;
             }
             else if (member.NameEquals(coordinates.Name))
             {
-                coordinates.Value = member.Value;
+                coordinates = member;
             }
             else if (member.NameEquals(labelCoordinates.Name))
             {
-                labelCoordinates.Value = member.Value;
+                labelCoordinates = member;
             }
             else if (member.NameEquals(marker.Name))
             {
-                marker.Value = member.Value;
+                marker = member;
             }
             else if (member.NameEquals(chatLink.Name))
             {
-                chatLink.Value = member.Value;
+                chatLink = member;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {

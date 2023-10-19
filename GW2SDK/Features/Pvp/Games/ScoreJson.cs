@@ -18,11 +18,11 @@ public static class ScoreJson
         {
             if (member.NameEquals(red.Name))
             {
-                red.Value = member.Value;
+                red = member;
             }
             else if (member.NameEquals(blue.Name))
             {
-                blue.Value = member.Value;
+                blue = member;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {

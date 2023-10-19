@@ -19,19 +19,19 @@ public static class BuffPrefixJson
         {
             if (member.NameEquals(text.Name))
             {
-                text.Value = member.Value;
+                text = member;
             }
             else if (member.NameEquals(icon.Name))
             {
-                icon.Value = member.Value;
+                icon = member;
             }
             else if (member.NameEquals(status.Name))
             {
-                status.Value = member.Value;
+                status = member;
             }
             else if (member.NameEquals(description.Name))
             {
-                description.Value = member.Value;
+                description = member;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {

@@ -26,11 +26,11 @@ public static class MasteryRewardJson
             }
             else if (member.NameEquals(id.Name))
             {
-                id.Value = member.Value;
+                id = member;
             }
             else if (member.NameEquals(region.Name))
             {
-                region.Value = member.Value;
+                region = member;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {

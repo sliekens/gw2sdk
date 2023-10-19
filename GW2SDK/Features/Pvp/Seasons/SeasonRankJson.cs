@@ -22,27 +22,27 @@ public static class SeasonRankJson
         {
             if (member.NameEquals(name.Name))
             {
-                name.Value = member.Value;
+                name = member;
             }
             else if (member.NameEquals(description.Name))
             {
-                description.Value = member.Value;
+                description = member;
             }
             else if (member.NameEquals(icon.Name))
             {
-                icon.Value = member.Value;
+                icon = member;
             }
             else if (member.NameEquals(overlay.Name))
             {
-                overlay.Value = member.Value;
+                overlay = member;
             }
             else if (member.NameEquals(smallOverlay.Name))
             {
-                smallOverlay.Value = member.Value;
+                smallOverlay = member;
             }
             else if (member.NameEquals(tiers.Name))
             {
-                tiers.Value = member.Value;
+                tiers = member;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {

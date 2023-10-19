@@ -19,15 +19,15 @@ public static class GuildEmblemJson
         {
             if (member.NameEquals(background.Name))
             {
-                background.Value = member.Value;
+                background = member;
             }
             else if (member.NameEquals(foreground.Name))
             {
-                foreground.Value = member.Value;
+                foreground = member;
             }
             else if (member.NameEquals(flags.Name))
             {
-                flags.Value = member.Value;
+                flags = member;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {

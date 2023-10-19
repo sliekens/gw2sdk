@@ -22,27 +22,27 @@ public static class LegendJson
         {
             if (member.NameEquals(id.Name))
             {
-                id.Value = member.Value;
+                id = member;
             }
             else if (member.NameEquals(swap.Name))
             {
-                swap.Value = member.Value;
+                swap = member;
             }
             else if (member.NameEquals(code.Name))
             {
-                code.Value = member.Value;
+                code = member;
             }
             else if (member.NameEquals(heal.Name))
             {
-                heal.Value = member.Value;
+                heal = member;
             }
             else if (member.NameEquals(elite.Name))
             {
-                elite.Value = member.Value;
+                elite = member;
             }
             else if (member.NameEquals(utilities.Name))
             {
-                utilities.Value = member.Value;
+                utilities = member;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {

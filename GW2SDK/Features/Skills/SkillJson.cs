@@ -66,67 +66,67 @@ public static class SkillJson
             }
             else if (member.NameEquals(name.Name))
             {
-                name.Value = member.Value;
+                name = member;
             }
             else if (member.NameEquals(facts.Name))
             {
-                facts.Value = member.Value;
+                facts = member;
             }
             else if (member.NameEquals(traitedFacts.Name))
             {
-                traitedFacts.Value = member.Value;
+                traitedFacts = member;
             }
             else if (member.NameEquals(description.Name))
             {
-                description.Value = member.Value;
+                description = member;
             }
             else if (member.NameEquals(icon.Name))
             {
-                icon.Value = member.Value;
+                icon = member;
             }
             else if (member.NameEquals(weaponType.Name))
             {
-                weaponType.Value = member.Value;
+                weaponType = member;
             }
             else if (member.NameEquals(professions.Name))
             {
-                professions.Value = member.Value;
+                professions = member;
             }
             else if (member.NameEquals(slot.Name))
             {
-                slot.Value = member.Value;
+                slot = member;
             }
             else if (member.NameEquals(flipSkill.Name))
             {
-                flipSkill.Value = member.Value;
+                flipSkill = member;
             }
             else if (member.NameEquals(nextChain.Name))
             {
-                nextChain.Value = member.Value;
+                nextChain = member;
             }
             else if (member.NameEquals(prevChain.Name))
             {
-                prevChain.Value = member.Value;
+                prevChain = member;
             }
             else if (member.NameEquals(flags.Name))
             {
-                flags.Value = member.Value;
+                flags = member;
             }
             else if (member.NameEquals(specialization.Name))
             {
-                specialization.Value = member.Value;
+                specialization = member;
             }
             else if (member.NameEquals(id.Name))
             {
-                id.Value = member.Value;
+                id = member;
             }
             else if (member.NameEquals(chatLink.Name))
             {
-                chatLink.Value = member.Value;
+                chatLink = member;
             }
             else if (member.NameEquals(categories.Name))
             {
-                categories.Value = member.Value;
+                categories = member;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {

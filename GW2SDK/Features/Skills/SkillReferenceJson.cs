@@ -19,15 +19,15 @@ public static class SkillReferenceJson
         {
             if (member.NameEquals(id.Name))
             {
-                id.Value = member.Value;
+                id = member;
             }
             else if (member.NameEquals(attunement.Name))
             {
-                attunement.Value = member.Value;
+                attunement = member;
             }
             else if (member.NameEquals(form.Name))
             {
-                form.Value = member.Value;
+                form = member;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {

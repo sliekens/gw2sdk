@@ -32,31 +32,31 @@ public static class WarhornSkinJson
             }
             else if (member.NameEquals(name.Name))
             {
-                name.Value = member.Value;
+                name = member;
             }
             else if (member.NameEquals(description.Name))
             {
-                description.Value = member.Value;
+                description = member;
             }
             else if (member.NameEquals(rarity.Name))
             {
-                rarity.Value = member.Value;
+                rarity = member;
             }
             else if (member.NameEquals(flags.Name))
             {
-                flags.Value = member.Value;
+                flags = member;
             }
             else if (member.NameEquals(restrictions.Name))
             {
-                restrictions.Value = member.Value;
+                restrictions = member;
             }
             else if (member.NameEquals(id.Name))
             {
-                id.Value = member.Value;
+                id = member;
             }
             else if (member.NameEquals(icon.Name))
             {
-                icon.Value = member.Value;
+                icon = member;
             }
             else if (member.NameEquals("details"))
             {
@@ -73,7 +73,7 @@ public static class WarhornSkinJson
                     }
                     else if (detail.NameEquals(damageType.Name))
                     {
-                        damageType.Value = detail.Value;
+                        damageType = detail;
                     }
                     else if (missingMemberBehavior == MissingMemberBehavior.Error)
                     {

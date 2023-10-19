@@ -17,7 +17,7 @@ public static class CharacterBackstoryJson
         {
             if (member.NameEquals(backstory.Name))
             {
-                backstory.Value = member.Value;
+                backstory = member;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {

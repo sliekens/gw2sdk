@@ -14,7 +14,7 @@ public static class NodeJson
         {
             if (member.NameEquals(id.Name))
             {
-                id.Value = member.Value;
+                id = member;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {

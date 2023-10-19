@@ -32,31 +32,31 @@ public static class StashActivityJson
             }
             else if (member.NameEquals(id.Name))
             {
-                id.Value = member.Value;
+                id = member;
             }
             else if (member.NameEquals(time.Name))
             {
-                time.Value = member.Value;
+                time = member;
             }
             else if (member.NameEquals(user.Name))
             {
-                user.Value = member.Value;
+                user = member;
             }
             else if (member.NameEquals(operation.Name))
             {
-                operation.Value = member.Value;
+                operation = member;
             }
             else if (member.NameEquals(itemId.Name))
             {
-                itemId.Value = member.Value;
+                itemId = member;
             }
             else if (member.NameEquals(count.Name))
             {
-                count.Value = member.Value;
+                count = member;
             }
             else if (member.NameEquals(coins.Name))
             {
-                coins.Value = member.Value;
+                coins = member;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {

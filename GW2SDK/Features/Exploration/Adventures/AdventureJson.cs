@@ -19,19 +19,19 @@ public static class AdventureJson
         {
             if (member.NameEquals(coordinates.Name))
             {
-                coordinates.Value = member.Value;
+                coordinates = member;
             }
             else if (member.NameEquals(id.Name))
             {
-                id.Value = member.Value;
+                id = member;
             }
             else if (member.NameEquals(name.Name))
             {
-                name.Value = member.Value;
+                name = member;
             }
             else if (member.NameEquals(description.Name))
             {
-                description.Value = member.Value;
+                description = member;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {

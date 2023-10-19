@@ -24,31 +24,31 @@ public static class LaddersJson
         {
             if (member.NameEquals(none.Name))
             {
-                none.Value = member.Value;
+                none = member;
             }
             else if (member.NameEquals(unranked.Name))
             {
-                unranked.Value = member.Value;
+                unranked = member;
             }
             else if (member.NameEquals(ranked.Name))
             {
-                ranked.Value = member.Value;
+                ranked = member;
             }
             else if (member.NameEquals(ranked2v2.Name))
             {
-                ranked2v2.Value = member.Value;
+                ranked2v2 = member;
             }
             else if (member.NameEquals(ranked3v3.Name))
             {
-                ranked3v3.Value = member.Value;
+                ranked3v3 = member;
             }
             else if (member.NameEquals(soloArenaRated.Name))
             {
-                soloArenaRated.Value = member.Value;
+                soloArenaRated = member;
             }
             else if (member.NameEquals(teamArenaRated.Name))
             {
-                teamArenaRated.Value = member.Value;
+                teamArenaRated = member;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {

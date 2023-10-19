@@ -20,19 +20,19 @@ public static class MatchStatsJson
         {
             if (member.NameEquals(id.Name))
             {
-                id.Value = member.Value;
+                id = member;
             }
             else if (member.NameEquals(deaths.Name))
             {
-                deaths.Value = member.Value;
+                deaths = member;
             }
             else if (member.NameEquals(kills.Name))
             {
-                kills.Value = member.Value;
+                kills = member;
             }
             else if (member.NameEquals(maps.Name))
             {
-                maps.Value = member.Value;
+                maps = member;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {

@@ -23,23 +23,23 @@ public static class TraitSkillJson
         {
             if (member.NameEquals(name.Name))
             {
-                name.Value = member.Value;
+                name = member;
             }
             else if (member.NameEquals(facts.Name))
             {
-                facts.Value = member.Value;
+                facts = member;
             }
             else if (member.NameEquals(traitedFacts.Name))
             {
-                traitedFacts.Value = member.Value;
+                traitedFacts = member;
             }
             else if (member.NameEquals(description.Name))
             {
-                description.Value = member.Value;
+                description = member;
             }
             else if (member.NameEquals(icon.Name))
             {
-                icon.Value = member.Value;
+                icon = member;
             }
             else if (member.NameEquals("flags"))
             {
@@ -52,15 +52,15 @@ public static class TraitSkillJson
             }
             else if (member.NameEquals(id.Name))
             {
-                id.Value = member.Value;
+                id = member;
             }
             else if (member.NameEquals(chatLink.Name))
             {
-                chatLink.Value = member.Value;
+                chatLink = member;
             }
             else if (member.NameEquals(categories.Name))
             {
-                categories.Value = member.Value;
+                categories = member;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {

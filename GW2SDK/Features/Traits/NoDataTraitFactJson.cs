@@ -38,11 +38,11 @@ public static class NoDataTraitFactJson
             }
             else if (member.NameEquals(text.Name))
             {
-                text.Value = member.Value;
+                text = member;
             }
             else if (member.NameEquals(icon.Name))
             {
-                icon.Value = member.Value;
+                icon = member;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {

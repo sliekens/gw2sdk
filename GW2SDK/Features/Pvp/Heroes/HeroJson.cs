@@ -21,35 +21,35 @@ public static class HeroJson
         {
             if (member.NameEquals(id.Name))
             {
-                id.Value = member.Value;
+                id = member;
             }
             else if (member.NameEquals(name.Name))
             {
-                name.Value = member.Value;
+                name = member;
             }
             else if (member.NameEquals(description.Name))
             {
-                description.Value = member.Value;
+                description = member;
             }
             else if (member.NameEquals(type.Name))
             {
-                type.Value = member.Value;
+                type = member;
             }
             else if (member.NameEquals(stats.Name))
             {
-                stats.Value = member.Value;
+                stats = member;
             }
             else if (member.NameEquals(overlay.Name))
             {
-                overlay.Value = member.Value;
+                overlay = member;
             }
             else if (member.NameEquals(underlay.Name))
             {
-                underlay.Value = member.Value;
+                underlay = member;
             }
             else if (member.NameEquals(skins.Name))
             {
-                skins.Value = member.Value;
+                skins = member;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {

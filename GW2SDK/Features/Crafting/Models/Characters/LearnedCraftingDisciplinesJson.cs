@@ -17,7 +17,7 @@ public static class LearnedCraftingDisciplinesJson
         {
             if (member.NameEquals(crafting.Name))
             {
-                crafting.Value = member.Value;
+                crafting = member;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {

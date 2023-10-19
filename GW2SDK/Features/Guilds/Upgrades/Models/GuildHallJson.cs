@@ -34,39 +34,39 @@ public static class GuildHallJson
             }
             else if (member.NameEquals(id.Name))
             {
-                id.Value = member.Value;
+                id = member;
             }
             else if (member.NameEquals(name.Name))
             {
-                name.Value = member.Value;
+                name = member;
             }
             else if (member.NameEquals(description.Name))
             {
-                description.Value = member.Value;
+                description = member;
             }
             else if (member.NameEquals(buildTime.Name))
             {
-                buildTime.Value = member.Value;
+                buildTime = member;
             }
             else if (member.NameEquals(icon.Name))
             {
-                icon.Value = member.Value;
+                icon = member;
             }
             else if (member.NameEquals(requiredLevel.Name))
             {
-                requiredLevel.Value = member.Value;
+                requiredLevel = member;
             }
             else if (member.NameEquals(experience.Name))
             {
-                experience.Value = member.Value;
+                experience = member;
             }
             else if (member.NameEquals(prerequisites.Name))
             {
-                prerequisites.Value = member.Value;
+                prerequisites = member;
             }
             else if (member.NameEquals(costs.Name))
             {
-                costs.Value = member.Value;
+                costs = member;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {

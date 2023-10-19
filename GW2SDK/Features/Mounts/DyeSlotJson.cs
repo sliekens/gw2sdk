@@ -17,11 +17,11 @@ public static class DyeSlotJson
         {
             if (member.NameEquals(colorId.Name))
             {
-                colorId.Value = member.Value;
+                colorId = member;
             }
             else if (member.NameEquals(material.Name))
             {
-                material.Value = member.Value;
+                material = member;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {

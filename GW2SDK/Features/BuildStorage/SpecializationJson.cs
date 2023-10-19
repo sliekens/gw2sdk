@@ -18,11 +18,11 @@ public static class SpecializationJson
         {
             if (member.NameEquals(id.Name))
             {
-                id.Value = member.Value;
+                id = member;
             }
             else if (member.NameEquals(traits.Name))
             {
-                traits.Value = member.Value;
+                traits = member;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {

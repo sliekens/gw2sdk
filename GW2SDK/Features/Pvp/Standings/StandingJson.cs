@@ -19,15 +19,15 @@ public static class StandingJson
         {
             if (member.NameEquals(seasonId.Name))
             {
-                seasonId.Value = member.Value;
+                seasonId = member;
             }
             else if (member.NameEquals(current.Name))
             {
-                current.Value = member.Value;
+                current = member;
             }
             else if (member.NameEquals(best.Name))
             {
-                best.Value = member.Value;
+                best = member;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {

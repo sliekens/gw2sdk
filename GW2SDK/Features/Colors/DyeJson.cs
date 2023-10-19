@@ -22,39 +22,39 @@ public static class DyeJson
         {
             if (member.NameEquals(id.Name))
             {
-                id.Value = member.Value;
+                id = member;
             }
             else if (member.NameEquals(name.Name))
             {
-                name.Value = member.Value;
+                name = member;
             }
             else if (member.NameEquals(baseRgb.Name))
             {
-                baseRgb.Value = member.Value;
+                baseRgb = member;
             }
             else if (member.NameEquals(cloth.Name))
             {
-                cloth.Value = member.Value;
+                cloth = member;
             }
             else if (member.NameEquals(leather.Name))
             {
-                leather.Value = member.Value;
+                leather = member;
             }
             else if (member.NameEquals(metal.Name))
             {
-                metal.Value = member.Value;
+                metal = member;
             }
             else if (member.NameEquals(fur.Name))
             {
-                fur.Value = member.Value;
+                fur = member;
             }
             else if (member.NameEquals(itemId.Name))
             {
-                itemId.Value = member.Value;
+                itemId = member;
             }
             else if (member.NameEquals(categories.Name))
             {
-                categories.Value = member.Value;
+                categories = member;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {

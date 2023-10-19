@@ -39,11 +39,11 @@ public static class SkillReferenceJson
             }
             else if (member.NameEquals(id.Name))
             {
-                id.Value = member.Value;
+                id = member;
             }
             else if (member.NameEquals(slot.Name))
             {
-                slot.Value = member.Value;
+                slot = member;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {

@@ -1,73 +1,82 @@
 ﻿using System.Drawing;
 using System.Text.Json;
-using GuildWars2.Json;
 
 namespace GuildWars2.Exploration;
 
 [PublicAPI]
 public static class RectangleJson
 {
-    public static Rectangle GetMapRectangle(this JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    public static Rectangle GetMapRectangle(
+        this JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
-        RequiredMember southWest = new("[0]");
-        RequiredMember northEast = new("[1]");
+        JsonElement southWest = default;
+        JsonElement northEast = default;
 
         foreach (var entry in json.EnumerateArray())
         {
-            if (southWest.IsUndefined)
+            if (southWest.ValueKind == JsonValueKind.Undefined)
             {
-                southWest.Value = entry;
+                southWest = entry;
             }
-            else if (northEast.IsUndefined)
+            else if (northEast.ValueKind == JsonValueKind.Undefined)
             {
-                northEast.Value = entry;
+                northEast = entry;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {
-                throw new InvalidOperationException(Strings.UnexpectedArrayLength(json.GetArrayLength()));
+                throw new InvalidOperationException(
+                    Strings.UnexpectedArrayLength(json.GetArrayLength())
+                );
             }
         }
 
-        var sw = southWest.Select(value => value.GetCoordinate(missingMemberBehavior));
-        var ne = northEast.Select(value => value.GetCoordinate(missingMemberBehavior));
+        var sw = southWest.GetCoordinate(missingMemberBehavior);
+        var ne = northEast.GetCoordinate(missingMemberBehavior);
 
         return new Rectangle(
-            x: sw.X, // The x-coordinate of the upper-left corner of the rectangle
-            y: ne.Y, // The y-coordinate of the upper-left corner of the rectangle
-            width: ne.X - sw.X,
-            height: sw.Y - ne.Y
+            sw.X, // The x-coordinate of the upper-left corner of the rectangle
+            ne.Y, // The y-coordinate of the upper-left corner of the rectangle
+            ne.X - sw.X,
+            sw.Y - ne.Y
         );
     }
 
-    public static Rectangle GetContinentRectangle(this JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    public static Rectangle GetContinentRectangle(
+        this JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
-        RequiredMember northWest = new("[0]");
-        RequiredMember southEast = new("[1]");
+        JsonElement northWest = default;
+        JsonElement southEast = default;
 
         foreach (var entry in json.EnumerateArray())
         {
-            if (northWest.IsUndefined)
+            if (northWest.ValueKind == JsonValueKind.Undefined)
             {
-                northWest.Value = entry;
+                northWest = entry;
             }
-            else if (southEast.IsUndefined)
+            else if (southEast.ValueKind == JsonValueKind.Undefined)
             {
-                southEast.Value = entry;
+                southEast = entry;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {
-                throw new InvalidOperationException(Strings.UnexpectedArrayLength(json.GetArrayLength()));
+                throw new InvalidOperationException(
+                    Strings.UnexpectedArrayLength(json.GetArrayLength())
+                );
             }
         }
 
-        var nw = northWest.Select(value => value.GetCoordinate(missingMemberBehavior));
-        var se = southEast.Select(value => value.GetCoordinate(missingMemberBehavior));
+        var nw = northWest.GetCoordinate(missingMemberBehavior);
+        var se = southEast.GetCoordinate(missingMemberBehavior);
 
         return new Rectangle(
-            x: nw.X, // The x-coordinate of the upper-left corner of the rectangle
-            y: nw.Y, // The y-coordinate of the upper-left corner of the rectangle
-            width: se.X - nw.X,
-            height: se.Y - nw.Y
+            nw.X, // The x-coordinate of the upper-left corner of the rectangle
+            nw.Y, // The y-coordinate of the upper-left corner of the rectangle
+            se.X - nw.X,
+            se.Y - nw.Y
         );
     }
 }

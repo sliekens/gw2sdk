@@ -36,7 +36,7 @@ public static class AccountLuckJson
             }
             else if (member.NameEquals(value.Name))
             {
-                value.Value = member.Value;
+                value = member;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {

@@ -18,11 +18,11 @@ public static class CurrencyAmountJson
         {
             if (member.NameEquals(currencyId.Name))
             {
-                currencyId.Value = member.Value;
+                currencyId = member;
             }
             else if (member.NameEquals(amount.Name))
             {
-                amount.Value = member.Value;
+                amount = member;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {

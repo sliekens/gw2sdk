@@ -17,11 +17,11 @@ public static class UpgradeAttributeJson
         {
             if (member.NameEquals(attribute.Name))
             {
-                attribute.Value = member.Value;
+                attribute = member;
             }
             else if (member.NameEquals(modifier.Name))
             {
-                modifier.Value = member.Value;
+                modifier = member;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {

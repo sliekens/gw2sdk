@@ -18,11 +18,11 @@ public static class RaidWingJson
         {
             if (member.NameEquals(id.Name))
             {
-                id.Value = member.Value;
+                id = member;
             }
             else if (member.NameEquals(events.Name))
             {
-                events.Value = member.Value;
+                events = member;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {

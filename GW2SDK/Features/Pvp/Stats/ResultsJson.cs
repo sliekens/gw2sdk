@@ -21,23 +21,23 @@ public static class ResultsJson
         {
             if (member.NameEquals(wins.Name))
             {
-                wins.Value = member.Value;
+                wins = member;
             }
             else if (member.NameEquals(losses.Name))
             {
-                losses.Value = member.Value;
+                losses = member;
             }
             else if (member.NameEquals(desertions.Name))
             {
-                desertions.Value = member.Value;
+                desertions = member;
             }
             else if (member.NameEquals(byes.Name))
             {
-                byes.Value = member.Value;
+                byes = member;
             }
             else if (member.NameEquals(forfeits.Name))
             {
-                forfeits.Value = member.Value;
+                forfeits = member;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {

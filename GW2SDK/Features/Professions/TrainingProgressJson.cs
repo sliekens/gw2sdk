@@ -19,15 +19,15 @@ public static class TrainingProgressJson
         {
             if (member.NameEquals(id.Name))
             {
-                id.Value = member.Value;
+                id = member;
             }
             else if (member.NameEquals(spent.Name))
             {
-                spent.Value = member.Value;
+                spent = member;
             }
             else if (member.NameEquals(done.Name))
             {
-                done.Value = member.Value;
+                done = member;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {

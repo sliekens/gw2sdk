@@ -17,11 +17,11 @@ public static class ItemUpgradeJson
         {
             if (member.NameEquals(upgrade.Name))
             {
-                upgrade.Value = member.Value;
+                upgrade = member;
             }
             else if (member.NameEquals(itemId.Name))
             {
-                itemId.Value = member.Value;
+                itemId = member;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {

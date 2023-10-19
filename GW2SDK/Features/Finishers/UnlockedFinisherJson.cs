@@ -19,15 +19,15 @@ public static class UnlockedFinisherJson
         {
             if (member.NameEquals(id.Name))
             {
-                id.Value = member.Value;
+                id = member;
             }
             else if (member.NameEquals(permanent.Name))
             {
-                permanent.Value = member.Value;
+                permanent = member;
             }
             else if (member.NameEquals(quantity.Name))
             {
-                quantity.Value = member.Value;
+                quantity = member;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {

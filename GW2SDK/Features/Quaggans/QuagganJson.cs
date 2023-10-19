@@ -18,11 +18,11 @@ public static class QuagganJson
         {
             if (member.NameEquals(id.Name))
             {
-                id.Value = member.Value;
+                id = member;
             }
             else if (member.NameEquals(url.Name))
             {
-                url.Value = member.Value;
+                url = member;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {

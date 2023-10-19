@@ -14,11 +14,11 @@ public static class BuffJson
         {
             if (member.NameEquals(skillId.Name))
             {
-                skillId.Value = member.Value;
+                skillId = member;
             }
             else if (member.NameEquals(description.Name))
             {
-                description.Value = member.Value;
+                description = member;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {

@@ -15,11 +15,11 @@ public static class BonusJson
         {
             if (member.NameEquals(type.Name))
             {
-                type.Value = member.Value;
+                type = member;
             }
             else if (member.NameEquals(owner.Name))
             {
-                owner.Value = member.Value;
+                owner = member;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {

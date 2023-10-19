@@ -19,15 +19,15 @@ public static class UpgradeTierJson
         {
             if (member.NameEquals(name.Name))
             {
-                name.Value = member.Value;
+                name = member;
             }
             else if (member.NameEquals(yaksRequired.Name))
             {
-                yaksRequired.Value = member.Value;
+                yaksRequired = member;
             }
             else if (member.NameEquals(upgrades.Name))
             {
-                upgrades.Value = member.Value;
+                upgrades = member;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {

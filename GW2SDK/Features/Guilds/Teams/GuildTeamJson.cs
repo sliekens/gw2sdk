@@ -24,35 +24,35 @@ public static class GuildTeamJson
         {
             if (member.NameEquals(id.Name))
             {
-                id.Value = member.Value;
+                id = member;
             }
             else if (member.NameEquals(members.Name))
             {
-                members.Value = member.Value;
+                members = member;
             }
             else if (member.NameEquals(name.Name))
             {
-                name.Value = member.Value;
+                name = member;
             }
             else if (member.NameEquals(state.Name))
             {
-                state.Value = member.Value;
+                state = member;
             }
             else if (member.NameEquals(aggregate.Name))
             {
-                aggregate.Value = member.Value;
+                aggregate = member;
             }
             else if (member.NameEquals(ladders.Name))
             {
-                ladders.Value = member.Value;
+                ladders = member;
             }
             else if (member.NameEquals(games.Name))
             {
-                games.Value = member.Value;
+                games = member;
             }
             else if (member.NameEquals(seasons.Name))
             {
-                seasons.Value = member.Value;
+                seasons = member;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {

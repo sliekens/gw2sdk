@@ -19,15 +19,15 @@ public static class DistributionJson
         {
             if (member.NameEquals(red.Name))
             {
-                red.Value = member.Value;
+                red = member;
             }
             else if (member.NameEquals(blue.Name))
             {
-                blue.Value = member.Value;
+                blue = member;
             }
             else if (member.NameEquals(green.Name))
             {
-                green.Value = member.Value;
+                green = member;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {

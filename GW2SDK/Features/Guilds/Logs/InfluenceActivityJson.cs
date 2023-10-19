@@ -36,23 +36,23 @@ public static class InfluenceActivityJson
             }
             else if (member.NameEquals(id.Name))
             {
-                id.Value = member.Value;
+                id = member;
             }
             else if (member.NameEquals(time.Name))
             {
-                time.Value = member.Value;
+                time = member;
             }
             else if (member.NameEquals(activity.Name))
             {
-                activity.Value = member.Value;
+                activity = member;
             }
             else if (member.NameEquals(totalParticipants.Name))
             {
-                totalParticipants.Value = member.Value;
+                totalParticipants = member;
             }
             else if (member.NameEquals(participants.Name))
             {
-                participants.Value = member.Value;
+                participants = member;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {

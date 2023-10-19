@@ -19,15 +19,15 @@ public static class SuperAdventureBoxProgressJson
         {
             if (member.NameEquals(zones.Name))
             {
-                zones.Value = member.Value;
+                zones = member;
             }
             else if (member.NameEquals(unlocks.Name))
             {
-                unlocks.Value = member.Value;
+                unlocks = member;
             }
             else if (member.NameEquals(songs.Name))
             {
-                songs.Value = member.Value;
+                songs = member;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {

@@ -24,35 +24,35 @@ public static class SeasonJson
         {
             if (member.NameEquals(id.Name))
             {
-                id.Value = member.Value;
+                id = member;
             }
             else if (member.NameEquals(name.Name))
             {
-                name.Value = member.Value;
+                name = member;
             }
             else if (member.NameEquals(start.Name))
             {
-                start.Value = member.Value;
+                start = member;
             }
             else if (member.NameEquals(end.Name))
             {
-                end.Value = member.Value;
+                end = member;
             }
             else if (member.NameEquals(active.Name))
             {
-                active.Value = member.Value;
+                active = member;
             }
             else if (member.NameEquals(divisions.Name))
             {
-                divisions.Value = member.Value;
+                divisions = member;
             }
             else if (member.NameEquals(ranks.Name))
             {
-                ranks.Value = member.Value;
+                ranks = member;
             }
             else if (member.NameEquals(leaderboards.Name))
             {
-                leaderboards.Value = member.Value;
+                leaderboards = member;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {

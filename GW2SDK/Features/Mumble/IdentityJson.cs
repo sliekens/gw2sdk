@@ -27,47 +27,47 @@ public static class IdentityJson
         {
             if (member.NameEquals(name.Name))
             {
-                name.Value = member.Value;
+                name = member;
             }
             else if (member.NameEquals(profession.Name))
             {
-                profession.Value = member.Value;
+                profession = member;
             }
             else if (member.NameEquals(specializationId.Name))
             {
-                specializationId.Value = member.Value;
+                specializationId = member;
             }
             else if (member.NameEquals(race.Name))
             {
-                race.Value = member.Value;
+                race = member;
             }
             else if (member.NameEquals(mapId.Name))
             {
-                mapId.Value = member.Value;
+                mapId = member;
             }
             else if (member.NameEquals(worldId.Name))
             {
-                worldId.Value = member.Value;
+                worldId = member;
             }
             else if (member.NameEquals(teamColorId.Name))
             {
-                teamColorId.Value = member.Value;
+                teamColorId = member;
             }
             else if (member.NameEquals(commander.Name))
             {
-                commander.Value = member.Value;
+                commander = member;
             }
             else if (member.NameEquals(fieldOfView.Name))
             {
-                fieldOfView.Value = member.Value;
+                fieldOfView = member;
             }
             else if (member.NameEquals(uiSize.Name))
             {
-                uiSize.Value = member.Value;
+                uiSize = member;
             }
             else if (member.NameEquals(map.Name))
             {
-                map.Value = member.Value;
+                map = member;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {

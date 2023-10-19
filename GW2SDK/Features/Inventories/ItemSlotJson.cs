@@ -34,47 +34,47 @@ public static class ItemSlotJson
         {
             if (member.NameEquals(id.Name))
             {
-                id.Value = member.Value;
+                id = member;
             }
             else if (member.NameEquals(count.Name))
             {
-                count.Value = member.Value;
+                count = member;
             }
             else if (member.NameEquals(charges.Name))
             {
-                charges.Value = member.Value;
+                charges = member;
             }
             else if (member.NameEquals(skin.Name))
             {
-                skin.Value = member.Value;
+                skin = member;
             }
             else if (member.NameEquals(upgrades.Name))
             {
-                upgrades.Value = member.Value;
+                upgrades = member;
             }
             else if (member.NameEquals(upgradeSlotIndices.Name))
             {
-                upgradeSlotIndices.Value = member.Value;
+                upgradeSlotIndices = member;
             }
             else if (member.NameEquals(infusions.Name))
             {
-                infusions.Value = member.Value;
+                infusions = member;
             }
             else if (member.NameEquals(dyes.Name))
             {
-                dyes.Value = member.Value;
+                dyes = member;
             }
             else if (member.NameEquals(binding.Name))
             {
-                binding.Value = member.Value;
+                binding = member;
             }
             else if (member.NameEquals(boundTo.Name))
             {
-                boundTo.Value = member.Value;
+                boundTo = member;
             }
             else if (member.NameEquals(stats.Name))
             {
-                stats.Value = member.Value;
+                stats = member;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {

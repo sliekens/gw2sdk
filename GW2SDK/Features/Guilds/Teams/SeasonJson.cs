@@ -20,19 +20,19 @@ public static class SeasonJson
         {
             if (member.NameEquals(id.Name))
             {
-                id.Value = member.Value;
+                id = member;
             }
             else if (member.NameEquals(wins.Name))
             {
-                wins.Value = member.Value;
+                wins = member;
             }
             else if (member.NameEquals(losses.Name))
             {
-                losses.Value = member.Value;
+                losses = member;
             }
             else if (member.NameEquals(rating.Name))
             {
-                rating.Value = member.Value;
+                rating = member;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {

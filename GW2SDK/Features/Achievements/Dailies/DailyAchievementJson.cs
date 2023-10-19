@@ -19,15 +19,15 @@ public static class DailyAchievementJson
         {
             if (member.NameEquals(id.Name))
             {
-                id.Value = member.Value;
+                id = member;
             }
             else if (member.NameEquals(level.Name))
             {
-                level.Value = member.Value;
+                level = member;
             }
             else if (member.NameEquals(requiredAccess.Name))
             {
-                requiredAccess.Value = member.Value;
+                requiredAccess = member;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {

@@ -27,47 +27,47 @@ public static class SpecializationJson
         {
             if (member.NameEquals(id.Name))
             {
-                id.Value = member.Value;
+                id = member;
             }
             else if (member.NameEquals(name.Name))
             {
-                name.Value = member.Value;
+                name = member;
             }
             else if (member.NameEquals(profession.Name))
             {
-                profession.Value = member.Value;
+                profession = member;
             }
             else if (member.NameEquals(elite.Name))
             {
-                elite.Value = member.Value;
+                elite = member;
             }
             else if (member.NameEquals(minorTraits.Name))
             {
-                minorTraits.Value = member.Value;
+                minorTraits = member;
             }
             else if (member.NameEquals(majorTraits.Name))
             {
-                majorTraits.Value = member.Value;
+                majorTraits = member;
             }
             else if (member.NameEquals(weaponTrait.Name))
             {
-                weaponTrait.Value = member.Value;
+                weaponTrait = member;
             }
             else if (member.NameEquals(icon.Name))
             {
-                icon.Value = member.Value;
+                icon = member;
             }
             else if (member.NameEquals(background.Name))
             {
-                background.Value = member.Value;
+                background = member;
             }
             else if (member.NameEquals(professionIconBig.Name))
             {
-                professionIconBig.Value = member.Value;
+                professionIconBig = member;
             }
             else if (member.NameEquals(professionIcon.Name))
             {
-                professionIcon.Value = member.Value;
+                professionIcon = member;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {

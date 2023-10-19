@@ -41,15 +41,15 @@ public static class NumberSkillFactJson
             }
             else if (member.NameEquals(text.Name))
             {
-                text.Value = member.Value;
+                text = member;
             }
             else if (member.NameEquals(icon.Name))
             {
-                icon.Value = member.Value;
+                icon = member;
             }
             else if (member.NameEquals(number.Name))
             {
-                number.Value = member.Value;
+                number = member;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {

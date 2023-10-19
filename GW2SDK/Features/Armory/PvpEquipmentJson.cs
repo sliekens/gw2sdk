@@ -19,15 +19,15 @@ public static class PvpEquipmentJson
         {
             if (member.NameEquals(amulet.Name))
             {
-                amulet.Value = member.Value;
+                amulet = member;
             }
             else if (member.NameEquals(rune.Name))
             {
-                rune.Value = member.Value;
+                rune = member;
             }
             else if (member.NameEquals(sigils.Name))
             {
-                sigils.Value = member.Value;
+                sigils = member;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {

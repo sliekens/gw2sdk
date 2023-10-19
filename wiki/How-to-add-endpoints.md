@@ -54,10 +54,10 @@ public static class QuagganJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        // Define all the members of the JSON data using RequiredMember<T>,
-        // OptionalMember<T> or NullableMember<T> (only for value types)
-        RequiredMember<string> id = new("id");
-        RequiredMember<string> url = new("url");
+        // Define all the members of the JSON data using RequiredMember,
+        // OptionalMember or (only for value types) NullableMember
+        RequiredMember id = new("id");
+        RequiredMember url = new("url");
 
         // Iterate over all the properties of the JSON object
         foreach (var member in json.EnumerateObject())
@@ -66,11 +66,11 @@ public static class QuagganJson
             // and copy the value when there is a match
             if (member.NameEquals(id.Name))
             {
-                id.Value = member.Value;
+                id = member;
             }
             else if (member.NameEquals(url.Name))
             {
-                url.Value = member.Value;
+                url = member;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {
@@ -81,11 +81,11 @@ public static class QuagganJson
         }
 
         // Create an instance of your record with all the values collected from the JsonElement
-        // The GetValue() method can throw an exception when no value is found for a RequiredMember 
+        // The Select() method can throw an exception when no value is found for a RequiredMember 
         return new Quaggan
         {
-            Id = id.GetValue(),
-            PictureHref = url.GetValue()
+            Id = id.Select(value => value.GetStringRequired()),
+            PictureHref = url.Select(value => value.GetStringRequired())
         };
     }
 }

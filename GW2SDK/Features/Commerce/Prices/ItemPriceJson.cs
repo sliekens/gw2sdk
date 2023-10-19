@@ -22,11 +22,11 @@ public static class ItemPriceJson
         {
             if (member.NameEquals(id.Name))
             {
-                id.Value = member.Value;
+                id = member;
             }
             else if (member.NameEquals(whitelisted.Name))
             {
-                whitelisted.Value = member.Value;
+                whitelisted = member;
             }
             else if (member.NameEquals("buys"))
             {
@@ -34,11 +34,11 @@ public static class ItemPriceJson
                 {
                     if (buy.NameEquals(demand.Name))
                     {
-                        demand.Value = buy.Value;
+                        demand = buy;
                     }
                     else if (buy.NameEquals(bestBid.Name))
                     {
-                        bestBid.Value = buy.Value;
+                        bestBid = buy;
                     }
                     else if (missingMemberBehavior == MissingMemberBehavior.Error)
                     {
@@ -52,11 +52,11 @@ public static class ItemPriceJson
                 {
                     if (sell.NameEquals(supply.Name))
                     {
-                        supply.Value = sell.Value;
+                        supply = sell;
                     }
                     else if (sell.NameEquals(bestAsk.Name))
                     {
-                        bestAsk.Value = sell.Value;
+                        bestAsk = sell;
                     }
                     else if (missingMemberBehavior == MissingMemberBehavior.Error)
                     {

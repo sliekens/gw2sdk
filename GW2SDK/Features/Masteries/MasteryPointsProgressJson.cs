@@ -18,11 +18,11 @@ public static class MasteryPointsProgressJson
         {
             if (member.NameEquals(totals.Name))
             {
-                totals.Value = member.Value;
+                totals = member;
             }
             else if (member.NameEquals(unlocked.Name))
             {
-                unlocked.Value = member.Value;
+                unlocked = member;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {

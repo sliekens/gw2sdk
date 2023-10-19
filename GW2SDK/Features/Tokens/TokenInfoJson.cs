@@ -35,15 +35,15 @@ public static class TokenInfoJson
             }
             else if (member.NameEquals(id.Name))
             {
-                id.Value = member.Value;
+                id = member;
             }
             else if (member.NameEquals(name.Name))
             {
-                name.Value = member.Value;
+                name = member;
             }
             else if (member.NameEquals(permissions.Name))
             {
-                permissions.Value = member.Value;
+                permissions = member;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {

@@ -20,19 +20,19 @@ public static class SuperAdventureBoxZoneJson
         {
             if (member.NameEquals(id.Name))
             {
-                id.Value = member.Value;
+                id = member;
             }
             else if (member.NameEquals(mode.Name))
             {
-                mode.Value = member.Value;
+                mode = member;
             }
             else if (member.NameEquals(world.Name))
             {
-                world.Value = member.Value;
+                world = member;
             }
             else if (member.NameEquals(zone.Name))
             {
-                zone.Value = member.Value;
+                zone = member;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {

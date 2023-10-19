@@ -22,27 +22,27 @@ public static class ColorInfoJson
         {
             if (member.NameEquals(brightness.Name))
             {
-                brightness.Value = member.Value;
+                brightness = member;
             }
             else if (member.NameEquals(contrast.Name))
             {
-                contrast.Value = member.Value;
+                contrast = member;
             }
             else if (member.NameEquals(hue.Name))
             {
-                hue.Value = member.Value;
+                hue = member;
             }
             else if (member.NameEquals(saturation.Name))
             {
-                saturation.Value = member.Value;
+                saturation = member;
             }
             else if (member.NameEquals(lightness.Name))
             {
-                lightness.Value = member.Value;
+                lightness = member;
             }
             else if (member.NameEquals(rgb.Name))
             {
-                rgb.Value = member.Value;
+                rgb = member;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {

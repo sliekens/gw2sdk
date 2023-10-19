@@ -19,15 +19,15 @@ public static class OrderBookJson
         {
             if (member.NameEquals(id.Name))
             {
-                id.Value = member.Value;
+                id = member;
             }
             else if (member.NameEquals(demand.Name))
             {
-                demand.Value = member.Value;
+                demand = member;
             }
             else if (member.NameEquals(supply.Name))
             {
-                supply.Value = member.Value;
+                supply = member;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {

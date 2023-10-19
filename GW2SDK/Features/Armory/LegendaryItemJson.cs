@@ -18,11 +18,11 @@ public static class LegendaryItemJson
         {
             if (member.NameEquals(id.Name))
             {
-                id.Value = member.Value;
+                id = member;
             }
             else if (member.NameEquals(maxCount.Name))
             {
-                maxCount.Value = member.Value;
+                maxCount = member;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {

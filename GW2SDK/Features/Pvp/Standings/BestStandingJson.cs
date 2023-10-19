@@ -21,23 +21,23 @@ public static class BestStandingJson
         {
             if (member.NameEquals(totalPoints.Name))
             {
-                totalPoints.Value = member.Value;
+                totalPoints = member;
             }
             else if (member.NameEquals(division.Name))
             {
-                division.Value = member.Value;
+                division = member;
             }
             else if (member.NameEquals(tier.Name))
             {
-                tier.Value = member.Value;
+                tier = member;
             }
             else if (member.NameEquals(points.Name))
             {
-                points.Value = member.Value;
+                points = member;
             }
             else if (member.NameEquals(repeats.Name))
             {
-                repeats.Value = member.Value;
+                repeats = member;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {

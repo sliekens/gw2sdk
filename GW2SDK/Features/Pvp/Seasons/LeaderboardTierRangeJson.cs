@@ -11,18 +11,18 @@ public static class LeaderboardTierRangeJson
         MissingMemberBehavior missingMemberBehavior
     )
     {
-        RequiredMember min = new("min");
-        RequiredMember max = new("max");
+        JsonElement min = default;
+        JsonElement max = default;
 
         foreach (var member in json.EnumerateArray())
         {
-            if (max.IsUndefined)
+            if (max.ValueKind == JsonValueKind.Undefined)
             {
-                max.Value = member;
+                max = member;
             }
-            else if (min.IsUndefined)
+            else if (min.ValueKind == JsonValueKind.Undefined)
             {
-                min.Value = member;
+                min = member;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {
@@ -32,8 +32,8 @@ public static class LeaderboardTierRangeJson
 
         return new LeaderboardTierRange
         {
-            Maximum = max.Select(value => value.GetDouble()),
-            Minimum = min.Select(value => value.GetDouble())
+            Maximum = max.GetDouble(),
+            Minimum = min.GetDouble()
         };
     }
 }

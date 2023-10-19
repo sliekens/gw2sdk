@@ -31,39 +31,39 @@ public static class CampJson
             }
             else if (member.NameEquals(id.Name))
             {
-                id.Value = member.Value;
+                id = member;
             }
             else if (member.NameEquals(owner.Name))
             {
-                owner.Value = member.Value;
+                owner = member;
             }
             else if (member.NameEquals(lastFlipped.Name))
             {
-                lastFlipped.Value = member.Value;
+                lastFlipped = member;
             }
             else if (member.NameEquals(pointsTick.Name))
             {
-                pointsTick.Value = member.Value;
+                pointsTick = member;
             }
             else if (member.NameEquals(pointsCapture.Name))
             {
-                pointsCapture.Value = member.Value;
+                pointsCapture = member;
             }
             else if (member.NameEquals(claimedBy.Name))
             {
-                claimedBy.Value = member.Value;
+                claimedBy = member;
             }
             else if (member.NameEquals(claimedAt.Name))
             {
-                claimedAt.Value = member.Value;
+                claimedAt = member;
             }
             else if (member.NameEquals(yaksDelivered.Name))
             {
-                yaksDelivered.Value = member.Value;
+                yaksDelivered = member;
             }
             else if (member.NameEquals(guildUpgrades.Name))
             {
-                guildUpgrades.Value = member.Value;
+                guildUpgrades = member;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {

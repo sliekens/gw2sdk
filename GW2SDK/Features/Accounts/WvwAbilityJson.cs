@@ -18,11 +18,11 @@ public static class WvwAbilityJson
         {
             if (member.NameEquals(id.Name))
             {
-                id.Value = member.Value;
+                id = member;
             }
             else if (member.NameEquals(rank.Name))
             {
-                rank.Value = member.Value;
+                rank = member;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {

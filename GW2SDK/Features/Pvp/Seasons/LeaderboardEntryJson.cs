@@ -23,31 +23,31 @@ public static class LeaderboardEntryJson
         {
             if (member.NameEquals(name.Name))
             {
-                name.Value = member.Value;
+                name = member;
             }
             else if (member.NameEquals(guildId.Name))
             {
-                guildId.Value = member.Value;
+                guildId = member;
             }
             else if (member.NameEquals(teamName.Name))
             {
-                teamName.Value = member.Value;
+                teamName = member;
             }
             else if (member.NameEquals(teamId.Name))
             {
-                teamId.Value = member.Value;
+                teamId = member;
             }
             else if (member.NameEquals(rank.Name))
             {
-                rank.Value = member.Value;
+                rank = member;
             }
             else if (member.NameEquals(date.Name))
             {
-                date.Value = member.Value;
+                date = member;
             }
             else if (member.NameEquals(scores.Name))
             {
-                scores.Value = member.Value;
+                scores = member;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {

@@ -19,7 +19,7 @@ public static class LeaderboardSettingJson
         {
             if (member.NameEquals(name.Name))
             {
-                name.Value = member.Value;
+                name = member;
             }
             else if (member.NameEquals("duration") && member.Value.ValueKind == JsonValueKind.Null)
             {
@@ -27,11 +27,11 @@ public static class LeaderboardSettingJson
             }
             else if (member.NameEquals(scoring.Name))
             {
-                scoring.Value = member.Value;
+                scoring = member;
             }
             else if (member.NameEquals(tiers.Name))
             {
-                tiers.Value = member.Value;
+                tiers = member;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {

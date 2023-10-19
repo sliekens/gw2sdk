@@ -18,23 +18,23 @@ public static class MountJson
         {
             if (member.NameEquals(id.Name))
             {
-                id.Value = member.Value;
+                id = member;
             }
             else if (member.NameEquals(name.Name))
             {
-                name.Value = member.Value;
+                name = member;
             }
             else if (member.NameEquals(defaultSkin.Name))
             {
-                defaultSkin.Value = member.Value;
+                defaultSkin = member;
             }
             else if (member.NameEquals(skins.Name))
             {
-                skins.Value = member.Value;
+                skins = member;
             }
             else if (member.NameEquals(skills.Name))
             {
-                skills.Value = member.Value;
+                skills = member;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {

@@ -22,27 +22,27 @@ public static class MinipetJson
         {
             if (member.NameEquals(id.Name))
             {
-                id.Value = member.Value;
+                id = member;
             }
             else if (member.NameEquals(name.Name))
             {
-                name.Value = member.Value;
+                name = member;
             }
             else if (member.NameEquals(unlock.Name))
             {
-                unlock.Value = member.Value;
+                unlock = member;
             }
             else if (member.NameEquals(icon.Name))
             {
-                icon.Value = member.Value;
+                icon = member;
             }
             else if (member.NameEquals(order.Name))
             {
-                order.Value = member.Value;
+                order = member;
             }
             else if (member.NameEquals(itemId.Name))
             {
-                itemId.Value = member.Value;
+                itemId = member;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {

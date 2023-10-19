@@ -30,27 +30,27 @@ public static class SubtokenInfoJson
             }
             else if (member.NameEquals(id.Name))
             {
-                id.Value = member.Value;
+                id = member;
             }
             else if (member.NameEquals(name.Name))
             {
-                name.Value = member.Value;
+                name = member;
             }
             else if (member.NameEquals(permissions.Name))
             {
-                permissions.Value = member.Value;
+                permissions = member;
             }
             else if (member.NameEquals(expiresAt.Name))
             {
-                expiresAt.Value = member.Value;
+                expiresAt = member;
             }
             else if (member.NameEquals(issuedAt.Name))
             {
-                issuedAt.Value = member.Value;
+                issuedAt = member;
             }
             else if (member.NameEquals(urls.Name))
             {
-                urls.Value = member.Value;
+                urls = member;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {

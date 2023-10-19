@@ -40,19 +40,19 @@ public static class DamageTraitFactJson
             }
             else if (member.NameEquals(text.Name))
             {
-                text.Value = member.Value;
+                text = member;
             }
             else if (member.NameEquals(icon.Name))
             {
-                icon.Value = member.Value;
+                icon = member;
             }
             else if (member.NameEquals(hitCount.Name))
             {
-                hitCount.Value = member.Value;
+                hitCount = member;
             }
             else if (member.NameEquals(damageMultiplier.Name))
             {
-                damageMultiplier.Value = member.Value;
+                damageMultiplier = member;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {

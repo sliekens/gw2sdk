@@ -21,23 +21,23 @@ public static class MatchScoresJson
         {
             if (member.NameEquals(id.Name))
             {
-                id.Value = member.Value;
+                id = member;
             }
             else if (member.NameEquals(scores.Name))
             {
-                scores.Value = member.Value;
+                scores = member;
             }
             else if (member.NameEquals(victoryPoints.Name))
             {
-                victoryPoints.Value = member.Value;
+                victoryPoints = member;
             }
             else if (member.NameEquals(skirmishes.Name))
             {
-                skirmishes.Value = member.Value;
+                skirmishes = member;
             }
             else if (member.NameEquals(maps.Name))
             {
-                maps.Value = member.Value;
+                maps = member;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {

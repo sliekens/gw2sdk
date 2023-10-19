@@ -24,47 +24,47 @@ public static class TraitJson
         {
             if (member.NameEquals(id.Name))
             {
-                id.Value = member.Value;
+                id = member;
             }
             else if (member.NameEquals(tier.Name))
             {
-                tier.Value = member.Value;
+                tier = member;
             }
             else if (member.NameEquals(order.Name))
             {
-                order.Value = member.Value;
+                order = member;
             }
             else if (member.NameEquals(name.Name))
             {
-                name.Value = member.Value;
+                name = member;
             }
             else if (member.NameEquals(description.Name))
             {
-                description.Value = member.Value;
+                description = member;
             }
             else if (member.NameEquals(slot.Name))
             {
-                slot.Value = member.Value;
+                slot = member;
             }
             else if (member.NameEquals(facts.Name))
             {
-                facts.Value = member.Value;
+                facts = member;
             }
             else if (member.NameEquals(traitedFacts.Name))
             {
-                traitedFacts.Value = member.Value;
+                traitedFacts = member;
             }
             else if (member.NameEquals(skills.Name))
             {
-                skills.Value = member.Value;
+                skills = member;
             }
             else if (member.NameEquals(specialization.Name))
             {
-                specialization.Value = member.Value;
+                specialization = member;
             }
             else if (member.NameEquals(icon.Name))
             {
-                icon.Value = member.Value;
+                icon = member;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {

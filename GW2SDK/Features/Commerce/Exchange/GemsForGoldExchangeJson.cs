@@ -17,11 +17,11 @@ public static class GemsForGoldExchangeJson
         {
             if (member.NameEquals(coinsPerGem.Name))
             {
-                coinsPerGem.Value = member.Value;
+                coinsPerGem = member;
             }
             else if (member.NameEquals(quantity.Name))
             {
-                quantity.Value = member.Value;
+                quantity = member;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {

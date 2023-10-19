@@ -19,19 +19,19 @@ public static class FloorJson
         {
             if (member.NameEquals(textureDimensions.Name))
             {
-                textureDimensions.Value = member.Value;
+                textureDimensions = member;
             }
             else if (member.NameEquals(clampedView.Name))
             {
-                clampedView.Value = member.Value;
+                clampedView = member;
             }
             else if (member.NameEquals(regions.Name))
             {
-                regions.Value = member.Value;
+                regions = member;
             }
             else if (member.NameEquals(id.Name))
             {
-                id.Value = member.Value;
+                id = member;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {

@@ -21,23 +21,23 @@ public static class LeaderboardScoringJson
         {
             if (member.NameEquals(id.Name))
             {
-                id.Value = member.Value;
+                id = member;
             }
             else if (member.NameEquals(type.Name))
             {
-                type.Value = member.Value;
+                type = member;
             }
             else if (member.NameEquals(description.Name))
             {
-                description.Value = member.Value;
+                description = member;
             }
             else if (member.NameEquals(name.Name))
             {
-                name.Value = member.Value;
+                name = member;
             }
             else if (member.NameEquals(ordering.Name))
             {
-                ordering.Value = member.Value;
+                ordering = member;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {

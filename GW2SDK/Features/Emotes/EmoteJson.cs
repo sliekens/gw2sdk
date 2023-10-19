@@ -16,15 +16,15 @@ public static class EmoteJson
         {
             if (member.NameEquals(id.Name))
             {
-                id.Value = member.Value;
+                id = member;
             }
             else if (member.NameEquals(commands.Name))
             {
-                commands.Value = member.Value;
+                commands = member;
             }
             else if (member.NameEquals(unlockItems.Name))
             {
-                unlockItems.Value = member.Value;
+                unlockItems = member;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {

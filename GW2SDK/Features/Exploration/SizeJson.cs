@@ -1,36 +1,37 @@
-using System.Drawing;
+﻿using System.Drawing;
 using System.Text.Json;
-using GuildWars2.Json;
 
 namespace GuildWars2.Exploration;
 
 [PublicAPI]
 public static class SizeJson
 {
-    public static Size GetDimensions(this JsonElement json, MissingMemberBehavior missingMemberBehavior)
+    public static Size GetDimensions(
+        this JsonElement json,
+        MissingMemberBehavior missingMemberBehavior
+    )
     {
-        RequiredMember width = new("[0]");
-        RequiredMember height = new("[1]");
+        JsonElement width = default;
+        JsonElement height = default;
 
         foreach (var entry in json.EnumerateArray())
         {
-            if (width.IsUndefined)
+            if (width.ValueKind == JsonValueKind.Undefined)
             {
-                width.Value = entry;
+                width = entry;
             }
-            else if (height.IsUndefined)
+            else if (height.ValueKind == JsonValueKind.Undefined)
             {
-                height.Value = entry;
+                height = entry;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {
-                throw new InvalidOperationException(Strings.UnexpectedArrayLength(json.GetArrayLength()));
+                throw new InvalidOperationException(
+                    Strings.UnexpectedArrayLength(json.GetArrayLength())
+                );
             }
         }
 
-        return new Size(
-            width.Select(value => value.GetInt32()),
-            height.Select(value => value.GetInt32())
-        );
+        return new Size(width.GetInt32(), height.GetInt32());
     }
 }

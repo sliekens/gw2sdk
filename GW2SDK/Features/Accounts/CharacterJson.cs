@@ -46,103 +46,103 @@ public static class CharacterJson
         {
             if (member.NameEquals(name.Name))
             {
-                name.Value = member.Value;
+                name = member;
             }
             else if (member.NameEquals(race.Name))
             {
-                race.Value = member.Value;
+                race = member;
             }
             else if (member.NameEquals(gender.Name))
             {
-                gender.Value = member.Value;
+                gender = member;
             }
             else if (member.NameEquals(flags.Name))
             {
-                flags.Value = member.Value;
+                flags = member;
             }
             else if (member.NameEquals(profession.Name))
             {
-                profession.Value = member.Value;
+                profession = member;
             }
             else if (member.NameEquals(level.Name))
             {
-                level.Value = member.Value;
+                level = member;
             }
             else if (member.NameEquals(guild.Name))
             {
-                guild.Value = member.Value;
+                guild = member;
             }
             else if (member.NameEquals(age.Name))
             {
-                age.Value = member.Value;
+                age = member;
             }
             else if (member.NameEquals(lastModified.Name))
             {
-                lastModified.Value = member.Value;
+                lastModified = member;
             }
             else if (member.NameEquals(created.Name))
             {
-                created.Value = member.Value;
+                created = member;
             }
             else if (member.NameEquals(deaths.Name))
             {
-                deaths.Value = member.Value;
+                deaths = member;
             }
             else if (member.NameEquals(crafting.Name))
             {
-                crafting.Value = member.Value;
+                crafting = member;
             }
             else if (member.NameEquals(title.Name))
             {
-                title.Value = member.Value;
+                title = member;
             }
             else if (member.NameEquals(backstory.Name))
             {
-                backstory.Value = member.Value;
+                backstory = member;
             }
             else if (member.NameEquals(wvwAbilities.Name))
             {
-                wvwAbilities.Value = member.Value;
+                wvwAbilities = member;
             }
             else if (member.NameEquals(buildTabsUnlocked.Name))
             {
-                buildTabsUnlocked.Value = member.Value;
+                buildTabsUnlocked = member;
             }
             else if (member.NameEquals(activeBuildTab.Name))
             {
-                activeBuildTab.Value = member.Value;
+                activeBuildTab = member;
             }
             else if (member.NameEquals(buildTabs.Name))
             {
-                buildTabs.Value = member.Value;
+                buildTabs = member;
             }
             else if (member.NameEquals(equipmentTabsUnlocked.Name))
             {
-                equipmentTabsUnlocked.Value = member.Value;
+                equipmentTabsUnlocked = member;
             }
             else if (member.NameEquals(activeEquipmentTab.Name))
             {
-                activeEquipmentTab.Value = member.Value;
+                activeEquipmentTab = member;
             }
             else if (member.NameEquals(equipment.Name))
             {
-                equipment.Value = member.Value;
+                equipment = member;
             }
             else if (member.NameEquals(equipmentTabs.Name))
             {
-                equipmentTabs.Value = member.Value;
+                equipmentTabs = member;
             }
             else if (member.NameEquals(recipes.Name))
             {
-                recipes.Value = member.Value;
+                recipes = member;
             }
             else if (member.NameEquals(training.Name))
             {
-                training.Value = member.Value;
+                training = member;
             }
             else if (member.NameEquals(bags.Name))
             {
-                bags.Value = member.Value;
+                bags = member;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {

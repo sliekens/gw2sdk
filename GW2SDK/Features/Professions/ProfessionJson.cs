@@ -26,47 +26,47 @@ public static class ProfessionJson
         {
             if (member.NameEquals(id.Name))
             {
-                id.Value = member.Value;
+                id = member;
             }
             else if (member.NameEquals(name.Name))
             {
-                name.Value = member.Value;
+                name = member;
             }
             else if (member.NameEquals(code.Name))
             {
-                code.Value = member.Value;
+                code = member;
             }
             else if (member.NameEquals(icon.Name))
             {
-                icon.Value = member.Value;
+                icon = member;
             }
             else if (member.NameEquals(iconBig.Name))
             {
-                iconBig.Value = member.Value;
+                iconBig = member;
             }
             else if (member.NameEquals(specializations.Name))
             {
-                specializations.Value = member.Value;
+                specializations = member;
             }
             else if (member.NameEquals(weapons.Name))
             {
-                weapons.Value = member.Value;
+                weapons = member;
             }
             else if (member.NameEquals(flags.Name))
             {
-                flags.Value = member.Value;
+                flags = member;
             }
             else if (member.NameEquals(skills.Name))
             {
-                skills.Value = member.Value;
+                skills = member;
             }
             else if (member.NameEquals(training.Name))
             {
-                training.Value = member.Value;
+                training = member;
             }
             else if (member.NameEquals(skillsByPalette.Name))
             {
-                skillsByPalette.Value = member.Value;
+                skillsByPalette = member;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {

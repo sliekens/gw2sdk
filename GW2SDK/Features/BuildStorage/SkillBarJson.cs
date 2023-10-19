@@ -19,15 +19,15 @@ public static class SkillBarJson
         {
             if (member.NameEquals(heal.Name))
             {
-                heal.Value = member.Value;
+                heal = member;
             }
             else if (member.NameEquals(utilities.Name))
             {
-                utilities.Value = member.Value;
+                utilities = member;
             }
             else if (member.NameEquals(elite.Name))
             {
-                elite.Value = member.Value;
+                elite = member;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {

@@ -22,31 +22,31 @@ public static class BackstoryQuestionJson
         {
             if (member.NameEquals(id.Name))
             {
-                id.Value = member.Value;
+                id = member;
             }
             else if (member.NameEquals(title.Name))
             {
-                title.Value = member.Value;
+                title = member;
             }
             else if (member.NameEquals(description.Name))
             {
-                description.Value = member.Value;
+                description = member;
             }
             else if (member.NameEquals(answers.Name))
             {
-                answers.Value = member.Value;
+                answers = member;
             }
             else if (member.NameEquals(order.Name))
             {
-                order.Value = member.Value;
+                order = member;
             }
             else if (member.NameEquals(professions.Name))
             {
-                professions.Value = member.Value;
+                professions = member;
             }
             else if (member.NameEquals(races.Name))
             {
-                races.Value = member.Value;
+                races = member;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {

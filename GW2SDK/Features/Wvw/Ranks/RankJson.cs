@@ -16,15 +16,15 @@ public static class RankJson
         {
             if (member.NameEquals(id.Name))
             {
-                id.Value = member.Value;
+                id = member;
             }
             else if (member.NameEquals(title.Name))
             {
-                title.Value = member.Value;
+                title = member;
             }
             else if (member.NameEquals(minRank.Name))
             {
-                minRank.Value = member.Value;
+                minRank = member;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {

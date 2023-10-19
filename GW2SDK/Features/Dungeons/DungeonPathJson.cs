@@ -18,11 +18,11 @@ public static class DungeonPathJson
         {
             if (member.NameEquals(id.Name))
             {
-                id.Value = member.Value;
+                id = member;
             }
             else if (member.NameEquals(kind.Name))
             {
-                kind.Value = member.Value;
+                kind = member;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {

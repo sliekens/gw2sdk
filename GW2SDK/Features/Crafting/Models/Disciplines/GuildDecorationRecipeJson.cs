@@ -35,51 +35,51 @@ public static class GuildDecorationRecipeJson
             }
             else if (member.NameEquals(outputItemId.Name))
             {
-                outputItemId.Value = member.Value;
+                outputItemId = member;
             }
             else if (member.NameEquals(outputItemCount.Name))
             {
-                outputItemCount.Value = member.Value;
+                outputItemCount = member;
             }
             else if (member.NameEquals(minRating.Name))
             {
-                minRating.Value = member.Value;
+                minRating = member;
             }
             else if (member.NameEquals(minRating.Name))
             {
-                minRating.Value = member.Value;
+                minRating = member;
             }
             else if (member.NameEquals(timeToCraft.Name))
             {
-                timeToCraft.Value = member.Value;
+                timeToCraft = member;
             }
             else if (member.NameEquals(disciplines.Name))
             {
-                disciplines.Value = member.Value;
+                disciplines = member;
             }
             else if (member.NameEquals(flags.Name))
             {
-                flags.Value = member.Value;
+                flags = member;
             }
             else if (member.NameEquals(ingredients.Name))
             {
-                ingredients.Value = member.Value;
+                ingredients = member;
             }
             else if (member.NameEquals(guildIngredients.Name))
             {
-                guildIngredients.Value = member.Value;
+                guildIngredients = member;
             }
             else if (member.NameEquals(outputUpgradeId.Name))
             {
-                outputUpgradeId.Value = member.Value;
+                outputUpgradeId = member;
             }
             else if (member.NameEquals(id.Name))
             {
-                id.Value = member.Value;
+                id = member;
             }
             else if (member.NameEquals(chatLink.Name))
             {
-                chatLink.Value = member.Value;
+                chatLink = member;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {

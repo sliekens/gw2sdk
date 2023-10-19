@@ -22,31 +22,31 @@ public static class GodShrineJson
         {
             if (member.NameEquals(id.Name))
             {
-                id.Value = member.Value;
+                id = member;
             }
             else if (member.NameEquals(name.Name))
             {
-                name.Value = member.Value;
+                name = member;
             }
             else if (member.NameEquals(nameContested.Name))
             {
-                nameContested.Value = member.Value;
+                nameContested = member;
             }
             else if (member.NameEquals(pointOfInterestId.Name))
             {
-                pointOfInterestId.Value = member.Value;
+                pointOfInterestId = member;
             }
             else if (member.NameEquals(coordinates.Name))
             {
-                coordinates.Value = member.Value;
+                coordinates = member;
             }
             else if (member.NameEquals(icon.Name))
             {
-                icon.Value = member.Value;
+                icon = member;
             }
             else if (member.NameEquals(iconContested.Name))
             {
-                iconContested.Value = member.Value;
+                iconContested = member;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {

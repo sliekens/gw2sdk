@@ -20,31 +20,31 @@ public static class RankJson
         {
             if (member.NameEquals(id.Name))
             {
-                id.Value = member.Value;
+                id = member;
             }
             else if (member.NameEquals(finisherId.Name))
             {
-                finisherId.Value = member.Value;
+                finisherId = member;
             }
             else if (member.NameEquals(name.Name))
             {
-                name.Value = member.Value;
+                name = member;
             }
             else if (member.NameEquals(icon.Name))
             {
-                icon.Value = member.Value;
+                icon = member;
             }
             else if (member.NameEquals(minRank.Name))
             {
-                minRank.Value = member.Value;
+                minRank = member;
             }
             else if (member.NameEquals(maxRank.Name))
             {
-                maxRank.Value = member.Value;
+                maxRank = member;
             }
             else if (member.NameEquals(levels.Name))
             {
-                levels.Value = member.Value;
+                levels = member;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {

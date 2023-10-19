@@ -19,15 +19,15 @@ public static class BuildTabJson
         {
             if (member.NameEquals(tab.Name))
             {
-                tab.Value = member.Value;
+                tab = member;
             }
             else if (member.NameEquals(build.Name))
             {
-                build.Value = member.Value;
+                build = member;
             }
             else if (member.NameEquals(isActive.Name))
             {
-                isActive.Value = member.Value;
+                isActive = member;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {

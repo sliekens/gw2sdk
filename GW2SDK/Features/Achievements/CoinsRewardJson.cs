@@ -25,7 +25,7 @@ public static class CoinsRewardJson
             }
             else if (member.NameEquals(coins.Name))
             {
-                coins.Value = member.Value;
+                coins = member;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {

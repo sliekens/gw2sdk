@@ -18,11 +18,11 @@ public static class EncounterJson
         {
             if (member.NameEquals(id.Name))
             {
-                id.Value = member.Value;
+                id = member;
             }
             else if (member.NameEquals(type.Name))
             {
-                type.Value = member.Value;
+                type = member;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {

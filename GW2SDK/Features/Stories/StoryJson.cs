@@ -23,43 +23,43 @@ public static class StoryJson
         {
             if (member.NameEquals(id.Name))
             {
-                id.Value = member.Value;
+                id = member;
             }
             else if (member.NameEquals(season.Name))
             {
-                season.Value = member.Value;
+                season = member;
             }
             else if (member.NameEquals(name.Name))
             {
-                name.Value = member.Value;
+                name = member;
             }
             else if (member.NameEquals(description.Name))
             {
-                description.Value = member.Value;
+                description = member;
             }
             else if (member.NameEquals(timeline.Name))
             {
-                timeline.Value = member.Value;
+                timeline = member;
             }
             else if (member.NameEquals(level.Name))
             {
-                level.Value = member.Value;
+                level = member;
             }
             else if (member.NameEquals(races.Name))
             {
-                races.Value = member.Value;
+                races = member;
             }
             else if (member.NameEquals(order.Name))
             {
-                order.Value = member.Value;
+                order = member;
             }
             else if (member.NameEquals(chapters.Name))
             {
-                chapters.Value = member.Value;
+                chapters = member;
             }
             else if (member.NameEquals(flags.Name))
             {
-                flags.Value = member.Value;
+                flags = member;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {

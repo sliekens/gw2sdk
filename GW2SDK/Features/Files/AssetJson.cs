@@ -15,11 +15,11 @@ public static class AssetJson
         {
             if (member.NameEquals(id.Name))
             {
-                id.Value = member.Value;
+                id = member;
             }
             else if (member.NameEquals(icon.Name))
             {
-                icon.Value = member.Value;
+                icon = member;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {

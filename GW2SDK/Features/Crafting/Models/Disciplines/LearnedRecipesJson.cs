@@ -17,7 +17,7 @@ public static class LearnedRecipesJson
         {
             if (member.NameEquals(recipes.Name))
             {
-                recipes.Value = member.Value;
+                recipes = member;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {

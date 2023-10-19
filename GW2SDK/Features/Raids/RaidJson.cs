@@ -15,11 +15,11 @@ public static class RaidJson
         {
             if (member.NameEquals(id.Name))
             {
-                id.Value = member.Value;
+                id = member;
             }
             else if (member.NameEquals(wings.Name))
             {
-                wings.Value = member.Value;
+                wings = member;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {

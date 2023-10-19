@@ -19,15 +19,15 @@ public static class ApiVersionJson
         {
             if (member.NameEquals(languages.Name))
             {
-                languages.Value = member.Value;
+                languages = member;
             }
             else if (member.NameEquals(routes.Name))
             {
-                routes.Value = member.Value;
+                routes = member;
             }
             else if (member.NameEquals(schemaVersions.Name))
             {
-                schemaVersions.Value = member.Value;
+                schemaVersions = member;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {

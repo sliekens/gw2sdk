@@ -17,7 +17,7 @@ public static class ChapterJson
         {
             if (member.NameEquals(name.Name))
             {
-                name.Value = member.Value;
+                name = member;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {

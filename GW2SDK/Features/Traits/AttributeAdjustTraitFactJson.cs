@@ -40,19 +40,19 @@ public static class AttributeAdjustTraitFactJson
             }
             else if (member.NameEquals(text.Name))
             {
-                text.Value = member.Value;
+                text = member;
             }
             else if (member.NameEquals(icon.Name))
             {
-                icon.Value = member.Value;
+                icon = member;
             }
             else if (member.NameEquals(adjustment.Name))
             {
-                adjustment.Value = member.Value;
+                adjustment = member;
             }
             else if (member.NameEquals(target.Name))
             {
-                target.Value = member.Value;
+                target = member;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {

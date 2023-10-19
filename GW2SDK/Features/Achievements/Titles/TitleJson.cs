@@ -17,19 +17,19 @@ public static class TitleJson
         {
             if (member.NameEquals(id.Name))
             {
-                id.Value = member.Value;
+                id = member;
             }
             else if (member.NameEquals(name.Name))
             {
-                name.Value = member.Value;
+                name = member;
             }
             else if (member.NameEquals(achievements.Name))
             {
-                achievements.Value = member.Value;
+                achievements = member;
             }
             else if (member.NameEquals(achievementPointsRequired.Name))
             {
-                achievementPointsRequired.Value = member.Value;
+                achievementPointsRequired = member;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {

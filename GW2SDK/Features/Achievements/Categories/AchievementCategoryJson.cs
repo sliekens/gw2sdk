@@ -23,31 +23,31 @@ public static class AchievementCategoryJson
         {
             if (member.NameEquals(id.Name))
             {
-                id.Value = member.Value;
+                id = member;
             }
             else if (member.NameEquals(name.Name))
             {
-                name.Value = member.Value;
+                name = member;
             }
             else if (member.NameEquals(description.Name))
             {
-                description.Value = member.Value;
+                description = member;
             }
             else if (member.NameEquals(order.Name))
             {
-                order.Value = member.Value;
+                order = member;
             }
             else if (member.NameEquals(icon.Name))
             {
-                icon.Value = member.Value;
+                icon = member;
             }
             else if (member.NameEquals(achievements.Name))
             {
-                achievements.Value = member.Value;
+                achievements = member;
             }
             else if (member.NameEquals(tomorrow.Name))
             {
-                tomorrow.Value = member.Value;
+                tomorrow = member;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {

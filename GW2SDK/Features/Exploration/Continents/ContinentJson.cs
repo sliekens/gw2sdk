@@ -21,27 +21,27 @@ public static class ContinentJson
         {
             if (member.NameEquals(name.Name))
             {
-                name.Value = member.Value;
+                name = member;
             }
             else if (member.NameEquals(continentDimensions.Name))
             {
-                continentDimensions.Value = member.Value;
+                continentDimensions = member;
             }
             else if (member.NameEquals(minZoom.Name))
             {
-                minZoom.Value = member.Value;
+                minZoom = member;
             }
             else if (member.NameEquals(maxZoom.Name))
             {
-                maxZoom.Value = member.Value;
+                maxZoom = member;
             }
             else if (member.NameEquals(floors.Name))
             {
-                floors.Value = member.Value;
+                floors = member;
             }
             else if (member.NameEquals(id.Name))
             {
-                id.Value = member.Value;
+                id = member;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {

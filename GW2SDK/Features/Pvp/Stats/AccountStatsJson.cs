@@ -22,27 +22,27 @@ public static class AccountStatsJson
         {
             if (member.NameEquals(pvpRank.Name))
             {
-                pvpRank.Value = member.Value;
+                pvpRank = member;
             }
             else if (member.NameEquals(pvpRankPoints.Name))
             {
-                pvpRankPoints.Value = member.Value;
+                pvpRankPoints = member;
             }
             else if (member.NameEquals(pvpRankRollovers.Name))
             {
-                pvpRankRollovers.Value = member.Value;
+                pvpRankRollovers = member;
             }
             else if (member.NameEquals(aggregate.Name))
             {
-                aggregate.Value = member.Value;
+                aggregate = member;
             }
             else if (member.NameEquals(professions.Name))
             {
-                professions.Value = member.Value;
+                professions = member;
             }
             else if (member.NameEquals(ladders.Name))
             {
-                ladders.Value = member.Value;
+                ladders = member;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {

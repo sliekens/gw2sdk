@@ -18,11 +18,11 @@ public static class ProgressionJson
         {
             if (member.NameEquals(progressId.Name))
             {
-                progressId.Value = member.Value;
+                progressId = member;
             }
             else if (member.NameEquals(progress.Name))
             {
-                progress.Value = member.Value;
+                progress = member;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {

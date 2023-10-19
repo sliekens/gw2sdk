@@ -39,15 +39,15 @@ public static class ComboFieldTraitFactJson
             }
             else if (member.NameEquals(text.Name))
             {
-                text.Value = member.Value;
+                text = member;
             }
             else if (member.NameEquals(icon.Name))
             {
-                icon.Value = member.Value;
+                icon = member;
             }
             else if (member.NameEquals(fieldType.Name))
             {
-                fieldType.Value = member.Value;
+                fieldType = member;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {

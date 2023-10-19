@@ -21,23 +21,23 @@ public static class MatchOverviewJson
         {
             if (member.NameEquals(id.Name))
             {
-                id.Value = member.Value;
+                id = member;
             }
             else if (member.NameEquals(worlds.Name))
             {
-                worlds.Value = member.Value;
+                worlds = member;
             }
             else if (member.NameEquals(allWorlds.Name))
             {
-                allWorlds.Value = member.Value;
+                allWorlds = member;
             }
             else if (member.NameEquals(startTime.Name))
             {
-                startTime.Value = member.Value;
+                startTime = member;
             }
             else if (member.NameEquals(endTime.Name))
             {
-                endTime.Value = member.Value;
+                endTime = member;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {

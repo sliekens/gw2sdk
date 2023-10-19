@@ -17,7 +17,7 @@ public static class BaggageJson
         {
             if (member.NameEquals(bags.Name))
             {
-                bags.Value = member.Value;
+                bags = member;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {

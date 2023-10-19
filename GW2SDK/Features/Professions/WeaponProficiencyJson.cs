@@ -19,15 +19,15 @@ public static class WeaponProficiencyJson
         {
             if (member.NameEquals(specialization.Name))
             {
-                specialization.Value = member.Value;
+                specialization = member;
             }
             else if (member.NameEquals(flags.Name))
             {
-                flags.Value = member.Value;
+                flags = member;
             }
             else if (member.NameEquals(skills.Name))
             {
-                skills.Value = member.Value;
+                skills = member;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {

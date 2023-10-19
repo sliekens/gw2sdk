@@ -22,27 +22,27 @@ public static class DivisionJson
         {
             if (member.NameEquals(name.Name))
             {
-                name.Value = member.Value;
+                name = member;
             }
             else if (member.NameEquals(flags.Name))
             {
-                flags.Value = member.Value;
+                flags = member;
             }
             else if (member.NameEquals(largeIcon.Name))
             {
-                largeIcon.Value = member.Value;
+                largeIcon = member;
             }
             else if (member.NameEquals(smallIcon.Name))
             {
-                smallIcon.Value = member.Value;
+                smallIcon = member;
             }
             else if (member.NameEquals(pipIcon.Name))
             {
-                pipIcon.Value = member.Value;
+                pipIcon = member;
             }
             else if (member.NameEquals(tiers.Name))
             {
-                tiers.Value = member.Value;
+                tiers = member;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {

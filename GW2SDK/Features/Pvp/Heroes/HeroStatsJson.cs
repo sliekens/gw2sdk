@@ -19,15 +19,15 @@ public static class HeroStatsJson
         {
             if (member.NameEquals(offense.Name))
             {
-                offense.Value = member.Value;
+                offense = member;
             }
             else if (member.NameEquals(defense.Name))
             {
-                defense.Value = member.Value;
+                defense = member;
             }
             else if (member.NameEquals(speed.Name))
             {
-                speed.Value = member.Value;
+                speed = member;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {

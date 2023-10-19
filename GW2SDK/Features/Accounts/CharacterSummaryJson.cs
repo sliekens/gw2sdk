@@ -27,47 +27,47 @@ public static class CharacterSummaryJson
         {
             if (member.NameEquals(name.Name))
             {
-                name.Value = member.Value;
+                name = member;
             }
             else if (member.NameEquals(race.Name))
             {
-                race.Value = member.Value;
+                race = member;
             }
             else if (member.NameEquals(gender.Name))
             {
-                gender.Value = member.Value;
+                gender = member;
             }
             else if (member.NameEquals(profession.Name))
             {
-                profession.Value = member.Value;
+                profession = member;
             }
             else if (member.NameEquals(level.Name))
             {
-                level.Value = member.Value;
+                level = member;
             }
             else if (member.NameEquals(guild.Name))
             {
-                guild.Value = member.Value;
+                guild = member;
             }
             else if (member.NameEquals(age.Name))
             {
-                age.Value = member.Value;
+                age = member;
             }
             else if (member.NameEquals(lastModified.Name))
             {
-                lastModified.Value = member.Value;
+                lastModified = member;
             }
             else if (member.NameEquals(created.Name))
             {
-                created.Value = member.Value;
+                created = member;
             }
             else if (member.NameEquals(deaths.Name))
             {
-                deaths.Value = member.Value;
+                deaths = member;
             }
             else if (member.NameEquals(title.Name))
             {
-                title.Value = member.Value;
+                title = member;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {

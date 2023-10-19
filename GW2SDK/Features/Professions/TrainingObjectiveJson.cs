@@ -33,7 +33,7 @@ public static class TrainingObjectiveJson
             }
             else if (member.NameEquals(cost.Name))
             {
-                cost.Value = member.Value;
+                cost = member;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {

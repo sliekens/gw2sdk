@@ -23,31 +23,31 @@ public static class AccountAchievementJson
         {
             if (member.NameEquals(id.Name))
             {
-                id.Value = member.Value;
+                id = member;
             }
             else if (member.NameEquals(current.Name))
             {
-                current.Value = member.Value;
+                current = member;
             }
             else if (member.NameEquals(max.Name))
             {
-                max.Value = member.Value;
+                max = member;
             }
             else if (member.NameEquals(done.Name))
             {
-                done.Value = member.Value;
+                done = member;
             }
             else if (member.NameEquals(bits.Name))
             {
-                bits.Value = member.Value;
+                bits = member;
             }
             else if (member.NameEquals(repeated.Name))
             {
-                repeated.Value = member.Value;
+                repeated = member;
             }
             else if (member.NameEquals(unlocked.Name))
             {
-                unlocked.Value = member.Value;
+                unlocked = member;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {

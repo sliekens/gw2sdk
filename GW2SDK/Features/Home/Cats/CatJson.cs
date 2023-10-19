@@ -15,11 +15,11 @@ public static class CatJson
         {
             if (member.NameEquals(id.Name))
             {
-                id.Value = member.Value;
+                id = member;
             }
             else if (member.NameEquals(hint.Name))
             {
-                hint.Value = member.Value;
+                hint = member;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {

@@ -37,51 +37,51 @@ public static class ItemSetAchievementJson
             }
             else if (member.NameEquals(id.Name))
             {
-                id.Value = member.Value;
+                id = member;
             }
             else if (member.NameEquals(icon.Name))
             {
-                icon.Value = member.Value;
+                icon = member;
             }
             else if (member.NameEquals(name.Name))
             {
-                name.Value = member.Value;
+                name = member;
             }
             else if (member.NameEquals(description.Name))
             {
-                description.Value = member.Value;
+                description = member;
             }
             else if (member.NameEquals(requirement.Name))
             {
-                requirement.Value = member.Value;
+                requirement = member;
             }
             else if (member.NameEquals(lockedText.Name))
             {
-                lockedText.Value = member.Value;
+                lockedText = member;
             }
             else if (member.NameEquals(flags.Name))
             {
-                flags.Value = member.Value;
+                flags = member;
             }
             else if (member.NameEquals(tiers.Name))
             {
-                tiers.Value = member.Value;
+                tiers = member;
             }
             else if (member.NameEquals(prerequisites.Name))
             {
-                prerequisites.Value = member.Value;
+                prerequisites = member;
             }
             else if (member.NameEquals(rewards.Name))
             {
-                rewards.Value = member.Value;
+                rewards = member;
             }
             else if (member.NameEquals(bits.Name))
             {
-                bits.Value = member.Value;
+                bits = member;
             }
             else if (member.NameEquals(pointCap.Name))
             {
-                pointCap.Value = member.Value;
+                pointCap = member;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {

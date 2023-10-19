@@ -19,15 +19,15 @@ public static class LeaderboardGroupJson
         {
             if (member.NameEquals(ladder.Name))
             {
-                ladder.Value = member.Value;
+                ladder = member;
             }
             else if (member.NameEquals(legendary.Name))
             {
-                legendary.Value = member.Value;
+                legendary = member;
             }
             else if (member.NameEquals(guild.Name))
             {
-                guild.Value = member.Value;
+                guild = member;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {

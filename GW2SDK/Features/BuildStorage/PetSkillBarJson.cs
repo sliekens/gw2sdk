@@ -18,11 +18,11 @@ public static class PetSkillBarJson
         {
             if (member.NameEquals(terrestrial.Name))
             {
-                terrestrial.Value = member.Value;
+                terrestrial = member;
             }
             else if (member.NameEquals(aquatic.Name))
             {
-                aquatic.Value = member.Value;
+                aquatic = member;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {

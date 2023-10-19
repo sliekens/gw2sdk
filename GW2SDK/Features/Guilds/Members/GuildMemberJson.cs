@@ -19,15 +19,15 @@ public static class GuildMemberJson
         {
             if (member.NameEquals(name.Name))
             {
-                name.Value = member.Value;
+                name = member;
             }
             else if (member.NameEquals(rank.Name))
             {
-                rank.Value = member.Value;
+                rank = member;
             }
             else if (member.NameEquals(joined.Name))
             {
-                joined.Value = member.Value;
+                joined = member;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {

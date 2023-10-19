@@ -18,11 +18,11 @@ public static class LeaderboardJson
         {
             if (member.NameEquals(settings.Name))
             {
-                settings.Value = member.Value;
+                settings = member;
             }
             else if (member.NameEquals(scorings.Name))
             {
-                scorings.Value = member.Value;
+                scorings = member;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {

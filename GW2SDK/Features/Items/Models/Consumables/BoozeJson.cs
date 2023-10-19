@@ -32,47 +32,47 @@ public static class BoozeJson
             }
             else if (member.NameEquals(name.Name))
             {
-                name.Value = member.Value;
+                name = member;
             }
             else if (member.NameEquals(description.Name))
             {
-                description.Value = member.Value;
+                description = member;
             }
             else if (member.NameEquals(level.Name))
             {
-                level.Value = member.Value;
+                level = member;
             }
             else if (member.NameEquals(rarity.Name))
             {
-                rarity.Value = member.Value;
+                rarity = member;
             }
             else if (member.NameEquals(vendorValue.Name))
             {
-                vendorValue.Value = member.Value;
+                vendorValue = member;
             }
             else if (member.NameEquals(gameTypes.Name))
             {
-                gameTypes.Value = member.Value;
+                gameTypes = member;
             }
             else if (member.NameEquals(flags.Name))
             {
-                flags.Value = member.Value;
+                flags = member;
             }
             else if (member.NameEquals(restrictions.Name))
             {
-                restrictions.Value = member.Value;
+                restrictions = member;
             }
             else if (member.NameEquals(id.Name))
             {
-                id.Value = member.Value;
+                id = member;
             }
             else if (member.NameEquals(chatLink.Name))
             {
-                chatLink.Value = member.Value;
+                chatLink = member;
             }
             else if (member.NameEquals(icon.Name))
             {
-                icon.Value = member.Value;
+                icon = member;
             }
             else if (member.NameEquals("details"))
             {

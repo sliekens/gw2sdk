@@ -41,15 +41,15 @@ public static class RangeSkillFactJson
             }
             else if (member.NameEquals(text.Name))
             {
-                text.Value = member.Value;
+                text = member;
             }
             else if (member.NameEquals(icon.Name))
             {
-                icon.Value = member.Value;
+                icon = member;
             }
             else if (member.NameEquals(range.Name))
             {
-                range.Value = member.Value;
+                range = member;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {

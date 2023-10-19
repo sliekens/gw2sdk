@@ -18,11 +18,11 @@ public static class AbilityRankJson
         {
             if (member.NameEquals(cost.Name))
             {
-                cost.Value = member.Value;
+                cost = member;
             }
             else if (member.NameEquals(effect.Name))
             {
-                effect.Value = member.Value;
+                effect = member;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {

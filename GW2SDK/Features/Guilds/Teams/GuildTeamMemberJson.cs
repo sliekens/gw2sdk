@@ -18,11 +18,11 @@ public static class GuildTeamMemberJson
         {
             if (member.NameEquals(name.Name))
             {
-                name.Value = member.Value;
+                name = member;
             }
             else if (member.NameEquals(role.Name))
             {
-                role.Value = member.Value;
+                role = member;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {

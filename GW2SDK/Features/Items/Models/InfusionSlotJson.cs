@@ -17,11 +17,11 @@ public static class InfusionSlotJson
         {
             if (member.NameEquals(flags.Name))
             {
-                flags.Value = member.Value;
+                flags = member;
             }
             else if (member.NameEquals(itemId.Name))
             {
-                itemId.Value = member.Value;
+                itemId = member;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {

@@ -17,7 +17,7 @@ public static class CreatedSubtokenJson
         {
             if (member.NameEquals(subtoken.Name))
             {
-                subtoken.Value = member.Value;
+                subtoken = member;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {

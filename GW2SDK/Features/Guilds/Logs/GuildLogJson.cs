@@ -51,11 +51,11 @@ public static class GuildLogJson
             }
             else if (member.NameEquals(id.Name))
             {
-                id.Value = member.Value;
+                id = member;
             }
             else if (member.NameEquals(time.Name))
             {
-                time.Value = member.Value;
+                time = member;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {

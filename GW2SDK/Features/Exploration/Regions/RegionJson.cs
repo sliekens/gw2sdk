@@ -21,23 +21,23 @@ public static class RegionJson
         {
             if (member.NameEquals(name.Name))
             {
-                name.Value = member.Value;
+                name = member;
             }
             else if (member.NameEquals(labelCoordinates.Name))
             {
-                labelCoordinates.Value = member.Value;
+                labelCoordinates = member;
             }
             else if (member.NameEquals(continentRectangle.Name))
             {
-                continentRectangle.Value = member.Value;
+                continentRectangle = member;
             }
             else if (member.NameEquals(maps.Name))
             {
-                maps.Value = member.Value;
+                maps = member;
             }
             else if (member.NameEquals(id.Name))
             {
-                id.Value = member.Value;
+                id = member;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {

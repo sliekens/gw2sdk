@@ -25,43 +25,43 @@ public static class SelectedModificationJson
         {
             if (member.NameEquals(agonyResistance.Name))
             {
-                agonyResistance.Value = member.Value;
+                agonyResistance = member;
             }
             else if (member.NameEquals(boonDuration.Name))
             {
-                boonDuration.Value = member.Value;
+                boonDuration = member;
             }
             else if (member.NameEquals(conditionDamage.Name))
             {
-                conditionDamage.Value = member.Value;
+                conditionDamage = member;
             }
             else if (member.NameEquals(conditionDuration.Name))
             {
-                conditionDuration.Value = member.Value;
+                conditionDuration = member;
             }
             else if (member.NameEquals(critDamage.Name))
             {
-                critDamage.Value = member.Value;
+                critDamage = member;
             }
             else if (member.NameEquals(healing.Name))
             {
-                healing.Value = member.Value;
+                healing = member;
             }
             else if (member.NameEquals(power.Name))
             {
-                power.Value = member.Value;
+                power = member;
             }
             else if (member.NameEquals(precision.Name))
             {
-                precision.Value = member.Value;
+                precision = member;
             }
             else if (member.NameEquals(toughness.Name))
             {
-                toughness.Value = member.Value;
+                toughness = member;
             }
             else if (member.NameEquals(vitality.Name))
             {
-                vitality.Value = member.Value;
+                vitality = member;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {

@@ -18,11 +18,11 @@ public static class EmblemJson
         {
             if (member.NameEquals(id.Name))
             {
-                id.Value = member.Value;
+                id = member;
             }
             else if (member.NameEquals(layers.Name))
             {
-                layers.Value = member.Value;
+                layers = member;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {

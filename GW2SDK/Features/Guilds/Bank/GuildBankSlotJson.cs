@@ -23,11 +23,11 @@ public static class GuildBankSlotJson
         {
             if (member.NameEquals(itemId.Name))
             {
-                itemId.Value = member.Value;
+                itemId = member;
             }
             else if (member.NameEquals(count.Name))
             {
-                count.Value = member.Value;
+                count = member;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {

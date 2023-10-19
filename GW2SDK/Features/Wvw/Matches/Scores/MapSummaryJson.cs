@@ -19,15 +19,15 @@ public static class MapSummaryJson
         {
             if (member.NameEquals(id.Name))
             {
-                id.Value = member.Value;
+                id = member;
             }
             else if (member.NameEquals(type.Name))
             {
-                type.Value = member.Value;
+                type = member;
             }
             else if (member.NameEquals(scores.Name))
             {
-                scores.Value = member.Value;
+                scores = member;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {

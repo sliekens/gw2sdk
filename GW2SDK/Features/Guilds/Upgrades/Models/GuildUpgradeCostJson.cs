@@ -20,19 +20,19 @@ public static class GuildUpgradeCostJson
         {
             if (member.NameEquals(kind.Name))
             {
-                kind.Value = member.Value;
+                kind = member;
             }
             else if (member.NameEquals(name.Name))
             {
-                name.Value = member.Value;
+                name = member;
             }
             else if (member.NameEquals(count.Name))
             {
-                count.Value = member.Value;
+                count = member;
             }
             else if (member.NameEquals(itemId.Name))
             {
-                itemId.Value = member.Value;
+                itemId = member;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {

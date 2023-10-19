@@ -20,19 +20,19 @@ public static class MaterialSlotJson
         {
             if (member.NameEquals(id.Name))
             {
-                id.Value = member.Value;
+                id = member;
             }
             else if (member.NameEquals(category.Name))
             {
-                category.Value = member.Value;
+                category = member;
             }
             else if (member.NameEquals(binding.Name))
             {
-                binding.Value = member.Value;
+                binding = member;
             }
             else if (member.NameEquals(count.Name))
             {
-                count.Value = member.Value;
+                count = member;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {

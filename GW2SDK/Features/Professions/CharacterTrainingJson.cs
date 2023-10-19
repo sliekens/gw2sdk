@@ -17,7 +17,7 @@ public static class CharacterTrainingJson
         {
             if (member.NameEquals(training.Name))
             {
-                training.Value = member.Value;
+                training = member;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {

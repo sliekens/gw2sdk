@@ -20,19 +20,19 @@ public static class MaterialCategoryJson
         {
             if (member.NameEquals(id.Name))
             {
-                id.Value = member.Value;
+                id = member;
             }
             else if (member.NameEquals(name.Name))
             {
-                name.Value = member.Value;
+                name = member;
             }
             else if (member.NameEquals(items.Name))
             {
-                items.Value = member.Value;
+                items = member;
             }
             else if (member.NameEquals(order.Name))
             {
-                order.Value = member.Value;
+                order = member;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {

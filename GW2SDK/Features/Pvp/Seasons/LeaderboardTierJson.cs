@@ -20,19 +20,19 @@ public static class LeaderboardTierJson
         {
             if (member.NameEquals(color.Name))
             {
-                color.Value = member.Value;
+                color = member;
             }
             else if (member.NameEquals(type.Name))
             {
-                type.Value = member.Value;
+                type = member;
             }
             else if (member.NameEquals(name.Name))
             {
-                name.Value = member.Value;
+                name = member;
             }
             else if (member.NameEquals(range.Name))
             {
-                range.Value = member.Value;
+                range = member;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {

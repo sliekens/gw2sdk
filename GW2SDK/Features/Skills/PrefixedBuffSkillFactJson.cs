@@ -45,31 +45,31 @@ public static class PrefixedBuffSkillFactJson
             }
             else if (member.NameEquals(text.Name))
             {
-                text.Value = member.Value;
+                text = member;
             }
             else if (member.NameEquals(icon.Name))
             {
-                icon.Value = member.Value;
+                icon = member;
             }
             else if (member.NameEquals(duration.Name))
             {
-                duration.Value = member.Value;
+                duration = member;
             }
             else if (member.NameEquals(status.Name))
             {
-                status.Value = member.Value;
+                status = member;
             }
             else if (member.NameEquals(description.Name))
             {
-                description.Value = member.Value;
+                description = member;
             }
             else if (member.NameEquals(applyCount.Name))
             {
-                applyCount.Value = member.Value;
+                applyCount = member;
             }
             else if (member.NameEquals(prefix.Name))
             {
-                prefix.Value = member.Value;
+                prefix = member;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {

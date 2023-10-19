@@ -25,7 +25,7 @@ public static class AchievementTextBitJson
             }
             else if (member.NameEquals(text.Name))
             {
-                text.Value = member.Value;
+                text = member;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {

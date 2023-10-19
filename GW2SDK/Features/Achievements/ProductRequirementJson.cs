@@ -18,11 +18,11 @@ public static class ProductRequirementJson
         {
             if (member.NameEquals(product.Name))
             {
-                product.Value = member.Value;
+                product = member;
             }
             else if (member.NameEquals(condition.Name))
             {
-                condition.Value = member.Value;
+                condition = member;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {

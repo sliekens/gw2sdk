@@ -20,11 +20,11 @@ public static class EquipmentTabJson
         {
             if (member.NameEquals(tab.Name))
             {
-                tab.Value = member.Value;
+                tab = member;
             }
             else if (member.NameEquals(name.Name))
             {
-                name.Value = member.Value;
+                name = member;
             }
             else if (member.NameEquals("is_active"))
             {
@@ -35,11 +35,11 @@ public static class EquipmentTabJson
             }
             else if (member.NameEquals(equipment.Name))
             {
-                equipment.Value = member.Value;
+                equipment = member;
             }
             else if (member.NameEquals(pvpEquipment.Name))
             {
-                pvpEquipment.Value = member.Value;
+                pvpEquipment = member;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {

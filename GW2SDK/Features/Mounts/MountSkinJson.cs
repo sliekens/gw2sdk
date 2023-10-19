@@ -21,23 +21,23 @@ public static class MountSkinJson
         {
             if (member.NameEquals(id.Name))
             {
-                id.Value = member.Value;
+                id = member;
             }
             else if (member.NameEquals(name.Name))
             {
-                name.Value = member.Value;
+                name = member;
             }
             else if (member.NameEquals(icon.Name))
             {
-                icon.Value = member.Value;
+                icon = member;
             }
             else if (member.NameEquals(dyeSlots.Name))
             {
-                dyeSlots.Value = member.Value;
+                dyeSlots = member;
             }
             else if (member.NameEquals(mount.Name))
             {
-                mount.Value = member.Value;
+                mount = member;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {

@@ -17,19 +17,19 @@ public static class RouteJson
         {
             if (member.NameEquals(path.Name))
             {
-                path.Value = member.Value;
+                path = member;
             }
             else if (member.NameEquals(lang.Name))
             {
-                lang.Value = member.Value;
+                lang = member;
             }
             else if (member.NameEquals(auth.Name))
             {
-                auth.Value = member.Value;
+                auth = member;
             }
             else if (member.NameEquals(active.Name))
             {
-                active.Value = member.Value;
+                active = member;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {

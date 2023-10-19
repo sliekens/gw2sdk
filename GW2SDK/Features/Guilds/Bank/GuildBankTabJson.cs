@@ -21,23 +21,23 @@ public static class GuildBankTabJson
         {
             if (member.NameEquals(upgradeId.Name))
             {
-                upgradeId.Value = member.Value;
+                upgradeId = member;
             }
             else if (member.NameEquals(size.Name))
             {
-                size.Value = member.Value;
+                size = member;
             }
             else if (member.NameEquals(coins.Name))
             {
-                coins.Value = member.Value;
+                coins = member;
             }
             else if (member.NameEquals(note.Name))
             {
-                note.Value = member.Value;
+                note = member;
             }
             else if (member.NameEquals(inventory.Name))
             {
-                inventory.Value = member.Value;
+                inventory = member;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {

@@ -19,15 +19,15 @@ public static class CraftingDisciplineJson
         {
             if (member.NameEquals(discipline.Name))
             {
-                discipline.Value = member.Value;
+                discipline = member;
             }
             else if (member.NameEquals(rating.Name))
             {
-                rating.Value = member.Value;
+                rating = member;
             }
             else if (member.NameEquals(active.Name))
             {
-                active.Value = member.Value;
+                active = member;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {

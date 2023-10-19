@@ -41,15 +41,15 @@ public static class DistanceSkillFactJson
             }
             else if (member.NameEquals(text.Name))
             {
-                text.Value = member.Value;
+                text = member;
             }
             else if (member.NameEquals(icon.Name))
             {
-                icon.Value = member.Value;
+                icon = member;
             }
             else if (member.NameEquals(distance.Name))
             {
-                distance.Value = member.Value;
+                distance = member;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {

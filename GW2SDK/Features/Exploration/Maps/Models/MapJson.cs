@@ -35,63 +35,63 @@ public static class MapJson
         {
             if (member.NameEquals(name.Name))
             {
-                name.Value = member.Value;
+                name = member;
             }
             else if (member.NameEquals(minLevel.Name))
             {
-                minLevel.Value = member.Value;
+                minLevel = member;
             }
             else if (member.NameEquals(maxLevel.Name))
             {
-                maxLevel.Value = member.Value;
+                maxLevel = member;
             }
             else if (member.NameEquals(defaultFloor.Name))
             {
-                defaultFloor.Value = member.Value;
+                defaultFloor = member;
             }
             else if (member.NameEquals(labelCoordinates.Name))
             {
-                labelCoordinates.Value = member.Value;
+                labelCoordinates = member;
             }
             else if (member.NameEquals(mapRectangle.Name))
             {
-                mapRectangle.Value = member.Value;
+                mapRectangle = member;
             }
             else if (member.NameEquals(continentRectangle.Name))
             {
-                continentRectangle.Value = member.Value;
+                continentRectangle = member;
             }
             else if (member.NameEquals(pointsOfInterest.Name))
             {
-                pointsOfInterest.Value = member.Value;
+                pointsOfInterest = member;
             }
             else if (member.NameEquals(godShrines.Name))
             {
-                godShrines.Value = member.Value;
+                godShrines = member;
             }
             else if (member.NameEquals(tasks.Name))
             {
-                tasks.Value = member.Value;
+                tasks = member;
             }
             else if (member.NameEquals(skillChallenges.Name))
             {
-                skillChallenges.Value = member.Value;
+                skillChallenges = member;
             }
             else if (member.NameEquals(sectors.Name))
             {
-                sectors.Value = member.Value;
+                sectors = member;
             }
             else if (member.NameEquals(adventures.Name))
             {
-                adventures.Value = member.Value;
+                adventures = member;
             }
             else if (member.NameEquals(id.Name))
             {
-                id.Value = member.Value;
+                id = member;
             }
             else if (member.NameEquals(masteryPoints.Name))
             {
-                masteryPoints.Value = member.Value;
+                masteryPoints = member;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {

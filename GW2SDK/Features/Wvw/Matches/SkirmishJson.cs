@@ -19,15 +19,15 @@ public static class SkirmishJson
         {
             if (member.NameEquals(id.Name))
             {
-                id.Value = member.Value;
+                id = member;
             }
             else if (member.NameEquals(scores.Name))
             {
-                scores.Value = member.Value;
+                scores = member;
             }
             else if (member.NameEquals(mapScores.Name))
             {
-                mapScores.Value = member.Value;
+                mapScores = member;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {

@@ -18,11 +18,11 @@ public static class GuildEmblemPartJson
         {
             if (member.NameEquals(id.Name))
             {
-                id.Value = member.Value;
+                id = member;
             }
             else if (member.NameEquals(colors.Name))
             {
-                colors.Value = member.Value;
+                colors = member;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {

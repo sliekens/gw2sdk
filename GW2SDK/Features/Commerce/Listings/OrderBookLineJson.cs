@@ -19,15 +19,15 @@ public static class OrderBookLineJson
         {
             if (member.NameEquals(listings.Name))
             {
-                listings.Value = member.Value;
+                listings = member;
             }
             else if (member.NameEquals(unitPrice.Name))
             {
-                unitPrice.Value = member.Value;
+                unitPrice = member;
             }
             else if (member.NameEquals(quantity.Name))
             {
-                quantity.Value = member.Value;
+                quantity = member;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {

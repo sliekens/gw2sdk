@@ -1,5 +1,4 @@
 ﻿using System.Text.Json;
-using GuildWars2.Json;
 
 namespace GuildWars2.Professions;
 
@@ -24,26 +23,28 @@ public static class SkillsByPaletteJson
         Dictionary<int, int> map = new(json.GetArrayLength());
         foreach (var entry in json.EnumerateArray())
         {
-            RequiredMember left = new("[0]");
-            RequiredMember right = new("[1]");
+            JsonElement left = default;
+            JsonElement right = default;
 
             foreach (var keyOrValue in entry.EnumerateArray())
             {
-                if (left.IsUndefined)
+                if (left.ValueKind == JsonValueKind.Undefined)
                 {
-                    left.Value = keyOrValue;
+                    left = keyOrValue;
                 }
-                else if (right.IsUndefined)
+                else if (right.ValueKind == JsonValueKind.Undefined)
                 {
-                    right.Value = keyOrValue;
+                    right = keyOrValue;
                 }
                 else if (missingMemberBehavior == MissingMemberBehavior.Error)
                 {
-                    throw new InvalidOperationException(Strings.UnexpectedArrayLength(entry.GetArrayLength()));
+                    throw new InvalidOperationException(
+                        Strings.UnexpectedArrayLength(entry.GetArrayLength())
+                    );
                 }
             }
 
-            map[left.Select(value => value.GetInt32())] = right.Select(value => value.GetInt32());
+            map[left.GetInt32()] = right.GetInt32();
         }
 
         return map;

@@ -3,29 +3,31 @@ using static System.Text.Json.JsonValueKind;
 
 namespace GuildWars2.Json;
 
-internal ref struct RequiredMember
+internal readonly ref struct RequiredMember
 {
-    public JsonElement Value = default;
+    public readonly ReadOnlySpan<char> Name;
 
-    public readonly bool IsUndefined => Value.ValueKind == Undefined;
+    public readonly JsonElement Value = default;
 
-    public readonly bool IsUndefinedOrNull => IsUndefined || Value.ValueKind == Null;
+    public bool IsUndefined => Value.ValueKind == Undefined;
 
-#if !NET // Because there is no implicit cast from String to ReadOnlySpan
-    internal RequiredMember(string name)
+    public bool IsUndefinedOrNull => IsUndefined || Value.ValueKind == Null;
+
+    public RequiredMember(string name)
     {
         Name = name.AsSpan();
     }
-#endif
 
-    internal RequiredMember(ReadOnlySpan<char> name)
+    private RequiredMember(string name, JsonElement value)
     {
-        Name = name;
+        Name = name.AsSpan();
+        Value = value;
     }
 
-    internal ReadOnlySpan<char> Name { get; }
+    public static implicit operator RequiredMember(JsonProperty member) =>
+        new(member.Name, member.Value);
 
-    internal TValue Select<TValue>(Func<JsonElement, TValue> resultSelector)
+    public TValue Select<TValue>(Func<JsonElement, TValue> resultSelector)
     {
         if (IsUndefinedOrNull)
         {
@@ -45,7 +47,7 @@ internal ref struct RequiredMember
         }
     }
 
-    internal IReadOnlyList<TValue> SelectMany<TValue>(Func<JsonElement, TValue> resultSelector)
+    public IReadOnlyList<TValue> SelectMany<TValue>(Func<JsonElement, TValue> resultSelector)
     {
         if (IsUndefinedOrNull)
         {

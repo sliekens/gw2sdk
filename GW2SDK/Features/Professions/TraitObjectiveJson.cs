@@ -26,11 +26,11 @@ public static class TraitObjectiveJson
             }
             else if (member.NameEquals(cost.Name))
             {
-                cost.Value = member.Value;
+                cost = member;
             }
             else if (member.NameEquals(traitId.Name))
             {
-                traitId.Value = member.Value;
+                traitId = member;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {

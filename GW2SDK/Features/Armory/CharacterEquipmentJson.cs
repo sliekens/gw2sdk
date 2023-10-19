@@ -17,7 +17,7 @@ public static class CharacterEquipmentJson
         {
             if (member.NameEquals(equipment.Name))
             {
-                equipment.Value = member.Value;
+                equipment = member;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {

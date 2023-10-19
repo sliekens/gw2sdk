@@ -22,27 +22,27 @@ public static class TransactionJson
         {
             if (member.NameEquals(id.Name))
             {
-                id.Value = member.Value;
+                id = member;
             }
             else if (member.NameEquals(itemId.Name))
             {
-                itemId.Value = member.Value;
+                itemId = member;
             }
             else if (member.NameEquals(price.Name))
             {
-                price.Value = member.Value;
+                price = member;
             }
             else if (member.NameEquals(quantity.Name))
             {
-                quantity.Value = member.Value;
+                quantity = member;
             }
             else if (member.NameEquals(created.Name))
             {
-                created.Value = member.Value;
+                created = member;
             }
             else if (member.NameEquals(purchased.Name))
             {
-                purchased.Value = member.Value;
+                purchased = member;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {

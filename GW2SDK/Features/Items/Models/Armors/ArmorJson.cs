@@ -58,51 +58,51 @@ public static class ArmorJson
             }
             else if (member.NameEquals(name.Name))
             {
-                name.Value = member.Value;
+                name = member;
             }
             else if (member.NameEquals(description.Name))
             {
-                description.Value = member.Value;
+                description = member;
             }
             else if (member.NameEquals(level.Name))
             {
-                level.Value = member.Value;
+                level = member;
             }
             else if (member.NameEquals(rarity.Name))
             {
-                rarity.Value = member.Value;
+                rarity = member;
             }
             else if (member.NameEquals(vendorValue.Name))
             {
-                vendorValue.Value = member.Value;
+                vendorValue = member;
             }
             else if (member.NameEquals(defaultSkin.Name))
             {
-                defaultSkin.Value = member.Value;
+                defaultSkin = member;
             }
             else if (member.NameEquals(gameTypes.Name))
             {
-                gameTypes.Value = member.Value;
+                gameTypes = member;
             }
             else if (member.NameEquals(flags.Name))
             {
-                flags.Value = member.Value;
+                flags = member;
             }
             else if (member.NameEquals(restrictions.Name))
             {
-                restrictions.Value = member.Value;
+                restrictions = member;
             }
             else if (member.NameEquals(id.Name))
             {
-                id.Value = member.Value;
+                id = member;
             }
             else if (member.NameEquals(chatLink.Name))
             {
-                chatLink.Value = member.Value;
+                chatLink = member;
             }
             else if (member.NameEquals(icon.Name))
             {
-                icon.Value = member.Value;
+                icon = member;
             }
             else if (member.NameEquals("details"))
             {
@@ -119,31 +119,31 @@ public static class ArmorJson
                     }
                     else if (detail.NameEquals(weightClass.Name))
                     {
-                        weightClass.Value = detail.Value;
+                        weightClass = detail;
                     }
                     else if (detail.NameEquals(defense.Name))
                     {
-                        defense.Value = detail.Value;
+                        defense = detail;
                     }
                     else if (detail.NameEquals(infusionSlots.Name))
                     {
-                        infusionSlots.Value = detail.Value;
+                        infusionSlots = detail;
                     }
                     else if (detail.NameEquals(attributeAdjustment.Name))
                     {
-                        attributeAdjustment.Value = detail.Value;
+                        attributeAdjustment = detail;
                     }
                     else if (detail.NameEquals(infixUpgrade.Name))
                     {
-                        infixUpgrade.Value = detail.Value;
+                        infixUpgrade = detail;
                     }
                     else if (detail.NameEquals(suffixItemId.Name))
                     {
-                        suffixItemId.Value = detail.Value;
+                        suffixItemId = detail;
                     }
                     else if (detail.NameEquals(statChoices.Name))
                     {
-                        statChoices.Value = detail.Value;
+                        statChoices = detail;
                     }
                     else if (missingMemberBehavior == MissingMemberBehavior.Error)
                     {

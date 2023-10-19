@@ -17,11 +17,11 @@ public static class SelectedStatJson
         {
             if (member.NameEquals(id.Name))
             {
-                id.Value = member.Value;
+                id = member;
             }
             else if (member.NameEquals(attributes.Name))
             {
-                attributes.Value = member.Value;
+                attributes = member;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {

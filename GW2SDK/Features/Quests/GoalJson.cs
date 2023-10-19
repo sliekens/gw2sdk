@@ -15,11 +15,11 @@ public static class GoalJson
         {
             if (member.NameEquals(active.Name))
             {
-                active.Value = member.Value;
+                active = member;
             }
             else if (member.NameEquals(complete.Name))
             {
-                complete.Value = member.Value;
+                complete = member;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {

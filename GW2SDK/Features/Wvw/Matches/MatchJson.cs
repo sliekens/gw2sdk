@@ -24,47 +24,47 @@ public static class MatchJson
         {
             if (member.NameEquals(id.Name))
             {
-                id.Value = member.Value;
+                id = member;
             }
             else if (member.NameEquals(startTime.Name))
             {
-                startTime.Value = member.Value;
+                startTime = member;
             }
             else if (member.NameEquals(endTime.Name))
             {
-                endTime.Value = member.Value;
+                endTime = member;
             }
             else if (member.NameEquals(scores.Name))
             {
-                scores.Value = member.Value;
+                scores = member;
             }
             else if (member.NameEquals(worlds.Name))
             {
-                worlds.Value = member.Value;
+                worlds = member;
             }
             else if (member.NameEquals(allWorlds.Name))
             {
-                allWorlds.Value = member.Value;
+                allWorlds = member;
             }
             else if (member.NameEquals(deaths.Name))
             {
-                deaths.Value = member.Value;
+                deaths = member;
             }
             else if (member.NameEquals(kills.Name))
             {
-                kills.Value = member.Value;
+                kills = member;
             }
             else if (member.NameEquals(victoryPoints.Name))
             {
-                victoryPoints.Value = member.Value;
+                victoryPoints = member;
             }
             else if (member.NameEquals(skirmishes.Name))
             {
-                skirmishes.Value = member.Value;
+                skirmishes = member;
             }
             else if (member.NameEquals(maps.Name))
             {
-                maps.Value = member.Value;
+                maps = member;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {

@@ -17,7 +17,7 @@ public static class RankTierJson
         {
             if (member.NameEquals(rating.Name))
             {
-                rating.Value = member.Value;
+                rating = member;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {

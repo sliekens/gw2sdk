@@ -26,11 +26,11 @@ public static class SkillObjectiveJson
             }
             else if (member.NameEquals(cost.Name))
             {
-                cost.Value = member.Value;
+                cost = member;
             }
             else if (member.NameEquals(skillId.Name))
             {
-                skillId.Value = member.Value;
+                skillId = member;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {

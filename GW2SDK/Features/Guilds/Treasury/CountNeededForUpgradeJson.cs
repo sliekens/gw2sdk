@@ -18,11 +18,11 @@ public static class CountNeededForUpgradeJson
         {
             if (member.NameEquals(upgradeId.Name))
             {
-                upgradeId.Value = member.Value;
+                upgradeId = member;
             }
             else if (member.NameEquals(count.Name))
             {
-                count.Value = member.Value;
+                count = member;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {

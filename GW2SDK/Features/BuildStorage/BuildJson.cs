@@ -21,35 +21,35 @@ public static class BuildJson
         {
             if (member.NameEquals(name.Name))
             {
-                name.Value = member.Value;
+                name = member;
             }
             else if (member.NameEquals(profession.Name))
             {
-                profession.Value = member.Value;
+                profession = member;
             }
             else if (member.NameEquals(specializations.Name))
             {
-                specializations.Value = member.Value;
+                specializations = member;
             }
             else if (member.NameEquals(skills.Name))
             {
-                skills.Value = member.Value;
+                skills = member;
             }
             else if (member.NameEquals(aquaticSkills.Name))
             {
-                aquaticSkills.Value = member.Value;
+                aquaticSkills = member;
             }
             else if (member.NameEquals(pets.Name))
             {
-                pets.Value = member.Value;
+                pets = member;
             }
             else if (member.NameEquals(legends.Name))
             {
-                legends.Value = member.Value;
+                legends = member;
             }
             else if (member.NameEquals(aquaticLegends.Name))
             {
-                aquaticLegends.Value = member.Value;
+                aquaticLegends = member;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {

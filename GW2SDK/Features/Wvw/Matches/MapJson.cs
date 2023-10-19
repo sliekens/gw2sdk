@@ -20,31 +20,31 @@ public static class MapJson
         {
             if (member.NameEquals(id.Name))
             {
-                id.Value = member.Value;
+                id = member;
             }
             else if (member.NameEquals(type.Name))
             {
-                type.Value = member.Value;
+                type = member;
             }
             else if (member.NameEquals(scores.Name))
             {
-                scores.Value = member.Value;
+                scores = member;
             }
             else if (member.NameEquals(bonuses.Name))
             {
-                bonuses.Value = member.Value;
+                bonuses = member;
             }
             else if (member.NameEquals(objectives.Name))
             {
-                objectives.Value = member.Value;
+                objectives = member;
             }
             else if (member.NameEquals(deaths.Name))
             {
-                deaths.Value = member.Value;
+                deaths = member;
             }
             else if (member.NameEquals(kills.Name))
             {
-                kills.Value = member.Value;
+                kills = member;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {

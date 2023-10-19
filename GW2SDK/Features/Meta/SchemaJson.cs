@@ -19,11 +19,11 @@ public static class SchemaJson
         {
             if (member.NameEquals(version.Name))
             {
-                version.Value = member.Value;
+                version = member;
             }
             else if (member.NameEquals(description.Name))
             {
-                description.Value = member.Value;
+                description = member;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {

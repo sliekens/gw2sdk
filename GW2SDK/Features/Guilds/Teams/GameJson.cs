@@ -26,43 +26,43 @@ public static class GameJson
         {
             if (member.NameEquals(id.Name))
             {
-                id.Value = member.Value;
+                id = member;
             }
             else if (member.NameEquals(mapId.Name))
             {
-                mapId.Value = member.Value;
+                mapId = member;
             }
             else if (member.NameEquals(started.Name))
             {
-                started.Value = member.Value;
+                started = member;
             }
             else if (member.NameEquals(ended.Name))
             {
-                ended.Value = member.Value;
+                ended = member;
             }
             else if (member.NameEquals(result.Name))
             {
-                result.Value = member.Value;
+                result = member;
             }
             else if (member.NameEquals(team.Name))
             {
-                team.Value = member.Value;
+                team = member;
             }
             else if (member.NameEquals(ratingType.Name))
             {
-                ratingType.Value = member.Value;
+                ratingType = member;
             }
             else if (member.NameEquals(ratingChange.Name))
             {
-                ratingChange.Value = member.Value;
+                ratingChange = member;
             }
             else if (member.NameEquals(seasonId.Name))
             {
-                seasonId.Value = member.Value;
+                seasonId = member;
             }
             else if (member.NameEquals(score.Name))
             {
-                score.Value = member.Value;
+                score = member;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {

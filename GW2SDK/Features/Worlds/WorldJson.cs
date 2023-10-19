@@ -15,15 +15,15 @@ public static class WorldJson
         {
             if (member.NameEquals(id.Name))
             {
-                id.Value = member.Value;
+                id = member;
             }
             else if (member.NameEquals(name.Name))
             {
-                name.Value = member.Value;
+                name = member;
             }
             else if (member.NameEquals(population.Name))
             {
-                population.Value = member.Value;
+                population = member;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {

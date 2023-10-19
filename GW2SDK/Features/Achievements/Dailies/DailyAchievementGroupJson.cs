@@ -21,23 +21,23 @@ public static class DailyAchievementGroupJson
         {
             if (member.NameEquals(pve.Name))
             {
-                pve.Value = member.Value;
+                pve = member;
             }
             else if (member.NameEquals(pvp.Name))
             {
-                pvp.Value = member.Value;
+                pvp = member;
             }
             else if (member.NameEquals(wvw.Name))
             {
-                wvw.Value = member.Value;
+                wvw = member;
             }
             else if (member.NameEquals(fractals.Name))
             {
-                fractals.Value = member.Value;
+                fractals = member;
             }
             else if (member.NameEquals(special.Name))
             {
-                special.Value = member.Value;
+                special = member;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {

@@ -20,19 +20,19 @@ public static class GuildRankJson
         {
             if (member.NameEquals(id.Name))
             {
-                id.Value = member.Value;
+                id = member;
             }
             else if (member.NameEquals(order.Name))
             {
-                order.Value = member.Value;
+                order = member;
             }
             else if (member.NameEquals(permissions.Name))
             {
-                permissions.Value = member.Value;
+                permissions = member;
             }
             else if (member.NameEquals(iconHref.Name))
             {
-                iconHref.Value = member.Value;
+                iconHref = member;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {

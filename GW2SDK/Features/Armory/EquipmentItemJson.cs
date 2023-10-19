@@ -29,51 +29,51 @@ public static class EquipmentItemJson
         {
             if (member.NameEquals(id.Name))
             {
-                id.Value = member.Value;
+                id = member;
             }
             else if (member.NameEquals(count.Name))
             {
-                count.Value = member.Value;
+                count = member;
             }
             else if (member.NameEquals(slot.Name))
             {
-                slot.Value = member.Value;
+                slot = member;
             }
             else if (member.NameEquals(upgrades.Name))
             {
-                upgrades.Value = member.Value;
+                upgrades = member;
             }
             else if (member.NameEquals(infusions.Name))
             {
-                infusions.Value = member.Value;
+                infusions = member;
             }
             else if (member.NameEquals(skin.Name))
             {
-                skin.Value = member.Value;
+                skin = member;
             }
             else if (member.NameEquals(stats.Name))
             {
-                stats.Value = member.Value;
+                stats = member;
             }
             else if (member.NameEquals(binding.Name))
             {
-                binding.Value = member.Value;
+                binding = member;
             }
             else if (member.NameEquals(boundTo.Name))
             {
-                boundTo.Value = member.Value;
+                boundTo = member;
             }
             else if (member.NameEquals(location.Name))
             {
-                location.Value = member.Value;
+                location = member;
             }
             else if (member.NameEquals(tabs.Name))
             {
-                tabs.Value = member.Value;
+                tabs = member;
             }
             else if (member.NameEquals(dyes.Name))
             {
-                dyes.Value = member.Value;
+                dyes = member;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {

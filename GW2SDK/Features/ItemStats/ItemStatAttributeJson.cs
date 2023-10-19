@@ -19,15 +19,15 @@ public static class ItemStatAttributeJson
         {
             if (member.NameEquals(attribute.Name))
             {
-                attribute.Value = member.Value;
+                attribute = member;
             }
             else if (member.NameEquals(multiplier.Name))
             {
-                multiplier.Value = member.Value;
+                multiplier = member;
             }
             else if (member.NameEquals(amount.Name))
             {
-                amount.Value = member.Value;
+                amount = member;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {

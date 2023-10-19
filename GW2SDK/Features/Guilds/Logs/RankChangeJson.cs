@@ -31,27 +31,27 @@ public static class RankChangeJson
             }
             else if (member.NameEquals(id.Name))
             {
-                id.Value = member.Value;
+                id = member;
             }
             else if (member.NameEquals(time.Name))
             {
-                time.Value = member.Value;
+                time = member;
             }
             else if (member.NameEquals(user.Name))
             {
-                user.Value = member.Value;
+                user = member;
             }
             else if (member.NameEquals(changedBy.Name))
             {
-                changedBy.Value = member.Value;
+                changedBy = member;
             }
             else if (member.NameEquals(oldRank.Name))
             {
-                oldRank.Value = member.Value;
+                oldRank = member;
             }
             else if (member.NameEquals(newRank.Name))
             {
-                newRank.Value = member.Value;
+                newRank = member;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {

@@ -39,15 +39,15 @@ public static class UnblockableTraitFactJson
             }
             else if (member.NameEquals(text.Name))
             {
-                text.Value = member.Value;
+                text = member;
             }
             else if (member.NameEquals(icon.Name))
             {
-                icon.Value = member.Value;
+                icon = member;
             }
             else if (member.NameEquals(unblockable.Name))
             {
-                unblockable.Value = member.Value;
+                unblockable = member;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {

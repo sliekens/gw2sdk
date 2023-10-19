@@ -28,51 +28,51 @@ public static class GuildJson
         {
             if (member.NameEquals(level.Name))
             {
-                level.Value = member.Value;
+                level = member;
             }
             else if (member.NameEquals(motd.Name))
             {
-                motd.Value = member.Value;
+                motd = member;
             }
             else if (member.NameEquals(influence.Name))
             {
-                influence.Value = member.Value;
+                influence = member;
             }
             else if (member.NameEquals(aetherium.Name))
             {
-                aetherium.Value = member.Value;
+                aetherium = member;
             }
             else if (member.NameEquals(resonance.Name))
             {
-                resonance.Value = member.Value;
+                resonance = member;
             }
             else if (member.NameEquals(favor.Name))
             {
-                favor.Value = member.Value;
+                favor = member;
             }
             else if (member.NameEquals(memberCount.Name))
             {
-                memberCount.Value = member.Value;
+                memberCount = member;
             }
             else if (member.NameEquals(memberCapacity.Name))
             {
-                memberCapacity.Value = member.Value;
+                memberCapacity = member;
             }
             else if (member.NameEquals(id.Name))
             {
-                id.Value = member.Value;
+                id = member;
             }
             else if (member.NameEquals(name.Name))
             {
-                name.Value = member.Value;
+                name = member;
             }
             else if (member.NameEquals(tag.Name))
             {
-                tag.Value = member.Value;
+                tag = member;
             }
             else if (member.NameEquals(emblem.Name))
             {
-                emblem.Value = member.Value;
+                emblem = member;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {

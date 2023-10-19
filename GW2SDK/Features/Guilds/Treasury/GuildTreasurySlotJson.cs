@@ -19,15 +19,15 @@ public static class GuildTreasurySlotJson
         {
             if (member.NameEquals(itemId.Name))
             {
-                itemId.Value = member.Value;
+                itemId = member;
             }
             else if (member.NameEquals(count.Name))
             {
-                count.Value = member.Value;
+                count = member;
             }
             else if (member.NameEquals(countNeededForUpgrade.Name))
             {
-                countNeededForUpgrade.Value = member.Value;
+                countNeededForUpgrade = member;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {

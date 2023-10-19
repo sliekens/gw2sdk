@@ -21,15 +21,15 @@ public static class BagJson
         {
             if (member.NameEquals(id.Name))
             {
-                id.Value = member.Value;
+                id = member;
             }
             else if (member.NameEquals(size.Name))
             {
-                size.Value = member.Value;
+                size = member;
             }
             else if (member.NameEquals(inventory.Name))
             {
-                inventory.Value = member.Value;
+                inventory = member;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {

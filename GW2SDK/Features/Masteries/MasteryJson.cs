@@ -23,31 +23,31 @@ public static class MasteryJson
         {
             if (member.NameEquals(id.Name))
             {
-                id.Value = member.Value;
+                id = member;
             }
             else if (member.NameEquals(name.Name))
             {
-                name.Value = member.Value;
+                name = member;
             }
             else if (member.NameEquals(requirement.Name))
             {
-                requirement.Value = member.Value;
+                requirement = member;
             }
             else if (member.NameEquals(order.Name))
             {
-                order.Value = member.Value;
+                order = member;
             }
             else if (member.NameEquals(background.Name))
             {
-                background.Value = member.Value;
+                background = member;
             }
             else if (member.NameEquals(region.Name))
             {
-                region.Value = member.Value;
+                region = member;
             }
             else if (member.NameEquals(levels.Name))
             {
-                levels.Value = member.Value;
+                levels = member;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {

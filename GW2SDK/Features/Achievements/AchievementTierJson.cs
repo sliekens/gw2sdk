@@ -17,11 +17,11 @@ public static class AchievementTierJson
         {
             if (member.NameEquals(count.Name))
             {
-                count.Value = member.Value;
+                count = member;
             }
             else if (member.NameEquals(points.Name))
             {
-                points.Value = member.Value;
+                points = member;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {

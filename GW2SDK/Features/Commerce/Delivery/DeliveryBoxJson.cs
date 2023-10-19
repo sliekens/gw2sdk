@@ -18,11 +18,11 @@ public static class DeliveryBoxJson
         {
             if (member.NameEquals(coins.Name))
             {
-                coins.Value = member.Value;
+                coins = member;
             }
             else if (member.NameEquals(items.Name))
             {
-                items.Value = member.Value;
+                items = member;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {

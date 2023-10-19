@@ -30,63 +30,63 @@ public static class AccountSummaryJson
         {
             if (member.NameEquals(id.Name))
             {
-                id.Value = member.Value;
+                id = member;
             }
             else if (member.NameEquals(name.Name))
             {
-                name.Value = member.Value;
+                name = member;
             }
             else if (member.NameEquals(age.Name))
             {
-                age.Value = member.Value;
+                age = member;
             }
             else if (member.NameEquals(lastModified.Name))
             {
-                lastModified.Value = member.Value;
+                lastModified = member;
             }
             else if (member.NameEquals(world.Name))
             {
-                world.Value = member.Value;
+                world = member;
             }
             else if (member.NameEquals(guilds.Name))
             {
-                guilds.Value = member.Value;
+                guilds = member;
             }
             else if (member.NameEquals(guildLeader.Name))
             {
-                guildLeader.Value = member.Value;
+                guildLeader = member;
             }
             else if (member.NameEquals(created.Name))
             {
-                created.Value = member.Value;
+                created = member;
             }
             else if (member.NameEquals(access.Name))
             {
-                access.Value = member.Value;
+                access = member;
             }
             else if (member.NameEquals(commander.Name))
             {
-                commander.Value = member.Value;
+                commander = member;
             }
             else if (member.NameEquals(fractalLevel.Name))
             {
-                fractalLevel.Value = member.Value;
+                fractalLevel = member;
             }
             else if (member.NameEquals(dailyAp.Name))
             {
-                dailyAp.Value = member.Value;
+                dailyAp = member;
             }
             else if (member.NameEquals(monthlyAp.Name))
             {
-                monthlyAp.Value = member.Value;
+                monthlyAp = member;
             }
             else if (member.NameEquals(wvwRank.Name))
             {
-                wvwRank.Value = member.Value;
+                wvwRank = member;
             }
             else if (member.NameEquals(buildStorageSlots.Name))
             {
-                buildStorageSlots.Value = member.Value;
+                buildStorageSlots = member;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {

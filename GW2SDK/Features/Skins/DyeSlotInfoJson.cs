@@ -1,4 +1,4 @@
-using System.Text.Json;
+﻿using System.Text.Json;
 using GuildWars2.Json;
 
 namespace GuildWars2.Skins;
@@ -26,7 +26,7 @@ public static class DyeSlotInfoJson
         {
             if (member.NameEquals(@default.Name))
             {
-                @default.Value = member.Value;
+                @default = member;
             }
             else if (member.NameEquals("overrides"))
             {
@@ -34,43 +34,43 @@ public static class DyeSlotInfoJson
                 {
                     if (@override.NameEquals(asuraFemale.Name))
                     {
-                        asuraFemale.Value = @override.Value;
+                        asuraFemale = @override;
                     }
                     else if (@override.NameEquals(asuraMale.Name))
                     {
-                        asuraMale.Value = @override.Value;
+                        asuraMale = @override;
                     }
                     else if (@override.NameEquals(charrFemale.Name))
                     {
-                        charrFemale.Value = @override.Value;
+                        charrFemale = @override;
                     }
                     else if (@override.NameEquals(charrMale.Name))
                     {
-                        charrMale.Value = @override.Value;
+                        charrMale = @override;
                     }
                     else if (@override.NameEquals(humanFemale.Name))
                     {
-                        humanFemale.Value = @override.Value;
+                        humanFemale = @override;
                     }
                     else if (@override.NameEquals(humanMale.Name))
                     {
-                        humanMale.Value = @override.Value;
+                        humanMale = @override;
                     }
                     else if (@override.NameEquals(nornFemale.Name))
                     {
-                        nornFemale.Value = @override.Value;
+                        nornFemale = @override;
                     }
                     else if (@override.NameEquals(nornMale.Name))
                     {
-                        nornMale.Value = @override.Value;
+                        nornMale = @override;
                     }
                     else if (@override.NameEquals(sylvariFemale.Name))
                     {
-                        sylvariFemale.Value = @override.Value;
+                        sylvariFemale = @override;
                     }
                     else if (@override.NameEquals(sylvariMale.Name))
                     {
-                        sylvariMale.Value = @override.Value;
+                        sylvariMale = @override;
                     }
                     else if (missingMemberBehavior == MissingMemberBehavior.Error)
                     {

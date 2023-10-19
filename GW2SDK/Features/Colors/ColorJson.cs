@@ -1,45 +1,39 @@
 ﻿using System.Drawing;
 using System.Text.Json;
-using GuildWars2.Json;
 
 namespace GuildWars2.Colors;
 
 [PublicAPI]
 public static class ColorJson
 {
-    public static Color GetColor(
-        this JsonElement json,
-        MissingMemberBehavior missingMemberBehavior
-    )
+    public static Color GetColor(this JsonElement json, MissingMemberBehavior missingMemberBehavior)
     {
-        RequiredMember red = new("[0]");
-        RequiredMember green = new("[1]");
-        RequiredMember blue = new("[2]");
+        JsonElement red = default;
+        JsonElement green = default;
+        JsonElement blue = default;
 
         foreach (var entry in json.EnumerateArray())
         {
-            if (red.IsUndefined)
+            if (red.ValueKind == JsonValueKind.Undefined)
             {
-                red.Value = entry;
+                red = entry;
             }
-            else if (green.IsUndefined)
+            else if (green.ValueKind == JsonValueKind.Undefined)
             {
-                green.Value = entry;
+                green = entry;
             }
-            else if (blue.IsUndefined)
+            else if (blue.ValueKind == JsonValueKind.Undefined)
             {
-                blue.Value = entry;
+                blue = entry;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {
-                throw new InvalidOperationException(Strings.UnexpectedArrayLength(json.GetArrayLength()));
+                throw new InvalidOperationException(
+                    Strings.UnexpectedArrayLength(json.GetArrayLength())
+                );
             }
         }
 
-        return Color.FromArgb(
-            red.Select(value => value.GetInt32()),
-            green.Select(value => value.GetInt32()),
-            blue.Select(value => value.GetInt32())
-        );
+        return Color.FromArgb(red.GetInt32(), green.GetInt32(), blue.GetInt32());
     }
 }

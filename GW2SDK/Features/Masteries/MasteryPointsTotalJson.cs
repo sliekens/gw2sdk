@@ -19,15 +19,15 @@ public static class MasteryPointsTotalJson
         {
             if (member.NameEquals(region.Name))
             {
-                region.Value = member.Value;
+                region = member;
             }
             else if (member.NameEquals(spent.Name))
             {
-                spent.Value = member.Value;
+                spent = member;
             }
             else if (member.NameEquals(earned.Name))
             {
-                earned.Value = member.Value;
+                earned = member;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {

@@ -18,11 +18,11 @@ public static class LevelRequirementJson
         {
             if (member.NameEquals(min.Name))
             {
-                min.Value = member.Value;
+                min = member;
             }
             else if (member.NameEquals(max.Name))
             {
-                max.Value = member.Value;
+                max = member;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {

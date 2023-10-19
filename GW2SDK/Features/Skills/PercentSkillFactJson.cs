@@ -41,16 +41,16 @@ public static class PercentSkillFactJson
             }
             else if (member.NameEquals(text.Name))
             {
-                text.Value = member.Value;
+                text = member;
             }
             else if (member.NameEquals(icon.Name))
             {
-                icon.Value = member.Value;
+                icon = member;
             }
             else if (member.NameEquals(percent.Name) || member.NameEquals("value"))
             {
                 // Some use the name 'percent', some use 'value'... weird
-                percent.Value = member.Value;
+                percent = member;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {

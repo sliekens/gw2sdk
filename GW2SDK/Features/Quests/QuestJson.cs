@@ -18,23 +18,23 @@ public static class QuestJson
         {
             if (member.NameEquals(name.Name))
             {
-                name.Value = member.Value;
+                name = member;
             }
             else if (member.NameEquals(level.Name))
             {
-                level.Value = member.Value;
+                level = member;
             }
             else if (member.NameEquals(story.Name))
             {
-                story.Value = member.Value;
+                story = member;
             }
             else if (member.NameEquals(goals.Name))
             {
-                goals.Value = member.Value;
+                goals = member;
             }
             else if (member.NameEquals(id.Name))
             {
-                id.Value = member.Value;
+                id = member;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {

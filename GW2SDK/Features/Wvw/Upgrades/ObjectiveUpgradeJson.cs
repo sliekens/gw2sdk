@@ -18,11 +18,11 @@ public static class ObjectiveUpgradeJson
         {
             if (member.NameEquals(id.Name))
             {
-                id.Value = member.Value;
+                id = member;
             }
             else if (member.NameEquals(tiers.Name))
             {
-                tiers.Value = member.Value;
+                tiers = member;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {

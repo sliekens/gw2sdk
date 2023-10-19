@@ -20,19 +20,19 @@ public static class TrainingJson
         {
             if (member.NameEquals(id.Name))
             {
-                id.Value = member.Value;
+                id = member;
             }
             else if (member.NameEquals(category.Name))
             {
-                category.Value = member.Value;
+                category = member;
             }
             else if (member.NameEquals(name.Name))
             {
-                name.Value = member.Value;
+                name = member;
             }
             else if (member.NameEquals(track.Name))
             {
-                track.Value = member.Value;
+                track = member;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {

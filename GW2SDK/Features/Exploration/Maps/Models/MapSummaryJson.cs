@@ -25,55 +25,55 @@ public static class MapSummaryJson
         {
             if (member.NameEquals(id.Name))
             {
-                id.Value = member.Value;
+                id = member;
             }
             else if (member.NameEquals(name.Name))
             {
-                name.Value = member.Value;
+                name = member;
             }
             else if (member.NameEquals(minLevel.Name))
             {
-                minLevel.Value = member.Value;
+                minLevel = member;
             }
             else if (member.NameEquals(maxLevel.Name))
             {
-                maxLevel.Value = member.Value;
+                maxLevel = member;
             }
             else if (member.NameEquals(defaultFloor.Name))
             {
-                defaultFloor.Value = member.Value;
+                defaultFloor = member;
             }
             else if (member.NameEquals(kind.Name))
             {
-                kind.Value = member.Value;
+                kind = member;
             }
             else if (member.NameEquals(floors.Name))
             {
-                floors.Value = member.Value;
+                floors = member;
             }
             else if (member.NameEquals(regionId.Name))
             {
-                regionId.Value = member.Value;
+                regionId = member;
             }
             else if (member.NameEquals(regionName.Name))
             {
-                regionName.Value = member.Value;
+                regionName = member;
             }
             else if (member.NameEquals(continentId.Name))
             {
-                continentId.Value = member.Value;
+                continentId = member;
             }
             else if (member.NameEquals(continentName.Name))
             {
-                continentName.Value = member.Value;
+                continentName = member;
             }
             else if (member.NameEquals(mapRectangle.Name))
             {
-                mapRectangle.Value = member.Value;
+                mapRectangle = member;
             }
             else if (member.NameEquals(continentRectangle.Name))
             {
-                continentRectangle.Value = member.Value;
+                continentRectangle = member;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {

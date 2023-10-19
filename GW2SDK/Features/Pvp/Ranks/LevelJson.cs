@@ -16,15 +16,15 @@ public static class LevelJson
         {
             if (member.NameEquals(minLevel.Name))
             {
-                minLevel.Value = member.Value;
+                minLevel = member;
             }
             else if (member.NameEquals(maxLevel.Name))
             {
-                maxLevel.Value = member.Value;
+                maxLevel = member;
             }
             else if (member.NameEquals(points.Name))
             {
-                points.Value = member.Value;
+                points = member;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {

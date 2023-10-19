@@ -26,23 +26,23 @@ public static class VistaJson
             }
             else if (member.NameEquals(name.Name))
             {
-                name.Value = member.Value;
+                name = member;
             }
             else if (member.NameEquals(floor.Name))
             {
-                floor.Value = member.Value;
+                floor = member;
             }
             else if (member.NameEquals(coordinates.Name))
             {
-                coordinates.Value = member.Value;
+                coordinates = member;
             }
             else if (member.NameEquals(id.Name))
             {
-                id.Value = member.Value;
+                id = member;
             }
             else if (member.NameEquals(chatLink.Name))
             {
-                chatLink.Value = member.Value;
+                chatLink = member;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {

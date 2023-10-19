@@ -41,23 +41,23 @@ public static class BuffConversionTraitFactJson
             }
             else if (member.NameEquals(text.Name))
             {
-                text.Value = member.Value;
+                text = member;
             }
             else if (member.NameEquals(icon.Name))
             {
-                icon.Value = member.Value;
+                icon = member;
             }
             else if (member.NameEquals(percent.Name))
             {
-                percent.Value = member.Value;
+                percent = member;
             }
             else if (member.NameEquals(source.Name))
             {
-                source.Value = member.Value;
+                source = member;
             }
             else if (member.NameEquals(target.Name))
             {
-                target.Value = member.Value;
+                target = member;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {

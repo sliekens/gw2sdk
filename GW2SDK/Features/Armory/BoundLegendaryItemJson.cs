@@ -18,11 +18,11 @@ public static class BoundLegendaryItemJson
         {
             if (member.NameEquals(id.Name))
             {
-                id.Value = member.Value;
+                id = member;
             }
             else if (member.NameEquals(count.Name))
             {
-                count.Value = member.Value;
+                count = member;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {

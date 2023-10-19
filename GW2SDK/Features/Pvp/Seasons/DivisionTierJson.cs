@@ -17,7 +17,7 @@ public static class DivisionTierJson
         {
             if (member.NameEquals(points.Name))
             {
-                points.Value = member.Value;
+                points = member;
             }
             else if (missingMemberBehavior == MissingMemberBehavior.Error)
             {
